@@ -58,12 +58,12 @@
 #define ADC_CMD_RESTRICTED  0xF1            //  
 CADS1246::CADS1246(uint16_t pincs, uint16_t pinsck, uint16_t pindin, uint16_t pindout, uint16_t pinrd, uint16_t pinreset)
 {
-    this->spi = new CSpiSoft(pincs, pinsck, pindin, pindout,0);
-    this->pinrd = new CPort(pinrd);
-    this->pinrd->SetModeIN_FLOATING();
-    this->pinreset = new CPort(pinreset);
-    this->pinreset->SetModeOut_PP();
-    this->pinreset->Reset();
+    this->pspi = new CSpiSoft(pincs, pinsck, pindin, pindout,0);
+    this->ppinrd = new CPort(pinrd);
+    this->ppinrd->SetModeIN_FLOATING();
+    this->ppinreset = new CPort(pinreset);
+    this->ppinreset->SetModeOut_PP();
+    this->ppinreset->Reset();
 }
 
 CADS1246::~CADS1246()
@@ -75,15 +75,15 @@ uint8_t CADS1246::ReadReg(uint8_t RegAddr)
     uint8_t ret = 0;
     uint8_t Cmd;
 
-    this->spi->portcs->Reset();
+    this->pspi->portcs->Reset();
 
 
     Cmd = ADC_CMD_RREG | RegAddr;
-    this->spi->spi_writebyte(Cmd);
-    this->spi->spi_writebyte(0);
-    ret = this->spi->spi_writebyte(0X00);
-    this->spi->spi_readbyte(); //发送NOP
-    this->spi->portcs->Set();
+    this->pspi->spi_writebyte(Cmd);
+    this->pspi->spi_writebyte(0);
+    ret = this->pspi->spi_writebyte(0X00);
+    this->pspi->spi_readbyte(); //发送NOP
+    this->pspi->portcs->Set();
 
     return ret;
 
@@ -92,14 +92,14 @@ uint8_t CADS1246::ReadReg(uint8_t RegAddr)
 void CADS1246::WriteReg(uint8_t RegAddr, uint8_t da)
 {
     uint8_t Cmd;
-    this->spi->portcs->Reset();
+    this->pspi->portcs->Reset();
 
     Cmd = ADC_CMD_WREG | RegAddr;
-    this->spi->spi_writebyte(Cmd);
-    this->spi->spi_writebyte(0);
-    this->spi->spi_writebyte(da);
-    this->spi->spi_readbyte(); //发送NOP
-    this->spi->portcs->Set();
+    this->pspi->spi_writebyte(Cmd);
+    this->pspi->spi_writebyte(0);
+    this->pspi->spi_writebyte(da);
+    this->pspi->spi_readbyte(); //发送NOP
+    this->pspi->portcs->Set();
 }
 
 /*---------------------------------------------------------
@@ -144,18 +144,18 @@ float CADS1246::Read(void) //返回-1,表示转换未完成
     float Ret = 0;
 
     Cmd[0] = ADC_CMD_RDATA;
-    this->spi->portcs->Reset();
-    if (this->pinrd->Read() != 0)
+    this->pspi->portcs->Reset();
+    if (this->ppinrd->Read() != 0)
     {
         return  - 1;
     }
 
-    this->spi->spi_writebyte(Cmd[0]);
-    Cmd[0] = this->spi->spi_readbyte();
-    Cmd[1] = this->spi->spi_readbyte();
-    Cmd[2] = this->spi->spi_readbyte();
-    this->spi->spi_readbyte(); //发送NOP
-    this->spi->portcs->Set();
+    this->pspi->spi_writebyte(Cmd[0]);
+    Cmd[0] = this->pspi->spi_readbyte();
+    Cmd[1] = this->pspi->spi_readbyte();
+    Cmd[2] = this->pspi->spi_readbyte();
+    this->pspi->spi_readbyte(); //发送NOP
+    this->pspi->portcs->Set();
 
     Ret = decodead(Cmd);
     return Ret;
@@ -163,18 +163,17 @@ float CADS1246::Read(void) //返回-1,表示转换未完成
 
 void CADS1246::Init(void)
 {
-    //spi_CfgGpio();
-    this->pinrd->Set();
-    this->spi->portcs->Set();
-    this->pinreset->Reset();
+    this->ppinrd->Set();
+    this->pspi->portcs->Set();
+    this->ppinreset->Reset();
     delay_ms(40);
-    this->pinreset->Set();
+    this->ppinreset->Set();
     delay_ms(20);
-    this->spi->portcs->Reset();
+    this->pspi->portcs->Reset();
     this->WriteReg(ADC_REG_ID, 0x08); //DOUT兼容DRDY引脚   0X4A 00 08
     delay_ms(40);
     this->WriteReg(ADC_REG_SYS0, ADC_SPS_20 | ADC_GAIN_1); //调整采样速度
-    this->spi->portcs->Set();
+    this->pspi->portcs->Set();
 
 
     //打开中断，转换完成中断
