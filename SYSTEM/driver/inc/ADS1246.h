@@ -12,7 +12,7 @@ class CADS1246
         float Read(void); //返回-1,表示转换未完成
         void Init(void);
         uint8_t Check(void); //AD检查，正常返回0
-    public:
+    private:
         CSpiSoft *pspi; //SPI接口
         CPort *ppinrd; //数据准备好接口
         CPort *ppinreset; //复位接口
