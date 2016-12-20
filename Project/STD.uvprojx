@@ -514,6 +514,11 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\driver\src\NPA.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ADS1246.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\driver\src\ADS1246.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
