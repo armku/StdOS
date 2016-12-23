@@ -1,5 +1,4 @@
 #include "sys.h"
-#include "CommonDef.h"
 #include "delay.h"
 #include "Data.h"
 
