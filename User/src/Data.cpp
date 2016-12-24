@@ -10,6 +10,7 @@
 #include "W25qxx.h"
 #include "Data.h"
 #include "multi_button.h"
+#include "Exti.h"
 
 CTaskScheduler Scheduling; //调度
 
@@ -28,6 +29,7 @@ CLed led2(PB13);
 
 CPort key1(PA0);
 CPort key2(PC13);
+CExti exti(PA1);//PA1 PB3
 
 void BTN2_SINGLE_CLICK_Handler(void *btn)
 {
@@ -40,53 +42,6 @@ void BTN2_DOUBLE_CLICK_Handler(void *btn)
     printf("按键22次按键\n");
 }
 CButton btn2(PC13);
-void keyapp()
-{
-//    static uint8_t btn1_event_val;
-	static uint8_t btn2_event_val;
-	
-	//return;
-//    if (btn1_event_val != get_button_event(&btn1))
-//    {
-//        btn1_event_val = get_button_event(&btn1);
-
-//        if (btn1_event_val == PRESS_DOWN)
-//        {
-//            //do something
-//            printf("按键1被按下\n");
-//        }
-//        else if (btn1_event_val == PRESS_UP)
-//        {
-//            //do something
-//        }
-//        else if (btn1_event_val == LONG_PRESS_HOLD)
-//        {
-//            printf("长按键\n");
-//            //do something
-//        }
-//    }
-//    if (btn1_event_val == LONG_PRESS_HOLD)
-//    {
-//        printf("长按键1\n");
-//    }
-
-//    if (btn2_event_val != btn2.get_button_event())
-//    {
-//        btn2_event_val = btn2.get_button_event();
-//        if (btn2_event_val == PRESS_DOWN)
-//        {
-//            printf("按键2被按下\n");
-//        }
-//        if (btn2_event_val == PRESS_UP)
-//        {
-//            printf("按键2被松开\n");
-//        }
-//    }
-	if (btn2_event_val == LONG_PRESS_HOLD)
-    {
-        printf("长按键2\n");
-    }
-}
 
 void btn2ticks();
 //系统初始化
@@ -98,6 +53,8 @@ void STDInit()
 	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable,ENABLE);//关闭jtag，保留swd	
     usmart_dev.init(SystemCoreClock / 1000000); //初始化USMART
 
+	exti.Init();
+	exti.On();
     printf("System init\n");
    
 	btn2.attach(SINGLE_CLICK, BTN2_SINGLE_CLICK_Handler);
@@ -105,9 +62,8 @@ void STDInit()
     
     Scheduling.ThreadAdd(softTimers, 1); //1毫秒周期循环
     Scheduling.ThreadAdd(ledflash, 50);
-    Scheduling.ThreadAdd(eepread, 100);
+    Scheduling.ThreadAdd(eepread, 1000);
     Scheduling.ThreadAdd(btn2ticks, 5);
-    Scheduling.ThreadAdd(keyapp, 500);
 }
 
 void ledflash()
@@ -120,11 +76,12 @@ void btn2ticks()
 {
     btn2.ticks();
 }
-
+extern uint16_t exti0;
 void eepread()
 {
-    //    uint8_t buf[200];
-    //at24c02.ReadBytes(buf, 0, 100);
+	static uint8_t cnt=0;
+	printf("%3d中断次数:%d",cnt++,exti0);
+	printf("\n");
 }
 
 //1ms软件定时器
