@@ -14,7 +14,6 @@
 
 CTaskScheduler Scheduling; //调度
 
-
 CFIFORing com1buf; //串口1接收缓冲区
 uint32_t com1timeidle; //串口1空闲时间
 //sequence 序列号 cur_seq max_seq step
@@ -25,25 +24,12 @@ void eepread();
 void softTimers();
 CLed led1(PB0);
 CLed led2(PB13);
-
+//按键 PC13 PA0
 
 CPort key1(PA0);
 CPort key2(PC13);
 CExti exti(PA0);//PA1 PB3
 
-void BTN2_SINGLE_CLICK_Handler(void *btn)
-{
-    //do something...
-    printf("按键2一次按键\n");
-}
-void BTN2_DOUBLE_CLICK_Handler(void *btn)
-{
-    //do something...
-    printf("按键22次按键\n");
-}
-CButton btn2(PC13);
-
-void btn2ticks();
 //系统初始化
 void STDInit() 
 {
@@ -56,14 +42,10 @@ void STDInit()
 	exti.Init();
 	exti.On();
     printf("System init\n");
-   
-	btn2.attach(SINGLE_CLICK, BTN2_SINGLE_CLICK_Handler);
-	btn2.attach(DOUBLE_CLICK, BTN2_DOUBLE_CLICK_Handler);
-    
+   	    
     Scheduling.ThreadAdd(softTimers, 1); //1毫秒周期循环
     Scheduling.ThreadAdd(ledflash, 50);
     Scheduling.ThreadAdd(eepread, 1000);
-    Scheduling.ThreadAdd(btn2ticks, 5);
 }
 
 void ledflash()
@@ -72,10 +54,6 @@ void ledflash()
     led2.Toggle();
 }
 
-void btn2ticks()
-{
-    btn2.ticks();
-}
 extern uint16_t exti0;
 void eepread()
 {
