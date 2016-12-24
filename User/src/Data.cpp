@@ -29,7 +29,7 @@ CLed led2(PB13);
 
 CPort key1(PA0);
 CPort key2(PC13);
-CExti exti(PA1);//PA1 PB3
+CExti exti(PB0);//PA1 PB3
 
 void BTN2_SINGLE_CLICK_Handler(void *btn)
 {

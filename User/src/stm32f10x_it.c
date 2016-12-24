@@ -150,6 +150,16 @@ void PendSV_Handler(void)
   */ 
 //外部中断0
 uint16_t exti0;
+void EXTI0_IRQHandler()
+{
+	exti0++;
+	if (EXTI_GetITStatus(EXTI_Line0) != RESET)
+        {
+
+            EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位
+            
+        }
+}
 void EXTI1_IRQHandler()
 {
 	exti0++;
@@ -157,6 +167,16 @@ void EXTI1_IRQHandler()
         {
 
             EXTI_ClearITPendingBit(EXTI_Line1); //清除中断标志位
+            
+        }
+}
+void EXTI2_IRQHandler()
+{
+	exti0++;
+	if (EXTI_GetITStatus(EXTI_Line2) != RESET)
+        {
+
+            EXTI_ClearITPendingBit(EXTI_Line2); //清除中断标志位
             
         }
 }

@@ -39,6 +39,27 @@ CExti::CExti(uint16_t pin)
 		this->gPIO_PinSource=GPIO_PinSource0;
 		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOA;
 	} 
+	else if(pin ==PB1)
+	{
+		this->eXTI_Line=EXTI_Line1;
+		this->nVIC_IRQChannel=EXTI1_IRQn;
+		this->gPIO_PinSource=GPIO_PinSource1;
+		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOB;
+	} 
+	else if(pin ==PB2)
+	{
+		this->eXTI_Line=EXTI_Line2;
+		this->nVIC_IRQChannel=EXTI2_IRQn;
+		this->gPIO_PinSource=GPIO_PinSource2;
+		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOB;
+	} 
+	else if(pin ==PB3)
+	{
+		this->eXTI_Line=EXTI_Line3;
+		this->nVIC_IRQChannel=EXTI3_IRQn;
+		this->gPIO_PinSource=GPIO_PinSource3;
+		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOB;
+	} 
 	else
 	{
 		//默认为PA0
@@ -72,7 +93,7 @@ void CExti::Init()
     
 	NVIC_InitTypeDef NVIC_InitStructure;
 
-	NVIC_InitStructure.NVIC_IRQChannel = this->nVIC_IRQChannel; //使能所在的外部中断通道
+	NVIC_InitStructure.NVIC_IRQChannel = this->nVIC_IRQChannel; //中断向量
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1; //抢占优先级0 
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1; //子优先级0 
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //使能外部中断通道
