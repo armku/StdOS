@@ -33,7 +33,7 @@ typedef enum
 class CButton
 {
     public:
-        CButton(uint16_t pin, uint8_t active_level = 0,uint8_t DownBit=0);
+        CButton(PinPort pin, uint8_t active_level = 0,uint8_t DownBit=0);
         ~CButton();
     public:        
         void attach(PressEvent event, BtnCallback cb);

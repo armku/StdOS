@@ -5,7 +5,7 @@
 #define macI2C_WR	0		/* Ð´¿ØÖÆbit */
 #define macI2C_RD	1		/* ¶Á¿ØÖÆbit */
 
-CW24xxx::CW24xxx(uint16_t pinsck, uint16_t pinsda, EW24XXType devtype, uint8_t devaddr, uint32_t wnms)
+CW24xxx::CW24xxx(PinPort pinsck, PinPort pinsda, EW24XXType devtype, uint8_t devaddr, uint32_t wnms)
 {
     this->pi2c = new CI2CSoft(pinsck, pinsda);
     this->deviceType = devtype;

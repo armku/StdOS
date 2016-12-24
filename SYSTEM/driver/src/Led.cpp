@@ -1,6 +1,6 @@
 #include "Led.h"
 
-CLed::CLed(uint16_t pin, uint16_t period1, uint16_t onTime1):CPort(pin)
+CLed::CLed(PinPort pin, uint16_t period1, uint16_t onTime1):CPort(pin)
 {    
     this->SetModeOut_PP();
     this->period = period1;

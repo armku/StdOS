@@ -4,7 +4,7 @@
 class CADS1246
 {
     public:
-        CADS1246(uint16_t pincs, uint16_t pinsck, uint16_t pindin, uint16_t pindout, uint16_t pinrd, uint16_t pinreset);
+        CADS1246(PinPort pincs, PinPort pinsck, PinPort pindin, PinPort pindout, PinPort pinrd, PinPort pinreset);
         ~CADS1246();
     public:
         uint8_t ReadReg(uint8_t RegAddr);

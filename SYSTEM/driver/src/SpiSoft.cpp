@@ -1,7 +1,7 @@
 #include "SpiSoft.h"
 #include "delay.h"
 
-CSpiSoft::CSpiSoft(uint16_t pincs, uint16_t pinsck, uint16_t pindi, uint8_t pindo, uint32_t nus)
+CSpiSoft::CSpiSoft(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, uint32_t nus)
 {
     this->portcs = new CPort(pincs);
     this->portsck = new CPort(pinsck);

@@ -7,7 +7,7 @@
 #define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
-CPort::CPort(uint16_t pin)
+CPort::CPort(PinPort pin)
 {
     this->pin = pin;
 }

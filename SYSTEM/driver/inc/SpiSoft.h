@@ -4,7 +4,7 @@
 class CSpiSoft
 {
 public:
-    CSpiSoft(uint16_t pincs, uint16_t pinsck, uint16_t pindi, uint8_t pindo, uint32_t nus = 0); //延时时间默认0us
+    CSpiSoft(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, uint32_t nus = 0); //延时时间默认0us
     ~CSpiSoft();
     uint8_t Init();
     uint8_t WaitBusy();

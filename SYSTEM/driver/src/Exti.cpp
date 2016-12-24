@@ -1,7 +1,7 @@
 #include "stm32f10x_exti.h"
 #include "Exti.h"
 
-CExti::CExti(uint16_t pin)
+CExti::CExti(PinPort pin)
 {
 	this->port=new CPort(pin);
 	

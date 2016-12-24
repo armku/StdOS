@@ -6,7 +6,7 @@
 #include "multi_button.h"
 #include "string.h"
 
-CButton::CButton(uint16_t pin, uint8_t active_level,uint8_t DownBit)
+CButton::CButton(PinPort pin, uint8_t active_level,uint8_t DownBit)
 {
     this->pPin = new CPort(pin);
     this->pPin->SetModeINPUT_IPU();

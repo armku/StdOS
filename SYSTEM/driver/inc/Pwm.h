@@ -5,7 +5,7 @@
 class CPWM
 {
 	public:
-		CPWM(uint16_t pin,uint32_t frq=10000,uint16_t duty=50);
+		CPWM(PinPort pin,uint32_t frq=10000,uint16_t duty=50);
 		~CPWM();
 		uint8_t Init();
 	private:

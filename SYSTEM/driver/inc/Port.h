@@ -6,7 +6,7 @@
 class CPort
 {
     public:
-        CPort(uint16_t pin);
+        CPort(PinPort pin);
         ~CPort();
     public:
         void SetModeAIN();

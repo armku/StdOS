@@ -5,7 +5,7 @@
 class CI2CSoft
 {
     public:
-        CI2CSoft(uint16_t pinsck, uint16_t pinsda, uint32_t nus = 1); //延时时间默认为10，频率为100kHz
+        CI2CSoft(PinPort pinsck, PinPort pinsda, uint32_t nus = 1); //延时时间默认为10，频率为100kHz
         ~CI2CSoft();
         void Init();
     public:

@@ -1,7 +1,7 @@
 #include "NPA.h"
 #include "delay.h"
 
-CNPA::CNPA(uint16_t pinsck, uint16_t pinsda, uint8_t devAddr)
+CNPA::CNPA(PinPort pinsck, PinPort pinsda, uint8_t devAddr)
 {
     this->DEVER_ADDR = devAddr;
     this->pi2c = new CI2CSoft(pinsck, pinsda);

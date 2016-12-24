@@ -10,7 +10,7 @@
 #define RB		1	//回读CFG寄存器 0：数据结束时回读当前配置，1：不回读配置内容
 
 //0-本次读取的数据缓存保存位置(n-2); 2-AD7689通道选择
-CAD7689::CAD7689(uint16_t pinsck, uint16_t pinsdi, uint16_t pinsdo, uint16_t pincnv)
+CAD7689::CAD7689(PinPort pinsck, PinPort pinsdi, PinPort pinsdo, PinPort pincnv)
 {
     this->ppinsck = new CPort(pinsck);
     this->ppinsdi = new CPort(pinsdi);

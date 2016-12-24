@@ -5,7 +5,7 @@
 class CLed:public CPort
 {
     public:
-        CLed(uint16_t pin, uint16_t period1 = 1000, uint16_t onTime1 = 500);
+        CLed(PinPort pin, uint16_t period1 = 1000, uint16_t onTime1 = 500);
         ~CLed();
 	public:
         uint8_t Init();

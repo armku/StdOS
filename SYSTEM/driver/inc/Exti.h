@@ -4,7 +4,7 @@
 class CExti
 {
     public:
-        CExti(uint16_t pin);
+        CExti(PinPort pin);
         ~CExti();
     public:
         void Init(); //≥ı ºªØ

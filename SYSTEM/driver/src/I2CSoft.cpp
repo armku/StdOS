@@ -1,7 +1,7 @@
 #include "I2CSoft.h"
 //#include "delay.h"
 
-CI2CSoft::CI2CSoft(uint16_t pinscl, uint16_t pinsda, uint32_t nus)
+CI2CSoft::CI2CSoft(PinPort pinscl, PinPort pinsda, uint32_t nus)
 {
     this->psck = new CPort(pinscl);
     this->psda = new CPort(pinsda);

@@ -1,7 +1,7 @@
 #include "Pwm.h"
 
 
-CPWM::CPWM(uint16_t pin,uint32_t frq,uint16_t duty)
+CPWM::CPWM(PinPort pin,uint32_t frq,uint16_t duty)
 {
 	this->pin=new CPort(pin);
 	this->freq=frq;
