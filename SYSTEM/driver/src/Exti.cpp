@@ -4,70 +4,25 @@
 CExti::CExti(uint16_t pin)
 {
 	this->port=new CPort(pin);
-	if(pin ==PA0)
+	
+		
+//		//默认为PA0
+//		this->eXTI_Line=EXTI_Line0;
+//		this->nVIC_IRQChannel=EXTI0_IRQn;
+//		this->gPIO_PinSource=GPIO_PinSource0;
+//		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOA;
+	
+	this->eXTI_Line=pin%16;
+	if(pin%16<5)
 	{
-		this->eXTI_Line=EXTI_Line0;
-		this->nVIC_IRQChannel=EXTI0_IRQn;
-		this->gPIO_PinSource=GPIO_PinSource1;
-		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOA;
+		this->nVIC_IRQChannel=EXTI0_IRQn+pin%16;
 	}
-	else if(pin ==PA1)
-	{
-		this->eXTI_Line=EXTI_Line1;
-		this->nVIC_IRQChannel=EXTI1_IRQn;
-		this->gPIO_PinSource=GPIO_PinSource2;
-		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOA;
-	} 
-	else if(pin ==PA2)
-	{
-		this->eXTI_Line=EXTI_Line1;
-		this->nVIC_IRQChannel=EXTI2_IRQn;
-		this->gPIO_PinSource=GPIO_PinSource3;
-		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOA;
-	} 
-	else if(pin ==PA3)
-	{
-		this->eXTI_Line=EXTI_Line3;
-		this->nVIC_IRQChannel=EXTI3_IRQn;
-		this->gPIO_PinSource=GPIO_PinSource4;
-		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOA;
-	} 
-	else if(pin ==PA4)
-	{
-		this->eXTI_Line=EXTI_Line4;
-		this->nVIC_IRQChannel=EXTI4_IRQn;
-		this->gPIO_PinSource=GPIO_PinSource0;
-		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOA;
-	} 
-	else if(pin ==PB1)
-	{
-		this->eXTI_Line=EXTI_Line1;
-		this->nVIC_IRQChannel=EXTI1_IRQn;
-		this->gPIO_PinSource=GPIO_PinSource1;
-		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOB;
-	} 
-	else if(pin ==PB2)
-	{
-		this->eXTI_Line=EXTI_Line2;
-		this->nVIC_IRQChannel=EXTI2_IRQn;
-		this->gPIO_PinSource=GPIO_PinSource2;
-		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOB;
-	} 
-	else if(pin ==PB3)
-	{
-		this->eXTI_Line=EXTI_Line3;
-		this->nVIC_IRQChannel=EXTI3_IRQn;
-		this->gPIO_PinSource=GPIO_PinSource3;
-		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOB;
-	} 
 	else
 	{
-		//默认为PA0
-		this->eXTI_Line=EXTI_Line0;
-		this->nVIC_IRQChannel=EXTI0_IRQn;
-		this->gPIO_PinSource=GPIO_PinSource0;
-		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOA;
+		this->nVIC_IRQChannel=EXTI15_10_IRQn;
 	}
+	this->gPIO_PinSource=pin%16;
+	this->gPIO_PortSourceGPIO=pin/16;
 }
 CExti::~CExti()
 {

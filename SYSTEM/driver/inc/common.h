@@ -14,22 +14,28 @@ typedef enum
 } PIN_MODE;
 /* Õë½Å ------------------------------------------------------------------*/
 #define P0 0xFFFF
-#define PA0 0
-#define PA1 1
-#define PA2 2
-#define PA3 3
-#define PA4 4
-#define PA5 5
-#define PA6 6
-#define PA7 7
-#define PA8 8
-#define PA9 9
-#define PA10 10
-#define PA11 11
-#define PA12 12
-#define PA13 13
-#define PA14 14
-#define PA15 15
+//Òý½Å¶¨Òå
+typedef enum
+{
+	PA0,PA1,PA2,PA3,PA4,PA5,PA6,PA7,PA8,PA9,PA10,PA11,PA12,PA13,PA14,PA15,
+}PinPort;
+
+//#define PA0 0
+//#define PA1 1
+//#define PA2 2
+//#define PA3 3
+//#define PA4 4
+//#define PA5 5
+//#define PA6 6
+//#define PA7 7
+//#define PA8 8
+//#define PA9 9
+//#define PA10 10
+//#define PA11 11
+//#define PA12 12
+//#define PA13 13
+//#define PA14 14
+//#define PA15 15
 #define PB0 16
 #define PB1 17
 #define PB2 18
