@@ -4,7 +4,6 @@
 CExti::CExti(PinPort pin)
 {
 	this->port=new CPort(pin);
-	
 		
 //		//Ä¬ÈÏÎªPA0
 //		this->eXTI_Line=EXTI_Line0;
