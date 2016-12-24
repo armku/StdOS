@@ -26,8 +26,6 @@ CLed led1(PB0);
 CLed led2(PB13);
 //按键 PC13 PA0
 
-CPort key1(PA0);
-CPort key2(PC13);
 CExti exti(PA0);//PA1 PB3
 
 //系统初始化

@@ -4,13 +4,14 @@
 CExti::CExti(PinPort pin)
 {
 	this->port=new CPort(pin);
-		
-//		//默认为PA0
-//		this->eXTI_Line=EXTI_Line0;
-//		this->nVIC_IRQChannel=EXTI0_IRQn;
-//		this->gPIO_PinSource=GPIO_PinSource0;
-//		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOA;
-	
+	this->port->SetModeINPUT_IPD();
+	#if 1
+		//默认为PA0
+		this->eXTI_Line=EXTI_Line0;
+		this->nVIC_IRQChannel=EXTI0_IRQn;
+		this->gPIO_PinSource=GPIO_PinSource0;
+		this->gPIO_PortSourceGPIO=GPIO_PortSourceGPIOA;
+	#else
 	this->eXTI_Line=pin%16;
 	if(pin%16<5)
 	{
@@ -22,6 +23,7 @@ CExti::CExti(PinPort pin)
 	}
 	this->gPIO_PinSource=pin%16;
 	this->gPIO_PortSourceGPIO=pin/16;
+	#endif
 }
 CExti::~CExti()
 {
