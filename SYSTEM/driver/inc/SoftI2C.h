@@ -6,7 +6,7 @@ class CSoftI2C
 {
     public:
         CSoftI2C(PinPort pinsck, PinPort pinsda, uint32_t nus = 1); //延时时间默认为10，频率为100kHz
-        
+        void SetPin(PinPort pinsck, PinPort pinsda);//设置端口
         void Init();
         void Start(void);
         void Stop(void);
