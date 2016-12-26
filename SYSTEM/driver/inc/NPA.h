@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 #include "Port.h"
-#include "I2CSoft.h"
+#include "SoftI2C.h"
 
 class CNPA
 {
@@ -13,6 +13,6 @@ class CNPA
         void Init(void);
         int Read(void);
     private:
-        CI2CSoft *pi2c;
+        CSoftI2C *pi2c;
         uint8_t DEVER_ADDR; //…Ë±∏µÿ÷∑
 };

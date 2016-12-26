@@ -12,9 +12,6 @@ CPort::CPort(PinPort pin)
     this->pin = pin;
 }
 
-CPort::~CPort(){
-
-}
 ////Òý½ÅÄ£Ê½
 void CPort::SetMode(PIN_MODE mode)
 {

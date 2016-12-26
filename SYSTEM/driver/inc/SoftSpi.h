@@ -1,11 +1,10 @@
 #pragma once
 #include "Port.h"
 
-class CSpiSoft
+class CSoftSpi
 {
 public:
-    CSpiSoft(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, uint32_t nus = 0); //延时时间默认0us
-    ~CSpiSoft();
+    CSoftSpi(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, uint32_t nus = 0); //延时时间默认0us   
     uint8_t Init();
     uint8_t WaitBusy();
     uint8_t spi_writebyte(uint8_t da);

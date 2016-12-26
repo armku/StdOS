@@ -2,13 +2,12 @@
 
 #include "Port.h"
 
-class CI2CSoft
+class CSoftI2C
 {
     public:
-        CI2CSoft(PinPort pinsck, PinPort pinsda, uint32_t nus = 1); //延时时间默认为10，频率为100kHz
-        ~CI2CSoft();
+        CSoftI2C(PinPort pinsck, PinPort pinsda, uint32_t nus = 1); //延时时间默认为10，频率为100kHz
+        
         void Init();
-    public:
         void Start(void);
         void Stop(void);
         void Ack(void);

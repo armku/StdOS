@@ -1,7 +1,7 @@
-#include "I2CSoft.h"
+#include "SoftI2C.h"
 //#include "delay.h"
 
-CI2CSoft::CI2CSoft(PinPort pinscl, PinPort pinsda, uint32_t nus)
+CSoftI2C::CSoftI2C(PinPort pinscl, PinPort pinsda, uint32_t nus)
 {
     this->psck = new CPort(pinscl);
     this->psda = new CPort(pinsda);
@@ -15,13 +15,10 @@ CI2CSoft::CI2CSoft(PinPort pinscl, PinPort pinsda, uint32_t nus)
     this->psck->Set();
 }
 
-CI2CSoft::~CI2CSoft(){
+void CSoftI2C::Init(){
 
 }
-void CI2CSoft::Init(){
-
-}
-void CI2CSoft::Start()
+void CSoftI2C::Start()
 {
     /* 当SCL高电平时，SDA出现一个下跳沿表示I2C总线启动信号 */
     this->psda->Set();
@@ -33,7 +30,7 @@ void CI2CSoft::Start()
     this->delay();
 }
 
-void CI2CSoft::Stop()
+void CSoftI2C::Stop()
 {
     /* 当SCL高电平时，SDA出现一个上跳沿表示I2C总线停止信号 */
     this->psda->Reset();
@@ -42,7 +39,7 @@ void CI2CSoft::Stop()
     this->psda->Set();
 }
 
-void CI2CSoft::WriteByte(uint8_t _ucByte)
+void CSoftI2C::WriteByte(uint8_t _ucByte)
 {
     uint8_t i;
 
@@ -70,7 +67,7 @@ void CI2CSoft::WriteByte(uint8_t _ucByte)
     }
 }
 
-uint8_t CI2CSoft::ReadByte()
+uint8_t CSoftI2C::ReadByte()
 {
     uint8_t i;
     uint8_t value;
@@ -95,7 +92,7 @@ uint8_t CI2CSoft::ReadByte()
 //等待应答信号到来
 //返回值：1，接收应答失败
 //        0，接收应答成功
-uint8_t CI2CSoft::WaitAck()
+uint8_t CSoftI2C::WaitAck()
 {
     uint8_t re;
 
@@ -118,7 +115,7 @@ uint8_t CI2CSoft::WaitAck()
     return re;
 }
 
-void CI2CSoft::Ack()
+void CSoftI2C::Ack()
 {
     this->psda->Reset(); /* CPU驱动SDA = 0 */
     this->delay();
@@ -130,7 +127,7 @@ void CI2CSoft::Ack()
     /*CPU释放SDA总线 */
 }
 
-void CI2CSoft::NAck()
+void CSoftI2C::NAck()
 {
     this->psda->Set(); /* CPU驱动SDA = 1 */
     this->delay();
@@ -140,7 +137,7 @@ void CI2CSoft::NAck()
     this->delay();
 }
 
-void CI2CSoft::delay(void)
+void CSoftI2C::delay(void)
 {
     uint8_t i;
 

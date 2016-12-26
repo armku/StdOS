@@ -1,6 +1,6 @@
 #pragma once 
 #include <stdint.h>
-#include "SpiSoft.h"
+#include "SoftSpi.h"
 class CADS1246
 {
     public:
@@ -13,7 +13,7 @@ class CADS1246
         void Init(void);
         uint8_t Check(void); //AD检查，正常返回0
     private:
-        CSpiSoft *pspi; //SPI接口
+        CSoftSpi *pspi; //SPI接口
         CPort *ppinrd; //数据准备好接口
         CPort *ppinreset; //复位接口
     private:

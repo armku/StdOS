@@ -1,5 +1,5 @@
 #pragma once 
-#include "I2CSoft.h"
+#include "SoftI2C.h"
 
 #define EEPTEST 1
 typedef enum
@@ -27,7 +27,7 @@ class CW24xxx
         EW24XXType deviceType; //器件类型
         uint8_t devAddr; //设备地址
         uint32_t pageSize; //存储页大小
-        CI2CSoft *pi2c;
+        CSoftI2C *pi2c;
         uint32_t writedelaynms; //写延时	
     private:
         uint16_t jsPageSize(uint32_t type); //计算存储页大小

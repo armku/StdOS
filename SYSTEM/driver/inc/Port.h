@@ -6,8 +6,7 @@
 class CPort
 {
     public:
-        CPort(PinPort pin);
-        ~CPort();
+        CPort(PinPort pin);       
     public:
         void SetModeAIN();
         void SetModeIN_FLOATING();

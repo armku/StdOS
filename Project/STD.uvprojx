@@ -475,19 +475,9 @@
               <FilePath>..\SYSTEM\driver\src\WatchDog.cpp</FilePath>
             </File>
             <File>
-              <FileName>I2CSoft.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\I2CSoft.cpp</FilePath>
-            </File>
-            <File>
               <FileName>W24xxx.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\driver\src\W24xxx.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SpiSoft.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\SpiSoft.cpp</FilePath>
             </File>
             <File>
               <FileName>SpiHard.cpp</FileName>
@@ -518,6 +508,36 @@
               <FileName>ADS1246.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\driver\src\ADS1246.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\driver\src\InputPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AlternatePort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\driver\src\AlternatePort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AnalogInPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\driver\src\AnalogInPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OutputPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\driver\src\OutputPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SoftI2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\driver\src\SoftI2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SoftSpi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\driver\src\SoftSpi.cpp</FilePath>
             </File>
           </Files>
         </Group>

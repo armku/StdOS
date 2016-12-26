@@ -1,7 +1,7 @@
-#include "SpiSoft.h"
+#include "SoftSpi.h"
 #include "delay.h"
 
-CSpiSoft::CSpiSoft(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, uint32_t nus)
+CSoftSpi::CSoftSpi(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, uint32_t nus)
 {
     this->portcs = new CPort(pincs);
     this->portsck = new CPort(pinsck);
@@ -16,15 +16,15 @@ CSpiSoft::CSpiSoft(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, 
     this->delayus = nus;
 }
 
-CSpiSoft::~CSpiSoft() {}
-uint8_t CSpiSoft::Init()
+
+uint8_t CSoftSpi::Init()
 {
     return 0;
 }
 /*---------------------------------------------------------
 忙状态判断，最长等待时间，200 X 10 ms=2S
 ---------------------------------------------------------*/
-uint8_t CSpiSoft::WaitBusy()
+uint8_t CSoftSpi::WaitBusy()
 {
     uint16_t i;
     this->portcs->Reset();
@@ -41,7 +41,7 @@ uint8_t CSpiSoft::WaitBusy()
 }
 
 //SPI写字节
-uint8_t CSpiSoft::spi_writebyte(uint8_t da)
+uint8_t CSoftSpi::spi_writebyte(uint8_t da)
 {
     uint8_t i;
     uint8_t ret = 0;
@@ -69,7 +69,7 @@ uint8_t CSpiSoft::spi_writebyte(uint8_t da)
 }
 
 //SPI总线读数据
-uint8_t CSpiSoft::spi_readbyte(void)
+uint8_t CSoftSpi::spi_readbyte(void)
 {
     return spi_writebyte(0xff);
 }

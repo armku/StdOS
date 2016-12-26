@@ -4,7 +4,7 @@
 CNPA::CNPA(PinPort pinsck, PinPort pinsda, uint8_t devAddr)
 {
     this->DEVER_ADDR = devAddr;
-    this->pi2c = new CI2CSoft(pinsck, pinsda);
+    this->pi2c = new CSoftI2C(pinsck, pinsda);
 }
 
 CNPA::~CNPA(){}
