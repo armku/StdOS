@@ -510,26 +510,6 @@
               <FilePath>..\SYSTEM\driver\src\ADS1246.cpp</FilePath>
             </File>
             <File>
-              <FileName>InputPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\InputPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AlternatePort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\AlternatePort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AnalogInPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\AnalogInPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>OutputPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\OutputPort.cpp</FilePath>
-            </File>
-            <File>
               <FileName>SoftI2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\driver\src\SoftI2C.cpp</FilePath>
