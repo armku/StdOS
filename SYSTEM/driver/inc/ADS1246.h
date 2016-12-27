@@ -14,8 +14,8 @@ class CADS1246
         uint8_t Check(void); //AD检查，正常返回0
     private:
         CSoftSpi *pspi; //SPI接口
-        CPort *ppinrd; //数据准备好接口
-        CPort *ppinreset; //复位接口
+        BasePort *ppinrd; //数据准备好接口
+        BasePort *ppinreset; //复位接口
     private:
         float decodead(uint8_t *da);
 

@@ -10,8 +10,8 @@ void uart_init(uint32_t bound)
 
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);	//使能USART1
 
-    CPort tx1(PA9);
-    CPort rx1(PA10);
+    BasePort tx1(PA9);
+    BasePort rx1(PA10);
     tx1.SetModeAF_PP();
     rx1.SetModeIN_FLOATING();
 
@@ -37,8 +37,8 @@ void uart_init(uint32_t bound)
     USART_ClearFlag(USART1, USART_FLAG_TC);
 
     //串口2设置
-    CPort tx2(PA2);
-    CPort rx2(PA3);
+    BasePort tx2(PA2);
+    BasePort rx2(PA3);
     tx2.SetModeAF_PP();
     rx2.SetModeIN_FLOATING();
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
@@ -58,8 +58,8 @@ void uart_init(uint32_t bound)
     USART_ClearFlag(USART2, USART_FLAG_TC);
 
     //	 //串口3设置
-    //	CPort tx3(PB11);
-    //    CPort rx3(PB10);
+    //	BasePort tx3(PB11);
+    //    BasePort rx3(PB10);
     //	tx3.SetModeAF_PP();
     //    rx3.SetModeIN_FLOATING();
     //RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
@@ -79,8 +79,8 @@ void uart_init(uint32_t bound)
     //	USART_ClearFlag(USART3, USART_FLAG_TC);
     //
     //	//串口4设置
-    //	CPort tx4(PC10);
-    //    CPort rx4(PC11);
+    //	BasePort tx4(PC10);
+    //    BasePort rx4(PC11);
     //	tx4.SetModeAF_PP();
     //    rx4.SetModeIN_FLOATING();
     //RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);
@@ -100,8 +100,8 @@ void uart_init(uint32_t bound)
     //USART_ClearFlag(UART4, USART_FLAG_TC);
     //
     //	 //串口5设置
-    //	CPort tx5(PC12);
-    //    CPort rx5(PD3);
+    //	BasePort tx5(PC12);
+    //    BasePort rx5(PD3);
     //	tx5.SetModeAF_PP();
     //    rx5.SetModeIN_FLOATING();
     //RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART5, ENABLE);

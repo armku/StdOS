@@ -7,13 +7,13 @@
 #define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
-CPort::CPort(PinPort pin)
+BasePort::BasePort(PinPort pin)
 {
     this->pin = pin;
 }
 
 ////Òý½ÅÄ£Ê½
-void CPort::SetMode(PIN_MODE mode)
+void BasePort::SetMode(PIN_MODE mode)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
     RCC_APB2PeriphClockCmd(_RCC_APB2(pin), ENABLE);
@@ -54,59 +54,59 @@ void CPort::SetMode(PIN_MODE mode)
     GPIO_Init(_GROUP(pin), &GPIO_InitStructure);
 }
 
-void CPort::SetModeAIN()
+void BasePort::SetModeAIN()
 {
     this->SetMode(AIN);
 }
 
-void CPort::SetModeIN_FLOATING()
+void BasePort::SetModeIN_FLOATING()
 {
     this->SetMode(INPUT);
 }
 
-void CPort::SetModeINPUT_IPD()
+void BasePort::SetModeINPUT_IPD()
 {
     this->SetMode(INPUT_PD);
 }
 
-void CPort::SetModeINPUT_IPU()
+void BasePort::SetModeINPUT_IPU()
 {
     this->SetMode(INPUT_PU);
 }
 
-void CPort::SetModeOut_OD()
+void BasePort::SetModeOut_OD()
 {
     this->SetMode(OUTPUT_OD);
 }
 
-void CPort::SetModeOut_PP()
+void BasePort::SetModeOut_PP()
 {
     this->SetMode(OUTPUT_PP);
 }
 
-void CPort::SetModeAF_OD()
+void BasePort::SetModeAF_OD()
 {
     this->SetMode(AF_OD);
 }
 
-void CPort::SetModeAF_PP()
+void BasePort::SetModeAF_PP()
 {
     this->SetMode(AF_PP);
 }
 
-void CPort::Set()
+void BasePort::Set()
 {
     this->pinbit = 1;
     GPIO_SetBits(_GROUP(pin), _PORT(pin));
 }
 
-void CPort::Reset()
+void BasePort::Reset()
 {
     this->pinbit = 0;
     GPIO_ResetBits(_GROUP(pin), _PORT(pin));
 }
 
-void CPort::Toggle()
+void BasePort::Toggle()
 {
     this->pinbit = !this->pinbit;
     if (this->pinbit)
@@ -119,12 +119,12 @@ void CPort::Toggle()
     }
 }
 
-uint8_t CPort::Read(void)
+uint8_t BasePort::Read(void)
 {
     return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
 }
 
-void CPort::Write(uint8_t da)
+void BasePort::Write(uint8_t da)
 {
     if (da)
     {

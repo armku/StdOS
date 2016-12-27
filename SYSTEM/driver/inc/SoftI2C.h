@@ -17,8 +17,8 @@ class CSoftI2C
 		void WriteByte(uint8_t _ucByte);
         uint8_t ReadByte(void);
     private:
-        CPort *psck;
-        CPort *psda;
+        BasePort *psck;
+        BasePort *psda;
         uint32_t delayus; //—” ± ±º‰
     private:
         void delay(void);

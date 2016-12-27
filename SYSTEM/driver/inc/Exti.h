@@ -11,7 +11,7 @@ class CExti
         void On(); //打开中断
         void Off(); //关闭中断
 	private:
-		CPort *port;	//端口
+		BasePort *port;	//端口
 	private:
 		void Exti0_state(bool onoff);
 		uint32_t eXTI_Line;//中断线

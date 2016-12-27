@@ -26,9 +26,9 @@ class CAD7689
         float volt[MAXCH]; //电压值
         uint8_t chCurrent; //当前通道
         uint8_t chDelayCnt; //通道延时时间，用于数据稳定
-        CPort *ppinsck;
-        CPort *ppinsdi;
-        CPort *ppinsdo;
-        CPort *ppincnv;
+        BasePort *ppinsck;
+        BasePort *ppinsdi;
+        BasePort *ppinsdo;
+        BasePort *ppincnv;
         uint8_t getNextCH(); //获取下次转换通道
 };

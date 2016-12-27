@@ -9,7 +9,7 @@ class CPWM
 		~CPWM();
 		uint8_t Init();
 	private:
-		CPort *pin;
+		BasePort *pin;
 		uint32_t freq;
 		uint16_t duty;
 };

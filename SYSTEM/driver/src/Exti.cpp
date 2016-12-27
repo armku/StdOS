@@ -3,7 +3,7 @@
 
 CExti::CExti(PinPort pin)
 {
-    this->port = new CPort(pin);
+    this->port = new BasePort(pin);
     this->port->SetModeINPUT_IPD();
     #if 0
         //д╛хон╙PA0

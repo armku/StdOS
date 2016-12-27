@@ -26,9 +26,9 @@ class CW25Qxxx
         void PageWrite(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
         void BulkErase(void);
 	private:
-		CPort *pincs;
-		CPort *pinclk;
-		CPort *pinmiso;
-		CPort *pinmosi;
+		BasePort *pincs;
+		BasePort *pinclk;
+		BasePort *pinmiso;
+		BasePort *pinmosi;
 		CSpiHard *spi;
 };

@@ -4,7 +4,7 @@
  * Copyright (c) 2016 Zibin Zheng <znbin@qq.com>
  * All rights reserved
  
- CPort key2(PC13);
+ BasePort key2(PC13);
  btn2.attach(SINGLE_CLICK, BTN2_SINGLE_CLICK_Handler);
  Scheduling.ThreadAdd(btn2ticks, 5);
  void btn2ticks()
@@ -40,7 +40,7 @@ class CButton
         void ticks();
         PressEvent get_button_event(); //获取当前按键状态
     private:
-        CPort *pPin;    
+        BasePort *pPin;    
         struct Button
         {
                 uint16_t ticks;

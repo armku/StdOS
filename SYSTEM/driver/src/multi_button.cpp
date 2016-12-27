@@ -8,7 +8,7 @@
 
 CButton::CButton(PinPort pin, uint8_t active_level,uint8_t DownBit)
 {
-    this->pPin = new CPort(pin);
+    this->pPin = new BasePort(pin);
     this->pPin->SetModeINPUT_IPU();
 
     memset(&(this->btn), sizeof(struct Button), 0);

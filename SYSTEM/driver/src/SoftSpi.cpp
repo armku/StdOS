@@ -3,10 +3,10 @@
 
 CSoftSpi::CSoftSpi(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, uint32_t nus)
 {
-    this->portcs = new CPort(pincs);
-    this->portsck = new CPort(pinsck);
-    this->portdi = new CPort(pindi);
-    this->portdo = new CPort(pindo);
+    this->portcs = new BasePort(pincs);
+    this->portsck = new BasePort(pinsck);
+    this->portdi = new BasePort(pindi);
+    this->portdo = new BasePort(pindo);
 
     this->portcs->SetModeOut_PP();
     this->portsck->SetModeOut_PP();

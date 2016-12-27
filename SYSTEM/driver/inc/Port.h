@@ -1,7 +1,6 @@
 #pragma once 
 
 #include <stdint.h>
-#include "common.h"
 
 typedef enum
 {
@@ -28,11 +27,10 @@ typedef enum
 	PG0,PG1,PG2,PG3,PG4,PG5,PG6,PG7,PG8,PG9,PG10,PG11,PG12,PG13,PG14,PG15
 }PinPort;
 
-class CPort
+class BasePort
 {
     public:
-        CPort(PinPort pin);       
-    public:
+        BasePort(PinPort pin);
         void SetModeAIN();
         void SetModeIN_FLOATING();
         void SetModeINPUT_IPD();

@@ -12,10 +12,10 @@
 //0-本次读取的数据缓存保存位置(n-2); 2-AD7689通道选择
 CAD7689::CAD7689(PinPort pinsck, PinPort pinsdi, PinPort pinsdo, PinPort pincnv)
 {
-    this->ppinsck = new CPort(pinsck);
-    this->ppinsdi = new CPort(pinsdi);
-    this->ppinsdo = new CPort(pinsdo);
-    this->ppincnv = new CPort(pincnv);
+    this->ppinsck = new BasePort(pinsck);
+    this->ppinsdi = new BasePort(pinsdi);
+    this->ppinsdo = new BasePort(pinsdo);
+    this->ppincnv = new BasePort(pincnv);
 
     for (uint8_t i = 0; i < MAXCH; i++)
     {

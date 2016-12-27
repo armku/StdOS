@@ -10,11 +10,11 @@ public:
     uint8_t spi_writebyte(uint8_t da);
     uint8_t spi_readbyte(void);
 public:
-    CPort *portsck;
-    CPort *portdi;
-    CPort *portdo;
+    BasePort *portsck;
+    BasePort *portdi;
+    BasePort *portdo;
 public:
-    CPort *portcs;
+    BasePort *portcs;
 private:
     uint32_t delayus;//—” ± ±º‰
 };

@@ -3,7 +3,7 @@
 
 CPWM::CPWM(PinPort pin,uint32_t frq,uint16_t duty)
 {
-	this->pin=new CPort(pin);
+	this->pin=new BasePort(pin);
 	this->freq=frq;
 	this->duty=duty;
 }
