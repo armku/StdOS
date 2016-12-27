@@ -14,7 +14,7 @@
  */
 
 
-#include "stdint.h"
+#include "Type.h"
 #include "BasePort.h"
 
 //According to your need to modify the constants.

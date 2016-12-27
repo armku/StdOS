@@ -1,5 +1,5 @@
 #pragma once
-#include <stdint.h>
+#include "Type.h"
 #include "Thread_T.h"
 
 #define PROCESSCNT 10	//任务数量

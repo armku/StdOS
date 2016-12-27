@@ -1,5 +1,5 @@
 #pragma once
-#include <stdint.h>
+#include "Type.h"
 
 #define NMAX 1000					//缓冲区大小，根据实际需要设置，但不能大于65535
 

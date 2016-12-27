@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdint.h>
+#include "Type.h"
 #include "BasePort.h"
 
 #define MAXCH	8

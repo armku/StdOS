@@ -1,5 +1,5 @@
 #pragma once 
-#include <stdint.h>
+#include "Type.h"
 #include "SoftSpi.h"
 class CADS1246
 {

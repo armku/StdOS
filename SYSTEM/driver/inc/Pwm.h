@@ -1,5 +1,5 @@
 #pragma once 
-#include <stdint.h>
+#include "Type.h"
 #include "BasePort.h"
 
 class PWM: public BasePort
