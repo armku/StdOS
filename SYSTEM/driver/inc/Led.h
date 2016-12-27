@@ -7,7 +7,7 @@ class CLed:public BasePort
     public:
         CLed(PinPort pin, uint16_t period1 = 1000, uint16_t onTime1 = 500);       
 	
-        uint8_t Init();
+        byte Init();
         void On();
         void Off(); 
     private:

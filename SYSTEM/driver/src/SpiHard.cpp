@@ -61,18 +61,18 @@ void CSpiHard::Init(void) //初始化SPI口
     }
 }
 
-void CSpiHard::SetSpeed(uint8_t SpeedSet) //设置SPI速度   
+void CSpiHard::SetSpeed(byte SpeedSet) //设置SPI速度   
 {
 
 }
-uint8_t CSpiHard::ReadByte() //SPI总线读一个字节
+byte CSpiHard::ReadByte() //SPI总线读一个字节
 {
     return this->WriteByte(0XFF);
 }
 
-uint8_t CSpiHard::WriteByte(uint8_t TxData) //SPI总线写一个字节
+byte CSpiHard::WriteByte(byte TxData) //SPI总线写一个字节
 {
-    uint8_t ret = 0;
+    byte ret = 0;
     switch (this->spiChannel)
     {
         case CHSPI1:

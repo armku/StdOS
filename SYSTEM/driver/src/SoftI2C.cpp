@@ -39,9 +39,9 @@ void CSoftI2C::Stop()
     this->psda->Set();
 }
 
-void CSoftI2C::WriteByte(uint8_t _ucByte)
+void CSoftI2C::WriteByte(byte _ucByte)
 {
-    uint8_t i;
+    byte i;
 
     /* 先发送字节的高位bit7 */
     for (i = 0; i < 8; i++)
@@ -67,10 +67,10 @@ void CSoftI2C::WriteByte(uint8_t _ucByte)
     }
 }
 
-uint8_t CSoftI2C::ReadByte()
+byte CSoftI2C::ReadByte()
 {
-    uint8_t i;
-    uint8_t value;
+    byte i;
+    byte value;
 
     /* 读到第1个bit为数据的bit7 */
     value = 0;
@@ -92,9 +92,9 @@ uint8_t CSoftI2C::ReadByte()
 //等待应答信号到来
 //返回值：1，接收应答失败
 //        0，接收应答成功
-uint8_t CSoftI2C::WaitAck()
+byte CSoftI2C::WaitAck()
 {
-    uint8_t re;
+    byte re;
 
     this->psda->Set(); /* CPU释放SDA总线 */
     this->delay();
@@ -139,7 +139,7 @@ void CSoftI2C::NAck()
 
 void CSoftI2C::delay(void)
 {
-    uint8_t i;
+    byte i;
 
     /*　
     下面的时间是通过安富莱AX-Pro逻辑分析仪测试得到的。

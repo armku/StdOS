@@ -15,7 +15,7 @@ class CExti
 	private:
 		void Exti0_state(bool onoff);
 		uint32_t eXTI_Line;//中断线
-		uint8_t nVIC_IRQChannel;//中断向量
-		uint8_t gPIO_PinSource;//中断线
-		uint8_t gPIO_PortSourceGPIO;//端口
+		byte nVIC_IRQChannel;//中断向量
+		byte gPIO_PinSource;//中断线
+		byte gPIO_PortSourceGPIO;//端口
 };

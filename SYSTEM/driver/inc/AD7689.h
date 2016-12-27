@@ -16,7 +16,7 @@ class CAD7689
         void Init(void); //
         float getVolt(uint16_t ch); //获取通道电压值
     public:
-        uint8_t FlagEnable[MAXCH]; //是否允许通道转换 0：禁止，1：允许 备用
+        byte FlagEnable[MAXCH]; //是否允许通道转换 0：禁止，1：允许 备用
     private:
         void Delay(uint32_t nTime);
         uint16_t AD_Read(void);
@@ -24,11 +24,11 @@ class CAD7689
     private:
         uint16_t ADBuf[MAXCH]; //原始AD值
         float volt[MAXCH]; //电压值
-        uint8_t chCurrent; //当前通道
-        uint8_t chDelayCnt; //通道延时时间，用于数据稳定
+        byte chCurrent; //当前通道
+        byte chDelayCnt; //通道延时时间，用于数据稳定
         BasePort *ppinsck;
         BasePort *ppinsdi;
         BasePort *ppinsdo;
         BasePort *ppincnv;
-        uint8_t getNextCH(); //获取下次转换通道
+        byte getNextCH(); //获取下次转换通道
 };

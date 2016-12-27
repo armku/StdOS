@@ -11,27 +11,27 @@ typedef enum
 class CW24xxx
 {
     public:
-        CW24xxx(PinPort pinsck, PinPort pinsda, EW24XXType devtype, uint8_t devaddr = 0xA0, uint32_t wnms = 5); //写延时时间
+        CW24xxx(PinPort pinsck, PinPort pinsda, EW24XXType devtype, byte devaddr = 0xA0, uint32_t wnms = 5); //写延时时间
         ~CW24xxx();
-        uint8_t CheckOk();
+        byte CheckOk();
     public:
         #if EEPTEST
             void Test(void);
         #endif 
-        uint8_t ReadBytes(uint8_t *_pReadBuf, uint16_t bufpos, uint16_t _usAddress, uint32_t _usSize);
-        uint8_t WriteBytes(uint8_t *_pWriteBuf, uint16_t bufpos, uint16_t _usAddress, uint32_t _usSize);
-        uint8_t ReadByte(uint16_t address);
-        uint8_t WriteByte(uint16_t address, uint8_t da);
+        byte ReadBytes(byte *_pReadBuf, uint16_t bufpos, uint16_t _usAddress, uint32_t _usSize);
+        byte WriteBytes(byte *_pWriteBuf, uint16_t bufpos, uint16_t _usAddress, uint32_t _usSize);
+        byte ReadByte(uint16_t address);
+        byte WriteByte(uint16_t address, byte da);
     private:
-        uint8_t checkDevice();
+        byte checkDevice();
         EW24XXType deviceType; //器件类型
-        uint8_t devAddr; //设备地址
+        byte devAddr; //设备地址
         uint32_t pageSize; //存储页大小
         CSoftI2C *pi2c;
         uint32_t writedelaynms; //写延时	
     private:
         uint16_t jsPageSize(uint32_t type); //计算存储页大小
-        uint8_t writePage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t len); //页内写
-        uint8_t readPage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t len); //页内读
-        uint8_t bufwr(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t len, uint8_t wr); //读写集中操作1写 0读
+        byte writePage(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t len); //页内写
+        byte readPage(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t len); //页内读
+        byte bufwr(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t len, byte wr); //读写集中操作1写 0读
 };

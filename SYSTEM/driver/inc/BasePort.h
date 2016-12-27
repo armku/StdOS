@@ -1,6 +1,6 @@
 #pragma once 
 
-#include <stdint.h>
+#include "Type.h"
 
 typedef enum
 {
@@ -33,7 +33,7 @@ class BasePort
         BasePort(PinPort pin);		
 		void Write(const bool value);//写入值，true：高电平，false：低电平
 		void operator = (const bool value);//写入值，true:高电平 false:低电平
-		void operator = (const uint8_t value);//写入值，其他:高电平 0:低电平
+		void operator = (const byte value);//写入值，其他:高电平 0:低电平
         void SetModeAIN();
         void SetModeIN_FLOATING();
         void SetModeINPUT_IPD();
@@ -45,9 +45,9 @@ class BasePort
         void Set(); //设置引脚
         void Reset(); //复位引脚
         void Toggle(); //翻转引脚
-        uint8_t Read(void);        
+        byte Read(void);        
     protected:
         PinPort pin; //引脚号
-        uint8_t pinbit;
+        byte pinbit;
         void SetMode(PIN_MODE mode); //引脚模式		
 };

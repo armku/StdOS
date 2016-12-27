@@ -151,7 +151,7 @@ void CW25Qxxx::BulkErase(void)
     this->WaitForWriteEnd();
 }
 
-void CW25Qxxx::PageWrite(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite)
+void CW25Qxxx::PageWrite(byte *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite)
 {
     /* Enable the write access to the FLASH */
     this->WriteEnable();
@@ -189,9 +189,9 @@ void CW25Qxxx::PageWrite(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteT
     this->WaitForWriteEnd();
 }
 
-void CW25Qxxx::BufferWrite(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite)
+void CW25Qxxx::BufferWrite(byte *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite)
 {
-    uint8_t NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
+    byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
     Addr = WriteAddr % SPI_FLASH_PageSize;
     count = SPI_FLASH_PageSize - Addr;
@@ -267,7 +267,7 @@ void CW25Qxxx::BufferWrite(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByt
     }
 }
 
-void CW25Qxxx::BufferRead(uint8_t *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead)
+void CW25Qxxx::BufferRead(byte *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead)
 {
     /* Select the FLASH: Chip Select low */
     this->pincs->Reset();
@@ -326,7 +326,7 @@ void CW25Qxxx::WriteEnable(void)
 #define SET 1	//½â¾ö±àÒë´íÎó
 void CW25Qxxx::WaitForWriteEnd(void)
 {
-    uint8_t FLASH_Status = 0;
+    byte FLASH_Status = 0;
 
     /* Select the FLASH: Chip Select low */
     this->pincs->Reset();

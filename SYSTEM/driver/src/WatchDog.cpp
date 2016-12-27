@@ -9,9 +9,9 @@ CWatchDog::CWatchDog(uint32_t ms)
 CWatchDog::~CWatchDog(){
 
 }
-uint8_t CWatchDog::Init()
+byte CWatchDog::Init()
 {
-    uint8_t prv = IWDG_Prescaler_64;
+    byte prv = IWDG_Prescaler_64;
     uint16_t rlv = 625;
 
     // 使能 预分频寄存器PR和重装载寄存器RLR可写

@@ -17,14 +17,14 @@ CSoftSpi::CSoftSpi(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, 
 }
 
 
-uint8_t CSoftSpi::Init()
+byte CSoftSpi::Init()
 {
     return 0;
 }
 /*---------------------------------------------------------
 忙状态判断，最长等待时间，200 X 10 ms=2S
 ---------------------------------------------------------*/
-uint8_t CSoftSpi::WaitBusy()
+byte CSoftSpi::WaitBusy()
 {
     uint16_t i;
     this->portcs->Reset();
@@ -41,10 +41,10 @@ uint8_t CSoftSpi::WaitBusy()
 }
 
 //SPI写字节
-uint8_t CSoftSpi::spi_writebyte(uint8_t da)
+byte CSoftSpi::spi_writebyte(byte da)
 {
-    uint8_t i;
-    uint8_t ret = 0;
+    byte i;
+    byte ret = 0;
     for (i = 0; i < 8; i++)
     {
         if (da & (1 << (8 - i - 1)))
@@ -69,7 +69,7 @@ uint8_t CSoftSpi::spi_writebyte(uint8_t da)
 }
 
 //SPI总线读数据
-uint8_t CSoftSpi::spi_readbyte(void)
+byte CSoftSpi::spi_readbyte(void)
 {
     return spi_writebyte(0xff);
 }

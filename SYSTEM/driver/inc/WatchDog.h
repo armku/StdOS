@@ -8,7 +8,7 @@ class CWatchDog
         CWatchDog(uint32_t ms = 3000);
         ~CWatchDog();
     public:
-        uint8_t Init();
+        byte Init();
         void Feed(); // 喂狗
     private:
         uint32_t timeout; // 当前超时时间

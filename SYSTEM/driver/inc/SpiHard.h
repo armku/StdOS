@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdint.h>
+#include "Type.h"
 
 typedef enum
 {
@@ -16,9 +16,9 @@ class CSpiHard
 		~CSpiHard();
 	public:
 		void Init(void);			 //初始化SPI口
-		void SetSpeed(uint8_t SpeedSet); //设置SPI速度   
-		uint8_t ReadByte();//SPI总线读一个字节
-		uint8_t WriteByte(uint8_t TxData);//SPI总线写一个字节
+		void SetSpeed(byte SpeedSet); //设置SPI速度   
+		byte ReadByte();//SPI总线读一个字节
+		byte WriteByte(byte TxData);//SPI总线写一个字节
 		uint16_t SendHalfWord(uint16_t HalfWord);
 	private:
 		ESpiChannel spiChannel;//通道

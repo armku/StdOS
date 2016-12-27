@@ -12,10 +12,10 @@ class CSoftI2C
         void Stop(void);
         void Ack(void);
         void NAck(void);
-        uint8_t WaitAck(void); //等待应答信号到来 返回值：1，接收应答失败 0，接收应答成功
+        byte WaitAck(void); //等待应答信号到来 返回值：1，接收应答失败 0，接收应答成功
         
-		void WriteByte(uint8_t _ucByte);
-        uint8_t ReadByte(void);
+		void WriteByte(byte _ucByte);
+        byte ReadByte(void);
     private:
         BasePort *psck;
         BasePort *psda;

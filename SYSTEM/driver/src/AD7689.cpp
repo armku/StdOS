@@ -17,7 +17,7 @@ CAD7689::CAD7689(PinPort pinsck, PinPort pinsdi, PinPort pinsdo, PinPort pincnv)
     this->ppinsdo = new BasePort(pinsdo);
     this->ppincnv = new BasePort(pincnv);
 
-    for (uint8_t i = 0; i < MAXCH; i++)
+    for (byte i = 0; i < MAXCH; i++)
     {
         this->FlagEnable[i] = 1;
     }
@@ -108,7 +108,7 @@ void CAD7689::Routin(void)
 {
     uint16_t ch;
     uint16_t reg;
-    uint8_t chNext = 0;
+    byte chNext = 0;
     uint16_t adcur = 0;
 
     ch = this->chCurrent;
@@ -139,9 +139,9 @@ float CAD7689::getVolt(uint16_t ch)
 }
 
 //获取下次转换通道
-uint8_t CAD7689::getNextCH()
+byte CAD7689::getNextCH()
 {
-    uint8_t ret = 0;
+    byte ret = 0;
 
     ret = this->chCurrent;
     ret++;

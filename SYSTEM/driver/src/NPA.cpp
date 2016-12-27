@@ -1,7 +1,7 @@
 #include "NPA.h"
 #include "delay.h"
 
-CNPA::CNPA(PinPort pinsck, PinPort pinsda, uint8_t devAddr)
+CNPA::CNPA(PinPort pinsck, PinPort pinsda, byte devAddr)
 {
     this->DEVER_ADDR = devAddr;
     this->pi2c = new CSoftI2C(pinsck, pinsda);
@@ -16,7 +16,7 @@ void CNPA::Init(void)
 
 int CNPA::Read(void)
 {
-    uint8_t buf1, buf2;
+    byte buf1, buf2;
     int buf;
     buf1 = 0;
     buf2 = 0;

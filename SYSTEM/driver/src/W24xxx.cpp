@@ -5,7 +5,7 @@
 #define macI2C_WR	0		/* 写控制bit */
 #define macI2C_RD	1		/* 读控制bit */
 
-CW24xxx::CW24xxx(PinPort pinsck, PinPort pinsda, EW24XXType devtype, uint8_t devaddr, uint32_t wnms)
+CW24xxx::CW24xxx(PinPort pinsck, PinPort pinsda, EW24XXType devtype, byte devaddr, uint32_t wnms)
 {
     this->pi2c = new CSoftI2C(pinsck, pinsda);
     this->deviceType = devtype;
@@ -17,7 +17,7 @@ CW24xxx::CW24xxx(PinPort pinsck, PinPort pinsda, EW24XXType devtype, uint8_t dev
 CW24xxx::~CW24xxx(){
 
 }
-uint8_t CW24xxx::CheckOk()
+byte CW24xxx::CheckOk()
 {
     if (this->checkDevice() == 0)
     {
@@ -31,9 +31,9 @@ uint8_t CW24xxx::CheckOk()
     }
 }
 
-uint8_t CW24xxx::checkDevice()
+byte CW24xxx::checkDevice()
 {
-    uint8_t ucAck;
+    byte ucAck;
 
     this->pi2c->Start(); /* 发送启动信号 */
     /* 发送设备地址+读写控制bit（0 = w， 1 = r) bit7 先传 */
@@ -55,7 +55,7 @@ uint8_t CW24xxx::checkDevice()
  *	返 回 值: 1 表示失败，0表示成功
  *********************************************************************************************************
  */
-uint8_t CW24xxx::ReadBytes(uint8_t *_pReadBuf, uint16_t bufpos, uint16_t _usAddress, uint32_t _usSize)
+byte CW24xxx::ReadBytes(byte *_pReadBuf, uint16_t bufpos, uint16_t _usAddress, uint32_t _usSize)
 {
     return this->bufwr(_pReadBuf, bufpos, _usAddress, _usSize, 0);
 }
@@ -70,14 +70,14 @@ uint8_t CW24xxx::ReadBytes(uint8_t *_pReadBuf, uint16_t bufpos, uint16_t _usAddr
  *	返 回 值: 0 表示失败，1表示成功
  *********************************************************************************************************
  */
-uint8_t CW24xxx::WriteBytes(uint8_t *_pWriteBuf, uint16_t bufpos, uint16_t _usAddress, uint32_t _usSize)
+byte CW24xxx::WriteBytes(byte *_pWriteBuf, uint16_t bufpos, uint16_t _usAddress, uint32_t _usSize)
 {
     return this->bufwr(_pWriteBuf, bufpos, _usAddress, _usSize, 1);
 }
 
-uint8_t CW24xxx::ReadByte(uint16_t address)
+byte CW24xxx::ReadByte(uint16_t address)
 {
-    uint8_t ret = 0;
+    byte ret = 0;
 
 
     /* 第1步：发起I2C总线启动信号 */
@@ -94,7 +94,7 @@ uint8_t CW24xxx::ReadByte(uint16_t address)
     if (this->deviceType > AT24C16)
     {
         /* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-        this->pi2c->WriteByte((uint8_t)((address) >> 8));
+        this->pi2c->WriteByte((byte)((address) >> 8));
 
         /* 第5步：等待ACK */
         if (this->pi2c->WaitAck() != 0)
@@ -103,7 +103,7 @@ uint8_t CW24xxx::ReadByte(uint16_t address)
         }
     }
     /* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-    this->pi2c->WriteByte((uint8_t)address);
+    this->pi2c->WriteByte((byte)address);
 
     /* 第5步：等待ACK */
     if (this->pi2c->WaitAck() != 0)
@@ -142,7 +142,7 @@ uint8_t CW24xxx::ReadByte(uint16_t address)
     return ret;
 }
 
-uint8_t CW24xxx::WriteByte(uint16_t address, uint8_t da)
+byte CW24xxx::WriteByte(uint16_t address, byte da)
 {
     uint32_t m;
 
@@ -173,7 +173,7 @@ uint8_t CW24xxx::WriteByte(uint16_t address, uint8_t da)
     if (this->deviceType > AT24C16)
     {
         /* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-        this->pi2c->WriteByte((uint8_t)((address >> 8)));
+        this->pi2c->WriteByte((byte)((address >> 8)));
 
         /* 第5步：等待ACK */
         if (this->pi2c->WaitAck() != 0)
@@ -182,7 +182,7 @@ uint8_t CW24xxx::WriteByte(uint16_t address, uint8_t da)
         }
     }
     /* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-    this->pi2c->WriteByte((uint8_t)address);
+    this->pi2c->WriteByte((byte)address);
 
     /* 第5步：等待ACK */
     if (this->pi2c->WaitAck() != 0)
@@ -212,7 +212,7 @@ uint8_t CW24xxx::WriteByte(uint16_t address, uint8_t da)
     return 0;
 }
 
-uint8_t CW24xxx::bufwr(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t len, uint8_t wr) //读写集中操作1写 0读
+byte CW24xxx::bufwr(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t len, byte wr) //读写集中操作1写 0读
 {
     uint32_t curAddr;
     uint32_t pageStart; //页内起始地址
@@ -309,7 +309,7 @@ uint8_t CW24xxx::bufwr(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t le
     return 0;
 }
 
-uint8_t CW24xxx::writePage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t len) //页内写
+byte CW24xxx::writePage(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t len) //页内写
 {
     uint32_t i, m;
     uint16_t usAddr;
@@ -343,7 +343,7 @@ uint8_t CW24xxx::writePage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_
     if (this->deviceType > AT24C16)
     {
         /* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-        this->pi2c->WriteByte((uint8_t)((usAddr >> 8)));
+        this->pi2c->WriteByte((byte)((usAddr >> 8)));
 
         /* 第5步：等待ACK */
         if (this->pi2c->WaitAck() != 0)
@@ -352,7 +352,7 @@ uint8_t CW24xxx::writePage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_
         }
     }
     /* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-    this->pi2c->WriteByte((uint8_t)usAddr);
+    this->pi2c->WriteByte((byte)usAddr);
 
     /* 第5步：等待ACK */
     if (this->pi2c->WaitAck() != 0)
@@ -385,7 +385,7 @@ uint8_t CW24xxx::writePage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_
     return 1;
 }
 
-uint8_t CW24xxx::readPage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t len) //页内读
+byte CW24xxx::readPage(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t len) //页内读
 {
     uint32_t i;
 
@@ -403,7 +403,7 @@ uint8_t CW24xxx::readPage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t
     if (this->deviceType > AT24C16)
     {
         /* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-        this->pi2c->WriteByte((uint8_t)((addr) >> 8));
+        this->pi2c->WriteByte((byte)((addr) >> 8));
 
         /* 第5步：等待ACK */
         if (this->pi2c->WaitAck() != 0)
@@ -412,7 +412,7 @@ uint8_t CW24xxx::readPage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t
         }
     }
     /* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-    this->pi2c->WriteByte((uint8_t)addr);
+    this->pi2c->WriteByte((byte)addr);
 
     /* 第5步：等待ACK */
     if (this->pi2c->WaitAck() != 0)
@@ -500,8 +500,8 @@ uint16_t CW24xxx::jsPageSize(uint32_t type) //计算存储页大小
         uint32_t i;
         const uint32_t testsize = 8;
         const uint32_t testaddress = 0;
-        uint8_t write_buf[testsize + testaddress];
-        uint8_t read_buf[testsize + testaddress];
+        byte write_buf[testsize + testaddress];
+        byte read_buf[testsize + testaddress];
 
         /*-----------------------------------------------------------------------------------*/
         if (this->CheckOk() == 0)
