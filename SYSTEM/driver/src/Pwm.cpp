@@ -2,7 +2,7 @@
 #include "stm32f10x.h"
 
 
-PWM::PWM(PinPort pin, uint32_t frq, uint32_t duty): BasePort(pin)
+PWM::PWM(PinPort pin, uint frq, uint duty): BasePort(pin)
 {
     this->freq = frq;
     this->duty = duty;
@@ -283,7 +283,7 @@ void PWM::Init()
 }
 
 //ÉèÖÃÊä³öÖµ
-void PWM::SetOut(uint16_t pwmValue)
+void PWM::SetOut(ushort pwmValue)
 {
     this->duty = pwmValue;
     switch (this->pin)

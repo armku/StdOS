@@ -5,7 +5,7 @@
 #define macI2C_WR	0		/* 写控制bit */
 #define macI2C_RD	1		/* 读控制bit */
 
-CW24xxx::CW24xxx(PinPort pinsck, PinPort pinsda, EW24XXType devtype, byte devaddr, uint32_t wnms)
+CW24xxx::CW24xxx(PinPort pinsck, PinPort pinsda, EW24XXType devtype, byte devaddr, uint wnms)
 {
     this->pi2c = new CSoftI2C(pinsck, pinsda);
     this->deviceType = devtype;
@@ -55,7 +55,7 @@ byte CW24xxx::checkDevice()
  *	返 回 值: 1 表示失败，0表示成功
  *********************************************************************************************************
  */
-byte CW24xxx::ReadBytes(byte *_pReadBuf, uint16_t bufpos, uint16_t _usAddress, uint32_t _usSize)
+byte CW24xxx::ReadBytes(byte *_pReadBuf, ushort bufpos, ushort _usAddress, uint _usSize)
 {
     return this->bufwr(_pReadBuf, bufpos, _usAddress, _usSize, 0);
 }
@@ -70,12 +70,12 @@ byte CW24xxx::ReadBytes(byte *_pReadBuf, uint16_t bufpos, uint16_t _usAddress, u
  *	返 回 值: 0 表示失败，1表示成功
  *********************************************************************************************************
  */
-byte CW24xxx::WriteBytes(byte *_pWriteBuf, uint16_t bufpos, uint16_t _usAddress, uint32_t _usSize)
+byte CW24xxx::WriteBytes(byte *_pWriteBuf, ushort bufpos, ushort _usAddress, uint _usSize)
 {
     return this->bufwr(_pWriteBuf, bufpos, _usAddress, _usSize, 1);
 }
 
-byte CW24xxx::ReadByte(uint16_t address)
+byte CW24xxx::ReadByte(ushort address)
 {
     byte ret = 0;
 
@@ -142,9 +142,9 @@ byte CW24xxx::ReadByte(uint16_t address)
     return ret;
 }
 
-byte CW24xxx::WriteByte(uint16_t address, byte da)
+byte CW24xxx::WriteByte(ushort address, byte da)
 {
-    uint32_t m;
+    uint m;
 
     /*　第０步：发停止信号，启动内部写操作　*/
     this->pi2c->Stop();
@@ -212,12 +212,12 @@ byte CW24xxx::WriteByte(uint16_t address, byte da)
     return 0;
 }
 
-byte CW24xxx::bufwr(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t len, byte wr) //读写集中操作1写 0读
+byte CW24xxx::bufwr(byte *buf, ushort bufpos, ushort addr, uint len, byte wr) //读写集中操作1写 0读
 {
-    uint32_t curAddr;
-    uint32_t pageStart; //页内起始地址
-    uint32_t bytesLeave; //还剩多少字节读取
-    uint16_t bufaddr;
+    uint curAddr;
+    uint pageStart; //页内起始地址
+    uint bytesLeave; //还剩多少字节读取
+    ushort bufaddr;
 
     pageStart = addr % this->pageSize;
     bytesLeave = len;
@@ -309,10 +309,10 @@ byte CW24xxx::bufwr(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t len, byt
     return 0;
 }
 
-byte CW24xxx::writePage(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t len) //页内写
+byte CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint len) //页内写
 {
-    uint32_t i, m;
-    uint16_t usAddr;
+    uint i, m;
+    ushort usAddr;
 
     usAddr = addr;
 
@@ -385,9 +385,9 @@ byte CW24xxx::writePage(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t len)
     return 1;
 }
 
-byte CW24xxx::readPage(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t len) //页内读
+byte CW24xxx::readPage(byte *buf, ushort bufpos, ushort addr, uint len) //页内读
 {
-    uint32_t i;
+    uint i;
 
     /* 第1步：发起I2C总线启动信号 */
     this->pi2c->Start();
@@ -457,9 +457,9 @@ byte CW24xxx::readPage(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t len) 
     return 1;
 }
 
-uint16_t CW24xxx::jsPageSize(uint32_t type) //计算存储页大小
+ushort CW24xxx::jsPageSize(uint type) //计算存储页大小
 {
-    uint16_t ret = 8;
+    ushort ret = 8;
     switch (type)
     {
         case AT24C02:
@@ -497,9 +497,9 @@ uint16_t CW24xxx::jsPageSize(uint32_t type) //计算存储页大小
      */
     void CW24xxx::Test(void)
     {
-        uint32_t i;
-        const uint32_t testsize = 8;
-        const uint32_t testaddress = 0;
+        uint i;
+        const uint testsize = 8;
+        const uint testaddress = 0;
         byte write_buf[testsize + testaddress];
         byte read_buf[testsize + testaddress];
 

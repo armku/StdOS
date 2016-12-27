@@ -123,9 +123,9 @@ byte CSpiHard::WriteByte(byte TxData) //SPI总线写一个字节
     return ret;
 }
 
-uint16_t CSpiHard::SendHalfWord(uint16_t HalfWord)
+ushort CSpiHard::SendHalfWord(ushort HalfWord)
 {
-    uint16_t ret = 0;
+    ushort ret = 0;
     switch (this->spiChannel)
     {
         case CHSPI1:

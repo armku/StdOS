@@ -28,17 +28,17 @@ CAD7689::CAD7689(PinPort pinsck, PinPort pinsdi, PinPort pinsdo, PinPort pincnv)
 CAD7689::~CAD7689(){
 
 }
-void CAD7689::Delay(uint32_t nTime)
+void CAD7689::Delay(uint nTime)
 {
-    uint32_t i;
+    uint i;
     for (i = 0; i < nTime; i++)
         ;
 }
 
-uint16_t CAD7689::AD_Read(void)
+ushort CAD7689::AD_Read(void)
 {
-    uint16_t dat = 0;
-    uint32_t i;
+    ushort dat = 0;
+    uint i;
     this->ppincnv->Reset();
     this->Delay(40);
     for (i = 0; i < 16; i++)
@@ -54,10 +54,10 @@ uint16_t CAD7689::AD_Read(void)
     return dat;
 }
 
-uint16_t CAD7689::AD_Write(uint16_t sdat)
+ushort CAD7689::AD_Write(ushort sdat)
 {
-    uint16_t dat = 0;
-    uint32_t i;
+    ushort dat = 0;
+    uint i;
     this->ppincnv->Reset();
     this->Delay(50);
     for (i = 0; i < 16; i++)
@@ -106,10 +106,10 @@ void CAD7689::Init(void)
  *******************************************************************************/
 void CAD7689::Routin(void)
 {
-    uint16_t ch;
-    uint16_t reg;
+    ushort ch;
+    ushort reg;
     byte chNext = 0;
-    uint16_t adcur = 0;
+    ushort adcur = 0;
 
     ch = this->chCurrent;
 
@@ -126,7 +126,7 @@ void CAD7689::Routin(void)
 }
 
 //获取通道电压值
-float CAD7689::getVolt(uint16_t ch)
+float CAD7689::getVolt(ushort ch)
 {
     if (ch >= MAXCH)
     {

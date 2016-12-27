@@ -14,7 +14,7 @@ class CExti
 		BasePort *port;	//端口
 	private:
 		void Exti0_state(bool onoff);
-		uint32_t eXTI_Line;//中断线
+		uint eXTI_Line;//中断线
 		byte nVIC_IRQChannel;//中断向量
 		byte gPIO_PinSource;//中断线
 		byte gPIO_PortSourceGPIO;//端口

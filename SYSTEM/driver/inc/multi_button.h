@@ -43,7 +43,7 @@ class CButton
         BasePort *pPin;    
         struct Button
         {
-                uint16_t ticks;
+                ushort ticks;
                 byte repeat: 4;
                 byte event: 4; //当前状态
                 byte state: 3; //当前按键状态

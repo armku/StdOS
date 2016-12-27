@@ -1,7 +1,7 @@
 #include "stm32f10x.h"
 #include "WatchDog.h"
 
-CWatchDog::CWatchDog(uint32_t ms)
+CWatchDog::CWatchDog(uint ms)
 {
     this->timeout = ms;
 }
@@ -12,7 +12,7 @@ CWatchDog::~CWatchDog(){
 byte CWatchDog::Init()
 {
     byte prv = IWDG_Prescaler_64;
-    uint16_t rlv = 625;
+    ushort rlv = 625;
 
     // 使能 预分频寄存器PR和重装载寄存器RLR可写
     IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);

@@ -51,9 +51,9 @@ void CW25Qxxx::Init()
 	this->spi->Init();
 }
 
-uint32_t CW25Qxxx::ReadDeviceID(void)
+uint CW25Qxxx::ReadDeviceID(void)
 {
-    uint32_t Temp = 0;
+    uint Temp = 0;
 
     /* Select the FLASH: Chip Select low */
     this->pincs->Reset(); 
@@ -73,9 +73,9 @@ uint32_t CW25Qxxx::ReadDeviceID(void)
     return Temp;
 }
 
-uint32_t CW25Qxxx::ReadID(void)
+uint CW25Qxxx::ReadID(void)
 {
-    uint32_t Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
+    uint Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
 
     /* Select the FLASH: Chip Select low */
     this->pincs->Reset();
@@ -112,7 +112,7 @@ void CW25Qxxx::PowerDown(void)
     this->pincs->Set();
 }
 
-void CW25Qxxx::SectorErase(uint32_t SectorAddr)
+void CW25Qxxx::SectorErase(uint SectorAddr)
 {
     /* Send write enable instruction */
     this->WriteEnable();
@@ -151,7 +151,7 @@ void CW25Qxxx::BulkErase(void)
     this->WaitForWriteEnd();
 }
 
-void CW25Qxxx::PageWrite(byte *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite)
+void CW25Qxxx::PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
     /* Enable the write access to the FLASH */
     this->WriteEnable();
@@ -189,7 +189,7 @@ void CW25Qxxx::PageWrite(byte *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWr
     this->WaitForWriteEnd();
 }
 
-void CW25Qxxx::BufferWrite(byte *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite)
+void CW25Qxxx::BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
     byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
@@ -267,7 +267,7 @@ void CW25Qxxx::BufferWrite(byte *pBuffer, uint32_t WriteAddr, uint16_t NumByteTo
     }
 }
 
-void CW25Qxxx::BufferRead(byte *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead)
+void CW25Qxxx::BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
 {
     /* Select the FLASH: Chip Select low */
     this->pincs->Reset();
@@ -295,7 +295,7 @@ void CW25Qxxx::BufferRead(byte *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRe
     this->pincs->Set();
 }
 
-void CW25Qxxx::StartReadSequence(uint32_t ReadAddr)
+void CW25Qxxx::StartReadSequence(uint ReadAddr)
 {
     /* Select the FLASH: Chip Select low */
     this->pincs->Reset();

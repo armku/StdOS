@@ -19,7 +19,7 @@ class CSpiHard
 		void SetSpeed(byte SpeedSet); //设置SPI速度   
 		byte ReadByte();//SPI总线读一个字节
 		byte WriteByte(byte TxData);//SPI总线写一个字节
-		uint16_t SendHalfWord(uint16_t HalfWord);
+		ushort SendHalfWord(ushort HalfWord);
 	private:
 		ESpiChannel spiChannel;//通道
 };

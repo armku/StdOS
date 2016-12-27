@@ -1,7 +1,7 @@
 #include "SoftSpi.h"
 #include "delay.h"
 
-CSoftSpi::CSoftSpi(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, uint32_t nus)
+CSoftSpi::CSoftSpi(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, uint nus)
 {
     this->portcs = new BasePort(pincs);
     this->portsck = new BasePort(pinsck);
@@ -26,7 +26,7 @@ byte CSoftSpi::Init()
 ---------------------------------------------------------*/
 byte CSoftSpi::WaitBusy()
 {
-    uint16_t i;
+    ushort i;
     this->portcs->Reset();
     i = 0;
     while (this->portdo->Read() > 0)

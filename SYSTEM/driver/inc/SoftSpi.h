@@ -4,7 +4,7 @@
 class CSoftSpi
 {
 public:
-    CSoftSpi(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, uint32_t nus = 0); //延时时间默认0us   
+    CSoftSpi(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, uint nus = 0); //延时时间默认0us   
     byte Init();
     byte WaitBusy();
     byte spi_writebyte(byte da);
@@ -16,5 +16,5 @@ public:
 public:
     BasePort *portcs;
 private:
-    uint32_t delayus;//延时时间
+    uint delayus;//延时时间
 };

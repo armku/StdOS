@@ -15,7 +15,7 @@
 CTaskScheduler Scheduling; //调度
 
 CFIFORing com1buf; //串口1接收缓冲区
-uint32_t com1timeidle; //串口1空闲时间
+uint com1timeidle; //串口1空闲时间
 //sequence 序列号 cur_seq max_seq step
 
 void ledflash();
@@ -52,7 +52,7 @@ void ledflash()
     led2.Toggle();
 }
 
-extern uint16_t exti0;
+extern ushort exti0;
 void eepread()
 {
 	static uint8_t cnt=0;
@@ -68,7 +68,7 @@ void softTimers()
     if (com1timeidle > 3)
     {
         com1timeidle = 0;
-        uint16_t len = com1buf.GetLength();
+        ushort len = com1buf.GetLength();
         if (len >= 3)
         {
             USART_RX_STA = len - 2;

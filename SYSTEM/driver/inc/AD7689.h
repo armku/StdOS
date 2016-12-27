@@ -18,7 +18,7 @@ class CAD7689
     public:
         byte FlagEnable[MAXCH]; //是否允许通道转换 0：禁止，1：允许 备用
     private:
-        void Delay(uint32_t nTime);
+        void Delay(uint nTime);
         uint16_t AD_Read(void);
         uint16_t AD_Write(uint16_t sdat);
     private:
