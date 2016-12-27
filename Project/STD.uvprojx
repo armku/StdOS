@@ -450,9 +450,9 @@
           <GroupName>Driver</GroupName>
           <Files>
             <File>
-              <FileName>Port.cpp</FileName>
+              <FileName>BasePort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\Port.cpp</FilePath>
+              <FilePath>..\SYSTEM\driver\src\BasePort.cpp</FilePath>
             </File>
             <File>
               <FileName>Led.cpp</FileName>

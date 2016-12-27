@@ -7,9 +7,6 @@ CLed::CLed(PinPort pin, uint16_t period1, uint16_t onTime1):BasePort(pin)
     this->onTime = onTime1;
 }
 
-CLed::~CLed(){
-
-}
 uint8_t CLed::Init(void)
 {
     return 0;

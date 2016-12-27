@@ -1,5 +1,5 @@
 #include "AD7689.h"
-#include "Port.h"
+#include "BasePort.h"
 
 //配置信息
 #define CFG		1	//配置更新	0：保持当前配置设置，1：覆盖寄存器的内容

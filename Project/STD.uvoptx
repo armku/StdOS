@@ -288,8 +288,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\SYSTEM\driver\src\Port.cpp</PathWithFileName>
-      <FilenameWithoutPath>Port.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\SYSTEM\driver\src\BasePort.cpp</PathWithFileName>
+      <FilenameWithoutPath>BasePort.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
