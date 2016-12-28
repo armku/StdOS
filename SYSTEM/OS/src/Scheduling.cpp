@@ -1,12 +1,9 @@
 #include "Scheduling.h"
 
 
-CTaskScheduler::CTaskScheduler(){}
-CTaskScheduler::~CTaskScheduler(){
+Task::Task(){}
 
-}
-
-void CTaskScheduler::TimeTick() //间隔10ms调用一次
+void Task::TimeTick() //间隔10ms调用一次
 {
     for (ushort i = 0; i < this->NextID; i++)
     {
@@ -15,7 +12,7 @@ void CTaskScheduler::TimeTick() //间隔10ms调用一次
     this->ticks++;
 }
 
-void CTaskScheduler::Routin() //运行
+void Task::Routin() //运行
 {
     for (ushort i = 0; i < this->NextID; i++)
     {
@@ -23,7 +20,7 @@ void CTaskScheduler::Routin() //运行
     }
 }
 
-void CTaskScheduler::ThreadAdd(void(*callback)(void), uint intervalms, uint delaycntms)
+void Task::AddTask(void(*callback)(void), uint delaycntms, uint intervalms)
 {
 
     if (this->NextID >= PROCESSCNT)

@@ -1,6 +1,6 @@
 #include "stdio.h"
 #include "W24xxx.h"
-#include "delay.h"
+#include "TSys.h"
 
 #define macI2C_WR	0		/* 写控制bit */
 #define macI2C_RD	1		/* 读控制bit */
@@ -203,7 +203,7 @@ byte CW24xxx::WriteByte(ushort address, byte da)
 
     /* 命令执行成功，发送I2C总线停止信号 */
     this->pi2c->Stop();
-    delay_ms(this->writedelaynms);
+    Sys.Sleep(this->writedelaynms);
     return 0;
 
     cmd_Writebytefail:  /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
@@ -241,7 +241,7 @@ byte CW24xxx::bufwr(byte *buf, ushort bufpos, ushort addr, uint len, byte wr) //
             bytesLeave -= bytesLeave;
             if (wr)
             {
-                delay_ms(this->writedelaynms);
+                Sys.Sleep(this->writedelaynms);
             }
             return 0;
         }
@@ -261,7 +261,7 @@ byte CW24xxx::bufwr(byte *buf, ushort bufpos, ushort addr, uint len, byte wr) //
             bufaddr += (this->pageSize - pageStart);
             if (wr)
             {
-                delay_ms(this->writedelaynms);
+                Sys.Sleep(this->writedelaynms);
             }
         }
     }
@@ -283,7 +283,7 @@ byte CW24xxx::bufwr(byte *buf, ushort bufpos, ushort addr, uint len, byte wr) //
             bufaddr += this->pageSize;
             if (wr)
             {
-                delay_ms(this->writedelaynms);
+                Sys.Sleep(this->writedelaynms);
             }
         }
         else
@@ -302,7 +302,7 @@ byte CW24xxx::bufwr(byte *buf, ushort bufpos, ushort addr, uint len, byte wr) //
             bytesLeave -= bytesLeave;
             if (wr)
             {
-                delay_ms(this->writedelaynms);
+                Sys.Sleep(this->writedelaynms);
             }
         }
     }

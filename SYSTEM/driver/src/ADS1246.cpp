@@ -1,5 +1,5 @@
 #include "ADS1246.h"
-#include "delay.h"
+#include "TSys.h"
 
 //下降沿芯片接收数据，上升沿芯片输出数据
 //ADS1246寄存器列表
@@ -166,12 +166,12 @@ void CADS1246::Init(void)
     this->ppinrd->Set();
     this->pspi->portcs->Set();
     this->ppinreset->Reset();
-    delay_ms(40);
+    Sys.Sleep(40);
     this->ppinreset->Set();
-    delay_ms(20);
+    Sys.Sleep(20);
     this->pspi->portcs->Reset();
     this->WriteReg(ADC_REG_ID, 0x08); //DOUT兼容DRDY引脚   0X4A 00 08
-    delay_ms(40);
+    Sys.Sleep(40);
     this->WriteReg(ADC_REG_SYS0, ADC_SPS_20 | ADC_GAIN_1); //调整采样速度
     this->pspi->portcs->Set();
 

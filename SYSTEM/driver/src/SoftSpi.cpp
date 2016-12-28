@@ -1,5 +1,5 @@
 #include "SoftSpi.h"
-#include "delay.h"
+#include "TSys.h"
 
 CSoftSpi::CSoftSpi(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, uint nus)
 {
@@ -31,7 +31,7 @@ byte CSoftSpi::WaitBusy()
     i = 0;
     while (this->portdo->Read() > 0)
     {
-        delay_ms(10);
+        Sys.Sleep(10);
         i++;
         if (i > 200)
             return 1;
@@ -55,9 +55,9 @@ byte CSoftSpi::spi_writebyte(byte da)
         {
             this->portdi->Reset();
         }
-        delay_us(this->delayus);
+		Sys.Delay(this->delayus);
         this->portsck->Set();
-        delay_us(this->delayus);
+        Sys.Delay(this->delayus);
         this->portsck->Reset();
         ret <<= 1;
         if (this->portdo->Read())

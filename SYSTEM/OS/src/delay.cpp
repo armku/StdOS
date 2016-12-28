@@ -1,6 +1,7 @@
 #include "sys.h"
 #include "delay.h"
 #include "Data.h"
+extern Task Scheduling; //µ÷¶È
 
 #ifdef __cplusplus
     extern "C"

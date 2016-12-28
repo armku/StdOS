@@ -4,15 +4,14 @@
 #include "usart.hpp"
 #include "Led.h"
 #include "W24xxx.h"
-#include "Scheduling.h"
+
 #include "usmart.h"
 #include "usart.h"
 #include "W25qxx.h"
 #include "Data.h"
 #include "multi_button.h"
 #include "Exti.h"
-
-CTaskScheduler Scheduling; //调度
+#include "TSys.h"
 
 CFIFORing com1buf; //串口1接收缓冲区
 uint com1timeidle; //串口1空闲时间
@@ -38,12 +37,14 @@ void STDInit()
     usmart_dev.init(SystemCoreClock / 1000000); //初始化USMART
 
 	exti.Init();
-	exti.On();
-    printf("System init\n");
-   	    
-    Scheduling.ThreadAdd(softTimers, 1); //1毫秒周期循环
-    Scheduling.ThreadAdd(ledflash, 50);
-    Scheduling.ThreadAdd(eepread, 1000);
+	exti.On();    
+	Sys.Init();
+	Sys.ShowInfo();
+	
+	Sys.AddTask(softTimers,0,1,1);//1毫秒周期循环
+	Sys.AddTask(ledflash,0,5,50);
+	Sys.AddTask(eepread,0,10,1000);
+	Sys.Start();
 }
 
 void ledflash()

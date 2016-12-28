@@ -609,6 +609,36 @@
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\CORE\src\system_stm32f10x.c</FilePath>
             </File>
+            <File>
+              <FileName>TSys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\TSys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Object.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\Object.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>String.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\String.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Array.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\Array.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Buffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\Buffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\Time.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
