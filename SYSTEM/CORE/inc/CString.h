@@ -25,7 +25,7 @@
 
 //内部会为
 //结尾的\0 保留存储空间，以确保取得的字符串指针是标准 C 格式字符串指针
-class CString:public Array
+class String:public Array
 {
 	public:
 		void Concat();
