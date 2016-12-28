@@ -38,7 +38,7 @@
 //1,修改了usmart_get_cmdname函数,增加最大参数长度限制.避免了输入错误参数时的死机现象.
 //2,增加USMART_ENTIM4_SCAN宏定义,用于配置是否使用TIM2定时执行scan函数.
 //V2.5 20110930
-//1,修改usmart_init函数为void usmart_init(uint8_t sysclk),可以根据系统频率自动设定扫描时间.(固定100ms)
+//1,修改usmart_init函数为void usmart_init(byte sysclk),可以根据系统频率自动设定扫描时间.(固定100ms)
 //2,去掉了usmart_init函数中的uart_init函数,串口初始化必须在外部初始化,方便用户自行管理.
 //V2.6 20111009
 //1,增加了read_addr和write_addr两个函数.可以利用这两个函数读写内部任意地址(必须是有效地址).更加方便调试.
@@ -61,7 +61,7 @@
 ///runtime统计功能,必须设置:USMART_ENTIMX_SCAN 为1,才可以使用!!
 /////////////////////////////////////////////////////////////////////////////////////
 //系统命令
-uint8_t *sys_cmd_tab[] =
+byte *sys_cmd_tab[] =
 {
     "?",
     "help",
@@ -73,13 +73,13 @@ uint8_t *sys_cmd_tab[] =
 };
 //处理系统指令
 //0,成功处理;其他,错误代码;
-uint8_t usmart_sys_cmd_exe(uint8_t *str)
+byte usmart_sys_cmd_exe(byte *str)
 {
-    uint8_t i;
-    uint8_t sfname[MAX_FNAME_LEN];//存放本地函数名
-    uint8_t pnum;
-    uint8_t rval;
-    uint32_t res;
+    byte i;
+    byte sfname[MAX_FNAME_LEN];//存放本地函数名
+    byte pnum;
+    byte rval;
+    uint res;
     res = usmart_get_cmdname(str, sfname, &i, MAX_FNAME_LEN); //得到指令及指令长度
     if(res)return USMART_FUNCERR;//错误的指令
     str += i;
@@ -125,7 +125,7 @@ uint8_t usmart_sys_cmd_exe(uint8_t *str)
         printf("-------------------------函数 ID --------------------------- \r\n");
         for(i = 0; i < usmart_dev.fnum; i++)
         {
-            usmart_get_fname((uint8_t *)usmart_dev.funs[i].name, sfname, &pnum, &rval); //得到本地函数名
+            usmart_get_fname((byte *)usmart_dev.funs[i].name, sfname, &pnum, &rval); //得到本地函数名
             printf("%s id is:\r\n0X%08X\r\n", sfname, usmart_dev.funs[i].func); //显示ID
         }
         printf("\r\n");
@@ -218,7 +218,7 @@ void usmart_reset_runtime(void)
 //获得runtime时间
 //返回值:执行时间,单位:0.1ms,最大延时时间为定时器CNT值的2倍*0.1ms
 //需要根据所移植到的MCU的定时器参数进行修改
-uint32_t usmart_get_runtime(void)
+uint usmart_get_runtime(void)
 {
     if(TIM_GetFlagStatus(TIM4, TIM_FLAG_Update) == SET) //在运行期间,产生了定时器溢出
     {
@@ -269,27 +269,27 @@ void Timer4_Init(uint16_t arr, uint16_t psc)
 ////////////////////////////////////////////////////////////////////////////////////////
 //初始化串口控制器
 //sysclk:系统时钟（Mhz）
-void usmart_init(uint8_t sysclk)
+void usmart_init(byte sysclk)
 {
 #if USMART_ENTIMX_SCAN==1
-    Timer4_Init(1000, (uint32_t)sysclk * 100 - 1); //分频,时钟为10K ,100ms中断一次,注意,计数频率必须为10Khz,以和runtime单位(0.1ms)同步.
+    Timer4_Init(1000, (uint)sysclk * 100 - 1); //分频,时钟为10K ,100ms中断一次,注意,计数频率必须为10Khz,以和runtime单位(0.1ms)同步.
 #endif
     usmart_dev.sptype = 1;	//十六进制显示参数
 }
 //从str中获取函数名,id,及参数信息
 //*str:字符串指针.
 //返回值:0,识别成功;其他,错误代码.
-uint8_t usmart_cmd_rec(uint8_t *str)
+byte usmart_cmd_rec(byte *str)
 {
-    uint8_t sta, i, rval; //状态
-    uint8_t rpnum, spnum;
-    uint8_t rfname[MAX_FNAME_LEN];//暂存空间,用于存放接收到的函数名
-    uint8_t sfname[MAX_FNAME_LEN];//存放本地函数名
+    byte sta, i, rval; //状态
+    byte rpnum, spnum;
+    byte rfname[MAX_FNAME_LEN];//暂存空间,用于存放接收到的函数名
+    byte sfname[MAX_FNAME_LEN];//存放本地函数名
     sta = usmart_get_fname(str, rfname, &rpnum, &rval); //得到接收到的数据的函数名及参数个数
     if(sta)return sta;//错误
     for(i = 0; i < usmart_dev.fnum; i++)
     {
-        sta = usmart_get_fname((uint8_t *)usmart_dev.funs[i].name, sfname, &spnum, &rval); //得到本地函数名及参数个数
+        sta = usmart_get_fname((byte *)usmart_dev.funs[i].name, sfname, &spnum, &rval); //得到本地函数名及参数个数
         if(sta)return sta;//本地解析有误
         if(usmart_strcmp(sfname, rfname) == 0) //相等
         {
@@ -311,14 +311,14 @@ uint8_t usmart_cmd_rec(uint8_t *str)
 //当所执行的函数没有返回值的时候,所打印的返回值是一个无意义的数据.
 void usmart_exe(void)
 {
-    uint8_t id, i;
-    uint32_t res;
-    uint32_t temp[MAX_PARM];//参数转换,使之支持了字符串
-    uint8_t sfname[MAX_FNAME_LEN];//存放本地函数名
-    uint8_t pnum, rval;
+    byte id, i;
+    uint res;
+    uint temp[MAX_PARM];//参数转换,使之支持了字符串
+    byte sfname[MAX_FNAME_LEN];//存放本地函数名
+    byte pnum, rval;
     id = usmart_dev.id;
     if(id >= usmart_dev.fnum)return; //不执行.
-    usmart_get_fname((uint8_t *)usmart_dev.funs[id].name, sfname, &pnum, &rval); //得到本地函数名,及参数个数
+    usmart_get_fname((byte *)usmart_dev.funs[id].name, sfname, &pnum, &rval); //得到本地函数名,及参数个数
     printf("\r\n%s(", sfname); //输出正要执行的函数名
     for(i = 0; i < pnum; i++) //输出参数
     {
@@ -327,11 +327,11 @@ void usmart_exe(void)
             printf("%c", '"');
             printf("%s", usmart_dev.parm + usmart_get_parmpos(i));
             printf("%c", '"');
-            temp[i] = (uint32_t) & (usmart_dev.parm[usmart_get_parmpos(i)]);
+            temp[i] = (uint) & (usmart_dev.parm[usmart_get_parmpos(i)]);
         }
         else						   //参数是数字
         {
-            temp[i] = *(uint32_t *)(usmart_dev.parm + usmart_get_parmpos(i));
+            temp[i] = *(uint *)(usmart_dev.parm + usmart_get_parmpos(i));
             if(usmart_dev.sptype == SP_TYPE_DEC)printf("%lu", temp[i]); //10进制参数显示
             else printf("0X%X", temp[i]); //16进制参数显示
         }
@@ -342,41 +342,41 @@ void usmart_exe(void)
     switch(usmart_dev.pnum)
     {
     case 0://无参数(void类型)
-        res = (*(uint32_t(*)())usmart_dev.funs[id].func)();
+        res = (*(uint(*)())usmart_dev.funs[id].func)();
         break;
     case 1://有1个参数
-        res = (*(uint32_t(*)())usmart_dev.funs[id].func)(temp[0]);
+        res = (*(uint(*)())usmart_dev.funs[id].func)(temp[0]);
         break;
     case 2://有2个参数
-        res = (*(uint32_t(*)())usmart_dev.funs[id].func)(temp[0], temp[1]);
+        res = (*(uint(*)())usmart_dev.funs[id].func)(temp[0], temp[1]);
         break;
     case 3://有3个参数
-        res = (*(uint32_t(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2]);
+        res = (*(uint(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2]);
         break;
     case 4://有4个参数
-        res = (*(uint32_t(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2], temp[3]);
+        res = (*(uint(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2], temp[3]);
         break;
     case 5://有5个参数
-        res = (*(uint32_t(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2], temp[3], temp[4]);
+        res = (*(uint(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2], temp[3], temp[4]);
         break;
     case 6://有6个参数
-        res = (*(uint32_t(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2], temp[3], temp[4], \
+        res = (*(uint(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2], temp[3], temp[4], \
                 temp[5]);
         break;
     case 7://有7个参数
-        res = (*(uint32_t(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2], temp[3], temp[4], \
+        res = (*(uint(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2], temp[3], temp[4], \
                 temp[5], temp[6]);
         break;
     case 8://有8个参数
-        res = (*(uint32_t(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2], temp[3], temp[4], \
+        res = (*(uint(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2], temp[3], temp[4], \
                 temp[5], temp[6], temp[7]);
         break;
     case 9://有9个参数
-        res = (*(uint32_t(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2], temp[3], temp[4], \
+        res = (*(uint(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2], temp[3], temp[4], \
                 temp[5], temp[6], temp[7], temp[8]);
         break;
     case 10://有10个参数
-        res = (*(uint32_t(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2], temp[3], temp[4], \
+        res = (*(uint(*)())usmart_dev.funs[id].func)(temp[0], temp[1], temp[2], temp[3], temp[4], \
                 temp[5], temp[6], temp[7], temp[8], temp[9]);
         break;
     }
@@ -399,7 +399,7 @@ void usmart_exe(void)
 //如果非ALIENTEK用户,则USART_RX_STA和USART_RX_BUF[]需要用户自己实现
 void usmart_scan(void)
 {
-    uint8_t sta, len;
+    byte sta, len;
     if(USART_RX_STA & 0x8000) //串口接收完成？
     {
         len = USART_RX_STA & 0x3fff;	//得到此次接收到的数据长度
@@ -435,13 +435,13 @@ void usmart_scan(void)
 
 #if USMART_USE_WRFUNS==1 	//如果使能了读写操作
 //读取指定地址的值
-uint32_t read_addr(uint32_t addr)
+uint read_addr(uint addr)
 {
-    return *(uint32_t *)addr; //
+    return *(uint *)addr; //
 }
 //在指定地址写入指定的值
-void write_addr(uint32_t addr, uint32_t val)
+void write_addr(uint addr, uint val)
 {
-    *(uint32_t *)addr = val;
+    *(uint *)addr = val;
 }
 #endif

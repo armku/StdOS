@@ -36,7 +36,7 @@
 //1,修改了usmart_get_cmdname函数,增加最大参数长度限制.避免了输入错误参数时的死机现象.
 //2,增加USMART_ENTIM4_SCAN宏定义,用于配置是否使用TIM2定时执行scan函数.
 //V2.5 20110930
-//1,修改usmart_init函数为void usmart_init(uint8_t sysclk),可以根据系统频率自动设定扫描时间.(固定100ms)
+//1,修改usmart_init函数为void usmart_init(byte sysclk),可以根据系统频率自动设定扫描时间.(固定100ms)
 //2,去掉了usmart_init函数中的uart_init函数,串口初始化必须在外部初始化,方便用户自行管理.
 //V2.6 20111009
 //1,增加了read_addr和write_addr两个函数.可以利用这两个函数读写内部任意地址(必须是有效地址).更加方便调试.
@@ -63,7 +63,7 @@
 //*str1:字符串1指针
 //*str2:字符串2指针
 //返回值:0，相等;1，不相等;
-uint8_t usmart_strcmp(uint8_t *str1, uint8_t *str2)
+byte usmart_strcmp(byte *str1, byte *str2)
 {
     while(1)
     {
@@ -77,7 +77,7 @@ uint8_t usmart_strcmp(uint8_t *str1, uint8_t *str2)
 //把str1的内容copy到str2
 //*str1:字符串1指针
 //*str2:字符串2指针
-void usmart_strcopy(uint8_t *str1, uint8_t *str2)
+void usmart_strcopy(byte *str1, byte *str2)
 {
     while(1)
     {
@@ -90,9 +90,9 @@ void usmart_strcopy(uint8_t *str1, uint8_t *str2)
 //得到字符串的长度(字节)
 //*str:字符串指针
 //返回值:字符串的长度
-uint8_t usmart_strlen(uint8_t *str)
+byte usmart_strlen(byte *str)
 {
-    uint8_t len = 0;
+    byte len = 0;
     while(1)
     {
         if(*str == '\0')break; //拷贝完成了.
@@ -103,9 +103,9 @@ uint8_t usmart_strlen(uint8_t *str)
 }
 //m^n函数
 //返回值:m^n次方
-uint32_t usmart_pow(uint8_t m, uint8_t n)
+uint usmart_pow(byte m, byte n)
 {
-    uint32_t result = 1;
+    uint result = 1;
     while(n--)result *= m;
     return result;
 }
@@ -116,12 +116,12 @@ uint32_t usmart_pow(uint8_t m, uint8_t n)
 //*res:转换完的结果存放地址.
 //返回值:0，成功转换完成.其他,错误代码.
 //1,数据格式错误.2,16进制位数为0.3,起始格式错误.4,十进制位数为0.
-uint8_t usmart_str2num(uint8_t *str, uint32_t *res)
+byte usmart_str2num(byte *str, uint *res)
 {
-    uint32_t t;
-    uint8_t bnum = 0;	//数字的位数
-    uint8_t *p;
-    uint8_t hexdec = 10; //默认为十进制数据
+    uint t;
+    byte bnum = 0;	//数字的位数
+    byte *p;
+    byte hexdec = 10; //默认为十进制数据
     p = str;
     *res = 0; //清零.
     while(1)
@@ -164,7 +164,7 @@ uint8_t usmart_str2num(uint8_t *str, uint32_t *res)
 //*nlen:指令名长度
 //maxlen:最大长度(做限制,指令不可能太长的)
 //返回值:0,成功;其他,失败.
-uint8_t usmart_get_cmdname(uint8_t *str, uint8_t *cmdname, uint8_t *nlen, uint8_t maxlen)
+byte usmart_get_cmdname(byte *str, byte *cmdname, byte *nlen, byte maxlen)
 {
     *nlen = 0;
     while(*str != ' ' && *str != '\0') //找到空格或者结束符则认为结束了
@@ -181,7 +181,7 @@ uint8_t usmart_get_cmdname(uint8_t *str, uint8_t *cmdname, uint8_t *nlen, uint8_
 //获取下一个字符（当中间有很多空格的时候，此函数直接忽略空格，找到空格之后的第一个字符）
 //str:字符串指针
 //返回值:下一个字符
-uint8_t usmart_search_nextc(uint8_t *str)
+byte usmart_search_nextc(byte *str)
 {
     str++;
     while(*str == ' ' && str != '\0')str++;
@@ -193,18 +193,18 @@ uint8_t usmart_search_nextc(uint8_t *str)
 //*pnum:函数的参数个数
 //*rval:是否需要显示返回值(0,不需要;1,需要)
 //返回值:0,成功;其他,错误代码.
-uint8_t usmart_get_fname(uint8_t *str, uint8_t *fname, uint8_t *pnum, uint8_t *rval)
+byte usmart_get_fname(byte *str, byte *fname, byte *pnum, byte *rval)
 {
-    uint8_t res;
-    uint8_t fover = 0;	 //括号深度
-    uint8_t *strtemp;
-    uint8_t offset = 0;
-    uint8_t parmnum = 0;
-    uint8_t temp = 1;
-    uint8_t fpname[6];//void+X+'/0'
-    uint8_t fplcnt = 0; //第一个参数的长度计数器
-    uint8_t pcnt = 0;	 //参数计数器
-    uint8_t nchar;
+    byte res;
+    byte fover = 0;	 //括号深度
+    byte *strtemp;
+    byte offset = 0;
+    byte parmnum = 0;
+    byte temp = 1;
+    byte fpname[6];//void+X+'/0'
+    byte fplcnt = 0; //第一个参数的长度计数器
+    byte pcnt = 0;	 //参数计数器
+    byte nchar;
     //判断函数是否有返回值
     strtemp = str;
     while(*strtemp != '\0') //没有结束
@@ -306,12 +306,12 @@ uint8_t usmart_get_fname(uint8_t *str, uint8_t *fname, uint8_t *pnum, uint8_t *r
 //*fparm:参数字符串指针
 //*ptype:参数类型 0，数字;1，字符串;0XFF，参数错误
 //返回值:0,已经无参数了;其他,下一个参数的偏移量.
-uint8_t usmart_get_aparm(uint8_t *str, uint8_t *fparm, uint8_t *ptype)
+byte usmart_get_aparm(byte *str, byte *fparm, byte *ptype)
 {
-    uint8_t i = 0;
-    uint8_t enout = 0;
-    uint8_t type = 0; //默认是数字
-    uint8_t string = 0; //标记str是否正在读
+    byte i = 0;
+    byte enout = 0;
+    byte type = 0; //默认是数字
+    byte string = 0; //标记str是否正在读
     while(1)
     {
         if(*str == ',' && string == 0)enout = 1;			//暂缓立即退出,目的是寻找下一个参数的起始地址
@@ -362,10 +362,10 @@ uint8_t usmart_get_aparm(uint8_t *str, uint8_t *fparm, uint8_t *ptype)
 //得到指定参数的起始地址
 //num:第num个参数,范围0~9.
 //返回值:该参数的起始地址
-uint8_t usmart_get_parmpos(uint8_t num)
+byte usmart_get_parmpos(byte num)
 {
-    uint8_t temp = 0;
-    uint8_t i;
+    byte temp = 0;
+    byte i;
     for(i = 0; i < num; i++)temp += usmart_dev.plentbl[i];
     return temp;
 }
@@ -373,13 +373,13 @@ uint8_t usmart_get_parmpos(uint8_t num)
 //str:源字符串;
 //parn:参数的多少.0表示无参数 void类型
 //返回值:0,成功;其他,错误代码.
-uint8_t usmart_get_fparam(uint8_t *str, uint8_t *parn)
+byte usmart_get_fparam(byte *str, byte *parn)
 {
-    uint8_t i, type;
-    uint32_t res;
-    uint8_t n = 0;
-    uint8_t len;
-    uint8_t tstr[PARM_LEN + 1]; //字节长度的缓存,最多可以存放PARM_LEN个字符的字符串
+    byte i, type;
+    uint res;
+    byte n = 0;
+    byte len;
+    byte tstr[PARM_LEN + 1]; //字节长度的缓存,最多可以存放PARM_LEN个字符的字符串
     for(i = 0; i < MAX_PARM; i++)usmart_dev.plentbl[i] = 0; //清空参数长度表
     while(*str != '(') //偏移到参数开始的地方
     {
@@ -398,7 +398,7 @@ uint8_t usmart_get_fparam(uint8_t *str, uint8_t *parn)
             {
                 i = usmart_str2num(tstr, &res);	//记录该参数
                 if(i)return USMART_PARMERR;		//参数错误.
-                *(uint32_t *)(usmart_dev.parm + usmart_get_parmpos(n)) = res; //记录转换成功的结果.
+                *(uint *)(usmart_dev.parm + usmart_get_parmpos(n)) = res; //记录转换成功的结果.
                 usmart_dev.parmtype &= ~(1 << n);	//标记数字
                 usmart_dev.plentbl[n] = 4;		//该参数的长度为4
                 n++;							//参数增加

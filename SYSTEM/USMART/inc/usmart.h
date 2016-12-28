@@ -36,7 +36,7 @@
 //1,修改了usmart_get_cmdname函数,增加最大参数长度限制.避免了输入错误参数时的死机现象.
 //2,增加USMART_ENTIM4_SCAN宏定义,用于配置是否使用TIM2定时执行scan函数.
 //V2.5 20110930
-//1,修改usmart_init函数为void usmart_init(uint8_t sysclk),可以根据系统频率自动设定扫描时间.(固定100ms)
+//1,修改usmart_init函数为void usmart_init(byte sysclk),可以根据系统频率自动设定扫描时间.(固定100ms)
 //2,去掉了usmart_init函数中的uart_init函数,串口初始化必须在外部初始化,方便用户自行管理.
 //V2.6 20111009
 //1,增加了read_addr和write_addr两个函数.可以利用这两个函数读写内部任意地址(必须是有效地址).更加方便调试.
@@ -88,35 +88,35 @@
 struct _m_usmart_nametab
 {
     void *func;			//函数指针
-    const uint8_t *name;		//函数名(查找串)
+    const byte *name;		//函数名(查找串)
 };
 //usmart控制管理器
 struct _m_usmart_dev
 {
     struct _m_usmart_nametab *funs;	//函数名指针
 
-    void (*init)(uint8_t);				//初始化
-    uint8_t (*cmd_rec)(uint8_t *str);			//识别函数名及参数
+    void (*init)(byte);				//初始化
+    byte (*cmd_rec)(byte *str);			//识别函数名及参数
     void (*exe)(void); 				//执行
     void (*scan)(void);             //扫描
-    uint8_t fnum; 				  		//函数数量
-    uint8_t pnum;                        //参数数量
-    uint8_t id;							//函数id
-    uint8_t sptype;						//参数显示类型(非字符串参数):0,10进制;1,16进制;
-    uint16_t parmtype;					//参数的类型
-    uint8_t  plentbl[MAX_PARM];  		//每个参数的长度暂存表
-    uint8_t  parm[PARM_LEN];  			//函数的参数
-    uint8_t runtimeflag;					//0,不统计函数执行时间;1,统计函数执行时间,注意:此功能必须在USMART_ENTIMX_SCAN使能的时候,才有用
-    uint32_t runtime;					//运行时间,单位:0.1ms,最大延时时间为定时器CNT值的2倍*0.1ms
+    byte fnum; 				  		//函数数量
+    byte pnum;                        //参数数量
+    byte id;							//函数id
+    byte sptype;						//参数显示类型(非字符串参数):0,10进制;1,16进制;
+    ushort parmtype;					//参数的类型
+    byte  plentbl[MAX_PARM];  		//每个参数的长度暂存表
+    byte  parm[PARM_LEN];  			//函数的参数
+    byte runtimeflag;					//0,不统计函数执行时间;1,统计函数执行时间,注意:此功能必须在USMART_ENTIMX_SCAN使能的时候,才有用
+    uint runtime;					//运行时间,单位:0.1ms,最大延时时间为定时器CNT值的2倍*0.1ms
 };
 extern struct _m_usmart_nametab usmart_nametab[];	//在usmart_config.c里面定义
 extern struct _m_usmart_dev usmart_dev;				//在usmart_config.c里面定义
 
-void usmart_init(uint8_t sysclk);//初始化
-uint8_t usmart_cmd_rec(uint8_t *str);	//识别
+void usmart_init(byte sysclk);//初始化
+byte usmart_cmd_rec(byte *str);	//识别
 void usmart_exe(void);		//执行
 void usmart_scan(void);     //扫描
-uint32_t read_addr(uint32_t addr);	//读取指定地址的值
-void write_addr(uint32_t addr, uint32_t val); //在指定地址写入指定的值
-uint32_t usmart_get_runtime(void);	//获取运行时间
+uint read_addr(uint addr);	//读取指定地址的值
+void write_addr(uint addr, uint val); //在指定地址写入指定的值
+uint usmart_get_runtime(void);	//获取运行时间
 void usmart_reset_runtime(void);//复位运行时间

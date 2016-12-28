@@ -1,5 +1,7 @@
 #pragma once
+
 #include "stm32f10x.h"
+#include "Type.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -56,7 +58,7 @@ extern "C" {
 void WFI_SET(void);		//执行WFI指令
 void INTX_DISABLE(void);//关闭所有中断
 void INTX_ENABLE(void);	//开启所有中断
-void MSR_MSP(uint32_t addr);	//设置堆栈地址
+void MSR_MSP(uint addr);	//设置堆栈地址
 #ifdef __cplusplus
 }
 #endif

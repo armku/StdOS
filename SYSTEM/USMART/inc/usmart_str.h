@@ -1,5 +1,5 @@
 #pragma once 
-#include "stm32f10x.h"
+#include "Type.h"
 //////////////////////////////////////////////////////////////////////////////////
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
 //ALIENTEK STM32开发板
@@ -36,7 +36,7 @@
 //1,修改了usmart_get_cmdname函数,增加最大参数长度限制.避免了输入错误参数时的死机现象.
 //2,增加USMART_ENTIM4_SCAN宏定义,用于配置是否使用TIM2定时执行scan函数.
 //V2.5 20110930
-//1,修改usmart_init函数为void usmart_init(uint8_t sysclk),可以根据系统频率自动设定扫描时间.(固定100ms)
+//1,修改usmart_init函数为void usmart_init(byte sysclk),可以根据系统频率自动设定扫描时间.(固定100ms)
 //2,去掉了usmart_init函数中的uart_init函数,串口初始化必须在外部初始化,方便用户自行管理.
 //V2.6 20111009
 //1,增加了read_addr和write_addr两个函数.可以利用这两个函数读写内部任意地址(必须是有效地址).更加方便调试.
@@ -59,11 +59,11 @@
 ///runtime统计功能,必须设置:USMART_ENTIMX_SCAN 为1,才可以使用!!
 /////////////////////////////////////////////////////////////////////////////////////
 
-uint8_t usmart_get_parmpos(uint8_t num);						//得到某个参数在参数列里面的起始位置
-uint8_t usmart_strcmp(uint8_t *str1, uint8_t *str2);					//对比两个字符串是否相等
-uint32_t usmart_pow(uint8_t m, uint8_t n);							//M^N次方
-uint8_t usmart_str2num(uint8_t *str, uint32_t *res);					//字符串转为数字
-uint8_t usmart_get_cmdname(uint8_t *str, uint8_t *cmdname, uint8_t *nlen, uint8_t maxlen); //从str中得到指令名,并返回指令长度
-uint8_t usmart_get_fname(uint8_t *str, uint8_t *fname, uint8_t *pnum, uint8_t *rval);		//从str中得到函数名
-uint8_t usmart_get_aparm(uint8_t *str, uint8_t *fparm, uint8_t *ptype); 	//从str中得到一个函数参数
-uint8_t usmart_get_fparam(uint8_t *str, uint8_t *parn);  			//得到str中所有的函数参数.
+byte usmart_get_parmpos(byte num);						//得到某个参数在参数列里面的起始位置
+byte usmart_strcmp(byte *str1, byte *str2);					//对比两个字符串是否相等
+uint usmart_pow(byte m, byte n);							//M^N次方
+byte usmart_str2num(byte *str, uint *res);					//字符串转为数字
+byte usmart_get_cmdname(byte *str, byte *cmdname, byte *nlen, byte maxlen); //从str中得到指令名,并返回指令长度
+byte usmart_get_fname(byte *str, byte *fname, byte *pnum, byte *rval);		//从str中得到函数名
+byte usmart_get_aparm(byte *str, byte *fparm, byte *ptype); 	//从str中得到一个函数参数
+byte usmart_get_fparam(byte *str, byte *parn);  			//得到str中所有的函数参数.

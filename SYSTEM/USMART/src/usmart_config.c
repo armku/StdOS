@@ -11,11 +11,11 @@
 struct _m_usmart_nametab usmart_nametab[] =
 {
 #if USMART_USE_WRFUNS==1 	//如果使能了读写操作
-    (void *)read_addr, "uint32_t read_addr(uint32_t addr)",
-    (void *)write_addr, "void write_addr(uint32_t addr,uint32_t val)",
+    (void *)read_addr, "uint read_addr(uint addr)",
+    (void *)write_addr, "void write_addr(uint addr,uint val)",
 #endif
-    (void *)delay_ms, "void delay_ms(uint16_t nms)",
-    (void *)delay_us, "void delay_us(uint32_t nus)",
+    (void *)delay_ms, "void delay_ms(ushort nms)",
+    (void *)delay_us, "void delay_us(uint nus)",
 };
 ///////////////////////////////////END///////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
