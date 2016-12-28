@@ -8,7 +8,7 @@
 */
 #pragma once
 
-#include "String.h"
+#include "CString.h"
 
 //¸ù¶ÔÏó
 class Object

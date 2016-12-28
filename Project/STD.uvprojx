@@ -600,11 +600,6 @@
               <FilePath>..\SYSTEM\CORE\src\Object.cpp</FilePath>
             </File>
             <File>
-              <FileName>String.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\String.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\Array.cpp</FilePath>
@@ -633,6 +628,11 @@
               <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\Type.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\CString.cpp</FilePath>
             </File>
           </Files>
         </Group>
