@@ -48,6 +48,11 @@ void TSys::Init()
     fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8
     //fac_ms = (uint16_t)fac_us * 1000;					//非OS下,代表每个ms需要的systick时钟数
     SysTick_Config(SystemCoreClock / delay_ostickspersec); //tick is 1ms	
+	
+	this->ID[0] = *(uint32_t *)(0X1FFFF7F0); // 高字节
+    this->ID[1] = *(uint32_t *)(0X1FFFF7EC); // 
+    this->ID[2] = *(uint32_t *)(0X1FFFF7E8); // 低字节
+    this->FlashSize = *(uint16_t *)(0X1FFFF7E0);  // 容量
 }
 
 //启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
