@@ -55,7 +55,7 @@ void ledflash()
 extern ushort exti0;
 void eepread()
 {
-	static uint8_t cnt=0;
+	static byte cnt=0;
 	printf("%3dÖĞ¶Ï´ÎÊı:%d",cnt++,exti0);
 	printf("\n");
 }
