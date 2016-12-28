@@ -6,12 +6,27 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
  */
 #include "stdio.h"
 #include "TSys.h"
-#include "Delay.h"
-#include "Scheduling.h"
+#include "Task.h"
+#include "stm32f10x.h"
+
+#define delay_ostickspersec 1000			//时钟频率
+static byte fac_us = 0; //us延时倍乘数
+//static uint16_t fac_ms = 0;							//ms延时倍乘数,在ucos下,代表每个节拍的ms数
+
+#ifdef __cplusplus
+    extern "C"
+    {
+    #endif 
+    void delay_us(uint nus);
+    #ifdef __cplusplus
+    }
+#endif 
+
+
+
 
 Task Scheduling; //调度
-
-TSys Sys;//系统参数
+TSys Sys; //系统参数
 
 TSys::TSys(uint clock, MessagePort_T messagePort)
 {
@@ -24,16 +39,24 @@ void TSys::Show(bool newLine)const{
 }
 
 //初始化
-void TSys::Init(){
-
+//初始化延迟函数
+//SYSTICK的时钟固定为HCLK时钟的1/8
+//SYSCLK:系统时钟
+void TSys::Init()
+{
+    SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
+    fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8
+    //fac_ms = (uint16_t)fac_us * 1000;					//非OS下,代表每个ms需要的systick时钟数
+    SysTick_Config(SystemCoreClock / delay_ostickspersec); //tick is 1ms	
 }
+
 //启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
 void TSys::Start()
 {
-	while(true)
-	{
-		Scheduling.Routin();
-	}	
+    while (true)
+    {
+        Scheduling.Routin();
+    }
 }
 
 //显示系统信息
@@ -54,42 +77,92 @@ void TSys::ShowInfo()
 //系统启动以来的毫秒数，无符号长整型8字节
 uint64_t TSys::Ms()
 {
-	return this->ms;
+    return this->ms;
 }
+
 //系统绝对UTC时间，整型4字节，Unix格式，1970年以来的总秒数。
 uint TSys::Seconds()
 {
-	return this->seconds;
+    return this->seconds;
 }
+
 //微妙级延迟，常用于高精度外设信号控制
 void TSys::Delay(uint us)
 {
-	delay_us(us);
+    delay_us(us);
 }
+
 //毫秒级睡眠，常用于业务层杂宁等待一定时间
 void TSys::Sleep(uint ms)
 {
-	delay_ms(ms);
+    while (ms--)
+    {
+        this->Delay(1000);
+    }
 }
+
 //异步热重启系统。延迟一定毫秒数执行。
 void TSys::Reboot(uint msDelay){}
 /*
 添加任务，参数分别是：任务函数、参数、首次时间、间隔时
 间、名称。返回值是一个 uint 的任务唯一编号。	
-*/
-uint TSys::AddTask(void(*callback)(void),void* para,uint delaycntms, uint intervalms,CString name )
-{
-	
-	return 0;
-}
-//临时用
-uint TSys::AddTask(void(*callback)(void),void* para,uint delaycntms, uint intervalms)
-{
-	Scheduling.AddTask(callback,delaycntms,intervalms);
-	return 0;
-}
-//删除任务
-void TSys::Remove(uint taskid)
+ */
+uint TSys::AddTask(void(*callback)(void), void *para, uint delaycntms, uint intervalms, CString name)
 {
 
+    return 0;
 }
+
+//临时用
+uint TSys::AddTask(void(*callback)(void), void *para, uint delaycntms, uint intervalms)
+{
+    Scheduling.AddTask(callback, delaycntms, intervalms);
+    return 0;
+}
+
+//删除任务
+void TSys::Remove(uint taskid){
+
+}
+#ifdef __cplusplus
+    extern "C"
+    {
+    #endif 
+
+    //systick中断服务函数,使用ucos时用到
+    void SysTick_Handler(void)
+    {
+        Scheduling.TimeTick();
+		Sys.ms++;
+    }
+
+    //延时nus
+    //nus为要延时的us数.
+    void delay_us(uint nus)
+    {
+        uint ticks;
+        uint told, tnow, tcnt = 0;
+        uint reload = SysTick->LOAD; //LOAD的值
+        ticks = nus * fac_us; //需要的节拍数
+        tcnt = 0;
+        told = SysTick->VAL; //刚进入时的计数器值
+        while (1)
+        {
+            tnow = SysTick->VAL;
+            if (tnow != told)
+            {
+                if (tnow < told)
+                    tcnt += told - tnow;
+                //这里注意一下SYSTICK是一个递减的计数器就可以了.
+                else
+                    tcnt += reload - tnow + told;
+                told = tnow;
+                if (tcnt >= ticks)
+                    break;
+                //时间超过/等于要延迟的时间,则退出.
+            }
+        };
+    }
+    #ifdef __cplusplus
+    }
+#endif

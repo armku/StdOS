@@ -29,7 +29,7 @@ class TSys:public Object
 	public:
 		uint Clock;//系统时钟
 		MessagePort_T MessagePort;//调试接口
-	private:
+	public:
 		uint64_t ms;//系统启动以来的毫秒数
 		uint seconds;//系统绝对UTC时间，Unix格式，1970年以来的总秒数。
 	

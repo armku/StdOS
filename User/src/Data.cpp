@@ -1,10 +1,8 @@
 #include "Type.h"
 #include "stm32f10x.h"
-#include "delay.h"
 #include "usart.hpp"
 #include "Led.h"
 #include "W24xxx.h"
-
 #include "usmart.h"
 #include "usart.h"
 #include "W25qxx.h"
@@ -29,8 +27,8 @@ CExti exti(PA0);//PA1 PB3
 
 //系统初始化
 void STDInit() 
-{
-    delay_init();
+{    
+	Sys.Init();
     uart_init(115200); //串口初始化为115200
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE );
 	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable,ENABLE);//关闭jtag，保留swd	
@@ -38,7 +36,7 @@ void STDInit()
 
 	exti.Init();
 	exti.On();    
-	Sys.Init();
+	
 	Sys.ShowInfo();
 	
 	Sys.AddTask(softTimers,0,1,1);//1毫秒周期循环

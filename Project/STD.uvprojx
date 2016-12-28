@@ -545,24 +545,9 @@
               <FilePath>..\SYSTEM\OS\src\usart.cpp</FilePath>
             </File>
             <File>
-              <FileName>delay.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\OS\src\delay.cpp</FilePath>
-            </File>
-            <File>
               <FileName>FIFORing.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\OS\src\FIFORing.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Scheduling.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\OS\src\Scheduling.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Thread_T.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\OS\src\Thread_T.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -638,6 +623,16 @@
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\Time.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Task.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Thread_T.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\Thread_T.cpp</FilePath>
             </File>
           </Files>
         </Group>

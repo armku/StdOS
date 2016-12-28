@@ -1,5 +1,4 @@
 #include "NPA.h"
-#include "delay.h"
 
 CNPA::CNPA(PinPort pinsck, PinPort pinsda, byte devAddr)
 {

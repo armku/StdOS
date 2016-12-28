@@ -6,7 +6,6 @@
  
  BasePort key2(PC13);
  btn2.attach(SINGLE_CLICK, BTN2_SINGLE_CLICK_Handler);
- Scheduling.ThreadAdd(btn2ticks, 5);
  void btn2ticks()
 {
     btn2.ticks();

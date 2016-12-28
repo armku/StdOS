@@ -3,7 +3,6 @@
 
 ////////////////////////////用户配置区///////////////////////////////////////////////
 //这下面要包含所用到的函数所申明的头文件(用户自己添加)
-#include "delay.h"
 #include "sys.h"
 
 //函数名列表初始化(用户自己添加)
@@ -14,8 +13,8 @@ struct _m_usmart_nametab usmart_nametab[] =
     (void *)read_addr, "uint read_addr(uint addr)",
     (void *)write_addr, "void write_addr(uint addr,uint val)",
 #endif
-    (void *)delay_ms, "void delay_ms(ushort nms)",
-    (void *)delay_us, "void delay_us(uint nus)",
+//    (void *)delay_ms, "void delay_ms(ushort nms)",
+//    (void *)delay_us, "void delay_us(uint nus)",
 };
 ///////////////////////////////////END///////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
