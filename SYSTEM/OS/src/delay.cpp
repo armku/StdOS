@@ -7,7 +7,7 @@
     {
     #endif 
 
-    static uint8_t fac_us = 0; //us延时倍乘数
+    static byte fac_us = 0; //us延时倍乘数
     //static uint16_t fac_ms = 0;							//ms延时倍乘数,在ucos下,代表每个节拍的ms数
 
     //systick中断服务函数,使用ucos时用到
@@ -28,11 +28,11 @@
     }
     //延时nus
     //nus为要延时的us数.
-    void delay_us(uint32_t nus)
+    void delay_us(uint nus)
     {
-        uint32_t ticks;
-        uint32_t told, tnow, tcnt = 0;
-        uint32_t reload = SysTick->LOAD; //LOAD的值
+        uint ticks;
+        uint told, tnow, tcnt = 0;
+        uint reload = SysTick->LOAD; //LOAD的值
         ticks = nus * fac_us; //需要的节拍数
         tcnt = 0;
         told = SysTick->VAL; //刚进入时的计数器值
@@ -55,7 +55,7 @@
     }
     //延时nms
     //nms:要延时的ms数
-    void delay_ms(uint16_t nms)
+    void delay_ms(ushort nms)
     {
 
         while (nms--)

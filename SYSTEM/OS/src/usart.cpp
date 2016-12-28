@@ -2,7 +2,7 @@
 #include "usart.hpp"
 #include "BasePort.h"
 
-void uart_init(uint32_t bound)
+void uart_init(uint bound)
 {
     //串口1设置
     USART_InitTypeDef USART_InitStructure;
@@ -133,7 +133,7 @@ void USART1_IRQHandler(void)                	//串口1中断服务程序
     if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)  //接收到一字节
     {
         USART_ClearITPendingBit(USART1, USART_IT_RXNE);
-        uint8_t  inch = USART1->DR;	//读取接收到的数据
+        byte  inch = USART1->DR;	//读取接收到的数据
         
 		com1buf.Push(inch);
 		com1timeidle=0;//空闲计时器清零
@@ -147,7 +147,7 @@ void USART2_IRQHandler(void)                	//串口1中断服务程序
     if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)  //接收中断(接收到的数据必须是0x0d 0x0a结尾)
     {
         USART_ClearITPendingBit(USART2, USART_IT_RXNE);
-        uint8_t  inch = USART_ReceiveData(USART2);	//读取接收到的数据
+        byte  inch = USART_ReceiveData(USART2);	//读取接收到的数据
 
         
     }

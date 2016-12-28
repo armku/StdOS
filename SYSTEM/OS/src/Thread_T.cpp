@@ -38,7 +38,7 @@ void CThread::checkRun()//判断是否运行
 			}
 		}
 }
-void CThread::SetPara(void (*callback)(void),uint32_t intervalms,uint32_t delaycntms)//设置参数
+void CThread::SetPara(void (*callback)(void),uint intervalms,uint delaycntms)//设置参数
 {
 	this->callback=callback;
 	this->intervalms=intervalms;

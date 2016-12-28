@@ -8,7 +8,7 @@ CTaskScheduler::~CTaskScheduler(){
 
 void CTaskScheduler::TimeTick() //间隔10ms调用一次
 {
-    for (uint16_t i = 0; i < this->NextID; i++)
+    for (ushort i = 0; i < this->NextID; i++)
     {
         this->thread[i].TickCur++;
     }
@@ -17,13 +17,13 @@ void CTaskScheduler::TimeTick() //间隔10ms调用一次
 
 void CTaskScheduler::Routin() //运行
 {
-    for (uint16_t i = 0; i < this->NextID; i++)
+    for (ushort i = 0; i < this->NextID; i++)
     {
         this->thread[i].checkRun();
     }
 }
 
-void CTaskScheduler::ThreadAdd(void(*callback)(void), uint32_t intervalms, uint32_t delaycntms)
+void CTaskScheduler::ThreadAdd(void(*callback)(void), uint intervalms, uint delaycntms)
 {
 
     if (this->NextID >= PROCESSCNT)

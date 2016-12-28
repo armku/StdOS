@@ -19,7 +19,7 @@ CFIFORing::~CFIFORing()
 //»º³åÇøÒÑÂú£¬µ«ÓÖÏòÆäÖÐÐ´ÈëÊý¾Ý£¬Ôò×îÏÈÐ´ÈëµÄÊý¾Ý±»³åµô
 //data: Ð´Èë»º³åÇøµÄÊý¾Ý
 //·µ»ØÖµ¹Ì¶¨Îª0
-void CFIFORing::Push(uint8_t data)
+void CFIFORing::Push(byte data)
 {
     //writeIndex &= (NMAX - 1);
     this->buffer[writeIndex] = data;
@@ -58,9 +58,9 @@ void CFIFORing::Push(uint8_t data)
 //µ±»º³åÇøÖÐ×îºóÒ»¸öÊý¾Ý±»È¡³öµÄÊ±ºò£¬ÖÃÎ» flagEmpty ±êÖ¾£¬±íÊ¾»º³åÇø¿Õ
 //»º³åÇøÒÑ¿Õ£¬ÓÖ½øÐÐ¶ÁÊý¾Ý²Ù×÷£¬Ôò¶Á³öµÄÊý¾ÝÊÇÎÞÐ§µÄ
 //·µ»ØÖµÎª¶Á³öµÄÊý¾Ý
-uint8_t CFIFORing::Pop()
+byte CFIFORing::Pop()
 {
-    uint8_t ucData;
+    byte ucData;
 
     //readIndex &= (NMAX - 1);
     ucData = this->buffer[readIndex];
@@ -95,9 +95,9 @@ uint8_t CFIFORing::Pop()
 
     return ucData;
 }
-uint16_t CFIFORing::Pop(uint8_t *buf,uint16_t pos,uint16_t len)//¶Á³öÖ¸¶¨³¤¶ÈµÄÊý¾Ý
+ushort CFIFORing::Pop(byte *buf,ushort pos,ushort len)//¶Á³öÖ¸¶¨³¤¶ÈµÄÊý¾Ý
 {
-	uint16_t readlen=0;
+	ushort readlen=0;
 	
 	if(len>this->GetLength())
 	{
@@ -116,9 +116,9 @@ uint16_t CFIFORing::Pop(uint8_t *buf,uint16_t pos,uint16_t len)//¶Á³öÖ¸¶¨³¤¶ÈµÄÊ
 }
 
 //»ñÈ¡»º³åÇøÖÐÊý¾Ý¸öÊý
-uint16_t CFIFORing::GetLength()
+ushort CFIFORing::GetLength()
 {
-    uint16_t ucDataNum;
+    ushort ucDataNum;
 
     if(this->flagOverflow)
     {

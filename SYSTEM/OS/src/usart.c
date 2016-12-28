@@ -49,7 +49,7 @@ void sendch(int ch)
 {
     while ((USART1->SR &0X40) == 0){}
     //循环发送,直到发送完毕
-    USART1->DR = (uint8_t)ch;
+    USART1->DR = (byte)ch;
 }
 
 //重定义fputc函数
@@ -77,12 +77,12 @@ int GetKey(void)
 #if EN_USART1_RX   //如果使能了接收
     //串口1中断服务程序
     //注意,读取USARTx->SR能避免莫名其妙的错误
-    uint8_t USART_RX_BUF[USART_REC_LEN]; //接收缓冲,最大USART_REC_LEN个字节.
+    byte USART_RX_BUF[USART_REC_LEN]; //接收缓冲,最大USART_REC_LEN个字节.
     //接收状态
     //bit15，	接收完成标志
     //bit14，	接收到0x0d
     //bit13~0，	接收到的有效字节数目
-    uint16_t USART_RX_STA = 0; //接收状态标记
+    ushort USART_RX_STA = 0; //接收状态标记
 
     /*
     当接收到从电脑发过来的数据，把接收到的数据保存在 USART_RX_BUF 中，同时在接收
@@ -96,12 +96,12 @@ int GetKey(void)
 
 #endif 
 //向串口1发送数据
-void sendToUsart1(uint8_t ch)
+void sendToUsart1(byte ch)
 {
     #if 0
         while ((USART1->SR &0X40) == 0){}
         //循环发送,直到发送完毕
-        USART1->DR = (uint8_t)ch;
+        USART1->DR = (byte)ch;
     #else 
         USART_SendData(USART1, ch);
 
@@ -111,7 +111,7 @@ void sendToUsart1(uint8_t ch)
 }
 
 //向串口2发送数据
-void sendToUsart2(uint8_t ch)
+void sendToUsart2(byte ch)
 {
     USART_SendData(USART2, ch);
 
@@ -120,7 +120,7 @@ void sendToUsart2(uint8_t ch)
 }
 
 //向串口3发送数据
-void sendToUsart3(uint8_t ch)
+void sendToUsart3(byte ch)
 {
     USART_SendData(USART3, ch);
 
@@ -129,7 +129,7 @@ void sendToUsart3(uint8_t ch)
 }
 
 //向串口4发送数据
-void sendToUsart4(uint8_t ch)
+void sendToUsart4(byte ch)
 {
     USART_SendData(UART4, ch);
 
@@ -138,7 +138,7 @@ void sendToUsart4(uint8_t ch)
 }
 
 //向串口5发送数据
-void sendToUsart5(uint8_t ch)
+void sendToUsart5(byte ch)
 {
     USART_SendData(UART5, ch);
 
