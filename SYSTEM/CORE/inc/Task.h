@@ -2,7 +2,7 @@
 #include "Type.h"
 #include "Thread_T.h"
 
-#define PROCESSCNT 10	//任务数量
+#define PROCESSCNT 20	//任务数量
 
 class Task
 {
