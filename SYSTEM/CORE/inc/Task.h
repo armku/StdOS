@@ -8,8 +8,6 @@ class CThread
 {
 	public:
 		CThread();
-		~CThread();
-	public:
 		uint TickCur;//当前计数值	
 		uint intervalms;//回调间隔
 		bool canRun;//可以执行

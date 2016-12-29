@@ -35,9 +35,6 @@ CThread::CThread()
 {
 	this->canRun=false;
 }
-CThread::~CThread()
-{
-}
 void CThread::checkRun()//判断是否运行
 {
 	//间隔运行
