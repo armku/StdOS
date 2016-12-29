@@ -519,6 +519,11 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\driver\src\SoftSpi.cpp</FilePath>
             </File>
+            <File>
+              <FileName>SerialPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\driver\src\SerialPort.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -618,6 +623,11 @@
               <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SmartIRQ.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\SmartIRQ.cpp</FilePath>
             </File>
           </Files>
         </Group>
