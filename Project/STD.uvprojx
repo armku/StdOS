@@ -334,7 +334,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\STM32F10x_FWLib\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\driver\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\Util\inc</IncludePath>
+              <IncludePath>..\SYSTEM\STM32F10x_FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\driver\inc;..\SYSTEM\Util\inc;..\SYSTEM\MCU\inc;..\UserDriver\inc;..\User\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -572,62 +572,72 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>CORE</GroupName>
+          <GroupName>Basic</GroupName>
           <Files>
-            <File>
-              <FileName>startup_stm32f10x_md.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\SYSTEM\CORE\startup_stm32f10x_md.s</FilePath>
-            </File>
-            <File>
-              <FileName>core_cm3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\CORE\src\core_cm3.c</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f10x.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\CORE\src\system_stm32f10x.c</FilePath>
-            </File>
-            <File>
-              <FileName>TSys.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TSys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Object.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\Object.cpp</FilePath>
-            </File>
             <File>
               <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\Array.cpp</FilePath>
+              <FilePath>..\SYSTEM\Basic\src\Array.cpp</FilePath>
             </File>
             <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\Buffer.cpp</FilePath>
+              <FilePath>..\SYSTEM\Basic\src\Buffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\CString.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Object.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\Object.cpp</FilePath>
             </File>
             <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\Time.cpp</FilePath>
+              <FilePath>..\SYSTEM\Basic\src\Time.cpp</FilePath>
             </File>
+            <File>
+              <FileName>TSys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\TSys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Type.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\Type.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CORE</GroupName>
+          <Files>
             <File>
               <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>MCU</GroupName>
+          <Files>
             <File>
-              <FileName>Type.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\Type.cpp</FilePath>
+              <FileName>startup_stm32f10x_md.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\SYSTEM\MCU\startup_stm32f10x_md.s</FilePath>
             </File>
             <File>
-              <FileName>CString.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\CString.cpp</FilePath>
+              <FileName>core_cm3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\MCU\src\core_cm3.c</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f10x.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\MCU\src\system_stm32f10x.c</FilePath>
             </File>
           </Files>
         </Group>
