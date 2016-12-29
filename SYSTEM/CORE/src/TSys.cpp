@@ -49,10 +49,12 @@ void TSys::Init()
     //fac_ms = (uint16_t)fac_us * 1000;					//非OS下,代表每个ms需要的systick时钟数
     SysTick_Config(SystemCoreClock / delay_ostickspersec); //tick is 1ms	
 	
-	this->ID[0] = *(uint32_t *)(0X1FFFF7F0); // 高字节
-    this->ID[1] = *(uint32_t *)(0X1FFFF7EC); // 
-    this->ID[2] = *(uint32_t *)(0X1FFFF7E8); // 低字节
-    this->FlashSize = *(uint16_t *)(0X1FFFF7E0);  // 容量
+	this->FlashSize = *(uint16_t *)(0X1FFFF7E0);  // 容量
+	
+	for(int i=0;i<12;i++)
+	{
+		this->ID[i]=*(byte*)(0X1FFFF7E8+i);
+	}
 }
 
 //启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
@@ -74,7 +76,12 @@ void TSys::ShowInfo()
     printf("Heap :(0x20000720, 0x20010000) = 0xf8e0 (62k)\n");
     printf("Stack:(0x20001720, 0x20010000) = 0xe8e0 (58k)\n");
     printf("ChipType:0x42455633 3\n");
-    printf("ChipID:04-53-36-35-34-31-31-31-32-30-32-34\n");
+    printf("ChipID:");
+	for(int i=0;i<11;i++)
+	{
+		printf("%02X-",this->ID[i]);
+	}
+	printf("%2X\n",this->ID[11]);
     printf("Time : 2016-12-28 10:56:32\n");
     printf("Support: http://www.armku.com\n");
 }
