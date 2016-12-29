@@ -620,11 +620,6 @@
               <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
             </File>
             <File>
-              <FileName>Thread_T.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\Thread_T.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\Type.cpp</FilePath>
