@@ -43,8 +43,7 @@ class BasePort
         void SetModeAF_OD();
         void SetModeAF_PP();
         void Set(); //设置引脚
-        void Reset(); //复位引脚
-        void Toggle(); //翻转引脚
+        void Reset(); //复位引脚        
         byte Read(void);        
     protected:
         PinPort pin; //引脚号

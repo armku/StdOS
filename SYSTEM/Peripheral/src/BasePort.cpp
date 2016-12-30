@@ -127,19 +127,6 @@ void BasePort::Reset()
     GPIO_ResetBits(_GROUP(pin), _PORT(pin));
 }
 
-void BasePort::Toggle()
-{
-    this->pinbit = !this->pinbit;
-    if (this->pinbit)
-    {
-        this->Set();
-    }
-    else
-    {
-        this->Reset();
-    }
-}
-
 byte BasePort::Read(void)
 {
     return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
