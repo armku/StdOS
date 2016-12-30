@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Type.h"
 #include "BasePort.h"
 
 class OutputPort:protected BasePort

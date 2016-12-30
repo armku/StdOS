@@ -17,8 +17,6 @@ CButton::CButton(PinPort pin, byte active_level,byte DownBit)
     this->btn.button_level = this->hal_button_Level();
     this->btn.active_level = 0;
 	this->downBit=DownBit;
-} CButton::~CButton(){
-
 }
 
 void CButton::attach(PressEvent event, BtnCallback cb)

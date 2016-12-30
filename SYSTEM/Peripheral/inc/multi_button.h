@@ -32,9 +32,7 @@ typedef enum
 class CButton
 {
     public:
-        CButton(PinPort pin, byte active_level = 0,byte DownBit=0);
-        ~CButton();
-    public:        
+        CButton(PinPort pin, byte active_level = 0,byte DownBit=0);         
         void attach(PressEvent event, BtnCallback cb);
         void ticks();
         PressEvent get_button_event(); //获取当前按键状态
