@@ -33,7 +33,7 @@ class TSys:public Object
 		uint64_t ms;//系统启动以来的毫秒数
 		uint seconds;//系统绝对UTC时间，Unix格式，1970年以来的总秒数。
 		byte ID[12];
-		uint FlashSize;
+		ushort FlashSize;
 	
 };
 extern TSys Sys;//系统参数

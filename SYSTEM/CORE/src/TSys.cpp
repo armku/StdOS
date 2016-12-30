@@ -55,6 +55,7 @@ void TSys::Init()
 	{
 		this->ID[i]=*(byte*)(0X1FFFF7E8+i);
 	}
+	this->FlashSize=*(ushort*)(0X1FFFF7E0);
 }
 
 //启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
@@ -70,7 +71,7 @@ void TSys::Start()
 void TSys::ShowInfo()
 {
     printf("STD_Embedded_Team::STD0801 Code:0801 Ver:0.0.6113 Build:2016-01-01\n");
-    printf("STDOS::STM32F103C8 72MHz Flash:512k RAM:20k\n");
+    printf("STDOS::STM32F103C8 72MHz Flash:%dk RAM:20k\n",this->FlashSize);
     printf("DevID:0x0414 RevID:0x1309\n");
     printf("CPUID:0x412fc231 ARM:ARMv7-M Cortex-M3: R1p2\n");
     printf("Heap :(0x20000720, 0x20010000) = 0xf8e0 (62k)\n");
