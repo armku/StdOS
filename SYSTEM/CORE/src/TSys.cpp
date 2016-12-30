@@ -178,7 +178,24 @@ uint TSys::AddTask(void(*callback)(void),void* para, uint firstms, int periodms,
     printf("\n");
 	return this->nodeCount;
 }
-
+/*
+设置任务参数
+*/
+void TSys::SetTask(uint taskid,bool onoff,int delayms)
+{
+	Node *tsk=this->findTask(taskid);
+	if(tsk!=0)
+	{
+		//add code
+	}
+}
+//查找任务
+Node *TSys::findTask(uint taskid)
+{
+	Node *ret=0;
+	
+	return ret;
+}
 //初始化
 void TSys::taskCls()
 {

@@ -62,6 +62,7 @@ class TSys:public Object
 	public:
 		uint AddTask(void(*callback)(void),void* para, uint firstms, int periodms, const char *name = "未命名任务"); //延时执行时间
         void TimeTick(); //间隔1ms调用一次
+		void SetTask(uint taskid,bool onoff,int delayms=0);//设置任务参数
         void Routin(); //运行        
     protected:
         //链表测试
@@ -69,6 +70,7 @@ class TSys:public Object
         Node *nodeLast; //最后一个链表节点
         uint nodeCount; //任务节点数量
         void taskCls(); //初始化
+		Node *findTask(uint taskid);//查找任务
     private:
         bool isStart; //是否启动
 	
