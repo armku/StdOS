@@ -610,11 +610,6 @@
               <FilePath>..\SYSTEM\CORE\src\TimeCost.cpp</FilePath>
             </File>
             <File>
-              <FileName>Task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
-            </File>
-            <File>
               <FileName>SmartIRQ.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\SmartIRQ.cpp</FilePath>
