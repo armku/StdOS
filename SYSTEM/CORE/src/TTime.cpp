@@ -13,3 +13,8 @@ void TTime::SetTime(UInt64 seconds)
 {
 	
 }
+//系统时间
+uint TTime::Seconds()
+{
+	return 0;
+}

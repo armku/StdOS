@@ -6,10 +6,11 @@ class TTime
 {
 	public:
 		TTime();
-		uint Ms();//返回当前毫秒数
+		uint Ms();//系统启动以来的毫秒数
+		uint Seconds();//系统时间
 		void SetTime(UInt64 seconds);//设置系统当前时间,Unix格式秒数
 	public:
-		uint Current;//当前毫秒数
+		uint64_t Current;//系统启动以来的毫秒数
 		uint CurrentTicks;//滴答数。比微妙还短的超高精度时间
 	
 };

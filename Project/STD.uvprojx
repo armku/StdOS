@@ -690,11 +690,6 @@
               <FilePath>..\SYSTEM\Peripheral\src\Exti.cpp</FilePath>
             </File>
             <File>
-              <FileName>Led.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Led.cpp</FilePath>
-            </File>
-            <File>
               <FileName>multi_button.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\multi_button.cpp</FilePath>

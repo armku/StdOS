@@ -23,4 +23,19 @@ class Task
 {
 	public:
 		Task();
+	public:
+		uint AddTask(void(*callback)(void),void* para, uint firstms, int periodms, const char *name = "未命名任务");
+        void TimeTick(); //间隔1ms调用一次
+		void SetTask(uint taskid,bool onoff,int delayms=0);//设置任务参数
+        void Routin(); //运行        
+		void Start();//启动
+    protected:
+        //链表测试
+        Node *nodeHead; //第一个节点
+        Node *nodeLast; //最后一个链表节点
+        uint nodeCount; //任务节点数量
+        void taskCls(); //初始化
+		Node *findTask(uint taskid);//查找任务
+    private:
+        bool isStart; //是否启动
 };

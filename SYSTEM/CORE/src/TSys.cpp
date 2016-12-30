@@ -6,6 +6,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
  */
 #include "stdio.h"
 #include "TSys.h"
+#include "TTime.h"
 #include "stm32f10x.h"
 
 #define delay_ostickspersec 1000			//时钟频率
@@ -21,17 +22,13 @@ static byte fac_us = 0; //us延时倍乘数
     }
 #endif 
 
-
-
-
-//Task Scheduling; //调度
 TSys Sys; //系统参数
+TTime Time;//系统时间，不建议用户直接使用
 
 TSys::TSys(uint clock, MessagePort_T messagePort)
 {
     this->Clock = clock;
-    this->MessagePort = messagePort;
-	this->taskCls();
+    this->MessagePort = messagePort;	
 }
 
 void TSys::Show(bool newLine)const{
@@ -57,17 +54,36 @@ void TSys::Init()
 	}
 	this->FlashSize=*(ushort*)(0X1FFFF7E0);
 }
-
+uint TSys::AddTask(void(*callback)(void),void* para, uint firstms, int periodms, const char *name)
+{
+	this->task.AddTask(callback,para,firstms,periodms,name);
+}
+//间隔1ms调用一次
+void TSys::TimeTick()
+{
+	this->task.TimeTick();	
+	Time.Current++;
+	
+}
 //启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
 void TSys::Start()
 {	
-	this->isStart = true;
+	this->task.Start();
     while (true)
     {
         this->Routin();
     }
 }
-
+//运行  
+void TSys::Routin()
+{
+	this->task.Routin();
+}
+//设置任务参数
+void TSys::SetTask(uint taskid,bool onoff,int delayms)
+{
+	this->task.SetTask(taskid,onoff,delayms);
+}
 //显示系统信息
 void TSys::ShowInfo()
 {
@@ -86,13 +102,13 @@ void TSys::ShowInfo()
 //系统启动以来的毫秒数，无符号长整型8字节
 uint64_t TSys::Ms()
 {
-    return this->ms;
+    return Time.Ms();
 }
 
 //系统绝对UTC时间，整型4字节，Unix格式，1970年以来的总秒数。
 uint TSys::Seconds()
 {
-    return this->seconds;
+    return Time.Seconds();
 }
 
 //微妙级延迟，常用于高精度外设信号控制
@@ -115,94 +131,6 @@ void TSys::Reboot(uint msDelay){}
 //删除任务
 void TSys::Remove(uint taskid){
 
-}
-//间隔10ms调用一次
-void TSys::TimeTick() 
-{
-    if (this->isStart)
-    {
-        Node *pnode = this->nodeHead;
-        while (pnode != 0)
-        {
-            pnode->data.TickCur++;
-            pnode = pnode->pNext;
-        }
-    }
-	Sys.ms++;
-}
-//运行
-void TSys::Routin() 
-{
-    if (this->isStart)
-    {
-        Node *pnode = this->nodeHead;
-        while (pnode != 0)
-        {
-            if (pnode->data.TickCur > pnode->data.periodMs)
-            {
-                pnode->data.callback();
-                pnode->data.TickCur = 0;
-            }
-            pnode = pnode->pNext;
-        }
-    }
-}
-/*
-添加任务，参数分别是：任务函数、参数、首次时间、间隔时
-间、名称。返回值是一个 uint 的任务唯一编号。	
- */
-uint TSys::AddTask(void(*callback)(void),void* para, uint firstms, int periodms, const char *name)
-{
-    Node *nodeNew = new Node(); //新版链表
-
-    nodeNew->data.TickCur = 0;
-    nodeNew->data.canRun = 1;
-    nodeNew->data.firstMs = firstms;
-    nodeNew->data.periodMs = periodms;
-    nodeNew->data.ID = this->nodeCount;
-    nodeNew->data.Name = name;
-    nodeNew->data.callback = callback;
-    if (this->nodeHead == 0)
-    {
-        this->nodeHead = nodeNew;
-        this->nodeLast = this->nodeHead;
-    }
-    else
-    {
-        this->nodeLast->pNext = nodeNew;
-        this->nodeLast = nodeNew;
-    }
-    printf("Sys::添加%02d: ", this->nodeCount++);
-    printf(name);
-	printf(" First=%dms Period=%dms",firstms,periodms);
-    printf("\n");
-	return this->nodeCount;
-}
-/*
-设置任务参数
-*/
-void TSys::SetTask(uint taskid,bool onoff,int delayms)
-{
-	Node *tsk=this->findTask(taskid);
-	if(tsk!=0)
-	{
-		//add code
-	}
-}
-//查找任务
-Node *TSys::findTask(uint taskid)
-{
-	Node *ret=0;
-	
-	return ret;
-}
-//初始化
-void TSys::taskCls()
-{
-    this->nodeCount = 0;
-    this->nodeHead = 0;
-    this->nodeLast = this->nodeHead;
-    this->isStart = false;
 }
 
 #ifdef __cplusplus

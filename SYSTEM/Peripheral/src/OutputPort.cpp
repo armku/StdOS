@@ -1,2 +1,61 @@
 #include "OutputPort.h"
 
+OutputPort::OutputPort(PinPort pin,byte invert):BasePort(pin)
+{
+	this->Init(pin,invert);
+}
+void OutputPort::Init(PinPort pin,byte invert)
+{
+	this->SetModeOut_PP();
+	switch(invert)
+	{
+		case 0:
+			this->binvert=invert;
+			break;
+		case 1:
+			this->binvert=invert;
+			break;
+		case 2:
+			if(this->Read())
+			{
+				this->binvert=true;
+			}
+			else
+			{
+				this->binvert=false;
+			}
+			break;
+		default:
+			break;
+	}
+}
+//Êä³ö¿ª¹Ø
+void OutputPort::Write(bool onoff)
+{
+	if(binvert)
+	{
+		if(onoff)
+		{
+			this->Reset();
+		}
+		else
+		{
+			this->Set();
+		}
+	}
+	else
+	{
+		if(onoff)
+		{
+			this->Set();
+		}
+		else
+		{
+			this->Reset();
+		}
+	}
+}
+void OutputPort::Open()
+{
+	
+}

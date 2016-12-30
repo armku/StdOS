@@ -1,7 +1,6 @@
 #include "Type.h"
 #include "stm32f10x.h"
 #include "usart.hpp"
-#include "Led.h"
 #include "W24xxx.h"
 #include "usmart.h"
 #include "usart.h"
@@ -10,6 +9,7 @@
 #include "multi_button.h"
 #include "Exti.h"
 #include "TSys.h"
+#include "OutputPort.h"
 
 CFIFORing com1buf; //串口1接收缓冲区
 uint com1timeidle; //串口1空闲时间
@@ -19,8 +19,8 @@ void ledflash();
 void eepread();
 //1ms软件定时器
 void softTimers();
-CLed led1(PB0);
-CLed led2(PB13);
+OutputPort led1(PB0);
+OutputPort led2(PB13);
 //按键 PC13 PA0
 
 CExti exti(PA0);//PA1 PB3
