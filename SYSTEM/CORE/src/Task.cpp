@@ -1,5 +1,5 @@
+#include <stdio.h>
 #include "Task.h"
-
 
 Task::Task(){}
 
@@ -22,6 +22,7 @@ void Task::Routin() //运行
 
 void Task::AddTask(void(*callback)(void), uint delaycntms, uint intervalms)
 {
+	static int i=1;
 
     if (this->NextID >= PROCESSCNT)
     {
@@ -29,6 +30,7 @@ void Task::AddTask(void(*callback)(void), uint delaycntms, uint intervalms)
     }
     this->thread[this->NextID].SetPara(callback, intervalms, delaycntms);
     this->NextID++;
+	printf("增加任务%02d: \n",i++);
 }
 
 CThread::CThread()

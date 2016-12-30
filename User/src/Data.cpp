@@ -41,7 +41,7 @@ void STDInit()
 	
 	Sys.AddTask(softTimers,0,1,1);//1∫¡√Î÷‹∆⁄—≠ª∑
 	Sys.AddTask(ledflash,0,5,50);
-	Sys.AddTask(eepread,0,10,1000);
+	Sys.AddTask(eepread,0,10,10000);
 	Sys.Start();
 }
 
