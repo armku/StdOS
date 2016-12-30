@@ -31,7 +31,7 @@ TSys::TSys(uint clock, MessagePort_T messagePort)
 {
     this->Clock = clock;
     this->MessagePort = messagePort;
-	this->Init1();
+	this->taskCls();
 }
 
 void TSys::Show(bool newLine)const{
@@ -60,8 +60,8 @@ void TSys::Init()
 
 //启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
 void TSys::Start()
-{
-	this->Start1();
+{	
+	this->isStart = true;
     while (true)
     {
         this->Routin();
@@ -112,23 +112,10 @@ void TSys::Sleep(uint ms)
 
 //异步热重启系统。延迟一定毫秒数执行。
 void TSys::Reboot(uint msDelay){}
-/*
-添加任务，参数分别是：任务函数、参数、首次时间、间隔时
-间、名称。返回值是一个 uint 的任务唯一编号。	
- */
-uint TSys::AddTask(void(*callback)(void), void *para, uint delaycntms, uint intervalms,const char* name)
-{
-	return this->AddTask(callback, delaycntms, intervalms,name);    
-}
-
 //删除任务
 void TSys::Remove(uint taskid){
 
 }
-//TSys::Task()
-//{
-//    this->Init1();
-//}
 //间隔10ms调用一次
 void TSys::TimeTick() 
 {
@@ -141,6 +128,7 @@ void TSys::TimeTick()
             pnode = pnode->pNext;
         }
     }
+	Sys.ms++;
 }
 //运行
 void TSys::Routin() 
@@ -159,8 +147,11 @@ void TSys::Routin()
         }
     }
 }
-
-uint TSys::AddTask(void(*callback)(void), uint firstms, uint periodms, const char *name)
+/*
+添加任务，参数分别是：任务函数、参数、首次时间、间隔时
+间、名称。返回值是一个 uint 的任务唯一编号。	
+ */
+uint TSys::AddTask(void(*callback)(void),void* para, uint firstms, uint periodms, const char *name)
 {
     Node *nodeNew = new Node(); //新版链表
 
@@ -189,7 +180,7 @@ uint TSys::AddTask(void(*callback)(void), uint firstms, uint periodms, const cha
 }
 
 //初始化
-void TSys::Init1()
+void TSys::taskCls()
 {
     this->nodeCount = 0;
     this->nodeHead = 0;
@@ -197,11 +188,6 @@ void TSys::Init1()
     this->isStart = false;
 }
 
-//开始
-void TSys::Start1()
-{
-    this->isStart = true;
-}
 #ifdef __cplusplus
     extern "C"
     {
@@ -210,8 +196,7 @@ void TSys::Start1()
     //systick中断服务函数,使用ucos时用到
     void SysTick_Handler(void)
     {
-        Sys.TimeTick();
-		Sys.ms++;
+        Sys.TimeTick();		
     }
 
     //延时nus

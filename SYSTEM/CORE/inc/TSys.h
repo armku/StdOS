@@ -46,8 +46,7 @@ class TSys:public Object
 		uint Seconds();//系统绝对UTC时间，整型4字节，Unix格式，1970年以来的总秒数。
 		void Delay(uint us);//微妙级延迟，常用于高精度外设信号控制
 		void Sleep(uint ms);//毫秒级睡眠，常用于业务层杂宁等待一定时间
-		void Reboot(uint msDelay);//异步热重启系统。延迟一定毫秒数执行。
-		uint AddTask(void(*callback)(void),void* para,uint delaycntms, uint intervalms,const char* name = "未命名任务");//临时用
+		void Reboot(uint msDelay);//异步热重启系统。延迟一定毫秒数执行。		
 		void Remove(uint taskid);//删除任务
 	public:
 		uint Clock;//系统时钟
@@ -61,16 +60,15 @@ class TSys:public Object
 	
 	
 	public:
-		uint AddTask(void(*callback)(void), uint firstms, uint periodms, const char *name = "未命名任务"); //延时执行时间
+		uint AddTask(void(*callback)(void),void* para, uint firstms, uint periodms, const char *name = "未命名任务"); //延时执行时间
         void TimeTick(); //间隔1ms调用一次
-        void Routin(); //运行
-        void Start1(); //开始
+        void Routin(); //运行        
     protected:
         //链表测试
         Node *nodeHead; //第一个节点
         Node *nodeLast; //最后一个链表节点
         uint nodeCount; //任务节点数量
-        void Init1(); //初始化
+        void taskCls(); //初始化
     private:
         bool isStart; //是否启动
 	
