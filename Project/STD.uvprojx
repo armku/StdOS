@@ -334,7 +334,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\STM32F10x_FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\driver\inc;..\SYSTEM\Util\inc;..\SYSTEM\MCU\inc;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc</IncludePath>
+              <IncludePath>..\SYSTEM\STM32F10x_FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\driver\inc;..\SYSTEM\Util\inc;..\SYSTEM\MCU\inc;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -450,11 +450,6 @@
           <GroupName>Driver</GroupName>
           <Files>
             <File>
-              <FileName>BasePort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\BasePort.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Led.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\driver\src\Led.cpp</FilePath>
@@ -483,21 +478,6 @@
               <FileName>multi_button.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\driver\src\multi_button.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftI2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\SoftI2C.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\SoftSpi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\SerialPort.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -708,6 +688,61 @@
               <FileName>WaitHandle.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\WaitHandle.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Peripheral</GroupName>
+          <Files>
+            <File>
+              <FileName>BasePort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\driver\src\BasePort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OutputPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\OutputPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\InputPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AlternatePort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\AlternatePort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AnalogInPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\AnalogInPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\driver\src\SerialPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\Spi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SoftSpi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\driver\src\SoftSpi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SoftI2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\driver\src\SoftI2C.cpp</FilePath>
             </File>
           </Files>
         </Group>
