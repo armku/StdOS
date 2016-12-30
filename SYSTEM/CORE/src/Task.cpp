@@ -26,7 +26,7 @@ void Task::Routin()
         Node *pnode = this->nodeHead;
         while (pnode != 0)
         {
-            if (pnode->data.TickCur > pnode->data.intervalms)
+            if (pnode->data.TickCur > pnode->data.periodMs)
             {
                 pnode->data.callback();
                 pnode->data.TickCur = 0;
@@ -36,14 +36,14 @@ void Task::Routin()
     }
 }
 
-void Task::AddTask(void(*callback)(void), uint delaycntms, uint intervalms, const char *name)
+void Task::AddTask(void(*callback)(void), uint firstms, uint periodms, const char *name)
 {
     Node *nodeNew = new Node(); //新版链表
 
     nodeNew->data.TickCur = 0;
     nodeNew->data.canRun = 1;
-    nodeNew->data.delaycnt = delaycntms;
-    nodeNew->data.intervalms = intervalms;
+    nodeNew->data.firstMs = firstms;
+    nodeNew->data.periodMs = periodms;
     nodeNew->data.ID = this->nodeCount;
     nodeNew->data.Name = name;
     nodeNew->data.callback = callback;
@@ -57,8 +57,9 @@ void Task::AddTask(void(*callback)(void), uint delaycntms, uint intervalms, cons
         this->nodeLast->pNext = nodeNew;
         this->nodeLast = nodeNew;
     }
-    printf("添加任务%02d: ", this->nodeCount++);
+    printf("Sys::添加%02d: ", this->nodeCount++);
     printf(name);
+	printf(" First=%dms Period=%dms",firstms,periodms);
     printf("\n");
 }
 
