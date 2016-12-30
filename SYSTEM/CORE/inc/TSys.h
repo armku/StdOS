@@ -60,7 +60,7 @@ class TSys:public Object
 	
 	
 	public:
-		uint AddTask(void(*callback)(void),void* para, uint firstms, uint periodms, const char *name = "未命名任务"); //延时执行时间
+		uint AddTask(void(*callback)(void),void* para, uint firstms, int periodms, const char *name = "未命名任务"); //延时执行时间
         void TimeTick(); //间隔1ms调用一次
         void Routin(); //运行        
     protected:
