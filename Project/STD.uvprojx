@@ -334,7 +334,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\STM32F10x_FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\driver\inc;..\SYSTEM\Util\inc;..\SYSTEM\MCU\inc;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc</IncludePath>
+              <IncludePath>..\SYSTEM\STM32F10x_FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\Util\inc;..\SYSTEM\MCU\inc;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -684,35 +684,30 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\SoftI2C.cpp</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Driver</GroupName>
-          <Files>
-            <File>
-              <FileName>Led.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\Led.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pwm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\Pwm.cpp</FilePath>
-            </File>
             <File>
               <FileName>Exti.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\Exti.cpp</FilePath>
+              <FilePath>..\SYSTEM\Peripheral\src\Exti.cpp</FilePath>
             </File>
             <File>
-              <FileName>WatchDog.cpp</FileName>
+              <FileName>Led.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\WatchDog.cpp</FilePath>
+              <FilePath>..\SYSTEM\Peripheral\src\Led.cpp</FilePath>
             </File>
             <File>
               <FileName>multi_button.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\multi_button.cpp</FilePath>
+              <FilePath>..\SYSTEM\Peripheral\src\multi_button.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pwm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\Pwm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\WatchDog.cpp</FilePath>
             </File>
           </Files>
         </Group>
