@@ -23,7 +23,7 @@ class Task
 {
     public:
         Task();
-        void AddTask(void(*callback)(void), uint firstms, uint periodms, const char *name = "未命名任务"); //延时执行时间
+        uint AddTask(void(*callback)(void), uint firstms, uint periodms, const char *name = "未命名任务"); //延时执行时间
         void TimeTick(); //间隔1ms调用一次
         void Routin(); //运行
         void Start(); //开始

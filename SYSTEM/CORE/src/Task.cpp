@@ -36,7 +36,7 @@ void Task::Routin()
     }
 }
 
-void Task::AddTask(void(*callback)(void), uint firstms, uint periodms, const char *name)
+uint Task::AddTask(void(*callback)(void), uint firstms, uint periodms, const char *name)
 {
     Node *nodeNew = new Node(); //新版链表
 
@@ -61,6 +61,7 @@ void Task::AddTask(void(*callback)(void), uint firstms, uint periodms, const cha
     printf(name);
 	printf(" First=%dms Period=%dms",firstms,periodms);
     printf("\n");
+	return this->nodeCount;
 }
 
 //初始化

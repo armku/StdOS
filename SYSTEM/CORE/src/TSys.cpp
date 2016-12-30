@@ -118,8 +118,7 @@ void TSys::Reboot(uint msDelay){}
  */
 uint TSys::AddTask(void(*callback)(void), void *para, uint delaycntms, uint intervalms,const char* name)
 {
-    Scheduling.AddTask(callback, delaycntms, intervalms,name);
-    return 0;
+	return Scheduling.AddTask(callback, delaycntms, intervalms,name);    
 }
 
 //É¾³ıÈÎÎñ
