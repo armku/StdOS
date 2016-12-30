@@ -655,6 +655,11 @@
               <FilePath>..\SYSTEM\Peripheral\src\AnalogInPort.cpp</FilePath>
             </File>
             <File>
+              <FileName>ITransport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
+            </File>
+            <File>
               <FileName>SerialPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>

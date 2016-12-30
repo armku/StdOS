@@ -11,3 +11,12 @@ void SerialPort::Open()
 {
 	
 }
+void SerialPort::Register(BtnInCallback onin)
+{
+	this->onIn=onin;
+}
+//Ð´Êý¾Ý
+//void SerialPort::Write(Buffer& bs)
+//{
+//	
+//}
