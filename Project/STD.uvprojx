@@ -334,7 +334,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\STM32F10x_FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\driver\inc;..\SYSTEM\Util\inc;..\SYSTEM\MCU\inc;..\UserDriver\inc;..\User\inc</IncludePath>
+              <IncludePath>..\SYSTEM\STM32F10x_FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\driver\inc;..\SYSTEM\Util\inc;..\SYSTEM\MCU\inc;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -475,39 +475,14 @@
               <FilePath>..\SYSTEM\driver\src\WatchDog.cpp</FilePath>
             </File>
             <File>
-              <FileName>W24xxx.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\W24xxx.cpp</FilePath>
-            </File>
-            <File>
               <FileName>SpiHard.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\driver\src\SpiHard.cpp</FilePath>
             </File>
             <File>
-              <FileName>w25qxx.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\w25qxx.cpp</FilePath>
-            </File>
-            <File>
               <FileName>multi_button.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\driver\src\multi_button.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7689.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\AD7689.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NPA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\NPA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1246.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\ADS1246.cpp</FilePath>
             </File>
             <File>
               <FileName>SoftI2C.cpp</FileName>
@@ -523,6 +498,36 @@
               <FileName>SerialPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\driver\src\SerialPort.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Devices</GroupName>
+          <Files>
+            <File>
+              <FileName>AD7689.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\AD7689.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ADS1246.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\ADS1246.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NPA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\NPA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W24xxx.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\W24xxx.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>w25qxx.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\w25qxx.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -613,6 +618,41 @@
               <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Basic\src\Type.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>NET</GroupName>
+          <Files>
+            <File>
+              <FileName>ISocketHost.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\NET\src\ISocketHost.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ISocket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\NET\src\ISocket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DHCP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\NET\src\DHCP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DNS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\NET\src\DNS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tcp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\NET\src\Tcp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Udp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\NET\src\Udp.cpp</FilePath>
             </File>
           </Files>
         </Group>
