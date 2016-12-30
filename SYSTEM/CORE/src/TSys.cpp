@@ -77,12 +77,7 @@ void TSys::ShowInfo()
     printf("Heap :(0x20000720, 0x20010000) = 0xf8e0 (62k)\n");
     printf("Stack:(0x20001720, 0x20010000) = 0xe8e0 (58k)\n");
     printf("ChipType:0x42455633 3\n");
-    printf("ChipID:");
-	for(int i=0;i<11;i++)
-	{
-		printf("%02X-",this->ID[i]);
-	}
-	printf("%2X\n",this->ID[11]);
+    printf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\n",ID[0],ID[1],ID[2],ID[3],ID[4],ID[5],ID[6],ID[7],ID[8],ID[9],ID[10],ID[11]);
     printf("Time : 2016-12-28 10:56:32\n");
     printf("Support: http://www.armku.com\n");
 }
