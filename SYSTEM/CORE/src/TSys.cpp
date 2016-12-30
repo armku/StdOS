@@ -24,13 +24,14 @@ static byte fac_us = 0; //us延时倍乘数
 
 
 
-Task Scheduling; //调度
+//Task Scheduling; //调度
 TSys Sys; //系统参数
 
 TSys::TSys(uint clock, MessagePort_T messagePort)
 {
     this->Clock = clock;
     this->MessagePort = messagePort;
+	this->Init1();
 }
 
 void TSys::Show(bool newLine)const{
@@ -60,10 +61,10 @@ void TSys::Init()
 //启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
 void TSys::Start()
 {
-	Scheduling.Start();
+	this->Start1();
     while (true)
     {
-        Scheduling.Routin();
+        this->Routin();
     }
 }
 
@@ -117,19 +118,19 @@ void TSys::Reboot(uint msDelay){}
  */
 uint TSys::AddTask(void(*callback)(void), void *para, uint delaycntms, uint intervalms,const char* name)
 {
-	return Scheduling.AddTask(callback, delaycntms, intervalms,name);    
+	return this->AddTask(callback, delaycntms, intervalms,name);    
 }
 
 //删除任务
 void TSys::Remove(uint taskid){
 
 }
-Task::Task()
-{
-    this->Init();
-}
+//TSys::Task()
+//{
+//    this->Init1();
+//}
 //间隔10ms调用一次
-void Task::TimeTick() 
+void TSys::TimeTick() 
 {
     if (this->isStart)
     {
@@ -142,7 +143,7 @@ void Task::TimeTick()
     }
 }
 //运行
-void Task::Routin() 
+void TSys::Routin() 
 {
     if (this->isStart)
     {
@@ -159,7 +160,7 @@ void Task::Routin()
     }
 }
 
-uint Task::AddTask(void(*callback)(void), uint firstms, uint periodms, const char *name)
+uint TSys::AddTask(void(*callback)(void), uint firstms, uint periodms, const char *name)
 {
     Node *nodeNew = new Node(); //新版链表
 
@@ -188,7 +189,7 @@ uint Task::AddTask(void(*callback)(void), uint firstms, uint periodms, const cha
 }
 
 //初始化
-void Task::Init()
+void TSys::Init1()
 {
     this->nodeCount = 0;
     this->nodeHead = 0;
@@ -197,7 +198,7 @@ void Task::Init()
 }
 
 //开始
-void Task::Start()
+void TSys::Start1()
 {
     this->isStart = true;
 }
@@ -209,7 +210,7 @@ void Task::Start()
     //systick中断服务函数,使用ucos时用到
     void SysTick_Handler(void)
     {
-        Scheduling.TimeTick();
+        Sys.TimeTick();
 		Sys.ms++;
     }
 

@@ -26,24 +26,13 @@ struct Node
     Node *pNext; //下一节点
 };
 
-class Task
-{
-    public:
-        Task();
-        uint AddTask(void(*callback)(void), uint firstms, uint periodms, const char *name = "未命名任务"); //延时执行时间
-        void TimeTick(); //间隔1ms调用一次
-        void Routin(); //运行
-        void Start(); //开始
-    protected:
-        //链表测试
-        Node *nodeHead; //第一个节点
-        Node *nodeLast; //最后一个链表节点
-        uint nodeCount; //任务节点数量
-        void Init(); //初始化
-    private:
-        bool isStart; //是否启动
+//class Task
+//{
+//    public:
+//        Task();
+//        
 
-};
+//};
 
 class TSys:public Object
 {
@@ -68,6 +57,22 @@ class TSys:public Object
 		uint seconds;//系统绝对UTC时间，Unix格式，1970年以来的总秒数。
 		byte ID[12];
 		ushort FlashSize;
+	
+	
+	
+	public:
+		uint AddTask(void(*callback)(void), uint firstms, uint periodms, const char *name = "未命名任务"); //延时执行时间
+        void TimeTick(); //间隔1ms调用一次
+        void Routin(); //运行
+        void Start1(); //开始
+    protected:
+        //链表测试
+        Node *nodeHead; //第一个节点
+        Node *nodeLast; //最后一个链表节点
+        uint nodeCount; //任务节点数量
+        void Init1(); //初始化
+    private:
+        bool isStart; //是否启动
 	
 };
 extern TSys Sys;//系统参数
