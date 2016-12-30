@@ -61,6 +61,7 @@ void TSys::Init()
 //启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
 void TSys::Start()
 {
+	Scheduling.Start();
     while (true)
     {
         Scheduling.Routin();

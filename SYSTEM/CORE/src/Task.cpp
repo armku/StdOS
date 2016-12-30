@@ -1,85 +1,78 @@
 #include <stdio.h>
 #include "Task.h"
 
-Task::Task(){}
-
-void Task::TimeTick() //间隔10ms调用一次
+Task::Task()
 {
-    for (ushort i = 0; i < this->NextID; i++)
+    this->Init();
+}
+//间隔10ms调用一次
+void Task::TimeTick() 
+{
+    if (this->isStart)
     {
-        this->thread[i].TickCur++;
+        Node *pnode = this->nodeHead;
+        while (pnode != 0)
+        {
+            pnode->data.TickCur++;
+            pnode = pnode->pNext;
+        }
     }
-    this->ticks++;
 }
-
-void Task::Routin() //运行
+//运行
+void Task::Routin() 
 {
-    for (ushort i = 0; i < this->NextID; i++)
+    if (this->isStart)
     {
-        this->thread[i].checkRun();
+        Node *pnode = this->nodeHead;
+        while (pnode != 0)
+        {
+            if (pnode->data.TickCur > pnode->data.intervalms)
+            {
+                pnode->data.callback();
+                pnode->data.TickCur = 0;
+            }
+            pnode = pnode->pNext;
+        }
     }
 }
 
-void Task::AddTask(void(*callback)(void), uint delaycntms, uint intervalms,const char* name)
+void Task::AddTask(void(*callback)(void), uint delaycntms, uint intervalms, const char *name)
 {
-	static int i=1;
+    Node *nodeNew = new Node(); //新版链表
 
-    if (this->NextID >= PROCESSCNT)
+    nodeNew->data.TickCur = 0;
+    nodeNew->data.canRun = 1;
+    nodeNew->data.delaycnt = delaycntms;
+    nodeNew->data.intervalms = intervalms;
+    nodeNew->data.ID = this->nodeCount;
+    nodeNew->data.Name = name;
+    nodeNew->data.callback = callback;
+    if (this->nodeHead == 0)
     {
-        return ;
+        this->nodeHead = nodeNew;
+        this->nodeLast = this->nodeHead;
     }
-    this->thread[this->NextID].SetPara(callback, intervalms, delaycntms);
-    this->NextID++;
-	printf("添加任务%02d: ",i++);
-	printf(name);
-	printf("\n");
+    else
+    {
+        this->nodeLast->pNext = nodeNew;
+        this->nodeLast = nodeNew;
+    }
+    printf("添加任务%02d: ", this->nodeCount++);
+    printf(name);
+    printf("\n");
 }
 
-CThread::CThread()
+//初始化
+void Task::Init()
 {
-	this->canRun=false;
+    this->nodeCount = 0;
+    this->nodeHead = 0;
+    this->nodeLast = this->nodeHead;
+    this->isStart = false;
 }
-void CThread::checkRun()//判断是否运行
+
+//开始
+void Task::Start()
 {
-	//间隔运行
-	if(this->canRun)
-	{
-		//时间间隔为0，每次都运行
-		if(this->intervalms==0)
-		{
-			this->TickCur=0;
-			this->callback();
-		}
-		//到达间隔时间，运行
-		else if(this->TickCur>=this->intervalms)
-		{
-			this->TickCur=0;
-			this->callback();
-		}		
-		else{}
-	}
-	//第一次运行
-	else
-		{
-			if(this->TickCur>=this->delaycnt)
-			{
-				this->canRun=true;
-				this->TickCur=0;
-				this->callback();
-			}
-		}
-}
-void CThread::SetPara(void (*callback)(void),uint intervalms,uint delaycntms)//设置参数
-{
-	this->callback=callback;
-	this->intervalms=intervalms;
-	this->delaycnt=delaycntms;
-	if(delaycntms==0)
-	{
-		this->canRun=true;
-	}
-	else
-	{
-		this->canRun=false;
-	}
+    this->isStart = true;
 }

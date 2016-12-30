@@ -1,44 +1,39 @@
 #pragma once
+
 #include "Type.h"
 
-#define PROCESSCNT 20	//任务数量
-
-//仅限内部使用
-class CThread
+typedef struct Thread_T
 {
-	public:
-		CThread();
-		uint TickCur;//当前计数值	
-		uint intervalms;//回调间隔
-		bool canRun;//可以执行
-		uint delaycnt;//延时时间		
-	public:
-		void (*callback)(void);//回调函数
-		void checkRun();//判断是否运行
-		void SetPara(void (*callback)(void),uint intervalms,uint delaycntms=0);//设置参数
+    uint TickCur; //当前计数值	
+    uint intervalms; //回调间隔
+    bool canRun; //可以执行
+    uint delaycnt; //延时时间	
+    uint ID; //编号
+    const char *Name; //名称
+    void(*callback)(void); //回调函数	
+} Thread_T;
+
+struct Node
+{
+    Thread_T data; //数据
+    Node *pNext; //下一节点
 };
-
-typedef struct Thread
-{
-	uint TickCur;//当前计数值	
-	uint intervalms;//回调间隔
-	bool canRun;//可以执行
-	uint delaycnt;//延时时间	
-	void (*callback)(void);//回调函数
-	Thread *pnext;
-	
-}Thread_T;
 
 class Task
 {
     public:
         Task();
-        uint ticks; //形同运行滴答数
-    private:
-        ushort	NextID; //下一个ID
-        CThread thread[PROCESSCNT];
-    public:
-        void AddTask(void(*callback)(void), uint delaycntms, uint intervalms,const char* name = "未命名任务"); //延时执行时间
+        void AddTask(void(*callback)(void), uint delaycntms, uint intervalms, const char *name = "未命名任务"); //延时执行时间
         void TimeTick(); //间隔1ms调用一次
         void Routin(); //运行
+        void Start(); //开始
+    protected:
+        //链表测试
+        Node *nodeHead; //第一个节点
+        Node *nodeLast; //最后一个链表节点
+        uint nodeCount; //任务节点数量
+        void Init(); //初始化
+    private:
+        bool isStart; //是否启动
+
 };
