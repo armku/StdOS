@@ -31,7 +31,7 @@ CW25Qxxx::CW25Qxxx(PinPort pinscs,PinPort pinsclk,PinPort pinsmiso,PinPort pinsm
 	this->pinclk=new BasePort(pinsclk);
 	this->pinmiso=new BasePort(pinsmiso);
 	this->pinmosi=new BasePort(pinsmosi);
-	this->spi=new CSpiHard(spichannel);
+	this->spi=new CHardSpi(spichannel);
 	
 	this->pincs->SetModeOut_PP();
 	this->pinclk->SetModeAF_PP();

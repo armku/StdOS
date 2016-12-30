@@ -470,11 +470,6 @@
               <FilePath>..\SYSTEM\driver\src\WatchDog.cpp</FilePath>
             </File>
             <File>
-              <FileName>SpiHard.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\SpiHard.cpp</FilePath>
-            </File>
-            <File>
               <FileName>multi_button.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\driver\src\multi_button.cpp</FilePath>
@@ -697,7 +692,7 @@
             <File>
               <FileName>BasePort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\BasePort.cpp</FilePath>
+              <FilePath>..\SYSTEM\Peripheral\src\BasePort.cpp</FilePath>
             </File>
             <File>
               <FileName>OutputPort.cpp</FileName>
@@ -722,7 +717,7 @@
             <File>
               <FileName>SerialPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\SerialPort.cpp</FilePath>
+              <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
             </File>
             <File>
               <FileName>Spi.cpp</FileName>
@@ -730,9 +725,14 @@
               <FilePath>..\SYSTEM\Peripheral\src\Spi.cpp</FilePath>
             </File>
             <File>
+              <FileName>HardSpi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\HardSpi.cpp</FilePath>
+            </File>
+            <File>
               <FileName>SoftSpi.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\SoftSpi.cpp</FilePath>
+              <FilePath>..\SYSTEM\Peripheral\src\SoftSpi.cpp</FilePath>
             </File>
             <File>
               <FileName>I2C.cpp</FileName>
@@ -742,7 +742,7 @@
             <File>
               <FileName>SoftI2C.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\driver\src\SoftI2C.cpp</FilePath>
+              <FilePath>..\SYSTEM\Peripheral\src\SoftI2C.cpp</FilePath>
             </File>
           </Files>
         </Group>

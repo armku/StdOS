@@ -9,11 +9,10 @@ CHSPI2	=	2,
 CHSPI3	=	3
 }ESpiChannel;
 //硬件SPI
-class CSpiHard
+class CHardSpi
 {
 	public:
-		CSpiHard(ESpiChannel spichannel);
-		~CSpiHard();
+		CHardSpi(ESpiChannel spichannel);		
 	public:
 		void Init(void);			 //初始化SPI口
 		void SetSpeed(byte SpeedSet); //设置SPI速度   

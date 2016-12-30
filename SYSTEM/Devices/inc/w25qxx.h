@@ -2,7 +2,7 @@
 
 #include "Type.h"
 #include "BasePort.h"
-#include "SpiHard.h"
+#include "HardSpi.h"
 
 
 class CW25Qxxx
@@ -30,5 +30,5 @@ class CW25Qxxx
 		BasePort *pinclk;
 		BasePort *pinmiso;
 		BasePort *pinmosi;
-		CSpiHard *spi;
+		CHardSpi *spi;
 };

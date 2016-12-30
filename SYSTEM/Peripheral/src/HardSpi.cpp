@@ -1,16 +1,13 @@
 #include "stm32f10x.h"
-#include "SpiHard.h"
+#include "HardSpi.h"
 
-CSpiHard::CSpiHard(ESpiChannel spichannel)
+CHardSpi::CHardSpi(ESpiChannel spichannel)
 {
     this->spiChannel = spichannel;
 }
 
-CSpiHard::~CSpiHard(){
 
-}
-
-void CSpiHard::Init(void) //初始化SPI口
+void CHardSpi::Init(void) //初始化SPI口
 {
     SPI_InitTypeDef SPI_InitStructure;
 
@@ -61,16 +58,16 @@ void CSpiHard::Init(void) //初始化SPI口
     }
 }
 
-void CSpiHard::SetSpeed(byte SpeedSet) //设置SPI速度   
+void CHardSpi::SetSpeed(byte SpeedSet) //设置SPI速度   
 {
 
 }
-byte CSpiHard::ReadByte() //SPI总线读一个字节
+byte CHardSpi::ReadByte() //SPI总线读一个字节
 {
     return this->WriteByte(0XFF);
 }
 
-byte CSpiHard::WriteByte(byte TxData) //SPI总线写一个字节
+byte CHardSpi::WriteByte(byte TxData) //SPI总线写一个字节
 {
     byte ret = 0;
     switch (this->spiChannel)
@@ -123,7 +120,7 @@ byte CSpiHard::WriteByte(byte TxData) //SPI总线写一个字节
     return ret;
 }
 
-ushort CSpiHard::SendHalfWord(ushort HalfWord)
+ushort CHardSpi::SendHalfWord(ushort HalfWord)
 {
     ushort ret = 0;
     switch (this->spiChannel)
