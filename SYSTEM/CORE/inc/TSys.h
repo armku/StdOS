@@ -2,6 +2,7 @@
 
 #include "Type.h"
 #include "Object.h"
+#include "Task.h"
 
 /* 串口定义 */
 
@@ -26,14 +27,6 @@ struct Node
     Node *pNext; //下一节点
 };
 
-//class Task
-//{
-//    public:
-//        Task();
-//        
-
-//};
-
 class TSys:public Object
 {
 	public:
@@ -56,6 +49,8 @@ class TSys:public Object
 		uint seconds;//系统绝对UTC时间，Unix格式，1970年以来的总秒数。
 		byte ID[12];
 		ushort FlashSize;
+	private:
+		Task task;
 	
 	
 	

@@ -619,6 +619,11 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\WaitHandle.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Task.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
