@@ -675,6 +675,26 @@
           <GroupName>CORE</GroupName>
           <Files>
             <File>
+              <FileName>TSys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\TSys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\TTime.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeWheel.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\TimeWheel.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeCost.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\TimeCost.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
@@ -685,9 +705,9 @@
               <FilePath>..\SYSTEM\CORE\src\SmartIRQ.cpp</FilePath>
             </File>
             <File>
-              <FileName>TSys.cpp</FileName>
+              <FileName>WaitHandle.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TSys.cpp</FilePath>
+              <FilePath>..\SYSTEM\CORE\src\WaitHandle.cpp</FilePath>
             </File>
           </Files>
         </Group>
