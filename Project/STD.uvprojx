@@ -585,19 +585,9 @@
           <GroupName>Basic</GroupName>
           <Files>
             <File>
-              <FileName>Array.cpp</FileName>
+              <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Array.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Buffer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Buffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CString.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\CString.cpp</FilePath>
+              <FilePath>..\SYSTEM\Basic\src\Type.cpp</FilePath>
             </File>
             <File>
               <FileName>Object.cpp</FileName>
@@ -605,19 +595,99 @@
               <FilePath>..\SYSTEM\Basic\src\Object.cpp</FilePath>
             </File>
             <File>
+              <FileName>Buffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\Buffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Array.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\Array.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Basic\src\Time.cpp</FilePath>
             </File>
             <File>
-              <FileName>TSys.cpp</FileName>
+              <FileName>ByteArray.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\TSys.cpp</FilePath>
+              <FilePath>..\SYSTEM\Basic\src\ByteArray.cpp</FilePath>
             </File>
             <File>
-              <FileName>Type.cpp</FileName>
+              <FileName>CString.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Type.cpp</FilePath>
+              <FilePath>..\SYSTEM\Basic\src\CString.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Stream.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\Stream.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DateTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\DateTime.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeSpan.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\TimeSpan.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IList.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\IList.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\List.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IDictionary.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\IDictionary.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Dictionary.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\Dictionary.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Delegate.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\Delegate.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Queue.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\Queue.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Random.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Basic\src\Random.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CORE</GroupName>
+          <Files>
+            <File>
+              <FileName>Task.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SmartIRQ.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\SmartIRQ.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TSys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\TSys.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -653,21 +723,6 @@
               <FileName>Udp.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\NET\src\Udp.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>CORE</GroupName>
-          <Files>
-            <File>
-              <FileName>Task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SmartIRQ.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\SmartIRQ.cpp</FilePath>
             </File>
           </Files>
         </Group>
