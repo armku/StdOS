@@ -115,16 +115,9 @@ void TSys::Reboot(uint msDelay){}
 添加任务，参数分别是：任务函数、参数、首次时间、间隔时
 间、名称。返回值是一个 uint 的任务唯一编号。	
  */
-uint TSys::AddTask(void(*callback)(void), void *para, uint delaycntms, uint intervalms, String name)
+uint TSys::AddTask(void(*callback)(void), void *para, uint delaycntms, uint intervalms,const char* name)
 {
-
-    return 0;
-}
-
-//临时用
-uint TSys::AddTask(void(*callback)(void), void *para, uint delaycntms, uint intervalms)
-{
-    Scheduling.AddTask(callback, delaycntms, intervalms);
+    Scheduling.AddTask(callback, delaycntms, intervalms,name);
     return 0;
 }
 

@@ -38,7 +38,7 @@ class Task
         ushort	NextID; //下一个ID
         CThread thread[PROCESSCNT];
     public:
-        void AddTask(void(*callback)(void), uint delaycntms, uint intervalms); //延时执行时间
+        void AddTask(void(*callback)(void), uint delaycntms, uint intervalms,const char* name = "未命名任务"); //延时执行时间
         void TimeTick(); //间隔1ms调用一次
         void Routin(); //运行
 };

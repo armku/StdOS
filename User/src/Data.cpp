@@ -39,9 +39,9 @@ void STDInit()
 	
 	Sys.ShowInfo();
 	
-	Sys.AddTask(softTimers,0,1,1);//1毫秒周期循环
-	Sys.AddTask(ledflash,0,5,50);
-	Sys.AddTask(eepread,0,10,10000);
+	Sys.AddTask(softTimers,0,1,1,"1毫秒软件定时器");//1毫秒周期循环
+	Sys.AddTask(ledflash,0,5,50,"状态指示灯");
+	Sys.AddTask(eepread,0,10,10000,"测试任务");
 	Sys.Start();
 }
 

@@ -20,7 +20,7 @@ void Task::Routin() //运行
     }
 }
 
-void Task::AddTask(void(*callback)(void), uint delaycntms, uint intervalms)
+void Task::AddTask(void(*callback)(void), uint delaycntms, uint intervalms,const char* name)
 {
 	static int i=1;
 
@@ -30,7 +30,9 @@ void Task::AddTask(void(*callback)(void), uint delaycntms, uint intervalms)
     }
     this->thread[this->NextID].SetPara(callback, intervalms, delaycntms);
     this->NextID++;
-	printf("增加任务%02d: \n",i++);
+	printf("增加任务%02d: ",i++);
+	printf(name);
+	printf("\n");
 }
 
 CThread::CThread()
