@@ -9,7 +9,7 @@ PB2 ?
 PB5 ?
 PC5 ?
 PC13
-*/
+ */
 #include "stm32f10x_exti.h"
 #include "Exti.h"
 
@@ -17,25 +17,18 @@ CExti::CExti(PinPort pin)
 {
     this->port = new BasePort(pin);
     this->port->SetModeINPUT_IPD();
-    #if 0
-        //Ä¬ÈÏÎªPA0
-        this->eXTI_Line = EXTI_Line0;
-        this->nVIC_IRQChannel = EXTI0_IRQn;
-        this->gPIO_PinSource = GPIO_PinSource0;
-        this->gPIO_PortSourceGPIO = GPIO_PortSourceGPIOA;
-    #else 
-        this->eXTI_Line = EXTI_Line0 << (pin % 16);
-        if ((pin % 16) < 5)
-        {
-            this->nVIC_IRQChannel = EXTI0_IRQn + (pin % 16);
-        }
-        else
-        {
-            this->nVIC_IRQChannel = EXTI15_10_IRQn;
-        }
-        this->gPIO_PinSource = GPIO_PinSource0 + pin % 16;
-        this->gPIO_PortSourceGPIO = GPIO_PortSourceGPIOA + pin / 16;
-    #endif 
+
+    this->eXTI_Line = EXTI_Line0 << (pin % 16);
+    if ((pin % 16) < 5)
+    {
+        this->nVIC_IRQChannel = EXTI0_IRQn + (pin % 16);
+    }
+    else
+    {
+        this->nVIC_IRQChannel = EXTI15_10_IRQn;
+    }
+    this->gPIO_PinSource = GPIO_PinSource0 + pin % 16;
+    this->gPIO_PortSourceGPIO = GPIO_PortSourceGPIOA + pin / 16;
 }
 
 void CExti::Init()
