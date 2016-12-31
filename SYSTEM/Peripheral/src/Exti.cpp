@@ -1,59 +1,59 @@
 /*
 ≤‚ ‘Õ®π˝
-PA0
+PA0 °Ã
 PA1
-PA2
-PA3
+PA2 ?
+PA3 ?
 PA4
 PA5
 PA6
 PA7
-PA8
-PA9
-PA10
-PA11
-PA12
+PA8 °Ã
+PA9 °Ã
+PA10 ?
+PA11 °Ã
+PA12 °Ã
 PA13
 PA14
 PA15
 
-PB0
-PB1
-PB2
+PB0 °Ã
+PB1 °Ã
+PB2 °Ã
 PB3
-PB4
-PB5
-PB6
-PB7
-PB8
-PB9
-PB10
-PB11
-PB12
-PB13
-PB14
-PB15
+PB4 °Ã
+PB5 °Ã
+PB6 °Ã
+PB7 °Ã
+PB8 °Ã
+PB9 ?
+PB10 ?
+PB11 °Ã
+PB12 °Ã
+PB13 °Ã
+PB14 °Ã
+PB15 °Ã
 
-PC0
-PC1
-PC2
-PC3
-PC4
-PC5
-PC6
-PC7
-PC8
-PC9
-PC10
-PC11
-PC12
-PC13
+PC0 °Ã
+PC1 °Ã
+PC2 °Ã
+PC3 °Ã
+PC4 °Ã
+PC5 °Ã
+PC6 °Ã
+PC7 °Ã
+PC8 °Ã
+PC9 °Ã
+PC10 ?
+PC11 °Ã
+PC12 °Ã
+PC13 °Ã
 PC14
 PC15
 
 PD0
 PD1
-PD2
+PD2 °Ã
 PD3
 PD4
 PD5
@@ -74,7 +74,7 @@ PE2
 PE3
 PE4
 PE5
-PE6
+PE6 °Ã
 PE7
 PE8
 PE9
@@ -102,6 +102,22 @@ PF13
 PF14
 PF15
 
+PG0
+PG1
+PG2
+PG3
+PG4
+PG5
+PG6
+PG7
+PG8 °Ã
+PG9 °Ã
+PG10
+PG11
+PG12
+PG13
+PG14
+PG15 °Ã
  */
 #include "stm32f10x_exti.h"
 #include "Exti.h"
