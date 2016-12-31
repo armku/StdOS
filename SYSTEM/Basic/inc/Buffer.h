@@ -31,25 +31,19 @@ Array/ByteArray/String 等会调用 SetLength 自动扩容，加大缓冲区。
 class Buffer
 {
     public:
-        //返回指针
-        void GetBuffer();
-        //长度
-        ushort Length();
-        //设置长度，可自动扩容
-        void SetLength(ushort len);
-        //拷贝数据，默认-1长度表示当前长度
-        virtual void Copy(int destIndex, const void *src, int len);
-        //把数据复制到目标缓冲区，默认-1长度表示当前长度
-        virtual void CopyTo(int destIndex, const void *dest, int len)const;
-        //拷贝数据，默认-1长度表示两者最小长度
-        virtual void Copy(int destIndex, const Buffer &sec, int srcIndex, int len);
-        //从另一个对象拷贝数据和长度，长度不足且扩容失败时报错
-        int Copy(const Buffer &src, int destIndex = 0);
-        //截取自缓冲区
-        void Sub();
-        //转换为16进制字符串
-        void ToHex();
-        //二进制数据直接作为字符串
-        void AsString();
+		Buffer(byte* buf,ushort length);        
+        byte* GetBuffer();//返回指针        
+        ushort Length();//长度        
+        void SetLength(ushort len);//设置长度，可自动扩容        
+//        virtual void Copy(int destIndex, const void *src, int len);//拷贝数据，默认-1长度表示当前长度        
+//        virtual void CopyTo(int destIndex, const void *dest, int len)const;//把数据复制到目标缓冲区，默认-1长度表示当前长度
+//        virtual void Copy(int destIndex, const Buffer &sec, int srcIndex, int len);//拷贝数据，默认-1长度表示两者最小长度        
+        int Copy(const Buffer &src, int destIndex = 0);        
+        void Sub();//截取自缓冲区        
+        void ToHex();//转换为16进制字符串        
+        void AsString();//二进制数据直接作为字符串
+	protected:
+		byte* pbuf;//缓冲区
+		ushort bufLength;//缓冲区长度
 
 };
