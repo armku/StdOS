@@ -29,9 +29,7 @@ CExti exti(PA0);//PA1 PB3
 void STDInit() 
 {    
 	Sys.Init();
-    uart_init(115200); //串口初始化为115200
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE );
-	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable,ENABLE);//关闭jtag，保留swd	
+    uart_init(115200); //串口初始化为115200	
     usmart_dev.init(SystemCoreClock / 1000000); //初始化USMART
 
 	exti.Init();
@@ -41,7 +39,7 @@ void STDInit()
 	
 	Sys.AddTask(softTimers,0,1,1,"1毫秒软件定时器");//1毫秒周期循环
 	Sys.AddTask(ledflash,0,5,50,"状态指示灯");
-	Sys.AddTask(eepread,0,10,10000,"测试任务");
+	Sys.AddTask(eepread,0,10,1000,"测试任务");
 	Sys.Start();
 }
 

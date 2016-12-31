@@ -45,7 +45,8 @@ void TSys::Init()
     fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8
     //fac_ms = (uint16_t)fac_us * 1000;					//非OS下,代表每个ms需要的systick时钟数
     SysTick_Config(SystemCoreClock / delay_ostickspersec); //tick is 1ms	
-	
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE );
+	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable,ENABLE);//关闭jtag，保留swd	
 	this->FlashSize = *(uint16_t *)(0X1FFFF7E0);  // 容量
 	
 	for(int i=0;i<12;i++)
