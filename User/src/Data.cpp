@@ -103,19 +103,7 @@ void softTimers()
   */
 void EXTI_PC13_Config(void)
 {
-	GPIO_InitTypeDef GPIO_InitStructure; 
 	EXTI_InitTypeDef EXTI_InitStructure;
-
-	/* config the extiline(PC13) clock and AFIO clock */
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO,ENABLE);
-												
-//	/* config the NVIC(PC13) */
-//	NVIC_Configuration();
-
-	/* EXTI line gpio config(PC13) */	
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;       
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;	 // …œ¿≠ ‰»Î
-  GPIO_Init(GPIOC, &GPIO_InitStructure);
 
 	/* EXTI line(PC13) mode config */
   GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource13); 
