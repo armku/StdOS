@@ -25,6 +25,7 @@ OutputPort led3(PF8,true);
 //按键 PC13 PA0
 
 CExti exti(PC13);//PA1 PB3
+void EXTI_PC13_Config(void);
 
 uint flagbtn;//按键
 uint exticnt;//中断次数
@@ -40,7 +41,7 @@ void STDInit()
 
 	exti.Init();
 	exti.On();	
-		
+	EXTI_PC13_Config();	
 	
 	led1.Write(false);
 	led2.Write(false);
@@ -93,4 +94,34 @@ void softTimers()
         }
         com1buf.Reset();
     }
+}
+
+ /**
+  * @brief  配置 PC13 为线中断口，并设置中断优先级
+  * @param  无
+  * @retval 无
+  */
+void EXTI_PC13_Config(void)
+{
+	GPIO_InitTypeDef GPIO_InitStructure; 
+	EXTI_InitTypeDef EXTI_InitStructure;
+
+	/* config the extiline(PC13) clock and AFIO clock */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO,ENABLE);
+												
+//	/* config the NVIC(PC13) */
+//	NVIC_Configuration();
+
+	/* EXTI line gpio config(PC13) */	
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;       
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;	 // 上拉输入
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
+
+	/* EXTI line(PC13) mode config */
+  GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource13); 
+  EXTI_InitStructure.EXTI_Line = EXTI_Line13;
+  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling; //下降沿中断
+  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+  EXTI_Init(&EXTI_InitStructure); 
 }
