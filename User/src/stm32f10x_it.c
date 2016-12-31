@@ -158,10 +158,10 @@ void EXTI0_IRQHandler()
     if (EXTI_GetITStatus(EXTI_Line0) != RESET)
     {
 
-        EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位
-		flagbtn=!flagbtn;
+        EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位		
 		exticnt++;
     }
+	flagbtn=!flagbtn;
 }
 
 void EXTI1_IRQHandler()
@@ -171,6 +171,7 @@ void EXTI1_IRQHandler()
         EXTI_ClearITPendingBit(EXTI_Line1); //清除中断标志位
 		exticnt++;
     }
+	flagbtn=!flagbtn;
 }
 
 void EXTI2_IRQHandler()
@@ -180,6 +181,7 @@ void EXTI2_IRQHandler()
         EXTI_ClearITPendingBit(EXTI_Line2); //清除中断标志位
 		exticnt++;
     }
+	flagbtn=!flagbtn;
 }
 
 void EXTI3_IRQHandler()
@@ -189,6 +191,7 @@ void EXTI3_IRQHandler()
         EXTI_ClearITPendingBit(EXTI_Line3); //清除中断标志位
 		exticnt++;
     }
+	flagbtn=!flagbtn;
 }
 
 void EXTI4_IRQHandler()
@@ -198,6 +201,7 @@ void EXTI4_IRQHandler()
         EXTI_ClearITPendingBit(EXTI_Line4); //清除中断标志位
 		exticnt++;
     }
+	flagbtn=!flagbtn;
 }
 
 void EXTI9_5_IRQHandler()
