@@ -151,6 +151,7 @@ void PendSV_Handler(void)
   */ 
 //外部中断0
 extern uint flagbtn;//按键
+extern uint exticnt;//中断次数
 
 void EXTI0_IRQHandler()
 {    
@@ -159,6 +160,7 @@ void EXTI0_IRQHandler()
 
         EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位
 		flagbtn=!flagbtn;
+		exticnt++;
     }
 }
 
@@ -166,9 +168,8 @@ void EXTI1_IRQHandler()
 {   
     if (EXTI_GetITStatus(EXTI_Line1) != RESET)
     {
-
         EXTI_ClearITPendingBit(EXTI_Line1); //清除中断标志位
-
+		exticnt++;
     }
 }
 
@@ -176,9 +177,8 @@ void EXTI2_IRQHandler()
 {    
     if (EXTI_GetITStatus(EXTI_Line2) != RESET)
     {
-
         EXTI_ClearITPendingBit(EXTI_Line2); //清除中断标志位
-
+		exticnt++;
     }
 }
 
@@ -186,9 +186,8 @@ void EXTI3_IRQHandler()
 {    
     if (EXTI_GetITStatus(EXTI_Line3) != RESET)
     {
-
         EXTI_ClearITPendingBit(EXTI_Line3); //清除中断标志位
-
+		exticnt++;
     }
 }
 
@@ -196,9 +195,8 @@ void EXTI4_IRQHandler()
 {   
     if (EXTI_GetITStatus(EXTI_Line4) != RESET)
     {
-
         EXTI_ClearITPendingBit(EXTI_Line4); //清除中断标志位
-
+		exticnt++;
     }
 }
 
@@ -206,9 +204,8 @@ void EXTI9_5_IRQHandler()
 {    
     if (EXTI_GetITStatus(EXTI_Line4) != RESET)
     {
-
         EXTI_ClearITPendingBit(EXTI_Line4); //清除中断标志位
-
+		exticnt++;
     }
 }
 

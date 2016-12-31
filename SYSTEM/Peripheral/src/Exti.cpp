@@ -1,3 +1,15 @@
+/*
+≤‚ ‘Õ®π˝
+PA0
+PA2 ?
+PA3 ?
+PB0
+PB1
+PB2 ?
+PB5 ?
+PC5 ?
+
+*/
 #include "stm32f10x_exti.h"
 #include "Exti.h"
 

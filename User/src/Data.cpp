@@ -24,9 +24,10 @@ OutputPort led2(PF7,true);
 OutputPort led3(PF8,true);
 //按键 PC13 PA0
 
-CExti exti(PA0);//PA1 PB3
+CExti exti(PC13);//PA1 PB3
 
 uint flagbtn;//按键
+uint exticnt;//中断次数
 /*
 KEY PA0 
 */
@@ -69,7 +70,7 @@ void ledflash()
 void eepread()
 {
 	static byte cnt=0;
-	printf("%3d中断次数:",cnt++);
+	printf("%3d中断次数: %d",cnt++,exticnt);
 	printf("\n");
 }
 
