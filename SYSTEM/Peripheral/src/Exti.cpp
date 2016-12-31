@@ -26,9 +26,6 @@ CExti::CExti(PinPort pin)
     #endif 
 }
 
-CExti::~CExti(){
-
-}
 void CExti::Init()
 {
     EXTI_InitTypeDef EXTI_InitStructure;

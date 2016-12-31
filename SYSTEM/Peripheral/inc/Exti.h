@@ -5,8 +5,6 @@ class CExti
 {
     public:
         CExti(PinPort pin);
-        ~CExti();
-    public:
         void Init(); //初始化
         void On(); //打开中断
         void Off(); //关闭中断
