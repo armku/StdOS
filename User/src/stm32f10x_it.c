@@ -205,8 +205,9 @@ void EXTI9_5_IRQHandler()
     if (EXTI_GetITStatus(EXTI_Line4) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line4); //清除中断标志位
-		exticnt++;
+		
     }
+	exticnt++;
 }
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
