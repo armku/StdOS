@@ -19,8 +19,9 @@ void ledflash();
 void eepread();
 //1ms软件定时器
 void softTimers();
-OutputPort led1(PB0);
-OutputPort led2(PB13);
+OutputPort led1(PB0,true);
+OutputPort led2(PF7,true);
+OutputPort led3(PF8,true);
 //按键 PC13 PA0
 
 CExti exti(PA0);//PA1 PB3
@@ -33,8 +34,10 @@ void STDInit()
     usmart_dev.init(SystemCoreClock / 1000000); //初始化USMART
 
 	exti.Init();
-	exti.On();    
-	
+	exti.On();	
+	led1.Write(false);
+	led2.Write(false);
+	led3.Write(false);
 	Sys.ShowInfo();
 	
 	Sys.AddTask(softTimers,0,1,1,"1毫秒软件定时器");//1毫秒周期循环
@@ -45,8 +48,9 @@ void STDInit()
 
 void ledflash()
 {
-    led1.Toggle();
-    led2.Toggle();
+//	led1.Toggle();
+//	led2.Toggle();
+//	led3.Toggle();
 }
 
 extern ushort exti0;
