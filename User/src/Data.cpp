@@ -105,8 +105,7 @@ void EXTI_PC13_Config(void)
 {
 	EXTI_InitTypeDef EXTI_InitStructure;
 
-	/* EXTI line(PC13) mode config */
-  GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource13); 
+	/* EXTI line(PC13) mode config */  
   EXTI_InitStructure.EXTI_Line = EXTI_Line13;
   EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
   EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling; //ÏÂ½µÑØÖÐ¶Ï
