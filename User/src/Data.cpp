@@ -41,7 +41,6 @@ void STDInit()
 
 	exti.Init();
 	exti.On();	
-	EXTI_PC13_Config();	
 	
 	led1.Write(false);
 	led2.Write(false);
@@ -94,21 +93,4 @@ void softTimers()
         }
         com1buf.Reset();
     }
-}
-
- /**
-  * @brief  配置 PC13 为线中断口，并设置中断优先级
-  * @param  无
-  * @retval 无
-  */
-void EXTI_PC13_Config(void)
-{
-	EXTI_InitTypeDef EXTI_InitStructure;
-
-	/* EXTI line(PC13) mode config */  
-  EXTI_InitStructure.EXTI_Line = EXTI_Line13;
-  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling; //下降沿中断
-  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-  EXTI_Init(&EXTI_InitStructure); 
 }

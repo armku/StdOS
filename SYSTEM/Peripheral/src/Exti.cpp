@@ -8,7 +8,7 @@ PB1
 PB2 ?
 PB5 ?
 PC5 ?
-
+PC13
 */
 #include "stm32f10x_exti.h"
 #include "Exti.h"
@@ -24,7 +24,7 @@ CExti::CExti(PinPort pin)
         this->gPIO_PinSource = GPIO_PinSource0;
         this->gPIO_PortSourceGPIO = GPIO_PortSourceGPIOA;
     #else 
-        this->eXTI_Line = EXTI_Line0 + pin % 16;
+        this->eXTI_Line = EXTI_Line0 << (pin % 16);
         if ((pin % 16) < 5)
         {
             this->nVIC_IRQChannel = EXTI0_IRQn + (pin % 16);
