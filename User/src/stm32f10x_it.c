@@ -25,6 +25,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
+#include "Type.h"
 
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
@@ -149,21 +150,20 @@ void PendSV_Handler(void)
   * @}
   */ 
 //外部中断0
-uint16_t exti0;
+extern uint flagbtn;//按键
+
 void EXTI0_IRQHandler()
-{
-    exti0++;
+{    
     if (EXTI_GetITStatus(EXTI_Line0) != RESET)
     {
 
         EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位
-
+		flagbtn=!flagbtn;
     }
 }
 
 void EXTI1_IRQHandler()
-{
-    exti0++;
+{   
     if (EXTI_GetITStatus(EXTI_Line1) != RESET)
     {
 
@@ -173,8 +173,7 @@ void EXTI1_IRQHandler()
 }
 
 void EXTI2_IRQHandler()
-{
-    exti0++;
+{    
     if (EXTI_GetITStatus(EXTI_Line2) != RESET)
     {
 
@@ -184,8 +183,7 @@ void EXTI2_IRQHandler()
 }
 
 void EXTI3_IRQHandler()
-{
-    exti0++;
+{    
     if (EXTI_GetITStatus(EXTI_Line3) != RESET)
     {
 
@@ -195,8 +193,7 @@ void EXTI3_IRQHandler()
 }
 
 void EXTI4_IRQHandler()
-{
-    exti0++;
+{   
     if (EXTI_GetITStatus(EXTI_Line4) != RESET)
     {
 
@@ -206,8 +203,7 @@ void EXTI4_IRQHandler()
 }
 
 void EXTI9_5_IRQHandler()
-{
-    exti0++;
+{    
     if (EXTI_GetITStatus(EXTI_Line4) != RESET)
     {
 

@@ -26,6 +26,11 @@ OutputPort led3(PF8,true);
 
 CExti exti(PA0);//PA1 PB3
 
+uint flagbtn;//按键
+/*
+KEY PA0 
+*/
+
 //系统初始化
 void STDInit() 
 {    
@@ -51,13 +56,20 @@ void ledflash()
 //	led1.Toggle();
 //	led2.Toggle();
 //	led3.Toggle();
+	if(flagbtn)
+	{
+		led2.Write(true);
+	}
+	else
+	{
+		led2.Write(false);
+	}
 }
 
-extern ushort exti0;
 void eepread()
 {
 	static byte cnt=0;
-	printf("%3d中断次数:%d",cnt++,exti0);
+	printf("%3d中断次数:",cnt++);
 	printf("\n");
 }
 
