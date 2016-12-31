@@ -26,14 +26,11 @@ OutputPort led3(PF8,true);
 
 CExti exti(PC13);//PA1 PB3
 
-BasePort bp(PC13);
-
 uint flagbtn;//按键
 uint exticnt;//中断次数
 /*
 KEY PA0 
 */
-
 //系统初始化
 void STDInit() 
 {    
@@ -43,7 +40,7 @@ void STDInit()
 
 	exti.Init();
 	exti.On();	
-	
+		
 	
 	led1.Write(false);
 	led2.Write(false);

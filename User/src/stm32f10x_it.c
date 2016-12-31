@@ -204,10 +204,21 @@ void EXTI9_5_IRQHandler()
 {    
     if (EXTI_GetITStatus(EXTI_Line4) != RESET)
     {
-        EXTI_ClearITPendingBit(EXTI_Line4); //清除中断标志位
-		
+        EXTI_ClearITPendingBit(EXTI_Line4); //清除中断标志位		
     }
+	if(EXTI_GetITStatus(EXTI_Line13) != RESET) //确保是否产生了EXTI Line中断
+	{		
+		EXTI_ClearITPendingBit(EXTI_Line13);     //清除中断标志位
+	}  
 	exticnt++;
 }
-
+/// IO 线中断，中断口为PC13
+void EXTI15_10_IRQHandler(void)
+{
+	if(EXTI_GetITStatus(EXTI_Line13) != RESET) //确保是否产生了EXTI Line中断
+	{		
+		EXTI_ClearITPendingBit(EXTI_Line13);     //清除中断标志位
+	}  
+	exticnt++;
+}
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
