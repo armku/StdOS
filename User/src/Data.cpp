@@ -24,7 +24,7 @@ OutputPort led2(PF7,true);
 OutputPort led3(PF8,true);
 //按键 PC13 PA0
 
-CExti exti(PA3);//PA1 PB3
+CExti exti(PC13);//PA1 PB3
 
 uint flagbtn;//按键
 uint exticnt;//中断次数

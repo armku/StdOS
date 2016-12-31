@@ -202,23 +202,55 @@ void EXTI4_IRQHandler()
 
 void EXTI9_5_IRQHandler()
 {    
-    if (EXTI_GetITStatus(EXTI_Line4) != RESET)
+    if (EXTI_GetITStatus(EXTI_Line5) != RESET)
     {
-        EXTI_ClearITPendingBit(EXTI_Line4); //清除中断标志位		
-    }
-	if(EXTI_GetITStatus(EXTI_Line13) != RESET) //确保是否产生了EXTI Line中断
-	{		
-		EXTI_ClearITPendingBit(EXTI_Line13);     //清除中断标志位
-	}  
+        EXTI_ClearITPendingBit(EXTI_Line5); //清除中断标志位		
+    }	 
+	if (EXTI_GetITStatus(EXTI_Line6) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line6); //清除中断标志位		
+    }	 
+	if (EXTI_GetITStatus(EXTI_Line7) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line7); //清除中断标志位		
+    }	 
+	if (EXTI_GetITStatus(EXTI_Line8) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line8); //清除中断标志位		
+    }	 
+	if (EXTI_GetITStatus(EXTI_Line9) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line9); //清除中断标志位		
+    }	 
 	exticnt++;
 }
 /// IO 线中断，中断口为PC13
 void EXTI15_10_IRQHandler(void)
 {
-	if(EXTI_GetITStatus(EXTI_Line13) != RESET) //确保是否产生了EXTI Line中断
-	{		
-		EXTI_ClearITPendingBit(EXTI_Line13);     //清除中断标志位
-	}  
+	if (EXTI_GetITStatus(EXTI_Line10) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line10); //清除中断标志位		
+    }  
+	if (EXTI_GetITStatus(EXTI_Line11) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line11); //清除中断标志位		
+    }  
+	if (EXTI_GetITStatus(EXTI_Line12) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line12); //清除中断标志位		
+    }  
+	if (EXTI_GetITStatus(EXTI_Line13) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line13); //清除中断标志位		
+    }  
+	if (EXTI_GetITStatus(EXTI_Line14) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line14); //清除中断标志位		
+    }  
+	if (EXTI_GetITStatus(EXTI_Line15) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line15); //清除中断标志位		
+    }  
 	exticnt++;
 }
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
