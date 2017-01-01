@@ -57,7 +57,7 @@ void TSys::Init()
 }
 uint TSys::AddTask(void(*callback)(void),void* para, uint firstms, int periodms, const char *name)
 {
-	this->task.AddTask(callback,para,firstms,periodms,name);
+	return this->task.AddTask(callback,para,firstms,periodms,name);
 }
 //间隔1ms调用一次
 void TSys::TimeTick()

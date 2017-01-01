@@ -18,7 +18,7 @@ class TSys:public Object
 		TSys(uint clock =72000000,MessagePort_T messagePort=COM1);
 		void Init();//初始化
 		void Start();//启动系统任务调度，该函数内部为死循环。
-		void Show(bool newLine=false) const;
+		virtual void Show(bool newLine=false) const;
 		void ShowInfo();//显示系统信息
 		uint64_t Ms();//系统启动以来的毫秒数，无符号长整型8字节
 		uint Seconds();//系统绝对UTC时间，整型4字节，Unix格式，1970年以来的总秒数。
