@@ -13,7 +13,7 @@ typedef struct TIntState
     bool OldValue;
 } IntState;
 
-class CExti
+class CExti:public BasePort
 {
     public:
         CExti(PinPort pin);
