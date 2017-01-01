@@ -129,14 +129,16 @@ void BasePort::Reset()
 
 byte BasePort::Read(void)
 {
-    return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
+    //return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
+	return ReadPinPort(this->pin);
 }
 byte BasePort::Read1(void)
 {
-    return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
+    //return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
+	return ReadPinPort(this->pin);
 }
 //¶ÁÈ¡¶Ë¿Ú×´Ì¬
-//static bool BasePort::ReadPinPort(PinPort pin)
-//{
-//	 return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
-//}
+bool BasePort::ReadPinPort(PinPort pin)
+{
+	 return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
+}
