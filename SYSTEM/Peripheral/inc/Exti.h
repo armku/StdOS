@@ -1,13 +1,26 @@
 #pragma once
 #include "BasePort.h"
 
+
+// 读取委托
+typedef void (*IOReadHandler)(PinPort , bool );
+/* 中断状态结构体 */
+/* 一共16条中断线，意味着同一条线每一组只能有一个引脚使用中断 */
+typedef struct TIntState
+{
+    PinPort Pin;
+    IOReadHandler Handler;
+    bool OldValue;
+} IntState;
+
 class CExti
 {
     public:
         CExti(PinPort pin);
         void Init(); //初始化
         void On(); //打开中断
-        void Off(); //关闭中断
+        void Off(); //关闭中断		
+		void TIO_Register(PinPort pin, IOReadHandler handler);// 注册回调  及中断使能
 	private:
 		BasePort *port;	//端口
 	private:

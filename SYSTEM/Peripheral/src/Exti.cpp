@@ -122,6 +122,12 @@ PG15 √
 #include "stm32f10x_exti.h"
 #include "Exti.h"
 
+/*默认按键去抖延时   70ms*/
+static byte shake_time=70;
+
+// 16条中断线
+static IntState State[16];
+
 CExti::CExti(PinPort pin)
 {
     this->port = new BasePort(pin);
@@ -199,4 +205,30 @@ void CExti::On()
 void CExti::Off()
 {
     this->Exti0_state(false);
+}
+// 注册回调  及中断使能
+void CExti::TIO_Register(PinPort pin, IOReadHandler handler)
+{
+	byte pins = pin & 0x0F;
+    IntState* state = &State[pins];
+	// 注册中断事件
+    if(handler)
+    {
+		// 检查是否已经注册到别的引脚上
+        if(state->Pin != pin && state->Pin != P0)
+        {
+#if DEBUG
+            debug_printf("EXTI%d can't register to P%c%d, it has register to P%c%d\r\n", pins, _PIN_NAME(pin), _PIN_NAME(state->Pin));
+#endif
+            return;
+        }
+        state->Pin = pin;
+        state->Handler = handler;
+	}
+	else
+    {
+        // 取消注册
+        state->Pin = P0;
+        state->Handler = 0;
+    }
 }

@@ -14,7 +14,6 @@ typedef enum
     AF_PP = 0x18  //推挽复用输出
 } PIN_MODE;
 /* 针脚 ------------------------------------------------------------------*/
-#define P0 0xFFFF
 //引脚定义
 typedef enum
 {
@@ -24,7 +23,8 @@ typedef enum
 	PD0,PD1,PD2,PD3,PD4,PD5,PD6,PD7,PD8,PD9,PD10,PD11,PD12,PD13,PD14,PD15,
 	PE0,PE1,PE2,PE3,PE4,PE5,PE6,PE7,PE8,PE9,PE10,PE11,PE12,PE13,PE14,PE15,
 	PF0,PF1,PF2,PF3,PF4,PF5,PF6,PF7,PF8,PF9,PF10,PF11,PF12,PF13,PF14,PF15,
-	PG0,PG1,PG2,PG3,PG4,PG5,PG6,PG7,PG8,PG9,PG10,PG11,PG12,PG13,PG14,PG15
+	PG0,PG1,PG2,PG3,PG4,PG5,PG6,PG7,PG8,PG9,PG10,PG11,PG12,PG13,PG14,PG15,
+	P0 = 0XFFFF
 }PinPort;
 
 class BasePort
