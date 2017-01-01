@@ -22,8 +22,6 @@ class CExti:public BasePort
         void Off(); //关闭中断		
 		void TIO_Register(PinPort pin, IOReadHandler handler);// 注册回调  及中断使能
 	private:
-		BasePort *port;	//端口
-	private:
 		void Exti0_state(bool onoff);
 		uint eXTI_Line;//中断线
 		byte nVIC_IRQChannel;//中断向量

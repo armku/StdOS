@@ -130,8 +130,7 @@ static IntState State[16];
 
 CExti::CExti(PinPort pin):BasePort(pin)
 {
-    this->port = new BasePort(pin);
-    this->port->SetModeINPUT_IPD();
+    this->SetModeINPUT_IPD();
 
     this->eXTI_Line = EXTI_Line0 << (pin &0X0F);
     if ((pin &0X0F) < 5)
