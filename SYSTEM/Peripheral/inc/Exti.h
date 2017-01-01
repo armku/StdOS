@@ -1,5 +1,5 @@
 #pragma once
-#include "BasePort.h"
+#include "InputPort.h"
 
 
 // ¶ÁÈ¡Î¯ÍÐ
@@ -13,7 +13,7 @@ typedef struct TIntState
     bool OldValue;
 } IntState;
 
-class CExti:public BasePort
+class CExti:protected InputPort
 {
     public:
         CExti(PinPort pin);

@@ -128,7 +128,7 @@ static byte shake_time = 70;
 // 16ÌõÖÐ¶ÏÏß
 static IntState State[16];
 
-CExti::CExti(PinPort pin):BasePort(pin)
+CExti::CExti(PinPort pin):InputPort(pin)
 {
     this->SetModeINPUT_IPD();
 
