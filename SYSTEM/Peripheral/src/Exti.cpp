@@ -20,7 +20,7 @@ PA15
 PB0 ¡Ì
 PB1 ¡Ì
 PB2 ¡Ì
-PB3
+PB3 ¡Ì
 PB4 ¡Ì
 PB5 ¡Ì
 PB6 ¡Ì
