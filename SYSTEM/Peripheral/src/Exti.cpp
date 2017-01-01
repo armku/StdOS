@@ -184,7 +184,7 @@ void CExti::Exti0_state(bool onoff)
 
     EXTI_InitStructure.EXTI_Line = this->eXTI_Line;
     EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt; //中断请求
-    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling; //下降沿中断
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling; //下降沿中断
     if (onoff)
     {
         EXTI_InitStructure.EXTI_LineCmd = ENABLE; //中断使能	
