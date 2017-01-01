@@ -30,14 +30,14 @@ extern uint exticnt;//ÖÐ¶Ï´ÎÊý
 
 void OnKeyPress(PinPort pin, bool onoff)
 {
-//	if(onoff)
-//	{
-//		led1.Write(true);
-//	}
-//	else		
-//	{
-//		led1.Write(false);
-//	}
+	if(onoff)
+	{
+		led1.Write(true);
+	}
+	else		
+	{
+		led1.Write(false);
+	}
 	led2.Toggle();
 }
 /*

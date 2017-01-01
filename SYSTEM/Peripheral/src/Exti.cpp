@@ -222,7 +222,7 @@ void CExti::Register(IOReadHandler handler)
 //            #endif 
 //            return ;
 //        }
-        state->Pin = pin;
+        state->Pin = this->pin;
         state->Handler = handler;
     }
     else
