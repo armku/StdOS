@@ -7,7 +7,6 @@ class CFIFORing
 {
 public:
     CFIFORing();
-    ~CFIFORing();
 private:
     byte  buffer[NMAX];      //缓冲区
     ushort writeIndex ;    //写索引，描述当前数据写入的位置

@@ -9,10 +9,7 @@ CFIFORing::CFIFORing()
 {
     this->Reset();
 }
-CFIFORing::~CFIFORing()
-{
 
-}
 
 //将数据写入缓冲区
 //当缓冲区满时，置位 flagFull 标志，表示缓冲区满
