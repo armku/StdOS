@@ -65,10 +65,12 @@ uint Task::AddTask(void(*callback)(void),void* para, uint firstms, int periodms,
         this->nodeLast->pNext = nodeNew;
         this->nodeLast = nodeNew;
     }
+	#if DEBUG
     printf("Sys::Ìí¼Ó%02d: ", this->nodeCount++);
     printf(name);
 	printf(" First=%dms Period=%dms",firstms,periodms);
     printf("\n");
+	#endif
 	return this->nodeCount;
 }
 /*
