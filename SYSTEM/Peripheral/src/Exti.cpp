@@ -127,12 +127,12 @@ CExti::CExti(PinPort pin)
     this->port = new BasePort(pin);
     this->port->SetModeINPUT_IPD();
 
-    this->eXTI_Line = EXTI_Line0 << (pin % 16);
-    if ((pin % 16) < 5)
+    this->eXTI_Line = EXTI_Line0 << (pin &0X0F);
+    if ((pin &0X0F) < 5)
     {
-        this->nVIC_IRQChannel = EXTI0_IRQn + (pin % 16);
+        this->nVIC_IRQChannel = EXTI0_IRQn + (pin &0X0F);
     }
-    else if((pin%16)<11)
+    else if((pin&0X0F)<11)
     {
         this->nVIC_IRQChannel = EXTI9_5_IRQn;
     }
@@ -140,7 +140,7 @@ CExti::CExti(PinPort pin)
 	{
 		this->nVIC_IRQChannel = EXTI15_10_IRQn;
 	}
-    this->gPIO_PinSource = GPIO_PinSource0 + pin % 16;
+    this->gPIO_PinSource = GPIO_PinSource0 + pin &0X0F;
     this->gPIO_PortSourceGPIO = GPIO_PortSourceGPIOA + pin / 16;
 }
 
