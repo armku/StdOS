@@ -49,7 +49,7 @@ void STDInit()
     uart_init(115200);
     usmart_dev.init(SystemCoreClock / 1000000); //≥ı ºªØUSMART
 
-	exti.Init();
+	exti.Init(PC13);
 	exti.On();	
 	exti.Register(OnKeyPress);
 	

@@ -134,7 +134,7 @@ typedef struct TIntState
 // 16ÌõÖÐ¶ÏÏß
 static IntState State[16];
 
-CExti::CExti(PinPort pin):InputPort(pin)
+CExti::CExti(PinPort pin,byte invert):InputPort(pin,invert)
 {
     this->SetModeINPUT_IPD();
 
@@ -155,7 +155,7 @@ CExti::CExti(PinPort pin):InputPort(pin)
     this->gPIO_PortSourceGPIO = GPIO_PortSourceGPIOA + pin / 16;
 }
 
-void CExti::Init()
+void CExti::Init(PinPort pin,byte invert)
 {
     EXTI_InitTypeDef EXTI_InitStructure;
 
