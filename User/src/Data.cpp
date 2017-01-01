@@ -7,7 +7,7 @@
 #include "W25qxx.h"
 #include "Data.h"
 #include "multi_button.h"
-#include "Exti.h"
+#include "InputPort.h"
 #include "TSys.h"
 #include "OutputPort.h"
 
