@@ -159,9 +159,9 @@ void CExti::Init()
     EXTI_InitStructure.EXTI_Line = this->eXTI_Line;
     EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt; //中断请求
     //3中中断方式任选一个
-    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling; //下降沿中断
+    //EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling; //下降沿中断
     //EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;//上升沿中断
-    //EXTI_InitStructure.EXTI_Trigger =	EXTI_Trigger_Rising_Falling//上升沿和下降沿都中断
+    EXTI_InitStructure.EXTI_Trigger =	EXTI_Trigger_Rising_Falling;//上升沿和下降沿都中断
     EXTI_InitStructure.EXTI_LineCmd = ENABLE;
     EXTI_Init(&EXTI_InitStructure);
     //根据EXTI_InitStruct中指定的参数初始化外设EXTI寄存器

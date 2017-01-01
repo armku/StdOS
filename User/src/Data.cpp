@@ -37,8 +37,9 @@ void OnKeyPress(PinPort pin, bool onoff)
 	else		
 	{
 		led1.Write(false);
-	}
+	}	
 	led2.Toggle();
+	printf("中断引脚：%d 值%d \n",pin,onoff);
 }
 /*
 KEY PA0 
@@ -47,7 +48,7 @@ KEY PA0
 void STDInit() 
 {    	
 	Sys.Init();
-    uart_init(115200); //串口初始化为115200	
+    uart_init(115200);
     usmart_dev.init(SystemCoreClock / 1000000); //初始化USMART
 
 	exti.Init();
@@ -75,8 +76,8 @@ void ledflash()
 void eepread()
 {
 	static byte cnt=0;
-	printf("%3d中断次数: %d",cnt++,exticnt);
-	printf("\n");
+//	printf("%3d中断次数: %d",cnt++,exticnt);
+//	printf("\n");
 }
 
 //1ms软件定时器
