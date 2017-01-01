@@ -45,7 +45,8 @@ class BasePort
         void Set(); //设置引脚
         void Reset(); //复位引脚        
         byte Read(void);        
-		byte Read1(void);   
+		byte Read1(void); 
+		static bool ReadPinPort(PinPort pin);//读取端口状态
     protected:
         PinPort pin; //引脚号
         byte pinbit;

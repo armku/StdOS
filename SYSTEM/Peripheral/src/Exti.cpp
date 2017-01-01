@@ -230,7 +230,7 @@ void CExti::TIO_Register(PinPort pin, IOReadHandler handler)
         // 取消注册
         state->Pin = P0;
         state->Handler = 0;
-    }
+    }	
 }
 
 extern "C"
@@ -244,7 +244,9 @@ extern "C"
         IntState *state = &State[num];
         uint bit = 1 << num;
         bool value;
-        //byte line = EXTI_Line0 << num;
+        exticnt++;
+		flagbtn = !flagbtn;
+		//byte line = EXTI_Line0 << num;
         // 如果未指定委托，则不处理
         if (!state->Handler)
 		{
@@ -272,11 +274,9 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line0) != RESET)
         {
 
-            EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位		
-            exticnt++;
+            EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位	
 			GPIO_ISR(0);
         }
-        flagbtn = !flagbtn;
     }
 
     void EXTI1_IRQHandler()
@@ -284,21 +284,17 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line1) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line1); //清除中断标志位
-            exticnt++;
 			GPIO_ISR(1);
-        }        
-        flagbtn = !flagbtn;
+        } 
     }
 
     void EXTI2_IRQHandler()
     {
         if (EXTI_GetITStatus(EXTI_Line2) != RESET)
         {
-            EXTI_ClearITPendingBit(EXTI_Line2); //清除中断标志位
-            exticnt++;
+            EXTI_ClearITPendingBit(EXTI_Line2); //清除中断标志位           
 			GPIO_ISR(2);
         }
-        flagbtn = !flagbtn;
     }
 
     void EXTI3_IRQHandler()
@@ -306,10 +302,8 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line3) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line3); //清除中断标志位
-            exticnt++;
 			GPIO_ISR(3);
         }
-        flagbtn = !flagbtn;
     }
 
     void EXTI4_IRQHandler()
@@ -317,10 +311,8 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line4) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line4); //清除中断标志位
-            exticnt++;
 			GPIO_ISR(4);
         }
-        flagbtn = !flagbtn;
     }
 
     void EXTI9_5_IRQHandler()
@@ -350,8 +342,6 @@ extern "C"
             EXTI_ClearITPendingBit(EXTI_Line9); //清除中断标志位		
         	GPIO_ISR(9);
         }
-        exticnt++;
-        flagbtn = !flagbtn;
     }
     /// IO 线中断，中断口为PC13
     void EXTI15_10_IRQHandler(void)
@@ -386,7 +376,5 @@ extern "C"
             EXTI_ClearITPendingBit(EXTI_Line15); //清除中断标志位		
         	GPIO_ISR(15);
         }
-        exticnt++;
-        flagbtn = !flagbtn;
     }
 }

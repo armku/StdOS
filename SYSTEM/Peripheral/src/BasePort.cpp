@@ -135,3 +135,8 @@ byte BasePort::Read1(void)
 {
     return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
 }
+//¶ÁÈ¡¶Ë¿Ú×´Ì¬
+//static bool BasePort::ReadPinPort(PinPort pin)
+//{
+//	 return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
+//}
