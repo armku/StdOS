@@ -24,7 +24,7 @@ OutputPort led2(PF7,true);
 OutputPort led3(PF8,true);
 //°´¼ü PC13 PA0
 
-CExti exti(PC13);//PA1 PB3
+InputPort exti(PC13);//PA1 PB3
 
 void OnKeyPress(PinPort pin, bool onoff)
 {
@@ -49,7 +49,7 @@ void STDInit()
     uart_init(115200);
     usmart_dev.init(SystemCoreClock / 1000000); //³õÊ¼»¯USMART
 
-	exti.Init(PC13);
+	exti.Init();
 	exti.On();	
 	exti.Register(OnKeyPress);
 	
