@@ -1,30 +1,21 @@
 #pragma once
 #include "InputPort.h"
 
+// 读取委托 引脚号 引脚电平状态
+typedef void(*IOReadHandler)(PinPort, bool);
 
-// 读取委托
-typedef void (*IOReadHandler)(PinPort , bool );
-/* 中断状态结构体 */
-/* 一共16条中断线，意味着同一条线每一组只能有一个引脚使用中断 */
-typedef struct TIntState
-{
-    PinPort Pin;
-    IOReadHandler Handler;
-    bool OldValue;
-} IntState;
-
-class CExti:protected InputPort
+class CExti: protected InputPort
 {
     public:
         CExti(PinPort pin);
         void Init(); //初始化
         void On(); //打开中断
         void Off(); //关闭中断		
-		void Register(IOReadHandler handler);// 注册回调  及中断使能
-	private:
-		void Exti0_state(bool onoff);
-		uint eXTI_Line;//中断线
-		byte nVIC_IRQChannel;//中断向量
-		byte gPIO_PinSource;//中断线
-		byte gPIO_PortSourceGPIO;//端口
+        void Register(IOReadHandler handler); // 注册回调
+    private:
+        void Exti0_state(bool onoff);
+        uint eXTI_Line; //中断线
+        byte nVIC_IRQChannel; //中断向量
+        byte gPIO_PinSource; //中断线
+        byte gPIO_PortSourceGPIO; //端口
 };

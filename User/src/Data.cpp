@@ -24,9 +24,7 @@ OutputPort led2(PF7,true);
 OutputPort led3(PF8,true);
 //按键 PC13 PA0
 
-CExti exti(PA0);//PA1 PB3
-
-extern uint exticnt;//中断次数
+CExti exti(PC13);//PA1 PB3
 
 void OnKeyPress(PinPort pin, bool onoff)
 {
@@ -75,9 +73,7 @@ void ledflash()
 
 void eepread()
 {
-	static byte cnt=0;
-//	printf("%3d中断次数: %d",cnt++,exticnt);
-//	printf("\n");
+	
 }
 
 //1ms软件定时器

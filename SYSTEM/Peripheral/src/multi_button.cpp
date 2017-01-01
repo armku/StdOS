@@ -6,6 +6,9 @@
 #include "multi_button.h"
 #include "string.h"
 
+///*默认按键去抖延时   70ms*/
+//static byte shake_time = 70;
+
 CButton::CButton(PinPort pin, byte active_level,byte DownBit)
 {
     this->pPin = new BasePort(pin);

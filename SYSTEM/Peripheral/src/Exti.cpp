@@ -122,8 +122,14 @@ PG15 √
 #include "stm32f10x_exti.h"
 #include "Exti.h"
 
-/*默认按键去抖延时   70ms*/
-static byte shake_time = 70;
+/* 中断状态结构体 */
+/* 一共16条中断线，意味着同一条线每一组只能有一个引脚使用中断 */
+typedef struct TIntState
+{
+    PinPort Pin;
+    IOReadHandler Handler;
+    bool OldValue;
+} IntState;
 
 // 16条中断线
 static IntState State[16];
@@ -234,21 +240,17 @@ void CExti::Register(IOReadHandler handler)
 }
 
 extern "C"
-{
-    //外部中断0   
-    uint exticnt; //中断次数
+{   
     void GPIO_ISR(int num) // 0 <= num <= 15
     {
         IntState *state = &State[num];
-        exticnt++;		
 		
 		// 如果未指定委托，则不处理
         if (!state->Handler)
 		{
             return ;
 		}
-		
-		uint bit = 1 << num;
+				
         bool value;
                 
         value = BasePort::ReadPinPort(state->Pin); // 获取引脚状态
