@@ -447,31 +447,6 @@
           <GroupName>UserDriver</GroupName>
         </Group>
         <Group>
-          <GroupName>SYSTEM</GroupName>
-          <Files>
-            <File>
-              <FileName>sys.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\OS\src\sys.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\OS\src\usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\OS\src\usart.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FIFORing.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\OS\src\FIFORing.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>USMART</GroupName>
           <Files>
             <File>
@@ -703,6 +678,26 @@
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\WatchDog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>sys.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\sys.c</FilePath>
+            </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>FIFORing.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\FIFORing.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usart.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\usart.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1271,7 +1266,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\STM32F10x_FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\Util\inc;..\SYSTEM\MCU\inc;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc</IncludePath>
+              <IncludePath>..\SYSTEM\STM32F10x_FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\USMART\inc;..\SYSTEM\Util\inc;..\SYSTEM\MCU\inc;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1382,31 +1377,6 @@
         </Group>
         <Group>
           <GroupName>UserDriver</GroupName>
-        </Group>
-        <Group>
-          <GroupName>SYSTEM</GroupName>
-          <Files>
-            <File>
-              <FileName>sys.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\OS\src\sys.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\OS\src\usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\OS\src\usart.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FIFORing.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\OS\src\FIFORing.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>USMART</GroupName>
@@ -1640,6 +1610,26 @@
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\WatchDog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>sys.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\sys.c</FilePath>
+            </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>FIFORing.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\FIFORing.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usart.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\usart.cpp</FilePath>
             </File>
           </Files>
         </Group>
