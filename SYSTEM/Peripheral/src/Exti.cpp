@@ -123,7 +123,7 @@ PG15 √
 #include "Exti.h"
 
 /*默认按键去抖延时   70ms*/
-static byte shake_time=70;
+static byte shake_time = 70;
 
 // 16条中断线
 static IntState State[16];
@@ -138,14 +138,14 @@ CExti::CExti(PinPort pin)
     {
         this->nVIC_IRQChannel = EXTI0_IRQn + (pin &0X0F);
     }
-    else if((pin&0X0F)<11)
+    else if ((pin &0X0F) < 11)
     {
         this->nVIC_IRQChannel = EXTI9_5_IRQn;
     }
-	else
-	{
-		this->nVIC_IRQChannel = EXTI15_10_IRQn;
-	}
+    else
+    {
+        this->nVIC_IRQChannel = EXTI15_10_IRQn;
+    }
     this->gPIO_PinSource = GPIO_PinSource0 + pin &0X0F;
     this->gPIO_PortSourceGPIO = GPIO_PortSourceGPIOA + pin / 16;
 }
@@ -206,142 +206,188 @@ void CExti::Off()
 {
     this->Exti0_state(false);
 }
+
 // 注册回调  及中断使能
 void CExti::TIO_Register(PinPort pin, IOReadHandler handler)
 {
-	byte pins = pin & 0x0F;
-    IntState* state = &State[pins];
-	// 注册中断事件
-    if(handler)
+    byte pins = pin &0x0F;
+    IntState *state = &State[pins];
+    // 注册中断事件
+    if (handler)
     {
-		// 检查是否已经注册到别的引脚上
-        if(state->Pin != pin && state->Pin != P0)
+        // 检查是否已经注册到别的引脚上
+        if (state->Pin != pin && state->Pin != P0)
         {
-#if DEBUG
-            debug_printf("EXTI%d can't register to P%c%d, it has register to P%c%d\r\n", pins, _PIN_NAME(pin), _PIN_NAME(state->Pin));
-#endif
-            return;
+            #if DEBUG
+                debug_printf("EXTI%d can't register to P%c%d, it has register to P%c%d\r\n", pins, _PIN_NAME(pin), _PIN_NAME(state->Pin));
+            #endif 
+            return ;
         }
         state->Pin = pin;
         state->Handler = handler;
-	}
-	else
+    }
+    else
     {
         // 取消注册
         state->Pin = P0;
         state->Handler = 0;
     }
 }
-extern "C" {
 
-//外部中断0
-uint flagbtn;//按键
-uint exticnt;//中断次数
-
-void EXTI0_IRQHandler()
-{    
-    if (EXTI_GetITStatus(EXTI_Line0) != RESET)
-    {
-
-        EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位		
-		exticnt++;
-    }
-	flagbtn=!flagbtn;
-}
-
-void EXTI1_IRQHandler()
-{   
-    if (EXTI_GetITStatus(EXTI_Line1) != RESET)
-    {
-        EXTI_ClearITPendingBit(EXTI_Line1); //清除中断标志位
-		exticnt++;
-    }
-	flagbtn=!flagbtn;
-}
-
-void EXTI2_IRQHandler()
-{    
-    if (EXTI_GetITStatus(EXTI_Line2) != RESET)
-    {
-        EXTI_ClearITPendingBit(EXTI_Line2); //清除中断标志位
-		exticnt++;
-    }
-	flagbtn=!flagbtn;
-}
-
-void EXTI3_IRQHandler()
-{    
-    if (EXTI_GetITStatus(EXTI_Line3) != RESET)
-    {
-        EXTI_ClearITPendingBit(EXTI_Line3); //清除中断标志位
-		exticnt++;
-    }
-	flagbtn=!flagbtn;
-}
-
-void EXTI4_IRQHandler()
-{   
-    if (EXTI_GetITStatus(EXTI_Line4) != RESET)
-    {
-        EXTI_ClearITPendingBit(EXTI_Line4); //清除中断标志位
-		exticnt++;
-    }
-	flagbtn=!flagbtn;
-}
-
-void EXTI9_5_IRQHandler()
-{    
-    if (EXTI_GetITStatus(EXTI_Line5) != RESET)
-    {
-        EXTI_ClearITPendingBit(EXTI_Line5); //清除中断标志位		
-    }	 
-	if (EXTI_GetITStatus(EXTI_Line6) != RESET)
-    {
-        EXTI_ClearITPendingBit(EXTI_Line6); //清除中断标志位		
-    }	 
-	if (EXTI_GetITStatus(EXTI_Line7) != RESET)
-    {
-        EXTI_ClearITPendingBit(EXTI_Line7); //清除中断标志位		
-    }	 
-	if (EXTI_GetITStatus(EXTI_Line8) != RESET)
-    {
-        EXTI_ClearITPendingBit(EXTI_Line8); //清除中断标志位		
-    }	 
-	if (EXTI_GetITStatus(EXTI_Line9) != RESET)
-    {
-        EXTI_ClearITPendingBit(EXTI_Line9); //清除中断标志位		
-    }	 
-	exticnt++;
-	flagbtn=!flagbtn;
-}
-/// IO 线中断，中断口为PC13
-void EXTI15_10_IRQHandler(void)
+extern "C"
 {
-	if (EXTI_GetITStatus(EXTI_Line10) != RESET)
+
+    //外部中断0
+    uint flagbtn; //按键
+    uint exticnt; //中断次数
+    void GPIO_ISR(int num) // 0 <= num <= 15
     {
-        EXTI_ClearITPendingBit(EXTI_Line10); //清除中断标志位		
-    }  
-	if (EXTI_GetITStatus(EXTI_Line11) != RESET)
+        IntState *state = &State[num];
+        uint bit = 1 << num;
+        bool value;
+        //byte line = EXTI_Line0 << num;
+        // 如果未指定委托，则不处理
+        if (!state->Handler)
+		{
+            return ;
+		}
+		
+        //if(EXTI_GetITStatus(line) == RESET) return;
+        do
+        {
+            //value = TIO_Read(state->Pin); // 获取引脚状态
+            EXTI->PR = bit; // 重置挂起位
+            //        value = TIO_Read(state->Pin); // 获取引脚状态
+            //        Sys.Sleep(shake_time); // 避免抖动		在os_cfg.h里面修改
+        }
+        while (EXTI->PR &bit); // 如果再次挂起则重复
+        //EXTI_ClearITPendingBit(line);
+        if (state->Handler)
+        {
+            state->Handler(state->Pin, value);
+        }
+    }
+
+    void EXTI0_IRQHandler()
     {
-        EXTI_ClearITPendingBit(EXTI_Line11); //清除中断标志位		
-    }  
-	if (EXTI_GetITStatus(EXTI_Line12) != RESET)
+        if (EXTI_GetITStatus(EXTI_Line0) != RESET)
+        {
+
+            EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位		
+            exticnt++;
+			GPIO_ISR(0);
+        }
+        flagbtn = !flagbtn;
+    }
+
+    void EXTI1_IRQHandler()
     {
-        EXTI_ClearITPendingBit(EXTI_Line12); //清除中断标志位		
-    }  
-	if (EXTI_GetITStatus(EXTI_Line13) != RESET)
+        if (EXTI_GetITStatus(EXTI_Line1) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line1); //清除中断标志位
+            exticnt++;
+			GPIO_ISR(1);
+        }        
+        flagbtn = !flagbtn;
+    }
+
+    void EXTI2_IRQHandler()
     {
-        EXTI_ClearITPendingBit(EXTI_Line13); //清除中断标志位		
-    }  
-	if (EXTI_GetITStatus(EXTI_Line14) != RESET)
+        if (EXTI_GetITStatus(EXTI_Line2) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line2); //清除中断标志位
+            exticnt++;
+			GPIO_ISR(2);
+        }
+        flagbtn = !flagbtn;
+    }
+
+    void EXTI3_IRQHandler()
     {
-        EXTI_ClearITPendingBit(EXTI_Line14); //清除中断标志位		
-    }  
-	if (EXTI_GetITStatus(EXTI_Line15) != RESET)
+        if (EXTI_GetITStatus(EXTI_Line3) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line3); //清除中断标志位
+            exticnt++;
+			GPIO_ISR(3);
+        }
+        flagbtn = !flagbtn;
+    }
+
+    void EXTI4_IRQHandler()
     {
-        EXTI_ClearITPendingBit(EXTI_Line15); //清除中断标志位		
-    }  
-	exticnt++;
-	flagbtn=!flagbtn;
-}
+        if (EXTI_GetITStatus(EXTI_Line4) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line4); //清除中断标志位
+            exticnt++;
+			GPIO_ISR(4);
+        }
+        flagbtn = !flagbtn;
+    }
+
+    void EXTI9_5_IRQHandler()
+    {
+        if (EXTI_GetITStatus(EXTI_Line5) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line5); //清除中断标志位
+			GPIO_ISR(5);
+        }
+        if (EXTI_GetITStatus(EXTI_Line6) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line6); //清除中断标志位		
+        	GPIO_ISR(6);
+        }
+        if (EXTI_GetITStatus(EXTI_Line7) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line7); //清除中断标志位		
+        	GPIO_ISR(7);
+        }
+        if (EXTI_GetITStatus(EXTI_Line8) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line8); //清除中断标志位		
+        	GPIO_ISR(8);
+        }
+        if (EXTI_GetITStatus(EXTI_Line9) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line9); //清除中断标志位		
+        	GPIO_ISR(9);
+        }
+        exticnt++;
+        flagbtn = !flagbtn;
+    }
+    /// IO 线中断，中断口为PC13
+    void EXTI15_10_IRQHandler(void)
+    {
+        if (EXTI_GetITStatus(EXTI_Line10) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line10); //清除中断标志位		
+        	GPIO_ISR(10);
+        }
+        if (EXTI_GetITStatus(EXTI_Line11) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line11); //清除中断标志位		
+        	GPIO_ISR(11);
+        }
+        if (EXTI_GetITStatus(EXTI_Line12) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line12); //清除中断标志位		
+        	GPIO_ISR(12);
+        }
+        if (EXTI_GetITStatus(EXTI_Line13) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line13); //清除中断标志位		
+        	GPIO_ISR(13);
+        }
+        if (EXTI_GetITStatus(EXTI_Line14) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line14); //清除中断标志位		
+        	GPIO_ISR(14);
+        }
+        if (EXTI_GetITStatus(EXTI_Line15) != RESET)
+        {
+            EXTI_ClearITPendingBit(EXTI_Line15); //清除中断标志位		
+        	GPIO_ISR(15);
+        }
+        exticnt++;
+        flagbtn = !flagbtn;
+    }
 }
