@@ -150,8 +150,8 @@ void PendSV_Handler(void)
   * @}
   */ 
 //外部中断0
-extern uint flagbtn;//按键
-extern uint exticnt;//中断次数
+uint flagbtn;//按键
+uint exticnt;//中断次数
 
 void EXTI0_IRQHandler()
 {    
