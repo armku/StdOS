@@ -52,7 +52,7 @@ void STDInit()
 
 	exti.Init();
 	exti.On();	
-	exti.TIO_Register(PA0,OnKeyPress);
+	exti.Register(OnKeyPress);
 	
 	led1.Write(false);
 	led2.Write(false);

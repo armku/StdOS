@@ -20,7 +20,7 @@ class CExti:protected InputPort
         void Init(); //初始化
         void On(); //打开中断
         void Off(); //关闭中断		
-		void TIO_Register(PinPort pin, IOReadHandler handler);// 注册回调  及中断使能
+		void Register(IOReadHandler handler);// 注册回调  及中断使能
 	private:
 		void Exti0_state(bool onoff);
 		uint eXTI_Line;//中断线

@@ -207,9 +207,9 @@ void CExti::Off()
 }
 
 // 注册回调  及中断使能
-void CExti::TIO_Register(PinPort pin, IOReadHandler handler)
+void CExti::Register(IOReadHandler handler)
 {
-    byte pins = pin &0x0F;
+    byte pins = this->pin &0x0F;
     IntState *state = &State[pins];
     // 注册中断事件
     if (handler)
