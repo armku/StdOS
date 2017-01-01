@@ -2,8 +2,7 @@
 
 #include "BasePort.h"
 
-//回调函数定义 down指示按下还是弹起触发
-typedef void(*BtnInCallback)(PinPort pin,bool down); 
+
 
 class InputPort:protected BasePort
 {
@@ -13,7 +12,7 @@ class InputPort:protected BasePort
 		void Open();	
 		void UsePress();//启用事件处理
 	public:
-		BtnInCallback callBack;//回掉函数
+		//BtnInCallback callBack;//回掉函数
 		uint PressTime;//弹起世间
 	private:
 		bool binvert;//端口反转

@@ -1,8 +1,8 @@
 #pragma once
 #include "InputPort.h"
 
-// 读取委托 引脚号 引脚电平状态
-typedef void(*IOReadHandler)(PinPort, bool);
+//回调函数定义 down指示按下还是弹起触发
+typedef void(*BtnInCallback)(PinPort pin,bool down); 
 
 class CExti: protected InputPort
 {
@@ -11,7 +11,7 @@ class CExti: protected InputPort
         void Init(); //初始化
         void On(); //打开中断
         void Off(); //关闭中断		
-        void Register(IOReadHandler handler); // 注册回调
+        void Register(BtnInCallback handler); // 注册回调
     private:
         void Exti0_state(bool onoff);
         uint eXTI_Line; //中断线

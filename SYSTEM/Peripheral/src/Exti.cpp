@@ -127,7 +127,7 @@ PG15 √
 typedef struct TIntState
 {
     PinPort Pin;
-    IOReadHandler Handler;
+    BtnInCallback Handler;
     bool OldValue;
 } IntState;
 
@@ -213,7 +213,7 @@ void CExti::Off()
 }
 
 // 注册回调  及中断使能
-void CExti::Register(IOReadHandler handler)
+void CExti::Register(BtnInCallback handler)
 {
     byte pins = this->pin &0x0F;
     IntState *state = &State[pins];

@@ -11,6 +11,14 @@ typedef enum
 	COM1=0,COM2,COM3,COM4,COM5,COM_NONE=0XFF
 }MessagePort_T;//端口号
 
+// 使用何种模块的宏定义
+#define using(module) Sys.module.Init = T##module##_Init;
+
+#ifdef DEBUG
+    #define debug_printf printf
+#else
+    __inline void debug_printf( const char *format, ... ) {}
+#endif
 
 class TSys:public Object
 {
