@@ -26,8 +26,20 @@ OutputPort led3(PF8,true);
 
 CExti exti(PA0);//PA1 PB3
 
-extern uint flagbtn;//按键
 extern uint exticnt;//中断次数
+
+void OnKeyPress(PinPort pin, bool onoff)
+{
+//	if(onoff)
+//	{
+//		led1.Write(true);
+//	}
+//	else		
+//	{
+//		led1.Write(false);
+//	}
+	led2.Toggle();
+}
 /*
 KEY PA0 
 */
@@ -40,6 +52,7 @@ void STDInit()
 
 	exti.Init();
 	exti.On();	
+	exti.TIO_Register(PA0,OnKeyPress);
 	
 	led1.Write(false);
 	led2.Write(false);
@@ -56,15 +69,7 @@ void ledflash()
 {
 //	led1.Toggle();
 //	led2.Toggle();
-	led3.Toggle();
-	if(flagbtn)
-	{
-		led2.Write(true);
-	}
-	else
-	{
-		led2.Write(false);
-	}
+	led3.Toggle();	
 }
 
 void eepread()

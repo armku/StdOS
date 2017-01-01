@@ -215,13 +215,13 @@ void CExti::TIO_Register(PinPort pin, IOReadHandler handler)
     if (handler)
     {
         // 检查是否已经注册到别的引脚上
-        if (state->Pin != pin && state->Pin != P0)
-        {
-            #if DEBUG
-                debug_printf("EXTI%d can't register to P%c%d, it has register to P%c%d\r\n", pins, _PIN_NAME(pin), _PIN_NAME(state->Pin));
-            #endif 
-            return ;
-        }
+//        if (state->Pin != pin && state->Pin != P0)
+//        {
+//            #if DEBUG
+//                debug_printf("EXTI%d can't register to P%c%d, it has register to P%c%d\r\n", pins, _PIN_NAME(pin), _PIN_NAME(state->Pin));
+//            #endif 
+//            return ;
+//        }
         state->Pin = pin;
         state->Handler = handler;
     }
@@ -235,14 +235,12 @@ void CExti::TIO_Register(PinPort pin, IOReadHandler handler)
 
 extern "C"
 {
-    //外部中断0
-    uint flagbtn; //按键
+    //外部中断0   
     uint exticnt; //中断次数
     void GPIO_ISR(int num) // 0 <= num <= 15
     {
         IntState *state = &State[num];
-        exticnt++;
-		flagbtn = !flagbtn;
+        exticnt++;		
 		
 		// 如果未指定委托，则不处理
         if (!state->Handler)
