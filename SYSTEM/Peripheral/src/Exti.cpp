@@ -235,34 +235,26 @@ void CExti::TIO_Register(PinPort pin, IOReadHandler handler)
 
 extern "C"
 {
-
     //外部中断0
     uint flagbtn; //按键
     uint exticnt; //中断次数
     void GPIO_ISR(int num) // 0 <= num <= 15
     {
         IntState *state = &State[num];
-        uint bit = 1 << num;
-        bool value;
         exticnt++;
 		flagbtn = !flagbtn;
-		//byte line = EXTI_Line0 << num;
-        // 如果未指定委托，则不处理
+		
+		// 如果未指定委托，则不处理
         if (!state->Handler)
 		{
             return ;
 		}
 		
-        //if(EXTI_GetITStatus(line) == RESET) return;
-        do
-        {
-            //value = TIO_Read(state->Pin); // 获取引脚状态
-            EXTI->PR = bit; // 重置挂起位
-            //        value = TIO_Read(state->Pin); // 获取引脚状态
-            //        Sys.Sleep(shake_time); // 避免抖动		在os_cfg.h里面修改
-        }
-        while (EXTI->PR &bit); // 如果再次挂起则重复
-        //EXTI_ClearITPendingBit(line);
+		uint bit = 1 << num;
+        bool value;
+                
+        value = BasePort::ReadPinPort(state->Pin); // 获取引脚状态
+        
         if (state->Handler)
         {
             state->Handler(state->Pin, value);
