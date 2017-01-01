@@ -29,11 +29,7 @@ void InputPort::Init(PinPort pin,byte invert)
 			break;
 	}
 }
-//读取端口电平
-byte InputPort::Read()
-{
-	return this->Read1();
-}
+
 void InputPort::Open()
 {
 	
