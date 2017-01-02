@@ -8,7 +8,7 @@
 #include "Data.h"
 #include "multi_button.h"
 #include "InputPort.h"
-#include "TSys.h"
+#include "Sys.h"
 #include "OutputPort.h"
 
 CFIFORing com1buf; //串口1接收缓冲区

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ITransport.h"
-#include "TSys.h"
+#include "Sys.h"
 
 //回调函数定义 down指示按下还是弹起触发
 typedef void(*BtnInCallback)(ITransport* transport,Buffer & bs);

@@ -1,5 +1,5 @@
 #include "SoftSpi.h"
-#include "TSys.h"
+#include "Sys.h"
 
 CSoftSpi::CSoftSpi(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, uint nus)
 {

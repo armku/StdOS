@@ -1,5 +1,5 @@
 #include "ADS1246.h"
-#include "TSys.h"
+#include "Sys.h"
 
 //下降沿芯片接收数据，上升沿芯片输出数据
 //ADS1246寄存器列表

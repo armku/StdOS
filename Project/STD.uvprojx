@@ -540,9 +540,9 @@
           <GroupName>CORE</GroupName>
           <Files>
             <File>
-              <FileName>TSys.cpp</FileName>
+              <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TSys.cpp</FilePath>
+              <FilePath>..\SYSTEM\CORE\src\Sys.cpp</FilePath>
             </File>
             <File>
               <FileName>TTime.cpp</FileName>
@@ -1467,9 +1467,9 @@
           <GroupName>CORE</GroupName>
           <Files>
             <File>
-              <FileName>TSys.cpp</FileName>
+              <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TSys.cpp</FilePath>
+              <FilePath>..\SYSTEM\CORE\src\Sys.cpp</FilePath>
             </File>
             <File>
               <FileName>TTime.cpp</FileName>

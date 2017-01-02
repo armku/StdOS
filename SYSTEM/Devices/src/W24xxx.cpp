@@ -1,6 +1,6 @@
 #include "stdio.h"
 #include "W24xxx.h"
-#include "TSys.h"
+#include "Sys.h"
 
 #define macI2C_WR	0		/* Ð´¿ØÖÆbit */
 #define macI2C_RD	1		/* ¶Á¿ØÖÆbit */

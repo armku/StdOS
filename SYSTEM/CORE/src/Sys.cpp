@@ -5,7 +5,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 
  */
 #include "stdio.h"
-#include "TSys.h"
+#include "Sys.h"
 #include "TTime.h"
 #include "stm32f10x.h"
 
