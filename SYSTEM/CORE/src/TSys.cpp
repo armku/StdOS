@@ -23,12 +23,12 @@ static byte fac_us = 0; //us延时倍乘数
 #endif 
 
 TSys Sys; //系统参数
-TTime Time;//系统时间，不建议用户直接使用
+TTime Time; //系统时间，不建议用户直接使用
 
 TSys::TSys(uint clock, MessagePort_T messagePort)
 {
     this->Clock = clock;
-    this->MessagePort = messagePort;	
+    this->MessagePort = messagePort;
 }
 
 void TSys::Show(bool newLine)const{
@@ -45,57 +45,63 @@ void TSys::Init()
     fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8
     //fac_ms = (uint16_t)fac_us * 1000;					//非OS下,代表每个ms需要的systick时钟数
     SysTick_Config(SystemCoreClock / delay_ostickspersec); //tick is 1ms	
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE );
-	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable,ENABLE);//关闭jtag，保留swd	
-	this->FlashSize = *(uint16_t *)(0X1FFFF7E0);  // 容量
-	
-	for(int i=0;i<12;i++)
-	{
-		this->ID[i]=*(byte*)(0X1FFFF7E8+i);
-	}
-	this->FlashSize=*(ushort*)(0X1FFFF7E0);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+    GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); //关闭jtag，保留swd	
+    this->FlashSize = *(uint16_t*)(0X1FFFF7E0); // 容量
+
+    for (int i = 0; i < 12; i++)
+    {
+        this->ID[i] = *(byte*)(0X1FFFF7E8 + i);
+    }
+    this->FlashSize = *(ushort*)(0X1FFFF7E0);
 }
-uint TSys::AddTask(void(*callback)(void),void* para, uint firstms, int periodms, const char *name)
+
+uint TSys::AddTask(void(*callback)(void), void *para, uint firstms, int periodms, const char *name)
 {
-	return this->task.AddTask(callback,para,firstms,periodms,name);
+    return this->task.AddTask(callback, para, firstms, periodms, name);
 }
+
 //间隔1ms调用一次
 void TSys::TimeTick()
 {
-	this->task.TimeTick();	
-	Time.Current++;
-	
+    this->task.TimeTick();
+    Time.Current++;
+
 }
+
 //启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
 void TSys::Start()
-{	
-	this->task.Start();
+{
+    this->task.Start();
     while (true)
     {
         this->Routin();
     }
 }
+
 //运行  
 void TSys::Routin()
 {
-	this->task.Routin();
+    this->task.Routin();
 }
+
 //设置任务参数
-void TSys::SetTask(uint taskid,bool onoff,int delayms)
+void TSys::SetTask(uint taskid, bool onoff, int delayms)
 {
-	this->task.SetTask(taskid,onoff,delayms);
+    this->task.SetTask(taskid, onoff, delayms);
 }
+
 //显示系统信息
 void TSys::ShowInfo()
 {
     printf("STD_Embedded_Team::STD0801 Code:0801 Ver:0.0.6113 Build:2016-01-01\n");
-    printf("STDOS::STM32F103C8 72MHz Flash:%dk RAM:20k\n",this->FlashSize);
+    printf("STDOS::STM32F103C8 72MHz Flash:%dk RAM:20k\n", this->FlashSize);
     printf("DevID:0x0414 RevID:0x1309\n");
     printf("CPUID:0x412fc231 ARM:ARMv7-M Cortex-M3: R1p2\n");
     printf("Heap :(0x20000720, 0x20010000) = 0xf8e0 (62k)\n");
     printf("Stack:(0x20001720, 0x20010000) = 0xe8e0 (58k)\n");
     printf("ChipType:0x42455633 3\n");
-    printf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\n",ID[0],ID[1],ID[2],ID[3],ID[4],ID[5],ID[6],ID[7],ID[8],ID[9],ID[10],ID[11]);
+    printf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\n", ID[0], ID[1], ID[2], ID[3], ID[4], ID[5], ID[6], ID[7], ID[8], ID[9], ID[10], ID[11]);
     printf("Time : 2016-12-28 10:56:32\n");
     printf("Support: http://www.armku.com\n");
 }
@@ -142,7 +148,7 @@ void TSys::Remove(uint taskid){
     //systick中断服务函数,使用ucos时用到
     void SysTick_Handler(void)
     {
-        Sys.TimeTick();		
+        Sys.TimeTick();
     }
 
     //延时nus
@@ -171,6 +177,37 @@ void TSys::Remove(uint taskid){
                 //时间超过/等于要延迟的时间,则退出.
             }
         };
+    }
+	 //以下为汇编函数
+    void WFI_SET(void); //执行WFI指令
+    void INTX_DISABLE(void); //关闭所有中断
+    void INTX_ENABLE(void); //开启所有中断
+    void MSR_MSP(uint addr); //设置堆栈地址
+    //THUMB指令不支持汇编内联
+    //采用如下方法实现执行汇编指令WFI  
+    void WFI_SET(void)
+    {
+        __ASM volatile("wfi");
+    }
+
+    //关闭所有中断
+    void INTX_DISABLE(void)
+    {
+        __ASM volatile("cpsid i");
+    }
+
+    //开启所有中断
+    void INTX_ENABLE(void)
+    {
+        __ASM volatile("cpsie i");
+    }
+
+    //设置栈顶地址
+    //addr:栈顶地址
+    __asm void MSR_MSP(uint addr)
+    {
+        MSR MSP, r0  //set Main Stack value
+        BX r14
     }
     #ifdef __cplusplus
     }

@@ -2,7 +2,6 @@
 
 #include <stdio.h>
 #include "Type.h"
-#include "sys.h" 
 #ifdef __cplusplus
     extern "C"
     {
