@@ -27,10 +27,10 @@ typedef enum
 	P0 = 0XFFFF
 }PinPort;
 
-class BasePort
+class Port
 {
     public:
-        BasePort(PinPort pin);		
+        Port(PinPort pin);		
 		void Write(const bool value);//写入值，true：高电平，false：低电平
 		void operator = (const bool value);//写入值，true:高电平 false:低电平
 		void operator = (const byte value);//写入值，其他:高电平 0:低电平

@@ -580,9 +580,9 @@
           <GroupName>Peripheral</GroupName>
           <Files>
             <File>
-              <FileName>BasePort.cpp</FileName>
+              <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\BasePort.cpp</FilePath>
+              <FilePath>..\SYSTEM\Peripheral\src\Port.cpp</FilePath>
             </File>
             <File>
               <FileName>OutputPort.cpp</FileName>
@@ -1507,9 +1507,9 @@
           <GroupName>Peripheral</GroupName>
           <Files>
             <File>
-              <FileName>BasePort.cpp</FileName>
+              <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\BasePort.cpp</FilePath>
+              <FilePath>..\SYSTEM\Peripheral\src\Port.cpp</FilePath>
             </File>
             <File>
               <FileName>OutputPort.cpp</FileName>

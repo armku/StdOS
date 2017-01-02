@@ -1,11 +1,11 @@
 #pragma once
 
-#include "BasePort.h"
+#include "Port.h"
 
 //回调函数定义 down指示按下还是弹起触发
 typedef void(*BtnInCallback)(PinPort pin, bool down);
 
-class InputPort: protected BasePort
+class InputPort: protected Port
 {
     public:
         InputPort(PinPort pin, byte invert = 2);

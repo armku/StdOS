@@ -1,7 +1,7 @@
 #include "stm32f10x_exti.h"
 #include "InputPort.h"
 
-InputPort::InputPort(PinPort pin,byte invert):BasePort(pin)
+InputPort::InputPort(PinPort pin,byte invert):Port(pin)
 {
 	this->SetModeOut_PP();
 	switch(invert)
@@ -153,7 +153,7 @@ extern "C"
 				
         bool value;
                 
-        value = BasePort::ReadPinPort(state->Pin); // 获取引脚状态
+        value = Port::ReadPinPort(state->Pin); // 获取引脚状态
         
         if (state->Handler)
         {

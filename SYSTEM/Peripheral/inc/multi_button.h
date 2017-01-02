@@ -4,7 +4,7 @@
  * Copyright (c) 2016 Zibin Zheng <znbin@qq.com>
  * All rights reserved
  
- BasePort key2(PC13);
+ Port key2(PC13);
  btn2.attach(SINGLE_CLICK, BTN2_SINGLE_CLICK_Handler);
  void btn2ticks()
 {
@@ -14,7 +14,7 @@
 
 
 #include "Type.h"
-#include "BasePort.h"
+#include "Port.h"
 
 //According to your need to modify the constants.
 #define TICKS_INTERVAL    5	//ms //按键时间间隔
@@ -37,7 +37,7 @@ class CButton
         void ticks();
         PressEvent get_button_event(); //获取当前按键状态
     private:
-        BasePort *pPin;    
+        Port *pPin;    
         struct Button
         {
                 ushort ticks;

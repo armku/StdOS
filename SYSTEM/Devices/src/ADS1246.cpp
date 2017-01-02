@@ -59,9 +59,9 @@
 CADS1246::CADS1246(PinPort pincs, PinPort pinsck, PinPort pindin, PinPort pindout, PinPort pinrd, PinPort pinreset)
 {
     this->pspi = new CSoftSpi(pincs, pinsck, pindin, pindout,0);
-    this->ppinrd = new BasePort(pinrd);
+    this->ppinrd = new Port(pinrd);
     this->ppinrd->SetModeIN_FLOATING();
-    this->ppinreset = new BasePort(pinreset);
+    this->ppinreset = new Port(pinreset);
     this->ppinreset->SetModeOut_PP();
     this->ppinreset->Reset();
 }

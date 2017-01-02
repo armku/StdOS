@@ -3,8 +3,8 @@
 
 CSoftI2C::CSoftI2C(PinPort pinscl, PinPort pinsda, uint nus)
 {
-    this->psck = new BasePort(pinscl);
-    this->psda = new BasePort(pinsda);
+    this->psck = new Port(pinscl);
+    this->psda = new Port(pinsda);
     this->delayus = nus;
 
     this->psck->SetModeOut_OD();

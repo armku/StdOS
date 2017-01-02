@@ -1,5 +1,5 @@
 #include "AD7689.h"
-#include "BasePort.h"
+#include "Port.h"
 
 //配置信息
 #define CFG		1	//配置更新	0：保持当前配置设置，1：覆盖寄存器的内容
@@ -12,10 +12,10 @@
 //0-本次读取的数据缓存保存位置(n-2); 2-AD7689通道选择
 CAD7689::CAD7689(PinPort pinsck, PinPort pinsdi, PinPort pinsdo, PinPort pincnv)
 {
-    this->ppinsck = new BasePort(pinsck);
-    this->ppinsdi = new BasePort(pinsdi);
-    this->ppinsdo = new BasePort(pinsdo);
-    this->ppincnv = new BasePort(pincnv);
+    this->ppinsck = new Port(pinsck);
+    this->ppinsdi = new Port(pinsdi);
+    this->ppinsdo = new Port(pinsdo);
+    this->ppincnv = new Port(pincnv);
 
     for (byte i = 0; i < MAXCH; i++)
     {

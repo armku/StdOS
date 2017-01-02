@@ -27,10 +27,10 @@
 
 CW25Qxxx::CW25Qxxx(PinPort pinscs,PinPort pinsclk,PinPort pinsmiso,PinPort pinsmosi,ESpiChannel spichannel)
 {
-	this->pincs=new BasePort(pinscs);
-	this->pinclk=new BasePort(pinsclk);
-	this->pinmiso=new BasePort(pinsmiso);
-	this->pinmosi=new BasePort(pinsmosi);
+	this->pincs=new Port(pinscs);
+	this->pinclk=new Port(pinsclk);
+	this->pinmiso=new Port(pinsmiso);
+	this->pinmosi=new Port(pinsmosi);
 	this->spi=new CHardSpi(spichannel);
 	
 	this->pincs->SetModeOut_PP();

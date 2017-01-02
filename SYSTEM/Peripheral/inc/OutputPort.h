@@ -1,8 +1,8 @@
 #pragma once
 
-#include "BasePort.h"
+#include "Port.h"
 
-class OutputPort:protected BasePort
+class OutputPort:protected Port
 {
 	public:
 		OutputPort(PinPort pin,byte invert=2);

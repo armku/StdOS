@@ -14,8 +14,8 @@ class CADS1246
         byte Check(void); //AD检查，正常返回0
     private:
         CSoftSpi *pspi; //SPI接口
-        BasePort *ppinrd; //数据准备好接口
-        BasePort *ppinreset; //复位接口
+        Port *ppinrd; //数据准备好接口
+        Port *ppinreset; //复位接口
     private:
         float decodead(byte *da);
 

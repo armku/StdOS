@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Type.h"
-#include "BasePort.h"
+#include "Port.h"
 
 #define MAXCH	8
 #define CHDELAY	2	//通道切换延时时间，用于数据稳定
@@ -26,9 +26,9 @@ class CAD7689
         float volt[MAXCH]; //电压值
         byte chCurrent; //当前通道
         byte chDelayCnt; //通道延时时间，用于数据稳定
-        BasePort *ppinsck;
-        BasePort *ppinsdi;
-        BasePort *ppinsdo;
-        BasePort *ppincnv;
+        Port *ppinsck;
+        Port *ppinsdi;
+        Port *ppinsdo;
+        Port *ppincnv;
         byte getNextCH(); //获取下次转换通道
 };

@@ -1,5 +1,5 @@
 #include "stm32f10x.h"
-#include "BasePort.h"
+#include "Port.h"
 // 获取组和针脚
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
 #define _PORT(PIN) (1 << ((PIN) & (ushort)0x0F))
@@ -7,12 +7,12 @@
 #define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
-BasePort::BasePort(PinPort pin)
+Port::Port(PinPort pin)
 {
     this->pin = pin;
 }
 //写入值，true：高电平，false：低电平
-void BasePort::Write(const bool value)
+void Port::Write(const bool value)
 {
 	if(value)
 	{
@@ -24,17 +24,17 @@ void BasePort::Write(const bool value)
 	}
 }
 //写入值，true:高电平 false:低电平
-void BasePort::operator = (const bool value)
+void Port::operator = (const bool value)
 {
 	this->Write(value);
 }
 //写入值，其他:高电平 0:低电平
-void BasePort::operator = (const byte value)
+void Port::operator = (const byte value)
 {
 	this->Write((bool)value);
 }
 ////引脚模式
-void BasePort::SetMode(PIN_MODE mode)
+void Port::SetMode(PIN_MODE mode)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
     RCC_APB2PeriphClockCmd(_RCC_APB2(pin), ENABLE);
@@ -75,64 +75,64 @@ void BasePort::SetMode(PIN_MODE mode)
     GPIO_Init(_GROUP(pin), &GPIO_InitStructure);
 }
 
-void BasePort::SetModeAIN()
+void Port::SetModeAIN()
 {
     this->SetMode(AIN);
 }
 
-void BasePort::SetModeIN_FLOATING()
+void Port::SetModeIN_FLOATING()
 {
     this->SetMode(INPUT);
 }
 
-void BasePort::SetModeINPUT_IPD()
+void Port::SetModeINPUT_IPD()
 {
     this->SetMode(INPUT_PD);
 }
 
-void BasePort::SetModeINPUT_IPU()
+void Port::SetModeINPUT_IPU()
 {
     this->SetMode(INPUT_PU);
 }
 
-void BasePort::SetModeOut_OD()
+void Port::SetModeOut_OD()
 {
     this->SetMode(OUTPUT_OD);
 }
 
-void BasePort::SetModeOut_PP()
+void Port::SetModeOut_PP()
 {
     this->SetMode(OUTPUT_PP);
 }
 
-void BasePort::SetModeAF_OD()
+void Port::SetModeAF_OD()
 {
     this->SetMode(AF_OD);
 }
 
-void BasePort::SetModeAF_PP()
+void Port::SetModeAF_PP()
 {
     this->SetMode(AF_PP);
 }
 
-void BasePort::Set()
+void Port::Set()
 {
     this->pinbit = 1;
     GPIO_SetBits(_GROUP(pin), _PORT(pin));
 }
 
-void BasePort::Reset()
+void Port::Reset()
 {
     this->pinbit = 0;
     GPIO_ResetBits(_GROUP(pin), _PORT(pin));
 }
 
-byte BasePort::Read(void)
+byte Port::Read(void)
 {
     return ReadPinPort(this->pin);
 }
 //读取端口状态
-bool BasePort::ReadPinPort(PinPort pin)
+bool Port::ReadPinPort(PinPort pin)
 {
 	 return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
 }

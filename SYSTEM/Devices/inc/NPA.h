@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Type.h"
-#include "BasePort.h"
+#include "Port.h"
 #include "SoftI2C.h"
 
 class CNPA
