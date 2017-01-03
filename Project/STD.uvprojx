@@ -584,91 +584,6 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\Port.cpp</FilePath>
             </File>
-            <File>
-              <FileName>OutputPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\OutputPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InputPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\InputPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AlternatePort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\AlternatePort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AnalogInPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\AnalogInPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>multi_button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\multi_button.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HardSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\HardSpi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SoftSpi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\I2C.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftI2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SoftI2C.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pwm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Pwm.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FIFORing.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\FIFORing.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\usart.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ITransport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -679,52 +594,10 @@
               <FileType>5</FileType>
               <FilePath>..\SYSTEM\USMART\readme.txt</FilePath>
             </File>
-            <File>
-              <FileName>usmart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\USMART\src\usmart.c</FilePath>
-            </File>
-            <File>
-              <FileName>usmart_config.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\USMART\src\usmart_config.c</FilePath>
-            </File>
-            <File>
-              <FileName>usmart_str.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\USMART\src\usmart_str.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Devices</GroupName>
-          <Files>
-            <File>
-              <FileName>AD7689.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\AD7689.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1246.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\ADS1246.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NPA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\NPA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W24xxx.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\W24xxx.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>w25qxx.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\w25qxx.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>NET</GroupName>
@@ -1511,91 +1384,6 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\Port.cpp</FilePath>
             </File>
-            <File>
-              <FileName>OutputPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\OutputPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InputPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\InputPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AlternatePort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\AlternatePort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AnalogInPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\AnalogInPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>multi_button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\multi_button.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HardSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\HardSpi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SoftSpi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\I2C.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftI2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SoftI2C.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pwm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Pwm.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FIFORing.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\FIFORing.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\usart.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ITransport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1606,52 +1394,10 @@
               <FileType>5</FileType>
               <FilePath>..\SYSTEM\USMART\readme.txt</FilePath>
             </File>
-            <File>
-              <FileName>usmart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\USMART\src\usmart.c</FilePath>
-            </File>
-            <File>
-              <FileName>usmart_config.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\USMART\src\usmart_config.c</FilePath>
-            </File>
-            <File>
-              <FileName>usmart_str.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\USMART\src\usmart_str.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Devices</GroupName>
-          <Files>
-            <File>
-              <FileName>AD7689.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\AD7689.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1246.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\ADS1246.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NPA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\NPA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W24xxx.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\W24xxx.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>w25qxx.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\w25qxx.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>NET</GroupName>
