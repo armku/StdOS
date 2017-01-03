@@ -9,7 +9,7 @@
 typedef enum
 {
 	COM1=0,COM2,COM3,COM4,COM5,COM_NONE=0XFF
-}MessagePort_T;//端口号
+}COM_Def;//端口号
 
 // 使用何种模块的宏定义
 #define using(module) Sys.module.Init = T##module##_Init;
@@ -23,7 +23,7 @@ typedef enum
 class TSys:public Object
 {
 	public:
-		TSys(uint clock =72000000,MessagePort_T messagePort=COM1);
+		TSys(uint clock =72000000,byte messagePort=COM1);
 		void Init();//初始化
 		void Start();//启动系统任务调度，该函数内部为死循环。
 		virtual void Show(bool newLine=false) const;
@@ -41,7 +41,7 @@ class TSys:public Object
 		void Routin(); //运行  
 	public:
 		uint Clock;//系统时钟
-		MessagePort_T MessagePort;//调试接口
+		byte MessagePort;//调试接口
 	public:
 		byte ID[12];
 		ushort FlashSize;

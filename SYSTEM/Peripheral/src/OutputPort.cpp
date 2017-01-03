@@ -1,5 +1,9 @@
 #include "OutputPort.h"
 
+OutputPort::OutputPort():Port()
+{
+}
+
 OutputPort::OutputPort(PinPort pin,byte invert):Port(pin)
 {
 	this->Init(pin,invert);

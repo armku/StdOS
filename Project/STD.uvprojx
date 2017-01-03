@@ -605,14 +605,9 @@
               <FilePath>..\SYSTEM\Peripheral\src\AnalogInPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>ITransport.cpp</FileName>
+              <FileName>multi_button.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
+              <FilePath>..\SYSTEM\Peripheral\src\multi_button.cpp</FilePath>
             </File>
             <File>
               <FileName>Spi.cpp</FileName>
@@ -640,11 +635,6 @@
               <FilePath>..\SYSTEM\Peripheral\src\SoftI2C.cpp</FilePath>
             </File>
             <File>
-              <FileName>multi_button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\multi_button.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Pwm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\Pwm.cpp</FilePath>
@@ -655,19 +645,29 @@
               <FilePath>..\SYSTEM\Peripheral\src\WatchDog.cpp</FilePath>
             </File>
             <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\usart.c</FilePath>
-            </File>
-            <File>
               <FileName>FIFORing.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\FIFORing.cpp</FilePath>
             </File>
             <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\usart.c</FilePath>
+            </File>
+            <File>
               <FileName>usart.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\usart.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ITransport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1532,14 +1532,9 @@
               <FilePath>..\SYSTEM\Peripheral\src\AnalogInPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>ITransport.cpp</FileName>
+              <FileName>multi_button.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
+              <FilePath>..\SYSTEM\Peripheral\src\multi_button.cpp</FilePath>
             </File>
             <File>
               <FileName>Spi.cpp</FileName>
@@ -1567,11 +1562,6 @@
               <FilePath>..\SYSTEM\Peripheral\src\SoftI2C.cpp</FilePath>
             </File>
             <File>
-              <FileName>multi_button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\multi_button.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Pwm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\Pwm.cpp</FilePath>
@@ -1582,19 +1572,29 @@
               <FilePath>..\SYSTEM\Peripheral\src\WatchDog.cpp</FilePath>
             </File>
             <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\usart.c</FilePath>
-            </File>
-            <File>
               <FileName>FIFORing.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\FIFORing.cpp</FilePath>
             </File>
             <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\usart.c</FilePath>
+            </File>
+            <File>
               <FileName>usart.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\usart.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ITransport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
             </File>
           </Files>
         </Group>

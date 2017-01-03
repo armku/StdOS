@@ -8,6 +8,7 @@ typedef void(*BtnInCallback)(PinPort pin, bool down);
 class InputPort: protected Port
 {
     public:
+		InputPort();
         InputPort(PinPort pin, byte invert = 2);
         void Init();
         //void Open();	

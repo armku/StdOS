@@ -1,6 +1,11 @@
 #include "stm32f10x_exti.h"
 #include "InputPort.h"
 
+InputPort::InputPort():Port()
+{
+	this->pin=P0;
+}
+
 InputPort::InputPort(PinPort pin,byte invert):Port(pin)
 {
 	this->SetModeOut_PP();

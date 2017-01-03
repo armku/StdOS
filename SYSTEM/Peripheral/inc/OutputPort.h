@@ -5,6 +5,7 @@
 class OutputPort:protected Port
 {
 	public:
+		OutputPort();
 		OutputPort(PinPort pin,byte invert=2);
 		void Init(PinPort pin,byte invert=2);
 		void Write(bool onoff);//Êä³ö¿ª¹Ø

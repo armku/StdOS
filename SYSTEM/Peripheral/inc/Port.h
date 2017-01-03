@@ -30,6 +30,7 @@ typedef enum
 class Port
 {
     public:
+		Port();
         Port(PinPort pin);		
 		void Write(const bool value);//写入值，true：高电平，false：低电平
 		void operator = (const bool value);//写入值，true:高电平 false:低电平
@@ -42,7 +43,8 @@ class Port
         void SetModeOut_PP();
         void SetModeAF_OD();
         void SetModeAF_PP();
-        void Set(); //设置引脚
+        void Set(); //设置高电平
+		void Set(PinPort pin); //设置引脚
         void Reset(); //复位引脚        
         byte Read(void); 
 		static bool ReadPinPort(PinPort pin);//读取端口状态

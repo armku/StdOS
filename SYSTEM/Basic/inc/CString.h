@@ -28,6 +28,7 @@
 class String:public Array
 {
 	public:
+		String(char* buf);
 		String(byte* buf,ushort length);
 		void Concat();
 		
