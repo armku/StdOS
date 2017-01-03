@@ -25,7 +25,7 @@ static byte fac_us = 0; //us延时倍乘数
 TSys Sys; //系统参数
 TTime Time; //系统时间，不建议用户直接使用
 
-TSys::TSys(uint clock, byte messagePort)
+TSys::TSys(uint clock, MessagePort_T messagePort)
 {
     this->Clock = clock;
     this->MessagePort = messagePort;

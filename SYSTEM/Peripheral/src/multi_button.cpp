@@ -9,7 +9,7 @@
 ///*默认按键去抖延时   70ms*/
 //static byte shake_time = 70;
 
-CButton::CButton(Pin pin, byte active_level,byte DownBit)
+CButton::CButton(PinPort pin, byte active_level,byte DownBit)
 {
     this->pPin = new Port(pin);
     this->pPin->SetModeINPUT_IPU();

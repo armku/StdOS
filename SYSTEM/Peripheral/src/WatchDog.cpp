@@ -6,6 +6,9 @@ CWatchDog::CWatchDog(uint ms)
     this->timeout = ms;
 }
 
+CWatchDog::~CWatchDog(){
+
+}
 byte CWatchDog::Init()
 {
     byte prv = IWDG_Prescaler_64;

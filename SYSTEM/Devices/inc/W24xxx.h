@@ -11,7 +11,7 @@ typedef enum
 class CW24xxx
 {
     public:
-        CW24xxx(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr = 0xA0, uint wnms = 5); //写延时时间
+        CW24xxx(PinPort pinsck, PinPort pinsda, EW24XXType devtype, byte devaddr = 0xA0, uint wnms = 5); //写延时时间
         ~CW24xxx();
         byte CheckOk();
     public:

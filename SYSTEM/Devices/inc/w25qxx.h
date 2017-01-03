@@ -8,7 +8,7 @@
 class CW25Qxxx
 {
     public:
-        CW25Qxxx(Pin pinscs,Pin pinsclk=PA5,Pin pinsmiso=PA6,Pin pinsmosi=PA7,ESpiChannel spichannel=CHSPI1);
+        CW25Qxxx(PinPort pinscs,PinPort pinsclk=PA5,PinPort pinsmiso=PA6,PinPort pinsmosi=PA7,ESpiChannel spichannel=CHSPI1);
         ~CW25Qxxx();
     public:
         void Init();

@@ -1,8 +1,7 @@
 #include "stm32f10x.h"
 #include "usart.h"
 #include "usart.hpp"
-#include "InputPort.h"
-#include "OutputPort.h"
+#include "Port.h"
 
 void uart_init(uint bound)
 {
@@ -12,8 +11,8 @@ void uart_init(uint bound)
 
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); //使能USART1
 
-    OutputPort tx1(PA9);
-    InputPort rx1(PA10);
+    Port tx1(PA9);
+    Port rx1(PA10);
     tx1.SetModeAF_PP();
     rx1.SetModeIN_FLOATING();
 
@@ -39,8 +38,8 @@ void uart_init(uint bound)
     USART_ClearFlag(USART1, USART_FLAG_TC);
 
     //串口2设置
-    OutputPort tx2(PA2);
-    InputPort rx2(PA3);
+    Port tx2(PA2);
+    Port rx2(PA3);
     tx2.SetModeAF_PP();
     rx2.SetModeIN_FLOATING();
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);

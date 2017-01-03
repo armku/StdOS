@@ -56,7 +56,7 @@
 #define ADC_CMD_SYSGCAL     0x61            //系统增益校准  
 #define ADC_CMD_SELFOCAL    0x62            //系统自校准  
 #define ADC_CMD_RESTRICTED  0xF1            //  
-CADS1246::CADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, Pin pinrd, Pin pinreset)
+CADS1246::CADS1246(PinPort pincs, PinPort pinsck, PinPort pindin, PinPort pindout, PinPort pinrd, PinPort pinreset)
 {
     this->pspi = new CSoftSpi(pincs, pinsck, pindin, pindout,0);
     this->ppinrd = new Port(pinrd);

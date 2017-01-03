@@ -1,7 +1,7 @@
 #include "SoftSpi.h"
 #include "Sys.h"
 
-CSoftSpi::CSoftSpi(Pin pincs, Pin pinsck, Pin pindi, Pin pindo, uint nus)
+CSoftSpi::CSoftSpi(PinPort pincs, PinPort pinsck, PinPort pindi, PinPort pindo, uint nus)
 {
     this->portcs = new Port(pincs);
     this->portsck = new Port(pinsck);

@@ -4,7 +4,7 @@
 class CADS1246
 {
     public:
-        CADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, Pin pinrd, Pin pinreset);
+        CADS1246(PinPort pincs, PinPort pinsck, PinPort pindin, PinPort pindout, PinPort pinrd, PinPort pinreset);
         ~CADS1246();
     public:
         byte ReadReg(byte RegAddr);

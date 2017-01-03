@@ -1,39 +1,10 @@
 #include "OutputPort.h"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#if 0
-OutputPort::OutputPort():Port()
-{
-}
-
-OutputPort::OutputPort(Pin pin,byte invert):Port(pin)
+OutputPort::OutputPort(PinPort pin,byte invert):Port(pin)
 {
 	this->Init(pin,invert);
 }
-void OutputPort::Init(Pin pin,byte invert)
+void OutputPort::Init(PinPort pin,byte invert)
 {
 	this->SetModeOut_PP();
 	switch(invert)
@@ -100,4 +71,3 @@ void OutputPort::Toggle()
         this->Reset();
     }
 }
-#endif

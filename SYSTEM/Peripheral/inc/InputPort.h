@@ -3,13 +3,12 @@
 #include "Port.h"
 
 //回调函数定义 down指示按下还是弹起触发
-typedef void(*BtnInCallback)(Pin pin, bool down);
+typedef void(*BtnInCallback)(PinPort pin, bool down);
 
 class InputPort: protected Port
 {
     public:
-		InputPort();
-        InputPort(Pin pin, byte invert = 2);
+        InputPort(PinPort pin, byte invert = 2);
         void Init();
         //void Open();	
         //void UsePress();//启用事件处理

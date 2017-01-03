@@ -9,7 +9,7 @@
 class CAD7689
 {
     public:
-        CAD7689(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv);
+        CAD7689(PinPort pinsck, PinPort pinsdi, PinPort pinsdo, PinPort pincnv);
         ~CAD7689();
     public:
         void Routin(void); //读取AD值,并切换通道

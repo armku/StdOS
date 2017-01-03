@@ -25,7 +25,7 @@
 
 #define WIP_Flag                  0x01  /* Write In Progress (WIP) flag */
 
-CW25Qxxx::CW25Qxxx(Pin pinscs,Pin pinsclk,Pin pinsmiso,Pin pinsmosi,ESpiChannel spichannel)
+CW25Qxxx::CW25Qxxx(PinPort pinscs,PinPort pinsclk,PinPort pinsmiso,PinPort pinsmosi,ESpiChannel spichannel)
 {
 	this->pincs=new Port(pinscs);
 	this->pinclk=new Port(pinsclk);
