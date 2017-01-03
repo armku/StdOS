@@ -25,12 +25,12 @@ typedef enum
 	PF0,PF1,PF2,PF3,PF4,PF5,PF6,PF7,PF8,PF9,PF10,PF11,PF12,PF13,PF14,PF15,
 	PG0,PG1,PG2,PG3,PG4,PG5,PG6,PG7,PG8,PG9,PG10,PG11,PG12,PG13,PG14,PG15,
 	P0 = 0XFFFF
-}PinPort;
+}Pin;
 
 class Port
 {
     public:
-        Port(PinPort pin);		
+        Port(Pin pin);		
 		void Write(const bool value);//写入值，true：高电平，false：低电平
 		void operator = (const bool value);//写入值，true:高电平 false:低电平
 		void operator = (const byte value);//写入值，其他:高电平 0:低电平
@@ -45,9 +45,9 @@ class Port
         void Set(); //设置引脚
         void Reset(); //复位引脚        
         byte Read(void); 
-		static bool ReadPinPort(PinPort pin);//读取端口状态
+		static bool ReadPinPort(Pin pin);//读取端口状态
     protected:
-        PinPort pin; //引脚号
+        Pin pin; //引脚号
         byte pinbit;
         void SetMode(PIN_MODE mode); //引脚模式		
 };

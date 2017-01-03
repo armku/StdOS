@@ -1,7 +1,7 @@
 #include "stm32f10x_exti.h"
 #include "InputPort.h"
 
-InputPort::InputPort(PinPort pin,byte invert):Port(pin)
+InputPort::InputPort(Pin pin,byte invert):Port(pin)
 {
 	this->SetModeOut_PP();
 	switch(invert)
@@ -75,7 +75,7 @@ void InputPort::Init()
 /* 一共16条中断线，意味着同一条线每一组只能有一个引脚使用中断 */
 typedef struct TIntState
 {
-    PinPort Pin;
+    Pin Pin;
     BtnInCallback Handler;
     bool OldValue;
 } IntState;

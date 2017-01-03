@@ -7,7 +7,7 @@
 #define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
-Port::Port(PinPort pin)
+Port::Port(Pin pin)
 {
     this->pin = pin;
 }
@@ -132,7 +132,7 @@ byte Port::Read(void)
     return ReadPinPort(this->pin);
 }
 //¶ÁÈ¡¶Ë¿Ú×´Ì¬
-bool Port::ReadPinPort(PinPort pin)
+bool Port::ReadPinPort(Pin pin)
 {
 	 return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
 }

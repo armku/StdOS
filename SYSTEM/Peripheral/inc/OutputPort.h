@@ -5,8 +5,8 @@
 class OutputPort:protected Port
 {
 	public:
-		OutputPort(PinPort pin,byte invert=2);
-		void Init(PinPort pin,byte invert=2);
+		OutputPort(Pin pin,byte invert=2);
+		void Init(Pin pin,byte invert=2);
 		void Write(bool onoff);//输出开关
 		void Open();
 		void Toggle(); //翻转引脚

@@ -26,7 +26,7 @@ OutputPort led3(PF8,true);
 
 InputPort exti(PC13);//PA1 PB3
 
-void OnKeyPress(PinPort pin, bool onoff)
+void OnKeyPress(Pin pin, bool onoff)
 {
 	if(onoff)
 	{
