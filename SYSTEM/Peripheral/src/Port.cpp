@@ -12,12 +12,12 @@ Port::Port()
 	this->pin=P0;
 }
 
-Port::Port(PinPort pin)
+Port::Port(Pin pin)
 {
     this->pin = pin;
 }
 //设置引脚
-void Set(PinPort pin)
+void Set(Pin pin)
 {
 	
 }	
@@ -142,7 +142,7 @@ byte Port::Read(void)
     return ReadPinPort(this->pin);
 }
 //读取端口状态
-bool Port::ReadPinPort(PinPort pin)
+bool Port::ReadPinPort(Pin pin)
 {
 	 return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
 }

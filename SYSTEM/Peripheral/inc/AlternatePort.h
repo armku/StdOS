@@ -6,6 +6,6 @@ class AlternatePort:public OutputPort
 {
 	public:
 		AlternatePort();
-		AlternatePort(PinPort pin);
+		AlternatePort(Pin pin);
 	byte ReadInput();//读取输入电平
 };

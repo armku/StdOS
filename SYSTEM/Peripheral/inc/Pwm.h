@@ -5,7 +5,7 @@
 class PWM: public Port
 {
     public:
-        PWM(PinPort pin, uint frq = 10000, uint duty = 50);
+        PWM(Pin pin, uint frq = 10000, uint duty = 50);
         void Init();
 		void SetOut(ushort pwmValue);//设置输出值
 		void SetOutPercent(float per);//设置输出比例，0-100		

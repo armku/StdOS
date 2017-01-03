@@ -4,7 +4,7 @@ AlternatePort::AlternatePort()
 {
 }
 
-AlternatePort::AlternatePort(PinPort pin):OutputPort(pin)
+AlternatePort::AlternatePort(Pin pin):OutputPort(pin)
 {
 }
 

@@ -7,7 +7,7 @@
 class CNPA
 {
     public:
-        CNPA(PinPort pinsck, PinPort pinsda, byte devAddr = 0X51);
+        CNPA(Pin pinsck, Pin pinsda, byte devAddr = 0X51);
         ~CNPA();
     public:
         void Init(void);

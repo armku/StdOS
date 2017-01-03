@@ -4,11 +4,11 @@ OutputPort::OutputPort():Port()
 {
 }
 
-OutputPort::OutputPort(PinPort pin,byte invert):Port(pin)
+OutputPort::OutputPort(Pin pin,byte invert):Port(pin)
 {
 	this->Init(pin,invert);
 }
-void OutputPort::Init(PinPort pin,byte invert)
+void OutputPort::Init(Pin pin,byte invert)
 {
 	this->SetModeOut_PP();
 	switch(invert)

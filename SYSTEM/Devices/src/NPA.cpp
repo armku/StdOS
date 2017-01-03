@@ -1,6 +1,6 @@
 #include "NPA.h"
 
-CNPA::CNPA(PinPort pinsck, PinPort pinsda, byte devAddr)
+CNPA::CNPA(Pin pinsck, Pin pinsda, byte devAddr)
 {
     this->DEVER_ADDR = devAddr;
     this->pi2c = new CSoftI2C(pinsck, pinsda);
