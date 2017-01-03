@@ -1,1 +1,1 @@
-git.exe pull -v --progress "origin"
+git.exe pull --progress --no-rebase -v "origin"
