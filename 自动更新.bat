@@ -1,0 +1,1 @@
+git.exe pull -v --progress "origin"
