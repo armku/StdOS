@@ -5,8 +5,7 @@
 class CWatchDog
 {
     public:
-        CWatchDog(uint ms = 3000);
-        ~CWatchDog();
+        CWatchDog(uint ms = 3000);       
     public:
         byte Init();
         void Feed(); // Î¹¹·
