@@ -10,6 +10,7 @@
 #include "InputPort.h"
 #include "Sys.h"
 #include "OutputPort.h"
+#include "WatchDog.h"
 
 CFIFORing com1buf; //串口1接收缓冲区
 uint com1timeidle; //串口1空闲时间
@@ -25,6 +26,11 @@ OutputPort led3(PF8,true);
 //按键 PC13 PA0
 
 InputPort exti(PC13);//PA1 PB3
+CWatchDog dog;
+void feeddog()
+{
+	dog.Feed();
+}
 
 void OnKeyPress(Pin pin, bool onoff)
 {
@@ -57,8 +63,10 @@ void STDInit()
 	led2.Write(false);
 	led3.Write(false);
 	Sys.ShowInfo();
+	dog.Init();	
 		
 	Sys.AddTask(softTimers,0,1,1,"1毫秒软件定时器");//1毫秒周期循环
+	Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
 	Sys.AddTask(ledflash,0,5,50,"状态指示灯");
 	Sys.AddTask(eepread,0,10,1000,"测试任务");
 	Sys.Start();
