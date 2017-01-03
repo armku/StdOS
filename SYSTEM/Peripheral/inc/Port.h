@@ -1,5 +1,6 @@
 #pragma once 
 
+#include <stdio.h>
 #include "stm32f10x.h"
 #include "Type.h"
 
@@ -33,6 +34,7 @@ typedef enum
 #else 
     #define GPIO_MAX_SPEED 50
 #endif 
+
 // 端口基类
 // 用于管理一个端口，通过PinBit标识该组的哪些引脚。
 // 子类初始化时先通过SetPort设置端口，备份引脚状态，然后Config通过gpio结构体配置端口，端口销毁时恢复引脚状态
@@ -76,7 +78,7 @@ class Port
         #endif 
 		
 	
-	
+#if 0	
 	
 		//以上为新版
 	public:		
@@ -99,5 +101,6 @@ class Port
     protected:
         Pin pin; //引脚号
         byte pinbit;
-        void SetMode(PIN_MODE mode); //引脚模式		
+        void SetMode(PIN_MODE mode); //引脚模式	
+#endif	
 };

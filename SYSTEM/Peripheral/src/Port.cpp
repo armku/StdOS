@@ -25,7 +25,6 @@ static const int PORT_IRQns[] = {
 
 // 端口基本功能
 #define REGION_Port 1
-#define NULL 0
 #ifdef REGION_Port
 Port::Port()
 {
@@ -223,142 +222,139 @@ bool Port::IsBusy(Pin pin)
 
 
 
+#if 0
 
 
+    //以上为新版
 
-
-
-
-
-//以上为新版
-
-Port::Port(Pin pin)
-{
-    this->pin = pin;
-}
-
-//写入值，true：高电平，false：低电平
-void Port::Write(const bool value)
-{
-	if(value)
-	{
-		this->Set();
-	}
-	else
-	{
-		this->Reset();
-	}
-}
-//写入值，true:高电平 false:低电平
-void Port::operator = (const bool value)
-{
-	this->Write(value);
-}
-//写入值，其他:高电平 0:低电平
-void Port::operator = (const byte value)
-{
-	this->Write((bool)value);
-}
-////引脚模式
-void Port::SetMode(PIN_MODE mode)
-{
-    GPIO_InitTypeDef GPIO_InitStructure;
-    RCC_APB2PeriphClockCmd(_RCC_APB2(pin), ENABLE);
-
-    switch (mode)
+    Port::Port(Pin pin)
     {
-        case AIN:
-            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
-            break;
-        case INPUT:
-            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-            break;
-        case INPUT_PD:
-            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
-            break;
-        case INPUT_PU:
-            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
-            break;
-        case OUTPUT_OD:
-            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
-            break;
-        case OUTPUT_PP:
-            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-            break;
-        case AF_OD:
-            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
-            break;
-        case AF_PP:
-            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-            break;
-        default:
-            break;
+        this->pin = pin;
     }
-    /*设置引脚速率为50MHz */
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Pin = _PORT(this->pin);
 
-    GPIO_Init(_GROUP(pin), &GPIO_InitStructure);
-}
+    //写入值，true：高电平，false：低电平
+    void Port::Write(const bool value)
+    {
+        if (value)
+        {
+            this->Set();
+        }
+        else
+        {
+            this->Reset();
+        }
+    }
+    //写入值，true:高电平 false:低电平
+    void Port::operator = (const bool value)
+    {
+        this->Write(value);
+    }
+    //写入值，其他:高电平 0:低电平
+    void Port::operator = (const byte value)
+    {
+        this->Write((bool)value);
+    }
+    ////引脚模式
+    void Port::SetMode(PIN_MODE mode)
+    {
+        GPIO_InitTypeDef GPIO_InitStructure;
+        RCC_APB2PeriphClockCmd(_RCC_APB2(pin), ENABLE);
 
-void Port::SetModeAIN()
-{
-    this->SetMode(AIN);
-}
+        switch (mode)
+        {
+            case AIN:
+                GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+                break;
+            case INPUT:
+                GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+                break;
+            case INPUT_PD:
+                GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
+                break;
+            case INPUT_PU:
+                GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+                break;
+            case OUTPUT_OD:
+                GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
+                break;
+            case OUTPUT_PP:
+                GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+                break;
+            case AF_OD:
+                GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
+                break;
+            case AF_PP:
+                GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+                break;
+            default:
+                break;
+        }
+        /*设置引脚速率为50MHz */
+        GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+        GPIO_InitStructure.GPIO_Pin = _PORT(this->pin);
 
-void Port::SetModeIN_FLOATING()
-{
-    this->SetMode(INPUT);
-}
+        GPIO_Init(_GROUP(pin), &GPIO_InitStructure);
+    }
 
-void Port::SetModeINPUT_IPD()
-{
-    this->SetMode(INPUT_PD);
-}
+    void Port::SetModeAIN()
+    {
+        this->SetMode(AIN);
+    }
 
-void Port::SetModeINPUT_IPU()
-{
-    this->SetMode(INPUT_PU);
-}
+    void Port::SetModeIN_FLOATING()
+    {
+        this->SetMode(INPUT);
+    }
 
-void Port::SetModeOut_OD()
-{
-    this->SetMode(OUTPUT_OD);
-}
+    void Port::SetModeINPUT_IPD()
+    {
+        this->SetMode(INPUT_PD);
+    }
 
-void Port::SetModeOut_PP()
-{
-    this->SetMode(OUTPUT_PP);
-}
+    void Port::SetModeINPUT_IPU()
+    {
+        this->SetMode(INPUT_PU);
+    }
 
-void Port::SetModeAF_OD()
-{
-    this->SetMode(AF_OD);
-}
+    void Port::SetModeOut_OD()
+    {
+        this->SetMode(OUTPUT_OD);
+    }
 
-void Port::SetModeAF_PP()
-{
-    this->SetMode(AF_PP);
-}
+    void Port::SetModeOut_PP()
+    {
+        this->SetMode(OUTPUT_PP);
+    }
 
-void Port::Set()
-{
-    this->pinbit = 1;
-    GPIO_SetBits(_GROUP(pin), _PORT(pin));
-}
+    void Port::SetModeAF_OD()
+    {
+        this->SetMode(AF_OD);
+    }
 
-void Port::Reset()
-{
-    this->pinbit = 0;
-    GPIO_ResetBits(_GROUP(pin), _PORT(pin));
-}
+    void Port::SetModeAF_PP()
+    {
+        this->SetMode(AF_PP);
+    }
 
-byte Port::Read(void)
-{
-    return ReadPinPort(this->pin);
-}
-//读取端口状态
-bool Port::ReadPinPort(Pin pin)
-{
-	 return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
-}
+    void Port::Set()
+    {
+        this->pinbit = 1;
+        GPIO_SetBits(_GROUP(pin), _PORT(pin));
+    }
+
+    void Port::Reset()
+    {
+        this->pinbit = 0;
+        GPIO_ResetBits(_GROUP(pin), _PORT(pin));
+    }
+
+    byte Port::Read(void)
+    {
+        return ReadPinPort(this->pin);
+    }
+    //读取端口状态
+    bool Port::ReadPinPort(Pin pin)
+    {
+        return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
+    }
+#endif

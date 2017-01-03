@@ -2,6 +2,28 @@
 
 #include "Port.h"
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#if 0
 class OutputPort:protected Port
 {
 	public:
@@ -14,3 +36,4 @@ class OutputPort:protected Port
 	private:
 		bool binvert;//¶Ë¿Ú·´×ª
 };
+#endif

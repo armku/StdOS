@@ -1,5 +1,30 @@
 #include "OutputPort.h"
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#if 0
 OutputPort::OutputPort():Port()
 {
 }
@@ -75,3 +100,4 @@ void OutputPort::Toggle()
         this->Reset();
     }
 }
+#endif
