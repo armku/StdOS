@@ -3,8 +3,9 @@
 #include "ITransport.h"
 #include "Sys.h"
 #include "stm32f10x.h"
-#include "Port.h"
+#include "OutputPort.h"
 #include "InputPort.h"
+#include "AlternatePort.h"
 
 // ´®¿ÚÀà
 class SerialPort: public ITransport

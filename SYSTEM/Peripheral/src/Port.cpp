@@ -17,23 +17,23 @@
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
 #if 0
-#if defined(STM32F1) || defined(STM32F4)
-    static const int PORT_IRQns[] = 
-    {
-        EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
-        EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
-        EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
-    };
-#elif defined(STM32F0)
-    static const int PORT_IRQns[] = 
-    {
-        EXTI0_1_IRQn, EXTI0_1_IRQn,  // 基础
-        EXTI2_3_IRQn, EXTI2_3_IRQn,  // 基础
-        EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn,
-            EXTI4_15_IRQn  // EXTI15_10
-    };
+    #if defined(STM32F1) || defined(STM32F4)
+        static const int PORT_IRQns[] = 
+        {
+            EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
+            EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
+            EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
+        };
+    #elif defined(STM32F0)
+        static const int PORT_IRQns[] = 
+        {
+            EXTI0_1_IRQn, EXTI0_1_IRQn,  // 基础
+            EXTI2_3_IRQn, EXTI2_3_IRQn,  // 基础
+            EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn,
+                EXTI4_15_IRQn  // EXTI15_10
+        };
+    #endif 
 #endif 
-#endif
 
 // 端口基本功能
 #define REGION_Port 1
@@ -262,84 +262,28 @@
 // 引脚配置
 #define REGION_Config 1
 #ifdef REGION_Config
-    void OutputPort::OnConfig(GPIO_InitTypeDef &gpio)
-    {
-        #ifndef STM32F4
-            assert_param(Speed == 2 || Speed == 10 || Speed == 50);
-        #else 
-            assert_param(Speed == 2 || Speed == 25 || Speed == 50 || Speed == 100);
-        #endif 
+    
 
-        Port::OnConfig(gpio);
-
-        switch (Speed)
+    
+    #if 0
+        void InputPort::OnConfig(GPIO_InitTypeDef &gpio)
         {
-            case 2:
-                gpio.GPIO_Speed = GPIO_Speed_2MHz;
-                break;
-                #ifndef STM32F4
-                case 10:
-                    gpio.GPIO_Speed = GPIO_Speed_10MHz;
-                    break;
-                #else 
-                case 25:
-                    gpio.GPIO_Speed = GPIO_Speed_25MHz;
-                    break;
-                case 100:
-                    gpio.GPIO_Speed = GPIO_Speed_100MHz;
-                    break;
-                #endif 
-            case 50:
-                gpio.GPIO_Speed = GPIO_Speed_50MHz;
-                break;
+            Port::OnConfig(gpio);
+
+            #ifdef STM32F1
+                if (Floating)
+                    gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+                else if (PuPd == PuPd_UP)
+                    gpio.GPIO_Mode = GPIO_Mode_IPU;
+                else if (PuPd == PuPd_DOWN)
+                    gpio.GPIO_Mode = GPIO_Mode_IPD;
+                // 这里很不确定，需要根据实际进行调整
+            #else 
+                gpio.GPIO_Mode = GPIO_Mode_IN;
+                //gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
+            #endif 
         }
-
-        #ifdef STM32F1
-            gpio.GPIO_Mode = OpenDrain ? GPIO_Mode_Out_OD : GPIO_Mode_Out_PP;
-        #else 
-            gpio.GPIO_Mode = GPIO_Mode_OUT;
-            gpio.GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
-        #endif 
-
-        // 配置之前，需要根据倒置情况来设定初始状态，也就是在打开端口之前必须明确端口高低状态
-        ushort dat = GPIO_ReadOutputData(Group);
-        if (!Invert)
-            dat &= ~PinBit;
-        else
-            dat |= PinBit;
-        GPIO_Write(Group, dat);
-    }
-
-    void AlternatePort::OnConfig(GPIO_InitTypeDef &gpio)
-    {
-        OutputPort::OnConfig(gpio);
-
-        #ifdef STM32F1
-            gpio.GPIO_Mode = OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
-        #else 
-            gpio.GPIO_Mode = GPIO_Mode_AF;
-            gpio.GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
-        #endif 
-    }
-#if 0
-    void InputPort::OnConfig(GPIO_InitTypeDef &gpio)
-    {
-        Port::OnConfig(gpio);
-
-        #ifdef STM32F1
-            if (Floating)
-                gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-            else if (PuPd == PuPd_UP)
-                gpio.GPIO_Mode = GPIO_Mode_IPU;
-            else if (PuPd == PuPd_DOWN)
-                gpio.GPIO_Mode = GPIO_Mode_IPD;
-            // 这里很不确定，需要根据实际进行调整
-        #else 
-            gpio.GPIO_Mode = GPIO_Mode_IN;
-            //gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
-        #endif 
-    }
-#endif
+    #endif 
     void AnalogInPort::OnConfig(GPIO_InitTypeDef &gpio)
     {
         Port::OnConfig(gpio);
@@ -356,70 +300,7 @@
 // 输出端口
 #define REGION_Output 1
 #ifdef REGION_Output
-    ushort OutputPort::ReadGroup() // 整组读取
-    {
-        return GPIO_ReadOutputData(Group);
-    }
-
-    bool OutputPort::Read()
-    {
-        // 转为bool时会转为0/1
-        bool rs = GPIO_ReadOutputData(Group) &PinBit;
-        return rs ^ Invert;
-    }
-
-    bool OutputPort::ReadInput()
-    {
-        bool rs = GPIO_ReadInputData(Group) &PinBit;
-        return rs ^ Invert;
-    }
-
-    bool OutputPort::Read(Pin pin)
-    {
-        GPIO_TypeDef *group = _GROUP(pin);
-        return (group->IDR >> (pin &0xF)) &1;
-    }
-
-    void OutputPort::Write(bool value)
-    {
-        if (value ^ Invert)
-            GPIO_SetBits(Group, PinBit);
-        else
-            GPIO_ResetBits(Group, PinBit);
-    }
-
-    void OutputPort::WriteGroup(ushort value)
-    {
-        GPIO_Write(Group, value);
-    }
-
-    void OutputPort::Up(uint ms)
-    {
-        Write(true);
-        Sys.Sleep(ms);
-        Write(false);
-    }
-
-    void OutputPort::Blink(uint times, uint ms)
-    {
-        bool flag = true;
-        for (int i = 0; i < times; i++)
-        {
-            Write(flag);
-            flag = !flag;
-            Sys.Sleep(ms);
-        }
-        Write(false);
-    }
-
-    // 设置端口状态
-    void OutputPort::Write(Pin pin, bool value)
-    {
-        if (value)
-            GPIO_SetBits(_GROUP(pin), _PORT(pin));
-        else
-            GPIO_ResetBits(_GROUP(pin), _PORT(pin));
-    }
+    
 #endif 
 
 #if 0

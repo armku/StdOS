@@ -585,6 +585,16 @@
               <FilePath>..\SYSTEM\Peripheral\src\Port.cpp</FilePath>
             </File>
             <File>
+              <FileName>OutputPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\OutputPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AlternatePort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\AlternatePort.cpp</FilePath>
+            </File>
+            <File>
               <FileName>InputPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\InputPort.cpp</FilePath>
@@ -1500,6 +1510,16 @@
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OutputPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\OutputPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AlternatePort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\AlternatePort.cpp</FilePath>
             </File>
             <File>
               <FileName>InputPort.cpp</FileName>
