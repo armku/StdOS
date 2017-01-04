@@ -585,24 +585,9 @@
               <FilePath>..\SYSTEM\Peripheral\src\Port.cpp</FilePath>
             </File>
             <File>
-              <FileName>OutputPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\OutputPort.cpp</FilePath>
-            </File>
-            <File>
               <FileName>InputPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\InputPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AlternatePort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\AlternatePort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AnalogInPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\AnalogInPort.cpp</FilePath>
             </File>
             <File>
               <FileName>ITransport.cpp</FileName>
@@ -1512,24 +1497,9 @@
               <FilePath>..\SYSTEM\Peripheral\src\Port.cpp</FilePath>
             </File>
             <File>
-              <FileName>OutputPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\OutputPort.cpp</FilePath>
-            </File>
-            <File>
               <FileName>InputPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\InputPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AlternatePort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\AlternatePort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AnalogInPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\AnalogInPort.cpp</FilePath>
             </File>
             <File>
               <FileName>ITransport.cpp</FileName>

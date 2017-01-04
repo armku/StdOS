@@ -9,8 +9,8 @@
 #include "multi_button.h"
 #include "InputPort.h"
 #include "Sys.h"
-#include "OutputPort.h"
 #include "WatchDog.h"
+#include "Port.h"
 
 CFIFORing com1buf; //串口1接收缓冲区
 uint com1timeidle; //串口1空闲时间
@@ -21,12 +21,13 @@ void eepread();
 //1ms软件定时器
 void softTimers();
 InputPort led1(PB0,true);
-InputPort led2(PF7,true);
+OutputPort led2(PF7,true);
 InputPort led3(PF8,true);
 InputPort TestPort(PB0);
 //按键 PC13 PA0
 
 InputPort exti(PC13);//PA1 PB3
+ 
 WatchDog dog(3000);
 void feeddog()
 {
@@ -43,7 +44,7 @@ void OnKeyPress(Pin pin, bool onoff)
 	{
 		led1.Write(false);
 	}	
-	led2.Toggle();
+	//led2.Toggle();
 	printf("中断引脚：%d 值%d \n",pin,onoff);
 }
 /*
@@ -80,6 +81,10 @@ void ledflash()
 		
 	//TestPort=true;
 	//TestPort=false;
+	
+	//led2.Write(true);
+	//led2.Write(false);
+	led2=!led2;
 }
 
 void eepread()
