@@ -1,8 +1,9 @@
 #include "stm32f10x_exti.h"
 #include "InputPort.h"
 
-InputPort::InputPort(Pin pin,byte invert):Port(pin)
+InputPort::InputPort(Pin pin,byte invert):Port()
 {
+	this->Set(pin);
 	this->SetModeOut_PP();
 	switch(invert)
 	{

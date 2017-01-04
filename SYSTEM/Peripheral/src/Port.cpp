@@ -47,10 +47,6 @@ Port& Port::Set(Pin pin)
 
 
 
-Port::Port(Pin pin)
-{
-    this->Set(pin);
-}
 //写入值，true：高电平，false：低电平
 void Port::Write(const bool value)
 {
