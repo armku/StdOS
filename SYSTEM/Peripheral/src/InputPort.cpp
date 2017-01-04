@@ -8,6 +8,10 @@
 #define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
+InputPort::InputPort()
+{
+	this->_Pin=P0;
+}
 InputPort::InputPort(Pin pin)
 {
 	this->_Pin = pin;

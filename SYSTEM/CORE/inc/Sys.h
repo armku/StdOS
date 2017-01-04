@@ -3,13 +3,14 @@
 #include "Type.h"
 #include "Object.h"
 #include "Task.h"
+#include "TTime.h"
 
 /* 串口定义 */
 
 typedef enum
 {
 	COM1=0,COM2,COM3,COM4,COM5,COM_NONE=0XFF
-}MessagePort_T;//端口号
+}COM_Def;//端口号
 typedef enum
 {
     AIN = 0x0,  //模拟输入 
@@ -21,6 +22,9 @@ typedef enum
     AF_OD = 0x1C,  //开漏复用输出
     AF_PP = 0x18  //推挽复用输出
 } PIN_MODE;
+#ifndef NULL
+	#define NULL 0
+#endif
 #define STM32F1    //使用STM32F1系列单片机
 /* 针脚 ------------------------------------------------------------------*/
 //引脚定义
@@ -48,7 +52,7 @@ typedef enum
 class TSys:public Object
 {
 	public:
-		TSys(uint clock =72000000,MessagePort_T messagePort=COM1);
+		TSys(uint clock =72000000,COM_Def messagePort=COM1);
 		void Init();//初始化
 		void Start();//启动系统任务调度，该函数内部为死循环。
 		virtual void Show(bool newLine=false) const;
@@ -66,7 +70,8 @@ class TSys:public Object
 		void Routin(); //运行  
 	public:
 		uint Clock;//系统时钟
-		MessagePort_T MessagePort;//调试接口
+		COM_Def MessagePort;//调试接口
+		byte Inited;//串口用参数
 	public:
 		byte ID[12];
 		ushort FlashSize;
@@ -75,3 +80,4 @@ class TSys:public Object
 	
 };
 extern TSys Sys;//系统参数
+extern TTime Time; //系统时间，不建议用户直接使用
