@@ -23,6 +23,7 @@ void softTimers();
 OutputPort led1(PB0,true);
 OutputPort led2(PF7,true);
 OutputPort led3(PF8,true);
+Port TestPort(PB0);
 //°´¼ü PC13 PA0
 
 InputPort exti(PC13);//PA1 PB3
@@ -76,6 +77,9 @@ void ledflash()
 //	led1.Toggle();
 //	led2.Toggle();
 	led3.Toggle();	
+		
+	TestPort=true;
+	//TestPort=false;
 }
 
 void eepread()

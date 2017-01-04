@@ -24,14 +24,14 @@ void Port::Write(const bool value)
 	}
 }
 //写入值，true:高电平 false:低电平
-void Port::operator = (const bool value)
+void Port::operator = (const bool onoff)
 {
-	this->Write(value);
+	this->Write(onoff);
 }
 //写入值，其他:高电平 0:低电平
-void Port::operator = (const byte value)
+void Port::operator = (const byte hilo)
 {
-	this->Write((bool)value);
+	this->Write((bool)hilo);
 }
 ////引脚模式
 void Port::SetMode(PIN_MODE mode)
