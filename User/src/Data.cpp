@@ -20,10 +20,9 @@ void ledflash();
 void eepread();
 //1ms软件定时器
 void softTimers();
-InputPort led1(PB0,true);
+OutputPort led1(PB0,true);
 OutputPort led2(PF7,true);
-InputPort led3(PF8,true);
-InputPort TestPort(PB0);
+OutputPort led3(PF8,true);
 //按键 PC13 PA0
 
 InputPort exti(PC13);//PA1 PB3
@@ -77,7 +76,7 @@ void ledflash()
 {
 //	led1.Toggle();
 //	led2.Toggle();
-	led3.Toggle();	
+	led3=!led3;	
 		
 	//TestPort=true;
 	//TestPort=false;

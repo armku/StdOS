@@ -8,7 +8,7 @@ typedef void(*BtnInCallback)(Pin pin, bool down);
 class InputPort
 {
     public:
-        InputPort(Pin pin, byte invert = 2);
+        InputPort(Pin pin);
         void Init();
         //void Open();	
         //void UsePress();//启用事件处理
@@ -16,8 +16,6 @@ class InputPort
         //BtnInCallback callBack;//回掉函数
         //uint PressTime;//弹起世间
 		Pin _Pin; // 针脚
-    private:
-        bool binvert; //端口反转
     public:
         void On(); //打开中断
         void Off(); //关闭中断		

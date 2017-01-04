@@ -8,31 +8,11 @@
 #define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
-InputPort::InputPort(Pin pin,byte invert)
+InputPort::InputPort(Pin pin)
 {
 	this->_Pin = pin;
 	this->SetModeOut_PP();
-	switch(invert)
-	{
-	case 0:
-		this->binvert=invert;
-		break;
-	case 1:
-		this->binvert=invert;
-		break;
-	case 2:
-		if(this->Read())
-		{
-		this->binvert=true;
-		}
-		else
-		{
-		this->binvert=false;
-		}
-		break;
-	default:
-		break;
-	}
+	
 	this->SetModeINPUT_IPD();
 
     this->eXTI_Line = EXTI_Line0 << (pin &0X0F);
