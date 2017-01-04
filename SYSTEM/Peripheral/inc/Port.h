@@ -47,7 +47,7 @@ class Port
         byte Read(void); 
 		static bool ReadPinPort(Pin pin);//读取端口状态
     protected:
-        Pin pin; //引脚号
+        Pin _Pin; //引脚号
         byte pinbit;
         void SetMode(PIN_MODE mode); //引脚模式		
 };

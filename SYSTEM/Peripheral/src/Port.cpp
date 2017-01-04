@@ -9,7 +9,7 @@
 
 Port::Port(Pin pin)
 {
-    this->pin = pin;
+    this->_Pin = pin;
 }
 //写入值，true：高电平，false：低电平
 void Port::Write(const bool value)
@@ -37,7 +37,7 @@ void Port::operator = (const int hilo)
 void Port::SetMode(PIN_MODE mode)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
-    RCC_APB2PeriphClockCmd(_RCC_APB2(pin), ENABLE);
+    RCC_APB2PeriphClockCmd(_RCC_APB2(this->_Pin), ENABLE);
 
     switch (mode)
     {
@@ -70,9 +70,9 @@ void Port::SetMode(PIN_MODE mode)
     }
     /*设置引脚速率为50MHz */
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Pin = _PORT(this->pin);
+    GPIO_InitStructure.GPIO_Pin = _PORT(this->_Pin);
 
-    GPIO_Init(_GROUP(pin), &GPIO_InitStructure);
+    GPIO_Init(_GROUP(this->_Pin), &GPIO_InitStructure);
 }
 
 void Port::SetModeAIN()
@@ -118,18 +118,18 @@ void Port::SetModeAF_PP()
 void Port::Set()
 {
     this->pinbit = 1;
-    GPIO_SetBits(_GROUP(pin), _PORT(pin));
+    GPIO_SetBits(_GROUP(_Pin), _PORT(_Pin));
 }
 
 void Port::Reset()
 {
     this->pinbit = 0;
-    GPIO_ResetBits(_GROUP(pin), _PORT(pin));
+    GPIO_ResetBits(_GROUP(_Pin), _PORT(_Pin));
 }
 
 byte Port::Read(void)
 {
-    return ReadPinPort(this->pin);
+    return ReadPinPort(this->_Pin);
 }
 //读取端口状态
 bool Port::ReadPinPort(Pin pin)

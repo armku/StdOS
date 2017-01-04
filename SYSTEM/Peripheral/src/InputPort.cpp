@@ -115,7 +115,7 @@ void InputPort::Off()
 // 注册回调  及中断使能
 void InputPort::Register(BtnInCallback handler)
 {
-    byte pins = this->pin &0x0F;
+    byte pins = this->_Pin &0x0F;
     IntState *state = &State[pins];
     // 注册中断事件
     if (handler)
@@ -128,7 +128,7 @@ void InputPort::Register(BtnInCallback handler)
 //            #endif 
 //            return ;
 //        }
-        state->Pin = this->pin;
+        state->Pin = this->_Pin;
         state->Handler = handler;
     }
     else

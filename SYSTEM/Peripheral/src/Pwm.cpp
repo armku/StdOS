@@ -12,7 +12,7 @@ void PWM::Init()
 {
     TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
     TIM_OCInitTypeDef TIM_OCInitStructure;
-    switch (this->pin)
+    switch (this->_Pin)
     {
 		//TIM2_CH1
 		case PA0:
@@ -286,7 +286,7 @@ void PWM::Init()
 void PWM::SetOut(ushort pwmValue)
 {
     this->duty = pwmValue;
-    switch (this->pin)
+    switch (this->_Pin)
     {
         //TIM2_CH1
 		case PA0:
