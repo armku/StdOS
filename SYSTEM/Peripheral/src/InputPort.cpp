@@ -143,16 +143,7 @@ void InputPort::Write(const bool value)
 		this->Reset();
 	}
 }
-//写入值，true:高电平 false:低电平
-void InputPort::operator = (const bool onoff)
-{
-	this->Write(onoff);
-}
-//写入值，其他:高电平 0:低电平
-void InputPort::operator = (const int hilo)
-{
-	this->Write((bool)hilo);
-}
+
 ////引脚模式
 void InputPort::SetMode(PIN_MODE mode)
 {
