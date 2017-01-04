@@ -1,18 +1,15 @@
 #include "SoftI2C.h"
-//#include "delay.h"
 
 CSoftI2C::CSoftI2C(Pin pinscl, Pin pinsda, uint nus)
 {
 	this->psck.OpenDrain=true;
-    this->psck.Set(pinscl);
-    this->psda = new InputPort(pinsda);
+    this->psda.OpenDrain=true;
+	this->psck.Set(pinscl);
+    this->psda.Set(pinsda);
     this->delayus = nus;
 
-    //this->psck->SetModeOut_OD();
-    this->psda->SetModeOut_OD();
-
     this->psck=0;
-    this->psda->Set();
+    this->psda=1;
     this->psck=1;
 }
 
@@ -22,10 +19,10 @@ void CSoftI2C::Init(){
 void CSoftI2C::Start()
 {
     /* 当SCL高电平时，SDA出现一个下跳沿表示I2C总线启动信号 */
-    this->psda->Set();
+    this->psda=1;
     this->psck=1;
     this->delay();
-    this->psda->Reset();
+    this->psda=0;
     this->delay();
     this->psck=0;
     this->delay();
@@ -34,10 +31,10 @@ void CSoftI2C::Start()
 void CSoftI2C::Stop()
 {
     /* 当SCL高电平时，SDA出现一个上跳沿表示I2C总线停止信号 */
-    this->psda->Reset();
+    this->psda=0;
     this->psck=1;
     this->delay();
-    this->psda->Set();
+    this->psda=1;
 }
 
 void CSoftI2C::WriteByte(byte _ucByte)
@@ -49,11 +46,11 @@ void CSoftI2C::WriteByte(byte _ucByte)
     {
         if (_ucByte &0x80)
         {
-            this->psda->Set();
+            this->psda=1;
         }
         else
         {
-            this->psda->Reset();
+            this->psda=0;
         }
         this->delay();
         this->psck=1;
@@ -61,7 +58,7 @@ void CSoftI2C::WriteByte(byte _ucByte)
         this->psck=0;
         if (i == 7)
         {
-            this->psda->Set(); // 释放总线
+            this->psda=1; // 释放总线
         }
         _ucByte <<= 1; /* 左移一个bit */
         this->delay();
@@ -80,7 +77,7 @@ byte CSoftI2C::ReadByte()
         value <<= 1;
         this->psck=1;
         this->delay();
-        if (this->psda->Read())
+        if (this->psda.ReadInput())
         {
             value++;
         }
@@ -97,12 +94,12 @@ byte CSoftI2C::WaitAck()
 {
     byte re;
 
-    this->psda->Set(); /* CPU释放SDA总线 */
+    this->psda=1; /* CPU释放SDA总线 */
     this->delay();
     this->psck=1; /* CPU驱动SCL = 1, 此时器件会返回ACK应答 */
     this->delay();
 
-    if (this->psda->Read())
+    if (this->psda.ReadInput())
     /* CPU读取SDA口线状态 */
     {
         re = 1;
@@ -118,19 +115,19 @@ byte CSoftI2C::WaitAck()
 
 void CSoftI2C::Ack()
 {
-    this->psda->Reset(); /* CPU驱动SDA = 0 */
+    this->psda=0; /* CPU驱动SDA = 0 */
     this->delay();
     this->psck=1; /* CPU产生1个时钟 */
     this->delay();
     this->psck=0;
     this->delay();
-    this->psda->Set();
+    this->psda=1;
     /*CPU释放SDA总线 */
 }
 
 void CSoftI2C::NAck()
 {
-    this->psda->Set(); /* CPU驱动SDA = 1 */
+    this->psda=1; /* CPU驱动SDA = 1 */
     this->delay();
     this->psck=1; /* CPU产生1个时钟 */
     this->delay();
