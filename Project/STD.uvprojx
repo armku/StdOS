@@ -714,6 +714,11 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Devices\src\w25qxx.cpp</FilePath>
             </File>
+            <File>
+              <FileName>lcd.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\lcd.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1625,6 +1630,11 @@
               <FileName>w25qxx.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Devices\src\w25qxx.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lcd.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\lcd.cpp</FilePath>
             </File>
           </Files>
         </Group>
