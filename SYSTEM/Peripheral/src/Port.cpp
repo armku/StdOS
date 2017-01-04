@@ -7,9 +7,49 @@
 #define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
+Port::Port()
+{
+	this->_Pin=P0;
+}
+// 设置引脚，并应用配置。
+Port& Port::Set(Pin pin)
+{
+	this->_Pin = pin;
+	
+	return *this;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Port::Port(Pin pin)
 {
-    this->_Pin = pin;
+    this->Set(pin);
 }
 //写入值，true：高电平，false：低电平
 void Port::Write(const bool value)

@@ -35,8 +35,14 @@ class Port
 		Port& Set(Pin pin); // 设置引脚，并应用配置。
 		bool Empty() const { return _Pin == P0; }
 		//virtual void Config(); // 确定配置,确认用对象内部的参数进行初始化
-	
-	
+		// 配置过程，由Config调用，最后GPIO_Init
+		//virtual void OnConfig(GPIO_InitTypeDef& gpio);
+	public:
+		Port();
+		
+		
+		
+		
 	
     public:
         Port(Pin pin);		
