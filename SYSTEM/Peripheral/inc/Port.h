@@ -44,23 +44,5 @@ class Port
 		
 		
 	
-    public:        	
-		void Write(const bool value);//写入值，true：高电平，false：低电平
-		void operator = (const bool onoff);//写入值，true:打开 false:关闭
-		void operator = (const int hilo);//写入值，其他:高电平 0:低电平
-        void SetModeAIN();
-        void SetModeIN_FLOATING();
-        void SetModeINPUT_IPD();
-        void SetModeINPUT_IPU();
-        void SetModeOut_OD();
-        void SetModeOut_PP();
-        void SetModeAF_OD();
-        void SetModeAF_PP();
-        void Set(); //设置引脚
-        void Reset(); //复位引脚        
-        byte Read(void); 
-		static bool ReadPinPort(Pin pin);//读取端口状态
-    protected:        
-        byte pinbit;
-        void SetMode(PIN_MODE mode); //引脚模式		
+    
 };
