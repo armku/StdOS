@@ -3,6 +3,7 @@
 #include "Sys.h"
 #include "stm32f10x.h"
 
+#define _force_inline 
 #ifdef STM32F4
     #define GPIO_MAX_SPEED 100
 #else 
@@ -28,15 +29,13 @@ class Port
         virtual void Config(); // 确定配置,确认用对象内部的参数进行初始化
 
         // 辅助函数
-        //_force_inline static GPIO_TypeDef* IndexToGroup(byte index);
-        //_force_inline static byte GroupToIndex(GPIO_TypeDef* group);
+        _force_inline static GPIO_TypeDef* IndexToGroup(byte index);
+        _force_inline static byte GroupToIndex(GPIO_TypeDef* group);
 
         #if DEBUG
             static bool Reserve(Pin pin, bool flag); // 保护引脚，别的功能要使用时将会报错。返回是否保护成功
             static bool IsBusy(Pin pin); // 引脚是否被保护
-        #endif 
-		GPIO_TypeDef *IndexToGroup(byte index);
-		byte GroupToIndex(GPIO_TypeDef *group);
+        #endif 		
     protected:
         Port();
         virtual ~Port();
