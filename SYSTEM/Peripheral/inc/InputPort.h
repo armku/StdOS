@@ -5,7 +5,7 @@
 //回调函数定义 down指示按下还是弹起触发
 typedef void(*BtnInCallback)(Pin pin, bool down);
 
-class InputPort: protected Port
+class InputPort: public Port
 {
     public:
         InputPort(Pin pin, byte invert = 2);

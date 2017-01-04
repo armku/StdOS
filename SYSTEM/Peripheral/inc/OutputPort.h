@@ -2,7 +2,7 @@
 
 #include "Port.h"
 
-class OutputPort:protected Port
+class OutputPort:public Port
 {
 	public:
 		OutputPort(Pin pin,byte invert=2);
