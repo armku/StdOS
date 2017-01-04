@@ -33,7 +33,7 @@ class Port
         Port(Pin pin);		
 		void Write(const bool value);//写入值，true：高电平，false：低电平
 		void operator = (const bool onoff);//写入值，true:打开 false:关闭
-		void operator = (const byte hilo);//写入值，其他:高电平 0:低电平
+		void operator = (const int hilo);//写入值，其他:高电平 0:低电平
         void SetModeAIN();
         void SetModeIN_FLOATING();
         void SetModeINPUT_IPD();

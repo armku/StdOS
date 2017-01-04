@@ -29,7 +29,7 @@ void Port::operator = (const bool onoff)
 	this->Write(onoff);
 }
 //写入值，其他:高电平 0:低电平
-void Port::operator = (const byte hilo)
+void Port::operator = (const int hilo)
 {
 	this->Write((bool)hilo);
 }
