@@ -11,10 +11,10 @@
 //0-本次读取的数据缓存保存位置(n-2); 2-AD7689通道选择
 CAD7689::CAD7689(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
 {
-    this->ppinsck = new InputPort(pinsck);
-    this->ppinsdi = new InputPort(pinsdi);
-    this->ppinsdo = new InputPort(pinsdo);
-    this->ppincnv = new InputPort(pincnv);
+    this->ppinsck.Set(pinsck);
+    this->ppinsdi.Set(pinsdi);
+    this->ppinsdo.Set(pinsdo);
+    this->ppincnv.Set(pincnv);
 
     for (byte i = 0; i < MAXCH; i++)
     {
@@ -38,18 +38,18 @@ ushort CAD7689::AD_Read(void)
 {
     ushort dat = 0;
     uint i;
-    this->ppincnv->Reset();
+    this->ppincnv=0;
     this->Delay(40);
     for (i = 0; i < 16; i++)
     {
-        this->ppinsck->Set();
+        this->ppinsck=1;
         this->Delay(40);
         dat <<= 1;
-        dat += this->ppinsdo->Read();
-        this->ppinsck->Reset();
+        dat += this->ppinsdo.ReadInput();
+        this->ppinsck=0;
         this->Delay(40);
     }
-    this->ppincnv->Set();
+    this->ppincnv=1;
     return dat;
 }
 
@@ -57,40 +57,37 @@ ushort CAD7689::AD_Write(ushort sdat)
 {
     ushort dat = 0;
     uint i;
-    this->ppincnv->Reset();
+    this->ppincnv=0;
     this->Delay(50);
     for (i = 0; i < 16; i++)
     {
-        ((sdat &0x8000) > 0) ? this->ppinsdi->Set(): this->ppinsdi->Reset();
+        ((sdat &0x8000) > 0) ? this->ppinsdi=1: this->ppinsdi=0;
         dat <<= 1;
-        dat += this->ppinsdo->Read();
+        dat += this->ppinsdo.ReadInput();
         this->Delay(50);
-        this->ppinsck->Reset();
+        this->ppinsck=0;
         this->Delay(50);
         sdat <<= 1;
-        this->ppinsck->Set();
+        this->ppinsck=1;
     }
     this->Delay(50);
-    this->ppinsdi->Reset();
+    this->ppinsdi=0;
     this->Delay(50);
-    this->ppincnv->Set();
+    this->ppincnv=1;
     return dat;
 }
 
 void CAD7689::Init(void)
-{
-    this->ppincnv->SetModeOut_PP();
-    this->ppinsdo->SetModeINPUT_IPU();
-    this->ppinsck->SetModeOut_PP();
-    this->ppinsdi->SetModeOut_PP();
-
-    this->ppinsck->Reset();
-    this->ppinsdi->Reset();
+{    
+    //this->ppinsdo->SetModeINPUT_IPU();
+    
+    this->ppinsck=0;
+    this->ppinsdi=0;
 
     //初始化配置
-    this->ppincnv->Reset();
+    this->ppincnv=0;
     this->Delay(100);
-    this->ppincnv->Set();
+    this->ppincnv=1;
     this->Delay(10000);
 
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Type.h"
-#include "InputPort.h"
+#include "Port.h"
 
 #define MAXCH	8
 #define CHDELAY	2	//通道切换延时时间，用于数据稳定
@@ -10,25 +10,22 @@ class CAD7689
 {
     public:
         CAD7689(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv);
-        ~CAD7689();
-    public:
+        ~CAD7689();  
         void Routin(void); //读取AD值,并切换通道
         void Init(void); //
-        float getVolt(uint16_t ch); //获取通道电压值
-    public:
+        float getVolt(ushort ch); //获取通道电压值    
         byte FlagEnable[MAXCH]; //是否允许通道转换 0：禁止，1：允许 备用
     private:
         void Delay(uint nTime);
-        uint16_t AD_Read(void);
-        uint16_t AD_Write(uint16_t sdat);
-    private:
-        uint16_t ADBuf[MAXCH]; //原始AD值
+        ushort AD_Read(void);
+        ushort AD_Write(ushort sdat);    
+        ushort ADBuf[MAXCH]; //原始AD值
         float volt[MAXCH]; //电压值
         byte chCurrent; //当前通道
         byte chDelayCnt; //通道延时时间，用于数据稳定
-        InputPort *ppinsck;
-        InputPort *ppinsdi;
-        InputPort *ppinsdo;
-        InputPort *ppincnv;
+        OutputPort ppinsck;
+        OutputPort ppinsdi;
+        OutputPort ppinsdo;
+        OutputPort ppincnv;
         byte getNextCH(); //获取下次转换通道
 };

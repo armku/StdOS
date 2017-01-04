@@ -27,16 +27,11 @@
 
 CW25Qxxx::CW25Qxxx(Pin pinscs,Pin pinsclk,Pin pinsmiso,Pin pinsmosi,ESpiChannel spichannel)
 {
-	this->pincs=new InputPort(pinscs);
-	this->pinclk=new InputPort(pinsclk);
-	this->pinmiso=new InputPort(pinsmiso);
-	this->pinmosi=new InputPort(pinsmosi);
+	this->pincs.Set(pinscs);
+	this->pinclk.Set(pinsclk);
+	this->pinmiso.Set(pinsmiso);
+	this->pinmosi.Set(pinsmosi);
 	this->spi=new CHardSpi(spichannel);
-	
-	this->pincs->SetModeOut_PP();
-	this->pinclk->SetModeAF_PP();
-	this->pinmiso->SetModeAF_PP();
-	this->pinmosi->SetModeAF_PP();
 		
 }
 CW25Qxxx::~CW25Qxxx(){
@@ -46,7 +41,7 @@ CW25Qxxx::~CW25Qxxx(){
 void CW25Qxxx::Init()
 {    
     /* Deselect the FLASH: Chip Select high */    
-	this->pincs->Set();
+	this->pincs=1;
    
 	this->spi->Init();
 }
@@ -56,7 +51,7 @@ uint CW25Qxxx::ReadDeviceID(void)
     uint Temp = 0;
 
     /* Select the FLASH: Chip Select low */
-    this->pincs->Reset(); 
+    this->pincs=0; 
 
     /* Send "RDID " instruction */
     this->spi->WriteByte(W25X_DeviceID);
@@ -68,7 +63,7 @@ uint CW25Qxxx::ReadDeviceID(void)
     Temp = this->spi->ReadByte();
 
     /* Deselect the FLASH: Chip Select high */
-    this->pincs->Set();
+    this->pincs=1;
 
     return Temp;
 }
@@ -78,7 +73,7 @@ uint CW25Qxxx::ReadID(void)
     uint Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
 
     /* Select the FLASH: Chip Select low */
-    this->pincs->Reset();
+    this->pincs=0;
 
     /* Send "RDID " instruction */
     this->spi->WriteByte(W25X_JedecDeviceID);
@@ -93,7 +88,7 @@ uint CW25Qxxx::ReadID(void)
     Temp2 = this->spi->ReadByte();
 
     /* Deselect the FLASH: Chip Select high */
-    this->pincs->Set();
+    this->pincs=1;
 
     Temp = (Temp0 << 16) | (Temp1 << 8) | Temp2;
 
@@ -103,13 +98,13 @@ uint CW25Qxxx::ReadID(void)
 void CW25Qxxx::PowerDown(void)
 {
     /* Select the FLASH: Chip Select low */
-    this->pincs->Reset();
+    this->pincs=0;
 
     /* Send "Power Down" instruction */
     this->spi->WriteByte(W25X_PowerDown);
 
     /* Deselect the FLASH: Chip Select high */
-    this->pincs->Set();
+    this->pincs=1;
 }
 
 void CW25Qxxx::SectorErase(uint SectorAddr)
@@ -119,7 +114,7 @@ void CW25Qxxx::SectorErase(uint SectorAddr)
     this->WaitForWriteEnd();
     /* Sector Erase */
     /* Select the FLASH: Chip Select low */
-    this->pincs->Reset();
+    this->pincs=0;
     /* Send Sector Erase instruction */
     this->spi->WriteByte(W25X_SectorErase);
     /* Send SectorAddr high nibble address byte */
@@ -129,7 +124,7 @@ void CW25Qxxx::SectorErase(uint SectorAddr)
     /* Send SectorAddr low nibble address byte */
     this->spi->WriteByte(SectorAddr &0xFF);
     /* Deselect the FLASH: Chip Select high */
-    this->pincs->Set();
+    this->pincs=1;
     /* Wait the end of Flash writing */
     this->WaitForWriteEnd();
 }
@@ -141,11 +136,11 @@ void CW25Qxxx::BulkErase(void)
 
     /* Bulk Erase */
     /* Select the FLASH: Chip Select low */
-    this->pincs->Reset();
+    this->pincs=0;
     /* Send Bulk Erase instruction  */
     this->spi->WriteByte(W25X_ChipErase);
     /* Deselect the FLASH: Chip Select high */
-    this->pincs->Set();
+    this->pincs=1;
 
     /* Wait the end of Flash writing */
     this->WaitForWriteEnd();
@@ -157,7 +152,7 @@ void CW25Qxxx::PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
     this->WriteEnable();
 
     /* Select the FLASH: Chip Select low */
-    this->pincs->Reset();
+    this->pincs=0;
     /* Send "Write to Memory " instruction */
     this->spi->WriteByte(W25X_PageProgram);
     /* Send WriteAddr high nibble address byte to write to */
@@ -183,7 +178,7 @@ void CW25Qxxx::PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
     }
 
     /* Deselect the FLASH: Chip Select high */
-    this->pincs->Set();
+    this->pincs=1;
 
     /* Wait the end of Flash writing */
     this->WaitForWriteEnd();
@@ -270,7 +265,7 @@ void CW25Qxxx::BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 void CW25Qxxx::BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
 {
     /* Select the FLASH: Chip Select low */
-    this->pincs->Reset();
+    this->pincs=0;
 
     /* Send "Read from Memory " instruction */
     this->spi->WriteByte(W25X_ReadData);
@@ -292,13 +287,13 @@ void CW25Qxxx::BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
     }
 
     /* Deselect the FLASH: Chip Select high */
-    this->pincs->Set();
+    this->pincs=1;
 }
 
 void CW25Qxxx::StartReadSequence(uint ReadAddr)
 {
     /* Select the FLASH: Chip Select low */
-    this->pincs->Reset();
+    this->pincs=0;
 
     /* Send "Read from Memory " instruction */
     this->spi->WriteByte(W25X_ReadData);
@@ -315,13 +310,13 @@ void CW25Qxxx::StartReadSequence(uint ReadAddr)
 void CW25Qxxx::WriteEnable(void)
 {
     /* Select the FLASH: Chip Select low */
-    this->pincs->Reset();
+    this->pincs=0;
 
     /* Send "Write Enable" instruction */
     this->spi->WriteByte(W25X_WriteEnable);
 
     /* Deselect the FLASH: Chip Select high */
-    this->pincs->Set();
+    this->pincs=1;
 }
 #define SET 1	//解决编译错误
 void CW25Qxxx::WaitForWriteEnd(void)
@@ -329,7 +324,7 @@ void CW25Qxxx::WaitForWriteEnd(void)
     byte FLASH_Status = 0;
 
     /* Select the FLASH: Chip Select low */
-    this->pincs->Reset();
+    this->pincs=0;
 
     /* Send "Read Status Register" instruction */
     this->spi->WriteByte(W25X_ReadStatusReg);
@@ -344,18 +339,18 @@ void CW25Qxxx::WaitForWriteEnd(void)
     while ((FLASH_Status &WIP_Flag) == SET); /* Write in progress */
 
     /* Deselect the FLASH: Chip Select high */
-    this->pincs->Set();
+    this->pincs=1;
 }
 
 //唤醒
 void CW25Qxxx::WAKEUP(void)
 {
     /* Select the FLASH: Chip Select low */
-    this->pincs->Reset();
+    this->pincs=0;
 
     /* Send "Power Down" instruction */
     this->spi->WriteByte(W25X_ReleasePowerDown);
 
     /* Deselect the FLASH: Chip Select high */
-    this->pincs->Set(); //等待TRES1
+    this->pincs=1; //等待TRES1
 }
