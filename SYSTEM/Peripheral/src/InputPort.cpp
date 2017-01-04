@@ -126,18 +126,6 @@ void InputPort::Register(BtnInCallback handler)
         state->Handler = 0;
     }	
 }
-void InputPort::Toggle()
-{
-    this->pinbit = !this->pinbit;
-    if (this->pinbit)
-    {
-        this->Set();
-    }
-    else
-    {
-        this->Reset();
-    }
-}
 
 //写入值，true：高电平，false：低电平
 void InputPort::Write(const bool value)
@@ -244,14 +232,12 @@ void InputPort::SetModeAF_PP()
 }
 
 void InputPort::Set()
-{
-    this->pinbit = 1;
+{    
     GPIO_SetBits(_GROUP(_Pin), _PORT(_Pin));
 }
 
 void InputPort::Reset()
-{
-    this->pinbit = 0;
+{    
     GPIO_ResetBits(_GROUP(_Pin), _PORT(_Pin));
 }
 
