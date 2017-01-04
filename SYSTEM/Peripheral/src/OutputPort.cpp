@@ -60,15 +60,4 @@ void OutputPort::Open()
 {
 	
 }
-void OutputPort::Toggle()
-{
-    this->pinbit = !this->pinbit;
-    if (this->pinbit)
-    {
-        this->Set();
-    }
-    else
-    {
-        this->Reset();
-    }
-}
+

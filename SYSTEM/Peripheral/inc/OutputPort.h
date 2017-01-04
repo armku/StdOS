@@ -8,8 +8,7 @@ class OutputPort:public Port
 		OutputPort(Pin pin,byte invert=2);
 		void Init(Pin pin,byte invert=2);
 		void Write(bool onoff);//输出开关
-		void Open();
-		void Toggle(); //翻转引脚
+		void Open();		
 	private:
 		bool binvert;//端口反转
 };

@@ -20,9 +20,9 @@ void ledflash();
 void eepread();
 //1ms软件定时器
 void softTimers();
-OutputPort led1(PB0,true);
-OutputPort led2(PF7,true);
-OutputPort led3(PF8,true);
+InputPort led1(PB0,true);
+InputPort led2(PF7,true);
+InputPort led3(PF8,true);
 InputPort TestPort(PB0);
 //按键 PC13 PA0
 

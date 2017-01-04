@@ -21,6 +21,7 @@ class InputPort: public Port
         void On(); //打开中断
         void Off(); //关闭中断		
         void Register(BtnInCallback handler); // 注册回调
+		void Toggle(); //翻转引脚
     private:
         void Exti0_state(bool onoff);
         uint eXTI_Line; //中断线

@@ -139,6 +139,18 @@ void InputPort::Register(BtnInCallback handler)
         state->Handler = 0;
     }	
 }
+void InputPort::Toggle()
+{
+    this->pinbit = !this->pinbit;
+    if (this->pinbit)
+    {
+        this->Set();
+    }
+    else
+    {
+        this->Reset();
+    }
+}
 
 extern "C"
 {   
@@ -271,6 +283,7 @@ extern "C"
         }
     }
 }
+
 /*
 ²âÊÔÍ¨¹ı
 PA0 ¡Ì

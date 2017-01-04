@@ -2,7 +2,6 @@
 
 #include "ITransport.h"
 #include "Sys.h"
-#include "AlternatePort.h"
 
 
 //回调函数定义 down指示按下还是弹起触发
@@ -16,8 +15,6 @@ class SerialPort:public ITransport
     byte _dataBits;
     byte _stopBits;
     int _baudRate;
-	
-	//AlternatePort _tx;
 	
 	public:
 		SerialPort(MessagePort_T comport=COM1,uint baudrate=115200);
