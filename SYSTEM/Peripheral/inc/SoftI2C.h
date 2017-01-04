@@ -1,6 +1,6 @@
 #pragma once 
 
-#include "Port.h"
+#include "InputPort.h"
 
 class CSoftI2C
 {
@@ -17,8 +17,8 @@ class CSoftI2C
 		void WriteByte(byte _ucByte);
         byte ReadByte(void);
     private:
-        Port *psck;
-        Port *psda;
+        InputPort *psck;
+        InputPort *psda;
         uint delayus; //—” ± ±º‰
     private:
         void delay(void);

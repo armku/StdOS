@@ -1,8 +1,8 @@
 #pragma once 
 #include "Type.h"
-#include "Port.h"
+#include "InputPort.h"
 
-class PWM: public Port
+class PWM: public InputPort
 {
     public:
         PWM(Pin pin, uint frq = 10000, uint duty = 50);

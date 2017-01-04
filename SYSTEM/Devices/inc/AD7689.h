@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Type.h"
-#include "OutputPort.h"
 #include "InputPort.h"
 
 #define MAXCH	8
@@ -10,7 +9,7 @@
 class CAD7689
 {
     public:
-        CAD7689(OutputPort pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv);
+        CAD7689(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv);
         ~CAD7689();
     public:
         void Routin(void); //读取AD值,并切换通道
@@ -27,9 +26,9 @@ class CAD7689
         float volt[MAXCH]; //电压值
         byte chCurrent; //当前通道
         byte chDelayCnt; //通道延时时间，用于数据稳定
-        OutputPort *ppinsck;
-        Port *ppinsdi;
-        Port *ppinsdo;
-        Port *ppincnv;
+        InputPort *ppinsck;
+        InputPort *ppinsdi;
+        InputPort *ppinsdo;
+        InputPort *ppincnv;
         byte getNextCH(); //获取下次转换通道
 };

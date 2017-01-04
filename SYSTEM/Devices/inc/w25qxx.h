@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Type.h"
-#include "Port.h"
+#include "InputPort.h"
 #include "HardSpi.h"
 
 
@@ -26,9 +26,9 @@ class CW25Qxxx
         void PageWrite(byte *pBuffer, uint32_t WriteAddr, ushort NumByteToWrite);
         void BulkErase(void);
 	private:
-		Port *pincs;
-		Port *pinclk;
-		Port *pinmiso;
-		Port *pinmosi;
+		InputPort *pincs;
+		InputPort *pinclk;
+		InputPort *pinmiso;
+		InputPort *pinmosi;
 		CHardSpi *spi;
 };

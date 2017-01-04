@@ -2,7 +2,7 @@
 #include "stm32f10x.h"
 
 
-PWM::PWM(Pin pin, uint frq, uint duty): Port(pin)
+PWM::PWM(Pin pin, uint frq, uint duty): InputPort(pin)
 {
     this->freq = frq;
     this->duty = duty;
