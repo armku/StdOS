@@ -16,6 +16,7 @@
 #define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
+#if 0
 #if defined(STM32F1) || defined(STM32F4)
     static const int PORT_IRQns[] = 
     {
@@ -32,6 +33,7 @@
             EXTI4_15_IRQn  // EXTI15_10
     };
 #endif 
+#endif
 
 // 端口基本功能
 #define REGION_Port 1
