@@ -595,6 +595,16 @@
               <FilePath>..\SYSTEM\Peripheral\src\AlternatePort.cpp</FilePath>
             </File>
             <File>
+              <FileName>AnalogInPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\AnalogInPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputPortNew.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\InputPortNew.cpp</FilePath>
+            </File>
+            <File>
               <FileName>InputPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\InputPort.cpp</FilePath>
@@ -1520,6 +1530,16 @@
               <FileName>AlternatePort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\AlternatePort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AnalogInPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\AnalogInPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputPortNew.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\InputPortNew.cpp</FilePath>
             </File>
             <File>
               <FileName>InputPort.cpp</FileName>
