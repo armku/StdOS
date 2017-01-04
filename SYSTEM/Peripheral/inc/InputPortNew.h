@@ -1,9 +1,9 @@
 #pragma once
 
-#if 0
+#include "Port.h"
 
 // 输入口
-class InputPort: public Port
+class InputPortNew: public Port
 {
     public:
         typedef enum
@@ -19,17 +19,17 @@ class InputPort: public Port
         bool Floating; // 是否浮空输入
         bool Invert; // 是否倒置输入输出
 
-        InputPort()
+        InputPortNew()
         {
                 Init();
         }
-        InputPort(Pin pin, bool floating = true, PuPd_TypeDef pupd = PuPd_UP)
+        InputPortNew(Pin pin, bool floating = true, PuPd_TypeDef pupd = PuPd_UP)
         {
                 Init(floating, pupd);
                 Set(pin);
         }
 
-        virtual ~InputPort();
+        virtual ~InputPortNew();
 
         ushort ReadGroup(); // 整组读取
         bool Read(); // 读取状态
@@ -68,7 +68,3 @@ class InputPort: public Port
         void RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param);
         void UnRegisterInput(int pinIndex);
 };
-#endif
-
-
-

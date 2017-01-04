@@ -1,25 +1,25 @@
 #include "InputPortNew.h"
 
-#if 0
-        void InputPort::OnConfig(GPIO_InitTypeDef &gpio)
-        {
-            Port::OnConfig(gpio);
 
-            #ifdef STM32F1
-                if (Floating)
-                    gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-                else if (PuPd == PuPd_UP)
-                    gpio.GPIO_Mode = GPIO_Mode_IPU;
-                else if (PuPd == PuPd_DOWN)
-                    gpio.GPIO_Mode = GPIO_Mode_IPD;
-                // 这里很不确定，需要根据实际进行调整
-            #else 
-                gpio.GPIO_Mode = GPIO_Mode_IN;
-                //gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
-            #endif 
-        }
+void InputPortNew::OnConfig(GPIO_InitTypeDef &gpio)
+{
+    Port::OnConfig(gpio);
+
+    #ifdef STM32F1
+        if (Floating)
+            gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+        else if (PuPd == PuPd_UP)
+            gpio.GPIO_Mode = GPIO_Mode_IPU;
+        else if (PuPd == PuPd_DOWN)
+            gpio.GPIO_Mode = GPIO_Mode_IPD;
+        // 这里很不确定，需要根据实际进行调整
+    #else 
+        gpio.GPIO_Mode = GPIO_Mode_IN;
+        //gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
-		#if 0
+}
+
+#if 0
     // 输入端口
     #define REGION_Input 1
     #ifdef REGION_Input
@@ -28,7 +28,7 @@
         typedef struct TIntState
         {
             Pin Pin;
-            InputPort::IOReadHandler Handler; // 委托事件
+            InputPortNew::IOReadHandler Handler; // 委托事件
             void *Param; // 事件参数，一般用来作为事件挂载者的对象，然后借助静态方法调用成员方法
             bool OldValue;
 
@@ -40,37 +40,37 @@
         static IntState State[16];
         static bool hasInitState = false;
 
-        void RegisterInput(int groupIndex, int pinIndex, InputPort::IOReadHandler handler);
+        void RegisterInput(int groupIndex, int pinIndex, InputPortNew::IOReadHandler handler);
         void UnRegisterInput(int pinIndex);
 
-        InputPort::InputPort()
+        InputPortNew::InputPortNew()
         {
             // 取消所有中断
             if (_Registed)
                 Register(NULL);
         }
 
-        ushort InputPort::ReadGroup() // 整组读取
+        ushort InputPortNew::ReadGroup() // 整组读取
         {
             return GPIO_ReadInputData(Group);
         }
 
         // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
-        bool InputPort::Read()
+        bool InputPortNew::Read()
         {
             // 转为bool时会转为0/1
             bool rs = GPIO_ReadInputData(Group) &PinBit;
             return rs ^ Invert;
         }
 
-        bool InputPort::Read(Pin pin)
+        bool InputPortNew::Read(Pin pin)
         {
             GPIO_TypeDef *group = _GROUP(pin);
             return (group->IDR >> (pin &0xF)) &1;
         }
 
         // 注册回调  及中断使能
-        void InputPort::Register(IOReadHandler handler, void *param)
+        void InputPortNew::Register(IOReadHandler handler, void *param)
         {
             if (!PinBit)
                 return ;
@@ -135,7 +135,7 @@
                 do
                 {
                     EXTI->PR = bit; // 重置挂起位
-                    value = InputPort::Read(state->Pin); // 获取引脚状态
+                    value = InputPortNew::Read(state->Pin); // 获取引脚状态
                     if (shakeTime > 0)
                     {
                         // 值必须有变动才触发
@@ -258,7 +258,7 @@
         }
 
         // 申请引脚中断托管
-        void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param)
+        void InputPortNew::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param)
         {
             IntState *state = &State[pinIndex];
             Pin pin = (Pin)((groupIndex << 4) + pinIndex);
@@ -296,7 +296,7 @@
             }
         }
 
-        void InputPort::UnRegisterInput(int pinIndex)
+        void InputPortNew::UnRegisterInput(int pinIndex)
         {
             IntState *state = &State[pinIndex];
             // 取消注册
@@ -313,4 +313,3 @@
         }
     #endif //#ifdef REGION_Input
 #endif
-
