@@ -23,6 +23,7 @@ void softTimers();
 OutputPort led1(PB0,true);
 OutputPort led2(PF7,true);
 OutputPort led3(PF8,true);
+CW24xxx  w24c02(PB6,PB7,AT24C02);
 //按键 PC13 PA0
 
 InputPort exti(PC13);//PA1 PB3
@@ -61,6 +62,7 @@ void STDInit()
 	exti.Register(OnKeyPress);
 	
 	Sys.ShowInfo();	
+	w24c02.Test();
 		
 	Sys.AddTask(softTimers,0,1,1,"1毫秒软件定时器");//1毫秒周期循环
 	Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
