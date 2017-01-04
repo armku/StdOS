@@ -1,7 +1,7 @@
 #pragma once 
 #include "Type.h"
 #include "SoftSpi.h"
-#include "InputPort.h"
+#include "Port.h"
 class CADS1246
 {
     public:
@@ -15,8 +15,8 @@ class CADS1246
         byte Check(void); //AD检查，正常返回0
     private:
         CSoftSpi *pspi; //SPI接口
-        InputPort *ppinrd; //数据准备好接口
-        InputPort *ppinreset; //复位接口
+        OutputPort ppinrd; //数据准备好接口
+        OutputPort ppinreset; //复位接口
     private:
         float decodead(byte *da);
 

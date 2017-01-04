@@ -1,5 +1,5 @@
 #pragma once
-#include "InputPort.h"
+#include "Port.h"
 
 class CSoftSpi
 {
@@ -10,11 +10,10 @@ public:
     byte spi_writebyte(byte da);
     byte spi_readbyte(void);
 public:
-    InputPort *portsck;
-    InputPort *portdi;
-    InputPort *portdo;
-public:
-    InputPort *portcs;
+    OutputPort portsck;
+    OutputPort portdi;
+    OutputPort portdo;
+    OutputPort portcs;
 private:
     uint delayus;//—” ± ±º‰
 };
