@@ -610,11 +610,6 @@
               <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
             </File>
             <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\Spi.cpp</FilePath>
@@ -655,19 +650,29 @@
               <FilePath>..\SYSTEM\Peripheral\src\WatchDog.cpp</FilePath>
             </File>
             <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\usart.c</FilePath>
-            </File>
-            <File>
               <FileName>FIFORing.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\FIFORing.cpp</FilePath>
             </File>
             <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\usart.c</FilePath>
+            </File>
+            <File>
               <FileName>usart.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\usart.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ISocket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\NET\src\ISocket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -733,11 +738,6 @@
               <FileName>ISocketHost.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\NET\src\ISocketHost.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ISocket.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\NET\src\ISocket.cpp</FilePath>
             </File>
             <File>
               <FileName>DHCP.cpp</FileName>
@@ -1537,11 +1537,6 @@
               <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
             </File>
             <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\Spi.cpp</FilePath>
@@ -1582,19 +1577,29 @@
               <FilePath>..\SYSTEM\Peripheral\src\WatchDog.cpp</FilePath>
             </File>
             <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\usart.c</FilePath>
-            </File>
-            <File>
               <FileName>FIFORing.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\FIFORing.cpp</FilePath>
             </File>
             <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\usart.c</FilePath>
+            </File>
+            <File>
               <FileName>usart.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\usart.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ISocket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\NET\src\ISocket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1660,11 +1665,6 @@
               <FileName>ISocketHost.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\NET\src\ISocketHost.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ISocket.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\NET\src\ISocket.cpp</FilePath>
             </File>
             <File>
               <FileName>DHCP.cpp</FileName>
