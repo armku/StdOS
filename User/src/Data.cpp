@@ -62,7 +62,7 @@ void STDInit()
 	exti.Register(OnKeyPress);
 	
 	Sys.ShowInfo();	
-	w24c02.Test();
+	//w24c02.Test();
 		
 	Sys.AddTask(softTimers,0,1,1,"1毫秒软件定时器");//1毫秒周期循环
 	Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
