@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Port.h"
+#include "Sys.h"
 
 //回调函数定义 down指示按下还是弹起触发
 typedef void(*BtnInCallback)(Pin pin, bool down);
 
-class InputPort: public Port
+class InputPort
 {
     public:
         InputPort(Pin pin, byte invert = 2);
@@ -15,6 +15,7 @@ class InputPort: public Port
     public:
         //BtnInCallback callBack;//回掉函数
         //uint PressTime;//弹起世间
+		Pin _Pin; // 针脚
     private:
         bool binvert; //端口反转
     public:

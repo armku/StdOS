@@ -16,6 +16,7 @@ typedef unsigned int uint; //无符号整型
 typedef int64_t Int64; //长整型
 typedef uint64_t UInt64; //无符号长整型
 typedef uint cstring; //C 格式字符串
+typedef uint64_t ulong; //
 
 #ifdef __cplusplus         
 

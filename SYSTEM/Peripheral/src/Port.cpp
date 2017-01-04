@@ -1,6 +1,14 @@
 #include "stm32f10x.h"
 #include "Port.h"
 
+#define NULL 0
+#define GPIO_Mode_IN GPIO_Mode_IN_FLOATING
+#define GPIO_Mode_AF GPIO_Mode_AF_OD
+#define GPIO_OType_OD GPIO_Mode_Out_OD
+#define GPIO_OType_PP GPIO_Mode_Out_PP
+#define GPIO_Mode_OUT GPIO_Mode_Out_OD
+
+
 // 获取组和针脚
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
 #define _PORT(PIN) (1 << ((PIN) & (ushort)0x0F))
@@ -34,8 +42,8 @@
         Group = NULL;
         PinBit = 0;
     }
-#else 
-    Port: Port()
+
+    Port::~Port()
     {
         #if defined(STM32F1)
             // 恢复为初始化状态
@@ -311,7 +319,7 @@
             gpio.GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
         #endif 
     }
-
+#if 0
     void InputPort::OnConfig(GPIO_InitTypeDef &gpio)
     {
         Port::OnConfig(gpio);
@@ -329,7 +337,7 @@
             //gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
         #endif 
     }
-
+#endif
     void AnalogInPort::OnConfig(GPIO_InitTypeDef &gpio)
     {
         Port::OnConfig(gpio);

@@ -35,7 +35,7 @@ class Port
             static bool Reserve(Pin pin, bool flag); // 保护引脚，别的功能要使用时将会报错。返回是否保护成功
             static bool IsBusy(Pin pin); // 引脚是否被保护
         #endif 
-
+		GPIO_TypeDef *Port::IndexToGroup(byte index);
     protected:
         Port();
         virtual ~Port();
