@@ -43,7 +43,7 @@ void OnKeyPress(Pin pin, bool onoff)
 	{
 		led1.Write(false);
 	}	
-	//led2.Toggle();
+	led2=!led2;
 	printf("中断引脚：%d 值%d \n",pin,onoff);
 }
 /*
@@ -60,9 +60,6 @@ void STDInit()
 	exti.On();	
 	exti.Register(OnKeyPress);
 	
-	led1.Write(false);
-	led2.Write(false);
-	led3.Write(false);
 	Sys.ShowInfo();	
 		
 	Sys.AddTask(softTimers,0,1,1,"1毫秒软件定时器");//1毫秒周期循环
@@ -74,16 +71,9 @@ void STDInit()
 
 void ledflash()
 {
-//	led1.Toggle();
-//	led2.Toggle();
+	//led1=!led1;
+	//led2=!led2;
 	led3=!led3;	
-		
-	//TestPort=true;
-	//TestPort=false;
-	
-	//led2.Write(true);
-	//led2.Write(false);
-	led2=!led2;
 }
 
 void eepread()
