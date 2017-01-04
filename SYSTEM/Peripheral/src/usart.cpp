@@ -2,6 +2,7 @@
 #include "usart.h"
 #include "usart.hpp"
 #include "InputPort.h"
+#include "Port.h"
 
 void uart_init(uint bound)
 {
