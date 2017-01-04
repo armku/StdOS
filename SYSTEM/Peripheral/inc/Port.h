@@ -29,6 +29,15 @@ typedef enum
 
 class Port
 {
+	public:
+		Pin _Pin; //引脚
+		ushort  PinBit; // 组内引脚位。每个引脚一个位
+		Port& Set(Pin pin); // 设置引脚，并应用配置。
+		bool Empty() const { return _Pin == P0; }
+		//virtual void Config(); // 确定配置,确认用对象内部的参数进行初始化
+	
+	
+	
     public:
         Port(Pin pin);		
 		void Write(const bool value);//写入值，true：高电平，false：低电平
@@ -46,8 +55,7 @@ class Port
         void Reset(); //复位引脚        
         byte Read(void); 
 		static bool ReadPinPort(Pin pin);//读取端口状态
-    protected:
-        Pin _Pin; //引脚号
+    protected:        
         byte pinbit;
         void SetMode(PIN_MODE mode); //引脚模式		
 };
