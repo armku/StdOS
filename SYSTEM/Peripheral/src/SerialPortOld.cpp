@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "SerialPortOld.h"
 #include "stm32f10x.h"
 #include "InputPort.h"
@@ -220,6 +221,36 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
 
         /* 等待发送完毕 */
         while (USART_GetFlagStatus(UART5, USART_FLAG_TXE) == RESET){}
+    }
+    void sendch(int ch)
+    {       
+		switch(Sys.MessagePort)
+		{
+			case COM1:
+				sendToUsart1(ch);
+				break;
+			case COM2:
+				sendToUsart1(ch);
+				break;
+			case COM3:
+				sendToUsart1(ch);
+				break;
+			case COM4:
+				sendToUsart1(ch);
+				break;
+			case COM5:
+				sendToUsart1(ch);
+				break;
+			default:
+				break;
+		}
+    }
+
+    //重定义fputc函数
+    int fputc(int ch, FILE *f)
+    {
+        sendch(ch);
+        return ch;
     }
     #ifdef __cplusplus
     }

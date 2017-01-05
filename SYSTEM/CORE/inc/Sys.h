@@ -70,7 +70,7 @@ class TSys:public Object
 		void Routin(); //运行  
 	public:
 		uint Clock;//系统时钟
-		COM_Def MessagePort;//调试接口
+		COM_Def MessagePort;// 指定printf输出的串口
 		byte Inited;//串口用参数
 	public:
 		byte ID[12];

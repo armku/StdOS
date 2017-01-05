@@ -55,6 +55,7 @@ KEY PA0
 //系统初始化
 void STDInit() 
 {    	
+	Sys.MessagePort=COM1;
 	Sys.Init();
     
 	exti.Init();
