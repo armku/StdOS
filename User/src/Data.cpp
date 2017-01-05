@@ -97,8 +97,6 @@ void softTimers()
         ushort len = com1buf.GetLength();
         if (len >= 3)
         {
-            
-
             com1buf.Pop(USART_RX_BUF, 0, len - 2);
         }
         com1buf.Reset();
