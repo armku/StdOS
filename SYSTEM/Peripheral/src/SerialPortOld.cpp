@@ -10,7 +10,7 @@ void uart_init(uint32_t bound)
     USART_InitTypeDef usart;
     NVIC_InitTypeDef nvic;
     //初始化时钟信号
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_USART1, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
     //初始化GPIO  
 	InputPort tx1(PA9);
 	InputPort rx1(PA10);
@@ -38,7 +38,7 @@ void uart_init(uint32_t bound)
     //USART_InitTypeDef usart;
     //NVIC_InitTypeDef nvic;
     //初始化时钟信号
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
     //初始化GPIO
     InputPort tx2(PA2);
@@ -68,8 +68,7 @@ void uart_init(uint32_t bound)
     //	GPIO_InitTypeDef gpio;
     //	USART_InitTypeDef usart;
     //	NVIC_InitTypeDef nvic;
-    //初始化时钟信号
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+    //初始化时钟信号   
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
     //初始化GPIO
 	InputPort tx3(PB10);
@@ -112,7 +111,7 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     this->Name[2] = 'M';
     this->Name[3] = '1' + index;
     this->Name[4] = 0;
-	return;
+	//return;
     switch (this->_index)
     {
         case COM1:
@@ -173,6 +172,7 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
             tx = new InputPort(PB11);
             rx = new InputPort(PB10);
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
+			RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
 
             //NVIC 配置
             NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;
