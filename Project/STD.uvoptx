@@ -681,7 +681,7 @@
 
   <Group>
     <GroupName>CORE</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -785,7 +785,7 @@
 
   <Group>
     <GroupName>Peripheral</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1000,8 +1000,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\SYSTEM\Peripheral\src\usart.cpp</PathWithFileName>
-      <FilenameWithoutPath>usart.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\SYSTEM\NET\src\ISocket.cpp</PathWithFileName>
+      <FilenameWithoutPath>ISocket.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1012,8 +1012,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\SYSTEM\NET\src\ISocket.cpp</PathWithFileName>
-      <FilenameWithoutPath>ISocket.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\SYSTEM\Peripheral\src\SerialPort.cpp</PathWithFileName>
+      <FilenameWithoutPath>SerialPort.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1024,8 +1024,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\SYSTEM\Peripheral\src\SerialPort.cpp</PathWithFileName>
-      <FilenameWithoutPath>SerialPort.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\SYSTEM\Peripheral\src\SerialPortOld.cpp</PathWithFileName>
+      <FilenameWithoutPath>SerialPortOld.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

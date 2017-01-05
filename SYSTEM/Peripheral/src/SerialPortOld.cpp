@@ -1,6 +1,6 @@
+#include "SerialPortOld.h"
 #include "stm32f10x.h"
 #include "usart.h"
-#include "usart.hpp"
 #include "InputPort.h"
 #include "AlternatePort.h"
 
@@ -12,7 +12,8 @@ void uart_init(uint bound)
 
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); //Ê¹ÄÜUSART1
 
-    InputPort tx1(PA9);
+    //AlternatePort tx1(PA9);
+	InputPort tx1(PA9);
     InputPort rx1(PA10);
     tx1.SetModeAF_PP();
     rx1.SetModeIN_FLOATING();

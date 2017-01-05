@@ -1,5 +1,15 @@
-#pragma once 
+#pragma once
+
 #include "FIFORing.h"
+
+class SerialPortOld
+{
+	public:
+		
+};
+
+
+
 
 void uart_init(uint bound);
 
