@@ -4,15 +4,19 @@
 #include "InputPort.h"
 #include "AlternatePort.h"
 
-SerialPortOld::SerialPortOld(COM_Def comPort, uint bound)
+SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte dataBits, byte stopBits)
 {
-    this->ComPort = comPort;
+    this->_index = index;
+	this->_baudRate=baudRate;
+	this->_parity=parity;
+	this->_dataBits=dataBits;
+	this->_stopBits=stopBits;
 
     USART_InitTypeDef USART_InitStructure;
     NVIC_InitTypeDef NVIC_InitStructure;
     InputPort *tx;
     InputPort *rx;
-    switch (this->ComPort)
+    switch (this->_index)
     {
         case COM1:
             //串口1设置
@@ -31,7 +35,7 @@ SerialPortOld::SerialPortOld(COM_Def comPort, uint bound)
 
             //USART 初始化设置
 
-            USART_InitStructure.USART_BaudRate = bound; //串口波特率
+            USART_InitStructure.USART_BaudRate = this->_baudRate; //串口波特率
             USART_InitStructure.USART_WordLength = USART_WordLength_8b; //字长为8位数据格式
             USART_InitStructure.USART_StopBits = USART_StopBits_1; //一个停止位
             USART_InitStructure.USART_Parity = USART_Parity_No; //无奇偶校验位
@@ -44,8 +48,8 @@ SerialPortOld::SerialPortOld(COM_Def comPort, uint bound)
             USART_ClearFlag(USART1, USART_FLAG_TC);
             break;
         case COM2:
-            tx=new InputPort(PA2);
-            rx=new InputPort(PA3);
+            tx = new InputPort(PA2);
+            rx = new InputPort(PA3);
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
 
             //Usart2 NVIC 配置
@@ -63,8 +67,8 @@ SerialPortOld::SerialPortOld(COM_Def comPort, uint bound)
             USART_ClearFlag(USART2, USART_FLAG_TC);
             break;
         case COM3:
-            tx=new InputPort(PB11);
-            rx=new InputPort(PB10);
+            tx = new InputPort(PB11);
+            rx = new InputPort(PB10);
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
 
             //Usart3 NVIC 配置
@@ -82,8 +86,8 @@ SerialPortOld::SerialPortOld(COM_Def comPort, uint bound)
             USART_ClearFlag(USART3, USART_FLAG_TC);
             break;
         case COM4:
-            tx=new InputPort(PC10);
-            rx=new InputPort(PC11);
+            tx = new InputPort(PC10);
+            rx = new InputPort(PC11);
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);
 
             //Usart4 NVIC 配置
@@ -101,8 +105,8 @@ SerialPortOld::SerialPortOld(COM_Def comPort, uint bound)
             USART_ClearFlag(UART4, USART_FLAG_TC);
             break;
         case COM5:
-            tx=new InputPort(PC12);
-            rx=new InputPort(PD3);
+            tx = new InputPort(PC12);
+            rx = new InputPort(PD3);
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART5, ENABLE);
 
             //Usart5 NVIC 配置
