@@ -19,12 +19,18 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     this->Name[4] = 0;
 
     uint32_t bound = this->_baudRate;
+    USART_InitTypeDef usart;
+    NVIC_InitTypeDef nvic;
+
+    usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+    usart.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+    usart.USART_Parity = USART_Parity_No;
+    usart.USART_StopBits = USART_StopBits_1;
+    usart.USART_WordLength = USART_WordLength_8b;
     switch (this->_index)
     {
         case COM1:
-            //串口1初始化    
-            USART_InitTypeDef usart;
-            NVIC_InitTypeDef nvic;
+            //串口1初始化
             //初始化时钟信号
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
             //初始化GPIO  
@@ -34,11 +40,7 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
             rx1.SetModeIN_FLOATING();
             //初始化USART
             usart.USART_BaudRate = bound;
-            usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-            usart.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-            usart.USART_Parity = USART_Parity_No;
-            usart.USART_StopBits = USART_StopBits_1;
-            usart.USART_WordLength = USART_WordLength_8b;
+
             USART_Init(USART1, &usart);
             USART_Cmd(USART1, ENABLE);
             USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
@@ -58,13 +60,7 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
             InputPort rx2(PA3);
             tx2.SetModeAF_PP();
             rx2.SetModeIN_FLOATING();
-            //初始化USART
-            usart.USART_BaudRate = bound;
-            usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-            usart.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-            usart.USART_Parity = USART_Parity_No;
-            usart.USART_StopBits = USART_StopBits_1;
-            usart.USART_WordLength = USART_WordLength_8b;
+            //初始化USART            
             USART_Init(USART2, &usart);
             USART_Cmd(USART2, ENABLE);
             USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
@@ -85,13 +81,7 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
             InputPort rx3(PB11);
             tx3.SetModeAF_PP();
             rx3.SetModeIN_FLOATING();
-            //初始化USART
-            usart.USART_BaudRate = bound;
-            usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-            usart.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-            usart.USART_Parity = USART_Parity_No;
-            usart.USART_StopBits = USART_StopBits_1;
-            usart.USART_WordLength = USART_WordLength_8b;
+            //初始化USART            
             USART_Init(USART3, &usart);
             USART_Cmd(USART3, ENABLE);
             USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);
