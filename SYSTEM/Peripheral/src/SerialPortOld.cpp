@@ -29,30 +29,30 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     usart.USART_WordLength = this->_dataBits;
 
     nvic.NVIC_IRQChannelCmd = ENABLE;
-    InputPort *tx;
-    InputPort *rx;
+    InputPortOld *tx;
+    InputPortOld *rx;
     //初始化端口引脚
     switch (this->_index)
     {
         case COM1:
-            tx = new InputPort(PA9);
-            rx = new InputPort(PA10);
+            tx = new InputPortOld(PA9);
+            rx = new InputPortOld(PA10);
             break;
         case COM2:
-            tx = new InputPort(PA2);
-            rx = new InputPort(PA3);
+            tx = new InputPortOld(PA2);
+            rx = new InputPortOld(PA3);
             break;
         case COM3:
-            tx = new InputPort(PB10);
-            rx = new InputPort(PB11);
+            tx = new InputPortOld(PB10);
+            rx = new InputPortOld(PB11);
             break;
         case COM4:
-            tx = new InputPort(PC10);
-            rx = new InputPort(PC11);
+            tx = new InputPortOld(PC10);
+            rx = new InputPortOld(PC11);
             break;
         case COM5:
-            tx = new InputPort(PC12);
-            rx = new InputPort(PD3);
+            tx = new InputPortOld(PC12);
+            rx = new InputPortOld(PD3);
             break;
         default:
             break;

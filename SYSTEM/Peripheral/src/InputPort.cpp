@@ -8,11 +8,11 @@
 #define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
-InputPort::InputPort()
+InputPortOld::InputPortOld()
 {
 	this->_Pin=P0;
 }
-InputPort::InputPort(Pin pin)
+InputPortOld::InputPortOld(Pin pin)
 {
 	this->_Pin = pin;
 	this->SetModeOut_PP();
@@ -35,7 +35,7 @@ InputPort::InputPort(Pin pin)
     this->gPIO_PinSource = GPIO_PinSource0 + pin &0X0F;
     this->gPIO_PortSourceGPIO = GPIO_PortSourceGPIOA + pin / 16;
 }
-void InputPort::Init()
+void InputPortOld::Init()
 {	
 	EXTI_InitTypeDef EXTI_InitStructure;
 
@@ -75,7 +75,7 @@ typedef struct TIntState
 // 16条中断线
 static IntState State[16];
 
-void InputPort::Exti0_state(bool onoff)
+void InputPortOld::Exti0_state(bool onoff)
 //外部中断1初始化  PA0 的使能是使能  ON为使能   OFF为使能
 {
     EXTI_InitTypeDef EXTI_InitStructure;
@@ -94,18 +94,18 @@ void InputPort::Exti0_state(bool onoff)
     EXTI_Init(&EXTI_InitStructure);
 }
 
-void InputPort::On()
+void InputPortOld::On()
 {
     this->Exti0_state(true);
 }
 
-void InputPort::Off()
+void InputPortOld::Off()
 {
     this->Exti0_state(false);
 }
 
 // 注册回调  及中断使能
-void InputPort::Register(BtnInCallback handler)
+void InputPortOld::Register(BtnInCallback handler)
 {
     byte pins = this->_Pin &0x0F;
     IntState *state = &State[pins];
@@ -132,7 +132,7 @@ void InputPort::Register(BtnInCallback handler)
 }
 
 //写入值，true：高电平，false：低电平
-void InputPort::Write(const bool value)
+void InputPortOld::Write(const bool value)
 {
 	if(value)
 	{
@@ -145,7 +145,7 @@ void InputPort::Write(const bool value)
 }
 
 ////引脚模式
-void InputPort::SetMode(PIN_MODE mode)
+void InputPortOld::SetMode(PIN_MODE mode)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
     RCC_APB2PeriphClockCmd(_RCC_APB2(this->_Pin), ENABLE);
@@ -186,62 +186,62 @@ void InputPort::SetMode(PIN_MODE mode)
     GPIO_Init(_GROUP(this->_Pin), &GPIO_InitStructure);
 }
 
-void InputPort::SetModeAIN()
+void InputPortOld::SetModeAIN()
 {
     this->SetMode(AIN);
 }
 
-void InputPort::SetModeIN_FLOATING()
+void InputPortOld::SetModeIN_FLOATING()
 {
     this->SetMode(INPUT);
 }
 
-void InputPort::SetModeINPUT_IPD()
+void InputPortOld::SetModeINPUT_IPD()
 {
     this->SetMode(INPUT_PD);
 }
 
-void InputPort::SetModeINPUT_IPU()
+void InputPortOld::SetModeINPUT_IPU()
 {
     this->SetMode(INPUT_PU);
 }
 
-void InputPort::SetModeOut_OD()
+void InputPortOld::SetModeOut_OD()
 {
     this->SetMode(OUTPUT_OD);
 }
 
-void InputPort::SetModeOut_PP()
+void InputPortOld::SetModeOut_PP()
 {
     this->SetMode(OUTPUT_PP);
 }
 
-void InputPort::SetModeAF_OD()
+void InputPortOld::SetModeAF_OD()
 {
     this->SetMode(AF_OD);
 }
 
-void InputPort::SetModeAF_PP()
+void InputPortOld::SetModeAF_PP()
 {
     this->SetMode(AF_PP);
 }
 
-void InputPort::Set()
+void InputPortOld::Set()
 {    
     GPIO_SetBits(_GROUP(_Pin), _PORT(_Pin));
 }
 
-void InputPort::Reset()
+void InputPortOld::Reset()
 {    
     GPIO_ResetBits(_GROUP(_Pin), _PORT(_Pin));
 }
 
-byte InputPort::Read(void)
+byte InputPortOld::Read(void)
 {
     return ReadPinPort(this->_Pin);
 }
 //读取端口状态
-bool InputPort::ReadPinPort(Pin pin)
+bool InputPortOld::ReadPinPort(Pin pin)
 {
 	 return GPIO_ReadInputDataBit(_GROUP(pin), _PORT(pin));
 }
@@ -260,7 +260,7 @@ extern "C"
 				
         bool value;
                 
-        value = InputPort::ReadPinPort(state->Pin); // 获取引脚状态
+        value = InputPortOld::ReadPinPort(state->Pin); // 获取引脚状态
         
         if (state->Handler)
         {

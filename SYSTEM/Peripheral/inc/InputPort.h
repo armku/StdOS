@@ -5,11 +5,11 @@
 //回调函数定义 down指示按下还是弹起触发
 typedef void(*BtnInCallback)(Pin pin, bool down);
 
-class InputPort
+class InputPortOld
 {
     public:
-		InputPort();
-        InputPort(Pin pin);
+		InputPortOld();
+        InputPortOld(Pin pin);
         void Init();
          
 		Pin _Pin; // 针脚

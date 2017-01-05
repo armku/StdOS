@@ -25,7 +25,7 @@ OutputPort led3(PF8,true);
 CW24xxx  w24c02(PB6,PB7,AT24C02);
 //°´¼ü PC13 PA0
 
-InputPort exti(PC13);//PA1 PB3
+InputPortOld exti(PC13);//PA1 PB3
  
 WatchDog dog(3000);
 void feeddog()
