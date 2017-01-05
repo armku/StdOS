@@ -10,7 +10,7 @@
 
 //0-本次读取的数据缓存保存位置(n-2); 2-AD7689通道选择
 CAD7689::CAD7689(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
-{
+{	
     this->ppinsck.Set(pinsck);
     this->ppinsdi.Set(pinsdi);
     this->ppinsdo.Set(pinsdo);
@@ -45,7 +45,7 @@ ushort CAD7689::AD_Read(void)
         this->ppinsck=1;
         this->Delay(40);
         dat <<= 1;
-        dat += this->ppinsdo.ReadInput();
+        dat += this->ppinsdo.Read();
         this->ppinsck=0;
         this->Delay(40);
     }
@@ -63,7 +63,7 @@ ushort CAD7689::AD_Write(ushort sdat)
     {
         ((sdat &0x8000) > 0) ? this->ppinsdi=1: this->ppinsdi=0;
         dat <<= 1;
-        dat += this->ppinsdo.ReadInput();
+        dat += this->ppinsdo.Read();
         this->Delay(50);
         this->ppinsck=0;
         this->Delay(50);
