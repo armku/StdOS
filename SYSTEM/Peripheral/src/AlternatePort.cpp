@@ -11,3 +11,13 @@ void AlternatePort::OnConfig(GPIO_InitTypeDef &gpio)
         gpio.GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 	
 }
+// 端口引脚保护
+#if DEBUG
+    
+    bool AlternatePort::OnReserve(Pin pin, bool flag)
+    {
+        debug_printf("Alternate::");
+
+        return Port::OnReserve(pin, flag);
+    }
+#endif
