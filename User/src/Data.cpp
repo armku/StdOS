@@ -48,6 +48,8 @@ void OnKeyPress(Pin pin, bool onoff)
 	printf("中断引脚：%d 值%d \n",pin,onoff);
 }
 SerialPortOld sp1(COM1);
+SerialPortOld sp2(COM2);
+SerialPortOld sp3(COM3);
 /*
 KEY PA0 
 */
@@ -81,7 +83,9 @@ void ledflash()
 
 void eepread()
 {
-	
+	sp1.SendData('A');
+	sp2.SendData('B');
+	sp3.SendData('C');
 }
 
 //1ms软件定时器

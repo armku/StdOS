@@ -3,6 +3,11 @@
 #include "usart.h"
 #include "InputPort.h"
 #include "AlternatePort.h"
+void sendToUsart1(byte ch);
+void sendToUsart2(byte ch);
+void sendToUsart3(byte ch);
+void sendToUsart4(byte ch);
+void sendToUsart5(byte ch);
 
 SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte dataBits, byte stopBits)
 {
@@ -16,6 +21,11 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     NVIC_InitTypeDef NVIC_InitStructure;
     InputPort *tx;
     InputPort *rx;
+	this->Name[0]='C';
+    this->Name[1]='O';
+    this->Name[2]='M';
+    this->Name[3]='1'+index;
+    this->Name[4]=0;
     switch (this->_index)
     {
         case COM1:
@@ -129,6 +139,29 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     tx->SetModeAF_PP();
     rx->SetModeIN_FLOATING();
 }
+void SerialPortOld::SendData(byte data)
+{
+	switch(this->_index)
+	{
+		case COM1:
+			sendToUsart1(data);
+			break;
+		case COM2:
+			sendToUsart2(data);
+			break;
+		case COM3:
+			sendToUsart3(data);
+			break;
+		case COM4:
+			sendToUsart4(data);
+			break;
+		case COM5:
+			sendToUsart5(data);
+			break;
+		default:
+			break;
+	}
+}
 
 #ifdef __cplusplus
     extern "C"
@@ -169,3 +202,53 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     #ifdef __cplusplus
     }
 #endif
+//向串口1发送数据
+void sendToUsart1(byte ch)
+{
+    #if 0
+        while ((USART1->SR &0X40) == 0){}
+        //循环发送,直到发送完毕
+        USART1->DR = (byte)ch;
+    #else 
+        USART_SendData(USART1, ch);
+
+        /* 等待发送完毕 */
+        while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET){}
+    #endif 
+}
+
+//向串口2发送数据
+void sendToUsart2(byte ch)
+{
+    USART_SendData(USART2, ch);
+
+    /* 等待发送完毕 */
+    while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET){}
+}
+
+//向串口3发送数据
+void sendToUsart3(byte ch)
+{
+    USART_SendData(USART3, ch);
+
+    /* 等待发送完毕 */
+    while (USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET){}
+}
+
+//向串口4发送数据
+void sendToUsart4(byte ch)
+{
+    USART_SendData(UART4, ch);
+
+    /* 等待发送完毕 */
+    while (USART_GetFlagStatus(UART4, USART_FLAG_TXE) == RESET){}
+}
+
+//向串口5发送数据
+void sendToUsart5(byte ch)
+{
+    USART_SendData(UART5, ch);
+
+    /* 等待发送完毕 */
+    while (USART_GetFlagStatus(UART5, USART_FLAG_TXE) == RESET){}
+}

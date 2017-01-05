@@ -1,33 +1,5 @@
 #include "stm32f10x.h"
 #include "usart.h"
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32开发板
-//串口1初始化
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//修改日期:2012/8/18
-//版本：V1.5
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2009-2019
-//All rights reserved
-//********************************************************************************
-//V1.3修改说明
-//支持适应不同频率下的串口波特率设置.
-//加入了对printf的支持
-//增加了串口接收命令功能.
-//修正了printf第一个字符丢失的bug
-//V1.4修改说明
-//1,修改串口初始化IO的bug
-//2,修改了USART_RX_STA,使得串口最大接收字节数为2的14次方
-//3,增加了USART_REC_LEN,用于定义串口最大允许接收的字节数(不大于2的14次方)
-//4,修改了EN_USART1_RX的使能方式
-//V1.5修改说明
-//1,增加了对UCOSII的支持
-//////////////////////////////////////////////////////////////////////////////////
-
-
 //////////////////////////////////////////////////////////////////
 //加入以下代码,支持printf函数,而不需要选择use MicroLIB
 #pragma import(__use_no_semihosting)
@@ -95,53 +67,3 @@ int GetKey(void)
      */
 
 #endif 
-//向串口1发送数据
-void sendToUsart1(byte ch)
-{
-    #if 0
-        while ((USART1->SR &0X40) == 0){}
-        //循环发送,直到发送完毕
-        USART1->DR = (byte)ch;
-    #else 
-        USART_SendData(USART1, ch);
-
-        /* 等待发送完毕 */
-        while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET){}
-    #endif 
-}
-
-//向串口2发送数据
-void sendToUsart2(byte ch)
-{
-    USART_SendData(USART2, ch);
-
-    /* 等待发送完毕 */
-    while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET){}
-}
-
-//向串口3发送数据
-void sendToUsart3(byte ch)
-{
-    USART_SendData(USART3, ch);
-
-    /* 等待发送完毕 */
-    while (USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET){}
-}
-
-//向串口4发送数据
-void sendToUsart4(byte ch)
-{
-    USART_SendData(UART4, ch);
-
-    /* 等待发送完毕 */
-    while (USART_GetFlagStatus(UART4, USART_FLAG_TXE) == RESET){}
-}
-
-//向串口5发送数据
-void sendToUsart5(byte ch)
-{
-    USART_SendData(UART5, ch);
-
-    /* 等待发送完毕 */
-    while (USART_GetFlagStatus(UART5, USART_FLAG_TXE) == RESET){}
-}
