@@ -29,20 +29,44 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     usart.USART_WordLength = USART_WordLength_8b;
 	
 	nvic.NVIC_IRQChannelCmd = ENABLE;
+	InputPort *tx;
+    InputPort *rx;
+	//初始化端口引脚
+	switch (this->_index)
+	{
+		case COM1:
+			tx=new InputPort(PA9);
+			rx=new InputPort(PA10);
+			break;
+		case COM2:
+			tx=new InputPort(PA2);
+			rx=new InputPort(PA3);
+			break;
+		case COM3:
+			tx=new InputPort(PB10);
+			rx=new InputPort(PB11);
+			break;
+		case COM4:
+			tx=new InputPort();
+			rx=new InputPort();
+			break;
+		case COM5:
+			tx=new InputPort();
+			rx=new InputPort();
+			break;
+		default:
+			break;
+	}		
+	tx->SetModeAF_PP();
+    rx->SetModeIN_FLOATING();
+	
     switch (this->_index)
     {
         case COM1:
             //串口1初始化
             //初始化时钟信号
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
-            //初始化GPIO  
-            InputPort tx1(PA9);
-            InputPort rx1(PA10);
-            tx1.SetModeAF_PP();
-            rx1.SetModeIN_FLOATING();
+            RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);           
             //初始化USART
-            
-
             USART_Init(USART1, &usart);
             USART_Cmd(USART1, ENABLE);
             USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
@@ -58,11 +82,6 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
             //初始化时钟信号
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
-            //初始化GPIO
-            InputPort tx2(PA2);
-            InputPort rx2(PA3);
-            tx2.SetModeAF_PP();
-            rx2.SetModeIN_FLOATING();
             //初始化USART            
             USART_Init(USART2, &usart);
             USART_Cmd(USART2, ENABLE);
@@ -79,11 +98,6 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
 			//串口3初始化
             //初始化时钟信号   
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
-            //初始化GPIO
-            InputPort tx3(PB10);
-            InputPort rx3(PB11);
-            tx3.SetModeAF_PP();
-            rx3.SetModeIN_FLOATING();
             //初始化USART            
             USART_Init(USART3, &usart);
             USART_Cmd(USART3, ENABLE);
@@ -105,6 +119,8 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
         default:
             break;
     }
+	tx->SetModeAF_PP();
+    rx->SetModeIN_FLOATING();
 
 }
 
