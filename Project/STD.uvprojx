@@ -687,31 +687,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>USMART</GroupName>
-          <Files>
-            <File>
-              <FileName>readme.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\SYSTEM\USMART\readme.txt</FilePath>
-            </File>
-            <File>
-              <FileName>usmart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\USMART\src\usmart.c</FilePath>
-            </File>
-            <File>
-              <FileName>usmart_config.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\USMART\src\usmart_config.c</FilePath>
-            </File>
-            <File>
-              <FileName>usmart_str.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\USMART\src\usmart_str.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Devices</GroupName>
           <Files>
             <File>
@@ -1625,31 +1600,6 @@
               <FileName>SerialPortOld.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\SerialPortOld.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>USMART</GroupName>
-          <Files>
-            <File>
-              <FileName>readme.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\SYSTEM\USMART\readme.txt</FilePath>
-            </File>
-            <File>
-              <FileName>usmart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\USMART\src\usmart.c</FilePath>
-            </File>
-            <File>
-              <FileName>usmart_config.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\USMART\src\usmart_config.c</FilePath>
-            </File>
-            <File>
-              <FileName>usmart_str.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\USMART\src\usmart_str.c</FilePath>
             </File>
           </Files>
         </Group>

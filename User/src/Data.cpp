@@ -2,7 +2,6 @@
 #include "stm32f10x.h"
 #include "SerialPortOld.h"
 #include "W24xxx.h"
-#include "usmart.h"
 #include "usart.h"
 #include "W25qxx.h"
 #include "Data.h"
@@ -57,9 +56,7 @@ KEY PA0
 void STDInit() 
 {    	
 	Sys.Init();
-    //uart_init(115200);
-    usmart_dev.init(SystemCoreClock / 1000000); //≥ı ºªØUSMART
-
+    
 	exti.Init();
 	exti.On();	
 	exti.Register(OnKeyPress);
