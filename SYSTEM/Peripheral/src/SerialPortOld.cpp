@@ -4,7 +4,6 @@
 #include "InputPort.h"
 #include "AlternatePort.h"
 
-
 SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte dataBits, byte stopBits)
 {
     this->_index = index;
@@ -79,8 +78,8 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
 
             //Usart3 NVIC 配置
             NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;
-            NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3; //抢占优先级3
-            NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3; //子优先级3
+            NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; //抢占优先级3
+            NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1; //子优先级3
             NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQ通道使能
             NVIC_Init(&NVIC_InitStructure); //根据指定的参数初始化VIC寄存器
 
@@ -166,8 +165,33 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
         {
             USART_ClearITPendingBit(USART2, USART_IT_RXNE);
             byte inch = USART_ReceiveData(USART2); //读取接收到的数据
-
-
+        }
+    }
+	void USART3_IRQHandler(void) //串口1中断服务程序
+    {
+        if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+        //接收中断(接收到的数据必须是0x0d 0x0a结尾)
+        {
+            USART_ClearITPendingBit(USART3, USART_IT_RXNE);
+            byte inch = USART_ReceiveData(USART3); //读取接收到的数据
+        }
+    }
+	void USART4_IRQHandler(void) //串口1中断服务程序
+    {
+        if (USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
+        //接收中断(接收到的数据必须是0x0d 0x0a结尾)
+        {
+            USART_ClearITPendingBit(UART4, USART_IT_RXNE);
+            byte inch = USART_ReceiveData(UART4); //读取接收到的数据
+        }
+    }
+	void USART5_IRQHandler(void) //串口1中断服务程序
+    {
+        if (USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
+        //接收中断(接收到的数据必须是0x0d 0x0a结尾)
+        {
+            USART_ClearITPendingBit(UART5, USART_IT_RXNE);
+            byte inch = USART_ReceiveData(UART5); //读取接收到的数据
         }
     }
 
