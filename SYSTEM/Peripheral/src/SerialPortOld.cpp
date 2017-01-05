@@ -6,14 +6,12 @@
 
 void uart_init(uint32_t bound)
 {
-    //串口1初始化
-    GPIO_InitTypeDef gpio;
+    //串口1初始化    
     USART_InitTypeDef usart;
     NVIC_InitTypeDef nvic;
     //初始化时钟信号
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_USART1, ENABLE);
-    //初始化GPIO    
-    GPIO_Init(GPIOA, &gpio);
+    //初始化GPIO  
 	InputPort tx1(PA9);
 	InputPort rx1(PA10);
 	tx1.SetModeAF_PP();
@@ -43,14 +41,10 @@ void uart_init(uint32_t bound)
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
     //初始化GPIO
-    gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    gpio.GPIO_Pin = GPIO_Pin_3;
-    gpio.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOA, &gpio);
-    gpio.GPIO_Mode = GPIO_Mode_AF_PP;
-    gpio.GPIO_Pin = GPIO_Pin_2;
-    gpio.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOA, &gpio);
+    InputPort tx2(PA2);
+	InputPort rx2(PA3);
+	tx2.SetModeAF_PP();
+	rx2.SetModeIN_FLOATING();
     //初始化USART
     usart.USART_BaudRate = bound;
     usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
