@@ -1,8 +1,8 @@
+#include <stdio.h>
 #include "Type.h"
 #include "stm32f10x.h"
 #include "SerialPortOld.h"
 #include "W24xxx.h"
-#include "usart.h"
 #include "W25qxx.h"
 #include "Data.h"
 #include "multi_button.h"
@@ -84,7 +84,7 @@ void eepread()
 	sp2.SendData('B');
 	sp3.SendData('C');
 }
-
+byte USART_RX_BUF[100]; //接收缓冲,最大USART_REC_LEN个字节.
 //1ms软件定时器
 void softTimers()
 {
@@ -96,8 +96,7 @@ void softTimers()
         ushort len = com1buf.GetLength();
         if (len >= 3)
         {
-            USART_RX_STA = len - 2;
-            USART_RX_STA |= 0x8000;
+            
 
             com1buf.Pop(USART_RX_BUF, 0, len - 2);
         }
