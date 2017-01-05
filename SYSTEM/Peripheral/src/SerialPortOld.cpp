@@ -11,115 +11,115 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     this->_parity = parity;
     this->_dataBits = dataBits;
     this->_stopBits = stopBits;
-    
+
     this->Name[0] = 'C';
     this->Name[1] = 'O';
     this->Name[2] = 'M';
     this->Name[3] = '1' + index;
     this->Name[4] = 0;
-	
-	uint32_t bound=this->_baudRate;
+
+    uint32_t bound = this->_baudRate;
     switch (this->_index)
     {
         case COM1:
             //串口1初始化    
-    USART_InitTypeDef usart;
-    NVIC_InitTypeDef nvic;
-    //初始化时钟信号
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
-    //初始化GPIO  
-	InputPort tx1(PA9);
-	InputPort rx1(PA10);
-	tx1.SetModeAF_PP();
-	rx1.SetModeIN_FLOATING();
-    //初始化USART
-    usart.USART_BaudRate = bound;
-    usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-    usart.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-    usart.USART_Parity = USART_Parity_No;
-    usart.USART_StopBits = USART_StopBits_1;
-    usart.USART_WordLength = USART_WordLength_8b;
-    USART_Init(USART1, &usart);
-    USART_Cmd(USART1, ENABLE);
-    USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
-    //初始化NVIC
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-    nvic.NVIC_IRQChannel = USART1_IRQn;
-    nvic.NVIC_IRQChannelCmd = ENABLE;
-    nvic.NVIC_IRQChannelPreemptionPriority = 0;
-    nvic.NVIC_IRQChannelSubPriority = 0;
-    NVIC_Init(&nvic);
-    //串口2初始化
-    //初始化时钟信号
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
-    //初始化GPIO
-    InputPort tx2(PA2);
-	InputPort rx2(PA3);
-	tx2.SetModeAF_PP();
-	rx2.SetModeIN_FLOATING();
-    //初始化USART
-    usart.USART_BaudRate = bound;
-    usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-    usart.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-    usart.USART_Parity = USART_Parity_No;
-    usart.USART_StopBits = USART_StopBits_1;
-    usart.USART_WordLength = USART_WordLength_8b;
-    USART_Init(USART2, &usart);
-    USART_Cmd(USART2, ENABLE);
-    USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
-    USART_ITConfig(USART2, USART_IT_IDLE, ENABLE);
-    //初始化NVIC
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-    nvic.NVIC_IRQChannel = USART2_IRQn;
-    nvic.NVIC_IRQChannelCmd = ENABLE;
-    nvic.NVIC_IRQChannelPreemptionPriority = 0;
-    nvic.NVIC_IRQChannelSubPriority = 1;
-    NVIC_Init(&nvic);
+            USART_InitTypeDef usart;
+            NVIC_InitTypeDef nvic;
+            //初始化时钟信号
+            RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+            //初始化GPIO  
+            InputPort tx1(PA9);
+            InputPort rx1(PA10);
+            tx1.SetModeAF_PP();
+            rx1.SetModeIN_FLOATING();
+            //初始化USART
+            usart.USART_BaudRate = bound;
+            usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+            usart.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+            usart.USART_Parity = USART_Parity_No;
+            usart.USART_StopBits = USART_StopBits_1;
+            usart.USART_WordLength = USART_WordLength_8b;
+            USART_Init(USART1, &usart);
+            USART_Cmd(USART1, ENABLE);
+            USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+            //初始化NVIC
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = USART1_IRQn;
+            nvic.NVIC_IRQChannelCmd = ENABLE;
+            nvic.NVIC_IRQChannelPreemptionPriority = 0;
+            nvic.NVIC_IRQChannelSubPriority = 0;
+            NVIC_Init(&nvic);
+            //串口2初始化
+            //初始化时钟信号
+            RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+            //初始化GPIO
+            InputPort tx2(PA2);
+            InputPort rx2(PA3);
+            tx2.SetModeAF_PP();
+            rx2.SetModeIN_FLOATING();
+            //初始化USART
+            usart.USART_BaudRate = bound;
+            usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+            usart.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+            usart.USART_Parity = USART_Parity_No;
+            usart.USART_StopBits = USART_StopBits_1;
+            usart.USART_WordLength = USART_WordLength_8b;
+            USART_Init(USART2, &usart);
+            USART_Cmd(USART2, ENABLE);
+            USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
+            USART_ITConfig(USART2, USART_IT_IDLE, ENABLE);
+            //初始化NVIC
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = USART2_IRQn;
+            nvic.NVIC_IRQChannelCmd = ENABLE;
+            nvic.NVIC_IRQChannelPreemptionPriority = 0;
+            nvic.NVIC_IRQChannelSubPriority = 1;
+            NVIC_Init(&nvic);
 
-    //串口3初始化
-    //初始化时钟信号   
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
-    //初始化GPIO
-	InputPort tx3(PB10);
-	InputPort rx3(PB11);
-	tx3.SetModeAF_PP();
-	rx3.SetModeIN_FLOATING();
-    //初始化USART
-    usart.USART_BaudRate = bound;
-    usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-    usart.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-    usart.USART_Parity = USART_Parity_No;
-    usart.USART_StopBits = USART_StopBits_1;
-    usart.USART_WordLength = USART_WordLength_8b;
-    USART_Init(USART3, &usart);
-    USART_Cmd(USART3, ENABLE);
-    USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);
-    //USART_ITConfig(USART3, USART_IT_IDLE, ENABLE);
-    //初始化NVIC
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-    nvic.NVIC_IRQChannel = USART3_IRQn;
-    nvic.NVIC_IRQChannelCmd = ENABLE;
-    nvic.NVIC_IRQChannelPreemptionPriority = 0;
-    nvic.NVIC_IRQChannelSubPriority = 4;
-    NVIC_Init(&nvic);
+            //串口3初始化
+            //初始化时钟信号   
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
+            //初始化GPIO
+            InputPort tx3(PB10);
+            InputPort rx3(PB11);
+            tx3.SetModeAF_PP();
+            rx3.SetModeIN_FLOATING();
+            //初始化USART
+            usart.USART_BaudRate = bound;
+            usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+            usart.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+            usart.USART_Parity = USART_Parity_No;
+            usart.USART_StopBits = USART_StopBits_1;
+            usart.USART_WordLength = USART_WordLength_8b;
+            USART_Init(USART3, &usart);
+            USART_Cmd(USART3, ENABLE);
+            USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);
+            //USART_ITConfig(USART3, USART_IT_IDLE, ENABLE);
+            //初始化NVIC
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = USART3_IRQn;
+            nvic.NVIC_IRQChannelCmd = ENABLE;
+            nvic.NVIC_IRQChannelPreemptionPriority = 0;
+            nvic.NVIC_IRQChannelSubPriority = 4;
+            NVIC_Init(&nvic);
             break;
         case COM2:
-            
+
             break;
         case COM3:
-            
+
             break;
             #if 0
-            case COM4:                
+            case COM4:
                 break;
-            case COM5:                
+            case COM5:
                 break;
             #endif 
         default:
             break;
     }
-    
+
 }
 
 
