@@ -1,20 +1,7 @@
 #pragma once
 
-/*
- * Copyright (c) 2016 Zibin Zheng <znbin@qq.com>
- * All rights reserved
- 
- InputPort key2(PC13);
- btn2.attach(SINGLE_CLICK, BTN2_SINGLE_CLICK_Handler);
- void btn2ticks()
-{
-    btn2.ticks();
-}
- */
-
-
 #include "Type.h"
-#include "InputPort.h"
+#include "InputPortNew.h"
 
 //According to your need to modify the constants.
 #define TICKS_INTERVAL    5	//ms //按键时间间隔
@@ -37,7 +24,7 @@ class CButton
         void ticks();
         PressEvent get_button_event(); //获取当前按键状态
     private:
-        InputPort *pPin;    
+        InputPortNew pPin;    
         struct Button
         {
                 ushort ticks;
@@ -53,3 +40,4 @@ class CButton
 		byte downBit;//键按下时的状态，高低电平，1高电平，0低电平
 		byte hal_button_Level(void); //读取是否有键按下。
 };
+

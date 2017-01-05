@@ -10,11 +10,9 @@
 //static byte shake_time = 70;
 
 CButton::CButton(Pin pin, byte active_level,byte DownBit)
-{
-    this->pPin = new InputPort(pin);
-    this->pPin->SetModeINPUT_IPU();
+{	
+    this->pPin.Set(pin);
 
-    memset(&(this->btn), sizeof(struct Button), 0);
     this->btn.event = (byte)NONE_PRESS;
     //this->btn.hal_button_Level = pin_level;
     this->btn.button_level = this->hal_button_Level();
@@ -30,7 +28,7 @@ void CButton::attach(PressEvent event, BtnCallback cb)
 byte CButton::hal_button_Level(void)
 {
 	byte ret=0;
-	ret=this->pPin->Read();
+	ret=this->pPin.Read();
 	if(!this->downBit)
 	{
 		ret=!ret;
