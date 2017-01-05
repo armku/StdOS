@@ -24,9 +24,6 @@ CAD7689::CAD7689(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
     this->chDelayCnt = 0;
 }
 
-CAD7689::~CAD7689(){
-
-}
 void CAD7689::Delay(uint nTime)
 {
     uint i;

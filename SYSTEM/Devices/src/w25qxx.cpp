@@ -34,9 +34,6 @@ CW25Qxxx::CW25Qxxx(Pin pinscs,Pin pinsclk,Pin pinsmiso,Pin pinsmosi,ESpiChannel 
 	this->spi=new CHardSpi(spichannel);
 		
 }
-CW25Qxxx::~CW25Qxxx(){
-
-}
 
 void CW25Qxxx::Init()
 {    

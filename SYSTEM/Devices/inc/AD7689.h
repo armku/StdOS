@@ -10,8 +10,7 @@
 class CAD7689
 {
     public:
-        CAD7689(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv);
-        ~CAD7689();  
+        CAD7689(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv);        
         void Routin(void); //读取AD值,并切换通道
         void Init(void); //
         float getVolt(ushort ch); //获取通道电压值    

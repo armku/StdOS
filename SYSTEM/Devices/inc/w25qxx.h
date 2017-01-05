@@ -8,9 +8,7 @@
 class CW25Qxxx
 {
     public:
-        CW25Qxxx(Pin pinscs,Pin pinsclk=PA5,Pin pinsmiso=PA6,Pin pinsmosi=PA7,ESpiChannel spichannel=CHSPI1);
-        ~CW25Qxxx();
-    public:
+        CW25Qxxx(Pin pinscs,Pin pinsclk=PA5,Pin pinsmiso=PA6,Pin pinsmosi=PA7,ESpiChannel spichannel=CHSPI1);        
         void Init();
         uint32_t ReadDeviceID(void);
         uint32_t ReadID(void);
@@ -24,8 +22,7 @@ class CW25Qxxx
         void WriteEnable(void);               
         void StartReadSequence(uint32_t ReadAddr);
         void PageWrite(byte *pBuffer, uint32_t WriteAddr, ushort NumByteToWrite);
-        void BulkErase(void);
-	private:
+        void BulkErase(void);	
 		OutputPort pincs;
 		OutputPort pinclk;
 		OutputPort pinmiso;

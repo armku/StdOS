@@ -66,10 +66,6 @@ CADS1246::CADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, Pin pinrd, Pi
     this->ppinreset=0;
 }
 
-CADS1246::~CADS1246()
-{
-
-}
 byte CADS1246::ReadReg(byte RegAddr)
 {
     byte ret = 0;

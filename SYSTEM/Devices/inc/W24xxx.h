@@ -11,10 +11,8 @@ typedef enum
 class CW24xxx
 {
     public:
-        CW24xxx(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr = 0xA0, uint wnms = 5); //写延时时间
-        ~CW24xxx();
+        CW24xxx(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr = 0xA0, uint wnms = 5); //写延时时间       
         byte CheckOk();
-    public:
         #if EEPTEST
             void Test(void);
         #endif 
@@ -28,8 +26,7 @@ class CW24xxx
         byte devAddr; //设备地址
         uint pageSize; //存储页大小
         CSoftI2C *pi2c;
-        uint writedelaynms; //写延时	
-    private:
+        uint writedelaynms; //写延时	    
         ushort jsPageSize(uint type); //计算存储页大小
         byte writePage(byte *buf, ushort bufpos, ushort addr, uint len); //页内写
         byte readPage(byte *buf, ushort bufpos, ushort addr, uint len); //页内读

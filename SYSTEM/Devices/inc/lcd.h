@@ -11,8 +11,7 @@ class CLcd
 {
     public:
         CLcd(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs);
-		CLcd();
-    public:
+		CLcd();    
         //直接操作屏幕
         void Init(); //初始化
         void Cls(ushort x0 = 0, ushort y0 = 0, ushort width = 128, ushort height = 64); //清理指定位置

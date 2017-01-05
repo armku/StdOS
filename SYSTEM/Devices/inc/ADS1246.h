@@ -5,9 +5,7 @@
 class CADS1246
 {
     public:
-        CADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, Pin pinrd, Pin pinreset);
-        ~CADS1246();
-    public:
+        CADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, Pin pinrd, Pin pinreset);       
         byte ReadReg(byte RegAddr);
         void WriteReg(byte RegAddr, byte da);
         float Read(void); //返回-1,表示转换未完成

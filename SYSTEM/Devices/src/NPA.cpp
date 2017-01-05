@@ -6,8 +6,6 @@ CNPA::CNPA(Pin pinsck, Pin pinsda, byte devAddr)
     this->pi2c = new CSoftI2C(pinsck, pinsda);
 }
 
-CNPA::~CNPA(){}
-
 void CNPA::Init(void)
 {
     this->pi2c->Init();

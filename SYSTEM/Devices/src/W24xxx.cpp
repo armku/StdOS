@@ -14,9 +14,6 @@ CW24xxx::CW24xxx(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr, uint 
     this->writedelaynms = wnms;
 }
 
-CW24xxx::~CW24xxx(){
-
-}
 byte CW24xxx::CheckOk()
 {
     if (this->checkDevice() == 0)
