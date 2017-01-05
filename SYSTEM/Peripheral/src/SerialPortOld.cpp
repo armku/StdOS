@@ -153,7 +153,8 @@ void SerialPortOld::Open()
 }
 
 
-
+CFIFORing com1buf; //串口1接收缓冲区
+uint com1timeidle; //串口1空闲时间
 #ifdef __cplusplus
     extern "C"
     {

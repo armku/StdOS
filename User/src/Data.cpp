@@ -11,8 +11,7 @@
 #include "WatchDog.h"
 #include "Port.h"
 
-CFIFORing com1buf; //串口1接收缓冲区
-uint com1timeidle; //串口1空闲时间
+
 //sequence 序列号 cur_seq max_seq step
 
 void ledflash();
