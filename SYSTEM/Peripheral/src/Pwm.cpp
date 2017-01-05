@@ -2,9 +2,9 @@
 #include "stm32f10x.h"
 
 
-PWM::PWM(Pin pin, uint frq, uint duty): InputPort(pin)
+PWM::PWM(Pin pin, uint frq, uint duty):AlternatePort(pin)
 {
-    this->freq = frq;
+	this->freq = frq;
     this->duty = duty;
 }
 
@@ -278,8 +278,6 @@ void PWM::Init()
 		default:
             break;
     }
-
-    this->SetModeAF_PP();
 }
 
 //ÉèÖÃÊä³öÖµ
