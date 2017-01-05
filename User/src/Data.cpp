@@ -53,10 +53,8 @@ SerialPortOld sp3(COM3);
 KEY PA0 
 */
 //系统初始化
-void uart_init(uint32_t bound=115200);
 void STDInit() 
-{    	
-	uart_init();
+{    		
 	Sys.Init();
 	Sys.ShowInfo();
     

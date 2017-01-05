@@ -4,9 +4,25 @@
 #include "InputPort.h"
 #include "AlternatePort.h"
 
-void uart_init(uint32_t bound)
+SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte dataBits, byte stopBits)
 {
-    //串口1初始化    
+    this->_index = index;
+    this->_baudRate = baudRate;
+    this->_parity = parity;
+    this->_dataBits = dataBits;
+    this->_stopBits = stopBits;
+    
+    this->Name[0] = 'C';
+    this->Name[1] = 'O';
+    this->Name[2] = 'M';
+    this->Name[3] = '1' + index;
+    this->Name[4] = 0;
+	
+	uint32_t bound=this->_baudRate;
+    switch (this->_index)
+    {
+        case COM1:
+            //串口1初始化    
     USART_InitTypeDef usart;
     NVIC_InitTypeDef nvic;
     //初始化时钟信号
@@ -87,25 +103,6 @@ void uart_init(uint32_t bound)
     nvic.NVIC_IRQChannelPreemptionPriority = 0;
     nvic.NVIC_IRQChannelSubPriority = 4;
     NVIC_Init(&nvic);
-}
-SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte dataBits, byte stopBits)
-{
-    this->_index = index;
-    this->_baudRate = baudRate;
-    this->_parity = parity;
-    this->_dataBits = dataBits;
-    this->_stopBits = stopBits;
-    
-    this->Name[0] = 'C';
-    this->Name[1] = 'O';
-    this->Name[2] = 'M';
-    this->Name[3] = '1' + index;
-    this->Name[4] = 0;
-	
-    switch (this->_index)
-    {
-        case COM1:
-            
             break;
         case COM2:
             
