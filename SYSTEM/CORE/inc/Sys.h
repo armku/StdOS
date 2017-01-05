@@ -76,7 +76,7 @@ class TSys:public Object
 		byte ID[12];
 		ushort FlashSize;
 	private:
-		Task task;	
+		TaskOld task;	
 	
 };
 extern TSys Sys;//系统参数

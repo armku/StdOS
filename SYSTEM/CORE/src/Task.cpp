@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include "Task.h"
 
-Task::Task()
+TaskOld::TaskOld()
 {
 	this->taskCls();
 }
 //启动
-void Task::Start()
+void TaskOld::Start()
 {
 	this->isStart = true;
 }
 //间隔10ms调用一次
-void Task::TimeTick() 
+void TaskOld::TimeTick() 
 {
     if (this->isStart)
     {
@@ -24,7 +24,7 @@ void Task::TimeTick()
     }	
 }
 //运行
-void Task::Routin() 
+void TaskOld::Routin() 
 {
     if (this->isStart)
     {
@@ -44,7 +44,7 @@ void Task::Routin()
 添加任务，参数分别是：任务函数、参数、首次时间、间隔时
 间、名称。返回值是一个 uint 的任务唯一编号。	
  */
-uint Task::AddTask(void(*callback)(void),void* para, uint firstms, int periodms, const char *name)
+uint TaskOld::AddTask(void(*callback)(void),void* para, uint firstms, int periodms, const char *name)
 {
     Node *nodeNew = new Node(); //新版链表
 
@@ -76,7 +76,7 @@ uint Task::AddTask(void(*callback)(void),void* para, uint firstms, int periodms,
 /*
 设置任务参数
 */
-void Task::SetTask(uint taskid,bool onoff,int delayms)
+void TaskOld::SetTask(uint taskid,bool onoff,int delayms)
 {
 	Node *tsk=this->findTask(taskid);
 	if(tsk!=0)
@@ -85,14 +85,14 @@ void Task::SetTask(uint taskid,bool onoff,int delayms)
 	}
 }
 //查找任务
-Node *Task::findTask(uint taskid)
+Node *TaskOld::findTask(uint taskid)
 {
 	Node *ret=0;
 	
 	return ret;
 }
 //初始化
-void Task::taskCls()
+void TaskOld::taskCls()
 {
     this->nodeCount = 0;
     this->nodeHead = 0;

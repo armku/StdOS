@@ -19,11 +19,10 @@ struct Node
     Node *pNext; //下一节点
 };
 
-class Task
+class TaskOld
 {
 	public:
-		Task();
-	public:
+		TaskOld();
 		uint AddTask(void(*callback)(void),void* para, uint firstms, int periodms, const char *name = "未命名任务");
         void TimeTick(); //间隔1ms调用一次
 		void SetTask(uint taskid,bool onoff,int delayms=0);//设置任务参数
