@@ -610,11 +610,6 @@
               <FilePath>..\SYSTEM\Peripheral\src\InputPortNew.cpp</FilePath>
             </File>
             <File>
-              <FileName>InputPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\InputPort.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ITransport.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
@@ -683,6 +678,11 @@
               <FileName>SerialPortOld.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\SerialPortOld.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputPortOld.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\InputPortOld.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1527,11 +1527,6 @@
               <FilePath>..\SYSTEM\Peripheral\src\InputPortNew.cpp</FilePath>
             </File>
             <File>
-              <FileName>InputPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\InputPort.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ITransport.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
@@ -1600,6 +1595,11 @@
               <FileName>SerialPortOld.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\SerialPortOld.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputPortOld.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\InputPortOld.cpp</FilePath>
             </File>
           </Files>
         </Group>

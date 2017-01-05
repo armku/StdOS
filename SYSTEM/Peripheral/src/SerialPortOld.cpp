@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "SerialPortOld.h"
 #include "stm32f10x.h"
-#include "InputPort.h"
+#include "InputPortOld.h"
 #include "AlternatePort.h"
 
 SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte dataBits, byte stopBits)

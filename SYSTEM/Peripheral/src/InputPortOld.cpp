@@ -1,5 +1,5 @@
 #include "stm32f10x_exti.h"
-#include "InputPort.h"
+#include "InputPortOld.h"
 
 // 获取组和针脚
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))

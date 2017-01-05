@@ -6,7 +6,7 @@
 #include "W25qxx.h"
 #include "Data.h"
 #include "multi_button.h"
-#include "InputPort.h"
+#include "InputPortOld.h"
 #include "Sys.h"
 #include "WatchDog.h"
 #include "Port.h"
