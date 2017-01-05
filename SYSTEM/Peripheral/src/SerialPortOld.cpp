@@ -147,6 +147,10 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     rx->SetModeIN_FLOATING();
 
 }
+void SerialPortOld::Open()
+{
+	
+}
 
 
 
