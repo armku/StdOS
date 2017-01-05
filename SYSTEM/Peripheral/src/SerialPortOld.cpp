@@ -34,9 +34,6 @@ void uart_init(uint32_t bound)
     nvic.NVIC_IRQChannelSubPriority = 0;
     NVIC_Init(&nvic);
     //串口2初始化
-    //GPIO_InitTypeDef gpio;
-    //USART_InitTypeDef usart;
-    //NVIC_InitTypeDef nvic;
     //初始化时钟信号
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
@@ -65,9 +62,6 @@ void uart_init(uint32_t bound)
     NVIC_Init(&nvic);
 
     //串口3初始化
-    //	GPIO_InitTypeDef gpio;
-    //	USART_InitTypeDef usart;
-    //	NVIC_InitTypeDef nvic;
     //初始化时钟信号   
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
     //初始化GPIO
