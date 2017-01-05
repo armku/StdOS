@@ -574,6 +574,11 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
             </File>
+            <File>
+              <FileName>TaskScheduler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\TaskScheduler.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1510,6 +1515,11 @@
               <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TaskScheduler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\TaskScheduler.cpp</FilePath>
             </File>
           </Files>
         </Group>
