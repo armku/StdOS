@@ -12,15 +12,12 @@ void uart_init(uint32_t bound)
     NVIC_InitTypeDef nvic;
     //初始化时钟信号
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_USART1, ENABLE);
-    //初始化GPIO
-    gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    gpio.GPIO_Pin = GPIO_Pin_10;
-    gpio.GPIO_Speed = GPIO_Speed_50MHz;
+    //初始化GPIO    
     GPIO_Init(GPIOA, &gpio);
-    gpio.GPIO_Mode = GPIO_Mode_AF_PP;
-    gpio.GPIO_Pin = GPIO_Pin_9;
-    gpio.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOA, &gpio);
+	InputPort tx1(PA9);
+	InputPort rx1(PA10);
+	tx1.SetModeAF_PP();
+	rx1.SetModeIN_FLOATING();
     //初始化USART
     usart.USART_BaudRate = bound;
     usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
@@ -81,14 +78,10 @@ void uart_init(uint32_t bound)
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
     //初始化GPIO
-    gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    gpio.GPIO_Pin = GPIO_Pin_11;
-    gpio.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOB, &gpio);
-    gpio.GPIO_Mode = GPIO_Mode_AF_PP;
-    gpio.GPIO_Pin = GPIO_Pin_10;
-    gpio.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOB, &gpio);
+	InputPort tx3(PB10);
+	InputPort rx3(PB11);
+	tx3.SetModeAF_PP();
+	rx3.SetModeIN_FLOATING();
     //初始化USART
     usart.USART_BaudRate = bound;
     usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
@@ -99,7 +92,7 @@ void uart_init(uint32_t bound)
     USART_Init(USART3, &usart);
     USART_Cmd(USART3, ENABLE);
     USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);
-    USART_ITConfig(USART3, USART_IT_IDLE, ENABLE);
+    //USART_ITConfig(USART3, USART_IT_IDLE, ENABLE);
     //初始化NVIC
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
     nvic.NVIC_IRQChannel = USART3_IRQn;
