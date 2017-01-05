@@ -47,6 +47,7 @@ void OnKeyPress(Pin pin, bool onoff)
 	led2=!led2;
 	printf("中断引脚：%d 值%d \n",pin,onoff);
 }
+SerialPortOld sp1(COM1);
 /*
 KEY PA0 
 */
@@ -54,7 +55,7 @@ KEY PA0
 void STDInit() 
 {    	
 	Sys.Init();
-    uart_init(115200);
+    //uart_init(115200);
     usmart_dev.init(SystemCoreClock / 1000000); //初始化USMART
 
 	exti.Init();
