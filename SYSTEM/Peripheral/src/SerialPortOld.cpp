@@ -95,159 +95,34 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     this->_parity = parity;
     this->_dataBits = dataBits;
     this->_stopBits = stopBits;
-
-    USART_InitTypeDef USART_InitStructure;
-    NVIC_InitTypeDef NVIC_InitStructure;
-    InputPort *tx;
-    InputPort *rx;
+    
     this->Name[0] = 'C';
     this->Name[1] = 'O';
     this->Name[2] = 'M';
     this->Name[3] = '1' + index;
     this->Name[4] = 0;
-	//return;
+	
     switch (this->_index)
     {
         case COM1:
-            tx = new InputPort(PA9);
-            rx = new InputPort(PA10);
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); //使能
-
-
-            //NVIC 配置
-            NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-            NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; //抢占优先级3
-            NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1; //子优先级3
-            NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQ通道使能
-            NVIC_Init(&NVIC_InitStructure); //根据指定的参数初始化VIC寄存器
-
-            //初始化设置
-
-            USART_InitStructure.USART_BaudRate = this->_baudRate; //串口波特率
-            USART_InitStructure.USART_WordLength = USART_WordLength_8b; //字长为8位数据格式
-            USART_InitStructure.USART_StopBits = USART_StopBits_1; //一个停止位
-            USART_InitStructure.USART_Parity = USART_Parity_No; //无奇偶校验位
-            USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None; //无硬件数据流控制
-            USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx; //收发模式
-
-            USART_Init(USART1, &USART_InitStructure); //初始化串口
-            USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); //开启串口接收中断
-            USART_Cmd(USART1, ENABLE); //使能串口
-            USART_ClearFlag(USART1, USART_FLAG_TC);
+            
             break;
         case COM2:
-            tx = new InputPort(PA2);
-            rx = new InputPort(PA3);
-            RCC_APB2PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE); //使能
-
-
-            //NVIC 配置
-            NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
-            NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; //抢占优先级3
-            NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1; //子优先级3
-            NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQ通道使能
-            NVIC_Init(&NVIC_InitStructure); //根据指定的参数初始化VIC寄存器
-
-            //初始化设置
-
-            USART_InitStructure.USART_BaudRate = this->_baudRate; //串口波特率
-            USART_InitStructure.USART_WordLength = USART_WordLength_8b; //字长为8位数据格式
-            USART_InitStructure.USART_StopBits = USART_StopBits_1; //一个停止位
-            USART_InitStructure.USART_Parity = USART_Parity_No; //无奇偶校验位
-            USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None; //无硬件数据流控制
-            USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx; //收发模式
-
-            USART_Init(USART2, &USART_InitStructure); //初始化串口
-            USART_ITConfig(USART2, USART_IT_RXNE, ENABLE); //开启串口接收中断
-            USART_Cmd(USART2, ENABLE); //使能串口
-            USART_ClearFlag(USART2, USART_FLAG_TC);
+            
             break;
         case COM3:
-            tx = new InputPort(PB11);
-            rx = new InputPort(PB10);
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
-			RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-
-            //NVIC 配置
-            NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;
-            NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; //抢占优先级3
-            NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1; //子优先级3
-            NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQ通道使能
-            NVIC_Init(&NVIC_InitStructure); //根据指定的参数初始化VIC寄存器
-
-            //初始化设置
-
-            USART_InitStructure.USART_BaudRate = this->_baudRate; //串口波特率
-            USART_InitStructure.USART_WordLength = USART_WordLength_8b; //字长为8位数据格式
-            USART_InitStructure.USART_StopBits = USART_StopBits_1; //一个停止位
-            USART_InitStructure.USART_Parity = USART_Parity_No; //无奇偶校验位
-            USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None; //无硬件数据流控制
-            USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx; //收发模式
-
-            USART_Init(USART3, &USART_InitStructure); //初始化串口
-            USART_ITConfig(USART3, USART_IT_RXNE, ENABLE); //开启串口接收中断
-            USART_Cmd(USART3, ENABLE); //使能串口
-            USART_ClearFlag(USART3, USART_FLAG_TC);
+            
             break;
             #if 0
-            case COM4:
-                tx = new InputPort(PC10);
-                rx = new InputPort(PC11);
-                RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);
-
-                //NVIC 配置
-                NVIC_InitStructure.NVIC_IRQChannel = UART4_IRQn;
-                NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; //抢占优先级3
-                NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1; //子优先级3
-                NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQ通道使能
-                NVIC_Init(&NVIC_InitStructure); //根据指定的参数初始化VIC寄存器
-
-                //初始化设置
-
-                USART_InitStructure.USART_BaudRate = this->_baudRate; //串口波特率
-                USART_InitStructure.USART_WordLength = USART_WordLength_8b; //字长为8位数据格式
-                USART_InitStructure.USART_StopBits = USART_StopBits_1; //一个停止位
-                USART_InitStructure.USART_Parity = USART_Parity_No; //无奇偶校验位
-                USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None; //无硬件数据流控制
-                USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx; //收发模式
-
-                USART_Init(UART4, &USART_InitStructure); //初始化串口
-                USART_ITConfig(UART4, USART_IT_RXNE, ENABLE); //开启串口接收中断
-                USART_Cmd(UART4, ENABLE); //使能串口
-                USART_ClearFlag(UART4, USART_FLAG_TC);
+            case COM4:                
                 break;
-            case COM5:
-                tx = new InputPort(PC12);
-                rx = new InputPort(PD3);
-                RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART5, ENABLE);
-
-                //NVIC 配置
-                NVIC_InitStructure.NVIC_IRQChannel = UART5_IRQn;
-                NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; //抢占优先级3
-                NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1; //子优先级3
-                NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQ通道使能
-                NVIC_Init(&NVIC_InitStructure); //根据指定的参数初始化VIC寄存器
-
-                //初始化设置
-
-                USART_InitStructure.USART_BaudRate = this->_baudRate; //串口波特率
-                USART_InitStructure.USART_WordLength = USART_WordLength_8b; //字长为8位数据格式
-                USART_InitStructure.USART_StopBits = USART_StopBits_1; //一个停止位
-                USART_InitStructure.USART_Parity = USART_Parity_No; //无奇偶校验位
-                USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None; //无硬件数据流控制
-                USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx; //收发模式
-
-                USART_Init(UART5, &USART_InitStructure); //初始化串口
-                USART_ITConfig(UART5, USART_IT_RXNE, ENABLE); //开启串口接收中断
-                USART_Cmd(UART5, ENABLE); //使能串口
-                USART_ClearFlag(UART5, USART_FLAG_TC);
+            case COM5:                
                 break;
             #endif 
         default:
             break;
     }
-    tx->SetModeAF_PP();
-    rx->SetModeIN_FLOATING();
+    
 }
 
 

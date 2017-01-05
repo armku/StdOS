@@ -57,9 +57,8 @@ void uart_init(uint32_t bound=115200);
 void STDInit() 
 {    	
 	uart_init();
-	Sys.Clock = 72000000;
-	Sys.MessagePort=COM1;
 	Sys.Init();
+	Sys.ShowInfo();
     
 	exti.Init();
 	exti.On();	
