@@ -55,14 +55,14 @@ KEY PA0
 //系统初始化
 void STDInit() 
 {    		
+	Sys.MessagePort=COM3;
 	Sys.Init();
 	Sys.ShowInfo();
     
 	exti.Init();
 	exti.On();	
 	exti.Register(OnKeyPress);
-	
-	Sys.ShowInfo();	
+		
 	//w24c02.Test();
 		
 	Sys.AddTask(softTimers,0,1,1,"1毫秒软件定时器");//1毫秒周期循环

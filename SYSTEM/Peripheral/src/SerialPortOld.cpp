@@ -24,9 +24,9 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     usart.USART_BaudRate = this->_baudRate;
     usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
     usart.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-    usart.USART_Parity = USART_Parity_No;
-    usart.USART_StopBits = USART_StopBits_1;
-    usart.USART_WordLength = USART_WordLength_8b;
+    usart.USART_Parity = this->_parity;
+    usart.USART_StopBits =this->_stopBits;
+    usart.USART_WordLength = this->_dataBits;
 
     nvic.NVIC_IRQChannelCmd = ENABLE;
     InputPort *tx;
