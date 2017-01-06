@@ -34,7 +34,7 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     nvic.NVIC_IRQChannelCmd = ENABLE;
     #if TXNEW
         AlternatePort tx;
-        tx.OpenDrain = true;
+        //tx.OpenDrain = true;
     #else 
         InputPortOld *tx;
 
