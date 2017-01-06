@@ -64,14 +64,9 @@ uint TaskOld::AddTask(void(*callback)(void),void* para, uint firstms, int period
     {
         this->nodeLast->pNext = nodeNew;
         this->nodeLast = nodeNew;
-    }
-	#if DEBUG
-    printf("Sys::添加%02d: ", this->nodeCount++);
-    printf(name);
-	printf(" First=%dms Period=%dms",firstms,periodms);
-    printf("\n");
-	#endif
-	return this->nodeCount;
+    }	
+    printf("Sys::添加%02d: %s First=%dms Period=%dms\n", this->nodeCount++,name,firstms,periodms);
+    return this->nodeCount;
 }
 /*
 设置任务参数
