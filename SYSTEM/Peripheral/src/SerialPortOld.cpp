@@ -31,35 +31,35 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
 
     nvic.NVIC_IRQChannelCmd = ENABLE;
     InputPortOld *tx;
-    InputPortOld *rx;
+    InputPortNew rx;
+	rx.Floating=true;
     //初始化端口引脚
     switch (this->_index)
     {
         case COM1:
             tx = new InputPortOld(PA9);
-            rx = new InputPortOld(PA10);
+			rx.Set(PA10);
             break;
         case COM2:
             tx = new InputPortOld(PA2);
-            rx = new InputPortOld(PA3);
+			rx.Set(PA3);
             break;
         case COM3:
             tx = new InputPortOld(PB10);
-            rx = new InputPortOld(PB11);
+			rx.Set(PB11);
             break;
         case COM4:
             tx = new InputPortOld(PC10);
-            rx = new InputPortOld(PC11);
+			rx.Set(PC11);
             break;
         case COM5:
             tx = new InputPortOld(PC12);
-            rx = new InputPortOld(PD3);
+			rx.Set(PD3);
             break;
         default:
             break;
     }
     tx->SetModeAF_PP();
-    rx->SetModeIN_FLOATING();
 
     switch (this->_index)
     {
@@ -144,8 +144,6 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
         default:
             break;
     }
-    tx->SetModeAF_PP();
-    rx->SetModeIN_FLOATING();
 
 }
 void SerialPortOld::Open()
