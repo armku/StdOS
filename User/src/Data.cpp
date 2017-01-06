@@ -47,7 +47,6 @@ void OnKeyPress(Pin pin, bool onoff)
 	led2=!led2;
 	printf("ÖÐ¶ÏÒý½Å£º%d Öµ%d \n",pin,onoff);
 }
-//static uint OnUsartRead(ITransport * transport,Buffer& bs,void* para)
 static uint OnUsartRead(ITransport* transport,Buffer& bs,void* para)
 {
 	SerialPortOld* sp =(SerialPortOld*)para;
@@ -73,6 +72,9 @@ void STDInit()
 	sp1.Register(OnUsartRead,&sp1);
 	sp2.Register(OnUsartRead,&sp2);
 	sp3.Register(OnUsartRead,&sp3);
+	sp1.Open();
+	sp2.Open();
+	sp3.Open();
 	
 	
     
