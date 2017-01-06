@@ -48,3 +48,35 @@ void Buffer::CopyTo(int destIndex, const void *dest, int len)
 		((byte*)dest)[destIndex+i]=this->pbuf[i];
 	}
 }
+//拷贝数据，默认-1长度表示当前长度 
+void Buffer::Copy(int destIndex, const void *src, int len)
+{
+	if(len==-1)
+	{
+		len=this->bufLength;
+	}
+	if(len<=0)
+	{
+		return;
+	}
+	for(int i=0;i<len;i++)
+	{
+	this->pbuf[destIndex+i]=((byte*)src)[i];	
+	}	
+}
+//拷贝数据，默认-1长度表示两者最小长度
+void Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
+{
+	if(len==-1)
+	{		
+		//len=(*src).Length()>this->Length?src.Length():this->Length;
+	}
+	if(len<=0)
+	{
+		return;
+	}
+	for(int i=0;i<len;i++)
+	{
+		//this->pbuf[destIndex+i]=src.GetBuffer()[srcIndex+i];
+	}	
+}
