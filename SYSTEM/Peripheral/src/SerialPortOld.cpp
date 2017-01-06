@@ -364,7 +364,7 @@ byte buftmp[40];
 //从串口收到数据
 void SerialPortOld::OnUsartReceive(byte *buf, ushort length)
 {
-    Buffer bs(buftmp, sizeof(buftmp));
+    Buffer bs(buftmp, length);
 	for(int i=0;i<length;i++)
 	{
 		buftmp[i]=buf[i];

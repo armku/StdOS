@@ -37,7 +37,7 @@ class Buffer:public Object
         ushort Length();//长度        
         void SetLength(ushort len);//设置长度，可自动扩容        
 //        virtual void Copy(int destIndex, const void *src, int len);//拷贝数据，默认-1长度表示当前长度        
-//        virtual void CopyTo(int destIndex, const void *dest, int len)const;//把数据复制到目标缓冲区，默认-1长度表示当前长度
+        virtual void CopyTo(int destIndex, const void *dest, int len=-1);//const;//把数据复制到目标缓冲区，默认-1长度表示当前长度
 //        virtual void Copy(int destIndex, const Buffer &sec, int srcIndex, int len);//拷贝数据，默认-1长度表示两者最小长度        
         int Copy(const Buffer &src, int destIndex = 0);        
         void Sub();//截取自缓冲区        
