@@ -5,6 +5,8 @@
 #include "AlternatePort.h"
 #include "InputPortNew.h"
 
+#define TXNEW 0
+
 SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte dataBits, byte stopBits)
 {
     this->_index = index;
@@ -26,40 +28,75 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
     usart.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
     usart.USART_Parity = this->_parity;
-    usart.USART_StopBits =this->_stopBits;
+    usart.USART_StopBits = this->_stopBits;
     usart.USART_WordLength = this->_dataBits;
 
     nvic.NVIC_IRQChannelCmd = ENABLE;
-    InputPortOld *tx;
+    #if TXNEW
+        AlternatePort tx;
+        tx.OpenDrain = true;
+    #else 
+        InputPortOld *tx;
+
+    #endif 
+
     InputPortNew rx;
-	rx.Floating=true;
+    rx.Floating = true;
     //初始化端口引脚
     switch (this->_index)
     {
         case COM1:
-            tx = new InputPortOld(PA9);
-			rx.Set(PA10);
+            #if TXNEW
+                tx.Set(PA9);
+            #else 
+                tx = new InputPortOld(PA9);
+            #endif 
+
+            rx.Set(PA10);
             break;
         case COM2:
-            tx = new InputPortOld(PA2);
-			rx.Set(PA3);
+            #if TXNEW
+                tx.Set(PA2);
+            #else 
+                tx = new InputPortOld(PA2);
+            #endif 
+
+            rx.Set(PA3);
             break;
         case COM3:
-            tx = new InputPortOld(PB10);
-			rx.Set(PB11);
+            #if TXNEW
+                tx.Set(PB10);
+            #else 
+                tx = new InputPortOld(PB10);
+            #endif 
+
+            rx.Set(PB11);
             break;
         case COM4:
-            tx = new InputPortOld(PC10);
-			rx.Set(PC11);
+            #if TXNEW
+                tx.Set(PC10);
+            #else 
+                tx = new InputPortOld(PC10);
+            #endif 
+
+            rx.Set(PC11);
             break;
         case COM5:
-            tx = new InputPortOld(PC12);
-			rx.Set(PD3);
+            #if TXNEW
+                tx.Set(PC12);
+            #else 
+                tx = new InputPortOld(PC12);
+            #endif 
+
+            rx.Set(PD3);
             break;
         default:
             break;
     }
-    tx->SetModeAF_PP();
+    #if TXNEW
+    #else 
+        tx->SetModeAF_PP();
+    #endif 
 
     switch (this->_index)
     {
@@ -146,9 +183,9 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     }
 
 }
-void SerialPortOld::Open()
-{
-	
+
+void SerialPortOld::Open(){
+
 }
 
 CFIFORing com1buf; //串口1接收缓冲区
@@ -183,29 +220,29 @@ uint com3timeidle; //串口3空闲时间
 
     void USART2_IRQHandler(void) //串口1中断服务程序
     {
-        if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)        
+        if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
         {
             USART_ClearITPendingBit(USART2, USART_IT_RXNE);
             byte inch = USART_ReceiveData(USART2); //读取接收到的数据
-			
-			com2buf.Push(inch);
+
+            com2buf.Push(inch);
             com2timeidle = 0; //空闲计时器清零
         }
     }
     void USART3_IRQHandler(void) //串口1中断服务程序
     {
-        if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)       
+        if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
         {
             USART_ClearITPendingBit(USART3, USART_IT_RXNE);
             byte inch = USART_ReceiveData(USART3); //读取接收到的数据
-			
-			com3buf.Push(inch);
+
+            com3buf.Push(inch);
             com3timeidle = 0; //空闲计时器清零
         }
     }
     void USART4_IRQHandler(void) //串口1中断服务程序
     {
-        if (USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)        
+        if (USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
         {
             USART_ClearITPendingBit(UART4, USART_IT_RXNE);
             byte inch = USART_ReceiveData(UART4); //读取接收到的数据
@@ -328,48 +365,52 @@ void SerialPortOld::SendData(byte data)
             break;
     }
 }
+
 //发送数据
-void SerialPortOld::SendBuffer(byte *buff,int length)
+void SerialPortOld::SendBuffer(byte *buff, int length)
 {
-	if(length==-1)
-	{
-		while(*buff)
-		{
-			this->SendData(*buff);
-			buff++;
-		}
-		return;
-	}
-	if(length<=0)
-	{
-		return;
-	}
-	for(int i=0;i<length;i++)
-	{
-		this->SendData(buff[i]);
-	}	
+    if (length ==  - 1)
+    {
+        while (*buff)
+        {
+            this->SendData(*buff);
+            buff++;
+        }
+        return ;
+    }
+    if (length <= 0)
+    {
+        return ;
+    }
+    for (int i = 0; i < length; i++)
+    {
+        this->SendData(buff[i]);
+    }
 }
+
 //发送数据
-void SerialPortOld::SendBuffer(char *buff,int length)
+void SerialPortOld::SendBuffer(char *buff, int length)
 {
-	this->SendBuffer((byte*)buff,length);
+    this->SendBuffer((byte*)buff, length);
 }
+
 // 注册数据到达事件
-void SerialPortOld::Register(IOnUsartRead handler,SerialPortOld *sp)
+void SerialPortOld::Register(IOnUsartRead handler, SerialPortOld *sp)
 {
-	this->OnRcv=handler;
-}	
+    this->OnRcv = handler;
+}
+
 byte buftmp[40];
 //从串口收到数据
 void SerialPortOld::OnUsartReceive(byte *buf, ushort length)
 {
     Buffer bs(buftmp, length);
-	for(int i=0;i<length;i++)
-	{
-		buftmp[i]=buf[i];
-	}
+    for (int i = 0; i < length; i++)
+    {
+        buftmp[i] = buf[i];
+    }
     if (this->OnRcv)
-    {   		
-		this->OnRcv(this,bs,this);
+    {
+        this->OnRcv(this, bs, this);
     }
 }
