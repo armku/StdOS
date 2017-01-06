@@ -64,6 +64,7 @@ SerialPortOld sp3(COM3);
 KEY PA0 
 */
 //系统初始化
+void ComTimers();
 void STDInit() 
 {    		
 	Sys.MessagePort=COM1;
@@ -82,6 +83,7 @@ void STDInit()
 	//w24c02.Test();
 		
 	Sys.AddTask(softTimers,0,1,1,"1毫秒软件定时器");//1毫秒周期循环
+	Sys.AddTask(ComTimers,0,1,1,"串口数据接收定时器");//1毫秒周期循环
 	Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
 	Sys.AddTask(ledflash,0,5,50,"状态指示灯");
 	Sys.AddTask(eepread,0,10,1000,"测试任务");
@@ -101,6 +103,12 @@ void eepread()
 	sp2.SendBuffer("COM2\n");
 	sp3.SendBuffer("COM3\n");
 }
+
+//1ms软件定时器
+void softTimers()
+{
+    
+}
 byte USART_RX_BUF[100]; //接收缓冲,最大USART_REC_LEN个字节.
 extern uint com1timeidle; //串口1空闲时间
 extern CFIFORing com1buf; //串口1接收缓冲区
@@ -110,10 +118,10 @@ extern CFIFORing com2buf; //串口2接收缓冲区
 
 extern uint com3timeidle; //串口3空闲时间
 extern CFIFORing com3buf; //串口3接收缓冲区
-//1ms软件定时器
-void softTimers()
+//串口接收通信定时器
+void ComTimers()
 {
-    com1timeidle++;
+	com1timeidle++;
 	com2timeidle++;
 	com3timeidle++;
 
