@@ -11,6 +11,8 @@
 #include "WatchDog.h"
 #include "Port.h"
 
+#define debug_printf printf
+
 
 //sequence 序列号 cur_seq max_seq step
 
@@ -45,6 +47,14 @@ void OnKeyPress(Pin pin, bool onoff)
 	led2=!led2;
 	printf("中断引脚：%d 值%d \n",pin,onoff);
 }
+static uint OnUsartRead(ITransport * transport,Buffer& bs,void* para)
+{
+	SerialPortOld* sp =(SerialPortOld*)para;
+	debug_printf("%s 收到： ",sp->Name);
+	//bs.Show(true);
+	
+	return 0;
+}
 SerialPortOld sp1(COM1);
 SerialPortOld sp2(COM2);
 SerialPortOld sp3(COM3);
@@ -57,6 +67,11 @@ void STDInit()
 	Sys.MessagePort=COM3;
 	Sys.Init();
 	Sys.ShowInfo();
+	sp1.Register(OnUsartRead,&sp1);
+	sp2.Register(OnUsartRead,&sp2);
+	sp3.Register(OnUsartRead,&sp3);
+	
+	
     
 	exti.Init();
 	exti.On();	
