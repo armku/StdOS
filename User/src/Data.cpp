@@ -139,11 +139,11 @@ void ComTimers()
         com1buf.Reset();		
     }
 	
-	if (com2timeidle > 1)
+	if (com2timeidle > 3)
     {
         com2timeidle = 0;
         ushort len = com2buf.GetLength();
-        if (len >= 3)
+        if (len >= 1)
         {
             com2buf.Pop(USART_RX_BUF, 0, len);
 			sp2.OnUsartReceive(USART_RX_BUF,len);
@@ -151,7 +151,7 @@ void ComTimers()
         com2buf.Reset();		
     }
 	
-	if (com3timeidle > 1)
+	if (com3timeidle > 3)
     {
         com3timeidle = 0;
         ushort len = com3buf.GetLength();
