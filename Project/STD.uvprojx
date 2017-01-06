@@ -570,14 +570,19 @@
               <FilePath>..\SYSTEM\CORE\src\WaitHandle.cpp</FilePath>
             </File>
             <File>
+              <FileName>TaskOld.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\TaskOld.cpp</FilePath>
+            </File>
+            <File>
               <FileName>TaskScheduler.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\TaskScheduler.cpp</FilePath>
             </File>
             <File>
-              <FileName>TaskOld.cpp</FileName>
+              <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TaskOld.cpp</FilePath>
+              <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1487,14 +1492,19 @@
               <FilePath>..\SYSTEM\CORE\src\WaitHandle.cpp</FilePath>
             </File>
             <File>
+              <FileName>TaskOld.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\TaskOld.cpp</FilePath>
+            </File>
+            <File>
               <FileName>TaskScheduler.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\TaskScheduler.cpp</FilePath>
             </File>
             <File>
-              <FileName>TaskOld.cpp</FileName>
+              <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TaskOld.cpp</FilePath>
+              <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
             </File>
           </Files>
         </Group>
