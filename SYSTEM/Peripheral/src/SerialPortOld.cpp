@@ -154,6 +154,12 @@ void SerialPortOld::Open()
 
 CFIFORing com1buf; //串口1接收缓冲区
 uint com1timeidle; //串口1空闲时间
+
+CFIFORing com2buf; //串口2接收缓冲区
+uint com2timeidle; //串口2空闲时间
+
+CFIFORing com3buf; //串口3接收缓冲区
+uint com3timeidle; //串口3空闲时间
 #ifdef __cplusplus
     extern "C"
     {
@@ -178,26 +184,29 @@ uint com1timeidle; //串口1空闲时间
 
     void USART2_IRQHandler(void) //串口1中断服务程序
     {
-        if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
-        //接收中断(接收到的数据必须是0x0d 0x0a结尾)
+        if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)        
         {
             USART_ClearITPendingBit(USART2, USART_IT_RXNE);
             byte inch = USART_ReceiveData(USART2); //读取接收到的数据
+			
+			com2buf.Push(inch);
+            com2timeidle = 0; //空闲计时器清零
         }
     }
     void USART3_IRQHandler(void) //串口1中断服务程序
     {
-        if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
-        //接收中断(接收到的数据必须是0x0d 0x0a结尾)
+        if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)       
         {
             USART_ClearITPendingBit(USART3, USART_IT_RXNE);
             byte inch = USART_ReceiveData(USART3); //读取接收到的数据
+			
+			com3buf.Push(inch);
+            com3timeidle = 0; //空闲计时器清零
         }
     }
     void USART4_IRQHandler(void) //串口1中断服务程序
     {
-        if (USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
-        //接收中断(接收到的数据必须是0x0d 0x0a结尾)
+        if (USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)        
         {
             USART_ClearITPendingBit(UART4, USART_IT_RXNE);
             byte inch = USART_ReceiveData(UART4); //读取接收到的数据
@@ -362,6 +371,6 @@ void SerialPortOld::OnUsartReceive(byte *buf, ushort length)
 	}
     if (this->OnRcv)
     {   		
-		this->OnRcv(bs,this);
+		this->OnRcv(this,bs,this);
     }
 }

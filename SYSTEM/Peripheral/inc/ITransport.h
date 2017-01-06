@@ -7,9 +7,7 @@ class ITransport;
 class SerialPortOld;
 
 //回调函数定义,当有数据到达时触发
-//typedef uint (*IOnUsartRead)(ITransport* transport, Buffer& bs,void* param);
-typedef uint (*IOnUsartRead)(Buffer& bs,void* param);
-
+typedef uint (*IOnUsartRead)(ITransport* transport,Buffer& bs,void* param);
 
 class ITransport
 {

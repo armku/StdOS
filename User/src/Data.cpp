@@ -48,7 +48,7 @@ void OnKeyPress(Pin pin, bool onoff)
 	printf("中断引脚：%d 值%d \n",pin,onoff);
 }
 //static uint OnUsartRead(ITransport * transport,Buffer& bs,void* para)
-static uint OnUsartRead(Buffer& bs,void* para)
+static uint OnUsartRead(ITransport* transport,Buffer& bs,void* para)
 {
 	SerialPortOld* sp =(SerialPortOld*)para;
 	debug_printf("%s 收到：",sp->Name);
@@ -101,10 +101,20 @@ void eepread()
 	sp3.SendBuffer("COM3\n");
 }
 byte USART_RX_BUF[100]; //接收缓冲,最大USART_REC_LEN个字节.
+extern uint com1timeidle; //串口1空闲时间
+extern CFIFORing com1buf; //串口1接收缓冲区
+
+extern uint com2timeidle; //串口2空闲时间
+extern CFIFORing com2buf; //串口2接收缓冲区
+
+extern uint com3timeidle; //串口3空闲时间
+extern CFIFORing com3buf; //串口3接收缓冲区
 //1ms软件定时器
 void softTimers()
 {
     com1timeidle++;
+	com2timeidle++;
+	com3timeidle++;
 
     if (com1timeidle > 3)
     {
@@ -113,9 +123,32 @@ void softTimers()
         if (len >= 3)
         {
             com1buf.Pop(USART_RX_BUF, 0, len);
-			//sp1.SendBuffer("com1 收到数据\n");
 			sp1.OnUsartReceive(USART_RX_BUF,len);
         }
         com1buf.Reset();		
+    }
+	
+	if (com2timeidle > 3)
+    {
+        com2timeidle = 0;
+        ushort len = com2buf.GetLength();
+        if (len >= 3)
+        {
+            com2buf.Pop(USART_RX_BUF, 0, len);
+			sp2.OnUsartReceive(USART_RX_BUF,len);
+        }
+        com2buf.Reset();		
+    }
+	
+	if (com3timeidle > 3)
+    {
+        com3timeidle = 0;
+        ushort len = com3buf.GetLength();
+        if (len >= 3)
+        {
+            com3buf.Pop(USART_RX_BUF, 0, len);
+			sp3.OnUsartReceive(USART_RX_BUF,len);
+        }
+        com3buf.Reset();		
     }
 }
