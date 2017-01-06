@@ -681,7 +681,7 @@
 
   <Group>
     <GroupName>CORE</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -764,8 +764,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\SYSTEM\CORE\src\Task.cpp</PathWithFileName>
-      <FilenameWithoutPath>Task.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\SYSTEM\CORE\src\TaskScheduler.cpp</PathWithFileName>
+      <FilenameWithoutPath>TaskScheduler.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -776,8 +776,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\SYSTEM\CORE\src\TaskScheduler.cpp</PathWithFileName>
-      <FilenameWithoutPath>TaskScheduler.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\SYSTEM\CORE\src\TaskOld.cpp</PathWithFileName>
+      <FilenameWithoutPath>TaskOld.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

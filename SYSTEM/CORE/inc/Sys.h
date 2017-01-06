@@ -2,7 +2,7 @@
 
 #include "Type.h"
 #include "Object.h"
-#include "Task.h"
+#include "TaskOld.h"
 #include "TTime.h"
 
 /* ´®¿Ú¶¨Òå */
