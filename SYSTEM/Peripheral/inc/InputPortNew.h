@@ -8,11 +8,20 @@ class InputPortNew: public Port
     public:
         typedef enum
         {
-                PuPd_NOPULL = 0x00, PuPd_UP = 0x01, PuPd_DOWN = 0x02
+                PuPd_NOPULL = 0x00,
+				PuPd_UP 	= 0x01,//上拉电阻 
+				PuPd_DOWN 	= 0x02,//下拉电阻
         } PuPd_TypeDef;
+		//enum class Trigger	//强类型枚举
+		typedef enum
+		{
+			Rising	=	0x01,	//上升沿
+			Falling	=	0x02,	//下降沿
+			Both	=	0x03	//上升下降沿
+		}Trigger;
 
         // 读取委托
-        typedef void(*IOReadHandler)(Pin pin, bool down, void *param);
+        typedef void(*IOReadHandler)(InputPortNew * port, bool down, void *param);
 
         uint ShakeTime; // 抖动时间
         PuPd_TypeDef PuPd; // 上拉下拉电阻
