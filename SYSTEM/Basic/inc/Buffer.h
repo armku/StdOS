@@ -26,9 +26,10 @@ Array/ByteArray/String 等会调用 SetLength 自动扩容，加大缓冲区。
  */
 #pragma once
 
-#include <Type.h>
+#include "Type.h"
+#include "Object.h"
 
-class Buffer
+class Buffer:public Object
 {
     public:
 		Buffer(byte* buf,ushort length);        
@@ -42,6 +43,7 @@ class Buffer
         void Sub();//截取自缓冲区        
         void ToHex();//转换为16进制字符串        
         void AsString();//二进制数据直接作为字符串
+		virtual void Show(bool newLine=false) const;
 	protected:
 		byte* pbuf;//缓冲区
 		ushort bufLength;//缓冲区长度

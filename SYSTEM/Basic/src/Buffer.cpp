@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "Buffer.h"
 
 Buffer::Buffer(byte* buf,ushort length)
@@ -15,4 +16,8 @@ ushort Buffer::Length()
 {
 	return this->bufLength;
 }
-
+void Buffer::Show(bool newLine) const
+{
+	printf("%s",this->pbuf);
+	Object::Show(newLine);
+}

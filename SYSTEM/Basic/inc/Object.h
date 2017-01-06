@@ -8,7 +8,7 @@
 */
 #pragma once
 
-#include "CString.h"
+class CType;
 
 //¸ù¶ÔÏó
 class Object

@@ -47,11 +47,12 @@ void OnKeyPress(Pin pin, bool onoff)
 	led2=!led2;
 	printf("中断引脚：%d 值%d \n",pin,onoff);
 }
-static uint OnUsartRead(ITransport * transport,Buffer& bs,void* para)
+//static uint OnUsartRead(ITransport * transport,Buffer& bs,void* para)
+static uint OnUsartRead(Buffer& bs,void* para)
 {
 	SerialPortOld* sp =(SerialPortOld*)para;
-	debug_printf("%s 收到： ",sp->Name);
-	//bs.Show(true);
+	debug_printf("%s 收到：",sp->Name);
+	bs.Show(true);	
 	
 	return 0;
 }

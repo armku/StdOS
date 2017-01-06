@@ -349,19 +349,19 @@ void SerialPortOld::SendBuffer(char *buff,int length)
 // 注册数据到达事件
 void SerialPortOld::Register(IOnUsartRead handler,SerialPortOld *sp)
 {
-	this->OnRcv=&handler;
+	this->OnRcv=handler;
 }	
 byte buftmp[20];
 //从串口收到数据
-void SerialPortOld::OnUsartReceive(byte * buf,ushort length)
-{	
-	Buffer bs(buftmp,20);
-	if(this->OnRcv)
+void SerialPortOld::OnUsartReceive(byte *buf, ushort length)
+{
+    Buffer bs(buftmp, 20);
+	for(int i=0;i<length;i++)
 	{
-		//*(this->OnRcv)(this,&bs,this);
-		this->SendBuffer(this->Name);
-	this->SendBuffer(" 收到: ");
-	this->SendBuffer(buf,length);	
-	this->SendBuffer("\n");
+		buftmp[i]=buf[i];
 	}
+    if (this->OnRcv)
+    {   		
+		this->OnRcv(bs,this);
+    }
 }
