@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "AlternatePort.h"
 
 void AlternatePort::OnConfig(GPIO_InitTypeDef &gpio)

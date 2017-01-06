@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "InputPortNew.h"
 
 // 获取组和针脚
@@ -329,7 +330,7 @@ void SetEXIT(int pinIndex, bool enable)
 #endif
 // 端口引脚保护
 #if DEBUG    
-    bool InputPort::OnReserve(Pin pin, bool flag)
+    bool InputPortNew::OnReserve(Pin pin, bool flag)
     {
         debug_printf("Input::");
 

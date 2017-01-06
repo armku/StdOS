@@ -45,9 +45,12 @@ IWDG->RLR = Reload;
 }
 
  */
+ #include <stdio.h>
 #include "stm32f10x.h"
 #include "WatchDog.h"
 #include "Sys.h"
+
+#define debug_printf printf
 
 WatchDog::WatchDog(uint ms)
 {
@@ -59,6 +62,7 @@ WatchDog::~WatchDog()
 {
     ConfigMax();
 }
+
 
 bool WatchDog::Config(uint ms)
 {
