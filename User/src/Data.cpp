@@ -13,7 +13,6 @@
 
 #define debug_printf printf
 
-
 //sequence –Ú¡–∫≈ cur_seq max_seq step
 
 void ledflash();
@@ -75,9 +74,7 @@ void STDInit()
 	sp1.Open();
 	sp2.Open();
 	sp3.Open();
-	
-	
-    
+	    
 	exti.Init();
 	exti.On();	
 	exti.Register(OnKeyPress);
