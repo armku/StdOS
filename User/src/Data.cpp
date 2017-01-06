@@ -112,7 +112,9 @@ void softTimers()
         if (len >= 3)
         {
             com1buf.Pop(USART_RX_BUF, 0, len - 2);
+			sp1.SendBuffer("com1 收到数据\n");
         }
         com1buf.Reset();
+		
     }
 }
