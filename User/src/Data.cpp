@@ -52,7 +52,8 @@ static uint OnUsartRead(ITransport* transport,Buffer& bs,void* para)
 {
 	SerialPortOld* sp =(SerialPortOld*)para;
 	debug_printf("%s ÊÕµ½£º",sp->Name);
-	bs.Show(true);	
+	bs.Show(true);		
+	sp->SendBuffer(bs.GetBuffer());
 	
 	return 0;
 }
