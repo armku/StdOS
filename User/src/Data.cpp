@@ -80,9 +80,9 @@ void ledflash()
 
 void eepread()
 {
-	sp1.SendData('A');
-	sp2.SendData('B');
-	sp3.SendData('C');
+	sp1.SendBuffer("COM1\n");
+	sp2.SendBuffer("COM2\n");
+	sp3.SendBuffer("COM3\n");
 }
 byte USART_RX_BUF[100]; //接收缓冲,最大USART_REC_LEN个字节.
 //1ms软件定时器

@@ -152,7 +152,6 @@ void SerialPortOld::Open()
 	
 }
 
-
 CFIFORing com1buf; //串口1接收缓冲区
 uint com1timeidle; //串口1空闲时间
 #ifdef __cplusplus
@@ -320,4 +319,30 @@ void SerialPortOld::SendData(byte data)
         default:
             break;
     }
+}
+//发送数据
+void SerialPortOld::SendBuffer(byte *buff,int length)
+{
+	if(length==-1)
+	{
+		while(*buff)
+		{
+			this->SendData(*buff);
+			buff++;
+		}
+		return;
+	}
+	if(length<=0)
+	{
+		return;
+	}
+	for(int i=0;i<length;i++)
+	{
+		this->SendData(buff[i]);
+	}	
+}
+//发送数据
+void SerialPortOld::SendBuffer(char *buff,int length)
+{
+	this->SendBuffer((byte*)buff,length);
 }
