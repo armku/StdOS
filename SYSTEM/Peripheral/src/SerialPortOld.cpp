@@ -360,11 +360,11 @@ void SerialPortOld::Register(IOnUsartRead handler,SerialPortOld *sp)
 {
 	this->OnRcv=handler;
 }	
-byte buftmp[20];
+byte buftmp[40];
 //从串口收到数据
 void SerialPortOld::OnUsartReceive(byte *buf, ushort length)
 {
-    Buffer bs(buftmp, 20);
+    Buffer bs(buftmp, sizeof(buftmp));
 	for(int i=0;i<length;i++)
 	{
 		buftmp[i]=buf[i];
