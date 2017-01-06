@@ -155,7 +155,7 @@ void ComTimers()
     {
         com3timeidle = 0;
         ushort len = com3buf.GetLength();
-        if (len >= 3)
+        if (len >= 1)
         {
             com3buf.Pop(USART_RX_BUF, 0, len);
 			sp3.OnUsartReceive(USART_RX_BUF,len);
