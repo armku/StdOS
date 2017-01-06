@@ -68,8 +68,8 @@ void STDInit()
 	Sys.Init();
 	Sys.ShowInfo();
 	sp1.Register(OnUsartRead,&sp1);
-	sp2.Register(OnUsartRead,&sp2);
-	sp3.Register(OnUsartRead,&sp3);
+//	sp2.Register(OnUsartRead,&sp2);
+//	sp3.Register(OnUsartRead,&sp3);
 	
 	
     
