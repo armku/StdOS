@@ -351,3 +351,11 @@ void SerialPortOld::Register(IOnUsartRead handler,SerialPortOld *sp)
 {
 	
 }	
+//从串口收到数据
+void SerialPortOld::OnUsartReceive(byte * buf,ushort length)
+{
+	this->SendBuffer(this->Name);
+	this->SendBuffer(" 收到数据: ");
+	this->SendBuffer(buf,length);	
+	this->SendBuffer("\n");
+}

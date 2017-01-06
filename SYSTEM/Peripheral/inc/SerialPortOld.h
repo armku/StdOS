@@ -16,6 +16,7 @@ class SerialPortOld:public ITransport
 		void SendBuffer(char *buff,int length=-1);//发送数据
 		void Open();
 		void Register(IOnUsartRead handler,SerialPortOld *sp); // 注册数据到达事件	
+		void OnUsartReceive(byte * buf,ushort length);//从串口收到数据
     private:
         byte _index;
         byte _parity;

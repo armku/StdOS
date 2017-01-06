@@ -64,7 +64,7 @@ KEY PA0
 //系统初始化
 void STDInit() 
 {    		
-	Sys.MessagePort=COM3;
+	Sys.MessagePort=COM1;
 	Sys.Init();
 	Sys.ShowInfo();
 	sp1.Register(OnUsartRead,&sp1);
@@ -95,7 +95,7 @@ void ledflash()
 
 void eepread()
 {
-	sp1.SendBuffer("COM1\n");
+	//sp1.SendBuffer("COM1\n");
 	sp2.SendBuffer("COM2\n");
 	sp3.SendBuffer("COM3\n");
 }
@@ -111,10 +111,10 @@ void softTimers()
         ushort len = com1buf.GetLength();
         if (len >= 3)
         {
-            com1buf.Pop(USART_RX_BUF, 0, len - 2);
-			sp1.SendBuffer("com1 收到数据\n");
+            com1buf.Pop(USART_RX_BUF, 0, len);
+			//sp1.SendBuffer("com1 收到数据\n");
+			sp1.OnUsartReceive(USART_RX_BUF,len);
         }
-        com1buf.Reset();
-		
+        com1buf.Reset();		
     }
 }
