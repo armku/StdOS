@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include "Task.h"
 
+template <typename T1,typename T2>
+T1 sum(T1 x,T2 y)
+{
+	return x+y;
+}
+
 Task::Task(TaskScheduler *scheduler)
 {
     _Scheduler = scheduler;

@@ -1,4 +1,5 @@
 #include "TaskScheduler.h"
+#include "TTime.h"
 
 
 TaskScheduler::TaskScheduler(string name)
@@ -20,7 +21,7 @@ TaskScheduler::~TaskScheduler()
     #endif 
 }
 
-#if 0
+
     // 创建任务，返回任务编号。dueTime首次调度时间us，period调度间隔us，-1表示仅处理一次
     uint TaskScheduler::Add(Action func, void *param, ulong dueTime, long period)
     {
@@ -32,7 +33,9 @@ TaskScheduler::~TaskScheduler()
         task->NextTime = Time.Current() + dueTime;
 
         Count++;
+		#if 0
         _Tasks.Add(task);
+		#endif
 
         #if DEBUG
             // 输出长整型%ld，无符号长整型%llu
@@ -49,7 +52,7 @@ TaskScheduler::~TaskScheduler()
 
         return task->ID;
     }
-#endif 
+
 void TaskScheduler::Remove(uint taskid)
 {
     int i =  - 1;

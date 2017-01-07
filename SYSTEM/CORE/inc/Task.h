@@ -6,6 +6,8 @@
 #define string char
 #define debug_printf printf
 
+typedef void(*Action)(void); //回调函数
+
 class TaskScheduler;
 // 任务
 class Task
@@ -18,10 +20,8 @@ class Task
         Task(TaskScheduler *scheduler);
 
     public:
-        uint ID; // 编号
-        #if 0
-            Action Callback; // 回调
-        #endif 
+        uint ID; // 编号       
+        Action Callback; // 回调
         void *Param; // 参数
         long Period; // 周期us
         ulong NextTime; // 下一次执行时间
