@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include "SerialPortOld.h"
 #include "stm32f10x.h"
-#include "InputPortOld.h"
 #include "AlternatePort.h"
 #include "InputPortNew.h"
-
-#define TXNEW 0
 
 SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte dataBits, byte stopBits)
 {
@@ -31,72 +28,37 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     usart.USART_StopBits = this->_stopBits;
     usart.USART_WordLength = this->_dataBits;
 
-    nvic.NVIC_IRQChannelCmd = ENABLE;
-    #if TXNEW
-        AlternatePort tx;
-        //tx.OpenDrain = true;
-    #else 
-        InputPortOld *tx;
-
-    #endif 
+    nvic.NVIC_IRQChannelCmd = ENABLE;    
+        AlternatePort tx;   
 
     InputPortNew rx;
     rx.Floating = true;
     //初始化端口引脚
     switch (this->_index)
     {
-        case COM1:
-            #if TXNEW
+        case COM1:            
                 tx.Set(PA9);
-            #else 
-                tx = new InputPortOld(PA9);
-            #endif 
-
             rx.Set(PA10);
             break;
-        case COM2:
-            #if TXNEW
+        case COM2:            
                 tx.Set(PA2);
-            #else 
-                tx = new InputPortOld(PA2);
-            #endif 
-
-            rx.Set(PA3);
+           rx.Set(PA3);
             break;
-        case COM3:
-            #if TXNEW
+        case COM3:            
                 tx.Set(PB10);
-            #else 
-                tx = new InputPortOld(PB10);
-            #endif 
-
             rx.Set(PB11);
             break;
-        case COM4:
-            #if TXNEW
-                tx.Set(PC10);
-            #else 
-                tx = new InputPortOld(PC10);
-            #endif 
-
+        case COM4:           
+                tx.Set(PC10);            
             rx.Set(PC11);
             break;
-        case COM5:
-            #if TXNEW
+        case COM5:           
                 tx.Set(PC12);
-            #else 
-                tx = new InputPortOld(PC12);
-            #endif 
-
             rx.Set(PD3);
             break;
         default:
             break;
     }
-    #if TXNEW
-    #else 
-        tx->SetModeAF_PP();
-    #endif 
 
     switch (this->_index)
     {

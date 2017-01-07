@@ -46,6 +46,7 @@ Port::Port()
 
 Port::~Port()
 {
+	return;//暂时停用以下功能，因其影响串口发送管脚配置
     #if defined(STM32F1)
         // 恢复为初始化状态
         ushort bits = PinBit;
