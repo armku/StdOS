@@ -27,7 +27,7 @@ class InputPortNew: public Port
         ushort	ShakeTime;//	=	0; 		// 抖动时间.毫秒
 		ushort	PressTime;//	=	0;		//长按时间。毫秒
 		bool	Invert	;//	=	2; 		// 是否倒置输入输出。默认2表示自动检测		
-        PuPd Pull;//	=	PuPd_UP;//上拉下拉电阻
+        PuPd Pull;//	=	PuPd;//上拉下拉电阻
 		Trigger	Mode	;//	=	Both;	//触发模式，上升沿下降沿
 		bool	HardEvent;//	=	false;	//是否使用硬件事件，默认false
 		
