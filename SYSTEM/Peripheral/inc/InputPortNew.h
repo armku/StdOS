@@ -6,13 +6,14 @@
 class InputPortNew: public Port
 {
     public:
-        typedef enum//2017-01-07
+		//以下为2017-01-07
+		typedef enum
         {
                 PuPd_NOPULL = 0x00,
 				PuPd_UP 	= 0x01,//上拉电阻 
 				PuPd_DOWN 	= 0x02,//下拉电阻 
         } PuPd_TypeDef;
-		//enum class Trigger	//强类型枚举 2017-01-07
+		//enum class Trigger	//强类型枚举
 		typedef enum	//2017-01-07
 		{
 			Rising	=	0x01,	//上升沿
@@ -21,12 +22,20 @@ class InputPortNew: public Port
 		}Trigger;
 
         // 读取委托
-        typedef void(*IOReadHandler)(InputPortNew * port, bool down, void *param); //2017-01-07
+        typedef void(*IOReadHandler)(InputPortNew * port, bool down, void *param); 
 
-        uint ShakeTime; // 抖动时间
-        PuPd_TypeDef PuPd; // 上拉下拉电阻
+        ushort	ShakeTime;//	=	0; 		// 抖动时间.毫秒
+		ushort	PressTime;//	=	0;		//长按时间。毫秒
+		bool	Invert	;//	=	2; 		// 是否倒置输入输出。默认2表示自动检测		
+        PuPd_TypeDef PuPd;//	=	PuPd_UP;//上拉下拉电阻
+		Trigger	Mode	;//	=	Both;	//触发模式，上升沿下降沿
+		bool	HardEvent;//	=	false;	//是否使用硬件事件，默认false
+		
+		//Delegate2<InputPortNew&,bool> Press;//按下事件
+		
+		//以上为2017-01-07
         bool Floating; // 是否浮空输入
-        bool Invert; // 是否倒置输入输出
+        
 
         InputPortNew()
         {
