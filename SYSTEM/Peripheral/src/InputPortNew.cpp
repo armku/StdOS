@@ -51,9 +51,9 @@ InputPortNew::~InputPortNew()
 {
     // 取消所有中断
     if (_Registed)
-	{
+    {
         Register(NULL);
-	}
+    }
 }
 
 ushort InputPortNew::ReadGroup() // 整组读取
@@ -124,7 +124,6 @@ void InputPortNew::Register(IOReadHandler handler, void *param)
     _Registed = handler != NULL;
 }
 
-#if 0
     void GPIO_ISR(int num) // 0 <= num <= 15
     {
         if (!hasInitState)
@@ -153,8 +152,9 @@ void InputPortNew::Register(IOReadHandler handler, void *param)
                 // 值必须有变动才触发
                 if (value == state->OldValue)
                     return ;
-
+				#if 0
                 Time.Sleep(shakeTime); // 避免抖动
+				#endif
             }
         }
         while (EXTI->PR &bit); // 如果再次挂起则重复
@@ -165,11 +165,12 @@ void InputPortNew::Register(IOReadHandler handler, void *param)
         state->OldValue = value;
         if (state->Handler)
         {
+			#if 0
             // 新值value为true，说明是上升，第二个参数是down，所以取非
             state->Handler(state->Pin, !value, state->Param);
+			#endif
         }
     }
-#endif 
 #if 0
     void EXTI_IRQHandler(ushort num, void *param)
     {
@@ -270,64 +271,65 @@ void SetEXIT(int pinIndex, bool enable)
     EXTI_Init(&ext);
 }
 
-    // 申请引脚中断托管
-    void InputPortNew::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param)
+// 申请引脚中断托管
+void InputPortNew::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param)
+{
+    IntState *state = &State[pinIndex];
+    Pin pin = (Pin)((groupIndex << 4) + pinIndex);
+    // 检查是否已经注册到别的引脚上
+    if (state->Pin != pin && state->Pin != P0)
     {
-        IntState *state = &State[pinIndex];
-        Pin pin = (Pin)((groupIndex << 4) + pinIndex);
-        // 检查是否已经注册到别的引脚上
-        if (state->Pin != pin && state->Pin != P0)
-        {
-            #if DEBUG
-                debug_printf("EXTI%d can't register to P%c%d, it has register to P%c%d\r\n", groupIndex, _PIN_NAME(pin), _PIN_NAME(state->Pin));
-            #endif 
-            return ;
-        }
-        state->Pin = pin;
-        state->Handler = handler;
-        state->Param = param;
-        state->OldValue = Read(pin); // 预先保存当前状态值，后面跳变时触发中断
-
-        // 打开时钟，选择端口作为端口EXTI时钟线
-        #if defined(STM32F0) || defined(STM32F4)
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
-            SYSCFG_EXTILineConfig(groupIndex, pinIndex);
-        #elif defined(STM32F1)
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-            GPIO_EXTILineConfig(groupIndex, pinIndex);
+        #if DEBUG
+            debug_printf("EXTI%d can't register to P%c%d, it has register to P%c%d\r\n", groupIndex, _PIN_NAME(pin), _PIN_NAME(state->Pin));
         #endif 
+        return ;
+    }
+    state->Pin = pin;
+    state->Handler = handler;
+    state->Param = param;
+    state->OldValue = Read(pin); // 预先保存当前状态值，后面跳变时触发中断
 
-        SetEXIT(pinIndex, true);
-		#if 0
+    // 打开时钟，选择端口作为端口EXTI时钟线
+    #if defined(STM32F0) || defined(STM32F4)
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+        SYSCFG_EXTILineConfig(groupIndex, pinIndex);
+    #elif defined(STM32F1)
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+        GPIO_EXTILineConfig(groupIndex, pinIndex);
+    #endif 
+
+    SetEXIT(pinIndex, true);
+    #if 0
         // 打开并设置EXTI中断为低优先级
         Interrupt.SetPriority(PORT_IRQns[pinIndex], 1);
-
-        state->Used++;
-        if (state->Used == 1)
-        {
-            Interrupt.Activate(PORT_IRQns[pinIndex], EXTI_IRQHandler, this);
-        }
-		#endif
-    }
-
-    void InputPortNew::UnRegisterInput(int pinIndex)
+    #endif 
+    state->Used++;
+    if (state->Used == 1)
     {
-        IntState *state = &State[pinIndex];
-        // 取消注册
-        state->Pin = P0;
-        state->Handler = 0;
-
-        SetEXIT(pinIndex, false);
-
-        state->Used--;
-        if (state->Used == 0)
-        {
-			#if 0
-            Interrupt.Deactivate(PORT_IRQns[pinIndex]);
-			#endif
-        }
+        #if 0
+            Interrupt.Activate(PORT_IRQns[pinIndex], EXTI_IRQHandler, this);
+        #endif 
     }
- 
+}
+
+void InputPortNew::UnRegisterInput(int pinIndex)
+{
+    IntState *state = &State[pinIndex];
+    // 取消注册
+    state->Pin = P0;
+    state->Handler = 0;
+
+    SetEXIT(pinIndex, false);
+
+    state->Used--;
+    if (state->Used == 0)
+    {
+        #if 0
+            Interrupt.Deactivate(PORT_IRQns[pinIndex]);
+        #endif 
+    }
+}
+
 // 端口引脚保护
 #if DEBUG    
     bool InputPortNew::OnReserve(Pin pin, bool flag)
