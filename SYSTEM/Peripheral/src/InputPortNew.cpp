@@ -270,7 +270,6 @@ void SetEXIT(int pinIndex, bool enable)
     EXTI_Init(&ext);
 }
 
-#if 0
     // 申请引脚中断托管
     void InputPortNew::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param)
     {
@@ -299,7 +298,7 @@ void SetEXIT(int pinIndex, bool enable)
         #endif 
 
         SetEXIT(pinIndex, true);
-
+		#if 0
         // 打开并设置EXTI中断为低优先级
         Interrupt.SetPriority(PORT_IRQns[pinIndex], 1);
 
@@ -308,8 +307,8 @@ void SetEXIT(int pinIndex, bool enable)
         {
             Interrupt.Activate(PORT_IRQns[pinIndex], EXTI_IRQHandler, this);
         }
+		#endif
     }
-#endif 
 
     void InputPortNew::UnRegisterInput(int pinIndex)
     {
