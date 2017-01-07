@@ -12,7 +12,7 @@ class InputPortNew: public Port
                 NOPULL = 0x00,
 				UP 	= 0x01,//上拉电阻 
 				DOWN 	= 0x02,//下拉电阻 
-        } PuPd_TypeDef;
+        } PuPd;
 		//enum class Trigger	//强类型枚举
 		typedef enum	//2017-01-07
 		{
@@ -27,7 +27,7 @@ class InputPortNew: public Port
         ushort	ShakeTime;//	=	0; 		// 抖动时间.毫秒
 		ushort	PressTime;//	=	0;		//长按时间。毫秒
 		bool	Invert	;//	=	2; 		// 是否倒置输入输出。默认2表示自动检测		
-        PuPd_TypeDef Pull;//	=	PuPd_UP;//上拉下拉电阻
+        PuPd Pull;//	=	PuPd_UP;//上拉下拉电阻
 		Trigger	Mode	;//	=	Both;	//触发模式，上升沿下降沿
 		bool	HardEvent;//	=	false;	//是否使用硬件事件，默认false
 		
@@ -41,7 +41,7 @@ class InputPortNew: public Port
         {
                 Init();
         }
-        InputPortNew(Pin pin, bool floating = true, PuPd_TypeDef pupd = UP)
+        InputPortNew(Pin pin, bool floating = true, PuPd pupd = UP)
         {
                 Init(floating, pupd);
                 Set(pin);
@@ -62,7 +62,7 @@ class InputPortNew: public Port
 
     protected:
         // 函数命名为Init，而不作为构造函数，主要是因为用构造函数会导致再实例化一个对象，然后这个函数在那个新对象里面执行
-        void Init(bool floating = true, PuPd_TypeDef pupd = UP)
+        void Init(bool floating = true, PuPd pupd = UP)
         {
                 Pull = pupd;
                 Floating = floating;
