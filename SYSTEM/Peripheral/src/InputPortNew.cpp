@@ -310,7 +310,7 @@ void SetEXIT(int pinIndex, bool enable)
         }
     }
 #endif 
-#if 0
+
     void InputPortNew::UnRegisterInput(int pinIndex)
     {
         IntState *state = &State[pinIndex];
@@ -323,10 +323,12 @@ void SetEXIT(int pinIndex, bool enable)
         state->Used--;
         if (state->Used == 0)
         {
+			#if 0
             Interrupt.Deactivate(PORT_IRQns[pinIndex]);
+			#endif
         }
     }
-#endif 
+ 
 // 端口引脚保护
 #if DEBUG    
     bool InputPortNew::OnReserve(Pin pin, bool flag)

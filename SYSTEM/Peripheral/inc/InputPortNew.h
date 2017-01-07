@@ -81,9 +81,8 @@ class InputPortNew: public Port
         #endif 
 
     private:
-        bool _Registed;
-        #if 0
+        bool _Registed;        
             void RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param);
             void UnRegisterInput(int pinIndex);
-        #endif 
+        
 };
