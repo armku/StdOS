@@ -151,10 +151,10 @@ void GPIO_ISR(int num) // 0 <= num <= 15
         {
             // 值必须有变动才触发
             if (value == state->OldValue)
-                return ;
-            #if 0
-                Time.Sleep(shakeTime); // 避免抖动
-            #endif 
+			{
+                return ;            
+            }
+			Time.Sleep(shakeTime); // 避免抖动
         }
     }
     while (EXTI->PR &bit); // 如果再次挂起则重复

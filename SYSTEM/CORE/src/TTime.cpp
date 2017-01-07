@@ -18,3 +18,8 @@ uint TTime::Seconds()
 {
 	return 0;
 }
+//—” ±ms
+void TTime::Sleep(uint ms)
+{
+	
+}
