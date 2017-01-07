@@ -124,140 +124,140 @@ void InputPortNew::Register(IOReadHandler handler, void *param)
     _Registed = handler != NULL;
 }
 
-    void GPIO_ISR(int num) // 0 <= num <= 15
+void GPIO_ISR(int num) // 0 <= num <= 15
+{
+    if (!hasInitState)
+        return ;
+
+    IntState *state = State + num;
+    if (!state)
+        return ;
+
+    uint bit = 1 << num;
+    bool value;
+    //byte line = EXTI_Line0 << num;
+    // 如果未指定委托，则不处理
+    if (!state->Handler)
+        return ;
+
+    // 默认20us抖动时间
+    uint shakeTime = state->ShakeTime;
+
+    do
     {
-        if (!hasInitState)
-            return ;
-
-        IntState *state = State + num;
-        if (!state)
-            return ;
-
-        uint bit = 1 << num;
-        bool value;
-        //byte line = EXTI_Line0 << num;
-        // 如果未指定委托，则不处理
-        if (!state->Handler)
-            return ;
-
-        // 默认20us抖动时间
-        uint shakeTime = state->ShakeTime;
-
-        do
+        EXTI->PR = bit; // 重置挂起位
+        value = InputPortNew::Read(state->Pin); // 获取引脚状态
+        if (shakeTime > 0)
         {
-            EXTI->PR = bit; // 重置挂起位
-            value = InputPortNew::Read(state->Pin); // 获取引脚状态
-            if (shakeTime > 0)
-            {
-                // 值必须有变动才触发
-                if (value == state->OldValue)
-                    return ;
-				#if 0
+            // 值必须有变动才触发
+            if (value == state->OldValue)
+                return ;
+            #if 0
                 Time.Sleep(shakeTime); // 避免抖动
-				#endif
-            }
+            #endif 
         }
-        while (EXTI->PR &bit); // 如果再次挂起则重复
-        //EXTI_ClearITPendingBit(line);
-        // 值必须有变动才触发
-        if (shakeTime > 0 && value == state->OldValue)
-            return ;
-        state->OldValue = value;
-        if (state->Handler)
-        {
-			#if 0
+    }
+    while (EXTI->PR &bit); // 如果再次挂起则重复
+    //EXTI_ClearITPendingBit(line);
+    // 值必须有变动才触发
+    if (shakeTime > 0 && value == state->OldValue)
+        return ;
+    state->OldValue = value;
+    if (state->Handler)
+    {
+        #if 0
             // 新值value为true，说明是上升，第二个参数是down，所以取非
             state->Handler(state->Pin, !value, state->Param);
-			#endif
-        }
-    }
-#if 0
-    void EXTI_IRQHandler(ushort num, void *param)
-    {
-        #if defined(STM32F1) || defined(STM32F4)
-            // EXTI0 - EXTI4
-            if (num <= EXTI4_IRQn)
-                GPIO_ISR(num - EXTI0_IRQn);
-            else if (num == EXTI9_5_IRQn)
-            {
-                // EXTI5 - EXTI9
-                uint pending = EXTI->PR &EXTI->IMR &0x03E0; // pending bits 5..9
-                int num = 5;
-                pending >>= 5;
-                do
-                {
-                    if (pending &1)
-                        GPIO_ISR(num);
-                    num++;
-                    pending >>= 1;
-                }
-                while (pending);
-            }
-            else if (num == EXTI15_10_IRQn)
-            {
-                // EXTI10 - EXTI15
-                uint pending = EXTI->PR &EXTI->IMR &0xFC00; // pending bits 10..15
-                int num = 10;
-                pending >>= 10;
-                do
-                {
-                    if (pending &1)
-                        GPIO_ISR(num);
-                    num++;
-                    pending >>= 1;
-                }
-                while (pending);
-            }
-        #elif defined(STM32F0)
-            switch (num)
-            {
-                case EXTI0_1_IRQn:
-                    {
-                        uint pending = EXTI->PR &EXTI->IMR &0x0003; // pending bits 0..1
-                        int num = 0;
-                        pending >>= 0;
-                        do
-                        {
-                            if (pending &1)
-                                GPIO_ISR(num);
-                            num++;
-                            pending >>= 1;
-                        }
-                        while (pending);
-                        break;
-                    }
-                case EXTI2_3_IRQn:
-                    {
-                        uint pending = EXTI->PR &EXTI->IMR &0x000c; // pending bits 3..2
-                        int num = 2;
-                        pending >>= 2;
-                        do
-                        {
-                            if (pending &1)
-                                GPIO_ISR(num);
-                            num++;
-                            pending >>= 1;
-                        }
-                        while (pending);
-                    }
-                case EXTI4_15_IRQn:
-                    {
-                        uint pending = EXTI->PR &EXTI->IMR &0xFFF0; // pending bits 4..15
-                        int num = 4;
-                        pending >>= 4;
-                        do
-                        {
-                            if (pending &1)
-                                GPIO_ISR(num);
-                            num++;
-                            pending >>= 1;
-                        }
-                        while (pending);
-                    }
-            }
         #endif 
     }
-#endif 
+}
+
+//所有中断线处理
+void EXTI_IRQHandler(ushort num, void *param)
+{
+    #if defined(STM32F1) || defined(STM32F4)
+        // EXTI0 - EXTI4
+        if (num <= EXTI4_IRQn)
+            GPIO_ISR(num - EXTI0_IRQn);
+        else if (num == EXTI9_5_IRQn)
+        {
+            // EXTI5 - EXTI9
+            uint pending = EXTI->PR &EXTI->IMR &0x03E0; // pending bits 5..9
+            int num = 5;
+            pending >>= 5;
+            do
+            {
+                if (pending &1)
+                    GPIO_ISR(num);
+                num++;
+                pending >>= 1;
+            }
+            while (pending);
+        }
+        else if (num == EXTI15_10_IRQn)
+        {
+            // EXTI10 - EXTI15
+            uint pending = EXTI->PR &EXTI->IMR &0xFC00; // pending bits 10..15
+            int num = 10;
+            pending >>= 10;
+            do
+            {
+                if (pending &1)
+                    GPIO_ISR(num);
+                num++;
+                pending >>= 1;
+            }
+            while (pending);
+        }
+    #elif defined(STM32F0)
+        switch (num)
+        {
+            case EXTI0_1_IRQn:
+                {
+                    uint pending = EXTI->PR &EXTI->IMR &0x0003; // pending bits 0..1
+                    int num = 0;
+                    pending >>= 0;
+                    do
+                    {
+                        if (pending &1)
+                            GPIO_ISR(num);
+                        num++;
+                        pending >>= 1;
+                    }
+                    while (pending);
+                    break;
+                }
+            case EXTI2_3_IRQn:
+                {
+                    uint pending = EXTI->PR &EXTI->IMR &0x000c; // pending bits 3..2
+                    int num = 2;
+                    pending >>= 2;
+                    do
+                    {
+                        if (pending &1)
+                            GPIO_ISR(num);
+                        num++;
+                        pending >>= 1;
+                    }
+                    while (pending);
+                }
+            case EXTI4_15_IRQn:
+                {
+                    uint pending = EXTI->PR &EXTI->IMR &0xFFF0; // pending bits 4..15
+                    int num = 4;
+                    pending >>= 4;
+                    do
+                    {
+                        if (pending &1)
+                            GPIO_ISR(num);
+                        num++;
+                        pending >>= 1;
+                    }
+                    while (pending);
+                }
+        }
+    #endif 
+}
 
 void SetEXIT(int pinIndex, bool enable)
 {
