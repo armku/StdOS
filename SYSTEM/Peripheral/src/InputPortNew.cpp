@@ -95,7 +95,7 @@ void InputPortNew::Register(IOReadHandler handler, void *param)
         hasInitState = true;
     }
 
-    byte gi = _Pin >> 4;
+    byte gi = _Pin >> 4;gi=gi;
     ushort n = PinBit;
     for (int i = 0; i < 16 && n != 0; i++)
     {
