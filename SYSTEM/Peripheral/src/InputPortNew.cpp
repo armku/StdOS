@@ -22,7 +22,7 @@ void InputPortNew::OnConfig(GPIO_InitTypeDef &gpio)
         // 这里很不确定，需要根据实际进行调整
     #else 
         gpio.GPIO_Mode = GPIO_Mode_IN;
-        //gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
+        gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
 }
 
