@@ -15,9 +15,9 @@ void InputPortNew::OnConfig(GPIO_InitTypeDef &gpio)
     #ifdef STM32F1
         if (Floating)
             gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-        else if (PuPd == PuPd_UP)
+        else if (Pull == UP)
             gpio.GPIO_Mode = GPIO_Mode_IPU;
-        else if (PuPd == PuPd_DOWN)
+        else if (Pull == DOWN)
             gpio.GPIO_Mode = GPIO_Mode_IPD;
         // 这里很不确定，需要根据实际进行调整
     #else 
