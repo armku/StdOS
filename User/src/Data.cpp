@@ -11,8 +11,6 @@
 #include "WatchDog.h"
 #include "Port.h"
 
-#define debug_printf printf
-
 //sequence –Ú¡–∫≈ cur_seq max_seq step
 
 void ledflash();

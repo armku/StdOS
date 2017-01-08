@@ -50,8 +50,6 @@ IWDG->RLR = Reload;
 #include "WatchDog.h"
 #include "Sys.h"
 
-#define debug_printf printf
-
 WatchDog::WatchDog(uint ms)
 {
     Timeout = ms;
