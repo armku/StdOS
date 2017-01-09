@@ -4,7 +4,7 @@ Bresenham算法画直线和圆，硬件条件stm32（fmsc）+ili9325
 http://www.amobbs.com/forum.php?mod=viewthread&tid=5296612&extra=&ordertype=1
  */
 #include "Sys.h"
-#include "JLX12864G.h"
+#include "ST7565R.h"
 
 CLcd::CLcd()
 {

@@ -720,9 +720,9 @@
               <FilePath>..\SYSTEM\Devices\src\w25qxx.cpp</FilePath>
             </File>
             <File>
-              <FileName>JLX12864G.cpp</FileName>
+              <FileName>ST7565R.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\JLX12864G.cpp</FilePath>
+              <FilePath>..\SYSTEM\Devices\src\ST7565R.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1642,9 +1642,9 @@
               <FilePath>..\SYSTEM\Devices\src\w25qxx.cpp</FilePath>
             </File>
             <File>
-              <FileName>JLX12864G.cpp</FileName>
+              <FileName>ST7565R.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\JLX12864G.cpp</FilePath>
+              <FilePath>..\SYSTEM\Devices\src\ST7565R.cpp</FilePath>
             </File>
           </Files>
         </Group>
