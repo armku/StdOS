@@ -720,9 +720,9 @@
               <FilePath>..\SYSTEM\Devices\src\w25qxx.cpp</FilePath>
             </File>
             <File>
-              <FileName>lcd.cpp</FileName>
+              <FileName>JLX12864G.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\lcd.cpp</FilePath>
+              <FilePath>..\SYSTEM\Devices\src\JLX12864G.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1642,9 +1642,9 @@
               <FilePath>..\SYSTEM\Devices\src\w25qxx.cpp</FilePath>
             </File>
             <File>
-              <FileName>lcd.cpp</FileName>
+              <FileName>JLX12864G.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\lcd.cpp</FilePath>
+              <FilePath>..\SYSTEM\Devices\src\JLX12864G.cpp</FilePath>
             </File>
           </Files>
         </Group>

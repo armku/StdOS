@@ -417,7 +417,7 @@
 
   <Group>
     <GroupName>USER</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -681,7 +681,7 @@
 
   <Group>
     <GroupName>CORE</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1045,7 +1045,7 @@
 
   <Group>
     <GroupName>Devices</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1116,8 +1116,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\SYSTEM\Devices\src\lcd.cpp</PathWithFileName>
-      <FilenameWithoutPath>lcd.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\SYSTEM\Devices\src\JLX12864G.cpp</PathWithFileName>
+      <FilenameWithoutPath>JLX12864G.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
