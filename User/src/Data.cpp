@@ -47,7 +47,7 @@ void OnKeyPress(Pin pin, bool onoff)
 static uint OnUsartRead(ITransport* transport,Buffer& bs,void* para)
 {
 	SerialPortOld* sp =(SerialPortOld*)para;
-	debug_printf("%s 收到：",sp->Name);
+	debug_printf("%s 收到：[%d]",sp->Name,bs.Length());
 	bs.Show(true);		
 	sp->SendBuffer(bs.GetBuffer());
 	
