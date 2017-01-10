@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include "SerialPortOld.h"
 #include "stm32f10x.h"
-#include "AlternatePort.h"
-#include "InputPortNew.h"
+
 
 SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte dataBits, byte stopBits)
 {
@@ -28,10 +27,7 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     usart.USART_StopBits = this->_stopBits;
     usart.USART_WordLength = this->_dataBits;
 
-    nvic.NVIC_IRQChannelCmd = ENABLE;    
-        AlternatePort tx;   
-
-    InputPortNew rx;
+    nvic.NVIC_IRQChannelCmd = ENABLE;
     rx.Floating = true;
     //初始化端口引脚
     switch (this->_index)
