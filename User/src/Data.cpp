@@ -33,14 +33,7 @@ void feeddog()
 
 void OnKeyPress(Pin pin, bool onoff)
 {
-	if(onoff)
-	{
-		led1.Write(true);
-	}
-	else		
-	{
-		led1.Write(false);
-	}	
+	led1.Write(onoff);
 	led2=!led2;
 	printf("ÖÐ¶ÏÒý½Å£º%d Öµ%d \n",pin,onoff);
 }
