@@ -53,9 +53,10 @@ void SerialPort::Init()
     IsRemap = false;
 }
 
-#if 0
-    void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte stopBits)
-    {
+
+void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte stopBits)
+{
+    #if 0
         USART_TypeDef *const g_Uart_Ports[] = UARTS;
         _index = index;
         assert_param(_index < ArrayLength(g_Uart_Ports));
@@ -69,18 +70,20 @@ void SerialPort::Init()
         // 根据端口实际情况决定打开状态
         if (_port->CR1 &USART_CR1_UE)
             Opened = true;
+    #endif 
+    // 设置名称
+    //Name = "COMx";
+    *(uint*)Name = *(uint*)"COMx";
+    Name[3] = '0' + _index + 1;
+    Name[4] = 0;
 
-        // 设置名称
-        //Name = "COMx";
-        *(uint*)Name = *(uint*)"COMx";
-        Name[3] = '0' + _index + 1;
-        Name[4] = 0;
-    }
-#endif 
-#if 0
-    // 打开串口
-    bool SerialPort::OnOpen()
-    {
+}
+
+
+// 打开串口
+bool SerialPort::OnOpen()
+{
+    #if 0
         Pin rx, tx;
         GetPins(&tx, &rx);
 
@@ -234,10 +237,10 @@ void SerialPort::Init()
                 goto ShowLog;
             }
         #endif 
+    #endif 
+    return true;
+}
 
-        return true;
-    }
-#endif 
 // 关闭端口
 void SerialPort::OnClose()
 {
@@ -304,14 +307,15 @@ bool SerialPort::OnWrite(const byte *buf, uint size)
     return true;
 }
 
-#if 0
-    // 从某个端口读取数据
-    uint SerialPort::OnRead(byte *buf, uint size)
-    {
-        // 在100ms内接收数据
-        uint msTimeout = 1;
-        ulong us = Time.Current() + msTimeout * 1000;
-        uint count = 0; // 收到的字节数
+
+// 从某个端口读取数据
+uint SerialPort::OnRead(byte *buf, uint size)
+{
+    // 在100ms内接收数据
+    uint msTimeout = 1;
+    ulong us = Time.Current() + msTimeout * 1000;
+    uint count = 0; // 收到的字节数
+    #if 0
         while (count < size && Time.Current() < us)
         {
             // 轮询接收寄存器，收到数据则放入缓冲区
@@ -322,9 +326,10 @@ bool SerialPort::OnWrite(const byte *buf, uint size)
                 us = Time.Current() + msTimeout * 1000;
             }
         }
-        return count;
-    }
-#endif 
+    #endif 
+    return count;
+}
+
 // 刷出某个端口中的数据
 bool SerialPort::Flush(uint times)
 {
@@ -335,9 +340,10 @@ bool SerialPort::Flush(uint times)
     return times > 0;
 }
 
-#if 0
-    void SerialPort::Register(TransportHandler handler, void *param)
-    {
+
+void SerialPort::Register(TransportHandler handler, void *param)
+{
+    #if 0
         ITransport::Register(handler, param);
 
         const byte irqs[] = UART_IRQs;
@@ -352,13 +358,16 @@ bool SerialPort::Flush(uint times)
         {
             Interrupt.Deactivate(irq);
         }
-    }
-#endif 
-#if 0
-    // 真正的串口中断函数
-    void SerialPort::OnUsartReceive(ushort num, void *param)
-    {
+    #endif 
+}
+
+
+// 真正的串口中断函数
+void SerialPort::OnUsartReceive(ushort num, void *param)
+{
+    
         SerialPort *sp = (SerialPort*)param;
+	#if 0
         if (sp && sp->HasHandler())
         {
             if (USART_GetITStatus(sp->_port, USART_IT_RXNE) != RESET)
@@ -376,14 +385,16 @@ bool SerialPort::Flush(uint times)
                 }
             }
         }
-    }
-#endif 
-#if 0
-    // 获取引脚
-    void SerialPort::GetPins(Pin *txPin, Pin *rxPin)
-    {
-        *rxPin =  *txPin = P0;
+    #endif 
+}
 
+
+// 获取引脚
+void SerialPort::GetPins(Pin *txPin, Pin *rxPin)
+{
+    
+        *rxPin =  *txPin = P0;
+#if 0
         const Pin g_Uart_Pins[] = UART_PINS;
         const Pin g_Uart_Pins_Map[] = UART_PINS_FULLREMAP;
         const Pin *p = g_Uart_Pins;
@@ -393,8 +404,9 @@ bool SerialPort::Flush(uint times)
         int n = _index << 2;
         *txPin = p[n];
         *rxPin = p[n + 1];
-    }
-#endif 
+     #endif
+}
+
 extern "C"
 {
     #if 0

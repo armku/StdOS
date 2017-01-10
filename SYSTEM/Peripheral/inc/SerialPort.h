@@ -55,12 +55,8 @@ class SerialPort: public ITransport
         void SendData(byte data, uint times = 3000);
 
         bool Flush(uint times = 3000);
-        #if 0
-            void GetPins(Pin *txPin, Pin *rxPin);
-        #endif 
-        #if 0
-            virtual void Register(TransportHandler handler, void *param = NULL);
-        #endif 
+        void GetPins(Pin *txPin, Pin *rxPin);
+        virtual void Register(TransportHandler handler, void *param = NULL);
         #if 0
             virtual string ToString()
             {
@@ -69,16 +65,10 @@ class SerialPort: public ITransport
         #endif 
         static SerialPort *GetMessagePort();
     protected:
-        #if 0
-            virtual bool OnOpen();
-        #endif 
+        virtual bool OnOpen();
         virtual void OnClose();
-
         virtual bool OnWrite(const byte *buf, uint size);
-        #if 0
-            virtual uint OnRead(byte *buf, uint size);
-        #endif 
-
+        virtual uint OnRead(byte *buf, uint size);
     private:
         static void OnUsartReceive(ushort num, void *param);
 };

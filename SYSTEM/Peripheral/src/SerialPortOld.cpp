@@ -352,6 +352,7 @@ void SerialPortOld::SendBuffer(char *buff, int length)
     this->SendBuffer((byte*)buff, length);
 }
 
+
 // 注册数据到达事件
 void SerialPortOld::Register(IOnUsartRead handler, SerialPortOld *sp)
 {
