@@ -35,7 +35,7 @@ InputPortOld::InputPortOld(Pin pin)
     this->gPIO_PinSource = GPIO_PinSource0 + pin &0X0F;
     this->gPIO_PortSourceGPIO = GPIO_PortSourceGPIOA + pin / 16;
 }
-void InputPortOld::Init()
+void InputPortOld::InitOld()
 {	
 	EXTI_InitTypeDef EXTI_InitStructure;
 
@@ -105,7 +105,7 @@ void InputPortOld::Off()
 }
 
 // 注册回调  及中断使能
-void InputPortOld::Register(BtnInCallback handler)
+void InputPortOld::RegisterOld(BtnInCallback handler)
 {
     byte pins = this->_Pin &0x0F;
     IntState *state = &State[pins];

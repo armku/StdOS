@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Port.h"
-
+#define REGOLD	1	//旧版注册机制
 // 输入口
 class InputPortNew: public Port
 {

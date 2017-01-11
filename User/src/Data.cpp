@@ -66,9 +66,9 @@ void STDInit()
 	sp2.Open();
 	sp3.Open();
 	    
-	exti.Init();
+	exti.InitOld();
 	exti.On();	
-	exti.Register(OnKeyPress);
+	exti.RegisterOld(OnKeyPress);
 		
 	//w24c02.Test();
 		

@@ -10,13 +10,13 @@ class InputPortOld
     public:
 		InputPortOld();
         InputPortOld(Pin pin);
-        void Init();
+        void InitOld();
          
 		Pin _Pin; // 针脚
    
         void On(); //打开中断
         void Off(); //关闭中断		
-        void Register(BtnInCallback handler); // 注册回调		
+        void RegisterOld(BtnInCallback handler); // 注册回调		
     private:
         void Exti0_state(bool onoff);
         uint eXTI_Line; //中断线
