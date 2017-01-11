@@ -3,7 +3,7 @@
 #include "Sys.h"
 #include "stm32f10x.h"
 
-#define _force_inline 
+#define _force_inline __inline
 #ifdef STM32F4
     #define GPIO_MAX_SPEED 100
 #else 
