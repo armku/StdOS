@@ -19,6 +19,7 @@ class SerialPortOld:public ITransport
 		void Open();
 		void Register(IOnUsartRead handler,SerialPortOld *sp); // 注册数据到达事件	
 		void OnUsartReceive(byte * buf,ushort length);//从串口收到数据
+		OutputPort *RS485; // RS485使能引脚
     private:
         byte _index;
         byte _parity;

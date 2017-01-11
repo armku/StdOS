@@ -327,6 +327,8 @@ void SerialPortOld::SendData(byte data)
 //发送数据
 void SerialPortOld::SendBuffer(byte *buff, int length)
 {
+	if (RS485)
+        *RS485 = true;
     if (length ==  - 1)
     {
         while (*buff)
@@ -344,6 +346,8 @@ void SerialPortOld::SendBuffer(byte *buff, int length)
     {
         this->SendData(buff[i]);
     }
+	if (RS485)
+        *RS485 = false;
 }
 
 //发送数据
