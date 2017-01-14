@@ -33,7 +33,7 @@ void IWDG_Enable(void)
 IWDG->KR = KR_KEY_Enable;
 }
 
-void IWDG_SetPrescaler(uint8_t IWDG_Prescaler)
+void IWDG_SetPrescaler(byte IWDG_Prescaler)
 {
 assert_param(IS_IWDG_PRESCALER(IWDG_Prescaler));
 IWDG->PR = IWDG_Prescaler;
@@ -85,13 +85,13 @@ bool WatchDog::Config(uint ms)
     // 考虑到reload溢出的可能，每种分频最大ms = reload * mul / 40 ~= 102 * mul
     int i = 0;
     /*
-    #define IWDG_Prescaler_4            ((uint8_t)0x00)
-    #define IWDG_Prescaler_8            ((uint8_t)0x01)
-    #define IWDG_Prescaler_16           ((uint8_t)0x02)
-    #define IWDG_Prescaler_32           ((uint8_t)0x03)
-    #define IWDG_Prescaler_64           ((uint8_t)0x04)
-    #define IWDG_Prescaler_128          ((uint8_t)0x05)
-    #define IWDG_Prescaler_256          ((uint8_t)0x06)
+    #define IWDG_Prescaler_4            ((byte)0x00)
+    #define IWDG_Prescaler_8            ((byte)0x01)
+    #define IWDG_Prescaler_16           ((byte)0x02)
+    #define IWDG_Prescaler_32           ((byte)0x03)
+    #define IWDG_Prescaler_64           ((byte)0x04)
+    #define IWDG_Prescaler_128          ((byte)0x05)
+    #define IWDG_Prescaler_256          ((byte)0x06)
      */
     for (i = IWDG_Prescaler_4; i <= IWDG_Prescaler_256; i++)
     {

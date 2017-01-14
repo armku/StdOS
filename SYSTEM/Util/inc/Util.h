@@ -7,11 +7,11 @@
     {
     #endif 
 
-    void bubbleSort(float *buf, uint32_t len);
+    void bubbleSort(float *buf, uint len);
     //设置浮点数
-    void SetBufFloat(uint8_t buf[], uint16_t pos, float da);
+    void SetBufFloat(byte buf[], ushort pos, float da);
     //设置浮点数
-    float GetBufFloat(uint8_t buf[], uint16_t pos);
+    float GetBufFloat(byte buf[], ushort pos);
     //从电阻获得温度
     float GetTFromPT100(float om);
 

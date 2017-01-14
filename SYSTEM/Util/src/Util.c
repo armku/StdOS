@@ -2,9 +2,9 @@
 #include "Util.h"
 
 //排序
-void bubbleSort(float *buf, uint32_t len)
+void bubbleSort(float *buf, uint len)
 {
-    uint32_t i, j, pos;
+    uint i, j, pos;
     float tmp;
     for (i = len; i > 0; i--)
     {
@@ -27,16 +27,16 @@ union
     float dafloat;
     struct
     {
-        uint8_t da3;
-        uint8_t da2;
-        uint8_t da1;
-        uint8_t da0;
+        byte da3;
+        byte da2;
+        byte da1;
+        byte da0;
     } char_bit;
 }
 
 bitconvert; //数据转换用   
 //设置浮点数
-void SetBufFloat(uint8_t buf[], uint16_t pos, float da)
+void SetBufFloat(byte buf[], ushort pos, float da)
 {
     bitconvert.dafloat = da;
     buf[pos] = bitconvert.char_bit.da3;
@@ -46,7 +46,7 @@ void SetBufFloat(uint8_t buf[], uint16_t pos, float da)
 }
 
 //设置浮点数
-float GetBufFloat(uint8_t buf[], uint16_t pos)
+float GetBufFloat(byte buf[], ushort pos)
 {
     bitconvert.char_bit.da3 = buf[pos];
     bitconvert.char_bit.da2 = buf[pos + 1];
