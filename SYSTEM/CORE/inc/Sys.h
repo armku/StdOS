@@ -1,5 +1,9 @@
 #pragma once
 
+#ifdef DEBUG1
+#include <stdio.h>
+#endif
+
 #include "Type.h"
 #include "Object.h"
 #include "TaskOld.h"
@@ -43,7 +47,7 @@ typedef enum
 // 使用何种模块的宏定义
 #define using(module) Sys.module.Init = T##module##_Init;
 
-#ifdef DEBUG
+#ifdef DEBUG1
     #define debug_printf printf
 #else
     __inline void debug_printf( const char *format, ... ) {}
