@@ -444,8 +444,9 @@ extern "C"
         }
     #endif 
 }
+USART_TypeDef comm1,comm2,comm3,comm4,comm5,comm6,comm7;
 
-
+USART_TypeDef UARTS[7]={comm1,comm2,comm3,comm4,comm5,comm6,comm7};
 SerialPort *SerialPort::GetMessagePort()
 {
 
@@ -454,9 +455,10 @@ SerialPort *SerialPort::GetMessagePort()
         int _index = Sys.MessagePort;
         if (_index == COM_NONE)
             return NULL;
-        #if 0
+        #if 1
             USART_TypeDef *g_Uart_Ports[] = UARTS;
             USART_TypeDef *port = g_Uart_Ports[_index];
+		
             _printf_sp = new SerialPort(port);
             _printf_sp->Open();
         #endif 
