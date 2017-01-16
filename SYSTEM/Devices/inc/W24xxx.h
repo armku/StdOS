@@ -20,6 +20,7 @@ class CW24xxx
         byte WriteBytes(byte *_pWriteBuf, ushort bufpos, ushort _usAddress, uint _usSize);
         byte ReadByte(ushort address);
         byte WriteByte(ushort address, byte da);
+		OutputPort *pinWP;//保护引脚
     private:
         byte checkDevice();
         EW24XXType deviceType; //器件类型

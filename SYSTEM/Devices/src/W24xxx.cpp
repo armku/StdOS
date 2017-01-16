@@ -220,7 +220,10 @@ byte CW24xxx::bufwr(byte *buf, ushort bufpos, ushort addr, uint len, byte wr) //
     bytesLeave = len;
     curAddr = addr;
     bufaddr = bufpos;
-
+	if(this->pinWP)
+	{
+		*this->pinWP=0;
+	}
     if (pageStart)
     {
         //读取不是页起始地址的内容
@@ -303,6 +306,10 @@ byte CW24xxx::bufwr(byte *buf, ushort bufpos, ushort addr, uint len, byte wr) //
             }
         }
     }
+	if(this->pinWP)
+	{
+		*this->pinWP=1;
+	}
     return 0;
 }
 
