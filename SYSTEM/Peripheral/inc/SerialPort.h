@@ -62,7 +62,7 @@ class SerialPort: public ITransport
             {
                     return Name;
             }
-        #endif 
+        #endif 		
         static SerialPort *GetMessagePort();
     protected:
         virtual bool OnOpen();

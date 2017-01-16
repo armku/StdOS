@@ -360,20 +360,23 @@ void SerialPort::Register(TransportHandler handler, void *param)
         }
     #endif 
 }
-
+uint ArrayLength(byte buf[])
+	{
+		return 10;
+	}
 
 // 真正的串口中断函数
 void SerialPort::OnUsartReceive(ushort num, void *param)
 {
 
     SerialPort *sp = (SerialPort*)param;
-    #if 0
+   
         if (sp && sp->HasHandler())
         {
             if (USART_GetITStatus(sp->_port, USART_IT_RXNE) != RESET)
             {
                 // 从栈分配，节省内存
-                byte buf[64];
+                byte buf[64];				 
                 uint len = sp->Read(buf, ArrayLength(buf));
                 if (len)
                 {
@@ -381,11 +384,13 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
                     assert_param(len <= ArrayLength(buf));
                     // 如果有数据，则反馈回去
                     if (len)
+					{
                         sp->Write(buf, len);
+					}
                 }
             }
         }
-    #endif 
+   
 }
 
 
@@ -444,9 +449,9 @@ extern "C"
         }
     #endif 
 }
-USART_TypeDef comm1,comm2,comm3,comm4,comm5,comm6,comm7;
 
-USART_TypeDef UARTS[7]={comm1,comm2,comm3,comm4,comm5,comm6,comm7};
+USART_TypeDef comm1,comm2,comm3,comm4,comm5,comm6,comm7;
+#define UARTS {&comm1,&comm2,&comm3,&comm4,&comm5,&comm6,&comm7}
 SerialPort *SerialPort::GetMessagePort()
 {
 
@@ -454,14 +459,14 @@ SerialPort *SerialPort::GetMessagePort()
     {
         int _index = Sys.MessagePort;
         if (_index == COM_NONE)
+		{
             return NULL;
-        #if 1
+		}        			
             USART_TypeDef *g_Uart_Ports[] = UARTS;
             USART_TypeDef *port = g_Uart_Ports[_index];
 		
             _printf_sp = new SerialPort(port);
-            _printf_sp->Open();
-        #endif 
+            _printf_sp->Open();       
     }
 
     return _printf_sp;
