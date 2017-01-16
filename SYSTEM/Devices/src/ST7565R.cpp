@@ -8,6 +8,7 @@ http://www.amobbs.com/forum.php?mod=viewthread&tid=5296612&extra=&ordertype=1
 
 CLcd::CLcd()
 {
+	this->ShadowReset();
 }
 
 CLcd::CLcd(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs)
@@ -17,6 +18,7 @@ CLcd::CLcd(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs)
     this->pPinsid.Set(pinsid);
     this->pPinres.Set(pinres);
     this->pPincs.Set(pincs);
+	this->ShadowReset();
 }
 
 /********************************************************************************************************
@@ -157,7 +159,7 @@ void CLcd::SetAddress(byte page, byte column) //写入地址 页 列
  ********************************************************************************************************/
 void CLcd::Point(ushort x, ushort y, ushort color)
 {
-        if (color)
+        if (((color)&&(!this->inShadow(x,y)))||((!color)&&(this->inShadow(x,y))))
         {
             this->Interface_Table[y / 8][x] |= (1 << (y % 8));
         }
@@ -385,17 +387,6 @@ void CLcd::Rect(ushort x, ushort y, ushort width, ushort height)
 
     this->Line(x, y, x, y + height);
     this->Line(x + width, y, x + width, y + height);
-}
-//显示阴影
-void CLcd::DisplayShadow(ushort x,ushort y,ushort width,ushort height)
-{
-	for (ushort xx = x; xx < x+width; xx++)
-    {
-        for (ushort yy = y; yy < y+height; yy++)
-		{
-            this->Point(xx, yy,this->readPoint(xx,yy)?0:1);
-		}
-    }
 }
 		
 //实心矩形
@@ -637,4 +628,43 @@ void CLcd::Flush()
             this->writeData(this->Interface_Table[j][i]);
         }
     }
+}
+//是否在阴影区域
+bool CLcd::inShadow(ushort x,ushort y)
+{
+	bool ret=false;
+	
+	for(int i=0;i<3;i++)
+	{
+		if(this->ShadowRect[i].enable)
+		{
+			if((x>=this->ShadowRect[i].x)&&(x<=(this->ShadowRect[i].x+this->ShadowRect[i].width))&&(y>=this->ShadowRect[i].y)&&(y<=(this->ShadowRect[i].y+this->ShadowRect[i].height)))
+			{
+				ret=true;
+			}
+		}
+	}
+	
+	return ret;
+}
+//阴影部分复位
+void CLcd::ShadowReset()
+{
+	for(int i=0;i<3;i++)
+	{
+		this->ShadowRect[i].enable=false;
+	}
+}
+//阴影启用，默认启用通道0
+void CLcd::ShadowOn(ushort x,ushort y,ushort width,ushort height,byte id)
+{
+	if(id>=3)
+	{
+		return;
+	}
+	this->ShadowRect[id].enable=true;
+	this->ShadowRect[id].x=x;
+	this->ShadowRect[id].y=y;
+	this->ShadowRect[id].width=width;
+	this->ShadowRect[id].height=height;
 }
