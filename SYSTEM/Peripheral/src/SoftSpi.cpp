@@ -26,7 +26,7 @@ byte CSoftSpi::WaitBusy()
     ushort i;
     this->portcs=0;
     i = 0;
-    while (this->portdo.ReadInput() > 0)
+    while (this->portdo.Read() > 0)
     {
         Sys.Sleep(10);
         i++;
@@ -57,7 +57,7 @@ byte CSoftSpi::spi_writebyte(byte da)
         Sys.Delay(this->delayus);
         this->portsck=0;
         ret <<= 1;
-        if (this->portdo.ReadInput())
+        if (this->portdo.Read())
         {
             ret |= 1;
         }

@@ -59,9 +59,8 @@
 CADS1246::CADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, Pin pinrd, Pin pinreset)
 {
     this->pspi = new CSoftSpi(pincs, pinsck, pindin, pindout,0);
-    this->ppinrd.OpenDrain=true;
+    this->ppinrd.Floating=true;
 	this->ppinrd.Set(pinrd);
-    //this->ppinrd->SetModeIN_FLOATING();
     this->ppinreset.Set(pinreset);
     this->ppinreset=0;
 }
@@ -141,7 +140,7 @@ float CADS1246::Read(void) //返回-1,表示转换未完成
 
     Cmd[0] = ADC_CMD_RDATA;
     this->pspi->portcs=0;
-    if (this->ppinrd.ReadInput() != 0)
+    if (this->ppinrd.Read() != 0)
     {
         return  - 1;
     }
@@ -159,7 +158,6 @@ float CADS1246::Read(void) //返回-1,表示转换未完成
 
 void CADS1246::Init(void)
 {
-    this->ppinrd=1;
     this->pspi->portcs=1;
     this->ppinreset=0;
     Sys.Sleep(40);

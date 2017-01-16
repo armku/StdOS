@@ -16,11 +16,11 @@ SerialPort::SerialPort()
     Init();
 }
 
-#if 0
-    SerialPort::SerialPort(USART_TypeDef *com, int baudRate, byte parity, byte dataBits, byte stopBits)
-    {
-        assert_param(com);
 
+SerialPort::SerialPort(USART_TypeDef *com, int baudRate, byte parity, byte dataBits, byte stopBits)
+{
+    assert_param(com);
+    #if 0
         const USART_TypeDef *const g_Uart_Ports[] = UARTS;
         byte _index = 0xFF;
         for (int i = 0; i < ArrayLength(g_Uart_Ports); i++)
@@ -31,11 +31,11 @@ SerialPort::SerialPort()
                 break;
             }
         }
+    #endif 
+    Init();
+    Init(_index, baudRate, parity, dataBits, stopBits);
+}
 
-        Init();
-        Init(_index, baudRate, parity, dataBits, stopBits);
-    }
-#endif 
 // 析构时自动关闭
 SerialPort::~SerialPort()
 {
@@ -83,10 +83,10 @@ void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte
 // 打开串口
 bool SerialPort::OnOpen()
 {
-    #if 0
-        Pin rx, tx;
-        GetPins(&tx, &rx);
 
+    Pin rx, tx;
+    GetPins(&tx, &rx);
+    #if 0
         //debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
         #if COM_DEBUG
             if (_index != Sys.MessagePort)
@@ -223,21 +223,21 @@ bool SerialPort::OnOpen()
         //USART_ITConfig(_port, USART_IT_TXE, DISABLE); // 不需要发送中断
 
         USART_Cmd(_port, ENABLE); //使能串口
-
-        if (RS485)
-            *RS485 = false;
-
-        //Opened = true;
-
-        #if COM_DEBUG
-            if (_index == Sys.MessagePort)
-            {
-                // 提前设置为已打开端口，ShowLog里面需要判断
-                Opened = true;
-                goto ShowLog;
-            }
-        #endif 
     #endif 
+    if (RS485)
+        *RS485 = false;
+
+    //Opened = true;
+
+    #if COM_DEBUG
+        if (_index == Sys.MessagePort)
+        {
+            // 提前设置为已打开端口，ShowLog里面需要判断
+            Opened = true;
+            goto ShowLog;
+        }
+    #endif 
+
     return true;
 }
 
@@ -245,11 +245,11 @@ bool SerialPort::OnOpen()
 void SerialPort::OnClose()
 {
     debug_printf("~Serial%d Close\r\n", _index + 1);
-    #if 0
-        Pin tx, rx;
 
-        GetPins(&tx, &rx);
-    #endif 
+    Pin tx, rx;
+
+    GetPins(&tx, &rx);
+
     USART_DeInit(_port);
 
     // 检查重映射
@@ -365,9 +365,9 @@ void SerialPort::Register(TransportHandler handler, void *param)
 // 真正的串口中断函数
 void SerialPort::OnUsartReceive(ushort num, void *param)
 {
-    
-        SerialPort *sp = (SerialPort*)param;
-	#if 0
+
+    SerialPort *sp = (SerialPort*)param;
+    #if 0
         if (sp && sp->HasHandler())
         {
             if (USART_GetITStatus(sp->_port, USART_IT_RXNE) != RESET)
@@ -392,9 +392,9 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
 // 获取引脚
 void SerialPort::GetPins(Pin *txPin, Pin *rxPin)
 {
-    
-        *rxPin =  *txPin = P0;
-#if 0
+
+    *rxPin =  *txPin = P0;
+    #if 0
         const Pin g_Uart_Pins[] = UART_PINS;
         const Pin g_Uart_Pins_Map[] = UART_PINS_FULLREMAP;
         const Pin *p = g_Uart_Pins;
@@ -404,15 +404,16 @@ void SerialPort::GetPins(Pin *txPin, Pin *rxPin)
         int n = _index << 2;
         *txPin = p[n];
         *rxPin = p[n + 1];
-     #endif
+    #endif 
 }
 
+SerialPort *_printf_sp;
+bool isInFPutc;
 extern "C"
 {
-    #if 0
-        SerialPort *_printf_sp;
-        bool isInFPutc;
 
+
+    #if 0
         /* 重载fputc可以让用户程序使用printf函数 */
         int fputc(int ch, FILE *f)
         {
@@ -443,21 +444,25 @@ extern "C"
         }
     #endif 
 }
+USART_TypeDef comm1,comm2,comm3,comm4,comm5,comm6,comm7;
 
-#if 0
-    SerialPort *SerialPort::GetMessagePort()
+USART_TypeDef UARTS[7]={comm1,comm2,comm3,comm4,comm5,comm6,comm7};
+SerialPort *SerialPort::GetMessagePort()
+{
+
+    if (!_printf_sp)
     {
-        if (!_printf_sp)
-        {
-            int _index = Sys.MessagePort;
-            if (_index == COM_NONE)
-                return NULL;
-
+        int _index = Sys.MessagePort;
+        if (_index == COM_NONE)
+            return NULL;
+        #if 1
             USART_TypeDef *g_Uart_Ports[] = UARTS;
             USART_TypeDef *port = g_Uart_Ports[_index];
+		
             _printf_sp = new SerialPort(port);
             _printf_sp->Open();
-        }
-        return _printf_sp;
+        #endif 
     }
-#endif
+
+    return _printf_sp;
+}

@@ -666,9 +666,9 @@ void CLcd::Display32x32(ushort x, ushort y, byte *dp,ushort color,ushort reverse
 
 void CLcd::Cls(ushort x, ushort y, ushort width, ushort height)
 {
-    for (ushort i = 0; i < width; i++)
+    for (ushort i = x; i < x+width; i++)
     {
-        for (ushort j = 0; j < height; j++)
+        for (ushort j = y; j < y+height; j++)
         {
             this->Point(i, j, 0);
         }

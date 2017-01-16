@@ -1,5 +1,9 @@
 #pragma once
 
+#ifdef DEBUG
+#include <stdio.h>
+#endif
+
 #include "Type.h"
 #include "Object.h"
 #include "TaskOld.h"
