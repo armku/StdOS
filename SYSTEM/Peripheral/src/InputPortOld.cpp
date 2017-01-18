@@ -112,14 +112,6 @@ void InputPortOld::RegisterOld(BtnInCallback handler)
     // 注册中断事件
     if (handler)
     {
-        // 检查是否已经注册到别的引脚上
-//        if (state->Pin != pin && state->Pin != P0)
-//        {
-//            #if DEBUG
-//                debug_printf("EXTI%d can't register to P%c%d, it has register to P%c%d\r\n", pins, _PIN_NAME(pin), _PIN_NAME(state->Pin));
-//            #endif 
-//            return ;
-//        }
         state->Pin = this->_Pin;
         state->Handler = handler;
     }
