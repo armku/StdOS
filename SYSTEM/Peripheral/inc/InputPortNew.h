@@ -75,11 +75,6 @@ class InputPortNew: public Port
         }
 
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
-
-        #if DEBUG
-            virtual bool OnReserve(Pin pin, bool flag);
-        #endif 
-
     private:
         bool _Registed;        
             void RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param);

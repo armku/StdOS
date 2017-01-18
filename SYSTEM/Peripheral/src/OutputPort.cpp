@@ -128,12 +128,3 @@ void OutputPort::Write(Pin pin, bool value)
     else
         GPIO_ResetBits(_GROUP(pin), _PORT(pin));
 }
-// 端口引脚保护
-#if DEBUG    
-    bool OutputPort::OnReserve(Pin pin, bool flag)
-    {
-        debug_printf("Output::");
-
-        return Port::OnReserve(pin, flag);
-    }
-#endif

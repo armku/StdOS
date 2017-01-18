@@ -20,8 +20,4 @@ class AlternatePort: public OutputPort
 
     protected:
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
-
-        #if DEBUG
-            virtual bool OnReserve(Pin pin, bool flag);
-        #endif 
 };

@@ -60,10 +60,6 @@ class OutputPort: public Port
                 Speed = speed;
                 Invert = invert;
         }
-
-        #if DEBUG
-            virtual bool OnReserve(Pin pin, bool flag);
-        #endif 
 };
 // 输出端口会话类。初始化时打开端口，超出作用域析构时关闭。反向操作可配置端口为倒置
 class PortScope

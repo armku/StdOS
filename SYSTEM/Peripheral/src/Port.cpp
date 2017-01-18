@@ -72,23 +72,13 @@ Port::~Port()
                 }
             }
         }
-    #endif 
-
-    #if DEBUG
-        // 解除保护引脚
-        OnReserve(_Pin, false);
-    #endif 
+    #endif
 }
 
 // 单一引脚初始化
 Port &Port::Set(Pin pin)
 {
     //assert_param(pin != P0);
-
-    #if DEBUG
-        if (_Pin != P0)
-            OnReserve(_Pin, false);
-    #endif 
 
     _Pin = pin;
     if (_Pin != P0)
@@ -107,13 +97,7 @@ Port &Port::Set(Pin pin)
         if (_Pin != P0)
             InitState = ((ulong)Group->CRH << 32) + Group->CRL;
     #endif 
-
-    #if DEBUG
-        // 保护引脚
-        if (_Pin != P0)
-            OnReserve(_Pin, true);
-    #endif 
-
+   
     if (_Pin != P0)
         Config();
 
@@ -172,68 +156,3 @@ byte Port::GroupToIndex(GPIO_TypeDef *group)
 {
     return (byte)(((int)group - GPIOA_BASE) >> 10);
 }
-
-
-// 端口引脚保护
-#if DEBUG
-    static ushort Reserved[8]; // 引脚保留位，记录每个引脚是否已经被保留，禁止别的模块使用
-
-    // 保护引脚，别的功能要使用时将会报错。返回是否保护成功
-    bool Port::Reserve(Pin pin, bool flag)
-    {
-        int port = pin >> 4, bit = 1 << (pin &0x0F);
-        if (flag)
-        {
-            if (Reserved[port] &bit)
-            {
-                // 增加针脚已经被保护的提示，很多地方调用ReservePin而不写日志，得到False后直接抛异常
-                debug_printf("ReservePin P%c%d already reserved\r\n", _PIN_NAME(pin));
-                return false; // already reserved
-            }
-            Reserved[port] |= bit;
-
-            debug_printf("ReservePin P%c%d\r\n", _PIN_NAME(pin));
-        }
-        else
-        {
-            Reserved[port] &= ~bit;
-
-            #if defined(STM32F1)
-                int config = 0;
-                uint shift = (pin &7) << 2; // 4 bits / pin
-                uint mask = 0xF << shift; // 屏蔽掉其它位
-                GPIO_TypeDef *port2 = IndexToGroup(port); // pointer to the actual port registers
-                if (pin &0x08)
-                {
-                    // bit 8 - 15
-                    config = port2->CRH &mask;
-                }
-                else
-                {
-                    // bit 0-7
-                    config = port2->CRL &mask;
-                }
-
-                config >>= shift; // 移位到最右边
-                config &= 0xF;
-                debug_printf("UnReservePin P%c%d Config=0x%02x\r\n", _PIN_NAME(pin), config);
-            #else 
-                debug_printf("UnReservePin P%c%d\r\n", _PIN_NAME(pin));
-            #endif 
-        }
-
-        return true;
-    }
-
-    bool Port::OnReserve(Pin pin, bool flag)
-    {
-        return Reserve(pin, flag);
-    }
-
-    // 引脚是否被保护
-    bool Port::IsBusy(Pin pin)
-    {
-        int port = pin >> 4, sh = pin &0x0F;
-        return (Reserved[port] >> sh) &1;
-    }
-#endif

@@ -31,21 +31,14 @@ class Port
         // 辅助函数
         _force_inline static GPIO_TypeDef* IndexToGroup(byte index);
         _force_inline static byte GroupToIndex(GPIO_TypeDef* group);
-
-        #if DEBUG
-            static bool Reserve(Pin pin, bool flag); // 保护引脚，别的功能要使用时将会报错。返回是否保护成功
-            static bool IsBusy(Pin pin); // 引脚是否被保护
-        #endif 		
+        	
     protected:
         Port();
         virtual ~Port();
 
         // 配置过程，由Config调用，最后GPIO_Init
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
-        #if DEBUG
-            virtual bool OnReserve(Pin pin, bool flag);
-        #endif 
-
+        
     private:
         #if defined(STM32F1)
             ulong InitState; // 备份引脚初始状态，在析构时还原

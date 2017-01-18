@@ -279,9 +279,6 @@ void InputPortNew::RegisterInput(int groupIndex, int pinIndex, IOReadHandler han
     // 检查是否已经注册到别的引脚上
     if (state->Pin != pin && state->Pin != P0)
     {
-        #if DEBUG
-            debug_printf("EXTI%d can't register to P%c%d, it has register to P%c%d\r\n", groupIndex, _PIN_NAME(pin), _PIN_NAME(state->Pin));
-        #endif 
         return ;
     }
     state->Pin = pin;
@@ -329,13 +326,3 @@ void InputPortNew::UnRegisterInput(int pinIndex)
         #endif 
     }
 }
-
-// 端口引脚保护
-#if DEBUG    
-    bool InputPortNew::OnReserve(Pin pin, bool flag)
-    {
-        debug_printf("Input::");
-
-        return Port::OnReserve(pin, flag);
-    }
-#endif
