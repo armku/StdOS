@@ -71,8 +71,8 @@ void STDInit()
 
 void ledflash()
 {
-	led1=!led1;
-	led2=!led2;
+//	led1=!led1;
+//	led2=!led2;
 	led3=!led3;	
 }
 
