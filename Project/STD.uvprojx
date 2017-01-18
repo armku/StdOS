@@ -436,11 +436,6 @@
               <FileType>1</FileType>
               <FilePath>..\User\src\stm32f10x_it.c</FilePath>
             </File>
-            <File>
-              <FileName>Data.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\src\Data.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1357,11 +1352,6 @@
               <FileName>stm32f10x_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\src\stm32f10x_it.c</FilePath>
-            </File>
-            <File>
-              <FileName>Data.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\src\Data.cpp</FilePath>
             </File>
           </Files>
         </Group>
