@@ -10,16 +10,10 @@
 #include "WatchDog.h"
 #include "Port.h"
 
-//sequence 序列号 cur_seq max_seq step
-
 void ledflash();
-void eepread();
-//1ms软件定时器
-void softTimers();
 OutputPort led1(PB0,true);
 OutputPort led2(PF7,true);
 OutputPort led3(PF8,true);
-CW24xxx  w24c02(PB6,PB7,AT24C02);
 //按键 PC13 PA0
 
 InputPortOld exti(PC13);//PA1 PB3
@@ -68,36 +62,20 @@ void STDInit()
 	exti.InitOld();
 	exti.On();	
 	exti.RegisterOld(OnKeyPress);
-		
-	//w24c02.Test();
-		
-	Sys.AddTask(softTimers,0,1,1,"1毫秒软件定时器");//1毫秒周期循环
+			
 	Sys.AddTask(ComTimers,0,1,1,"串口数据接收定时器");//1毫秒周期循环
 	Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
-	Sys.AddTask(ledflash,0,5,50,"状态指示灯");
-	Sys.AddTask(eepread,0,10,1000,"测试任务");
+	Sys.AddTask(ledflash,0,5,50,"状态指示灯");	
 	Sys.Start();
 }
 
 void ledflash()
 {
-	//led1=!led1;
-	//led2=!led2;
+	led1=!led1;
+	led2=!led2;
 	led3=!led3;	
 }
 
-void eepread()
-{
-	//sp1.SendBuffer("COM1\n");
-	sp2.SendBuffer("COM2\n");
-	sp3.SendBuffer("COM3\n");
-}
-
-//1ms软件定时器
-void softTimers()
-{
-    
-}
 byte USART_RX_BUF[100]; //接收缓冲,最大USART_REC_LEN个字节.
 extern uint com1timeidle; //串口1空闲时间
 extern CFIFORing com1buf; //串口1接收缓冲区
