@@ -32,7 +32,8 @@ Array/ByteArray/String 等会调用 SetLength 自动扩容，加大缓冲区。
 class Buffer:public Object
 {
     public:
-		Buffer(byte* buf,ushort length);        
+		Buffer(byte* buf,ushort length);     
+		Buffer(char* buf,ushort length);
         byte* GetBuffer();//返回指针        
         ushort Length();//长度        
         void SetLength(ushort len);//设置长度，可自动扩容        

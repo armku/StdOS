@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include "Buffer.h"
 
+Buffer::Buffer(char* buf,ushort length)
+{
+	this->pbuf=(byte*)buf;
+	this->bufLength=length;
+}
+
 Buffer::Buffer(byte* buf,ushort length)
 {
 	this->pbuf=buf;

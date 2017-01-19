@@ -9,6 +9,7 @@
 #include "Sys.h"
 #include "WatchDog.h"
 #include "Port.h"
+#include "Buffer.h"
 
 void ledflash();
 OutputPort led1(PB0,true);
@@ -62,6 +63,11 @@ void STDInit()
 	exti.InitOld();
 	exti.On();	
 	exti.RegisterOld(OnKeyPress);
+	
+	char cs[]="this is a buffer test";
+	Buffer bs(cs,sizeof(cs));
+	debug_printf("Buffer bs(cs,strlen(cs))=>%s \r\n",cs);
+	
 			
 	Sys.AddTask(ComTimers,0,1,1,"串口数据接收定时器");//1毫秒周期循环
 	Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
