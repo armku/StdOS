@@ -7,15 +7,11 @@
 
 #include <stdint.h>
 
-
 typedef unsigned char byte; //单字节 0~255
-//typedef  int16_t short;//短整型
 typedef unsigned short int ushort; //无符号短整型 0~65535
-//typedef  int32_t int;//整型
 typedef unsigned int uint; //无符号整型
 typedef int64_t Int64; //长整型
 typedef uint64_t UInt64; //无符号长整型
-typedef uint cstring; //C 格式字符串
 typedef uint64_t ulong; //
 
 #ifdef __cplusplus         
