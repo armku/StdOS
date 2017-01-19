@@ -4,7 +4,6 @@
 
 #define NULL 0
 #define string char
-#define debug_printf printf
 
 typedef void(*Action)(void); //»Øµ÷º¯Êý
 

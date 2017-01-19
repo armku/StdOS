@@ -52,7 +52,7 @@ typedef enum
 #ifdef DEBUG
     #define debug_printf printf
 #else
-    __inline void debug_printf( const char *format, ... ) {}
+    inline void debug_printf( const char *format, ... ) {}
 #endif
 
 class TSys:public Object
