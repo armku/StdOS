@@ -2,7 +2,7 @@
 
 #include "Type.h"
 #include "OutputPort.h"
-#include "InputPortNew.h"
+#include "InputPort.h"
 
 #define MAXCH	8
 #define CHDELAY	2	//通道切换延时时间，用于数据稳定
@@ -25,7 +25,7 @@ class CAD7689
         byte chDelayCnt; //通道延时时间，用于数据稳定
         OutputPort ppinsck;
         OutputPort ppinsdi;
-        InputPortNew ppinsdo;
+        InputPort ppinsdo;
         OutputPort ppincnv;
         byte getNextCH(); //获取下次转换通道
 };

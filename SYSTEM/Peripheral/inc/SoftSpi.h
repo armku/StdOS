@@ -1,7 +1,7 @@
 #pragma once
 
 #include "OutputPort.h"
-#include "InputPortNew.h"
+#include "InputPort.h"
 
 class CSoftSpi
 {
@@ -14,7 +14,7 @@ public:
 public:
     OutputPort portsck;
     OutputPort portdi;
-    InputPortNew portdo;
+    InputPort portdo;
     OutputPort portcs;
 private:
     uint delayus;//—” ± ±º‰

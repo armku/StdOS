@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "InputPortNew.h"
+#include "InputPort.h"
 
 // 获取组和针脚
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
@@ -8,7 +8,7 @@
 #define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
-void InputPortNew::OnConfig(GPIO_InitTypeDef &gpio)
+void InputPort::OnConfig(GPIO_InitTypeDef &gpio)
 {
     Port::OnConfig(gpio);
 
@@ -32,7 +32,7 @@ void InputPortNew::OnConfig(GPIO_InitTypeDef &gpio)
 typedef struct TIntState
 {
     Pin Pin;
-    InputPortNew::IOReadHandler Handler; // 委托事件
+    InputPort::IOReadHandler Handler; // 委托事件
     void *Param; // 事件参数，一般用来作为事件挂载者的对象，然后借助静态方法调用成员方法
     bool OldValue;
 
@@ -44,10 +44,10 @@ typedef struct TIntState
 static IntState State[16];
 static bool hasInitState = false;
 
-void RegisterInput(int groupIndex, int pinIndex, InputPortNew::IOReadHandler handler);
+void RegisterInput(int groupIndex, int pinIndex, InputPort::IOReadHandler handler);
 void UnRegisterInput(int pinIndex);
 
-InputPortNew::~InputPortNew()
+InputPort::~InputPort()
 {
     // 取消所有中断
     if (_Registed)
@@ -56,20 +56,20 @@ InputPortNew::~InputPortNew()
     }
 }
 
-ushort InputPortNew::ReadGroup() // 整组读取
+ushort InputPort::ReadGroup() // 整组读取
 {
     return GPIO_ReadInputData(Group);
 }
 
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
-bool InputPortNew::Read()
+bool InputPort::Read()
 {
     // 转为bool时会转为0/1
     bool rs = GPIO_ReadInputData(Group) &PinBit;
     return rs ^ Invert;
 }
 
-bool InputPortNew::Read(Pin pin)
+bool InputPort::Read(Pin pin)
 {
     GPIO_TypeDef *group = _GROUP(pin);
     return (group->IDR >> (pin &0xF)) &1;
@@ -77,7 +77,7 @@ bool InputPortNew::Read(Pin pin)
 
 
 // 注册回调  及中断使能
-void InputPortNew::Register(IOReadHandler handler, void *param)
+void InputPort::Register(IOReadHandler handler, void *param)
 {
     if (!PinBit)
         return ;
@@ -146,7 +146,7 @@ void GPIO_ISR(int num) // 0 <= num <= 15
     do
     {
         EXTI->PR = bit; // 重置挂起位
-        value = InputPortNew::Read(state->Pin); // 获取引脚状态
+        value = InputPort::Read(state->Pin); // 获取引脚状态
         if (shakeTime > 0)
         {
             // 值必须有变动才触发
@@ -272,7 +272,7 @@ void SetEXIT(int pinIndex, bool enable)
 }
 
 // 申请引脚中断托管
-void InputPortNew::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param)
+void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param)
 {
     IntState *state = &State[pinIndex];
     Pin pin = (Pin)((groupIndex << 4) + pinIndex);
@@ -309,7 +309,7 @@ void InputPortNew::RegisterInput(int groupIndex, int pinIndex, IOReadHandler han
     }
 }
 
-void InputPortNew::UnRegisterInput(int pinIndex)
+void InputPort::UnRegisterInput(int pinIndex)
 {
     IntState *state = &State[pinIndex];
     // 取消注册

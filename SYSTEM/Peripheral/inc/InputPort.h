@@ -3,7 +3,7 @@
 #include "Port.h"
 #define REGOLD	1	//旧版注册机制
 // 输入口
-class InputPortNew: public Port
+class InputPort: public Port
 {
     public:
 		//以下为2017-01-07
@@ -22,7 +22,7 @@ class InputPortNew: public Port
 		}Trigger;
 
         // 读取委托
-        typedef void(*IOReadHandler)(InputPortNew * port, bool down, void *param); 
+        typedef void(*IOReadHandler)(InputPort * port, bool down, void *param); 
 
         ushort	ShakeTime;//	=	0; 		// 抖动时间.毫秒
 		ushort	PressTime;//	=	0;		//长按时间。毫秒
@@ -37,17 +37,17 @@ class InputPortNew: public Port
         bool Floating; // 是否浮空输入
         
 
-        InputPortNew()
+        InputPort()
         {
                 Init();
         }
-        InputPortNew(Pin pin, bool floating = true, PuPd pupd = UP)
+        InputPort(Pin pin, bool floating = true, PuPd pupd = UP)
         {
                 Init(floating, pupd);
                 Set(pin);
         }
 
-        virtual ~InputPortNew();
+        virtual ~InputPort();
 
         ushort ReadGroup(); // 整组读取
         bool Read(); // 读取状态

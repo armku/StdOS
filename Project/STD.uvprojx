@@ -605,9 +605,9 @@
               <FilePath>..\SYSTEM\Peripheral\src\AnalogInPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>InputPortNew.cpp</FileName>
+              <FileName>InputPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\InputPortNew.cpp</FilePath>
+              <FilePath>..\SYSTEM\Peripheral\src\InputPort.cpp</FilePath>
             </File>
             <File>
               <FileName>Spi.cpp</FileName>
@@ -1527,9 +1527,9 @@
               <FilePath>..\SYSTEM\Peripheral\src\AnalogInPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>InputPortNew.cpp</FileName>
+              <FileName>InputPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\InputPortNew.cpp</FilePath>
+              <FilePath>..\SYSTEM\Peripheral\src\InputPort.cpp</FilePath>
             </File>
             <File>
               <FileName>Spi.cpp</FileName>

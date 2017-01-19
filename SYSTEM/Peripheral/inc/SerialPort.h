@@ -4,7 +4,7 @@
 #include "Sys.h"
 #include "stm32f10x.h"
 #include "OutputPort.h"
-#include "InputPortNew.h"
+#include "InputPort.h"
 #include "AlternatePort.h"
 
 // ´®¿ÚÀà
@@ -22,7 +22,7 @@ class SerialPort: public ITransport
         #if defined(STM32F0) || defined(STM32F4)
             AlternatePort _rx;
         #else 
-            InputPortNew _rx;
+            InputPort _rx;
         #endif 
 
         void Init();

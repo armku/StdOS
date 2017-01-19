@@ -5,7 +5,7 @@
 #include "FIFORing.h"
 #include "ITransport.h"
 #include "AlternatePort.h"
-#include "InputPortNew.h"
+#include "InputPort.h"
 
 class SerialPortOld:public ITransport
 {
@@ -28,5 +28,5 @@ class SerialPortOld:public ITransport
         int _baudRate;
 		IOnUsartRead OnRcv; 
 		AlternatePort tx;
-		InputPortNew rx;
+		InputPort rx;
 };
