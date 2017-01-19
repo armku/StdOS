@@ -603,6 +603,7 @@ void CLcd::Display32x32(ushort x, ushort y, byte *dp)
 
 void CLcd::Cls(ushort x, ushort y, ushort width, ushort height)
 {
+	this->ShadowReset();
     for (ushort i = x; i < x+width; i++)
     {
         for (ushort j = y; j < y+height; j++)
