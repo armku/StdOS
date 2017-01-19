@@ -610,11 +610,6 @@
               <FilePath>..\SYSTEM\Peripheral\src\InputPortNew.cpp</FilePath>
             </File>
             <File>
-              <FileName>ITransport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\Spi.cpp</FilePath>
@@ -670,6 +665,11 @@
               <FilePath>..\SYSTEM\NET\src\ISocket.cpp</FilePath>
             </File>
             <File>
+              <FileName>ITransport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
+            </File>
+            <File>
               <FileName>SerialPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
@@ -683,6 +683,11 @@
               <FileName>InputPortOld.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\InputPortOld.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\Timer.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1527,11 +1532,6 @@
               <FilePath>..\SYSTEM\Peripheral\src\InputPortNew.cpp</FilePath>
             </File>
             <File>
-              <FileName>ITransport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\Spi.cpp</FilePath>
@@ -1587,6 +1587,11 @@
               <FilePath>..\SYSTEM\NET\src\ISocket.cpp</FilePath>
             </File>
             <File>
+              <FileName>ITransport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
+            </File>
+            <File>
               <FileName>SerialPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
@@ -1600,6 +1605,11 @@
               <FileName>InputPortOld.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\InputPortOld.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\Timer.cpp</FilePath>
             </File>
           </Files>
         </Group>

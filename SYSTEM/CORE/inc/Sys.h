@@ -9,6 +9,8 @@
 #include "TaskOld.h"
 #include "TTime.h"
 
+#define NULL 0
+
 /* ´®¿Ú¶¨Òå */
 
 typedef enum
