@@ -669,11 +669,6 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\InputPortOld.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Timer.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1575,11 +1570,6 @@
               <FileName>InputPortOld.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\InputPortOld.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Timer.cpp</FilePath>
             </File>
           </Files>
         </Group>
