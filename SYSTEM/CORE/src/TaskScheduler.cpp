@@ -35,21 +35,10 @@ TaskScheduler::~TaskScheduler()
         Count++;
 		#if 0
         _Tasks.Add(task);
-		#endif
-
-        #if DEBUG
+		#endif       
             // 输出长整型%ld，无符号长整型%llu
             //debug_printf("%s添加任务%d 0x%08x FirstTime=%lluus Period=%ldus\r\n", Name, task->ID, func, dueTime, period);
-            if (period >= 1000)
-            {
-                uint dt = dueTime / 1000;
-                int pd = period > 0 ? period / 1000: period;
-                debug_printf("%s::添加任务%d 0x%08x FirstTime=%ums Period=%dms\r\n", Name, task->ID, func, dt, pd);
-            }
-            else
-                debug_printf("%s::添加任务%d 0x%08x FirstTime=%uus Period=%dus\r\n", Name, task->ID, func, (uint)dueTime, (int)period);
-        #endif 
-
+            
         return task->ID;
     }
 
@@ -77,11 +66,10 @@ void TaskScheduler::Start()
 {
     if (Running)
         return ;
-
-    #if DEBUG
+    
         //Add(ShowTime, NULL, 2000000, 2000000);
         //Add(ShowStatus, this, 10000000, 30000000);
-    #endif 
+   
     debug_printf("%s::准备就绪 开始循环处理%d个任务！\r\n\r\n", Name, Count);
 
     Running = true;
@@ -137,13 +125,10 @@ void TaskScheduler::Execute(uint usMax)
                 {
                     task->CpuTime += cost - task->SleepTime;
                     task->Cost = task->CpuTime / task->Times;
-                }
-
-                #if DEBUG
+                }               
                     if (cost > 500000)
                         debug_printf("Task::Execute 任务 %d [%d] 执行时间过长 %dus 睡眠 %dus\r\n", task->ID, task->Times, cost, task->SleepTime);
-                #endif 
-
+                
                 // 如果只是一次性任务，在这里清理
                 if (task->Period < 0)
                     Remove(task->ID);
@@ -158,10 +143,8 @@ void TaskScheduler::Execute(uint usMax)
         now = Time.Current(); // 当前时间
         if (min != UInt64_Max && min > now)
         {
-            min -= now;
-            #if DEBUG
-                //debug_printf("TaskScheduler::Execute 等待下一次任务调度 %uus\r\n", (uint)min);
-            #endif 
+            min -= now;            
+                //debug_printf("TaskScheduler::Execute 等待下一次任务调度 %uus\r\n", (uint)min);           
             //// 最大只允许睡眠1秒，避免Sys.Delay出现设计错误，同时也更人性化
             //if(min > 1000000) min = 1000000;
             //Sys.Delay(min);
@@ -237,10 +220,7 @@ Task *TaskScheduler::operator[](int taskid)
     {
         if (!_Scheduler)
             _Scheduler = new TaskScheduler("系统");
-
-        #if DEBUG
-            //AddTask(ShowTime, NULL, 2000000, 2000000);
-        #endif 
+            //AddTask(ShowTime, NULL, 2000000, 2000000);       
         if (OnStart)
             OnStart();
         else
@@ -309,12 +289,10 @@ Task *TaskScheduler::operator[](int taskid)
         if (OnSleep)
             OnSleep(ms);
         else
-        {
-            #if DEBUG
+        {            
                 if (ms > 1000)
                     debug_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！", ms);
-            #endif 
-
+            
             TimeSleep(ms *1000);
         }
     }
@@ -326,10 +304,10 @@ Task *TaskScheduler::operator[](int taskid)
             OnSleep((us + 500) / 1000);
         else
         {
-            #if DEBUG
+           
                 if (us > 1000000)
                     debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！", us);
-            #endif 
+           
 
             TimeSleep(us);
         }
