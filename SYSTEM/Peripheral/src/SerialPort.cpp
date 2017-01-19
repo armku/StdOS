@@ -348,9 +348,9 @@ bool SerialPort::Flush(uint times)
 
 void SerialPort::Register(TransportHandler handler, void *param)
 {
-    #if 0
+    
         ITransport::Register(handler, param);
-
+#if 0
         const byte irqs[] = UART_IRQs;
         byte irq = irqs[_index];
         if (handler)
