@@ -6,9 +6,13 @@
 
 #define COM_DEBUG 0
 
+
+USART_TypeDef comm1,comm2,comm3,comm4,comm5,comm6,comm7;
+#define UARTS {&comm1,&comm2,&comm3,&comm4,&comm5,&comm6,&comm7}
+
 int ArrayLength(int buf[])
 {
-    return 0;
+    return 7;
 }
 
 SerialPort::SerialPort()
@@ -20,9 +24,10 @@ SerialPort::SerialPort()
 SerialPort::SerialPort(USART_TypeDef *com, int baudRate, byte parity, byte dataBits, byte stopBits)
 {
     assert_param(com);
-    #if 0
+   
         const USART_TypeDef *const g_Uart_Ports[] = UARTS;
         byte _index = 0xFF;
+	 #if 0
         for (int i = 0; i < ArrayLength(g_Uart_Ports); i++)
         {
             if (g_Uart_Ports[i] == com)
@@ -56,7 +61,7 @@ void SerialPort::Init()
 
 void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte stopBits)
 {
-    #if 0
+   
         USART_TypeDef *const g_Uart_Ports[] = UARTS;
         _index = index;
         assert_param(_index < ArrayLength(g_Uart_Ports));
@@ -66,7 +71,7 @@ void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte
         _parity = parity;
         _dataBits = dataBits;
         _stopBits = stopBits;
-
+ #if 0
         // 根据端口实际情况决定打开状态
         if (_port->CR1 &USART_CR1_UE)
             Opened = true;
@@ -86,7 +91,7 @@ bool SerialPort::OnOpen()
 
     Pin rx, tx;
     GetPins(&tx, &rx);
-    #if 0
+    
         //debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
         #if COM_DEBUG
             if (_index != Sys.MessagePort)
@@ -223,7 +228,7 @@ bool SerialPort::OnOpen()
         //USART_ITConfig(_port, USART_IT_TXE, DISABLE); // 不需要发送中断
 
         USART_Cmd(_port, ENABLE); //使能串口
-    #endif 
+    
     if (RS485)
         *RS485 = false;
 
@@ -450,8 +455,6 @@ extern "C"
     #endif 
 }
 
-USART_TypeDef comm1,comm2,comm3,comm4,comm5,comm6,comm7;
-#define UARTS {&comm1,&comm2,&comm3,&comm4,&comm5,&comm6,&comm7}
 SerialPort *SerialPort::GetMessagePort()
 {
 
