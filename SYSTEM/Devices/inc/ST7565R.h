@@ -5,7 +5,7 @@
 #pragma once
 
 #include "Type.h"
-#include "OutputPort.h"
+#include "Port.h"
 
 class CLcd
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "OutputPort.h"
+#include "Port.h"
 #include "InputPort.h"
 
 class CSoftSpi

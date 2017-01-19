@@ -1,6 +1,6 @@
 #pragma once 
 #include "Type.h"
-#include "AlternatePort.h"
+#include "Port.h"
 
 class PWM:private AlternatePort
 {

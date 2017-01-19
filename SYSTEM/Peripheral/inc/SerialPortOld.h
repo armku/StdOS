@@ -4,7 +4,7 @@
 #include "Sys.h"
 #include "FIFORing.h"
 #include "ITransport.h"
-#include "AlternatePort.h"
+#include "Port.h"
 #include "InputPort.h"
 
 class SerialPortOld:public ITransport
