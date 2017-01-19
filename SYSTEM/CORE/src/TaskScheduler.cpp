@@ -1,6 +1,6 @@
 #include "TaskScheduler.h"
 #include "TTime.h"
-
+#include "Sys.h"
 
 TaskScheduler::TaskScheduler(string name)
 {
@@ -40,8 +40,9 @@ uint TaskScheduler::Add(Action func, void *param, ulong dueTime, long period)
 
 void TaskScheduler::Remove(uint taskid)
 {
+	#if 0
     int i =  - 1;
-    #if 0
+    
         while (_Tasks.MoveNext(i))
         {
             Task *task = _Tasks[i];
@@ -163,10 +164,11 @@ void TaskScheduler::Execute(uint usMax)
 // ÏÔÊ¾×´Ì¬
 void TaskScheduler::ShowStatus(void *param)
 {
+	 #if 0
     TaskScheduler *ts = (TaskScheduler*)param;
 
     int i =  - 1;
-    #if 0
+   
         while (ts->_Tasks.MoveNext(i))
         {
             Task *task = ts->_Tasks[i];
@@ -180,8 +182,9 @@ void TaskScheduler::ShowStatus(void *param)
 
 Task *TaskScheduler::operator[](int taskid)
 {
+	 #if 0
     int i =  - 1;
-    #if 0
+   
         while (_Tasks.MoveNext(i))
         {
             Task *task = _Tasks[i];

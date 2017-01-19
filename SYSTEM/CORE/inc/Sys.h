@@ -68,17 +68,19 @@ class TSys:public Object
 		void Delay(uint us);//微妙级延迟，常用于高精度外设信号控制
 		void Sleep(uint ms);//毫秒级睡眠，常用于业务层杂宁等待一定时间
 		void Reboot(uint msDelay);//异步热重启系统。延迟一定毫秒数执行。		
-	public:
+	
 		uint AddTask(void(*callback)(void),void* para, uint firstms, int periodms, const char *name = "未命名任务");
 		void SetTask(uint taskid,bool onoff,int delayms=0);//设置任务参数
 		void Remove(uint taskid);//删除任务
 		void TimeTick(); //间隔1ms调用一次
 		void Routin(); //运行  
-	public:
+	
 		uint Clock;//系统时钟
 		COM_Def MessagePort;// 指定printf输出的串口
 		byte Inited;//串口用参数
-	public:
+	
+		ulong StartTime;//系统启动时间
+	
 		byte ID[12];
 		ushort FlashSize;
 	private:
