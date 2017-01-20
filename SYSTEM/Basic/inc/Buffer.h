@@ -44,7 +44,7 @@ class Buffer:public Object
         virtual void CopyTo(int destIndex, const void *dest, int len=-1);//const;//把数据复制到目标缓冲区，默认-1长度表示当前长度
         virtual void Copy(int destIndex, const Buffer &src, int srcIndex, int len);//拷贝数据，默认-1长度表示两者最小长度        
         int Copy(const Buffer &src, int destIndex = 0);        
-        void Sub();//截取自缓冲区        
+        Buffer Sub(int index,int length);//截取自缓冲区        
         void ToHex();//转换为16进制字符串        
         void AsString();//二进制数据直接作为字符串
 		virtual void Show(bool newLine=false) const;

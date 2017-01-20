@@ -135,3 +135,15 @@ void Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
 		this->pbuf[destIndex+i] = src.pbuf[srcIndex+i];
 	}	
 }
+//½ØÈ¡×Ô»º³åÇø  
+Buffer Buffer::Sub(int index,int length)
+{	
+	byte *pbufsub=new byte[length];
+	Buffer buf(pbufsub,length);
+	
+	for(int i=index;i<(index+length);i++)
+	{
+		pbufsub[i]=this->GetBuffer()[index+i];
+	}	
+	return buf;
+}
