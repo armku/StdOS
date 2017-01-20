@@ -68,12 +68,23 @@ void STDInit()
 //	Buffer bs(cs,sizeof(cs));
 //	debug_printf("Buffer bs(cs,strlen(cs))=>%s \r\n",cs);
 	
-	byte buf[]={'1','2','3','4'};
-	byte bts[]={'5','6','7','8','9','0'};
-	Buffer bs(buf,sizeof(buf));
-	bs.Show(false);
-	bs=bts;
-	bs.Show(false);
+//	byte buf[]={'1','2','3','4'};
+//	byte bts[]={'5','6','7','8','9','0'};
+//	Buffer bs(buf,sizeof(buf));
+//	bs.Show(false);
+//	bs=bts;
+//	bs.Show(false);
+
+byte buf[]={1,2,3,4};
+byte bts[]={5,6,7};
+
+Buffer bs(buf,sizeof(buf));
+Buffer bs2(bts,sizeof(bts));
+
+bs.Show(true);
+bs=bs2;
+bs.Show(true);
+bs2=bs;
 	
 			
 	Sys.AddTask(ComTimers,0,1,1,"串口数据接收定时器");//1毫秒周期循环

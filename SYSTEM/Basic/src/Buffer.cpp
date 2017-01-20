@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "Buffer.h"
+#include "Sys.h"
 
 Buffer::Buffer(char* buf,ushort length)
 {
@@ -17,6 +18,21 @@ Buffer & Buffer::operator = (byte* bufsrc)
 	for(int  i=0;i<this->bufLength;i++)
 	{
 		this->pbuf[i]=bufsrc[i];
+	}
+	return *this;
+}
+Buffer &Buffer::operator = (Buffer bufsrc)
+{
+	if(this->bufLength<bufsrc.bufLength)
+	{
+		debug_printf("Buffer copy Error: src length:%d,dst length:%d \r\d",bufsrc.bufLength,this->bufLength);
+	}
+	else
+	{
+		for(int i=0;i<bufsrc.Length();i++)
+		{
+			this->pbuf[i]=bufsrc.GetBuffer()[i];
+		}
 	}
 	return *this;
 }
