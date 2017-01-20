@@ -34,6 +34,7 @@ class Buffer:public Object
     public:
 		Buffer(byte* buf,ushort length);     
 		Buffer(char* buf,ushort length);
+		Buffer &operator = (byte* bufsrc);
         byte* GetBuffer();//返回指针        
         ushort Length();//长度        
         void SetLength(ushort len);//设置长度，可自动扩容        

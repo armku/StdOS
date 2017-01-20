@@ -64,9 +64,16 @@ void STDInit()
 	exti.On();	
 	exti.RegisterOld(OnKeyPress);
 	
-	char cs[]="this is a buffer test";
-	Buffer bs(cs,sizeof(cs));
-	debug_printf("Buffer bs(cs,strlen(cs))=>%s \r\n",cs);
+//	char cs[]="this is a buffer test";
+//	Buffer bs(cs,sizeof(cs));
+//	debug_printf("Buffer bs(cs,strlen(cs))=>%s \r\n",cs);
+	
+	byte buf[]={'1','2','3','4'};
+	byte bts[]={'5','6','7','8','9','0'};
+	Buffer bs(buf,sizeof(buf));
+	bs.Show(false);
+	bs=bts;
+	bs.Show(false);
 	
 			
 	Sys.AddTask(ComTimers,0,1,1,"串口数据接收定时器");//1毫秒周期循环

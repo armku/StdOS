@@ -12,6 +12,14 @@ Buffer::Buffer(byte* buf,ushort length)
 	this->pbuf=buf;
 	this->bufLength=length;
 }
+Buffer & Buffer::operator = (byte* bufsrc)
+{
+	for(int  i=0;i<this->bufLength;i++)
+	{
+		this->pbuf[i]=bufsrc[i];
+	}
+	return *this;
+}
 //∑µªÿ÷∏’Î
 byte* Buffer::GetBuffer()
 {
@@ -28,7 +36,7 @@ void Buffer::Show(bool newLine) const
 	{
 		for(int i=0;i<this->bufLength-1;i++)
 		{
-			printf("%02X-",this->pbuf[i]);
+			printf("%02X ",this->pbuf[i]);
 		}
 		printf("%02X",this->pbuf[this->bufLength-1]);
 	}
