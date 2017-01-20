@@ -25,7 +25,7 @@ Buffer &Buffer::operator = (Buffer bufsrc)
 {
 	if(this->bufLength<bufsrc.bufLength)
 	{
-		debug_printf("Error Buffer copy: Buffer length mismath src: %d ,dst: %d \n",bufsrc.bufLength,this->bufLength);
+		debug_printf("Error: Buffer copy: Buffer length mismath src: %d ,dst: %d \n",bufsrc.bufLength,this->bufLength);
 	}
 	else
 	{
@@ -35,6 +35,15 @@ Buffer &Buffer::operator = (Buffer bufsrc)
 		}
 	}
 	return *this;
+}
+byte &Buffer::operator [] (int pos)
+{
+	if((pos<0)||(pos>this->bufLength))
+	{
+		debug_printf("Error: [] length error");
+		return this->pbuf[0];
+	}
+	return this->pbuf[pos];
 }
 //·µ»ØÖ¸Õë
 byte* Buffer::GetBuffer()
@@ -114,14 +123,15 @@ void Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
 {
 	if(len==-1)
 	{		
-		//len=(*src).Length()>this->Length?src.Length():this->Length;
-	}
-	if(len<=0)
-	{
-		return;
+		len=this->bufLength;
+		if(len<src.bufLength)
+		{
+			this->SetLength(src.bufLength);
+			len=this->bufLength;
+		}
 	}
 	for(int i=0;i<len;i++)
-	{
-		//this->pbuf[destIndex+i]=src.GetBuffer()[srcIndex+i];
+	{		
+		this->pbuf[destIndex+i] = src.pbuf[srcIndex+i];
 	}	
 }
