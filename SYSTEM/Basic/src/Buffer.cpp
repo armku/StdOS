@@ -58,6 +58,7 @@ void Buffer::SetLength(ushort len)
 		//×Ô¶¯À©ÈÝ
 		this->pbuf=new byte[len];
 		this->bufLength=len;
+		delete []this->pbuf;
 	}
 }
 void Buffer::Show(bool newLine) const
