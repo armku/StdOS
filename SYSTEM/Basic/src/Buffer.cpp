@@ -25,7 +25,7 @@ Buffer &Buffer::operator = (Buffer bufsrc)
 {
 	if(this->bufLength<bufsrc.bufLength)
 	{
-		debug_printf("Buffer copy Error: src length:%d,dst length:%d \r\d",bufsrc.bufLength,this->bufLength);
+		debug_printf("Error Buffer copy: Buffer length mismath src: %d ,dst: %d \n",bufsrc.bufLength,this->bufLength);
 	}
 	else
 	{
@@ -45,6 +45,20 @@ byte* Buffer::GetBuffer()
 ushort Buffer::Length()
 {
 	return this->bufLength;
+}
+//设置长度，可自动扩容  
+void Buffer::SetLength(ushort len)
+{
+	if(this->bufLength>=len)
+	{
+		this->bufLength=len;
+	}
+	else
+	{
+		//自动扩容
+		this->pbuf=new byte[len];
+		this->bufLength=len;
+	}
 }
 void Buffer::Show(bool newLine) const
 {

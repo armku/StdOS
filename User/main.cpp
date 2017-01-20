@@ -85,6 +85,9 @@ bs.Show(true);
 bs=bs2;
 bs.Show(true);
 bs2=bs;
+bs2.SetLength(bs.Length());
+bs2=bs;
+bs2.Show(true);
 	
 			
 	Sys.AddTask(ComTimers,0,1,1,"串口数据接收定时器");//1毫秒周期循环

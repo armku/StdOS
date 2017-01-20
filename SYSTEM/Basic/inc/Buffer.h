@@ -37,7 +37,7 @@ class Buffer:public Object
 		Buffer &operator = (byte* bufsrc);
 		Buffer &operator = (Buffer bufsrc);
         byte* GetBuffer();//返回指针        
-        ushort Length();//长度        
+        ushort Length();//长度     		
         void SetLength(ushort len);//设置长度，可自动扩容        
         virtual void Copy(int destIndex, const void *src, int len=-1);//拷贝数据，默认-1长度表示当前长度        
         virtual void CopyTo(int destIndex, const void *dest, int len=-1);//const;//把数据复制到目标缓冲区，默认-1长度表示当前长度
