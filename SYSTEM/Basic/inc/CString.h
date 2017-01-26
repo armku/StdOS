@@ -28,10 +28,11 @@
 class String:public Array
 {
 	public:
-		#if 0
+		#if 1
 		String();
 		#endif
 		String(byte* buf,ushort length);
 		void Concat();
+	private:
 		
 };

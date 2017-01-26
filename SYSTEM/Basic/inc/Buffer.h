@@ -32,6 +32,7 @@ Array/ByteArray/String 等会调用 SetLength 自动扩容，加大缓冲区。
 class Buffer:public Object
 {
     public:
+		Buffer();
 		Buffer(byte* buf,ushort length);     
 		Buffer(char* buf,ushort length);
 		Buffer &operator = (byte* bufsrc);
@@ -45,8 +46,12 @@ class Buffer:public Object
         virtual void Copy(int destIndex, const Buffer &src, int srcIndex, int len);//拷贝数据，默认-1长度表示两者最小长度        
         int Copy(const Buffer &src, int destIndex = 0);        
         Buffer Sub(int index,int length);//截取自缓冲区        
-        void ToHex();//转换为16进制字符串        
+        #if 0
+		String ToHex();//转换为16进制字符串        
+		#endif
+		#if 0
         void AsString();//二进制数据直接作为字符串
+		#endif
 		virtual void Show(bool newLine=false) const;
 	protected:
 		byte* pbuf;//缓冲区

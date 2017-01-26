@@ -14,5 +14,6 @@
 class Array:public Buffer
 {
 	public:
+		Array();
 		Array(byte* buf,ushort length);
 };

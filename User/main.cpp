@@ -51,6 +51,7 @@ KEY PA0
  */
 //系统初始化
 void ComTimers();
+void assert_failed(uint8_t* file, uint32_t line);
 void STDInit()
 {
     Sys.MessagePort = COM1;
@@ -104,9 +105,14 @@ void STDInit()
     bs2.SetLength(bs.Length());
     bs2 = bs;
     bs2.Show(true);
+	Buffer bs3=bs2.Sub(0,2);
+	bs3.Show(true);
 	debug_printf("测试String\n");
-	#if 0
+	#if 1
 	String str;
+	printf("strlength=%d \n",str.Length());
+	assert(str.Length()==1);
+//	assert_failed((uint8_t *)__FILE__, __LINE__);
 	#endif
 	
 	

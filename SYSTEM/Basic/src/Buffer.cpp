@@ -2,6 +2,11 @@
 #include "Buffer.h"
 #include "Sys.h"
 
+Buffer::Buffer()
+{
+
+}
+
 Buffer::Buffer(char* buf,ushort length)
 {
 	this->pbuf=(byte*)buf;
@@ -139,6 +144,10 @@ void Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
 Buffer Buffer::Sub(int index,int length)
 {	
 	byte *pbufsub=new byte[length];
+	if(length > this->bufLength)
+	{
+		length= this->bufLength;
+	}
 	Buffer buf(pbufsub,length);
 	
 	for(int i=index;i<(index+length);i++)
