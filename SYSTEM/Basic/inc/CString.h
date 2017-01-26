@@ -32,11 +32,14 @@ class String:public Array
 		String(char * str);
 		String(char ch);
 		String(byte value,byte radix=10);//进制字符串
+		String(short value,byte radix=10);//进制字符串
 		String(byte* buf,ushort length);
 		bool operator==(char* str);
 		bool operator==(const String& str);
 		void Concat();
 		uint Capacity() const;//数组容量
 	private:
+		void mSetValue(Int64 value,byte radix=10);
+		void mSetValue(UInt64 value,byte radix=10);
 		
 };

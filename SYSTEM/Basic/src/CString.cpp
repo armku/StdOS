@@ -58,6 +58,18 @@ String::String(byte value,byte radix)
 			break;
 	}
 }
+//½øÖÆ×Ö·û´®
+String::String(short value,byte radix)
+{
+	switch(radix)
+	{
+		case 10:
+			
+			break;
+		case 16:
+			break;
+	}
+}
 String::String(byte* buf,ushort length):Array(buf,length)
 {
 	
