@@ -30,6 +30,8 @@ class String:public Array
 	public:
 		String();
 		String(char * str);
+		String(char ch);
+		String(byte value,byte radix=10);//½øÖÆ×Ö·û´®
 		String(byte* buf,ushort length);
 		bool operator==(char* str);
 		bool operator==(const String& str);

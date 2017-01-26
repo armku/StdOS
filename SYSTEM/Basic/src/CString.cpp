@@ -1,4 +1,5 @@
 #include "CString.h"
+#include <stdio.h>
 
 String::String()
 {
@@ -13,7 +14,50 @@ String::String(char * str)
 	this->pbuf=new byte[this->bufLength];
 	this->Copy(0,str,this->bufLength);
 }
-
+String::String(char ch)
+{
+	this->bufLength=2;
+	this->pbuf=new byte[this->bufLength];
+	this->pbuf[0]=ch;
+	this->pbuf[1]=0;
+}
+//½øÖÆ×Ö·û´®
+String::String(byte value,byte radix)
+{
+	switch(radix)
+	{
+		case 10:
+			if(value<10)
+			{
+				this->bufLength=1;
+			}
+			else if(value<100)
+			{
+				this->bufLength=2;
+			}
+			else
+			{
+				this->bufLength=3;
+			}
+			this->pbuf=new byte[this->bufLength+1];
+			snprintf((char*)this->pbuf,2,"%d",value);
+			break;
+		case 16:
+			if(value<0x10)
+			{
+				this->bufLength=1;
+			}
+			else
+			{
+				this->bufLength=2;
+			}
+			this->pbuf=new byte[this->bufLength+1];
+			snprintf((char*)this->pbuf,2,"%X",value);
+			break;
+		default:
+			break;
+	}
+}
 String::String(byte* buf,ushort length):Array(buf,length)
 {
 	
