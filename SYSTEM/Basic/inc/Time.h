@@ -9,10 +9,12 @@ Time.SetTime(UInt64 seconds) 设置系统当前时间，Unix 格式秒数。
 
 #include "Type.h"
 
-class CTime
+class TTime
 {
 	public:
 		uint64_t Current;
 		uint64_t CurrentTicks;
 		void SetTime(UInt64 seconds);
+		uint TicksToUs(uint ticks) const;
+		uint UsToTicks(uint us) const;
 };

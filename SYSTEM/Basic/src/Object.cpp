@@ -18,3 +18,10 @@ void Object::Show(bool newLine)const
 #if 0
     const CType Object::GetType()const{}
 #endif
+#if 0
+//输出对象的字符串表示方式.支持RVO优化
+String Object::ToString()const
+{	
+	return String("Object");
+}
+#endif
