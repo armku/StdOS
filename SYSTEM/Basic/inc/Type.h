@@ -15,7 +15,7 @@ typedef uint64_t UInt64; //无符号长整型
 typedef uint64_t ulong; //
 
 #ifdef  DEBUG
-void assert_failed(uint8_t* file, uint32_t line);
+void assert_failed(uint8_t* file, uint32_t line,char * errstr);
 /**
   * @brief  The assert_param macro is used for function's parameters check.
   * @param  expr: If expr is false, it calls assert_failed function which reports 
@@ -23,7 +23,7 @@ void assert_failed(uint8_t* file, uint32_t line);
   *         that failed. If expr is true, it returns no value.
   * @retval None
   */
-  #define assert(expr) ((expr) ?assert_failed((uint8_t *)__FILE__, __LINE__): (void)0)
+  #define assert(expr,errstr) ((expr) ?assert_failed((uint8_t *)__FILE__, __LINE__,errstr): (void)0)
 /* Exported functions ------------------------------------------------------- */  
 #else
   #define assert(expr) ((void)0)

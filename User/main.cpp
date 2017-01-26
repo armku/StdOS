@@ -111,7 +111,8 @@ void STDInit()
 	#if 1
 	String str;
 	printf("strlength=%d \n",str.Length());
-	assert(str.Length()==1);
+	char * errstr="·¢ÏÖ´íÎó";
+	assert(str.Length()==1,errstr);
 //	assert_failed((uint8_t *)__FILE__, __LINE__);
 	#endif
 	
