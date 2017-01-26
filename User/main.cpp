@@ -109,11 +109,13 @@ void STDInit()
 	bs3.Show(true);
 	debug_printf("²âÊÔString\n");
 	#if 1
-	String str;
-	printf("strlength=%d \n",str.Length());
 	char * errstr="·¢ÏÖ´íÎó";
+	String str;		
 	assert(str.Length()==1,errstr);
-//	assert_failed((uint8_t *)__FILE__, __LINE__);
+	assert(str.Capacity() == 0X40 - 1, errstr);
+	
+	String str1("456");
+	assert(str1=="456",errstr);
 	#endif
 	
 	

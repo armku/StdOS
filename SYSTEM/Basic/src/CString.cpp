@@ -12,4 +12,9 @@ String::String(byte* buf,ushort length):Array(buf,length)
 {
 	
 }
+//Êý×éÈÝÁ¿
+uint String::Capacity() const
+{
+	return this->bufLength;
+}
 

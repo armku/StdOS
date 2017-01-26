@@ -33,6 +33,7 @@ class String:public Array
 		#endif
 		String(byte* buf,ushort length);
 		void Concat();
+		uint Capacity() const;//Êý×éÈÝÁ¿
 	private:
 		
 };
