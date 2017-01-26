@@ -115,7 +115,13 @@ void STDInit()
 	assert(str.Capacity() == 0X40 - 1, errstr);
 	
 	String str1("456");
+	debug_printf("str1 length = %d",str1.Length());
+	str1.Show(true);
 	assert(str1=="456",errstr);
+	assert(str1.GetBuffer()=="456",errstr);
+	
+	String str2(str1);
+	assert(str1==str2,errstr);
 	#endif
 	
 	

@@ -28,10 +28,11 @@
 class String:public Array
 {
 	public:
-		#if 1
 		String();
-		#endif
+		String(char * str);
 		String(byte* buf,ushort length);
+		bool operator==(char* str);
+		bool operator==(const String& str);
 		void Concat();
 		uint Capacity() const;//Êý×éÈÝÁ¿
 	private:
