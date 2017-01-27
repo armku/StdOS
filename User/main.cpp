@@ -72,67 +72,12 @@ void STDInit()
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
     Sys.AddTask(ledflash, 0, 5, 50, "状态指示灯");
-    
-	
-	
-	
-	//	char cs[]="this is a buffer test";
-    //	Buffer bs(cs,sizeof(cs));
-    //	debug_printf("Buffer bs(cs,strlen(cs))=>%s \r\n",cs);
-
-    //	byte buf[]={'1','2','3','4'};
-    //	byte bts[]={'5','6','7','8','9','0'};
-    //	Buffer bs(buf,sizeof(buf));
-    //	bs.Show(false);
-    //	bs=bts;
-    //	bs.Show(false);
-
-    byte buf[] = 
-    {
-        1, 2, 3, 4
-    };
-    byte bts[] = 
-    {
-        5, 6, 7
-    };
-
-    Buffer bs(buf, sizeof(buf));
-    Buffer bs2(bts, sizeof(bts));
-
-    bs.Show(true);
-    bs = bs2;
-    bs.Show(true);
-    bs2 = bs;
-    bs2.SetLength(bs.Length());
-    bs2 = bs;
-    bs2.Show(true);
-	Buffer bs3=bs2.Sub(0,2);
-	bs3.Show(true);
+    	
 	debug_printf("测试String\n");
-	#if 1
-	char * errstr="发现错误";
-	String str;		
-	assert(str.Length()==1,errstr);
-	assert(str.Capacity() == 0X40 - 1, errstr);
 	
-	String str1("456");
-	debug_printf("str1 length = %d",str1.Length());
-	str1.Show(true);
-	assert(str1=="456",errstr);
-	assert(str1.GetBuffer()=="456",errstr);
-	
-	String str2(str1);
-	assert(str1==str2,errstr);
-	
-	char* buftest=new char[10];
-	for(int i=0;i<10;i++)
-	{
-		buftest[i]=0;
-	}
-	printf("buftest length=%d \n",strlen(buftest));
-	snprintf((char*)buftest,10,"hello");
-	printf("buftest length=%d \n",strlen(buftest));
-	#endif
+	String str;
+	str.Show(true);
+	printf("str length:%d",str.Length());
 	
 	
 	
