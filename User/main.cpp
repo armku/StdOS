@@ -11,6 +11,7 @@
 #include "Port.h"
 #include "Buffer.h"
 #include "CString.h"
+#include "string.h"
 
 void ledflash();
 OutputPort led1(PB0, true);
@@ -122,6 +123,15 @@ void STDInit()
 	
 	String str2(str1);
 	assert(str1==str2,errstr);
+	
+	char* buftest=new char[10];
+	for(int i=0;i<10;i++)
+	{
+		buftest[i]=0;
+	}
+	printf("buftest length=%d \n",strlen(buftest));
+	snprintf((char*)buftest,10,"hello");
+	printf("buftest length=%d \n",strlen(buftest));
 	#endif
 	
 	

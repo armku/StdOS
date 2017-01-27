@@ -25,6 +25,7 @@
 
 //内部会为
 //结尾的\0 保留存储空间，以确保取得的字符串指针是标准 C 格式字符串指针
+//自带64字节的缓冲区。
 class String:public Array
 {
 	public:
@@ -32,14 +33,21 @@ class String:public Array
 		String(char * str);
 		String(char ch);
 		String(byte value,byte radix=10);//进制字符串
-		String(short value,byte radix=10);//进制字符串
-		String(byte* buf,ushort length);
+		String(short value,byte radix=10);//进制字符串		
+		String(int value,byte radix=10);//进制字符串
+		String(uint value,byte radix=10);//进制字符串
+		String(Int64 value,byte radix=10);//进制字符串
+		String(UInt64 value,byte radix=10);//进制字符串
+		String(float value,byte dot=2);//浮点数
+		String(double value,byte dot=2);//浮点数
 		bool operator==(char* str);
 		bool operator==(const String& str);
 		void Concat();
 		uint Capacity() const;//数组容量
 	private:
-		void mSetValue(Int64 value,byte radix=10);
-		void mSetValue(UInt64 value,byte radix=10);
+		void initCapacity();//初始化容器
+		void jsLength();//计算字符串长度
+		short mcapacity;//字符串容量
+		
 		
 };
