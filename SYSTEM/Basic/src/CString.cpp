@@ -202,7 +202,7 @@ bool String::operator==(const String& str1)
 //数组容量
 uint String::Capacity() const
 {
-	return this->bufLength;
+	return this->mcapacity;
 }
 //初始化容器
 void String::initCapacity()

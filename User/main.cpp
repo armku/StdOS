@@ -139,7 +139,7 @@ int main(void)
 	
 	String str;
 	str.Show(true);
-	printf("str length:%d",str.Length());
+	printf("str length:%d capacity:%d",str.Length(),str.Capacity());
 	
 	
 	
