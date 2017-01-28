@@ -53,39 +53,6 @@ KEY PA0
 //系统初始化
 void ComTimers();
 void assert_failed(uint8_t* file, uint32_t line);
-void STDInit()
-{
-    Sys.MessagePort = COM1;
-    Sys.Init();
-    Sys.ShowInfo();
-    sp1.Register(OnUsartRead, &sp1);
-    sp2.Register(OnUsartRead, &sp2);
-    sp3.Register(OnUsartRead, &sp3);
-    sp1.Open();
-    sp2.Open();
-    sp3.Open();
-
-    exti.InitOld();
-    exti.On();
-    exti.RegisterOld(OnKeyPress);
-
-    Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
-    Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
-    Sys.AddTask(ledflash, 0, 5, 50, "状态指示灯");
-    	
-	debug_printf("测试String\n");
-	
-	String str;
-	str.Show(true);
-	printf("str length:%d",str.Length());
-	
-	
-	
-	
-	
-	
-	Sys.Start();	
-}
 
 void ledflash()
 {
@@ -150,7 +117,34 @@ void ComTimers()
 
 int main(void)
 {
-    STDInit();
+     Sys.MessagePort = COM1;
+    Sys.Init();
+    Sys.ShowInfo();
+    sp1.Register(OnUsartRead, &sp1);
+    sp2.Register(OnUsartRead, &sp2);
+    sp3.Register(OnUsartRead, &sp3);
+    sp1.Open();
+    sp2.Open();
+    sp3.Open();
 
-    while (1){}
+    exti.InitOld();
+    exti.On();
+    exti.RegisterOld(OnKeyPress);
+
+    Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
+    Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
+    Sys.AddTask(ledflash, 0, 5, 50, "状态指示灯");
+    	
+	debug_printf("测试String\n");
+	
+	String str;
+	str.Show(true);
+	printf("str length:%d",str.Length());
+	
+	
+	
+	
+	
+	
+	Sys.Start();
 }
