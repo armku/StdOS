@@ -178,10 +178,10 @@ String::String(const String& str1)
 	#if 1
 	this->initCapacity();
 	#endif
-	#if 0
-	//for(int i=0;i<str1.Length();i++)
+	#if 1
+	for(int i=0;i<str1.Length();i++)
 	{
-		//this->pbuf[i]=str1.GetBuffer()[i];
+		this->pbuf[i]=str1.GetBuffer()[i];
 	}
 	this->jsLength();
 	#endif

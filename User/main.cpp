@@ -143,11 +143,11 @@ int main(void)
 	
 	String str1("456");
 	str1.Show();
-	printf("Getbuffer:%s length:%d",str1.GetBuffer(),str1.Length());
+	printf("Getbuffer:%s length:%d\n",str1.GetBuffer(),str1.Length());
 	
 	String str2(str1);
-//	str2.Show();
-//	printf("str1==str2:%d \n",str1==str2);
+	str2.Show();
+	printf("str1==str2:%d \n",str1==str2);
 	
 	
 	
