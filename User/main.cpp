@@ -135,28 +135,25 @@ int main(void)
     Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
     Sys.AddTask(ledflash, 0, 5, 50, "状态指示灯");
     	
-	debug_printf("测试String\n");
-	
-	String str;
-	str.Show(true);
-	printf("str length:%d capacity:%d\n",str.Length(),str.Capacity());
-	
-	String str1("456");
+	debug_printf("10进制构造函数   \r\n");
+	String str1((byte)123,10);
 	str1.Show();
-	printf("Getbuffer:%s length:%d\n",str1.GetBuffer(),str1.Length());
 	
-	String str2(str1);
+	String str2((short)4567,10);
 	str2.Show();
-	printf("str1==str2:%d \n",str1==str2);
 	
-	char cs[]="Hello Buffer";
-	String str4(cs,sizeof(cs));
+	String str3((int)-88996677,10);
+	str3.Show();
+	
+	String str4((uint)0xffffffff,10);
 	str4.Show();
-	printf("str4 == cs :%d \n",str4==cs);
 	
-	String str5((char)'1');
+	String str5((Int64)-7744,10);
 	str5.Show();
-	printf("str5 == 1 %d \n",str5=="1");
+	
+	String str6((UInt64)331144,10);
+	str6.Show();
+	
 	
 	
 	Sys.Start();

@@ -1,3 +1,26 @@
+/*
+String str;
+	str.Show(true);
+	printf("str length:%d capacity:%d\n",str.Length(),str.Capacity());
+	
+	String str1("456");
+	str1.Show();
+	printf("Getbuffer:%s length:%d\n",str1.GetBuffer(),str1.Length());
+	
+	String str2(str1);
+	str2.Show();
+	printf("str1==str2:%d \n",str1==str2);
+	
+	char cs[]="Hello Buffer";
+	String str4(cs,sizeof(cs));
+	str4.Show();
+	printf("str4 == cs :%d \n",str4==cs);
+	
+	String str5((char)'1');
+	str5.Show();
+	printf("str5 == 1 %d \n",str5=="1");
+*/
+
 #include "CString.h"
 #include <stdio.h>
 #include <string.h>
