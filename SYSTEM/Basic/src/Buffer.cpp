@@ -51,12 +51,12 @@ byte &Buffer::operator [] (int pos)
 	return this->pbuf[pos];
 }
 //返回指针
-byte* Buffer::GetBuffer()
+byte* Buffer::GetBuffer() const
 {
 	return this->pbuf;
 }
 //长度
-ushort Buffer::Length()
+ushort Buffer::Length() const
 {
 	return this->bufLength;
 }

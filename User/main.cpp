@@ -139,10 +139,15 @@ int main(void)
 	
 	String str;
 	str.Show(true);
-	printf("str length:%d capacity:%d",str.Length(),str.Capacity());
+	printf("str length:%d capacity:%d\n",str.Length(),str.Capacity());
 	
+	String str1("456");
+	str1.Show();
+	printf("Getbuffer:%s length:%d",str1.GetBuffer(),str1.Length());
 	
-	
+	String str2(str1);
+//	str2.Show();
+//	printf("str1==str2:%d \n",str1==str2);
 	
 	
 	

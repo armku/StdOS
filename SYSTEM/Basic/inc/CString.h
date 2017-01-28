@@ -32,6 +32,7 @@ class String:public Array
 		String();
 		String(char * str);
 		String(char ch);
+		String(const String& str1);
 		String(byte value,byte radix=10);//进制字符串
 		String(short value,byte radix=10);//进制字符串		
 		String(int value,byte radix=10);//进制字符串
@@ -41,6 +42,7 @@ class String:public Array
 		String(float value,byte dot=2);//浮点数
 		String(double value,byte dot=2);//浮点数
 		bool operator==(char* str);
+		void Show(bool newLine=true) const;
 		bool operator==(const String& str);
 		void Concat();
 		uint Capacity() const;//数组容量

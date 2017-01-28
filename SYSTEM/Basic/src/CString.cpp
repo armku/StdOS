@@ -173,6 +173,15 @@ String::String(double value,byte dot)
 	}	
 	this->jsLength();	
 }
+String::String(const String& str1)
+{
+	this->initCapacity();
+	//for(int i=0;i<str1.Length();i++)
+	{
+		//this->pbuf[i]=str1.GetBuffer()[i];
+	}
+	this->jsLength();
+}
 bool String::operator ==(char* str)
 {
 	for(int i=0;i<this->bufLength;i++)
@@ -203,6 +212,11 @@ bool String::operator==(const String& str1)
 uint String::Capacity() const
 {
 	return this->mcapacity;
+}
+void String::Show(bool newLine) const
+{
+	printf("%s",this->pbuf);
+	newLine ? printf("\n"):0;
 }
 //³õÊ¼»¯ÈÝÆ÷
 void String::initCapacity()
