@@ -56,7 +56,7 @@ byte* Buffer::GetBuffer() const
 	return this->pbuf;
 }
 //³¤¶È
-ushort Buffer::Length() const
+int Buffer::Length() const
 {
 	return this->bufLength;
 }
