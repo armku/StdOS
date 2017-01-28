@@ -149,6 +149,14 @@ int main(void)
 	str2.Show();
 	printf("str1==str2:%d \n",str1==str2);
 	
+	char cs[]="Hello Buffer";
+	String str4(cs,sizeof(cs));
+	str4.Show();
+	printf("str4 == cs :%d \n",str4==cs);
+	
+	String str5((char)'1');
+	str5.Show();
+	printf("str5 == 1 %d \n",str5=="1");
 	
 	
 	Sys.Start();

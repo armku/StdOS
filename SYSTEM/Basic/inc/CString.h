@@ -30,7 +30,7 @@ class String:public Array
 {
 	public:
 		String();
-		String(char * str);
+		String(const char * str,int length=-1);
 		String(char ch);
 		String(const String& str1);
 		String(byte value,byte radix=10);//进制字符串
@@ -41,7 +41,7 @@ class String:public Array
 		String(UInt64 value,byte radix=10);//进制字符串
 		String(float value,byte dot=2);//浮点数
 		String(double value,byte dot=2);//浮点数
-		bool operator==(char* str);
+		bool operator==(const char* str) ;
 		void Show(bool newLine=true) const;
 		bool operator==(const String& str);
 		void Concat();

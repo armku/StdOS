@@ -7,10 +7,18 @@ String::String()
 	this->initCapacity();
 	this->jsLength();
 }
-String::String(char * str)
+String::String(const char * str,int length)
 {
+	if(length<0)
+	{
+		this->bufLength=strlen(str);		
+	}
+	else
+	{
+		this->bufLength=length;
+	}
 	this->initCapacity();
-	this->bufLength=strlen(str);	
+	
 	this->Copy(0,str,this->bufLength);	
 }
 String::String(char ch)
@@ -186,7 +194,7 @@ String::String(const String& str1)
 	this->jsLength();
 	#endif
 }
-bool String::operator ==(char* str)
+bool String::operator ==(const char* str) 
 {
 	for(int i=0;i<this->bufLength;i++)
 	{
