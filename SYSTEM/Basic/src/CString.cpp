@@ -281,8 +281,29 @@ String& String::operator =(const char* str)
 	this->pbuf[this->bufLength]=0;
 	return *this;
 }
+String& String::operator =(const String& str) 
+{
+	if(str.Length()<=this->mcapacity)
+	{
+		this->bufLength=str.Length();
+	}
+	else
+	{
+		this->bufLength=this->mcapacity;
+	}
+	for(int i=0;i<this->bufLength;i++)
+	{
+		this->pbuf[i]=str.GetBuffer()[i];		
+	}
+	this->pbuf[this->bufLength]=0;
+	return *this;
+}
 bool String::operator ==(const char* str) 
 {
+	if(strlen(str)!=this->bufLength)
+	{
+		return false;
+	}
 	for(int i=0;i<this->bufLength;i++)
 	{
 		if(this->pbuf[i]!=str[i])

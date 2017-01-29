@@ -42,6 +42,7 @@ class String:public Array
 		String(float value,byte dot=2);//浮点数
 		String(double value,byte dot=2);//浮点数
 		String& operator=(const char* str) ;
+		String& operator=(const String& str) ;
 		bool operator==(const char* str) ;
 		bool operator==(const String& str);
 		void Concat();

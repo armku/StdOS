@@ -141,9 +141,10 @@ int main(void)
 	str="无法无天";
 	str.Show();
 	printf("str: %s \n",str.GetBuffer());
-	printf("str== :%d",str=="万家灯火，无法无天!");
+	printf("str== :%d\n",str=="无法无天");
 	
 	String str2 = "xxx";
+	str2.Show();
 	str2=str;
 	
 	str2.Show();
