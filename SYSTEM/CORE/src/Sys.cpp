@@ -107,7 +107,7 @@ void TSys::ShowInfo()
 }
 
 //系统启动以来的毫秒数，无符号长整型8字节
-uint64_t TSys::Ms()
+UInt64 TSys::Ms()
 {
     return Time.Ms();
 }

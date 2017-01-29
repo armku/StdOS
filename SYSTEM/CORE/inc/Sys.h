@@ -63,7 +63,7 @@ class TSys:public Object
 		void Start();//启动系统任务调度，该函数内部为死循环。
 		virtual void Show(bool newLine=false) const;
 		void ShowInfo();//显示系统信息
-		uint64_t Ms();//系统启动以来的毫秒数，无符号长整型8字节
+		UInt64 Ms();//系统启动以来的毫秒数，无符号长整型8字节
 		uint Seconds();//系统绝对UTC时间，整型4字节，Unix格式，1970年以来的总秒数。
 		void Delay(uint us);//微妙级延迟，常用于高精度外设信号控制
 		void Sleep(uint ms);//毫秒级睡眠，常用于业务层杂宁等待一定时间
