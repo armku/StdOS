@@ -364,6 +364,207 @@ String& String::operator+=(const String& str)
 	
 	return *this;
 }
+String& String::operator+=(const float da)
+{
+	byte buf[100]={0};
+	snprintf((char*)buf,100,"%2.2f",da);
+	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	{
+		this->Copy(this->bufLength,buf,strlen((char*)buf));
+	}
+	this->bufLength+=strlen((char*)buf);
+	return *this;
+}
+
+String& String::Concat(byte value,byte radix)
+{
+	byte buf[100]={0};
+	switch(radix)
+	{
+		case 10:			
+			snprintf((char*)buf,100,"%d",value);
+		break;
+		case 16:
+			snprintf((char*)buf,100,"%X",value);
+			break;
+		default:
+			break;
+	}
+	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	{
+		this->Copy(this->bufLength,buf,strlen((char*)buf));
+	}
+	this->bufLength+=strlen((char*)buf);
+	return *this;
+}
+String& String::Concat(short value,byte radix)
+{
+	byte buf[100]={0};
+	switch(radix)
+	{
+		case 10:			
+			snprintf((char*)buf,100,"%d",value);
+		break;
+		case 16:
+			snprintf((char*)buf,100,"%X",value);
+			break;
+		default:
+			break;
+	}
+	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	{
+		this->Copy(this->bufLength,buf,strlen((char*)buf));
+	}
+	this->bufLength+=strlen((char*)buf);
+	return *this;
+}
+String& String::Concat(int value,byte radix)
+{
+	byte buf[100]={0};
+	switch(radix)
+	{
+		case 10:			
+			snprintf((char*)buf,100,"%d",value);
+		break;
+		case 16:
+			snprintf((char*)buf,100,"%X",value);
+			break;
+		default:
+			break;
+	}
+	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	{
+		this->Copy(this->bufLength,buf,strlen((char*)buf));
+	}
+	this->bufLength+=strlen((char*)buf);
+	return *this;
+}
+String& String::Concat(uint value,byte radix)
+{
+	byte buf[100]={0};
+	switch(radix)
+	{
+		case 10:			
+			snprintf((char*)buf,100,"%u",value);
+		break;
+		case 16:
+			snprintf((char*)buf,100,"%X",value);
+			break;
+		default:
+			break;
+	}
+	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	{
+		this->Copy(this->bufLength,buf,strlen((char*)buf));
+	}
+	this->bufLength+=strlen((char*)buf);
+	return *this;
+}
+String& String::Concat(Int64 value,byte radix)
+{
+	byte buf[100]={0};
+	switch(radix)
+	{
+		case 10:			
+			snprintf((char*)buf,100,"%lld",value);
+		break;
+		case 16:
+			snprintf((char*)buf,100,"%llX",value);
+			break;
+		default:
+			break;
+	}
+	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	{
+		this->Copy(this->bufLength,buf,strlen((char*)buf));
+	}
+	this->bufLength+=strlen((char*)buf);
+	return *this;
+}
+String& String::Concat(UInt64 value,byte radix)
+{
+	byte buf[100]={0};
+	switch(radix)
+	{
+		case 10:			
+			snprintf((char*)buf,100,"%llu",value);
+		break;
+		case 16:
+			snprintf((char*)buf,100,"%llX",value);
+			break;
+		default:
+			break;
+	}
+	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	{
+		this->Copy(this->bufLength,buf,strlen((char*)buf));
+	}
+	this->bufLength+=strlen((char*)buf);
+	return *this;
+}
+String& String::Concat(float value,byte dot)
+{
+	byte buf[100]={0};
+	switch(dot)
+	{
+		case 0:			
+			snprintf((char*)buf,100,"%0.0f",value);
+			break;
+		case 1:			
+			snprintf((char*)buf,100,"%1.1f",value);
+			break;
+		case 2:			
+			snprintf((char*)buf,100,"%2.2f",value);
+			break;
+		case 3:
+			snprintf((char*)buf,100,"%3.3f",value);
+			break;
+		case 4:
+			snprintf((char*)buf,100,"%4.4f",value);
+			break;
+		default:
+			break;
+	}
+	
+	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	{
+		this->Copy(this->bufLength,buf,strlen((char*)buf));
+	}
+	this->bufLength+=strlen((char*)buf);
+	return *this;
+}
+String& String::Concat(double value,byte dot)
+{
+	byte buf[100]={0};
+	switch(dot)
+	{
+		case 0:			
+			snprintf((char*)buf,100,"%0.0f",value);
+			break;
+		case 1:			
+			snprintf((char*)buf,100,"%1.1f",value);
+			break;
+		case 2:			
+			snprintf((char*)buf,100,"%2.2f",value);
+			break;
+		case 3:
+			snprintf((char*)buf,100,"%3.3f",value);
+			break;
+		case 4:
+			snprintf((char*)buf,100,"%4.4f",value);
+			break;
+		default:
+			break;
+	}
+	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	{
+		this->Copy(this->bufLength,buf,strlen((char*)buf));
+	}
+	this->bufLength+=strlen((char*)buf);
+	return *this;
+}
+
+
 //Êý×éÈÝÁ¿
 uint String::Capacity() const
 {

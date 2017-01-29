@@ -31,7 +31,6 @@ class String:public Array
 {
 	public:
 		String();
-		~String();
 		String(const char * str,int length=-1);
 		String(char ch);
 		String(const String& str1);
@@ -43,6 +42,9 @@ class String:public Array
 		String(UInt64 value,byte radix=10);//进制字符串
 		String(float value,byte dot=2);//浮点数
 		String(double value,byte dot=2);//浮点数
+		
+		~String();
+		
 		String& operator=(const char* str) ;
 		String& operator=(const String& str) ;
 		bool operator==(const char* str) ;
@@ -50,6 +52,16 @@ class String:public Array
 	
 		String& operator+=(const DateTime& dt);
 		String& operator+=(const String& str);
+		String& operator+=(const float da);
+		
+		String& Concat(byte value,byte radix=10);
+		String& Concat(short value,byte radix=10);
+		String& Concat(int value,byte radix=10);
+		String& Concat(uint value,byte radix=10);
+		String& Concat(Int64 value,byte radix=10);
+		String& Concat(UInt64 value,byte radix=10);
+		String& Concat(float value,byte dot=2);
+		String& Concat(double value,byte dot=2);
 		
 		void Concat();
 		void Show(bool newLine=true) const;

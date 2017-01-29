@@ -148,6 +148,10 @@ int main(void)
 	String str2(" 中国时间");
 	str+=str2;
 	str.Show();
+	str+="haha";
+	str.Show();
+	str+=-123.4567;
+	str.Show();
 	
 	Sys.Start();
 }
