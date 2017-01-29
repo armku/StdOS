@@ -48,6 +48,24 @@ String str;
 	
 	String str9((double)456.789);
 	str9.Show();
+	
+	String str1((byte)0xA3,16);
+	str1.Show();
+	
+	String str2((short)0x4567,16);
+	str2.Show();
+	
+	String str3((int)-0x7799,16);
+	str3.Show();
+	
+	String str4((uint)0xffffffff,16);
+	str4.Show();
+	
+	String str5((Int64)0x331144997ac45566,16);
+	str5.Show();
+	
+	String str6((UInt64)0x331144997ac45566,16);
+	str6.Show();
 */
 
 #include "CString.h"
@@ -245,6 +263,23 @@ String::String(const String& str1)
 	}
 	this->jsLength();
 	#endif
+}
+String& String::operator =(const char* str) 
+{
+	if(strlen(str)<=this->mcapacity)
+	{
+		this->bufLength=strlen(str);
+	}
+	else
+	{
+		this->bufLength=this->mcapacity;
+	}
+	for(int i=0;i<this->bufLength;i++)
+	{
+		this->pbuf[i]=str[i];		
+	}
+	this->pbuf[this->bufLength]=0;
+	return *this;
 }
 bool String::operator ==(const char* str) 
 {

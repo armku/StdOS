@@ -135,11 +135,18 @@ int main(void)
     Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
     Sys.AddTask(ledflash, 0, 5, 50, "状态指示灯");
     	
-	debug_printf("10进制构造函数   \r\n");
-	String str1((byte)0xA3,16);
-	str1.Show();
+	debug_printf("赋值构造测试   \r\n");
+	String str = "万家灯火，无法无天!";
+	str.Show();
+	str="无法无天";
+	str.Show();
+	printf("str: %s \n",str.GetBuffer());
+	printf("str== :%d",str=="万家灯火，无法无天!");
 	
+	String str2 = "xxx";
+	str2=str;
 	
+	str2.Show();
 	
 	Sys.Start();
 }

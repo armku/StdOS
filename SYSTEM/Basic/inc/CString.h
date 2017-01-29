@@ -41,10 +41,11 @@ class String:public Array
 		String(UInt64 value,byte radix=10);//进制字符串
 		String(float value,byte dot=2);//浮点数
 		String(double value,byte dot=2);//浮点数
+		String& operator=(const char* str) ;
 		bool operator==(const char* str) ;
-		void Show(bool newLine=true) const;
 		bool operator==(const String& str);
 		void Concat();
+		void Show(bool newLine=true) const;
 		uint Capacity() const;//数组容量
 	private:
 		void initCapacity();//初始化容器
