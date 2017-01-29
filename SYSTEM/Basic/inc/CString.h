@@ -22,6 +22,7 @@
 #pragma once
 
 #include "Array.h"
+#include "DateTime.h"
 
 //内部会为
 //结尾的\0 保留存储空间，以确保取得的字符串指针是标准 C 格式字符串指针
@@ -30,6 +31,7 @@ class String:public Array
 {
 	public:
 		String();
+		~String();
 		String(const char * str,int length=-1);
 		String(char ch);
 		String(const String& str1);
@@ -45,6 +47,9 @@ class String:public Array
 		String& operator=(const String& str) ;
 		bool operator==(const char* str) ;
 		bool operator==(const String& str);
+	
+		String& operator+=(const DateTime& dt);
+		
 		void Concat();
 		void Show(bool newLine=true) const;
 		uint Capacity() const;//数组容量

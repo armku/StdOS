@@ -12,6 +12,7 @@
 #include "Buffer.h"
 #include "CString.h"
 #include "string.h"
+#include "DateTime.h"
 
 void ledflash();
 OutputPort led1(PB0, true);
@@ -136,18 +137,12 @@ int main(void)
     Sys.AddTask(ledflash, 0, 5, 50, "状态指示灯");
     	
 	debug_printf("赋值构造测试   \r\n");
-	String str = "万家灯火，无法无天!";
-	str.Show();
-	str="无法无天";
-	str.Show();
-	printf("str: %s \n",str.GetBuffer());
-	printf("str== :%d\n",str=="无法无天");
 	
-	String str2 = "xxx";
-	str2.Show();
-	str2=str;
+	String str;
 	
-	str2.Show();
+	str+=DateTime::Now();
+	
+	str.Show();
 	
 	Sys.Start();
 }

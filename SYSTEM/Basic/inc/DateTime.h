@@ -36,7 +36,7 @@ class DateTime
         //取时间日期的日期部分
         DateTime Date()const;
 		
-		static void Now();//当前时间
+		static DateTime Now();//当前时间
 		
 		private:
 		static const ushort TicksPerMillisecond = 10000;

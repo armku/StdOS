@@ -60,7 +60,14 @@ DateTime DateTime::Date()const
 	return *this;
 }
 //当前时间
-void DateTime::Now()
+DateTime DateTime::Now()
 {
-	
+	DateTime dt;
+	dt.Year=2017;
+	dt.Month=01;
+	dt.Day=29;
+	dt.Hour=10;
+	dt.Minute=55;
+	dt.Second=12;
+	return dt;
 }

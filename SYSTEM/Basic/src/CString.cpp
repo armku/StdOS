@@ -66,12 +66,29 @@ String str;
 	
 	String str6((UInt64)0x331144997ac45566,16);
 	str6.Show();
+	
+	String str = "万家灯火，无法无天!";
+	str.Show();
+	str="无法无天";
+	str.Show();
+	printf("str: %s \n",str.GetBuffer());
+	printf("str== :%d\n",str=="无法无天");
+	
+	String str2 = "xxx";
+	str2.Show();
+	str2=str;
+	
+	str2.Show();
 */
 
 #include "CString.h"
 #include <stdio.h>
 #include <string.h>
 
+String::~String()
+{
+	delete[] this->pbuf;
+}
 String::String()
 {
 	this->initCapacity();
@@ -327,6 +344,15 @@ bool String::operator==(const String& str1)
 		}
 	}
 	return true;
+}
+String& String::operator+=(const DateTime& dt)
+{
+	if((this->bufLength+19)<this->Capacity())
+	{
+		this->bufLength+=19;
+		snprintf((char*)&this->pbuf[this->bufLength-1-18],20,"%04d-%02d-%02d %02d:%02d:%02d",dt.Year,dt.Month,dt.Day,dt.Hour,dt.Minute,dt.Second);
+	}
+	return *this;
 }
 //数组容量
 uint String::Capacity() const
