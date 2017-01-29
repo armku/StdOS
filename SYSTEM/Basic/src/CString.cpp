@@ -1,89 +1,11 @@
 /*
-String str;
-	str.Show(true);
-	printf("str length:%d capacity:%d\n",str.Length(),str.Capacity());
-	
-	String str1("456");
-	str1.Show();
-	printf("Getbuffer:%s length:%d\n",str1.GetBuffer(),str1.Length());
-	
-	String str2(str1);
-	str2.Show();
-	printf("str1==str2:%d \n",str1==str2);
-	
-	char cs[]="Hello Buffer";
-	String str4(cs,sizeof(cs));
-	str4.Show();
-	printf("str4 == cs :%d \n",str4==cs);
-	
-	String str5((char)'1');
-	str5.Show();
-	printf("str5 == 1 %d \n",str5=="1");
-	
-	
-	debug_printf("10进制构造函数   \r\n");
-	String str1((byte)123,10);
-	str1.Show();
-	
-	String str2((short)4567,10);
-	str2.Show();
-	
-	String str3((int)-88996677,10);
-	str3.Show();
-	
-	String str4((uint)0xffffffff,10);
-	str4.Show();
-	
-	String str5((Int64)-7744,10);
-	str5.Show();
-	
-	String str6((UInt64)331144,10);
-	str6.Show();
-	
-	String str7((float)123.0);
-	str7.Show();
-	
-	String str8((double)456.784);
-	str8.Show();
-	
-	String str9((double)456.789);
-	str9.Show();
-	
-	String str1((byte)0xA3,16);
-	str1.Show();
-	
-	String str2((short)0x4567,16);
-	str2.Show();
-	
-	String str3((int)-0x7799,16);
-	str3.Show();
-	
-	String str4((uint)0xffffffff,16);
-	str4.Show();
-	
-	String str5((Int64)0x331144997ac45566,16);
-	str5.Show();
-	
-	String str6((UInt64)0x331144997ac45566,16);
-	str6.Show();
-	
-	String str = "万家灯火，无法无天!";
-	str.Show();
-	str="无法无天";
-	str.Show();
-	printf("str: %s \n",str.GetBuffer());
-	printf("str== :%d\n",str=="无法无天");
-	
-	String str2 = "xxx";
-	str2.Show();
-	str2=str;
-	
-	str2.Show();
+进行到字符串搜索
 */
 
 #include "CString.h"
 #include <stdio.h>
 #include <string.h>
+#include <CType.h>
 
 String::~String()
 {
@@ -563,7 +485,52 @@ String& String::Concat(double value,byte dot)
 	this->bufLength+=strlen((char*)buf);
 	return *this;
 }
-
+byte ToInt(char ch)
+{
+	ch=toupper(ch);
+	if(ch<='9')
+	{
+		return ch-'0';
+	}
+	return ch-'A'+10;
+}
+String String::ToHex()
+{	
+	byte buf[100];
+	byte bi=0;
+	byte da;
+	int j=0;
+	for(int i=0;i<100;i++)
+	{
+		buf[i]=0;
+	}
+	for(int i=0;i<this->bufLength;i++)
+	{
+		
+		if(isxdigit(this->pbuf[i]))
+		{
+			if(bi==0)
+			{				
+				da= ToInt(this->pbuf[i]);
+				da<<=4;
+				bi=1;				
+			}
+			else
+			{
+				da|=ToInt(this->pbuf[i]);
+				buf[j]=da;
+				j++;
+				bi=0;
+			}
+		}
+		else
+		{
+			bi=0;
+		}
+	}
+	
+	return String((const char*)buf);
+}
 
 //数组容量
 uint String::Capacity() const

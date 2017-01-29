@@ -63,7 +63,7 @@ class String:public Array
 		String& Concat(float value,byte dot=2);
 		String& Concat(double value,byte dot=2);
 		
-		void Concat();
+		String ToHex();
 		void Show(bool newLine=true) const;
 		uint Capacity() const;//Êý×éÈÝÁ¿
 	private:

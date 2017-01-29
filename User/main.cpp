@@ -136,22 +136,5 @@ int main(void)
     Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
     Sys.AddTask(ledflash, 0, 5, 50, "状态指示灯");
     	
-	debug_printf("赋值构造测试   \r\n");
-	
-	String str;
-	
-	str+=DateTime::Now();
-	
-	str.Show();
-	printf("Str Length: %d \n",str.Length());
-	
-	String str2(" 中国时间");
-	str+=str2;
-	str.Show();
-	str+="haha";
-	str.Show();
-	str+=-123.4567;
-	str.Show();
-	
 	Sys.Start();
 }
