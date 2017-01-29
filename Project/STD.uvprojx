@@ -422,7 +422,7 @@
                     <vShortEn>2</vShortEn>
                     <vShortWch>2</vShortWch>
                     <v6Lto>0</v6Lto>
-                    <v6WtE>0</v6WtE>
+                    <v6WtE>2</v6WtE>
                     <v6Rtti>2</v6Rtti>
                     <VariousControls>
                       <MiscControls></MiscControls>
@@ -466,11 +466,6 @@
               <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Basic\src\Array.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Time.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Time.cpp</FilePath>
             </File>
             <File>
               <FileName>ByteArray.cpp</FileName>
@@ -1327,7 +1322,7 @@
                     <vShortEn>2</vShortEn>
                     <vShortWch>2</vShortWch>
                     <v6Lto>0</v6Lto>
-                    <v6WtE>0</v6WtE>
+                    <v6WtE>2</v6WtE>
                     <v6Rtti>2</v6Rtti>
                     <VariousControls>
                       <MiscControls></MiscControls>
@@ -1371,11 +1366,6 @@
               <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Basic\src\Array.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Time.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Time.cpp</FilePath>
             </File>
             <File>
               <FileName>ByteArray.cpp</FileName>

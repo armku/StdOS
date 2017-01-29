@@ -28,7 +28,7 @@ uint TaskScheduler::Add(Action func, void *param, ulong dueTime, long period)
     task->Callback = func;
     task->Param = param;
     task->Period = period;
-    task->NextTime = Time.Current() + dueTime;
+    task->NextTime = Time.Current + dueTime;
 
     Count++;
     //_Tasks.Add(task);   
