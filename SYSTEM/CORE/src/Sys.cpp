@@ -65,7 +65,7 @@ uint TSys::AddTask(void(*callback)(void), void *para, uint firstms, int periodms
 void TSys::TimeTick()
 {
     this->task.TimeTick();
-    Time._Current++;
+    Time.Current++;
 
 }
 
