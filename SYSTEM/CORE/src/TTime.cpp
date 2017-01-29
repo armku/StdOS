@@ -4,9 +4,9 @@ TTime::TTime()
 {
 }
 //返回当前毫秒数
-uint TTime::Ms()
+UInt64 TTime::Ms()
 {
-	return this->Current;
+	return Current;
 }
 //设置系统当前时间,Unix格式秒数
 void TTime::SetTime(UInt64 seconds)

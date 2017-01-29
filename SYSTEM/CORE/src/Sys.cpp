@@ -65,7 +65,7 @@ uint TSys::AddTask(void(*callback)(void), void *para, uint firstms, int periodms
 void TSys::TimeTick()
 {
     this->task.TimeTick();
-    Time.Current++;
+    TTime::Current++;
 
 }
 
@@ -109,7 +109,7 @@ void TSys::ShowInfo()
 //系统启动以来的毫秒数，无符号长整型8字节
 uint64_t TSys::Ms()
 {
-    return Time.Ms();
+    return TTime::Ms();
 }
 
 //系统绝对UTC时间，整型4字节，Unix格式，1970年以来的总秒数。
