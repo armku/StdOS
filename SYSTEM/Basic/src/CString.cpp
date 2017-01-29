@@ -19,6 +19,35 @@ String str;
 	String str5((char)'1');
 	str5.Show();
 	printf("str5 == 1 %d \n",str5=="1");
+	
+	
+	debug_printf("10进制构造函数   \r\n");
+	String str1((byte)123,10);
+	str1.Show();
+	
+	String str2((short)4567,10);
+	str2.Show();
+	
+	String str3((int)-88996677,10);
+	str3.Show();
+	
+	String str4((uint)0xffffffff,10);
+	str4.Show();
+	
+	String str5((Int64)-7744,10);
+	str5.Show();
+	
+	String str6((UInt64)331144,10);
+	str6.Show();
+	
+	String str7((float)123.0);
+	str7.Show();
+	
+	String str8((double)456.784);
+	str8.Show();
+	
+	String str9((double)456.789);
+	str9.Show();
 */
 
 #include "CString.h"
@@ -61,7 +90,7 @@ String::String(byte value,byte radix)
 			snprintf((char*)this->pbuf,this->mcapacity,"%d",value);
 			break;
 		case 16:
-			snprintf((char*)this->pbuf,this->mcapacity,"%x",value);
+			snprintf((char*)this->pbuf,this->mcapacity,"%X",value);
 			break;
 	}
 	this->jsLength();
@@ -77,7 +106,7 @@ String::String(short value,byte radix)
 			snprintf((char*)this->pbuf,this->mcapacity,"%d",value);
 			break;
 		case 16:
-			snprintf((char*)this->pbuf,this->mcapacity,"%x",value);
+			snprintf((char*)this->pbuf,this->mcapacity,"%X",value);
 			break;
 	}
 	this->jsLength();	
@@ -93,7 +122,7 @@ String::String(int value,byte radix)
 			snprintf((char*)this->pbuf,this->mcapacity,"%d",value);
 			break;
 		case 16:
-			snprintf((char*)this->pbuf,this->mcapacity,"%x",value);
+			snprintf((char*)this->pbuf,this->mcapacity,"%X",value);
 			break;
 	}
 	this->jsLength();	
@@ -109,7 +138,7 @@ String::String(uint value,byte radix)
 			snprintf((char*)this->pbuf,this->mcapacity,"%u",value);
 			break;
 		case 16:
-			snprintf((char*)this->pbuf,this->mcapacity,"%x",value);
+			snprintf((char*)this->pbuf,this->mcapacity,"%X",value);
 			break;
 	}
 	this->jsLength();	
@@ -122,10 +151,10 @@ String::String(Int64 value,byte radix)
 	switch(radix)
 	{
 		case 10:
-			snprintf((char*)this->pbuf,this->mcapacity,"%I64d",value);
+			snprintf((char*)this->pbuf,this->mcapacity,"%lld",value);
 			break;
 		case 16:
-			snprintf((char*)this->pbuf,this->mcapacity,"%I64d",value);
+			snprintf((char*)this->pbuf,this->mcapacity,"%llX",value);
 			break;
 	}
 	this->jsLength();	
@@ -138,10 +167,10 @@ String::String(UInt64 value,byte radix)
 	switch(radix)
 	{
 		case 10:
-			snprintf((char*)this->pbuf,this->mcapacity,"%I64u",value);
+			snprintf((char*)this->pbuf,this->mcapacity,"%llu",value);
 			break;
 		case 16:
-			snprintf((char*)this->pbuf,this->mcapacity,"%I64u",value);
+			snprintf((char*)this->pbuf,this->mcapacity,"%llX",value);
 			break;
 	}
 	this->jsLength();	

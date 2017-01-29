@@ -136,23 +136,8 @@ int main(void)
     Sys.AddTask(ledflash, 0, 5, 50, "状态指示灯");
     	
 	debug_printf("10进制构造函数   \r\n");
-	String str1((byte)123,10);
+	String str1((byte)0xA3,16);
 	str1.Show();
-	
-	String str2((short)4567,10);
-	str2.Show();
-	
-	String str3((int)-88996677,10);
-	str3.Show();
-	
-	String str4((uint)0xffffffff,10);
-	str4.Show();
-	
-	String str5((Int64)-7744,10);
-	str5.Show();
-	
-	String str6((UInt64)331144,10);
-	str6.Show();
 	
 	
 	
