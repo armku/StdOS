@@ -114,7 +114,11 @@ void ComTimers()
         com3buf.Reset();
     }
 }
-
+//显示系统时间
+void ShowSysTime()
+{
+	printf("%d\n",Sys.Ms());
+}
 
 int main(void)
 {
@@ -135,6 +139,7 @@ int main(void)
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
     Sys.AddTask(ledflash, 0, 5, 50, "状态指示灯");
+	Sys.AddTask(ShowSysTime, 0, 5, 1000, "系统时间显示");
     	
 	Sys.Start();
 }
