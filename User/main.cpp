@@ -143,6 +143,11 @@ int main(void)
 	str+=DateTime::Now();
 	
 	str.Show();
+	printf("Str Length: %d \n",str.Length());
+	
+	String str2(" 中国时间");
+	str+=str2;
+	str.Show();
 	
 	Sys.Start();
 }

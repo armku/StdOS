@@ -49,6 +49,7 @@ class String:public Array
 		bool operator==(const String& str);
 	
 		String& operator+=(const DateTime& dt);
+		String& operator+=(const String& str);
 		
 		void Concat();
 		void Show(bool newLine=true) const;

@@ -354,6 +354,16 @@ String& String::operator+=(const DateTime& dt)
 	}
 	return *this;
 }
+String& String::operator+=(const String& str)
+{
+	if((str.Length()+this->bufLength)<this->mcapacity)
+	{
+		this->bufLength+=str.Length();
+		this->Copy(this->bufLength-str.Length(),str.GetBuffer(),str.Length());
+	}
+	
+	return *this;
+}
 //Êý×éÈÝÁ¿
 uint String::Capacity() const
 {
