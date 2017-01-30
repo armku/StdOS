@@ -109,7 +109,9 @@ void TSys::ShowInfo()
 //系统启动以来的毫秒数，无符号长整型8字节
 UInt64 TSys::Ms()
 {
-    return Time.Ms();
+	UInt64 ret=Time.Current;
+	 printf("Support: http://www.armku.com %d \n",ret);
+    return ret;
 }
 
 //系统绝对UTC时间，整型4字节，Unix格式，1970年以来的总秒数。
