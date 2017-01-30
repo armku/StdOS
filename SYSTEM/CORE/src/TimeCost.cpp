@@ -8,7 +8,7 @@ TimeCost::TimeCost()
 //显示执行时间
 void TimeCost::Show()
 {
-	printf("执行 %d 微妙",12);
+	printf("执行 %d 微妙\r\n",12);
 }
 //开始计时
 void TimeCost::Start()

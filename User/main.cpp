@@ -13,6 +13,7 @@
 #include "CString.h"
 #include "string.h"
 #include "DateTime.h"
+#include "TimeCost.h"
 
 void ledflash();
 OutputPort led1(PB0, true);
@@ -132,9 +133,11 @@ int main(void)
     sp2.Open();
     sp3.Open();
 
+	TimeCost tc; 
     exti.InitOld();
     exti.On();
     exti.RegisterOld(OnKeyPress);
+	tc.Show();
 
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
