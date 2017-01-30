@@ -17,5 +17,3 @@ class TTime
 		uint UsToTicks(uint us) const;
 	
 };
-
-extern TTime Time;//系统时间，不建议用户直接使用
