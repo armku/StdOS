@@ -76,13 +76,12 @@ class TSys:public Object
 		void Routin(); //运行  
 	
 		uint Clock;//系统时钟
+		ulong StartTime;//系统启动时间
+		ushort FlashSize;
 		COM_Def MessagePort;// 指定printf输出的串口
 		byte Inited;//串口用参数
-	
-		ulong StartTime;//系统启动时间
-	
 		byte ID[12];
-		ushort FlashSize;
+		
 	private:
 		TaskOld task;	
 	
