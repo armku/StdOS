@@ -109,8 +109,9 @@ void TSys::ShowInfo()
 //系统启动以来的毫秒数，无符号长整型8字节
 UInt64 TSys::Ms()
 {
-	UInt64 ret=Time.Current;
-	 printf("Support: http://www.armku.com %d \n",ret);
+static 	UInt64 ret;
+	ret=Time.Current;
+	printf("Support: http://www.armku.com %d-%d \n",ret,Time.Current);
     return ret;
 }
 
