@@ -25,7 +25,7 @@ OutputPort led3(PF8, true);
 InputPortOld exti(PC13); //PA1 PB3
 
 WatchDog dog(3000);
-void feeddog()
+void feeddog(void * param)
 {
     dog.Feed();
 }
@@ -57,7 +57,7 @@ KEY PA0
 void ComTimers();
 void assert_failed(uint8_t *file, uint32_t line);
 
-void ledflash()
+void ledflash(void * param)
 {
     //	led1=!led1;
     //	led2=!led2;
@@ -74,7 +74,7 @@ extern CFIFORing com2buf; //串口2接收缓冲区
 extern uint com3timeidle; //串口3空闲时间
 extern CFIFORing com3buf; //串口3接收缓冲区
 //串口接收通信定时器
-void ComTimers()
+void ComTimers(void * param)
 {
     com1timeidle++;
     com2timeidle++;
@@ -118,7 +118,7 @@ void ComTimers()
 }
 
 //显示系统时间
-void ShowSysTime()
+void ShowSysTime(void * param)
 {
     //printf("%d-%d\n", Sys.Ms(), Time.Ms());
 }

@@ -10,7 +10,7 @@ typedef struct Thread_T
     uint firstMs; //延时时间	
     uint ID; //编号
     const char *Name; //名称
-    void(*callback)(void); //回调函数	
+    void(*callback)(void * param); //回调函数	
 } Thread_T;
 
 struct Node
@@ -23,7 +23,7 @@ class TaskOld
 {
 	public:
 		TaskOld();
-		uint AddTask(void(*callback)(void),void* para, uint firstms, int periodms, const char *name = "未命名任务");
+		uint AddTask(void(*callback)(void * param),void* para, uint firstms, int periodms, const char *name = "未命名任务");
         void TimeTick(); //间隔1ms调用一次
 		void SetTask(uint taskid,bool onoff,int delayms=0);//设置任务参数
         void Routin(); //运行        

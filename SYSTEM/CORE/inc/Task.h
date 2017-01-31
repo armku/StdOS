@@ -5,7 +5,7 @@
 #define NULL 0
 #define string char
 
-typedef void(*Action)(void); //回调函数
+typedef void(*Action)(void* param); //回调函数
 
 class TaskScheduler;
 // 任务

@@ -33,7 +33,7 @@ void TaskOld::Routin()
         {
             if (pnode->data.TickCur > pnode->data.periodMs)
             {
-                pnode->data.callback();
+                pnode->data.callback(0);
                 pnode->data.TickCur = 0;
             }
             pnode = pnode->pNext;
@@ -44,7 +44,7 @@ void TaskOld::Routin()
 添加任务，参数分别是：任务函数、参数、首次时间、间隔时
 间、名称。返回值是一个 uint 的任务唯一编号。	
  */
-uint TaskOld::AddTask(void(*callback)(void),void* para, uint firstms, int periodms, const char *name)
+uint TaskOld::AddTask(void(*callback)(void * param),void* para, uint firstms, int periodms, const char *name)
 {
     Node *nodeNew = new Node(); //新版链表
 

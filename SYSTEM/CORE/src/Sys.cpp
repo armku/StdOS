@@ -59,7 +59,7 @@ void TSys::Init()
     this->FlashSize = *(ushort*)(0X1FFFF7E0);
 }
 
-uint TSys::AddTask(void(*callback)(void), void *para, uint firstms, int periodms, const char *name)
+uint TSys::AddTask(void(*callback)(void* param), void *para, uint firstms, int periodms, const char *name)
 {
 	ts.Add(callback, para, firstms, periodms, name);
     return this->task.AddTask(callback, para, firstms, periodms, name);
