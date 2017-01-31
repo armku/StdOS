@@ -97,7 +97,7 @@ void TaskScheduler::Execute(uint usMax)
 	now= Time.Current() - Sys.StartTime; // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆
 	if(nowold!=now)
 	{
-		printf("now:%d-Current:%d StartTime:%d\r\n",now,Time.Current(),Sys.StartTime);
+		printf("now:%d-Current:%d StartTime:%d Current-StartTime:%d\r\n",now,Time.Current(),Sys.StartTime,Time.Current()-Sys.StartTime);
 		nowold=now;
 	}
     ulong min = UInt64_Max; // 最小时间，这个时间就会有任务到来
