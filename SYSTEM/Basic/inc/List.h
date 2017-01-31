@@ -75,7 +75,7 @@ void List<T>::PrintList()
 	int i=0;
 	for(Node* p=pFirst;p;p=p->pNext)
 	{
-			printf("%d\n",i++);		
+			printf("%f\n",*(p->pT));		
 	}
 }
 

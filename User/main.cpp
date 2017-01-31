@@ -146,6 +146,7 @@ int main(void)
     {
         floatList.Add(*new float(i + 0.6));
     }
+	printf("原始\n");
     floatList.PrintList();
     float b = 3.6;
     float *pa = floatList.Find(b);
@@ -153,6 +154,7 @@ int main(void)
     {
         floatList.Remove(*pa);
     }
+	printf("\n处理\n");
     floatList.PrintList();
 
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
