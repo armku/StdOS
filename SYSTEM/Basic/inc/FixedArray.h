@@ -60,7 +60,7 @@ template <class T,int length> void FixedArray<T,length>::Remove(T &t)
         }
 }
 template<class T,int length>
-T* List<T,length>::Find(T& t)
+T* FixedArray<T,length>::Find(T& t)
 {
 	for(Node* p=pFirst;p;p=p->pNext)
 	{

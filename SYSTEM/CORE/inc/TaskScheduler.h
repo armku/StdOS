@@ -8,10 +8,8 @@
 // 任务调度器
 class TaskScheduler
 {
-    private:
-        #if 1
-            FixedArray < Task, 32 > _Tasks;
-        #endif 
+    private:        
+        FixedArray < Task, 32 > _Tasks;       
         uint _gid; // 总编号
 
         friend class Task;
