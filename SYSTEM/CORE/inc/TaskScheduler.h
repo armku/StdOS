@@ -4,8 +4,13 @@
 #include "Type.h"
 #include "Task.h"
 
-template<class Task,int width>
-class FixedArray;
+//template class deque <void*, allocator <void*> >;
+
+
+//template <class _TypeT>
+
+//template<class Task,int width>;
+//class FixedArray;
 
 
 // 任务调度器
