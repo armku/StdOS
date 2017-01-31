@@ -3,21 +3,13 @@
 #include <stdio.h>
 #include "Type.h"
 #include "Task.h"
-
-//template class deque <void*, allocator <void*> >;
-
-
-//template <class _TypeT>
-
-//template<class Task,int width>;
-//class FixedArray;
-
+#include "FixedArray.h"
 
 // 任务调度器
 class TaskScheduler
 {
     private:
-        #if 0
+        #if 1
             FixedArray < Task, 32 > _Tasks;
         #endif 
         uint _gid; // 总编号

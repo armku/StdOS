@@ -1,18 +1,14 @@
-/*
-
-*/
 #pragma once
-#include <stdio.h>
 
-template<class T> class List
+template<class T,int length> class FixedArray
 {
 	public:
-		List();
+		FixedArray();
 		void Add(T&);
 		void Remove(T&);
 		T* Find(T&);
 		void PrintList();
-		~List();
+		~FixedArray();
 	protected:
 		struct Node{
 			Node* pNext;
@@ -20,12 +16,15 @@ template<class T> class List
 		};
 		Node *pFirst;//链首节点指针
 };
-template <class T> List<T>::List()
+
+
+template <class T,int length> 
+FixedArray<T,length>::FixedArray()
 {
         this->pFirst = 0;
 }
-
-template <class T> void List<T>::Add(T &t)
+template <class T,int length> 
+void FixedArray<T,length>::Add(T &t)
 {
         Node *temp = new Node();
         temp->pT = &t;
@@ -33,7 +32,7 @@ template <class T> void List<T>::Add(T &t)
         pFirst = temp;
 }
 
-template <class T> void List<T>::Remove(T &t)
+template <class T,int length> void FixedArray<T,length>::Remove(T &t)
 {
         Node *q = 0; //用来定位待删除的节点
         if (*(pFirst->pT) == t)
@@ -60,8 +59,8 @@ template <class T> void List<T>::Remove(T &t)
                 delete q;
         }
 }
-template<class T>
-T* List<T>::Find(T& t)
+template<class T,int length>
+T* List<T,length>::Find(T& t)
 {
 	for(Node* p=pFirst;p;p=p->pNext)
 	{
@@ -72,8 +71,8 @@ T* List<T>::Find(T& t)
 	}
 	return 0;
 }
-template<class T>
-void List<T>::PrintList()
+template<class T,int length>
+void FixedArray<T,length>::PrintList()
 {
 	int i=0;
 	for(Node* p=pFirst;p;p=p->pNext)
@@ -82,8 +81,8 @@ void List<T>::PrintList()
 	}
 }
 
-template<class T>
-List<T>::~List<T>()
+template<class T,int length>
+FixedArray<T,length>::~FixedArray<T,length>()
 {
 	Node *p;
 	while(p=pFirst)
@@ -93,5 +92,3 @@ List<T>::~List<T>()
 		delete p;
 	}
 }
-
-
