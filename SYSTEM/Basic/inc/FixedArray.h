@@ -102,7 +102,7 @@ T* FixedArray<T,length>::operator[](int taskid)
 	int i=0;
 	for(Node* p=pFirst;p;p=p->pNext,i++)
 	{
-		if((*(p->pT))&&(i==taskid))
+		if(p&&(i==taskid))
 		{
 			return p->pT;
 		}
