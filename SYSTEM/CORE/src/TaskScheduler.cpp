@@ -18,7 +18,9 @@ TaskScheduler::TaskScheduler(string name)
 TaskScheduler::~TaskScheduler()
 {
     Current = NULL;
-    //_Tasks.DeleteAll().Clear();
+    #if 0
+        _Tasks.DeleteAll().Clear();
+    #endif 
 }
 
 
@@ -165,20 +167,18 @@ void TaskScheduler::Execute(uint usMax)
 // ÏÔÊ¾×´Ì¬
 void TaskScheduler::ShowStatus(void *param)
 {
-    #if 0
-        TaskScheduler *ts = (TaskScheduler*)param;
+    TaskScheduler *ts = (TaskScheduler*)param;
 
-        int i =  - 1;
+    int i =  - 1;
 
-        while (ts->_Tasks.MoveNext(i))
+    while (ts->_Tasks.MoveNext(i))
+    {
+        Task *task = ts->_Tasks[i];
+        if (task)
         {
-            Task *task = ts->_Tasks[i];
-            if (task)
-            {
-                task->ShowStatus();
-            }
+            task->ShowStatus();
         }
-    #endif 
+    }
 }
 
 Task *TaskScheduler::operator[](int taskid)
