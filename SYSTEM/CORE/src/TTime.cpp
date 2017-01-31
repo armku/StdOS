@@ -41,6 +41,9 @@ uint TTime::TicksToUs(uint ticks) const
 		return ((UInt64)ticks * (1000000 >> 6)) >> (16-6);
 	}
 }
+/*
+1us=30ticks
+*/
 uint TTime::UsToTicks(uint us) const
 {
 	if(!us) 
