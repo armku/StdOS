@@ -55,7 +55,7 @@ KEY PA0
  */
 //系统初始化
 void ComTimers();
-void assert_failed(uint8_t* file, uint32_t line);
+void assert_failed(uint8_t *file, uint32_t line);
 
 void ledflash()
 {
@@ -116,15 +116,16 @@ void ComTimers()
         com3buf.Reset();
     }
 }
+
 //显示系统时间
 void ShowSysTime()
 {
-	printf("%d-%d\n",Sys.Ms(),Time.Ms());
+    printf("%d-%d\n", Sys.Ms(), Time.Ms());
 }
 
 int main(void)
 {
-     Sys.MessagePort = COM1;
+    Sys.MessagePort = COM1;
     Sys.Init();
     Sys.ShowInfo();
     sp1.Register(OnUsartRead, &sp1);
@@ -134,30 +135,30 @@ int main(void)
     sp2.Open();
     sp3.Open();
 
-	TimeCost tc; 
+    TimeCost tc;
     exti.InitOld();
     exti.On();
     exti.RegisterOld(OnKeyPress);
-	tc.Show();
-	List<float> floatList;
+    tc.Show();
+    List < float > floatList;
 
-for(int i=1;i<7;i++)
-{
-floatList.Add(* new float(i+0.6));
-}
-floatList.PrintList();
-float b=3.6;
-float *pa=floatList.Find(b);
-if(pa)
-{
-	floatList.Remove(*pa);
-}
-floatList.PrintList();
+    for (int i = 1; i < 7; i++)
+    {
+        floatList.Add(*new float(i + 0.6));
+    }
+    floatList.PrintList();
+    float b = 3.6;
+    float *pa = floatList.Find(b);
+    if (pa)
+    {
+        floatList.Remove(*pa);
+    }
+    floatList.PrintList();
 
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
     Sys.AddTask(ledflash, 0, 5, 50, "状态指示灯");
-	Sys.AddTask(ShowSysTime, 0, 5, 1000, "系统时间显示");
-    	
-	Sys.Start();
+    Sys.AddTask(ShowSysTime, 0, 5, 1000, "系统时间显示");
+
+    Sys.Start();
 }
