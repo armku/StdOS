@@ -74,8 +74,7 @@ T* List<T>::Find(T& t)
 }
 template<class T>
 void List<T>::PrintList()
-{
-	int i=0;
+{	
 	for(Node* p=pFirst;p;p=p->pNext)
 	{
 			printf("%f\n",*(p->pT));		

@@ -69,7 +69,7 @@ uint TSys::AddTask(void(*callback)(void), void *para, uint firstms, int periodms
 void TSys::TimeTick()
 {
     this->task.TimeTick();
-    Time.Current++;
+    Time.mCurrent++;
 
 }
 
@@ -77,10 +77,11 @@ void TSys::TimeTick()
 void TSys::Start()
 {
     this->task.Start();
+	ts.Start();
     while (true)
     {
-        this->Routin();
-    }
+        this->Routin();		
+    }	
 }
 
 //运行  
@@ -113,7 +114,7 @@ void TSys::ShowInfo()
 //系统启动以来的毫秒数，无符号长整型8字节
 UInt64 TSys::Ms()
 {
-    return Time.Current;
+    return Time.Current();
 }
 
 //系统绝对UTC时间，整型4字节，Unix格式，1970年以来的总秒数。

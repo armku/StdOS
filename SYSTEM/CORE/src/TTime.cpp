@@ -6,7 +6,7 @@ TTime::TTime()
 //返回当前毫秒数
 UInt64 TTime::Ms()
 {
-	return Current;
+	return this->mCurrent;
 }
 //设置系统当前时间,Unix格式秒数
 void TTime::SetTime(UInt64 seconds)
@@ -22,6 +22,11 @@ uint TTime::Seconds()
 void TTime::Sleep(uint ms)
 {
 	
+}
+//系统启动以来的毫秒
+UInt64 TTime::Current() const
+{
+	return this->mCurrent;
 }
 uint TTime::TicksToUs(uint ticks) const
 {

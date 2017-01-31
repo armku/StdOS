@@ -1,5 +1,8 @@
 #include "TaskScheduler.h"
 #include "Sys.h"
+#include <limits.h>
+
+#define UInt64_Max LONG_MAX
 
 TaskScheduler::TaskScheduler(string name)
 {
@@ -27,7 +30,7 @@ uint TaskScheduler::Add(Action func, void *param, ulong dueTime, long period,con
     task->Callback = func;
     task->Param = param;
     task->Period = period;
-    task->NextTime = Time.Current + dueTime;
+    task->NextTime = Time.Current() + dueTime;
 
     Count++;
     _Tasks.Add(task);   
@@ -86,9 +89,9 @@ void TaskScheduler::Stop()
 
 // 执行一次循环。指定最大可用时间
 void TaskScheduler::Execute(uint usMax)
-{
-    #if 0
+{    
         ulong now = Time.Current() - Sys.StartTime; // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆
+	
         ulong min = UInt64_Max; // 最小时间，这个时间就会有任务到来
         ulong end = Time.Current() + usMax;
 
@@ -96,6 +99,7 @@ void TaskScheduler::Execute(uint usMax)
         //Task* _cur = Current;
 
         int i =  - 1;
+	#if 1
         while (_Tasks.MoveNext(i))
         {
             Task *task = _Tasks[i];
@@ -181,7 +185,7 @@ void TaskScheduler::ShowStatus(void *param)
 
 Task *TaskScheduler::operator[](int taskid)
 {
-	 #if 0
+	 #if 1
     int i =  - 1;
    
         while (_Tasks.MoveNext(i))

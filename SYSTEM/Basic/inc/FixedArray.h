@@ -7,7 +7,9 @@ template<class T,int length> class FixedArray
 		void Add(T&);
 		void Add(T*);
 		void Remove(T&);
+		bool MoveNext(int pos);//到下一个节点
 		T* Find(T&);
+		T *operator[](int taskid);
 		void PrintList();
 		~FixedArray();
 	protected:
@@ -79,6 +81,32 @@ T* FixedArray<T,length>::Find(T& t)
 			return p->pT;
 		}
 	}
+	return 0;
+}
+template<class T,int length>
+bool FixedArray<T,length>::MoveNext(int pos)
+{
+	int i=0;
+	for(Node* p=pFirst;p;p=p->pNext,i++)
+	{
+		if(p&&(i==pos))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+template<class T,int length>
+T* FixedArray<T,length>::operator[](int taskid)
+{
+	int i=0;
+	for(Node* p=pFirst;p;p=p->pNext,i++)
+	{
+		if((*(p->pT))&&(i==taskid))
+		{
+			return p->pT;
+		}
+	}	
 	return 0;
 }
 template<class T,int length>
