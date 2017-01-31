@@ -20,7 +20,7 @@ TaskScheduler::~TaskScheduler()
 
 
 // 创建任务，返回任务编号。dueTime首次调度时间us，period调度间隔us，-1表示仅处理一次
-uint TaskScheduler::Add(Action func, void *param, ulong dueTime, long period)
+uint TaskScheduler::Add(Action func, void *param, ulong dueTime, long period,const char *name)
 {
     Task *task = new Task(this);
     task->ID = _gid++;
@@ -30,9 +30,9 @@ uint TaskScheduler::Add(Action func, void *param, ulong dueTime, long period)
     task->NextTime = Time.Current + dueTime;
 
     Count++;
-    //_Tasks.Add(task);   
+    _Tasks.Add(task);   
     // 输出长整型%ld，无符号长整型%llu
-    //debug_printf("%s添加任务%d 0x%08x FirstTime=%lluus Period=%ldus\r\n", Name, task->ID, func, dueTime, period);
+    debug_printf("%s添加任务%d 0x%08x FirstTime=%lluus Period=%ldus\r\n", Name, task->ID, func, dueTime, period);
 
     return task->ID;
 }

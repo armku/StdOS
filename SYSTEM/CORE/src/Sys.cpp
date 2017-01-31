@@ -8,6 +8,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "Sys.h"
 #include "TTime.h"
 #include "stm32f10x.h"
+#include "TaskScheduler.h"
 
 #define delay_ostickspersec 1000			//时钟频率
 static byte fac_us = 0; //us延时倍乘数
@@ -24,6 +25,8 @@ static byte fac_us = 0; //us延时倍乘数
 
 TSys Sys; //系统参数
 TTime Time; //系统时间，不建议用户直接使用
+TaskScheduler ts;//任务调度
+
 
 TSys::TSys(uint clock, COM_Def messagePort)
 {
@@ -58,6 +61,7 @@ void TSys::Init()
 
 uint TSys::AddTask(void(*callback)(void), void *para, uint firstms, int periodms, const char *name)
 {
+	ts.Add(callback, para, firstms, periodms, name);
     return this->task.AddTask(callback, para, firstms, periodms, name);
 }
 

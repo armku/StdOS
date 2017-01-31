@@ -5,6 +5,7 @@ template<class T,int length> class FixedArray
 	public:
 		FixedArray();
 		void Add(T&);
+		void Add(T*);
 		void Remove(T&);
 		T* Find(T&);
 		void PrintList();
@@ -28,6 +29,15 @@ void FixedArray<T,length>::Add(T &t)
 {
         Node *temp = new Node();
         temp->pT = &t;
+        temp->pNext = pFirst;
+        pFirst = temp;
+}
+
+template <class T,int length> 
+void FixedArray<T,length>::Add(T *t)
+{
+        Node *temp = new Node();
+        temp->pT = t;
         temp->pNext = pFirst;
         pFirst = temp;
 }
@@ -73,8 +83,7 @@ T* FixedArray<T,length>::Find(T& t)
 }
 template<class T,int length>
 void FixedArray<T,length>::PrintList()
-{
-	int i=0;
+{	
 	for(Node* p=pFirst;p;p=p->pNext)
 	{
 			printf("%f\n",*(p->pT));		
