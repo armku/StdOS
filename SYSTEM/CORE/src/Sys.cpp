@@ -78,61 +78,61 @@ void TSys::Stop()
     _Scheduler->Stop();
 }
 
-#if 1
-    void TimeSleep(uint us)
+
+void TimeSleep(uint us)
+{
+    // 在这段时间里面，去处理一下别的任务
+    if (_Scheduler && (!us || us >= 1000))
     {
-        // 在这段时间里面，去处理一下别的任务
-        if (_Scheduler && (!us || us >= 1000))
+        // 记录当前正在执行任务
+        Task *task = _Scheduler->Current;
+
+        ulong start = Time.Current();
+        // 1ms一般不够调度新任务，留给硬件等待
+        ulong end = start + us - 1000;
+        // 如果休眠时间足够长，允许多次调度其它任务
+        int cost = 0;
+        while (true)
         {
-            // 记录当前正在执行任务
-            Task *task = _Scheduler->Current;
+            ulong start2 = Time.Current();
 
-            ulong start = Time.Current();
-            // 1ms一般不够调度新任务，留给硬件等待
-            ulong end = start + us - 1000;
-            // 如果休眠时间足够长，允许多次调度其它任务
-            int cost = 0;
-            while (true)
-            {
-                ulong start2 = Time.Current();
+            _Scheduler->Execute(us);
 
-                _Scheduler->Execute(us);
+            ulong now = Time.Current();
+            cost += (int)(now - start2);
 
-                ulong now = Time.Current();
-                cost += (int)(now - start2);
-
-                // us=0 表示释放一下CPU
-                if (!us)
-                {
-                    return ;
-                }
-
-                if (now >= end)
-                {
-                    break;
-                }
-            }
-
-            if (task)
-            {
-                _Scheduler->Current = task;
-                task->SleepTime += cost;
-            }
-
-            cost = (int)(Time.Current() - start);
-            if (cost > 0)
+            // us=0 表示释放一下CPU
+            if (!us)
             {
                 return ;
             }
 
-            us -= cost;
+            if (now >= end)
+            {
+                break;
+            }
         }
-        if (us)
+
+        if (task)
         {
-            Time.Sleep(us);
+            _Scheduler->Current = task;
+            task->SleepTime += cost;
         }
+
+        cost = (int)(Time.Current() - start);
+        if (cost > 0)
+        {
+            return ;
+        }
+
+        us -= cost;
     }
-#endif
+    if (us)
+    {
+        Time.Sleep(us);
+    }
+}
+
 #if 0
     void TSys::Sleep(uint ms)
     {
@@ -150,7 +150,7 @@ void TSys::Stop()
             TimeSleep(ms *1000);
         }
     }
-#endif
+#endif 
 #if 0
     void TSys::Delay(uint us)
     {
@@ -171,7 +171,28 @@ void TSys::Stop()
     }
 
 #endif 
+#ifdef __cplusplus
+    extern "C"
+    {
+    #endif 
+    void delay_us(uint nus);
+    #ifdef __cplusplus
+    }
+#endif 
+//微妙级延迟，常用于高精度外设信号控制
+void TSys::Delay(uint us)
+{
+    delay_us(us);
+}
 
+//毫秒级睡眠，常用于业务层杂宁等待一定时间
+void TSys::Sleep(uint ms)
+{
+    while (ms--)
+    {
+        this->Delay(1000);
+    }
+}
 
 
 
@@ -184,14 +205,7 @@ void TSys::Stop()
 static byte fac_us = 0; //us延时倍乘数
 //static uint16_t fac_ms = 0;							//ms延时倍乘数,在ucos下,代表每个节拍的ms数
 
-#ifdef __cplusplus
-    extern "C"
-    {
-    #endif 
-    void delay_us(uint nus);
-    #ifdef __cplusplus
-    }
-#endif 
+
 
 TSys Sys; //系统参数
 TTime Time; //系统时间，不建议用户直接使用
@@ -268,21 +282,6 @@ UInt64 TSys::Ms()
 uint TSys::Seconds()
 {
     return Time.Seconds();
-}
-
-//微妙级延迟，常用于高精度外设信号控制
-void TSys::Delay(uint us)
-{
-    delay_us(us);
-}
-
-//毫秒级睡眠，常用于业务层杂宁等待一定时间
-void TSys::Sleep(uint ms)
-{
-    while (ms--)
-    {
-        this->Delay(1000);
-    }
 }
 
 //异步热重启系统。延迟一定毫秒数执行。
