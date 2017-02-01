@@ -1,4 +1,12 @@
 #include "TTime.h"
+#ifdef __cplusplus
+    extern "C"
+    {
+    #endif 
+    void delay_us(uint nus);
+    #ifdef __cplusplus
+    }
+#endif 
 
 TTime::TTime()
 {
@@ -19,9 +27,9 @@ uint TTime::Seconds()
 	return 0;
 }
 //延时ms
-void TTime::Sleep(uint ms)
+void TTime::Sleep(uint us)
 {
-	
+	delay_us(us);
 }
 //系统启动以来的毫秒
 UInt64 TTime::Current() const

@@ -10,7 +10,7 @@ class TTime
 		UInt64 Current() const;//系统启动以来的毫秒
 		uint Seconds();//系统时间
 		void SetTime(UInt64 seconds);//设置系统当前时间,Unix格式秒数
-		void Sleep(uint ms);//延时ms		
+		void Sleep(uint us);//延时us		
 					
 		uint TicksToUs(uint ticks) const;
 		uint UsToTicks(uint us) const;

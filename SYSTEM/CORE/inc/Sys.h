@@ -75,8 +75,7 @@ class TSys:public Object
 		void SetTask(uint taskid, bool enable);//设置任务参数
 		void RemoveTask(uint taskid);//删除任务
 		void TimeTick(); //间隔1ms调用一次
-		void Routin(); //运行  
-	
+			
 		uint Clock;//系统时钟
 		ulong StartTime;//系统启动时间
 		ushort FlashSize;

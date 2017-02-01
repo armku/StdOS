@@ -133,70 +133,46 @@ void TimeSleep(uint us)
     }
 }
 
-#if 0
-    void TSys::Sleep(uint ms)
-    {
-        // 优先使用线程级睡眠
+//毫秒级睡眠，常用于业务层杂宁等待一定时间
+void TSys::Sleep(uint ms)
+{
+    // 优先使用线程级睡眠
+    #if 0
         if (OnSleep)
         {
             OnSleep(ms);
         }
         else
-        {
-            if (ms > 1000)
-            {
-                debug_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！", ms);
-            }
-            TimeSleep(ms *1000);
-        }
-    }
-#endif 
-#if 0
-    void TSys::Delay(uint us)
+    #endif 
     {
-        // 如果延迟微秒数太大，则使用线程级睡眠
+        if (ms > 1000)
+        {
+            debug_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！", ms);
+        }
+        TimeSleep(ms *1000);
+    }
+}
+
+//微妙级延迟，常用于高精度外设信号控制
+void TSys::Delay(uint us)
+{
+    // 如果延迟微秒数太大，则使用线程级睡眠
+    #if 0
         if (OnSleep && us >= 2000)
         {
             OnSleep((us + 500) / 1000);
         }
         else
-        {
-
-            if (us > 1000000)
-            {
-                debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！", us);
-            }
-            TimeSleep(us);
-        }
-    }
-
-#endif 
-#ifdef __cplusplus
-    extern "C"
-    {
     #endif 
-    void delay_us(uint nus);
-    #ifdef __cplusplus
-    }
-#endif 
-//微妙级延迟，常用于高精度外设信号控制
-void TSys::Delay(uint us)
-{
-    delay_us(us);
-}
-
-//毫秒级睡眠，常用于业务层杂宁等待一定时间
-void TSys::Sleep(uint ms)
-{
-    while (ms--)
     {
-        this->Delay(1000);
+
+        if (us > 1000000)
+        {
+            debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！", us);
+        }
+        TimeSleep(us);
     }
 }
-
-
-
-
 
 
 
@@ -248,13 +224,6 @@ void TSys::Init()
 void TSys::TimeTick()
 {
     Time.mCurrent++;
-}
-
-
-
-//运行  
-void TSys::Routin(){
-
 }
 
 //显示系统信息
