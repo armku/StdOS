@@ -172,7 +172,7 @@ void TaskScheduler::ShowStatus(void *param)
 {
     TaskScheduler *ts = (TaskScheduler*)param;
 
-    int i =  - 1;
+    int i =  1;
 
     while (ts->_Tasks.MoveNext(i))
     {
@@ -195,6 +195,7 @@ Task *TaskScheduler::operator[](int taskid)
         {
             return task;
         }
+		i++;
     }
     return NULL;
 }
