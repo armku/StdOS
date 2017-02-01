@@ -3,7 +3,6 @@
 #include "Type.h"
 
 #define NULL 0
-#define string char
 
 typedef void(*Action)(void* param); //»Øµ÷º¯Êý
 
