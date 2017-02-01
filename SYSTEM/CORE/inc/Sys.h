@@ -7,6 +7,7 @@
 #include "Type.h"
 #include "Object.h"
 #include "TTime.h"
+#include "Delegate.h"
 
 #define NULL 0
 
@@ -68,7 +69,7 @@ class TSys:public Object
 		void Sleep(uint ms);//毫秒级睡眠，常用于业务层杂宁等待一定时间
 		void Reboot(uint msDelay);//异步热重启系统。延迟一定毫秒数执行。		
 	
-		uint AddTask(void(*callback)(void* param),void* para, uint firstms, int periodms, const char *name = "未命名任务");
+		uint AddTask(Action func,void* para, uint firstms, int periodms, const char *name = "未命名任务");
 		void SetTask(uint taskid,bool onoff,int delayms=0);//设置任务参数
 		void Remove(uint taskid);//删除任务
 		void TimeTick(); //间隔1ms调用一次

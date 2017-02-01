@@ -60,7 +60,7 @@ void TSys::Init()
     this->FlashSize = *(ushort*)(0X1FFFF7E0);
 }
 
-uint TSys::AddTask(void(*func)(void *param), void *param, uint dueTime, int period, const char *name)
+uint TSys::AddTask(Action func, void *param, uint dueTime, int period, const char *name)
 {
     // 屏蔽中断，否则可能有线程冲突
     SmartIRQ irq;
