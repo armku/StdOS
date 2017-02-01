@@ -24,6 +24,6 @@ class Object
         virtual String ToString()const;        
 		#endif
         //显示对象。默认显示 ToString
-        virtual void Show(bool newLine = false)const;
+        virtual void Show(bool newLine = true)const;
         const CType GetType()const;
 };

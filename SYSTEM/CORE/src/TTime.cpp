@@ -4,7 +4,7 @@ TTime::TTime()
 {
 }
 //返回当前毫秒数
-UInt64 TTime::Ms()
+UInt64 TTime::Ms() const
 {
 	return this->mCurrent;
 }

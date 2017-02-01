@@ -91,15 +91,11 @@ void TaskScheduler::Stop()
 
 // 执行一次循环。指定最大可用时间
 void TaskScheduler::Execute(uint usMax)
-{
-	static ulong nowold=0;
-    ulong now;
-	now= Time.Current() - Sys.StartTime; // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆
-	if(nowold!=now)
-	{
-		printf("now:%d-Current:%d StartTime:%d Current-StartTime:%d\r\n",now,Time.Current(),Sys.StartTime,Time.Current()-Sys.StartTime);
-		nowold=now;
-	}
+{	
+   ulong now;	
+	now= Time.Current() - Sys.StartTime; // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
+	printf("now:%lld-Current:%lld StartTime:%lld Current-StartTime:%lld\r\n",now,Time.Current(),Sys.StartTime,Time.Current()-Sys.StartTime);
+		
     ulong min = UInt64_Max; // 最小时间，这个时间就会有任务到来
     ulong end = Time.Current() + usMax;
 
