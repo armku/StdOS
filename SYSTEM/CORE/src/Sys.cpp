@@ -78,7 +78,7 @@ void TSys::Stop()
     _Scheduler->Stop();
 }
 
-#if 0
+#if 1
     void TimeSleep(uint us)
     {
         // 在这段时间里面，去处理一下别的任务
@@ -132,7 +132,8 @@ void TSys::Stop()
             Time.Sleep(us);
         }
     }
-
+#endif
+#if 0
     void TSys::Sleep(uint ms)
     {
         // 优先使用线程级睡眠
@@ -149,7 +150,8 @@ void TSys::Stop()
             TimeSleep(ms *1000);
         }
     }
-
+#endif
+#if 0
     void TSys::Delay(uint us)
     {
         // 如果延迟微秒数太大，则使用线程级睡眠
