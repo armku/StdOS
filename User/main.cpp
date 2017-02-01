@@ -120,7 +120,7 @@ void ComTimers(void * param)
 //显示系统时间
 void ShowSysTime(void * param)
 {
-    printf("%lld-%lld-%lld-%lld\n", Sys.Ms(), Time.Ms(),Time.Current(),Time.mCurrent);
+    //printf("%lld-%lld-%lld-%lld\n", Sys.Ms(), Time.Ms(),Time.Current(),Time.mCurrent);
 }
 
 int main(void)
@@ -140,23 +140,7 @@ int main(void)
     exti.On();
     exti.RegisterOld(OnKeyPress);
     tc.Show();
-    List < float > floatList;
-
-    for (int i = 1; i < 7; i++)
-    {
-        floatList.Add(*new float(i + 0.6));
-    }
-	printf("原始\n");
-    floatList.PrintList();
-    float b = 3.6;
-    float *pa = floatList.Find(b);
-    if (pa)
-    {
-        floatList.Remove(*pa);
-    }
-	printf("\n处理\n");
-    floatList.PrintList();
-
+    	
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
     Sys.AddTask(ledflash, 0, 5, 50, "状态指示灯");

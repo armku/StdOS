@@ -61,39 +61,31 @@ void TSys::Init()
 
 uint TSys::AddTask(void(*callback)(void* param), void *para, uint firstms, int periodms, const char *name)
 {
-	ts.Add(callback, para, firstms, periodms, name);
-    return this->task.AddTask(callback, para, firstms, periodms, name);
+	return ts.Add(callback, para, firstms, periodms, name);
 }
 
 //间隔1ms调用一次
 void TSys::TimeTick()
-{
-    this->task.TimeTick();
+{    
     Time.mCurrent++;
-
 }
 
 //启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
 void TSys::Start()
-{
-    this->task.Start();
+{    
 	ts.Start();
-    while (true)
-    {
-        this->Routin();		
-    }	
 }
 
 //运行  
 void TSys::Routin()
 {
-    this->task.Routin();
+    
 }
 
 //设置任务参数
 void TSys::SetTask(uint taskid, bool onoff, int delayms)
 {
-    this->task.SetTask(taskid, onoff, delayms);
+    
 }
 
 //显示系统信息

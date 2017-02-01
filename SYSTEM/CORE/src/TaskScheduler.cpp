@@ -4,11 +4,11 @@
 
 #define UInt64_Max LONG_MAX
 
-TaskScheduler::TaskScheduler(String name)
+TaskScheduler::TaskScheduler(char* name)
 {
     Name = name;
 
-    _gid = 1;
+    mgid = 1;
 
     Running = false;
     Current = NULL;
@@ -28,7 +28,7 @@ TaskScheduler::~TaskScheduler()
 uint TaskScheduler::Add(Action func, void *param, ulong dueTime, long period, const char *name)
 {
     Task *task = new Task(this);
-    task->ID = _gid++;
+    task->ID = mgid++;
     task->Callback = func;
     task->Param = param;
     task->Period = period;
@@ -37,7 +37,7 @@ uint TaskScheduler::Add(Action func, void *param, ulong dueTime, long period, co
     Count++;
     _Tasks.Add(task);
     // 输出长整型%ld，无符号长整型%llu
-    debug_printf("%s添加任务%d 0x%08x FirstTime=%lluus Period=%ldus\r\n", Name, task->ID, func, dueTime, period);
+    debug_printf("%s添加任务%d 0x%08x FirstTime=%llums Period=%ldms\r\n", Name, task->ID, func, dueTime, period);
 
     return task->ID;
 }
@@ -71,7 +71,7 @@ void TaskScheduler::Start()
     }
 
     //Add(ShowTime, NULL, 2000000, 2000000);
-    Add(ShowStatus, this, 10000000, 30000000);
+    Add(ShowStatus, this, 10000, 30000);
 
     debug_printf("%s::准备就绪 开始循环处理%d个任务！\r\n\r\n", Name, Count);
 

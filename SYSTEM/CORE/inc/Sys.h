@@ -6,7 +6,6 @@
 
 #include "Type.h"
 #include "Object.h"
-#include "TaskOld.h"
 #include "TTime.h"
 
 #define NULL 0
@@ -83,7 +82,7 @@ class TSys:public Object
 		byte ID[12];
 		
 	private:
-		TaskOld task;	
+			
 	
 };
 extern TSys Sys;//系统参数

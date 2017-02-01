@@ -563,11 +563,6 @@
               <FilePath>..\SYSTEM\CORE\src\WaitHandle.cpp</FilePath>
             </File>
             <File>
-              <FileName>TaskOld.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TaskOld.cpp</FilePath>
-            </File>
-            <File>
               <FileName>TaskScheduler.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\TaskScheduler.cpp</FilePath>
@@ -1461,11 +1456,6 @@
               <FileName>WaitHandle.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\WaitHandle.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TaskOld.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TaskOld.cpp</FilePath>
             </File>
             <File>
               <FileName>TaskScheduler.cpp</FileName>
