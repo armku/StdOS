@@ -178,6 +178,7 @@ void TaskScheduler::ShowStatus(void *param)
             task->ShowStatus();
         }
     }	
+	debug_printf("\r\n");
 }
 
 Task *TaskScheduler::operator[](int taskid)
