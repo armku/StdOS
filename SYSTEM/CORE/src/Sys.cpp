@@ -9,6 +9,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "TTime.h"
 #include "stm32f10x.h"
 #include "TaskScheduler.h"
+#include "SmartIrq.h"
 
 #define delay_ostickspersec 1000			//时钟频率
 static byte fac_us = 0; //us延时倍乘数
@@ -25,7 +26,7 @@ static byte fac_us = 0; //us延时倍乘数
 
 TSys Sys; //系统参数
 TTime Time; //系统时间，不建议用户直接使用
-TaskScheduler ts;//任务调度
+TaskScheduler *_Scheduler; //任务调度
 
 
 TSys::TSys(uint clock, COM_Def messagePort)
@@ -59,33 +60,38 @@ void TSys::Init()
     this->FlashSize = *(ushort*)(0X1FFFF7E0);
 }
 
-uint TSys::AddTask(void(*callback)(void* param), void *para, uint firstms, int periodms, const char *name)
+uint TSys::AddTask(void(*func)(void *param), void *param, uint dueTime, int period, const char *name)
 {
-	return ts.Add(callback, para, firstms, periodms, name);
+    // 屏蔽中断，否则可能有线程冲突
+    SmartIRQ irq;
+    if (!_Scheduler)
+    {
+        _Scheduler = new TaskScheduler("系统");
+    }
+
+    return _Scheduler->Add(func, param, dueTime, period);
 }
 
 //间隔1ms调用一次
 void TSys::TimeTick()
-{    
+{
     Time.mCurrent++;
 }
 
 //启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
 void TSys::Start()
-{    
-	ts.Start();
+{
+    _Scheduler->Start();
 }
 
 //运行  
-void TSys::Routin()
-{
-    
+void TSys::Routin(){
+
 }
 
 //设置任务参数
-void TSys::SetTask(uint taskid, bool onoff, int delayms)
-{
-    
+void TSys::SetTask(uint taskid, bool onoff, int delayms){
+
 }
 
 //显示系统信息
@@ -175,7 +181,7 @@ void TSys::Remove(uint taskid){
             }
         };
     }
-	 //以下为汇编函数
+    //以下为汇编函数
     void WFI_SET(void); //执行WFI指令
     void INTX_DISABLE(void); //关闭所有中断
     void INTX_ENABLE(void); //开启所有中断
