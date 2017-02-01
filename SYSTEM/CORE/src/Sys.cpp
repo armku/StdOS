@@ -69,7 +69,7 @@ uint TSys::AddTask(Action func, void *param, uint dueTime, int period, const cha
         _Scheduler = new TaskScheduler("系统");
     }
 
-    return _Scheduler->Add(func, param, dueTime, period);
+    return _Scheduler->Add(func, param, dueTime, period,name);
 }
 
 //间隔1ms调用一次

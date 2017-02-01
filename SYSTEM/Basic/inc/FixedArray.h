@@ -7,6 +7,7 @@ template<class T,int length> class FixedArray
 		void Add(T&);
 		void Add(T*);
 		void Remove(T&);
+		void RemoveAt(int pos=-1);
 		bool MoveNext(int pos);//到下一个节点
 		T* Find(T&);
 		T *operator[](int taskid);
@@ -72,6 +73,13 @@ template <class T,int length> void FixedArray<T,length>::Remove(T &t)
                 delete q->pT;
                 delete q;
         }
+}
+template <class T,int length> void FixedArray<T,length>::RemoveAt(int pos)
+{
+	if(pos==-1)
+	{
+		this->Remove(*(mpCur->pT));
+	}
 }
 template<class T,int length>
 T* FixedArray<T,length>::Find(T& t)

@@ -6,18 +6,18 @@
 
 TaskScheduler::TaskScheduler(char* name)
 {
-    Name = name;
+    this->Name = name;
 
-    mgid = 1;
+    this->mgid = 1;
 
-    Running = false;
-    Current = NULL;
-    Count = 0;
+    this->Running = false;
+    this->Current = NULL;
+    this->Count = 0;
 }
 
 TaskScheduler::~TaskScheduler()
 {
-    Current = NULL;
+    this->Current = NULL;
     #if 0
         _Tasks.DeleteAll().Clear();
     #endif 
@@ -33,11 +33,12 @@ uint TaskScheduler::Add(Action func, void *param, ulong dueTime, long period, co
     task->Param = param;
     task->Period = period;
     task->NextTime = Time.Current() + dueTime;
+	task->Name=name;
 
-    Count++;
+    this->Count++;
     _Tasks.Add(task);
     // 输出长整型%ld，无符号长整型%llu
-    debug_printf("%s添加任务%d 0x%08x FirstTime=%llums Period=%ldms\r\n", Name, task->ID, func, dueTime, period);
+    debug_printf("%s添加任务%d %s 0x%08x FirstTime=%llums Period=%ldms\r\n", Name,task->ID, task->Name, func, dueTime, period);
 
     return task->ID;
 }
@@ -50,10 +51,8 @@ void TaskScheduler::Remove(uint taskid)
     {
         Task *task = _Tasks[i];
         if (task->ID == taskid)
-        {
-            #if 0
-                _Tasks.RemoveAt(i);
-            #endif 
+        {            
+            _Tasks.RemoveAt(i);
             debug_printf("%s::删除任务%d 0x%08x\r\n", Name, task->ID, task->Callback);
             // 首先清零ID，避免delete的时候再次删除
             task->ID = 0;
@@ -71,7 +70,7 @@ void TaskScheduler::Start()
     }
 
     //Add(ShowTime, NULL, 2000000, 2000000);
-    Add(ShowStatus, this, 10000, 30000);
+    Add(ShowStatus, this, 10000, 30000,"任务显示");
 
     debug_printf("%s::准备就绪 开始循环处理%d个任务！\r\n\r\n", Name, Count);
 
@@ -118,9 +117,9 @@ void TaskScheduler::Execute(uint usMax)
             ulong now2 = Time.Current();
             task->SleepTime = 0;
 
-            Current = task;
+            this->Current = task;
             task->Callback(task->Param);
-            Current = NULL;
+            this->Current = NULL;
 
             // 累加任务执行次数和时间
             task->Times++;

@@ -21,6 +21,7 @@ class Task
         uint ID; // 编号       
         Action Callback; // 回调
         void *Param; // 参数
+		const char* Name;//名称
         long Period; // 周期us
         ulong NextTime; // 下一次执行时间
         uint Times; // 执行次数
@@ -28,6 +29,7 @@ class Task
         uint SleepTime; // 当前睡眠时间
         uint Cost; // 平均执行时间
         bool Enable; // 是否启用
+		bool operator==(Task& tsk);
         byte Reversed[3]; // 保留，避免对齐问题
 
         //~Task();

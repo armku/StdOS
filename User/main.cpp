@@ -120,7 +120,7 @@ void ComTimers(void * param)
 //显示系统时间
 void ShowSysTime(void * param)
 {
-    printf("%lld-%lld-%lld-%lld\n", Sys.Ms(), Time.Ms(),Time.Current(),Time.mCurrent);
+    //printf("%lld-%lld-%lld-%lld\n", Sys.Ms(), Time.Ms(),Time.Current(),Time.mCurrent);
 }
 
 int main(void)
