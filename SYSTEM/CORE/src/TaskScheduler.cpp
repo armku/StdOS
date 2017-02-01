@@ -72,6 +72,7 @@ void TaskScheduler::Start()
 
     //Add(ShowTime, NULL, 2000000, 2000000);
     Add(ShowStatus, this, 10000, 30000);
+	Add(ShowStatus, this, 10000, 30000);
 
     debug_printf("%s::准备就绪 开始循环处理%d个任务！\r\n\r\n", Name, Count);
 
@@ -102,7 +103,7 @@ void TaskScheduler::Execute(uint usMax)
     // 需要跳过当前正在执行任务的调度
     //Task* _cur = Current;
 
-    int i =   1;
+    int i =   -1;
     while (_Tasks.MoveNext(i))
     {		
         Task *task = _Tasks[i];
@@ -150,8 +151,7 @@ void TaskScheduler::Execute(uint usMax)
         if (!usMax || Time.Current() > end)
         {
             return ;
-        }
-		i++;
+        }		
     }
 
     // 如果有最小时间，睡一会吧
@@ -172,7 +172,7 @@ void TaskScheduler::ShowStatus(void *param)
 {
     TaskScheduler *ts = (TaskScheduler*)param;
 
-    int i =  1;
+    int i =  -1;
 
     while (ts->_Tasks.MoveNext(i))
     {
@@ -186,7 +186,7 @@ void TaskScheduler::ShowStatus(void *param)
 
 Task *TaskScheduler::operator[](int taskid)
 {
-    int i =  - 1;
+    int i =  -1;
 
     while (_Tasks.MoveNext(i))
     {
@@ -195,7 +195,6 @@ Task *TaskScheduler::operator[](int taskid)
         {
             return task;
         }
-		i++;
     }
     return NULL;
 }

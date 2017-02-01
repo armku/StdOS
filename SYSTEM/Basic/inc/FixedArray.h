@@ -18,6 +18,7 @@ template<class T,int length> class FixedArray
 			T* pT;
 		};
 		Node *pFirst;//链首节点指针
+		Node *mpCur;//当前节点
 };
 
 
@@ -33,6 +34,7 @@ void FixedArray<T,length>::Add(T &t)
         temp->pT = &t;
         temp->pNext = pFirst;
         pFirst = temp;
+		mpCur=temp;
 }
 
 template <class T,int length> 
@@ -86,6 +88,25 @@ T* FixedArray<T,length>::Find(T& t)
 template<class T,int length>
 bool FixedArray<T,length>::MoveNext(int pos)
 {
+	if(pos<0)
+	{
+		if(!mpCur)
+		{
+			mpCur=pFirst;
+		}
+		mpCur=mpCur->pNext;
+		if(mpCur)
+		{
+			return true;
+		}
+		else
+		{
+			mpCur=pFirst;
+			return false;
+		}
+	}
+	
+	
 	int i=0;
 	for(Node* p=pFirst;p;p=p->pNext,i++)
 	{
@@ -98,7 +119,11 @@ bool FixedArray<T,length>::MoveNext(int pos)
 }
 template<class T,int length>
 T* FixedArray<T,length>::operator[](int taskid)
-{
+{	
+	if(taskid==-1)
+	{
+		return this->mpCur->pT;
+	}
 	int i=0;
 	for(Node* p=pFirst;p;p=p->pNext,i++)
 	{
