@@ -174,19 +174,6 @@ void TSys::Delay(uint us)
     }
 }
 
-
-
-
-#define delay_ostickspersec 1000			//时钟频率
-static byte fac_us = 0; //us延时倍乘数
-//static uint16_t fac_ms = 0;							//ms延时倍乘数,在ucos下,代表每个节拍的ms数
-
-
-
-TSys Sys; //系统参数
-TTime Time; //系统时间，不建议用户直接使用
-
-
 TSys::TSys(uint clock, COM_Def messagePort)
 {
     this->Clock = clock;
@@ -196,6 +183,41 @@ TSys::TSys(uint clock, COM_Def messagePort)
 void TSys::Show(bool newLine)const{
 
 }
+//系统启动以来的毫秒数，无符号长整型8字节
+UInt64 TSys::Ms()
+{
+    return Time.Current();
+}
+
+//系统绝对UTC时间，整型4字节，Unix格式，1970年以来的总秒数。
+uint TSys::Seconds()
+{
+    return Time.Seconds();
+}
+
+//异步热重启系统。延迟一定毫秒数执行。
+void TSys::Reboot(uint msDelay){}
+//显示系统信息
+void TSys::ShowInfo()
+{
+    printf("STD_Embedded_Team::STD0801 Code:0801 Ver:0.0.6113 Build:2016-01-01\n");
+    printf("STDOS::STM32F103C8 72MHz Flash:%dk RAM:20k\n", this->FlashSize);
+    printf("DevID:0x0414 RevID:0x1309\n");
+    printf("CPUID:0x412fc231 ARM:ARMv7-M Cortex-M3: R1p2\n");
+    printf("Heap :(0x20000720, 0x20010000) = 0xf8e0 (62k)\n");
+    printf("Stack:(0x20001720, 0x20010000) = 0xe8e0 (58k)\n");
+    printf("ChipType:0x42455633 3\n");
+    printf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\n", ID[0], ID[1], ID[2], ID[3], ID[4], ID[5], ID[6], ID[7], ID[8], ID[9], ID[10], ID[11]);
+    printf("Time : 2016-12-28 10:56:32\n");
+    printf("Support: http://www.armku.com\n");
+}
+
+#define delay_ostickspersec 1000			//时钟频率
+static byte fac_us = 0; //us延时倍乘数
+//static uint16_t fac_ms = 0;							//ms延时倍乘数,在ucos下,代表每个节拍的ms数
+
+TSys Sys; //系统参数
+TTime Time; //系统时间，不建议用户直接使用
 
 //初始化
 //初始化延迟函数
@@ -218,36 +240,6 @@ void TSys::Init()
     this->FlashSize = *(ushort*)(0X1FFFF7E0);
 }
 
-//显示系统信息
-void TSys::ShowInfo()
-{
-    printf("STD_Embedded_Team::STD0801 Code:0801 Ver:0.0.6113 Build:2016-01-01\n");
-    printf("STDOS::STM32F103C8 72MHz Flash:%dk RAM:20k\n", this->FlashSize);
-    printf("DevID:0x0414 RevID:0x1309\n");
-    printf("CPUID:0x412fc231 ARM:ARMv7-M Cortex-M3: R1p2\n");
-    printf("Heap :(0x20000720, 0x20010000) = 0xf8e0 (62k)\n");
-    printf("Stack:(0x20001720, 0x20010000) = 0xe8e0 (58k)\n");
-    printf("ChipType:0x42455633 3\n");
-    printf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\n", ID[0], ID[1], ID[2], ID[3], ID[4], ID[5], ID[6], ID[7], ID[8], ID[9], ID[10], ID[11]);
-    printf("Time : 2016-12-28 10:56:32\n");
-    printf("Support: http://www.armku.com\n");
-}
-
-//系统启动以来的毫秒数，无符号长整型8字节
-UInt64 TSys::Ms()
-{
-    return Time.Current();
-}
-
-//系统绝对UTC时间，整型4字节，Unix格式，1970年以来的总秒数。
-uint TSys::Seconds()
-{
-    return Time.Seconds();
-}
-
-//异步热重启系统。延迟一定毫秒数执行。
-void TSys::Reboot(uint msDelay){}
-
 #ifdef __cplusplus
     extern "C"
     {
@@ -255,8 +247,8 @@ void TSys::Reboot(uint msDelay){}
 
     //systick中断服务函数,使用ucos时用到
     void SysTick_Handler(void)
-    {        
-		Time.mCurrent++;
+    {
+        Time.mCurrent++;
     }
 
     //延时nus
