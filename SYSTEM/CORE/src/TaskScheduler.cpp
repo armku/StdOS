@@ -72,7 +72,6 @@ void TaskScheduler::Start()
 
     //Add(ShowTime, NULL, 2000000, 2000000);
     Add(ShowStatus, this, 10000, 30000);
-	Add(ShowStatus, this, 10000, 30000);
 
     debug_printf("%s::准备就绪 开始循环处理%d个任务！\r\n\r\n", Name, Count);
 
@@ -172,8 +171,7 @@ void TaskScheduler::ShowStatus(void *param)
 {
     TaskScheduler *ts = (TaskScheduler*)param;
 
-    int i =  -1;
-
+    int i =  -1;	
     while (ts->_Tasks.MoveNext(i))
     {
         Task *task = ts->_Tasks[i];
@@ -181,7 +179,7 @@ void TaskScheduler::ShowStatus(void *param)
         {
             task->ShowStatus();
         }
-    }
+    }	
 }
 
 Task *TaskScheduler::operator[](int taskid)

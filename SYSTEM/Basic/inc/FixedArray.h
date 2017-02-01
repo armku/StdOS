@@ -89,20 +89,23 @@ template<class T,int length>
 bool FixedArray<T,length>::MoveNext(int pos)
 {
 	if(pos<0)
-	{
-		if(!mpCur)
-		{
-			mpCur=pFirst;
-		}
-		mpCur=mpCur->pNext;
+	{	
 		if(mpCur)
 		{
-			return true;
+			mpCur=mpCur->pNext;
+			if(mpCur)
+			{
+				return true;
+			}
+			else
+			{				
+				return false;
+			}
 		}
 		else
 		{
 			mpCur=pFirst;
-			return false;
+			return true;
 		}
 	}
 	
@@ -120,7 +123,7 @@ bool FixedArray<T,length>::MoveNext(int pos)
 template<class T,int length>
 T* FixedArray<T,length>::operator[](int taskid)
 {	
-	if(taskid==-1)
+	if(taskid<0)
 	{
 		return this->mpCur->pT;
 	}
