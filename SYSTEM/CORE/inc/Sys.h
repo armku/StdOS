@@ -61,6 +61,8 @@ class TSys:public Object
 		TSys(uint clock =72000000,COM_Def messagePort=COM1);
 		void Init();//初始化
 		void Start();//启动系统任务调度，该函数内部为死循环。
+		void Stop();
+		void StartInternal();
 		virtual void Show(bool newLine=false) const;
 		void ShowInfo();//显示系统信息
 		UInt64 Ms();//系统启动以来的毫秒数，无符号长整型8字节
@@ -69,9 +71,9 @@ class TSys:public Object
 		void Sleep(uint ms);//毫秒级睡眠，常用于业务层杂宁等待一定时间
 		void Reboot(uint msDelay);//异步热重启系统。延迟一定毫秒数执行。		
 	
-		uint AddTask(Action func,void* para, uint firstms, int periodms, const char *name = "未命名任务");
-		void SetTask(uint taskid,bool onoff,int delayms=0);//设置任务参数
-		void Remove(uint taskid);//删除任务
+		uint AddTask(Action func, void *param, ulong dueTime, long period, const char *name = "未命名任务");
+		void SetTask(uint taskid, bool enable);//设置任务参数
+		void RemoveTask(uint taskid);//删除任务
 		void TimeTick(); //间隔1ms调用一次
 		void Routin(); //运行  
 	

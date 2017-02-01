@@ -11,6 +11,173 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "TaskScheduler.h"
 #include "SmartIrq.h"
 
+//外部注册函数
+// 任务
+#include "Task.h"
+// 任务类
+TaskScheduler *_Scheduler;
+
+// 创建任务，返回任务编号。priority优先级，dueTime首次调度时间us，period调度间隔us，-1表示仅处理一次
+uint TSys::AddTask(Action func, void *param, ulong dueTime, long period, const char *name)
+{
+    // 屏蔽中断，否则可能有线程冲突
+    SmartIRQ irq;
+
+    if (!_Scheduler)
+    {
+        _Scheduler = new TaskScheduler("系统");
+    }
+
+    return _Scheduler->Add(func, param, dueTime, period, name);
+}
+
+void TSys::RemoveTask(uint taskid)
+{
+    #if 0
+        assert_ptr(_Scheduler);
+    #endif 
+    _Scheduler->Remove(taskid);
+}
+
+void TSys::SetTask(uint taskid, bool enable)
+{
+    Task *task = (*_Scheduler)[taskid];
+    if (task)
+    {
+        task->Enable = enable;
+    }
+}
+
+//启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
+void TSys::Start()
+{
+    if (!_Scheduler)
+    {
+        _Scheduler = new TaskScheduler("系统");
+    }
+    //AddTask(ShowTime, NULL, 2000000, 2000000);    
+    #if 0		
+        if (OnStart)
+        {
+            OnStart();
+        }
+        else
+    #endif 
+    {
+        _Scheduler->Start();
+    }
+}
+
+void TSys::StartInternal()
+{
+    _Scheduler->Start();
+}
+
+void TSys::Stop()
+{
+    _Scheduler->Stop();
+}
+
+#if 0
+    void TimeSleep(uint us)
+    {
+        // 在这段时间里面，去处理一下别的任务
+        if (_Scheduler && (!us || us >= 1000))
+        {
+            // 记录当前正在执行任务
+            Task *task = _Scheduler->Current;
+
+            ulong start = Time.Current();
+            // 1ms一般不够调度新任务，留给硬件等待
+            ulong end = start + us - 1000;
+            // 如果休眠时间足够长，允许多次调度其它任务
+            int cost = 0;
+            while (true)
+            {
+                ulong start2 = Time.Current();
+
+                _Scheduler->Execute(us);
+
+                ulong now = Time.Current();
+                cost += (int)(now - start2);
+
+                // us=0 表示释放一下CPU
+                if (!us)
+                {
+                    return ;
+                }
+
+                if (now >= end)
+                {
+                    break;
+                }
+            }
+
+            if (task)
+            {
+                _Scheduler->Current = task;
+                task->SleepTime += cost;
+            }
+
+            cost = (int)(Time.Current() - start);
+            if (cost > 0)
+            {
+                return ;
+            }
+
+            us -= cost;
+        }
+        if (us)
+        {
+            Time.Sleep(us);
+        }
+    }
+
+    void TSys::Sleep(uint ms)
+    {
+        // 优先使用线程级睡眠
+        if (OnSleep)
+        {
+            OnSleep(ms);
+        }
+        else
+        {
+            if (ms > 1000)
+            {
+                debug_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！", ms);
+            }
+            TimeSleep(ms *1000);
+        }
+    }
+
+    void TSys::Delay(uint us)
+    {
+        // 如果延迟微秒数太大，则使用线程级睡眠
+        if (OnSleep && us >= 2000)
+        {
+            OnSleep((us + 500) / 1000);
+        }
+        else
+        {
+
+            if (us > 1000000)
+            {
+                debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！", us);
+            }
+            TimeSleep(us);
+        }
+    }
+
+#endif 
+
+
+
+
+
+
+
+
+
 #define delay_ostickspersec 1000			//时钟频率
 static byte fac_us = 0; //us延时倍乘数
 //static uint16_t fac_ms = 0;							//ms延时倍乘数,在ucos下,代表每个节拍的ms数
@@ -26,7 +193,6 @@ static byte fac_us = 0; //us延时倍乘数
 
 TSys Sys; //系统参数
 TTime Time; //系统时间，不建议用户直接使用
-TaskScheduler *_Scheduler; //任务调度
 
 
 TSys::TSys(uint clock, COM_Def messagePort)
@@ -60,17 +226,7 @@ void TSys::Init()
     this->FlashSize = *(ushort*)(0X1FFFF7E0);
 }
 
-uint TSys::AddTask(Action func, void *param, uint dueTime, int period, const char *name)
-{
-    // 屏蔽中断，否则可能有线程冲突
-    SmartIRQ irq;
-    if (!_Scheduler)
-    {
-        _Scheduler = new TaskScheduler("系统");
-    }
 
-    return _Scheduler->Add(func, param, dueTime, period,name);
-}
 
 //间隔1ms调用一次
 void TSys::TimeTick()
@@ -78,19 +234,10 @@ void TSys::TimeTick()
     Time.mCurrent++;
 }
 
-//启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
-void TSys::Start()
-{
-    _Scheduler->Start();
-}
+
 
 //运行  
 void TSys::Routin(){
-
-}
-
-//设置任务参数
-void TSys::SetTask(uint taskid, bool onoff, int delayms){
 
 }
 
@@ -138,10 +285,6 @@ void TSys::Sleep(uint ms)
 
 //异步热重启系统。延迟一定毫秒数执行。
 void TSys::Reboot(uint msDelay){}
-//删除任务
-void TSys::Remove(uint taskid){
-
-}
 
 #ifdef __cplusplus
     extern "C"
