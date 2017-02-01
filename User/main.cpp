@@ -121,6 +121,7 @@ void ComTimers(void * param)
 void ShowSysTime(void * param)
 {
     //printf("%lld-%lld-%lld-%lld\n", Sys.Ms(), Time.Ms(),Time.Current(),Time.mCurrent);
+	//led1.Blink(3,200);
 }
 
 int main(void)
@@ -140,12 +141,13 @@ int main(void)
     exti.On();
     exti.RegisterOld(OnKeyPress);
     tc.Show();
-	led1.Blink(50,200);
-    	
+	    	
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
     Sys.AddTask(ledflash, 0, 5, 50, "状态指示灯");
     Sys.AddTask(ShowSysTime, 0, 5, 3000, "系统时间显示");
-
+	
+	
+	
     Sys.Start();
 }
