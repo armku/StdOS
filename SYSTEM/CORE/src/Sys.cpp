@@ -218,14 +218,6 @@ void TSys::Init()
     this->FlashSize = *(ushort*)(0X1FFFF7E0);
 }
 
-
-
-//间隔1ms调用一次
-void TSys::TimeTick()
-{
-    Time.mCurrent++;
-}
-
 //显示系统信息
 void TSys::ShowInfo()
 {
@@ -263,8 +255,8 @@ void TSys::Reboot(uint msDelay){}
 
     //systick中断服务函数,使用ucos时用到
     void SysTick_Handler(void)
-    {
-        Sys.TimeTick();
+    {        
+		Time.mCurrent++;
     }
 
     //延时nus

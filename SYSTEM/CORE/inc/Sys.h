@@ -74,8 +74,7 @@ class TSys:public Object
 		uint AddTask(Action func, void *param, ulong dueTime, long period, const char *name = "未命名任务");
 		void SetTask(uint taskid, bool enable);//设置任务参数
 		void RemoveTask(uint taskid);//删除任务
-		void TimeTick(); //间隔1ms调用一次
-			
+					
 		uint Clock;//系统时钟
 		ulong StartTime;//系统启动时间
 		ushort FlashSize;
