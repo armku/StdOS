@@ -65,15 +65,15 @@ void InputPortOld::InitOld()
 
 /* 中断状态结构体 */
 /* 一共16条中断线，意味着同一条线每一组只能有一个引脚使用中断 */
-typedef struct TIntState
+typedef struct TIntStateOld
 {
     Pin Pin;
-    BtnInCallback Handler;
+    BtnInCallbackOld Handler;
     bool OldValue;
-} IntState;
+} IntStateOld;
 
 // 16条中断线
-static IntState State[16];
+static IntStateOld State[16];
 
 void InputPortOld::Exti0_state(bool onoff)
 //外部中断1初始化  PA0 的使能是使能  ON为使能   OFF为使能
@@ -105,10 +105,10 @@ void InputPortOld::Off()
 }
 
 // 注册回调  及中断使能
-void InputPortOld::RegisterOld(BtnInCallback handler)
+void InputPortOld::RegisterOld(BtnInCallbackOld handler)
 {
     byte pins = this->_Pin &0x0F;
-    IntState *state = &State[pins];
+    IntStateOld *state = &State[pins];
     // 注册中断事件
     if (handler)
     {
@@ -240,9 +240,9 @@ bool InputPortOld::ReadPinPort(Pin pin)
 
 extern "C"
 {   
-    void GPIO_ISR(int num) // 0 <= num <= 15
+    void GPIO_ISROld(int num) // 0 <= num <= 15
     {
-        IntState *state = &State[num];
+        IntStateOld *state = &State[num];
 		
 		// 如果未指定委托，则不处理
         if (!state->Handler)
@@ -266,7 +266,7 @@ extern "C"
         {
 
             EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位	
-			GPIO_ISR(0);
+			GPIO_ISROld(0);
         }
     }
 
@@ -275,7 +275,7 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line1) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line1); //清除中断标志位
-			GPIO_ISR(1);
+			GPIO_ISROld(1);
         } 
     }
 
@@ -284,7 +284,7 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line2) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line2); //清除中断标志位           
-			GPIO_ISR(2);
+			GPIO_ISROld(2);
         }
     }
 
@@ -293,7 +293,7 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line3) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line3); //清除中断标志位
-			GPIO_ISR(3);
+			GPIO_ISROld(3);
         }
     }
 
@@ -302,7 +302,7 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line4) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line4); //清除中断标志位
-			GPIO_ISR(4);
+			GPIO_ISROld(4);
         }
     }
 
@@ -311,27 +311,27 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line5) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line5); //清除中断标志位
-			GPIO_ISR(5);
+			GPIO_ISROld(5);
         }
         if (EXTI_GetITStatus(EXTI_Line6) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line6); //清除中断标志位		
-        	GPIO_ISR(6);
+        	GPIO_ISROld(6);
         }
         if (EXTI_GetITStatus(EXTI_Line7) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line7); //清除中断标志位		
-        	GPIO_ISR(7);
+        	GPIO_ISROld(7);
         }
         if (EXTI_GetITStatus(EXTI_Line8) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line8); //清除中断标志位		
-        	GPIO_ISR(8);
+        	GPIO_ISROld(8);
         }
         if (EXTI_GetITStatus(EXTI_Line9) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line9); //清除中断标志位		
-        	GPIO_ISR(9);
+        	GPIO_ISROld(9);
         }
     }
     /// IO 线中断，中断口为PC13
@@ -340,32 +340,32 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line10) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line10); //清除中断标志位		
-        	GPIO_ISR(10);
+        	GPIO_ISROld(10);
         }
         if (EXTI_GetITStatus(EXTI_Line11) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line11); //清除中断标志位		
-        	GPIO_ISR(11);
+        	GPIO_ISROld(11);
         }
         if (EXTI_GetITStatus(EXTI_Line12) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line12); //清除中断标志位		
-        	GPIO_ISR(12);
+        	GPIO_ISROld(12);
         }
         if (EXTI_GetITStatus(EXTI_Line13) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line13); //清除中断标志位		
-        	GPIO_ISR(13);
+        	GPIO_ISROld(13);
         }
         if (EXTI_GetITStatus(EXTI_Line14) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line14); //清除中断标志位		
-        	GPIO_ISR(14);
+        	GPIO_ISROld(14);
         }
         if (EXTI_GetITStatus(EXTI_Line15) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line15); //清除中断标志位		
-        	GPIO_ISR(15);
+        	GPIO_ISROld(15);
         }
     }
 }

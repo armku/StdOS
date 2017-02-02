@@ -3,7 +3,7 @@
 #include "Sys.h"
 
 //回调函数定义 down指示按下还是弹起触发
-typedef void(*BtnInCallback)(Pin pin, bool down);
+typedef void(*BtnInCallbackOld)(Pin pin, bool down);
 
 class InputPortOld
 {
@@ -16,7 +16,7 @@ class InputPortOld
    
         void On(); //打开中断
         void Off(); //关闭中断		
-        void RegisterOld(BtnInCallback handler); // 注册回调		
+        void RegisterOld(BtnInCallbackOld handler); // 注册回调		
     private:
         void Exti0_state(bool onoff);
         uint eXTI_Line; //中断线
