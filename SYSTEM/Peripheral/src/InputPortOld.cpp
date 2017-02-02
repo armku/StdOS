@@ -73,7 +73,7 @@ typedef struct TIntStateOld
 } IntStateOld;
 
 // 16条中断线
-static IntStateOld State[16];
+static IntStateOld StateOld[16];
 
 void InputPortOld::Exti0_state(bool onoff)
 //外部中断1初始化  PA0 的使能是使能  ON为使能   OFF为使能
@@ -108,7 +108,7 @@ void InputPortOld::Off()
 void InputPortOld::RegisterOld(BtnInCallbackOld handler)
 {
     byte pins = this->_Pin &0x0F;
-    IntStateOld *state = &State[pins];
+    IntStateOld *state = &StateOld[pins];
     // 注册中断事件
     if (handler)
     {
@@ -242,7 +242,7 @@ extern "C"
 {   
     void GPIO_ISROld(int num) // 0 <= num <= 15
     {
-        IntStateOld *state = &State[num];
+        IntStateOld *state = &StateOld[num];
 		
 		// 如果未指定委托，则不处理
         if (!state->Handler)
