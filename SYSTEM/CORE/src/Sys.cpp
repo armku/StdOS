@@ -55,7 +55,7 @@ void TSys::Start()
     {
         _Scheduler = new TaskScheduler("系统");
     }
-    //AddTask(ShowTime, NULL, 2000000, 2000000);    
+    AddTask(ShowTime, NULL, 5000, 5000,"时间显示");    
     #if 0		
         if (OnStart)
         {
@@ -66,6 +66,11 @@ void TSys::Start()
     {
         _Scheduler->Start();
     }
+}
+//显示时间
+void TSys::ShowTime(void * param)
+{
+	debug_printf("Now: %lld:%lld:%lld\n",Time.Current()/3600000,Time.Current()/60000%60,Time.Current()/1000%60);
 }
 
 void TSys::StartInternal()

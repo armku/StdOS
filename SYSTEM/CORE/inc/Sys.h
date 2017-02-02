@@ -83,6 +83,7 @@ class TSys:public Object
 		byte ID[12];
 		
 	private:
+	static	void ShowTime(void * param);//œ‘ æ ±º‰
 			
 	
 };
