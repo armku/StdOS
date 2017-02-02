@@ -85,12 +85,12 @@ template<class T>
 List<T>::~List<T>()
 {
 	Node *p;
-	while(p=pFirst)
+	p=pFirst;
+	while(p)
 	{
-		pFirst=pFirst->pNext;
+		pFirst=p->pNext;
 		delete p->pT;
 		delete p;
+		p=pFirst;
 	}
 }
-
-

@@ -158,10 +158,12 @@ template<class T,int length>
 FixedArray<T,length>::~FixedArray<T,length>()
 {
 	Node *p;
-	while(p=pFirst)
+	p=pFirst;
+	while(p)
 	{
-		pFirst=pFirst->pNext;
+		pFirst=p->pNext;
 		delete p->pT;
 		delete p;
+		p=pFirst;
 	}
 }

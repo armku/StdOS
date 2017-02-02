@@ -25,10 +25,10 @@ SerialPort::SerialPort()
 SerialPort::SerialPort(USART_TypeDef *com, int baudRate, byte parity, byte dataBits, byte stopBits)
 {
     assert_param(com);
-   
+    #if 0
         const USART_TypeDef *const g_Uart_Ports[] = UARTS;
         byte _index = 0xFF;
-	 #if 0
+	
         for (int i = 0; i < ArrayLength(g_Uart_Ports); i++)
         {
             if (g_Uart_Ports[i] == com)

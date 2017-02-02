@@ -64,7 +64,7 @@ class String:public Array
 		String& Concat(double value,byte dot=2);
 		
 		String ToHex();
-		void Show(bool newLine=true) const;
+		virtual void Show(bool newLine=true) const;
 		uint Capacity() const;//数组容量
 	private:
 		void initCapacity();//初始化容器
