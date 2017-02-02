@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "Type.h"
 #include "stm32f10x.h"
-#include "SerialPortOld.h"
+#include "SerialPort.h"
 #include "W24xxx.h"
 #include "W25qxx.h"
 #include "multi_button.h"
@@ -15,6 +15,7 @@
 #include "DateTime.h"
 #include "TimeCost.h"
 #include "List.h"
+#include "FIFORing.h"
 
 void ledflash();
 OutputPort led1(PB0, true);

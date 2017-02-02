@@ -652,11 +652,6 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
             </File>
-            <File>
-              <FileName>SerialPortOld.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SerialPortOld.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1541,11 +1536,6 @@
               <FileName>SerialPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPortOld.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SerialPortOld.cpp</FilePath>
             </File>
           </Files>
         </Group>
