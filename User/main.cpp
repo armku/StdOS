@@ -138,8 +138,8 @@ int main(void)
     tc.Show();
 	    	
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
-    Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
-    Sys.AddTask(ledflash, 0, 5, 50, "状态指示灯");
+    Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
+    Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");
     Sys.AddTask(ShowSysTime, 0, 5, 3000, "系统时间显示");
 			
     Sys.Start();
