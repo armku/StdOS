@@ -17,48 +17,19 @@
 #include "List.h"
 #include "FIFORing.h"
 
-void ledflash();
-OutputPort led1(PB0, true);
-OutputPort led2(PF7, true);
-OutputPort led3(PF8, true);
-//按键 PC13 PA0
-
-InputPortOld exti(PC13); //PA1 PB3     PA0 PC13
-InputPort exti1(PA0);
-
 WatchDog dog(3000);
 void feeddog(void * param)
 {
     dog.Feed();
 }
 
-void OnKeyPress(Pin pin, bool onoff)
-{
-    //led1.Write(onoff);
-    led2 = !led2;
-    printf("中断引脚：%d 值%d \n", pin, onoff);
-}
 
-static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
-{
-    SerialPortOld *sp = (SerialPortOld*)para;
-    debug_printf("%s 收到：[%d]", sp->Name, bs.Length());
-    bs.Show(true);
-    sp->SendBuffer(bs.GetBuffer());
-
-    return 0;
-}
-
-SerialPortOld sp1(COM1);
-SerialPortOld sp2(COM2);
-SerialPortOld sp3(COM3);
 /*
 KEY PA0 
  */
-//系统初始化
-void ComTimers();
-void assert_failed(uint8_t *file, uint32_t line);
-
+OutputPort led1(PB0, true);
+OutputPort led2(PF7, true);
+OutputPort led3(PF8, true);
 void ledflash(void * param)
 {
     //	led1=!led1;
@@ -66,13 +37,25 @@ void ledflash(void * param)
     led3 = !led3;
 }
 
+
+//按键 PC13 PA0
+InputPortOld exti(PC13); //PA1 PB3     PA0 PC13
+InputPort exti1(PA0);
+void OnKeyPress(Pin pin, bool onoff)
+{
+    //led1.Write(onoff);
+    led2 = !led2;
+    printf("中断引脚：%d 值%d \n", pin, onoff);
+}
+
+SerialPortOld sp1(COM1);
+SerialPortOld sp2(COM2);
+SerialPortOld sp3(COM3);
 byte USART_RX_BUF[100]; //接收缓冲,最大USART_REC_LEN个字节.
 extern uint com1timeidle; //串口1空闲时间
 extern CFIFORing com1buf; //串口1接收缓冲区
-
 extern uint com2timeidle; //串口2空闲时间
 extern CFIFORing com2buf; //串口2接收缓冲区
-
 extern uint com3timeidle; //串口3空闲时间
 extern CFIFORing com3buf; //串口3接收缓冲区
 //串口接收通信定时器
@@ -118,6 +101,16 @@ void ComTimers(void * param)
         com3buf.Reset();
     }
 }
+static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
+{
+    SerialPortOld *sp = (SerialPortOld*)para;
+    debug_printf("%s 收到：[%d]", sp->Name, bs.Length());
+    bs.Show(true);
+    sp->SendBuffer(bs.GetBuffer());
+
+    return 0;
+}
+
 
 //显示系统时间
 void ShowSysTime(void * param)
@@ -148,8 +141,6 @@ int main(void)
     Sys.AddTask(feeddog, 0, 0, 10, "看门狗"); //看门狗-喂狗
     Sys.AddTask(ledflash, 0, 5, 50, "状态指示灯");
     Sys.AddTask(ShowSysTime, 0, 5, 3000, "系统时间显示");
-	
-	
-	
+			
     Sys.Start();
 }
