@@ -56,11 +56,10 @@
 #define ADC_CMD_SYSGCAL     0x61            //系统增益校准  
 #define ADC_CMD_SELFOCAL    0x62            //系统自校准  
 #define ADC_CMD_RESTRICTED  0xF1            //  
-CADS1246::CADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, Pin pinrd, Pin pinreset)
+CADS1246::CADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, InputPortOld& pinrd, Pin pinreset)
 {
     this->pspi = new CSoftSpi(pincs, pinsck, pindin, pindout,0);
-    this->ppinrd.Floating=true;
-	this->ppinrd.Set(pinrd);
+	this->ppinrd=&pinrd;
     this->ppinreset.Set(pinreset);
     this->ppinreset=0;
 }
@@ -140,7 +139,7 @@ float CADS1246::Read(void) //返回-1,表示转换未完成
 
     Cmd[0] = ADC_CMD_RDATA;
     this->pspi->portcs=0;
-    if (this->ppinrd.Read() != 0)
+    if (this->ppinrd->Read() != 0)
     {
         return  - 1;
     }
