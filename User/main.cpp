@@ -111,14 +111,6 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
     return 0;
 }
 
-
-//显示系统时间
-void ShowSysTime(void * param)
-{
-    //printf("%lld-%lld-%lld-%lld\n", Sys.Ms(), Time.Ms(),Time.Current(),Time.mCurrent);
-	//led1.Blink(3,200);
-}
-
 int main(void)
 {
     Sys.MessagePort = COM1;
@@ -139,8 +131,7 @@ int main(void)
 	    	
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
-    Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");
-    Sys.AddTask(ShowSysTime, 0, 5, 3000, "系统时间显示");
+    Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");    
 			
     Sys.Start();
 }
