@@ -60,8 +60,8 @@ CADS1246::CADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, InputPortOld&
 {
     this->pspi = new CSoftSpi(pincs, pinsck, pindin, pindout,0);
 	this->ppinrd=&pinrd;
-    this->ppinreset.Set(pinreset);
-    this->ppinreset=0;
+	this->ppinreset=new OutputPort(pinreset);
+    *this->ppinreset=0;
 }
 
 byte CADS1246::ReadReg(byte RegAddr)
@@ -158,9 +158,9 @@ float CADS1246::Read(void) //返回-1,表示转换未完成
 void CADS1246::Init(void)
 {
     this->pspi->portcs=1;
-    this->ppinreset=0;
+    *this->ppinreset=0;
     Sys.Sleep(40);
-    this->ppinreset=1;
+    *this->ppinreset=1;
     Sys.Sleep(20);
     this->pspi->portcs=0;
     this->WriteReg(ADC_REG_ID, 0x08); //DOUT兼容DRDY引脚   0X4A 00 08

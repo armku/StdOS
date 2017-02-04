@@ -15,7 +15,7 @@ class CADS1246
     private:
         CSoftSpi *pspi; //SPI接口
         InputPortOld *ppinrd; //数据准备好接口
-        OutputPort ppinreset; //复位接口
+        OutputPort *ppinreset; //复位接口
     private:
         float decodead(byte *da);
 
