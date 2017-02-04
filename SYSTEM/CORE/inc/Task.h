@@ -1,10 +1,8 @@
 #pragma once
 
-#include "Type.h"
+#include "Delegate.h"
 
 #define NULL 0
-
-typedef void(*Action)(void* param); //回调函数
 
 class TaskScheduler;
 // 任务
