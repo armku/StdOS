@@ -69,7 +69,7 @@ byte CADS1246::ReadReg(byte RegAddr)
     byte ret = 0;
     byte Cmd;
 
-    this->pspi->portcs=0;
+    *this->pspi->pportcs=0;
 
 
     Cmd = ADC_CMD_RREG | RegAddr;
@@ -77,7 +77,7 @@ byte CADS1246::ReadReg(byte RegAddr)
     this->pspi->spi_writebyte(0);
     ret = this->pspi->spi_writebyte(0X00);
     this->pspi->spi_readbyte(); //发送NOP
-    this->pspi->portcs=1;
+    *this->pspi->pportcs=1;
 
     return ret;
 
@@ -86,14 +86,14 @@ byte CADS1246::ReadReg(byte RegAddr)
 void CADS1246::WriteReg(byte RegAddr, byte da)
 {
     byte Cmd;
-    this->pspi->portcs=0;
+    *this->pspi->pportcs=0;
 
     Cmd = ADC_CMD_WREG | RegAddr;
     this->pspi->spi_writebyte(Cmd);
     this->pspi->spi_writebyte(0);
     this->pspi->spi_writebyte(da);
     this->pspi->spi_readbyte(); //发送NOP
-    this->pspi->portcs=1;
+    *this->pspi->pportcs=1;
 }
 
 /*---------------------------------------------------------
@@ -138,35 +138,36 @@ float CADS1246::Read(void) //返回-1,表示转换未完成
     float Ret = 0;
 
     Cmd[0] = ADC_CMD_RDATA;
-    this->pspi->portcs=0;
-    if (this->ppinrd->Read() != 0)
+    *this->pspi->pportcs=0;
+
+    if (this->ppinrd->Read())
     {
         return  - 1;
-    }
-
-    this->pspi->spi_writebyte(Cmd[0]);
+    }	
+    this->pspi->spi_writebyte(Cmd[0]);	
     Cmd[0] = this->pspi->spi_readbyte();
     Cmd[1] = this->pspi->spi_readbyte();
     Cmd[2] = this->pspi->spi_readbyte();
-    this->pspi->spi_readbyte(); //发送NOP
-    this->pspi->portcs=1;
+    this->pspi->spi_readbyte(); //发送NOP	
+    *this->pspi->pportcs=1;
 
     Ret = decodead(Cmd);
+
     return Ret;
 }
 
 void CADS1246::Init(void)
 {
-    this->pspi->portcs=1;
+    *this->pspi->pportcs=1;
     *this->ppinreset=0;
     Sys.Sleep(40);
     *this->ppinreset=1;
     Sys.Sleep(20);
-    this->pspi->portcs=0;
+    *this->pspi->pportcs=0;
     this->WriteReg(ADC_REG_ID, 0x08); //DOUT兼容DRDY引脚   0X4A 00 08
     Sys.Sleep(40);
     this->WriteReg(ADC_REG_SYS0, ADC_SPS_20 | ADC_GAIN_1); //调整采样速度
-    this->pspi->portcs=1;
+    *this->pspi->pportcs=1;
 
 
     //打开中断，转换完成中断

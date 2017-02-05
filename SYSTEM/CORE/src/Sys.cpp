@@ -87,7 +87,7 @@ void TSys::Stop()
 void TimeSleep(uint us)
 {
     // 在这段时间里面，去处理一下别的任务
-    if (_Scheduler && (!us || us >= 1000))
+    if (_Scheduler && (us >= 1000))
     {
         // 记录当前正在执行任务
         Task *task = _Scheduler->Current;

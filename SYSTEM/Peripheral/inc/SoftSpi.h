@@ -12,10 +12,10 @@ public:
     byte spi_writebyte(byte da);
     byte spi_readbyte(void);
 public:
-    OutputPort portsck;
-    OutputPort portdi;
-    InputPort portdo;
-    OutputPort portcs;
+    OutputPort *pportsck;
+    OutputPort *pportdi;
+    InputPort *pportdo;
+    OutputPort *pportcs;
 private:
     uint delayus;//—” ± ±º‰
 };

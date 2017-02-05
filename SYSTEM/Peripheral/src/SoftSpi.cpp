@@ -3,16 +3,12 @@
 
 CSoftSpi::CSoftSpi(Pin pincs, Pin pinsck, Pin pindi, Pin pindo, uint nus)
 {
-    this->portcs.Set(pincs);
-    this->portsck.Set(pinsck);
-    this->portdi.Set(pindi);
-    this->portdo.Set(pindo);
-
-    //this->portdo->SetModeIN_FLOATING();
-
+    this->pportcs=new OutputPort(pincs);
+    this->pportsck=new OutputPort(pinsck);
+    this->pportdi=new OutputPort(pindi);
+    this->pportdo=new InputPort(pindo,true);
     this->delayus = nus;
 }
-
 
 byte CSoftSpi::Init()
 {
@@ -24,16 +20,16 @@ byte CSoftSpi::Init()
 byte CSoftSpi::WaitBusy()
 {
     ushort i;
-    this->portcs=0;
+    *this->pportcs=0;
     i = 0;
-    while (this->portdo.Read() > 0)
+    while (this->pportdo->Read() > 0)
     {
         Sys.Sleep(10);
         i++;
         if (i > 200)
             return 1;
     }
-    this->portcs=1;
+    *this->pportcs=1;
     return 0;
 }
 
@@ -46,18 +42,18 @@ byte CSoftSpi::spi_writebyte(byte da)
     {
         if (da & (1 << (8 - i - 1)))
         {
-            this->portdi=1;
+            *this->pportdi=1;
         }
         else
         {
-            this->portdi=0;
+            *this->pportdi=0;
         }
 		Sys.Delay(this->delayus);
-        this->portsck=1;
+        *this->pportsck=1;
         Sys.Delay(this->delayus);
-        this->portsck=0;
+        *this->pportsck=0;
         ret <<= 1;
-        if (this->portdo.Read())
+        if (this->pportdo->Read())
         {
             ret |= 1;
         }
