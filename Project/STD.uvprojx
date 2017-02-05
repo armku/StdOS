@@ -613,11 +613,6 @@
               <FilePath>..\SYSTEM\Peripheral\src\SoftI2C.cpp</FilePath>
             </File>
             <File>
-              <FileName>multi_button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\multi_button.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Pwm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\Pwm.cpp</FilePath>
@@ -686,6 +681,11 @@
               <FileName>ST7565R.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Devices\src\ST7565R.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>multi_button.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\multi_button.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1498,11 +1498,6 @@
               <FilePath>..\SYSTEM\Peripheral\src\SoftI2C.cpp</FilePath>
             </File>
             <File>
-              <FileName>multi_button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\multi_button.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Pwm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\Pwm.cpp</FilePath>
@@ -1571,6 +1566,11 @@
               <FileName>ST7565R.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Devices\src\ST7565R.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>multi_button.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\multi_button.cpp</FilePath>
             </File>
           </Files>
         </Group>
