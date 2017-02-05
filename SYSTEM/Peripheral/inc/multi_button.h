@@ -9,8 +9,6 @@
 #define SHORT_TICKS       (300 /TICKS_INTERVAL) //短按键延时时间
 #define LONG_TICKS        (1000 /TICKS_INTERVAL)//长按键延时时间
 
-typedef void(*BtnCallback)(void*); //回调函数定义
-
 typedef enum
 {
     PRESS_DOWN = 0, PRESS_UP, PRESS_REPEAT, SINGLE_CLICK, DOUBLE_CLICK, LONG_RRESS_START, LONG_PRESS_HOLD, number_of_event, NONE_PRESS
@@ -20,7 +18,7 @@ class CButton
 {
     public:
         CButton(Pin pin, byte active_level = 0,byte DownBit=0);         
-        void attach(PressEvent event, BtnCallback cb);
+        void attach(PressEvent event, Action action);
         void ticks();
         PressEvent get_button_event(); //获取当前按键状态
     private:
@@ -34,7 +32,7 @@ class CButton
                 byte debounce_cnt: 3; //双击次数
                 byte active_level: 1; //按键按下的电平
                 byte button_level: 1; //按键松开的电平
-                BtnCallback cb[number_of_event]; //回调函数
+                Action actions[number_of_event]; //回调函数
                 //struct Button *next;
         } btn;
 		byte downBit;//键按下时的状态，高低电平，1高电平，0低电平

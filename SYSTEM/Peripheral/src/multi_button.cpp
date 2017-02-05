@@ -20,9 +20,9 @@ CButton::CButton(Pin pin, byte active_level,byte DownBit)
 	this->downBit=DownBit;
 }
 
-void CButton::attach(PressEvent event, BtnCallback cb)
+void CButton::attach(PressEvent event, Action action)
 {
-    this->btn.cb[event] = cb;
+    this->btn.actions[event] = action;
 }
 //读取是否有键按下。
 byte CButton::hal_button_Level(void)
@@ -70,9 +70,9 @@ void CButton::ticks()
             {
                 //start press down
                 this->btn.event = (byte)PRESS_DOWN;
-                if (this->btn.cb[PRESS_DOWN])
+                if (this->btn.actions[PRESS_DOWN])
                 {
-                    this->btn.cb[PRESS_DOWN]((Button*)(&(this->btn)));
+                    this->btn.actions[PRESS_DOWN]((Button*)(&(this->btn)));
                 }
                 this->btn.ticks = 0;
                 this->btn.repeat = 1;
@@ -89,9 +89,9 @@ void CButton::ticks()
             {
                 //released press up
                 this->btn.event = (byte)PRESS_UP;
-                if (this->btn.cb[PRESS_UP])
+                if (this->btn.actions[PRESS_UP])
                 {
-                    this->btn.cb[PRESS_UP]((Button*)(&(this->btn)));
+                    this->btn.actions[PRESS_UP]((Button*)(&(this->btn)));
                 }
                 this->btn.ticks = 0;
                 this->btn.state = 2;
@@ -100,9 +100,9 @@ void CButton::ticks()
             else if (this->btn.ticks > LONG_TICKS)
             {
                 this->btn.event = (byte)LONG_RRESS_START;
-                if (this->btn.cb[LONG_RRESS_START])
+                if (this->btn.actions[LONG_RRESS_START])
                 {
-                    this->btn.cb[LONG_RRESS_START]((Button*)(&(this->btn)));
+                    this->btn.actions[LONG_RRESS_START]((Button*)(&(this->btn)));
                 }
                 this->btn.state = 5;
             }
@@ -113,22 +113,22 @@ void CButton::ticks()
             {
                 //press down again
                 this->btn.event = (byte)PRESS_DOWN;
-                if (this->btn.cb[PRESS_DOWN])
+                if (this->btn.actions[PRESS_DOWN])
                 {
-                    this->btn.cb[PRESS_DOWN]((Button*)(&(this->btn)));
+                    this->btn.actions[PRESS_DOWN]((Button*)(&(this->btn)));
                 }
                 this->btn.repeat++;
                 if (this->btn.repeat == 2)
                 {
-                    if (this->btn.cb[DOUBLE_CLICK])
+                    if (this->btn.actions[DOUBLE_CLICK])
                     {
-                        this->btn.cb[DOUBLE_CLICK]((Button*)(&(this->btn)));
+                        this->btn.actions[DOUBLE_CLICK]((Button*)(&(this->btn)));
                     }
 
                 }
-                if (this->btn.cb[PRESS_REPEAT])
+                if (this->btn.actions[PRESS_REPEAT])
                 {
-                    this->btn.cb[PRESS_REPEAT]((Button*)(&(this->btn)));
+                    this->btn.actions[PRESS_REPEAT]((Button*)(&(this->btn)));
                 }
                 this->btn.ticks = 0;
                 this->btn.state = 3;
@@ -139,9 +139,9 @@ void CButton::ticks()
                 if (this->btn.repeat == 1)
                 {
                     this->btn.event = (byte)SINGLE_CLICK;
-                    if (this->btn.cb[SINGLE_CLICK])
+                    if (this->btn.actions[SINGLE_CLICK])
                     {
-                        this->btn.cb[SINGLE_CLICK]((Button*)(&(this->btn)));
+                        this->btn.actions[SINGLE_CLICK]((Button*)(&(this->btn)));
                     }                    
                 }
                 else if (this->btn.repeat == 2)
@@ -157,9 +157,9 @@ void CButton::ticks()
             {
                 //released press up
                 this->btn.event = (byte)PRESS_UP;
-                if (this->btn.cb[PRESS_UP])
+                if (this->btn.actions[PRESS_UP])
                 {
-                    this->btn.cb[PRESS_UP]((Button*)(&(this->btn)));
+                    this->btn.actions[PRESS_UP]((Button*)(&(this->btn)));
                 }
                 if (this->btn.ticks < SHORT_TICKS)
                 {
@@ -178,9 +178,9 @@ void CButton::ticks()
             {
                 //continue hold trigger
                 this->btn.event = (byte)LONG_PRESS_HOLD;
-                if (this->btn.cb[LONG_PRESS_HOLD])
+                if (this->btn.actions[LONG_PRESS_HOLD])
                 {
-                    this->btn.cb[LONG_PRESS_HOLD]((Button*)(&(this->btn)));
+                    this->btn.actions[LONG_PRESS_HOLD]((Button*)(&(this->btn)));
                 }
 
             }
@@ -188,9 +188,9 @@ void CButton::ticks()
             {
                 //releasd
                 this->btn.event = (byte)PRESS_UP;
-                if (this->btn.cb[PRESS_UP])
+                if (this->btn.actions[PRESS_UP])
                 {
-                    this->btn.cb[PRESS_UP]((Button*)(&(this->btn)));
+                    this->btn.actions[PRESS_UP]((Button*)(&(this->btn)));
                 }
                 this->btn.state = 0; //reset
             }
