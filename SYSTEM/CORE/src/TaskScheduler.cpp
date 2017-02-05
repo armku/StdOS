@@ -38,7 +38,8 @@ uint TaskScheduler::Add(Action func, void *param, ulong dueTime, long period, co
     this->Count++;
     _Tasks.Add(task);
     // 输出长整型%ld，无符号长整型%llu
-    debug_printf("%s添加任务%d %s 0x%08x FirstTime=%llums Period=%ldms\r\n", Name,task->ID, task->Name, func, dueTime, period);
+    //debug_printf("%s添加任务%d 0x%08x FirstTime=%llums Period=%ldms\r\n", Name,task->ID, func, dueTime, period);
+	debug_printf("%s添加任务%d %s FirstTime=%llums Period=%ldms\r\n", Name,task->ID, task->Name, dueTime, period);
 
     return task->ID;
 }
@@ -69,8 +70,8 @@ void TaskScheduler::Start()
         return ;
     }
 
-    //Add(ShowTime, NULL, 2000000, 2000000);
-    Add(ShowStatus, this, 10000, 30000,"任务显示");
+    Add(ShowTime, NULL, 2000, 2000,"时间显示");
+    //Add(ShowStatus, this, 2000, 2000,"任务显示");
 
     debug_printf("%s::准备就绪 开始循环处理%d个任务！\r\n\r\n", Name, Count);
 
@@ -163,7 +164,11 @@ void TaskScheduler::Execute(uint usMax)
         Time.Sleep(min);
     }
 }
-
+//显示时间
+void TaskScheduler::ShowTime(void * param)
+{
+	debug_printf("Time: %02lld:%02lld:%02lld\n",Time.Current()/3600000,Time.Current()/60000%60,Time.Current()/1000%60);
+}
 // 显示状态
 void TaskScheduler::ShowStatus(void *param)
 {

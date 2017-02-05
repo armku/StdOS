@@ -83,9 +83,7 @@ class TSys:public Object
 		byte ID[12];
 		
 	private:
-	static	void ShowTime(void * param);//显示时间
-			
-	
+		
 };
 extern TSys Sys;//系统参数
 extern TTime Time; //系统时间，不建议用户直接使用

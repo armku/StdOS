@@ -30,10 +30,11 @@ class TaskScheduler
 
         void Start();
         void Stop();
-        // 执行一次循环。指定最大可用时间
+	// 执行一次循环。指定最大可用时间
         void Execute(uint usMax);
-
+		Task *operator[](int taskid);
+	private:        
+		static	void ShowTime(void * param);//显示时间
         static void ShowStatus(void *param); // 显示状态
-
-        Task *operator[](int taskid);
+        
 };
