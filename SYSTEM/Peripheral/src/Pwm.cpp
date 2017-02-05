@@ -275,6 +275,54 @@ void PWM::Init()
             /* TIM4 enable counter */
             TIM_Cmd(TIM4, ENABLE); //使能定时器4
             break;
+		case PE9:
+			//TIM1-CH1 remap
+			break;
+		case PE11:
+			//TIM1-CH2 remap
+			break;
+		case PE13:
+			//TIM1-CH3 remap
+			break;
+		case PE14:
+			//TIM1-CH4 remap
+			break;
+		case PA15:
+			//TIM2-CH1 remap
+			break;
+		case PB3:
+			//TIM2-CH2 remap
+			break;
+		case PB10:
+			//TIM2-CH3 remap
+			break;
+		case PB11:
+			//TIM2-CH4 remap
+			break;
+		case PC6:
+			//TIM3-CH1 remap
+			break;
+		case PC7:
+			//TIM3-CH2 remap
+			break;
+		case PC8:
+			//TIM3-CH3 remap
+			break;
+		case PC9:
+			//TIM3-CH4 remap
+			break;
+		case PD12:
+			//TIM4-CH1 remap
+			break;
+		case PD13:
+			//TIM4-CH2 remap
+			break;
+		case PD14:
+			//TIM4-CH3 remap
+			break;
+		case PD15:
+			//TIM4-CH4 remap
+			break;
 		default:
             break;
     }
