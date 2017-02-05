@@ -22,20 +22,21 @@ class CButton
         void ticks();
         PressEvent get_button_event(); //获取当前按键状态
     private:
-        InputPort pPin;    
+		byte hal_button_Level(void); //读取是否有键按下。
+	
         struct Button
         {
-                ushort ticks;
+                Action actions[number_of_event]; //回调函数
+				ushort ticks;
                 byte repeat: 4;
                 byte event: 4; //当前状态
                 byte state: 3; //当前按键状态
                 byte debounce_cnt: 3; //双击次数
                 byte active_level: 1; //按键按下的电平
-                byte button_level: 1; //按键松开的电平
-                Action actions[number_of_event]; //回调函数
+                byte button_level: 1; //按键松开的电平                
                 //struct Button *next;
         } btn;
-		byte downBit;//键按下时的状态，高低电平，1高电平，0低电平
-		byte hal_button_Level(void); //读取是否有键按下。
+		InputPort pPin;    
+        byte downBit;//键按下时的状态，高低电平，1高电平，0低电平		
 };
 

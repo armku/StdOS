@@ -15,8 +15,8 @@ class CW25Qxxx
         void PowerDown(void);
         void SectorErase(uint32_t SectorAddr);
         void BufferWrite(byte *pBuffer, uint32_t WriteAddr, ushort NumByteToWrite);
-        void BufferRead(byte *pBuffer, uint32_t ReadAddr, ushort NumByteToRead);
-    private:
+        void BufferRead(byte *pBuffer, uint32_t ReadAddr, ushort NumByteToRead);    
+	private:
         void WAKEUP(void);
         void WaitForWriteEnd(void);
         void WriteEnable(void);               

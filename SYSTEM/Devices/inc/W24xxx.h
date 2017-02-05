@@ -20,16 +20,18 @@ class CW24xxx
         byte WriteBytes(byte *_pWriteBuf, ushort bufpos, ushort _usAddress, uint _usSize);
         byte ReadByte(ushort address);
         byte WriteByte(ushort address, byte da);
+		
 		OutputPort *pinWP;//保护引脚
     private:
         byte checkDevice();
-        EW24XXType deviceType; //器件类型
-        byte devAddr; //设备地址
-        uint pageSize; //存储页大小
-        CSoftI2C *pi2c;
-        uint writedelaynms; //写延时	    
-        ushort jsPageSize(uint type); //计算存储页大小
+		ushort jsPageSize(uint type); //计算存储页大小
         byte writePage(byte *buf, ushort bufpos, ushort addr, uint len); //页内写
         byte readPage(byte *buf, ushort bufpos, ushort addr, uint len); //页内读
         byte bufwr(byte *buf, ushort bufpos, ushort addr, uint len, byte wr); //读写集中操作1写 0读
+		
+		CSoftI2C *pi2c;
+        EW24XXType deviceType; //器件类型
+        uint pageSize; //存储页大小
+        uint writedelaynms; //写延时	    
+        byte devAddr; //设备地址        
 };

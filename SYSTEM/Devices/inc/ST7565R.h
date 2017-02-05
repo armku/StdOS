@@ -12,7 +12,7 @@ class CLcd
     public:
         CLcd(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs);
 		CLcd();    
-        //直接操作屏幕
+        
         void Init(); //初始化
         void Cls(ushort x0 = 0, ushort y0 = 0, ushort width = 128, ushort height = 64); //清理指定位置
         void Test(byte data1, byte data2);
@@ -29,6 +29,8 @@ class CLcd
 		void Display16x32(ushort x, ushort y, byte *dp);
 		void Display32x32(ushort x, ushort y, byte *dp);
         void Flush(); //显示缓冲区刷新到屏        
+		void ShadowReset();//阴影部分复位
+		void ShadowOn(ushort x,ushort y,ushort width,ushort height,byte id=0);//阴影启用，默认启用通道0
 		struct
 		{
 			ushort x;
@@ -37,15 +39,14 @@ class CLcd
 			ushort height;
 			bool enable;
 		}ShadowRect[3];//3组阴影区域，实现特定动作。
-		void ShadowReset();//阴影部分复位
-		void ShadowOn(ushort x,ushort y,ushort width,ushort height,byte id=0);//阴影启用，默认启用通道0
+		
     protected:
-        byte Interface_Table[8][128]; //显示缓冲区
-		ushort readPoint(ushort x,ushort y);//读取颜色
         void writeData(byte data1);
         void writeCMD(byte data1);
         void SetAddress(byte page, byte column); //写入地址 页 列    
 		bool inShadow(ushort x,ushort y);//是否在阴影区域
+		ushort readPoint(ushort x,ushort y);//读取颜色
+		byte Interface_Table[8][128]; //显示缓冲区		        
     private:
         OutputPort pPinRS;
         OutputPort pPinsclk;
