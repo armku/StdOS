@@ -15,7 +15,6 @@
 #include "TimeCost.h"
 #include "List.h"
 #include "FIFORing.h"
-#include "PWM.h"
 
 WatchDog dog(3000);
 void feeddog(void * param)
@@ -110,8 +109,6 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 
     return 0;
 }
-PWM pwm1(PA0);
-PWM pwm2(PC7);
 
 int main(void)
 {
@@ -130,8 +127,7 @@ int main(void)
     exti.On();
     exti.RegisterOld(OnKeyPress);
     tc.Show();
-	pwm1.Init();
-	pwm2.Init();
+	
 	    	
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
