@@ -304,6 +304,24 @@ void PWM::Init()
 			break;
 		case PC7:
 			//TIM3-CH2 remap
+			RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+
+            /* PWM信号电平跳变值 */
+            //u16 CCR1_Val = 500;        
+            /* Time base configuration */
+            TIM_TimeBaseStructure.TIM_Period = this->freq; //999;       //当定时器从0计数到999，即为1000次，为一个定时周期
+            TIM_TimeBaseStructure.TIM_Prescaler = 0; //设置预分频：不预分频，即为72MHz
+            TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1; //设置时钟分频系数：不分频(这里用不到)
+            TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; //向上计数模式
+            TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
+
+            /* PWM1 Mode configuration: Channel2 */
+            TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
+            TIM_OCInitStructure.TIM_Pulse = this->duty; //设置通道2的电平跳变值，输出另外一个占空比的PWM
+            TIM_OC2Init(TIM3, &TIM_OCInitStructure); //使能通道2
+            TIM_OC2PreloadConfig(TIM3, TIM_OCPreload_Enable);
+            /* TIM3 enable counter */
+            TIM_Cmd(TIM3, ENABLE); //使能定时器3	
 			break;
 		case PC8:
 			//TIM3-CH3 remap
@@ -382,6 +400,66 @@ void PWM::SetOut(ushort pwmValue)
 		case PB9:
 			TIM3->CCR4=this->duty;
             break;
+		case PE9:
+			//TIM1-CH1 remap
+			break;
+		case PE11:
+			//TIM1-CH2 remap
+			break;
+		case PE13:
+			//TIM1-CH3 remap
+			break;
+		case PE14:
+			//TIM1-CH4 remap
+			break;
+		case PA15:
+			//TIM2-CH1 remap
+			TIM2->CCR1=this->duty;
+			break;
+		case PB3:
+			//TIM2-CH2 remap
+			TIM2->CCR2=this->duty;
+			break;
+		case PB10:
+			//TIM2-CH3 remap
+			TIM2->CCR3=this->duty;
+			break;
+		case PB11:
+			//TIM2-CH4 remap
+			TIM2->CCR4=this->duty;
+			break;
+		case PC6:
+			//TIM3-CH1 remap
+			TIM3->CCR1=this->duty;
+			break;
+		case PC7:
+			//TIM3-CH2 remap			
+			TIM3->CCR2=this->duty;
+			break;
+		case PC8:
+			//TIM3-CH3 remap
+			TIM3->CCR3=this->duty;
+			break;
+		case PC9:
+			//TIM3-CH4 remap
+			TIM3->CCR4=this->duty;
+			break;
+		case PD12:
+			//TIM4-CH1 remap
+			TIM4->CCR1=this->duty;
+			break;
+		case PD13:
+			//TIM4-CH2 remap
+			TIM4->CCR2=this->duty;
+			break;
+		case PD14:
+			//TIM4-CH3 remap
+			TIM4->CCR3=this->duty;
+			break;
+		case PD15:
+			//TIM4-CH4 remap
+			TIM4->CCR4=this->duty;
+			break;
 		default:
             break;
     }
