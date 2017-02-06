@@ -105,9 +105,16 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
     SerialPortOld *sp = (SerialPortOld*)para;
     debug_printf("%s 收到：[%d]", sp->Name, bs.Length());
     bs.Show(true);
-    sp->SendBuffer(bs.GetBuffer());
-
+	bs.Show(false);
+    //sp->SendBuffer(bs.GetBuffer());
+	
     return 0;
+}
+
+void com485Test(void * param)
+{
+	String bf="Hello world";
+	sp2.SendBuffer(bf.GetBuffer());
 }
 
 int main(void)
@@ -121,6 +128,9 @@ int main(void)
     sp1.Open();
     sp2.Open();
     sp3.Open();
+	
+	OutputPort rs485(PB5);
+	sp2.RS485=&rs485;
 
     TimeCost tc;
     exti.InitOld();
@@ -131,7 +141,8 @@ int main(void)
 	    	
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
-    Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");    
+    Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");  
+	Sys.AddTask(com485Test, 0, 5, 2000, "485测试");  
 			
     Sys.Start();
 }
