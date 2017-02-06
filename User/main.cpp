@@ -15,6 +15,12 @@
 #include "TimeCost.h"
 #include "List.h"
 #include "FIFORing.h"
+#include "bsp_rtc.h"
+
+// N = 2^32/365/24/60/60 = 136 年
+
+/*时间结构体*/
+struct rtc_time systmtime;
 
 WatchDog dog(3000);
 void feeddog(void * param)
@@ -113,6 +119,11 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 }
 
 OutputPort rs485(PC2);
+
+void TimeDisplay(void * param)
+{
+	Time_Display( RTC_GetCounter(),&systmtime);
+}
 int main(void)
 {
     Sys.MessagePort = COM1;
@@ -134,10 +145,16 @@ int main(void)
     exti.RegisterOld(OnKeyPress);
     tc.Show();
 	
+		/* 配置RTC秒中断优先级 */
+	  RTC_NVIC_Config();
+	  RTC_CheckAndConfig(&systmtime);
+	
+	  	
 	    	
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
     Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");   
+	Sys.AddTask(TimeDisplay, 0, 5, 1000, "时钟显示"); 
 			
     Sys.Start();
 }
