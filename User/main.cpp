@@ -116,7 +116,7 @@ void com485Test(void * param)
 	String bf="Hello world";
 	sp2.SendBuffer(bf.GetBuffer());
 }
-
+OutputPort rs485(PC2);
 int main(void)
 {
     Sys.MessagePort = COM1;
@@ -128,9 +128,9 @@ int main(void)
     sp1.Open();
     sp2.Open();
     sp3.Open();
-	
-	OutputPort rs485(PB5);
+		
 	sp2.RS485=&rs485;
+	rs485=0;
 
     TimeCost tc;
     exti.InitOld();
