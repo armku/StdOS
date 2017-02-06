@@ -4,7 +4,7 @@
 #include "InputPort.h"
 
 //According to your need to modify the constants.
-#define TICKS_INTERVAL    5	//ms //按键时间间隔
+#define TICKS_INTERVAL    3	//ms //按键时间间隔
 #define DEBOUNCE_TICKS    3	//MAX 8 双击次数
 #define SHORT_TICKS       (300 /TICKS_INTERVAL) //短按键延时时间
 #define LONG_TICKS        (1000 /TICKS_INTERVAL)//长按键延时时间
