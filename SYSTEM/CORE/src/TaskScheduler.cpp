@@ -38,8 +38,8 @@ uint TaskScheduler::Add(Action func, void *param, ulong dueTime, long period, co
     this->Count++;
     _Tasks.Add(task);
     // 输出长整型%ld，无符号长整型%llu
-    //debug_printf("%s添加任务%d 0x%08x FirstTime=%llums Period=%ldms\r\n", Name,task->ID, func, dueTime, period);
-	debug_printf("%s添加任务%d %s FirstTime=%llums Period=%ldms\r\n", Name,task->ID, task->Name, dueTime, period);
+    //debug_printf("%s::添加任务%d 0x%08x FirstTime=%llums Period=%ldms\r\n", Name,task->ID, func, dueTime, period);
+	debug_printf("%s::添加%d %s FirstTime=%llums Period=%ldms\r\n", Name,task->ID, task->Name, dueTime, period);
 
     return task->ID;
 }

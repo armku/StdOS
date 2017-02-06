@@ -25,7 +25,7 @@ uint TSys::AddTask(Action func, void *param, ulong dueTime, long period, const c
 
     if (!_Scheduler)
     {
-        _Scheduler = new TaskScheduler("ϵͳ");
+        _Scheduler = new TaskScheduler("Sys");
     }
 
     return _Scheduler->Add(func, param, dueTime, period, name);
