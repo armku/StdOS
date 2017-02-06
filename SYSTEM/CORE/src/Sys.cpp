@@ -53,7 +53,7 @@ void TSys::Start()
 {
     if (!_Scheduler)
     {
-        _Scheduler = new TaskScheduler("ϵͳ");
+        _Scheduler = new TaskScheduler("Sys");
     }
    
     #if 0		
