@@ -111,11 +111,6 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
     return 0;
 }
 
-void com485Test(void * param)
-{
-	String bf="Hello world";
-	sp2.SendBuffer(bf.GetBuffer());
-}
 OutputPort rs485(PC2);
 int main(void)
 {
@@ -141,8 +136,7 @@ int main(void)
 	    	
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
-    Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");  
-	Sys.AddTask(com485Test, 0, 5, 2000, "485测试");  
+    Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");   
 			
     Sys.Start();
 }
