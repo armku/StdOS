@@ -106,7 +106,8 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
     debug_printf("%s ÊÕµ½£º[%d]", sp->Name, bs.Length());
     bs.Show(true);
 	bs.Show(false);
-    //sp->SendBuffer(bs.GetBuffer());
+	String str="Hello master";
+    sp->SendBuffer(str.GetBuffer());
 	
     return 0;
 }
