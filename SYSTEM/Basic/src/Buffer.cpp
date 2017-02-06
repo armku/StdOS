@@ -89,7 +89,8 @@ void Buffer::Show(bool newLine) const
 	{
 		printf("%s",this->pbuf);
 	}
-	Object::Show(newLine);
+	//Object::Show(newLine);
+	Object::Show(true);
 }
 //把数据复制到目标缓冲区，默认-1长度表示当前长度
 void Buffer::CopyTo(int destIndex, const void *dest, int len)
