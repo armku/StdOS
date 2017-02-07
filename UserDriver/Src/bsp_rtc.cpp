@@ -209,85 +209,12 @@ static uint8_t USART_Scanf(uint32_t value)
  */
 void Time_Regulate(struct rtc_time *tm)
 {
-	  u32 Tmp_YY = 0xFF, Tmp_MM = 0xFF, Tmp_DD = 0xFF, Tmp_HH = 0xFF, Tmp_MI = 0xFF, Tmp_SS = 0xFF;
-	
-	  printf("\r\n=========================Time Settings==================");
-	
-	  printf("\r\n  请输入年份(Please Set Years):  20");
-
-	  while (Tmp_YY == 0xFF)
-	  {
-	    Tmp_YY = USART_Scanf(99);
-	  }
-
-	  printf("\n\r  年份被设置为:  20%0.2d\n\r", Tmp_YY);
-
-	  tm->tm_year = Tmp_YY+2000;
-	
-	  Tmp_MM = 0xFF;
-
-	  printf("\r\n  请输入月份(Please Set Months):  ");
-
-	  while (Tmp_MM == 0xFF)
-	  {
-	    Tmp_MM = USART_Scanf(12);
-	  }
-
-	  printf("\n\r  月份被设置为:  %d\n\r", Tmp_MM);
-
-	  tm->tm_mon= Tmp_MM;
-	
-	  Tmp_DD = 0xFF;
-
-	  printf("\r\n  请输入日期(Please Set Dates):  ");
-
-	  while (Tmp_DD == 0xFF)
-	  {
-	    Tmp_DD = USART_Scanf(31);
-	  }
-
-	  printf("\n\r  日期被设置为:  %d\n\r", Tmp_DD);
-
-	  tm->tm_mday= Tmp_DD;
-	
-	  Tmp_HH  = 0xFF;
-
-	  printf("\r\n  请输入时钟(Please Set Hours):  ");
-
-	  while (Tmp_HH == 0xFF)
-	  {
-	    Tmp_HH = USART_Scanf(23);
-	  }
-
-	  printf("\n\r  时钟被设置为:  %d\n\r", Tmp_HH );
-
-	  tm->tm_hour= Tmp_HH;
-	    
-	  Tmp_MI = 0xFF;
-
-	  printf("\r\n  请输入分钟(Please Set Minutes):  ");
-
-	  while (Tmp_MI == 0xFF)
-	  {
-	    Tmp_MI = USART_Scanf(59);
-	  }
-
-	  printf("\n\r  分钟被设置为:  %d\n\r", Tmp_MI);
-
-	  tm->tm_min= Tmp_MI;
-	  
-	  Tmp_SS = 0xFF;
-
-	  printf("\r\n  请输入秒钟(Please Set Seconds):  ");
-
-	  while (Tmp_SS == 0xFF)
-	  {
-	    Tmp_SS = USART_Scanf(59);
-	  }
-
-	  printf("\n\r  秒钟被设置为:  %d\n\r", Tmp_SS);
-
-	  tm->tm_sec= Tmp_SS;
+	  tm->tm_year=2017;
+	  tm->tm_mon=2;
+	  tm->tm_mday=7;
+	  tm->tm_hour=9;
+	  tm->tm_min=5;
+	  tm->tm_sec=5;
 }
 
 /*
