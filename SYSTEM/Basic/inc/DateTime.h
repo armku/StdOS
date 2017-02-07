@@ -34,7 +34,7 @@ class DateTime:public Object
         //获取星期
         byte DayOfWeek()const;
         //取时间日期的日期部分
-        DateTime Date()const;
+        DateTime Date()const;		
 		
 //////////////////////////////////////////
 //以下为新内容

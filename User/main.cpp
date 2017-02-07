@@ -127,7 +127,7 @@ DateTime dtNow;
 void TimeDisplay(void *param)
 {
     Time_Display(RTC_GetCounter(), &systmtime);
-	dtNow=RTC_GetCounter();
+	dtNow=RTC_GetCounter()+8*60*60;
 	dtNow.Show();
 }
 
