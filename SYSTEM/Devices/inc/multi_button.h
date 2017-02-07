@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Type.h"
 #include "InputPort.h"
 
 //According to your need to modify the constants.
@@ -39,4 +38,3 @@ class CButton
 		InputPort pPin;    
         byte downBit;//键按下时的状态，高低电平，1高电平，0低电平		
 };
-
