@@ -39,17 +39,10 @@ void RTC_CheckAndConfig(struct rtc_time *tm)
     /*在启动时检查备份寄存器BKP_DR1，如果内容不是0xA5A5,
     则需重新配置时间并询问用户调整时间*/
     if (BKP_ReadBackupRegister(BKP_DR1) != 0x1234)
-    {
-        printf("\r\n\r\n RTC not yet configured....");
-
-        /* RTC Configuration */
+    {        
         RTC_Configuration();
-
-        printf("\r\n\r\n RTC configured....");
-
-        /* Adjust time by users typed on the hyperterminal */
+        
         Time_Adjust(tm);
-
         BKP_WriteBackupRegister(BKP_DR1, 0x1234);
     } 
     else
@@ -149,16 +142,6 @@ void RTC_Configuration(void)
     RTC_WaitForLastTask();
 }
 
-void Time_Regulate(struct rtc_time *tm)
-{
-    tm->tm_year = 1970;
-    tm->tm_mon = 1;
-    tm->tm_mday = 1;
-    tm->tm_hour = 8;
-    tm->tm_min = 0;
-    tm->tm_sec = 0;
-} 
-
 /*
  * 函数名：Time_Adjust
  * 描述  ：时间调节
@@ -172,7 +155,12 @@ void Time_Adjust(struct rtc_time *tm)
     RTC_WaitForLastTask();
 
     /* Get time entred by the user on the hyperterminal */
-    Time_Regulate(tm);
+    tm->tm_year = 1970;
+    tm->tm_mon = 1;
+    tm->tm_mday = 1;
+    tm->tm_hour = 8;
+    tm->tm_min = 0;
+    tm->tm_sec = 0;
 
     /* Get wday */
     GregorianDay(tm);
