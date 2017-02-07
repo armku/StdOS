@@ -37,14 +37,11 @@ DateTime::DateTime(DateTime && value)
 #define days_in_year(a) 	(leapyear(a) ? 366 : 365)
 #define days_in_month(a) 	(month_days[(a) - 1])
 /*星期，生肖用文字ASCII码*/
-uint8_t const *WEEK_STR[] = 
+byte const *WEEK_STR[] = 
 {
     "日", "一", "二", "三", "四", "五", "六"
 };
-static int month_days[12] = 
-{
-    31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
-};
+
 //判断是否是闰年函数
 //月份   1  2  3  4  5  6  7  8  9  10 11 12
 //闰年   31 29 31 30 31 30 31 31 30 31 30 31
