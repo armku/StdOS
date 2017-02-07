@@ -624,4 +624,3 @@ u8 GetJieQiStr(u16 year,u8 month,u8 day,u8 *str)
 	str[11]=day%10+'0';
 	return 1;
 }
-
