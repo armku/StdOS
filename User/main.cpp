@@ -23,10 +23,10 @@
 struct rtc_time systmtime;
 
 WatchDog dog(3000);
-void feeddog(void * param)
+void feeddog(void *param)
 {
     dog.Feed();
-}
+} 
 
 
 /*
@@ -35,7 +35,7 @@ KEY PA0
 OutputPort led1(PB0, true);
 OutputPort led2(PF7, true);
 OutputPort led3(PF8, true);
-void ledflash(void * param)
+void ledflash(void *param)
 {
     //	led1=!led1;
     //	led2=!led2;
@@ -64,7 +64,7 @@ extern CFIFORing com2buf; //串口2接收缓冲区
 extern uint com3timeidle; //串口3空闲时间
 extern CFIFORing com3buf; //串口3接收缓冲区
 //串口接收通信定时器
-void ComTimers(void * param)
+void ComTimers(void *param)
 {
     com1timeidle++;
     com2timeidle++;
@@ -106,24 +106,26 @@ void ComTimers(void * param)
         com3buf.Reset();
     }
 }
+
 static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 {
     SerialPortOld *sp = (SerialPortOld*)para;
     debug_printf("%s 收到：[%d]", sp->Name, bs.Length());
     bs.Show(true);
-	bs.Show(false);
-	String str="Hello master";
+    bs.Show(false);
+    String str = "Hello master";
     sp->SendBuffer(str.GetBuffer());
-	
+
     return 0;
 }
 
 OutputPort rs485(PC2);
 
-void TimeDisplay(void * param)
+void TimeDisplay(void *param)
 {
-	Time_Display( RTC_GetCounter(),&systmtime);
+    Time_Display(RTC_GetCounter(), &systmtime);
 }
+
 int main(void)
 {
     Sys.MessagePort = COM1;
@@ -135,26 +137,25 @@ int main(void)
     sp1.Open();
     sp2.Open();
     sp3.Open();
-		
-	sp2.RS485=&rs485;
-	rs485=0;
+
+    sp2.RS485 = &rs485;
+    rs485 = 0;
 
     TimeCost tc;
     exti.InitOld();
     exti.On();
     exti.RegisterOld(OnKeyPress);
     tc.Show();
-	
-		/* 配置RTC秒中断优先级 */
-	  RTC_NVIC_Config();
-	  RTC_CheckAndConfig(&systmtime);
-	
-	  	
-	    	
+
+    /* 配置RTC秒中断优先级 */
+    RTC_NVIC_Config();
+    RTC_CheckAndConfig(&systmtime);
+
+
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
-    Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");   
-	Sys.AddTask(TimeDisplay, 0, 5, 1000, "时钟显示"); 
-			
+    Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");
+    Sys.AddTask(TimeDisplay, 0, 5, 1000, "时钟显示");
+
     Sys.Start();
 }
