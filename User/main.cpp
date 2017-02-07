@@ -1,23 +1,15 @@
 #include <stdio.h>
-#include "Type.h"
-#include "stm32f10x.h"
 #include "SerialPort.h"
 #include "W24xxx.h"
 #include "multi_button.h"
 #include "InputPort.h"
-#include "Sys.h"
 #include "WatchDog.h"
-#include "Port.h"
-#include "Buffer.h"
 #include "CString.h"
 #include "string.h"
 #include "DateTime.h"
-#include "TimeCost.h"
 #include "List.h"
 #include "FIFORing.h"
-#include "STM32Rtc.h"
 #include "Pwm.h"
-#include "DateTime.h"
 
 // N = 2^32/365/24/60/60 = 136 年
 
@@ -27,10 +19,6 @@ void feeddog(void *param)
     dog.Feed();
 } 
 
-
-/*
-KEY PA0 
- */
 OutputPort led1(PB0, true);
 OutputPort led2(PF7, true);
 OutputPort led3(PF8, true);
@@ -40,7 +28,6 @@ void ledflash(void *param)
     //	led2=!led2;
     led3 = !led3;
 }
-
 
 //按键 PC13 PA0
 InputPortOld exti(PC13); //PA1 PB3     PA0 PC13
@@ -119,14 +106,6 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 }
 
 OutputPort rs485(PC2);
-DateTime dtNow;
-STM32Rtc rtc;
-
-void TimeDisplay(void *param)
-{
-    dtNow=rtc.GetTime(dtNow);
-    dtNow.Show();
-}
 
 int main(void)
 {
@@ -142,18 +121,11 @@ int main(void)
 
     sp2.RS485 = &rs485;
     rs485 = 0;
-
-    TimeCost tc;
+    
     exti.InitOld();
     exti.On();
     exti.RegisterOld(OnKeyPress);
-    tc.Show();
-
-    dtNow.Year = 1980;
-
-    rtc.Init();
-    rtc.SetTime(dtNow);
-
+   
     PWM pwm1(PC9);
     pwm1.Init();
     pwm1.SetOutPercent(50);
@@ -161,8 +133,7 @@ int main(void)
 
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
-    Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");
-    Sys.AddTask(TimeDisplay, 0, 5, 1000, "时钟显示");
+    Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");    
 
     Sys.Start();
 }
