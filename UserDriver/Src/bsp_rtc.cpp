@@ -11,7 +11,7 @@ __IO uint32_t TimeDisplay = 0;
  * 输出  ：无
  * 调用  ：外部调用
  */
- void StmRtc::RTC_NVIC_Config(void)
+void StmRtc::RTC_NVIC_Config(void)
 {
     NVIC_InitTypeDef NVIC_InitStructure;
 
@@ -39,18 +39,17 @@ void StmRtc::RTC_CheckAndConfig(struct rtc_time *tm)
     /*在启动时检查备份寄存器BKP_DR1，如果内容不是0xA5A5,
     则需重新配置时间并询问用户调整时间*/
     if (BKP_ReadBackupRegister(BKP_DR1) != 0x2234)
-    {        
+    {
         RTC_Configuration();
-        
-       
-		tm->tm_year = 1970;
-    tm->tm_mon = 1;
-    tm->tm_mday = 1;
-    tm->tm_hour = 8;
-    tm->tm_min = 0;
-    tm->tm_sec = 0;
-		this->SetTime(mktimev(tm));
-		
+
+        tm->tm_year = 1970;
+        tm->tm_mon = 1;
+        tm->tm_mday = 1;
+        tm->tm_hour = 8;
+        tm->tm_min = 0;
+        tm->tm_sec = 0;
+        this->SetTime(mktimev(tm));
+
         BKP_WriteBackupRegister(BKP_DR1, 0x2234);
     } 
     else
@@ -153,15 +152,16 @@ void StmRtc::RTC_Configuration(void)
 //设置时间
 void StmRtc::SetTime(uint seconds)
 {
-	/* Wait until last write operation on RTC registers has finished */
+    /* Wait until last write operation on RTC registers has finished */
     RTC_WaitForLastTask();
-	
-	/* 修改当前RTC计数寄存器内容 */
+
+    /* 修改当前RTC计数寄存器内容 */
     RTC_SetCounter(seconds);
 
     /* Wait until last write operation on RTC registers has finished */
     RTC_WaitForLastTask();
 }
+
 #ifdef __cplusplus
     extern "C"
     {
@@ -182,4 +182,4 @@ void StmRtc::SetTime(uint seconds)
     }
     #ifdef __cplusplus
     }
-#endif 
+#endif

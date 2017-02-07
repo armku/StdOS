@@ -127,8 +127,8 @@ StmRtc rtc;
 
 void TimeDisplay(void *param)
 {
-    dtNow=RTC_GetCounter()+8*60*60;
-	dtNow.Show();
+    dtNow = RTC_GetCounter() + 8 * 60 * 60;
+    dtNow.Show();
 }
 
 int main(void)
@@ -152,16 +152,17 @@ int main(void)
     exti.RegisterOld(OnKeyPress);
     tc.Show();
 
-	dtNow.Year=1980;
-	
-	//rtc.SetTime(dtNow.TotalSeconds());
+    dtNow.Year = 1980;
+
+
     /* 配置RTC秒中断优先级 */
-   rtc. RTC_NVIC_Config();
-   rtc. RTC_CheckAndConfig(&systmtime);
-	
-	PWM pwm1(PC9);
-	pwm1.Init();
-	pwm1.SetOutPercent(50);
+    rtc. RTC_NVIC_Config();
+    rtc. RTC_CheckAndConfig(&systmtime);
+    //rtc.SetTime(dtNow.TotalSeconds());
+
+    PWM pwm1(PC9);
+    pwm1.Init();
+    pwm1.SetOutPercent(50);
 
 
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
