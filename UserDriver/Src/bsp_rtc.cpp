@@ -29,14 +29,15 @@ void StmRtc::RTC_NVIC_Config(void)
 
 void StmRtc::RTC_CheckAndConfig()
 {    
-    if (BKP_ReadBackupRegister(BKP_DR1) != 0x1234)
+    if (BKP_ReadBackupRegister(BKP_DR1) != 0x2234)
     {
         RTC_Configuration();
         
 		DateTime dt;
+		dt.Year=1981;
 		this->SetTime(dt.TotalSeconds());
 
-        BKP_WriteBackupRegister(BKP_DR1, 0x1234);
+        BKP_WriteBackupRegister(BKP_DR1, 0x2234);
     } 
     else
     {
