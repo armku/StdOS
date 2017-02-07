@@ -219,8 +219,7 @@ void Time_Display(uint32_t TimeVar, struct rtc_time *tm)
     to_tm(BJ_TimeVar, tm); /*把定时器的值转换为北京时间*/
     
     /* 输出时间戳，公历时间 */
-    printf(" UNIX时间戳 = %d 当前时间为: %d年 %d月 %d日 (星期%s)  %0.2d:%0.2d:%0.2d\r", TimeVar, tm->tm_year,tm->tm_mon, tm->tm_mday,
-        WEEK_STR[tm->tm_wday], tm->tm_hour, tm->tm_min, tm->tm_sec);
+    printf("UNIX = %d %04d-%02d-%02d %0.2d:%0.2d:%0.2d(星期%s)\r", TimeVar, tm->tm_year,tm->tm_mon, tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec,WEEK_STR[tm->tm_wday]);
 }
 
 #ifdef __cplusplus
