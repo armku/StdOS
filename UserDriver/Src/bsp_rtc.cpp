@@ -9,11 +9,6 @@ uint8_t const *WEEK_STR[] =
 {
     "日", "一", "二", "三", "四", "五", "六"
 };
-uint8_t const *zodiac_sign[] = 
-{
-    "猪", "鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗"
-};
-
 
 /*
  * 函数名：NVIC_Configuration
@@ -169,39 +164,6 @@ void RTC_Configuration(void)
  * 调用    ：内部调用
  ***/
 
-static uint8_t USART_Scanf(uint32_t value)
-{
-    uint32_t index = 0;
-    uint32_t tmp[2] = 
-    {
-        0, 0
-    };
-
-    while (index < 2)
-    {
-        /* Loop until RXNE = 1 */
-        while (USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET){}
-
-        tmp[index++] = (USART_ReceiveData(USART1));
-        if ((tmp[index - 1] < 0x30) || (tmp[index - 1] > 0x39))
-         /*数字0到9的ASCII码为0x30至0x39*/
-        {
-            printf("\n\rPlease enter valid number between 0 and 9 -->:  ");
-            index--;
-        }
-    }
-
-    /* 计算输入字符的ASCII码转换为数字*/
-    index = (tmp[1] - 0x30) + ((tmp[0] - 0x30) *10);
-
-    /* Checks */
-    if (index > value)
-    {
-        printf("\n\rPlease enter valid number between 0 and %d", value);
-        return 0xFF;
-    }
-    return index;
-}
 
 void Time_Regulate(struct rtc_time *tm)
 {
@@ -247,32 +209,17 @@ void Time_Adjust(struct rtc_time *tm)
  */
 void Time_Display(uint32_t TimeVar, struct rtc_time *tm)
 {
-    static uint32_t FirstDisplay = 1;
+   
     uint32_t BJ_TimeVar;
-    uint8_t str[15]; // 字符串暂存  	
+    	
 
     /*  把标准时间转换为北京时间*/
     BJ_TimeVar = TimeVar + 8 * 60 * 60;
 
     to_tm(BJ_TimeVar, tm); /*把定时器的值转换为北京时间*/
-
-    if ((!tm->tm_hour && !tm->tm_min && !tm->tm_sec) || (FirstDisplay))
-    {
-
-        GetChinaCalendar((u16)tm->tm_year, (u8)tm->tm_mon, (u8)tm->tm_mday, str);
-        printf("\r\n 今天新历：%0.2d%0.2d,%0.2d,%0.2d", str[0], str[1], str[2], str[3]);
-
-        GetChinaCalendarStr((u16)tm->tm_year, (u8)tm->tm_mon, (u8)tm->tm_mday, str);
-        printf("\r\n 今天农历：%s\r\n", str);
-
-        if (GetJieQiStr((u16)tm->tm_year, (u8)tm->tm_mon, (u8)tm->tm_mday, str))
-            printf("\r\n 今天农历：%s\r\n", str);
-
-        FirstDisplay = 0;
-    } 
-
+    
     /* 输出时间戳，公历时间 */
-    printf(" UNIX时间戳 = %d 当前时间为: %d年(%s年) %d月 %d日 (星期%s)  %0.2d:%0.2d:%0.2d\r", TimeVar, tm->tm_year, zodiac_sign[(tm->tm_year - 3) % 12], tm->tm_mon, tm->tm_mday,
+    printf(" UNIX时间戳 = %d 当前时间为: %d年 %d月 %d日 (星期%s)  %0.2d:%0.2d:%0.2d\r", TimeVar, tm->tm_year,tm->tm_mon, tm->tm_mday,
         WEEK_STR[tm->tm_wday], tm->tm_hour, tm->tm_min, tm->tm_sec);
 }
 

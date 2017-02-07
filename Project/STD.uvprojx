@@ -442,11 +442,6 @@
           <GroupName>UserDriver</GroupName>
           <Files>
             <File>
-              <FileName>bsp_calendar.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\UserDriver\Src\bsp_calendar.cpp</FilePath>
-            </File>
-            <File>
               <FileName>bsp_date.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\UserDriver\Src\bsp_date.cpp</FilePath>
@@ -1340,11 +1335,6 @@
         <Group>
           <GroupName>UserDriver</GroupName>
           <Files>
-            <File>
-              <FileName>bsp_calendar.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\UserDriver\Src\bsp_calendar.cpp</FilePath>
-            </File>
             <File>
               <FileName>bsp_date.cpp</FileName>
               <FileType>8</FileType>
