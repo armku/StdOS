@@ -440,13 +440,6 @@
         </Group>
         <Group>
           <GroupName>UserDriver</GroupName>
-          <Files>
-            <File>
-              <FileName>bsp_rtc.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\UserDriver\Src\bsp_rtc.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Basic</GroupName>
@@ -650,6 +643,11 @@
               <FileName>SerialPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>STM32Rtc.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\STM32Rtc.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1329,13 +1327,6 @@
         </Group>
         <Group>
           <GroupName>UserDriver</GroupName>
-          <Files>
-            <File>
-              <FileName>bsp_rtc.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\UserDriver\Src\bsp_rtc.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Basic</GroupName>
@@ -1539,6 +1530,11 @@
               <FileName>SerialPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>STM32Rtc.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\STM32Rtc.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -15,7 +15,7 @@
 #include "TimeCost.h"
 #include "List.h"
 #include "FIFORing.h"
-#include "bsp_rtc.h"
+#include "STM32Rtc.h"
 #include "Pwm.h"
 #include "DateTime.h"
 
@@ -120,11 +120,11 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 
 OutputPort rs485(PC2);
 DateTime dtNow;
-StmRtc rtc;
+STM32Rtc rtc;
 
 void TimeDisplay(void *param)
 {
-    dtNow = RTC_GetCounter() + 8 * 60 * 60;
+    dtNow=rtc.GetTime(dtNow);
     dtNow.Show();
 }
 
@@ -151,11 +151,8 @@ int main(void)
 
     dtNow.Year = 1980;
 
-
-    /* 配置RTC秒中断优先级 */
-    rtc. RTC_NVIC_Config();
-    rtc. RTC_CheckAndConfig();
-    //rtc.SetTime(dtNow.TotalSeconds());
+    rtc.Init();
+    rtc.SetTime(dtNow);
 
     PWM pwm1(PC9);
     pwm1.Init();

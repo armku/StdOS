@@ -1,18 +1,11 @@
-#include "bsp_rtc.h"
-#include <stdio.h>
+#include "STM32Rtc.h"
 #include "DateTime.h"
+#include "stm32f10x.h"
 
 /* 秒中断标志，进入秒中断时置1，当时间被刷新之后清0 */
 __IO uint32_t TimeDisplay = 0;
 
-/*
- * 函数名：NVIC_Configuration
- * 描述  ：配置RTC秒中断的主中断优先级为1，次优先级为0
- * 输入  ：无
- * 输出  ：无
- * 调用  ：外部调用
- */
-void StmRtc::RTC_NVIC_Config(void)
+void STM32Rtc::RTC_NVIC_Config(void)
 {
     NVIC_InitTypeDef NVIC_InitStructure;
 
@@ -27,50 +20,7 @@ void StmRtc::RTC_NVIC_Config(void)
     NVIC_Init(&NVIC_InitStructure);
 }
 
-void StmRtc::RTC_CheckAndConfig()
-{    
-    if (BKP_ReadBackupRegister(BKP_DR1) != 0x2234)
-    {
-        RTC_Configuration();
-        
-		DateTime dt;
-		dt.Year=1981;
-		this->SetTime(dt.TotalSeconds());
-
-        BKP_WriteBackupRegister(BKP_DR1, 0x2234);
-    } 
-    else
-    {
-        /*启动无需设置新时钟*/
-        /*检查是否掉电重启*/
-        if (RCC_GetFlagStatus(RCC_FLAG_PORRST) != RESET)
-        {
-            printf("\r\n\r\n Power On Reset occurred....");
-        }
-        /*检查是否Reset复位*/
-        else if (RCC_GetFlagStatus(RCC_FLAG_PINRST) != RESET)
-        {
-            printf("\r\n\r\n External Reset occurred....");
-        }
-
-        printf("\r\n No need to configure RTC....");
-
-        /*等待寄存器同步*/
-        RTC_WaitForSynchro();
-
-        /*允许RTC秒中断*/
-        RTC_ITConfig(RTC_IT_SEC, ENABLE);
-
-        /*等待上次RTC寄存器写操作完成*/
-        RTC_WaitForLastTask();
-    }
-    
-    /* Clear reset flags */
-    RCC_ClearFlag();
-
-}
-
-void StmRtc::RTC_Configuration(void)
+void STM32Rtc::RTC_Configuration(void)
 {
     /* Enable PWR and BKP clocks */
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);
@@ -115,20 +65,30 @@ void StmRtc::RTC_Configuration(void)
 }
 
 //设置时间
-void StmRtc::SetTime(uint seconds)
-{
-    /* Wait until last write operation on RTC registers has finished */
-    RTC_WaitForLastTask();
+void STM32Rtc::SetTime(uint seconds)
+{	
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);	//使能PWR和BKP外设时钟  
+	PWR_BackupAccessCmd(ENABLE);	//使能RTC和后备寄存器访问 
+	RTC_SetCounter(seconds);	//设置RTC计数器的值
 
-    /* 修改当前RTC计数寄存器内容 */
-    RTC_SetCounter(seconds);
-
-    /* Wait until last write operation on RTC registers has finished */
-    RTC_WaitForLastTask();
-	/* Clear reset flags */
-    RCC_ClearFlag();
+	RTC_WaitForLastTask();	//等待最近一次对RTC寄存器的写操作完成  
 }
-
+//设置时间-北京时间格式
+void STM32Rtc::SetTime(DateTime & dt)
+{
+	this->SetTime(dt.TotalSeconds());
+}
+void STM32Rtc::Init()
+{
+	this->RTC_NVIC_Config();
+	this->RTC_Configuration();
+}
+//读取时间
+DateTime& STM32Rtc::GetTime(DateTime & dt)
+{
+	dt=RTC_GetCounter() + 8 * 60 * 60;
+	return dt;
+}
 #ifdef __cplusplus
     extern "C"
     {
