@@ -97,7 +97,19 @@ uint DateTime::TotalDays()const
 }
 uint DateTime::TotalSeconds()const
 {	
-	return 0;
+	#if 0
+	 if (0 >= (int)(this->Month -= 2))
+    {	
+         /* 1..12 -> 11,12,1..10 */
+        this->Month += 12; /* Puts Feb last since it has leap day */
+        this->Year -= 1;
+    } 
+	#endif
+	
+    return ((((uint)(this->Year / 4-this->Year / 100+this->Year / 400+367 * this->Month / 12+this->Day) + this->Year *365-719499) *24+this->Hour /* now have hours */
+    ) *60+this->Minute /* now have minutes */
+    ) *60+this->Second - 8 * 60 * 60; /* finally seconds */
+    /*-8*60*60 把输入的北京时间转换为标准时间，*/
 }
 UInt64 DateTime::TotalMs()const
 {	

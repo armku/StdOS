@@ -8,43 +8,6 @@
 #define days_in_year(a) 	(leapyear(a) ? 366 : 365)
 #define days_in_month(a) 	(month_days[(a) - 1])
 
-/*
- * This only works for the Gregorian calendar - i.e. after 1752 (in the UK)
- */
-/*计算公历*/
-void GregorianDay(struct rtc_time *tm)
-{
-    int leapsToDate;
-    int lastYear;
-    int day;
-    int MonthOffset[] = 
-    {
-        0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334
-    };
-
-    lastYear = tm->tm_year - 1;
-
-    /*计算从公元元年到计数的前一年之中一共经历了多少个闰年*/
-    leapsToDate = lastYear / 4-lastYear / 100+lastYear / 400;
-
-    /*如若计数的这一年为闰年，且计数的月份在2月之后，则日数加1，否则不加1*/
-    if ((tm->tm_year % 4 == 0) && ((tm->tm_year % 100 != 0) || (tm->tm_year % 400 == 0)) && (tm->tm_mon > 2))
-    {
-        /*
-         * We are past Feb. 29 in a leap year
-         */
-        day = 1;
-    }
-    else
-    {
-        day = 0;
-    }
-
-    day += lastYear * 365+leapsToDate + MonthOffset[tm->tm_mon - 1] + tm->tm_mday; /*计算从公元元年元旦到计数日期一共有多少天*/
-
-    tm->tm_wday = day % 7;
-}
-
 /* Converts Gregorian date to seconds since 1970-01-01 00:00:00.
  * Assumes input in normal date format, i.e. 1980-12-31 23:59:59
  * => year=1980, mon=12, day=31, hour=23, min=59, sec=59.
@@ -66,7 +29,7 @@ void GregorianDay(struct rtc_time *tm)
 u32 mktimev(struct rtc_time *tm)
 {
     if (0 >= (int)(tm->tm_mon -= 2))
-    {
+    {	
          /* 1..12 -> 11,12,1..10 */
         tm->tm_mon += 12; /* Puts Feb last since it has leap day */
         tm->tm_year -= 1;

@@ -10,8 +10,6 @@ struct rtc_time
     int tm_mday;
     int tm_mon;
     int tm_year;
-    int tm_wday;
 };
 
-void GregorianDay(struct rtc_time *tm);
 uint32_t mktimev(struct rtc_time *tm);

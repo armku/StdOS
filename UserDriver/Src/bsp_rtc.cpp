@@ -161,10 +161,7 @@ void Time_Adjust(struct rtc_time *tm)
     tm->tm_hour = 8;
     tm->tm_min = 0;
     tm->tm_sec = 0;
-
-    /* Get wday */
-    GregorianDay(tm);
-
+    
     /* 修改当前RTC计数寄存器内容 */
     RTC_SetCounter(mktimev(tm));
 
