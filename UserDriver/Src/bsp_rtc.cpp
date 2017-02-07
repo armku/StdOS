@@ -11,7 +11,7 @@ __IO uint32_t TimeDisplay = 0;
  * 输出  ：无
  * 调用  ：外部调用
  */
-void RTC_NVIC_Config(void)
+ void StmRtc::RTC_NVIC_Config(void)
 {
     NVIC_InitTypeDef NVIC_InitStructure;
 
@@ -34,16 +34,24 @@ void RTC_NVIC_Config(void)
  * 输出  ：无
  * 调用  ：外部调用
  */
-void RTC_CheckAndConfig(struct rtc_time *tm)
+void StmRtc::RTC_CheckAndConfig(struct rtc_time *tm)
 {
     /*在启动时检查备份寄存器BKP_DR1，如果内容不是0xA5A5,
     则需重新配置时间并询问用户调整时间*/
-    if (BKP_ReadBackupRegister(BKP_DR1) != 0x1234)
+    if (BKP_ReadBackupRegister(BKP_DR1) != 0x2234)
     {        
         RTC_Configuration();
         
-        Time_Adjust(tm);
-        BKP_WriteBackupRegister(BKP_DR1, 0x1234);
+       
+		tm->tm_year = 1970;
+    tm->tm_mon = 1;
+    tm->tm_mday = 1;
+    tm->tm_hour = 8;
+    tm->tm_min = 0;
+    tm->tm_sec = 0;
+		this->SetTime(mktimev(tm));
+		
+        BKP_WriteBackupRegister(BKP_DR1, 0x2234);
     } 
     else
     {
@@ -98,7 +106,7 @@ void RTC_CheckAndConfig(struct rtc_time *tm)
  * 输出  ：无
  * 调用  ：外部调用
  */
-void RTC_Configuration(void)
+void StmRtc::RTC_Configuration(void)
 {
     /* Enable PWR and BKP clocks */
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);
@@ -142,33 +150,18 @@ void RTC_Configuration(void)
     RTC_WaitForLastTask();
 }
 
-/*
- * 函数名：Time_Adjust
- * 描述  ：时间调节
- * 输入  ：用于读取RTC时间的结构体指针
- * 输出  ：无
- * 调用  ：外部调用
- */
-void Time_Adjust(struct rtc_time *tm)
+//设置时间
+void StmRtc::SetTime(uint seconds)
 {
-    /* Wait until last write operation on RTC registers has finished */
+	/* Wait until last write operation on RTC registers has finished */
     RTC_WaitForLastTask();
-
-    /* Get time entred by the user on the hyperterminal */
-    tm->tm_year = 1970;
-    tm->tm_mon = 1;
-    tm->tm_mday = 1;
-    tm->tm_hour = 8;
-    tm->tm_min = 0;
-    tm->tm_sec = 0;
-    
-    /* 修改当前RTC计数寄存器内容 */
-    RTC_SetCounter(mktimev(tm));
+	
+	/* 修改当前RTC计数寄存器内容 */
+    RTC_SetCounter(seconds);
 
     /* Wait until last write operation on RTC registers has finished */
     RTC_WaitForLastTask();
-} 
-
+}
 #ifdef __cplusplus
     extern "C"
     {

@@ -3,6 +3,12 @@
 
 DateTime::DateTime()
 {
+	this->Year=1970;
+	this->Month=1;
+	this->Day=1;
+	this->Hour=8;
+	this->Minute=0;
+	this->Second=0;
 }
 DateTime::DateTime(ushort year, byte month, byte day)
 {
@@ -39,42 +45,85 @@ static int month_days[12] =
 {
     31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 };
+//判断是否是闰年函数
+//月份   1  2  3  4  5  6  7  8  9  10 11 12
+//闰年   31 29 31 30 31 30 31 31 30 31 30 31
+//非闰年 31 28 31 30 31 30 31 31 30 31 30 31
+//输入:年份
+//输出:该年份是不是闰年.1,是.0,不是
+bool Is_Leap_Year(ushort year)
+{			  
+	if(year%4==0) //必须能被4整除
+	{ 
+		if(year%100==0) 
+		{ 
+			if(year%400==0)return 1;//如果以00结尾,还要能被400整除 	   
+			else return 0;   
+		}else return 1;   
+	}else return 0;	
+}	 			   
+//设置时钟
+//把输入的时钟转换为秒钟
+//以1970年1月1日为基准
+//1970~2099年为合法年份
+//返回值:0,成功;其他:错误代码.
+//月份数据表											 
+byte const table_week[12]={0,3,3,6,1,4,6,2,5,0,3,5}; //月修正数据表	  
+//平年的月份日期表
+const byte mon_table[12]={31,28,31,30,31,30,31,31,30,31,30,31}; 
 DateTime &DateTime::operator = (uint seconds)
 {
-	register uint i;
-    register long hms, day;
-		
-    day = seconds / SECDAY; /* 有多少天 */
-    hms = seconds % SECDAY; /* 今天的时间，单位s */
-
-    /* Hours, minutes, seconds are easy */
-  this->Hour = hms / 3600;
-  this->Minute = (hms % 3600) / 60;
-  this->Second = (hms % 3600) % 60;
-
-     /* Number of years in days */ /*算出当前年份，起始的计数年份为1970年*/
-    for (i = STARTOFTIME; day >= days_in_year(i); i++)
-    {
-        day -= days_in_year(i);
-    } 
-	this->Year = i;
-
-     /* Number of months in days left */ /*计算当前的月份*/
-    if (leapyear(this->Year))
-    {
-        days_in_month(FEBRUARY) = 29;
-    }
-    for (i = 1; day >= days_in_month(i); i++)
-    {
-        day -= days_in_month(i);
-    }
-    days_in_month(FEBRUARY) = 28;
-    this->Month = i;
-
-     /* Days are what is left over (+1) from all that. */ /*计算当前日期*/
-    this->Day = day + 1;
-  
+	ushort daycnt=0;
+	uint timecount=0; 
+	uint temp=0;
+	ushort temp1=0;	  
+    timecount=seconds;	 
+ 	temp=timecount/86400;   //得到天数(秒钟数对应的)
 	
+	if(daycnt!=temp)//超过一天了
+	{	  
+		daycnt=temp;
+		temp1=1970;	//从1970年开始
+		while(temp>=365)
+		{				 
+			if(Is_Leap_Year(temp1))//是闰年
+			{
+				if(temp>=366)temp-=366;//闰年的秒钟数
+				else {temp1++;break;}  
+			}
+			else temp-=365;	  //平年 
+			temp1++;  
+		}   
+		this->Year=temp1;//得到年份
+		temp1=0;
+		while(temp>=28)//超过了一个月
+		{
+			if(Is_Leap_Year(this->Year)&&temp1==1)//当年是不是闰年/2月份
+			{
+				if(temp>=29)temp-=29;//闰年的秒钟数
+				else break; 
+			}
+			else 
+			{
+				if(temp>=mon_table[temp1])temp-=mon_table[temp1];//平年
+				else break;
+			}
+			temp1++;  
+		}
+		this->Month=temp1+1;	//得到月份
+		this->Day=temp+1;  	//得到日期 
+	}
+	else
+	{
+		this->Year=1970;
+		this->Month=1;
+		this->Day=1;
+	}
+	temp=timecount%86400;     		//得到秒钟数   	   
+	this->Hour=temp/3600;     	//小时
+	this->Minute=(temp%3600)/60; 	//分钟	
+	this->Second=(temp%3600)%60; 	//秒钟
+	 	
 	return *this;
 }
 
@@ -95,21 +144,34 @@ uint DateTime::TotalDays()const
 	
 	return 0;
 }
+	
 uint DateTime::TotalSeconds()const
 {	
-	#if 0
-	 if (0 >= (int)(this->Month -= 2))
-    {	
-         /* 1..12 -> 11,12,1..10 */
-        this->Month += 12; /* Puts Feb last since it has leap day */
-        this->Year -= 1;
-    } 
-	#endif
-	
-    return ((((uint)(this->Year / 4-this->Year / 100+this->Year / 400+367 * this->Month / 12+this->Day) + this->Year *365-719499) *24+this->Hour /* now have hours */
-    ) *60+this->Minute /* now have minutes */
-    ) *60+this->Second - 8 * 60 * 60; /* finally seconds */
-    /*-8*60*60 把输入的北京时间转换为标准时间，*/
+	ushort syear=this->Year;
+	byte smon=this->Month;
+	byte sday=this->Day;
+	byte hour=this->Hour;
+	byte min=this->Minute;
+	byte sec=this->Second;
+	ushort t;
+	uint seccount=0;
+	if(syear<1970||syear>2099)return 1;	   
+	for(t=1970;t<syear;t++)	//把所有年份的秒钟相加
+	{
+		if(Is_Leap_Year(t))seccount+=31622400;//闰年的秒钟数
+		else seccount+=31536000;			  //平年的秒钟数
+	}
+	smon-=1;
+	for(t=0;t<smon;t++)	   //把前面月份的秒钟数相加
+	{
+		seccount+=(uint)mon_table[t]*86400;//月份秒钟数相加
+		if(Is_Leap_Year(syear)&&t==1)seccount+=86400;//闰年2月份增加一天的秒钟数	   
+	}
+	seccount+=(uint)(sday-1)*86400;//把前面日期的秒钟数相加 
+	seccount+=(uint)hour*3600;//小时秒钟数
+    seccount+=(uint)min*60;	 //分钟秒钟数
+	seccount+=sec;//最后的秒钟加上去
+	return 	seccount-8*60*60;
 }
 UInt64 DateTime::TotalMs()const
 {	

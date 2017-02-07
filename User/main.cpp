@@ -123,6 +123,7 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 
 OutputPort rs485(PC2);
 DateTime dtNow;
+StmRtc rtc;
 
 void TimeDisplay(void *param)
 {
@@ -151,9 +152,12 @@ int main(void)
     exti.RegisterOld(OnKeyPress);
     tc.Show();
 
+	dtNow.Year=1980;
+	
+	//rtc.SetTime(dtNow.TotalSeconds());
     /* 配置RTC秒中断优先级 */
-    RTC_NVIC_Config();
-    RTC_CheckAndConfig(&systmtime);
+   rtc. RTC_NVIC_Config();
+   rtc. RTC_CheckAndConfig(&systmtime);
 	
 	PWM pwm1(PC9);
 	pwm1.Init();
