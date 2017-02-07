@@ -442,11 +442,6 @@
           <GroupName>UserDriver</GroupName>
           <Files>
             <File>
-              <FileName>bsp_date.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\UserDriver\Src\bsp_date.cpp</FilePath>
-            </File>
-            <File>
               <FileName>bsp_rtc.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\UserDriver\Src\bsp_rtc.cpp</FilePath>
@@ -1335,11 +1330,6 @@
         <Group>
           <GroupName>UserDriver</GroupName>
           <Files>
-            <File>
-              <FileName>bsp_date.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\UserDriver\Src\bsp_date.cpp</FilePath>
-            </File>
             <File>
               <FileName>bsp_rtc.cpp</FileName>
               <FileType>8</FileType>

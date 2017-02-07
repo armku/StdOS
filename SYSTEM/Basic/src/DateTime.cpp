@@ -179,35 +179,18 @@ UInt64 DateTime::TotalMs()const
 }
 byte DateTime::DayOfWeek()const
 {
-	int leapsToDate;
-    int lastYear;
-    int day;
-    int MonthOffset[] = 
-    {
-        0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334
-    };
-
-    lastYear =this->Year - 1;
-
-    /*计算从公元元年到计数的前一年之中一共经历了多少个闰年*/
-    leapsToDate = lastYear / 4-lastYear / 100+lastYear / 400;
-
-    /*如若计数的这一年为闰年，且计数的月份在2月之后，则日数加1，否则不加1*/
-    if ((this->Year % 4 == 0) && ((this->Year % 100 != 0) || (this->Year % 400 == 0)) && (this->Month > 2))
-    {
-        /*
-         * We are past Feb. 29 in a leap year
-         */
-        day = 1;
-    }
-    else
-    {
-        day = 0;
-    }
-
-    day += lastYear * 365+leapsToDate + MonthOffset[this->Month - 1] + this->Day; /*计算从公元元年元旦到计数日期一共有多少天*/
-
-	return day % 7;
+	ushort temp2;
+	byte yearH,yearL;
+	
+	yearH=this->Year/100;	yearL=this->Year%100; 
+	// 如果为21世纪,年份数加100  
+	if (yearH>19)yearL+=100;
+	// 所过闰年数只算1900年之后的  
+	temp2=yearL+yearL/4;
+	temp2=temp2%7; 
+	temp2=temp2+this->Day+table_week[this->Month -1];
+	if (yearL%4==0&&this->Month <3)temp2--;
+	return(temp2%7);
 }
 DateTime DateTime::Date()const
 {

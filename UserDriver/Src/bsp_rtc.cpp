@@ -1,5 +1,6 @@
 #include "bsp_rtc.h"
 #include <stdio.h>
+#include "DateTime.h"
 
 /* 秒中断标志，进入秒中断时置1，当时间被刷新之后清0 */
 __IO uint32_t TimeDisplay = 0;
@@ -26,31 +27,16 @@ void StmRtc::RTC_NVIC_Config(void)
     NVIC_Init(&NVIC_InitStructure);
 }
 
-
-/*
- * 函数名：RTC_CheckAndConfig
- * 描述  ：检查并配置RTC
- * 输入  ：用于读取RTC时间的结构体指针
- * 输出  ：无
- * 调用  ：外部调用
- */
-void StmRtc::RTC_CheckAndConfig(struct rtc_time *tm)
-{
-    /*在启动时检查备份寄存器BKP_DR1，如果内容不是0xA5A5,
-    则需重新配置时间并询问用户调整时间*/
-    if (BKP_ReadBackupRegister(BKP_DR1) != 0x2234)
+void StmRtc::RTC_CheckAndConfig()
+{    
+    if (BKP_ReadBackupRegister(BKP_DR1) != 0x1234)
     {
         RTC_Configuration();
+        
+		DateTime dt;
+		this->SetTime(dt.TotalSeconds());
 
-        tm->tm_year = 1970;
-        tm->tm_mon = 1;
-        tm->tm_mday = 1;
-        tm->tm_hour = 8;
-        tm->tm_min = 0;
-        tm->tm_sec = 0;
-        this->SetTime(mktimev(tm));
-
-        BKP_WriteBackupRegister(BKP_DR1, 0x2234);
+        BKP_WriteBackupRegister(BKP_DR1, 0x1234);
     } 
     else
     {
@@ -77,34 +63,12 @@ void StmRtc::RTC_CheckAndConfig(struct rtc_time *tm)
         /*等待上次RTC寄存器写操作完成*/
         RTC_WaitForLastTask();
     }
-    /*定义了时钟输出宏，则配置校正时钟输出到PC13*/
-    #ifdef RTCClockOutput_Enable
-        /* Enable PWR and BKP clocks */
-        RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);
-
-        /* Allow access to BKP Domain */
-        PWR_BackupAccessCmd(ENABLE);
-
-        /* Disable the Tamper Pin */
-        BKP_TamperPinCmd(DISABLE); /* To output RTCCLK/64 on Tamper pin, the tamper
-        functionality must be disabled */
-
-        /* Enable RTC Clock Output on Tamper Pin */
-        BKP_RTCOutputConfig(BKP_RTCOutputSource_CalibClock);
-    #endif 
-
+    
     /* Clear reset flags */
     RCC_ClearFlag();
 
 }
 
-/*
- * 函数名：RTC_Configuration
- * 描述  ：配置RTC
- * 输入  ：无
- * 输出  ：无
- * 调用  ：外部调用
- */
 void StmRtc::RTC_Configuration(void)
 {
     /* Enable PWR and BKP clocks */
@@ -160,6 +124,8 @@ void StmRtc::SetTime(uint seconds)
 
     /* Wait until last write operation on RTC registers has finished */
     RTC_WaitForLastTask();
+	/* Clear reset flags */
+    RCC_ClearFlag();
 }
 
 #ifdef __cplusplus

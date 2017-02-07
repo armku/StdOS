@@ -21,9 +21,6 @@
 
 // N = 2^32/365/24/60/60 = 136 年
 
-/*时间结构体*/
-struct rtc_time systmtime;
-
 WatchDog dog(3000);
 void feeddog(void *param)
 {
@@ -157,7 +154,7 @@ int main(void)
 
     /* 配置RTC秒中断优先级 */
     rtc. RTC_NVIC_Config();
-    rtc. RTC_CheckAndConfig(&systmtime);
+    rtc. RTC_CheckAndConfig();
     //rtc.SetTime(dtNow.TotalSeconds());
 
     PWM pwm1(PC9);
