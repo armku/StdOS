@@ -4,12 +4,6 @@
 /* 秒中断标志，进入秒中断时置1，当时间被刷新之后清0 */
 __IO uint32_t TimeDisplay = 0;
 
-/*星期，生肖用文字ASCII码*/
-uint8_t const *WEEK_STR[] = 
-{
-    "日", "一", "二", "三", "四", "五", "六"
-};
-
 /*
  * 函数名：NVIC_Configuration
  * 描述  ：配置RTC秒中断的主中断优先级为1，次优先级为0
@@ -189,28 +183,6 @@ void Time_Adjust(struct rtc_time *tm)
     /* Wait until last write operation on RTC registers has finished */
     RTC_WaitForLastTask();
 } 
-
-/*
- * 函数名：Time_Display
- * 描述  ：显示当前时间值
- * 输入  ：-TimeVar RTC计数值，单位为 s
- * 输出  ：无
- * 调用  ：内部调用
- */
-void Time_Display(uint32_t TimeVar, struct rtc_time *tm)
-{
-   
-    uint32_t BJ_TimeVar;
-    	
-
-    /*  把标准时间转换为北京时间*/
-    BJ_TimeVar = TimeVar + 8 * 60 * 60;
-
-    to_tm(BJ_TimeVar, tm); /*把定时器的值转换为北京时间*/
-    
-    /* 输出时间戳，公历时间 */
-    printf("UNIX = %d %04d-%02d-%02d %0.2d:%0.2d:%0.2d(星期%s)\r", TimeVar, tm->tm_year,tm->tm_mon, tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec,WEEK_STR[tm->tm_wday]);
-}
 
 #ifdef __cplusplus
     extern "C"

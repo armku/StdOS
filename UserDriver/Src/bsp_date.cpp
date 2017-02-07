@@ -8,11 +8,6 @@
 #define days_in_year(a) 	(leapyear(a) ? 366 : 365)
 #define days_in_month(a) 	(month_days[(a) - 1])
 
-static int month_days[12] = 
-{
-    31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
-};
-
 /*
  * This only works for the Gregorian calendar - i.e. after 1752 (in the UK)
  */
@@ -83,44 +78,4 @@ u32 mktimev(struct rtc_time *tm)
     /*Add by fire: -8*60*60 把输入的北京时间转换为标准时间，
     再写入计时器中，确保计时器的数据为标准的UNIX时间戳*/
 
-}
-
-void to_tm(u32 tim, struct rtc_time *tm)
-{
-    register u32 i;
-    register long hms, day;
-
-    day = tim / SECDAY; /* 有多少天 */
-    hms = tim % SECDAY; /* 今天的时间，单位s */
-
-    /* Hours, minutes, seconds are easy */
-    tm->tm_hour = hms / 3600;
-    tm->tm_min = (hms % 3600) / 60;
-    tm->tm_sec = (hms % 3600) % 60;
-
-     /* Number of years in days */ /*算出当前年份，起始的计数年份为1970年*/
-    for (i = STARTOFTIME; day >= days_in_year(i); i++)
-    {
-        day -= days_in_year(i);
-    } tm->tm_year = i;
-
-     /* Number of months in days left */ /*计算当前的月份*/
-    if (leapyear(tm->tm_year))
-    {
-        days_in_month(FEBRUARY) = 29;
-    }
-    for (i = 1; day >= days_in_month(i); i++)
-    {
-        day -= days_in_month(i);
-    }
-    days_in_month(FEBRUARY) = 28;
-    tm->tm_mon = i;
-
-     /* Days are what is left over (+1) from all that. */ /*计算当前日期*/
-    tm->tm_mday = day + 1;
-
-    /*
-     * Determine the day of week
-     */
-    GregorianDay(tm);
 }
