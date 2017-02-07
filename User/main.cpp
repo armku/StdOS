@@ -16,6 +16,7 @@
 #include "List.h"
 #include "FIFORing.h"
 #include "bsp_rtc.h"
+#include "Pwm.h"
 
 // N = 2^32/365/24/60/60 = 136 年
 
@@ -150,6 +151,10 @@ int main(void)
     /* 配置RTC秒中断优先级 */
     RTC_NVIC_Config();
     RTC_CheckAndConfig(&systmtime);
+	
+	PWM pwm1(PC9);
+	pwm1.Init();
+	pwm1.SetOutPercent(50);
 
 
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
