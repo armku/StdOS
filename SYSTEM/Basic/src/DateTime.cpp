@@ -1,4 +1,5 @@
 #include "DateTime.h"
+#include <stdio.h>
 
 DateTime::DateTime()
 {
@@ -70,4 +71,9 @@ DateTime DateTime::Now()
 	dt.Minute=55;
 	dt.Second=12;
 	return dt;
+}
+void DateTime::Show(bool newLine)const
+{
+	printf("%04d-%02d-%02d %02d:%02d:%02d",this->Year,this->Month,this->Day,this->Hour,this->Minute,this->Second);
+	Object::Show(true);
 }

@@ -44,7 +44,7 @@ void RTC_CheckAndConfig(struct rtc_time *tm)
 {
     /*在启动时检查备份寄存器BKP_DR1，如果内容不是0xA5A5,
     则需重新配置时间并询问用户调整时间*/
-    if (BKP_ReadBackupRegister(BKP_DR1) != 0xA5A5)
+    if (BKP_ReadBackupRegister(BKP_DR1) != 0x1234)
     {
         printf("\r\n\r\n RTC not yet configured....");
 
@@ -56,7 +56,7 @@ void RTC_CheckAndConfig(struct rtc_time *tm)
         /* Adjust time by users typed on the hyperterminal */
         Time_Adjust(tm);
 
-        BKP_WriteBackupRegister(BKP_DR1, 0xA5A5);
+        BKP_WriteBackupRegister(BKP_DR1, 0x1234);
     } 
     else
     {
@@ -155,22 +155,12 @@ void RTC_Configuration(void)
     RTC_WaitForLastTask();
 }
 
-/*****
- * 函数名  : USART_Scanf
- * 描述    : 从微机超级终端获取数字值(把ASCII码转换为数字)
-本函数专用于RTC获取时间，若进行其它输入应用，要修改一下
- * 输入    : - value 用户在超级终端中输入的数值
- * 输出    : 输入字符的ASCII码对应的数值
- * 调用    ：内部调用
- ***/
-
-
 void Time_Regulate(struct rtc_time *tm)
 {
     tm->tm_year = 1970;
     tm->tm_mon = 1;
     tm->tm_mday = 1;
-    tm->tm_hour = 0;
+    tm->tm_hour = 8;
     tm->tm_min = 0;
     tm->tm_sec = 0;
 } 

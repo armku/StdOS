@@ -17,6 +17,7 @@
 #include "FIFORing.h"
 #include "bsp_rtc.h"
 #include "Pwm.h"
+#include "DateTime.h"
 
 // N = 2^32/365/24/60/60 = 136 Äê
 
@@ -121,10 +122,13 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 }
 
 OutputPort rs485(PC2);
+DateTime dtNow;
 
 void TimeDisplay(void *param)
 {
     Time_Display(RTC_GetCounter(), &systmtime);
+	dtNow=RTC_GetCounter();
+	dtNow.Show();
 }
 
 int main(void)

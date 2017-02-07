@@ -2,7 +2,7 @@
 #include "Type.h"
 #include "Object.h"
 
-class DateTime
+class DateTime:public Object
 {
     public:
         ushort Year;
@@ -35,6 +35,18 @@ class DateTime
         byte DayOfWeek()const;
         //取时间日期的日期部分
         DateTime Date()const;
+		
+//////////////////////////////////////////
+//以下为新内容
+public:
+		virtual void Show(bool newLine = true)const;
+		
+		
+		
+		
+		
+		
+		
 		
 		static DateTime Now();//当前时间
 		
@@ -75,4 +87,5 @@ class DateTime
 		
 		//static const ushort DaysToMonth365[] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365};
         //static const ushort DaysToMonth366[] = {0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366};
+		
 };
