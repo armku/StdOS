@@ -46,9 +46,9 @@ SerialPort::SerialPort(USART_TypeDef *com, int baudRate, byte parity, byte dataB
 SerialPort::~SerialPort()
 {
     if (RS485)
-	{
+    {
         delete RS485;
-	}
+    }
     RS485 = NULL;
 }
 
@@ -73,10 +73,10 @@ void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte
     _baudRate = baudRate;
     _parity = parity;
     _dataBits = dataBits;
-    _stopBits = stopBits;    
-        // 根据端口实际情况决定打开状态
-        if (_port->CR1 &USART_CR1_UE)
-            Opened = true;    
+    _stopBits = stopBits;
+    // 根据端口实际情况决定打开状态
+    if (_port->CR1 &USART_CR1_UE)
+        Opened = true;
     // 设置名称
     //Name = "COMx";
     *(uint*)Name = *(uint*)"COMx";
@@ -285,41 +285,41 @@ void SerialPort::SendData(byte data, uint times)
         ;
     //等待发送完毕
     if (times > 0)
-	{
+    {
         USART_SendData(_port, (ushort)data);
-	}
+    }
     else
-	{
+    {
         Error++;
-	}
+    }
 }
 
 // 向某个端口写入数据。如果size为0，则把data当作字符串，一直发送直到遇到\0为止
 bool SerialPort::OnWrite(const byte *buf, uint size)
 {
     if (RS485)
-	{
+    {
         *RS485 = true;
-	}
+    }
     if (size > 0)
     {
         for (int i = 0; i < size; i++)
-		{
+        {
             SendData(*buf++);
-		}
+        }
     }
     else
     {
         while (*buf)
-		{
+        {
             SendData(*buf++);
-		}
+        }
     }
 
     if (RS485)
-	{
+    {
         *RS485 = false;
-	}
+    }
     return true;
 }
 
