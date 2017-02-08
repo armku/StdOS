@@ -104,7 +104,10 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 
     return 0;
 }
-
+/*
+ISO-V2:PB5控制485方向
+ISO-V3:PC2控制485方向
+*/
 OutputPort rs485(PC2);
 
 int main(void)
