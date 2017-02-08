@@ -11,7 +11,7 @@
 USART_TypeDef comm1, comm2, comm3, comm4, comm5, comm6, comm7;
 #define UARTS {&comm1,&comm2,&comm3,&comm4,&comm5,&comm6,&comm7}
 
-int ArrayLength(int buf[])
+int ArrayLength(const USART_TypeDef *const buf[])
 {
     return 7;
 }
@@ -25,19 +25,17 @@ SerialPort::SerialPort()
 SerialPort::SerialPort(USART_TypeDef *com, int baudRate, byte parity, byte dataBits, byte stopBits)
 {
     assert_param(com);
-    #if 0
-        const USART_TypeDef *const g_Uart_Ports[] = UARTS;
-        byte _index = 0xFF;
+    const USART_TypeDef *const g_Uart_Ports[] = UARTS;
+    byte _index = 0xFF;
 
-        for (int i = 0; i < ArrayLength(g_Uart_Ports); i++)
+    for (int i = 0; i < ArrayLength(g_Uart_Ports); i++)
+    {
+        if (g_Uart_Ports[i] == com)
         {
-            if (g_Uart_Ports[i] == com)
-            {
-                _index = i;
-                break;
-            }
+            _index = i;
+            break;
         }
-    #endif 
+    }
     Init();
     Init(_index, baudRate, parity, dataBits, stopBits);
 }
