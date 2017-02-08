@@ -422,8 +422,6 @@ SerialPort *_printf_sp;
 bool isInFPutc;
 extern "C"
 {
-
-
     #if 0
         /* 重载fputc可以让用户程序使用printf函数 */
         int fputc(int ch, FILE *f)
@@ -801,8 +799,8 @@ void SerialPortOld::SendData(byte data)
 //发送数据
 void SerialPortOld::SendBuffer(byte *buff, int length)
 {
-	if (RS485)
-        *RS485 = true;
+	if (this->RS485)
+        *this->RS485 = true;
     if (length ==  - 1)
     {
         while (*buff)
@@ -820,8 +818,8 @@ void SerialPortOld::SendBuffer(byte *buff, int length)
     {
         this->SendData(buff[i]);
     }
-	if (RS485)
-        *RS485 = false;
+	if (this->RS485)
+        *this->RS485 = false;
 }
 
 //发送数据

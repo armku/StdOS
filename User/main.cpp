@@ -92,7 +92,11 @@ void ComTimers(void *param)
         com3buf.Reset();
     }
 }
-
+/*
+ISO-V2:PB5控制485方向
+ISO-V3:PC2控制485方向
+*/
+OutputPort rs485(PC2);
 static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 {
     SerialPortOld *sp = (SerialPortOld*)para;
@@ -101,14 +105,12 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
     bs.Show(false);
     String str = "Hello master";
     sp->SendBuffer(str.GetBuffer());
+	//rs485=0;
+//	*sp->RS485=false;
 
     return 0;
 }
-/*
-ISO-V2:PB5控制485方向
-ISO-V3:PC2控制485方向
-*/
-OutputPort rs485(PC2);
+
 
 int main(void)
 {
@@ -132,8 +134,8 @@ int main(void)
     PWM pwm1(PC9);
     pwm1.Init();
     pwm1.SetOutPercent(50);
-
-
+	
+	
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
     Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");    
