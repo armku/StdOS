@@ -422,7 +422,7 @@ void SerialPort::GetPins(Pin *txPin, Pin *rxPin)
     {
         p = g_Uart_Pins_Map;
     }
-    int n = _index << 2;
+    int n = _index << 1;
     *txPin = p[n];
     *rxPin = p[n + 1];
 }
