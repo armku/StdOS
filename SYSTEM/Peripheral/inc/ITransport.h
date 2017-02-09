@@ -41,5 +41,6 @@ class ITransport
 		bool Opened;//ÊÇ·ñ´ò¿ª
 	protected:
 		virtual bool OnOpen(){return true;}	
+		virtual bool OnWrite(const byte *buf, uint size){return true;}
 
 };

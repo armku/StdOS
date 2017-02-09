@@ -462,7 +462,6 @@ extern "C"
 
 SerialPort *SerialPort::GetMessagePort()
 {
-
     if (!_printf_sp)
     {
         int _index = Sys.MessagePort;

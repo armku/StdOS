@@ -1,4 +1,5 @@
 #include "ITransport.h"
+#include "string.h"
 // 注册数据到达事件
 void ITransport::Register(IOnUsartRead handler,void *param)
 {
@@ -9,19 +10,22 @@ void ITransport::SendBuffer(byte *buff, int length)
 { 
     if (length < 0)
     {
-        while (*buff)
-        {
-            this->SendData(*buff);
-            buff++;
-        }
+		length=strlen((char*)buff);
+//        while (*buff)
+//        {
+//            this->SendData(*buff);
+//            buff++;
+//        }
     }
-    else
-    {
-        for (int i = 0; i < length; i++)
-        {
-            this->SendData(buff[i]);
-        }
-    }
+//    else
+//    {
+//        for (int i = 0; i < length; i++)
+//        {
+//            this->SendData(buff[i]);
+//        }
+//    }
+	
+	this->OnWrite(buff,length);
 }
 
 //发送数据
