@@ -8,12 +8,11 @@
 #define COM_DEBUG 1
 
 
-USART_TypeDef comm1, comm2, comm3, comm4, comm5, comm6, comm7;
-#define UARTS {&comm1,&comm2,&comm3,&comm4,&comm5,&comm6,&comm7}
+#define UARTS {USART1,USART2,USART3,UART4,UART5}
 
 int ArrayLength(const USART_TypeDef *const buf[])
 {
-    return 7;
+    return 5;
 }
 
 SerialPort::SerialPort()
@@ -279,6 +278,7 @@ void SerialPort::SendData(byte data, uint times)
 {
     while (USART_GetFlagStatus(_port, USART_FLAG_TXE) == RESET && --times > 0)
         ;
+	printf("Send Data times:%d \r\n",times);
     //µÈ´ý·¢ËÍÍê±Ï
     if (times > 0)
     {
