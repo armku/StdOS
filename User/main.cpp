@@ -106,8 +106,9 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
     String str = "Hello master";
     sp->SendBuffer(str.GetBuffer());
 	//rs485=0;
-//	*sp->RS485=false;
+	//*sp->RS485=false;
 
+	printf("rs485=%d\r\n",rs485.Read());
     return 0;
 }
 
