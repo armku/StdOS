@@ -17,10 +17,10 @@ void _sys_exit(int x)
     x = x;
 }
 //c++µÄ
-void sendch(int ch);
 void _ttywrch(int ch)
-{
-    sendch(ch);
+{   
+	FILE *fp;
+	fputc(ch,fp);
 }
 
 int GetKey(void)

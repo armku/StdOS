@@ -745,30 +745,7 @@ uint com3timeidle; //串口3空闲时间
 
         /* 等待发送完毕 */
         while (USART_GetFlagStatus(UART5, USART_FLAG_TXE) == RESET){}
-    }
-    void sendch(int ch)
-    {
-        switch (Sys.MessagePort)
-        {
-            case COM1:
-                sendToUsart1(ch);
-                break;
-            case COM2:
-                sendToUsart2(ch);
-                break;
-            case COM3:
-                sendToUsart3(ch);
-                break;
-            case COM4:
-                sendToUsart4(ch);
-                break;
-            case COM5:
-                sendToUsart5(ch);
-                break;
-            default:
-                break;
-        }
-    }
+    }    
     #ifdef __cplusplus
     }
 #endif 
