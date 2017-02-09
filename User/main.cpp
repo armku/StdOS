@@ -40,7 +40,7 @@ void OnKeyPress(Pin pin, bool onoff)
 }
 
 SerialPortOld sp1(COM1);
-SerialPortOld sp2(COM2);
+//SerialPortOld sp2(COM2);
 SerialPortOld sp3(COM3);
 byte USART_RX_BUF[100]; //接收缓冲,最大USART_REC_LEN个字节.
 extern uint com1timeidle; //串口1空闲时间
@@ -75,7 +75,7 @@ void ComTimers(void *param)
         if (len >= 1)
         {
             com2buf.Pop(USART_RX_BUF, 0, len);
-            sp2.OnUsartReceive(USART_RX_BUF, len);
+            //sp2.OnUsartReceive(USART_RX_BUF, len);
         }
         com2buf.Reset();
     }
@@ -116,14 +116,14 @@ int main(void)
     Sys.Init();
     Sys.ShowInfo();
     sp1.Register(OnUsartRead, &sp1);
-    sp2.Register(OnUsartRead, &sp2);
+    //sp2.Register(OnUsartRead, &sp2);
     sp3.Register(OnUsartRead, &sp3);
     sp1.Open();
-    sp2.Open();
+    //sp2.Open();
     sp3.Open();
 
-    sp2.RS485 = &rs485;
-    rs485 = 0;
+    //sp2.RS485 = &rs485;
+    rs485 = 1;
     
     exti.InitOld();
     exti.On();
