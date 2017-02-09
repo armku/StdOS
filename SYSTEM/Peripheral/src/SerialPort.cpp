@@ -408,23 +408,25 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
 
 }
 
+#define UART_PINS {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}
+#define UART_PINS_FULLREMAP {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}   //需要整理
 
 // 获取引脚
 void SerialPort::GetPins(Pin *txPin, Pin *rxPin)
 {
 
     *rxPin =  *txPin = P0;
-    #if 0
-        const Pin g_Uart_Pins[] = UART_PINS;
-        const Pin g_Uart_Pins_Map[] = UART_PINS_FULLREMAP;
-        const Pin *p = g_Uart_Pins;
-        if (IsRemap)
-            p = g_Uart_Pins_Map;
 
-        int n = _index << 2;
-        *txPin = p[n];
-        *rxPin = p[n + 1];
-    #endif 
+    const Pin g_Uart_Pins[] = UART_PINS;
+    const Pin g_Uart_Pins_Map[] = UART_PINS_FULLREMAP;
+    const Pin *p = g_Uart_Pins;
+    if (IsRemap)
+    {
+        p = g_Uart_Pins_Map;
+    }
+    int n = _index << 2;
+    *txPin = p[n];
+    *rxPin = p[n + 1];
 }
 
 SerialPort *_printf_sp;
@@ -827,10 +829,10 @@ void SerialPortOld::SendBuffer(byte *buff, int length)
         {
             this->SendData(buff[i]);
         }
-    }	
+    }
     if (this->RS485)
     {
-		Sys.Delay(100);//延时，解决最后一个字节没有发出问题
+        Sys.Delay(100); //延时，解决最后一个字节没有发出问题
         *this->RS485 = false;
     }
 }
