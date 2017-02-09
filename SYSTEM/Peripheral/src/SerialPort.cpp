@@ -325,19 +325,17 @@ uint SerialPort::OnRead(byte *buf, uint size)
     // 在100ms内接收数据
     uint msTimeout = 1;
     ulong us = Time.Current() + msTimeout * 1000;
-    uint count = 0; // 收到的字节数
-    #if 0
-        while (count < size && Time.Current() < us)
+    uint count = 0; // 收到的字节数    
+    while (count < size && Time.Current() < us)
+    {
+        // 轮询接收寄存器，收到数据则放入缓冲区
+        if (USART_GetFlagStatus(_port, USART_FLAG_RXNE) != RESET)
         {
-            // 轮询接收寄存器，收到数据则放入缓冲区
-            if (USART_GetFlagStatus(_port, USART_FLAG_RXNE) != RESET)
-            {
-                *buf++ = (byte)USART_ReceiveData(_port);
-                count++;
-                us = Time.Current() + msTimeout * 1000;
-            }
+            *buf++ = (byte)USART_ReceiveData(_port);
+            count++;
+            us = Time.Current() + msTimeout * 1000;
         }
-    #endif 
+    }
     return count;
 }
 
@@ -744,7 +742,7 @@ uint com3timeidle; //串口3空闲时间
 
         /* 等待发送完毕 */
         while (USART_GetFlagStatus(UART5, USART_FLAG_TXE) == RESET){}
-    }    
+    }
     #ifdef __cplusplus
     }
 #endif 
