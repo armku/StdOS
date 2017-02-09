@@ -34,9 +34,7 @@ class SerialPort: public ITransport
         int Error; // 错误计数
 
         SerialPort();
-        SerialPort(COM_Def index, int baudRate = 115200, byte parity = USART_Parity_No,  //无奇偶校验
-        byte dataBits = USART_WordLength_8b,  //8位数据长度
-        byte stopBits = USART_StopBits_1) //1位停止位
+        SerialPort(COM_Def index, int baudRate = 115200, byte parity = USART_Parity_No,byte dataBits = USART_WordLength_8b,byte stopBits = USART_StopBits_1)
         {
                 Init();
                 Init(index, baudRate, parity, dataBits, stopBits);
