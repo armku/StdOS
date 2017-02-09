@@ -238,6 +238,7 @@ void TSys::Init()
         this->ID[i] = *(byte*)(0X1FFFF7E8 + i);
     }
     this->FlashSize = *(ushort*)(0X1FFFF7E0);
+	this->Inited=1;
 }
 
 #ifdef __cplusplus
