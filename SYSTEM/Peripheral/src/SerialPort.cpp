@@ -6,7 +6,7 @@
 #include "FIFORing.h"
 
 #define COM_DEBUG 1
-
+#define STM32F1XX
 
 #define UARTS {USART1,USART2,USART3,UART4,UART5}
 
