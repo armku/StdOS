@@ -827,10 +827,10 @@ void SerialPortOld::SendBuffer(byte *buff, int length)
         {
             this->SendData(buff[i]);
         }
-    }
-	Sys.Delay(100);//延时，解决最后一个字节没有发出问题
+    }	
     if (this->RS485)
     {
+		Sys.Delay(100);//延时，解决最后一个字节没有发出问题
         *this->RS485 = false;
     }
 }
