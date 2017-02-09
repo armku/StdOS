@@ -78,7 +78,7 @@ void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte
     //Name = "COMx";
     *(uint*)Name = *(uint*)"COMx";
     Name[3] = '0' + _index + 1;
-    Name[4] = 0;	
+    Name[4] = 0;
 }
 
 #define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
@@ -276,13 +276,12 @@ void SerialPort::OnClose()
 // 发送单一字节数据
 void SerialPort::SendData(byte data, uint times)
 {
-    while (USART_GetFlagStatus(_port, USART_FLAG_TXE) == RESET && --times > 0)
-    {}
-	
+    while (USART_GetFlagStatus(_port, USART_FLAG_TXE) == RESET && --times > 0){}
+
     //等待发送完毕
     if (times > 0)
     {
-        USART_SendData(_port, (ushort)data);		
+        USART_SendData(_port, (ushort)data);
     }
     else
     {
@@ -431,36 +430,34 @@ SerialPort *_printf_sp;
 bool isInFPutc;
 extern "C"
 {
-    #if 1
-        /* 重载fputc可以让用户程序使用printf函数 */
-        int fputc(int ch, FILE *f)
-        {
-            if (!Sys.Inited)
-                return ch;
-
-            int _index = Sys.MessagePort;
-            if (_index == COM_NONE)
-                return ch;
-
-            USART_TypeDef *g_Uart_Ports[] = UARTS;
-            USART_TypeDef *port = g_Uart_Ports[_index];
-
-            if (isInFPutc)
-                return ch;
-            isInFPutc = true;
-            // 检查并打开串口
-            if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && _printf_sp == NULL)
-            {
-                _printf_sp = new SerialPort(port);
-                _printf_sp->Open();
-            }
-
-            _printf_sp->SendData((byte)ch);
-
-            isInFPutc = false;
+    /* 重载fputc可以让用户程序使用printf函数 */
+    int fputc(int ch, FILE *f)
+    {
+        if (!Sys.Inited)
             return ch;
+
+        int _index = Sys.MessagePort;
+        if (_index == COM_NONE)
+            return ch;
+
+        USART_TypeDef *g_Uart_Ports[] = UARTS;
+        USART_TypeDef *port = g_Uart_Ports[_index];
+
+        if (isInFPutc)
+            return ch;
+        isInFPutc = true;
+        // 检查并打开串口
+        if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && _printf_sp == NULL)
+        {
+            _printf_sp = new SerialPort(port);
+            _printf_sp->Open();
         }
-    #endif 
+
+        _printf_sp->SendData((byte)ch);
+
+        isInFPutc = false;
+        return ch;
+    }
 }
 
 SerialPort *SerialPort::GetMessagePort()
@@ -777,7 +774,7 @@ uint com3timeidle; //串口3空闲时间
 #endif 
 void SerialPortOld::SendData(byte data, uint times)
 {
-	if (this->RS485)
+    if (this->RS485)
     {
         *this->RS485 = true;
     }
@@ -801,7 +798,7 @@ void SerialPortOld::SendData(byte data, uint times)
         default:
             break;
     }
-	if (this->RS485)
+    if (this->RS485)
     {
         //Sys.Delay(100); //延时，解决最后一个字节没有发出问题
         *this->RS485 = false;
