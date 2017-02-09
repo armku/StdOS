@@ -5,7 +5,7 @@
 #include "SerialPort.h"
 #include "FIFORing.h"
 
-#define COM_DEBUG 0
+#define COM_DEBUG 1
 
 
 USART_TypeDef comm1, comm2, comm3, comm4, comm5, comm6, comm7;
@@ -82,7 +82,7 @@ void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte
     Name[4] = 0;	
 }
 
-
+#define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 // ´ò¿ª´®¿Ú
 bool SerialPort::OnOpen()
 {
