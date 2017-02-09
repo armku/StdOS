@@ -810,28 +810,28 @@ void SerialPortOld::SendData(byte data)
 void SerialPortOld::SendBuffer(byte *buff, int length)
 {
     if (this->RS485)
-	{
-		*this->RS485 = true;		
-	}
-    if (length <  0)
+    {
+        *this->RS485 = true;
+    }
+    if (length < 0)
     {
         while (*buff)
         {
             this->SendData(*buff);
             buff++;
-        }        
+        }
     }
-	else
-	{
-    for (int i = 0; i < length; i++)
+    else
     {
-        this->SendData(buff[i]);
+        for (int i = 0; i < length; i++)
+        {
+            this->SendData(buff[i]);
+        }
     }
-	}
-	if (this->RS485)
-	{
-		*this->RS485 = false;		
-	}
+    if (this->RS485)
+    {
+        *this->RS485 = false;
+    }
 }
 
 //·¢ËÍÊý¾Ý
