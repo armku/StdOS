@@ -134,6 +134,9 @@ int main(void)
     pwm1.SetOutPercent(50);
 	
 	spp3.Open();
+	spp3.SendData('0');
+	spp3.SendData('1');
+	spp3.SendData('2');
 	spp3.SendData('3');
 	
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环

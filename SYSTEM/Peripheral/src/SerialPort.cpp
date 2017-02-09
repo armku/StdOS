@@ -277,12 +277,12 @@ void SerialPort::OnClose()
 void SerialPort::SendData(byte data, uint times)
 {
     while (USART_GetFlagStatus(_port, USART_FLAG_TXE) == RESET && --times > 0)
-        ;
-	printf("Send Data times:%d \r\n",times);
+    {}
+	
     //µÈ´ý·¢ËÍÍê±Ï
     if (times > 0)
     {
-        USART_SendData(_port, (ushort)data);
+        USART_SendData(_port, (ushort)data);		
     }
     else
     {
