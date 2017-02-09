@@ -87,11 +87,10 @@ void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte
 // ´ò¿ª´®¿Ú
 bool SerialPort::OnOpen()
 {
-
     Pin rx, tx;
     GetPins(&tx, &rx);
 
-    //debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
+    debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
     #if COM_DEBUG
         if (_index != Sys.MessagePort)
         {

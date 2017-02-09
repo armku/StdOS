@@ -16,7 +16,7 @@ typedef uint(*TransportHandler)(ITransport *transport, Buffer &bs, void *param);
 class ITransport
 {
     public:
-        void Open(){}
+        void Open(){OnOpen();}
         //打开端口
         bool HasHandler()
         {
@@ -39,5 +39,7 @@ class ITransport
         void SendBuffer(char *buff, int length =  - 1); //发送数据
         void Register(IOnUsartRead handler, void *param = NULL); // 注册数据到达事件
 		bool Opened;//是否打开
+	protected:
+		virtual bool OnOpen(){return true;}	
 
 };
