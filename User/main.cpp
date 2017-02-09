@@ -108,7 +108,7 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 		
     return 0;
 }
-SerialPort spp2(COM2);
+SerialPort spp3(COM3);
 
 int main(void)
 {
@@ -133,8 +133,8 @@ int main(void)
     pwm1.Init();
     pwm1.SetOutPercent(50);
 	
-	spp2.Open();
-	spp2.SendData('3');
+	spp3.Open();
+	spp3.SendData('3');
 	
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
