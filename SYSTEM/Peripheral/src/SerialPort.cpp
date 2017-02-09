@@ -782,7 +782,7 @@ uint com3timeidle; //´®¿Ú3¿ÕÏĞÊ±¼ä
     #ifdef __cplusplus
     }
 #endif 
-void SerialPortOld::SendData(byte data)
+void SerialPortOld::SendData(byte data, uint times)
 {
     switch (this->_index)
     {

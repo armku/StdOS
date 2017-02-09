@@ -138,6 +138,8 @@ int main(void)
 	spp3.SendData('1');
 	spp3.SendData('2');
 	spp3.SendData('3');
+	String str="Hello work";
+	//spp3.SendBuffer(str.GetBuffer());
 	
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
