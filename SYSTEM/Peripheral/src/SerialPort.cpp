@@ -784,6 +784,10 @@ uint com3timeidle; //串口3空闲时间
 #endif 
 void SerialPortOld::SendData(byte data, uint times)
 {
+	if (this->RS485)
+    {
+        *this->RS485 = true;
+    }
     switch (this->_index)
     {
         case COM1:
@@ -804,43 +808,12 @@ void SerialPortOld::SendData(byte data, uint times)
         default:
             break;
     }
-}
-
-//发送数据
-void SerialPortOld::SendBuffer(byte *buff, int length)
-{
-    if (this->RS485)
+	if (this->RS485)
     {
-        *this->RS485 = true;
-    }
-    if (length < 0)
-    {
-        while (*buff)
-        {
-            this->SendData(*buff);
-            buff++;
-        }
-    }
-    else
-    {
-        for (int i = 0; i < length; i++)
-        {
-            this->SendData(buff[i]);
-        }
-    }
-    if (this->RS485)
-    {
-        Sys.Delay(100); //延时，解决最后一个字节没有发出问题
+        //Sys.Delay(100); //延时，解决最后一个字节没有发出问题
         *this->RS485 = false;
     }
 }
-
-//发送数据
-void SerialPortOld::SendBuffer(char *buff, int length)
-{
-    this->SendBuffer((byte*)buff, length);
-}
-
 
 // 注册数据到达事件
 void SerialPortOld::Register(IOnUsartRead handler, SerialPortOld *sp)
