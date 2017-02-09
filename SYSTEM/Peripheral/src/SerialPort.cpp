@@ -431,7 +431,7 @@ SerialPort *_printf_sp;
 bool isInFPutc;
 extern "C"
 {
-    #if 0
+    #if 1
         /* 重载fputc可以让用户程序使用printf函数 */
         int fputc(int ch, FILE *f)
         {
@@ -771,13 +771,6 @@ uint com3timeidle; //串口3空闲时间
             default:
                 break;
         }
-    }
-
-    //重定义fputc函数
-    int fputc(int ch, FILE *f)
-    {
-        sendch(ch);
-        return ch;
     }
     #ifdef __cplusplus
     }

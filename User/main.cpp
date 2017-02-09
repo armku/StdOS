@@ -39,7 +39,7 @@ void OnKeyPress(Pin pin, bool onoff)
     printf("中断引脚：%d 值%d \n", pin, onoff);
 }
 
-SerialPortOld sp1(COM1);
+//SerialPortOld sp1(COM1);
 //SerialPortOld sp2(COM2);
 //SerialPortOld sp3(COM3);
 byte USART_RX_BUF[100]; //接收缓冲,最大USART_REC_LEN个字节.
@@ -63,7 +63,7 @@ void ComTimers(void *param)
         if (len >= 1)
         {
             com1buf.Pop(USART_RX_BUF, 0, len);
-            sp1.OnUsartReceive(USART_RX_BUF, len);
+            //sp1.OnUsartReceive(USART_RX_BUF, len);
         }
         com1buf.Reset();
     }
@@ -115,10 +115,10 @@ int main(void)
     Sys.MessagePort = COM1;
     Sys.Init();
     Sys.ShowInfo();
-    sp1.Register(OnUsartRead, &sp1);
+    //sp1.Register(OnUsartRead, &sp1);
     //sp2.Register(OnUsartRead, &sp2);
     //sp3.Register(OnUsartRead, &sp3);
-    sp1.Open();
+    //sp1.Open();
     //sp2.Open();
     //sp3.Open();
 
@@ -139,7 +139,7 @@ int main(void)
 	spp3.SendData('2');
 	spp3.SendData('3');
 	String str="Hello work";
-	//spp3.SendBuffer(str.GetBuffer());
+	spp3.SendBuffer(str.GetBuffer());
 	
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
