@@ -230,7 +230,7 @@ bool SerialPort::OnOpen()
         *RS485 = false;
 
     //Opened = true;
-
+	this->AddInterrupt();
     #if COM_DEBUG
         if (_index == Sys.MessagePort)
         {
@@ -627,7 +627,51 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     }
 
 }
-
+void SerialPort::AddInterrupt()
+{
+	NVIC_InitTypeDef nvic;
+	nvic.NVIC_IRQChannelCmd = ENABLE;
+	
+	switch(this->_index)
+	{
+		case COM1:
+			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = USART1_IRQn;
+            nvic.NVIC_IRQChannelPreemptionPriority = 0;
+            nvic.NVIC_IRQChannelSubPriority = 0;            
+			break;
+		case COM2:
+			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = USART2_IRQn;
+            nvic.NVIC_IRQChannelPreemptionPriority = 0;
+            nvic.NVIC_IRQChannelSubPriority = 1;
+            break;
+		case COM3:
+			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = USART3_IRQn;
+            nvic.NVIC_IRQChannelPreemptionPriority = 0;
+            nvic.NVIC_IRQChannelSubPriority = 2;
+            break;
+		#if 0
+		case COM4:
+			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+                nvic.NVIC_IRQChannel = UART4_IRQn;
+                nvic.NVIC_IRQChannelPreemptionPriority = 0;
+                nvic.NVIC_IRQChannelSubPriority = 3;
+                break;
+		case COM5:
+			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+                nvic.NVIC_IRQChannel = UART5_IRQn;
+                nvic.NVIC_IRQChannelPreemptionPriority = 0;
+                nvic.NVIC_IRQChannelSubPriority = 2;
+                NVIC_Init(&nvic);
+                break;
+		#endif
+		default:
+			break;
+	}
+	NVIC_Init(&nvic);
+}
 void SerialPortOld::Open(){
 
 }
@@ -658,7 +702,7 @@ uint com3timeidle; //串口3空闲时间
 			
             USART_ClearITPendingBit(USART1, USART_IT_RXNE);
             byte inch = USART1->DR; //读取接收到的数据
-			printf("in data \r\n");
+			printf("COM1 in data \r\n");
             com1buf.Push(inch);
             com1timeidle = 0; //空闲计时器清零
         }
@@ -692,7 +736,7 @@ uint com3timeidle; //串口3空闲时间
         {
             USART_ClearITPendingBit(USART3, USART_IT_RXNE);
             byte inch = USART_ReceiveData(USART3); //读取接收到的数据
-
+			printf("com3 in data \r\n");
             com3buf.Push(inch);
             com3timeidle = 0; //空闲计时器清零
         }
