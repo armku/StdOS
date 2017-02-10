@@ -13,31 +13,20 @@ typedef uint(*TransportHandler)(ITransport *transport, Buffer &bs, void *param);
 class ITransport
 {
     public:
-        void Open(){OnOpen();}
+        void Open();
         //打开端口
-        bool HasHandler()
-        {
-                return false;
-        }
-        uint Read(byte *buf, uint len)
-        {
-                return 10;
-        }
-        uint Write(byte *buf, uint len)
-        {
-                return len;
-        }
-        int OnReceive(byte *buf, uint len)
-        {
-                return len;
-        }
-        void SendData(byte data, uint times = 3000){}
+        bool HasHandler();
+        uint Read(byte *buf, uint len);
+        uint Write(byte *buf, uint len);
+        int OnReceive(byte *buf, uint len);
+        void SendData(byte data, uint times = 3000);
         void SendBuffer(byte *buff, int length =  - 1); //发送数据
         void SendBuffer(char *buff, int length =  - 1); //发送数据
         void Register(TransportHandler handler, void *param = NULL); // 注册数据到达事件
-		bool Opened;//是否打开
-	protected:
-		virtual bool OnOpen(){return true;}	
-		virtual bool OnWrite(const byte *buf, uint size){return true;}
+        bool Opened; //是否打开
+    protected:
+        virtual bool OnOpen();
+        virtual bool OnWrite(const byte *buf, uint size);
+        TransportHandler *pHandler;
 
 };
