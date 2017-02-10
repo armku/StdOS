@@ -328,7 +328,7 @@ uint SerialPort::OnRead(byte *buf, uint size)
         uint msTimeout = 1;
         ulong us = Time.Current() + msTimeout * 1000;
     #else 
-        uint msTimeout = 10;
+        uint msTimeout = 100;
         ulong us = Time.Current() + msTimeout;
     #endif 
     uint count = 0; // 收到的字节数    
@@ -337,7 +337,7 @@ uint SerialPort::OnRead(byte *buf, uint size)
         // 轮询接收寄存器，收到数据则放入缓冲区
         if (USART_GetFlagStatus(_port, USART_FLAG_RXNE) != RESET)
         {
-			USART_ClearITPendingBit(_port, USART_IT_RXNE);//ADD
+			//USART_ClearITPendingBit(_port, USART_IT_RXNE);//ADD
 			
             *buf++ = (byte)USART_ReceiveData(_port);
             count++;
@@ -401,6 +401,8 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
             byte buf[64];
             uint len = sp->Read(buf, ArrayLength(buf));
 			printf("COM1收到数据:%d\r\n",len);
+			Buffer str(buf,len);
+			str.Show(false);
 			#if 1
             if (len)
             {
