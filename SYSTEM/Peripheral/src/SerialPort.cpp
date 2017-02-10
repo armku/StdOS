@@ -651,15 +651,28 @@ uint com3timeidle; //串口3空闲时间
      */
     void USART1_IRQHandler(void) //串口1中断服务程序
     {
+		#if 1
         if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
         //接收到一字节
         {
+			
             USART_ClearITPendingBit(USART1, USART_IT_RXNE);
             byte inch = USART1->DR; //读取接收到的数据
-
+			printf("in data \r\n");
             com1buf.Push(inch);
             com1timeidle = 0; //空闲计时器清零
         }
+		#else
+		if(_printf_sp)
+		{
+			printf("has _printf_sp\r\n");
+			_printf_sp->OnUsartReceive(0,_printf_sp);
+		}
+		else
+		{
+			printf("has no _printf_sp\r\n");
+		}
+		#endif
     }
 
     void USART2_IRQHandler(void) //串口1中断服务程序

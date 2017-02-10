@@ -67,7 +67,7 @@ class SerialPort: public ITransport
         virtual void OnClose();
         virtual bool OnWrite(const byte *buf, uint size);
         virtual uint OnRead(byte *buf, uint size);
-    private:
+    public://ԭʼ:private
         static void OnUsartReceive(ushort num, void *param);
 };
 class SerialPortOld: public ITransport

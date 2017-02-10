@@ -113,8 +113,13 @@ SerialPort spp3(COM3);
 void ReadComm(void * param)
 {
 	byte  buf[100];
-	byte readlen=spp3.Read(buf,100);
-	printf("收到数据:[%d] %s\r\n",readlen,buf);
+	for(int i=0;i<100;i++)
+	{
+		buf[i]=0;
+	}
+	byte readlen	= 0;
+	//readlen			= SerialPort::GetMessagePort()->Read(buf,100);
+	//printf("收到数据:[%d] %s\r\n",readlen,buf);
 }
 
 int main(void)
