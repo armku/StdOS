@@ -230,7 +230,7 @@ bool SerialPort::OnOpen()
         *RS485 = false;
 
     //Opened = true;
-	this->AddInterrupt();
+    this->AddInterrupt();
     #if COM_DEBUG
         if (_index == Sys.MessagePort)
         {
@@ -324,13 +324,13 @@ bool SerialPort::OnWrite(const byte *buf, uint size)
 uint SerialPort::OnRead(byte *buf, uint size)
 {
     // 在100ms内接收数据
-	#if 0
-    uint msTimeout = 1;
-    ulong us = Time.Current() + msTimeout * 1000;
-	#else
-	uint msTimeout = 100;
-    ulong us = Time.Current() + msTimeout;
-	#endif
+    #if 0
+        uint msTimeout = 1;
+        ulong us = Time.Current() + msTimeout * 1000;
+    #else 
+        uint msTimeout = 100;
+        ulong us = Time.Current() + msTimeout;
+    #endif 
     uint count = 0; // 收到的字节数    
     while (count < size && Time.Current() < us)
     {
@@ -339,11 +339,11 @@ uint SerialPort::OnRead(byte *buf, uint size)
         {
             *buf++ = (byte)USART_ReceiveData(_port);
             count++;
-			#if 0
-            us = Time.Current() + msTimeout * 1000;
-			#else
-			us = Time.Current() + msTimeout;
-			#endif
+            #if 0
+                us = Time.Current() + msTimeout * 1000;
+            #else 
+                us = Time.Current() + msTimeout;
+            #endif 
         }
     }
     return count;
@@ -627,51 +627,53 @@ SerialPortOld::SerialPortOld(COM_Def index, int baudRate, byte parity, byte data
     }
 
 }
+
 void SerialPort::AddInterrupt()
 {
-	NVIC_InitTypeDef nvic;
-	nvic.NVIC_IRQChannelCmd = ENABLE;
-	
-	switch(this->_index)
-	{
-		case COM1:
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+    NVIC_InitTypeDef nvic;
+    nvic.NVIC_IRQChannelCmd = ENABLE;
+
+    switch (this->_index)
+    {
+        case COM1:
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = USART1_IRQn;
             nvic.NVIC_IRQChannelPreemptionPriority = 0;
-            nvic.NVIC_IRQChannelSubPriority = 0;            
-			break;
-		case COM2:
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannelSubPriority = 0;
+            break;
+        case COM2:
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = USART2_IRQn;
             nvic.NVIC_IRQChannelPreemptionPriority = 0;
             nvic.NVIC_IRQChannelSubPriority = 1;
             break;
-		case COM3:
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+        case COM3:
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = USART3_IRQn;
             nvic.NVIC_IRQChannelPreemptionPriority = 0;
             nvic.NVIC_IRQChannelSubPriority = 2;
             break;
-		#if 0
-		case COM4:
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            #if 0
+            case COM4:
+                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
                 nvic.NVIC_IRQChannel = UART4_IRQn;
                 nvic.NVIC_IRQChannelPreemptionPriority = 0;
                 nvic.NVIC_IRQChannelSubPriority = 3;
                 break;
-		case COM5:
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            case COM5:
+                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
                 nvic.NVIC_IRQChannel = UART5_IRQn;
                 nvic.NVIC_IRQChannelPreemptionPriority = 0;
                 nvic.NVIC_IRQChannelSubPriority = 2;
                 NVIC_Init(&nvic);
                 break;
-		#endif
-		default:
-			break;
-	}
-	NVIC_Init(&nvic);
+            #endif 
+        default:
+            break;
+    }
+    NVIC_Init(&nvic);
 }
+
 void SerialPortOld::Open(){
 
 }
@@ -695,28 +697,28 @@ uint com3timeidle; //串口3空闲时间
      */
     void USART1_IRQHandler(void) //串口1中断服务程序
     {
-		#if 1
-        if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
-        //接收到一字节
-        {
-			
-            USART_ClearITPendingBit(USART1, USART_IT_RXNE);
-            byte inch = USART1->DR; //读取接收到的数据
-			printf("COM1 in data \r\n");
-            com1buf.Push(inch);
-            com1timeidle = 0; //空闲计时器清零
-        }
-		#else
-		if(_printf_sp)
-		{
-			printf("has _printf_sp\r\n");
-			_printf_sp->OnUsartReceive(0,_printf_sp);
-		}
-		else
-		{
-			printf("has no _printf_sp\r\n");
-		}
-		#endif
+        #if 1
+            if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
+            //接收到一字节
+            {
+
+                USART_ClearITPendingBit(USART1, USART_IT_RXNE);
+                byte inch = USART1->DR; //读取接收到的数据
+                printf("COM1 in data \r\n");
+                com1buf.Push(inch);
+                com1timeidle = 0; //空闲计时器清零
+            }
+        #else 
+            if (_printf_sp)
+            {
+                printf("has _printf_sp\r\n");
+                _printf_sp->OnUsartReceive(0, _printf_sp);
+            }
+            else
+            {
+                printf("has no _printf_sp\r\n");
+            }
+        #endif 
     }
 
     void USART2_IRQHandler(void) //串口1中断服务程序
@@ -736,7 +738,7 @@ uint com3timeidle; //串口3空闲时间
         {
             USART_ClearITPendingBit(USART3, USART_IT_RXNE);
             byte inch = USART_ReceiveData(USART3); //读取接收到的数据
-			printf("com3 in data \r\n");
+            printf("com3 in data \r\n");
             com3buf.Push(inch);
             com3timeidle = 0; //空闲计时器清零
         }
