@@ -7,12 +7,13 @@ void ITransport::Open()
 }
 
 // 注册数据到达事件
-void ITransport::Register(TransportHandler handler, void *param){
-
+void ITransport::Register(TransportHandler handler, void *param)
+{
+	this->pHandler=&handler;
 }
 bool ITransport::HasHandler()
-{
-    return pHandler;
+{	
+    return  this->pHandler;
 }
 
 //发送数据

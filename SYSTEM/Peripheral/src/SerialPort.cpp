@@ -395,6 +395,7 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
     {
         if (USART_GetITStatus(sp->_port, USART_IT_RXNE) != RESET)
         {
+			#if 0
             // 从栈分配，节省内存
             byte buf[64];
             uint len = sp->Read(buf, ArrayLength(buf));
@@ -408,6 +409,11 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
                     sp->Write(buf, len);
                 }
             }
+			#else
+			USART_ClearITPendingBit(sp->_port, USART_IT_RXNE);
+                byte inch = USART1->DR; //读取接收到的数据
+                printf("COM1 in data \r\n");
+			#endif
         }
     }
 
@@ -697,7 +703,7 @@ uint com3timeidle; //串口3空闲时间
      */
     void USART1_IRQHandler(void) //串口1中断服务程序
     {
-        #if 1
+        #if 0
             if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
             //接收到一字节
             {
@@ -711,12 +717,7 @@ uint com3timeidle; //串口3空闲时间
         #else 
             if (_printf_sp)
             {
-                printf("has _printf_sp\r\n");
                 _printf_sp->OnUsartReceive(0, _printf_sp);
-            }
-            else
-            {
-                printf("has no _printf_sp\r\n");
             }
         #endif 
     }
