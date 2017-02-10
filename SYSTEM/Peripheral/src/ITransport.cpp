@@ -1,7 +1,7 @@
 #include "ITransport.h"
 #include "string.h"
 // 注册数据到达事件
-void ITransport::Register(IOnUsartRead handler,void *param)
+void ITransport::Register(TransportHandler handler,void *param)
 {
 	
 }

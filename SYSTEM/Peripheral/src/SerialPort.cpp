@@ -780,7 +780,7 @@ void SerialPortOld::SendData(byte data, uint times)
 }
 
 // 注册数据到达事件
-void SerialPortOld::Register(IOnUsartRead handler, SerialPortOld *sp)
+void SerialPortOld::Register(TransportHandler handler, SerialPortOld *sp)
 {
     this->OnRcv = handler;
 }

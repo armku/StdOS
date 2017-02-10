@@ -134,10 +134,7 @@ int main(void)
     pwm1.SetOutPercent(50);
 	
 	spp3.Open();
-	spp3.SendData('0');
-	spp3.SendData('1');
-	spp3.SendData('2');
-	spp3.SendData('3');
+	spp3.Register(OnUsartRead);
 	String str="Hello work";
 	spp3.SendBuffer(str.GetBuffer());
 	
