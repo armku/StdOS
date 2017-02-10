@@ -336,9 +336,7 @@ uint SerialPort::OnRead(byte *buf, uint size)
     {
         // 轮询接收寄存器，收到数据则放入缓冲区
         if (USART_GetFlagStatus(_port, USART_FLAG_RXNE) != RESET)
-        {
-			//USART_ClearITPendingBit(_port, USART_IT_RXNE);//ADD
-			
+        {			
             *buf++ = (byte)USART_ReceiveData(_port);
             count++;
             #if 0
@@ -720,6 +718,7 @@ uint com3timeidle; //串口3空闲时间
         #else 
             if (_printf_sp)
             {
+				
                 _printf_sp->OnUsartReceive(0, _printf_sp);
             }
         #endif 
