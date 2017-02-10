@@ -4,6 +4,7 @@
 #include "Port.h"
 #include "SerialPort.h"
 #include "FIFORing.h"
+#include "TInterrupt.h"
 
 #define COM_DEBUG 0
 #define STM32F1XX
@@ -348,13 +349,13 @@ bool SerialPort::Flush(uint times)
     //µÈ´ý·¢ËÍÍê±Ï
     return times > 0;
 }
-
+#define UART_IRQs {0}
 
 void SerialPort::Register(TransportHandler handler, void *param)
 {
 
     ITransport::Register(handler, param);
-    #if 0
+    #if 1
         const byte irqs[] = UART_IRQs;
         byte irq = irqs[_index];
         if (handler)

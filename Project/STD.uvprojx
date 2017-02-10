@@ -569,6 +569,11 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
             </File>
+            <File>
+              <FileName>TInterrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\TInterrupt.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1455,6 +1460,11 @@
               <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TInterrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\TInterrupt.cpp</FilePath>
             </File>
           </Files>
         </Group>
