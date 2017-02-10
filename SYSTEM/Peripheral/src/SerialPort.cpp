@@ -349,26 +349,26 @@ bool SerialPort::Flush(uint times)
     //µÈ´ý·¢ËÍÍê±Ï
     return times > 0;
 }
+
 #define UART_IRQs {0}
 
 void SerialPort::Register(TransportHandler handler, void *param)
 {
-
     ITransport::Register(handler, param);
-    #if 1
-        const byte irqs[] = UART_IRQs;
-        byte irq = irqs[_index];
-        if (handler)
-        {
-            Interrupt.SetPriority(irq, 1);
 
+    const byte irqs[] = UART_IRQs;
+    byte irq = irqs[_index];
+    if (handler)
+    {
+        Interrupt.SetPriority(irq, 1);
+        #if 0
             Interrupt.Activate(irq, OnUsartReceive, this);
-        }
-        else
-        {
-            Interrupt.Deactivate(irq);
-        }
-    #endif 
+        #endif 
+    }
+    else
+    {
+        Interrupt.Deactivate(irq);
+    }
 }
 
 uint ArrayLength(byte buf[])
