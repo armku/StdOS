@@ -110,6 +110,13 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 }
 SerialPort spp3(COM3);
 
+void ReadComm(void * param)
+{
+	byte  buf[100];
+	byte readlen=spp3.Read(buf,100);
+	printf("收到数据:[%d] %s\r\n",readlen,buf);
+}
+
 int main(void)
 {
     Sys.MessagePort = COM1;
@@ -141,6 +148,7 @@ int main(void)
     Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
     Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");    
+	Sys.AddTask(ReadComm, 0, 5, 1000, "串口读取测试");   
 
     Sys.Start();
 }

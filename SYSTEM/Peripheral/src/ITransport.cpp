@@ -18,7 +18,7 @@ bool ITransport::HasHandler()
 //·¢ËÍÊý¾Ý
 uint ITransport::Read(byte *buf, uint len)
 {
-    return 10;
+	return this->OnRead(buf,len);
 }
 
 uint ITransport::Write(byte *buf, uint len)
@@ -41,7 +41,10 @@ bool ITransport::OnWrite(const byte *buf, uint size)
 {
     return true;
 }
-
+uint ITransport::OnRead(byte *buf, uint size)
+{
+	return 0;
+}
 void ITransport::SendBuffer(byte *buff, int length)
 {
     if (length < 0)
