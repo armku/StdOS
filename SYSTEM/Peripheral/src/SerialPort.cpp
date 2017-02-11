@@ -380,11 +380,6 @@ void SerialPort::Register(TransportHandler handler, void *param)
     }
 }
 
-uint ArrayLength(byte buf[])
-{
-    return 10;
-}
-
 // 真正的串口中断函数
 void SerialPort::OnUsartReceive(ushort num, void *param)
 {
@@ -397,7 +392,7 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
         {			
             // 从栈分配，节省内存
             byte buf[64];
-            uint len = sp->Read(buf, ArrayLength(buf));
+            uint len = sp->Read(buf, sizeof(buf));
 			printf("COM1收到数据:%d\r\n",len);
 			Buffer str(buf,len);
 			str.Show(false);
@@ -416,6 +411,10 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
             }
 			#endif
         }
+		 if (USART_GetFlagStatus(sp->_port, USART_FLAG_RXNE) != RESET)
+        {			
+            (byte)USART_ReceiveData(sp->_port);
+		}
     }
 
 }
