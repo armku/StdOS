@@ -393,11 +393,9 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
             // 从栈分配，节省内存
             byte buf[64];
             uint len = sp->Read(buf, sizeof(buf));
-			printf("COM1收到数据:%d\r\n",len);
 			Buffer str(buf,len);
-			str.Show(false);
-			#if 1
-            if (len)
+			str.Show(true);
+			if (len)
             {
                 len = sp->OnReceive(buf, len);
 				#if 0
@@ -408,13 +406,8 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
                 {
                     sp->Write(buf, len);
                 }
-            }
-			#endif
+            }			
         }
-		 if (USART_GetFlagStatus(sp->_port, USART_FLAG_RXNE) != RESET)
-        {			
-            (byte)USART_ReceiveData(sp->_port);
-		}
     }
 
 }
@@ -644,32 +637,32 @@ void SerialPort::AddInterrupt()
         case COM1:
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = USART1_IRQn;
-            nvic.NVIC_IRQChannelPreemptionPriority = 0;
-            nvic.NVIC_IRQChannelSubPriority = 0;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
+            nvic.NVIC_IRQChannelSubPriority = 1;
             break;
         case COM2:
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = USART2_IRQn;
-            nvic.NVIC_IRQChannelPreemptionPriority = 0;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = 1;
             break;
         case COM3:
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = USART3_IRQn;
-            nvic.NVIC_IRQChannelPreemptionPriority = 0;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = 2;
             break;
             #if 0
             case COM4:
                 NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
                 nvic.NVIC_IRQChannel = UART4_IRQn;
-                nvic.NVIC_IRQChannelPreemptionPriority = 0;
+                nvic.NVIC_IRQChannelPreemptionPriority = 1;
                 nvic.NVIC_IRQChannelSubPriority = 3;
                 break;
             case COM5:
                 NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
                 nvic.NVIC_IRQChannel = UART5_IRQn;
-                nvic.NVIC_IRQChannelPreemptionPriority = 0;
+                nvic.NVIC_IRQChannelPreemptionPriority = 1;
                 nvic.NVIC_IRQChannelSubPriority = 2;
                 NVIC_Init(&nvic);
                 break;

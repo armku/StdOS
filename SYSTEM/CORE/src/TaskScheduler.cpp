@@ -71,7 +71,7 @@ void TaskScheduler::Start()
     }
 
     Add(ShowTime, NULL, 2000, 30000,"时间显示");
-    Add(ShowStatus, this, 3000, 30000,"任务显示");
+    //Add(ShowStatus, this, 3000, 30000,"任务显示");
 
     debug_printf("%s::准备就绪 开始循环处理%d个任务！\r\n\r\n", Name, Count);
 

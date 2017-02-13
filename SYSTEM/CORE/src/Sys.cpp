@@ -231,6 +231,12 @@ void TSys::Init()
     SysTick_Config(SystemCoreClock / delay_ostickspersec); //tick is 1ms	
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
     GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); //¹Ø±Õjtag£¬±£Áôswd	
+	
+	
+	NVIC_SetPriority (SysTick_IRQn, 0);
+	
+	
+	
     this->FlashSize = *(uint16_t*)(0X1FFFF7E0); // ÈÝÁ¿
 
     for (int i = 0; i < 12; i++)
