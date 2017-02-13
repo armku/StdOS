@@ -17,27 +17,26 @@
 #define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
-#if 0
-    #if defined(STM32F1) || defined(STM32F4)
-        static const int PORT_IRQns[] = 
-        {
-            EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
-            EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
-            EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
-        };
-    #elif defined(STM32F0)
-        static const int PORT_IRQns[] = 
-        {
-            EXTI0_1_IRQn, EXTI0_1_IRQn,  // 基础
-            EXTI2_3_IRQn, EXTI2_3_IRQn,  // 基础
-            EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn,
-                EXTI4_15_IRQn  // EXTI15_10
-        };
-    #endif 
+
+#if defined(STM32F1) || defined(STM32F4)
+    static const int PORT_IRQns[] = 
+    {
+        EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
+        EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
+        EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
+    };
+#elif defined(STM32F0)
+    static const int PORT_IRQns[] = 
+    {
+        EXTI0_1_IRQn, EXTI0_1_IRQn,  // 基础
+        EXTI2_3_IRQn, EXTI2_3_IRQn,  // 基础
+        EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn,
+            EXTI4_15_IRQn  // EXTI15_10
+    };
 #endif 
 /*
- 端口基本功能
-*/
+端口基本功能
+ */
 Port::Port()
 {
     _Pin = P0;
@@ -75,9 +74,10 @@ Port::~Port()
         }
     #endif 
 }
+
 /*
- 单一引脚初始化
-*/
+单一引脚初始化
+ */
 Port &Port::Set(Pin pin)
 {
     //assert_param(pin != P0);
@@ -236,10 +236,11 @@ void OutputPort::OnConfig(GPIO_InitTypeDef &gpio)
         dat |= PinBit;
     GPIO_Write(Group, dat);
 }
+
 /*
- 整组读取
-*/
-ushort OutputPort::ReadGroup() 
+整组读取
+ */
+ushort OutputPort::ReadGroup()
 {
     return GPIO_ReadOutputData(Group);
 }
@@ -313,8 +314,8 @@ void OutputPort::Blink(uint times, uint ms)
 }
 
 /*
- 设置端口状态
-*/
+设置端口状态
+ */
 void OutputPort::Write(Pin pin, bool value)
 {
     if (value)
