@@ -13,11 +13,11 @@
 class SerialPort: public ITransport
 {
     private:
+		int _baudRate;
         byte _index;
         byte _parity;
         byte _dataBits;
-        byte _stopBits;
-        int _baudRate;
+        byte _stopBits;        
 
         USART_TypeDef *_port;
         AlternatePort _tx;
