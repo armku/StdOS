@@ -26,7 +26,7 @@ if(ID) _Scheduler->Remove(ID);
 // 显示状态
 void Task::ShowStatus()
 {
-    debug_printf("Task::Status 任务 %d [%d]%s 执行 %dus 平均 %dus\r\n", ID, Times,Name, CpuTime, Cost);
+	debug_printf("Task::%-12s  %2d [%8d] 平均 %5dus 最大 %5dus 周期 %dms %s\r\n",Name, ID, Times,CpuTime,Cost,this->Period,this->Enable?" ":"禁用");
 }
 bool Task::operator==(Task& tsk)
 {

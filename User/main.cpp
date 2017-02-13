@@ -152,10 +152,10 @@ int main(void)
 	
 	SerialPort::GetMessagePort()->Register(OnUsartRead);
 	
-    Sys.AddTask(ComTimers, 0, 1, 1, "串口数据接收定时器"); //1毫秒周期循环
+    Sys.AddTask(ComTimers, 0, 1, 1, "串口接收"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
     Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");    
-	Sys.AddTask(ReadComm, 0, 5, 1000, "串口读取测试");   
+	Sys.AddTask(ReadComm, 0, 5, 1000, "串口测试");   
 
     Sys.Start();
 }
