@@ -1,3 +1,8 @@
+/*
+端口基类
+用于管理一个端口，通过PinBit标识该组的哪些引脚。
+子类初始化时先通过SetPort设置端口，备份引脚状态，然后Config通过gpio结构体配置端口，端口销毁时恢复引脚状态
+ */
 #pragma once 
 
 #include "Sys.h"
@@ -10,9 +15,6 @@
     #define GPIO_MAX_SPEED 50
 #endif 
 
-// 端口基类
-// 用于管理一个端口，通过PinBit标识该组的哪些引脚。
-// 子类初始化时先通过SetPort设置端口，备份引脚状态，然后Config通过gpio结构体配置端口，端口销毁时恢复引脚状态
 class Port
 {
     public:
@@ -21,30 +23,25 @@ class Port
         ushort PinBit; // 组内引脚位。每个引脚一个位
 
         Port &Set(Pin pin); // 设置引脚，并应用配置。
-        bool Empty()const
-        {
-                return _Pin == P0;
-        }
-
+        bool Empty()const;
         virtual void Config(); // 确定配置,确认用对象内部的参数进行初始化
-
         // 辅助函数
-        _force_inline static GPIO_TypeDef* IndexToGroup(byte index);
-        _force_inline static byte GroupToIndex(GPIO_TypeDef* group);
-        	
+        _force_inline static GPIO_TypeDef *IndexToGroup(byte index);
+        _force_inline static byte GroupToIndex(GPIO_TypeDef *group);
+
     protected:
         Port();
         virtual ~Port();
-
         // 配置过程，由Config调用，最后GPIO_Init
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
-        
     private:
         #if defined(STM32F1)
             ulong InitState; // 备份引脚初始状态，在析构时还原
         #endif 
 };
-// 输出口
+/*
+输出口
+ */
 class OutputPort: public Port
 {
     public:
@@ -52,16 +49,9 @@ class OutputPort: public Port
         bool Invert; // 是否倒置输入输出
         uint Speed; // 速度
 
-        OutputPort()
-        {
-                Init();
-        }
+        OutputPort();
         // 普通输出一般采用开漏输出，需要倒置
-        OutputPort(Pin pin, bool invert = false, bool openDrain = false, uint speed = GPIO_MAX_SPEED)
-        {
-                Init(invert, openDrain, speed);
-                Set(pin);
-        }
+        OutputPort(Pin pin, bool invert = false, bool openDrain = false, uint speed = GPIO_MAX_SPEED);
 
         // 整体写入所有包含的引脚
         void Write(bool value);
@@ -78,82 +68,46 @@ class OutputPort: public Port
         static bool Read(Pin pin);
         static void Write(Pin pin, bool value);
 
-        OutputPort &operator = (bool value)
-        {
-                Write(value);
-                return  *this;
-        }
-        OutputPort &operator = (OutputPort &port)
-        {
-                Write(port.Read());
-                return  *this;
-        }
-        operator bool()
-        {
-                return Read();
-        }
+        OutputPort &operator = (bool value);
+        OutputPort &operator = (OutputPort &port);
+        operator bool();
 
     protected:
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
-
-        void Init(bool invert = false, bool openDrain = false, uint speed = GPIO_MAX_SPEED)
-        {
-                OpenDrain = openDrain;
-                Speed = speed;
-                Invert = invert;
-        }
+        void Init(bool invert = false, bool openDrain = false, uint speed = GPIO_MAX_SPEED);
 };
-// 输出端口会话类。初始化时打开端口，超出作用域析构时关闭。反向操作可配置端口为倒置
+/*
+输出端口会话类。初始化时打开端口，超出作用域析构时关闭。反向操作可配置端口为倒置
+ */
 class PortScope
 {
     private:
         OutputPort *_port;
         bool _value;
-
     public:
-        PortScope(OutputPort *port, bool value = true)
-        {
-                _port = port;
-                if (_port)
-                {
-                        // 备份数值，析构的时候需要还原
-                        _value = port->Read();
-                        *_port = value;
-                }
-        }
+        PortScope(OutputPort *port, bool value = true);
 
-        ~PortScope()
-        {
-                if (_port)
-                    *_port = _value;
-        }
+        ~PortScope();
 };
-// 复用输出口
+/*
+复用输出口
+ */
 class AlternatePort: public OutputPort
 {
     public:
-        AlternatePort(): OutputPort()
-        {
-			Init(false,false);
-		}
+        AlternatePort();
         // 复用输出一般采用推挽输出，不需要倒置
-        AlternatePort(Pin pin, bool invert = false, bool openDrain = false, uint speed = GPIO_MAX_SPEED): OutputPort(pin,invert,openDrain,speed)
-        {
-			Init(invert,openDrain,speed);
-			Set(pin);
-		}
-
+        AlternatePort(Pin pin, bool invert = false, bool openDrain = false, uint speed = GPIO_MAX_SPEED);
     protected:
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
 };
-// 模拟输入输出口
+/*
+模拟输入输出口
+ */
 class AnalogInPort: public Port
 {
     public:
-        AnalogInPort(Pin pin)
-        {
-                Set(pin);
-        }
+        AnalogInPort(Pin pin);
 
     protected:
         virtual void OnConfig(GPIO_InitTypeDef &gpio);

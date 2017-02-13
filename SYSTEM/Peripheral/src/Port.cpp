@@ -35,8 +35,9 @@
         };
     #endif 
 #endif 
-
-// 端口基本功能
+/*
+ 端口基本功能
+*/
 Port::Port()
 {
     _Pin = P0;
@@ -72,10 +73,11 @@ Port::~Port()
                 }
             }
         }
-    #endif
+    #endif 
 }
-
-// 单一引脚初始化
+/*
+ 单一引脚初始化
+*/
 Port &Port::Set(Pin pin)
 {
     //assert_param(pin != P0);
@@ -97,11 +99,16 @@ Port &Port::Set(Pin pin)
         if (_Pin != P0)
             InitState = ((ulong)Group->CRH << 32) + Group->CRL;
     #endif 
-   
+
     if (_Pin != P0)
         Config();
 
     return  *this;
+}
+
+bool Port::Empty()const
+{
+    return _Pin == P0;
 }
 
 void Port::Config()
@@ -171,6 +178,17 @@ byte Port::GroupToIndex(GPIO_TypeDef *group)
 #define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
+OutputPort::OutputPort()
+{
+    Init();
+}
+
+OutputPort::OutputPort(Pin pin, bool invert, bool openDrain, uint speed)
+{
+    Init(invert, openDrain, speed);
+    Set(pin);
+}
+
 void OutputPort::OnConfig(GPIO_InitTypeDef &gpio)
 {
     #ifndef STM32F4
@@ -218,8 +236,10 @@ void OutputPort::OnConfig(GPIO_InitTypeDef &gpio)
         dat |= PinBit;
     GPIO_Write(Group, dat);
 }
-
-ushort OutputPort::ReadGroup() // 整组读取
+/*
+ 整组读取
+*/
+ushort OutputPort::ReadGroup() 
 {
     return GPIO_ReadOutputData(Group);
 }
@@ -251,6 +271,23 @@ void OutputPort::Write(bool value)
         GPIO_ResetBits(Group, PinBit);
 }
 
+OutputPort &OutputPort::operator = (bool value)
+{
+    Write(value);
+    return  *this;
+}
+
+OutputPort &OutputPort::operator = (OutputPort &port)
+{
+    Write(port.Read());
+    return  *this;
+}
+
+OutputPort::operator bool()
+{
+    return Read();
+}
+
 void OutputPort::WriteGroup(ushort value)
 {
     GPIO_Write(Group, value);
@@ -275,7 +312,9 @@ void OutputPort::Blink(uint times, uint ms)
     Write(false);
 }
 
-// 设置端口状态
+/*
+ 设置端口状态
+*/
 void OutputPort::Write(Pin pin, bool value)
 {
     if (value)
@@ -283,8 +322,44 @@ void OutputPort::Write(Pin pin, bool value)
     else
         GPIO_ResetBits(_GROUP(pin), _PORT(pin));
 }
+
+void OutputPort::Init(bool invert, bool openDrain, uint speed)
+{
+    OpenDrain = openDrain;
+    Speed = speed;
+    Invert = invert;
+}
+
+PortScope::PortScope(OutputPort *port, bool value)
+{
+    _port = port;
+    if (_port)
+    {
+        // 备份数值，析构的时候需要还原
+        _value = port->Read();
+        *_port = value;
+    }
+}
+
+PortScope::~PortScope()
+{
+    if (_port)
+        *_port = _value;
+}
+
+AlternatePort::AlternatePort(): OutputPort()
+{
+    Init(false, false);
+}
+
+AlternatePort::AlternatePort(Pin pin, bool invert, bool openDrain, uint speed): OutputPort(pin, invert, openDrain, speed)
+{
+    Init(invert, openDrain, speed);
+    Set(pin);
+}
+
 void AlternatePort::OnConfig(GPIO_InitTypeDef &gpio)
-{	
+{
     OutputPort::OnConfig(gpio);
 
     #ifdef STM32F1
@@ -292,8 +367,9 @@ void AlternatePort::OnConfig(GPIO_InitTypeDef &gpio)
     #else 
         gpio.GPIO_Mode = GPIO_Mode_AF;
         gpio.GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
-    #endif 	
+    #endif 
 }
+
 void AnalogInPort::OnConfig(GPIO_InitTypeDef &gpio)
 {
     Port::OnConfig(gpio);
@@ -304,4 +380,9 @@ void AnalogInPort::OnConfig(GPIO_InitTypeDef &gpio)
         gpio.GPIO_Mode = GPIO_Mode_AN;
         //gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
+}
+
+AnalogInPort::AnalogInPort(Pin pin)
+{
+    Set(pin);
 }
