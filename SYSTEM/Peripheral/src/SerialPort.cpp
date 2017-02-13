@@ -21,6 +21,11 @@ SerialPort::SerialPort()
     Init();
 }
 
+SerialPort::SerialPort(COM_Def index, int baudRate, byte parity, byte dataBits, byte stopBits)
+{
+    Init();
+    Init(index, baudRate, parity, dataBits, stopBits);
+}
 
 SerialPort::SerialPort(USART_TypeDef *com, int baudRate, byte parity, byte dataBits, byte stopBits)
 {
@@ -336,7 +341,7 @@ uint SerialPort::OnRead(byte *buf, uint size)
     {
         // 轮询接收寄存器，收到数据则放入缓冲区
         if (USART_GetFlagStatus(_port, USART_FLAG_RXNE) != RESET)
-        {			
+        {
             *buf++ = (byte)USART_ReceiveData(_port);
             count++;
             #if 0
@@ -358,8 +363,11 @@ bool SerialPort::Flush(uint times)
     //等待发送完毕
     return times > 0;
 }
-
-#define UART_IRQs {0,1,2,3,4,5}
+#ifdef STM32F10X_HD
+#define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
+#else
+#define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn}
+#endif
 
 void SerialPort::Register(TransportHandler handler, void *param)
 {
@@ -369,13 +377,18 @@ void SerialPort::Register(TransportHandler handler, void *param)
     byte irq = irqs[_index];
     if (handler)
     {
-        Interrupt.SetPriority(irq, 1);       
-		Interrupt.Activate(irq, SerialPort::OnUsartReceive, this);       
+        Interrupt.SetPriority(irq, 1);
+        Interrupt.Activate(irq, SerialPort::OnUsartReceive, this);
     }
     else
     {
         Interrupt.Deactivate(irq);
     }
+}
+
+String SerialPort::ToString()
+{
+    return Name;
 }
 
 // 真正的串口中断函数
@@ -387,24 +400,24 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
     if (sp && sp->HasHandler())
     {
         if (USART_GetITStatus(sp->_port, USART_IT_RXNE) != RESET)
-        {			
+        {
             // 从栈分配，节省内存
             byte buf[64];
             uint len = sp->Read(buf, sizeof(buf));
-			if (len)
+            if (len)
             {
-				len = sp->OnReceive(buf, len);
+                len = sp->OnReceive(buf, len);
                 #if 0
-                assert_param(len <= ArrayLength(buf));
-				#endif
+                    assert_param(len <= ArrayLength(buf));
+                #endif 
                 // 如果有数据，则反馈回去
-				#if 0
-                if (len)
-                {
-                    sp->Write(buf, len);
-                }
-				#endif
-            }			
+                #if 0
+                    if (len)
+                    {
+                        sp->Write(buf, len);
+                    }
+                #endif 
+            }
         }
     }
 
