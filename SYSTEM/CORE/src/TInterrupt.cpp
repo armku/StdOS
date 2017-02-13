@@ -3,7 +3,7 @@
 
 TInterrupt Interrupt;
 
-typedef void (*OnUsartReceive)(ushort num, void *param);
+
 
 SerialPort *onSerialPortRcv[5];
 
@@ -11,7 +11,7 @@ void TInterrupt::SetPriority(byte intp,byte level)
 {
 	
 }
-void TInterrupt::Activate(byte irq, void *OnUsartReceive, void * param)
+void TInterrupt::Activate(byte irq, OnUsartReceive onrcv, void * param)
 {
 	SerialPort *sp=(SerialPort*)param;
 	onSerialPortRcv[irq]=sp;
