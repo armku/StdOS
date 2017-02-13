@@ -403,7 +403,6 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
                 if (len)
                 {
                     sp->Write(buf, len);
-					sp->SendBuffer(buf,len);
                 }
             }			
         }

@@ -24,7 +24,7 @@ uint ITransport::Read(byte *buf, uint len)
 
 uint ITransport::Write(byte *buf, uint len)
 {
-    return len;
+	return this->OnWrite(buf,len);
 }
 
 int ITransport::OnReceive(byte *buf, uint len)

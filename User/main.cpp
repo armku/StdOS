@@ -100,11 +100,11 @@ OutputPort rs485(PC2);
 static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 {	
     SerialPortOld *sp = (SerialPortOld*)para;
-    debug_printf("%s 收到：[%d]", sp->Name, bs.Length());
-    bs.Show(true);
-    bs.Show(false);
-    String str = "Hello master";
-    sp->SendBuffer(str.GetBuffer());
+//    debug_printf("%s 收到：[%d]", sp->Name, bs.Length());
+//    bs.Show(true);
+//    bs.Show(false);
+//    String str = "Hello master";
+//    sp->SendBuffer(str.GetBuffer());
 		
     return 0;
 }
