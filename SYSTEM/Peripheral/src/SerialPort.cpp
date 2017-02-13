@@ -328,7 +328,7 @@ uint SerialPort::OnRead(byte *buf, uint size)
         uint msTimeout = 1;
         ulong us = Time.Current() + msTimeout * 1000;
     #else 
-        uint msTimeout = 100;
+        uint msTimeout = 20;
         ulong us = Time.Current() + msTimeout;
     #endif 
     uint count = 0; // 收到的字节数    
