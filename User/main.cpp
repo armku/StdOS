@@ -98,7 +98,7 @@ ISO-V3:PC2控制485方向
 */
 OutputPort rs485(PC2);
 static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
-{
+{	
     SerialPortOld *sp = (SerialPortOld*)para;
     debug_printf("%s 收到：[%d]", sp->Name, bs.Length());
     bs.Show(true);

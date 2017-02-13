@@ -9,7 +9,7 @@ void ITransport::Open()
 // 注册数据到达事件
 void ITransport::Register(TransportHandler handler, void *param)
 {
-	this->pHandler=&handler;
+	this->pHandler=handler;
 }
 bool ITransport::HasHandler()
 {	
@@ -29,6 +29,11 @@ uint ITransport::Write(byte *buf, uint len)
 
 int ITransport::OnReceive(byte *buf, uint len)
 {
+	if(this->pHandler)
+	{
+		Buffer buffer(buf,len);
+		this->pHandler(this,buffer,this);
+	}
     return len;
 }
 

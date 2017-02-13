@@ -28,6 +28,6 @@ class ITransport
         virtual bool OnOpen();
         virtual bool OnWrite(const byte *buf, uint size);
 		virtual uint OnRead(byte *buf, uint size);
-        TransportHandler *pHandler;
+        TransportHandler pHandler;
 
 };

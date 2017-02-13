@@ -393,18 +393,17 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
             // 从栈分配，节省内存
             byte buf[64];
             uint len = sp->Read(buf, sizeof(buf));
-			Buffer str(buf,len);
-			str.Show(true);
 			if (len)
             {
-                len = sp->OnReceive(buf, len);
-				#if 0
+				len = sp->OnReceive(buf, len);
+                #if 0
                 assert_param(len <= ArrayLength(buf));
 				#endif
                 // 如果有数据，则反馈回去
                 if (len)
                 {
                     sp->Write(buf, len);
+					sp->SendBuffer(buf,len);
                 }
             }			
         }
