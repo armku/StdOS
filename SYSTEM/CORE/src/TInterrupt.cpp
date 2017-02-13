@@ -3,8 +3,6 @@
 
 TInterrupt Interrupt;
 
-
-
 SerialPort *onSerialPortRcv[5];
 
 void TInterrupt::SetPriority(byte intp,byte level)
