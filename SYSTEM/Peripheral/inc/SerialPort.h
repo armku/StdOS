@@ -71,24 +71,3 @@ class SerialPort: public ITransport
         static void OnUsartReceive(ushort num, void *param);
 		void AddInterrupt();
 };
-class SerialPortOld: public ITransport
-{
-    public:
-        //115200 无奇偶校验 8位数据长度 1位停止位
-        SerialPortOld(COM_Def index, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);
-        char Name[5]; // 名称。COMx，后面1字节\0表示结束
-        void SendData(byte data, uint times = 3000);        
-        void Open();
-        void Register(TransportHandler handler, SerialPortOld *sp); // 注册数据到达事件	
-        void OnUsartReceive(byte *buf, ushort length); //从串口收到数据
-        OutputPort *RS485; // RS485使能引脚
-    private:
-        byte _index;
-        byte _parity;
-        byte _dataBits;
-        byte _stopBits;
-        int _baudRate;
-        TransportHandler OnRcv;
-        AlternatePort tx;
-        InputPort rx;
-};

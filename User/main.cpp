@@ -99,7 +99,7 @@ ISO-V3:PC2控制485方向
 OutputPort rs485(PC2);
 static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 {	
-    SerialPortOld *sp = (SerialPortOld*)para;
+    SerialPort *sp = (SerialPort*)para;
     debug_printf("%s 收到：[%d]", sp->Name, bs.Length());
     bs.Show(true);
     bs.Show(false);
@@ -108,11 +108,11 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 		
     return 0;
 }
-SerialPort spp3(COM3);
+//SerialPort spp3(COM3);
 
 int main(void)
 {
-    Sys.MessagePort = COM1;
+    Sys.MessagePort = COM3;
     Sys.Init();
     Sys.ShowInfo();
     //sp1.Register(OnUsartRead, &sp1);
@@ -133,10 +133,10 @@ int main(void)
     pwm1.Init();
     pwm1.SetOutPercent(50);
 	
-	spp3.Open();
-	spp3.Register(OnUsartRead);	
-	String str="Hello work";
-	spp3.SendBuffer(str.GetBuffer());
+//	spp3.Open();
+//	spp3.Register(OnUsartRead);	
+//	String str="Hello work";
+//	spp3.SendBuffer(str.GetBuffer());
 	
 	SerialPort::GetMessagePort()->Register(OnUsartRead);
 	
