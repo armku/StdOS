@@ -3,6 +3,10 @@
 
 TInterrupt Interrupt;
 
+typedef void (*OnUsartReceive)(ushort num, void *param);
+
+OnUsartReceive onSerialPortRcv[5];
+
 void TInterrupt::SetPriority(byte intp,byte level)
 {
 	
