@@ -692,45 +692,7 @@ uint com3timeidle; //串口3空闲时间
 
     
 
-    void USART2_IRQHandler(void) //串口1中断服务程序
-    {
-        if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
-        {
-            USART_ClearITPendingBit(USART2, USART_IT_RXNE);
-            byte inch = USART_ReceiveData(USART2); //读取接收到的数据
-
-            com2buf.Push(inch);
-            com2timeidle = 0; //空闲计时器清零
-        }
-    }
-    void USART3_IRQHandler(void) //串口1中断服务程序
-    {
-        if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
-        {
-            USART_ClearITPendingBit(USART3, USART_IT_RXNE);
-            byte inch = USART_ReceiveData(USART3); //读取接收到的数据
-            printf("com3 in data \r\n");
-            com3buf.Push(inch);
-            com3timeidle = 0; //空闲计时器清零
-        }
-    }
-    void USART4_IRQHandler(void) //串口1中断服务程序
-    {
-        if (USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
-        {
-            USART_ClearITPendingBit(UART4, USART_IT_RXNE);
-            byte inch = USART_ReceiveData(UART4); //读取接收到的数据
-        }
-    }
-    void USART5_IRQHandler(void) //串口1中断服务程序
-    {
-        if (USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
-        //接收中断(接收到的数据必须是0x0d 0x0a结尾)
-        {
-            USART_ClearITPendingBit(UART5, USART_IT_RXNE);
-            byte inch = USART_ReceiveData(UART5); //读取接收到的数据
-        }
-    }
+    
 
 
     //向串口1发送数据
