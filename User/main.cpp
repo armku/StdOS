@@ -59,7 +59,7 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 
 int main(void)
 {
-    Sys.MessagePort = COM3;
+    Sys.MessagePort = COM1;
     Sys.Init();
     Sys.ShowInfo();
    
