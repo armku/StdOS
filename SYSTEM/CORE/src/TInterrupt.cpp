@@ -46,7 +46,7 @@ extern SerialPort *_printf_sp;
             if (_printf_sp)
             {
 				
-                _printf_sp->OnUsartReceive(0, _printf_sp);
+                SerialPort::OnUsartReceive(0, _printf_sp);
             }
         #endif 
     }		
