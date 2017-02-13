@@ -100,27 +100,15 @@ OutputPort rs485(PC2);
 static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 {	
     SerialPortOld *sp = (SerialPortOld*)para;
-//    debug_printf("%s 收到：[%d]", sp->Name, bs.Length());
-//    bs.Show(true);
-//    bs.Show(false);
-//    String str = "Hello master";
-//    sp->SendBuffer(str.GetBuffer());
+    debug_printf("%s 收到：[%d]", sp->Name, bs.Length());
+    bs.Show(true);
+    bs.Show(false);
+    String str = "Hello master";
+    sp->SendBuffer(str.GetBuffer());
 		
     return 0;
 }
 SerialPort spp3(COM3);
-
-void ReadComm(void * param)
-{
-	byte  buf[100];
-	for(int i=0;i<100;i++)
-	{
-		buf[i]=0;
-	}
-	byte readlen	= 0;
-	//readlen			= SerialPort::GetMessagePort()->Read(buf,100);
-	//printf("收到数据:[%d] %s\r\n",readlen,buf);
-}
 
 int main(void)
 {
@@ -154,8 +142,7 @@ int main(void)
 	
     Sys.AddTask(ComTimers, 0, 1, 1, "串口接收"); //1毫秒周期循环
     Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
-    Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯");    
-	Sys.AddTask(ReadComm, 0, 5, 1000, "串口测试");   
+    Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯"); 
 
     Sys.Start();
 }

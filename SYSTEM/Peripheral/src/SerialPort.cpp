@@ -400,10 +400,12 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
                 assert_param(len <= ArrayLength(buf));
 				#endif
                 // 如果有数据，则反馈回去
+				#if 0
                 if (len)
                 {
                     sp->Write(buf, len);
                 }
+				#endif
             }			
         }
     }
