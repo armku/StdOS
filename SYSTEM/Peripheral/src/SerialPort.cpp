@@ -359,7 +359,7 @@ bool SerialPort::Flush(uint times)
     return times > 0;
 }
 
-#define UART_IRQs {0}
+#define UART_IRQs {0,1,2,3,4,5}
 
 void SerialPort::Register(TransportHandler handler, void *param)
 {
@@ -370,7 +370,7 @@ void SerialPort::Register(TransportHandler handler, void *param)
     if (handler)
     {
         Interrupt.SetPriority(irq, 1);
-        #if 0
+        #if 1
             Interrupt.Activate(irq, OnUsartReceive, this);
         #endif 
     }

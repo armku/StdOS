@@ -5,7 +5,7 @@ TInterrupt Interrupt;
 
 typedef void (*OnUsartReceive)(ushort num, void *param);
 
-OnUsartReceive onSerialPortRcv[5];
+SerialPort *onSerialPortRcv[5];
 
 void TInterrupt::SetPriority(byte intp,byte level)
 {
@@ -13,7 +13,8 @@ void TInterrupt::SetPriority(byte intp,byte level)
 }
 void TInterrupt::Activate(byte irq, void *OnUsartReceive, void * param)
 {
-	
+	SerialPort *sp=(SerialPort*)param;
+	onSerialPortRcv[irq]=sp;
 }
 //关闭中断
 void TInterrupt::Deactivate(byte irq)
@@ -43,11 +44,15 @@ extern SerialPort *_printf_sp;
                 com1timeidle = 0; //空闲计时器清零
             }
         #else 
-            if (_printf_sp)
-            {
-				
-                SerialPort::OnUsartReceive(0, _printf_sp);
-            }
+//            if (_printf_sp)
+//            {
+//				
+//                SerialPort::OnUsartReceive(0, _printf_sp);
+//            }
+			if(onSerialPortRcv[0])
+			{
+				SerialPort::OnUsartReceive(0, onSerialPortRcv[0]);
+			}
         #endif 
     }		
 		
