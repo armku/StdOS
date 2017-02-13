@@ -54,7 +54,7 @@ void TaskScheduler::Remove(uint taskid)
         if (task->ID == taskid)
         {            
             _Tasks.RemoveAt(i);
-            debug_printf("%s::删除任务%d 0x%08x\r\n", Name, task->ID, task->Callback);
+            debug_printf("%s::删除任务%d 0x%08x\r\n", Name, task->ID, (unsigned int)task->Callback);
             // 首先清零ID，避免delete的时候再次删除
             task->ID = 0;
             delete task;
