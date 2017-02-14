@@ -5,9 +5,52 @@ TInterrupt Interrupt;
 
 SerialPort *onSerialPortRcv[5];
 
-void TInterrupt::SetPriority(byte intp, byte level){
+void TInterrupt::SetPriority(byte irq, byte level)
+{
+    NVIC_InitTypeDef nvic;
+    nvic.NVIC_IRQChannelCmd = ENABLE;
+    switch (irq)
+    {
+        case USART1_IRQn:
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = USART1_IRQn;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
+            nvic.NVIC_IRQChannelSubPriority = 1;
+            break;
+        case USART2_IRQn:
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = USART2_IRQn;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
+            nvic.NVIC_IRQChannelSubPriority = 1;
+            break;
+        case USART3_IRQn:
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = USART3_IRQn;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
+            nvic.NVIC_IRQChannelSubPriority = 2;
+            break;
+            #ifdef STM32F10X_HD
+            case UART4_IRQn:
+                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+                nvic.NVIC_IRQChannel = UART4_IRQn;
+                nvic.NVIC_IRQChannelPreemptionPriority = 1;
+                nvic.NVIC_IRQChannelSubPriority = 3;
+                break;
+            case UART5_IRQn:
+                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+                nvic.NVIC_IRQChannel = UART5_IRQn;
+                nvic.NVIC_IRQChannelPreemptionPriority = 1;
+                nvic.NVIC_IRQChannelSubPriority = 2;
+                NVIC_Init(&nvic);
+                break;
+            #endif 
+        default:
+            break;
+    }
 
+    NVIC_Init(&nvic);
 }
+
 void TInterrupt::Activate(byte irq, OnUsartReceive onrcv, void *param)
 {
     SerialPort *sp = (SerialPort*)param;

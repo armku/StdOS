@@ -232,12 +232,10 @@ bool SerialPort::OnOpen()
 
     if (RS485)
 	{
-		Sys.Delay(200);
-        *RS485 = false;
+		*RS485 = false;
 	}
 
-    //Opened = true;
-    this->AddInterrupt();
+    //Opened = true;    
     #if COM_DEBUG
         if (_index == Sys.MessagePort)
         {
@@ -498,53 +496,4 @@ SerialPort *SerialPort::GetMessagePort()
     }
 
     return _printf_sp;
-}
-
-///////////////////////////////////////////////////////////
-//old
-
-void SerialPort::AddInterrupt()
-{
-    NVIC_InitTypeDef nvic;
-    nvic.NVIC_IRQChannelCmd = ENABLE;
-
-    switch (this->_index)
-    {
-        case COM1:
-            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-            nvic.NVIC_IRQChannel = USART1_IRQn;
-            nvic.NVIC_IRQChannelPreemptionPriority = 1;
-            nvic.NVIC_IRQChannelSubPriority = 1;
-            break;
-        case COM2:
-            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-            nvic.NVIC_IRQChannel = USART2_IRQn;
-            nvic.NVIC_IRQChannelPreemptionPriority = 1;
-            nvic.NVIC_IRQChannelSubPriority = 1;
-            break;
-        case COM3:
-            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-            nvic.NVIC_IRQChannel = USART3_IRQn;
-            nvic.NVIC_IRQChannelPreemptionPriority = 1;
-            nvic.NVIC_IRQChannelSubPriority = 2;
-            break;
-            #if 0
-            case COM4:
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannel = UART4_IRQn;
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = 3;
-                break;
-            case COM5:
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannel = UART5_IRQn;
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = 2;
-                NVIC_Init(&nvic);
-                break;
-            #endif 
-        default:
-            break;
-    }
-    NVIC_Init(&nvic);
 }

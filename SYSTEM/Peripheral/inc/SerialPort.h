@@ -52,5 +52,4 @@ class SerialPort: public ITransport
     public:
         //ԭʼ:private
         static void OnUsartReceive(ushort num, void *param);
-        void AddInterrupt();
 };
