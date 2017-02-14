@@ -321,6 +321,7 @@ bool SerialPort::OnWrite(const byte *buf, uint size)
 
     if (RS485)
     {
+		Sys.Delay(200);
         *RS485 = false;
     }
     return true;

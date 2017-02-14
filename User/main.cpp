@@ -46,10 +46,11 @@ OutputPort rs485(PC2);
 static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 {	
     SerialPort *sp = (SerialPort*)para;
-    debug_printf("%s 收到：[%d]", sp->Name, bs.Length());
-    bs.Show(true);    
+    debug_printf("%s 收到：[%d]", sp->Name, bs.Length());    
+	bs.Show(true);
+	
     String str = "Hello master";
-    //sp->SendBuffer(str.GetBuffer());
+    sp->SendBuffer(str.GetBuffer());
 		
     return 0;
 }
@@ -62,7 +63,7 @@ int main(void)
     Sys.ShowInfo();
    
     sp2.RS485 = &rs485;
-    rs485 = 1;
+    rs485 = 0;
 	sp2.Register(OnUsartRead);
 	sp2.Open();
     
@@ -73,11 +74,6 @@ int main(void)
     PWM pwm1(PC9);
     pwm1.Init();
     pwm1.SetOutPercent(50);
-	
-//	spp3.Open();
-//	spp3.Register(OnUsartRead);	
-//	String str="Hello work";
-//	spp3.SendBuffer(str.GetBuffer());
 	
 	SerialPort::GetMessagePort()->Register(OnUsartRead);
 	
