@@ -3,7 +3,6 @@
 
 #include "Port.h"
 #include "SerialPort.h"
-#include "FIFORing.h"
 #include "TInterrupt.h"
 
 #define COM_DEBUG 0
