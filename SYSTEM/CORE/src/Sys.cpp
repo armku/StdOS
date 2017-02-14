@@ -203,7 +203,7 @@ void TSys::Reboot(uint msDelay){}
 //显示系统信息
 void TSys::ShowInfo()
 {
-    printf("STD_Embedded_Team::STD0801 Code:0801 Ver:0.0.6113 Build:2016-01-01\n");
+    printf("STD_Embedded_Team::STD0801 Code:Demo Ver:0.0.6113 Build:%s\n",__DATE__);
     printf("STDOS::%s 72MHz Flash:%dk RAM:%dk\n", this->CPUName->GetBuffer(), this->FlashSize, this->RamSize);
     printf("DevID:0X%04X RevID:0X%04X\n", this->DevID, this->RevID);
     printf("CPUID:0X%X ARM:ARMv7-M Cortex-M3: R1p2\n", this->CPUID);
