@@ -204,17 +204,17 @@ void TSys::Reboot(uint msDelay){}
 void TSys::ShowInfo()
 {
     printf("STD_Embedded_Team::STD0801 Code:0801 Ver:0.0.6113 Build:2016-01-01\n");
-    printf("STDOS::STM32F103C8 72MHz Flash:%dk RAM:%dk\n", this->FlashSize,this->RamSize);
-    printf("DevID:0X%04X RevID:0X%04X\n",this->DevID,this->RevID);
-    printf("CPUID:0X%X ARM:ARMv7-M Cortex-M3: R1p2\n",this->CPUID);
+    printf("STDOS::%s 72MHz Flash:%dk RAM:%dk\n", this->CPUName->GetBuffer(), this->FlashSize, this->RamSize);
+    printf("DevID:0X%04X RevID:0X%04X\n", this->DevID, this->RevID);
+    printf("CPUID:0X%X ARM:ARMv7-M Cortex-M3: R1p2\n", this->CPUID);
     printf("Heap :(0x20000720, 0x20010000) = 0xf8e0 (62k)\n");
     printf("Stack:(0x20001720, 0x20010000) = 0xe8e0 (58k)\n");
     printf("ChipType:0x42455633 3\n");
     printf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\n", ID[0], ID[1], ID[2], ID[3], ID[4], ID[5], ID[6], ID[7], ID[8], ID[9], ID[10], ID[11]);
     printf("Time : ");
-	DateTime dt;
-	dt.Show();
-	
+    DateTime dt;
+    dt.Show();
+
     printf("Support: http://www.armku.com\n");
 }
 
@@ -261,8 +261,27 @@ void TSys::Init()
     #else 
         FlashSize = *(__IO ushort*)(0x1FFFF7E0); // 容量
     #endif 
-
+    this->Initjs();
     this->Inited = 1;
+}
+
+//计算ram、型号等
+void TSys::Initjs()
+{    
+    switch (this->DevID)
+    {
+        case 0x0410:
+            this->CPUName=new String("STM32F103C8");
+			this->RamSize=20;
+            break;
+		case 0X0414:
+            this->CPUName=new String("STM32F103ZE");
+			this->RamSize=64;
+            break;
+		default:
+			this->CPUName=new String("未知");
+			break;
+    }
 }
 
 #ifdef __cplusplus

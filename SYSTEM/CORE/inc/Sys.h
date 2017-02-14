@@ -8,6 +8,7 @@
 #include "Object.h"
 #include "TTime.h"
 #include "Delegate.h"
+#include "CString.h"
 
 #define NULL 0
 
@@ -86,8 +87,10 @@ class TSys:public Object
 		ushort RevID;
 		ushort DevID;
 		byte _Index;//未知
+		String *CPUName;
 		
 	private:
+		void Initjs();//计算ram、型号等
 		
 };
 extern TSys Sys;//系统参数
