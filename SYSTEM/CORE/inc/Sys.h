@@ -78,9 +78,14 @@ class TSys:public Object
 		uint Clock;//系统时钟
 		ulong StartTime;//系统启动时间
 		ushort FlashSize;
+		ushort RamSize;
 		COM_Def MessagePort;// 指定printf输出的串口
 		byte Inited;//串口用参数
 		byte ID[12];
+		uint CPUID;
+		ushort RevID;
+		ushort DevID;
+		byte _Index;//未知
 		
 	private:
 		

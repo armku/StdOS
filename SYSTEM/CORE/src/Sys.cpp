@@ -10,6 +10,9 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "stm32f10x.h"
 #include "TaskScheduler.h"
 #include "SmartIrq.h"
+#include <string.h>
+#include "Array.h"
+#include "DateTime.h"
 
 //外部注册函数
 // 任务
@@ -201,14 +204,17 @@ void TSys::Reboot(uint msDelay){}
 void TSys::ShowInfo()
 {
     printf("STD_Embedded_Team::STD0801 Code:0801 Ver:0.0.6113 Build:2016-01-01\n");
-    printf("STDOS::STM32F103C8 72MHz Flash:%dk RAM:20k\n", this->FlashSize);
-    printf("DevID:0x0414 RevID:0x1309\n");
-    printf("CPUID:0x412fc231 ARM:ARMv7-M Cortex-M3: R1p2\n");
+    printf("STDOS::STM32F103C8 72MHz Flash:%dk RAM:%dk\n", this->FlashSize,this->RamSize);
+    printf("DevID:0X%04X RevID:0X%04X\n",this->DevID,this->RevID);
+    printf("CPUID:0X%X ARM:ARMv7-M Cortex-M3: R1p2\n",this->CPUID);
     printf("Heap :(0x20000720, 0x20010000) = 0xf8e0 (62k)\n");
     printf("Stack:(0x20001720, 0x20010000) = 0xe8e0 (58k)\n");
     printf("ChipType:0x42455633 3\n");
     printf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\n", ID[0], ID[1], ID[2], ID[3], ID[4], ID[5], ID[6], ID[7], ID[8], ID[9], ID[10], ID[11]);
-    printf("Time : 2016-12-28 10:56:32\n");
+    printf("Time : ");
+	DateTime dt;
+	dt.Show();
+	
     printf("Support: http://www.armku.com\n");
 }
 
@@ -231,20 +237,32 @@ void TSys::Init()
     SysTick_Config(SystemCoreClock / delay_ostickspersec); //tick is 1ms	
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
     GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); //关闭jtag，保留swd	
-	
-	
-	NVIC_SetPriority (SysTick_IRQn, 0);
-	
-	
-	
-    this->FlashSize = *(uint16_t*)(0X1FFFF7E0); // 容量
 
-    for (int i = 0; i < 12; i++)
-    {
-        this->ID[i] = *(byte*)(0X1FFFF7E8 + i);
-    }
-    this->FlashSize = *(ushort*)(0X1FFFF7E0);
-	this->Inited=1;
+
+    NVIC_SetPriority(SysTick_IRQn, 0);
+
+    #ifdef STM32F0XX
+        void *p = (void*)0x1FFFF7AC;
+    #else 
+        void *p = (void*)0x1FFFF7E8;
+    #endif 
+    memcpy(ID, p, ArrayLength(ID));
+
+
+    this->CPUID = SCB->CPUID;
+    uint MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
+    this->RevID = MCUID >> 16;
+    this->DevID = MCUID &0x0FFF;
+
+    this->_Index = 0;
+
+    #ifdef STM32F0XX
+        FlashSize = *(__IO ushort*)(0x1FFFF7CC); // 容量
+    #else 
+        FlashSize = *(__IO ushort*)(0x1FFFF7E0); // 容量
+    #endif 
+
+    this->Inited = 1;
 }
 
 #ifdef __cplusplus
