@@ -231,7 +231,10 @@ bool SerialPort::OnOpen()
     USART_Cmd(_port, ENABLE); //Ê¹ÄÜ´®¿Ú
 
     if (RS485)
+	{
+		Sys.Delay(200);
         *RS485 = false;
+	}
 
     //Opened = true;
     this->AddInterrupt();
