@@ -47,14 +47,13 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 {	
     SerialPort *sp = (SerialPort*)para;
     debug_printf("%s ÊÕµ½£º[%d]", sp->Name, bs.Length());
-    bs.Show(true);
-    bs.Show(false);
+    bs.Show(true);    
     String str = "Hello master";
-    sp->SendBuffer(str.GetBuffer());
+    //sp->SendBuffer(str.GetBuffer());
 		
     return 0;
 }
-//SerialPort spp3(COM3);
+SerialPort sp2(COM2);
 
 int main(void)
 {
@@ -62,8 +61,10 @@ int main(void)
     Sys.Init();
     Sys.ShowInfo();
    
-    //sp2.RS485 = &rs485;
+    sp2.RS485 = &rs485;
     rs485 = 1;
+	sp2.Register(OnUsartRead);
+	sp2.Open();
     
     exti.InitOld();
     exti.On();
