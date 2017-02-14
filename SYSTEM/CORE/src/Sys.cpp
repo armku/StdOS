@@ -278,6 +278,10 @@ void TSys::Initjs()
             this->CPUName=new String("STM32F103ZE");
 			this->RamSize=64;
             break;
+		case 0x418:
+			this->CPUName=new String("STM32F105VC");
+			this->RamSize=64;
+            break;
 		default:
 			this->CPUName=new String("δ֪");
 			break;
