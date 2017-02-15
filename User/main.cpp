@@ -77,8 +77,8 @@ int main(void)
 	
 	SerialPort::GetMessagePort()->Register(OnUsartRead);
 	
-    Sys.AddTask(feeddog, 0, 0, 1000, "看门狗"); //看门狗-喂狗
-    Sys.AddTask(ledflash, 0, 5, 500, "状态指示灯"); 
+    Sys.AddTask(feeddog, 0, 0, 1000, "WatchDog"); 
+    Sys.AddTask(ledflash, 0, 5, 500, "LedTask"); 
 
     Sys.Start();
 }
