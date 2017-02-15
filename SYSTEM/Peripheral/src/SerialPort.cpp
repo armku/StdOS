@@ -10,11 +10,6 @@
 
 #define UARTS {USART1,USART2,USART3,UART4,UART5}
 
-int ArrayLength(const USART_TypeDef *const buf[])
-{
-    return 5;
-}
-
 SerialPort::SerialPort()
 {
     Init();
