@@ -1,16 +1,12 @@
 #include "Timer.h"
 #include "stm32f10x_rcc.h"
 
-#define TIMS {TIM1,TIM2,TIM3,TIM4,TIM5,TIM6}
+#define TIMS {TIM1,TIM2,TIM3,TIM4,TIM5}
 
 
 static TIM_TypeDef *const g_Timers[] = TIMS;
 Timer **Timer::Timers = NULL;
-#if 0
-    const byte Timer::TimerCount = ArrayLength(g_Timers);
-#else 
-    const byte Timer::TimerCount = 3;
-#endif 
+const byte Timer::TimerCount = ArrayLength(g_Timers);
 
 Timer::Timer(TIM_TypeDef *timer)
 {
