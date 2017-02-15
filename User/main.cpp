@@ -54,7 +54,7 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 	buf[1]=0x01;
 	buf[2]=0x00;
 	buf[3]=0x05;
-    sp->SendBuffer(buf,4);	
+    sp->SendBuffer(buf);	
     return 0;
 }
 SerialPort sp2(COM2);

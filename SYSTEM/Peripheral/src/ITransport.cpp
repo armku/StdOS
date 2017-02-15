@@ -1,5 +1,6 @@
 #include "ITransport.h"
 #include "string.h"
+#include "Array.h"
 
 void ITransport::Open()
 {
@@ -55,20 +56,8 @@ void ITransport::SendBuffer(byte *buff, int length)
 {
     if (length < 0)
     {
-        length = strlen((char*)buff);
-        //        while (*buff)
-        //        {
-        //            this->SendData(*buff);
-        //            buff++;
-        //        }
-    }
-    //    else
-    //    {
-    //        for (int i = 0; i < length; i++)
-    //        {
-    //            this->SendData(buff[i]);
-    //        }
-    //    }
+        length = ArrayLength(buff);        
+    }    
 
     this->OnWrite(buff, length);
 }
