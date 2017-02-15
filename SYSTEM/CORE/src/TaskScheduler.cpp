@@ -70,8 +70,8 @@ void TaskScheduler::Start()
         return ;
     }
 
-    Add(ShowTime, NULL, 2000, 30000,"时间显示");
-    //Add(ShowStatus, this, 3000, 30000,"任务显示");
+    Add(ShowTime, NULL, 2000000, 30000000,"时间显示");
+    Add(ShowStatus, this, 3000000, 30000000,"任务显示");
 
     debug_printf("%s::准备就绪 开始循环处理%d个任务！\r\n\r\n", Name, Count);
 
@@ -167,7 +167,8 @@ void TaskScheduler::Execute(uint usMax)
 //显示时间
 void TaskScheduler::ShowTime(void * param)
 {
-	debug_printf("Time: %02lld:%02lld:%02lld\n",Time.Current()/3600000,Time.Current()/60000%60,Time.Current()/1000%60);
+	UInt64 curms=Time.Ms();
+	debug_printf("Time: %02lld:%02lld:%02lld\n",curms/3600000,curms/60000%60,curms/1000%60);
 }
 // 显示状态
 void TaskScheduler::ShowStatus(void *param)

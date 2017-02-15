@@ -34,7 +34,7 @@ void TTime::Sleep(uint us)
 //系统启动以来的毫秒
 UInt64 TTime::Current() const
 {
-	return this->mCurrent;
+	return this->mCurrent*1000;
 }
 uint TTime::TicksToUs(uint ticks) const
 {

@@ -31,7 +31,7 @@ uint TSys::AddTask(Action func, void *param, ulong dueTime, long period, const c
         _Scheduler = new TaskScheduler("Sys");
     }
 
-    return _Scheduler->Add(func, param, dueTime, period, name);
+    return _Scheduler->Add(func, param, dueTime*1000, period*1000, name);
 }
 
 void TSys::RemoveTask(uint taskid)
@@ -189,7 +189,7 @@ void TSys::Show(bool newLine)const{
 //系统启动以来的毫秒数，无符号长整型8字节
 UInt64 TSys::Ms()
 {
-    return Time.Current();
+    return Time.Ms();
 }
 
 //系统绝对UTC时间，整型4字节，Unix格式，1970年以来的总秒数。

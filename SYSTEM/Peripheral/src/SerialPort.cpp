@@ -231,9 +231,9 @@ bool SerialPort::OnOpen()
     USART_Cmd(_port, ENABLE); //使能串口
 
     if (RS485)
-	{
-		*RS485 = false;
-	}
+    {
+        *RS485 = false;
+    }
 
     //Opened = true;    
     #if COM_DEBUG
@@ -319,7 +319,7 @@ bool SerialPort::OnWrite(const byte *buf, uint size)
 
     if (RS485)
     {
-		Sys.Delay(200);
+        Sys.Delay(200);
         *RS485 = false;
     }
     return true;
@@ -330,13 +330,9 @@ bool SerialPort::OnWrite(const byte *buf, uint size)
 uint SerialPort::OnRead(byte *buf, uint size)
 {
     // 在100ms内接收数据
-    #if 0
-        uint msTimeout = 1;
-        ulong us = Time.Current() + msTimeout * 1000;
-    #else 
-        uint msTimeout = 20;
-        ulong us = Time.Current() + msTimeout;
-    #endif 
+    uint msTimeout = 1;
+    ulong us = Time.Current() + msTimeout * 1000;
+
     uint count = 0; // 收到的字节数    
     while (count < size && Time.Current() < us)
     {
@@ -345,11 +341,7 @@ uint SerialPort::OnRead(byte *buf, uint size)
         {
             *buf++ = (byte)USART_ReceiveData(_port);
             count++;
-            #if 0
-                us = Time.Current() + msTimeout * 1000;
-            #else 
-                us = Time.Current() + msTimeout;
-            #endif 
+            us = Time.Current() + msTimeout * 1000;
         }
     }
     return count;
@@ -364,11 +356,12 @@ bool SerialPort::Flush(uint times)
     //等待发送完毕
     return times > 0;
 }
+
 #ifdef STM32F10X_HD
-#define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
-#else
-#define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn}
-#endif
+    #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
+#else 
+    #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn}
+#endif 
 
 void SerialPort::Register(TransportHandler handler, void *param)
 {
