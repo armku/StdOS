@@ -103,7 +103,7 @@ extern UInt64 TicksPerms;
 UInt64 TTime::Current()const
 {
 	UInt64 ret=this->mCurrent *1000;
-	ret+=(TicksPerms-SysTick->VAL)/TicksPerms;
+	ret+=(TicksPerms-SysTick->VAL)/fac_us;
     return ret;
 }
 
