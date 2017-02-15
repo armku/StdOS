@@ -49,9 +49,12 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
     debug_printf("%s ÊÕµ½£º[%d]", sp->Name, bs.Length());    
 	bs.Show(true);
 	
-    String str = "Hello master";
-    sp->SendBuffer(str.GetBuffer());
-		
+	byte buf[4];
+	buf[0]=0x04;
+	buf[1]=0x01;
+	buf[2]=0x00;
+	buf[3]=0x05;
+    sp->SendBuffer(buf,4);	
     return 0;
 }
 SerialPort sp2(COM2);
