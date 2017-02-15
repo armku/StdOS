@@ -94,4 +94,3 @@ class TSys:public Object
 		
 };
 extern TSys Sys;//系统参数
-extern TTime Time; //系统时间，不建议用户直接使用

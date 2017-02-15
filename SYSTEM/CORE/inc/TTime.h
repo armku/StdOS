@@ -18,3 +18,4 @@ class TTime
 		UInt64 mCurrent;//系统启动以来的毫秒数	
 		UInt64 CurrentTicks;//滴答数。比微妙还短的超高精度时间		
 };
+extern TTime Time; //系统时间，不建议用户直接使用
