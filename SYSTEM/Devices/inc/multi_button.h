@@ -22,6 +22,8 @@ class CButton
         void ticks();
         PressEvent get_button_event(); //获取当前按键状态
 		FuncRead ReadKey;//按键读取
+		ushort keycur;//当前按键
+		ushort keyold;//历史按键
     private:		
         struct Button
         {

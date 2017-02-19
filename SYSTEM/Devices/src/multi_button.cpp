@@ -20,25 +20,32 @@ void CButton::attach(PressEvent event, Action action)
 }
 
 void CButton::ticks()
-{
-    //µ±Ç°°´¼ü×´Ì¬
-    byte read_gpio_level = 0;
+{    
 	if (this->ReadKey)
     {
-        read_gpio_level = this->ReadKey();
+        this->keycur = this->ReadKey();
     }
 	else
 	{
+		this->keyold=0;
 		return;
 	}
-
-    //ticks counter working..
-    if (this->btn.state > 0)
-    {
-        this->btn.ticks++;
-    }
+	
+	if(this->keycur==0)
+	{
+		return;
+	}
+	
+	if(this->keyold!=this->keycur)
+	{
+		this->keyold=this->keycur;
+		this->btn.ticks=0;
+	}
+    
+    this->btn.ticks++;
+    
     /*------------button debounce handle---------------*/
-    if (read_gpio_level)
+    if (this->keycur)
     {
         //not equal to prev one
         //continue read 3 times same new level change
@@ -57,7 +64,7 @@ void CButton::ticks()
     switch (this->btn.state)
     {
         case 0:
-            if (read_gpio_level)
+            if (this->keycur)
             {
                 //start press down
                 this->btn.event = (byte)PRESS_DOWN;
@@ -76,7 +83,7 @@ void CButton::ticks()
             break;
 
         case 1:
-            if (!read_gpio_level)
+            if (!this->keycur)
             {
                 //released press up
                 this->btn.event = (byte)PRESS_UP;
@@ -100,7 +107,7 @@ void CButton::ticks()
             break;
 
         case 2:
-            if (read_gpio_level)
+            if (this->keycur)
             {
                 //press down again
                 this->btn.event = (byte)PRESS_DOWN;
@@ -144,7 +151,7 @@ void CButton::ticks()
             break;
 
         case 3:
-            if (read_gpio_level)
+            if (this->keycur)
             {
                 //released press up
                 this->btn.event = (byte)PRESS_UP;
@@ -165,7 +172,7 @@ void CButton::ticks()
             break;
 
         case 5:
-            if (read_gpio_level)
+            if (this->keycur)
             {
                 //continue hold trigger
                 this->btn.event = (byte)LONG_PRESS_HOLD;
