@@ -11,7 +11,16 @@
 #include "Pwm.h"
 
 // N = 2^32/365/24/60/60 = 136 年
-
+typedef enum
+{
+    KEY_UP 		= 1,  	 // 模拟输入 
+    KEY_DOWN	= 1<<1,  // 输入
+    KEY_LEFT	= 1<<2,  // 浮空输入
+    KEY_RIGHT	= 1<<3,  // 推挽式输入
+    KEY_OK		= 1<<4,  // 开漏输出
+    KEY_MENU	= 1<<5,  // 推挽式输出
+    KEY_NULL	= 0
+} KEY_MODE;
 WatchDog dog(3000);
 void feeddog(void *param)
 {
