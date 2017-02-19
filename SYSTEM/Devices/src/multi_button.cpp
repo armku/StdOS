@@ -9,36 +9,28 @@
 ///*默认按键去抖延时   70ms*/
 //static byte shake_time = 70;
 
-CButton::CButton(Pin pin, byte active_level,byte DownBit)
-{	
-    this->pPin.Set(pin);
-
+CButton::CButton()
+{
     this->btn.event = (byte)NONE_PRESS;
-    //this->btn.hal_button_Level = pin_level;
-    this->btn.button_level = this->hal_button_Level();
-    this->btn.active_level = 0;
-	this->downBit=DownBit;
 }
 
 void CButton::attach(PressEvent event, Action action)
 {
     this->btn.actions[event] = action;
 }
-//读取是否有键按下。
-byte CButton::hal_button_Level(void)
-{
-	byte ret=0;
-	ret=this->pPin.Read();
-	if(!this->downBit)
-	{
-		ret=!ret;
-	}
-	return  ret;
-}
+
 void CButton::ticks()
 {
     //当前按键状态
-    byte read_gpio_level = !this->hal_button_Level();
+    byte read_gpio_level = 0;
+	if (this->ReadKey)
+    {
+        read_gpio_level = this->ReadKey();
+    }
+	else
+	{
+		return;
+	}
 
     //ticks counter working..
     if (this->btn.state > 0)
@@ -46,13 +38,12 @@ void CButton::ticks()
         this->btn.ticks++;
     }
     /*------------button debounce handle---------------*/
-    if (read_gpio_level != this->btn.button_level)
+    if (read_gpio_level)
     {
         //not equal to prev one
         //continue read 3 times same new level change
         if (++(this->btn.debounce_cnt) >= DEBOUNCE_TICKS)
         {
-            this->btn.button_level = read_gpio_level;
             this->btn.debounce_cnt = 0;
         }
     }
@@ -66,7 +57,7 @@ void CButton::ticks()
     switch (this->btn.state)
     {
         case 0:
-            if (this->btn.button_level == this->btn.active_level)
+            if (read_gpio_level)
             {
                 //start press down
                 this->btn.event = (byte)PRESS_DOWN;
@@ -85,7 +76,7 @@ void CButton::ticks()
             break;
 
         case 1:
-            if (this->btn.button_level != this->btn.active_level)
+            if (!read_gpio_level)
             {
                 //released press up
                 this->btn.event = (byte)PRESS_UP;
@@ -109,7 +100,7 @@ void CButton::ticks()
             break;
 
         case 2:
-            if (this->btn.button_level == this->btn.active_level)
+            if (read_gpio_level)
             {
                 //press down again
                 this->btn.event = (byte)PRESS_DOWN;
@@ -142,7 +133,7 @@ void CButton::ticks()
                     if (this->btn.actions[SINGLE_CLICK])
                     {
                         this->btn.actions[SINGLE_CLICK]((Button*)(&(this->btn)));
-                    }                    
+                    }
                 }
                 else if (this->btn.repeat == 2)
                 {
@@ -153,7 +144,7 @@ void CButton::ticks()
             break;
 
         case 3:
-            if (this->btn.button_level != this->btn.active_level)
+            if (read_gpio_level)
             {
                 //released press up
                 this->btn.event = (byte)PRESS_UP;
@@ -174,7 +165,7 @@ void CButton::ticks()
             break;
 
         case 5:
-            if (this->btn.button_level == this->btn.active_level)
+            if (read_gpio_level)
             {
                 //continue hold trigger
                 this->btn.event = (byte)LONG_PRESS_HOLD;
