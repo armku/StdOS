@@ -46,7 +46,11 @@ void OnKeyPress(Pin pin, bool onoff)
     led2 = !led2;
     printf("中断引脚：%d 值%d \n", pin, onoff);
 }
-
+void IOReadHandler1(InputPort * port, bool down, void *param)
+{
+	led2 = !led2;
+    printf("中断引脚： 值%d \n", down);
+}
 /*
 ISO-V2:PB5控制485方向
 ISO-V3:PC2控制485方向
@@ -82,6 +86,8 @@ int main(void)
     exti.InitOld();
     exti.On();
     exti.RegisterOld(OnKeyPress);
+	
+	exti1.Register(IOReadHandler1);
    
     PWM pwm1(PC9);
     pwm1.Init();

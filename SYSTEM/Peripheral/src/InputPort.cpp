@@ -592,6 +592,7 @@ extern "C"
 
             EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位	
 			GPIO_ISROld(0);
+			EXTI_IRQHandler(0,0);
         }
     }
 
