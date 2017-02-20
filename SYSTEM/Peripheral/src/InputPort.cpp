@@ -606,8 +606,7 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line1) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line1); //清除中断标志位
-			GPIO_ISROld(1);
-			printf("中断线1\r\n");
+			EXTI_IRQHandler(EXTI1_IRQn,0);
         } 
     }
 
@@ -616,8 +615,7 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line2) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line2); //清除中断标志位           
-			GPIO_ISROld(2);
-			printf("中断线2\r\n");
+			EXTI_IRQHandler(EXTI2_IRQn,0);
         }
     }
 
@@ -626,8 +624,7 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line3) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line3); //清除中断标志位
-			GPIO_ISROld(3);
-			printf("中断线3\r\n");
+			EXTI_IRQHandler(EXTI3_IRQn,0);
         }
     }
 
@@ -636,8 +633,7 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line4) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line4); //清除中断标志位
-			GPIO_ISROld(4);
-			printf("中断线4\r\n");
+			EXTI_IRQHandler(EXTI4_IRQn,0);
         }
     }
 
@@ -646,29 +642,28 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line5) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line5); //清除中断标志位
-			GPIO_ISROld(5);
+			EXTI_IRQHandler(EXTI9_5_IRQn,0);
         }
         if (EXTI_GetITStatus(EXTI_Line6) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line6); //清除中断标志位		
-        	GPIO_ISROld(6);
+        	EXTI_IRQHandler(EXTI9_5_IRQn,0);
         }
         if (EXTI_GetITStatus(EXTI_Line7) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line7); //清除中断标志位		
-        	GPIO_ISROld(7);
+        	EXTI_IRQHandler(EXTI9_5_IRQn,0);
         }
         if (EXTI_GetITStatus(EXTI_Line8) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line8); //清除中断标志位		
-        	GPIO_ISROld(8);
+        	EXTI_IRQHandler(EXTI9_5_IRQn,0);
         }
         if (EXTI_GetITStatus(EXTI_Line9) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line9); //清除中断标志位		
-        	GPIO_ISROld(9);
+        	EXTI_IRQHandler(EXTI9_5_IRQn,0);
         }
-		printf("中断线9_5\r\n");
     }
     /// IO 线中断，中断口为PC13
     void EXTI15_10_IRQHandler(void)
@@ -676,34 +671,33 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line10) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line10); //清除中断标志位		
-        	GPIO_ISROld(10);
+        	EXTI_IRQHandler(EXTI15_10_IRQn,0);
         }
         if (EXTI_GetITStatus(EXTI_Line11) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line11); //清除中断标志位		
-        	GPIO_ISROld(11);
+        	EXTI_IRQHandler(EXTI15_10_IRQn,0);
         }
         if (EXTI_GetITStatus(EXTI_Line12) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line12); //清除中断标志位		
-        	GPIO_ISROld(12);
+        	EXTI_IRQHandler(EXTI15_10_IRQn,0);
         }
         if (EXTI_GetITStatus(EXTI_Line13) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line13); //清除中断标志位		
-        	GPIO_ISROld(13);
+        	EXTI_IRQHandler(EXTI15_10_IRQn,0);
         }
         if (EXTI_GetITStatus(EXTI_Line14) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line14); //清除中断标志位		
-        	GPIO_ISROld(14);
+        	EXTI_IRQHandler(EXTI15_10_IRQn,0);
         }
         if (EXTI_GetITStatus(EXTI_Line15) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line15); //清除中断标志位		
-        	GPIO_ISROld(15);
+        	EXTI_IRQHandler(EXTI15_10_IRQn,0);
         }
-		printf("中断线5_10\r\n");
     }
 }
 

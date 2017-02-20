@@ -38,7 +38,7 @@ void ledflash(void *param)
 }
 
 //°´¼ü PC13 PA0
-InputPortOld exti(PC13); //PA1 PB3     PA0 PC13
+//InputPortOld exti(PC13); //PA1 PB3     PA0 PC13
 InputPort exti1(PA0);
 void OnKeyPress(Pin pin, bool onoff)
 {
@@ -83,9 +83,9 @@ int main(void)
 	sp2.Register(OnUsartRead);
 	sp2.Open();
     
-    exti.InitOld();
-    exti.On();
-    exti.RegisterOld(OnKeyPress);
+//    exti.InitOld();
+//    exti.On();
+//    exti.RegisterOld(OnKeyPress);
 	
 	exti1.Register(IOReadHandler1);
    
