@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "InputPort.h"
+#include "TInterrupt.h"
 
 // 获取组和针脚
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
@@ -266,7 +267,14 @@ void SetEXIT(int pinIndex, bool enable)
     ext.EXTI_LineCmd = enable ? ENABLE : DISABLE;
     EXTI_Init(&ext);
 }
-
+#if defined(STM32F1) || defined(STM32F4)
+    static const int PORT_IRQns[] = 
+    {
+        EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
+        EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
+        EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
+    };
+	#endif
 // 申请引脚中断托管
 void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param)
 {
@@ -291,17 +299,13 @@ void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handle
         GPIO_EXTILineConfig(groupIndex, pinIndex);
     #endif 
 
-    SetEXIT(pinIndex, true);
-    #if 0
+    SetEXIT(pinIndex, true);    
         // 打开并设置EXTI中断为低优先级
-        Interrupt.SetPriority(PORT_IRQns[pinIndex], 1);
-    #endif 
+    Interrupt.SetPriority(PORT_IRQns[pinIndex], 1);   
     state->Used++;
     if (state->Used == 1)
-    {
-        #if 0
-            Interrupt.Activate(PORT_IRQns[pinIndex], EXTI_IRQHandler, this);
-        #endif 
+    {        
+        Interrupt.Activate(PORT_IRQns[pinIndex], EXTI_IRQHandler, this);        
     }
 }
 
@@ -316,10 +320,8 @@ void InputPort::UnRegisterInput(int pinIndex)
 
     state->Used--;
     if (state->Used == 0)
-    {
-        #if 0
-            Interrupt.Deactivate(PORT_IRQns[pinIndex]);
-        #endif 
+    {        
+        Interrupt.Deactivate(PORT_IRQns[pinIndex]);        
     }
 }
 /////////////////////////////////////////////////////////////////
