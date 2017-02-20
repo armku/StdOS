@@ -123,23 +123,28 @@ void InputPort::Register(IOReadHandler handler, void *param)
 
 void GPIO_ISR(int num) // 0 <= num <= 15
 {
-    if (!hasInitState)
+	if (!hasInitState)
+	{
         return ;
-
-    IntState *state = State + num;
+	}
+	IntState *state = State + num;
     if (!state)
+	{
         return ;
-
-    uint bit = 1 << num;
+	}
+	uint bit = 1 << num;
     bool value;
     //byte line = EXTI_Line0 << num;
     // 如果未指定委托，则不处理
     if (!state->Handler)
+	{
         return ;
-
+	}
+	
     // 默认20us抖动时间
     uint shakeTime = state->ShakeTime;
-
+	//printf("here state004\r\n");
+	#if 0
     do
     {
         EXTI->PR = bit; // 重置挂起位
@@ -153,8 +158,10 @@ void GPIO_ISR(int num) // 0 <= num <= 15
             }
 			Time.Sleep(shakeTime); // 避免抖动
         }
-    }
+    }	
     while (EXTI->PR &bit); // 如果再次挂起则重复
+	#endif
+	//printf("here state005\r\n");
     //EXTI_ClearITPendingBit(line);
     // 值必须有变动才触发
     if (shakeTime > 0 && value == state->OldValue)
@@ -162,7 +169,8 @@ void GPIO_ISR(int num) // 0 <= num <= 15
     state->OldValue = value;
     if (state->Handler)
     {
-        #if 0
+		printf("here state006\r\n");
+		#if 1
             // 新值value为true，说明是上升，第二个参数是down，所以取非
             state->Handler(state->Pin, !value, state->Param);
         #endif 
@@ -175,8 +183,10 @@ void EXTI_IRQHandler(ushort num, void *param)
     #if defined(STM32F1) || defined(STM32F4)
         // EXTI0 - EXTI4
         if (num <= EXTI4_IRQn)
+		{
             GPIO_ISR(num - EXTI0_IRQn);
-        else if (num == EXTI9_5_IRQn)
+        }
+		else if (num == EXTI9_5_IRQn)
         {
             // EXTI5 - EXTI9
             uint pending = EXTI->PR &EXTI->IMR &0x03E0; // pending bits 5..9
@@ -592,7 +602,7 @@ extern "C"
 
             EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位	
 			//GPIO_ISROld(0);
-			//EXTI_IRQHandler(0,0);
+			EXTI_IRQHandler(0,0);
 			printf("中断线0\r\n");
         }
     }

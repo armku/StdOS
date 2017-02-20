@@ -22,7 +22,7 @@ class InputPort: public Port
 		}Trigger;
 
         // 读取委托
-        typedef void(*IOReadHandler)(InputPort * port, bool down, void *param); 
+        typedef void(*IOReadHandler)(Pin port, bool down, void *param); 
 
         ushort	ShakeTime;//	=	0; 		// 抖动时间.毫秒
 		ushort	PressTime;//	=	0;		//长按时间。毫秒
