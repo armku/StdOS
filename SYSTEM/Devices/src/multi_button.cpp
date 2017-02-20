@@ -20,39 +20,81 @@ void CButton::attach(PressEvent event, Action action)
 }
 
 void CButton::ticks()
-{    
-	if (this->ReadKey)
+{
+    if (this->ReadKey)
     {
         this->keycur = this->ReadKey();
-    }
-	else
-	{
-		this->keyold=0;
-		return;
-	}
-	
-	if(this->keycur==0)
-	{
-		return;
-	}
-	
-	if(this->keyold!=this->keycur)
-	{
-		this->keyold=this->keycur;
-		this->btn.ticks=0;
-	}
-    
-    this->btn.ticks++;
-    
-    /*------------button debounce handle---------------*/
-    if (this->keycur)
-    {
-        //not equal to prev one
-        //continue read 3 times same new level change
-        if (++(this->btn.debounce_cnt) >= DEBOUNCE_TICKS)
+        if (this->keycur == 0)
         {
-            this->btn.debounce_cnt = 0;
+            this->keycur = 0;
+            this->keyold = 0;
+            return ;
         }
+    }
+    else
+    {
+        this->keyold = 0;
+        this->keycur = 0;
+        return ;
+    }
+
+
+    if (this->keyold != this->keycur)
+    {
+        this->keyold = this->keycur;
+        this->btn.ticks = 0;
+		this->btn.state=0;
+    }
+
+    this->btn.ticks++;
+
+    if (this->btn.ticks < 2)
+    {
+        return ;
+    }
+    switch (this->btn.state)
+    {
+        case 0:
+            //按键按下
+            this->btn.event = (byte)PRESS_DOWN;
+            if (this->btn.actions[PRESS_DOWN])
+            {
+                this->btn.actions[PRESS_DOWN]((Button*)(&(this->btn)));
+            }
+            this->btn.ticks = 0;
+            this->btn.repeat = 1;
+            this->btn.state = 1;
+            break;
+        case 1:
+			//按键松开
+            this->btn.event = (byte)PRESS_UP;
+            if (this->btn.actions[PRESS_UP])
+            {
+                this->btn.actions[PRESS_UP]((Button*)(&(this->btn)));
+            }
+			this->btn.state=2;
+            break;
+        case 2:
+			//持续按下
+			break;
+		default:
+            this->btn.state = 0;
+            break;
+    }
+
+    return ;
+
+
+
+
+
+
+    /*------------button debounce handle---------------*/
+    //not equal to prev one
+    //continue read 3 times same new level change
+    if (++(this->btn.debounce_cnt) >= DEBOUNCE_TICKS)
+    {
+        this->btn.debounce_cnt = 0;
     }
     else
     {
@@ -63,6 +105,7 @@ void CButton::ticks()
     /*-----------------State machine-------------------*/
     switch (this->btn.state)
     {
+        //
         case 0:
             if (this->keycur)
             {
