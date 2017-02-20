@@ -6,7 +6,7 @@
 class CADS1246
 {
     public:
-        CADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, InputPortOld& pinrd, Pin pinreset);       
+        CADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, InputPort& pinrd, Pin pinreset);       
         byte ReadReg(byte RegAddr);
         void WriteReg(byte RegAddr, byte da);
         float Read(void); //返回-1,表示转换未完成
@@ -16,6 +16,6 @@ class CADS1246
         float decodead(byte *da);
 	
 		CSoftSpi *pspi; //SPI接口
-        InputPortOld *ppinrd; //数据准备好接口
+        InputPort *ppinrd; //数据准备好接口
         OutputPort *ppinreset; //复位接口
 };
