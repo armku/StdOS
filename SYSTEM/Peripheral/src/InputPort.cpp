@@ -211,6 +211,7 @@ void EXTI_IRQHandler(ushort num, void *param)
                 pending >>= 1;
             }
             while (pending);
+			printf("EXTI_IRQHandler EXTI15_10_IRQn\r\n");
         }
     #elif defined(STM32F0)
         switch (num)
@@ -430,6 +431,7 @@ extern "C"
         {
             EXTI_ClearITPendingBit(EXTI_Line13); //清除中断标志位		
             EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+			printf("EXTI13_IRQn\r\n");
         }
         if (EXTI_GetITStatus(EXTI_Line14) != RESET)
         {
@@ -441,6 +443,7 @@ extern "C"
             EXTI_ClearITPendingBit(EXTI_Line15); //清除中断标志位		
             EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         }
+		printf("EXTI15_10_IRQn\r\n");
     }
 }
 
