@@ -45,9 +45,6 @@ typedef struct TIntState
 static IntState State[16];
 static bool hasInitState = false;
 
-void RegisterInput(int groupIndex, int pinIndex, InputPort::IOReadHandler handler);
-void UnRegisterInput(int pinIndex);
-
 InputPort::~InputPort()
 {
     // 取消所有中断
@@ -96,7 +93,8 @@ void InputPort::Register(IOReadHandler handler, void *param)
         hasInitState = true;
     }
 
-    byte gi = _Pin >> 4;gi=gi;
+    byte gi = _Pin >> 4;
+    gi = gi;
     ushort n = PinBit;
     for (int i = 0; i < 16 && n != 0; i++)
     {
@@ -107,12 +105,12 @@ void InputPort::Register(IOReadHandler handler, void *param)
             if (handler)
             {
                 IntState *state = &State[i];
-                state->ShakeTime = ShakeTime; 
+                state->ShakeTime = ShakeTime;
                 RegisterInput(gi, i, handler, param);
             }
             else
-            {                
-                UnRegisterInput(i);               
+            {
+                UnRegisterInput(i);
             }
         }
         n >>= 1;
@@ -123,44 +121,46 @@ void InputPort::Register(IOReadHandler handler, void *param)
 
 void GPIO_ISR(int num) // 0 <= num <= 15
 {
-	if (!hasInitState)
-	{
+    if (!hasInitState)
+    {
         return ;
-	}
-	IntState *state = State + num;
-	if (!state)
-	{
+    }
+    IntState *state = State + num;
+    if (!state)
+    {
         return ;
-	}
-	uint bit = 1 << num;
+    }
+    #if 0
+        uint bit = 1 << num;
+    #endif 
     bool value;
     //byte line = EXTI_Line0 << num;
     // 如果未指定委托，则不处理
     if (!state->Handler)
-	{
+    {
         return ;
-	}
-	
+    }
+
     // 默认20us抖动时间
     uint shakeTime = state->ShakeTime;
-	#if 0
-    do
-    {
-        EXTI->PR = bit; // 重置挂起位
-        value = InputPort::Read(state->Pin); // 获取引脚状态
-        if (shakeTime > 0)
+    #if 0
+        do
         {
-            // 值必须有变动才触发
-            if (value == state->OldValue)
-			{
-                return ;            
+            EXTI->PR = bit; // 重置挂起位
+            value = InputPort::Read(state->Pin); // 获取引脚状态
+            if (shakeTime > 0)
+            {
+                // 值必须有变动才触发
+                if (value == state->OldValue)
+                {
+                    return ;
+                }
+                Time.Sleep(shakeTime); // 避免抖动
             }
-			Time.Sleep(shakeTime); // 避免抖动
         }
-    }	
-    while (EXTI->PR &bit); // 如果再次挂起则重复
-	#endif
-	//printf("here state005\r\n");
+        while (EXTI->PR &bit); // 如果再次挂起则重复
+    #endif 
+    //printf("here state005\r\n");
     //EXTI_ClearITPendingBit(line);
     // 值必须有变动才触发
     if (shakeTime > 0 && value == state->OldValue)
@@ -168,7 +168,7 @@ void GPIO_ISR(int num) // 0 <= num <= 15
     state->OldValue = value;
     if (state->Handler)
     {
-		// 新值value为true，说明是上升，第二个参数是down，所以取非
+        // 新值value为true，说明是上升，第二个参数是down，所以取非
         state->Handler(state->Pin, !value, state->Param);
     }
 }
@@ -176,13 +176,13 @@ void GPIO_ISR(int num) // 0 <= num <= 15
 //所有中断线处理
 void EXTI_IRQHandler(ushort num, void *param)
 {
-	#if defined(STM32F1) || defined(STM32F4)
+    #if defined(STM32F1) || defined(STM32F4)
         // EXTI0 - EXTI4
         if (num <= EXTI4_IRQn)
-		{
+        {
             GPIO_ISR(num - EXTI0_IRQn);
         }
-		else if (num == EXTI9_5_IRQn)
+        else if (num == EXTI9_5_IRQn)
         {
             // EXTI5 - EXTI9
             uint pending = EXTI->PR &EXTI->IMR &0x03E0; // pending bits 5..9
@@ -273,6 +273,7 @@ void SetEXIT(int pinIndex, bool enable)
     ext.EXTI_LineCmd = enable ? ENABLE : DISABLE;
     EXTI_Init(&ext);
 }
+
 #if defined(STM32F1) || defined(STM32F4)
     static const int PORT_IRQns[] = 
     {
@@ -280,7 +281,7 @@ void SetEXIT(int pinIndex, bool enable)
         EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
         EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
     };
-	#endif
+#endif 
 // 申请引脚中断托管
 void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param)
 {
@@ -295,7 +296,7 @@ void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handle
     state->Handler = handler;
     state->Param = param;
     state->OldValue = Read(pin); // 预先保存当前状态值，后面跳变时触发中断
-	
+
     // 打开时钟，选择端口作为端口EXTI时钟线
     #if defined(STM32F0) || defined(STM32F4)
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
@@ -304,14 +305,14 @@ void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handle
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
         GPIO_EXTILineConfig(groupIndex, pinIndex);
     #endif 
-	
-    SetEXIT(pinIndex, true);    
-        // 打开并设置EXTI中断为低优先级
-    Interrupt.SetPriority(PORT_IRQns[pinIndex], 1);   
+
+    SetEXIT(pinIndex, true);
+    // 打开并设置EXTI中断为低优先级
+    Interrupt.SetPriority(PORT_IRQns[pinIndex], 1);
     state->Used++;
     if (state->Used == 1)
-    {        
-        Interrupt.Activate(PORT_IRQns[pinIndex], EXTI_IRQHandler, this);        
+    {
+        Interrupt.Activate(PORT_IRQns[pinIndex], EXTI_IRQHandler, this);
     }
 }
 
@@ -326,20 +327,20 @@ void InputPort::UnRegisterInput(int pinIndex)
 
     state->Used--;
     if (state->Used == 0)
-    {        
-        Interrupt.Deactivate(PORT_IRQns[pinIndex]);        
+    {
+        Interrupt.Deactivate(PORT_IRQns[pinIndex]);
     }
 }
 
 extern "C"
-{  
+{
     void EXTI0_IRQHandler()
     {
         if (EXTI_GetITStatus(EXTI_Line0) != RESET)
         {
 
             EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位	
-			EXTI_IRQHandler(EXTI0_IRQn,0);
+            EXTI_IRQHandler(EXTI0_IRQn, 0);
         }
     }
 
@@ -348,8 +349,8 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line1) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line1); //清除中断标志位
-			EXTI_IRQHandler(EXTI1_IRQn,0);
-        } 
+            EXTI_IRQHandler(EXTI1_IRQn, 0);
+        }
     }
 
     void EXTI2_IRQHandler()
@@ -357,7 +358,7 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line2) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line2); //清除中断标志位           
-			EXTI_IRQHandler(EXTI2_IRQn,0);
+            EXTI_IRQHandler(EXTI2_IRQn, 0);
         }
     }
 
@@ -366,7 +367,7 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line3) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line3); //清除中断标志位
-			EXTI_IRQHandler(EXTI3_IRQn,0);
+            EXTI_IRQHandler(EXTI3_IRQn, 0);
         }
     }
 
@@ -375,7 +376,7 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line4) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line4); //清除中断标志位
-			EXTI_IRQHandler(EXTI4_IRQn,0);
+            EXTI_IRQHandler(EXTI4_IRQn, 0);
         }
     }
 
@@ -384,27 +385,27 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line5) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line5); //清除中断标志位
-			EXTI_IRQHandler(EXTI9_5_IRQn,0);
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         }
         if (EXTI_GetITStatus(EXTI_Line6) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line6); //清除中断标志位		
-        	EXTI_IRQHandler(EXTI9_5_IRQn,0);
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         }
         if (EXTI_GetITStatus(EXTI_Line7) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line7); //清除中断标志位		
-        	EXTI_IRQHandler(EXTI9_5_IRQn,0);
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         }
         if (EXTI_GetITStatus(EXTI_Line8) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line8); //清除中断标志位		
-        	EXTI_IRQHandler(EXTI9_5_IRQn,0);
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         }
         if (EXTI_GetITStatus(EXTI_Line9) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line9); //清除中断标志位		
-        	EXTI_IRQHandler(EXTI9_5_IRQn,0);
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         }
     }
     /// IO 线中断，中断口为PC13
@@ -413,32 +414,32 @@ extern "C"
         if (EXTI_GetITStatus(EXTI_Line10) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line10); //清除中断标志位		
-        	EXTI_IRQHandler(EXTI15_10_IRQn,0);
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         }
         if (EXTI_GetITStatus(EXTI_Line11) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line11); //清除中断标志位		
-        	EXTI_IRQHandler(EXTI15_10_IRQn,0);
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         }
         if (EXTI_GetITStatus(EXTI_Line12) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line12); //清除中断标志位		
-        	EXTI_IRQHandler(EXTI15_10_IRQn,0);
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         }
         if (EXTI_GetITStatus(EXTI_Line13) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line13); //清除中断标志位		
-        	EXTI_IRQHandler(EXTI15_10_IRQn,0);
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         }
         if (EXTI_GetITStatus(EXTI_Line14) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line14); //清除中断标志位		
-        	EXTI_IRQHandler(EXTI15_10_IRQn,0);
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         }
         if (EXTI_GetITStatus(EXTI_Line15) != RESET)
         {
             EXTI_ClearITPendingBit(EXTI_Line15); //清除中断标志位		
-        	EXTI_IRQHandler(EXTI15_10_IRQn,0);
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         }
     }
 }
@@ -564,4 +565,3 @@ PG13
 PG14
 PG15 √
  */
-

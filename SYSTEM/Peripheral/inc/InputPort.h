@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Port.h"
-#define REGOLD	1	//旧版注册机制
+
 // 输入口
 class InputPort: public Port
 {
@@ -81,5 +81,3 @@ class InputPort: public Port
             void UnRegisterInput(int pinIndex);
         
 };
-//回调函数定义 down指示按下还是弹起触发
-typedef void(*BtnInCallbackOld)(Pin pin, bool down);
