@@ -106,16 +106,12 @@ void InputPort::Register(IOReadHandler handler, void *param)
             if (handler)
             {
                 IntState *state = &State[i];
-                state->ShakeTime = ShakeTime;
-                #if 0
-                    RegisterInput(gi, i, handler, param);
-                #endif 
+                state->ShakeTime = ShakeTime;                
+                RegisterInput(gi, i, handler, param);
             }
             else
-            {
-                #if 0
-                    UnRegisterInput(i);
-                #endif 
+            {                
+                UnRegisterInput(i);               
             }
         }
         n >>= 1;
