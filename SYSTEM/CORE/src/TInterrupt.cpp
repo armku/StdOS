@@ -56,7 +56,21 @@ void TInterrupt::Activate(byte irq, OnUsartReceive onrcv, void *param)
     SerialPort *sp = (SerialPort*)param;
     switch (irq)
     {
-        case USART1_IRQn:
+        case EXTI0_IRQn:
+			break;
+		case EXTI1_IRQn:
+			break;
+		case EXTI2_IRQn:
+			break;
+		case EXTI3_IRQn:
+			break;
+		case EXTI4_IRQn:
+			break;
+		case EXTI9_5_IRQn:
+			break;
+		case EXTI15_10_IRQn:
+			break;
+		case USART1_IRQn:
             onSerialPortRcv[0] = sp;
             break;
         case USART2_IRQn:
