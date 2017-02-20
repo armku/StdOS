@@ -119,6 +119,12 @@ void InputPort::Register(IOReadHandler handler, void *param)
     }
 
     _Registed = handler != NULL;
+	this->RegisterAdd();
+}
+//附加测试功能
+void InputPort::RegisterAdd()
+{
+	printf("RegAdd\r\n");
 }
 
 void GPIO_ISR(int num) // 0 <= num <= 15
@@ -289,7 +295,7 @@ void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handle
     state->Handler = handler;
     state->Param = param;
     state->OldValue = Read(pin); // 预先保存当前状态值，后面跳变时触发中断
-
+	
     // 打开时钟，选择端口作为端口EXTI时钟线
     #if defined(STM32F0) || defined(STM32F4)
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
@@ -298,7 +304,7 @@ void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handle
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
         GPIO_EXTILineConfig(groupIndex, pinIndex);
     #endif 
-
+	
     SetEXIT(pinIndex, true);    
         // 打开并设置EXTI中断为低优先级
     Interrupt.SetPriority(PORT_IRQns[pinIndex], 1);   

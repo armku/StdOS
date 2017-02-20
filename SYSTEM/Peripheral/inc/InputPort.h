@@ -54,6 +54,7 @@ class InputPort: public Port
         static bool Read(Pin pin); // 读取某个引脚
 
         void Register(IOReadHandler handler, void *param = NULL); // 注册事件
+		void RegisterAdd();//附加测试功能
 
         operator bool()
         {
