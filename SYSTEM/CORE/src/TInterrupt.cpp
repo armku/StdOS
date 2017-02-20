@@ -11,7 +11,49 @@ void TInterrupt::SetPriority(byte irq, byte level)
     nvic.NVIC_IRQChannelCmd = ENABLE;
     switch (irq)
     {
-        case USART1_IRQn:
+        case EXTI0_IRQn:
+			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = EXTI0_IRQn;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
+            nvic.NVIC_IRQChannelSubPriority = 1;
+            break;
+		case EXTI1_IRQn:
+			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = EXTI1_IRQn;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
+            nvic.NVIC_IRQChannelSubPriority = 1;
+            break;
+		case EXTI2_IRQn:
+			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = EXTI2_IRQn;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
+            nvic.NVIC_IRQChannelSubPriority = 1;
+            break;
+		case EXTI3_IRQn:
+			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = EXTI3_IRQn;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
+            nvic.NVIC_IRQChannelSubPriority = 1;
+            break;
+		case EXTI4_IRQn:
+			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = EXTI4_IRQn;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
+            nvic.NVIC_IRQChannelSubPriority = 1;
+            break;
+		case EXTI9_5_IRQn:
+			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = EXTI9_5_IRQn;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
+            nvic.NVIC_IRQChannelSubPriority = 1;
+            break;
+		case EXTI15_10_IRQn:
+			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = EXTI15_10_IRQn;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
+            nvic.NVIC_IRQChannelSubPriority = 1;
+            break;
+		case USART1_IRQn:
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = USART1_IRQn;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
