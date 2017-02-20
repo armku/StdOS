@@ -107,7 +107,7 @@ void InputPort::Register(IOReadHandler handler, void *param)
             if (handler)
             {
                 IntState *state = &State[i];
-                state->ShakeTime = ShakeTime;                
+                state->ShakeTime = ShakeTime; 
                 RegisterInput(gi, i, handler, param);
             }
             else
@@ -128,7 +128,7 @@ void GPIO_ISR(int num) // 0 <= num <= 15
         return ;
 	}
 	IntState *state = State + num;
-    if (!state)
+	if (!state)
 	{
         return ;
 	}
@@ -143,7 +143,6 @@ void GPIO_ISR(int num) // 0 <= num <= 15
 	
     // 默认20us抖动时间
     uint shakeTime = state->ShakeTime;
-	//printf("here state004\r\n");
 	#if 0
     do
     {
@@ -169,18 +168,15 @@ void GPIO_ISR(int num) // 0 <= num <= 15
     state->OldValue = value;
     if (state->Handler)
     {
-		printf("here state006\r\n");
-		#if 1
-            // 新值value为true，说明是上升，第二个参数是down，所以取非
-            state->Handler(state->Pin, !value, state->Param);
-        #endif 
+		// 新值value为true，说明是上升，第二个参数是down，所以取非
+        state->Handler(state->Pin, !value, state->Param);
     }
 }
 
 //所有中断线处理
 void EXTI_IRQHandler(ushort num, void *param)
 {
-    #if defined(STM32F1) || defined(STM32F4)
+	#if defined(STM32F1) || defined(STM32F4)
         // EXTI0 - EXTI4
         if (num <= EXTI4_IRQn)
 		{
@@ -601,9 +597,7 @@ extern "C"
         {
 
             EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位	
-			//GPIO_ISROld(0);
-			EXTI_IRQHandler(0,0);
-			printf("中断线0\r\n");
+			EXTI_IRQHandler(EXTI0_IRQn,0);
         }
     }
 
