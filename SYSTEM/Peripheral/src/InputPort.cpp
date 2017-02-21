@@ -134,15 +134,17 @@ void GPIO_ISR(int num) // 0 <= num <= 15
         uint bit = 1 << num;
     #endif 
     bool value;
+	value = InputPort::Read(state->Pin);
     //byte line = EXTI_Line0 << num;
     // 如果未指定委托，则不处理
     if (!state->Handler)
     {
         return ;
     }
-
+	#if 0
     // 默认20us抖动时间
     uint shakeTime = state->ShakeTime;
+	#endif
     #if 0
         do
         {
@@ -170,7 +172,7 @@ void GPIO_ISR(int num) // 0 <= num <= 15
     if (state->Handler)
     {
         // 新值value为true，说明是上升，第二个参数是down，所以取非
-        state->Handler(state->Pin, !value, state->Param);
+        state->Handler(state->Pin, value, state->Param);
     }
 }
 
