@@ -9,6 +9,35 @@
 #define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
+
+InputPort::InputPort()
+{
+    Init();
+}
+
+InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
+{
+    Init(floating, pupd);
+    Set(pin);
+}
+
+InputPort::operator bool()
+{
+    return Read();
+}
+
+void InputPort::Init(bool floating, PuPd pupd)
+{
+    Pull = pupd;
+    Floating = floating;
+
+    _Registed = false;
+    //ShakeTime = 20;
+    // 有些应用的输入口需要极高的灵敏度，这个时候不需要抖动检测
+    ShakeTime = 0;
+    Invert = false;
+}
+
 void InputPort::OnConfig(GPIO_InitTypeDef &gpio)
 {
     Port::OnConfig(gpio);
@@ -134,17 +163,17 @@ void GPIO_ISR(int num) // 0 <= num <= 15
         uint bit = 1 << num;
     #endif 
     bool value;
-	value = InputPort::Read(state->Pin);
+    value = InputPort::Read(state->Pin);
     //byte line = EXTI_Line0 << num;
     // 如果未指定委托，则不处理
     if (!state->Handler)
     {
         return ;
     }
-	#if 0
-    // 默认20us抖动时间
-    uint shakeTime = state->ShakeTime;
-	#endif
+    #if 0
+        // 默认20us抖动时间
+        uint shakeTime = state->ShakeTime;
+    #endif 
     #if 0
         do
         {
