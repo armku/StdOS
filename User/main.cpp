@@ -44,7 +44,7 @@ void OnKeyPress(Pin pin, bool onoff, void *param)
 {
     //led1.Write(onoff);
     led2 = !led2;
-    printf("中断引脚：%d 值%d \n", pin, onoff);
+    printf("中断引脚：值%d \n", onoff);
 }
 void IOReadHandler1(Pin port, bool down, void *param)
 {

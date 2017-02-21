@@ -160,8 +160,7 @@ void GPIO_ISR(int num) // 0 <= num <= 15
             }
         }
         while (EXTI->PR &bit); // 如果再次挂起则重复
-    #endif 
-    //printf("here state005\r\n");
+    #endif    
     //EXTI_ClearITPendingBit(line);
     // 值必须有变动才触发
     if (shakeTime > 0 && value == state->OldValue)
