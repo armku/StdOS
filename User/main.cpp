@@ -40,16 +40,13 @@ void ledflash(void *param)
 //按键 PC13 PA0
 InputPort exti(PC13); //PA1 PB3     PA0 PC13
 InputPort exti1(PA0);
-void OnKeyPress(Pin pin, bool onoff, void *param)
+#define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
+#define _PIN(PIN) (PIN & 0x0F)
+void OnKeyPress(Pin pin, bool down, void *param)
 {
     //led1.Write(onoff);
     led2 = !led2;
-    printf("中断引脚：值%d \n", onoff);
-}
-void IOReadHandler1(Pin port, bool down, void *param)
-{
-	led2 = !led2;
-    printf("中断引脚： 值%d \n", down);
+    printf("中断引脚：P%c%d 值%d \n",_PIN_NAME(pin),pin, down);
 }
 /*
 ISO-V2:PB5控制485方向
@@ -83,9 +80,8 @@ int main(void)
 	sp2.Register(OnUsartRead);
 	sp2.Open();
     
-    exti.Register(OnKeyPress);
-	
-	exti1.Register(IOReadHandler1);
+    exti.Register(OnKeyPress);	
+	exti1.Register(OnKeyPress);
    
     PWM pwm1(PC9);
     pwm1.Init();
