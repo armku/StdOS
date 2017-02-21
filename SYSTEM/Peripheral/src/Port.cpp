@@ -683,7 +683,7 @@ void EXTI_IRQHandler(ushort num, void *param)
         }
     #endif 
 }
-
+//中断线打开、关闭
 void SetEXIT(int pinIndex, bool enable)
 {
     /* 配置EXTI中断线 */
