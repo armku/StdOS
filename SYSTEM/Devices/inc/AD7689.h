@@ -2,7 +2,7 @@
 
 #include "Type.h"
 #include "Port.h"
-#include "InputPort.h"
+#include "Port.h"
 
 #define MAXCH	8
 #define CHDELAY	2	//通道切换延时时间，用于数据稳定

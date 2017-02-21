@@ -1,6 +1,6 @@
 #pragma once
 
-#include "InputPort.h"
+#include "Port.h"
 #include "Delegate.h"
 
 //According to your need to modify the constants.

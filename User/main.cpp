@@ -2,7 +2,7 @@
 #include "SerialPort.h"
 #include "W24xxx.h"
 #include "multi_button.h"
-#include "InputPort.h"
+#include "Port.h"
 #include "WatchDog.h"
 #include "CString.h"
 #include "string.h"

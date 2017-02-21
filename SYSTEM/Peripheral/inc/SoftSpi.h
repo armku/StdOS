@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Port.h"
-#include "InputPort.h"
+#include "Port.h"
 
 class CSoftSpi
 {
