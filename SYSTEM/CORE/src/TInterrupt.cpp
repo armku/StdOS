@@ -138,6 +138,8 @@ void TInterrupt::Activate(byte irq, OnUsartReceive onrcv, void *param)
 void TInterrupt::Deactivate(byte irq){
 
 }
+	//所有中断线处理
+void EXTI_IRQHandler(ushort num, void *param);
 extern SerialPort *_printf_sp;
 #ifdef __cplusplus
     extern "C"
@@ -183,7 +185,112 @@ extern SerialPort *_printf_sp;
             SerialPort::OnUsartReceive(4, onSerialPortRcv[4]);
         }
     }
-
-    #ifdef __cplusplus
+	
+    void EXTI0_IRQHandler()
+    {
+        if (EXTI_GetITStatus(EXTI_Line0) != RESET)
+        {
+            EXTI_IRQHandler(EXTI0_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line0);
+        }
     }
-#endif
+
+    void EXTI1_IRQHandler()
+    {
+        if (EXTI_GetITStatus(EXTI_Line1) != RESET)
+        {
+            EXTI_IRQHandler(EXTI1_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line1);
+        }
+    }
+
+    void EXTI2_IRQHandler()
+    {
+        if (EXTI_GetITStatus(EXTI_Line2) != RESET)
+        {
+            EXTI_IRQHandler(EXTI2_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line2);
+        }
+    }
+
+    void EXTI3_IRQHandler()
+    {
+        if (EXTI_GetITStatus(EXTI_Line3) != RESET)
+        {
+            EXTI_IRQHandler(EXTI3_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line3);
+        }
+    }
+
+    void EXTI4_IRQHandler()
+    {
+        if (EXTI_GetITStatus(EXTI_Line4) != RESET)
+        {
+            EXTI_IRQHandler(EXTI4_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line4);
+        }
+    }
+
+    void EXTI9_5_IRQHandler()
+    {
+        if (EXTI_GetITStatus(EXTI_Line5) != RESET)
+        {
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line5);
+        }
+        if (EXTI_GetITStatus(EXTI_Line6) != RESET)
+        {
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line6);
+        }
+        if (EXTI_GetITStatus(EXTI_Line7) != RESET)
+        {
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line7);
+        }
+        if (EXTI_GetITStatus(EXTI_Line8) != RESET)
+        {
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line8);
+        }
+        if (EXTI_GetITStatus(EXTI_Line9) != RESET)
+        {
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line9);
+        }
+    }
+    /// IO 线中断，中断口为PC13
+    void EXTI15_10_IRQHandler(void)
+    {
+        if (EXTI_GetITStatus(EXTI_Line10) != RESET)
+        {
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line10);
+        }
+        if (EXTI_GetITStatus(EXTI_Line11) != RESET)
+        {
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line11);
+        }
+        if (EXTI_GetITStatus(EXTI_Line12) != RESET)
+        {
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line12);
+        }
+        if (EXTI_GetITStatus(EXTI_Line13) != RESET)
+        {
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line13);
+        }
+        if (EXTI_GetITStatus(EXTI_Line14) != RESET)
+        {
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line14);
+        }
+        if (EXTI_GetITStatus(EXTI_Line15) != RESET)
+        {
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line15);
+        }
+    }
+}
