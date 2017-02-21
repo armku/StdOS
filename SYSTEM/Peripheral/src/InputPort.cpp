@@ -121,7 +121,6 @@ void InputPort::Register(IOReadHandler handler, void *param)
 
 void GPIO_ISR(int num) // 0 <= num <= 15
 {
-	printf("GPIO_ISR %d\r\n",num);
     if (!hasInitState)
     {
         return ;
@@ -160,12 +159,14 @@ void GPIO_ISR(int num) // 0 <= num <= 15
             }
         }
         while (EXTI->PR &bit); // 如果再次挂起则重复
-    #endif    
+    #endif 
     //EXTI_ClearITPendingBit(line);
-    // 值必须有变动才触发
-    if (shakeTime > 0 && value == state->OldValue)
-        return ;
-    state->OldValue = value;
+    #if 0
+        // 值必须有变动才触发
+        if (shakeTime > 0 && value == state->OldValue)
+            return ;
+        state->OldValue = value;
+    #endif 
     if (state->Handler)
     {
         // 新值value为true，说明是上升，第二个参数是down，所以取非
@@ -191,9 +192,9 @@ void EXTI_IRQHandler(ushort num, void *param)
             do
             {
                 if (pending &1)
-				{
+                {
                     GPIO_ISR(num);
-				}
+                }
                 num++;
                 pending >>= 1;
             }
@@ -208,9 +209,9 @@ void EXTI_IRQHandler(ushort num, void *param)
             do
             {
                 if (pending &1)
-				{
+                {
                     GPIO_ISR(num);
-				}
+                }
                 num++;
                 pending >>= 1;
             }
@@ -342,7 +343,7 @@ extern "C"
     {
         if (EXTI_GetITStatus(EXTI_Line0) != RESET)
         {
-			EXTI_IRQHandler(EXTI0_IRQn, 0);
+            EXTI_IRQHandler(EXTI0_IRQn, 0);
             EXTI_ClearITPendingBit(EXTI_Line0);
         }
     }
@@ -351,8 +352,8 @@ extern "C"
     {
         if (EXTI_GetITStatus(EXTI_Line1) != RESET)
         {
-			EXTI_IRQHandler(EXTI1_IRQn, 0);
-            EXTI_ClearITPendingBit(EXTI_Line1);            
+            EXTI_IRQHandler(EXTI1_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line1);
         }
     }
 
@@ -360,8 +361,8 @@ extern "C"
     {
         if (EXTI_GetITStatus(EXTI_Line2) != RESET)
         {
-			EXTI_IRQHandler(EXTI2_IRQn, 0);
-            EXTI_ClearITPendingBit(EXTI_Line2); 
+            EXTI_IRQHandler(EXTI2_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line2);
         }
     }
 
@@ -369,8 +370,8 @@ extern "C"
     {
         if (EXTI_GetITStatus(EXTI_Line3) != RESET)
         {
-			EXTI_IRQHandler(EXTI3_IRQn, 0);
-            EXTI_ClearITPendingBit(EXTI_Line3);            
+            EXTI_IRQHandler(EXTI3_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line3);
         }
     }
 
@@ -378,8 +379,8 @@ extern "C"
     {
         if (EXTI_GetITStatus(EXTI_Line4) != RESET)
         {
-			 EXTI_IRQHandler(EXTI4_IRQn, 0);
-            EXTI_ClearITPendingBit(EXTI_Line4);           
+            EXTI_IRQHandler(EXTI4_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line4);
         }
     }
 
@@ -387,28 +388,28 @@ extern "C"
     {
         if (EXTI_GetITStatus(EXTI_Line5) != RESET)
         {
-			EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
             EXTI_ClearITPendingBit(EXTI_Line5);
         }
         if (EXTI_GetITStatus(EXTI_Line6) != RESET)
         {
-			EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
             EXTI_ClearITPendingBit(EXTI_Line6);
         }
         if (EXTI_GetITStatus(EXTI_Line7) != RESET)
         {
-			EXTI_IRQHandler(EXTI9_5_IRQn, 0);
-            EXTI_ClearITPendingBit(EXTI_Line7);            
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line7);
         }
         if (EXTI_GetITStatus(EXTI_Line8) != RESET)
         {
-			EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
             EXTI_ClearITPendingBit(EXTI_Line8);
         }
         if (EXTI_GetITStatus(EXTI_Line9) != RESET)
         {
-			EXTI_IRQHandler(EXTI9_5_IRQn, 0);
-            EXTI_ClearITPendingBit(EXTI_Line9);            
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            EXTI_ClearITPendingBit(EXTI_Line9);
         }
     }
     /// IO 线中断，中断口为PC13
@@ -416,34 +417,33 @@ extern "C"
     {
         if (EXTI_GetITStatus(EXTI_Line10) != RESET)
         {
-			EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
             EXTI_ClearITPendingBit(EXTI_Line10);
         }
         if (EXTI_GetITStatus(EXTI_Line11) != RESET)
         {
-			EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
             EXTI_ClearITPendingBit(EXTI_Line11);
         }
         if (EXTI_GetITStatus(EXTI_Line12) != RESET)
         {
-			EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
             EXTI_ClearITPendingBit(EXTI_Line12);
         }
         if (EXTI_GetITStatus(EXTI_Line13) != RESET)
         {
             EXTI_IRQHandler(EXTI15_10_IRQn, 0);
-			EXTI_ClearITPendingBit(EXTI_Line13);		
-            printf("EXTI13_IRQn\r\n");
+            EXTI_ClearITPendingBit(EXTI_Line13);
         }
         if (EXTI_GetITStatus(EXTI_Line14) != RESET)
-        {            		
+        {
             EXTI_IRQHandler(EXTI15_10_IRQn, 0);
-			EXTI_ClearITPendingBit(EXTI_Line14);
+            EXTI_ClearITPendingBit(EXTI_Line14);
         }
         if (EXTI_GetITStatus(EXTI_Line15) != RESET)
-        {            		
+        {
             EXTI_IRQHandler(EXTI15_10_IRQn, 0);
-			EXTI_ClearITPendingBit(EXTI_Line15);
+            EXTI_ClearITPendingBit(EXTI_Line15);
         }
     }
 }
@@ -568,4 +568,5 @@ PG12
 PG13
 PG14
 PG15 √
- */
+*/
+ 
