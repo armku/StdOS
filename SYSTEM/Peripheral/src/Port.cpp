@@ -745,4 +745,3 @@ void InputPort::UnRegisterInput(int pinIndex)
         Interrupt.Deactivate(PORT_IRQns[pinIndex]);
     }
 }
-
