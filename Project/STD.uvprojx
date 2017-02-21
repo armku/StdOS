@@ -623,11 +623,6 @@
               <FilePath>..\SYSTEM\Peripheral\src\WatchDog.cpp</FilePath>
             </File>
             <File>
-              <FileName>FIFORing.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\FIFORing.cpp</FilePath>
-            </File>
-            <File>
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\usart.c</FilePath>
@@ -1516,11 +1511,6 @@
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FIFORing.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\FIFORing.cpp</FilePath>
             </File>
             <File>
               <FileName>usart.c</FileName>
