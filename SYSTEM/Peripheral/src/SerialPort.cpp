@@ -383,7 +383,6 @@ String SerialPort::ToString()
 // 真正的串口中断函数
 void SerialPort::OnUsartReceive(ushort num, void *param)
 {
-
     SerialPort *sp = (SerialPort*)param;
 
     if (sp && sp->HasHandler())
@@ -391,7 +390,7 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
         if (USART_GetITStatus(sp->_port, USART_IT_RXNE) != RESET)
         {
             // 从栈分配，节省内存
-            byte buf[64];
+            byte buf[128];
             uint len = sp->Read(buf, sizeof(buf));
             if (len)
             {
@@ -409,7 +408,6 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
             }
         }
     }
-
 }
 
 #define UART_PINS {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}
