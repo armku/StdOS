@@ -25,6 +25,7 @@ void bubbleSort(float *buf, uint len)
 union
 {
     float dafloat;
+    ushort daushort[2];
     struct
     {
         byte da3;
@@ -45,6 +46,13 @@ void SetBufFloat(byte buf[], ushort pos, float da)
     buf[pos + 3] = bitconvert.char_bit.da0;
 }
 
+void SetBufUshort(byte buf[], ushort pos, ushort da)
+{
+    bitconvert.daushort[0] = da;
+    buf[pos] = bitconvert.char_bit.da3;
+    buf[pos + 1] = bitconvert.char_bit.da2;
+}
+
 //设置浮点数
 float GetBufFloat(byte buf[], ushort pos)
 {
@@ -54,6 +62,17 @@ float GetBufFloat(byte buf[], ushort pos)
     bitconvert.char_bit.da0 = buf[pos + 3];
     return bitconvert.dafloat;
 }
+
+//设置浮点数
+ushort GetBufUshort(byte buf[], ushort pos)
+{
+    bitconvert.char_bit.da3 = buf[pos];
+    bitconvert.char_bit.da2 = buf[pos + 1];
+    bitconvert.char_bit.da1 = buf[pos + 2];
+    bitconvert.char_bit.da0 = buf[pos + 3];
+    return bitconvert.daushort[0];
+}
+
 //从电阻获得温度
 float GetTFromPT100(float om)
 {
@@ -74,4 +93,3 @@ float GetTFromPT100(float om)
 
     return ret;
 }
-
