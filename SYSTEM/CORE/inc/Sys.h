@@ -10,7 +10,7 @@
 #include "Delegate.h"
 #include "CString.h"
 
-#define NULL 0
+//#define NULL 0
 
 /* ´®¿Ú¶¨Òå */
 

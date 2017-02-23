@@ -289,18 +289,21 @@ void TSys::Initjs()
 
 void TSys::ShowHex(byte *data, byte hexlength)
 {
+	byte ba;
+	ushort ba1;
+	uint ba2;
     switch (hexlength)
     {
         case 1:
-            byte ba = data[0];
+            ba = data[0];
             debug_printf("%u", ba);
             break;
         case 2:
-            ushort ba1 = (ushort)(*data);
+            ba1 = (ushort)(*data);
             debug_printf("%u", ba1);
             break;
         case 4:
-            uint ba2 = (uint)(*data);
+            ba2 = (uint)(*data);
             debug_printf("%u", ba2);
             break;
         default:
