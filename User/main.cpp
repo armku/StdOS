@@ -20,21 +20,15 @@ typedef enum
     KEY_MENU = 1 << 5,  // 推挽式输出
     KEY_NULL = 0
 } KEY_MODE;
-WatchDog dog(3000);
+
 void feeddog(void *param)
 {
-    dog.Feed();
+	WatchDog *dog=(WatchDog *)param;
+    dog->Feed();
 }
 
 OutputPort led1(PB0, true);
 OutputPort led2(PF7, true);
-OutputPort led3(PF8, true);
-void ledflash(void *param)
-{
-    //	led1=!led1;
-    //	led2=!led2;
-    led3 = !led3;
-}
 
 //按键 PC13 PA0
 InputPort exti(PC13); //PA1 PB3     PA0 PC13
@@ -68,7 +62,11 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 }
 
 SerialPort sp2(COM2);
-
+void LedTask(void* param)
+{
+    OutputPort* leds = (OutputPort*)param;
+    *leds = !*leds;
+}
 int main(void)
 {
     Sys.MessagePort = COM1;
@@ -88,9 +86,12 @@ int main(void)
     pwm1.SetOutPercent(50);
 
     SerialPort::GetMessagePort()->Register(OnUsartRead);
-
-    Sys.AddTask(feeddog, 0, 0, 1000, "WatchDog");
-    Sys.AddTask(ledflash, 0, 5, 500, "LedTask");
+	
+	// 初始化为输出
+	OutputPort led(PF8);
+	WatchDog dog(3000);
+    Sys.AddTask(LedTask, &led, 0, 300,"LedTask");
+    Sys.AddTask(feeddog, &dog, 0, 1000, "WatchDog");
 
     Sys.Start();
 }
