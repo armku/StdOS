@@ -90,8 +90,8 @@ int main(void)
 	// 初始化为输出
 	OutputPort led(PF8);
 	WatchDog dog(3000);
-    Sys.AddTask(LedTask, &led, 0, 300,"LedTask");
     Sys.AddTask(FeedDog, &dog, 0, 1000, "WatchDog");
-
+	Sys.AddTask(LedTask, &led, 0, 300,"LedTask");
+    
     Sys.Start();
 }
