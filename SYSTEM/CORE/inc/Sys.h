@@ -88,6 +88,9 @@ class TSys:public Object
 		ushort DevID;
 		byte _Index;//未知
 		String *CPUName;
+		ushort Crc16(const void* buf, uint len, ushort crc);//crc 计算 软件实现
+		uint Crc(const void* buf, uint len);//crc 硬件实现
+		uint Crc(const void* buf, uint len, uint crc);
 		
 	private:
 		void Initjs();//计算ram、型号等
