@@ -872,6 +872,11 @@
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\Util\src\Util.c</FilePath>
             </File>
+            <File>
+              <FileName>RC4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Util\src\RC4.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1761,6 +1766,11 @@
               <FileName>Util.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\Util\src\Util.c</FilePath>
+            </File>
+            <File>
+              <FileName>RC4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Util\src\RC4.cpp</FilePath>
             </File>
           </Files>
         </Group>
