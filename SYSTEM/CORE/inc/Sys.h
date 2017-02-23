@@ -10,8 +10,6 @@
 #include "Delegate.h"
 #include "CString.h"
 
-//#define NULL 0
-
 /* 串口定义 */
 
 typedef enum
@@ -29,9 +27,7 @@ typedef enum
     AF_OD = 0x1C,  //开漏复用输出
     AF_PP = 0x18  //推挽复用输出
 } PIN_MODE;
-#ifndef NULL
-    #define NULL 0
-#endif 
+ 
 #define STM32F1    //使用STM32F1系列单片机
 /* 针脚 ------------------------------------------------------------------*/
 //引脚定义

@@ -2,8 +2,6 @@
 
 #include "Delegate.h"
 
-#define NULL 0
-
 class TaskScheduler;
 // хннЯ
 class Task

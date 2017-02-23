@@ -14,7 +14,9 @@ typedef int64_t Int64; //长整型
 typedef uint64_t UInt64; //无符号长整型
 typedef uint64_t ulong; //
 
-#define NULL 0
+#ifndef NULL
+    #define NULL 0
+#endif
 
 #ifdef  DEBUG
 void assert_failed(uint8_t* file, uint32_t line,char * errstr);

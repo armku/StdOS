@@ -4,7 +4,6 @@
 #include "Buffer.h"
 
 class ITransport;
-#define NULL 0
 
 //回调函数定义,当有数据到达时触发
 typedef uint(*TransportHandler)(ITransport *transport, Buffer &bs, void *param); //临时不能用

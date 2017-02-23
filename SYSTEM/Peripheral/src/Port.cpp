@@ -3,7 +3,6 @@
 #include "Port.h"
 #include "TInterrupt.h"
 
-#define NULL 0
 #define GPIO_Mode_IN GPIO_Mode_IN_FLOATING
 #define GPIO_Mode_AF GPIO_Mode_AF_OD
 #define GPIO_OType_OD GPIO_Mode_Out_OD
