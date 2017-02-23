@@ -21,7 +21,7 @@ typedef enum
     KEY_NULL = 0
 } KEY_MODE;
 
-void feeddog(void *param)
+void FeedDog(void *param)
 {
 	WatchDog *dog=(WatchDog *)param;
     dog->Feed();
@@ -91,7 +91,7 @@ int main(void)
 	OutputPort led(PF8);
 	WatchDog dog(3000);
     Sys.AddTask(LedTask, &led, 0, 300,"LedTask");
-    Sys.AddTask(feeddog, &dog, 0, 1000, "WatchDog");
+    Sys.AddTask(FeedDog, &dog, 0, 1000, "WatchDog");
 
     Sys.Start();
 }
