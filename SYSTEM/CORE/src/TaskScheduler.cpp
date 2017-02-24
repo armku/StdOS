@@ -80,7 +80,7 @@ void TaskScheduler::SetTask(uint taskid,bool onoff,long delaytime)
 		return;
 	}
 	this->_Tasks[taskid]->Enable=onoff;
-	this->_Tasks[taskid]->NextTime=Time.Current()+delaytime+1000;	
+	this->_Tasks[taskid]->NextTime=Time.Current()+delaytime*1000;	
 }
 void TaskScheduler::Remove(uint taskid)
 {
