@@ -61,5 +61,5 @@ class ModbusSlave
 		ModbusEntity Entity;
 	protected:
 		virtual ModbusEntity Process(ModbusEntity entity);
-		ushort CalcCRC(byte *u8Data, byte u8Size);
+		ushort GetCRC(byte *byteData, int len);
 };
