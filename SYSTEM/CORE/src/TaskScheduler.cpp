@@ -39,7 +39,13 @@ uint TaskScheduler::Add(Action func, void *param, long dueTime, long period, con
     _Tasks.Add(task);
     #if DEBUG
         // 输出长整型%ld，无符号长整型%llu
-        if (period >= 1000)
+        if (period >= 1000000)
+        {
+            uint dt = dueTime / 1000000;
+            int pd = period > 0 ? period / 1000000: period;
+            debug_printf("%s::添加%2d %-10s FirstTime = %8ds Period = %8ds\r\n", Name, task->ID, task->Name, dt, pd);
+        }
+        else if (period >= 1000)
         {
             uint dt = dueTime / 1000;
             int pd = period > 0 ? period / 1000: period;
