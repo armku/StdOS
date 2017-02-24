@@ -65,14 +65,7 @@ SerialPort sp2(COM2);
 void LedTask(void* param)
 {
     OutputPort* leds = (OutputPort*)param;
-    *leds = !*leds;
-}
-uint idddd=0;
-void LedTaskFast(void * param)
-{	
-	static bool onoff1=false;
-	onoff1=!onoff1;
-	Sys.SetTask(idddd,onoff1);
+	*leds = !*leds;	
 }
 int main(void)
 {
@@ -98,8 +91,7 @@ int main(void)
 	OutputPort led(PF8);
 	WatchDog dog(3000);
     Sys.AddTask(FeedDog, &dog, 0, 1000, "WatchDog");
-	idddd=Sys.AddTask(LedTask, &led, 0, 300,"LedTask");
-	Sys.AddTask(LedTaskFast, &led, -1, 10000,"LedTaskFast");
+	Sys.AddTask(LedTask, &led, 0, 500,"LedTask");
 	
     
     Sys.Start();

@@ -31,7 +31,7 @@ uint TaskScheduler::Add(Action func, void *param, long dueTime, long period, con
 	{
 		dueTime*=1000;
 	}
-	if(period>0)
+	if(period>1)
 	{
 		period*=1000;
 	}
@@ -43,6 +43,10 @@ uint TaskScheduler::Add(Action func, void *param, long dueTime, long period, con
     task->Period = period;
     task->NextTime = Time.Current() + dueTime;
     task->Name = name;
+	if(period==1)
+	{
+		task->Enable=false;
+	}
 
     this->Count++;
     _Tasks.Add(task);
