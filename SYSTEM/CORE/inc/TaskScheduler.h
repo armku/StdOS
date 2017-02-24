@@ -24,10 +24,9 @@ class TaskScheduler
         TaskScheduler(char* name = NULL);
         ~TaskScheduler();        
             // 创建任务，返回任务编号。dueTime首次调度时间us，period调度间隔us，-1表示仅处理一次
-        uint Add(Action func, void *param, long dueTime = 0, long period = 0,const char *name="No Name");
-         
+        uint Add(Action func, void *param, long dueTime = 0, long period = 0,const char *name="No Name");         
         void Remove(uint taskid);
-
+		void SetTask(uint taskid,bool onoff,long delaytime=0);//设置任务执行、就绪状态
         void Start();
         void Stop();
 	// 执行一次循环。指定最大可用时间

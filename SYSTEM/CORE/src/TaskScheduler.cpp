@@ -58,7 +58,17 @@ uint TaskScheduler::Add(Action func, void *param, long dueTime, long period, con
     #endif 
     return task->ID;
 }
-
+//设置任务执行、就绪状态
+void TaskScheduler::SetTask(uint taskid,bool onoff,long delaytime)
+{
+	if(taskid>this->Count)
+	{
+		//超范围，返回
+		return;
+	}
+	this->_Tasks[taskid]->Enable=onoff;
+	this->_Tasks[taskid]->NextTime=Time.Current()+delaytime+1000;	
+}
 void TaskScheduler::Remove(uint taskid)
 {
     int i =  - 1;
