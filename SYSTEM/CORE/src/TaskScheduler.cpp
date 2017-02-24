@@ -24,9 +24,18 @@ TaskScheduler::~TaskScheduler()
 }
 
 
-// 创建任务，返回任务编号。dueTime首次调度时间us，period调度间隔us，-1表示仅处理一次
+// 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
 uint TaskScheduler::Add(Action func, void *param, long dueTime, long period, const char *name)
 {
+	if(dueTime >0)
+	{
+		dueTime*=1000;
+	}
+	if(period>0)
+	{
+		period*=1000;
+	}
+	
     Task *task = new Task(this);
     task->ID = mgid++;
     task->Callback = func;
@@ -95,8 +104,8 @@ void TaskScheduler::Start()
         return ;
     }
 
-    Add(ShowTime, NULL, 2 *1000 * 1000, 20 *1000 * 1000, "时间显示");
-    Add(ShowStatus, this, 1*1000*1000, 30*1000*1000,"任务显示");
+    Add(ShowTime, NULL, 2 *1000, 20 *1000, "时间显示");
+    Add(ShowStatus, this, 1*1000, 30*1000,"任务显示");
 
     debug_printf("%s::准备就绪 开始循环处理%d个任务！\r\n\r\n", Name, Count);
 

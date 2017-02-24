@@ -31,7 +31,7 @@ uint TSys::AddTask(Action func, void *param, long dueTime, long period, const ch
         _Scheduler = new TaskScheduler("Sys");
     }
 
-    return _Scheduler->Add(func, param, dueTime *1000, period *1000, name);
+    return _Scheduler->Add(func, param, dueTime, period, name);
 }
 
 void TSys::RemoveTask(uint taskid)
