@@ -21,7 +21,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 TaskScheduler *_Scheduler;
 
 // 创建任务，返回任务编号。priority优先级，dueTime首次调度时间us，period调度间隔us，-1表示仅处理一次
-uint TSys::AddTask(Action func, void *param, ulong dueTime, long period, const char *name)
+uint TSys::AddTask(Action func, void *param, long dueTime, long period, const char *name)
 {
     // 屏蔽中断，否则可能有线程冲突
     SmartIRQ irq;

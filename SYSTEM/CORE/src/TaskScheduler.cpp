@@ -4,7 +4,7 @@
 
 #define UInt64_Max LONG_MAX
 
-TaskScheduler::TaskScheduler(char* name)
+TaskScheduler::TaskScheduler(char *name)
 {
     this->Name = name;
 
@@ -25,7 +25,7 @@ TaskScheduler::~TaskScheduler()
 
 
 // 创建任务，返回任务编号。dueTime首次调度时间us，period调度间隔us，-1表示仅处理一次
-uint TaskScheduler::Add(Action func, void *param, ulong dueTime, long period, const char *name)
+uint TaskScheduler::Add(Action func, void *param, long dueTime, long period, const char *name)
 {
     Task *task = new Task(this);
     task->ID = mgid++;
@@ -33,14 +33,23 @@ uint TaskScheduler::Add(Action func, void *param, ulong dueTime, long period, co
     task->Param = param;
     task->Period = period;
     task->NextTime = Time.Current() + dueTime;
-	task->Name=name;
+    task->Name = name;
 
     this->Count++;
     _Tasks.Add(task);
-    // 输出长整型%ld，无符号长整型%llu
-    //debug_printf("%s::添加任务%d 0x%08x FirstTime=%llums Period=%ldms\r\n", Name,task->ID, func, dueTime, period);
-	debug_printf("%s::添加%2d %-10s FirstTime = %8llums Period = %8ldms\r\n", Name,task->ID, task->Name, dueTime, period);
-
+    #if DEBUG
+        // 输出长整型%ld，无符号长整型%llu
+        if (period >= 1000)
+        {
+            uint dt = dueTime / 1000;
+            int pd = period > 0 ? period / 1000: period;
+            debug_printf("%s::添加%2d %-10s FirstTime = %8dms Period = %8dms\r\n", Name, task->ID, task->Name, dt, pd);
+        }
+        else
+        {
+            debug_printf("%s::添加%2d %-10s FirstTime = %8ldus Period = %8ldus\r\n", Name, task->ID, task->Name, dueTime, period);
+        }
+    #endif 
     return task->ID;
 }
 
@@ -52,7 +61,7 @@ void TaskScheduler::Remove(uint taskid)
     {
         Task *task = _Tasks[i];
         if (task->ID == taskid)
-        {            
+        {
             _Tasks.RemoveAt(i);
             debug_printf("%s::删除任务%d 0x%08x\r\n", Name, task->ID, (unsigned int)task->Callback);
             // 首先清零ID，避免delete的时候再次删除
@@ -70,8 +79,8 @@ void TaskScheduler::Start()
         return ;
     }
 
-    Add(ShowTime, NULL, 2*1000*1000, 30*1000*1000,"时间显示");
-    //Add(ShowStatus, this, 3*1000*1000, 30*1000*1000,"任务显示");
+    Add(ShowTime, NULL, 2 *1000 * 1000, 20 *1000 * 1000, "时间显示");
+    //Add(ShowStatus, this, 1*1000*1000, 30*1000*1000,"任务显示");
 
     debug_printf("%s::准备就绪 开始循环处理%d个任务！\r\n\r\n", Name, Count);
 
@@ -91,19 +100,19 @@ void TaskScheduler::Stop()
 
 // 执行一次循环。指定最大可用时间
 void TaskScheduler::Execute(uint usMax)
-{	
-	ulong now;	
-	now= Time.Current() - Sys.StartTime; // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
-			
+{
+    ulong now;
+    now = Time.Current() - Sys.StartTime; // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
+
     ulong min = UInt64_Max; // 最小时间，这个时间就会有任务到来
     ulong end = Time.Current() + usMax;
 
     // 需要跳过当前正在执行任务的调度
     //Task* _cur = Current;
 
-    int i =   -1;
+    int i =  - 1;
     while (_Tasks.MoveNext(i))
-    {		
+    {
         Task *task = _Tasks[i];
         //if(task && task != _cur && task->Enable && task->NextTime <= now)
         if (task && task->Enable && task->NextTime <= now)
@@ -149,7 +158,7 @@ void TaskScheduler::Execute(uint usMax)
         if (!usMax || Time.Current() > end)
         {
             return ;
-        }		
+        }
     }
 
     // 如果有最小时间，睡一会吧
@@ -164,19 +173,21 @@ void TaskScheduler::Execute(uint usMax)
         Time.Sleep(min);
     }
 }
+
 //显示时间
-void TaskScheduler::ShowTime(void * param)
+void TaskScheduler::ShowTime(void *param)
 {
-	UInt64 curms=Time.Ms();
-	debug_printf("Time: %02lld:%02lld:%02lld\n",curms/3600000,curms/60000%60,curms/1000%60);
+    UInt64 curms = Time.Ms();
+    debug_printf("Time: %02lld:%02lld:%02lld\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60);
 }
+
 // 显示状态
 void TaskScheduler::ShowStatus(void *param)
 {
     TaskScheduler *ts = (TaskScheduler*)param;
 
-    int i =  -1;	
-	
+    int i =  - 1;
+
     while (ts->_Tasks.MoveNext(i))
     {
         Task *task = ts->_Tasks[i];
@@ -184,12 +195,12 @@ void TaskScheduler::ShowStatus(void *param)
         {
             task->ShowStatus();
         }
-    }		
+    }
 }
 
 Task *TaskScheduler::operator[](int taskid)
 {
-    int i =  -1;
+    int i =  - 1;
 
     while (_Tasks.MoveNext(i))
     {

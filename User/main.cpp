@@ -67,6 +67,11 @@ void LedTask(void* param)
     OutputPort* leds = (OutputPort*)param;
     *leds = !*leds;
 }
+void LedTaskFast(void * param)
+{
+	OutputPort* leds = (OutputPort*)param;
+    *leds = !*leds;
+}
 int main(void)
 {
     Sys.MessagePort = COM1;
@@ -92,6 +97,8 @@ int main(void)
 	WatchDog dog(3000);
     Sys.AddTask(FeedDog, &dog, 0, 1000, "WatchDog");
 	Sys.AddTask(LedTask, &led, 0, 300,"LedTask");
+	Sys.AddTask(LedTaskFast, &led, -1, 100,"LedTaskFast");
+	
     
     Sys.Start();
 }

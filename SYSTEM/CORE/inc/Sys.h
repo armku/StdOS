@@ -64,7 +64,7 @@ class TSys: public Object
         void Sleep(uint ms); //毫秒级睡眠，常用于业务层杂宁等待一定时间
         void Reboot(uint msDelay); //异步热重启系统。延迟一定毫秒数执行。		
 
-        uint AddTask(Action func, void *param, ulong dueTime, long period, const char *name = "未命名任务");
+        uint AddTask(Action func, void *param, long dueTime, long period, const char *name = "未命名任务");
         void SetTask(uint taskid, bool enable); //设置任务参数
         void RemoveTask(uint taskid); //删除任务
 
