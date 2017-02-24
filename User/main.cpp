@@ -9,6 +9,7 @@
 #include "DateTime.h"
 #include "List.h"
 #include "Pwm.h"
+#include "Modbus.h"
 
 typedef enum
 {
@@ -46,18 +47,10 @@ ISO-V2:PB5控制485方向
 ISO-V3:PC2控制485方向
  */
 OutputPort rs485(PC2);
+ModbusSlave ModbusSlave;
 static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 {
-    SerialPort *sp = (SerialPort*)para;
-    debug_printf("%s 收到：[%d]", sp->Name, bs.Length());
-    bs.Show(true);
-
-    byte buf[4];
-    buf[0] = 0x04;
-    buf[1] = 0x01;
-    buf[2] = 0x00;
-    buf[3] = 0x05;
-    sp->SendBuffer(buf);
+	ModbusSlave.Process(bs,para);
     return 0;
 }
 

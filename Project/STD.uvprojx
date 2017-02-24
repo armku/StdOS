@@ -692,6 +692,11 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Devices\src\multi_button.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ModBus.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\ModBus.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1586,6 +1591,11 @@
               <FileName>multi_button.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Devices\src\multi_button.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModBus.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\ModBus.cpp</FilePath>
             </File>
           </Files>
         </Group>
