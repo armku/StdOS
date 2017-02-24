@@ -56,17 +56,17 @@ uint TaskScheduler::Add(Action func, void *param, long dueTime, long period, con
         {
             uint dt = dueTime / 1000000;
             int pd = period > 0 ? period / 1000000: period;
-            debug_printf("%s::添加%2d %-10s FirstTime = %8ds Period = %8ds\r\n", Name, task->ID, task->Name, dt, pd);
+            debug_printf("%s::添加%2d %-10s FirstTime = %3ds  Period = %3ds\r\n", Name, task->ID, task->Name, dt, pd);
         }
         else if (period >= 1000)
         {
             uint dt = dueTime / 1000;
             int pd = period > 0 ? period / 1000: period;
-            debug_printf("%s::添加%2d %-10s FirstTime = %8dms Period = %8dms\r\n", Name, task->ID, task->Name, dt, pd);
+            debug_printf("%s::添加%2d %-10s FirstTime = %3dms Period = %3dms\r\n", Name, task->ID, task->Name, dt, pd);
         }
         else
         {
-            debug_printf("%s::添加%2d %-10s FirstTime = %8ldus Period = %8ldus\r\n", Name, task->ID, task->Name, dueTime, period);
+            debug_printf("%s::添加%2d %-10s FirstTime = %3ldus Period = %3ldus\r\n", Name, task->ID, task->Name, dueTime, period);
         }
     #endif 
     return task->ID;
