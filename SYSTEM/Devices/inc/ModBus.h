@@ -65,3 +65,4 @@ class ModbusSlave
 		virtual ModbusEntity Process(ModbusEntity entity);
 		ushort GetCRC(byte *byteData, int len);
 };
+extern float RegInputFloat[20];//ÊäÈë¼Ä´æÆ÷Öµ

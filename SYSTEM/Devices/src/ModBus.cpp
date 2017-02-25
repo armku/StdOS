@@ -4,6 +4,7 @@
 #include "Util.h"
 
 byte reginbuf[200];//输入寄存器
+float RegInputFloat[20];//输入寄存器值
 
 void ModbusSlave::Process(Buffer &bs, void *param)
 {
@@ -14,9 +15,9 @@ void ModbusSlave::Process(Buffer &bs, void *param)
     {
 		byte *buf = bs.GetBuffer();
         debug_printf("正确数据帧 %d %d\r\n",buf[0],buf[1]);        
-
+		
         //广播地址或本机地址，响应
-        if ((buf[0] == 17) || (buf[0] == this->id))
+        if ((buf[0] == 0) || (buf[0] == this->id))
         {
             this->Entity.Function = (MBFunction)buf[1];
 			this->Entity.address=(buf[2]<<8)+buf[3];
@@ -44,11 +45,11 @@ void ModbusSlave::DealFrame(Buffer&bs,void *param)
 			reginbuf[2]=this->Entity.reglength*2;
 			for(int i=0;i<this->Entity.reglength/2;i++)
 			{
-				SetBufFloat(reginbuf,3+i*4,i,1);
+				SetBufFloat(reginbuf,3+i*4,RegInputFloat[i+this->Entity.address/2],1);
 			}
 			ushort crc=this->GetCRC(reginbuf,this->Entity.reglength*2+3);
-			reginbuf[this->Entity.reglength*2+3]=(crc>>8)&0x00ff;
-			reginbuf[this->Entity.reglength*2+4]=crc&0x00ff;
+			reginbuf[this->Entity.reglength*2+4]=(crc>>8)&0x00ff;
+			reginbuf[this->Entity.reglength*2+3]=crc&0x00ff;
 			sp->SendBuffer(reginbuf,this->Entity.reglength*2+5);
 			break;
 		default:

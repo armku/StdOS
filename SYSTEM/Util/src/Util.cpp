@@ -49,10 +49,10 @@ void SetBufFloat(byte buf[], ushort pos, float da, byte type)
             buf[pos + 3] = bitconvert.char_bit.da0;
             break;
         case 1:
-            buf[pos] = bitconvert.char_bit.da1;
-            buf[pos + 1] = bitconvert.char_bit.da0;
-            buf[pos + 2] = bitconvert.char_bit.da3;
-            buf[pos + 3] = bitconvert.char_bit.da2;
+            buf[pos] = bitconvert.char_bit.da3;
+            buf[pos + 1] = bitconvert.char_bit.da2;
+            buf[pos + 2] = bitconvert.char_bit.da0;
+            buf[pos + 3] = bitconvert.char_bit.da1;
             break;
         default:
             break;
