@@ -10,7 +10,7 @@
       <TargetName>Debug</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060183::V5.06 update 2 (build 183)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
@@ -330,7 +330,6 @@
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
             <v6WtE>0</v6WtE>
-            <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,DEBUG</Define>
@@ -423,7 +422,6 @@
                     <vShortWch>2</vShortWch>
                     <v6Lto>0</v6Lto>
                     <v6WtE>2</v6WtE>
-                    <v6Rtti>2</v6Rtti>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -873,14 +871,14 @@
           <GroupName>Util</GroupName>
           <Files>
             <File>
-              <FileName>Util.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\Util\src\Util.c</FilePath>
-            </File>
-            <File>
               <FileName>RC4.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Util\src\RC4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Util.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Util\src\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1230,7 +1228,6 @@
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
             <v6WtE>0</v6WtE>
-            <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
@@ -1323,7 +1320,6 @@
                     <vShortWch>2</vShortWch>
                     <v6Lto>0</v6Lto>
                     <v6WtE>2</v6WtE>
-                    <v6Rtti>2</v6Rtti>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1773,14 +1769,14 @@
           <GroupName>Util</GroupName>
           <Files>
             <File>
-              <FileName>Util.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\Util\src\Util.c</FilePath>
-            </File>
-            <File>
               <FileName>RC4.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Util\src\RC4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Util.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Util\src\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1807,11 +1803,5 @@
       </Groups>
     </Target>
   </Targets>
-
-  <RTE>
-    <apis/>
-    <components/>
-    <files/>
-  </RTE>
 
 </Project>

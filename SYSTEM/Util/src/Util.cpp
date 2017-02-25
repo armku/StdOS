@@ -37,13 +37,26 @@ union
 
 bitconvert; //数据转换用   
 //设置浮点数
-void SetBufFloat(byte buf[], ushort pos, float da)
+void SetBufFloat(byte buf[], ushort pos, float da, byte type)
 {
     bitconvert.dafloat = da;
-    buf[pos] = bitconvert.char_bit.da3;
-    buf[pos + 1] = bitconvert.char_bit.da2;
-    buf[pos + 2] = bitconvert.char_bit.da1;
-    buf[pos + 3] = bitconvert.char_bit.da0;
+    switch (type)
+    {
+        case 0:
+            buf[pos] = bitconvert.char_bit.da3;
+            buf[pos + 1] = bitconvert.char_bit.da2;
+            buf[pos + 2] = bitconvert.char_bit.da1;
+            buf[pos + 3] = bitconvert.char_bit.da0;
+            break;
+        case 1:
+            buf[pos] = bitconvert.char_bit.da1;
+            buf[pos + 1] = bitconvert.char_bit.da0;
+            buf[pos + 2] = bitconvert.char_bit.da3;
+            buf[pos + 3] = bitconvert.char_bit.da2;
+            break;
+        default:
+            break;
+    }
 }
 
 void SetBufUshort(byte buf[], ushort pos, ushort da)

@@ -38,6 +38,8 @@ class ModbusEntity
         MBFunction Function;
 		/// <summary>数据</summary>
         byte* Data;
+		ushort address;//地址
+		ushort reglength;//长度
 		/// <summary>校验数据</summary>
         ushort Crc;
 		/// <summary>分析字节数组</summary>
@@ -57,7 +59,7 @@ class ModbusSlave
 		byte id;//本机ID
 		void Process(Buffer &bs, void *para);//处理数据
 		bool IsFrameOK(Buffer& bs);//完整的一帧数据
-	
+		void DealFrame(Buffer&bs,void *param);//处理数据帧
 		ModbusEntity Entity;
 	protected:
 		virtual ModbusEntity Process(ModbusEntity entity);

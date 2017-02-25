@@ -1,28 +1,59 @@
 #include "Modbus.h"
 #include "SerialPort.h"
 #include "string.h"
+#include "Util.h"
 
-void ModbusSlave::Process(Buffer &bs, void *para)
+byte reginbuf[200];//输入寄存器
+
+void ModbusSlave::Process(Buffer &bs, void *param)
 {
-    SerialPort *sp = (SerialPort*)para;
+    SerialPort *sp = (SerialPort*)param;
     debug_printf("%s 收到：[%d]", sp->Name, bs.Length());
     bs.Show(true);
     if (IsFrameOK(bs))
     {
-        debug_printf("正确数据帧\r\n");
-        byte *buf = bs.GetBuffer();
+		byte *buf = bs.GetBuffer();
+        debug_printf("正确数据帧 %d %d\r\n",buf[0],buf[1]);        
 
         //广播地址或本机地址，响应
-        if ((buf[0] == 0) || (buf[0] == this->id))
+        if ((buf[0] == 17) || (buf[0] == this->id))
         {
             this->Entity.Function = (MBFunction)buf[1];
+			this->Entity.address=(buf[2]<<8)+buf[3];
+			this->Entity.reglength=(buf[4]<<8)+buf[5];			
             //add: 添加处理
+			this->DealFrame(bs,param);
         }
     }
     else
     {
         debug_printf("错误数据帧\r\n");
     }
+}
+//处理数据帧
+void ModbusSlave::DealFrame(Buffer&bs,void *param)
+{
+	 SerialPort *sp = (SerialPort*)param;
+	debug_printf("address:%d length:%d\r\n",this->Entity.address,this->Entity.reglength);
+	switch(this->Entity.Function)
+	{
+		case ReadInputRegisters:
+			//读取输入寄存器
+			reginbuf[0]=this->id;
+			reginbuf[1]=ReadInputRegisters;
+			reginbuf[2]=this->Entity.reglength*2;
+			for(int i=0;i<this->Entity.reglength/2;i++)
+			{
+				SetBufFloat(reginbuf,3+i*4,i,1);
+			}
+			ushort crc=this->GetCRC(reginbuf,this->Entity.reglength*2+3);
+			reginbuf[this->Entity.reglength*2+3]=(crc>>8)&0x00ff;
+			reginbuf[this->Entity.reglength*2+4]=crc&0x00ff;
+			sp->SendBuffer(reginbuf,this->Entity.reglength*2+5);
+			break;
+		default:
+			break;
+	}
 }
 
 /// <summary>
@@ -55,6 +86,7 @@ ushort ModbusSlave::GetCRC(byte *byteData, int len)
 
 //完整的一帧数据
 //demo:01 03 00 00 00 28 45 D4 
+//11 04 00 08 00 02 F2 99
 bool ModbusSlave::IsFrameOK(Buffer &bs)
 {
     ushort crc = 0;
@@ -67,8 +99,7 @@ bool ModbusSlave::IsFrameOK(Buffer &bs)
     crcrcv = bs.GetBuffer()[bs.Length() - 1];
     crcrcv <<= 8;
     crcrcv |= bs.GetBuffer()[bs.Length() - 2];
-	printf("%x %x %x\r\n",crcrcv,crc,GetCRC(bs.GetBuffer(),bs.Length()-2));
-    if (crcrcv == crc)
+	if (crcrcv == crc)
     {
         return true;
     }
