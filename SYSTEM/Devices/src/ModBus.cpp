@@ -3,8 +3,8 @@
 #include "string.h"
 #include "Util.h"
 
-byte reginbuf[200];//输入寄存器
-float RegInputFloat[20];//输入寄存器值
+byte reginbuf[200]; //输入寄存器
+float RegInputFloat[20]; //输入寄存器值
 
 void ModbusSlave::Process(Buffer &bs, void *param)
 {
@@ -13,17 +13,17 @@ void ModbusSlave::Process(Buffer &bs, void *param)
     bs.Show(true);
     if (IsFrameOK(bs))
     {
-		byte *buf = bs.GetBuffer();
-        debug_printf("正确数据帧 %d %d\r\n",buf[0],buf[1]);        
-		
+        byte *buf = bs.GetBuffer();
+        debug_printf("正确数据帧 %d %d\r\n", buf[0], buf[1]);
+
         //广播地址或本机地址，响应
         if ((buf[0] == 0) || (buf[0] == this->id))
         {
             this->Entity.Function = (MBFunction)buf[1];
-			this->Entity.address=(buf[2]<<8)+buf[3];
-			this->Entity.reglength=(buf[4]<<8)+buf[5];			
+            this->Entity.address = (buf[2] << 8) + buf[3];
+            this->Entity.reglength = (buf[4] << 8) + buf[5];
             //add: 添加处理
-			this->DealFrame(bs,param);
+            this->DealFrame(bs, param);
         }
     }
     else
@@ -31,30 +31,32 @@ void ModbusSlave::Process(Buffer &bs, void *param)
         debug_printf("错误数据帧\r\n");
     }
 }
+
 //处理数据帧
-void ModbusSlave::DealFrame(Buffer&bs,void *param)
+void ModbusSlave::DealFrame(Buffer &bs, void *param)
 {
-	 SerialPort *sp = (SerialPort*)param;
-	debug_printf("address:%d length:%d\r\n",this->Entity.address,this->Entity.reglength);
-	switch(this->Entity.Function)
-	{
-		case ReadInputRegisters:
-			//读取输入寄存器
-			reginbuf[0]=this->id;
-			reginbuf[1]=ReadInputRegisters;
-			reginbuf[2]=this->Entity.reglength*2;
-			for(int i=0;i<this->Entity.reglength/2;i++)
-			{
-				SetBufFloat(reginbuf,3+i*4,RegInputFloat[i+this->Entity.address/2],1);
-			}
-			ushort crc=this->GetCRC(reginbuf,this->Entity.reglength*2+3);
-			reginbuf[this->Entity.reglength*2+4]=(crc>>8)&0x00ff;
-			reginbuf[this->Entity.reglength*2+3]=crc&0x00ff;
-			sp->SendBuffer(reginbuf,this->Entity.reglength*2+5);
-			break;
-		default:
-			break;
-	}
+    SerialPort *sp = (SerialPort*)param;
+    debug_printf("address:%d length:%d\r\n", this->Entity.address, this->Entity.reglength);
+    ushort crc;
+    switch (this->Entity.Function)
+    {
+        case ReadInputRegisters:
+            //读取输入寄存器
+            reginbuf[0] = this->id;
+            reginbuf[1] = ReadInputRegisters;
+            reginbuf[2] = this->Entity.reglength *2;
+            for (int i = 0; i < this->Entity.reglength / 2; i++)
+            {
+                SetBufFloat(reginbuf, 3+i * 4, RegInputFloat[i + this->Entity.address / 2], 1);
+            }
+            crc = this->GetCRC(reginbuf, this->Entity.reglength *2+3);
+            reginbuf[this->Entity.reglength *2+4] = (crc >> 8) &0x00ff;
+            reginbuf[this->Entity.reglength *2+3] = crc &0x00ff;
+            sp->SendBuffer(reginbuf, this->Entity.reglength *2+5);
+            break;
+        default:
+            break;
+    }
 }
 
 /// <summary>
@@ -100,7 +102,7 @@ bool ModbusSlave::IsFrameOK(Buffer &bs)
     crcrcv = bs.GetBuffer()[bs.Length() - 1];
     crcrcv <<= 8;
     crcrcv |= bs.GetBuffer()[bs.Length() - 2];
-	if (crcrcv == crc)
+    if (crcrcv == crc)
     {
         return true;
     }
@@ -145,6 +147,7 @@ ModbusEntity ModbusSlave::Process(ModbusEntity entity)
         default:
             // 不支持的功能码
             //            return entity.SetError(Errors.FunctionCode);
+            break;
     }
 
     return entity;
