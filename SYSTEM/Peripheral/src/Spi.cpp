@@ -51,28 +51,30 @@ void Spi::Init()
     Opened = false;
 }
 
+#define SPIS {SPI1,SPI2,SPI3}
+#define SPI_PINS_FULLREMAP {PA4,PA5,PA6,PA7}   //需要整理
 void Spi::Init(SPI_TypeDef *spi, uint speedHz, bool useNss)
 {
     assert_param(spi);
-    #if 0
-        SPI_TypeDef *g_Spis[] = SPIS;
-        _index = 0xFF;
-        for (int i = 0; i < ArrayLength(g_Spis); i++)
+
+    SPI_TypeDef *g_Spis[] = SPIS;
+    _index = 0xFF;
+    for (int i = 0; i < ArrayLength(g_Spis); i++)
+    {
+        if (g_Spis[i] == spi)
         {
-            if (g_Spis == spi)
-            {
-                _index = i;
-                break;
-            }
+            _index = i;
+            break;
         }
-        assert_param(_index < ArrayLength(g_Spis));
+    }
+    assert_param(_index < ArrayLength(g_Spis));
 
-        SPI = g_Spis[_index];
+    SPI = g_Spis[_index];
 
-        Pin g_Spi_Pins_Map[][4] = SPI_PINS_FULLREMAP;
-        Pin *ps = g_Spi_Pins_Map[_index]; //选定spi引脚
-        memcpy(Pins, ps, sizeof(Pins));
-    #endif 
+    Pin g_Spi_Pins_Map[][4] = SPI_PINS_FULLREMAP;
+    Pin *ps = g_Spi_Pins_Map[_index]; //选定spi引脚
+    memcpy(Pins, ps, sizeof(Pins));
+
     if (!useNss)
         Pins[0] = P0;
 
@@ -109,13 +111,13 @@ void Spi::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
 void Spi::GetPin(Pin *clk, Pin *miso, Pin *mosi, Pin *nss)
 {
     if (nss)
-         *nss = Pins[0];
+        *nss = Pins[0];
     if (clk)
-         *clk = Pins[1];
+        *clk = Pins[1];
     if (miso)
-         *miso = Pins[2];
+        *miso = Pins[2];
     if (mosi)
-         *mosi = Pins[3];
+        *mosi = Pins[3];
 }
 
 void Spi::Open()
