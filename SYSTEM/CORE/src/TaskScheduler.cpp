@@ -43,7 +43,7 @@ uint TaskScheduler::Add(Action func, void *param, long dueTime, long period, con
     task->Period = period;
     task->NextTime = Time.Current() + dueTime;
     task->Name = name;
-	if(period==1)
+	if(dueTime<0)
 	{
 		task->Enable=false;
 	}
@@ -189,7 +189,7 @@ void TaskScheduler::Execute(uint usMax)
             // 如果只是一次性任务，在这里清理
             if (task->Period < 0)
             {
-                Remove(task->ID);
+				Remove(task->ID);
             }
         }
 
