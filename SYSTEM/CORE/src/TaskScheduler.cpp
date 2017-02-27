@@ -90,7 +90,10 @@ void TaskScheduler::SetTask(uint taskid,bool onoff,long delaytime)
 		return;
 	}
 	this->_Tasks[taskid]->Enable=onoff;
-	this->_Tasks[taskid]->NextTime=Time.Current()+delaytime*1000;	
+	if(onoff)
+	{
+		this->_Tasks[taskid]->NextTime=Time.Current()+delaytime*1000;	
+	}
 }
 void TaskScheduler::Remove(uint taskid)
 {
@@ -184,7 +187,7 @@ void TaskScheduler::Execute(uint usMax)
             }
             if (cost > 500000)
             {
-                debug_printf("Task::Execute 任务 %d [%d] 执行时间过长 %dus 睡眠 %dus\r\n", task->ID, task->Times, cost, task->SleepTime);
+                debug_printf("Task::Execute 任务:%s %d [%d] 执行时间过长 %dus 睡眠 %dus\r\n",task->Name, task->ID, task->Times, cost, task->SleepTime);
             }
             // 如果只是一次性任务，在这里清理
             if (task->Period < 0)
