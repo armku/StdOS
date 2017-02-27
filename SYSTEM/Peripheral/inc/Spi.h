@@ -3,6 +3,69 @@
 #include "Sys.h"
 #include "Port.h"
 
+#if 0
+/*Spi定义*/
+//SPI1..这种格式与st库冲突
+#define SPI_1    0
+#define SPI_2    1
+#define SPI_3    2
+#define SPI_NONE 0XFF
+
+// Spi类
+class Spi
+{
+private:
+    int _spi;
+    OutputPort* _nss;
+
+    AlternatePort* clk;
+    AlternatePort* msio;
+    AlternatePort* mosi;
+
+public:
+    SPI_TypeDef* SPI;
+    int Speed;  // 速度
+    int Retry;  // 等待重试次数，默认200
+    int Error;  // 错误次数
+
+    // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
+    Spi(int spi, int speedHz = 9000000, bool useNss = true);
+    virtual ~Spi();
+
+    byte Write(byte data);
+    ushort Write16(ushort data);
+
+    void Start();   // 拉低NSS，开始传输
+    void Stop();    // 拉高NSS，停止传输
+};
+
+// Spi会话类。初始化时打开Spi，超出作用域析构时关闭
+class SpiScope
+{
+private:
+    Spi* _spi;
+
+public:
+    force_inline SpiScope(Spi* spi)
+    {
+        _spi = spi;
+        _spi->Start();
+    }
+
+    force_inline ~SpiScope()
+    {
+        _spi->Stop();
+    }
+};
+
+Spi类用法也很简单，直接Spi spi(SPI1, 9000000, true)即可初始化SPI1为9MHz，使用nss
+后面的SpiScope是一个Spi作用域神器，在很多Spi操作函数里面，需要先拉低nss，然后操作，最后拉高。
+借助SpiScope，我们只需要在函数操作Spi前来一句
+SpiScope sc(&spi);
+然后别的就不用管了，离开这个函数的时候sc析构，会自动调用spi.Stop拉高nss，方便吧！
+
+End.
+#endif
 // Spi类
 class Spi
 {

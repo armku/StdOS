@@ -61,6 +61,7 @@ void LedTask(void* param)
 	*leds = !*leds;	
 }
 int flashtest(void);
+void TestAT45DB();
 int main(void)
 {
     Sys.MessagePort = COM1;
