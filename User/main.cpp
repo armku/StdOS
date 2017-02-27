@@ -85,7 +85,6 @@ int main(void)
 	WatchDog dog(3000);
     Sys.AddTask(FeedDog, &dog, 0, 1000, "WatchDog");
 	Sys.AddTask(LedTask, &led, 0, 500,"LedTask");
-	
-    
+	    
     Sys.Start();
 }
