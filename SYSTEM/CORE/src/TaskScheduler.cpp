@@ -31,7 +31,7 @@ uint TaskScheduler::Add(Action func, void *param, long dueTime, long period, con
 	{
 		dueTime*=1000;
 	}
-	if(period>1)
+	if(period>0)
 	{
 		period*=1000;
 	}
