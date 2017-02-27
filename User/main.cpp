@@ -60,6 +60,7 @@ void LedTask(void* param)
     OutputPort* leds = (OutputPort*)param;
 	*leds = !*leds;	
 }
+int flashtest(void);
 int main(void)
 {
     Sys.MessagePort = COM1;
@@ -77,14 +78,14 @@ int main(void)
     PWM pwm1(PC9);
     pwm1.Init();
     pwm1.SetOutPercent(50);
-
-    SerialPort::GetMessagePort()->Register(OnUsartRead);
 	
 	// 初始化为输出
 	OutputPort led(PF8);
 	WatchDog dog(3000);
     Sys.AddTask(FeedDog, &dog, 0, 1000, "WatchDog");
 	Sys.AddTask(LedTask, &led, 0, 500,"LedTask");
+	
+	flashtest();
 	    
     Sys.Start();
 }
