@@ -42,13 +42,9 @@ void TSys::RemoveTask(uint taskid)
     _Scheduler->Remove(taskid);
 }
 
-void TSys::SetTask(uint taskid, bool enable)
+void TSys::SetTask(uint taskid,bool onoff,long delaytime)
 {
-    Task *task = (*_Scheduler)[taskid];
-    if (task)
-    {
-        task->Enable = enable;
-    }
+    _Scheduler->SetTask(taskid,onoff,delaytime);
 }
 
 //启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
