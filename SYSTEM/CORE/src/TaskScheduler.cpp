@@ -54,15 +54,15 @@ uint TaskScheduler::Add(Action func, void *param, long dueTime, long period, con
 		debug_printf("%s::添加%2d %-11s",Name,task->ID,task->Name);
 		if(dueTime>=1000000)
 		{
-			debug_printf("FirstTime = %3lds ",dueTime/1000000);
+			debug_printf("First = %3lds ",dueTime/1000000);
 		}
 		else if(dueTime>=1000)
 		{
-			debug_printf("FirstTime = %3ldms",dueTime/1000);
+			debug_printf("First = %3ldms",dueTime/1000);
 		}
 		else
 		{
-			debug_printf("FirstTime = %3ldus",dueTime);
+			debug_printf("First = %3ldus",dueTime);
 		}
 	
         // 输出长整型%ld，无符号长整型%llu
