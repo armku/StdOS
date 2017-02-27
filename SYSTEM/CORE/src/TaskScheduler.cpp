@@ -51,22 +51,32 @@ uint TaskScheduler::Add(Action func, void *param, long dueTime, long period, con
     this->Count++;
     _Tasks.Add(task);
     #if DEBUG
+		debug_printf("%s::添加%2d %-11s",Name,task->ID,task->Name);
+		if(dueTime>=1000000)
+		{
+			debug_printf("FirstTime = %3lds ",dueTime/1000000);
+		}
+		else if(dueTime>=1000)
+		{
+			debug_printf("FirstTime = %3ldms",dueTime/1000);
+		}
+		else
+		{
+			debug_printf("FirstTime = %3ldus",dueTime);
+		}
+	
         // 输出长整型%ld，无符号长整型%llu
         if (period >= 1000000)
-        {
-            uint dt = dueTime / 1000000;
-            int pd = period > 0 ? period / 1000000: period;
-            debug_printf("%s::添加%2d %-10s FirstTime = %3ds  Period = %3ds\r\n", Name, task->ID, task->Name, dt, pd);
+        {           
+            debug_printf(" Period = %3lds \r\n",period/1000000);
         }
         else if (period >= 1000)
         {
-            uint dt = dueTime / 1000;
-            int pd = period > 0 ? period / 1000: period;
-            debug_printf("%s::添加%2d %-10s FirstTime = %3dms Period = %3dms\r\n", Name, task->ID, task->Name, dt, pd);
+            debug_printf(" Period = %3ldms\r\n", period/1000);
         }
         else
         {
-            debug_printf("%s::添加%2d %-10s FirstTime = %3ldus Period = %3ldus\r\n", Name, task->ID, task->Name, dueTime, period);
+            debug_printf(" Period = %3ldus\r\n", period);
         }
     #endif 
     return task->ID;
