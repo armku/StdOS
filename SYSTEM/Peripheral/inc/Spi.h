@@ -3,14 +3,13 @@
 #include "Sys.h"
 #include "Port.h"
 
-#if 0
 /*Spi定义*/
 //SPI1..这种格式与st库冲突
 #define SPI_1    0
 #define SPI_2    1
 #define SPI_3    2
 #define SPI_NONE 0XFF
-
+#if 0
 // Spi类
 class Spi
 {
@@ -37,25 +36,6 @@ public:
 
     void Start();   // 拉低NSS，开始传输
     void Stop();    // 拉高NSS，停止传输
-};
-
-// Spi会话类。初始化时打开Spi，超出作用域析构时关闭
-class SpiScope
-{
-private:
-    Spi* _spi;
-
-public:
-    force_inline SpiScope(Spi* spi)
-    {
-        _spi = spi;
-        _spi->Start();
-    }
-
-    force_inline ~SpiScope()
-    {
-        _spi->Stop();
-    }
 };
 
 Spi类用法也很简单，直接Spi spi(SPI1, 9000000, true)即可初始化SPI1为9MHz，使用nss
