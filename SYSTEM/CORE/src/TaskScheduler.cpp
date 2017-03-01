@@ -249,7 +249,7 @@ void TaskScheduler::ShowStatus(void *param)
 	debug_printf("µ±Ç° 1970-01-01 23 00:00");
 	debug_printf("Æô¶¯ ");	
     debug_printf("%02lld:%02lld:%02lld.%03lld ", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60,curms%1000);
-	debug_printf("¶Ñ %X/%x",&(buf[0])-0X20000000,1024);
+	debug_printf("¶Ñ %u/%u",&(buf[0])-0X20000000,1024);
 	debug_printf("\r\n");
     int i =  - 1;
     while (ts->_Tasks.MoveNext(i))
