@@ -54,13 +54,27 @@ void Task::ShowStatus()
 	{
 		debug_printf("[%d]      ",Times);
 	}
+	float cpuPercent=0;
+	cpuPercent=0;
+	cpuPercent=this->Cost*this->Times/10;
+	cpuPercent/=Sys.Ms();
+	
+	if(cpuPercent>10)
+	{
+		debug_printf(" 平均[%4.1f%%] ", cpuPercent);
+	}
+	else  
+	{
+		debug_printf(" 平均[%0.2f%%] ", cpuPercent);
+	}
+	
 	if(Cost>1000)
 	{
-		debug_printf(" 平均 %3ums", Cost/1000);
+		debug_printf("%3ums", Cost/1000);
 	}
 	else
 	{
-		debug_printf(" 平均 %3uus", Cost);
+		debug_printf("%3uus", Cost);
 	}
 	if(CpuTime>1000000)
 	{
