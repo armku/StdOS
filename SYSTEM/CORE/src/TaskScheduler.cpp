@@ -229,6 +229,7 @@ void TaskScheduler::ShowStatus(void *param)
 	static ulong runCounts=0;
 	float RunTimes=0;
 	Task *tsk;
+	byte buf[1];
 	
 	runCounts++;
     TaskScheduler *ts = (TaskScheduler*)param;
@@ -250,7 +251,7 @@ void TaskScheduler::ShowStatus(void *param)
 	debug_printf("µ±Ç° 1970-01-01 23 00:00");
 	debug_printf("Æô¶¯ ");	
     debug_printf("%02lld:%02lld:%02lld.%03lld ", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60,curms%1000);
-	debug_printf("¶Ñ 74140/253");
+	debug_printf("¶Ñ %X/253",&(buf[0]));
 	debug_printf("\r\n");
     int i =  - 1;
     while (ts->_Tasks.MoveNext(i))
