@@ -227,6 +227,7 @@ void TaskScheduler::ShowStatus(void *param)
 {
 	static ulong runCounts=0;
 	float RunTimes=0;
+	float RunTimesAvg=0;
 	Task *tsk;
 	byte buf[1];
 	
@@ -236,15 +237,26 @@ void TaskScheduler::ShowStatus(void *param)
 	
 	//统计运行时间
 	RunTimes=0;
+	RunTimesAvg=0;
 	for(int j=0;j<ts->Count;j++)
 	{
 		tsk=ts->_Tasks[j];
 		RunTimes+=tsk->Cost*tsk->Times;
+		RunTimesAvg+=tsk->Cost;
 	}
+	RunTimesAvg/=ts->Count;
 	//SRAM   0X20000000-0X3FFFFFFF 共512MB
 	//SCODE  0X00000000-0X1FFFFFFF 共512MB
 	debug_printf("Task::%s [%llu]", "ShowStatus", runCounts);
-	debug_printf("负载 %0.2f%% 平均 %dus ", RunTimes/10/curms, 123);
+	debug_printf("负载 %0.2f%% ", RunTimes/10/curms);
+	if(RunTimesAvg>=1000)
+	{
+		debug_printf("平均 %3.1fms ", RunTimesAvg/ts->Count/1000);
+	}
+		else
+		{
+			debug_printf("平均 %3.0fus ", RunTimesAvg/ts->Count);
+		}
 	debug_printf("当前 1970-01-01 23 00:00");
 	debug_printf("启动 ");	
     debug_printf("%02lld:%02lld:%02lld.%03lld ", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60,curms%1000);
