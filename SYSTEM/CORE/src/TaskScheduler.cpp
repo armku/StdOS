@@ -227,12 +227,26 @@ void TaskScheduler::ShowTime(void *param)
 void TaskScheduler::ShowStatus(void *param)
 {
 	static ulong runCounts=0;
+	float RunTimes=0;
+	Task *tsk;
+	
 	runCounts++;
     TaskScheduler *ts = (TaskScheduler*)param;
 	UInt64 curms = Time.Ms();
+	
+	//统计运行时间
+	RunTimes=0;
+	for(int j=0;j<ts->Count;j++)
+	{
+		tsk=ts->_Tasks[j];
+		RunTimes+=tsk->Cost;
+	}
+	
+	
+	
 
 	debug_printf("Task::%s [%llu]", "ShowStatus", runCounts);
-	debug_printf("负载 %0.2f 平均 %dus ", 1.23f, 123);
+	debug_printf("负载 %0.3f%% 平均 %dus ", RunTimes/10/curms, 123);
 	debug_printf("当前 1970-01-01 23 00:00");
 	debug_printf("启动 ");	
     debug_printf("%02lld:%02lld:%02lld.%03lld ", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60,curms%1000);
