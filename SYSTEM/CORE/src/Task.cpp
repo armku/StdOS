@@ -28,31 +28,31 @@ void Task::ShowStatus()
 	debug_printf("Task::%-12s %2d", Name, ID);
 	if(Times>1000000)
 	{
-		debug_printf("[%d] ",Times);
+		debug_printf("[%d]",Times);
 	}
 	else if(Times>100000)
 	{
-		debug_printf("[%d]  ",Times);
+		debug_printf("[%d] ",Times);
 	}
 	else if(Times>10000)
 	{
-		debug_printf("[%d]   ",Times);
+		debug_printf("[%d]  ",Times);
 	}
 	else if(Times>1000)
 	{
-		debug_printf("[%d]    ",Times);
+		debug_printf("[%d]   ",Times);
 	}
 	else if(Times>100)
 	{
-		debug_printf("[%d]     ",Times);
+		debug_printf("[%d]    ",Times);
 	}
 	else if(Times>10)
 	{
-		debug_printf("[%d]      ",Times);
+		debug_printf("[%d]     ",Times);
 	}
 	else
 	{
-		debug_printf("[%d]       ",Times);
+		debug_printf("[%d]      ",Times);
 	}
 	if(Cost>1000)
 	{

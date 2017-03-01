@@ -220,16 +220,25 @@ void TaskScheduler::Execute(uint usMax)
 void TaskScheduler::ShowTime(void *param)
 {
     UInt64 curms = Time.Ms();
-    debug_printf("Time: %02lld:%02lld:%02lld\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60);
+    debug_printf("Time: %02lld:%02lld:%02lld.%03lld\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60,curms%1000);
 }
 
 // 显示状态
 void TaskScheduler::ShowStatus(void *param)
 {
+	static ulong runCounts=0;
+	runCounts++;
     TaskScheduler *ts = (TaskScheduler*)param;
+	UInt64 curms = Time.Ms();
 
+	debug_printf("Task::%s [%llu]", "ShowStatus", runCounts);
+	debug_printf("负载 %0.2f 平均 %dus ", 1.23f, 123);
+	debug_printf("当前 1970-01-01 23 00:00");
+	debug_printf("启动 ");	
+    debug_printf("%02lld:%02lld:%02lld.%03lld ", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60,curms%1000);
+	debug_printf("堆 74140/253");
+	debug_printf("\r\n");
     int i =  - 1;
-
     while (ts->_Tasks.MoveNext(i))
     {
         Task *task = ts->_Tasks[i];
