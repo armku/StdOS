@@ -246,7 +246,7 @@ void TaskScheduler::ShowStatus(void *param)
 	
 
 	debug_printf("Task::%s [%llu]", "ShowStatus", runCounts);
-	debug_printf("负载 %0.3f%% 平均 %dus ", RunTimes/10/curms, 123);
+	debug_printf("负载 %0.2f%% 平均 %dus ", RunTimes/10/curms, 123);
 	debug_printf("当前 1970-01-01 23 00:00");
 	debug_printf("启动 ");	
     debug_printf("%02lld:%02lld:%02lld.%03lld ", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60,curms%1000);
