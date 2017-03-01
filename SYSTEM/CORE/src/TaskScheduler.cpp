@@ -151,7 +151,7 @@ void TaskScheduler::Execute(uint usMax)
 
     // 需要跳过当前正在执行任务的调度
     //Task* _cur = Current;
-
+	
     int i =  - 1;
     while (_Tasks.MoveNext(i))
     {
@@ -201,8 +201,7 @@ void TaskScheduler::Execute(uint usMax)
         {
             return ;
         }
-    }
-
+    }	
     // 如果有最小时间，睡一会吧
     now = Time.Current(); // 当前时间
     if (min != UInt64_Max && min > now)
@@ -251,8 +250,9 @@ void TaskScheduler::ShowStatus(void *param)
     debug_printf("%02lld:%02lld:%02lld.%03lld ", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60,curms%1000);
 	debug_printf("堆 %u/%u",&(buf[0])-0X20000000,1024);
 	debug_printf("\r\n");
-    int i =  - 1;
-    while (ts->_Tasks.MoveNext(i))
+    #if 0
+	int i =  - 1;
+	while (ts->_Tasks.MoveNext(i))
     {
         Task *task = ts->_Tasks[i];
         if (task)
@@ -260,6 +260,12 @@ void TaskScheduler::ShowStatus(void *param)
             task->ShowStatus();
         }
     }
+	#endif
+	for(int j=0;j<ts->Count;j++)
+	{
+		tsk=ts->_Tasks[j];
+		tsk->ShowStatus();
+	}	
 }
 
 Task *TaskScheduler::operator[](int taskid)
