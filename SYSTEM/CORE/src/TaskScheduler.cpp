@@ -122,7 +122,7 @@ void TaskScheduler::Start()
     }
 
     Add(ShowTime, this, 2 *1000, 20 *1000, "时间显示");
-    Add(ShowStatus, this, 1*1000, 30*1000,"任务显示");
+    Add(ShowStatus, this, 1*1000, 30*1000,"任务状态");
 
     debug_printf("%s::准备就绪 开始循环处理%d个任务！\r\n\r\n", Name, Count);
 
@@ -250,8 +250,10 @@ void TaskScheduler::ShowStatus(void *param)
     debug_printf("%02lld:%02lld:%02lld.%03lld ", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60,curms%1000);
 	debug_printf("堆 %u/%u",&(buf[0])-0X20000000,1024);
 	debug_printf("\r\n");
-    #if 0
+    
 	int i =  - 1;
+	Task *task=ts->Current;
+	task->ShowStatus();
 	while (ts->_Tasks.MoveNext(i))
     {
         Task *task = ts->_Tasks[i];
@@ -260,12 +262,6 @@ void TaskScheduler::ShowStatus(void *param)
             task->ShowStatus();
         }
     }
-	#endif
-	for(int j=0;j<ts->Count;j++)
-	{
-		tsk=ts->_Tasks[j];
-		tsk->ShowStatus();
-	}	
 }
 
 Task *TaskScheduler::operator[](int taskid)
