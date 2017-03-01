@@ -239,7 +239,7 @@ void TaskScheduler::ShowStatus(void *param)
 	for(int j=0;j<ts->Count;j++)
 	{
 		tsk=ts->_Tasks[j];
-		RunTimes+=tsk->Cost;
+		RunTimes+=tsk->Cost*tsk->Times;
 	}
 	//SRAM   0X20000000-0X3FFFFFFF ¹²512MB
 	//SCODE  0X00000000-0X1FFFFFFF ¹²512MB
