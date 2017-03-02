@@ -22,20 +22,9 @@ private:
     AlternatePort* mosi;
 
 public:
-    SPI_TypeDef* SPI;
-    int Speed;  // 速度
-    int Retry;  // 等待重试次数，默认200
-    int Error;  // 错误次数
-
     // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
     Spi(int spi, int speedHz = 9000000, bool useNss = true);
     virtual ~Spi();
-
-    byte Write(byte data);
-    ushort Write16(ushort data);
-
-    void Start();   // 拉低NSS，开始传输
-    void Stop();    // 拉高NSS，停止传输
 };
 
 Spi类用法也很简单，直接Spi spi(SPI1, 9000000, true)即可初始化SPI1为9MHz，使用nss
@@ -43,7 +32,6 @@ Spi类用法也很简单，直接Spi spi(SPI1, 9000000, true)即可初始化SPI1为9MHz，使用nss
 借助SpiScope，我们只需要在函数操作Spi前来一句
 SpiScope sc(&spi);
 然后别的就不用管了，离开这个函数的时候sc析构，会自动调用spi.Stop拉高nss，方便吧！
-
 End.
 #endif
 // Spi类
