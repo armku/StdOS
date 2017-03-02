@@ -3,6 +3,14 @@
 #include "Spi.h"
 #include "string.h"
 
+/*
+		nss		SCK		MISO	MOSI
+SPI1	PA4		PA5		PA6		PA7
+SPI2	PB12	PB13	PB14	PB15
+SPI3	PA15	PB3		PB4		PB5
+
+*/
+
 int GetPre(int index, uint *speedHz)
 {
     // 自动计算稍低于速度speedHz的分频
