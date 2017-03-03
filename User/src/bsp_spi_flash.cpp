@@ -435,7 +435,7 @@ u32 W25QXXX::SPI_FLASH_ReadDeviceID(void)
     macSPI_FLASH_CS_ENABLE();
 
     /* Send "RDID " instruction */
-	#if 0
+	#if 1
 	this->pSpi->Write(W25X_DeviceID);
 	this->pSpi->Write(Dummy_Byte);
 	this->pSpi->Write(Dummy_Byte);
