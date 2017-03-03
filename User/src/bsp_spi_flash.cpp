@@ -69,8 +69,7 @@ void W25QXXX::Init(void)
     macSPI_APBxClock_FUN(macSPI_CLK, ENABLE);
      
 	this->pcs=new OutputPort(PA4,false);
-    /* Deselect the FLASH: Chip Select high */
-    //macSPI_FLASH_CS_DISABLE();
+    /* Deselect the FLASH: Chip Select high */    
 	*this->pcs=1;
 }
 
@@ -98,7 +97,7 @@ void W25QXXX::SectorErase(uint SectorAddr)
     /* Send SectorAddr low nibble address byte */
     this->pSpi->Write(SectorAddr &0xFF);
     /* Deselect the FLASH: Chip Select high */
-    macSPI_FLASH_CS_DISABLE();
+    *this->pcs=1;
     /* Wait the end of Flash writing */
     WaitForWriteEnd();
 }
@@ -121,7 +120,7 @@ void W25QXXX::BulkErase(void)
     /* Send Bulk Erase instruction  */
     this->pSpi->Write(W25X_ChipErase);
     /* Deselect the FLASH: Chip Select high */
-    macSPI_FLASH_CS_DISABLE();
+    *this->pcs=1;
 
     /* Wait the end of Flash writing */
     WaitForWriteEnd();
@@ -172,7 +171,7 @@ void W25QXXX::PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
     }
 
     /* Deselect the FLASH: Chip Select high */
-    macSPI_FLASH_CS_DISABLE();
+    *this->pcs=1;
 
     /* Wait the end of Flash writing */
     WaitForWriteEnd();
@@ -342,7 +341,7 @@ void W25QXXX::BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
     }
 
     /* Deselect the FLASH: Chip Select high */
-    macSPI_FLASH_CS_DISABLE();
+    *this->pcs=1;
 }
 
 /*******************************************************************************
@@ -372,7 +371,7 @@ uint W25QXXX::ReadID(void)
     Temp2 = this->pSpi->Write(Dummy_Byte);
 
     /* Deselect the FLASH: Chip Select high */
-    macSPI_FLASH_CS_DISABLE();
+    *this->pcs=1;
 
     Temp = (Temp0 << 16) | (Temp1 << 8) | Temp2;
 
@@ -402,7 +401,7 @@ uint W25QXXX::ReadDeviceID(void)
 	Temp = this->pSpi->Write(Dummy_Byte);	
 	
     /* Deselect the FLASH: Chip Select high */
-    macSPI_FLASH_CS_DISABLE();
+    *this->pcs=1;
 
     return Temp;
 }
@@ -452,7 +451,7 @@ void W25QXXX::WriteEnable(void)
     this->pSpi->Write(W25X_WriteEnable);
 
     /* Deselect the FLASH: Chip Select high */
-    macSPI_FLASH_CS_DISABLE();
+    *this->pcs=1;
 }
 
 /*******************************************************************************
@@ -484,7 +483,7 @@ void W25QXXX::WaitForWriteEnd(void)
     while ((FLASH_Status &WIP_Flag) == SET); /* Write in progress */
 
     /* Deselect the FLASH: Chip Select high */
-    macSPI_FLASH_CS_DISABLE();
+    *this->pcs=1;
 }
 
 
@@ -498,7 +497,7 @@ void W25QXXX::PowerDown(void)
     this->pSpi->Write(W25X_PowerDown);
 
     /* Deselect the FLASH: Chip Select high */
-    macSPI_FLASH_CS_DISABLE();
+    *this->pcs=1;
 }
 
 //»½ÐÑ
@@ -511,5 +510,5 @@ void W25QXXX::WAKEUP(void)
     this->pSpi->Write(W25X_ReleasePowerDown);
 
     /* Deselect the FLASH: Chip Select high */
-    macSPI_FLASH_CS_DISABLE(); //µÈ´ýTRES1
+    *this->pcs=1; //µÈ´ýTRES1
 }
