@@ -43,14 +43,14 @@ class W25QXXX
 		Spi * pSpi;
 	
         void Init(void);
-        void SectorErase(u32 SectorAddr);
+        void SectorErase(uint SectorAddr);
         void BulkErase(void);
-        void PageWrite(u8 *pBuffer, u32 WriteAddr, u16 NumByteToWrite);
-        void BufferWrite(u8 *pBuffer, u32 WriteAddr, u16 NumByteToWrite);
-        void BufferRead(u8 *pBuffer, u32 ReadAddr, u16 NumByteToRead);
+        void PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
+        void BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
+        void BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead);
         uint ReadID(void);
         uint ReadDeviceID(void);
-        void StartReadSequence(u32 ReadAddr);
+        void StartReadSequence(uint ReadAddr);
         void PowerDown(void);
         void WAKEUP(void);
                     
