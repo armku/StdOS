@@ -3,14 +3,8 @@
 #include "Spi.h"
 #include "string.h"
 
-/*
-		nss		SCK		MISO	MOSI
-SPI1	PA4		PA5		PA6		PA7
-SPI2	PB12	PB13	PB14	PB15
-SPI3	PA15	PB3		PB4		PB5
-
-*/
-
+#define SPIS {SPI1,SPI2,SPI3}
+#define SPI_PINS_FULLREMAP {PA4,PA5,PA6,PA7,PB12,PB13,PB14,PB15,PA15,PB3,PB4,PB5}   //需要整理
 int GetPre(int index, uint *speedHz)
 {
     // 自动计算稍低于速度speedHz的分频
@@ -37,8 +31,7 @@ Spi::Spi()
 {
     Init();
 }
-#define SPIS {SPI1,SPI2,SPI3}
-#define SPI_PINS_FULLREMAP {PA4,PA5,PA6,PA7}   //需要整理
+
 Spi::Spi(int spi, int speedHz, bool useNss)
 {
 	SPI_TypeDef *g_Spis[] = SPIS;
