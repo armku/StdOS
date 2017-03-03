@@ -24,6 +24,7 @@ class W25QXXX
 		W25QXXX(Spi * spi);
 	
 		Spi * pSpi;
+		OutputPort *pcs;//Æ¬Ñ¡½Å
 	
         void Init(void);
         void SectorErase(uint SectorAddr);

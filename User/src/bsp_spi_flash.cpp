@@ -60,7 +60,6 @@ W25QXXX::W25QXXX(Spi * spi)
 void W25QXXX::Init(void)
 {
     SPI_InitTypeDef SPI_InitStructure;
-    GPIO_InitTypeDef GPIO_InitStructure;
 
     /* Enable SPI1 and GPIO clocks */
     /*!< SPI_FLASH_SPI_CS_GPIO, SPI_FLASH_SPI_MOSI_GPIO, 
@@ -68,17 +67,11 @@ void W25QXXX::Init(void)
     and SPI_FLASH_SPI_SCK_GPIO Periph clock enable */
     /*!< SPI_FLASH_SPI Periph clock enable */
     macSPI_APBxClock_FUN(macSPI_CLK, ENABLE);
-
-    /*!< Configure SPI_FLASH_SPI_CS_PIN pin: SPI_FLASH Card CS pin */
-    macSPI_CS_APBxClock_FUN(macSPI_CS_CLK, ENABLE);
-    GPIO_InitStructure.GPIO_Pin = macSPI_CS_PIN;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_Init(macSPI_CS_PORT, &GPIO_InitStructure);
- 
+     
+	this->pcs=new OutputPort(PA4,false);
     /* Deselect the FLASH: Chip Select high */
-    macSPI_FLASH_CS_DISABLE();
-
+    //macSPI_FLASH_CS_DISABLE();
+	*this->pcs=1;
 }
 
 /*******************************************************************************
