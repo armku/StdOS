@@ -50,24 +50,9 @@ W25QXXX::W25QXXX(Spi * spi)
 	this->pSpi=spi;
 }
 
-/*******************************************************************************
- * Function Name  : SPI_FLASH_Init
- * Description    : Initializes the peripherals used by the SPI FLASH driver.
- * Input          : None
- * Output         : None
- * Return         : None
- *******************************************************************************/
 void W25QXXX::Init(void)
 {    
-    /* Enable SPI1 and GPIO clocks */
-    /*!< SPI_FLASH_SPI_CS_GPIO, SPI_FLASH_SPI_MOSI_GPIO, 
-    SPI_FLASH_SPI_MISO_GPIO, SPI_FLASH_SPI_DETECT_GPIO 
-    and SPI_FLASH_SPI_SCK_GPIO Periph clock enable */
-    /*!< SPI_FLASH_SPI Periph clock enable */
-    macSPI_APBxClock_FUN(macSPI_CLK, ENABLE);
-     
-	this->pcs=new OutputPort(PA4,false);
-    /* Deselect the FLASH: Chip Select high */    
+    this->pcs=new OutputPort(PA4,false); 
 	*this->pcs=1;
 }
 
