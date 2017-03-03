@@ -53,8 +53,7 @@ class W25QXXX
         void SPI_FLASH_StartReadSequence(u32 ReadAddr);
         void SPI_Flash_PowerDown(void);
         void SPI_Flash_WAKEUP(void);
-            
-        ushort SPI_FLASH_SendHalfWord(ushort HalfWord);
+                    
         void SPI_FLASH_WriteEnable(void);
         void SPI_FLASH_WaitForWriteEnd(void);
 };
