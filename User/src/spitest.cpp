@@ -41,7 +41,7 @@ int flashtest(void)
 
     Spi spi(SPI_1, 9000000, false);
 	spi.Open();
-    W25QXXX w25q64(&spi);
+    W25QXXX w25q64(&spi,PA4);
     /* 8M¥Æ––flash W25Q64≥ı ºªØ */
     w25q64.Init();
 

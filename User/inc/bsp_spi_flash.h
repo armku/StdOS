@@ -1,15 +1,11 @@
 #pragma once
 
-#include "stm32f10x.h"
 #include "Spi.h"
 
 class W25QXXX
 {
     public:
-		W25QXXX(Spi * spi);
-	
-		Spi * pSpi;
-		OutputPort *pcs;//Æ¬Ñ¡½Å
+		W25QXXX(Spi * spi,Pin pincs);
 	
         void Init(void);
         void SectorErase(uint SectorAddr);
@@ -25,4 +21,7 @@ class W25QXXX
                     
         void WriteEnable(void);
         void WaitForWriteEnd(void);
+	private:
+		Spi * pSpi;
+		OutputPort *pcs;//Æ¬Ñ¡½Å
 };

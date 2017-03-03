@@ -1,20 +1,3 @@
-/**
- ******************************************************************************
- * @file    bsp_xxx.c
- * @author  STMicroelectronics
- * @version V1.0
- * @date    2013-xx-xx
- * @brief   spi flash 底层应用函数bsp 
- ******************************************************************************
- * @attention
- *
- * 实验平台:野火 iSO STM32 开发板 
- * 论坛    :http://www.chuxue123.com
- * 淘宝    :http://firestm32.taobao.com
- *
- ******************************************************************************
- */
-
 #include "bsp_spi_flash.h"
 
 
@@ -45,14 +28,14 @@
 
 #define Dummy_Byte                0xFF
 
-W25QXXX::W25QXXX(Spi * spi)
+W25QXXX::W25QXXX(Spi * spi,Pin pincs)
 {
 	this->pSpi=spi;
+	this->pcs=new OutputPort(pincs,false); 
 }
 
 void W25QXXX::Init(void)
-{    
-    this->pcs=new OutputPort(PA4,false); 
+{        
 	*this->pcs=1;
 }
 
