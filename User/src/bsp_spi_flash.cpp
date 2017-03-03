@@ -16,6 +16,7 @@
  */
 
 #include "bsp_spi_flash.h"
+#include "Spi.h"
 
 /* Private typedef -----------------------------------------------------------*/
 //#define SPI_FLASH_PageSize      4096
