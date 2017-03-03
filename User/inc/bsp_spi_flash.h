@@ -1,7 +1,7 @@
 #pragma once
 
 #include "stm32f10x.h"
-
+#include "Spi.h"
 
 
 /************************** SPI Flash 连接引脚定义********************************/
@@ -38,6 +38,10 @@
 class W25QXXX
 {
     public:
+		W25QXXX(Spi * spi);
+	
+		Spi * pSpi;
+	
         void SPI_FLASH_Init(void);
         void SPI_FLASH_SectorErase(u32 SectorAddr);
         void SPI_FLASH_BulkErase(void);

@@ -16,7 +16,7 @@
  */
 
 #include "bsp_spi_flash.h"
-#include "Spi.h"
+
 
 /* Private typedef -----------------------------------------------------------*/
 //#define SPI_FLASH_PageSize      4096
@@ -44,6 +44,11 @@
 #define WIP_Flag                  0x01  /* Write In Progress (WIP) flag */
 
 #define Dummy_Byte                0xFF
+
+W25QXXX::W25QXXX(Spi * spi)
+{
+	this->pSpi=spi;
+}
 
 /*******************************************************************************
  * Function Name  : SPI_FLASH_Init
