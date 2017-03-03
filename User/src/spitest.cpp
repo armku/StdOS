@@ -56,6 +56,7 @@ int flashtest(void)
 {
     printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
 
+	Spi spi(SPI_2, 9000000, true);
     /* 8M串行flash W25Q64初始化 */
     SPI_FLASH_Init();
 
