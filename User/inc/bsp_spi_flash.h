@@ -4,8 +4,6 @@
 #include "Spi.h"
 
 
-/************************** SPI Flash 连接引脚定义********************************/
-#define macSPIx                                     SPI1
 #define macSPI_APBxClock_FUN                        RCC_APB2PeriphClockCmd
 #define macSPI_CLK                                  RCC_APB2Periph_SPI1
 
