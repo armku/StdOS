@@ -10,6 +10,7 @@
 #include "List.h"
 #include "Pwm.h"
 #include "Modbus.h"
+#include "Spi.h"
 
 typedef enum
 {
@@ -85,6 +86,8 @@ int main(void)
 	WatchDog dog(3000);
     Sys.AddTask(FeedDog, &dog, 0, 1000, "WatchDog");
 	Sys.AddTask(LedTask, &led, 0, 500,"LedTask");
+	
+	Spi spi(SPI_2, 9000000, true);
 	
 	flashtest();
 	    

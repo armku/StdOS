@@ -37,7 +37,14 @@ Spi::Spi()
 {
     Init();
 }
-
+#define SPIS {SPI1,SPI2,SPI3}
+#define SPI_PINS_FULLREMAP {PA4,PA5,PA6,PA7}   //需要整理
+Spi::Spi(int spi, int speedHz, bool useNss)
+{
+	SPI_TypeDef *g_Spis[] = SPIS;
+	Init();
+	Init(g_Spis[spi],speedHz,useNss);
+}
 Spi::Spi(SPI_TypeDef *spi, uint speedHz, bool useNss)
 {
     Init();
@@ -59,8 +66,6 @@ void Spi::Init()
     Opened = false;
 }
 
-#define SPIS {SPI1,SPI2,SPI3}
-#define SPI_PINS_FULLREMAP {PA4,PA5,PA6,PA7}   //需要整理
 void Spi::Init(SPI_TypeDef *spi, uint speedHz, bool useNss)
 {
     assert_param(spi);
