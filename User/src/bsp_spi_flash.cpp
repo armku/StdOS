@@ -131,13 +131,13 @@ void W25QXXX::SPI_FLASH_SectorErase(uint SectorAddr)
     /* Select the FLASH: Chip Select low */
     macSPI_FLASH_CS_ENABLE();
     /* Send Sector Erase instruction */
-    SPI_FLASH_SendByte(W25X_SectorErase);
+    this->pSpi->Write(W25X_SectorErase);
     /* Send SectorAddr high nibble address byte */
-    SPI_FLASH_SendByte((SectorAddr &0xFF0000) >> 16);
+    this->pSpi->Write((SectorAddr &0xFF0000) >> 16);
     /* Send SectorAddr medium nibble address byte */
-    SPI_FLASH_SendByte((SectorAddr &0xFF00) >> 8);
+    this->pSpi->Write((SectorAddr &0xFF00) >> 8);
     /* Send SectorAddr low nibble address byte */
-    SPI_FLASH_SendByte(SectorAddr &0xFF);
+    this->pSpi->Write(SectorAddr &0xFF);
     /* Deselect the FLASH: Chip Select high */
     macSPI_FLASH_CS_DISABLE();
     /* Wait the end of Flash writing */
@@ -160,7 +160,7 @@ void W25QXXX::SPI_FLASH_BulkErase(void)
     /* Select the FLASH: Chip Select low */
     macSPI_FLASH_CS_ENABLE();
     /* Send Bulk Erase instruction  */
-    SPI_FLASH_SendByte(W25X_ChipErase);
+    this->pSpi->Write(W25X_ChipErase);
     /* Deselect the FLASH: Chip Select high */
     macSPI_FLASH_CS_DISABLE();
 
@@ -189,13 +189,13 @@ void W25QXXX::SPI_FLASH_PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteT
     /* Select the FLASH: Chip Select low */
     macSPI_FLASH_CS_ENABLE();
     /* Send "Write to Memory " instruction */
-    SPI_FLASH_SendByte(W25X_PageProgram);
+    this->pSpi->Write(W25X_PageProgram);
     /* Send WriteAddr high nibble address byte to write to */
-    SPI_FLASH_SendByte((WriteAddr &0xFF0000) >> 16);
+    this->pSpi->Write((WriteAddr &0xFF0000) >> 16);
     /* Send WriteAddr medium nibble address byte to write to */
-    SPI_FLASH_SendByte((WriteAddr &0xFF00) >> 8);
+    this->pSpi->Write((WriteAddr &0xFF00) >> 8);
     /* Send WriteAddr low nibble address byte to write to */
-    SPI_FLASH_SendByte(WriteAddr &0xFF);
+    this->pSpi->Write(WriteAddr &0xFF);
 
     if (NumByteToWrite > SPI_FLASH_PerWritePageSize)
     {
@@ -207,7 +207,7 @@ void W25QXXX::SPI_FLASH_PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteT
     while (NumByteToWrite--)
     {
         /* Send the current byte */
-        SPI_FLASH_SendByte(*pBuffer);
+        this->pSpi->Write(*pBuffer);
         /* Point on the next byte to be written */
         pBuffer++;
     }
@@ -364,20 +364,20 @@ void W25QXXX::SPI_FLASH_BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteT
     macSPI_FLASH_CS_ENABLE();
 
     /* Send "Read from Memory " instruction */
-    SPI_FLASH_SendByte(W25X_ReadData);
+    this->pSpi->Write(W25X_ReadData);
 
     /* Send ReadAddr high nibble address byte to read from */
-    SPI_FLASH_SendByte((ReadAddr &0xFF0000) >> 16);
+    this->pSpi->Write((ReadAddr &0xFF0000) >> 16);
     /* Send ReadAddr medium nibble address byte to read from */
-    SPI_FLASH_SendByte((ReadAddr &0xFF00) >> 8);
+    this->pSpi->Write((ReadAddr &0xFF00) >> 8);
     /* Send ReadAddr low nibble address byte to read from */
-    SPI_FLASH_SendByte(ReadAddr &0xFF);
+    this->pSpi->Write(ReadAddr &0xFF);
 
     while (NumByteToRead--)
     /* while there is data to be read */
     {
         /* Read a byte from the FLASH */
-        *pBuffer = SPI_FLASH_SendByte(Dummy_Byte);
+        *pBuffer = this->pSpi->Write(Dummy_Byte);
         /* Point to the next location where the byte read will be saved */
         pBuffer++;
     }
@@ -401,16 +401,16 @@ uint W25QXXX::SPI_FLASH_ReadID(void)
     macSPI_FLASH_CS_ENABLE();
 
     /* Send "RDID " instruction */
-    SPI_FLASH_SendByte(W25X_JedecDeviceID);
+    this->pSpi->Write(W25X_JedecDeviceID);
 
     /* Read a byte from the FLASH */
-    Temp0 = SPI_FLASH_SendByte(Dummy_Byte);
+    Temp0 = this->pSpi->Write(Dummy_Byte);
 
     /* Read a byte from the FLASH */
-    Temp1 = SPI_FLASH_SendByte(Dummy_Byte);
+    Temp1 = this->pSpi->Write(Dummy_Byte);
 
     /* Read a byte from the FLASH */
-    Temp2 = SPI_FLASH_SendByte(Dummy_Byte);
+    Temp2 = this->pSpi->Write(Dummy_Byte);
 
     /* Deselect the FLASH: Chip Select high */
     macSPI_FLASH_CS_DISABLE();
@@ -475,15 +475,15 @@ void W25QXXX::SPI_FLASH_StartReadSequence(uint ReadAddr)
     macSPI_FLASH_CS_ENABLE();
 
     /* Send "Read from Memory " instruction */
-    SPI_FLASH_SendByte(W25X_ReadData);
+    this->pSpi->Write(W25X_ReadData);
 
     /* Send the 24-bit address of the address to read from -----------------------*/
     /* Send ReadAddr high nibble address byte */
-    SPI_FLASH_SendByte((ReadAddr &0xFF0000) >> 16);
+    this->pSpi->Write((ReadAddr &0xFF0000) >> 16);
     /* Send ReadAddr medium nibble address byte */
-    SPI_FLASH_SendByte((ReadAddr &0xFF00) >> 8);
+    this->pSpi->Write((ReadAddr &0xFF00) >> 8);
     /* Send ReadAddr low nibble address byte */
-    SPI_FLASH_SendByte(ReadAddr &0xFF);
+    this->pSpi->Write(ReadAddr &0xFF);
 }
 
 /*******************************************************************************
@@ -497,20 +497,7 @@ void W25QXXX::SPI_FLASH_StartReadSequence(uint ReadAddr)
  *******************************************************************************/
 byte W25QXXX::SPI_FLASH_ReadByte(void)
 {
-    return (SPI_FLASH_SendByte(Dummy_Byte));
-}
-
-/*******************************************************************************
- * Function Name  : SPI_FLASH_SendByte
- * Description    : Sends a byte through the SPI interface and return the byte
- *                  received from the SPI bus.
- * Input          : byte : byte to send.
- * Output         : None
- * Return         : The value of the received byte.
- *******************************************************************************/
-byte W25QXXX::SPI_FLASH_SendByte(byte byt)
-{
-	return this->pSpi->Write(byt);	
+    return (this->pSpi->Write(Dummy_Byte));
 }
 
 /*******************************************************************************
@@ -551,7 +538,7 @@ void W25QXXX::SPI_FLASH_WriteEnable(void)
     macSPI_FLASH_CS_ENABLE();
 
     /* Send "Write Enable" instruction */
-    SPI_FLASH_SendByte(W25X_WriteEnable);
+    this->pSpi->Write(W25X_WriteEnable);
 
     /* Deselect the FLASH: Chip Select high */
     macSPI_FLASH_CS_DISABLE();
@@ -574,14 +561,14 @@ void W25QXXX::SPI_FLASH_WaitForWriteEnd(void)
     macSPI_FLASH_CS_ENABLE();
 
     /* Send "Read Status Register" instruction */
-    SPI_FLASH_SendByte(W25X_ReadStatusReg);
+    this->pSpi->Write(W25X_ReadStatusReg);
 
     /* Loop as long as the memory is busy with a write cycle */
     do
     {
         /* Send a dummy byte to generate the clock needed by the FLASH
         and put the value of the status register in FLASH_Status variable */
-        FLASH_Status = SPI_FLASH_SendByte(Dummy_Byte);
+        FLASH_Status = this->pSpi->Write(Dummy_Byte);
     }
     while ((FLASH_Status &WIP_Flag) == SET); /* Write in progress */
 
@@ -597,7 +584,7 @@ void W25QXXX::SPI_Flash_PowerDown(void)
     macSPI_FLASH_CS_ENABLE();
 
     /* Send "Power Down" instruction */
-    SPI_FLASH_SendByte(W25X_PowerDown);
+    this->pSpi->Write(W25X_PowerDown);
 
     /* Deselect the FLASH: Chip Select high */
     macSPI_FLASH_CS_DISABLE();
@@ -610,7 +597,7 @@ void W25QXXX::SPI_Flash_WAKEUP(void)
     macSPI_FLASH_CS_ENABLE();
 
     /* Send "Power Down" instruction */
-    SPI_FLASH_SendByte(W25X_ReleasePowerDown);
+    this->pSpi->Write(W25X_ReleasePowerDown);
 
     /* Deselect the FLASH: Chip Select high */
     macSPI_FLASH_CS_DISABLE(); //µÈ´ýTRES1

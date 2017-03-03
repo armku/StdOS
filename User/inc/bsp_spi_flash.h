@@ -55,8 +55,7 @@ class W25QXXX
         void SPI_Flash_WAKEUP(void);
 
 
-        byte SPI_FLASH_ReadByte(void);
-        byte SPI_FLASH_SendByte(byte byt);
+        byte SPI_FLASH_ReadByte(void);       
         ushort SPI_FLASH_SendHalfWord(ushort HalfWord);
         void SPI_FLASH_WriteEnable(void);
         void SPI_FLASH_WaitForWriteEnd(void);
