@@ -445,11 +445,6 @@
           <GroupName>UserDriver</GroupName>
           <Files>
             <File>
-              <FileName>bsp_spi_flash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\src\bsp_spi_flash.cpp</FilePath>
-            </File>
-            <File>
               <FileName>spitest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\src\spitest.cpp</FilePath>
@@ -708,6 +703,11 @@
               <FileName>ModBus.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Devices\src\ModBus.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\W25QXXX.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1357,11 +1357,6 @@
           <GroupName>UserDriver</GroupName>
           <Files>
             <File>
-              <FileName>bsp_spi_flash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\src\bsp_spi_flash.cpp</FilePath>
-            </File>
-            <File>
               <FileName>spitest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\src\spitest.cpp</FilePath>
@@ -1620,6 +1615,11 @@
               <FileName>ModBus.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Devices\src\ModBus.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\W25QXXX.cpp</FilePath>
             </File>
           </Files>
         </Group>

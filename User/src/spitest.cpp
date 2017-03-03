@@ -1,6 +1,5 @@
-#include "stm32f10x.h"
 #include "stdio.h"
-#include "bsp_spi_flash.h"
+#include "W25QXXX.h"
 #include "spi.h"
 
 typedef enum
@@ -24,7 +23,7 @@ typedef enum
 
 
 /* 发送缓冲区初始化 */
-uint8_t Tx_Buffer[] = " 感谢您选用野火stm32开发板\r\n                http://firestm32.taobao.com";
+uint8_t Tx_Buffer[] = "感谢您选用stm32开发板\r\n";
 uint8_t Rx_Buffer[BufferSize];
 
 __IO uint32_t DeviceID = 0;
@@ -53,13 +52,13 @@ int flashtest(void)
     /* Get SPI Flash ID */
     FlashID = w25q64.ReadID();
 
-    printf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", FlashID, DeviceID);
+    printf("\r\nFlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", FlashID, DeviceID);
 
     /* Check the SPI Flash ID */
     if (FlashID == sFLASH_ID)
     /* #define  sFLASH_ID  0XEF4017 */
     {
-        printf("\r\n 检测到华邦串行flash W25Q64 !\r\n");
+        printf("检测到华邦串行flash W25Q64 !\r\n");
 
         /* Erase SPI FLASH Sector to write on */
         w25q64.SectorErase(FLASH_SectorToErase);
@@ -67,27 +66,27 @@ int flashtest(void)
         /* 将发送缓冲区的数据写到flash中 */
         w25q64.BufferWrite(Tx_Buffer, FLASH_WriteAddress, BufferSize);
         w25q64.BufferWrite(Tx_Buffer, 252, BufferSize);
-        printf("\r\n 写入的数据为：%s \r\t", Tx_Buffer);
+        printf("写入的数据为：%s \r\n", Tx_Buffer);
 
         /* 将刚刚写入的数据读出来放到接收缓冲区中 */
         w25q64.BufferRead(Rx_Buffer, FLASH_ReadAddress, BufferSize);
-        printf("\r\n 读出的数据为：%s \r\n", Rx_Buffer);
+        printf("读出的数据为：%s \r\n", Rx_Buffer);
 
         /* 检查写入的数据与读出的数据是否相等 */
         TransferStatus1 = Buffercmp(Tx_Buffer, Rx_Buffer, BufferSize);
 
         if (PASSED == TransferStatus1)
         {
-            printf("\r\n 8M串行flash(W25Q64)测试成功!\n\r");
+            printf("8M串行flash(W25Q64)测试成功!\n\r");
         }
         else
         {
-            printf("\r\n 8M串行flash(W25Q64)测试失败!\n\r");
+            printf("8M串行flash(W25Q64)测试失败!\n\r");
         }
     } // if (FlashID == sFLASH_ID)
     else
     {
-        printf("\r\n 获取不到 W25Q64 ID!\n\r");
+        printf("获取不到 W25Q64 ID!\n\r");
     }
 
     w25q64.PowerDown();

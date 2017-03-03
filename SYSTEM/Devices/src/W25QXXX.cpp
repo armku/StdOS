@@ -1,5 +1,4 @@
-#include "bsp_spi_flash.h"
-
+#include "W25QXXX.h"
 
 /* Private typedef -----------------------------------------------------------*/
 //#define SPI_FLASH_PageSize      4096
