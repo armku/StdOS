@@ -21,7 +21,6 @@ typedef enum
 //#define  sFLASH_ID              0xEF4015	 //W25Q16
 #define sFLASH_ID              0XEF4017    //W25Q64
 
-
 /* 发送缓冲区初始化 */
 uint8_t Tx_Buffer[] = "感谢您选用stm32开发板\r\n";
 uint8_t Rx_Buffer[BufferSize];
@@ -30,13 +29,11 @@ __IO uint32_t DeviceID = 0;
 __IO uint32_t FlashID = 0;
 __IO TestStatus TransferStatus1 = FAILED;
 
-// 函数原型声明
-void Delay(__IO uint32_t nCount);
 TestStatus Buffercmp(uint8_t *pBuffer1, uint8_t *pBuffer2, uint16_t BufferLength);
 
 int flashtest(void)
 {
-    printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
+    printf("\r\n这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
 
     Spi spi(SPI_1, 9000000, false);
 	spi.Open();
@@ -46,8 +43,8 @@ int flashtest(void)
 
     /* Get SPI Flash Device ID */
     DeviceID = w25q64.ReadDeviceID();
-
-    Delay(200);
+   
+	Sys.Delay(100);
 
     /* Get SPI Flash ID */
     FlashID = w25q64.ReadID();
@@ -77,16 +74,16 @@ int flashtest(void)
 
         if (PASSED == TransferStatus1)
         {
-            printf("8M串行flash(W25Q64)测试成功!\n\r");
+            printf("8M串行flash(W25Q64)测试成功!\r\n");
         }
         else
         {
-            printf("8M串行flash(W25Q64)测试失败!\n\r");
+            printf("8M串行flash(W25Q64)测试失败!\r\n");
         }
     } // if (FlashID == sFLASH_ID)
     else
     {
-        printf("获取不到 W25Q64 ID!\n\r");
+        printf("获取不到 W25Q64 ID!\r\n");
     }
 
     w25q64.PowerDown();
@@ -147,10 +144,4 @@ TestStatus Buffercmp(uint8_t *pBuffer1, uint8_t *pBuffer2, uint16_t BufferLength
         pBuffer2++;
     }
     return PASSED;
-}
-
-void Delay(__IO uint32_t nCount)
-{
-    for (; nCount != 0; nCount--)
-        ;
 }
