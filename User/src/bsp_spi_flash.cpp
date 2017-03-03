@@ -487,20 +487,6 @@ void W25QXXX::SPI_FLASH_StartReadSequence(uint ReadAddr)
 }
 
 /*******************************************************************************
- * Function Name  : SPI_FLASH_ReadByte
- * Description    : Reads a byte from the SPI Flash.
- *                  This function must be used only if the Start_Read_Sequence
- *                  function has been previously called.
- * Input          : None
- * Output         : None
- * Return         : Byte Read from the SPI Flash.
- *******************************************************************************/
-byte W25QXXX::SPI_FLASH_ReadByte(void)
-{
-    return (this->pSpi->Write(Dummy_Byte));
-}
-
-/*******************************************************************************
  * Function Name  : SPI_FLASH_SendHalfWord
  * Description    : Sends a Half Word through the SPI interface and return the
  *                  Half Word received from the SPI bus.
