@@ -510,19 +510,7 @@ byte W25QXXX::SPI_FLASH_ReadByte(void)
  *******************************************************************************/
 byte W25QXXX::SPI_FLASH_SendByte(byte byt)
 {
-    /* Loop while DR register in not emplty */
-    while (SPI_I2S_GetFlagStatus(macSPIx, SPI_I2S_FLAG_TXE) == RESET)
-        ;
-
-    /* Send byte through the SPI1 peripheral */
-    SPI_I2S_SendData(macSPIx, byt);
-
-    /* Wait to receive a byte */
-    while (SPI_I2S_GetFlagStatus(macSPIx, SPI_I2S_FLAG_RXNE) == RESET)
-        ;
-
-    /* Return the byte read from the SPI bus */
-    return SPI_I2S_ReceiveData(macSPIx);
+	return this->pSpi->Write(byt);	
 }
 
 /*******************************************************************************
