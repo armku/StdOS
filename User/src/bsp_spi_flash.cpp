@@ -58,9 +58,7 @@ W25QXXX::W25QXXX(Spi * spi)
  * Return         : None
  *******************************************************************************/
 void W25QXXX::Init(void)
-{
-    SPI_InitTypeDef SPI_InitStructure;
-
+{    
     /* Enable SPI1 and GPIO clocks */
     /*!< SPI_FLASH_SPI_CS_GPIO, SPI_FLASH_SPI_MOSI_GPIO, 
     SPI_FLASH_SPI_MISO_GPIO, SPI_FLASH_SPI_DETECT_GPIO 
@@ -87,7 +85,7 @@ void W25QXXX::SectorErase(uint SectorAddr)
     WaitForWriteEnd();
     /* Sector Erase */
     /* Select the FLASH: Chip Select low */
-    macSPI_FLASH_CS_ENABLE();
+    *this->pcs=0;
     /* Send Sector Erase instruction */
     this->pSpi->Write(W25X_SectorErase);
     /* Send SectorAddr high nibble address byte */
@@ -116,7 +114,7 @@ void W25QXXX::BulkErase(void)
 
     /* Bulk Erase */
     /* Select the FLASH: Chip Select low */
-    macSPI_FLASH_CS_ENABLE();
+    *this->pcs=0;
     /* Send Bulk Erase instruction  */
     this->pSpi->Write(W25X_ChipErase);
     /* Deselect the FLASH: Chip Select high */
@@ -145,7 +143,7 @@ void W25QXXX::PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
     WriteEnable();
 
     /* Select the FLASH: Chip Select low */
-    macSPI_FLASH_CS_ENABLE();
+    *this->pcs=0;
     /* Send "Write to Memory " instruction */
     this->pSpi->Write(W25X_PageProgram);
     /* Send WriteAddr high nibble address byte to write to */
@@ -319,7 +317,7 @@ void W25QXXX::BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 void W25QXXX::BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
 {
     /* Select the FLASH: Chip Select low */
-    macSPI_FLASH_CS_ENABLE();
+    *this->pcs=0;
 
     /* Send "Read from Memory " instruction */
     this->pSpi->Write(W25X_ReadData);
@@ -356,7 +354,7 @@ uint W25QXXX::ReadID(void)
     uint Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
 
     /* Select the FLASH: Chip Select low */
-    macSPI_FLASH_CS_ENABLE();
+    *this->pcs=0;
 
     /* Send "RDID " instruction */
     this->pSpi->Write(W25X_JedecDeviceID);
@@ -390,7 +388,7 @@ uint W25QXXX::ReadDeviceID(void)
     uint Temp = 0;
 
     /* Select the FLASH: Chip Select low */
-    macSPI_FLASH_CS_ENABLE();
+    *this->pcs=0;
 
     /* Send "RDID " instruction */	
 	this->pSpi->Write(W25X_DeviceID);
@@ -421,7 +419,7 @@ uint W25QXXX::ReadDeviceID(void)
 void W25QXXX::StartReadSequence(uint ReadAddr)
 {
     /* Select the FLASH: Chip Select low */
-    macSPI_FLASH_CS_ENABLE();
+    *this->pcs=0;
 
     /* Send "Read from Memory " instruction */
     this->pSpi->Write(W25X_ReadData);
@@ -445,7 +443,7 @@ void W25QXXX::StartReadSequence(uint ReadAddr)
 void W25QXXX::WriteEnable(void)
 {
     /* Select the FLASH: Chip Select low */
-    macSPI_FLASH_CS_ENABLE();
+    *this->pcs=0;
 
     /* Send "Write Enable" instruction */
     this->pSpi->Write(W25X_WriteEnable);
@@ -468,7 +466,7 @@ void W25QXXX::WaitForWriteEnd(void)
     u8 FLASH_Status = 0;
 
     /* Select the FLASH: Chip Select low */
-    macSPI_FLASH_CS_ENABLE();
+    *this->pcs=0;
 
     /* Send "Read Status Register" instruction */
     this->pSpi->Write(W25X_ReadStatusReg);
@@ -491,7 +489,7 @@ void W25QXXX::WaitForWriteEnd(void)
 void W25QXXX::PowerDown(void)
 {
     /* Select the FLASH: Chip Select low */
-    macSPI_FLASH_CS_ENABLE();
+    *this->pcs=0;
 
     /* Send "Power Down" instruction */
     this->pSpi->Write(W25X_PowerDown);
@@ -504,7 +502,7 @@ void W25QXXX::PowerDown(void)
 void W25QXXX::WAKEUP(void)
 {
     /* Select the FLASH: Chip Select low */
-    macSPI_FLASH_CS_ENABLE();
+    *this->pcs=0;
 
     /* Send "Power Down" instruction */
     this->pSpi->Write(W25X_ReleasePowerDown);

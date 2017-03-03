@@ -14,9 +14,6 @@
 #define macSPI_CS_PORT                              GPIOA
 #define macSPI_CS_PIN                               GPIO_Pin_4
 
-/************************** SPI Flash º¯Êýºê¶¨Òå********************************/
-#define macSPI_FLASH_CS_ENABLE()                       GPIO_ResetBits( macSPI_CS_PORT, macSPI_CS_PIN )
-
 class W25QXXX
 {
     public:
