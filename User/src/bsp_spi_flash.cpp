@@ -435,6 +435,14 @@ u32 W25QXXX::SPI_FLASH_ReadDeviceID(void)
     macSPI_FLASH_CS_ENABLE();
 
     /* Send "RDID " instruction */
+	#if 0
+	this->pSpi->Write(W25X_DeviceID);
+	this->pSpi->Write(Dummy_Byte);
+	this->pSpi->Write(Dummy_Byte);
+	this->pSpi->Write(Dummy_Byte);
+	
+	Temp = this->pSpi->Write(Dummy_Byte);
+	#else
     SPI_FLASH_SendByte(W25X_DeviceID);
     SPI_FLASH_SendByte(Dummy_Byte);
     SPI_FLASH_SendByte(Dummy_Byte);
@@ -442,7 +450,7 @@ u32 W25QXXX::SPI_FLASH_ReadDeviceID(void)
 
     /* Read a byte from the FLASH */
     Temp = SPI_FLASH_SendByte(Dummy_Byte);
-
+	#endif
     /* Deselect the FLASH: Chip Select high */
     macSPI_FLASH_CS_DISABLE();
 
