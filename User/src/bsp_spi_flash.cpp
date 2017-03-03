@@ -57,7 +57,7 @@ W25QXXX::W25QXXX(Spi * spi)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::SPI_FLASH_Init(void)
+void W25QXXX::Init(void)
 {
     SPI_InitTypeDef SPI_InitStructure;
     GPIO_InitTypeDef GPIO_InitStructure;
@@ -122,11 +122,11 @@ void W25QXXX::SPI_FLASH_Init(void)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::SPI_FLASH_SectorErase(uint SectorAddr)
+void W25QXXX::SectorErase(uint SectorAddr)
 {
     /* Send write enable instruction */
-    SPI_FLASH_WriteEnable();
-    SPI_FLASH_WaitForWriteEnd();
+    WriteEnable();
+    WaitForWriteEnd();
     /* Sector Erase */
     /* Select the FLASH: Chip Select low */
     macSPI_FLASH_CS_ENABLE();
@@ -141,7 +141,7 @@ void W25QXXX::SPI_FLASH_SectorErase(uint SectorAddr)
     /* Deselect the FLASH: Chip Select high */
     macSPI_FLASH_CS_DISABLE();
     /* Wait the end of Flash writing */
-    SPI_FLASH_WaitForWriteEnd();
+    WaitForWriteEnd();
 }
 
 /*******************************************************************************
@@ -151,10 +151,10 @@ void W25QXXX::SPI_FLASH_SectorErase(uint SectorAddr)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::SPI_FLASH_BulkErase(void)
+void W25QXXX::BulkErase(void)
 {
     /* Send write enable instruction */
-    SPI_FLASH_WriteEnable();
+    WriteEnable();
 
     /* Bulk Erase */
     /* Select the FLASH: Chip Select low */
@@ -165,7 +165,7 @@ void W25QXXX::SPI_FLASH_BulkErase(void)
     macSPI_FLASH_CS_DISABLE();
 
     /* Wait the end of Flash writing */
-    SPI_FLASH_WaitForWriteEnd();
+    WaitForWriteEnd();
 }
 
 /*******************************************************************************
@@ -181,10 +181,10 @@ void W25QXXX::SPI_FLASH_BulkErase(void)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::SPI_FLASH_PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
+void W25QXXX::PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
     /* Enable the write access to the FLASH */
-    SPI_FLASH_WriteEnable();
+    WriteEnable();
 
     /* Select the FLASH: Chip Select low */
     macSPI_FLASH_CS_ENABLE();
@@ -216,7 +216,7 @@ void W25QXXX::SPI_FLASH_PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteT
     macSPI_FLASH_CS_DISABLE();
 
     /* Wait the end of Flash writing */
-    SPI_FLASH_WaitForWriteEnd();
+    WaitForWriteEnd();
 }
 
 /*******************************************************************************
@@ -230,7 +230,7 @@ void W25QXXX::SPI_FLASH_PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteT
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::SPI_FLASH_BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
+void W25QXXX::BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
     byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
@@ -245,19 +245,19 @@ void W25QXXX::SPI_FLASH_BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByt
         if (NumOfPage == 0)
         /* NumByteToWrite < SPI_FLASH_PageSize */
         {
-            SPI_FLASH_PageWrite(pBuffer, WriteAddr, NumByteToWrite);
+            PageWrite(pBuffer, WriteAddr, NumByteToWrite);
         }
         else
         /* NumByteToWrite > SPI_FLASH_PageSize */
         {
             while (NumOfPage--)
             {
-                SPI_FLASH_PageWrite(pBuffer, WriteAddr, SPI_FLASH_PageSize);
+                PageWrite(pBuffer, WriteAddr, SPI_FLASH_PageSize);
                 WriteAddr += SPI_FLASH_PageSize;
                 pBuffer += SPI_FLASH_PageSize;
             }
 
-            SPI_FLASH_PageWrite(pBuffer, WriteAddr, NumOfSingle);
+            PageWrite(pBuffer, WriteAddr, NumOfSingle);
         }
     }
     else
@@ -271,15 +271,15 @@ void W25QXXX::SPI_FLASH_BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByt
             {
                 temp = NumOfSingle - count;
 
-                SPI_FLASH_PageWrite(pBuffer, WriteAddr, count);
+                PageWrite(pBuffer, WriteAddr, count);
                 WriteAddr += count;
                 pBuffer += count;
 
-                SPI_FLASH_PageWrite(pBuffer, WriteAddr, temp);
+                PageWrite(pBuffer, WriteAddr, temp);
             }
             else
             {
-                SPI_FLASH_PageWrite(pBuffer, WriteAddr, NumByteToWrite);
+                PageWrite(pBuffer, WriteAddr, NumByteToWrite);
             }
         }
         else
@@ -289,20 +289,20 @@ void W25QXXX::SPI_FLASH_BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByt
             NumOfPage = NumByteToWrite / SPI_FLASH_PageSize;
             NumOfSingle = NumByteToWrite % SPI_FLASH_PageSize;
 
-            SPI_FLASH_PageWrite(pBuffer, WriteAddr, count);
+            PageWrite(pBuffer, WriteAddr, count);
             WriteAddr += count;
             pBuffer += count;
 
             while (NumOfPage--)
             {
-                SPI_FLASH_PageWrite(pBuffer, WriteAddr, SPI_FLASH_PageSize);
+                PageWrite(pBuffer, WriteAddr, SPI_FLASH_PageSize);
                 WriteAddr += SPI_FLASH_PageSize;
                 pBuffer += SPI_FLASH_PageSize;
             }
 
             if (NumOfSingle != 0)
             {
-                SPI_FLASH_PageWrite(pBuffer, WriteAddr, NumOfSingle);
+                PageWrite(pBuffer, WriteAddr, NumOfSingle);
             }
         }
     }
@@ -358,7 +358,7 @@ void W25QXXX::SPI_FLASH_BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByt
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::SPI_FLASH_BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
+void W25QXXX::BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
 {
     /* Select the FLASH: Chip Select low */
     macSPI_FLASH_CS_ENABLE();
@@ -393,7 +393,7 @@ void W25QXXX::SPI_FLASH_BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteT
  * Output         : None
  * Return         : FLASH identification
  *******************************************************************************/
-uint W25QXXX::SPI_FLASH_ReadID(void)
+uint W25QXXX::ReadID(void)
 {
     uint Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
 
@@ -427,7 +427,7 @@ uint W25QXXX::SPI_FLASH_ReadID(void)
  * Output         : None
  * Return         : FLASH identification
  *******************************************************************************/
-uint W25QXXX::SPI_FLASH_ReadDeviceID(void)
+uint W25QXXX::ReadDeviceID(void)
 {
     uint Temp = 0;
 
@@ -469,7 +469,7 @@ uint W25QXXX::SPI_FLASH_ReadDeviceID(void)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::SPI_FLASH_StartReadSequence(uint ReadAddr)
+void W25QXXX::StartReadSequence(uint ReadAddr)
 {
     /* Select the FLASH: Chip Select low */
     macSPI_FLASH_CS_ENABLE();
@@ -493,7 +493,7 @@ void W25QXXX::SPI_FLASH_StartReadSequence(uint ReadAddr)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::SPI_FLASH_WriteEnable(void)
+void W25QXXX::WriteEnable(void)
 {
     /* Select the FLASH: Chip Select low */
     macSPI_FLASH_CS_ENABLE();
@@ -514,7 +514,7 @@ void W25QXXX::SPI_FLASH_WriteEnable(void)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::SPI_FLASH_WaitForWriteEnd(void)
+void W25QXXX::WaitForWriteEnd(void)
 {
     u8 FLASH_Status = 0;
 
@@ -539,7 +539,7 @@ void W25QXXX::SPI_FLASH_WaitForWriteEnd(void)
 
 
 //进入掉电模式
-void W25QXXX::SPI_Flash_PowerDown(void)
+void W25QXXX::PowerDown(void)
 {
     /* Select the FLASH: Chip Select low */
     macSPI_FLASH_CS_ENABLE();
@@ -552,7 +552,7 @@ void W25QXXX::SPI_Flash_PowerDown(void)
 }
 
 //唤醒
-void W25QXXX::SPI_Flash_WAKEUP(void)
+void W25QXXX::WAKEUP(void)
 {
     /* Select the FLASH: Chip Select low */
     macSPI_FLASH_CS_ENABLE();

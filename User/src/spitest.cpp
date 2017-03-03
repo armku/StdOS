@@ -43,15 +43,15 @@ int flashtest(void)
 	spi.Open();
     W25QXXX w25q64(&spi);
     /* 8M串行flash W25Q64初始化 */
-    w25q64.SPI_FLASH_Init();
+    w25q64.Init();
 
     /* Get SPI Flash Device ID */
-    DeviceID = w25q64.SPI_FLASH_ReadDeviceID();
+    DeviceID = w25q64.ReadDeviceID();
 
     Delay(200);
 
     /* Get SPI Flash ID */
-    FlashID = w25q64.SPI_FLASH_ReadID();
+    FlashID = w25q64.ReadID();
 
     printf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", FlashID, DeviceID);
 
@@ -62,15 +62,15 @@ int flashtest(void)
         printf("\r\n 检测到华邦串行flash W25Q64 !\r\n");
 
         /* Erase SPI FLASH Sector to write on */
-        w25q64.SPI_FLASH_SectorErase(FLASH_SectorToErase);
+        w25q64.SectorErase(FLASH_SectorToErase);
 
         /* 将发送缓冲区的数据写到flash中 */
-        w25q64.SPI_FLASH_BufferWrite(Tx_Buffer, FLASH_WriteAddress, BufferSize);
-        w25q64.SPI_FLASH_BufferWrite(Tx_Buffer, 252, BufferSize);
+        w25q64.BufferWrite(Tx_Buffer, FLASH_WriteAddress, BufferSize);
+        w25q64.BufferWrite(Tx_Buffer, 252, BufferSize);
         printf("\r\n 写入的数据为：%s \r\t", Tx_Buffer);
 
         /* 将刚刚写入的数据读出来放到接收缓冲区中 */
-        w25q64.SPI_FLASH_BufferRead(Rx_Buffer, FLASH_ReadAddress, BufferSize);
+        w25q64.BufferRead(Rx_Buffer, FLASH_ReadAddress, BufferSize);
         printf("\r\n 读出的数据为：%s \r\n", Rx_Buffer);
 
         /* 检查写入的数据与读出的数据是否相等 */
@@ -90,7 +90,7 @@ int flashtest(void)
         printf("\r\n 获取不到 W25Q64 ID!\n\r");
     }
 
-    w25q64.SPI_Flash_PowerDown();
+    w25q64.PowerDown();
     return 0;
 }
 

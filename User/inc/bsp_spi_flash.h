@@ -42,18 +42,18 @@ class W25QXXX
 	
 		Spi * pSpi;
 	
-        void SPI_FLASH_Init(void);
-        void SPI_FLASH_SectorErase(u32 SectorAddr);
-        void SPI_FLASH_BulkErase(void);
-        void SPI_FLASH_PageWrite(u8 *pBuffer, u32 WriteAddr, u16 NumByteToWrite);
-        void SPI_FLASH_BufferWrite(u8 *pBuffer, u32 WriteAddr, u16 NumByteToWrite);
-        void SPI_FLASH_BufferRead(u8 *pBuffer, u32 ReadAddr, u16 NumByteToRead);
-        uint SPI_FLASH_ReadID(void);
-        uint SPI_FLASH_ReadDeviceID(void);
-        void SPI_FLASH_StartReadSequence(u32 ReadAddr);
-        void SPI_Flash_PowerDown(void);
-        void SPI_Flash_WAKEUP(void);
+        void Init(void);
+        void SectorErase(u32 SectorAddr);
+        void BulkErase(void);
+        void PageWrite(u8 *pBuffer, u32 WriteAddr, u16 NumByteToWrite);
+        void BufferWrite(u8 *pBuffer, u32 WriteAddr, u16 NumByteToWrite);
+        void BufferRead(u8 *pBuffer, u32 ReadAddr, u16 NumByteToRead);
+        uint ReadID(void);
+        uint ReadDeviceID(void);
+        void StartReadSequence(u32 ReadAddr);
+        void PowerDown(void);
+        void WAKEUP(void);
                     
-        void SPI_FLASH_WriteEnable(void);
-        void SPI_FLASH_WaitForWriteEnd(void);
+        void WriteEnable(void);
+        void WaitForWriteEnd(void);
 };
