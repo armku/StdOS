@@ -122,7 +122,7 @@ void W25QXXX::SPI_FLASH_Init(void)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::SPI_FLASH_SectorErase(u32 SectorAddr)
+void W25QXXX::SPI_FLASH_SectorErase(uint SectorAddr)
 {
     /* Send write enable instruction */
     SPI_FLASH_WriteEnable();
@@ -181,7 +181,7 @@ void W25QXXX::SPI_FLASH_BulkErase(void)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::SPI_FLASH_PageWrite(u8 *pBuffer, u32 WriteAddr, u16 NumByteToWrite)
+void W25QXXX::SPI_FLASH_PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
     /* Enable the write access to the FLASH */
     SPI_FLASH_WriteEnable();
@@ -230,9 +230,9 @@ void W25QXXX::SPI_FLASH_PageWrite(u8 *pBuffer, u32 WriteAddr, u16 NumByteToWrite
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::SPI_FLASH_BufferWrite(u8 *pBuffer, u32 WriteAddr, u16 NumByteToWrite)
+void W25QXXX::SPI_FLASH_BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
-    u8 NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
+    byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
     Addr = WriteAddr % SPI_FLASH_PageSize;
     count = SPI_FLASH_PageSize - Addr;
@@ -358,7 +358,7 @@ void W25QXXX::SPI_FLASH_BufferWrite(u8 *pBuffer, u32 WriteAddr, u16 NumByteToWri
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::SPI_FLASH_BufferRead(u8 *pBuffer, u32 ReadAddr, u16 NumByteToRead)
+void W25QXXX::SPI_FLASH_BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
 {
     /* Select the FLASH: Chip Select low */
     macSPI_FLASH_CS_ENABLE();
@@ -393,9 +393,9 @@ void W25QXXX::SPI_FLASH_BufferRead(u8 *pBuffer, u32 ReadAddr, u16 NumByteToRead)
  * Output         : None
  * Return         : FLASH identification
  *******************************************************************************/
-u32 W25QXXX::SPI_FLASH_ReadID(void)
+uint W25QXXX::SPI_FLASH_ReadID(void)
 {
-    u32 Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
+    uint Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
 
     /* Select the FLASH: Chip Select low */
     macSPI_FLASH_CS_ENABLE();
@@ -427,9 +427,9 @@ u32 W25QXXX::SPI_FLASH_ReadID(void)
  * Output         : None
  * Return         : FLASH identification
  *******************************************************************************/
-u32 W25QXXX::SPI_FLASH_ReadDeviceID(void)
+uint W25QXXX::SPI_FLASH_ReadDeviceID(void)
 {
-    u32 Temp = 0;
+    uint Temp = 0;
 
     /* Select the FLASH: Chip Select low */
     macSPI_FLASH_CS_ENABLE();
@@ -469,7 +469,7 @@ u32 W25QXXX::SPI_FLASH_ReadDeviceID(void)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::SPI_FLASH_StartReadSequence(u32 ReadAddr)
+void W25QXXX::SPI_FLASH_StartReadSequence(uint ReadAddr)
 {
     /* Select the FLASH: Chip Select low */
     macSPI_FLASH_CS_ENABLE();
@@ -495,7 +495,7 @@ void W25QXXX::SPI_FLASH_StartReadSequence(u32 ReadAddr)
  * Output         : None
  * Return         : Byte Read from the SPI Flash.
  *******************************************************************************/
-u8 W25QXXX::SPI_FLASH_ReadByte(void)
+byte W25QXXX::SPI_FLASH_ReadByte(void)
 {
     return (SPI_FLASH_SendByte(Dummy_Byte));
 }
@@ -508,7 +508,7 @@ u8 W25QXXX::SPI_FLASH_ReadByte(void)
  * Output         : None
  * Return         : The value of the received byte.
  *******************************************************************************/
-u8 W25QXXX::SPI_FLASH_SendByte(u8 byt)
+byte W25QXXX::SPI_FLASH_SendByte(byte byt)
 {
     /* Loop while DR register in not emplty */
     while (SPI_I2S_GetFlagStatus(macSPIx, SPI_I2S_FLAG_TXE) == RESET)
@@ -533,7 +533,7 @@ u8 W25QXXX::SPI_FLASH_SendByte(u8 byt)
  * Output         : None
  * Return         : The value of the received Half Word.
  *******************************************************************************/
-u16 W25QXXX::SPI_FLASH_SendHalfWord(u16 HalfWord)
+ushort W25QXXX::SPI_FLASH_SendHalfWord(ushort HalfWord)
 {
     /* Loop while DR register in not emplty */
     while (SPI_I2S_GetFlagStatus(macSPIx, SPI_I2S_FLAG_TXE) == RESET)
