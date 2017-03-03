@@ -508,14 +508,14 @@ u8 W25QXXX::SPI_FLASH_ReadByte(void)
  * Output         : None
  * Return         : The value of the received byte.
  *******************************************************************************/
-u8 W25QXXX::SPI_FLASH_SendByte(u8 byte)
+u8 W25QXXX::SPI_FLASH_SendByte(u8 byt)
 {
     /* Loop while DR register in not emplty */
     while (SPI_I2S_GetFlagStatus(macSPIx, SPI_I2S_FLAG_TXE) == RESET)
         ;
 
     /* Send byte through the SPI1 peripheral */
-    SPI_I2S_SendData(macSPIx, byte);
+    SPI_I2S_SendData(macSPIx, byt);
 
     /* Wait to receive a byte */
     while (SPI_I2S_GetFlagStatus(macSPIx, SPI_I2S_FLAG_RXNE) == RESET)
