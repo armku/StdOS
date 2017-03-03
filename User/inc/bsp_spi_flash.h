@@ -56,7 +56,7 @@ class W25QXXX
 
 
         u8 SPI_FLASH_ReadByte(void);
-        u8 SPI_FLASH_SendByte(u8 byte);
+        u8 SPI_FLASH_SendByte(u8 byt);
         u16 SPI_FLASH_SendHalfWord(u16 HalfWord);
         void SPI_FLASH_WriteEnable(void);
         void SPI_FLASH_WaitForWriteEnd(void);
