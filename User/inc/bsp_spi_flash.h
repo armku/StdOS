@@ -9,11 +9,6 @@
 #define macSPI_APBxClock_FUN                        RCC_APB2PeriphClockCmd
 #define macSPI_CLK                                  RCC_APB2Periph_SPI1
 
-#define macSPI_CS_APBxClock_FUN                     RCC_APB2PeriphClockCmd
-#define macSPI_CS_CLK                               RCC_APB2Periph_GPIOA    
-#define macSPI_CS_PORT                              GPIOA
-#define macSPI_CS_PIN                               GPIO_Pin_4
-
 class W25QXXX
 {
     public:
