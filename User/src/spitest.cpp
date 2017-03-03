@@ -1,24 +1,7 @@
-/**
- ******************************************************************************
- * @file    main.c
- * @author  fire
- * @version V1.0
- * @date    2013-xx-xx
- * @brief   华邦 8M串行flash测试，并将测试信息通过串口1在电脑的超级终端中打印出来
- ******************************************************************************
- * @attention
- *
- * 实验平台:野火 iSO STM32 开发板 
- * 论坛    :http://www.chuxue123.com
- * 淘宝    :http://firestm32.taobao.com
- *
- ******************************************************************************
- */
 #include "stm32f10x.h"
 #include "stdio.h"
 #include "bsp_spi_flash.h"
 #include "spi.h"
-
 
 typedef enum
 {
@@ -56,36 +39,37 @@ int flashtest(void)
 {
     printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
 
-	Spi spi(SPI_2, 9000000, true);
+    Spi spi(SPI_2, 9000000, true);
+    W25QXXX w25q64;
     /* 8M串行flash W25Q64初始化 */
-    SPI_FLASH_Init();
+    w25q64.SPI_FLASH_Init();
 
     /* Get SPI Flash Device ID */
-    DeviceID = SPI_FLASH_ReadDeviceID();
+    DeviceID = w25q64.SPI_FLASH_ReadDeviceID();
 
     Delay(200);
 
     /* Get SPI Flash ID */
-    FlashID = SPI_FLASH_ReadID();
+    FlashID = w25q64.SPI_FLASH_ReadID();
 
     printf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", FlashID, DeviceID);
 
     /* Check the SPI Flash ID */
     if (FlashID == sFLASH_ID)
-     /* #define  sFLASH_ID  0XEF4017 */
+    /* #define  sFLASH_ID  0XEF4017 */
     {
         printf("\r\n 检测到华邦串行flash W25Q64 !\r\n");
 
         /* Erase SPI FLASH Sector to write on */
-        SPI_FLASH_SectorErase(FLASH_SectorToErase);
+        w25q64.SPI_FLASH_SectorErase(FLASH_SectorToErase);
 
         /* 将发送缓冲区的数据写到flash中 */
-        SPI_FLASH_BufferWrite(Tx_Buffer, FLASH_WriteAddress, BufferSize);
-        SPI_FLASH_BufferWrite(Tx_Buffer, 252, BufferSize);
+        w25q64.SPI_FLASH_BufferWrite(Tx_Buffer, FLASH_WriteAddress, BufferSize);
+        w25q64.SPI_FLASH_BufferWrite(Tx_Buffer, 252, BufferSize);
         printf("\r\n 写入的数据为：%s \r\t", Tx_Buffer);
 
         /* 将刚刚写入的数据读出来放到接收缓冲区中 */
-        SPI_FLASH_BufferRead(Rx_Buffer, FLASH_ReadAddress, BufferSize);
+        w25q64.SPI_FLASH_BufferRead(Rx_Buffer, FLASH_ReadAddress, BufferSize);
         printf("\r\n 读出的数据为：%s \r\n", Rx_Buffer);
 
         /* 检查写入的数据与读出的数据是否相等 */
@@ -105,57 +89,51 @@ int flashtest(void)
         printf("\r\n 获取不到 W25Q64 ID!\n\r");
     }
 
-    SPI_Flash_PowerDown();
+    w25q64.SPI_Flash_PowerDown();
     return 0;
 }
+
 #if 0
-#include "AT45DB.h"
+    #include "AT45DB.h"
 
-const byte Tx_Buffer[] = "STM32F10x SPI Firmware Library Example: communication with an AT45DB SPI FLASH";
+    const byte Tx_Buffer[] = "STM32F10x SPI Firmware Library Example: communication with an AT45DB SPI FLASH";
 
-void TestAT45DB()
-{
-    Spi spi(SPI_2, 9000000, true);
-    AT45DB sf(&spi);
-    debug_printf("AT45DB ID=0x%08X PageSize=%d\r\n", sf.ID, sf.PageSize);
-    int size = ArrayLength(Tx_Buffer);
-    debug_printf("DataSize=%d\r\n", size);
-
-    uint addr = 0x00000;
-    if(sf.ErasePage(addr))
-        debug_printf("擦除0x%08x成功\r\n", addr);
-    else
-        debug_printf("擦除0x%08x失败\r\n", addr);
-
-    byte Rx_Buffer[80];
-    for(int i=0; i<9; i++)
+    void TestAT45DB()
     {
-        sf.ErasePage(addr);
-        memset(Rx_Buffer, 0, ArrayLength(Rx_Buffer));
-        if(!sf.Write(addr, Tx_Buffer, size)) debug_printf("写入0x%08X失败！\r\n", addr);
-        if(!sf.ReadPage(addr, Rx_Buffer, size)) debug_printf("读取0x%08X失败！\r\n", addr);
-        memset(Rx_Buffer, 0, ArrayLength(Rx_Buffer));
-        addr += size;
-    }
-    
-    for(int i=0; i<size; i++)
-    {
-        if(Rx_Buffer != Tx_Buffer) debug_printf("Error %d ", i);
-    }
-    debug_printf("\r\nFinish!\r\n");
-}
-#endif
+        Spi spi(SPI_2, 9000000, true);
+        AT45DB sf(&spi);
+        debug_printf("AT45DB ID=0x%08X PageSize=%d\r\n", sf.ID, sf.PageSize);
+        int size = ArrayLength(Tx_Buffer);
+        debug_printf("DataSize=%d\r\n", size);
 
-/*
- * 函数名：Buffercmp
- * 描述  ：比较两个缓冲区中的数据是否相等
- * 输入  ：-pBuffer1     src缓冲区指针
- *         -pBuffer2     dst缓冲区指针
- *         -BufferLength 缓冲区长度
- * 输出  ：无
- * 返回  ：-PASSED pBuffer1 等于   pBuffer2
- *         -FAILED pBuffer1 不同于 pBuffer2
- */
+        uint addr = 0x00000;
+        if (sf.ErasePage(addr))
+            debug_printf("擦除0x%08x成功\r\n", addr);
+        else
+            debug_printf("擦除0x%08x失败\r\n", addr);
+
+        byte Rx_Buffer[80];
+        for (int i = 0; i < 9; i++)
+        {
+            sf.ErasePage(addr);
+            memset(Rx_Buffer, 0, ArrayLength(Rx_Buffer));
+            if (!sf.Write(addr, Tx_Buffer, size))
+                debug_printf("写入0x%08X失败！\r\n", addr);
+            if (!sf.ReadPage(addr, Rx_Buffer, size))
+                debug_printf("读取0x%08X失败！\r\n", addr);
+            memset(Rx_Buffer, 0, ArrayLength(Rx_Buffer));
+            addr += size;
+        }
+
+        for (int i = 0; i < size; i++)
+        {
+            if (Rx_Buffer != Tx_Buffer)
+                debug_printf("Error %d ", i);
+        }
+        debug_printf("\r\nFinish!\r\n");
+    }
+#endif 
+
 TestStatus Buffercmp(uint8_t *pBuffer1, uint8_t *pBuffer2, uint16_t BufferLength)
 {
     while (BufferLength--)
