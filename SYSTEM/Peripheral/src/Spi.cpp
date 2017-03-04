@@ -31,8 +31,11 @@ int GetPre(int index, uint *speedHz)
 Spi::Spi(int spi, int speedHz, bool useNss)
 {
     SPI_TypeDef *g_Spis[] = SPIS;
-    Init();
+    _index = 0xFF;
+    Retry = 200;
+    Opened = false;
     Init(g_Spis[spi], speedHz, useNss);
+	this->Open();
 }
 
 Spi::~Spi()
@@ -40,13 +43,6 @@ Spi::~Spi()
     debug_printf("Spi:Spi%d\r\n", _index + 1);
 
     Close();
-}
-
-void Spi::Init()
-{
-    _index = 0xFF;
-    Retry = 200;
-    Opened = false;
 }
 
 void Spi::Init(SPI_TypeDef *spi, uint speedHz, bool useNss)

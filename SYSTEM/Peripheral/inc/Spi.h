@@ -22,7 +22,10 @@ class Spi
         AlternatePort *pMiso;
         AlternatePort *pMosi;
 
-        void Init();
+		void Init(SPI_TypeDef *spi, uint speedHz = 9000000, bool useNss = true);
+		void Open();//需要清理
+        void Close();//需要清理
+
     public:
         SPI_TypeDef *SPI;
         int Speed; // 速度
@@ -33,12 +36,7 @@ class Spi
         // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
         Spi(int spi, int speedHz = 9000000, bool useNss = true);
         ~Spi();
-
-        void Init(SPI_TypeDef *spi, uint speedHz = 9000000, bool useNss = true);
-
-        void Open();
-        void Close();
-
+        
         byte Write(byte data);
         ushort Write16(ushort data);
 
