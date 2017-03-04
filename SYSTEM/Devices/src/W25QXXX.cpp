@@ -98,20 +98,7 @@ void W25QXXX::BulkErase(void)
     WaitForWriteEnd();
 }
 
-/*******************************************************************************
- * Function Name  : SPI_FLASH_PageWrite
- * Description    : Writes more than one byte to the FLASH with a single WRITE
- *                  cycle(Page WRITE sequence). The number of byte can't exceed
- *                  the FLASH page size.
- * Input          : - pBuffer : pointer to the buffer  containing the data to be
- *                    written to the FLASH.
- *                  - addr : FLASH's internal address to write to.
- *                  - size : number of bytes to write to the FLASH,
- *                    must be equal or less than "SPI_FLASH_PageSize" value.
- * Output         : None
- * Return         : None
- *******************************************************************************/
-void W25QXXX::PageWrite(byte *pBuffer, uint addr, int size)
+void W25QXXX::PageWrite(uint addr,byte *pBuffer,  int size)
 {
     /* Enable the write access to the FLASH */
     WriteEnable();
@@ -150,7 +137,7 @@ void W25QXXX::PageWrite(byte *pBuffer, uint addr, int size)
     /* Wait the end of Flash writing */
     WaitForWriteEnd();
 }
-void W25QXXX::Write(byte *pBuffer, uint addr, int size)
+void W25QXXX::Write(uint addr,byte *pBuffer,  int size)
 {
     byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
@@ -165,19 +152,19 @@ void W25QXXX::Write(byte *pBuffer, uint addr, int size)
         if (NumOfPage == 0)
         /* size < SPI_FLASH_PageSize */
         {
-            PageWrite(pBuffer, addr, size);
+            PageWrite(addr,pBuffer,  size);
         }
         else
         /* size > SPI_FLASH_PageSize */
         {
             while (NumOfPage--)
             {
-                PageWrite(pBuffer, addr, SPI_FLASH_PageSize);
+                PageWrite(addr,pBuffer,  SPI_FLASH_PageSize);
                 addr += SPI_FLASH_PageSize;
                 pBuffer += SPI_FLASH_PageSize;
             }
 
-            PageWrite(pBuffer, addr, NumOfSingle);
+            PageWrite(addr,pBuffer,  NumOfSingle);
         }
     }
     else
@@ -191,15 +178,15 @@ void W25QXXX::Write(byte *pBuffer, uint addr, int size)
             {
                 temp = NumOfSingle - count;
 
-                PageWrite(pBuffer, addr, count);
+                PageWrite(addr,pBuffer,  count);
                 addr += count;
                 pBuffer += count;
 
-                PageWrite(pBuffer, addr, temp);
+                PageWrite(addr,pBuffer,  temp);
             }
             else
             {
-                PageWrite(pBuffer, addr, size);
+                PageWrite(addr,pBuffer,  size);
             }
         }
         else
@@ -209,25 +196,25 @@ void W25QXXX::Write(byte *pBuffer, uint addr, int size)
             NumOfPage = size / SPI_FLASH_PageSize;
             NumOfSingle = size % SPI_FLASH_PageSize;
 
-            PageWrite(pBuffer, addr, count);
+            PageWrite(addr,pBuffer,  count);
             addr += count;
             pBuffer += count;
 
             while (NumOfPage--)
             {
-                PageWrite(pBuffer, addr, SPI_FLASH_PageSize);
+                PageWrite(addr,pBuffer,  SPI_FLASH_PageSize);
                 addr += SPI_FLASH_PageSize;
                 pBuffer += SPI_FLASH_PageSize;
             }
 
             if (NumOfSingle != 0)
             {
-                PageWrite(pBuffer, addr, NumOfSingle);
+                PageWrite(addr,pBuffer,  NumOfSingle);
             }
         }
     }
 }
-void W25QXXX::Read(byte *pBuffer, uint addr, int size)
+void W25QXXX::Read(uint addr,byte *pBuffer,  int size)
 {
     /* Select the FLASH: Chip Select low */
     if(this->pcs)
