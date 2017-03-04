@@ -16,8 +16,8 @@ class CW24xxx
         #if EEPTEST
             void Test(void);
         #endif 
-        byte ReadBytes(byte *_pReadBuf, ushort bufpos, ushort _usAddress, uint _usSize);
-        byte WriteBytes(byte *_pWriteBuf, ushort bufpos, ushort _usAddress, uint _usSize);
+        byte ReadBytes(byte *_pReadBuf, ushort bufpos, uint addr, int size);
+        byte WriteBytes(byte *_pWriteBuf, ushort bufpos, uint addr, int size);
         byte ReadByte(ushort address);
         byte WriteByte(ushort address, byte da);
 		

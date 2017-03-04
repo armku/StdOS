@@ -46,30 +46,30 @@ byte CW24xxx::checkDevice()
  *********************************************************************************************************
  *	函 数 名: ee_ReadBytes
  *	功能说明: 从串行EEPROM指定地址处开始读取若干数据
- *	形    参：_usAddress : 起始地址
- *			 _usSize : 数据长度，单位为字节
+ *	形    参：addr : 起始地址
+ *			 size : 数据长度，单位为字节
  *			 _pReadBuf : 存放读到的数据的缓冲区指针
  *	返 回 值: 1 表示失败，0表示成功
  *********************************************************************************************************
  */
-byte CW24xxx::ReadBytes(byte *_pReadBuf, ushort bufpos, ushort _usAddress, uint _usSize)
+byte CW24xxx::ReadBytes(byte *_pReadBuf, ushort bufpos, uint addr, int size)
 {
-    return this->bufwr(_pReadBuf, bufpos, _usAddress, _usSize, 0);
+    return this->bufwr(_pReadBuf, bufpos, addr, size, 0);
 }
 
 /*
  *********************************************************************************************************
  *	函 数 名: ee_WriteBytes
  *	功能说明: 向串行EEPROM指定地址写入若干数据，采用页写操作提高写入效率
- *	形    参：_usAddress : 起始地址
- *			 _usSize : 数据长度，单位为字节
+ *	形    参：addr : 起始地址
+ *			 size : 数据长度，单位为字节
  *			 _pWriteBuf : 存放读到的数据的缓冲区指针
  *	返 回 值: 0 表示失败，1表示成功
  *********************************************************************************************************
  */
-byte CW24xxx::WriteBytes(byte *_pWriteBuf, ushort bufpos, ushort _usAddress, uint _usSize)
+byte CW24xxx::WriteBytes(byte *_pWriteBuf, ushort bufpos, uint addr, int size)
 {
-    return this->bufwr(_pWriteBuf, bufpos, _usAddress, _usSize, 1);
+    return this->bufwr(_pWriteBuf, bufpos, addr, size, 1);
 }
 
 byte CW24xxx::ReadByte(ushort address)
