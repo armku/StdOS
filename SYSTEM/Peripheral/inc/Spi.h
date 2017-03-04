@@ -15,7 +15,6 @@ class Spi
 {
     private:
         byte _index;
-        Pin Pins[4]; // NSS/CLK/MISO/MOSI ÐèÒªÏû³ý
         OutputPort *pNss;
 
         AlternatePort *pClk;
