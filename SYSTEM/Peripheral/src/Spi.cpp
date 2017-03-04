@@ -3,6 +3,7 @@
 #include "Spi.h"
 #include "string.h"
 
+// NSS/CLK/MISO/MOSI
 #define SPIS {SPI1,SPI2,SPI3}
 #define SPI_PINS_FULLREMAP {PA4,PA5,PA6,PA7,PB12,PB13,PB14,PB15,PA15,PB3,PB4,PB5}   //需要整理
 int GetPre(int index, uint *speedHz)
@@ -27,23 +28,11 @@ int GetPre(int index, uint *speedHz)
     return pre;
 }
 
-Spi::Spi()
-{
-    Init();
-}
-
 Spi::Spi(int spi, int speedHz, bool useNss)
 {
     SPI_TypeDef *g_Spis[] = SPIS;
     Init();
     Init(g_Spis[spi], speedHz, useNss);
-}
-
-Spi::Spi(SPI_TypeDef *spi, uint speedHz, bool useNss)
-{
-    Init();
-
-    Init(spi, speedHz, useNss);
 }
 
 Spi::~Spi()
