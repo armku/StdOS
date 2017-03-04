@@ -12,9 +12,6 @@
 #include "Modbus.h"
 #include "Spi.h"
 
-uint __heap_base =0x000;
-uint __heap_limit=0x400;
-
 typedef enum
 {
     KEY_UP = 1,  // 模拟输入 
@@ -83,7 +80,7 @@ int main(void)
     PWM pwm1(PC9);
     pwm1.Init();
     pwm1.SetOutPercent(50);
-	
+		
 	// 初始化为输出
 	OutputPort led(PF8);
 	WatchDog dog(3000);
