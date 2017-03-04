@@ -34,10 +34,11 @@ Spi::Spi()
 
 Spi::Spi(int spi, int speedHz, bool useNss)
 {
-	SPI_TypeDef *g_Spis[] = SPIS;
-	Init();
-	Init(g_Spis[spi],speedHz,useNss);
+    SPI_TypeDef *g_Spis[] = SPIS;
+    Init();
+    Init(g_Spis[spi], speedHz, useNss);
 }
+
 Spi::Spi(SPI_TypeDef *spi, uint speedHz, bool useNss)
 {
     Init();
@@ -82,7 +83,7 @@ void Spi::Init(SPI_TypeDef *spi, uint speedHz, bool useNss)
     memcpy(Pins, ps, sizeof(Pins));
 
     if (!useNss)
-        Pins[0] = P0;
+        Pins[_index *4] = P0;
 
     #if DEBUG
         int k = speedHz / 1000;
@@ -150,17 +151,18 @@ void Spi::Open()
     Pin *ps = Pins;
     // 端口配置，销毁Spi对象时才释放
     debug_printf("    CLK : ");
-    _clk.Set(ps[1]);
+    this->pClk = new AlternatePort(ps[1+_index * 4]);
     debug_printf("    MISO: ");
-    _miso.Set(ps[2]);
+    this->pMiso = new AlternatePort(ps[2+_index * 4]);
     debug_printf("    MOSI: ");
-    _mosi.Set(ps[3]);
+    this->pMosi = new AlternatePort(ps[3+_index * 4]);
+    this->pNss = new OutputPort(ps[0+_index * 4]);
 
     if (ps[0] != P0)
     {
         debug_printf("    NSS : ");
-        _nss.OpenDrain = false;
-        _nss.Set(ps[0]);
+        this->pNss->OpenDrain = false;
+        this->pNss->Set(ps[0]);
     }
 
     // 使能SPI时钟
@@ -240,13 +242,13 @@ void Spi::Close()
     SPI_I2S_DeInit(SPI);
 
     debug_printf("    CLK : ");
-    _clk.Set(P0);
+    this->pClk->Set(P0);
     debug_printf("    MISO: ");
-    _miso.Set(P0);
+    this->pMiso->Set(P0);
     debug_printf("    MOSI: ");
-    _mosi.Set(P0);
+    this->pMosi->Set(P0);
     debug_printf("    NSS : ");
-    _nss.Set(P0);
+    this->pNss->Set(P0);
 
     Opened = false;
 }
@@ -323,8 +325,8 @@ ushort Spi::Write16(ushort data)
 // 拉低NSS，开始传输
 void Spi::Start()
 {
-    if (!_nss.Empty())
-        _nss = false;
+    if (!this->pNss->Empty())
+        *this->pNss = false;
 
     // 开始新一轮事务操作，错误次数清零
     Error = 0;
@@ -333,6 +335,6 @@ void Spi::Start()
 // 拉高NSS，停止传输
 void Spi::Stop()
 {
-    if (!_nss.Empty())
-        _nss = true;
+    if (!this->pNss->Empty())
+        *this->pNss = true;
 }
