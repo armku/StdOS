@@ -10,7 +10,7 @@ class W25QXXX
         void Init(void);
         void SectorErase(uint SectorAddr);
         void BulkErase(void);
-        void PageWrite(uint addr,byte *pBuffer,  int size);
+        void WritePage(uint addr,byte *pBuffer,  int size);
         void Write(uint addr,byte *pBuffer,  int size);
         void Read(uint addr,byte *pBuffer,  int size);
         uint ReadID(void);

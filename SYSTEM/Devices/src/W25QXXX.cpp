@@ -98,7 +98,7 @@ void W25QXXX::BulkErase(void)
     WaitForWriteEnd();
 }
 
-void W25QXXX::PageWrite(uint addr,byte *pBuffer,  int size)
+void W25QXXX::WritePage(uint addr,byte *pBuffer,  int size)
 {
     /* Enable the write access to the FLASH */
     WriteEnable();
@@ -152,19 +152,19 @@ void W25QXXX::Write(uint addr,byte *pBuffer,  int size)
         if (NumOfPage == 0)
         /* size < SPI_FLASH_PageSize */
         {
-            PageWrite(addr,pBuffer,  size);
+            WritePage(addr,pBuffer,  size);
         }
         else
         /* size > SPI_FLASH_PageSize */
         {
             while (NumOfPage--)
             {
-                PageWrite(addr,pBuffer,  SPI_FLASH_PageSize);
+                WritePage(addr,pBuffer,  SPI_FLASH_PageSize);
                 addr += SPI_FLASH_PageSize;
                 pBuffer += SPI_FLASH_PageSize;
             }
 
-            PageWrite(addr,pBuffer,  NumOfSingle);
+            WritePage(addr,pBuffer,  NumOfSingle);
         }
     }
     else
@@ -178,15 +178,15 @@ void W25QXXX::Write(uint addr,byte *pBuffer,  int size)
             {
                 temp = NumOfSingle - count;
 
-                PageWrite(addr,pBuffer,  count);
+                WritePage(addr,pBuffer,  count);
                 addr += count;
                 pBuffer += count;
 
-                PageWrite(addr,pBuffer,  temp);
+                WritePage(addr,pBuffer,  temp);
             }
             else
             {
-                PageWrite(addr,pBuffer,  size);
+                WritePage(addr,pBuffer,  size);
             }
         }
         else
@@ -196,20 +196,20 @@ void W25QXXX::Write(uint addr,byte *pBuffer,  int size)
             NumOfPage = size / SPI_FLASH_PageSize;
             NumOfSingle = size % SPI_FLASH_PageSize;
 
-            PageWrite(addr,pBuffer,  count);
+            WritePage(addr,pBuffer,  count);
             addr += count;
             pBuffer += count;
 
             while (NumOfPage--)
             {
-                PageWrite(addr,pBuffer,  SPI_FLASH_PageSize);
+                WritePage(addr,pBuffer,  SPI_FLASH_PageSize);
                 addr += SPI_FLASH_PageSize;
                 pBuffer += SPI_FLASH_PageSize;
             }
 
             if (NumOfSingle != 0)
             {
-                PageWrite(addr,pBuffer,  NumOfSingle);
+                WritePage(addr,pBuffer,  NumOfSingle);
             }
         }
     }
