@@ -10,9 +10,9 @@ class W25QXXX
         void Init(void);
         void SectorErase(uint SectorAddr);
         void BulkErase(void);
-        void PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
-        void BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
-        void BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead);
+        void PageWrite(byte *pBuffer, uint WriteAddr, int NumByteToWrite);
+        void Write(byte *pBuffer, uint WriteAddr, int NumByteToWrite);
+        void Read(byte *pBuffer, uint ReadAddr, int NumByteToRead);
         uint ReadID(void);
         uint ReadDeviceID(void);
         void StartReadSequence(uint ReadAddr);

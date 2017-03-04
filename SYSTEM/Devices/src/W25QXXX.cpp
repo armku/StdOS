@@ -111,7 +111,7 @@ void W25QXXX::BulkErase(void)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
+void W25QXXX::PageWrite(byte *pBuffer, uint WriteAddr, int NumByteToWrite)
 {
     /* Enable the write access to the FLASH */
     WriteEnable();
@@ -150,19 +150,7 @@ void W25QXXX::PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
     /* Wait the end of Flash writing */
     WaitForWriteEnd();
 }
-
-/*******************************************************************************
- * Function Name  : SPI_FLASH_BufferWrite
- * Description    : Writes block of data to the FLASH. In this function, the
- *                  number of WRITE cycles are reduced, using Page WRITE sequence.
- * Input          : - pBuffer : pointer to the buffer  containing the data to be
- *                    written to the FLASH.
- *                  - WriteAddr : FLASH's internal address to write to.
- *                  - NumByteToWrite : number of bytes to write to the FLASH.
- * Output         : None
- * Return         : None
- *******************************************************************************/
-void W25QXXX::BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
+void W25QXXX::Write(byte *pBuffer, uint WriteAddr, int NumByteToWrite)
 {
     byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
@@ -239,58 +227,7 @@ void W25QXXX::BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
         }
     }
 }
-
-#if 0
-    void SPI_FLASH_BufferWrite(u8 *pBuffer, u32 WriteAddr, u16 NumByteToWrite)
-    {
-        u8 NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, i;
-        u32 CurrentAddr;
-
-
-        CurrentAddr = WriteAddr;
-
-        Addr = WriteAddr % SPI_FLASH_PageSize;
-        count = SPI_FLASH_PageSize - Addr;
-
-        NumOfPage = (NumByteToWrite - count) / SPI_FLASH_PageSize;
-        NumOfSingle = (NumByteToWrite - count) % SPI_FLASH_PageSize;
-
-
-        if (count)
-        {
-            SPI_FLASH_PageWrite(pBuffer, CurrentAddr, count);
-
-            CurrentAddr += count;
-            pBuffer += count;
-
-        }
-
-        for (i = 0; i < NumOfPage; i++)
-        {
-            SPI_FLASH_PageWrite(pBuffer, CurrentAddr, SPI_FLASH_PageSize);
-
-            CurrentAddr += SPI_FLASH_PageSize;
-            pBuffer += SPI_FLASH_PageSize;
-
-        }
-
-        if (NumOfSingle)
-            SPI_FLASH_PageWrite(pBuffer, CurrentAddr, NumOfSingle);
-
-    }
-#endif 
-
-/*******************************************************************************
- * Function Name  : SPI_FLASH_BufferRead
- * Description    : Reads a block of data from the FLASH.
- * Input          : - pBuffer : pointer to the buffer that receives the data read
- *                    from the FLASH.
- *                  - ReadAddr : FLASH's internal address to read from.
- *                  - NumByteToRead : number of bytes to read from the FLASH.
- * Output         : None
- * Return         : None
- *******************************************************************************/
-void W25QXXX::BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
+void W25QXXX::Read(byte *pBuffer, uint ReadAddr, int NumByteToRead)
 {
     /* Select the FLASH: Chip Select low */
     if(this->pcs)
