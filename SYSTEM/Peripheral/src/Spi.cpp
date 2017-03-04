@@ -49,7 +49,7 @@ void Spi::Init(SPI_TypeDef *spi, uint speedHz, bool useNss)
     assert_param(spi);
 
     SPI_TypeDef *g_Spis[] = SPIS;
-    _index = 0xFF;
+    this->_index = 0xFF;
     for (int i = 0; i < ArrayLength(g_Spis); i++)
     {
         if (g_Spis[i] == spi)
@@ -60,15 +60,9 @@ void Spi::Init(SPI_TypeDef *spi, uint speedHz, bool useNss)
     }
     assert_param(_index < ArrayLength(g_Spis));
 
-    SPI = g_Spis[_index];
+    this->SPI = g_Spis[_index];
 
-    Pin g_Spi_Pins_Map[][4] = SPI_PINS_FULLREMAP;
-    Pin *ps = g_Spi_Pins_Map[_index]; //选定spi引脚
-    memcpy(Pins, ps, sizeof(Pins));
-
-    if (!useNss)
-        Pins[_index *4] = P0;
-
+       
     #if DEBUG
         int k = speedHz / 1000;
         int m = k / 1000;
@@ -105,17 +99,17 @@ void Spi::Open(bool useNss)
     if (pre ==  - 1)
         return ;
     
-	const Pin g_SPI_Pins[] = SPI_PINS_FULLREMAP;
+	const Pin g_Spi_Pins_Map[][4] = SPI_PINS_FULLREMAP;
     // 端口配置，销毁Spi对象时才释放
     debug_printf("    CLK : ");
-    this->pClk = new AlternatePort(g_SPI_Pins[1+_index * 4]);
+    this->pClk = new AlternatePort(g_Spi_Pins_Map[_index][1]);
     debug_printf("    MISO: ");
-    this->pMiso = new AlternatePort(g_SPI_Pins[2+_index * 4]);
+    this->pMiso = new AlternatePort(g_Spi_Pins_Map[_index][2]);
     debug_printf("    MOSI: ");
-    this->pMosi = new AlternatePort(g_SPI_Pins[3+_index * 4]);
+    this->pMosi = new AlternatePort(g_Spi_Pins_Map[_index][3]);
 	if(useNss)
 	{
-    this->pNss = new OutputPort(g_SPI_Pins[0+_index * 4]);
+    this->pNss = new OutputPort(g_Spi_Pins_Map[_index][0]);
 	}
 	else
 	{
