@@ -34,7 +34,7 @@ Spi::Spi(int spi, int speedHz, bool useNss)
     _index = 0xFF;
     Retry = 200;
     Init(g_Spis[spi], speedHz, useNss);
-	this->Open();
+	this->Open(useNss);
 }
 
 Spi::~Spi()
@@ -87,7 +87,7 @@ void Spi::Init(SPI_TypeDef *spi, uint speedHz, bool useNss)
     Speed = speedHz;
 }
 
-void Spi::Open()
+void Spi::Open(bool useNss)
 {    
     #if DEBUG
         int k = Speed / 1000;

@@ -23,7 +23,7 @@ class Spi
         AlternatePort *pMosi;
 
 		void Init(SPI_TypeDef *spi, uint speedHz = 9000000, bool useNss = true);
-		void Open();//需要清理
+		void Open(bool useNss);//需要清理
         void Close();//需要清理
 
     public:
