@@ -12,7 +12,7 @@ class W25QXXX
         void BulkErase(void);
         void PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
         void Write(uint addr,byte *pBuffer,  int size);
-        void BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead);
+        void Read(uint addr,byte *pBuffer,  int size);
         uint ReadID(void);
         uint ReadDeviceID(void);
         void StartReadSequence(uint ReadAddr);

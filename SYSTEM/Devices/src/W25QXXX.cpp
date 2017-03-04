@@ -239,7 +239,7 @@ void W25QXXX::Write(uint addr,byte *pBuffer,  int size)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25QXXX::BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
+void W25QXXX::Read(uint addr,byte *pBuffer,  int size)
 {
     /* Select the FLASH: Chip Select low */
     if(this->pcs)
@@ -249,13 +249,13 @@ void W25QXXX::BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
     this->pSpi->Write(W25X_ReadData);
 
     /* Send ReadAddr high nibble address byte to read from */
-    this->pSpi->Write((ReadAddr &0xFF0000) >> 16);
+    this->pSpi->Write((addr &0xFF0000) >> 16);
     /* Send ReadAddr medium nibble address byte to read from */
-    this->pSpi->Write((ReadAddr &0xFF00) >> 8);
+    this->pSpi->Write((addr &0xFF00) >> 8);
     /* Send ReadAddr low nibble address byte to read from */
-    this->pSpi->Write(ReadAddr &0xFF);
+    this->pSpi->Write(addr &0xFF);
 
-    while (NumByteToRead--)
+    while (size--)
     /* while there is data to be read */
     {
         /* Read a byte from the FLASH */

@@ -65,7 +65,7 @@ int flashtest(void)
         printf("写入的数据为：%s \r\n", Tx_Buffer);
 
         /* 将刚刚写入的数据读出来放到接收缓冲区中 */
-        w25q64.BufferRead(Rx_Buffer, FLASH_ReadAddress, BufferSize);
+        w25q64.Read(FLASH_ReadAddress,Rx_Buffer,  BufferSize);
         printf("读出的数据为：%s \r\n", Rx_Buffer);
 
         /* 检查写入的数据与读出的数据是否相等 */
