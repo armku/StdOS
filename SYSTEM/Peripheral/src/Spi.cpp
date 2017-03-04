@@ -38,7 +38,6 @@ Spi::Spi(int spiIndex, uint speedHz, bool useNss)
        
     this->SPI = g_Spis[_index];
 
-
     #if DEBUG
         int k = speedHz / 1000;
         int m = k / 1000;
