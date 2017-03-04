@@ -33,9 +33,9 @@ Spi::Spi(int spiIndex, uint speedHz, bool useNss)
     SPI_TypeDef *g_Spis[] = SPIS;
     _index = spiIndex;
     Retry = 200;
-	
-	assert_param(spi);
-       
+
+    assert_param(spi);
+
     this->SPI = g_Spis[_index];
 
     #if DEBUG
@@ -54,7 +54,7 @@ Spi::Spi(int spiIndex, uint speedHz, bool useNss)
         return ;
 
     Speed = speedHz;
-	    
+
     const Pin g_Spi_Pins_Map[][4] = SPI_PINS_FULLREMAP;
     // 端口配置，销毁Spi对象时才释放
     debug_printf("    CLK : ");
@@ -125,7 +125,14 @@ Spi::Spi(int spiIndex, uint speedHz, bool useNss)
     sp.SPI_DataSize = SPI_DataSize_8b; // 数据大小8位 SPI发送接收8位帧结构
     sp.SPI_CPOL = SPI_CPOL_Low; // 时钟极性，空闲时为低
     sp.SPI_CPHA = SPI_CPHA_1Edge; // 第1个边沿有效，上升沿为采样时刻
-    sp.SPI_NSS = SPI_NSS_Soft; // NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制
+    if (useNss)
+    {
+        sp.SPI_NSS = SPI_NSS_Soft; // NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制
+    }
+    else
+    {
+        sp.SPI_NSS = SPI_NSS_Hard;
+    }
     sp.SPI_BaudRatePrescaler = pre; // 8分频，9MHz 定义波特率预分频的值
     sp.SPI_FirstBit = SPI_FirstBit_MSB; // 高位在前。指定数据传输从MSB位还是LSB位开始:数据传输从MSB位开始
     sp.SPI_CRCPolynomial = 7; // CRC值计算的多项式
