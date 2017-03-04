@@ -13,7 +13,7 @@
 #include "Spi.h"
 
 uint __heap_base =0x000;
-uint __heap_limit=0x123;
+uint __heap_limit=0x400;
 
 typedef enum
 {
