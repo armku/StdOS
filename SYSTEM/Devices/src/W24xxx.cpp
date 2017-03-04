@@ -52,9 +52,9 @@ byte CW24xxx::checkDevice()
  *	返 回 值: 1 表示失败，0表示成功
  *********************************************************************************************************
  */
-byte CW24xxx::ReadBytes(byte *pBuffer, ushort bufpos, uint addr, int size)
+int CW24xxx::Read(uint addr, byte *pBuffer, int size, ushort bufpos)
 {
-    return this->bufwr(pBuffer, bufpos, addr, size, 0);
+    return this->bufwr(addr, pBuffer, size, bufpos, 0);
 }
 
 /*
@@ -67,12 +67,12 @@ byte CW24xxx::ReadBytes(byte *pBuffer, ushort bufpos, uint addr, int size)
  *	返 回 值: 0 表示失败，1表示成功
  *********************************************************************************************************
  */
-byte CW24xxx::WriteBytes(byte *pBuffer, ushort bufpos, uint addr, int size)
+int CW24xxx::Write(uint addr, byte *pBuffer, int size, ushort bufpos)
 {
-    return this->bufwr(pBuffer, bufpos, addr, size, 1);
+    return this->bufwr(addr, pBuffer, size, bufpos, 1);
 }
 
-byte CW24xxx::ReadByte(ushort address)
+byte CW24xxx::ReadByte(uint address)
 {
     byte ret = 0;
 
@@ -139,7 +139,7 @@ byte CW24xxx::ReadByte(ushort address)
     return ret;
 }
 
-byte CW24xxx::WriteByte(ushort address, byte da)
+int CW24xxx::WriteByte(uint address, byte da)
 {
     uint m;
 
@@ -209,7 +209,7 @@ byte CW24xxx::WriteByte(ushort address, byte da)
     return 0;
 }
 
-byte CW24xxx::bufwr(byte *buf, ushort bufpos, ushort addr, uint size, byte wr) //读写集中操作1写 0读
+int CW24xxx::bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr) //读写集中操作1写 0读
 {
     uint curAddr;
     uint pageStart; //页内起始地址
@@ -220,10 +220,10 @@ byte CW24xxx::bufwr(byte *buf, ushort bufpos, ushort addr, uint size, byte wr) /
     bytesLeave = size;
     curAddr = addr;
     bufaddr = bufpos;
-	if(this->pinWP)
-	{
-		*this->pinWP=0;
-	}
+    if (this->pinWP)
+    {
+        *this->pinWP = 0;
+    }
     if (pageStart)
     {
         //读取不是页起始地址的内容
@@ -306,14 +306,14 @@ byte CW24xxx::bufwr(byte *buf, ushort bufpos, ushort addr, uint size, byte wr) /
             }
         }
     }
-	if(this->pinWP)
-	{
-		*this->pinWP=1;
-	}
+    if (this->pinWP)
+    {
+        *this->pinWP = 1;
+    }
     return 0;
 }
 
-byte CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //页内写
+int CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //页内写
 {
     uint i, m;
     ushort usAddr;
@@ -389,7 +389,7 @@ byte CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //页内
     return 1;
 }
 
-byte CW24xxx::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //页内读
+int CW24xxx::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //页内读
 {
     uint i;
 
@@ -534,7 +534,7 @@ ushort CW24xxx::jsPageSize(uint type) //计算存储页大小
         }
         printf("\r\n");
         /*------------------------------------------------------------------------------------*/
-        if (this->WriteBytes(write_buf, 0, testaddress, testsize))
+        if (this->Write(testaddress, write_buf, testsize, 0))
         {
             printf("写eeprom出错！\r\n");
             return ;
@@ -546,7 +546,7 @@ ushort CW24xxx::jsPageSize(uint type) //计算存储页大小
         /*写完之后需要适当的延时再去读，不然会出错*/
 
         /*-----------------------------------------------------------------------------------*/
-        if (this->ReadBytes(read_buf, 0, testaddress, testsize))
+        if (this->Read(testaddress, read_buf, testsize, 0))
         {
             printf("读eeprom出错！\r\n");
             return ;

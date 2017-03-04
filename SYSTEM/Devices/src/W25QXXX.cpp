@@ -27,19 +27,19 @@
 
 #define Dummy_Byte                0xFF
 
-W25QXXX::W25QXXX(Spi * spi,Pin pincs)
+W25QXXX::W25QXXX(Spi *spi, Pin pincs)
 {
-	this->pSpi=spi;
-	if(pincs!=P0)
-	{	
-	this->pcs=new OutputPort(pincs,false); 
-	}
+    this->pSpi = spi;
+    if (pincs != P0)
+    {
+        this->pcs = new OutputPort(pincs, false);
+    }
 }
 
 void W25QXXX::Init(void)
-{        
-	if(this->pcs)
-	*this->pcs=1;
+{
+    if (this->pcs)
+        *this->pcs = 1;
 }
 
 /*******************************************************************************
@@ -56,8 +56,8 @@ void W25QXXX::SectorErase(uint SectorAddr)
     WaitForWriteEnd();
     /* Sector Erase */
     /* Select the FLASH: Chip Select low */
-    if(this->pcs)
-		*this->pcs=0;
+    if (this->pcs)
+        *this->pcs = 0;
     /* Send Sector Erase instruction */
     this->pSpi->Write(W25X_SectorErase);
     /* Send SectorAddr high nibble address byte */
@@ -67,7 +67,7 @@ void W25QXXX::SectorErase(uint SectorAddr)
     /* Send SectorAddr low nibble address byte */
     this->pSpi->Write(SectorAddr &0xFF);
     /* Deselect the FLASH: Chip Select high */
-    *this->pcs=1;
+    *this->pcs = 1;
     /* Wait the end of Flash writing */
     WaitForWriteEnd();
 }
@@ -86,26 +86,26 @@ void W25QXXX::BulkErase(void)
 
     /* Bulk Erase */
     /* Select the FLASH: Chip Select low */
-    if(this->pcs)
-		*this->pcs=0;
+    if (this->pcs)
+        *this->pcs = 0;
     /* Send Bulk Erase instruction  */
     this->pSpi->Write(W25X_ChipErase);
     /* Deselect the FLASH: Chip Select high */
-    if(this->pcs)
-		*this->pcs=1;
+    if (this->pcs)
+        *this->pcs = 1;
 
     /* Wait the end of Flash writing */
     WaitForWriteEnd();
 }
 
-void W25QXXX::WritePage(uint addr,byte *pBuffer,  int size)
+void W25QXXX::WritePage(uint addr, byte *pBuffer, int size)
 {
     /* Enable the write access to the FLASH */
     WriteEnable();
 
     /* Select the FLASH: Chip Select low */
-    if(this->pcs)
-		*this->pcs=0;
+    if (this->pcs)
+        *this->pcs = 0;
     /* Send "Write to Memory " instruction */
     this->pSpi->Write(W25X_PageProgram);
     /* Send addr high nibble address byte to write to */
@@ -131,13 +131,14 @@ void W25QXXX::WritePage(uint addr,byte *pBuffer,  int size)
     }
 
     /* Deselect the FLASH: Chip Select high */
-    if(this->pcs)
-		*this->pcs=1;
+    if (this->pcs)
+        *this->pcs = 1;
 
     /* Wait the end of Flash writing */
     WaitForWriteEnd();
 }
-void W25QXXX::Write(uint addr,byte *pBuffer,  int size)
+
+void W25QXXX::Write(uint addr, byte *pBuffer, int size)
 {
     byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
@@ -152,19 +153,19 @@ void W25QXXX::Write(uint addr,byte *pBuffer,  int size)
         if (NumOfPage == 0)
         /* size < SPI_FLASH_PageSize */
         {
-            WritePage(addr,pBuffer,  size);
+            WritePage(addr, pBuffer, size);
         }
         else
         /* size > SPI_FLASH_PageSize */
         {
             while (NumOfPage--)
             {
-                WritePage(addr,pBuffer,  SPI_FLASH_PageSize);
+                WritePage(addr, pBuffer, SPI_FLASH_PageSize);
                 addr += SPI_FLASH_PageSize;
                 pBuffer += SPI_FLASH_PageSize;
             }
 
-            WritePage(addr,pBuffer,  NumOfSingle);
+            WritePage(addr, pBuffer, NumOfSingle);
         }
     }
     else
@@ -178,15 +179,15 @@ void W25QXXX::Write(uint addr,byte *pBuffer,  int size)
             {
                 temp = NumOfSingle - count;
 
-                WritePage(addr,pBuffer,  count);
+                WritePage(addr, pBuffer, count);
                 addr += count;
                 pBuffer += count;
 
-                WritePage(addr,pBuffer,  temp);
+                WritePage(addr, pBuffer, temp);
             }
             else
             {
-                WritePage(addr,pBuffer,  size);
+                WritePage(addr, pBuffer, size);
             }
         }
         else
@@ -196,29 +197,30 @@ void W25QXXX::Write(uint addr,byte *pBuffer,  int size)
             NumOfPage = size / SPI_FLASH_PageSize;
             NumOfSingle = size % SPI_FLASH_PageSize;
 
-            WritePage(addr,pBuffer,  count);
+            WritePage(addr, pBuffer, count);
             addr += count;
             pBuffer += count;
 
             while (NumOfPage--)
             {
-                WritePage(addr,pBuffer,  SPI_FLASH_PageSize);
+                WritePage(addr, pBuffer, SPI_FLASH_PageSize);
                 addr += SPI_FLASH_PageSize;
                 pBuffer += SPI_FLASH_PageSize;
             }
 
             if (NumOfSingle != 0)
             {
-                WritePage(addr,pBuffer,  NumOfSingle);
+                WritePage(addr, pBuffer, NumOfSingle);
             }
         }
     }
 }
-void W25QXXX::Read(uint addr,byte *pBuffer,  int size)
+
+void W25QXXX::Read(uint addr, byte *pBuffer, int size)
 {
     /* Select the FLASH: Chip Select low */
-    if(this->pcs)
-		*this->pcs=0;
+    if (this->pcs)
+        *this->pcs = 0;
 
     /* Send "Read from Memory " instruction */
     this->pSpi->Write(W25X_ReadData);
@@ -240,8 +242,8 @@ void W25QXXX::Read(uint addr,byte *pBuffer,  int size)
     }
 
     /* Deselect the FLASH: Chip Select high */
-    if(this->pcs)
-		*this->pcs=1;
+    if (this->pcs)
+        *this->pcs = 1;
 }
 
 /*******************************************************************************
@@ -256,8 +258,8 @@ uint W25QXXX::ReadID(void)
     uint Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
 
     /* Select the FLASH: Chip Select low */
-    if(this->pcs)
-		*this->pcs=0;
+    if (this->pcs)
+        *this->pcs = 0;
 
     /* Send "RDID " instruction */
     this->pSpi->Write(W25X_JedecDeviceID);
@@ -272,8 +274,8 @@ uint W25QXXX::ReadID(void)
     Temp2 = this->pSpi->Write(Dummy_Byte);
 
     /* Deselect the FLASH: Chip Select high */
-    if(this->pcs)
-		*this->pcs=1;
+    if (this->pcs)
+        *this->pcs = 1;
 
     Temp = (Temp0 << 16) | (Temp1 << 8) | Temp2;
 
@@ -292,20 +294,20 @@ uint W25QXXX::ReadDeviceID(void)
     uint Temp = 0;
 
     /* Select the FLASH: Chip Select low */
-    if(this->pcs)
-		*this->pcs=0;
+    if (this->pcs)
+        *this->pcs = 0;
 
-    /* Send "RDID " instruction */	
-	this->pSpi->Write(W25X_DeviceID);
-	this->pSpi->Write(Dummy_Byte);
-	this->pSpi->Write(Dummy_Byte);
-	this->pSpi->Write(Dummy_Byte);
-	
-	Temp = this->pSpi->Write(Dummy_Byte);	
-	
+    /* Send "RDID " instruction */
+    this->pSpi->Write(W25X_DeviceID);
+    this->pSpi->Write(Dummy_Byte);
+    this->pSpi->Write(Dummy_Byte);
+    this->pSpi->Write(Dummy_Byte);
+
+    Temp = this->pSpi->Write(Dummy_Byte);
+
     /* Deselect the FLASH: Chip Select high */
-    if(this->pcs)
-		*this->pcs=1;
+    if (this->pcs)
+        *this->pcs = 1;
 
     return Temp;
 }
@@ -325,8 +327,8 @@ uint W25QXXX::ReadDeviceID(void)
 void W25QXXX::StartReadSequence(uint addr)
 {
     /* Select the FLASH: Chip Select low */
-    if(this->pcs)
-		*this->pcs=0;
+    if (this->pcs)
+        *this->pcs = 0;
 
     /* Send "Read from Memory " instruction */
     this->pSpi->Write(W25X_ReadData);
@@ -350,15 +352,15 @@ void W25QXXX::StartReadSequence(uint addr)
 void W25QXXX::WriteEnable(void)
 {
     /* Select the FLASH: Chip Select low */
-    if(this->pcs)
-		*this->pcs=0;
+    if (this->pcs)
+        *this->pcs = 0;
 
     /* Send "Write Enable" instruction */
     this->pSpi->Write(W25X_WriteEnable);
 
     /* Deselect the FLASH: Chip Select high */
-    if(this->pcs)
-		*this->pcs=1;
+    if (this->pcs)
+        *this->pcs = 1;
 }
 
 /*******************************************************************************
@@ -375,8 +377,8 @@ void W25QXXX::WaitForWriteEnd(void)
     u8 FLASH_Status = 0;
 
     /* Select the FLASH: Chip Select low */
-    if(this->pcs)
-		*this->pcs=0;
+    if (this->pcs)
+        *this->pcs = 0;
 
     /* Send "Read Status Register" instruction */
     this->pSpi->Write(W25X_ReadStatusReg);
@@ -391,8 +393,8 @@ void W25QXXX::WaitForWriteEnd(void)
     while ((FLASH_Status &WIP_Flag) == SET); /* Write in progress */
 
     /* Deselect the FLASH: Chip Select high */
-    if(this->pcs)
-		*this->pcs=1;
+    if (this->pcs)
+        *this->pcs = 1;
 }
 
 
@@ -400,28 +402,29 @@ void W25QXXX::WaitForWriteEnd(void)
 void W25QXXX::PowerDown(void)
 {
     /* Select the FLASH: Chip Select low */
-    if(this->pcs)
-		*this->pcs=0;
+    if (this->pcs)
+        *this->pcs = 0;
 
     /* Send "Power Down" instruction */
     this->pSpi->Write(W25X_PowerDown);
 
     /* Deselect the FLASH: Chip Select high */
-    if(this->pcs)
-		*this->pcs=1;
+    if (this->pcs)
+        *this->pcs = 1;
 }
 
 //»½ÐÑ
 void W25QXXX::WAKEUP(void)
 {
     /* Select the FLASH: Chip Select low */
-    if(this->pcs)
-		*this->pcs=0;
+    if (this->pcs)
+        *this->pcs = 0;
 
     /* Send "Power Down" instruction */
     this->pSpi->Write(W25X_ReleasePowerDown);
 
     /* Deselect the FLASH: Chip Select high */
-    if(this->pcs)
-		*this->pcs=1; //µÈ´ýTRES1
+    if (this->pcs)
+        *this->pcs = 1;
+    //µÈ´ýTRES1
 }
