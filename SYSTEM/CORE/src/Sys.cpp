@@ -17,8 +17,9 @@ extern "C"
 {
     extern uint __heap_base;
     extern uint __heap_limit;
-	extern uint __initial_sp;
+    extern uint __initial_sp;
 }
+
 //外部注册函数
 // 任务
 #include "Task.h"
@@ -47,9 +48,9 @@ void TSys::RemoveTask(uint taskid)
     _Scheduler->Remove(taskid);
 }
 
-void TSys::SetTask(uint taskid,bool onoff,long delaytime)
+void TSys::SetTask(uint taskid, bool onoff, long delaytime)
 {
-    _Scheduler->SetTask(taskid,onoff,delaytime);
+    _Scheduler->SetTask(taskid, onoff, delaytime);
 }
 
 //启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
@@ -204,18 +205,18 @@ void TSys::Reboot(uint msDelay){}
 //显示系统信息
 void TSys::ShowInfo()
 {
-	uint HeapSize=0;
-	uint StackSize=0;
-	
-	HeapSize=((uint) &__heap_limit-(uint) &__heap_base);
-	StackSize=((uint) &__initial_sp-(uint) &__heap_limit);
-	
+    uint HeapSize = 0;
+    uint StackSize = 0;
+
+    HeapSize = ((uint) &__heap_limit - (uint) &__heap_base);
+    StackSize = ((uint) &__initial_sp - (uint) &__heap_limit);
+
     printf("STD_Embedded_Team::STD0801 Code:Demo Ver:0.0.6113 Build:%s\n", __DATE__);
     printf("STDOS::%s 72MHz Flash:%dk RAM:%dk\n", this->CPUName->GetBuffer(), this->FlashSize, this->RamSize);
     printf("DevID:0X%04X RevID:0X%04X\n", this->DevID, this->RevID);
     printf("CPUID:0X%X ARM:ARMv7-M Cortex-M3: R1p2\n", this->CPUID);
-    printf("Heap :(0X%X, 0X%X) = 0X%X (%dk)\n",(uint) &__heap_base,(uint) &__heap_limit,HeapSize,HeapSize/1024);
-    printf("Stack:(0X%X, 0X%X) = 0X%X (%dk)\n",(uint) &__heap_limit,(uint) &__initial_sp,StackSize,StackSize/1024);
+    printf("Heap :(0X%X, 0X%X) = 0X%X (%dk)\n", (uint) &__heap_base, (uint) &__heap_limit, HeapSize, HeapSize / 1024);
+    printf("Stack:(0X%X, 0X%X) = 0X%X (%dk)\n", (uint) &__heap_limit, (uint) &__initial_sp, StackSize, StackSize / 1024);
     printf("ChipType:0x42455633 3\n");
     printf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\n", ID[0], ID[1], ID[2], ID[3], ID[4], ID[5], ID[6], ID[7], ID[8], ID[9], ID[10], ID[11]);
     printf("Time : ");
@@ -296,9 +297,9 @@ void TSys::Initjs()
 
 void TSys::ShowHex(byte *data, byte hexlength)
 {
-	byte ba;
-	ushort ba1;
-	uint ba2;
+    byte ba;
+    ushort ba1;
+    uint ba2;
     switch (hexlength)
     {
         case 1:
@@ -563,4 +564,4 @@ ushort TSys::Crc16(const void *buf, uint len, ushort crc)
         debug_printf("TestCrc Finish!\r\n");
     }
 
-#endif 
+#endif
