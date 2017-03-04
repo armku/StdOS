@@ -34,56 +34,7 @@ Spi::Spi(int spi, int speedHz, bool useNss)
     _index = 0xFF;
     Retry = 200;
     Init(g_Spis[spi], speedHz, useNss);
-	this->Open(useNss);
-}
-
-Spi::~Spi()
-{
-    debug_printf("Spi:Spi%d\r\n", _index + 1);
-
-    Close();
-}
-
-void Spi::Init(SPI_TypeDef *spi, uint speedHz, bool useNss)
-{
-    assert_param(spi);
-
-    SPI_TypeDef *g_Spis[] = SPIS;
-    this->_index = 0xFF;
-    for (int i = 0; i < ArrayLength(g_Spis); i++)
-    {
-        if (g_Spis[i] == spi)
-        {
-            _index = i;
-            break;
-        }
-    }
-    assert_param(_index < ArrayLength(g_Spis));
-
-    this->SPI = g_Spis[_index];
-
-       
-    #if DEBUG
-        int k = speedHz / 1000;
-        int m = k / 1000;
-        k -= m * 1000;
-        if (k == 0)
-            debug_printf("Spi%d::Init %dMHz Nss:%d\r\n", _index + 1, m, useNss);
-        else
-            debug_printf("Spi%d::Init %d.%dMHz Nss:%d\r\n", _index + 1, m, k, useNss);
-    #endif 
-
-    // 自动计算稍低于速度speedHz的分频
-    int pre = GetPre(_index, &speedHz);
-    if (pre ==  - 1)
-        return ;
-
-    Speed = speedHz;
-}
-
-void Spi::Open(bool useNss)
-{    
-    #if DEBUG
+	#if DEBUG
         int k = Speed / 1000;
         int m = k / 1000;
         k -= m * 1000;
@@ -94,8 +45,8 @@ void Spi::Open(bool useNss)
     #endif 
 
     // 自动计算稍低于速度speedHz的分频
-    uint speedHz = Speed;
-    int pre = GetPre(_index, &speedHz);
+    uint speedHz1 = speedHz;
+    int pre = GetPre(_index, &speedHz1);
     if (pre ==  - 1)
         return ;
     
@@ -178,6 +129,50 @@ void Spi::Open(bool useNss)
     SPI_Cmd(SPI, ENABLE);
 
     Stop();
+}
+
+Spi::~Spi()
+{
+    debug_printf("Spi:Spi%d\r\n", _index + 1);
+
+    Close();
+}
+
+void Spi::Init(SPI_TypeDef *spi, uint speedHz, bool useNss)
+{
+    assert_param(spi);
+
+    SPI_TypeDef *g_Spis[] = SPIS;
+    this->_index = 0xFF;
+    for (int i = 0; i < ArrayLength(g_Spis); i++)
+    {
+        if (g_Spis[i] == spi)
+        {
+            _index = i;
+            break;
+        }
+    }
+    assert_param(_index < ArrayLength(g_Spis));
+
+    this->SPI = g_Spis[_index];
+
+       
+    #if DEBUG
+        int k = speedHz / 1000;
+        int m = k / 1000;
+        k -= m * 1000;
+        if (k == 0)
+            debug_printf("Spi%d::Init %dMHz Nss:%d\r\n", _index + 1, m, useNss);
+        else
+            debug_printf("Spi%d::Init %d.%dMHz Nss:%d\r\n", _index + 1, m, k, useNss);
+    #endif 
+
+    // 自动计算稍低于速度speedHz的分频
+    int pre = GetPre(_index, &speedHz);
+    if (pre ==  - 1)
+        return ;
+
+    Speed = speedHz;
 }
 
 void Spi::Close()
