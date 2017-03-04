@@ -28,12 +28,12 @@ int GetPre(int index, uint *speedHz)
     return pre;
 }
 
-Spi::Spi(int spi, uint speedHz, bool useNss)
+Spi::Spi(int spiIndex, uint speedHz, bool useNss)
 {
     SPI_TypeDef *g_Spis[] = SPIS;
     _index = 0xFF;
     Retry = 200;
-    Init(g_Spis[spi], speedHz, useNss);
+    Init(g_Spis[spiIndex], speedHz, useNss);
     #if DEBUG
         int k = Speed / 1000;
         int m = k / 1000;

@@ -31,7 +31,7 @@ class Spi
         int Error; // 错误次数
 
         // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
-        Spi(int spi, uint speedHz = 9000000, bool useNss = true);
+        Spi(int spiIndex, uint speedHz = 9000000, bool useNss = true);
         ~Spi();
 
         byte Write(byte data);
