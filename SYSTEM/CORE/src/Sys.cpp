@@ -208,7 +208,7 @@ void TSys::ShowInfo()
 	uint StackSize=0;
 	
 	HeapSize=((uint) &__heap_limit-(uint) &__heap_base);
-	StackSize=((uint) &__initial_sp-(uint) &__heap_base);
+	StackSize=((uint) &__initial_sp-(uint) &__heap_limit);
 	
     printf("STD_Embedded_Team::STD0801 Code:Demo Ver:0.0.6113 Build:%s\n", __DATE__);
     printf("STDOS::%s 72MHz Flash:%dk RAM:%dk\n", this->CPUName->GetBuffer(), this->FlashSize, this->RamSize);
