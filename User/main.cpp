@@ -12,6 +12,9 @@
 #include "Modbus.h"
 #include "Spi.h"
 
+uint __heap_base =0x000;
+uint __heap_limit=0x123;
+
 typedef enum
 {
     KEY_UP = 1,  // Ä£ÄâÊäÈë 

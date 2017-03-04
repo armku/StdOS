@@ -584,6 +584,11 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\TInterrupt.cpp</FilePath>
             </File>
+            <File>
+              <FileName>NewDelete.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\NewDelete.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1495,6 +1500,11 @@
               <FileName>TInterrupt.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\CORE\src\TInterrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NewDelete.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\CORE\src\NewDelete.cpp</FilePath>
             </File>
           </Files>
         </Group>
