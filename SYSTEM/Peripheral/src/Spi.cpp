@@ -28,13 +28,13 @@ int GetPre(int index, uint *speedHz)
     return pre;
 }
 
-Spi::Spi(int spi, int speedHz, bool useNss)
+Spi::Spi(int spi, uint speedHz, bool useNss)
 {
     SPI_TypeDef *g_Spis[] = SPIS;
     _index = 0xFF;
     Retry = 200;
     Init(g_Spis[spi], speedHz, useNss);
-	#if DEBUG
+    #if DEBUG
         int k = Speed / 1000;
         int m = k / 1000;
         k -= m * 1000;
@@ -44,13 +44,12 @@ Spi::Spi(int spi, int speedHz, bool useNss)
             debug_printf("Spi%d::Open %d.%dMHz\r\n", _index + 1, m, k);
     #endif 
 
-    // 自动计算稍低于速度speedHz的分频
-    uint speedHz1 = speedHz;
-    int pre = GetPre(_index, &speedHz1);
+    // 自动计算稍低于速度speedHz的分频    
+    int pre = GetPre(_index, &speedHz);
     if (pre ==  - 1)
         return ;
-    
-	const Pin g_Spi_Pins_Map[][4] = SPI_PINS_FULLREMAP;
+
+    const Pin g_Spi_Pins_Map[][4] = SPI_PINS_FULLREMAP;
     // 端口配置，销毁Spi对象时才释放
     debug_printf("    CLK : ");
     this->pClk = new AlternatePort(g_Spi_Pins_Map[_index][1]);
@@ -58,15 +57,15 @@ Spi::Spi(int spi, int speedHz, bool useNss)
     this->pMiso = new AlternatePort(g_Spi_Pins_Map[_index][2]);
     debug_printf("    MOSI: ");
     this->pMosi = new AlternatePort(g_Spi_Pins_Map[_index][3]);
-	if(useNss)
-	{
-    this->pNss = new OutputPort(g_Spi_Pins_Map[_index][0]);
-	}
-	else
-	{
-	this->pNss = new OutputPort(P0);	
-	}
-    
+    if (useNss)
+    {
+        this->pNss = new OutputPort(g_Spi_Pins_Map[_index][0]);
+    }
+    else
+    {
+        this->pNss = new OutputPort(P0);
+    }
+
     // 使能SPI时钟
     switch (_index)
     {
@@ -156,7 +155,7 @@ void Spi::Init(SPI_TypeDef *spi, uint speedHz, bool useNss)
 
     this->SPI = g_Spis[_index];
 
-       
+
     #if DEBUG
         int k = speedHz / 1000;
         int m = k / 1000;
@@ -176,7 +175,7 @@ void Spi::Init(SPI_TypeDef *spi, uint speedHz, bool useNss)
 }
 
 void Spi::Close()
-{    
+{
     Stop();
 
     SPI_Cmd(SPI, DISABLE);
@@ -193,7 +192,7 @@ void Spi::Close()
 }
 
 byte Spi::Write(byte data)
-{    
+{
     int retry = Retry;
     while (SPI_I2S_GetFlagStatus(SPI, SPI_I2S_FLAG_TXE) == RESET)
     {
