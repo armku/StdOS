@@ -60,8 +60,8 @@ int flashtest(void)
         w25q64.SectorErase(FLASH_SectorToErase);
 
         /* 将发送缓冲区的数据写到flash中 */
-        w25q64.BufferWrite(Tx_Buffer, FLASH_WriteAddress, BufferSize);
-        w25q64.BufferWrite(Tx_Buffer, 252, BufferSize);
+        w25q64.Write(FLASH_WriteAddress,Tx_Buffer,  BufferSize);
+        w25q64.Write(252,Tx_Buffer,  BufferSize);
         printf("写入的数据为：%s \r\n", Tx_Buffer);
 
         /* 将刚刚写入的数据读出来放到接收缓冲区中 */
