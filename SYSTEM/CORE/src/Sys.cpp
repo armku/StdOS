@@ -212,7 +212,7 @@ void TSys::ShowInfo()
     StackSize = ((uint) &__initial_sp - (uint) &__heap_limit);
 
     printf("STD_Embedded_Team::STD0801 Code:Demo Ver:0.0.6113 Build:%s\n", __DATE__);
-    printf("STDOS::%s 72MHz Flash:%dk RAM:%dk\n", this->CPUName->GetBuffer(), this->FlashSize, this->RamSize);
+    printf("STDOS::%s %dMHz Flash:%dk RAM:%dk\n", this->CPUName->GetBuffer(),this->Clock/1000000, this->FlashSize, this->RamSize);
     printf("DevID:0X%04X RevID:0X%04X\n", this->DevID, this->RevID);
     printf("CPUID:0X%X ARM:ARMv7-M Cortex-M3: R1p2\n", this->CPUID);
     printf("Heap :(0X%X, 0X%X) = 0X%X (%dk)\n", (uint) &__heap_base, (uint) &__heap_limit, HeapSize, HeapSize / 1024);
