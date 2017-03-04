@@ -104,24 +104,24 @@ void Spi::Open(bool useNss)
     int pre = GetPre(_index, &speedHz);
     if (pre ==  - 1)
         return ;
-
-    Pin *ps = Pins;
+    
+	const Pin g_SPI_Pins[] = SPI_PINS_FULLREMAP;
     // 端口配置，销毁Spi对象时才释放
     debug_printf("    CLK : ");
-    this->pClk = new AlternatePort(ps[1+_index * 4]);
+    this->pClk = new AlternatePort(g_SPI_Pins[1+_index * 4]);
     debug_printf("    MISO: ");
-    this->pMiso = new AlternatePort(ps[2+_index * 4]);
+    this->pMiso = new AlternatePort(g_SPI_Pins[2+_index * 4]);
     debug_printf("    MOSI: ");
-    this->pMosi = new AlternatePort(ps[3+_index * 4]);
-    this->pNss = new OutputPort(ps[0+_index * 4]);
-
-    if (ps[0] != P0)
-    {
-        debug_printf("    NSS : ");
-        this->pNss->OpenDrain = false;
-        this->pNss->Set(ps[0]);
-    }
-
+    this->pMosi = new AlternatePort(g_SPI_Pins[3+_index * 4]);
+	if(useNss)
+	{
+    this->pNss = new OutputPort(g_SPI_Pins[0+_index * 4]);
+	}
+	else
+	{
+	this->pNss = new OutputPort(P0);	
+	}
+    
     // 使能SPI时钟
     switch (_index)
     {
