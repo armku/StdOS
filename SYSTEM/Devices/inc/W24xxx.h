@@ -16,8 +16,8 @@ class CW24xxx
         #if EEPTEST
             void Test(void);
         #endif 
-        byte ReadBytes(byte *_pReadBuf, ushort bufpos, uint addr, int size);
-        byte WriteBytes(byte *_pWriteBuf, ushort bufpos, uint addr, int size);
+        byte ReadBytes(byte *pBuffer, ushort bufpos, uint addr, int size);
+        byte WriteBytes(byte *pBuffer, ushort bufpos, uint addr, int size);
         byte ReadByte(ushort address);
         byte WriteByte(ushort address, byte da);
 		
@@ -25,9 +25,9 @@ class CW24xxx
     private:
         byte checkDevice();
 		ushort jsPageSize(uint type); //计算存储页大小
-        byte writePage(byte *buf, ushort bufpos, ushort addr, uint len); //页内写
-        byte readPage(byte *buf, ushort bufpos, ushort addr, uint len); //页内读
-        byte bufwr(byte *buf, ushort bufpos, ushort addr, uint len, byte wr); //读写集中操作1写 0读
+        byte writePage(byte *buf, ushort bufpos, ushort addr, uint size); //页内写
+        byte readPage(byte *buf, ushort bufpos, ushort addr, uint size); //页内读
+        byte bufwr(byte *buf, ushort bufpos, ushort addr, uint size, byte wr); //读写集中操作1写 0读
 		
 		CSoftI2C *pi2c;
         EW24XXType deviceType; //器件类型

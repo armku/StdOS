@@ -48,13 +48,13 @@ byte CW24xxx::checkDevice()
  *	¹¦ÄÜËµÃ÷: ´Ó´®ÐÐEEPROMÖ¸¶¨µØÖ·´¦¿ªÊ¼¶ÁÈ¡Èô¸ÉÊý¾Ý
  *	ÐÎ    ²Î£ºaddr : ÆðÊ¼µØÖ·
  *			 size : Êý¾Ý³¤¶È£¬µ¥Î»Îª×Ö½Ú
- *			 _pReadBuf : ´æ·Å¶Áµ½µÄÊý¾ÝµÄ»º³åÇøÖ¸Õë
+ *			 pBuffer : ´æ·Å¶Áµ½µÄÊý¾ÝµÄ»º³åÇøÖ¸Õë
  *	·µ »Ø Öµ: 1 ±íÊ¾Ê§°Ü£¬0±íÊ¾³É¹¦
  *********************************************************************************************************
  */
-byte CW24xxx::ReadBytes(byte *_pReadBuf, ushort bufpos, uint addr, int size)
+byte CW24xxx::ReadBytes(byte *pBuffer, ushort bufpos, uint addr, int size)
 {
-    return this->bufwr(_pReadBuf, bufpos, addr, size, 0);
+    return this->bufwr(pBuffer, bufpos, addr, size, 0);
 }
 
 /*
@@ -63,13 +63,13 @@ byte CW24xxx::ReadBytes(byte *_pReadBuf, ushort bufpos, uint addr, int size)
  *	¹¦ÄÜËµÃ÷: Ïò´®ÐÐEEPROMÖ¸¶¨µØÖ·Ð´ÈëÈô¸ÉÊý¾Ý£¬²ÉÓÃÒ³Ð´²Ù×÷Ìá¸ßÐ´ÈëÐ§ÂÊ
  *	ÐÎ    ²Î£ºaddr : ÆðÊ¼µØÖ·
  *			 size : Êý¾Ý³¤¶È£¬µ¥Î»Îª×Ö½Ú
- *			 _pWriteBuf : ´æ·Å¶Áµ½µÄÊý¾ÝµÄ»º³åÇøÖ¸Õë
+ *			 pBuffer : ´æ·Å¶Áµ½µÄÊý¾ÝµÄ»º³åÇøÖ¸Õë
  *	·µ »Ø Öµ: 0 ±íÊ¾Ê§°Ü£¬1±íÊ¾³É¹¦
  *********************************************************************************************************
  */
-byte CW24xxx::WriteBytes(byte *_pWriteBuf, ushort bufpos, uint addr, int size)
+byte CW24xxx::WriteBytes(byte *pBuffer, ushort bufpos, uint addr, int size)
 {
-    return this->bufwr(_pWriteBuf, bufpos, addr, size, 1);
+    return this->bufwr(pBuffer, bufpos, addr, size, 1);
 }
 
 byte CW24xxx::ReadByte(ushort address)
@@ -209,7 +209,7 @@ byte CW24xxx::WriteByte(ushort address, byte da)
     return 0;
 }
 
-byte CW24xxx::bufwr(byte *buf, ushort bufpos, ushort addr, uint len, byte wr) //¶ÁÐ´¼¯ÖÐ²Ù×÷1Ð´ 0¶Á
+byte CW24xxx::bufwr(byte *buf, ushort bufpos, ushort addr, uint size, byte wr) //¶ÁÐ´¼¯ÖÐ²Ù×÷1Ð´ 0¶Á
 {
     uint curAddr;
     uint pageStart; //Ò³ÄÚÆðÊ¼µØÖ·
@@ -217,7 +217,7 @@ byte CW24xxx::bufwr(byte *buf, ushort bufpos, ushort addr, uint len, byte wr) //
     ushort bufaddr;
 
     pageStart = addr % this->pageSize;
-    bytesLeave = len;
+    bytesLeave = size;
     curAddr = addr;
     bufaddr = bufpos;
 	if(this->pinWP)
@@ -313,7 +313,7 @@ byte CW24xxx::bufwr(byte *buf, ushort bufpos, ushort addr, uint len, byte wr) //
     return 0;
 }
 
-byte CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint len) //Ò³ÄÚÐ´
+byte CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚÐ´
 {
     uint i, m;
     ushort usAddr;
@@ -364,7 +364,7 @@ byte CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint len) //Ò³ÄÚÐ
         goto cmd_Writefail; /* EEPROMÆ÷¼þÎÞÓ¦´ð */
     }
 
-    for (i = 0; i < len; i++)
+    for (i = 0; i < size; i++)
     {
 
         /* µÚ6²½£º¿ªÊ¼Ð´ÈëÊý¾Ý */
@@ -389,7 +389,7 @@ byte CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint len) //Ò³ÄÚÐ
     return 1;
 }
 
-byte CW24xxx::readPage(byte *buf, ushort bufpos, ushort addr, uint len) //Ò³ÄÚ¶Á
+byte CW24xxx::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚ¶Á
 {
     uint i;
 
@@ -437,12 +437,12 @@ byte CW24xxx::readPage(byte *buf, ushort bufpos, ushort addr, uint len) //Ò³ÄÚ¶Á
     }
 
     /* µÚ9²½£ºÑ­»·¶ÁÈ¡Êý¾Ý */
-    for (i = 0; i < len; i++)
+    for (i = 0; i < size; i++)
     {
         buf[bufpos + i] = pi2c->ReadByte(); /* ¶Á1¸ö×Ö½Ú */
 
         /* Ã¿¶ÁÍê1¸ö×Ö½Úºó£¬ÐèÒª·¢ËÍAck£¬ ×îºóÒ»¸ö×Ö½Ú²»ÐèÒªAck£¬·¢Nack */
-        if (i != len - 1)
+        if (i != size - 1)
         {
             this->pi2c->Ack(); /* ÖÐ¼ä×Ö½Ú¶ÁÍêºó£¬CPU²úÉúACKÐÅºÅ(Çý¶¯SDA = 0) */
         }
