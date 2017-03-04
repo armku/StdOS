@@ -92,30 +92,6 @@ void Spi::Init(SPI_TypeDef *spi, uint speedHz, bool useNss)
     Speed = speedHz;
 }
 
-void Spi::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
-{
-    if (nss != P0)
-        Pins[0] = nss;
-    if (clk != P0)
-        Pins[1] = clk;
-    if (miso != P0)
-        Pins[2] = miso;
-    if (mosi != P0)
-        Pins[3] = mosi;
-}
-
-void Spi::GetPin(Pin *clk, Pin *miso, Pin *mosi, Pin *nss)
-{
-    if (nss)
-        *nss = Pins[0];
-    if (clk)
-        *clk = Pins[1];
-    if (miso)
-        *miso = Pins[2];
-    if (mosi)
-        *mosi = Pins[3];
-}
-
 void Spi::Open()
 {
     if (Opened)

@@ -36,8 +36,6 @@ class Spi
 
         void Init(SPI_TypeDef *spi, uint speedHz = 9000000, bool useNss = true);
 
-        void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0, Pin nss = P0);
-        void GetPin(Pin *clk = NULL, Pin *miso = NULL, Pin *mosi = NULL, Pin *nss = NULL);
         void Open();
         void Close();
 
