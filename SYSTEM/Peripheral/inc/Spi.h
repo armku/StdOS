@@ -31,8 +31,7 @@ class Spi
         int Speed; // 速度
         int Retry; // 等待重试次数，默认200
         int Error; // 错误次数
-        bool Opened;
-
+        
         // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
         Spi(int spi, int speedHz = 9000000, bool useNss = true);
         ~Spi();

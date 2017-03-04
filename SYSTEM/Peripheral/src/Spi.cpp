@@ -33,7 +33,6 @@ Spi::Spi(int spi, int speedHz, bool useNss)
     SPI_TypeDef *g_Spis[] = SPIS;
     _index = 0xFF;
     Retry = 200;
-    Opened = false;
     Init(g_Spis[spi], speedHz, useNss);
 	this->Open();
 }
@@ -89,10 +88,7 @@ void Spi::Init(SPI_TypeDef *spi, uint speedHz, bool useNss)
 }
 
 void Spi::Open()
-{
-    if (Opened)
-        return ;
-
+{    
     #if DEBUG
         int k = Speed / 1000;
         int m = k / 1000;
@@ -188,15 +184,10 @@ void Spi::Open()
     SPI_Cmd(SPI, ENABLE);
 
     Stop();
-
-    Opened = true;
 }
 
 void Spi::Close()
-{
-    if (!Opened)
-        return ;
-
+{    
     Stop();
 
     SPI_Cmd(SPI, DISABLE);
@@ -210,15 +201,10 @@ void Spi::Close()
     this->pMosi->Set(P0);
     debug_printf("    NSS : ");
     this->pNss->Set(P0);
-
-    Opened = false;
 }
 
 byte Spi::Write(byte data)
-{
-    if (!Opened)
-        Open();
-
+{    
     int retry = Retry;
     while (SPI_I2S_GetFlagStatus(SPI, SPI_I2S_FLAG_TXE) == RESET)
     {
@@ -250,9 +236,6 @@ byte Spi::Write(byte data)
 
 ushort Spi::Write16(ushort data)
 {
-    if (!Opened)
-        Open();
-
     // 双字节操作，超时次数加倍
     int retry = Retry << 1;
     while (SPI_I2S_GetFlagStatus(SPI, SPI_I2S_FLAG_TXE) == RESET)
