@@ -685,11 +685,6 @@
               <FilePath>..\SYSTEM\Devices\src\W24xxx.cpp</FilePath>
             </File>
             <File>
-              <FileName>w25qxx.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\w25qxx.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ST7565R.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Devices\src\ST7565R.cpp</FilePath>
@@ -1595,11 +1590,6 @@
               <FileName>W24xxx.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Devices\src\W24xxx.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>w25qxx.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\w25qxx.cpp</FilePath>
             </File>
             <File>
               <FileName>ST7565R.cpp</FileName>
