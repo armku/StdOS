@@ -31,24 +31,31 @@ int GetPre(int index, uint *speedHz)
 Spi::Spi(int spiIndex, uint speedHz, bool useNss)
 {
     SPI_TypeDef *g_Spis[] = SPIS;
-    _index = 0xFF;
+    _index = spiIndex;
     Retry = 200;
-    Init(g_Spis[spiIndex], speedHz, useNss);
+	
+	assert_param(spi);
+       
+    this->SPI = g_Spis[_index];
+
+
     #if DEBUG
-        int k = Speed / 1000;
+        int k = speedHz / 1000;
         int m = k / 1000;
         k -= m * 1000;
         if (k == 0)
-            debug_printf("Spi%d::Open %dMHz\r\n", _index + 1, m);
+            debug_printf("Spi%d::Init %dMHz Nss:%d\r\n", _index + 1, m, useNss);
         else
-            debug_printf("Spi%d::Open %d.%dMHz\r\n", _index + 1, m, k);
+            debug_printf("Spi%d::Init %d.%dMHz Nss:%d\r\n", _index + 1, m, k, useNss);
     #endif 
 
-    // 自动计算稍低于速度speedHz的分频    
+    // 自动计算稍低于速度speedHz的分频
     int pre = GetPre(_index, &speedHz);
     if (pre ==  - 1)
         return ;
 
+    Speed = speedHz;
+	    
     const Pin g_Spi_Pins_Map[][4] = SPI_PINS_FULLREMAP;
     // 端口配置，销毁Spi对象时才释放
     debug_printf("    CLK : ");
@@ -135,43 +142,6 @@ Spi::~Spi()
     debug_printf("Spi:Spi%d\r\n", _index + 1);
 
     Close();
-}
-
-void Spi::Init(SPI_TypeDef *spi, uint speedHz, bool useNss)
-{
-    assert_param(spi);
-
-    SPI_TypeDef *g_Spis[] = SPIS;
-    this->_index = 0xFF;
-    for (int i = 0; i < ArrayLength(g_Spis); i++)
-    {
-        if (g_Spis[i] == spi)
-        {
-            _index = i;
-            break;
-        }
-    }
-    assert_param(_index < ArrayLength(g_Spis));
-
-    this->SPI = g_Spis[_index];
-
-
-    #if DEBUG
-        int k = speedHz / 1000;
-        int m = k / 1000;
-        k -= m * 1000;
-        if (k == 0)
-            debug_printf("Spi%d::Init %dMHz Nss:%d\r\n", _index + 1, m, useNss);
-        else
-            debug_printf("Spi%d::Init %d.%dMHz Nss:%d\r\n", _index + 1, m, k, useNss);
-    #endif 
-
-    // 自动计算稍低于速度speedHz的分频
-    int pre = GetPre(_index, &speedHz);
-    if (pre ==  - 1)
-        return ;
-
-    Speed = speedHz;
 }
 
 void Spi::Close()
