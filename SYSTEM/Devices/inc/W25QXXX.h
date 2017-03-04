@@ -5,7 +5,7 @@
 class W25QXXX
 {
     public:
-		W25QXXX(Spi * spi,Pin pincs);
+		W25QXXX(Spi * spi,Pin pincs=P0);
 	
         void Init(void);
         void SectorErase(uint SectorAddr);
