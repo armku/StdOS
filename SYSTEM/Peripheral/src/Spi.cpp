@@ -127,11 +127,11 @@ Spi::Spi(int spiIndex, uint speedHz, bool useNss)
     sp.SPI_CPHA = SPI_CPHA_1Edge; // 第1个边沿有效，上升沿为采样时刻
     if (useNss)
     {
-        sp.SPI_NSS = SPI_NSS_Soft; // NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制
+        sp.SPI_NSS = SPI_NSS_Hard; // NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制
     }
     else
     {
-        sp.SPI_NSS = SPI_NSS_Hard;
+        sp.SPI_NSS = SPI_NSS_Soft;
     }
     sp.SPI_BaudRatePrescaler = pre; // 8分频，9MHz 定义波特率预分频的值
     sp.SPI_FirstBit = SPI_FirstBit_MSB; // 高位在前。指定数据传输从MSB位还是LSB位开始:数据传输从MSB位开始
