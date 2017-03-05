@@ -83,12 +83,7 @@ void CButton::ticks()
     }
 
     return ;
-
-
-
-
-
-
+#if 0
     /*------------button debounce handle---------------*/
     //not equal to prev one
     //continue read 3 times same new level change
@@ -237,7 +232,7 @@ void CButton::ticks()
             }
             break;
     }
-
+#endif
 }
 
 //获取当前按键状态
