@@ -73,9 +73,11 @@ int main(void)
     rs485 = 0;
     sp2.Register(OnUsartRead);
     sp2.Open();
+	SerialPort::GetMessagePort()->Register(OnUsartRead);
 
     exti.Register(OnKeyPress);
     exti1.Register(OnKeyPress);
+		
 
     PWM pwm1(PC9);
     pwm1.Init();
