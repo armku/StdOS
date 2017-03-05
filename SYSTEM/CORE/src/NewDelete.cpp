@@ -11,8 +11,8 @@
 
 extern "C"
 {
-    extern uint __heap_base;
-    extern uint __heap_limit;
+    //extern uint __heap_base;
+    //extern uint __heap_limit;
 }
 
 void *operator new(uint size)
@@ -25,9 +25,11 @@ void *operator new(uint size)
     {
         debug_printf(" 0X%08x", p);
         // 如果堆只剩下64字节，则报告失败，要求用户扩大堆空间以免不测
+		#if 0
         uint end = (uint) &__heap_limit;
         if ((uint)p + size + 0x40 >= end)
             debug_printf(" + %d near HeapEnd=0X%08x", size, end);
+		#endif
     }
 	debug_printf("\r\n");
     //assert_param(p);
@@ -44,9 +46,11 @@ void *operator new[](uint size)
     {
         debug_printf(" 0x%08x", p);
         // 如果堆只剩下64字节，则报告失败，要求用户扩大堆空间以免不测
+		#if 0
         uint end = (uint) &__heap_limit;
         if ((uint)p + size + 0x40 >= end)
             debug_printf(" + %d near HeapEnd=0x%08x", size, end);
+		#endif
     }
 	debug_printf("\r\n");
     //assert_param(p);
