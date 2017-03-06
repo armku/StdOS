@@ -89,7 +89,7 @@ int main(void)
     Sys.AddTask(FeedDog, &dog, 0, 1000, "WatchDog");
 	Sys.AddTask(LedTask, &led, 0, 500,"LedTask");
 		
-	flashtest();
+	//flashtest();
 	    
     Sys.Start();
 }
