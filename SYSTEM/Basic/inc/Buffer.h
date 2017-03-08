@@ -38,7 +38,7 @@ class Buffer:public Object
 		//禁用拷贝构造函数
 		Buffer(const Buffer& buf)=delete;
 		//对象Mov操作，指针和长度归我，清空对方
-		Buffer(Buffer&& rval);
+		Buffer(Buffer& rval);
 		
 		//从另一个对象拷贝数据和长度，长度不足时扩容失败时报错
 		Buffer& operator = (const Buffer&rhs);
