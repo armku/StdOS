@@ -48,8 +48,8 @@ class Buffer:public Object
 		Buffer& operator=(Buffer&& rval);
 		
 		//拿出指针供外部使用
-		inline byte* GetBuffer(){return (byte*)_Arr;}
-		inline const byte* GetBuffer() const{return (byte*)_Arr;}
+		inline byte* GetBuffer(){return (byte*)Arr;}
+		inline const byte* GetBuffer() const{return (byte*)Arr;}
 		inline int Length() const{return _Length;}
 		
 		virtual bool SetLength(int len);
@@ -115,27 +115,14 @@ class Buffer:public Object
 			byte Arr[0x40];//内部缓冲区
 			virtual void* Alloc(int len);
 		//以下为猜测内容
-		int _Length=0x40;
+		int _Length;
 		
-	//上面内容为新版本
-		
-		
-		
-		
-	
-		
+	//上面内容为新版本				
 		Buffer(char* buf,ushort len=-1);
 		Buffer &operator = (byte* bufsrc);
 		Buffer &operator = (Buffer bufsrc);
-		byte &operator [] (int pos);
-        byte* GetBuffer() const;//返回指针        
-        int Length() const;//长度     		
         void SetLength(ushort len);//设置长度，可自动扩容        
-             
-        
-               
-           
-              
+                            
         #if 0
 		String ToHex();//转换为16进制字符串        
 		#endif
