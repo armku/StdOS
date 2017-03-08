@@ -14,37 +14,7 @@ IWDG_ReloadCounter()    喂狗，必须在计数值减到1之前喂狗
 
 IWDG_PR和IWDG_RLR寄存器具有写保护功能。要修改这两个寄存器的值，必须先向IWDG_KR寄存器中写入0x5555。
 以不同的值写入这个寄存器将会打乱操作顺序，寄存器将重新被保护。重装载操作(即写入0xAAAA)也会启动写保护功能。
-
-#define IWDG_WriteAccess_Enable     ((uint16_t)0x5555)
-#define IWDG_WriteAccess_Disable    ((uint16_t)0x0000)
-
-void IWDG_WriteAccessCmd(uint16_t IWDG_WriteAccess)
-{
-assert_param(IS_IWDG_WRITE_ACCESS(IWDG_WriteAccess));
-IWDG->KR = IWDG_WriteAccess;
-}
-
-void IWDG_ReloadCounter(void)
-{
-IWDG->KR = KR_KEY_Reload;
-}
-void IWDG_Enable(void)
-{
-IWDG->KR = KR_KEY_Enable;
-}
-
-void IWDG_SetPrescaler(byte IWDG_Prescaler)
-{
-assert_param(IS_IWDG_PRESCALER(IWDG_Prescaler));
-IWDG->PR = IWDG_Prescaler;
-}
-void IWDG_SetReload(uint16_t Reload)
-{
-assert_param(IS_IWDG_RELOAD(Reload));
-IWDG->RLR = Reload;
-}
-
- */
+*/
  #include <stdio.h>
 #include "stm32f10x.h"
 #include "WatchDog.h"
