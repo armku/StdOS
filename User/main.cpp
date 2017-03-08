@@ -65,10 +65,31 @@ int flashtest(void);
 void TestAT45DB();
 int main(void)
 {
-    Sys.MessagePort = COM1;
-    Sys.Init();
-    Sys.ShowInfo();
-
+	auto& sys=(TSys&)(Sys);
+	sys.Codec=codec;
+	sys.Name=(char*) namee;
+	//Rtc提取时间
+	auto Rtc=HardRtc::Instance();
+	Rtc->LowPower=false;
+    Rtc->External = false;
+	Rtc->Init();
+	Rtc->Start(false,false);
+	
+	sys.Init();
+	#if DEBUG
+	Sys.MessagePort=COM1;
+	Sys.ShowInfo();
+	
+	WatchDog::Start(20000,10000);
+	#else
+	WatchDog::Start();
+	#endif
+	//flash 最后一块作为配置区
+	Config::Current = &Config::CreateFlash();
+	
+	
+	
+	
     sp2.RS485 = &rs485;
     rs485 = 0;
     sp2.Register(OnUsartRead);
