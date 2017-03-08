@@ -1,5 +1,6 @@
 #include "RC4.h"
 
+#if 0
 /// <summary>¼ÓÃÜ</summary>
 /// <param name="data">Êı¾İ</param>
 /// <param name="pass">ÃÜÂë</param>
@@ -50,3 +51,4 @@ byte *RC4::GetKey(byte *pass, int passlen, int len)
     }
     return box;
 }
+#endif
