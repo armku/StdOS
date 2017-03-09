@@ -19,4 +19,5 @@ class Array:public Buffer
 {
 	public:		
 		Array(void* ptr,int len):Buffer(ptr,len){}
+		Array();
 };

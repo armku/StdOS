@@ -11,7 +11,7 @@ String::~String()
 {
 	delete[] ((byte *)(this->_Arr));
 }
-String::String(const char * str,int len):Array(str,len)
+String::String(const char * str,int len)
 {
 	if(len<0)
 	{
