@@ -22,8 +22,8 @@ class Buffer:public Object
 		Buffer& operator=(Buffer&& rval);
 		
 		//拿出指针供外部使用
-		inline byte* GetBuffer(){return (byte*)Arr;}
-		inline const byte* GetBuffer() const{return (byte*)Arr;}
+		inline byte* GetBuffer(){return (byte*)_Arr;}
+		inline const byte* GetBuffer() const{return (byte*)_Arr;}
 		inline int Length() const{return _Length;}
 		
 		virtual bool SetLength(int len);
@@ -86,16 +86,12 @@ class Buffer:public Object
 		 static void Test();
 		#endif
 		protected:
-			byte Arr[0x40];//内部缓冲区
+			byte Arr[0x40];//内部缓冲区			
 			virtual void* Alloc(int len);
 		//以下为猜测内容
 		int _Length;
+		void *_Arr;	
 		
-	//上面内容为新版本
-		Buffer &operator = (byte* bufsrc);
-		Buffer &operator = (Buffer bufsrc);
-                            
-        
 		virtual void Show(bool newLine=false) const;
 	protected:
 		byte* pbuf;//缓冲区

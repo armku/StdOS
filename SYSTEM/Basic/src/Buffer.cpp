@@ -2,41 +2,31 @@
 #include "Buffer.h"
 #include "Sys.h"
 
-Buffer::Buffer()
+Buffer::Buffer(void* ptr,int len)
 {
-
+	this->_Arr=ptr;
+	this->_Length=len;
 }
 
-Buffer::Buffer(char* buf,ushort length)
-{
-	this->pbuf=(byte*)buf;
-	this->bufLength=length;
-}
-
-Buffer::Buffer(byte* buf,ushort length)
-{
-	this->pbuf=buf;
-	this->bufLength=length;
-}
-Buffer & Buffer::operator = (byte* bufsrc)
+Buffer & Buffer::operator = (const void * prt)
 {
 	for(int  i=0;i<this->bufLength;i++)
 	{
-		this->pbuf[i]=bufsrc[i];
+		this->pbuf[i]=((byte*)prt)[i];
 	}
 	return *this;
 }
-Buffer &Buffer::operator = (Buffer bufsrc)
+Buffer& Buffer::operator=(Buffer&& rval)
 {
-	if(this->bufLength<bufsrc.bufLength)
+	if(this->bufLength<rval.bufLength)
 	{
-		debug_printf("Error: Buffer copy: Buffer length mismath src: %d ,dst: %d \n",bufsrc.bufLength,this->bufLength);
+		debug_printf("Error: Buffer copy: Buffer length mismath src: %d ,dst: %d \n",rval.bufLength,this->bufLength);
 	}
 	else
 	{
-		for(int i=0;i<bufsrc.Length();i++)
+		for(int i=0;i<rval.Length();i++)
 		{
-			this->pbuf[i]=bufsrc.GetBuffer()[i];
+			this->pbuf[i]=rval.GetBuffer()[i];
 		}
 	}
 	return *this;
@@ -50,18 +40,9 @@ byte &Buffer::operator [] (int pos)
 	}
 	return this->pbuf[pos];
 }
-//返回指针
-byte* Buffer::GetBuffer() const
-{
-	return this->pbuf;
-}
-//长度
-int Buffer::Length() const
-{
-	return this->bufLength;
-}
-//设置长度，可自动扩容  
-void Buffer::SetLength(ushort len)
+
+//设置长度，可自动扩容 
+bool Buffer::SetLength(int len)
 {
 	if(this->bufLength>=len)
 	{
@@ -74,6 +55,7 @@ void Buffer::SetLength(ushort len)
 		this->bufLength=len;
 		delete []this->pbuf;
 	}
+	return true;
 }
 void Buffer::Show(bool newLine) const
 {
