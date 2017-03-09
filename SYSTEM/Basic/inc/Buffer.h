@@ -91,6 +91,6 @@ class Buffer:public Object
 		//以下为猜测内容
 		int _Length;
 		void *_Arr;	
-		
+		public:
 		virtual void Show(bool newLine=false) const;	
 };
