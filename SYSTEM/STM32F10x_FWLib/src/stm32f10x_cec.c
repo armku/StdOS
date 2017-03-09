@@ -1,25 +1,3 @@
-/**
-  ******************************************************************************
-  * @file    stm32f10x_cec.c
-  * @author  MCD Application Team
-  * @version V3.5.0
-  * @date    11-March-2011
-  * @brief   This file provides all the CEC firmware functions.
-  ******************************************************************************
-  * @attention
-  *
-  * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
-  * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
-  * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
-  * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
-  * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
-  * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
-  *
-  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************
-  */
-
-/* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_cec.h"
 #include "stm32f10x_rcc.h"
 
@@ -417,17 +395,3 @@ void CEC_ClearITPendingBit(uint16_t CEC_IT)
   /* Clear the selected CEC interrupt pending bits */
   CEC->CSR &= (uint32_t)(((~(uint32_t)CEC_IT) & 0xFFFFFFFC) | tmp);
 }
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
