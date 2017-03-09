@@ -17,22 +17,17 @@ Buffer &Buffer::operator = (const void *prt)
     return  *this;
 }
 
-#if 0
-    //C++11
-    Buffer &Buffer::operator = (Buffer && rval)
-#else 
-    Buffer &Buffer::operator = (Buffer &rval)
-#endif 
+Buffer &Buffer::operator = (const Buffer &rhs)
 {
-    if (this->_Length < rval._Length)
+    if (this->_Length < rhs._Length)
     {
-        debug_printf("Error: Buffer copy: Buffer length mismath src: %d ,dst: %d \n", rval._Length, this->_Length);
+        debug_printf("Error: Buffer copy: Buffer length mismath src: %d ,dst: %d \n", rhs._Length, this->_Length);
     }
     else
     {
-        for (int i = 0; i < rval.Length(); i++)
+        for (int i = 0; i < rhs.Length(); i++)
         {
-            ((byte*)(this->_Arr))[i] = rval.GetBuffer()[i];
+            ((byte*)(this->_Arr))[i] = rhs.GetBuffer()[i];
         }
     }
     return  *this;
