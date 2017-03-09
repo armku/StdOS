@@ -9,18 +9,20 @@ struct __FILE
     int handle;
 
 };
-
-FILE __stdout;
+#if 0
+    FILE __stdout;
+#endif 
 //定义_sys_exit()以避免使用半主机模式
 void _sys_exit(int x)
 {
     x = x;
 }
+
 //c++的
 void _ttywrch(int ch)
-{   
-	FILE *fp;
-	fputc(ch,fp);
+{
+    FILE *fp;
+    fputc(ch, fp);
 }
 
 int GetKey(void)
