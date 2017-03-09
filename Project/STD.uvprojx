@@ -335,7 +335,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,DEBUG</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\STM32F10x_FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\Util\inc;..\SYSTEM\MCU\inc;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc</IncludePath>
+              <IncludePath>..\SYSTEM\FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\Util\inc;..\SYSTEM\CMSIS;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -669,6 +669,11 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\Flash.cpp</FilePath>
             </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\Peripheral\usart.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -747,27 +752,27 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>MCU</GroupName>
+          <GroupName>startup</GroupName>
           <Files>
             <File>
               <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\SYSTEM\MCU\startup_stm32f10x_md.s</FilePath>
+              <FilePath>..\SYSTEM\startup\startup_stm32f10x_md.s</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CMSIS</GroupName>
+          <Files>
             <File>
               <FileName>core_cm3.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\MCU\src\core_cm3.c</FilePath>
+              <FilePath>..\SYSTEM\CMSIS\core_cm3.c</FilePath>
             </File>
             <File>
               <FileName>system_stm32f10x.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\MCU\src\system_stm32f10x.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\MCU\src\usart.c</FilePath>
+              <FilePath>..\SYSTEM\CMSIS\system_stm32f10x.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -777,117 +782,117 @@
             <File>
               <FileName>misc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\misc.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\misc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_adc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_adc.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_adc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_bkp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_bkp.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_bkp.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_can.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_can.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_can.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_cec.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_cec.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_cec.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_crc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_crc.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_crc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_dac.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_dac.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_dac.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_dbgmcu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_dbgmcu.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_dbgmcu.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_dma.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_dma.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_dma.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_exti.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_exti.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_exti.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_flash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_flash.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_flash.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_fsmc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_fsmc.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_fsmc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_gpio.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_gpio.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_i2c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_i2c.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_i2c.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_iwdg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_iwdg.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_iwdg.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_pwr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_pwr.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_pwr.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_rcc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_rcc.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_rcc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_rtc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_rtc.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_rtc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_sdio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_sdio.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_sdio.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_spi.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_spi.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_tim.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_tim.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_tim.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_usart.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_usart.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_wwdg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_wwdg.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_wwdg.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1591,6 +1596,11 @@
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\Flash.cpp</FilePath>
             </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\Peripheral\usart.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1669,27 +1679,27 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>MCU</GroupName>
+          <GroupName>startup</GroupName>
           <Files>
             <File>
               <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\SYSTEM\MCU\startup_stm32f10x_md.s</FilePath>
+              <FilePath>..\SYSTEM\startup\startup_stm32f10x_md.s</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CMSIS</GroupName>
+          <Files>
             <File>
               <FileName>core_cm3.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\MCU\src\core_cm3.c</FilePath>
+              <FilePath>..\SYSTEM\CMSIS\core_cm3.c</FilePath>
             </File>
             <File>
               <FileName>system_stm32f10x.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\MCU\src\system_stm32f10x.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\MCU\src\usart.c</FilePath>
+              <FilePath>..\SYSTEM\CMSIS\system_stm32f10x.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1699,117 +1709,117 @@
             <File>
               <FileName>misc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\misc.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\misc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_adc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_adc.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_adc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_bkp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_bkp.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_bkp.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_can.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_can.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_can.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_cec.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_cec.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_cec.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_crc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_crc.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_crc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_dac.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_dac.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_dac.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_dbgmcu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_dbgmcu.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_dbgmcu.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_dma.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_dma.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_dma.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_exti.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_exti.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_exti.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_flash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_flash.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_flash.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_fsmc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_fsmc.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_fsmc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_gpio.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_gpio.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_i2c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_i2c.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_i2c.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_iwdg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_iwdg.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_iwdg.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_pwr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_pwr.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_pwr.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_rcc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_rcc.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_rcc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_rtc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_rtc.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_rtc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_sdio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_sdio.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_sdio.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_spi.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_spi.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_tim.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_tim.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_tim.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_usart.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_usart.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_wwdg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F10x_FWLib\src\stm32f10x_wwdg.c</FilePath>
+              <FilePath>..\SYSTEM\FWLib\src\stm32f10x_wwdg.c</FilePath>
             </File>
           </Files>
         </Group>

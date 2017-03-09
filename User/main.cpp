@@ -25,7 +25,7 @@ typedef enum
 
 void FeedDog(void *param)
 {
-	WatchDog *dog=(WatchDog *)param;
+    WatchDog *dog = (WatchDog*)param;
     dog->Feed();
 }
 
@@ -51,68 +51,69 @@ OutputPort rs485(PC2);
 ModbusSlave ModbusSlave;
 static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 {
-	ModbusSlave.Process(bs,para);
+    ModbusSlave.Process(bs, para);
     return 0;
 }
 
 SerialPort sp2(COM2);
-void LedTask(void* param)
+void LedTask(void *param)
 {
-    OutputPort* leds = (OutputPort*)param;
-	*leds = !*leds;	
+    OutputPort *leds = (OutputPort*)param;
+    *leds = ! * leds;
 }
+
 int flashtest(void);
 void TestAT45DB();
 int main(void)
 {
-	TSys& sys=(TSys&)(Sys);
-	#if 0
-	sys.Codec=codec;
-	sys.Name=(char*) namee;
-	//Rtc提取时间
-	auto Rtc=HardRtc::Instance();
-	Rtc->LowPower=false;
-    Rtc->External = false;
-	Rtc->Init();
-	Rtc->Start(false,false);
-	#endif
-	sys.Init();
-	#if DEBUG
-	Sys.MessagePort=COM1;
-	Sys.ShowInfo();
-	
-	WatchDog::Start(20000,10000);
-	#else
-	WatchDog::Start();
-	#endif
-	#if 0
-	//flash 最后一块作为配置区
-	Config::Current = &Config::CreateFlash();
-	#endif
-	
-	
-	
+    TSys &sys = (TSys &)(Sys);
+    #if 0
+        sys.Codec = codec;
+        sys.Name = (char*)namee;
+        //Rtc提取时间
+        auto Rtc = HardRtc::Instance();
+        Rtc->LowPower = false;
+        Rtc->External = false;
+        Rtc->Init();
+        Rtc->Start(false, false);
+    #endif 
+    sys.Init();
+    #if DEBUG
+        Sys.MessagePort = COM1;
+        Sys.ShowInfo();
+
+        WatchDog::Start(20000, 10000);
+    #else 
+        WatchDog::Start();
+    #endif 
+    #if 0
+        //flash 最后一块作为配置区
+        Config::Current = &Config::CreateFlash();
+    #endif 
+
+
+
     sp2.RS485 = &rs485;
     rs485 = 0;
     sp2.Register(OnUsartRead);
     sp2.Open();
-	SerialPort::GetMessagePort()->Register(OnUsartRead);
+    SerialPort::GetMessagePort()->Register(OnUsartRead);
 
     exti.Register(OnKeyPress);
     exti1.Register(OnKeyPress);
-		
+
 
     PWM pwm1(PC9);
     pwm1.Init();
     pwm1.SetOutPercent(50);
-		
-	// 初始化为输出
-	OutputPort led(PF8);
-	WatchDog dog(3000);
+
+    // 初始化为输出
+    OutputPort led(PF8);
+    WatchDog dog(3000);
     Sys.AddTask(FeedDog, &dog, 0, 1000, "WatchDog");
-	Sys.AddTask(LedTask, &led, 0, 500,"LedTask");
-		
-	//flashtest();
-	    
+    Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
+
+    //flashtest();
+
     Sys.Start();
 }
