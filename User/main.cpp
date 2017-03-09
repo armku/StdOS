@@ -65,7 +65,7 @@ int flashtest(void);
 void TestAT45DB();
 int main(void)
 {
-	auto& sys=(TSys&)(Sys);
+	TSys& sys=(TSys&)(Sys);
 	#if 0
 	sys.Codec=codec;
 	sys.Name=(char*) namee;

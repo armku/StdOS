@@ -10,7 +10,10 @@ class Buffer: public Object
         //打包一个指针和长度指定的数据区
         Buffer(void *ptr, int len);
         //禁用拷贝构造函数
-        Buffer(const Buffer &buf) = delete ;
+        #if 0 
+            //c++11
+            Buffer(const Buffer &buf) = delete ;
+        #endif 
         //对象Mov操作，指针和长度归我，清空对方
         Buffer(Buffer &rval);
 
@@ -19,8 +22,12 @@ class Buffer: public Object
         //从指针拷贝，使用我的长度
         Buffer &operator = (const void *prt);
         //对象Mov操作，指针和长度归我，清空对方
-        Buffer &operator = (Buffer && rval);
-
+        #if 0
+            //C++11
+            Buffer &operator = (Buffer && rval);
+        #else 
+            Buffer &operator = (Buffer &rval);
+        #endif 
         //拿出指针供外部使用
         inline byte *GetBuffer()
         {
@@ -79,11 +86,18 @@ class Buffer: public Object
         virtual String &ToStr(String &str)const;
         //包装为字符串对象
         String AsString()const;
-
-        explicit operator bool()const
-        {
-                return _Length > 0;
-        }
+        #if 0
+            //C++11
+            explicit operator bool()const
+            {
+                    return _Length > 0;
+            }
+        #else 
+            operator bool()const
+            {
+                    return _Length > 0;
+            }
+        #endif 
         bool operator !()const
         {
                 return _Length == 0;
@@ -108,5 +122,5 @@ class Buffer: public Object
         void *_Arr;
     public:
         virtual void Show(bool newLine = false)const;
-		Buffer();
+        Buffer();
 };

@@ -17,7 +17,12 @@ Buffer &Buffer::operator = (const void *prt)
     return  *this;
 }
 
-Buffer &Buffer::operator = (Buffer && rval)
+#if 0
+    //C++11
+    Buffer &Buffer::operator = (Buffer && rval)
+#else 
+    Buffer &Buffer::operator = (Buffer &rval)
+#endif 
 {
     if (this->_Length < rval._Length)
     {
@@ -146,15 +151,15 @@ Buffer Buffer::Sub(int index, int length)
     }
     return buf;
 }
-Buffer::Buffer()
-{
-}
+
+Buffer::Buffer(){}
 String &Buffer::ToStr(String &str)const
 {
-	String *ret=new String();
-	return *ret;
+    String *ret = new String();
+    return  *ret;
 }
+
 void *Buffer::Alloc(int len)
 {
-	return this->_Arr;
+    return this->_Arr;
 }
