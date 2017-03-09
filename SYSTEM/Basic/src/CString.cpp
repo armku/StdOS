@@ -20,15 +20,15 @@ String::String(const char * str,int length)
 {
 	if(length<0)
 	{
-		this->bufLength=strlen(str);		
+		this->_Length=strlen(str);		
 	}
 	else
 	{
-		this->bufLength=length;
+		this->_Length=length;
 	}
 	this->initCapacity();
 	
-	this->Copy(0,str,this->bufLength);	
+	this->Copy(0,str,this->_Length);	
 }
 String::String(char ch)
 {
@@ -207,43 +207,43 @@ String& String::operator =(const char* str)
 {
 	if(strlen(str)<=this->mcapacity)
 	{
-		this->bufLength=strlen(str);
+		this->_Length=strlen(str);
 	}
 	else
 	{
-		this->bufLength=this->mcapacity;
+		this->_Length=this->mcapacity;
 	}
-	for(int i=0;i<this->bufLength;i++)
+	for(int i=0;i<this->_Length;i++)
 	{
 		this->pbuf[i]=str[i];		
 	}
-	this->pbuf[this->bufLength]=0;
+	this->pbuf[this->_Length]=0;
 	return *this;
 }
 String& String::operator =(const String& str) 
 {
 	if(str.Length()<=this->mcapacity)
 	{
-		this->bufLength=str.Length();
+		this->_Length=str.Length();
 	}
 	else
 	{
-		this->bufLength=this->mcapacity;
+		this->_Length=this->mcapacity;
 	}
-	for(int i=0;i<this->bufLength;i++)
+	for(int i=0;i<this->_Length;i++)
 	{
 		this->pbuf[i]=str.GetBuffer()[i];		
 	}
-	this->pbuf[this->bufLength]=0;
+	this->pbuf[this->_Length]=0;
 	return *this;
 }
 bool String::operator ==(const char* str) 
 {
-	if(strlen(str)!=this->bufLength)
+	if(strlen(str)!=this->_Length)
 	{
 		return false;
 	}
-	for(int i=0;i<this->bufLength;i++)
+	for(int i=0;i<this->_Length;i++)
 	{
 		if(this->pbuf[i]!=str[i])
 		{
@@ -254,11 +254,11 @@ bool String::operator ==(const char* str)
 }
 bool String::operator==(const String& str1)
 {
-	if(this->Length()!=str1.bufLength)
+	if(this->Length()!=str1._Length)
 	{
 		return false;
 	}
-	for(int i=0;i<this->bufLength;i++)
+	for(int i=0;i<this->_Length;i++)
 	{
 		if(this->pbuf[i]!=str1.pbuf[i])
 		{
@@ -269,19 +269,19 @@ bool String::operator==(const String& str1)
 }
 String& String::operator+=(const DateTime& dt)
 {
-	if((this->bufLength+19)<this->Capacity())
+	if((this->_Length+19)<this->Capacity())
 	{
-		this->bufLength+=19;
-		snprintf((char*)&this->pbuf[this->bufLength-1-18],20,"%04d-%02d-%02d %02d:%02d:%02d",dt.Year,dt.Month,dt.Day,dt.Hour,dt.Minute,dt.Second);
+		this->_Length+=19;
+		snprintf((char*)&this->pbuf[this->_Length-1-18],20,"%04d-%02d-%02d %02d:%02d:%02d",dt.Year,dt.Month,dt.Day,dt.Hour,dt.Minute,dt.Second);
 	}
 	return *this;
 }
 String& String::operator+=(const String& str)
 {
-	if((str.Length()+this->bufLength)<this->mcapacity)
+	if((str.Length()+this->_Length)<this->mcapacity)
 	{
-		this->bufLength+=str.Length();
-		this->Copy(this->bufLength-str.Length(),str.GetBuffer(),str.Length());
+		this->_Length+=str.Length();
+		this->Copy(this->_Length-str.Length(),str.GetBuffer(),str.Length());
 	}
 	
 	return *this;
@@ -290,11 +290,11 @@ String& String::operator+=(const float da)
 {
 	byte buf[100]={0};
 	snprintf((char*)buf,100,"%2.2f",da);
-	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	if((this->_Length+strlen((char*)buf))<this->mcapacity)
 	{
-		this->Copy(this->bufLength,buf,strlen((char*)buf));
+		this->Copy(this->_Length,buf,strlen((char*)buf));
 	}
-	this->bufLength+=strlen((char*)buf);
+	this->_Length+=strlen((char*)buf);
 	return *this;
 }
 
@@ -312,11 +312,11 @@ String& String::Concat(byte value,byte radix)
 		default:
 			break;
 	}
-	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	if((this->_Length+strlen((char*)buf))<this->mcapacity)
 	{
-		this->Copy(this->bufLength,buf,strlen((char*)buf));
+		this->Copy(this->_Length,buf,strlen((char*)buf));
 	}
-	this->bufLength+=strlen((char*)buf);
+	this->_Length+=strlen((char*)buf);
 	return *this;
 }
 String& String::Concat(short value,byte radix)
@@ -333,11 +333,11 @@ String& String::Concat(short value,byte radix)
 		default:
 			break;
 	}
-	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	if((this->_Length+strlen((char*)buf))<this->mcapacity)
 	{
-		this->Copy(this->bufLength,buf,strlen((char*)buf));
+		this->Copy(this->_Length,buf,strlen((char*)buf));
 	}
-	this->bufLength+=strlen((char*)buf);
+	this->_Length+=strlen((char*)buf);
 	return *this;
 }
 String& String::Concat(int value,byte radix)
@@ -354,11 +354,11 @@ String& String::Concat(int value,byte radix)
 		default:
 			break;
 	}
-	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	if((this->_Length+strlen((char*)buf))<this->mcapacity)
 	{
-		this->Copy(this->bufLength,buf,strlen((char*)buf));
+		this->Copy(this->_Length,buf,strlen((char*)buf));
 	}
-	this->bufLength+=strlen((char*)buf);
+	this->_Length+=strlen((char*)buf);
 	return *this;
 }
 String& String::Concat(uint value,byte radix)
@@ -375,11 +375,11 @@ String& String::Concat(uint value,byte radix)
 		default:
 			break;
 	}
-	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	if((this->_Length+strlen((char*)buf))<this->mcapacity)
 	{
-		this->Copy(this->bufLength,buf,strlen((char*)buf));
+		this->Copy(this->_Length,buf,strlen((char*)buf));
 	}
-	this->bufLength+=strlen((char*)buf);
+	this->_Length+=strlen((char*)buf);
 	return *this;
 }
 String& String::Concat(Int64 value,byte radix)
@@ -396,11 +396,11 @@ String& String::Concat(Int64 value,byte radix)
 		default:
 			break;
 	}
-	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	if((this->_Length+strlen((char*)buf))<this->mcapacity)
 	{
-		this->Copy(this->bufLength,buf,strlen((char*)buf));
+		this->Copy(this->_Length,buf,strlen((char*)buf));
 	}
-	this->bufLength+=strlen((char*)buf);
+	this->_Length+=strlen((char*)buf);
 	return *this;
 }
 String& String::Concat(UInt64 value,byte radix)
@@ -417,11 +417,11 @@ String& String::Concat(UInt64 value,byte radix)
 		default:
 			break;
 	}
-	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	if((this->_Length+strlen((char*)buf))<this->mcapacity)
 	{
-		this->Copy(this->bufLength,buf,strlen((char*)buf));
+		this->Copy(this->_Length,buf,strlen((char*)buf));
 	}
-	this->bufLength+=strlen((char*)buf);
+	this->_Length+=strlen((char*)buf);
 	return *this;
 }
 String& String::Concat(float value,byte dot)
@@ -448,11 +448,11 @@ String& String::Concat(float value,byte dot)
 			break;
 	}
 	
-	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	if((this->_Length+strlen((char*)buf))<this->mcapacity)
 	{
-		this->Copy(this->bufLength,buf,strlen((char*)buf));
+		this->Copy(this->_Length,buf,strlen((char*)buf));
 	}
-	this->bufLength+=strlen((char*)buf);
+	this->_Length+=strlen((char*)buf);
 	return *this;
 }
 String& String::Concat(double value,byte dot)
@@ -478,11 +478,11 @@ String& String::Concat(double value,byte dot)
 		default:
 			break;
 	}
-	if((this->bufLength+strlen((char*)buf))<this->mcapacity)
+	if((this->_Length+strlen((char*)buf))<this->mcapacity)
 	{
-		this->Copy(this->bufLength,buf,strlen((char*)buf));
+		this->Copy(this->_Length,buf,strlen((char*)buf));
 	}
-	this->bufLength+=strlen((char*)buf);
+	this->_Length+=strlen((char*)buf);
 	return *this;
 }
 byte ToInt(char ch)
@@ -504,7 +504,7 @@ String String::ToHex()
 	{
 		buf[i]=0;
 	}
-	for(int i=0;i<this->bufLength;i++)
+	for(int i=0;i<this->_Length;i++)
 	{
 		
 		if(isxdigit(this->pbuf[i]))
@@ -552,5 +552,5 @@ void String::initCapacity()
 //¼ÆËã×Ö·û´®³¤¶È
 void String::jsLength()
 {
-	this->bufLength= strlen((char*)this->pbuf);
+	this->_Length= strlen((char*)this->pbuf);
 }

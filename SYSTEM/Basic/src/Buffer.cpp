@@ -10,7 +10,7 @@ Buffer::Buffer(void* ptr,int len)
 
 Buffer & Buffer::operator = (const void * prt)
 {
-	for(int  i=0;i<this->bufLength;i++)
+	for(int  i=0;i<this->_Length;i++)
 	{
 		this->pbuf[i]=((byte*)prt)[i];
 	}
@@ -18,9 +18,9 @@ Buffer & Buffer::operator = (const void * prt)
 }
 Buffer& Buffer::operator=(Buffer&& rval)
 {
-	if(this->bufLength<rval.bufLength)
+	if(this->_Length<rval._Length)
 	{
-		debug_printf("Error: Buffer copy: Buffer length mismath src: %d ,dst: %d \n",rval.bufLength,this->bufLength);
+		debug_printf("Error: Buffer copy: Buffer length mismath src: %d ,dst: %d \n",rval._Length,this->_Length);
 	}
 	else
 	{
@@ -33,7 +33,7 @@ Buffer& Buffer::operator=(Buffer&& rval)
 }
 byte &Buffer::operator [] (int pos)
 {
-	if((pos<0)||(pos>this->bufLength))
+	if((pos<0)||(pos>this->_Length))
 	{
 		debug_printf("Error: [] length error");
 		return this->pbuf[0];
@@ -44,15 +44,15 @@ byte &Buffer::operator [] (int pos)
 //设置长度，可自动扩容 
 bool Buffer::SetLength(int len)
 {
-	if(this->bufLength>=len)
+	if(this->_Length>=len)
 	{
-		this->bufLength=len;
+		this->_Length=len;
 	}
 	else
 	{
 		//自动扩容
 		this->pbuf=new byte[len];
-		this->bufLength=len;
+		this->_Length=len;
 		delete []this->pbuf;
 	}
 	return true;
@@ -61,11 +61,11 @@ void Buffer::Show(bool newLine) const
 {
 	if(newLine)
 	{
-		for(int i=0;i<this->bufLength-1;i++)
+		for(int i=0;i<this->_Length-1;i++)
 		{
 			printf("%02X ",this->pbuf[i]);
 		}
-		printf("%02X",this->pbuf[this->bufLength-1]);
+		printf("%02X",this->pbuf[this->_Length-1]);
 	}
 	else
 	{
@@ -79,7 +79,7 @@ void Buffer::CopyTo(int destIndex, const void *dest, int len)
 {
 	if(len==-1)
 	{
-		len=this->bufLength;
+		len=this->_Length;
 	}
 	if(len<=0)
 	{
@@ -95,7 +95,7 @@ void Buffer::Copy(int destIndex, const void *src, int len)
 {
 	if(len==-1)
 	{
-		len=this->bufLength;
+		len=this->_Length;
 	}
 	if(len<=0)
 	{
@@ -111,11 +111,11 @@ void Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
 {
 	if(len==-1)
 	{		
-		len=this->bufLength;
-		if(len<src.bufLength)
+		len=this->_Length;
+		if(len<src._Length)
 		{
-			this->SetLength(src.bufLength);
-			len=this->bufLength;
+			this->SetLength(src._Length);
+			len=this->_Length;
 		}
 	}
 	for(int i=0;i<len;i++)
@@ -127,9 +127,9 @@ void Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
 Buffer Buffer::Sub(int index,int length)
 {	
 	byte *pbufsub=new byte[length];
-	if(length > this->bufLength)
+	if(length > this->_Length)
 	{
-		length= this->bufLength;
+		length= this->_Length;
 	}
 	Buffer buf(pbufsub,length);
 	
