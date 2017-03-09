@@ -18,5 +18,5 @@ int ArrayLength(T& array)
 class Array:public Buffer
 {
 	public:		
-		Array(byte* buf,ushort length);
+		Array(void* ptr,int len):Buffer(ptr,len){}
 };

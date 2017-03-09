@@ -30,7 +30,7 @@
 class String:public Array
 {
 	public:		
-		String(const char * str,int length=-1);
+		String(const char * str,int len=-1);
 		String(char ch);
 		String(const String& str1);
 		String(byte value,byte radix=10);//½øÖÆ×Ö·û´®

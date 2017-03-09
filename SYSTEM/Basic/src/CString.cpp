@@ -11,15 +11,15 @@ String::~String()
 {
 	delete[] ((byte *)(this->_Arr));
 }
-String::String(const char * str,int length)
+String::String(const char * str,int len):Array(str,len)
 {
-	if(length<0)
+	if(len<0)
 	{
 		this->_Length=strlen(str);		
 	}
 	else
 	{
-		this->_Length=length;
+		this->_Length=len;
 	}
 	this->initCapacity();
 	
