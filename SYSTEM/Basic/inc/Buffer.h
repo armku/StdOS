@@ -92,8 +92,5 @@ class Buffer:public Object
 		int _Length;
 		void *_Arr;	
 		
-		virtual void Show(bool newLine=false) const;
-	protected:
-		byte* pbuf;//»º³åÇø
-
+		virtual void Show(bool newLine=false) const;	
 };

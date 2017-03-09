@@ -9,7 +9,7 @@
 
 String::~String()
 {
-	delete[] this->pbuf;
+	delete[] ((byte *)(this->_Arr));
 }
 String::String()
 {
@@ -33,7 +33,7 @@ String::String(const char * str,int length)
 String::String(char ch)
 {
 	this->initCapacity();	
-	this->pbuf[0]=ch;
+	((byte *)(this->_Arr))[0]=ch;
 	this->jsLength();
 }
 //进制字符串
@@ -44,10 +44,10 @@ String::String(byte value,byte radix)
 	switch(radix)
 	{
 		case 10:
-			snprintf((char*)this->pbuf,this->mcapacity,"%d",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%d",value);
 			break;
 		case 16:
-			snprintf((char*)this->pbuf,this->mcapacity,"%X",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%X",value);
 			break;
 	}
 	this->jsLength();
@@ -60,10 +60,10 @@ String::String(short value,byte radix)
 	switch(radix)
 	{
 		case 10:
-			snprintf((char*)this->pbuf,this->mcapacity,"%d",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%d",value);
 			break;
 		case 16:
-			snprintf((char*)this->pbuf,this->mcapacity,"%X",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%X",value);
 			break;
 	}
 	this->jsLength();	
@@ -76,10 +76,10 @@ String::String(int value,byte radix)
 	switch(radix)
 	{
 		case 10:
-			snprintf((char*)this->pbuf,this->mcapacity,"%d",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%d",value);
 			break;
 		case 16:
-			snprintf((char*)this->pbuf,this->mcapacity,"%X",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%X",value);
 			break;
 	}
 	this->jsLength();	
@@ -92,10 +92,10 @@ String::String(uint value,byte radix)
 	switch(radix)
 	{
 		case 10:
-			snprintf((char*)this->pbuf,this->mcapacity,"%u",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%u",value);
 			break;
 		case 16:
-			snprintf((char*)this->pbuf,this->mcapacity,"%X",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%X",value);
 			break;
 	}
 	this->jsLength();	
@@ -108,10 +108,10 @@ String::String(Int64 value,byte radix)
 	switch(radix)
 	{
 		case 10:
-			snprintf((char*)this->pbuf,this->mcapacity,"%lld",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%lld",value);
 			break;
 		case 16:
-			snprintf((char*)this->pbuf,this->mcapacity,"%llX",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%llX",value);
 			break;
 	}
 	this->jsLength();	
@@ -124,10 +124,10 @@ String::String(UInt64 value,byte radix)
 	switch(radix)
 	{
 		case 10:
-			snprintf((char*)this->pbuf,this->mcapacity,"%llu",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%llu",value);
 			break;
 		case 16:
-			snprintf((char*)this->pbuf,this->mcapacity,"%llX",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%llX",value);
 			break;
 	}
 	this->jsLength();	
@@ -139,22 +139,22 @@ String::String(float value,byte dot)
 	switch(dot)
 	{
 		case 0:
-			snprintf((char*)this->pbuf,this->mcapacity,"%0.0f",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%0.0f",value);
 			break;
 		case 1:
-			snprintf((char*)this->pbuf,this->mcapacity,"%0.1f",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%0.1f",value);
 			break;
 		case 2:
-			snprintf((char*)this->pbuf,this->mcapacity,"%0.2f",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%0.2f",value);
 			break;
 		case 3:
-			snprintf((char*)this->pbuf,this->mcapacity,"%0.3f",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%0.3f",value);
 			break;
 		case 4:
-			snprintf((char*)this->pbuf,this->mcapacity,"%0.4f",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%0.4f",value);
 			break;
 		case 5:
-			snprintf((char*)this->pbuf,this->mcapacity,"%0.5f",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%0.5f",value);
 			break;
 		default:
 			break;
@@ -168,22 +168,22 @@ String::String(double value,byte dot)
 	switch(dot)
 	{
 		case 0:
-			snprintf((char*)this->pbuf,this->mcapacity,"%0.0lf",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%0.0lf",value);
 			break;
 		case 1:
-			snprintf((char*)this->pbuf,this->mcapacity,"%0.1lf",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%0.1lf",value);
 			break;
 		case 2:
-			snprintf((char*)this->pbuf,this->mcapacity,"%0.2lf",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%0.2lf",value);
 			break;
 		case 3:
-			snprintf((char*)this->pbuf,this->mcapacity,"%0.3lf",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%0.3lf",value);
 			break;
 		case 4:
-			snprintf((char*)this->pbuf,this->mcapacity,"%0.4lf",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%0.4lf",value);
 			break;
 		case 5:
-			snprintf((char*)this->pbuf,this->mcapacity,"%0.5lf",value);
+			snprintf((char*)((byte *)(this->_Arr)),this->mcapacity,"%0.5lf",value);
 			break;
 		default:
 			break;
@@ -198,7 +198,7 @@ String::String(const String& str1)
 	#if 1
 	for(int i=0;i<str1.Length();i++)
 	{
-		this->pbuf[i]=str1.GetBuffer()[i];
+		((byte *)(this->_Arr))[i]=str1.GetBuffer()[i];
 	}
 	this->jsLength();
 	#endif
@@ -215,9 +215,9 @@ String& String::operator =(const char* str)
 	}
 	for(int i=0;i<this->_Length;i++)
 	{
-		this->pbuf[i]=str[i];		
+		((byte *)(this->_Arr))[i]=str[i];		
 	}
-	this->pbuf[this->_Length]=0;
+	((byte *)(this->_Arr))[this->_Length]=0;
 	return *this;
 }
 String& String::operator =(const String& str) 
@@ -232,9 +232,9 @@ String& String::operator =(const String& str)
 	}
 	for(int i=0;i<this->_Length;i++)
 	{
-		this->pbuf[i]=str.GetBuffer()[i];		
+		((byte *)(this->_Arr))[i]=str.GetBuffer()[i];		
 	}
-	this->pbuf[this->_Length]=0;
+	((byte *)(this->_Arr))[this->_Length]=0;
 	return *this;
 }
 bool String::operator ==(const char* str) 
@@ -245,7 +245,7 @@ bool String::operator ==(const char* str)
 	}
 	for(int i=0;i<this->_Length;i++)
 	{
-		if(this->pbuf[i]!=str[i])
+		if(((byte *)(this->_Arr))[i]!=str[i])
 		{
 			return false;
 		}
@@ -260,7 +260,7 @@ bool String::operator==(const String& str1)
 	}
 	for(int i=0;i<this->_Length;i++)
 	{
-		if(this->pbuf[i]!=str1.pbuf[i])
+		if(((byte *)(this->_Arr))[i]!=((byte*)str1._Arr)[i])
 		{
 			return false;
 		}
@@ -272,7 +272,7 @@ String& String::operator+=(const DateTime& dt)
 	if((this->_Length+19)<this->Capacity())
 	{
 		this->_Length+=19;
-		snprintf((char*)&this->pbuf[this->_Length-1-18],20,"%04d-%02d-%02d %02d:%02d:%02d",dt.Year,dt.Month,dt.Day,dt.Hour,dt.Minute,dt.Second);
+		snprintf((char*)&((byte *)(this->_Arr))[this->_Length-1-18],20,"%04d-%02d-%02d %02d:%02d:%02d",dt.Year,dt.Month,dt.Day,dt.Hour,dt.Minute,dt.Second);
 	}
 	return *this;
 }
@@ -507,17 +507,17 @@ String String::ToHex()
 	for(int i=0;i<this->_Length;i++)
 	{
 		
-		if(isxdigit(this->pbuf[i]))
+		if(isxdigit(((byte *)(this->_Arr))[i]))
 		{
 			if(bi==0)
 			{				
-				da= ToInt(this->pbuf[i]);
+				da= ToInt(((byte *)(this->_Arr))[i]);
 				da<<=4;
 				bi=1;				
 			}
 			else
 			{
-				da|=ToInt(this->pbuf[i]);
+				da|=ToInt(((byte *)(this->_Arr))[i]);
 				buf[j]=da;
 				j++;
 				bi=0;
@@ -539,18 +539,18 @@ uint String::Capacity() const
 }
 void String::Show(bool newLine) const
 {
-	printf("%s",this->pbuf);
+	printf("%s",((byte *)(this->_Arr)));
 	newLine ? printf("\n"):0;
 }
 //初始化容器
 void String::initCapacity()
 {
-	this->pbuf=new byte[0x40];
+	((byte *)(this->_Arr))=new byte[0x40];
 	this->mcapacity=0x40-1;
-	memset(this->pbuf,0x40,0);
+	memset(((byte *)(this->_Arr)),0x40,0);
 }
 //计算字符串长度
 void String::jsLength()
 {
-	this->_Length= strlen((char*)this->pbuf);
+	this->_Length= strlen((char*)((byte *)(this->_Arr)));
 }

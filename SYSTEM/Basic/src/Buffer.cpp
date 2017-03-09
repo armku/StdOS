@@ -12,7 +12,7 @@ Buffer & Buffer::operator = (const void * prt)
 {
 	for(int  i=0;i<this->_Length;i++)
 	{
-		this->pbuf[i]=((byte*)prt)[i];
+		((byte *)(this->_Arr))[i]=((byte*)prt)[i];
 	}
 	return *this;
 }
@@ -26,7 +26,7 @@ Buffer& Buffer::operator=(Buffer&& rval)
 	{
 		for(int i=0;i<rval.Length();i++)
 		{
-			this->pbuf[i]=rval.GetBuffer()[i];
+			((byte *)(this->_Arr))[i]=rval.GetBuffer()[i];
 		}
 	}
 	return *this;
@@ -36,9 +36,9 @@ byte &Buffer::operator [] (int pos)
 	if((pos<0)||(pos>this->_Length))
 	{
 		debug_printf("Error: [] length error");
-		return this->pbuf[0];
+		return ((byte *)(this->_Arr))[0];
 	}
-	return this->pbuf[pos];
+	return ((byte *)(this->_Arr))[pos];
 }
 
 //设置长度，可自动扩容 
@@ -51,9 +51,9 @@ bool Buffer::SetLength(int len)
 	else
 	{
 		//自动扩容
-		this->pbuf=new byte[len];
+		this->_Arr=new byte[len];
 		this->_Length=len;
-		delete []this->pbuf;
+		delete []((byte *)(this->_Arr));
 	}
 	return true;
 }
@@ -63,13 +63,13 @@ void Buffer::Show(bool newLine) const
 	{
 		for(int i=0;i<this->_Length-1;i++)
 		{
-			printf("%02X ",this->pbuf[i]);
+			printf("%02X ",((byte *)(this->_Arr))[i]);
 		}
-		printf("%02X",this->pbuf[this->_Length-1]);
+		printf("%02X",((byte *)(this->_Arr))[this->_Length-1]);
 	}
 	else
 	{
-		printf("%s",this->pbuf);
+		printf("%s",((byte *)(this->_Arr)));
 	}
 	//Object::Show(newLine);
 	Object::Show(true);
@@ -87,7 +87,7 @@ void Buffer::CopyTo(int destIndex, const void *dest, int len)
 	}
 	for(int i=0;i<len;i++)
 	{
-		((byte*)dest)[destIndex+i]=this->pbuf[i];
+		((byte*)dest)[destIndex+i]=((byte *)(this->_Arr))[i];
 	}
 }
 //拷贝数据，默认-1长度表示当前长度 
@@ -103,7 +103,7 @@ void Buffer::Copy(int destIndex, const void *src, int len)
 	}
 	for(int i=0;i<len;i++)
 	{
-	this->pbuf[destIndex+i]=((byte*)src)[i];	
+	((byte *)(this->_Arr))[destIndex+i]=((byte*)src)[i];	
 	}	
 }
 //拷贝数据，默认-1长度表示两者最小长度
@@ -120,7 +120,7 @@ void Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
 	}
 	for(int i=0;i<len;i++)
 	{		
-		this->pbuf[destIndex+i] = src.pbuf[srcIndex+i];
+		((byte*)this->_Arr)[destIndex+i] = ((byte*)(src._Arr))[srcIndex+i];
 	}	
 }
 //截取自缓冲区  
