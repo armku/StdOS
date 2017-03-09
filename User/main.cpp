@@ -66,6 +66,7 @@ void TestAT45DB();
 int main(void)
 {
 	auto& sys=(TSys&)(Sys);
+	#if 0
 	sys.Codec=codec;
 	sys.Name=(char*) namee;
 	//Rtc提取时间
@@ -74,7 +75,7 @@ int main(void)
     Rtc->External = false;
 	Rtc->Init();
 	Rtc->Start(false,false);
-	
+	#endif
 	sys.Init();
 	#if DEBUG
 	Sys.MessagePort=COM1;
@@ -84,9 +85,10 @@ int main(void)
 	#else
 	WatchDog::Start();
 	#endif
+	#if 0
 	//flash 最后一块作为配置区
 	Config::Current = &Config::CreateFlash();
-	
+	#endif
 	
 	
 	
