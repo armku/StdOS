@@ -95,6 +95,5 @@ class Buffer:public Object
 		virtual void Show(bool newLine=false) const;
 	protected:
 		byte* pbuf;//缓冲区
-		//ushort bufLength;//缓冲区长度
 
 };
