@@ -110,3 +110,7 @@ void WatchDog::Feed()
 {
     IWDG_ReloadCounter();
 }
+void WatchDog::Start(uint msTimeOut,uint msFeed)
+{
+	
+}

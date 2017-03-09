@@ -146,3 +146,15 @@ Buffer Buffer::Sub(int index, int length)
     }
     return buf;
 }
+Buffer::Buffer()
+{
+}
+String &Buffer::ToStr(String &str)const
+{
+	String *ret=new String();
+	return *ret;
+}
+void *Buffer::Alloc(int len)
+{
+	return this->_Arr;
+}

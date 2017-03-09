@@ -30,6 +30,7 @@
 class String:public Array
 {
 	public:		
+		String();
 		String(const char * str,int len=-1);
 		String(char ch);
 		String(const String& str1);
