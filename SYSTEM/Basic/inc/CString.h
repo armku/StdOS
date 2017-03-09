@@ -29,8 +29,7 @@
 //自带64字节的缓冲区。
 class String:public Array
 {
-	public:
-		String();
+	public:		
 		String(const char * str,int length=-1);
 		String(char ch);
 		String(const String& str1);

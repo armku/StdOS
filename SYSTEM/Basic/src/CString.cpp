@@ -11,11 +11,6 @@ String::~String()
 {
 	delete[] ((byte *)(this->_Arr));
 }
-String::String()
-{
-	this->initCapacity();
-	this->jsLength();
-}
 String::String(const char * str,int length)
 {
 	if(length<0)

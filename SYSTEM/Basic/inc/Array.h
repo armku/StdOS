@@ -17,7 +17,6 @@ int ArrayLength(T& array)
 //สýื้
 class Array:public Buffer
 {
-	public:
-		Array();
+	public:		
 		Array(byte* buf,ushort length);
 };
