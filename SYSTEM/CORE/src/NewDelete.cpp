@@ -11,8 +11,8 @@
 
 extern "C"
 {
-    //extern uint __heap_base;
-    //extern uint __heap_limit;
+    extern uint __heap_base;
+    extern uint __heap_limit;
 }
 
 void *operator new(uint size)
@@ -20,7 +20,9 @@ void *operator new(uint size)
     debug_printf("new size: %d", size);
     void *p = malloc(size);
     if (!p)
+	{
         debug_printf(" malloc failed! size=%d", size);
+	}
     else
     {
         debug_printf(" 0X%08x", p);

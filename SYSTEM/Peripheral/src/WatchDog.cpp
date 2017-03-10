@@ -110,7 +110,16 @@ void WatchDog::Feed()
 {
     IWDG_ReloadCounter();
 }
-void WatchDog::Start(uint msTimeOut,uint msFeed)
+WatchDog cur;
+WatchDog& WatchDog::Current()
+{
+	return cur;
+}
+void WatchDog::FeedDogTask(void* param)
 {
 	
+}
+void WatchDog::Start(uint msTimeOut,uint msFeed)
+{
+	Sys.AddTask(FeedDogTask,&WatchDog::Current(),msTimeOut,msFeed);
 }
