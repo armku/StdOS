@@ -3,7 +3,7 @@
 #include "Type.h"
 #include "DateTime.h"
 
-class STM32Rtc
+class HardRtc
 {
     public:  
 		void Init();
