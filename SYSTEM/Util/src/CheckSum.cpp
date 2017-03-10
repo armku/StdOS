@@ -17,7 +17,7 @@ CRC-32
 *输   出:校验和
 *功   能:校验和-8
 *******************************************************/
-byte CheckSum8(byte *buf,ushort len)
+byte CheckSum::CheckSum8(byte *buf,ushort len)
 {
 	  ushort    i=0;
 	  byte Sum=0;
@@ -36,7 +36,7 @@ byte CheckSum8(byte *buf,ushort len)
 *输   出:校验和
 *功   能:校验和-16
 *******************************************************/
-ushort CheckSum16(byte *buf,ushort len)
+ushort CheckSum::CheckSum16(byte *buf,ushort len)
 {
 	ushort    i=0;
 	ushort Sum=0;
@@ -55,7 +55,7 @@ ushort CheckSum16(byte *buf,ushort len)
 *输   出:校验和
 *功   能:校验和-32
 *******************************************************/
-uint CheckSum32(byte *buf,ushort len)
+uint CheckSum::CheckSum32(byte *buf,ushort len)
 {
 	ushort    i=0;
 	uint Sum=0;
@@ -75,7 +75,7 @@ uint CheckSum32(byte *buf,ushort len)
 *输   出:校验和
 *功   能:校验和-Intel Hex
 *******************************************************/
-byte IntelHexCheckSum(byte *buf,ushort len)
+byte CheckSum::IntelHexCheckSum(byte *buf,ushort len)
 {
       byte Sum;
 
@@ -91,7 +91,7 @@ byte IntelHexCheckSum(byte *buf,ushort len)
 *输   出:校验和
 *功   能:校验和-TCP/IP
 *******************************************************/
-ushort NetCheckSum(byte *buf, ushort len)
+ushort CheckSum::NetCheckSum(byte *buf, ushort len)
 {
 	ushort   Sum=0; 
 
@@ -112,7 +112,7 @@ ushort NetCheckSum(byte *buf, ushort len)
 *输   出:校验值
 *功   能:异或校验
 *******************************************************/
-byte BCCVerify(byte *buf,ushort len)
+byte CheckSum::BCCVerify(byte *buf,ushort len)
 {
 	byte s=0;
 
@@ -130,7 +130,7 @@ byte BCCVerify(byte *buf,ushort len)
 *输   出:校验和
 *功   能:奇校验
 *******************************************************/
-bool OddParity(byte *buf, ushort len)   
+bool CheckSum::OddParity(byte *buf, ushort len)   
 {   
 	ushort  i=0,j=0;   
 	byte d=0;   
@@ -162,7 +162,7 @@ bool OddParity(byte *buf, ushort len)
 *输   出:校验和
 *功   能:偶校验
 *******************************************************/
-bool EvenParity(byte *buf, ushort len)   
+bool CheckSum::EvenParity(byte *buf, ushort len)   
 {   
 	 return (!OddParity(buf,len)); 
 }   
@@ -228,7 +228,7 @@ const byte CRC8TAB[256]={
 *输   出:校验值
 *功   能:循环冗余校验-8
 *******************************************************/
-byte CRC8( byte *buf, ushort len)     
+byte CheckSum::CRC8( byte *buf, ushort len)     
 {               
        byte  crc=0;
    
@@ -249,7 +249,7 @@ byte CRC8( byte *buf, ushort len)
 *功   能:循环冗余校验-16
          （美国标准-0x8005）
 *******************************************************/
-ushort CRC16Default(byte * pszBuf, ushort unLength)
+ushort CheckSum::CRC16Default(byte * pszBuf, ushort unLength)
 {
 	uint i, j;
 	ushort CrcReg = 0xFFFF;
@@ -279,7 +279,7 @@ ushort CRC16Default(byte * pszBuf, ushort unLength)
 *功   能:循环冗余校验-16
          （CCITT标准-0x1021）
 *******************************************************/
-ushort CRC16CCITT(byte * pszBuf, ushort unLength)
+ushort CheckSum::CRC16CCITT(byte * pszBuf, ushort unLength)
 {
 
 	uint i, j;
@@ -310,7 +310,7 @@ ushort CRC16CCITT(byte * pszBuf, ushort unLength)
 *功   能:循环冗余校验-16
          （RTU标准-0xA001）
 *******************************************************/
-ushort CRC16RTU( byte * pszBuf, ushort unLength)
+ushort CheckSum::CRC16RTU( byte * pszBuf, ushort unLength)
 {
 	ushort CRC=0XFFFF;
 	uint CRC_count;
@@ -340,7 +340,7 @@ ushort CRC16RTU( byte * pszBuf, ushort unLength)
 }
 
 
-static unsigned long Reflect(unsigned long ref, char ch)
+unsigned long CheckSum::Reflect(unsigned long ref, char ch)
 {
 	unsigned long value = 0;
 
@@ -362,7 +362,7 @@ static unsigned long Reflect(unsigned long ref, char ch)
 *功   能:循环冗余校验-32
          （美国标准-0x04C11DB7）
 *******************************************************/
-UInt64 CRC32Default(byte *pszBuf,UInt64 ulLength)
+UInt64 CheckSum::CRC32Default(byte *pszBuf,UInt64 ulLength)
 {
 	unsigned long Result = 0xFFFFFFFF;
 	unsigned long m_Table[256];
