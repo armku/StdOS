@@ -385,18 +385,3 @@ UInt64 CRC32Default(byte *pszBuf,UInt64 ulLength)
 
 	return Result;
 }
-
-unsigned long Reflect(unsigned long ref, char ch)
-{
-	unsigned long value = 0;
-
-	
-	for(int i = 1; i < (ch + 1); i++)
-	{
-		if (ref & 1)
-			value |= 1 << (ch - i);
-		ref >>= 1;
-	}
-
-	return value;
-}
