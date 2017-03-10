@@ -56,7 +56,7 @@ class Buffer: public Object
         static void Zero(void *dest, int len);
         //拷贝数据 默认-1长度表示当前长度
         virtual void Copy(int destIndex, const void *src, int len =  - 1); //拷贝数据，默认-1长度表示当前长度   
-        virtual void CopyTo(int destIndex, const void *dest, int len =  - 1); //const;//把数据复制到目标缓冲区，默认-1长度表示当前长度
+        virtual void CopyTo(int destIndex, const void *dest, int len =  - 1) const;//把数据复制到目标缓冲区，默认-1长度表示当前长度
         virtual void Copy(int destIndex, const Buffer &src, int srcIndex, int len); //拷贝数据，默认-1长度表示两者最小长度 
         int Copy(const Buffer &src, int destIndex = 0);
         //用指定字节设置初始化一个区域
@@ -64,7 +64,7 @@ class Buffer: public Object
         void Clear(byte item = 0);
 
         //截取一个子缓冲区，默认-1长度表示剩余全部		
-        Buffer Sub(int index, int length); //截取自缓冲区  
+        Buffer Sub(int index, int length=-1); //截取自缓冲区  
         const Buffer Sub(int index, int len)const;
 
         //显示16禁止数据，指定分割字符和换行长度
@@ -121,6 +121,7 @@ class Buffer: public Object
         virtual void *Alloc(int len);
         //以下为猜测内容
         int _Length;
+		int _LengthInit;//初始长度
         void *_Arr;
     public:
         virtual void Show(bool newLine = false)const;
