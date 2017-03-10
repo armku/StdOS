@@ -102,7 +102,7 @@ void WatchDog::ConfigMax()
 
     // 独立看门狗无法关闭
     IWDG_SetPrescaler(IWDG_Prescaler_256);
-    IWDG_SetReload(0x0FFF);
+    IWDG_SetReload(0x0FFF); 
     IWDG_ReloadCounter();
 }
 
@@ -110,16 +110,18 @@ void WatchDog::Feed()
 {
     IWDG_ReloadCounter();
 }
-WatchDog cur;
+WatchDog* cur;
 WatchDog& WatchDog::Current()
 {
-	return cur;
+	return *cur;
 }
 void WatchDog::FeedDogTask(void* param)
 {
-	
+	WatchDog *dog = (WatchDog*)param;
+    dog->Feed();
 }
 void WatchDog::Start(uint msTimeOut,uint msFeed)
 {
+	cur=new WatchDog(msTimeOut);
 	Sys.AddTask(FeedDogTask,&WatchDog::Current(),msTimeOut,msFeed,"FeedDog");
 }

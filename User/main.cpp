@@ -24,12 +24,6 @@ typedef enum
     KEY_NULL = 0
 } KEY_MODE;
 
-void FeedDog(void *param)
-{
-    WatchDog *dog = (WatchDog*)param;
-    dog->Feed();
-}
-
 OutputPort led1(PB0, true);
 OutputPort led2(PF7, true);
 
@@ -109,8 +103,7 @@ int main(void)
 
     // 初始化为输出
     OutputPort led(PF8);
-    WatchDog dog(3000);
-    Sys.AddTask(FeedDog, &dog, 0, 1000, "WatchDog");
+    
     Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
 
     //flashtest();
