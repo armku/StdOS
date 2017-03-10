@@ -14,11 +14,11 @@ class Buffer: public Object
             //c++11
             Buffer(const Buffer &buf) = delete ;
         #endif 
-		#if 0
-		//c++11
-        //对象Mov操作，指针和长度归我，清空对方
-        Buffer(Buffer &&rval);
-		#endif
+        #if 0
+            //c++11
+            //对象Mov操作，指针和长度归我，清空对方
+            Buffer(Buffer && rval);
+        #endif 
         //从另一个对象拷贝数据和长度，长度不足时扩容失败时报错
         Buffer &operator = (const Buffer &rhs);
         //从指针拷贝，使用我的长度
@@ -26,7 +26,7 @@ class Buffer: public Object
         //对象Mov操作，指针和长度归我，清空对方
         #if 0
             //C++11
-            Buffer &operator = (Buffer && rval);        
+            Buffer &operator = (Buffer && rval);
         #endif 
         //拿出指针供外部使用
         inline byte *GetBuffer()
