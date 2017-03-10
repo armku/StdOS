@@ -222,12 +222,15 @@ const Buffer Buffer::Sub(int index, int len)const
     uint Buffer::ToUInt32()const{}
 
     UInt64 Buffer::ToUInt64()const{}
+#endif 
+void Buffer::Write(ushort value, int index){
 
-    void Buffer::Write(ushort value, int index){}
-    void Buffer::Write(short value, int index){}
-    void Buffer::Write(uint value, int index){}
-    void Buffer::Write(int value, int index){}
-    void Buffer::Write(UInt64 value, int index){}
+}
+void Buffer::Write(short value, int index){}
+void Buffer::Write(uint value, int index){}
+void Buffer::Write(int value, int index){}
+void Buffer::Write(UInt64 value, int index){}
+#if 0
     //输出对象的字符串表示方式
     String &Buffer::ToStr(String &str)const{}
     //包装为字符串对象
@@ -271,22 +274,22 @@ int Buffer::CompareTo(const void *ptr, int len)const
 }
 
 #if 0
-bool Buffer::operator == (const Buffer &bs1, const Buffer &bs2)
-{
-    if (bs1.Length() != bs2.Length())
+    bool Buffer::operator == (const Buffer &bs1, const Buffer &bs2)
     {
-        return false;
-    }
-    for (int i = 0; i < bs1.Length(); i++)
-    {
-        if (bs1[i] != bs2[i])
+        if (bs1.Length() != bs2.Length())
         {
             return false;
         }
+        for (int i = 0; i < bs1.Length(); i++)
+        {
+            if (bs1[i] != bs2[i])
+            {
+                return false;
+            }
+        }
+        return true;
     }
-    return true;
-}
-#endif
+#endif 
 #if 0  
     friend bool Buffer::operator == (const Buffer &bs1, const void *ptr){}
     friend bool Buffer::operator != (const Buffer &bs1, const Buffer &bs2){}
