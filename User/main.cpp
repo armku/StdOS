@@ -11,6 +11,7 @@
 #include "Pwm.h"
 #include "Modbus.h"
 #include "Spi.h"
+#include "HardRtc.h"
 
 typedef enum
 {
@@ -70,8 +71,10 @@ int main(void)
     #if 0
         sys.Codec = codec;
         sys.Name = (char*)namee;
+	#endif
+	#if 1
         //Rtc提取时间
-        auto Rtc = HardRtc::Instance();
+        HardRtc* Rtc = HardRtc::Instance();
         Rtc->LowPower = false;
         Rtc->External = false;
         Rtc->Init();

@@ -2,6 +2,8 @@
 #include "DateTime.h"
 #include "stm32f10x.h"
 
+HardRtc hardRtc;
+
 /* 秒中断标志，进入秒中断时置1，当时间被刷新之后清0 */
 __IO uint32_t TimeDisplay = 0;
 
@@ -18,6 +20,15 @@ void HardRtc::RTC_NVIC_Config(void)
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
+}
+//生成实例
+HardRtc * HardRtc::Instance()
+{
+	return &hardRtc;
+}
+void HardRtc::Start(bool b1 ,bool b2)
+{
+	
 }
 
 void HardRtc::RTC_Configuration(void)
