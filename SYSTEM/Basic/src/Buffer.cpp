@@ -232,10 +232,62 @@ const Buffer Buffer::Sub(int index, int len)const
     String &Buffer::ToStr(String &str)const{}
     //包装为字符串对象
     String Buffer::AsString()const{}
-    int Buffer::CompareTo(const Buffer &bs)const{}
-    int Buffer::CompareTo(const void *ptr, int len)const{}
+#endif 
+int Buffer::CompareTo(const Buffer &bs)const
+{
+    for (int i = 0; i < this->_Length; i++)
+    {
+        if (this->GetBuffer()[i] > bs[i])
+        {
+            return 1;
+        }
+        if (this->GetBuffer()[i] < bs[i])
+        {
+            return  - 1;
+        }
+    }
+    return 0;
+}
 
-    friend bool Buffer::operator == (const Buffer &bs1, const Buffer &bs2){}
+int Buffer::CompareTo(const void *ptr, int len)const
+{
+    if (len > this->_Length)
+    {
+        len = this->_Length;
+    }
+    int ret = 0;
+    for (int i = 0; i < this->_Length; i++)
+    {
+        if (this->GetBuffer()[i] > ((byte*)ptr)[i])
+        {
+            return 1;
+        }
+        if (this->GetBuffer()[i] < ((byte*)ptr)[i])
+        {
+            return  - 1;
+        }
+    }
+    return ret;
+}
+
+#if 0
+bool Buffer::operator == (const Buffer &bs1, const Buffer &bs2)
+{
+    if (bs1.Length() != bs2.Length())
+    {
+        return false;
+    }
+    for (int i = 0; i < bs1.Length(); i++)
+    {
+        if (bs1[i] != bs2[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+#endif
+#if 0  
     friend bool Buffer::operator == (const Buffer &bs1, const void *ptr){}
     friend bool Buffer::operator != (const Buffer &bs1, const Buffer &bs2){}
     friend bool Buffer::operator != (const Buffer &bs1, const void *ptr){}
