@@ -80,6 +80,7 @@ class TSys: public Object
         ushort DevID;
         byte _Index; //未知
         String *CPUName;
+		char * Name;//名称
         ushort Crc16(const void *buf, uint len, ushort crc = 0); //crc 计算 软件实现
         uint Crc(const void *buf, uint len); //crc 硬件实现
         uint Crc(const void *buf, uint len, uint crc);

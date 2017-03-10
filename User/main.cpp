@@ -65,21 +65,21 @@ void LedTask(void *param)
 
 int flashtest(void);
 void TestAT45DB();
+#define namee "StdOS"
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);
     #if 0
         sys.Codec = codec;
-        sys.Name = (char*)namee;
 	#endif
-	#if 1
-        //Rtc提取时间
-        HardRtc* Rtc = HardRtc::Instance();
-        Rtc->LowPower = false;
-        Rtc->External = false;
-        Rtc->Init();
-        Rtc->Start(false, false);
-    #endif 
+	
+    sys.Name = (char*)namee;    
+    //Rtc提取时间
+    HardRtc *Rtc = HardRtc::Instance();
+    Rtc->LowPower = false;
+    Rtc->External = false;
+    Rtc->Init();
+    Rtc->Start(false, false);
     sys.Init();
     #if DEBUG
         Sys.MessagePort = COM1;
@@ -94,8 +94,6 @@ int main(void)
         Config::Current = &Config::CreateFlash();
     #endif 
 
-
-
     sp2.RS485 = &rs485;
     rs485 = 0;
     sp2.Register(OnUsartRead);
@@ -104,7 +102,6 @@ int main(void)
 
     exti.Register(OnKeyPress);
     exti1.Register(OnKeyPress);
-
 
     PWM pwm1(PC9);
     pwm1.Init();
