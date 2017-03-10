@@ -10,25 +10,6 @@ CRC-32
 */
 #include "CheckSum.h"
 
-/*************************************************************************************
- 
-	作    者：温子祺
-	联系方式：wenziqi@hotmail.com  wenziqi@gmail.com
-	官    网：www.smartmcu.com  
-	博    客：http://www.cnblogs.com/wenziqi/       
-                                        
-
- *************************************************************************************/
-
-
-
-
-//======================================================================================
-
-                                        校验和
-
-//======================================================================================
-
 /******************************************************
 *函数名称:CheckSum8
 *输   入:buf 要校验的数据 
@@ -36,10 +17,10 @@ CRC-32
 *输   出:校验和
 *功   能:校验和-8
 *******************************************************/
-UCHAR CheckSum8(UCHAR *buf,UINT len)
+byte CheckSum8(byte *buf,ushort len)
 {
-	  UINT    i=0;
-	  UCHAR Sum=0;
+	  ushort    i=0;
+	  byte Sum=0;
 
 	  for (i=0;i<len;i++)
 	  {
@@ -55,10 +36,10 @@ UCHAR CheckSum8(UCHAR *buf,UINT len)
 *输   出:校验和
 *功   能:校验和-16
 *******************************************************/
-UINT16 CheckSum16(UCHAR *buf,UINT len)
+ushort CheckSum16(byte *buf,ushort len)
 {
-	UINT    i=0;
-	UINT16 Sum=0;
+	ushort    i=0;
+	ushort Sum=0;
 
 	for (i=0;i<len;i++)
 	{
@@ -74,10 +55,10 @@ UINT16 CheckSum16(UCHAR *buf,UINT len)
 *输   出:校验和
 *功   能:校验和-32
 *******************************************************/
-UINT32 CheckSum32(UCHAR *buf,UINT len)
+uint CheckSum32(byte *buf,ushort len)
 {
-	UINT    i=0;
-	UINT32 Sum=0;
+	ushort    i=0;
+	uint Sum=0;
 
 	for (i=0;i<len;i++)
 	{
@@ -94,12 +75,12 @@ UINT32 CheckSum32(UCHAR *buf,UINT len)
 *输   出:校验和
 *功   能:校验和-Intel Hex
 *******************************************************/
-UCHAR IntelHexCheckSum(UCHAR *buf,UINT len)
+byte IntelHexCheckSum(byte *buf,ushort len)
 {
-      UCHAR Sum;
+      byte Sum;
 
       Sum=CheckSum8(buf,len);
-      Sum=0x01+(UCHAR)(~Sum);
+      Sum=0x01+(byte)(~Sum);
 
       return Sum;
 }
@@ -110,9 +91,9 @@ UCHAR IntelHexCheckSum(UCHAR *buf,UINT len)
 *输   出:校验和
 *功   能:校验和-TCP/IP
 *******************************************************/
-USHORT NetCheckSum(UCHAR *buf, UINT len)
+ushort NetCheckSum(byte *buf, ushort len)
 {
-	UINT   Sum=0; 
+	ushort   Sum=0; 
 
 	while(len--) 
 	{ 
@@ -122,7 +103,7 @@ USHORT NetCheckSum(UCHAR *buf, UINT len)
 	Sum=  (Sum>> 16)   +   (Sum&   0xffff); 
 	Sum+= (Sum>> 16); 
 
-	return   (USHORT)(~Sum); 
+	return   (ushort)(~Sum); 
 }
 /******************************************************
 *函数名称:BCCVerify
@@ -131,11 +112,11 @@ USHORT NetCheckSum(UCHAR *buf, UINT len)
 *输   出:校验值
 *功   能:异或校验
 *******************************************************/
-UCHAR BCCVerify(UCHAR *buf,UINT len)
+byte BCCVerify(byte *buf,ushort len)
 {
-	UCHAR s=0;
+	byte s=0;
 
-	for (UINT i=0;i<len;i++)
+	for (ushort i=0;i<len;i++)
 	{
 		s = s^(*(buf+i));
 	}
@@ -143,23 +124,17 @@ UCHAR BCCVerify(UCHAR *buf,UINT len)
 	return s;
 }
 
-//======================================================================================
-
-                                       奇偶校验
-
-//======================================================================================
-
 /******************************************************
 *函数名称:OddParity
 *输   入:buf 要校验的数据; len 校验数据的长
 *输   出:校验和
 *功   能:奇校验
 *******************************************************/
-BOOL OddParity(UCHAR *buf, UINT len)   
+bool OddParity(byte *buf, ushort len)   
 {   
-	UINT  i=0,j=0;   
-	UCHAR d=0;   
-	BOOL  bParity=FALSE;   
+	ushort  i=0,j=0;   
+	byte d=0;   
+	bool  bParity=false;   
 
 	bParity = 1;  
 
@@ -187,21 +162,17 @@ BOOL OddParity(UCHAR *buf, UINT len)
 *输   出:校验和
 *功   能:偶校验
 *******************************************************/
-BOOL EvenParity(UCHAR *buf, UINT len)   
+bool EvenParity(byte *buf, ushort len)   
 {   
 	 return (!OddParity(buf,len)); 
 }   
-
-//======================================================================================
-
-                                       循环冗余校验
 
 //======================================================================================
 /******************************************************************
 *  CRC8 码表
 ******************************************************************/
 //生成多项式：X8+X5+X4+1=0x31 ，CRC8TAB[1]=生成多项式
-const UCHAR CRC8TAB[256]={ 
+const byte CRC8TAB[256]={ 
 //0
 0x00, 0x31, 0x62, 0x53, 0xC4, 0xF5, 0xA6, 0x97, 
 0xB9, 0x88, 0xDB, 0xEA, 0x7D, 0x4C, 0x1F, 0x2E, 
@@ -257,9 +228,9 @@ const UCHAR CRC8TAB[256]={
 *输   出:校验值
 *功   能:循环冗余校验-8
 *******************************************************/
-UCHAR CRC8( UCHAR *buf, UINT len)     
+byte CRC8( byte *buf, ushort len)     
 {               
-       UCHAR  crc=0;
+       byte  crc=0;
    
        while ( len-- )     
        {   
@@ -278,11 +249,11 @@ UCHAR CRC8( UCHAR *buf, UINT len)
 *功   能:循环冗余校验-16
          （美国标准-0x8005）
 *******************************************************/
-UINT16 CRC16Default(UCHAR * pszBuf, UINT unLength)
+ushort CRC16Default(byte * pszBuf, ushort unLength)
 {
-	UINT32 i, j;
-	UINT16 CrcReg = 0xFFFF;
-	UINT16 CurVal;
+	uint i, j;
+	ushort CrcReg = 0xFFFF;
+	ushort CurVal;
 
 	for (i = 0; i < unLength; i++) 
 	{
@@ -308,12 +279,12 @@ UINT16 CRC16Default(UCHAR * pszBuf, UINT unLength)
 *功   能:循环冗余校验-16
          （CCITT标准-0x1021）
 *******************************************************/
-UINT16 CRC16CCITT(UCHAR * pszBuf, UINT unLength)
+ushort CRC16CCITT(byte * pszBuf, ushort unLength)
 {
 
-	UINT32 i, j;
-	UINT16 CrcReg = 0xFFFF;
-	UINT16 CurVal;
+	uint i, j;
+	ushort CrcReg = 0xFFFF;
+	ushort CurVal;
 
 	for (i = 0; i < unLength; i++) 
 	{
@@ -339,10 +310,10 @@ UINT16 CRC16CCITT(UCHAR * pszBuf, UINT unLength)
 *功   能:循环冗余校验-16
          （RTU标准-0xA001）
 *******************************************************/
-UINT16 CRC16RTU( UCHAR * pszBuf, UINT unLength)
+ushort CRC16RTU( byte * pszBuf, ushort unLength)
 {
-	UINT16 CRC=0XFFFF;
-	UINT32 CRC_count;
+	ushort CRC=0XFFFF;
+	uint CRC_count;
 
 	for(CRC_count=0;CRC_count<unLength;CRC_count++)
 	{
@@ -391,7 +362,7 @@ static unsigned long Reflect(unsigned long ref, char ch)
 *功   能:循环冗余校验-32
          （美国标准-0x04C11DB7）
 *******************************************************/
-ULONG CRC32Default(UCHAR *pszBuf,ULONG ulLength)
+UInt64 CRC32Default(byte *pszBuf,UInt64 ulLength)
 {
 	unsigned long Result = 0xFFFFFFFF;
 	unsigned long m_Table[256];
