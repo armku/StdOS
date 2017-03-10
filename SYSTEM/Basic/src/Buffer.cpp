@@ -158,3 +158,10 @@ void *Buffer::Alloc(int len)
 {
     return this->_Arr;
 }
+
+#if DEBUG
+void Buffer::Test()
+{
+	
+}
+#endif

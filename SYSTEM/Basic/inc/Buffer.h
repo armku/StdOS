@@ -115,7 +115,9 @@ class Buffer: public Object
             static void Test();
         #endif 
     protected:
-        byte Arr[0x40]; //内部缓冲区			
+        #if 0
+            byte Arr[0x40]; //内部缓冲区			
+        #endif 
         virtual void *Alloc(int len);
         //以下为猜测内容
         int _Length;
