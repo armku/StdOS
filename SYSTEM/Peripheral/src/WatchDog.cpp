@@ -121,5 +121,5 @@ void WatchDog::FeedDogTask(void* param)
 }
 void WatchDog::Start(uint msTimeOut,uint msFeed)
 {
-	Sys.AddTask(FeedDogTask,&WatchDog::Current(),msTimeOut,msFeed);
+	Sys.AddTask(FeedDogTask,&WatchDog::Current(),msTimeOut,msFeed,"FeedDog");
 }
