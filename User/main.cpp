@@ -57,7 +57,6 @@ void LedTask(void *param)
     *leds = ! * leds;
 }
 
-int flashtest(void);
 void TestAT45DB();
 #define namee "StdOS"
 int main(void)
@@ -106,8 +105,6 @@ int main(void)
     OutputPort led(PF8);
     
     Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
-
-    //flashtest();
-
+    
     Sys.Start();
 }
