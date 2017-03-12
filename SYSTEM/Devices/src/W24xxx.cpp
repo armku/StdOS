@@ -495,11 +495,11 @@ ushort CW24xxx::jsPageSize(uint type) //º∆À„¥Ê¥¢“≥¥Û–°
     return ret;
 }
 
-#if EEPTEST
+#ifdef DEBUG
     /*
      * ∂¡–¥≤‚ ‘
      */
-    void CW24xxx::Test(void)
+    void CW24xxx::Test()
     {
         uint i;
         const uint testsize = 8;

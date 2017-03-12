@@ -1,7 +1,6 @@
 #pragma once 
 #include "SoftI2C.h"
 
-#define EEPTEST 1
 typedef enum
 {
     AT24C01 = 127,  //
@@ -24,15 +23,15 @@ class CW24xxx
     public:
         CW24xxx(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr = 0xA0, uint wnms = 5); //写延时时间       
         byte CheckOk();
-        #if EEPTEST
-            void Test(void);
-        #endif 
         int Read(uint addr, byte *pBuffer, int size, ushort bufpos = 0);
         int Write(uint addr, byte *pBuffer, int size, ushort bufpos = 0);
         byte ReadByte(uint address);
         int WriteByte(uint address, byte da);
 
         OutputPort *pinWP; //保护引脚
+        #ifdef DEBUG
+            void Test();
+        #endif 
     private:
         byte checkDevice();
         ushort jsPageSize(uint type); //计算存储页大小
