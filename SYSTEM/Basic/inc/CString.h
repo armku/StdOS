@@ -66,6 +66,9 @@ class String:public Array
 		String ToHex();
 		virtual void Show(bool newLine=true) const;
 		uint Capacity() const;//数组容量
+		#ifdef DEBUG
+		static void Test();
+		#endif
 	private:
 		void initCapacity();//初始化容器
 		void jsLength();//计算字符串长度
