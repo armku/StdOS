@@ -290,12 +290,46 @@ bool operator == (const Buffer &bs1, const Buffer &bs2)
     return true;
 }
 
-#if 0  
-    friend bool Buffer::operator == (const Buffer &bs1, const void *ptr){}
-    friend bool Buffer::operator != (const Buffer &bs1, const Buffer &bs2){}
-    friend bool Buffer::operator != (const Buffer &bs1, const void *ptr){}
 
-#endif 
+bool operator == (const Buffer &bs1, const void *ptr)
+{
+    for (int i = 0; i < bs1.Length(); i++)
+    {
+        if (bs1[i] != ((byte*)ptr)[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool operator != (const Buffer &bs1, const Buffer &bs2)
+{
+    if (bs1.Length() != bs2.Length())
+    {
+        return true;
+    }
+    for (int i = 0; i < bs1.Length(); i++)
+    {
+        if (bs1[i] != bs2[i])
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool operator != (const Buffer &bs1, const void *ptr)
+{
+    for (int i = 0; i < bs1.Length(); i++)
+    {
+        if (bs1[i] != ((byte*)ptr)[i])
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
 
 
