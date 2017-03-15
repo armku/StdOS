@@ -27,6 +27,11 @@ template<typename T> class IList
 		int count;
 };
 
+template <typename T> 
+int IList<T>::Count()
+{
+	return this->count;
+}
 
 template <typename T> 
 IList<T>::IList()
@@ -42,6 +47,7 @@ void IList<T>::Add(T &t)
         temp->pNext = pFirst;
         pFirst = temp;
 		mpCur=temp;
+		this->count++;
 }
 
 template <typename T> 
@@ -51,6 +57,7 @@ void IList<T>::Add(T *t)
         temp->pT = t;
         temp->pNext = pFirst;
         pFirst = temp;
+		this->count++;
 }
 
 template <typename T> void IList<T>::Remove(T &t)
@@ -79,6 +86,7 @@ template <typename T> void IList<T>::Remove(T &t)
                 delete q->pT;
                 delete q;
         }
+		this->count--;
 }
 template <typename T> void IList<T>::RemoveAt(int pos)
 {
