@@ -36,7 +36,7 @@ int IList<T>::Count()
 template <typename T> 
 IList<T>::IList()
 {
-        this->pFirst = 0;
+        this->pFirst = NULL;
 		this->count=0;
 }
 template <typename T> 
