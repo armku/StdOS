@@ -31,10 +31,14 @@ class Stream: public Object
         uint WriteEncodeInt(uint value);
         //把字节数组的数据写入到数据流，不包含长度前缀
         bool Write(const Buffer &bs);
-
         //从数据流读取变长数据到字节数组。以压缩整数开头表示长度
         uint ReadArray(Buffer &bs);
         ByteArray ReadArray(int count);
         //把字节数组作为变长数据写入到数据流。以压缩整数开头表示长度
         bool WriteArray(const Buffer &bs);
+    private:
+        byte *pbuf; //缓冲区
+        int pos; //当前指针
+		int capcity;//容量
+
 };
