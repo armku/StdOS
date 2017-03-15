@@ -3,17 +3,19 @@
 #include "Type.h"
 
 
-template<class T> class IList
+template<typename T> class IList
 {
 	public:
 		IList();
 		void Add(T&);
 		void Add(T*);
+		int Count();
+		int FindIndex(T&);
 		void Remove(T&);
 		void RemoveAt(int pos=-1);
 		bool MoveNext(int pos);//到下一个节点
 		T* Find(T&);
-		T *operator[](int taskid);
+		T *operator[](int id);
 		void PrintList();
 		~IList();
 	protected:
@@ -26,12 +28,12 @@ template<class T> class IList
 };
 
 
-template <class T> 
+template <typename T> 
 IList<T>::IList()
 {
         this->pFirst = 0;
 }
-template <class T> 
+template <typename T> 
 void IList<T>::Add(T &t)
 {
         Node *temp = new Node();
@@ -41,7 +43,7 @@ void IList<T>::Add(T &t)
 		mpCur=temp;
 }
 
-template <class T> 
+template <typename T> 
 void IList<T>::Add(T *t)
 {
         Node *temp = new Node();
@@ -50,7 +52,7 @@ void IList<T>::Add(T *t)
         pFirst = temp;
 }
 
-template <class T> void IList<T>::Remove(T &t)
+template <typename T> void IList<T>::Remove(T &t)
 {
         Node *q = 0; //用来定位待删除的节点
         if (*(pFirst->pT) == t)
@@ -77,14 +79,14 @@ template <class T> void IList<T>::Remove(T &t)
                 delete q;
         }
 }
-template <class T> void IList<T>::RemoveAt(int pos)
+template <typename T> void IList<T>::RemoveAt(int pos)
 {
 	if(pos==-1)
 	{
 		this->Remove(*(mpCur->pT));
 	}
 }
-template<class T>
+template<typename T>
 T* IList<T>::Find(T& t)
 {
 	for(Node* p=pFirst;p;p=p->pNext)
@@ -96,7 +98,7 @@ T* IList<T>::Find(T& t)
 	}
 	return 0;
 }
-template<class T>
+template<typename T>
 bool IList<T>::MoveNext(int pos)
 {
 	if(pos<0)
@@ -131,7 +133,7 @@ bool IList<T>::MoveNext(int pos)
 	}
 	return false;
 }
-template<class T>
+template<typename T>
 T* IList<T>::operator[](int taskid)
 {	
 	if(taskid<0)
@@ -148,7 +150,7 @@ T* IList<T>::operator[](int taskid)
 	}	
 	return 0;
 }
-template<class T>
+template<typename T>
 void IList<T>::PrintList()
 {	
 	for(Node* p=pFirst;p;p=p->pNext)
@@ -157,7 +159,7 @@ void IList<T>::PrintList()
 	}
 }
 
-template<class T>
+template<typename T>
 IList<T>::~IList<T>()
 {
 	Node *p;
