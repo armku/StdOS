@@ -2,7 +2,6 @@
 
 #include "Type.h"
 
-
 template<typename T> class IList
 {
 	public:
@@ -25,6 +24,7 @@ template<typename T> class IList
 		};
 		Node *pFirst;//链首节点指针
 		Node *mpCur;//当前节点
+		int count;
 };
 
 
@@ -32,6 +32,7 @@ template <typename T>
 IList<T>::IList()
 {
         this->pFirst = 0;
+		this->count=0;
 }
 template <typename T> 
 void IList<T>::Add(T &t)
