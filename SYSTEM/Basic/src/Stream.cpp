@@ -52,6 +52,15 @@ uint Stream::ReadEncodeInt()
 //读取数据到字节数组，由于字节数组指定大小，不包含长度前缀
 uint Stream::Read(Buffer &bs)
 {
+	int len=bs.Length();
+	if(len>this->capcity)
+	{
+		len=this->capcity;
+	}
+	for(int i=0;i<len;i++)
+	{
+		this->pbuf[i]=bs[i];
+	}
     return 0;
 }
 
