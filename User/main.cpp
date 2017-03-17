@@ -112,9 +112,9 @@ int main(void)
     Buffer::Test();
 	debug_printf("ø™ º≤‚ ‘Flash\r\n");
 	uint addr=0x08020000;
-	debug_printf("%d\r\n",STMFLASH_ReadHalfWord(addr));
-	Test_Write(addr,12345);
-	debug_printf("%d\r\n",STMFLASH_ReadHalfWord(addr));
+	debug_printf("%X\r\n",STMFLASH_ReadHalfWord(addr));
+	Test_Write(addr,0x3039);
+	debug_printf("%X\r\n",STMFLASH_ReadHalfWord(addr));
 	debug_printf("Ω· ¯≤‚ ‘Flash\r\n");
     Sys.Start();
 }
