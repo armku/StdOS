@@ -13,6 +13,11 @@
 
 大容量每页2k，中小容量每页1k
 */
+Flash::Flash()
+{
+	this->BytesPerBlock=1024;
+	this->Size=1024*16;
+}
 
 int Flash::Erase(uint addr, int size)
 {

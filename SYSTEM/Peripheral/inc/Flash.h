@@ -7,10 +7,12 @@
 class Flash
 {
     public:
+		Flash();
         int Erase(uint addr, int size);
         int WriteBlock(uint addr, byte *pBuffer, int size);
         int Read(uint addr, byte *pBuffer, int size);
         int Write(uint addr, byte *pBuffer, int size);
+		void SetSize(int size,int bytesperblock);//设置大小及扇区大小
         #ifdef DEBUG
             void TestFlash();
         #endif 
