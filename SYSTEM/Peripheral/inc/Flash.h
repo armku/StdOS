@@ -19,6 +19,8 @@ class Flash
         void Read(uint addr, ushort *pBuffer, ushort size);
         void Write(uint addr, ushort *pBuffer, ushort size);
 		void Write_NoCheck(uint addr, ushort *pBuffer, ushort size);
+	
+		int eraseSector(uint addr);//²Á³ıÕû¸öÉÈÇø
         
         int Size;
         int BytesPerBlock;

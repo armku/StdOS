@@ -149,8 +149,15 @@ void Flash::Read(uint addr, ushort *pBuffer, ushort size)
         pBuffer[i] = ReadHalfWord(addr); //读取2个字节.
         addr += 2; //偏移2个字节.	
     }
+	
 }
-
+//擦除整个扇区
+int Flash::eraseSector(uint addr)
+{
+	int i=0;
+	Read(addr, STMFLASH_BUF, STM_SECTOR_SIZE / 2); //读出整个扇区的内容
+	return this->BytesPerBlock;
+}
 void Flash::Write(uint addr, ushort *pBuffer, ushort size)
 {
     uint secpos; //扇区地址
@@ -191,7 +198,9 @@ void Flash::Write(uint addr, ushort *pBuffer, ushort size)
             Write_NoCheck(secpos *STM_SECTOR_SIZE + STM32_FLASH_BASE, STMFLASH_BUF, STM_SECTOR_SIZE / 2); //写入整个扇区  
         }
         else
+		{
             Write_NoCheck(addr, pBuffer, secremain);
+		}
         //写已经擦除了的,直接写入扇区剩余区间. 				   
         if (size == secremain)
             break;

@@ -12,6 +12,7 @@
 #include "Modbus.h"
 #include "Spi.h"
 #include "HardRtc.h"
+#include "Flash.h"
 
 typedef enum
 {
@@ -105,6 +106,8 @@ int main(void)
     OutputPort led(PF8);
     
     Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
-    Buffer::Test();
+	Flash flash;
+	flash.TestFlash();
+    //Buffer::Test();
     Sys.Start();
 }
