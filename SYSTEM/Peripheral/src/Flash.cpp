@@ -18,7 +18,15 @@ Flash::Flash()
 	this->BytesPerBlock=1024;
 	this->Size=1024*16;
 }
-
+//设置大小及扇区大小
+void Flash::SetSectorSize(int bytesperblock,int size)
+{
+	this->BytesPerBlock=bytesperblock;
+	if(size<0)
+	{
+		this->Size=1024*1024;
+	}
+}
 int Flash::Erase(uint addr, int size)
 {
     return 0;
