@@ -21,6 +21,7 @@ Buffer &Buffer::operator = (const Buffer &rhs)
         {
             ((byte*)(this->_Arr))[i] = rhs.GetBuffer()[i];
         }
+		this->_Length=rhs._Length;
     }
     return  *this;
 }
@@ -420,7 +421,7 @@ void *Buffer::Alloc(int len)
         {
             5, 6, 7
         };
-        Buffer bs2(buf1, sizeof(buf0));
+        Buffer bs2(buf1, sizeof(buf1));
         Buffer bs22(bts0, sizeof(bts0));
 
         char err1[] = "Buffer& operator = (const Buffer& rhs)";
@@ -432,7 +433,7 @@ void *Buffer::Alloc(int len)
         assert(bs2.GetBuffer() == buf1, err1);
         assert(bs2.GetBuffer() != bts1, err1);
         assert(bs2.Length() == sizeof(bts1), err1);
-        assert(bs22.Length() == sizeof(buf1), err1);
+        assert(bs2.Length() != sizeof(buf1), err1);
         assert(buf1[0] == bts1[0] && buf1[2] == bts1[2], err1);
         assert(buf1[3] == 4, err1);
 
