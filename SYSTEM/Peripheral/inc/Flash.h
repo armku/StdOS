@@ -16,7 +16,7 @@ class Flash
         #ifdef DEBUG
             void TestFlash();
         #endif 
-    private:
+    //private:
         ushort ReadHalfWord(uint addr);
         void Read(uint addr, ushort *pBuffer, ushort size);
         void Write(uint addr, ushort *pBuffer, ushort size);
