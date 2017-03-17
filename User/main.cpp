@@ -13,6 +13,7 @@
 #include "Spi.h"
 #include "HardRtc.h"
 #include "Flash.h"
+#include "stmflash1.h"
 
 typedef enum
 {
@@ -107,7 +108,13 @@ int main(void)
     
     Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
 	Flash flash;
-	//flash.TestFlash();
-    //Buffer::Test();
+	flash.TestFlash();
+    Buffer::Test();
+	debug_printf("ø™ º≤‚ ‘Flash\r\n");
+	uint addr=0x08020000;
+	debug_printf("%d\r\n",STMFLASH_ReadHalfWord(addr));
+	Test_Write(addr,12345);
+	debug_printf("%d\r\n",STMFLASH_ReadHalfWord(addr));
+	debug_printf("Ω· ¯≤‚ ‘Flash\r\n");
     Sys.Start();
 }
