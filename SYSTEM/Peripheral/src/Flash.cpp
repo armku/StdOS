@@ -2,9 +2,17 @@
 #include "stm32f10x.h"
 #include "Sys.h"
 #include "stdlib.h"
-#ifdef TestFlsh
+#ifdef DEBUG
     #include "stdlib.h"
 #endif 
+
+/*
+小容量是16~32K
+中容量是64~128K
+大容量是大于256K
+
+大容量每页2k，中小容量每页1k
+*/
 
 int Flash::Erase(uint addr, int size)
 {
