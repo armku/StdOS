@@ -12,7 +12,7 @@ class Flash
         int WriteBlock(uint addr, byte *pBuffer, int size);
         int Read(uint addr, byte *pBuffer, int size);
         int Write(uint addr, byte *pBuffer, int size);
-		void SetSectorSize(int bytesperblock,int size=-1);//设置大小及扇区大小
+		void SetSectorSize(int bytesperblock,int size=-1);//设置扇区大小，容量大小，单位K
         #ifdef DEBUG
             void TestFlash();
         #endif 

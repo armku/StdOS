@@ -24,7 +24,7 @@ void Flash::SetSectorSize(int bytesperblock,int size)
 	this->BytesPerBlock=bytesperblock;
 	if(size<0)
 	{
-		this->Size=1024*1024;
+		this->Size=1024;
 	}
 }
 int Flash::Erase(uint addr, int size)
@@ -107,16 +107,8 @@ int Flash::Write(uint addr, byte *pBuffer, int size)
         debug_printf("\r\nTestFlash Finish!\r\n");
     }
 #endif 
-//用户根据自己的需要设置
-#define STM32_FLASH_SIZE 512 	 		//所选STM32的FLASH容量大小(单位为K)
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
 //FLASH起始地址
 #define STM32_FLASH_BASE 0x08000000 	//STM32 FLASH的起始地址	
-
-
-
-
 
 //读取指定地址的半字(16位数据)
 //faddr:读地址(此地址必须为2的倍数!!)
@@ -173,7 +165,7 @@ void Flash::Write(uint addr, ushort *pBuffer, ushort size)
     ushort secremain; //扇区内剩余地址(16位字计算)	   
     ushort i;
     uint offaddr; //去掉0X08000000后的地址
-    if (addr < STM32_FLASH_BASE || (addr >= (STM32_FLASH_BASE + 1024 * STM32_FLASH_SIZE)))
+    if (addr < STM32_FLASH_BASE || (addr >= (STM32_FLASH_BASE + 1024 * this->Size)))
         return ;
     //非法地址
     FLASH_Unlock(); //解锁
