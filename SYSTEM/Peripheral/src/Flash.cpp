@@ -88,7 +88,7 @@ int Flash::Write(uint addr, byte *pBuffer, int size)
 //读取指定地址的半字(16位数据)
 //faddr:读地址(此地址必须为2的倍数!!)
 //返回值:对应数据.
-ushort STMFLASH_ReadHalfWord(uint faddr)
+	ushort Flash::ReadHalfWord(uint faddr)
 {
     return *(volatile ushort*)faddr;
 }
@@ -98,7 +98,7 @@ ushort STMFLASH_ReadHalfWord(uint faddr)
     //WriteAddr:起始地址
     //pBuffer:数据指针
     //NumToWrite:半字(16位)数   
-    void STMFLASH_Write_NoCheck(uint WriteAddr, ushort *pBuffer, ushort NumToWrite)
+    void Flash::Write_NoCheck(uint WriteAddr, ushort *pBuffer, ushort NumToWrite)
     {
         ushort i;
         for (i = 0; i < NumToWrite; i++)
@@ -121,16 +121,16 @@ ushort STMFLASH_ReadHalfWord(uint faddr)
     //ReadAddr:起始地址
     //pBuffer:数据指针
     //NumToWrite:半字(16位)数
-    void STMFLASH_Read(uint ReadAddr, ushort *pBuffer, ushort NumToRead)
+    void Flash::STMFLASH_Read(uint ReadAddr, ushort *pBuffer, ushort NumToRead)
     {
         ushort i;
         for (i = 0; i < NumToRead; i++)
         {
-            pBuffer[i] = STMFLASH_ReadHalfWord(ReadAddr); //读取2个字节.
+            pBuffer[i] = ReadHalfWord(ReadAddr); //读取2个字节.
             ReadAddr += 2; //偏移2个字节.	
         }
     }
-    void STMFLASH_Write(uint WriteAddr, ushort *pBuffer, ushort NumToWrite)
+    void Flash::STMFLASH_Write(uint WriteAddr, ushort *pBuffer, ushort NumToWrite)
     {
         uint secpos; //扇区地址
         ushort secoff; //扇区内偏移地址(16位字计算)
@@ -167,10 +167,10 @@ ushort STMFLASH_ReadHalfWord(uint faddr)
                 {
                     STMFLASH_BUF[i + secoff] = pBuffer[i];
                 }
-                STMFLASH_Write_NoCheck(secpos *STM_SECTOR_SIZE + STM32_FLASH_BASE, STMFLASH_BUF, STM_SECTOR_SIZE / 2); //写入整个扇区  
+                Write_NoCheck(secpos *STM_SECTOR_SIZE + STM32_FLASH_BASE, STMFLASH_BUF, STM_SECTOR_SIZE / 2); //写入整个扇区  
             }
             else
-                STMFLASH_Write_NoCheck(WriteAddr, pBuffer, secremain);
+                Write_NoCheck(WriteAddr, pBuffer, secremain);
             //写已经擦除了的,直接写入扇区剩余区间. 				   
             if (NumToWrite == secremain)
                 break;
@@ -200,7 +200,7 @@ ushort STMFLASH_ReadHalfWord(uint faddr)
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //WriteAddr:起始地址
 //WriteData:要写入的数据
-void Test_Write(uint WriteAddr, ushort WriteData)
+void Flash::Test_Write(uint WriteAddr, ushort WriteData)
 {
     STMFLASH_Write(WriteAddr, &WriteData, 1); //写入一个字 
 }
