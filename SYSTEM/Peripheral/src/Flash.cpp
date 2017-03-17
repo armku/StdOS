@@ -1,5 +1,6 @@
 #include "Flash.h"
 #include "Sys.h"
+#include "stdlib.h"
 #ifdef TestFlsh
     #include "stdlib.h"
 #endif 
@@ -24,7 +25,7 @@ int Flash::Write(uint addr, byte *pBuffer, int size)
     return 0;
 }
 
-#ifdef TestFlsh
+#ifdef DEBUG
 
     void TestFlash()
     {
