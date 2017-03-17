@@ -28,7 +28,7 @@ int Flash::Write(uint addr, byte *pBuffer, int size)
 
 #ifdef DEBUG
 
-    void TestFlash()
+    void Flash::TestFlash()
     {
         debug_printf("\r\n\r\n");
         debug_printf("TestFlash Start......\r\n");
@@ -88,7 +88,7 @@ int Flash::Write(uint addr, byte *pBuffer, int size)
 //读取指定地址的半字(16位数据)
 //faddr:读地址(此地址必须为2的倍数!!)
 //返回值:对应数据.
-	ushort Flash::ReadHalfWord(uint faddr)
+ushort Flash::ReadHalfWord(uint faddr)
 {
     return *(volatile ushort*)faddr;
 }
