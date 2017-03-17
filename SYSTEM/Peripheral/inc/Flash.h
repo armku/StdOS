@@ -17,9 +17,8 @@ class Flash
     private:
         ushort ReadHalfWord(uint faddr);
         void Write_NoCheck(uint WriteAddr, ushort *pBuffer, ushort NumToWrite);
-        void STMFLASH_Read(uint ReadAddr, ushort *pBuffer, ushort NumToRead);
-        void STMFLASH_Write(uint WriteAddr, ushort *pBuffer, ushort NumToWrite);
-        void Test_Write(uint WriteAddr, ushort WriteData);
+        void Read(uint ReadAddr, ushort *pBuffer, ushort NumToRead);
+        void Write(uint WriteAddr, ushort *pBuffer, ushort NumToWrite);
 
         int Size;
         int BytesPerBlock;
