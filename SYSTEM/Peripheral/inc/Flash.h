@@ -15,11 +15,11 @@ class Flash
             void TestFlash();
         #endif 
     private:
-        ushort ReadHalfWord(uint faddr);
-        void Write_NoCheck(uint WriteAddr, ushort *pBuffer, ushort NumToWrite);
-        void Read(uint ReadAddr, ushort *pBuffer, ushort NumToRead);
-        void Write(uint WriteAddr, ushort *pBuffer, ushort NumToWrite);
-
+        ushort ReadHalfWord(uint addr);
+        void Read(uint addr, ushort *pBuffer, ushort size);
+        void Write(uint addr, ushort *pBuffer, ushort size);
+		void Write_NoCheck(uint addr, ushort *pBuffer, ushort size);
+        
         int Size;
         int BytesPerBlock;
 };
