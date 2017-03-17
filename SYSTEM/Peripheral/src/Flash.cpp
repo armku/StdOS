@@ -70,7 +70,7 @@ int Flash::Write(uint addr, byte *pBuffer, int size)
             debug_printf("\r\n\r\n");
             debug_printf("TestFlash Start......\r\n");
 
-            uint addr = 0x08004000;
+            uint addr = 0x08010000;
 
             Flash flash;
 			flash.SetSectorSize(2048,512);
