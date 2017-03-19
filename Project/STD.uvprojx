@@ -705,11 +705,6 @@
               <FilePath>..\SYSTEM\Devices\src\ST7565R.cpp</FilePath>
             </File>
             <File>
-              <FileName>multi_button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\multi_button.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ModBus.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Devices\src\ModBus.cpp</FilePath>
@@ -718,6 +713,11 @@
               <FileName>W25QXXX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Devices\src\W25QXXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Button.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\Button.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1637,11 +1637,6 @@
               <FilePath>..\SYSTEM\Devices\src\ST7565R.cpp</FilePath>
             </File>
             <File>
-              <FileName>multi_button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\multi_button.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ModBus.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Devices\src\ModBus.cpp</FilePath>
@@ -1650,6 +1645,11 @@
               <FileName>W25QXXX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Devices\src\W25QXXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Button.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Devices\src\Button.cpp</FilePath>
             </File>
           </Files>
         </Group>

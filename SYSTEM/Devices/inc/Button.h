@@ -18,20 +18,17 @@ class CButton
 {
     public:
         CButton();         
-        void attach(PressEvent event, Action action);
-        void ticks();
-        PressEvent get_button_event(); //获取当前按键状态
-		FuncRead ReadKey;//按键读取
-		ushort keycur;//当前按键
-		ushort keyold;//历史按键
+        void Attach(PressEvent event, Action action);
+        void Ticks();
+        PressEvent GetButtonEvent(); //获取当前按键状态
+		FuncRead ReadKey;//按键读取		
     private:		
-        struct Button
-        {
-                Action actions[number_of_event]; //回调函数
-				ushort ticks;
-                byte repeat: 4;
-                byte event: 4; //当前状态
-                byte state: 3; //当前按键状态
-                byte debounce_cnt: 3; //双击次数 
-        } btn;	
+        byte event: 4; //当前状态
+		byte debounce_cnt: 3; //双击次数
+		byte repeat: 4;
+		byte state: 3; //当前按键状态
+		Action actions[number_of_event]; //回调函数
+		ushort ticks;	
+		ushort KeyCur;//当前按键
+		ushort KeyOld;//历史按键
 };

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "SerialPort.h"
 #include "W24xxx.h"
-#include "multi_button.h"
+#include "Button.h"
 #include "Port.h"
 #include "WatchDog.h"
 #include "CString.h"

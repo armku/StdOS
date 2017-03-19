@@ -101,7 +101,7 @@
         <sRunDeb>0</sRunDeb>
         <sLrtime>0</sLrtime>
         <bEvRecOn>1</bEvRecOn>
-        <nTsel>3</nTsel>
+        <nTsel>6</nTsel>
         <sDll></sDll>
         <sDllPa></sDllPa>
         <sDlgDll></sDlgDll>
@@ -408,7 +408,7 @@
 
   <Group>
     <GroupName>USER</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -988,7 +988,7 @@
 
   <Group>
     <GroupName>Devices</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1059,8 +1059,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\SYSTEM\Devices\src\multi_button.cpp</PathWithFileName>
-      <FilenameWithoutPath>multi_button.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\SYSTEM\Devices\src\ModBus.cpp</PathWithFileName>
+      <FilenameWithoutPath>ModBus.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1071,8 +1071,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\SYSTEM\Devices\src\ModBus.cpp</PathWithFileName>
-      <FilenameWithoutPath>ModBus.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\SYSTEM\Devices\src\W25QXXX.cpp</PathWithFileName>
+      <FilenameWithoutPath>W25QXXX.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1083,8 +1083,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\SYSTEM\Devices\src\W25QXXX.cpp</PathWithFileName>
-      <FilenameWithoutPath>W25QXXX.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\SYSTEM\Devices\src\Button.cpp</PathWithFileName>
+      <FilenameWithoutPath>Button.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
