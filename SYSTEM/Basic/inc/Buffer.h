@@ -125,5 +125,6 @@ class Buffer: public Object
         void *_Arr;
     public:
         virtual void Show(bool newLine = false)const;
+	protected:
         Buffer();
 };
