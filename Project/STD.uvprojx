@@ -434,11 +434,6 @@
                 </FileArmAds>
               </FileOption>
             </File>
-            <File>
-              <FileName>stmflash1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\stmflash1.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1365,11 +1360,6 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
-            </File>
-            <File>
-              <FileName>stmflash1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\stmflash1.cpp</FilePath>
             </File>
           </Files>
         </Group>
