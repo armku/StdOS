@@ -20,6 +20,11 @@ class Flash
         ushort ReadHalfWord(uint addr);
         void Read(uint addr, ushort *pBuffer, ushort size);
         void Write(uint addr, ushort *pBuffer, ushort size);
+		union SectorBuffer
+		{
+			byte buf[2048];//×Ö½Ú»º³åÇø
+			ushort buf16[1024];//»º³åÇø			
+		}SectorBuffer;
 		
 		void Write_NoCheck(uint addr, ushort *pBuffer, ushort size);
 	
