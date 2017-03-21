@@ -150,13 +150,13 @@ int Flash::Write(uint addr, void *pBuffer, int size)
     if (size > 0)
     {
         //当第三部分需要处理时
-        this->Read(addr, this->SectorBuffer.buf, this->BytesPerBlock);
-        this->eraseSector(addr);
+        //this->Read(addr, this->SectorBuffer.buf, this->BytesPerBlock);
+        //this->eraseSector(addr);
         for (int i = 0; i < size; i++)
         {
             this->SectorBuffer.buf[i] = ((byte*)pBuffer)[pos + i];
         }
-        this->WriteSector(addr, this->SectorBuffer.buf);
+        //this->WriteSector(addr, this->SectorBuffer.buf);
     }
     FLASH_Lock(); //上锁
     return size;
