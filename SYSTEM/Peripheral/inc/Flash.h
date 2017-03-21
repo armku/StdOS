@@ -20,10 +20,12 @@ class Flash
         ushort ReadHalfWord(uint addr);
         void Read(uint addr, ushort *pBuffer, ushort size);
         void Write(uint addr, ushort *pBuffer, ushort size);
-		void WriteSector(uint addr, ushort *pBuffer, ushort size);//写扇区
+		
 		void Write_NoCheck(uint addr, ushort *pBuffer, ushort size);
 	
-		int eraseSector(uint addr);//擦除整个扇区		
+		bool sectorNeedErase(uint addr);//扇区是否需要擦除
+		int eraseSector(uint addr);//擦除整个扇区	
+		void WriteSector(uint addr, ushort *pBuffer, ushort size);//写扇区
         
         int Size;
         int BytesPerBlock;

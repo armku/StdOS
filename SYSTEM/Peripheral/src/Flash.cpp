@@ -248,19 +248,23 @@ void Flash::Write(uint addr, ushort *pBuffer, ushort size)
     };
     FLASH_Lock(); //上锁
 }
-//擦除整个扇区
-int Flash::eraseSector(uint addr)
-{
-    int i = 0;
+//扇区是否需要擦除
+bool Flash::sectorNeedErase(uint addr)
+{	
     Read(addr, STMFLASH_BUF1, this->BytesPerBlock / 2); //读出整个扇区的内容
-    for (i = 0; i < this->BytesPerBlock / 2; i++)
+    for (int i = 0; i < this->BytesPerBlock / 2; i++)
     {
         if (STMFLASH_BUF1[i] != 0XFFFF)
-            break;
+            return true;
     }
-    if (i < this->BytesPerBlock / 2)
+	
+	return false;
+}
+//擦除整个扇区
+int Flash::eraseSector(uint addr)
+{    
+    if (sectorNeedErase(addr))
     {
-        //需要擦除
         FLASH_ErasePage(addr); //擦除这个扇区		
     }
     return this->BytesPerBlock;
