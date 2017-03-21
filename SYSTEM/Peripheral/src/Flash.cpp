@@ -141,7 +141,10 @@ int Flash::Read(uint addr, void *pBuffer, int size)
 //返回值:对应数据.
 ushort Flash::ReadHalfWord(uint addr)
 {
-    return *(volatile ushort*)addr;
+	if(addr%2)
+	{
+		return *(volatile ushort*)addr;
+	}
 }
 
 //不检查的写入
