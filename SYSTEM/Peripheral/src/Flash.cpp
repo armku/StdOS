@@ -29,16 +29,6 @@ void Flash::SetSectorSize(int bytesperblock, int size)
     }
 }
 
-int Flash::Erase(uint addr, int size)
-{
-    return 0;
-}
-
-int Flash::WriteBlock(uint addr, byte *pBuffer, int size)
-{
-    return 0;
-}
-
 int Flash::Read(uint addr, void *pBuffer, int size)
 {
 	ushort tmp;
@@ -59,80 +49,6 @@ int Flash::Read(uint addr, void *pBuffer, int size)
     return size;
 }
 
-#ifdef DEBUG123
-
-    void Flash::TestFlash()
-    {
-        
-            debug_printf("\r\n\r\n");
-            debug_printf("TestFlash Start......\r\n");
-
-            uint addr = 0x08010000;
-
-            Flash flash;
-			flash.SetSectorSize(2048,512);
-            debug_printf("FlashSize: %d kBytes  BytesPerBlock: %d kBytes\r\n", flash.Size, flash.BytesPerBlock);
-		#if 0
-            flash.Erase(addr, 0x100);
-
-            byte buf[] = "STM32F10x SPI Firmware Library Example: communication with an AT45DB SPI FLASH";
-            uint size = ArrayLength(buf);
-
-            flash.WriteBlock(addr, buf, size);
-
-            byte *rx = (byte*)malloc(size);
-            flash.Read(addr, rx, size);
-
-            int n = 0;
-            for (int i = 0; i < size; i++)
-            {
-                if (buf[i] != rx[i])
-                    n++;
-            }
-            debug_printf("diffent %d\r\n", n);
-
-            // 集成测试
-            //flash.Erase(addr, 0x100);
-            flash.Write(addr, buf, size);
-
-            flash.Read(addr, rx, size);
-
-            n = 0;
-            for (int i = 0; i < size; i++)
-            {
-                if (buf[i] != rx[i])
-                    n++;
-            }
-            debug_printf("diffent %d\r\n", n);
-
-            free(rx);
-
-            debug_printf("\r\nTestFlash Finish!\r\n");
-        #else            
-            ushort buftest1[20];
-			debug_printf("测试开始\r\n");
-            for (int i = 0; i < 20; i++)
-            {
-                buftest1[i] = 1000+i;
-            }
-			debug_printf("-1\r\n");
-            flash.Write(addr, buftest1, 20);
-			debug_printf("0\r\n");
-            for (int i = 0; i < 20; i++)
-            {
-                buftest1[i] = 0;
-            }
-			debug_printf("1\r\n");
-            flash.Read(addr, buftest1, 20);
-			debug_printf("2\r\n");
-            for (int i = 0; i < 20; i++)
-            {
-                debug_printf("%d:%d\r\n", i, buftest1[i]);
-            }
-            debug_printf("测试完成\r\n");
-        #endif 
-    }
-#endif 
 //FLASH起始地址
 #define STM32_FLASH_BASE 0x08000000 	//STM32 FLASH的起始地址	
 
@@ -141,10 +57,12 @@ int Flash::Read(uint addr, void *pBuffer, int size)
 //返回值:对应数据.
 ushort Flash::ReadHalfWord(uint addr)
 {
+	ushort ret=0;
 	if(addr%2)
 	{
-		return *(volatile ushort*)addr;
+		ret= *(volatile ushort*)addr;
 	}
+	return ret;
 }
 
 //不检查的写入
@@ -253,3 +171,77 @@ void Flash::WriteSector(uint addr, void *pBuffer)
 {
   this->Write_NoCheck(addr, (ushort *)pBuffer, this->BytesPerBlock/2);
 }
+#ifdef DEBUG123
+
+    void Flash::TestFlash()
+    {
+        
+            debug_printf("\r\n\r\n");
+            debug_printf("TestFlash Start......\r\n");
+
+            uint addr = 0x08010000;
+
+            Flash flash;
+			flash.SetSectorSize(2048,512);
+            debug_printf("FlashSize: %d kBytes  BytesPerBlock: %d kBytes\r\n", flash.Size, flash.BytesPerBlock);
+		#if 0
+            flash.Erase(addr, 0x100);
+
+            byte buf[] = "STM32F10x SPI Firmware Library Example: communication with an AT45DB SPI FLASH";
+            uint size = ArrayLength(buf);
+
+            flash.WriteBlock(addr, buf, size);
+
+            byte *rx = (byte*)malloc(size);
+            flash.Read(addr, rx, size);
+
+            int n = 0;
+            for (int i = 0; i < size; i++)
+            {
+                if (buf[i] != rx[i])
+                    n++;
+            }
+            debug_printf("diffent %d\r\n", n);
+
+            // 集成测试
+            //flash.Erase(addr, 0x100);
+            flash.Write(addr, buf, size);
+
+            flash.Read(addr, rx, size);
+
+            n = 0;
+            for (int i = 0; i < size; i++)
+            {
+                if (buf[i] != rx[i])
+                    n++;
+            }
+            debug_printf("diffent %d\r\n", n);
+
+            free(rx);
+
+            debug_printf("\r\nTestFlash Finish!\r\n");
+        #else            
+            ushort buftest1[20];
+			debug_printf("测试开始\r\n");
+            for (int i = 0; i < 20; i++)
+            {
+                buftest1[i] = 1000+i;
+            }
+			debug_printf("-1\r\n");
+            flash.Write(addr, buftest1, 20);
+			debug_printf("0\r\n");
+            for (int i = 0; i < 20; i++)
+            {
+                buftest1[i] = 0;
+            }
+			debug_printf("1\r\n");
+            flash.Read(addr, buftest1, 20);
+			debug_printf("2\r\n");
+            for (int i = 0; i < 20; i++)
+            {
+                debug_printf("%d:%d\r\n", i, buftest1[i]);
+            }
+            debug_printf("测试完成\r\n");
+        #endif 
+    }
+#endif 
