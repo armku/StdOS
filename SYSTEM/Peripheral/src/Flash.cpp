@@ -171,7 +171,7 @@ void Flash::WriteSector(uint addr, void *pBuffer)
 {
   this->Write_NoCheck(addr, (ushort *)pBuffer, this->BytesPerBlock/2);
 }
-#ifdef DEBUG123
+#ifdef DEBUG
 
     void Flash::TestFlash()
     {
@@ -184,6 +184,7 @@ void Flash::WriteSector(uint addr, void *pBuffer)
             Flash flash;
 			flash.SetSectorSize(2048,512);
             debug_printf("FlashSize: %d kBytes  BytesPerBlock: %d kBytes\r\n", flash.Size, flash.BytesPerBlock);
+			return;
 		#if 0
             flash.Erase(addr, 0x100);
 
