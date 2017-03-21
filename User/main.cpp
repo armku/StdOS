@@ -92,7 +92,7 @@ int main(void)
     rs485 = 0;
     sp2.Register(OnUsartRead);
     sp2.Open();
-    SerialPort::GetMessagePort()->Register(OnUsartRead);
+    //SerialPort::GetMessagePort()->Register(OnUsartRead);
 
     exti.Register(OnKeyPress);
     exti1.Register(OnKeyPress);
@@ -107,7 +107,7 @@ int main(void)
     
     Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
 	Flash flash;
-	flash.TestFlash();
+	//flash.TestFlash();
     //Buffer::Test();
     Sys.Start();
 }
