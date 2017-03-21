@@ -18,7 +18,6 @@ class Flash
         #endif 
     private:
         ushort ReadHalfWord(uint addr);
-        void Write(uint addr, ushort *pBuffer, ushort size);
 		union SectorBuffer
 		{
 			byte buf[2048];//×Ö½Ú»º³åÇø
