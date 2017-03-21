@@ -165,7 +165,7 @@ void Flash::Write_NoCheck(uint addr, ushort *pBuffer, ushort size)
 //WriteAddr:起始地址(此地址必须为2的倍数!!)
 //pBuffer:数据指针
 //NumToWrite:半字(16位)数(就是要写入的16位数据的个数.)
-ushort STMFLASH_BUF1[1024]; //最多是2K字节
+
 //从指定地址开始读出指定长度的数据
 //ReadAddr:起始地址
 //pBuffer:数据指针
@@ -203,11 +203,11 @@ void Flash::Write(uint addr, ushort *pBuffer, ushort size)
     //不大于该扇区范围
     while (1)
     {
-        Read(secpos *this->BytesPerBlock + STM32_FLASH_BASE, STMFLASH_BUF1, this->BytesPerBlock / 2); //读出整个扇区的内容
+        Read(secpos *this->BytesPerBlock + STM32_FLASH_BASE,this->SectorBuffer.buf16, this->BytesPerBlock / 2); //读出整个扇区的内容
         for (i = 0; i < secremain; i++)
         //校验数据
         {
-            if (STMFLASH_BUF1[secoff + i] != 0XFFFF)
+            if (this->SectorBuffer.buf16[secoff + i] != 0XFFFF)
                 break;
             //需要擦除  	  
         }
@@ -218,9 +218,9 @@ void Flash::Write(uint addr, ushort *pBuffer, ushort size)
             for (i = 0; i < secremain; i++)
             //复制
             {
-                STMFLASH_BUF1[i + secoff] = pBuffer[i];
+                this->SectorBuffer.buf16[i + secoff] = pBuffer[i];
             }
-			this->WriteSector(secpos *this->BytesPerBlock + STM32_FLASH_BASE, STMFLASH_BUF1, this->BytesPerBlock / 2); //写入整个扇区  
+			this->WriteSector(secpos *this->BytesPerBlock + STM32_FLASH_BASE, this->SectorBuffer.buf16, this->BytesPerBlock / 2); //写入整个扇区  
         }
         else
         {
@@ -251,10 +251,10 @@ void Flash::Write(uint addr, ushort *pBuffer, ushort size)
 //扇区是否需要擦除
 bool Flash::sectorNeedErase(uint addr)
 {	
-    Read(addr, STMFLASH_BUF1, this->BytesPerBlock / 2); //读出整个扇区的内容
+    Read(addr, this->SectorBuffer.buf16, this->BytesPerBlock / 2); //读出整个扇区的内容
     for (int i = 0; i < this->BytesPerBlock / 2; i++)
     {
-        if (STMFLASH_BUF1[i] != 0XFFFF)
+        if (this->SectorBuffer.buf16[i] != 0XFFFF)
             return true;
     }
 	

@@ -24,7 +24,7 @@ class Flash
 		{
 			byte buf[2048];//字节缓冲区
 			ushort buf16[1024];//缓冲区			
-		}SectorBuffer;
+		}SectorBuffer;//最多2K
 		
 		void Write_NoCheck(uint addr, ushort *pBuffer, ushort size);
 	
