@@ -138,7 +138,7 @@ int Flash::Write(uint addr, void *pBuffer, int size)
         pos += size1;
     }
     //处理第二部分
-    while (size > this->BytesPerBlock)
+    while (size >= this->BytesPerBlock)
     {
         this->eraseSector(addr);
         this->WriteSector(addr, (byte*)pBuffer + pos);
