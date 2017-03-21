@@ -199,7 +199,7 @@ void Flash::WriteSector(uint addr, void *pBuffer)
         debug_printf("\r\n\r\n");
         debug_printf("TestFlash Start......\r\n");
 
-        uint addr = 0x08019000;
+        uint addr = 0x08000900;
 
         Flash flash;
         flash.SetSectorSize(2048, 512);
@@ -241,22 +241,22 @@ void Flash::WriteSector(uint addr, void *pBuffer)
 
             debug_printf("\r\nTestFlash Finish!\r\n");
         #else 
-            ushort buftest1[20];
+            byte buftest1[120];
             debug_printf("²âÊÔ¿ªÊ¼\r\n");
             for (int i = 0; i < 20; i++)
             {
                 buftest1[i] = 1000+i;
             }
-            debug_printf("-1\r\n");
+            debug_printf("-1 \r\n");
             flash.Write(addr, buftest1, 20);
-            debug_printf("0\r\n");
+            debug_printf("0 \r\n");
             for (int i = 0; i < 20; i++)
             {
                 buftest1[i] = 0;
             }
-            debug_printf("1\r\n");
+            debug_printf("1 \r\n");
             flash.Read(addr, buftest1, 20);
-            debug_printf("2\r\n");
+            debug_printf("2 \r\n");
             for (int i = 0; i < 20; i++)
             {
                 debug_printf("%d:%d\r\n", i, buftest1[i]);
