@@ -39,8 +39,9 @@ int Flash::WriteBlock(uint addr, byte *pBuffer, int size)
     return 0;
 }
 
-int Flash::Read(uint addr, byte *pBuffer, int size)
+int Flash::Read(uint addr, void *pBuffer, int size)
 {
+	ushort tmp;
     if (size <= 0)
     {
         return 0;
@@ -52,17 +53,13 @@ int Flash::Read(uint addr, byte *pBuffer, int size)
     }
     if (size % 2)
     {
-        pBuffer[size - 1] = this->ReadHalfWord(addr - 1);
+		tmp=this->ReadHalfWord(addr - 1);
+        ((byte*)pBuffer)[size - 1] = tmp&0xff;
     }
     return size;
 }
 
-int Flash::Write(uint addr, byte *pBuffer, int size)
-{
-    return 0;
-}
-
-#ifdef DEBUG
+#ifdef DEBUG123
 
     void Flash::TestFlash()
     {
@@ -166,22 +163,62 @@ void Flash::Write_NoCheck(uint addr, ushort *pBuffer, ushort size)
 //pBuffer:数据指针
 //NumToWrite:半字(16位)数(就是要写入的16位数据的个数.)
 
-//从指定地址开始读出指定长度的数据
-//ReadAddr:起始地址
-//pBuffer:数据指针
-//NumToWrite:半字(16位)数
-void Flash::Read(uint addr, ushort *pBuffer, ushort size)
+/*
+--------|--------|--------|--------|  扇区
+               **************         数据
+            1        2          3     编号
+
+*/
+int Flash::Write(uint addr, void *pBuffer, int size)
 {
-    ushort i;
-    for (i = 0; i < size; i++)
-    {
-        pBuffer[i] = ReadHalfWord(addr); //读取2个字节.
-        addr += 2; //偏移2个字节.	
-    }
-
+	uint secpos;//扇区地址
+	ushort secoff;//扇区内偏移
+	ushort secremain;//扇区内剩余地址
+	ushort i;
+	uint offaddr;////去掉0X08000000后的地址
+	
+	offaddr = addr - STM32_FLASH_BASE; //实际偏移地址
+	secpos = offaddr / this->BytesPerBlock; //扇区地址  0~127 for STM32F103RBT6
+	secoff = (offaddr % this->BytesPerBlock); //在扇区内的偏移(2个字节为基本单位.)
+    secremain = this->BytesPerBlock / 2-secoff; //扇区剩余空间大小   
+	int size1=0;//第一部分字节大小
+	int size3=0;//第三部分字节大小
+	int pos=0;
+	size1=(secpos+1)*this->BytesPerBlock-addr;
+	
+	if(size1>this->BytesPerBlock)
+	{
+		//错误发生时，直接返回，放置造成意外伤害
+		return -2;
+	}
+	
+		
+	//读取
+	 FLASH_Unlock(); //解锁
+	//处理第一部分
+	this->Read(secpos*this->BytesPerBlock+STM32_FLASH_BASE,this->SectorBuffer.buf,this->BytesPerBlock);
+	for(int i=0;i<size1;i++)
+	{
+		this->SectorBuffer.buf[secoff+i]=((byte*)pBuffer)[i];
+	}
+	this->eraseSector(secpos *this->BytesPerBlock + STM32_FLASH_BASE); //擦除这个扇区
+	this->WriteSector(secpos*this->BytesPerBlock+STM32_FLASH_BASE, this->SectorBuffer.buf16);
+	size-=size1;
+	addr+=size1;
+	pos+=size1;
+	//处理第二部分
+	while(size>this->BytesPerBlock)
+	{
+		this->eraseSector(addr);
+		this->WriteSector(addr,(byte*)pBuffer+pos);
+		size-=this->BytesPerBlock;
+		pos+=this->BytesPerBlock;
+	}
+	//处理第三部分
+	
+	 FLASH_Lock(); //上锁
+    return size;
 }
-
-
 
 void Flash::Write(uint addr, ushort *pBuffer, ushort size)
 {
@@ -220,11 +257,11 @@ void Flash::Write(uint addr, ushort *pBuffer, ushort size)
             {
                 this->SectorBuffer.buf16[i + secoff] = pBuffer[i];
             }
-			this->WriteSector(secpos *this->BytesPerBlock + STM32_FLASH_BASE, this->SectorBuffer.buf16, this->BytesPerBlock / 2); //写入整个扇区  
+			this->WriteSector(secpos *this->BytesPerBlock + STM32_FLASH_BASE, this->SectorBuffer.buf16); //写入整个扇区  
         }
         else
         {
-           this->WriteSector(addr, pBuffer, secremain);
+           //this->WriteSector(addr, pBuffer, secremain);
         }
         //写已经擦除了的,直接写入扇区剩余区间. 				   
         if (size == secremain)
@@ -270,7 +307,7 @@ int Flash::eraseSector(uint addr)
     return this->BytesPerBlock;
 }
 //写扇区
-void Flash::WriteSector(uint addr, ushort *pBuffer, ushort size)
+void Flash::WriteSector(uint addr, void *pBuffer)
 {
-  this->Write_NoCheck(addr, pBuffer, size);
+  this->Write_NoCheck(addr, (ushort *)pBuffer, this->BytesPerBlock/2);
 }
