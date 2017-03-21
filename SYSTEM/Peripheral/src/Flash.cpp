@@ -236,11 +236,11 @@ void Flash::Write(uint addr, ushort *pBuffer, ushort size)
             {
                 STMFLASH_BUF1[i + secoff] = pBuffer[i];
             }
-            Write_NoCheck(secpos *this->BytesPerBlock + STM32_FLASH_BASE, STMFLASH_BUF1, this->BytesPerBlock / 2); //写入整个扇区  
+			this->WriteSector(secpos *this->BytesPerBlock + STM32_FLASH_BASE, STMFLASH_BUF1, this->BytesPerBlock / 2); //写入整个扇区  
         }
         else
         {
-            Write_NoCheck(addr, pBuffer, secremain);
+           this->WriteSector(addr, pBuffer, secremain);
         }
         //写已经擦除了的,直接写入扇区剩余区间. 				   
         if (size == secremain)
