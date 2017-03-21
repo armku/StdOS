@@ -12,7 +12,7 @@ class Flash
         int Write(uint addr, void *pBuffer, int size);
 		void SetSectorSize(int bytesperblock,int size=-1);//设置扇区大小，容量大小，单位K
         #ifdef DEBUG
-            void TestFlash();
+         static   void TestFlash();
         #endif 
     private:
         ushort ReadHalfWord(uint addr);

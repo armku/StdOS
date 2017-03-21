@@ -27,6 +27,10 @@ void Flash::SetSectorSize(int bytesperblock, int size)
     {
         this->Size = 1024;
     }
+	else 
+	{
+		this->Size=size;
+	}
 }
 
 int Flash::Read(uint addr, void *pBuffer, int size)
@@ -183,8 +187,7 @@ void Flash::WriteSector(uint addr, void *pBuffer)
 
             Flash flash;
 			flash.SetSectorSize(2048,512);
-            debug_printf("FlashSize: %d kBytes  BytesPerBlock: %d kBytes\r\n", flash.Size, flash.BytesPerBlock);
-			return;
+            debug_printf("FlashSize: %d kBytes  BytesPerBlock: %d kBytes\r\n", flash.Size, flash.BytesPerBlock);			
 		#if 0
             flash.Erase(addr, 0x100);
 
