@@ -5,7 +5,7 @@
 //读取指定地址的半字(16位数据)
 //faddr:读地址(此地址必须为2的倍数!!)
 //返回值:对应数据.
-ushort STMFLASH::STMFLASH_ReadHalfWord(uint faddr)
+ushort STMFLASH::ReadHalfWord(uint faddr)
 {
     return *(volatile ushort*)faddr;
 }
@@ -103,7 +103,7 @@ void STMFLASH::STMFLASH_Read(uint addr, ushort *pBuffer, ushort NumToRead)
     ushort i;
     for (i = 0; i < NumToRead; i++)
     {
-        pBuffer[i] = STMFLASH_ReadHalfWord(addr); //读取2个字节.
+        pBuffer[i] = ReadHalfWord(addr); //读取2个字节.
         addr += 2; //偏移2个字节.	
     }
 }
