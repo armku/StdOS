@@ -128,14 +128,14 @@ void STMFLASH::Read(uint addr, ushort *pBuffer, ushort NumToRead)
             buftest1[i] = 1000+i;
         }
         debug_printf("-1 \r\n");
-        Write(addr, buftest1, 20);
+        flash1.Write(addr, buftest1, 20);
         debug_printf("0 \r\n");
         for (int i = 0; i < 20; i++)
         {
             buftest1[i] = 0;
         }
         debug_printf("1 \r\n");
-        Read(addr, buftest1, 20);
+        flash1.Read(addr, buftest1, 20);
         debug_printf("2 \r\n");
         for (int i = 0; i < 20; i++)
         {
