@@ -9,7 +9,9 @@ class Flash
     public:
 		Flash();
         int Read(uint addr, void *pBuffer, int size);
+		int ReadOpposite(uint addr, void *pBuffer, int size);//读取相对位置
         int Write(uint addr, void *pBuffer, int size);
+		int WriteOpposite(uint addr, void *pBuffer, int size);//写相对位置
 		void SetSectorSize(int bytesperblock,int size=-1);//设置扇区大小，容量大小，单位K
         #ifdef DEBUG
          static   void TestFlash();
@@ -28,5 +30,5 @@ class Flash
 		void WriteSector(uint addr, void *pBuffer);//写扇区
         
         int Size;//Flash大小
-        int BytesPerBlock;//扇区大小
+        int BytesPerBlock;//扇区字节大小
 };
