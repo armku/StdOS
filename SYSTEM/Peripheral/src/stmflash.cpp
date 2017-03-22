@@ -34,8 +34,6 @@ void STMFLASH::Write_NoCheck(uint addr, ushort *pBuffer, ushort NumToWrite)
 //addr:起始地址(此地址必须为2的倍数!!)
 //pBuffer:数据指针
 //NumToWrite:半字(16位)数(就是要写入的16位数据的个数.)
-
-ushort STMFLASH_BUF[STM_SECTOR_SIZE / 2]; //最多是2K字节
 void STMFLASH::Write(uint addr, ushort *pBuffer, ushort NumToWrite)
 {
     uint secpos; //扇区地址
@@ -56,11 +54,11 @@ void STMFLASH::Write(uint addr, ushort *pBuffer, ushort NumToWrite)
     //不大于该扇区范围
     while (1)
     {
-        Read(secpos *STM_SECTOR_SIZE + STM32_FLASH_BASE, STMFLASH_BUF, STM_SECTOR_SIZE / 2); //读出整个扇区的内容
+        Read(secpos *STM_SECTOR_SIZE + STM32_FLASH_BASE, Buff.buf16, STM_SECTOR_SIZE / 2); //读出整个扇区的内容
         for (i = 0; i < secremain; i++)
         //校验数据
         {
-            if (STMFLASH_BUF[secoff + i] != 0XFFFF)
+            if (Buff.buf16[secoff + i] != 0XFFFF)
                 break;
             //需要擦除  	  
         }
@@ -71,9 +69,9 @@ void STMFLASH::Write(uint addr, ushort *pBuffer, ushort NumToWrite)
             for (i = 0; i < secremain; i++)
             //复制
             {
-                STMFLASH_BUF[i + secoff] = pBuffer[i];
+                Buff.buf16[i + secoff] = pBuffer[i];
             }
-            Write_NoCheck(secpos *STM_SECTOR_SIZE + STM32_FLASH_BASE, STMFLASH_BUF, STM_SECTOR_SIZE / 2); //写入整个扇区  
+            Write_NoCheck(secpos *STM_SECTOR_SIZE + STM32_FLASH_BASE, Buff.buf16, STM_SECTOR_SIZE / 2); //写入整个扇区  
         }
         else
             Write_NoCheck(addr, pBuffer, secremain);
