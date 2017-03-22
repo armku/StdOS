@@ -13,6 +13,7 @@
 #include "Spi.h"
 #include "HardRtc.h"
 #include "Flash.h"
+#include "stmflash.h"
 
 typedef enum
 {
@@ -108,6 +109,7 @@ int main(void)
     Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
 	
 	//Flash::TestFlash();
+	STMFLASH::Test();
     //Buffer::Test();
     Sys.Start();
 }
