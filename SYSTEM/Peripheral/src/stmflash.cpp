@@ -2,6 +2,12 @@
 #include "stm32f10x_flash.h"
 #include "Sys.h"
 
+union Buff
+{
+    byte buf[2048];
+    ushort buf16[1024];
+} Buff;
+
 //读取指定地址的半字(16位数据)
 //faddr:读地址(此地址必须为2的倍数!!)
 //返回值:对应数据.
@@ -112,7 +118,7 @@ void STMFLASH::Read(uint addr, ushort *pBuffer, ushort NumToRead)
     void STMFLASH::Test()
     {
         ushort buftest1[120];
-        uint addr = STM32_FLASH_BASE+1024*20;
+        uint addr = STM32_FLASH_BASE + 1024 * 20;
 
         debug_printf("\r\n\r\n");
         debug_printf("TestFlash Start......\r\n");
