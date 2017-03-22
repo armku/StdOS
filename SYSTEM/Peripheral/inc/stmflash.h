@@ -18,14 +18,14 @@
 class STMFLASH
 {
     public:        
-        static ushort ReadHalfWord(uint faddr); //读出半字  
-        static void WriteLenByte(uint addr, uint DataToWrite, ushort Len); //指定地址开始写入指定长度的数据
-        static uint ReadLenByte(uint addr, ushort Len); //指定地址开始读取指定长度数据
-        static void Write(uint addr, ushort *pBuffer, ushort NumToWrite); //从指定地址开始写入指定长度的数据
-        static void Read(uint addr, ushort *pBuffer, ushort NumToRead); //从指定地址开始读出指定长度的数据
+        ushort ReadHalfWord(uint faddr); //读出半字  
+        void WriteLenByte(uint addr, uint DataToWrite, ushort Len); //指定地址开始写入指定长度的数据
+        uint ReadLenByte(uint addr, ushort Len); //指定地址开始读取指定长度数据
+        void Write(uint addr, ushort *pBuffer, ushort NumToWrite); //从指定地址开始写入指定长度的数据
+        void Read(uint addr, ushort *pBuffer, ushort NumToRead); //从指定地址开始读出指定长度的数据
 	#ifdef DEBUG
 		static void Test();
 	#endif	
 	private:
-		static void Write_NoCheck(uint addr, ushort *pBuffer, ushort NumToWrite);		
+		void Write_NoCheck(uint addr, ushort *pBuffer, ushort NumToWrite);		
 };
