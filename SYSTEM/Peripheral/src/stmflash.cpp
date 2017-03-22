@@ -7,7 +7,11 @@
 //返回值:对应数据.
 ushort STMFLASH::STMFLASH_ReadHalfWord(uint faddr)
 {
+	if(faddr%2)
+	{
     return *(volatile ushort*)faddr;
+	}
+	return 0;
 }
 
 //不检查的写入
