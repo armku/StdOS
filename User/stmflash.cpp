@@ -4,18 +4,18 @@
 //读取指定地址的半字(16位数据)
 //faddr:读地址(此地址必须为2的倍数!!)
 //返回值:对应数据.
-uint16_t STMFLASH::STMFLASH_ReadHalfWord(uint32_t faddr)
+ushort STMFLASH::STMFLASH_ReadHalfWord(uint faddr)
 {
-    return *(volatile uint16_t*)faddr;
+    return *(volatile ushort*)faddr;
 }
 
 //不检查的写入
 //WriteAddr:起始地址
 //pBuffer:数据指针
 //NumToWrite:半字(16位)数   
-void STMFLASH::STMFLASH_Write_NoCheck(uint32_t WriteAddr, uint16_t *pBuffer, uint16_t NumToWrite)
+void STMFLASH::STMFLASH_Write_NoCheck(uint WriteAddr, ushort *pBuffer, ushort NumToWrite)
 {
-    uint16_t i;
+    ushort i;
     for (i = 0; i < NumToWrite; i++)
     {
         FLASH_ProgramHalfWord(WriteAddr, pBuffer[i]);
@@ -32,14 +32,14 @@ void STMFLASH::STMFLASH_Write_NoCheck(uint32_t WriteAddr, uint16_t *pBuffer, uin
 #else 
     #define STM_SECTOR_SIZE	2048
 #endif 
-uint16_t STMFLASH_BUF[STM_SECTOR_SIZE / 2]; //最多是2K字节
-void STMFLASH::STMFLASH_Write(uint32_t WriteAddr, uint16_t *pBuffer, uint16_t NumToWrite)
+ushort STMFLASH_BUF[STM_SECTOR_SIZE / 2]; //最多是2K字节
+void STMFLASH::STMFLASH_Write(uint WriteAddr, ushort *pBuffer, ushort NumToWrite)
 {
-    uint32_t secpos; //扇区地址
-    uint16_t secoff; //扇区内偏移地址(16位字计算)
-    uint16_t secremain; //扇区内剩余地址(16位字计算)	   
-    uint16_t i;
-    uint32_t offaddr; //去掉0X08000000后的地址
+    uint secpos; //扇区地址
+    ushort secoff; //扇区内偏移地址(16位字计算)
+    ushort secremain; //扇区内剩余地址(16位字计算)	   
+    ushort i;
+    uint offaddr; //去掉0X08000000后的地址
     if (WriteAddr < STM32_FLASH_BASE || (WriteAddr >= (STM32_FLASH_BASE + 1024 * STM32_FLASH_SIZE)))
         return ;
     //非法地址
@@ -101,9 +101,9 @@ void STMFLASH::STMFLASH_Write(uint32_t WriteAddr, uint16_t *pBuffer, uint16_t Nu
 //ReadAddr:起始地址
 //pBuffer:数据指针
 //NumToWrite:半字(16位)数
-void STMFLASH::STMFLASH_Read(uint32_t ReadAddr, uint16_t *pBuffer, uint16_t NumToRead)
+void STMFLASH::STMFLASH_Read(uint ReadAddr, ushort *pBuffer, ushort NumToRead)
 {
-    uint16_t i;
+    ushort i;
     for (i = 0; i < NumToRead; i++)
     {
         pBuffer[i] = STMFLASH_ReadHalfWord(ReadAddr); //读取2个字节.
