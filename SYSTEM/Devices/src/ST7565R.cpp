@@ -168,6 +168,15 @@ void CLcd::Point(ushort x, ushort y, ushort color)
             this->Interface_Table[(y) / 8][x] &= 0xff ^ (1 << (y % 8));
         }
 }
+//»­Í¼ÐÎ
+void CLcd::DisplayImage(byte *pbuf,ushort color)
+{
+	for(int i=0;i<128*64/8;i++)
+	{
+		((byte*)(this->Interface_Table))[i]=color?pbuf[i]:pbuf[i]^0XFF;
+	}
+	this->Flush();
+}
 //¶ÁÈ¡ÑÕÉ«
 ushort CLcd::readPoint(ushort x,ushort y)
 {
