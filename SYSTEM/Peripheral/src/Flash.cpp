@@ -261,7 +261,7 @@ void Flash::WriteSector(uint addr, void *pBuffer)
             debug_printf("2 \r\n");
             for (int i = 0; i < 20; i++)
             {
-                debug_printf("%d:%d\r\n", i, buftest1[i]);
+                debug_printf("%d:%d\t", i, buftest1[i]);
             }
             debug_printf("²âÊÔÍê³É\r\n");
         #endif 
