@@ -9,7 +9,7 @@ ushort STMFLASH::STMFLASH_ReadHalfWord(uint faddr)
 {
 	if(faddr%2)
 	{
-    return *(volatile ushort*)faddr;
+		return *(volatile ushort*)faddr;
 	}
 	return 0;
 }
