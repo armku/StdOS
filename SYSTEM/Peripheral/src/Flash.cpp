@@ -114,7 +114,6 @@ void Flash::Write_NoCheck(uint addr, ushort *pBuffer, ushort size)
 1        2          3     ±àºÅ
 
  */
-void STMFLASH_Write(uint32_t WriteAddr,uint16_t *pBuffer,uint16_t NumToWrite);
 int Flash::Write(uint addr, void *pBuffer, int size)
 {
     uint secpos; //ÉÈÇøµØÖ·
@@ -177,8 +176,7 @@ int Flash::Write(uint addr, void *pBuffer, int size)
         {
             this->SectorBuffer.buf[i] = ((byte*)pBuffer)[pos + i];
         }
-        //this->WriteSector(addr, this->SectorBuffer.buf);
-		STMFLASH_Write(addr,this->SectorBuffer.buf16,this->BytesPerBlock/2);
+        //this->WriteSector(addr, this->SectorBuffer.buf);		
     }
     FLASH_Lock(); //ÉÏËø
     return size;

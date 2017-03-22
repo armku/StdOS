@@ -107,7 +107,7 @@ int main(void)
     
     Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
 	
-	Flash::TestFlash();
+	//Flash::TestFlash();
     //Buffer::Test();
     Sys.Start();
 }
