@@ -23,4 +23,9 @@ class STMFLASH
 	#endif	
 	private:
 		static void STMFLASH_Write_NoCheck(uint addr, ushort *pBuffer, ushort NumToWrite);
+		union Buffer
+		{
+			byte buf[2048];
+			ushort buf16[1024];
+		}Buffer;
 };
