@@ -116,7 +116,7 @@ void STMFLASH::STMFLASH_Read(uint addr, ushort *pBuffer, ushort NumToRead)
     void STMFLASH::Test()
     {
         ushort buftest1[120];
-        uint addr = STM32_FLASH_BASE+0X00070000;
+        uint addr = STM32_FLASH_BASE+1024*20;
 
         debug_printf("\r\n\r\n");
         debug_printf("TestFlash Start......\r\n");
