@@ -7,21 +7,17 @@
 //返回值:对应数据.
 ushort STMFLASH::STMFLASH_ReadHalfWord(uint faddr)
 {
-	if(faddr%2)
-	{
-		return *(volatile ushort*)faddr;
-	}
-	return 0;
+    return *(volatile ushort*)faddr;
 }
 
 //不检查的写入
 //addr:起始地址
 //pBuffer:数据指针
-//len:半字(16位)数   
-void STMFLASH::STMFLASH_Write_NoCheck(uint addr, ushort *pBuffer, ushort len)
+//NumToWrite:半字(16位)数   
+void STMFLASH::STMFLASH_Write_NoCheck(uint addr, ushort *pBuffer, ushort NumToWrite)
 {
     ushort i;
-    for (i = 0; i < len; i++)
+    for (i = 0; i < NumToWrite; i++)
     {
         FLASH_ProgramHalfWord(addr, pBuffer[i]);
         addr += 2; //地址增加2.
@@ -31,14 +27,14 @@ void STMFLASH::STMFLASH_Write_NoCheck(uint addr, ushort *pBuffer, ushort len)
 //从指定地址开始写入指定长度的数据
 //addr:起始地址(此地址必须为2的倍数!!)
 //pBuffer:数据指针
-//len:半字(16位)数(就是要写入的16位数据的个数.)
+//NumToWrite:半字(16位)数(就是要写入的16位数据的个数.)
 #if STM32_FLASH_SIZE<256
     #define STM_SECTOR_SIZE 1024 //字节
 #else 
     #define STM_SECTOR_SIZE	2048
 #endif 
 ushort STMFLASH_BUF[STM_SECTOR_SIZE / 2]; //最多是2K字节
-void STMFLASH::STMFLASH_Write(uint addr, ushort *pBuffer, ushort len)
+void STMFLASH::STMFLASH_Write(uint addr, ushort *pBuffer, ushort NumToWrite)
 {
     uint secpos; //扇区地址
     ushort secoff; //扇区内偏移地址(16位字计算)
@@ -53,8 +49,8 @@ void STMFLASH::STMFLASH_Write(uint addr, ushort *pBuffer, ushort len)
     secpos = offaddr / STM_SECTOR_SIZE; //扇区地址  0~127 for STM32F103RBT6
     secoff = (offaddr % STM_SECTOR_SIZE) / 2; //在扇区内的偏移(2个字节为基本单位.)
     secremain = STM_SECTOR_SIZE / 2-secoff; //扇区剩余空间大小   
-    if (len <= secremain)
-        secremain = len;
+    if (NumToWrite <= secremain)
+        secremain = NumToWrite;
     //不大于该扇区范围
     while (1)
     {
@@ -80,7 +76,7 @@ void STMFLASH::STMFLASH_Write(uint addr, ushort *pBuffer, ushort len)
         else
             STMFLASH_Write_NoCheck(addr, pBuffer, secremain);
         //写已经擦除了的,直接写入扇区剩余区间. 				   
-        if (len == secremain)
+        if (NumToWrite == secremain)
             break;
         //写入结束了
         else
@@ -90,12 +86,12 @@ void STMFLASH::STMFLASH_Write(uint addr, ushort *pBuffer, ushort len)
             secoff = 0; //偏移位置为0 	 
             pBuffer += secremain; //指针偏移
             addr += secremain; //写地址偏移	   
-            len -= secremain; //字节(16位)数递减
-            if (len > (STM_SECTOR_SIZE / 2))
+            NumToWrite -= secremain; //字节(16位)数递减
+            if (NumToWrite > (STM_SECTOR_SIZE / 2))
                 secremain = STM_SECTOR_SIZE / 2;
             //下一个扇区还是写不完
             else
-                secremain = len;
+                secremain = NumToWrite;
             //下一个扇区可以写完了
         }
     };
@@ -105,11 +101,11 @@ void STMFLASH::STMFLASH_Write(uint addr, ushort *pBuffer, ushort len)
 //从指定地址开始读出指定长度的数据
 //addr:起始地址
 //pBuffer:数据指针
-//len:半字(16位)数
-void STMFLASH::STMFLASH_Read(uint addr, ushort *pBuffer, ushort len)
+//NumToWrite:半字(16位)数
+void STMFLASH::STMFLASH_Read(uint addr, ushort *pBuffer, ushort NumToRead)
 {
     ushort i;
-    for (i = 0; i < len; i++)
+    for (i = 0; i < NumToRead; i++)
     {
         pBuffer[i] = STMFLASH_ReadHalfWord(addr); //读取2个字节.
         addr += 2; //偏移2个字节.	
@@ -120,7 +116,7 @@ void STMFLASH::STMFLASH_Read(uint addr, ushort *pBuffer, ushort len)
     void STMFLASH::Test()
     {
         ushort buftest1[120];
-        uint addr = STM32_FLASH_BASE+1024*20;
+        uint addr = 0X08070000;
 
         debug_printf("\r\n\r\n");
         debug_printf("TestFlash Start......\r\n");
