@@ -434,11 +434,6 @@
                 </FileArmAds>
               </FileOption>
             </File>
-            <File>
-              <FileName>stmflash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\stmflash.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -660,11 +655,6 @@
               <FilePath>..\SYSTEM\Peripheral\src\Timer.cpp</FilePath>
             </File>
             <File>
-              <FileName>Flash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Flash.cpp</FilePath>
-            </File>
-            <File>
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\Peripheral\usart.c</FilePath>
@@ -673,6 +663,11 @@
               <FileName>HardRtc.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\HardRtc.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stmflash.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\stmflash.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1366,11 +1361,6 @@
                 </FileArmAds>
               </FileOption>
             </File>
-            <File>
-              <FileName>stmflash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\stmflash.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1592,11 +1582,6 @@
               <FilePath>..\SYSTEM\Peripheral\src\Timer.cpp</FilePath>
             </File>
             <File>
-              <FileName>Flash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Flash.cpp</FilePath>
-            </File>
-            <File>
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\Peripheral\usart.c</FilePath>
@@ -1605,6 +1590,11 @@
               <FileName>HardRtc.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SYSTEM\Peripheral\src\HardRtc.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stmflash.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SYSTEM\Peripheral\src\stmflash.cpp</FilePath>
             </File>
           </Files>
         </Group>
