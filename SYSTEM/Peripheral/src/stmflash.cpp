@@ -2,6 +2,8 @@
 #include "stm32f10x_flash.h"
 #include "Sys.h"
 
+#define STM32_FLASH_BASE 0x08000000 	//STM32 FLASH的起始地址
+
 static union Buff
 {
     byte buf[2048];
@@ -46,7 +48,7 @@ void STMFLASH::Write(uint addr, ushort *pBuffer, ushort len)
     ushort secremain; //扇区内剩余地址(16位字计算)	   
     ushort i;
     uint offaddr; //去掉0X08000000后的地址
-    if (addr < STM32_FLASH_BASE || (addr >= (STM32_FLASH_BASE + 1024 * STM32_FLASH_SIZE)))
+    if (addr < STM32_FLASH_BASE || (addr >= (STM32_FLASH_BASE + 1024 * this->flashSize)))
         return ;
     //非法地址
     FLASH_Unlock(); //解锁
