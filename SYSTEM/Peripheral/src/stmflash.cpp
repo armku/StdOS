@@ -51,15 +51,15 @@ void STMFLASH::Write(uint addr, ushort *pBuffer, ushort len)
     //非法地址
     FLASH_Unlock(); //解锁
     offaddr = addr - STM32_FLASH_BASE; //实际偏移地址.
-    secpos = offaddr / STM_SECTOR_SIZE; //扇区地址  0~127 for STM32F103RBT6
-    secoff = (offaddr % STM_SECTOR_SIZE) / 2; //在扇区内的偏移(2个字节为基本单位.)
-    secremain = STM_SECTOR_SIZE / 2-secoff; //扇区剩余空间大小   
+    secpos = offaddr / this->sectorSize; //扇区地址  0~127 for STM32F103RBT6
+    secoff = (offaddr % this->sectorSize) / 2; //在扇区内的偏移(2个字节为基本单位.)
+    secremain = this->sectorSize / 2-secoff; //扇区剩余空间大小   
     if (len <= secremain)
         secremain = len;
     //不大于该扇区范围
     while (1)
     {
-        Read(secpos *STM_SECTOR_SIZE + STM32_FLASH_BASE, Buff.buf16, STM_SECTOR_SIZE / 2); //读出整个扇区的内容
+        Read(secpos *this->sectorSize + STM32_FLASH_BASE, Buff.buf16, this->sectorSize / 2); //读出整个扇区的内容
         for (i = 0; i < secremain; i++)
         //校验数据
         {
@@ -70,13 +70,13 @@ void STMFLASH::Write(uint addr, ushort *pBuffer, ushort len)
         if (i < secremain)
         //需要擦除
         {
-            FLASH_ErasePage(secpos *STM_SECTOR_SIZE + STM32_FLASH_BASE); //擦除这个扇区
+            FLASH_ErasePage(secpos *this->sectorSize + STM32_FLASH_BASE); //擦除这个扇区
             for (i = 0; i < secremain; i++)
             //复制
             {
                 Buff.buf16[i + secoff] = pBuffer[i];
             }
-            Write_NoCheck(secpos *STM_SECTOR_SIZE + STM32_FLASH_BASE, Buff.buf16, STM_SECTOR_SIZE / 2); //写入整个扇区  
+            Write_NoCheck(secpos *this->sectorSize + STM32_FLASH_BASE, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
         }
         else
             Write_NoCheck(addr, pBuffer, secremain);
@@ -92,8 +92,8 @@ void STMFLASH::Write(uint addr, ushort *pBuffer, ushort len)
             pBuffer += secremain; //指针偏移
             addr += secremain; //写地址偏移	   
             len -= secremain; //字节(16位)数递减
-            if (len > (STM_SECTOR_SIZE / 2))
-                secremain = STM_SECTOR_SIZE / 2;
+            if (len > (this->sectorSize / 2))
+                secremain = this->sectorSize / 2;
             //下一个扇区还是写不完
             else
                 secremain = len;
