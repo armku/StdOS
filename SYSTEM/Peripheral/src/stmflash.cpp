@@ -12,115 +12,128 @@ static union Buff
 
 STMFLASH::STMFLASH()
 {
-	this->flashSize=64;
-	this->sectorSize=1024;
+    this->flashSize = 64;
+    this->sectorSize = 1024;
 }
+
 void STMFLASH::SetFlashSize(uint flashsize)
 {
-	this->flashSize=flashsize;
-	if(this->flashSize>256)
-	{
-		//大容量产品能为2k
-		this->sectorSize=2048;
-	}
-	else
-	{
-		//中小容量产品为1k
-		this->sectorSize=1024;
-	}
+    this->flashSize = flashsize;
+    if (this->flashSize > 256)
+    {
+        //大容量产品能为2k
+        this->sectorSize = 2048;
+    }
+    else
+    {
+        //中小容量产品为1k
+        this->sectorSize = 1024;
+    }
 }
+
 //读取
-int STMFLASH::Read(uint addr,void* pBuf,int len)
+int STMFLASH::Read(uint addr, void *pBuf, int len)
 {
-	uint len1=len;
-	uint addr1=addr;
-	if(len<=0)
-	{
-		return 0;
-	}
-	if((addr<=STM32_FLASH_BASE)||((addr+len)>this->sectorSize*this->flashSize))
-	{
-		//地址非法
-		return 0;
-	}
-	if(addr%2)
-	{
-		//起始地址为奇数
-		ushort tmp1=this->readHalfWord(addr-1);
-		((byte*)pBuf)[0]=tmp1&0xff;
-		addr1++;
-		len1--;
-	}
-		
-	
-	this->read(addr1,(ushort*)pBuf,len1/2);
-	if(len1%2)
-	{
-		//没有对齐
-		ushort tmp=this->readHalfWord(addr+len1/2+1);
-		((byte*)pBuf)[len1-1]=tmp&0xff;
-	}
-	
-	
-	return len;
+    uint len1 = len;
+    uint addr1 = addr;
+    if (len <= 0)
+    {
+        return 0;
+    }
+    if ((addr <= STM32_FLASH_BASE) || ((addr + len) > this->sectorSize *this->flashSize))
+    {
+        //地址非法
+        return 0;
+    }
+    if (addr % 2)
+    {
+        //起始地址为奇数
+        ushort tmp1 = this->readHalfWord(addr - 1);
+        ((byte*)pBuf)[0] = tmp1 &0xff;
+        addr1++;
+        len1--;
+    }
+
+
+    this->read(addr1, (ushort*)pBuf, len1 / 2);
+    if (len1 % 2)
+    {
+        //没有对齐
+        ushort tmp = this->readHalfWord(addr + len1 / 2+1);
+        ((byte*)pBuf)[len1 - 1] = tmp &0xff;
+    }
+
+
+    return len;
 }
+
 //写入
-int STMFLASH::Write(uint addr,void* pBuf,int len)
+int STMFLASH::Write(uint addr, void *pBuf, int len)
 {
-	if(len<=0)
-	{
-		return 0;
-	}
-	if((addr<=STM32_FLASH_BASE)||((addr+len)>this->sectorSize*this->flashSize))
-	{
-		//地址非法
-		return 0;
-	}
-/*
-|--------|---------|----------|
+    if (len <= 0)
+    {
+        return 0;
+    }
+    if ((addr <= STM32_FLASH_BASE) || ((addr + len) > this->sectorSize *this->flashSize))
+    {
+        //地址非法
+        return 0;
+    }
+    /*
+    |--------|---------|----------|
      *******************
     1        2         3	
-*/
-	//第一区
-	uint addr1=addr;
-	uint len1=len;
-	uint sec1;//第一区
-	uint sec1pos;//地址在第一区位置
-	uint writeSize;//写入大小
-	sec1=(addr1-STM32_FLASH_BASE)/this->sectorSize;
-	sec1pos=(addr1-STM32_FLASH_BASE)%this->sectorSize;
-	writeSize=this->sectorSize-sec1pos;
-	if(writeSize>len1)
-	{
-		writeSize=len1;
-	}
-	this->Read(sec1*this->sectorSize+STM32_FLASH_BASE,Buff.buf,this->sectorSize);
-	for(int i=0;i<writeSize;i++)
-	{
-		Buff.buf[sec1pos+i]=((byte*)pBuf)[i];
-	}
-	FLASH_Unlock(); //解锁
-	FLASH_ErasePage(sec1pos *this->sectorSize + STM32_FLASH_BASE); //擦除这个扇区
-	writeNoCheck(sec1pos *this->sectorSize + STM32_FLASH_BASE, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
-	len1-=writeSize;
-	addr1+=len1;
-	//第二区
-	while(1)
-	{
-		if(len1<this->flashSize)
-		{
-			//小于一个扇区，退出
-			break;
-		}
-		for(int i=0;i<this->flashSize;i++)
-		{
-			//Buff[]
-		}
-	}
-	
-	 FLASH_Lock(); //上锁
-	return len;
+     */
+    //第一区
+    uint addr1 = addr;
+    uint len1 = len;
+    uint sec1; //第一区
+    uint sec1pos; //地址在第一区位置
+    uint writeSize; //写入大小
+    sec1 = (addr1 - STM32_FLASH_BASE) / this->sectorSize;
+    sec1pos = (addr1 - STM32_FLASH_BASE) % this->sectorSize;
+    writeSize = this->sectorSize - sec1pos;
+    if (writeSize > len1)
+    {
+        writeSize = len1;
+    }
+    this->Read(sec1 *this->sectorSize + STM32_FLASH_BASE, Buff.buf, this->sectorSize);
+    for (int i = 0; i < writeSize; i++)
+    {
+        Buff.buf[sec1pos + i] = ((byte*)pBuf)[i];
+    }
+    FLASH_Unlock(); //解锁
+    FLASH_ErasePage(sec1pos *this->sectorSize + STM32_FLASH_BASE); //擦除这个扇区
+    writeNoCheck(sec1pos *this->sectorSize + STM32_FLASH_BASE, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
+    len1 -= writeSize;
+    addr1 += len1;
+    //第二区
+    while (1)
+    {
+        if (len1 < this->flashSize)
+        {
+            //小于一个扇区，退出
+            break;
+        }
+        for (int i = 0; i < this->flashSize; i++)
+        {
+            Buff.buf[i] = ((byte*)pBuf)[addr1 + i];
+        }
+        writeNoCheck(addr1, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
+        addr1 += this->flashSize;
+        len1 -= this->flashSize;
+    }
+    //第三区
+    this->Read(addr1, Buff.buf, this->sectorSize);
+    for (int i = 0; i < len1; i++)
+    {
+        Buff.buf[i] = ((byte*)addr1)[addr1 + i];
+    }
+    writeNoCheck(addr1, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
+    FLASH_Lock(); //上锁
+    return len;
 }
+
 //读取指定地址的半字(16位数据)
 //faddr:读地址(此地址必须为2的倍数!!)
 //返回值:对应数据.
@@ -227,10 +240,10 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
 
 #ifdef DEBUG
     void STMFLASH::Test()
-    {		
+    {
         ushort buftest1[120];
         uint addr = STM32_FLASH_BASE + 1024 * 30;
-		STMFLASH flash1;
+        STMFLASH flash1;
 
         debug_printf("\r\n\r\n");
         debug_printf("TestFlash Start......\r\n");
@@ -248,7 +261,7 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
             buftest1[i] = 0;
         }
         debug_printf("1 \r\n");
-        flash1.Read(addr, buftest1, 20*2);
+        flash1.read(addr, buftest1, 20);
         debug_printf("2 \r\n");
         for (int i = 0; i < 20; i++)
         {
