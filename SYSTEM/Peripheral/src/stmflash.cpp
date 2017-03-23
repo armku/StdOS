@@ -32,7 +32,7 @@ void STMFLASH::SetFlashSize(uint flashsize)
 //读取指定地址的半字(16位数据)
 //faddr:读地址(此地址必须为2的倍数!!)
 //返回值:对应数据.
-ushort STMFLASH::ReadHalfWord(uint faddr)
+ushort STMFLASH::readHalfWord(uint faddr)
 {
     return *(volatile ushort*)faddr;
 }
@@ -41,7 +41,7 @@ ushort STMFLASH::ReadHalfWord(uint faddr)
 //addr:起始地址
 //pBuffer:数据指针
 //len:半字(16位)数   
-void STMFLASH::Write_NoCheck(uint addr, ushort *pBuffer, ushort len)
+void STMFLASH::writeNoCheck(uint addr, ushort *pBuffer, ushort len)
 {
     ushort i;
     for (i = 0; i < len; i++)
@@ -55,7 +55,7 @@ void STMFLASH::Write_NoCheck(uint addr, ushort *pBuffer, ushort len)
 //addr:起始地址(此地址必须为2的倍数!!)
 //pBuffer:数据指针
 //len:半字(16位)数(就是要写入的16位数据的个数.)
-void STMFLASH::Write(uint addr, ushort *pBuffer, ushort len)
+void STMFLASH::write(uint addr, ushort *pBuffer, ushort len)
 {
     uint secpos; //扇区地址
     ushort secoff; //扇区内偏移地址(16位字计算)
@@ -75,7 +75,7 @@ void STMFLASH::Write(uint addr, ushort *pBuffer, ushort len)
     //不大于该扇区范围
     while (1)
     {
-        Read(secpos *this->sectorSize + STM32_FLASH_BASE, Buff.buf16, this->sectorSize / 2); //读出整个扇区的内容
+        this->read(secpos *this->sectorSize + STM32_FLASH_BASE, Buff.buf16, this->sectorSize / 2); //读出整个扇区的内容
         for (i = 0; i < secremain; i++)
         //校验数据
         {
@@ -92,10 +92,10 @@ void STMFLASH::Write(uint addr, ushort *pBuffer, ushort len)
             {
                 Buff.buf16[i + secoff] = pBuffer[i];
             }
-            Write_NoCheck(secpos *this->sectorSize + STM32_FLASH_BASE, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
+            writeNoCheck(secpos *this->sectorSize + STM32_FLASH_BASE, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
         }
         else
-            Write_NoCheck(addr, pBuffer, secremain);
+            writeNoCheck(addr, pBuffer, secremain);
         //写已经擦除了的,直接写入扇区剩余区间. 				   
         if (len == secremain)
             break;
@@ -123,12 +123,12 @@ void STMFLASH::Write(uint addr, ushort *pBuffer, ushort len)
 //addr:起始地址
 //pBuffer:数据指针
 //len:半字(16位)数
-void STMFLASH::Read(uint addr, ushort *pBuffer, ushort len)
+void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
 {
     ushort i;
     for (i = 0; i < len; i++)
     {
-        pBuffer[i] = ReadHalfWord(addr); //读取2个字节.
+        pBuffer[i] = readHalfWord(addr); //读取2个字节.
         addr += 2; //偏移2个字节.	
     }
 }
@@ -149,14 +149,14 @@ void STMFLASH::Read(uint addr, ushort *pBuffer, ushort len)
             buftest1[i] = 1000+i;
         }
         debug_printf("-1 \r\n");
-        flash1.Write(addr, buftest1, 20);
+        flash1.write(addr, buftest1, 20);
         debug_printf("0 \r\n");
         for (int i = 0; i < 20; i++)
         {
             buftest1[i] = 0;
         }
         debug_printf("1 \r\n");
-        flash1.Read(addr, buftest1, 20);
+        flash1.read(addr, buftest1, 20);
         debug_printf("2 \r\n");
         for (int i = 0; i < 20; i++)
         {
