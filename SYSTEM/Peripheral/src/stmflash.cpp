@@ -15,6 +15,20 @@ STMFLASH::STMFLASH()
 	this->flashSize=64;
 	this->sectorSize=1024;
 }
+void STMFLASH::SetFlashSize(uint flashsize)
+{
+	this->flashSize=flashsize;
+	if(this->flashSize>256)
+	{
+		//大容量产品能为2k
+		this->sectorSize=2048;
+	}
+	else
+	{
+		//中小容量产品为1k
+		this->sectorSize=1024;
+	}
+}
 //读取指定地址的半字(16位数据)
 //faddr:读地址(此地址必须为2的倍数!!)
 //返回值:对应数据.
