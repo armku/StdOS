@@ -244,6 +244,7 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
         ushort buftest1[120];
         uint addr = STM32_FLASH_BASE + 1024 * 30;
         STMFLASH flash1;
+		flash1.SetFlashSize(512);
 
         debug_printf("\r\n\r\n");
         debug_printf("TestFlash Start......\r\n");
