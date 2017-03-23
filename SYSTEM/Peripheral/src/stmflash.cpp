@@ -29,6 +29,55 @@ void STMFLASH::SetFlashSize(uint flashsize)
 		this->sectorSize=1024;
 	}
 }
+//读取
+int STMFLASH::Read(uint addr,void* pBuf,int len)
+{
+	uint len1=len;
+	uint addr1=addr;
+	if(len<=0)
+	{
+		return 0;
+	}
+	if(addr<=STM32_FLASH_BASE)
+	{
+		//地址非法
+		return 0;
+	}
+	if(addr%2)
+	{
+		//起始地址为奇数
+		ushort tmp1=this->readHalfWord(addr-1);
+		((byte*)pBuf)[0]=tmp1&0xff;
+		addr1++;
+		len1--;
+	}
+		
+	
+	this->read(addr1,(ushort*)pBuf,len1/2);
+	if(len1%2)
+	{
+		//没有对齐
+		ushort tmp=this->readHalfWord(addr+len1/2+1);
+		((byte*)pBuf)[len1-1]=tmp&0xff;
+	}
+	
+	
+	return len;
+}
+//写入
+int STMFLASH::Write(uint addr,void* pBuf,int len)
+{
+	if(len<=0)
+	{
+		return 0;
+	}
+	if(addr<=STM32_FLASH_BASE)
+	{
+		//地址非法
+		return 0;
+	}
+	return len;
+}
 //读取指定地址的半字(16位数据)
 //faddr:读地址(此地址必须为2的倍数!!)
 //返回值:对应数据.

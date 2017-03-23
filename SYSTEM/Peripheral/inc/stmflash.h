@@ -5,7 +5,9 @@ class STMFLASH
 {
     public:       
 		STMFLASH();
-		void SetFlashSize(uint flashsize);        
+		void SetFlashSize(uint flashsize);
+		int Read(uint addr,void* pBuf,int len);//∂¡»°
+		int Write(uint addr,void* pBuf,int len);//–¥»Î
 	#ifdef DEBUG
 		static void Test();
 	#endif	
