@@ -2,7 +2,7 @@
 #include "stm32f10x_flash.h"
 #include "Sys.h"
 
-union Buff
+static union Buff
 {
     byte buf[2048];
     ushort buf16[1024];
