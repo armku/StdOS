@@ -18,6 +18,7 @@
 class STMFLASH
 {
     public:       
+		STMFLASH();
         ushort ReadHalfWord(uint faddr); //读出半字  
         void WriteLenByte(uint addr, uint DataToWrite, ushort len); //指定地址开始写入指定长度的数据
         uint ReadLenByte(uint addr, ushort len); //指定地址开始读取指定长度数据

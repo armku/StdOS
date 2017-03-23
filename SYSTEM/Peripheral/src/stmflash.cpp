@@ -8,6 +8,11 @@ static union Buff
     ushort buf16[1024];
 } Buff;
 
+STMFLASH::STMFLASH()
+{
+	this->flashSize=64;
+	this->sectorSize=1024;
+}
 //读取指定地址的半字(16位数据)
 //faddr:读地址(此地址必须为2的倍数!!)
 //返回值:对应数据.
