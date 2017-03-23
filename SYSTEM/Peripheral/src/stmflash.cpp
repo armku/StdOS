@@ -255,7 +255,8 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
             buftest1[i] = 1000+i;
         }
         debug_printf("-1 \r\n");
-        flash1.write(addr, buftest1, 20);
+        //flash1.write(addr, buftest1, 20);
+		flash1.Write(addr, buftest1, 20*2);
         debug_printf("0 \r\n");
         for (int i = 0; i < 20; i++)
         {
@@ -263,6 +264,7 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
         }
         debug_printf("1 \r\n");
         flash1.read(addr, buftest1, 20);
+		//flash1.Read(addr, buftest1, 20*2);
         debug_printf("2 \r\n");
         for (int i = 0; i < 20; i++)
         {
