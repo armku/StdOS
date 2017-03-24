@@ -258,8 +258,8 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
 #ifdef DEBUG
     void STMFLASH::Test()
     {
-        ushort buftest1[120];
-        uint addr = STM32_FLASH_BASE + 1024 * 30;
+        ushort buftest1[1200];
+        uint addr = STM32_FLASH_BASE + 1024 * 30+10;
         STMFLASH flash1;
         flash1.SetFlashSize(512);
 
@@ -267,13 +267,13 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
         debug_printf("TestFlash Start......\r\n");
 
         debug_printf("²âÊÔ¿ªÊ¼\r\n");
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 1200; i++)
         {
             buftest1[i] = 1000+i;
         }
         debug_printf("-1 \r\n");
         //flash1.write(addr, buftest1, 20);
-        int wid = flash1.Write(addr, buftest1, 20 *2);
+        int wid = flash1.Write(addr, buftest1, 1200);
         debug_printf("write:%d \r\n", wid);
         for (int i = 0; i < 20; i++)
         {
@@ -281,9 +281,9 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
         }
         debug_printf("1 \r\n");
         //flash1.read(addr, buftest1, 20);
-        int rid = flash1.Read(addr, buftest1, 20 *2);
+        int rid = flash1.Read(addr, buftest1, 1200);
         debug_printf("Read:%d \r\n", rid);
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 1200; i++)
         {
             debug_printf("%d:%d\t", i, buftest1[i]);
         }
