@@ -110,6 +110,7 @@ int STMFLASH::Write(uint addr, void *pBuf, int len)
     writeNoCheck(sec1pos *this->sectorSize + STM32_FLASH_BASE, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
     len1 -= writeSize;
     addr1 += writeSize;
+	return 0;
     //第二区
     while (1)
     {
@@ -259,16 +260,16 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
         }
         debug_printf("-1 \r\n");
         //flash1.write(addr, buftest1, 20);
-		flash1.Write(addr, buftest1, 20*2);
-        debug_printf("0 \r\n");
+		int wid=flash1.Write(addr, buftest1, 20*2);
+        debug_printf("%d \r\n",wid);
         for (int i = 0; i < 20; i++)
         {
             buftest1[i] = 0;
         }
         debug_printf("1 \r\n");
         //flash1.read(addr, buftest1, 20);
-		flash1.Read(addr, buftest1, 20*2);
-        debug_printf("2 \r\n");
+		int rid=flash1.Read(addr, buftest1, 20*2);
+        debug_printf("%d \r\n",rid);
         for (int i = 0; i < 20; i++)
         {
             debug_printf("%d:%d\t", i, buftest1[i]);
