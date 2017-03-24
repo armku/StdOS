@@ -40,7 +40,7 @@ int STMFLASH::Read(uint addr, void *pBuf, int len)
     {
         return 0;
     }
-    if ((addr <= STM32_FLASH_BASE) || ((addr + len) > (STM32_FLASH_BASE+this->sectorSize *this->flashSize)))
+    if ((addr <= STM32_FLASH_BASE) || ((addr + len) > (STM32_FLASH_BASE + this->sectorSize *this->flashSize)))
     {
         //地址非法
         return 0;
@@ -74,7 +74,7 @@ int STMFLASH::Write(uint addr, void *pBuf, int len)
     {
         return 0;
     }
-    if ((addr <= STM32_FLASH_BASE) || ((addr + len) > (STM32_FLASH_BASE+this->sectorSize *this->flashSize)))
+    if ((addr <= STM32_FLASH_BASE) || ((addr + len) > (STM32_FLASH_BASE + this->sectorSize *this->flashSize)))
     {
         //地址非法
         return 0;
@@ -90,28 +90,39 @@ int STMFLASH::Write(uint addr, void *pBuf, int len)
     uint sec1; //第一区
     uint sec1pos; //地址在第一区位置
     uint writeSize; //写入大小
-	
-	addr1=addr;
-	len1=len;
+
+    addr1 = addr;
+    len1 = len;
+
+
+	debug_printf("地址：0X%08X 长度：%d\r\n",addr1,len1);
+    //第一区
     sec1 = (addr1 - STM32_FLASH_BASE) / this->sectorSize;
     sec1pos = (addr1 - STM32_FLASH_BASE) % this->sectorSize;
     writeSize = this->sectorSize - sec1pos;
-    if (writeSize > len1)
+	debug_printf("第一区扇区位置:%d 区内偏移:%d 长度:%d\r\n",sec1,sec1pos,len1);
+    if (sec1pos != 0)
     {
-        writeSize = len1;
+        //第一区需要写入
+        if (writeSize > len1)
+        {
+            writeSize = len1;
+        }
+        this->Read(sec1 *this->sectorSize + STM32_FLASH_BASE, Buff.buf, this->sectorSize);
+        for (int i = 0; i < writeSize; i++)
+        {
+            Buff.buf[sec1pos + i] = ((byte*)pBuf)[i];
+        }
+        FLASH_Unlock(); //解锁
+        debug_printf("Begin Write\r\n");
+        FLASH_ErasePage(sec1pos *this->sectorSize + STM32_FLASH_BASE); //擦除这个扇区
+        writeNoCheck(sec1pos *this->sectorSize + STM32_FLASH_BASE, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
+        len1 -= writeSize;
+        addr1 += writeSize;
+        return 0;
     }
-    this->Read(sec1 *this->sectorSize + STM32_FLASH_BASE, Buff.buf, this->sectorSize);
-    for (int i = 0; i < writeSize; i++)
-    {
-        Buff.buf[sec1pos + i] = ((byte*)pBuf)[i];
-    }
-    FLASH_Unlock(); //解锁
-    FLASH_ErasePage(sec1pos *this->sectorSize + STM32_FLASH_BASE); //擦除这个扇区
-    writeNoCheck(sec1pos *this->sectorSize + STM32_FLASH_BASE, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
-    len1 -= writeSize;
-    addr1 += writeSize;
-	return 0;
     //第二区
+	debug_printf("第二区写入大小:%d \r\n",len1);
     while (1)
     {
         if (len1 < this->sectorSize)
@@ -119,6 +130,7 @@ int STMFLASH::Write(uint addr, void *pBuf, int len)
             //小于一个扇区，退出
             break;
         }
+		debug_printf("第二区内循环扇区：0X%08X 剩余长度:%d\r\n",addr1,len1);
         for (int i = 0; i < this->flashSize; i++)
         {
             Buff.buf[i] = ((byte*)pBuf)[addr1 + i];
@@ -128,10 +140,11 @@ int STMFLASH::Write(uint addr, void *pBuf, int len)
         len1 -= this->flashSize;
     }
     //第三区
+	debug_printf("第三区地址：0X%08X 大小：%d",addr1,len1);
     this->Read(addr1, Buff.buf, this->sectorSize);
     for (int i = 0; i < len1; i++)
     {
-        Buff.buf[i] = ((byte*)addr1)[addr1 + i];
+        Buff.buf[i] = ((byte*)addr1)[i];
     }
     writeNoCheck(addr1, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
     FLASH_Lock(); //上锁
@@ -248,7 +261,7 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
         ushort buftest1[120];
         uint addr = STM32_FLASH_BASE + 1024 * 30;
         STMFLASH flash1;
-		flash1.SetFlashSize(512);
+        flash1.SetFlashSize(512);
 
         debug_printf("\r\n\r\n");
         debug_printf("TestFlash Start......\r\n");
@@ -260,16 +273,16 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
         }
         debug_printf("-1 \r\n");
         //flash1.write(addr, buftest1, 20);
-		int wid=flash1.Write(addr, buftest1, 20*2);
-        debug_printf("%d \r\n",wid);
+        int wid = flash1.Write(addr, buftest1, 20 *2);
+        debug_printf("write:%d \r\n", wid);
         for (int i = 0; i < 20; i++)
         {
             buftest1[i] = 0;
         }
         debug_printf("1 \r\n");
         //flash1.read(addr, buftest1, 20);
-		int rid=flash1.Read(addr, buftest1, 20*2);
-        debug_printf("%d \r\n",rid);
+        int rid = flash1.Read(addr, buftest1, 20 *2);
+        debug_printf("Read:%d \r\n", rid);
         for (int i = 0; i < 20; i++)
         {
             debug_printf("%d:%d\t", i, buftest1[i]);
