@@ -110,7 +110,7 @@ int STMFLASH::Write(uint addr, void *pBuf, int len)
     //第二区
     while (1)
     {
-        if (len1 < this->flashSize)
+        if (len1 < this->sectorSize)
         {
             //小于一个扇区，退出
             break;
