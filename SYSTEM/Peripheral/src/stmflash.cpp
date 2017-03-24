@@ -85,11 +85,14 @@ int STMFLASH::Write(uint addr, void *pBuf, int len)
     1        2         3	
      */
     //第一区
-    uint addr1 = addr;
-    uint len1 = len;
+    uint addr1;
+    uint len1;
     uint sec1; //第一区
     uint sec1pos; //地址在第一区位置
     uint writeSize; //写入大小
+	
+	addr1=addr;
+	len1=len;
     sec1 = (addr1 - STM32_FLASH_BASE) / this->sectorSize;
     sec1pos = (addr1 - STM32_FLASH_BASE) % this->sectorSize;
     writeSize = this->sectorSize - sec1pos;
