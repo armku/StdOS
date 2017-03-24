@@ -45,6 +45,7 @@ int STMFLASH::Read(uint addr, void *pBuf, int len)
         //地址非法
         return 0;
     }
+	debug_printf("开始读取地址：0x%08x 长度：%d",addr,len);
     if (addr % 2)
     {
         //起始地址为奇数
@@ -108,13 +109,15 @@ int STMFLASH::Write(uint addr, void *pBuf, int len)
         {
             writeSize = len1;
         }
+		debug_printf("第一区扇区:%d 写入: %d\r\n",sec1,writeSize);
         this->Read(sec1 *this->sectorSize + STM32_FLASH_BASE, Buff.buf, this->sectorSize);
+		debug_printf("第一区读取成功\r\n");
         for (int i = 0; i < writeSize; i++)
         {
             Buff.buf[sec1pos + i] = ((byte*)pBuf)[i];
         }
         FLASH_Unlock(); //解锁
-        debug_printf("Begin Write\r\n");
+        debug_printf("开始写入第一区\r\n");
         FLASH_ErasePage(sec1pos *this->sectorSize + STM32_FLASH_BASE); //擦除这个扇区
         writeNoCheck(sec1pos *this->sectorSize + STM32_FLASH_BASE, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
         len1 -= writeSize;
@@ -259,7 +262,7 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
     void STMFLASH::Test()
     {
         byte buftest1[3200];
-        uint addr = STM32_FLASH_BASE + 1024 * 30+10;
+        uint addr = STM32_FLASH_BASE + 1024 * 34+10;
         STMFLASH flash1;
         flash1.SetFlashSize(512);
 
