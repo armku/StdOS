@@ -7,7 +7,7 @@ class STMFLASH
 		STMFLASH();
 		void SetFlashSize(uint flashsize);
 		int Read(uint addr,void* pBuf,int len);//∂¡»°
-		int Write(uint addr,void* pBuf,int len);//–¥»Î
+		int Write(uint addr,void* pBuf,int len,bool saveold=true);//–¥»Î
 	#ifdef DEBUG
 		static void Test();
 	#endif	
