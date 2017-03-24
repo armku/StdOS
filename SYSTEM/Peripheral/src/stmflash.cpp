@@ -109,7 +109,7 @@ int STMFLASH::Write(uint addr, void *pBuf, int len)
     FLASH_ErasePage(sec1pos *this->sectorSize + STM32_FLASH_BASE); //擦除这个扇区
     writeNoCheck(sec1pos *this->sectorSize + STM32_FLASH_BASE, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
     len1 -= writeSize;
-    addr1 += len1;
+    addr1 += writeSize;
     //第二区
     while (1)
     {
