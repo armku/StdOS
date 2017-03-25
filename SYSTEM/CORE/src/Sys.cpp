@@ -320,6 +320,10 @@ void TSys::Initjs()
 {
     switch (this->DevID)
     {
+        case 0X0307:
+			this->CPUName = new String("STM32F103RD");
+            this->RamSize = 64;
+			break;
         case 0x0410:
             this->CPUName = new String("STM32F103C8");
             this->RamSize = 20;
