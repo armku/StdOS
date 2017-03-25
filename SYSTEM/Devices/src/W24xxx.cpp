@@ -69,6 +69,19 @@ int CW24xxx::Read(uint addr, byte *pBuffer, int size, ushort bufpos)
  */
 int CW24xxx::Write(uint addr, byte *pBuffer, int size, ushort bufpos)
 {
+	int i=0;
+	for(i=0;i<size;i++)
+	{
+		if(this->ReadByte(addr+i)!=pBuffer[bufpos+i])
+		{
+			break;
+		}
+	}
+	if(i>=size)
+	{
+		//´æ´¢ÄÚÈÝÏàÍ¬£¬²»ÐèÒªÐ´Èë
+		return size;
+	}
     return this->bufwr(addr, pBuffer, size, bufpos, 1);
 }
 
@@ -320,21 +333,6 @@ int CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚÐ
 
     usAddr = addr;
 	
-	byte bufRead[64];//¶ÁÈ¡µÄ´æ´¢Êý¾Ý,ÔÛÖ§³Öµ½24C256,¸ü¸ßÈÝÁ¿¸Ã´Î´úÂë
-	this->readPage(bufRead,0,addr,size);
-	for(int i=0;i<size;i++)
-	{
-		if(bufRead[i]!=buf[bufpos+i])
-		{
-			break;
-		}
-	}
-	if(i>=size)
-	{
-		//Ð´ÈëÊý¾ÝÓë¶Á³öÊý¾ÝÏàÍ¬£¬²»ÐèÐ´ÈëÊý¾Ý
-		return size;
-	}
-
     /*¡¡µÚ£°²½£º·¢Í£Ö¹ÐÅºÅ£¬Æô¶¯ÄÚ²¿Ð´²Ù×÷¡¡*/
     this->pi2c->Stop();
 
