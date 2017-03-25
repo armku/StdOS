@@ -23,8 +23,8 @@ class CW24xxx
     public:
         CW24xxx(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr = 0xA0, uint wnms = 5); //–¥—” ± ±º‰       
         byte CheckOk();
-        int Read(uint addr, byte *pBuffer, int size, ushort bufpos = 0);
-        int Write(uint addr, byte *pBuffer, int size, ushort bufpos = 0);
+        int Read(uint addr, void *pBuffer, int size, ushort bufpos = 0);
+        int Write(uint addr, void *pBuffer, int size, ushort bufpos = 0);
         byte ReadByte(uint address);
         int WriteByte(uint address, byte da);
 

@@ -52,9 +52,9 @@ byte CW24xxx::checkDevice()
  *	返 回 值: 1 表示失败，0表示成功
  *********************************************************************************************************
  */
-int CW24xxx::Read(uint addr, byte *pBuffer, int size, ushort bufpos)
+int CW24xxx::Read(uint addr, void *pBuffer, int size, ushort bufpos)
 {
-    return this->bufwr(addr, pBuffer, size, bufpos, 0);
+    return this->bufwr(addr, (byte*)pBuffer, size, bufpos, 0);
 }
 
 /*
@@ -67,12 +67,12 @@ int CW24xxx::Read(uint addr, byte *pBuffer, int size, ushort bufpos)
  *	返 回 值: 0 表示失败，1表示成功
  *********************************************************************************************************
  */
-int CW24xxx::Write(uint addr, byte *pBuffer, int size, ushort bufpos)
+int CW24xxx::Write(uint addr, void *pBuffer, int size, ushort bufpos)
 {
 	int i=0;
 	for(i=0;i<size;i++)
 	{
-		if(this->ReadByte(addr+i)!=pBuffer[bufpos+i])
+		if(this->ReadByte(addr+i)!=((byte*)pBuffer)[bufpos+i])
 		{
 			break;
 		}
@@ -82,7 +82,7 @@ int CW24xxx::Write(uint addr, byte *pBuffer, int size, ushort bufpos)
 		//存储内容相同，不需要写入
 		return size;
 	}
-    return this->bufwr(addr, pBuffer, size, bufpos, 1);
+    return this->bufwr(addr, (byte*)pBuffer, size, bufpos, 1);
 }
 
 byte CW24xxx::ReadByte(uint address)
