@@ -123,8 +123,11 @@ void TaskScheduler::Start()
         return ;
     }
 
-    //Add(ShowTime, this, 2 *1000, 20 *1000, "时间显示");
-    //Add(ShowStatus, this, 1 *1000, 30 *1000, "任务状态");
+    #ifdef DEBUG
+        Add(ShowStatus, this, 1 *1000, 30 *1000, "任务状态");
+    #else 
+        Add(ShowTime, this, 2 *1000, 20 *1000, "时间显示");
+    #endif 
 
     debug_printf("%s::准备就绪 开始循环处理%d个任务！\r\n\r\n", Name, Count);
 
