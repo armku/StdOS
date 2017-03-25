@@ -2,10 +2,11 @@
 #include "stm32f10x.h"
 
 
-PWM::PWM(Pin pin, uint frq, uint duty): AlternatePort(pin)
+PWM::PWM(Pin pin, uint frq, uint duty,uint prescaler): AlternatePort(pin)
 {
     this->freq = frq;
     this->duty = duty;
+	this->prescal=prescaler;
 }
 
 void PWM::Init()
@@ -22,7 +23,7 @@ void PWM::Init()
             //u16 CCR1_Val = 500;        
             /* Time base configuration */
             TIM_TimeBaseStructure.TIM_Period = this->freq; //999;       //当定时器从0计数到999，即为1000次，为一个定时周期
-            TIM_TimeBaseStructure.TIM_Prescaler = 0; //设置预分频：不预分频，即为72MHz
+            TIM_TimeBaseStructure.TIM_Prescaler = this->prescal; //设置预分频：不预分频，即为72MHz
             TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1; //设置时钟分频系数：不分频(这里用不到)
             TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; //向上计数模式
             TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
