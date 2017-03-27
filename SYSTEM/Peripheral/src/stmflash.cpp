@@ -83,11 +83,16 @@ int STMFLASH::Write(uint addr, void *pBuf, int len, bool protecold)
     {
         return 0;
     }
-    if ((addr <= STM32_FLASH_BASE) || ((addr + len) > (STM32_FLASH_BASE + this->sectorSize *this->flashSize)))
+	if(!this->addrValid(addr))
     {
         //地址非法
         return 0;
     }
+	if(!this->addrValid(addr+len))
+	{
+		//数据超限
+		return 0;
+	}
     /*
     |--------|---------|----------|
      *******************
