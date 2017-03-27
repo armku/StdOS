@@ -17,7 +17,7 @@ class CLcd
         void Cls(ushort x0 = 0, ushort y0 = 0, ushort width = 128, ushort height = 64); //清理指定位置
         void Test(byte data1, byte data2);
         void Point(ushort x0, ushort y0, ushort color = 1); //画点,为所有的基础操作
-		void DisplayImage(byte *pbuf,ushort color=1);//画图形
+		void DisplayImage(byte *pbuf,ushort color=1,uint showtype=1);//画图形
         void Line(ushort x0, ushort y0, ushort x1, ushort y1);
         void Rect(ushort x0, ushort y0, ushort width, ushort height); //矩形
 		void RectSolid(ushort x0, ushort y0, ushort width, ushort height); //实心矩形
