@@ -142,10 +142,8 @@ int STMFLASH::Write(uint addr, void *pBuf, int len, bool protecold)
         }
 		
         
-        debug_printf("开始写入第一区\r\n");
-        FLASH_ErasePage(sec1 *this->sectorSize + STM32_FLASH_BASE); //擦除这个扇区
-		debug_printf("扇区擦除成功\r\n");
-        writeNoCheck(sec1 *this->sectorSize + STM32_FLASH_BASE, Buff.buf16, this->sectorSize / 2); //写入整个扇区  		
+        debug_printf("开始写入第一区\r\n");	
+		this->writeSector(sec1 *this->sectorSize + STM32_FLASH_BASE);
         len1 -= writeSize;
         addr1 += writeSize;
         return 0;
@@ -164,7 +162,7 @@ int STMFLASH::Write(uint addr, void *pBuf, int len, bool protecold)
         {
             Buff.buf[i] = ((byte*)pBuf)[addr1 + i];
         }
-        writeNoCheck(addr1, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
+		this->writeSector(addr1);
         addr1 += this->flashSize;
         len1 -= this->flashSize;
     }
@@ -178,7 +176,7 @@ int STMFLASH::Write(uint addr, void *pBuf, int len, bool protecold)
     {
         Buff.buf[i] = ((byte*)addr1)[i];
     }
-    writeNoCheck(addr1, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
+	this->writeSector(addr1);
     FLASH_Lock(); //上锁
     return len;
 }
