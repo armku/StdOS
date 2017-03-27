@@ -390,7 +390,7 @@ void SerialPort::OnUsartReceive(ushort num, void *param)
         if (USART_GetITStatus(sp->_port, USART_IT_RXNE) != RESET)
         {
             // 从栈分配，节省内存
-            byte buf[128];
+            byte buf[512];
             uint len = sp->Read(buf, sizeof(buf));
             if (len)
             {
