@@ -199,7 +199,49 @@ void STMFLASH::writeNoCheck(uint addr, ushort *pBuffer, ushort len)
         addr += 2; //地址增加2.
     }
 }
-
+//地址正确，在上下限范围内
+bool STMFLASH::addrValid(uint addr)
+{
+	if(addr<STM32_FLASH_BASE)
+	{
+		//地址下限错误
+		return false;
+	}
+	if(addr>=(STM32_FLASH_BASE+this->flashSize*1024))
+	{
+		//地址上限错误
+		return false;
+	}
+	return true;
+}
+//地址是否是扇区起始地址
+bool STMFLASH::addrSectorFirst(uint addr)
+{
+	if(!this->addrValid(addr))
+	{
+		return false;
+	}
+	uint size=addr-STM32_FLASH_BASE;
+	if(size%this->sectorSize)
+	{
+		return false;
+	}
+	return true;
+}
+//写入整个扇区,需要保证参数正确，如果不正确，直接返回
+int STMFLASH::writeSector(uint addr)
+{
+	if(!this->addrSectorFirst(addr))
+	{
+		//不是扇区起始地址或者地址非法直接返回
+		return 0;
+	}
+	FLASH_Unlock(); //解锁	
+	FLASH_ErasePage(addr); //擦除这个扇区
+	writeNoCheck(addr, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
+	FLASH_Lock(); //上锁
+	return this->sectorSize;
+}
 //从指定地址开始写入指定长度的数据
 //addr:起始地址(此地址必须为2的倍数!!)
 //pBuffer:数据指针
