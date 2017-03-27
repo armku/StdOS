@@ -4,7 +4,8 @@
 #include "Util.h"
 
 byte reginbuf[200]; //ÊäÈë¼Ä´æÆ÷
-float RegInputFloat[20]; //ÊäÈë¼Ä´æÆ÷Öµ
+ushort RegInputu16[40];//ÊäÈë¼Ä´æÆ÷
+ushort RegHoilding16[(22*16+8*12+4+16+5)*2];
 
 void ModbusSlave::Process(Buffer &bs, void *param)
 {
@@ -44,17 +45,21 @@ void ModbusSlave::DealFrame(Buffer &bs, void *param)
             //¶ÁÈ¡ÊäÈë¼Ä´æÆ÷
             reginbuf[0] = this->id;
             reginbuf[1] = ReadInputRegisters;
-            reginbuf[2] = this->Entity.reglength *2;
-            for (int i = 0; i < this->Entity.reglength / 2; i++)
-            {
-                SetBufFloat(reginbuf, 3+i * 4, RegInputFloat[i + this->Entity.address / 2], 1);
-            }
+            reginbuf[2] = this->Entity.reglength *2;            
+			for(int i=0;i<this->Entity.reglength;i++)
+			{
+				reginbuf[3+i*2+1]=RegInputu16[i]&0xff;
+				reginbuf[3+i*2]=(RegInputu16[i]>>8)&0xff;
+			}
             crc = this->GetCRC(reginbuf, this->Entity.reglength *2+3);
             reginbuf[this->Entity.reglength *2+4] = (crc >> 8) &0x00ff;
             reginbuf[this->Entity.reglength *2+3] = crc &0x00ff;
             sp->SendBuffer(reginbuf, this->Entity.reglength *2+5);
             break;
-        default:
+        case ReadHoldingRegisters:
+			//¶ÁÈ¡±£³Ö¼Ä´æÆ÷
+			break;
+		default:
             break;
     }
 }
