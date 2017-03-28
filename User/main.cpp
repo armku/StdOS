@@ -96,12 +96,7 @@ int main(void)
     exti.Register(OnKeyPress);
     exti1.Register(OnKeyPress);
 
-    //PWM pwm1(PC9);
-	PWM pwm1(PB1);
-    pwm1.Init();
-    pwm1.SetOutPercent(50);
-
-    // 初始化为输出
+       // 初始化为输出
     OutputPort led(PF8);
     
     Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
