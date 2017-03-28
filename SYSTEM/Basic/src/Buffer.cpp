@@ -21,7 +21,7 @@ Buffer &Buffer::operator = (const Buffer &rhs)
         {
             ((byte*)(this->_Arr))[i] = rhs.GetBuffer()[i];
         }
-		this->_Length=rhs._Length;
+        this->_Length = rhs._Length;
     }
     return  *this;
 }
@@ -387,13 +387,14 @@ void *Buffer::Alloc(int len)
 #if DEBUG
     void Buffer::Test()
     {
-        //使用指针和长度构造一个内存区
-        char cs[] = "This is Buffer Test.";
-        Buffer bs0(cs, sizeof(cs));
-        debug_printf("Buffer bs (cs,strlen(cs)) => %s\r\n", cs);
-        assert(bs0.GetBuffer() == (byte*)cs, "GetBuffer()");
-        assert(bs0 == cs, "Buffer(void* p = nullptr, int len = 0)");
-
+        #if 0
+            //使用指针和长度构造一个内存区
+            char cs[] = "This is Buffer Test.";
+            Buffer bs(cs, sizeof(cs));
+            debug_printf("Buffer bs (cs,strlen(cs)) => %s\r\n", cs);
+            assert(bs.GetBuffer() == (byte*)cs, "GetBuffer()");
+            assert(bs == cs, "Buffer(void* p = nullptr, int len = 0)");
+        #endif 
         byte buf0[] = 
         {
             1, 2, 3, 4
