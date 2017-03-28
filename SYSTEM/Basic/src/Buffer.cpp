@@ -395,49 +395,51 @@ void *Buffer::Alloc(int len)
             assert(bs.GetBuffer() == (byte*)cs, "GetBuffer()");
             assert(bs == cs, "Buffer(void* p = nullptr, int len = 0)");
         #endif 
-        byte buf0[] = 
-        {
-            1, 2, 3, 4
-        };
-        byte bts0[] = 
-        {
-            5, 6, 7, 8, 9, 10
-        };
-        Buffer bs1(buf0, sizeof(buf0));
+        #if 0
+            byte buf[] = 
+            {
+                1, 2, 3, 4
+            };
+            byte bts[] = 
+            {
+                5, 6, 7, 8, 9, 10
+            };
+            Buffer bs1(buf, sizeof(buf));
 
-        char err[] = "Buffer& operator = (const void* ptr)";
+            char err[] = "Buffer& operator = (const void* ptr)";
 
-        //从指针拷贝，使用我的长度
-        bs1 = bts0;
-        assert(bs1.GetBuffer() == buf0, err);
-        assert(bs1.GetBuffer() != bts0, err);
-        assert(bs1.Length() == sizeof(buf0), err);
-        assert(buf0[0] == bts0[0] && buf0[3] == bts0[3], err);
+            //从指针拷贝，使用我的长度
+            bs1 = bts;
+            assert(bs1.GetBuffer() == buf, err);
+            assert(bs1.GetBuffer() != bts, err);
+            assert(bs1.Length() == sizeof(buf), err);
+            assert(buf[0] == bts[0] && buf[3] == bts[3], err);
+        #endif 
+        #if 0
+            byte buf[] = 
+            {
+                1, 2, 3, 4
+            };
+            byte bts[] = 
+            {
+                5, 6, 7
+            };
+            Buffer bs(buf, sizeof(buf));
+            Buffer bs2(bts, sizeof(bts));
 
-        byte buf1[] = 
-        {
-            1, 2, 3, 4
-        };
-        byte bts1[] = 
-        {
-            5, 6, 7
-        };
-        Buffer bs2(buf1, sizeof(buf1));
-        Buffer bs22(bts0, sizeof(bts0));
+            char err[] = "Buffer& operator = (const Buffer& rhs)";
 
-        char err1[] = "Buffer& operator = (const Buffer& rhs)";
-
-        //从另一个对象拷贝数据和长度 长度不足且扩容失败时报错
-        //Buffer 无法自动扩容，Array可以
-        //bs2 = bs;
-        bs2 = bs22;
-        assert(bs2.GetBuffer() == buf1, err1);
-        assert(bs2.GetBuffer() != bts1, err1);
-        assert(bs2.Length() == sizeof(bts1), err1);
-        assert(bs2.Length() != sizeof(buf1), err1);
-        assert(buf1[0] == bts1[0] && buf1[2] == bts1[2], err1);
-        assert(buf1[3] == 4, err1);
-
+            //从另一个对象拷贝数据和长度 长度不足且扩容失败时报错
+            //Buffer 无法自动扩容，Array可以
+            //bs2 = bs;
+            bs = bs2;
+            assert(bs.GetBuffer() == buf, err);
+            assert(bs.GetBuffer() != bts, err);
+            assert(bs.Length() == sizeof(bts), err);
+            assert(bs.Length() != sizeof(buf), err);
+            assert(buf[0] == bts[0] && buf[2] == bts[2], err);
+            assert(buf[3] == 4, err);
+        #endif 
 
     }
 #endif
