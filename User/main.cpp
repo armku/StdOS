@@ -43,7 +43,6 @@ void OnKeyPress(Pin pin, bool down, void *param)
 ISO-V2:PB5控制485方向
 ISO-V3:PC2控制485方向
  */
-OutputPort rs485(PC2);
 ModbusSlave ModbusSlave;
 static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
 {
@@ -51,14 +50,12 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
     return 0;
 }
 
-SerialPort sp2(COM2);
 void LedTask(void *param)
 {
     OutputPort *leds = (OutputPort*)param;
     *leds = ! * leds;
 }
 
-void TestAT45DB();
 #define namee "StdOS"
 int main(void)
 {
@@ -87,12 +84,7 @@ int main(void)
         //flash 最后一块作为配置区
         Config::Current = &Config::CreateFlash();
     #endif 
-
-    sp2.RS485 = &rs485;
-    rs485 = 0;
-    sp2.Register(OnUsartRead);
-    sp2.Open();
-
+    
     exti.Register(OnKeyPress);
     exti1.Register(OnKeyPress);
 
