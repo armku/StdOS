@@ -106,8 +106,7 @@ int main(void)
     OutputPort led(PF8);
     
     Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
-	
-	STMFLASH::Test();
-    //Buffer::Test();
+		
+    Buffer::Test();
     Sys.Start();
 }

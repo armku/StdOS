@@ -38,11 +38,11 @@ int STMFLASH::Read(uint addr, void *pBuf, int len)
     {
         return 0;
     }
-    if(!this->addrValid(addr))
-	{
-		//地址非法
-		return 0;
-	}
+    if (!this->addrValid(addr))
+    {
+        //地址非法
+        return 0;
+    }
     if (addr % 2)
     {
         //起始地址为奇数
@@ -68,7 +68,7 @@ int STMFLASH::Read(uint addr, void *pBuf, int len)
         ((byte*)pBuf)[0] = tmp &0xff;
     }
 
-	return len;
+    return len;
 }
 
 //写入
@@ -78,16 +78,16 @@ int STMFLASH::Write(uint addr, void *pBuf, int len, bool protecold)
     {
         return 0;
     }
-	if(!this->addrValid(addr))
+    if (!this->addrValid(addr))
     {
         //地址非法
         return 0;
     }
-	if(!this->addrValid(addr+len))
-	{
-		//数据超限
-		return 0;
-	}
+    if (!this->addrValid(addr + len))
+    {
+        //数据超限
+        return 0;
+    }
     /*
     |--------|---------|----------|
      *******************
@@ -116,18 +116,18 @@ int STMFLASH::Write(uint addr, void *pBuf, int len, bool protecold)
         }
         if (protecold)
         {
-			uint addrt=sec1 *this->sectorSize + STM32_FLASH_BASE;
-			for(int i=0;i<this->sectorSize/2;i++)
-			{
-				Buff.buf16[i]=this->readHalfWord(addrt+i*2);
-			}            
+            uint addrt = sec1 * this->sectorSize + STM32_FLASH_BASE;
+            for (int i = 0; i < this->sectorSize / 2; i++)
+            {
+                Buff.buf16[i] = this->readHalfWord(addrt + i * 2);
+            }
         }
         for (int i = 0; i < writeSize; i++)
-        {	
-			Buff.buf[sec1pos + i] = ((byte*)pBuf)[i];			
+        {
+            Buff.buf[sec1pos + i] = ((byte*)pBuf)[i];
         }
-		
-        
+
+
         this->writeSector(sec1 *this->sectorSize + STM32_FLASH_BASE);
         len1 -= writeSize;
         addr1 += writeSize;
@@ -145,7 +145,7 @@ int STMFLASH::Write(uint addr, void *pBuf, int len, bool protecold)
         {
             Buff.buf[i] = ((byte*)pBuf)[addr1 + i];
         }
-		this->writeSector(addr1);
+        this->writeSector(addr1);
         addr1 += this->flashSize;
         len1 -= this->flashSize;
     }
@@ -158,7 +158,7 @@ int STMFLASH::Write(uint addr, void *pBuf, int len, bool protecold)
     {
         Buff.buf[i] = ((byte*)addr1)[i];
     }
-	this->writeSector(addr1);   
+    this->writeSector(addr1);
     return len;
 }
 
@@ -183,49 +183,53 @@ void STMFLASH::writeNoCheck(uint addr, ushort *pBuffer, ushort len)
         addr += 2; //地址增加2.
     }
 }
+
 //地址正确，在上下限范围内
 bool STMFLASH::addrValid(uint addr)
 {
-	if(addr<STM32_FLASH_BASE)
-	{
-		//地址下限错误
-		return false;
-	}
-	if(addr>=(STM32_FLASH_BASE+this->flashSize*1024))
-	{
-		//地址上限错误
-		return false;
-	}
-	return true;
+    if (addr < STM32_FLASH_BASE)
+    {
+        //地址下限错误
+        return false;
+    }
+    if (addr >= (STM32_FLASH_BASE + this->flashSize *1024))
+    {
+        //地址上限错误
+        return false;
+    }
+    return true;
 }
+
 //地址是否是扇区起始地址
 bool STMFLASH::addrSectorFirst(uint addr)
 {
-	if(!this->addrValid(addr))
-	{
-		return false;
-	}
-	uint size=addr-STM32_FLASH_BASE;
-	if(size%this->sectorSize)
-	{
-		return false;
-	}
-	return true;
+    if (!this->addrValid(addr))
+    {
+        return false;
+    }
+    uint size = addr - STM32_FLASH_BASE;
+    if (size % this->sectorSize)
+    {
+        return false;
+    }
+    return true;
 }
+
 //写入整个扇区,需要保证参数正确，如果不正确，直接返回
 int STMFLASH::writeSector(uint addr)
 {
-	if(!this->addrSectorFirst(addr))
-	{
-		//不是扇区起始地址或者地址非法直接返回
-		return 0;
-	}
-	FLASH_Unlock(); //解锁	
-	FLASH_ErasePage(addr); //擦除这个扇区
-	writeNoCheck(addr, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
-	FLASH_Lock(); //上锁
-	return this->sectorSize;
+    if (!this->addrSectorFirst(addr))
+    {
+        //不是扇区起始地址或者地址非法直接返回
+        return 0;
+    }
+    FLASH_Unlock(); //解锁	
+    FLASH_ErasePage(addr); //擦除这个扇区
+    writeNoCheck(addr, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
+    FLASH_Lock(); //上锁
+    return this->sectorSize;
 }
+
 //从指定地址开始写入指定长度的数据
 //addr:起始地址(此地址必须为2的倍数!!)
 //pBuffer:数据指针
@@ -315,30 +319,28 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
         uint addr = STM32_FLASH_BASE + 1024 * 36+10;
         STMFLASH flash1;
         flash1.SetFlashSize(512);
-
         debug_printf("测试开始\r\n");
         for (int i = 0; i < 1200; i++)
         {
-            buftest1[i] = i%200;
+            buftest1[i] = i % 200;
         }
-        //flash1.write(addr, buftest1, 20);
+
         int wid = flash1.Write(addr, buftest1, 3200);
-		debug_printf("write ok\r\n");
+        debug_printf("write ok\r\n");
         for (int i = 0; i < 3200; i++)
         {
             buftest1[i] = 0;
         }
-        debug_printf("1 \r\n");
-        //flash1.read(addr, buftest1, 20);
+
         int rid = flash1.Read(addr, buftest1, 3200);
-		debug_printf("read ok\r\n");
+        debug_printf("read ok\r\n");
         for (int i = 0; i < 1200; i++)
         {
-			if(buftest1[i]!=(i%200))
-			{
-				debug_printf("测试失败，数据错误：%d\r\n",buftest1[i]);
-				return;
-			}
+            if (buftest1[i] != (i % 200))
+            {
+                debug_printf("测试失败，数据错误：%d\r\n", buftest1[i]);
+                return ;
+            }
             //debug_printf("%d:%d\t", i, buftest1[i]);
         }
 
