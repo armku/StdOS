@@ -455,26 +455,6 @@
           <GroupName>CORE123</GroupName>
           <Files>
             <File>
-              <FileName>Sys.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\TTime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TInterrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\TInterrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
-            </File>
-            <File>
               <FileName>NewDelete.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\NewDelete.cpp</FilePath>
@@ -498,11 +478,6 @@
               <FileName>TaskScheduler.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\TaskScheduler.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitHandle.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -779,6 +754,46 @@
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Version.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Kernel</GroupName>
+          <Files>
+            <File>
+              <FileName>TTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\TTime.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaitHandle.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Task.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TInterrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\TInterrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Heap.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Thread.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1233,26 +1248,6 @@
           <GroupName>CORE123</GroupName>
           <Files>
             <File>
-              <FileName>Sys.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\TTime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TInterrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\TInterrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
-            </File>
-            <File>
               <FileName>NewDelete.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\NewDelete.cpp</FilePath>
@@ -1276,11 +1271,6 @@
               <FileName>TaskScheduler.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\TaskScheduler.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitHandle.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1557,6 +1547,46 @@
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Version.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Kernel</GroupName>
+          <Files>
+            <File>
+              <FileName>TTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\TTime.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaitHandle.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Task.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TInterrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\TInterrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Heap.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Thread.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
             </File>
           </Files>
         </Group>
