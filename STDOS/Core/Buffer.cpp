@@ -108,7 +108,7 @@ void Buffer::Copy(int destIndex, const void *src, int len)
 }
 
 //把数据复制到目标缓冲区，默认-1长度表示当前长度
-void Buffer::CopyTo(int destIndex, const void *dest, int len)const
+void Buffer::CopyTo(int destIndex, void *dest, int len)const
 {
     if (len ==  - 1)
     {

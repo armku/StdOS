@@ -45,8 +45,8 @@ class Buffer: public Object
         static void Copy(void *dest, const void *source, int len);
         static void Zero(void *dest, int len);
         //拷贝数据 默认-1长度表示当前长度
-        virtual void Copy(int destIndex, const void *src, int len =  - 1); //拷贝数据，默认-1长度表示当前长度   
-        virtual void CopyTo(int destIndex, const void *dest, int len =  - 1)const; //把数据复制到目标缓冲区，默认-1长度表示当前长度
+        virtual void Copy(int destIndex, const void *src, int len); //拷贝数据，默认-1长度表示当前长度   
+        virtual void CopyTo(int destIndex, void *dest, int len)const; //把数据复制到目标缓冲区，默认-1长度表示当前长度
         virtual void Copy(int destIndex, const Buffer &src, int srcIndex, int len); //拷贝数据，默认-1长度表示两者最小长度 
         int Copy(const Buffer &src, int destIndex = 0);
         //用指定字节设置初始化一个区域
