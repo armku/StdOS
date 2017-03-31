@@ -455,11 +455,6 @@
           <GroupName>Basic</GroupName>
           <Files>
             <File>
-              <FileName>Stream.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
@@ -792,6 +787,11 @@
         <Group>
           <GroupName>Core</GroupName>
           <Files>
+            <File>
+              <FileName>Stream.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
+            </File>
             <File>
               <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
@@ -1270,11 +1270,6 @@
           <GroupName>Basic</GroupName>
           <Files>
             <File>
-              <FileName>Stream.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
@@ -1607,6 +1602,11 @@
         <Group>
           <GroupName>Core</GroupName>
           <Files>
+            <File>
+              <FileName>Stream.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
+            </File>
             <File>
               <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
