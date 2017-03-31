@@ -465,11 +465,6 @@
               <FilePath>..\STDOS\Core\IDictionary.cpp</FilePath>
             </File>
             <File>
-              <FileName>IList.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\IList.cpp</FilePath>
-            </File>
-            <File>
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\List.cpp</FilePath>
@@ -1236,11 +1231,6 @@
               <FileName>IDictionary.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\IDictionary.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IList.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\IList.cpp</FilePath>
             </File>
             <File>
               <FileName>List.cpp</FileName>
