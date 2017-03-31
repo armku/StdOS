@@ -549,7 +549,7 @@ byte ToInt(char ch)
     }
     return ch - 'A' + 10;
 }
-
+#if 0
 String String::ToHex()
 {
     byte buf[100];
@@ -587,12 +587,14 @@ String String::ToHex()
 
     return String((const char*)buf);
 }
-
+#endif
+#if 0
 //Êý×éÈÝÁ¿
 uint String::Capacity()const
 {
     return this->mcapacity;
 }
+#endif
 
 void String::Show(bool newLine)const
 {
