@@ -1,3 +1,4 @@
+#include "ByteArray.h"
 #include "Stream.h"
 #include <stdio.h>
 
