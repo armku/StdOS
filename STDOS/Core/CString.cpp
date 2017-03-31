@@ -597,7 +597,7 @@ void String::Show(bool newLine)const
 //³õÊ¼»¯ÈÝÆ÷
 void String::initCapacity()
 {
-    this->_Arr = new byte[0x40];
+    this->_Arr = new char[0x40];
     this->mcapacity = 0x40 - 1;
     memset(((byte*)(this->_Arr)), 0x40, 0);
 }

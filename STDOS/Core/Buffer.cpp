@@ -4,7 +4,7 @@
 
 Buffer::Buffer(void *ptr, int len)
 {
-    this->_Arr = ptr;
+    this->_Arr = (char*)ptr;
     this->_Length = len;
     this->_LengthInit = len;
 }

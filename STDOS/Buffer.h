@@ -97,14 +97,13 @@ class Buffer: public Object
             static void Test();
         #endif 
     protected:
-        #if 0
-            byte Arr[0x40]; //内部缓冲区			
-        #endif 
+        
+        char * _Arr; //内部缓冲区			
+        
         virtual void *Alloc(int len);
         //以下为猜测内容
         int _Length;
         int _LengthInit; //初始长度
-        void *_Arr;
     public:
         virtual void Show(bool newLine = false)const;
     protected:
