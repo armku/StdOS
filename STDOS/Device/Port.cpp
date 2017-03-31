@@ -97,7 +97,7 @@ Port &Port::Set(Pin pin)
     #if defined(STM32F1)
         // 整组引脚的初始状态，析构时有选择恢复
         if (_Pin != P0)
-            InitState = ((ulong)Group->CRH << 32) + Group->CRL;
+            InitState = ((UInt64)Group->CRH << 32) + Group->CRL;
     #endif 
 
     if (_Pin != P0)

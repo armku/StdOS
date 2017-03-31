@@ -36,7 +36,7 @@ class Port
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
     private:
         #if defined(STM32F1)
-            ulong InitState; // 备份引脚初始状态，在析构时还原
+            UInt64 InitState; // 备份引脚初始状态，在析构时还原
         #endif 
 };
 /*

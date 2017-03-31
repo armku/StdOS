@@ -2,8 +2,6 @@
 #include "Sys.h"
 #include <limits.h>
 
-#define UInt64_Max LONG_MAX
-
 TaskScheduler::TaskScheduler(char *name)
 {
     this->Name = name;
@@ -148,11 +146,11 @@ void TaskScheduler::Stop()
 // 执行一次循环。指定最大可用时间
 void TaskScheduler::Execute(uint usMax)
 {
-    ulong now;
+    UInt64 now;
     now = Time.Current() - Sys.StartTime; // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
 
-    ulong min = UInt64_Max; // 最小时间，这个时间就会有任务到来
-    ulong end = Time.Current() + usMax;
+    UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
+    UInt64 end = Time.Current() + usMax;
 
     // 需要跳过当前正在执行任务的调度
     //Task* _cur = Current;
@@ -171,7 +169,7 @@ void TaskScheduler::Execute(uint usMax)
                 min = task->NextTime;
             }
 
-            ulong now2 = Time.Current();
+            UInt64 now2 = Time.Current();
             task->SleepTime = 0;
 
             this->Current = task;
@@ -230,7 +228,7 @@ void TaskScheduler::ShowTime(void *param)
 // 显示状态
 void TaskScheduler::ShowStatus(void *param)
 {
-    static ulong runCounts = 0;
+    static UInt64 runCounts = 0;
     float RunTimes = 0;
     float RunTimesAvg = 0;
     Task *tsk;

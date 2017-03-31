@@ -68,7 +68,7 @@ class TSys: public Object
         void RemoveTask(uint taskid); //删除任务
 
         uint Clock; //系统时钟
-        ulong StartTime; //系统启动时间
+        UInt64 StartTime; //系统启动时间
         ushort FlashSize;
         ushort RamSize;
         COM_Def MessagePort; // 指定printf输出的串口

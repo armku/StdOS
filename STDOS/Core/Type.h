@@ -1,45 +1,35 @@
+#ifndef __Type_H__
+#define __Type_H__
+
+/* 类型定义 */
+typedef char			sbyte;
+typedef unsigned char	byte;
+typedef unsigned short	ushort;
+typedef unsigned int	uint;
+typedef unsigned long long	UInt64;
+typedef long long		Int64;
+typedef const char*		cstring;
+
+#define UInt64_Max 0xFFFFFFFFFFFFFFFFull
+
+// 逐步使用char替代byte，在返回类型中使用char*替代void*
+// 因为格式化输出时，可以用%c输出char，用%s输出char*
+
+class String;
+class Type;
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-基本类型表，在 C++基础上尽可能参考 C#/Net
-
-
- */
-#pragma once
 
 #include <stdint.h>
-
-typedef unsigned char byte; //单字节 0~255
-typedef unsigned short int ushort; //无符号短整型 0~65535
-typedef unsigned int uint; //无符号整型
-typedef int64_t Int64; //长整型
-typedef uint64_t UInt64; //无符号长整型
-typedef uint64_t ulong; //
 
 #ifndef NULL
     #define NULL 0
 #endif
 
 #ifdef  DEBUG
-void assert_failed(uint8_t* file, uint32_t line,char * errstr);
+void assert_failed(byte* file, uint line,char * errstr);
 /**
   * @brief  The assert_param macro is used for function's parameters check.
   * @param  expr: If expr is false, it calls assert_failed function which reports 
@@ -79,3 +69,5 @@ class Object
         virtual void Show(bool newLine = true)const;
         const CType GetType()const;
 };
+
+#endif

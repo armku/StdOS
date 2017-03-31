@@ -19,7 +19,7 @@ class Task
         void *Param; // 参数
 		const char* Name;//名称
         long Period; // 周期us
-        ulong NextTime; // 下一次执行时间
+        UInt64 NextTime; // 下一次执行时间
         uint Times; // 执行次数
         uint CpuTime; // 总耗费时间
         uint SleepTime; // 当前睡眠时间

@@ -94,18 +94,18 @@ void TimeSleep(uint us)
         // 记录当前正在执行任务
         Task *task = _Scheduler->Current;
 
-        ulong start = Time.Current();
+        UInt64 start = Time.Current();
         // 1ms一般不够调度新任务，留给硬件等待
-        ulong end = start + us - 1000;
+        UInt64 end = start + us - 1000;
         // 如果休眠时间足够长，允许多次调度其它任务
         int cost = 0;
         while (true)
         {
-            ulong start2 = Time.Current();
+            UInt64 start2 = Time.Current();
 
             _Scheduler->Execute(us);
 
-            ulong now = Time.Current();
+            UInt64 now = Time.Current();
             cost += (int)(now - start2);
 
             // us=0 表示释放一下CPU

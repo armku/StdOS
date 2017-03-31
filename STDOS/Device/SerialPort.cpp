@@ -326,7 +326,7 @@ uint SerialPort::OnRead(byte *buf, uint size)
 {
     // 在100ms内接收数据
     uint usTimeout = 100;
-    ulong us = Time.Current() + usTimeout;
+    UInt64 us = Time.Current() + usTimeout;
 
     uint count = 0; // 收到的字节数    
     while (count < size && Time.Current() < us)
