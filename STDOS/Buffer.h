@@ -8,25 +8,16 @@ class Buffer: public Object
     public:
         //打包一个指针和长度指定的数据区
         Buffer(void *ptr, int len);
-        //禁用拷贝构造函数
-        #if 0 
-            //c++11
-            Buffer(const Buffer &buf) = delete ;
-        #endif 
-        #if 0
-            //c++11
-            //对象Mov操作，指针和长度归我，清空对方
-            Buffer(Buffer && rval);
-        #endif 
+        //禁用拷贝构造函数        
+        Buffer(const Buffer &buf) = delete ;
+        //对象Mov操作，指针和长度归我，清空对方
+        Buffer(Buffer && rval);
         //从另一个对象拷贝数据和长度，长度不足时扩容失败时报错
         Buffer &operator = (const Buffer &rhs);
         //从指针拷贝，使用我的长度
         Buffer &operator = (const void *prt);
-        //对象Mov操作，指针和长度归我，清空对方
-        #if 0
-            //C++11
-            Buffer &operator = (Buffer && rval);
-        #endif 
+        //对象Mov操作，指针和长度归我，清空对方        
+        Buffer &operator = (Buffer && rval);
         //拿出指针供外部使用
         inline byte *GetBuffer()
         {
@@ -55,7 +46,7 @@ class Buffer: public Object
         static void Zero(void *dest, int len);
         //拷贝数据 默认-1长度表示当前长度
         virtual void Copy(int destIndex, const void *src, int len =  - 1); //拷贝数据，默认-1长度表示当前长度   
-        virtual void CopyTo(int destIndex, const void *dest, int len =  - 1) const;//把数据复制到目标缓冲区，默认-1长度表示当前长度
+        virtual void CopyTo(int destIndex, const void *dest, int len =  - 1)const; //把数据复制到目标缓冲区，默认-1长度表示当前长度
         virtual void Copy(int destIndex, const Buffer &src, int srcIndex, int len); //拷贝数据，默认-1长度表示两者最小长度 
         int Copy(const Buffer &src, int destIndex = 0);
         //用指定字节设置初始化一个区域
@@ -63,7 +54,7 @@ class Buffer: public Object
         void Clear(byte item = 0);
 
         //截取一个子缓冲区，默认-1长度表示剩余全部		
-        Buffer Sub(int index, int length=-1); //截取自缓冲区  
+        Buffer Sub(int index, int length =  - 1); //截取自缓冲区  
         const Buffer Sub(int index, int len)const;
 
         //显示16禁止数据，指定分割字符和换行长度
@@ -85,18 +76,10 @@ class Buffer: public Object
         virtual String &ToStr(String &str)const;
         //包装为字符串对象
         String AsString()const;
-        #if 0
-            //C++11
-            explicit operator bool()const
-            {
-                    return _Length > 0;
-            }
-        #else 
-            operator bool()const
-            {
-                    return _Length > 0;
-            }
-        #endif 
+        explicit operator bool()const
+        {
+                return _Length > 0;
+        }
         bool operator !()const
         {
                 return _Length == 0;
@@ -120,10 +103,10 @@ class Buffer: public Object
         virtual void *Alloc(int len);
         //以下为猜测内容
         int _Length;
-		int _LengthInit;//初始长度
+        int _LengthInit; //初始长度
         void *_Arr;
     public:
         virtual void Show(bool newLine = false)const;
-	protected:
+    protected:
         Buffer();
 };
