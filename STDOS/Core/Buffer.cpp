@@ -348,23 +348,23 @@ bool operator != (const Buffer &bs1, const void *ptr)
 
 
 
-void Buffer::Show(bool newLine)const
-{
-    if (newLine)
-    {
-        for (int i = 0; i < this->_Length - 1; i++)
-        {
-            printf("%02X ", ((byte*)(this->_Arr))[i]);
-        }
-        printf("%02X", ((byte*)(this->_Arr))[this->_Length - 1]);
-    }
-    else
-    {
-        printf("%s", ((byte*)(this->_Arr)));
-    }
-    //Object::Show(newLine);
-    Object::Show(true);
-}
+//void Buffer::Show(bool newLine)const
+//{
+//    if (newLine)
+//    {
+//        for (int i = 0; i < this->_Length - 1; i++)
+//        {
+//            printf("%02X ", ((byte*)(this->_Arr))[i]);
+//        }
+//        printf("%02X", ((byte*)(this->_Arr))[this->_Length - 1]);
+//    }
+//    else
+//    {
+//        printf("%s", ((byte*)(this->_Arr)));
+//    }
+//    //Object::Show(newLine);
+//    Object::Show(true);
+//}
 
 
 

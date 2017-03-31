@@ -8,210 +8,210 @@
 #include <CType.h>
 #include "Sys.h"
 
-String::String(cstring cstr)
+String::String(cstring cstr):Array(cstr,ArrayLength(cstr))
 {
 	
 }
-String::~String()
-{
-}
-String::String(const char *str, int len)
-{
-    if (len < 0)
-    {
-        this->_Length = strlen(str);
-    }
-    else
-    {
-        this->_Length = len;
-    }
- //   this->initCapacity();
+//String::~String()
+//{
+//}
+//String::String(const char *str, int len)
+//{
+//    if (len < 0)
+//    {
+//        this->_Length = strlen(str);
+//    }
+//    else
+//    {
+//        this->_Length = len;
+//    }
+// //   this->initCapacity();
 
-    this->Copy(0, str, this->_Length);
-}
+//    this->Copy(0, str, this->_Length);
+//}
 
-String::String(char ch)
-{
-//    this->initCapacity();
-    ((byte*)(this->_Arr))[0] = ch;
-//    this->jsLength();
-}
-
-//进制字符串
-String::String(byte value, int radix)
-{
-//    this->initCapacity();
-
-    switch (radix)
-    {
-        case 10:
-            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%d", value);
-            break;
-        case 16:
-            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%X", value);
-            break;
-    }
- //   this->jsLength();
-}
+//String::String(char ch)
+//{
+////    this->initCapacity();
+//    ((byte*)(this->_Arr))[0] = ch;
+////    this->jsLength();
+//}
 
 //进制字符串
-String::String(short value, int radix)
-{
-//    this->initCapacity();
+//String::String(byte value, int radix)
+//{
+////    this->initCapacity();
 
-    switch (radix)
-    {
-        case 10:
-  //          snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%d", value);
-            break;
-        case 16:
-    //        snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%X", value);
-            break;
-    }
-//    this->jsLength();
-}
-
-//进制字符串
-String::String(int value, int radix)
-{
-//    this->initCapacity();
-
-    switch (radix)
-    {
-        case 10:
-  //          snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%d", value);
-            break;
-        case 16:
-  //          snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%X", value);
-            break;
-    }
- //   this->jsLength();
-}
-
-//进制字符串
-String::String(uint value, int radix)
-{
-//    this->initCapacity();
-
-    switch (radix)
-    {
-        case 10:
-//            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%u", value);
-            break;
-        case 16:
+//    switch (radix)
+//    {
+//        case 10:
+//            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%d", value);
+//            break;
+//        case 16:
 //            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%X", value);
-            break;
-    }
-//    this->jsLength();
-}
+//            break;
+//    }
+// //   this->jsLength();
+//}
 
 //进制字符串
-String::String(Int64 value, int radix)
-{
-//    this->initCapacity();
+//String::String(short value, int radix)
+//{
+////    this->initCapacity();
 
-    switch (radix)
-    {
-        case 10:
-//            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%lld", value);
-            break;
-        case 16:
-//            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%llX", value);
-            break;
-    }
-//    this->jsLength();
-}
+//    switch (radix)
+//    {
+//        case 10:
+//  //          snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%d", value);
+//            break;
+//        case 16:
+//    //        snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%X", value);
+//            break;
+//    }
+////    this->jsLength();
+//}
 
 //进制字符串
-String::String(UInt64 value, int radix)
-{
-//    this->initCapacity();
+//String::String(int value, int radix)
+//{
+////    this->initCapacity();
 
-    switch (radix)
-    {
-        case 10:
-//            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%llu", value);
-            break;
-        case 16:
-//            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%llX", value);
-            break;
-    }
-//    this->jsLength();
-}
+//    switch (radix)
+//    {
+//        case 10:
+//  //          snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%d", value);
+//            break;
+//        case 16:
+//  //          snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%X", value);
+//            break;
+//    }
+// //   this->jsLength();
+//}
+
+//进制字符串
+//String::String(uint value, int radix)
+//{
+////    this->initCapacity();
+
+//    switch (radix)
+//    {
+//        case 10:
+////            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%u", value);
+//            break;
+//        case 16:
+////            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%X", value);
+//            break;
+//    }
+////    this->jsLength();
+//}
+
+//进制字符串
+//String::String(Int64 value, int radix)
+//{
+////    this->initCapacity();
+
+//    switch (radix)
+//    {
+//        case 10:
+////            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%lld", value);
+//            break;
+//        case 16:
+////            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%llX", value);
+//            break;
+//    }
+////    this->jsLength();
+//}
+
+//进制字符串
+//String::String(UInt64 value, int radix)
+//{
+////    this->initCapacity();
+
+//    switch (radix)
+//    {
+//        case 10:
+////            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%llu", value);
+//            break;
+//        case 16:
+////            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%llX", value);
+//            break;
+//    }
+////    this->jsLength();
+//}
 
 //浮点数
-String::String(float value, int dot)
-{
-//    this->initCapacity();
-    switch (dot)
-    {
-        case 0:
-  //          snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.0f", value);
-            break;
-        case 1:
-   //         snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.1f", value);
-            break;
-        case 2:
-  //          snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.2f", value);
-            break;
-        case 3:
- //           snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.3f", value);
-            break;
-        case 4:
-//            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.4f", value);
-            break;
-        case 5:
-//            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.5f", value);
-            break;
-        default:
-            break;
-    }
-//    this->jsLength();
-}
+//String::String(float value, int dot)
+//{
+////    this->initCapacity();
+//    switch (dot)
+//    {
+//        case 0:
+//  //          snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.0f", value);
+//            break;
+//        case 1:
+//   //         snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.1f", value);
+//            break;
+//        case 2:
+//  //          snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.2f", value);
+//            break;
+//        case 3:
+// //           snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.3f", value);
+//            break;
+//        case 4:
+////            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.4f", value);
+//            break;
+//        case 5:
+////            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.5f", value);
+//            break;
+//        default:
+//            break;
+//    }
+////    this->jsLength();
+//}
 
 //浮点数
-String::String(double value, int dot)
-{
-//    this->initCapacity();
-    switch (dot)
-    {
-        case 0:
-//            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.0lf", value);
-            break;
-        case 1:
-//            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.1lf", value);
-            break;
-        case 2:
-//            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.2lf", value);
-            break;
-        case 3:
- //           snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.3lf", value);
-            break;
-        case 4:
- //           snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.4lf", value);
-            break;
-        case 5:
-//            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.5lf", value);
-            break;
-        default:
-            break;
-    }
-//    this->jsLength();
-}
+//String::String(double value, int dot)
+//{
+////    this->initCapacity();
+//    switch (dot)
+//    {
+//        case 0:
+////            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.0lf", value);
+//            break;
+//        case 1:
+////            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.1lf", value);
+//            break;
+//        case 2:
+////            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.2lf", value);
+//            break;
+//        case 3:
+// //           snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.3lf", value);
+//            break;
+//        case 4:
+// //           snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.4lf", value);
+//            break;
+//        case 5:
+////            snprintf((char*)((byte*)(this->_Arr)), this->mcapacity, "%0.5lf", value);
+//            break;
+//        default:
+//            break;
+//    }
+////    this->jsLength();
+//}
 
-String::String(const String &str1)
-{
-    #if 1
-  //      this->initCapacity();
-    #endif 
-    #if 1
-        for (int i = 0; i < str1.Length(); i++)
-        {
-            ((byte*)(this->_Arr))[i] = str1.GetBuffer()[i];
-        }
-  //      this->jsLength();
-    #endif 
-}
+//String::String(const String &str1)
+//{
+//    #if 1
+//  //      this->initCapacity();
+//    #endif 
+//    #if 1
+//        for (int i = 0; i < str1.Length(); i++)
+//        {
+//            ((byte*)(this->_Arr))[i] = str1.GetBuffer()[i];
+//        }
+//  //      this->jsLength();
+//    #endif 
+//}
 
 String &String::operator = (const char *str)
 {

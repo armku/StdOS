@@ -21,7 +21,9 @@ extern "C"
     extern uint __initial_sp;
 }
 #endif
-
+void assert_failed2(cstring msg, cstring file, unsigned int line)
+{
+}
 //外部注册函数
 // 任务
 #include "Task.h"

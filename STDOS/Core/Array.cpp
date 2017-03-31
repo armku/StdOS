@@ -1,8 +1,13 @@
 #include "Array.h"
 
-//Array::Array()
-//{
-//}
+Array::Array(void* data, int len):Buffer(data,len)
+{
+	
+}
+Array::Array(const void* data, int len):Buffer((void*)data ,len)
+{
+	
+}
 bool Array::Release()
 {
 	return true;
