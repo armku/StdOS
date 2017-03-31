@@ -8,11 +8,6 @@
 
 #include "Buffer.h"
 
-template <class T>
-int ArrayLength(T& array)
-{
-  return (sizeof(array) / sizeof(array[0]));
-}
 //主要提供自动扩容功能
 //数组
 class Array:public Buffer

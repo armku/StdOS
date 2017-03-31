@@ -48,7 +48,7 @@ public:
 	const String Name() const;	// 名称
 };
 // 数组长度
-//#define ArrayLength(arr) (int)(sizeof(arr)/sizeof(arr[0]))
+#define ArrayLength(arr) (int)(sizeof(arr)/sizeof(arr[0]))
 // 数组清零，固定长度
 //#define ArrayZero(arr) memset(arr, 0, sizeof(arr))
 
@@ -79,14 +79,6 @@ void assert_failed(byte* file, uint line,char * errstr);
 #else
   #define assert(expr) ((void)0)
 #endif /* USE_FULL_ASSERT */
-
-#ifdef __cplusplus         
-
-    class CType{
-
-    }
-    ;
-#endif /* __cplusplus */
 
 
 #endif
