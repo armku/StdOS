@@ -7,6 +7,10 @@
 #include <string.h>
 #include <CType.h>
 
+String::String(cstring cstr)
+{
+	
+}
 String::String(const char *str, int len)
 {
     if (len < 0)
