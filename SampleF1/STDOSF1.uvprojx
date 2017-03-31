@@ -465,11 +465,6 @@
               <FilePath>..\STDOS\Core\IDictionary.cpp</FilePath>
             </File>
             <File>
-              <FileName>List.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Random.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Random.cpp</FilePath>
@@ -734,6 +729,11 @@
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\List.cpp</FilePath>
             </File>
             <File>
               <FileName>Array.cpp</FileName>
@@ -1233,11 +1233,6 @@
               <FilePath>..\STDOS\Core\IDictionary.cpp</FilePath>
             </File>
             <File>
-              <FileName>List.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Random.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Random.cpp</FilePath>
@@ -1502,6 +1497,11 @@
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\List.cpp</FilePath>
             </File>
             <File>
               <FileName>Array.cpp</FileName>
