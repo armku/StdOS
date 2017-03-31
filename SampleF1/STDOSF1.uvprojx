@@ -465,144 +465,11 @@
               <FilePath>..\STDOS\SmartIRQ.cpp</FilePath>
             </File>
             <File>
-              <FileName>TimeCost.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TimeCost.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimeWheel.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TimeWheel.cpp</FilePath>
-            </File>
-            <File>
               <FileName>TaskScheduler.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\TaskScheduler.cpp</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>Peripheral</GroupName>
-          <Files>
-            <File>
-              <FileName>HardRtc.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\HardRtc.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HardSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\HardSpi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pwm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Pwm.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\SerialPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftI2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\SoftI2C.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\SoftSpi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stmflash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\stmflash.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Device\usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>ITransport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Devices</GroupName>
-          <Files>
-            <File>
-              <FileName>AD7689.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\AD7689.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1246.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\ADS1246.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Button.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NPA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\NPA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ST7565R.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\ST7565R.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W24xxx.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\W24xxx.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W25QXXX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModBus.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Modbus\ModBus.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>NET</GroupName>
         </Group>
         <Group>
           <GroupName>startup</GroupName>
@@ -630,9 +497,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>FWLIB</GroupName>
-        </Group>
-        <Group>
           <GroupName>Util</GroupName>
           <Files>
             <File>
@@ -646,6 +510,9 @@
               <FilePath>..\STDOS\CheckSum.cpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>FWLIB</GroupName>
         </Group>
         <Group>
           <GroupName>DOC</GroupName>
@@ -664,6 +531,26 @@
               <FileName>端口分配.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\Doc\端口分配.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Modbus</GroupName>
+          <Files>
+            <File>
+              <FileName>ModBus.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Modbus\ModBus.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>NET</GroupName>
+          <Files>
+            <File>
+              <FileName>ITransport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -794,6 +681,116 @@
               <FileName>Thread.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Device</GroupName>
+          <Files>
+            <File>
+              <FileName>HardRtc.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\HardRtc.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Device\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>HardSpi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\HardSpi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\SerialPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SoftSpi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\SoftSpi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SoftI2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\SoftI2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pwm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Pwm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stmflash.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\stmflash.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>ADS1246.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\ADS1246.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NPA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\NPA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7689.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AD7689.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Button.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Button.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7565R.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\ST7565R.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W24xxx.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\W24xxx.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1258,144 +1255,11 @@
               <FilePath>..\STDOS\SmartIRQ.cpp</FilePath>
             </File>
             <File>
-              <FileName>TimeCost.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TimeCost.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimeWheel.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TimeWheel.cpp</FilePath>
-            </File>
-            <File>
               <FileName>TaskScheduler.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\TaskScheduler.cpp</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>Peripheral</GroupName>
-          <Files>
-            <File>
-              <FileName>HardRtc.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\HardRtc.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HardSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\HardSpi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pwm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Pwm.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\SerialPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftI2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\SoftI2C.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\SoftSpi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stmflash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\stmflash.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Device\usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>ITransport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Devices</GroupName>
-          <Files>
-            <File>
-              <FileName>AD7689.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\AD7689.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1246.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\ADS1246.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Button.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NPA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\NPA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ST7565R.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\ST7565R.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W24xxx.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\W24xxx.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W25QXXX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModBus.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Modbus\ModBus.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>NET</GroupName>
         </Group>
         <Group>
           <GroupName>startup</GroupName>
@@ -1423,9 +1287,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>FWLIB</GroupName>
-        </Group>
-        <Group>
           <GroupName>Util</GroupName>
           <Files>
             <File>
@@ -1439,6 +1300,9 @@
               <FilePath>..\STDOS\CheckSum.cpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>FWLIB</GroupName>
         </Group>
         <Group>
           <GroupName>DOC</GroupName>
@@ -1457,6 +1321,26 @@
               <FileName>端口分配.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\Doc\端口分配.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Modbus</GroupName>
+          <Files>
+            <File>
+              <FileName>ModBus.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Modbus\ModBus.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>NET</GroupName>
+          <Files>
+            <File>
+              <FileName>ITransport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1587,6 +1471,116 @@
               <FileName>Thread.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Device</GroupName>
+          <Files>
+            <File>
+              <FileName>HardRtc.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\HardRtc.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Device\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>HardSpi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\HardSpi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\SerialPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SoftSpi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\SoftSpi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SoftI2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\SoftI2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pwm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Pwm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stmflash.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\stmflash.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>ADS1246.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\ADS1246.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NPA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\NPA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7689.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AD7689.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Button.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Button.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7565R.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\ST7565R.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W24xxx.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\W24xxx.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
             </File>
           </Files>
         </Group>
