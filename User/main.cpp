@@ -4,7 +4,7 @@
 #include "Button.h"
 #include "Port.h"
 #include "WatchDog.h"
-#include "CString.h"
+#include "SString.h"
 #include "string.h"
 #include "DateTime.h"
 #include "List.h"

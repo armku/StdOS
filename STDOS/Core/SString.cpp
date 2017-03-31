@@ -7,12 +7,6 @@
 #include <string.h>
 #include <CType.h>
 
-String::String(){}
-String::~String()
-{
-    delete []((byte*)(this->_Arr));
-}
-
 String::String(const char *str, int len)
 {
     if (len < 0)
