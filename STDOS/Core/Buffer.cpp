@@ -5,8 +5,7 @@
 Buffer::Buffer(void *ptr, int len)
 {
     this->_Arr = (char*)ptr;
-    this->_Length = len;
-    this->_LengthInit = len;
+    this->_Length = len;    
 }
 
 Buffer &Buffer::operator = (const Buffer &rhs)
@@ -38,7 +37,7 @@ Buffer &Buffer::operator = (const void *prt)
 //设置长度，可自动扩容 
 bool Buffer::SetLength(int len)
 {
-    if (this->_LengthInit >= len)
+    
     {
         this->_Length = len;
     }
@@ -377,11 +376,6 @@ String &Buffer::ToStr(String &str)const
 {
     String *ret = new String();
     return  *ret;
-}
-
-void *Buffer::Alloc(int len)
-{
-    return this->_Arr;
 }
 
 #if DEBUG

@@ -99,11 +99,9 @@ class Buffer: public Object
     protected:
         
         char * _Arr; //内部缓冲区			
-        
-        virtual void *Alloc(int len);
+                
         //以下为猜测内容
         int _Length;
-        int _LengthInit; //初始长度
     public:
         virtual void Show(bool newLine = false)const;
     protected:
