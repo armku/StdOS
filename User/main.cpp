@@ -43,12 +43,12 @@ void OnKeyPress(Pin pin, bool down, void *param)
 ISO-V2:PB5控制485方向
 ISO-V3:PC2控制485方向
  */
-ModbusSlave ModbusSlave;
-static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
-{
-    ModbusSlave.Process(bs, para);
-    return 0;
-}
+//ModbusSlave ModbusSlave;
+//static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
+//{
+//    ModbusSlave.Process(bs, para);
+//    return 0;
+//}
 static uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para)
 {
    bs.Show(true);
