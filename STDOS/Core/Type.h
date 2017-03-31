@@ -23,13 +23,13 @@
     {
         public:
             // 输出对象的字符串表示方式
-            //virtual String& ToStr(String& str) const;
+            virtual String& ToStr(String& str) const;
             // 输出对象的字符串表示方式。支持RVO优化
-            //virtual String ToString() const;
+            virtual String ToString() const;
             // 显示对象。默认显示ToString
             virtual void Show(bool newLine = false)const;
 
-            //const Type GetType() const;
+            const Type GetType() const;
     };
     // 类型
     class Type
