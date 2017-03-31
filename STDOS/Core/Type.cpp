@@ -1,9 +1,9 @@
 #include "stdio.h"
 #include "Type.h"
 
-void assert_failed(byte* file, uint line,char * errstr)
+void assert_failed(byte *file, uint line, char *errstr)
 {
-	printf("%s(%d):    %s\n", file, line,errstr);
+    printf("%s(%d):    %s\n", file, line, errstr);
 }
 
 #if 0
@@ -22,11 +22,11 @@ void Object::Show(bool newLine)const
 
 #if 0
     const CType Object::GetType()const{}
-#endif
+#endif 
 #if 0
-//输出对象的字符串表示方式.支持RVO优化
-String Object::ToString()const
-{	
-	return String("Object");
-}
+    //输出对象的字符串表示方式.支持RVO优化
+    String Object::ToString()const
+    {
+        return String("Object");
+    }
 #endif
