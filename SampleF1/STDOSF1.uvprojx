@@ -452,16 +452,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Basic</GroupName>
-          <Files>
-            <File>
-              <FileName>Delegate.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Delegate.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>CORE123</GroupName>
           <Files>
             <File>
@@ -746,6 +736,11 @@
               <FilePath>..\STDOS\Core\Random.cpp</FilePath>
             </File>
             <File>
+              <FileName>Delegate.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Delegate.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Queue.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
@@ -764,6 +759,26 @@
               <FileName>SString.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\SString.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>LinkedList.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\LinkedList.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Environment.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Environment.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EventHandler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\EventHandler.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Version.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Version.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1215,16 +1230,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Basic</GroupName>
-          <Files>
-            <File>
-              <FileName>Delegate.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Delegate.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>CORE123</GroupName>
           <Files>
             <File>
@@ -1509,6 +1514,11 @@
               <FilePath>..\STDOS\Core\Random.cpp</FilePath>
             </File>
             <File>
+              <FileName>Delegate.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Delegate.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Queue.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
@@ -1527,6 +1537,26 @@
               <FileName>SString.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\SString.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>LinkedList.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\LinkedList.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Environment.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Environment.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EventHandler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\EventHandler.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Version.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Version.cpp</FilePath>
             </File>
           </Files>
         </Group>
