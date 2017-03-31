@@ -455,26 +455,6 @@
           <GroupName>Basic</GroupName>
           <Files>
             <File>
-              <FileName>Dictionary.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Dictionary.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IDictionary.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\IDictionary.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Random.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Random.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Queue.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Delegate.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Delegate.cpp</FilePath>
@@ -726,34 +706,9 @@
           <GroupName>Core</GroupName>
           <Files>
             <File>
-              <FileName>Stream.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>List.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Array.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimeSpan.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DateTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ByteArray.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
             </File>
             <File>
               <FileName>Buffer.cpp</FileName>
@@ -761,9 +716,49 @@
               <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
             </File>
             <File>
+              <FileName>ByteArray.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DateTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeSpan.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\List.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Type.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Random.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Random.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Queue.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Stream.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Dictionary.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Dictionary.cpp</FilePath>
             </File>
             <File>
               <FileName>SString.cpp</FileName>
@@ -1223,26 +1218,6 @@
           <GroupName>Basic</GroupName>
           <Files>
             <File>
-              <FileName>Dictionary.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Dictionary.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IDictionary.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\IDictionary.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Random.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Random.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Queue.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Delegate.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Delegate.cpp</FilePath>
@@ -1494,34 +1469,9 @@
           <GroupName>Core</GroupName>
           <Files>
             <File>
-              <FileName>Stream.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>List.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Array.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimeSpan.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DateTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ByteArray.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
             </File>
             <File>
               <FileName>Buffer.cpp</FileName>
@@ -1529,9 +1479,49 @@
               <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
             </File>
             <File>
+              <FileName>ByteArray.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DateTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeSpan.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\List.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Type.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Random.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Random.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Queue.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Stream.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Dictionary.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Dictionary.cpp</FilePath>
             </File>
             <File>
               <FileName>SString.cpp</FileName>
