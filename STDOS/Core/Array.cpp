@@ -1,8 +1,8 @@
 #include "Array.h"
 
-Array::Array()
-{
-}
+//Array::Array()
+//{
+//}
 bool Array::Release()
 {
 	return true;

@@ -374,7 +374,7 @@ void Buffer::Show(bool newLine)const
 
 
 
-Buffer::Buffer(){}
+//Buffer::Buffer(){}
 String &Buffer::ToStr(String &str)const
 {
     String *ret = new String();

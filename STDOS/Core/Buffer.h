@@ -130,7 +130,7 @@
             int _Length; // 长度
 
             void move(Buffer &rval);
-            Buffer();
+//            Buffer();
     };
 
     // 带引用计数的缓冲区
