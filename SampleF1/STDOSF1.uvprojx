@@ -794,6 +794,16 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>Security</GroupName>
+          <Files>
+            <File>
+              <FileName>RC4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -1581,6 +1591,16 @@
               <FileName>W25QXXX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Security</GroupName>
+          <Files>
+            <File>
+              <FileName>RC4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
             </File>
           </Files>
         </Group>

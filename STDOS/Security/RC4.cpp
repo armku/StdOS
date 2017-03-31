@@ -1,5 +1,6 @@
 #include "RC4.h"
 
+#if 0
 void RC4::Init(byte*s,byte*key, uint Len)
 {
 	int i=0,j=0;
@@ -33,3 +34,4 @@ void RC4::rc4_crypt(byte*s,byte*Data,uint Len)
         Data[k]^=s[t];
     }
 }
+#endif
