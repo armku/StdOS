@@ -1,4 +1,3 @@
-
 #ifndef __String_H__
 #define __String_H__
 
@@ -15,7 +14,6 @@ public:
 	String(cstring cstr = "");
 	String(const String& str);
 	String(String&& rval);
-	~String();
 	// 外部传入缓冲区供内部使用，内部计算字符串长度，注意长度减去零结束符
 	String(char* str, int length);
 	String(char* str, int length, bool expand);
@@ -171,10 +169,6 @@ private:
 	virtual void* Alloc(int len);
 
 	int Search(cstring str, int len, int startIndex, bool rev) const;
-private:
-		void initCapacity();//初始化容器
-		void jsLength();//计算字符串长度
-		short mcapacity;//字符串容量
 };
 
 #define R(str) String(str)
@@ -200,62 +194,4 @@ private:
 	const String& _Str;
 };
 
-#endif
-#if 0
-
-#pragma once
-
-#include "Array.h"
-#include "DateTime.h"
-
-//内部会为
-//结尾的\0 保留存储空间，以确保取得的字符串指针是标准 C 格式字符串指针
-//自带64字节的缓冲区。
-class String:public Array
-{
-	public:		
-		String();
-		String(const char * str,int len=-1);
-		String(char ch);
-		String(const String& str1);
-		String(byte value,byte radix=10);//进制字符串
-		String(short value,byte radix=10);//进制字符串		
-		String(int value,byte radix=10);//进制字符串
-		String(uint value,byte radix=10);//进制字符串
-		String(Int64 value,byte radix=10);//进制字符串
-		String(UInt64 value,byte radix=10);//进制字符串
-		String(float value,byte dot=2);//浮点数
-		String(double value,byte dot=2);//浮点数
-		
-		~String();
-		
-		String& operator=(const char* str) ;
-		String& operator=(const String& str) ;
-		bool operator==(const char* str) ;
-		bool operator==(const String& str);
-	
-		String& operator+=(const DateTime& dt);
-		String& operator+=(const String& str);
-		String& operator+=(const float da);
-		
-		String& Concat(byte value,byte radix=10);
-		String& Concat(short value,byte radix=10);
-		String& Concat(int value,byte radix=10);
-		String& Concat(uint value,byte radix=10);
-		String& Concat(Int64 value,byte radix=10);
-		String& Concat(UInt64 value,byte radix=10);
-		String& Concat(float value,byte dot=2);
-		String& Concat(double value,byte dot=2);
-		
-		String ToHex();
-		virtual void Show(bool newLine=true) const;
-		uint Capacity() const;//数组容量
-		#ifdef DEBUG
-		static void Test();
-		#endif
-	private:
-		void initCapacity();//初始化容器
-		void jsLength();//计算字符串长度
-		short mcapacity;//字符串容量
-};
 #endif

@@ -12,7 +12,7 @@ public:
 	// 数组最大容量。初始化时决定，后面不允许改变
 	inline int Capacity() const { return _Capacity; }
 
-	Array(void* data, int len):Buffer(data,len){};
+	Array(void* data, int len);
 	Array(const void* data, int len);
 	Array(const Array& rhs) = delete;
 	Array(Array&& rval);
@@ -57,7 +57,7 @@ public:
 #if DEBUG
 	static void Test();
 #endif
-	Array();
+
 protected:
 	bool	_needFree;	// 是否需要释放
 	bool	_canWrite;	// 是否可写

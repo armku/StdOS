@@ -2,6 +2,7 @@
 
 #include "Type.h"
 #include "Buffer.h"
+#include <stdio.h>
 
 class ITransport;
 

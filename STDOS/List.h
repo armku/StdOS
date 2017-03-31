@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Type.h"
+#include <stdio.h>
 
 // 变长列表模版
 template <typename T> class List
