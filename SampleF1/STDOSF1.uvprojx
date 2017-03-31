@@ -455,16 +455,6 @@
           <GroupName>Basic</GroupName>
           <Files>
             <File>
-              <FileName>Type.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Type.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Object.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Object.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
@@ -537,7 +527,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>CORE</GroupName>
+          <GroupName>CORE123</GroupName>
           <Files>
             <File>
               <FileName>Sys.cpp</FileName>
@@ -816,6 +806,16 @@
               <FileName>端口分配.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\Doc\端口分配.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Core</GroupName>
+          <Files>
+            <File>
+              <FileName>Type.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Type.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1270,16 +1270,6 @@
           <GroupName>Basic</GroupName>
           <Files>
             <File>
-              <FileName>Type.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Type.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Object.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Object.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
@@ -1352,7 +1342,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>CORE</GroupName>
+          <GroupName>CORE123</GroupName>
           <Files>
             <File>
               <FileName>Sys.cpp</FileName>
@@ -1631,6 +1621,16 @@
               <FileName>端口分配.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\Doc\端口分配.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Core</GroupName>
+          <Files>
+            <File>
+              <FileName>Type.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Type.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,3 +1,23 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 基本类型表，在 C++基础上尽可能参考 C#/Net
 
@@ -40,3 +60,22 @@ void assert_failed(uint8_t* file, uint32_t line,char * errstr);
     }
     ;
 #endif /* __cplusplus */
+class CType;
+class String;
+
+//根对象
+class Object
+{
+    public:
+        #if 0
+            //输出对象的字符串表示方式
+            virtual String &ToStr(String &str)const;
+		#endif
+		#if 0
+        //输出对象的字符串表示方式.支持RVO优化
+        virtual String ToString()const;        
+		#endif
+        //显示对象。默认显示 ToString
+        virtual void Show(bool newLine = true)const;
+        const CType GetType()const;
+};

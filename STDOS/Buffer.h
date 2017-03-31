@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Type.h"
-#include "Object.h"
 
 //拷贝的原则是尽力而为，有多少可用空间拷贝多少长度
 class Buffer: public Object

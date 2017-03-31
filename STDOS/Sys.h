@@ -5,7 +5,6 @@
 #endif 
 
 #include "Type.h"
-#include "Object.h"
 #include "TTime.h"
 #include "Delegate.h"
 #include "CString.h"
