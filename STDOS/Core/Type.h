@@ -59,8 +59,6 @@ public:
 #define	WEAK	__attribute__((weak))
 #endif
 
-#include <stdint.h>
-
 #ifndef NULL
     #define NULL 0
 #endif
@@ -74,7 +72,7 @@ void assert_failed(byte* file, uint line,char * errstr);
   *         that failed. If expr is true, it returns no value.
   * @retval None
   */
-  #define assert(expr,errstr) ((expr) ?(void)0:assert_failed((uint8_t *)__FILE__, __LINE__,errstr))
+  #define assert(expr,errstr) ((expr) ?(void)0:assert_failed((byte *)__FILE__, __LINE__,errstr))
 /* Exported functions ------------------------------------------------------- */  
 #else
   #define assert(expr) ((void)0)
