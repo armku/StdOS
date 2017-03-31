@@ -240,7 +240,7 @@ String &String::operator = (const String &str)
     ((byte*)(this->_Arr))[this->_Length] = 0;
     return  *this;
 }
-
+#if 0
 bool String::operator == (const char *str)
 {
     if (strlen(str) != this->_Length)
@@ -256,8 +256,8 @@ bool String::operator == (const char *str)
     }
     return true;
 }
-
-bool String::operator == (const String &str1)
+#endif
+bool String::Equals(const String &str1) const
 {
     if (this->Length() != str1._Length)
     {
@@ -272,7 +272,7 @@ bool String::operator == (const String &str1)
     }
     return true;
 }
-
+#if 0
 String &String::operator += (const DateTime &dt)
 {
     if ((this->_Length + 19) < this->Capacity())
@@ -282,7 +282,8 @@ String &String::operator += (const DateTime &dt)
     }
     return  *this;
 }
-
+#endif
+#if 0
 String &String::operator += (const String &str)
 {
     if ((str.Length() + this->_Length) < this->mcapacity)
@@ -293,7 +294,8 @@ String &String::operator += (const String &str)
 
     return  *this;
 }
-
+#endif
+#if 0
 String &String::operator += (const float da)
 {
     byte buf[100] = 
@@ -308,7 +310,8 @@ String &String::operator += (const float da)
     this->_Length += strlen((char*)buf);
     return  *this;
 }
-
+#endif
+#if 0
 String &String::Concat(byte value, byte radix)
 {
     byte buf[100] = 
@@ -333,7 +336,8 @@ String &String::Concat(byte value, byte radix)
     this->_Length += strlen((char*)buf);
     return  *this;
 }
-
+#endif
+#if 0
 String &String::Concat(short value, byte radix)
 {
     byte buf[100] = 
@@ -358,7 +362,8 @@ String &String::Concat(short value, byte radix)
     this->_Length += strlen((char*)buf);
     return  *this;
 }
-
+#endif
+#if 0
 String &String::Concat(int value, byte radix)
 {
     byte buf[100] = 
@@ -383,7 +388,8 @@ String &String::Concat(int value, byte radix)
     this->_Length += strlen((char*)buf);
     return  *this;
 }
-
+#endif
+#if 0
 String &String::Concat(uint value, byte radix)
 {
     byte buf[100] = 
@@ -408,7 +414,8 @@ String &String::Concat(uint value, byte radix)
     this->_Length += strlen((char*)buf);
     return  *this;
 }
-
+#endif
+#if 0
 String &String::Concat(Int64 value, byte radix)
 {
     byte buf[100] = 
@@ -433,7 +440,8 @@ String &String::Concat(Int64 value, byte radix)
     this->_Length += strlen((char*)buf);
     return  *this;
 }
-
+#endif
+#if 0
 String &String::Concat(UInt64 value, byte radix)
 {
     byte buf[100] = 
@@ -458,7 +466,8 @@ String &String::Concat(UInt64 value, byte radix)
     this->_Length += strlen((char*)buf);
     return  *this;
 }
-
+#endif
+#if 0
 String &String::Concat(float value, byte dot)
 {
     byte buf[100] = 
@@ -493,6 +502,9 @@ String &String::Concat(float value, byte dot)
     this->_Length += strlen((char*)buf);
     return  *this;
 }
+#endif
+
+#if 0
 
 String &String::Concat(double value, byte dot)
 {
@@ -527,7 +539,7 @@ String &String::Concat(double value, byte dot)
     this->_Length += strlen((char*)buf);
     return  *this;
 }
-
+#endif
 byte ToInt(char ch)
 {
     ch = toupper(ch);
