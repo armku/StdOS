@@ -257,6 +257,10 @@ bool String::operator == (const char *str)
     return true;
 }
 #endif
+int String::Copy(int destIndex, const void* src, int len)
+{
+	return len;
+}
 bool String::Equals(const String &str1) const
 {
     if (this->Length() != str1._Length)
@@ -271,6 +275,10 @@ bool String::Equals(const String &str1) const
         }
     }
     return true;
+}
+bool String::Equals(cstring cstr) const
+{
+	return true;
 }
 #if 0
 String &String::operator += (const DateTime &dt)
