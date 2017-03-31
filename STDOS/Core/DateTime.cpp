@@ -10,13 +10,13 @@ DateTime::DateTime()
 	this->Minute=0;
 	this->Second=0;
 }
-DateTime::DateTime(ushort year, byte month, byte day)
+DateTime::DateTime(int year, int month, int day)
 {
 	this->Year=year;
 	this->Month=month;
 	this->Day=day;
 }
-DateTime::DateTime(uint seconds)
+DateTime::DateTime(int seconds)
 {
 	
 }
@@ -68,7 +68,7 @@ bool Is_Leap_Year(ushort year)
 byte const table_week[12]={0,3,3,6,1,4,6,2,5,0,3,5}; //月修正数据表	  
 //平年的月份日期表
 const byte mon_table[12]={31,28,31,30,31,30,31,31,30,31,30,31}; 
-DateTime &DateTime::operator = (uint seconds)
+DateTime &DateTime::operator = (int seconds)
 {
 	ushort daycnt=0;
 	uint timecount=0; 
@@ -128,21 +128,21 @@ DateTime &DateTime::operator = (const DateTime &value)
 {
 	return *this;
 }
-DateTime &DateTime::Parse(uint seconds)
+DateTime &DateTime::Parse(int seconds)
 {
 	return *this;
 }
-DateTime &DateTime::ParseMs(UInt64 ms)
+DateTime &DateTime::ParseMs(Int64 ms)
 {
 	return *this;
 }
-uint DateTime::TotalDays()const
+int DateTime::TotalDays()const
 {
 	
 	return 0;
 }
 	
-uint DateTime::TotalSeconds()const
+int DateTime::TotalSeconds()const
 {	
 	ushort syear=this->Year;
 	byte smon=this->Month;
@@ -170,7 +170,7 @@ uint DateTime::TotalSeconds()const
 	seccount+=sec;//最后的秒钟加上去
 	return 	seccount-8*60*60;
 }
-UInt64 DateTime::TotalMs()const
+Int64 DateTime::TotalMs()const
 {	
 	return 0;
 }
