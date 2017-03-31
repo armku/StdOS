@@ -452,26 +452,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>CORE123</GroupName>
-          <Files>
-            <File>
-              <FileName>NewDelete.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\NewDelete.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SmartIRQ.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\SmartIRQ.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TaskScheduler.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TaskScheduler.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>startup</GroupName>
           <Files>
             <File>
@@ -499,6 +479,21 @@
         <Group>
           <GroupName>Util</GroupName>
           <Files>
+            <File>
+              <FileName>TaskScheduler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TaskScheduler.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NewDelete.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\NewDelete.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SmartIRQ.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\SmartIRQ.cpp</FilePath>
+            </File>
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
@@ -1252,26 +1247,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>CORE123</GroupName>
-          <Files>
-            <File>
-              <FileName>NewDelete.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\NewDelete.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SmartIRQ.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\SmartIRQ.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TaskScheduler.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TaskScheduler.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>startup</GroupName>
           <Files>
             <File>
@@ -1299,6 +1274,21 @@
         <Group>
           <GroupName>Util</GroupName>
           <Files>
+            <File>
+              <FileName>TaskScheduler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TaskScheduler.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NewDelete.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\NewDelete.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SmartIRQ.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\SmartIRQ.cpp</FilePath>
+            </File>
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
