@@ -455,21 +455,6 @@
           <GroupName>Basic</GroupName>
           <Files>
             <File>
-              <FileName>ByteArray.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Array.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Array.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CString.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\CString.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
@@ -808,6 +793,16 @@
           <GroupName>Core</GroupName>
           <Files>
             <File>
+              <FileName>Array.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Array.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ByteArray.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
@@ -816,6 +811,11 @@
               <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Type.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\SString.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1270,21 +1270,6 @@
           <GroupName>Basic</GroupName>
           <Files>
             <File>
-              <FileName>ByteArray.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Array.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Array.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CString.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\CString.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
@@ -1623,6 +1608,16 @@
           <GroupName>Core</GroupName>
           <Files>
             <File>
+              <FileName>Array.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Array.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ByteArray.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
@@ -1631,6 +1626,11 @@
               <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Type.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\SString.cpp</FilePath>
             </File>
           </Files>
         </Group>
