@@ -54,7 +54,7 @@ class Buffer: public Object
         void Clear(byte item = 0);
 
         //截取一个子缓冲区，默认-1长度表示剩余全部		
-        Buffer Sub(int index, int length =  - 1); //截取自缓冲区  
+        Buffer Sub(int index, int length ); //截取自缓冲区  
         const Buffer Sub(int index, int len)const;
 
         //显示16禁止数据，指定分割字符和换行长度
