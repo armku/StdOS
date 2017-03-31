@@ -437,7 +437,7 @@
             <File>
               <FileName>STM32F10XD.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\User\STM32F10XD.lib</FilePath>
+              <FilePath>..\lib\STM32F10XD.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -1252,7 +1252,7 @@
             <File>
               <FileName>STM32F10XD.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\User\STM32F10XD.lib</FilePath>
+              <FilePath>..\lib\STM32F10XD.lib</FilePath>
             </File>
           </Files>
         </Group>

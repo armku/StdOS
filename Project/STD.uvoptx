@@ -409,7 +409,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\STM32F10XD.lib</PathWithFileName>
+      <PathWithFileName>..\lib\STM32F10XD.lib</PathWithFileName>
       <FilenameWithoutPath>STM32F10XD.lib</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
