@@ -60,7 +60,7 @@ class Buffer: public Object
         //显示16禁止数据，指定分割字符和换行长度
         String &ToHex(String &str, char sep = 0, int newLine = 0)const;
         //显示16禁止数据，指定分割字符和换行长度
-        String ToHex(char sep = 0, int newLine = 0);
+        String ToHex(char sep = 0, int newLine = 0) const;
 
 
         ushort ToUInt16()const;
