@@ -630,7 +630,26 @@ void String::jsLength()
 {
     this->_Length = strlen((char*)((byte*)(this->_Arr)));
 }
-
+bool String::SetLength(int length, bool bak)
+{
+	return true;
+}
+String& String::ToStr(String& str) const
+{
+	return str;
+}
+String String::ToString() const
+{
+	return String("");
+}
+int String::CopyTo(int srcIndex, void* dest, int len) const
+{
+	return len;
+}
+void* String::Alloc(int len)
+{
+	return 0;
+}
 #ifdef DEBUG
     void String::Test()
 	{
