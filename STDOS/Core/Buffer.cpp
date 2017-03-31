@@ -90,7 +90,7 @@ void Buffer::Zero(void *dest, int len)
 }
 
 //拷贝数据，默认-1长度表示当前长度 
-void Buffer::Copy(int destIndex, const void *src, int len)
+int Buffer::Copy(int destIndex, const void *src, int len)
 {
     if (len ==  - 1)
     {
@@ -98,16 +98,17 @@ void Buffer::Copy(int destIndex, const void *src, int len)
     }
     if (len <= 0)
     {
-        return ;
+        return 0;
     }
     for (int i = 0; i < len; i++)
     {
         ((byte*)(this->_Arr))[destIndex + i] = ((byte*)src)[i];
     }
+	return len;
 }
 
 //把数据复制到目标缓冲区，默认-1长度表示当前长度
-void Buffer::CopyTo(int destIndex, void *dest, int len)const
+int Buffer::CopyTo(int destIndex, void *dest, int len)const
 {
     if (len ==  - 1)
     {
@@ -115,16 +116,17 @@ void Buffer::CopyTo(int destIndex, void *dest, int len)const
     }
     if (len <= 0)
     {
-        return ;
+        return 0;
     }
     for (int i = 0; i < len; i++)
     {
         ((byte*)dest)[destIndex + i] = ((byte*)(this->_Arr))[i];
     }
+	return len;
 }
 
 //拷贝数据，默认-1长度表示两者最小长度 
-void Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
+int Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
 {
     if (len ==  - 1)
     {
@@ -139,6 +141,7 @@ void Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
     {
         ((byte*)this->_Arr)[destIndex + i] = ((byte*)(src._Arr))[srcIndex + i];
     }
+	return len;
 }
 
 int Buffer::Copy(const Buffer &src, int destIndex)
