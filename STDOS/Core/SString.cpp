@@ -2,7 +2,7 @@
 ½øÐÐµ½×Ö·û´®ËÑË÷
  */
 
-#include "CString.h"
+#include "SString.h"
 #include <stdio.h>
 #include <string.h>
 #include <CType.h>

@@ -7,7 +7,7 @@
 #include "Type.h"
 #include "TTime.h"
 #include "Delegate.h"
-#include "CString.h"
+#include "SString.h"
 
 /* ´®¿Ú¶¨Òå */
 

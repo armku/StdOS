@@ -5,7 +5,7 @@
 #include "stm32f10x.h"
 #include "Port.h"
 #include "Port.h"
-#include "CString.h"
+#include "SString.h"
 
 /*
 ´®¿ÚÀà
