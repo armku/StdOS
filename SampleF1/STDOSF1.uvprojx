@@ -485,11 +485,6 @@
               <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
             </File>
             <File>
-              <FileName>TimeSpan.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Delegate.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Delegate.cpp</FilePath>
@@ -759,6 +754,11 @@
               <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Array.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeSpan.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
@@ -1268,11 +1268,6 @@
               <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
             </File>
             <File>
-              <FileName>TimeSpan.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Delegate.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Delegate.cpp</FilePath>
@@ -1542,6 +1537,11 @@
               <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Array.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeSpan.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
