@@ -30,7 +30,7 @@ String::String(char ch)
 }
 
 //进制字符串
-String::String(byte value, byte radix)
+String::String(byte value, int radix)
 {
     this->initCapacity();
 
@@ -47,7 +47,7 @@ String::String(byte value, byte radix)
 }
 
 //进制字符串
-String::String(short value, byte radix)
+String::String(short value, int radix)
 {
     this->initCapacity();
 
@@ -64,7 +64,7 @@ String::String(short value, byte radix)
 }
 
 //进制字符串
-String::String(int value, byte radix)
+String::String(int value, int radix)
 {
     this->initCapacity();
 
@@ -81,7 +81,7 @@ String::String(int value, byte radix)
 }
 
 //进制字符串
-String::String(uint value, byte radix)
+String::String(uint value, int radix)
 {
     this->initCapacity();
 
@@ -98,7 +98,7 @@ String::String(uint value, byte radix)
 }
 
 //进制字符串
-String::String(Int64 value, byte radix)
+String::String(Int64 value, int radix)
 {
     this->initCapacity();
 
@@ -115,7 +115,7 @@ String::String(Int64 value, byte radix)
 }
 
 //进制字符串
-String::String(UInt64 value, byte radix)
+String::String(UInt64 value, int radix)
 {
     this->initCapacity();
 
@@ -132,7 +132,7 @@ String::String(UInt64 value, byte radix)
 }
 
 //浮点数
-String::String(float value, byte dot)
+String::String(float value, int dot)
 {
     this->initCapacity();
     switch (dot)
@@ -162,7 +162,7 @@ String::String(float value, byte dot)
 }
 
 //浮点数
-String::String(double value, byte dot)
+String::String(double value, int dot)
 {
     this->initCapacity();
     switch (dot)
