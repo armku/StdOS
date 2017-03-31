@@ -455,11 +455,6 @@
           <GroupName>Basic</GroupName>
           <Files>
             <File>
-              <FileName>DateTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Dictionary.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Dictionary.cpp</FilePath>
@@ -764,6 +759,11 @@
               <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Array.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DateTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
             </File>
             <File>
               <FileName>ByteArray.cpp</FileName>
@@ -1238,11 +1238,6 @@
           <GroupName>Basic</GroupName>
           <Files>
             <File>
-              <FileName>DateTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Dictionary.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Dictionary.cpp</FilePath>
@@ -1547,6 +1542,11 @@
               <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Array.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DateTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
             </File>
             <File>
               <FileName>ByteArray.cpp</FileName>
