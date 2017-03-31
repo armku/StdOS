@@ -18,9 +18,39 @@ typedef const char*		cstring;
 class String;
 class Type;
 
+// 根对象
+class Object
+{
+public:
+	// 输出对象的字符串表示方式
+	//virtual String& ToStr(String& str) const;
+	// 输出对象的字符串表示方式。支持RVO优化
+	//virtual String ToString() const;
+	// 显示对象。默认显示ToString
+	virtual void Show(bool newLine = false) const;
 
+	//const Type GetType() const;
+};
+// 类型
+class Type
+{
+private:
+	const void* _info;
 
+	friend class Object;
 
+	Type();
+
+public:
+	int		Size;	// 大小
+	//String	Name;	// 名称
+
+	const String Name() const;	// 名称
+};
+// 数组长度
+//#define ArrayLength(arr) (int)(sizeof(arr)/sizeof(arr[0]))
+// 数组清零，固定长度
+//#define ArrayZero(arr) memset(arr, 0, sizeof(arr))
 
 #include <stdint.h>
 
@@ -50,24 +80,6 @@ void assert_failed(byte* file, uint line,char * errstr);
     }
     ;
 #endif /* __cplusplus */
-class CType;
-class String;
 
-//根对象
-class Object
-{
-    public:
-        #if 0
-            //输出对象的字符串表示方式
-            virtual String &ToStr(String &str)const;
-		#endif
-		#if 0
-        //输出对象的字符串表示方式.支持RVO优化
-        virtual String ToString()const;        
-		#endif
-        //显示对象。默认显示 ToString
-        virtual void Show(bool newLine = true)const;
-        const CType GetType()const;
-};
 
 #endif
