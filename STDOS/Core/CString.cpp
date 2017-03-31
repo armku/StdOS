@@ -621,7 +621,7 @@ void String::jsLength()
 		assert(str1 == "456",err);
 		assert(str1.GetBuffer() == "456",err);
 		
-		char err1[] = "String(const String& str)";
+//		char err1[] = "String(const String& str)";
 		
 		
     }

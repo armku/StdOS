@@ -186,7 +186,7 @@
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>0</useUlib>
+            <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
@@ -322,7 +322,7 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>1</uC99>
+            <uC99>0</uC99>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -332,7 +332,7 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>--cpp11</MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,DEBUG</Define>
               <Undefine></Undefine>
               <IncludePath>..\SYSTEM\FWLib\inc;..\STDOS;..\STDOS\Modbus;..\SYSTEM\CMSIS;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc;..\STDOS\Core;..\STDOS\Device;..\STDOS\Drivers;..\STDOS\Kernel;..\STDOS\Platform;..\STDOS\Board;..\STDOS\App;..\STDOS\Security;..\STDOS\TinyIP;..\STDOS\Net</IncludePath>
@@ -454,11 +454,6 @@
         <Group>
           <GroupName>Basic</GroupName>
           <Files>
-            <File>
-              <FileName>Buffer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
-            </File>
             <File>
               <FileName>ByteArray.cpp</FileName>
               <FileType>8</FileType>
@@ -812,6 +807,11 @@
         <Group>
           <GroupName>Core</GroupName>
           <Files>
+            <File>
+              <FileName>Buffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
+            </File>
             <File>
               <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
@@ -1270,11 +1270,6 @@
           <GroupName>Basic</GroupName>
           <Files>
             <File>
-              <FileName>Buffer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ByteArray.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
@@ -1627,6 +1622,11 @@
         <Group>
           <GroupName>Core</GroupName>
           <Files>
+            <File>
+              <FileName>Buffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
+            </File>
             <File>
               <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
