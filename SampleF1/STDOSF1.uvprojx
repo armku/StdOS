@@ -515,11 +515,6 @@
               <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
-              <FileName>RC4.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\RC4.cpp</FilePath>
-            </File>
-            <File>
               <FileName>NewDelete.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\NewDelete.cpp</FilePath>
@@ -705,11 +700,6 @@
         <Group>
           <GroupName>Util</GroupName>
           <Files>
-            <File>
-              <FileName>RC4.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
-            </File>
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
@@ -1298,11 +1288,6 @@
               <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
-              <FileName>RC4.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\RC4.cpp</FilePath>
-            </File>
-            <File>
               <FileName>NewDelete.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\NewDelete.cpp</FilePath>
@@ -1488,11 +1473,6 @@
         <Group>
           <GroupName>Util</GroupName>
           <Files>
-            <File>
-              <FileName>RC4.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
-            </File>
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
