@@ -207,6 +207,5 @@ DateTime DateTime::Now()
 }
 void DateTime::Show(bool newLine)const
 {
-	printf("%04d-%02d-%02d %02d:%02d:%02d",this->Year,this->Month,this->Day,this->Hour,this->Minute,this->Second);
-	Object::Show(true);
+	printf("%04d-%02d-%02d %02d:%02d:%02d",this->Year,this->Month,this->Day,this->Hour,this->Minute,this->Second);	
 }
