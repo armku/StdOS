@@ -335,7 +335,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,DEBUG</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\Util\inc;..\SYSTEM\CMSIS;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc;..\STDOS\Core;..\STDOS\Device;..\STDOS\Drivers;..\STDOS\Kernel;..\STDOS\Platform;..\STDOS\Board;..\STDOS\App;..\STDOS\Security;..\STDOS\TinyIP;..\STDOS\Net</IncludePath>
+              <IncludePath>..\SYSTEM\FWLib\inc;..\STDOS;..\STDOS\Modbus;..\SYSTEM\CMSIS;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc;..\STDOS\Core;..\STDOS\Device;..\STDOS\Drivers;..\STDOS\Kernel;..\STDOS\Platform;..\STDOS\Board;..\STDOS\App;..\STDOS\Security;..\STDOS\TinyIP;..\STDOS\Net</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -457,82 +457,82 @@
             <File>
               <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Type.cpp</FilePath>
+              <FilePath>..\STDOS\Core\Type.cpp</FilePath>
             </File>
             <File>
               <FileName>Object.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Object.cpp</FilePath>
+              <FilePath>..\STDOS\Object.cpp</FilePath>
             </File>
             <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Buffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Array.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Array.cpp</FilePath>
+              <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
             </File>
             <File>
               <FileName>ByteArray.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\ByteArray.cpp</FilePath>
+              <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Array.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Array.cpp</FilePath>
             </File>
             <File>
               <FileName>CString.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\CString.cpp</FilePath>
+              <FilePath>..\STDOS\Core\CString.cpp</FilePath>
             </File>
             <File>
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Stream.cpp</FilePath>
+              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\DateTime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimeSpan.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\TimeSpan.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IList.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\IList.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>List.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\List.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IDictionary.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\IDictionary.cpp</FilePath>
+              <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
             </File>
             <File>
               <FileName>Dictionary.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Dictionary.cpp</FilePath>
+              <FilePath>..\STDOS\Core\Dictionary.cpp</FilePath>
             </File>
             <File>
-              <FileName>Delegate.cpp</FileName>
+              <FileName>IDictionary.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Delegate.cpp</FilePath>
+              <FilePath>..\STDOS\Core\IDictionary.cpp</FilePath>
             </File>
             <File>
-              <FileName>Queue.cpp</FileName>
+              <FileName>IList.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Queue.cpp</FilePath>
+              <FilePath>..\STDOS\Core\IList.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\List.cpp</FilePath>
             </File>
             <File>
               <FileName>Random.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Random.cpp</FilePath>
+              <FilePath>..\STDOS\Core\Random.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Queue.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeSpan.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Delegate.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Delegate.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -542,57 +542,57 @@
             <File>
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\Sys.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
             </File>
             <File>
               <FileName>TTime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TTime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimeWheel.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TimeWheel.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimeCost.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TimeCost.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SmartIRQ.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\SmartIRQ.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitHandle.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\WaitHandle.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TaskScheduler.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TaskScheduler.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\TTime.cpp</FilePath>
             </File>
             <File>
               <FileName>TInterrupt.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TInterrupt.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\TInterrupt.cpp</FilePath>
             </File>
             <File>
-              <FileName>NewDelete.cpp</FileName>
+              <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\NewDelete.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
               <FileName>RC4.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\RC4.cpp</FilePath>
+              <FilePath>..\STDOS\RC4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NewDelete.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\NewDelete.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SmartIRQ.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\SmartIRQ.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeCost.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TimeCost.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeWheel.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TimeWheel.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TaskScheduler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TaskScheduler.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaitHandle.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -600,79 +600,79 @@
           <GroupName>Peripheral</GroupName>
           <Files>
             <File>
-              <FileName>Port.cpp</FileName>
+              <FileName>HardRtc.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Spi.cpp</FilePath>
+              <FilePath>..\STDOS\Device\HardRtc.cpp</FilePath>
             </File>
             <File>
               <FileName>HardSpi.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\HardSpi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SoftSpi.cpp</FilePath>
+              <FilePath>..\STDOS\Device\HardSpi.cpp</FilePath>
             </File>
             <File>
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\I2C.cpp</FilePath>
+              <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
             </File>
             <File>
-              <FileName>SoftI2C.cpp</FileName>
+              <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SoftI2C.cpp</FilePath>
+              <FilePath>..\STDOS\Device\Port.cpp</FilePath>
             </File>
             <File>
               <FileName>Pwm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Pwm.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ISocket.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\NET\src\ISocket.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ITransport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
+              <FilePath>..\STDOS\Device\Pwm.cpp</FilePath>
             </File>
             <File>
               <FileName>SerialPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
+              <FilePath>..\STDOS\Device\SerialPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>Timer.cpp</FileName>
+              <FileName>SoftI2C.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Timer.cpp</FilePath>
+              <FilePath>..\STDOS\Device\SoftI2C.cpp</FilePath>
             </File>
             <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\Peripheral\usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>HardRtc.cpp</FileName>
+              <FileName>SoftSpi.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\HardRtc.cpp</FilePath>
+              <FilePath>..\STDOS\Device\SoftSpi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
             </File>
             <File>
               <FileName>stmflash.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\stmflash.cpp</FilePath>
+              <FilePath>..\STDOS\Device\stmflash.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Device\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>ISocket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\ISocket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ITransport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -682,42 +682,42 @@
             <File>
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\AD7689.cpp</FilePath>
+              <FilePath>..\STDOS\Drivers\AD7689.cpp</FilePath>
             </File>
             <File>
               <FileName>ADS1246.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\ADS1246.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NPA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\NPA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W24xxx.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\W24xxx.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ST7565R.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\ST7565R.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModBus.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\ModBus.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W25QXXX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\W25QXXX.cpp</FilePath>
+              <FilePath>..\STDOS\Drivers\ADS1246.cpp</FilePath>
             </File>
             <File>
               <FileName>Button.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\Button.cpp</FilePath>
+              <FilePath>..\STDOS\Drivers\Button.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NPA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\NPA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7565R.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\ST7565R.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W24xxx.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\W24xxx.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModBus.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Modbus\ModBus.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -725,29 +725,29 @@
           <GroupName>NET</GroupName>
           <Files>
             <File>
-              <FileName>ISocketHost.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\NET\src\ISocketHost.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DHCP.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\NET\src\DHCP.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DNS.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\NET\src\DNS.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Tcp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\NET\src\Tcp.cpp</FilePath>
+              <FilePath>..\STDOS\TinyIP\Tcp.cpp</FilePath>
             </File>
             <File>
               <FileName>Udp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\NET\src\Udp.cpp</FilePath>
+              <FilePath>..\STDOS\TinyIP\Udp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DHCP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\DHCP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DNS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\DNS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ISocket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\ISocket.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -785,17 +785,17 @@
             <File>
               <FileName>RC4.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Util\src\RC4.cpp</FilePath>
+              <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
             </File>
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Util\src\Util.cpp</FilePath>
+              <FilePath>..\STDOS\Util.cpp</FilePath>
             </File>
             <File>
               <FileName>CheckSum.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Util\src\CheckSum.cpp</FilePath>
+              <FilePath>..\STDOS\CheckSum.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1272,82 +1272,82 @@
             <File>
               <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Type.cpp</FilePath>
+              <FilePath>..\STDOS\Core\Type.cpp</FilePath>
             </File>
             <File>
               <FileName>Object.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Object.cpp</FilePath>
+              <FilePath>..\STDOS\Object.cpp</FilePath>
             </File>
             <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Buffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Array.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Array.cpp</FilePath>
+              <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
             </File>
             <File>
               <FileName>ByteArray.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\ByteArray.cpp</FilePath>
+              <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Array.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Array.cpp</FilePath>
             </File>
             <File>
               <FileName>CString.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\CString.cpp</FilePath>
+              <FilePath>..\STDOS\Core\CString.cpp</FilePath>
             </File>
             <File>
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Stream.cpp</FilePath>
+              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\DateTime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimeSpan.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\TimeSpan.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IList.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\IList.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>List.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\List.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IDictionary.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\IDictionary.cpp</FilePath>
+              <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
             </File>
             <File>
               <FileName>Dictionary.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Dictionary.cpp</FilePath>
+              <FilePath>..\STDOS\Core\Dictionary.cpp</FilePath>
             </File>
             <File>
-              <FileName>Delegate.cpp</FileName>
+              <FileName>IDictionary.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Delegate.cpp</FilePath>
+              <FilePath>..\STDOS\Core\IDictionary.cpp</FilePath>
             </File>
             <File>
-              <FileName>Queue.cpp</FileName>
+              <FileName>IList.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Queue.cpp</FilePath>
+              <FilePath>..\STDOS\Core\IList.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\List.cpp</FilePath>
             </File>
             <File>
               <FileName>Random.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Basic\src\Random.cpp</FilePath>
+              <FilePath>..\STDOS\Core\Random.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Queue.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeSpan.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Delegate.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Delegate.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1357,57 +1357,57 @@
             <File>
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\Sys.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
             </File>
             <File>
               <FileName>TTime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TTime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimeWheel.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TimeWheel.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimeCost.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TimeCost.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SmartIRQ.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\SmartIRQ.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitHandle.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\WaitHandle.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TaskScheduler.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TaskScheduler.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\Task.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\TTime.cpp</FilePath>
             </File>
             <File>
               <FileName>TInterrupt.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\TInterrupt.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\TInterrupt.cpp</FilePath>
             </File>
             <File>
-              <FileName>NewDelete.cpp</FileName>
+              <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\NewDelete.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
               <FileName>RC4.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\CORE\src\RC4.cpp</FilePath>
+              <FilePath>..\STDOS\RC4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NewDelete.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\NewDelete.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SmartIRQ.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\SmartIRQ.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeCost.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TimeCost.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeWheel.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TimeWheel.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TaskScheduler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TaskScheduler.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaitHandle.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1415,79 +1415,79 @@
           <GroupName>Peripheral</GroupName>
           <Files>
             <File>
-              <FileName>Port.cpp</FileName>
+              <FileName>HardRtc.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Spi.cpp</FilePath>
+              <FilePath>..\STDOS\Device\HardRtc.cpp</FilePath>
             </File>
             <File>
               <FileName>HardSpi.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\HardSpi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SoftSpi.cpp</FilePath>
+              <FilePath>..\STDOS\Device\HardSpi.cpp</FilePath>
             </File>
             <File>
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\I2C.cpp</FilePath>
+              <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
             </File>
             <File>
-              <FileName>SoftI2C.cpp</FileName>
+              <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SoftI2C.cpp</FilePath>
+              <FilePath>..\STDOS\Device\Port.cpp</FilePath>
             </File>
             <File>
               <FileName>Pwm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Pwm.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ISocket.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\NET\src\ISocket.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ITransport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\ITransport.cpp</FilePath>
+              <FilePath>..\STDOS\Device\Pwm.cpp</FilePath>
             </File>
             <File>
               <FileName>SerialPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\SerialPort.cpp</FilePath>
+              <FilePath>..\STDOS\Device\SerialPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>Timer.cpp</FileName>
+              <FileName>SoftI2C.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\Timer.cpp</FilePath>
+              <FilePath>..\STDOS\Device\SoftI2C.cpp</FilePath>
             </File>
             <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\Peripheral\usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>HardRtc.cpp</FileName>
+              <FileName>SoftSpi.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\HardRtc.cpp</FilePath>
+              <FilePath>..\STDOS\Device\SoftSpi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
             </File>
             <File>
               <FileName>stmflash.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Peripheral\src\stmflash.cpp</FilePath>
+              <FilePath>..\STDOS\Device\stmflash.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Device\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>ISocket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\ISocket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ITransport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1497,42 +1497,42 @@
             <File>
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\AD7689.cpp</FilePath>
+              <FilePath>..\STDOS\Drivers\AD7689.cpp</FilePath>
             </File>
             <File>
               <FileName>ADS1246.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\ADS1246.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NPA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\NPA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W24xxx.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\W24xxx.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ST7565R.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\ST7565R.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModBus.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\ModBus.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W25QXXX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\W25QXXX.cpp</FilePath>
+              <FilePath>..\STDOS\Drivers\ADS1246.cpp</FilePath>
             </File>
             <File>
               <FileName>Button.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Devices\src\Button.cpp</FilePath>
+              <FilePath>..\STDOS\Drivers\Button.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NPA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\NPA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7565R.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\ST7565R.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W24xxx.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\W24xxx.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModBus.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Modbus\ModBus.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1540,29 +1540,29 @@
           <GroupName>NET</GroupName>
           <Files>
             <File>
-              <FileName>ISocketHost.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\NET\src\ISocketHost.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DHCP.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\NET\src\DHCP.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DNS.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SYSTEM\NET\src\DNS.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Tcp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\NET\src\Tcp.cpp</FilePath>
+              <FilePath>..\STDOS\TinyIP\Tcp.cpp</FilePath>
             </File>
             <File>
               <FileName>Udp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\NET\src\Udp.cpp</FilePath>
+              <FilePath>..\STDOS\TinyIP\Udp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DHCP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\DHCP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DNS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\DNS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ISocket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\ISocket.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1600,17 +1600,17 @@
             <File>
               <FileName>RC4.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Util\src\RC4.cpp</FilePath>
+              <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
             </File>
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Util\src\Util.cpp</FilePath>
+              <FilePath>..\STDOS\Util.cpp</FilePath>
             </File>
             <File>
               <FileName>CheckSum.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SYSTEM\Util\src\CheckSum.cpp</FilePath>
+              <FilePath>..\STDOS\CheckSum.cpp</FilePath>
             </File>
           </Files>
         </Group>
