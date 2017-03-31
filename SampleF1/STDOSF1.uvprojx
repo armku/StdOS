@@ -335,7 +335,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,DEBUG</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\Util\inc;..\SYSTEM\CMSIS;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc;..\STDOS\Core;..\STDOS\Device;..\STDOS\Drivers;..\STDOS\Kernel;..\STDOS\Platform;..\STDOS\Board;..\STDOS\App;..\STDOS\Security</IncludePath>
+              <IncludePath>..\SYSTEM\FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\Util\inc;..\SYSTEM\CMSIS;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc;..\STDOS\Core;..\STDOS\Device;..\STDOS\Drivers;..\STDOS\Kernel;..\STDOS\Platform;..\STDOS\Board;..\STDOS\App;..\STDOS\Security;..\STDOS\TinyIP</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
