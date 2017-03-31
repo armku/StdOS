@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <CType.h>
+#include "Sys.h"
 
 String::String(cstring cstr)
 {
@@ -218,7 +219,7 @@ String &String::operator = (const char *str)
     {
 //        this->_Length = strlen(str);
     }
-    else
+ //   else
     {
 //        this->_Length = this->mcapacity;
     }
@@ -232,13 +233,13 @@ String &String::operator = (const char *str)
 
 String &String::operator = (const String &str)
 {
-    if (str.Length() <= this->mcapacity)
+//    if (str.Length() <= this->mcapacity)
     {
-        this->_Length = str.Length();
+//        this->_Length = str.Length();
     }
-    else
+ //   else
     {
-        this->_Length = this->mcapacity;
+//        this->_Length = this->mcapacity;
     }
     for (int i = 0; i < this->_Length; i++)
     {
@@ -618,18 +619,18 @@ void String::Show(bool newLine)const
 }
 
 //初始化容器
-void String::initCapacity()
-{
-    this->_Arr = new char[0x40];
-    this->mcapacity = 0x40 - 1;
-    memset(((byte*)(this->_Arr)), 0x40, 0);
-}
+//void String::initCapacity()
+//{
+//    this->_Arr = new char[0x40];
+////    this->mcapacity = 0x40 - 1;
+//    memset(((byte*)(this->_Arr)), 0x40, 0);
+//}
 
 //计算字符串长度
-void String::jsLength()
-{
-    this->_Length = strlen((char*)((byte*)(this->_Arr)));
-}
+//void String::jsLength()
+//{
+//    this->_Length = strlen((char*)((byte*)(this->_Arr)));
+//}
 bool String::SetLength(int length, bool bak)
 {
 	return true;

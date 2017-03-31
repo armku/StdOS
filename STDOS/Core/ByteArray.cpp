@@ -14,6 +14,3 @@ void *ByteArray::Alloc(int len)
 {
 	return 0;
 }
-ByteArray::~ByteArray()
-{
-}
