@@ -52,6 +52,13 @@ public:
 // 数组清零，固定长度
 //#define ArrayZero(arr) memset(arr, 0, sizeof(arr))
 
+// 弱函数
+#if defined(_MSC_VER)
+#define WEAK
+#else
+#define	WEAK	__attribute__((weak))
+#endif
+
 #include <stdint.h>
 
 #ifndef NULL
