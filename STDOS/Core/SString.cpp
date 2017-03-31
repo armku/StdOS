@@ -11,6 +11,9 @@ String::String(cstring cstr)
 {
 	
 }
+String::~String()
+{
+}
 String::String(const char *str, int len)
 {
     if (len < 0)

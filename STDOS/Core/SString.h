@@ -15,6 +15,7 @@ public:
 	String(cstring cstr = "");
 	String(const String& str);
 	String(String&& rval);
+	~String();
 	// 外部传入缓冲区供内部使用，内部计算字符串长度，注意长度减去零结束符
 	String(char* str, int length);
 	String(char* str, int length, bool expand);
