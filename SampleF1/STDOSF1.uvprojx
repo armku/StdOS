@@ -630,11 +630,6 @@
               <FilePath>..\STDOS\Device\usart.c</FilePath>
             </File>
             <File>
-              <FileName>ISocket.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ISocket.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ITransport.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
@@ -688,33 +683,6 @@
         </Group>
         <Group>
           <GroupName>NET</GroupName>
-          <Files>
-            <File>
-              <FileName>Tcp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyIP\Tcp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Udp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyIP\Udp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DHCP.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\DHCP.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DNS.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\DNS.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ISocket.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ISocket.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>startup</GroupName>
@@ -1445,11 +1413,6 @@
               <FilePath>..\STDOS\Device\usart.c</FilePath>
             </File>
             <File>
-              <FileName>ISocket.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ISocket.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ITransport.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
@@ -1503,33 +1466,6 @@
         </Group>
         <Group>
           <GroupName>NET</GroupName>
-          <Files>
-            <File>
-              <FileName>Tcp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyIP\Tcp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Udp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyIP\Udp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DHCP.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\DHCP.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DNS.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\DNS.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ISocket.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ISocket.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>startup</GroupName>
