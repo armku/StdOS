@@ -49,6 +49,11 @@ static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
     ModbusSlave.Process(bs, para);
     return 0;
 }
+static uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para)
+{
+   bs.Show(true);
+    return 0;
+}
 
 void LedTask(void *param)
 {
@@ -87,6 +92,7 @@ int main(void)
     
     exti.Register(OnKeyPress);
     exti1.Register(OnKeyPress);
+	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
        // 初始化为输出
     OutputPort led(PF8);
