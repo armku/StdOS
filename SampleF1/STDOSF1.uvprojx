@@ -1146,6 +1146,18 @@
         </Group>
         <Group>
           <GroupName>Platform</GroupName>
+          <Files>
+            <File>
+              <FileName>BootConfig.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\BootConfig.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Config.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Config.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Storage</GroupName>
@@ -2509,6 +2521,18 @@
         </Group>
         <Group>
           <GroupName>Platform</GroupName>
+          <Files>
+            <File>
+              <FileName>BootConfig.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\BootConfig.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Config.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Config.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Storage</GroupName>
