@@ -1,6 +1,32 @@
-/*
-SmartOS v2.9的看门狗驱动，兼容STM32F0/F1/F4/GD32F10x/GD32F1x0
- */
+#ifndef __WatchDog_H__
+#define __WatchDog_H__
+
+#include "Kernel\Sys.h"
+
+// 看门狗
+class WatchDog1
+{
+private:
+	WatchDog1();
+
+public:
+	//WatchDog(uint ms = 3000);
+	~WatchDog1();
+
+	uint Timeout; // 当前超时时间
+
+	bool Config(uint ms);	// 配置看门狗喂狗重置时间，超过该时间将重启MCU
+	void ConfigMax();		// 看门狗无法关闭，只能设置一个最大值
+	void Feed(); // 喂狗
+
+	static WatchDog1& Current();
+	static void FeedDogTask(void* param);
+	// 打开看门狗。最长喂狗时间26208ms，默认2000ms
+	static void Start(uint msTimeout = 2000, uint msFeed = 500);
+};
+
+#endif
+
 #pragma once 
 
 #include "Type.h"

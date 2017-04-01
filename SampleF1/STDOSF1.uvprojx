@@ -688,9 +688,64 @@
               <FilePath>..\STDOS\Device\usart.c</FilePath>
             </File>
             <File>
-              <FileName>WatchDog.cpp</FileName>
+              <FileName>ADC.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
+              <FilePath>..\STDOS\Device\ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CAN.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\CAN.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DAC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\DAC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DMA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\DMA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Flash.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Flash.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Power.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Power.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Proxy.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Proxy.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ProxyConfig.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\ProxyConfig.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pwm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Pwm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\RTC.cpp</FilePath>
             </File>
             <File>
               <FileName>SerialPort.cpp</FileName>
@@ -703,34 +758,19 @@
               <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
             </File>
             <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pwm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Pwm.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Port.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
             </File>
             <File>
-              <FileName>Flash.cpp</FileName>
+              <FileName>UTPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Flash.cpp</FilePath>
+              <FilePath>..\STDOS\Device\UTPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>RTC.cpp</FileName>
+              <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\RTC.cpp</FilePath>
+              <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -771,6 +811,126 @@
               <FileName>W25QXXX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>74HC165.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\74HC165.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>74HC165Monitor.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\74HC165Monitor.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>A67.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\A67.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT24CXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT45DB.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BH1750.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\BH1750.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BufferPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\BufferPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DHT11.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\DHT11.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Enc28j60.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Enc28j60.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GSM07.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\GSM07.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HX711.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\HX711.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>JTW8953.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\JTW8953.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NRF24L01.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\NRF24L01.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PMS5003.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\PMS5003.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SHT30.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\SHT30.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ShunCom.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\ShunCom.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sim900A.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Sim900A.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>UBlox.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\UBlox.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W5500.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\W5500.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Esp8266\Esp8266.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspSocket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Esp8266\EspSocket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspTcp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Esp8266\EspTcp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspUdp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Esp8266\EspUdp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaitExpect.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Esp8266\WaitExpect.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1478,9 +1638,64 @@
               <FilePath>..\STDOS\Device\usart.c</FilePath>
             </File>
             <File>
-              <FileName>WatchDog.cpp</FileName>
+              <FileName>ADC.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
+              <FilePath>..\STDOS\Device\ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CAN.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\CAN.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DAC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\DAC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DMA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\DMA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Flash.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Flash.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Power.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Power.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Proxy.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Proxy.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ProxyConfig.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\ProxyConfig.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pwm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\Pwm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\RTC.cpp</FilePath>
             </File>
             <File>
               <FileName>SerialPort.cpp</FileName>
@@ -1493,34 +1708,19 @@
               <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
             </File>
             <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pwm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Pwm.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Port.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
             </File>
             <File>
-              <FileName>Flash.cpp</FileName>
+              <FileName>UTPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Flash.cpp</FilePath>
+              <FilePath>..\STDOS\Device\UTPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>RTC.cpp</FileName>
+              <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\RTC.cpp</FilePath>
+              <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1561,6 +1761,126 @@
               <FileName>W25QXXX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>74HC165.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\74HC165.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>74HC165Monitor.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\74HC165Monitor.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>A67.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\A67.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT24CXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT45DB.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BH1750.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\BH1750.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BufferPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\BufferPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DHT11.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\DHT11.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Enc28j60.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Enc28j60.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GSM07.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\GSM07.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HX711.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\HX711.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>JTW8953.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\JTW8953.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NRF24L01.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\NRF24L01.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PMS5003.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\PMS5003.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SHT30.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\SHT30.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ShunCom.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\ShunCom.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sim900A.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Sim900A.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>UBlox.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\UBlox.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W5500.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\W5500.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Esp8266\Esp8266.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspSocket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Esp8266\EspSocket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspTcp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Esp8266\EspTcp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspUdp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Esp8266\EspUdp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaitExpect.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Esp8266\WaitExpect.cpp</FilePath>
             </File>
           </Files>
         </Group>
