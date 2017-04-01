@@ -12,7 +12,7 @@
 #include "Modbus.h"
 #include "Spi.h"
 #include "HardRtc.h"
-#include "stmflash.h"
+#include "Flash.h"
 
 typedef enum
 {

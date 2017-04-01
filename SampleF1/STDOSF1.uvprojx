@@ -743,9 +743,9 @@
               <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
             </File>
             <File>
-              <FileName>stmflash.cpp</FileName>
+              <FileName>Flash.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\stmflash.cpp</FilePath>
+              <FilePath>..\STDOS\Device\Flash.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -796,6 +796,16 @@
               <FileName>RC4.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Storage</GroupName>
+          <Files>
+            <File>
+              <FileName>Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1538,9 +1548,9 @@
               <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
             </File>
             <File>
-              <FileName>stmflash.cpp</FileName>
+              <FileName>Flash.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\stmflash.cpp</FilePath>
+              <FilePath>..\STDOS\Device\Flash.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1591,6 +1601,16 @@
               <FileName>RC4.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Storage</GroupName>
+          <Files>
+            <File>
+              <FileName>Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
         </Group>
