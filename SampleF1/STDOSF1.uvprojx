@@ -683,11 +683,6 @@
           <GroupName>Device</GroupName>
           <Files>
             <File>
-              <FileName>HardRtc.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\HardRtc.cpp</FilePath>
-            </File>
-            <File>
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\STDOS\Device\usart.c</FilePath>
@@ -731,6 +726,11 @@
               <FileName>Flash.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Flash.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\RTC.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1473,11 +1473,6 @@
           <GroupName>Device</GroupName>
           <Files>
             <File>
-              <FileName>HardRtc.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\HardRtc.cpp</FilePath>
-            </File>
-            <File>
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\STDOS\Device\usart.c</FilePath>
@@ -1521,6 +1516,11 @@
               <FileName>Flash.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Flash.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\RTC.cpp</FilePath>
             </File>
           </Files>
         </Group>

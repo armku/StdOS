@@ -11,7 +11,7 @@
 #include "Pwm.h"
 #include "Modbus.h"
 #include "Spi.h"
-#include "HardRtc.h"
+#include "RTC.h"
 #include "Flash.h"
 
 typedef enum

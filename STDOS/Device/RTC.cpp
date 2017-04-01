@@ -1,4 +1,4 @@
-#include "HardRtc.h"
+#include "RTC.h"
 #include "DateTime.h"
 #include "stm32f10x.h"
 
