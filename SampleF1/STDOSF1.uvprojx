@@ -540,77 +540,92 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>NET</GroupName>
+          <GroupName>App</GroupName>
           <Files>
             <File>
-              <FileName>ITransport.cpp</FileName>
+              <FileName>ACZero.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
+              <FilePath>..\STDOS\App\ACZero.cpp</FilePath>
             </File>
             <File>
-              <FileName>Blu40.cpp</FileName>
+              <FileName>Alarm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Blu40.cpp</FilePath>
+              <FilePath>..\STDOS\App\Alarm.cpp</FilePath>
             </File>
             <File>
-              <FileName>Dhcp.cpp</FileName>
+              <FileName>AT.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Dhcp.cpp</FilePath>
+              <FilePath>..\STDOS\App\AT.cpp</FilePath>
             </File>
             <File>
-              <FileName>DNS.cpp</FileName>
+              <FileName>BlinkPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\DNS.cpp</FilePath>
+              <FilePath>..\STDOS\App\BlinkPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>Ethernet.cpp</FileName>
+              <FileName>Button.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Ethernet.cpp</FilePath>
+              <FilePath>..\STDOS\App\Button.cpp</FilePath>
             </File>
             <File>
-              <FileName>HttpClient.cpp</FileName>
+              <FileName>Button_GrayLevel.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\HttpClient.cpp</FilePath>
+              <FilePath>..\STDOS\App\Button_GrayLevel.cpp</FilePath>
             </File>
             <File>
-              <FileName>IPAddress.cpp</FileName>
+              <FileName>Button_magnetic.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\IPAddress.cpp</FilePath>
+              <FilePath>..\STDOS\App\Button_magnetic.cpp</FilePath>
             </File>
             <File>
-              <FileName>IPEndPoint.cpp</FileName>
+              <FileName>CommandPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\IPEndPoint.cpp</FilePath>
+              <FilePath>..\STDOS\App\CommandPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>ISocketHost.cpp</FileName>
+              <FileName>Dimmer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ISocketHost.cpp</FilePath>
+              <FilePath>..\STDOS\App\Dimmer.cpp</FilePath>
             </File>
             <File>
-              <FileName>MacAddress.cpp</FileName>
+              <FileName>FlushPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\MacAddress.cpp</FilePath>
+              <FilePath>..\STDOS\App\FlushPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>NetUri.cpp</FileName>
+              <FileName>IR.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\NetUri.cpp</FilePath>
+              <FilePath>..\STDOS\App\IR.cpp</FilePath>
             </File>
             <File>
-              <FileName>NetworkInterface.cpp</FileName>
+              <FileName>IRcoding.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\NetworkInterface.cpp</FilePath>
+              <FilePath>..\STDOS\App\IRcoding.cpp</FilePath>
             </File>
             <File>
-              <FileName>Socket.cpp</FileName>
+              <FileName>PowerUps.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Socket.cpp</FilePath>
+              <FilePath>..\STDOS\App\PowerUps.cpp</FilePath>
             </File>
             <File>
-              <FileName>Zigbee.cpp</FileName>
+              <FileName>PulsePort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Zigbee.cpp</FilePath>
+              <FilePath>..\STDOS\App\PulsePort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Raster.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\Raster.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sensor.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\Sensor.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sound.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\Sound.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -701,46 +716,6 @@
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Version.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Kernel</GroupName>
-          <Files>
-            <File>
-              <FileName>TTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\TTime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitHandle.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TInterrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\TInterrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sys.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Heap.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Thread.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1000,47 +975,42 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Security</GroupName>
+          <GroupName>Kernel</GroupName>
           <Files>
             <File>
-              <FileName>RC4.cpp</FileName>
+              <FileName>TTime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\TTime.cpp</FilePath>
             </File>
             <File>
-              <FileName>AES.cpp</FileName>
+              <FileName>WaitHandle.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\AES.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
             <File>
-              <FileName>Crc.cpp</FileName>
+              <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
-              <FileName>MD5.cpp</FileName>
+              <FileName>TInterrupt.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\MD5.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\TInterrupt.cpp</FilePath>
             </File>
             <File>
-              <FileName>RC6.cpp</FileName>
+              <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RC6.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>RSA.cpp</FileName>
+              <FileName>Heap.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RSA.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Storage</GroupName>
-          <Files>
             <File>
-              <FileName>Storage.cpp</FileName>
+              <FileName>Thread.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Storage\Storage.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1096,6 +1066,304 @@
               <FileName>WeakStore.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Message\WeakStore.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Net</GroupName>
+          <Files>
+            <File>
+              <FileName>ITransport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Blu40.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Blu40.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Dhcp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Dhcp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DNS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\DNS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Ethernet.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Ethernet.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HttpClient.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\HttpClient.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\IPAddress.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPEndPoint.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\IPEndPoint.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ISocketHost.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\ISocketHost.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MacAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\MacAddress.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NetUri.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\NetUri.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NetworkInterface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\NetworkInterface.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Socket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Socket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Zigbee.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Zigbee.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Platform</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Storage</GroupName>
+          <Files>
+            <File>
+              <FileName>Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Storage\Storage.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Security</GroupName>
+          <Files>
+            <File>
+              <FileName>RC4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AES.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\AES.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Crc.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MD5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\MD5.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RC6.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\RC6.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RSA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\RSA.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>TinyIP</GroupName>
+          <Files>
+            <File>
+              <FileName>Arp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyIP\Arp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Icmp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyIP\Icmp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tcp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyIP\Tcp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TinyIP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyIP\TinyIP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Udp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyIP\Udp.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>TinyNet</GroupName>
+          <Files>
+            <File>
+              <FileName>DataMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\DataMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>JoinMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\JoinMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PingMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\PingMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tiny.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\Tiny.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TinyClient.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\TinyClient.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TinyConfig.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\TinyConfig.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TinyController.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\TinyController.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TinyMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\TinyMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TinyServer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\TinyServer.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>TokenNet</GroupName>
+          <Files>
+            <File>
+              <FileName>Device.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\Device.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DeviceBody.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\DeviceBody.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DeviceMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\DeviceMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DevicesManagement.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\DevicesManagement.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ErrorMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\ErrorMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Gateway.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\Gateway.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HelloMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\HelloMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>LoginMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\LoginMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RegisterMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\RegisterMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Token.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\Token.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenClient.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenClient.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenConfig.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenConfig.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenController.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenController.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenDataMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenDataMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenDevice.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenDevice.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenPingMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenPingMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenSession.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenSession.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1635,77 +1903,92 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>NET</GroupName>
+          <GroupName>App</GroupName>
           <Files>
             <File>
-              <FileName>ITransport.cpp</FileName>
+              <FileName>ACZero.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
+              <FilePath>..\STDOS\App\ACZero.cpp</FilePath>
             </File>
             <File>
-              <FileName>Blu40.cpp</FileName>
+              <FileName>Alarm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Blu40.cpp</FilePath>
+              <FilePath>..\STDOS\App\Alarm.cpp</FilePath>
             </File>
             <File>
-              <FileName>Dhcp.cpp</FileName>
+              <FileName>AT.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Dhcp.cpp</FilePath>
+              <FilePath>..\STDOS\App\AT.cpp</FilePath>
             </File>
             <File>
-              <FileName>DNS.cpp</FileName>
+              <FileName>BlinkPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\DNS.cpp</FilePath>
+              <FilePath>..\STDOS\App\BlinkPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>Ethernet.cpp</FileName>
+              <FileName>Button.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Ethernet.cpp</FilePath>
+              <FilePath>..\STDOS\App\Button.cpp</FilePath>
             </File>
             <File>
-              <FileName>HttpClient.cpp</FileName>
+              <FileName>Button_GrayLevel.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\HttpClient.cpp</FilePath>
+              <FilePath>..\STDOS\App\Button_GrayLevel.cpp</FilePath>
             </File>
             <File>
-              <FileName>IPAddress.cpp</FileName>
+              <FileName>Button_magnetic.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\IPAddress.cpp</FilePath>
+              <FilePath>..\STDOS\App\Button_magnetic.cpp</FilePath>
             </File>
             <File>
-              <FileName>IPEndPoint.cpp</FileName>
+              <FileName>CommandPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\IPEndPoint.cpp</FilePath>
+              <FilePath>..\STDOS\App\CommandPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>ISocketHost.cpp</FileName>
+              <FileName>Dimmer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ISocketHost.cpp</FilePath>
+              <FilePath>..\STDOS\App\Dimmer.cpp</FilePath>
             </File>
             <File>
-              <FileName>MacAddress.cpp</FileName>
+              <FileName>FlushPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\MacAddress.cpp</FilePath>
+              <FilePath>..\STDOS\App\FlushPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>NetUri.cpp</FileName>
+              <FileName>IR.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\NetUri.cpp</FilePath>
+              <FilePath>..\STDOS\App\IR.cpp</FilePath>
             </File>
             <File>
-              <FileName>NetworkInterface.cpp</FileName>
+              <FileName>IRcoding.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\NetworkInterface.cpp</FilePath>
+              <FilePath>..\STDOS\App\IRcoding.cpp</FilePath>
             </File>
             <File>
-              <FileName>Socket.cpp</FileName>
+              <FileName>PowerUps.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Socket.cpp</FilePath>
+              <FilePath>..\STDOS\App\PowerUps.cpp</FilePath>
             </File>
             <File>
-              <FileName>Zigbee.cpp</FileName>
+              <FileName>PulsePort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Zigbee.cpp</FilePath>
+              <FilePath>..\STDOS\App\PulsePort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Raster.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\Raster.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sensor.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\Sensor.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sound.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\Sound.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1796,46 +2079,6 @@
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Version.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Kernel</GroupName>
-          <Files>
-            <File>
-              <FileName>TTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\TTime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitHandle.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TInterrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\TInterrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sys.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Heap.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Thread.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2095,47 +2338,42 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Security</GroupName>
+          <GroupName>Kernel</GroupName>
           <Files>
             <File>
-              <FileName>RC4.cpp</FileName>
+              <FileName>TTime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\TTime.cpp</FilePath>
             </File>
             <File>
-              <FileName>AES.cpp</FileName>
+              <FileName>WaitHandle.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\AES.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
             <File>
-              <FileName>Crc.cpp</FileName>
+              <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
-              <FileName>MD5.cpp</FileName>
+              <FileName>TInterrupt.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\MD5.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\TInterrupt.cpp</FilePath>
             </File>
             <File>
-              <FileName>RC6.cpp</FileName>
+              <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RC6.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>RSA.cpp</FileName>
+              <FileName>Heap.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RSA.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Storage</GroupName>
-          <Files>
             <File>
-              <FileName>Storage.cpp</FileName>
+              <FileName>Thread.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Storage\Storage.cpp</FilePath>
+              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2191,6 +2429,304 @@
               <FileName>WeakStore.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Message\WeakStore.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Net</GroupName>
+          <Files>
+            <File>
+              <FileName>ITransport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Blu40.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Blu40.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Dhcp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Dhcp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DNS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\DNS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Ethernet.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Ethernet.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HttpClient.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\HttpClient.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\IPAddress.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPEndPoint.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\IPEndPoint.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ISocketHost.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\ISocketHost.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MacAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\MacAddress.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NetUri.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\NetUri.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NetworkInterface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\NetworkInterface.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Socket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Socket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Zigbee.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Zigbee.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Platform</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Storage</GroupName>
+          <Files>
+            <File>
+              <FileName>Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Storage\Storage.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Security</GroupName>
+          <Files>
+            <File>
+              <FileName>RC4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AES.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\AES.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Crc.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MD5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\MD5.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RC6.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\RC6.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RSA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\RSA.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>TinyIP</GroupName>
+          <Files>
+            <File>
+              <FileName>Arp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyIP\Arp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Icmp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyIP\Icmp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tcp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyIP\Tcp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TinyIP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyIP\TinyIP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Udp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyIP\Udp.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>TinyNet</GroupName>
+          <Files>
+            <File>
+              <FileName>DataMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\DataMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>JoinMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\JoinMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PingMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\PingMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tiny.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\Tiny.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TinyClient.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\TinyClient.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TinyConfig.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\TinyConfig.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TinyController.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\TinyController.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TinyMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\TinyMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TinyServer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TinyNet\TinyServer.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>TokenNet</GroupName>
+          <Files>
+            <File>
+              <FileName>Device.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\Device.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DeviceBody.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\DeviceBody.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DeviceMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\DeviceMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DevicesManagement.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\DevicesManagement.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ErrorMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\ErrorMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Gateway.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\Gateway.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HelloMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\HelloMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>LoginMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\LoginMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RegisterMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\RegisterMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Token.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\Token.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenClient.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenClient.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenConfig.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenConfig.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenController.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenController.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenDataMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenDataMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenDevice.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenDevice.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenPingMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenPingMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TokenSession.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\TokenNet\TokenSession.cpp</FilePath>
             </File>
           </Files>
         </Group>
