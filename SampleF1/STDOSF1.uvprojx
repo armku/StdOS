@@ -547,6 +547,71 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Blu40.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Blu40.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Dhcp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Dhcp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DNS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\DNS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Ethernet.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Ethernet.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HttpClient.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\HttpClient.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\IPAddress.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPEndPoint.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\IPEndPoint.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ISocketHost.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\ISocketHost.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MacAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\MacAddress.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NetUri.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\NetUri.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NetworkInterface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\NetworkInterface.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Socket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Socket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Zigbee.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Zigbee.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -942,6 +1007,31 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
             </File>
+            <File>
+              <FileName>AES.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\AES.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Crc.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MD5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\MD5.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RC6.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\RC6.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RSA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\RSA.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -951,6 +1041,61 @@
               <FileName>Storage.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Storage\Storage.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Message</GroupName>
+          <Files>
+            <File>
+              <FileName>BinaryPair.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\BinaryPair.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Controller.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\Controller.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DataStore.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\DataStore.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Json.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\Json.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Message.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\Message.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MessageBase.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\MessageBase.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pair.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\Pair.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ProxyFactory.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\ProxyFactory.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>UTPacket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\UTPacket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WeakStore.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\WeakStore.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1497,6 +1642,71 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Blu40.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Blu40.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Dhcp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Dhcp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DNS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\DNS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Ethernet.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Ethernet.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HttpClient.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\HttpClient.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\IPAddress.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPEndPoint.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\IPEndPoint.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ISocketHost.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\ISocketHost.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MacAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\MacAddress.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NetUri.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\NetUri.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NetworkInterface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\NetworkInterface.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Socket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Socket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Zigbee.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Zigbee.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1892,6 +2102,31 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
             </File>
+            <File>
+              <FileName>AES.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\AES.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Crc.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MD5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\MD5.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RC6.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\RC6.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RSA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\RSA.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1901,6 +2136,61 @@
               <FileName>Storage.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Storage\Storage.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Message</GroupName>
+          <Files>
+            <File>
+              <FileName>BinaryPair.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\BinaryPair.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Controller.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\Controller.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DataStore.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\DataStore.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Json.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\Json.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Message.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\Message.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MessageBase.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\MessageBase.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pair.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\Pair.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ProxyFactory.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\ProxyFactory.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>UTPacket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\UTPacket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WeakStore.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Message\WeakStore.cpp</FilePath>
             </File>
           </Files>
         </Group>
