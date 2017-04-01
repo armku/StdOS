@@ -2,7 +2,7 @@
 
 #include "Type.h"
 #include "Port.h"
-#include "SoftI2C.h"
+#include "I2C.h"
 
 class CNPA
 {

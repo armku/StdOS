@@ -693,11 +693,6 @@
               <FilePath>..\STDOS\Device\usart.c</FilePath>
             </File>
             <File>
-              <FileName>HardSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\HardSpi.cpp</FilePath>
-            </File>
-            <File>
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
@@ -711,16 +706,6 @@
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\SoftSpi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftI2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\SoftI2C.cpp</FilePath>
             </File>
             <File>
               <FileName>I2C.cpp</FileName>
@@ -1498,11 +1483,6 @@
               <FilePath>..\STDOS\Device\usart.c</FilePath>
             </File>
             <File>
-              <FileName>HardSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\HardSpi.cpp</FilePath>
-            </File>
-            <File>
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
@@ -1516,16 +1496,6 @@
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftSpi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\SoftSpi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SoftI2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\SoftI2C.cpp</FilePath>
             </File>
             <File>
               <FileName>I2C.cpp</FileName>

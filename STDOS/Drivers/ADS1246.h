@@ -1,6 +1,6 @@
 #pragma once 
 #include "Type.h"
-#include "SoftSpi.h"
+#include "Spi.h"
 #include "Port.h"
 
 class CADS1246

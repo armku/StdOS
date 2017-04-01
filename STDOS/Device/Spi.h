@@ -58,3 +58,39 @@ class SpiScope
                 _spi->Stop();
         }
 };
+class CSoftSpi
+{
+public:
+    CSoftSpi(Pin pincs, Pin pinsck, Pin pindi, Pin pindo, uint nus = 0); //延时时间默认0us   
+    byte Init();
+    byte WaitBusy();
+    byte spi_writebyte(byte da);
+    byte spi_readbyte(void);
+public:
+    OutputPort *pportsck;
+    OutputPort *pportdi;
+    InputPort *pportdo;
+    OutputPort *pportcs;
+private:
+    uint delayus;//延时时间
+};
+typedef enum
+{
+CHSPI1	=	1,
+CHSPI2	=	2,
+CHSPI3	=	3
+}ESpiChannel;
+//硬件SPI
+class CHardSpi
+{
+	public:
+		CHardSpi(ESpiChannel spichannel);		
+	public:
+		void Init(void);			 //初始化SPI口
+		void SetSpeed(byte SpeedSet); //设置SPI速度   
+		byte ReadByte();//SPI总线读一个字节
+		byte WriteByte(byte TxData);//SPI总线写一个字节
+		ushort SendHalfWord(ushort HalfWord);
+	private:
+		ESpiChannel spiChannel;//通道
+};

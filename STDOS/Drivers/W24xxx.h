@@ -1,5 +1,5 @@
 #pragma once 
-#include "SoftI2C.h"
+#include "I2C.h"
 
 typedef enum
 {
