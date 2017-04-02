@@ -31,7 +31,6 @@ OutputPort led2(PF7, true);
 //°´¼ü PC13 PA0
 InputPort exti(PC13); //PA1 PB3     PA0 PC13
 InputPort exti1(PA0);
-#define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 void OnKeyPress(Pin pin, bool down, void *param)
 {
     //led1.Write(onoff);

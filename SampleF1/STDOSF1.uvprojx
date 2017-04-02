@@ -553,11 +553,6 @@
               <FilePath>..\STDOS\App\Alarm.cpp</FilePath>
             </File>
             <File>
-              <FileName>AT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\AT.cpp</FilePath>
-            </File>
-            <File>
               <FileName>BlinkPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\App\BlinkPort.cpp</FilePath>
@@ -581,11 +576,6 @@
               <FileName>CommandPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\App\CommandPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Dimmer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Dimmer.cpp</FilePath>
             </File>
             <File>
               <FileName>FlushPort.cpp</FileName>
@@ -773,11 +763,6 @@
               <FilePath>..\STDOS\Device\Power.cpp</FilePath>
             </File>
             <File>
-              <FileName>Proxy.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Proxy.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ProxyConfig.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\ProxyConfig.cpp</FilePath>
@@ -858,119 +843,14 @@
               <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>74HC165.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\74HC165.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>74HC165Monitor.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\74HC165Monitor.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>A67.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\A67.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT24CXX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>AT45DB.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BH1750.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\BH1750.cpp</FilePath>
-            </File>
-            <File>
               <FileName>BufferPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\BufferPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DHT11.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\DHT11.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Enc28j60.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Enc28j60.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GSM07.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\GSM07.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HX711.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\HX711.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>JTW8953.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\JTW8953.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NRF24L01.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\NRF24L01.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PMS5003.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\PMS5003.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SHT30.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\SHT30.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ShunCom.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\ShunCom.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sim900A.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Sim900A.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>UBlox.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\UBlox.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W5500.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\W5500.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Esp8266.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Esp8266\Esp8266.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EspSocket.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Esp8266\EspSocket.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EspTcp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Esp8266\EspTcp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EspUdp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Esp8266\EspUdp.cpp</FilePath>
             </File>
             <File>
               <FileName>WaitExpect.cpp</FileName>
@@ -1021,58 +901,6 @@
         </Group>
         <Group>
           <GroupName>Message</GroupName>
-          <Files>
-            <File>
-              <FileName>BinaryPair.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\BinaryPair.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Controller.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\Controller.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DataStore.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\DataStore.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Json.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\Json.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Message.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\Message.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MessageBase.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\MessageBase.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pair.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\Pair.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ProxyFactory.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\ProxyFactory.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>UTPacket.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\UTPacket.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WeakStore.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\WeakStore.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Net</GroupName>
@@ -1081,71 +909,6 @@
               <FileName>ITransport.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Blu40.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Blu40.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Dhcp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Dhcp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DNS.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\DNS.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Ethernet.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Ethernet.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HttpClient.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\HttpClient.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IPAddress.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\IPAddress.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IPEndPoint.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\IPEndPoint.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ISocketHost.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ISocketHost.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MacAddress.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\MacAddress.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NetUri.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\NetUri.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NetworkInterface.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\NetworkInterface.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Socket.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Socket.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Zigbee.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Zigbee.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1211,178 +974,12 @@
         </Group>
         <Group>
           <GroupName>TinyIP</GroupName>
-          <Files>
-            <File>
-              <FileName>Arp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyIP\Arp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Icmp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyIP\Icmp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Tcp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyIP\Tcp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TinyIP.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyIP\TinyIP.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Udp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyIP\Udp.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>TinyNet</GroupName>
-          <Files>
-            <File>
-              <FileName>DataMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\DataMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>JoinMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\JoinMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PingMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\PingMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Tiny.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\Tiny.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TinyClient.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\TinyClient.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TinyConfig.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\TinyConfig.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TinyController.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\TinyController.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TinyMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\TinyMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TinyServer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\TinyServer.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>TokenNet</GroupName>
-          <Files>
-            <File>
-              <FileName>Device.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\Device.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DeviceBody.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\DeviceBody.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DeviceMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\DeviceMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DevicesManagement.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\DevicesManagement.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ErrorMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\ErrorMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Gateway.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\Gateway.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HelloMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\HelloMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>LoginMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\LoginMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RegisterMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\RegisterMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Token.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\Token.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenClient.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenClient.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenConfig.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenConfig.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenController.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenController.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenDataMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenDataMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenDevice.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenDevice.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenPingMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenPingMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenSession.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenSession.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
       </Groups>
     </Target>
@@ -1933,11 +1530,6 @@
               <FilePath>..\STDOS\App\Alarm.cpp</FilePath>
             </File>
             <File>
-              <FileName>AT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\AT.cpp</FilePath>
-            </File>
-            <File>
               <FileName>BlinkPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\App\BlinkPort.cpp</FilePath>
@@ -1961,11 +1553,6 @@
               <FileName>CommandPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\App\CommandPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Dimmer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Dimmer.cpp</FilePath>
             </File>
             <File>
               <FileName>FlushPort.cpp</FileName>
@@ -2153,11 +1740,6 @@
               <FilePath>..\STDOS\Device\Power.cpp</FilePath>
             </File>
             <File>
-              <FileName>Proxy.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Proxy.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ProxyConfig.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\ProxyConfig.cpp</FilePath>
@@ -2238,119 +1820,14 @@
               <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>74HC165.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\74HC165.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>74HC165Monitor.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\74HC165Monitor.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>A67.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\A67.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT24CXX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>AT45DB.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BH1750.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\BH1750.cpp</FilePath>
-            </File>
-            <File>
               <FileName>BufferPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\BufferPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DHT11.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\DHT11.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Enc28j60.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Enc28j60.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GSM07.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\GSM07.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HX711.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\HX711.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>JTW8953.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\JTW8953.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NRF24L01.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\NRF24L01.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PMS5003.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\PMS5003.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SHT30.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\SHT30.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ShunCom.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\ShunCom.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sim900A.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Sim900A.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>UBlox.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\UBlox.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W5500.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\W5500.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Esp8266.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Esp8266\Esp8266.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EspSocket.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Esp8266\EspSocket.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EspTcp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Esp8266\EspTcp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EspUdp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Esp8266\EspUdp.cpp</FilePath>
             </File>
             <File>
               <FileName>WaitExpect.cpp</FileName>
@@ -2401,58 +1878,6 @@
         </Group>
         <Group>
           <GroupName>Message</GroupName>
-          <Files>
-            <File>
-              <FileName>BinaryPair.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\BinaryPair.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Controller.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\Controller.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DataStore.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\DataStore.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Json.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\Json.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Message.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\Message.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MessageBase.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\MessageBase.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pair.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\Pair.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ProxyFactory.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\ProxyFactory.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>UTPacket.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\UTPacket.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WeakStore.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Message\WeakStore.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Net</GroupName>
@@ -2461,71 +1886,6 @@
               <FileName>ITransport.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Blu40.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Blu40.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Dhcp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Dhcp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DNS.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\DNS.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Ethernet.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Ethernet.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HttpClient.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\HttpClient.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IPAddress.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\IPAddress.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IPEndPoint.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\IPEndPoint.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ISocketHost.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ISocketHost.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MacAddress.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\MacAddress.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NetUri.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\NetUri.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NetworkInterface.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\NetworkInterface.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Socket.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Socket.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Zigbee.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\Zigbee.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2591,178 +1951,12 @@
         </Group>
         <Group>
           <GroupName>TinyIP</GroupName>
-          <Files>
-            <File>
-              <FileName>Arp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyIP\Arp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Icmp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyIP\Icmp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Tcp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyIP\Tcp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TinyIP.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyIP\TinyIP.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Udp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyIP\Udp.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>TinyNet</GroupName>
-          <Files>
-            <File>
-              <FileName>DataMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\DataMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>JoinMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\JoinMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PingMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\PingMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Tiny.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\Tiny.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TinyClient.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\TinyClient.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TinyConfig.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\TinyConfig.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TinyController.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\TinyController.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TinyMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\TinyMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TinyServer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TinyNet\TinyServer.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>TokenNet</GroupName>
-          <Files>
-            <File>
-              <FileName>Device.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\Device.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DeviceBody.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\DeviceBody.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DeviceMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\DeviceMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DevicesManagement.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\DevicesManagement.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ErrorMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\ErrorMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Gateway.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\Gateway.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HelloMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\HelloMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>LoginMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\LoginMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RegisterMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\RegisterMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Token.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\Token.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenClient.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenClient.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenConfig.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenConfig.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenController.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenController.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenDataMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenDataMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenDevice.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenDevice.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenPingMessage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenPingMessage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TokenSession.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\TokenNet\TokenSession.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
       </Groups>
     </Target>
