@@ -717,6 +717,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Version.cpp</FilePath>
             </File>
+            <File>
+              <FileName>TimeCost.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\TimeCost.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2091,6 +2096,11 @@
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Version.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeCost.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\TimeCost.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,6 +1,8 @@
-﻿#ifndef __TokenClient_H__
+#ifndef __TokenClient_H__
 #define __TokenClient_H__
 
+#include "..\Core\Stream.h"
+#include "..\Core\Dictionary.h"
 #include "Kernel\Sys.h"
 #include "TokenNet\TokenConfig.h"
 #include "TokenMessage.h"
