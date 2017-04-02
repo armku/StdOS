@@ -1,6 +1,7 @@
-﻿#ifndef __BinaryPair_H__
+#ifndef __BinaryPair_H__
 #define __BinaryPair_H__
 
+#include "..\Core\Dictionary.h"
 #include "Kernel\Sys.h"
 #include "Pair.h"
 

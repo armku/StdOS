@@ -1,7 +1,8 @@
-﻿#ifndef __RASTER__H__
+#ifndef __RASTER__H__
 #define __RASTER__H__
 
 #include "Kernel\Sys.h"
+#include "..\Core\Stream.h"
 
 #pragma pack(push)
 #pragma pack(1)

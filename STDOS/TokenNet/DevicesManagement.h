@@ -1,6 +1,7 @@
-﻿#ifndef __DevMgmt_H__
+#ifndef __DevMgmt_H__
 #define __DevMgmt_H__
 
+#include "..\Core\List.h"
 #include "Kernel\Sys.h"
 #include "Device.h"
 

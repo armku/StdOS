@@ -1,6 +1,8 @@
-﻿#ifndef __DataStore_H__
+#ifndef __DataStore_H__
 #define __DataStore_H__
 
+#include "..\Core\List.h"
+#include "..\Core\ByteArray.h"
 class IDataPort;
 
 // 数据存储适配器

@@ -15,7 +15,7 @@ SerialPort::SerialPort()
     Init();
 }
 
-SerialPort::SerialPort(COM_Def index, int baudRate, byte parity, byte dataBits, byte stopBits)
+SerialPort::SerialPort(byte index, int baudRate, byte parity, byte dataBits, byte stopBits)
 {
     Init();
     Init(index, baudRate, parity, dataBits, stopBits);

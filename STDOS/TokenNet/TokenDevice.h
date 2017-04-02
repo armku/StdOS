@@ -1,10 +1,11 @@
-﻿#ifndef __TokenDevice_H__
+#ifndef __TokenDevice_H__
 #define __TokenDevice_H__
 
 #include "Kernel\Sys.h"
 #include "TokenNet\TokenConfig.h"
 #include "TokenMessage.h"
 #include "HelloMessage.h"
+#include "TokenClient.h"
 
 
 // 微网客户端

@@ -1,8 +1,9 @@
-﻿#ifndef __ACZero_H__
+#ifndef __ACZero_H__
 #define __ACZero_H__
 
 #include "Kernel\TTime.h"
 #include "Device\Port.h"
+#include "..\Core\TimeCost.h"
 
 // 交流过零检测
 class ACZero

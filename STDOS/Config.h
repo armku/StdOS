@@ -1,6 +1,7 @@
-﻿#ifndef __Config_H__
+#ifndef __Config_H__
 #define __Config_H__
 
+#include "..\Core\Stream.h"
 #include "Kernel\Sys.h"
 #include "Storage\Storage.h"
 

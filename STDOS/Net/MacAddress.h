@@ -1,6 +1,7 @@
 #ifndef _MacAddress_H_
 #define _MacAddress_H_
 
+#include "..\Core\SString.h"
 class Buffer;
 
 // Macµÿ÷∑

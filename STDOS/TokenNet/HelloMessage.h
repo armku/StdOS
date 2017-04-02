@@ -1,6 +1,7 @@
-﻿#ifndef __HelloMessage_H__
+#ifndef __HelloMessage_H__
 #define __HelloMessage_H__
 
+#include "..\Core\Stream.h"
 #include "Message\MessageBase.h"
 #include "Net\NetUri.h"
 

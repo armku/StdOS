@@ -2,6 +2,7 @@
 #define _SmartOS_DNS_H_
 
 #include "Net\ITransport.h"
+#include "Net\NetworkInterface.h"
 
 // DNS–≠“È
 class DNS

@@ -2,6 +2,7 @@
 #define _Ethernet_H_
 
 #include "Kernel\Sys.h"
+#include "..\Net\MacAddress.h"
 
 // TCP/IP协议头部结构体
 

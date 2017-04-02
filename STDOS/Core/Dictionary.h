@@ -1,6 +1,9 @@
 #ifndef _Dictionary_H_
 #define _Dictionary_H_
 
+#include "..\Core\List.h"
+#include "..\Core\SString.h"
+
 // 字典。仅用于存储指针。
 // 内置两个List用于存储键值集合，添加删除时对它们进行同步操作
 class IDictionary

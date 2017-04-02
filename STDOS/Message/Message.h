@@ -1,6 +1,7 @@
-﻿#ifndef __Message_H__
+#ifndef __Message_H__
 #define __Message_H__
 
+#include "..\Core\Stream.h"
 #include "Kernel\Sys.h"
 
 // 消息基类

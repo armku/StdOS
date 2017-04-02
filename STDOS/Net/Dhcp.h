@@ -1,6 +1,8 @@
 #ifndef _TinyIP_DHCP_H_
 #define _TinyIP_DHCP_H_
 
+#include "..\Core\Buffer.h"
+#include "..\Core\Stream.h"
 // DHCP–≠“È
 class Dhcp
 {

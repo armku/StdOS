@@ -1,10 +1,11 @@
-﻿#ifndef _Token_H_
+#ifndef _Token_H_
 #define _Token_H_
 
 #include "Kernel\Sys.h"
 #include "Net\ITransport.h"
 #include "Net\Socket.h"
 #include "Message\DataStore.h"
+#include "..\Platform\Pin.h"
 
 #include "TokenNet\TokenClient.h"
 #include "TinyNet\TinyServer.h"

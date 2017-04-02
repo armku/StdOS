@@ -1,9 +1,10 @@
-﻿#ifndef _Tiny_H_
+#ifndef _Tiny_H_
 #define _Tiny_H_
 
 #include "Kernel\Sys.h"
 #include "Device\Power.h"
 #include "Net\ITransport.h"
+#include "..\Platform\Pin.h"
 
 #include "TinyNet\TinyClient.h"
 

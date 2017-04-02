@@ -183,7 +183,7 @@ void TSys::Delay(uint us)
     }
 }
 
-TSys::TSys(uint clock, COM_Def messagePort)
+TSys::TSys(uint clock, byte messagePort)
 {
     this->Clock = clock;
     this->MessagePort = messagePort;

@@ -8,13 +8,9 @@
 #include "TTime.h"
 #include "Delegate.h"
 #include "SString.h"
+#include "..\Platform\Pin.h"
 
 /* 串口定义 */
-
-typedef enum
-{
-    COM1 = 0, COM2, COM3, COM4, COM5, COM_NONE = 0XFF
-} COM_Def; //端口号
 typedef enum
 {
     AIN = 0x0,  //模拟输入 
@@ -29,14 +25,6 @@ typedef enum
  
 #define STM32F1    //使用STM32F1系列单片机
 /* 针脚 ------------------------------------------------------------------*/
-//引脚定义
-typedef enum
-{
-    PA0, PA1, PA2, PA3, PA4, PA5, PA6, PA7, PA8, PA9, PA10, PA11, PA12, PA13, PA14, PA15, PB0, PB1, PB2, PB3, PB4, PB5, PB6, PB7, PB8, PB9, PB10, PB11, PB12, PB13, PB14, PB15, PC0,
-        PC1, PC2, PC3, PC4, PC5, PC6, PC7, PC8, PC9, PC10, PC11, PC12, PC13, PC14, PC15, PD0, PD1, PD2, PD3, PD4, PD5, PD6, PD7, PD8, PD9, PD10, PD11, PD12, PD13, PD14, PD15, PE0,
-        PE1, PE2, PE3, PE4, PE5, PE6, PE7, PE8, PE9, PE10, PE11, PE12, PE13, PE14, PE15, PF0, PF1, PF2, PF3, PF4, PF5, PF6, PF7, PF8, PF9, PF10, PF11, PF12, PF13, PF14, PF15, PG0,
-        PG1, PG2, PG3, PG4, PG5, PG6, PG7, PG8, PG9, PG10, PG11, PG12, PG13, PG14, PG15, P0 = 0XFFFF
-} Pin;
 #ifdef DEBUG
 
 void assert_failed2(cstring msg, cstring file, unsigned int line);
@@ -59,7 +47,7 @@ void assert_failed2(cstring msg, cstring file, unsigned int line);
 class TSys: public Object
 {
     public:
-        TSys(uint clock = 72000000, COM_Def messagePort = COM1);
+        TSys(uint clock = 72000000, byte messagePort = COM1);
         void Init(); //初始化
         void Start(); //启动系统任务调度，该函数内部为死循环。
         void Stop();
@@ -80,7 +68,7 @@ class TSys: public Object
         UInt64 StartTime; //系统启动时间
         ushort FlashSize;
         ushort RamSize;
-        COM_Def MessagePort; // 指定printf输出的串口
+        byte MessagePort; // 指定printf输出的串口
         byte Inited; //串口用参数
         byte ID[12];
         uint CPUID;

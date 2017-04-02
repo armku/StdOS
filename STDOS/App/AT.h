@@ -1,5 +1,8 @@
-﻿#ifndef __AT_H__
+#ifndef __AT_H__
 #define __AT_H__
+#include "..\Core\SString.h"
+#include "..\Platform\Pin.h"
+#include "..\Net\ITransport.h"
 
 // GPRS的AT指令集 GSM 07.07
 class AT

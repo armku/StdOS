@@ -1,6 +1,8 @@
 #ifndef _JTW8953_H_
 #define _JTW8953_H_
 
+#include "..\Core\Buffer.h"
+
 class I2C;
 class InputPort;
 

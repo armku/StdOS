@@ -1,6 +1,7 @@
-﻿#ifndef __TokenMessage_H__
+#ifndef __TokenMessage_H__
 #define __TokenMessage_H__
 
+#include "..\Core\Stream.h"
 #include "Message\Message.h"
 
 enum ErrorCodeType :byte

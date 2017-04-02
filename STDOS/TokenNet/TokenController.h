@@ -1,7 +1,8 @@
-﻿#ifndef __TokenController_H__
+#ifndef __TokenController_H__
 #define __TokenController_H__
 
 #include "Kernel\Sys.h"
+#include "..\Core\Stream.h"
 #include "Net\ITransport.h"
 #include "Net\Socket.h"
 
