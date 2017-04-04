@@ -1,4 +1,4 @@
-#include "Modbus.h"
+#include "Modbus1.h"
 #include "SerialPort.h"
 #include "string.h"
 #include "Util.h"
@@ -7,7 +7,7 @@ byte reginbuf[200]; //输入寄存器
 ushort RegInputu16[40];//输入寄存器
 ushort RegHoilding16[(22*16+8*12+4+16+5)*2];
 
-void ModbusSlave::Process(Buffer &bs, void *param)
+void ModbusSlave1::Process(Buffer &bs, void *param)
 {
     SerialPort *sp = (SerialPort*)param;
     debug_printf("%s 收到：[%d]", sp->Name, bs.Length());
@@ -34,7 +34,7 @@ void ModbusSlave::Process(Buffer &bs, void *param)
 }
 
 //处理数据帧
-void ModbusSlave::DealFrame(Buffer &bs, void *param)
+void ModbusSlave1::DealFrame(Buffer &bs, void *param)
 {
     SerialPort *sp = (SerialPort*)param;
     debug_printf("address:%d length:%d\r\n", this->Entity.address, this->Entity.reglength);
@@ -69,7 +69,7 @@ void ModbusSlave::DealFrame(Buffer &bs, void *param)
 /// </summary>
 /// <param name="byteData">输入参数：CRC值</param>
 /// <returns>返回值：byte[]，2位，0：地位，1：高位</returns>
-ushort ModbusSlave::GetCRC(byte *byteData, int len)
+ushort ModbusSlave1::GetCRC(byte *byteData, int len)
 {
     ushort wCrc = 0xFFFF;
     for (int i = 0; i < len; i++)
@@ -95,7 +95,7 @@ ushort ModbusSlave::GetCRC(byte *byteData, int len)
 //完整的一帧数据
 //demo:01 03 00 00 00 28 45 D4 
 //11 04 00 08 00 02 F2 99
-bool ModbusSlave::IsFrameOK(Buffer &bs)
+bool ModbusSlave1::IsFrameOK(Buffer &bs)
 {
     ushort crc = 0;
     ushort crcrcv = 0;
@@ -118,7 +118,7 @@ bool ModbusSlave::IsFrameOK(Buffer &bs)
 }
 
 
-ModbusEntity ModbusSlave::Process(ModbusEntity entity)
+ModbusEntity1 ModbusSlave1::Process(ModbusEntity1 entity)
 {
     // 如果是广播消息，则设置主站ID，便于其他人知道我的主站ID    
     switch (entity.Function)

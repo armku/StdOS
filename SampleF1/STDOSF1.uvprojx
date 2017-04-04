@@ -533,9 +533,9 @@
           <GroupName>Modbus</GroupName>
           <Files>
             <File>
-              <FileName>ModBus.cpp</FileName>
+              <FileName>ModBus1.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Modbus\ModBus.cpp</FilePath>
+              <FilePath>..\STDOS\Modbus\ModBus1.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1510,9 +1510,9 @@
           <GroupName>Modbus</GroupName>
           <Files>
             <File>
-              <FileName>ModBus.cpp</FileName>
+              <FileName>ModBus1.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Modbus\ModBus.cpp</FilePath>
+              <FilePath>..\STDOS\Modbus\ModBus1.cpp</FilePath>
             </File>
           </Files>
         </Group>

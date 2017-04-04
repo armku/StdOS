@@ -3,7 +3,7 @@
 #include "Type.h"
 #include "Buffer.h"
 
-typedef enum MBFunction
+typedef enum MBFunction1
 {
     /// <summary>读取线圈状态。取得一组逻辑线圈的当前状态（ON/OFF) </summary>
     ReadCoils = 1, 
@@ -29,7 +29,7 @@ typedef enum MBFunction
     ReportIdentity = 17, 
 } MBFunction;
 /// <summary>Modbus实体</summary>
-class ModbusEntity
+class ModbusEntity1
 {
 	public:
 		/// <summary>主机地址。用于485编码</summary>
@@ -47,23 +47,23 @@ class ModbusEntity
         /// <param name="offset">偏移</param>
         /// <param name="count">数量</param>
         /// <returns></returns>
-        ModbusEntity Parse(byte *data, int offset = 0, int count = -1);
+        ModbusEntity1 Parse(byte *data, int offset = 0, int count = -1);
 		/// <summary>转为字节数组</summary>
         /// <returns></returns>
         byte* ToArray();
 };
 
-class ModbusSlave
+class ModbusSlave1
 {
 	public:
 		byte id;//本机ID
 		void Process(Buffer &bs, void *para);//处理数据
 		bool IsFrameOK(Buffer& bs);//完整的一帧数据
 		void DealFrame(Buffer&bs,void *param);//处理数据帧
-		ModbusEntity Entity;
+		ModbusEntity1 Entity;
 	protected:
-		virtual ModbusEntity Process(ModbusEntity entity);
+		virtual ModbusEntity1 Process(ModbusEntity1 entity);
 		ushort GetCRC(byte *byteData, int len);
 };
-extern ushort RegInputu16[];//输入寄存器
-extern ushort RegHoilding16[];//保持寄存器
+extern ushort RegInputu161[];//输入寄存器
+extern ushort RegHoilding161[];//保持寄存器
