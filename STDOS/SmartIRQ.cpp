@@ -1,4 +1,5 @@
 #include "SmartIRQ.h"
+#include "Sys.h"
 #ifdef __cplusplus
     extern "C"
     {
@@ -10,7 +11,7 @@
     #ifdef __cplusplus
     }
 #endif 
-SmartIRQ::SmartIRQ()
+SmartIRQ::SmartIRQ(bool enable)
 {
     INTX_DISABLE();
 }
