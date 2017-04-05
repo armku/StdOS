@@ -250,6 +250,7 @@ void TaskScheduler::ShowStatus(void *param)
     RunTimesAvg /= ts->Count;
     //SRAM   0X20000000-0X3FFFFFFF ¹²512MB
     //SCODE  0X00000000-0X1FFFFFFF ¹²512MB
+	debug_printf("\r\n");
     debug_printf("Task::%s [%llu]", "ShowStatus", runCounts);
     debug_printf("¸ºÔØ %0.2f%% ", RunTimes / 10 / curms);
     if (RunTimesAvg >= 1000)

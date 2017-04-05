@@ -1,104 +1,388 @@
-#include "ByteArray.h"
 #include "Stream.h"
 #include <stdio.h>
 
-#if 0
-//数据流容量
-uint Stream::Capacity() const
+void Stream::Init(void *buf, int len)
 {
-    return 0;
+    this->_Buffer = (byte*)buf;
+    this->_Capacity = len;
+    this->_Position = 0;
+    this->Little = true;
+    this->CanWrite = true;
+    this->CanResize = false;
 }
-#endif
-#if 0
-void Stream::SetCapacity(uint len){}
-#endif
-#if 0
-//当前位置
-uint Stream::Position() const
+
+bool Stream::CheckRemain(int count)
 {
-    return 0;
+    if ((this->_Capacity - this->_Position) >= count)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
-#endif
-//设置位置
+
+Stream::Stream(void *buf, int len)
+{
+    this->Init(buf, len);
+}
+
+Stream::Stream(const void *buf, int len)
+{
+    this->Init((void*)buf, len);
+}
+
+Stream::Stream(Buffer &bs)
+{
+    this->Init(bs.GetBuffer(), bs.Length());
+}
+
+Stream::Stream(const Buffer &bs)
+{
+    this->Init((void*)(bs.GetBuffer()), bs.Length());
+}
+
+Stream::~Stream(){
+
+}
+int Stream::Capacity()const
+{
+    return this->_Capacity;
+}
+
+void Stream::SetCapacity(int len)
+{
+    if (len <= this->_Capacity)
+    {
+        this->_Capacity = len;
+    }
+}
+
+int Stream::Position()const
+{
+    return this->_Position;
+}
+
 bool Stream::SetPosition(int p)
 {
+    if (p < this->_Capacity)
+    {
+        this->_Position = p;
+        return true;
+    }
     return false;
 }
-#if 0
-//余下的有效数据流长度，0表示已经到达终点
-uint Stream::Remain() const
+
+int Stream::Remain()const
 {
-    return 0;
+    return this->_Capacity - this->_Position - 1;
 }
-#endif
-//尝试前后移动一段距离，返回成功或者失败。如果失败，不移动游标
+
 bool Stream::Seek(int offset)
 {
+    int tmp = offset + this->_Position;
+    if ((tmp >= 0) && (tmp < this->_Capacity))
+    {
+        this->_Position += offset;
+        return true;
+    }
     return false;
 }
 
-//数据流指针，注意：扩容后指针会改变
-byte *Stream::GetBuffer() const
+byte *Stream::GetBuffer()const
 {
-    return NULL;
+    return this->_Buffer;
 }
 
-//数据流udagnqian位置指针。注意：扩容后指针会改变
-byte *Stream::Current() const
+byte *Stream::Current()const
 {
-    return NULL;
+    return this->_Buffer + this->_Position;
 }
-#if 0
-//读取7为压缩编码整数
-uint Stream::ReadEncodeInt()
+
+//int Stream::ReadEncodeInt()
+//{
+//	return 0;	
+//}
+// 读取数据到字节数组，由字节数组指定大小。不包含长度前缀
+int Stream::Read(Buffer &bs)
 {
-    return 0;
+    if (this->_Capacity <= bs.Length())
+    {
+        for (int i = 0; i < this->_Capacity; i++)
+        {
+            bs[i] = this->_Buffer[i];
+        }
+        return this->_Capacity;
+    }
+    else
+    {
+        for (int i = 0; i < bs.Length(); i++)
+        {
+            bs[i] = this->_Buffer[i];
+        }
+        return bs.Length();
+    }
 }
-#endif
-#if 0
-//读取数据到字节数组，由于字节数组指定大小，不包含长度前缀
-uint Stream::Read(Buffer &bs)
-{
-	int len=bs.Length();
-	if(len>this->capcity)
-	{
-		len=this->capcity;
-	}
-	for(int i=0;i<len;i++)
-	{
-		this->pbuf[i]=bs[i];
-	}
-    return 0;
-}
-#endif
-#if 0
-//写入7位压缩编码整数
-uint Stream::WriteEncodeInt(uint value)
-{
-    return 0;
-}
-#endif
-//把字节数组的数据写入到数据流，不包含长度前缀
+
+//int Stream::WriteEncodeInt(int value)
+//{
+//	return 0;
+//}
 bool Stream::Write(const Buffer &bs)
 {
-	return false;
+    if (this->_Capacity >= bs.Length())
+    {
+        for (int i = 0; i < bs.Length(); i++)
+        {
+            this->_Buffer[i] = bs[i];
+        }
+
+        return true;
+    }
+    else
+    {
+        for (int i = 0; i < this->_Capacity; i++)
+        {
+            this->_Buffer[i] = bs[i];
+        }
+        return false;
+    }
 }
-#if 0
-//从数据流读取变长数据到字节数组。以压缩整数开头表示长度
-uint Stream::ReadArray(Buffer &bs)
+
+int Stream::ReadArray(Buffer &bs)
 {
+    //未实现
     return 0;
 }
-#endif
-#if 0
-ByteArray Stream::ReadArray(int count)
+
+//ByteArray Stream::ReadArray(int count)
+//{
+//	//未实现
+//	return nullptr;
+//}
+//bool Stream::WriteArray(const Buffer& bs)
+//{
+//	
+//	return false;
+//}
+//ByteArray Stream::ReadArray()
+//{
+//}
+//	String Stream::ReadString()
+//{
+//}
+
+int Stream::ReadByte()
 {
-	byte buf[3];
-    return ByteArray(buf,3);
+    int ret = 0;
+    if (this->_Position < this->Length)
+    {
+        ret = this->_Buffer[this->_Position];
+    }
+    return ret;
 }
-#endif
-//把字节数组作为变长数据写入到数据流。以压缩整数开头表示长度
-bool Stream::WriteArray(const Buffer &bs)
+
+ushort Stream::ReadUInt16()
 {
+    ushort ret = 0;
+    if (this->_Position < this->Length - 1)
+    {
+        if (this->Little)
+        {
+            ret = this->_Buffer[this->_Position + 0];
+            ret <<= 8;
+            ret |= this->_Buffer[this->_Position + 1];
+        }
+        else
+        {
+            ret = this->_Buffer[this->_Position + 1];
+            ret <<= 8;
+            ret |= this->_Buffer[this->_Position + 0];
+        }
+    }
+    return ret;
+}
+
+uint Stream::ReadUInt32()
+{
+    uint ret = 0;
+    if (this->_Position < this->Length - 3)
+    {
+        if (this->Little)
+		{
+			ret = this->_Buffer[this->_Position + 0];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 1];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 2];
+            ret <<= 8;
+            ret |= this->_Buffer[this->_Position+ 3];
+		}
+        else
+        {
+            ret = this->_Buffer[this->_Position + 3];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 2];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 1];
+            ret <<= 8;
+            ret |= this->_Buffer[this->_Position+ 0];
+        }
+    }
+    return ret;
+}
+
+UInt64 Stream::ReadUInt64()
+{
+    UInt64 ret = 0;
+    if (this->_Position < this->Length - 3)
+    {
+        if (this->Little)
+		{
+			ret = this->_Buffer[this->_Position + 0];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 1];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 2];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 3];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 4];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 5];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 6];
+            ret <<= 8;
+            ret |= this->_Buffer[this->_Position+ 7];
+		}
+        else
+        {
+            ret = this->_Buffer[this->_Position + 7];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 6];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 5];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 4];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 3];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 2];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 1];
+            ret <<= 8;
+            ret |= this->_Buffer[this->_Position+ 0];
+        }
+    }
+    return ret;
+}
+
+bool Stream::Write(byte value)
+{
+    if (this->_Position < this->Length)
+    {
+        this->_Buffer[this->_Position] = value;
+        return true;
+    }
     return false;
 }
+
+bool Stream::Write(ushort value)
+{
+    if (this->_Position < this->Length - 1)
+    {
+        if (this->Little)
+		{
+			this->_Buffer[this->_Position + 1] = value &0XFF;
+            this->_Buffer[this->_Position + 0] = (value >> 8) &0XFF;
+		}
+        else
+        {
+            this->_Buffer[this->_Position + 0] = value &0XFF;
+            this->_Buffer[this->_Position + 1] = (value >> 8) &0XFF;
+        }
+        return true;
+    }
+    return false;
+}
+
+bool Stream::Write(uint value)
+{
+    if (this->_Position < this->Length - 3)
+    {
+        if (this->Little)
+		{	
+			this->_Buffer[this->_Position + 3] = value &0xff;
+            this->_Buffer[this->_Position + 2] = (value >> 8) &0xff;
+            this->_Buffer[this->_Position + 1] = (value >> 16) &0xff;
+            this->_Buffer[this->_Position + 0] = (value >> 24) &0xff;
+		}
+        else
+        {
+            this->_Buffer[this->_Position + 0] = value &0xff;
+            this->_Buffer[this->_Position + 1] = (value >> 8) &0xff;
+            this->_Buffer[this->_Position + 2] = (value >> 16) &0xff;
+            this->_Buffer[this->_Position + 3] = (value >> 24) &0xff;
+        }
+
+        return true;
+    }
+    return false;
+}
+
+bool Stream::Write(UInt64 value)
+{
+    if (this->_Position < this->Length - 7)
+    {
+        if (this->Little)
+		{
+			this->_Buffer[this->_Position + 7] = value &0xff;
+            this->_Buffer[this->_Position + 6] = (value >> 8) &0xff;
+            this->_Buffer[this->_Position + 5] = (value >> 16) &0xff;
+            this->_Buffer[this->_Position + 4] = (value >> 24) &0xff;
+            this->_Buffer[this->_Position + 3] = (value >> 32) &0xff;
+            this->_Buffer[this->_Position + 2] = (value >> 40) &0xff;
+            this->_Buffer[this->_Position + 1] = (value >> 48) &0xff;
+            this->_Buffer[this->_Position + 0] = (value >> 56) &0xff;
+		}
+        else
+        {
+            this->_Buffer[this->_Position + 0] = value &0xff;
+            this->_Buffer[this->_Position + 1] = (value >> 8) &0xff;
+            this->_Buffer[this->_Position + 2] = (value >> 16) &0xff;
+            this->_Buffer[this->_Position + 3] = (value >> 24) &0xff;
+            this->_Buffer[this->_Position + 4] = (value >> 32) &0xff;
+            this->_Buffer[this->_Position + 5] = (value >> 40) &0xff;
+            this->_Buffer[this->_Position + 6] = (value >> 48) &0xff;
+            this->_Buffer[this->_Position + 7] = (value >> 56) &0xff;
+        }
+
+        return true;
+    }
+    return false;
+}
+
+//	byte* Stream::ReadBytes(int count)
+//{
+//}
+
+//	// 读取一个字节，不移动游标。如果没有可用数据，则返回-1
+//	int Stream::Peek() const
+//{
+//}
+//bool MemoryStream::CheckRemain(int count)
+//{
+//}
+//// 分配指定大小的数据流
+//MemoryStream::MemoryStream(int len )
+//	{
+//	}
+//	// 使用缓冲区初始化数据流，支持自动扩容
+//	MemoryStream::MemoryStream(void* buf, int len)
+//	{
+//	}
+//	// 销毁数据流
+//	MemoryStream:: ~MemoryStream()
+//	{
+//	}
