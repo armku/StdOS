@@ -490,11 +490,6 @@
               <FilePath>..\STDOS\NewDelete.cpp</FilePath>
             </File>
             <File>
-              <FileName>SmartIRQ.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\SmartIRQ.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Util.cpp</FilePath>
@@ -1465,11 +1460,6 @@
               <FileName>NewDelete.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\NewDelete.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SmartIRQ.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\SmartIRQ.cpp</FilePath>
             </File>
             <File>
               <FileName>Util.cpp</FileName>

@@ -9,7 +9,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "TTime.h"
 #include "stm32f10x.h"
 #include "TaskScheduler.h"
-#include "SmartIrq.h"
+#include "Sys.h"
 #include <string.h>
 #include "Array.h"
 #include "DateTime.h"
@@ -457,4 +457,24 @@ ushort TSys::Crc16(const void *buf, uint len, ushort crc)
         crc = (ushort)(c_CRC16Table[((b >> 4) ^ crc) &0x0F] ^ (crc >> 4));
     }
     return crc;
+}
+#ifdef __cplusplus
+    extern "C"
+    {
+    #endif 
+    //开启所有中断
+    void INTX_ENABLE(void);
+    //关闭所有中断
+    void INTX_DISABLE(void);
+    #ifdef __cplusplus
+    }
+#endif 
+SmartIRQ::SmartIRQ(bool enable)
+{
+    INTX_DISABLE();
+}
+
+SmartIRQ::~SmartIRQ()
+{
+    INTX_ENABLE();
 }
