@@ -81,7 +81,6 @@ void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte
     Name[4] = 0;
 }
 
-#define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
 // ´ò¿ª´®¿Ú
 bool SerialPort::OnOpen()
 {
