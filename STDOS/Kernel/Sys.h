@@ -70,19 +70,7 @@ class SystemConfig;
 #include "SString.h"
 #include "..\Platform\Pin.h"
 
-/* 串口定义 */
-typedef enum
-{
-    AIN = 0x0,  //模拟输入 
-    INPUT = 0x04,  //输入
-    INPUT_PD = 0x28,  //浮空输入
-    INPUT_PU = 0x48,  //推挽式输入
-    OUTPUT_OD = 0x14,  //开漏输出
-    OUTPUT_PP = 0x10,  //推挽式输出
-    AF_OD = 0x1C,  //开漏复用输出
-    AF_PP = 0x18  //推挽复用输出
-} PIN_MODE;
- 
+
 #define STM32F1    //使用STM32F1系列单片机
 /* 针脚 ------------------------------------------------------------------*/
 #ifdef DEBUG
