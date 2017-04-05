@@ -190,15 +190,15 @@ ushort Stream::ReadUInt16()
     {
         if (this->Little)
         {
-            ret = this->_Buffer[this->_Position + 1];
+            ret = this->_Buffer[this->_Position + 0];
             ret <<= 8;
-            ret |= this->_Buffer[this->_Position];
+            ret |= this->_Buffer[this->_Position + 1];
         }
         else
         {
-            ret = this->_Buffer[this->_Position];
+            ret = this->_Buffer[this->_Position + 1];
             ret <<= 8;
-            ret |= this->_Buffer[this->_Position + 1];
+            ret |= this->_Buffer[this->_Position + 0];
         }
     }
     return ret;
@@ -209,13 +209,26 @@ uint Stream::ReadUInt32()
     uint ret = 0;
     if (this->_Position < this->Length - 3)
     {
-        ret = this->_Buffer[this->_Position + 3];
-        ret <<= 8;
-        ret = this->_Buffer[this->_Position + 2];
-        ret <<= 8;
-        ret = this->_Buffer[this->_Position + 1];
-        ret <<= 8;
-        ret |= this->_Buffer[this->_Position];
+        if (this->Little)
+		{
+			ret = this->_Buffer[this->_Position + 0];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 1];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 2];
+            ret <<= 8;
+            ret |= this->_Buffer[this->_Position+ 3];
+		}
+        else
+        {
+            ret = this->_Buffer[this->_Position + 3];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 2];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 1];
+            ret <<= 8;
+            ret |= this->_Buffer[this->_Position+ 0];
+        }
     }
     return ret;
 }
@@ -225,21 +238,42 @@ UInt64 Stream::ReadUInt64()
     UInt64 ret = 0;
     if (this->_Position < this->Length - 3)
     {
-        ret = this->_Buffer[this->_Position + 7];
-        ret <<= 8;
-        ret = this->_Buffer[this->_Position + 6];
-        ret <<= 8;
-        ret = this->_Buffer[this->_Position + 5];
-        ret <<= 8;
-        ret = this->_Buffer[this->_Position + 4];
-        ret <<= 8;
-        ret = this->_Buffer[this->_Position + 3];
-        ret <<= 8;
-        ret = this->_Buffer[this->_Position + 2];
-        ret <<= 8;
-        ret = this->_Buffer[this->_Position + 1];
-        ret <<= 8;
-        ret |= this->_Buffer[this->_Position];
+        if (this->Little)
+		{
+			ret = this->_Buffer[this->_Position + 0];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 1];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 2];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 3];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 4];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 5];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 6];
+            ret <<= 8;
+            ret |= this->_Buffer[this->_Position+ 7];
+		}
+        else
+        {
+            ret = this->_Buffer[this->_Position + 7];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 6];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 5];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 4];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 3];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 2];
+            ret <<= 8;
+            ret = this->_Buffer[this->_Position + 1];
+            ret <<= 8;
+            ret |= this->_Buffer[this->_Position+ 0];
+        }
     }
     return ret;
 }
@@ -258,8 +292,16 @@ bool Stream::Write(ushort value)
 {
     if (this->_Position < this->Length - 1)
     {
-        this->_Buffer[this->_Position] = value &0XFF;
-        this->_Buffer[this->_Position + 1] = (value >> 8) &0XFF;
+        if (this->Little)
+		{
+			this->_Buffer[this->_Position + 1] = value &0XFF;
+            this->_Buffer[this->_Position + 0] = (value >> 8) &0XFF;
+		}
+        else
+        {
+            this->_Buffer[this->_Position + 0] = value &0XFF;
+            this->_Buffer[this->_Position + 1] = (value >> 8) &0XFF;
+        }
         return true;
     }
     return false;
@@ -269,10 +311,20 @@ bool Stream::Write(uint value)
 {
     if (this->_Position < this->Length - 3)
     {
-        this->_Buffer[this->_Position] = value &0xff;
-        this->_Buffer[this->_Position + 1] = (value >> 8) &0xff;
-        this->_Buffer[this->_Position + 2] = (value >> 16) &0xff;
-        this->_Buffer[this->_Position + 3] = (value >> 24) &0xff;
+        if (this->Little)
+		{	
+			this->_Buffer[this->_Position + 3] = value &0xff;
+            this->_Buffer[this->_Position + 2] = (value >> 8) &0xff;
+            this->_Buffer[this->_Position + 1] = (value >> 16) &0xff;
+            this->_Buffer[this->_Position + 0] = (value >> 24) &0xff;
+		}
+        else
+        {
+            this->_Buffer[this->_Position + 0] = value &0xff;
+            this->_Buffer[this->_Position + 1] = (value >> 8) &0xff;
+            this->_Buffer[this->_Position + 2] = (value >> 16) &0xff;
+            this->_Buffer[this->_Position + 3] = (value >> 24) &0xff;
+        }
 
         return true;
     }
@@ -283,14 +335,28 @@ bool Stream::Write(UInt64 value)
 {
     if (this->_Position < this->Length - 7)
     {
-        this->_Buffer[this->_Position] = value &0xff;
-        this->_Buffer[this->_Position + 1] = (value >> 8) &0xff;
-        this->_Buffer[this->_Position + 2] = (value >> 16) &0xff;
-        this->_Buffer[this->_Position + 3] = (value >> 24) &0xff;
-        this->_Buffer[this->_Position + 4] = (value >> 32) &0xff;
-        this->_Buffer[this->_Position + 5] = (value >> 40) &0xff;
-        this->_Buffer[this->_Position + 6] = (value >> 48) &0xff;
-        this->_Buffer[this->_Position + 7] = (value >> 56) &0xff;
+        if (this->Little)
+		{
+			this->_Buffer[this->_Position + 7] = value &0xff;
+            this->_Buffer[this->_Position + 6] = (value >> 8) &0xff;
+            this->_Buffer[this->_Position + 5] = (value >> 16) &0xff;
+            this->_Buffer[this->_Position + 4] = (value >> 24) &0xff;
+            this->_Buffer[this->_Position + 3] = (value >> 32) &0xff;
+            this->_Buffer[this->_Position + 2] = (value >> 40) &0xff;
+            this->_Buffer[this->_Position + 1] = (value >> 48) &0xff;
+            this->_Buffer[this->_Position + 0] = (value >> 56) &0xff;
+		}
+        else
+        {
+            this->_Buffer[this->_Position + 0] = value &0xff;
+            this->_Buffer[this->_Position + 1] = (value >> 8) &0xff;
+            this->_Buffer[this->_Position + 2] = (value >> 16) &0xff;
+            this->_Buffer[this->_Position + 3] = (value >> 24) &0xff;
+            this->_Buffer[this->_Position + 4] = (value >> 32) &0xff;
+            this->_Buffer[this->_Position + 5] = (value >> 40) &0xff;
+            this->_Buffer[this->_Position + 6] = (value >> 48) &0xff;
+            this->_Buffer[this->_Position + 7] = (value >> 56) &0xff;
+        }
 
         return true;
     }
