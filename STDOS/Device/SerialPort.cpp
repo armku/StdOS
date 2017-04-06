@@ -4,6 +4,7 @@
 #include "Port.h"
 #include "SerialPort.h"
 #include "TInterrupt.h"
+#include "TTime.h"
 
 #define COM_DEBUG 0
 #define STM32F1XX

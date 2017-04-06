@@ -65,9 +65,6 @@ extern struct HandlerRemap StrBoot;
 
 class SystemConfig;
 
-#include "TTime.h"
-
-
 #define STM32F1    //使用STM32F1系列单片机
 
 class TSys 
