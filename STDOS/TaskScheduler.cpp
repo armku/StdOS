@@ -147,7 +147,7 @@ void TaskScheduler::Stop()
 void TaskScheduler::Execute(uint usMax)
 {
     UInt64 now;
-    now = Time.Current() - Sys.StartTime; // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
+    now = Time.Current(); // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
 
     UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
     UInt64 end = Time.Current() + usMax;

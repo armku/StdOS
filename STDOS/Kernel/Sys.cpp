@@ -30,8 +30,8 @@ void assert_failed2(cstring msg, cstring file, unsigned int line)
 // 任务类
 TaskScheduler *_Scheduler;
 
-// 创建任务，返回任务编号。priority优先级，dueTime首次调度时间us，period调度间隔us，-1表示仅处理一次
-uint TSys::AddTask(Action func, void *param, long dueTime, long period, const char *name)
+// 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
+uint TSys::AddTask(Action func, void* param, int dueTime, int period, cstring name) const
 {
     // 屏蔽中断，否则可能有线程冲突
     SmartIRQ irq;
@@ -44,17 +44,18 @@ uint TSys::AddTask(Action func, void *param, long dueTime, long period, const ch
     return _Scheduler->Add(func, param, dueTime, period, name);
 }
 
-void TSys::RemoveTask(uint taskid)
+void TSys::RemoveTask(uint& taskid) const
 {
     #if 0
         assert_ptr(_Scheduler);
     #endif 
     _Scheduler->Remove(taskid);
 }
-
-void TSys::SetTask(uint taskid, bool onoff, long delaytime)
+// 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
+bool TSys::SetTask(uint taskid, bool enable, int msNextTime) const
 {
-    _Scheduler->SetTask(taskid, onoff, delaytime);
+    _Scheduler->SetTask(taskid, enable, msNextTime);
+	return true;
 }
 
 //启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
@@ -77,15 +78,6 @@ void TSys::Start()
     }
 }
 
-void TSys::StartInternal()
-{
-    _Scheduler->Start();
-}
-
-void TSys::Stop()
-{
-    _Scheduler->Stop();
-}
 
 
 void TimeSleep(uint us)
@@ -141,9 +133,7 @@ void TimeSleep(uint us)
         Time.Sleep(us);
     }
 }
-
-//毫秒级睡眠，常用于业务层杂宁等待一定时间
-void TSys::Sleep(uint ms)
+void TSys::Sleep(int ms) const // 毫秒级延迟
 {
     // 优先使用线程级睡眠
     #if 0
@@ -161,9 +151,7 @@ void TSys::Sleep(uint ms)
         TimeSleep(ms *1000);
     }
 }
-
-//微妙级延迟，常用于高精度外设信号控制
-void TSys::Delay(uint us)
+void TSys::Delay(int us) const // 微秒级延迟
 {
     // 如果延迟微秒数太大，则使用线程级睡眠
     #if 0
@@ -183,31 +171,28 @@ void TSys::Delay(uint us)
     }
 }
 
-TSys::TSys(uint clock, byte messagePort)
+TSys::TSys()
 {
-    this->Clock = clock;
-    this->MessagePort = messagePort;
+	this->Clock = 72000000;
+    this->MessagePort = COM1;
 }
 
-void TSys::Show(bool newLine)const{
 
-}
-//系统启动以来的毫秒数，无符号长整型8字节
-UInt64 TSys::Ms()
+UInt64	 TSys::Ms() const		// 系统启动后的毫秒数
 {
     return Time.Ms();
 }
-
-//系统绝对UTC时间，整型4字节，Unix格式，1970年以来的总秒数。
-uint TSys::Seconds()
+uint	TSys::Seconds() const	// 系统绝对当前时间，秒
 {
     return Time.Seconds();
 }
 
-//异步热重启系统。延迟一定毫秒数执行。
-void TSys::Reboot(uint msDelay){}
-//显示系统信息
-void TSys::ShowInfo()
+// 延迟异步重启
+void TSys::Reboot(int msDelay ) const
+{
+	
+}
+void TSys::ShowInfo() const
 {
 	uint Rx=0;
 	uint Px=0;
@@ -255,7 +240,7 @@ void TSys::ShowInfo()
 	
 	
     printf("STD_Embedded_Team::STD0801 Code:Demo Ver:0.0.6113 Build:%s\n", __DATE__);
-    printf("STDOS::%s %dMHz Flash:%dk RAM:%dk\n", this->CPUName->GetBuffer(),this->Clock/1000000, this->FlashSize, this->RamSize);
+    printf("STDOS::%s %dMHz Flash:%dk RAM:%dk\n", this->CPUName->GetBuffer(),this->Clock/1000000, this->FlashSize, this->RAMSize);
     printf("DevID:0X%04X RevID:0X%04X\n", this->DevID, this->RevID);
     printf("CPUID:0X%X ARM:ARMv7-M Cortex-M3: R%dp%d\n", this->CPUID,Rx,Px);
 	#if 0
@@ -314,7 +299,7 @@ void TSys::Init()
         FlashSize = *(__IO ushort*)(0x1FFFF7E0); // 容量
     #endif 
     this->Initjs();
-    this->Inited = 1;
+//    this->Inited = 1;
 }
 
 //计算ram、型号等
@@ -324,19 +309,19 @@ void TSys::Initjs()
     {
         case 0X0307:
 			this->CPUName = new String("STM32F103RD");
-            this->RamSize = 64;
+            this->RAMSize = 64;
 			break;
         case 0x0410:
             this->CPUName = new String("STM32F103C8");
-            this->RamSize = 20;
+            this->RAMSize = 20;
             break;
         case 0X0414:
             this->CPUName = new String("STM32F103ZE");
-            this->RamSize = 64;
+            this->RAMSize = 64;
             break;
         case 0x418:
             this->CPUName = new String("STM32F105VC");
-            this->RamSize = 64;
+            this->RAMSize = 64;
             break;
         default:
             this->CPUName = new String("未知");
@@ -398,7 +383,7 @@ static const uint c_CRCTable[256] =
         0xBCB4666D, 0xB8757BDA, 0xB5365D03, 0xB1F740B4
 };
 
-uint TSys::Crc(const void *buf, uint len, uint crc)
+uint Crc(const void *buf, uint len, uint crc)
 {
     byte *ptr = (byte*)buf;
     while (len-- > 0)
@@ -409,7 +394,7 @@ uint TSys::Crc(const void *buf, uint len, uint crc)
     return crc;
 }
 
-uint TSys::Crc(const void *buf, uint len)
+uint Crc(const void *buf, uint len)
 {
     #ifdef STM32F4
         RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_CRC, ENABLE);
@@ -445,7 +430,7 @@ static const ushort c_CRC16Table[] =
 {
     0x0000, 0xCC01, 0xD801, 0x1400, 0xF001, 0x3C00, 0x2800, 0xE401, 0xA001, 0x6C00, 0x7800, 0xB401, 0x5000, 0x9C01, 0x8801, 0x4400, 
 };
-ushort TSys::Crc16(const void *buf, uint len, ushort crc)
+ushort Crc16(const void *buf, uint len, ushort crc)
 {
     if (!buf || !len)
         return 0;
