@@ -9,7 +9,6 @@
 #include "stm32f10x.h"
 #include "..\Platform\Pin.h"
 
-#define _force_inline __inline
 #ifdef STM32F4
     #define GPIO_MAX_SPEED 100
 #else 

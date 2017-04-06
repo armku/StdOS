@@ -25,6 +25,7 @@
 
 extern "C"
 {
+	#define SmartOS_printf printf
 #if defined(DEBUG)
 	#define debug_printf SmartOS_printf
 	extern int SmartOS_printf(const char *format, ...);
@@ -64,33 +65,13 @@ extern struct HandlerRemap StrBoot;
 
 class SystemConfig;
 
-#include "Type.h"
 #include "TTime.h"
-#include "Delegate.h"
-#include "SString.h"
-#include "..\Platform\Pin.h"
 
 
 #define STM32F1    //使用STM32F1系列单片机
 /* 针脚 ------------------------------------------------------------------*/
-#ifdef DEBUG
-
-void assert_failed2(cstring msg, cstring file, unsigned int line);
-#define assert(expr, msg) ((expr) ? (void)0 : assert_failed2(msg, (const char*)__FILE__, __LINE__))
-
-#else
-
-#define assert(expr, msg) ((void)0)
-
-#endif
 // 使用何种模块的宏定义
 #define using(module) Sys.module.Init = T##module##_Init;
-
-#ifdef DEBUG
-    #define debug_printf printf
-#else 
-    inline void debug_printf(const char *format, ...){}
-#endif 
 
 class TSys: public Object
 {
