@@ -25,7 +25,7 @@
 
 extern "C"
 {
-	#define SmartOS_printf printf
+#define SmartOS_printf printf
 #if defined(DEBUG)
 	#define debug_printf SmartOS_printf
 	extern int SmartOS_printf(const char *format, ...);
@@ -65,12 +65,11 @@ extern struct HandlerRemap StrBoot;
 
 class SystemConfig;
 
-#define STM32F1    //使用STM32F1系列单片机
-
-class TSys 
+// 系统类
+class TSys
 {
-    public:
-		byte	MessagePort;// 消息口，默认0表示USART1
+public:
+    byte	MessagePort;// 消息口，默认0表示USART1
 
     uint	Clock;  	// 系统时钟
     uint	CystalClock;// 晶振时钟
@@ -89,7 +88,7 @@ class TSys
 	const SystemConfig*	Config;	// 系统设置
 
     TSys();				// 构造函数
-	
+
 	void InitClock();	// 初始化系统时钟
     void Init();     	// 初始化系统
 	void ShowInfo() const;
@@ -139,7 +138,7 @@ public:
 	void Start();	// 开始系统大循环
 };
 
-extern TSys Sys; //系统参数
+extern TSys Sys;		// 创建一个全局的Sys对象  会在main函数之前执行构造函数（！！！！！）
 
 // 系统设置
 class SystemConfig
@@ -187,6 +186,7 @@ public:
 private:
 	uint _state;
 };
+
 #if DEBUG
 // 函数栈。
 // 进入函数时压栈函数名，离开时弹出。便于异常时获取主线程调用列表
@@ -223,6 +223,7 @@ public:
 #ifndef __BUILD_USER__
 #define __BUILD_USER__ "Computer_User"
 #endif
+
 
 #endif //_Sys_H_
 

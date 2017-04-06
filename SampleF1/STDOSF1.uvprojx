@@ -333,7 +333,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--cpp11</MiscControls>
-              <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,DEBUG</Define>
+              <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,DEBUG,STM32F1</Define>
               <Undefine></Undefine>
               <IncludePath>..\SYSTEM\FWLib\inc;..\STDOS;..\STDOS\Modbus;..\SYSTEM\CMSIS;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc;..\STDOS\Core;..\STDOS\Device;..\STDOS\Drivers;..\STDOS\Kernel;..\STDOS\Platform;..\STDOS\Board;..\STDOS\App;..\STDOS\Security;..\STDOS\TinyIP;..\STDOS\Net</IncludePath>
             </VariousControls>
@@ -1305,7 +1305,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
+              <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,STM32F1</Define>
               <Undefine></Undefine>
               <IncludePath>..\SYSTEM\FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\Util\inc;..\SYSTEM\CMSIS;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc</IncludePath>
             </VariousControls>
