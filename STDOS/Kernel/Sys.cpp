@@ -21,6 +21,7 @@ extern "C"
     extern uint __initial_sp;
 }
 #endif
+String *CPUName;
 void assert_failed2(cstring msg, cstring file, unsigned int line)
 {
 }
@@ -240,7 +241,7 @@ void TSys::ShowInfo() const
 	
 	
     printf("STD_Embedded_Team::STD0801 Code:Demo Ver:0.0.6113 Build:%s\n", __DATE__);
-    printf("STDOS::%s %dMHz Flash:%dk RAM:%dk\n", this->CPUName->GetBuffer(),this->Clock/1000000, this->FlashSize, this->RAMSize);
+    printf("STDOS::%s %dMHz Flash:%dk RAM:%dk\n", CPUName->GetBuffer(),this->Clock/1000000, this->FlashSize, this->RAMSize);
     printf("DevID:0X%04X RevID:0X%04X\n", this->DevID, this->RevID);
     printf("CPUID:0X%X ARM:ARMv7-M Cortex-M3: R%dp%d\n", this->CPUID,Rx,Px);
 	#if 0
@@ -291,66 +292,34 @@ void TSys::Init()
     this->RevID = MCUID >> 16;
     this->DevID = MCUID &0x0FFF;
 
-    this->_Index = 0;
-
     #ifdef STM32F0XX
         FlashSize = *(__IO ushort*)(0x1FFFF7CC); // 容量
     #else 
         FlashSize = *(__IO ushort*)(0x1FFFF7E0); // 容量
     #endif 
-    this->Initjs();
-//    this->Inited = 1;
-}
-
-//计算ram、型号等
-void TSys::Initjs()
-{
-    switch (this->DevID)
+   switch (this->DevID)
     {
         case 0X0307:
-			this->CPUName = new String("STM32F103RD");
+			CPUName = new String("STM32F103RD");
             this->RAMSize = 64;
 			break;
         case 0x0410:
-            this->CPUName = new String("STM32F103C8");
+            CPUName = new String("STM32F103C8");
             this->RAMSize = 20;
             break;
         case 0X0414:
-            this->CPUName = new String("STM32F103ZE");
+            CPUName = new String("STM32F103ZE");
             this->RAMSize = 64;
             break;
         case 0x418:
-            this->CPUName = new String("STM32F105VC");
+            CPUName = new String("STM32F105VC");
             this->RAMSize = 64;
             break;
         default:
-            this->CPUName = new String("未知");
+            CPUName = new String("未知");
             break;
     }
-}
-
-void TSys::ShowHex(byte *data, byte hexlength)
-{
-    byte ba;
-    ushort ba1;
-    uint ba2;
-    switch (hexlength)
-    {
-        case 1:
-            ba = data[0];
-            debug_printf("%u", ba);
-            break;
-        case 2:
-            ba1 = (ushort)(*data);
-            debug_printf("%u", ba1);
-            break;
-        case 4:
-            ba2 = (uint)(*data);
-            debug_printf("%u", ba2);
-            break;
-        default:
-            break;
-    }
+//    this->Inited = 1;
 }
 
 /*

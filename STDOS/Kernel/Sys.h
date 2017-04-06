@@ -140,31 +140,6 @@ public:
 
 	bool Started;
 	void Start();	// 开始系统大循环
-	
-	
-	
-	
-	
-	
-	
-	
-        
-        
-      
-                
-        //byte Inited; //串口用参数
-        
-        
-       
-       
-        byte _Index; //未知
-        String *CPUName;
-
-        void ShowHex(byte *data, byte hexlength);
-
-    private:
-        void Initjs(); //计算ram、型号等
-
 };
 extern TSys Sys; //系统参数
 
