@@ -335,12 +335,13 @@ void ShowTime(void *param)
 // ÏÔÊ¾×´Ì¬
 void ShowStatus(void *param)
 {
+	#if 0
     static UInt64 runCounts = 0;
     float RunTimes = 0;
     float RunTimesAvg = 0;
     Task *tsk;
     byte buf[1];
-#if 0
+
     runCounts++;
     TaskScheduler *ts = (TaskScheduler*)param;
     UInt64 curms = Time.Ms();

@@ -239,7 +239,7 @@ FixedArray<T,length>::~FixedArray<T,length>()
 class TaskScheduler
 {
 private:
-	List<Task*>	_Tasks;	// 任务列表
+	List<Task*>	_Tasks123456789;	// 任务列表
 	bool	_SkipSleep;	// 跳过最近一次睡眠，马上开始下一轮循环
 
 	friend class Task;
