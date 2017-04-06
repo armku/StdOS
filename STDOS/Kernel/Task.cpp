@@ -7,7 +7,9 @@ template <typename T1, typename T2> T1 sum(T1 x, T2 y)
 {
     return x + y;
 }
-
+void ShowTime(void * param);//显示时间
+void ShowStatus(void *param); // 显示状态
+uint mgid; // 总编号
 Task::Task(TaskScheduler *scheduler)
 {
     Host = scheduler;
@@ -114,28 +116,20 @@ bool Task::operator == (Task &tsk)
     }
     return false;
 }
-TaskScheduler::TaskScheduler(char *name)
+TaskScheduler::TaskScheduler(cstring name)
 {
     this->Name = name;
 
-    this->mgid = 1;
+    mgid = 1;
 
     this->Running = false;
     this->Current = NULL;
     this->Count = 0;
 }
 
-TaskScheduler::~TaskScheduler()
-{
-    this->Current = NULL;
-    #if 0
-        _Tasks.DeleteAll().Clear();
-    #endif 
-}
 
-
-// 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
-uint TaskScheduler::Add(Action func, void *param, long dueTime, long period, const char *name)
+// 创建任务，返回任务编号。dueTime首次调度时间ms，-1表示事件型任务，period调度间隔ms，-1表示仅处理一次
+uint TaskScheduler::Add(Action func, void* param, int dueTime, int period, cstring name)
 {
     if (dueTime > 0)
     {
@@ -193,19 +187,19 @@ uint TaskScheduler::Add(Action func, void *param, long dueTime, long period, con
 }
 
 //设置任务执行、就绪状态
-void TaskScheduler::SetTask(uint taskid, bool onoff, long delaytime)
-{
-    if (taskid > this->Count)
-    {
-        //超范围，返回
-        return ;
-    }
-    this->_Tasks[taskid]->Enable = onoff;
-    if (onoff)
-    {
-        this->_Tasks[taskid]->NextTime = Time.Current() + delaytime * 1000;
-    }
-}
+//void TaskScheduler::SetTask(uint taskid, bool onoff, long delaytime)
+//{
+//    if (taskid > this->Count)
+//    {
+//        //超范围，返回
+//        return ;
+//    }
+//    this->_Tasks[taskid]->Enable = onoff;
+//    if (onoff)
+//    {
+//        this->_Tasks[taskid]->NextTime = Time.Current() + delaytime * 1000;
+//    }
+//}
 
 void TaskScheduler::Remove(uint taskid)
 {
@@ -234,7 +228,7 @@ void TaskScheduler::Start()
     }
 
     #ifdef DEBUG
-        Add(ShowStatus, this, 1 *1000, 30 *1000, "任务状态");
+        //Add(ShowStatus, this, 1 *1000, 30 *1000, "任务状态");
     #else 
         Add(ShowTime, this, 2 *1000, 20 *1000, "时间显示");
     #endif 
@@ -244,7 +238,8 @@ void TaskScheduler::Start()
     Running = true;
     while (Running)
     {
-        Execute(0xFFFFFFFF);
+		bool bb=false;
+        Execute(0xFFFFFFFF,bb);
     }
     debug_printf("%s停止调度，共有%d个任务！\r\n", Name, Count);
 }
@@ -256,13 +251,13 @@ void TaskScheduler::Stop()
 }
 
 // 执行一次循环。指定最大可用时间
-void TaskScheduler::Execute(uint usMax)
+void TaskScheduler::Execute(uint msMax, bool& cancel)
 {
     UInt64 now;
     now = Time.Current(); // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
 
     UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
-    UInt64 end = Time.Current() + usMax;
+    UInt64 end = Time.Current() + msMax;
 
     // 需要跳过当前正在执行任务的调度
     //Task* _cur = Current;
@@ -312,7 +307,7 @@ void TaskScheduler::Execute(uint usMax)
         }
 
         // 如果已经超出最大可用时间，则退出
-        if (!usMax || Time.Current() > end)
+        if (!msMax || Time.Current() > end)
         {
             return ;
         }
@@ -331,21 +326,21 @@ void TaskScheduler::Execute(uint usMax)
 }
 
 //显示时间
-void TaskScheduler::ShowTime(void *param)
+void ShowTime(void *param)
 {
     UInt64 curms = Time.Ms();
     debug_printf("Time: %02lld:%02lld:%02lld.%03lld\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000);
 }
 
 // 显示状态
-void TaskScheduler::ShowStatus(void *param)
+void ShowStatus(void *param)
 {
     static UInt64 runCounts = 0;
     float RunTimes = 0;
     float RunTimesAvg = 0;
     Task *tsk;
     byte buf[1];
-
+#if 0
     runCounts++;
     TaskScheduler *ts = (TaskScheduler*)param;
     UInt64 curms = Time.Ms();
@@ -390,6 +385,7 @@ void TaskScheduler::ShowStatus(void *param)
             task->ShowStatus();
         }
     }
+	#endif
 }
 
 Task *TaskScheduler::operator[](int taskid)

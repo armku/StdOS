@@ -53,21 +53,7 @@ private:
 	void Init();
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	
     private:
         Task(TaskScheduler *scheduler);
@@ -75,6 +61,13 @@ private:
         uint CpuTime; // 总耗费时间        
 		bool operator==(Task& tsk);
 };
+
+
+
+
+
+
+
 template<class T,int length> class FixedArray
 {
 	public:
@@ -245,32 +238,62 @@ FixedArray<T,length>::~FixedArray<T,length>()
 // 任务调度器
 class TaskScheduler
 {
-    private:        
-        FixedArray < Task, 32 > _Tasks;       
-        uint mgid; // 总编号
+private:
+	List<Task*>	_Tasks;	// 任务列表
+	bool	_SkipSleep;	// 跳过最近一次睡眠，马上开始下一轮循环
 
-        friend class Task;
+	friend class Task;
 
-    public:
-        char* Name; // 系统名称
-        int Count; // 任务个数
-        Task *Current; // 正在执行的任务
-        bool Running; // 是否正在运行
-        byte Reversed[3]; // 保留，避免对齐问题
+public:
+	cstring	Name;	// 系统名称
+	int		Count;		// 任务个数
+	Task*	Current;	// 正在执行的任务
+	bool	Running;	// 是否正在运行
+	bool	Sleeping;	// 如果当前处于Sleep状态，马上停止并退出
+	byte	Deepth;		// 当前深度
+	byte	MaxDeepth;	// 最大深度。默认5层
 
-        TaskScheduler(char* name = NULL);
-        ~TaskScheduler();        
-            // 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
-        uint Add(Action func, void *param, long dueTime = 0, long period = 0,const char *name="No Name");         
-        void Remove(uint taskid);
-		void SetTask(uint taskid,bool onoff,long delaytime=1);//设置任务执行、就绪状态
-        void Start();
-        void Stop();
+	int		Times;		// 执行次数
+	int		Cost;		// 平均执行时间us
+	UInt64	TotalSleep;	// 所有任务的总睡眠时间ms
+	UInt64	LastTrace;	// 最后统计跟踪时间ms
+
+	typedef void (*SAction)(int ms);
+	SAction	EnterSleep;	// 通知外部，需要睡眠若干毫秒
+	Func	ExitSleep;	// 通知外部，要求退出睡眠，恢复调度
+
+	TaskScheduler(cstring name = nullptr);
+
+	// 使用外部缓冲区初始化任务列表，避免频繁的堆分配
+	void Set(Task* tasks, int count);
+	// 查找任务 返回使用此函数的首个任务的ID
+	uint FindID(Action func);
+	// 查找任务 返回使用此函数的首个任务
+	Task* FindTask(Action func);
+	// 创建任务，返回任务编号。dueTime首次调度时间ms，-1表示事件型任务，period调度间隔ms，-1表示仅处理一次
+	uint Add(Action func, void* param, int dueTime = 0, int period = 0, cstring name = nullptr);
+	template<typename T>
+	uint Add(void(T::*func)(), T* target, int dueTime = 0, int period = 0, cstring name = nullptr)
+	{
+		return Add(*(Action*)&func, target, dueTime, period, name);
+	}
+	void Remove(uint taskid);
+
+	void Start();
+	void Stop();
 	// 执行一次循环。指定最大可用时间
-        void Execute(uint usMax);
-		Task *operator[](int taskid);
-	private:        
-		static	void ShowTime(void * param);//显示时间
-        static void ShowStatus(void *param); // 显示状态
-        
+	void Execute(uint msMax, bool& cancel);
+	uint ExecuteForWait(uint msMax, bool& cancel);
+
+	// 跳过最近一次睡眠，马上开始下一轮循环
+	void SkipSleep();
+
+	void ShowStatus();	// 显示状态
+
+    Task* operator[](int taskid);	
+	
+	
+	
+    private:        
+        FixedArray < Task, 32 > _Tasks;    
 };

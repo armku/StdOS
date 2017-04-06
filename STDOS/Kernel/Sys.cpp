@@ -55,7 +55,7 @@ void TSys::RemoveTask(uint& taskid) const
 // 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
 bool TSys::SetTask(uint taskid, bool enable, int msNextTime) const
 {
-    _Scheduler->SetTask(taskid, enable, msNextTime);
+//    _Scheduler->SetTask(taskid, enable, msNextTime);
 	return true;
 }
 
@@ -97,8 +97,8 @@ void TimeSleep(uint us)
         while (true)
         {
             UInt64 start2 = Time.Current();
-
-            _Scheduler->Execute(us);
+			bool bb=false;
+            _Scheduler->Execute(us,bb);
 
             UInt64 now = Time.Current();
             cost += (int)(now - start2);
