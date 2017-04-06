@@ -10,7 +10,7 @@ template <typename T1, typename T2> T1 sum(T1 x, T2 y)
 
 Task::Task(TaskScheduler *scheduler)
 {
-    _Scheduler = scheduler;
+    Host = scheduler;
 
     Times = 0;
     CpuTime = 0;
@@ -18,7 +18,9 @@ Task::Task(TaskScheduler *scheduler)
     Cost = 0;
     Enable = true;
 }
-
+Task::~Task()
+{
+}
 /*Task::~Task()
 {
 if(ID) _Scheduler->Remove(ID);

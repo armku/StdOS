@@ -1,36 +1,79 @@
 #pragma once
 
-#include "Delegate.h"
+#include "Kernel\Sys.h"
 
 class TaskScheduler;
+
 // 任务
 class Task
 {
+	public:
+	TaskScheduler* Host;
+
+	uint	ID;			// 编号
+	cstring	Name;		// 名称
+
+	Action	Callback;	// 回调
+	void*	Param;		// 参数
+
+	int		Period;		// 周期ms
+	UInt64	NextTime;	// 下一次执行时间ms
+
+	int		Times;		// 执行次数
+	int		SleepTime;	// 当前睡眠时间us
+	int		Cost;		// 平均执行时间us
+	int		CostMs;		// 平均执行时间ms
+	int		MaxCost;	// 最大执行时间us
+
+	bool	Enable;		// 是否启用
+	bool	Event;		// 是否只执行一次后暂停的事件型任务
+	byte	Deepth;		// 当前深度
+	byte	MaxDeepth;	// 最大深度。默认1层，不允许重入
+
+	Task();
+	Task(const Task& task)	= delete;
+	~Task();
+
+	// 执行任务。返回是否正常执行。
+	bool Execute(UInt64 now);
+	// 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
+	void Set(bool enable, int msNextTime = -1);
+	// 显示状态
+	void ShowStatus();
+
+	// 全局任务调度器
+	static TaskScheduler* Scheduler();
+	static Task* Get(int taskid);
+	static Task& Current();
+
+private:
+	friend class TaskScheduler;
+
+	bool CheckTime(UInt64 end, bool isSleep);
+	void Init();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     private:
-        TaskScheduler *_Scheduler;
-
-        friend class TaskScheduler;
-
         Task(TaskScheduler *scheduler);
-
-    public:
-        uint ID; // 编号       
-        Action Callback; // 回调
-        void *Param; // 参数
-		const char* Name;//名称
-        long Period; // 周期us
-        UInt64 NextTime; // 下一次执行时间
-        uint Times; // 执行次数
-        uint CpuTime; // 总耗费时间
-        uint SleepTime; // 当前睡眠时间
-        uint Cost; // 平均执行时间
-        bool Enable; // 是否启用
+    public:        
+        uint CpuTime; // 总耗费时间        
 		bool operator==(Task& tsk);
-        byte Reversed[3]; // 保留，避免对齐问题
-
-        //~Task();
-
-        void ShowStatus(); // 显示状态
 };
 template<class T,int length> class FixedArray
 {
