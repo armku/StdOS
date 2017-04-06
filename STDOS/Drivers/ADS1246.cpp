@@ -104,9 +104,9 @@ void CADS1246::WriteReg(byte RegAddr, byte da)
 FF FF FF -MIN
 80 00 00 -MAX
 ---------------------------------------------------------*/
-float CADS1246::decodead(byte *da)
+int CADS1246::decodead(byte *da)
 {
-    float ret = 0;
+    int ret = 0;
     uint ret1 = 0;
     if (da[0] < 0x80)
     {
@@ -132,10 +132,10 @@ float CADS1246::decodead(byte *da)
     return ret;
 }
 
-float CADS1246::Read(void) //返回-1,表示转换未完成
+int CADS1246::Read(void) //返回-1,表示转换未完成
 {
     byte Cmd[3];
-    float Ret = 0;
+    int Ret = 0;
 
     Cmd[0] = ADC_CMD_RDATA;
     *this->pspi->pportcs=0;
