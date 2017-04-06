@@ -138,6 +138,7 @@ public:
 	bool Started;
 	void Start();	// 开始系统大循环
 };
+
 extern TSys Sys; //系统参数
 
 // 系统设置
