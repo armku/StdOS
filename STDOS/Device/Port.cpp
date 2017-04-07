@@ -40,7 +40,7 @@ Port::Port()
     Group = NULL;
     PinBit = 0;
 }
-
+#ifndef TINY	
 Port::~Port()
 {
     #if defined(STM32F1)
@@ -71,7 +71,7 @@ Port::~Port()
         }
     #endif 
 }
-
+#endif
 /*
 单一引脚初始化
  */

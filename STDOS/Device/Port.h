@@ -30,9 +30,28 @@ Port::Close
 
 class Port
 {
+	public:
+	enum GPIO_AF
+	{
+		AF_0 = 0,
+		AF_1 = 1,
+		AF_2 = 2,
+		AF_3 = 3,
+		AF_4 = 4,
+		AF_5 = 5,
+		AF_6 = 6,
+		AF_7 = 7
+	};
+	Pin		_Pin;		// 引脚
+	bool	Opened;		// 是否已经打开
+	byte    Index;		// 引脚自身次序编号，用于区分多引脚次序
+	Port();
+	#ifndef TINY
+	virtual ~Port();
+	#endif
     public:
         GPIO_TypeDef *Group; // 针脚组
-        Pin _Pin; // 针脚
+		
         ushort PinBit; // 组内引脚位。每个引脚一个位
 
         Port &Set(Pin pin); // 设置引脚，并应用配置。
@@ -43,8 +62,8 @@ class Port
         _force_inline static byte GroupToIndex(GPIO_TypeDef *group);
 
     protected:
-        Port();
-        virtual ~Port();
+       
+       
         // 配置过程，由Config调用，最后GPIO_Init
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
     private:
