@@ -290,6 +290,10 @@ int SerialPort::SendData(byte data, int times)
     }
 	return 0;
 }
+void SerialPort::ChangePower(int level)
+{
+	
+}
 
 // 向某个端口写入数据。如果size为0，则把data当作字符串，一直发送直到遇到\0为止
 bool SerialPort::OnWrite(const byte *buf, uint size)

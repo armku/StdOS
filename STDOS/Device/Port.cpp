@@ -375,12 +375,23 @@ InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
     Init(floating, pupd);
     Set(pin);
 }
+InputPort::InputPort()
+{
+	
+}
 
 InputPort::operator bool()
 {
     return Read();
 }
-
+void InputPort::OnOpen(void* param)
+{
+	
+}
+void InputPort::OnClose()
+{
+	
+}
 void InputPort::Init(bool floating, PuPd pupd)
 {
     Pull = pupd;
