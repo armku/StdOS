@@ -87,16 +87,10 @@ UInt64 TTime::Ms()const
 void TTime::SetTime(UInt64 seconds){
 
 }
-//系统时间
-uint TTime::Seconds()
-{
-    return 0;
-}
 
-//延时ms
-void TTime::Sleep(uint us)
+void TTime::Sleep(int ms, bool* running) const
 {
-    delay_us(us);
+    delay_us(ms);
 }
 extern UInt64 TicksPerms;
 //系统启动以来的毫秒

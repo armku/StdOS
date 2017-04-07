@@ -185,7 +185,7 @@ UInt64	 TSys::Ms() const		// 系统启动后的毫秒数
 }
 uint	TSys::Seconds() const	// 系统绝对当前时间，秒
 {
-    return Time.Seconds();
+    return Time.Seconds;
 }
 
 // 延迟异步重启
