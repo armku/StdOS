@@ -444,14 +444,14 @@ ushort InputPort::ReadGroup() // 整组读取
 }
 
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
-bool InputPort::Read()
+bool InputPort::Read() const
 {
     // 转为bool时会转为0/1
     bool rs = GPIO_ReadInputData(Group) &PinBit;
     return rs ^ Invert;
 }
 
-bool InputPort::Read(Pin pin) const
+bool InputPort::Read(Pin pin)
 {
     GPIO_TypeDef *group = _GROUP(pin);
     return (group->IDR >> (pin &0xF)) &1;
