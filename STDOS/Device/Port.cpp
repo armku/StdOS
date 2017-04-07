@@ -107,7 +107,13 @@ bool Port::Empty()const
 {
     return _Pin == P0;
 }
-
+void Port::OnOpen(void* param)
+{
+	
+}
+	void Port::OnClose()
+	{
+	}
 void Port::Config()
 {
     GPIO_InitTypeDef gpio;

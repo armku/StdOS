@@ -60,7 +60,20 @@ class Port
     //virtual bool Read() const;
 
 	String ToString() const;
+	protected:
+    // ÅäÖÃ¹ý³Ì
+    virtual void OnOpen(void* param);
+	virtual void OnClose();
+
+private:
+	void Opening();
 	
+
+
+
+
+
+
     public:
         GPIO_TypeDef *Group; // Õë½Å×é
 		
