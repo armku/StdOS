@@ -108,39 +108,34 @@ public:
 	OutputPort();
     OutputPort(Pin pin);
     OutputPort(Pin pin, byte invert, bool openDrain = false, byte speed = 50);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-    public:
-        
-        
+	OutputPort& Init(Pin pin, bool invert);
+	void Write(bool value) const;
+	// 拉高一段时间后拉低
+	void Up(int ms) const;
+	void Down(int ms) const;
+	// 闪烁多次
+	void Blink(int times, int ms) const;
+	// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
+    virtual bool Read() const;
+	bool ReadInput() const;
 
-        // 整体写入所有包含的引脚
-        void Write(bool value);
+    static void Write(Pin pin, bool value);
+	OutputPort& operator=(bool value) { Write(value); return *this; }
+    OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }
+    operator bool() const { return Read(); }
+
+protected:
+    virtual void OnOpen(void* param);
+	virtual void OpenPin(void* param);
+
+private:		
+    public:          
         void WriteGroup(ushort value); // 整组写入
-        void Up(uint ms); // 拉高一段时间后拉低
-        void Blink(uint times, uint ms); // 闪烁多次
-
         ushort ReadGroup(); // 整组读取
         // 读取指定索引引脚。索引按照从小到大，0xFF表示任意脚为true则返回true
         bool Read(byte index);
-        bool Read(); // Read() ReadReal() 的区别在  前者读输出  一个读输入    在开漏输出的时候有很大区别
-        bool ReadInput();
-
-        static bool Read(Pin pin);
-        static void Write(Pin pin, bool value);
-
-        OutputPort &operator = (bool value);
-        OutputPort &operator = (OutputPort &port);
+        static bool Read(Pin pin); 
         operator bool();
-
     protected:
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
         void Init(bool invert = false, bool openDrain = false, uint speed = GPIO_MAX_SPEED);

@@ -245,14 +245,14 @@ ushort OutputPort::ReadGroup()
     return GPIO_ReadOutputData(Group);
 }
 
-bool OutputPort::Read()
+bool OutputPort::Read() const
 {
     // 转为bool时会转为0/1
     bool rs = GPIO_ReadOutputData(Group) &PinBit;
     return rs ^ Invert;
 }
 
-bool OutputPort::ReadInput()
+bool OutputPort::ReadInput() const
 {
     bool rs = GPIO_ReadInputData(Group) &PinBit;
     return rs ^ Invert;
@@ -264,24 +264,12 @@ bool OutputPort::Read(Pin pin)
     return (group->IDR >> (pin &0xF)) &1;
 }
 
-void OutputPort::Write(bool value)
+void OutputPort::Write(bool value) const
 {
     if (value ^ Invert)
         GPIO_SetBits(Group, PinBit);
     else
         GPIO_ResetBits(Group, PinBit);
-}
-
-OutputPort &OutputPort::operator = (bool value)
-{
-    Write(value);
-    return  *this;
-}
-
-OutputPort &OutputPort::operator = (OutputPort &port)
-{
-    Write(port.Read());
-    return  *this;
 }
 
 OutputPort::operator bool()
@@ -294,14 +282,20 @@ void OutputPort::WriteGroup(ushort value)
     GPIO_Write(Group, value);
 }
 
-void OutputPort::Up(uint ms)
+void OutputPort::Up(int ms) const
 {
     Write(true);
     Sys.Sleep(ms);
     Write(false);
 }
+void OutputPort::Down(int ms) const
+{
+    Write(false);
+    Sys.Sleep(ms);
+    Write(true);
+}
 
-void OutputPort::Blink(uint times, uint ms)
+void OutputPort::Blink(int times, int ms) const
 {
     bool flag = true;
     for (int i = 0; i < times; i++)
@@ -312,7 +306,12 @@ void OutputPort::Blink(uint times, uint ms)
     }
     Write(false);
 }
-
+void OutputPort::OnOpen(void* param)
+{
+}
+	void OutputPort::OpenPin(void* param)
+	{
+	}
 /*
 设置端口状态
  */
