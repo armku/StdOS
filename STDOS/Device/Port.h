@@ -22,12 +22,6 @@ Port::Close
 // 子类初始化时先通过SetPort设置端口，备份引脚状态，然后Config通过gpio结构体配置端口，端口销毁时恢复引脚状态
 #include "stm32f10x.h"
 
-#ifdef STM32F4
-    #define GPIO_MAX_SPEED 100
-#else 
-    #define GPIO_MAX_SPEED 50
-#endif 
-
 class Port
 {
 	public:
@@ -138,7 +132,7 @@ private:
         operator bool();
     protected:
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
-        void Init(bool invert = false, bool openDrain = false, uint speed = GPIO_MAX_SPEED);
+        void Init(bool invert = false, bool openDrain = false, uint speed = 50);
 };
 
 /******************************** AlternatePort ********************************/
