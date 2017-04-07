@@ -70,7 +70,14 @@ void IList::Init()
 
 bool IList::CheckCapacity(int count)
 {
-    return ;
+	if(count<=this->_Capacity)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void IList::move(IList &list)
