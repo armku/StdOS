@@ -140,19 +140,7 @@ private:
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
         void Init(bool invert = false, bool openDrain = false, uint speed = GPIO_MAX_SPEED);
 };
-/*
-输出端口会话类。初始化时打开端口，超出作用域析构时关闭。反向操作可配置端口为倒置
- */
-class PortScope
-{
-    private:
-        OutputPort *_port;
-        bool _value;
-    public:
-        PortScope(OutputPort *port, bool value = true);
 
-        ~PortScope();
-};
 /******************************** AlternatePort ********************************/
 
 // 复用输出口
@@ -172,36 +160,77 @@ private:
     protected:
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
 };
-/*
-模拟输入输出口
- */
-class AnalogInPort: public Port
-{
-    public:
-        AnalogInPort(Pin pin);
 
-    protected:
-        virtual void OnConfig(GPIO_InitTypeDef &gpio);
-};
+/******************************** InputPort ********************************/
+
 // 输入口
-class InputPort: public Port
+class InputPort : public Port
 {
+	typedef enum
+    {
+        NOPULL	= 0x00,
+        UP		= 0x01,	// 上拉电阻
+        DOWN	= 0x02,	// 下拉电阻
+    }PuPd;
+    typedef enum
+    {
+        Rising	= 0x01,	// 上升沿
+        Falling	= 0x02,	// 下降沿
+		Both	= 0x03	// 上升下降沿
+    }Trigger;
+
+    // 读取委托
+    typedef void (*IOReadHandler)(InputPort* port, bool down, void* param);
+
+    ushort	ShakeTime	= 0;	// 设置 抖动时间。毫秒
+	ushort	PressTime	= 0;	// 获取 长按时间。毫秒
+    byte	Invert		= 2;	// 是否倒置输入输出。默认2表示自动检测
+    bool	Floating	= true;	// 是否浮空输入
+    PuPd	Pull		= UP;	// 上拉下拉电阻
+	//Trigger	Mode		= Both;	// 触发模式，上升沿下降沿
+	bool	HardEvent	= false;// 是否使用硬件事件。默认false
+
+	Delegate2<InputPort&, bool>	Press;	// 按下事件
+
+	InputPort();
+    InputPort(Pin pin, bool floating = true, PuPd pull = UP);
+    virtual ~InputPort();
+
+	InputPort& Init(Pin pin, bool invert);
+
+	// 读取状态
+    virtual bool Read() const;
+
+	bool UsePress();
+	void OnPress(bool down);
+
+    operator bool() const { return Read(); }
+
+protected:
+    virtual void OnOpen(void* param);
+	virtual void OnClose();
+
+private:
+	bool	_IRQ	= false;
+
+	uint	_task	= 0;	// 输入任务
+	int		_Start	= 0;	// 开始按下时间
+	int		_Last	= 0;	// 最后一次触发时间
+	static void InputTask(void* param);
+	static void InputNoIRQTask(void* param);
+
+private:
+	void OpenPin(void* param);
+	void ClosePin();
+	bool OnRegister();
+	byte	_Value;	// 当前值
+	
+	
+	
+	
+	
     public:
-        //以下为2017-01-07
-        typedef enum
-        {
-                NOPULL = 0x00, UP = 0x01,  //上拉电阻 
-                DOWN = 0x02,  //下拉电阻 
-        } PuPd;
-        //enum class Trigger	//强类型枚举
-        typedef enum  //2017-01-07
-        {
-                Rising = 0x01,  //上升沿
-                Falling = 0x02,  //下降沿
-                Both = 0x03  //上升下降沿
-        } Trigger;
-        // 读取委托
-        typedef void(*IOReadHandler)(Pin port, bool down, void *param);
+               
         ushort ShakeTime; //	=	0; 		// 抖动时间.毫秒
         ushort PressTime; //	=	0;		//长按时间。毫秒
         bool Invert; //	=	2; 		// 是否倒置输入输出。默认2表示自动检测		
@@ -228,6 +257,56 @@ class InputPort: public Port
         void RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param);
         void UnRegisterInput(int pinIndex);
 };
+/******************************** AnalogInPort ********************************/
+
+// 模拟输入口
+class AnalogInPort : public Port
+{
+public:
+    AnalogInPort() : Port() { }
+    AnalogInPort(Pin pin) : Port() { Set(pin); Open(); }
+
+protected:
+    virtual void OnOpen(void* param);
+
+private:
+	void OpenPin(void* param);
+
+    protected:
+        virtual void OnConfig(GPIO_InitTypeDef &gpio);
+};
+
+
+/******************************** PortScope ********************************/
+
+// 输出端口会话类。初始化时打开端口，超出作用域析构时关闭。反向操作可配置端口为倒置
+class PortScope
+{
+private:
+	OutputPort* _port;
+	bool _value;
+
+public:
+	PortScope(OutputPort* port, bool value = true)
+	{
+		_port = port;
+		if(_port)
+		{
+			// 备份数值，析构的时候需要还原
+			_value = port->Read();
+			*_port = value;
+		}
+	}
+
+	~PortScope()
+	{
+		if(_port) *_port = _value;
+	}
+	private:
+        OutputPort *_port;
+        bool _value;
+};
+
 //中断线打开、关闭
 void SetEXIT(int pinIndex, bool enable);
 

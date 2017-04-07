@@ -386,15 +386,6 @@ void AnalogInPort::OnConfig(GPIO_InitTypeDef &gpio)
     #endif 
 }
 
-AnalogInPort::AnalogInPort(Pin pin)
-{
-    Set(pin);
-}
-
-InputPort::InputPort()
-{
-    Init();
-}
 
 InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
 {
