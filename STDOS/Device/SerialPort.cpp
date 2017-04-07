@@ -56,7 +56,7 @@ void SerialPort::Init()
     RS485 = NULL;
     Error = 0;
 
-    IsRemap = false;
+    Remap = 0;
 }
 
 
@@ -156,7 +156,7 @@ bool SerialPort::OnOpen()
 
     // 检查重映射
     #ifdef STM32F1XX
-        if (IsRemap)
+        if (Remap)
         {
             switch (_index)
             {
@@ -256,7 +256,7 @@ void SerialPort::OnClose()
 
     // 检查重映射
     #ifdef STM32F1XX
-        if (IsRemap)
+        if (Remap)
         {
             switch (_index)
             {
@@ -422,7 +422,7 @@ void SerialPort::GetPins(Pin *txPin, Pin *rxPin)
     const Pin g_Uart_Pins[] = UART_PINS;
     const Pin g_Uart_Pins_Map[] = UART_PINS_FULLREMAP;
     const Pin *p = g_Uart_Pins;
-    if (IsRemap)
+    if (Remap)
     {
         p = g_Uart_Pins_Map;
     }
