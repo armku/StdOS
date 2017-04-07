@@ -417,6 +417,7 @@ void InputPort::OnConfig(GPIO_InitTypeDef &gpio)
 typedef struct TIntState
 {
     Pin Pin;
+	InputPort inputport;
     InputPort::IOReadHandler Handler; // 委托事件
     void *Param; // 事件参数，一般用来作为事件挂载者的对象，然后借助静态方法调用成员方法	
     bool OldValue;
@@ -556,7 +557,7 @@ void GPIO_ISR(int num) // 0 <= num <= 15
     if (state->Handler)
     {
         // 新值value为true，说明是上升，第二个参数是down，所以取非
-        state->Handler(state->Pin, value, state->Param);
+        state->Handler(&(state->inputport), value, state->Param);
     }
 }
 

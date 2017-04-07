@@ -31,11 +31,11 @@ OutputPort led2(PF7, true);
 //按键 PC13 PA0
 InputPort exti(PC13); //PA1 PB3     PA0 PC13
 InputPort exti1(PA0);
-void OnKeyPress(Pin pin, bool down, void *param)
+void OnKeyPress(InputPort* pin, bool down, void *param)
 {
     //led1.Write(onoff);
     led2 = !led2;
-    printf("中断引脚：P%c%d 值%d \r\n", _PIN_NAME(pin), down);
+//    printf("中断引脚：P%c%d 值%d \r\n", _PIN_NAME(pin), down);
 }
 
 /*
