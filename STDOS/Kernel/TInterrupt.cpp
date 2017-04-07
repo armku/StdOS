@@ -1,5 +1,5 @@
-#include "TInterrupt.h"
 #include "SerialPort.h"
+#include "TInterrupt.h"
 
 TInterrupt Interrupt;
 
