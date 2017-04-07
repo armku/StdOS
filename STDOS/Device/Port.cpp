@@ -344,6 +344,10 @@ AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
     Init(invert, openDrain, speed);
     Set(pin);
 }
+void AlternatePort::OpenPin(void* param)
+{
+	
+}
 
 void AlternatePort::OnConfig(GPIO_InitTypeDef &gpio)
 {

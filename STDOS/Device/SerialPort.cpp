@@ -1,7 +1,6 @@
 #include "Sys.h"
 #include <stdio.h>
 
-#include "Port.h"
 #include "SerialPort.h"
 #include "TInterrupt.h"
 #include "TTime.h"
@@ -80,6 +79,14 @@ void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte
     *(uint*)Name = *(uint*)"COMx";
     Name[3] = '0' + _index + 1;
     Name[4] = 0;
+}
+bool SerialPort::OnWrite(const Buffer &bs)
+{
+		return false;
+}
+uint SerialPort::OnRead(Buffer &bs)
+{
+	return 0;
 }
 
 // ´ò¿ª´®¿Ú

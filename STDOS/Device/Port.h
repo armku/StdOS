@@ -155,8 +155,7 @@ protected:
     //virtual void OnOpen();
 	virtual void OpenPin(void* param);
 
-private:
-	public:       
+private:	  
     protected:
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
 };

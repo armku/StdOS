@@ -212,7 +212,10 @@ String::String(cstring cstr):Array(cstr,ArrayLength(cstr))
 //  //      this->jsLength();
 //    #endif 
 //}
-
+bool String::Concat(cstring cstr)
+{
+	return false;
+}
 String &String::operator = (const char *str)
 {
 //    if (strlen(str) <= this->mcapacity)
