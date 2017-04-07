@@ -51,6 +51,15 @@ class Port
 	#endif
 	Port& Set(Pin pin);	// …Ë÷√“˝Ω≈
 	bool Empty() const;
+	bool Open();
+	void Close();
+	void Clear();
+	void AFConfig(GPIO_AF GPIO_AF) const;
+	static void RemapConfig(uint param, bool sta);
+
+    //virtual bool Read() const;
+
+	String ToString() const;
 	
     public:
         GPIO_TypeDef *Group; // ’ÎΩ≈◊È
