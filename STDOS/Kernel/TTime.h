@@ -43,3 +43,15 @@ public:
 		UInt64 mCurrent;//系统启动以来的毫秒数				
 };
 extern TTime Time; //系统时间，不建议用户直接使用
+class TimeCost
+{
+	public:
+	UInt64	Start;		// 开始时间，毫秒
+	uint	StartTicks;	// 开始滴答
+
+	TimeCost();
+
+	void Reset();
+	int Elapsed() const;	// 逝去的时间，微秒
+	void Show(cstring format = nullptr) const;
+};

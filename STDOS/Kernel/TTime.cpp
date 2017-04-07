@@ -142,3 +142,19 @@ uint TTime::UsToTicks(uint us)const
         return ((UInt64)us << (15-6)) / (1000000 >> 6);
     }
 }
+TimeCost::TimeCost()
+{
+	this->Start=0;
+}
+void TimeCost::Show(cstring format) const
+{
+	printf("执行 %d 微妙\r\n",12);
+}
+
+// 逝去的时间，微秒
+int TimeCost::Elapsed() const
+{
+	uint ret=12;
+	ret-=this->Start;
+	return ret;
+}

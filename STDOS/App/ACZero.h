@@ -3,7 +3,6 @@
 
 #include "Kernel\TTime.h"
 #include "Device\Port.h"
-#include "..\Core\TimeCost.h"
 
 // 交流过零检测
 class ACZero
