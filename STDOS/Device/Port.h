@@ -153,15 +153,22 @@ class PortScope
 
         ~PortScope();
 };
-/*
-复用输出口
- */
-class AlternatePort: public OutputPort
+/******************************** AlternatePort ********************************/
+
+// 复用输出口
+class AlternatePort : public OutputPort
 {
-    public:
-        AlternatePort();
-        // 复用输出一般采用推挽输出，不需要倒置
-        AlternatePort(Pin pin, bool invert = false, bool openDrain = false, uint speed = GPIO_MAX_SPEED);
+public:
+	AlternatePort();
+    AlternatePort(Pin pin);
+    AlternatePort(Pin pin, byte invert, bool openDrain = false, byte speed = 50);
+
+protected:
+    //virtual void OnOpen();
+	virtual void OpenPin(void* param);
+
+private:
+	public:       
     protected:
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
 };

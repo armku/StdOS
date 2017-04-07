@@ -351,8 +351,12 @@ AlternatePort::AlternatePort(): OutputPort()
 {
     Init(false, false);
 }
+AlternatePort::AlternatePort(Pin pin): OutputPort(pin)
+{
+	
+}
 
-AlternatePort::AlternatePort(Pin pin, bool invert, bool openDrain, uint speed): OutputPort(pin, invert, openDrain, speed)
+AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
 {
     Init(invert, openDrain, speed);
     Set(pin);
