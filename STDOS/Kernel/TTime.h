@@ -37,14 +37,9 @@ public:
 
 	uint TicksToUs(uint ticks) const;
 	uint UsToTicks(uint us) const;
-	
-	
-	
-	public:
-		uint seconds;//全局秒数，系统启动后总秒数，累加							
-		UInt64 Ms() const;//系统启动以来的毫秒数		
 		
-		UInt64 mCurrent;//系统启动以来的毫秒数	
-			
+	public:							
+		UInt64 Ms() const;//系统启动以来的毫秒数		
+		UInt64 mCurrent;//系统启动以来的毫秒数				
 };
 extern TTime Time; //系统时间，不建议用户直接使用
