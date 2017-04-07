@@ -1,13 +1,26 @@
-/*
-端口基类
-用于管理一个端口，通过PinBit标识该组的哪些引脚。
-子类初始化时先通过SetPort设置端口，备份引脚状态，然后Config通过gpio结构体配置端口，端口销毁时恢复引脚状态
- */
-#pragma once 
+#ifndef _Port_H_
+#define _Port_H_
+#include "Kernel\Sys.h"
 
-#include "Sys.h"
+/******** 端口打开关闭流程 ********/
+/*
+Port::Open
+	#Port::Opening
+		OutputPort::OnOpen
+			#Port::OnOpen
+		#OutputPort::OpenPin
+
+Port::Close
+	#Port::OnClose
+*/
+
+
+/******************************** Port ********************************/
+
+// 端口基类
+// 用于管理一个端口，通过PinBit标识该组的哪些引脚。
+// 子类初始化时先通过SetPort设置端口，备份引脚状态，然后Config通过gpio结构体配置端口，端口销毁时恢复引脚状态
 #include "stm32f10x.h"
-#include "..\Platform\Pin.h"
 
 #ifdef STM32F4
     #define GPIO_MAX_SPEED 100
@@ -159,3 +172,14 @@ class InputPort: public Port
 };
 //中断线打开、关闭
 void SetEXIT(int pinIndex, bool enable);
+
+/*
+输入口防抖原理：
+1，中断时，通过循环读取来避免极快的中断触发。
+实际上不知道是否有效果，太快了无从测试，这样子可能导致丢失按下或弹起事件，将来考虑是否需要改进。
+2，按下和弹起事件允许同时并存于_Value，然后启动一个任务来处理，任务支持毫秒级防抖延迟
+3，因为_Value可能同时存在按下和弹起，任务处理时需要同时考虑两者。
+*/
+
+#endif //_Port_H_
+
