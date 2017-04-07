@@ -49,13 +49,16 @@ class Port
 	#ifndef TINY
 	virtual ~Port();
 	#endif
+	Port& Set(Pin pin);	// 设置引脚
+	bool Empty() const;
+	
     public:
         GPIO_TypeDef *Group; // 针脚组
 		
         ushort PinBit; // 组内引脚位。每个引脚一个位
 
-        Port &Set(Pin pin); // 设置引脚，并应用配置。
-        bool Empty()const;
+       
+       
         virtual void Config(); // 确定配置,确认用对象内部的参数进行初始化
         // 辅助函数
         _force_inline static GPIO_TypeDef *IndexToGroup(byte index);
