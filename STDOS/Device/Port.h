@@ -166,6 +166,7 @@ private:
 // 输入口
 class InputPort : public Port
 {
+public:
 	typedef enum
     {
         NOPULL	= 0x00,
@@ -223,28 +224,12 @@ private:
 	void OpenPin(void* param);
 	void ClosePin();
 	bool OnRegister();
-	byte	_Value;	// 当前值
-	
-	
-	
-	
-	
-    public:
-               
-        ushort ShakeTime; //	=	0; 		// 抖动时间.毫秒
-        ushort PressTime; //	=	0;		//长按时间。毫秒
-        bool Invert; //	=	2; 		// 是否倒置输入输出。默认2表示自动检测		
-        PuPd Pull; //	=	PuPd;//上拉下拉电阻
-        Trigger Mode; //	=	Both;	//触发模式，上升沿下降沿
-        bool HardEvent; //	=	false;	//是否使用硬件事件，默认false
-        //Delegate2<InputPortNew&,bool> Press;//按下事件
-        //以上为2017-01-07
-        bool Floating; // 是否浮空输入
-        InputPort();
-        InputPort(Pin pin, bool floating = true, PuPd pupd = UP);
-        virtual ~InputPort();
+	byte	_Value;	// 当前值	
+    public:        
+        Trigger Mode; //	=	Both;	//触发模式，上升沿下降沿       
+                
         ushort ReadGroup(); // 整组读取
-        bool Read(); // 读取状态
+        
         static bool Read(Pin pin); // 读取某个引脚
         void Register(IOReadHandler handler, void *param = NULL); // 注册事件
         operator bool();
@@ -302,9 +287,6 @@ public:
 	{
 		if(_port) *_port = _value;
 	}
-	private:
-        OutputPort *_port;
-        bool _value;
 };
 
 //中断线打开、关闭

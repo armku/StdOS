@@ -468,7 +468,7 @@ bool InputPort::Read()
     return rs ^ Invert;
 }
 
-bool InputPort::Read(Pin pin)
+bool InputPort::Read(Pin pin) const
 {
     GPIO_TypeDef *group = _GROUP(pin);
     return (group->IDR >> (pin &0xF)) &1;
