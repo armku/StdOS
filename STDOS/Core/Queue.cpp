@@ -1,11 +1,9 @@
 #include "Queue.h"
 
 byte buf[512];
-Queue::Queue()
-{
-	
-	this->_s=new Array(buf,512);
-    return ;
+Queue::Queue():_s(buf,512)
+{	
+	return ;
 }
 
 
