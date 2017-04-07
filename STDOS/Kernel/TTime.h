@@ -43,6 +43,20 @@ public:
 		UInt64 mCurrent;//系统启动以来的毫秒数				
 };
 extern TTime Time; //系统时间，不建议用户直接使用
+// 时间轮。用于超时处理
+class TimeWheel
+{
+public:
+	UInt64	Expire;		// 到期时间，毫秒
+	ushort	Sleep;		// 睡眠时间，默认0毫秒
+
+	TimeWheel(uint ms);
+
+	void Reset(uint ms);
+
+	// 是否已过期
+	bool Expired();
+};
 class TimeCost
 {
 	public:
