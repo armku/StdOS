@@ -105,7 +105,9 @@ public:
     byte Invert		= 2;		// 是否倒置输入输出。默认2表示自动检测
     bool OpenDrain	= false;	// 是否开漏输出
     byte Speed		= 50;		// 速度
-	
+	OutputPort();
+    OutputPort(Pin pin);
+    OutputPort(Pin pin, byte invert, bool openDrain = false, byte speed = 50);
 	
 	
 	
@@ -119,11 +121,6 @@ public:
     public:
         
         
-        
-
-        OutputPort();
-        // 普通输出一般采用开漏输出，需要倒置
-        OutputPort(Pin pin, bool invert = false, bool openDrain = false, uint speed = GPIO_MAX_SPEED);
 
         // 整体写入所有包含的引脚
         void Write(bool value);

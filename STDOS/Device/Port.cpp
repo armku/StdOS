@@ -177,8 +177,13 @@ OutputPort::OutputPort()
 {
     Init();
 }
+OutputPort::OutputPort(Pin pin)
+{
+	Init();
+	Set(pin);
+}
 
-OutputPort::OutputPort(Pin pin, bool invert, bool openDrain, uint speed)
+OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
 {
     Init(invert, openDrain, speed);
     Set(pin);
