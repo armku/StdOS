@@ -94,10 +94,7 @@
             void OnClose2();
             void OnWrite2();
         private:
-
             byte _index;
-
-
             USART_TypeDef *_port;
             AlternatePort _tx;
             #if defined(STM32F0) || defined(STM32F4)
@@ -105,14 +102,10 @@
             #else 
                 InputPort _rx;
             #endif 
-
         public:
             SerialPort(byte index, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);
-            SerialPort(USART_TypeDef *com, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);
-            
-            void Init(byte index, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);
-            void SendData(byte data, uint times = 3000);
-            bool Flush(uint times = 3000);
+            SerialPort(USART_TypeDef *com, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);            
+            void Init(byte index, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);                     
             void GetPins(Pin *txPin, Pin *rxPin);            
             virtual String ToString();            
         protected:            

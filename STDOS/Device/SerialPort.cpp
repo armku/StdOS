@@ -275,7 +275,7 @@ void SerialPort::OnClose()
 }
 
 // 发送单一字节数据
-void SerialPort::SendData(byte data, uint times)
+int SerialPort::SendData(byte data, int times)
 {
     while (USART_GetFlagStatus(_port, USART_FLAG_TXE) == RESET && --times > 0){}
 
@@ -288,6 +288,7 @@ void SerialPort::SendData(byte data, uint times)
     {
         Error++;
     }
+	return 0;
 }
 
 // 向某个端口写入数据。如果size为0，则把data当作字符串，一直发送直到遇到\0为止
@@ -343,7 +344,7 @@ uint SerialPort::OnRead(byte *buf, uint size)
 }
 
 // 刷出某个端口中的数据
-bool SerialPort::Flush(uint times)
+bool SerialPort::Flush(int times)
 {
     //uint times = 3000;
     while (USART_GetFlagStatus(_port, USART_FLAG_TXE) == RESET && --times > 0)
