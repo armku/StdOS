@@ -5,7 +5,8 @@ TInterrupt Interrupt;
 
 SerialPort *onSerialPortRcv[5];
 
-void TInterrupt::SetPriority(byte irq, byte level)
+// 设置优先级
+void TInterrupt::SetPriority(short irq, uint priority) const
 {
     NVIC_InitTypeDef nvic;
     nvic.NVIC_IRQChannelCmd = ENABLE;
@@ -92,8 +93,8 @@ void TInterrupt::SetPriority(byte irq, byte level)
 
     NVIC_Init(&nvic);
 }
-
-void TInterrupt::Activate(byte irq, OnUsartReceive onrcv, void *param)
+// 注册中断函数（中断号，函数，参数）
+bool TInterrupt::Activate(short irq, InterruptCallback isr, void* param)
 {
     SerialPort *sp = (SerialPort*)param;
     switch (irq)
@@ -132,11 +133,13 @@ void TInterrupt::Activate(byte irq, OnUsartReceive onrcv, void *param)
         default:
             break;
     }
+	return true;
 }
 
 //关闭中断
-void TInterrupt::Deactivate(byte irq){
-
+bool TInterrupt::Deactivate(short irq)
+{
+	return true;
 }
 	//所有中断线处理
 void EXTI_IRQHandler(ushort num, void *param);
