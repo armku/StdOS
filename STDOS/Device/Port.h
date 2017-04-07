@@ -96,15 +96,30 @@ private:
             UInt64 InitState; // 备份引脚初始状态，在析构时还原
         #endif 
 };
-/*
-输出口
- */
-class OutputPort: public Port
+/******************************** OutputPort ********************************/
+
+// 输出口
+class OutputPort : public Port
 {
+public:
+    byte Invert		= 2;		// 是否倒置输入输出。默认2表示自动检测
+    bool OpenDrain	= false;	// 是否开漏输出
+    byte Speed		= 50;		// 速度
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     public:
-        bool OpenDrain; // 是否开漏输出
-        bool Invert; // 是否倒置输入输出
-        uint Speed; // 速度
+        
+        
+        
 
         OutputPort();
         // 普通输出一般采用开漏输出，需要倒置
