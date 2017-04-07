@@ -330,23 +330,6 @@ void OutputPort::Init(bool invert, bool openDrain, uint speed)
     Invert = invert;
 }
 
-PortScope::PortScope(OutputPort *port, bool value)
-{
-    _port = port;
-    if (_port)
-    {
-        // 备份数值，析构的时候需要还原
-        _value = port->Read();
-        *_port = value;
-    }
-}
-
-PortScope::~PortScope()
-{
-    if (_port)
-        *_port = _value;
-}
-
 AlternatePort::AlternatePort(): OutputPort()
 {
     Init(false, false);
