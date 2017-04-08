@@ -115,12 +115,19 @@ bool Version::operator==	(const Version& left, const Version& right)
 	// 设置编译日期
 	Version& Version::SetCompile(int year, int month, int day)
 	{
+		return *this;
 	}
 	// 设置编译日期 170325
 	Version& Version::SetCompile(int buildday)
 	{
+		this->Build=buildday;
+		return *this;
 	}
 
 	String Version::ToString() const
 	{
+		String* ret=new String();
+		
+		return *ret;
 	}
+	
