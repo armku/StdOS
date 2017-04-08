@@ -1,5 +1,20 @@
 #include "Type.h"
 #include "I2C.h"
+void SoftI2C::Delay(int us)
+{
+	//Sys.Delay(us);
+	/*
+	因为有系统代码，导致Delay不是很准，经常大于1us
+	右移23位时：
+	48M = 5;
+	72M = 8;
+	108M= 12;
+	120m= 14;
+	*/
+	// 72M = 4
+	int t=Sys.Clock >> 21;
+	while(t-- > 0);
+}
 CSoftI2C::CSoftI2C(Pin pinscl, Pin pinsda, uint nus)
 {
 	this->psck.OpenDrain=true;
@@ -151,4 +166,5 @@ void CSoftI2C::delay(void)
     for (i = 0; i < 10; i++)
         ;
 }
+
 
