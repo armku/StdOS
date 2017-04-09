@@ -8,17 +8,34 @@
 #include <CType.h>
 #include "Sys.h"
 
-String::String(cstring cstr):Array(cstr,ArrayLength(cstr))
-{	
-        this->_Length =ArrayLength(cstr);
- //   this->initCapacity();
-
+String::String(cstring cstr): Array(cstr, ArrayLength(cstr))
+{
+    this->_Length = ArrayLength(cstr);
     this->Copy(0, cstr, this->_Length);
 }
-String::String(const String& str):Array(str.GetBuffer(),str.Length())
-{
-	
+
+String::String(const String &str): Array(str.GetBuffer(), str.Length()){
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -213,17 +230,18 @@ String::String(const String& str):Array(str.GetBuffer(),str.Length())
 //}
 bool String::Concat(cstring cstr)
 {
-	return false;
+    return false;
 }
+
 String &String::operator = (const char *str)
 {
-//    if (strlen(str) <= this->mcapacity)
+    //    if (strlen(str) <= this->mcapacity)
     {
-//        this->_Length = strlen(str);
+        //        this->_Length = strlen(str);
     }
- //   else
+    //   else
     {
-//        this->_Length = this->mcapacity;
+        //        this->_Length = this->mcapacity;
     }
     for (int i = 0; i < this->_Length; i++)
     {
@@ -235,13 +253,13 @@ String &String::operator = (const char *str)
 
 String &String::operator = (const String &str)
 {
-//    if (str.Length() <= this->mcapacity)
+    //    if (str.Length() <= this->mcapacity)
     {
-//        this->_Length = str.Length();
+        //        this->_Length = str.Length();
     }
- //   else
+    //   else
     {
-//        this->_Length = this->mcapacity;
+        //        this->_Length = this->mcapacity;
     }
     for (int i = 0; i < this->_Length; i++)
     {
@@ -250,28 +268,30 @@ String &String::operator = (const String &str)
     ((byte*)(this->_Arr))[this->_Length] = 0;
     return  *this;
 }
+
 #if 0
-bool String::operator == (const char *str)
-{
-    if (strlen(str) != this->_Length)
+    bool String::operator == (const char *str)
     {
-        return false;
-    }
-    for (int i = 0; i < this->_Length; i++)
-    {
-        if (((byte*)(this->_Arr))[i] != str[i])
+        if (strlen(str) != this->_Length)
         {
             return false;
         }
+        for (int i = 0; i < this->_Length; i++)
+        {
+            if (((byte*)(this->_Arr))[i] != str[i])
+            {
+                return false;
+            }
+        }
+        return true;
     }
-    return true;
-}
-#endif
-int String::Copy(int destIndex, const void* src, int len)
+#endif 
+int String::Copy(int destIndex, const void *src, int len)
 {
-	return len;
+    return len;
 }
-bool String::Equals(const String &str1) const
+
+bool String::Equals(const String &str1)const
 {
     if (this->Length() != str1._Length)
     {
@@ -286,278 +306,280 @@ bool String::Equals(const String &str1) const
     }
     return true;
 }
-bool String::Equals(cstring cstr) const
-{
-	return true;
-}
-#if 0
-String &String::operator += (const DateTime &dt)
-{
-    if ((this->_Length + 19) < this->Capacity())
-    {
-        this->_Length += 19;
-        snprintf((char*) &((byte*)(this->_Arr))[this->_Length - 1-18], 20, "%04d-%02d-%02d %02d:%02d:%02d", dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second);
-    }
-    return  *this;
-}
-#endif
-#if 0
-String &String::operator += (const String &str)
-{
-    if ((str.Length() + this->_Length) < this->mcapacity)
-    {
-        this->_Length += str.Length();
-        this->Copy(this->_Length - str.Length(), str.GetBuffer(), str.Length());
-    }
 
-    return  *this;
-}
-#endif
-#if 0
-String &String::operator += (const float da)
+bool String::Equals(cstring cstr)const
 {
-    byte buf[100] = 
-    {
-        0
-    };
-    snprintf((char*)buf, 100, "%2.2f", da);
-    if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
-    {
-        this->Copy(this->_Length, buf, strlen((char*)buf));
-    }
-    this->_Length += strlen((char*)buf);
-    return  *this;
+    return true;
 }
-#endif
-#if 0
-String &String::Concat(byte value, byte radix)
-{
-    byte buf[100] = 
-    {
-        0
-    };
-    switch (radix)
-    {
-        case 10:
-            snprintf((char*)buf, 100, "%d", value);
-            break;
-        case 16:
-            snprintf((char*)buf, 100, "%X", value);
-            break;
-        default:
-            break;
-    }
-    if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
-    {
-        this->Copy(this->_Length, buf, strlen((char*)buf));
-    }
-    this->_Length += strlen((char*)buf);
-    return  *this;
-}
-#endif
-#if 0
-String &String::Concat(short value, byte radix)
-{
-    byte buf[100] = 
-    {
-        0
-    };
-    switch (radix)
-    {
-        case 10:
-            snprintf((char*)buf, 100, "%d", value);
-            break;
-        case 16:
-            snprintf((char*)buf, 100, "%X", value);
-            break;
-        default:
-            break;
-    }
-    if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
-    {
-        this->Copy(this->_Length, buf, strlen((char*)buf));
-    }
-    this->_Length += strlen((char*)buf);
-    return  *this;
-}
-#endif
-#if 0
-String &String::Concat(int value, byte radix)
-{
-    byte buf[100] = 
-    {
-        0
-    };
-    switch (radix)
-    {
-        case 10:
-            snprintf((char*)buf, 100, "%d", value);
-            break;
-        case 16:
-            snprintf((char*)buf, 100, "%X", value);
-            break;
-        default:
-            break;
-    }
-    if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
-    {
-        this->Copy(this->_Length, buf, strlen((char*)buf));
-    }
-    this->_Length += strlen((char*)buf);
-    return  *this;
-}
-#endif
-#if 0
-String &String::Concat(uint value, byte radix)
-{
-    byte buf[100] = 
-    {
-        0
-    };
-    switch (radix)
-    {
-        case 10:
-            snprintf((char*)buf, 100, "%u", value);
-            break;
-        case 16:
-            snprintf((char*)buf, 100, "%X", value);
-            break;
-        default:
-            break;
-    }
-    if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
-    {
-        this->Copy(this->_Length, buf, strlen((char*)buf));
-    }
-    this->_Length += strlen((char*)buf);
-    return  *this;
-}
-#endif
-#if 0
-String &String::Concat(Int64 value, byte radix)
-{
-    byte buf[100] = 
-    {
-        0
-    };
-    switch (radix)
-    {
-        case 10:
-            snprintf((char*)buf, 100, "%lld", value);
-            break;
-        case 16:
-            snprintf((char*)buf, 100, "%llX", value);
-            break;
-        default:
-            break;
-    }
-    if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
-    {
-        this->Copy(this->_Length, buf, strlen((char*)buf));
-    }
-    this->_Length += strlen((char*)buf);
-    return  *this;
-}
-#endif
-#if 0
-String &String::Concat(UInt64 value, byte radix)
-{
-    byte buf[100] = 
-    {
-        0
-    };
-    switch (radix)
-    {
-        case 10:
-            snprintf((char*)buf, 100, "%llu", value);
-            break;
-        case 16:
-            snprintf((char*)buf, 100, "%llX", value);
-            break;
-        default:
-            break;
-    }
-    if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
-    {
-        this->Copy(this->_Length, buf, strlen((char*)buf));
-    }
-    this->_Length += strlen((char*)buf);
-    return  *this;
-}
-#endif
-#if 0
-String &String::Concat(float value, byte dot)
-{
-    byte buf[100] = 
-    {
-        0
-    };
-    switch (dot)
-    {
-        case 0:
-            snprintf((char*)buf, 100, "%0.0f", value);
-            break;
-        case 1:
-            snprintf((char*)buf, 100, "%1.1f", value);
-            break;
-        case 2:
-            snprintf((char*)buf, 100, "%2.2f", value);
-            break;
-        case 3:
-            snprintf((char*)buf, 100, "%3.3f", value);
-            break;
-        case 4:
-            snprintf((char*)buf, 100, "%4.4f", value);
-            break;
-        default:
-            break;
-    }
-
-    if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
-    {
-        this->Copy(this->_Length, buf, strlen((char*)buf));
-    }
-    this->_Length += strlen((char*)buf);
-    return  *this;
-}
-#endif
 
 #if 0
+    String &String::operator += (const DateTime &dt)
+    {
+        if ((this->_Length + 19) < this->Capacity())
+        {
+            this->_Length += 19;
+            snprintf((char*) &((byte*)(this->_Arr))[this->_Length - 1-18], 20, "%04d-%02d-%02d %02d:%02d:%02d", dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second);
+        }
+        return  *this;
+    }
+#endif 
+#if 0
+    String &String::operator += (const String &str)
+    {
+        if ((str.Length() + this->_Length) < this->mcapacity)
+        {
+            this->_Length += str.Length();
+            this->Copy(this->_Length - str.Length(), str.GetBuffer(), str.Length());
+        }
 
-String &String::Concat(double value, byte dot)
-{
-    byte buf[100] = 
-    {
-        0
-    };
-    switch (dot)
-    {
-        case 0:
-            snprintf((char*)buf, 100, "%0.0f", value);
-            break;
-        case 1:
-            snprintf((char*)buf, 100, "%1.1f", value);
-            break;
-        case 2:
-            snprintf((char*)buf, 100, "%2.2f", value);
-            break;
-        case 3:
-            snprintf((char*)buf, 100, "%3.3f", value);
-            break;
-        case 4:
-            snprintf((char*)buf, 100, "%4.4f", value);
-            break;
-        default:
-            break;
+        return  *this;
     }
-    if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
+#endif 
+#if 0
+    String &String::operator += (const float da)
     {
-        this->Copy(this->_Length, buf, strlen((char*)buf));
+        byte buf[100] = 
+        {
+            0
+        };
+        snprintf((char*)buf, 100, "%2.2f", da);
+        if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
+        {
+            this->Copy(this->_Length, buf, strlen((char*)buf));
+        }
+        this->_Length += strlen((char*)buf);
+        return  *this;
     }
-    this->_Length += strlen((char*)buf);
-    return  *this;
-}
-#endif
+#endif 
+#if 0
+    String &String::Concat(byte value, byte radix)
+    {
+        byte buf[100] = 
+        {
+            0
+        };
+        switch (radix)
+        {
+            case 10:
+                snprintf((char*)buf, 100, "%d", value);
+                break;
+            case 16:
+                snprintf((char*)buf, 100, "%X", value);
+                break;
+            default:
+                break;
+        }
+        if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
+        {
+            this->Copy(this->_Length, buf, strlen((char*)buf));
+        }
+        this->_Length += strlen((char*)buf);
+        return  *this;
+    }
+#endif 
+#if 0
+    String &String::Concat(short value, byte radix)
+    {
+        byte buf[100] = 
+        {
+            0
+        };
+        switch (radix)
+        {
+            case 10:
+                snprintf((char*)buf, 100, "%d", value);
+                break;
+            case 16:
+                snprintf((char*)buf, 100, "%X", value);
+                break;
+            default:
+                break;
+        }
+        if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
+        {
+            this->Copy(this->_Length, buf, strlen((char*)buf));
+        }
+        this->_Length += strlen((char*)buf);
+        return  *this;
+    }
+#endif 
+#if 0
+    String &String::Concat(int value, byte radix)
+    {
+        byte buf[100] = 
+        {
+            0
+        };
+        switch (radix)
+        {
+            case 10:
+                snprintf((char*)buf, 100, "%d", value);
+                break;
+            case 16:
+                snprintf((char*)buf, 100, "%X", value);
+                break;
+            default:
+                break;
+        }
+        if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
+        {
+            this->Copy(this->_Length, buf, strlen((char*)buf));
+        }
+        this->_Length += strlen((char*)buf);
+        return  *this;
+    }
+#endif 
+#if 0
+    String &String::Concat(uint value, byte radix)
+    {
+        byte buf[100] = 
+        {
+            0
+        };
+        switch (radix)
+        {
+            case 10:
+                snprintf((char*)buf, 100, "%u", value);
+                break;
+            case 16:
+                snprintf((char*)buf, 100, "%X", value);
+                break;
+            default:
+                break;
+        }
+        if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
+        {
+            this->Copy(this->_Length, buf, strlen((char*)buf));
+        }
+        this->_Length += strlen((char*)buf);
+        return  *this;
+    }
+#endif 
+#if 0
+    String &String::Concat(Int64 value, byte radix)
+    {
+        byte buf[100] = 
+        {
+            0
+        };
+        switch (radix)
+        {
+            case 10:
+                snprintf((char*)buf, 100, "%lld", value);
+                break;
+            case 16:
+                snprintf((char*)buf, 100, "%llX", value);
+                break;
+            default:
+                break;
+        }
+        if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
+        {
+            this->Copy(this->_Length, buf, strlen((char*)buf));
+        }
+        this->_Length += strlen((char*)buf);
+        return  *this;
+    }
+#endif 
+#if 0
+    String &String::Concat(UInt64 value, byte radix)
+    {
+        byte buf[100] = 
+        {
+            0
+        };
+        switch (radix)
+        {
+            case 10:
+                snprintf((char*)buf, 100, "%llu", value);
+                break;
+            case 16:
+                snprintf((char*)buf, 100, "%llX", value);
+                break;
+            default:
+                break;
+        }
+        if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
+        {
+            this->Copy(this->_Length, buf, strlen((char*)buf));
+        }
+        this->_Length += strlen((char*)buf);
+        return  *this;
+    }
+#endif 
+#if 0
+    String &String::Concat(float value, byte dot)
+    {
+        byte buf[100] = 
+        {
+            0
+        };
+        switch (dot)
+        {
+            case 0:
+                snprintf((char*)buf, 100, "%0.0f", value);
+                break;
+            case 1:
+                snprintf((char*)buf, 100, "%1.1f", value);
+                break;
+            case 2:
+                snprintf((char*)buf, 100, "%2.2f", value);
+                break;
+            case 3:
+                snprintf((char*)buf, 100, "%3.3f", value);
+                break;
+            case 4:
+                snprintf((char*)buf, 100, "%4.4f", value);
+                break;
+            default:
+                break;
+        }
+
+        if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
+        {
+            this->Copy(this->_Length, buf, strlen((char*)buf));
+        }
+        this->_Length += strlen((char*)buf);
+        return  *this;
+    }
+#endif 
+
+#if 0
+
+    String &String::Concat(double value, byte dot)
+    {
+        byte buf[100] = 
+        {
+            0
+        };
+        switch (dot)
+        {
+            case 0:
+                snprintf((char*)buf, 100, "%0.0f", value);
+                break;
+            case 1:
+                snprintf((char*)buf, 100, "%1.1f", value);
+                break;
+            case 2:
+                snprintf((char*)buf, 100, "%2.2f", value);
+                break;
+            case 3:
+                snprintf((char*)buf, 100, "%3.3f", value);
+                break;
+            case 4:
+                snprintf((char*)buf, 100, "%4.4f", value);
+                break;
+            default:
+                break;
+        }
+        if ((this->_Length + strlen((char*)buf)) < this->mcapacity)
+        {
+            this->Copy(this->_Length, buf, strlen((char*)buf));
+        }
+        this->_Length += strlen((char*)buf);
+        return  *this;
+    }
+#endif 
 byte ToInt(char ch)
 {
     ch = toupper(ch);
@@ -567,52 +589,53 @@ byte ToInt(char ch)
     }
     return ch - 'A' + 10;
 }
-#if 0
-String String::ToHex()
-{
-    byte buf[100];
-    byte bi = 0;
-    byte da;
-    int j = 0;
-    for (int i = 0; i < 100; i++)
-    {
-        buf[i] = 0;
-    }
-    for (int i = 0; i < this->_Length; i++)
-    {
 
-        if (isxdigit(((byte*)(this->_Arr))[i]))
+#if 0
+    String String::ToHex()
+    {
+        byte buf[100];
+        byte bi = 0;
+        byte da;
+        int j = 0;
+        for (int i = 0; i < 100; i++)
         {
-            if (bi == 0)
+            buf[i] = 0;
+        }
+        for (int i = 0; i < this->_Length; i++)
+        {
+
+            if (isxdigit(((byte*)(this->_Arr))[i]))
             {
-                da = ToInt(((byte*)(this->_Arr))[i]);
-                da <<= 4;
-                bi = 1;
+                if (bi == 0)
+                {
+                    da = ToInt(((byte*)(this->_Arr))[i]);
+                    da <<= 4;
+                    bi = 1;
+                }
+                else
+                {
+                    da |= ToInt(((byte*)(this->_Arr))[i]);
+                    buf[j] = da;
+                    j++;
+                    bi = 0;
+                }
             }
             else
             {
-                da |= ToInt(((byte*)(this->_Arr))[i]);
-                buf[j] = da;
-                j++;
                 bi = 0;
             }
         }
-        else
-        {
-            bi = 0;
-        }
-    }
 
-    return String((const char*)buf);
-}
-#endif
+        return String((const char*)buf);
+    }
+#endif 
 #if 0
-//数组容量
-uint String::Capacity()const
-{
-    return this->mcapacity;
-}
-#endif
+    //数组容量
+    uint String::Capacity()const
+    {
+        return this->mcapacity;
+    }
+#endif 
 
 void String::Show(bool newLine)const
 {
@@ -635,39 +658,44 @@ void String::Show(bool newLine)const
 //}
 bool String::SetLength(int length, bool bak)
 {
-	return true;
+    return true;
 }
-String& String::ToStr(String& str) const
+
+String &String::ToStr(String &str)const
 {
-	return str;
+    return str;
 }
-String String::ToString() const
+
+String String::ToString()const
 {
-	return String("");
+    return String("");
 }
-int String::CopyTo(int srcIndex, void* dest, int len) const
+
+int String::CopyTo(int srcIndex, void *dest, int len)const
 {
-	return len;
+    return len;
 }
-void* String::Alloc(int len)
+
+void *String::Alloc(int len)
 {
-	return 0;
+    return 0;
 }
+
 #ifdef DEBUG
     void String::Test()
-	{
-		char err[]="String Err\r\n";
-		//默认空字符串，使用内部数据区
-		String str;
-		assert(str.Length() ==0,err);
-		assert(str.Capacity() == 0x40 -1,err);
-		
-		String str1("456");
-		assert(str1 == "456",err);
-		assert(str1.GetBuffer() == "456",err);
-		
-//		char err1[] = "String(const String& str)";
-		
-		
+    {
+        char err[] = "String Err\r\n";
+        //默认空字符串，使用内部数据区
+        String str;
+        assert(str.Length() == 0, err);
+        assert(str.Capacity() == 0x40 - 1, err);
+
+        String str1("456");
+        assert(str1 == "456", err);
+        assert(str1.GetBuffer() == "456", err);
+
+        //		char err1[] = "String(const String& str)";
+
+
     }
 #endif
