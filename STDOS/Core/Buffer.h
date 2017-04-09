@@ -114,6 +114,8 @@ protected:
 	int		_Length;	// 长度
 
 	void move(Buffer& rval);
+public:	
+	virtual String ToString() const;
 };
 
 // 带引用计数的缓冲区

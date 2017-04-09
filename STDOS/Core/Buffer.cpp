@@ -361,25 +361,28 @@ bool operator != (const Buffer &bs1, const void *ptr)
 //    else
 //    {
 //        printf("%s", ((byte*)(this->_Arr)));
-//    }
-//    //Object::Show(newLine);
+//    }    
 //    Object::Show(true);
 //}
 
 
-
-
-
-
-
-
-
+char chartmp[512];
 //Buffer::Buffer(){}
 String &Buffer::ToStr(String &str)const
-{
+{	
     String *ret = new String();
     return  *ret;
 }
+String  Buffer::ToString()const
+{
+	for(int i=0;i<this->_Length;i++)
+	{
+		chartmp[i]=this->_Arr[i];
+	}
+	chartmp[this->_Length]=0;
+    return String(chartmp);
+}
+
 
 #if DEBUG
     void Buffer::Test()

@@ -14,7 +14,7 @@ String &Object::ToStr(String &str)const
 
 String Object::ToString()const
 {
-    return String("");
+    return String("Object");
 }
 
 void Object::Show(bool newLine)const
