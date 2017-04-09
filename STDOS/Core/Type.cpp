@@ -6,30 +6,41 @@ void assert_failed(byte *file, uint line, char *errstr)
 {
     printf("%s(%d):    %s\n", file, line, errstr);
 }
-String& Object::ToStr(String& str) const
+
+String &Object::ToStr(String &str)const
 {
-	return str;
+    return str;
 }
-String Object::ToString() const
+
+String Object::ToString()const
 {
-	return String("");
+    return String("");
 }
 
 void Object::Show(bool newLine)const
 {
+    printf(this->ToString().GetBuffer());
+
     if (newLine)
     {
         printf("\r\n");
     }
 }
 
-#if 0
-    const CType Object::GetType()const{}
-#endif 
-#if 0
-    //输出对象的字符串表示方式.支持RVO优化
-    String Object::ToString()const
-    {
-        return String("Object");
-    }
-#endif
+const Type Object::GetType()const
+{
+    Type ret;
+	ret._info="Object";
+	ret.Size=7;
+    return ret;
+}
+
+Type::Type(){
+
+}
+// 名称
+const String Type::Name()const
+{
+    String ret((cstring)(this->_info), this->Size);
+    return ret;
+}
