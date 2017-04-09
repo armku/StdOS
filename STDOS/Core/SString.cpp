@@ -9,25 +9,24 @@
 #include "Sys.h"
 
 String::String(cstring cstr):Array(cstr,ArrayLength(cstr))
+{	
+        this->_Length =ArrayLength(cstr);
+ //   this->initCapacity();
+
+    this->Copy(0, cstr, this->_Length);
+}
+String::String(const String& str):Array(str.GetBuffer(),str.Length())
 {
 	
 }
+
+
+
+
+
+
 //String::~String()
 //{
-//}
-//String::String(const char *str, int len)
-//{
-//    if (len < 0)
-//    {
-//        this->_Length = strlen(str);
-//    }
-//    else
-//    {
-//        this->_Length = len;
-//    }
-// //   this->initCapacity();
-
-//    this->Copy(0, str, this->_Length);
 //}
 
 //String::String(char ch)

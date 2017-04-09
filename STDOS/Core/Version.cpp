@@ -1,5 +1,7 @@
 #include "DateTime.h"
+#include "SString.h"
 #include "Version.h"
+#include <stdio.h>
 
 Version::Version()
 {
@@ -55,79 +57,99 @@ int Version::ToValue()const
     ret |= this->Build;
     return ret;
 }
-int Version::CompareTo(const Version& value) const
-{
-	if(this->Major>value.Major)
-	{
-		return 1;
-	}
-	else if(this->Major<value.Major)
-	{
-		return -1;
-	}
-	else{}
-	if(this->Minor>value.Minor)
-	{
-		return 1;
-	}
-	else if(this->Minor<value.Minor)
-	{
-		return -1;
-	}
-	else{}
-	if(this->Build>value.Build)
-	{
-		return 1;
-	}
-	else if(this->Build<value.Build)
-	{
-		return -1;
-	}
-	else{}
-	return 0;
-}
-bool Version::operator==	(const Version& left, const Version& right)
-{
-	return ((left.CompareTo(right))==0)?true:false;
-}
-    friend bool Version::operator!=	(const Version& left, const Version& right)
-	{
-	}
-    friend bool Version::operator>	(const Version& left, const Version& right)
-	{
-	}
-    friend bool Version::operator<	(const Version& left, const Version& right)
-	{
-	}
-    friend bool Version::operator>=	(const Version& left, const Version& right)
-	{
-	}
-    friend bool Version::operator<=	(const Version& left, const Version& right)
-	{
-	}
 
-	// 根据版本号反推编译时间。
-	DateTime Version::Compile() const
-	{
-		DateTime *dt=new DateTime();
-		dt->Year=this->Build;
-	}
-	// 设置编译日期
-	Version& Version::SetCompile(int year, int month, int day)
-	{
-		return *this;
-	}
-	// 设置编译日期 170325
-	Version& Version::SetCompile(int buildday)
-	{
-		this->Build=buildday;
-		return *this;
-	}
+int Version::CompareTo(const Version &value)const
+{
+    if (this->Major > value.Major)
+    {
+        return 1;
+    }
+    else if (this->Major < value.Major)
+    {
+        return  - 1;
+    }
+    else
+    {}
+    if (this->Minor > value.Minor)
+    {
+        return 1;
+    }
+    else if (this->Minor < value.Minor)
+    {
+        return  - 1;
+    }
+    else
+    {}
+    if (this->Build > value.Build)
+    {
+        return 1;
+    }
+    else if (this->Build < value.Build)
+    {
+        return  - 1;
+    }
+    else
+    {}
+        return 0;
+}
 
-	String Version::ToString() const
-	{
-		String* ret=new String();
-		
-		return *ret;
-	}
+bool operator == (const Version &left, const Version &right)
+{
+    return (left.CompareTo(right)) == 0;
+}
+
+bool operator != (const Version &left, const Version &right)
+{
+    return (left.CompareTo(right)) != 0;
+}
+
+bool operator > (const Version &left, const Version &right)
+{
+    return (left.CompareTo(right)) > 0;
+}
+
+bool operator < (const Version &left, const Version &right)
+{
+    return (left.CompareTo(right)) < 0;
+}
+
+bool operator >= (const Version &left, const Version &right)
+{
+    return (left.CompareTo(right)) >= 0;
+}
+
+bool operator <= (const Version &left, const Version &right)
+{
+    return (left.CompareTo(right)) <= 0;
+}
+
+// 根据版本号反推编译时间。
+DateTime Version::Compile()const
+{
+    DateTime *dt = new DateTime();
+    dt->Year = this->Build;
 	
+	return *dt;
+}
+
+// 设置编译日期
+Version &Version::SetCompile(int year, int month, int day)
+{
+    return  *this;
+}
+
+// 设置编译日期 170325
+Version &Version::SetCompile(int buildday)
+{
+    this->Build = buildday;
+    return  *this;
+}
+
+String Version::ToString()const
+{
+	char *buf=new char[100];
+	snprintf(buf,100,"%d.%d.%d",this->Major,this->Minor,this->Build);
+    String *ret = new String(buf);
+
+    return  *ret;
+}
