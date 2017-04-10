@@ -7,7 +7,7 @@ Version::Version()
 {
     this->Major = 0;
     this->Minor = 0;
-    this->Build = 2017;
+    this->Build = 0;
 }
 
 Version::Version(int value)
@@ -128,13 +128,39 @@ DateTime Version::Compile()const
 {
     DateTime *dt = new DateTime();
     dt->Year = this->Build;
-	
-	return *dt;
+
+    return  *dt;
 }
 
+#define leapyear(year)		((year) % 4 == 0)
+#define days_in_year(a) 	(leapyear(a) ? 366 : 365)
+#define days_in_month(a) 	(month_days[(a) - 1])
 // ÉèÖÃ±àÒëÈÕÆÚ
 Version &Version::SetCompile(int year, int month, int day)
 {
+    if (year < 2000)
+    {
+        this->Build = 0;
+    }
+	else if((month<1)||(month>12))
+	{
+		this->Build = 0;
+	}
+	else if((day<1)||(day>31))
+	{
+		this->Build=0;
+	}
+    else
+    {
+        int days = 0;
+        while (year > 2000)
+        {
+            days += days_in_year(year);
+            year--;
+        }
+//		days+=days_in_month(month);
+		days+=day-1;
+    }	
     return  *this;
 }
 
@@ -147,8 +173,8 @@ Version &Version::SetCompile(int buildday)
 
 String Version::ToString()const
 {
-	char *buf=new char[100];
-	snprintf(buf,100,"%d.%d.%d",this->Major,this->Minor,this->Build);
+    char *buf = new char[100];
+    snprintf(buf, 100, "%d.%d.%d", this->Major, this->Minor, this->Build);
     String *ret = new String(buf);
 
     return  *ret;
