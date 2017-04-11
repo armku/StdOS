@@ -47,6 +47,24 @@ typedef enum
 
 class CW24xxx: public CharStorage
 {
+public:
+    I2C* IIC;		// I2C通信口
+	byte Address;	// 设备地址
+
+    CW24xxx();
+    virtual ~CW24xxx();
+
+	void Init();
+	bool Write(ushort addr, byte data);
+	byte Read(ushort addr);
+
+	virtual bool Write(uint addr, const Buffer& bs) const;
+	virtual bool Read(uint addr, Buffer& bs) const;
+	
+	
+	
+	
+	
     public:
         CW24xxx(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr = 0xA0, uint wnms = 5); //写延时时间       
         byte CheckOk();
@@ -65,8 +83,7 @@ class CW24xxx: public CharStorage
         int writePage(byte *buf, ushort bufpos, ushort addr, uint size); //页内写
         int readPage(byte *buf, ushort bufpos, ushort addr, uint size); //页内读
         int bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr); //读写集中操作1写 0读
-
-        I2C *IIC;
+        
         EW24XXType deviceType; //器件类型
         uint pageSize; //存储页大小
         uint writedelaynms; //写延时	    

@@ -5,6 +5,36 @@
 #define macI2C_WR	0		/* Ð´¿ØÖÆbit */
 #define macI2C_RD	1		/* ¶Á¿ØÖÆbit */
 
+
+CW24xxx::CW24xxx()
+{
+}
+    CW24xxx::~CW24xxx()
+	{
+	}
+
+	void CW24xxx::Init()
+	{
+		
+	}
+	bool CW24xxx::Write(ushort addr, byte data)
+	{
+		return false;
+	}
+	byte CW24xxx::Read(ushort addr)
+	{
+		return 0;
+	}
+
+	bool CW24xxx::Write(uint addr, const Buffer& bs) const
+	{
+		return false;
+	}
+	bool CW24xxx::Read(uint addr, Buffer& bs) const
+	{
+		return false;
+	}
+
 CW24xxx::CW24xxx(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr, uint wnms)
 {
     this->IIC = new SoftI2C(pinsck, pinsda);
