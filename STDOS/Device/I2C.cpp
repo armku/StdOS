@@ -136,7 +136,28 @@ void CSoftI2C::Ack(bool ack)
     this->Delay();
 	}
 }
-
+void CSoftI2C::OnOpen()
+{
+}
+void CSoftI2C::OnClose()
+{
+}
+void CSoftI2C::GetPin(Pin* scl, Pin* sda)
+{
+	
+}
+void CSoftI2C::SetPin(Pin scl, Pin sda)
+{
+	
+}
+// 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
+CSoftI2C::CSoftI2C(uint speedHz)
+{
+	
+}
+CSoftI2C::~CSoftI2C()
+{
+}
 void CSoftI2C::Delay(int us)
 {
 	

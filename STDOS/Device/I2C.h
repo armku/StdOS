@@ -150,21 +150,37 @@ private:
 class CSoftI2C //: public I2C
 {		
     public:
-        CSoftI2C(Pin pinsck, Pin pinsda); //延时时间默认为10，频率为100kHz
-        void SetPin(Pin pinsck, Pin pinsda);//设置端口
+		bool HasSecAddress;	// 设备是否有子地址
+	
+		// 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
+		CSoftI2C(uint speedHz = 100000);
+        CSoftI2C(Pin pinsck, Pin pinsda); 
+        
         void Init();
+	
+		virtual ~CSoftI2C();
+		virtual void SetPin(Pin scl, Pin sda);
+		virtual void GetPin(Pin* scl = nullptr, Pin* sda = nullptr);
+	
+	
+	
 		virtual void Start();
 		virtual void Stop();
-		virtual void Ack(bool ack);  
-		virtual bool WaitAck(int retry=0);	// 等待Ack，默认0表示采用全局Retry
-                
+		        
 		virtual void WriteByte(byte dat);
 		virtual byte ReadByte();
-    private:
-        OutputPort SCL;
-        OutputPort SDA;        
-    private:
-        void Delay(int us=5);
+		virtual void Ack(bool ack);  
+		virtual bool WaitAck(int retry=0);	// 等待Ack，默认0表示采用全局Retry
+private:
+	int _delay;			// 根据速度匹配的延时
+
+	OutputPort	SCL;	// 时钟。开漏输出
+	OutputPort	SDA;	// 数据。开漏输出，直接具备读写功能
+
+	virtual void OnOpen();
+	virtual void OnClose();
+	
+	void Delay(int us=5);
 };
 /*
 开发历史
