@@ -7,8 +7,7 @@
 class CNPA
 {
     public:
-        CNPA(Pin pinsck, Pin pinsda, byte devAddr = 0X51);        
-        void Init(void);
+        CNPA(Pin pinsck, Pin pinsda, byte devAddr = 0X51);
         int Read(void);
     private:
         SoftI2C *pi2c;

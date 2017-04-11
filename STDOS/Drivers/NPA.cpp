@@ -7,11 +7,6 @@ CNPA::CNPA(Pin pinsck, Pin pinsda, byte devAddr)
 	this->pi2c->SetPin(pinsck, pinsda);
 }
 
-void CNPA::Init(void)
-{
-    this->pi2c->Init();
-}
-
 int CNPA::Read(void)
 {
     byte buf1, buf2;

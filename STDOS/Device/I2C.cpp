@@ -71,9 +71,6 @@ void SoftI2C::SetPin(Pin scl, Pin sda)
     this->SCL = 1;
 }
 
-void SoftI2C::Init(){
-
-}
 void SoftI2C::Start()
 {
     /* 当SCL高电平时，SDA出现一个下跳沿表示I2C总线启动信号 */

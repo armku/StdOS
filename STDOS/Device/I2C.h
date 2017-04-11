@@ -121,8 +121,7 @@ public:
 
 	// 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
     SoftI2C(uint speedHz = 100000);	
-    virtual ~SoftI2C();
-	void Init();
+    virtual ~SoftI2C();	
 	virtual void SetPin(Pin scl, Pin sda);
 	virtual void GetPin(Pin* scl = nullptr, Pin* sda = nullptr);
 
