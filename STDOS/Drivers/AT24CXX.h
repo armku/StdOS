@@ -40,8 +40,6 @@
             int Read(uint addr, void *pBuffer, int size, ushort bufpos = 0);
             int Write(uint addr, void *pBuffer, int size, ushort bufpos = 0);
             
-            int WriteByte(uint address, byte da);
-
             OutputPort *pinWP; //±£»¤Òý½Å
             #ifdef DEBUG
                 void Test();

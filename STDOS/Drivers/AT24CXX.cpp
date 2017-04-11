@@ -12,10 +12,6 @@ AT24CXX::~AT24CXX(){}
 void AT24CXX::Init(){
 
 }
-bool AT24CXX::Write(ushort addr, byte data)
-{
-    return false;
-}
 
 bool AT24CXX::Write(uint addr, const Buffer &bs)const
 {
@@ -174,7 +170,7 @@ byte AT24CXX::Read(ushort address)
     return ret;
 }
 
-int AT24CXX::WriteByte(uint address, byte da)
+bool AT24CXX::Write(ushort address, byte da)
 {
     uint m;
 
@@ -236,12 +232,12 @@ int AT24CXX::WriteByte(uint address, byte da)
     /* 命令执行成功，发送I2C总线停止信号 */
     this->IIC->Stop();
     Sys.Sleep(this->writedelaynms);
-    return 0;
+    return true;
 
     cmd_Writebytefail:  /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
     /* 发送I2C总线停止信号 */
     this->IIC->Stop();
-    return 0;
+    return true;
 }
 
 int AT24CXX::bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr) //读写集中操作1写 0读
