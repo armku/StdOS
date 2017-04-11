@@ -161,8 +161,8 @@ class CSoftI2C //: public I2C
 		virtual void WriteByte(byte dat);
 		virtual byte ReadByte();
     private:
-        OutputPort psck;
-        OutputPort psda;
+        OutputPort SCL;
+        OutputPort SDA;
         uint delayus; //—” ± ±º‰
     private:
         void delay(void);
