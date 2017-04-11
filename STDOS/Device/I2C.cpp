@@ -52,14 +52,14 @@ void CSoftI2C::Stop()
     this->psda=1;
 }
 
-void CSoftI2C::WriteByte(byte _ucByte)
+void CSoftI2C::WriteByte(byte dat)
 {
     byte i;
 
     /* 先发送字节的高位bit7 */
     for (i = 0; i < 8; i++)
     {
-        if (_ucByte &0x80)
+        if (dat &0x80)
         {
             this->psda=1;
         }
@@ -75,7 +75,7 @@ void CSoftI2C::WriteByte(byte _ucByte)
         {
             this->psda=1; // 释放总线
         }
-        _ucByte <<= 1; /* 左移一个bit */
+        dat <<= 1; /* 左移一个bit */
         this->delay();
     }
 }

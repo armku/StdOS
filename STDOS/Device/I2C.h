@@ -3,6 +3,8 @@
 
 #include "Device\Port.h"
 
+#pragma once
+
 //SCL		开漏复用输出
 //SDA		开漏复用输出
 
@@ -112,7 +114,27 @@ private:
 	virtual void OnOpen();
 	virtual void OnClose();
 };
-
+class CSoftI2C //: public I2C
+{		
+    public:
+        CSoftI2C(Pin pinsck, Pin pinsda, uint nus = 1); //延时时间默认为10，频率为100kHz
+        void SetPin(Pin pinsck, Pin pinsda);//设置端口
+        void Init();
+        void Start(void);
+        void Stop(void);
+        void Ack(void);
+        void NAck(void);
+        byte WaitAck(void); //等待应答信号到来 返回值：1，接收应答失败 0，接收应答成功
+        
+		void WriteByte(byte dat);
+        byte ReadByte(void);
+    private:
+        OutputPort psck;
+        OutputPort psda;
+        uint delayus; //延时时间
+    private:
+        void delay(void);
+};
 // 软件模拟I2C
 class SoftI2C : public I2C
 {
@@ -159,26 +181,3 @@ SCL为高时，SDA下降沿表示开始，SDA上升沿表示停止。
 */
 
 #endif
-#pragma once
-class CSoftI2C
-{
-    public:
-        CSoftI2C(Pin pinsck, Pin pinsda, uint nus = 1); //延时时间默认为10，频率为100kHz
-        void SetPin(Pin pinsck, Pin pinsda);//设置端口
-        void Init();
-        void Start(void);
-        void Stop(void);
-        void Ack(void);
-        void NAck(void);
-        byte WaitAck(void); //等待应答信号到来 返回值：1，接收应答失败 0，接收应答成功
-        
-		void WriteByte(byte _ucByte);
-        byte ReadByte(void);
-    private:
-        OutputPort psck;
-        OutputPort psda;
-        uint delayus; //延时时间
-    private:
-        void delay(void);
-};
-
