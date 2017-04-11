@@ -818,11 +818,6 @@
               <FilePath>..\STDOS\Drivers\ST7565R.cpp</FilePath>
             </File>
             <File>
-              <FileName>W24xxx.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\W24xxx.cpp</FilePath>
-            </File>
-            <File>
               <FileName>W25QXXX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
@@ -1778,11 +1773,6 @@
               <FileName>ST7565R.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\ST7565R.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W24xxx.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\W24xxx.cpp</FilePath>
             </File>
             <File>
               <FileName>W25QXXX.cpp</FileName>
