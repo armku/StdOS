@@ -59,17 +59,20 @@ bool I2C::SendSubAddr(int addr)
 {
     return false;
 }
-
-SoftI2C::SoftI2C(Pin pinscl, Pin pinsda)
+void SoftI2C::SetPin(Pin scl, Pin sda)
 {
-    this->SCL.OpenDrain = true;
+	this->SCL.OpenDrain = true;
     this->SDA.OpenDrain = true;
-    this->SCL.Set(pinscl);
-    this->SDA.Set(pinsda);
+    this->SCL.Set(scl);
+    this->SDA.Set(sda);
 
     this->SCL = 0;
     this->SDA = 1;
     this->SCL = 1;
+}
+SoftI2C::SoftI2C(Pin scl, Pin sda)
+{
+    this->SetPin(scl,sda);
 }
 
 void SoftI2C::Init(){
@@ -199,9 +202,6 @@ void SoftI2C::Ack(bool ack)
 void SoftI2C::OnOpen(){}
 void SoftI2C::OnClose(){}
 void SoftI2C::GetPin(Pin *scl, Pin *sda){
-
-}
-void SoftI2C::SetPin(Pin scl, Pin sda){
 
 }
 // 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
