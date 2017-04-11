@@ -7,7 +7,7 @@
 
 CW24xxx::CW24xxx(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr, uint wnms)
 {
-    this->pi2c = new CSoftI2C(pinsck, pinsda);
+    this->pi2c = new SoftI2C(pinsck, pinsda);
     this->deviceType = devtype;
     this->devAddr = devaddr;
     this->pageSize = this->jsPageSize(devtype);

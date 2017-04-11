@@ -60,7 +60,7 @@ bool I2C::SendSubAddr(int addr)
     return false;
 }
 
-CSoftI2C::CSoftI2C(Pin pinscl, Pin pinsda)
+SoftI2C::SoftI2C(Pin pinscl, Pin pinsda)
 {
     this->SCL.OpenDrain = true;
     this->SDA.OpenDrain = true;
@@ -72,10 +72,10 @@ CSoftI2C::CSoftI2C(Pin pinscl, Pin pinsda)
     this->SCL = 1;
 }
 
-void CSoftI2C::Init(){
+void SoftI2C::Init(){
 
 }
-void CSoftI2C::Start()
+void SoftI2C::Start()
 {
     /* 当SCL高电平时，SDA出现一个下跳沿表示I2C总线启动信号 */
     this->SDA = 1;
@@ -87,7 +87,7 @@ void CSoftI2C::Start()
     this->Delay();
 }
 
-void CSoftI2C::Stop()
+void SoftI2C::Stop()
 {
     /* 当SCL高电平时，SDA出现一个上跳沿表示I2C总线停止信号 */
     this->SDA = 0;
@@ -96,7 +96,7 @@ void CSoftI2C::Stop()
     this->SDA = 1;
 }
 
-void CSoftI2C::WriteByte(byte dat)
+void SoftI2C::WriteByte(byte dat)
 {
     byte i;
 
@@ -124,7 +124,7 @@ void CSoftI2C::WriteByte(byte dat)
     }
 }
 
-byte CSoftI2C::ReadByte()
+byte SoftI2C::ReadByte()
 {
     byte i;
     byte value;
@@ -149,7 +149,7 @@ byte CSoftI2C::ReadByte()
 //等待应答信号到来
 //返回值：1，接收应答失败
 //        0，接收应答成功
-bool CSoftI2C::WaitAck(int retry)
+bool SoftI2C::WaitAck(int retry)
 {
     byte re;
 
@@ -172,7 +172,7 @@ bool CSoftI2C::WaitAck(int retry)
     return re;
 }
 
-void CSoftI2C::Ack(bool ack)
+void SoftI2C::Ack(bool ack)
 {
     if (ack)
     {
@@ -196,20 +196,20 @@ void CSoftI2C::Ack(bool ack)
     }
 }
 
-void CSoftI2C::OnOpen(){}
-void CSoftI2C::OnClose(){}
-void CSoftI2C::GetPin(Pin *scl, Pin *sda){
+void SoftI2C::OnOpen(){}
+void SoftI2C::OnClose(){}
+void SoftI2C::GetPin(Pin *scl, Pin *sda){
 
 }
-void CSoftI2C::SetPin(Pin scl, Pin sda){
+void SoftI2C::SetPin(Pin scl, Pin sda){
 
 }
 // 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
-CSoftI2C::CSoftI2C(uint speedHz){
+SoftI2C::SoftI2C(uint speedHz){
 
 }
-CSoftI2C::~CSoftI2C(){}
-void CSoftI2C::Delay(int us)
+SoftI2C::~SoftI2C(){}
+void SoftI2C::Delay(int us)
 {
 
     #if 0
