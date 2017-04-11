@@ -31,8 +31,7 @@
             void Init();
             bool Write(ushort addr, byte data);
             byte Read(ushort addr);
-			byte ReadByte(ushort address);
-
+			
             virtual bool Write(uint addr, const Buffer &bs)const;
             virtual bool Read(uint addr, Buffer &bs)const;
         public:

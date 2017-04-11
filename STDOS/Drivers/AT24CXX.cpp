@@ -17,11 +17,6 @@ bool AT24CXX::Write(ushort addr, byte data)
     return false;
 }
 
-byte AT24CXX::Read(ushort addr)
-{
-    return 0;
-}
-
 bool AT24CXX::Write(uint addr, const Buffer &bs)const
 {
     return false;
@@ -99,7 +94,7 @@ int AT24CXX::Write(uint addr, void *pBuffer, int size, ushort bufpos)
     int i = 0;
     for (i = 0; i < size; i++)
     {
-        if (this->ReadByte(addr + i) != ((byte*)pBuffer)[bufpos + i])
+        if (this->Read(addr + i) != ((byte*)pBuffer)[bufpos + i])
         {
             break;
         }
@@ -112,7 +107,7 @@ int AT24CXX::Write(uint addr, void *pBuffer, int size, ushort bufpos)
     return this->bufwr(addr, (byte*)pBuffer, size, bufpos, 1);
 }
 
-byte AT24CXX::ReadByte(ushort address)
+byte AT24CXX::Read(ushort address)
 {
     byte ret = 0;
 
