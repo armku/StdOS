@@ -1,5 +1,6 @@
 #pragma once 
-#include "I2C.h"
+#include "Device\I2C.h"
+#include "Storage\Storage.h"
 
 typedef enum
 {
