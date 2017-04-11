@@ -105,7 +105,7 @@ byte CSoftI2C::ReadByte()
 //等待应答信号到来
 //返回值：1，接收应答失败
 //        0，接收应答成功
-byte CSoftI2C::WaitAck()
+bool CSoftI2C::WaitAck(int retry)
 {
     byte re;
 
@@ -128,8 +128,10 @@ byte CSoftI2C::WaitAck()
     return re;
 }
 
-void CSoftI2C::Ack()
+void CSoftI2C::Ack(bool ack)
 {
+	if(ack)
+	{
     this->psda=0; /* CPU驱动SDA = 0 */
     this->delay();
     this->psck=1; /* CPU产生1个时钟 */
@@ -138,16 +140,16 @@ void CSoftI2C::Ack()
     this->delay();
     this->psda=1;
     /*CPU释放SDA总线 */
-}
-
-void CSoftI2C::NAck()
-{
-    this->psda=1; /* CPU驱动SDA = 1 */
+	}
+	else
+	{
+		this->psda=1; /* CPU驱动SDA = 1 */
     this->delay();
     this->psck=1; /* CPU产生1个时钟 */
     this->delay();
     this->psck=0;
     this->delay();
+	}
 }
 
 void CSoftI2C::delay(void)

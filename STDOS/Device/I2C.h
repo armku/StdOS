@@ -120,14 +120,13 @@ class CSoftI2C //: public I2C
         CSoftI2C(Pin pinsck, Pin pinsda, uint nus = 1); //延时时间默认为10，频率为100kHz
         void SetPin(Pin pinsck, Pin pinsda);//设置端口
         void Init();
-        void Start(void);
-        void Stop(void);
-        void Ack(void);
-        void NAck(void);
-        byte WaitAck(void); //等待应答信号到来 返回值：1，接收应答失败 0，接收应答成功
-        
-		void WriteByte(byte dat);
-        byte ReadByte(void);
+		virtual void Start();
+		virtual void Stop();
+		virtual void Ack(bool ack);  
+		virtual bool WaitAck(int retry=0);	// 等待Ack，默认0表示采用全局Retry
+                
+		virtual void WriteByte(byte dat);
+		virtual byte ReadByte();
     private:
         OutputPort psck;
         OutputPort psda;

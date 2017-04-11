@@ -138,7 +138,7 @@ byte CW24xxx::ReadByte(uint address)
     ret = this->pi2c->ReadByte(); /* 读1个字节 */
 
 
-    this->pi2c->NAck(); /* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
+    this->pi2c->Ack(false); /* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
 
 
     /* 发送I2C总线停止信号 */
@@ -457,11 +457,11 @@ int CW24xxx::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //页内读
         /* 每读完1个字节后，需要发送Ack， 最后一个字节不需要Ack，发Nack */
         if (i != size - 1)
         {
-            this->pi2c->Ack(); /* 中间字节读完后，CPU产生ACK信号(驱动SDA = 0) */
+            this->pi2c->Ack(true); /* 中间字节读完后，CPU产生ACK信号(驱动SDA = 0) */
         }
         else
         {
-            this->pi2c->NAck(); /* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
+            this->pi2c->Ack(false); /* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
         }
     }
     /* 发送I2C总线停止信号 */
