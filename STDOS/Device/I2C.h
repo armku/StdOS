@@ -147,7 +147,7 @@ private:
 	
 	void Delay(int us);
 };
-class CSoftI2C //: public I2C
+class CSoftI2C : public I2C
 {		
     public:
 		bool HasSecAddress;	// 设备是否有子地址

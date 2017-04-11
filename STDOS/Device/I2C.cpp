@@ -1,11 +1,23 @@
 #include "Type.h"
 #include "I2C.h"
 
-I2C::~I2C(){}
+I2C::I2C()
+{
+}
+I2C::~I2C()
+{
+	
+}
 // 打开设备
-void I2C::Open(){}
+void I2C::Open()
+{
+	
+}
 // 关闭设备
-void I2C::Close(){}
+void I2C::Close()
+{
+	
+}
 // 新会话向指定地址写入
 bool I2C::Write(int addr, const Buffer &bs)
 {
