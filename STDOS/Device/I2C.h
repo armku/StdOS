@@ -162,10 +162,9 @@ class CSoftI2C //: public I2C
 		virtual byte ReadByte();
     private:
         OutputPort SCL;
-        OutputPort SDA;
-        uint delayus; //延时时间
+        OutputPort SDA;        
     private:
-        void delay(void);
+        void Delay(int us=5);
 };
 /*
 开发历史

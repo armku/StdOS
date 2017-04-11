@@ -1,28 +1,13 @@
 #include "Type.h"
 #include "I2C.h"
-void SoftI2C::Delay(int us)
-{
-	//Sys.Delay(us);
-	/*
-	因为有系统代码，导致Delay不是很准，经常大于1us
-	右移23位时：
-	48M = 5;
-	72M = 8;
-	108M= 12;
-	120m= 14;
-	*/
-	// 72M = 4
-	int t=Sys.Clock >> 21;
-	while(t-- > 0);
-}
+
 CSoftI2C::CSoftI2C(Pin pinscl, Pin pinsda, uint nus)
 {
 	this->SCL.OpenDrain=true;
     this->SDA.OpenDrain=true;
 	this->SCL.Set(pinscl);
     this->SDA.Set(pinsda);
-    this->delayus = nus;
-
+    
     this->SCL=0;
     this->SDA=1;
     this->SCL=1;
@@ -36,11 +21,11 @@ void CSoftI2C::Start()
     /* 当SCL高电平时，SDA出现一个下跳沿表示I2C总线启动信号 */
     this->SDA=1;
     this->SCL=1;
-    this->delay();
+    this->Delay();
     this->SDA=0;
-    this->delay();
+    this->Delay();
     this->SCL=0;
-    this->delay();
+    this->Delay();
 }
 
 void CSoftI2C::Stop()
@@ -48,7 +33,7 @@ void CSoftI2C::Stop()
     /* 当SCL高电平时，SDA出现一个上跳沿表示I2C总线停止信号 */
     this->SDA=0;
     this->SCL=1;
-    this->delay();
+    this->Delay();
     this->SDA=1;
 }
 
@@ -67,16 +52,16 @@ void CSoftI2C::WriteByte(byte dat)
         {
             this->SDA=0;
         }
-        this->delay();
+        this->Delay();
         this->SCL=1;
-        this->delay();
+        this->Delay();
         this->SCL=0;
         if (i == 7)
         {
             this->SDA=1; // 释放总线
         }
         dat <<= 1; /* 左移一个bit */
-        this->delay();
+        this->Delay();
     }
 }
 
@@ -91,13 +76,13 @@ byte CSoftI2C::ReadByte()
     {
         value <<= 1;
         this->SCL=1;
-        this->delay();
+        this->Delay();
         if (this->SDA.ReadInput())
         {
             value++;
         }
         this->SCL=0;
-        this->delay();
+        this->Delay();
     }
     return value;
 }
@@ -110,9 +95,9 @@ bool CSoftI2C::WaitAck(int retry)
     byte re;
 
     this->SDA=1; /* CPU释放SDA总线 */
-    this->delay();
+    this->Delay();
     this->SCL=1; /* CPU驱动SCL = 1, 此时器件会返回ACK应答 */
-    this->delay();
+    this->Delay();
 
     if (this->SDA.ReadInput())
     /* CPU读取SDA口线状态 */
@@ -124,7 +109,7 @@ bool CSoftI2C::WaitAck(int retry)
         re = 0;
     }
     this->SCL=0;
-    this->delay();
+    this->Delay();
     return re;
 }
 
@@ -133,27 +118,42 @@ void CSoftI2C::Ack(bool ack)
 	if(ack)
 	{
     this->SDA=0; /* CPU驱动SDA = 0 */
-    this->delay();
+    this->Delay();
     this->SCL=1; /* CPU产生1个时钟 */
-    this->delay();
+    this->Delay();
     this->SCL=0;
-    this->delay();
+    this->Delay();
     this->SDA=1;
     /*CPU释放SDA总线 */
 	}
 	else
 	{
 		this->SDA=1; /* CPU驱动SDA = 1 */
-    this->delay();
+    this->Delay();
     this->SCL=1; /* CPU产生1个时钟 */
-    this->delay();
+    this->Delay();
     this->SCL=0;
-    this->delay();
+    this->Delay();
 	}
 }
 
-void CSoftI2C::delay(void)
+void CSoftI2C::Delay(int us)
 {
+	
+	#if 0
+	//Sys.Delay(us);
+	/*
+	因为有系统代码，导致Delay不是很准，经常大于1us
+	右移23位时：
+	48M = 5;
+	72M = 8;
+	108M= 12;
+	120m= 14;
+	*/
+	// 72M = 4
+	int t=Sys.Clock >> 21;
+	while(t-- > 0);
+	#endif
     byte i;
 
     /*　
@@ -168,5 +168,3 @@ void CSoftI2C::delay(void)
     for (i = 0; i < 10; i++)
         ;
 }
-
-
