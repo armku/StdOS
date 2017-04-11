@@ -3,8 +3,6 @@
 
 #include "Device\Port.h"
 
-#pragma once
-
 //SCL		开漏复用输出
 //SDA		开漏复用输出
 
