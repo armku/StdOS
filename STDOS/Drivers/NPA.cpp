@@ -3,7 +3,8 @@
 CNPA::CNPA(Pin pinsck, Pin pinsda, byte devAddr)
 {
     this->DEVER_ADDR = devAddr;
-    this->pi2c = new SoftI2C(pinsck, pinsda);
+    this->pi2c = new SoftI2C();
+	this->pi2c->SetPin(pinsck, pinsda);
 }
 
 void CNPA::Init(void)

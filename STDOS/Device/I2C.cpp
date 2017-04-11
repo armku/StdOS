@@ -70,10 +70,6 @@ void SoftI2C::SetPin(Pin scl, Pin sda)
     this->SDA = 1;
     this->SCL = 1;
 }
-SoftI2C::SoftI2C(Pin scl, Pin sda)
-{
-    this->SetPin(scl,sda);
-}
 
 void SoftI2C::Init(){
 

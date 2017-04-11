@@ -25,7 +25,8 @@ bool AT24CXX::Read(uint addr, Buffer &bs)const
 
 AT24CXX::AT24CXX(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr, uint wnms)
 {
-    this->IIC = new SoftI2C(pinsck, pinsda);
+    this->IIC = new SoftI2C();
+	this->IIC->SetPin(pinsck,pinsda);
     this->deviceType = devtype;
     this->Address = devaddr;
     this->pageSize = this->jsPageSize(devtype);
