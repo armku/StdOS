@@ -31,6 +31,7 @@
             void Init();
             bool Write(ushort addr, byte data);
             byte Read(ushort addr);
+			byte ReadByte(ushort address);
 
             virtual bool Write(uint addr, const Buffer &bs)const;
             virtual bool Read(uint addr, Buffer &bs)const;
@@ -39,7 +40,7 @@
             byte CheckOk();
             int Read(uint addr, void *pBuffer, int size, ushort bufpos = 0);
             int Write(uint addr, void *pBuffer, int size, ushort bufpos = 0);
-            byte ReadByte(uint address);
+            
             int WriteByte(uint address, byte da);
 
             OutputPort *pinWP; //±£»¤Òý½Å

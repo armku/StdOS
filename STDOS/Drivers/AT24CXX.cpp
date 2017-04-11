@@ -112,7 +112,7 @@ int AT24CXX::Write(uint addr, void *pBuffer, int size, ushort bufpos)
     return this->bufwr(addr, (byte*)pBuffer, size, bufpos, 1);
 }
 
-byte AT24CXX::ReadByte(uint address)
+byte AT24CXX::ReadByte(ushort address)
 {
     byte ret = 0;
 
