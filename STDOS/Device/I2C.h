@@ -114,26 +114,7 @@ private:
 	virtual void OnOpen();
 	virtual void OnClose();
 };
-class CSoftI2C //: public I2C
-{		
-    public:
-        CSoftI2C(Pin pinsck, Pin pinsda, uint nus = 1); //延时时间默认为10，频率为100kHz
-        void SetPin(Pin pinsck, Pin pinsda);//设置端口
-        void Init();
-		virtual void Start();
-		virtual void Stop();
-		virtual void Ack(bool ack);  
-		virtual bool WaitAck(int retry=0);	// 等待Ack，默认0表示采用全局Retry
-                
-		virtual void WriteByte(byte dat);
-		virtual byte ReadByte();
-    private:
-        OutputPort psck;
-        OutputPort psda;
-        uint delayus; //延时时间
-    private:
-        void delay(void);
-};
+
 // 软件模拟I2C
 class SoftI2C : public I2C
 {
@@ -166,7 +147,26 @@ private:
 	
 	void Delay(int us);
 };
-
+class CSoftI2C //: public I2C
+{		
+    public:
+        CSoftI2C(Pin pinsck, Pin pinsda, uint nus = 1); //延时时间默认为10，频率为100kHz
+        void SetPin(Pin pinsck, Pin pinsda);//设置端口
+        void Init();
+		virtual void Start();
+		virtual void Stop();
+		virtual void Ack(bool ack);  
+		virtual bool WaitAck(int retry=0);	// 等待Ack，默认0表示采用全局Retry
+                
+		virtual void WriteByte(byte dat);
+		virtual byte ReadByte();
+    private:
+        OutputPort psck;
+        OutputPort psda;
+        uint delayus; //延时时间
+    private:
+        void delay(void);
+};
 /*
 开发历史
 
