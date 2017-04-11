@@ -6,36 +6,33 @@
 #define macI2C_RD	1		/* ∂¡øÿ÷∆bit */
 
 
-CW24xxx::CW24xxx()
-{
+AT24CXX::AT24CXX(){}
+AT24CXX::~AT24CXX(){}
+
+void AT24CXX::Init(){
+
 }
-    CW24xxx::~CW24xxx()
-	{
-	}
+bool AT24CXX::Write(ushort addr, byte data)
+{
+    return false;
+}
 
-	void CW24xxx::Init()
-	{
-		
-	}
-	bool CW24xxx::Write(ushort addr, byte data)
-	{
-		return false;
-	}
-	byte CW24xxx::Read(ushort addr)
-	{
-		return 0;
-	}
+byte AT24CXX::Read(ushort addr)
+{
+    return 0;
+}
 
-	bool CW24xxx::Write(uint addr, const Buffer& bs) const
-	{
-		return false;
-	}
-	bool CW24xxx::Read(uint addr, Buffer& bs) const
-	{
-		return false;
-	}
+bool AT24CXX::Write(uint addr, const Buffer &bs)const
+{
+    return false;
+}
 
-CW24xxx::CW24xxx(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr, uint wnms)
+bool AT24CXX::Read(uint addr, Buffer &bs)const
+{
+    return false;
+}
+
+AT24CXX::AT24CXX(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr, uint wnms)
 {
     this->IIC = new SoftI2C(pinsck, pinsda);
     this->deviceType = devtype;
@@ -44,7 +41,7 @@ CW24xxx::CW24xxx(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr, uint 
     this->writedelaynms = wnms;
 }
 
-byte CW24xxx::CheckOk()
+byte AT24CXX::CheckOk()
 {
     if (this->checkDevice() == 0)
     {
@@ -58,7 +55,7 @@ byte CW24xxx::CheckOk()
     }
 }
 
-byte CW24xxx::checkDevice()
+byte AT24CXX::checkDevice()
 {
     byte ucAck;
 
@@ -82,7 +79,7 @@ byte CW24xxx::checkDevice()
  *	∑µ ªÿ ÷µ: 1 ±Ì æ ß∞‹£¨0±Ì æ≥…π¶
  *********************************************************************************************************
  */
-int CW24xxx::Read(uint addr, void *pBuffer, int size, ushort bufpos)
+int AT24CXX::Read(uint addr, void *pBuffer, int size, ushort bufpos)
 {
     return this->bufwr(addr, (byte*)pBuffer, size, bufpos, 0);
 }
@@ -97,25 +94,25 @@ int CW24xxx::Read(uint addr, void *pBuffer, int size, ushort bufpos)
  *	∑µ ªÿ ÷µ: 0 ±Ì æ ß∞‹£¨1±Ì æ≥…π¶
  *********************************************************************************************************
  */
-int CW24xxx::Write(uint addr, void *pBuffer, int size, ushort bufpos)
+int AT24CXX::Write(uint addr, void *pBuffer, int size, ushort bufpos)
 {
-	int i=0;
-	for(i=0;i<size;i++)
-	{
-		if(this->ReadByte(addr+i)!=((byte*)pBuffer)[bufpos+i])
-		{
-			break;
-		}
-	}
-	if(i>=size)
-	{
-		//¥Ê¥¢ƒ⁄»›œ‡Õ¨£¨≤ª–Ë“™–¥»Î
-		return size;
-	}
+    int i = 0;
+    for (i = 0; i < size; i++)
+    {
+        if (this->ReadByte(addr + i) != ((byte*)pBuffer)[bufpos + i])
+        {
+            break;
+        }
+    }
+    if (i >= size)
+    {
+        //¥Ê¥¢ƒ⁄»›œ‡Õ¨£¨≤ª–Ë“™–¥»Î
+        return size;
+    }
     return this->bufwr(addr, (byte*)pBuffer, size, bufpos, 1);
 }
 
-byte CW24xxx::ReadByte(uint address)
+byte AT24CXX::ReadByte(uint address)
 {
     byte ret = 0;
 
@@ -182,7 +179,7 @@ byte CW24xxx::ReadByte(uint address)
     return ret;
 }
 
-int CW24xxx::WriteByte(uint address, byte da)
+int AT24CXX::WriteByte(uint address, byte da)
 {
     uint m;
 
@@ -252,7 +249,7 @@ int CW24xxx::WriteByte(uint address, byte da)
     return 0;
 }
 
-int CW24xxx::bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr) //∂¡–¥ºØ÷–≤Ÿ◊˜1–¥ 0∂¡
+int AT24CXX::bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr) //∂¡–¥ºØ÷–≤Ÿ◊˜1–¥ 0∂¡
 {
     uint curAddr;
     uint pageStart; //“≥ƒ⁄∆ ºµÿ÷∑
@@ -356,13 +353,13 @@ int CW24xxx::bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr) //
     return 0;
 }
 
-int CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //“≥ƒ⁄–¥
+int AT24CXX::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //“≥ƒ⁄–¥
 {
     uint i, m;
     ushort usAddr;
 
     usAddr = addr;
-	
+
     /*°°µ⁄£∞≤Ω£∫∑¢Õ£÷π–≈∫≈£¨∆Ù∂Øƒ⁄≤ø–¥≤Ÿ◊˜°°*/
     this->IIC->Stop();
 
@@ -432,7 +429,7 @@ int CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //“≥ƒ⁄–
     return 1;
 }
 
-int CW24xxx::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //“≥ƒ⁄∂¡
+int AT24CXX::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //“≥ƒ⁄∂¡
 {
     uint i;
 
@@ -504,7 +501,7 @@ int CW24xxx::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //“≥ƒ⁄∂¡
     return 1;
 }
 
-ushort CW24xxx::jsPageSize(uint type) //º∆À„¥Ê¥¢“≥¥Û–°
+ushort AT24CXX::jsPageSize(uint type) //º∆À„¥Ê¥¢“≥¥Û–°
 {
     ushort ret = 8;
     switch (type)
@@ -542,7 +539,7 @@ ushort CW24xxx::jsPageSize(uint type) //º∆À„¥Ê¥¢“≥¥Û–°
     /*
      * ∂¡–¥≤‚ ‘
      */
-    void CW24xxx::Test()
+    void AT24CXX::Test()
     {
         uint i;
         const uint testsize = 8;
@@ -618,4 +615,3 @@ ushort CW24xxx::jsPageSize(uint type) //º∆À„¥Ê¥¢“≥¥Û–°
         printf("eeprom∂¡–¥≤‚ ‘≥…π¶\r\n");
     }
 #endif
-
