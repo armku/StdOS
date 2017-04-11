@@ -66,7 +66,7 @@ class CW24xxx: public CharStorage
         int readPage(byte *buf, ushort bufpos, ushort addr, uint size); //页内读
         int bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr); //读写集中操作1写 0读
 
-        SoftI2C *IIC;
+        I2C *IIC;
         EW24XXType deviceType; //器件类型
         uint pageSize; //存储页大小
         uint writedelaynms; //写延时	    
