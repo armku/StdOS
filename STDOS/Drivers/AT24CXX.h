@@ -45,7 +45,7 @@ typedef enum
 } EW24XXType;
 
 
-class CW24xxx
+class CW24xxx: public CharStorage
 {
     public:
         CW24xxx(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr = 0xA0, uint wnms = 5); //–¥—” ± ±º‰       
