@@ -36,7 +36,7 @@ AT24CXX::AT24CXX(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr, uint 
 {
     this->IIC = new SoftI2C(pinsck, pinsda);
     this->deviceType = devtype;
-    this->devAddr = devaddr;
+    this->Address = devaddr;
     this->pageSize = this->jsPageSize(devtype);
     this->writedelaynms = wnms;
 }
@@ -61,7 +61,7 @@ byte AT24CXX::checkDevice()
 
     this->IIC->Start(); /* ·¢ËÍÆô¶¯ÐÅºÅ */
     /* ·¢ËÍÉè±¸µØÖ·+¶ÁÐ´¿ØÖÆbit£¨0 = w£¬ 1 = r) bit7 ÏÈ´« */
-    this->IIC->WriteByte((this->devAddr) | macI2C_WR);
+    this->IIC->WriteByte((this->Address) | macI2C_WR);
     ucAck = this->IIC->WaitAck(); /*¼ì²âÉè±¸µÄACKÓ¦´ð */
 
     this->IIC->Stop(); /* ·¢ËÍÍ£Ö¹ÐÅºÅ */
@@ -121,7 +121,7 @@ byte AT24CXX::ReadByte(uint address)
     this->IIC->Start();
 
     /* µÚ2²½£º·¢Æð¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁÐ´¿ØÖÆÎ»£¬0±íÊ¾Ð´£¬1±íÊ¾¶Á */
-    this->IIC->WriteByte(this->devAddr | macI2C_WR); /* ´Ë´¦ÊÇÐ´Ö¸Áî */
+    this->IIC->WriteByte(this->Address | macI2C_WR); /* ´Ë´¦ÊÇÐ´Ö¸Áî */
 
     /* µÚ3²½£ºµÈ´ýACK */
     if (this->IIC->WaitAck() != 0)
@@ -152,7 +152,7 @@ byte AT24CXX::ReadByte(uint address)
     this->IIC->Start();
 
     /* µÚ7²½£º·¢Æð¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁÐ´¿ØÖÆÎ»£¬0±íÊ¾Ð´£¬1±íÊ¾¶Á */
-    this->IIC->WriteByte(this->devAddr | macI2C_RD); /* ´Ë´¦ÊÇ¶ÁÖ¸Áî */
+    this->IIC->WriteByte(this->Address | macI2C_RD); /* ´Ë´¦ÊÇ¶ÁÖ¸Áî */
 
     /* µÚ8²½£º·¢ËÍACK */
     if (this->IIC->WaitAck() != 0)
@@ -195,7 +195,7 @@ int AT24CXX::WriteByte(uint address, byte da)
         this->IIC->Start();
 
         /* µÚ2²½£º·¢Æð¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁÐ´¿ØÖÆÎ»£¬0±íÊ¾Ð´£¬1±íÊ¾¶Á */
-        this->IIC->WriteByte(this->devAddr | macI2C_WR); /* ´Ë´¦ÊÇÐ´Ö¸Áî */
+        this->IIC->WriteByte(this->Address | macI2C_WR); /* ´Ë´¦ÊÇÐ´Ö¸Áî */
 
         /* µÚ3²½£º·¢ËÍÒ»¸öÊ±ÖÓ£¬ÅÐ¶ÏÆ÷¼þÊÇ·ñÕýÈ·Ó¦´ð */
         if (this->IIC->WaitAck() == 0)
@@ -372,7 +372,7 @@ int AT24CXX::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚÐ
         this->IIC->Start();
 
         /* µÚ2²½£º·¢Æð¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁÐ´¿ØÖÆÎ»£¬0±íÊ¾Ð´£¬1±íÊ¾¶Á */
-        this->IIC->WriteByte(this->devAddr | macI2C_WR); /* ´Ë´¦ÊÇÐ´Ö¸Áî */
+        this->IIC->WriteByte(this->Address | macI2C_WR); /* ´Ë´¦ÊÇÐ´Ö¸Áî */
 
         /* µÚ3²½£º·¢ËÍÒ»¸öÊ±ÖÓ£¬ÅÐ¶ÏÆ÷¼þÊÇ·ñÕýÈ·Ó¦´ð */
         if (this->IIC->WaitAck() == 0)
@@ -437,7 +437,7 @@ int AT24CXX::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚ¶Á
     this->IIC->Start();
 
     /* µÚ2²½£º·¢Æð¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁÐ´¿ØÖÆÎ»£¬0±íÊ¾Ð´£¬1±íÊ¾¶Á */
-    this->IIC->WriteByte(this->devAddr | macI2C_WR); /* ´Ë´¦ÊÇÐ´Ö¸Áî */
+    this->IIC->WriteByte(this->Address | macI2C_WR); /* ´Ë´¦ÊÇÐ´Ö¸Áî */
 
     /* µÚ3²½£ºµÈ´ýACK */
     if (this->IIC->WaitAck() != 0)
@@ -468,7 +468,7 @@ int AT24CXX::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚ¶Á
     this->IIC->Start();
 
     /* µÚ7²½£º·¢Æð¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁÐ´¿ØÖÆÎ»£¬0±íÊ¾Ð´£¬1±íÊ¾¶Á */
-    this->IIC->WriteByte(this->devAddr | macI2C_RD); /* ´Ë´¦ÊÇ¶ÁÖ¸Áî */
+    this->IIC->WriteByte(this->Address | macI2C_RD); /* ´Ë´¦ÊÇ¶ÁÖ¸Áî */
 
     /* µÚ8²½£º·¢ËÍACK */
     if (this->IIC->WaitAck() != 0)

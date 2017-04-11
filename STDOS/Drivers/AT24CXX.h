@@ -55,8 +55,7 @@
 
             EW24XXType deviceType; //器件类型
             uint pageSize; //存储页大小
-            uint writedelaynms; //写延时	    
-            byte devAddr; //设备地址        
+            uint writedelaynms; //写延时	  
     };
 
 #endif
