@@ -150,7 +150,7 @@ private:
 class CSoftI2C //: public I2C
 {		
     public:
-        CSoftI2C(Pin pinsck, Pin pinsda, uint nus = 1); //延时时间默认为10，频率为100kHz
+        CSoftI2C(Pin pinsck, Pin pinsda); //延时时间默认为10，频率为100kHz
         void SetPin(Pin pinsck, Pin pinsda);//设置端口
         void Init();
 		virtual void Start();

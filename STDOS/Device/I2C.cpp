@@ -1,7 +1,7 @@
 #include "Type.h"
 #include "I2C.h"
 
-CSoftI2C::CSoftI2C(Pin pinscl, Pin pinsda, uint nus)
+CSoftI2C::CSoftI2C(Pin pinscl, Pin pinsda)
 {
 	this->SCL.OpenDrain=true;
     this->SDA.OpenDrain=true;
