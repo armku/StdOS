@@ -7,7 +7,7 @@
 
 CW24xxx::CW24xxx(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr, uint wnms)
 {
-    this->pi2c = new SoftI2C(pinsck, pinsda);
+    this->IIC = new SoftI2C(pinsck, pinsda);
     this->deviceType = devtype;
     this->devAddr = devaddr;
     this->pageSize = this->jsPageSize(devtype);
@@ -23,7 +23,7 @@ byte CW24xxx::CheckOk()
     else
     {
         /* Ê§°Üºó£¬ÇĞ¼Ç·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-        this->pi2c->Stop();
+        this->IIC->Stop();
         return 0;
     }
 }
@@ -32,12 +32,12 @@ byte CW24xxx::checkDevice()
 {
     byte ucAck;
 
-    this->pi2c->Start(); /* ·¢ËÍÆô¶¯ĞÅºÅ */
+    this->IIC->Start(); /* ·¢ËÍÆô¶¯ĞÅºÅ */
     /* ·¢ËÍÉè±¸µØÖ·+¶ÁĞ´¿ØÖÆbit£¨0 = w£¬ 1 = r) bit7 ÏÈ´« */
-    this->pi2c->WriteByte((this->devAddr) | macI2C_WR);
-    ucAck = this->pi2c->WaitAck(); /*¼ì²âÉè±¸µÄACKÓ¦´ğ */
+    this->IIC->WriteByte((this->devAddr) | macI2C_WR);
+    ucAck = this->IIC->WaitAck(); /*¼ì²âÉè±¸µÄACKÓ¦´ğ */
 
-    this->pi2c->Stop(); /* ·¢ËÍÍ£Ö¹ĞÅºÅ */
+    this->IIC->Stop(); /* ·¢ËÍÍ£Ö¹ĞÅºÅ */
 
     return ucAck;
 }
@@ -91,63 +91,63 @@ byte CW24xxx::ReadByte(uint address)
 
 
     /* µÚ1²½£º·¢ÆğI2C×ÜÏßÆô¶¯ĞÅºÅ */
-    this->pi2c->Start();
+    this->IIC->Start();
 
     /* µÚ2²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
-    this->pi2c->WriteByte(this->devAddr | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
+    this->IIC->WriteByte(this->devAddr | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
 
     /* µÚ3²½£ºµÈ´ıACK */
-    if (this->pi2c->WaitAck() != 0)
+    if (this->IIC->WaitAck() != 0)
     {
         goto cmd_Readbytefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
     if (this->deviceType > AT24C16)
     {
         /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-        this->pi2c->WriteByte((byte)((address) >> 8));
+        this->IIC->WriteByte((byte)((address) >> 8));
 
         /* µÚ5²½£ºµÈ´ıACK */
-        if (this->pi2c->WaitAck() != 0)
+        if (this->IIC->WaitAck() != 0)
         {
             goto cmd_Readbytefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
         }
     }
     /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-    this->pi2c->WriteByte((byte)address);
+    this->IIC->WriteByte((byte)address);
 
     /* µÚ5²½£ºµÈ´ıACK */
-    if (this->pi2c->WaitAck() != 0)
+    if (this->IIC->WaitAck() != 0)
     {
         goto cmd_Readbytefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
 
     /* µÚ6²½£ºÖØĞÂÆô¶¯I2C×ÜÏß¡£Ç°ÃæµÄ´úÂëµÄÄ¿µÄÏòEEPROM´«ËÍµØÖ·£¬ÏÂÃæ¿ªÊ¼¶ÁÈ¡Êı¾İ */
-    this->pi2c->Start();
+    this->IIC->Start();
 
     /* µÚ7²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
-    this->pi2c->WriteByte(this->devAddr | macI2C_RD); /* ´Ë´¦ÊÇ¶ÁÖ¸Áî */
+    this->IIC->WriteByte(this->devAddr | macI2C_RD); /* ´Ë´¦ÊÇ¶ÁÖ¸Áî */
 
     /* µÚ8²½£º·¢ËÍACK */
-    if (this->pi2c->WaitAck() != 0)
+    if (this->IIC->WaitAck() != 0)
     {
         goto cmd_Readbytefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
 
     /* µÚ9²½£ºÑ­»·¶ÁÈ¡Êı¾İ */
 
-    ret = this->pi2c->ReadByte(); /* ¶Á1¸ö×Ö½Ú */
+    ret = this->IIC->ReadByte(); /* ¶Á1¸ö×Ö½Ú */
 
 
-    this->pi2c->Ack(false); /* ×îºó1¸ö×Ö½Ú¶ÁÍêºó£¬CPU²úÉúNACKĞÅºÅ(Çı¶¯SDA = 1) */
+    this->IIC->Ack(false); /* ×îºó1¸ö×Ö½Ú¶ÁÍêºó£¬CPU²úÉúNACKĞÅºÅ(Çı¶¯SDA = 1) */
 
 
     /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->pi2c->Stop();
+    this->IIC->Stop();
     return ret; /* Ö´ĞĞ³É¹¦ */
 
     cmd_Readbytefail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ */
     /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->pi2c->Stop();
+    this->IIC->Stop();
 
     return ret;
 }
@@ -157,7 +157,7 @@ int CW24xxx::WriteByte(uint address, byte da)
     uint m;
 
     /*¡¡µÚ£°²½£º·¢Í£Ö¹ĞÅºÅ£¬Æô¶¯ÄÚ²¿Ğ´²Ù×÷¡¡*/
-    this->pi2c->Stop();
+    this->IIC->Stop();
 
     /* Í¨¹ı¼ì²éÆ÷¼şÓ¦´ğµÄ·½Ê½£¬ÅĞ¶ÏÄÚ²¿Ğ´²Ù×÷ÊÇ·ñÍê³É, Ò»°ãĞ¡ÓÚ 10ms 			
     CLKÆµÂÊÎª200KHzÊ±£¬²éÑ¯´ÎÊıÎª30´Î×óÓÒ
@@ -165,13 +165,13 @@ int CW24xxx::WriteByte(uint address, byte da)
     for (m = 0; m < 1000; m++)
     {
         /* µÚ1²½£º·¢ÆğI2C×ÜÏßÆô¶¯ĞÅºÅ */
-        this->pi2c->Start();
+        this->IIC->Start();
 
         /* µÚ2²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
-        this->pi2c->WriteByte(this->devAddr | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
+        this->IIC->WriteByte(this->devAddr | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
 
         /* µÚ3²½£º·¢ËÍÒ»¸öÊ±ÖÓ£¬ÅĞ¶ÏÆ÷¼şÊÇ·ñÕıÈ·Ó¦´ğ */
-        if (this->pi2c->WaitAck() == 0)
+        if (this->IIC->WaitAck() == 0)
         {
             break;
         }
@@ -183,19 +183,19 @@ int CW24xxx::WriteByte(uint address, byte da)
     if (this->deviceType > AT24C16)
     {
         /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-        this->pi2c->WriteByte((byte)((address >> 8)));
+        this->IIC->WriteByte((byte)((address >> 8)));
 
         /* µÚ5²½£ºµÈ´ıACK */
-        if (this->pi2c->WaitAck() != 0)
+        if (this->IIC->WaitAck() != 0)
         {
             goto cmd_Writebytefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
         }
     }
     /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-    this->pi2c->WriteByte((byte)address);
+    this->IIC->WriteByte((byte)address);
 
     /* µÚ5²½£ºµÈ´ıACK */
-    if (this->pi2c->WaitAck() != 0)
+    if (this->IIC->WaitAck() != 0)
     {
         goto cmd_Writebytefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
@@ -203,22 +203,22 @@ int CW24xxx::WriteByte(uint address, byte da)
 
 
     /* µÚ6²½£º¿ªÊ¼Ğ´ÈëÊı¾İ */
-    this->pi2c->WriteByte(da);
+    this->IIC->WriteByte(da);
 
     /* µÚ7²½£º·¢ËÍACK */
-    if (this->pi2c->WaitAck() != 0)
+    if (this->IIC->WaitAck() != 0)
     {
         goto cmd_Writebytefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
 
     /* ÃüÁîÖ´ĞĞ³É¹¦£¬·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->pi2c->Stop();
+    this->IIC->Stop();
     Sys.Sleep(this->writedelaynms);
     return 0;
 
     cmd_Writebytefail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ */
     /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->pi2c->Stop();
+    this->IIC->Stop();
     return 0;
 }
 
@@ -334,7 +334,7 @@ int CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ
     usAddr = addr;
 	
     /*¡¡µÚ£°²½£º·¢Í£Ö¹ĞÅºÅ£¬Æô¶¯ÄÚ²¿Ğ´²Ù×÷¡¡*/
-    this->pi2c->Stop();
+    this->IIC->Stop();
 
     /* Í¨¹ı¼ì²éÆ÷¼şÓ¦´ğµÄ·½Ê½£¬ÅĞ¶ÏÄÚ²¿Ğ´²Ù×÷ÊÇ·ñÍê³É, Ò»°ãĞ¡ÓÚ 10ms 			
     CLKÆµÂÊÎª200KHzÊ±£¬²éÑ¯´ÎÊıÎª30´Î×óÓÒ
@@ -342,13 +342,13 @@ int CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ
     for (m = 0; m < 1000; m++)
     {
         /* µÚ1²½£º·¢ÆğI2C×ÜÏßÆô¶¯ĞÅºÅ */
-        this->pi2c->Start();
+        this->IIC->Start();
 
         /* µÚ2²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
-        this->pi2c->WriteByte(this->devAddr | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
+        this->IIC->WriteByte(this->devAddr | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
 
         /* µÚ3²½£º·¢ËÍÒ»¸öÊ±ÖÓ£¬ÅĞ¶ÏÆ÷¼şÊÇ·ñÕıÈ·Ó¦´ğ */
-        if (this->pi2c->WaitAck() == 0)
+        if (this->IIC->WaitAck() == 0)
         {
             break;
         }
@@ -360,19 +360,19 @@ int CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ
     if (this->deviceType > AT24C16)
     {
         /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-        this->pi2c->WriteByte((byte)((usAddr >> 8)));
+        this->IIC->WriteByte((byte)((usAddr >> 8)));
 
         /* µÚ5²½£ºµÈ´ıACK */
-        if (this->pi2c->WaitAck() != 0)
+        if (this->IIC->WaitAck() != 0)
         {
             goto cmd_Writefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
         }
     }
     /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-    this->pi2c->WriteByte((byte)usAddr);
+    this->IIC->WriteByte((byte)usAddr);
 
     /* µÚ5²½£ºµÈ´ıACK */
-    if (this->pi2c->WaitAck() != 0)
+    if (this->IIC->WaitAck() != 0)
     {
         goto cmd_Writefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
@@ -381,10 +381,10 @@ int CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ
     {
 
         /* µÚ6²½£º¿ªÊ¼Ğ´ÈëÊı¾İ */
-        this->pi2c->WriteByte(buf[bufpos + i]);
+        this->IIC->WriteByte(buf[bufpos + i]);
 
         /* µÚ7²½£º·¢ËÍACK */
-        if (this->pi2c->WaitAck() != 0)
+        if (this->IIC->WaitAck() != 0)
         {
             goto cmd_Writefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
         }
@@ -393,12 +393,12 @@ int CW24xxx::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ
     }
 
     /* ÃüÁîÖ´ĞĞ³É¹¦£¬·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->pi2c->Stop();
+    this->IIC->Stop();
     return 0;
 
     cmd_Writefail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ */
     /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->pi2c->Stop();
+    this->IIC->Stop();
     return 1;
 }
 
@@ -407,44 +407,44 @@ int CW24xxx::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚ¶Á
     uint i;
 
     /* µÚ1²½£º·¢ÆğI2C×ÜÏßÆô¶¯ĞÅºÅ */
-    this->pi2c->Start();
+    this->IIC->Start();
 
     /* µÚ2²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
-    this->pi2c->WriteByte(this->devAddr | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
+    this->IIC->WriteByte(this->devAddr | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
 
     /* µÚ3²½£ºµÈ´ıACK */
-    if (this->pi2c->WaitAck() != 0)
+    if (this->IIC->WaitAck() != 0)
     {
         goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
     if (this->deviceType > AT24C16)
     {
         /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-        this->pi2c->WriteByte((byte)((addr) >> 8));
+        this->IIC->WriteByte((byte)((addr) >> 8));
 
         /* µÚ5²½£ºµÈ´ıACK */
-        if (this->pi2c->WaitAck() != 0)
+        if (this->IIC->WaitAck() != 0)
         {
             goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
         }
     }
     /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-    this->pi2c->WriteByte((byte)addr);
+    this->IIC->WriteByte((byte)addr);
 
     /* µÚ5²½£ºµÈ´ıACK */
-    if (this->pi2c->WaitAck() != 0)
+    if (this->IIC->WaitAck() != 0)
     {
         goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
 
     /* µÚ6²½£ºÖØĞÂÆô¶¯I2C×ÜÏß¡£Ç°ÃæµÄ´úÂëµÄÄ¿µÄÏòEEPROM´«ËÍµØÖ·£¬ÏÂÃæ¿ªÊ¼¶ÁÈ¡Êı¾İ */
-    this->pi2c->Start();
+    this->IIC->Start();
 
     /* µÚ7²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
-    this->pi2c->WriteByte(this->devAddr | macI2C_RD); /* ´Ë´¦ÊÇ¶ÁÖ¸Áî */
+    this->IIC->WriteByte(this->devAddr | macI2C_RD); /* ´Ë´¦ÊÇ¶ÁÖ¸Áî */
 
     /* µÚ8²½£º·¢ËÍACK */
-    if (this->pi2c->WaitAck() != 0)
+    if (this->IIC->WaitAck() != 0)
     {
         goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
@@ -452,25 +452,25 @@ int CW24xxx::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚ¶Á
     /* µÚ9²½£ºÑ­»·¶ÁÈ¡Êı¾İ */
     for (i = 0; i < size; i++)
     {
-        buf[bufpos + i] = pi2c->ReadByte(); /* ¶Á1¸ö×Ö½Ú */
+        buf[bufpos + i] = IIC->ReadByte(); /* ¶Á1¸ö×Ö½Ú */
 
         /* Ã¿¶ÁÍê1¸ö×Ö½Úºó£¬ĞèÒª·¢ËÍAck£¬ ×îºóÒ»¸ö×Ö½Ú²»ĞèÒªAck£¬·¢Nack */
         if (i != size - 1)
         {
-            this->pi2c->Ack(true); /* ÖĞ¼ä×Ö½Ú¶ÁÍêºó£¬CPU²úÉúACKĞÅºÅ(Çı¶¯SDA = 0) */
+            this->IIC->Ack(true); /* ÖĞ¼ä×Ö½Ú¶ÁÍêºó£¬CPU²úÉúACKĞÅºÅ(Çı¶¯SDA = 0) */
         }
         else
         {
-            this->pi2c->Ack(false); /* ×îºó1¸ö×Ö½Ú¶ÁÍêºó£¬CPU²úÉúNACKĞÅºÅ(Çı¶¯SDA = 1) */
+            this->IIC->Ack(false); /* ×îºó1¸ö×Ö½Ú¶ÁÍêºó£¬CPU²úÉúNACKĞÅºÅ(Çı¶¯SDA = 1) */
         }
     }
     /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->pi2c->Stop();
+    this->IIC->Stop();
     return 0; /* Ö´ĞĞ³É¹¦ */
 
     cmd_Readfail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ */
     /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->pi2c->Stop();
+    this->IIC->Stop();
     return 1;
 }
 
