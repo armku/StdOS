@@ -154,7 +154,10 @@ bool Port::Empty()const
 {
     return _Pin == P0;
 }
-
+bool Port::Read() const
+{
+	return false;
+}
 void Port::OnOpen(void *param){
 
 }

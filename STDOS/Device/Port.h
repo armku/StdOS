@@ -24,7 +24,7 @@ Port::Close
 
 class Port
 {
-	public:
+public:
 	enum GPIO_AF
 	{
 		AF_0 = 0,
@@ -36,27 +36,32 @@ class Port
 		AF_6 = 6,
 		AF_7 = 7
 	};
-	Pin		_Pin;		// 引脚
+
+    Pin		_Pin;		// 引脚
 	bool	Opened;		// 是否已经打开
 	byte    Index;		// 引脚自身次序编号，用于区分多引脚次序
 	void*	State;		// 用户状态数据
-	
+
 	Port();
-	#ifndef TINY
+#ifndef TINY
 	virtual ~Port();
-	#endif
-	Port& Set(Pin pin);	// 设置引脚
+#endif
+
+    Port& Set(Pin pin);	// 设置引脚
 	bool Empty() const;
+
 	bool Open();
 	void Close();
 	void Clear();
+
 	void AFConfig(GPIO_AF GPIO_AF) const;
 	static void RemapConfig(uint param, bool sta);
 
-    //virtual bool Read() const;
+    virtual bool Read() const;
 
 	String ToString() const;
-	protected:
+
+protected:
     // 配置过程
     virtual void OnOpen(void* param);
 	virtual void OnClose();
