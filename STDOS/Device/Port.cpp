@@ -35,6 +35,7 @@ GPIO_TypeDef *IndexToGroup(byte index)
 {
     return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
 }
+
 byte GroupToIndex(GPIO_TypeDef *group)
 {
     return (byte)(((int)group - GPIOA_BASE) >> 10);
@@ -49,38 +50,39 @@ Port::Port()
     Group = NULL;
     PinBit = 0;
 }
-#ifndef TINY	
-Port::~Port()
-{
-    #if defined(STM32F1)
-        // 恢复为初始化状态
-        ushort bits = PinBit;
-        int config = InitState &0xFFFFFFFF;
-        for (int i = 0; i < 16 && bits; i++, bits >>= 1)
-        {
-            if (i == 7)
-                config = InitState >> 32;
-            if (bits &1)
-            {
-                uint shift = (i &7) << 2; // 每引脚4位
-                uint mask = 0xF << shift; // 屏蔽掉其它位
 
-                GPIO_TypeDef *port = Group;
-                if (i &0x08)
+#ifndef TINY	
+    Port::~Port()
+    {
+        #if defined(STM32F1)
+            // 恢复为初始化状态
+            ushort bits = PinBit;
+            int config = InitState &0xFFFFFFFF;
+            for (int i = 0; i < 16 && bits; i++, bits >>= 1)
+            {
+                if (i == 7)
+                    config = InitState >> 32;
+                if (bits &1)
                 {
-                    // bit 8 - 15
-                    port->CRH = port->CRH &~mask | (config &mask);
-                }
-                else
-                {
-                    // bit 0-7
-                    port->CRL = port->CRL &~mask | (config &mask);
+                    uint shift = (i &7) << 2; // 每引脚4位
+                    uint mask = 0xF << shift; // 屏蔽掉其它位
+
+                    GPIO_TypeDef *port = Group;
+                    if (i &0x08)
+                    {
+                        // bit 8 - 15
+                        port->CRH = port->CRH &~mask | (config &mask);
+                    }
+                    else
+                    {
+                        // bit 0-7
+                        port->CRL = port->CRL &~mask | (config &mask);
+                    }
                 }
             }
-        }
-    #endif 
-}
-#endif
+        #endif 
+    }
+#endif 
 
 /*
 单一引脚初始化
@@ -117,13 +119,11 @@ bool Port::Empty()const
 {
     return _Pin == P0;
 }
-void Port::OnOpen(void* param)
-{
-	
+
+void Port::OnOpen(void *param){
+
 }
-	void Port::OnClose()
-	{
-	}
+void Port::OnClose(){}
 void Port::Config()
 {
     GPIO_InitTypeDef gpio;
@@ -179,10 +179,11 @@ OutputPort::OutputPort()
 {
     Init();
 }
+
 OutputPort::OutputPort(Pin pin)
 {
-	Init();
-	Set(pin);
+    Init();
+    Set(pin);
 }
 
 OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
@@ -247,14 +248,14 @@ ushort OutputPort::ReadGroup()
     return GPIO_ReadOutputData(Group);
 }
 
-bool OutputPort::Read() const
+bool OutputPort::Read()const
 {
     // 转为bool时会转为0/1
     bool rs = GPIO_ReadOutputData(Group) &PinBit;
     return rs ^ Invert;
 }
 
-bool OutputPort::ReadInput() const
+bool OutputPort::ReadInput()const
 {
     bool rs = GPIO_ReadInputData(Group) &PinBit;
     return rs ^ Invert;
@@ -266,7 +267,7 @@ bool OutputPort::Read(Pin pin)
     return (group->IDR >> (pin &0xF)) &1;
 }
 
-void OutputPort::Write(bool value) const
+void OutputPort::Write(bool value)const
 {
     if (value ^ Invert)
         GPIO_SetBits(Group, PinBit);
@@ -284,20 +285,21 @@ void OutputPort::WriteGroup(ushort value)
     GPIO_Write(Group, value);
 }
 
-void OutputPort::Up(int ms) const
+void OutputPort::Up(int ms)const
 {
     Write(true);
     Sys.Sleep(ms);
     Write(false);
 }
-void OutputPort::Down(int ms) const
+
+void OutputPort::Down(int ms)const
 {
     Write(false);
     Sys.Sleep(ms);
     Write(true);
 }
 
-void OutputPort::Blink(int times, int ms) const
+void OutputPort::Blink(int times, int ms)const
 {
     bool flag = true;
     for (int i = 0; i < times; i++)
@@ -308,12 +310,9 @@ void OutputPort::Blink(int times, int ms) const
     }
     Write(false);
 }
-void OutputPort::OnOpen(void* param)
-{
-}
-	void OutputPort::OpenPin(void* param)
-	{
-	}
+
+void OutputPort::OnOpen(void *param){}
+void OutputPort::OpenPin(void *param){}
 /*
 设置端口状态
  */
@@ -336,9 +335,9 @@ AlternatePort::AlternatePort(): OutputPort()
 {
     Init(false, false);
 }
-AlternatePort::AlternatePort(Pin pin): OutputPort(pin)
-{
-	
+
+AlternatePort::AlternatePort(Pin pin): OutputPort(pin){
+
 }
 
 AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
@@ -346,9 +345,9 @@ AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
     Init(invert, openDrain, speed);
     Set(pin);
 }
-void AlternatePort::OpenPin(void* param)
-{
-	
+
+void AlternatePort::OpenPin(void *param){
+
 }
 
 void AlternatePort::OnConfig(GPIO_InitTypeDef &gpio)
@@ -381,22 +380,21 @@ InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
     Init(floating, pupd);
     Set(pin);
 }
-InputPort::InputPort()
-{
-	
+
+InputPort::InputPort(){
+
 }
 
 InputPort::operator bool()
 {
     return Read();
 }
-void InputPort::OnOpen(void* param)
-{
-	
+
+void InputPort::OnOpen(void *param){
+
 }
-void InputPort::OnClose()
-{
-	
+void InputPort::OnClose(){
+
 }
 void InputPort::Init(bool floating, PuPd pupd)
 {
@@ -434,7 +432,7 @@ void InputPort::OnConfig(GPIO_InitTypeDef &gpio)
 typedef struct TIntState
 {
     Pin Pin;
-	InputPort inputport;
+    InputPort inputport;
     InputPort::IOReadHandler Handler; // 委托事件
     void *Param; // 事件参数，一般用来作为事件挂载者的对象，然后借助静态方法调用成员方法	
     bool OldValue;
@@ -462,7 +460,7 @@ ushort InputPort::ReadGroup() // 整组读取
 }
 
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
-bool InputPort::Read() const
+bool InputPort::Read()const
 {
     // 转为bool时会转为0/1
     bool rs = GPIO_ReadInputData(Group) &PinBit;
@@ -670,6 +668,7 @@ void EXTI_IRQHandler(ushort num, void *param)
         }
     #endif 
 }
+
 //中断线打开、关闭
 void SetEXIT(int pinIndex, bool enable)
 {
