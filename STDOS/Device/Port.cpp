@@ -444,9 +444,9 @@ static bool hasInitState = false;
 InputPort::~InputPort()
 {
     // 取消所有中断
-    if (_Registed)
+//    if (_Registed)
     {
-        Register(NULL);
+ //       Register(NULL);
     }
 }
 #if 0
@@ -470,7 +470,7 @@ bool InputPort::Read(Pin pin)
     return (group->IDR >> (pin &0xF)) &1;
 }
 #endif
-
+#if 0
 // 注册回调  及中断使能
 void InputPort::Register(IOReadHandler handler, void *param)
 {
@@ -514,9 +514,9 @@ void InputPort::Register(IOReadHandler handler, void *param)
         n >>= 1;
     }
 
-    _Registed = handler != NULL;
+//    _Registed = handler != NULL;
 }
-
+#endif
 void GPIO_ISR(int num) // 0 <= num <= 15
 {
     if (!hasInitState)
@@ -679,7 +679,7 @@ void SetEXIT(int pinIndex, bool enable)
     ext.EXTI_LineCmd = enable ? ENABLE : DISABLE;
     EXTI_Init(&ext);
 }
-
+#if 0
 // 申请引脚中断托管
 void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param)
 {
@@ -713,7 +713,8 @@ void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handle
         Interrupt.Activate(PORT_IRQns[pinIndex], EXTI_IRQHandler, this);
     }
 }
-
+#endif
+#if 0
 void InputPort::UnRegisterInput(int pinIndex)
 {
     IntState *state5 = &InterruptState[pinIndex];
@@ -729,3 +730,4 @@ void InputPort::UnRegisterInput(int pinIndex)
         Interrupt.Deactivate(PORT_IRQns[pinIndex]);
     }
 }
+#endif

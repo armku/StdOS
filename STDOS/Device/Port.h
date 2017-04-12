@@ -199,16 +199,16 @@ private:
 //        ushort ReadGroup(); // 整组读取
         
 //        static bool Read(Pin pin); // 读取某个引脚
-        void Register(IOReadHandler handler, void *param = NULL); // 注册事件
+//        void Register(IOReadHandler handler, void *param = NULL); // 注册事件
 //        operator bool();
-    protected:
+//    protected:
         // 函数命名为Init，而不作为构造函数，主要是因为用构造函数会导致再实例化一个对象，然后这个函数在那个新对象里面执行
  //       void Init(bool floating = true, PuPd pupd = UP);
  //       virtual void OnConfig(GPIO_InitTypeDef &gpio);
     private:
-        bool _Registed;
-        void RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param);
-        void UnRegisterInput(int pinIndex);
+ //       bool _Registed;
+ //       void RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param);
+ //       void UnRegisterInput(int pinIndex);
 };
 /******************************** AnalogInPort ********************************/
 

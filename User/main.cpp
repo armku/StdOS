@@ -89,8 +89,8 @@ int main(void)
         Config::Current = &Config::CreateFlash();
     #endif 
     
-    exti.Register(OnKeyPress);
-    exti1.Register(OnKeyPress);
+//    exti.Register(OnKeyPress);
+//    exti1.Register(OnKeyPress);
 	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
        // 初始化为输出
