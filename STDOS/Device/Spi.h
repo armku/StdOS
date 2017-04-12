@@ -71,22 +71,21 @@ public:
 private:
     uint delayus;//延时时间
 };
-
 // Spi会话类。初始化时打开Spi，超出作用域析构时关闭
 class SpiScope
 {
-    private:
-        Spi *_spi;
+private:
+	Spi* _spi;
 
-    public:
-        _force_inline SpiScope(Spi *spi)
-        {
-                _spi = spi;
-                _spi->Start();
-        }
+public:
+	SpiScope(Spi* spi)
+	{
+		_spi = spi;
+		_spi->Start();
+	}
 
-        _force_inline ~SpiScope()
-        {
-                _spi->Stop();
-        }
+	~SpiScope()
+	{
+		_spi->Stop();
+	}
 };
