@@ -68,13 +68,6 @@ protected:
 
 private:
 	void Opening();
-	
-    public:        
-        ushort PinBit; // 组内引脚位。每个引脚一个位    
-    private:
-        #if defined(STM32F1)
-            UInt64 InitState; // 备份引脚初始状态，在析构时还原
-        #endif 
 };
 /******************************** OutputPort ********************************/
 

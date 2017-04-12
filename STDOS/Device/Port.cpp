@@ -48,7 +48,7 @@ Port::Port()
 {
     this->_Pin = P0;
     this->State = NULL;
-    this->PinBit = 0;
+    //this->PinBit = 0;
 }
 
 #ifndef TINY	
@@ -56,30 +56,30 @@ Port::Port()
     {
         #if defined(STM32F1)
             // 恢复为初始化状态
-            ushort bits = PinBit;
-            int config = InitState &0xFFFFFFFF;
-            for (int i = 0; i < 16 && bits; i++, bits >>= 1)
-            {
-                if (i == 7)
-                    config = InitState >> 32;
-                if (bits &1)
-                {
-                    uint shift = (i &7) << 2; // 每引脚4位
-                    uint mask = 0xF << shift; // 屏蔽掉其它位
+//            ushort bits = PinBit;
+//            int config = InitState &0xFFFFFFFF;
+//            for (int i = 0; i < 16 && bits; i++, bits >>= 1)
+//            {
+//                if (i == 7)
+//                    config = InitState >> 32;
+//                if (bits &1)
+//                {
+//                    uint shift = (i &7) << 2; // 每引脚4位
+//                    uint mask = 0xF << shift; // 屏蔽掉其它位
 
-                    GPIO_TypeDef *port = (GPIO_TypeDef *)this->State;
-                    if (i &0x08)
-                    {
-                        // bit 8 - 15
-                        port->CRH = port->CRH &~mask | (config &mask);
-                    }
-                    else
-                    {
-                        // bit 0-7
-                        port->CRL = port->CRL &~mask | (config &mask);
-                    }
-                }
-            }
+//                    GPIO_TypeDef *port = (GPIO_TypeDef *)this->State;
+//                    if (i &0x08)
+//                    {
+//                        // bit 8 - 15
+//                        port->CRH = port->CRH &~mask | (config &mask);
+//                    }
+//                    else
+//                    {
+//                        // bit 0-7
+//                        port->CRL = port->CRL &~mask | (config &mask);
+//                    }
+//                }
+//            }
         #endif 
     }
 #endif 
@@ -95,18 +95,18 @@ Port &Port::Set(Pin pin)
     if (_Pin != P0)
     {
         this->State = IndexToGroup(pin >> 4);
-        PinBit = 1 << (pin &0x0F);
+//        PinBit = 1 << (pin &0x0F);
     }
     else
     {
         this->State = NULL;
-        PinBit = 0;
+//        PinBit = 0;
     }
 
     #if defined(STM32F1)
         // 整组引脚的初始状态，析构时有选择恢复
-        if (_Pin != P0)
-            InitState = ((UInt64)((GPIO_TypeDef *)this->State)->CRH << 32) + ((GPIO_TypeDef *)this->State)->CRL;
+//        if (_Pin != P0)
+//            InitState = ((UInt64)((GPIO_TypeDef *)this->State)->CRH << 32) + ((GPIO_TypeDef *)this->State)->CRL;
     #endif 
 
     if (_Pin != P0)
@@ -125,7 +125,7 @@ Port &Port::Set(Pin pin)
             RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
         #endif 
 
-        gpio.GPIO_Pin = PinBit;
+//        gpio.GPIO_Pin = PinBit;
 
         #ifdef STM32F1
             // PA15/PB3/PB4 需要关闭JTAG
@@ -227,10 +227,10 @@ void OutputPort::OnConfig(GPIO_InitTypeDef &gpio)
 
     // 配置之前，需要根据倒置情况来设定初始状态，也就是在打开端口之前必须明确端口高低状态
     ushort dat = GPIO_ReadOutputData(((GPIO_TypeDef *)this->State));
-    if (!Invert)
-        dat &= ~PinBit;
-    else
-        dat |= PinBit;
+//    if (!Invert)
+//        dat &= ~PinBit;
+//    else
+//        dat |= PinBit;
     GPIO_Write(((GPIO_TypeDef *)this->State), dat);
 }
 
@@ -245,13 +245,15 @@ ushort OutputPort::ReadGroup()
 bool OutputPort::Read()const
 {
     // 转为bool时会转为0/1
-    bool rs = GPIO_ReadOutputData(((GPIO_TypeDef *)this->State)) &PinBit;
+//    bool rs = GPIO_ReadOutputData(((GPIO_TypeDef *)this->State)) &PinBit;
+	bool rs = GPIO_ReadOutputData(((GPIO_TypeDef *)this->State));
     return rs ^ Invert;
 }
 
 bool OutputPort::ReadInput()const
 {
-    bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State)) &PinBit;
+//    bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State)) &PinBit;
+	bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State));
     return rs ^ Invert;
 }
 
@@ -263,10 +265,10 @@ bool OutputPort::Read(Pin pin)
 
 void OutputPort::Write(bool value)const
 {
-    if (value ^ Invert)
-        GPIO_SetBits(((GPIO_TypeDef *)this->State), PinBit);
-    else
-        GPIO_ResetBits(((GPIO_TypeDef *)this->State), PinBit);
+//    if (value ^ Invert)
+//        GPIO_SetBits(((GPIO_TypeDef *)this->State), PinBit);
+//    else
+//        GPIO_ResetBits(((GPIO_TypeDef *)this->State), PinBit);
 }
 
 OutputPort::operator bool()
@@ -457,7 +459,8 @@ ushort InputPort::ReadGroup() // 整组读取
 bool InputPort::Read()const
 {
     // 转为bool时会转为0/1
-    bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State)) &PinBit;
+//    bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State)) &PinBit;
+	bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State));
     return rs ^ Invert;
 }
 
@@ -471,8 +474,8 @@ bool InputPort::Read(Pin pin)
 // 注册回调  及中断使能
 void InputPort::Register(IOReadHandler handler, void *param)
 {
-    if (!PinBit)
-        return ;
+//    if (!PinBit)
+//        return ;
 
     // 检查并初始化中断线数组
     if (!hasInitState)
@@ -489,7 +492,8 @@ void InputPort::Register(IOReadHandler handler, void *param)
 
     byte gi = _Pin >> 4;
     gi = gi;
-    ushort n = PinBit;
+//    ushort n = PinBit;
+	ushort n = 0;
     for (int i = 0; i < 16 && n != 0; i++)
     {
         // 如果设置了这一位，则注册事件
