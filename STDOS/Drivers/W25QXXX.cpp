@@ -1,4 +1,5 @@
 #include "W25QXXX.h"
+#include "stm32f10x.h"
 
 /* Private typedef -----------------------------------------------------------*/
 //#define SPI_FLASH_PageSize      4096
@@ -374,7 +375,7 @@ void W25QXXX::WriteEnable(void)
  *******************************************************************************/
 void W25QXXX::WaitForWriteEnd(void)
 {
-    u8 FLASH_Status = 0;
+    byte FLASH_Status = 0;
 
     /* Select the FLASH: Chip Select low */
     if (this->pcs)
@@ -453,9 +454,9 @@ void W25QXXX::WAKEUP(void)
     uint8_t Tx_Buffer[] = "感谢您选用stm32开发板\r\n";
     uint8_t Rx_Buffer[BufferSize];
 
-    __IO uint32_t DeviceID = 0;
-    __IO uint32_t FlashID = 0;
-    __IO TestStatus TransferStatus1 = FAILED;
+    uint DeviceID = 0;
+    uint FlashID = 0;
+    TestStatus TransferStatus1 = FAILED;
 
     TestStatus Buffercmp(uint8_t *pBuffer1, uint8_t *pBuffer2, uint16_t BufferLength);
     void W25QXXX::Test()

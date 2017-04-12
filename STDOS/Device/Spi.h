@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Sys.h"
-#include "Port.h"
-#include "stm32f10x.h"
+#include "Device\Port.h"
 
 // Spi¿‡
 class Spi
