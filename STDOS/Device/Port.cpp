@@ -110,7 +110,14 @@ Port &Port::Set(Pin pin)
     #endif 
 
     if (_Pin != P0)
-        Config();
+	{
+		GPIO_InitTypeDef gpio;
+    // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
+    GPIO_StructInit(&gpio);
+
+    OnConfig(gpio);
+    GPIO_Init(Group, &gpio);
+	}
 
     return  *this;
 }
@@ -126,12 +133,7 @@ void Port::OnOpen(void *param){
 void Port::OnClose(){}
 void Port::Config()
 {
-    GPIO_InitTypeDef gpio;
-    // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
-    GPIO_StructInit(&gpio);
-
-    OnConfig(gpio);
-    GPIO_Init(Group, &gpio);
+    
 }
 
 void Port::OnConfig(GPIO_InitTypeDef &gpio)
