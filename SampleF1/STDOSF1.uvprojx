@@ -703,11 +703,6 @@
           <GroupName>Device</GroupName>
           <Files>
             <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Device\usart.c</FilePath>
-            </File>
-            <File>
               <FileName>ADC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\ADC.cpp</FilePath>
@@ -1659,11 +1654,6 @@
         <Group>
           <GroupName>Device</GroupName>
           <Files>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Device\usart.c</FilePath>
-            </File>
             <File>
               <FileName>ADC.cpp</FileName>
               <FileType>8</FileType>
