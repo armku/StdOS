@@ -376,17 +376,12 @@ void AnalogInPort::OnConfig(GPIO_InitTypeDef &gpio)
 
 InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
 {
-    Init(floating, pupd);
+//    Init(floating, pupd);
     Set(pin);
 }
 
 InputPort::InputPort(){
 
-}
-
-InputPort::operator bool()
-{
-    return Read();
 }
 
 void InputPort::OnOpen(void *param){
@@ -395,6 +390,7 @@ void InputPort::OnOpen(void *param){
 void InputPort::OnClose(){
 
 }
+#if 0
 void InputPort::Init(bool floating, PuPd pupd)
 {
     Pull = pupd;
@@ -406,7 +402,8 @@ void InputPort::Init(bool floating, PuPd pupd)
     ShakeTime = 0;
     Invert = false;
 }
-
+#endif
+#if 0
 void InputPort::OnConfig(GPIO_InitTypeDef &gpio)
 {
 //    Port::OnConfig(gpio);
@@ -424,7 +421,7 @@ void InputPort::OnConfig(GPIO_InitTypeDef &gpio)
         gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
 }
-
+#endif
 
 /* 中断状态结构体 */
 /* 一共16条中断线，意味着同一条线每一组只能有一个引脚使用中断 */
@@ -452,12 +449,12 @@ InputPort::~InputPort()
         Register(NULL);
     }
 }
-
+#if 0
 ushort InputPort::ReadGroup() // 整组读取
 {
     return GPIO_ReadInputData(((GPIO_TypeDef *)this->State));
 }
-
+#endif
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
 bool InputPort::Read()const
 {
@@ -466,13 +463,13 @@ bool InputPort::Read()const
 	bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State));
     return rs ^ Invert;
 }
-
+#if 0
 bool InputPort::Read(Pin pin)
 {
     GPIO_TypeDef *group = _GROUP(pin);
     return (group->IDR >> (pin &0xF)) &1;
 }
-
+#endif
 
 // 注册回调  及中断使能
 void InputPort::Register(IOReadHandler handler, void *param)
@@ -535,7 +532,7 @@ void GPIO_ISR(int num) // 0 <= num <= 15
         uint bit = 1 << num;
     #endif 
     bool value;
-    value = InputPort::Read(state3->Pin);
+//    value = InputPort::Read(state3->Pin);
     //byte line = EXTI_Line0 << num;
     // 如果未指定委托，则不处理
     if (!state3->Handler)
@@ -696,7 +693,7 @@ void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handle
     state4->Pin = pin;
     state4->Handler = handler;
     state4->Param = param;
-    state4->OldValue = Read(pin); // 预先保存当前状态值，后面跳变时触发中断
+//    state4->OldValue = Read(pin); // 预先保存当前状态值，后面跳变时触发中断
 
     // 打开时钟，选择端口作为端口EXTI时钟线
     #if defined(STM32F0) || defined(STM32F4)
