@@ -131,10 +131,6 @@ void Port::OnOpen(void *param){
 
 }
 void Port::OnClose(){}
-void Port::Config()
-{
-    
-}
 
 void Port::OnConfig(GPIO_InitTypeDef &gpio)
 {

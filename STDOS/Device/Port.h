@@ -66,8 +66,7 @@ private:
 	
     public:
         GPIO_TypeDef *Group; // 针脚组
-        ushort PinBit; // 组内引脚位。每个引脚一个位       
-        virtual void Config(); // 确定配置,确认用对象内部的参数进行初始化
+        ushort PinBit; // 组内引脚位。每个引脚一个位
     protected:    
         // 配置过程，由Config调用，最后GPIO_Init
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
