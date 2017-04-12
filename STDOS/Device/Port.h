@@ -66,10 +66,7 @@ private:
 	
     public:
         GPIO_TypeDef *Group; // 针脚组
-        ushort PinBit; // 组内引脚位。每个引脚一个位
-    protected:    
-        // 配置过程，由Config调用，最后GPIO_Init
-        //virtual void OnConfig(GPIO_InitTypeDef &gpio);
+        ushort PinBit; // 组内引脚位。每个引脚一个位    
     private:
         #if defined(STM32F1)
             UInt64 InitState; // 备份引脚初始状态，在析构时还原
