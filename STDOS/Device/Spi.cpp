@@ -3,17 +3,23 @@
 #include "Spi.h"
 #include "string.h"
 
-typedef enum
-{
-CHSPI1	=	1,
-CHSPI2	=	2,
-CHSPI3	=	3
-}ESpiChannel;
+#if 0
+    private:        
+        OutputPort *pNss;
+
+        AlternatePort *pClk;
+        AlternatePort *pMiso;
+        AlternatePort *pMosi;
+    public:
+        SPI_TypeDef *SPI; 
+        // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
+        Spi(int spiIndex, uint speedHz = 9000000, bool useNss = true);
+#endif   
 //硬件SPI
 class CHardSpi
 {
 	public:
-		CHardSpi(ESpiChannel spichannel);		
+		CHardSpi(SPI spichannel);		
 	public:
 		void Init(void);			 //初始化SPI口
 		void SetSpeed(byte SpeedSet); //设置SPI速度   
@@ -21,7 +27,7 @@ class CHardSpi
 		byte WriteByte(byte TxData);//SPI总线写一个字节
 		ushort SendHalfWord(ushort HalfWord);
 	private:
-		ESpiChannel spiChannel;//通道
+		SPI spiChannel;//通道
 };
 
 // NSS/CLK/MISO/MOSI
@@ -49,6 +55,15 @@ int GetPre(int index, uint *speedHz)
     return pre;
 }
 
+void Spi::Init(SPI spi, uint speedHz, bool useNss)
+{
+}
+// 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
+    Spi::Spi(SPI spi, uint speedHz , bool useNss)
+	{
+		
+	}
+#if 0
 Spi::Spi(int spiIndex, uint speedHz, bool useNss)
 {
     SPI_TypeDef *g_Spis[] = SPIS;
@@ -163,7 +178,7 @@ Spi::Spi(int spiIndex, uint speedHz, bool useNss)
 
     Stop();
 }
-
+#endif
 Spi::~Spi()
 {
     debug_printf("Spi:Spi%d\r\n", _index + 1);
@@ -173,6 +188,7 @@ Spi::~Spi()
 
 void Spi::Close()
 {
+	#if 0
     Stop();
 
     SPI_Cmd(SPI, DISABLE);
@@ -186,10 +202,13 @@ void Spi::Close()
     this->pMosi->Set(P0);
     debug_printf("    NSS : ");
     this->pNss->Set(P0);
+	#endif
 }
+
 
 byte Spi::Write(byte data)
 {
+	#if 0
     int retry = Retry;
     while (SPI_I2S_GetFlagStatus(SPI, SPI_I2S_FLAG_TXE) == RESET)
     {
@@ -217,8 +236,11 @@ byte Spi::Write(byte data)
     #else 
         return SPI_ReceiveData8(SPI); //返回通过SPIx最近接收的数据
     #endif 
+	#endif
+	return 0;
 }
 
+#if 0
 ushort Spi::Write16(ushort data)
 {
     // 双字节操作，超时次数加倍
@@ -250,7 +272,8 @@ ushort Spi::Write16(ushort data)
         return SPI_I2S_ReceiveData16(SPI);
     #endif 
 }
-
+#endif
+#if 0
 // 拉低NSS，开始传输
 void Spi::Start()
 {
@@ -260,13 +283,15 @@ void Spi::Start()
     // 开始新一轮事务操作，错误次数清零
     Error = 0;
 }
-
+#endif
+#if 0
 // 拉高NSS，停止传输
 void Spi::Stop()
 {
     if (!this->pNss->Empty())
         *this->pNss = true;
 }
+#endif
 CSoftSpi::CSoftSpi(Pin pincs, Pin pinsck, Pin pindi, Pin pindo, uint nus)
 {
     this->pportcs=new OutputPort(pincs);
@@ -332,7 +357,7 @@ byte CSoftSpi::spi_readbyte(void)
 {
     return Write(0xff);
 }
-CHardSpi::CHardSpi(ESpiChannel spichannel)
+CHardSpi::CHardSpi(SPI spichannel)
 {
     this->spiChannel = spichannel;
 }
@@ -357,7 +382,7 @@ void CHardSpi::Init(void) //初始化SPI口
 
     switch (this->spiChannel)
     {
-        case CHSPI1:
+        case Spi1:
             /*!< SPI_FLASH_SPI Periph clock enable */
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
 
@@ -366,7 +391,7 @@ void CHardSpi::Init(void) //初始化SPI口
             /* Enable SPI1  */
             SPI_Cmd(SPI1, ENABLE);
             break;
-        case CHSPI2:
+        case Spi2:
             /*!< SPI_FLASH_SPI Periph clock enable */
             RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
 
@@ -375,7 +400,7 @@ void CHardSpi::Init(void) //初始化SPI口
             /* Enable SPI1  */
             SPI_Cmd(SPI2, ENABLE);
             break;
-        case CHSPI3:
+        case Spi3:
             /*!< SPI_FLASH_SPI Periph clock enable */
             RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
 
@@ -403,7 +428,7 @@ byte CHardSpi::WriteByte(byte TxData) //SPI总线写一个字节
     byte ret = 0;
     switch (this->spiChannel)
     {
-        case CHSPI1:
+        case Spi1:
             /* Loop while DR register in not emplty */
             while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET)
                 ;
@@ -417,7 +442,7 @@ byte CHardSpi::WriteByte(byte TxData) //SPI总线写一个字节
             /* Return the byte read from the SPI bus */
             ret = SPI_I2S_ReceiveData(SPI1);
             break;
-        case CHSPI2:
+        case Spi2:
             /* Loop while DR register in not emplty */
             while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_TXE) == RESET)
                 ;
@@ -431,7 +456,7 @@ byte CHardSpi::WriteByte(byte TxData) //SPI总线写一个字节
             /* Return the byte read from the SPI bus */
             ret = SPI_I2S_ReceiveData(SPI2);
             break;
-        case CHSPI3:
+        case Spi3:
             /* Loop while DR register in not emplty */
             while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_TXE) == RESET)
                 ;
@@ -456,7 +481,7 @@ ushort CHardSpi::SendHalfWord(ushort HalfWord)
     ushort ret = 0;
     switch (this->spiChannel)
     {
-        case CHSPI1:
+        case Spi1:
             /* Loop while DR register in not emplty */
             while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET)
                 ;
@@ -471,7 +496,7 @@ ushort CHardSpi::SendHalfWord(ushort HalfWord)
             /* Return the Half Word read from the SPI bus */
             ret = SPI_I2S_ReceiveData(SPI1);
             break;
-        case CHSPI2:
+        case Spi2:
             /* Loop while DR register in not emplty */
             while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_TXE) == RESET)
                 ;
@@ -486,7 +511,7 @@ ushort CHardSpi::SendHalfWord(ushort HalfWord)
             /* Return the Half Word read from the SPI bus */
             ret = SPI_I2S_ReceiveData(SPI2);
             break;
-        case CHSPI3:
+        case Spi3:
             /* Loop while DR register in not emplty */
             while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_TXE) == RESET)
                 ;

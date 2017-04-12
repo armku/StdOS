@@ -462,7 +462,7 @@ void W25QXXX::WAKEUP(void)
     {
         printf("\r\n这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
 
-        Spi spi(SPI_1, 9000000, false);
+        Spi spi(Spi1, 9000000, false);
         W25QXXX w25q64(&spi, PA4);
         /* 8M串行flash W25Q64初始化 */
         w25q64.Init();
