@@ -64,8 +64,7 @@ class Port
 private:
 	void Opening();
 	
-    public:
-        GPIO_TypeDef *Group; // 针脚组
+    public:        
         ushort PinBit; // 组内引脚位。每个引脚一个位    
     private:
         #if defined(STM32F1)

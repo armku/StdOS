@@ -46,9 +46,9 @@ byte GroupToIndex(GPIO_TypeDef *group)
  */
 Port::Port()
 {
-    _Pin = P0;
-    Group = NULL;
-    PinBit = 0;
+    this->_Pin = P0;
+    this->State = NULL;
+    this->PinBit = 0;
 }
 
 #ifndef TINY	
@@ -67,7 +67,7 @@ Port::Port()
                     uint shift = (i &7) << 2; // 每引脚4位
                     uint mask = 0xF << shift; // 屏蔽掉其它位
 
-                    GPIO_TypeDef *port = Group;
+                    GPIO_TypeDef *port = (GPIO_TypeDef *)this->State;
                     if (i &0x08)
                     {
                         // bit 8 - 15
@@ -94,19 +94,19 @@ Port &Port::Set(Pin pin)
     _Pin = pin;
     if (_Pin != P0)
     {
-        Group = IndexToGroup(pin >> 4);
+        this->State = IndexToGroup(pin >> 4);
         PinBit = 1 << (pin &0x0F);
     }
     else
     {
-        Group = NULL;
+        this->State = NULL;
         PinBit = 0;
     }
 
     #if defined(STM32F1)
         // 整组引脚的初始状态，析构时有选择恢复
         if (_Pin != P0)
-            InitState = ((UInt64)Group->CRH << 32) + Group->CRL;
+            InitState = ((UInt64)((GPIO_TypeDef *)this->State)->CRH << 32) + ((GPIO_TypeDef *)this->State)->CRL;
     #endif 
 
     if (_Pin != P0)
@@ -144,7 +144,7 @@ Port &Port::Set(Pin pin)
                     }
             }
         #endif 
-        GPIO_Init(Group, &gpio);
+        GPIO_Init(((GPIO_TypeDef *)this->State), &gpio);
     }
 
     return  *this;
@@ -223,12 +223,12 @@ void OutputPort::OnConfig(GPIO_InitTypeDef &gpio)
     #endif 
 
     // 配置之前，需要根据倒置情况来设定初始状态，也就是在打开端口之前必须明确端口高低状态
-    ushort dat = GPIO_ReadOutputData(Group);
+    ushort dat = GPIO_ReadOutputData(((GPIO_TypeDef *)this->State));
     if (!Invert)
         dat &= ~PinBit;
     else
         dat |= PinBit;
-    GPIO_Write(Group, dat);
+    GPIO_Write(((GPIO_TypeDef *)this->State), dat);
 }
 
 /*
@@ -236,19 +236,19 @@ void OutputPort::OnConfig(GPIO_InitTypeDef &gpio)
  */
 ushort OutputPort::ReadGroup()
 {
-    return GPIO_ReadOutputData(Group);
+    return GPIO_ReadOutputData(((GPIO_TypeDef *)this->State));
 }
 
 bool OutputPort::Read()const
 {
     // 转为bool时会转为0/1
-    bool rs = GPIO_ReadOutputData(Group) &PinBit;
+    bool rs = GPIO_ReadOutputData(((GPIO_TypeDef *)this->State)) &PinBit;
     return rs ^ Invert;
 }
 
 bool OutputPort::ReadInput()const
 {
-    bool rs = GPIO_ReadInputData(Group) &PinBit;
+    bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State)) &PinBit;
     return rs ^ Invert;
 }
 
@@ -261,9 +261,9 @@ bool OutputPort::Read(Pin pin)
 void OutputPort::Write(bool value)const
 {
     if (value ^ Invert)
-        GPIO_SetBits(Group, PinBit);
+        GPIO_SetBits(((GPIO_TypeDef *)this->State), PinBit);
     else
-        GPIO_ResetBits(Group, PinBit);
+        GPIO_ResetBits(((GPIO_TypeDef *)this->State), PinBit);
 }
 
 OutputPort::operator bool()
@@ -273,7 +273,7 @@ OutputPort::operator bool()
 
 void OutputPort::WriteGroup(ushort value)
 {
-    GPIO_Write(Group, value);
+    GPIO_Write(((GPIO_TypeDef *)this->State), value);
 }
 
 void OutputPort::Up(int ms)const
@@ -447,14 +447,14 @@ InputPort::~InputPort()
 
 ushort InputPort::ReadGroup() // 整组读取
 {
-    return GPIO_ReadInputData(Group);
+    return GPIO_ReadInputData(((GPIO_TypeDef *)this->State));
 }
 
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
 bool InputPort::Read()const
 {
     // 转为bool时会转为0/1
-    bool rs = GPIO_ReadInputData(Group) &PinBit;
+    bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State)) &PinBit;
     return rs ^ Invert;
 }
 
