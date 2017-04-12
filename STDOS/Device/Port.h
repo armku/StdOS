@@ -102,16 +102,7 @@ protected:
 	virtual void OpenPin(void* param);
 
 private:		
-    public:          
-        void WriteGroup(ushort value); // 整组写入
-        ushort ReadGroup(); // 整组读取
-        // 读取指定索引引脚。索引按照从小到大，0xFF表示任意脚为true则返回true
-        bool Read(byte index);
-        static bool Read(Pin pin); 
-        operator bool();
-    protected:
-        virtual void OnConfig(GPIO_InitTypeDef &gpio);
-        void Init(bool invert = false, bool openDrain = false, uint speed = 50);
+
 };
 
 /******************************** AlternatePort ********************************/
@@ -128,9 +119,8 @@ protected:
     //virtual void OnOpen();
 	virtual void OpenPin(void* param);
 
-private:	  
-    protected:
-        virtual void OnConfig(GPIO_InitTypeDef &gpio);
+private:	 
+   
 };
 
 /******************************** InputPort ********************************/
@@ -197,6 +187,12 @@ private:
 	void ClosePin();
 	bool OnRegister();
 	byte	_Value;	// 当前值	
+
+
+
+
+
+
     public:        
         Trigger Mode; //	=	Both;	//触发模式，上升沿下降沿       
                 
@@ -228,9 +224,6 @@ protected:
 
 private:
 	void OpenPin(void* param);
-
-    protected:
-        virtual void OnConfig(GPIO_InitTypeDef &gpio);
 };
 
 

@@ -171,23 +171,24 @@ void Port::OnClose(){}
 
 OutputPort::OutputPort()
 {
-    Init();
+//    Init();
 }
 
 OutputPort::OutputPort(Pin pin)
 {
-    Init();
+//    Init();
     Set(pin);
 }
 
 OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
 {
-    Init(invert, openDrain, speed);
+//    Init(invert, openDrain, speed);
     Set(pin);
 }
 
-void OutputPort::OnConfig(GPIO_InitTypeDef &gpio)
-{
+//void OutputPort::OnConfig(GPIO_InitTypeDef &gpio)
+//{
+	#if 0
     #ifndef STM32F4
         assert_param(Speed == 2 || Speed == 10 || Speed == 50);
     #else 
@@ -232,15 +233,16 @@ void OutputPort::OnConfig(GPIO_InitTypeDef &gpio)
 //    else
 //        dat |= PinBit;
     GPIO_Write(((GPIO_TypeDef *)this->State), dat);
-}
+	#endif
+//}
 
 /*
 Õû×é¶ÁÈ¡
  */
-ushort OutputPort::ReadGroup()
-{
-    return GPIO_ReadOutputData(((GPIO_TypeDef *)this->State));
-}
+//ushort OutputPort::ReadGroup()
+//{
+//    return GPIO_ReadOutputData(((GPIO_TypeDef *)this->State));
+//}
 
 bool OutputPort::Read()const
 {
@@ -257,11 +259,11 @@ bool OutputPort::ReadInput()const
     return rs ^ Invert;
 }
 
-bool OutputPort::Read(Pin pin)
-{
-    GPIO_TypeDef *group = _GROUP(pin);
-    return (group->IDR >> (pin &0xF)) &1;
-}
+//bool OutputPort::Read(Pin pin)
+//{
+//    GPIO_TypeDef *group = _GROUP(pin);
+//    return (group->IDR >> (pin &0xF)) &1;
+//}
 
 void OutputPort::Write(bool value)const
 {
@@ -271,15 +273,15 @@ void OutputPort::Write(bool value)const
 //        GPIO_ResetBits(((GPIO_TypeDef *)this->State), PinBit);
 }
 
-OutputPort::operator bool()
-{
-    return Read();
-}
+//OutputPort::operator bool()
+//{
+//    return Read();
+//}
 
-void OutputPort::WriteGroup(ushort value)
-{
-    GPIO_Write(((GPIO_TypeDef *)this->State), value);
-}
+//void OutputPort::WriteGroup(ushort value)
+//{
+//    GPIO_Write(((GPIO_TypeDef *)this->State), value);
+//}
 
 void OutputPort::Up(int ms)const
 {
@@ -319,17 +321,17 @@ void OutputPort::Write(Pin pin, bool value)
     else
         GPIO_ResetBits(_GROUP(pin), _PORT(pin));
 }
-
+#if 0
 void OutputPort::Init(bool invert, bool openDrain, uint speed)
 {
     OpenDrain = openDrain;
     Speed = speed;
     Invert = invert;
 }
-
+#endif
 AlternatePort::AlternatePort(): OutputPort()
 {
-    Init(false, false);
+//    Init(false, false);
 }
 
 AlternatePort::AlternatePort(Pin pin): OutputPort(pin){
@@ -338,17 +340,17 @@ AlternatePort::AlternatePort(Pin pin): OutputPort(pin){
 
 AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
 {
-    Init(invert, openDrain, speed);
+//    Init(invert, openDrain, speed);
     Set(pin);
 }
 
 void AlternatePort::OpenPin(void *param){
 
 }
-
+#if 0
 void AlternatePort::OnConfig(GPIO_InitTypeDef &gpio)
 {
-    OutputPort::OnConfig(gpio);
+//    OutputPort::OnConfig(gpio);
 
     #ifdef STM32F1
         gpio.GPIO_Mode = OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
@@ -357,7 +359,8 @@ void AlternatePort::OnConfig(GPIO_InitTypeDef &gpio)
         gpio.GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
 }
-
+#endif
+#if 0
 void AnalogInPort::OnConfig(GPIO_InitTypeDef &gpio)
 {
 //    Port::OnConfig(gpio);
@@ -369,7 +372,7 @@ void AnalogInPort::OnConfig(GPIO_InitTypeDef &gpio)
         //gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
 }
-
+#endif
 
 InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
 {
