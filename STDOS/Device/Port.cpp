@@ -160,12 +160,6 @@ void Port::OnOpen(void *param){
 }
 void Port::OnClose(){}
 
-void Port::OnConfig(GPIO_InitTypeDef &gpio){
-
-}
-
-
-
 #define GPIO_Mode_IN GPIO_Mode_IN_FLOATING
 #define GPIO_Mode_AF GPIO_Mode_AF_OD
 #define GPIO_OType_OD GPIO_Mode_Out_OD
@@ -197,7 +191,7 @@ void OutputPort::OnConfig(GPIO_InitTypeDef &gpio)
         assert_param(Speed == 2 || Speed == 25 || Speed == 50 || Speed == 100);
     #endif 
 
-    Port::OnConfig(gpio);
+//    Port::OnConfig(gpio);
 
     switch (Speed)
     {
@@ -361,7 +355,7 @@ void AlternatePort::OnConfig(GPIO_InitTypeDef &gpio)
 
 void AnalogInPort::OnConfig(GPIO_InitTypeDef &gpio)
 {
-    Port::OnConfig(gpio);
+//    Port::OnConfig(gpio);
 
     #ifdef STM32F1
         gpio.GPIO_Mode = GPIO_Mode_AIN; //
@@ -407,7 +401,7 @@ void InputPort::Init(bool floating, PuPd pupd)
 
 void InputPort::OnConfig(GPIO_InitTypeDef &gpio)
 {
-    Port::OnConfig(gpio);
+//    Port::OnConfig(gpio);
 
     #ifdef STM32F1
         if (Floating)

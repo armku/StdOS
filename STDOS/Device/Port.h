@@ -69,7 +69,7 @@ private:
         ushort PinBit; // 组内引脚位。每个引脚一个位
     protected:    
         // 配置过程，由Config调用，最后GPIO_Init
-        virtual void OnConfig(GPIO_InitTypeDef &gpio);
+        //virtual void OnConfig(GPIO_InitTypeDef &gpio);
     private:
         #if defined(STM32F1)
             UInt64 InitState; // 备份引脚初始状态，在析构时还原
