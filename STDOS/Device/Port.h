@@ -39,7 +39,7 @@ class Port
 	Pin		_Pin;		// 引脚
 	bool	Opened;		// 是否已经打开
 	byte    Index;		// 引脚自身次序编号，用于区分多引脚次序
-	//void*	State;		// 用户状态数据
+	void*	State;		// 用户状态数据
 	
 	Port();
 	#ifndef TINY
