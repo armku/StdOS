@@ -53,22 +53,7 @@ private:
 	void OnClose();	
 
 };
-class CSoftSpi
-{
-public:
-    CSoftSpi(Pin pincs, Pin pinsck, Pin pindi, Pin pindo, uint nus = 0); //延时时间默认0us   
-    byte Init();
-    byte WaitBusy();
-    byte Write(byte da);
-    byte spi_readbyte(void);
-public:
-    OutputPort *pClk;
-    OutputPort *pportdi;
-    InputPort *pportdo;
-    OutputPort *pportcs;
-private:
-    uint delayus;//延时时间
-};
+
 // Spi会话类。初始化时打开Spi，超出作用域析构时关闭
 class SpiScope
 {
