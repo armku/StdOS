@@ -270,7 +270,7 @@ void Spi::Stop()
 CSoftSpi::CSoftSpi(Pin pincs, Pin pinsck, Pin pindi, Pin pindo, uint nus)
 {
     this->pportcs=new OutputPort(pincs);
-    this->pportsck=new OutputPort(pinsck);
+    this->pClk=new OutputPort(pinsck);
     this->pportdi=new OutputPort(pindi);
     this->pportdo=new InputPort(pindo,true);
     this->delayus = nus;
@@ -300,7 +300,7 @@ byte CSoftSpi::WaitBusy()
 }
 
 //SPI写字节
-byte CSoftSpi::spi_writebyte(byte da)
+byte CSoftSpi::Write(byte da)
 {
     byte i;
     byte ret = 0;
@@ -315,9 +315,9 @@ byte CSoftSpi::spi_writebyte(byte da)
             *this->pportdi=0;
         }
 		Sys.Delay(this->delayus);
-        *this->pportsck=1;
+        *this->pClk=1;
         Sys.Delay(this->delayus);
-        *this->pportsck=0;
+        *this->pClk=0;
         ret <<= 1;
         if (this->pportdo->Read())
         {
@@ -330,7 +330,7 @@ byte CSoftSpi::spi_writebyte(byte da)
 //SPI总线读数据
 byte CSoftSpi::spi_readbyte(void)
 {
-    return spi_writebyte(0xff);
+    return Write(0xff);
 }
 CHardSpi::CHardSpi(ESpiChannel spichannel)
 {

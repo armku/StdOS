@@ -39,6 +39,22 @@ class Spi
         void Start(); // 拉低NSS，开始传输
         void Stop(); // 拉高NSS，停止传输
 };
+class CSoftSpi
+{
+public:
+    CSoftSpi(Pin pincs, Pin pinsck, Pin pindi, Pin pindo, uint nus = 0); //延时时间默认0us   
+    byte Init();
+    byte WaitBusy();
+    byte Write(byte da);
+    byte spi_readbyte(void);
+public:
+    OutputPort *pClk;
+    OutputPort *pportdi;
+    InputPort *pportdo;
+    OutputPort *pportcs;
+private:
+    uint delayus;//延时时间
+};
 
 // Spi会话类。初始化时打开Spi，超出作用域析构时关闭
 class SpiScope
@@ -58,20 +74,3 @@ class SpiScope
                 _spi->Stop();
         }
 };
-class CSoftSpi
-{
-public:
-    CSoftSpi(Pin pincs, Pin pinsck, Pin pindi, Pin pindo, uint nus = 0); //延时时间默认0us   
-    byte Init();
-    byte WaitBusy();
-    byte spi_writebyte(byte da);
-    byte spi_readbyte(void);
-public:
-    OutputPort *pportsck;
-    OutputPort *pportdi;
-    InputPort *pportdo;
-    OutputPort *pportcs;
-private:
-    uint delayus;//延时时间
-};
-

@@ -73,9 +73,9 @@ byte CADS1246::ReadReg(byte RegAddr)
 
 
     Cmd = ADC_CMD_RREG | RegAddr;
-    this->pspi->spi_writebyte(Cmd);
-    this->pspi->spi_writebyte(0);
-    ret = this->pspi->spi_writebyte(0X00);
+    this->pspi->Write(Cmd);
+    this->pspi->Write(0);
+    ret = this->pspi->Write(0X00);
     this->pspi->spi_readbyte(); //发送NOP
     *this->pspi->pportcs=1;
 
@@ -89,9 +89,9 @@ void CADS1246::WriteReg(byte RegAddr, byte da)
     *this->pspi->pportcs=0;
 
     Cmd = ADC_CMD_WREG | RegAddr;
-    this->pspi->spi_writebyte(Cmd);
-    this->pspi->spi_writebyte(0);
-    this->pspi->spi_writebyte(da);
+    this->pspi->Write(Cmd);
+    this->pspi->Write(0);
+    this->pspi->Write(da);
     this->pspi->spi_readbyte(); //发送NOP
     *this->pspi->pportcs=1;
 }
@@ -144,7 +144,7 @@ int CADS1246::Read(void) //返回-1,表示转换未完成
     {
         return  - 1;
     }	
-    this->pspi->spi_writebyte(Cmd[0]);	
+    this->pspi->Write(Cmd[0]);	
     Cmd[0] = this->pspi->spi_readbyte();
     Cmd[1] = this->pspi->spi_readbyte();
     Cmd[2] = this->pspi->spi_readbyte();
