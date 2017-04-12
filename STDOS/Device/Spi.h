@@ -2,7 +2,7 @@
 
 #include "Sys.h"
 #include "Port.h"
-
+#include "stm32f10x.h"
 /*Spi定义*/
 //SPI1..这种格式与st库冲突
 #define SPI_1    0

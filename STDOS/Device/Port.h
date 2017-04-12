@@ -1,5 +1,6 @@
 #ifndef _Port_H_
 #define _Port_H_
+
 #include "Kernel\Sys.h"
 
 /******** 端口打开关闭流程 ********/
@@ -20,8 +21,6 @@ Port::Close
 // 端口基类
 // 用于管理一个端口，通过PinBit标识该组的哪些引脚。
 // 子类初始化时先通过SetPort设置端口，备份引脚状态，然后Config通过gpio结构体配置端口，端口销毁时恢复引脚状态
-#include "stm32f10x.h"
-
 class Port
 {
 public:
@@ -69,6 +68,7 @@ protected:
 private:
 	void Opening();
 };
+
 /******************************** OutputPort ********************************/
 
 // 输出口
@@ -78,22 +78,27 @@ public:
     byte Invert		= 2;		// 是否倒置输入输出。默认2表示自动检测
     bool OpenDrain	= false;	// 是否开漏输出
     byte Speed		= 50;		// 速度
-	OutputPort();
+
+    OutputPort();
     OutputPort(Pin pin);
     OutputPort(Pin pin, byte invert, bool openDrain = false, byte speed = 50);
+
 	OutputPort& Init(Pin pin, bool invert);
-	void Write(bool value) const;
+
+    void Write(bool value) const;
 	// 拉高一段时间后拉低
 	void Up(int ms) const;
 	void Down(int ms) const;
 	// 闪烁多次
 	void Blink(int times, int ms) const;
+
 	// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
     virtual bool Read() const;
 	bool ReadInput() const;
 
     static void Write(Pin pin, bool value);
-	OutputPort& operator=(bool value) { Write(value); return *this; }
+
+    OutputPort& operator=(bool value) { Write(value); return *this; }
     OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }
     operator bool() const { return Read(); }
 
@@ -101,8 +106,7 @@ protected:
     virtual void OnOpen(void* param);
 	virtual void OpenPin(void* param);
 
-private:		
-
+private:
 };
 
 /******************************** AlternatePort ********************************/
@@ -119,8 +123,7 @@ protected:
     //virtual void OnOpen();
 	virtual void OpenPin(void* param);
 
-private:	 
-   
+private:
 };
 
 /******************************** InputPort ********************************/
@@ -129,7 +132,7 @@ private:
 class InputPort : public Port
 {
 public:
-	typedef enum
+    typedef enum
     {
         NOPULL	= 0x00,
         UP		= 0x01,	// 上拉电阻
@@ -186,30 +189,9 @@ private:
 	void OpenPin(void* param);
 	void ClosePin();
 	bool OnRegister();
-	byte	_Value;	// 当前值	
-
-
-
-
-
-
-    public:        
- //       Trigger Mode; //	=	Both;	//触发模式，上升沿下降沿       
-                
-//        ushort ReadGroup(); // 整组读取
-        
-//        static bool Read(Pin pin); // 读取某个引脚
-//        void Register(IOReadHandler handler, void *param = NULL); // 注册事件
-//        operator bool();
-//    protected:
-        // 函数命名为Init，而不作为构造函数，主要是因为用构造函数会导致再实例化一个对象，然后这个函数在那个新对象里面执行
- //       void Init(bool floating = true, PuPd pupd = UP);
- //       virtual void OnConfig(GPIO_InitTypeDef &gpio);
-    private:
- //       bool _Registed;
- //       void RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param);
- //       void UnRegisterInput(int pinIndex);
+	byte	_Value;	// 当前值
 };
+
 /******************************** AnalogInPort ********************************/
 
 // 模拟输入口
@@ -225,7 +207,6 @@ protected:
 private:
 	void OpenPin(void* param);
 };
-
 
 /******************************** PortScope ********************************/
 
@@ -254,9 +235,6 @@ public:
 	}
 };
 
-//中断线打开、关闭
-void SetEXIT(int pinIndex, bool enable);
-
 /*
 输入口防抖原理：
 1，中断时，通过循环读取来避免极快的中断触发。
@@ -266,4 +244,3 @@ void SetEXIT(int pinIndex, bool enable);
 */
 
 #endif //_Port_H_
-
