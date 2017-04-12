@@ -3,6 +3,27 @@
 #include "Spi.h"
 #include "string.h"
 
+typedef enum
+{
+CHSPI1	=	1,
+CHSPI2	=	2,
+CHSPI3	=	3
+}ESpiChannel;
+//硬件SPI
+class CHardSpi
+{
+	public:
+		CHardSpi(ESpiChannel spichannel);		
+	public:
+		void Init(void);			 //初始化SPI口
+		void SetSpeed(byte SpeedSet); //设置SPI速度   
+		byte ReadByte();//SPI总线读一个字节
+		byte WriteByte(byte TxData);//SPI总线写一个字节
+		ushort SendHalfWord(ushort HalfWord);
+	private:
+		ESpiChannel spiChannel;//通道
+};
+
 // NSS/CLK/MISO/MOSI
 #define SPIS {SPI1,SPI2,SPI3}
 #define SPI_PINS_FULLREMAP {PA4,PA5,PA6,PA7,PB12,PB13,PB14,PB15,PA15,PB3,PB4,PB5}   //需要整理
