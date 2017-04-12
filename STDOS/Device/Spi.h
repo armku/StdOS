@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __SPI_H__
+#define __SPI_H__
 
 #include "Device\Port.h"
 
@@ -50,8 +51,7 @@ private:
 	static int GetPre(int index, uint& speedHz);
 	void OnInit();
 	void OnOpen();
-	void OnClose();	
-
+	void OnClose();
 };
 
 // Spi会话类。初始化时打开Spi，超出作用域析构时关闭
@@ -72,3 +72,5 @@ public:
 		_spi->Stop();
 	}
 };
+
+#endif
