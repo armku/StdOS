@@ -39,6 +39,8 @@ class Port
 	Pin		_Pin;		// 引脚
 	bool	Opened;		// 是否已经打开
 	byte    Index;		// 引脚自身次序编号，用于区分多引脚次序
+	//void*	State;		// 用户状态数据
+	
 	Port();
 	#ifndef TINY
 	virtual ~Port();
@@ -62,27 +64,11 @@ class Port
 private:
 	void Opening();
 	
-
-
-
-
-
-
     public:
         GPIO_TypeDef *Group; // 针脚组
-		
-        ushort PinBit; // 组内引脚位。每个引脚一个位
-
-       
-       
+        ushort PinBit; // 组内引脚位。每个引脚一个位       
         virtual void Config(); // 确定配置,确认用对象内部的参数进行初始化
-        // 辅助函数
-        _force_inline static GPIO_TypeDef *IndexToGroup(byte index);
-        _force_inline static byte GroupToIndex(GPIO_TypeDef *group);
-
-    protected:
-       
-       
+    protected:    
         // 配置过程，由Config调用，最后GPIO_Init
         virtual void OnConfig(GPIO_InitTypeDef &gpio);
     private:

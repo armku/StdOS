@@ -31,6 +31,15 @@
             EXTI4_15_IRQn  // EXTI15_10
     };
 #endif 
+GPIO_TypeDef *IndexToGroup(byte index)
+{
+    return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
+}
+byte GroupToIndex(GPIO_TypeDef *group)
+{
+    return (byte)(((int)group - GPIOA_BASE) >> 10);
+}
+
 /*
 端口基本功能
  */
@@ -72,6 +81,7 @@ Port::~Port()
     #endif 
 }
 #endif
+
 /*
 单一引脚初始化
  */
@@ -157,15 +167,7 @@ void Port::OnConfig(GPIO_InitTypeDef &gpio)
     #endif 
 }
 
-GPIO_TypeDef *Port::IndexToGroup(byte index)
-{
-    return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
-}
 
-byte Port::GroupToIndex(GPIO_TypeDef *group)
-{
-    return (byte)(((int)group - GPIOA_BASE) >> 10);
-}
 
 #define GPIO_Mode_IN GPIO_Mode_IN_FLOATING
 #define GPIO_Mode_AF GPIO_Mode_AF_OD
