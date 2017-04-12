@@ -433,7 +433,7 @@ typedef struct TIntState
 } IntState;
 
 // 16条中断线
-static IntState State[16];
+static IntState InterruptState[16];
 static bool hasInitState = false;
 
 InputPort::~InputPort()
@@ -476,10 +476,10 @@ void InputPort::Register(IOReadHandler handler, void *param)
     {
         for (int i = 0; i < 16; i++)
         {
-            IntState *state = &State[i];
-            state->Pin = P0;
-            state->Handler = NULL;
-            state->Used = 0;
+            IntState *state1 = &InterruptState[i];
+            state1->Pin = P0;
+            state1->Handler = NULL;
+            state1->Used = 0;
         }
         hasInitState = true;
     }
@@ -495,8 +495,8 @@ void InputPort::Register(IOReadHandler handler, void *param)
             // 注册中断事件
             if (handler)
             {
-                IntState *state = &State[i];
-                state->ShakeTime = ShakeTime;
+                IntState *state2 = &InterruptState[i];
+                state2->ShakeTime = ShakeTime;
                 RegisterInput(gi, i, handler, param);
             }
             else
@@ -516,8 +516,8 @@ void GPIO_ISR(int num) // 0 <= num <= 15
     {
         return ;
     }
-    IntState *state = State + num;
-    if (!state)
+    IntState *state3 = InterruptState + num;
+    if (!state3)
     {
         return ;
     }
@@ -525,10 +525,10 @@ void GPIO_ISR(int num) // 0 <= num <= 15
         uint bit = 1 << num;
     #endif 
     bool value;
-    value = InputPort::Read(state->Pin);
+    value = InputPort::Read(state3->Pin);
     //byte line = EXTI_Line0 << num;
     // 如果未指定委托，则不处理
-    if (!state->Handler)
+    if (!state3->Handler)
     {
         return ;
     }
@@ -560,10 +560,10 @@ void GPIO_ISR(int num) // 0 <= num <= 15
             return ;
         state->OldValue = value;
     #endif 
-    if (state->Handler)
+    if (state3->Handler)
     {
         // 新值value为true，说明是上升，第二个参数是down，所以取非
-        state->Handler(&(state->inputport), value, state->Param);
+        state3->Handler(&(state3->inputport), value, state3->Param);
     }
 }
 
@@ -676,17 +676,17 @@ void SetEXIT(int pinIndex, bool enable)
 // 申请引脚中断托管
 void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param)
 {
-    IntState *state = &State[pinIndex];
+    IntState *state4 = &InterruptState[pinIndex];
     Pin pin = (Pin)((groupIndex << 4) + pinIndex);
     // 检查是否已经注册到别的引脚上
-    if (state->Pin != pin && state->Pin != P0)
+    if (state4->Pin != pin && state4->Pin != P0)
     {
         return ;
     }
-    state->Pin = pin;
-    state->Handler = handler;
-    state->Param = param;
-    state->OldValue = Read(pin); // 预先保存当前状态值，后面跳变时触发中断
+    state4->Pin = pin;
+    state4->Handler = handler;
+    state4->Param = param;
+    state4->OldValue = Read(pin); // 预先保存当前状态值，后面跳变时触发中断
 
     // 打开时钟，选择端口作为端口EXTI时钟线
     #if defined(STM32F0) || defined(STM32F4)
@@ -700,8 +700,8 @@ void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handle
     SetEXIT(pinIndex, true);
     // 打开并设置EXTI中断为低优先级
     Interrupt.SetPriority(PORT_IRQns[pinIndex], 1);
-    state->Used++;
-    if (state->Used == 1)
+    state4->Used++;
+    if (state4->Used == 1)
     {
         Interrupt.Activate(PORT_IRQns[pinIndex], EXTI_IRQHandler, this);
     }
@@ -709,15 +709,15 @@ void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handle
 
 void InputPort::UnRegisterInput(int pinIndex)
 {
-    IntState *state = &State[pinIndex];
+    IntState *state5 = &InterruptState[pinIndex];
     // 取消注册
-    state->Pin = P0;
-    state->Handler = 0;
+    state5->Pin = P0;
+    state5->Handler = 0;
 
     SetEXIT(pinIndex, false);
 
-    state->Used--;
-    if (state->Used == 0)
+    state5->Used--;
+    if (state5->Used == 0)
     {
         Interrupt.Deactivate(PORT_IRQns[pinIndex]);
     }
