@@ -58,30 +58,30 @@ Port::Port()
     {
         #if defined(STM32F1)
             // 恢复为初始化状态
-//            ushort bits = PinBit;
-//            int config = InitState &0xFFFFFFFF;
-//            for (int i = 0; i < 16 && bits; i++, bits >>= 1)
-//            {
-//                if (i == 7)
-//                    config = InitState >> 32;
-//                if (bits &1)
-//                {
-//                    uint shift = (i &7) << 2; // 每引脚4位
-//                    uint mask = 0xF << shift; // 屏蔽掉其它位
+            //            ushort bits = PinBit;
+            //            int config = InitState &0xFFFFFFFF;
+            //            for (int i = 0; i < 16 && bits; i++, bits >>= 1)
+            //            {
+            //                if (i == 7)
+            //                    config = InitState >> 32;
+            //                if (bits &1)
+            //                {
+            //                    uint shift = (i &7) << 2; // 每引脚4位
+            //                    uint mask = 0xF << shift; // 屏蔽掉其它位
 
-//                    GPIO_TypeDef *port = (GPIO_TypeDef *)this->State;
-//                    if (i &0x08)
-//                    {
-//                        // bit 8 - 15
-//                        port->CRH = port->CRH &~mask | (config &mask);
-//                    }
-//                    else
-//                    {
-//                        // bit 0-7
-//                        port->CRL = port->CRL &~mask | (config &mask);
-//                    }
-//                }
-//            }
+            //                    GPIO_TypeDef *port = (GPIO_TypeDef *)this->State;
+            //                    if (i &0x08)
+            //                    {
+            //                        // bit 8 - 15
+            //                        port->CRH = port->CRH &~mask | (config &mask);
+            //                    }
+            //                    else
+            //                    {
+            //                        // bit 0-7
+            //                        port->CRL = port->CRL &~mask | (config &mask);
+            //                    }
+            //                }
+            //            }
         #endif 
     }
 #endif 
@@ -97,18 +97,18 @@ Port &Port::Set(Pin pin)
     if (_Pin != P0)
     {
         this->State = IndexToGroup(pin >> 4);
-//        PinBit = 1 << (pin &0x0F);
+        //        PinBit = 1 << (pin &0x0F);
     }
     else
     {
         this->State = NULL;
-//        PinBit = 0;
+        //        PinBit = 0;
     }
 
     #if defined(STM32F1)
         // 整组引脚的初始状态，析构时有选择恢复
-//        if (_Pin != P0)
-//            InitState = ((UInt64)((GPIO_TypeDef *)this->State)->CRH << 32) + ((GPIO_TypeDef *)this->State)->CRL;
+        //        if (_Pin != P0)
+        //            InitState = ((UInt64)((GPIO_TypeDef *)this->State)->CRH << 32) + ((GPIO_TypeDef *)this->State)->CRL;
     #endif 
 
     if (_Pin != P0)
@@ -127,7 +127,7 @@ Port &Port::Set(Pin pin)
             RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
         #endif 
 
-//        gpio.GPIO_Pin = PinBit;
+        //        gpio.GPIO_Pin = PinBit;
 
         #ifdef STM32F1
             // PA15/PB3/PB4 需要关闭JTAG
@@ -146,7 +146,7 @@ Port &Port::Set(Pin pin)
                     }
             }
         #endif 
-        GPIO_Init(((GPIO_TypeDef *)this->State), &gpio);
+        GPIO_Init(((GPIO_TypeDef*)this->State), &gpio);
     }
 
     return  *this;
@@ -156,14 +156,36 @@ bool Port::Empty()const
 {
     return _Pin == P0;
 }
-bool Port::Read() const
+
+bool Port::Open()
 {
-	return false;
+    this->OnOpen(this->State);
+    this->Opened = true;
+    return true;
 }
+
+void Port::Close()
+{
+    this->OnClose();
+    this->Opened = false;
+}
+
+void Port::Clear(){}
+bool Port::Read()const
+{
+    return false;
+}
+
 void Port::OnOpen(void *param){
 
 }
 void Port::OnClose(){}
+
+
+
+
+
+
 
 #define GPIO_Mode_IN GPIO_Mode_IN_FLOATING
 #define GPIO_Mode_AF GPIO_Mode_AF_OD
@@ -173,31 +195,31 @@ void Port::OnClose(){}
 
 OutputPort::OutputPort()
 {
-//    Init();
+    //    Init();
 }
 
 OutputPort::OutputPort(Pin pin)
 {
-//    Init();
+    //    Init();
     Set(pin);
 }
 
 OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
 {
-//    Init(invert, openDrain, speed);
+    //    Init(invert, openDrain, speed);
     Set(pin);
 }
 
 //void OutputPort::OnConfig(GPIO_InitTypeDef &gpio)
 //{
-	#if 0
+#if 0
     #ifndef STM32F4
         assert_param(Speed == 2 || Speed == 10 || Speed == 50);
     #else 
         assert_param(Speed == 2 || Speed == 25 || Speed == 50 || Speed == 100);
     #endif 
 
-//    Port::OnConfig(gpio);
+    //    Port::OnConfig(gpio);
 
     switch (Speed)
     {
@@ -229,13 +251,13 @@ OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
     #endif 
 
     // 配置之前，需要根据倒置情况来设定初始状态，也就是在打开端口之前必须明确端口高低状态
-    ushort dat = GPIO_ReadOutputData(((GPIO_TypeDef *)this->State));
-//    if (!Invert)
-//        dat &= ~PinBit;
-//    else
-//        dat |= PinBit;
-    GPIO_Write(((GPIO_TypeDef *)this->State), dat);
-	#endif
+    ushort dat = GPIO_ReadOutputData(((GPIO_TypeDef*)this->State));
+    //    if (!Invert)
+    //        dat &= ~PinBit;
+    //    else
+    //        dat |= PinBit;
+    GPIO_Write(((GPIO_TypeDef*)this->State), dat);
+#endif 
 //}
 
 /*
@@ -249,15 +271,15 @@ OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
 bool OutputPort::Read()const
 {
     // 转为bool时会转为0/1
-//    bool rs = GPIO_ReadOutputData(((GPIO_TypeDef *)this->State)) &PinBit;
-	bool rs = GPIO_ReadOutputData(((GPIO_TypeDef *)this->State));
+    //    bool rs = GPIO_ReadOutputData(((GPIO_TypeDef *)this->State)) &PinBit;
+    bool rs = GPIO_ReadOutputData(((GPIO_TypeDef*)this->State));
     return rs ^ Invert;
 }
 
 bool OutputPort::ReadInput()const
 {
-//    bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State)) &PinBit;
-	bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State));
+    //    bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State)) &PinBit;
+    bool rs = GPIO_ReadInputData(((GPIO_TypeDef*)this->State));
     return rs ^ Invert;
 }
 
@@ -269,10 +291,10 @@ bool OutputPort::ReadInput()const
 
 void OutputPort::Write(bool value)const
 {
-//    if (value ^ Invert)
-//        GPIO_SetBits(((GPIO_TypeDef *)this->State), PinBit);
-//    else
-//        GPIO_ResetBits(((GPIO_TypeDef *)this->State), PinBit);
+    //    if (value ^ Invert)
+    //        GPIO_SetBits(((GPIO_TypeDef *)this->State), PinBit);
+    //    else
+    //        GPIO_ResetBits(((GPIO_TypeDef *)this->State), PinBit);
 }
 
 //OutputPort::operator bool()
@@ -311,7 +333,10 @@ void OutputPort::Blink(int times, int ms)const
     Write(false);
 }
 
-void OutputPort::OnOpen(void *param){}
+void OutputPort::OnOpen(void *param)
+{
+	Port::OnOpen(param);
+}
 void OutputPort::OpenPin(void *param){}
 /*
 设置端口状态
@@ -323,17 +348,18 @@ void OutputPort::Write(Pin pin, bool value)
     else
         GPIO_ResetBits(_GROUP(pin), _PORT(pin));
 }
+
 #if 0
-void OutputPort::Init(bool invert, bool openDrain, uint speed)
-{
-    OpenDrain = openDrain;
-    Speed = speed;
-    Invert = invert;
-}
-#endif
+    void OutputPort::Init(bool invert, bool openDrain, uint speed)
+    {
+        OpenDrain = openDrain;
+        Speed = speed;
+        Invert = invert;
+    }
+#endif 
 AlternatePort::AlternatePort(): OutputPort()
 {
-//    Init(false, false);
+    //    Init(false, false);
 }
 
 AlternatePort::AlternatePort(Pin pin): OutputPort(pin){
@@ -342,7 +368,7 @@ AlternatePort::AlternatePort(Pin pin): OutputPort(pin){
 
 AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
 {
-//    Init(invert, openDrain, speed);
+    //    Init(invert, openDrain, speed);
     Set(pin);
 }
 
@@ -350,35 +376,35 @@ void AlternatePort::OpenPin(void *param){
 
 }
 #if 0
-void AlternatePort::OnConfig(GPIO_InitTypeDef &gpio)
-{
-//    OutputPort::OnConfig(gpio);
+    void AlternatePort::OnConfig(GPIO_InitTypeDef &gpio)
+    {
+        //    OutputPort::OnConfig(gpio);
 
-    #ifdef STM32F1
-        gpio.GPIO_Mode = OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
-    #else 
-        gpio.GPIO_Mode = GPIO_Mode_AF;
-        gpio.GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
-    #endif 
-}
-#endif
+        #ifdef STM32F1
+            gpio.GPIO_Mode = OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
+        #else 
+            gpio.GPIO_Mode = GPIO_Mode_AF;
+            gpio.GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
+        #endif 
+    }
+#endif 
 #if 0
-void AnalogInPort::OnConfig(GPIO_InitTypeDef &gpio)
-{
-//    Port::OnConfig(gpio);
+    void AnalogInPort::OnConfig(GPIO_InitTypeDef &gpio)
+    {
+        //    Port::OnConfig(gpio);
 
-    #ifdef STM32F1
-        gpio.GPIO_Mode = GPIO_Mode_AIN; //
-    #else 
-        gpio.GPIO_Mode = GPIO_Mode_AN;
-        //gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
-    #endif 
-}
-#endif
+        #ifdef STM32F1
+            gpio.GPIO_Mode = GPIO_Mode_AIN; //
+        #else 
+            gpio.GPIO_Mode = GPIO_Mode_AN;
+            //gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
+        #endif 
+    }
+#endif 
 
 InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
 {
-//    Init(floating, pupd);
+    //    Init(floating, pupd);
     Set(pin);
 }
 
@@ -393,37 +419,37 @@ void InputPort::OnClose(){
 
 }
 #if 0
-void InputPort::Init(bool floating, PuPd pupd)
-{
-    Pull = pupd;
-    Floating = floating;
+    void InputPort::Init(bool floating, PuPd pupd)
+    {
+        Pull = pupd;
+        Floating = floating;
 
-    _Registed = false;
-    //ShakeTime = 20;
-    // 有些应用的输入口需要极高的灵敏度，这个时候不需要抖动检测
-    ShakeTime = 0;
-    Invert = false;
-}
-#endif
+        _Registed = false;
+        //ShakeTime = 20;
+        // 有些应用的输入口需要极高的灵敏度，这个时候不需要抖动检测
+        ShakeTime = 0;
+        Invert = false;
+    }
+#endif 
 #if 0
-void InputPort::OnConfig(GPIO_InitTypeDef &gpio)
-{
-//    Port::OnConfig(gpio);
+    void InputPort::OnConfig(GPIO_InitTypeDef &gpio)
+    {
+        //    Port::OnConfig(gpio);
 
-    #ifdef STM32F1
-        if (Floating)
-            gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-        else if (Pull == UP)
-            gpio.GPIO_Mode = GPIO_Mode_IPU;
-        else if (Pull == DOWN)
-            gpio.GPIO_Mode = GPIO_Mode_IPD;
-        // 这里很不确定，需要根据实际进行调整
-    #else 
-        gpio.GPIO_Mode = GPIO_Mode_IN;
-        gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
-    #endif 
-}
-#endif
+        #ifdef STM32F1
+            if (Floating)
+                gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+            else if (Pull == UP)
+                gpio.GPIO_Mode = GPIO_Mode_IPU;
+            else if (Pull == DOWN)
+                gpio.GPIO_Mode = GPIO_Mode_IPD;
+            // 这里很不确定，需要根据实际进行调整
+        #else 
+            gpio.GPIO_Mode = GPIO_Mode_IN;
+            gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
+        #endif 
+    }
+#endif 
 
 /* 中断状态结构体 */
 /* 一共16条中断线，意味着同一条线每一组只能有一个引脚使用中断 */
@@ -446,79 +472,81 @@ static bool hasInitState = false;
 InputPort::~InputPort()
 {
     // 取消所有中断
-//    if (_Registed)
+    //    if (_Registed)
     {
- //       Register(NULL);
+        //       Register(NULL);
     }
 }
+
 #if 0
-ushort InputPort::ReadGroup() // 整组读取
-{
-    return GPIO_ReadInputData(((GPIO_TypeDef *)this->State));
-}
-#endif
+    ushort InputPort::ReadGroup() // 整组读取
+    {
+        return GPIO_ReadInputData(((GPIO_TypeDef*)this->State));
+    }
+#endif 
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
 bool InputPort::Read()const
 {
     // 转为bool时会转为0/1
-//    bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State)) &PinBit;
-	bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State));
+    //    bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State)) &PinBit;
+    bool rs = GPIO_ReadInputData(((GPIO_TypeDef*)this->State));
     return rs ^ Invert;
 }
+
 #if 0
-bool InputPort::Read(Pin pin)
-{
-    GPIO_TypeDef *group = _GROUP(pin);
-    return (group->IDR >> (pin &0xF)) &1;
-}
-#endif
+    bool InputPort::Read(Pin pin)
+    {
+        GPIO_TypeDef *group = _GROUP(pin);
+        return (group->IDR >> (pin &0xF)) &1;
+    }
+#endif 
 #if 0
-// 注册回调  及中断使能
-void InputPort::Register(IOReadHandler handler, void *param)
-{
-//    if (!PinBit)
-//        return ;
-
-    // 检查并初始化中断线数组
-    if (!hasInitState)
+    // 注册回调  及中断使能
+    void InputPort::Register(IOReadHandler handler, void *param)
     {
-        for (int i = 0; i < 16; i++)
-        {
-            IntState *state1 = &InterruptState[i];
-            state1->Pin = P0;
-            state1->Handler = NULL;
-            state1->Used = 0;
-        }
-        hasInitState = true;
-    }
+        //    if (!PinBit)
+        //        return ;
 
-    byte gi = _Pin >> 4;
-    gi = gi;
-//    ushort n = PinBit;
-	ushort n = 0;
-    for (int i = 0; i < 16 && n != 0; i++)
-    {
-        // 如果设置了这一位，则注册事件
-        if (n &0x01)
+        // 检查并初始化中断线数组
+        if (!hasInitState)
         {
-            // 注册中断事件
-            if (handler)
+            for (int i = 0; i < 16; i++)
             {
-                IntState *state2 = &InterruptState[i];
-                state2->ShakeTime = ShakeTime;
-                RegisterInput(gi, i, handler, param);
+                IntState *state1 = &InterruptState[i];
+                state1->Pin = P0;
+                state1->Handler = NULL;
+                state1->Used = 0;
             }
-            else
-            {
-                UnRegisterInput(i);
-            }
+            hasInitState = true;
         }
-        n >>= 1;
-    }
 
-//    _Registed = handler != NULL;
-}
-#endif
+        byte gi = _Pin >> 4;
+        gi = gi;
+        //    ushort n = PinBit;
+        ushort n = 0;
+        for (int i = 0; i < 16 && n != 0; i++)
+        {
+            // 如果设置了这一位，则注册事件
+            if (n &0x01)
+            {
+                // 注册中断事件
+                if (handler)
+                {
+                    IntState *state2 = &InterruptState[i];
+                    state2->ShakeTime = ShakeTime;
+                    RegisterInput(gi, i, handler, param);
+                }
+                else
+                {
+                    UnRegisterInput(i);
+                }
+            }
+            n >>= 1;
+        }
+
+        //    _Registed = handler != NULL;
+    }
+#endif 
 void GPIO_ISR(int num) // 0 <= num <= 15
 {
     if (!hasInitState)
@@ -534,7 +562,7 @@ void GPIO_ISR(int num) // 0 <= num <= 15
         uint bit = 1 << num;
     #endif 
     bool value;
-//    value = InputPort::Read(state3->Pin);
+    //    value = InputPort::Read(state3->Pin);
     //byte line = EXTI_Line0 << num;
     // 如果未指定委托，则不处理
     if (!state3->Handler)
@@ -681,55 +709,56 @@ void SetEXIT(int pinIndex, bool enable)
     ext.EXTI_LineCmd = enable ? ENABLE : DISABLE;
     EXTI_Init(&ext);
 }
+
 #if 0
-// 申请引脚中断托管
-void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param)
-{
-    IntState *state4 = &InterruptState[pinIndex];
-    Pin pin = (Pin)((groupIndex << 4) + pinIndex);
-    // 检查是否已经注册到别的引脚上
-    if (state4->Pin != pin && state4->Pin != P0)
+    // 申请引脚中断托管
+    void InputPort::RegisterInput(int groupIndex, int pinIndex, IOReadHandler handler, void *param)
     {
-        return ;
-    }
-    state4->Pin = pin;
-    state4->Handler = handler;
-    state4->Param = param;
-//    state4->OldValue = Read(pin); // 预先保存当前状态值，后面跳变时触发中断
+        IntState *state4 = &InterruptState[pinIndex];
+        Pin pin = (Pin)((groupIndex << 4) + pinIndex);
+        // 检查是否已经注册到别的引脚上
+        if (state4->Pin != pin && state4->Pin != P0)
+        {
+            return ;
+        }
+        state4->Pin = pin;
+        state4->Handler = handler;
+        state4->Param = param;
+        //    state4->OldValue = Read(pin); // 预先保存当前状态值，后面跳变时触发中断
 
-    // 打开时钟，选择端口作为端口EXTI时钟线
-    #if defined(STM32F0) || defined(STM32F4)
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
-        SYSCFG_EXTILineConfig(groupIndex, pinIndex);
-    #elif defined(STM32F1)
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-        GPIO_EXTILineConfig(groupIndex, pinIndex);
-    #endif 
+        // 打开时钟，选择端口作为端口EXTI时钟线
+        #if defined(STM32F0) || defined(STM32F4)
+            RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+            SYSCFG_EXTILineConfig(groupIndex, pinIndex);
+        #elif defined(STM32F1)
+            RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+            GPIO_EXTILineConfig(groupIndex, pinIndex);
+        #endif 
 
-    SetEXIT(pinIndex, true);
-    // 打开并设置EXTI中断为低优先级
-    Interrupt.SetPriority(PORT_IRQns[pinIndex], 1);
-    state4->Used++;
-    if (state4->Used == 1)
-    {
-        Interrupt.Activate(PORT_IRQns[pinIndex], EXTI_IRQHandler, this);
+        SetEXIT(pinIndex, true);
+        // 打开并设置EXTI中断为低优先级
+        Interrupt.SetPriority(PORT_IRQns[pinIndex], 1);
+        state4->Used++;
+        if (state4->Used == 1)
+        {
+            Interrupt.Activate(PORT_IRQns[pinIndex], EXTI_IRQHandler, this);
+        }
     }
-}
-#endif
+#endif 
 #if 0
-void InputPort::UnRegisterInput(int pinIndex)
-{
-    IntState *state5 = &InterruptState[pinIndex];
-    // 取消注册
-    state5->Pin = P0;
-    state5->Handler = 0;
-
-    SetEXIT(pinIndex, false);
-
-    state5->Used--;
-    if (state5->Used == 0)
+    void InputPort::UnRegisterInput(int pinIndex)
     {
-        Interrupt.Deactivate(PORT_IRQns[pinIndex]);
+        IntState *state5 = &InterruptState[pinIndex];
+        // 取消注册
+        state5->Pin = P0;
+        state5->Handler = 0;
+
+        SetEXIT(pinIndex, false);
+
+        state5->Used--;
+        if (state5->Used == 0)
+        {
+            Interrupt.Deactivate(PORT_IRQns[pinIndex]);
+        }
     }
-}
 #endif
