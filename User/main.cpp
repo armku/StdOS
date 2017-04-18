@@ -182,9 +182,9 @@ int main(void)
             Delay(0x0FFFFF);
             LED3( OFF );		  // Ãð	   
         #else 
-            led1 = 1;			  // ÁÁ
+            led1 = true;			  // ÁÁ
             Delay(0x0FFFFF);
-            led1 = 0;		  // Ãð
+            led1 = false;		  // Ãð
 
             led2 = 1; 			  // ÁÁ
             Delay(0x0FFFFF);
