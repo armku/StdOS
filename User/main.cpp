@@ -64,47 +64,45 @@ void LedTask(void *param)
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);
-//    #if 0
-//        sys.Codec = codec;
-//	#endif
-	
-    sys.Name = (char*)namee;    
+    //    #if 0
+    //        sys.Codec = codec;
+    //	#endif
+
+    sys.Name = (char*)namee;
     //Rtc提取时间
-//    HardRtc *Rtc = HardRtc::Instance();
-//    Rtc->LowPower = false;
-//    Rtc->External = false;
-//    Rtc->Init();
-//    Rtc->Start(false, false);
+    //    HardRtc *Rtc = HardRtc::Instance();
+    //    Rtc->LowPower = false;
+    //    Rtc->External = false;
+    //    Rtc->Init();
+    //    Rtc->Start(false, false);
     sys.Init();
-//    #if DEBUG
-//        Sys.MessagePort = COM1;
-//        Sys.ShowInfo();
+    //    #if DEBUG
+    //        Sys.MessagePort = COM1;
+    //        Sys.ShowInfo();
 
-//        WatchDog::Start(20000, 10000);
-//    #else 
-//        WatchDog::Start();
-//    #endif 
-//    #if 0
-//        //flash 最后一块作为配置区
-//        Config::Current = &Config::CreateFlash();
-//    #endif 
-    
-//    exti.Register(OnKeyPress);
-//    exti1.Register(OnKeyPress);
-//	SerialPort::GetMessagePort()->Register(OnUsart1Read);
+    //        WatchDog::Start(20000, 10000);
+    //    #else 
+    //        WatchDog::Start();
+    //    #endif 
+    //    #if 0
+    //        //flash 最后一块作为配置区
+    //        Config::Current = &Config::CreateFlash();
+    //    #endif 
 
-       // 初始化为输出
+    //    exti.Register(OnKeyPress);
+    //    exti1.Register(OnKeyPress);
+    //	SerialPort::GetMessagePort()->Register(OnUsart1Read);
+
+    // 初始化为输出
     OutputPort led(PF8);
-    #if 0
-	led=0;
-	led1=0;
-	led2=0;
-	#else
-	led=1;
-	led1=1;
-	led2=1;
-	#endif
+
     //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
-	
-    Sys.Start();
+
+    //    Sys.Start();
+    while (true)
+    {
+        led = 1;
+        led1 = 1;
+        led2 = 1;
+    }
 }
