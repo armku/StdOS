@@ -25,9 +25,9 @@ typedef enum
     KEY_NULL = 0
 } KEY_MODE;
 
-OutputPort led1(PB0, true);
-OutputPort led2(PF7, true);
-OutputPort led(PF8,true);
+OutputPort led1(PB0);
+OutputPort led2(PF7);
+OutputPort led(PF8);
 
 //按键 PC13 PA0
 //InputPort exti(PC13); //PA1 PB3     PA0 PC13
@@ -62,66 +62,69 @@ void LedTask(void *param)
 }
 
 #define namee "StdOS"
-void Delay(__IO uint32_t nCount)	 //简单的延时函数
+void Delay(__IO uint32_t nCount) //简单的延时函数
 {
-	for(; nCount != 0; nCount--);
+    for (; nCount != 0; nCount--)
+        ;
 }
+
 #define ON  0
 #define OFF 1
 
 /* 带参宏，可以像内联函数一样使用 */
 #define LED1(a)	if (a)	\
-					GPIO_SetBits(GPIOB,GPIO_Pin_0);\
-					else		\
-					GPIO_ResetBits(GPIOB,GPIO_Pin_0)
+GPIO_SetBits(GPIOB,GPIO_Pin_0);\
+else		\
+GPIO_ResetBits(GPIOB,GPIO_Pin_0)
 
 #define LED2(a)	if (a)	\
-					GPIO_SetBits(GPIOF,GPIO_Pin_7);\
-					else		\
-					GPIO_ResetBits(GPIOF,GPIO_Pin_7)
+GPIO_SetBits(GPIOF,GPIO_Pin_7);\
+else		\
+GPIO_ResetBits(GPIOF,GPIO_Pin_7)
 
 #define LED3(a)	if (a)	\
-					GPIO_SetBits(GPIOF,GPIO_Pin_8);\
-					else		\
-					GPIO_ResetBits(GPIOF,GPIO_Pin_8)
+GPIO_SetBits(GPIOF,GPIO_Pin_8);\
+else		\
+GPIO_ResetBits(GPIOF,GPIO_Pin_8)
 void LED_GPIO_Config(void)
-{		
-		/*定义一个GPIO_InitTypeDef类型的结构体*/
-		GPIO_InitTypeDef GPIO_InitStructure;
+{
+    /*定义一个GPIO_InitTypeDef类型的结构体*/
+    GPIO_InitTypeDef GPIO_InitStructure;
 
-		/*开启GPIOB和GPIOF的外设时钟*/
-		RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOF, ENABLE); 
+    /*开启GPIOB和GPIOF的外设时钟*/
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOF, ENABLE);
 
-		/*选择要控制的GPIOB引脚*/															   
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;	
+    /*选择要控制的GPIOB引脚*/
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
 
-		/*设置引脚模式为通用推挽输出*/
-		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;   
+    /*设置引脚模式为通用推挽输出*/
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 
-		/*设置引脚速率为50MHz */   
-		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; 
+    /*设置引脚速率为50MHz */
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 
-		/*调用库函数，初始化GPIOB0*/
-		GPIO_Init(GPIOB, &GPIO_InitStructure);	
-		
-		/*选择要控制的GPIOF引脚*/															   
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
+    /*调用库函数，初始化GPIOB0*/
+    GPIO_Init(GPIOB, &GPIO_InitStructure);
 
-		/*调用库函数，初始化GPIOF7*/
-		GPIO_Init(GPIOF, &GPIO_InitStructure);
-		
-		/*选择要控制的GPIOF引脚*/															   
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
+    /*选择要控制的GPIOF引脚*/
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
 
-		/*调用库函数，初始化GPIOF7*/
-		GPIO_Init(GPIOF, &GPIO_InitStructure);			  
+    /*调用库函数，初始化GPIOF7*/
+    GPIO_Init(GPIOF, &GPIO_InitStructure);
 
-		/* 关闭所有led灯	*/
-		GPIO_SetBits(GPIOB, GPIO_Pin_0);
-		
-		/* 关闭所有led灯	*/
-		GPIO_SetBits(GPIOF, GPIO_Pin_7|GPIO_Pin_8);	 
+    /*选择要控制的GPIOF引脚*/
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
+
+    /*调用库函数，初始化GPIOF7*/
+    GPIO_Init(GPIOF, &GPIO_InitStructure);
+
+    /* 关闭所有led灯	*/
+    GPIO_SetBits(GPIOB, GPIO_Pin_0);
+
+    /* 关闭所有led灯	*/
+    GPIO_SetBits(GPIOF, GPIO_Pin_7 | GPIO_Pin_8);
 }
+
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);
@@ -155,27 +158,41 @@ int main(void)
     //	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
     // 初始化为输出
-    
+
 
     //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
 
     //    Sys.Start();
-	LED_GPIO_Config();
+    LED_GPIO_Config();
     led = 0;
-        led1 = 0;
-        led2 = 0;
-	while (true)
+    led1 = 0;
+    led2 = 0;
+    while (true)
     {
-        LED1( ON );			  // 亮
-		Delay(0x0FFFFF);
-		LED1( OFF );		  // 灭
+        #if 1
+            LED1( ON );			  // 亮
+            Delay(0x0FFFFF);
+            LED1( OFF );		  // 灭
 
-		LED2( ON );			  // 亮
-		Delay(0x0FFFFF);
-		LED2( OFF );		  // 灭
+            LED2( ON );			  // 亮
+            Delay(0x0FFFFF);
+            LED2( OFF );		  // 灭
 
-		LED3( ON );			  // 亮
-		Delay(0x0FFFFF);
-		LED3( OFF );		  // 灭	   
+            LED3( ON );			  // 亮
+            Delay(0x0FFFFF);
+            LED3( OFF );		  // 灭	   
+        #else 
+            led1 = 1;			  // 亮
+            Delay(0x0FFFFF);
+            led1 = 0;		  // 灭
+
+            led2 = 1; 			  // 亮
+            Delay(0x0FFFFF);
+            led2 = 0; 		  // 灭
+
+            led = 1; 			  // 亮
+            Delay(0x0FFFFF);
+            led = 0; 		  // 灭	  
+        #endif 
     }
 }
