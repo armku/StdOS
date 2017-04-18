@@ -295,10 +295,14 @@ bool OutputPort::ReadInput()const
 
 void OutputPort::Write(bool value)const
 {
-    //    if (value ^ Invert)
-    //        GPIO_SetBits(((GPIO_TypeDef *)this->State), PinBit);
-    //    else
-    //        GPIO_ResetBits(((GPIO_TypeDef *)this->State), PinBit);
+        if (value ^ Invert)
+		{
+            GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+        }
+		else
+        {
+			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+		}
 }
 
 //OutputPort::operator bool()

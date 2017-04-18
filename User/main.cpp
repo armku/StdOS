@@ -27,6 +27,7 @@ typedef enum
 
 OutputPort led1(PB0, true);
 OutputPort led2(PF7, true);
+OutputPort led(PF8,true);
 
 //按键 PC13 PA0
 //InputPort exti(PC13); //PA1 PB3     PA0 PC13
@@ -61,6 +62,28 @@ void LedTask(void *param)
 }
 
 #define namee "StdOS"
+void Delay(__IO uint32_t nCount)	 //简单的延时函数
+{
+	for(; nCount != 0; nCount--);
+}
+#define ON  0
+#define OFF 1
+
+/* 带参宏，可以像内联函数一样使用 */
+#define LED1(a)	if (a)	\
+					GPIO_SetBits(GPIOB,GPIO_Pin_0);\
+					else		\
+					GPIO_ResetBits(GPIOB,GPIO_Pin_0)
+
+#define LED2(a)	if (a)	\
+					GPIO_SetBits(GPIOF,GPIO_Pin_7);\
+					else		\
+					GPIO_ResetBits(GPIOF,GPIO_Pin_7)
+
+#define LED3(a)	if (a)	\
+					GPIO_SetBits(GPIOF,GPIO_Pin_8);\
+					else		\
+					GPIO_ResetBits(GPIOF,GPIO_Pin_8)
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);
@@ -94,15 +117,26 @@ int main(void)
     //	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
     // 初始化为输出
-    OutputPort led(PF8);
+    
 
     //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
 
     //    Sys.Start();
-    while (true)
+    led = 0;
+        led1 = 0;
+        led2 = 0;
+	while (true)
     {
-        led = 1;
-        led1 = 1;
-        led2 = 1;
+        LED1( ON );			  // 亮
+		Delay(0x0FFFFF);
+		LED1( OFF );		  // 灭
+
+		LED2( ON );			  // 亮
+		Delay(0x0FFFFF);
+		LED2( OFF );		  // 灭
+
+		LED3( ON );			  // 亮
+		Delay(0x0FFFFF);
+		LED3( OFF );		  // 灭	   
     }
 }
