@@ -29,14 +29,14 @@ OutputPort led1(PB0, true);
 OutputPort led2(PF7, true);
 
 //按键 PC13 PA0
-InputPort exti(PC13); //PA1 PB3     PA0 PC13
-InputPort exti1(PA0);
-void OnKeyPress(InputPort* pin, bool down, void *param)
-{
-    //led1.Write(onoff);
-    led2 = !led2;
-//    printf("中断引脚：P%c%d 值%d \r\n", _PIN_NAME(pin), down);
-}
+//InputPort exti(PC13); //PA1 PB3     PA0 PC13
+//InputPort exti1(PA0);
+//void OnKeyPress(InputPort* pin, bool down, void *param)
+//{
+//    //led1.Write(onoff);
+//    led2 = !led2;
+////    printf("中断引脚：P%c%d 值%d \r\n", _PIN_NAME(pin), down);
+//}
 
 /*
 ISO-V2:PB5控制485方向
@@ -48,11 +48,11 @@ ISO-V3:PC2控制485方向
 //    ModbusSlave.Process(bs, para);
 //    return 0;
 //}
-static uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para)
-{
-   bs.Show(true);
-    return 0;
-}
+//static uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para)
+//{
+//   bs.Show(true);
+//    return 0;
+//}
 
 void LedTask(void *param)
 {
@@ -64,39 +64,47 @@ void LedTask(void *param)
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);
-    #if 0
-        sys.Codec = codec;
-	#endif
+//    #if 0
+//        sys.Codec = codec;
+//	#endif
 	
     sys.Name = (char*)namee;    
     //Rtc提取时间
-    HardRtc *Rtc = HardRtc::Instance();
-    Rtc->LowPower = false;
-    Rtc->External = false;
-    Rtc->Init();
-    Rtc->Start(false, false);
+//    HardRtc *Rtc = HardRtc::Instance();
+//    Rtc->LowPower = false;
+//    Rtc->External = false;
+//    Rtc->Init();
+//    Rtc->Start(false, false);
     sys.Init();
-    #if DEBUG
-        Sys.MessagePort = COM1;
-        Sys.ShowInfo();
+//    #if DEBUG
+//        Sys.MessagePort = COM1;
+//        Sys.ShowInfo();
 
-        WatchDog::Start(20000, 10000);
-    #else 
-        WatchDog::Start();
-    #endif 
-    #if 0
-        //flash 最后一块作为配置区
-        Config::Current = &Config::CreateFlash();
-    #endif 
+//        WatchDog::Start(20000, 10000);
+//    #else 
+//        WatchDog::Start();
+//    #endif 
+//    #if 0
+//        //flash 最后一块作为配置区
+//        Config::Current = &Config::CreateFlash();
+//    #endif 
     
 //    exti.Register(OnKeyPress);
 //    exti1.Register(OnKeyPress);
-	SerialPort::GetMessagePort()->Register(OnUsart1Read);
+//	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
        // 初始化为输出
     OutputPort led(PF8);
-    
-    Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
+    #if 0
+	led=0;
+	led1=0;
+	led2=0;
+	#else
+	led=1;
+	led1=1;
+	led2=1;
+	#endif
+    //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
 	
     Sys.Start();
 }
