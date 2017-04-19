@@ -160,10 +160,10 @@ bool Port::Open()
                         }
                 }
             #endif 
-			this->OnOpen(this->State);
+            this->OnOpen(&gpio);
             GPIO_Init(((GPIO_TypeDef*)this->State), &gpio);
         }
-        
+
         this->Opened = true;
     }
     return true;
@@ -358,22 +358,31 @@ void OutputPort::Blink(int times, int ms)const
 
 void OutputPort::OnOpen(void *param)
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
-    RCC_APB2PeriphClockCmd(_RCC_APB2(this->_Pin), ENABLE);
-
+    GPIO_InitTypeDef gpio = *((GPIO_InitTypeDef*)param);
     if (this->OpenDrain)
     {
-        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
+        gpio.GPIO_Mode = GPIO_Mode_Out_OD;
     }
     else
     {
-        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+        gpio.GPIO_Mode = GPIO_Mode_Out_PP;
     }
-    /*设置引脚速率为50MHz */
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Pin = _PORT(this->_Pin);
+    //    GPIO_InitTypeDef GPIO_InitStructure;
+    //    RCC_APB2PeriphClockCmd(_RCC_APB2(this->_Pin), ENABLE);
 
-    GPIO_Init(_GROUP(this->_Pin), &GPIO_InitStructure);
+    //    if (this->OpenDrain)
+    //    {
+    //        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
+    //    }
+    //    else
+    //    {
+    //        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    //    }
+    //    /*设置引脚速率为50MHz */
+    //    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    //    GPIO_InitStructure.GPIO_Pin = _PORT(this->_Pin);
+
+    //    GPIO_Init(_GROUP(this->_Pin), &GPIO_InitStructure);
 
 
 
