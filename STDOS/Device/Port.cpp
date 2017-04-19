@@ -177,7 +177,8 @@ void Port::Close()
 void Port::Clear(){}
 bool Port::Read()const
 {
-    return false;
+    GPIO_TypeDef *group = _GROUP(this->_Pin);
+    return (group->IDR >> (this->_Pin &0xF)) &1;
 }
 
 void Port::OnOpen(void *param)
@@ -269,17 +270,12 @@ OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
 
 bool OutputPort::Read()const
 {
-    // 转为bool时会转为0/1
-    //    bool rs = GPIO_ReadOutputData(((GPIO_TypeDef *)this->State)) &PinBit;
-    bool rs = GPIO_ReadOutputData(((GPIO_TypeDef*)this->State));
-    return rs ^ Invert;
+    return this->Invert ? !Port::Read(): Port::Read();
 }
 
 bool OutputPort::ReadInput()const
 {
-    //    bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State)) &PinBit;
-    bool rs = GPIO_ReadInputData(((GPIO_TypeDef*)this->State));
-    return rs ^ Invert;
+    return this->Invert ? !Port::Read(): Port::Read();
 }
 
 //bool OutputPort::Read(Pin pin)
@@ -384,9 +380,8 @@ void OutputPort::Write(Pin pin, bool value)
         Invert = invert;
     }
 #endif 
-AlternatePort::AlternatePort(): OutputPort()
-{
-    //    Init(false, false);
+AlternatePort::AlternatePort(): OutputPort(){
+
 }
 
 AlternatePort::AlternatePort(Pin pin): OutputPort(pin){
@@ -395,7 +390,8 @@ AlternatePort::AlternatePort(Pin pin): OutputPort(pin){
 
 AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
 {
-    //    Init(invert, openDrain, speed);
+    this->Invert = invert;
+    this->OpenDrain = openDrain;
     Set(pin);
 }
 
@@ -410,23 +406,22 @@ void AlternatePort::OpenPin(void *param)
     #endif 
 }
 
-#if 0
-    void AnalogInPort::OnConfig(GPIO_InitTypeDef &gpio)
-    {
-        //    Port::OnConfig(gpio);
-
-        #ifdef STM32F1
-            gpio.GPIO_Mode = GPIO_Mode_AIN; //
-        #else 
-            gpio.GPIO_Mode = GPIO_Mode_AN;
-            //gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
-        #endif 
-    }
-#endif 
+void AnalogInPort::OnOpen(void *param)
+{
+    Port::OnOpen(param);
+    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+    #ifdef STM32F1
+        gpio->GPIO_Mode = GPIO_Mode_AIN; //
+    #else 
+        gpio->GPIO_Mode = GPIO_Mode_AN;
+        gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
+    #endif 
+}
 
 InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
 {
-    //    Init(floating, pupd);
+    this->Floating = floating;
+    this->Pull = pupd;
     Set(pin);
 }
 
@@ -505,31 +500,9 @@ InputPort::~InputPort()
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
 bool InputPort::Read()const
 {
-    // 转为bool时会转为0/1
-    //    bool rs = GPIO_ReadInputData(((GPIO_TypeDef *)this->State)) &PinBit;
-    bool rs = GPIO_ReadInputData(((GPIO_TypeDef*)this->State));
-    return rs ^ Invert;
+    return this->Invert ? !Port::Read(): Port::Read();
 }
 
-#if 0
-    bool InputPort::Read(Pin pin)
-    {
-        GPIO_TypeDef *group = _GROUP(pin);
-        return (group->IDR >> (pin &0xF)) &1;
-    }
-#endif 
-void AnalogInPort::OnOpen(void *param)
-{
-    Port::OnOpen(param);
-    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    #ifdef STM32F1
-        gpio->GPIO_Mode = GPIO_Mode_AF_OD;
-        //gpio->GPIO_Mode = OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
-    #else 
-        gpio->GPIO_Mode = GPIO_Mode_AF;
-        gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
-    #endif 
-}
 
 #if 0
     // 注册回调  及中断使能

@@ -67,7 +67,7 @@ void Delay(__IO uint32_t nCount) //¼òµ¥µÄÑÓÊ±º¯Êý
     for (; nCount != 0; nCount--)
         ;
 }
-
+InputPort key0(PA0);
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);
@@ -118,9 +118,10 @@ int main(void)
             Delay(0x0FFFFF);
             led2 = false; 		  // Ãð
 
-            led = true; 			  // ÁÁ
+            //led = true; 			  // ÁÁ
+			led=key0;
             Delay(0x0FFFFF);
-            led = false; 		  // Ãð	         
+            //led = false; 		  // Ãð	         
 		#endif
     }
 }
