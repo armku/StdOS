@@ -160,8 +160,6 @@ bool Port::Open()
 			gpio.GPIO_Pin = 1 << (this->_Pin &0x0F);	
 			this->OnOpen(&gpio);            
 
-            gpio.GPIO_Mode=GPIO_Mode_Out_PP;
-			gpio.GPIO_Speed=GPIO_Speed_50MHz;
             GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
         }
 
@@ -184,8 +182,8 @@ bool Port::Read()const
 
 void Port::OnOpen(void *param)
 {
-    GPIO_InitTypeDef gpio = *((GPIO_InitTypeDef*)param);    
-    gpio.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;    
+    gpio->GPIO_Speed = GPIO_Speed_50MHz;
 }
 
 void Port::OnClose(){}
@@ -361,14 +359,14 @@ void OutputPort::Blink(int times, int ms)const
 
 void OutputPort::OnOpen(void *param)
 {
-    GPIO_InitTypeDef gpio = *((GPIO_InitTypeDef*)param);
+    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     if (this->OpenDrain)
     {
-        gpio.GPIO_Mode = GPIO_Mode_Out_OD;
+        gpio->GPIO_Mode = GPIO_Mode_Out_OD;
     }
     else
     {
-        gpio.GPIO_Mode = GPIO_Mode_Out_PP;
+        gpio->GPIO_Mode = GPIO_Mode_Out_PP;
     }
     //    GPIO_InitTypeDef GPIO_InitStructure;
     //    RCC_APB2PeriphClockCmd(_RCC_APB2(this->_Pin), ENABLE);
