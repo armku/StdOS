@@ -140,8 +140,7 @@ bool Port::Open()
             #elif defined(STM32F4)
                 RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
             #endif 
-            
-			gpio.GPIO_Mode = GPIO_Mode_Out_PP;
+            			
             #ifdef STM32F1
                 // PA15/PB3/PB4 ÐèÒª¹Ø±ÕJTAG
                 switch (_Pin)
@@ -159,6 +158,7 @@ bool Port::Open()
                         }
                 }
             #endif 
+			gpio.GPIO_Mode = GPIO_Mode_Out_PP;
             this->OnOpen(&gpio);
             GPIO_Init(GPIOB, &gpio);
 				
@@ -188,6 +188,7 @@ void Port::OnOpen(void *param)
 {
 	GPIO_InitTypeDef gpio = *((GPIO_InitTypeDef*)param);
 	gpio.GPIO_Pin = _PIN(this->_Pin);
+	gpio.GPIO_Mode = GPIO_Mode_Out_PP;
 	gpio.GPIO_Speed = GPIO_Speed_50MHz;
 }
 void Port::OnClose(){}
@@ -364,6 +365,7 @@ void OutputPort::Blink(int times, int ms)const
 
 void OutputPort::OnOpen(void *param)
 {
+	 Port::OnOpen(param);
     GPIO_InitTypeDef gpio = *((GPIO_InitTypeDef*)param);
     if (this->OpenDrain)
     {
@@ -389,10 +391,6 @@ void OutputPort::OnOpen(void *param)
     //    GPIO_InitStructure.GPIO_Pin = _PORT(this->_Pin);
 
     //    GPIO_Init(_GROUP(this->_Pin), &GPIO_InitStructure);
-
-
-
-    Port::OnOpen(param);
 }
 
 void OutputPort::OpenPin(void *param){}
