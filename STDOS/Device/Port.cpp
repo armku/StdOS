@@ -189,11 +189,6 @@ void Port::OnOpen(void *param)
 void Port::OnClose(){}
 
 
-
-
-
-
-
 //#define GPIO_Mode_IN GPIO_Mode_IN_FLOATING
 //#define GPIO_Mode_AF GPIO_Mode_AF_OD
 //#define GPIO_OType_OD GPIO_Mode_Out_OD
@@ -359,6 +354,7 @@ void OutputPort::Blink(int times, int ms)const
 
 void OutputPort::OnOpen(void *param)
 {
+	Port::OnOpen(param);
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     if (this->OpenDrain)
     {
@@ -367,24 +363,7 @@ void OutputPort::OnOpen(void *param)
     else
     {
         gpio->GPIO_Mode = GPIO_Mode_Out_PP;
-    }
-    //    GPIO_InitTypeDef GPIO_InitStructure;
-    //    RCC_APB2PeriphClockCmd(_RCC_APB2(this->_Pin), ENABLE);
-
-    //    if (this->OpenDrain)
-    //    {
-    //        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
-    //    }
-    //    else
-    //    {
-    //        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    //    }
-    //    /*设置引脚速率为50MHz */
-    //    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    //    GPIO_InitStructure.GPIO_Pin = _PORT(this->_Pin);
-
-    //    GPIO_Init(_GROUP(this->_Pin), &GPIO_InitStructure);
-    Port::OnOpen(param);
+    } 
 }
 
 void OutputPort::OpenPin(void *param){}
@@ -422,22 +401,16 @@ AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
     Set(pin);
 }
 
-void AlternatePort::OpenPin(void *param){
-
-}
-#if 0
-    void AlternatePort::OnConfig(GPIO_InitTypeDef &gpio)
-    {
-        //    OutputPort::OnConfig(gpio);
-
-        #ifdef STM32F1
-            gpio.GPIO_Mode = OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
+void AlternatePort::OpenPin(void *param)
+{
+	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+	#ifdef STM32F1
+            gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
         #else 
-            gpio.GPIO_Mode = GPIO_Mode_AF;
-            gpio.GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
+            gpio->GPIO_Mode = GPIO_Mode_AF;
+            gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
         #endif 
-    }
-#endif 
+}
 #if 0
     void AnalogInPort::OnConfig(GPIO_InitTypeDef &gpio)
     {
@@ -462,8 +435,22 @@ InputPort::InputPort(){
 
 }
 
-void InputPort::OnOpen(void *param){
-
+void InputPort::OnOpen(void *param)
+{
+	Port::OnOpen(param);
+GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+	#ifdef STM32F1
+            if (Floating)
+                gpio->GPIO_Mode = GPIO_Mode_IN_FLOATING;
+            else if (Pull == UP)
+                gpio->GPIO_Mode = GPIO_Mode_IPU;
+            else if (Pull == DOWN)
+                gpio->GPIO_Mode = GPIO_Mode_IPD;
+            // 这里很不确定，需要根据实际进行调整
+        #else 
+            gpio->GPIO_Mode = GPIO_Mode_IN;
+            gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
+        #endif 
 }
 void InputPort::OnClose(){
 
@@ -479,25 +466,6 @@ void InputPort::OnClose(){
         // 有些应用的输入口需要极高的灵敏度，这个时候不需要抖动检测
         ShakeTime = 0;
         Invert = false;
-    }
-#endif 
-#if 0
-    void InputPort::OnConfig(GPIO_InitTypeDef &gpio)
-    {
-        //    Port::OnConfig(gpio);
-
-        #ifdef STM32F1
-            if (Floating)
-                gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-            else if (Pull == UP)
-                gpio.GPIO_Mode = GPIO_Mode_IPU;
-            else if (Pull == DOWN)
-                gpio.GPIO_Mode = GPIO_Mode_IPD;
-            // 这里很不确定，需要根据实际进行调整
-        #else 
-            gpio.GPIO_Mode = GPIO_Mode_IN;
-            gpio.GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
-        #endif 
     }
 #endif 
 
