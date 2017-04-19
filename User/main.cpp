@@ -169,7 +169,7 @@ int main(void)
     led2 = 0;
     while (true)
     {
-        #if 1
+        #if 0
             LED1( ON );			  // ÁÁ
             Delay(0x0FFFFF);
             LED1( OFF );		  // Ãð
