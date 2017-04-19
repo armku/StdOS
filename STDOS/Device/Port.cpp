@@ -111,43 +111,7 @@ Port &Port::Set(Pin pin)
         //            InitState = ((UInt64)((GPIO_TypeDef *)this->State)->CRH << 32) + ((GPIO_TypeDef *)this->State)->CRL;
     #endif 
 
-    if (_Pin != P0)
-    {
-        GPIO_InitTypeDef gpio;
-        // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
-        GPIO_StructInit(&gpio);
 
-        // 打开时钟
-        int gi = _Pin >> 4;
-        #ifdef STM32F0
-            RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOAEN << gi, ENABLE);
-        #elif defined(STM32F1)
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << gi, ENABLE);
-        #elif defined(STM32F4)
-            RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
-        #endif 
-
-        //        gpio.GPIO_Pin = PinBit;
-
-        #ifdef STM32F1
-            // PA15/PB3/PB4 需要关闭JTAG
-            switch (_Pin)
-            {
-                case PA15:
-                case PB3:
-                case PB4:
-                    {
-                        debug_printf("Close JTAG for P%c%d\r\n", _PIN_NAME(_Pin));
-
-                        // PA15是jtag接口中的一员 想要使用 必须开启remap
-                        RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-                        GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
-                        break;
-                    }
-            }
-        #endif 
-        GPIO_Init(((GPIO_TypeDef*)this->State), &gpio);
-    }
     this->Open();
     return  *this;
 }
@@ -161,7 +125,45 @@ bool Port::Open()
 {
     if (this->Opened == false)
     {
-        this->OnOpen(this->State);
+        if (_Pin != P0)
+        {
+            GPIO_InitTypeDef gpio;
+            // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
+            GPIO_StructInit(&gpio);
+
+            // 打开时钟
+            int gi = _Pin >> 4;
+            #ifdef STM32F0
+                RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOAEN << gi, ENABLE);
+            #elif defined(STM32F1)
+                RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << gi, ENABLE);
+            #elif defined(STM32F4)
+                RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
+            #endif 
+
+            //        gpio.GPIO_Pin = PinBit;
+
+            #ifdef STM32F1
+                // PA15/PB3/PB4 需要关闭JTAG
+                switch (_Pin)
+                {
+                    case PA15:
+                    case PB3:
+                    case PB4:
+                        {
+                            debug_printf("Close JTAG for P%c%d\r\n", _PIN_NAME(_Pin));
+
+                            // PA15是jtag接口中的一员 想要使用 必须开启remap
+                            RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+                            GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
+                            break;
+                        }
+                }
+            #endif 
+			this->OnOpen(this->State);
+            GPIO_Init(((GPIO_TypeDef*)this->State), &gpio);
+        }
+        
         this->Opened = true;
     }
     return true;
