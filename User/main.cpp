@@ -79,14 +79,14 @@ int main(void)
     //    Rtc->Init();
     //    Rtc->Start(false, false);
     sys.Init();
-    //    #if DEBUG
-    //        Sys.MessagePort = COM1;
-    //        Sys.ShowInfo();
+        #if DEBUG
+            Sys.MessagePort = COM1;
+            Sys.ShowInfo();
 
     //        WatchDog::Start(20000, 10000);
     //    #else 
     //        WatchDog::Start();
-    //    #endif 
+        #endif 
     //    #if 0
     //        //flash 最后一块作为配置区
     //        Config::Current = &Config::CreateFlash();
