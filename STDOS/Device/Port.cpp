@@ -157,6 +157,7 @@ bool Port::Open()
 			 GPIO_InitTypeDef gpio;
             // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
             GPIO_StructInit(&gpio);
+			gpio.GPIO_Pin = _PIN(this->_Pin);
             this->OnOpen(&gpio);
             GPIO_Init(GPIOB, &gpio);
 
@@ -186,8 +187,7 @@ bool Port::Read()const
 
 void Port::OnOpen(void *param)
 {
-    GPIO_InitTypeDef gpio = *((GPIO_InitTypeDef*)param);
-    gpio.GPIO_Pin = _PIN(this->_Pin);
+    GPIO_InitTypeDef gpio = *((GPIO_InitTypeDef*)param);    
     gpio.GPIO_Speed = GPIO_Speed_50MHz;
 }
 
