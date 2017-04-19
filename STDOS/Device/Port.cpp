@@ -162,6 +162,8 @@ bool Port::Open()
             GPIO_Init(GPIOB, &gpio);
 
             gpio.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_8;
+			gpio.GPIO_Mode=GPIO_Mode_Out_PP;
+			gpio.GPIO_Speed=GPIO_Speed_50MHz;
             GPIO_Init(GPIOF, &gpio);
             //GPIO_Init(_PORT(this->_Pin), &gpio);
         }
