@@ -141,8 +141,9 @@ bool Port::Open()
                 RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
             #endif 
             gpio.GPIO_Pin = _PIN(this->_Pin);
+			gpio.GPIO_Pin = GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_0;
             gpio.GPIO_Speed = GPIO_Speed_50MHz;
-           
+			gpio.GPIO_Mode = GPIO_Mode_Out_PP;
             #ifdef STM32F1
                 // PA15/PB3/PB4 需要关闭JTAG
                 switch (_Pin)
@@ -161,12 +162,12 @@ bool Port::Open()
                 }
             #endif 
             this->OnOpen(&gpio);
-            GPIO_Init(GPIOF, &gpio);
+            GPIO_Init(GPIOB, &gpio);
 			//GPIO_Init(_PORT(this->_Pin), &gpio);
 
 
 
-#if 1
+#if 0
 
             /*定义一个GPIO_InitTypeDef类型的结构体*/
             GPIO_InitTypeDef GPIO_InitStructure;
