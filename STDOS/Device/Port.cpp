@@ -157,15 +157,12 @@ bool Port::Open()
 			 GPIO_InitTypeDef gpio;
             // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
             GPIO_StructInit(&gpio);
-			gpio.GPIO_Pin = _PIN(this->_Pin);
-            this->OnOpen(&gpio);
-            GPIO_Init(GPIOB, &gpio);
+			gpio.GPIO_Pin = 1 << (this->_Pin &0x0F);	
+			this->OnOpen(&gpio);            
 
-            gpio.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_8;
-			gpio.GPIO_Mode=GPIO_Mode_Out_PP;
+            gpio.GPIO_Mode=GPIO_Mode_Out_PP;
 			gpio.GPIO_Speed=GPIO_Speed_50MHz;
-            GPIO_Init(GPIOF, &gpio);
-            //GPIO_Init(_PORT(this->_Pin), &gpio);
+            GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
         }
 
         this->Opened = true;
