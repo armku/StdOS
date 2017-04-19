@@ -207,19 +207,18 @@ void Port::OnClose(){}
 #define GPIO_Mode_OUT GPIO_Mode_Out_OD
 
 OutputPort::OutputPort()
-{
-    //    Init();
+{   
 }
 
 OutputPort::OutputPort(Pin pin)
-{
-    //    Init();
+{    
     Set(pin);
 }
 
 OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
-{
-    //    Init(invert, openDrain, speed);
+{    
+	this->Invert=invert;
+	this->OpenDrain=openDrain;	
     Set(pin);
 }
 
