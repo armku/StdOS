@@ -93,17 +93,17 @@ Port &Port::Set(Pin pin)
 {
     //assert_param(pin != P0);
 
-    _Pin = pin;
-    if (_Pin != P0)
-    {
-        this->State = IndexToGroup(pin >> 4);
-        //        PinBit = 1 << (pin &0x0F);
-    }
-    else
-    {
-        this->State = NULL;
-        //        PinBit = 0;
-    }
+    this->_Pin = pin;
+//    if (_Pin != P0)
+//    {
+//        this->State = IndexToGroup(pin >> 4);
+//        //        PinBit = 1 << (pin &0x0F);
+//    }
+//    else
+//    {
+//        this->State = NULL;
+//        //        PinBit = 0;
+//    }
 
     #if defined(STM32F1)
         // 整组引脚的初始状态，析构时有选择恢复
