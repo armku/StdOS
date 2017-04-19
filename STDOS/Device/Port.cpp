@@ -452,6 +452,7 @@ GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
             gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
         #endif 
 }
+
 void InputPort::OnClose(){
 
 }
@@ -518,6 +519,18 @@ bool InputPort::Read()const
         return (group->IDR >> (pin &0xF)) &1;
     }
 #endif 
+	void AnalogInPort::OnOpen(void* param)
+	{
+		Port::OnOpen(param);
+GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+	 #ifdef STM32F1
+        gpio->GPIO_Mode = GPIO_Mode_AF_OD;
+		//gpio->GPIO_Mode = OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
+    #else 
+        gpio->GPIO_Mode = GPIO_Mode_AF;
+        gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
+    #endif 
+	}
 #if 0
     // 注册回调  及中断使能
     void InputPort::Register(IOReadHandler handler, void *param)
