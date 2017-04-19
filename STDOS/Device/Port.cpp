@@ -194,11 +194,11 @@ void Port::OnClose(){}
 
 
 
-#define GPIO_Mode_IN GPIO_Mode_IN_FLOATING
-#define GPIO_Mode_AF GPIO_Mode_AF_OD
-#define GPIO_OType_OD GPIO_Mode_Out_OD
-#define GPIO_OType_PP GPIO_Mode_Out_PP
-#define GPIO_Mode_OUT GPIO_Mode_Out_OD
+//#define GPIO_Mode_IN GPIO_Mode_IN_FLOATING
+//#define GPIO_Mode_AF GPIO_Mode_AF_OD
+//#define GPIO_OType_OD GPIO_Mode_Out_OD
+//#define GPIO_OType_PP GPIO_Mode_Out_PP
+//#define GPIO_Mode_OUT GPIO_Mode_Out_OD
 
 OutputPort::OutputPort()
 {   
