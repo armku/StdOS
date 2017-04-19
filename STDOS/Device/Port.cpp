@@ -163,7 +163,7 @@ bool Port::Open()
             this->OnOpen(&gpio);
             GPIO_Init(GPIOB, &gpio);
 				
-				gpio.GPIO_Pin = GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_0;
+				gpio.GPIO_Pin = GPIO_Pin_7|GPIO_Pin_8;
 				 GPIO_Init(GPIOF, &gpio);
 			//GPIO_Init(_PORT(this->_Pin), &gpio);
         }
