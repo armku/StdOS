@@ -127,10 +127,6 @@ bool Port::Open()
     {
         if (_Pin != P0)
         {
-            GPIO_InitTypeDef gpio;
-            // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
-            GPIO_StructInit(&gpio);
-
             // 打开时钟
             int gi = _Pin >> 4;
             #ifdef STM32F0
@@ -158,6 +154,9 @@ bool Port::Open()
                         }
                 }
             #endif 
+			 GPIO_InitTypeDef gpio;
+            // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
+            GPIO_StructInit(&gpio);
             this->OnOpen(&gpio);
             GPIO_Init(GPIOB, &gpio);
 
