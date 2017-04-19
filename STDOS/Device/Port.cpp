@@ -94,16 +94,16 @@ Port &Port::Set(Pin pin)
     //assert_param(pin != P0);
 
     this->_Pin = pin;
-//    if (_Pin != P0)
-//    {
-//        this->State = IndexToGroup(pin >> 4);
-//        //        PinBit = 1 << (pin &0x0F);
-//    }
-//    else
-//    {
-//        this->State = NULL;
-//        //        PinBit = 0;
-//    }
+    //    if (_Pin != P0)
+    //    {
+    //        this->State = IndexToGroup(pin >> 4);
+    //        //        PinBit = 1 << (pin &0x0F);
+    //    }
+    //    else
+    //    {
+    //        this->State = NULL;
+    //        //        PinBit = 0;
+    //    }
 
     #if defined(STM32F1)
         // 整组引脚的初始状态，析构时有选择恢复
@@ -140,7 +140,7 @@ bool Port::Open()
             #elif defined(STM32F4)
                 RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
             #endif 
-            			
+
             #ifdef STM32F1
                 // PA15/PB3/PB4 需要关闭JTAG
                 switch (_Pin)
@@ -157,13 +157,13 @@ bool Port::Open()
                             break;
                         }
                 }
-            #endif 			
+            #endif 
             this->OnOpen(&gpio);
             GPIO_Init(GPIOB, &gpio);
-				
-				gpio.GPIO_Pin = GPIO_Pin_7|GPIO_Pin_8;
-				 GPIO_Init(GPIOF, &gpio);
-			//GPIO_Init(_PORT(this->_Pin), &gpio);
+
+            gpio.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_8;
+            GPIO_Init(GPIOF, &gpio);
+            //GPIO_Init(_PORT(this->_Pin), &gpio);
         }
 
         this->Opened = true;
@@ -185,10 +185,11 @@ bool Port::Read()const
 
 void Port::OnOpen(void *param)
 {
-	GPIO_InitTypeDef gpio = *((GPIO_InitTypeDef*)param);
-	gpio.GPIO_Pin = _PIN(this->_Pin);	
-	gpio.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitTypeDef gpio = *((GPIO_InitTypeDef*)param);
+    gpio.GPIO_Pin = _PIN(this->_Pin);
+    gpio.GPIO_Speed = GPIO_Speed_50MHz;
 }
+
 void Port::OnClose(){}
 
 
@@ -362,7 +363,7 @@ void OutputPort::Blink(int times, int ms)const
 }
 
 void OutputPort::OnOpen(void *param)
-{	 
+{
     GPIO_InitTypeDef gpio = *((GPIO_InitTypeDef*)param);
     if (this->OpenDrain)
     {
@@ -371,7 +372,7 @@ void OutputPort::OnOpen(void *param)
     else
     {
         gpio.GPIO_Mode = GPIO_Mode_Out_PP;
-    }	
+    }
     //    GPIO_InitTypeDef GPIO_InitStructure;
     //    RCC_APB2PeriphClockCmd(_RCC_APB2(this->_Pin), ENABLE);
 
@@ -388,7 +389,7 @@ void OutputPort::OnOpen(void *param)
     //    GPIO_InitStructure.GPIO_Pin = _PORT(this->_Pin);
 
     //    GPIO_Init(_GROUP(this->_Pin), &GPIO_InitStructure);
-	Port::OnOpen(param);
+    Port::OnOpen(param);
 }
 
 void OutputPort::OpenPin(void *param){}
