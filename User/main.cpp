@@ -163,7 +163,7 @@ int main(void)
     //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
 
     //    Sys.Start();
-    LED_GPIO_Config();
+    //LED_GPIO_Config();
     led = 0;
     led1 = 0;
     led2 = 0;
@@ -186,13 +186,13 @@ int main(void)
             Delay(0x0FFFFF);
             led1 = false;		  // Ãð
 
-            led2 = 1; 			  // ÁÁ
+            led2 = true; 			  // ÁÁ
             Delay(0x0FFFFF);
-            led2 = 0; 		  // Ãð
+            led2 = false; 		  // Ãð
 
-            led = 1; 			  // ÁÁ
+            led = true; 			  // ÁÁ
             Delay(0x0FFFFF);
-            led = 0; 		  // Ãð	  
+            led = false; 		  // Ãð	  
         #endif 
     }
 }
