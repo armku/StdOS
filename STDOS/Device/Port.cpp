@@ -140,12 +140,9 @@ bool Port::Open()
             #elif defined(STM32F4)
                 RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
             #endif 
-            gpio.GPIO_Pin = _PORT(this->_Pin);
+            gpio.GPIO_Pin = _PIN(this->_Pin);
             gpio.GPIO_Speed = GPIO_Speed_50MHz;
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOF, ENABLE);
-
-            //        gpio.GPIO_Pin = PinBit;
-
+           
             #ifdef STM32F1
                 // PA15/PB3/PB4 需要关闭JTAG
                 switch (_Pin)
@@ -165,17 +162,17 @@ bool Port::Open()
             #endif 
             this->OnOpen(&gpio);
             GPIO_Init(GPIOF, &gpio);
-            GPIO_Init(((GPIO_TypeDef*)this->State), &gpio);
+			//GPIO_Init(_PORT(this->_Pin), &gpio);
 
 
 
-
+#if 1
 
             /*定义一个GPIO_InitTypeDef类型的结构体*/
             GPIO_InitTypeDef GPIO_InitStructure;
 
             /*开启GPIOB和GPIOF的外设时钟*/
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOF, ENABLE);
+            //RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOF, ENABLE);
 
             /*选择要控制的GPIOB引脚*/
             GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
@@ -201,11 +198,12 @@ bool Port::Open()
             /*调用库函数，初始化GPIOF7*/
             GPIO_Init(GPIOF, &GPIO_InitStructure);
 
-            /* 关闭所有led灯	*/
-            GPIO_SetBits(GPIOB, GPIO_Pin_0);
+//            /* 关闭所有led灯	*/
+//            GPIO_SetBits(GPIOB, GPIO_Pin_0);
 
-            /* 关闭所有led灯	*/
-            GPIO_SetBits(GPIOF, GPIO_Pin_7 | GPIO_Pin_8);
+//            /* 关闭所有led灯	*/
+//            GPIO_SetBits(GPIOF, GPIO_Pin_7 | GPIO_Pin_8);
+			#endif
         }
 
         this->Opened = true;
@@ -410,7 +408,7 @@ void OutputPort::OnOpen(void *param)
     else
     {
         gpio.GPIO_Mode = GPIO_Mode_Out_PP;
-    }
+    }	
     //    GPIO_InitTypeDef GPIO_InitStructure;
     //    RCC_APB2PeriphClockCmd(_RCC_APB2(this->_Pin), ENABLE);
 
