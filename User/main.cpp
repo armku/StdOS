@@ -62,11 +62,7 @@ void LedTask(void *param)
 }
 
 #define namee "StdOS"
-void Delay(__IO uint32_t nCount) //¼òµ¥µÄÑÓÊ±º¯Êý
-{
-    for (; nCount != 0; nCount--)
-        ;
-}
+
 InputPort key0(PA0);
 int main(void)
 {
@@ -105,23 +101,5 @@ int main(void)
 
     Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
 
-    //Sys.Start();
-    
-    while (true)
-    {        
-		#if 1
-            led1 = true;			  // ÁÁ
-            Delay(0x0FFFFF);
-            led1 = false;		  // Ãð
-
-            led2 = true; 			  // ÁÁ
-            Delay(0x0FFFFF);
-            led2 = false; 		  // Ãð
-
-            //led = true; 			  // ÁÁ
-			led=key0;
-            Delay(0x0FFFFF);
-            //led = false; 		  // Ãð	         
-		#endif
-    }
+    Sys.Start();
 }
