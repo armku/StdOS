@@ -68,25 +68,6 @@ void Delay(__IO uint32_t nCount) //简单的延时函数
         ;
 }
 
-#define ON  0
-#define OFF 1
-
-/* 带参宏，可以像内联函数一样使用 */
-#define LED1(a)	if (a)	\
-GPIO_SetBits(GPIOB,GPIO_Pin_0);\
-else		\
-GPIO_ResetBits(GPIOB,GPIO_Pin_0)
-
-#define LED2(a)	if (a)	\
-GPIO_SetBits(GPIOF,GPIO_Pin_7);\
-else		\
-GPIO_ResetBits(GPIOF,GPIO_Pin_7)
-
-#define LED3(a)	if (a)	\
-GPIO_SetBits(GPIOF,GPIO_Pin_8);\
-else		\
-GPIO_ResetBits(GPIOF,GPIO_Pin_8)
-
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);
@@ -122,28 +103,13 @@ int main(void)
     // 初始化为输出
 
 
-    //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
+    Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
 
     //    Sys.Start();
     
-    led = 0;
-    led1 = 0;
-    led2 = 0;
     while (true)
-    {
-        #if 0
-            LED1( ON );			  // 亮
-            Delay(0x0FFFFF);
-            LED1( OFF );		  // 灭
-
-            LED2( ON );			  // 亮
-            Delay(0x0FFFFF);
-            LED2( OFF );		  // 灭
-
-            LED3( ON );			  // 亮
-            Delay(0x0FFFFF);
-            LED3( OFF );		  // 灭	   
-        #else 
+    {        
+		#if 1
             led1 = true;			  // 亮
             Delay(0x0FFFFF);
             led1 = false;		  // 灭
@@ -154,7 +120,7 @@ int main(void)
 
             led = true; 			  // 亮
             Delay(0x0FFFFF);
-            led = false; 		  // 灭	  
-        #endif 
+            led = false; 		  // 灭	         
+		#endif
     }
 }
