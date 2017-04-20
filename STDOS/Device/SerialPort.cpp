@@ -448,7 +448,7 @@ bool isInFPutc;
 extern "C"
 {
     /* 重载fputc可以让用户程序使用printf函数 */
-    int fputc(int ch, FILE *f)
+    int fputc1(int ch, FILE *f)
     {
 //        if (!Sys.Inited)
 //            return ch;

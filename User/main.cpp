@@ -59,76 +59,79 @@ void LedTask(void *param)
 {
     OutputPort *leds = (OutputPort*)param;
     *leds = ! * leds;
-	led1=key0;
+    led1 = key0;
 }
 
 #define namee "StdOS"
 
 void USART1_Config(void)
 {
-	GPIO_InitTypeDef GPIO_InitStructure;
-	USART_InitTypeDef USART_InitStructure;
-	
-	/* config USART1 clock */
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1 | RCC_APB2Periph_GPIOA, ENABLE);
-	
-	/* USART1 GPIO config */
-	/* Configure USART1 Tx (PA.09) as alternate function push-pull */
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);    
-	/* Configure USART1 Rx (PA.10) as input floating */
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
-	
-	/* USART1 mode config */
-	USART_InitStructure.USART_BaudRate = 115200;
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;
-	USART_InitStructure.USART_Parity = USART_Parity_No ;
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-	USART_Init(USART1, &USART_InitStructure);
-	
-	/* 使能串口1接收中断 */
-	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
-	
-	USART_Cmd(USART1, ENABLE);
+    GPIO_InitTypeDef GPIO_InitStructure;
+    USART_InitTypeDef USART_InitStructure;
+
+    /* config USART1 clock */
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1 | RCC_APB2Periph_GPIOA, ENABLE);
+
+    /* USART1 GPIO config */
+    /* Configure USART1 Tx (PA.09) as alternate function push-pull */
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+    /* Configure USART1 Rx (PA.10) as input floating */
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+    /* USART1 mode config */
+    USART_InitStructure.USART_BaudRate = 115200;
+    USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+    USART_InitStructure.USART_StopBits = USART_StopBits_1;
+    USART_InitStructure.USART_Parity = USART_Parity_No;
+    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+    USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+    USART_Init(USART1, &USART_InitStructure);
+
+    /* 使能串口1接收中断 */
+    USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+
+    USART_Cmd(USART1, ENABLE);
 }
+
 /// 配置USART1接收中断
 void NVIC_Configuration(void)
 {
-	NVIC_InitTypeDef NVIC_InitStructure; 
-	/* Configure the NVIC Preemption Priority Bits */  
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-	
-	/* Enable the USARTy Interrupt */
-	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;	 
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
+    NVIC_InitTypeDef NVIC_InitStructure;
+    /* Configure the NVIC Preemption Priority Bits */
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+
+    /* Enable the USARTy Interrupt */
+    NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
 }
+
 #ifdef __cplusplus
     extern "C"
     {
-    #endif
-/// 重定向c库函数printf到USART1
-int fputc1(int ch, FILE *f)
-{
-		/* 发送一个字节数据到USART1 */
-		USART_SendData(USART1, (uint8_t) ch);
-		
-		/* 等待发送完毕 */
-		while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);		
-	
-		return (ch);
-}
-#ifdef __cplusplus
+    #endif 
+    /// 重定向c库函数printf到USART1
+    int fputc(int ch, FILE *f)
+    {
+        /* 发送一个字节数据到USART1 */
+        USART_SendData(USART1, (uint8_t)ch);
+
+        /* 等待发送完毕 */
+        while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
+            ;
+
+        return (ch);
     }
-    #endif
+    #ifdef __cplusplus
+    }
+#endif 
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);
@@ -144,16 +147,16 @@ int main(void)
     //    Rtc->Init();
     //    Rtc->Start(false, false);
     sys.Init();
-        #if DEBUG
-            Sys.MessagePort = COM1;
-			//USART1_Config();	
-			//NVIC_Configuration();
-            Sys.ShowInfo();
+    #if DEBUG
+        Sys.MessagePort = COM1;
+        USART1_Config();
+        NVIC_Configuration();
+        Sys.ShowInfo();
 
-    //        WatchDog::Start(20000, 10000);
-    //    #else 
-    //        WatchDog::Start();
-        #endif 
+        //        WatchDog::Start(20000, 10000);
+        //    #else 
+        //        WatchDog::Start();
+    #endif 
     //    #if 0
     //        //flash 最后一块作为配置区
     //        Config::Current = &Config::CreateFlash();
