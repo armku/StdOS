@@ -1,6 +1,6 @@
 #include "Sys.h"
 #include <stdio.h>
-
+#include "stm32f10x.h"
 #include "SerialPort.h"
 #include "TInterrupt.h"
 #include "TTime.h"
