@@ -6,55 +6,55 @@ TInterrupt Interrupt;
 SerialPort *onSerialPortRcv[5];
 
 // 设置优先级
-void TInterrupt::SetPriority(short irq, uint priority) const
+void TInterrupt::SetPriority(short irq, uint priority)const
 {
     NVIC_InitTypeDef nvic;
     nvic.NVIC_IRQChannelCmd = ENABLE;
     switch (irq)
     {
         case EXTI0_IRQn:
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = EXTI0_IRQn;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = 1;
             break;
-		case EXTI1_IRQn:
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+        case EXTI1_IRQn:
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = EXTI1_IRQn;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = 1;
             break;
-		case EXTI2_IRQn:
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+        case EXTI2_IRQn:
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = EXTI2_IRQn;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = 1;
             break;
-		case EXTI3_IRQn:
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+        case EXTI3_IRQn:
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = EXTI3_IRQn;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = 1;
             break;
-		case EXTI4_IRQn:
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+        case EXTI4_IRQn:
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = EXTI4_IRQn;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = 1;
             break;
-		case EXTI9_5_IRQn:
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+        case EXTI9_5_IRQn:
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = EXTI9_5_IRQn;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = 1;
             break;
-		case EXTI15_10_IRQn:
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+        case EXTI15_10_IRQn:
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = EXTI15_10_IRQn;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = 1;
             break;
-		case USART1_IRQn:
+        case USART1_IRQn:
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
             nvic.NVIC_IRQChannel = USART1_IRQn;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
@@ -93,27 +93,28 @@ void TInterrupt::SetPriority(short irq, uint priority) const
 
     NVIC_Init(&nvic);
 }
+
 // 注册中断函数（中断号，函数，参数）
-bool TInterrupt::Activate(short irq, InterruptCallback isr, void* param)
+bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
 {
     SerialPort *sp = (SerialPort*)param;
     switch (irq)
     {
         case EXTI0_IRQn:
-			break;
-		case EXTI1_IRQn:
-			break;
-		case EXTI2_IRQn:
-			break;
-		case EXTI3_IRQn:
-			break;
-		case EXTI4_IRQn:
-			break;
-		case EXTI9_5_IRQn:
-			break;
-		case EXTI15_10_IRQn:
-			break;
-		case USART1_IRQn:
+            break;
+        case EXTI1_IRQn:
+            break;
+        case EXTI2_IRQn:
+            break;
+        case EXTI3_IRQn:
+            break;
+        case EXTI4_IRQn:
+            break;
+        case EXTI9_5_IRQn:
+            break;
+        case EXTI15_10_IRQn:
+            break;
+        case USART1_IRQn:
             onSerialPortRcv[0] = sp;
             break;
         case USART2_IRQn:
@@ -133,15 +134,16 @@ bool TInterrupt::Activate(short irq, InterruptCallback isr, void* param)
         default:
             break;
     }
-	return true;
+    return true;
 }
 
 //关闭中断
 bool TInterrupt::Deactivate(short irq)
 {
-	return true;
+    return true;
 }
-	//所有中断线处理
+
+//所有中断线处理
 void EXTI_IRQHandler(ushort num, void *param);
 extern SerialPort *_printf_sp;
 #ifdef __cplusplus
@@ -154,22 +156,22 @@ extern SerialPort *_printf_sp;
      */
     void USART1_IRQHandler(void) //串口1中断服务程序
     {
-		#if 0
-		
-        if (onSerialPortRcv[0])
-        {
-            SerialPort::OnUsartReceive(0, onSerialPortRcv[0]);
-        }
-		#else
-		uint8_t ch;
-	
-	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
-	{ 	
-	    //ch = USART1->DR;
-			ch = USART_ReceiveData(USART1);
-	  	printf( "%c", ch );    //将接受到的数据直接返回打印
-	} 
-		#endif
+        #if 0
+
+            if (onSerialPortRcv[0])
+            {
+                SerialPort::OnUsartReceive(0, onSerialPortRcv[0]);
+            }
+        #else 
+            uint8_t ch;
+
+            if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
+            {
+                //ch = USART1->DR;
+                ch = USART_ReceiveData(USART1);
+                printf("%c", ch); //将接受到的数据直接返回打印
+            }
+        #endif 
     }
     void USART2_IRQHandler(void) //串口1中断服务程序
     {
@@ -199,7 +201,7 @@ extern SerialPort *_printf_sp;
             SerialPort::OnUsartReceive(4, onSerialPortRcv[4]);
         }
     }
-	
+
     void EXTI0_IRQHandler()
     {
         if (EXTI_GetITStatus(EXTI_Line0) != RESET)
