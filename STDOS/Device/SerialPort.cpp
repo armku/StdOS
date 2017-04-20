@@ -9,7 +9,28 @@
 #define STM32F1XX
 
 #define UARTS {USART1,USART2,USART3,UART4,UART5}
-
+		
+		//以下为过期需要整理内容
+//		private:
+//            byte _index;
+//            USART_TypeDef *_port;
+//            AlternatePort _tx;
+//            #if defined(STM32F0) || defined(STM32F4)
+//                AlternatePort _rx;
+//            #else 
+//                InputPort _rx;
+//            #endif 
+//        public:
+//            SerialPort(byte index, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);
+            //SerialPort(USART_TypeDef *com, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);            
+//            void Init(byte index, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);                     
+//            void GetPins(Pin *txPin, Pin *rxPin);            
+//        protected:            
+//            virtual bool OnWrite(const byte *buf, uint size);
+//            virtual uint OnRead(byte *buf, uint size);
+//        public:
+            //原始:private
+//            static void OnUsartReceive(ushort num, void *param);
 SerialPort::SerialPort()
 {
     Init();
@@ -155,12 +176,12 @@ bool SerialPort::OnOpen()
     USART_InitTypeDef p;
 
     //串口引脚初始化
-    _tx.Set(tx);
-    #if defined(STM32F0) || defined(STM32F4)
-        _rx.Set(rx);
-    #else 
-        _rx.Set(rx);
-    #endif 
+//    _tx.Set(tx);
+//    #if defined(STM32F0) || defined(STM32F4)
+//        _rx.Set(rx);
+//    #else 
+//        _rx.Set(rx);
+//    #endif 
 
     // 不要关调试口，否则杯具
 //    if (_index != Sys.MessagePort)
