@@ -150,7 +150,7 @@ int main(void)
     #if DEBUG
         Sys.MessagePort = COM1;
         USART1_Config();
-        NVIC_Configuration();
+        //NVIC_Configuration();
         Sys.ShowInfo();
 
         //        WatchDog::Start(20000, 10000);
