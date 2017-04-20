@@ -398,11 +398,6 @@ void SerialPort::Register(TransportHandler handler, void *param)
     }
 }
 
-String SerialPort::ToString()
-{
-    return Name;
-}
-
 // 真正的串口中断函数
 void SerialPort::OnUsartReceive(ushort num, void *param)
 {

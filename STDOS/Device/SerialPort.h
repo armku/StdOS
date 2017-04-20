@@ -114,7 +114,6 @@
             SerialPort(USART_TypeDef *com, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);            
             void Init(byte index, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);                     
             void GetPins(Pin *txPin, Pin *rxPin);            
-            virtual String ToString();            
         protected:            
             virtual bool OnWrite(const byte *buf, uint size);
             virtual uint OnRead(byte *buf, uint size);
