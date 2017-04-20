@@ -5,10 +5,8 @@
     #include "Port.h"
     #include "Power.h"
     #include "Net\ITransport.h"
-	
-    #include "Sys.h"
+	    
     #include "stm32f10x.h"
-    #include "SString.h"
 
     // ´®¿ÚÀà
     class SerialPort: public ITransport, public Power
