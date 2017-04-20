@@ -119,6 +119,6 @@
             virtual uint OnRead(byte *buf, uint size);
         public:
             //ԭʼ:private
-            static void OnUsartReceive(ushort num, void *param);
+//            static void OnUsartReceive(ushort num, void *param);
     };
 #endif

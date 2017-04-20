@@ -393,7 +393,7 @@ void SerialPort::Register(TransportHandler handler, void *param)
     if (handler)
     {
         Interrupt.SetPriority(irq, 1);
-        Interrupt.Activate(irq, SerialPort::OnUsartReceive, this);
+//        Interrupt.Activate(irq, SerialPort::OnUsartReceive, this);
     }
     else
     {
@@ -402,34 +402,34 @@ void SerialPort::Register(TransportHandler handler, void *param)
 }
 
 // 真正的串口中断函数
-void SerialPort::OnUsartReceive(ushort num, void *param)
-{
-    SerialPort *sp = (SerialPort*)param;
+//void SerialPort::OnUsartReceive(ushort num, void *param)
+//{
+//    SerialPort *sp = (SerialPort*)param;
 
-    if (sp && sp->HasHandler())
-    {
-        if (USART_GetITStatus(sp->_port, USART_IT_RXNE) != RESET)
-        {
-            // 从栈分配，节省内存
-            byte buf[512];
-            uint len = sp->Read(buf, sizeof(buf));
-            if (len)
-            {
-                len = sp->OnReceive(buf, len);
-                #if 0
-                    assert_param(len <= ArrayLength(buf));
-                #endif 
-                // 如果有数据，则反馈回去
-                #if 0
-                    if (len)
-                    {
-                        sp->Write(buf, len);
-                    }
-                #endif 
-            }
-        }
-    }
-}
+//    if (sp && sp->HasHandler())
+//    {
+//        if (USART_GetITStatus(sp->_port, USART_IT_RXNE) != RESET)
+//        {
+//            // 从栈分配，节省内存
+//            byte buf[512];
+//            uint len = sp->Read(buf, sizeof(buf));
+//            if (len)
+//            {
+//                len = sp->OnReceive(buf, len);
+//                #if 0
+//                    assert_param(len <= ArrayLength(buf));
+//                #endif 
+//                // 如果有数据，则反馈回去
+//                #if 0
+//                    if (len)
+//                    {
+//                        sp->Write(buf, len);
+//                    }
+//                #endif 
+//            }
+//        }
+//    }
+//}
 
 #define UART_PINS {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}
 #define UART_PINS_FULLREMAP {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}   //需要整理
