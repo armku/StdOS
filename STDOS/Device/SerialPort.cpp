@@ -291,7 +291,10 @@ int SerialPort::SendData(byte data, int times)
     //等待发送完毕
     if (times > 0)
     {
-        USART_SendData(_port, (ushort)data);
+        //USART_SendData(_port, (ushort)data);
+        USART_SendData(USART1, (ushort)data);
+        while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
+            ;
     }
     else
     {
@@ -446,44 +449,34 @@ void SerialPort::GetPins(Pin *txPin, Pin *rxPin)
 }
 
 SerialPort *_printf_sp;
-bool isInFPutc;
+bool isInFPutc; //正在串口输出
 extern "C"
 {
     /* 重载fputc可以让用户程序使用printf函数 */
     int fputc(int ch, FILE *f)
     {
-        #if 0
-            //        if (!Sys.Inited)
-            //            return ch;
+        //        if (!Sys.Inited)
+        //            return ch;
 
-            int _index = Sys.MessagePort;
-            if (_index == COM_NONE)
-                return ch;
+        int _index = Sys.MessagePort;
+        if (_index == COM_NONE)
+            return ch;
 
-            USART_TypeDef *g_Uart_Ports[] = UARTS;
-            USART_TypeDef *port = g_Uart_Ports[_index];
+        USART_TypeDef *g_Uart_Ports[] = UARTS;
+        USART_TypeDef *port = g_Uart_Ports[_index];
 
-            if (isInFPutc)
-                return ch;
-            isInFPutc = true;
-            // 检查并打开串口
-            if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && _printf_sp == NULL)
-            {
-                _printf_sp = new SerialPort(port);
-                _printf_sp->Open();
-            }
+        if (isInFPutc)
+            return ch;
+        isInFPutc = true;
 
-            _printf_sp->SendData((byte)ch);
-
-            isInFPutc = false;
-        #else 
-            /* 发送一个字节数据到USART1 */
-            USART_SendData(USART1, (uint8_t)ch);
-
-            /* 等待发送完毕 */
-            while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
-                ;
-        #endif 
+        // 检查并打开串口
+        if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && _printf_sp == NULL)
+        {
+            _printf_sp = new SerialPort(port);
+            _printf_sp->Open();
+        }
+        _printf_sp->SendData((byte)ch);
+        isInFPutc = false;
         return ch;
     }
 }
