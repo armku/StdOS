@@ -91,13 +91,5 @@
             void OnOpen2();
             void OnClose2();
             void OnWrite2();
-        
-		
-		
-		
-		
-		
-		
-
     };
 #endif
