@@ -36,14 +36,17 @@ SerialPort::SerialPort()
     Init();
 }
 
-//SerialPort::SerialPort(byte index, int baudRate, byte parity, byte dataBits, byte stopBits)
-//{
-//    Init();
-//    Init(index, baudRate, parity, dataBits, stopBits);
-//}
 SerialPort::SerialPort(COM index, int baudRate)
 {
-	
+	this->Index=index;
+	if(baudRate<=0)
+	{
+		this->_baudRate=115200;
+	}
+	else
+	{
+		this->_baudRate=baudRate;
+	}
 }
 //SerialPort::SerialPort(USART_TypeDef *com, int baudRate, byte parity, byte dataBits, byte stopBits)
 //{
@@ -320,7 +323,9 @@ int SerialPort::SendData(byte data, int times)
     if (times > 0)
     {
 		
-//		this->Index=COM1;
+		//this->Index=COM1;
+		int aa=this->Index;
+		//this->Index=this->Index;
 		//if((this->Index>=0)&&(this->Index<5))
 		{        
         USART_SendData(g_Uart_Ports[cc], (ushort)data);
