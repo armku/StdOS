@@ -288,15 +288,18 @@ void SerialPort::OnClose()
 int SerialPort::SendData(byte data, int times)
 {
 	USART_TypeDef *const g_Uart_Ports[] = UARTS;
+	COM cc=COM1;
 	//_port=USART1;
-    while (USART_GetFlagStatus(g_Uart_Ports[0], USART_FLAG_TXE) == RESET && --times > 0){}
+    while (USART_GetFlagStatus(g_Uart_Ports[cc], USART_FLAG_TXE) == RESET && --times > 0){}
 	//this->Index=COM1;
     //µÈ´ý·¢ËÍÍê±Ï
     if (times > 0)
     {
+		
+//		this->Index=COM1;
 		//if((this->Index>=0)&&(this->Index<5))
 		{        
-        USART_SendData(g_Uart_Ports[0], (ushort)data);
+        USART_SendData(g_Uart_Ports[cc], (ushort)data);
 		}
     }
     else
