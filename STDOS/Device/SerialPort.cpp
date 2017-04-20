@@ -80,13 +80,15 @@ void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte
     Name[3] = '0' + _index + 1;
     Name[4] = 0;
 }
+
 bool SerialPort::OnWrite(const Buffer &bs)
 {
-		return false;
+    return false;
 }
+
 uint SerialPort::OnRead(Buffer &bs)
 {
-	return 0;
+    return 0;
 }
 
 // 打开串口
@@ -295,11 +297,11 @@ int SerialPort::SendData(byte data, int times)
     {
         Error++;
     }
-	return 0;
+    return 0;
 }
-void SerialPort::ChangePower(int level)
-{
-	
+
+void SerialPort::ChangePower(int level){
+
 }
 
 // 向某个端口写入数据。如果size为0，则把data当作字符串，一直发送直到遇到\0为止
@@ -448,31 +450,40 @@ bool isInFPutc;
 extern "C"
 {
     /* 重载fputc可以让用户程序使用printf函数 */
-    int fputc1(int ch, FILE *f)
+    int fputc(int ch, FILE *f)
     {
-//        if (!Sys.Inited)
-//            return ch;
+        #if 0
+            //        if (!Sys.Inited)
+            //            return ch;
 
-        int _index = Sys.MessagePort;
-        if (_index == COM_NONE)
-            return ch;
+            int _index = Sys.MessagePort;
+            if (_index == COM_NONE)
+                return ch;
 
-        USART_TypeDef *g_Uart_Ports[] = UARTS;
-        USART_TypeDef *port = g_Uart_Ports[_index];
+            USART_TypeDef *g_Uart_Ports[] = UARTS;
+            USART_TypeDef *port = g_Uart_Ports[_index];
 
-        if (isInFPutc)
-            return ch;
-        isInFPutc = true;
-        // 检查并打开串口
-        if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && _printf_sp == NULL)
-        {
-            _printf_sp = new SerialPort(port);
-            _printf_sp->Open();
-        }
+            if (isInFPutc)
+                return ch;
+            isInFPutc = true;
+            // 检查并打开串口
+            if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && _printf_sp == NULL)
+            {
+                _printf_sp = new SerialPort(port);
+                _printf_sp->Open();
+            }
 
-        _printf_sp->SendData((byte)ch);
+            _printf_sp->SendData((byte)ch);
 
-        isInFPutc = false;
+            isInFPutc = false;
+        #else 
+            /* 发送一个字节数据到USART1 */
+            USART_SendData(USART1, (uint8_t)ch);
+
+            /* 等待发送完毕 */
+            while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
+                ;
+        #endif 
         return ch;
     }
 }
