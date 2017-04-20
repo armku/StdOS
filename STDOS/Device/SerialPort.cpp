@@ -15,29 +15,32 @@ SerialPort::SerialPort()
     Init();
 }
 
-SerialPort::SerialPort(byte index, int baudRate, byte parity, byte dataBits, byte stopBits)
+//SerialPort::SerialPort(byte index, int baudRate, byte parity, byte dataBits, byte stopBits)
+//{
+//    Init();
+//    Init(index, baudRate, parity, dataBits, stopBits);
+//}
+SerialPort::SerialPort(COM index, int baudRate)
 {
-    Init();
-    Init(index, baudRate, parity, dataBits, stopBits);
+	
 }
+//SerialPort::SerialPort(USART_TypeDef *com, int baudRate, byte parity, byte dataBits, byte stopBits)
+//{
+//    assert_param(com);
+//    const USART_TypeDef *const g_Uart_Ports[] = UARTS;
+//    byte _index = 0xFF;
 
-SerialPort::SerialPort(USART_TypeDef *com, int baudRate, byte parity, byte dataBits, byte stopBits)
-{
-    assert_param(com);
-    const USART_TypeDef *const g_Uart_Ports[] = UARTS;
-    byte _index = 0xFF;
-
-    for (int i = 0; i < ArrayLength(g_Uart_Ports); i++)
-    {
-        if (g_Uart_Ports[i] == com)
-        {
-            _index = i;
-            break;
-        }
-    }
-    Init();
-    Init(_index, baudRate, parity, dataBits, stopBits);
-}
+//    for (int i = 0; i < ArrayLength(g_Uart_Ports); i++)
+//    {
+//        if (g_Uart_Ports[i] == com)
+//        {
+//            _index = i;
+//            break;
+//        }
+//    }
+//    Init();
+//    Init(_index, baudRate, parity, dataBits, stopBits);
+//}
 
 // 析构时自动关闭
 SerialPort::~SerialPort()
@@ -473,7 +476,7 @@ extern "C"
         // 检查并打开串口
         if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && _printf_sp == NULL)
         {
-            _printf_sp = new SerialPort(_index);
+            _printf_sp = new SerialPort(COM1);
             _printf_sp->Open();
         }
         _printf_sp->SendData((byte)ch);
@@ -491,10 +494,10 @@ SerialPort *SerialPort::GetMessagePort()
         {
             return NULL;
         }
-        USART_TypeDef *g_Uart_Ports[] = UARTS;
-        USART_TypeDef *port = g_Uart_Ports[_index];
+//        USART_TypeDef *g_Uart_Ports[] = UARTS;
+//        USART_TypeDef *port = g_Uart_Ports[_index];
 
-        _printf_sp = new SerialPort(port);
+        _printf_sp = new SerialPort(COM1);
         _printf_sp->Open();
     }
 
