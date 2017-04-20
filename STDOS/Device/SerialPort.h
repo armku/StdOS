@@ -1,91 +1,90 @@
 #ifndef __SerialPort_H__
-    #define __SerialPort_H__
+#define __SerialPort_H__
 
-    #include "Core\Queue.h"
-    #include "Port.h"
-    #include "Power.h"
-    #include "Net\ITransport.h"
-	    
-    // 串口类
-    class SerialPort: public ITransport, public Power
-    {
-        private:
-            friend class ComProxy;
-            int _baudRate;
-            byte _dataBits;
-            byte _parity;
-            byte _stopBits;
+#include "Core\Queue.h"
+#include "Port.h"
+#include "Power.h"
+#include "Net\ITransport.h"
 
-            void Init();
+// 串口类
+class SerialPort : public ITransport, public Power
+{
+private:
+	friend class ComProxy;
+	int		_baudRate;
+	byte	_dataBits;
+	byte	_parity;
+	byte	_stopBits;
 
-        public:
-            char Name[5]; // 名称。COMxx，后面1字节\0表示结束
-            byte Remap; // 重映射组
-            OutputPort *RS485; // RS485使能引脚
-            int Error; // 错误计数
-            int ByteTime; // 字节间隔，最小1ms
-            Pin Pins[2]; // Tx/Rx
-            Port *Ports[2]; // Tx/Rx
-            COM Index;
+	void Init();
 
-            void *State;
+public:
+	char 		Name[5];	// 名称。COMxx，后面1字节\0表示结束
+	byte		Remap;		// 重映射组
+	OutputPort* RS485;		// RS485使能引脚
+	int 		Error;		// 错误计数
+	int			ByteTime;	// 字节间隔，最小1ms
+	Pin			Pins[2];	// Tx/Rx
+	Port*		Ports[2];	// Tx/Rx
+	COM			Index;
 
-            // 收发缓冲区
-            Queue Tx;
-            Queue Rx;
-            SerialPort();
-            SerialPort(COM index, int baudRate = 0);
+	void*	State;
 
-            // 析构时自动关闭
-            virtual ~SerialPort();
+	// 收发缓冲区
+	Queue	Tx;
+	Queue	Rx;
 
-            void Set(COM index, int baudRate = 0);
-            void Set(byte dataBits, byte parity, byte stopBits);
+	SerialPort();
+	SerialPort(COM index, int baudRate = 0);
 
-            int SendData(byte data, int times = 3000);
+	// 析构时自动关闭
+	virtual ~SerialPort();
 
-            bool Flush(int times = 3000);
+	void Set(COM index, int baudRate = 0);
+	void Set(byte dataBits, byte parity, byte stopBits);
 
-            void SetBaudRate(int baudRate = 0);
+	int SendData(byte data, int times = 3000);
 
-            virtual void Register(TransportHandler handler, void *param = nullptr);
+	bool Flush(int times = 3000);
 
-            // 电源等级变更（如进入低功耗模式）时调用
-            virtual void ChangePower(int level);
+	void SetBaudRate(int baudRate = 0);
 
-            virtual String &ToStr(String &str)const
-            {
-                    return str + Name;
-            }
+	virtual void Register(TransportHandler handler, void* param = nullptr);
 
-            void OnTxHandler();
-            void OnRxHandler();
+	// 电源等级变更（如进入低功耗模式）时调用
+	virtual void ChangePower(int level);
 
-            static SerialPort *GetMessagePort();
+	virtual String& ToStr(String& str) const { return str + Name; }
 
-            #ifdef DEBUG
-                static void Test();
-            #endif 
+	void OnTxHandler();
+	void OnRxHandler();
 
-        protected:
-            virtual bool OnOpen();
-            virtual void OnClose();
+	static SerialPort* GetMessagePort();
 
-            virtual bool OnWrite(const Buffer &bs);
-            virtual uint OnRead(Buffer &bs);
+#ifdef DEBUG
+	static void Test();
+#endif
 
-        private:
-            static void OnHandler(ushort num, void *param);
-            void Set485(bool flag);
+protected:
+	virtual bool OnOpen();
+	virtual void OnClose();
 
-            void *_task;
-            uint _taskidRx;
-            void ReceiveTask();
+	virtual bool OnWrite(const Buffer& bs);
+	virtual uint OnRead(Buffer& bs);
 
-            void OnInit();
-            bool OnSet();
-            void OnOpen2();
-            void OnClose2();
-            void OnWrite2();
-    };
+private:
+	static void OnHandler(ushort num, void* param);
+	void Set485(bool flag);
+
+	void*	_task;
+	uint	_taskidRx;
+	void ReceiveTask();
+
+	void OnInit();
+	bool OnSet();
+	void OnOpen2();
+	void OnClose2();
+	void OnWrite2();
+};
+
 #endif
