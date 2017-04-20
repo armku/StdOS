@@ -97,7 +97,38 @@ void USART1_Config(void)
 	
 	USART_Cmd(USART1, ENABLE);
 }
-
+/// 配置USART1接收中断
+void NVIC_Configuration(void)
+{
+	NVIC_InitTypeDef NVIC_InitStructure; 
+	/* Configure the NVIC Preemption Priority Bits */  
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+	
+	/* Enable the USARTy Interrupt */
+	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;	 
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+}
+#ifdef __cplusplus
+    extern "C"
+    {
+    #endif
+/// 重定向c库函数printf到USART1
+int fputc1(int ch, FILE *f)
+{
+		/* 发送一个字节数据到USART1 */
+		USART_SendData(USART1, (uint8_t) ch);
+		
+		/* 等待发送完毕 */
+		while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);		
+	
+		return (ch);
+}
+#ifdef __cplusplus
+    }
+    #endif
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);
@@ -115,7 +146,8 @@ int main(void)
     sys.Init();
         #if DEBUG
             Sys.MessagePort = COM1;
-			//USART1_Config();			
+			//USART1_Config();	
+			//NVIC_Configuration();
             Sys.ShowInfo();
 
     //        WatchDog::Start(20000, 10000);
