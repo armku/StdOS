@@ -475,7 +475,7 @@ extern "C"
         // 检查并打开串口
         if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && _printf_sp == NULL)
         {
-            _printf_sp = new SerialPort(port);
+            _printf_sp = new SerialPort(_index);
             _printf_sp->Open();
         }
         _printf_sp->SendData((byte)ch);
