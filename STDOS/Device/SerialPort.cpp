@@ -62,28 +62,28 @@ void SerialPort::Init()
 }
 
 
-void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte stopBits)
-{
+//void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte stopBits)
+//{
 
-    USART_TypeDef *const g_Uart_Ports[] = UARTS;
-    _index = index;
-	this->Index=(COM)index;
-    assert_param(_index < ArrayLength(g_Uart_Ports));
+//    USART_TypeDef *const g_Uart_Ports[] = UARTS;
+//    _index = index;
+//	this->Index=(COM)index;
+//    assert_param(_index < ArrayLength(g_Uart_Ports));
 
-    _port = g_Uart_Ports[_index];
-    _baudRate = baudRate;
-    _parity = parity;
-    _dataBits = dataBits;
-    _stopBits = stopBits;
-    // 根据端口实际情况决定打开状态
-    if (_port->CR1 &USART_CR1_UE)
-        Opened = true;
-    // 设置名称
-    //Name = "COMx";
-    *(uint*)Name = *(uint*)"COMx";
-    Name[3] = '0' + _index + 1;
-    Name[4] = 0;
-}
+//    _port = g_Uart_Ports[_index];
+//    _baudRate = baudRate;
+//    _parity = parity;
+//    _dataBits = dataBits;
+//    _stopBits = stopBits;
+//    // 根据端口实际情况决定打开状态
+//    if (_port->CR1 &USART_CR1_UE)
+//        Opened = true;
+//    // 设置名称
+//    //Name = "COMx";
+//    *(uint*)Name = *(uint*)"COMx";
+//    Name[3] = '0' + _index + 1;
+//    Name[4] = 0;
+//}
 
 bool SerialPort::OnWrite(const Buffer &bs)
 {
