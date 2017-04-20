@@ -64,6 +64,7 @@ void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte
 
     USART_TypeDef *const g_Uart_Ports[] = UARTS;
     _index = index;
+	this->Index=(COM)index;
     assert_param(_index < ArrayLength(g_Uart_Ports));
 
     _port = g_Uart_Ports[_index];
@@ -286,15 +287,19 @@ void SerialPort::OnClose()
 // 发送单一字节数据
 int SerialPort::SendData(byte data, int times)
 {
+	//_port=USART1;
     while (USART_GetFlagStatus(_port, USART_FLAG_TXE) == RESET && --times > 0){}
-
+	//this->Index=COM1;
     //等待发送完毕
     if (times > 0)
     {
+		//if((this->Index>=0)&&(this->Index<5))
+		{
         //USART_SendData(_port, (ushort)data);
         USART_SendData(USART1, (ushort)data);
         while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
             ;
+		}
     }
     else
     {
