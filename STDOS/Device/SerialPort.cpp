@@ -99,7 +99,7 @@ uint SerialPort::OnRead(Buffer &bs)
 bool SerialPort::OnOpen()
 {
     Pin rx, tx;
-    GetPins(&tx, &rx);
+//    GetPins(&tx, &rx);
 
     debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
     #if COM_DEBUG
@@ -163,8 +163,8 @@ bool SerialPort::OnOpen()
     #endif 
 
     // 不要关调试口，否则杯具
-    if (_index != Sys.MessagePort)
-        USART_DeInit(_port);
+//    if (_index != Sys.MessagePort)
+//        USART_DeInit(_port);
     // USART_DeInit其实就是关闭时钟，这里有点多此一举。但为了安全起见，还是使用
 
     // 检查重映射
@@ -230,13 +230,13 @@ bool SerialPort::OnOpen()
     p.USART_WordLength = _dataBits;
     p.USART_StopBits = _stopBits;
     p.USART_Parity = _parity;
-    USART_Init(_port, &p);
+//    USART_Init(_port, &p);
 
-    USART_ITConfig(_port, USART_IT_RXNE, ENABLE); // 串口接收中断配置
+//    USART_ITConfig(_port, USART_IT_RXNE, ENABLE); // 串口接收中断配置
     // 初始化的时候会关闭所有中断，这里不需要单独关闭发送中断
     //USART_ITConfig(_port, USART_IT_TXE, DISABLE); // 不需要发送中断
 
-    USART_Cmd(_port, ENABLE); //使能串口
+//    USART_Cmd(_port, ENABLE); //使能串口
 
     if (RS485)
     {
@@ -263,9 +263,9 @@ void SerialPort::OnClose()
 
     Pin tx, rx;
 
-    GetPins(&tx, &rx);
+//    GetPins(&tx, &rx);
 
-    USART_DeInit(_port);
+//    USART_DeInit(_port);
 
     // 检查重映射
     #ifdef STM32F1XX
@@ -317,63 +317,63 @@ void SerialPort::ChangePower(int level){
 }
 
 // 向某个端口写入数据。如果size为0，则把data当作字符串，一直发送直到遇到\0为止
-bool SerialPort::OnWrite(const byte *buf, uint size)
-{
-    if (RS485)
-    {
-        *RS485 = true;
-    }
-    if (size > 0)
-    {
-        for (int i = 0; i < size; i++)
-        {
-            SendData(*buf++);
-        }
-    }
-    else
-    {
-        while (*buf)
-        {
-            SendData(*buf++);
-        }
-    }
+//bool SerialPort::OnWrite(const byte *buf, uint size)
+//{
+//    if (RS485)
+//    {
+//        *RS485 = true;
+//    }
+//    if (size > 0)
+//    {
+//        for (int i = 0; i < size; i++)
+//        {
+//            SendData(*buf++);
+//        }
+//    }
+//    else
+//    {
+//        while (*buf)
+//        {
+//            SendData(*buf++);
+//        }
+//    }
 
-    if (RS485)
-    {
-        Sys.Delay(200);
-        *RS485 = false;
-    }
-    return true;
-}
+//    if (RS485)
+//    {
+//        Sys.Delay(200);
+//        *RS485 = false;
+//    }
+//    return true;
+//}
 
 
 // 从某个端口读取数据
-uint SerialPort::OnRead(byte *buf, uint size)
-{
-    // 在100ms内接收数据
-    uint usTimeout = 100;
-    UInt64 us = Time.Current() + usTimeout;
+//uint SerialPort::OnRead(byte *buf, uint size)
+//{
+//    // 在100ms内接收数据
+//    uint usTimeout = 100;
+//    UInt64 us = Time.Current() + usTimeout;
 
-    uint count = 0; // 收到的字节数    
-    while (count < size && Time.Current() < us)
-    {
-        // 轮询接收寄存器，收到数据则放入缓冲区
-        if (USART_GetFlagStatus(_port, USART_FLAG_RXNE) != RESET)
-        {
-            *buf++ = (byte)USART_ReceiveData(_port);
-            count++;
-            us = Time.Current() + usTimeout;
-        }
-    }
-    return count;
-}
+//    uint count = 0; // 收到的字节数    
+//    while (count < size && Time.Current() < us)
+//    {
+//        // 轮询接收寄存器，收到数据则放入缓冲区
+//        if (USART_GetFlagStatus(_port, USART_FLAG_RXNE) != RESET)
+//        {
+//            *buf++ = (byte)USART_ReceiveData(_port);
+//            count++;
+//            us = Time.Current() + usTimeout;
+//        }
+//    }
+//    return count;
+//}
 
 // 刷出某个端口中的数据
 bool SerialPort::Flush(int times)
 {
     //uint times = 3000;
-    while (USART_GetFlagStatus(_port, USART_FLAG_TXE) == RESET && --times > 0)
-        ;
+//    while (USART_GetFlagStatus(_port, USART_FLAG_TXE) == RESET && --times > 0)
+//        ;
     //等待发送完毕
     return times > 0;
 }
@@ -435,22 +435,22 @@ void SerialPort::Register(TransportHandler handler, void *param)
 #define UART_PINS_FULLREMAP {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}   //需要整理
 
 // 获取引脚
-void SerialPort::GetPins(Pin *txPin, Pin *rxPin)
-{
+//void SerialPort::GetPins(Pin *txPin, Pin *rxPin)
+//{
 
-    *rxPin =  *txPin = P0;
+//    *rxPin =  *txPin = P0;
 
-    const Pin g_Uart_Pins[] = UART_PINS;
-    const Pin g_Uart_Pins_Map[] = UART_PINS_FULLREMAP;
-    const Pin *p = g_Uart_Pins;
-    if (Remap)
-    {
-        p = g_Uart_Pins_Map;
-    }
-    int n = _index << 1;
-    *txPin = p[n];
-    *rxPin = p[n + 1];
-}
+//    const Pin g_Uart_Pins[] = UART_PINS;
+//    const Pin g_Uart_Pins_Map[] = UART_PINS_FULLREMAP;
+//    const Pin *p = g_Uart_Pins;
+//    if (Remap)
+//    {
+//        p = g_Uart_Pins_Map;
+//    }
+//    int n = _index << 1;
+//    *txPin = p[n];
+//    *rxPin = p[n + 1];
+//}
 
 SerialPort *_printf_sp;
 bool isInFPutc; //正在串口输出
