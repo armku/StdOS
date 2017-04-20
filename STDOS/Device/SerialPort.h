@@ -101,7 +101,7 @@
 		
 		//以下为过期需要整理内容
 		private:
-            byte _index;
+//            byte _index;
 //            USART_TypeDef *_port;
             AlternatePort _tx;
             #if defined(STM32F0) || defined(STM32F4)

@@ -54,7 +54,7 @@ SerialPort::~SerialPort()
 
 void SerialPort::Init()
 {
-    _index = 0xFF;
+//    _index = 0xFF;
     RS485 = NULL;
     Error = 0;
 
@@ -101,49 +101,49 @@ bool SerialPort::OnOpen()
     Pin rx, tx;
 //    GetPins(&tx, &rx);
 
-    debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
+//    debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
     #if COM_DEBUG
-        if (_index != Sys.MessagePort)
-        {
-            ShowLog: debug_printf("Serial%d Open(%d", _index + 1, _baudRate);
-            switch (_parity)
-            {
-                case USART_Parity_No:
-                    debug_printf(", Parity_None");
-                    break;
-                case USART_Parity_Even:
-                    debug_printf(", Parity_Even");
-                    break;
-                case USART_Parity_Odd:
-                    debug_printf(", Parity_Odd");
-                    break;
-            }
-            switch (_dataBits)
-            {
-                case USART_WordLength_8b:
-                    debug_printf(", WordLength_8b");
-                    break;
-                case USART_WordLength_9b:
-                    debug_printf(", WordLength_9b");
-                    break;
-            }
-            switch (_stopBits)
-            {
-                #ifdef STM32F10X
-                    case USART_StopBits_0_5:
-                        debug_printf(", StopBits_0_5");
-                        break;
-                    #endif 
-                case USART_StopBits_1:
-                    debug_printf(", StopBits_1");
-                    break;
-                case USART_StopBits_1_5:
-                    debug_printf(", StopBits_1_5");
-                    break;
-                case USART_StopBits_2:
-                    debug_printf(", StopBits_2");
-                    break;
-            }
+//        if (_index != Sys.MessagePort)
+//        {
+//            ShowLog: debug_printf("Serial%d Open(%d", _index + 1, _baudRate);
+//            switch (_parity)
+//            {
+//                case USART_Parity_No:
+//                    debug_printf(", Parity_None");
+//                    break;
+//                case USART_Parity_Even:
+//                    debug_printf(", Parity_Even");
+//                    break;
+//                case USART_Parity_Odd:
+//                    debug_printf(", Parity_Odd");
+//                    break;
+//            }
+//            switch (_dataBits)
+//            {
+//                case USART_WordLength_8b:
+//                    debug_printf(", WordLength_8b");
+//                    break;
+//                case USART_WordLength_9b:
+//                    debug_printf(", WordLength_9b");
+//                    break;
+//            }
+//            switch (_stopBits)
+//            {
+//                #ifdef STM32F10X
+//                    case USART_StopBits_0_5:
+//                        debug_printf(", StopBits_0_5");
+//                        break;
+//                    #endif 
+//                case USART_StopBits_1:
+//                    debug_printf(", StopBits_1");
+//                    break;
+//                case USART_StopBits_1_5:
+//                    debug_printf(", StopBits_1_5");
+//                    break;
+//                case USART_StopBits_2:
+//                    debug_printf(", StopBits_2");
+//                    break;
+//            }
             debug_printf(") TX=P%c%d RX=P%c%d\r\n", _PIN_NAME(tx), _PIN_NAME(rx));
 
             // 有可能是打开串口完成以后跳回来
@@ -171,46 +171,46 @@ bool SerialPort::OnOpen()
     #ifdef STM32F1XX
         if (Remap)
         {
-            switch (_index)
-            {
-                case 0:
-                    AFIO->MAPR |= AFIO_MAPR_USART1_REMAP;
-                    break;
-                case 1:
-                    AFIO->MAPR |= AFIO_MAPR_USART2_REMAP;
-                    break;
-                case 2:
-                    AFIO->MAPR |= AFIO_MAPR_USART3_REMAP_FULLREMAP;
-                    break;
-            }
+//            switch (_index)
+//            {
+//                case 0:
+//                    AFIO->MAPR |= AFIO_MAPR_USART1_REMAP;
+//                    break;
+//                case 1:
+//                    AFIO->MAPR |= AFIO_MAPR_USART2_REMAP;
+//                    break;
+//                case 2:
+//                    AFIO->MAPR |= AFIO_MAPR_USART3_REMAP_FULLREMAP;
+//                    break;
+//            }
         }
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
     #endif 
 
     // 打开 UART 时钟。必须先打开串口时钟，才配置引脚
     #ifdef STM32F0XX
-        switch (_index)
-        {
-            case COM1:
-                RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
-                break; //开启时钟
-            case COM2:
-                RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
-                break;
-            default:
-                break;
-        }
+//        switch (_index)
+//        {
+//            case COM1:
+//                RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+//                break; //开启时钟
+//            case COM2:
+//                RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+//                break;
+//            default:
+//                break;
+//        }
     #else 
-        if (_index)
-        {
-            // COM2-5 on APB1
-            RCC->APB1ENR |= RCC_APB1ENR_USART2EN >> 1 << _index;
-        }
-        else
-        {
-            // COM1 on APB2
-            RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
-        }
+//        if (_index)
+//        {
+//            // COM2-5 on APB1
+//            RCC->APB1ENR |= RCC_APB1ENR_USART2EN >> 1 << _index;
+//        }
+//        else
+//        {
+//            // COM1 on APB2
+//            RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
+//        }
     #endif 
 
     #ifdef STM32F0
@@ -259,7 +259,7 @@ bool SerialPort::OnOpen()
 // 关闭端口
 void SerialPort::OnClose()
 {
-    debug_printf("~Serial%d Close\r\n", _index + 1);
+//    debug_printf("~Serial%d Close\r\n", _index + 1);
 
     Pin tx, rx;
 
@@ -271,18 +271,18 @@ void SerialPort::OnClose()
     #ifdef STM32F1XX
         if (Remap)
         {
-            switch (_index)
-            {
-                case 0:
-                    AFIO->MAPR &= ~AFIO_MAPR_USART1_REMAP;
-                    break;
-                case 1:
-                    AFIO->MAPR &= ~AFIO_MAPR_USART2_REMAP;
-                    break;
-                case 2:
-                    AFIO->MAPR &= ~AFIO_MAPR_USART3_REMAP_FULLREMAP;
-                    break;
-            }
+//            switch (_index)
+//            {
+//                case 0:
+//                    AFIO->MAPR &= ~AFIO_MAPR_USART1_REMAP;
+//                    break;
+//                case 1:
+//                    AFIO->MAPR &= ~AFIO_MAPR_USART2_REMAP;
+//                    break;
+//                case 2:
+//                    AFIO->MAPR &= ~AFIO_MAPR_USART3_REMAP_FULLREMAP;
+//                    break;
+//            }
         }
     #endif 
 }
@@ -389,15 +389,15 @@ void SerialPort::Register(TransportHandler handler, void *param)
     ITransport::Register(handler, param);
 
     const byte irqs[] = UART_IRQs;
-    byte irq = irqs[_index];
+//    byte irq = irqs[_index];
     if (handler)
     {
-        Interrupt.SetPriority(irq, 1);
+//        Interrupt.SetPriority(irq, 1);
 //        Interrupt.Activate(irq, SerialPort::OnUsartReceive, this);
     }
     else
     {
-        Interrupt.Deactivate(irq);
+//        Interrupt.Deactivate(irq);
     }
 }
 
