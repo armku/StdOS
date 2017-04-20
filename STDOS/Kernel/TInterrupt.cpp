@@ -1,5 +1,6 @@
 #include "SerialPort.h"
 #include "TInterrupt.h"
+#include "stm32f10x.h"
 
 TInterrupt Interrupt;
 

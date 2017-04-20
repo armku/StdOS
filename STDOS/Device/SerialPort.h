@@ -6,8 +6,6 @@
     #include "Power.h"
     #include "Net\ITransport.h"
 	    
-    #include "stm32f10x.h"
-
     // ´®¿ÚÀà
     class SerialPort: public ITransport, public Power
     {
