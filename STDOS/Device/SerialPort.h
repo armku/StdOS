@@ -91,7 +91,16 @@
             void OnOpen2();
             void OnClose2();
             void OnWrite2();
-        private:
+        
+		
+		
+		
+		
+		
+		
+		
+		//以下为过期需要整理内容
+		private:
             byte _index;
             USART_TypeDef *_port;
             AlternatePort _tx;
