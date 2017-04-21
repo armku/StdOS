@@ -153,54 +153,53 @@ bool SerialPort::OnOpen()
     GetPins(&tx, &rx, this->Index);
 
     //    debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
-    #if COM_DEBUG
-        if (_index != Sys.MessagePort)
-        {
-            ShowLog: debug_printf("Serial%d Open(%d", _index + 1, _baudRate);
-            switch (_parity)
-            {
-                case USART_Parity_No:
-                    debug_printf(", Parity_None");
-                    break;
-                case USART_Parity_Even:
-                    debug_printf(", Parity_Even");
-                    break;
-                case USART_Parity_Odd:
-                    debug_printf(", Parity_Odd");
-                    break;
-            }
-            switch (_dataBits)
-            {
-                case USART_WordLength_8b:
-                    debug_printf(", WordLength_8b");
-                    break;
-                case USART_WordLength_9b:
-                    debug_printf(", WordLength_9b");
-                    break;
-            }
-            switch (_stopBits)
-            {
-                #ifdef STM32F10X
-                    case USART_StopBits_0_5:
-                        debug_printf(", StopBits_0_5");
-                        break;
-                    #endif 
-                case USART_StopBits_1:
-                    debug_printf(", StopBits_1");
-                    break;
-                case USART_StopBits_1_5:
-                    debug_printf(", StopBits_1_5");
-                    break;
-                case USART_StopBits_2:
-                    debug_printf(", StopBits_2");
-                    break;
-            }
-            debug_printf(") TX=P%c%d RX=P%c%d\r\n", _PIN_NAME(tx), _PIN_NAME(rx));
+    #if COM_DEBUG        
 
-            // 有可能是打开串口完成以后跳回来
-            if (Opened)
-                return true;
+        ShowLog: debug_printf("Serial%d Open(%d", _index + 1, _baudRate);
+        switch (_parity)
+        {
+            case USART_Parity_No:
+                debug_printf(", Parity_None");
+                break;
+            case USART_Parity_Even:
+                debug_printf(", Parity_Even");
+                break;
+            case USART_Parity_Odd:
+                debug_printf(", Parity_Odd");
+                break;
         }
+        switch (_dataBits)
+        {
+            case USART_WordLength_8b:
+                debug_printf(", WordLength_8b");
+                break;
+            case USART_WordLength_9b:
+                debug_printf(", WordLength_9b");
+                break;
+        }
+        switch (_stopBits)
+        {
+            #ifdef STM32F10X
+                case USART_StopBits_0_5:
+                    debug_printf(", StopBits_0_5");
+                    break;
+                #endif 
+            case USART_StopBits_1:
+                debug_printf(", StopBits_1");
+                break;
+            case USART_StopBits_1_5:
+                debug_printf(", StopBits_1_5");
+                break;
+            case USART_StopBits_2:
+                debug_printf(", StopBits_2");
+                break;
+        }
+        debug_printf(") TX=P%c%d RX=P%c%d\r\n", _PIN_NAME(tx), _PIN_NAME(rx));
+
+        // 有可能是打开串口完成以后跳回来
+        if (Opened)
+            return true;
+
     #endif 
 
     USART_InitTypeDef p;
