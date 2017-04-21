@@ -9,8 +9,8 @@
 #define STM32F1XX
 
 #define UARTS {USART1,USART2,USART3,UART4,UART5}
-		
-		//以下为过期需要整理内容
+
+//以下为过期需要整理内容
 //		private:
 //            byte _index;
 //            USART_TypeDef *_port;
@@ -22,14 +22,14 @@
 //            #endif 
 //        public:
 //            SerialPort(byte index, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);
-            //SerialPort(USART_TypeDef *com, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);            
+//SerialPort(USART_TypeDef *com, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);            
 //            void Init(byte index, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);                     
 //            void GetPins(Pin *txPin, Pin *rxPin);            
 //        protected:            
 //            virtual bool OnWrite(const byte *buf, uint size);
 //            virtual uint OnRead(byte *buf, uint size);
 //        public:
-            //原始:private
+//原始:private
 //            static void OnUsartReceive(ushort num, void *param);
 SerialPort::SerialPort()
 {
@@ -38,16 +38,17 @@ SerialPort::SerialPort()
 
 SerialPort::SerialPort(COM index, int baudRate)
 {
-	this->Index=index;
-	if(baudRate<=0)
-	{
-		this->_baudRate=115200;
-	}
-	else
-	{
-		this->_baudRate=baudRate;
-	}
+    this->Index = index;
+    if (baudRate <= 0)
+    {
+        this->_baudRate = 115200;
+    }
+    else
+    {
+        this->_baudRate = baudRate;
+    }
 }
+
 //SerialPort::SerialPort(USART_TypeDef *com, int baudRate, byte parity, byte dataBits, byte stopBits)
 //{
 //    assert_param(com);
@@ -78,7 +79,7 @@ SerialPort::~SerialPort()
 
 void SerialPort::Init()
 {
-//    _index = 0xFF;
+    //    _index = 0xFF;
     RS485 = NULL;
     Error = 0;
 
@@ -123,62 +124,62 @@ uint SerialPort::OnRead(Buffer &bs)
 bool SerialPort::OnOpen()
 {
     Pin rx, tx;
-//    GetPins(&tx, &rx);
+    //    GetPins(&tx, &rx);
 
-//    debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
+    //    debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
     #if COM_DEBUG
-//        if (_index != Sys.MessagePort)
-//        {
-//            ShowLog: debug_printf("Serial%d Open(%d", _index + 1, _baudRate);
-//            switch (_parity)
-//            {
-//                case USART_Parity_No:
-//                    debug_printf(", Parity_None");
-//                    break;
-//                case USART_Parity_Even:
-//                    debug_printf(", Parity_Even");
-//                    break;
-//                case USART_Parity_Odd:
-//                    debug_printf(", Parity_Odd");
-//                    break;
-//            }
-//            switch (_dataBits)
-//            {
-//                case USART_WordLength_8b:
-//                    debug_printf(", WordLength_8b");
-//                    break;
-//                case USART_WordLength_9b:
-//                    debug_printf(", WordLength_9b");
-//                    break;
-//            }
-//            switch (_stopBits)
-//            {
-//                #ifdef STM32F10X
-//                    case USART_StopBits_0_5:
-//                        debug_printf(", StopBits_0_5");
-//                        break;
-//                    #endif 
-//                case USART_StopBits_1:
-//                    debug_printf(", StopBits_1");
-//                    break;
-//                case USART_StopBits_1_5:
-//                    debug_printf(", StopBits_1_5");
-//                    break;
-//                case USART_StopBits_2:
-//                    debug_printf(", StopBits_2");
-//                    break;
-//            }
-            debug_printf(") TX=P%c%d RX=P%c%d\r\n", _PIN_NAME(tx), _PIN_NAME(rx));
+        //        if (_index != Sys.MessagePort)
+        //        {
+        //            ShowLog: debug_printf("Serial%d Open(%d", _index + 1, _baudRate);
+        //            switch (_parity)
+        //            {
+        //                case USART_Parity_No:
+        //                    debug_printf(", Parity_None");
+        //                    break;
+        //                case USART_Parity_Even:
+        //                    debug_printf(", Parity_Even");
+        //                    break;
+        //                case USART_Parity_Odd:
+        //                    debug_printf(", Parity_Odd");
+        //                    break;
+        //            }
+        //            switch (_dataBits)
+        //            {
+        //                case USART_WordLength_8b:
+        //                    debug_printf(", WordLength_8b");
+        //                    break;
+        //                case USART_WordLength_9b:
+        //                    debug_printf(", WordLength_9b");
+        //                    break;
+        //            }
+        //            switch (_stopBits)
+        //            {
+        //                #ifdef STM32F10X
+        //                    case USART_StopBits_0_5:
+        //                        debug_printf(", StopBits_0_5");
+        //                        break;
+        //                    #endif 
+        //                case USART_StopBits_1:
+        //                    debug_printf(", StopBits_1");
+        //                    break;
+        //                case USART_StopBits_1_5:
+        //                    debug_printf(", StopBits_1_5");
+        //                    break;
+        //                case USART_StopBits_2:
+        //                    debug_printf(", StopBits_2");
+        //                    break;
+        //            }
+        debug_printf(") TX=P%c%d RX=P%c%d\r\n", _PIN_NAME(tx), _PIN_NAME(rx));
 
-            // 有可能是打开串口完成以后跳回来
-            if (Opened)
-                return true;
-        }
-    #endif 
+        // 有可能是打开串口完成以后跳回来
+        if (Opened)
+            return true;
+    }
+#endif 
 
-    USART_InitTypeDef p;
+USART_InitTypeDef p;
 
-    //串口引脚初始化
+//串口引脚初始化
 //    _tx.Set(tx);
 //    #if defined(STM32F0) || defined(STM32F4)
 //        _rx.Set(rx);
@@ -186,127 +187,127 @@ bool SerialPort::OnOpen()
 //        _rx.Set(rx);
 //    #endif 
 
-    // 不要关调试口，否则杯具
+// 不要关调试口，否则杯具
 //    if (_index != Sys.MessagePort)
 //        USART_DeInit(_port);
-    // USART_DeInit其实就是关闭时钟，这里有点多此一举。但为了安全起见，还是使用
+// USART_DeInit其实就是关闭时钟，这里有点多此一举。但为了安全起见，还是使用
 
-    // 检查重映射
-    #ifdef STM32F1XX
-        if (Remap)
-        {
-//            switch (_index)
-//            {
-//                case 0:
-//                    AFIO->MAPR |= AFIO_MAPR_USART1_REMAP;
-//                    break;
-//                case 1:
-//                    AFIO->MAPR |= AFIO_MAPR_USART2_REMAP;
-//                    break;
-//                case 2:
-//                    AFIO->MAPR |= AFIO_MAPR_USART3_REMAP_FULLREMAP;
-//                    break;
-//            }
-        }
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-    #endif 
+// 检查重映射
+#ifdef STM32F1XX
+    if (Remap)
+    {
+        //            switch (_index)
+        //            {
+        //                case 0:
+        //                    AFIO->MAPR |= AFIO_MAPR_USART1_REMAP;
+        //                    break;
+        //                case 1:
+        //                    AFIO->MAPR |= AFIO_MAPR_USART2_REMAP;
+        //                    break;
+        //                case 2:
+        //                    AFIO->MAPR |= AFIO_MAPR_USART3_REMAP_FULLREMAP;
+        //                    break;
+        //            }
+    }
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+#endif 
 
-    // 打开 UART 时钟。必须先打开串口时钟，才配置引脚
-    #ifdef STM32F0XX
-//        switch (_index)
-//        {
-//            case COM1:
-//                RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
-//                break; //开启时钟
-//            case COM2:
-//                RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
-//                break;
-//            default:
-//                break;
-//        }
-    #else 
-//        if (_index)
-//        {
-//            // COM2-5 on APB1
-//            RCC->APB1ENR |= RCC_APB1ENR_USART2EN >> 1 << _index;
-//        }
-//        else
-//        {
-//            // COM1 on APB2
-//            RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
-//        }
-    #endif 
+// 打开 UART 时钟。必须先打开串口时钟，才配置引脚
+#ifdef STM32F0XX
+    //        switch (_index)
+    //        {
+    //            case COM1:
+    //                RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+    //                break; //开启时钟
+    //            case COM2:
+    //                RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+    //                break;
+    //            default:
+    //                break;
+    //        }
+#else 
+    //        if (_index)
+    //        {
+    //            // COM2-5 on APB1
+    //            RCC->APB1ENR |= RCC_APB1ENR_USART2EN >> 1 << _index;
+    //        }
+    //        else
+    //        {
+    //            // COM1 on APB2
+    //            RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
+    //        }
+#endif 
 
-    #ifdef STM32F0
-        GPIO_PinAFConfig(_GROUP(tx), _PIN(tx), GPIO_AF_1); //将IO口映射为USART接口
-        GPIO_PinAFConfig(_GROUP(rx), _PIN(rx), GPIO_AF_1);
-    #elif defined(STM32F4)
-        const byte afs[] = 
-        {
-            GPIO_AF_USART1, GPIO_AF_USART2, GPIO_AF_USART3, GPIO_AF_UART4, GPIO_AF_UART5, GPIO_AF_USART6, GPIO_AF_UART7, GPIO_AF_UART8
-        };
-        GPIO_PinAFConfig(_GROUP(tx), _PIN(tx), afs[_index]);
-        GPIO_PinAFConfig(_GROUP(rx), _PIN(rx), afs[_index]);
-    #endif 
+#ifdef STM32F0
+    GPIO_PinAFConfig(_GROUP(tx), _PIN(tx), GPIO_AF_1); //将IO口映射为USART接口
+    GPIO_PinAFConfig(_GROUP(rx), _PIN(rx), GPIO_AF_1);
+#elif defined(STM32F4)
+    const byte afs[] = 
+    {
+        GPIO_AF_USART1, GPIO_AF_USART2, GPIO_AF_USART3, GPIO_AF_UART4, GPIO_AF_UART5, GPIO_AF_USART6, GPIO_AF_UART7, GPIO_AF_UART8
+    };
+    GPIO_PinAFConfig(_GROUP(tx), _PIN(tx), afs[_index]);
+    GPIO_PinAFConfig(_GROUP(rx), _PIN(rx), afs[_index]);
+#endif 
 
-    USART_StructInit(&p);
-    p.USART_BaudRate = _baudRate;
-    p.USART_WordLength = _dataBits;
-    p.USART_StopBits = _stopBits;
-    p.USART_Parity = _parity;
+USART_StructInit(&p);
+p.USART_BaudRate = _baudRate;
+p.USART_WordLength = _dataBits;
+p.USART_StopBits = _stopBits;
+p.USART_Parity = _parity;
 //    USART_Init(_port, &p);
 
 //    USART_ITConfig(_port, USART_IT_RXNE, ENABLE); // 串口接收中断配置
-    // 初始化的时候会关闭所有中断，这里不需要单独关闭发送中断
-    //USART_ITConfig(_port, USART_IT_TXE, DISABLE); // 不需要发送中断
+// 初始化的时候会关闭所有中断，这里不需要单独关闭发送中断
+//USART_ITConfig(_port, USART_IT_TXE, DISABLE); // 不需要发送中断
 
 //    USART_Cmd(_port, ENABLE); //使能串口
 
-    if (RS485)
+if (RS485)
+{
+    *RS485 = false;
+}
+
+//Opened = true;    
+#if COM_DEBUG
+    if (_index == Sys.MessagePort)
     {
-        *RS485 = false;
+        // 提前设置为已打开端口，ShowLog里面需要判断
+        Opened = true;
+        goto ShowLog;
     }
+#endif 
 
-    //Opened = true;    
-    #if COM_DEBUG
-        if (_index == Sys.MessagePort)
-        {
-            // 提前设置为已打开端口，ShowLog里面需要判断
-            Opened = true;
-            goto ShowLog;
-        }
-    #endif 
-
-    return true;
+return true;
 }
 
 // 关闭端口
 void SerialPort::OnClose()
 {
-//    debug_printf("~Serial%d Close\r\n", _index + 1);
+    //    debug_printf("~Serial%d Close\r\n", _index + 1);
 
     Pin tx, rx;
 
-//    GetPins(&tx, &rx);
+    //    GetPins(&tx, &rx);
 
-//    USART_DeInit(_port);
+    //    USART_DeInit(_port);
 
     // 检查重映射
     #ifdef STM32F1XX
         if (Remap)
         {
-//            switch (_index)
-//            {
-//                case 0:
-//                    AFIO->MAPR &= ~AFIO_MAPR_USART1_REMAP;
-//                    break;
-//                case 1:
-//                    AFIO->MAPR &= ~AFIO_MAPR_USART2_REMAP;
-//                    break;
-//                case 2:
-//                    AFIO->MAPR &= ~AFIO_MAPR_USART3_REMAP_FULLREMAP;
-//                    break;
-//            }
+            //            switch (_index)
+            //            {
+            //                case 0:
+            //                    AFIO->MAPR &= ~AFIO_MAPR_USART1_REMAP;
+            //                    break;
+            //                case 1:
+            //                    AFIO->MAPR &= ~AFIO_MAPR_USART2_REMAP;
+            //                    break;
+            //                case 2:
+            //                    AFIO->MAPR &= ~AFIO_MAPR_USART3_REMAP_FULLREMAP;
+            //                    break;
+            //            }
         }
     #endif 
 }
@@ -314,22 +315,61 @@ void SerialPort::OnClose()
 // 发送单一字节数据
 int SerialPort::SendData(byte data, int times)
 {
-	USART_TypeDef *const g_Uart_Ports[] = UARTS;
-	COM cc=COM1;
-	//_port=USART1;
-    while (USART_GetFlagStatus(g_Uart_Ports[cc], USART_FLAG_TXE) == RESET && --times > 0){}
-	//this->Index=COM1;
+    USART_TypeDef *const g_Uart_Ports[] = UARTS;
+    switch (this->Index)
+    {
+        case COM1:
+            while (USART_GetFlagStatus(g_Uart_Ports[0], USART_FLAG_TXE) == RESET && --times > 0){}
+            break;
+        case COM2:
+            while (USART_GetFlagStatus(g_Uart_Ports[1], USART_FLAG_TXE) == RESET && --times > 0){}
+            break;
+        case COM3:
+            while (USART_GetFlagStatus(g_Uart_Ports[2], USART_FLAG_TXE) == RESET && --times > 0){}
+            break;
+        case COM4:
+            while (USART_GetFlagStatus(g_Uart_Ports[3], USART_FLAG_TXE) == RESET && --times > 0){}
+            break;
+        case COM5:
+            while (USART_GetFlagStatus(g_Uart_Ports[4], USART_FLAG_TXE) == RESET && --times > 0){}
+            break;
+        default:
+			while (USART_GetFlagStatus(g_Uart_Ports[0], USART_FLAG_TXE) == RESET && --times > 0){}
+            break;
+    }
+    //this->Index=COM1;
     //等待发送完毕
     if (times > 0)
     {
-		
-		//this->Index=COM1;
-		int aa=this->Index;
-		//this->Index=this->Index;
-		//if((this->Index>=0)&&(this->Index<5))
-		{        
-        USART_SendData(g_Uart_Ports[cc], (ushort)data);
-		}
+
+        //this->Index=COM1;
+        int aa = this->Index;
+        //this->Index=this->Index;
+        //if((this->Index>=0)&&(this->Index<5))
+        {
+            switch (this->Index)
+            {
+                case COM1:
+                    USART_SendData(g_Uart_Ports[0], (ushort)data);
+                    break;
+                case COM2:
+                    USART_SendData(g_Uart_Ports[1], (ushort)data);
+                    break;
+                case COM3:
+                    USART_SendData(g_Uart_Ports[2], (ushort)data);
+                    break;
+                case COM4:
+                    USART_SendData(g_Uart_Ports[3], (ushort)data);
+                    break;
+                case COM5:
+                    USART_SendData(g_Uart_Ports[4], (ushort)data);
+                    break;
+                default:
+                    USART_SendData(g_Uart_Ports[0], (ushort)data);
+                    break;
+            }
+
+        }
     }
     else
     {
@@ -398,8 +438,8 @@ void SerialPort::ChangePower(int level){
 bool SerialPort::Flush(int times)
 {
     //uint times = 3000;
-//    while (USART_GetFlagStatus(_port, USART_FLAG_TXE) == RESET && --times > 0)
-//        ;
+    //    while (USART_GetFlagStatus(_port, USART_FLAG_TXE) == RESET && --times > 0)
+    //        ;
     //等待发送完毕
     return times > 0;
 }
@@ -415,15 +455,15 @@ void SerialPort::Register(TransportHandler handler, void *param)
     ITransport::Register(handler, param);
 
     const byte irqs[] = UART_IRQs;
-//    byte irq = irqs[_index];
+    //    byte irq = irqs[_index];
     if (handler)
     {
-//        Interrupt.SetPriority(irq, 1);
-//        Interrupt.Activate(irq, SerialPort::OnUsartReceive, this);
+        //        Interrupt.SetPriority(irq, 1);
+        //        Interrupt.Activate(irq, SerialPort::OnUsartReceive, this);
     }
     else
     {
-//        Interrupt.Deactivate(irq);
+        //        Interrupt.Deactivate(irq);
     }
 }
 
@@ -520,8 +560,8 @@ SerialPort *SerialPort::GetMessagePort()
         {
             return NULL;
         }
-//        USART_TypeDef *g_Uart_Ports[] = UARTS;
-//        USART_TypeDef *port = g_Uart_Ports[_index];
+        //        USART_TypeDef *g_Uart_Ports[] = UARTS;
+        //        USART_TypeDef *port = g_Uart_Ports[_index];
 
         _printf_sp = new SerialPort(COM1);
         _printf_sp->Open();
