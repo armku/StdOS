@@ -365,7 +365,7 @@ int SerialPort::SendData(byte data, int times)
                     USART_SendData(g_Uart_Ports[4], (ushort)data);
                     break;
                 default:
-                    USART_SendData(g_Uart_Ports[0], (ushort)data);
+					//USART_SendData(g_Uart_Ports[0], (ushort)data);
                     break;
             }
 
@@ -540,7 +540,8 @@ extern "C"
         isInFPutc = true;
 
         // 检查并打开串口
-        if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && _printf_sp == NULL)
+        //if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && _printf_sp == NULL)
+		if ( _printf_sp == NULL)
         {
             _printf_sp = new SerialPort(COM1);
             _printf_sp->Open();
