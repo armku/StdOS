@@ -340,8 +340,6 @@ int SerialPort::SendData(byte data, int times)
     //µÈ´ý·¢ËÍÍê±Ï
     if (times > 0)
     {
-
-        int aa = this->Index;
         {
             switch (this->Index)
             {
@@ -364,7 +362,6 @@ int SerialPort::SendData(byte data, int times)
 					//USART_SendData(g_Uart_Ports[0], (ushort)data);
                     break;
             }
-
         }
     }
     else
@@ -374,7 +371,8 @@ int SerialPort::SendData(byte data, int times)
     return 0;
 }
 
-void SerialPort::ChangePower(int level){
+void SerialPort::ChangePower(int level)
+{
 
 }
 
@@ -524,12 +522,8 @@ extern "C"
         //        if (!Sys.Inited)
         //            return ch;
 
-        int _index = Sys.MessagePort;
-        if (_index == COM_NONE)
+        if (Sys.MessagePort == COM_NONE)
             return ch;
-
-        USART_TypeDef *g_Uart_Ports[] = UARTS;
-        USART_TypeDef *port = g_Uart_Ports[_index];
 
         if (isInFPutc)
             return ch;
@@ -539,7 +533,7 @@ extern "C"
         //if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && _printf_sp == NULL)
 		if ( _printf_sp == NULL)
         {
-            _printf_sp = new SerialPort(COM1);
+            _printf_sp = new SerialPort(COM(Sys.MessagePort));
             _printf_sp->Open();
         }
         _printf_sp->SendData((byte)ch);
@@ -552,15 +546,11 @@ SerialPort *SerialPort::GetMessagePort()
 {
     if (!_printf_sp)
     {
-        int _index = Sys.MessagePort;
-        if (_index == COM_NONE)
+        if (Sys.MessagePort == COM_NONE)
         {
             return NULL;
-        }
-        //        USART_TypeDef *g_Uart_Ports[] = UARTS;
-        //        USART_TypeDef *port = g_Uart_Ports[_index];
-
-        _printf_sp = new SerialPort(COM1);
+        }        
+        _printf_sp = new SerialPort(COM(Sys.MessagePort));
         _printf_sp->Open();
     }
 
