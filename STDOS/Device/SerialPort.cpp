@@ -334,18 +334,14 @@ int SerialPort::SendData(byte data, int times)
             while (USART_GetFlagStatus(g_Uart_Ports[4], USART_FLAG_TXE) == RESET && --times > 0){}
             break;
         default:
-			while (USART_GetFlagStatus(g_Uart_Ports[0], USART_FLAG_TXE) == RESET && --times > 0){}
+			//while (USART_GetFlagStatus(g_Uart_Ports[0], USART_FLAG_TXE) == RESET && --times > 0){}
             break;
     }
-    //this->Index=COM1;
     //µÈ´ý·¢ËÍÍê±Ï
     if (times > 0)
     {
 
-        //this->Index=COM1;
         int aa = this->Index;
-        //this->Index=this->Index;
-        //if((this->Index>=0)&&(this->Index<5))
         {
             switch (this->Index)
             {
