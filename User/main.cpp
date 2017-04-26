@@ -66,27 +66,17 @@ void LedTask(void *param)
 
 void USART1_Config(void)
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
+    //GPIO_InitTypeDef GPIO_InitStructure;
     USART_InitTypeDef USART_InitStructure;
 
     /* config USART1 clock */
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1 | RCC_APB2Periph_GPIOA, ENABLE);
-
-	#if 1
-    /* USART1 GPIO config */
-    /* Configure USART1 Tx (PA.09) as alternate function push-pull */
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
-	#else
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+	
 	AlternatePort txxx(PA9);
 	txxx.Open();
-	#endif
-    /* Configure USART1 Rx (PA.10) as input floating */
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
+	
+	InputPort rxxx(PA10);
+	rxxx.Open();
 
     /* USART1 mode config */
     USART_InitStructure.USART_BaudRate = 115200;
@@ -136,7 +126,7 @@ int main(void)
     #if DEBUG
         Sys.MessagePort = COM1;
         USART1_Config();
-        //NVIC_Configuration();
+        NVIC_Configuration();
         Sys.ShowInfo();
 
         //        WatchDog::Start(20000, 10000);

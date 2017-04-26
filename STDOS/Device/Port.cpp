@@ -419,6 +419,7 @@ void AnalogInPort::OnOpen(void *param)
 
 InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
 {
+	this->Opened=false;
     this->Floating = floating;
     this->Pull = pupd;
     Set(pin);
