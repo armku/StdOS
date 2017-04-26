@@ -81,6 +81,7 @@ void USART1_Config(void)
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 	#else
 	AlternatePort txxx(PA9);
+	txxx.Open();
 	#endif
     /* Configure USART1 Rx (PA.10) as input floating */
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;

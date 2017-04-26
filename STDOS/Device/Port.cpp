@@ -184,7 +184,7 @@ bool Port::Read()const
 void Port::OnOpen(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    gpio->GPIO_Speed = GPIO_Speed_50MHz;
+    gpio->GPIO_Speed = GPIO_Speed_50MHz;	
 }
 
 void Port::OnClose(){}
@@ -358,9 +358,13 @@ void OutputPort::OnOpen(void *param)
     {
         gpio->GPIO_Mode = GPIO_Mode_Out_PP;
     }
+	this->OpenPin(param);
 }
 
-void OutputPort::OpenPin(void *param){}
+void OutputPort::OpenPin(void *param)
+{
+	
+}
 /*
 ÉèÖÃ¶Ë¿Ú×´Ì¬
  */
@@ -384,8 +388,9 @@ AlternatePort::AlternatePort(): OutputPort(){
 
 }
 
-AlternatePort::AlternatePort(Pin pin): OutputPort(pin){
-
+AlternatePort::AlternatePort(Pin pin): OutputPort(pin)
+{
+	this->OpenDrain=false;
 }
 
 AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
