@@ -184,74 +184,26 @@ bool Port::Read()const
 void Port::OnOpen(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    gpio->GPIO_Speed = GPIO_Speed_50MHz;	
+    gpio->GPIO_Speed = GPIO_Speed_50MHz;
 }
 
 void Port::OnClose(){}
-
-
-//#define GPIO_Mode_IN GPIO_Mode_IN_FLOATING
-//#define GPIO_Mode_AF GPIO_Mode_AF_OD
-//#define GPIO_OType_OD GPIO_Mode_Out_OD
-//#define GPIO_OType_PP GPIO_Mode_Out_PP
-//#define GPIO_Mode_OUT GPIO_Mode_Out_OD
-
 OutputPort::OutputPort(){}
-
 OutputPort::OutputPort(Pin pin)
 {
-	this->Opened=false;
+    this->Opened = false;
     Set(pin);
 }
 
 OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
 {
-	this->Opened=false;
+    this->Opened = false;
     this->Invert = invert;
     this->OpenDrain = openDrain;
     Set(pin);
 }
 
-//void OutputPort::OnConfig(GPIO_InitTypeDef &gpio)
-//{
-#if 0
-    #ifndef STM32F4
-        assert_param(Speed == 2 || Speed == 10 || Speed == 50);
-    #else 
-        assert_param(Speed == 2 || Speed == 25 || Speed == 50 || Speed == 100);
-    #endif 
-
-    //    Port::OnConfig(gpio);
-
-    switch (Speed)
-    {
-        case 2:
-            gpio.GPIO_Speed = GPIO_Speed_2MHz;
-            break;
-            #ifndef STM32F4
-            case 10:
-                gpio.GPIO_Speed = GPIO_Speed_10MHz;
-                break;
-            #else 
-            case 25:
-                gpio.GPIO_Speed = GPIO_Speed_25MHz;
-                break;
-            case 100:
-                gpio.GPIO_Speed = GPIO_Speed_100MHz;
-                break;
-            #endif 
-        case 50:
-            gpio.GPIO_Speed = GPIO_Speed_50MHz;
-            break;
-    }
-
-    #ifdef STM32F1
-        gpio.GPIO_Mode = OpenDrain ? GPIO_Mode_Out_OD : GPIO_Mode_Out_PP;
-    #else 
-        gpio.GPIO_Mode = GPIO_Mode_OUT;
-        gpio.GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
-    #endif 
-
+#if 0   
     // 配置之前，需要根据倒置情况来设定初始状态，也就是在打开端口之前必须明确端口高低状态
     ushort dat = GPIO_ReadOutputData(((GPIO_TypeDef*)this->State));
     //    if (!Invert)
@@ -260,7 +212,6 @@ OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
     //        dat |= PinBit;
     GPIO_Write(((GPIO_TypeDef*)this->State), dat);
 #endif 
-//}
 
 /*
 整组读取
@@ -345,13 +296,13 @@ void OutputPort::Blink(int times, int ms)const
 
 void OutputPort::OnOpen(void *param)
 {
-    Port::OnOpen(param);    
-	this->OpenPin(param);
+    Port::OnOpen(param);
+    this->OpenPin(param);
 }
 
 void OutputPort::OpenPin(void *param)
 {
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     if (this->OpenDrain)
     {
         gpio->GPIO_Mode = GPIO_Mode_Out_OD;
@@ -361,6 +312,7 @@ void OutputPort::OpenPin(void *param)
         gpio->GPIO_Mode = GPIO_Mode_Out_PP;
     }
 }
+
 /*
 设置端口状态
  */
@@ -374,26 +326,26 @@ void OutputPort::Write(Pin pin, bool value)
 
 AlternatePort::AlternatePort(): OutputPort()
 {
-this->Opened=false;
+    this->Opened = false;
 }
 
 AlternatePort::AlternatePort(Pin pin): OutputPort(pin)
 {
-	this->Opened=false;
-	this->OpenDrain=false;
+    this->Opened = false;
+    this->OpenDrain = false;
 }
 
 AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
 {
-	//局部变量中，数据值不确定
-	this->Opened=false;
+    //局部变量中，数据值不确定
+    this->Opened = false;
     this->Invert = invert;
     this->OpenDrain = openDrain;
     Set(pin);
 }
 
 void AlternatePort::OpenPin(void *param)
-{	
+{
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F1
         gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
@@ -401,8 +353,8 @@ void AlternatePort::OpenPin(void *param)
         gpio->GPIO_Mode = GPIO_Mode_AF;
         gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
-	int i=0;
-	i++;
+    int i = 0;
+    i++;
 }
 
 void AnalogInPort::OnOpen(void *param)
@@ -419,7 +371,7 @@ void AnalogInPort::OnOpen(void *param)
 
 InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
 {
-	this->Opened=false;
+    this->Opened = false;
     this->Floating = floating;
     this->Pull = pupd;
     Set(pin);
