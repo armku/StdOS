@@ -71,12 +71,6 @@ void USART1_Config(void)
 
     /* config USART1 clock */
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
-	
-	AlternatePort txxx(PA9);
-	txxx.Open();
-	
-	InputPort rxxx(PA10);
-	rxxx.Open();
 
     /* USART1 mode config */
     USART_InitStructure.USART_BaudRate = 115200;

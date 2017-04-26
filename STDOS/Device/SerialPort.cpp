@@ -121,8 +121,6 @@ uint SerialPort::OnRead(Buffer &bs)
 
 #define UART_PINS {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}
 #define UART_PINS_FULLREMAP {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}   //需要整理
-
-
 // 获取引脚
 void GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
 {
@@ -145,6 +143,8 @@ void GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
 bool SerialPort::OnOpen()
 {
     Pin rx, tx;
+	AlternatePort txx;
+	InputPort rxx;
 
     if (COM_NONE == Sys.MessagePort)
     {
@@ -152,6 +152,8 @@ bool SerialPort::OnOpen()
     }
     GetPins(&tx, &rx, this->Index);
 
+	txx.Set(tx);
+	rxx.Set(rx);
     //    debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
     #if COM_DEBUG        
 
