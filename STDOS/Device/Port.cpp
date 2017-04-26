@@ -200,11 +200,13 @@ OutputPort::OutputPort(){}
 
 OutputPort::OutputPort(Pin pin)
 {
+	this->Opened=false;
     Set(pin);
 }
 
 OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
 {
+	this->Opened=false;
     this->Invert = invert;
     this->OpenDrain = openDrain;
     Set(pin);
@@ -310,11 +312,6 @@ void OutputPort::Write(bool value)const
     }
 }
 
-//OutputPort::operator bool()
-//{
-//    return Read();
-//}
-
 //void OutputPort::WriteGroup(ushort value)
 //{
 //    GPIO_Write(((GPIO_TypeDef *)this->State), value);
@@ -375,25 +372,21 @@ void OutputPort::Write(Pin pin, bool value)
         GPIO_ResetBits(_GROUP(pin), _PORT(pin));
 }
 
-#if 0
-    void OutputPort::Init(bool invert, bool openDrain, uint speed)
-    {
-        OpenDrain = openDrain;
-        Speed = speed;
-        Invert = invert;
-    }
-#endif 
-AlternatePort::AlternatePort(): OutputPort(){
-
+AlternatePort::AlternatePort(): OutputPort()
+{
+this->Opened=false;
 }
 
 AlternatePort::AlternatePort(Pin pin): OutputPort(pin)
 {
+	this->Opened=false;
 	this->OpenDrain=false;
 }
 
 AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
 {
+	//局部变量中，数据值不确定
+	this->Opened=false;
     this->Invert = invert;
     this->OpenDrain = openDrain;
     Set(pin);
