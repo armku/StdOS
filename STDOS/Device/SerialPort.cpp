@@ -364,28 +364,26 @@ int SerialPort::SendData(byte data, int times)
     //µÈ´ý·¢ËÍÍê±Ï
     if (times > 0)
     {
+        switch (this->Index)
         {
-            switch (this->Index)
-            {
-                case COM1:
-                    USART_SendData(g_Uart_Ports[0], (ushort)data);
-                    break;
-                case COM2:
-                    USART_SendData(g_Uart_Ports[1], (ushort)data);
-                    break;
-                case COM3:
-                    USART_SendData(g_Uart_Ports[2], (ushort)data);
-                    break;
-                case COM4:
-                    USART_SendData(g_Uart_Ports[3], (ushort)data);
-                    break;
-                case COM5:
-                    USART_SendData(g_Uart_Ports[4], (ushort)data);
-                    break;
-                default:
-                    //USART_SendData(g_Uart_Ports[0], (ushort)data);
-                    break;
-            }
+            case COM1:
+                USART_SendData(g_Uart_Ports[0], (ushort)data);
+                break;
+            case COM2:
+                USART_SendData(g_Uart_Ports[1], (ushort)data);
+                break;
+            case COM3:
+                USART_SendData(g_Uart_Ports[2], (ushort)data);
+                break;
+            case COM4:
+                USART_SendData(g_Uart_Ports[3], (ushort)data);
+                break;
+            case COM5:
+                USART_SendData(g_Uart_Ports[4], (ushort)data);
+                break;
+            default:
+                //USART_SendData(g_Uart_Ports[0], (ushort)data);
+                break;
         }
     }
     else
