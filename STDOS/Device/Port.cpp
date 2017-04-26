@@ -348,8 +348,13 @@ void OutputPort::Blink(int times, int ms)const
 
 void OutputPort::OnOpen(void *param)
 {
-    Port::OnOpen(param);
-    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+    Port::OnOpen(param);    
+	this->OpenPin(param);
+}
+
+void OutputPort::OpenPin(void *param)
+{
+	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     if (this->OpenDrain)
     {
         gpio->GPIO_Mode = GPIO_Mode_Out_OD;
@@ -358,12 +363,6 @@ void OutputPort::OnOpen(void *param)
     {
         gpio->GPIO_Mode = GPIO_Mode_Out_PP;
     }
-	this->OpenPin(param);
-}
-
-void OutputPort::OpenPin(void *param)
-{
-	
 }
 /*
 ÉèÖÃ¶Ë¿Ú×´Ì¬
@@ -401,7 +400,7 @@ AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
 }
 
 void AlternatePort::OpenPin(void *param)
-{
+{	
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F1
         gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
@@ -409,6 +408,8 @@ void AlternatePort::OpenPin(void *param)
         gpio->GPIO_Mode = GPIO_Mode_AF;
         gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
+	int i=0;
+	i++;
 }
 
 void AnalogInPort::OnOpen(void *param)
