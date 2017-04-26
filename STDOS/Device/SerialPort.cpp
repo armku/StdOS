@@ -10,26 +10,6 @@
 
 #define UARTS {USART1,USART2,USART3,UART4,UART5}
 
-//以下为过期需要整理内容
-//		private:
-//            byte _index;
-//            USART_TypeDef *_port;
-//            AlternatePort _tx;
-//            #if defined(STM32F0) || defined(STM32F4)
-//                AlternatePort _rx;
-//            #else 
-//                InputPort _rx;
-//            #endif 
-//        public:
-//            SerialPort(byte index, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);
-//SerialPort(USART_TypeDef *com, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1);            
-//            void Init(byte index, int baudRate = 115200, byte parity = USART_Parity_No, byte dataBits = USART_WordLength_8b, byte stopBits = USART_StopBits_1); 
-//        protected:            
-//            virtual bool OnWrite(const byte *buf, uint size);
-//            virtual uint OnRead(byte *buf, uint size);
-//        public:
-//原始:private
-//            static void OnUsartReceive(ushort num, void *param);
 SerialPort::SerialPort()
 {
     Init();
@@ -47,24 +27,6 @@ SerialPort::SerialPort(COM index, int baudRate)
         this->_baudRate = baudRate;
     }
 }
-
-//SerialPort::SerialPort(USART_TypeDef *com, int baudRate, byte parity, byte dataBits, byte stopBits)
-//{
-//    assert_param(com);
-//    const USART_TypeDef *const g_Uart_Ports[] = UARTS;
-//    byte _index = 0xFF;
-
-//    for (int i = 0; i < ArrayLength(g_Uart_Ports); i++)
-//    {
-//        if (g_Uart_Ports[i] == com)
-//        {
-//            _index = i;
-//            break;
-//        }
-//    }
-//    Init();
-//    Init(_index, baudRate, parity, dataBits, stopBits);
-//}
 
 // 析构时自动关闭
 SerialPort::~SerialPort()
@@ -84,30 +46,6 @@ void SerialPort::Init()
 
     Remap = 0;
 }
-
-
-//void SerialPort::Init(byte index, int baudRate, byte parity, byte dataBits, byte stopBits)
-//{
-
-//    USART_TypeDef *const g_Uart_Ports[] = UARTS;
-//    _index = index;
-//	this->Index=(COM)index;
-//    assert_param(_index < ArrayLength(g_Uart_Ports));
-
-//    _port = g_Uart_Ports[_index];
-//    _baudRate = baudRate;
-//    _parity = parity;
-//    _dataBits = dataBits;
-//    _stopBits = stopBits;
-//    // 根据端口实际情况决定打开状态
-//    if (_port->CR1 &USART_CR1_UE)
-//        Opened = true;
-//    // 设置名称
-//    //Name = "COMx";
-//    *(uint*)Name = *(uint*)"COMx";
-//    Name[3] = '0' + _index + 1;
-//    Name[4] = 0;
-//}
 
 bool SerialPort::OnWrite(const Buffer &bs)
 {
