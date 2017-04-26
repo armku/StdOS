@@ -5,13 +5,6 @@
 
 void SetEXIT(int pinIndex, bool enable);
 
-#define GPIO_Mode_IN GPIO_Mode_IN_FLOATING
-#define GPIO_Mode_AF GPIO_Mode_AF_OD
-#define GPIO_OType_OD GPIO_Mode_Out_OD
-#define GPIO_OType_PP GPIO_Mode_Out_PP
-#define GPIO_Mode_OUT GPIO_Mode_Out_OD
-
-
 // 获取组和针脚
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
