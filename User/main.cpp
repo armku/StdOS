@@ -64,23 +64,13 @@ void LedTask(void *param)
 
 #define namee "StdOS"
 
-/// ÅäÖÃUSART1½ÓÊÕÖÐ¶Ï
-void NVIC_Configuration(void)
+uint OnUsart1Read(ITransport *transport, Buffer &bs, void *param)
 {
-    NVIC_InitTypeDef NVIC_InitStructure;
-    /* Configure the NVIC Preemption Priority Bits */
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-
-    /* Enable the USARTy Interrupt */
-    NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
-    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init(&NVIC_InitStructure);
+	return bs.Length();
 }
-
 int main(void)
 {
+    SerialPort *sp1;
     TSys &sys = (TSys &)(Sys);
     //    #if 0
     //        sys.Codec = codec;
@@ -96,8 +86,9 @@ int main(void)
     sys.Init();
     #if DEBUG
         Sys.MessagePort = COM1;
-        NVIC_Configuration();
         Sys.ShowInfo();
+        sp1 = SerialPort::GetMessagePort();
+        sp1->Register(OnUsart1Read, sp1);
 
         //        WatchDog::Start(20000, 10000);
         //    #else 

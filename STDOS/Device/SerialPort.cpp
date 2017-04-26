@@ -407,11 +407,11 @@ void SerialPort::Register(TransportHandler handler, void *param)
 {
     ITransport::Register(handler, param);
 
-    //    const byte irqs[] = UART_IRQs;
-    //    byte irq = irqs[_index];
+        const byte irqs[] = UART_IRQs;
+        byte irq = irqs[this->Index];
     if (handler)
     {
-        //        Interrupt.SetPriority(irq, 1);
+                Interrupt.SetPriority(irq, 1);
         //        Interrupt.Activate(irq, SerialPort::OnUsartReceive, this);
     }
     else

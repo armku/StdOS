@@ -187,6 +187,14 @@ extern SerialPort *_printf_sp;
         {
 //            SerialPort::OnUsartReceive(2, onSerialPortRcv[2]);
         }
+		uint8_t ch;
+
+            if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+            {
+                //ch = USART1->DR;
+                ch = USART_ReceiveData(USART3);
+                printf("%c", ch); //将接受到的数据直接返回打印
+            }
     }
     void USART4_IRQHandler(void) //串口1中断服务程序
     {
