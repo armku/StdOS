@@ -278,30 +278,14 @@ bool SerialPort::OnOpen()
     p.USART_WordLength = _dataBits;
     p.USART_StopBits = _stopBits;
     p.USART_Parity = _parity;
-    //USART_Init(_port, &p);
+    USART_TypeDef *const g_Uart_Ports[] = UARTS;
+    USART_Init(g_Uart_Ports[this->Index], &p);
 
-    //    USART_ITConfig(_port, USART_IT_RXNE, ENABLE); // 串口接收中断配置
+    USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_RXNE, ENABLE); // 串口接收中断配置
     // 初始化的时候会关闭所有中断，这里不需要单独关闭发送中断
     //USART_ITConfig(_port, USART_IT_TXE, DISABLE); // 不需要发送中断
 
-    //    USART_Cmd(_port, ENABLE); //使能串口
-    {
-        USART_InitTypeDef USART_InitStructure;
-        
-        /* USART1 mode config */
-        USART_InitStructure.USART_BaudRate = 115200;
-        USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-        USART_InitStructure.USART_StopBits = USART_StopBits_1;
-        USART_InitStructure.USART_Parity = USART_Parity_No;
-        USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-        USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-        USART_Init(USART1, &USART_InitStructure);
-
-        /* 使能串口1接收中断 */
-        USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
-
-        USART_Cmd(USART1, ENABLE);
-    }
+    USART_Cmd(g_Uart_Ports[this->Index], ENABLE); //使能串口
 
     if (RS485)
     {
@@ -326,7 +310,7 @@ void SerialPort::OnClose()
 {
     //    debug_printf("~Serial%d Close\r\n", _index + 1);
 
-//    Pin tx, rx;
+    //    Pin tx, rx;
 
     //    GetPins(&tx, &rx);
 
@@ -487,7 +471,7 @@ void SerialPort::Register(TransportHandler handler, void *param)
 {
     ITransport::Register(handler, param);
 
-//    const byte irqs[] = UART_IRQs;
+    //    const byte irqs[] = UART_IRQs;
     //    byte irq = irqs[_index];
     if (handler)
     {
