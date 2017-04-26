@@ -218,46 +218,46 @@ bool SerialPort::OnOpen()
     #ifdef STM32F1XX
         if (Remap)
         {
-            //            switch (_index)
-            //            {
-            //                case 0:
-            //                    AFIO->MAPR |= AFIO_MAPR_USART1_REMAP;
-            //                    break;
-            //                case 1:
-            //                    AFIO->MAPR |= AFIO_MAPR_USART2_REMAP;
-            //                    break;
-            //                case 2:
-            //                    AFIO->MAPR |= AFIO_MAPR_USART3_REMAP_FULLREMAP;
-            //                    break;
-            //            }
+            switch (this->Index)
+            {
+                case 0:
+                    AFIO->MAPR |= AFIO_MAPR_USART1_REMAP;
+                    break;
+                case 1:
+                    AFIO->MAPR |= AFIO_MAPR_USART2_REMAP;
+                    break;
+                case 2:
+                    AFIO->MAPR |= AFIO_MAPR_USART3_REMAP_FULLREMAP;
+                    break;
+            }
         }
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
     #endif 
 
     // 打开 UART 时钟。必须先打开串口时钟，才配置引脚
     #ifdef STM32F0XX
-        //        switch (_index)
-        //        {
-        //            case COM1:
-        //                RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
-        //                break; //开启时钟
-        //            case COM2:
-        //                RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
-        //                break;
-        //            default:
-        //                break;
-        //        }
+        switch (this->Index)
+        {
+            case COM1:
+                RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+                break; //开启时钟
+            case COM2:
+                RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+                break;
+            default:
+                break;
+        }
     #else 
-        //        if (_index)
-        //        {
-        //            // COM2-5 on APB1
-        //            RCC->APB1ENR |= RCC_APB1ENR_USART2EN >> 1 << _index;
-        //        }
-        //        else
-        //        {
-        //            // COM1 on APB2
-        //            RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
-        //        }
+        if (this->Index)
+        {
+            // COM2-5 on APB1
+            RCC->APB1ENR |= RCC_APB1ENR_USART2EN >> 1 << this->Index;
+        }
+        else
+        {
+            // COM1 on APB2
+            RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
+        }
     #endif 
 
     #ifdef STM32F0
