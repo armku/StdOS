@@ -96,7 +96,7 @@ int main(void)
     sys.Init();
     #if DEBUG
         Sys.MessagePort = COM1;
-        //NVIC_Configuration();
+        NVIC_Configuration();
         Sys.ShowInfo();
 
         //        WatchDog::Start(20000, 10000);

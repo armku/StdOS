@@ -256,8 +256,8 @@ bool SerialPort::OnOpen()
         else
         {
             // COM1 on APB2
-            //RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+            RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
+            //RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); //此代码功能同上行
         }
     #endif 
 
