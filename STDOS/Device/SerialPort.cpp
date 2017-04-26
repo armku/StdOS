@@ -143,8 +143,7 @@ void GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
 bool SerialPort::OnOpen()
 {
     Pin rx, tx;
-	AlternatePort txx;
-	InputPort rxx;
+
 
     if (COM_NONE == Sys.MessagePort)
     {
@@ -152,8 +151,6 @@ bool SerialPort::OnOpen()
     }
     GetPins(&tx, &rx, this->Index);
 
-	txx.Set(tx);
-	rxx.Set(rx);
     //    debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
     #if COM_DEBUG        
 
@@ -207,12 +204,10 @@ bool SerialPort::OnOpen()
     USART_InitTypeDef p;
 
     //串口引脚初始化
-    //    _tx.Set(tx);
-    //    #if defined(STM32F0) || defined(STM32F4)
-    //        _rx.Set(rx);
-    //    #else 
-    //        _rx.Set(rx);
-    //    #endif 
+    AlternatePort txx;
+    InputPort rxx;
+    txx.Set(tx);
+    rxx.Set(rx);
 
     // 不要关调试口，否则杯具
     //    if (_index != Sys.MessagePort)
