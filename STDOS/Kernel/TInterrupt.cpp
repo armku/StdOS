@@ -147,6 +147,7 @@ bool TInterrupt::Deactivate(short irq)
 //所有中断线处理
 void EXTI_IRQHandler(ushort num, void *param);
 extern SerialPort *_printf_sp;
+void OnUsartReceive(ushort num, void *param);
 #ifdef __cplusplus
     extern "C"
     {
@@ -157,11 +158,11 @@ extern SerialPort *_printf_sp;
      */
     void USART1_IRQHandler(void) //串口1中断服务程序
     {
-        #if 0
+        #if 1
 
             if (onSerialPortRcv[0])
             {
-                SerialPort::OnUsartReceive(0, onSerialPortRcv[0]);
+                OnUsartReceive(0, onSerialPortRcv[0]);
             }
         #else 
             uint8_t ch;

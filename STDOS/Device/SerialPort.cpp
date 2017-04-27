@@ -402,17 +402,17 @@ bool SerialPort::Flush(int times)
 #else 
     #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn}
 #endif 
-
+void OnUsartReceive(ushort num, void *param);
 void SerialPort::Register(TransportHandler handler, void *param)
 {
     ITransport::Register(handler, param);
 
-        const byte irqs[] = UART_IRQs;
-        byte irq = irqs[this->Index];
+    const byte irqs[] = UART_IRQs;
+    byte irq = irqs[this->Index];
     if (handler)
     {
-                Interrupt.SetPriority(irq, 1);
-        //        Interrupt.Activate(irq, SerialPort::OnUsartReceive, this);
+        Interrupt.SetPriority(irq, 1);
+        Interrupt.Activate(irq, OnUsartReceive, this);
     }
     else
     {
@@ -421,9 +421,9 @@ void SerialPort::Register(TransportHandler handler, void *param)
 }
 
 // 真正的串口中断函数
-//void SerialPort::OnUsartReceive(ushort num, void *param)
-//{
-//    SerialPort *sp = (SerialPort*)param;
+void OnUsartReceive(ushort num, void *param)
+{
+    SerialPort *sp = (SerialPort*)param;
 
 //    if (sp && sp->HasHandler())
 //    {
@@ -448,7 +448,7 @@ void SerialPort::Register(TransportHandler handler, void *param)
 //            }
 //        }
 //    }
-//}
+}
 
 SerialPort *_printf_sp;
 bool isInFPutc; //正在串口输出
