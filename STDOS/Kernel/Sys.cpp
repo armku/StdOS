@@ -13,6 +13,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include <string.h>
 #include "Array.h"
 #include "DateTime.h"
+#include "TInterrupt.h"
 #if 0
 extern "C"
 {
@@ -412,23 +413,13 @@ ushort Crc16(const void *buf, uint len, ushort crc)
     }
     return crc;
 }
-#ifdef __cplusplus
-    extern "C"
-    {
-    #endif 
-    //开启所有中断
-    void INTX_ENABLE(void);
-    //关闭所有中断
-    void INTX_DISABLE(void);
-    #ifdef __cplusplus
-    }
-#endif 
+
 SmartIRQ::SmartIRQ(bool enable)
-{
-    INTX_DISABLE();
+{    
+	TInterrupt::GlobalDisable();
 }
 
 SmartIRQ::~SmartIRQ()
 {
-    INTX_ENABLE();
+    TInterrupt::GlobalEnable();
 }

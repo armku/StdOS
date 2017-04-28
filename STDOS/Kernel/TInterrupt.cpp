@@ -167,9 +167,15 @@ void TInterrupt::DecodePriority(uint priority, uint priorityGroup, uint *pPreemp
 
 }
 // 打开全局中断
-void TInterrupt::GlobalEnable(){}
+void TInterrupt::GlobalEnable()
+{
+	__ASM volatile("cpsie i");
+}
 // 关闭全局中断
-void TInterrupt::GlobalDisable(){}
+void TInterrupt::GlobalDisable()
+{
+	__ASM volatile("cpsid i");
+}
 // 全局中断开关状态
 bool TInterrupt::GlobalState()
 {

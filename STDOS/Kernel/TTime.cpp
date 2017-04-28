@@ -41,9 +41,7 @@ extern byte fac_us; //每个us需要的systick时钟数
         };
     }
     //以下为汇编函数
-    void WFI_SET(void); //执行WFI指令
-    void INTX_DISABLE(void); //关闭所有中断
-    void INTX_ENABLE(void); //开启所有中断
+    void WFI_SET(void); //执行WFI指令    
     void MSR_MSP(uint addr); //设置堆栈地址
     //THUMB指令不支持汇编内联
     //采用如下方法实现执行汇编指令WFI  
@@ -51,19 +49,7 @@ extern byte fac_us; //每个us需要的systick时钟数
     {
         __ASM volatile("wfi");
     }
-
-    //关闭所有中断
-    void INTX_DISABLE(void)
-    {
-        __ASM volatile("cpsid i");
-    }
-
-    //开启所有中断
-    void INTX_ENABLE(void)
-    {
-        __ASM volatile("cpsie i");
-    }
-
+    
     //设置栈顶地址
     //addr:栈顶地址
     __asm void MSR_MSP(uint addr)
