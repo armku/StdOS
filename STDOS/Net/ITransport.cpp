@@ -75,16 +75,7 @@ uint ITransport::OnRead(Buffer& bs)
 
 
 
-//发送数据
-uint ITransport::Read(byte *buf, uint len)
-{
-	return this->OnRead(buf,len);
-}
 
-uint ITransport::Write(byte *buf, uint len)
-{
-	return this->OnWrite(buf,len);
-}
 
 int ITransport::OnReceive(byte *buf, uint len)
 {
@@ -94,30 +85,4 @@ int ITransport::OnReceive(byte *buf, uint len)
 		this->pHandler(this,buffer,this,this);
 	}
     return len;
-}
-
-void ITransport::SendData(byte data, uint times){}
-
-bool ITransport::OnWrite(const byte *buf, uint size)
-{
-    return true;
-}
-uint ITransport::OnRead(byte *buf, uint size)
-{
-	return 0;
-}
-void ITransport::SendBuffer(byte *buff, int length)
-{
-    if (length < 0)
-    {
-        length = ArrayLength(buff);        
-    }    
-
-    this->OnWrite(buff, length);
-}
-
-//发送数据
-void ITransport::SendBuffer(char *buff, int length)
-{
-    this->SendBuffer((byte*)buff, length);
 }

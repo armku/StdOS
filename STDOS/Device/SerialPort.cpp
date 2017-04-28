@@ -432,10 +432,10 @@ void OnUsartReceive(ushort num, void *param)
         {
             // 从栈分配，节省内存
             byte buf[512];
-            uint len = sp->Read(buf, sizeof(buf));
-            if (len)
+            //uint len = sp->Read(buf, sizeof(buf));
+            //if (len)
             {
-                len = sp->OnReceive(buf, len);
+//                len = sp->OnReceive(buf, len);
 //                #if 0
 //                    assert_param(len <= ArrayLength(buf));
 //                #endif 

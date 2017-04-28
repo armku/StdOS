@@ -54,7 +54,7 @@ void ModbusSlave1::DealFrame(Buffer &bs, void *param)
             crc = this->GetCRC(reginbuf, this->Entity.reglength *2+3);
             reginbuf[this->Entity.reglength *2+4] = (crc >> 8) &0x00ff;
             reginbuf[this->Entity.reglength *2+3] = crc &0x00ff;
-            sp->SendBuffer(reginbuf, this->Entity.reglength *2+5);
+            //sp->SendBuffer(reginbuf, this->Entity.reglength *2+5);
             break;
         case ReadHoldingRegisters:
 			//¶ÁÈ¡±£³Ö¼Ä´æÆ÷

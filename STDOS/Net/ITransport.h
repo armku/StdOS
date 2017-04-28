@@ -54,17 +54,38 @@ protected:
 	// 引发数据到达事件
 	virtual uint OnReceive(Buffer& bs, void* param);
 public:        
-        uint Read(byte *buf, uint len);
-        uint Write(byte *buf, uint len);
+        
         int OnReceive(byte *buf, uint len);
-        void SendData(byte data, uint times = 3000);
-        void SendBuffer(byte *buff, int length =  - 1); //发送数据
-        void SendBuffer(char *buff, int length =  - 1); //发送数据
+        
     protected:        
-        virtual bool OnWrite(const byte *buf, uint size);
-		virtual uint OnRead(byte *buf, uint size);
+       
         TransportHandler pHandler;
 
+};
+
+// 数据口包装
+class PackPort : public ITransport
+{
+private:
+
+public:
+	ITransport*	Port;	// 传输口
+
+	PackPort();
+	virtual ~PackPort();
+
+	virtual void Set(ITransport* port);
+
+	//virtual const String ToString() const { return String("PackPort"); }
+
+protected:
+	virtual bool OnOpen();
+    virtual void OnClose();
+
+    virtual bool OnWrite(const Buffer& bs);
+	virtual uint OnRead(Buffer& bs);
+
+	static uint OnPortReceive(ITransport* sender, Buffer& bs, void* param, void* param2);
 };
 
 #endif
