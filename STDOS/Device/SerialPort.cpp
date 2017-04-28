@@ -410,7 +410,7 @@ void SerialPort::Register(TransportHandler handler, void *param)
     byte irq = irqs[this->Index];
     if (handler)
     {
-        Interrupt.SetPriority(irq, 1);
+        Interrupt.SetPriority(irq);
         Interrupt.Activate(irq, OnUsartReceive, this);
     }
     else

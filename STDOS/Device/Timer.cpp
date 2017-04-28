@@ -316,7 +316,7 @@ void Timer::SetFrequency(uint frequency)
         int irqs[] = TIM_IRQns;
         if (handler)
         {
-            Interrupt.SetPriority(irqs[_index], 1);
+            Interrupt.SetPriority(irqs[_index]);
             Interrupt.Activate(irqs[_index], OnHandler, this);
         }
         else
