@@ -47,15 +47,6 @@ void SerialPort::Init()
     Remap = 0;
 }
 
-bool SerialPort::OnWrite(const Buffer &bs)
-{
-	for(int i=0;i<bs.Length();i++)
-	{
-		this->SendData(bs[i]);
-	}
-    return true;
-}
-
 #define UART_PINS {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}
 #define UART_PINS_FULLREMAP {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}   //需要整理
 // 获取引脚
@@ -335,38 +326,26 @@ void SerialPort::ChangePower(int level){
 }
 
 // 向某个端口写入数据。如果size为0，则把data当作字符串，一直发送直到遇到\0为止
-//bool SerialPort::OnWrite(const byte *buf, uint size)
-//{
-//    if (RS485)
-//    {
-//        *RS485 = true;
-//    }
-//    if (size > 0)
-//    {
-//        for (int i = 0; i < size; i++)
-//        {
-//            SendData(*buf++);
-//        }
-//    }
-//    else
-//    {
-//        while (*buf)
-//        {
-//            SendData(*buf++);
-//        }
-//    }
+bool SerialPort::OnWrite(const Buffer& bs)
+{
+    if (RS485)
+    {
+        *RS485 = true;
+    }
 
-//    if (RS485)
-//    {
-//        Sys.Delay(200);
-//        *RS485 = false;
-//    }
-//    return true;
-//}
+	for(int i=0;i<bs.Length();i++)
+	{
+		this->SendData(bs[i]);
+	}
 
+    if (RS485)
+    {
+        Sys.Delay(200);
+        *RS485 = false;
+    }
+    return true;
+}
 
-// 从某个端口读取数据
-//uint SerialPort::OnRead(byte *buf, uint size)
 //数据读取事件
 uint SerialPort::OnRead(Buffer &bs)
 {
