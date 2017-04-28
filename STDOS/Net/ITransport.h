@@ -15,6 +15,7 @@ class ITransport
 private:
 	TransportHandler _handler;
 	void* _param;
+
 public:
 	bool Opening;	// 是否正在打开
     bool Opened;    // 是否打开
