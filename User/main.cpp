@@ -67,6 +67,7 @@ void LedTask(void *param)
 
 uint OnUsart1Read(ITransport *transport, Buffer &bs, void *param,void *param2)
 {
+	transport->Write(bs);
 	return bs.Length();
 }
 int main(void)

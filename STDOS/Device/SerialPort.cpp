@@ -40,7 +40,7 @@ SerialPort::~SerialPort()
 
 void SerialPort::Init()
 {
-    //    _index = 0xFF;
+    this->Index=COM_NONE;
     RS485 = NULL;
     Error = 0;
 
@@ -49,7 +49,11 @@ void SerialPort::Init()
 
 bool SerialPort::OnWrite(const Buffer &bs)
 {
-    return false;
+	for(int i=0;i<bs.Length();i++)
+	{
+		this->SendData(bs[i]);
+	}
+    return true;
 }
 
 #define UART_PINS {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}
@@ -382,6 +386,8 @@ uint SerialPort::OnRead(Buffer &bs)
             us = Time.Current() + usTimeout;
         }
     }
+	bs.SetLength(count);
+	this->OnReceive(bs,this);
     return count;
 }
 
@@ -414,7 +420,7 @@ void SerialPort::Register(TransportHandler handler, void *param)
     }
     else
     {
-        //        Interrupt.Deactivate(irq);
+                Interrupt.Deactivate(irq);
     }
 }
 
@@ -433,9 +439,9 @@ void OnUsartReceive(ushort num, void *param)
             byte buf[512];
 			Buffer bs(buf,512);
             uint len = sp->Read(bs);
-            //if (len)
-            {
-//                len = sp->OnReceive(buf, len);
+            if (len)
+            {				
+                //len = sp->OnReceive(bs,param);
 //                #if 0
 //                    assert_param(len <= ArrayLength(buf));
 //                #endif 

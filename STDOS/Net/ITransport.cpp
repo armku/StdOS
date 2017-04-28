@@ -23,12 +23,12 @@ void ITransport::Close(){}
 // 发送数据
 bool ITransport::Write(const Buffer &bs)
 {
-    return false;
+    return this->OnWrite(bs);
 }
 
 bool ITransport::Write(const Buffer &bs, const void *opt)
 {
-    return false;
+    return this->OnWrite(bs);
 }
 
 // 接收数据

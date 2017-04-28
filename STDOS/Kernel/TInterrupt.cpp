@@ -169,13 +169,15 @@ void TInterrupt::DecodePriority(uint priority, uint priorityGroup, uint *pPreemp
 // 打开全局中断
 void TInterrupt::GlobalEnable()
 {
-	__ASM volatile("cpsie i");
+    __ASM volatile("cpsie i");
 }
+
 // 关闭全局中断
 void TInterrupt::GlobalDisable()
 {
-	__ASM volatile("cpsid i");
+    __ASM volatile("cpsid i");
 }
+
 // 全局中断开关状态
 bool TInterrupt::GlobalState()
 {
@@ -226,22 +228,10 @@ void OnUsartReceive(ushort num, void *param);
      */
     void USART1_IRQHandler(void) //串口1中断服务程序
     {
-        #if 1
-
-            if (onSerialPortRcv[0])
-            {
-                OnUsartReceive(0, onSerialPortRcv[0]);
-            }
-        #else 
-            uint8_t ch;
-
-            if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
-            {
-                //ch = USART1->DR;
-                ch = USART_ReceiveData(USART1);
-                printf("%c", ch); //将接受到的数据直接返回打印
-            }
-        #endif 
+        if (onSerialPortRcv[0])
+        {
+            OnUsartReceive(0, onSerialPortRcv[0]);
+        }
     }
     void USART2_IRQHandler(void) //串口1中断服务程序
     {
@@ -254,7 +244,7 @@ void OnUsartReceive(ushort num, void *param);
     {
         if (onSerialPortRcv[2])
         {
-            //            SerialPort::OnUsartReceive(2, onSerialPortRcv[2]);
+            OnUsartReceive(2, onSerialPortRcv[2]);
         }
         uint8_t ch;
 
