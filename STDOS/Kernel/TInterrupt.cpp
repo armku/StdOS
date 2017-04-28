@@ -2,9 +2,66 @@
 #include "TInterrupt.h"
 #include "stm32f10x.h"
 
+SerialPort *onSerialPortRcv[5];
 TInterrupt Interrupt;
 
-SerialPort *onSerialPortRcv[5];
+// 初始化中断向量表
+void TInterrupt::Init()const{
+
+}
+
+void TInterrupt::Process(uint num)const{
+
+}
+
+// 注册中断函数（中断号，函数，参数）
+bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
+{
+    SerialPort *sp = (SerialPort*)param;
+    switch (irq)
+    {
+        case EXTI0_IRQn:
+            break;
+        case EXTI1_IRQn:
+            break;
+        case EXTI2_IRQn:
+            break;
+        case EXTI3_IRQn:
+            break;
+        case EXTI4_IRQn:
+            break;
+        case EXTI9_5_IRQn:
+            break;
+        case EXTI15_10_IRQn:
+            break;
+        case USART1_IRQn:
+            onSerialPortRcv[0] = sp;
+            break;
+        case USART2_IRQn:
+            onSerialPortRcv[1] = sp;
+            break;
+        case USART3_IRQn:
+            onSerialPortRcv[2] = sp;
+            break;
+            #ifdef STM32F10X_HD
+            case UART4_IRQn:
+                onSerialPortRcv[3] = sp;
+                break;
+            case UART5_IRQn:
+                onSerialPortRcv[4] = sp;
+                break;
+            #endif 
+        default:
+            break;
+    }
+    return true;
+}
+
+//关闭中断
+bool TInterrupt::Deactivate(short irq)
+{
+    return false;
+}
 
 // 设置优先级
 void TInterrupt::SetPriority(short irq, uint priority)const
@@ -95,54 +152,59 @@ void TInterrupt::SetPriority(short irq, uint priority)const
     NVIC_Init(&nvic);
 }
 
-// 注册中断函数（中断号，函数，参数）
-bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
+// 获取优先级
+void TInterrupt::GetPriority(short irq)const{
+
+}
+// 编码优先级
+uint TInterrupt::EncodePriority(uint priorityGroup, uint preemptPriority, uint subPriority)const
 {
-    SerialPort *sp = (SerialPort*)param;
-    switch (irq)
-    {
-        case EXTI0_IRQn:
-            break;
-        case EXTI1_IRQn:
-            break;
-        case EXTI2_IRQn:
-            break;
-        case EXTI3_IRQn:
-            break;
-        case EXTI4_IRQn:
-            break;
-        case EXTI9_5_IRQn:
-            break;
-        case EXTI15_10_IRQn:
-            break;
-        case USART1_IRQn:
-            onSerialPortRcv[0] = sp;
-            break;
-        case USART2_IRQn:
-            onSerialPortRcv[1] = sp;
-            break;
-        case USART3_IRQn:
-            onSerialPortRcv[2] = sp;
-            break;
-            #ifdef STM32F10X_HD
-            case UART4_IRQn:
-                onSerialPortRcv[3] = sp;
-                break;
-            case UART5_IRQn:
-                onSerialPortRcv[4] = sp;
-                break;
-            #endif 
-        default:
-            break;
-    }
-    return true;
+    return 0;
 }
 
-//关闭中断
-bool TInterrupt::Deactivate(short irq)
-{
-    return true;
+// 解码优先级
+void TInterrupt::DecodePriority(uint priority, uint priorityGroup, uint *pPreemptPriority, uint *pSubPriority)const{
+
 }
+// 打开全局中断
+void TInterrupt::GlobalEnable(){}
+// 关闭全局中断
+void TInterrupt::GlobalDisable(){}
+// 全局中断开关状态
+bool TInterrupt::GlobalState()
+{
+    return false;
+}
+
+// 是否在中断里面
+bool TInterrupt::IsHandler()
+{
+    return false;
+}
+
+// 系统挂起
+void TInterrupt::Halt(){}
+void TInterrupt::OnInit()const{}
+bool TInterrupt::OnActivate(short irq)
+{
+    return false;
+}
+
+bool TInterrupt::OnDeactivate(short irq)
+{
+    return false;
+}
+
+Lock::Lock(int &ref){}
+Lock::~Lock(){}
+
+bool Lock::Wait(int ms)
+{
+    return false;
+}
+
+
+
 
 //所有中断线处理
 void EXTI_IRQHandler(ushort num, void *param);
@@ -179,36 +241,36 @@ void OnUsartReceive(ushort num, void *param);
     {
         if (onSerialPortRcv[1])
         {
-//            SerialPort::OnUsartReceive(1, onSerialPortRcv[1]);
+            //            SerialPort::OnUsartReceive(1, onSerialPortRcv[1]);
         }
     }
     void USART3_IRQHandler(void) //串口1中断服务程序
     {
         if (onSerialPortRcv[2])
         {
-//            SerialPort::OnUsartReceive(2, onSerialPortRcv[2]);
+            //            SerialPort::OnUsartReceive(2, onSerialPortRcv[2]);
         }
-		uint8_t ch;
+        uint8_t ch;
 
-            if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
-            {
-                //ch = USART1->DR;
-                ch = USART_ReceiveData(USART3);
-                printf("%c", ch); //将接受到的数据直接返回打印
-            }
+        if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+        {
+            //ch = USART1->DR;
+            ch = USART_ReceiveData(USART3);
+            printf("%c", ch); //将接受到的数据直接返回打印
+        }
     }
     void USART4_IRQHandler(void) //串口1中断服务程序
     {
         if (onSerialPortRcv[3])
         {
-//            SerialPort::OnUsartReceive(3, onSerialPortRcv[3]);
+            //            SerialPort::OnUsartReceive(3, onSerialPortRcv[3]);
         }
     }
     void USART5_IRQHandler(void) //串口1中断服务程序
     {
         if (onSerialPortRcv[4])
         {
- //           SerialPort::OnUsartReceive(4, onSerialPortRcv[4]);
+            //           SerialPort::OnUsartReceive(4, onSerialPortRcv[4]);
         }
     }
 
