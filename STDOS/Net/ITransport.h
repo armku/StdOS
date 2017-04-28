@@ -10,12 +10,6 @@ typedef uint (*TransportHandler)(ITransport* port, Buffer& bs, void* param, void
 
 // 帧数据传输接口
 // 实现者确保数据以包的形式传输，屏蔽数据的粘包和拆包
-#pragma once
-
-#include "Type.h"
-#include "Buffer.h"
-#include <stdio.h>
-
 class ITransport
 {
     public:
