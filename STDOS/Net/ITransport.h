@@ -53,14 +53,6 @@ protected:
 
 	// 引发数据到达事件
 	virtual uint OnReceive(Buffer& bs, void* param);
-public:        
-        
-        int OnReceive(byte *buf, uint len);
-        
-    protected:        
-       
-        TransportHandler pHandler;
-
 };
 
 // 数据口包装

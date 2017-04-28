@@ -41,7 +41,7 @@ bool ITransport::Open()
 // 注册回调函数
 	void ITransport::Register(TransportHandler handler, void* param)
 	{
-	this->pHandler=handler;
+	this->_handler=handler;
 }
 bool ITransport::OnWrite(const Buffer& bs)
 {
@@ -60,29 +60,10 @@ uint ITransport::OnRead(Buffer& bs)
 // 引发数据到达事件
 	uint ITransport::OnReceive(Buffer& bs, void* param)
 	{
-		
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-int ITransport::OnReceive(byte *buf, uint len)
-{
-	if(this->pHandler)
+		if(this->_handler)
 	{
-		Buffer buffer(buf,len);
-		this->pHandler(this,buffer,this,this);
+		
+		this->_handler(this,bs,this,this);
 	}
-    return len;
-}
+    return bs.Length();
+	}
