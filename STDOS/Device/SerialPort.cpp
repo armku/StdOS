@@ -425,7 +425,8 @@ void OnUsartReceive(ushort num, void *param)
     SerialPort *sp = (SerialPort*)param;
 	USART_TypeDef *const g_Uart_Ports[] = UARTS;
 
-    if (sp && sp->HasHandler())
+    //if (sp && sp->HasHandler())
+	if (sp)
     {
         if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
         {
