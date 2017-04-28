@@ -1,7 +1,14 @@
 #include "ITransport.h"
 
 // 初始化
-ITransport::ITransport(){}
+ITransport::ITransport()
+{
+	this->Opening=false;
+	this->Opened=false;
+	this->MinSize=1;
+	this->MaxSize=1;
+	this->_handler=nullptr;
+}
 // 析构函数确保关闭
 ITransport::~ITransport(){}
 // 打开传输口
@@ -60,4 +67,34 @@ uint ITransport::OnReceive(Buffer &bs, void *param)
         this->_handler(this, bs, this, this);
     }
     return bs.Length();
+}
+
+PackPort::PackPort()
+{
+	this->Port=nullptr;
+}
+PackPort::~PackPort()
+{
+}
+void PackPort::Set(ITransport* port)
+{
+}
+bool PackPort::OnOpen()
+{
+	return false;
+}
+void PackPort::OnClose()
+{
+}
+bool PackPort::OnWrite(const Buffer& bs)
+{
+	return false;
+}
+uint PackPort::OnRead(Buffer& bs)
+{
+	return 0;
+}
+uint PackPort::OnPortReceive(ITransport* sender, Buffer& bs, void* param, void* param2)
+{
+	return 0;
 }
