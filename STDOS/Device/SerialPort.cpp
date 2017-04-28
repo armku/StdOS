@@ -363,27 +363,26 @@ void SerialPort::ChangePower(int level){
 
 // 从某个端口读取数据
 //uint SerialPort::OnRead(byte *buf, uint size)
-//{
-//    // 在100ms内接收数据
-//    uint usTimeout = 100;
-//    UInt64 us = Time.Current() + usTimeout;
-
-//    uint count = 0; // 收到的字节数    
-//    while (count < size && Time.Current() < us)
-//    {
-//        // 轮询接收寄存器，收到数据则放入缓冲区
-//        if (USART_GetFlagStatus(_port, USART_FLAG_RXNE) != RESET)
-//        {
-//            *buf++ = (byte)USART_ReceiveData(_port);
-//            count++;
-//            us = Time.Current() + usTimeout;
-//        }
-//    }
-//    return count;
-//}
+//数据读取事件
 uint SerialPort::OnRead(Buffer &bs)
 {
-    return 0;
+	USART_TypeDef *const g_Uart_Ports[] = UARTS;
+    // 在100ms内接收数据
+    uint usTimeout = 100;
+    UInt64 us = Time.Current() + usTimeout;
+
+    uint count = 0; // 收到的字节数    
+    while (count < this->MaxSize && Time.Current() < us)
+    {
+        // 轮询接收寄存器，收到数据则放入缓冲区
+        if (USART_GetFlagStatus(g_Uart_Ports[this->Index], USART_FLAG_RXNE) != RESET)
+        {
+            bs[count] = (byte)USART_ReceiveData(g_Uart_Ports[this->Index]);
+            count++;
+            us = Time.Current() + usTimeout;
+        }
+    }
+    return count;
 }
 
 // 刷出某个端口中的数据
@@ -432,7 +431,8 @@ void OnUsartReceive(ushort num, void *param)
         {
             // 从栈分配，节省内存
             byte buf[512];
-            //uint len = sp->Read(buf, sizeof(buf));
+			Buffer bs(buf,512);
+            uint len = sp->Read(bs);
             //if (len)
             {
 //                len = sp->OnReceive(buf, len);

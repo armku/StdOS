@@ -6,7 +6,7 @@ ITransport::ITransport()
 	this->Opening=false;
 	this->Opened=false;
 	this->MinSize=1;
-	this->MaxSize=1;
+	this->MaxSize=100;
 	this->_handler=nullptr;
 }
 // 析构函数确保关闭
@@ -34,7 +34,7 @@ bool ITransport::Write(const Buffer &bs, const void *opt)
 // 接收数据
 uint ITransport::Read(Buffer &bs)
 {
-    return 0;
+    return this->OnRead(bs);
 }
 
 // 注册回调函数
@@ -55,7 +55,7 @@ bool ITransport::OnWriteEx(const Buffer &bs, const void *opt)
 
 uint ITransport::OnRead(Buffer &bs)
 {
-    return 0;
+    return bs.Length();
 }
 
 // 引发数据到达事件
