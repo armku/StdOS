@@ -52,11 +52,6 @@ bool SerialPort::OnWrite(const Buffer &bs)
     return false;
 }
 
-uint SerialPort::OnRead(Buffer &bs)
-{
-    return 0;
-}
-
 #define UART_PINS {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}
 #define UART_PINS_FULLREMAP {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}   //需要整理
 // 获取引脚
@@ -386,6 +381,10 @@ void SerialPort::ChangePower(int level){
 //    }
 //    return count;
 //}
+uint SerialPort::OnRead(Buffer &bs)
+{
+    return 0;
+}
 
 // 刷出某个端口中的数据
 bool SerialPort::Flush(int times)
@@ -424,17 +423,18 @@ void SerialPort::Register(TransportHandler handler, void *param)
 void OnUsartReceive(ushort num, void *param)
 {
     SerialPort *sp = (SerialPort*)param;
+	USART_TypeDef *const g_Uart_Ports[] = UARTS;
 
-//    if (sp && sp->HasHandler())
-//    {
-//        if (USART_GetITStatus(sp->_port, USART_IT_RXNE) != RESET)
-//        {
-//            // 从栈分配，节省内存
-//            byte buf[512];
-//            uint len = sp->Read(buf, sizeof(buf));
-//            if (len)
-//            {
-//                len = sp->OnReceive(buf, len);
+    if (sp && sp->HasHandler())
+    {
+        if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
+        {
+            // 从栈分配，节省内存
+            byte buf[512];
+            uint len = sp->Read(buf, sizeof(buf));
+            if (len)
+            {
+                len = sp->OnReceive(buf, len);
 //                #if 0
 //                    assert_param(len <= ArrayLength(buf));
 //                #endif 
@@ -445,9 +445,9 @@ void OnUsartReceive(ushort num, void *param)
 //                        sp->Write(buf, len);
 //                    }
 //                #endif 
-//            }
-//        }
-//    }
+            }
+        }
+    }
 }
 
 SerialPort *_printf_sp;

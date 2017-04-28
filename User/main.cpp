@@ -64,7 +64,7 @@ void LedTask(void *param)
 
 #define namee "StdOS"
 
-uint OnUsart1Read(ITransport *transport, Buffer &bs, void *param)
+uint OnUsart1Read(ITransport *transport, Buffer &bs, void *param,void *param2)
 {
 	return bs.Length();
 }

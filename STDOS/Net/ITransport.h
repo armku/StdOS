@@ -1,13 +1,20 @@
+#ifndef __ITransport_H__
+#define __ITransport_H__
+
+#include "Kernel\Sys.h"
+
+class ITransport;
+
+// 传输口数据到达委托。传入数据缓冲区地址和长度，如有反馈，仍使用该缓冲区，返回数据长度
+typedef uint (*TransportHandler)(ITransport* port, Buffer& bs, void* param, void* param2);
+
+// 帧数据传输接口
+// 实现者确保数据以包的形式传输，屏蔽数据的粘包和拆包
 #pragma once
 
 #include "Type.h"
 #include "Buffer.h"
 #include <stdio.h>
-
-class ITransport;
-
-//回调函数定义,当有数据到达时触发
-typedef uint(*TransportHandler)(ITransport *transport, Buffer &bs, void *param); //临时不能用
 
 class ITransport
 {
@@ -30,3 +37,5 @@ class ITransport
         TransportHandler pHandler;
 
 };
+
+#endif

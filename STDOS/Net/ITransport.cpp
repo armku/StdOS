@@ -33,7 +33,7 @@ int ITransport::OnReceive(byte *buf, uint len)
 	if(this->pHandler)
 	{
 		Buffer buffer(buf,len);
-		this->pHandler(this,buffer,this);
+		this->pHandler(this,buffer,this,this);
 	}
     return len;
 }
