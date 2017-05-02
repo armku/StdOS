@@ -70,6 +70,12 @@ uint OnUsart1Read(ITransport *transport, Buffer &bs, void *param,void *param2)
 	transport->Write(bs);
 	return bs.Length();
 }
+//按键事件
+void OnPress(InputPort& port,bool down)
+{
+	debug_printf("Press P%c%d down=%d\r\n",_PIN_NAME(port._Pin),down);
+}
+
 int main(void)
 {
     SerialPort *sp1;
@@ -101,13 +107,17 @@ int main(void)
     //        Config::Current = &Config::CreateFlash();
     //    #endif 
 
+	InputPort key(PC13);
+	key.Press	= OnPress;
+	key.UsePress();
+	key.Open();
     //    exti.Register(OnKeyPress);
     //    exti1.Register(OnKeyPress);
     //	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
     // 初始化为输出
-
-
+	
+	
     Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
     Sys.Start();
 }

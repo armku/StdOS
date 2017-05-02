@@ -391,7 +391,10 @@ void InputPort::OnOpen(void *param)
         gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
 }
-
+bool InputPort::UsePress()
+{
+	return false;
+}
 void InputPort::OnClose(){
 
 }
