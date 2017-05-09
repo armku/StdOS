@@ -227,11 +227,17 @@ void OnUsartReceive(ushort num, void *param);
     /*
      */
     void USART1_IRQHandler(void) //串口1中断服务程序
-    {
+    {		
+		#if 0
+		byte ch;
+		ch = USART_ReceiveData(USART1);
+	  	printf( "%c", ch );    //将接收到的数据直接返回打印
+		#else
         if (onSerialPortRcv[0])
         {
             OnUsartReceive(0, onSerialPortRcv[0]);
         }
+		#endif
     }
     void USART2_IRQHandler(void) //串口2中断服务程序
     {
