@@ -233,14 +233,14 @@ void OnUsartReceive(ushort num, void *param);
             OnUsartReceive(0, onSerialPortRcv[0]);
         }
     }
-    void USART2_IRQHandler(void) //串口1中断服务程序
+    void USART2_IRQHandler(void) //串口2中断服务程序
     {
         if (onSerialPortRcv[1])
         {
             //            SerialPort::OnUsartReceive(1, onSerialPortRcv[1]);
         }
     }
-    void USART3_IRQHandler(void) //串口1中断服务程序
+    void USART3_IRQHandler(void) //串口3中断服务程序
     {
         if (onSerialPortRcv[2])
         {
@@ -255,14 +255,14 @@ void OnUsartReceive(ushort num, void *param);
             printf("%c", ch); //将接受到的数据直接返回打印
         }
     }
-    void USART4_IRQHandler(void) //串口1中断服务程序
+    void USART4_IRQHandler(void) //串口4中断服务程序
     {
         if (onSerialPortRcv[3])
         {
             //            SerialPort::OnUsartReceive(3, onSerialPortRcv[3]);
         }
     }
-    void USART5_IRQHandler(void) //串口1中断服务程序
+    void USART5_IRQHandler(void) //串口5中断服务程序
     {
         if (onSerialPortRcv[4])
         {
