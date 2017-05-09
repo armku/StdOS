@@ -45,16 +45,15 @@ Timer::Timer(TIM_TypeDef *timer)
     Period = 1000;*/
     SetFrequency(10);
 
-    _started = false;
+    Opened = false;
     #if 0
         _Handler = NULL;
     #endif 
-    _Param = NULL;
 }
 
 Timer::~Timer()
 {
-    if (_started)
+    if (Opened)
         Close();
     #if 0
         if (_Handler)
@@ -144,11 +143,11 @@ void Timer::Open()	// 开始定时器
     // 打开计数
     TIM_Cmd(_port, ENABLE);
 
-    _started = true;
+    Opened = true;
 }
 void Timer::Close()	// 停止定时器
 {
-	if (!_started)
+	if (!Opened)
         return ;
 
     debug_printf("Timer%d::Stop\r\n", _index + 1);
@@ -159,7 +158,7 @@ void Timer::Close()	// 停止定时器
     TIM_ClearITPendingBit(_port, TIM_IT_Update); // 仅清除中断标志位 关闭不可靠
     TIM_Cmd(_port, DISABLE);
 
-    _started = false;
+    Opened = false;
 }
 void Timer::Config()
 {
@@ -305,7 +304,7 @@ void Timer::SetFrequency(uint frequency)
     Period = p;
 
     // 如果已启动定时器，则重新配置一下，让新设置生效
-    if (_started)
+    if (Opened)
     {
         TIM_TimeBaseInitTypeDef _timer;
         TIM_TimeBaseStructInit(&_timer);
