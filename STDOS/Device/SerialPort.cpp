@@ -359,7 +359,6 @@ uint SerialPort::OnRead(Buffer &bs)
     {
         // 轮询接收寄存器，收到数据则放入缓冲区
         if (USART_GetFlagStatus(g_Uart_Ports[this->Index], USART_FLAG_RXNE) != RESET)
-		//if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
         {
             bs[count] = (byte)USART_ReceiveData(g_Uart_Ports[this->Index]);			
             count++;   
