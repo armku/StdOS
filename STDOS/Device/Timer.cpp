@@ -55,7 +55,7 @@ Timer::Timer(TIM_TypeDef *timer)
 Timer::~Timer()
 {
     if (_started)
-        Stop();
+        Close();
     #if 0
         if (_Handler)
             Register(NULL);
@@ -99,10 +99,9 @@ Timer *Timer::Create(byte index)
     else
         return new Timer(g_Timers[index]);
 }
-
-void Timer::Start()
+void Timer::Open()	// 开始定时器
 {
-    #if DEBUG
+	 #if DEBUG
         // 获取当前频率
         RCC_ClocksTypeDef clock;
         RCC_GetClocksFreq(&clock);
@@ -147,10 +146,9 @@ void Timer::Start()
 
     _started = true;
 }
-
-void Timer::Stop()
+void Timer::Close()	// 停止定时器
 {
-    if (!_started)
+	if (!_started)
         return ;
 
     debug_printf("Timer%d::Stop\r\n", _index + 1);
@@ -163,6 +161,18 @@ void Timer::Stop()
 
     _started = false;
 }
+void Timer::Config()
+{
+}
+void Timer::OnInit()
+{
+}
+	void Timer::OnOpen()
+	{
+	}
+	void Timer::OnClose()
+	{
+	}
 
 void Timer::ClockCmd(bool state)
 {
