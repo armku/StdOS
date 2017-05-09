@@ -119,7 +119,7 @@ void Timer::Open()	// 开始定时器
     #endif 
 
     // 打开时钟
-    ClockCmd(true);
+    ClockCmd(_index,true);
 
     // 关闭。不再需要，跟上面ClockCmd的效果一样
     //TIM_DeInit(_port);
@@ -153,7 +153,7 @@ void Timer::Close()	// 停止定时器
     debug_printf("Timer%d::Stop\r\n", _index + 1);
 
     // 关闭时钟
-    ClockCmd(false);
+    ClockCmd(_index,false);
     TIM_ITConfig(_port, TIM_IT_Update, DISABLE);
     TIM_ClearITPendingBit(_port, TIM_IT_Update); // 仅清除中断标志位 关闭不可靠
     TIM_Cmd(_port, DISABLE);
@@ -173,10 +173,10 @@ void Timer::OnInit()
 	{
 	}
 
-void Timer::ClockCmd(bool state)
+void Timer::ClockCmd(int idx, bool state)
 {
     FunctionalState st = state ? ENABLE : DISABLE;
-    switch (_index + 1)
+    switch (idx + 1)
     {
         case 1:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, st);

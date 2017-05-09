@@ -54,8 +54,7 @@ private:
 	static const void* GetTimer(byte idx);
 //////////////////////以下为需要清理的数据
 private:
-        TIM_TypeDef *_port;        
-        void ClockCmd(bool state);
+        TIM_TypeDef *_port;    
     public:
         Timer(TIM_TypeDef *timer); 
         static Timer **Timers; // 已经实例化的定时器对象
