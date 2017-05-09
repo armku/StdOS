@@ -82,9 +82,13 @@ extern UInt64 TicksPerms;
 //系统启动以来的毫秒
 UInt64 TTime::Current()const
 {
+	#if 1
 	UInt64 ret=this->mCurrent *1000;
 	ret+=(TicksPerms-SysTick->VAL)/fac_us;
     return ret;
+	#else
+	return this->mCurrent*1000;
+	#endif
 }
 
 uint TTime::TicksToUs(uint ticks)const
