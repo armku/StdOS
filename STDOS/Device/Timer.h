@@ -3,11 +3,10 @@
 
 #include "Kernel\Sys.h"
 #include "Device\Port.h"
-#include "stm32f10x.h"
+
 // 定时器
 class Timer
 {
-	
 protected:
 	byte	_index;		// 第几个定时器，从0开始
 	Delegate<Timer&>	OnTick;	// 带this参数
@@ -52,12 +51,6 @@ private:
 	void OnClose();
 
 	static const void* GetTimer(byte idx);
-//////////////////////以下为需要清理的数据
-private:
-        TIM_TypeDef *_port;    
-    public:
-        Timer(TIM_TypeDef *timer); 
-        static Timer **Timers; // 已经实例化的定时器对象
 };
 
 #endif

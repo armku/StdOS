@@ -5,9 +5,30 @@
 
 
 static TIM_TypeDef *const g_Timers[] = TIMS;
-Timer **Timer::Timers = NULL;
+static Timer **Timers = NULL;// 已经实例化的定时器对象
 const byte Timer::TimerCount = ArrayLength(g_Timers);
 
+Timer::Timer(TIMER index)
+{
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TIM_TypeDef *_port; 
+#if 0
 Timer::Timer(TIM_TypeDef *timer)
 {
     assert_param(timer);
@@ -50,7 +71,7 @@ Timer::Timer(TIM_TypeDef *timer)
         _Handler = NULL;
     #endif 
 }
-
+#endif
 Timer::~Timer()
 {
     if (Opened)
@@ -96,7 +117,7 @@ Timer *Timer::Create(byte index)
     if (Timers[index])
         return Timers[index];
     else
-        return new Timer(g_Timers[index]);
+        return new Timer((TIMER)index);
 }
 void Timer::Open()	// 开始定时器
 {
