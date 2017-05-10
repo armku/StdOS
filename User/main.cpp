@@ -78,12 +78,12 @@ void OnPress(InputPort& port,bool down)
 void TIM2_Configuration(void);
 void TIM2_NVIC_Configuration(void);
 #include "stm32f10x_tim.h"
-volatile u32 time = 0; // ms 计时变量 
+volatile u32 time2cnt = 0; // ms 计时变量 
 void LedTest(void *param)
 {
-    if ( time == 1000 ) /* 1000 * 1 ms = 1s 时间到 */
+    if ( time2cnt >= 1000 ) /* 1000 * 1 ms = 1s 时间到 */
     {
-      time = 0;   
+      time2cnt = 0;   
 		led=!led; 
     }    
 }
