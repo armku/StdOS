@@ -145,7 +145,15 @@ void TInterrupt::SetPriority(short irq, uint priority)const
                 NVIC_Init(&nvic);
                 break;
             #endif 
-        default:
+		case TIM2_IRQn:
+			//28
+			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+			nvic.NVIC_IRQChannel = TIM2_IRQn;
+			nvic.NVIC_IRQChannelPreemptionPriority = 0;
+			nvic.NVIC_IRQChannelSubPriority = 3;
+			nvic.NVIC_IRQChannelCmd = ENABLE;
+				break;
+		default:
             break;
     }
 

@@ -76,7 +76,6 @@ void OnPress(InputPort &port, bool down)
 {
     debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
 }
-void TIM2_NVIC_Configuration(void);
 #include "stm32f10x_tim.h"
 volatile u32 time2cnt = 0; // ms 计时变量 
 void LedTest(void *param)
@@ -131,25 +130,11 @@ int main(void)
     // 初始化为输出
 	
 	timer2.SetCounter(1000);
-	timer2.Config();
-    /* 实战定时器的中断优先级 */
-    TIM2_NVIC_Configuration();
+	timer2.Config();    
+	Interrupt.SetPriority(TIM2_IRQn,3);
 
     timer2.Open();
     //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
     Sys.AddTask(LedTest, nullptr, 0, 10, "LedTest");
     Sys.Start();
-}
-
-/// TIM2中断优先级配置
-void TIM2_NVIC_Configuration(void)
-{
-    NVIC_InitTypeDef NVIC_InitStructure;
-
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-    NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;
-    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init(&NVIC_InitStructure);
 }
