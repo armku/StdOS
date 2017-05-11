@@ -70,140 +70,140 @@ void TInterrupt::SetPriority(short irq, uint priority)const
     nvic.NVIC_IRQChannelCmd = ENABLE;
     switch (irq)
     {
-        case EXTI0_IRQn:
-			//6
+        case 6:
+            //EXTI0_IRQn
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-            nvic.NVIC_IRQChannel = EXTI0_IRQn;
+            nvic.NVIC_IRQChannel = irq;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = priority;
             break;
-        case EXTI1_IRQn:
-			//7
+        case 7:
+            //EXTI1_IRQn
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-            nvic.NVIC_IRQChannel = EXTI1_IRQn;
+            nvic.NVIC_IRQChannel = irq;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = priority;
             break;
-        case EXTI2_IRQn:
-            //8
+        case 8:
+            //EXTI2_IRQn
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-            nvic.NVIC_IRQChannel = EXTI2_IRQn;
+            nvic.NVIC_IRQChannel = irq;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = priority;
             break;
-        case EXTI3_IRQn:
-            //9
+        case 9:
+            //EXTI3_IRQn
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-            nvic.NVIC_IRQChannel = EXTI3_IRQn;
+            nvic.NVIC_IRQChannel = irq;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = priority;
             break;
-        case EXTI4_IRQn:
-            //10
+        case 10:
+            //EXTI4_IRQn
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-            nvic.NVIC_IRQChannel = EXTI4_IRQn;
+            nvic.NVIC_IRQChannel = irq;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = priority;
             break;
-        case EXTI9_5_IRQn:
-            //23
+        case 23:
+            //EXTI9_5_IRQn
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-            nvic.NVIC_IRQChannel = EXTI9_5_IRQn;
+            nvic.NVIC_IRQChannel = irq;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = priority;
             break;
-        case TIM2_IRQn:
-			//28
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-			nvic.NVIC_IRQChannel = TIM2_IRQn;
-			nvic.NVIC_IRQChannelPreemptionPriority = 0;
-			nvic.NVIC_IRQChannelSubPriority = 3;
-			nvic.NVIC_IRQChannelCmd = ENABLE;
-				break;
-		case TIM3_IRQn:
-			//29
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-			nvic.NVIC_IRQChannel = TIM3_IRQn;
-			nvic.NVIC_IRQChannelPreemptionPriority = 0;
-			nvic.NVIC_IRQChannelSubPriority = 3;
-			nvic.NVIC_IRQChannelCmd = ENABLE;
-				break;
-		case TIM4_IRQn:
-			//30
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-			nvic.NVIC_IRQChannel = TIM4_IRQn;
-			nvic.NVIC_IRQChannelPreemptionPriority = 0;
-			nvic.NVIC_IRQChannelSubPriority = 3;
-			nvic.NVIC_IRQChannelCmd = ENABLE;
-				break;
-		case USART1_IRQn:
-            //37
+        case 28:
+            //TIM2_IRQn
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+            nvic.NVIC_IRQChannel = irq;
+            nvic.NVIC_IRQChannelPreemptionPriority = 0;
+            nvic.NVIC_IRQChannelSubPriority = 3;
+            nvic.NVIC_IRQChannelCmd = ENABLE;
+            break;
+        case 29:
+            //TIM3_IRQn
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+            nvic.NVIC_IRQChannel = irq;
+            nvic.NVIC_IRQChannelPreemptionPriority = 0;
+            nvic.NVIC_IRQChannelSubPriority = 3;
+            nvic.NVIC_IRQChannelCmd = ENABLE;
+            break;
+        case 30:
+            //TIM4_IRQn
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+            nvic.NVIC_IRQChannel = irq;
+            nvic.NVIC_IRQChannelPreemptionPriority = 0;
+            nvic.NVIC_IRQChannelSubPriority = 3;
+            nvic.NVIC_IRQChannelCmd = ENABLE;
+            break;
+        case 37:
+            //USART1_IRQn
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-            nvic.NVIC_IRQChannel = USART1_IRQn;
+            nvic.NVIC_IRQChannel = irq;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = priority;
             break;
-        case USART2_IRQn:
-            //38
+        case 38:
+            //USART2_IRQn
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-            nvic.NVIC_IRQChannel = USART2_IRQn;
+            nvic.NVIC_IRQChannel = irq;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = priority;
             break;
-        case USART3_IRQn:
-            //39
+        case 39:
+            //USART3_IRQn
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-            nvic.NVIC_IRQChannel = USART3_IRQn;
+            nvic.NVIC_IRQChannel = irq;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = priority;
             break;
-            #ifdef STM32F10X_HD
-            case UART4_IRQn:
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannel = UART4_IRQn;
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = priority;
-                break;
-            case UART5_IRQn:
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannel = UART5_IRQn;
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = priority;
-                NVIC_Init(&nvic);
-                break;
-            #endif 
-		case EXTI15_10_IRQn:
-            //40
+        case 52:
+            //UART4_IRQn
             NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-            nvic.NVIC_IRQChannel = EXTI15_10_IRQn;
+            nvic.NVIC_IRQChannel = irq;
             nvic.NVIC_IRQChannelPreemptionPriority = 1;
             nvic.NVIC_IRQChannelSubPriority = priority;
             break;
-        case TIM5_IRQn:
-			//50
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-			nvic.NVIC_IRQChannel = TIM5_IRQn;
-			nvic.NVIC_IRQChannelPreemptionPriority = 0;
-			nvic.NVIC_IRQChannelSubPriority = 3;
-			nvic.NVIC_IRQChannelCmd = ENABLE;
-				break;
-		case TIM6_IRQn:
-			//54
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-			nvic.NVIC_IRQChannel = TIM6_IRQn;
-			nvic.NVIC_IRQChannelPreemptionPriority = 0;
-			nvic.NVIC_IRQChannelSubPriority = 3;
-			nvic.NVIC_IRQChannelCmd = ENABLE;
-				break;
-		case TIM7_IRQn:
-			//55
-			NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-			nvic.NVIC_IRQChannel = TIM7_IRQn;
-			nvic.NVIC_IRQChannelPreemptionPriority = 0;
-			nvic.NVIC_IRQChannelSubPriority = 3;
-			nvic.NVIC_IRQChannelCmd = ENABLE;
-				break;
-		default:
+        case 53:
+            //UART5_IRQn
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = irq;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
+            nvic.NVIC_IRQChannelSubPriority = priority;
+            NVIC_Init(&nvic);
+            break;
+        case 40:
+            //EXTI15_10_IRQn
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+            nvic.NVIC_IRQChannel = irq;
+            nvic.NVIC_IRQChannelPreemptionPriority = 1;
+            nvic.NVIC_IRQChannelSubPriority = priority;
+            break;
+        case 50:
+            //TIM5_IRQn
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+            nvic.NVIC_IRQChannel = irq;
+            nvic.NVIC_IRQChannelPreemptionPriority = 0;
+            nvic.NVIC_IRQChannelSubPriority = 3;
+            nvic.NVIC_IRQChannelCmd = ENABLE;
+            break;
+        case 54:
+            //TIM6_IRQn
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+            nvic.NVIC_IRQChannel = irq;
+            nvic.NVIC_IRQChannelPreemptionPriority = 0;
+            nvic.NVIC_IRQChannelSubPriority = 3;
+            nvic.NVIC_IRQChannelCmd = ENABLE;
+            break;
+        case 55:
+            //TIM7_IRQn
+            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+            nvic.NVIC_IRQChannel = irq;
+            nvic.NVIC_IRQChannelPreemptionPriority = 0;
+            nvic.NVIC_IRQChannelSubPriority = 3;
+            nvic.NVIC_IRQChannelCmd = ENABLE;
+            break;
+        default:
             break;
     }
 
@@ -329,14 +329,14 @@ extern volatile u32 time2cnt;
         }
     }
 
-void TIM2_IRQHandler(void)
-{
-	if ( TIM_GetITStatus(TIM2 , TIM_IT_Update) != RESET ) 
-	{	
-		time2cnt++;
-		TIM_ClearITPendingBit(TIM2 , TIM_FLAG_Update);  		 
-	}		 	
-}
+    void TIM2_IRQHandler(void)
+    {
+        if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
+        {
+            time2cnt++;
+            TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
+        }
+    }
     void EXTI0_IRQHandler()
     {
         if (EXTI_GetITStatus(EXTI_Line0) != RESET)
