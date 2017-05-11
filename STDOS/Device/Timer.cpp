@@ -14,7 +14,7 @@ void Timer::SetHandler(bool set)
 
 Timer::Timer(TIMER index)
 {
-	
+	this->_index=index;
 }
 
 Timer::~Timer()
@@ -29,6 +29,8 @@ Timer::~Timer()
 }
 void Timer::Open()	// 开始定时器
 {
+	this->OnOpen();
+	#if 0
 	 #if DEBUG
         // 获取当前频率
         RCC_ClocksTypeDef clock;
@@ -71,7 +73,7 @@ void Timer::Open()	// 开始定时器
     //        TIM_ClearITPendingBit(_port, TIM_IT_Update);
     // 打开计数
     TIM_Cmd(_port, ENABLE);
-
+#endif
     Opened = true;
 }
 void Timer::Close()	// 停止定时器
@@ -91,6 +93,7 @@ void Timer::Close()	// 停止定时器
 }
 void Timer::Config()
 {
+	
 }
 // 设置频率，自动计算预分频
 void Timer::SetFrequency(uint frequency)
@@ -161,7 +164,7 @@ uint Timer::GetCounter()
 }
 void Timer::SetCounter(uint cnt)		// 设置计数器值
 {
-	
+	this->Period=cnt;
 }
 void Timer::Register(const Delegate<Timer&>& dlg)
 {
@@ -295,33 +298,98 @@ void Timer::OnInit()
 }
 	void Timer::OnOpen()
 	{
+		switch(this->_index)
+		{
+			case Timer1:
+				break;
+			case Timer2:
+				RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+				break;
+			case Timer3:
+				break;
+			case Timer4:
+				break;
+			case Timer5:
+				break;
+			case Timer6:
+				break;
+			case Timer7:
+				break;
+			case Timer8:
+				break;
+			case Timer9:
+				break;
+			case Timer10:
+				break;
+			case Timer11:
+				break;
+			case Timer12:
+				break;
+			case Timer13:
+				break;
+			case Timer14:
+				break;
+			case Timer15:
+				break;
+			case Timer16:
+				break;
+			case Timer17:
+				break;
+			case Timer18:
+				break;
+			default:
+				break;
+		}
 	}
 	void Timer::OnClose()
 	{
+		switch(this->_index)
+		{
+			case Timer1:
+				break;
+			case Timer2:
+				RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE);
+				break;
+			case Timer3:
+				break;
+			case Timer4:
+				break;
+			case Timer5:
+				break;
+			case Timer6:
+				break;
+			case Timer7:
+				break;
+			case Timer8:
+				break;
+			case Timer9:
+				break;
+			case Timer10:
+				break;
+			case Timer11:
+				break;
+			case Timer12:
+				break;
+			case Timer13:
+				break;
+			case Timer14:
+				break;
+			case Timer15:
+				break;
+			case Timer16:
+				break;
+			case Timer17:
+				break;
+			case Timer18:
+				break;
+			default:
+				break;
+		}
 	}
 const void* Timer::GetTimer(byte idx)
 {
 	return nullptr;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #if 0
 Timer::Timer(TIM_TypeDef *timer)
 {
@@ -367,12 +435,6 @@ Timer::Timer(TIM_TypeDef *timer)
 }
 #endif
 
-
-
-
-
-
-
 // 设置预分频目标，比如1MHz
 /*void Timer::SetScaler(uint scaler)
 {
@@ -399,6 +461,3 @@ assert_param(ps > 0 && ps <= 0xFFFF);
             Interrupt.Deactivate(irqs[_index]);
     }
 #endif 
-
-
-

@@ -131,18 +131,15 @@ int main(void)
     //	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
     // 初始化为输出
-
+	
+	timer2.SetCounter(1000);
     /* TIM2 定时配置 */
     TIM2_Configuration();
 
     /* 实战定时器的中断优先级 */
     TIM2_NVIC_Configuration();
 
-    /* TIM2 重新开时钟，开始计时 */
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-
-
-
+    timer2.Open();
     //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
     Sys.AddTask(LedTest, nullptr, 0, 10, "LedTest");
     Sys.Start();
