@@ -90,7 +90,7 @@ void LedTest(void *param)
         led = !led;
     }
 }
-
+Timer timer2(Timer2);
 int main(void)
 {
     SerialPort *sp1;
