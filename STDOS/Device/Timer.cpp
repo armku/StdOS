@@ -1,20 +1,19 @@
 #include "Timer.h"
 #include "stm32f10x_rcc.h"
 
-static Timer **Timers = NULL;// 已经实例化的定时器对象
-TIM_TypeDef *_port; 
+static Timer **Timers = NULL; // 已经实例化的定时器对象
+TIM_TypeDef *_port;
 #define TIMS {TIM1,TIM2,TIM3,TIM4,TIM5}
 static TIM_TypeDef *const g_Timers[] = TIMS;
 const byte Timer::TimerCount = ArrayLength(g_Timers);
 
-void Timer::SetHandler(bool set)
-{
-	
+void Timer::SetHandler(bool set){
+
 }
 
 Timer::Timer(TIMER index)
 {
-	this->_index=index;
+    this->_index = index;
 }
 
 Timer::~Timer()
@@ -27,70 +26,73 @@ Timer::~Timer()
     #endif 
     Timers[_index] = NULL;
 }
-void Timer::Open()	// 开始定时器
-{
-	this->OnOpen();
-	#if 0
-	 #if DEBUG
-        // 获取当前频率
-        RCC_ClocksTypeDef clock;
-        RCC_GetClocksFreq(&clock);
 
-        #if defined(STM32F1) || defined(STM32F4)
-            uint clk = clock.PCLK1_Frequency;
-            if ((uint)_port &0x00010000)
-                clk = clock.PCLK2_Frequency;
-            clk <<= 1;
-        #elif defined(STM32F0)
-            uint clk = clock.PCLK_Frequency << 1;
+void Timer::Open() // 开始定时器
+{
+    this->OnOpen();
+    #if 0
+        #if DEBUG
+            // 获取当前频率
+            RCC_ClocksTypeDef clock;
+            RCC_GetClocksFreq(&clock);
+
+            #if defined(STM32F1) || defined(STM32F4)
+                uint clk = clock.PCLK1_Frequency;
+                if ((uint)_port &0x00010000)
+                    clk = clock.PCLK2_Frequency;
+                clk <<= 1;
+            #elif defined(STM32F0)
+                uint clk = clock.PCLK_Frequency << 1;
+            #endif 
+
+            uint fre = clk / Prescaler / Period;
+            debug_printf("Timer%d::Start Prescaler=%d Period=%d Frequency=%d\r\n", _index + 1, Prescaler, Period, fre);
         #endif 
 
-        uint fre = clk / Prescaler / Period;
-        debug_printf("Timer%d::Start Prescaler=%d Period=%d Frequency=%d\r\n", _index + 1, Prescaler, Period, fre);
+        // 打开时钟
+        ClockCmd(_index, true);
+
+        // 关闭。不再需要，跟上面ClockCmd的效果一样
+        //TIM_DeInit(_port);
+
+        // 配置时钟
+        TIM_TimeBaseInitTypeDef _timer;
+        TIM_TimeBaseStructInit(&_timer);
+        _timer.TIM_Period = Period - 1;
+        _timer.TIM_Prescaler = Prescaler - 1;
+        //_timer.TIM_ClockDivision = 0x0;
+        _timer.TIM_CounterMode = TIM_CounterMode_Up;
+        TIM_TimeBaseInit(_port, &_timer);
+
+        //        TIM_PrescalerConfig(_port, _timer.TIM_Period,TIM_PSCReloadMode_Immediate);                // 分频数立即加载
+        // 打开中断
+        //TIM_ITConfig(_port, TIM_IT_Update | TIM_IT_Trigger, ENABLE);
+        TIM_ITConfig(_port, TIM_IT_Update, ENABLE);
+        //TIM_UpdateRequestConfig(_port, TIM_UpdateSource_Regular);
+        TIM_ClearFlag(_port, TIM_FLAG_Update); // 清楚标志位  必须要有！！ 否则 开启中断立马中断给你看
+        //        TIM_ClearITPendingBit(_port, TIM_IT_Update);
+        // 打开计数
+        TIM_Cmd(_port, ENABLE);
     #endif 
-
-    // 打开时钟
-    ClockCmd(_index,true);
-
-    // 关闭。不再需要，跟上面ClockCmd的效果一样
-    //TIM_DeInit(_port);
-
-    // 配置时钟
-    TIM_TimeBaseInitTypeDef _timer;
-    TIM_TimeBaseStructInit(&_timer);
-    _timer.TIM_Period = Period - 1;
-    _timer.TIM_Prescaler = Prescaler - 1;
-    //_timer.TIM_ClockDivision = 0x0;
-    _timer.TIM_CounterMode = TIM_CounterMode_Up;
-    TIM_TimeBaseInit(_port, &_timer);
-
-    //        TIM_PrescalerConfig(_port, _timer.TIM_Period,TIM_PSCReloadMode_Immediate);                // 分频数立即加载
-    // 打开中断
-    //TIM_ITConfig(_port, TIM_IT_Update | TIM_IT_Trigger, ENABLE);
-    TIM_ITConfig(_port, TIM_IT_Update, ENABLE);
-    //TIM_UpdateRequestConfig(_port, TIM_UpdateSource_Regular);
-    TIM_ClearFlag(_port, TIM_FLAG_Update); // 清楚标志位  必须要有！！ 否则 开启中断立马中断给你看
-    //        TIM_ClearITPendingBit(_port, TIM_IT_Update);
-    // 打开计数
-    TIM_Cmd(_port, ENABLE);
-#endif
     Opened = true;
 }
-void Timer::Close()	// 停止定时器
+
+void Timer::Close() // 停止定时器
 {
-	if (!Opened)
+    if (!Opened)
         return ;
 
     debug_printf("Timer%d::Stop\r\n", _index + 1);
 
     // 关闭时钟
-    ClockCmd(_index,false);
+    ClockCmd(_index, false);
     TIM_ITConfig(_port, TIM_IT_Update, DISABLE);
     TIM_ClearITPendingBit(_port, TIM_IT_Update); // 仅清除中断标志位 关闭不可靠
     TIM_Cmd(_port, DISABLE);
 
     Opened = false;
 }
+
 /*
  * TIM_Period / Auto Reload Register(ARR) = 1000   TIM_Prescaler--71 
  * 中断周期为 = 1/(72MHZ /72) * 1000 = 1ms
@@ -99,75 +101,76 @@ void Timer::Close()	// 停止定时器
  */
 void Timer::Config()
 {
-	switch(this->_index)
-		{
-			case Timer1:
-				break;
-			case Timer2:
-				TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+    switch (this->_index)
+    {
+        case Timer1:
+            break;
+        case Timer2:
+            TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
 
-    /* 设置TIM2CLK 为 72MHZ */
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-    //TIM_DeInit(TIM2);
+            /* 设置TIM2CLK 为 72MHZ */
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+            //TIM_DeInit(TIM2);
 
-    /* 自动重装载寄存器周期的值(计数值) */
-    TIM_TimeBaseStructure.TIM_Period = 1000;
+            /* 自动重装载寄存器周期的值(计数值) */
+            TIM_TimeBaseStructure.TIM_Period = 1000;
 
-    /* 累计 TIM_Period个频率后产生一个更新或者中断 */
-    /* 时钟预分频数为72 */
-    TIM_TimeBaseStructure.TIM_Prescaler = 71;
+            /* 累计 TIM_Period个频率后产生一个更新或者中断 */
+            /* 时钟预分频数为72 */
+            TIM_TimeBaseStructure.TIM_Prescaler = 71;
 
-    /* 对外部时钟进行采样的时钟分频,这里没有用到 */
-    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+            /* 对外部时钟进行采样的时钟分频,这里没有用到 */
+            TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
 
-    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
-    TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+            TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+            TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
 
-    TIM_ClearFlag(TIM2, TIM_FLAG_Update);
+            TIM_ClearFlag(TIM2, TIM_FLAG_Update);
 
-    TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+            TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
 
-    TIM_Cmd(TIM2, ENABLE);
+            TIM_Cmd(TIM2, ENABLE);
 
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE); /*先关闭等待使用*/		
-			
-				break;
-			case Timer3:
-				break;
-			case Timer4:
-				break;
-			case Timer5:
-				break;
-			case Timer6:
-				break;
-			case Timer7:
-				break;
-			case Timer8:
-				break;
-			case Timer9:
-				break;
-			case Timer10:
-				break;
-			case Timer11:
-				break;
-			case Timer12:
-				break;
-			case Timer13:
-				break;
-			case Timer14:
-				break;
-			case Timer15:
-				break;
-			case Timer16:
-				break;
-			case Timer17:
-				break;
-			case Timer18:
-				break;
-			default:
-				break;
-		}	
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE); /*先关闭等待使用*/
+
+            break;
+        case Timer3:
+            break;
+        case Timer4:
+            break;
+        case Timer5:
+            break;
+        case Timer6:
+            break;
+        case Timer7:
+            break;
+        case Timer8:
+            break;
+        case Timer9:
+            break;
+        case Timer10:
+            break;
+        case Timer11:
+            break;
+        case Timer12:
+            break;
+        case Timer13:
+            break;
+        case Timer14:
+            break;
+        case Timer15:
+            break;
+        case Timer16:
+            break;
+        case Timer17:
+            break;
+        case Timer18:
+            break;
+        default:
+            break;
+    }
 }
+
 // 设置频率，自动计算预分频
 void Timer::SetFrequency(uint frequency)
 {
@@ -231,17 +234,18 @@ void Timer::SetFrequency(uint frequency)
         TIM_TimeBaseInit(_port, &_timer);
     }
 }
+
 uint Timer::GetCounter()
 {
-	return 0;
+    return 0;
 }
-void Timer::SetCounter(uint cnt)		// 设置计数器值
+
+void Timer::SetCounter(uint cnt) // 设置计数器值
 {
-	this->Period=cnt;
+    this->Period = cnt;
 }
-void Timer::Register(const Delegate<Timer&>& dlg)
-{
-}
+
+void Timer::Register(const Delegate < Timer & >  &dlg){}
 void Timer::OnInterrupt()
 {
     // 检查指定的 TIM 中断发生
@@ -324,12 +328,14 @@ void Timer::ClockCmd(int idx, bool state)
             #endif 
     }
 }
+
 void Timer::OnHandler(ushort num, void *param)
 {
     Timer *timer = (Timer*)param;
     if (timer)
         timer->OnInterrupt();
 }
+
 // 创建指定索引的定时器，如果已有则直接返回，默认0xFF表示随机分配
 Timer *Timer::Create(byte index)
 {
@@ -366,147 +372,149 @@ Timer *Timer::Create(byte index)
     else
         return new Timer((TIMER)index);
 }
-void Timer::OnInit()
-{
-}
-	void Timer::OnOpen()
-	{
-		switch(this->_index)
-		{
-			case Timer1:
-				break;
-			case Timer2:
-				RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-				break;
-			case Timer3:
-				break;
-			case Timer4:
-				break;
-			case Timer5:
-				break;
-			case Timer6:
-				break;
-			case Timer7:
-				break;
-			case Timer8:
-				break;
-			case Timer9:
-				break;
-			case Timer10:
-				break;
-			case Timer11:
-				break;
-			case Timer12:
-				break;
-			case Timer13:
-				break;
-			case Timer14:
-				break;
-			case Timer15:
-				break;
-			case Timer16:
-				break;
-			case Timer17:
-				break;
-			case Timer18:
-				break;
-			default:
-				break;
-		}
-	}
-	void Timer::OnClose()
-	{
-		switch(this->_index)
-		{
-			case Timer1:
-				break;
-			case Timer2:
-				RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE);
-				break;
-			case Timer3:
-				break;
-			case Timer4:
-				break;
-			case Timer5:
-				break;
-			case Timer6:
-				break;
-			case Timer7:
-				break;
-			case Timer8:
-				break;
-			case Timer9:
-				break;
-			case Timer10:
-				break;
-			case Timer11:
-				break;
-			case Timer12:
-				break;
-			case Timer13:
-				break;
-			case Timer14:
-				break;
-			case Timer15:
-				break;
-			case Timer16:
-				break;
-			case Timer17:
-				break;
-			case Timer18:
-				break;
-			default:
-				break;
-		}
-	}
-const void* Timer::GetTimer(byte idx)
-{
-	return nullptr;
-}
-#if 0
-Timer::Timer(TIM_TypeDef *timer)
-{
-    assert_param(timer);
 
-    // 初始化静态数组
-    if (!Timers)
+void Timer::OnInit(){}
+void Timer::OnOpen()
+{
+    switch (this->_index)
     {
-        Timers = new Timer *[TimerCount];
+        case Timer1:
+            break;
+        case Timer2:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+            break;
+        case Timer3:
+            break;
+        case Timer4:
+            break;
+        case Timer5:
+            break;
+        case Timer6:
+            break;
+        case Timer7:
+            break;
+        case Timer8:
+            break;
+        case Timer9:
+            break;
+        case Timer10:
+            break;
+        case Timer11:
+            break;
+        case Timer12:
+            break;
+        case Timer13:
+            break;
+        case Timer14:
+            break;
+        case Timer15:
+            break;
+        case Timer16:
+            break;
+        case Timer17:
+            break;
+        case Timer18:
+            break;
+        default:
+            break;
+    }
+}
+
+void Timer::OnClose()
+{
+    switch (this->_index)
+    {
+        case Timer1:
+            break;
+        case Timer2:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE);
+            break;
+        case Timer3:
+            break;
+        case Timer4:
+            break;
+        case Timer5:
+            break;
+        case Timer6:
+            break;
+        case Timer7:
+            break;
+        case Timer8:
+            break;
+        case Timer9:
+            break;
+        case Timer10:
+            break;
+        case Timer11:
+            break;
+        case Timer12:
+            break;
+        case Timer13:
+            break;
+        case Timer14:
+            break;
+        case Timer15:
+            break;
+        case Timer16:
+            break;
+        case Timer17:
+            break;
+        case Timer18:
+            break;
+        default:
+            break;
+    }
+}
+
+const void *Timer::GetTimer(byte idx)
+{
+    return nullptr;
+}
+
+#if 0
+    Timer::Timer(TIM_TypeDef *timer)
+    {
+        assert_param(timer);
+
+        // 初始化静态数组
+        if (!Timers)
+        {
+            Timers = new Timer *[TimerCount];
+            #if 0
+                ArrayZero2(Timers, TimerCount);
+            #endif 
+        }
+
+        //TIM_TypeDef* g_Timers[] = TIMS;
+        byte idx = 0xFF;
         #if 0
-            ArrayZero2(Timers, TimerCount);
+            for (int i = 0; i < ArrayLength(g_Timers); i++)
+            {
+                if (g_Timers[i] == timer)
+                {
+                    idx = i;
+                    break;
+                }
+            }
+        #endif 
+        assert_param(idx <= ArrayLength(g_Timers));
+
+        Timers[idx] = this;
+
+        _index = idx;
+        _port = g_Timers[idx];
+
+        // 默认情况下，预分频到1MHz，然后1000个周期，即是1ms中断一次
+        /*Prescaler = Sys.Clock / 1000000;
+        Period = 1000;*/
+        SetFrequency(10);
+
+        Opened = false;
+        #if 0
+            _Handler = NULL;
         #endif 
     }
-
-    //TIM_TypeDef* g_Timers[] = TIMS;
-    byte idx = 0xFF;
-    #if 0
-        for (int i = 0; i < ArrayLength(g_Timers); i++)
-        {
-            if (g_Timers[i] == timer)
-            {
-                idx = i;
-                break;
-            }
-        }
-    #endif 
-    assert_param(idx <= ArrayLength(g_Timers));
-
-    Timers[idx] = this;
-
-    _index = idx;
-    _port = g_Timers[idx];
-
-    // 默认情况下，预分频到1MHz，然后1000个周期，即是1ms中断一次
-    /*Prescaler = Sys.Clock / 1000000;
-    Period = 1000;*/
-    SetFrequency(10);
-
-    Opened = false;
-    #if 0
-        _Handler = NULL;
-    #endif 
-}
-#endif
+#endif 
 
 // 设置预分频目标，比如1MHz
 /*void Timer::SetScaler(uint scaler)
@@ -533,4 +541,4 @@ assert_param(ps > 0 && ps <= 0xFFFF);
         else
             Interrupt.Deactivate(irqs[_index]);
     }
-#endif 
+#endif
