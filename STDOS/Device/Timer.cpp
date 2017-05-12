@@ -1,5 +1,6 @@
 #include "Timer.h"
 #include "stm32f10x_rcc.h"
+#include "TInterrupt.h"
 
 static Timer **Timers = NULL; // 已经实例化的定时器对象
 TIM_TypeDef *_port;
@@ -132,7 +133,7 @@ void Timer::Config()
             TIM_Cmd(TIM2, ENABLE);
 
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE); /*先关闭等待使用*/
-
+			Interrupt.SetPriority(TIM2_IRQn,3);
             break;
         case Timer3:
             break;

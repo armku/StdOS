@@ -76,8 +76,7 @@ void OnPress(InputPort &port, bool down)
 {
     debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
 }
-#include "stm32f10x_tim.h"
-volatile u32 time2cnt = 0; // ms 计时变量 
+volatile uint time2cnt = 0; // ms 计时变量 
 void LedTest(void *param)
 {
     if (time2cnt >= 1000)
@@ -130,8 +129,7 @@ int main(void)
     // 初始化为输出
 	
 	timer2.SetCounter(1000);
-	timer2.Config();    
-	Interrupt.SetPriority(TIM2_IRQn,3);
+	timer2.Config();
 
     timer2.Open();
     //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
