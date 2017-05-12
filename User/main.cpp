@@ -86,7 +86,7 @@ void LedTest(void *param)
         led = !led;
     }
 }
-Timer timer2(Timer2);
+
 int main(void)
 {
     SerialPort *sp1;
@@ -127,10 +127,9 @@ int main(void)
     //	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
     // 初始化为输出
-	
+	Timer timer2(Timer2);
 	timer2.SetCounter(1000);
 	timer2.Config();
-
     timer2.Open();
     //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
     Sys.AddTask(LedTest, nullptr, 0, 10, "LedTest");
