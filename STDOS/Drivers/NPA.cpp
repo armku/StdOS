@@ -20,7 +20,9 @@ int CNPA::Read(void)
         return  - 1;
     }
     buf1 = this->pi2c->ReadByte();
+	this->pi2c->Ack();
     buf2 = this->pi2c->ReadByte();
+	this->pi2c->Ack(false);
     this->pi2c->Stop();
     buf = (buf1 << 8) | buf2;
     return buf;
