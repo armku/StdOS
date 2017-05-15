@@ -246,7 +246,10 @@ void Timer::SetCounter(uint cnt) // 设置计数器值
     this->Period = cnt;
 }
 
-void Timer::Register(const Delegate < Timer & >  &dlg){}
+void Timer::Register(const Delegate < Timer & >  &dlg)
+{
+	this->OnTick=dlg;
+}
 void Timer::OnInterrupt()
 {
     // 检查指定的 TIM 中断发生

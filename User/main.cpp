@@ -86,6 +86,7 @@ void LedTest(void *param)
         led = !led;
     }
 }
+Delegate<Timer&> abc;
 
 int main(void)
 {
@@ -130,7 +131,9 @@ int main(void)
 	Timer timer2(Timer2);
 	timer2.SetCounter(1000);
 	timer2.Config();
+	timer2.Register(abc);
     timer2.Open();
+	
     //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
     Sys.AddTask(LedTest, nullptr, 0, 10, "LedTest");
     Sys.Start();
