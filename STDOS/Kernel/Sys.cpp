@@ -312,13 +312,18 @@ void TSys::Init()
             CPUName = new String("STM32F103ZE");
             this->RAMSize = 64;
             break;
-        case 0x418:
+        case 0X0418:
             CPUName = new String("STM32F105VC");
             this->RAMSize = 64;
             break;
-        default:
+        case 0X0430:
+			CPUName = new String("STM32F103VG");
+            this->RAMSize = 768;
+			break;
+		default:
             CPUName = new String("δ֪");
-            break;
+            this->RAMSize = 0;
+			break;
     }
 //    this->Inited = 1;
 }
