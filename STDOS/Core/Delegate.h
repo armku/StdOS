@@ -1,6 +1,5 @@
 #ifndef _Delegate_H_
 #define _Delegate_H_
-#include "Type.h"
 
 // 没有参数和返回值的委托
 typedef void (*Func)(void);
@@ -303,7 +302,3 @@ A* pa=&a;
 */
 
 #endif //_Delegate_H_
-#pragma once
-/*
-回调函数，分号之前必须有空格，否则可能编译异常
-*/
