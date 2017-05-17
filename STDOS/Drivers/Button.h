@@ -8,7 +8,7 @@
 #define DEBOUNCE_TICKS    3	//MAX 8 双击次数
 #define SHORT_TICKS       (300 /TICKS_INTERVAL) //短按键延时时间
 #define LONG_TICKS        (1000 /TICKS_INTERVAL)//长按键延时时间
-
+typedef uint (*FuncRead)();//有返回值的委托
 typedef enum
 {
     PRESS_DOWN = 0, PRESS_UP, PRESS_REPEAT, SINGLE_CLICK, DOUBLE_CLICK, LONG_RRESS_START, LONG_PRESS_HOLD, number_of_event, NONE_PRESS
