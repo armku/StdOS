@@ -3,10 +3,9 @@
 #include "WatchDog.h"
 #include "Sys.h"
 
-WatchDog::WatchDog(uint ms)
-{
-    Timeout = ms;
-    Config(ms);
+WatchDog::WatchDog()
+{ 
+ 
 }
 
 WatchDog::~WatchDog()
@@ -122,6 +121,7 @@ void WatchDog::FeedDogTask(void* param)
 }
 void WatchDog::Start(uint msTimeOut,uint msFeed)
 {
-	cur=new WatchDog(msTimeOut);
+	cur=new WatchDog();
+	cur->Config(msTimeOut);
 	Sys.AddTask(FeedDogTask,&WatchDog::Current(),10,msFeed,"FeedDog");
 }
