@@ -5,15 +5,14 @@
 
 WatchDog::WatchDog()
 { 
- 
+	this->Timeout=3000;
 }
 
 WatchDog::~WatchDog()
 {
     ConfigMax();
 }
-
-
+// 配置看门狗喂狗重置时间，超过该时间将重启MCU
 bool WatchDog::Config(uint ms)
 {
     if (ms == 0)
@@ -93,7 +92,7 @@ bool WatchDog::Config(uint ms)
 
     return true;
 }
-
+// 看门狗无法关闭，只能设置一个最大值
 void WatchDog::ConfigMax()
 {
     /* 打开IWDG_PR和IWDG_RLR寄存器的写访问 */
@@ -104,7 +103,7 @@ void WatchDog::ConfigMax()
     IWDG_SetReload(0x0FFF); 
     IWDG_ReloadCounter();
 }
-
+// 喂狗
 void WatchDog::Feed()
 {
     IWDG_ReloadCounter();
@@ -119,6 +118,7 @@ void WatchDog::FeedDogTask(void* param)
 	WatchDog *dog = (WatchDog*)param;
     dog->Feed();
 }
+// 打开看门狗。最长喂狗时间26208ms，默认2000ms
 void WatchDog::Start(uint msTimeOut,uint msFeed)
 {
 	cur=new WatchDog();
