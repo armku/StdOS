@@ -1,8 +1,10 @@
 #include "SerialPort.h"
 #include "TInterrupt.h"
+#include "Timer.h"
 #include "stm32f10x.h"
 
 SerialPort *onSerialPortRcv[5];
+Timer *onTimerPortRcv[18];
 TInterrupt Interrupt;
 
 // 初始化中断向量表
@@ -17,7 +19,6 @@ void TInterrupt::Process(uint num)const{
 // 注册中断函数（中断号，函数，参数）
 bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
 {
-    SerialPort *sp = (SerialPort*)param;
     switch (irq)
     {
         case  - 14: 
@@ -139,6 +140,7 @@ bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
             break;
         case 25:
             //TIM1_UP_IRQn
+			onTimerPortRcv[0]=(Timer*)param;
             break;
         case 26:
             //TIM1_TRG_COM_IRQn
@@ -175,15 +177,15 @@ bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
             break;
         case 37:
             //USART1_IRQn
-            onSerialPortRcv[0] = sp;
+            onSerialPortRcv[0] = (SerialPort*)param;
             break;
         case 38:
             //USART2_IRQn
-            onSerialPortRcv[1] = sp;
+            onSerialPortRcv[1] = (SerialPort*)param;
             break;
         case 39:
             //USART3_IRQn
-            onSerialPortRcv[2] = sp;
+            onSerialPortRcv[2] = (SerialPort*)param;
             break;
         case 40:
             //EXTI15_10_IRQn
@@ -223,11 +225,11 @@ bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
             break;
         case 52:
             //UART4_IRQn
-            onSerialPortRcv[3] = sp;
+            onSerialPortRcv[3] = (SerialPort*)param;
             break;
         case 53:
             //UART5_IRQn
-            onSerialPortRcv[4] = sp;
+            onSerialPortRcv[4] = (SerialPort*)param;
             break;
         case 54:
             //TIM6_IRQn
