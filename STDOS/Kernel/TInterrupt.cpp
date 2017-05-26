@@ -150,12 +150,15 @@ bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
             break;
         case 28:
             //TIM2_IRQn
+			onTimerPortRcv[1]=(Timer*)param;
             break;
         case 29:
             //TIM3_IRQn
+            onTimerPortRcv[2]=(Timer*)param;
             break;
         case 30:
             //TIM4_IRQn
+            onTimerPortRcv[3]=(Timer*)param;
             break;
         case 31:
             //I2C1_EV_IRQn
@@ -219,6 +222,7 @@ bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
             break;
         case 50:
             //TIM5_IRQn
+            onTimerPortRcv[4]=(Timer*)param;
             break;
         case 51:
             //SPI3_IRQn
@@ -233,9 +237,11 @@ bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
             break;
         case 54:
             //TIM6_IRQn
+            onTimerPortRcv[5]=(Timer*)param;
             break;
         case 55:
             //TIM7_IRQn
+            onTimerPortRcv[6]=(Timer*)param;
             break;
         case 56:
             //DMA2_Channel1_IRQn
