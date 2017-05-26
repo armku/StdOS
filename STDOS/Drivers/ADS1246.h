@@ -29,10 +29,12 @@ class CADS1246
         int Read(void); //返回-1,表示转换未完成
         void Init(void);
         byte Check(void); //AD检查，正常返回0
+		bool GetFlag(void);//读取AD转换是否正常
     private:
+		int flagOK;//ad转换正常
         int decodead(byte *da);
 	
 		CSoftSpi *pspi; //SPI接口
         InputPort *ppinrd; //数据准备好接口
-        OutputPort *ppinreset; //复位接口
+        OutputPort *ppinreset; //复位接口		
 };

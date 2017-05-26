@@ -140,8 +140,10 @@ int CADS1246::Read(void) //返回-1,表示转换未完成
     Cmd[0] = ADC_CMD_RDATA;
     *this->pspi->pportcs=0;
 
+	this->flagOK=true;
     if (this->ppinrd->Read())
     {
+		this->flagOK=false;
         return  - 1;
     }	
     this->pspi->Write(Cmd[0]);	
@@ -251,4 +253,11 @@ byte CSoftSpi::Write(byte da)
 byte CSoftSpi::spi_readbyte(void)
 {
     return Write(0xff);
+}
+//读取AD转换是否正常
+bool CADS1246::GetFlag(void)
+{
+	bool ret=this->flagOK;
+	this->flagOK=false;
+	return ret;
 }
