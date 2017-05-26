@@ -732,8 +732,12 @@ extern volatile u32 time2cnt;
     void TIM2_IRQHandler(void)
     {
         if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
-        {
-            time2cnt++;
+        {      
+			time2cnt++;			
+			if(onTimerPortRcv[1])
+			{
+				
+			}
             TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
         }
     }

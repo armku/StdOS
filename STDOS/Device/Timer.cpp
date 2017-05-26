@@ -249,6 +249,7 @@ void Timer::SetCounter(uint cnt) // 设置计数器值
 void Timer::Register(const Delegate < Timer & >  &dlg)
 {
 	this->OnTick=dlg;
+	//Interrupt.Activate(this->_index+27, dlg, this);
 }
 void Timer::OnInterrupt()
 {
