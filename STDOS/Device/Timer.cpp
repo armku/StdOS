@@ -278,17 +278,19 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
 	}
 	//
 }
+extern volatile uint time2cnt;
 void Timer::OnInterrupt()
 {
-    // 检查指定的 TIM 中断发生
-    if (TIM_GetITStatus(_port, TIM_IT_Update) == RESET)
-        return ;
-    // 必须清除TIMx的中断待处理位，否则会频繁中断
-    TIM_ClearITPendingBit(_port, TIM_IT_Update);
-    #if 0
-        if (_Handler)
-            _Handler(this, _Param);
-    #endif 
+//    // 检查指定的 TIM 中断发生
+//    if (TIM_GetITStatus(_port, TIM_IT_Update) == RESET)
+//        return ;
+//    // 必须清除TIMx的中断待处理位，否则会频繁中断
+//    TIM_ClearITPendingBit(_port, TIM_IT_Update);
+//    #if 0
+//        if (_Handler)
+//            _Handler(this, _Param);
+//    #endif 
+	time2cnt++;
 }
 
 void Timer::ClockCmd(int idx, bool state)

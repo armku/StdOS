@@ -676,7 +676,6 @@ bool Lock::Wait(int ms)
 void EXTI_IRQHandler(ushort num, void *param);
 extern SerialPort *_printf_sp;
 void OnUsartReceive(ushort num, void *param);
-extern volatile u32 time2cnt;
 #ifdef __cplusplus
     extern "C"
     {
@@ -733,10 +732,9 @@ extern volatile u32 time2cnt;
     {
         if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
         {      
-			time2cnt++;			
 			if(onTimerPortRcv[1])
 			{
-				
+				onTimerPortRcv[1]->OnInterrupt();
 			}
             TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
         }

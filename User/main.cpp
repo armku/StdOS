@@ -88,7 +88,7 @@ void LedTest(void *param)
 }
 void tim2refesh(void * param)
 {
-	
+	time2cnt++;
 }
 Delegate<Timer&> abc;
 
