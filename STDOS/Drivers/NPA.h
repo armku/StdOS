@@ -1,15 +1,17 @@
-#pragma once
+#ifndef _NPA_H
+#define _NPA_H
 
-#include "Type.h"
-#include "Port.h"
-#include "I2C.h"
+    #include "Type.h"
+    #include "Port.h"
+    #include "I2C.h"
 
-class CNPA
-{
-    public:
-        CNPA(Pin pinsck, Pin pinsda, byte devAddr = 0X51);
-        int Read(void);
-    private:
-        SoftI2C *pi2c;
-        byte DEVER_ADDR; //设备地址
-};
+    class CNPA
+    {
+        public:
+            CNPA(Pin pinsck, Pin pinsda, byte devAddr = 0X51);
+            int Read(void);
+        private:
+            SoftI2C *pi2c;
+            byte DEVER_ADDR; //设备地址
+    };
+#endif

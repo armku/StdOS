@@ -1,5 +1,5 @@
 #ifndef _AT24CXX_H_
-    #define _AT24CXX_H_
+#define _AT24CXX_H_
 
     #include "Device\I2C.h"
     #include "Storage\Storage.h"
