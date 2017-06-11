@@ -245,7 +245,22 @@ void Timer::SetCounter(uint cnt) // 设置计数器值
 {
     this->Period = cnt;
 }
+#if 0
+    void Timer::Register(EventHandler handler, void *param)
+    {
+        _Handler = handler;
+        _Param = param;
 
+        int irqs[] = TIM_IRQns;
+        if (handler)
+        {
+            Interrupt.SetPriority(irqs[_index]);
+            Interrupt.Activate(irqs[_index], OnHandler, this);
+        }
+        else
+            Interrupt.Deactivate(irqs[_index]);
+    }
+#endif
 void Timer::Register(const Delegate < Timer & >  &dlg)
 {
 	this->OnTick=dlg;
@@ -559,21 +574,3 @@ assert_param(scaler);
 uint ps = Sys.Clock / scaler;
 assert_param(ps > 0 && ps <= 0xFFFF);
 }*/
-
-
-#if 0
-    void Timer::Register(EventHandler handler, void *param)
-    {
-        _Handler = handler;
-        _Param = param;
-
-        int irqs[] = TIM_IRQns;
-        if (handler)
-        {
-            Interrupt.SetPriority(irqs[_index]);
-            Interrupt.Activate(irqs[_index], OnHandler, this);
-        }
-        else
-            Interrupt.Deactivate(irqs[_index]);
-    }
-#endif
