@@ -135,8 +135,8 @@ int main(void)
 	Timer timer2(Timer2);
 	timer2.SetCounter(1000);
 	timer2.Config();
-	timer2.Register(abc);
 	abc.Bind(tim2refesh);
+	timer2.Register(abc);	
     timer2.Open();
 		
     //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");

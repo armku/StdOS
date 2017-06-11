@@ -293,7 +293,7 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
 	}
 	//
 }
-extern volatile uint time2cnt;
+
 void Timer::OnInterrupt()
 {
 //    // 检查指定的 TIM 中断发生
@@ -307,10 +307,9 @@ void Timer::OnInterrupt()
 //    #endif 
 	
 
-	//if(this->OnTick)
+	if(this->OnTick)
 	{
 		((Action)this->OnTick.Method)(this->OnTick.Target);
-		time2cnt++;
 	}
 }
 
