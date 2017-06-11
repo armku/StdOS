@@ -305,8 +305,13 @@ void Timer::OnInterrupt()
 //        if (_Handler)
 //            _Handler(this, _Param);
 //    #endif 
-	time2cnt++;
-//	this->OnTick.Method();
+	
+
+	//if(this->OnTick)
+	{
+		//this->OnTick(this);
+		time2cnt++;
+	}
 }
 
 void Timer::ClockCmd(int idx, bool state)
