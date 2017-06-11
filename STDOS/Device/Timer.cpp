@@ -309,7 +309,7 @@ void Timer::OnInterrupt()
 
 	//if(this->OnTick)
 	{
-		this->OnTick(*this);
+		((Action)this->OnTick.Method)(this->OnTick.Target);
 		time2cnt++;
 	}
 }
