@@ -106,7 +106,7 @@ void Timer::Config()
             TIM_ClearFlag(TIM2, TIM_FLAG_Update);
 
             TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
-
+			TIM_ClearFlag(TIM2, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
             TIM_Cmd(TIM2, ENABLE);
 
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE); /*先关闭等待使用*/
