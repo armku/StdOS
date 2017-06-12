@@ -3,7 +3,6 @@
 #include "TInterrupt.h"
 
 static Timer **Timers = NULL; // 已经实例化的定时器对象
-TIM_TypeDef *_port;
 #define TIMS {TIM1,TIM2,TIM3,TIM4,TIM5}
 static TIM_TypeDef *const g_Timers[] = TIMS;
 const byte Timer::TimerCount = ArrayLength(g_Timers);
@@ -42,8 +41,8 @@ void Timer::Open() // 开始定时器
 
             #if defined(STM32F1) || defined(STM32F4)
                 uint clk = clock.PCLK1_Frequency;
-                if ((uint)_port &0x00010000)
-                    clk = clock.PCLK2_Frequency;
+//                if ((uint)_port &0x00010000)
+//                    clk = clock.PCLK2_Frequency;
                 clk <<= 1;
             #elif defined(STM32F0)
                 uint clk = clock.PCLK_Frequency << 1;
@@ -65,9 +64,9 @@ void Timer::Close() // 停止定时器
 
     // 关闭时钟
     ClockCmd(_index, false);
-    TIM_ITConfig(_port, TIM_IT_Update, DISABLE);
-    TIM_ClearITPendingBit(_port, TIM_IT_Update); // 仅清除中断标志位 关闭不可靠
-    TIM_Cmd(_port, DISABLE);
+//    TIM_ITConfig(_port, TIM_IT_Update, DISABLE);
+//    TIM_ClearITPendingBit(_port, TIM_IT_Update); // 仅清除中断标志位 关闭不可靠
+//    TIM_Cmd(_port, DISABLE);
 
     Opened = false;
 }
@@ -159,7 +158,7 @@ void Timer::SetFrequency(uint frequency)
 
     #if defined(STM32F1) || defined(STM32F4)
         uint clk = clock.PCLK1_Frequency;
-        if ((uint)_port &0x00010000)
+        if ((uint)this->_index &0x00010000)
             clk = clock.PCLK2_Frequency;
         clk <<= 1;
     #elif defined(STM32F0)
