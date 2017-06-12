@@ -201,17 +201,6 @@ void Timer::SetFrequency(uint frequency)
     Prescaler = pre;
     Period = p;
 
-    // 如果已启动定时器，则重新配置一下，让新设置生效
-    if (Opened)
-    {
-        TIM_TimeBaseInitTypeDef _timer;
-        TIM_TimeBaseStructInit(&_timer);
-        _timer.TIM_Period = this->Period;
-        _timer.TIM_Prescaler =this->Prescaler;
-        //_timer.TIM_ClockDivision = 0x0;
-        _timer.TIM_CounterMode = TIM_CounterMode_Up;
-        TIM_TimeBaseInit(_port, &_timer);
-    }
 	this->Config();
 }
 
@@ -260,17 +249,6 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
 
 void Timer::OnInterrupt()
 {
-//    // 检查指定的 TIM 中断发生
-//    if (TIM_GetITStatus(_port, TIM_IT_Update) == RESET)
-//        return ;
-//    // 必须清除TIMx的中断待处理位，否则会频繁中断
-//    TIM_ClearITPendingBit(_port, TIM_IT_Update);
-//    #if 0
-//        if (_Handler)
-//            _Handler(this, _Param);
-//    #endif 
-	
-
 	if(this->OnTick)
 	{
 		((Action)this->OnTick.Method)(this->OnTick.Target);
