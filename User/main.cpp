@@ -79,7 +79,7 @@ void OnPress(InputPort &port, bool down)
 volatile uint time2cnt = 0; // ms 计时变量 
 void LedTest(void *param)
 {
-    if (time2cnt >= 1000)
+    if (time2cnt >= 1)
      /* 1000 * 1 ms = 1s 时间到 */
     {
         time2cnt = 0;
@@ -133,12 +133,10 @@ int main(void)
 
     // 初始化为输出
 	Timer timer2(Timer2);
-	//timer2.SetCounter(1000);
-	//timer2.Config();
 	abc.Bind(tim2refesh);
 	timer2.Register(abc);	
     timer2.Open();
-	timer2.SetFrequency(1000);
+	timer2.SetFrequency(1);
 		
     //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
     Sys.AddTask(LedTest, nullptr, 0, 10, "LedTest");
