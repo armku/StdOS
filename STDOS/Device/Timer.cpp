@@ -114,7 +114,7 @@ void Timer::Config()
             //TIM_DeInit(TIM2);
 
             /* 自动重装载寄存器周期的值(计数值) */
-            TIM_TimeBaseStructure.TIM_Period = 1000;
+            TIM_TimeBaseStructure.TIM_Period = this->Period;
 
             /* 累计 TIM_Period个频率后产生一个更新或者中断 */
             /* 时钟预分频数为72 */
@@ -228,7 +228,7 @@ void Timer::SetFrequency(uint frequency)
     {
         TIM_TimeBaseInitTypeDef _timer;
         TIM_TimeBaseStructInit(&_timer);
-        _timer.TIM_Period = Period - 1;
+        _timer.TIM_Period = this->Period;
         _timer.TIM_Prescaler = Prescaler - 1;
         //_timer.TIM_ClockDivision = 0x0;
         _timer.TIM_CounterMode = TIM_CounterMode_Up;
@@ -554,12 +554,3 @@ const void *Timer::GetTimer(byte idx)
         #endif 
     }
 #endif 
-
-// 设置预分频目标，比如1MHz
-/*void Timer::SetScaler(uint scaler)
-{
-assert_param(scaler);
-
-uint ps = Sys.Clock / scaler;
-assert_param(ps > 0 && ps <= 0xFFFF);
-}*/
