@@ -47,7 +47,7 @@ void Timer::Open() // 开始定时器
                 uint clk = clock.PCLK_Frequency << 1;
             #endif 
 
-            uint fre = clk / Prescaler / Period;
+            uint fre = clk / (Prescaler+1) / Period;
             debug_printf("Timer%d::Start Prescaler=%d Period=%d Frequency=%d\r\n", _index + 1, Prescaler, Period, fre);
         #endif      
     Opened = true;
