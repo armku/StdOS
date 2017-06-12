@@ -48,7 +48,7 @@ void Timer::Open() // 开始定时器
         #endif 
 
         uint fre = clk / (Prescaler + 1) / Period;
-        debug_printf("Timer%d::Start Prescaler=%d Period=%d Frequency=%d\r\n", _index + 1, Prescaler, Period, fre);
+        debug_printf("Timer%d::Start Prescaler=%d Period=%d Frequency=%d\r\n", _index + 1, Prescaler+1, Period, fre);
     #endif 
     Opened = true;
 }
