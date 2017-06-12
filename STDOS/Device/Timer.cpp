@@ -238,7 +238,7 @@ void Timer::SetFrequency(uint frequency)
 
 uint Timer::GetCounter()
 {
-    return 0;
+    return this->Period;
 }
 
 void Timer::SetCounter(uint cnt) // 设置计数器值
