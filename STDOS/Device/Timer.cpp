@@ -14,8 +14,8 @@ void Timer::SetHandler(bool set){
 Timer::Timer(TIMER index)
 {
     this->_index = index;
-	this->Period=1000;//默认1秒一次
-	this->Prescaler=71;
+    this->Period = 1000; //默认1秒一次
+    this->Prescaler = 71;
 }
 
 Timer::~Timer()
@@ -31,25 +31,25 @@ Timer::~Timer()
 
 void Timer::Open() // 开始定时器
 {
-	this->Config();
+    this->Config();
     this->OnOpen();
-            #if DEBUG
-            // 获取当前频率
-            RCC_ClocksTypeDef clock;
-            RCC_GetClocksFreq(&clock);
+    #if DEBUG
+        // 获取当前频率
+        RCC_ClocksTypeDef clock;
+        RCC_GetClocksFreq(&clock);
 
-            #if defined(STM32F1) || defined(STM32F4)
-                uint clk = clock.PCLK1_Frequency;
-//                if ((uint)_port &0x00010000)
-//                    clk = clock.PCLK2_Frequency;
-                clk <<= 1;
-            #elif defined(STM32F0)
-                uint clk = clock.PCLK_Frequency << 1;
-            #endif 
+        #if defined(STM32F1) || defined(STM32F4)
+            uint clk = clock.PCLK1_Frequency;
+            if ((uint)this->_index &0x00010000)
+                clk = clock.PCLK2_Frequency;
+            clk <<= 1;
+        #elif defined(STM32F0)
+            uint clk = clock.PCLK_Frequency << 1;
+        #endif 
 
-            uint fre = clk / (Prescaler+1) / Period;
-            debug_printf("Timer%d::Start Prescaler=%d Period=%d Frequency=%d\r\n", _index + 1, Prescaler, Period, fre);
-        #endif      
+        uint fre = clk / (Prescaler + 1) / Period;
+        debug_printf("Timer%d::Start Prescaler=%d Period=%d Frequency=%d\r\n", _index + 1, Prescaler, Period, fre);
+    #endif 
     Opened = true;
 }
 
@@ -62,9 +62,9 @@ void Timer::Close() // 停止定时器
 
     // 关闭时钟
     ClockCmd(_index, false);
-//    TIM_ITConfig(_port, TIM_IT_Update, DISABLE);
-//    TIM_ClearITPendingBit(_port, TIM_IT_Update); // 仅清除中断标志位 关闭不可靠
-//    TIM_Cmd(_port, DISABLE);
+    //    TIM_ITConfig(_port, TIM_IT_Update, DISABLE);
+    //    TIM_ClearITPendingBit(_port, TIM_IT_Update); // 仅清除中断标志位 关闭不可靠
+    //    TIM_Cmd(_port, DISABLE);
 
     Opened = false;
 }
@@ -104,11 +104,11 @@ void Timer::Config()
             TIM_ClearFlag(TIM2, TIM_FLAG_Update);
 
             TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
-			TIM_ClearFlag(TIM2, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
+            TIM_ClearFlag(TIM2, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
             TIM_Cmd(TIM2, ENABLE);
 
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE); /*先关闭等待使用*/
-			Interrupt.SetPriority(TIM2_IRQn,3);
+            Interrupt.SetPriority(TIM2_IRQn, 3);
             break;
         case Timer3:
             break;
@@ -198,7 +198,7 @@ void Timer::SetFrequency(uint frequency)
     Prescaler = pre;
     Period = p;
 
-	this->Config();
+    this->Config();
 }
 
 uint Timer::GetCounter()
@@ -213,43 +213,43 @@ void Timer::SetCounter(uint cnt) // 设置计数器值
 
 void Timer::Register(const Delegate < Timer & >  &dlg)
 {
-	this->OnTick=dlg;
-	switch(this->_index)
-	{
-		case Timer1:
-			break;
-		case Timer2:
-			Interrupt.Activate(28, Timer::OnHandler, this);
-			break;
-		case Timer3:
-			Interrupt.Activate(29, Timer::OnHandler, this);
-			break;
-		case Timer4:
-			Interrupt.Activate(30, Timer::OnHandler, this);
-			break;
-		case Timer5:
-			Interrupt.Activate(50, Timer::OnHandler, this);
-			break;
-		case Timer6:
-			Interrupt.Activate(54, Timer::OnHandler, this);
-			break;
-		case Timer7:
-			Interrupt.Activate(55, Timer::OnHandler, this);
-			break;
-		case Timer8:
-			break;
-		default:
-			break;
-	}
-	//
+    this->OnTick = dlg;
+    switch (this->_index)
+    {
+        case Timer1:
+            break;
+        case Timer2:
+            Interrupt.Activate(28, Timer::OnHandler, this);
+            break;
+        case Timer3:
+            Interrupt.Activate(29, Timer::OnHandler, this);
+            break;
+        case Timer4:
+            Interrupt.Activate(30, Timer::OnHandler, this);
+            break;
+        case Timer5:
+            Interrupt.Activate(50, Timer::OnHandler, this);
+            break;
+        case Timer6:
+            Interrupt.Activate(54, Timer::OnHandler, this);
+            break;
+        case Timer7:
+            Interrupt.Activate(55, Timer::OnHandler, this);
+            break;
+        case Timer8:
+            break;
+        default:
+            break;
+    }
+    //
 }
 
 void Timer::OnInterrupt()
 {
-	if(this->OnTick)
-	{
-		((Action)this->OnTick.Method)(this->OnTick.Target);
-	}
+    if (this->OnTick)
+    {
+        ((Action)this->OnTick.Method)(this->OnTick.Target);
+    }
 }
 
 void Timer::ClockCmd(int idx, bool state)
