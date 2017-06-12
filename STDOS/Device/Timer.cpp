@@ -195,10 +195,10 @@ void Timer::SetFrequency(uint frequency)
         }
     }
 
-    Prescaler = pre;
+    Prescaler = pre-1;
     Period = p;
 
-    this->Config();
+    this->Open();
 }
 
 uint Timer::GetCounter()
