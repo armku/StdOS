@@ -33,8 +33,7 @@ void Timer::Open() // 开始定时器
 {
 	this->Config();
     this->OnOpen();
-    #if 0
-        #if DEBUG
+            #if DEBUG
             // 获取当前频率
             RCC_ClocksTypeDef clock;
             RCC_GetClocksFreq(&clock);
@@ -50,8 +49,7 @@ void Timer::Open() // 开始定时器
 
             uint fre = clk / Prescaler / Period;
             debug_printf("Timer%d::Start Prescaler=%d Period=%d Frequency=%d\r\n", _index + 1, Prescaler, Period, fre);
-        #endif 
-    #endif 
+        #endif      
     Opened = true;
 }
 
