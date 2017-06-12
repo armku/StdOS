@@ -15,6 +15,8 @@ void Timer::SetHandler(bool set){
 Timer::Timer(TIMER index)
 {
     this->_index = index;
+	this->Period=1000;//默认1秒一次
+	this->Prescaler=71;
 }
 
 Timer::~Timer()
@@ -49,31 +51,6 @@ void Timer::Open() // 开始定时器
             uint fre = clk / Prescaler / Period;
             debug_printf("Timer%d::Start Prescaler=%d Period=%d Frequency=%d\r\n", _index + 1, Prescaler, Period, fre);
         #endif 
-
-        // 打开时钟
-        ClockCmd(_index, true);
-
-        // 关闭。不再需要，跟上面ClockCmd的效果一样
-        //TIM_DeInit(_port);
-
-        // 配置时钟
-        TIM_TimeBaseInitTypeDef _timer;
-        TIM_TimeBaseStructInit(&_timer);
-        _timer.TIM_Period = Period - 1;
-        _timer.TIM_Prescaler = Prescaler - 1;
-        //_timer.TIM_ClockDivision = 0x0;
-        _timer.TIM_CounterMode = TIM_CounterMode_Up;
-        TIM_TimeBaseInit(_port, &_timer);
-
-        //        TIM_PrescalerConfig(_port, _timer.TIM_Period,TIM_PSCReloadMode_Immediate);                // 分频数立即加载
-        // 打开中断
-        //TIM_ITConfig(_port, TIM_IT_Update | TIM_IT_Trigger, ENABLE);
-        TIM_ITConfig(_port, TIM_IT_Update, ENABLE);
-        //TIM_UpdateRequestConfig(_port, TIM_UpdateSource_Regular);
-        TIM_ClearFlag(_port, TIM_FLAG_Update); // 清楚标志位  必须要有！！ 否则 开启中断立马中断给你看
-        //        TIM_ClearITPendingBit(_port, TIM_IT_Update);
-        // 打开计数
-        TIM_Cmd(_port, ENABLE);
     #endif 
     Opened = true;
 }
@@ -118,7 +95,7 @@ void Timer::Config()
 
             /* 累计 TIM_Period个频率后产生一个更新或者中断 */
             /* 时钟预分频数为72 */
-            TIM_TimeBaseStructure.TIM_Prescaler = 71;
+            TIM_TimeBaseStructure.TIM_Prescaler = this->Prescaler;
 
             /* 对外部时钟进行采样的时钟分频,这里没有用到 */
             TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
@@ -229,7 +206,7 @@ void Timer::SetFrequency(uint frequency)
         TIM_TimeBaseInitTypeDef _timer;
         TIM_TimeBaseStructInit(&_timer);
         _timer.TIM_Period = this->Period;
-        _timer.TIM_Prescaler = Prescaler - 1;
+        _timer.TIM_Prescaler =this->Prescaler;
         //_timer.TIM_ClockDivision = 0x0;
         _timer.TIM_CounterMode = TIM_CounterMode_Up;
         TIM_TimeBaseInit(_port, &_timer);
