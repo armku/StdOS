@@ -133,8 +133,8 @@ int main(void)
 
     // 初始化为输出
 	Timer timer2(Timer2);
-	timer2.SetCounter(1000);
-	timer2.Config();
+	//timer2.SetCounter(1000);
+	//timer2.Config();
 	abc.Bind(tim2refesh);
 	timer2.Register(abc);	
     timer2.Open();

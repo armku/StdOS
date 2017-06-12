@@ -32,6 +32,7 @@ Timer::~Timer()
 
 void Timer::Open() // 开始定时器
 {
+	this->Config();
     this->OnOpen();
     #if 0
         #if DEBUG
