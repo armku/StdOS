@@ -212,6 +212,7 @@ void Timer::SetFrequency(uint frequency)
         _timer.TIM_CounterMode = TIM_CounterMode_Up;
         TIM_TimeBaseInit(_port, &_timer);
     }
+	this->Config();
 }
 
 uint Timer::GetCounter()

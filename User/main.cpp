@@ -138,6 +138,7 @@ int main(void)
 	abc.Bind(tim2refesh);
 	timer2.Register(abc);	
     timer2.Open();
+	//timer2.SetFrequency(10);
 		
     //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
     Sys.AddTask(LedTest, nullptr, 0, 10, "LedTest");
