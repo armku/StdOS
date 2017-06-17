@@ -117,8 +117,15 @@ int main(void)
 	Rtc->GetTime(now);
 	if(now.TotalSeconds()<100)
 	{
+		now.Year=2017;
+		now.Month=6;
+		now.Day=17;
+		now.Hour=14;
+		now.Minute=17;
+		
 		Rtc->Init();
 		Rtc->Start(false, false);
+		Rtc->SetTime(now);
 	}
     sys.Init();
     #if DEBUG
