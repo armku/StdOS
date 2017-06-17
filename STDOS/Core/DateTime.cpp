@@ -16,8 +16,25 @@ DateTime::DateTime(int year, int month, int day)
 	this->Month=month;
 	this->Day=day;
 }
+bool Is_Leap_Year(ushort year);
 DateTime::DateTime(int seconds)
 {
+	this->Year=1970;
+	uint secleap=366*24*60*60;
+	uint secs=365*24*60*60;
+	//Äê
+	while(seconds<secleap)
+	{
+		if(Is_Leap_Year(this->Year))
+		{
+			seconds-=secleap;
+		}
+		else
+		{
+			seconds-=secs;
+		}
+		this->Year++;
+	}
 	
 }
 DateTime::DateTime(const DateTime &value)
