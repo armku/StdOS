@@ -22,13 +22,14 @@ DateTime::DateTime(int seconds)
 }
 DateTime::DateTime(const DateTime &value)
 {
-	
+	this->Year=value.Year;
+	this->Month=value.Month;
+	this->Day=value.Day;
+	this->Hour=value.Hour;
+	this->Minute=value.Minute;
+	this->Second=value.Second;
 }
-#if 0
-DateTime::DateTime(DateTime && value)
-{
-}
-#endif
+
 #define FEBRUARY		2
 #define STARTOFTIME		1970
 #define SECDAY			86400L           /*  一天有多少s */
