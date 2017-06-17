@@ -139,8 +139,28 @@ DateTime &DateTime::ParseMs(Int64 ms)
 // 1970/1/1以来天数
 int DateTime::TotalDays()const
 {
+	uint daycount=0;
 	
-	return 0;
+	if(this->Year<1970||this->Year>2099)return 1;	
+	for(int t=1970;t<this->Year;t++)	//把所有年份的天数相加
+	{
+		if(Is_Leap_Year(t))daycount+=366;//闰年的天数
+		else daycount+=365;			  //平年的天数
+	}
+	
+	ushort syear=this->Year;
+	byte smon=this->Month;
+	byte sday=this->Day;
+	
+	smon-=1;
+	for(int t=0;t<smon;t++)	   //把前面月份的天数相加
+	{
+		daycount+=(uint)mon_table[t];//月份天数相加
+		if(Is_Leap_Year(syear)&&t==1)daycount++;//闰年2月份增加一天的秒钟数	   
+	}
+	daycount+=(uint)(sday-1);//把前面日期的秒钟数相加 
+	
+	return daycount;
 }
 // 1970/1/1以来秒数
 int DateTime::TotalSeconds()const
