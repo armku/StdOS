@@ -26,6 +26,8 @@ typedef enum
     KEY_NULL = 0
 } KEY_MODE;
 
+const byte vers[]="yyyy-MM-dd HH:mm:ss";
+
 OutputPort led1(PB0);
 OutputPort led2(PF7);
 OutputPort led(PF8);
@@ -109,6 +111,8 @@ int main(void)
     //	#endif
 
     sys.Name = (char*)namee;
+	byte aa=vers[0];
+	aa=aa;
     //Rtc提取时间
     HardRtc *Rtc = HardRtc::Instance();
     Rtc->LowPower = false;
