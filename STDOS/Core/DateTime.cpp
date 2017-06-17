@@ -165,27 +165,12 @@ int DateTime::TotalDays()const
 // 1970/1/1以来秒数
 int DateTime::TotalSeconds()const
 {	
-	ushort syear=this->Year;
-	byte smon=this->Month;
-	byte sday=this->Day;
 	byte hour=this->Hour;
 	byte min=this->Minute;
 	byte sec=this->Second;
-	ushort t;
 	uint seccount=0;
-	if(syear<1970||syear>2099)return 1;	   
-	for(t=1970;t<syear;t++)	//把所有年份的秒钟相加
-	{
-		if(Is_Leap_Year(t))seccount+=31622400;//闰年的秒钟数
-		else seccount+=31536000;			  //平年的秒钟数
-	}
-	smon-=1;
-	for(t=0;t<smon;t++)	   //把前面月份的秒钟数相加
-	{
-		seccount+=(uint)mon_table[t]*86400;//月份秒钟数相加
-		if(Is_Leap_Year(syear)&&t==1)seccount+=86400;//闰年2月份增加一天的秒钟数	   
-	}
-	seccount+=(uint)(sday-1)*86400;//把前面日期的秒钟数相加 
+	
+	seccount=this->TotalDays()*86400;
 	seccount+=(uint)hour*3600;//小时秒钟数
     seccount+=(uint)min*60;	 //分钟秒钟数
 	seccount+=sec;//最后的秒钟加上去
@@ -194,7 +179,7 @@ int DateTime::TotalSeconds()const
 // 1970/1/1以来毫秒数
 Int64 DateTime::TotalMs()const
 {	
-	return 0;
+	return this->TotalSeconds()*1000;
 }
 byte DateTime::DayOfWeek()const
 {
