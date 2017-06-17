@@ -90,6 +90,14 @@ void tim2refesh(void * param)
 {
 	time2cnt++;
 }
+DateTime now;//当前时间
+void TimeRefresh(void* param)
+{
+	HardRtc * rtc=(HardRtc*)param;
+	rtc->GetTime(now);
+	now.Show();
+}
+
 Delegate<Timer&> abc;
 
 int main(void)
@@ -102,11 +110,16 @@ int main(void)
 
     sys.Name = (char*)namee;
     //Rtc提取时间
-    //    HardRtc *Rtc = HardRtc::Instance();
-    //    Rtc->LowPower = false;
-    //    Rtc->External = false;
-    //    Rtc->Init();
-    //    Rtc->Start(false, false);
+    HardRtc *Rtc = HardRtc::Instance();
+    Rtc->LowPower = false;
+    Rtc->External = false;
+    
+	Rtc->GetTime(now);
+	if(now.TotalSeconds()<100)
+	{
+		Rtc->Init();
+		Rtc->Start(false, false);
+	}
     sys.Init();
     #if DEBUG
         Sys.MessagePort = COM1;
@@ -114,9 +127,9 @@ int main(void)
         sp1 = SerialPort::GetMessagePort();
         sp1->Register(OnUsart1Read, sp1);
 
-        //        WatchDog::Start(20000, 10000);
-        //    #else 
-        //        WatchDog::Start();
+        WatchDog::Start(20000, 10000);
+    #else 
+        WatchDog::Start();
     #endif 
     //    #if 0
     //        //flash 最后一块作为配置区
@@ -137,8 +150,9 @@ int main(void)
 	timer2.Register(abc);	
     timer2.Open();
 	timer2.SetFrequency(1);
-		
+			
     //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
     Sys.AddTask(LedTest, nullptr, 0, 10, "LedTest");
+	Sys.AddTask(TimeRefresh,Rtc,100,1000,"TimeUp");
     Sys.Start();
 }

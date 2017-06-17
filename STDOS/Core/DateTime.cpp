@@ -136,12 +136,13 @@ DateTime &DateTime::ParseMs(Int64 ms)
 {
 	return *this;
 }
+// 1970/1/1以来天数
 int DateTime::TotalDays()const
 {
 	
 	return 0;
 }
-	
+// 1970/1/1以来秒数
 int DateTime::TotalSeconds()const
 {	
 	ushort syear=this->Year;
@@ -170,6 +171,7 @@ int DateTime::TotalSeconds()const
 	seccount+=sec;//最后的秒钟加上去
 	return 	seccount-8*60*60;
 }
+// 1970/1/1以来毫秒数
 Int64 DateTime::TotalMs()const
 {	
 	return 0;
