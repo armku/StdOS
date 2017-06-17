@@ -75,7 +75,7 @@ namespace NewLife.Reflection
             // 查找时间字符串，写入真实时间
             using (var fs = File.Open(sys, FileMode.Open, FileAccess.ReadWrite))
             {
-                //if (fs.IndexOf(dt) > 0)
+                if (fs.IndexOf(dt) > 0)
                 {
                     //fs.Position -= dt.Length;
                     var now = DateTime.Now.ToString(ft);
