@@ -79,7 +79,7 @@ namespace NewLife.Reflection
                 {
                     fs.Position -= dt.Length;
                     var now = DateTime.Now.ToString(ft);
-                    Console.WriteLine("找到编译时间的位置0x{0}，准备写入编译时间{1}", fs.Position, now);
+                    Console.WriteLine("找到编译时间的位置0x{0:X8}，准备写入编译时间{1}", fs.Position, now);
                     fs.Write(now.GetBytes());
 
                     return true;
