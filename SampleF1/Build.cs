@@ -67,7 +67,7 @@ namespace NewLife.Reflection
         static Boolean WriteBuildTime(String axf)
         {
             // 修改编译时间
-            var ft = "yyyy-MM-dd HHss";
+            var ft = "yyyy-MM-dd HH:mm:ss";
             var sys = axf.GetFullPath();
             if (!File.Exists(sys)) return false;
 
@@ -77,10 +77,10 @@ namespace NewLife.Reflection
             {
                 if (fs.IndexOf(dt) > 0)
                 {
-                    //fs.Position -= dt.Length;
+                    fs.Position -= dt.Length;
                     var now = DateTime.Now.ToString(ft);
-                    //Console.WriteLine("找到编译时间的位置0x{08}，准备写入编译时间{1}", fs.Position, now);
-                    //fs.Write(now.GetBytes());
+                    Console.WriteLine("找到编译时间的位置0x{0}，准备写入编译时间{1}", fs.Position, now);
+                    fs.Write(now.GetBytes());
 
                     return true;
                 }
