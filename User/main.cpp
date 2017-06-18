@@ -30,7 +30,7 @@ const byte vers[]="yyyy-MM-dd HH:mm:ss";
 
 OutputPort led1(PB0);
 OutputPort led2(PF7);
-OutputPort led(PF8);
+OutputPort led3(PF8);
 
 //按键 PC13 PA0
 //InputPort exti(PC13); //PA1 PB3     PA0 PC13
@@ -62,7 +62,7 @@ void LedTask(void *param)
 {
     OutputPort *leds = (OutputPort*)param;
     *leds = ! * leds;
-    led1 = key0;
+    led2 = key0;
 }
 
 #define namee "StdOS"
@@ -85,7 +85,7 @@ void LedTest(void *param)
      /* 1000 * 1 ms = 1s 时间到 */
     {
         time2cnt = 0;
-        led = !led;
+        led3 = !led3;
     }
 }
 void tim2refesh(void * param)
@@ -162,7 +162,7 @@ int main(void)
     timer2.Open();
 	timer2.SetFrequency(1);
 			
-    //Sys.AddTask(LedTask, &led, 0, 500, "LedTask");
+    Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(LedTest, nullptr, 0, 10, "LedTest");
 	Sys.AddTask(TimeRefresh,Rtc,100,1000,"TimeUp");
     Sys.Start();
