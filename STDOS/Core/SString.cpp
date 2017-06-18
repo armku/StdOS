@@ -8,7 +8,7 @@
 #include <CType.h>
 #include "Sys.h"
 
-byte buftmp[10];
+static byte buftmp[10];
 
 String::String(cstring cstr): Array(cstr, ArrayLength(cstr))
 {
