@@ -333,9 +333,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--cpp11</MiscControls>
-              <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,DEBUG,STM32F1</Define>
+              <Define>STM32F1,DEBUG,STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\FWLib\inc;..\STDOS;..\STDOS\Modbus;..\SYSTEM\CMSIS;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc;..\STDOS\Core;..\STDOS\Device;..\STDOS\Drivers;..\STDOS\Kernel;..\STDOS\Platform;..\STDOS\Board;..\STDOS\App;..\STDOS\Security;..\STDOS\TinyIP;..\STDOS\Net</IncludePath>
+              <IncludePath>..\SYSTEM\FWLib\inc;..\STDOS;..\STDOS\Modbus;..\SYSTEM\CMSIS;..\User\inc;..\STDOS\Core;..\STDOS\Device;..\STDOS\Drivers;..\STDOS\Kernel;..\STDOS\Platform;..\STDOS\App;..\STDOS\Security</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
