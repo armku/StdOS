@@ -335,7 +335,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>STM32F1,DEBUG,STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\FWLib\inc;..\SYSTEM\CMSIS;..\User\inc;..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\STDOS\Drivers</IncludePath>
+              <IncludePath>..\SYSTEM\FWLib\inc;..\SYSTEM\CMSIS;..\User\inc;..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

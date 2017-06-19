@@ -11,12 +11,14 @@ void SetEXIT(int pinIndex, bool enable);
 
 
 #if defined(STM32F1) || defined(STM32F4)
-    static const int PORT_IRQns[] = 
+#if 0
+	static const int PORT_IRQns[] = 
     {
         EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5¸ö»ù´¡µÄ
         EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
         EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
     };
+#endif
 #elif defined(STM32F0)
     static const int PORT_IRQns[] = 
     {
