@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "SerialPort.h"
-#include "..\STDOS\Drivers\AT24CXX.h"
-#include "..\STDOS\Drivers\Button.h"
+#include "Drivers\AT24CXX.h"
+#include "Drivers\Button.h"
 #include "Port.h"
 #include "WatchDog.h"
 #include "SString.h"
@@ -9,7 +9,7 @@
 #include "DateTime.h"
 #include "List.h"
 #include "Pwm.h"
-#include "..\STDOS\Modbus\Modbus1.h"
+#include "Modbus\Modbus1.h"
 #include "Spi.h"
 #include "RTC.h"
 #include "Flash.h"
