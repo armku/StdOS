@@ -494,6 +494,11 @@
               <FileType>8</FileType>
               <FilePath>..\Util\Util.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ModBus1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Util\ModBus1.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -521,13 +526,6 @@
         </Group>
         <Group>
           <GroupName>Modbus</GroupName>
-          <Files>
-            <File>
-              <FileName>ModBus1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Modbus\ModBus1.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>App</GroupName>
@@ -1446,6 +1444,11 @@
               <FileType>8</FileType>
               <FilePath>..\Util\Util.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ModBus1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Util\ModBus1.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1473,13 +1476,6 @@
         </Group>
         <Group>
           <GroupName>Modbus</GroupName>
-          <Files>
-            <File>
-              <FileName>ModBus1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Modbus\ModBus1.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>App</GroupName>
