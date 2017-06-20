@@ -335,7 +335,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>STM32F1,DEBUG,STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\SYSTEM\CMSIS;..\SYSTEM\FWLib\inc</IncludePath>
+              <IncludePath>..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\SYSTEM\CMSIS;..\SYSTEM\FWLib\inc;..\Util</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -480,19 +480,19 @@
           <GroupName>Util</GroupName>
           <Files>
             <File>
+              <FileName>CheckSum.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Util\CheckSum.cpp</FilePath>
+            </File>
+            <File>
               <FileName>NewDelete.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\NewDelete.cpp</FilePath>
+              <FilePath>..\Util\NewDelete.cpp</FilePath>
             </File>
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Util.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CheckSum.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\CheckSum.cpp</FilePath>
+              <FilePath>..\Util\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1432,19 +1432,19 @@
           <GroupName>Util</GroupName>
           <Files>
             <File>
+              <FileName>CheckSum.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Util\CheckSum.cpp</FilePath>
+            </File>
+            <File>
               <FileName>NewDelete.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\NewDelete.cpp</FilePath>
+              <FilePath>..\Util\NewDelete.cpp</FilePath>
             </File>
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Util.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CheckSum.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\CheckSum.cpp</FilePath>
+              <FilePath>..\Util\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>

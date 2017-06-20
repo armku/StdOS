@@ -585,8 +585,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\NewDelete.cpp</PathWithFileName>
-      <FilenameWithoutPath>NewDelete.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Util\CheckSum.cpp</PathWithFileName>
+      <FilenameWithoutPath>CheckSum.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -597,8 +597,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Util.cpp</PathWithFileName>
-      <FilenameWithoutPath>Util.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Util\NewDelete.cpp</PathWithFileName>
+      <FilenameWithoutPath>NewDelete.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -609,8 +609,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\CheckSum.cpp</PathWithFileName>
-      <FilenameWithoutPath>CheckSum.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Util\Util.cpp</PathWithFileName>
+      <FilenameWithoutPath>Util.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
