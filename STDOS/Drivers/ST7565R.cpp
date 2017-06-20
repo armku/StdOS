@@ -20,7 +20,6 @@ CLcd::CLcd(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs)
     this->pPincs.Set(pincs);
     this->ShadowReset();
 }
-
 /********************************************************************************************************
 函 数 名: Init
 功能说明: LCD模块初始化
@@ -34,22 +33,36 @@ void CLcd::Init()
     Sys.Delay(500);
     this->pPinres = 1; /*复位完毕*/
     Sys.Delay(500);
-    this->writeCMD(0xe2); /*软复位*/
-    Sys.Delay(500);
-    this->writeCMD(0x2c); /*升压步聚1*/
-    Sys.Delay(500);
-    this->writeCMD(0x2e); /*升压步聚2*/
-    Sys.Delay(500);
-    this->writeCMD(0x2f); /*升压步聚3*/
-    Sys.Delay(500);
-    this->writeCMD(0x24); //0x24粗调对比度，可设置范围0x20～0x27
-    this->writeCMD(0x81); /*微调对比度*/
-    this->writeCMD(0x1a); //微调对比度的值，可设置范围0x00～0x3f
-    this->writeCMD(0xa2); //1/9偏压比（bias）
-    this->writeCMD(0xc0); //行扫描顺序：从上到下
-    this->writeCMD(0xa1); //列扫描顺序：从左到右
-    this->writeCMD(0x40); //起始行：第一行开始,原来那款“JLX12864G-202”型号的这里是“0x60”的
-    this->writeCMD(0xaf); //开显示
+    #if 0    
+        this->writeCMD(0xe2); /*软复位*/
+        Sys.Delay(500);
+        this->writeCMD(0x2c); /*升压步聚1*/
+        Sys.Delay(500);
+        this->writeCMD(0x2e); /*升压步聚2*/
+        Sys.Delay(500);
+        this->writeCMD(0x2f); /*升压步聚3*/
+        Sys.Delay(500);
+        this->writeCMD(0x24); //0x24粗调对比度，可设置范围0x20～0x27
+        this->writeCMD(0x81); /*微调对比度*/
+        this->writeCMD(0x1a); //微调对比度的值，可设置范围0x00～0x3f
+        this->writeCMD(0xa2); //1/9偏压比（bias）
+        this->writeCMD(0xc0); //行扫描顺序：从上到下
+        this->writeCMD(0xa1); //列扫描顺序：从左到右
+        this->writeCMD(0x40); //起始行：第一行开始,原来那款“JLX12864G-202”型号的这里是“0x60”的
+        this->writeCMD(0xaf); //开显示
+    #else 
+        this->writeCMD(0xe2); //用软件方式复位ST7565R 
+        Sys.Delay(20);
+        this->writeCMD(0xa2); //LCD偏压设置 （该寄存器的值请不要改动）
+        this->writeCMD(0xa1); //横向刷屏方向设置  0xa0:从左向右  0xa1：从右向左
+        this->writeCMD(0xc0); //纵向刷屏方向设置  0xc0:从下向上  0xc8:从上向下
+        this->writeCMD(0x2f); //内部升压电路使能设置（该寄存器的值请不要改动）
+        this->writeCMD(0x24); //粗调显示浓度（该寄存器值的范围为：0x20--0x27）
+        this->writeCMD(0x81);
+        this->writeCMD(0x28); //细调显示浓度（该寄存器值的范围为：0x01--0x3f）
+        this->writeCMD(0xa8); //反白显示设置  0xa6:正常显示  0xa7:反白显示
+        this->writeCMD(0xaf); //开启显示		
+    #endif 
     this->pPincs = 1;
 
     this->Cls();
@@ -175,14 +188,14 @@ void CLcd::DisplayImage(byte *pbuf, ushort color, uint showtype)
     switch (showtype)
     {
         case 0:
-			//纵向取模下位高
+            //纵向取模下位高
             for (int i = 0; i < 128 *64 / 8; i++)
             {
                 ((byte*)(this->Interface_Table))[i] = color ? pbuf[i]: pbuf[i] ^ 0XFF;
             }
             break;
         case 1:
-			//横向取模
+            //横向取模
             for (int i = 0; i < 128 *8; i++)
             {
                 for (int temp = 0x80, j = 0; j < 8; j++)
@@ -553,12 +566,25 @@ void CLcd::Display8x16(ushort x, ushort y, byte *dp)
  ********************************************************************************************************/
 void CLcd::Display12x12(ushort x, ushort y, byte *dp)
 {
+	for (byte j = 0; j < 2; j++)
+    {
+        for (byte i = 0; i < 16; i++)
+        {
+            byte bitMap = 1;
+            for (byte mi = 0; mi < 8; mi++)
+            {
+                this->Point(x + i, y + mi + 8 * j, 0);
+                bitMap <<= 1;
+            }
+        }
+    }
+	
     for (byte i = 0; i < 12; i++)
     {
         byte bitMap = 0x01;
         for (byte mi = 0; mi < 8; mi++)
         {
-            this->Point(x + i, y + mi, bitMap &dp[i] ? 1 : 0);
+            this->Point(x + i, y + mi+2, bitMap &dp[i] ? 1 : 0);
             bitMap <<= 1;
         }
     }
@@ -567,11 +593,10 @@ void CLcd::Display12x12(ushort x, ushort y, byte *dp)
         byte bitMap = 0x01;
         for (byte mi = 0; mi < 4; mi++)
         {
-            this->Point(x + i, y + mi + 8, bitMap &dp[i + 12] ? 1 : 0);
+            this->Point(x + i, y + mi + 8+2, bitMap &dp[i + 12] ? 1 : 0);
             bitMap <<= 1;
         }
-    }
-
+    }	 
 }
 
 /*********************************************************************************************************
