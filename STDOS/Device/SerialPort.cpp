@@ -5,9 +5,6 @@
 #include "TInterrupt.h"
 #include "TTime.h"
 
-#define COM_DEBUG 0
-#define STM32F1XX
-
 #define UARTS {USART1,USART2,USART3,UART4,UART5}
 
 SerialPort::SerialPort()
@@ -80,9 +77,9 @@ bool SerialPort::OnOpen()
     GetPins(&tx, &rx, this->Index);
 
     //    debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
-    #if COM_DEBUG        
+    #ifdef DEBUG        
 
-        ShowLog: debug_printf("Serial%d Open(%d", _index + 1, _baudRate);
+        ShowLog: debug_printf("Serial%d Open(%d", this->Index + 1, _baudRate);
         switch (_parity)
         {
             case USART_Parity_No:
@@ -143,7 +140,7 @@ bool SerialPort::OnOpen()
     // USART_DeInit其实就是关闭时钟，这里有点多此一举。但为了安全起见，还是使用
 
     // 检查重映射
-    #ifdef STM32F1XX
+    #ifdef STM32F1
         if (Remap)
         {
             switch (this->Index)
@@ -221,8 +218,8 @@ bool SerialPort::OnOpen()
     }
 
     //Opened = true;    
-    #if COM_DEBUG
-        if (_index == Sys.MessagePort)
+    #ifdef DEBUG
+        if (this->Index == Sys.MessagePort)
         {
             // 提前设置为已打开端口，ShowLog里面需要判断
             Opened = true;
@@ -245,7 +242,7 @@ void SerialPort::OnClose()
     //    USART_DeInit(_port);
 
     // 检查重映射
-    #ifdef STM32F1XX
+    #ifdef STM32F1
         if (Remap)
         {
             //            switch (_index)
