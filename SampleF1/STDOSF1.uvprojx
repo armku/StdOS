@@ -830,6 +830,16 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\Esp8266\WaitExpect.cpp</FilePath>
             </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_dr.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\lcd_dr.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1779,6 +1789,16 @@
               <FileName>WaitExpect.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\Esp8266\WaitExpect.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_dr.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\lcd_dr.cpp</FilePath>
             </File>
           </Files>
         </Group>

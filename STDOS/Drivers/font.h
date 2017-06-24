@@ -1,0 +1,51 @@
+#pragma once
+
+#include "Type.h"
+
+#ifdef __cplusplus
+    extern "C"
+    {
+    #endif 
+
+    /////////////////////////////////////////////////////////////////////////
+    // 汉字字模表                                                          //
+    // 汉字库: 宋体16.dot 纵向取模下高位,数据排列:从左到右从上到下         //
+    /////////////////////////////////////////////////////////////////////////
+    typedef struct  // 汉字字模数据结构
+    {
+        byte Index[3]; // 汉字内码索引
+        byte Msk[32]; // 点阵码数据
+    } typFNT_GB16;
+    // 汉字表：
+    // 测量显示通道设置报警输出打印系统密码修改开锁
+
+    typedef struct  // 汉字字模数据结构
+    {
+        byte Index[3]; // 汉字内码索引
+        byte Msk[24]; // 点阵码数据
+    } typFNT_GB12;
+
+
+    extern const byte ascii_table_8x16[95][16];
+    extern const byte ascii_table_5x8[95][5];
+    extern const byte ascii_table_4x8[][4];
+    extern typFNT_GB16 const GB_16[];
+
+
+    /////////////////////////////////////////////////////////////////////////
+    // 汉字字模表                                                          //
+    // 汉字库: 宋体12.dot 纵向取模下高位,数据排列:从左到右从上到下         //
+    /////////////////////////////////////////////////////////////////////////
+    extern typFNT_GB12 const GB_12[];
+    
+    extern byte const FONT_UNIT[][10]; //单位
+    extern byte const FONT_CHANNEL[][10]; //输入通道
+    extern byte const FONT_INPUT_TYPE[][10]; //输入类型
+    extern byte const FONT_ALARM_TYPE[][10]; //报警类型;
+    extern byte const FONT_OUTPUT_TYPE[][10];          
+    extern byte const FONT_CONTROL_MANNER[][10];
+    extern byte const FONT_CONTROL_SE[][10];
+    extern uint const FONT_BAUD_RATE[];	
+    #ifdef __cplusplus
+    }
+#endif

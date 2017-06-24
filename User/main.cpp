@@ -13,6 +13,7 @@
 #include "Spi.h"
 #include "RTC.h"
 #include "Flash.h"
+#include "Drivers\lcd_dr.h"
 #include "TInterrupt.h"
 
 typedef enum
@@ -101,6 +102,7 @@ void TimeRefresh(void* param)
 }
 
 Delegate<Timer&> abc;
+CLcd_DR lcddr1(PD3, PD6, PD7, PB3, PB4);
 
 int main(void)
 {
