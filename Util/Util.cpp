@@ -43,16 +43,16 @@ void SetBufFloat(byte buf[], ushort pos, float da, byte type)
     switch (type)
     {
         case 0:
-            buf[pos] = bitconvert.char_bit.da3;
+            buf[pos + 0] = bitconvert.char_bit.da3;
             buf[pos + 1] = bitconvert.char_bit.da2;
             buf[pos + 2] = bitconvert.char_bit.da1;
             buf[pos + 3] = bitconvert.char_bit.da0;
             break;
         case 1:
-            buf[pos] = bitconvert.char_bit.da3;
+            buf[pos + 3] = bitconvert.char_bit.da3;
             buf[pos + 1] = bitconvert.char_bit.da2;
             buf[pos + 2] = bitconvert.char_bit.da0;
-            buf[pos + 3] = bitconvert.char_bit.da1;
+            buf[pos + 0] = bitconvert.char_bit.da1;
             break;
         default:
             break;
@@ -66,13 +66,26 @@ void SetBufUshort(byte buf[], ushort pos, ushort da)
     buf[pos + 1] = bitconvert.char_bit.da2;
 }
 
-//设置浮点数
-float GetBufFloat(byte buf[], ushort pos)
+//设置浮点数 0:小端 1：大端
+float GetBufFloat(byte buf[], ushort pos,byte type)
 {
-    bitconvert.char_bit.da3 = buf[pos];
-    bitconvert.char_bit.da2 = buf[pos + 1];
-    bitconvert.char_bit.da1 = buf[pos + 2];
-    bitconvert.char_bit.da0 = buf[pos + 3];
+	switch(type)
+	{
+		case 0:
+			bitconvert.char_bit.da3 = buf[pos + 0];
+			bitconvert.char_bit.da2 = buf[pos + 1];
+			bitconvert.char_bit.da1 = buf[pos + 2];
+			bitconvert.char_bit.da0 = buf[pos + 3];
+			break;
+		case 1:
+			bitconvert.char_bit.da3 = buf[pos + 3];
+			bitconvert.char_bit.da2 = buf[pos + 1];
+			bitconvert.char_bit.da1 = buf[pos + 2];
+			bitconvert.char_bit.da0 = buf[pos + 0];
+			break;
+		default:
+			break;
+	}
     return bitconvert.dafloat;
 }
 
