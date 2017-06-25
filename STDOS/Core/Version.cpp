@@ -127,7 +127,7 @@ bool operator <= (const Version &left, const Version &right)
 DateTime Version::Compile()const
 {
     DateTime *dt = new DateTime();
-    dt->Year = this->Build;
+	dt->ParseDays(this->Build+10957);//加上1970-2000年的天数
 
     return  *dt;
 }
@@ -164,6 +164,7 @@ Version &Version::SetCompile(int year, int month, int day)
 			days++;
 		}
 		days+=day-1;
+		this->Build=days;
     }	
     return  *this;
 }

@@ -77,6 +77,17 @@ bool Is_Leap_Year(ushort year)
 		}else return 1;   
 	}else return 0;	
 }	 			   
+int daysInYear(ushort year)
+{
+	if(Is_Leap_Year(year))
+	{
+		return 366;
+	}
+	else
+	{
+		return 366;
+	}
+}
 //设置时钟
 //把输入的时钟转换为秒钟
 //以1970年1月1日为基准
@@ -86,6 +97,18 @@ bool Is_Leap_Year(ushort year)
 byte const table_week[12]={0,3,3,6,1,4,6,2,5,0,3,5}; //月修正数据表	  
 //平年的月份日期表
 const byte mon_table[12]={31,28,31,30,31,30,31,31,30,31,30,31}; 
+int daysInYearMonth(ushort year,ushort month)
+{
+	if(Is_Leap_Year(year)&&(month==2))
+	{
+		return 29;
+	}
+	else
+	{
+		return mon_table[month-1];
+	}
+}
+
 DateTime &DateTime::operator = (int seconds)
 {
 	ushort daycnt=0;
@@ -152,6 +175,24 @@ DateTime &DateTime::Parse(int seconds)
 }
 DateTime &DateTime::ParseMs(Int64 ms)
 {
+	return *this;
+}
+DateTime& DateTime::ParseDays(int days)
+{
+	this->Year=1970;
+	while(days>daysInYear(this->Year))
+	{
+		days-=daysInYear(this->Year);
+		this->Year++;
+	}
+	this->Month=1;
+	//1月
+	while(days>daysInYearMonth(this->Year,this->Month))
+	{
+		days-=daysInYearMonth(this->Year,this->Month);
+		this->Month++;
+	}
+	this->Day=days+1;
 	return *this;
 }
 // 1970/1/1以来天数
