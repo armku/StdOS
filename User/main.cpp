@@ -18,9 +18,9 @@
 
 const byte vers[]="yyyy-MM-dd HH:mm:ss";
 
-OutputPort led1(PB0);
-OutputPort led2(PF7);
-OutputPort led3(PF8);
+OutputPort led1(PD0);//led1(PB0);
+OutputPort led2(PD1);//led2(PF7);
+OutputPort led3(PD2);//led3(PF8);
 
 //按键 PC13 PA0
 //InputPort exti(PC13); //PA1 PB3     PA0 PC13
@@ -47,27 +47,27 @@ ISO-V3:PC2控制485方向
 //   bs.Show(true);
 //    return 0;
 //}
-InputPort key0(PA0);
+//InputPort key0(PA0);
 void LedTask(void *param)
 {
     OutputPort *leds = (OutputPort*)param;
     *leds = ! * leds;
-    led2 = key0;
+//    led2 = key0;
 }
 
-#define namee "StdOS"
+//#define namee "StdOS"
 
-uint OnUsart1Read(ITransport *transport, Buffer &bs, void *param, void *param2)
-{
-    transport->Write(bs);
-    return bs.Length();
-}
+//uint OnUsart1Read(ITransport *transport, Buffer &bs, void *param, void *param2)
+//{
+//    transport->Write(bs);
+//    return bs.Length();
+//}
 
-//按键事件
-void OnPress(InputPort &port, bool down)
-{
-    debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
-}
+////按键事件
+//void OnPress(InputPort &port, bool down)
+//{
+//    debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
+//}
 volatile uint time2cnt = 0; // ms 计时变量 
 void LedTest(void *param)
 {
@@ -95,13 +95,13 @@ CLcd_DR lcddr1(PD3, PD6, PD7, PB3, PB4);
 
 int main(void)
 {
-    SerialPort *sp1;
+//    SerialPort *sp1;
     TSys &sys = (TSys &)(Sys);
     //    #if 0
     //        sys.Codec = codec;
     //	#endif
 
-    sys.Name = (char*)namee;
+//    sys.Name = (char*)namee;
 	byte aa=vers[0];
 	aa=aa;
     //Rtc提取时间
@@ -126,8 +126,8 @@ int main(void)
     #if DEBUG
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
-        sp1 = SerialPort::GetMessagePort();
-        sp1->Register(OnUsart1Read, sp1);
+//        sp1 = SerialPort::GetMessagePort();
+        //sp1->Register(OnUsart1Read, sp1);
 
         WatchDog::Start(20000, 10000);
     #else 
@@ -138,10 +138,10 @@ int main(void)
     //        Config::Current = &Config::CreateFlash();
     //    #endif 
 
-    InputPort key(PC13);
-    key.Press = OnPress;
-    key.UsePress();
-    key.Open();
+//    InputPort key(PC13);
+//    key.Press = OnPress;
+//    key.UsePress();
+//    key.Open();
     //    exti.Register(OnKeyPress);
     //    exti1.Register(OnKeyPress);
     //	SerialPort::GetMessagePort()->Register(OnUsart1Read);
