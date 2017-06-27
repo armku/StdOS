@@ -1,6 +1,51 @@
 #include "Pwm.h"
 #include "stm32f10x.h"
 
+// index 定时器编号
+Pwm::Pwm(TIMER index):Timer(index)
+{
+}
+Pwm::~Pwm()
+{
+	
+}
+void Pwm::Open()
+{
+}
+void Pwm::Close()
+{
+}
+void Pwm::Config()
+{
+}
+// 刷新输出
+void Pwm::Flush()
+{
+}
+
+void Pwm::SetPulse(int idx, ushort pulse)
+{
+}
+// 设置占空比，0~255
+void Pwm::SetDuty(int idx, byte duty)
+{
+}
+byte Pwm::GetDuty(int idx)
+{
+	return 0;
+}
+PwmData::PwmData(TIMER index):Pwm(index)
+{
+	
+}
+
+void PwmData::Config()
+{
+	
+}
+void PwmData::OnInterrupt()
+{
+}
 
 PWM::PWM(Pin pin, uint frq, uint duty,uint prescaler,bool voltlevellow): AlternatePort(pin)
 {
