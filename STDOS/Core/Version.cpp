@@ -153,17 +153,18 @@ Version &Version::SetCompile(int year, int month, int day)
     else
     {
         int days = 0;
+		month--;
+		while(month>0)
+		{
+			days+=days_in_month(month);
+			month--;
+		}
+		days+=day;
         while (year > 2000)
         {
             days += days_in_year(year);
             year--;
-        }
-		days+=days_in_month(month);
-		if((leapyear(year))&&(month>=2))
-		{
-			days++;
-		}
-		days+=day-1;
+        }		
 		this->Build=days;
     }	
     return  *this;
