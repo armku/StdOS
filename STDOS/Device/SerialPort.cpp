@@ -376,7 +376,11 @@ bool SerialPort::Flush(int times)
     //µÈ´ý·¢ËÍÍê±Ï
     return times > 0;
 }
-
+void SerialPort::SetBaudRate(int baudRate)
+{
+	this->_baudRate=baudRate;
+	this->OnOpen();
+}
 #ifdef STM32F10X_HD
     #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
 #else 
