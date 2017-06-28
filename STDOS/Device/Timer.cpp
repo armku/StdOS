@@ -116,14 +116,139 @@ void Timer::Config()
             Interrupt.SetPriority(TIM2_IRQn, 3);
             break;
         case Timer3:
+			 /* 设置TIM2CLK 为 72MHZ */
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+            //TIM_DeInit(TIM3);
+
+            /* 自动重装载寄存器周期的值(计数值) */
+            TIM_TimeBaseStructure.TIM_Period = this->Period;
+
+            /* 累计 TIM_Period个频率后产生一个更新或者中断 */
+            /* 时钟预分频数为72 */
+            TIM_TimeBaseStructure.TIM_Prescaler = this->Prescaler;
+
+            /* 对外部时钟进行采样的时钟分频,这里没有用到 */
+            TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+
+            TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+            TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
+
+            TIM_ClearFlag(TIM3, TIM_FLAG_Update);
+
+            TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
+            TIM_ClearFlag(TIM3, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
+            TIM_Cmd(TIM3, ENABLE);
+
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, DISABLE); /*先关闭等待使用*/
+            Interrupt.SetPriority(TIM3_IRQn, 3);
             break;
         case Timer4:
+             /* 设置TIM2CLK 为 72MHZ */
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
+            //TIM_DeInit(TIM4);
+
+            /* 自动重装载寄存器周期的值(计数值) */
+            TIM_TimeBaseStructure.TIM_Period = this->Period;
+
+            /* 累计 TIM_Period个频率后产生一个更新或者中断 */
+            /* 时钟预分频数为72 */
+            TIM_TimeBaseStructure.TIM_Prescaler = this->Prescaler;
+
+            /* 对外部时钟进行采样的时钟分频,这里没有用到 */
+            TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+
+            TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+            TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
+
+            TIM_ClearFlag(TIM4, TIM_FLAG_Update);
+
+            TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE);
+            TIM_ClearFlag(TIM4, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
+            TIM_Cmd(TIM4, ENABLE);
+
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, DISABLE); /*先关闭等待使用*/
+            Interrupt.SetPriority(TIM4_IRQn, 3);
             break;
         case Timer5:
+             /* 设置TIM2CLK 为 72MHZ */
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
+            //TIM_DeInit(TIM5);
+
+            /* 自动重装载寄存器周期的值(计数值) */
+            TIM_TimeBaseStructure.TIM_Period = this->Period;
+
+            /* 累计 TIM_Period个频率后产生一个更新或者中断 */
+            /* 时钟预分频数为72 */
+            TIM_TimeBaseStructure.TIM_Prescaler = this->Prescaler;
+
+            /* 对外部时钟进行采样的时钟分频,这里没有用到 */
+            TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+
+            TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+            TIM_TimeBaseInit(TIM5, &TIM_TimeBaseStructure);
+
+            TIM_ClearFlag(TIM5, TIM_FLAG_Update);
+
+            TIM_ITConfig(TIM5, TIM_IT_Update, ENABLE);
+            TIM_ClearFlag(TIM5, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
+            TIM_Cmd(TIM5, ENABLE);
+
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, DISABLE); /*先关闭等待使用*/
+            Interrupt.SetPriority(TIM5_IRQn, 3);
             break;
         case Timer6:
+             /* 设置TIM2CLK 为 72MHZ */
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
+            //TIM_DeInit(TIM6);
+
+            /* 自动重装载寄存器周期的值(计数值) */
+            TIM_TimeBaseStructure.TIM_Period = this->Period;
+
+            /* 累计 TIM_Period个频率后产生一个更新或者中断 */
+            /* 时钟预分频数为72 */
+            TIM_TimeBaseStructure.TIM_Prescaler = this->Prescaler;
+
+            /* 对外部时钟进行采样的时钟分频,这里没有用到 */
+            TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+
+            TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+            TIM_TimeBaseInit(TIM6, &TIM_TimeBaseStructure);
+
+            TIM_ClearFlag(TIM6, TIM_FLAG_Update);
+
+            TIM_ITConfig(TIM6, TIM_IT_Update, ENABLE);
+            TIM_ClearFlag(TIM6, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
+            TIM_Cmd(TIM6, ENABLE);
+
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, DISABLE); /*先关闭等待使用*/
+            Interrupt.SetPriority(TIM6_IRQn, 3);
             break;
         case Timer7:
+             /* 设置TIM2CLK 为 72MHZ */
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
+            //TIM_DeInit(TIM7);
+
+            /* 自动重装载寄存器周期的值(计数值) */
+            TIM_TimeBaseStructure.TIM_Period = this->Period;
+
+            /* 累计 TIM_Period个频率后产生一个更新或者中断 */
+            /* 时钟预分频数为72 */
+            TIM_TimeBaseStructure.TIM_Prescaler = this->Prescaler;
+
+            /* 对外部时钟进行采样的时钟分频,这里没有用到 */
+            TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+
+            TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+            TIM_TimeBaseInit(TIM7, &TIM_TimeBaseStructure);
+
+            TIM_ClearFlag(TIM7, TIM_FLAG_Update);
+
+            TIM_ITConfig(TIM7, TIM_IT_Update, ENABLE);
+            TIM_ClearFlag(TIM7, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
+            TIM_Cmd(TIM7, ENABLE);
+
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE); /*先关闭等待使用*/
+            Interrupt.SetPriority(TIM7_IRQn, 3);
             break;
         case Timer8:
             break;
@@ -382,14 +507,19 @@ void Timer::OnOpen()
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
             break;
         case Timer3:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
             break;
         case Timer4:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
             break;
         case Timer5:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
             break;
         case Timer6:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
             break;
         case Timer7:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
             break;
         case Timer8:
             break;
@@ -428,14 +558,19 @@ void Timer::OnClose()
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE);
             break;
         case Timer3:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, DISABLE);
             break;
         case Timer4:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, DISABLE);
             break;
         case Timer5:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, DISABLE);
             break;
         case Timer6:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, DISABLE);
             break;
         case Timer7:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE);
             break;
         case Timer8:
             break;
