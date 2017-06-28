@@ -17,11 +17,15 @@
 #include "TInterrupt.h"
 
 const byte vers[]="yyyy-MM-dd HH:mm:ss";
-
-OutputPort led1(PD0);//led1(PB0);
-OutputPort led2(PD1);//led2(PF7);
-OutputPort led3(PD2);//led3(PF8);
-
+#if 1
+OutputPort led1(PB0);
+OutputPort led2(PF7);
+OutputPort led3(PF8);
+#else
+OutputPort led1(PD0);
+OutputPort led2(PD1);
+OutputPort led3(PD2);
+#endif
 //°´¼ü PC13 PA0
 //InputPort exti(PC13); //PA1 PB3     PA0 PC13
 //InputPort exti1(PA0);
