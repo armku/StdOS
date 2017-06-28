@@ -163,6 +163,158 @@ int main(void)
     Sys.Start();
 }
 #include "stm32f10x.h"
+void TIM2_Configuration(void)
+{
+    TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
+		
+		// 开启TIMx_CLK,x[2,3,4,5],即内部时钟CK_INT=72M
+    RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM2, ENABLE);
+	
+		// 自动重装载寄存器周的值(计数值)
+    TIM_TimeBaseStructure.TIM_Period=1000;
+	
+    // 累计 TIM_Period个频率后产生一个更新或者中断
+	  // 时钟预分频数为71，则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=1M
+    TIM_TimeBaseStructure.TIM_Prescaler= 71;
+	
+		// 时钟分频因子 ，没有用到，不用管
+    //TIM_TimeBaseStructure.TIM_ClockDivision=TIM_CKD_DIV1;
+		
+		// 计数器计数模式，设置为向上计数
+    TIM_TimeBaseStructure.TIM_CounterMode=TIM_CounterMode_Up; 
+		
+		// 重复计数器的值，通用定时器没有，不用管
+		//TIM_TimeBaseStructure.TIM_RepetitionCounter=0;
+	
+	  // 初始化定时器TIMx, x[2,3,4,5]
+    TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+		
+		// 清除计数器中断标志位
+    TIM_ClearFlag(TIM2, TIM_FLAG_Update);
+	  
+		// 开启计数器中断
+    TIM_ITConfig(TIM2,TIM_IT_Update,ENABLE);
+		
+		// 使能计数器
+    TIM_Cmd(TIM2, ENABLE);																		
+    
+		// 暂时关闭TIMx,x[2,3,4,5]的时钟，等待使用
+    RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM2, DISABLE);   
+}
+void TIM3_Configuration(void)
+{
+    TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
+		
+		// 开启TIMx_CLK,x[2,3,4,5],即内部时钟CK_INT=72M
+    RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM3, ENABLE);
+	
+		// 自动重装载寄存器周的值(计数值)
+    TIM_TimeBaseStructure.TIM_Period=1000;
+	
+    // 累计 TIM_Period个频率后产生一个更新或者中断
+	  // 时钟预分频数为71，则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=1M
+    TIM_TimeBaseStructure.TIM_Prescaler= 71;
+	
+		// 时钟分频因子 ，没有用到，不用管
+    //TIM_TimeBaseStructure.TIM_ClockDivision=TIM_CKD_DIV1;
+		
+		// 计数器计数模式，设置为向上计数
+    TIM_TimeBaseStructure.TIM_CounterMode=TIM_CounterMode_Up; 
+		
+		// 重复计数器的值，通用定时器没有，不用管
+		//TIM_TimeBaseStructure.TIM_RepetitionCounter=0;
+	
+	  // 初始化定时器TIMx, x[2,3,4,5]
+    TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
+		
+		// 清除计数器中断标志位
+    TIM_ClearFlag(TIM3, TIM_FLAG_Update);
+	  
+		// 开启计数器中断
+    TIM_ITConfig(TIM3,TIM_IT_Update,ENABLE);
+		
+		// 使能计数器
+    TIM_Cmd(TIM3, ENABLE);																		
+    
+		// 暂时关闭TIMx,x[2,3,4,5]的时钟，等待使用
+    RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM3, DISABLE);   
+}
+void TIM4_Configuration(void)
+{
+    TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
+		
+		// 开启TIMx_CLK,x[2,3,4,5],即内部时钟CK_INT=72M
+    RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM4, ENABLE);
+	
+		// 自动重装载寄存器周的值(计数值)
+    TIM_TimeBaseStructure.TIM_Period=1000;
+	
+    // 累计 TIM_Period个频率后产生一个更新或者中断
+	  // 时钟预分频数为71，则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=1M
+    TIM_TimeBaseStructure.TIM_Prescaler= 71;
+	
+		// 时钟分频因子 ，没有用到，不用管
+    //TIM_TimeBaseStructure.TIM_ClockDivision=TIM_CKD_DIV1;
+		
+		// 计数器计数模式，设置为向上计数
+    TIM_TimeBaseStructure.TIM_CounterMode=TIM_CounterMode_Up; 
+		
+		// 重复计数器的值，通用定时器没有，不用管
+		//TIM_TimeBaseStructure.TIM_RepetitionCounter=0;
+	
+	  // 初始化定时器TIMx, x[2,3,4,5]
+    TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
+		
+		// 清除计数器中断标志位
+    TIM_ClearFlag(TIM4, TIM_FLAG_Update);
+	  
+		// 开启计数器中断
+    TIM_ITConfig(TIM4,TIM_IT_Update,ENABLE);
+		
+		// 使能计数器
+    TIM_Cmd(TIM4, ENABLE);																		
+    
+		// 暂时关闭TIMx,x[2,3,4,5]的时钟，等待使用
+    RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM4, DISABLE);   
+}
+void TIM5_Configuration(void)
+{
+    TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
+		
+		// 开启TIMx_CLK,x[2,3,4,5],即内部时钟CK_INT=72M
+    RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM5, ENABLE);
+	
+		// 自动重装载寄存器周的值(计数值)
+    TIM_TimeBaseStructure.TIM_Period=1000;
+	
+    // 累计 TIM_Period个频率后产生一个更新或者中断
+	  // 时钟预分频数为71，则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=1M
+    TIM_TimeBaseStructure.TIM_Prescaler= 71;
+	
+		// 时钟分频因子 ，没有用到，不用管
+    //TIM_TimeBaseStructure.TIM_ClockDivision=TIM_CKD_DIV1;
+		
+		// 计数器计数模式，设置为向上计数
+    TIM_TimeBaseStructure.TIM_CounterMode=TIM_CounterMode_Up; 
+		
+		// 重复计数器的值，通用定时器没有，不用管
+		//TIM_TimeBaseStructure.TIM_RepetitionCounter=0;
+	
+	  // 初始化定时器TIMx, x[2,3,4,5]
+    TIM_TimeBaseInit(TIM5, &TIM_TimeBaseStructure);
+		
+		// 清除计数器中断标志位
+    TIM_ClearFlag(TIM5, TIM_FLAG_Update);
+	  
+		// 开启计数器中断
+    TIM_ITConfig(TIM5,TIM_IT_Update,ENABLE);
+		
+		// 使能计数器
+    TIM_Cmd(TIM5, ENABLE);																		
+    
+		// 暂时关闭TIMx,x[2,3,4,5]的时钟，等待使用
+    RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM5, DISABLE);   
+}
 void TIM6_Configuration(void)
 {
     TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
@@ -239,6 +391,50 @@ void TIM7_Configuration(void)
 		// 暂时关闭TIMx,x[6,7]的时钟，等待使用
     RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM7, DISABLE);   
 }
+void TIM2_NVIC_Configuration(void)
+{
+    NVIC_InitTypeDef NVIC_InitStructure; 
+    
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);  													
+    NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;	  
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;	
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
+}
+void TIM3_NVIC_Configuration(void)
+{
+    NVIC_InitTypeDef NVIC_InitStructure; 
+    
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);  													
+    NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;	  
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;	
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
+}
+void TIM4_NVIC_Configuration(void)
+{
+    NVIC_InitTypeDef NVIC_InitStructure; 
+    
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);  													
+    NVIC_InitStructure.NVIC_IRQChannel = TIM4_IRQn;	  
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;	
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
+}
+void TIM5_NVIC_Configuration(void)
+{
+    NVIC_InitTypeDef NVIC_InitStructure; 
+    
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);  													
+    NVIC_InitStructure.NVIC_IRQChannel = TIM5_IRQn;	  
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;	
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
+}
 void TIM6_NVIC_Configuration(void)
 {
     NVIC_InitTypeDef NVIC_InitStructure; 
@@ -273,7 +469,47 @@ void TIM7_NVIC_Configuration(void)
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
 }
-void timetest()
+void time2test()
+{
+	TIM2_Configuration();
+	
+	/* 配置基本定时器 TIMx,x[6,7]的中断优先级 */
+	TIM2_NVIC_Configuration();
+
+	/* 基本定时器 TIMx,x[6,7] 重新开时钟，开始计时 */
+	RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM2, ENABLE);
+}
+void time3test()
+{
+	TIM3_Configuration();
+	
+	/* 配置基本定时器 TIMx,x[6,7]的中断优先级 */
+	TIM3_NVIC_Configuration();
+
+	/* 基本定时器 TIMx,x[6,7] 重新开时钟，开始计时 */
+	RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM3, ENABLE);
+}
+void time4test()
+{
+	TIM4_Configuration();
+	
+	/* 配置基本定时器 TIMx,x[6,7]的中断优先级 */
+	TIM4_NVIC_Configuration();
+
+	/* 基本定时器 TIMx,x[6,7] 重新开时钟，开始计时 */
+	RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM4, ENABLE);
+}
+void time5test()
+{
+	TIM5_Configuration();
+	
+	/* 配置基本定时器 TIMx,x[6,7]的中断优先级 */
+	TIM5_NVIC_Configuration();
+
+	/* 基本定时器 TIMx,x[6,7] 重新开时钟，开始计时 */
+	RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM5, ENABLE);
+}
+void time6test()
 {
 	TIM6_Configuration();
 	
@@ -282,7 +518,9 @@ void timetest()
 
 	/* 基本定时器 TIMx,x[6,7] 重新开时钟，开始计时 */
 	RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM6, ENABLE);
-	
+}
+void time7test()
+{
 	TIM7_Configuration();
 	
 	/* 配置基本定时器 TIMx,x[6,7]的中断优先级 */
@@ -290,4 +528,15 @@ void timetest()
 
 	/* 基本定时器 TIMx,x[6,7] 重新开时钟，开始计时 */
 	RCC_APB1PeriphClockCmd (RCC_APB1Periph_TIM7, ENABLE);
+}
+void timetest()
+{
+	time2test();
+	time3test();
+	time4test();
+	time5test();
+	time6test();
+	time7test();
+	
+	
 }

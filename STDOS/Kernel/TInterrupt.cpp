@@ -728,6 +728,7 @@ void OnUsartReceive(ushort num, void *param);
         }
     }
     int timer2testcnt123=0;
+	int time2,time3,time4,time5,time6,time7;
     void TIM2_IRQHandler(void)
     {
         if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
@@ -739,8 +740,33 @@ void OnUsartReceive(ushort num, void *param);
             TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
         }
 		timer2testcnt123++;
+		time2++;
     }
-	int time6,time7;
+	
+	void TIM3_IRQHandler()
+	{
+		if ( TIM_GetITStatus( TIM3, TIM_IT_Update) != RESET ) 
+		{	
+			time3++;
+			TIM_ClearITPendingBit(TIM3 , TIM_FLAG_Update);  		 
+		}		
+	}
+	void TIM4_IRQHandler()
+	{
+		if ( TIM_GetITStatus( TIM4, TIM_IT_Update) != RESET ) 
+		{	
+			time4++;
+			TIM_ClearITPendingBit(TIM4 , TIM_FLAG_Update);  		 
+		}		
+	}
+	void TIM5_IRQHandler()
+	{
+		if ( TIM_GetITStatus( TIM5, TIM_IT_Update) != RESET ) 
+		{	
+			time5++;
+			TIM_ClearITPendingBit(TIM5 , TIM_FLAG_Update);  		 
+		}		
+	}
 	void TIM6_IRQHandler()
 	{
 		if ( TIM_GetITStatus( TIM6, TIM_IT_Update) != RESET ) 
