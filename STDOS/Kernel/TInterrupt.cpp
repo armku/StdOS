@@ -748,6 +748,10 @@ void OnUsartReceive(ushort num, void *param);
 		if ( TIM_GetITStatus( TIM3, TIM_IT_Update) != RESET ) 
 		{	
 			time3++;
+			if(onTimerPortRcv[2])
+			{
+				onTimerPortRcv[2]->OnInterrupt();
+			}
 			TIM_ClearITPendingBit(TIM3 , TIM_FLAG_Update);  		 
 		}		
 	}
@@ -756,6 +760,10 @@ void OnUsartReceive(ushort num, void *param);
 		if ( TIM_GetITStatus( TIM4, TIM_IT_Update) != RESET ) 
 		{	
 			time4++;
+			if(onTimerPortRcv[3])
+			{
+				onTimerPortRcv[3]->OnInterrupt();
+			}
 			TIM_ClearITPendingBit(TIM4 , TIM_FLAG_Update);  		 
 		}		
 	}
@@ -764,6 +772,10 @@ void OnUsartReceive(ushort num, void *param);
 		if ( TIM_GetITStatus( TIM5, TIM_IT_Update) != RESET ) 
 		{	
 			time5++;
+			if(onTimerPortRcv[4])
+			{
+				onTimerPortRcv[4]->OnInterrupt();
+			}
 			TIM_ClearITPendingBit(TIM5 , TIM_FLAG_Update);  		 
 		}		
 	}
@@ -772,6 +784,10 @@ void OnUsartReceive(ushort num, void *param);
 		if ( TIM_GetITStatus( TIM6, TIM_IT_Update) != RESET ) 
 		{	
 			time6++;
+			if(onTimerPortRcv[5])
+			{
+				onTimerPortRcv[5]->OnInterrupt();
+			}
 			TIM_ClearITPendingBit(TIM6 , TIM_FLAG_Update);  		 
 		}		
 	}
@@ -780,6 +796,10 @@ void OnUsartReceive(ushort num, void *param);
 		if ( TIM_GetITStatus( TIM7, TIM_IT_Update) != RESET ) 
 		{	
 			time7++;
+			if(onTimerPortRcv[6])
+			{
+				onTimerPortRcv[6]->OnInterrupt();
+			}
 			TIM_ClearITPendingBit(TIM7 , TIM_FLAG_Update);  		 
 		}	
 	}
