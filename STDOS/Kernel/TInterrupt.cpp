@@ -740,6 +740,23 @@ void OnUsartReceive(ushort num, void *param);
         }
 		timer2testcnt123++;
     }
+	int time6,time7;
+	void TIM6_IRQHandler()
+	{
+		if ( TIM_GetITStatus( TIM6, TIM_IT_Update) != RESET ) 
+		{	
+			time6++;
+			TIM_ClearITPendingBit(TIM6 , TIM_FLAG_Update);  		 
+		}		
+	}
+	void TIM7_IRQHandler()
+	{
+		if ( TIM_GetITStatus( TIM7, TIM_IT_Update) != RESET ) 
+		{	
+			time7++;
+			TIM_ClearITPendingBit(TIM7 , TIM_FLAG_Update);  		 
+		}	
+	}
     void EXTI0_IRQHandler()
     {
         if (EXTI_GetITStatus(EXTI_Line0) != RESET)
