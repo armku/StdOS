@@ -148,12 +148,12 @@ int main(void)
     //	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
     // 初始化为输出
-	Timer timer2(Timer2);
-	abc.Bind(tim2refesh);
-	timer2.Register(abc);	
-    timer2.Open();
-	timer2.SetFrequency(1);
-	timer2.Config();
+//	Timer timer2(Timer2);
+//	abc.Bind(tim2refesh);
+//	timer2.Register(abc);	
+//    timer2.Open();
+//	timer2.SetFrequency(1);
+//	timer2.Config();
 //	ledLCD.Init();
 //	ledLCD.SetOutPercent(50);
 			timetest();
