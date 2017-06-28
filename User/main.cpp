@@ -148,10 +148,10 @@ int main(void)
     //	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
     // 初始化为输出
-//	Timer timer2(Timer2);
+	Timer timer2(Timer3);
 //	abc.Bind(tim2refesh);
 //	timer2.Register(abc);	
-//    timer2.Open();
+    timer2.Open();
 //	timer2.SetFrequency(1);
 //	timer2.Config();
 //	ledLCD.Init();
@@ -531,12 +531,11 @@ void time7test()
 }
 void timetest()
 {
-	time2test();
-	time3test();
-	time4test();
-	time5test();
-	time6test();
-	time7test();
-	
+//	time2test();
+//	time3test();
+//	time4test();
+//	time5test();
+//	time6test();
+//	time7test();
 	
 }

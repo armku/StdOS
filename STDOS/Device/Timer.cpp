@@ -82,12 +82,12 @@ void Timer::Close() // 停止定时器
  */
 void Timer::Config()
 {
+	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
     switch (this->_index)
     {
         case Timer1:
             break;
-        case Timer2:
-            TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+        case Timer2:     
 
             /* 设置TIM2CLK 为 72MHZ */
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
