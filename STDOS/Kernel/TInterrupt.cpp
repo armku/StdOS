@@ -727,7 +727,7 @@ void OnUsartReceive(ushort num, void *param);
             //           SerialPort::OnUsartReceive(4, onSerialPortRcv[4]);
         }
     }
-
+    int timer2testcnt123=0;
     void TIM2_IRQHandler(void)
     {
         if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
@@ -738,6 +738,7 @@ void OnUsartReceive(ushort num, void *param);
 			}
             TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
         }
+		timer2testcnt123++;
     }
     void EXTI0_IRQHandler()
     {

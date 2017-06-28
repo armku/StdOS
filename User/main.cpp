@@ -71,7 +71,7 @@ void LedTask(void *param)
 volatile uint time2cnt = 0; // ms 计时变量 
 void LedTest(void *param)
 {
-    if (time2cnt >= 1)
+    if (time2cnt >= 199)
      /* 1000 * 1 ms = 1s 时间到 */
     {
         time2cnt = 0;
@@ -91,8 +91,8 @@ void TimeRefresh(void* param)
 }
 
 Delegate<Timer&> abc;
-CLcd_DR lcddr1(PD3, PD6, PD7, PB3, PB4);
-PWM ledLCD(PD12);
+//CLcd_DR lcddr1(PD3, PD6, PD7, PB3, PB4);
+//PWM ledLCD(PD12);
 int main(void)
 {
 //    SerialPort *sp1;
@@ -152,8 +152,9 @@ int main(void)
 	timer2.Register(abc);	
     timer2.Open();
 	timer2.SetFrequency(1);
-	ledLCD.Init();
-	ledLCD.SetOutPercent(50);
+	timer2.Config();
+//	ledLCD.Init();
+//	ledLCD.SetOutPercent(50);
 			
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(LedTest, nullptr, 0, 10, "LedTest");
