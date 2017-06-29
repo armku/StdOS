@@ -113,7 +113,7 @@ void Timer::Config()
             TIM_Cmd(TIM2, ENABLE);
 
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE); /*先关闭等待使用*/
-            Interrupt.SetPriority(TIM2_IRQn, 3);
+            Interrupt.SetPriority(28, 3);//TIM2_IRQn
             break;
         case Timer3:
 			 /* 设置TIM2CLK 为 72MHZ */
@@ -140,7 +140,7 @@ void Timer::Config()
             TIM_Cmd(TIM3, ENABLE);
 
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, DISABLE); /*先关闭等待使用*/
-            Interrupt.SetPriority(TIM3_IRQn, 3);
+            Interrupt.SetPriority(29, 3);//TIM3_IRQn
             break;
         case Timer4:
              /* 设置TIM2CLK 为 72MHZ */
@@ -167,7 +167,7 @@ void Timer::Config()
             TIM_Cmd(TIM4, ENABLE);
 
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, DISABLE); /*先关闭等待使用*/
-            Interrupt.SetPriority(TIM4_IRQn, 3);
+            Interrupt.SetPriority(30, 3);//TIM4_IRQn
             break;
         case Timer5:
              /* 设置TIM2CLK 为 72MHZ */
@@ -194,7 +194,7 @@ void Timer::Config()
             TIM_Cmd(TIM5, ENABLE);
 
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, DISABLE); /*先关闭等待使用*/
-            Interrupt.SetPriority(TIM5_IRQn, 3);
+            Interrupt.SetPriority(50, 3);//TIM5_IRQn
             break;
         case Timer6:
              /* 设置TIM2CLK 为 72MHZ */
@@ -221,7 +221,7 @@ void Timer::Config()
             TIM_Cmd(TIM6, ENABLE);
 
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, DISABLE); /*先关闭等待使用*/
-            Interrupt.SetPriority(TIM6_IRQn, 3);
+            Interrupt.SetPriority(54, 3);//TIM6_IRQn
             break;
         case Timer7:
              /* 设置TIM2CLK 为 72MHZ */
@@ -248,7 +248,7 @@ void Timer::Config()
             TIM_Cmd(TIM7, ENABLE);
 
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE); /*先关闭等待使用*/
-            Interrupt.SetPriority(TIM7_IRQn, 3);
+            Interrupt.SetPriority(55, 3);//TIM7_IRQn
             break;
         case Timer8:
             break;
