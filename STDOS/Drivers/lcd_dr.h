@@ -6,7 +6,7 @@
 
     typedef enum
     {
-        FONT_4X8, FONT_5X8, FONT_8X8, FONT_12X12, FONT_8X16, FONT_16X16, FONT_16X32, FONT_32X32
+        FONT_4X8, FONT_5X8, FONT_8X8, FONT_6X12, FONT_12X12, FONT_8X16,FONT_8X16BOLT, FONT_16X16, FONT_16X32, FONT_32X32
     } Font;
 
     class CLcd_DR: public CLcd
@@ -17,7 +17,9 @@
             void DisplayString4x8(ushort x, ushort y, byte *text);
             void DisplayChar5x8(ushort x, ushort y, byte ch);
             void DisplayString5x8(ushort x, ushort y, byte *text);
-            void DisplayChar8x16(ushort x, ushort y, byte ch);
+            void DisplayChar6x12(ushort x, ushort y, byte ch);
+			void DisplayChar8x16(ushort x, ushort y, byte ch);
+			void DisplayChar8x16Bolt(ushort x, ushort y, byte ch);
             void DisplayString8x16(ushort x, ushort y, byte *text);
 
             void DisplayLattice(ushort x, ushort y, byte *dp, Font font); //œ‘ æµ„’ÛÕº–Œ

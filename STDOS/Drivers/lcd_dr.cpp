@@ -71,6 +71,20 @@ void CLcd_DR::DisplayString5x8(ushort x, ushort y, byte *text)
 		x+=6;
 	}
 }
+extern const byte ascii_table_6x12[][12];
+/*********************************************************************************************************
+函 数 名: DisplayChar6x12
+功能说明: 显示ascall码
+形    参1: x  X轴坐标
+形    参2: y  Y轴坐标
+形    参3: ch 显示内容
+形    参4: color 颜色
+返 回 值: 无
+ ********************************************************************************************************/
+void CLcd_DR::DisplayChar6x12(ushort x, ushort y, byte ch)
+{    
+	this->Display6x12(x,y,(byte*)&ascii_table_6x12[ch - 0x20][0]);
+}
 /*********************************************************************************************************
 函 数 名: DisplayChar8x16
 功能说明: 显示ascall码
@@ -83,6 +97,20 @@ void CLcd_DR::DisplayString5x8(ushort x, ushort y, byte *text)
 void CLcd_DR::DisplayChar8x16(ushort x, ushort y, byte ch)
 {    
 	this->Display8x16(x,y,(byte*)&ascii_table_8x16[ch - 0x20][0]);
+}
+extern const byte ascBolt[][16];
+/*********************************************************************************************************
+函 数 名: DisplayChar8x16Bolt
+功能说明: 显示ascall码
+形    参1: x  X轴坐标
+形    参2: y  Y轴坐标
+形    参3: ch 显示内容
+形    参4: color 颜色
+返 回 值: 无
+ ********************************************************************************************************/
+void CLcd_DR::DisplayChar8x16Bolt(ushort x, ushort y, byte ch)
+{    
+	this->Display8x16(x,y,(byte*)&ascBolt[ch - 0x20][0]);
 }
 /*********************************************************************************************************
 函 数 名: DisplayString8x16
@@ -190,11 +218,19 @@ void CLcd_DR::DisplayStr(ushort x, ushort y, byte *text, Font font)
                         this->DisplayChar4x8(x, y, *text);
                         x += 5;                    
                     break;
-                case FONT_12X12:
+                case FONT_6X12:
+					this->DisplayChar6x12(x, y, *text);
+					x+=6;
+					break;
+				case FONT_12X12:
 				case FONT_5X8:                    
                         this->DisplayString5x8(x, y, text);
                         x += 6;                    
                     break;
+				case FONT_8X16BOLT:
+					 this->DisplayChar8x16Bolt(x, y, *text);
+                        x += 8; 
+					break;
                 case FONT_16X16:
 				case FONT_8X16:                    
                         this->DisplayChar8x16(x, y, *text);

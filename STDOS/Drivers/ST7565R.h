@@ -25,7 +25,8 @@
             void Circle(ushort x0, ushort y0, ushort r); //»­Ô²
             void Display4x8(ushort x, ushort y, byte *dp);
             void Display5x8(ushort x, ushort y, byte *dp);
-            void Display8x16(ushort x, ushort y, byte *dp);
+            void Display6x12(ushort x, ushort y, byte *dp);
+			void Display8x16(ushort x, ushort y, byte *dp);
             void Display12x12(ushort x, ushort y, byte *dp);
             void Display16x16(ushort x, ushort y, byte *dp);
             void Display16x32(ushort x, ushort y, byte *dp);
