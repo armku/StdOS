@@ -36,21 +36,7 @@ OutputPort led3(PD2);
 ////    printf("中断引脚：P%c%d 值%d \r\n", _PIN_NAME(pin), down);
 //}
 
-/*
-ISO-V2:PB5控制485方向
-ISO-V3:PC2控制485方向
- */
-//ModbusSlave ModbusSlave;
-//static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
-//{
-//    ModbusSlave.Process(bs, para);
-//    return 0;
-//}
-//static uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para)
-//{
-//   bs.Show(true);
-//    return 0;
-//}
+
 //InputPort key0(PA0);
 void LedTask(void *param)
 {
@@ -61,24 +47,16 @@ void LedTask(void *param)
 
 //#define namee "StdOS"
 
-//uint OnUsart1Read(ITransport *transport, Buffer &bs, void *param, void *param2)
-//{
-//    transport->Write(bs);
-//    return bs.Length();
-//}
-
 ////按键事件
 //void OnPress(InputPort &port, bool down)
 //{
 //    debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
 //}
-uint time2cnt = 0; // ms 计时变量 
 
 //PWM ledLCD(PD12);
 
 int main(void)
 {
-//    SerialPort *sp1;
     TSys &sys = (TSys &)(Sys);
     //    #if 0
     //        sys.Codec = codec;
@@ -92,9 +70,6 @@ int main(void)
     #if DEBUG
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
-//        sp1 = SerialPort::GetMessagePort();
-        //sp1->Register(OnUsart1Read, sp1);
-
         WatchDog::Start(20000, 10000);
     #else 
         WatchDog::Start();

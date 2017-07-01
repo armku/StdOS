@@ -481,3 +481,31 @@ SerialPort *SerialPort::GetMessagePort()
 
     return _printf_sp;
 }
+//测试代码
+/*
+ISO-V2:PB5控制485方向
+ISO-V3:PC2控制485方向
+ */
+//ModbusSlave ModbusSlave;
+//static uint OnUsartRead(ITransport *transport, Buffer &bs, void *para)
+//{
+//    ModbusSlave.Process(bs, para);
+//    return 0;
+//}
+//static uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para)
+//{
+//   bs.Show(true);
+//    return 0;
+//}
+//uint OnUsart1Read(ITransport *transport, Buffer &bs, void *param, void *param2)
+//{
+//    transport->Write(bs);
+//    return bs.Length();
+//}
+void SerialTest()
+{
+	//    SerialPort *sp1;
+	//        sp1 = SerialPort::GetMessagePort();
+        //sp1->Register(OnUsart1Read, sp1);
+	
+}
