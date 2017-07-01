@@ -73,15 +73,6 @@ void LedTask(void *param)
 //    debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
 //}
 uint time2cnt = 0; // ms 计时变量 
-void LedTest(void *param)
-{
-    if (time2cnt >= 199)
-     /* 1000 * 1 ms = 1s 时间到 */
-    {
-        time2cnt = 0;
-        led3 = !led3;
-    }
-}
 
 DateTime now;//当前时间
 void TimeRefresh(void* param)
@@ -151,7 +142,6 @@ int main(void)
 	TimeTest();
 	
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
-    Sys.AddTask(LedTest, nullptr, 0, 10, "LedTest");
 	Sys.AddTask(TimeRefresh,Rtc,100,1000,"TimeUp");
     Sys.Start();
 }
