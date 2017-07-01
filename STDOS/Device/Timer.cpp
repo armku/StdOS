@@ -604,6 +604,7 @@ const void *Timer::GetTimer(byte idx)
     return nullptr;
 }
 //¶¨Ê±Æ÷²âÊÔ
+#if 0
 extern uint time2cnt;
 Delegate<Timer&> abc;
 void tim2refesh(void * param)
@@ -621,3 +622,4 @@ void TimeTest()
 //	timer2->SetFrequency(1);
 //	timer2->Config();
 }
+#endif

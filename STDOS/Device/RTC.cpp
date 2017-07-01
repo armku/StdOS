@@ -121,3 +121,35 @@ DateTime& HardRtc::GetTime(DateTime & dt)
     #ifdef __cplusplus
     }
 #endif
+//测试时钟
+#if 0
+DateTime now;//当前时间
+HardRtc *Rtc;
+void TimeRefresh(void* param)
+{
+	HardRtc * rtc=(HardRtc*)param;
+	rtc->GetTime(now);
+	now.Show();
+}
+void RTCtest()
+{
+	Rtc = HardRtc::Instance();
+    Rtc->LowPower = false;
+    Rtc->External = false;
+    
+	Rtc->GetTime(now);
+	if(now.TotalSeconds()<100)
+	{
+		now.Year=2017;
+		now.Month=6;
+		now.Day=17;
+		now.Hour=14;
+		now.Minute=17;
+		
+		Rtc->Init();
+		Rtc->Start(false, false);
+		Rtc->SetTime(now);
+	}
+	Sys.AddTask(TimeRefresh,Rtc,100,1000,"TimeUp");
+}
+#endif
