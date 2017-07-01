@@ -95,7 +95,6 @@ void TimeRefresh(void* param)
 }
 
 Delegate<Timer&> abc;
-//CLcd_DR lcddr1(PD3, PD6, PD7, PB3, PB4);
 //PWM ledLCD(PD12);
 
 int main(void)
@@ -158,8 +157,6 @@ int main(void)
     timer2.Open();
 //	timer2.SetFrequency(1);
 //	timer2.Config();
-//	ledLCD.Init();
-//	ledLCD.SetOutPercent(50);
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(LedTest, nullptr, 0, 10, "LedTest");
 	Sys.AddTask(TimeRefresh,Rtc,100,1000,"TimeUp");

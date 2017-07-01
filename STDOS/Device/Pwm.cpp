@@ -47,6 +47,41 @@ void PwmData::OnInterrupt()
 {
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 PWM::PWM(Pin pin, uint frq, uint duty,uint prescaler,bool voltlevellow): AlternatePort(pin)
 {
     this->freq = frq;
