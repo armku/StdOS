@@ -72,7 +72,7 @@ void LedTask(void *param)
 //{
 //    debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
 //}
-volatile uint time2cnt = 0; // ms 计时变量 
+uint time2cnt = 0; // ms 计时变量 
 void LedTest(void *param)
 {
     if (time2cnt >= 199)
@@ -82,10 +82,7 @@ void LedTest(void *param)
         led3 = !led3;
     }
 }
-void tim2refesh(void * param)
-{
-	time2cnt++;
-}
+
 DateTime now;//当前时间
 void TimeRefresh(void* param)
 {
@@ -94,7 +91,8 @@ void TimeRefresh(void* param)
 	now.Show();
 }
 
-Delegate<Timer&> abc;
+void TimeTest();
+
 //PWM ledLCD(PD12);
 
 int main(void)
@@ -149,14 +147,9 @@ int main(void)
     //    exti.Register(OnKeyPress);
     //    exti1.Register(OnKeyPress);
     //	SerialPort::GetMessagePort()->Register(OnUsart1Read);
-
-    // 初始化为输出
-	Timer timer2(Timer7);
-	abc.Bind(tim2refesh);
-	timer2.Register(abc);	
-    timer2.Open();
-//	timer2.SetFrequency(1);
-//	timer2.Config();
+    
+	TimeTest();
+	
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(LedTest, nullptr, 0, 10, "LedTest");
 	Sys.AddTask(TimeRefresh,Rtc,100,1000,"TimeUp");
