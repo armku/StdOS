@@ -71,7 +71,7 @@ void CLcd_DR::DisplayString5x8(ushort x, ushort y, byte *text)
 		x+=6;
 	}
 }
-extern const byte ascii_table_6x12[][12];
+
 /*********************************************************************************************************
 函 数 名: DisplayChar6x12
 功能说明: 显示ascall码
@@ -98,7 +98,7 @@ void CLcd_DR::DisplayChar8x16(ushort x, ushort y, byte ch)
 {    
 	this->Display8x16(x,y,(byte*)&ascii_table_8x16[ch - 0x20][0]);
 }
-extern const byte ascBolt[][16];
+
 /*********************************************************************************************************
 函 数 名: DisplayChar8x16Bolt
 功能说明: 显示ascall码

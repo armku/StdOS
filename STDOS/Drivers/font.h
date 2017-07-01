@@ -30,6 +30,8 @@
     extern const byte ascii_table_5x8[95][5];
     extern const byte ascii_table_4x8[][4];
     extern typFNT_GB16 const GB_16[];
+	extern const byte ascBolt[][16];
+	extern const byte ascii_table_6x12[][12];
 
 
     /////////////////////////////////////////////////////////////////////////
