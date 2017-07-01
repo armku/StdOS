@@ -26,33 +26,14 @@ OutputPort led1(PD0);
 OutputPort led2(PD1);
 OutputPort led3(PD2);
 #endif
-//按键 PC13 PA0
-//InputPort exti(PC13); //PA1 PB3     PA0 PC13
-//InputPort exti1(PA0);
-//void OnKeyPress(InputPort* pin, bool down, void *param)
-//{
-//    //led1.Write(onoff);
-//    led2 = !led2;
-////    printf("中断引脚：P%c%d 值%d \r\n", _PIN_NAME(pin), down);
-//}
 
-
-//InputPort key0(PA0);
 void LedTask(void *param)
 {
     OutputPort *leds = (OutputPort*)param;
     *leds = ! * leds;
 //    led2 = key0;
 }
-
 //#define namee "StdOS"
-
-////按键事件
-//void OnPress(InputPort &port, bool down)
-//{
-//    debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
-//}
-
 //PWM ledLCD(PD12);
 
 int main(void)
@@ -77,15 +58,7 @@ int main(void)
     //    #if 0
     //        //flash 最后一块作为配置区
     //        Config::Current = &Config::CreateFlash();
-    //    #endif 
-
-//    InputPort key(PC13);
-//    key.Press = OnPress;
-//    key.UsePress();
-//    key.Open();
-    //    exti.Register(OnKeyPress);
-    //    exti1.Register(OnKeyPress);
-    //	SerialPort::GetMessagePort()->Register(OnUsart1Read);
+    //    #endif  
 	
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	

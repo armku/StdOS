@@ -507,5 +507,5 @@ void SerialTest()
 	//    SerialPort *sp1;
 	//        sp1 = SerialPort::GetMessagePort();
         //sp1->Register(OnUsart1Read, sp1);
-	
+	//	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 }
