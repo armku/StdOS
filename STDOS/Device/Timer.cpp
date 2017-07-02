@@ -89,7 +89,7 @@ void Timer::Config()
 
             /* 设置TIM2CLK 为 72MHZ */
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-            //TIM_DeInit(TIM2);
+            TIM_DeInit(TIM2);
 
             /* 自动重装载寄存器周期的值(计数值) */
             TIM_TimeBaseStructure.TIM_Period = this->Period;
@@ -116,7 +116,7 @@ void Timer::Config()
         case Timer3:
 			 /* 设置TIM2CLK 为 72MHZ */
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-            //TIM_DeInit(TIM3);
+            TIM_DeInit(TIM3);
 
             /* 自动重装载寄存器周期的值(计数值) */
             TIM_TimeBaseStructure.TIM_Period = this->Period;
@@ -143,7 +143,7 @@ void Timer::Config()
         case Timer4:
              /* 设置TIM2CLK 为 72MHZ */
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-            //TIM_DeInit(TIM4);
+            TIM_DeInit(TIM4);
 
             /* 自动重装载寄存器周期的值(计数值) */
             TIM_TimeBaseStructure.TIM_Period = this->Period;
@@ -170,7 +170,7 @@ void Timer::Config()
         case Timer5:
              /* 设置TIM2CLK 为 72MHZ */
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
-            //TIM_DeInit(TIM5);
+            TIM_DeInit(TIM5);
 
             /* 自动重装载寄存器周期的值(计数值) */
             TIM_TimeBaseStructure.TIM_Period = this->Period;
@@ -197,7 +197,7 @@ void Timer::Config()
         case Timer6:
              /* 设置TIM2CLK 为 72MHZ */
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
-            //TIM_DeInit(TIM6);
+            TIM_DeInit(TIM6);
 
             /* 自动重装载寄存器周期的值(计数值) */
             TIM_TimeBaseStructure.TIM_Period = this->Period;
@@ -224,7 +224,7 @@ void Timer::Config()
         case Timer7:
              /* 设置TIM2CLK 为 72MHZ */
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
-            //TIM_DeInit(TIM7);
+            TIM_DeInit(TIM7);
 
             /* 自动重装载寄存器周期的值(计数值) */
             TIM_TimeBaseStructure.TIM_Period = this->Period;
