@@ -61,6 +61,14 @@ int main(void)
     #endif 
 	Pwm pwm(Timer3);
 	abc.Bind(tim2refesh);
+	pwm.Enabled[0]=false;
+	pwm.Enabled[1]=false;
+	pwm.Enabled[2]=true;
+	pwm.Enabled[3]=false;
+	pwm.Pulse[0]=0;
+	pwm.Pulse[1]=0;
+	pwm.Pulse[2]=0;
+	pwm.Pulse[3]=0;
 	pwm.Register(abc);
 	pwm.Open();
 
