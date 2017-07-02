@@ -4,6 +4,8 @@
 // index 定时器编号
 Pwm::Pwm(TIMER index):Timer(index)
 {
+	this->Period = 255; //默认1秒一次
+    this->Prescaler = 1999;
 }
 Pwm::~Pwm()
 {
@@ -11,20 +13,7 @@ Pwm::~Pwm()
 }
 void TIMx_Breathing_Init(void)
 {
-    TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
     TIM_OCInitTypeDef TIM_OCInitStructure;
-
-
-    /* 设置TIM3CLK 时钟为72MHZ */
-    //  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); 					//使能TIM3时钟
-//    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-
-    /* 基本定时器配置 */
-    TIM_TimeBaseStructure.TIM_Period = 255; //当定时器从0计数到255，即为266次，为一个定时周期
-    TIM_TimeBaseStructure.TIM_Prescaler = 1999; //设置预分频：
-    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1; //设置时钟分频系数：不分频(这里用不到)
-    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; //向上计数模式
-    TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
 
     /* PWM模式配置 */
     TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; //配置为PWM模式1
@@ -38,11 +27,6 @@ void TIMx_Breathing_Init(void)
     TIM_OC3PreloadConfig(TIM3, TIM_OCPreload_Enable); //使能预装载	
 
     TIM_ARRPreloadConfig(TIM3, ENABLE); //使能TIM3重载寄存器ARR
-
-    /* TIM3 enable counter */
-//    TIM_Cmd(TIM3, ENABLE); //使能定时器3	
-
-//    TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE); //使能update中断
 }
 void Pwm::Open()
 {
