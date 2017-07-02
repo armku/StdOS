@@ -54,8 +54,7 @@ void Timer::Open() // 开始定时器
 
         uint fre = clk / (Prescaler + 1) / Period;
         debug_printf("Timer%d::Start Prescaler=%d Period=%d Frequency=%d\r\n", _index + 1, Prescaler+1, Period, fre);
-    #endif 
-    Opened = true;
+    #endif     
 }
 
 void Timer::Close() // 停止定时器
@@ -70,8 +69,7 @@ void Timer::Close() // 停止定时器
     //    TIM_ITConfig(_port, TIM_IT_Update, DISABLE);
     //    TIM_ClearITPendingBit(_port, TIM_IT_Update); // 仅清除中断标志位 关闭不可靠
     //    TIM_Cmd(_port, DISABLE);
-
-    Opened = false;
+	this->OnClose();    
 }
 
 /*
@@ -546,6 +544,7 @@ void Timer::OnOpen()
         default:
             break;
     }
+	this->Opened = true;
 }
 
 void Timer::OnClose()
@@ -597,6 +596,7 @@ void Timer::OnClose()
         default:
             break;
     }
+	Opened = false;
 }
 
 const void *Timer::GetTimer(byte idx)
