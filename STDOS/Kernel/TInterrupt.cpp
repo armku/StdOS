@@ -676,6 +676,7 @@ bool Lock::Wait(int ms)
 void EXTI_IRQHandler(ushort num, void *param);
 extern SerialPort *_printf_sp;
 void OnUsartReceive(ushort num, void *param);
+void macTIMx_IRQHandler(void);
 #ifdef __cplusplus
     extern "C"
     {
@@ -753,7 +754,8 @@ void OnUsartReceive(ushort num, void *param);
 				onTimerPortRcv[2]->OnInterrupt();
 			}
 			TIM_ClearITPendingBit(TIM3 , TIM_FLAG_Update);  		 
-		}		
+		}	
+		macTIMx_IRQHandler();
 	}
 	void TIM4_IRQHandler()
 	{
