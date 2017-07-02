@@ -427,6 +427,7 @@ void PwmData::OnInterrupt()
 {
 }
 //ºôÎüµÆÀý³Ì
+#if 1
 Pwm pwm(Timer3);
 Delegate<Timer&> abc;
 void macTIMx_IRQHandler(void);
@@ -484,5 +485,4 @@ void breathledtest()
 	pwm.Register(abc);
 	pwm.Open();
 }
-
-
+#endif
