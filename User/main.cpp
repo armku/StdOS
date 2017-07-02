@@ -37,6 +37,12 @@ void LedTask(void *param)
 #define namee "StdOS"
 //PWM ledLCD(PD12);
 void TIMx_Breathing_Init(void);
+Delegate<Timer&> abc;
+void macTIMx_IRQHandler(void);
+void tim2refesh(void * param)
+{
+	macTIMx_IRQHandler();
+}
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);
@@ -53,6 +59,10 @@ int main(void)
     #else 
         WatchDog::Start();
     #endif 
+	Timer pwm(Timer3);
+	abc.Bind(tim2refesh);
+	pwm.Register(abc);
+	pwm.Open();
     TIMx_Breathing_Init();
 
     //Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
@@ -67,20 +77,6 @@ uint8_t indexWave[] =
     1, 1, 2, 2, 3, 4, 6, 8, 10, 14, 19, 25, 33, 44, 59, 80, 107, 143, 191, 255, 255, 191, 143, 107, 80, 59, 44, 33, 25, 19, 14, 10, 8, 6, 4, 3, 2, 2, 1, 1
 };
 
-static void NVIC_Config_PWM(void)
-{
-    NVIC_InitTypeDef NVIC_InitStructure;
-
-    /* Configure one bit for preemption priority */
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-
-    /* 配置TIM3_IRQ中断为中断源 */
-    NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
-    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init(&NVIC_InitStructure);
-}
 /*
  * TIMxCLK/CK_PSC --> TIMxCNT --> TIMx_ARR --> 中断 & TIMxCNT 重新计数
  *                    TIMx_CCR(电平发生变化)
@@ -126,9 +122,6 @@ static void TIMx_Mode_Config(void)
     TIM_Cmd(TIM3, ENABLE); //使能定时器3	
 
     TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE); //使能update中断
-
-    NVIC_Config_PWM(); //配置中断优先级		
-
 }
 
 void TIMx_Breathing_Init(void)

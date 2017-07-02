@@ -11,6 +11,7 @@ Pwm::~Pwm()
 }
 void Pwm::Open()
 {
+	Timer::Open();
 }
 void Pwm::Close()
 {
