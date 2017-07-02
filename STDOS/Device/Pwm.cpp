@@ -11,9 +11,11 @@ Pwm::~Pwm()
 {
 	
 }
-void TIMx_Breathing_Init(void)
+
+void Pwm::Open()
 {
-    TIM_OCInitTypeDef TIM_OCInitStructure;
+	Timer::Open();
+	TIM_OCInitTypeDef TIM_OCInitStructure;
 
     /* PWM模式配置 */
     TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; //配置为PWM模式1
@@ -27,11 +29,6 @@ void TIMx_Breathing_Init(void)
     TIM_OC3PreloadConfig(TIM3, TIM_OCPreload_Enable); //使能预装载	
 
     TIM_ARRPreloadConfig(TIM3, ENABLE); //使能TIM3重载寄存器ARR
-}
-void Pwm::Open()
-{
-	Timer::Open();
-	TIMx_Breathing_Init();
 	switch (this->_index)
 	{
 		case Timer1:
@@ -86,9 +83,61 @@ void Pwm::Config()
 		case Timer1:
             break;
         case Timer2:
-            break;
+            if(this->Enabled[0])
+			{
+				this->Ports[0]=new AlternatePort(PA0, false, true);
+			}
+			if(this->Enabled[1])
+			{
+				this->Ports[1]=new AlternatePort(PA1, false, true);
+			}
+			if(this->Enabled[2])
+			{
+				this->Ports[2]=new AlternatePort(PA2, false, true);
+			}
+			if(this->Enabled[3])
+			{
+				this->Ports[3]=new AlternatePort(PA3, false, true);
+			}
+			break;
         case Timer3:
 			if(this->Enabled[0])
+			{
+				this->Ports[0]=new AlternatePort(PA6, false, true);
+			}
+			if(this->Enabled[1])
+			{
+				this->Ports[1]=new AlternatePort(PA7, false, true);
+			}
+			if(this->Enabled[2])
+			{
+				this->Ports[2]=new AlternatePort(PB0, false, true);
+			}
+			if(this->Enabled[3])
+			{
+				this->Ports[3]=new AlternatePort(PB1, false, true);
+			}
+            break;
+        case Timer4:
+            if(this->Enabled[0])
+			{
+				this->Ports[0]=new AlternatePort(PB6, false, true);
+			}
+			if(this->Enabled[1])
+			{
+				this->Ports[1]=new AlternatePort(PB7, false, true);
+			}
+			if(this->Enabled[2])
+			{
+				this->Ports[2]=new AlternatePort(PB8, false, true);
+			}
+			if(this->Enabled[3])
+			{
+				this->Ports[3]=new AlternatePort(PB9, false, true);
+			}
+			break;
+        case Timer5:
+            if(this->Enabled[0])
 			{
 				this->Ports[0]=new AlternatePort();
 			}
@@ -98,17 +147,13 @@ void Pwm::Config()
 			}
 			if(this->Enabled[2])
 			{
-				this->Ports[2]=new AlternatePort(PB0, false, true);
+				this->Ports[2]=new AlternatePort();
 			}
 			if(this->Enabled[3])
 			{
 				this->Ports[3]=new AlternatePort();
 			}
-            break;
-        case Timer4:
-            break;
-        case Timer5:
-            break;
+			break;
         case Timer6:
             break;
         case Timer7:
@@ -156,7 +201,24 @@ void Pwm::SetPulse(int idx, ushort pulse)
 		case Timer1:
             break;
         case Timer2:
-            break;
+            switch(idx)
+			{
+				case 0:
+					TIM2->CCR1=this->Pulse[idx];//根据PWM表修改定时器的比较寄存器值
+					break;
+				case 1:
+					TIM2->CCR2=this->Pulse[idx];
+					break;
+				case 2:
+					TIM2->CCR3=this->Pulse[idx];
+					break;
+				case 3:
+					TIM2->CCR4=this->Pulse[idx];
+					break;
+				default:
+					break;
+			}
+			break;
         case Timer3:			
 			switch(idx)
 			{
@@ -177,9 +239,43 @@ void Pwm::SetPulse(int idx, ushort pulse)
 			}
             break;
         case Timer4:
-            break;
+            switch(idx)
+			{
+				case 0:
+					TIM4->CCR1=this->Pulse[idx];//根据PWM表修改定时器的比较寄存器值
+					break;
+				case 1:
+					TIM4->CCR2=this->Pulse[idx];
+					break;
+				case 2:
+					TIM4->CCR3=this->Pulse[idx];
+					break;
+				case 3:
+					TIM4->CCR4=this->Pulse[idx];
+					break;
+				default:
+					break;
+			}
+			break;
         case Timer5:
-            break;
+            switch(idx)
+			{
+				case 0:
+					TIM5->CCR1=this->Pulse[idx];//根据PWM表修改定时器的比较寄存器值
+					break;
+				case 1:
+					TIM5->CCR2=this->Pulse[idx];
+					break;
+				case 2:
+					TIM5->CCR3=this->Pulse[idx];
+					break;
+				case 3:
+					TIM5->CCR4=this->Pulse[idx];
+					break;
+				default:
+					break;
+			}
+			break;
         case Timer6:
             break;
         case Timer7:
