@@ -18,7 +18,7 @@
 
 const byte vers[] = "yyyy-MM-dd HH:mm:ss";
 #if 1
-    AlternatePort led1(PB0, false, true);
+    //AlternatePort led1(PB0, false, true);
     //OutputPort led2(PF7);
     //OutputPort led3(PF8);
 #else 

@@ -81,6 +81,63 @@ void Pwm::Close()
 void Pwm::Config()
 {
 	Timer::Config();
+	switch (this->_index)
+	{
+		case Timer1:
+            break;
+        case Timer2:
+            break;
+        case Timer3:
+			if(this->Enabled[0])
+			{
+				this->Ports[0]=new AlternatePort();
+			}
+			if(this->Enabled[1])
+			{
+				this->Ports[1]=new AlternatePort();
+			}
+			if(this->Enabled[2])
+			{
+				this->Ports[2]=new AlternatePort(PB0, false, true);
+			}
+			if(this->Enabled[3])
+			{
+				this->Ports[3]=new AlternatePort();
+			}
+            break;
+        case Timer4:
+            break;
+        case Timer5:
+            break;
+        case Timer6:
+            break;
+        case Timer7:
+            break;
+        case Timer8:
+            break;
+        case Timer9:
+            break;
+        case Timer10:
+            break;
+        case Timer11:
+            break;
+        case Timer12:
+            break;
+        case Timer13:
+            break;
+        case Timer14:
+            break;
+        case Timer15:
+            break;
+        case Timer16:
+            break;
+        case Timer17:
+            break;
+        case Timer18:
+            break;
+        default:
+			break;
+	}
 }
 // Ë¢ÐÂÊä³ö
 void Pwm::Flush()
