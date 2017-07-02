@@ -48,6 +48,47 @@ void Pwm::Open()
 {
 	Timer::Open();
 	TIMx_Breathing_Init();
+	switch (this->_index)
+	{
+		case Timer1:
+            break;
+        case Timer2:
+            break;
+        case Timer3:
+            break;
+        case Timer4:
+            break;
+        case Timer5:
+            break;
+        case Timer6:
+            break;
+        case Timer7:
+            break;
+        case Timer8:
+            break;
+        case Timer9:
+            break;
+        case Timer10:
+            break;
+        case Timer11:
+            break;
+        case Timer12:
+            break;
+        case Timer13:
+            break;
+        case Timer14:
+            break;
+        case Timer15:
+            break;
+        case Timer16:
+            break;
+        case Timer17:
+            break;
+        case Timer18:
+            break;
+        default:
+			break;
+	}
 }
 void Pwm::Close()
 {
