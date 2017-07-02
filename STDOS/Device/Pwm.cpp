@@ -146,6 +146,69 @@ void Pwm::Flush()
 
 void Pwm::SetPulse(int idx, ushort pulse)
 {
+	if(idx>3)
+	{
+		return;
+	}
+	this->Pulse[idx]=pulse;
+	switch (this->_index)
+	{
+		case Timer1:
+            break;
+        case Timer2:
+            break;
+        case Timer3:			
+			switch(idx)
+			{
+				case 0:
+					TIM3->CCR1=this->Pulse[idx];//根据PWM表修改定时器的比较寄存器值
+					break;
+				case 1:
+					TIM3->CCR2=this->Pulse[idx];
+					break;
+				case 2:
+					TIM3->CCR3=this->Pulse[idx];
+					break;
+				case 3:
+					TIM3->CCR4=this->Pulse[idx];
+					break;
+				default:
+					break;
+			}
+            break;
+        case Timer4:
+            break;
+        case Timer5:
+            break;
+        case Timer6:
+            break;
+        case Timer7:
+            break;
+        case Timer8:
+            break;
+        case Timer9:
+            break;
+        case Timer10:
+            break;
+        case Timer11:
+            break;
+        case Timer12:
+            break;
+        case Timer13:
+            break;
+        case Timer14:
+            break;
+        case Timer15:
+            break;
+        case Timer16:
+            break;
+        case Timer17:
+            break;
+        case Timer18:
+            break;
+        default:
+			break;
+	}
 }
 // 设置占空比，0~255
 void Pwm::SetDuty(int idx, byte duty)

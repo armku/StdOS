@@ -43,6 +43,7 @@ void tim2refesh(void * param)
 {
 	macTIMx_IRQHandler();
 }
+Pwm pwm(Timer3);
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);
@@ -59,7 +60,7 @@ int main(void)
     #else 
         WatchDog::Start();
     #endif 
-	Pwm pwm(Timer3);
+	
 	abc.Bind(tim2refesh);
 	pwm.Enabled[0]=false;
 	pwm.Enabled[1]=false;
@@ -77,7 +78,6 @@ int main(void)
     Sys.Start();
 }
 
-#include "stm32f10x.h"
 /* LED亮度等级 PWM表 */
 uint8_t indexWave[] = 
 {
@@ -106,7 +106,7 @@ void macTIMx_IRQHandler(void)
     //若输出的周期数大于10，输出下一种脉冲宽的PWM波
     {
 
-        TIM3->CCR3 = indexWave[pwm_index]; //根据PWM表修改定时器的比较寄存器值
+        pwm.SetPulse(2,indexWave[pwm_index]);
         pwm_index++; //标志PWM表的下一个元素
 
         if (pwm_index >= 40)
