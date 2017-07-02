@@ -88,7 +88,7 @@ uint8_t indexWave[] =
 /*    _______    ______     _____      ____       ___        __         _
  * |_|       |__|      |___|     |____|    |_____|   |______|  |_______| |________|
  */
-static void TIMx_Mode_Config(void)
+static void TIMx_Breathing_Init(void)
 {
     TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
     TIM_OCInitTypeDef TIM_OCInitStructure;
@@ -96,7 +96,7 @@ static void TIMx_Mode_Config(void)
 
     /* 设置TIM3CLK 时钟为72MHZ */
     //  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); 					//使能TIM3时钟
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+//    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 
     /* 基本定时器配置 */
     TIM_TimeBaseStructure.TIM_Period = 255; //当定时器从0计数到255，即为266次，为一个定时周期
@@ -119,14 +119,9 @@ static void TIMx_Mode_Config(void)
     TIM_ARRPreloadConfig(TIM3, ENABLE); //使能TIM3重载寄存器ARR
 
     /* TIM3 enable counter */
-    TIM_Cmd(TIM3, ENABLE); //使能定时器3	
+//    TIM_Cmd(TIM3, ENABLE); //使能定时器3	
 
-    TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE); //使能update中断
-}
-
-void TIMx_Breathing_Init(void)
-{
-    TIMx_Mode_Config();
+//    TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE); //使能update中断
 }
 
 /* 呼吸灯中断服务函数 */
