@@ -36,7 +36,7 @@ void LedTask(void *param)
 
 #define namee "StdOS"
 //PWM ledLCD(PD12);
-void TIMx_Breathing_Init(void);
+
 Delegate<Timer&> abc;
 void macTIMx_IRQHandler(void);
 void tim2refesh(void * param)
@@ -63,7 +63,6 @@ int main(void)
 	abc.Bind(tim2refesh);
 	pwm.Register(abc);
 	pwm.Open();
-    TIMx_Breathing_Init();
 
     //Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 

@@ -47,7 +47,7 @@ void TIMx_Breathing_Init(void)
 void Pwm::Open()
 {
 	Timer::Open();
-	
+	TIMx_Breathing_Init();
 }
 void Pwm::Close()
 {
