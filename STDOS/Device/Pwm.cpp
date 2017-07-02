@@ -14,6 +14,11 @@ Pwm::~Pwm()
 
 void Pwm::Open()
 {
+	/*
+	REMAP
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
+    GPIO_PinRemapConfig(GPIO_FullRemap_TIM2, ENABLE);
+	*/
 	TIM_OCInitTypeDef TIM_OCInitStructure;
 	
 	Timer::Open();
@@ -158,6 +163,18 @@ void Pwm::Close()
 {
 	Timer::Close();
 }
+/*
+TIM2 PA0,PA1,PA2,PA3
+TIM3 PA6,PA7,PB0,PB1
+TIM4 PB6,PB7,PB8,PB9
+TIM5 
+remap
+
+TIM1 PE9,PE11,PE13,PE14
+TIM2 PA15,PB3,PB10,PB11
+TIM3 PC6,PC7,PC8,PC9
+TIM4 PD12,PD13,PD14,PD15
+*/
 void Pwm::Config()
 {
 	Timer::Config();
@@ -409,567 +426,63 @@ void PwmData::Config()
 void PwmData::OnInterrupt()
 {
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-PWM::PWM(Pin pin, uint frq, uint duty,uint prescaler,bool voltlevellow): AlternatePort(pin)
+//呼吸灯例程
+Pwm pwm(Timer3);
+Delegate<Timer&> abc;
+void macTIMx_IRQHandler(void);
+/* LED亮度等级 PWM表 */
+uint8_t indexWave[] = 
 {
-    this->freq = frq;
-    this->duty = duty;
-	this->prescal=prescaler;
-	this->voltLevelLow=voltlevellow;
-}
+    1, 1, 2, 2, 3, 4, 6, 8, 10, 14, 19, 25, 33, 44, 59, 80, 107, 143, 191, 255, 255, 191, 143, 107, 80, 59, 44, 33, 25, 19, 14, 10, 8, 6, 4, 3, 2, 2, 1, 1
+};
 
-void PWM::Init()
+/*
+ * TIMxCLK/CK_PSC --> TIMxCNT --> TIMx_ARR --> 中断 & TIMxCNT 重新计数
+ *                    TIMx_CCR(电平发生变化)
+ *
+ * 信号周期=(TIMx_ARR +1 ) * 时钟周期
+ * 
+ */
+
+/*    _______    ______     _____      ____       ___        __         _
+ * |_|       |__|      |___|     |____|    |_____|   |______|  |_______| |________|
+ */
+void tim2refesh(void * param)
 {
-    TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
-    TIM_OCInitTypeDef TIM_OCInitStructure;
-	
-	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1; //设置时钟分频系数：不分频(这里用不到)
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; //向上计数模式
-	
-	TIM_TimeBaseStructure.TIM_Period = this->freq; //999;       //当定时器从0计数到999，即为1000次，为一个定时周期	
-	TIM_TimeBaseStructure.TIM_Prescaler = this->prescal; //设置预分频：不预分频，即为72MHz
-	TIM_OCInitStructure.TIM_Pulse = this->duty; //CCR1_Val;	   //设置跳变值，当计数器计数到这个值时，电平发生跳变
-	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; //配置为PWM模式1
-	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-	if(this->voltLevelLow)
-	{
-		TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low; //当定时器计数值小于CCR1_Val时为低电平
-	}
-	else
-	{
-		TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High; //当定时器计数值小于CCR1_Val时为高电平
-	}
-    switch (this->_Pin)
+	static uint8_t pwm_index = 0; //用于PWM查表
+    static uint8_t period_cnt = 0; //用于计算周期数
+
+    period_cnt++;
+    if (period_cnt >= 10)
+    //若输出的周期数大于10，输出下一种脉冲宽的PWM波
     {
-        //TIM2_CH1
-        case PA0:
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
-            TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+        pwm.SetPulse(2,indexWave[pwm_index]);
+        pwm_index++; //标志PWM表的下一个元素
 
-            /* PWM1 Mode configuration: Channel1 */
-            TIM_OC1Init(TIM2, &TIM_OCInitStructure); //使能通道2
-            TIM_OC1PreloadConfig(TIM2, TIM_OCPreload_Enable);
-            /* TIM2 enable counter */
-            TIM_Cmd(TIM2, ENABLE); //使能定时器2
-            TIM_OC1Init(TIM2, &TIM_OCInitStructure); //使能通道1
-            break;
-            //TIM2_CH2
-        case PA1:
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+        if (pwm_index >= 40)
+        //若PWM脉冲表已经输出完成一遍，重置PWM查表标志
+        {
+            pwm_index = 0;
+        }
 
-            TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel2 */
-            TIM_OC2Init(TIM2, &TIM_OCInitStructure); //使能通道2
-            TIM_OC2PreloadConfig(TIM2, TIM_OCPreload_Enable);
-            /* TIM2 enable counter */
-            TIM_Cmd(TIM2, ENABLE); //使能定时器3	
-            TIM_OC2Init(TIM2, &TIM_OCInitStructure); //使能通道2
-            break;
-            //TIM2_CH3
-        case PA2:
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-
-            TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel3 */
-            TIM_OC3Init(TIM2, &TIM_OCInitStructure); //使能通道2
-            TIM_OC3PreloadConfig(TIM2, TIM_OCPreload_Enable);
-            /* TIM2 enable counter */
-            TIM_Cmd(TIM2, ENABLE); //使能定时器2
-            TIM_OC3Init(TIM2, &TIM_OCInitStructure); //使能通道3
-            break;
-            //TIM2_CH4
-        case PA3:
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-
-            TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel4 */
-            TIM_OC4Init(TIM2, &TIM_OCInitStructure); //使能通道4
-            TIM_OC4PreloadConfig(TIM2, TIM_OCPreload_Enable);
-            TIM_ARRPreloadConfig(TIM2, ENABLE); // 使能TIM2重载寄存器ARR
-            /* TIM2 enable counter */
-            TIM_Cmd(TIM2, ENABLE); //使能定时器2	
-            TIM_OC4Init(TIM2, &TIM_OCInitStructure); //使能通道4
-            break;
-            //TIM3_CH1
-        case PA6:
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-
-            TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel1 */
-            TIM_OC1Init(TIM3, &TIM_OCInitStructure); //使能通道1
-            TIM_OC1PreloadConfig(TIM3, TIM_OCPreload_Enable);
-            /* TIM3 enable counter */
-            TIM_Cmd(TIM3, ENABLE); //使能定时器3	
-            TIM_OC1Init(TIM3, &TIM_OCInitStructure); //使能通道1
-            break;
-            //TIM3_CH2
-        case PA7:
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-
-            TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel2 */
-            TIM_OC2Init(TIM3, &TIM_OCInitStructure); //使能通道2
-            TIM_OC2PreloadConfig(TIM3, TIM_OCPreload_Enable);
-            /* TIM3 enable counter */
-            TIM_Cmd(TIM3, ENABLE); //使能定时器3	
-            TIM_OC2Init(TIM3, &TIM_OCInitStructure); //使能通道2
-            break;
-            //TIM3_CH3
-        case PB0:
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-
-            TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel3 */
-            TIM_OC3Init(TIM3, &TIM_OCInitStructure); //使能通道3
-            TIM_OC3PreloadConfig(TIM3, TIM_OCPreload_Enable);
-            /* TIM3 enable counter */
-            TIM_Cmd(TIM3, ENABLE); //使能定时器3	
-            TIM_OC3Init(TIM3, &TIM_OCInitStructure); //使能通道3
-            break;
-            //TIM3_CH4
-        case PB1:
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-
-            TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel4 */
-            TIM_OC4Init(TIM3, &TIM_OCInitStructure); //使能通道4
-            TIM_OC4PreloadConfig(TIM3, TIM_OCPreload_Enable);
-            TIM_ARRPreloadConfig(TIM3, ENABLE); // 使能TIM3重载寄存器ARR
-            /* TIM3 enable counter */
-            TIM_Cmd(TIM3, ENABLE); //使能定时器3            
-            TIM_OC4Init(TIM3, &TIM_OCInitStructure); //使能通道4
-            break;
-            //TIM4_CH1
-        case PB6:
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-
-            TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel1 */
-            TIM_OC1Init(TIM4, &TIM_OCInitStructure); //使能通道1
-            TIM_OC1PreloadConfig(TIM4, TIM_OCPreload_Enable);
-            /* TIM4 enable counter */
-            TIM_Cmd(TIM4, ENABLE); //使能定时器4	
-            TIM_OC1Init(TIM4, &TIM_OCInitStructure); //使能通道1
-            break;
-            //TIM4_CH2
-        case PB7:
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-
-            TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel2 */
-            TIM_OC2Init(TIM4, &TIM_OCInitStructure); //使能通道4
-            TIM_OC2PreloadConfig(TIM4, TIM_OCPreload_Enable);
-            /* TIM3 enable counter */
-            TIM_Cmd(TIM4, ENABLE); //使能定时器4	
-            TIM_OC2Init(TIM4, &TIM_OCInitStructure); //使能通道2
-            break;
-            //TIM4_CH3
-        case PB8:
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-
-            TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel3 */
-            TIM_OC3Init(TIM4, &TIM_OCInitStructure); //使能通道4
-            TIM_OC3PreloadConfig(TIM4, TIM_OCPreload_Enable);
-            /* TIM3 enable counter */
-            TIM_Cmd(TIM4, ENABLE); //使能定时器4	
-            TIM_OC3Init(TIM4, &TIM_OCInitStructure); //使能通道3
-            break;
-            //TIM4_CH4
-        case PB9:
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-
-            TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel4 */
-            TIM_OC4Init(TIM4, &TIM_OCInitStructure); //使能通道4
-            TIM_OC4PreloadConfig(TIM4, TIM_OCPreload_Enable);
-            TIM_ARRPreloadConfig(TIM4, ENABLE); // 使能TIM4重载寄存器ARR
-            /* TIM4 enable counter */
-            TIM_Cmd(TIM4, ENABLE); //使能定时器4
-            TIM_OC4Init(TIM4, &TIM_OCInitStructure); //使能通道4
-            break;
-        case PE9:
-            //TIM1-CH1 remap
-            break;
-        case PE11:
-            //TIM1-CH2 remap
-            break;
-        case PE13:
-            //TIM1-CH3 remap
-            break;
-        case PE14:
-            //TIM1-CH4 remap
-            break;
-        case PA15:
-            //TIM2-CH1 remap
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
-            GPIO_PinRemapConfig(GPIO_FullRemap_TIM2, ENABLE);
-
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-
-            TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel1 */
-            TIM_OC1Init(TIM2, &TIM_OCInitStructure); //使能通道2
-            TIM_OC1PreloadConfig(TIM2, TIM_OCPreload_Enable);
-            /* TIM2 enable counter */
-            TIM_Cmd(TIM2, ENABLE); //使能定时器2
-            TIM_OC1Init(TIM2, &TIM_OCInitStructure); //使能通道1
-            break;
-        case PB3:
-            //TIM2-CH2 remap
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
-            GPIO_PinRemapConfig(GPIO_FullRemap_TIM2, ENABLE);
-
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-
-            TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel2 */
-            TIM_OC2Init(TIM2, &TIM_OCInitStructure); //使能通道2
-            TIM_OC2PreloadConfig(TIM2, TIM_OCPreload_Enable);
-            /* TIM2 enable counter */
-            TIM_Cmd(TIM2, ENABLE); //使能定时器3	
-            TIM_OC2Init(TIM2, &TIM_OCInitStructure); //使能通道2
-            break;
-        case PB10:
-            //TIM2-CH3 remap
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
-            GPIO_PinRemapConfig(GPIO_FullRemap_TIM2, ENABLE);
-
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-
-            TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel3 */
-            TIM_OC3Init(TIM2, &TIM_OCInitStructure); //使能通道2
-            TIM_OC3PreloadConfig(TIM2, TIM_OCPreload_Enable);
-            /* TIM2 enable counter */
-            TIM_Cmd(TIM2, ENABLE); //使能定时器2
-            TIM_OC3Init(TIM2, &TIM_OCInitStructure); //使能通道3
-            break;
-        case PB11:
-            //TIM2-CH4 remap
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
-            GPIO_PinRemapConfig(GPIO_FullRemap_TIM2, ENABLE);
-
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-
-            TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel4 */
-            TIM_OC4Init(TIM2, &TIM_OCInitStructure); //使能通道4
-            TIM_OC4PreloadConfig(TIM2, TIM_OCPreload_Enable);
-            TIM_ARRPreloadConfig(TIM2, ENABLE); // 使能TIM2重载寄存器ARR
-            TIM_Cmd(TIM2, ENABLE); //使能定时器2
-            TIM_OC4Init(TIM2, &TIM_OCInitStructure); //使能通道4
-            /* TIM2 enable counter */
-            break;
-        case PC6:
-            //TIM3-CH1 remap
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
-            GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);
-
-
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-
-            TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel1 */
-            TIM_OC1Init(TIM3, &TIM_OCInitStructure); //使能通道1
-            TIM_OC1PreloadConfig(TIM3, TIM_OCPreload_Enable);
-            /* TIM3 enable counter */
-            TIM_Cmd(TIM3, ENABLE); //使能定时器3	
-            TIM_OC1Init(TIM3, &TIM_OCInitStructure); //使能通道1
-            break;
-        case PC7:
-            //TIM3-CH2 remap
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
-            GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);
-
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-
-            TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel2 */
-            TIM_OC2Init(TIM3, &TIM_OCInitStructure); //使能通道2
-            TIM_OC2PreloadConfig(TIM3, TIM_OCPreload_Enable);
-            /* TIM3 enable counter */
-            TIM_Cmd(TIM3, ENABLE); //使能定时器3	
-            TIM_OC2Init(TIM3, &TIM_OCInitStructure); //使能通道2
-            break;
-        case PC8:
-            //TIM3-CH3 remap
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
-            GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);
-
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-
-            TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel3 */
-            TIM_OC3Init(TIM3, &TIM_OCInitStructure); //使能通道3
-            TIM_OC3PreloadConfig(TIM3, TIM_OCPreload_Enable);
-            /* TIM3 enable counter */
-            TIM_Cmd(TIM3, ENABLE); //使能定时器3	
-            TIM_OC3Init(TIM3, &TIM_OCInitStructure); //使能通道3
-            break;
-        case PC9:
-            //TIM3-CH4 remap
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
-            GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);
-
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-
-            TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel4 */
-            TIM_OC4Init(TIM3, &TIM_OCInitStructure); //使能通道4
-            TIM_OC4PreloadConfig(TIM3, TIM_OCPreload_Enable);
-            TIM_ARRPreloadConfig(TIM3, ENABLE); // 使能TIM3重载寄存器ARR
-            /* TIM3 enable counter */
-            TIM_Cmd(TIM3, ENABLE); //使能定时器3	
-            TIM_OC4Init(TIM3, &TIM_OCInitStructure); //使能通道4
-            break;
-        case PD12:
-            //TIM4-CH1 remap
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_AFIO, ENABLE);
-            GPIO_PinRemapConfig(GPIO_Remap_TIM4, ENABLE);
-
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-
-            TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel1 */
-            TIM_OC1Init(TIM4, &TIM_OCInitStructure); //使能通道1
-            TIM_OC1PreloadConfig(TIM4, TIM_OCPreload_Enable);
-            /* TIM4 enable counter */
-            TIM_Cmd(TIM4, ENABLE); //使能定时器4	
-            TIM_OC1Init(TIM4, &TIM_OCInitStructure); //使能通道1
-            break;
-        case PD13:
-            //TIM4-CH2 remap
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_AFIO, ENABLE);
-            GPIO_PinRemapConfig(GPIO_Remap_TIM4, ENABLE);
-
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-
-            TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel2 */
-            TIM_OC2Init(TIM4, &TIM_OCInitStructure); //使能通道4
-            TIM_OC2PreloadConfig(TIM4, TIM_OCPreload_Enable);
-            /* TIM3 enable counter */
-            TIM_Cmd(TIM4, ENABLE); //使能定时器4	
-            TIM_OC2Init(TIM4, &TIM_OCInitStructure); //使能通道2
-            break;
-        case PD14:
-            //TIM4-CH3 remap
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_AFIO, ENABLE);
-            GPIO_PinRemapConfig(GPIO_Remap_TIM4, ENABLE);
-
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-
-            TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel3 */
-            TIM_OC3Init(TIM4, &TIM_OCInitStructure); //使能通道4
-            TIM_OC3PreloadConfig(TIM4, TIM_OCPreload_Enable);
-            /* TIM3 enable counter */
-            TIM_Cmd(TIM4, ENABLE); //使能定时器4	
-            TIM_OC3Init(TIM4, &TIM_OCInitStructure); //使能通道3
-            break;
-        case PD15:
-            //TIM4-CH4 remap
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_AFIO, ENABLE);
-            GPIO_PinRemapConfig(GPIO_Remap_TIM4, ENABLE);
-
-            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-
-            TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
-
-            /* PWM1 Mode configuration: Channel4 */
-            TIM_OC4Init(TIM4, &TIM_OCInitStructure); //使能通道4
-            TIM_OC4PreloadConfig(TIM4, TIM_OCPreload_Enable);
-            TIM_ARRPreloadConfig(TIM4, ENABLE); // 使能TIM4重载寄存器ARR
-            /* TIM4 enable counter */
-            TIM_Cmd(TIM4, ENABLE); //使能定时器4
-            TIM_OC4Init(TIM4, &TIM_OCInitStructure); //使能通道4
-            break;
-        default:
-            break;
+        period_cnt = 0; //重置周期计数标志
     }
 }
 
-//设置输出值
-void PWM::SetOut(ushort pwmValue)
+void breathledtest()
 {
-    this->duty = pwmValue;
-    switch (this->_Pin)
-    {
-        //TIM2_CH1
-        case PA0:
-            TIM2->CCR1 = this->duty;
-            break;
-            //TIM2_CH2
-        case PA1:
-            TIM2->CCR2 = this->duty;
-            break;
-            //TIM2_CH3
-        case PA2:
-            TIM2->CCR3 = this->duty;
-            break;
-            //TIM2_CH4
-        case PA3:
-            TIM2->CCR4 = this->duty;
-            break;
-            //TIM3_CH1
-        case PA6:
-            TIM3->CCR1 = this->duty;
-            break;
-            //TIM3_CH2
-        case PA7:
-            TIM3->CCR2 = this->duty;
-            break;
-            //TIM3_CH3
-        case PB0:
-            TIM3->CCR3 = this->duty;
-            break;
-            //TIM3_CH4
-        case PB1:
-            TIM3->CCR4 = this->duty;
-            break;
-            //TIM4_CH1
-        case PB6:
-            TIM3->CCR1 = this->duty;
-            break;
-            //TIM4_CH2
-        case PB7:
-            TIM3->CCR2 = this->duty;
-            break;
-            //TIM4_CH3
-        case PB8:
-            TIM3->CCR3 = this->duty;
-            break;
-            //TIM4_CH4
-        case PB9:
-            TIM3->CCR4 = this->duty;
-            break;
-        case PE9:
-            //TIM1-CH1 remap
-            break;
-        case PE11:
-            //TIM1-CH2 remap
-            break;
-        case PE13:
-            //TIM1-CH3 remap
-            break;
-        case PE14:
-            //TIM1-CH4 remap
-            break;
-        case PA15:
-            //TIM2-CH1 remap
-            TIM2->CCR1 = this->duty;
-            break;
-        case PB3:
-            //TIM2-CH2 remap
-            TIM2->CCR2 = this->duty;
-            break;
-        case PB10:
-            //TIM2-CH3 remap
-            TIM2->CCR3 = this->duty;
-            break;
-        case PB11:
-            //TIM2-CH4 remap
-            TIM2->CCR4 = this->duty;
-            break;
-        case PC6:
-            //TIM3-CH1 remap
-            TIM3->CCR1 = this->duty;
-            break;
-        case PC7:
-            //TIM3-CH2 remap			
-            TIM3->CCR2 = this->duty;
-            break;
-        case PC8:
-            //TIM3-CH3 remap
-            TIM3->CCR3 = this->duty;
-            break;
-        case PC9:
-            //TIM3-CH4 remap
-            TIM3->CCR4 = this->duty;
-            break;
-        case PD12:
-            //TIM4-CH1 remap
-            TIM4->CCR1 = this->duty;
-            break;
-        case PD13:
-            //TIM4-CH2 remap
-            TIM4->CCR2 = this->duty;
-            break;
-        case PD14:
-            //TIM4-CH3 remap
-            TIM4->CCR3 = this->duty;
-            break;
-        case PD15:
-            //TIM4-CH4 remap
-            TIM4->CCR4 = this->duty;
-            break;
-        default:
-            break;
-    }
+	abc.Bind(tim2refesh);
+	pwm.Enabled[0]=false;
+	pwm.Enabled[1]=false;
+	pwm.Enabled[2]=true;
+	pwm.Enabled[3]=false;
+	pwm.Pulse[0]=0;
+	pwm.Pulse[1]=0;
+	pwm.Pulse[2]=0;
+	pwm.Pulse[3]=0;
+	pwm.Register(abc);
+	pwm.Open();
 }
 
-//设置输出比例，0-100
-void PWM::SetOutPercent(float per)
-{
-    this->duty = this->freq *per / 100;
-    this->SetOut(this->duty);
-}
+
