@@ -34,14 +34,14 @@ void LedTask(void *param)
     //    led2 = key0;
 }
 
-//#define namee "StdOS"
+#define namee "StdOS"
 //PWM ledLCD(PD12);
 
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);   
 
-    //    sys.Name = (char*)namee;
+    sys.Name = (char*)namee;
     byte aa = vers[0];
     aa = aa;
 
