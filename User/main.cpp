@@ -59,7 +59,7 @@ int main(void)
     #else 
         WatchDog::Start();
     #endif 
-	Timer pwm(Timer3);
+	Pwm pwm(Timer3);
 	abc.Bind(tim2refesh);
 	pwm.Register(abc);
 	pwm.Open();

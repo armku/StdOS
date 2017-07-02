@@ -15,9 +15,11 @@ void Pwm::Open()
 }
 void Pwm::Close()
 {
+	Timer::Close();
 }
 void Pwm::Config()
 {
+	Timer::Config();
 }
 // Ë¢ÐÂÊä³ö
 void Pwm::Flush()
