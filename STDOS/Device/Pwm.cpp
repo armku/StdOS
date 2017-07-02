@@ -22,22 +22,107 @@ void Pwm::Open()
 	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; //配置为PWM模式1
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable; //使能输出
 	TIM_OCInitStructure.TIM_Pulse = 0; //设置初始PWM脉冲宽度为0	
-	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low; //当定时器计数值小于CCR1_Val时为低电平
+	TIM_OCInitStructure.TIM_OCPolarity = this->Polarity?TIM_OCPolarity_Low:TIM_OCPolarity_High; //当定时器计数值小于CCR1_Val时为低电平
 
 	switch (this->_index)
 	{
 		case Timer1:
             break;
         case Timer2:
+            if(this->Enabled[0])
+			{
+				TIM_OC1Init(TIM2, &TIM_OCInitStructure); //使能通道3
+				TIM_OC1PreloadConfig(TIM2, TIM_OCPreload_Enable); //使能预装载	
+			}
+			if(this->Enabled[1])
+			{
+				TIM_OC2Init(TIM2, &TIM_OCInitStructure); //使能通道3
+				TIM_OC2PreloadConfig(TIM2, TIM_OCPreload_Enable); //使能预装载	
+			}
+			if(this->Enabled[2])
+			{
+				TIM_OC3Init(TIM2, &TIM_OCInitStructure); //使能通道3
+				TIM_OC3PreloadConfig(TIM2, TIM_OCPreload_Enable); //使能预装载	
+			}
+			if(this->Enabled[3])
+			{
+				TIM_OC4Init(TIM2, &TIM_OCInitStructure); //使能通道3
+				TIM_OC4PreloadConfig(TIM2, TIM_OCPreload_Enable); //使能预装载	
+			}
+			
+			TIM_ARRPreloadConfig(TIM2, ENABLE); //使能TIM3重载寄存器ARR
             break;
-        case Timer3:			
-			TIM_OC3Init(TIM3, &TIM_OCInitStructure); //使能通道3
-			TIM_OC3PreloadConfig(TIM3, TIM_OCPreload_Enable); //使能预装载	
+        case Timer3:
+			if(this->Enabled[0])
+			{
+				TIM_OC1Init(TIM3, &TIM_OCInitStructure); //使能通道3
+				TIM_OC1PreloadConfig(TIM3, TIM_OCPreload_Enable); //使能预装载	
+			}
+			if(this->Enabled[1])
+			{
+				TIM_OC2Init(TIM3, &TIM_OCInitStructure); //使能通道3
+				TIM_OC2PreloadConfig(TIM3, TIM_OCPreload_Enable); //使能预装载	
+			}
+			if(this->Enabled[2])
+			{
+				TIM_OC3Init(TIM3, &TIM_OCInitStructure); //使能通道3
+				TIM_OC3PreloadConfig(TIM3, TIM_OCPreload_Enable); //使能预装载	
+			}
+			if(this->Enabled[3])
+			{
+				TIM_OC4Init(TIM3, &TIM_OCInitStructure); //使能通道3
+				TIM_OC4PreloadConfig(TIM3, TIM_OCPreload_Enable); //使能预装载	
+			}
+			
 			TIM_ARRPreloadConfig(TIM3, ENABLE); //使能TIM3重载寄存器ARR
             break;
         case Timer4:
+            if(this->Enabled[0])
+			{
+				TIM_OC1Init(TIM4, &TIM_OCInitStructure); //使能通道3
+				TIM_OC1PreloadConfig(TIM4, TIM_OCPreload_Enable); //使能预装载	
+			}
+			if(this->Enabled[1])
+			{
+				TIM_OC2Init(TIM4, &TIM_OCInitStructure); //使能通道3
+				TIM_OC2PreloadConfig(TIM4, TIM_OCPreload_Enable); //使能预装载	
+			}
+			if(this->Enabled[2])
+			{
+				TIM_OC3Init(TIM4, &TIM_OCInitStructure); //使能通道3
+				TIM_OC3PreloadConfig(TIM4, TIM_OCPreload_Enable); //使能预装载	
+			}
+			if(this->Enabled[3])
+			{
+				TIM_OC4Init(TIM4, &TIM_OCInitStructure); //使能通道3
+				TIM_OC4PreloadConfig(TIM4, TIM_OCPreload_Enable); //使能预装载	
+			}
+			
+			TIM_ARRPreloadConfig(TIM4, ENABLE); //使能TIM3重载寄存器ARR
             break;
         case Timer5:
+            if(this->Enabled[0])
+			{
+				TIM_OC1Init(TIM5, &TIM_OCInitStructure); //使能通道3
+				TIM_OC1PreloadConfig(TIM5, TIM_OCPreload_Enable); //使能预装载	
+			}
+			if(this->Enabled[1])
+			{
+				TIM_OC2Init(TIM5, &TIM_OCInitStructure); //使能通道3
+				TIM_OC2PreloadConfig(TIM5, TIM_OCPreload_Enable); //使能预装载	
+			}
+			if(this->Enabled[2])
+			{
+				TIM_OC3Init(TIM5, &TIM_OCInitStructure); //使能通道3
+				TIM_OC3PreloadConfig(TIM5, TIM_OCPreload_Enable); //使能预装载	
+			}
+			if(this->Enabled[3])
+			{
+				TIM_OC4Init(TIM5, &TIM_OCInitStructure); //使能通道3
+				TIM_OC4PreloadConfig(TIM5, TIM_OCPreload_Enable); //使能预装载	
+			}
+			
+			TIM_ARRPreloadConfig(TIM5, ENABLE); //使能TIM3重载寄存器ARR
             break;
         case Timer6:
             break;
