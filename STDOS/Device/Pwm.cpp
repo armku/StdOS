@@ -427,7 +427,7 @@ void PwmData::OnInterrupt()
 {
 }
 //ºôÎüµÆÀý³Ì
-#if 1
+#if 0
 Pwm pwm(Timer3);
 Delegate<Timer&> abc;
 void macTIMx_IRQHandler(void);

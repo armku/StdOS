@@ -11,26 +11,26 @@
 #include "TInterrupt.h"
 
 const byte vers[] = "yyyy-MM-dd HH:mm:ss";
-#if 1
-    //OutputPort led1(PB0);
-    //OutputPort led2(PF7);
-    //OutputPort led3(PF8);
+#if 0
+    OutputPort led1(PB0);
+    OutputPort led2(PF7);
+    OutputPort led3(PF8);
 #else 
     OutputPort led1(PD0);
     OutputPort led2(PD1);
     OutputPort led3(PD2);
+	OutputPort ledLCD(PD12);
 #endif 
 
 void LedTask(void *param)
 {
-    //OutputPort *leds = (OutputPort*)param;
-    //*leds = ! * leds;
+    OutputPort *leds = (OutputPort*)param;
+    *leds = ! * leds;
     //    led2 = key0;
 }
 
 #define namee "StdOS"
 
-void breathledtest();
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);
@@ -43,10 +43,10 @@ int main(void)
     #if DEBUG
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
-    #endif 
-	breathledtest();	
+    #endif 	
+	ledLCD=0;
 
-    //Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
+    Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
     Sys.Start();
 }
