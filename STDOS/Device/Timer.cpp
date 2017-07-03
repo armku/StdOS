@@ -81,6 +81,17 @@ void Timer::Close() // 停止定时器
 void Timer::Config()
 {
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+	
+	/* 自动重装载寄存器周期的值(计数值) */
+    TIM_TimeBaseStructure.TIM_Period = this->Period;
+	/* 累计 TIM_Period个频率后产生一个更新或者中断 */
+    /* 时钟预分频数为72 */
+    TIM_TimeBaseStructure.TIM_Prescaler = this->Prescaler;
+
+    /* 对外部时钟进行采样的时钟分频,这里没有用到 */
+    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+
+    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
     switch (this->_index)
     {
         case Timer1:
@@ -90,18 +101,7 @@ void Timer::Config()
             /* 设置TIM2CLK 为 72MHZ */
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
             TIM_DeInit(TIM2);
-
-            /* 自动重装载寄存器周期的值(计数值) */
-            TIM_TimeBaseStructure.TIM_Period = this->Period;
-
-            /* 累计 TIM_Period个频率后产生一个更新或者中断 */
-            /* 时钟预分频数为72 */
-            TIM_TimeBaseStructure.TIM_Prescaler = this->Prescaler;
-
-            /* 对外部时钟进行采样的时钟分频,这里没有用到 */
-            TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-            TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+            
             TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
 
             TIM_ClearFlag(TIM2, TIM_FLAG_Update);
@@ -117,18 +117,7 @@ void Timer::Config()
 			 /* 设置TIM2CLK 为 72MHZ */
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
             TIM_DeInit(TIM3);
-
-            /* 自动重装载寄存器周期的值(计数值) */
-            TIM_TimeBaseStructure.TIM_Period = this->Period;
-
-            /* 累计 TIM_Period个频率后产生一个更新或者中断 */
-            /* 时钟预分频数为72 */
-            TIM_TimeBaseStructure.TIM_Prescaler = this->Prescaler;
-
-            /* 对外部时钟进行采样的时钟分频,这里没有用到 */
-            TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-            TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+            
             TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
 
             TIM_ClearFlag(TIM3, TIM_FLAG_Update);
@@ -145,17 +134,6 @@ void Timer::Config()
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
             TIM_DeInit(TIM4);
 
-            /* 自动重装载寄存器周期的值(计数值) */
-            TIM_TimeBaseStructure.TIM_Period = this->Period;
-
-            /* 累计 TIM_Period个频率后产生一个更新或者中断 */
-            /* 时钟预分频数为72 */
-            TIM_TimeBaseStructure.TIM_Prescaler = this->Prescaler;
-
-            /* 对外部时钟进行采样的时钟分频,这里没有用到 */
-            TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-            TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
             TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
 
             TIM_ClearFlag(TIM4, TIM_FLAG_Update);
@@ -172,17 +150,6 @@ void Timer::Config()
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
             TIM_DeInit(TIM5);
 
-            /* 自动重装载寄存器周期的值(计数值) */
-            TIM_TimeBaseStructure.TIM_Period = this->Period;
-
-            /* 累计 TIM_Period个频率后产生一个更新或者中断 */
-            /* 时钟预分频数为72 */
-            TIM_TimeBaseStructure.TIM_Prescaler = this->Prescaler;
-
-            /* 对外部时钟进行采样的时钟分频,这里没有用到 */
-            TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-            TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
             TIM_TimeBaseInit(TIM5, &TIM_TimeBaseStructure);
 
             TIM_ClearFlag(TIM5, TIM_FLAG_Update);
@@ -199,17 +166,6 @@ void Timer::Config()
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
             TIM_DeInit(TIM6);
 
-            /* 自动重装载寄存器周期的值(计数值) */
-            TIM_TimeBaseStructure.TIM_Period = this->Period;
-
-            /* 累计 TIM_Period个频率后产生一个更新或者中断 */
-            /* 时钟预分频数为72 */
-            TIM_TimeBaseStructure.TIM_Prescaler = this->Prescaler;
-
-            /* 对外部时钟进行采样的时钟分频,这里没有用到 */
-            TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-            TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
             TIM_TimeBaseInit(TIM6, &TIM_TimeBaseStructure);
 
             TIM_ClearFlag(TIM6, TIM_FLAG_Update);
@@ -226,17 +182,6 @@ void Timer::Config()
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
             TIM_DeInit(TIM7);
 
-            /* 自动重装载寄存器周期的值(计数值) */
-            TIM_TimeBaseStructure.TIM_Period = this->Period;
-
-            /* 累计 TIM_Period个频率后产生一个更新或者中断 */
-            /* 时钟预分频数为72 */
-            TIM_TimeBaseStructure.TIM_Prescaler = this->Prescaler;
-
-            /* 对外部时钟进行采样的时钟分频,这里没有用到 */
-            TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-            TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
             TIM_TimeBaseInit(TIM7, &TIM_TimeBaseStructure);
 
             TIM_ClearFlag(TIM7, TIM_FLAG_Update);
