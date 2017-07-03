@@ -4,8 +4,7 @@
 // index 定时器编号
 Pwm::Pwm(TIMER index):Timer(index)
 {
-	this->Period = 255; //默认1秒一次
-    this->Prescaler = 1999;
+	
 }
 Pwm::~Pwm()
 {
@@ -483,6 +482,8 @@ void breathledtest()
 	pwm.Pulse[2]=0;
 	pwm.Pulse[3]=0;
 	pwm.Register(abc);
+	pwm.Period = 255; //默认1秒一次
+    pwm.Prescaler = 1999;
 	pwm.Open();
 }
 #endif
