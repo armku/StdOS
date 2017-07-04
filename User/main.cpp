@@ -11,7 +11,7 @@
 #include "TInterrupt.h"
 
 const byte vers[] = "yyyy-MM-dd HH:mm:ss";
-#if 0
+#if 1
     OutputPort led1(PB0);
     OutputPort led2(PF7);
     OutputPort led3(PF8);
@@ -44,7 +44,6 @@ int main(void)
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 	
-	ledLCD=0;
 
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
