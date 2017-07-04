@@ -615,32 +615,18 @@ ushort AT24CXX::jsPageSize(uint type) //计算存储页大小
 #define I2C_WR	0		/* 写控制bit */
 #define I2C_RD	1		/* 读控制bit */
 /* 定义I2C总线连接的GPIO端口, 用户只需要修改下面4行代码即可任意改变SCL和SDA的引脚 */
-#define GPIO_PORT_I2C	GPIOB			/* GPIO端口 */
-#define RCC_I2C_PORT 	RCC_APB2Periph_GPIOB		/* GPIO端口时钟 */
 #define I2C_SCL_PIN		GPIO_Pin_6			/* 连接到SCL时钟线的GPIO */
 #define I2C_SDA_PIN		GPIO_Pin_7			/* 连接到SDA数据线的GPIO */
 
 /* 定义读写SCL和SDA的宏，已增加代码的可移植性和可阅读性 */
-#if 0	/* 条件编译： 1 选择GPIO的库函数实现IO读写 */
-	#define I2C_SCL_1()  GPIO_SetBits(GPIO_PORT_I2C, I2C_SCL_PIN)		/* SCL = 1 */
-	#define I2C_SCL_0()  GPIO_ResetBits(GPIO_PORT_I2C, I2C_SCL_PIN)		/* SCL = 0 */
-	
-	#define I2C_SDA_1()  GPIO_SetBits(GPIO_PORT_I2C, I2C_SDA_PIN)		/* SDA = 1 */
-	#define I2C_SDA_0()  GPIO_ResetBits(GPIO_PORT_I2C, I2C_SDA_PIN)		/* SDA = 0 */
-	
-	#define I2C_SDA_READ()  GPIO_ReadInputDataBit(GPIO_PORT_I2C, I2C_SDA_PIN)	/* 读SDA口线状态 */
-#else	/* 这个分支选择直接寄存器操作实现IO读写 */
-    /*　注意：如下写法，在IAR最高级别优化时，会被编译器错误优化 */
-	#define I2C_SCL_1()  GPIO_PORT_I2C->BSRR = I2C_SCL_PIN				/* SCL = 1 */
-	#define I2C_SCL_0()  GPIO_PORT_I2C->BRR = I2C_SCL_PIN				/* SCL = 0 */
-	
-	#define I2C_SDA_1()  GPIO_PORT_I2C->BSRR = I2C_SDA_PIN				/* SDA = 1 */
-	#define I2C_SDA_0()  GPIO_PORT_I2C->BRR = I2C_SDA_PIN				/* SDA = 0 */
-	
-	#define I2C_SDA_READ()  ((GPIO_PORT_I2C->IDR & I2C_SDA_PIN) != 0)	/* 读SDA口线状态 */
-#endif
 
-static void i2c_CfgGpio(void);
+	#define I2C_SCL_1()  GPIO_SetBits(GPIOB, I2C_SCL_PIN)		/* SCL = 1 */
+	#define I2C_SCL_0()  GPIO_ResetBits(GPIOB, I2C_SCL_PIN)		/* SCL = 0 */
+	
+	#define I2C_SDA_1()  GPIO_SetBits(GPIOB, I2C_SDA_PIN)		/* SDA = 1 */
+	#define I2C_SDA_0()  GPIO_ResetBits(GPIOB, I2C_SDA_PIN)		/* SDA = 0 */
+	
+	#define I2C_SDA_READ()  GPIO_ReadInputDataBit(GPIOB, I2C_SDA_PIN)	/* 读SDA口线状态 */
 
 /*
 *********************************************************************************************************
@@ -847,12 +833,12 @@ static void i2c_CfgGpio(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
 
-	RCC_APB2PeriphClockCmd(RCC_I2C_PORT, ENABLE);	/* 打开GPIO时钟 */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);	/* 打开GPIO时钟 */
 
 	GPIO_InitStructure.GPIO_Pin = I2C_SCL_PIN | I2C_SDA_PIN;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;  	/* 开漏输出 */
-	GPIO_Init(GPIO_PORT_I2C, &GPIO_InitStructure);
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
 
 	/* 给一个停止信号, 复位I2C总线上的所有设备到待机模式 */
 	i2c_Stop();
