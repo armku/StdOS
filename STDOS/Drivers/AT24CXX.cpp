@@ -614,7 +614,10 @@ ushort AT24CXX::jsPageSize(uint type) //计算存储页大小
 #define EE_SIZE				256			  /* 24xx02总容量 */
 #define I2C_WR	0		/* 写控制bit */
 #define I2C_RD	1		/* 读控制bit */
+OutputPort scl(PB6,false);
+OutputPort sda(PB7,false);
 
+#if 0
 	#define I2C_SCL_1()  GPIO_SetBits(GPIOB, GPIO_Pin_6)		/* SCL = 1 */
 	#define I2C_SCL_0()  GPIO_ResetBits(GPIOB, GPIO_Pin_6)		/* SCL = 0 */
 	
@@ -622,7 +625,15 @@ ushort AT24CXX::jsPageSize(uint type) //计算存储页大小
 	#define I2C_SDA_0()  GPIO_ResetBits(GPIOB, GPIO_Pin_7)		/* SDA = 0 */
 	
 	#define I2C_SDA_READ()  GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_7)	/* 读SDA口线状态 */
-
+#else
+	#define I2C_SCL_1()  scl=1		/* SCL = 1 */
+	#define I2C_SCL_0()  scl=0		/* SCL = 0 */
+	
+	#define I2C_SDA_1()  sda=1		/* SDA = 1 */
+	#define I2C_SDA_0()  sda=0		/* SDA = 0 */
+	
+	#define I2C_SDA_READ()  sda	/* 读SDA口线状态 */
+#endif
 /*
 *********************************************************************************************************
 *	函 数 名: i2c_Delay
