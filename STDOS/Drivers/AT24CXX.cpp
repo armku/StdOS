@@ -614,19 +614,14 @@ ushort AT24CXX::jsPageSize(uint type) //计算存储页大小
 #define EE_SIZE				256			  /* 24xx02总容量 */
 #define I2C_WR	0		/* 写控制bit */
 #define I2C_RD	1		/* 读控制bit */
-/* 定义I2C总线连接的GPIO端口, 用户只需要修改下面4行代码即可任意改变SCL和SDA的引脚 */
-#define I2C_SCL_PIN		GPIO_Pin_6			/* 连接到SCL时钟线的GPIO */
-#define I2C_SDA_PIN		GPIO_Pin_7			/* 连接到SDA数据线的GPIO */
 
-/* 定义读写SCL和SDA的宏，已增加代码的可移植性和可阅读性 */
-
-	#define I2C_SCL_1()  GPIO_SetBits(GPIOB, I2C_SCL_PIN)		/* SCL = 1 */
-	#define I2C_SCL_0()  GPIO_ResetBits(GPIOB, I2C_SCL_PIN)		/* SCL = 0 */
+	#define I2C_SCL_1()  GPIO_SetBits(GPIOB, GPIO_Pin_6)		/* SCL = 1 */
+	#define I2C_SCL_0()  GPIO_ResetBits(GPIOB, GPIO_Pin_6)		/* SCL = 0 */
 	
-	#define I2C_SDA_1()  GPIO_SetBits(GPIOB, I2C_SDA_PIN)		/* SDA = 1 */
-	#define I2C_SDA_0()  GPIO_ResetBits(GPIOB, I2C_SDA_PIN)		/* SDA = 0 */
+	#define I2C_SDA_1()  GPIO_SetBits(GPIOB, GPIO_Pin_7)		/* SDA = 1 */
+	#define I2C_SDA_0()  GPIO_ResetBits(GPIOB, GPIO_Pin_7)		/* SDA = 0 */
 	
-	#define I2C_SDA_READ()  GPIO_ReadInputDataBit(GPIOB, I2C_SDA_PIN)	/* 读SDA口线状态 */
+	#define I2C_SDA_READ()  GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_7)	/* 读SDA口线状态 */
 
 /*
 *********************************************************************************************************
@@ -835,7 +830,7 @@ static void i2c_CfgGpio(void)
 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);	/* 打开GPIO时钟 */
 
-	GPIO_InitStructure.GPIO_Pin = I2C_SCL_PIN | I2C_SDA_PIN;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;  	/* 开漏输出 */
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
