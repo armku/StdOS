@@ -30,18 +30,18 @@ void CLcd::Init()
 {
     this->pPincs = 0;
     this->pPinres = 0; /*低电平复位*/
-    Sys.Delay(500);
+    //Sys.Delay(500);
     this->pPinres = 1; /*复位完毕*/
-    Sys.Delay(500);
+    //Sys.Delay(500);
     #if 0    
         this->writeCMD(0xe2); /*软复位*/
-        Sys.Delay(500);
+        //Sys.Delay(500);
         this->writeCMD(0x2c); /*升压步聚1*/
-        Sys.Delay(500);
+        //Sys.Delay(500);
         this->writeCMD(0x2e); /*升压步聚2*/
-        Sys.Delay(500);
+        //Sys.Delay(500);
         this->writeCMD(0x2f); /*升压步聚3*/
-        Sys.Delay(500);
+        //Sys.Delay(500);
         this->writeCMD(0x24); //0x24粗调对比度，可设置范围0x20～0x27
         this->writeCMD(0x81); /*微调对比度*/
         this->writeCMD(0x1a); //微调对比度的值，可设置范围0x00～0x3f
@@ -52,7 +52,7 @@ void CLcd::Init()
         this->writeCMD(0xaf); //开显示
     #else 
         this->writeCMD(0xe2); //用软件方式复位ST7565R 
-        Sys.Delay(20);
+        //Sys.Delay(20);
         this->writeCMD(0xa2); //LCD偏压设置 （该寄存器的值请不要改动）
         this->writeCMD(0xa1); //横向刷屏方向设置  0xa0:从左向右  0xa1：从右向左
         this->writeCMD(0xc0); //纵向刷屏方向设置  0xc0:从下向上  0xc8:从上向下
@@ -549,6 +549,30 @@ void CLcd::Display6x12(ushort x, ushort y, byte *dp)
             for (byte mi = 0; mi < 6; mi++)
             {
                 this->Point(x + i, y + mi + 6 * j, bitMap &dp[i + 6 * j] ? 1 : 0);
+                bitMap <<= 1;
+            }
+        }
+    }
+}
+/*********************************************************************************************************
+函 数 名: Display6x16
+功能说明: 显示6x16点阵图像、ASCII, 或8x16点阵的自造字符、其他图标
+形    参1: x  X轴坐标
+形    参2: y  Y轴坐标
+形    参3: *dp 显示内容
+形    参4: color 颜色
+返 回 值: 无
+ ********************************************************************************************************/
+void CLcd::Display6x16(ushort x, ushort y, byte *dp)
+{
+    for (byte j = 0; j < 2; j++)
+    {
+        for (byte i = 0; i < 8; i++)
+        {
+            byte bitMap = 0x01;
+            for (byte mi = 0; mi < 8; mi++)
+            {
+                this->Point(x + i, y + mi + 8 * j, bitMap &dp[i + 8 * j] ? 1 : 0);
                 bitMap <<= 1;
             }
         }

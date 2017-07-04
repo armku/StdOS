@@ -32,6 +32,7 @@
     extern typFNT_GB16 const GB_16[];
 	extern const byte ascBolt[][16];
 	extern const byte ascii_table_6x12[][12];
+	extern const byte nAsciiDot6X16[][16] ;
 
 
     /////////////////////////////////////////////////////////////////////////

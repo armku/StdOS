@@ -100,6 +100,19 @@ void CLcd_DR::DisplayChar8x16(ushort x, ushort y, byte ch)
 }
 
 /*********************************************************************************************************
+函 数 名: DisplayChar6x16
+功能说明: 显示ascall码
+形    参1: x  X轴坐标
+形    参2: y  Y轴坐标
+形    参3: ch 显示内容
+形    参4: color 颜色
+返 回 值: 无
+ ********************************************************************************************************/
+void CLcd_DR::DisplayChar6x16(ushort x, ushort y, byte ch)
+{    
+	this->Display6x16(x,y,(byte*)&nAsciiDot6X16[ch - 0x20][0]);
+}
+/*********************************************************************************************************
 函 数 名: DisplayChar8x16Bolt
 功能说明: 显示ascall码
 形    参1: x  X轴坐标
@@ -227,9 +240,27 @@ void CLcd_DR::DisplayStr(ushort x, ushort y, byte *text, Font font)
                         this->DisplayString5x8(x, y, text);
                         x += 6;                    
                     break;
-				case FONT_8X16BOLT:
+				case FONT_6X16:
+					 this->DisplayChar6x16(x, y, *text);
+					if(*text=='.')
+					{
+                        x += 5; 
+					}
+					else
+					{
+						x+=7;
+					}
+					break;
+                case FONT_8X16BOLT:
 					 this->DisplayChar8x16Bolt(x, y, *text);
+					if(*text=='.')
+					{
+						x+=6;
+					}
+					else
+					{
                         x += 8; 
+					}
 					break;
                 case FONT_16X16:
 				case FONT_8X16:                    
@@ -273,19 +304,19 @@ void CLcd_DR::DispVal(ushort x, ushort y, float val, int8_t wei, Font font)
     switch (wei)
     {
         case 0:
-            snprintf((char*)dat, 8, "%d", (int32_t)val);
+            snprintf((char*)dat, 8, "%6.0f", val);
             this->DisplayStr(x, y, dat, font);
             break;
         case 1:
-            snprintf((char*)dat, 8, "%.*f", 1, val);
+            snprintf((char*)dat, 8, "%6.1f", val);
             this->DisplayStr(x, y, dat, font);
             break;
         case 2:
-            snprintf((char*)dat, 8, "%.*f", 2, val);
+            snprintf((char*)dat, 8, "%6.2f", val);
             this->DisplayStr(x, y, dat, font);
             break;
         case 3:
-            snprintf((char*)dat, 8, "%.*f", 3, val);
+            snprintf((char*)dat, 8, "%6.3f", val);
             this->DisplayStr(x, y, dat, font);
             break;
         case 4:
