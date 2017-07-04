@@ -616,6 +616,7 @@ ushort AT24CXX::jsPageSize(uint type) //计算存储页大小
 #define I2C_RD	1		/* 读控制bit */
 OutputPort scl(PB6,false);
 OutputPort sda(PB7,false);
+SoftI2C iic;
 
 #if 0
 	#define I2C_SCL_1()  GPIO_SetBits(GPIOB, GPIO_Pin_6)		/* SCL = 1 */
@@ -668,14 +669,15 @@ static void i2c_Delay(void)
 */
 void i2c_Start(void)
 {
-	/* 当SCL高电平时，SDA出现一个下跳沿表示I2C总线启动信号 */
-	I2C_SDA_1();
-	I2C_SCL_1();
-	i2c_Delay();
-	I2C_SDA_0();
-	i2c_Delay();
-	I2C_SCL_0();
-	i2c_Delay();
+//	/* 当SCL高电平时，SDA出现一个下跳沿表示I2C总线启动信号 */
+//	I2C_SDA_1();
+//	I2C_SCL_1();
+//	i2c_Delay();
+//	I2C_SDA_0();
+//	i2c_Delay();
+//	I2C_SCL_0();
+//	i2c_Delay();
+	iic.Start();
 }
 
 /*
@@ -1088,11 +1090,16 @@ static void ee_Delay(__IO uint32_t nCount)	 //简单的延时函数
 }
 void AT24C02Test()
 {
+	
 //	AT24CXX at2402(PB6,PB7,AT24C02);
 //	i2c_CfgGpio();
 //	at2402.Init();	
 //	printf("\r\n");
 //	at2402.Test();
+	
+	
+	iic.SetPin(PB6,PB7);
+	
 	uint16_t i;
 	uint8_t write_buf[EE_SIZE];
   uint8_t read_buf[EE_SIZE];
