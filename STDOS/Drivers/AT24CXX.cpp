@@ -614,7 +614,8 @@ ushort AT24CXX::jsPageSize(uint type) //计算存储页大小
 #define EE_SIZE				256			  /* 24xx02总容量 */
 #define I2C_WR	0		/* 写控制bit */
 #define I2C_RD	1		/* 读控制bit */
-SoftI2C iic;
+SoftI2C *iic;
+
 
 /*
 *********************************************************************************************************
@@ -626,7 +627,7 @@ SoftI2C iic;
 */
 void i2c_Start(void)
 {
-	iic.Start();
+	iic->Start();
 }
 
 /*
@@ -639,7 +640,7 @@ void i2c_Start(void)
 */
 void i2c_Stop(void)
 {
-	iic.Stop();
+	iic->Stop();
 }
 
 /*
@@ -652,7 +653,7 @@ void i2c_Stop(void)
 */
 void i2c_SendByte(uint8_t _ucByte)
 {
-	iic.WriteByte(_ucByte);
+	iic->WriteByte(_ucByte);
 }
 
 /*
@@ -665,7 +666,7 @@ void i2c_SendByte(uint8_t _ucByte)
 */
 uint8_t i2c_ReadByte(void)
 {
-	return iic.ReadByte();
+	return iic->ReadByte();
 
 }
 
@@ -679,7 +680,7 @@ uint8_t i2c_ReadByte(void)
 */
 uint8_t i2c_WaitAck(void)
 {
-	return iic.WaitAck();
+	return iic->WaitAck();
 }
 
 /*
@@ -692,7 +693,7 @@ uint8_t i2c_WaitAck(void)
 */
 void i2c_Ack(void)
 {
-	iic.Ack();
+	iic->Ack();
 }
 
 /*
@@ -705,7 +706,7 @@ void i2c_Ack(void)
 */
 void i2c_NAck(void)
 {
-	iic.Ack(false);
+	iic->Ack(false);
 }
 
 /*
@@ -960,8 +961,8 @@ void AT24C02Test()
 //	printf("\r\n");
 //	at2402.Test();
 	
-	
-	iic.SetPin(PB6,PB7);
+	iic=new SoftI2C();
+	iic->SetPin(PB6,PB7);
 	
 	uint16_t i;
 	uint8_t write_buf[EE_SIZE];
