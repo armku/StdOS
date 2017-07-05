@@ -21,8 +21,7 @@ bool AT24CXX::Read(uint addr, Buffer &bs)const
 
 AT24CXX::AT24CXX(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr, uint wnms)
 {
-    this->IIC = new SoftI2C();
-    this->IIC->SetPin(pinsck, pinsda);
+    this->IIC.SetPin(pinsck, pinsda);
     this->deviceType = devtype;
     this->Address = devaddr;
     this->pageSize = this->jsPageSize(devtype);
@@ -78,63 +77,63 @@ byte AT24CXX::Read(ushort address)
 
 
     /* µÚ1²½£º·¢ÆğI2C×ÜÏßÆô¶¯ĞÅºÅ */
-    this->IIC->Start();
+    this->IIC.Start();
 
     /* µÚ2²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
-    this->IIC->WriteByte(this->Address | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
+    this->IIC.WriteByte(this->Address | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
 
     /* µÚ3²½£ºµÈ´ıACK */
-    if (this->IIC->WaitAck() != 0)
+    if (this->IIC.WaitAck() != 0)
     {
         goto cmd_Readbytefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
     if (this->deviceType > AT24C16)
     {
         /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-        this->IIC->WriteByte((byte)((address) >> 8));
+        this->IIC.WriteByte((byte)((address) >> 8));
 
         /* µÚ5²½£ºµÈ´ıACK */
-        if (this->IIC->WaitAck() != 0)
+        if (this->IIC.WaitAck() != 0)
         {
             goto cmd_Readbytefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
         }
     }
     /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-    this->IIC->WriteByte((byte)address);
+    this->IIC.WriteByte((byte)address);
 
     /* µÚ5²½£ºµÈ´ıACK */
-    if (this->IIC->WaitAck() != 0)
+    if (this->IIC.WaitAck() != 0)
     {
         goto cmd_Readbytefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
 
     /* µÚ6²½£ºÖØĞÂÆô¶¯I2C×ÜÏß¡£Ç°ÃæµÄ´úÂëµÄÄ¿µÄÏòEEPROM´«ËÍµØÖ·£¬ÏÂÃæ¿ªÊ¼¶ÁÈ¡Êı¾İ */
-    this->IIC->Start();
+    this->IIC.Start();
 
     /* µÚ7²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
-    this->IIC->WriteByte(this->Address | macI2C_RD); /* ´Ë´¦ÊÇ¶ÁÖ¸Áî */
+    this->IIC.WriteByte(this->Address | macI2C_RD); /* ´Ë´¦ÊÇ¶ÁÖ¸Áî */
 
     /* µÚ8²½£º·¢ËÍACK */
-    if (this->IIC->WaitAck() != 0)
+    if (this->IIC.WaitAck() != 0)
     {
         goto cmd_Readbytefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
 
     /* µÚ9²½£ºÑ­»·¶ÁÈ¡Êı¾İ */
 
-    ret = this->IIC->ReadByte(); /* ¶Á1¸ö×Ö½Ú */
+    ret = this->IIC.ReadByte(); /* ¶Á1¸ö×Ö½Ú */
 
 
-    this->IIC->Ack(false); /* ×îºó1¸ö×Ö½Ú¶ÁÍêºó£¬CPU²úÉúNACKĞÅºÅ(Çı¶¯SDA = 1) */
+    this->IIC.Ack(false); /* ×îºó1¸ö×Ö½Ú¶ÁÍêºó£¬CPU²úÉúNACKĞÅºÅ(Çı¶¯SDA = 1) */
 
 
     /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->IIC->Stop();
+    this->IIC.Stop();
     return ret; /* Ö´ĞĞ³É¹¦ */
 
     cmd_Readbytefail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ */
     /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->IIC->Stop();
+    this->IIC.Stop();
 
     return ret;
 }
@@ -144,7 +143,7 @@ bool AT24CXX::Write(ushort address, byte da)
     uint m;
 
     /*¡¡µÚ£°²½£º·¢Í£Ö¹ĞÅºÅ£¬Æô¶¯ÄÚ²¿Ğ´²Ù×÷¡¡*/
-    this->IIC->Stop();
+    this->IIC.Stop();
 
     /* Í¨¹ı¼ì²éÆ÷¼şÓ¦´ğµÄ·½Ê½£¬ÅĞ¶ÏÄÚ²¿Ğ´²Ù×÷ÊÇ·ñÍê³É, Ò»°ãĞ¡ÓÚ 10ms 			
     CLKÆµÂÊÎª200KHzÊ±£¬²éÑ¯´ÎÊıÎª30´Î×óÓÒ
@@ -152,13 +151,13 @@ bool AT24CXX::Write(ushort address, byte da)
     for (m = 0; m < 1000; m++)
     {
         /* µÚ1²½£º·¢ÆğI2C×ÜÏßÆô¶¯ĞÅºÅ */
-        this->IIC->Start();
+        this->IIC.Start();
 
         /* µÚ2²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
-        this->IIC->WriteByte(this->Address | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
+        this->IIC.WriteByte(this->Address | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
 
         /* µÚ3²½£º·¢ËÍÒ»¸öÊ±ÖÓ£¬ÅĞ¶ÏÆ÷¼şÊÇ·ñÕıÈ·Ó¦´ğ */
-        if (this->IIC->WaitAck() == 0)
+        if (this->IIC.WaitAck() == 0)
         {
             break;
         }
@@ -170,19 +169,19 @@ bool AT24CXX::Write(ushort address, byte da)
     if (this->deviceType > AT24C16)
     {
         /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-        this->IIC->WriteByte((byte)((address >> 8)));
+        this->IIC.WriteByte((byte)((address >> 8)));
 
         /* µÚ5²½£ºµÈ´ıACK */
-        if (this->IIC->WaitAck() != 0)
+        if (this->IIC.WaitAck() != 0)
         {
             goto cmd_Writebytefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
         }
     }
     /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-    this->IIC->WriteByte((byte)address);
+    this->IIC.WriteByte((byte)address);
 
     /* µÚ5²½£ºµÈ´ıACK */
-    if (this->IIC->WaitAck() != 0)
+    if (this->IIC.WaitAck() != 0)
     {
         goto cmd_Writebytefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
@@ -190,22 +189,22 @@ bool AT24CXX::Write(ushort address, byte da)
 
 
     /* µÚ6²½£º¿ªÊ¼Ğ´ÈëÊı¾İ */
-    this->IIC->WriteByte(da);
+    this->IIC.WriteByte(da);
 
     /* µÚ7²½£º·¢ËÍACK */
-    if (this->IIC->WaitAck() != 0)
+    if (this->IIC.WaitAck() != 0)
     {
         goto cmd_Writebytefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
 
     /* ÃüÁîÖ´ĞĞ³É¹¦£¬·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->IIC->Stop();
+    this->IIC.Stop();
     Sys.Sleep(this->writedelaynms);
     return true;
 
     cmd_Writebytefail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ */
     /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->IIC->Stop();
+    this->IIC.Stop();
     return true;
 }
 
@@ -321,7 +320,7 @@ int AT24CXX::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ
     usAddr = addr;
 
     /*¡¡µÚ£°²½£º·¢Í£Ö¹ĞÅºÅ£¬Æô¶¯ÄÚ²¿Ğ´²Ù×÷¡¡*/
-    this->IIC->Stop();
+    this->IIC.Stop();
 
     /* Í¨¹ı¼ì²éÆ÷¼şÓ¦´ğµÄ·½Ê½£¬ÅĞ¶ÏÄÚ²¿Ğ´²Ù×÷ÊÇ·ñÍê³É, Ò»°ãĞ¡ÓÚ 10ms 			
     CLKÆµÂÊÎª200KHzÊ±£¬²éÑ¯´ÎÊıÎª30´Î×óÓÒ
@@ -329,13 +328,13 @@ int AT24CXX::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ
     for (m = 0; m < 1000; m++)
     {
         /* µÚ1²½£º·¢ÆğI2C×ÜÏßÆô¶¯ĞÅºÅ */
-        this->IIC->Start();
+        this->IIC.Start();
 
         /* µÚ2²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
-        this->IIC->WriteByte(this->Address | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
+        this->IIC.WriteByte(this->Address | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
 
         /* µÚ3²½£º·¢ËÍÒ»¸öÊ±ÖÓ£¬ÅĞ¶ÏÆ÷¼şÊÇ·ñÕıÈ·Ó¦´ğ */
-        if (this->IIC->WaitAck() == 0)
+        if (this->IIC.WaitAck() == 0)
         {
             break;
         }
@@ -347,19 +346,19 @@ int AT24CXX::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ
     if (this->deviceType > AT24C16)
     {
         /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-        this->IIC->WriteByte((byte)((usAddr >> 8)));
+        this->IIC.WriteByte((byte)((usAddr >> 8)));
 
         /* µÚ5²½£ºµÈ´ıACK */
-        if (this->IIC->WaitAck() != 0)
+        if (this->IIC.WaitAck() != 0)
         {
             goto cmd_Writefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
         }
     }
     /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-    this->IIC->WriteByte((byte)usAddr);
+    this->IIC.WriteByte((byte)usAddr);
 
     /* µÚ5²½£ºµÈ´ıACK */
-    if (this->IIC->WaitAck() != 0)
+    if (this->IIC.WaitAck() != 0)
     {
         goto cmd_Writefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
@@ -368,10 +367,10 @@ int AT24CXX::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ
     {
 
         /* µÚ6²½£º¿ªÊ¼Ğ´ÈëÊı¾İ */
-        this->IIC->WriteByte(buf[bufpos + i]);
+        this->IIC.WriteByte(buf[bufpos + i]);
 
         /* µÚ7²½£º·¢ËÍACK */
-        if (this->IIC->WaitAck() != 0)
+        if (this->IIC.WaitAck() != 0)
         {
             goto cmd_Writefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
         }
@@ -380,12 +379,12 @@ int AT24CXX::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ
     }
 
     /* ÃüÁîÖ´ĞĞ³É¹¦£¬·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->IIC->Stop();
+    this->IIC.Stop();
     return 0;
 
     cmd_Writefail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ */
     /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->IIC->Stop();
+    this->IIC.Stop();
     return 1;
 }
 
@@ -394,44 +393,44 @@ int AT24CXX::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚ¶Á
     uint i;
 
     /* µÚ1²½£º·¢ÆğI2C×ÜÏßÆô¶¯ĞÅºÅ */
-    this->IIC->Start();
+    this->IIC.Start();
 
     /* µÚ2²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
-    this->IIC->WriteByte(this->Address | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
+    this->IIC.WriteByte(this->Address | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
 
     /* µÚ3²½£ºµÈ´ıACK */
-    if (this->IIC->WaitAck() != 0)
+    if (this->IIC.WaitAck() != 0)
     {
         goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
     if (this->deviceType > AT24C16)
     {
         /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-        this->IIC->WriteByte((byte)((addr) >> 8));
+        this->IIC.WriteByte((byte)((addr) >> 8));
 
         /* µÚ5²½£ºµÈ´ıACK */
-        if (this->IIC->WaitAck() != 0)
+        if (this->IIC.WaitAck() != 0)
         {
             goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
         }
     }
     /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-    this->IIC->WriteByte((byte)addr);
+    this->IIC.WriteByte((byte)addr);
 
     /* µÚ5²½£ºµÈ´ıACK */
-    if (this->IIC->WaitAck() != 0)
+    if (this->IIC.WaitAck() != 0)
     {
         goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
 
     /* µÚ6²½£ºÖØĞÂÆô¶¯I2C×ÜÏß¡£Ç°ÃæµÄ´úÂëµÄÄ¿µÄÏòEEPROM´«ËÍµØÖ·£¬ÏÂÃæ¿ªÊ¼¶ÁÈ¡Êı¾İ */
-    this->IIC->Start();
+    this->IIC.Start();
 
     /* µÚ7²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
-    this->IIC->WriteByte(this->Address | macI2C_RD); /* ´Ë´¦ÊÇ¶ÁÖ¸Áî */
+    this->IIC.WriteByte(this->Address | macI2C_RD); /* ´Ë´¦ÊÇ¶ÁÖ¸Áî */
 
     /* µÚ8²½£º·¢ËÍACK */
-    if (this->IIC->WaitAck() != 0)
+    if (this->IIC.WaitAck() != 0)
     {
         goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
@@ -439,25 +438,25 @@ int AT24CXX::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚ¶Á
     /* µÚ9²½£ºÑ­»·¶ÁÈ¡Êı¾İ */
     for (i = 0; i < size; i++)
     {
-        buf[bufpos + i] = IIC->ReadByte(); /* ¶Á1¸ö×Ö½Ú */
+        buf[bufpos + i] = this->IIC.ReadByte(); /* ¶Á1¸ö×Ö½Ú */
 
         /* Ã¿¶ÁÍê1¸ö×Ö½Úºó£¬ĞèÒª·¢ËÍAck£¬ ×îºóÒ»¸ö×Ö½Ú²»ĞèÒªAck£¬·¢Nack */
         if (i != size - 1)
         {
-            this->IIC->Ack(true); /* ÖĞ¼ä×Ö½Ú¶ÁÍêºó£¬CPU²úÉúACKĞÅºÅ(Çı¶¯SDA = 0) */
+            this->IIC.Ack(true); /* ÖĞ¼ä×Ö½Ú¶ÁÍêºó£¬CPU²úÉúACKĞÅºÅ(Çı¶¯SDA = 0) */
         }
         else
         {
-            this->IIC->Ack(false); /* ×îºó1¸ö×Ö½Ú¶ÁÍêºó£¬CPU²úÉúNACKĞÅºÅ(Çı¶¯SDA = 1) */
+            this->IIC.Ack(false); /* ×îºó1¸ö×Ö½Ú¶ÁÍêºó£¬CPU²úÉúNACKĞÅºÅ(Çı¶¯SDA = 1) */
         }
     }
     /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->IIC->Stop();
+    this->IIC.Stop();
     return 0; /* Ö´ĞĞ³É¹¦ */
 
     cmd_Readfail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ */
     /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->IIC->Stop();
+    this->IIC.Stop();
     return 1;
 }
 
@@ -499,12 +498,12 @@ byte AT24CXX::checkDevice()
 {
     byte ucAck;
 
-    this->IIC->Start(); /* ·¢ËÍÆô¶¯ĞÅºÅ */
+    this->IIC.Start(); /* ·¢ËÍÆô¶¯ĞÅºÅ */
     /* ·¢ËÍÉè±¸µØÖ·+¶ÁĞ´¿ØÖÆbit£¨0 = w£¬ 1 = r) bit7 ÏÈ´« */
-    this->IIC->WriteByte((this->Address) | macI2C_WR);
-    ucAck = this->IIC->WaitAck(); /*¼ì²âÉè±¸µÄACKÓ¦´ğ */
+    this->IIC.WriteByte((this->Address) | macI2C_WR);
+    ucAck = this->IIC.WaitAck(); /*¼ì²âÉè±¸µÄACKÓ¦´ğ */
 
-    this->IIC->Stop(); /* ·¢ËÍÍ£Ö¹ĞÅºÅ */
+    this->IIC.Stop(); /* ·¢ËÍÍ£Ö¹ĞÅºÅ */
 
     return ucAck;
 }
@@ -518,12 +517,12 @@ byte AT24CXX::CheckOk()
     else
     {
         /* Ê§°Üºó£¬ÇĞ¼Ç·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-        this->IIC->Stop();
+        this->IIC.Stop();
         return 0;
     }
 }
 
-#if 1
+#if 0
     #define EE_SIZE				256			  /* 24xx02×ÜÈİÁ¿ */    
        
     void AT24C02Test()

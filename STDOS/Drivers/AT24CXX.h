@@ -22,7 +22,7 @@
     class AT24CXX: public CharStorage
     {
         public:
-            SoftI2C *IIC; // I2C通信口
+            SoftI2C IIC; // I2C通信口
             byte Address; // 设备地址
 
             AT24CXX();
