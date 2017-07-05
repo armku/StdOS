@@ -13,7 +13,13 @@ CLcd::CLcd()
 
 CLcd::CLcd(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs)
 {
-    this->pPinRS.Set(pinrs);
+    this->pPinRS.Invert=false;
+    this->pPinsclk.Invert=false;
+    this->pPinsid.Invert=false;
+    this->pPinres.Invert=false;
+    this->pPincs.Invert=false;
+	
+	this->pPinRS.Set(pinrs);
     this->pPinsclk.Set(pinsclk);
     this->pPinsid.Set(pinsid);
     this->pPinres.Set(pinres);
