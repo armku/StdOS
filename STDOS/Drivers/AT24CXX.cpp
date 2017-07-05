@@ -9,10 +9,6 @@
 AT24CXX::AT24CXX(){}
 AT24CXX::~AT24CXX(){}
 
-void AT24CXX::Init(){
-
-}
-
 bool AT24CXX::Write(uint addr, const Buffer &bs)const
 {
     return false;

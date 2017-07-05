@@ -28,7 +28,6 @@
             AT24CXX();
             virtual ~AT24CXX();
 
-            void Init();
             bool Write(ushort addr, byte data);
             byte Read(ushort addr);
 			
