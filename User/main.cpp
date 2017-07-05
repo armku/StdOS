@@ -30,7 +30,7 @@ void LedTask(void *param)
 }
 
 #define namee "StdOS"
-
+CLcd_DR lcddr1(PD3, PD6, PD7, PB3, PB4);
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);
@@ -44,7 +44,8 @@ int main(void)
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 	
-
+	lcddr1.Init();
+	lcddr1.Test(0x55,0xaa);
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
     Sys.Start();

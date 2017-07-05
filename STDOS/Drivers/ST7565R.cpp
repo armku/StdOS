@@ -13,13 +13,13 @@ CLcd::CLcd()
 
 CLcd::CLcd(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs)
 {
-    this->pPinRS.Invert=false;
+	this->pPinRS.Invert=false;
     this->pPinsclk.Invert=false;
     this->pPinsid.Invert=false;
     this->pPinres.Invert=false;
     this->pPincs.Invert=false;
 	
-	this->pPinRS.Set(pinrs);
+    this->pPinRS.Set(pinrs);
     this->pPinsclk.Set(pinsclk);
     this->pPinsid.Set(pinsid);
     this->pPinres.Set(pinres);
@@ -36,18 +36,18 @@ void CLcd::Init()
 {
     this->pPincs = 0;
     this->pPinres = 0; /*低电平复位*/
-    //Sys.Delay(500);
+    Sys.Delay(500);
     this->pPinres = 1; /*复位完毕*/
-    //Sys.Delay(500);
+    Sys.Delay(500);
     #if 0    
         this->writeCMD(0xe2); /*软复位*/
-        //Sys.Delay(500);
+        Sys.Delay(500);
         this->writeCMD(0x2c); /*升压步聚1*/
-        //Sys.Delay(500);
+        Sys.Delay(500);
         this->writeCMD(0x2e); /*升压步聚2*/
-        //Sys.Delay(500);
+        Sys.Delay(500);
         this->writeCMD(0x2f); /*升压步聚3*/
-        //Sys.Delay(500);
+        Sys.Delay(500);
         this->writeCMD(0x24); //0x24粗调对比度，可设置范围0x20～0x27
         this->writeCMD(0x81); /*微调对比度*/
         this->writeCMD(0x1a); //微调对比度的值，可设置范围0x00～0x3f
@@ -58,7 +58,7 @@ void CLcd::Init()
         this->writeCMD(0xaf); //开显示
     #else 
         this->writeCMD(0xe2); //用软件方式复位ST7565R 
-        //Sys.Delay(20);
+        Sys.Delay(20);
         this->writeCMD(0xa2); //LCD偏压设置 （该寄存器的值请不要改动）
         this->writeCMD(0xa1); //横向刷屏方向设置  0xa0:从左向右  0xa1：从右向左
         this->writeCMD(0xc0); //纵向刷屏方向设置  0xc0:从下向上  0xc8:从上向下
