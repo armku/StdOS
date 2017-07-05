@@ -33,33 +33,9 @@ AT24CXX::AT24CXX(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr, uint 
     this->writedelaynms = wnms;
 }
 
-byte AT24CXX::CheckOk()
-{
-    if (this->checkDevice() == 0)
-    {
-        return 1;
-    }
-    else
-    {
-        /* 失败后，切记发送I2C总线停止信号 */
-        this->IIC->Stop();
-        return 0;
-    }
-}
 
-byte AT24CXX::checkDevice()
-{
-    byte ucAck;
 
-    this->IIC->Start(); /* 发送启动信号 */
-    /* 发送设备地址+读写控制bit（0 = w， 1 = r) bit7 先传 */
-    this->IIC->WriteByte((this->Address) | macI2C_WR);
-    ucAck = this->IIC->WaitAck(); /*检测设备的ACK应答 */
 
-    this->IIC->Stop(); /* 发送停止信号 */
-
-    return ucAck;
-}
 
 /*
  *********************************************************************************************************
@@ -649,40 +625,32 @@ void i2c_NAck(void)
 {
 	iic->Ack(false);
 }
-static void i2c_CfgGpio(void)
+
+byte AT24CXX::checkDevice()
 {
-	/* 给一个停止信号, 复位I2C总线上的所有设备到待机模式 */
-	i2c_Stop();
+    byte ucAck;
+
+    this->IIC->Start(); /* 发送启动信号 */
+    /* 发送设备地址+读写控制bit（0 = w， 1 = r) bit7 先传 */
+    this->IIC->WriteByte((this->Address) | macI2C_WR);
+    ucAck = this->IIC->WaitAck(); /*检测设备的ACK应答 */
+
+    this->IIC->Stop(); /* 发送停止信号 */
+
+    return ucAck;
 }
-uint8_t i2c_CheckDevice(uint8_t _Address)
+byte AT24CXX::CheckOk()
 {
-	uint8_t ucAck;
-
-	i2c_CfgGpio();		/* 配置GPIO */
-
-	
-	i2c_Start();		/* 发送启动信号 */
-
-	/* 发送设备地址+读写控制bit（0 = w， 1 = r) bit7 先传 */
-	i2c_SendByte(_Address | I2C_WR);
-	ucAck = i2c_WaitAck();	/* 检测设备的ACK应答 */
-
-	i2c_Stop();			/* 发送停止信号 */
-
-	return ucAck;
-}
-uint8_t ee_CheckOk(void)
-{
-	if (i2c_CheckDevice(EE_DEV_ADDR) == 0)
-	{
-		return 1;
-	}
-	else
-	{
-		/* 失败后，切记发送I2C总线停止信号 */
-		i2c_Stop();		
-		return 0;
-	}
+    if (this->checkDevice() == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        /* 失败后，切记发送I2C总线停止信号 */
+        this->IIC->Stop();
+        return 0;
+    }
 }
 
 uint8_t ee_ReadBytes(uint8_t *_pReadBuf, uint16_t _usAddress, uint16_t _usSize)
@@ -861,7 +829,7 @@ printf("\r\n");
   uint8_t read_buf[EE_SIZE];
   
 /*-----------------------------------------------------------------------------------*/  
-  if (ee_CheckOk() == 0)
+  if (at2402.CheckOk() == 0)
 	{
 		/* 没有检测到EEPROM */
 		printf("没有检测到串行EEPROM!\r\n");
