@@ -955,13 +955,14 @@ void ee_Erase(void)
 void AT24C02Test()
 {
 	
-//	AT24CXX at2402(PB6,PB7,AT24C02);
+	AT24CXX at2402(PB6,PB7,AT24C02);
 //	i2c_CfgGpio();
 //	at2402.Init();	
 //	printf("\r\n");
 //	at2402.Test();
 	
-	iic=new SoftI2C();
+	iic=(SoftI2C*)at2402.IIC;
+	//iic=new SoftI2C();
 	iic->SetPin(PB6,PB7);
 	
 	uint16_t i;
