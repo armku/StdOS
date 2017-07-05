@@ -503,6 +503,34 @@ ushort AT24CXX::jsPageSize(uint type) //计算存储页大小
     return ret;
 }
 
+byte AT24CXX::checkDevice()
+{
+    byte ucAck;
+
+    this->IIC->Start(); /* 发送启动信号 */
+    /* 发送设备地址+读写控制bit（0 = w， 1 = r) bit7 先传 */
+    this->IIC->WriteByte((this->Address) | macI2C_WR);
+    ucAck = this->IIC->WaitAck(); /*检测设备的ACK应答 */
+
+    this->IIC->Stop(); /* 发送停止信号 */
+
+    return ucAck;
+}
+
+byte AT24CXX::CheckOk()
+{
+    if (this->checkDevice() == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        /* 失败后，切记发送I2C总线停止信号 */
+        this->IIC->Stop();
+        return 0;
+    }
+}
+
 #ifdef DEBUG
     /*
      * 读写测试
@@ -592,32 +620,7 @@ ushort AT24CXX::jsPageSize(uint type) //计算存储页大小
     #define I2C_RD	1		/* 读控制bit */
     AT24CXX at2402(PB6, PB7, AT24C02);
 
-    byte AT24CXX::checkDevice()
-    {
-        byte ucAck;
 
-        this->IIC->Start(); /* 发送启动信号 */
-        /* 发送设备地址+读写控制bit（0 = w， 1 = r) bit7 先传 */
-        this->IIC->WriteByte((this->Address) | macI2C_WR);
-        ucAck = this->IIC->WaitAck(); /*检测设备的ACK应答 */
-
-        this->IIC->Stop(); /* 发送停止信号 */
-
-        return ucAck;
-    }
-    byte AT24CXX::CheckOk()
-    {
-        if (this->checkDevice() == 0)
-        {
-            return 1;
-        }
-        else
-        {
-            /* 失败后，切记发送I2C总线停止信号 */
-            this->IIC->Stop();
-            return 0;
-        }
-    }
 
     uint8_t ee_ReadBytes(uint8_t *_pReadBuf, uint16_t _usAddress, uint16_t _usSize)
     {
@@ -798,7 +801,7 @@ ushort AT24CXX::jsPageSize(uint type) //计算存储页大小
 
             while (1)
                 ;
-             /* 停机 */
+            /* 停机 */
         }
         /*------------------------------------------------------------------------------------*/
         /* 填充测试缓冲区 */
