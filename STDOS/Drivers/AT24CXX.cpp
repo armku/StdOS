@@ -614,8 +614,6 @@ ushort AT24CXX::jsPageSize(uint type) //计算存储页大小
 #define EE_SIZE				256			  /* 24xx02总容量 */
 #define I2C_WR	0		/* 写控制bit */
 #define I2C_RD	1		/* 读控制bit */
-OutputPort scl(PB6,false);
-OutputPort sda(PB7,false);
 SoftI2C iic;
 
 /*
