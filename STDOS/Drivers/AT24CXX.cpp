@@ -33,13 +33,9 @@ AT24CXX::AT24CXX(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr, uint 
     this->writedelaynms = wnms;
 }
 
-
-
-
-
 /*
  *********************************************************************************************************
- *	函 数 名: ee_ReadBytes
+ *	函 数 名: Read
  *	功能说明: 从串行EEPROM指定地址处开始读取若干数据
  *	形    参：addr : 起始地址
  *			 size : 数据长度，单位为字节
@@ -54,7 +50,7 @@ int AT24CXX::Read(uint addr, void *pBuffer, int size, ushort bufpos)
 
 /*
  *********************************************************************************************************
- *	函 数 名: ee_WriteBytes
+ *	函 数 名: Write
  *	功能说明: 向串行EEPROM指定地址写入若干数据，采用页写操作提高写入效率
  *	形    参：addr : 起始地址
  *			 size : 数据长度，单位为字节
