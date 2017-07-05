@@ -60,18 +60,59 @@ bool I2C::SendSubAddr(int addr)
 {
     return false;
 }
-void SoftI2C::SetPin(Pin scl, Pin sda)
+
+////////////////////////////////////////////////////////////////
+////////////////////I2CScope/////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////
+////////////////////HardI2C/////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////
+////////////////////SoftI2C/////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+// 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
+SoftI2C::SoftI2C(uint speedHz)
 {
+	this->_delay=5;
 	this->SCL.OpenDrain = true;
     this->SDA.OpenDrain = true;
 	this->SCL.Invert = false;
-	this->SDA.Invert = false;
-    this->SCL.Set(scl);
+	this->SDA.Invert = false;    
+}
+SoftI2C::~SoftI2C(){}
+
+void SoftI2C::SetPin(Pin scl, Pin sda)
+{
+	this->SCL.Set(scl);
     this->SDA.Set(sda);
 
     this->SCL = 0;
     this->SDA = 1;
     this->SCL = 1;
+}
+
+void SoftI2C::GetPin(Pin *scl, Pin *sda)
+{
+
 }
 
 void SoftI2C::Start()
@@ -145,6 +186,30 @@ byte SoftI2C::ReadByte()
     return value;
 }
 
+void SoftI2C::Ack(bool ack)
+{
+    if (ack)
+    {
+        this->SDA = 0; /* CPU驱动SDA = 0 */
+        this->Delay(this->_delay);
+        this->SCL = 1; /* CPU产生1个时钟 */
+        this->Delay(this->_delay);
+        this->SCL = 0;
+        this->Delay(this->_delay);
+        this->SDA = 1;
+        /*CPU释放SDA总线 */
+    }
+    else
+    {
+        this->SDA = 1; /* CPU驱动SDA = 1 */
+        this->Delay(this->_delay);
+        this->SCL = 1; /* CPU产生1个时钟 */
+        this->Delay(this->_delay);
+        this->SCL = 0;
+        this->Delay(this->_delay);
+    }
+}
+
 //等待应答信号到来
 //返回值：1，接收应答失败
 //        0，接收应答成功
@@ -171,41 +236,10 @@ bool SoftI2C::WaitAck(int retry)
     return re;
 }
 
-void SoftI2C::Ack(bool ack)
-{
-    if (ack)
-    {
-        this->SDA = 0; /* CPU驱动SDA = 0 */
-        this->Delay(this->_delay);
-        this->SCL = 1; /* CPU产生1个时钟 */
-        this->Delay(this->_delay);
-        this->SCL = 0;
-        this->Delay(this->_delay);
-        this->SDA = 1;
-        /*CPU释放SDA总线 */
-    }
-    else
-    {
-        this->SDA = 1; /* CPU驱动SDA = 1 */
-        this->Delay(this->_delay);
-        this->SCL = 1; /* CPU产生1个时钟 */
-        this->Delay(this->_delay);
-        this->SCL = 0;
-        this->Delay(this->_delay);
-    }
-}
-
 void SoftI2C::OnOpen(){}
 void SoftI2C::OnClose(){}
-void SoftI2C::GetPin(Pin *scl, Pin *sda){
 
-}
-// 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
-SoftI2C::SoftI2C(uint speedHz)
-{
-	this->_delay=5;
-}
-SoftI2C::~SoftI2C(){}
+
 void SoftI2C::Delay(int us)
 {
 
