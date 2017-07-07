@@ -25,12 +25,6 @@
 void W25Q64::SetAddr(uint addr){
 
 }
-// 等待操作完成
-bool W25Q64::WaitForEnd()
-{
-
-    return true;
-}
 
 // 读取编号
 uint W25Q64::ReadID()
@@ -100,7 +94,7 @@ bool W25Q64::Erase(uint SectorAddr)
 {
     /* Send write enable instruction */
     WriteEnable();
-    WaitForWriteEnd();
+    this->WaitForEnd();
     /* Sector Erase */
     /* Select the FLASH: Chip Select low */
     this->_spi->Start();
@@ -115,7 +109,7 @@ bool W25Q64::Erase(uint SectorAddr)
     /* Deselect the FLASH: Chip Select high */
     this->_spi->Stop();
     /* Wait the end of Flash writing */
-    WaitForWriteEnd();
+    this->WaitForEnd();
     return true;
 }
 
@@ -133,7 +127,7 @@ bool W25Q64::ErasePage(uint pageAddr)
 }
 
 /*******************************************************************************
- * Function Name  : WaitForWriteEnd
+ * Function Name  : WaitForEnd
  * Description    : Polls the status of the Write In Progress (WIP) flag in the
  *                  FLASH's status  register  and  loop  until write  opertaion
  *                  has completed.
@@ -141,9 +135,10 @@ bool W25Q64::ErasePage(uint pageAddr)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::WaitForWriteEnd(void)
+// 等待操作完成
+bool W25Q64::WaitForEnd()
 {
-    byte FLASH_Status = 0;
+   byte FLASH_Status = 0;
 
     /* Select the FLASH: Chip Select low */
     this->_spi->Start();
@@ -162,6 +157,8 @@ void W25Q64::WaitForWriteEnd(void)
 
     /* Deselect the FLASH: Chip Select high */
     this->_spi->Stop();
+	
+	return true;
 }
 
 /*******************************************************************************
@@ -204,7 +201,7 @@ void W25Q64::BulkErase(void)
     this->_spi->Stop();
 
     /* Wait the end of Flash writing */
-    WaitForWriteEnd();
+    this->WaitForEnd();
 }
 
 /*******************************************************************************
@@ -256,7 +253,7 @@ bool W25Q64::WritePage(uint addr, byte *pBuffer, uint NumByteToWrite)
     this->_spi->Stop();
 
     /* Wait the end of Flash writing */
-    WaitForWriteEnd();
+    this->WaitForEnd();
     return true;
 }
 

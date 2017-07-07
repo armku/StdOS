@@ -17,7 +17,6 @@
 
             // ∂¡»°±‡∫≈
             uint ReadID();
-            void WaitForWriteEnd(void);
             void WriteEnable(void);
             void StartReadSequence(uint ReadAddr);
 
