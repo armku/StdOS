@@ -22,9 +22,6 @@
 
             void WriteEnable(void);
             void WaitForWriteEnd(void);
-            #ifdef DEBUG
-                void Test();
-            #endif 
         private:
             Spi *pSpi;
             OutputPort *pcs; //Æ¬Ñ¡½Å
