@@ -76,29 +76,5 @@ AT45DB041中的数据按页存放,主存共2048页,每页 264字节,所以总容量为528K字节（约4M比
 和9位任意码,在轮换时钟SCK的控制下从SI载入。当/CS上检测到一个由低到高的跳变时,器件将首先擦除被选中的主存页,然后将储存在缓存中的数据写入该页。
 擦除和写入的过程都是自动进行的,这一进程不超过20ms。在这个时间里,状态寄存器将指示状态忙。状态寄存器值读取:读状态寄存器的值可以用来确定设备的忙闲状态。
 忙闲状态通过寄存器的第7位指示。如果第7位为1,则设备位于空闲状态并可接收下一条指令。如果为0,则设备忙。在载入8位操作码57H后,从SO上可以读出1字节的状态寄存器的值。
-*/
-    
-    class W25QXXX
-    {
-        public:
-            W25QXXX(Spi *spi, Pin pincs = P0);
-            void Write(uint addr, byte *pBuffer, int size);
-            void Read(uint addr, byte *pBuffer, int size);
-        public:
-            void Init(void);
-            void SectorErase(uint SectorAddr);
-            void BulkErase(void);
-            void WritePage(uint addr, byte *pBuffer, int size);
-            uint ReadID(void);
-            uint ReadDeviceID(void);
-            void StartReadSequence(uint addr);
-            void PowerDown(void);
-            void WAKEUP(void);
-
-            void WriteEnable(void);
-            void WaitForWriteEnd(void);
-        private:
-            Spi *pSpi;
-            OutputPort *pcs; //片选脚
-    };
+*/        
 #endif
