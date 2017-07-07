@@ -1,9 +1,6 @@
 #include "W25QXXX.h"
 #include "stm32f10x.h"
 
-/* Private typedef -----------------------------------------------------------*/
-#define SPI_FLASH_PageSize      256
-
 /* Private define ------------------------------------------------------------*/
 #define W25X_WriteEnable		      0x06 
 #define W25X_WriteDisable		      0x04 
@@ -299,40 +296,40 @@ void W25Q64::SPI_FLASH_BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByte
 {
     byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
-    Addr = WriteAddr % SPI_FLASH_PageSize;
-    count = SPI_FLASH_PageSize - Addr;
-    NumOfPage = NumByteToWrite / SPI_FLASH_PageSize;
-    NumOfSingle = NumByteToWrite % SPI_FLASH_PageSize;
+    Addr = WriteAddr % this->PageSize;
+    count = this->PageSize - Addr;
+    NumOfPage = NumByteToWrite / this->PageSize;
+    NumOfSingle = NumByteToWrite % this->PageSize;
 
     if (Addr == 0)
-     /* WriteAddr is SPI_FLASH_PageSize aligned  */
+     /* WriteAddr is this->PageSize aligned  */
     {
         if (NumOfPage == 0)
-         /* NumByteToWrite < SPI_FLASH_PageSize */
+         /* NumByteToWrite < this->PageSize */
         {
             SPI_FLASH_PageWrite(pBuffer, WriteAddr, NumByteToWrite);
         }
         else
-         /* NumByteToWrite > SPI_FLASH_PageSize */
+         /* NumByteToWrite > this->PageSize */
         {
             while (NumOfPage--)
             {
-                SPI_FLASH_PageWrite(pBuffer, WriteAddr, SPI_FLASH_PageSize);
-                WriteAddr += SPI_FLASH_PageSize;
-                pBuffer += SPI_FLASH_PageSize;
+                SPI_FLASH_PageWrite(pBuffer, WriteAddr, this->PageSize);
+                WriteAddr += this->PageSize;
+                pBuffer += this->PageSize;
             }
 
             SPI_FLASH_PageWrite(pBuffer, WriteAddr, NumOfSingle);
         }
     }
     else
-     /* WriteAddr is not SPI_FLASH_PageSize aligned  */
+     /* WriteAddr is not this->PageSize aligned  */
     {
         if (NumOfPage == 0)
-         /* NumByteToWrite < SPI_FLASH_PageSize */
+         /* NumByteToWrite < this->PageSize */
         {
             if (NumOfSingle > count)
-             /* (NumByteToWrite + WriteAddr) > SPI_FLASH_PageSize */
+             /* (NumByteToWrite + WriteAddr) > this->PageSize */
             {
                 temp = NumOfSingle - count;
 
@@ -348,11 +345,11 @@ void W25Q64::SPI_FLASH_BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByte
             }
         }
         else
-         /* NumByteToWrite > SPI_FLASH_PageSize */
+         /* NumByteToWrite > this->PageSize */
         {
             NumByteToWrite -= count;
-            NumOfPage = NumByteToWrite / SPI_FLASH_PageSize;
-            NumOfSingle = NumByteToWrite % SPI_FLASH_PageSize;
+            NumOfPage = NumByteToWrite / this->PageSize;
+            NumOfSingle = NumByteToWrite % this->PageSize;
 
             SPI_FLASH_PageWrite(pBuffer, WriteAddr, count);
             WriteAddr += count;
@@ -360,9 +357,9 @@ void W25Q64::SPI_FLASH_BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByte
 
             while (NumOfPage--)
             {
-                SPI_FLASH_PageWrite(pBuffer, WriteAddr, SPI_FLASH_PageSize);
-                WriteAddr += SPI_FLASH_PageSize;
-                pBuffer += SPI_FLASH_PageSize;
+                SPI_FLASH_PageWrite(pBuffer, WriteAddr, this->PageSize);
+                WriteAddr += this->PageSize;
+                pBuffer += this->PageSize;
             }
 
             if (NumOfSingle != 0)
@@ -480,11 +477,11 @@ W25Q64 w25q64(&spi);
 //	
 //	CurrentAddr = WriteAddr;
 //	
-//  Addr = WriteAddr % SPI_FLASH_PageSize;
-//  count = SPI_FLASH_PageSize - Addr;
+//  Addr = WriteAddr % this->PageSize;
+//  count = this->PageSize - Addr;
 //	
-//	NumOfPage = ( NumByteToWrite - count ) / SPI_FLASH_PageSize;
-//	NumOfSingle = ( NumByteToWrite - count ) % SPI_FLASH_PageSize;
+//	NumOfPage = ( NumByteToWrite - count ) / this->PageSize;
+//	NumOfSingle = ( NumByteToWrite - count ) % this->PageSize;
 //	
 
 //	if ( count )
@@ -498,10 +495,10 @@ W25Q64 w25q64(&spi);
 //	
 //	for ( i = 0; i < NumOfPage; i ++ )
 //	{
-//		SPI_FLASH_PageWrite ( pBuffer, CurrentAddr, SPI_FLASH_PageSize );
+//		SPI_FLASH_PageWrite ( pBuffer, CurrentAddr, this->PageSize );
 //		
-//		CurrentAddr += SPI_FLASH_PageSize;
-//		pBuffer += SPI_FLASH_PageSize;
+//		CurrentAddr += this->PageSize;
+//		pBuffer += this->PageSize;
 //		
 //	}
 //	
