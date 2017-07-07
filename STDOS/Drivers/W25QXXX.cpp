@@ -237,13 +237,13 @@ void W25Q64::BulkErase(void)
  *                  the FLASH page size.
  * Input          : - pBuffer : pointer to the buffer  containing the data to be
  *                    written to the FLASH.
- *                  - WriteAddr : FLASH's internal address to write to.
+ *                  - addr : FLASH's internal address to write to.
  *                  - NumByteToWrite : number of bytes to write to the FLASH,
  *                    must be equal or less than "SPI_FLASH_PageSize" value.
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
+void W25Q64::PageWrite(byte *pBuffer, uint addr, ushort NumByteToWrite)
 {
     /* Enable the write access to the FLASH */
     WriteEnable();
@@ -252,12 +252,12 @@ void W25Q64::PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
     this->_spi->Start();
     /* Send "Write to Memory " instruction */
     this->_spi->Write(W25X_PageProgram);
-    /* Send WriteAddr high nibble address byte to write to */
-    this->_spi->Write((WriteAddr &0xFF0000) >> 16);
-    /* Send WriteAddr medium nibble address byte to write to */
-    this->_spi->Write((WriteAddr &0xFF00) >> 8);
-    /* Send WriteAddr low nibble address byte to write to */
-    this->_spi->Write(WriteAddr &0xFF);
+    /* Send addr high nibble address byte to write to */
+    this->_spi->Write((addr &0xFF0000) >> 16);
+    /* Send addr medium nibble address byte to write to */
+    this->_spi->Write((addr &0xFF00) >> 8);
+    /* Send addr low nibble address byte to write to */
+    this->_spi->Write(addr &0xFF);
 
     if (NumByteToWrite > this->PageSize)
     {
@@ -287,61 +287,61 @@ void W25Q64::PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
  *                  number of WRITE cycles are reduced, using Page WRITE sequence.
  * Input          : - pBuffer : pointer to the buffer  containing the data to be
  *                    written to the FLASH.
- *                  - WriteAddr : FLASH's internal address to write to.
+ *                  - addr : FLASH's internal address to write to.
  *                  - NumByteToWrite : number of bytes to write to the FLASH.
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
+void W25Q64::BufferWrite(byte *pBuffer, uint addr, ushort NumByteToWrite)
 {
     byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
-    Addr = WriteAddr % this->PageSize;
+    Addr = addr % this->PageSize;
     count = this->PageSize - Addr;
     NumOfPage = NumByteToWrite / this->PageSize;
     NumOfSingle = NumByteToWrite % this->PageSize;
 
     if (Addr == 0)
-     /* WriteAddr is this->PageSize aligned  */
+     /* addr is this->PageSize aligned  */
     {
         if (NumOfPage == 0)
          /* NumByteToWrite < this->PageSize */
         {
-            this->PageWrite(pBuffer, WriteAddr, NumByteToWrite);
+            this->PageWrite(pBuffer, addr, NumByteToWrite);
         }
         else
          /* NumByteToWrite > this->PageSize */
         {
             while (NumOfPage--)
             {
-                this->PageWrite(pBuffer, WriteAddr, this->PageSize);
-                WriteAddr += this->PageSize;
+                this->PageWrite(pBuffer, addr, this->PageSize);
+                addr += this->PageSize;
                 pBuffer += this->PageSize;
             }
 
-            this->PageWrite(pBuffer, WriteAddr, NumOfSingle);
+            this->PageWrite(pBuffer, addr, NumOfSingle);
         }
     }
     else
-     /* WriteAddr is not this->PageSize aligned  */
+     /* addr is not this->PageSize aligned  */
     {
         if (NumOfPage == 0)
          /* NumByteToWrite < this->PageSize */
         {
             if (NumOfSingle > count)
-             /* (NumByteToWrite + WriteAddr) > this->PageSize */
+             /* (NumByteToWrite + addr) > this->PageSize */
             {
                 temp = NumOfSingle - count;
 
-                PageWrite(pBuffer, WriteAddr, count);
-                WriteAddr += count;
+                PageWrite(pBuffer, addr, count);
+                addr += count;
                 pBuffer += count;
 
-                this->PageWrite(pBuffer, WriteAddr, temp);
+                this->PageWrite(pBuffer, addr, temp);
             }
             else
             {
-                PageWrite(pBuffer, WriteAddr, NumByteToWrite);
+                PageWrite(pBuffer, addr, NumByteToWrite);
             }
         }
         else
@@ -351,20 +351,20 @@ void W25Q64::BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
             NumOfPage = NumByteToWrite / this->PageSize;
             NumOfSingle = NumByteToWrite % this->PageSize;
 
-            PageWrite(pBuffer, WriteAddr, count);
-            WriteAddr += count;
+            PageWrite(pBuffer, addr, count);
+            addr += count;
             pBuffer += count;
 
             while (NumOfPage--)
             {
-                this->PageWrite(pBuffer, WriteAddr, this->PageSize);
-                WriteAddr += this->PageSize;
+                this->PageWrite(pBuffer, addr, this->PageSize);
+                addr += this->PageSize;
                 pBuffer += this->PageSize;
             }
 
             if (NumOfSingle != 0)
             {
-                this->PageWrite(pBuffer, WriteAddr, NumOfSingle);
+                this->PageWrite(pBuffer, addr, NumOfSingle);
             }
         }
     }

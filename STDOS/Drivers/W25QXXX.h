@@ -37,7 +37,8 @@ public:
 
     // 写入一页
 	bool WritePage(uint addr, byte* buf, uint count);
-    // 读取一页
+    void PageWrite(byte* pBuffer, uint addr, ushort NumByteToWrite);
+	// 读取一页
 	bool ReadPage(uint addr, byte* buf, uint count);
     // 写入数据
 	bool Write(uint addr, byte* buf, uint count);
@@ -49,8 +50,7 @@ public:
 	void SectorErase(uint SectorAddr);//Erases the specified FLASH sector.
 	//Erases the entire FLASH.
 	void BulkErase(void);
-	void PageWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
-	void BufferWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
+	void BufferWrite(byte* pBuffer, uint addr, ushort NumByteToWrite);
 	void WakeUp(void);//唤醒
 	void PowerDown(void);//进入掉电模式
 	void BufferRead(byte* pBuffer, uint ReadAddr, ushort NumByteToRead);
