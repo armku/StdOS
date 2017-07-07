@@ -7,11 +7,6 @@
 
 void Spi::Init()
 {
-	
-}
-
-Spi::Spi()
-{
 	this->_clk.Invert=false;
 	this->_miso.Invert=false;
 	this->_mosi.Invert=false;
@@ -23,21 +18,29 @@ Spi::Spi()
 	this->_nss.OpenDrain=false;
 }
 
+Spi::Spi()
+{
+	this->Init();
+}
+
 // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
-//Spi::Spi(SPI spi, uint speedHz, bool useNss)
-//{
-//	
-//}
+Spi::Spi(SPI spi, uint speedHz, bool useNss)
+{
+	this->Init();
+	this->Init(spi,speedHz,useNss);
+}
 
-//Spi::~Spi()
-//{
-//	
-//}
+Spi::~Spi()
+{
+	debug_printf("Spi:Spi%d\r\n", _index + 1);
 
-//void Spi::Init(SPI spi, uint speedHz = 9000000, bool useNss = true)
-//{
-//	
-//}
+    this->Close();
+}
+
+void Spi::Init(SPI spi, uint speedHz, bool useNss)
+{
+	
+}
 
 void Spi::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
 {
@@ -62,16 +65,16 @@ void Spi::Open()
 {
 	
 }
-//void Spi::Close()
-//{
-//	
-//}
+void Spi::Close()
+{
+	
+}
 
 // 基础读写
-//byte Spi::Write(byte data)
-//{
-//	
-//}
+byte Spi::Write(byte data)
+{
+	
+}
 ushort Spi::Write16(ushort data)
 {
 	return 0;
@@ -202,11 +205,6 @@ int GetPre(int index, uint *speedHz)
     return pre;
 }
 
-void Spi::Init(SPI spi, uint speedHz, bool useNss){}
-// 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
-Spi::Spi(SPI spi, uint speedHz, bool useNss){
-
-}
 #if 0
     Spi::Spi(int spiIndex, uint speedHz, bool useNss)
     {
@@ -323,16 +321,10 @@ Spi::Spi(SPI spi, uint speedHz, bool useNss){
         Stop();
     }
 #endif 
-Spi::~Spi()
-{
-    debug_printf("Spi:Spi%d\r\n", _index + 1);
-
-    Close();
-}
-
+#if 0
 void Spi::Close()
 {
-    #if 0
+    
         Stop();
 
         SPI_Cmd(SPI, DISABLE);
@@ -346,13 +338,13 @@ void Spi::Close()
         this->pMosi->Set(P0);
         debug_printf("    NSS : ");
         this->pNss->Set(P0);
-    #endif 
+     
 }
-
-
+#endif
+ #if 0
 byte Spi::Write(byte data)
 {
-    #if 0
+   
         int retry = Retry;
         while (SPI_I2S_GetFlagStatus(SPI, SPI_I2S_FLAG_TXE) == RESET)
         {
@@ -380,10 +372,10 @@ byte Spi::Write(byte data)
         #else 
             return SPI_ReceiveData8(SPI); //返回通过SPIx最近接收的数据
         #endif 
-    #endif 
+    
     return 0;
 }
-
+#endif 
 #if 0
     ushort Spi::Write16(ushort data)
     {
