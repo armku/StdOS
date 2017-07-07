@@ -41,7 +41,7 @@ Spi::~Spi()
 void Spi::Init(SPI spi, uint speedHz, bool useNss)
 {
     this->_index = spi;
-    this->Speed = speedHz;	
+    this->Speed = speedHz;
     switch (this->_index)
     {
         case Spi1:
@@ -53,13 +53,13 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
             {
                 this->SetPin(PA5, PA6, PA7);
             }
-			this->_SPI=SPI1;
+            this->_SPI = SPI1;
             break;
         case Spi2:
-            this->_SPI=SPI2;
+            this->_SPI = SPI2;
             break;
         case Spi3:
-            this->_SPI=SPI3;
+            this->_SPI = SPI3;
             break;
         default:
             break;
@@ -101,34 +101,54 @@ void Spi::Close()
 // 基础读写
 byte Spi::Write(byte data)
 {
+    byte ret = 0;
     switch (this->_index)
     {
         case Spi1:
         case Spi2:
         case Spi3:
             /* Loop while DR register in not emplty */
-            while (SPI_I2S_GetFlagStatus((SPI_TypeDef *)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
+            while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
                 ;
 
             /* Send byte through the SPI1 peripheral */
-            SPI_I2S_SendData((SPI_TypeDef *)(this->_SPI), data);
+            SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
 
             /* Wait to receive a byte */
-            while (SPI_I2S_GetFlagStatus((SPI_TypeDef *)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
+            while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
                 ;
 
             /* Return the byte read from the SPI bus */
-            return SPI_I2S_ReceiveData((SPI_TypeDef *)(this->_SPI));
+            ret = SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
         default:
-			return 0;
             break;
     }
-
+    return ret;
 }
 
 ushort Spi::Write16(ushort data)
 {
-    return 0;
+    ushort ret = 0;
+    switch (this->_index)
+    {
+        case Spi1:
+        case Spi2:
+        case Spi3:
+            /* Loop while DR register in not emplty */
+            while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
+                ;
+            /* Send Half Word through the SPI1 peripheral */
+            SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
+            /* Wait to receive a Half Word */
+            while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
+                ;
+            /* Return the Half Word read from the SPI bus */
+            ret = SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
+            break;
+        default:
+            break;
+    }
+    return ret;
 }
 
 // 批量读写。以字节数组长度为准
@@ -206,12 +226,12 @@ void Spi::OnInit()
         default:
             break;
     }
-	switch (this->_index)
+    switch (this->_index)
     {
         case Spi1:
         case Spi2:
         case Spi3:
-            SPI_Init((SPI_TypeDef *)(this->_SPI), &SPI_InitStructure);
+            SPI_Init((SPI_TypeDef*)(this->_SPI), &SPI_InitStructure);
             break;
         default:
             break;
@@ -225,7 +245,7 @@ void Spi::OnOpen()
         case Spi1:
         case Spi2:
         case Spi3:
-            SPI_Cmd((SPI_TypeDef *)(this->_SPI), ENABLE);
+            SPI_Cmd((SPI_TypeDef*)(this->_SPI), ENABLE);
             break;
         default:
             break;
@@ -239,7 +259,7 @@ void Spi::OnClose()
         case Spi1:
         case Spi2:
         case Spi3:
-            SPI_Cmd((SPI_TypeDef *)(this->_SPI), DISABLE);
+            SPI_Cmd((SPI_TypeDef*)(this->_SPI), DISABLE);
             break;
         default:
             break;

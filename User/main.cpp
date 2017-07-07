@@ -69,9 +69,6 @@ void SPI_FLASH_StartReadSequence(u32 ReadAddr);
 void SPI_Flash_PowerDown(void);
 void SPI_Flash_WAKEUP(void);
 
-
-byte SPI_FLASH_ReadByte(void);
-ushort SPI_FLASH_SendHalfWord(u16 HalfWord);
 void SPI_FLASH_WriteEnable(void);
 void SPI_FLASH_WaitForWriteEnd(void);
 
@@ -450,43 +447,6 @@ void SPI_FLASH_StartReadSequence(u32 ReadAddr)
   spi.Write((ReadAddr& 0xFF00) >> 8);
   /* Send ReadAddr low nibble address byte */
   spi.Write(ReadAddr & 0xFF);
-}
-
-/*******************************************************************************
-* Function Name  : SPI_FLASH_ReadByte
-* Description    : Reads a byte from the SPI Flash.
-*                  This function must be used only if the Start_Read_Sequence
-*                  function has been previously called.
-* Input          : None
-* Output         : None
-* Return         : Byte Read from the SPI Flash.
-*******************************************************************************/
-byte SPI_FLASH_ReadByte(void)
-{
-  return (spi.Write(Dummy_Byte));
-}
-
-/*******************************************************************************
-* Function Name  : SPI_FLASH_SendHalfWord
-* Description    : Sends a Half Word through the SPI interface and return the
-*                  Half Word received from the SPI bus.
-* Input          : Half Word : Half Word to send.
-* Output         : None
-* Return         : The value of the received Half Word.
-*******************************************************************************/
-ushort SPI_FLASH_SendHalfWord(ushort HalfWord)
-{
-  /* Loop while DR register in not emplty */
-  while (SPI_I2S_GetFlagStatus(SPI1 , SPI_I2S_FLAG_TXE) == RESET);
-
-  /* Send Half Word through the SPI1 peripheral */
-  SPI_I2S_SendData(SPI1 , HalfWord);
-
-  /* Wait to receive a Half Word */
-  while (SPI_I2S_GetFlagStatus(SPI1 , SPI_I2S_FLAG_RXNE) == RESET);
-
-  /* Return the Half Word read from the SPI bus */
-  return SPI_I2S_ReceiveData(SPI1 );
 }
 
 /*******************************************************************************
