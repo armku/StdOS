@@ -16,6 +16,11 @@ Spi::Spi()
 	this->_miso.Invert=false;
 	this->_mosi.Invert=false;
 	this->_nss.Invert=false;	
+	
+	this->_clk.OpenDrain=false;
+	this->_miso.OpenDrain=false;
+	this->_mosi.OpenDrain=false;
+	this->_nss.OpenDrain=false;
 }
 
 // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
