@@ -17,6 +17,10 @@ private:
 
     // 读取编号
 	uint ReadID();
+	void WaitForWriteEnd(void);
+	void WriteEnable(void);
+	void StartReadSequence(uint ReadAddr);
+	
 public:
     uint ID;            // 芯片ID
 	uint DeviceID;		// 设备ID
@@ -43,15 +47,12 @@ public:
 
 	uint ReadDeviceID(void);//Reads FLASH identification.
 	void SectorErase(uint SectorAddr);//Erases the specified FLASH sector.
-	void WaitForWriteEnd(void);
-	void WriteEnable(void);
 	//Erases the entire FLASH.
 	void BulkErase(void);
 	void PageWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
 	void BufferWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
 	void WakeUp(void);//唤醒
 	void PowerDown(void);//进入掉电模式
-	void StartReadSequence(uint ReadAddr);
 	void BufferRead(byte* pBuffer, uint ReadAddr, ushort NumByteToRead);
 };
 
