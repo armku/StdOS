@@ -26,7 +26,6 @@
 
 #define WIP_Flag                  0x01  /* Write In Progress (WIP) flag */
 
-#define Dummy_Byte                0xFF
 // ÉèÖÃ²Ù×÷µØÖ·
 void W25Q64::SetAddr(uint addr)
 {
@@ -51,13 +50,13 @@ uint W25Q64::ReadID()
   this->_spi->Write(W25X_JedecDeviceID);
 
   /* Read a byte from the FLASH */
-  Temp0 = this->_spi->Write(Dummy_Byte);
+  Temp0 = this->_spi->Write(0xFF);
 
   /* Read a byte from the FLASH */
-  Temp1 = this->_spi->Write(Dummy_Byte);
+  Temp1 = this->_spi->Write(0xFF);
 
   /* Read a byte from the FLASH */
-  Temp2 = this->_spi->Write(Dummy_Byte);
+  Temp2 = this->_spi->Write(0xFF);
 
   /* Deselect the FLASH: Chip Select high */
   this->_spi->Stop();
@@ -190,7 +189,7 @@ void W25Q64::SPI_FLASH_WaitForWriteEnd(void)
   {
     /* Send a dummy byte to generate the clock needed by the FLASH
     and put the value of the status register in FLASH_Status variable */
-    FLASH_Status = this->_spi->Write(Dummy_Byte);	 
+    FLASH_Status = this->_spi->Write(0xFF);	 
   }
   while ((FLASH_Status & WIP_Flag) == SET); /* Write in progress */
 
@@ -422,7 +421,7 @@ void W25Q64::SPI_FLASH_BufferRead(byte* pBuffer, uint ReadAddr, ushort NumByteTo
   while (NumByteToRead--) /* while there is data to be read */
   {
     /* Read a byte from the FLASH */
-    *pBuffer = this->_spi->Write(Dummy_Byte);
+    *pBuffer = this->_spi->Write(0xFF);
     /* Point to the next location where the byte read will be saved */
     pBuffer++;
   }
