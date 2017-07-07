@@ -42,22 +42,27 @@ bool W25Q64::WaitForEnd()
 // 读取编号
 uint W25Q64::ReadID()
 {
-	uint Temp = 0;
+	uint Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
 
   /* Select the FLASH: Chip Select low */
   this->_spi->Start();
 
   /* Send "RDID " instruction */
-  this->_spi->Write(W25X_DeviceID);
-  this->_spi->Write(0XFF);
-  this->_spi->Write(0XFF);
-  this->_spi->Write(0XFF);
-  
+  this->_spi->Write(W25X_JedecDeviceID);
+
   /* Read a byte from the FLASH */
-  Temp = this->_spi->Write(0XFF);
+  Temp0 = this->_spi->Write(Dummy_Byte);
+
+  /* Read a byte from the FLASH */
+  Temp1 = this->_spi->Write(Dummy_Byte);
+
+  /* Read a byte from the FLASH */
+  Temp2 = this->_spi->Write(Dummy_Byte);
 
   /* Deselect the FLASH: Chip Select high */
   this->_spi->Stop();
+
+  Temp = (Temp0 << 16) | (Temp1 << 8) | Temp2;
 
   return Temp;
 }
@@ -112,39 +117,24 @@ bool W25Q64::Read(uint addr, byte* buf, uint count)
 *******************************************************************************/
 uint W25Q64::SPI_FLASH_ReadDeviceID(void)
 {
-  return this->ReadID();
-}
-/*******************************************************************************
-* Function Name  : SPI_FLASH_ReadID
-* Description    : Reads FLASH identification.
-* Input          : None
-* Output         : None
-* Return         : FLASH identification
-*******************************************************************************/
-uint W25Q64::SPI_FLASH_ReadID(void)
-{
-  uint Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
+  uint Temp = 0;
 
   /* Select the FLASH: Chip Select low */
   this->_spi->Start();
 
   /* Send "RDID " instruction */
-  this->_spi->Write(W25X_JedecDeviceID);
-
+  this->_spi->Write(W25X_DeviceID);
+  this->_spi->Write(0XFF);
+  this->_spi->Write(0XFF);
+  this->_spi->Write(0XFF);
+  
   /* Read a byte from the FLASH */
-  Temp0 = this->_spi->Write(Dummy_Byte);
-
-  /* Read a byte from the FLASH */
-  Temp1 = this->_spi->Write(Dummy_Byte);
-
-  /* Read a byte from the FLASH */
-  Temp2 = this->_spi->Write(Dummy_Byte);
+  Temp = this->_spi->Write(0XFF);
 
   /* Deselect the FLASH: Chip Select high */
   this->_spi->Stop();
 
-  Temp = (Temp0 << 16) | (Temp1 << 8) | Temp2;
-
+	this->ID=this->ReadID();
   return Temp;
 }
 
@@ -574,25 +564,20 @@ TestStatus Buffercmp(byte* pBuffer1, byte* pBuffer2, ushort BufferLength)
 
 void W25Q64Test()
 {
-	__IO uint DeviceID = 0;
-	__IO uint FlashID = 0;
 	__IO TestStatus TransferStatus1 = FAILED;
 	
 	printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
 	
 	spi.Open();
 	/* Get SPI Flash Device ID */
-	DeviceID = w25q64.SPI_FLASH_ReadDeviceID();
+	w25q64.DeviceID = w25q64.SPI_FLASH_ReadDeviceID();
 	
 	Sys.Delay(10);
 	
-	/* Get SPI Flash ID */
-	FlashID = w25q64.SPI_FLASH_ReadID();
-	
-	printf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", FlashID, DeviceID);
+	printf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", w25q64.ID, w25q64.DeviceID);
 	
 	/* Check the SPI Flash ID */
-	if (FlashID == sFLASH_ID)  /* #define  sFLASH_ID  0XEF4017 */
+	if (w25q64.ID == sFLASH_ID)  /* #define  sFLASH_ID  0XEF4017 */
 	{	
 		printf("\r\n 检测到华邦串行flash W25Q64 !\r\n");
 		

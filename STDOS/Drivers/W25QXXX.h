@@ -19,6 +19,7 @@ private:
 	uint ReadID();
 public:
     uint ID;            // 芯片ID
+	uint DeviceID;		// 设备ID
     ushort PageSize;    // 页大小
     ushort Retry;       // 等待重试次数
 
@@ -41,7 +42,6 @@ public:
 
 
 	uint SPI_FLASH_ReadDeviceID(void);//Reads FLASH identification.
-	uint SPI_FLASH_ReadID(void);//Reads FLASH identification.
 	void SPI_FLASH_SectorErase(uint SectorAddr);//Erases the specified FLASH sector.
 	void SPI_FLASH_WaitForWriteEnd(void);
 	void SPI_FLASH_WriteEnable(void);
