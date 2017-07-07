@@ -41,17 +41,18 @@ public:
 	bool Read(uint addr, byte* buf, uint count);
 
 
-	uint SPI_FLASH_ReadDeviceID(void);//Reads FLASH identification.
-	void SPI_FLASH_SectorErase(uint SectorAddr);//Erases the specified FLASH sector.
-	void SPI_FLASH_WaitForWriteEnd(void);
-	void SPI_FLASH_WriteEnable(void);
-	void SPI_FLASH_BulkErase(void);
-	void SPI_FLASH_PageWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
-	void SPI_FLASH_BufferWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
-	void SPI_Flash_WAKEUP(void);//唤醒
-	void SPI_Flash_PowerDown(void);//进入掉电模式
-	void SPI_FLASH_StartReadSequence(uint ReadAddr);
-	void SPI_FLASH_BufferRead(byte* pBuffer, uint ReadAddr, ushort NumByteToRead);
+	uint ReadDeviceID(void);//Reads FLASH identification.
+	void SectorErase(uint SectorAddr);//Erases the specified FLASH sector.
+	void WaitForWriteEnd(void);
+	void WriteEnable(void);
+	//Erases the entire FLASH.
+	void BulkErase(void);
+	void PageWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
+	void BufferWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
+	void WakeUp(void);//唤醒
+	void PowerDown(void);//进入掉电模式
+	void StartReadSequence(uint ReadAddr);
+	void BufferRead(byte* pBuffer, uint ReadAddr, ushort NumByteToRead);
 };
 
 /*

@@ -103,7 +103,7 @@ bool W25Q64::Read(uint addr, byte *buf, uint count)
  * Output         : None
  * Return         : FLASH identification
  *******************************************************************************/
-uint W25Q64::SPI_FLASH_ReadDeviceID(void)
+uint W25Q64::ReadDeviceID(void)
 {
     uint Temp = 0;
 
@@ -127,17 +127,17 @@ uint W25Q64::SPI_FLASH_ReadDeviceID(void)
 }
 
 /*******************************************************************************
- * Function Name  : SPI_FLASH_SectorErase
+ * Function Name  : SectorErase
  * Description    : Erases the specified FLASH sector.
  * Input          : SectorAddr: address of the sector to erase.
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::SPI_FLASH_SectorErase(uint SectorAddr)
+void W25Q64::SectorErase(uint SectorAddr)
 {
     /* Send write enable instruction */
-    SPI_FLASH_WriteEnable();
-    SPI_FLASH_WaitForWriteEnd();
+    WriteEnable();
+    WaitForWriteEnd();
     /* Sector Erase */
     /* Select the FLASH: Chip Select low */
     this->_spi->Start();
@@ -152,11 +152,11 @@ void W25Q64::SPI_FLASH_SectorErase(uint SectorAddr)
     /* Deselect the FLASH: Chip Select high */
     this->_spi->Stop();
     /* Wait the end of Flash writing */
-    SPI_FLASH_WaitForWriteEnd();
+    WaitForWriteEnd();
 }
 
 /*******************************************************************************
- * Function Name  : SPI_FLASH_WaitForWriteEnd
+ * Function Name  : WaitForWriteEnd
  * Description    : Polls the status of the Write In Progress (WIP) flag in the
  *                  FLASH's status  register  and  loop  until write  opertaion
  *                  has completed.
@@ -164,7 +164,7 @@ void W25Q64::SPI_FLASH_SectorErase(uint SectorAddr)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::SPI_FLASH_WaitForWriteEnd(void)
+void W25Q64::WaitForWriteEnd(void)
 {
     byte FLASH_Status = 0;
 
@@ -188,13 +188,13 @@ void W25Q64::SPI_FLASH_WaitForWriteEnd(void)
 }
 
 /*******************************************************************************
- * Function Name  : SPI_FLASH_WriteEnable
+ * Function Name  : WriteEnable
  * Description    : Enables the write access to the FLASH.
  * Input          : None
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::SPI_FLASH_WriteEnable(void)
+void W25Q64::WriteEnable(void)
 {
     /* Select the FLASH: Chip Select low */
     this->_spi->Start();
@@ -207,16 +207,16 @@ void W25Q64::SPI_FLASH_WriteEnable(void)
 }
 
 /*******************************************************************************
- * Function Name  : SPI_FLASH_BulkErase
+ * Function Name  : BulkErase
  * Description    : Erases the entire FLASH.
  * Input          : None
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::SPI_FLASH_BulkErase(void)
+void W25Q64::BulkErase(void)
 {
     /* Send write enable instruction */
-    SPI_FLASH_WriteEnable();
+    WriteEnable();
 
     /* Bulk Erase */
     /* Select the FLASH: Chip Select low */
@@ -227,11 +227,11 @@ void W25Q64::SPI_FLASH_BulkErase(void)
     this->_spi->Stop();
 
     /* Wait the end of Flash writing */
-    SPI_FLASH_WaitForWriteEnd();
+    WaitForWriteEnd();
 }
 
 /*******************************************************************************
- * Function Name  : SPI_FLASH_PageWrite
+ * Function Name  : PageWrite
  * Description    : Writes more than one byte to the FLASH with a single WRITE
  *                  cycle(Page WRITE sequence). The number of byte can't exceed
  *                  the FLASH page size.
@@ -243,10 +243,10 @@ void W25Q64::SPI_FLASH_BulkErase(void)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::SPI_FLASH_PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
+void W25Q64::PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
     /* Enable the write access to the FLASH */
-    SPI_FLASH_WriteEnable();
+    WriteEnable();
 
     /* Select the FLASH: Chip Select low */
     this->_spi->Start();
@@ -262,7 +262,7 @@ void W25Q64::SPI_FLASH_PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteTo
     if (NumByteToWrite > this->PageSize)
     {
         NumByteToWrite = this->PageSize;
-        //printf("\n\r Err: SPI_FLASH_PageWrite too large!");
+        //printf("\n\r Err: this->PageWrite too large!");
     }
 
     /* while there is data to be written on the FLASH */
@@ -278,11 +278,11 @@ void W25Q64::SPI_FLASH_PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteTo
     this->_spi->Stop();
 
     /* Wait the end of Flash writing */
-    SPI_FLASH_WaitForWriteEnd();
+    WaitForWriteEnd();
 }
 
 /*******************************************************************************
- * Function Name  : SPI_FLASH_BufferWrite
+ * Function Name  : BufferWrite
  * Description    : Writes block of data to the FLASH. In this function, the
  *                  number of WRITE cycles are reduced, using Page WRITE sequence.
  * Input          : - pBuffer : pointer to the buffer  containing the data to be
@@ -292,7 +292,7 @@ void W25Q64::SPI_FLASH_PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteTo
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::SPI_FLASH_BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
+void W25Q64::BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
     byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
@@ -307,19 +307,19 @@ void W25Q64::SPI_FLASH_BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByte
         if (NumOfPage == 0)
          /* NumByteToWrite < this->PageSize */
         {
-            SPI_FLASH_PageWrite(pBuffer, WriteAddr, NumByteToWrite);
+            this->PageWrite(pBuffer, WriteAddr, NumByteToWrite);
         }
         else
          /* NumByteToWrite > this->PageSize */
         {
             while (NumOfPage--)
             {
-                SPI_FLASH_PageWrite(pBuffer, WriteAddr, this->PageSize);
+                this->PageWrite(pBuffer, WriteAddr, this->PageSize);
                 WriteAddr += this->PageSize;
                 pBuffer += this->PageSize;
             }
 
-            SPI_FLASH_PageWrite(pBuffer, WriteAddr, NumOfSingle);
+            this->PageWrite(pBuffer, WriteAddr, NumOfSingle);
         }
     }
     else
@@ -333,15 +333,15 @@ void W25Q64::SPI_FLASH_BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByte
             {
                 temp = NumOfSingle - count;
 
-                SPI_FLASH_PageWrite(pBuffer, WriteAddr, count);
+                PageWrite(pBuffer, WriteAddr, count);
                 WriteAddr += count;
                 pBuffer += count;
 
-                SPI_FLASH_PageWrite(pBuffer, WriteAddr, temp);
+                this->PageWrite(pBuffer, WriteAddr, temp);
             }
             else
             {
-                SPI_FLASH_PageWrite(pBuffer, WriteAddr, NumByteToWrite);
+                PageWrite(pBuffer, WriteAddr, NumByteToWrite);
             }
         }
         else
@@ -351,27 +351,27 @@ void W25Q64::SPI_FLASH_BufferWrite(byte *pBuffer, uint WriteAddr, ushort NumByte
             NumOfPage = NumByteToWrite / this->PageSize;
             NumOfSingle = NumByteToWrite % this->PageSize;
 
-            SPI_FLASH_PageWrite(pBuffer, WriteAddr, count);
+            PageWrite(pBuffer, WriteAddr, count);
             WriteAddr += count;
             pBuffer += count;
 
             while (NumOfPage--)
             {
-                SPI_FLASH_PageWrite(pBuffer, WriteAddr, this->PageSize);
+                this->PageWrite(pBuffer, WriteAddr, this->PageSize);
                 WriteAddr += this->PageSize;
                 pBuffer += this->PageSize;
             }
 
             if (NumOfSingle != 0)
             {
-                SPI_FLASH_PageWrite(pBuffer, WriteAddr, NumOfSingle);
+                this->PageWrite(pBuffer, WriteAddr, NumOfSingle);
             }
         }
     }
 }
 
 //进入掉电模式
-void W25Q64::SPI_Flash_PowerDown(void)
+void W25Q64::PowerDown(void)
 {
     /* Select the FLASH: Chip Select low */
     this->_spi->Start();
@@ -384,7 +384,7 @@ void W25Q64::SPI_Flash_PowerDown(void)
 }
 
 //唤醒
-void W25Q64::SPI_Flash_WAKEUP(void)
+void W25Q64::WakeUp(void)
 {
     /* Select the FLASH: Chip Select low */
     this->_spi->Start();
@@ -397,7 +397,7 @@ void W25Q64::SPI_Flash_WAKEUP(void)
 }
 
 /*******************************************************************************
- * Function Name  : SPI_FLASH_BufferRead
+ * Function Name  : BufferRead
  * Description    : Reads a block of data from the FLASH.
  * Input          : - pBuffer : pointer to the buffer that receives the data read
  *                    from the FLASH.
@@ -406,7 +406,7 @@ void W25Q64::SPI_Flash_WAKEUP(void)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::SPI_FLASH_BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
+void W25Q64::BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
 {
     /* Select the FLASH: Chip Select low */
     this->_spi->Start();
@@ -437,7 +437,7 @@ void W25Q64::SPI_FLASH_BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteTo
 
 
 /*******************************************************************************
- * Function Name  : SPI_FLASH_StartReadSequence
+ * Function Name  : StartReadSequence
  * Description    : Initiates a read data byte (READ) sequence from the Flash.
  *                  This is done by driving the /CS line low to select the device,
  *                  then the READ instruction is transmitted followed by 3 bytes
@@ -448,7 +448,7 @@ void W25Q64::SPI_FLASH_BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteTo
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::SPI_FLASH_StartReadSequence(uint ReadAddr)
+void W25Q64::StartReadSequence(uint ReadAddr)
 {
     /* Select the FLASH: Chip Select low */
     this->_spi->Start();
@@ -467,56 +467,6 @@ void W25Q64::SPI_FLASH_StartReadSequence(uint ReadAddr)
 
 Spi spi(Spi1);
 W25Q64 w25q64(&spi);
-
-
-//void SPI_FLASH_BufferWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite)
-//{
-//  byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, i;
-//	uint CurrentAddr;
-
-//	
-//	CurrentAddr = WriteAddr;
-//	
-//  Addr = WriteAddr % this->PageSize;
-//  count = this->PageSize - Addr;
-//	
-//	NumOfPage = ( NumByteToWrite - count ) / this->PageSize;
-//	NumOfSingle = ( NumByteToWrite - count ) % this->PageSize;
-//	
-
-//	if ( count )
-//	{
-//		SPI_FLASH_PageWrite ( pBuffer, CurrentAddr, count );
-//		
-//		CurrentAddr += count;
-//		pBuffer += count;
-//		
-//	}
-//	
-//	for ( i = 0; i < NumOfPage; i ++ )
-//	{
-//		SPI_FLASH_PageWrite ( pBuffer, CurrentAddr, this->PageSize );
-//		
-//		CurrentAddr += this->PageSize;
-//		pBuffer += this->PageSize;
-//		
-//	}
-//	
-//	if ( NumOfSingle )
-//		SPI_FLASH_PageWrite ( pBuffer, CurrentAddr, NumOfSingle );
-
-//}
-
-
-
-
-
-
-
-
-
-
-
 
 typedef enum
 {
@@ -576,7 +526,7 @@ void W25Q64Test()
 
     spi.Open();
     /* Get SPI Flash Device ID */
-    w25q64.DeviceID = w25q64.SPI_FLASH_ReadDeviceID();
+    w25q64.DeviceID = w25q64.ReadDeviceID();
 
     Sys.Delay(10);
 
@@ -588,16 +538,16 @@ void W25Q64Test()
     {
         printf("\r\n 检测到华邦串行flash W25Q64 !\r\n");
 
-        /* Erase SPI FLASH Sector to write on */
-        w25q64.SPI_FLASH_SectorErase(FLASH_SectorToErase);
+        /* Erase FLASH Sector to write on */
+        w25q64.SectorErase(FLASH_SectorToErase);
 
         /* 将发送缓冲区的数据写到flash中 */
-        w25q64.SPI_FLASH_BufferWrite(Tx_Buffer, FLASH_WriteAddress, BufferSize);
-        w25q64.SPI_FLASH_BufferWrite(Tx_Buffer, 252, BufferSize);
+        w25q64.BufferWrite(Tx_Buffer, FLASH_WriteAddress, BufferSize);
+        w25q64.BufferWrite(Tx_Buffer, 252, BufferSize);
         printf("\r\n 写入的数据为：%s \r\t", Tx_Buffer);
 
         /* 将刚刚写入的数据读出来放到接收缓冲区中 */
-        w25q64.SPI_FLASH_BufferRead(Rx_Buffer, FLASH_ReadAddress, BufferSize);
+        w25q64.BufferRead(Rx_Buffer, FLASH_ReadAddress, BufferSize);
         printf("\r\n 读出的数据为：%s \r\n", Rx_Buffer);
 
         /* 检查写入的数据与读出的数据是否相等 */
@@ -617,6 +567,6 @@ void W25Q64Test()
         printf("\r\n 获取不到 W25Q64 ID!\n\r");
     }
 
-    w25q64.SPI_Flash_PowerDown();
+    w25q64.PowerDown();
     printf("\r\n\n\r");
 }
