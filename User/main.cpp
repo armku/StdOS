@@ -627,8 +627,7 @@ __IO uint32_t DeviceID = 0;
 __IO uint32_t FlashID = 0;
 __IO TestStatus TransferStatus1 = FAILED;
 
-// 函数原型声明
-void Delay(__IO uint32_t nCount);
+
 TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
 
 
@@ -640,7 +639,7 @@ void W25Q64Test()
 	/* Get SPI Flash Device ID */
 	DeviceID = SPI_FLASH_ReadDeviceID();
 	
-	Delay( 200 );
+	Sys.Delay(10);
 	
 	/* Get SPI Flash ID */
 	FlashID = SPI_FLASH_ReadID();
@@ -707,9 +706,4 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
     pBuffer2++;
   }
   return PASSED;
-}
-
-void Delay(__IO uint32_t nCount)
-{
-  for(; nCount != 0; nCount--);
 }
