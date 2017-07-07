@@ -54,7 +54,7 @@ int main(void)
 
 
 
-
+Spi spi;
 
 
 

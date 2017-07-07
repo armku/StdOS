@@ -36,11 +36,22 @@ Spi::Spi()
 
 void Spi::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
 {
+	this->_nss.Set(nss);
+	this->_clk.Set(clk);
+	this->_miso.Set(miso);
+	this->_mosi.Set(mosi);
 	
+	this->Pins[0]=nss;
+	this->Pins[1]=clk;
+	this->Pins[2]=miso;
+	this->Pins[3]=mosi;
 }
 void Spi::GetPin(Pin* clk, Pin* miso, Pin* mosi, Pin* nss)
 {
-	
+//	nss=&this->Pins[0];
+//	clk=&this->Pins[1];
+//	miso=&this->Pins[2];
+//	mosi=&this->Pins[3];
 }
 void Spi::Open()
 {
