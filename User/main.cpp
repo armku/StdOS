@@ -58,14 +58,14 @@ Spi spi(Spi1);
 
 #include "stm32f10x.h"
 
-void SPI_FLASH_SectorErase(u32 SectorAddr);
+void SPI_FLASH_SectorErase(uint SectorAddr);
 void SPI_FLASH_BulkErase(void);
-void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite);
-void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite);
-void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, u16 NumByteToRead);
+void SPI_FLASH_PageWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
+void SPI_FLASH_BufferWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
+void SPI_FLASH_BufferRead(byte* pBuffer, uint ReadAddr, ushort NumByteToRead);
 uint SPI_FLASH_ReadID(void);
 uint SPI_FLASH_ReadDeviceID(void);
-void SPI_FLASH_StartReadSequence(u32 ReadAddr);
+void SPI_FLASH_StartReadSequence(uint ReadAddr);
 void SPI_Flash_PowerDown(void);
 void SPI_Flash_WAKEUP(void);
 
@@ -106,7 +106,7 @@ void SPI_FLASH_WaitForWriteEnd(void);
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI_FLASH_SectorErase(u32 SectorAddr)
+void SPI_FLASH_SectorErase(uint SectorAddr)
 {
   /* Send write enable instruction */
   SPI_FLASH_WriteEnable();
@@ -165,7 +165,7 @@ void SPI_FLASH_BulkErase(void)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
+void SPI_FLASH_PageWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
   /* Enable the write access to the FLASH */
   SPI_FLASH_WriteEnable();
@@ -214,9 +214,9 @@ void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
+void SPI_FLASH_BufferWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
-  u8 NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
+  byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
   Addr = WriteAddr % SPI_FLASH_PageSize;
   count = SPI_FLASH_PageSize - Addr;
@@ -284,10 +284,10 @@ void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
     }
   }
 }
-//void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
+//void SPI_FLASH_BufferWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite)
 //{
-//  u8 NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, i;
-//	u32 CurrentAddr;
+//  byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, i;
+//	uint CurrentAddr;
 
 //	
 //	CurrentAddr = WriteAddr;
@@ -332,7 +332,7 @@ void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, u16 NumByteToRead)
+void SPI_FLASH_BufferRead(byte* pBuffer, uint ReadAddr, ushort NumByteToRead)
 {
   /* Select the FLASH: Chip Select low */
   spi.Start();
@@ -368,7 +368,7 @@ void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, u16 NumByteToRead)
 *******************************************************************************/
 uint SPI_FLASH_ReadID(void)
 {
-  u32 Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
+  uint Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
 
   /* Select the FLASH: Chip Select low */
   spi.Start();
@@ -432,7 +432,7 @@ uint SPI_FLASH_ReadDeviceID(void)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI_FLASH_StartReadSequence(u32 ReadAddr)
+void SPI_FLASH_StartReadSequence(uint ReadAddr)
 {
   /* Select the FLASH: Chip Select low */
   spi.Start();
