@@ -41,6 +41,7 @@ public:
 
 
 	uint SPI_FLASH_ReadDeviceID(void);//Reads FLASH identification.
+	uint SPI_FLASH_ReadID(void);//Reads FLASH identification.
 };
 
 /*

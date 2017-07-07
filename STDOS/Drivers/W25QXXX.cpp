@@ -114,6 +114,44 @@ uint W25Q64::SPI_FLASH_ReadDeviceID(void)
 
   return Temp;
 }
+/*******************************************************************************
+* Function Name  : SPI_FLASH_ReadID
+* Description    : Reads FLASH identification.
+* Input          : None
+* Output         : None
+* Return         : FLASH identification
+*******************************************************************************/
+uint W25Q64::SPI_FLASH_ReadID(void)
+{
+  uint Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
+
+  /* Select the FLASH: Chip Select low */
+  this->_spi->Start();
+
+  /* Send "RDID " instruction */
+  this->_spi->Write(W25X_JedecDeviceID);
+
+  /* Read a byte from the FLASH */
+  Temp0 = this->_spi->Write(Dummy_Byte);
+
+  /* Read a byte from the FLASH */
+  Temp1 = this->_spi->Write(Dummy_Byte);
+
+  /* Read a byte from the FLASH */
+  Temp2 = this->_spi->Write(Dummy_Byte);
+
+  /* Deselect the FLASH: Chip Select high */
+  this->_spi->Stop();
+
+  Temp = (Temp0 << 16) | (Temp1 << 8) | Temp2;
+
+  return Temp;
+}
+
+
+
+
+
 
 
 
@@ -125,7 +163,6 @@ void SPI_FLASH_BulkErase(void);
 void SPI_FLASH_PageWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
 void SPI_FLASH_BufferWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
 void SPI_FLASH_BufferRead(byte* pBuffer, uint ReadAddr, ushort NumByteToRead);
-uint SPI_FLASH_ReadID(void);
 void SPI_FLASH_StartReadSequence(uint ReadAddr);
 void SPI_Flash_PowerDown(void);
 void SPI_Flash_WAKEUP(void);
@@ -395,39 +432,7 @@ void SPI_FLASH_BufferRead(byte* pBuffer, uint ReadAddr, ushort NumByteToRead)
   spi.Stop();
 }
 
-/*******************************************************************************
-* Function Name  : SPI_FLASH_ReadID
-* Description    : Reads FLASH identification.
-* Input          : None
-* Output         : None
-* Return         : FLASH identification
-*******************************************************************************/
-uint SPI_FLASH_ReadID(void)
-{
-  uint Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
 
-  /* Select the FLASH: Chip Select low */
-  spi.Start();
-
-  /* Send "RDID " instruction */
-  spi.Write(W25X_JedecDeviceID);
-
-  /* Read a byte from the FLASH */
-  Temp0 = spi.Write(Dummy_Byte);
-
-  /* Read a byte from the FLASH */
-  Temp1 = spi.Write(Dummy_Byte);
-
-  /* Read a byte from the FLASH */
-  Temp2 = spi.Write(Dummy_Byte);
-
-  /* Deselect the FLASH: Chip Select high */
-  spi.Stop();
-
-  Temp = (Temp0 << 16) | (Temp1 << 8) | Temp2;
-
-  return Temp;
-}
 
 /*******************************************************************************
 * Function Name  : SPI_FLASH_StartReadSequence
@@ -601,7 +606,7 @@ void W25Q64Test()
 	Sys.Delay(10);
 	
 	/* Get SPI Flash ID */
-	FlashID = SPI_FLASH_ReadID();
+	FlashID = w25q64.SPI_FLASH_ReadID();
 	
 	printf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", FlashID, DeviceID);
 	
