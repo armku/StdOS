@@ -21,6 +21,7 @@ void Spi::Init()
 Spi::Spi()
 {
 	this->Init();
+	this->_index=0xff;
 }
 
 // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
@@ -60,6 +61,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
 		default:
 			break;
 	}
+	this->OnInit();
 }
 
 void Spi::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
@@ -126,7 +128,17 @@ int Spi::GetPre(int index, uint& speedHz)
 }
 void Spi::OnInit()
 {
-
+	switch(this->_index)
+	{
+		case Spi1:
+			break;
+		case Spi2:
+			break;
+		case Spi3:
+			break;
+		default:
+			break;
+	}
 }
 void Spi::OnOpen()
 {
