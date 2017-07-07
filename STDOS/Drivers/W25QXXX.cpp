@@ -1,6 +1,108 @@
 #include "W25QXXX.h"
 #include "stm32f10x.h"
 
+
+// 设置操作地址
+void W25Q64::SetAddr(uint addr)
+{
+	
+}
+// 等待操作完成
+bool W25Q64::WaitForEnd()
+{
+	
+	return true;
+}
+
+// 读取编号
+uint W25Q64::ReadID()
+{
+	return 0;
+}
+
+W25Q64::W25Q64(Spi* spi)
+{
+	
+}
+W25Q64::~W25Q64()
+{
+	
+}
+
+// 擦除扇区
+bool W25Q64::Erase(uint sector)
+{
+	return true;
+}
+// 擦除页
+bool W25Q64::ErasePage(uint pageAddr)
+{
+	return true;
+}
+
+// 写入一页
+bool W25Q64::WritePage(uint addr, byte* buf, uint count)
+{
+	return true;
+}
+// 读取一页
+bool W25Q64::ReadPage(uint addr, byte* buf, uint count)
+{
+	return true;
+}
+// 写入数据
+bool W25Q64::Write(uint addr, byte* buf, uint count)
+{
+	return true;
+}
+// 读取数据
+bool W25Q64::Read(uint addr, byte* buf, uint count)
+{
+	return true;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Private typedef -----------------------------------------------------------*/
 //#define SPI_FLASH_PageSize      4096
 #define SPI_FLASH_PageSize      256
