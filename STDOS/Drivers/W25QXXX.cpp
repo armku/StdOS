@@ -84,17 +84,7 @@ bool W25Q64::ReadPage(uint addr, byte *buf, uint count)
     return true;
 }
 
-// 写入数据
-bool W25Q64::Write(uint addr, byte *buf, uint count)
-{
-    return true;
-}
 
-// 读取数据
-bool W25Q64::Read(uint addr, byte *buf, uint count)
-{
-    return true;
-}
 
 /*******************************************************************************
  * Function Name  : SPI_FLASH_ReadID
@@ -282,7 +272,7 @@ void W25Q64::PageWrite(byte *pBuffer, uint addr, uint NumByteToWrite)
 }
 
 /*******************************************************************************
- * Function Name  : BufferWrite
+ * Function Name  : Write
  * Description    : Writes block of data to the FLASH. In this function, the
  *                  number of WRITE cycles are reduced, using Page WRITE sequence.
  * Input          : - pBuffer : pointer to the buffer  containing the data to be
@@ -292,8 +282,9 @@ void W25Q64::PageWrite(byte *pBuffer, uint addr, uint NumByteToWrite)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::BufferWrite(byte *pBuffer, uint addr, uint NumByteToWrite)
-{
+// 写入数据
+bool W25Q64::Write(uint addr, byte *pBuffer, uint NumByteToWrite)
+{	
     byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
     Addr = addr % this->PageSize;
@@ -368,6 +359,7 @@ void W25Q64::BufferWrite(byte *pBuffer, uint addr, uint NumByteToWrite)
             }
         }
     }
+	return true;
 }
 
 //进入掉电模式
@@ -397,7 +389,7 @@ void W25Q64::WakeUp(void)
 }
 
 /*******************************************************************************
- * Function Name  : BufferRead
+ * Function Name  : Read
  * Description    : Reads a block of data from the FLASH.
  * Input          : - pBuffer : pointer to the buffer that receives the data read
  *                    from the FLASH.
@@ -406,8 +398,9 @@ void W25Q64::WakeUp(void)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::BufferRead(byte *pBuffer, uint ReadAddr, uint NumByteToRead)
-{
+// 读取数据
+bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
+{	
     /* Select the FLASH: Chip Select low */
     this->_spi->Start();
 
@@ -432,6 +425,7 @@ void W25Q64::BufferRead(byte *pBuffer, uint ReadAddr, uint NumByteToRead)
 
     /* Deselect the FLASH: Chip Select high */
     this->_spi->Stop();
+	return true;
 }
 
 
@@ -542,12 +536,12 @@ void W25Q64Test()
         w25q64.SectorErase(FLASH_SectorToErase);
 
         /* 将发送缓冲区的数据写到flash中 */
-        w25q64.BufferWrite(Tx_Buffer, FLASH_WriteAddress, BufferSize);
-        w25q64.BufferWrite(Tx_Buffer, 252, BufferSize);
+        w25q64.Write(FLASH_WriteAddress,Tx_Buffer,  BufferSize);
+        w25q64.Write( 252,Tx_Buffer, BufferSize);
         printf("\r\n 写入的数据为：%s \r\t", Tx_Buffer);
 
         /* 将刚刚写入的数据读出来放到接收缓冲区中 */
-        w25q64.BufferRead(Rx_Buffer, FLASH_ReadAddress, BufferSize);
+        w25q64.Read(FLASH_ReadAddress,Rx_Buffer,  BufferSize);
         printf("\r\n 读出的数据为：%s \r\n", Rx_Buffer);
 
         /* 检查写入的数据与读出的数据是否相等 */
