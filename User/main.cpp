@@ -54,7 +54,7 @@ int main(void)
 
 
 
-Spi spi;
+Spi spi(Spi1);
 
 
 
@@ -125,7 +125,7 @@ void SPI_FLASH_Init(void)
   SPI_InitTypeDef  SPI_InitStructure;
 //  GPIO_InitTypeDef GPIO_InitStructure;
 	
-  spi.SetPin(PA5,PA6,PA7,PA4);
+  //spi.SetPin(PA5,PA6,PA7,PA4);
 
   /* Enable SPI1 and GPIO clocks */
   /*!< SPI_FLASH_SPI_CS_GPIO, SPI_FLASH_SPI_MOSI_GPIO, 

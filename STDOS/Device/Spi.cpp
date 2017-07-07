@@ -39,7 +39,27 @@ Spi::~Spi()
 
 void Spi::Init(SPI spi, uint speedHz, bool useNss)
 {
-	
+	this->_index=spi;
+	this->Speed=speedHz;
+	switch(spi)
+	{
+		case Spi1:
+			if(useNss)
+			{
+				this->SetPin(PA5,PA6,PA7,PA4);
+			}
+			else
+			{
+				this->SetPin(PA5,PA6,PA7);
+			}
+			break;
+		case Spi2:
+			break;
+		case Spi3:
+			break;
+		default:
+			break;
+	}
 }
 
 void Spi::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
