@@ -42,7 +42,24 @@ bool W25Q64::WaitForEnd()
 // 读取编号
 uint W25Q64::ReadID()
 {
-	return 0;
+	uint Temp = 0;
+
+  /* Select the FLASH: Chip Select low */
+  this->_spi->Start();
+
+  /* Send "RDID " instruction */
+  this->_spi->Write(W25X_DeviceID);
+  this->_spi->Write(0XFF);
+  this->_spi->Write(0XFF);
+  this->_spi->Write(0XFF);
+  
+  /* Read a byte from the FLASH */
+  Temp = this->_spi->Write(0XFF);
+
+  /* Deselect the FLASH: Chip Select high */
+  this->_spi->Stop();
+
+  return Temp;
 }
 
 W25Q64::W25Q64(Spi* spi)
@@ -95,24 +112,7 @@ bool W25Q64::Read(uint addr, byte* buf, uint count)
 *******************************************************************************/
 uint W25Q64::SPI_FLASH_ReadDeviceID(void)
 {
-  uint Temp = 0;
-
-  /* Select the FLASH: Chip Select low */
-  this->_spi->Start();
-
-  /* Send "RDID " instruction */
-  this->_spi->Write(W25X_DeviceID);
-  this->_spi->Write(0XFF);
-  this->_spi->Write(0XFF);
-  this->_spi->Write(0XFF);
-  
-  /* Read a byte from the FLASH */
-  Temp = this->_spi->Write(0XFF);
-
-  /* Deselect the FLASH: Chip Select high */
-  this->_spi->Stop();
-
-  return Temp;
+  return this->ReadID();
 }
 /*******************************************************************************
 * Function Name  : SPI_FLASH_ReadID
@@ -546,11 +546,6 @@ typedef enum { FAILED = 0, PASSED = !FAILED} TestStatus;
 byte Tx_Buffer[] = " 感谢您选用野火stm32开发板\r\n                http://firestm32.taobao.com";
 byte Rx_Buffer[BufferSize];
 
-__IO uint DeviceID = 0;
-__IO uint FlashID = 0;
-__IO TestStatus TransferStatus1 = FAILED;
-
-
 /*
  * 函数名：Buffercmp
  * 描述  ：比较两个缓冲区中的数据是否相等
@@ -579,6 +574,10 @@ TestStatus Buffercmp(byte* pBuffer1, byte* pBuffer2, ushort BufferLength)
 
 void W25Q64Test()
 {
+	__IO uint DeviceID = 0;
+	__IO uint FlashID = 0;
+	__IO TestStatus TransferStatus1 = FAILED;
+	
 	printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
 	
 	spi.Open();
