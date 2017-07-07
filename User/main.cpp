@@ -72,16 +72,16 @@ void SPI_FLASH_BulkErase(void);
 void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite);
 void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite);
 void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, u16 NumByteToRead);
-u32 SPI_FLASH_ReadID(void);
-u32 SPI_FLASH_ReadDeviceID(void);
+uint SPI_FLASH_ReadID(void);
+uint SPI_FLASH_ReadDeviceID(void);
 void SPI_FLASH_StartReadSequence(u32 ReadAddr);
 void SPI_Flash_PowerDown(void);
 void SPI_Flash_WAKEUP(void);
 
 
-u8 SPI_FLASH_ReadByte(void);
-u8 SPI_FLASH_SendByte(u8 byte);
-u16 SPI_FLASH_SendHalfWord(u16 HalfWord);
+byte SPI_FLASH_ReadByte(void);
+byte SPI_FLASH_SendByte(u8 byte);
+ushort SPI_FLASH_SendHalfWord(u16 HalfWord);
 void SPI_FLASH_WriteEnable(void);
 void SPI_FLASH_WaitForWriteEnd(void);
 
@@ -379,7 +379,7 @@ void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, u16 NumByteToRead)
 * Output         : None
 * Return         : FLASH identification
 *******************************************************************************/
-u32 SPI_FLASH_ReadID(void)
+uint SPI_FLASH_ReadID(void)
 {
   u32 Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
 
@@ -412,9 +412,9 @@ u32 SPI_FLASH_ReadID(void)
 * Output         : None
 * Return         : FLASH identification
 *******************************************************************************/
-u32 SPI_FLASH_ReadDeviceID(void)
+uint SPI_FLASH_ReadDeviceID(void)
 {
-  u32 Temp = 0;
+  uint Temp = 0;
 
   /* Select the FLASH: Chip Select low */
   macSPI_FLASH_CS_ENABLE();
@@ -471,7 +471,7 @@ void SPI_FLASH_StartReadSequence(u32 ReadAddr)
 * Output         : None
 * Return         : Byte Read from the SPI Flash.
 *******************************************************************************/
-u8 SPI_FLASH_ReadByte(void)
+byte SPI_FLASH_ReadByte(void)
 {
   return (SPI_FLASH_SendByte(Dummy_Byte));
 }
@@ -484,7 +484,7 @@ u8 SPI_FLASH_ReadByte(void)
 * Output         : None
 * Return         : The value of the received byte.
 *******************************************************************************/
-u8 SPI_FLASH_SendByte(u8 byte)
+byte SPI_FLASH_SendByte(u8 byte)
 {
   /* Loop while DR register in not emplty */
   while (SPI_I2S_GetFlagStatus(SPI1 , SPI_I2S_FLAG_TXE) == RESET);
@@ -507,7 +507,7 @@ u8 SPI_FLASH_SendByte(u8 byte)
 * Output         : None
 * Return         : The value of the received Half Word.
 *******************************************************************************/
-u16 SPI_FLASH_SendHalfWord(u16 HalfWord)
+ushort SPI_FLASH_SendHalfWord(ushort HalfWord)
 {
   /* Loop while DR register in not emplty */
   while (SPI_I2S_GetFlagStatus(SPI1 , SPI_I2S_FLAG_TXE) == RESET);
@@ -552,7 +552,7 @@ void SPI_FLASH_WriteEnable(void)
 *******************************************************************************/
 void SPI_FLASH_WaitForWriteEnd(void)
 {
-  u8 FLASH_Status = 0;
+  byte FLASH_Status = 0;
 
   /* Select the FLASH: Chip Select low */
   macSPI_FLASH_CS_ENABLE();
@@ -620,15 +620,38 @@ typedef enum { FAILED = 0, PASSED = !FAILED} TestStatus;
      
 
 /* 发送缓冲区初始化 */
-uint8_t Tx_Buffer[] = " 感谢您选用野火stm32开发板\r\n                http://firestm32.taobao.com";
-uint8_t Rx_Buffer[BufferSize];
+byte Tx_Buffer[] = " 感谢您选用野火stm32开发板\r\n                http://firestm32.taobao.com";
+byte Rx_Buffer[BufferSize];
 
-__IO uint32_t DeviceID = 0;
-__IO uint32_t FlashID = 0;
+__IO uint DeviceID = 0;
+__IO uint FlashID = 0;
 __IO TestStatus TransferStatus1 = FAILED;
 
 
-TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
+/*
+ * 函数名：Buffercmp
+ * 描述  ：比较两个缓冲区中的数据是否相等
+ * 输入  ：-pBuffer1     src缓冲区指针
+ *         -pBuffer2     dst缓冲区指针
+ *         -BufferLength 缓冲区长度
+ * 输出  ：无
+ * 返回  ：-PASSED pBuffer1 等于   pBuffer2
+ *         -FAILED pBuffer1 不同于 pBuffer2
+ */
+TestStatus Buffercmp(byte* pBuffer1, byte* pBuffer2, ushort BufferLength)
+{
+  while(BufferLength--)
+  {
+    if(*pBuffer1 != *pBuffer2)
+    {
+      return FAILED;
+    }
+
+    pBuffer1++;
+    pBuffer2++;
+  }
+  return PASSED;
+}
 
 
 void W25Q64Test()
@@ -682,28 +705,4 @@ void W25Q64Test()
 	
 	SPI_Flash_PowerDown();  
 	printf("\r\n\n\r");
-}
-/*
- * 函数名：Buffercmp
- * 描述  ：比较两个缓冲区中的数据是否相等
- * 输入  ：-pBuffer1     src缓冲区指针
- *         -pBuffer2     dst缓冲区指针
- *         -BufferLength 缓冲区长度
- * 输出  ：无
- * 返回  ：-PASSED pBuffer1 等于   pBuffer2
- *         -FAILED pBuffer1 不同于 pBuffer2
- */
-TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength)
-{
-  while(BufferLength--)
-  {
-    if(*pBuffer1 != *pBuffer2)
-    {
-      return FAILED;
-    }
-
-    pBuffer1++;
-    pBuffer2++;
-  }
-  return PASSED;
 }
