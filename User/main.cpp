@@ -635,7 +635,8 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
 void W25Q64Test()
 {
 	printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
-		
+	
+	spi.Open();
 	/* Get SPI Flash Device ID */
 	DeviceID = SPI_FLASH_ReadDeviceID();
 	

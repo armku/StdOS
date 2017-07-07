@@ -141,8 +141,10 @@ void Spi::OnInit()
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
             break;
         case Spi2:
+			RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
             break;
         case Spi3:
+			RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
             break;
         default:
             break;
@@ -165,23 +167,52 @@ void Spi::OnInit()
         case Spi1:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
             SPI_Init(SPI1, &SPI_InitStructure);
-            /* Enable SPI1  */
-            SPI_Cmd(SPI1, ENABLE);
             break;
         case Spi2:
+            RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
+            SPI_Init(SPI2, &SPI_InitStructure);
             break;
         case Spi3:
+            RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
+            SPI_Init(SPI3, &SPI_InitStructure);
             break;
         default:
             break;
     }
 }
 
-void Spi::OnOpen(){
-
+void Spi::OnOpen()
+{
+	switch (this->_index)
+    {
+        case Spi1:
+            SPI_Cmd(SPI1, ENABLE);
+            break;
+        case Spi2:
+            SPI_Cmd(SPI2, ENABLE);
+            break;
+        case Spi3:
+            SPI_Cmd(SPI3, ENABLE);
+            break;
+        default:
+            break;
+    }
 }
 void Spi::OnClose(){
-
+	switch (this->_index)
+    {
+        case Spi1:
+            SPI_Cmd(SPI1, DISABLE);
+            break;
+        case Spi2:
+            SPI_Cmd(SPI2, DISABLE);
+            break;
+        case Spi3:
+            SPI_Cmd(SPI3, DISABLE);
+            break;
+        default:
+            break;
+    }
 }
 
 
