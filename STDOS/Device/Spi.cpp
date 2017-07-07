@@ -41,7 +41,7 @@ Spi::~Spi()
 void Spi::Init(SPI spi, uint speedHz, bool useNss)
 {
     this->_index = spi;
-    this->Speed = speedHz;
+    this->Speed = speedHz;	
     switch (this->_index)
     {
         case Spi1:
@@ -53,10 +53,13 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
             {
                 this->SetPin(PA5, PA6, PA7);
             }
+			this->_SPI=SPI1;
             break;
         case Spi2:
+            this->_SPI=SPI2;
             break;
         case Spi3:
+            this->_SPI=SPI3;
             break;
         default:
             break;
@@ -101,51 +104,23 @@ byte Spi::Write(byte data)
     switch (this->_index)
     {
         case Spi1:
-            /* Loop while DR register in not emplty */
-            while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET)
-                ;
-
-            /* Send byte through the SPI1 peripheral */
-            SPI_I2S_SendData(SPI1, data);
-
-            /* Wait to receive a byte */
-            while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET)
-                ;
-
-            /* Return the byte read from the SPI bus */
-            return SPI_I2S_ReceiveData(SPI1);
-            break;
         case Spi2:
-            /* Loop while DR register in not emplty */
-            while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_TXE) == RESET)
-                ;
-
-            /* Send byte through the SPI1 peripheral */
-            SPI_I2S_SendData(SPI2, data);
-
-            /* Wait to receive a byte */
-            while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_RXNE) == RESET)
-                ;
-
-            /* Return the byte read from the SPI bus */
-            return SPI_I2S_ReceiveData(SPI2);
-            break;
         case Spi3:
             /* Loop while DR register in not emplty */
-            while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_TXE) == RESET)
+            while (SPI_I2S_GetFlagStatus((SPI_TypeDef *)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
                 ;
 
             /* Send byte through the SPI1 peripheral */
-            SPI_I2S_SendData(SPI3, data);
+            SPI_I2S_SendData((SPI_TypeDef *)(this->_SPI), data);
 
             /* Wait to receive a byte */
-            while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_RXNE) == RESET)
+            while (SPI_I2S_GetFlagStatus((SPI_TypeDef *)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
                 ;
 
             /* Return the byte read from the SPI bus */
-            return SPI_I2S_ReceiveData(SPI3);
-            break;
+            return SPI_I2S_ReceiveData((SPI_TypeDef *)(this->_SPI));
         default:
+			return 0;
             break;
     }
 
@@ -221,15 +196,22 @@ void Spi::OnInit()
     {
         case Spi1:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
-            SPI_Init(SPI1, &SPI_InitStructure);
             break;
         case Spi2:
             RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
-            SPI_Init(SPI2, &SPI_InitStructure);
             break;
         case Spi3:
             RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
-            SPI_Init(SPI3, &SPI_InitStructure);
+            break;
+        default:
+            break;
+    }
+	switch (this->_index)
+    {
+        case Spi1:
+        case Spi2:
+        case Spi3:
+            SPI_Init((SPI_TypeDef *)(this->_SPI), &SPI_InitStructure);
             break;
         default:
             break;
@@ -241,13 +223,9 @@ void Spi::OnOpen()
     switch (this->_index)
     {
         case Spi1:
-            SPI_Cmd(SPI1, ENABLE);
-            break;
         case Spi2:
-            SPI_Cmd(SPI2, ENABLE);
-            break;
         case Spi3:
-            SPI_Cmd(SPI3, ENABLE);
+            SPI_Cmd((SPI_TypeDef *)(this->_SPI), ENABLE);
             break;
         default:
             break;
@@ -259,13 +237,9 @@ void Spi::OnClose()
     switch (this->_index)
     {
         case Spi1:
-            SPI_Cmd(SPI1, DISABLE);
-            break;
         case Spi2:
-            SPI_Cmd(SPI2, DISABLE);
-            break;
         case Spi3:
-            SPI_Cmd(SPI3, DISABLE);
+            SPI_Cmd((SPI_TypeDef *)(this->_SPI), DISABLE);
             break;
         default:
             break;
