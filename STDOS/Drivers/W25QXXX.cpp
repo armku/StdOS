@@ -3,7 +3,6 @@
 
 /* Private typedef -----------------------------------------------------------*/
 #define SPI_FLASH_PageSize      256
-#define SPI_FLASH_PerWritePageSize      256
 
 /* Private define ------------------------------------------------------------*/
 #define W25X_WriteEnable		      0x06 
@@ -263,9 +262,9 @@ void W25Q64::SPI_FLASH_PageWrite(byte *pBuffer, uint WriteAddr, ushort NumByteTo
     /* Send WriteAddr low nibble address byte to write to */
     this->_spi->Write(WriteAddr &0xFF);
 
-    if (NumByteToWrite > SPI_FLASH_PerWritePageSize)
+    if (NumByteToWrite > this->PageSize)
     {
-        NumByteToWrite = SPI_FLASH_PerWritePageSize;
+        NumByteToWrite = this->PageSize;
         //printf("\n\r Err: SPI_FLASH_PageWrite too large!");
     }
 
