@@ -1,7 +1,32 @@
 #include "W25QXXX.h"
 #include "stm32f10x.h"
 
+/* Private typedef -----------------------------------------------------------*/
+//#define SPI_FLASH_PageSize      4096
+#define SPI_FLASH_PageSize      256
+#define SPI_FLASH_PerWritePageSize      256
 
+/* Private define ------------------------------------------------------------*/
+#define W25X_WriteEnable		      0x06 
+#define W25X_WriteDisable		      0x04 
+#define W25X_ReadStatusReg		    0x05 
+#define W25X_WriteStatusReg		    0x01 
+#define W25X_ReadData			        0x03 
+#define W25X_FastReadData		      0x0B 
+#define W25X_FastReadDual		      0x3B 
+#define W25X_PageProgram		      0x02 
+#define W25X_BlockErase			      0xD8 
+#define W25X_SectorErase		      0x20 
+#define W25X_ChipErase			      0xC7 
+#define W25X_PowerDown			      0xB9 
+#define W25X_ReleasePowerDown	    0xAB 
+#define W25X_DeviceID			        0xAB 
+#define W25X_ManufactDeviceID   	0x90 
+#define W25X_JedecDeviceID		    0x9F 
+
+#define WIP_Flag                  0x01  /* Write In Progress (WIP) flag */
+
+#define Dummy_Byte                0xFF
 // ÉèÖÃ²Ù×÷µØÖ·
 void W25Q64::SetAddr(uint addr)
 {
@@ -22,7 +47,7 @@ uint W25Q64::ReadID()
 
 W25Q64::W25Q64(Spi* spi)
 {
-	
+	this->_spi=spi;
 }
 W25Q64::~W25Q64()
 {
@@ -61,7 +86,34 @@ bool W25Q64::Read(uint addr, byte* buf, uint count)
 	return true;
 }
 
+/*******************************************************************************
+* Function Name  : SPI_FLASH_ReadID
+* Description    : Reads FLASH identification.
+* Input          : None
+* Output         : None
+* Return         : FLASH identification
+*******************************************************************************/
+uint W25Q64::SPI_FLASH_ReadDeviceID(void)
+{
+  uint Temp = 0;
 
+  /* Select the FLASH: Chip Select low */
+  this->_spi->Start();
+
+  /* Send "RDID " instruction */
+  this->_spi->Write(W25X_DeviceID);
+  this->_spi->Write(0XFF);
+  this->_spi->Write(0XFF);
+  this->_spi->Write(0XFF);
+  
+  /* Read a byte from the FLASH */
+  Temp = this->_spi->Write(0XFF);
+
+  /* Deselect the FLASH: Chip Select high */
+  this->_spi->Stop();
+
+  return Temp;
+}
 
 
 
@@ -76,7 +128,6 @@ void SPI_FLASH_PageWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
 void SPI_FLASH_BufferWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
 void SPI_FLASH_BufferRead(byte* pBuffer, uint ReadAddr, ushort NumByteToRead);
 uint SPI_FLASH_ReadID(void);
-uint SPI_FLASH_ReadDeviceID(void);
 void SPI_FLASH_StartReadSequence(uint ReadAddr);
 void SPI_Flash_PowerDown(void);
 void SPI_Flash_WAKEUP(void);
@@ -84,32 +135,7 @@ void SPI_Flash_WAKEUP(void);
 void SPI_FLASH_WriteEnable(void);
 void SPI_FLASH_WaitForWriteEnd(void);
 
-/* Private typedef -----------------------------------------------------------*/
-//#define SPI_FLASH_PageSize      4096
-#define SPI_FLASH_PageSize      256
-#define SPI_FLASH_PerWritePageSize      256
 
-/* Private define ------------------------------------------------------------*/
-#define W25X_WriteEnable		      0x06 
-#define W25X_WriteDisable		      0x04 
-#define W25X_ReadStatusReg		    0x05 
-#define W25X_WriteStatusReg		    0x01 
-#define W25X_ReadData			        0x03 
-#define W25X_FastReadData		      0x0B 
-#define W25X_FastReadDual		      0x3B 
-#define W25X_PageProgram		      0x02 
-#define W25X_BlockErase			      0xD8 
-#define W25X_SectorErase		      0x20 
-#define W25X_ChipErase			      0xC7 
-#define W25X_PowerDown			      0xB9 
-#define W25X_ReleasePowerDown	    0xAB 
-#define W25X_DeviceID			        0xAB 
-#define W25X_ManufactDeviceID   	0x90 
-#define W25X_JedecDeviceID		    0x9F 
-
-#define WIP_Flag                  0x01  /* Write In Progress (WIP) flag */
-
-#define Dummy_Byte                0xFF
 
 /*******************************************************************************
 * Function Name  : SPI_FLASH_SectorErase
@@ -404,34 +430,7 @@ uint SPI_FLASH_ReadID(void)
 
   return Temp;
 }
-/*******************************************************************************
-* Function Name  : SPI_FLASH_ReadID
-* Description    : Reads FLASH identification.
-* Input          : None
-* Output         : None
-* Return         : FLASH identification
-*******************************************************************************/
-uint SPI_FLASH_ReadDeviceID(void)
-{
-  uint Temp = 0;
 
-  /* Select the FLASH: Chip Select low */
-  spi.Start();
-
-  /* Send "RDID " instruction */
-  spi.Write(W25X_DeviceID);
-  spi.Write(Dummy_Byte);
-  spi.Write(Dummy_Byte);
-  spi.Write(Dummy_Byte);
-  
-  /* Read a byte from the FLASH */
-  Temp = spi.Write(Dummy_Byte);
-
-  /* Deselect the FLASH: Chip Select high */
-  spi.Stop();
-
-  return Temp;
-}
 /*******************************************************************************
 * Function Name  : SPI_FLASH_StartReadSequence
 * Description    : Initiates a read data byte (READ) sequence from the Flash.
@@ -599,7 +598,7 @@ void W25Q64Test()
 	
 	spi.Open();
 	/* Get SPI Flash Device ID */
-	DeviceID = SPI_FLASH_ReadDeviceID();
+	DeviceID = w25q64.SPI_FLASH_ReadDeviceID();
 	
 	Sys.Delay(10);
 	
@@ -682,33 +681,6 @@ void W25Q64Test()
 
 
 
-
-/* Private typedef -----------------------------------------------------------*/
-//#define SPI_FLASH_PageSize      4096
-#define SPI_FLASH_PageSize      256
-#define SPI_FLASH_PerWritePageSize      256
-
-/* Private define ------------------------------------------------------------*/
-#define W25X_WriteEnable		      0x06 
-#define W25X_WriteDisable		      0x04 
-#define W25X_ReadStatusReg		    0x05 
-#define W25X_WriteStatusReg		    0x01 
-#define W25X_ReadData			        0x03 
-#define W25X_FastReadData		      0x0B 
-#define W25X_FastReadDual		      0x3B 
-#define W25X_PageProgram		      0x02 
-#define W25X_BlockErase			      0xD8 
-#define W25X_SectorErase		      0x20 
-#define W25X_ChipErase			      0xC7 
-#define W25X_PowerDown			      0xB9 
-#define W25X_ReleasePowerDown	    0xAB 
-#define W25X_DeviceID			        0xAB 
-#define W25X_ManufactDeviceID   	0x90 
-#define W25X_JedecDeviceID		    0x9F 
-
-#define WIP_Flag                  0x01  /* Write In Progress (WIP) flag */
-
-#define Dummy_Byte                0xFF
 
 W25QXXX::W25QXXX(Spi *spi, Pin pincs)
 {

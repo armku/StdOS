@@ -38,6 +38,9 @@ public:
 	bool Write(uint addr, byte* buf, uint count);
     // ¶ÁÈ¡Êý¾Ý
 	bool Read(uint addr, byte* buf, uint count);
+
+
+	uint SPI_FLASH_ReadDeviceID(void);//Reads FLASH identification.
 };
 
 /*
