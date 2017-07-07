@@ -243,7 +243,7 @@ void W25Q64::BulkErase(void)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::PageWrite(byte *pBuffer, uint addr, ushort NumByteToWrite)
+void W25Q64::PageWrite(byte *pBuffer, uint addr, uint NumByteToWrite)
 {
     /* Enable the write access to the FLASH */
     WriteEnable();
@@ -292,7 +292,7 @@ void W25Q64::PageWrite(byte *pBuffer, uint addr, ushort NumByteToWrite)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::BufferWrite(byte *pBuffer, uint addr, ushort NumByteToWrite)
+void W25Q64::BufferWrite(byte *pBuffer, uint addr, uint NumByteToWrite)
 {
     byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
@@ -406,7 +406,7 @@ void W25Q64::WakeUp(void)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::BufferRead(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
+void W25Q64::BufferRead(byte *pBuffer, uint ReadAddr, uint NumByteToRead)
 {
     /* Select the FLASH: Chip Select low */
     this->_spi->Start();
