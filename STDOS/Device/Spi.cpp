@@ -42,7 +42,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
 {
     this->_index = spi;
     this->Speed = speedHz;
-    switch (spi)
+    switch (this->_index)
     {
         case Spi1:
             if (useNss)
@@ -87,17 +87,70 @@ void Spi::GetPin(Pin *clk, Pin *miso, Pin *mosi, Pin *nss)
 
 void Spi::Open()
 {
-	this->OnOpen();
+    this->OnOpen();
 }
+
 void Spi::Close()
 {
-	this->OnClose();
+    this->OnClose();
 }
 
 // 基础读写
-byte Spi::Write(byte data){
+byte Spi::Write(byte data)
+{
+    switch (this->_index)
+    {
+        case Spi1:
+            /* Loop while DR register in not emplty */
+            while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET)
+                ;
+
+            /* Send byte through the SPI1 peripheral */
+            SPI_I2S_SendData(SPI1, data);
+
+            /* Wait to receive a byte */
+            while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET)
+                ;
+
+            /* Return the byte read from the SPI bus */
+            return SPI_I2S_ReceiveData(SPI1);
+            break;
+        case Spi2:
+            /* Loop while DR register in not emplty */
+            while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_TXE) == RESET)
+                ;
+
+            /* Send byte through the SPI1 peripheral */
+            SPI_I2S_SendData(SPI2, data);
+
+            /* Wait to receive a byte */
+            while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_RXNE) == RESET)
+                ;
+
+            /* Return the byte read from the SPI bus */
+            return SPI_I2S_ReceiveData(SPI2);
+            break;
+        case Spi3:
+            /* Loop while DR register in not emplty */
+            while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_TXE) == RESET)
+                ;
+
+            /* Send byte through the SPI1 peripheral */
+            SPI_I2S_SendData(SPI3, data);
+
+            /* Wait to receive a byte */
+            while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_RXNE) == RESET)
+                ;
+
+            /* Return the byte read from the SPI bus */
+            return SPI_I2S_ReceiveData(SPI3);
+            break;
+        default:
+            break;
+    }
 
 }
+
 ushort Spi::Write16(ushort data)
 {
     return 0;
@@ -114,19 +167,21 @@ void Spi::Read(Buffer &bs){
 // 拉低NSS，开始传输
 void Spi::Start()
 {
-	if(this->Pins[0]!=P0)
-	{
-		this->_nss=0;
-	}
+    if (this->Pins[0] != P0)
+    {
+        this->_nss = 0;
+    }
 }
+
 // 拉高NSS，停止传输
 void Spi::Stop()
 {
-	if(this->Pins[0]!=P0)
-	{
-		this->_nss=1;
-	}
+    if (this->Pins[0] != P0)
+    {
+        this->_nss = 1;
+    }
 }
+
 int Spi::GetPre(int index, uint &speedHz)
 {
     return 0;
@@ -141,10 +196,10 @@ void Spi::OnInit()
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
             break;
         case Spi2:
-			RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
+            RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
             break;
         case Spi3:
-			RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
+            RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
             break;
         default:
             break;
@@ -183,7 +238,7 @@ void Spi::OnInit()
 
 void Spi::OnOpen()
 {
-	switch (this->_index)
+    switch (this->_index)
     {
         case Spi1:
             SPI_Cmd(SPI1, ENABLE);
@@ -198,8 +253,10 @@ void Spi::OnOpen()
             break;
     }
 }
-void Spi::OnClose(){
-	switch (this->_index)
+
+void Spi::OnClose()
+{
+    switch (this->_index)
     {
         case Spi1:
             SPI_Cmd(SPI1, DISABLE);
