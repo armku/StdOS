@@ -7,145 +7,180 @@
 
 void Spi::Init()
 {
-	this->_clk.Invert=false;
-	this->_miso.Invert=false;
-	this->_mosi.Invert=false;
-	this->_nss.Invert=false;	
-	
-	this->_clk.OpenDrain=false;
-	this->_miso.OpenDrain=false;
-	this->_mosi.OpenDrain=false;
-	this->_nss.OpenDrain=false;
+    this->_clk.Invert = false;
+    this->_miso.Invert = false;
+    this->_mosi.Invert = false;
+    this->_nss.Invert = false;
+
+    this->_clk.OpenDrain = false;
+    this->_miso.OpenDrain = false;
+    this->_mosi.OpenDrain = false;
+    this->_nss.OpenDrain = false;
 }
 
 Spi::Spi()
 {
-	this->Init();
-	this->_index=0xff;
+    this->Init();
+    this->_index = 0xff;
 }
 
 // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
 Spi::Spi(SPI spi, uint speedHz, bool useNss)
 {
-	this->Init();
-	this->Init(spi,speedHz,useNss);
+    this->Init();
+    this->Init(spi, speedHz, useNss);
 }
 
 Spi::~Spi()
 {
-	debug_printf("Spi:Spi%d\r\n", _index + 1);
+    debug_printf("Spi:Spi%d\r\n", _index + 1);
 
     this->Close();
 }
 
 void Spi::Init(SPI spi, uint speedHz, bool useNss)
 {
-	this->_index=spi;
-	this->Speed=speedHz;
-	switch(spi)
-	{
-		case Spi1:
-			if(useNss)
-			{
-				this->SetPin(PA5,PA6,PA7,PA4);
-			}
-			else
-			{
-				this->SetPin(PA5,PA6,PA7);
-			}
-			break;
-		case Spi2:
-			break;
-		case Spi3:
-			break;
-		default:
-			break;
-	}
-	this->OnInit();
+    this->_index = spi;
+    this->Speed = speedHz;
+    switch (spi)
+    {
+        case Spi1:
+            if (useNss)
+            {
+                this->SetPin(PA5, PA6, PA7, PA4);
+            }
+            else
+            {
+                this->SetPin(PA5, PA6, PA7);
+            }
+            break;
+        case Spi2:
+            break;
+        case Spi3:
+            break;
+        default:
+            break;
+    }
+    this->OnInit();
 }
 
 void Spi::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
 {
-	this->_nss.Set(nss);
-	this->_clk.Set(clk);
-	this->_miso.Set(miso);
-	this->_mosi.Set(mosi);
-	
-	this->Pins[0]=nss;
-	this->Pins[1]=clk;
-	this->Pins[2]=miso;
-	this->Pins[3]=mosi;
+    this->_nss.Set(nss);
+    this->_clk.Set(clk);
+    this->_miso.Set(miso);
+    this->_mosi.Set(mosi);
+
+    this->Pins[0] = nss;
+    this->Pins[1] = clk;
+    this->Pins[2] = miso;
+    this->Pins[3] = mosi;
 }
-void Spi::GetPin(Pin* clk, Pin* miso, Pin* mosi, Pin* nss)
+
+void Spi::GetPin(Pin *clk, Pin *miso, Pin *mosi, Pin *nss)
 {
-//	nss=&this->Pins[0];
-//	clk=&this->Pins[1];
-//	miso=&this->Pins[2];
-//	mosi=&this->Pins[3];
+    //	nss=&this->Pins[0];
+    //	clk=&this->Pins[1];
+    //	miso=&this->Pins[2];
+    //	mosi=&this->Pins[3];
 }
+
 void Spi::Open()
 {
-	
+	this->OnOpen();
 }
 void Spi::Close()
 {
-	
+	this->OnClose();
 }
 
 // 基础读写
-byte Spi::Write(byte data)
-{
-	
+byte Spi::Write(byte data){
+
 }
 ushort Spi::Write16(ushort data)
 {
-	return 0;
+    return 0;
 }
 
 // 批量读写。以字节数组长度为准
-void Spi::Write(const Buffer& bs)
-{
-	
+void Spi::Write(const Buffer &bs){
+
 }
-void Spi::Read(Buffer& bs)
-{
-	
+void Spi::Read(Buffer &bs){
+
 }
 
 // 拉低NSS，开始传输
 void Spi::Start()
 {
-	
+	if(this->Pins[0]!=P0)
+	{
+		this->_nss=0;
+	}
 }
 // 拉高NSS，停止传输
 void Spi::Stop()
 {
-	
-}	
-int Spi::GetPre(int index, uint& speedHz)
-{
-	return 0;
-}
-void Spi::OnInit()
-{
-	switch(this->_index)
+	if(this->Pins[0]!=P0)
 	{
-		case Spi1:
-			break;
-		case Spi2:
-			break;
-		case Spi3:
-			break;
-		default:
-			break;
+		this->_nss=1;
 	}
 }
-void Spi::OnOpen()
+int Spi::GetPre(int index, uint &speedHz)
 {
+    return 0;
+}
+
+void Spi::OnInit()
+{
+    SPI_InitTypeDef SPI_InitStructure;
+    switch (this->_index)
+    {
+        case Spi1:
+            RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
+            break;
+        case Spi2:
+            break;
+        case Spi3:
+            break;
+        default:
+            break;
+    }
+    this->Stop();
+    /* SPI1 configuration */
+    // W25X16: data input on the DIO pin is sampled on the rising edge of the CLK. 
+    // Data on the DO and DIO pins are clocked out on the falling edge of CLK.
+    SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+    SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
+    SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
+    SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
+    SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
+    SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+    SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
+    SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
+    SPI_InitStructure.SPI_CRCPolynomial = 7;
+    switch (this->_index)
+    {
+        case Spi1:
+            RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
+            SPI_Init(SPI1, &SPI_InitStructure);
+            /* Enable SPI1  */
+            SPI_Cmd(SPI1, ENABLE);
+            break;
+        case Spi2:
+            break;
+        case Spi3:
+            break;
+        default:
+            break;
+    }
+}
+
+void Spi::OnOpen(){
 
 }
-void Spi::OnClose()
-{
+void Spi::OnClose(){
 
 }
 
@@ -354,9 +389,9 @@ int GetPre(int index, uint *speedHz)
     }
 #endif 
 #if 0
-void Spi::Close()
-{
-    
+    void Spi::Close()
+    {
+
         Stop();
 
         SPI_Cmd(SPI, DISABLE);
@@ -370,13 +405,13 @@ void Spi::Close()
         this->pMosi->Set(P0);
         debug_printf("    NSS : ");
         this->pNss->Set(P0);
-     
-}
-#endif
- #if 0
-byte Spi::Write(byte data)
-{
-   
+
+    }
+#endif 
+#if 0
+    byte Spi::Write(byte data)
+    {
+
         int retry = Retry;
         while (SPI_I2S_GetFlagStatus(SPI, SPI_I2S_FLAG_TXE) == RESET)
         {
@@ -404,9 +439,9 @@ byte Spi::Write(byte data)
         #else 
             return SPI_ReceiveData8(SPI); //返回通过SPIx最近接收的数据
         #endif 
-    
-    return 0;
-}
+
+        return 0;
+    }
 #endif 
 #if 0
     ushort Spi::Write16(ushort data)
