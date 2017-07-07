@@ -71,7 +71,6 @@ void SPI_Flash_WAKEUP(void);
 
 
 byte SPI_FLASH_ReadByte(void);
-byte SPI_FLASH_SendByte(u8 byte);
 ushort SPI_FLASH_SendHalfWord(u16 HalfWord);
 void SPI_FLASH_WriteEnable(void);
 void SPI_FLASH_WaitForWriteEnd(void);
@@ -119,13 +118,13 @@ void SPI_FLASH_SectorErase(u32 SectorAddr)
   /* Select the FLASH: Chip Select low */
   spi.Start();
   /* Send Sector Erase instruction */
-  SPI_FLASH_SendByte(W25X_SectorErase);
+  spi.Write(W25X_SectorErase);
   /* Send SectorAddr high nibble address byte */
-  SPI_FLASH_SendByte((SectorAddr & 0xFF0000) >> 16);
+  spi.Write((SectorAddr & 0xFF0000) >> 16);
   /* Send SectorAddr medium nibble address byte */
-  SPI_FLASH_SendByte((SectorAddr & 0xFF00) >> 8);
+  spi.Write((SectorAddr & 0xFF00) >> 8);
   /* Send SectorAddr low nibble address byte */
-  SPI_FLASH_SendByte(SectorAddr & 0xFF);
+  spi.Write(SectorAddr & 0xFF);
   /* Deselect the FLASH: Chip Select high */
   spi.Stop();
   /* Wait the end of Flash writing */
@@ -148,7 +147,7 @@ void SPI_FLASH_BulkErase(void)
   /* Select the FLASH: Chip Select low */
   spi.Start();
   /* Send Bulk Erase instruction  */
-  SPI_FLASH_SendByte(W25X_ChipErase);
+  spi.Write(W25X_ChipErase);
   /* Deselect the FLASH: Chip Select high */
   spi.Stop();
 
@@ -177,13 +176,13 @@ void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
   /* Select the FLASH: Chip Select low */
   spi.Start();
   /* Send "Write to Memory " instruction */
-  SPI_FLASH_SendByte(W25X_PageProgram);
+  spi.Write(W25X_PageProgram);
   /* Send WriteAddr high nibble address byte to write to */
-  SPI_FLASH_SendByte((WriteAddr & 0xFF0000) >> 16);
+  spi.Write((WriteAddr & 0xFF0000) >> 16);
   /* Send WriteAddr medium nibble address byte to write to */
-  SPI_FLASH_SendByte((WriteAddr & 0xFF00) >> 8);
+  spi.Write((WriteAddr & 0xFF00) >> 8);
   /* Send WriteAddr low nibble address byte to write to */
-  SPI_FLASH_SendByte(WriteAddr & 0xFF);
+  spi.Write(WriteAddr & 0xFF);
 
   if(NumByteToWrite > SPI_FLASH_PerWritePageSize)
   {
@@ -195,7 +194,7 @@ void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
   while (NumByteToWrite--)
   {
     /* Send the current byte */
-    SPI_FLASH_SendByte(*pBuffer);
+    spi.Write(*pBuffer);
     /* Point on the next byte to be written */
     pBuffer++;
   }
@@ -342,19 +341,19 @@ void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, u16 NumByteToRead)
   spi.Start();
 
   /* Send "Read from Memory " instruction */
-  SPI_FLASH_SendByte(W25X_ReadData);
+  spi.Write(W25X_ReadData);
 
   /* Send ReadAddr high nibble address byte to read from */
-  SPI_FLASH_SendByte((ReadAddr & 0xFF0000) >> 16);
+  spi.Write((ReadAddr & 0xFF0000) >> 16);
   /* Send ReadAddr medium nibble address byte to read from */
-  SPI_FLASH_SendByte((ReadAddr& 0xFF00) >> 8);
+  spi.Write((ReadAddr& 0xFF00) >> 8);
   /* Send ReadAddr low nibble address byte to read from */
-  SPI_FLASH_SendByte(ReadAddr & 0xFF);
+  spi.Write(ReadAddr & 0xFF);
 
   while (NumByteToRead--) /* while there is data to be read */
   {
     /* Read a byte from the FLASH */
-    *pBuffer = SPI_FLASH_SendByte(Dummy_Byte);
+    *pBuffer = spi.Write(Dummy_Byte);
     /* Point to the next location where the byte read will be saved */
     pBuffer++;
   }
@@ -378,16 +377,16 @@ uint SPI_FLASH_ReadID(void)
   spi.Start();
 
   /* Send "RDID " instruction */
-  SPI_FLASH_SendByte(W25X_JedecDeviceID);
+  spi.Write(W25X_JedecDeviceID);
 
   /* Read a byte from the FLASH */
-  Temp0 = SPI_FLASH_SendByte(Dummy_Byte);
+  Temp0 = spi.Write(Dummy_Byte);
 
   /* Read a byte from the FLASH */
-  Temp1 = SPI_FLASH_SendByte(Dummy_Byte);
+  Temp1 = spi.Write(Dummy_Byte);
 
   /* Read a byte from the FLASH */
-  Temp2 = SPI_FLASH_SendByte(Dummy_Byte);
+  Temp2 = spi.Write(Dummy_Byte);
 
   /* Deselect the FLASH: Chip Select high */
   spi.Stop();
@@ -411,13 +410,13 @@ uint SPI_FLASH_ReadDeviceID(void)
   spi.Start();
 
   /* Send "RDID " instruction */
-  SPI_FLASH_SendByte(W25X_DeviceID);
-  SPI_FLASH_SendByte(Dummy_Byte);
-  SPI_FLASH_SendByte(Dummy_Byte);
-  SPI_FLASH_SendByte(Dummy_Byte);
+  spi.Write(W25X_DeviceID);
+  spi.Write(Dummy_Byte);
+  spi.Write(Dummy_Byte);
+  spi.Write(Dummy_Byte);
   
   /* Read a byte from the FLASH */
-  Temp = SPI_FLASH_SendByte(Dummy_Byte);
+  Temp = spi.Write(Dummy_Byte);
 
   /* Deselect the FLASH: Chip Select high */
   spi.Stop();
@@ -442,15 +441,15 @@ void SPI_FLASH_StartReadSequence(u32 ReadAddr)
   spi.Start();
 
   /* Send "Read from Memory " instruction */
-  SPI_FLASH_SendByte(W25X_ReadData);
+  spi.Write(W25X_ReadData);
 
   /* Send the 24-bit address of the address to read from -----------------------*/
   /* Send ReadAddr high nibble address byte */
-  SPI_FLASH_SendByte((ReadAddr & 0xFF0000) >> 16);
+  spi.Write((ReadAddr & 0xFF0000) >> 16);
   /* Send ReadAddr medium nibble address byte */
-  SPI_FLASH_SendByte((ReadAddr& 0xFF00) >> 8);
+  spi.Write((ReadAddr& 0xFF00) >> 8);
   /* Send ReadAddr low nibble address byte */
-  SPI_FLASH_SendByte(ReadAddr & 0xFF);
+  spi.Write(ReadAddr & 0xFF);
 }
 
 /*******************************************************************************
@@ -464,20 +463,7 @@ void SPI_FLASH_StartReadSequence(u32 ReadAddr)
 *******************************************************************************/
 byte SPI_FLASH_ReadByte(void)
 {
-  return (SPI_FLASH_SendByte(Dummy_Byte));
-}
-
-/*******************************************************************************
-* Function Name  : SPI_FLASH_SendByte
-* Description    : Sends a byte through the SPI interface and return the byte
-*                  received from the SPI bus.
-* Input          : byte : byte to send.
-* Output         : None
-* Return         : The value of the received byte.
-*******************************************************************************/
-byte SPI_FLASH_SendByte(u8 byte)
-{
-	return spi.Write(byte);
+  return (spi.Write(Dummy_Byte));
 }
 
 /*******************************************************************************
@@ -516,7 +502,7 @@ void SPI_FLASH_WriteEnable(void)
   spi.Start();
 
   /* Send "Write Enable" instruction */
-  SPI_FLASH_SendByte(W25X_WriteEnable);
+  spi.Write(W25X_WriteEnable);
 
   /* Deselect the FLASH: Chip Select high */
   spi.Stop();
@@ -539,14 +525,14 @@ void SPI_FLASH_WaitForWriteEnd(void)
   spi.Start();
 
   /* Send "Read Status Register" instruction */
-  SPI_FLASH_SendByte(W25X_ReadStatusReg);
+  spi.Write(W25X_ReadStatusReg);
 
   /* Loop as long as the memory is busy with a write cycle */
   do
   {
     /* Send a dummy byte to generate the clock needed by the FLASH
     and put the value of the status register in FLASH_Status variable */
-    FLASH_Status = SPI_FLASH_SendByte(Dummy_Byte);	 
+    FLASH_Status = spi.Write(Dummy_Byte);	 
   }
   while ((FLASH_Status & WIP_Flag) == SET); /* Write in progress */
 
@@ -562,7 +548,7 @@ void SPI_Flash_PowerDown(void)
   spi.Start();
 
   /* Send "Power Down" instruction */
-  SPI_FLASH_SendByte(W25X_PowerDown);
+  spi.Write(W25X_PowerDown);
 
   /* Deselect the FLASH: Chip Select high */
   spi.Stop();
@@ -575,7 +561,7 @@ void SPI_Flash_WAKEUP(void)
   spi.Start();
 
   /* Send "Power Down" instruction */
-  SPI_FLASH_SendByte(W25X_ReleasePowerDown);
+  spi.Write(W25X_ReleasePowerDown);
 
   /* Deselect the FLASH: Chip Select high */
   spi.Stop();                   //µÈ´ýTRES1
