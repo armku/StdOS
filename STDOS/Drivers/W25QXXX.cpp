@@ -120,8 +120,6 @@ uint W25Q64::SPI_FLASH_ReadDeviceID(void)
 Spi spi(Spi1);
 W25Q64 w25q64(&spi);
 
-#include "stm32f10x.h"
-
 void SPI_FLASH_SectorErase(uint SectorAddr);
 void SPI_FLASH_BulkErase(void);
 void SPI_FLASH_PageWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite);
