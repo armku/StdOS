@@ -56,16 +56,7 @@ int main(void)
 
 Spi spi(Spi1);
 
-
-
 #include "stm32f10x.h"
-
-/************************** SPI Flash 函数宏定义********************************/
-#define      macSPI_FLASH_CS_ENABLE()                       GPIO_ResetBits( GPIOA, GPIO_Pin_4 )
-#define      macSPI_FLASH_CS_DISABLE()                      GPIO_SetBits( GPIOA, GPIO_Pin_4 )
-
-//#define      macSPI_FLASH_CS_ENABLE()                 spi._clk=0
-//#define      macSPI_FLASH_CS_DISABLE()                spi._clk=1
 
 void SPI_FLASH_SectorErase(u32 SectorAddr);
 void SPI_FLASH_BulkErase(void);
@@ -126,7 +117,7 @@ void SPI_FLASH_SectorErase(u32 SectorAddr)
   SPI_FLASH_WaitForWriteEnd();
   /* Sector Erase */
   /* Select the FLASH: Chip Select low */
-  macSPI_FLASH_CS_ENABLE();
+  spi.Start();
   /* Send Sector Erase instruction */
   SPI_FLASH_SendByte(W25X_SectorErase);
   /* Send SectorAddr high nibble address byte */
@@ -136,7 +127,7 @@ void SPI_FLASH_SectorErase(u32 SectorAddr)
   /* Send SectorAddr low nibble address byte */
   SPI_FLASH_SendByte(SectorAddr & 0xFF);
   /* Deselect the FLASH: Chip Select high */
-  macSPI_FLASH_CS_DISABLE();
+  spi.Stop();
   /* Wait the end of Flash writing */
   SPI_FLASH_WaitForWriteEnd();
 }
@@ -155,11 +146,11 @@ void SPI_FLASH_BulkErase(void)
 
   /* Bulk Erase */
   /* Select the FLASH: Chip Select low */
-  macSPI_FLASH_CS_ENABLE();
+  spi.Start();
   /* Send Bulk Erase instruction  */
   SPI_FLASH_SendByte(W25X_ChipErase);
   /* Deselect the FLASH: Chip Select high */
-  macSPI_FLASH_CS_DISABLE();
+  spi.Stop();
 
   /* Wait the end of Flash writing */
   SPI_FLASH_WaitForWriteEnd();
@@ -184,7 +175,7 @@ void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
   SPI_FLASH_WriteEnable();
 
   /* Select the FLASH: Chip Select low */
-  macSPI_FLASH_CS_ENABLE();
+  spi.Start();
   /* Send "Write to Memory " instruction */
   SPI_FLASH_SendByte(W25X_PageProgram);
   /* Send WriteAddr high nibble address byte to write to */
@@ -210,7 +201,7 @@ void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
   }
 
   /* Deselect the FLASH: Chip Select high */
-  macSPI_FLASH_CS_DISABLE();
+  spi.Stop();
 
   /* Wait the end of Flash writing */
   SPI_FLASH_WaitForWriteEnd();
@@ -348,7 +339,7 @@ void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
 void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, u16 NumByteToRead)
 {
   /* Select the FLASH: Chip Select low */
-  macSPI_FLASH_CS_ENABLE();
+  spi.Start();
 
   /* Send "Read from Memory " instruction */
   SPI_FLASH_SendByte(W25X_ReadData);
@@ -369,7 +360,7 @@ void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, u16 NumByteToRead)
   }
 
   /* Deselect the FLASH: Chip Select high */
-  macSPI_FLASH_CS_DISABLE();
+  spi.Stop();
 }
 
 /*******************************************************************************
@@ -384,7 +375,7 @@ uint SPI_FLASH_ReadID(void)
   u32 Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
 
   /* Select the FLASH: Chip Select low */
-  macSPI_FLASH_CS_ENABLE();
+  spi.Start();
 
   /* Send "RDID " instruction */
   SPI_FLASH_SendByte(W25X_JedecDeviceID);
@@ -399,7 +390,7 @@ uint SPI_FLASH_ReadID(void)
   Temp2 = SPI_FLASH_SendByte(Dummy_Byte);
 
   /* Deselect the FLASH: Chip Select high */
-  macSPI_FLASH_CS_DISABLE();
+  spi.Stop();
 
   Temp = (Temp0 << 16) | (Temp1 << 8) | Temp2;
 
@@ -417,7 +408,7 @@ uint SPI_FLASH_ReadDeviceID(void)
   uint Temp = 0;
 
   /* Select the FLASH: Chip Select low */
-  macSPI_FLASH_CS_ENABLE();
+  spi.Start();
 
   /* Send "RDID " instruction */
   SPI_FLASH_SendByte(W25X_DeviceID);
@@ -429,7 +420,7 @@ uint SPI_FLASH_ReadDeviceID(void)
   Temp = SPI_FLASH_SendByte(Dummy_Byte);
 
   /* Deselect the FLASH: Chip Select high */
-  macSPI_FLASH_CS_DISABLE();
+  spi.Stop();
 
   return Temp;
 }
@@ -448,7 +439,7 @@ uint SPI_FLASH_ReadDeviceID(void)
 void SPI_FLASH_StartReadSequence(u32 ReadAddr)
 {
   /* Select the FLASH: Chip Select low */
-  macSPI_FLASH_CS_ENABLE();
+  spi.Start();
 
   /* Send "Read from Memory " instruction */
   SPI_FLASH_SendByte(W25X_ReadData);
@@ -532,13 +523,13 @@ ushort SPI_FLASH_SendHalfWord(ushort HalfWord)
 void SPI_FLASH_WriteEnable(void)
 {
   /* Select the FLASH: Chip Select low */
-  macSPI_FLASH_CS_ENABLE();
+  spi.Start();
 
   /* Send "Write Enable" instruction */
   SPI_FLASH_SendByte(W25X_WriteEnable);
 
   /* Deselect the FLASH: Chip Select high */
-  macSPI_FLASH_CS_DISABLE();
+  spi.Stop();
 }
 
 /*******************************************************************************
@@ -555,7 +546,7 @@ void SPI_FLASH_WaitForWriteEnd(void)
   byte FLASH_Status = 0;
 
   /* Select the FLASH: Chip Select low */
-  macSPI_FLASH_CS_ENABLE();
+  spi.Start();
 
   /* Send "Read Status Register" instruction */
   SPI_FLASH_SendByte(W25X_ReadStatusReg);
@@ -570,7 +561,7 @@ void SPI_FLASH_WaitForWriteEnd(void)
   while ((FLASH_Status & WIP_Flag) == SET); /* Write in progress */
 
   /* Deselect the FLASH: Chip Select high */
-  macSPI_FLASH_CS_DISABLE();
+  spi.Stop();
 }
 
 
@@ -578,26 +569,26 @@ void SPI_FLASH_WaitForWriteEnd(void)
 void SPI_Flash_PowerDown(void)   
 { 
   /* Select the FLASH: Chip Select low */
-  macSPI_FLASH_CS_ENABLE();
+  spi.Start();
 
   /* Send "Power Down" instruction */
   SPI_FLASH_SendByte(W25X_PowerDown);
 
   /* Deselect the FLASH: Chip Select high */
-  macSPI_FLASH_CS_DISABLE();
+  spi.Stop();
 }   
 
 //唤醒
 void SPI_Flash_WAKEUP(void)   
 {
   /* Select the FLASH: Chip Select low */
-  macSPI_FLASH_CS_ENABLE();
+  spi.Start();
 
   /* Send "Power Down" instruction */
   SPI_FLASH_SendByte(W25X_ReleasePowerDown);
 
   /* Deselect the FLASH: Chip Select high */
-  macSPI_FLASH_CS_DISABLE();                   //等待TRES1
+  spi.Stop();                   //等待TRES1
 }   
 
 
