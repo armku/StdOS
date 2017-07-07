@@ -48,7 +48,6 @@ public:
 	void SectorErase(uint SectorAddr);//Erases the specified FLASH sector.
 	//Erases the entire FLASH.
 	void BulkErase(void);
-	void PageWrite(byte* pBuffer, uint addr, uint NumByteToWrite);
 	void WakeUp(void);//唤醒
 	void PowerDown(void);//进入掉电模式	
 };

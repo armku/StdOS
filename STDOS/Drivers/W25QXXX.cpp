@@ -72,11 +72,7 @@ bool W25Q64::ErasePage(uint pageAddr)
     return true;
 }
 
-// 写入一页
-bool W25Q64::WritePage(uint addr, byte *buf, uint count)
-{
-    return true;
-}
+
 
 // 读取一页
 bool W25Q64::ReadPage(uint addr, byte *buf, uint count)
@@ -233,8 +229,9 @@ void W25Q64::BulkErase(void)
  * Output         : None
  * Return         : None
  *******************************************************************************/
-void W25Q64::PageWrite(byte *pBuffer, uint addr, uint NumByteToWrite)
-{
+// 写入一页
+bool W25Q64::WritePage(uint addr, byte *pBuffer, uint NumByteToWrite)
+{	
     /* Enable the write access to the FLASH */
     WriteEnable();
 
@@ -269,6 +266,7 @@ void W25Q64::PageWrite(byte *pBuffer, uint addr, uint NumByteToWrite)
 
     /* Wait the end of Flash writing */
     WaitForWriteEnd();
+	return true;
 }
 
 /*******************************************************************************
@@ -298,19 +296,19 @@ bool W25Q64::Write(uint addr, byte *pBuffer, uint NumByteToWrite)
         if (NumOfPage == 0)
          /* NumByteToWrite < this->PageSize */
         {
-            this->PageWrite(pBuffer, addr, NumByteToWrite);
+            this->WritePage(addr,pBuffer,  NumByteToWrite);
         }
         else
          /* NumByteToWrite > this->PageSize */
         {
             while (NumOfPage--)
             {
-                this->PageWrite(pBuffer, addr, this->PageSize);
+                this->WritePage(addr,pBuffer,  this->PageSize);
                 addr += this->PageSize;
                 pBuffer += this->PageSize;
             }
 
-            this->PageWrite(pBuffer, addr, NumOfSingle);
+            this->WritePage(addr,pBuffer,  NumOfSingle);
         }
     }
     else
@@ -324,15 +322,15 @@ bool W25Q64::Write(uint addr, byte *pBuffer, uint NumByteToWrite)
             {
                 temp = NumOfSingle - count;
 
-                PageWrite(pBuffer, addr, count);
+                WritePage(addr,pBuffer,  count);
                 addr += count;
                 pBuffer += count;
 
-                this->PageWrite(pBuffer, addr, temp);
+                this->WritePage(addr,pBuffer,  temp);
             }
             else
             {
-                PageWrite(pBuffer, addr, NumByteToWrite);
+                WritePage(addr,pBuffer,  NumByteToWrite);
             }
         }
         else
@@ -342,20 +340,20 @@ bool W25Q64::Write(uint addr, byte *pBuffer, uint NumByteToWrite)
             NumOfPage = NumByteToWrite / this->PageSize;
             NumOfSingle = NumByteToWrite % this->PageSize;
 
-            PageWrite(pBuffer, addr, count);
+            WritePage(addr,pBuffer,  count);
             addr += count;
             pBuffer += count;
 
             while (NumOfPage--)
             {
-                this->PageWrite(pBuffer, addr, this->PageSize);
+                this->WritePage(addr,pBuffer,  this->PageSize);
                 addr += this->PageSize;
                 pBuffer += this->PageSize;
             }
 
             if (NumOfSingle != 0)
             {
-                this->PageWrite(pBuffer, addr, NumOfSingle);
+                this->WritePage(addr,pBuffer,  NumOfSingle);
             }
         }
     }
