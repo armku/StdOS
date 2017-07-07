@@ -5,21 +5,98 @@
 #include "stm32f10x.h"
 
 
+void Spi::Init()
+{
+	
+}
 
+Spi::Spi()
+{
+	this->_clk.Invert=false;
+	this->_miso.Invert=false;
+	this->_mosi.Invert=false;
+	this->_nss.Invert=false;	
+}
 
+// 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
+//Spi::Spi(SPI spi, uint speedHz, bool useNss)
+//{
+//	
+//}
 
+//Spi::~Spi()
+//{
+//	
+//}
 
+//void Spi::Init(SPI spi, uint speedHz = 9000000, bool useNss = true)
+//{
+//	
+//}
 
+void Spi::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
+{
+	
+}
+void Spi::GetPin(Pin* clk, Pin* miso, Pin* mosi, Pin* nss)
+{
+	
+}
+void Spi::Open()
+{
+	
+}
+//void Spi::Close()
+//{
+//	
+//}
 
+// 基础读写
+//byte Spi::Write(byte data)
+//{
+//	
+//}
+ushort Spi::Write16(ushort data)
+{
+	return 0;
+}
 
+// 批量读写。以字节数组长度为准
+void Spi::Write(const Buffer& bs)
+{
+	
+}
+void Spi::Read(Buffer& bs)
+{
+	
+}
 
+// 拉低NSS，开始传输
+void Spi::Start()
+{
+	
+}
+// 拉高NSS，停止传输
+void Spi::Stop()
+{
+	
+}	
+int Spi::GetPre(int index, uint& speedHz)
+{
+	return 0;
+}
+void Spi::OnInit()
+{
 
+}
+void Spi::OnOpen()
+{
 
+}
+void Spi::OnClose()
+{
 
-
-
-
-
+}
 
 
 
