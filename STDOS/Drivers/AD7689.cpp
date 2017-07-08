@@ -9,21 +9,31 @@
 #define RB		1	//回读CFG寄存器 0：数据结束时回读当前配置，1：不回读配置内容
 
 //0-本次读取的数据缓存保存位置(n-2); 2-AD7689通道选择
-CAD7689::CAD7689(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
-{	
-    this->ppinsck.Set(pinsck);
-    this->ppinsdi.Set(pinsdi);
-    this->ppinsdo.Set(pinsdo);
-    this->ppincnv.Set(pincnv);
-
-    for (byte i = 0; i < MAXCH; i++)
+CAD7689::CAD7689()
+{
+	this->ppinsck.Invert=false;
+    this->ppinsdi.Invert=false;
+    this->ppinsdo.Invert=false;
+    this->ppincnv.Invert=false;  
+	
+	for (byte i = 0; i < MAXCH; i++)
     {
         this->FlagEnable[i] = 1;
     }
     this->chCurrent = 0;
     this->chDelayCnt = 0;
 }
-
+CAD7689::CAD7689(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv):CAD7689()
+{
+	this->SetPin(pinsck,pinsdi,pinsdo,pincnv);
+}
+void CAD7689::SetPin(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
+{
+	this->ppinsck.Set(pinsck);
+    this->ppinsdi.Set(pinsdi);
+    this->ppinsdo.Set(pinsdo);
+    this->ppincnv.Set(pincnv);
+}
 void CAD7689::Delay(uint nTime)
 {
     uint i;
