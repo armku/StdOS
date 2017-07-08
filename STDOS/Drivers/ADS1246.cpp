@@ -56,44 +56,47 @@
 #define ADC_CMD_SYSGCAL     0x61            //系统增益校准  
 #define ADC_CMD_SELFOCAL    0x62            //系统自校准  
 #define ADC_CMD_RESTRICTED  0xF1            //  
-CADS1246::CADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, InputPort& pinrd, Pin pinreset)
+ADS1246::ADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, InputPort& pinrd, Pin pinreset)
 {
-    this->pspi = new CSoftSpi(pincs, pinsck, pindin, pindout,0);
+	this->ppinreset.Invert=false;
+	
+	this->ppinreset.Set(pinreset);
+	
+    this->pspi.SetPin(pincs, pinsck, pindin, pindout);
 	this->ppinrd=&pinrd;
-	this->ppinreset=new OutputPort(pinreset);
-    *this->ppinreset=0;
+    this->ppinreset=0;
 }
 
-byte CADS1246::ReadReg(byte RegAddr)
+byte ADS1246::ReadReg(byte RegAddr)
 {
     byte ret = 0;
     byte Cmd;
 
-    *this->pspi->pportcs=0;
+    this->pspi.Start();
 
 
     Cmd = ADC_CMD_RREG | RegAddr;
-    this->pspi->Write(Cmd);
-    this->pspi->Write(0);
-    ret = this->pspi->Write(0X00);
-    this->pspi->spi_readbyte(); //发送NOP
-    *this->pspi->pportcs=1;
+    this->pspi.Write(Cmd);
+    this->pspi.Write(0);
+    ret = this->pspi.Write(0X00);
+    this->pspi.Write(0xff); //发送NOP
+    this->pspi.Stop();
 
     return ret;
 
 }
 
-void CADS1246::WriteReg(byte RegAddr, byte da)
+void ADS1246::WriteReg(byte RegAddr, byte da)
 {
     byte Cmd;
-    *this->pspi->pportcs=0;
+    this->pspi.Start();
 
     Cmd = ADC_CMD_WREG | RegAddr;
-    this->pspi->Write(Cmd);
-    this->pspi->Write(0);
-    this->pspi->Write(da);
-    this->pspi->spi_readbyte(); //发送NOP
-    *this->pspi->pportcs=1;
+    this->pspi.Write(Cmd);
+    this->pspi.Write(0);
+    this->pspi.Write(da);
+    this->pspi.Write(0xff); //发送NOP
+    this->pspi.Stop();
 }
 
 /*---------------------------------------------------------
@@ -104,7 +107,7 @@ void CADS1246::WriteReg(byte RegAddr, byte da)
 FF FF FF -MIN
 80 00 00 -MAX
 ---------------------------------------------------------*/
-int CADS1246::decodead(byte *da)
+int ADS1246::decodead(byte *da)
 {
     int ret = 0;
     uint ret1 = 0;
@@ -132,13 +135,13 @@ int CADS1246::decodead(byte *da)
     return ret;
 }
 
-int CADS1246::Read(void) //返回-1,表示转换未完成
+int ADS1246::Read(void) //返回-1,表示转换未完成
 {
     byte Cmd[3];
     int Ret = 0;
 
     Cmd[0] = ADC_CMD_RDATA;
-    *this->pspi->pportcs=0;
+    this->pspi.Start();
 
 	this->flagOK=true;
     if (this->ppinrd->Read())
@@ -146,37 +149,37 @@ int CADS1246::Read(void) //返回-1,表示转换未完成
 		this->flagOK=false;
         return  - 1;
     }	
-    this->pspi->Write(Cmd[0]);	
-    Cmd[0] = this->pspi->spi_readbyte();
-    Cmd[1] = this->pspi->spi_readbyte();
-    Cmd[2] = this->pspi->spi_readbyte();
-    this->pspi->spi_readbyte(); //发送NOP	
-    *this->pspi->pportcs=1;
+    this->pspi.Write(Cmd[0]);	
+    Cmd[0] = this->pspi.Write(0xff);
+    Cmd[1] = this->pspi.Write(0xff);
+    Cmd[2] = this->pspi.Write(0xff);
+    this->pspi.Write(0xff); //发送NOP	
+    this->pspi.Stop();
 
     Ret = decodead(Cmd);
 
     return Ret;
 }
 
-void CADS1246::Init(void)
+void ADS1246::Init(void)
 {
-    *this->pspi->pportcs=1;
-    *this->ppinreset=0;
+    this->pspi.Stop();
+    this->ppinreset=0;
     Sys.Sleep(40);
-    *this->ppinreset=1;
+    this->ppinreset=1;
     Sys.Sleep(20);
-    *this->pspi->pportcs=0;
+    this->pspi.Start();
     this->WriteReg(ADC_REG_ID, 0x08); //DOUT兼容DRDY引脚   0X4A 00 08
     Sys.Sleep(40);
     this->WriteReg(ADC_REG_SYS0, ADC_SPS_20 | ADC_GAIN_1); //调整采样速度
-    *this->pspi->pportcs=1;
+    this->pspi.Stop();
 
 
     //打开中断，转换完成中断
 }
 
 //AD检查，正常返回0
-byte CADS1246::Check(void)
+byte ADS1246::Check(void)
 {
     byte ret = 0;
     if (0x08 != this->ReadReg(ADC_REG_ID))
@@ -189,73 +192,9 @@ byte CADS1246::Check(void)
     }
     return ret;
 }
-CSoftSpi::CSoftSpi(Pin pincs, Pin pinsck, Pin pindi, Pin pindo, uint nus)
-{
-    this->pportcs=new OutputPort(pincs);
-    this->pClk=new OutputPort(pinsck);
-    this->pportdi=new OutputPort(pindi);
-    this->pportdo=new InputPort(pindo,true);
-    this->delayus = nus;
-}
 
-byte CSoftSpi::Init()
-{
-    return 0;
-}
-/*---------------------------------------------------------
-忙状态判断，最长等待时间，200 X 10 ms=2S
----------------------------------------------------------*/
-byte CSoftSpi::WaitBusy()
-{
-    ushort i;
-    *this->pportcs=0;
-    i = 0;
-    while (this->pportdo->Read() > 0)
-    {
-        Sys.Sleep(10);
-        i++;
-        if (i > 200)
-            return 1;
-    }
-    *this->pportcs=1;
-    return 0;
-}
-
-//SPI写字节
-byte CSoftSpi::Write(byte da)
-{
-    byte i;
-    byte ret = 0;
-    for (i = 0; i < 8; i++)
-    {
-        if (da & (1 << (8 - i - 1)))
-        {
-            *this->pportdi=1;
-        }
-        else
-        {
-            *this->pportdi=0;
-        }
-		Sys.Delay(this->delayus);
-        *this->pClk=1;
-        Sys.Delay(this->delayus);
-        *this->pClk=0;
-        ret <<= 1;
-        if (this->pportdo->Read())
-        {
-            ret |= 1;
-        }
-    }
-    return ret;
-}
-
-//SPI总线读数据
-byte CSoftSpi::spi_readbyte(void)
-{
-    return Write(0xff);
-}
 //读取AD转换是否正常
-bool CADS1246::GetFlag(void)
+bool ADS1246::GetFlag(void)
 {
 	bool ret=this->flagOK;
 	this->flagOK=false;

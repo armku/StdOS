@@ -265,8 +265,90 @@ void Spi::OnClose()
             break;
     }
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////SoftSpi////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+SoftSpi::SoftSpi(uint speedHz)
+{
+	this->pportcs.Invert=false;
+    this->pClk.Invert=false;
+    this->pportdi.Invert=false;
+    this->pportdo.Invert=false;
+	//this->delayus=speedHz;
+	this->delayus=0;
+}
+void SoftSpi::SetPin(Pin pincs, Pin pinsck, Pin pindi, Pin pindo)
+{	
+	this->pportcs.Set(pincs);
+	this->pClk.Set(pinsck);
+	this->pportdi.Set(pindi);
+	this->pportdo.Set(pindo);	
+}
+/*---------------------------------------------------------
+忙状态判断，最长等待时间，200 X 10 ms=2S
+---------------------------------------------------------*/
+byte SoftSpi::WaitBusy()
+{
+    ushort i;
+    this->pportcs=0;
+    i = 0;
+    while (this->pportdo.Read() > 0)
+    {
+        Sys.Sleep(10);
+        i++;
+        if (i > 200)
+            return 1;
+    }
+    this->pportcs=1;
+    return 0;
+}
 
-
+//SPI写字节
+byte SoftSpi::Write(byte data)
+{
+    byte i;
+    byte ret = 0;
+    for (i = 0; i < 8; i++)
+    {
+        if (data & (1 << (8 - i - 1)))
+        {
+            this->pportdi=1;
+        }
+        else
+        {
+            this->pportdi=0;
+        }
+		Sys.Delay(this->delayus);
+        this->pClk=1;
+        Sys.Delay(this->delayus);
+        this->pClk=0;
+        ret <<= 1;
+        if (this->pportdo.Read())
+        {
+            ret |= 1;
+        }
+    }
+    return ret;
+}
+void SoftSpi::Open()
+{
+	
+}
+void SoftSpi::Close()
+{
+	
+}
+			
+// 拉低NSS，开始传输
+void SoftSpi::Start()
+{
+	this->pportcs=0;
+}	
+// 拉高NSS，停止传输
+void SoftSpi::Stop()
+{
+	this->pportcs=1;
+}
 
 
 
