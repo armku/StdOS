@@ -31,7 +31,8 @@ void LED_Init(void)
 int main(void)
 {
     LED_Init(); //³õÊ¼»¯LED¶Ë¿Ú
-    while (1){
+    while (1)
+	{
 
     }
 }
