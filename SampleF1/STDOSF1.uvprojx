@@ -388,13 +388,6 @@
         </Group>
         <Group>
           <GroupName>UserDriver</GroupName>
-          <Files>
-            <File>
-              <FileName>spitest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\src\spitest.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>startup</GroupName>
@@ -901,6 +894,11 @@
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\lcd_dr.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT45DB.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1410,13 +1408,6 @@
         </Group>
         <Group>
           <GroupName>UserDriver</GroupName>
-          <Files>
-            <File>
-              <FileName>spitest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\src\spitest.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>startup</GroupName>
@@ -1923,6 +1914,11 @@
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\lcd_dr.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT45DB.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
             </File>
           </Files>
         </Group>
