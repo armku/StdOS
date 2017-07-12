@@ -369,7 +369,7 @@ void AnalogInPort::OnOpen(void *param)
         gpio->GPIO_Mode = GPIO_Mode_AIN; //
     #else 
         gpio->GPIO_Mode = GPIO_Mode_AN;
-        gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
+        //gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
 }
 

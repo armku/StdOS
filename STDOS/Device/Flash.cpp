@@ -250,7 +250,9 @@ int STMFLASH::writeSector(uint addr)
         return 0;
     }
     FLASH_Unlock(); //解锁	
+	#ifdef STM32F1
     FLASH_ErasePage(addr); //擦除这个扇区
+	#endif
     writeNoCheck(addr, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
     FLASH_Lock(); //上锁
     return this->sectorSize;
@@ -291,7 +293,9 @@ void STMFLASH::write(uint addr, ushort *pBuffer, ushort len)
         if (i < secremain)
         //需要擦除
         {
+			#ifdef STM32F1
             FLASH_ErasePage(secpos *this->sectorSize + STM32_FLASH_BASE); //擦除这个扇区
+			#endif
             for (i = 0; i < secremain; i++)
             //复制
             {
