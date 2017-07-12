@@ -1,5 +1,4 @@
 #include "W25QXXX.h"
-#include "stm32f10x.h"
 
 /* Private define ------------------------------------------------------------*/
 #define W25X_WriteEnable			0x06 
@@ -153,7 +152,7 @@ bool W25Q64::WaitForEnd()
         and put the value of the status register in FLASH_Status variable */
         FLASH_Status = this->_spi->Write(0xFF);
     }
-    while ((FLASH_Status &WIP_Flag) == SET); /* Write in progress */
+    while ((FLASH_Status &WIP_Flag)); /* Write in progress */
 
     /* Deselect the FLASH: Chip Select high */
     this->_spi->Stop();
@@ -443,7 +442,7 @@ void W25Q64::StartReadSequence(uint ReadAddr)
     this->_spi->Write(ReadAddr &0xFF);
 }
 
-#if 1
+#if 0
     Spi spi(Spi1);
     W25Q64 w25q64(&spi);
 
@@ -499,7 +498,7 @@ void W25Q64::StartReadSequence(uint ReadAddr)
 
     void W25Q64Test()
     {
-        __IO TestStatus TransferStatus1 = FAILED;
+        TestStatus TransferStatus1 = FAILED;
 
         printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
 
