@@ -1,6 +1,8 @@
 #include <stdio.h>
-#include "stm32f10x.h"
 #include "WatchDog.h"
+#ifdef STM32F1
+	#include "stm32f10x.h"
+#endif
 
 WatchDog::WatchDog()
 { 

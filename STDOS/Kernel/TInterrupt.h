@@ -1,6 +1,6 @@
 #ifndef __INTERRUPT_H__
 #define __INTERRUPT_H__
-
+#include "Type.h"
 // 中断委托（中断号，参数）
 typedef void (*InterruptCallback)(ushort num, void* param);
 

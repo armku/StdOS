@@ -1,5 +1,7 @@
 #include "Flash.h"
-#include "stm32f10x.h"
+#ifdef STM32F1
+	#include "stm32f10x.h"
+#endif
 
 class STMFLASH
 {

@@ -1,7 +1,9 @@
 #include "SerialPort.h"
 #include "TInterrupt.h"
 #include "Timer.h"
-#include "stm32f10x.h"
+#ifdef STM32F1
+	#include "stm32f10x.h"
+#endif
 
 SerialPort *onSerialPortRcv[5];
 Timer *onTimerPortRcv[18];

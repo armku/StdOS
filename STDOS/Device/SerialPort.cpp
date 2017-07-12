@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include "stm32f10x.h"
-#include "SerialPort.h"
 #include "TInterrupt.h"
 #include "TTime.h"
+#ifdef STM32F1
+	#include "SerialPort.h"
+#endif
 
 #define UARTS {USART1,USART2,USART3,UART4,UART5}
 

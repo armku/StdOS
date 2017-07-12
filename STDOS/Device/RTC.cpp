@@ -1,6 +1,8 @@
 #include "RTC.h"
 #include "DateTime.h"
-#include "stm32f10x.h"
+#ifdef STM32F1
+	#include "stm32f10x.h"
+#endif
 
 HardRtc hardRtc;
 

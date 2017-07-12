@@ -1,5 +1,7 @@
 #include "TTime.h"
-#include "stm32f10x.h"
+#ifdef STM32F1
+	#include "stm32f10x.h"
+#endif
 
 extern byte fac_us; //每个us需要的systick时钟数 
 #ifdef __cplusplus
