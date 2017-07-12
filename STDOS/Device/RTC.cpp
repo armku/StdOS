@@ -20,7 +20,9 @@ void HardRtc::RTC_NVIC_Config(void)
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
 
     /* Enable the RTC Interrupt */
-    NVIC_InitStructure.NVIC_IRQChannel = RTC_IRQn;
+    #ifdef STM32F1
+		NVIC_InitStructure.NVIC_IRQChannel = RTC_IRQn;
+	#endif
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
@@ -39,13 +41,16 @@ void HardRtc::Start(bool b1 ,bool b2)
 void HardRtc::RTC_Configuration(void)
 {
     /* Enable PWR and BKP clocks */
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);
-
+    #ifdef STM32F1
+		RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);
+	#endif
     /* Allow access to BKP Domain */
     PWR_BackupAccessCmd(ENABLE);
 
     /* Reset Backup Domain */
-    BKP_DeInit();
+    #ifdef STM32F1	
+		BKP_DeInit();
+	#endif
 
     /* Enable LSE */
     RCC_LSEConfig(RCC_LSE_ON);
@@ -65,29 +70,35 @@ void HardRtc::RTC_Configuration(void)
     RTC_WaitForSynchro();
 
     /* Wait until last write operation on RTC registers has finished */
-    RTC_WaitForLastTask();
-
+    #ifdef STM32F1
+		RTC_WaitForLastTask();
+	#endif
+		
     /* Enable the RTC Second */
-    RTC_ITConfig(RTC_IT_SEC, ENABLE);
+    #ifdef STM32F1
+		RTC_ITConfig(RTC_IT_SEC, ENABLE);
+	
+		/* Wait until last write operation on RTC registers has finished */
+		RTC_WaitForLastTask();
 
-    /* Wait until last write operation on RTC registers has finished */
-    RTC_WaitForLastTask();
-
-    /* Set RTC prescaler: set RTC period to 1sec */
-    RTC_SetPrescaler(32767); /* RTC period = RTCCLK/RTC_PR = (32.768 KHz)/(32767+1) = 1HZ */
-
-    /* Wait until last write operation on RTC registers has finished */
-    RTC_WaitForLastTask();
+		/* Set RTC prescaler: set RTC period to 1sec */
+		RTC_SetPrescaler(32767); /* RTC period = RTCCLK/RTC_PR = (32.768 KHz)/(32767+1) = 1HZ */
+	
+		/* Wait until last write operation on RTC registers has finished */
+		RTC_WaitForLastTask();
+	#endif
 }
 
 //设置时间
 void HardRtc::SetTime(uint seconds)
 {	
+	#ifdef STM32F1
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);	//使能PWR和BKP外设时钟  
 	PWR_BackupAccessCmd(ENABLE);	//使能RTC和后备寄存器访问 
 	RTC_SetCounter(seconds);	//设置RTC计数器的值
 
 	RTC_WaitForLastTask();	//等待最近一次对RTC寄存器的写操作完成  
+	#endif
 }
 //设置时间-北京时间格式
 void HardRtc::SetTime(DateTime & dt)
@@ -102,7 +113,9 @@ void HardRtc::Init()
 //读取时间
 DateTime& HardRtc::GetTime(DateTime & dt)
 {
+	#ifdef STM32F1
 	dt=RTC_GetCounter() + 8 * 60 * 60;
+	#endif
 	return dt;
 }
 #ifdef __cplusplus
@@ -111,6 +124,7 @@ DateTime& HardRtc::GetTime(DateTime & dt)
     #endif 
     void RTC_IRQHandler(void)
     {
+		#ifdef STM32F1
         if (RTC_GetITStatus(RTC_IT_SEC) != RESET)
         {
             /* Clear the RTC Second interrupt */
@@ -122,6 +136,7 @@ DateTime& HardRtc::GetTime(DateTime & dt)
             /* Wait until last write operation on RTC registers has finished */
             RTC_WaitForLastTask();
         }
+		#endif
     }
     #ifdef __cplusplus
     }

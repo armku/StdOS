@@ -305,11 +305,15 @@ void OutputPort::OpenPin(void *param)
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     if (this->OpenDrain)
     {
-        gpio->GPIO_Mode = GPIO_Mode_Out_OD;
+		#ifdef STM32F1
+			gpio->GPIO_Mode = GPIO_Mode_Out_OD;
+		#endif
     }
     else
     {
-        gpio->GPIO_Mode = GPIO_Mode_Out_PP;
+		#ifdef STM32F1
+			gpio->GPIO_Mode = GPIO_Mode_Out_PP;
+		#endif
     }
 }
 
