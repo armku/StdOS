@@ -403,11 +403,6 @@
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>stm32f4xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\CMSIS\stm32f4xx_it.c</FilePath>
-            </File>
-            <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\CMSIS\system_stm32f4xx.c</FilePath>
@@ -521,11 +516,6 @@
               <FileName>stm32f4xx_flash_ramfunc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_flash_ramfunc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_fmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_fmc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_fsmc.c</FileName>
@@ -1483,11 +1473,6 @@
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>stm32f4xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\CMSIS\stm32f4xx_it.c</FilePath>
-            </File>
-            <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\CMSIS\system_stm32f4xx.c</FilePath>
@@ -1601,11 +1586,6 @@
               <FileName>stm32f4xx_flash_ramfunc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_flash_ramfunc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_fmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_fmc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_fsmc.c</FileName>
