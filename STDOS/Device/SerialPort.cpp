@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include "stm32f10x.h"
 #include "TInterrupt.h"
 #include "TTime.h"
+#include "SerialPort.h"
 #ifdef STM32F1
-	#include "SerialPort.h"
+	#include "stm32f10x.h"
 #endif
 #ifdef STM32F4
 	#include "stm32f4xx.h"
