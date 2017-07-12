@@ -1,19 +1,4 @@
 #include "stm32f4xx.h" 
-void LED_Init(void);
-int main(void)
-{
-	LED_Init();		        //初始化LED端口
-	GPIO_ResetBits(GPIOF,GPIO_Pin_9);  //LED0对应引脚GPIOF.9拉低，亮  等同LED0=0;
-	GPIO_SetBits(GPIOF,GPIO_Pin_10);   //LED1对应引脚GPIOF.10拉高，灭 等同LED1=1;
-	//delay_ms(500);  		   //延时300ms
-	GPIO_SetBits(GPIOF,GPIO_Pin_9);	   //LED0对应引脚GPIOF.0拉高，灭  等同LED0=1;
-	GPIO_ResetBits(GPIOF,GPIO_Pin_10); //LED1对应引脚GPIOF.10拉低，亮 等同LED1=0;
-	//delay_ms(500);   
-	while(1)
-	{
-		    
-	}
-}
 #define PFout(n)   BIT_ADDR(GPIOF_ODR_Addr,n)  //输出 
 
 #define LED0 PFout(9)	// DS0
@@ -34,4 +19,18 @@ void LED_Init(void)
 	
 	GPIO_SetBits(GPIOF,GPIO_Pin_9 | GPIO_Pin_10);//GPIOF9,F10设置高，灯灭
 
+}
+int main(void)
+{
+	LED_Init();		        //初始化LED端口
+	GPIO_ResetBits(GPIOF,GPIO_Pin_9);  //LED0对应引脚GPIOF.9拉低，亮  等同LED0=0;
+	GPIO_SetBits(GPIOF,GPIO_Pin_10);   //LED1对应引脚GPIOF.10拉高，灭 等同LED1=1;
+	//delay_ms(500);  		   //延时300ms
+	GPIO_SetBits(GPIOF,GPIO_Pin_9);	   //LED0对应引脚GPIOF.0拉高，灭  等同LED0=1;
+	GPIO_ResetBits(GPIOF,GPIO_Pin_10); //LED1对应引脚GPIOF.10拉低，亮 等同LED1=0;
+	//delay_ms(500);   
+	while(1)
+	{
+		    
+	}
 }
