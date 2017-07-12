@@ -33,6 +33,7 @@
 
 //#define namee "StdOS"
 //void W25Q64Test();
+#include "stm32f4xx.h" 
 void LED_Init(void);
 int main(void)
 {
