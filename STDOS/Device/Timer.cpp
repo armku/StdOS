@@ -4,7 +4,7 @@ Timer2 Timer3 Timer4 Timer5 为通用定时器，可以脉宽测量PWM 具有编码器接口
 Timer1 Timer8 高级定时器，具有基本定时器 通用定时器所有功能，三相六步电机，刹车功能，PWM死区控制
 */
 #include "Timer.h"
-#include "stm32f10x_rcc.h"
+#include "stm32f10x.h"
 #include "TInterrupt.h"
 
 static Timer **Timers = NULL; // 已经实例化的定时器对象

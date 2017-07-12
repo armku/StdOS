@@ -1,9 +1,5 @@
 #include "Flash.h"
-#include "stm32f10x_flash.h"
-#include "Sys.h"
-
-
-#include "Type.h"
+#include "stm32f10x.h"
 
 class STMFLASH
 {

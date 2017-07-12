@@ -1,6 +1,4 @@
 #include "AT24CXX.h"
-#include "stdio.h"
-#include "Sys.h"
 
 #define macI2C_WR	0		/* Ð´¿ØÖÆbit */
 #define macI2C_RD	1		/* ¶Á¿ØÖÆbit */

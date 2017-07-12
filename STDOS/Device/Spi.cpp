@@ -1,7 +1,5 @@
 #include "Sys.h"
-#include "Port.h"
 #include "Spi.h"
-#include "string.h"
 #include "stm32f10x.h"
 
 

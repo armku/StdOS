@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "stm32f10x.h"
 #include "WatchDog.h"
-#include "Sys.h"
 
 WatchDog::WatchDog()
 { 
