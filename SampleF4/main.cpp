@@ -1,55 +1,37 @@
-#include "Sys.h"
-#include "Device\Port.h"
-//#include "Device\SerialPort.h"
-
-void LedTask(void* param)
-{
-    auto leds	= (OutputPort*)param;
-    *leds = !*leds;
-}
-
-void OnPress(InputPort& port, bool down)
-{
-    debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
-}
-
+#include "stm32f4xx.h" 
+void LED_Init(void);
 int main(void)
 {
-    // åˆå§‹åŒ–ç³»ç»Ÿ
-    //Sys.Clock = 72000000;
-    //Sys.MessagePort = COM1;
-    Sys.Init();
-    //Sys.InitClock();
-    Sys.ShowInfo();
-
-    // åˆå§‹åŒ–ä¸ºè¾“å‡º
-	OutputPort leds[] = {PD0, PD1};
-	for(int i=0; i<ArrayLength(leds); i++)
-		leds[i].Invert = true;
-
-    // åˆå§‹åŒ–ä¸ºä¸­æ–­è¾“å…¥
-    Pin ips[] = { PE9, PE8, PE4, PE5, PE6, PE7};
-    InputPort btns[6];
-	for(int i=0; i<ArrayLength(btns); i++)
+	LED_Init();		        //³õÊ¼»¯LED¶Ë¿Ú
+	GPIO_ResetBits(GPIOF,GPIO_Pin_9);  //LED0¶ÔÓ¦Òı½ÅGPIOF.9À­µÍ£¬ÁÁ  µÈÍ¬LED0=0;
+	GPIO_SetBits(GPIOF,GPIO_Pin_10);   //LED1¶ÔÓ¦Òı½ÅGPIOF.10À­¸ß£¬Ãğ µÈÍ¬LED1=1;
+	//delay_ms(500);  		   //ÑÓÊ±300ms
+	GPIO_SetBits(GPIOF,GPIO_Pin_9);	   //LED0¶ÔÓ¦Òı½ÅGPIOF.0À­¸ß£¬Ãğ  µÈÍ¬LED0=1;
+	GPIO_ResetBits(GPIOF,GPIO_Pin_10); //LED1¶ÔÓ¦Òı½ÅGPIOF.10À­µÍ£¬ÁÁ µÈÍ¬LED1=0;
+	//delay_ms(500);   
+	while(1)
 	{
-		btns[i].Index = i;
-		btns[i].Set(ips[i]);
-		btns[i].Press = OnPress;
-		btns[i].UsePress();
-		btns[i].Open();
+		    
 	}
+}
+#define PFout(n)   BIT_ADDR(GPIOF_ODR_Addr,n)  //Êä³ö 
 
-	Sys.AddTask(LedTask, &leds[0], 500, 500, "Ledé—ªçƒ");
+#define LED0 PFout(9)	// DS0
+#define LED1 PFout(10)	// DS1
+void LED_Init(void)
+{    	 
+  GPIO_InitTypeDef  GPIO_InitStructure;
 
-	/*Buffer::Test();
-	Array::Test();
-	String::Test();
-	DateTime::Test();
-	IList::Test();
-	IDictionary::Test();*/
-	/*OutputPort power(PE2);
-	power = true;
-	SerialPort::Test();*/
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOF, ENABLE);//Ê¹ÄÜGPIOFÊ±ÖÓ
 
-    Sys.Start();
+  //GPIOF9,F10³õÊ¼»¯ÉèÖÃ
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_10;//LED0ºÍLED1¶ÔÓ¦IO¿Ú
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;//ÆÕÍ¨Êä³öÄ£Ê½
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;//ÍÆÍìÊä³ö
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;//100MHz
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;//ÉÏÀ­
+  GPIO_Init(GPIOF, &GPIO_InitStructure);//³õÊ¼»¯GPIO
+	
+	GPIO_SetBits(GPIOF,GPIO_Pin_9 | GPIO_Pin_10);//GPIOF9,F10ÉèÖÃ¸ß£¬µÆÃğ
+
 }
