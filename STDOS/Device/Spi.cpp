@@ -3,6 +3,9 @@
 #ifdef STM32F1
 	#include "stm32f10x.h"
 #endif
+#ifdef STM32F4
+	#include "stm32f4xx.h"
+#endif
 
 void Spi::Init()
 {

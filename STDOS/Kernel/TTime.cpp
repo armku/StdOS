@@ -2,6 +2,9 @@
 #ifdef STM32F1
 	#include "stm32f10x.h"
 #endif
+#ifdef STM32F4
+	#include "stm32f4xx.h"
+#endif
 
 extern byte fac_us; //每个us需要的systick时钟数 
 #ifdef __cplusplus

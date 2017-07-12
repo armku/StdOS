@@ -5,6 +5,9 @@
 #ifdef STM32F1
 	#include "SerialPort.h"
 #endif
+#ifdef STM32F4
+	#include "stm32f4xx.h"
+#endif
 
 #define UARTS {USART1,USART2,USART3,UART4,UART5}
 
