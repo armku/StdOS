@@ -2,6 +2,7 @@
 #include "Port.h"
 
 //OutputPort led1(PF9);
+//OutputPort led2(PF10);
 
 void LED_Init(void)
 {
