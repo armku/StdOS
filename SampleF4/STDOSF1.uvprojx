@@ -335,7 +335,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>STM32F4,DEBUG,STM32F40_41xxx, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\SYSTEM\CMSIS;..\SYSTEM\STM32F1\FWLib\inc;..\Util</IncludePath>
+              <IncludePath>..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\SYSTEM\STM32F4\CMSIS;..\SYSTEM\STM32F4\FWLIB\inc;..\Util</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -388,13 +388,6 @@
         </Group>
         <Group>
           <GroupName>UserDriver</GroupName>
-          <Files>
-            <File>
-              <FileName>spitest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\src\spitest.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>startup</GroupName>
@@ -402,7 +395,7 @@
             <File>
               <FileName>startup_stm32f40_41xxx.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\SYSTEM\startup\startup_stm32f40_41xxx.s</FilePath>
+              <FilePath>..\SYSTEM\STM32F4\startup\startup_stm32f40_41xxx.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -410,14 +403,14 @@
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>core_cm3.c</FileName>
+              <FileName>stm32f4xx_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\CMSIS\core_cm3.c</FilePath>
+              <FilePath>..\SYSTEM\STM32F4\CMSIS\stm32f4xx_it.c</FilePath>
             </File>
             <File>
-              <FileName>system_stm32f10x.c</FileName>
+              <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\CMSIS\system_stm32f10x.c</FilePath>
+              <FilePath>..\SYSTEM\STM32F4\CMSIS\system_stm32f4xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1475,13 +1468,6 @@
         </Group>
         <Group>
           <GroupName>UserDriver</GroupName>
-          <Files>
-            <File>
-              <FileName>spitest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\src\spitest.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>startup</GroupName>
@@ -1489,7 +1475,7 @@
             <File>
               <FileName>startup_stm32f40_41xxx.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\SYSTEM\startup\startup_stm32f40_41xxx.s</FilePath>
+              <FilePath>..\SYSTEM\STM32F4\startup\startup_stm32f40_41xxx.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -1497,14 +1483,14 @@
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>core_cm3.c</FileName>
+              <FileName>stm32f4xx_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\CMSIS\core_cm3.c</FilePath>
+              <FilePath>..\SYSTEM\STM32F4\CMSIS\stm32f4xx_it.c</FilePath>
             </File>
             <File>
-              <FileName>system_stm32f10x.c</FileName>
+              <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\CMSIS\system_stm32f10x.c</FilePath>
+              <FilePath>..\SYSTEM\STM32F4\CMSIS\system_stm32f4xx.c</FilePath>
             </File>
           </Files>
         </Group>
