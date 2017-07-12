@@ -3,7 +3,6 @@ Bresenham算法画直线和圆，硬件条件stm32（fmsc）+ili9325
 直线算法参照  http://www.cnblogs.com/soroman/archive/2008/09/30/509602.html  的算法
 http://www.amobbs.com/forum.php?mod=viewthread&tid=5296612&extra=&ordertype=1
  */
-#include "Sys.h"
 #include "ST7565R.h"
 
 CLcd::CLcd()
