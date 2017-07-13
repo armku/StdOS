@@ -184,7 +184,12 @@ bool Port::Read()const
 void Port::OnOpen(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    gpio->GPIO_Speed = GPIO_Speed_50MHz;
+	#ifdef STM32F1
+		gpio->GPIO_Speed = GPIO_Speed_50MHz;
+	#endif
+	#ifdef STM32F4
+		gpio->GPIO_Speed = GPIO_Speed_100MHz;
+	#endif
 }
 
 void Port::OnClose(){}
@@ -303,16 +308,17 @@ void OutputPort::OnOpen(void *param)
 void OutputPort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+	#ifdef STM32F4
+		gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式
+		gpio->GPIO_PuPd = GPIO_PuPd_UP; //上拉
+	#endif
     if (this->OpenDrain)
     {
 		#ifdef STM32F1
 			gpio->GPIO_Mode = GPIO_Mode_Out_OD;
 		#endif
 		#ifdef STM32F4
-//			gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式
-//			gpio->GPIO_OType = GPIO_OType_PP; //推挽输出
-//			gpio->GPIO_Speed = GPIO_Speed_100MHz; //100MHz
-//			gpio->GPIO_PuPd = GPIO_PuPd_UP; //上拉
+			gpio->GPIO_OType = GPIO_OType_OD; //推挽输出
 		#endif
     }
     else
@@ -321,10 +327,7 @@ void OutputPort::OpenPin(void *param)
 			gpio->GPIO_Mode = GPIO_Mode_Out_PP;
 		#endif
 		#ifdef STM32F4
-			gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式
 			gpio->GPIO_OType = GPIO_OType_PP; //推挽输出
-			gpio->GPIO_Speed = GPIO_Speed_100MHz; //100MHz
-			gpio->GPIO_PuPd = GPIO_PuPd_UP; //上拉
 		#endif
     }
 }
