@@ -309,8 +309,7 @@ void OutputPort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
 	#ifdef STM32F4
-		gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式
-		gpio->GPIO_PuPd = GPIO_PuPd_UP; //上拉
+		gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式		
 	#endif
     if (this->OpenDrain)
     {
@@ -319,6 +318,7 @@ void OutputPort::OpenPin(void *param)
 		#endif
 		#ifdef STM32F4
 			gpio->GPIO_OType = GPIO_OType_OD; //推挽输出
+			gpio->GPIO_PuPd = GPIO_PuPd_NOPULL; //
 		#endif
     }
     else
@@ -328,6 +328,7 @@ void OutputPort::OpenPin(void *param)
 		#endif
 		#ifdef STM32F4
 			gpio->GPIO_OType = GPIO_OType_PP; //推挽输出
+			gpio->GPIO_PuPd = GPIO_PuPd_UP; //上拉
 		#endif
     }
 }
