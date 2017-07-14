@@ -198,7 +198,7 @@ uint	TSys::Seconds() const	// 系统绝对当前时间，秒
 // 延迟异步重启
 void TSys::Reboot(int msDelay ) const
 {
-	
+	NVIC_SystemReset();
 }
 void TSys::ShowInfo() const
 {
