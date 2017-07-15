@@ -129,7 +129,7 @@ bool Port::Open()
             int gi = _Pin >> 4;
             #ifdef STM32F0
                 RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOAEN << gi, ENABLE);
-                #elifdef STM32F1
+            #elif defined STM32F1
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << gi, ENABLE);
                 // PA15/PB3/PB4 需要关闭JTAG
                 switch (_Pin)
@@ -146,7 +146,7 @@ bool Port::Open()
                             break;
                         }
                 }
-                #elifdef STM32F4
+            #elif defined STM32F4
                 RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
             #endif 
 
@@ -182,9 +182,9 @@ void Port::OnOpen(void *param)
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F0
 
-        #elifdef STM32F1
+    #elif defined STM32F1
         gpio->GPIO_Speed = GPIO_Speed_50MHz;
-        #elifdef STM32F4
+    #elif defined STM32F4
         gpio->GPIO_Speed = GPIO_Speed_100MHz;
     #endif 
 }
@@ -250,6 +250,7 @@ void OutputPort::Write(bool value)const
         }
     }
 }
+
 #if 0   
     // 配置之前，需要根据倒置情况来设定初始状态，也就是在打开端口之前必须明确端口高低状态
     ushort dat = GPIO_ReadOutputData(((GPIO_TypeDef*)this->State));
@@ -303,7 +304,7 @@ void OutputPort::OpenPin(void *param)
 
     #ifdef STM32F0
 
-        #elifdef STM32F1
+    #elif defined STM32F1
         if (this->OpenDrain)
         {
             gpio->GPIO_Mode = GPIO_Mode_Out_OD;
@@ -312,7 +313,7 @@ void OutputPort::OpenPin(void *param)
         {
             gpio->GPIO_Mode = GPIO_Mode_Out_PP;
         }
-        #elifdef STM32F4
+    #elif defined STM32F4
         gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式	
         if (this->OpenDrain)
         {
@@ -367,9 +368,9 @@ void AlternatePort::OpenPin(void *param)
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F0
 
-        #elifdef STM32F1
+    #elif defined STM32F1
         gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
-        #elifdef STM32F4
+    #elif defined STM32F4
         gpio->GPIO_Mode = GPIO_Mode_AF;
         gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
@@ -383,9 +384,9 @@ void AnalogInPort::OnOpen(void *param)
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F0
 
-        #elifdef STM32F1
+    #elif defined STM32F1
         gpio->GPIO_Mode = GPIO_Mode_AIN; //
-        #elifdef STM32F4
+    #elif defined STM32F4
         gpio->GPIO_Mode = GPIO_Mode_AN;
         //gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
@@ -409,7 +410,7 @@ void InputPort::OnOpen(void *param)
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F0
 
-        #elifdef STM32F1
+    #elif defined STM32F1
         if (Floating)
             gpio->GPIO_Mode = GPIO_Mode_IN_FLOATING;
         else if (Pull == UP)
@@ -417,7 +418,7 @@ void InputPort::OnOpen(void *param)
         else if (Pull == DOWN)
             gpio->GPIO_Mode = GPIO_Mode_IPD;
         // 这里很不确定，需要根据实际进行调整
-        #elifdef STM32F4
+    #elif defined STM32F4
         gpio->GPIO_Mode = GPIO_Mode_IN;
         if (this->Floating)
         {
@@ -770,7 +771,7 @@ void SetEXIT(int pinIndex, bool enable)
 #endif 
 #if 0
     //测试代码
-    ????PC13 PA0 InputPort exti(PC13); //PA1 PB3     PA0 PC13
+     ?  ?  ?  ? PC13 PA0 InputPort exti(PC13); //PA1 PB3     PA0 PC13
     InputPort exti1(PA0);
     void OnKeyPress(InputPort *pin, bool down, void *param)
     {

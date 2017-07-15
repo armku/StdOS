@@ -2,7 +2,7 @@
 
 OutputPort led1(PF9,false);
 OutputPort led2(PF10,false);
-InputPort key0(PE4,true);
+//InputPort key0(PE4,true);
 //OutputPort key1(PE3,false);
 //OutputPort key2(PE2,false);
 //OutputPort keyup(PA0,false);
