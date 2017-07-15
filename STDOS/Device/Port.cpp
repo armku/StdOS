@@ -205,15 +205,6 @@ OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
     Set(pin);
 }
 
-#if 0   
-    // 配置之前，需要根据倒置情况来设定初始状态，也就是在打开端口之前必须明确端口高低状态
-    ushort dat = GPIO_ReadOutputData(((GPIO_TypeDef*)this->State));
-    //    if (!Invert)
-    //        dat &= ~PinBit;
-    //    else
-    //        dat |= PinBit;
-    GPIO_Write(((GPIO_TypeDef*)this->State), dat);
-#endif 
 
 /*
 整组读取
@@ -233,11 +224,6 @@ bool OutputPort::ReadInput()const
     return this->Invert ? !Port::Read(): Port::Read();
 }
 
-//bool OutputPort::Read(Pin pin)
-//{
-//    GPIO_TypeDef *group = _GROUP(pin);
-//    return (group->IDR >> (pin &0xF)) &1;
-//}
 
 void OutputPort::Write(bool value)const
 {
@@ -264,6 +250,15 @@ void OutputPort::Write(bool value)const
         }
     }
 }
+#if 0   
+    // 配置之前，需要根据倒置情况来设定初始状态，也就是在打开端口之前必须明确端口高低状态
+    ushort dat = GPIO_ReadOutputData(((GPIO_TypeDef*)this->State));
+    //    if (!Invert)
+    //        dat &= ~PinBit;
+    //    else
+    //        dat |= PinBit;
+    GPIO_Write(((GPIO_TypeDef*)this->State), dat);
+#endif 
 
 //void OutputPort::WriteGroup(ushort value)
 //{
