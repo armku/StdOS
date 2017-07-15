@@ -369,7 +369,8 @@ void AlternatePort::OpenPin(void *param)
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F1
         gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
-    #else 
+	#endif
+    #ifdef STM32F4
         gpio->GPIO_Mode = GPIO_Mode_AF;
         gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
@@ -383,7 +384,8 @@ void AnalogInPort::OnOpen(void *param)
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F1
         gpio->GPIO_Mode = GPIO_Mode_AIN; //
-    #else 
+	#endif
+	#ifdef STM32F4
         gpio->GPIO_Mode = GPIO_Mode_AN;
         //gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
@@ -413,7 +415,8 @@ void InputPort::OnOpen(void *param)
         else if (Pull == DOWN)
             gpio->GPIO_Mode = GPIO_Mode_IPD;
         // 这里很不确定，需要根据实际进行调整
-    #else 
+    #endif
+	#ifdef STM32F4
         gpio->GPIO_Mode = GPIO_Mode_IN;
         gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
