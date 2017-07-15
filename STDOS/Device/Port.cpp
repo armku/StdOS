@@ -184,6 +184,9 @@ bool Port::Read()const
 void Port::OnOpen(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+	#ifdef STM32F0
+		
+	#endif
 	#ifdef STM32F1
 		gpio->GPIO_Speed = GPIO_Speed_50MHz;
 	#endif
@@ -311,8 +314,14 @@ void OutputPort::OpenPin(void *param)
 	#ifdef STM32F4
 		gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式		
 	#endif
-    if (this->OpenDrain)
+	#ifdef STM32F0
+		
+	#endif
+	if (this->OpenDrain)
     {
+		#ifdef STM32F0
+		
+		#endif
 		#ifdef STM32F1
 			gpio->GPIO_Mode = GPIO_Mode_Out_OD;
 		#endif
@@ -323,6 +332,9 @@ void OutputPort::OpenPin(void *param)
     }
     else
     {
+		#ifdef STM32F0
+		
+		#endif
 		#ifdef STM32F1
 			gpio->GPIO_Mode = GPIO_Mode_Out_PP;
 		#endif
@@ -367,7 +379,10 @@ AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
 void AlternatePort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    #ifdef STM32F1
+    #ifdef STM32F0
+		
+	#endif
+	#ifdef STM32F1
         gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
 	#endif
     #ifdef STM32F4
@@ -382,7 +397,10 @@ void AnalogInPort::OnOpen(void *param)
 {
     Port::OnOpen(param);
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    #ifdef STM32F1
+    #ifdef STM32F0
+		
+	#endif
+	#ifdef STM32F1
         gpio->GPIO_Mode = GPIO_Mode_AIN; //
 	#endif
 	#ifdef STM32F4
@@ -407,7 +425,10 @@ void InputPort::OnOpen(void *param)
 {
     Port::OnOpen(param);
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    #ifdef STM32F1
+    #ifdef STM32F0
+		
+	#endif
+	#ifdef STM32F1
         if (Floating)
             gpio->GPIO_Mode = GPIO_Mode_IN_FLOATING;
         else if (Pull == UP)
