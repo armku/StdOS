@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "Port.h"
-#include "TInterrupt.h"
 #ifdef STM32F1
 	#include "stm32f10x.h"
 #endif
