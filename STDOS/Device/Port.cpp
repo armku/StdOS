@@ -438,7 +438,28 @@ void InputPort::OnOpen(void *param)
     #endif
 	#ifdef STM32F4
         gpio->GPIO_Mode = GPIO_Mode_IN;
-        gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
+		if(this->Floating)
+		{
+			gpio->GPIO_OType=GPIO_OType_OD;
+		}
+		else
+		{
+			gpio->GPIO_OType=GPIO_OType_PP;
+		}
+        switch(this->Pull)
+		{
+			case NOPULL:
+				gpio->GPIO_PuPd=GPIO_PuPd_NOPULL;
+				break;
+			case UP:
+				gpio->GPIO_PuPd=GPIO_PuPd_UP;
+				break;
+			case DOWN:
+				gpio->GPIO_PuPd=GPIO_PuPd_DOWN;
+				break;
+			default:
+				break;
+		}
     #endif 
 }
 bool InputPort::UsePress()
