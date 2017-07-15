@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include "Port.h"
 #ifdef STM32F1
-	#include "stm32f10x.h"
-#endif
+    #include "stm32f10x.h"
+#endif 
 #ifdef STM32F4
-	#include "stm32f4xx.h"
-#endif
+    #include "stm32f4xx.h"
+#endif 
 
 void SetEXIT(int pinIndex, bool enable);
 
@@ -15,21 +15,20 @@ void SetEXIT(int pinIndex, bool enable);
 
 
 #if defined(STM32F1) || defined(STM32F4)
-#if 0
-	static const int PORT_IRQns[] = 
-    {
-        EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
-        EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
-        EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
-    };
-#endif
+    #if 0
+        static const int PORT_IRQns[] = 
+        {
+            EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
+            EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
+            EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
+        };
+    #endif 
 #elif defined(STM32F0)
     static const int PORT_IRQns[] = 
     {
         EXTI0_1_IRQn, EXTI0_1_IRQn,  // 基础
         EXTI2_3_IRQn, EXTI2_3_IRQn,  // 基础
-        EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn,
-            EXTI4_15_IRQn  // EXTI15_10
+        EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn  // EXTI15_10
     };
 #endif 
 GPIO_TypeDef *IndexToGroup(byte index)
@@ -55,7 +54,7 @@ Port::Port()
 #ifndef TINY	
     Port::~Port()
     {
-        #if defined(STM32F1)
+        #ifdef STM32F1
             // 恢复为初始化状态
             //            ushort bits = PinBit;
             //            int config = InitState &0xFFFFFFFF;
@@ -104,7 +103,7 @@ Port &Port::Set(Pin pin)
     //        //        PinBit = 0;
     //    }
 
-    #if defined(STM32F1)
+    #ifdef STM32F1
         // 整组引脚的初始状态，析构时有选择恢复
         //        if (_Pin != P0)
         //            InitState = ((UInt64)((GPIO_TypeDef *)this->State)->CRH << 32) + ((GPIO_TypeDef *)this->State)->CRL;
@@ -130,13 +129,8 @@ bool Port::Open()
             int gi = _Pin >> 4;
             #ifdef STM32F0
                 RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOAEN << gi, ENABLE);
-            #elif defined(STM32F1)
+                #elifdef STM32F1
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << gi, ENABLE);
-            #elif defined(STM32F4)
-                RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
-            #endif 
-
-            #ifdef STM32F1
                 // PA15/PB3/PB4 需要关闭JTAG
                 switch (_Pin)
                 {
@@ -152,7 +146,10 @@ bool Port::Open()
                             break;
                         }
                 }
+                #elifdef STM32F4
+                RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
             #endif 
+
             GPIO_InitTypeDef gpio;
             // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
             GPIO_StructInit(&gpio);
@@ -183,15 +180,13 @@ bool Port::Read()const
 void Port::OnOpen(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-	#ifdef STM32F0
-		
-	#endif
-	#ifdef STM32F1
-		gpio->GPIO_Speed = GPIO_Speed_50MHz;
-	#endif
-	#ifdef STM32F4
-		gpio->GPIO_Speed = GPIO_Speed_100MHz;
-	#endif
+    #ifdef STM32F0
+
+        #elifdef STM32F1
+        gpio->GPIO_Speed = GPIO_Speed_50MHz;
+        #elifdef STM32F4
+        gpio->GPIO_Speed = GPIO_Speed_100MHz;
+    #endif 
 }
 
 void Port::OnClose(){}
@@ -310,41 +305,31 @@ void OutputPort::OnOpen(void *param)
 void OutputPort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-	
-	
-	
-	#ifdef STM32F4
-		gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式		
-	#endif
-	#ifdef STM32F0
-		
-	#endif
-	if (this->OpenDrain)
-    {
-		#ifdef STM32F0
-		
-		#endif
-		#ifdef STM32F1
-			gpio->GPIO_Mode = GPIO_Mode_Out_OD;
-		#endif
-		#ifdef STM32F4
-			gpio->GPIO_OType = GPIO_OType_OD; //推挽输出
-			gpio->GPIO_PuPd = GPIO_PuPd_NOPULL; //
-		#endif
-    }
-    else
-    {
-		#ifdef STM32F0
-		
-		#endif
-		#ifdef STM32F1
-			gpio->GPIO_Mode = GPIO_Mode_Out_PP;
-		#endif
-		#ifdef STM32F4
-			gpio->GPIO_OType = GPIO_OType_PP; //推挽输出
-			gpio->GPIO_PuPd = GPIO_PuPd_UP; //上拉
-		#endif
-    }
+
+    #ifdef STM32F0
+
+        #elifdef STM32F1
+        if (this->OpenDrain)
+        {
+            gpio->GPIO_Mode = GPIO_Mode_Out_OD;
+        }
+        else
+        {
+            gpio->GPIO_Mode = GPIO_Mode_Out_PP;
+        }
+        #elifdef STM32F4
+        gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式	
+        if (this->OpenDrain)
+        {
+            gpio->GPIO_OType = GPIO_OType_OD; //推挽输出
+            gpio->GPIO_PuPd = GPIO_PuPd_NOPULL; //            
+        }
+        else
+        {
+            gpio->GPIO_OType = GPIO_OType_PP; //推挽输出
+            gpio->GPIO_PuPd = GPIO_PuPd_UP; //上拉
+        }
+    #endif 
 }
 
 /*
@@ -353,9 +338,13 @@ void OutputPort::OpenPin(void *param)
 void OutputPort::Write(Pin pin, bool value)
 {
     if (value)
+    {
         GPIO_SetBits(_GROUP(pin), _PORT(pin));
+    }
     else
+    {
         GPIO_ResetBits(_GROUP(pin), _PORT(pin));
+    }
 }
 
 AlternatePort::AlternatePort(): OutputPort()
@@ -382,12 +371,10 @@ void AlternatePort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F0
-		
-	#endif
-	#ifdef STM32F1
+
+        #elifdef STM32F1
         gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
-	#endif
-    #ifdef STM32F4
+        #elifdef STM32F4
         gpio->GPIO_Mode = GPIO_Mode_AF;
         gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
@@ -400,12 +387,10 @@ void AnalogInPort::OnOpen(void *param)
     Port::OnOpen(param);
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F0
-		
-	#endif
-	#ifdef STM32F1
+
+        #elifdef STM32F1
         gpio->GPIO_Mode = GPIO_Mode_AIN; //
-	#endif
-	#ifdef STM32F4
+        #elifdef STM32F4
         gpio->GPIO_Mode = GPIO_Mode_AN;
         //gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
     #endif 
@@ -428,9 +413,8 @@ void InputPort::OnOpen(void *param)
     Port::OnOpen(param);
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F0
-		
-	#endif
-	#ifdef STM32F1
+
+        #elifdef STM32F1
         if (Floating)
             gpio->GPIO_Mode = GPIO_Mode_IN_FLOATING;
         else if (Pull == UP)
@@ -438,37 +422,38 @@ void InputPort::OnOpen(void *param)
         else if (Pull == DOWN)
             gpio->GPIO_Mode = GPIO_Mode_IPD;
         // 这里很不确定，需要根据实际进行调整
-    #endif
-	#ifdef STM32F4
-//        gpio->GPIO_Mode = GPIO_Mode_IN;
-//		if(this->Floating)
-//		{
-//			gpio->GPIO_OType=GPIO_OType_OD;
-//		}
-//		else
-//		{
-//			gpio->GPIO_OType=GPIO_OType_PP;
-//		}
-//        switch(this->Pull)
-//		{
-//			case NOPULL:
-//				gpio->GPIO_PuPd=GPIO_PuPd_NOPULL;
-//				break;
-//			case UP:
-//				gpio->GPIO_PuPd=GPIO_PuPd_UP;
-//				break;
-//			case DOWN:
-//				gpio->GPIO_PuPd=GPIO_PuPd_DOWN;
-//				break;
-//			default:
-//				break;
-//		}
+        #elifdef STM32F4
+        gpio->GPIO_Mode = GPIO_Mode_IN;
+        if (this->Floating)
+        {
+            gpio->GPIO_OType = GPIO_OType_OD;
+        }
+        else
+        {
+            gpio->GPIO_OType = GPIO_OType_PP;
+        }
+        switch (this->Pull)
+        {
+            case NOPULL:
+                gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
+                break;
+            case UP:
+                gpio->GPIO_PuPd = GPIO_PuPd_UP;
+                break;
+            case DOWN:
+                gpio->GPIO_PuPd = GPIO_PuPd_DOWN;
+                break;
+            default:
+                break;
+        }
     #endif 
 }
+
 bool InputPort::UsePress()
 {
-	return false;
+    return false;
 }
+
 void InputPort::OnClose(){
 
 }
@@ -787,29 +772,29 @@ void SetEXIT(int pinIndex, bool enable)
             Interrupt.Deactivate(PORT_IRQns[pinIndex]);
         }
     }
+#endif 
+#if 0
+    //测试代码
+    ????PC13 PA0 InputPort exti(PC13); //PA1 PB3     PA0 PC13
+    InputPort exti1(PA0);
+    void OnKeyPress(InputPort *pin, bool down, void *param)
+    {
+        //led1.Write(onoff);
+        led2 = !led2;
+        //    printf("中断引脚：P%c%d 值%d \r\n", _PIN_NAME(pin), down);
+    }
+
+
+    InputPort key0(PA0);
+    //按键事件
+    void OnPress(InputPort &port, bool down)
+    {
+        debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
+    }
+    InputPort key(PC13);
+    key.Press = OnPress;
+    key.UsePress();
+    key.Open();
+    exti.Register(OnKeyPress);
+    exti1.Register(OnKeyPress);
 #endif
-//测试代码
-//按键 PC13 PA0
-//InputPort exti(PC13); //PA1 PB3     PA0 PC13
-//InputPort exti1(PA0);
-//void OnKeyPress(InputPort* pin, bool down, void *param)
-//{
-//    //led1.Write(onoff);
-//    led2 = !led2;
-////    printf("中断引脚：P%c%d 值%d \r\n", _PIN_NAME(pin), down);
-//}
-
-
-//InputPort key0(PA0);
-////按键事件
-//void OnPress(InputPort &port, bool down)
-//{
-//    debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
-//}
-//    InputPort key(PC13);
-//    key.Press = OnPress;
-//    key.UsePress();
-//    key.Open();
-    //    exti.Register(OnKeyPress);
-    //    exti1.Register(OnKeyPress);
-
