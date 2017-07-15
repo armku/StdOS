@@ -310,6 +310,9 @@ void OutputPort::OnOpen(void *param)
 void OutputPort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+	
+	
+	
 	#ifdef STM32F4
 		gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式		
 	#endif
@@ -437,29 +440,29 @@ void InputPort::OnOpen(void *param)
         // 这里很不确定，需要根据实际进行调整
     #endif
 	#ifdef STM32F4
-        gpio->GPIO_Mode = GPIO_Mode_IN;
-		if(this->Floating)
-		{
-			gpio->GPIO_OType=GPIO_OType_OD;
-		}
-		else
-		{
-			gpio->GPIO_OType=GPIO_OType_PP;
-		}
-        switch(this->Pull)
-		{
-			case NOPULL:
-				gpio->GPIO_PuPd=GPIO_PuPd_NOPULL;
-				break;
-			case UP:
-				gpio->GPIO_PuPd=GPIO_PuPd_UP;
-				break;
-			case DOWN:
-				gpio->GPIO_PuPd=GPIO_PuPd_DOWN;
-				break;
-			default:
-				break;
-		}
+//        gpio->GPIO_Mode = GPIO_Mode_IN;
+//		if(this->Floating)
+//		{
+//			gpio->GPIO_OType=GPIO_OType_OD;
+//		}
+//		else
+//		{
+//			gpio->GPIO_OType=GPIO_OType_PP;
+//		}
+//        switch(this->Pull)
+//		{
+//			case NOPULL:
+//				gpio->GPIO_PuPd=GPIO_PuPd_NOPULL;
+//				break;
+//			case UP:
+//				gpio->GPIO_PuPd=GPIO_PuPd_UP;
+//				break;
+//			case DOWN:
+//				gpio->GPIO_PuPd=GPIO_PuPd_DOWN;
+//				break;
+//			default:
+//				break;
+//		}
     #endif 
 }
 bool InputPort::UsePress()
