@@ -66,7 +66,8 @@ void GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
     *txPin = p[n];
     *rxPin = p[n + 1];
 }
-extern GPIO_TypeDef *IndexToGroup(byte index);
+// 获取组和针脚
+#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
 // 打开串口
 bool SerialPort::OnOpen()
 {
@@ -201,12 +202,8 @@ bool SerialPort::OnOpen()
         {
             GPIO_AF_USART1, GPIO_AF_USART2, GPIO_AF_USART3, GPIO_AF_UART4, GPIO_AF_UART5, GPIO_AF_USART6, GPIO_AF_UART7, GPIO_AF_UART8
         };
-//		GPIO_PinAFConfig(IndexToGroup(tx), _PIN(tx), afs[Index]);
-//		GPIO_PinAFConfig(IndexToGroup(rx), _PIN(rx), afs[Index]);
-		GPIO_PinAFConfig(GPIOA,GPIO_PinSource9,afs[Index]); //GPIOA9复用为USART1
-		GPIO_PinAFConfig(GPIOA,GPIO_PinSource10,afs[Index]); //GPIOA10复用为USART1
-		//GPIO_PinAFConfig(GPIOA,GPIO_PinSource9,GPIO_AF_USART1); //GPIOA9复用为USART1
-		//GPIO_PinAFConfig(GPIOA,GPIO_PinSource10,GPIO_AF_USART1); //GPIOA10复用为USART1
+		GPIO_PinAFConfig(_GROUP(tx),_PIN(tx),afs[Index]); //GPIOA9复用为USART1
+		GPIO_PinAFConfig(_GROUP(rx),_PIN(rx),afs[Index]); //GPIOA10复用为USART1
     #endif 
 
     USART_StructInit(&p);
