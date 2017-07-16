@@ -203,6 +203,8 @@ bool SerialPort::OnOpen()
         };
 //		GPIO_PinAFConfig(IndexToGroup(tx), _PIN(tx), afs[Index]);
 //		GPIO_PinAFConfig(IndexToGroup(rx), _PIN(rx), afs[Index]);
+		GPIO_PinAFConfig(GPIOA,GPIO_PinSource9,GPIO_AF_USART1); //GPIOA9复用为USART1
+	GPIO_PinAFConfig(GPIOA,GPIO_PinSource10,GPIO_AF_USART1); //GPIOA10复用为USART1
     #endif 
 
     USART_StructInit(&p);
