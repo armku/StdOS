@@ -133,7 +133,11 @@ bool SerialPort::OnOpen()
 
     //串口引脚初始化
     AlternatePort txx;
-    InputPort rxx;
+	#ifdef STM32F1
+		InputPort rxx;
+	#elif defined STM32F4
+		AlternatePort rxx;
+	#endif
     txx.Set(tx);
     rxx.Set(rx);
 

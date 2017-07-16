@@ -372,7 +372,16 @@ void AlternatePort::OpenPin(void *param)
         gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
     #elif defined STM32F4
         gpio->GPIO_Mode = GPIO_Mode_AF;
+		gpio->GPIO_Speed = GPIO_Speed_50MHz;
         gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
+		if(!this->OpenDrain)
+		{
+			gpio->GPIO_PuPd = GPIO_PuPd_UP;
+		}
+		else
+		{
+			gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
+		}
     #endif 
     int i = 0;
     i++;
