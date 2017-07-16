@@ -21,13 +21,13 @@ int main(void)
 {
 	TSys &sys = (TSys &)(Sys);
 	sys.Init();
-    #if DEBUG
+    testSerial();
+	#if DEBUG
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 	
 	//W25Q64Test();
 	//test();
-	testSerial();
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
     Sys.Start();
