@@ -66,7 +66,7 @@ void GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
     *txPin = p[n];
     *rxPin = p[n + 1];
 }
-
+extern GPIO_TypeDef *IndexToGroup(byte index);
 // ´ò¿ª´®¿Ú
 bool SerialPort::OnOpen()
 {
@@ -197,8 +197,8 @@ bool SerialPort::OnOpen()
         {
             GPIO_AF_USART1, GPIO_AF_USART2, GPIO_AF_USART3, GPIO_AF_UART4, GPIO_AF_UART5, GPIO_AF_USART6, GPIO_AF_UART7, GPIO_AF_UART8
         };
-		GPIO_PinAFConfig(_GROUP(tx), _PIN(tx), afs[Index]);
-		//GPIO_PinAFConfig(_GROUP(rx), _PIN(rx), afs[Index]);
+//		GPIO_PinAFConfig(IndexToGroup(tx), _PIN(tx), afs[Index]);
+//		GPIO_PinAFConfig(IndexToGroup(rx), _PIN(rx), afs[Index]);
     #endif 
 
     USART_StructInit(&p);
