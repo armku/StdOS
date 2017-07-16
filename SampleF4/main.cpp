@@ -60,7 +60,7 @@ void test()
 //bound:波特率
 void uart_init(u32 bound){
    //GPIO端口设置
-  GPIO_InitTypeDef GPIO_InitStructure;
+//  GPIO_InitTypeDef GPIO_InitStructure;
 	USART_InitTypeDef USART_InitStructure;
 //	NVIC_InitTypeDef NVIC_InitStructure;
 	
