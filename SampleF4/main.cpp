@@ -15,6 +15,10 @@ void LedTask(void *param)
     //    led2 = key0;
 	//led2=key0;
 }
+void SerialTest(void *param)
+{
+	debug_printf("hello\r\n");
+}
 void test();
 int main(void)
 {
@@ -27,6 +31,7 @@ int main(void)
 	//W25Q64Test();
 	//test();
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
+	//Sys.AddTask(SerialTest,0,0,1000,"Ledtest");
 
     Sys.Start();
 	while(1)

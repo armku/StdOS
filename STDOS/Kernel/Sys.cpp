@@ -327,6 +327,12 @@ void TSys::Init()
 			CPUName = new String("STM32F103VG");
             this->RAMSize = 768;
 			break;
+		#ifdef STM32F4
+		case 0X0413:
+			CPUName = new String("STM32F407ZG");
+            this->RAMSize = 192;
+			break;
+		#endif
 		default:
             CPUName = new String("δ֪");
             this->RAMSize = 0;
