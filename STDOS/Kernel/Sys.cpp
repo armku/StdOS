@@ -312,27 +312,28 @@ void TSys::Init()
     #endif 
     switch (this->DevID)
     {
-        case 0X0307:
-            CPUName = new String("STM32F103RD");
-            this->RAMSize = 64;
-            break;
-        case 0x0410:
-            CPUName = new String("STM32F103C8");
-            this->RAMSize = 20;
-            break;
-        case 0X0414:
-            CPUName = new String("STM32F103ZE");
-            this->RAMSize = 64;
-            break;
-        case 0X0418:
-            CPUName = new String("STM32F105VC");
-            this->RAMSize = 64;
-            break;
-        case 0X0430:
-            CPUName = new String("STM32F103VG");
-            this->RAMSize = 768;
-            break;
-            #ifdef STM32F4
+        #ifdef STM32F1
+            case 0X0307:
+                CPUName = new String("STM32F103RD");
+                this->RAMSize = 64;
+                break;
+            case 0x0410:
+                CPUName = new String("STM32F103C8");
+                this->RAMSize = 20;
+                break;
+            case 0X0414:
+                CPUName = new String("STM32F103ZE");
+                this->RAMSize = 64;
+                break;
+            case 0X0418:
+                CPUName = new String("STM32F105VC");
+                this->RAMSize = 64;
+                break;
+            case 0X0430:
+                CPUName = new String("STM32F103VG");
+                this->RAMSize = 768;
+                break;
+            #elif defined STM32F4
             case 0X0413:
                 CPUName = new String("STM32F407ZG");
                 this->RAMSize = 192;
