@@ -21,8 +21,8 @@ int main(void)
 	TSys &sys = (TSys &)(Sys);
 	sys.Init();
     #if DEBUG
-    //    Sys.MessagePort = COM1;
-    //    Sys.ShowInfo();
+        Sys.MessagePort = COM1;
+        Sys.ShowInfo();
     #endif 	
 	//W25Q64Test();
 	//test();
