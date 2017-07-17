@@ -525,7 +525,11 @@ byte AT24CXX::CheckOk()
        
     void AT24C02Test()
     {
-		AT24CXX at2402(PB6, PB7, AT24C02);
+		#ifdef STM32F1
+			AT24CXX at2402(PB6, PB7, AT24C02);
+		#elif defined STM32F4
+			AT24CXX at2402(PB8, PB9, AT24C02);
+		#endif
         printf("\r\n");
 
         ushort i;
