@@ -6,13 +6,13 @@ InputPort key0(PE4,true);
 //InputPort key0(PE4,true);
 InputPort key1(PE3,true);
 InputPort key2(PE2,true);
-InputPort keyup(PA0,true);
+InputPort keyup(PA0,true,InputPort::DOWN);
 
 void LedTask(void *param)
 {
     OutputPort *leds = (OutputPort*)param;
     *leds = ! * leds;	
-    led2 = key0;
+    led2 = keyup;
 }
 void SerialTest(void *param)
 {
