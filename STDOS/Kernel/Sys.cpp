@@ -280,8 +280,13 @@ UInt64 TicksPerms = 0;
 void TSys::Init()
 {
     SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
-    fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数   
-    TicksPerms = SystemCoreClock / delay_ostickspersec;
+    #ifdef STM32F1
+        fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数   
+        TicksPerms = SystemCoreClock / delay_ostickspersec;
+    #elif defined STM32F4
+        fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数   
+        TicksPerms = SystemCoreClock / delay_ostickspersec;
+    #endif 
     SysTick_Config(TicksPerms); //tick is 1ms	
     #ifdef STM32F1
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);

@@ -180,7 +180,21 @@
   * @{
   */
 
-  uint32_t SystemCoreClock = 144000000;
+#if defined(STM32F40_41xxx)
+  uint32_t SystemCoreClock = 168000000;
+#endif /* STM32F40_41xxx */
+
+#if defined(STM32F427_437xx) || defined(STM32F429_439xx) || defined(STM32F446xx) || defined(STM32F469_479xx)
+  uint32_t SystemCoreClock = 180000000;
+#endif /* STM32F427_437x || STM32F429_439xx || STM32F446xx || STM32F469_479xx */
+
+#if defined(STM32F401xx)
+  uint32_t SystemCoreClock = 84000000;
+#endif /* STM32F401xx */
+
+#if defined(STM32F410xx) || defined(STM32F411xE) || defined(STM32F412xG) || defined(STM32F413_423xx)
+  uint32_t SystemCoreClock = 100000000;
+#endif /* STM32F410xx || STM32F401xE || STM32F412xG || STM32F413_423xx */
 
   __I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
 
