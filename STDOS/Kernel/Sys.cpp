@@ -20,14 +20,13 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
     #include "stm32f4xx.h"
 #endif 
 
-#if 0
-    extern "C"
-    {
-        extern uint __heap_base;
-        extern uint __heap_limit;
-        extern uint __initial_sp;
-    }
-#endif 
+extern "C"
+{
+    extern uint __heap_base;
+    extern uint __heap_limit;
+    extern uint __initial_sp;
+}
+
 String *CPUName;
 void assert_failed2(cstring msg, cstring file, unsigned int line){}
 //外部注册函数
@@ -207,14 +206,14 @@ void TSys::ShowInfo()const
 {
     uint Rx = 0;
     uint Px = 0;
-    #if 0	
-        uint HeapSize = 0;
-        uint StackSize = 0;
+
+    uint HeapSize = 0;
+    uint StackSize = 0;
 
 
-        HeapSize = ((uint) &__heap_limit - (uint) &__heap_base);
-        StackSize = ((uint) &__initial_sp - (uint) &__heap_limit);
-    #endif 
+    HeapSize = ((uint) &__heap_limit - (uint) &__heap_base);
+    StackSize = ((uint) &__initial_sp - (uint) &__heap_limit);
+
     switch (this->CPUID &SCB_CPUID_VARIANT_Msk)
     {
         case 0:
@@ -254,10 +253,8 @@ void TSys::ShowInfo()const
     printf("STDOS::%s %dMHz Flash:%dk RAM:%dk\n", CPUName->GetBuffer(), this->Clock / 1000000, this->FlashSize, this->RAMSize);
     printf("DevID:0X%04X RevID:0X%04X\n", this->DevID, this->RevID);
     printf("CPUID:0X%X ARM:ARMv7-M Cortex-M3: R%dp%d\n", this->CPUID, Rx, Px);
-    #if 0
-        printf("Heap :(0X%X, 0X%X) = 0X%X (%dk)\n", (uint) &__heap_base, (uint) &__heap_limit, HeapSize, HeapSize / 1024);
-        printf("Stack:(0X%X, 0X%X) = 0X%X (%dk)\n", (uint) &__heap_limit, (uint) &__initial_sp, StackSize, StackSize / 1024);
-    #endif 
+    printf("Heap :(0X%X, 0X%X) = 0X%X (%dk)\n", (uint) &__heap_base, (uint) &__heap_limit, HeapSize, HeapSize / 1024);
+    printf("Stack:(0X%X, 0X%X) = 0X%X (%dk)\n", (uint) &__heap_limit, (uint) &__initial_sp, StackSize, StackSize / 1024);
     printf("ChipType:0x42455633 3\n");
     printf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\n", ID[0], ID[1], ID[2], ID[3], ID[4], ID[5], ID[6], ID[7], ID[8], ID[9], ID[10], ID[11]);
     printf("Time : ");
@@ -297,7 +294,9 @@ void TSys::Init()
 
     #ifdef STM32F0XX
         void *p = (void*)0x1FFFF7AC;
-    #else 
+    #elif defined STM32F1 
+        void *p = (void*)0x1FFFF7E8;
+    #elif defined STM32F4 
         void *p = (void*)0x1FFFF7E8;
     #endif 
     memcpy(ID, p, ArrayLength(ID));
