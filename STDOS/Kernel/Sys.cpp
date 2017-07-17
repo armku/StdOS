@@ -31,7 +31,6 @@ String *CPUName;
 void assert_failed2(cstring msg, cstring file, unsigned int line){}
 //外部注册函数
 // 任务
-#include "Task.h"
 // 任务类
 TaskScheduler *_Scheduler;
 
