@@ -12,8 +12,7 @@ void LedTask(void *param)
 {
     OutputPort *leds = (OutputPort*)param;
     *leds = ! * leds;	
-    //    led2 = key0;
-	//led2=key0;
+    led2 = key0;
 }
 void SerialTest(void *param)
 {
@@ -35,11 +34,6 @@ int main(void)
 	Sys.AddTask(SerialTest,0,0,1000,"Ledtest");
 
     Sys.Start();
-	while(1)
-	{
-//		led1=key0;
-//		led2=key2;
-	}
 }
 #include "stm32f4xx.h" 
 void test()
