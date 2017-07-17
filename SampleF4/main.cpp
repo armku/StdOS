@@ -2,11 +2,11 @@
 
 OutputPort led1(PF9,false);
 OutputPort led2(PF10,false);
+InputPort key0(PE4,true);
 //InputPort key0(PE4,true);
-//InputPort key0(PE4,true);
-//InputPort key1(PE3,true);
-//InputPort key2(PE2,true);
-//InputPort keyup(PA0,true);
+InputPort key1(PE3,true);
+InputPort key2(PE2,true);
+InputPort keyup(PA0,true);
 
 void LedTask(void *param)
 {
@@ -17,7 +17,8 @@ void LedTask(void *param)
 }
 void SerialTest(void *param)
 {
-	debug_printf("hello\r\n");
+	static int i=0;
+	debug_printf("hello %4d\r\n",i++);
 }
 void test();
 int main(void)
@@ -31,7 +32,7 @@ int main(void)
 	//W25Q64Test();
 	//test();
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
-	//Sys.AddTask(SerialTest,0,0,1000,"Ledtest");
+	Sys.AddTask(SerialTest,0,0,1000,"Ledtest");
 
     Sys.Start();
 	while(1)
