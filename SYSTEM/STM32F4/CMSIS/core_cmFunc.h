@@ -1,13 +1,13 @@
 /**************************************************************************//**
  * @file     core_cmFunc.h
  * @brief    CMSIS Cortex-M Core Function Access Header File
- * @version  V4.10
- * @date     18. March 2015
+ * @version  V3.20
+ * @date     25. February 2013
  *
  * @note
  *
  ******************************************************************************/
-/* Copyright (c) 2009 - 2015 ARM LIMITED
+/* Copyright (c) 2009 - 2013 ARM LIMITED
 
    All rights reserved.
    Redistribution and use in source and binary forms, with or without
@@ -198,7 +198,7 @@ __STATIC_INLINE void __set_PRIMASK(uint32_t priMask)
 }
 
 
-#if       (__CORTEX_M >= 0x03) || (__CORTEX_SC >= 300)
+#if       (__CORTEX_M >= 0x03)
 
 /** \brief  Enable FIQ
 
@@ -242,20 +242,6 @@ __STATIC_INLINE void __set_BASEPRI(uint32_t basePri)
 }
 
 
-/** \brief  Set Base Priority with condition
-
-    This function assigns the given value to the Base Priority register only if BASEPRI masking is disabled,
-    or the new value increases the BASEPRI priority level.
-
-    \param [in]    basePri  Base Priority value to set
- */
-__STATIC_INLINE void __set_BASEPRI_MAX(uint32_t basePri)
-{
-  register uint32_t __regBasePriMax      __ASM("basepri_max");
-  __regBasePriMax = (basePri & 0xff);
-}
-
-
 /** \brief  Get Fault Mask
 
     This function returns the current value of the Fault Mask register.
@@ -281,10 +267,10 @@ __STATIC_INLINE void __set_FAULTMASK(uint32_t faultMask)
   __regFaultMask = (faultMask & (uint32_t)1);
 }
 
-#endif /* (__CORTEX_M >= 0x03) || (__CORTEX_SC >= 300) */
+#endif /* (__CORTEX_M >= 0x03) */
 
 
-#if       (__CORTEX_M == 0x04) || (__CORTEX_M == 0x07)
+#if       (__CORTEX_M == 0x04)
 
 /** \brief  Get FPSCR
 
@@ -317,7 +303,19 @@ __STATIC_INLINE void __set_FPSCR(uint32_t fpscr)
 #endif
 }
 
-#endif /* (__CORTEX_M == 0x04) || (__CORTEX_M == 0x07) */
+#endif /* (__CORTEX_M == 0x04) */
+
+
+#elif defined ( __ICCARM__ ) /*------------------ ICC Compiler -------------------*/
+/* IAR iccarm specific functions */
+
+#include <cmsis_iar.h>
+
+
+#elif defined ( __TMS470__ ) /*---------------- TI CCS Compiler ------------------*/
+/* TI CCS specific functions */
+
+#include <cmsis_ccs.h>
 
 
 #elif defined ( __GNUC__ ) /*------------------ GNU Compiler ---------------------*/
@@ -532,7 +530,7 @@ __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_BASEPRI(void)
 {
   uint32_t result;
 
-  __ASM volatile ("MRS %0, basepri" : "=r" (result) );
+  __ASM volatile ("MRS %0, basepri_max" : "=r" (result) );
   return(result);
 }
 
@@ -546,19 +544,6 @@ __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_BASEPRI(void)
 __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_BASEPRI(uint32_t value)
 {
   __ASM volatile ("MSR basepri, %0" : : "r" (value) : "memory");
-}
-
-
-/** \brief  Set Base Priority with condition
-
-    This function assigns the given value to the Base Priority register only if BASEPRI masking is disabled,
-	or the new value increases the BASEPRI priority level.
-
-    \param [in]    basePri  Base Priority value to set
- */
-__attribute__( ( always_inline ) ) __STATIC_INLINE void __set_BASEPRI_MAX(uint32_t value)
-{
-  __ASM volatile ("MSR basepri_max, %0" : : "r" (value) : "memory");
 }
 
 
@@ -591,7 +576,7 @@ __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_FAULTMASK(uint32_t
 #endif /* (__CORTEX_M >= 0x03) */
 
 
-#if       (__CORTEX_M == 0x04) || (__CORTEX_M == 0x07)
+#if       (__CORTEX_M == 0x04)
 
 /** \brief  Get FPSCR
 
@@ -631,34 +616,21 @@ __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_FPSCR(uint32_t fps
 #endif
 }
 
-#endif /* (__CORTEX_M == 0x04) || (__CORTEX_M == 0x07) */
-
-
-#elif defined ( __ICCARM__ ) /*------------------ ICC Compiler -------------------*/
-/* IAR iccarm specific functions */
-#include <cmsis_iar.h>
-
-
-#elif defined ( __TMS470__ ) /*---------------- TI CCS Compiler ------------------*/
-/* TI CCS specific functions */
-#include <cmsis_ccs.h>
+#endif /* (__CORTEX_M == 0x04) */
 
 
 #elif defined ( __TASKING__ ) /*------------------ TASKING Compiler --------------*/
 /* TASKING carm specific functions */
+
 /*
  * The CMSIS functions have been implemented as intrinsics in the compiler.
- * Please use "carm -?i" to get an up to date list of all intrinsics,
+ * Please use "carm -?i" to get an up to date list of all instrinsics,
  * Including the CMSIS ones.
  */
-
-
-#elif defined ( __CSMC__ ) /*------------------ COSMIC Compiler -------------------*/
-/* Cosmic specific functions */
-#include <cmsis_csm.h>
 
 #endif
 
 /*@} end of CMSIS_Core_RegAccFunctions */
+
 
 #endif /* __CORE_CMFUNC_H */
