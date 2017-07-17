@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include "Buffer.h"
 #include "Sys.h"
 
 Buffer::Buffer(void *ptr, int len)

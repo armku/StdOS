@@ -3,7 +3,6 @@
  */
 
 #include "SString.h"
-#include <stdio.h>
 #include <string.h>
 #include <CType.h>
 #include "Sys.h"

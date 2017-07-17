@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "TInterrupt.h"
 #include "TTime.h"
 #include "SerialPort.h"

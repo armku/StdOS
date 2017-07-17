@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "WatchDog.h"
 #ifdef STM32F1
 	#include "stm32f10x.h"
