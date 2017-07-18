@@ -176,7 +176,13 @@ void TSys::Delay(int us)const  // Î¢Ãë¼¶ÑÓ³Ù
 
 TSys::TSys()
 {
-    this->Clock = 72000000;
+	#ifdef STM32F0
+		this->Clock = 72000000;
+	#elif defined STM32F1
+		this->Clock = 72000000;
+	#elif defined STM32F4
+		this->Clock = 72000000;
+	#endif
     this->MessagePort = COM1;
 }
 
