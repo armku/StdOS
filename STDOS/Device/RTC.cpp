@@ -79,7 +79,9 @@ void HardRTC::Init()
 }
 void HardRTC::LoadTime()
 {
-	
+	#ifdef STM32F1
+	Time.Seconds=RTC_GetCounter() + 8 * 60 * 60;
+	#endif
 }
 void HardRTC::SaveTime()
 {
@@ -115,62 +117,9 @@ void HardRTC::Start(bool lowpower, bool external)
 	
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class HardRtc
-{
-    public:  
-		void SetTime(uint seconds);//设置时间
-		DateTime& GetTime(DateTime & dt);//读取时间
-};
-
-HardRtc hardRtc;
-
 /* 秒中断标志，进入秒中断时置1，当时间被刷新之后清0 */
 __IO uint32_t TimeDisplay = 0;
 
-//设置时间
-void HardRtc::SetTime(uint seconds)
-{	
-	#ifdef STM32F1
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);	//使能PWR和BKP外设时钟  
-	PWR_BackupAccessCmd(ENABLE);	//使能RTC和后备寄存器访问 
-	RTC_SetCounter(seconds);	//设置RTC计数器的值
-
-	RTC_WaitForLastTask();	//等待最近一次对RTC寄存器的写操作完成  
-	#endif
-}
-
-//读取时间
-DateTime& HardRtc::GetTime(DateTime & dt)
-{
-	#ifdef STM32F1
-	dt=RTC_GetCounter() + 8 * 60 * 60;
-	#endif
-	return dt;
-}
 #ifdef __cplusplus
     extern "C"
     {
@@ -197,20 +146,21 @@ DateTime& HardRtc::GetTime(DateTime & dt)
 //测试时钟
 #if 1
 DateTime now;//当前时间
-HardRtc *Rtc;
+
 void TimeRefresh(void* param)
 {
-	HardRtc * rtc=(HardRtc*)param;
-	rtc->GetTime(now);
+	HardRTC * rtc=(HardRTC*)param;
+	rtc->LoadTime();
+	now=Time.Seconds;
 	now.Show();
 }
 void RTCtest()
 {
-	Rtc = &hardRtc;
-    tt.LowPower = false;
+	tt.LowPower = false;
     tt.External = false;
     
-	Rtc->GetTime(now);
+	tt.LoadTime();
+	now=Time.Seconds;
 	if(now.TotalSeconds()<100)
 	{
 		now.Year=2017;
@@ -220,8 +170,9 @@ void RTCtest()
 		now.Minute=17;
 		
 		tt.Init();
-		Rtc->SetTime(now.TotalSeconds());
+		Time.Seconds=now.TotalSeconds();
+		tt.SaveTime();
 	}
-	Sys.AddTask(TimeRefresh,Rtc,100,1000,"TimeUp");
+	Sys.AddTask(TimeRefresh,&tt,100,1000,"TimeUp");
 }
 #endif
