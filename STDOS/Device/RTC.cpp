@@ -7,8 +7,6 @@
     #include "stm32f4xx.h"
 #endif 
 
-HardRTC tt;
-
 HardRTC::HardRTC()
 {
 	this->LowPower	= true;
@@ -77,18 +75,30 @@ void HardRTC::Init()
         /* Wait until last write operation on RTC registers has finished */
         RTC_WaitForLastTask();
     #endif 
+	this->LoadTime();
+	Time.BaseSeconds=Time.Seconds+Time.BaseSeconds;
 }
 
 void HardRTC::LoadTime()
 {
+	uint totalSeconds=0;
     #ifdef STM32F1
-        Time.Seconds = RTC_GetCounter() + 8 * 60 * 60;
+        totalSeconds = RTC_GetCounter();
+		Time.Seconds=totalSeconds;
+		if(totalSeconds>Time.BaseSeconds)
+		{
+			Time.Seconds=totalSeconds-Time.BaseSeconds;
+		}
+		else
+		{
+			Time.Seconds=0;
+		}
     #endif 
 }
 
 void HardRTC::SaveTime()
 {
-    uint seconds = Time.Seconds; //先这么用
+    uint seconds = Time.Seconds+Time.BaseSeconds;
     #ifdef STM32F1
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE); //使能PWR和BKP外设时钟  
         PWR_BackupAccessCmd(ENABLE); //使能RTC和后备寄存器访问 
@@ -116,7 +126,7 @@ void HardRTC::WriteBackup(byte addr, uint value)
 
 HardRTC *HardRTC::Instance()
 {
-    return  &tt;
+    return  new HardRTC();
 }
 
 void HardRTC::Start(bool lowpower, bool external)
@@ -159,16 +169,19 @@ __IO uint32_t TimeDisplay = 0;
     {
         HardRTC *rtc = (HardRTC*)param;
         rtc->LoadTime();
-        now = Time.Seconds;
+        now = Time.BaseSeconds+Time.Seconds;
         now.Show();
+		debug_printf("  BaseSeconds:%d Seconds:%d\r\n",Time.BaseSeconds,Time.Seconds);
     }
     void RTCtest()
     {
-        tt.LowPower = false;
-        tt.External = false;
+		HardRTC* rtc=HardRTC::Instance();
+        rtc->LowPower = false;
+        rtc->External = false;
 
-        tt.LoadTime();
-        now = Time.Seconds;
+		rtc->Init();
+        rtc->LoadTime();
+        now = Time.BaseSeconds+Time.Seconds;
         if (now.TotalSeconds() < 100)
         {
             now.Year = 2017;
@@ -177,10 +190,11 @@ __IO uint32_t TimeDisplay = 0;
             now.Hour = 14;
             now.Minute = 17;
 
-            tt.Init();
-            Time.Seconds = now.TotalSeconds();
-            tt.SaveTime();
+            rtc->Init();
+            Time.BaseSeconds = now.TotalSeconds()-Time.Seconds;
+			rtc->LoadTime();
+            rtc->SaveTime();
         }
-        Sys.AddTask(TimeRefresh, &tt, 100, 1000, "TimeUp");
+        Sys.AddTask(TimeRefresh, rtc, 100, 1000, "TimeUp");
     }
 #endif

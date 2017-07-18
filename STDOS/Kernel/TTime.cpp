@@ -14,14 +14,18 @@ void TTime::OnHandler(ushort num, void *param){
 
 }
 
-TTime::TTime(){
-
+TTime::TTime()
+{
+	this->BaseSeconds=0;
+	this->Seconds=0;
 }
 // 使用RTC，必须在Init前调用
-void TTime::UseRTC(){
+void TTime::UseRTC()
+{
 
 }
-void TTime::Init(){
+void TTime::Init()
+{
 
 }
 // 当前滴答时钟
