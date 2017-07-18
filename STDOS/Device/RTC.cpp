@@ -141,7 +141,7 @@ DateTime& HardRtc::GetTime(DateTime & dt)
     }
 #endif
 //测试时钟
-#if 0
+#if 1
 DateTime now;//当前时间
 HardRtc *Rtc;
 void TimeRefresh(void* param)

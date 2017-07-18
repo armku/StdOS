@@ -29,9 +29,6 @@ public:
 #endif
 #pragma once
 
-#include "Type.h"
-#include "DateTime.h"
-
 class HardRtc
 {
     public:  
