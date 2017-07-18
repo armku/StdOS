@@ -326,7 +326,7 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
 //œ‘ æ ±º‰
 void ShowTime(void *param)
 {
-    UInt64 curms = Time.Ms();
+    UInt64 curms = Time.Milliseconds;
     debug_printf("Time: %02lld:%02lld:%02lld.%03lld\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000);
 }
 

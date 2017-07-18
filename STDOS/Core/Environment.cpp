@@ -16,7 +16,7 @@ UInt64 TEnvironment::TickCount()const
 // 获取系统启动后经过的毫秒数
 UInt64 TEnvironment::Ms()const
 {
-    return Time.Ms();
+    return Time.Milliseconds;
 }
 
 // 获取当前计算机上的处理器数

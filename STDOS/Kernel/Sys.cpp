@@ -189,7 +189,7 @@ TSys::TSys()
 
 UInt64 TSys::Ms()const  // 系统启动后的毫秒数
 {
-    return Time.Ms();
+    return Time.Milliseconds;
 }
 
 uint TSys::Seconds()const  // 系统绝对当前时间，秒

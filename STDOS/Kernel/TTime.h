@@ -36,11 +36,7 @@ public:
     void Delay(int us) const;	// 微秒级延迟
 
 	uint TicksToUs(uint ticks) const;
-	uint UsToTicks(uint us) const;
-		
-	public:							
-		UInt64 Ms() const;//系统启动以来的毫秒数		
-		//UInt64 mCurrent;//系统启动以来的毫秒数				
+	uint UsToTicks(uint us) const;	
 };
 extern TTime Time; //系统时间，不建议用户直接使用
 // 时间轮。用于超时处理
