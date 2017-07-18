@@ -319,7 +319,7 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
         //// 最大只允许睡眠1秒，避免Sys.Delay出现设计错误，同时也更人性化
         //if(min > 1000000) min = 1000000;
         //Sys.Delay(min);
-        Time.Sleep(min);
+        Time.Delay(min);
     }
 }
 

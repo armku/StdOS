@@ -131,7 +131,7 @@ void TimeSleep(uint us)
     }
     if (us)
     {
-        Time.Sleep(us);
+        Time.Delay(us);
     }
 }
 

@@ -88,7 +88,7 @@ void TTime::SetTime(UInt64 seconds)
 #endif 
 void TTime::Sleep(int ms, bool* running) const
 {
-    this->Delay(ms);
+    this->Delay(ms*1000);
 }
 
 // Œ¢√Îº∂—”≥Ÿ
