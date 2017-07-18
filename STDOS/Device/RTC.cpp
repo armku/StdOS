@@ -74,9 +74,7 @@ void HardRTC::Init()
 
         /* Wait until last write operation on RTC registers has finished */
         RTC_WaitForLastTask();
-    #endif 
-	this->LoadTime();
-	Time.BaseSeconds=Time.Seconds+Time.BaseSeconds;
+    #endif 	
 }
 
 void HardRTC::LoadTime()
@@ -179,8 +177,8 @@ __IO uint32_t TimeDisplay = 0;
         rtc->LowPower = false;
         rtc->External = false;
 
-		rtc->Init();
-        rtc->LoadTime();
+		rtc->LoadTime();
+		Time.BaseSeconds=Time.Seconds+Time.BaseSeconds;
         now = Time.BaseSeconds+Time.Seconds;
         if (now.TotalSeconds() < 100)
         {
@@ -190,7 +188,7 @@ __IO uint32_t TimeDisplay = 0;
             now.Hour = 14;
             now.Minute = 17;
 
-            rtc->Init();
+            rtc->Init();//设置时间时初始化，否则错乱
             Time.BaseSeconds = now.TotalSeconds()-Time.Seconds;
 			rtc->LoadTime();
             rtc->SaveTime();
