@@ -6,6 +6,75 @@
 	#include "stm32f4xx.h"
 #endif
 
+HardRTC tt;
+
+HardRTC::HardRTC()
+{
+	
+}
+
+void HardRTC::Init()
+{
+	
+}
+void HardRTC::LoadTime()
+{
+	
+}
+void HardRTC::SaveTime()
+{
+	
+}
+int HardRTC::Sleep(int ms)
+{
+	return 0;
+}
+
+uint HardRTC::ReadBackup(byte addr)
+{
+	return 0;
+}
+void HardRTC::WriteBackup(byte addr, uint value)
+{
+	
+}
+	
+HardRTC* HardRTC::Instance()
+{
+	return &tt;
+}
+void HardRTC::Start(bool lowpower, bool external)
+{
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 HardRtc hardRtc;
 
 /* 秒中断标志，进入秒中断时置1，当时间被刷新之后清0 */
