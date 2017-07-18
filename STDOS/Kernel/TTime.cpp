@@ -7,17 +7,54 @@
 #endif
 
 extern byte fac_us; //每个us需要的systick时钟数 
+TTime Time; //系统时间，不建议用户直接使用
+extern UInt64 TicksPerms;
+
+void TTime::OnHandler(ushort num, void* param)
+{
+	
+}
+
+TTime::TTime()
+{
+	
+}
+// 使用RTC，必须在Init前调用
+void TTime::UseRTC()
+{
+	
+}
+void TTime::Init()
+{
+	
+}
+// 当前滴答时钟
+uint TTime::CurrentTicks() const
+{
+	return 0;
+}
+// 当前毫秒数
+UInt64 TTime::Current()const
+{
+	#if 1
+	UInt64 ret=this->mCurrent *1000;
+	ret+=(TicksPerms-SysTick->VAL)/fac_us;
+    return ret;
+	#else
+	return this->mCurrent*1000;
+	#endif
+}
+
+// 设置时间
+void TTime::SetTime(UInt64 seconds)
+{
+	
+}
 #ifdef __cplusplus
     extern "C"
     {
     #endif 
-
-    //systick中断服务函数,使用ucos时用到
-    void SysTick_Handler(void)
-    {
-        Time.mCurrent++;
-    }
-
+    
     //延时nus
     //nus为要延时的us数.
     void delay_us(uint nus)
@@ -45,55 +82,19 @@ extern byte fac_us; //每个us需要的systick时钟数
             }
         };
     }
-    //以下为汇编函数
-    void WFI_SET(void); //执行WFI指令    
-    void MSR_MSP(uint addr); //设置堆栈地址
-    //THUMB指令不支持汇编内联
-    //采用如下方法实现执行汇编指令WFI  
-    void WFI_SET(void)
-    {
-        __ASM volatile("wfi");
-    }
-    
-    //设置栈顶地址
-    //addr:栈顶地址
-    __asm void MSR_MSP(uint addr)
-    {
-        MSR MSP, r0  //set Main Stack value
-        BX r14
-    }
+
     #ifdef __cplusplus
     }
 #endif 
-TTime Time; //系统时间，不建议用户直接使用
-
-TTime::TTime(){}
-//返回当前毫秒数
-UInt64 TTime::Ms()const
-{
-    return this->mCurrent;
-}
-
-//设置系统当前时间,Unix格式秒数
-void TTime::SetTime(UInt64 seconds){
-
-}
-
 void TTime::Sleep(int ms, bool* running) const
 {
-    delay_us(ms);
+    this->Delay(ms);
 }
-extern UInt64 TicksPerms;
-//系统启动以来的毫秒
-UInt64 TTime::Current()const
+
+// 微秒级延迟
+void TTime::Delay(int us) const
 {
-	#if 1
-	UInt64 ret=this->mCurrent *1000;
-	ret+=(TicksPerms-SysTick->VAL)/fac_us;
-    return ret;
-	#else
-	return this->mCurrent*1000;
-	#endif
+	delay_us(us);
 }
 
 uint TTime::TicksToUs(uint ticks)const
@@ -114,10 +115,6 @@ uint TTime::TicksToUs(uint ticks)const
         return ((UInt64)ticks *(1000000 >> 6)) >> (16-6);
     }
 }
-
-/*
-1us=30ticks
- */
 uint TTime::UsToTicks(uint us)const
 {
     if (!us)
@@ -137,15 +134,39 @@ uint TTime::UsToTicks(uint us)const
         return ((UInt64)us << (15-6)) / (1000000 >> 6);
     }
 }
+
+//系统启动以来的毫秒数
+UInt64 TTime::Ms()const
+{
+    return this->mCurrent;
+}
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+TimeWheel::TimeWheel(uint ms)
+{
+	
+}
+
+void TimeWheel::Reset(uint ms)
+{
+	
+}
+// 是否已过期
+bool TimeWheel::Expired()
+{
+	return true;
+}
+
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 TimeCost::TimeCost()
 {
 	this->Start=0;
 }
-void TimeCost::Show(cstring format) const
-{
-	printf("执行 %d 微妙\r\n",12);
-}
 
+void TimeCost::Reset()
+{
+}
 // 逝去的时间，微秒
 int TimeCost::Elapsed() const
 {
@@ -153,3 +174,42 @@ int TimeCost::Elapsed() const
 	ret-=this->Start;
 	return ret;
 }
+void TimeCost::Show(cstring format) const
+{
+	printf("执行 %d 微妙\r\n",12);
+}
+
+
+
+
+#ifdef __cplusplus
+    extern "C"
+    {
+    #endif 
+
+    //systick中断服务函数,使用ucos时用到
+    void SysTick_Handler(void)
+    {
+        Time.mCurrent++;
+    }
+    
+    //以下为汇编函数
+    void WFI_SET(void); //执行WFI指令    
+    void MSR_MSP(uint addr); //设置堆栈地址
+    //THUMB指令不支持汇编内联
+    //采用如下方法实现执行汇编指令WFI  
+    void WFI_SET(void)
+    {
+        __ASM volatile("wfi");
+    }
+    
+    //设置栈顶地址
+    //addr:栈顶地址
+    __asm void MSR_MSP(uint addr)
+    {
+        MSR MSP, r0  //set Main Stack value
+        BX r14
+    }
+    #ifdef __cplusplus
+    }
+#endif 
