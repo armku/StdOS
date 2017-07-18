@@ -233,7 +233,7 @@ int DateTime::TotalSeconds()const
 	seccount+=(uint)hour*3600;//小时秒钟数
     seccount+=(uint)min*60;	 //分钟秒钟数
 	seccount+=sec;//最后的秒钟加上去
-	return 	seccount-8*60*60;
+	return 	seccount;
 }
 // 1970/1/1以来毫秒数
 Int64 DateTime::TotalMs()const

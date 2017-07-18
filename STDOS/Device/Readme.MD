@@ -8,6 +8,7 @@
 ##	Spi		
 ##	I2C		
 ## WatchDog 
+## RTC
 
 #STM32F4
 

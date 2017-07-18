@@ -1,4 +1,5 @@
 #include "TTime.h"
+#include "Device\RTC.h"
 #ifdef STM32F1
     #include "stm32f10x.h"
 #endif 
@@ -19,10 +20,20 @@ TTime::TTime()
 	this->BaseSeconds=0;
 	this->Seconds=0;
 }
+void RtcRefresh(void *param)
+{
+	HardRTC *rtc = (HardRTC*)param;
+    rtc->LoadTime();
+}
 // 使用RTC，必须在Init前调用
 void TTime::UseRTC()
 {
+	HardRTC *rtc=HardRTC::Instance();
+	rtc->LowPower = false;
+    rtc->External = false;
 
+	rtc->Init();
+	Sys.AddTask(RtcRefresh, rtc, 100, 100, "Rtc");
 }
 void TTime::Init()
 {

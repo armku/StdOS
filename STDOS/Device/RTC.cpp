@@ -162,7 +162,7 @@ __IO uint32_t TimeDisplay = 0;
     }
 #endif 
 //测试时钟
-#if 1
+#if 0
     DateTime now; //当前时间
 
     void TimeRefresh(void *param)

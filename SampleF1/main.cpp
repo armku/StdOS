@@ -33,7 +33,6 @@ void LedTask(void *param)
 
 #define namee "StdOS"
 //void W25Q64Test();
-void RTCtest();
 int main(void)
 {
     TSys &sys = (TSys &)(Sys);
@@ -47,8 +46,7 @@ int main(void)
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 	
-	//W25Q64Test();
-	RTCtest();
+	//W25Q64Test();	
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
     Sys.Start();	
