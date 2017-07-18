@@ -1,4 +1,5 @@
 #include "RTC.h"
+#include "TTime.h"
 #ifdef STM32F1
 	#include "stm32f10x.h"
 #endif
@@ -82,7 +83,14 @@ void HardRTC::LoadTime()
 }
 void HardRTC::SaveTime()
 {
-	
+	uint seconds=Time.Seconds;//先这么用
+	#ifdef STM32F1
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);	//使能PWR和BKP外设时钟  
+	PWR_BackupAccessCmd(ENABLE);	//使能RTC和后备寄存器访问 
+	RTC_SetCounter(seconds);	//设置RTC计数器的值
+
+	RTC_WaitForLastTask();	//等待最近一次对RTC寄存器的写操作完成  
+	#endif
 }
 int HardRTC::Sleep(int ms)
 {
