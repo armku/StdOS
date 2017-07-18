@@ -1,100 +1,82 @@
 #include "TTime.h"
 #ifdef STM32F1
-	#include "stm32f10x.h"
-#endif
+    #include "stm32f10x.h"
+#endif 
 #ifdef STM32F4
-	#include "stm32f4xx.h"
-#endif
+    #include "stm32f4xx.h"
+#endif 
 
 extern byte fac_us; //每个us需要的systick时钟数 
 TTime Time; //系统时间，不建议用户直接使用
 extern UInt64 TicksPerms;
 
-void TTime::OnHandler(ushort num, void* param)
-{
-	
+void TTime::OnHandler(ushort num, void *param){
+
 }
 
-TTime::TTime()
-{
-	
+TTime::TTime(){
+
 }
 // 使用RTC，必须在Init前调用
-void TTime::UseRTC()
-{
-	
+void TTime::UseRTC(){
+
 }
-void TTime::Init()
-{
-	
+void TTime::Init(){
+
 }
 // 当前滴答时钟
-uint TTime::CurrentTicks() const
+uint TTime::CurrentTicks()const
 {
-	return 0;
+    return 0;
 }
+
 // 当前毫秒数
 UInt64 TTime::Current()const
 {
-	#if 1
-	UInt64 ret=this->mCurrent *1000;
-	ret+=(TicksPerms-SysTick->VAL)/fac_us;
-    return ret;
-	#else
-	return this->mCurrent*1000;
-	#endif
+    #if 1
+        UInt64 ret = this->mCurrent *1000;
+        ret += (TicksPerms - SysTick->VAL) / fac_us;
+        return ret;
+    #else 
+        return this->mCurrent *1000;
+    #endif 
 }
 
 // 设置时间
-void TTime::SetTime(UInt64 seconds)
-{
-	
-}
-#ifdef __cplusplus
-    extern "C"
-    {
-    #endif 
-    
-    //延时nus
-    //nus为要延时的us数.
-    void delay_us(uint nus)
-    {
-        uint ticks;
-        uint told, tnow, tcnt = 0;
-        uint reload = SysTick->LOAD; //LOAD的值
-        ticks = nus * fac_us; //需要的节拍数
-        tcnt = 0;
-        told = SysTick->VAL; //刚进入时的计数器值
-        while (1)
-        {
-            tnow = SysTick->VAL;
-            if (tnow != told)
-            {
-                if (tnow < told)
-                    tcnt += told - tnow;
-                //这里注意一下SYSTICK是一个递减的计数器就可以了.
-                else
-                    tcnt += reload - tnow + told;
-                told = tnow;
-                if (tcnt >= ticks)
-                    break;
-                //时间超过/等于要延迟的时间,则退出.
-            }
-        };
-    }
+void TTime::SetTime(UInt64 seconds){
 
-    #ifdef __cplusplus
-    }
-#endif 
-void TTime::Sleep(int ms, bool* running) const
+}
+
+void TTime::Sleep(int ms, bool *running)const
 {
-    this->Delay(ms*1000);
+    this->Delay(ms *1000);
 }
 
 // 微秒级延迟
-void TTime::Delay(int us) const
+void TTime::Delay(int us)const
 {
-	delay_us(us);
+    uint ticks;
+    uint told, tnow, tcnt = 0;
+    uint reload = SysTick->LOAD; //LOAD的值
+    ticks = us * fac_us; //需要的节拍数
+    tcnt = 0;
+    told = SysTick->VAL; //刚进入时的计数器值
+    while (1)
+    {
+        tnow = SysTick->VAL;
+        if (tnow != told)
+        {
+            if (tnow < told)
+                tcnt += told - tnow;
+            //这里注意一下SYSTICK是一个递减的计数器就可以了.
+            else
+                tcnt += reload - tnow + told;
+            told = tnow;
+            if (tcnt >= ticks)
+                break;
+            //时间超过/等于要延迟的时间,则退出.
+        }
+    };
 }
 
 uint TTime::TicksToUs(uint ticks)const
@@ -115,6 +97,7 @@ uint TTime::TicksToUs(uint ticks)const
         return ((UInt64)ticks *(1000000 >> 6)) >> (16-6);
     }
 }
+
 uint TTime::UsToTicks(uint us)const
 {
     if (!us)
@@ -140,43 +123,41 @@ UInt64 TTime::Ms()const
 {
     return this->mCurrent;
 }
+
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
-TimeWheel::TimeWheel(uint ms)
-{
-	
+TimeWheel::TimeWheel(uint ms){
+
 }
 
-void TimeWheel::Reset(uint ms)
-{
-	
+void TimeWheel::Reset(uint ms){
+
 }
 // 是否已过期
 bool TimeWheel::Expired()
 {
-	return true;
+    return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 TimeCost::TimeCost()
 {
-	this->Start=0;
+    this->Start = 0;
 }
 
-void TimeCost::Reset()
-{
-}
+void TimeCost::Reset(){}
 // 逝去的时间，微秒
-int TimeCost::Elapsed() const
+int TimeCost::Elapsed()const
 {
-	uint ret=12;
-	ret-=this->Start;
-	return ret;
+    uint ret = 12;
+    ret -= this->Start;
+    return ret;
 }
-void TimeCost::Show(cstring format) const
+
+void TimeCost::Show(cstring format)const
 {
-	printf("执行 %d 微妙\r\n",12);
+    printf("执行 %d 微妙\r\n", 12);
 }
 
 
@@ -192,7 +173,7 @@ void TimeCost::Show(cstring format) const
     {
         Time.mCurrent++;
     }
-    
+
     //以下为汇编函数
     void WFI_SET(void); //执行WFI指令    
     void MSR_MSP(uint addr); //设置堆栈地址
@@ -202,7 +183,7 @@ void TimeCost::Show(cstring format) const
     {
         __ASM volatile("wfi");
     }
-    
+
     //设置栈顶地址
     //addr:栈顶地址
     __asm void MSR_MSP(uint addr)
@@ -212,4 +193,4 @@ void TimeCost::Show(cstring format) const
     }
     #ifdef __cplusplus
     }
-#endif 
+#endif
