@@ -40,7 +40,7 @@ public:
 		
 	public:							
 		UInt64 Ms() const;//系统启动以来的毫秒数		
-		UInt64 mCurrent;//系统启动以来的毫秒数				
+		//UInt64 mCurrent;//系统启动以来的毫秒数				
 };
 extern TTime Time; //系统时间，不建议用户直接使用
 // 时间轮。用于超时处理

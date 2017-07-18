@@ -34,7 +34,7 @@ uint TTime::CurrentTicks()const
 UInt64 TTime::Current()const
 {
     #if 1
-        UInt64 ret = this->mCurrent *1000;
+        UInt64 ret = this->Milliseconds *1000;//先转换为us
         ret += (TicksPerms - SysTick->VAL) / fac_us;
         return ret;
     #else 
@@ -121,7 +121,7 @@ uint TTime::UsToTicks(uint us)const
 //系统启动以来的毫秒数
 UInt64 TTime::Ms()const
 {
-    return this->mCurrent;
+    return this->Milliseconds;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -171,7 +171,7 @@ void TimeCost::Show(cstring format)const
     //systick中断服务函数,使用ucos时用到
     void SysTick_Handler(void)
     {
-        Time.mCurrent++;
+        Time.Milliseconds++;
     }
 
     //以下为汇编函数
