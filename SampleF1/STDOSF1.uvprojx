@@ -950,6 +950,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Readme.MD</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\STDOS\Kernel\Readme.MD</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1979,6 +1984,11 @@
               <FileName>Thread.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Readme.MD</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\STDOS\Kernel\Readme.MD</FilePath>
             </File>
           </Files>
         </Group>

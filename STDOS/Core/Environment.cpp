@@ -1,15 +1,15 @@
-#include "Type.h"
+#include "Kernel\TTime.h"
 #include "Environment.h"
-#include "TTime.h"
 
 TEnvironment::TEnvironment()
 {
+	
 }
 
 // 获取系统启动后经过的毫秒数
 UInt64 TEnvironment::TickCount()const
 {
-    return 0;
+    return Time.Milliseconds;
 }
 
 
@@ -22,5 +22,11 @@ UInt64 TEnvironment::Ms()const
 // 获取当前计算机上的处理器数
 int TEnvironment::ProcessorCount()const
 {
-    return 1;
+	#ifdef STM32F0	
+		return 1;
+	#elif defined STM32F1
+		return 1;
+	#elif defined STM32F4
+		return 1;
+	#endif
 }

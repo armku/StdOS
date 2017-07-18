@@ -1,13 +1,4 @@
-##	TSys		完成
-##	TTime		完成
-##	TimeWheel			未完成
-##	TimeCost			未完成
-##	Task			未完成
-##	TInterrupt		未完成
-##	WaitHandle			完成
-##	Power		未完成
-##	Pwm			完成
-##	RTC			完成
-##	SerialPort	完成
-##	Spi			完成
-##	WatchDog	完成
+
+TTime.h中 未解决问题
+extern const TTime Time;
+extern TTime Time;
