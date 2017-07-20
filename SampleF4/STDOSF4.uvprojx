@@ -950,6 +950,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\lcd_dr.cpp</FilePath>
             </File>
+            <File>
+              <FileName>RX8025T.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\RX8025T.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2019,6 +2024,11 @@
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\lcd_dr.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RX8025T.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\RX8025T.cpp</FilePath>
             </File>
           </Files>
         </Group>
