@@ -50,6 +50,50 @@
             void PowerDown(void); //进入掉电模式	
     };
 
+	class W25Q128
+    {
+        private:
+            Spi *_spi; // 内部Spi对象
+
+            // 设置操作地址
+            void SetAddr(uint addr);
+            // 等待操作完成
+            bool WaitForEnd();
+
+            // 读取编号
+            uint ReadID();
+            void WriteEnable(void);
+            void StartReadSequence(uint ReadAddr);
+
+        public:
+            uint ID; // 芯片ID
+            uint DeviceID; // 设备ID
+            ushort PageSize; // 页大小
+            ushort Retry; // 等待重试次数
+
+            W25Q128(Spi *spi);
+            ~W25Q128();
+
+            // 擦除扇区
+            bool Erase(uint sector);
+            // 擦除页
+            bool ErasePage(uint pageAddr);
+
+            // 写入一页
+            bool WritePage(uint addr, byte *buf, uint count);
+            // 读取一页
+            bool ReadPage(uint addr, byte *buf, uint count);
+            // 写入数据
+            bool Write(uint addr, byte *buf, uint count);
+            // 读取数据
+            bool Read(uint addr, byte *buf, uint count);
+
+            uint ReadDeviceID(void); //Reads FLASH identification.
+            //Erases the entire FLASH.
+            void BulkErase(void);
+            void WakeUp(void); //唤醒
+            void PowerDown(void); //进入掉电模式	
+    };
     /*
     AT45DB041中的数据按页存放,主存共2048页,每页 264字节,所以总容量为528K字节（约4M比特）。存放在主存中的数据掉电不丢失。
     除了主存以外,AT45DB041还有两个容量为264字节的数据缓存。缓存可以用作主存与外部进行数据交换时的缓冲区域,也可以暂存一些临时数据。
