@@ -127,48 +127,22 @@ bool W25Q64::ErasePage(uint pageAddr)
     return this->Erase(pageAddr);
 }
 
-/*******************************************************************************
- * Function Name  : WaitForEnd
- * Description    : Polls the status of the Write In Progress (WIP) flag in the
- *                  FLASH's status  register  and  loop  until write  opertaion
- *                  has completed.
- * Input          : None
- * Output         : None
- * Return         : None
- *******************************************************************************/
 // 等待操作完成
 bool W25Q64::WaitForEnd()
 {
     byte FLASH_Status = 0;
-
-    /* Select the FLASH: Chip Select low */
-    this->_spi->Start();
-
-    /* Send "Read Status Register" instruction */
-    this->_spi->Write(W25X_ReadStatusReg);
-
-    /* Loop as long as the memory is busy with a write cycle */
-    do
+	this->_spi->Start();
+	this->_spi->Write(W25X_ReadStatusReg);
+	do
     {
-        /* Send a dummy byte to generate the clock needed by the FLASH
-        and put the value of the status register in FLASH_Status variable */
         FLASH_Status = this->_spi->Write(0xFF);
     }
-    while ((FLASH_Status &WIP_Flag)); /* Write in progress */
-
-    /* Deselect the FLASH: Chip Select high */
-    this->_spi->Stop();
+    while ((FLASH_Status &WIP_Flag)); 
+	this->_spi->Stop();
 
     return true;
 }
 
-/*******************************************************************************
- * Function Name  : WriteEnable
- * Description    : Enables the write access to the FLASH.
- * Input          : None
- * Output         : None
- * Return         : None
- *******************************************************************************/
 void W25Q64::WriteEnable(void)
 {
     this->_spi->Start();
@@ -182,45 +156,14 @@ void W25Q64::WriteDisable(void)
 	this->_spi->Write(W25X_WriteDisable);
 	this->_spi->Stop();
 }
-
-/*******************************************************************************
- * Function Name  : BulkErase
- * Description    : Erases the entire FLASH.
- * Input          : None
- * Output         : None
- * Return         : None
- *******************************************************************************/
 void W25Q64::BulkErase(void)
 {
-    /* Send write enable instruction */
-    WriteEnable();
-
-    /* Bulk Erase */
-    /* Select the FLASH: Chip Select low */
-    this->_spi->Start();
-    /* Send Bulk Erase instruction  */
+    this->WriteEnable();
+	this->_spi->Start();
     this->_spi->Write(W25X_ChipErase);
-    /* Deselect the FLASH: Chip Select high */
     this->_spi->Stop();
-
-    /* Wait the end of Flash writing */
-    this->WaitForEnd();
+	this->WaitForEnd();
 }
-
-/*******************************************************************************
- * Function Name  : PageWrite
- * Description    : Writes more than one byte to the FLASH with a single WRITE
- *                  cycle(Page WRITE sequence). The number of byte can't exceed
- *                  the FLASH page size.
- * Input          : - pBuffer : pointer to the buffer  containing the data to be
- *                    written to the FLASH.
- *                  - addr : FLASH's internal address to write to.
- *                  - NumByteToWrite : number of bytes to write to the FLASH,
- *                    must be equal or less than "SPI_FLASH_PageSize" value.
- * Output         : None
- * Return         : None
- *******************************************************************************/
-// 写入一页
 bool W25Q64::WritePage(uint addr, byte *pBuffer, uint NumByteToWrite)
 {
     WriteEnable();
