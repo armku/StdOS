@@ -7,7 +7,7 @@
     // W25Q64存储Flash
     class W25Q64
     {
-        private:
+        private:public:
             Spi *_spi; // 内部Spi对象
 
             // 设置操作地址

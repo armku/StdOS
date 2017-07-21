@@ -585,6 +585,7 @@ void W25Q64::StartReadSequence(uint ReadAddr)
 
 
 Spi spi(Spi1);
+W25Q128 w25q128(&spi);
 
 // …Ë÷√≤Ÿ◊˜µÿ÷∑
 void W25Q128::SetAddr(uint addr)
@@ -993,7 +994,7 @@ const byte TEXT_Buffer[] =
 };
 #define SIZE sizeof(TEXT_Buffer)	
 
-//W25Q128 w25q128(&spi);	
+	
 OutputPort nsspp;
 void w25q128test()
 {
