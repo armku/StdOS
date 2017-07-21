@@ -580,7 +580,7 @@ void W25Q64::StartReadSequence(uint ReadAddr)
 
 
 
-OutputPort nsspp;
+
 
 Spi spi(Spi1);
 
@@ -728,11 +728,7 @@ ushort W25QXX_TYPE = W25Q128; //默认是W25Q128
 //初始化SPI FLASH的IO口
 void W25QXX_Init(void)
 {		
-	nsspp.Invert=false;
-	nsspp.OpenDrain=false;
-	nsspp.Set(PG7);
-
-	nsspp=1; //PG7输出1,防止NRF干扰SPI FLASH的通信 
+	
 	spi.Stop();
     
 //	SPI_Cmd(SPI1, ENABLE); //使能SPI外设
@@ -1045,9 +1041,13 @@ const byte TEXT_Buffer[] =
 #define SIZE sizeof(TEXT_Buffer)	
 
 //W25Q128 w25q128(&spi);	
+OutputPort nsspp;
 void w25q128test()
 {
-	
+	nsspp.Invert=false;
+	nsspp.OpenDrain=false;
+	nsspp.Set(PG7);
+	nsspp=1; //PG7输出1,防止NRF干扰SPI FLASH的通信 
 	
     byte datatemp[SIZE];
     uint FLASH_SIZE;
