@@ -617,19 +617,10 @@ u8 SPI1_ReadWriteByte(u8 TxData); //SPI1总线读写一个字节
 //这里针是对SPI1的初始化
 void SPI1_Init(void)
 {
-//    GPIO_InitTypeDef GPIO_InitStructure;
     SPI_InitTypeDef SPI_InitStructure;
 
-//    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE); //使能GPIOB时钟
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE); //使能SPI1时钟
 
-    //GPIOFB3,4,5初始化设置
-//    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5; //PB3~5复用功能输出	
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF; //复用功能
-//    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //推挽输出
-//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz; //100MHz
-//    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; //上拉
-//    GPIO_Init(GPIOB, &GPIO_InitStructure); //初始化
 	clk.Invert=false;
 	miso.Invert=false;
 	mosi.Invert=false;
@@ -757,16 +748,20 @@ void W25QXX_Init(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
 
-    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE); //使能GPIOB时钟
+//    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE); //使能GPIOB时钟
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOG, ENABLE); //使能GPIOG时钟
 
     //GPIOB14
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14; //PB14
+//    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14; //PB14
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT; //输出
     GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //推挽输出
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz; //100MHz
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; //上拉
-    GPIO_Init(GPIOB, &GPIO_InitStructure); //初始化
+//    GPIO_Init(GPIOB, &GPIO_InitStructure); //初始化
+	
+	nss.Invert=false;
+	nss.OpenDrain=false;
+	nss.Set(PB14);
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7; //PG7
     GPIO_Init(GPIOG, &GPIO_InitStructure); //初始化
