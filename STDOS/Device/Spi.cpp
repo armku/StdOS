@@ -67,6 +67,9 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
                 {
                     this->SetPin(PB3, PB4, PB5);
                 }
+				GPIO_PinAFConfig(GPIOB, GPIO_PinSource3, GPIO_AF_SPI1); //PB3复用为 SPI1
+				GPIO_PinAFConfig(GPIOB, GPIO_PinSource4, GPIO_AF_SPI1); //PB4复用为 SPI1
+				GPIO_PinAFConfig(GPIOB, GPIO_PinSource5, GPIO_AF_SPI1); //PB5复用为 SPI1
             #endif 
             this->_SPI = SPI1;
             break;
