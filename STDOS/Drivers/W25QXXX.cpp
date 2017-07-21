@@ -683,29 +683,7 @@ u8 SPI1_ReadWriteByte(u8 TxData); //SPI1总线读写一个字节
 //这里针是对SPI1的初始化
 void SPI1_Init(void)
 {
-    SPI_InitTypeDef SPI_InitStructure;
-
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE); //使能SPI1时钟
-
-    
-
-    //这里只针对SPI口初始化
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_SPI1, ENABLE); //复位SPI1
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_SPI1, DISABLE); //停止复位SPI1
-
-    SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; //设置SPI单向或者双向的数据模式:SPI设置为双线双向全双工
-    SPI_InitStructure.SPI_Mode = SPI_Mode_Master; //设置SPI工作模式:设置为主SPI
-    SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b; //设置SPI的数据大小:SPI发送接收8位帧结构
-    SPI_InitStructure.SPI_CPOL = SPI_CPOL_High; //串行同步时钟的空闲状态为高电平
-    SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge; //串行同步时钟的第二个跳变沿（上升或下降）数据被采样
-    SPI_InitStructure.SPI_NSS = SPI_NSS_Soft; //NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制
-    SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_256; //定义波特率预分频的值:波特率预分频值为256
-    SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB; //指定数据传输从MSB位还是LSB位开始:数据传输从MSB位开始
-    SPI_InitStructure.SPI_CRCPolynomial = 7; //CRC值计算的多项式
-    SPI_Init(SPI1, &SPI_InitStructure); //根据SPI_InitStruct中指定的参数初始化外设SPIx寄存器
-
     SPI_Cmd(SPI1, ENABLE); //使能SPI外设
-
     SPI1_ReadWriteByte(0xff); //启动传输		 
 }
 
