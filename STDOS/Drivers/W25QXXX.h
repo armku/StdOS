@@ -50,7 +50,7 @@
             void PowerDown(void); //进入掉电模式	
     };
 
-	class W25Q128
+	class W25Q128:public W25Q64
     {
         private:
             Spi *_spi; // 内部Spi对象
@@ -91,8 +91,6 @@
             uint ReadDeviceID(void); //Reads FLASH identification.
             //Erases the entire FLASH.
             void BulkErase(void);
-            void WakeUp(void); //唤醒
-            void PowerDown(void); //进入掉电模式	
     };
     /*
     AT45DB041中的数据按页存放,主存共2048页,每页 264字节,所以总容量为528K字节（约4M比特）。存放在主存中的数据掉电不丢失。
