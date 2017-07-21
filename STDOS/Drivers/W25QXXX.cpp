@@ -583,9 +583,6 @@ void W25Q64::StartReadSequence(uint ReadAddr)
 OutputPort nsspp;
 
 Spi spi(Spi1);
-#include "stm32f4xx.h"
-
-
 
 // 设置操作地址
 void W25Q128::SetAddr(uint addr)
@@ -711,11 +708,11 @@ byte W25QXX_ReadSR(void); //读取状态寄存器
 void W25QXX_Write_SR(byte sr); //写状态寄存器
 void W25QXX_Write_Enable(void); //写使能 
 void W25QXX_Write_Disable(void); //写保护
-void W25QXX_Write_NoCheck(byte *pBuffer, u32 WriteAddr, ushort NumByteToWrite);
-void W25QXX_Read(byte *pBuffer, u32 ReadAddr, ushort NumByteToRead); //读取flash
-void W25QXX_Write(byte *pBuffer, u32 WriteAddr, ushort NumByteToWrite); //写入flash
+void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
+void W25QXX_Read(byte *pBuffer, uint ReadAddr, ushort NumByteToRead); //读取flash
+void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite); //写入flash
 void W25QXX_Erase_Chip(void); //整片擦除
-void W25QXX_Erase_Sector(u32 Dst_Addr); //扇区擦除
+void W25QXX_Erase_Sector(uint Dst_Addr); //扇区擦除
 void W25QXX_Wait_Busy(void); //等待空闲
 void W25QXX_PowerDown(void); //进入掉电模式
 void W25QXX_WAKEUP(void); //唤醒
@@ -828,7 +825,7 @@ ushort W25QXX_ReadID(void)
 //pBuffer:数据存储区
 //ReadAddr:开始读取的地址(24bit)
 //NumByteToRead:要读取的字节数(最大65535)
-void W25QXX_Read(byte *pBuffer, u32 ReadAddr, ushort NumByteToRead)
+void W25QXX_Read(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
 {
     ushort i;
      //使能器件   
@@ -850,7 +847,7 @@ void W25QXX_Read(byte *pBuffer, u32 ReadAddr, ushort NumByteToRead)
 //pBuffer:数据存储区
 //WriteAddr:开始写入的地址(24bit)
 //NumByteToWrite:要写入的字节数(最大256),该数不应该超过该页的剩余字节数!!!	 
-void W25QXX_Write_Page(byte *pBuffer, u32 WriteAddr, ushort NumByteToWrite)
+void W25QXX_Write_Page(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
     ushort i;
     W25QXX_Write_Enable(); //SET WEL 
@@ -876,7 +873,7 @@ void W25QXX_Write_Page(byte *pBuffer, u32 WriteAddr, ushort NumByteToWrite)
 //WriteAddr:开始写入的地址(24bit)
 //NumByteToWrite:要写入的字节数(最大65535)
 //CHECK OK
-void W25QXX_Write_NoCheck(byte *pBuffer, u32 WriteAddr, ushort NumByteToWrite)
+void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
     ushort pageremain;
     pageremain = 256-WriteAddr % 256; //单页剩余的字节数		 	    
@@ -913,9 +910,9 @@ void W25QXX_Write_NoCheck(byte *pBuffer, u32 WriteAddr, ushort NumByteToWrite)
 //WriteAddr:开始写入的地址(24bit)						
 //NumByteToWrite:要写入的字节数(最大65535)   
 byte W25QXX_BUFFER[4096];
-void W25QXX_Write(byte *pBuffer, u32 WriteAddr, ushort NumByteToWrite)
+void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
-    u32 secpos;
+    uint secpos;
     ushort secoff;
     ushort secremain;
     ushort i;
@@ -992,7 +989,7 @@ void W25QXX_Erase_Chip(void)
 //擦除一个扇区
 //Dst_Addr:扇区地址 根据实际容量设置
 //擦除一个山区的最少时间:150ms
-void W25QXX_Erase_Sector(u32 Dst_Addr)
+void W25QXX_Erase_Sector(uint Dst_Addr)
 {
     //监视falsh擦除情况,测试用   
     printf("fe:%x\r\n", Dst_Addr);
@@ -1053,7 +1050,7 @@ void w25q128test()
 	
 	
     byte datatemp[SIZE];
-    u32 FLASH_SIZE;
+    uint FLASH_SIZE;
     W25QXX_Init(); //W25QXX初始化
     printf("SPI TEST\r\n");
     while (W25QXX_ReadID() != W25Q128)
