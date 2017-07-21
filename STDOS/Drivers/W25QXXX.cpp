@@ -673,10 +673,6 @@ void W25Q128::PowerDown(void)
 }
 
  
-
-void SPI1_Init(void); //初始化SPI1口
-void SPI1_SetSpeed(u8 SpeedSet); //设置SPI1速度
-
 //以下是SPI模块的初始化代码，配置成主机模式 						  
 //SPI口初始化
 //这里针是对SPI1的初始化
