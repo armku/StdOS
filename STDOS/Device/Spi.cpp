@@ -71,7 +71,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
 				GPIO_PinAFConfig(GPIOB, GPIO_PinSource4, GPIO_AF_SPI1); //PB4复用为 SPI1
 				GPIO_PinAFConfig(GPIOB, GPIO_PinSource5, GPIO_AF_SPI1); //PB5复用为 SPI1
             #endif 
-            this->_SPI = SPI1;
+            this->_SPI = SPI1;			
             break;
         case Spi2:
             this->_SPI = SPI2;
@@ -240,6 +240,20 @@ void Spi::OnInit()
     {
         case Spi1:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
+			#ifdef STM32F0
+			
+			#elif defined STM32F1
+				
+			#elif defined STM32F4
+				//SPI1速度设置函数
+				//SPI速度=fAPB2/分频系数
+				//@ref SPI_BaudRate_Prescaler:SPI_BaudRatePrescaler_2~SPI_BaudRatePrescaler_256  
+				//fAPB2时钟一般为84Mhz：
+				assert_param(IS_SPI_BAUDRATE_PRESCALER(SPI_BaudRatePrescaler)); //判断有效性
+				SPI1->CR1 &= 0XFFC7; //位3-5清零，用来设置波特率
+				SPI1->CR1 |= SPI_BaudRatePrescaler_4; //设置SPI1速度 设置为21M时钟,高速模式 
+				SPI_Cmd(SPI1, ENABLE); //使能SPI1
+			#endif
             break;
         case Spi2:
             RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);

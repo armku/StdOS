@@ -672,21 +672,6 @@ void W25Q128::PowerDown(void)
 	
 }
 
- 
-//以下是SPI模块的初始化代码，配置成主机模式 						  
-
-//SPI1速度设置函数
-//SPI速度=fAPB2/分频系数
-//@ref SPI_BaudRate_Prescaler:SPI_BaudRatePrescaler_2~SPI_BaudRatePrescaler_256  
-//fAPB2时钟一般为84Mhz：
-void SPI1_SetSpeed(u8 SPI_BaudRatePrescaler)
-{
-    assert_param(IS_SPI_BAUDRATE_PRESCALER(SPI_BaudRatePrescaler)); //判断有效性
-    SPI1->CR1 &= 0XFFC7; //位3-5清零，用来设置波特率
-    SPI1->CR1 |= SPI_BaudRatePrescaler; //设置SPI1速度 
-    SPI_Cmd(SPI1, ENABLE); //使能SPI1
-}
-
 //W25X系列/Q系列芯片列表	   
 //W25Q80  ID  0XEF13
 //W25Q16  ID  0XEF14
@@ -700,8 +685,6 @@ void SPI1_SetSpeed(u8 SPI_BaudRatePrescaler)
 #define W25Q128	0XEF17
 
 extern u16 W25QXX_TYPE; //定义W25QXX芯片型号		   
-
-#define W25QXX_CS 		PBout(14)  		//W25QXX的片选信号
 
 ////////////////////////////////////////////////////////////////////////////////// 
 //指令表
@@ -753,12 +736,10 @@ void W25QXX_Init(void)
 	nsspp.Set(PG7);
 
 	nsspp=1; //PG7输出1,防止NRF干扰SPI FLASH的通信 
-    //nss=1;
 	spi.Stop();
     
-	SPI_Cmd(SPI1, ENABLE); //使能SPI外设
-    spi.Write(0xff); //启动传输
-    SPI1_SetSpeed(SPI_BaudRatePrescaler_4); //设置为21M时钟,高速模式 
+//	SPI_Cmd(SPI1, ENABLE); //使能SPI外设
+//    spi.Write(0xff); //启动传输
     W25QXX_TYPE = W25QXX_ReadID(); //读取FLASH ID.
 }
 
