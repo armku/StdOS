@@ -745,16 +745,7 @@ u16 W25QXX_TYPE = W25Q128; //默认是W25Q128
 
 //初始化SPI FLASH的IO口
 void W25QXX_Init(void)
-{
-//    GPIO_InitTypeDef GPIO_InitStructure;
-
-    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOG, ENABLE); //使能GPIOG时钟
-
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT; //输出
-//    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //推挽输出
-//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz; //100MHz
-//    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; //上拉
-	
+{	
 	nss.Invert=false;
 	nss.OpenDrain=false;
 	nss.Set(PB14);
@@ -762,9 +753,6 @@ void W25QXX_Init(void)
 	nsspp.Invert=false;
 	nsspp.OpenDrain=false;
 	nsspp.Set(PG7);
-
-//    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7; //PG7
-//    GPIO_Init(GPIOG, &GPIO_InitStructure); //初始化
 
     GPIO_SetBits(GPIOG, GPIO_Pin_7); //PG7输出1,防止NRF干扰SPI FLASH的通信 
     W25QXX_CS = 1; //SPI FLASH不选中
