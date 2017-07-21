@@ -81,8 +81,6 @@
             bool ReadPage(uint addr, byte *buf, uint count);
             // 写入数据
             bool Write(uint addr, byte *buf, uint count);
-            // 读取数据
-            bool Read(uint addr, byte *buf, uint count);
 
             uint ReadDeviceID(void); //Reads FLASH identification.
             //Erases the entire FLASH.

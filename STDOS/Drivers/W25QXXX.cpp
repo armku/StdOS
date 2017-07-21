@@ -568,11 +568,7 @@ bool W25Q128::Write(uint addr, byte *buf, uint count)
 {
 	return false;
 }
-// 读取数据
-bool W25Q128::Read(uint addr, byte *buf, uint count)
-{
-	return false;
-}
+
 //Reads FLASH identification.
 uint W25Q128::ReadDeviceID(void) 
 {
@@ -687,28 +683,6 @@ ushort W25QXX_ReadID(void)
     return Temp;
 }
 
-//读取SPI FLASH  
-//在指定地址开始读取指定长度的数据
-//pBuffer:数据存储区
-//ReadAddr:开始读取的地址(24bit)
-//NumByteToRead:要读取的字节数(最大65535)
-void W25QXX_Read(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
-{
-    ushort i;
-     //使能器件   
-	spi.Start();
-    spi.Write(W25X_ReadData); //发送读取命令   
-    spi.Write((byte)((ReadAddr) >> 16)); //发送24bit地址    
-    spi.Write((byte)((ReadAddr) >> 8));
-    spi.Write((byte)ReadAddr);
-    for (i = 0; i < NumByteToRead; i++)
-    {
-        pBuffer[i] = spi.Write(0XFF); //循环读数  
-    }
-    //取消片选     
-	spi.Stop();
-}
-
 //SPI在一页(0~65535)内写入少于256个字节的数据
 //在指定地址开始写入最大256字节的数据
 //pBuffer:数据存储区
@@ -794,7 +768,7 @@ void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
     //不大于4096个字节
     while (1)
     {
-        W25QXX_Read(W25QXX_BUF, secpos *4096, 4096); //读出整个扇区的内容
+        w25q128.Read(secpos *4096,W25QXX_BUF,  4096); //读出整个扇区的内容
         for (i = 0; i < secremain; i++)
         //校验数据
         {
@@ -918,7 +892,7 @@ void w25q128test()
     printf("\r\n");
 
     printf("Start Read W25Q128....\r\n");
-    W25QXX_Read(datatemp, FLASH_SIZE - 100, SIZE); //从倒数第100个地址处开始,读出SIZE个字节
+    w25q128.Read(FLASH_SIZE - 100,datatemp,  SIZE); //从倒数第100个地址处开始,读出SIZE个字节
     printf("The Data Readed Is:\r\n"); //提示传送完成
     printf((const char*)datatemp);
 
