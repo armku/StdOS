@@ -594,7 +594,6 @@ AlternatePort mosi;
 
 
 #include "stm32f4xx.h" 
-#include "Sys.h"
 
 void SPI1_Init(void); //初始化SPI1口
 void SPI1_SetSpeed(u8 SpeedSet); //设置SPI1速度   
