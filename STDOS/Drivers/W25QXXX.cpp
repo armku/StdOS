@@ -354,27 +354,17 @@ bool W25Q64::Write(uint addr, byte *pBuffer, uint NumByteToWrite)
 //进入掉电模式
 void W25Q64::PowerDown(void)
 {
-    /* Select the FLASH: Chip Select low */
     this->_spi->Start();
-
-    /* Send "Power Down" instruction */
-    this->_spi->Write(W25X_PowerDown);
-
-    /* Deselect the FLASH: Chip Select high */
-    this->_spi->Stop();
+	this->_spi->Write(W25X_PowerDown);
+	this->_spi->Stop();
 }
 
 //唤醒
 void W25Q64::WakeUp(void)
 {
-    /* Select the FLASH: Chip Select low */
     this->_spi->Start();
-
-    /* Send "Power Down" instruction */
-    this->_spi->Write(W25X_ReleasePowerDown);
-
-    /* Deselect the FLASH: Chip Select high */
-    this->_spi->Stop(); //等待TRES1
+	this->_spi->Write(W25X_ReleasePowerDown);
+	this->_spi->Stop(); //等待TRES1
 }
 
 /*******************************************************************************
@@ -390,7 +380,6 @@ void W25Q64::WakeUp(void)
 // 读取数据
 bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
 {
-    /* Select the FLASH: Chip Select low */
     this->_spi->Start();
 
     /* Send "Read from Memory " instruction */
@@ -412,7 +401,6 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
         pBuffer++;
     }
 
-    /* Deselect the FLASH: Chip Select high */
     this->_spi->Stop();
     return true;
 }
@@ -431,7 +419,6 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
  *******************************************************************************/
 void W25Q64::StartReadSequence(uint ReadAddr)
 {
-    /* Select the FLASH: Chip Select low */
     this->_spi->Start();
 
     /* Send "Read from Memory " instruction */
