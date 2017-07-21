@@ -62,7 +62,6 @@
 
             // ∂¡»°±‡∫≈
             uint ReadID();
-            void WriteEnable(void);
             void StartReadSequence(uint ReadAddr);
 
         public:

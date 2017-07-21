@@ -603,10 +603,7 @@ uint W25Q128::ReadID()
 {
 	return 0;
 }
-void W25Q128::WriteEnable(void)
-{
-	
-}
+
 void W25Q128::StartReadSequence(uint ReadAddr)
 {
 	
@@ -683,7 +680,6 @@ void W25QXX_Init(void);
 ushort W25QXX_ReadID(void); //读取FLASH ID
 byte W25QXX_ReadSR(void); //读取状态寄存器 
 void W25QXX_Write_SR(byte sr); //写状态寄存器
-void W25QXX_Write_Enable(void); //写使能 
 void W25QXX_Write_Disable(void); //写保护
 void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
 void W25QXX_Read(byte *pBuffer, uint ReadAddr, ushort NumByteToRead); //读取flash
@@ -742,17 +738,6 @@ void W25QXX_Write_SR(byte sr)
     //取消片选     
 	spi.Stop();
     
-}
-
-//W25QXX写使能	
-//将WEL置位   
-void W25QXX_Write_Enable(void)
-{
-    //使能器件   
-	spi.Start(); 
-    spi.Write(W25X_WriteEnable); //发送写使能  
-    //取消片选     	      
-	spi.Stop();
 }
 
 //W25QXX写禁止	
@@ -821,7 +806,7 @@ void W25QXX_Read(byte *pBuffer, uint ReadAddr, ushort NumByteToRead)
 void W25QXX_Write_Page(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
     ushort i;
-    W25QXX_Write_Enable(); //SET WEL 
+    w25q128.WriteEnable(); //SET WEL 
     //使能器件   
 	spi.Start();  
     spi.Write(W25X_PageProgram); //发送写页命令   
@@ -947,7 +932,7 @@ void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 //等待时间超长...
 void W25QXX_Erase_Chip(void)
 {
-    W25QXX_Write_Enable(); //SET WEL 
+    w25q128.WriteEnable(); //SET WEL 
     W25QXX_Wait_Busy();
     //使能器件   
 	spi.Start();   
@@ -965,7 +950,7 @@ void W25QXX_Erase_Sector(uint Dst_Addr)
     //监视falsh擦除情况,测试用   
     printf("fe:%x\r\n", Dst_Addr);
     Dst_Addr *= 4096;
-    W25QXX_Write_Enable(); //SET WEL 	 
+    w25q128.WriteEnable(); //SET WEL 	 
     W25QXX_Wait_Busy();
     //使能器件   
 	spi.Start();
