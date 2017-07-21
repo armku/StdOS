@@ -580,7 +580,14 @@ void W25Q64::StartReadSequence(uint ReadAddr)
 
 
 
+OutputPort nss;
+OutputPort nsspp;
+AlternatePort clk;
+AlternatePort miso;
+AlternatePort mosi;
 
+Spi spi(Spi1);
+#include "stm32f4xx.h"
 
 
 
@@ -669,14 +676,7 @@ void W25Q128::PowerDown(void)
 	
 }
 
-OutputPort nss;
-OutputPort nsspp;
-AlternatePort clk;
-AlternatePort miso;
-AlternatePort mosi;
-
-
-#include "stm32f4xx.h" 
+ 
 
 void SPI1_Init(void); //初始化SPI1口
 void SPI1_SetSpeed(u8 SpeedSet); //设置SPI1速度   
@@ -1136,7 +1136,7 @@ const u8 TEXT_Buffer[] =
     "Explorer STM32F4 SPI TEST"
 };
 #define SIZE sizeof(TEXT_Buffer)	
-Spi spi(Spi1);
+
 //W25Q128 w25q128(&spi);	
 void w25q128test()
 {
