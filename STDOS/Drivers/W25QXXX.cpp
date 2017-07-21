@@ -104,14 +104,6 @@ bool W25Q64::EraseSector(uint SectorAddr)
     this->WaitForEnd();
     return true;
 }
-
-/*******************************************************************************
- * Function Name  : ErasePage
- * Description    : Erases the specified FLASH sector.
- * Input          : SectorAddr: address of the sector to erase.
- * Output         : None
- * Return         : None
- *******************************************************************************/
 // ²Á³ýÒ³
 bool W25Q64::ErasePage(uint pageAddr)
 {
@@ -482,7 +474,7 @@ W25Q128::~W25Q128()
 }
 
 // ²Á³ýÉÈÇø
-bool W25Q128::Erase(uint sector)
+bool W25Q128::EraseSector(uint sector)
 {
 	return false;
 }
