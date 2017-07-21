@@ -91,25 +91,16 @@ uint W25Q64::ReadDeviceID(void)
 }
 
 // 擦除扇区
-bool W25Q64::Erase(uint SectorAddr)
+bool W25Q64::EraseSector(uint SectorAddr)
 {
-    /* Send write enable instruction */
-    WriteEnable();
+    this->WriteEnable();
     this->WaitForEnd();
-    /* Sector Erase */
-    /* Select the FLASH: Chip Select low */
     this->_spi->Start();
-    /* Send Sector Erase instruction */
     this->_spi->Write(W25X_SectorErase);
-    /* Send SectorAddr high nibble address byte */
     this->_spi->Write((SectorAddr &0xFF0000) >> 16);
-    /* Send SectorAddr medium nibble address byte */
     this->_spi->Write((SectorAddr &0xFF00) >> 8);
-    /* Send SectorAddr low nibble address byte */
     this->_spi->Write(SectorAddr &0xFF);
-    /* Deselect the FLASH: Chip Select high */
     this->_spi->Stop();
-    /* Wait the end of Flash writing */
     this->WaitForEnd();
     return true;
 }
@@ -124,7 +115,7 @@ bool W25Q64::Erase(uint SectorAddr)
 // 擦除页
 bool W25Q64::ErasePage(uint pageAddr)
 {
-    return this->Erase(pageAddr);
+    return this->EraseSector(pageAddr);
 }
 
 // 等待操作完成

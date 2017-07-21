@@ -29,7 +29,7 @@
             ~W25Q64();
 
             // ²Á³ıÉÈÇø
-            bool Erase(uint sector);
+            bool EraseSector(uint sector);
             // ²Á³ıÒ³
             bool ErasePage(uint pageAddr);
 
