@@ -165,9 +165,10 @@ void W25Q64::WriteDisable(void)
 	this->_spi->Write(W25X_WriteDisable);
 	this->_spi->Stop();
 }
-void W25Q64::BulkErase(void)
+void W25Q64::EraseChip(void)
 {
     this->WriteEnable();
+	this->WaitForEnd();
 	this->_spi->Start();
     this->_spi->Write(W25X_ChipErase);
     this->_spi->Stop();
@@ -521,11 +522,6 @@ uint W25Q128::ReadDeviceID(void)
 {
 	return false;
 }
-//Erases the entire FLASH.
-void W25Q128::BulkErase(void)
-{
-	
-}
 
 
 //W25X系列/Q系列芯片列表	   
@@ -549,7 +545,6 @@ ushort W25QXX_ReadID(void); //读取FLASH ID
 void W25QXX_Write_SR(byte sr); //写状态寄存器
 void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
 void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite); //写入flash
-void W25QXX_Erase_Chip(void); //整片擦除
 void W25QXX_Erase_Sector(uint Dst_Addr); //扇区擦除
 
 
@@ -560,7 +555,6 @@ ushort W25QXX_TYPE = W25Q128; //默认是W25Q128
 //W25Q128
 //容量为16M字节,共有128个Block,4096个Sector 
 
-//初始化SPI FLASH的IO口
 void W25QXX_Init(void)
 {		
 	
@@ -737,21 +731,6 @@ void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
         }
     };
 }
-
-//擦除整个芯片		  
-//等待时间超长...
-void W25QXX_Erase_Chip(void)
-{
-    w25q128.WriteEnable(); //SET WEL 
-    w25q128.WaitForEnd();
-    //使能器件   
-	spi.Start();   
-    spi.Write(W25X_ChipErase); //发送片擦除命令  
-    //取消片选     
-	spi.Stop();    	      
-    w25q128.WaitForEnd(); //等待芯片擦除结束
-}
-
 //擦除一个扇区
 //Dst_Addr:扇区地址 根据实际容量设置
 //擦除一个山区的最少时间:150ms

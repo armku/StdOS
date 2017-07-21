@@ -44,7 +44,7 @@
 
             uint ReadDeviceID(void); //Reads FLASH identification.
             //Erases the entire FLASH.
-            void BulkErase(void);
+            void EraseChip(void);////擦除整个芯片 等待时间超长...
             void WakeUp(void); //唤醒
             void PowerDown(void); //进入掉电模式	
     };
@@ -74,8 +74,6 @@
             bool Write(uint addr, byte *buf, uint count);
 
             uint ReadDeviceID(void); //Reads FLASH identification.
-            //Erases the entire FLASH.
-            void BulkErase(void);
     };
     /*
     AT45DB041中的数据按页存放,主存共2048页,每页 264字节,所以总容量为528K字节（约4M比特）。存放在主存中的数据掉电不丢失。
