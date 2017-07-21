@@ -674,13 +674,6 @@ void W25Q128::PowerDown(void)
 
  
 //以下是SPI模块的初始化代码，配置成主机模式 						  
-//SPI口初始化
-//这里针是对SPI1的初始化
-void SPI1_Init(void)
-{
-    SPI_Cmd(SPI1, ENABLE); //使能SPI外设
-    spi.Write(0xff); //启动传输			
-}
 
 //SPI1速度设置函数
 //SPI速度=fAPB2/分频系数
@@ -762,7 +755,9 @@ void W25QXX_Init(void)
 	nsspp=1; //PG7输出1,防止NRF干扰SPI FLASH的通信 
     //nss=1;
 	spi.Stop();
-    SPI1_Init(); //初始化SPI
+    
+	SPI_Cmd(SPI1, ENABLE); //使能SPI外设
+    spi.Write(0xff); //启动传输
     SPI1_SetSpeed(SPI_BaudRatePrescaler_4); //设置为21M时钟,高速模式 
     W25QXX_TYPE = W25QXX_ReadID(); //读取FLASH ID.
 }
