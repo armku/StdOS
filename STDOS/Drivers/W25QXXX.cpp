@@ -355,70 +355,22 @@ void W25Q64::WakeUp(void)
 	this->_spi->Stop(); //µÈ´ýTRES1
 }
 
-/*******************************************************************************
- * Function Name  : Read
- * Description    : Reads a block of data from the FLASH.
- * Input          : - pBuffer : pointer to the buffer that receives the data read
- *                    from the FLASH.
- *                  - ReadAddr : FLASH's internal address to read from.
- *                  - NumByteToRead : number of bytes to read from the FLASH.
- * Output         : None
- * Return         : None
- *******************************************************************************/
 // ¶ÁÈ¡Êý¾Ý
 bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
 {
     this->_spi->Start();
-
-    /* Send "Read from Memory " instruction */
-    this->_spi->Write(W25X_ReadData);
-
-    /* Send ReadAddr high nibble address byte to read from */
-    this->_spi->Write((ReadAddr &0xFF0000) >> 16);
-    /* Send ReadAddr medium nibble address byte to read from */
+	this->_spi->Write(W25X_ReadData);
+	this->_spi->Write((ReadAddr &0xFF0000) >> 16);
     this->_spi->Write((ReadAddr &0xFF00) >> 8);
-    /* Send ReadAddr low nibble address byte to read from */
     this->_spi->Write(ReadAddr &0xFF);
 
-    while (NumByteToRead--)
-    /* while there is data to be read */
-    {
-        /* Read a byte from the FLASH */
-        *pBuffer = this->_spi->Write(0xFF);
-        /* Point to the next location where the byte read will be saved */
-        pBuffer++;
-    }
+    for(int i=0;i<NumByteToRead;i++)
+	{
+        pBuffer[i] = this->_spi->Write(0xFF);
+	}
 
     this->_spi->Stop();
     return true;
-}
-
-/*******************************************************************************
- * Function Name  : StartReadSequence
- * Description    : Initiates a read data byte (READ) sequence from the Flash.
- *                  This is done by driving the /CS line low to select the device,
- *                  then the READ instruction is transmitted followed by 3 bytes
- *                  address. This function exit and keep the /CS line low, so the
- *                  Flash still being selected. With this technique the whole
- *                  content of the Flash is read with a single READ instruction.
- * Input          : - ReadAddr : FLASH's internal address to read from.
- * Output         : None
- * Return         : None
- *******************************************************************************/
-void W25Q64::StartReadSequence(uint ReadAddr)
-{
-    this->_spi->Start();
-
-    /* Send "Read from Memory " instruction */
-    this->_spi->Write(W25X_ReadData);
-
-    /* Send the 24-bit address of the address to read from -----------------------*/
-    /* Send ReadAddr high nibble address byte */
-    this->_spi->Write((ReadAddr &0xFF0000) >> 16);
-    /* Send ReadAddr medium nibble address byte */
-    this->_spi->Write((ReadAddr &0xFF00) >> 8);
-    /* Send ReadAddr low nibble address byte */
-    this->_spi->Write(ReadAddr &0xFF);
 }
 
 #if 0
@@ -581,10 +533,6 @@ uint W25Q128::ReadID()
 	return 0;
 }
 
-void W25Q128::StartReadSequence(uint ReadAddr)
-{
-	
-}
 W25Q128::W25Q128(Spi *spi):W25Q64(spi)
 {
 	this->PageSize=256;
@@ -658,7 +606,6 @@ ushort W25QXX_ReadID(void); //¶ÁÈ¡FLASH ID
 byte W25QXX_ReadSR(void); //¶ÁÈ¡×´Ì¬¼Ä´æÆ÷ 
 void W25QXX_Write_SR(byte sr); //Ð´×´Ì¬¼Ä´æÆ÷
 void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
-void W25QXX_Read(byte *pBuffer, uint ReadAddr, ushort NumByteToRead); //¶ÁÈ¡flash
 void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite); //Ð´Èëflash
 void W25QXX_Erase_Chip(void); //ÕûÆ¬²Á³ý
 void W25QXX_Erase_Sector(uint Dst_Addr); //ÉÈÇø²Á³ý

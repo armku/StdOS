@@ -19,8 +19,6 @@
             uint ReadID();
             void WriteEnable(void);//写允许
 			void WriteDisable(void);//写保护
-            void StartReadSequence(uint ReadAddr);
-
         public:
             uint ID; // 芯片ID
             uint DeviceID; // 设备ID
@@ -63,8 +61,6 @@
 
             // 读取编号
             uint ReadID();
-            void StartReadSequence(uint ReadAddr);
-
         public:
             uint ID; // 芯片ID
             uint DeviceID; // 设备ID
