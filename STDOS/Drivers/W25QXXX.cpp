@@ -582,9 +582,6 @@ void W25Q64::StartReadSequence(uint ReadAddr)
 
 OutputPort nss;
 OutputPort nsspp;
-AlternatePort clk;
-AlternatePort miso;
-AlternatePort mosi;
 
 Spi spi(Spi1);
 #include "stm32f4xx.h"
@@ -690,16 +687,6 @@ void SPI1_Init(void)
     SPI_InitTypeDef SPI_InitStructure;
 
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE); //使能SPI1时钟
-
-	clk.Invert=false;
-	miso.Invert=false;
-	mosi.Invert=false;
-	clk.OpenDrain=false;
-	miso.OpenDrain=false;
-	mosi.OpenDrain=false;
-	clk.Set(PB3);
-	miso.Set(PB4);
-	mosi.Set(PB5);
 
     GPIO_PinAFConfig(GPIOB, GPIO_PinSource3, GPIO_AF_SPI1); //PB3复用为 SPI1
     GPIO_PinAFConfig(GPIOB, GPIO_PinSource4, GPIO_AF_SPI1); //PB4复用为 SPI1

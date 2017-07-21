@@ -47,6 +47,9 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
     switch (this->_index)
     {
         case Spi1:
+			#ifdef STM32F0
+		
+			#elif defined STM32F1
             if (useNss)
             {
                 this->SetPin(PA5, PA6, PA7, PA4);
@@ -55,6 +58,16 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
             {
                 this->SetPin(PA5, PA6, PA7);
             }
+			#elif defined STM32F4
+			if (useNss)
+            {
+                this->SetPin(PB3, PB4, PB5, PB14);
+            }
+            else
+            {
+                this->SetPin(PB3, PB4, PB5);
+            }
+			#endif
             this->_SPI = SPI1;
             break;
         case Spi2:
