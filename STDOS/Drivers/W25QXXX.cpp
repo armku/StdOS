@@ -171,26 +171,16 @@ bool W25Q64::WaitForEnd()
  *******************************************************************************/
 void W25Q64::WriteEnable(void)
 {
-    /* Select the FLASH: Chip Select low */
     this->_spi->Start();
-
-    /* Send "Write Enable" instruction */
     this->_spi->Write(W25X_WriteEnable);
-
-    /* Deselect the FLASH: Chip Select high */
     this->_spi->Stop();
 }
 //写保护
 void W25Q64::WriteDisable(void)
 {
-	/* Select the FLASH: Chip Select low */
-    this->_spi->Start();
-
-    /* Send "Write Enable" instruction */
-    this->_spi->Write(W25X_WriteDisable);
-
-    /* Deselect the FLASH: Chip Select high */
-    this->_spi->Stop();
+	this->_spi->Start();
+	this->_spi->Write(W25X_WriteDisable);
+	this->_spi->Stop();
 }
 
 /*******************************************************************************
@@ -763,7 +753,7 @@ ushort W25QXX_ReadID(void)
     ushort Temp = 0;
      //使能器件   
 	spi.Start();
-    spi.Write(0x90); //发送读取ID命令	    
+    spi.Write(W25X_ManufactDeviceID); //发送读取ID命令	    
     spi.Write(0x00);
     spi.Write(0x00);
     spi.Write(0x00);
