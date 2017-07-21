@@ -56,9 +56,6 @@
 
             // 设置操作地址
             void SetAddr(uint addr);
-            // 等待操作完成
-            bool WaitForEnd();
-
             // 读取编号
             uint ReadID();
         public:

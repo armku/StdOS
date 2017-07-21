@@ -128,6 +128,15 @@ bool W25Q64::ErasePage(uint pageAddr)
 }
 
 // 等待操作完成
+//读取W25QXX的状态寄存器
+//BIT7  6   5   4   3   2   1   0
+//SPR   RV  TB BP2 BP1 BP0 WEL BUSY
+//SPR:默认0,状态寄存器保护位,配合WP使用
+//TB,BP2,BP1,BP0:FLASH区域写保护设置
+//WEL:写使能锁定
+//BUSY:忙标记位(1,忙;0,空闲)
+//默认:0x00
+
 bool W25Q64::WaitForEnd()
 {
     byte FLASH_Status = 0;
@@ -464,11 +473,6 @@ void W25Q128::SetAddr(uint addr)
 {
 	
 }
-// 等待操作完成
-bool W25Q128::WaitForEnd()
-{
-	return false;
-}
 
 // 读取编号
 uint W25Q128::ReadID()
@@ -542,13 +546,11 @@ extern ushort W25QXX_TYPE; //定义W25QXX芯片型号
 
 void W25QXX_Init(void);
 ushort W25QXX_ReadID(void); //读取FLASH ID
-byte W25QXX_ReadSR(void); //读取状态寄存器 
 void W25QXX_Write_SR(byte sr); //写状态寄存器
 void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
 void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite); //写入flash
 void W25QXX_Erase_Chip(void); //整片擦除
 void W25QXX_Erase_Sector(uint Dst_Addr); //扇区擦除
-void W25QXX_Wait_Busy(void); //等待空闲
 
 
 ushort W25QXX_TYPE = W25Q128; //默认是W25Q128
@@ -567,26 +569,6 @@ void W25QXX_Init(void)
 //	SPI_Cmd(SPI1, ENABLE); //使能SPI外设
 //    spi.Write(0xff); //启动传输
     W25QXX_TYPE = W25QXX_ReadID(); //读取FLASH ID.
-}
-
-//读取W25QXX的状态寄存器
-//BIT7  6   5   4   3   2   1   0
-//SPR   RV  TB BP2 BP1 BP0 WEL BUSY
-//SPR:默认0,状态寄存器保护位,配合WP使用
-//TB,BP2,BP1,BP0:FLASH区域写保护设置
-//WEL:写使能锁定
-//BUSY:忙标记位(1,忙;0,空闲)
-//默认:0x00
-byte W25QXX_ReadSR(void)
-{
-    byte byte = 0;
-    //使能器件   
-	spi.Start();
-    spi.Write(W25X_ReadStatusReg); //发送读取状态寄存器命令    
-    byte = spi.Write(0Xff); //读取一个字节  
-    //取消片选     
-	spi.Stop();
-    return byte;
 }
 
 //写W25QXX状态寄存器
@@ -646,7 +628,7 @@ void W25QXX_Write_Page(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
     //循环写数  
     //取消片选     
 	spi.Stop();
-    W25QXX_Wait_Busy(); //等待写入结束
+    w25q128.WaitForEnd(); //等待写入结束
 }
 
 //无检验写SPI FLASH 
@@ -761,13 +743,13 @@ void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 void W25QXX_Erase_Chip(void)
 {
     w25q128.WriteEnable(); //SET WEL 
-    W25QXX_Wait_Busy();
+    w25q128.WaitForEnd();
     //使能器件   
 	spi.Start();   
     spi.Write(W25X_ChipErase); //发送片擦除命令  
     //取消片选     
 	spi.Stop();    	      
-    W25QXX_Wait_Busy(); //等待芯片擦除结束
+    w25q128.WaitForEnd(); //等待芯片擦除结束
 }
 
 //擦除一个扇区
@@ -779,7 +761,7 @@ void W25QXX_Erase_Sector(uint Dst_Addr)
     printf("fe:%x\r\n", Dst_Addr);
     Dst_Addr *= 4096;
     w25q128.WriteEnable(); //SET WEL 	 
-    W25QXX_Wait_Busy();
+    w25q128.WaitForEnd();
     //使能器件   
 	spi.Start();
     spi.Write(W25X_SectorErase); //发送扇区擦除指令 
@@ -788,17 +770,8 @@ void W25QXX_Erase_Sector(uint Dst_Addr)
     spi.Write((byte)Dst_Addr);
     //取消片选     
 	spi.Stop();	      
-    W25QXX_Wait_Busy(); //等待擦除完成
+    w25q128.WaitForEnd(); //等待擦除完成
 }
-
-//等待空闲
-void W25QXX_Wait_Busy(void)
-{
-    while ((W25QXX_ReadSR() &0x01) == 0x01)
-        ;
-    // 等待BUSY位清空
-}
-
 
 //要写入到W25Q16的字符串数组
 const byte TEXT_Buffer[] = 
