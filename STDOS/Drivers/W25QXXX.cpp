@@ -180,6 +180,18 @@ void W25Q64::WriteEnable(void)
     /* Deselect the FLASH: Chip Select high */
     this->_spi->Stop();
 }
+//写保护
+void W25Q64::WriteDisable(void)
+{
+	/* Select the FLASH: Chip Select low */
+    this->_spi->Start();
+
+    /* Send "Write Enable" instruction */
+    this->_spi->Write(W25X_WriteDisable);
+
+    /* Deselect the FLASH: Chip Select high */
+    this->_spi->Stop();
+}
 
 /*******************************************************************************
  * Function Name  : BulkErase
@@ -680,7 +692,6 @@ void W25QXX_Init(void);
 ushort W25QXX_ReadID(void); //读取FLASH ID
 byte W25QXX_ReadSR(void); //读取状态寄存器 
 void W25QXX_Write_SR(byte sr); //写状态寄存器
-void W25QXX_Write_Disable(void); //写保护
 void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
 void W25QXX_Read(byte *pBuffer, uint ReadAddr, ushort NumByteToRead); //读取flash
 void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite); //写入flash
@@ -738,18 +749,6 @@ void W25QXX_Write_SR(byte sr)
     //取消片选     
 	spi.Stop();
     
-}
-
-//W25QXX写禁止	
-//将WEL清零  
-void W25QXX_Write_Disable(void)
-{
-     //使能器件   
-	spi.Start();  
-    spi.Write(W25X_WriteDisable); //发送写禁止指令    
-    //取消片选     
-	spi.Stop();
-        	      
 }
 
 //读取芯片ID

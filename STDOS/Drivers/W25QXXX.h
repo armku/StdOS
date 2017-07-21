@@ -17,7 +17,8 @@
 
             // 读取编号
             uint ReadID();
-            void WriteEnable(void);
+            void WriteEnable(void);//写允许
+			void WriteDisable(void);//写保护
             void StartReadSequence(uint ReadAddr);
 
         public:
