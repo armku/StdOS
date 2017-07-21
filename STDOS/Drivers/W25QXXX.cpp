@@ -223,18 +223,11 @@ void W25Q64::BulkErase(void)
 // Ð´ÈëÒ»Ò³
 bool W25Q64::WritePage(uint addr, byte *pBuffer, uint NumByteToWrite)
 {
-    /* Enable the write access to the FLASH */
     WriteEnable();
-
-    /* Select the FLASH: Chip Select low */
-    this->_spi->Start();
-    /* Send "Write to Memory " instruction */
+	this->_spi->Start();
     this->_spi->Write(W25X_PageProgram);
-    /* Send addr high nibble address byte to write to */
     this->_spi->Write((addr &0xFF0000) >> 16);
-    /* Send addr medium nibble address byte to write to */
     this->_spi->Write((addr &0xFF00) >> 8);
-    /* Send addr low nibble address byte to write to */
     this->_spi->Write(addr &0xFF);
 
     if (NumByteToWrite > this->PageSize)
@@ -243,19 +236,14 @@ bool W25Q64::WritePage(uint addr, byte *pBuffer, uint NumByteToWrite)
         //printf("\n\r Err: this->PageWrite too large!");
     }
 
-    /* while there is data to be written on the FLASH */
     while (NumByteToWrite--)
     {
-        /* Send the current byte */
         this->_spi->Write(*pBuffer);
-        /* Point on the next byte to be written */
         pBuffer++;
     }
 
-    /* Deselect the FLASH: Chip Select high */
     this->_spi->Stop();
 
-    /* Wait the end of Flash writing */
     this->WaitForEnd();
     return true;
 }
@@ -599,7 +587,7 @@ void W25Q128::StartReadSequence(uint ReadAddr)
 }
 W25Q128::W25Q128(Spi *spi):W25Q64(spi)
 {
-	
+	this->PageSize=256;
 }
 W25Q128::~W25Q128()
 {
