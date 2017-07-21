@@ -584,7 +584,90 @@ void W25Q64::StartReadSequence(uint ReadAddr)
 
 
 
+// 设置操作地址
+void W25Q128::SetAddr(uint addr)
+{
+	
+}
+// 等待操作完成
+bool W25Q128::WaitForEnd()
+{
+	return false;
+}
 
+// 读取编号
+uint W25Q128::ReadID()
+{
+	return 0;
+}
+void W25Q128::WriteEnable(void)
+{
+	
+}
+void W25Q128::StartReadSequence(uint ReadAddr)
+{
+	
+}
+W25Q128::W25Q128(Spi *spi)
+{
+	
+}
+W25Q128::~W25Q128()
+{
+	
+}
+
+// 擦除扇区
+bool W25Q128::Erase(uint sector)
+{
+	return false;
+}
+// 擦除页
+bool W25Q128::ErasePage(uint pageAddr)
+{
+	return false;
+}
+
+// 写入一页
+bool W25Q128::WritePage(uint addr, byte *buf, uint count)
+{
+	return false;
+}
+// 读取一页
+bool W25Q128::ReadPage(uint addr, byte *buf, uint count)
+{
+	return false;
+}
+// 写入数据
+bool W25Q128::Write(uint addr, byte *buf, uint count)
+{
+	return false;
+}
+// 读取数据
+bool W25Q128::Read(uint addr, byte *buf, uint count)
+{
+	return false;
+}
+//Reads FLASH identification.
+uint W25Q128::ReadDeviceID(void) 
+{
+	return false;
+}
+//Erases the entire FLASH.
+void W25Q128::BulkErase(void)
+{
+	
+}
+//唤醒
+void W25Q128::WakeUp(void) 
+{
+	
+}
+//进入掉电模式
+void W25Q128::PowerDown(void)
+{
+	
+}
 
 OutputPort nss;
 OutputPort nsspp;
@@ -1052,9 +1135,13 @@ const u8 TEXT_Buffer[] =
 {
     "Explorer STM32F4 SPI TEST"
 };
-#define SIZE sizeof(TEXT_Buffer)	 
+#define SIZE sizeof(TEXT_Buffer)	
+Spi spi(Spi1);
+//W25Q128 w25q128(&spi);	
 void w25q128test()
 {
+	
+	
     byte datatemp[SIZE];
     u32 FLASH_SIZE;
     W25QXX_Init(); //W25QXX初始化
