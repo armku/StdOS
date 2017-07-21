@@ -1,11 +1,11 @@
 #include "Sys.h"
 #include "Spi.h"
 #ifdef STM32F1
-	#include "stm32f10x.h"
-#endif
+    #include "stm32f10x.h"
+#endif 
 #ifdef STM32F4
-	#include "stm32f4xx.h"
-#endif
+    #include "stm32f4xx.h"
+#endif 
 
 void Spi::Init()
 {
@@ -47,27 +47,27 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
     switch (this->_index)
     {
         case Spi1:
-			#ifdef STM32F0
-		
-			#elif defined STM32F1
-            if (useNss)
-            {
-                this->SetPin(PA5, PA6, PA7, PA4);
-            }
-            else
-            {
-                this->SetPin(PA5, PA6, PA7);
-            }
-			#elif defined STM32F4
-			if (useNss)
-            {
-                this->SetPin(PB3, PB4, PB5, PB14);
-            }
-            else
-            {
-                this->SetPin(PB3, PB4, PB5);
-            }
-			#endif
+            #ifdef STM32F0
+
+            #elif defined STM32F1
+                if (useNss)
+                {
+                    this->SetPin(PA5, PA6, PA7, PA4);
+                }
+                else
+                {
+                    this->SetPin(PA5, PA6, PA7);
+                }
+            #elif defined STM32F4
+                if (useNss)
+                {
+                    this->SetPin(PB3, PB4, PB5, PB14);
+                }
+                else
+                {
+                    this->SetPin(PB3, PB4, PB5);
+                }
+            #endif 
             this->_SPI = SPI1;
             break;
         case Spi2:
@@ -280,32 +280,35 @@ void Spi::OnClose()
             break;
     }
 }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////SoftSpi////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 SoftSpi::SoftSpi(uint speedHz)
 {
-	this->pportcs.Invert=false;
-    this->pClk.Invert=false;
-    this->pportdi.Invert=false;
-    this->pportdo.Invert=false;
-	//this->delayus=speedHz;
-	this->delayus=0;
+    this->pportcs.Invert = false;
+    this->pClk.Invert = false;
+    this->pportdi.Invert = false;
+    this->pportdo.Invert = false;
+    //this->delayus=speedHz;
+    this->delayus = 0;
 }
+
 void SoftSpi::SetPin(Pin pincs, Pin pinsck, Pin pindi, Pin pindo)
-{	
-	this->pportcs.Set(pincs);
-	this->pClk.Set(pinsck);
-	this->pportdi.Set(pindi);
-	this->pportdo.Set(pindo);	
+{
+    this->pportcs.Set(pincs);
+    this->pClk.Set(pinsck);
+    this->pportdi.Set(pindi);
+    this->pportdo.Set(pindo);
 }
+
 /*---------------------------------------------------------
 忙状态判断，最长等待时间，200 X 10 ms=2S
 ---------------------------------------------------------*/
 byte SoftSpi::WaitBusy()
 {
     ushort i;
-    this->pportcs=0;
+    this->pportcs = 0;
     i = 0;
     while (this->pportdo.Read() > 0)
     {
@@ -314,7 +317,7 @@ byte SoftSpi::WaitBusy()
         if (i > 200)
             return 1;
     }
-    this->pportcs=1;
+    this->pportcs = 1;
     return 0;
 }
 
@@ -325,18 +328,18 @@ byte SoftSpi::Write(byte data)
     byte ret = 0;
     for (i = 0; i < 8; i++)
     {
-        if (data & (1 << (8 - i - 1)))
+        if (data &(1 << (8-i - 1)))
         {
-            this->pportdi=1;
+            this->pportdi = 1;
         }
         else
         {
-            this->pportdi=0;
+            this->pportdi = 0;
         }
-		Sys.Delay(this->delayus);
-        this->pClk=1;
         Sys.Delay(this->delayus);
-        this->pClk=0;
+        this->pClk = 1;
+        Sys.Delay(this->delayus);
+        this->pClk = 0;
         ret <<= 1;
         if (this->pportdo.Read())
         {
@@ -345,24 +348,24 @@ byte SoftSpi::Write(byte data)
     }
     return ret;
 }
-void SoftSpi::Open()
-{
-	
+
+void SoftSpi::Open(){
+
 }
-void SoftSpi::Close()
-{
-	
+void SoftSpi::Close(){
+
 }
-			
+
 // 拉低NSS，开始传输
 void SoftSpi::Start()
 {
-	this->pportcs=0;
-}	
+    this->pportcs = 0;
+}
+
 // 拉高NSS，停止传输
 void SoftSpi::Stop()
 {
-	this->pportcs=1;
+    this->pportcs = 1;
 }
 
 
