@@ -22,24 +22,16 @@
 
 #define WIP_Flag                  	0x01  /* Write In Progress (WIP) flag */
 
-// 设置操作地址
-void W25Q64::SetAddr(uint addr){
-
-}
-
 // 读取编号
 uint W25Q64::ReadID()
 {
     uint Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
 
-    /* Select the FLASH: Chip Select low */
     this->_spi->Start();
-    /* Send "RDID " instruction */
     this->_spi->Write(W25X_JedecDeviceID);
     Temp0 = this->_spi->Write(0xFF);
     Temp1 = this->_spi->Write(0xFF);
     Temp2 = this->_spi->Write(0xFF);
-    /* Deselect the FLASH: Chip Select high */
     this->_spi->Stop();
     Temp = (Temp0 << 16) | (Temp1 << 8) | Temp2;
     return Temp;
@@ -51,39 +43,19 @@ W25Q64::W25Q64(Spi *spi)
     this->PageSize = 256;
 }
 
-W25Q64::~W25Q64(){
-
-}
-// 读取一页
-bool W25Q64::ReadPage(uint addr, byte *buf, uint count)
-{
-    return true;
-}
-
-/*******************************************************************************
- * Function Name  : SPI_FLASH_ReadID
- * Description    : Reads FLASH identification.
- * Input          : None
- * Output         : None
- * Return         : FLASH identification
- *******************************************************************************/
 uint W25Q64::ReadDeviceID(void)
 {
     uint Temp = 0;
 
-    /* Select the FLASH: Chip Select low */
     this->_spi->Start();
 
-    /* Send "RDID " instruction */
     this->_spi->Write(W25X_DeviceID);
     this->_spi->Write(0XFF);
     this->_spi->Write(0XFF);
     this->_spi->Write(0XFF);
 
-    /* Read a byte from the FLASH */
     Temp = this->_spi->Write(0XFF);
 
-    /* Deselect the FLASH: Chip Select high */
     this->_spi->Stop();
 
     this->ID = this->ReadID();
@@ -184,17 +156,6 @@ bool W25Q64::WritePage(uint addr, byte *pBuffer, uint NumByteToWrite)
     return true;
 }
 
-/*******************************************************************************
- * Function Name  : Write
- * Description    : Writes block of data to the FLASH. In this function, the
- *                  number of WRITE cycles are reduced, using Page WRITE sequence.
- * Input          : - pBuffer : pointer to the buffer  containing the data to be
- *                    written to the FLASH.
- *                  - addr : FLASH's internal address to write to.
- *                  - NumByteToWrite : number of bytes to write to the FLASH.
- * Output         : None
- * Return         : None
- *******************************************************************************/
 // 写入数据
 bool W25Q64::Write(uint addr, byte *pBuffer, uint NumByteToWrite)
 {
@@ -419,44 +380,8 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Spi spi(Spi1);
 W25Q128 w25q128(&spi);
-
-// 设置操作地址
-void W25Q128::SetAddr(uint addr)
-{
-	
-}
 
 // 读取编号
 uint W25Q128::ReadID()
@@ -466,11 +391,7 @@ uint W25Q128::ReadID()
 
 W25Q128::W25Q128(Spi *spi):W25Q64(spi)
 {
-	this->PageSize=256;
-}
-W25Q128::~W25Q128()
-{
-	
+	this->PageSize=4096;
 }
 
 // 擦除扇区
@@ -486,11 +407,6 @@ bool W25Q128::ErasePage(uint pageAddr)
 
 // 写入一页
 bool W25Q128::WritePage(uint addr, byte *buf, uint count)
-{
-	return false;
-}
-// 读取一页
-bool W25Q128::ReadPage(uint addr, byte *buf, uint count)
 {
 	return false;
 }

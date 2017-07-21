@@ -10,8 +10,6 @@
         private:public:
             Spi *_spi; // 内部Spi对象
 
-            // 设置操作地址
-            void SetAddr(uint addr);
             // 等待操作完成
             bool WaitForEnd();
 
@@ -26,7 +24,6 @@
             ushort Retry; // 等待重试次数
 
             W25Q64(Spi *spi);
-            ~W25Q64();
 
             // 擦除扇区
             bool EraseSector(uint sector);
@@ -35,8 +32,6 @@
 
             // 写入一页
             bool WritePage(uint addr, byte *buf, uint count);
-            // 读取一页
-            bool ReadPage(uint addr, byte *buf, uint count);
             // 写入数据
             bool Write(uint addr, byte *buf, uint count);
             // 读取数据
@@ -52,14 +47,10 @@
 	class W25Q128:public W25Q64
     {
         private:
-            // 设置操作地址
-            void SetAddr(uint addr);
             // 读取编号
             uint ReadID();
         public:
-            
             W25Q128(Spi *spi);
-            ~W25Q128();
 
             // 擦除扇区
             bool EraseSector(uint sector);
@@ -68,8 +59,6 @@
 
             // 写入一页
             bool WritePage(uint addr, byte *buf, uint count);
-            // 读取一页
-            bool ReadPage(uint addr, byte *buf, uint count);
             // 写入数据
             bool Write(uint addr, byte *buf, uint count);
 
