@@ -52,18 +52,12 @@
 	class W25Q128:public W25Q64
     {
         private:
-            Spi *_spi; // 内部Spi对象
-
             // 设置操作地址
             void SetAddr(uint addr);
             // 读取编号
             uint ReadID();
         public:
-            uint ID; // 芯片ID
-            uint DeviceID; // 设备ID
-            ushort PageSize; // 页大小
-            ushort Retry; // 等待重试次数
-
+            
             W25Q128(Spi *spi);
             ~W25Q128();
 
