@@ -381,11 +381,28 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
 
 
 
-
-// 读取编号
+//读取芯片ID
+//返回值如下:				   
+//0XEF13,表示芯片型号为W25Q80  
+//0XEF14,表示芯片型号为W25Q16    
+//0XEF15,表示芯片型号为W25Q32  
+//0XEF16,表示芯片型号为W25Q64 
+//0XEF17,表示芯片型号为W25Q128 	  
 uint W25Q128::ReadID()
 {
-	return 0;
+	ushort Temp = 0;
+     //使能器件   
+	this->_spi->Start();
+    this->_spi->Write(W25X_ManufactDeviceID); //发送读取ID命令	    
+    this->_spi->Write(0x00);
+    this->_spi->Write(0x00);
+    this->_spi->Write(0x00);
+    Temp |= this->_spi->Write(0xFF) << 8;
+    Temp |= this->_spi->Write(0xFF);
+     //取消片选     
+	this->_spi->Stop();
+    
+    return Temp;
 }
 
 W25Q128::W25Q128(Spi *spi):W25Q64(spi)
@@ -480,7 +497,6 @@ extern ushort W25QXX_TYPE; //定义W25QXX芯片型号
 
 
 void W25QXX_Init(void);
-ushort W25QXX_ReadID(void); //读取FLASH ID
 void W25QXX_Write_SR(byte sr); //写状态寄存器
 void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
 void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite); //写入flash
@@ -499,7 +515,7 @@ void W25QXX_Init(void)
     
 //	SPI_Cmd(SPI1, ENABLE); //使能SPI外设
 //    spi.Write(0xff); //启动传输
-    W25QXX_TYPE = W25QXX_ReadID(); //读取FLASH ID.
+    W25QXX_TYPE = w25q128.ReadID(); //读取FLASH ID.
 }
 
 //写W25QXX状态寄存器
@@ -515,29 +531,7 @@ void W25QXX_Write_SR(byte sr)
     
 }
 
-//读取芯片ID
-//返回值如下:				   
-//0XEF13,表示芯片型号为W25Q80  
-//0XEF14,表示芯片型号为W25Q16    
-//0XEF15,表示芯片型号为W25Q32  
-//0XEF16,表示芯片型号为W25Q64 
-//0XEF17,表示芯片型号为W25Q128 	  
-ushort W25QXX_ReadID(void)
-{
-    ushort Temp = 0;
-     //使能器件   
-	spi.Start();
-    spi.Write(W25X_ManufactDeviceID); //发送读取ID命令	    
-    spi.Write(0x00);
-    spi.Write(0x00);
-    spi.Write(0x00);
-    Temp |= spi.Write(0xFF) << 8;
-    Temp |= spi.Write(0xFF);
-     //取消片选     
-	spi.Stop();
-    
-    return Temp;
-}
+
 
 //无检验写SPI FLASH 
 //必须确保所写的地址范围内的数据全部为0XFF,否则在非0XFF处写入的数据将失败!
@@ -666,7 +660,7 @@ void w25q128test()
     uint FLASH_SIZE;
     W25QXX_Init(); //W25QXX初始化
     printf("SPI TEST\r\n");
-    while (W25QXX_ReadID() != W25Q128)
+    while (w25q128.ReadID() != W25Q128)
     //检测不到W25Q128
     {
         printf("W25Q128 Check Failed!\r\n");

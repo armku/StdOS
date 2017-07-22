@@ -46,7 +46,7 @@
 
 	class W25Q128:public W25Q64
     {
-        private:
+	private:public:
             // ∂¡»°±‡∫≈
             uint ReadID();
         public:
