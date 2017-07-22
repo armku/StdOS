@@ -4,10 +4,17 @@
     #include "Kernel\Sys.h"
     #include "Device\Spi.h"
 
+    //W25X系列/Q系列芯片列表	   
+    typedef enum
+    {
+        W25QXXX80 = 0XEF13, W25QXXX16 = 0XEF14, W25QXXX32 = 0XEF15, W25QXXX64 = 0XEF16, W25QXXX128 = 0XEF17
+    } W25QXXXType;
+
     // W25Q64存储Flash
     class W25Q64
     {
-        private:public:
+        private:
+        public:
             Spi *_spi; // 内部Spi对象
 
             // 等待操作完成
@@ -15,8 +22,8 @@
 
             // 读取编号
             uint ReadID();
-            void WriteEnable(void);//写允许
-			void WriteDisable(void);//写保护
+            void WriteEnable(void); //写允许
+            void WriteDisable(void); //写保护
         public:
             uint ID; // 芯片ID
             uint DeviceID; // 设备ID
@@ -39,28 +46,28 @@
 
             uint ReadDeviceID(void); //Reads FLASH identification.
             //Erases the entire FLASH.
-            void EraseChip(void);////擦除整个芯片 等待时间超长...
+            void EraseChip(void); ////擦除整个芯片 等待时间超长...
             void WakeUp(void); //唤醒
             void PowerDown(void); //进入掉电模式	
     };
 
-	class W25Q128:public W25Q64
+    class W25Q128: public W25Q64
     {
-	    public:
+        public:
             // 读取编号
             uint ReadID();
-			W25Q128(Spi *spi);
+            W25Q128(Spi *spi);
             // 擦除扇区 扇区地址
-            bool EraseSector(uint sectorAddr);            
+            bool EraseSector(uint sectorAddr);
             // 写入一页
             bool WritePage(uint addr, byte *buf, uint count);
             // 写入数据
             bool Write(uint addr, byte *buf, uint count);
             void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
-			void W25QXX_Write_SR(byte sr);
-			void W25QXX_Init(void);
-			ushort W25QXX_TYPE;
-			byte W25QXX_BUFFER[4096];
+            void W25QXX_Write_SR(byte sr);
+            void W25QXX_Init(void);
+            ushort W25QXX_TYPE;
+            byte W25QXX_BUFFER[4096];
     };
     /*
     AT45DB041中的数据按页存放,主存共2048页,每页 264字节,所以总容量为528K字节（约4M比特）。存放在主存中的数据掉电不丢失。
