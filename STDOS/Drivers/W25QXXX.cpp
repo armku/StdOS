@@ -423,9 +423,31 @@ bool W25Q128::ErasePage(uint pageAddr)
 }
 
 // 写入一页
+//SPI在一页(0~65535)内写入少于256个字节的数据
+//在指定地址开始写入最大256字节的数据
+//pBuffer:数据存储区
+//WriteAddr:开始写入的地址(24bit)
+//NumByteToWrite:要写入的字节数(最大256),该数不应该超过该页的剩余字节数!!!	 
+
 bool W25Q128::WritePage(uint addr, byte *buf, uint count)
 {
-	return false;
+	ushort i;
+    this->WriteEnable(); //SET WEL 
+    //使能器件   
+	this->_spi->Start();  
+    this->_spi->Write(W25X_PageProgram); //发送写页命令   
+    this->_spi->Write((byte)((addr) >> 16)); //发送24bit地址    
+    this->_spi->Write((byte)((addr) >> 8));
+    this->_spi->Write((byte)addr);
+    for (i = 0; i < count; i++)
+	{
+        this->_spi->Write(buf[i]);
+    }
+	//循环写数  
+    //取消片选     
+	this->_spi->Stop();
+    this->WaitForEnd(); //等待写入结束
+	return true;
 }
 // 写入数据
 bool W25Q128::Write(uint addr, byte *buf, uint count)
@@ -517,29 +539,6 @@ ushort W25QXX_ReadID(void)
     return Temp;
 }
 
-//SPI在一页(0~65535)内写入少于256个字节的数据
-//在指定地址开始写入最大256字节的数据
-//pBuffer:数据存储区
-//WriteAddr:开始写入的地址(24bit)
-//NumByteToWrite:要写入的字节数(最大256),该数不应该超过该页的剩余字节数!!!	 
-void W25QXX_Write_Page(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
-{
-    ushort i;
-    w25q128.WriteEnable(); //SET WEL 
-    //使能器件   
-	spi.Start();  
-    spi.Write(W25X_PageProgram); //发送写页命令   
-    spi.Write((byte)((WriteAddr) >> 16)); //发送24bit地址    
-    spi.Write((byte)((WriteAddr) >> 8));
-    spi.Write((byte)WriteAddr);
-    for (i = 0; i < NumByteToWrite; i++)
-        spi.Write(pBuffer[i]);
-    //循环写数  
-    //取消片选     
-	spi.Stop();
-    w25q128.WaitForEnd(); //等待写入结束
-}
-
 //无检验写SPI FLASH 
 //必须确保所写的地址范围内的数据全部为0XFF,否则在非0XFF处写入的数据将失败!
 //具有自动换页功能 
@@ -557,7 +556,7 @@ void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
     //不大于256个字节
     while (1)
     {
-        W25QXX_Write_Page(pBuffer, WriteAddr, pageremain);
+        w25q128.WritePage(WriteAddr,pBuffer,  pageremain);
         if (NumByteToWrite == pageremain)
             break;
         //写入结束了
