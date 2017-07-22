@@ -380,8 +380,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
 
 
 
-Spi spi(Spi1);
-W25Q128 w25q128(&spi);
+
 
 // 读取编号
 uint W25Q128::ReadID()
@@ -395,9 +394,27 @@ W25Q128::W25Q128(Spi *spi):W25Q64(spi)
 }
 
 // 擦除扇区
-bool W25Q128::EraseSector(uint sector)
+//擦除一个扇区
+//Dst_Addr:扇区地址 根据实际容量设置
+//擦除一个山区的最少时间:150ms
+bool W25Q128::EraseSector(uint sectorAddr)
 {
-	return false;
+	 //监视falsh擦除情况,测试用   
+    printf("fe:%x\r\n", sectorAddr);
+    sectorAddr *= 4096;
+    this->WriteEnable(); //SET WEL 	 
+    this->WaitForEnd();
+    //使能器件   
+	this->_spi->Start();
+    this->_spi->Write(W25X_SectorErase); //发送扇区擦除指令 
+    this->_spi->Write((byte)((sectorAddr) >> 16)); //发送24bit地址    
+    this->_spi->Write((byte)((sectorAddr) >> 8));
+    this->_spi->Write((byte)sectorAddr);
+    //取消片选     
+	this->_spi->Stop();	      
+    this->WaitForEnd(); //等待擦除完成
+	
+	return true;
 }
 // 擦除页
 bool W25Q128::ErasePage(uint pageAddr)
@@ -421,7 +438,8 @@ uint W25Q128::ReadDeviceID(void)
 {
 	return false;
 }
-
+Spi spi(Spi1);
+W25Q128 w25q128(&spi);
 
 //W25X系列/Q系列芯片列表	   
 //W25Q80  ID  0XEF13
@@ -444,8 +462,6 @@ ushort W25QXX_ReadID(void); //读取FLASH ID
 void W25QXX_Write_SR(byte sr); //写状态寄存器
 void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
 void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite); //写入flash
-void W25QXX_Erase_Sector(uint Dst_Addr); //扇区擦除
-
 
 ushort W25QXX_TYPE = W25Q128; //默认是W25Q128
 
@@ -597,7 +613,7 @@ void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
         if (i < secremain)
         //需要擦除
         {
-            W25QXX_Erase_Sector(secpos); //擦除这个扇区
+            w25q128.EraseSector(secpos); //擦除这个扇区
             for (i = 0; i < secremain; i++)
             //复制
             {
@@ -629,26 +645,6 @@ void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
             //下一个扇区可以写完了
         }
     };
-}
-//擦除一个扇区
-//Dst_Addr:扇区地址 根据实际容量设置
-//擦除一个山区的最少时间:150ms
-void W25QXX_Erase_Sector(uint Dst_Addr)
-{
-    //监视falsh擦除情况,测试用   
-    printf("fe:%x\r\n", Dst_Addr);
-    Dst_Addr *= 4096;
-    w25q128.WriteEnable(); //SET WEL 	 
-    w25q128.WaitForEnd();
-    //使能器件   
-	spi.Start();
-    spi.Write(W25X_SectorErase); //发送扇区擦除指令 
-    spi.Write((byte)((Dst_Addr) >> 16)); //发送24bit地址    
-    spi.Write((byte)((Dst_Addr) >> 8));
-    spi.Write((byte)Dst_Addr);
-    //取消片选     
-	spi.Stop();	      
-    w25q128.WaitForEnd(); //等待擦除完成
 }
 
 //要写入到W25Q16的字符串数组

@@ -52,8 +52,8 @@
         public:
             W25Q128(Spi *spi);
 
-            // ²Á³ıÉÈÇø
-            bool EraseSector(uint sector);
+            // ²Á³ıÉÈÇø ÉÈÇøµØÖ·
+            bool EraseSector(uint sectorAddr);
             // ²Á³ıÒ³
             bool ErasePage(uint pageAddr);
 
