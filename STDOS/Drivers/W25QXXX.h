@@ -54,15 +54,18 @@
 
             // 擦除扇区 扇区地址
             bool EraseSector(uint sectorAddr);
-            // 擦除页
-            bool ErasePage(uint pageAddr);
-
+            
             // 写入一页
             bool WritePage(uint addr, byte *buf, uint count);
             // 写入数据
             bool Write(uint addr, byte *buf, uint count);
 
-            uint ReadDeviceID(void); //Reads FLASH identification.
+            void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
+			void W25QXX_Write_SR(byte sr);
+			void W25QXX_Init(void);
+			void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
+			ushort W25QXX_TYPE;
+			byte W25QXX_BUFFER[4096];
     };
     /*
     AT45DB041中的数据按页存放,主存共2048页,每页 264字节,所以总容量为528K字节（约4M比特）。存放在主存中的数据掉电不丢失。

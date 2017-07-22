@@ -433,11 +433,6 @@ bool W25Q128::EraseSector(uint sectorAddr)
 	
 	return true;
 }
-// 擦除页
-bool W25Q128::ErasePage(uint pageAddr)
-{
-	return false;
-}
 
 // 写入一页
 //SPI在一页(0~65535)内写入少于256个字节的数据
@@ -472,67 +467,31 @@ bool W25Q128::Write(uint addr, byte *buf, uint count)
 	return false;
 }
 
-//Reads FLASH identification.
-uint W25Q128::ReadDeviceID(void) 
-{
-	return false;
-}
-Spi spi(Spi1);
-W25Q128 w25q128(&spi);
-
-//W25X系列/Q系列芯片列表	   
-//W25Q80  ID  0XEF13
-//W25Q16  ID  0XEF14
-//W25Q32  ID  0XEF15
-//W25Q64  ID  0XEF16	
-//W25Q128 ID  0XEF17	
-#define W25Q80 	0XEF13 	
-#define W25Q16 	0XEF14
-#define W25Q32 	0XEF15
-#define W25Q64 	0XEF16
-#define W25Q128	0XEF17
-
-extern ushort W25QXX_TYPE; //定义W25QXX芯片型号		   
-
-
-
-void W25QXX_Init(void);
-void W25QXX_Write_SR(byte sr); //写状态寄存器
-void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
-void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite); //写入flash
-
-ushort W25QXX_TYPE = W25Q128; //默认是W25Q128
-
 //4Kbytes为一个Sector
 //16个扇区为1个Block
 //W25Q128
 //容量为16M字节,共有128个Block,4096个Sector 
-
-void W25QXX_Init(void)
+void W25Q128::W25QXX_Init(void)
 {		
 	
-	spi.Stop();
+	this->_spi->Stop();
     
 //	SPI_Cmd(SPI1, ENABLE); //使能SPI外设
 //    spi.Write(0xff); //启动传输
-    W25QXX_TYPE = w25q128.ReadID(); //读取FLASH ID.
+    W25QXX_TYPE = this->ReadID(); //读取FLASH ID.
 }
-
 //写W25QXX状态寄存器
 //只有SPR,TB,BP2,BP1,BP0(bit 7,5,4,3,2)可以写!!!
-void W25QXX_Write_SR(byte sr)
+void W25Q128::W25QXX_Write_SR(byte sr)
 {
     //使能器件   
-	spi.Start();
-    spi.Write(W25X_WriteStatusReg); //发送写取状态寄存器命令    
-    spi.Write(sr); //写入一个字节  
+	this->_spi->Start();
+    this->_spi->Write(W25X_WriteStatusReg); //发送写取状态寄存器命令    
+    this->_spi->Write(sr); //写入一个字节  
     //取消片选     
-	spi.Stop();
+	this->_spi->Stop();
     
 }
-
-
-
 //无检验写SPI FLASH 
 //必须确保所写的地址范围内的数据全部为0XFF,否则在非0XFF处写入的数据将失败!
 //具有自动换页功能 
@@ -541,7 +500,7 @@ void W25QXX_Write_SR(byte sr)
 //WriteAddr:开始写入的地址(24bit)
 //NumByteToWrite:要写入的字节数(最大65535)
 //CHECK OK
-void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
+void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
     ushort pageremain;
     pageremain = 256-WriteAddr % 256; //单页剩余的字节数		 	    
@@ -550,7 +509,7 @@ void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
     //不大于256个字节
     while (1)
     {
-        w25q128.WritePage(WriteAddr,pBuffer,  pageremain);
+        this->WritePage(WriteAddr,pBuffer,  pageremain);
         if (NumByteToWrite == pageremain)
             break;
         //写入结束了
@@ -570,15 +529,13 @@ void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
         }
     };
 }
-
 //写SPI FLASH  
 //在指定地址开始写入指定长度的数据
 //该函数带擦除操作!
 //pBuffer:数据存储区
 //WriteAddr:开始写入的地址(24bit)						
-//NumByteToWrite:要写入的字节数(最大65535)   
-byte W25QXX_BUFFER[4096];
-void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
+//NumByteToWrite:要写入的字节数(最大65535)
+void W25Q128::W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
     uint secpos;
     ushort secoff;
@@ -595,7 +552,7 @@ void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
     //不大于4096个字节
     while (1)
     {
-        w25q128.Read(secpos *4096,W25QXX_BUF,  4096); //读出整个扇区的内容
+        this->Read(secpos *4096,W25QXX_BUF,  4096); //读出整个扇区的内容
         for (i = 0; i < secremain; i++)
         //校验数据
         {
@@ -606,17 +563,17 @@ void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
         if (i < secremain)
         //需要擦除
         {
-            w25q128.EraseSector(secpos); //擦除这个扇区
+            this->EraseSector(secpos); //擦除这个扇区
             for (i = 0; i < secremain; i++)
             //复制
             {
                 W25QXX_BUF[i + secoff] = pBuffer[i];
             }
-            W25QXX_Write_NoCheck(W25QXX_BUF, secpos *4096, 4096); //写入整个扇区  
+            this->W25QXX_Write_NoCheck(W25QXX_BUF, secpos *4096, 4096); //写入整个扇区  
 
         }
         else
-            W25QXX_Write_NoCheck(pBuffer, WriteAddr, secremain);
+            this->W25QXX_Write_NoCheck(pBuffer, WriteAddr, secremain);
         //写已经擦除了的,直接写入扇区剩余区间. 				   
         if (NumByteToWrite == secremain)
             break;
@@ -640,6 +597,23 @@ void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
     };
 }
 
+Spi spi(Spi1);
+W25Q128 w25q128(&spi);	
+OutputPort nsspp;
+//W25X系列/Q系列芯片列表	   
+//W25Q80  ID  0XEF13
+//W25Q16  ID  0XEF14
+//W25Q32  ID  0XEF15
+//W25Q64  ID  0XEF16	
+//W25Q128 ID  0XEF17	
+#define W25Q80 	0XEF13 	
+#define W25Q16 	0XEF14
+#define W25Q32 	0XEF15
+#define W25Q64 	0XEF16
+#define W25Q128	0XEF17
+
+//extern ushort W25QXX_TYPE; //定义W25QXX芯片型号		   
+//ushort W25QXX_TYPE = W25Q128; //默认是W25Q128
 //要写入到W25Q16的字符串数组
 const byte TEXT_Buffer[] = 
 {
@@ -647,8 +621,6 @@ const byte TEXT_Buffer[] =
 };
 #define SIZE sizeof(TEXT_Buffer)	
 
-	
-OutputPort nsspp;
 void w25q128test()
 {
 	nsspp.Invert=false;
@@ -658,7 +630,7 @@ void w25q128test()
 	
     byte datatemp[SIZE];
     uint FLASH_SIZE;
-    W25QXX_Init(); //W25QXX初始化
+    w25q128.W25QXX_Init(); //W25QXX初始化
     printf("SPI TEST\r\n");
     while (w25q128.ReadID() != W25Q128)
     //检测不到W25Q128
@@ -670,7 +642,7 @@ void w25q128test()
     printf("\r\n");
 
     printf("Start Write W25Q128....\r\n");
-    W25QXX_Write((byte*)TEXT_Buffer, FLASH_SIZE - 100, SIZE); //从倒数第100个地址处开始,写入SIZE长度的数据
+    w25q128.W25QXX_Write((byte*)TEXT_Buffer, FLASH_SIZE - 100, SIZE); //从倒数第100个地址处开始,写入SIZE长度的数据
     printf("W25Q128 Write Finished!\r\n"); //提示传送完成
     printf("\r\n");
 
