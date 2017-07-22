@@ -617,7 +617,6 @@ const byte TEXT_Buffer[] =
 {
     "Explorer STM32F4 SPI TEST"
 };
-#define SIZE sizeof(TEXT_Buffer)	
 
 void w25q128test()
 {
@@ -626,7 +625,7 @@ void w25q128test()
 	nsspp.Set(PG7);
 	nsspp=1; //PG7输出1,防止NRF干扰SPI FLASH的通信 
 	
-    byte datatemp[SIZE];
+    byte datatemp[sizeof(TEXT_Buffer)];
     uint FLASH_SIZE;
     w25q128.W25QXX_Init(); //W25QXX初始化
     printf("SPI TEST\r\n");
@@ -640,12 +639,12 @@ void w25q128test()
     printf("\r\n");
 
     printf("Start Write W25Q128....\r\n");
-    w25q128.Write(FLASH_SIZE - 100,(byte*)TEXT_Buffer,  SIZE); //从倒数第100个地址处开始,写入SIZE长度的数据
+    w25q128.Write(FLASH_SIZE - 100,(byte*)TEXT_Buffer,  sizeof(TEXT_Buffer)); //从倒数第100个地址处开始,写入SIZE长度的数据
     printf("W25Q128 Write Finished!\r\n"); //提示传送完成
     printf("\r\n");
 
     printf("Start Read W25Q128....\r\n");
-    w25q128.Read(FLASH_SIZE - 100,datatemp,  SIZE); //从倒数第100个地址处开始,读出SIZE个字节
+    w25q128.Read(FLASH_SIZE - 100,datatemp,  sizeof(TEXT_Buffer)); //从倒数第100个地址处开始,读出SIZE个字节
     printf("The Data Readed Is:\r\n"); //提示传送完成
     printf((const char*)datatemp);
 
