@@ -63,7 +63,6 @@
             void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
 			void W25QXX_Write_SR(byte sr);
 			void W25QXX_Init(void);
-			void W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
 			ushort W25QXX_TYPE;
 			byte W25QXX_BUFFER[4096];
     };

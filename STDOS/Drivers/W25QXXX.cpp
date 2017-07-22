@@ -461,10 +461,74 @@ bool W25Q128::WritePage(uint addr, byte *buf, uint count)
     this->WaitForEnd(); //等待写入结束
 	return true;
 }
+//写SPI FLASH  
+//在指定地址开始写入指定长度的数据
+//该函数带擦除操作!
+//pBuffer:数据存储区
+//WriteAddr:开始写入的地址(24bit)						
+//NumByteToWrite:要写入的字节数(最大65535)
 // 写入数据
-bool W25Q128::Write(uint addr, byte *buf, uint count)
+bool W25Q128::Write(uint WriteAddr, byte *pBuffer, uint NumByteToWrite)
 {
-	return false;
+	uint secpos;
+    ushort secoff;
+    ushort secremain;
+    ushort i;
+    byte *W25QXX_BUF;
+    W25QXX_BUF = W25QXX_BUFFER;
+    secpos = WriteAddr / 4096; //扇区地址  
+    secoff = WriteAddr % 4096; //在扇区内的偏移
+    secremain = 4096-secoff; //扇区剩余空间大小   
+    //printf("ad:%X,nb:%X\r\n",WriteAddr,NumByteToWrite);//测试用
+    if (NumByteToWrite <= secremain)
+        secremain = NumByteToWrite;
+    //不大于4096个字节
+    while (1)
+    {
+        this->Read(secpos *4096,W25QXX_BUF,  4096); //读出整个扇区的内容
+        for (i = 0; i < secremain; i++)
+        //校验数据
+        {
+            if (W25QXX_BUF[secoff + i] != 0XFF)
+                break;
+            //需要擦除  	  
+        }
+        if (i < secremain)
+        //需要擦除
+        {
+            this->EraseSector(secpos); //擦除这个扇区
+            for (i = 0; i < secremain; i++)
+            //复制
+            {
+                W25QXX_BUF[i + secoff] = pBuffer[i];
+            }
+            this->W25QXX_Write_NoCheck(W25QXX_BUF, secpos *4096, 4096); //写入整个扇区  
+
+        }
+        else
+            this->W25QXX_Write_NoCheck(pBuffer, WriteAddr, secremain);
+        //写已经擦除了的,直接写入扇区剩余区间. 				   
+        if (NumByteToWrite == secremain)
+            break;
+        //写入结束了
+        else
+        //写入未结束
+        {
+            secpos++; //扇区地址增1
+            secoff = 0; //偏移位置为0 	 
+
+            pBuffer += secremain; //指针偏移
+            WriteAddr += secremain; //写地址偏移	   
+            NumByteToWrite -= secremain; //字节数递减
+            if (NumByteToWrite > 4096)
+                secremain = 4096;
+            //下一个扇区还是写不完
+            else
+                secremain = NumByteToWrite;
+            //下一个扇区可以写完了
+        }
+    };
+	return true;
 }
 
 //4Kbytes为一个Sector
@@ -529,73 +593,7 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
         }
     };
 }
-//写SPI FLASH  
-//在指定地址开始写入指定长度的数据
-//该函数带擦除操作!
-//pBuffer:数据存储区
-//WriteAddr:开始写入的地址(24bit)						
-//NumByteToWrite:要写入的字节数(最大65535)
-void W25Q128::W25QXX_Write(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
-{
-    uint secpos;
-    ushort secoff;
-    ushort secremain;
-    ushort i;
-    byte *W25QXX_BUF;
-    W25QXX_BUF = W25QXX_BUFFER;
-    secpos = WriteAddr / 4096; //扇区地址  
-    secoff = WriteAddr % 4096; //在扇区内的偏移
-    secremain = 4096-secoff; //扇区剩余空间大小   
-    //printf("ad:%X,nb:%X\r\n",WriteAddr,NumByteToWrite);//测试用
-    if (NumByteToWrite <= secremain)
-        secremain = NumByteToWrite;
-    //不大于4096个字节
-    while (1)
-    {
-        this->Read(secpos *4096,W25QXX_BUF,  4096); //读出整个扇区的内容
-        for (i = 0; i < secremain; i++)
-        //校验数据
-        {
-            if (W25QXX_BUF[secoff + i] != 0XFF)
-                break;
-            //需要擦除  	  
-        }
-        if (i < secremain)
-        //需要擦除
-        {
-            this->EraseSector(secpos); //擦除这个扇区
-            for (i = 0; i < secremain; i++)
-            //复制
-            {
-                W25QXX_BUF[i + secoff] = pBuffer[i];
-            }
-            this->W25QXX_Write_NoCheck(W25QXX_BUF, secpos *4096, 4096); //写入整个扇区  
 
-        }
-        else
-            this->W25QXX_Write_NoCheck(pBuffer, WriteAddr, secremain);
-        //写已经擦除了的,直接写入扇区剩余区间. 				   
-        if (NumByteToWrite == secremain)
-            break;
-        //写入结束了
-        else
-        //写入未结束
-        {
-            secpos++; //扇区地址增1
-            secoff = 0; //偏移位置为0 	 
-
-            pBuffer += secremain; //指针偏移
-            WriteAddr += secremain; //写地址偏移	   
-            NumByteToWrite -= secremain; //字节数递减
-            if (NumByteToWrite > 4096)
-                secremain = 4096;
-            //下一个扇区还是写不完
-            else
-                secremain = NumByteToWrite;
-            //下一个扇区可以写完了
-        }
-    };
-}
 
 Spi spi(Spi1);
 W25Q128 w25q128(&spi);	
@@ -642,7 +640,7 @@ void w25q128test()
     printf("\r\n");
 
     printf("Start Write W25Q128....\r\n");
-    w25q128.W25QXX_Write((byte*)TEXT_Buffer, FLASH_SIZE - 100, SIZE); //从倒数第100个地址处开始,写入SIZE长度的数据
+    w25q128.Write(FLASH_SIZE - 100,(byte*)TEXT_Buffer,  SIZE); //从倒数第100个地址处开始,写入SIZE长度的数据
     printf("W25Q128 Write Finished!\r\n"); //提示传送完成
     printf("\r\n");
 
