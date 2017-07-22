@@ -46,20 +46,16 @@
 
 	class W25Q128:public W25Q64
     {
-	private:public:
+	    public:
             // 读取编号
             uint ReadID();
-        public:
-            W25Q128(Spi *spi);
-
+			W25Q128(Spi *spi);
             // 擦除扇区 扇区地址
-            bool EraseSector(uint sectorAddr);
-            
+            bool EraseSector(uint sectorAddr);            
             // 写入一页
             bool WritePage(uint addr, byte *buf, uint count);
             // 写入数据
             bool Write(uint addr, byte *buf, uint count);
-
             void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
 			void W25QXX_Write_SR(byte sr);
 			void W25QXX_Init(void);
