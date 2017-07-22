@@ -61,6 +61,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
             #elif defined STM32F4
                 if (useNss)
                 {
+					//this->SetPin(PA5, PA6, PA7, PA4);/原生SPI1
                     this->SetPin(PB3, PB4, PB5, PB14);
                 }
                 else
@@ -74,9 +75,57 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
             this->_SPI = SPI1;			
             break;
         case Spi2:
+			#ifdef STM32F0
+
+            #elif defined STM32F1
+                if (useNss)
+                {
+//                    this->SetPin(PA5, PA6, PA7, PA4);
+                }
+                else
+                {
+//                    this->SetPin(PA5, PA6, PA7);
+                }
+            #elif defined STM32F4
+                if (useNss)
+                {
+					this->SetPin(PB13, PB14, PB15, PB12);//原生SPI2
+                }
+                else
+                {
+                    this->SetPin(PB13, PB14, PB15);
+                }
+				GPIO_PinAFConfig(GPIOB, GPIO_PinSource13, GPIO_AF_SPI2); //PB13复用为 SPI2
+				GPIO_PinAFConfig(GPIOB, GPIO_PinSource14, GPIO_AF_SPI2); //PB14复用为 SPI2
+				GPIO_PinAFConfig(GPIOB, GPIO_PinSource15, GPIO_AF_SPI2); //PB15复用为 SPI2
+            #endif 
             this->_SPI = SPI2;
             break;
         case Spi3:
+			#ifdef STM32F0
+
+            #elif defined STM32F1
+                if (useNss)
+                {
+//                    this->SetPin(PA5, PA6, PA7, PA4);
+                }
+                else
+                {
+//                    this->SetPin(PA5, PA6, PA7);
+                }
+            #elif defined STM32F4
+                if (useNss)
+                {
+                    this->SetPin(PC10, PC11, PC12, PA15);
+                }
+                else
+                {
+                    this->SetPin(PC10, PC11, PC12);
+                }
+				GPIO_PinAFConfig(GPIOC, GPIO_PinSource10, GPIO_AF_SPI3); //PC10复用为 SPI3
+				GPIO_PinAFConfig(GPIOC, GPIO_PinSource11, GPIO_AF_SPI3); //PC11复用为 SPI3
+				GPIO_PinAFConfig(GPIOC, GPIO_PinSource12, GPIO_AF_SPI3); //PC12复用为 SPI3
+            #endif 
             this->_SPI = SPI3;
             break;
         default:
