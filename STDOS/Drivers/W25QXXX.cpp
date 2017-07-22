@@ -599,11 +599,6 @@ Spi spi(Spi1);
 W25Q128 w25q128(&spi);	
 OutputPort nsspp;
 //W25X系列/Q系列芯片列表	   
-//W25Q80  ID  0XEF13
-//W25Q16  ID  0XEF14
-//W25Q32  ID  0XEF15
-//W25Q64  ID  0XEF16	
-//W25Q128 ID  0XEF17	
 #define W25Q80 	0XEF13 	
 #define W25Q16 	0XEF14
 #define W25Q32 	0XEF15
