@@ -274,7 +274,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
     return true;
 }
 
-#if 0
+#if 1
     Spi spi(Spi1);
     W25Q64 w25q64(&spi);
 
@@ -349,7 +349,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
             printf("\r\n 检测到华邦串行flash W25Q64 !\r\n");
 
             /* Erase FLASH Sector to write on */
-            w25q64.Erase(FLASH_SectorToErase);
+            w25q64.EraseSector(FLASH_SectorToErase);
 
             /* 将发送缓冲区的数据写到flash中 */
             w25q64.Write(FLASH_WriteAddress, Tx_Buffer, BufferSize);
@@ -601,46 +601,47 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
     };
 }
 
+#if 0
+    Spi spi(Spi1);
+    W25Q128 w25q128(&spi);
+    OutputPort nsspp;
 
-Spi spi(Spi1);
-W25Q128 w25q128(&spi);
-OutputPort nsspp;
-
-//要写入到W25Q16的字符串数组
-const byte TEXT_Buffer[] = 
-{
-    "Explorer STM32F4 SPI TEST"
-};
-
-void w25q128test()
-{
-    nsspp.Invert = false;
-    nsspp.OpenDrain = false;
-    nsspp.Set(PG7);
-    nsspp = 1; //PG7输出1,防止NRF干扰SPI FLASH的通信 
-
-    byte datatemp[sizeof(TEXT_Buffer)];
-    uint FLASH_SIZE;
-    w25q128.W25QXX_Init(); //W25QXX初始化
-    printf("SPI TEST\r\n");
-    while (w25q128.ReadID() != W25QXXX128)
-    //检测不到W25Q128
+    //要写入到W25Q16的字符串数组
+    const byte TEXT_Buffer[] = 
     {
-        printf("W25Q128 Check Failed!\r\n");
+        "Explorer STM32F4 SPI TEST"
+    };
+
+    void w25q128test()
+    {
+        nsspp.Invert = false;
+        nsspp.OpenDrain = false;
+        nsspp.Set(PG7);
+        nsspp = 1; //PG7输出1,防止NRF干扰SPI FLASH的通信 
+
+        byte datatemp[sizeof(TEXT_Buffer)];
+        uint FLASH_SIZE;
+        w25q128.W25QXX_Init(); //W25QXX初始化
+        printf("SPI TEST\r\n");
+        while (w25q128.ReadID() != W25QXXX128)
+        //检测不到W25Q128
+        {
+            printf("W25Q128 Check Failed!\r\n");
+        }
+        printf("W25Q128 Ready!\r\n");
+        FLASH_SIZE = 16 * 1024 * 1024; //FLASH 大小为16字节
+        printf("\r\n");
+
+        printf("Start Write W25Q128....\r\n");
+        w25q128.Write(FLASH_SIZE - 100, (byte*)TEXT_Buffer, sizeof(TEXT_Buffer)); //从倒数第100个地址处开始,写入SIZE长度的数据
+        printf("W25Q128 Write Finished!\r\n"); //提示传送完成
+        printf("\r\n");
+
+        printf("Start Read W25Q128....\r\n");
+        w25q128.Read(FLASH_SIZE - 100, datatemp, sizeof(TEXT_Buffer)); //从倒数第100个地址处开始,读出SIZE个字节
+        printf("The Data Readed Is:\r\n"); //提示传送完成
+        printf((const char*)datatemp);
+
+        printf("\r\n\r\n");
     }
-    printf("W25Q128 Ready!\r\n");
-    FLASH_SIZE = 16 * 1024 * 1024; //FLASH 大小为16字节
-    printf("\r\n");
-
-    printf("Start Write W25Q128....\r\n");
-    w25q128.Write(FLASH_SIZE - 100, (byte*)TEXT_Buffer, sizeof(TEXT_Buffer)); //从倒数第100个地址处开始,写入SIZE长度的数据
-    printf("W25Q128 Write Finished!\r\n"); //提示传送完成
-    printf("\r\n");
-
-    printf("Start Read W25Q128....\r\n");
-    w25q128.Read(FLASH_SIZE - 100, datatemp, sizeof(TEXT_Buffer)); //从倒数第100个地址处开始,读出SIZE个字节
-    printf("The Data Readed Is:\r\n"); //提示传送完成
-    printf((const char*)datatemp);
-
-    printf("\r\n\r\n");
-}
+#endif
