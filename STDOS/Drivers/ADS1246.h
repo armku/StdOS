@@ -18,7 +18,7 @@
             int flagOK; //ad转换正常
             int decodead(byte *da);
 
-            SoftSpi pspi; //SPI接口
+            SpiSoft pspi; //SPI接口
             InputPort *ppinrd; //数据准备好接口
             OutputPort ppinreset; //复位接口		
     };

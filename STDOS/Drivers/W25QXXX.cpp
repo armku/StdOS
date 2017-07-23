@@ -274,7 +274,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
     return true;
 }
 
-#if 1
+#if 0
     Spi spi(Spi1);
     W25Q64 w25q64(&spi);
 
@@ -601,7 +601,7 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
     };
 }
 
-#if 0
+#if 1
     Spi spi(Spi1);
     W25Q128 w25q128(&spi);
     OutputPort nsspp;

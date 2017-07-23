@@ -354,9 +354,9 @@ void Spi::OnClose()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////SoftSpi////////////////////////////////////////////////////////////////////
+////////////////////////////SpiSoft////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-SoftSpi::SoftSpi(uint speedHz)
+SpiSoft::SpiSoft(uint speedHz)
 {
     this->pportcs.Invert = false;
     this->pClk.Invert = false;
@@ -366,7 +366,7 @@ SoftSpi::SoftSpi(uint speedHz)
     this->delayus = 0;
 }
 
-void SoftSpi::SetPin(Pin pincs, Pin pinsck, Pin pindi, Pin pindo)
+void SpiSoft::SetPin(Pin pincs, Pin pinsck, Pin pindi, Pin pindo)
 {
     this->pportcs.Set(pincs);
     this->pClk.Set(pinsck);
@@ -377,7 +377,7 @@ void SoftSpi::SetPin(Pin pincs, Pin pinsck, Pin pindi, Pin pindo)
 /*---------------------------------------------------------
 忙状态判断，最长等待时间，200 X 10 ms=2S
 ---------------------------------------------------------*/
-byte SoftSpi::WaitBusy()
+byte SpiSoft::WaitBusy()
 {
     ushort i;
     this->pportcs = 0;
@@ -394,7 +394,7 @@ byte SoftSpi::WaitBusy()
 }
 
 //SPI写字节
-byte SoftSpi::Write(byte data)
+byte SpiSoft::Write(byte data)
 {
     byte i;
     byte ret = 0;
@@ -421,21 +421,21 @@ byte SoftSpi::Write(byte data)
     return ret;
 }
 
-void SoftSpi::Open(){
+void SpiSoft::Open(){
 
 }
-void SoftSpi::Close(){
+void SpiSoft::Close(){
 
 }
 
 // 拉低NSS，开始传输
-void SoftSpi::Start()
+void SpiSoft::Start()
 {
     this->pportcs = 0;
 }
 
 // 拉高NSS，停止传输
-void SoftSpi::Stop()
+void SpiSoft::Stop()
 {
     this->pportcs = 1;
 }
