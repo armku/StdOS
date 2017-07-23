@@ -18,6 +18,8 @@ void Spi::Init()
     this->_miso.OpenDrain = false;
     this->_mosi.OpenDrain = false;
     this->_nss.OpenDrain = false;
+
+    this->Retry = 200; //默认重试次数为200
 }
 
 Spi::Spi()
@@ -149,10 +151,10 @@ void Spi::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
 
 void Spi::GetPin(Pin *clk, Pin *miso, Pin *mosi, Pin *nss)
 {
-//    nss=&this->Pins[0];
-//    clk=&this->Pins[1];
-//    miso=&this->Pins[2];
-//    mosi=&this->Pins[3];
+    //    nss=&this->Pins[0];
+    //    clk=&this->Pins[1];
+    //    miso=&this->Pins[2];
+    //    mosi=&this->Pins[3];
 }
 
 void Spi::Open()
@@ -164,92 +166,93 @@ void Spi::Close()
 {
     this->OnClose();
 }
-#if 0
-    byte Spi::Write(byte data)
-    {
 
-        int retry = Retry;
-        while (SPI_I2S_GetFlagStatus(SPI, SPI_I2S_FLAG_TXE) == RESET)
-        {
-            if (--retry <= 0)
-                return ++Error;
-            // 超时处理
-        }
-
-        #ifndef STM32F0
-            SPI_I2S_SendData(SPI, data);
-        #else 
-            SPI_SendData8(SPI, data);
-        #endif 
-
-        retry = Retry;
-        while (SPI_I2S_GetFlagStatus(SPI, SPI_I2S_FLAG_RXNE) == RESET)
-        //是否发送成功
-        {
-            if (--retry <= 0)
-                return ++Error;
-            // 超时处理
-        }
-        #ifndef STM32F0
-            return SPI_I2S_ReceiveData(SPI);
-        #else 
-            return SPI_ReceiveData8(SPI); //返回通过SPIx最近接收的数据
-        #endif 
-
-        return 0;
-    }
-#endif 
 // 基础读写
 byte Spi::Write(byte data)
 {
-    byte ret = 0;
     switch (this->_index)
     {
         case Spi1:
         case Spi2:
         case Spi3:
-            /* Loop while DR register in not emplty */
+            int retry = Retry;
             while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
-                ;
+            {
+                if (--retry <= 0)
+                    return ++Error;
+                // 超时处理
+            }
+            #ifdef STM32F0
+                SPI_SendData8((SPI_TypeDef*)(this->_SPI), data);
+            #elif defined STM32F1
+                SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
+            #elif defined STM32F4
+                SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
+            #else 
 
-            /* Send byte through the SPI1 peripheral */
-            SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
+            #endif 
 
-            /* Wait to receive a byte */
+            //是否发送成功
+            retry = Retry;
             while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
-                ;
+            {
+                if (--retry <= 0)
+                    return ++Error;
+                // 超时处理
+            }
 
-            /* Return the byte read from the SPI bus */
-            ret = SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
+            #ifdef STM32F0
+                return SPI_ReceiveData8((SPI_TypeDef*)(this->_SPI)); //返回通过SPIx最近接收的数据
+            #elif defined STM32F1
+                return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
+            #elif defined STM32F4 
+                return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
+            #endif 
         default:
-            break;
+            return  - 1;
     }
-    return ret;
 }
 
 ushort Spi::Write16(ushort data)
 {
-    ushort ret = 0;
     switch (this->_index)
     {
         case Spi1:
         case Spi2:
         case Spi3:
-            /* Loop while DR register in not emplty */
+            // 双字节操作，超时次数加倍
+            int retry = Retry << 1;
             while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
-                ;
-            /* Send Half Word through the SPI1 peripheral */
-            SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
-            /* Wait to receive a Half Word */
+            {
+                if (--retry <= 0)
+                    return ++Error;
+                // 超时处理
+            }
+            #ifdef STM32F0
+                SPI_I2S_SendData16((SPI_TypeDef*)(this->_SPI), data);
+            #elif defined STM32F1
+                SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
+            #elif defined STM32F4
+                SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
+            #endif 
+
+            retry = Retry << 1;
             while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
-                ;
-            /* Return the Half Word read from the SPI bus */
-            ret = SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
-            break;
+            {
+                if (--retry <= 0)
+                    return ++Error;
+                // 超时处理
+            }
+            #ifdef STM32F0
+                return SPI_I2S_ReceiveData16((SPI_TypeDef*)(this->_SPI));
+            #elif defined STM32F1
+                return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
+            #elif defined STM32F4
+                return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
+            #endif 
         default:
-            break;
+            return 0;
     }
-    return ret;
 }
 
 // 批量读写。以字节数组长度为准
@@ -263,18 +266,18 @@ void Spi::Read(Buffer &bs){
 // 拉低NSS，开始传输
 void Spi::Start()
 {
-    if(!this->_nss.Empty())
+    if (!this->_nss.Empty())
     {
         this->_nss = 0;
     }
-	// 开始新一轮事务操作，错误次数清零
+    // 开始新一轮事务操作，错误次数清零
     this->Error = 0;
 }
 
 // 拉高NSS，停止传输
 void Spi::Stop()
 {
-    if(!this->_nss.Empty())
+    if (!this->_nss.Empty())
     {
         this->_nss = 1;
     }
@@ -377,7 +380,7 @@ void Spi::OnOpen()
 
 void Spi::OnClose()
 {
-	this->Stop();
+    this->Stop();
     switch (this->_index)
     {
         case Spi1:
@@ -388,8 +391,8 @@ void Spi::OnClose()
         default:
             break;
     }
-	SPI_I2S_DeInit((SPI_TypeDef*)(this->_SPI));
-	debug_printf("    CLK : ");
+    SPI_I2S_DeInit((SPI_TypeDef*)(this->_SPI));
+    debug_printf("    CLK : ");
     this->_clk.Set(P0);
     debug_printf("    MISO: ");
     this->_miso.Set(P0);
@@ -397,11 +400,11 @@ void Spi::OnClose()
     this->_mosi.Set(P0);
     debug_printf("    NSS : ");
     this->_nss.Set(P0);
-	
-	this->Pins[0]=P0;
-	this->Pins[1]=P0;
-	this->Pins[2]=P0;
-	this->Pins[3]=P0;
+
+    this->Pins[0] = P0;
+    this->Pins[1] = P0;
+    this->Pins[2] = P0;
+    this->Pins[3] = P0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -482,21 +485,21 @@ void SpiSoft::Close(){
 // 拉低NSS，开始传输
 void SpiSoft::Start()
 {
-	if(!this->pportcs.Empty())
-	{
-		this->pportcs = 0;
-	}
-	// 开始新一轮事务操作，错误次数清零
+    if (!this->pportcs.Empty())
+    {
+        this->pportcs = 0;
+    }
+    // 开始新一轮事务操作，错误次数清零
     //Error = 0;
 }
 
 // 拉高NSS，停止传输
 void SpiSoft::Stop()
 {
-	if(!this->pportcs.Empty())
-	{
-		this->pportcs = 1;
-	}
+    if (!this->pportcs.Empty())
+    {
+        this->pportcs = 1;
+    }
 }
 
 
@@ -663,42 +666,6 @@ int GetPre(int index, uint *speedHz)
         Stop();
     }
 #endif 
-
-
-#if 0
-    ushort Spi::Write16(ushort data)
-    {
-        // 双字节操作，超时次数加倍
-        int retry = Retry << 1;
-        while (SPI_I2S_GetFlagStatus(SPI, SPI_I2S_FLAG_TXE) == RESET)
-        {
-            if (--retry <= 0)
-                return ++Error;
-            // 超时处理
-        }
-
-        #ifndef STM32F0
-            SPI_I2S_SendData(SPI, data);
-        #else 
-            SPI_I2S_SendData16(SPI, data);
-        #endif 
-
-        retry = Retry << 1;
-        while (SPI_I2S_GetFlagStatus(SPI, SPI_I2S_FLAG_RXNE) == RESET)
-        {
-            if (--retry <= 0)
-                return ++Error;
-            // 超时处理
-        }
-
-        #ifndef STM32F0
-            return SPI_I2S_ReceiveData(SPI);
-        #else 
-            return SPI_I2S_ReceiveData16(SPI);
-        #endif 
-    }
-#endif 
-
 
 CHardSpi::CHardSpi(SPI spichannel)
 {
