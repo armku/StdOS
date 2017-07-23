@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "AT45DB.h"
 
 #if 0
