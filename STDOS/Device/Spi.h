@@ -72,17 +72,7 @@
                     _spi->Stop();
             }
     };
-
-    //硬件SPI
-    class CHardSpi
-    {
-        public:
-            void Init(void); //初始化SPI口
-            byte WriteByte(byte TxData); //SPI总线写一个字节
-            ushort SendHalfWord(ushort HalfWord);
-        private:
-            SPI spiChannel; //通道
-    };
+    
     class SpiSoft
     {
         public:
