@@ -274,9 +274,9 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
     return true;
 }
 
-#if 0
-    Spi spi(Spi1);
-    W25Q64 w25q64(&spi);
+#if 1
+    Spi spi64(Spi1);
+    W25Q64 w25q64(&spi64);
 
     typedef enum
     {
@@ -334,7 +334,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
 
         printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
 
-        spi.Open();
+        spi64.Open();
         /* Get SPI Flash Device ID */
         w25q64.DeviceID = w25q64.ReadDeviceID();
 
@@ -601,7 +601,7 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
     };
 }
 
-#if 1
+#if 0
     Spi spi(Spi1);
     W25Q128 w25q128(&spi);
     OutputPort nsspp;
