@@ -285,7 +285,24 @@ void Spi::Stop()
 
 int Spi::GetPre(int index, uint &speedHz)
 {
-    return 0;
+    // 自动计算稍低于速度speedHz的分频
+    ushort pre = SPI_BaudRatePrescaler_2;
+    uint clock = Sys.Clock >> 1;
+    while (pre <= SPI_BaudRatePrescaler_256)
+    {
+        if (clock <=  speedHz)
+            break;
+        clock >>= 1;
+        pre += (SPI_BaudRatePrescaler_4 - SPI_BaudRatePrescaler_2);
+    }
+    if (pre > SPI_BaudRatePrescaler_256)
+    {
+        debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %d\r\n", index,  speedHz, Sys.Clock);
+        return  - 1;
+    }
+
+    speedHz = clock;
+    return pre;
 }
 
 void Spi::OnInit()
@@ -519,27 +536,6 @@ public:
 // NSS/CLK/MISO/MOSI
 #define SPIS {SPI1,SPI2,SPI3}
 #define SPI_PINS_FULLREMAP {PA4,PA5,PA6,PA7,PB12,PB13,PB14,PB15,PA15,PB3,PB4,PB5}   //需要整理
-int GetPre(int index, uint *speedHz)
-{
-    // 自动计算稍低于速度speedHz的分频
-    ushort pre = SPI_BaudRatePrescaler_2;
-    uint clock = Sys.Clock >> 1;
-    while (pre <= SPI_BaudRatePrescaler_256)
-    {
-        if (clock <=  *speedHz)
-            break;
-        clock >>= 1;
-        pre += (SPI_BaudRatePrescaler_4 - SPI_BaudRatePrescaler_2);
-    }
-    if (pre > SPI_BaudRatePrescaler_256)
-    {
-        debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %d\r\n", index,  *speedHz, Sys.Clock);
-        return  - 1;
-    }
-
-    *speedHz = clock;
-    return pre;
-}
 
 #if 0
     Spi::Spi(int spiIndex, uint speedHz, bool useNss)
