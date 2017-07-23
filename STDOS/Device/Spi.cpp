@@ -164,7 +164,41 @@ void Spi::Close()
 {
     this->OnClose();
 }
+#if 0
+    byte Spi::Write(byte data)
+    {
 
+        int retry = Retry;
+        while (SPI_I2S_GetFlagStatus(SPI, SPI_I2S_FLAG_TXE) == RESET)
+        {
+            if (--retry <= 0)
+                return ++Error;
+            // 超时处理
+        }
+
+        #ifndef STM32F0
+            SPI_I2S_SendData(SPI, data);
+        #else 
+            SPI_SendData8(SPI, data);
+        #endif 
+
+        retry = Retry;
+        while (SPI_I2S_GetFlagStatus(SPI, SPI_I2S_FLAG_RXNE) == RESET)
+        //是否发送成功
+        {
+            if (--retry <= 0)
+                return ++Error;
+            // 超时处理
+        }
+        #ifndef STM32F0
+            return SPI_I2S_ReceiveData(SPI);
+        #else 
+            return SPI_ReceiveData8(SPI); //返回通过SPIx最近接收的数据
+        #endif 
+
+        return 0;
+    }
+#endif 
 // 基础读写
 byte Spi::Write(byte data)
 {
@@ -486,20 +520,7 @@ public:
     // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
     Spi(int spiIndex, uint speedHz = 9000000, bool useNss = true);
 #endif 
-//硬件SPI
-class CHardSpi
-{
-    public:
-        CHardSpi(SPI spichannel);
-    public:
-        void Init(void); //初始化SPI口
-        void SetSpeed(byte SpeedSet); //设置SPI速度   
-        byte ReadByte(); //SPI总线读一个字节
-        byte WriteByte(byte TxData); //SPI总线写一个字节
-        ushort SendHalfWord(ushort HalfWord);
-    private:
-        SPI spiChannel; //通道
-};
+
 
 // NSS/CLK/MISO/MOSI
 #define SPIS {SPI1,SPI2,SPI3}
@@ -643,41 +664,7 @@ int GetPre(int index, uint *speedHz)
     }
 #endif 
 
-#if 0
-    byte Spi::Write(byte data)
-    {
 
-        int retry = Retry;
-        while (SPI_I2S_GetFlagStatus(SPI, SPI_I2S_FLAG_TXE) == RESET)
-        {
-            if (--retry <= 0)
-                return ++Error;
-            // 超时处理
-        }
-
-        #ifndef STM32F0
-            SPI_I2S_SendData(SPI, data);
-        #else 
-            SPI_SendData8(SPI, data);
-        #endif 
-
-        retry = Retry;
-        while (SPI_I2S_GetFlagStatus(SPI, SPI_I2S_FLAG_RXNE) == RESET)
-        //是否发送成功
-        {
-            if (--retry <= 0)
-                return ++Error;
-            // 超时处理
-        }
-        #ifndef STM32F0
-            return SPI_I2S_ReceiveData(SPI);
-        #else 
-            return SPI_ReceiveData8(SPI); //返回通过SPIx最近接收的数据
-        #endif 
-
-        return 0;
-    }
-#endif 
 #if 0
     ushort Spi::Write16(ushort data)
     {
