@@ -61,57 +61,57 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
             #elif defined STM32F4
                 if (useNss)
                 {
-					//this->SetPin(PA5, PA6, PA7, PA4);/原生SPI1
+                    //this->SetPin(PA5, PA6, PA7, PA4);/原生SPI1
                     this->SetPin(PB3, PB4, PB5, PB14);
                 }
                 else
                 {
                     this->SetPin(PB3, PB4, PB5);
                 }
-				GPIO_PinAFConfig(GPIOB, GPIO_PinSource3, GPIO_AF_SPI1); //PB3复用为 SPI1
-				GPIO_PinAFConfig(GPIOB, GPIO_PinSource4, GPIO_AF_SPI1); //PB4复用为 SPI1
-				GPIO_PinAFConfig(GPIOB, GPIO_PinSource5, GPIO_AF_SPI1); //PB5复用为 SPI1
+                GPIO_PinAFConfig(GPIOB, GPIO_PinSource3, GPIO_AF_SPI1); //PB3复用为 SPI1
+                GPIO_PinAFConfig(GPIOB, GPIO_PinSource4, GPIO_AF_SPI1); //PB4复用为 SPI1
+                GPIO_PinAFConfig(GPIOB, GPIO_PinSource5, GPIO_AF_SPI1); //PB5复用为 SPI1
             #endif 
-            this->_SPI = SPI1;			
+            this->_SPI = SPI1;
             break;
         case Spi2:
-			#ifdef STM32F0
+            #ifdef STM32F0
 
             #elif defined STM32F1
                 if (useNss)
                 {
-//                    this->SetPin(PA5, PA6, PA7, PA4);
+                    //                    this->SetPin(PA5, PA6, PA7, PA4);
                 }
                 else
                 {
-//                    this->SetPin(PA5, PA6, PA7);
+                    //                    this->SetPin(PA5, PA6, PA7);
                 }
             #elif defined STM32F4
                 if (useNss)
                 {
-					this->SetPin(PB13, PB14, PB15, PB12);//原生SPI2
+                    this->SetPin(PB13, PB14, PB15, PB12); //原生SPI2
                 }
                 else
                 {
                     this->SetPin(PB13, PB14, PB15);
                 }
-				GPIO_PinAFConfig(GPIOB, GPIO_PinSource13, GPIO_AF_SPI2); //PB13复用为 SPI2
-				GPIO_PinAFConfig(GPIOB, GPIO_PinSource14, GPIO_AF_SPI2); //PB14复用为 SPI2
-				GPIO_PinAFConfig(GPIOB, GPIO_PinSource15, GPIO_AF_SPI2); //PB15复用为 SPI2
+                GPIO_PinAFConfig(GPIOB, GPIO_PinSource13, GPIO_AF_SPI2); //PB13复用为 SPI2
+                GPIO_PinAFConfig(GPIOB, GPIO_PinSource14, GPIO_AF_SPI2); //PB14复用为 SPI2
+                GPIO_PinAFConfig(GPIOB, GPIO_PinSource15, GPIO_AF_SPI2); //PB15复用为 SPI2
             #endif 
             this->_SPI = SPI2;
             break;
         case Spi3:
-			#ifdef STM32F0
+            #ifdef STM32F0
 
             #elif defined STM32F1
                 if (useNss)
                 {
-//                    this->SetPin(PA5, PA6, PA7, PA4);
+                    //                    this->SetPin(PA5, PA6, PA7, PA4);
                 }
                 else
                 {
-//                    this->SetPin(PA5, PA6, PA7);
+                    //                    this->SetPin(PA5, PA6, PA7);
                 }
             #elif defined STM32F4
                 if (useNss)
@@ -122,9 +122,9 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
                 {
                     this->SetPin(PC10, PC11, PC12);
                 }
-				GPIO_PinAFConfig(GPIOC, GPIO_PinSource10, GPIO_AF_SPI3); //PC10复用为 SPI3
-				GPIO_PinAFConfig(GPIOC, GPIO_PinSource11, GPIO_AF_SPI3); //PC11复用为 SPI3
-				GPIO_PinAFConfig(GPIOC, GPIO_PinSource12, GPIO_AF_SPI3); //PC12复用为 SPI3
+                GPIO_PinAFConfig(GPIOC, GPIO_PinSource10, GPIO_AF_SPI3); //PC10复用为 SPI3
+                GPIO_PinAFConfig(GPIOC, GPIO_PinSource11, GPIO_AF_SPI3); //PC11复用为 SPI3
+                GPIO_PinAFConfig(GPIOC, GPIO_PinSource12, GPIO_AF_SPI3); //PC12复用为 SPI3
             #endif 
             this->_SPI = SPI3;
             break;
@@ -275,34 +275,34 @@ void Spi::OnInit()
     SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
     SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
     SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
-    SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;    
-	#ifdef STM32F0
-		SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
-	#elif defined STM32F1
-		SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
-	#elif defined STM32F4
-		SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_256; //定义波特率预分频的值:波特率预分频值为256
-	#endif
+    SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+    #ifdef STM32F0
+        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
+    #elif defined STM32F1
+        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
+    #elif defined STM32F4
+        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_256; //定义波特率预分频的值:波特率预分频值为256
+    #endif 
     SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
     SPI_InitStructure.SPI_CRCPolynomial = 7;
     switch (this->_index)
     {
         case Spi1:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
-			#ifdef STM32F0
-			
-			#elif defined STM32F1
-				
-			#elif defined STM32F4
-				//SPI1速度设置函数
-				//SPI速度=fAPB2/分频系数
-				//@ref SPI_BaudRate_Prescaler:SPI_BaudRatePrescaler_2~SPI_BaudRatePrescaler_256  
-				//fAPB2时钟一般为84Mhz：
-				assert_param(IS_SPI_BAUDRATE_PRESCALER(SPI_BaudRatePrescaler)); //判断有效性
-				SPI1->CR1 &= 0XFFC7; //位3-5清零，用来设置波特率
-				SPI1->CR1 |= SPI_BaudRatePrescaler_4; //设置SPI1速度 设置为21M时钟,高速模式 
-				SPI_Cmd(SPI1, ENABLE); //使能SPI1
-			#endif
+            #ifdef STM32F0
+
+            #elif defined STM32F1
+
+            #elif defined STM32F4
+                //SPI1速度设置函数
+                //SPI速度=fAPB2/分频系数
+                //@ref SPI_BaudRate_Prescaler:SPI_BaudRatePrescaler_2~SPI_BaudRatePrescaler_256  
+                //fAPB2时钟一般为84Mhz：
+                assert_param(IS_SPI_BAUDRATE_PRESCALER(SPI_BaudRatePrescaler)); //判断有效性
+                SPI1->CR1 &= 0XFFC7; //位3-5清零，用来设置波特率
+                SPI1->CR1 |= SPI_BaudRatePrescaler_4; //设置SPI1速度 设置为21M时钟,高速模式 
+                SPI_Cmd(SPI1, ENABLE); //使能SPI1
+            #endif 
             break;
         case Spi2:
             RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
@@ -475,12 +475,7 @@ void SpiSoft::Stop()
 
 
 #if 0
-private:
-    OutputPort *pNss;
 
-    AlternatePort *pClk;
-    AlternatePort *pMiso;
-    AlternatePort *pMosi;
 public:
     SPI_TypeDef *SPI;
     // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
