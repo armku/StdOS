@@ -229,16 +229,18 @@ void Spi::Read(Buffer &bs){
 // 拉低NSS，开始传输
 void Spi::Start()
 {
-    if (this->Pins[0] != P0)
+    if(!this->_nss.Empty())
     {
         this->_nss = 0;
     }
+	// 开始新一轮事务操作，错误次数清零
+    this->Error = 0;
 }
 
 // 拉高NSS，停止传输
 void Spi::Stop()
 {
-    if (this->Pins[0] != P0)
+    if(!this->_nss.Empty())
     {
         this->_nss = 1;
     }
@@ -431,34 +433,22 @@ void SpiSoft::Close(){
 // 拉低NSS，开始传输
 void SpiSoft::Start()
 {
-    this->pportcs = 0;
+	if(!this->pportcs.Empty())
+	{
+		this->pportcs = 0;
+	}
+	// 开始新一轮事务操作，错误次数清零
+    //Error = 0;
 }
 
 // 拉高NSS，停止传输
 void SpiSoft::Stop()
 {
-    this->pportcs = 1;
+	if(!this->pportcs.Empty())
+	{
+		this->pportcs = 1;
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -725,25 +715,7 @@ int GetPre(int index, uint *speedHz)
         #endif 
     }
 #endif 
-#if 0
-    // 拉低NSS，开始传输
-    void Spi::Start()
-    {
-        if (!this->pNss->Empty())
-            *this->pNss = false;
 
-        // 开始新一轮事务操作，错误次数清零
-        Error = 0;
-    }
-#endif 
-#if 0
-    // 拉高NSS，停止传输
-    void Spi::Stop()
-    {
-        if (!this->pNss->Empty())
-            *this->pNss = true;
-    }
-#endif 
 
 CHardSpi::CHardSpi(SPI spichannel)
 {
