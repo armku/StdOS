@@ -166,7 +166,58 @@ void Spi::Close()
 {
     this->OnClose();
 }
+byte CHardSpi::WriteByte(byte TxData) //SPI总线写一个字节
+{
+    byte ret = 0;
+    switch (this->spiChannel)
+    {
+        case Spi1:
+            /* Loop while DR register in not emplty */
+            while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET)
+                ;
 
+            /* Send byte through the SPI1 peripheral */
+            SPI_I2S_SendData(SPI1, TxData);
+
+            /* Wait to receive a byte */
+            while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET)
+                ;
+            /* Return the byte read from the SPI bus */
+            ret = SPI_I2S_ReceiveData(SPI1);
+            break;
+        case Spi2:
+            /* Loop while DR register in not emplty */
+            while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_TXE) == RESET)
+                ;
+
+            /* Send byte through the SPI2 peripheral */
+            SPI_I2S_SendData(SPI2, TxData);
+
+            /* Wait to receive a byte */
+            while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_RXNE) == RESET)
+                ;
+            /* Return the byte read from the SPI bus */
+            ret = SPI_I2S_ReceiveData(SPI2);
+            break;
+        case Spi3:
+            /* Loop while DR register in not emplty */
+            while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_TXE) == RESET)
+                ;
+
+            /* Send byte through the SPI3 peripheral */
+            SPI_I2S_SendData(SPI3, TxData);
+
+            /* Wait to receive a byte */
+            while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_RXNE) == RESET)
+                ;
+            /* Return the byte read from the SPI bus */
+            ret = SPI_I2S_ReceiveData(SPI3);
+            break;
+        default:
+            break;
+    }
+    return ret;
+}
 // 基础读写
 byte Spi::Write(byte data)
 {
@@ -667,12 +718,6 @@ int GetPre(int index, uint *speedHz)
     }
 #endif 
 
-CHardSpi::CHardSpi(SPI spichannel)
-{
-    this->spiChannel = spichannel;
-}
-
-
 void CHardSpi::Init(void) //初始化SPI口
 {
     SPI_InitTypeDef SPI_InitStructure;
@@ -722,68 +767,6 @@ void CHardSpi::Init(void) //初始化SPI口
         default:
             break;
     }
-}
-
-void CHardSpi::SetSpeed(byte SpeedSet) //设置SPI速度   
-{
-
-}
-byte CHardSpi::ReadByte() //SPI总线读一个字节
-{
-    return this->WriteByte(0XFF);
-}
-
-byte CHardSpi::WriteByte(byte TxData) //SPI总线写一个字节
-{
-    byte ret = 0;
-    switch (this->spiChannel)
-    {
-        case Spi1:
-            /* Loop while DR register in not emplty */
-            while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET)
-                ;
-
-            /* Send byte through the SPI1 peripheral */
-            SPI_I2S_SendData(SPI1, TxData);
-
-            /* Wait to receive a byte */
-            while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET)
-                ;
-            /* Return the byte read from the SPI bus */
-            ret = SPI_I2S_ReceiveData(SPI1);
-            break;
-        case Spi2:
-            /* Loop while DR register in not emplty */
-            while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_TXE) == RESET)
-                ;
-
-            /* Send byte through the SPI2 peripheral */
-            SPI_I2S_SendData(SPI2, TxData);
-
-            /* Wait to receive a byte */
-            while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_RXNE) == RESET)
-                ;
-            /* Return the byte read from the SPI bus */
-            ret = SPI_I2S_ReceiveData(SPI2);
-            break;
-        case Spi3:
-            /* Loop while DR register in not emplty */
-            while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_TXE) == RESET)
-                ;
-
-            /* Send byte through the SPI3 peripheral */
-            SPI_I2S_SendData(SPI3, TxData);
-
-            /* Wait to receive a byte */
-            while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_RXNE) == RESET)
-                ;
-            /* Return the byte read from the SPI bus */
-            ret = SPI_I2S_ReceiveData(SPI3);
-            break;
-        default:
-            break;
-    }
-    return ret;
 }
 
 ushort CHardSpi::SendHalfWord(ushort HalfWord)
