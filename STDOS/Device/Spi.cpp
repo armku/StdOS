@@ -149,10 +149,10 @@ void Spi::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
 
 void Spi::GetPin(Pin *clk, Pin *miso, Pin *mosi, Pin *nss)
 {
-    //	nss=&this->Pins[0];
-    //	clk=&this->Pins[1];
-    //	miso=&this->Pins[2];
-    //	mosi=&this->Pins[3];
+//    nss=&this->Pins[0];
+//    clk=&this->Pins[1];
+//    miso=&this->Pins[2];
+//    mosi=&this->Pins[3];
 }
 
 void Spi::Open()
@@ -343,6 +343,7 @@ void Spi::OnOpen()
 
 void Spi::OnClose()
 {
+	this->Stop();
     switch (this->_index)
     {
         case Spi1:
@@ -353,6 +354,20 @@ void Spi::OnClose()
         default:
             break;
     }
+	SPI_I2S_DeInit((SPI_TypeDef*)(this->_SPI));
+	debug_printf("    CLK : ");
+    this->_clk.Set(P0);
+    debug_printf("    MISO: ");
+    this->_miso.Set(P0);
+    debug_printf("    MOSI: ");
+    this->_mosi.Set(P0);
+    debug_printf("    NSS : ");
+    this->_nss.Set(P0);
+	
+	this->Pins[0]=P0;
+	this->Pins[1]=P0;
+	this->Pins[2]=P0;
+	this->Pins[3]=P0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -627,26 +642,7 @@ int GetPre(int index, uint *speedHz)
         Stop();
     }
 #endif 
-#if 0
-    void Spi::Close()
-    {
 
-        Stop();
-
-        SPI_Cmd(SPI, DISABLE);
-        SPI_I2S_DeInit(SPI);
-
-        debug_printf("    CLK : ");
-        this->pClk->Set(P0);
-        debug_printf("    MISO: ");
-        this->pMiso->Set(P0);
-        debug_printf("    MOSI: ");
-        this->pMosi->Set(P0);
-        debug_printf("    NSS : ");
-        this->pNss->Set(P0);
-
-    }
-#endif 
 #if 0
     byte Spi::Write(byte data)
     {
