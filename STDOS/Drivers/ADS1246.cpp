@@ -56,13 +56,13 @@
 #define ADC_CMD_SYSGCAL     0x61            //系统增益校准  
 #define ADC_CMD_SELFOCAL    0x62            //系统自校准  
 #define ADC_CMD_RESTRICTED  0xF1            //  
-ADS1246::ADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, InputPort& pinrd, Pin pinreset)
+ADS1246::ADS1246(Pin nss, Pin clk, Pin mosi, Pin miso, InputPort& pinrd, Pin pinreset)
 {
 	this->ppinreset.Invert=false;
 	
 	this->ppinreset.Set(pinreset);
 	
-    this->pspi.SetPin(pincs, pinsck, pindin, pindout);
+    this->pspi.SetPin(nss, clk, mosi, miso);
 	this->ppinrd=&pinrd;
     this->ppinreset=0;
 }

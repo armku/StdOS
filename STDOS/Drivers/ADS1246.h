@@ -5,7 +5,7 @@
 	class ADS1246
     {
         public:
-            ADS1246(Pin pincs, Pin pinsck, Pin pindin, Pin pindout, InputPort &pinrd, Pin pinreset);
+            ADS1246(Pin nss, Pin clk, Pin mosi, Pin miso, InputPort &pinrd, Pin pinreset);
             byte ReadReg(byte RegAddr);
             void WriteReg(byte RegAddr, byte da);
             int Read(void); //返回-1,表示转换未完成
