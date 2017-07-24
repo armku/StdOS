@@ -57,23 +57,23 @@ public:
 #if 0
     Spi::Spi(int spiIndex, uint speedHz, bool useNss)
     {
-        SPI_TypeDef *g_Spis[] = SPIS;
-        _index = spiIndex;
-        Retry = 200;
+//        SPI_TypeDef *g_Spis[] = SPIS;
+//        _index = spiIndex;
+//        Retry = 200;
 
-        assert_param(spi);
+//        assert_param(spi);
 
-        this->SPI = g_Spis[_index];
+//        this->SPI = g_Spis[_index];
 
-        #if DEBUG
-            int k = speedHz / 1000;
-            int m = k / 1000;
-            k -= m * 1000;
-            if (k == 0)
-                debug_printf("Spi%d::Init %dMHz Nss:%d\r\n", _index + 1, m, useNss);
-            else
-                debug_printf("Spi%d::Init %d.%dMHz Nss:%d\r\n", _index + 1, m, k, useNss);
-        #endif 
+//        #if DEBUG
+//            int k = speedHz / 1000;
+//            int m = k / 1000;
+//            k -= m * 1000;
+//            if (k == 0)
+//                debug_printf("Spi%d::Init %dMHz Nss:%d\r\n", _index + 1, m, useNss);
+//            else
+//                debug_printf("Spi%d::Init %d.%dMHz Nss:%d\r\n", _index + 1, m, k, useNss);
+//        #endif 
 
         // 自动计算稍低于速度speedHz的分频
         int pre = GetPre(_index, &speedHz);
@@ -175,6 +175,15 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
 {
     this->_index = spi;
     this->Speed = speedHz;
+	#if DEBUG
+            int k = speedHz / 1000;
+            int m = k / 1000;
+            k -= m * 1000;
+            if (k == 0)
+                debug_printf("Spi%d::Init %dMHz Nss:%d\r\n", _index + 1, m, useNss);
+            else
+                debug_printf("Spi%d::Init %d.%dMHz Nss:%d\r\n", _index + 1, m, k, useNss);
+        #endif 
     switch (this->_index)
     {
         case Spi1:
