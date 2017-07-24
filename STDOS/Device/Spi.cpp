@@ -72,7 +72,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
 //        GPIO_PinAFConfig(_GROUP(ps[2]), _PIN(ps[2]), GPIO_AF_0);
 //        GPIO_PinAFConfig(_GROUP(ps[3]), _PIN(ps[3]), GPIO_AF_0)
             #elif defined STM32F1
-                if (useNss)
+                if (!useNss)
                 {
                     this->SetPin(PA5, PA6, PA7, PA4);
                 }
@@ -81,7 +81,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
                     this->SetPin(PA5, PA6, PA7);
                 }
             #elif defined STM32F4				
-                if (useNss)
+                if (!useNss)
                 {
                     //this->SetPin(PA5, PA6, PA7, PA4);/原生SPI1
                     this->SetPin(PB3, PB4, PB5, PB14);
@@ -107,7 +107,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
             #ifdef STM32F0
 
             #elif defined STM32F1
-                if (useNss)
+                if (!useNss)
                 {
                     //                    this->SetPin(PA5, PA6, PA7, PA4);
                 }
@@ -116,7 +116,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
                     //                    this->SetPin(PA5, PA6, PA7);
                 }
             #elif defined STM32F4
-                if (useNss)
+                if (!useNss)
                 {
                     this->SetPin(PB13, PB14, PB15, PB12); //原生SPI2
                 }
@@ -134,7 +134,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
             #ifdef STM32F0
 
             #elif defined STM32F1
-                if (useNss)
+                if (!useNss)
                 {
                     //                    this->SetPin(PA5, PA6, PA7, PA4);
                 }
@@ -143,7 +143,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
                     //                    this->SetPin(PA5, PA6, PA7);
                 }
             #elif defined STM32F4
-                if (useNss)
+                if (!useNss)
                 {
                     this->SetPin(PC10, PC11, PC12, PA15);
                 }
@@ -191,7 +191,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
 	{
 		SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
     }
-	SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+	//SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
 	#ifdef STM32F0
         SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
     #elif defined STM32F1

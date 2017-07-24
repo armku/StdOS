@@ -275,7 +275,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
 }
 
 #if 1
-    Spi spi64(Spi1,9000000,true);
+    Spi spi64(Spi1,9000000,false);
     W25Q64 w25q64(&spi64);
 
     typedef enum
