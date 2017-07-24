@@ -42,10 +42,6 @@ Spi::~Spi()
     this->Close();
 }
 
-// NSS/CLK/MISO/MOSI
-#define SPIS {SPI1,SPI2,SPI3}
-#define SPI_PINS_FULLREMAP {PA4,PA5,PA6,PA7,PB12,PB13,PB14,PB15,PA15,PB3,PB4,PB5}   //需要整理
-
 void Spi::Init(SPI spi, uint speedHz, bool useNss)
 {
     this->_index = spi;
@@ -65,22 +61,6 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
         return ;
 
     Speed = speedHz;
-    const Pin g_Spi_Pins_Map[][4] = SPI_PINS_FULLREMAP;
-    // 端口配置，销毁Spi对象时才释放
-    debug_printf("    CLK : ");
-    this->_clk.Set(g_Spi_Pins_Map[_index][1]);
-    debug_printf("    MISO: ");
-    this->_miso.Set(g_Spi_Pins_Map[_index][2]);
-    debug_printf("    MOSI: ");
-    this->_mosi.Set(g_Spi_Pins_Map[_index][3]);
-    if (useNss)
-    {
-        this->_nss.Set(g_Spi_Pins_Map[_index][0]);
-    }
-    else
-    {
-        this->_nss.Set(P0);
-    }
 
 	//以上为历史内容
     switch (this->_index)
