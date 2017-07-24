@@ -150,6 +150,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
     SPI_Cmd((SPI_TypeDef*)(this->_SPI), ENABLE);
 
     Stop();
+	//以上为历史内容
     switch (this->_index)
     {
         case Spi1:
