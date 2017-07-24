@@ -465,20 +465,20 @@ void Spi::OnClose()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 SpiSoft::SpiSoft(uint speedHz)
 {
-    this->pportcs.Invert = false;
-    this->pClk.Invert = false;
-    this->pportdi.Invert = false;
-    this->pportdo.Invert = false;
+    this->_nss.Invert = false;
+    this->_clk.Invert = false;
+    this->_mosi.Invert = false;
+    this->_miso.Invert = false;
     //this->delayus=speedHz;
     this->delayus = 0;
 }
 
 void SpiSoft::SetPin(Pin pincs, Pin pinsck, Pin pindi, Pin pindo)
 {
-    this->pportcs.Set(pincs);
-    this->pClk.Set(pinsck);
-    this->pportdi.Set(pindi);
-    this->pportdo.Set(pindo);
+    this->_nss.Set(pincs);
+    this->_clk.Set(pinsck);
+    this->_mosi.Set(pindi);
+    this->_miso.Set(pindo);
 }
 
 /*---------------------------------------------------------
@@ -487,16 +487,16 @@ void SpiSoft::SetPin(Pin pincs, Pin pinsck, Pin pindi, Pin pindo)
 byte SpiSoft::WaitBusy()
 {
     ushort i;
-    this->pportcs = 0;
+    this->_nss = 0;
     i = 0;
-    while (this->pportdo.Read() > 0)
+    while (this->_miso.Read() > 0)
     {
         Sys.Sleep(10);
         i++;
         if (i > 200)
             return 1;
     }
-    this->pportcs = 1;
+    this->_nss = 1;
     return 0;
 }
 
@@ -509,18 +509,18 @@ byte SpiSoft::Write(byte data)
     {
         if (data &(1 << (8-i - 1)))
         {
-            this->pportdi = 1;
+            this->_mosi = 1;
         }
         else
         {
-            this->pportdi = 0;
+            this->_mosi = 0;
         }
         Sys.Delay(this->delayus);
-        this->pClk = 1;
+        this->_clk = 1;
         Sys.Delay(this->delayus);
-        this->pClk = 0;
+        this->_clk = 0;
         ret <<= 1;
-        if (this->pportdo.Read())
+        if (this->_miso.Read())
         {
             ret |= 1;
         }
@@ -538,9 +538,9 @@ void SpiSoft::Close(){
 // 拉低NSS，开始传输
 void SpiSoft::Start()
 {
-    if (!this->pportcs.Empty())
+    if (!this->_nss.Empty())
     {
-        this->pportcs = 0;
+        this->_nss = 0;
     }
     // 开始新一轮事务操作，错误次数清零
     //Error = 0;
@@ -549,8 +549,8 @@ void SpiSoft::Start()
 // 拉高NSS，停止传输
 void SpiSoft::Stop()
 {
-    if (!this->pportcs.Empty())
+    if (!this->_nss.Empty())
     {
-        this->pportcs = 1;
+        this->_nss = 1;
     }
 }

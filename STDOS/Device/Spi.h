@@ -84,10 +84,10 @@
             void Start(); // 拉低NSS，开始传输
             void Stop(); // 拉高NSS，停止传输
         private:
-            OutputPort pportcs;
-            OutputPort pClk;
-            OutputPort pportdi;
-            InputPort pportdo;
+            OutputPort _nss;
+            OutputPort _clk;
+            OutputPort _mosi;
+            InputPort _miso;
             uint delayus; //延时时间
         private:
             byte WaitBusy();
