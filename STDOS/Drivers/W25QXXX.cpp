@@ -601,9 +601,9 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
     };
 }
 
-#if 0
-    Spi spi(Spi1);
-    W25Q128 w25q128(&spi);
+#if 1
+    Spi spi128(Spi1);
+    W25Q128 w25q128(&spi128);
     OutputPort nsspp;
 
     //要写入到W25Q16的字符串数组
