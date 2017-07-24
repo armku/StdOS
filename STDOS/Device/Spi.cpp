@@ -107,22 +107,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
                 #endif 
             #endif 
     }
-
-    #if defined(STM32F0)
-        // SPI都在GPIO_AF_0分组内
-        GPIO_PinAFConfig(_GROUP(ps[1]), _PIN(ps[1]), GPIO_AF_0);
-        GPIO_PinAFConfig(_GROUP(ps[2]), _PIN(ps[2]), GPIO_AF_0);
-        GPIO_PinAFConfig(_GROUP(ps[3]), _PIN(ps[3]), GPIO_AF_0);
-    #elif defined(STM32F4)
-        byte afs[] = 
-        {
-            GPIO_AF_SPI1, GPIO_AF_SPI2, GPIO_AF_SPI3, GPIO_AF_SPI4, GPIO_AF_SPI5, GPIO_AF_SPI6
-        };
-        GPIO_PinAFConfig(_GROUP(ps[1]), _PIN(ps[1]), afs[_index]);
-        GPIO_PinAFConfig(_GROUP(ps[2]), _PIN(ps[2]), afs[_index]);
-        GPIO_PinAFConfig(_GROUP(ps[3]), _PIN(ps[3]), afs[_index]);
-    #endif 
-
+    
     Stop();
     SPI_I2S_DeInit((SPI_TypeDef*)(this->_SPI));
     //SPI_DeInit(SPI);    // SPI_I2S_DeInit的宏定义别名
@@ -155,7 +140,10 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
     {
         case Spi1:
             #ifdef STM32F0
-
+//				// SPI都在GPIO_AF_0分组内
+//        GPIO_PinAFConfig(_GROUP(ps[1]), _PIN(ps[1]), GPIO_AF_0);
+//        GPIO_PinAFConfig(_GROUP(ps[2]), _PIN(ps[2]), GPIO_AF_0);
+//        GPIO_PinAFConfig(_GROUP(ps[3]), _PIN(ps[3]), GPIO_AF_0)
             #elif defined STM32F1
                 if (useNss)
                 {
@@ -165,7 +153,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
                 {
                     this->SetPin(PA5, PA6, PA7);
                 }
-            #elif defined STM32F4
+            #elif defined STM32F4				
                 if (useNss)
                 {
                     //this->SetPin(PA5, PA6, PA7, PA4);/原生SPI1
@@ -175,6 +163,13 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
                 {
                     this->SetPin(PB3, PB4, PB5);
                 }
+//				byte afs[] = 
+//        {
+//            GPIO_AF_SPI1, GPIO_AF_SPI2, GPIO_AF_SPI3, GPIO_AF_SPI4, GPIO_AF_SPI5, GPIO_AF_SPI6
+//        };
+//        GPIO_PinAFConfig(_GROUP(ps[1]), _PIN(ps[1]), afs[_index]);
+//        GPIO_PinAFConfig(_GROUP(ps[2]), _PIN(ps[2]), afs[_index]);
+//        GPIO_PinAFConfig(_GROUP(ps[3]), _PIN(ps[3]), afs[_index]);
                 GPIO_PinAFConfig(GPIOB, GPIO_PinSource3, GPIO_AF_SPI1); //PB3复用为 SPI1
                 GPIO_PinAFConfig(GPIOB, GPIO_PinSource4, GPIO_AF_SPI1); //PB4复用为 SPI1
                 GPIO_PinAFConfig(GPIOB, GPIO_PinSource5, GPIO_AF_SPI1); //PB5复用为 SPI1
@@ -234,6 +229,79 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
                 GPIO_PinAFConfig(GPIOC, GPIO_PinSource12, GPIO_AF_SPI3); //PC12复用为 SPI3
             #endif 
             this->_SPI = SPI3;
+            break;
+        default:
+            break;
+    }
+	/////////////////////////////////////////////////////////////
+	SPI_InitTypeDef SPI_InitStructure;
+    switch (this->_index)
+    {
+        case Spi1:
+            RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
+            break;
+        case Spi2:
+            RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
+            break;
+        case Spi3:
+            RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
+            break;
+        default:
+            break;
+    }
+    this->Stop();
+    /* SPI1 configuration */
+    // W25X16: data input on the DIO pin is sampled on the rising edge of the CLK. 
+    // Data on the DO and DIO pins are clocked out on the falling edge of CLK.
+    SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+    SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
+    SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
+    SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
+    SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
+    SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+    #ifdef STM32F0
+        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
+    #elif defined STM32F1
+        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
+    #elif defined STM32F4
+        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_256; //定义波特率预分频的值:波特率预分频值为256
+    #endif 
+    SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
+    SPI_InitStructure.SPI_CRCPolynomial = 7;
+    switch (this->_index)
+    {
+        case Spi1:
+            RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
+            #ifdef STM32F0
+
+            #elif defined STM32F1
+
+            #elif defined STM32F4
+                //SPI1速度设置函数
+                //SPI速度=fAPB2/分频系数
+                //@ref SPI_BaudRate_Prescaler:SPI_BaudRatePrescaler_2~SPI_BaudRatePrescaler_256  
+                //fAPB2时钟一般为84Mhz：
+                assert_param(IS_SPI_BAUDRATE_PRESCALER(SPI_BaudRatePrescaler)); //判断有效性
+                SPI1->CR1 &= 0XFFC7; //位3-5清零，用来设置波特率
+                SPI1->CR1 |= SPI_BaudRatePrescaler_4; //设置SPI1速度 设置为21M时钟,高速模式 
+                SPI_Cmd(SPI1, ENABLE); //使能SPI1
+            #endif 
+            break;
+        case Spi2:
+            RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
+            break;
+        case Spi3:
+            RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
+            break;
+        default:
+            break;
+    }
+    switch (this->_index)
+    {
+        case Spi1:
+        case Spi2:
+        case Spi3:
+            SPI_Init((SPI_TypeDef*)(this->_SPI), &SPI_InitStructure);
             break;
         default:
             break;
@@ -412,78 +480,7 @@ int Spi::GetPre(int index, uint &speedHz)
 
 void Spi::OnInit()
 {
-    SPI_InitTypeDef SPI_InitStructure;
-    switch (this->_index)
-    {
-        case Spi1:
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
-            break;
-        case Spi2:
-            RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
-            break;
-        case Spi3:
-            RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
-            break;
-        default:
-            break;
-    }
-    this->Stop();
-    /* SPI1 configuration */
-    // W25X16: data input on the DIO pin is sampled on the rising edge of the CLK. 
-    // Data on the DO and DIO pins are clocked out on the falling edge of CLK.
-    SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
-    SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
-    SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
-    SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
-    SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
-    SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
-    #ifdef STM32F0
-        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
-    #elif defined STM32F1
-        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
-    #elif defined STM32F4
-        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_256; //定义波特率预分频的值:波特率预分频值为256
-    #endif 
-    SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
-    SPI_InitStructure.SPI_CRCPolynomial = 7;
-    switch (this->_index)
-    {
-        case Spi1:
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
-            #ifdef STM32F0
-
-            #elif defined STM32F1
-
-            #elif defined STM32F4
-                //SPI1速度设置函数
-                //SPI速度=fAPB2/分频系数
-                //@ref SPI_BaudRate_Prescaler:SPI_BaudRatePrescaler_2~SPI_BaudRatePrescaler_256  
-                //fAPB2时钟一般为84Mhz：
-                assert_param(IS_SPI_BAUDRATE_PRESCALER(SPI_BaudRatePrescaler)); //判断有效性
-                SPI1->CR1 &= 0XFFC7; //位3-5清零，用来设置波特率
-                SPI1->CR1 |= SPI_BaudRatePrescaler_4; //设置SPI1速度 设置为21M时钟,高速模式 
-                SPI_Cmd(SPI1, ENABLE); //使能SPI1
-            #endif 
-            break;
-        case Spi2:
-            RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
-            break;
-        case Spi3:
-            RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
-            break;
-        default:
-            break;
-    }
-    switch (this->_index)
-    {
-        case Spi1:
-        case Spi2:
-        case Spi3:
-            SPI_Init((SPI_TypeDef*)(this->_SPI), &SPI_InitStructure);
-            break;
-        default:
-            break;
-    }
+    
 }
 
 void Spi::OnOpen()
