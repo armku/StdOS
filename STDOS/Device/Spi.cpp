@@ -41,6 +41,7 @@ Spi::~Spi()
 
     this->Close();
 }
+
 #if 0
 
 public:
@@ -57,30 +58,30 @@ public:
 #if 0
     Spi::Spi(int spiIndex, uint speedHz, bool useNss)
     {
-//        SPI_TypeDef *g_Spis[] = SPIS;
-//        _index = spiIndex;
-//        Retry = 200;
+        //        SPI_TypeDef *g_Spis[] = SPIS;
+        //        _index = spiIndex;
+        //        Retry = 200;
 
-//        assert_param(spi);
+        //        assert_param(spi);
 
-//        this->SPI = g_Spis[_index];
+        //        this->SPI = g_Spis[_index];
 
-//        #if DEBUG
-//            int k = speedHz / 1000;
-//            int m = k / 1000;
-//            k -= m * 1000;
-//            if (k == 0)
-//                debug_printf("Spi%d::Init %dMHz Nss:%d\r\n", _index + 1, m, useNss);
-//            else
-//                debug_printf("Spi%d::Init %d.%dMHz Nss:%d\r\n", _index + 1, m, k, useNss);
-//        #endif 
+        //        #if DEBUG
+        //            int k = speedHz / 1000;
+        //            int m = k / 1000;
+        //            k -= m * 1000;
+        //            if (k == 0)
+        //                debug_printf("Spi%d::Init %dMHz Nss:%d\r\n", _index + 1, m, useNss);
+        //            else
+        //                debug_printf("Spi%d::Init %d.%dMHz Nss:%d\r\n", _index + 1, m, k, useNss);
+        //        #endif 
 
         // 自动计算稍低于速度speedHz的分频
-        int pre = GetPre(_index, &speedHz);
-        if (pre ==  - 1)
-            return ;
+        //        int pre = GetPre(_index, &speedHz);
+        //        if (pre ==  - 1)
+        //            return ;
 
-        Speed = speedHz;
+        //        Speed = speedHz;
 
         const Pin g_Spi_Pins_Map[][4] = SPI_PINS_FULLREMAP;
         // 端口配置，销毁Spi对象时才释放
@@ -175,15 +176,21 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
 {
     this->_index = spi;
     this->Speed = speedHz;
-	#if DEBUG
-            int k = speedHz / 1000;
-            int m = k / 1000;
-            k -= m * 1000;
-            if (k == 0)
-                debug_printf("Spi%d::Init %dMHz Nss:%d\r\n", _index + 1, m, useNss);
-            else
-                debug_printf("Spi%d::Init %d.%dMHz Nss:%d\r\n", _index + 1, m, k, useNss);
-        #endif 
+    #if DEBUG
+        int k = speedHz / 1000;
+        int m = k / 1000;
+        k -= m * 1000;
+        if (k == 0)
+            debug_printf("Spi%d::Init %dMHz Nss:%d\r\n", _index + 1, m, useNss);
+        else
+            debug_printf("Spi%d::Init %d.%dMHz Nss:%d\r\n", _index + 1, m, k, useNss);
+    #endif 
+    // 自动计算稍低于速度speedHz的分频
+    int pre = GetPre(spi, speedHz);
+    if (pre ==  - 1)
+        return ;
+
+    Speed = speedHz;
     switch (this->_index)
     {
         case Spi1:
@@ -428,14 +435,14 @@ int Spi::GetPre(int index, uint &speedHz)
     uint clock = Sys.Clock >> 1;
     while (pre <= SPI_BaudRatePrescaler_256)
     {
-        if (clock <=  speedHz)
+        if (clock <= speedHz)
             break;
         clock >>= 1;
         pre += (SPI_BaudRatePrescaler_4 - SPI_BaudRatePrescaler_2);
     }
     if (pre > SPI_BaudRatePrescaler_256)
     {
-        debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %d\r\n", index,  speedHz, Sys.Clock);
+        debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %d\r\n", index, speedHz, Sys.Clock);
         return  - 1;
     }
 
