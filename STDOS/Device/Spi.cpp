@@ -59,6 +59,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
     int pre = GetPre(spi, speedHz);
     if (pre ==  - 1)
         return ;
+	debug_printf("pre %x \r\n",pre);
 
     Speed = speedHz;
 
@@ -195,7 +196,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
 	#ifdef STM32F0
         SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
     #elif defined STM32F1
-        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
+        SPI_InitStructure.SPI_BaudRatePrescaler = pre;//SPI_BaudRatePrescaler_4;
     #elif defined STM32F4
         SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_256; //定义波特率预分频的值:波特率预分频值为256
     #endif 
