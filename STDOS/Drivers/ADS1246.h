@@ -1,8 +1,6 @@
 #ifndef _ADS1246_H
 #define _ADS1246_H
-    #include "Type.h"
     #include "Spi.h"
-    #include "Port.h"
 
 	class ADS1246
     {
