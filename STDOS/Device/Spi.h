@@ -73,11 +73,11 @@
             }
     };
     
-    class SpiSoft
+    class SpiSoft:public Spi
     {
         public:
             SpiSoft(uint speedHz = 9000000); //使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度   
-            void SetPin(Pin pincs, Pin pinsck, Pin pindi, Pin pindo);
+            void SetPin(Pin pincs=P0, Pin pinsck=P0, Pin pindi=P0, Pin pindo=P0);
             byte Write(byte data);
             void Open();
             void Close();
