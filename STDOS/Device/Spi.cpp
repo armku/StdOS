@@ -81,60 +81,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
     {
         this->_nss.Set(P0);
     }
-    // 使能SPI时钟
-    switch (_index)
-    {
-        case 0:
-            RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
-            break;
-            #if defined(STM32F1) || defined(STM32F4)
-            case 1:
-                RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
-                break;
-            case 2:
-                RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
-                break;
-                #if defined(STM32F4)
-                case 3:
-                    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI4, ENABLE);
-                    break;
-                case 4:
-                    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI5, ENABLE);
-                    break;
-                case 5:
-                    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI6, ENABLE);
-                    break;
-                #endif 
-            #endif 
-    }
-    
-    Stop();
-    SPI_I2S_DeInit((SPI_TypeDef*)(this->_SPI));
-    //SPI_DeInit(SPI);    // SPI_I2S_DeInit的宏定义别名
 
-    SPI_InitTypeDef sp;
-    SPI_StructInit(&sp);
-//    sp.SPI_Direction = SPI_Direction_2Lines_FullDuplex; //双线全双工
-//    sp.SPI_Mode = SPI_Mode_Master; // 主模式
-//    sp.SPI_DataSize = SPI_DataSize_8b; // 数据大小8位 SPI发送接收8位帧结构
-//    sp.SPI_CPOL = SPI_CPOL_Low; // 时钟极性，空闲时为低
-//    sp.SPI_CPHA = SPI_CPHA_1Edge; // 第1个边沿有效，上升沿为采样时刻
-//    if (useNss)
-//    {
-//        sp.SPI_NSS = SPI_NSS_Hard; // NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制
-//    }
-//    else
-//    {
-//        sp.SPI_NSS = SPI_NSS_Soft;
-//    }
-//    sp.SPI_BaudRatePrescaler = pre; // 8分频，9MHz 定义波特率预分频的值
-//    sp.SPI_FirstBit = SPI_FirstBit_MSB; // 高位在前。指定数据传输从MSB位还是LSB位开始:数据传输从MSB位开始
-//    sp.SPI_CRCPolynomial = 7; // CRC值计算的多项式
-
-//    SPI_Init((SPI_TypeDef*)(this->_SPI), &sp);
-//    SPI_Cmd((SPI_TypeDef*)(this->_SPI), ENABLE);
-
-//    Stop();
 	//以上为历史内容
     switch (this->_index)
     {
@@ -235,6 +182,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
     }
 	/////////////////////////////////////////////////////////////
 	SPI_InitTypeDef SPI_InitStructure;
+	SPI_StructInit(&SPI_InitStructure);
     switch (this->_index)
     {
         case Spi1:
