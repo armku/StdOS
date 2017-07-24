@@ -42,15 +42,6 @@ Spi::~Spi()
     this->Close();
 }
 
-#if 0
-
-public:
-    SPI_TypeDef *SPI;
-    // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
-    Spi(int spiIndex, uint speedHz = 9000000, bool useNss = true);
-#endif 
-
-
 // NSS/CLK/MISO/MOSI
 #define SPIS {SPI1,SPI2,SPI3}
 #define SPI_PINS_FULLREMAP {PA4,PA5,PA6,PA7,PB12,PB13,PB14,PB15,PA15,PB3,PB4,PB5}   //需要整理
