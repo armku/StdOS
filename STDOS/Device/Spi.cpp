@@ -114,27 +114,27 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
 
     SPI_InitTypeDef sp;
     SPI_StructInit(&sp);
-    sp.SPI_Direction = SPI_Direction_2Lines_FullDuplex; //双线全双工
-    sp.SPI_Mode = SPI_Mode_Master; // 主模式
-    sp.SPI_DataSize = SPI_DataSize_8b; // 数据大小8位 SPI发送接收8位帧结构
-    sp.SPI_CPOL = SPI_CPOL_Low; // 时钟极性，空闲时为低
-    sp.SPI_CPHA = SPI_CPHA_1Edge; // 第1个边沿有效，上升沿为采样时刻
-    if (useNss)
-    {
-        sp.SPI_NSS = SPI_NSS_Hard; // NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制
-    }
-    else
-    {
-        sp.SPI_NSS = SPI_NSS_Soft;
-    }
-    sp.SPI_BaudRatePrescaler = pre; // 8分频，9MHz 定义波特率预分频的值
-    sp.SPI_FirstBit = SPI_FirstBit_MSB; // 高位在前。指定数据传输从MSB位还是LSB位开始:数据传输从MSB位开始
-    sp.SPI_CRCPolynomial = 7; // CRC值计算的多项式
+//    sp.SPI_Direction = SPI_Direction_2Lines_FullDuplex; //双线全双工
+//    sp.SPI_Mode = SPI_Mode_Master; // 主模式
+//    sp.SPI_DataSize = SPI_DataSize_8b; // 数据大小8位 SPI发送接收8位帧结构
+//    sp.SPI_CPOL = SPI_CPOL_Low; // 时钟极性，空闲时为低
+//    sp.SPI_CPHA = SPI_CPHA_1Edge; // 第1个边沿有效，上升沿为采样时刻
+//    if (useNss)
+//    {
+//        sp.SPI_NSS = SPI_NSS_Hard; // NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制
+//    }
+//    else
+//    {
+//        sp.SPI_NSS = SPI_NSS_Soft;
+//    }
+//    sp.SPI_BaudRatePrescaler = pre; // 8分频，9MHz 定义波特率预分频的值
+//    sp.SPI_FirstBit = SPI_FirstBit_MSB; // 高位在前。指定数据传输从MSB位还是LSB位开始:数据传输从MSB位开始
+//    sp.SPI_CRCPolynomial = 7; // CRC值计算的多项式
 
-    SPI_Init((SPI_TypeDef*)(this->_SPI), &sp);
-    SPI_Cmd((SPI_TypeDef*)(this->_SPI), ENABLE);
+//    SPI_Init((SPI_TypeDef*)(this->_SPI), &sp);
+//    SPI_Cmd((SPI_TypeDef*)(this->_SPI), ENABLE);
 
-    Stop();
+//    Stop();
 	//以上为历史内容
     switch (this->_index)
     {
@@ -250,24 +250,29 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
             break;
     }
     this->Stop();
-    /* SPI1 configuration */
-    // W25X16: data input on the DIO pin is sampled on the rising edge of the CLK. 
-    // Data on the DO and DIO pins are clocked out on the falling edge of CLK.
-    SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
-    SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
-    SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
-    SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
-    SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
-    SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
-    #ifdef STM32F0
+    SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;//双线全双工
+    SPI_InitStructure.SPI_Mode = SPI_Mode_Master;// 主模式
+    SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;// 数据大小8位 SPI发送接收8位帧结构
+    SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;// 时钟极性，空闲时为高
+    SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;// 第2个边沿有效，上升沿为采样时刻
+	if(useNss)
+	{
+		SPI_InitStructure.SPI_NSS = SPI_NSS_Hard;// NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制
+	}
+	else
+	{
+		SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+    }
+	SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+	#ifdef STM32F0
         SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
     #elif defined STM32F1
         SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
     #elif defined STM32F4
         SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_256; //定义波特率预分频的值:波特率预分频值为256
     #endif 
-    SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
-    SPI_InitStructure.SPI_CRCPolynomial = 7;
+    SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;// 高位在前。指定数据传输从MSB位还是LSB位开始:数据传输从MSB位开始
+    SPI_InitStructure.SPI_CRCPolynomial = 7;// CRC值计算的多项式
     switch (this->_index)
     {
         case Spi1:
