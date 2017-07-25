@@ -288,7 +288,8 @@ void W25Q64::Test()
 	spi64.Write(0xFF);
 	spi64.Write(0xFF);
 	spi64.Write(0xFF);
-	spi64.Write(0xFF);
+	//spi64.Write(0xFF);
+	this->_spi->Write(0xff);
 	spi64.Stop();
 }
 #if 1    
@@ -356,10 +357,10 @@ void W25Q64::Test()
         #endif 
         spi64.Open();
 		
-		w25q64.Test();
+//		w25q64.Test();
 		/* Get SPI Flash Device ID */
         w25q64.DeviceID = w25q64.ReadDeviceID();
-		return;
+//		return;
         Sys.Delay(10);
 
         printf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", w25q64.ID, w25q64.DeviceID);

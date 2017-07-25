@@ -16,7 +16,11 @@
     {
         private:
         public:
-            Spi *_spi; // 内部Spi对象
+			#if USESPISOFT
+				SpiSoft *_spi; // 内部Spi对象
+			#else
+				Spi *_spi; // 内部Spi对象
+			#endif
 
             // 等待操作完成
             bool WaitForEnd();
