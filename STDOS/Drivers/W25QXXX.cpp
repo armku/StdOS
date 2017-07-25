@@ -275,7 +275,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
 }
 
 #if 1
-    #define USESPISOFT  0
+    #define USESPISOFT  1
     #if USESPISOFT
         SpiSoft spi64;
     #else 
@@ -339,12 +339,19 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
 
         printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
         #if USESPISOFT
-            spi64.SetPin(PA5, PA6, PA7, PA4);
+            spi64.SetPin(PA5, PA7, PA6, PA4);
             spi64.CPOL = SpiSoft::CPOL_High;
             spi64.CPHA = SpiSoft::CPHA_2Edge;
         #else 
         #endif 
         spi64.Open();
+		
+		spi64.Start();
+		
+		spi64.Close();
+		spi64.Stop();
+		
+		return;
         /* Get SPI Flash Device ID */
         w25q64.DeviceID = w25q64.ReadDeviceID();
 

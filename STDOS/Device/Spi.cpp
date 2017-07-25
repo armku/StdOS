@@ -469,7 +469,7 @@ SpiSoft::SpiSoft(uint speedHz)
     this->_mosi.Invert = false;
     this->_miso.Invert = false;
     //this->delayus=speedHz;
-    this->delayus = 0;
+    this->delayus = 1;
 
     this->CPOL = CPOL_Low;
     this->CPHA = CPHA_1Edge;
@@ -481,6 +481,8 @@ void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
     this->_clk.Set(clk);
     this->_mosi.Set(mosi);
     this->_miso.Set(miso);
+	
+	this->Open();
 }
 
 /*---------------------------------------------------------
@@ -623,11 +625,29 @@ byte SpiSoft::Write(byte data)
         return ret;
 }
 
-void SpiSoft::Open(){
-
+void SpiSoft::Open()
+{
+	if(this->CPOL)
+	{
+		this->_clk=1;
+	}
+	else
+	{
+		this->_clk=0;
+	}
+	this->_nss=1;
 }
-void SpiSoft::Close(){
-
+void SpiSoft::Close()
+{
+	//测试，等待删除
+	for(int i=0;i<8;i++)
+	{
+		this->_clk=0;
+		this->_mosi=1;
+		Sys.Delay(this->delayus);
+		this->_clk=1;
+		this->_mosi=0;
+	}
 }
 
 // 拉低NSS，开始传输
