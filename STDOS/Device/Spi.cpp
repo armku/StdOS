@@ -59,19 +59,19 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
     int pre = GetPre(spi, speedHz);
     if (pre ==  - 1)
         return ;
-	debug_printf("pre %x \r\n",pre);
+    debug_printf("pre %x \r\n", pre);
 
     Speed = speedHz;
 
-	//以上为历史内容
+    //以上为历史内容
     switch (this->_index)
     {
         case Spi1:
             #ifdef STM32F0
-//				// SPI都在GPIO_AF_0分组内
-//        GPIO_PinAFConfig(_GROUP(ps[1]), _PIN(ps[1]), GPIO_AF_0);
-//        GPIO_PinAFConfig(_GROUP(ps[2]), _PIN(ps[2]), GPIO_AF_0);
-//        GPIO_PinAFConfig(_GROUP(ps[3]), _PIN(ps[3]), GPIO_AF_0)
+                //				// SPI都在GPIO_AF_0分组内
+                //        GPIO_PinAFConfig(_GROUP(ps[1]), _PIN(ps[1]), GPIO_AF_0);
+                //        GPIO_PinAFConfig(_GROUP(ps[2]), _PIN(ps[2]), GPIO_AF_0);
+                //        GPIO_PinAFConfig(_GROUP(ps[3]), _PIN(ps[3]), GPIO_AF_0)
             #elif defined STM32F1
                 if (useNss)
                 {
@@ -91,13 +91,13 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
                 {
                     this->SetPin(PB3, PB4, PB5);
                 }
-//				byte afs[] = 
-//        {
-//            GPIO_AF_SPI1, GPIO_AF_SPI2, GPIO_AF_SPI3, GPIO_AF_SPI4, GPIO_AF_SPI5, GPIO_AF_SPI6
-//        };
-//        GPIO_PinAFConfig(_GROUP(ps[1]), _PIN(ps[1]), afs[_index]);
-//        GPIO_PinAFConfig(_GROUP(ps[2]), _PIN(ps[2]), afs[_index]);
-//        GPIO_PinAFConfig(_GROUP(ps[3]), _PIN(ps[3]), afs[_index]);
+                //				byte afs[] = 
+                //        {
+                //            GPIO_AF_SPI1, GPIO_AF_SPI2, GPIO_AF_SPI3, GPIO_AF_SPI4, GPIO_AF_SPI5, GPIO_AF_SPI6
+                //        };
+                //        GPIO_PinAFConfig(_GROUP(ps[1]), _PIN(ps[1]), afs[_index]);
+                //        GPIO_PinAFConfig(_GROUP(ps[2]), _PIN(ps[2]), afs[_index]);
+                //        GPIO_PinAFConfig(_GROUP(ps[3]), _PIN(ps[3]), afs[_index]);
                 GPIO_PinAFConfig(GPIOB, GPIO_PinSource3, GPIO_AF_SPI1); //PB3复用为 SPI1
                 GPIO_PinAFConfig(GPIOB, GPIO_PinSource4, GPIO_AF_SPI1); //PB4复用为 SPI1
                 GPIO_PinAFConfig(GPIOB, GPIO_PinSource5, GPIO_AF_SPI1); //PB5复用为 SPI1
@@ -161,9 +161,9 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
         default:
             break;
     }
-	/////////////////////////////////////////////////////////////
-	SPI_InitTypeDef SPI_InitStructure;
-	SPI_StructInit(&SPI_InitStructure);
+    /////////////////////////////////////////////////////////////
+    SPI_InitTypeDef SPI_InitStructure;
+    SPI_StructInit(&SPI_InitStructure);
     switch (this->_index)
     {
         case Spi1:
@@ -179,29 +179,29 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
             break;
     }
     this->Stop();
-    SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;//双线全双工
-    SPI_InitStructure.SPI_Mode = SPI_Mode_Master;// 主模式
-    SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;// 数据大小8位 SPI发送接收8位帧结构
-    SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;// 时钟极性，空闲时为高
-    SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;// 第2个边沿有效，上升沿为采样时刻
-	if(useNss)
-	{
-		SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
-	}
-	else
-	{
-		SPI_InitStructure.SPI_NSS = SPI_NSS_Hard;// NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制
+    SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; //双线全双工
+    SPI_InitStructure.SPI_Mode = SPI_Mode_Master; // 主模式
+    SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b; // 数据大小8位 SPI发送接收8位帧结构
+    SPI_InitStructure.SPI_CPOL = SPI_CPOL_High; // 时钟极性，空闲时为高
+    SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge; // 第2个边沿有效，上升沿为采样时刻
+    if (useNss)
+    {
+        SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
     }
-	//SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
-	#ifdef STM32F0
+    else
+    {
+        SPI_InitStructure.SPI_NSS = SPI_NSS_Hard; // NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制
+    }
+    //SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+    #ifdef STM32F0
         SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
     #elif defined STM32F1
-        SPI_InitStructure.SPI_BaudRatePrescaler = pre;//SPI_BaudRatePrescaler_4;
+        SPI_InitStructure.SPI_BaudRatePrescaler = pre; //SPI_BaudRatePrescaler_4;
     #elif defined STM32F4
         SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_256; //定义波特率预分频的值:波特率预分频值为256
     #endif 
-    SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;// 高位在前。指定数据传输从MSB位还是LSB位开始:数据传输从MSB位开始
-    SPI_InitStructure.SPI_CRCPolynomial = 7;// CRC值计算的多项式
+    SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB; // 高位在前。指定数据传输从MSB位还是LSB位开始:数据传输从MSB位开始
+    SPI_InitStructure.SPI_CRCPolynomial = 7; // CRC值计算的多项式
     switch (this->_index)
     {
         case Spi1:
@@ -412,9 +412,8 @@ int Spi::GetPre(int index, uint &speedHz)
     return pre;
 }
 
-void Spi::OnInit()
-{
-    
+void Spi::OnInit(){
+
 }
 
 void Spi::OnOpen()
@@ -471,9 +470,12 @@ SpiSoft::SpiSoft(uint speedHz)
     this->_miso.Invert = false;
     //this->delayus=speedHz;
     this->delayus = 0;
+
+    this->CPOL = CPOL_Low;
+    this->CPHA = CPHA_1Edge;
 }
 
-void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi,Pin nss)
+void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
 {
     this->_nss.Set(nss);
     this->_clk.Set(clk);
@@ -505,27 +507,118 @@ byte SpiSoft::Write(byte data)
 {
     byte i;
     byte ret = 0;
-    for (i = 0; i < 8; i++)
+    if (this->CPOL)
     {
-        if (data &(1 << (8-i - 1)))
+        //时钟极性，空闲时为高
+        if (this->CPHA == CPHA_1Edge)
         {
-            this->_mosi = 1;
+            //时钟相位 在串行同步时钟的第一个跳变沿（上升或下降）数据被采样
+            for (i = 0; i < 8; i++)
+            {
+                if (data &(1 << (8-i - 1)))
+                {
+                    this->_mosi = 1;
+                }
+                else
+                {
+                    this->_mosi = 0;
+                }
+                Sys.Delay(this->delayus);
+                this->_clk = 0;
+                Sys.Delay(this->delayus);
+                this->_clk = 1;
+                ret <<= 1;
+                if (this->_miso.Read())
+                {
+                    ret |= 1;
+                }
+            }
+        }
+        else if (this->CPHA == CPHA_2Edge)
+        {
+            //时钟相位 在串行同步时钟的第二个跳变沿（上升或下降）数据被采样
+			//需要检查
+			for (i = 0; i < 8; i++)
+            {
+                if (data &(1 << (8-i - 1)))
+                {
+                    this->_mosi = 1;
+                }
+                else
+                {
+                    this->_mosi = 0;
+                }
+                Sys.Delay(this->delayus);
+                this->_clk = 0;
+                Sys.Delay(this->delayus);
+                this->_clk = 1;
+                ret <<= 1;
+                if (this->_miso.Read())
+                {
+                    ret |= 1;
+                }
+            }
         }
         else
-        {
-            this->_mosi = 0;
-        }
-        Sys.Delay(this->delayus);
-        this->_clk = 1;
-        Sys.Delay(this->delayus);
-        this->_clk = 0;
-        ret <<= 1;
-        if (this->_miso.Read())
-        {
-            ret |= 1;
-        }
+        {}
     }
-    return ret;
+    else
+    {
+        //时钟极性，空闲时为低
+        if (this->CPHA == CPHA_1Edge)
+        {
+            //时钟相位 在串行同步时钟的第一个跳变沿（上升或下降）数据被采样
+            for (i = 0; i < 8; i++)
+            {
+                if (data &(1 << (8-i - 1)))
+                {
+                    this->_mosi = 1;
+                }
+                else
+                {
+                    this->_mosi = 0;
+                }
+                Sys.Delay(this->delayus);
+                this->_clk = 1;
+                Sys.Delay(this->delayus);
+                this->_clk = 0;
+                ret <<= 1;
+                if (this->_miso.Read())
+                {
+                    ret |= 1;
+                }
+            }
+        }
+        else if (this->CPHA == CPHA_2Edge)
+        {
+            //时钟相位 在串行同步时钟的第二个跳变沿（上升或下降）数据被采样
+			//需要检查
+			for (i = 0; i < 8; i++)
+            {
+                if (data &(1 << (8-i - 1)))
+                {
+                    this->_mosi = 1;
+                }
+                else
+                {
+                    this->_mosi = 0;
+                }
+                Sys.Delay(this->delayus);
+                this->_clk = 1;
+                Sys.Delay(this->delayus);
+                this->_clk = 0;
+                ret <<= 1;
+                if (this->_miso.Read())
+                {
+                    ret |= 1;
+                }
+            }
+        }
+        else
+        {}
+
+    }
+        return ret;
 }
 
 void SpiSoft::Open(){
