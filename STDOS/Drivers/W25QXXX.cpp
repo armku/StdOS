@@ -614,8 +614,12 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
     };
 }
 
-#if 0
-    Spi spi128(Spi1);
+#if 1
+	#if USESPISOFT
+        SpiSoft spi128;
+    #else 
+        Spi spi128(Spi1);
+    #endif     
     W25Q128 w25q128(&spi128);
     OutputPort nsspp;
 
@@ -632,6 +636,11 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
         nsspp.Set(PG7);
         nsspp = 1; //PG7输出1,防止NRF干扰SPI FLASH的通信 
 
+		#if USESPISOFT
+			spi128.SetPin(PB3, PB4, PB5, PB14);
+            spi128.CPOL = SpiSoft::CPOL_High;
+            spi128.CPHA = SpiSoft::CPHA_2Edge;
+		#endif
         byte datatemp[sizeof(TEXT_Buffer)];
         uint FLASH_SIZE;
         w25q128.W25QXX_Init(); //W25QXX初始化
