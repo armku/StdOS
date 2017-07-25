@@ -538,6 +538,7 @@ byte SpiSoft::Write(byte data)
         {
             //时钟相位 在串行同步时钟的第二个跳变沿（上升或下降）数据被采样
 			//需要检查
+			this->_clk=0;
 			for (i = 0; i < 8; i++)
             {
                 if (data &(1 << (8-i - 1)))
@@ -549,15 +550,16 @@ byte SpiSoft::Write(byte data)
                     this->_mosi = 0;
                 }
                 Sys.Delay(this->delayus);
-                this->_clk = 0;
-                Sys.Delay(this->delayus);
                 this->_clk = 1;
+                Sys.Delay(this->delayus);
+                this->_clk = 0;
                 ret <<= 1;
                 if (this->_miso.Read())
                 {
                     ret |= 1;
-                }
+                }				
             }
+			this->_clk=1;
         }
         else
         {}
