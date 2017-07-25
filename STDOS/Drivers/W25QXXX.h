@@ -4,6 +4,7 @@
     #include "Kernel\Sys.h"
     #include "Device\Spi.h"
 
+	#define USESPISOFT	1
     //W25X系列/Q系列芯片列表	   
     typedef enum
     {
@@ -29,9 +30,11 @@
             uint DeviceID; // 设备ID
             ushort PageSize; // 页大小
             ushort Retry; // 等待重试次数
-
-            W25Q64(Spi *spi);
-
+			#if USESPISOFT
+				W25Q64(SpiSoft *spi);
+			#else
+				W25Q64(Spi *spi);
+			#endif
             // 擦除扇区
             bool EraseSector(uint sector);
             // 擦除页
@@ -49,6 +52,7 @@
             void EraseChip(void); ////擦除整个芯片 等待时间超长...
             void WakeUp(void); //唤醒
             void PowerDown(void); //进入掉电模式	
+			void Test();
     };
 
     class W25Q128: public W25Q64
@@ -56,7 +60,11 @@
         public:
             // 读取编号
             uint ReadID();
-            W25Q128(Spi *spi);
+			#if USESPISOFT
+				W25Q128(SpiSoft *spi);
+			#else
+				W25Q128(Spi *spi);
+			#endif
             // 擦除扇区 扇区地址
             bool EraseSector(uint sectorAddr);
             // 写入一页
