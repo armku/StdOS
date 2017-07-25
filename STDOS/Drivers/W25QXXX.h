@@ -56,7 +56,6 @@
             void EraseChip(void); ////擦除整个芯片 等待时间超长...
             void WakeUp(void); //唤醒
             void PowerDown(void); //进入掉电模式	
-			void Test();
     };
 
     class W25Q128: public W25Q64

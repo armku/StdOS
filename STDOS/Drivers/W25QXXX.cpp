@@ -36,11 +36,12 @@ uint W25Q64::ReadID()
     Temp = (Temp0 << 16) | (Temp1 << 8) | Temp2;
     return Temp;
 }
+
 #if USESPISOFT
-W25Q64::W25Q64(SpiSoft *spi)
-#else
-W25Q64::W25Q64(Spi *spi)
-#endif
+    W25Q64::W25Q64(SpiSoft *spi)
+#else 
+    W25Q64::W25Q64(Spi *spi)
+#endif 
 {
     this->_spi = spi;
     this->PageSize = 256;
@@ -276,24 +277,9 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
     this->_spi->Stop();
     return true;
 }
-#if USESPISOFT
-        SpiSoft spi64;
-    #else 
-        Spi spi64(Spi1);
-    #endif 
-void W25Q64::Test()
-{
-	spi64.Start();	
-	spi64.Write(0xAB);
-	spi64.Write(0xFF);
-	spi64.Write(0xFF);
-	spi64.Write(0xFF);
-	//spi64.Write(0xFF);
-	this->_spi->Write(0xff);
-	spi64.Stop();
-}
+
 #if 1    
-    
+
     typedef enum
     {
         FAILED = 0, PASSED = !FAILED
@@ -342,7 +328,11 @@ void W25Q64::Test()
         }
         return PASSED;
     }
-	
+    #if USESPISOFT
+        SpiSoft spi64;
+    #else 
+        Spi spi64(Spi1);
+    #endif 
     W25Q64 w25q64(&spi64);
     void W25Q64Test()
     {
@@ -356,11 +346,10 @@ void W25Q64::Test()
         #else 
         #endif 
         spi64.Open();
-		
-//		w25q64.Test();
-		/* Get SPI Flash Device ID */
+
+        /* Get SPI Flash Device ID */
         w25q64.DeviceID = w25q64.ReadDeviceID();
-//		return;
+        //		return;
         Sys.Delay(10);
 
         printf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", w25q64.ID, w25q64.DeviceID);
@@ -428,11 +417,12 @@ uint W25Q128::ReadID()
 
     return Temp;
 }
+
 #if USESPISOFT
-W25Q128::W25Q128(SpiSoft *spi): W25Q64(spi)
-#else
-W25Q128::W25Q128(Spi *spi): W25Q64(spi)
-#endif
+    W25Q128::W25Q128(SpiSoft *spi): W25Q64(spi)
+#else 
+    W25Q128::W25Q128(Spi *spi): W25Q64(spi)
+#endif 
 {
     this->PageSize = 4096;
 }
