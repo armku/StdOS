@@ -46,7 +46,7 @@
 #define ADC_CMD_SLEEP       0x02            //进入睡眠模式  
 #define ADC_CMD_SYNC        0x04            //同步ADC转换  
 #define ADC_CMD_RESET       0x06            //芯片复位  
-#define ADC_CMD_NOP					0xFF            //空操作  
+#define ADC_CMD_NOP			0xFF            //空操作  
 #define ADC_CMD_RDATA       0x12            //单次读取数据  
 #define ADC_CMD_RDATAC      0x14            //连续读取数据  
 #define ADC_CMD_SDATAC      0x16            //停止连续读取  
@@ -56,13 +56,13 @@
 #define ADC_CMD_SYSGCAL     0x61            //系统增益校准  
 #define ADC_CMD_SELFOCAL    0x62            //系统自校准  
 #define ADC_CMD_RESTRICTED  0xF1            //  
-ADS1246::ADS1246(Pin nss, Pin clk, Pin mosi, Pin miso, InputPort& pinrd, Pin pinreset)
+ADS1246::ADS1246(Pin clk, Pin miso, Pin mosi,Pin nss,  InputPort& pinrd, Pin pinreset)
 {
 	this->ppinreset.Invert=false;
 	
 	this->ppinreset.Set(pinreset);
 	
-    this->pspi.SetPin(nss, clk, mosi, miso);
+    this->pspi.SetPin(clk, miso, mosi,nss);
 	this->ppinrd=&pinrd;
     this->ppinreset=0;
 }

@@ -473,7 +473,7 @@ SpiSoft::SpiSoft(uint speedHz)
     this->delayus = 0;
 }
 
-void SpiSoft::SetPin(Pin nss, Pin clk, Pin mosi, Pin miso)
+void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi,Pin nss)
 {
     this->_nss.Set(nss);
     this->_clk.Set(clk);
