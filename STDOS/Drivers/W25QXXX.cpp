@@ -442,7 +442,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
 
         printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
 
-		spi64.SetPin(PA4,PA5,PA6,PA7);
+		spi64.SetPin(PA5,PA7,PA6,PA4);
 		spi64.CPOL=SpiSoft::CPOL_High;
 		spi64.CPHA=SpiSoft::CPHA_2Edge;
         //spi64.Open();
