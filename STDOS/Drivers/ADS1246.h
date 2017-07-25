@@ -12,9 +12,13 @@
             void Init(void);
             byte Check(void); //AD检查，正常返回0
             bool GetFlag(void); //读取AD转换是否正常
+			void Reset(void);//复位
+			int  CheckSpeed(int checkTimems=1000);//检查速度,传入检查周期
         private:
             int flagOK; //ad转换正常
             int decodead(byte *da);
+			int readCnt;//读取次数
+			int readCntCheck;//上次检查的读取周期
 
             SpiSoft pspi; //SPI接口
             InputPort *ppinrd; //数据准备好接口

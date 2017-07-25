@@ -139,6 +139,8 @@ int ADS1246::Read(void) //返回-1,表示转换未完成
 {
     byte Cmd[3];
     int Ret = 0;
+	this->readCnt++;
+	this->readCntCheck++;
 
     Cmd[0] = ADC_CMD_RDATA;
     this->pspi.Start();
@@ -171,11 +173,17 @@ void ADS1246::Init(void)
     this->pspi.Start();
     this->WriteReg(ADC_REG_ID, 0x08); //DOUT兼容DRDY引脚   0X4A 00 08
     Sys.Sleep(40);
-    this->WriteReg(ADC_REG_SYS0, ADC_SPS_20 | ADC_GAIN_1); //调整采样速度
+    this->WriteReg(ADC_REG_SYS0, ADC_SPS_160 | ADC_GAIN_1); //调整采样速度
     this->pspi.Stop();
 
 
     //打开中断，转换完成中断
+}
+void ADS1246::Reset(void)
+{
+	this->pspi.Start();
+    this->WriteReg(ADC_REG_SYS0, ADC_SPS_160 | ADC_GAIN_1); //调整采样速度
+    this->pspi.Stop();
 }
 
 //AD检查，正常返回0
@@ -198,5 +206,13 @@ bool ADS1246::GetFlag(void)
 {
 	bool ret=this->flagOK;
 	this->flagOK=false;
+	return ret;
+}
+//检查速度,传入检查周期
+int  ADS1246::CheckSpeed(int checkTimems)
+{
+	checkTimems=checkTimems;
+	int ret=this->readCntCheck;
+	this->readCntCheck=0;
 	return ret;
 }
