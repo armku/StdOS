@@ -507,65 +507,7 @@ byte SpiSoft::Write(byte data)
 {
     byte i;
     byte ret = 0;
-    if (this->CPOL)
-    {
-        //时钟极性，空闲时为高
-        if (this->CPHA == CPHA_1Edge)
-        {
-            //时钟相位 在串行同步时钟的第一个跳变沿（上升或下降）数据被采样
-            for (i = 0; i < 8; i++)
-            {
-                if (data &(1 << (8-i - 1)))
-                {
-                    this->_mosi = 1;
-                }
-                else
-                {
-                    this->_mosi = 0;
-                }
-                Sys.Delay(this->delayus);
-                this->_clk = 0;
-                Sys.Delay(this->delayus);
-                this->_clk = 1;
-                ret <<= 1;
-                if (this->_miso.Read())
-                {
-                    ret |= 1;
-                }
-            }
-        }
-        else if (this->CPHA == CPHA_2Edge)
-        {
-            //时钟相位 在串行同步时钟的第二个跳变沿（上升或下降）数据被采样
-			//需要检查			
-			for (i = 0; i < 8; i++)
-            {
-				this->_clk=0;
-				Sys.Delay(this->delayus);
-                if (data &(1 << (8-i - 1)))
-                {
-                    this->_mosi = 1;
-                }
-                else
-                {
-                    this->_mosi = 0;
-                }
-                Sys.Delay(this->delayus);
-                this->_clk = 1;
-                Sys.Delay(this->delayus);
-                //this->_clk = 0;
-                ret <<= 1;
-                if (this->_miso.Read())
-                {
-                    ret |= 1;
-                }				
-            }
-			//this->_clk=1;
-        }
-        else
-        {}
-    }
-    else
+    if (this->CPOL == 0)
     {
         //时钟极性，空闲时为低
         if (this->CPHA == CPHA_1Edge)
@@ -595,8 +537,8 @@ byte SpiSoft::Write(byte data)
         else if (this->CPHA == CPHA_2Edge)
         {
             //时钟相位 在串行同步时钟的第二个跳变沿（上升或下降）数据被采样
-			//需要检查
-			for (i = 0; i < 8; i++)
+            //需要检查
+            for (i = 0; i < 8; i++)
             {
                 if (data &(1 << (8-i - 1)))
                 {
@@ -617,10 +559,67 @@ byte SpiSoft::Write(byte data)
                 }
             }
         }
+    }
+    else if (this->CPOL == 1)
+    {
+        //时钟极性，空闲时为高
+        if (this->CPHA == CPHA_1Edge)
+        {
+            //时钟相位 在串行同步时钟的第一个跳变沿（上升或下降）数据被采样
+            for (i = 0; i < 8; i++)
+            {
+                if (data &(1 << (8-i - 1)))
+                {
+                    this->_mosi = 1;
+                }
+                else
+                {
+                    this->_mosi = 0;
+                }
+                Sys.Delay(this->delayus);
+                this->_clk = 0;
+                Sys.Delay(this->delayus);
+                this->_clk = 1;
+                ret <<= 1;
+                if (this->_miso.Read())
+                {
+                    ret |= 1;
+                }
+            }
+        }
+        else if (this->CPHA == CPHA_2Edge)
+        {
+            //时钟相位 在串行同步时钟的第二个跳变沿（上升或下降）数据被采样
+            //需要检查			
+            for (i = 0; i < 8; i++)
+            {
+                this->_clk = 0;
+                Sys.Delay(this->delayus);
+                if (data &(1 << (8-i - 1)))
+                {
+                    this->_mosi = 1;
+                }
+                else
+                {
+                    this->_mosi = 0;
+                }
+                Sys.Delay(this->delayus);
+                this->_clk = 1;
+                Sys.Delay(this->delayus);
+                //this->_clk = 0;
+                ret <<= 1;
+                if (this->_miso.Read())
+                {
+                    ret |= 1;
+                }
+            }
+            //this->_clk=1;
+        }
         else
         {}
-
     }
+    else
+    {}
         return ret;
 }
 
