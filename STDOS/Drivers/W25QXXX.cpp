@@ -642,6 +642,7 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
             spi128.CPOL = SpiSoft::CPOL_High;
             spi128.CPHA = SpiSoft::CPHA_2Edge;
 		#endif
+		spi128.SetNss(PB14);
         byte datatemp[sizeof(TEXT_Buffer)];
         uint FLASH_SIZE;
         w25q128.W25QXX_Init(); //W25QXX≥ı ºªØ
