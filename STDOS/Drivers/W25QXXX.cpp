@@ -345,6 +345,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
             spi64.CPHA = SpiSoft::CPHA_2Edge;
         #else 
         #endif 
+		spi64.SetNss(PA4);
         spi64.Open();
 
         /* Get SPI Flash Device ID */
