@@ -184,15 +184,7 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
     SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b; // 数据大小8位 SPI发送接收8位帧结构
     SPI_InitStructure.SPI_CPOL = SPI_CPOL_High; // 时钟极性，空闲时为高
     SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge; // 第2个边沿有效，上升沿为采样时刻
-    if (useNss)
-    {
-        SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
-    }
-    else
-    {
-        SPI_InitStructure.SPI_NSS = SPI_NSS_Hard; // NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制
-    }
-    //SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+    SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;// NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制    
     #ifdef STM32F0
         SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
     #elif defined STM32F1
@@ -321,7 +313,7 @@ byte Spi::Write(byte data)
                 return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
             #endif 
         default:
-            return  - 1;
+            return  0;
     }
 }
 
