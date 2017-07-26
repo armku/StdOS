@@ -29,10 +29,10 @@ Spi::Spi()
 }
 
 // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
-Spi::Spi(SPI spi, uint speedHz, bool useNss)
+Spi::Spi(SPI spi, uint speedHz)
 {
     this->Init();
-    this->Init(spi, speedHz, useNss);
+    this->Init(spi, speedHz);
 }
 
 Spi::~Spi()
@@ -42,8 +42,9 @@ Spi::~Spi()
     this->Close();
 }
 
-void Spi::Init(SPI spi, uint speedHz, bool useNss)
+void Spi::Init(SPI spi, uint speedHz)
 {
+	bool useNss=true;
     this->_index = spi;
     this->Speed = speedHz;
     #if DEBUG
