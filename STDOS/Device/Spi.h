@@ -31,7 +31,7 @@
 
             void Init(SPI spi, uint speedHz = 9000000);
 
-            void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0, Pin nss = P0);
+            void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
 			void SetNss(Pin nss = P0);
             void GetPin(Pin *clk = NULL, Pin *miso = NULL, Pin *mosi = NULL, Pin *nss = NULL);
             void Open();

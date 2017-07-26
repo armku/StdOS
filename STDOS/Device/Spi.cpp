@@ -44,8 +44,7 @@ Spi::~Spi()
 
 void Spi::Init(SPI spi, uint speedHz)
 {
-	bool useNss=true;
-    this->_index = spi;
+	this->_index = spi;
     this->Speed = speedHz;
     #if DEBUG
         int k = speedHz / 1000;
@@ -74,24 +73,9 @@ void Spi::Init(SPI spi, uint speedHz)
                 //        GPIO_PinAFConfig(_GROUP(ps[2]), _PIN(ps[2]), GPIO_AF_0);
                 //        GPIO_PinAFConfig(_GROUP(ps[3]), _PIN(ps[3]), GPIO_AF_0)
             #elif defined STM32F1
-                if (useNss)
-                {
-                    this->SetPin(PA5, PA6, PA7, PA4);
-                }
-                else
-                {
-                    this->SetPin(PA5, PA6, PA7);
-                }
+                this->SetPin(PA5, PA6, PA7);//this->SetPin(PA5, PA6, PA7, PA4);                
             #elif defined STM32F4				
-                if (useNss)
-                {
-                    //this->SetPin(PA5, PA6, PA7, PA4);/原生SPI1
-                    this->SetPin(PB3, PB4, PB5, PB14);
-                }
-                else
-                {
-                    this->SetPin(PB3, PB4, PB5);
-                }
+                this->SetPin(PB3, PB4, PB5);//this->SetPin(PB3, PB4, PB5, PB14);//this->SetPin(PA5, PA6, PA7, PA4);/原生SPI1
                 //				byte afs[] = 
                 //        {
                 //            GPIO_AF_SPI1, GPIO_AF_SPI2, GPIO_AF_SPI3, GPIO_AF_SPI4, GPIO_AF_SPI5, GPIO_AF_SPI6
@@ -109,23 +93,9 @@ void Spi::Init(SPI spi, uint speedHz)
             #ifdef STM32F0
 
             #elif defined STM32F1
-                if (useNss)
-                {
-                    //                    this->SetPin(PA5, PA6, PA7, PA4);
-                }
-                else
-                {
-                    //                    this->SetPin(PA5, PA6, PA7);
-                }
+                //this->SetPin(PA5, PA6, PA7);//this->SetPin(PA5, PA6, PA7, PA4);                
             #elif defined STM32F4
-                if (useNss)
-                {
-                    this->SetPin(PB13, PB14, PB15, PB12); //原生SPI2
-                }
-                else
-                {
-                    this->SetPin(PB13, PB14, PB15);
-                }
+                this->SetPin(PB13, PB14, PB15);//this->SetPin(PB13, PB14, PB15, PB12); //原生SPI2
                 GPIO_PinAFConfig(GPIOB, GPIO_PinSource13, GPIO_AF_SPI2); //PB13复用为 SPI2
                 GPIO_PinAFConfig(GPIOB, GPIO_PinSource14, GPIO_AF_SPI2); //PB14复用为 SPI2
                 GPIO_PinAFConfig(GPIOB, GPIO_PinSource15, GPIO_AF_SPI2); //PB15复用为 SPI2
@@ -136,23 +106,9 @@ void Spi::Init(SPI spi, uint speedHz)
             #ifdef STM32F0
 
             #elif defined STM32F1
-                if (useNss)
-                {
-                    //                    this->SetPin(PA5, PA6, PA7, PA4);
-                }
-                else
-                {
-                    //                    this->SetPin(PA5, PA6, PA7);
-                }
+                //this->SetPin(PA5, PA6, PA7);//this->SetPin(PA5, PA6, PA7, PA4);                
             #elif defined STM32F4
-                if (useNss)
-                {
-                    this->SetPin(PC10, PC11, PC12, PA15);
-                }
-                else
-                {
-                    this->SetPin(PC10, PC11, PC12);
-                }
+                this->SetPin(PC10, PC11, PC12);//this->SetPin(PC10, PC11, PC12, PA15);
                 GPIO_PinAFConfig(GPIOC, GPIO_PinSource10, GPIO_AF_SPI3); //PC10复用为 SPI3
                 GPIO_PinAFConfig(GPIOC, GPIO_PinSource11, GPIO_AF_SPI3); //PC11复用为 SPI3
                 GPIO_PinAFConfig(GPIOC, GPIO_PinSource12, GPIO_AF_SPI3); //PC12复用为 SPI3
@@ -179,7 +135,7 @@ void Spi::Init(SPI spi, uint speedHz)
         default:
             break;
     }
-//    this->Stop();
+    //this->Stop();
     SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; //双线全双工
     SPI_InitStructure.SPI_Mode = SPI_Mode_Master; // 主模式
     SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b; // 数据大小8位 SPI发送接收8位帧结构
@@ -236,14 +192,12 @@ void Spi::Init(SPI spi, uint speedHz)
     this->OnInit();
 }
 
-void Spi::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
+void Spi::SetPin(Pin clk, Pin miso, Pin mosi)
 {
-	this->Pins[0] = nss;
-    this->Pins[1] = clk;
+	this->Pins[1] = clk;
     this->Pins[2] = miso;
     this->Pins[3] = mosi;
 	
-    this->_nss.Set(this->Pins[0]);
     this->_clk.Set(this->Pins[1]);
     this->_miso.Set(this->Pins[2]);
     this->_mosi.Set(this->Pins[3]);    
