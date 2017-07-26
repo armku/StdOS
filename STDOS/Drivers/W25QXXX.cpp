@@ -341,8 +341,8 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
         printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
         #if W25QXXXUSESPISOFT
             spi64.SetPin(PA5, PA6, PA7);
-            spi64.CPOL = SpiSoft::CPOL_High;
-            spi64.CPHA = SpiSoft::CPHA_2Edge;
+            spi64.CPOL = CPOL_High;
+            spi64.CPHA = CPHA_2Edge;
         #else 
         #endif 
 		spi64.SetNss(PA4);
@@ -639,8 +639,8 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
 
 		#if W25QXXXUSESPISOFT
 			spi128.SetPin(PB3, PB4, PB5);
-            spi128.CPOL = SpiSoft::CPOL_High;
-            spi128.CPHA = SpiSoft::CPHA_2Edge;
+            spi128.CPOL = CPOL_High;
+            spi128.CPHA = CPHA_2Edge;
 		#endif
 		spi128.SetNss(PB14);
         byte datatemp[sizeof(TEXT_Buffer)];
