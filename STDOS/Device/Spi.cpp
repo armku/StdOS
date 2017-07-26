@@ -423,8 +423,13 @@ SpiSoft::SpiSoft(uint speedHz)
     this->_mosi.Invert = false;
     this->_miso.Invert = false;
     //this->delayus=speedHz;
-    this->delayus = 1;
-
+	#ifdef STM32F0
+		this->delayus = 0;
+	#elif defined STM32F1
+		this->delayus = 0;
+	#elif defined STM32F4
+		this->delayus = 1;
+	#endif
     this->CPOL = CPOL_Low;
     this->CPHA = CPHA_1Edge;
 }
