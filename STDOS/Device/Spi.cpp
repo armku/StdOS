@@ -472,7 +472,7 @@ byte SpiSoft::Write(byte data)
 {
     byte i;
     byte ret = 0;
-    if (this->CPOL == 0)
+    if (this->CPOL == CPOL_Low)
     {
         //时钟极性，空闲时为低
         if (this->CPHA == CPHA_1Edge)
@@ -526,7 +526,7 @@ byte SpiSoft::Write(byte data)
             }
         }
     }
-    else if (this->CPOL == 1)
+    else if (this->CPOL == CPOL_High)
     {
         //时钟极性，空闲时为高
         if (this->CPHA == CPHA_1Edge)
