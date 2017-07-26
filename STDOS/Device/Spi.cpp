@@ -29,8 +29,10 @@ Spi::Spi()
 }
 
 // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
-Spi::Spi(SPI spi, uint speedHz)
+Spi::Spi(SPI spi,CPOLTYPE cpol,CPHATYPE cpha, uint speedHz)
 {
+	this->CPOL=cpol;
+	this->CPHA=cpha;
     this->Init();
     this->Init(spi, speedHz);
 }
@@ -139,13 +141,29 @@ void Spi::Init(SPI spi, uint speedHz)
     SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; //双线全双工
     SPI_InitStructure.SPI_Mode = SPI_Mode_Master; // 主模式
     SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b; // 数据大小8位 SPI发送接收8位帧结构
-    SPI_InitStructure.SPI_CPOL = SPI_CPOL_High; // 时钟极性，空闲时为高
-    SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge; // 第2个边沿有效，上升沿为采样时刻
+	if(this->CPOL==CPOL_Low)
+	{
+		SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low; // 时钟极性，空闲时为高
+	}
+	else if(this->CPOL==CPOL_High)
+	{
+		SPI_InitStructure.SPI_CPOL = SPI_CPOL_High; // 时钟极性，空闲时为高
+	}
+	else{}
+	if(this->CPHA==CPHA_1Edge)
+	{
+		SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge; // 第1个边沿有效，上升沿为采样时刻
+	}
+	else if(this->CPHA==CPHA_2Edge)
+	{
+		SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge; // 第2个边沿有效，上升沿为采样时刻
+	}
+	else{}
     SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;// NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制    
     #ifdef STM32F0
         SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
     #elif defined STM32F1
-        SPI_InitStructure.SPI_BaudRatePrescaler = pre; //SPI_BaudRatePrescaler_4;
+        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_8;
     #elif defined STM32F4
         SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_256; //定义波特率预分频的值:波特率预分频值为256
     #endif 
@@ -416,7 +434,7 @@ void Spi::OnClose()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////SpiSoft////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-SpiSoft::SpiSoft(uint speedHz)
+SpiSoft::SpiSoft(CPOLTYPE cpol,CPHATYPE cpha,uint speedHz)
 {
     this->_nss.Invert = false;
     this->_clk.Invert = false;
@@ -430,8 +448,8 @@ SpiSoft::SpiSoft(uint speedHz)
 	#elif defined STM32F4
 		this->delayus = 0;
 	#endif
-    this->CPOL = CPOL_Low;
-    this->CPHA = CPHA_1Edge;
+    this->CPOL = cpol;
+    this->CPHA = cpha;
 }
 
 void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi)

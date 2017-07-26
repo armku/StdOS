@@ -3,9 +3,22 @@
 
     #include "Device\Port.h"
 
+    typedef enum
+    {
+        CPOL_Low = 0,  // 时钟极性，空闲时为低
+        CPOL_High = 1,  // 时钟极性，空闲时为高
+    } CPOLTYPE;
+    typedef enum
+    {
+        CPHA_1Edge = 0,  //时钟相位 在串行同步时钟的第一个跳变沿（上升或下降）数据被采样
+        CPHA_2Edge = 1,  //时钟相位 在串行同步时钟的第二个跳变沿（上升或下降）数据被采样
+    } CPHATYPE;
     // Spi类
     class Spi
     {
+        public:
+            CPOLTYPE CPOL; //时钟极性
+            CPHATYPE CPHA; //时钟相位
         private:
             byte _index;
             void *_SPI;
@@ -26,13 +39,13 @@
 
             Spi();
             // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
-            Spi(SPI spi, uint speedHz = 9000000);
+            Spi(SPI spi, CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge, uint speedHz = 9000000);
             ~Spi();
 
             void Init(SPI spi, uint speedHz = 9000000);
 
             void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
-			void SetNss(Pin nss = P0);
+            void SetNss(Pin nss = P0);
             void GetPin(Pin *clk = NULL, Pin *miso = NULL, Pin *mosi = NULL, Pin *nss = NULL);
             void Open();
             void Close();
@@ -77,22 +90,12 @@
     class SpiSoft
     {
         public:
-            typedef enum
-            {
-                    CPOL_Low = 0,  // 时钟极性，空闲时为低
-                    CPOL_High = 1,  // 时钟极性，空闲时为高
-            } CPOLTYPE;
-            typedef enum
-            {
-                    CPHA_1Edge = 0,  //时钟相位 在串行同步时钟的第一个跳变沿（上升或下降）数据被采样
-                    CPHA_2Edge = 1,  //时钟相位 在串行同步时钟的第二个跳变沿（上升或下降）数据被采样
-            } CPHATYPE;
-			CPOLTYPE CPOL;//时钟极性
-			CPHATYPE CPHA;//时钟相位
+            CPOLTYPE CPOL; //时钟极性
+            CPHATYPE CPHA; //时钟相位
         public:
-            SpiSoft(uint speedHz = 9000000); //使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度   
+            SpiSoft(CPOLTYPE cpol = CPOL_Low, CPHATYPE cpha = CPHA_1Edge, uint speedHz = 9000000); //使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度   
             void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
-			void SetNss(Pin nss = P0);
+            void SetNss(Pin nss = P0);
             byte Write(byte data);
             void Open();
             void Close();

@@ -1,11 +1,17 @@
 #ifndef _ADS1246_H
 #define _ADS1246_H
     #include "Spi.h"
+	
+	#define ADS1246SPISOFT   1
 
 	class ADS1246
     {
         public:
-            ADS1246(Pin clk, Pin miso, Pin mosi,Pin nss,  InputPort &pinrd, Pin pinreset);
+			#if ADS1246SPISOFT
+				ADS1246(SpiSoft *spi,InputPort &pinrd, Pin pinreset);
+			#else
+				ADS1246(Spi *spi,InputPort &pinrd, Pin pinreset);
+			#endif
             byte ReadReg(byte RegAddr);
             void WriteReg(byte RegAddr, byte da);
             int Read(void); //返回-1,表示转换未完成
@@ -20,7 +26,11 @@
 			int readCnt;//读取次数
 			int readCntCheck;//上次检查的读取周期
 
-            SpiSoft pspi; //SPI接口
+			#if ADS1246SPISOFT
+				SpiSoft *pspi; //SPI接口
+			#else
+				Spi *pspi; //SPI接口
+			#endif
             InputPort *ppinrd; //数据准备好接口
             OutputPort ppinreset; //复位接口		
     };

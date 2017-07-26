@@ -56,13 +56,17 @@
 #define ADC_CMD_SYSGCAL     0x61            //系统增益校准  
 #define ADC_CMD_SELFOCAL    0x62            //系统自校准  
 #define ADC_CMD_RESTRICTED  0xF1            //  
-ADS1246::ADS1246(Pin clk, Pin miso, Pin mosi,Pin nss,  InputPort& pinrd, Pin pinreset)
+#if ADS1246SPISOFT
+ADS1246::ADS1246(SpiSoft *spi,InputPort& pinrd, Pin pinreset)
+#else
+ADS1246::ADS1246(Spi *spi,InputPort& pinrd, Pin pinreset)
+#endif
 {
 	this->ppinreset.Invert=false;
 	
 	this->ppinreset.Set(pinreset);
 	
-    this->pspi.SetPin(clk, miso, mosi);
+	this->pspi=spi;
 	this->ppinrd=&pinrd;
     this->ppinreset=0;
 }
@@ -72,15 +76,15 @@ byte ADS1246::ReadReg(byte RegAddr)
     byte ret = 0;
     byte Cmd;
 
-    this->pspi.Start();
+    this->pspi->Start();
 
 
     Cmd = ADC_CMD_RREG | RegAddr;
-    this->pspi.Write(Cmd);
-    this->pspi.Write(0);
-    ret = this->pspi.Write(0X00);
-    this->pspi.Write(0xff); //发送NOP
-    this->pspi.Stop();
+    this->pspi->Write(Cmd);
+    this->pspi->Write(0);
+    ret = this->pspi->Write(0X00);
+    this->pspi->Write(0xff); //发送NOP
+    this->pspi->Stop();
 
     return ret;
 
@@ -89,14 +93,14 @@ byte ADS1246::ReadReg(byte RegAddr)
 void ADS1246::WriteReg(byte RegAddr, byte da)
 {
     byte Cmd;
-    this->pspi.Start();
+    this->pspi->Start();
 
     Cmd = ADC_CMD_WREG | RegAddr;
-    this->pspi.Write(Cmd);
-    this->pspi.Write(0);
-    this->pspi.Write(da);
-    this->pspi.Write(0xff); //发送NOP
-    this->pspi.Stop();
+    this->pspi->Write(Cmd);
+    this->pspi->Write(0);
+    this->pspi->Write(da);
+    this->pspi->Write(0xff); //发送NOP
+    this->pspi->Stop();
 }
 
 /*---------------------------------------------------------
@@ -143,7 +147,7 @@ int ADS1246::Read(void) //返回-1,表示转换未完成
 	this->readCntCheck++;
 
     Cmd[0] = ADC_CMD_RDATA;
-    this->pspi.Start();
+    this->pspi->Start();
 
 	this->flagOK=true;
     if (this->ppinrd->Read())
@@ -151,12 +155,12 @@ int ADS1246::Read(void) //返回-1,表示转换未完成
 		this->flagOK=false;
         return  - 1;
     }	
-    this->pspi.Write(Cmd[0]);	
-    Cmd[0] = this->pspi.Write(0xff);
-    Cmd[1] = this->pspi.Write(0xff);
-    Cmd[2] = this->pspi.Write(0xff);
-    this->pspi.Write(0xff); //发送NOP	
-    this->pspi.Stop();
+    this->pspi->Write(Cmd[0]);	
+    Cmd[0] = this->pspi->Write(0xff);
+    Cmd[1] = this->pspi->Write(0xff);
+    Cmd[2] = this->pspi->Write(0xff);
+    this->pspi->Write(0xff); //发送NOP	
+    this->pspi->Stop();
 
     Ret = decodead(Cmd);
 
@@ -165,25 +169,26 @@ int ADS1246::Read(void) //返回-1,表示转换未完成
 
 void ADS1246::Init(void)
 {
-    this->pspi.Stop();
+	this->pspi->Open();
+    this->pspi->Stop();
     this->ppinreset=0;
     Sys.Sleep(40);
     this->ppinreset=1;
     Sys.Sleep(20);
-    this->pspi.Start();
+    this->pspi->Start();
     this->WriteReg(ADC_REG_ID, 0x08); //DOUT兼容DRDY引脚   0X4A 00 08
     Sys.Sleep(40);
     this->WriteReg(ADC_REG_SYS0, ADC_SPS_160 | ADC_GAIN_1); //调整采样速度
-    this->pspi.Stop();
+    this->pspi->Stop();
 
 
     //打开中断，转换完成中断
 }
 void ADS1246::Reset(void)
 {
-	this->pspi.Start();
+	this->pspi->Start();
     this->WriteReg(ADC_REG_SYS0, ADC_SPS_160 | ADC_GAIN_1); //调整采样速度
-    this->pspi.Stop();
+    this->pspi->Stop();
 }
 
 //AD检查，正常返回0
