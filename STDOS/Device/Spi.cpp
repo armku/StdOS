@@ -592,7 +592,7 @@ void SpiSoft::Open()
 	{
 		this->_clk=0;
 	}
-	this->_nss=1;
+	this->Stop();
 }
 void SpiSoft::Close()
 {
