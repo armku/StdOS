@@ -428,7 +428,7 @@ SpiSoft::SpiSoft(uint speedHz)
 	#elif defined STM32F1
 		this->delayus = 0;
 	#elif defined STM32F4
-		this->delayus = 1;
+		this->delayus = 0;
 	#endif
     this->CPOL = CPOL_Low;
     this->CPHA = CPHA_1Edge;
