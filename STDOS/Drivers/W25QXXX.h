@@ -4,7 +4,7 @@
     #include "Kernel\Sys.h"
     #include "Device\Spi.h"
 
-	#define USESPISOFT	1
+	#define W25QXXXUSESPISOFT	0
     //W25X系列/Q系列芯片列表	   
     typedef enum
     {
@@ -16,7 +16,7 @@
     {
         private:
         public:
-			#if USESPISOFT
+			#if W25QXXXUSESPISOFT
 				SpiSoft *_spi; // 内部Spi对象
 			#else
 				Spi *_spi; // 内部Spi对象
@@ -34,7 +34,7 @@
             uint DeviceID; // 设备ID
             ushort PageSize; // 页大小
             ushort Retry; // 等待重试次数
-			#if USESPISOFT
+			#if W25QXXXUSESPISOFT
 				W25Q64(SpiSoft *spi);
 			#else
 				W25Q64(Spi *spi);
@@ -63,7 +63,7 @@
         public:
             // 读取编号
             uint ReadID();
-			#if USESPISOFT
+			#if W25QXXXUSESPISOFT
 				W25Q128(SpiSoft *spi);
 			#else
 				W25Q128(Spi *spi);

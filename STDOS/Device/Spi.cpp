@@ -255,6 +255,11 @@ void Spi::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
     this->Pins[2] = miso;
     this->Pins[3] = mosi;
 }
+void Spi::SetNss(Pin nss)
+{
+	this->_nss.Set(nss);
+	this->Open();
+}
 
 void Spi::GetPin(Pin *clk, Pin *miso, Pin *mosi, Pin *nss)
 {
@@ -481,6 +486,12 @@ void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
     this->_clk.Set(clk);
     this->_mosi.Set(mosi);
     this->_miso.Set(miso);
+	
+	this->Open();
+}
+void SpiSoft::SetNss(Pin nss)
+{
+    this->_nss.Set(nss);
 	
 	this->Open();
 }

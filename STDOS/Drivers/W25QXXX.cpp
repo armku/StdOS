@@ -37,7 +37,7 @@ uint W25Q64::ReadID()
     return Temp;
 }
 
-#if USESPISOFT
+#if W25QXXXUSESPISOFT
     W25Q64::W25Q64(SpiSoft *spi)
 #else 
     W25Q64::W25Q64(Spi *spi)
@@ -328,7 +328,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
         }
         return PASSED;
     }
-    #if USESPISOFT
+    #if W25QXXXUSESPISOFT
         SpiSoft spi64;
     #else 
         Spi spi64(Spi1);
@@ -339,7 +339,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
         TestStatus TransferStatus1 = FAILED;
 
         printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
-        #if USESPISOFT
+        #if W25QXXXUSESPISOFT
             spi64.SetPin(PA5, PA6, PA7, PA4);
             spi64.CPOL = SpiSoft::CPOL_High;
             spi64.CPHA = SpiSoft::CPHA_2Edge;
@@ -418,7 +418,7 @@ uint W25Q128::ReadID()
     return Temp;
 }
 
-#if USESPISOFT
+#if W25QXXXUSESPISOFT
     W25Q128::W25Q128(SpiSoft *spi): W25Q64(spi)
 #else 
     W25Q128::W25Q128(Spi *spi): W25Q64(spi)
@@ -615,7 +615,7 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
 }
 
 #if 1
-	#if USESPISOFT
+	#if W25QXXXUSESPISOFT
         SpiSoft spi128;
     #else 
         Spi spi128(Spi1);
@@ -636,7 +636,7 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
         nsspp.Set(PG7);
         nsspp = 1; //PG7输出1,防止NRF干扰SPI FLASH的通信 
 
-		#if USESPISOFT
+		#if W25QXXXUSESPISOFT
 			spi128.SetPin(PB3, PB4, PB5, PB14);
             spi128.CPOL = SpiSoft::CPOL_High;
             spi128.CPHA = SpiSoft::CPHA_2Edge;
