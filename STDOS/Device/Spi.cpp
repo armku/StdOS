@@ -429,9 +429,8 @@ SpiSoft::SpiSoft(uint speedHz)
     this->CPHA = CPHA_1Edge;
 }
 
-void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
+void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi)
 {
-    this->_nss.Set(nss);
     this->_clk.Set(clk);
     this->_mosi.Set(mosi);
     this->_miso.Set(miso);
@@ -440,8 +439,7 @@ void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
 }
 void SpiSoft::SetNss(Pin nss)
 {
-    this->_nss.Set(nss);
-	
+    this->_nss.Set(nss);	
 	this->Open();
 }
 

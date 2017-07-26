@@ -62,7 +62,7 @@ ADS1246::ADS1246(Pin clk, Pin miso, Pin mosi,Pin nss,  InputPort& pinrd, Pin pin
 	
 	this->ppinreset.Set(pinreset);
 	
-    this->pspi.SetPin(clk, miso, mosi,nss);
+    this->pspi.SetPin(clk, miso, mosi);
 	this->ppinrd=&pinrd;
     this->ppinreset=0;
 }

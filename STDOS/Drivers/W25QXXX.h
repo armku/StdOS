@@ -4,7 +4,7 @@
     #include "Kernel\Sys.h"
     #include "Device\Spi.h"
 
-	#define W25QXXXUSESPISOFT	1
+	#define W25QXXXUSESPISOFT	0
     //W25X系列/Q系列芯片列表	   
     typedef enum
     {

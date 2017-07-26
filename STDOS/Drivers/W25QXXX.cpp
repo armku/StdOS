@@ -340,7 +340,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
 
         printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
         #if W25QXXXUSESPISOFT
-            spi64.SetPin(PA5, PA6, PA7, PA4);
+            spi64.SetPin(PA5, PA6, PA7);
             spi64.CPOL = SpiSoft::CPOL_High;
             spi64.CPHA = SpiSoft::CPHA_2Edge;
         #else 
@@ -638,7 +638,7 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
         nsspp = 1; //PG7输出1,防止NRF干扰SPI FLASH的通信 
 
 		#if W25QXXXUSESPISOFT
-			spi128.SetPin(PB3, PB4, PB5, PB14);
+			spi128.SetPin(PB3, PB4, PB5);
             spi128.CPOL = SpiSoft::CPOL_High;
             spi128.CPHA = SpiSoft::CPHA_2Edge;
 		#endif
