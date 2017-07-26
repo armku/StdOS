@@ -51,9 +51,9 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
         int m = k / 1000;
         k -= m * 1000;
         if (k == 0)
-            debug_printf("Spi%d::Init %dMHz Nss:%d\r\n", _index + 1, m, useNss);
+            debug_printf("Spi%d::Init %dMHz\r\n", _index + 1, m);
         else
-            debug_printf("Spi%d::Init %d.%dMHz Nss:%d\r\n", _index + 1, m, k, useNss);
+            debug_printf("Spi%d::Init %d.%dMHz\r\n", _index + 1, m, k);
     #endif 
     // 自动计算稍低于速度speedHz的分频
     int pre = GetPre(spi, speedHz);
@@ -237,19 +237,20 @@ void Spi::Init(SPI spi, uint speedHz, bool useNss)
 
 void Spi::SetPin(Pin clk, Pin miso, Pin mosi, Pin nss)
 {
-    this->_nss.Set(nss);
-    this->_clk.Set(clk);
-    this->_miso.Set(miso);
-    this->_mosi.Set(mosi);
-
-    this->Pins[0] = nss;
+	this->Pins[0] = nss;
     this->Pins[1] = clk;
     this->Pins[2] = miso;
     this->Pins[3] = mosi;
+	
+    this->_nss.Set(this->Pins[0]);
+    this->_clk.Set(this->Pins[1]);
+    this->_miso.Set(this->Pins[2]);
+    this->_mosi.Set(this->Pins[3]);    
 }
 void Spi::SetNss(Pin nss)
 {
-	this->_nss.Set(nss);
+	this->Pins[0] = nss;
+	this->_nss.Set(this->Pins[0]);
 	this->Open();
 }
 
