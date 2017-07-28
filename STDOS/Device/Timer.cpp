@@ -13,6 +13,51 @@ Timer1 Timer8 ¸ß¼¶¶¨Ê±Æ÷£¬¾ßÓÐ»ù±¾¶¨Ê±Æ÷ Í¨ÓÃ¶¨Ê±Æ÷ËùÓÐ¹¦ÄÜ£¬ÈýÏàÁù²½µç»ú£¬É²³µ¹
 #endif
 
 
+
+
+
+
+
+
+
+
+/* ¶¨Ê±Æ÷Õë½Å ------------------------------------------------------------------*/
+#define TIMS {TIM1, TIM2, TIM3, TIM4, TIM5, TIM6, TIM7, TIM8}
+#define TIM_PINS {\
+PA8, PA9, PA10,PA11,/* TIM1 */	\
+PA0, PA1, PA2, PA3, /* TIM2 */	\
+PA6, PA7, PB0, PB1, /* TIM3 */	\
+PB6, PB7, PB8, PB9, /* TIM4 */	\
+PA0, PA1, PA2, PA3, /* TIM5 */	\
+P0,  P0,  P0,  P0,	/* TIM6 */	\
+P0,  P0,  P0,  P0,	/* TIM7 */	\
+PC6, PC7, PC8, PC9	/* TIM8 */	\
+}
+#define TIM_PINS_FULLREMAP {\
+PE9, PE11,PE13,PE14,/* TIM1 AFIO_MAPR_TIM1_REMAP_FULLREMAP */	\
+PA15,PB3, PB10,PB11,/* TIM2 AFIO_MAPR_TIM2_REMAP_FULLREMAP */	\
+PC6, PC7, PC8, PC9, /* TIM3 AFIO_MAPR_TIM3_REMAP_FULLREMAP */	\
+PD12,PD13,PD14,PD15,/* TIM4 AFIO_MAPR_TIM4_REMAP */	\
+PA0, PA1, PA2, PA3, /* TIM5 */	\
+P0,  P0,  P0,  P0,	/* TIM6 */	\
+P0,  P0,  P0,  P0,	/* TIM7 */	\
+PC6, PC7, PC8, PC9	/* TIM8 */	\
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 static Timer **Timers = NULL; // ÒÑ¾­ÊµÀý»¯µÄ¶¨Ê±Æ÷¶ÔÏó
 #define TIMS {TIM1,TIM2,TIM3,TIM4,TIM5}
 static TIM_TypeDef *const g_Timers[] = TIMS;

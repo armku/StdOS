@@ -7,6 +7,48 @@
 	#include "stm32f4xx.h"
 #endif
 
+
+
+
+
+
+
+
+
+
+
+/* 通用同步/异步收发器(USART)针脚 ------------------------------------------------------------------*/
+#define UARTS {USART1, USART2, USART3, UART4, UART5}
+#define UART_PINS {\
+/* TX   RX   CTS  RTS */	\
+PA9, PA10,PA11,PA12,/* USART1 */	\
+PA2, PA3, PA0, PA1, /* USART2 */	\
+PB10,PB11,PB13,PB14,/* USART3 */	\
+PC10,PC11,P0,  P0,  /* UART4  */	\
+PC12, PD2,P0,  P0,  /* UART5  */	\
+}
+#define UART_PINS_FULLREMAP {\
+/* TX   RX   CTS  RTS */	\
+PB6, PB7, PA11,PA12,/* USART1 AFIO_MAPR_USART1_REMAP */	\
+PD5, PD6, PD3, PD4, /* USART2 AFIO_MAPR_USART2_REMAP */	\
+PD8, PD9, PD11,PD12,/* USART3 AFIO_MAPR_USART3_REMAP_FULLREMAP */	\
+PC10,PC11,P0,  P0,  /* UART4  */	\
+PC12, PD2,P0,  P0,  /* UART5  */	\
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #define UARTS {USART1,USART2,USART3,UART4,UART5}
 
 SerialPort::SerialPort()
