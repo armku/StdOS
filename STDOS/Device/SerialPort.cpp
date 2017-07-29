@@ -7,16 +7,6 @@
 	#include "stm32f4xx.h"
 #endif
 
-
-
-
-
-
-
-
-
-
-
 /* 通用同步/异步收发器(USART)针脚 ------------------------------------------------------------------*/
 #define UARTS {USART1, USART2, USART3, UART4, UART5}
 #define UART_PINS {\
@@ -35,21 +25,6 @@ PD8, PD9, PD11,PD12,/* USART3 AFIO_MAPR_USART3_REMAP_FULLREMAP */	\
 PC10,PC11,P0,  P0,  /* UART4  */	\
 PC12, PD2,P0,  P0,  /* UART5  */	\
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#define UARTS {USART1,USART2,USART3,UART4,UART5}
 
 SerialPort::SerialPort()
 {
@@ -88,8 +63,6 @@ void SerialPort::Init()
     Remap = 0;
 }
 
-#define UART_PINS {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}
-#define UART_PINS_FULLREMAP {PA9,PA10,PA2,PA3,PB10,PB11,PC10,PC11,PC12,PD3}   //需要整理
 // 获取引脚
 void GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
 {
