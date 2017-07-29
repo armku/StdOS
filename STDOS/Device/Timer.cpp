@@ -12,15 +12,6 @@ Timer1 Timer8 ¸ß¼¶¶¨Ê±Æ÷£¬¾ßÓÐ»ù±¾¶¨Ê±Æ÷ Í¨ÓÃ¶¨Ê±Æ÷ËùÓÐ¹¦ÄÜ£¬ÈýÏàÁù²½µç»ú£¬É²³µ¹
 	#include "stm32f4xx.h"
 #endif
 
-
-
-
-
-
-
-
-
-
 /* ¶¨Ê±Æ÷Õë½Å ------------------------------------------------------------------*/
 #define TIMS {TIM1, TIM2, TIM3, TIM4, TIM5, TIM6, TIM7, TIM8}
 #define TIM_PINS {\
@@ -44,22 +35,7 @@ P0,  P0,  P0,  P0,	/* TIM7 */	\
 PC6, PC7, PC8, PC9	/* TIM8 */	\
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 static Timer **Timers = NULL; // ÒÑ¾­ÊµÀý»¯µÄ¶¨Ê±Æ÷¶ÔÏó
-#define TIMS {TIM1,TIM2,TIM3,TIM4,TIM5}
 static TIM_TypeDef *const g_Timers[] = TIMS;
 const byte Timer::TimerCount = ArrayLength(g_Timers);
 

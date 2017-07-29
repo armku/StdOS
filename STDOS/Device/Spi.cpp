@@ -7,14 +7,6 @@
     #include "stm32f4xx.h"
 #endif 
 
-
-
-
-
-
-
-
-
 /* 串行外设接口(SPI)针脚 ------------------------------------------------------------------*/
 //#define SPI_NSS_PINS  {4, 28, 15} // PA4, PB12, PA15
 //#define SPI_SCLK_PINS {5, 29, 19} // PA5, PB13, PB3
@@ -27,15 +19,6 @@
 {PB12,PB13,PB14,PB15},\
 {PA15,PB3, PB4, PB5 }\
 }
-
-
-
-
-
-
-
-
-
 
 void Spi::Init()
 {
