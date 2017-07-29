@@ -6,49 +6,11 @@
     #include "stm32f4xx.h"
 #endif 
 
-
-
-
-
-
-
-
-
-
-
-
-
-// 获取组和针脚
-#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (uint16_t)0xF0) << 6)))
-#define _PORT(PIN) (1 << ((PIN) & (uint16_t)0x0F))
-#define _PIN(PIN) (PIN & 0x0F)
-#define _PIN_NAME(pin) ('A' + (pin >> 4)), (pin & 0x0F)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void SetEXIT(int pinIndex, bool enable);
-
 // 获取组和针脚
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
+void SetEXIT(int pinIndex, bool enable);
 
 #if defined(STM32F1) || defined(STM32F4)
     #if 0
