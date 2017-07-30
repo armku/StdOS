@@ -13,16 +13,16 @@
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STM32F103VE</Device>
+          <Device>STM32F072VB</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F1xx_DFP.2.0.0</PackID>
+          <PackID>Keil.STM32F0xx_DFP.1.5.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
-          <Cpu>IRAM(0x20000000,0x10000) IROM(0x08000000,0x80000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
+          <Cpu>IRAM(0x20000000,0x4000) IROM(0x08000000,0x20000) CPUTYPE("Cortex-M0") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F10x_512 -FS08000000 -FL080000 -FP0($$Device:STM32F103VE$Flash\STM32F10x_512.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F0xx_128 -FS08000000 -FL020000 -FP0($$Device:STM32F072VB$Flash\STM32F0xx_128.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:STM32F103VE$Device\Include\stm32f10x.h</RegisterFile>
+          <RegisterFile>$$Device:STM32F072VB$Device\Include\stm32f0xx.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -32,7 +32,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:STM32F103VE$SVD\STM32F103xx.svd</SFDFile>
+          <SFDFile>$$Device:STM32F072VB$SVD\STM32F0x2.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -109,13 +109,13 @@
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
-          <SimDllArguments> -REMAP</SimDllArguments>
-          <SimDlgDll>DCM.DLL</SimDlgDll>
-          <SimDlgDllArguments>-pCM3</SimDlgDllArguments>
+          <SimDllArguments> -REMAP </SimDllArguments>
+          <SimDlgDll>DARMCM1.DLL</SimDlgDll>
+          <SimDlgDllArguments>-pCM0</SimDlgDllArguments>
           <TargetDllName>SARMCM3.DLL</TargetDllName>
-          <TargetDllArguments></TargetDllArguments>
-          <TargetDlgDll>TCM.DLL</TargetDlgDll>
-          <TargetDlgDllArguments>-pCM3</TargetDlgDllArguments>
+          <TargetDllArguments> </TargetDllArguments>
+          <TargetDlgDll>TARMCM1.DLL</TargetDlgDll>
+          <TargetDlgDllArguments>-pCM0</TargetDlgDllArguments>
         </DllOption>
         <DebugOption>
           <OPTHX>
@@ -173,7 +173,7 @@
             <AdsLsxf>1</AdsLsxf>
             <RvctClst>0</RvctClst>
             <GenPPlst>0</GenPPlst>
-            <AdsCpuType>"Cortex-M3"</AdsCpuType>
+            <AdsCpuType>"Cortex-M0"</AdsCpuType>
             <RvctDeviceName></RvctDeviceName>
             <mOS>0</mOS>
             <uocRom>0</uocRom>
@@ -243,12 +243,12 @@
               <IRAM>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x10000</Size>
+                <Size>0x4000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x80000</Size>
+                <Size>0x20000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -273,7 +273,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x80000</Size>
+                <Size>0x20000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -298,7 +298,7 @@
               <OCR_RVCT9>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x10000</Size>
+                <Size>0x4000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
@@ -333,7 +333,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--cpp11</MiscControls>
-              <Define>STM32F0,DEBUG,STM32F10X_HD, USE_STDPERIPH_DRIVER</Define>
+              <Define>STM32F0,DEBUG,STM32F072, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
               <IncludePath>..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\SYSTEM\STM32F0\CMSIS;..\SYSTEM\STM32F0\FWLib\inc;..\Util</IncludePath>
             </VariousControls>
@@ -393,9 +393,9 @@
           <GroupName>startup</GroupName>
           <Files>
             <File>
-              <FileName>startup_stm32f10x_hd.s</FileName>
+              <FileName>startup_stm32f072.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\SYSTEM\STM32F1\startup\startup_stm32f10x_hd.s</FilePath>
+              <FilePath>..\SYSTEM\STM32F0\startup\startup_stm32f072.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -403,14 +403,9 @@
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>core_cm3.c</FileName>
+              <FileName>system_stm32f0xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\CMSIS\core_cm3.c</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f10x.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\CMSIS\system_stm32f10x.c</FilePath>
+              <FilePath>..\SYSTEM\STM32F0\CMSIS\system_stm32f0xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -441,6 +436,123 @@
         </Group>
         <Group>
           <GroupName>FWLIB</GroupName>
+          <Files>
+            <File>
+              <FileName>stm32f0xx_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_can.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_cec.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_cec.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_comp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_comp.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_crc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_crs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_crs.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_dac.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_dac.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_dbgmcu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_dbgmcu.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_iwdg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_misc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_misc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_pwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_syscfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_syscfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_wwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_wwdg.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>DOC</GroupName>
@@ -1316,9 +1428,9 @@
           <GroupName>startup</GroupName>
           <Files>
             <File>
-              <FileName>startup_stm32f10x_hd.s</FileName>
+              <FileName>startup_stm32f072.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\SYSTEM\STM32F1\startup\startup_stm32f10x_hd.s</FilePath>
+              <FilePath>..\SYSTEM\STM32F0\startup\startup_stm32f072.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -1326,14 +1438,9 @@
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>core_cm3.c</FileName>
+              <FileName>system_stm32f0xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\CMSIS\core_cm3.c</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f10x.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\CMSIS\system_stm32f10x.c</FilePath>
+              <FilePath>..\SYSTEM\STM32F0\CMSIS\system_stm32f0xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1364,6 +1471,123 @@
         </Group>
         <Group>
           <GroupName>FWLIB</GroupName>
+          <Files>
+            <File>
+              <FileName>stm32f0xx_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_can.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_cec.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_cec.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_comp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_comp.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_crc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_crs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_crs.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_dac.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_dac.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_dbgmcu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_dbgmcu.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_iwdg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_misc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_misc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_pwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_syscfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_syscfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_wwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F0\FWLib\src\stm32f0xx_wwdg.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>DOC</GroupName>

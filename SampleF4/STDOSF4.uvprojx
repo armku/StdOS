@@ -955,6 +955,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\RX8025T.cpp</FilePath>
             </File>
+            <File>
+              <FileName>AD7124.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AD7124.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2029,6 +2034,11 @@
               <FileName>RX8025T.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\RX8025T.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7124.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AD7124.cpp</FilePath>
             </File>
           </Files>
         </Group>
