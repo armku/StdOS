@@ -1,11 +1,24 @@
 #include "AD7124.h"
 
 
-AD7124::AD7124()
+#if AD7124SPISOFT
+AD7124::AD7124(SpiSoft *spi)
+#else
+AD7124::AD7124(Spi *spi)
+#endif
 {
 	
 }
-
+//返回-1,表示转换未完成
+int AD7124::Read(void)
+{
+	return 0;
+}
+//读取AD转换是否正常
+bool AD7124::GetFlag(void)
+{
+	return true;
+}
 
 
 
