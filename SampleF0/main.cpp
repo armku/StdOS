@@ -1,55 +1,53 @@
-#include "Sys.h"
-#include "Device\Port.h"
-//#include "Device\SerialPort.h"
+#include <stdio.h>
+#include "SerialPort.h"
+#include "Drivers\AT24CXX.h"
+#include "Drivers\W25QXXX.h"
+#include "Drivers\Button.h"
+#include "SString.h"
+#include "string.h"
+#include "List.h"
+#include "Spi.h"
+#include "Flash.h"
+#include "Drivers\lcd_dr.h"
+#include "TInterrupt.h"
 
-void LedTask(void* param)
+
+const byte vers[] = "yyyy-MM-dd HH:mm:ss";
+#if 1
+    OutputPort led1(PB0,false);
+    OutputPort led2(PF7,false);
+    OutputPort led3(PF8,false);
+#else 
+    OutputPort led1(PD0,false);
+    OutputPort led2(PD1,false);
+    OutputPort led3(PD2,false);
+	OutputPort ledLCD(PD12,false);
+#endif 
+
+void LedTask(void *param)
 {
-    auto leds	= (OutputPort*)param;
-    *leds = !*leds;
+    OutputPort *leds = (OutputPort*)param;
+    *leds = ! * leds;
+    //    led2 = key0;
 }
 
-void OnPress(InputPort& port, bool down)
-{
-    debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
-}
-
+#define namee "StdOS"
+void W25Q64Test();
 int main(void)
 {
-    // 初始化系统
-    //Sys.Clock = 72000000;
-    //Sys.MessagePort = COM1;
-    Sys.Init();
-    //Sys.InitClock();
-    Sys.ShowInfo();
+    TSys &sys = (TSys &)(Sys);
 
-    // 初始化为输出
-	OutputPort leds[] = {PD0, PD1};
-	for(int i=0; i<ArrayLength(leds); i++)
-		leds[i].Invert = true;
+    sys.Name = (char*)namee;
+    byte aa = vers[0];
+    aa = aa;
 
-    // 初始化为中断输入
-    Pin ips[] = { PE9, PE8, PE4, PE5, PE6, PE7};
-    InputPort btns[6];
-	for(int i=0; i<ArrayLength(btns); i++)
-	{
-		btns[i].Index = i;
-		btns[i].Set(ips[i]);
-		btns[i].Press = OnPress;
-		btns[i].UsePress();
-		btns[i].Open();
-	}
+    sys.Init();
+    #if DEBUG
+        Sys.MessagePort = COM1;
+        Sys.ShowInfo();
+    #endif 	
+	W25Q64Test();	
+	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
-	Sys.AddTask(LedTask, &leds[0], 500, 500, "Led闪烁");
-
-	/*Buffer::Test();
-	Array::Test();
-	String::Test();
-	DateTime::Test();
-	IList::Test();
-	IDictionary::Test();*/
-	/*OutputPort power(PE2);
-	power = true;
-	SerialPort::Test();*/
-
-    Sys.Start();
+    Sys.Start();	
 }
