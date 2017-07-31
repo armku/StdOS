@@ -124,11 +124,13 @@ bool SerialPort::OnOpen()
         }
         switch (_stopBits)
         {
-            #ifdef STM32F10X
+			#ifdef STM32F0
+            #elif defined STM32F1
                 case USART_StopBits_0_5:
                     debug_printf(", StopBits_0_5");
                     break;
-                #endif 
+            #elif defined STM32F4
+			#endif 
             case USART_StopBits_1:
                 debug_printf(", StopBits_1");
                 break;
@@ -151,7 +153,8 @@ bool SerialPort::OnOpen()
 
     //串口引脚初始化
     AlternatePort txx;
-	#ifdef STM32F1
+	#ifdef STM32F0
+	#elif defined STM32F1
 		InputPort rxx;
 	#elif defined STM32F4
 		AlternatePort rxx;
@@ -165,7 +168,8 @@ bool SerialPort::OnOpen()
     // USART_DeInit其实就是关闭时钟，这里有点多此一举。但为了安全起见，还是使用
 
     // 检查重映射
-    #ifdef STM32F1
+	#ifdef STM32F0
+    #elif defined STM32F1
         if (Remap)
         {
             switch (this->Index)
@@ -182,22 +186,11 @@ bool SerialPort::OnOpen()
             }
         }
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-    #endif 
+    #elif defined STM32F4
+	#endif 
 
     // 打开 UART 时钟。必须先打开串口时钟，才配置引脚
-    #ifdef STM32F0XX
-        switch (this->Index)
-        {
-            case COM1:
-                RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
-                break; //开启时钟
-            case COM2:
-                RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
-                break;
-            default:
-                break;
-        }
-    #else 
+    #if defined(STM32F1) || defined(STM32F4) 
         if (this->Index)
         {
             // COM2-5 on APB1
@@ -209,12 +202,25 @@ bool SerialPort::OnOpen()
             RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
             //RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); //此代码功能同上行
         }
+	#elif defined STM32F0
+		switch (this->Index)
+        {
+            case COM1:
+                RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+                break; //开启时钟
+            case COM2:
+                RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+                break;
+            default:
+                break;
+        }
     #endif 
 
     #ifdef STM32F0
         GPIO_PinAFConfig(_GROUP(tx), _PIN(tx), GPIO_AF_1); //将IO口映射为USART接口
         GPIO_PinAFConfig(_GROUP(rx), _PIN(rx), GPIO_AF_1);
-    #elif defined STM32F4
+    #elif defined STM32F1
+	#elif defined STM32F4
         const byte afs[] = 
         {
             GPIO_AF_USART1, GPIO_AF_USART2, GPIO_AF_USART3, GPIO_AF_UART4, GPIO_AF_UART5, GPIO_AF_USART6, GPIO_AF_UART7, GPIO_AF_UART8
@@ -267,7 +273,8 @@ void SerialPort::OnClose()
     //    USART_DeInit(_port);
 
     // 检查重映射
-    #ifdef STM32F1
+	#ifdef STM32F0
+    #elif defined STM32F1
         if (Remap)
         {
             //            switch (_index)
@@ -283,6 +290,7 @@ void SerialPort::OnClose()
             //                    break;
             //            }
         }
+	#elif defined STM32F4
     #endif 
 }
 
@@ -406,9 +414,10 @@ void SerialPort::SetBaudRate(int baudRate)
 	this->_baudRate=baudRate;
 	this->OnOpen();
 }
-#ifdef STM32F10X_HD
+#ifdef STM32F0
+#elif defined STM32F1
     #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
-#else 
+#elif defined STM32F4 
     #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn}
 #endif 
 void OnUsartReceive(ushort num, void *param);
