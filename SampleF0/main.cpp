@@ -1,3 +1,24 @@
+#include "Port.h"
+
+void main()
+{
+	while(1)
+	{
+	}
+}
+
+
+
+
+
+
+
+
+
+
+#ifdef STM32F0TESTOLD
+
+
 #include <stdio.h>
 #include "SerialPort.h"
 #include "Drivers\AT24CXX.h"
@@ -51,3 +72,4 @@ int main(void)
 
     Sys.Start();	
 }
+#endif

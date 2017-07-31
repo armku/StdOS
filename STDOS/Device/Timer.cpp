@@ -5,10 +5,12 @@ Timer1 Timer8 ¸ß¼¶¶¨Ê±Æ÷£¬¾ßÓĞ»ù±¾¶¨Ê±Æ÷ Í¨ÓÃ¶¨Ê±Æ÷ËùÓĞ¹¦ÄÜ£¬ÈıÏàÁù²½µç»ú£¬É²³µ¹
 */
 #include "Timer.h"
 #include "TInterrupt.h"
-#ifdef STM32F1
+
+#ifdef STM32F0
+	#include "stm32f0xx.h"
+#elif defined STM32F1
 	#include "stm32f10x.h"
-#endif
-#ifdef STM32F4
+#elif defined STM32F4
 	#include "stm32f4xx.h"
 #endif
 
