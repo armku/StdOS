@@ -11,7 +11,11 @@
 #endif
 
 /* 通用同步/异步收发器(USART)针脚 ------------------------------------------------------------------*/
+#if defined(STM32F1) || defined(STM32F4) 
 #define UARTS {USART1, USART2, USART3, UART4, UART5}
+#elif defined STM32F0
+#define UARTS {USART1, USART2, USART3}
+#endif
 #define UART_PINS {\
 /* TX   RX   CTS  RTS */	\
 PA9, PA10,PA11,PA12,/* USART1 */	\
@@ -415,6 +419,7 @@ void SerialPort::SetBaudRate(int baudRate)
 	this->OnOpen();
 }
 #ifdef STM32F0
+	#define UART_IRQs {USART1_IRQn,USART2_IRQn}
 #elif defined STM32F1
     #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
 #elif defined STM32F4 

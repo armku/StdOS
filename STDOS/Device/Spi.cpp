@@ -130,7 +130,10 @@ void Spi::Init(SPI spi, uint speedHz)
                 GPIO_PinAFConfig(GPIOC, GPIO_PinSource11, GPIO_AF_SPI3); //PC11复用为 SPI3
                 GPIO_PinAFConfig(GPIOC, GPIO_PinSource12, GPIO_AF_SPI3); //PC12复用为 SPI3
             #endif 
+			#if defined(STM32F1) || defined(STM32F4) 
             this->_SPI = SPI3;
+			#elif defined STM32F0
+			#endif
             break;
         default:
             break;
@@ -147,7 +150,10 @@ void Spi::Init(SPI spi, uint speedHz)
             RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
             break;
         case Spi3:
+			#if defined(STM32F1) || defined(STM32F4) 
             RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
+			#elif defined STM32F0
+			#endif
             break;
         default:
             break;
@@ -207,7 +213,10 @@ void Spi::Init(SPI spi, uint speedHz)
             RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
             break;
         case Spi3:
+			#if defined(STM32F1) || defined(STM32F4) 
             RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
+			#elif defined STM32F0
+			#endif
             break;
         default:
             break;

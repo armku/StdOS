@@ -15,7 +15,11 @@ Timer1 Timer8 ¸ß¼¶¶¨Ê±Æ÷£¬¾ßÓÐ»ù±¾¶¨Ê±Æ÷ Í¨ÓÃ¶¨Ê±Æ÷ËùÓÐ¹¦ÄÜ£¬ÈýÏàÁù²½µç»ú£¬É²³µ¹
 #endif
 
 /* ¶¨Ê±Æ÷Õë½Å ------------------------------------------------------------------*/
+#if defined(STM32F1) || defined(STM32F4) 
 #define TIMS {TIM1, TIM2, TIM3, TIM4, TIM5, TIM6, TIM7, TIM8}
+#elif defined STM32F0
+#define TIMS {TIM1, TIM2, TIM3}
+#endif
 #define TIM_PINS {\
 PA8, PA9, PA10,PA11,/* TIM1 */	\
 PA0, PA1, PA2, PA3, /* TIM2 */	\
@@ -158,6 +162,7 @@ void Timer::Config()
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, DISABLE); /*ÏÈ¹Ø±ÕµÈ´ýÊ¹ÓÃ*/
             Interrupt.SetPriority(29, 3);//TIM3_IRQn
             break;
+		#if defined(STM32F1) || defined(STM32F4)
         case Timer4:
              /* ÉèÖÃTIM2CLK Îª 72MHZ */
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
@@ -244,6 +249,8 @@ void Timer::Config()
             break;
         case Timer18:
             break;
+		#elif defined STM32F0
+		#endif
         default:
             break;
     }
@@ -326,6 +333,7 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
         case Timer3:
             Interrupt.Activate(29, Timer::OnHandler, this);
             break;
+		#if defined(STM32F1) || defined(STM32F4)
         case Timer4:
             Interrupt.Activate(30, Timer::OnHandler, this);
             break;
@@ -340,6 +348,8 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
             break;
         case Timer8:
             break;
+		#elif defined STM32F0
+		#endif
         default:
             break;
     }
@@ -375,6 +385,7 @@ void Timer::ClockCmd(int idx, bool state)
             case 5:
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, st);
                 break;
+			#elif defined STM32F0
             #endif 
         case 6:
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, st);
@@ -386,8 +397,11 @@ void Timer::ClockCmd(int idx, bool state)
             case 8:
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8, st);
                 break;
+			#elif defined STM32F0
             #endif 
-            #ifdef STM32F4
+			#ifdef STM32F0
+			#elif defined STM32F1
+            #elif defined STM32F4
             case 9:
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM9, st);
                 break;
@@ -420,6 +434,8 @@ void Timer::ClockCmd(int idx, bool state)
             case 17:
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM17, st);
                 break;
+			#elif defined STM32F1
+			#elif defined STM32F4
             #endif 
     }
 }
@@ -481,7 +497,8 @@ void Timer::OnOpen()
         case Timer3:
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
             break;
-        case Timer4:
+        #if defined(STM32F1) || defined(STM32F4)
+		case Timer4:
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
             break;
         case Timer5:
@@ -515,6 +532,8 @@ void Timer::OnOpen()
             break;
         case Timer18:
             break;
+		#elif defined STM32F0
+		#endif
         default:
             break;
     }
@@ -533,6 +552,7 @@ void Timer::OnClose()
         case Timer3:
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, DISABLE);
             break;
+		#if defined(STM32F1) || defined(STM32F4)
         case Timer4:
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, DISABLE);
             break;
@@ -567,6 +587,8 @@ void Timer::OnClose()
             break;
         case Timer18:
             break;
+		#elif defined STM32F0
+		#endif
         default:
             break;
     }

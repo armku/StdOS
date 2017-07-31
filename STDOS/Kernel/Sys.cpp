@@ -280,7 +280,8 @@ UInt64 TicksPerms = 0;
 void TSys::Init()
 {
     SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
-    #ifdef STM32F1
+    #ifdef STM32F0
+	#elif defined STM32F1
         fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数   
         TicksPerms = SystemCoreClock / delay_ostickspersec;
     #elif defined STM32F4
@@ -288,14 +289,16 @@ void TSys::Init()
         TicksPerms = SystemCoreClock / delay_ostickspersec;
     #endif 
     SysTick_Config(TicksPerms); //tick is 1ms	
-    #ifdef STM32F1
+    #ifdef STM32F0
+	#elif defined STM32F1
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
         GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); //关闭jtag，保留swd	
-    #endif 
+    #elif defined STM32F4
+	#endif 
 
     NVIC_SetPriority(SysTick_IRQn, 0);
 
-    #ifdef STM32F0XX
+    #ifdef STM32F0
         void *p = (void*)0x1FFFF7AC;
     #elif defined STM32F1 
         void *p = (void*)0x1FFFF7E8;
@@ -310,7 +313,7 @@ void TSys::Init()
     this->RevID = MCUID >> 16;
     this->DevID = MCUID &0x0FFF;
 
-    #ifdef STM32F0XX
+    #ifdef STM32F0
         FlashSize = *(__IO ushort*)(0x1FFFF7CC); // 容量
     #elif defined STM32F1 
         FlashSize = *(__IO ushort*)(0x1FFFF7E0); // 容量
@@ -319,7 +322,8 @@ void TSys::Init()
     #endif 
     switch (this->DevID)
     {
-        #ifdef STM32F1
+		#ifdef STM32F0
+        #elif defined STM32F1
             case 0X0307:
                 CPUName = new String("STM32F103RD");
                 this->RAMSize = 64;

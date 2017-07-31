@@ -351,6 +351,7 @@ void Pwm::SetPulse(int idx, ushort pulse)
 			}
             break;
         case Timer4:
+			#if defined(STM32F1) || defined(STM32F4)
             switch(idx)
 			{
 				case 0:
@@ -368,8 +369,11 @@ void Pwm::SetPulse(int idx, ushort pulse)
 				default:
 					break;
 			}
+			#elif defined STM32F0
+			#endif
 			break;
         case Timer5:
+			#if defined(STM32F1) || defined(STM32F4)
             switch(idx)
 			{
 				case 0:
@@ -387,6 +391,8 @@ void Pwm::SetPulse(int idx, ushort pulse)
 				default:
 					break;
 			}
+			#elif defined STM32F0
+			#endif
 			break;
         case Timer6:
             break;
