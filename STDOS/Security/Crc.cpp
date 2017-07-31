@@ -49,12 +49,14 @@ uint Crc(const void *buf, uint len, uint crc)
 
 uint Crc(const void *buf, uint len)
 {
-    #ifdef STM32F4
+    #ifdef STM32F0
+	#elif defined STM32F1
+		RCC_AHBPeriphClockCmd(RCC_AHBPeriph_CRC, ENABLE);
+	#elif defined STM32F4
         RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_CRC, ENABLE);
-    #else 
-        RCC_AHBPeriphClockCmd(RCC_AHBPeriph_CRC, ENABLE);
     #endif 
 
+	#if defined(STM32F1) || defined(STM32F4)
     CRC_ResetDR();
     // STM32的初值是0xFFFFFFFF，而软Crc初值是0
     //CRC->DR = __REV(crc ^ 0xFFFFFFFF);
@@ -65,12 +67,17 @@ uint Crc(const void *buf, uint len)
     {
         CRC->DR = __REV(*ptr++); // 字节顺序倒过来,注意不是位序,不是用__RBIT指令
     }
+	
     uint crc = CRC->DR;
-
-    #ifdef STM32F4
+	#elif defined STM32F0
+	uint crc=0;
+	#endif
+	
+	#ifdef STM32F0
+	#elif defined STM32F1
+		RCC_AHBPeriphClockCmd(RCC_AHBPeriph_CRC, DISABLE);
+    #elif defined STM32F4
         RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_CRC, DISABLE);
-    #else 
-        RCC_AHBPeriphClockCmd(RCC_AHBPeriph_CRC, DISABLE);
     #endif 
 
     return crc;
