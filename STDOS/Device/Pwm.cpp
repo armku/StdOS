@@ -88,6 +88,7 @@ void Pwm::Open()
 			TIM_ARRPreloadConfig(TIM3, ENABLE); //使能TIM3重载寄存器ARR
             break;
         case Timer4:
+			#if defined(STM32F1) || defined(STM32F4)			
             if(this->Enabled[0])
 			{
 				TIM_OC1Init(TIM4, &TIM_OCInitStructure); //使能通道3
@@ -98,6 +99,7 @@ void Pwm::Open()
 				TIM_OC2Init(TIM4, &TIM_OCInitStructure); //使能通道3
 				TIM_OC2PreloadConfig(TIM4, TIM_OCPreload_Enable); //使能预装载	
 			}
+			
 			if(this->Enabled[2])
 			{
 				TIM_OC3Init(TIM4, &TIM_OCInitStructure); //使能通道3
@@ -107,11 +109,13 @@ void Pwm::Open()
 			{
 				TIM_OC4Init(TIM4, &TIM_OCInitStructure); //使能通道3
 				TIM_OC4PreloadConfig(TIM4, TIM_OCPreload_Enable); //使能预装载	
-			}
-			
+			}			
 			TIM_ARRPreloadConfig(TIM4, ENABLE); //使能TIM3重载寄存器ARR
-            break;
+            #elif defined STM32F0
+			#endif
+			break;
         case Timer5:
+			#if defined(STM32F1) || defined(STM32F4)
             if(this->Enabled[0])
 			{
 				TIM_OC1Init(TIM5, &TIM_OCInitStructure); //使能通道3
@@ -131,10 +135,11 @@ void Pwm::Open()
 			{
 				TIM_OC4Init(TIM5, &TIM_OCInitStructure); //使能通道3
 				TIM_OC4PreloadConfig(TIM5, TIM_OCPreload_Enable); //使能预装载	
-			}
-			
+			}			
 			TIM_ARRPreloadConfig(TIM5, ENABLE); //使能TIM3重载寄存器ARR
-            break;
+            #elif defined STM32F0
+			#endif
+			break;
         case Timer6:
             break;
         case Timer7:
