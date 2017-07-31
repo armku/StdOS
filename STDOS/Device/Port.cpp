@@ -54,7 +54,8 @@ Port::Port()
 #ifndef TINY	
     Port::~Port()
     {
-        #ifdef STM32F1
+		#ifdef STM32F0
+        #elif defined STM32F1
             // 恢复为初始化状态
             //            ushort bits = PinBit;
             //            int config = InitState &0xFFFFFFFF;
@@ -80,7 +81,8 @@ Port::Port()
             //                    }
             //                }
             //            }
-        #endif 
+        #elif defined STM32F4
+		#endif 
     }
 #endif 
 
@@ -102,12 +104,13 @@ Port &Port::Set(Pin pin)
     //        this->State = NULL;
     //        //        PinBit = 0;
     //    }
-
-    #ifdef STM32F1
+	#ifdef STM32F0
+    #elif defined STM32F1
         // 整组引脚的初始状态，析构时有选择恢复
         //        if (_Pin != P0)
         //            InitState = ((UInt64)((GPIO_TypeDef *)this->State)->CRH << 32) + ((GPIO_TypeDef *)this->State)->CRL;
-    #endif 
+    #elif defined STM32F4
+	#endif 
 
 
     this->Open();
