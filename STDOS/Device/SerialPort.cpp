@@ -158,6 +158,7 @@ bool SerialPort::OnOpen()
     //串口引脚初始化
     AlternatePort txx;
 	#ifdef STM32F0
+		InputPort rxx;
 	#elif defined STM32F1
 		InputPort rxx;
 	#elif defined STM32F4

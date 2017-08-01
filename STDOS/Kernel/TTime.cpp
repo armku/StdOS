@@ -48,13 +48,14 @@ uint TTime::CurrentTicks()const
 // 当前毫秒数
 UInt64 TTime::Current()const
 {
-    #if 1
-        UInt64 ret = this->Milliseconds *1000;//先转换为us
+	UInt64 ret=0;
+    #if defined(STM32F1) || defined(STM32F4)	
+        ret = this->Milliseconds *1000;//先转换为us
         ret += (TicksPerms - SysTick->VAL) / fac_us;
-        return ret;
-    #else 
-        return this->mCurrent *1000;
-    #endif 
+    #elif defined STM32F0
+	#endif
+        //return this->mCurrent *1000;
+    return ret;    
 }
 
 // 设置时间
@@ -72,13 +73,23 @@ void TTime::Delay(int us)const
 {
     uint ticks;
     uint told, tnow, tcnt = 0;
-    uint reload = SysTick->LOAD; //LOAD的值
+	uint reload=0;
+	#if defined(STM32F1) || defined(STM32F4)
+    reload = SysTick->LOAD; //LOAD的值
+	#elif defined STM32F0
+	#endif
     ticks = us * fac_us; //需要的节拍数
     tcnt = 0;
+	#if defined(STM32F1) || defined(STM32F4)
     told = SysTick->VAL; //刚进入时的计数器值
+	#elif defined STM32F0
+	#endif
     while (1)
     {
+		#if defined(STM32F1) || defined(STM32F4)
         tnow = SysTick->VAL;
+		#elif defined STM32F0
+		#endif
         if (tnow != told)
         {
             if (tnow < told)
@@ -190,7 +201,10 @@ void TimeCost::Show(cstring format)const
     //采用如下方法实现执行汇编指令WFI  
     void WFI_SET(void)
     {
+		#if defined(STM32F1) || defined(STM32F4)
         __ASM volatile("wfi");
+		#elif defined STM32F0
+		#endif
     }
 
     //设置栈顶地址
