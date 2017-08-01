@@ -638,7 +638,7 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
         nsspp = 1; //PG7输出1,防止NRF干扰SPI FLASH的通信 
 
 		#if W25QXXXUSESPISOFT
-			spi128.SetPin(PB3, PB4, PB5);
+			spi128.SetPin(PG6,PG7,PG8);//PB3, PB4, PB5);
             spi128.CPOL = CPOL_High;
             spi128.CPHA = CPHA_2Edge;
 		#endif
@@ -651,6 +651,7 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
         //检测不到W25Q128
         {
             printf("W25Q128 Check Failed!\r\n");
+			return;
         }
         printf("W25Q128 Ready!\r\n");
         FLASH_SIZE = 16 * 1024 * 1024; //FLASH 大小为16字节
