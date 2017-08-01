@@ -869,7 +869,11 @@ void OnUsartReceive(ushort num, void *param);
     {
         if (EXTI_GetITStatus(EXTI_Line0) != RESET)
         {
-            EXTI_IRQHandler(EXTI0_IRQn, 0);
+			#if defined(STM32F1) || defined(STM32F4)			
+				EXTI_IRQHandler(EXTI0_IRQn, 0);
+			#elif defined STM32F0
+				EXTI_IRQHandler(EXTI0_1_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line0);
         }
     }
@@ -878,7 +882,11 @@ void OnUsartReceive(ushort num, void *param);
     {
         if (EXTI_GetITStatus(EXTI_Line1) != RESET)
         {
-            EXTI_IRQHandler(EXTI1_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+				EXTI_IRQHandler(EXTI0_IRQn, 0);
+			#elif defined STM32F0
+				EXTI_IRQHandler(EXTI0_1_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line1);
         }
     }
@@ -887,7 +895,11 @@ void OnUsartReceive(ushort num, void *param);
     {
         if (EXTI_GetITStatus(EXTI_Line2) != RESET)
         {
-            EXTI_IRQHandler(EXTI2_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+				EXTI_IRQHandler(EXTI2_IRQn, 0);
+            #elif defined STM32F0
+				EXTI_IRQHandler(EXTI2_3_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line2);
         }
     }
@@ -896,7 +908,11 @@ void OnUsartReceive(ushort num, void *param);
     {
         if (EXTI_GetITStatus(EXTI_Line3) != RESET)
         {
-            EXTI_IRQHandler(EXTI3_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+				EXTI_IRQHandler(EXTI3_IRQn, 0);
+            #elif defined STM32F0
+				EXTI_IRQHandler(EXTI2_3_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line3);
         }
     }
@@ -905,7 +921,11 @@ void OnUsartReceive(ushort num, void *param);
     {
         if (EXTI_GetITStatus(EXTI_Line4) != RESET)
         {
-            EXTI_IRQHandler(EXTI4_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+				EXTI_IRQHandler(EXTI4_IRQn, 0);
+            #elif defined STM32F0
+				EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line4);
         }
     }
@@ -914,27 +934,47 @@ void OnUsartReceive(ushort num, void *param);
     {
         if (EXTI_GetITStatus(EXTI_Line5) != RESET)
         {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+				EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            #elif defined STM32F0
+				EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line5);
         }
         if (EXTI_GetITStatus(EXTI_Line6) != RESET)
         {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+			EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            #elif defined STM32F0
+				EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line6);
         }
         if (EXTI_GetITStatus(EXTI_Line7) != RESET)
         {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+			EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            #elif defined STM32F0
+				EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line7);
         }
         if (EXTI_GetITStatus(EXTI_Line8) != RESET)
         {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+			EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            #elif defined STM32F0
+				EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line8);
         }
         if (EXTI_GetITStatus(EXTI_Line9) != RESET)
         {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+			EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+            #elif defined STM32F0
+				EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line9);
         }
     }
@@ -943,32 +983,56 @@ void OnUsartReceive(ushort num, void *param);
     {
         if (EXTI_GetITStatus(EXTI_Line10) != RESET)
         {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+			EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            #elif defined STM32F0
+				EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line10);
         }
         if (EXTI_GetITStatus(EXTI_Line11) != RESET)
         {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+			EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            #elif defined STM32F0
+				EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line11);
         }
         if (EXTI_GetITStatus(EXTI_Line12) != RESET)
         {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+			EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            #elif defined STM32F0
+				EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line12);
         }
         if (EXTI_GetITStatus(EXTI_Line13) != RESET)
         {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+			EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            #elif defined STM32F0
+				EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line13);
         }
         if (EXTI_GetITStatus(EXTI_Line14) != RESET)
         {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+			EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            #elif defined STM32F0
+				EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line14);
         }
         if (EXTI_GetITStatus(EXTI_Line15) != RESET)
         {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            #if defined(STM32F1) || defined(STM32F4)			
+			EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+            #elif defined STM32F0
+				EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+			#endif
             EXTI_ClearITPendingBit(EXTI_Line15);
         }
     }
