@@ -616,6 +616,7 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
 }
 
 #if 0
+	//正点原子 探索者开发板
 	#if W25QXXXUSESPISOFT
         SpiSoft spi128;
     #else 
