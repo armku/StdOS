@@ -278,7 +278,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
     return true;
 }
 
-#if 1    
+#if 0    
 
     typedef enum
     {
@@ -615,7 +615,7 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
     };
 }
 
-#if 1
+#if 0
 	#if W25QXXXUSESPISOFT
         SpiSoft spi128;
     #else 
@@ -646,7 +646,7 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
         byte datatemp[sizeof(TEXT_Buffer)];
         uint FLASH_SIZE;
         w25q128.W25QXX_Init(); //W25QXX初始化
-        printf("SPI TEST\r\n");
+        printf("\r\nSPI TEST\r\n");
         while (w25q128.ReadID() != W25QXXX128)
         //检测不到W25Q128
         {

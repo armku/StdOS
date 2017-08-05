@@ -29,7 +29,7 @@ int main(void)
     #endif 	
 	//W25Q64Test();
 	//test();
-	w25q128test();
+	//w25q128test();
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	//Sys.AddTask(SerialTest,0,0,1000,"Serialtest");
 
