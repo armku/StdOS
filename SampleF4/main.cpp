@@ -18,7 +18,7 @@ void SerialTest(void *param)
 	static int i=0;
 	debug_printf("hello %4d\r\n",i++);
 }
-void w25q128test();
+
 int main(void)
 {
 	TSys &sys = (TSys &)(Sys);
@@ -26,10 +26,8 @@ int main(void)
 	#if DEBUG
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
-    #endif 	
-	//W25Q64Test();
+    #endif 		
 	//test();
-	//w25q128test();
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	//Sys.AddTask(SerialTest,0,0,1000,"Serialtest");
 
