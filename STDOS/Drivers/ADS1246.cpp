@@ -57,9 +57,9 @@
 #define ADC_CMD_SELFOCAL    0x62            //系统自校准  
 #define ADC_CMD_RESTRICTED  0xF1            //  
 #if ADS1246SPISOFT
-ADS1246::ADS1246(SpiSoft *spi,InputPort& pinrd, Pin pinreset)
+ADS1246::ADS1246(SpiSoft *spi,InputPort& pinrd, Pin pinreset,ADSPEEDTYPE spd)
 #else
-ADS1246::ADS1246(Spi *spi,InputPort& pinrd, Pin pinreset)
+ADS1246::ADS1246(Spi *spi,InputPort& pinrd, Pin pinreset,ADSPEEDTYPE spd)
 #endif
 {
 	this->ppinreset.Invert=false;
@@ -69,6 +69,8 @@ ADS1246::ADS1246(Spi *spi,InputPort& pinrd, Pin pinreset)
 	this->pspi=spi;
 	this->ppinrd=&pinrd;
     this->ppinreset=0;
+	this->speed=spd;
+	this->online=false;
 }
 
 byte ADS1246::ReadReg(byte RegAddr)
@@ -163,6 +165,10 @@ int ADS1246::Read(void) //返回-1,表示转换未完成
     this->pspi->Stop();
 
     Ret = decodead(Cmd);
+	if(this->readCnt>30)
+	{
+		this->online=true;
+	}
 
     return Ret;
 }
@@ -178,7 +184,7 @@ void ADS1246::Init(void)
     this->pspi->Start();
     this->WriteReg(ADC_REG_ID, 0x08); //DOUT兼容DRDY引脚   0X4A 00 08
     Sys.Sleep(40);
-    this->WriteReg(ADC_REG_SYS0, ADC_SPS_160 | ADC_GAIN_1); //调整采样速度
+    this->WriteReg(ADC_REG_SYS0, this->speed | ADC_GAIN_1); //调整采样速度
     this->pspi->Stop();
 
 
@@ -186,8 +192,13 @@ void ADS1246::Init(void)
 }
 void ADS1246::Reset(void)
 {
+	this->SetSpeed(this->speed);
+}
+//设置AD转换速度
+void  ADS1246::SetSpeed(ADSPEEDTYPE spd)
+{
 	this->pspi->Start();
-    this->WriteReg(ADC_REG_SYS0, ADC_SPS_160 | ADC_GAIN_1); //调整采样速度
+    this->WriteReg(ADC_REG_SYS0, spd | ADC_GAIN_1); //调整采样速度
     this->pspi->Stop();
 }
 
@@ -221,3 +232,64 @@ int  ADS1246::CheckSpeed(int checkTimems)
 	this->readCntCheck=0;
 	return ret;
 }
+//在线
+bool ADS1246::Online()
+{
+	return this->online;
+}
+//测试代码
+#if 0
+    InputPort exti_1(PD5); //1246中断接口
+    #if ADS1246SPISOFT
+        SpiSoft spi1;
+    #else 
+        Spi spi1(Spi2, CPOL_High, CPHA_1Edge);
+    #endif 
+    ADS1246 ads1246_1(&spi1, exti_1, PE1, ADC_SPS_80);
+    uint adsCnt1 = 0;
+    void adRead_1()
+    {
+        SetEXIT(5, false);
+        int adtmp = ads1246_1.Read();
+        SetEXIT(5, true);
+    }
+
+    void adRead_1();
+    volatile bool flaginad;
+    void adRead_1test(Pin pin, bool down, void *param)
+    {
+        if (down)
+        {
+            return ;
+        }
+        if (!flaginad)
+        {
+            flaginad = true;
+            adRead_1();
+            flaginad = false;
+        }
+    }
+
+    void adResetChk(void *param)
+    {
+        adsCnt1 = ads1246_1.CheckSpeed();
+        if (adsCnt1 < 30)
+        {
+            if (ads1246_1.Online())
+            {
+                ads1246_1.Reset();
+            }
+        }
+    }
+
+    void ads1246test()
+    {
+        #if ADS1246SPISOFT
+            spi1.SetPin(PB13, PB15, PB14);
+        #endif 
+        spi1.SetNss(PE0);
+        ads1246_1.Init();
+        exti_1.Register(adRead_1test);
+        Sys.AddTask(adResetChk, 0, 20000, 1000, "adSpeedchk");
+    }
+#endif
