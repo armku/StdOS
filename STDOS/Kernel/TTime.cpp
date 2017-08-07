@@ -1,9 +1,11 @@
 #include "TTime.h"
 #include "Device\RTC.h"
-#ifdef STM32F1
+
+#ifdef STM32F0
+    #include "stm32f0xx.h"
+#elif defined STM32F1
     #include "stm32f10x.h"
-#endif 
-#ifdef STM32F4
+#elif defined STM32F4
     #include "stm32f4xx.h"
 #endif 
 
@@ -17,26 +19,28 @@ void TTime::OnHandler(ushort num, void *param){
 
 TTime::TTime()
 {
-	this->BaseSeconds=0;
-	this->Seconds=0;
+    this->BaseSeconds = 0;
+    this->Seconds = 0;
 }
+
 void RtcRefresh(void *param)
 {
-	HardRTC *rtc = (HardRTC*)param;
+    HardRTC *rtc = (HardRTC*)param;
     rtc->LoadTime();
 }
+
 // 使用RTC，必须在Init前调用
 void TTime::UseRTC()
 {
-	HardRTC *rtc=HardRTC::Instance();
-	rtc->LowPower = false;
+    HardRTC *rtc = HardRTC::Instance();
+    rtc->LowPower = false;
     rtc->External = false;
 
-	rtc->Init();
-	Sys.AddTask(RtcRefresh, rtc, 100, 100, "Rtc");
+    rtc->Init();
+    Sys.AddTask(RtcRefresh, rtc, 100, 100, "Rtc");
 }
-void TTime::Init()
-{
+
+void TTime::Init(){
 
 }
 // 当前滴答时钟
@@ -48,14 +52,16 @@ uint TTime::CurrentTicks()const
 // 当前毫秒数
 UInt64 TTime::Current()const
 {
-	UInt64 ret=0;
+    UInt64 ret = 0;
     #if defined(STM32F1) || defined(STM32F4)	
-        ret = this->Milliseconds *1000;//先转换为us
+        ret = this->Milliseconds *1000; //先转换为us
         ret += (TicksPerms - SysTick->VAL) / fac_us;
     #elif defined STM32F0
-	#endif
-        //return this->mCurrent *1000;
-    return ret;    
+        ret = this->Milliseconds *1000; //先转换为us
+        ret += (TicksPerms - SysTick->VAL) / fac_us;
+    #endif 
+    //return this->mCurrent *1000;
+    return ret;
 }
 
 // 设置时间
@@ -73,23 +79,26 @@ void TTime::Delay(int us)const
 {
     uint ticks;
     uint told, tnow, tcnt = 0;
-	uint reload=0;
-	#if defined(STM32F1) || defined(STM32F4)
-    reload = SysTick->LOAD; //LOAD的值
-	#elif defined STM32F0
-	#endif
+    uint reload = 0;
+    #if defined(STM32F1) || defined(STM32F4)
+        reload = SysTick->LOAD; //LOAD的值
+    #elif defined STM32F0
+        reload = SysTick->LOAD; //LOAD的值
+    #endif 
     ticks = us * fac_us; //需要的节拍数
     tcnt = 0;
-	#if defined(STM32F1) || defined(STM32F4)
-    told = SysTick->VAL; //刚进入时的计数器值
-	#elif defined STM32F0
-	#endif
+    #if defined(STM32F1) || defined(STM32F4)
+        told = SysTick->VAL; //刚进入时的计数器值
+    #elif defined STM32F0
+        told = SysTick->VAL; //刚进入时的计数器值
+    #endif 
     while (1)
     {
-		#if defined(STM32F1) || defined(STM32F4)
-        tnow = SysTick->VAL;
-		#elif defined STM32F0
-		#endif
+        #if defined(STM32F1) || defined(STM32F4)
+            tnow = SysTick->VAL;
+        #elif defined STM32F0
+            tnow = SysTick->VAL;
+        #endif 
         if (tnow != told)
         {
             if (tnow < told)
@@ -201,10 +210,11 @@ void TimeCost::Show(cstring format)const
     //采用如下方法实现执行汇编指令WFI  
     void WFI_SET(void)
     {
-		#if defined(STM32F1) || defined(STM32F4)
-        __ASM volatile("wfi");
-		#elif defined STM32F0
-		#endif
+        #if defined(STM32F1) || defined(STM32F4)
+            __ASM volatile("wfi");
+        #elif defined STM32F0
+			__ASM volatile("wfi");
+        #endif 
     }
 
     //设置栈顶地址

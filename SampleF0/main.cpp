@@ -25,7 +25,7 @@ void delay_ms(uint16_t nms)
 void LED_Demo(void)
 {
     led1=1;; //拉低PC6引脚，LED1发光二极管(发光)
-    Sys.Sleep(500);//delay_ms(500); //
+    //Sys.Sleep(500);//delay_ms(500); //
     led1=0; //拉高PC6引脚，LED1发光二极管(熄灭)
     delay_ms(500);
 
