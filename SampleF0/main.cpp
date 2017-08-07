@@ -1,42 +1,11 @@
 #include "Port.h"
 #include "stm32f0xx.h"
 
-void LED_GPIO(void);
-void LED_Demo(void);
+const byte vers[] = "yyyy-MM-dd HH:mm:ss";
 OutputPort led1(PC6, true);
 OutputPort led2(PC7, true);
 OutputPort led3(PC8, true);
 OutputPort led4(PC9, true);
-void LedTask(void *param)
-{
-    OutputPort *leds = (OutputPort*)param;
-    *leds = ! * leds;
-    //    led2 = key0;
-}
-
-#define namee "StdOS"
-
-void main()
-{
-    TSys &sys = (TSys &)(Sys);
-    sys.Name = (char*)namee;
-    sys.Init();
-    #if DEBUG
-        Sys.MessagePort = COM1;
-        Sys.ShowInfo();
-    #endif 
-
-    LED_GPIO(); //硬件驱动初始化函数
-//    Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
-
-
-    while (1)
-    {
-        LED_Demo(); //调用LED流水灯例程
-    }
-    Sys.Start();
-}
-
 void LED_GPIO(void)
 {
     /*定义一个GPIO_InitTypeDef类型的结构体*/
@@ -65,7 +34,6 @@ void LED_GPIO(void)
     led3=0; //拉高熄灭
     led4=0; //拉高熄灭
 }
-
 void delay_ms(uint16_t nms)
 {
     uint32_t temp;
@@ -103,67 +71,32 @@ void LED_Demo(void)
     led2=0; //拉高PC7引脚，RGB发光二极管(蓝色熄灭)
     delay_ms(500);
 }
+void LedTask(void *param)
+{
+    OutputPort *leds = (OutputPort*)param;
+    *leds = ! * leds;
+    //    led2 = key0;
+}
 
+#define namee "StdOS"
 
-
-
-
-
-
-#ifdef STM32F0TESTOLD
-
-
-    #include <stdio.h>
-    #include "SerialPort.h"
-    #include "Drivers\AT24CXX.h"
-    #include "Drivers\W25QXXX.h"
-    #include "Drivers\Button.h"
-    #include "SString.h"
-    #include "string.h"
-    #include "List.h"
-    #include "Spi.h"
-    #include "Flash.h"
-    #include "Drivers\lcd_dr.h"
-    #include "TInterrupt.h"
-
-
-    const byte vers[] = "yyyy-MM-dd HH:mm:ss";
-    #if 1
-        OutputPort led1(PB0, false);
-        OutputPort led2(PF7, false);
-        OutputPort led3(PF8, false);
-    #else 
-        OutputPort led1(PD0, false);
-        OutputPort led2(PD1, false);
-        OutputPort led3(PD2, false);
-        OutputPort ledLCD(PD12, false);
+void main()
+{
+    TSys &sys = (TSys &)(Sys);
+    sys.Name = (char*)namee;
+    sys.Init();
+    #if DEBUG
+        Sys.MessagePort = COM1;
+        Sys.ShowInfo();
     #endif 
 
-    void LedTask(void *param)
+    LED_GPIO(); //硬件驱动初始化函数
+//    Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
+
+
+    while (1)
     {
-        OutputPort *leds = (OutputPort*)param;
-        *leds = ! * leds;
-        //    led2 = key0;
+        LED_Demo(); //调用LED流水灯例程
     }
-
-    #define namee "StdOS"
-    void W25Q64Test();
-    int main(void)
-    {
-        TSys &sys = (TSys &)(Sys);
-
-        sys.Name = (char*)namee;
-        byte aa = vers[0];
-        aa = aa;
-
-        sys.Init();
-        #if DEBUG
-            Sys.MessagePort = COM1;
-            Sys.ShowInfo();
-        #endif 
-        W25Q64Test();
-        Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
-
-        Sys.Start();
-    }
-#endif
+    Sys.Start();
+}
