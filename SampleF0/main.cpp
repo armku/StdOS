@@ -2,9 +2,11 @@
 #include "stm32f0xx.h"
 
 void BSP_Configuration(void);
-void RCC_Configuration(void);
 void LED_Demo(void);
-OutputPort led1(PB0, false);
+OutputPort led1(PC6, false);
+OutputPort led2(PC7, false);
+OutputPort led3(PC8, false);
+OutputPort led4(PC9, false);
 void LedTask(void *param)
 {
     OutputPort *leds = (OutputPort*)param;

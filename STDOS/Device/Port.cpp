@@ -131,7 +131,7 @@ bool Port::Open()
             // 打开时钟
             int gi = _Pin >> 4;
             #ifdef STM32F0
-                RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOAEN << gi, ENABLE);
+                RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA << gi, ENABLE);
             #elif defined STM32F1
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << gi, ENABLE);
                 // PA15/PB3/PB4 需要关闭JTAG
@@ -184,7 +184,7 @@ void Port::OnOpen(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F0
-
+		gpio->GPIO_Speed = GPIO_Speed_50MHz;
     #elif defined STM32F1
         gpio->GPIO_Speed = GPIO_Speed_50MHz;
     #elif defined STM32F4
@@ -306,7 +306,16 @@ void OutputPort::OpenPin(void *param)
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
 
     #ifdef STM32F0
-
+		if (this->OpenDrain)
+        {
+            gpio->GPIO_OType = GPIO_OType_OD;
+			gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;/*设置引脚模式为无上拉*/
+        }
+        else
+        {
+            gpio->GPIO_OType = GPIO_OType_PP;//通用推挽输出			
+			gpio->GPIO_PuPd = GPIO_PuPd_UP;/*设置引脚模式为上拉*/
+        }
     #elif defined STM32F1
         if (this->OpenDrain)
         {
