@@ -3,10 +3,10 @@
 
 void LED_GPIO(void);
 void LED_Demo(void);
-OutputPort led1(PC6, false);
-OutputPort led2(PC7, false);
-OutputPort led3(PC8, false);
-OutputPort led4(PC9, false);
+OutputPort led1(PC6, true);
+OutputPort led2(PC7, true);
+OutputPort led3(PC8, true);
+OutputPort led4(PC9, true);
 void LedTask(void *param)
 {
     OutputPort *leds = (OutputPort*)param;
@@ -66,10 +66,10 @@ void LED_GPIO(void)
     /*调用库函数，初始化GPIOB*/
     GPIO_Init(LED_PORT, &GPIO_InitStructure);
 
-    led1=1; //拉高熄灭
-    led2=1; //拉高熄灭
-    led3=1; //拉高熄灭
-    led4=1; //拉高熄灭
+    led1=0; //拉高熄灭
+    led2=0; //拉高熄灭
+    led3=0; //拉高熄灭
+    led4=0; //拉高熄灭
 }
 
 void delay_ms(uint16_t nms)
@@ -89,24 +89,24 @@ void delay_ms(uint16_t nms)
 
 void LED_Demo(void)
 {
-    led1=0;; //拉低PC6引脚，LED1发光二极管(发光)
+    led1=1;; //拉低PC6引脚，LED1发光二极管(发光)
     delay_ms(500); //
-    led1=1; //拉高PC6引脚，LED1发光二极管(熄灭)
+    led1=0; //拉高PC6引脚，LED1发光二极管(熄灭)
     delay_ms(500);
 
-    led4=0; //拉低PC9引脚，RGB发光二极管(发红色光)
+    led4=1; //拉低PC9引脚，RGB发光二极管(发红色光)
     delay_ms(500);
-    led4=1; //拉高PC9引脚，RGB发光二极管(红色熄灭)
-    delay_ms(500);
-
-    led3=0; //拉低PC8引脚，RGB发光二极管(发绿色光)
-    delay_ms(500);
-    led3=1; //拉低PC8引脚，RGB发光二极管(绿色熄灭)
+    led4=0; //拉高PC9引脚，RGB发光二极管(红色熄灭)
     delay_ms(500);
 
-    led2=0; //拉低PC7引脚，RGB发光二极管(发蓝色光)
+    led3=1; //拉低PC8引脚，RGB发光二极管(发绿色光)
     delay_ms(500);
-    led2=1; //拉高PC7引脚，RGB发光二极管(蓝色熄灭)
+    led3=0; //拉低PC8引脚，RGB发光二极管(绿色熄灭)
+    delay_ms(500);
+
+    led2=1; //拉低PC7引脚，RGB发光二极管(发蓝色光)
+    delay_ms(500);
+    led2=0; //拉高PC7引脚，RGB发光二极管(蓝色熄灭)
     delay_ms(500);
 }
 
