@@ -62,10 +62,6 @@ void main()
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 
-	led1=0;
-	led2=0;
-	led3=0;
-	led4=0;
 
 //    Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 

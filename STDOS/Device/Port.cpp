@@ -198,6 +198,7 @@ OutputPort::OutputPort(Pin pin)
 {
     this->Opened = false;
     Set(pin);
+	this->Write(0);
 }
 
 OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
@@ -206,6 +207,7 @@ OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
     this->Invert = invert;
     this->OpenDrain = openDrain;
     Set(pin);
+	this->Write(0);
 }
 
 
