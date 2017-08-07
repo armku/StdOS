@@ -3,7 +3,7 @@
 
 void BSP_Configuration(void);
 void LED_Demo(void);
-//OutputPort led1(PC6, false);
+OutputPort led1(PC6, false);
 void LedTask(void *param)
 {
     OutputPort *leds = (OutputPort*)param;
@@ -42,8 +42,8 @@ void main()
 
 //如果想用其他管脚控制LED,那么只需更改上面对应的端口与引脚编号即可
 
-#define LED_1_L GPIO_ResetBits(LED_PORT,LED_1_PIN);    //定义LED_1_L,调用LED_1_L命令，PC6引脚输出低电平
-#define LED_1_H GPIO_SetBits(LED_PORT,LED_1_PIN);      //定义LED_1_H,调用LED_1_H命令，PC6引脚输出低高平
+//#define LED_1_L GPIO_ResetBits(LED_PORT,LED_1_PIN);    //定义LED_1_L,调用LED_1_L命令，PC6引脚输出低电平
+//#define LED_1_H GPIO_SetBits(LED_PORT,LED_1_PIN);      //定义LED_1_H,调用LED_1_H命令，PC6引脚输出低高平
 #define LED_1_T GPIO_WriteBit(LED_PORT,LED_1_PIN,(BitAction)(1 - GPIO_ReadOutputDataBit(LED_PORT, LED_1_PIN)));//定义LED_1_T,调用LED_1_T命令，PC6引脚输出电平反转
 
 #define LED_B_L GPIO_ResetBits(LED_PORT,LED_B_PIN);    //定义LED_B_L,调用LED_B_L命令，PC7引脚输出低电平
@@ -88,7 +88,7 @@ void LED_GPIO(void)
     /*调用库函数，初始化GPIOB*/
     GPIO_Init(LED_PORT, &GPIO_InitStructure);
 
-    LED_1_H; //拉高熄灭
+    led1=1; //拉高熄灭
     LED_B_H; //拉高熄灭
     LED_G_H; //拉高熄灭
     LED_R_H; //拉高熄灭
@@ -123,9 +123,9 @@ void delay_ms(uint16_t nms)
 
 void LED_Demo(void)
 {
-    LED_1_L; //拉低PC6引脚，LED1发光二极管(发光)
+    led1=0;; //拉低PC6引脚，LED1发光二极管(发光)
     delay_ms(500); //
-    LED_1_H; //拉高PC6引脚，LED1发光二极管(熄灭)
+    led1=1; //拉高PC6引脚，LED1发光二极管(熄灭)
     delay_ms(500);
 
 //    LED_R_L; //拉低PC9引脚，RGB发光二极管(发红色光)
