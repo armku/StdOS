@@ -3,10 +3,7 @@
 
 void BSP_Configuration(void);
 void LED_Demo(void);
-OutputPort led1(PC6, false);
-OutputPort led2(PC7, false);
-OutputPort led3(PC8, false);
-OutputPort led4(PC9, false);
+//OutputPort led1(PC6, false);
 void LedTask(void *param)
 {
     OutputPort *leds = (OutputPort*)param;
@@ -27,7 +24,7 @@ void main()
     #endif 
 
     BSP_Configuration(); //硬件驱动初始化函数
-    Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
+//    Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
 
     while (1)
@@ -131,20 +128,20 @@ void LED_Demo(void)
     LED_1_H; //拉高PC6引脚，LED1发光二极管(熄灭)
     delay_ms(500);
 
-    LED_R_L; //拉低PC9引脚，RGB发光二极管(发红色光)
-    delay_ms(500);
-    LED_R_H; //拉高PC9引脚，RGB发光二极管(红色熄灭)
-    delay_ms(500);
+//    LED_R_L; //拉低PC9引脚，RGB发光二极管(发红色光)
+//    delay_ms(500);
+//    LED_R_H; //拉高PC9引脚，RGB发光二极管(红色熄灭)
+//    delay_ms(500);
 
-    LED_G_L; //拉低PC8引脚，RGB发光二极管(发绿色光)
-    delay_ms(500);
-    LED_G_H; //拉低PC8引脚，RGB发光二极管(绿色熄灭)
-    delay_ms(500);
+//    LED_G_L; //拉低PC8引脚，RGB发光二极管(发绿色光)
+//    delay_ms(500);
+//    LED_G_H; //拉低PC8引脚，RGB发光二极管(绿色熄灭)
+//    delay_ms(500);
 
-    LED_B_L; //拉低PC7引脚，RGB发光二极管(发蓝色光)
-    delay_ms(500);
-    LED_B_H; //拉高PC7引脚，RGB发光二极管(蓝色熄灭)
-    delay_ms(500);
+//    LED_B_L; //拉低PC7引脚，RGB发光二极管(发蓝色光)
+//    delay_ms(500);
+//    LED_B_H; //拉高PC7引脚，RGB发光二极管(蓝色熄灭)
+//    delay_ms(500);
 }
 
 
