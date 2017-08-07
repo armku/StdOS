@@ -37,19 +37,13 @@ void main()
     Sys.Start();
 }
 
-#define LED_1_PIN GPIO_Pin_6 //定义GPIO_Pin_6引脚为LED_1_PIN，相当于重新命名。
-#define LED_B_PIN GPIO_Pin_7 //定义GPIO_Pin_7引脚为LED_B_PIN，相当于重新命名。
-#define LED_G_PIN GPIO_Pin_8 //定义GPIO_Pin_8引脚为LED_G_PIN，相当于重新命名。
-#define LED_R_PIN GPIO_Pin_9 //定义GPIO_Pin_9引脚为LED_R_PIN，相当于重新命名。
-#define LED_PORT GPIOC  //定义GPIOC端口为LED_PORT，相当于重新命名。
-
 void LED_GPIO(void)
 {
     /*定义一个GPIO_InitTypeDef类型的结构体*/
     GPIO_InitTypeDef GPIO_InitStructure;
 
     /*选择要控制的GPIOC引脚*/
-    GPIO_InitStructure.GPIO_Pin = LED_1_PIN | LED_B_PIN | LED_G_PIN | LED_R_PIN;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9;
 
     /*设置要控制的GPIOC引脚为输出模式*/
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
@@ -64,7 +58,7 @@ void LED_GPIO(void)
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 
     /*调用库函数，初始化GPIOB*/
-    GPIO_Init(LED_PORT, &GPIO_InitStructure);
+    GPIO_Init(GPIOC, &GPIO_InitStructure);
 
     led1=0; //拉高熄灭
     led2=0; //拉高熄灭
