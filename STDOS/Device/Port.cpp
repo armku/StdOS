@@ -306,7 +306,8 @@ void OutputPort::OpenPin(void *param)
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
 
     #ifdef STM32F0
-		if (this->OpenDrain)
+		gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式	
+        if (this->OpenDrain)
         {
             gpio->GPIO_OType = GPIO_OType_OD;
 			gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;/*设置引脚模式为无上拉*/

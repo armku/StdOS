@@ -6,34 +6,7 @@ OutputPort led1(PC6, true);
 OutputPort led2(PC7, true);
 OutputPort led3(PC8, true);
 OutputPort led4(PC9, true);
-void LED_GPIO(void)
-{
-    /*定义一个GPIO_InitTypeDef类型的结构体*/
-    GPIO_InitTypeDef GPIO_InitStructure;
 
-    /*选择要控制的GPIOC引脚*/
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9;
-
-    /*设置要控制的GPIOC引脚为输出模式*/
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-
-    /*设置引脚速率为50MHz */
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-
-    /*设置引脚模式为通用推挽输出*/
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-
-    /*设置引脚模式为上拉*/
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
-
-    /*调用库函数，初始化GPIOB*/
-    GPIO_Init(GPIOC, &GPIO_InitStructure);
-
-    led1=0; //拉高熄灭
-    led2=0; //拉高熄灭
-    led3=0; //拉高熄灭
-    led4=0; //拉高熄灭
-}
 void delay_ms(uint16_t nms)
 {
     uint32_t temp;
@@ -89,8 +62,11 @@ void main()
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 
+	led1=0;
+	led2=0;
+	led3=0;
+	led4=0;
 
-    LED_GPIO(); //硬件驱动初始化函数
 //    Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
 
