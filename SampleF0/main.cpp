@@ -73,29 +73,13 @@ OutputPort nss(PA8, false,true);
 #define W25X_ManufactDeviceID	0x90 
 #define W25X_JedecDeviceID		0x9F 
 
-uint8_t SPI1_SendByte(uint8_t byte)
-{
-//	/* Loop while DR register in not emplty */
-//	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
-
-//	/* Send byte through the SPI2 peripheral */
-//	SPI_SendData8(SPI1, byte);
-
-//	/* Wait to receive a byte */
-//	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET);
-
-//	/* Return the byte read from the SPI bus */
-//	return SPI_ReceiveData8(SPI1);
-	
-	return spi.Write(byte);
-}
 uint8_t W25QXX_ReadSR(void)//flash读入数据
 {
     uint8_t byte=0;
     
     nss=0;
-    SPI1_SendByte(W25X_ReadStatusReg);
-    byte=SPI1_SendByte(0);
+    spi.Write(W25X_ReadStatusReg);
+    byte=spi.Write(0);
     nss=1;
     return byte;
 }
@@ -103,7 +87,7 @@ uint8_t W25QXX_ReadSR(void)//flash读入数据
 void W25QXX_Write_Enable(void)//flash写数据启动函数
 {    
     nss=0;
-    SPI1_SendByte(W25X_WriteEnable);
+    spi.Write(W25X_WriteEnable);
     nss=1;
 }
 
@@ -118,7 +102,7 @@ void W25QXX_Erase_Chip(void)
     W25QXX_Wait_Busy();
 
     nss=0;
-    SPI1_SendByte(W25X_ChipErase);
+    spi.Write(W25X_ChipErase);
     nss=1;
 
     W25QXX_Wait_Busy();
@@ -132,10 +116,10 @@ void W25QXX_Erase_Sector(uint32_t Dst_Addr)
     W25QXX_Wait_Busy();
 
     nss=0;
-    SPI1_SendByte(W25X_SectorErase);
-    SPI1_SendByte((uint8_t)(Dst_Addr>>16));
-    SPI1_SendByte((uint8_t)(Dst_Addr>>8));
-    SPI1_SendByte((uint8_t)(Dst_Addr));
+    spi.Write(W25X_SectorErase);
+    spi.Write((uint8_t)(Dst_Addr>>16));
+    spi.Write((uint8_t)(Dst_Addr>>8));
+    spi.Write((uint8_t)(Dst_Addr));
     nss=1;
     W25QXX_Wait_Busy();
 }
@@ -147,14 +131,14 @@ void W25QXX_Read(uint8_t* pBuffer,uint32_t ReadAddr,uint16_t NumByteToRead)
     W25QXX_Wait_Busy();
     
     nss=0;
-    SPI1_SendByte(W25X_ReadData);
-    SPI1_SendByte((uint8_t)(ReadAddr>>16));
-    SPI1_SendByte((uint8_t)(ReadAddr>>8));
-    SPI1_SendByte((uint8_t)(ReadAddr));
+    spi.Write(W25X_ReadData);
+    spi.Write((uint8_t)(ReadAddr>>16));
+    spi.Write((uint8_t)(ReadAddr>>8));
+    spi.Write((uint8_t)(ReadAddr));
     
     for(i=0;i<NumByteToRead;i++)
     {
-        pBuffer[i]=SPI1_SendByte(0);
+        pBuffer[i]=spi.Write(0);
     }
   
     nss=1;
@@ -168,14 +152,14 @@ void W25QXX_Write_Page(uint8_t* pBuffer,uint32_t WriteAddr,uint16_t NumByteToWri
     W25QXX_Wait_Busy();
     
     nss=0;
-    SPI1_SendByte(W25X_PageProgram);
-    SPI1_SendByte((uint8_t)(WriteAddr>>16));
-    SPI1_SendByte((uint8_t)(WriteAddr>>8));
-    SPI1_SendByte((uint8_t)(WriteAddr));
+    spi.Write(W25X_PageProgram);
+    spi.Write((uint8_t)(WriteAddr>>16));
+    spi.Write((uint8_t)(WriteAddr>>8));
+    spi.Write((uint8_t)(WriteAddr));
     
     for(i=0;i<NumByteToWrite;i++)
     {
-        SPI1_SendByte(pBuffer[i]);
+        spi.Write(pBuffer[i]);
     }
     nss=1;
     W25QXX_Wait_Busy();
