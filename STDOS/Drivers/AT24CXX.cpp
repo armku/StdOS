@@ -520,12 +520,14 @@ byte AT24CXX::CheckOk()
     }
 }
 
-#if 0
+#if 1
     #define EE_SIZE				256			  /* 24xx02×ÜÈÝÁ¿ */    
        
     void AT24C02Test()
     {
-		#ifdef STM32F1
+		#ifdef STM32F0
+			AT24CXX at2402(PB6, PB7, AT24C02);
+		#elif defined STM32F1
 			AT24CXX at2402(PB6, PB7, AT24C02);
 		#elif defined STM32F4
 			AT24CXX at2402(PB8, PB9, AT24C02);
