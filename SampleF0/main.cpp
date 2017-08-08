@@ -75,17 +75,19 @@ OutputPort nss(PA8, false,true);
 
 uint8_t SPI1_SendByte(uint8_t byte)
 {
-	/* Loop while DR register in not emplty */
-	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
+//	/* Loop while DR register in not emplty */
+//	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
 
-	/* Send byte through the SPI2 peripheral */
-	SPI_SendData8(SPI1, byte);
+//	/* Send byte through the SPI2 peripheral */
+//	SPI_SendData8(SPI1, byte);
 
-	/* Wait to receive a byte */
-	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET);
+//	/* Wait to receive a byte */
+//	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET);
 
-	/* Return the byte read from the SPI bus */
-	return SPI_ReceiveData8(SPI1);
+//	/* Return the byte read from the SPI bus */
+//	return SPI_ReceiveData8(SPI1);
+	
+	return spi.Write(byte);
 }
 uint8_t W25QXX_ReadSR(void)//flash∂¡»Î ˝æ›
 {
