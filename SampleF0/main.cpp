@@ -35,7 +35,6 @@ void LedTask(void *param)
 void RCC_Configuration(void)//时钟初始化函数
 {  
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE); //设置A端口时钟使能
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE); //设置C端口时钟使能
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); //设置串口1时钟使能
 }
 
