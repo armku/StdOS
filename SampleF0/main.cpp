@@ -51,12 +51,7 @@ int main()
 
     Sys.Start();
 }
-#define W25Q_CS_PIN GPIO_Pin_8
-#define W25Q_CS_PORT GPIOA
-
-#define W25Q_CS_L GPIO_ResetBits(W25Q_CS_PORT,W25Q_CS_PIN);
-#define W25Q_CS_H GPIO_SetBits(W25Q_CS_PORT,W25Q_CS_PIN);
-
+OutputPort nss(PA8, false,true);
 
 //指令表
 #define W25X_WriteEnable		0x06 
@@ -85,16 +80,7 @@ void RCC_Configuration(void)//时钟初始化函数
 }
 void W25QXX_GPIO(void)//flash控制管脚初始化函数
 {    
-	GPIO_InitTypeDef GPIO_InitStructure;//定义一个GPIO_InitTypeDef类型的结构体
-
-	GPIO_InitStructure.GPIO_Pin = W25Q_CS_PIN;	//定义使用的管脚	
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_OUT;	//模拟输出方式
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; 
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; 
-	GPIO_InitStructure.GPIO_PuPd   = GPIO_PuPd_NOPULL;  
-	GPIO_Init(W25Q_CS_PORT, &GPIO_InitStructure);	
-	
-	W25Q_CS_H;//片选置高
+	nss=1;//片选置高
 }
 void SPI1_GPIO(void)
 {
@@ -178,18 +164,18 @@ uint8_t W25QXX_ReadSR(void)//flash读入数据
 {
     uint8_t byte=0;
     
-    W25Q_CS_L;
+    nss=0;
     SPI1_SendByte(W25X_ReadStatusReg);
     byte=SPI1_SendByte(0);
-    W25Q_CS_H;
+    nss=1;
     return byte;
 }
 
 void W25QXX_Write_Enable(void)//flash写数据启动函数
 {    
-    W25Q_CS_L;
+    nss=0;
     SPI1_SendByte(W25X_WriteEnable);
-    W25Q_CS_H;
+    nss=1;
 }
 
 void W25QXX_Wait_Busy(void)//flash忙等待
@@ -202,9 +188,9 @@ void W25QXX_Erase_Chip(void)
     W25QXX_Write_Enable();
     W25QXX_Wait_Busy();
 
-    W25Q_CS_L;
+    nss=0;
     SPI1_SendByte(W25X_ChipErase);
-    W25Q_CS_H;
+    nss=1;
 
     W25QXX_Wait_Busy();
 }
@@ -216,12 +202,12 @@ void W25QXX_Erase_Sector(uint32_t Dst_Addr)
     W25QXX_Write_Enable();
     W25QXX_Wait_Busy();
 
-    W25Q_CS_L;
+    nss=0;
     SPI1_SendByte(W25X_SectorErase);
     SPI1_SendByte((uint8_t)(Dst_Addr>>16));
     SPI1_SendByte((uint8_t)(Dst_Addr>>8));
     SPI1_SendByte((uint8_t)(Dst_Addr));
-    W25Q_CS_H;
+    nss=1;
     W25QXX_Wait_Busy();
 }
 
@@ -231,7 +217,7 @@ void W25QXX_Read(uint8_t* pBuffer,uint32_t ReadAddr,uint16_t NumByteToRead)
   
     W25QXX_Wait_Busy();
     
-    W25Q_CS_L;
+    nss=0;
     SPI1_SendByte(W25X_ReadData);
     SPI1_SendByte((uint8_t)(ReadAddr>>16));
     SPI1_SendByte((uint8_t)(ReadAddr>>8));
@@ -242,7 +228,7 @@ void W25QXX_Read(uint8_t* pBuffer,uint32_t ReadAddr,uint16_t NumByteToRead)
         pBuffer[i]=SPI1_SendByte(0);
     }
   
-    W25Q_CS_H;
+    nss=1;
 }
 
 void W25QXX_Write_Page(uint8_t* pBuffer,uint32_t WriteAddr,uint16_t NumByteToWrite)//写页
@@ -252,7 +238,7 @@ void W25QXX_Write_Page(uint8_t* pBuffer,uint32_t WriteAddr,uint16_t NumByteToWri
     W25QXX_Write_Enable();
     W25QXX_Wait_Busy();
     
-    W25Q_CS_L;
+    nss=0;
     SPI1_SendByte(W25X_PageProgram);
     SPI1_SendByte((uint8_t)(WriteAddr>>16));
     SPI1_SendByte((uint8_t)(WriteAddr>>8));
@@ -262,7 +248,7 @@ void W25QXX_Write_Page(uint8_t* pBuffer,uint32_t WriteAddr,uint16_t NumByteToWri
     {
         SPI1_SendByte(pBuffer[i]);
     }
-    W25Q_CS_H;
+    nss=1;
     W25QXX_Wait_Busy();
 }
 
