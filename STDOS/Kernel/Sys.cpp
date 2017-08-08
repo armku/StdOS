@@ -290,7 +290,7 @@ void TSys::Init()
         fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数   
         TicksPerms = SystemCoreClock / delay_ostickspersec;
     #endif 
-    SysTick_Config(TicksPerms); //tick is 1ms	
+    SysTick_Config(TicksPerms); //配置SysTick tick is 1ms	
     #ifdef STM32F0
 	#elif defined STM32F1
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);

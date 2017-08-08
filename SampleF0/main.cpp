@@ -24,10 +24,10 @@ void delay_ms(uint16_t nms)
 
 void LED_Demo(void)
 {
-    led1=1;; //拉低PC6引脚，LED1发光二极管(发光)
-    //Sys.Sleep(500);//delay_ms(500); //
-    led1=0; //拉高PC6引脚，LED1发光二极管(熄灭)
-    delay_ms(500);
+//    led1=1;; //拉低PC6引脚，LED1发光二极管(发光)
+//    delay_ms(500); //
+//    led1=0; //拉高PC6引脚，LED1发光二极管(熄灭)
+//    delay_ms(500);
 
     led4=1; //拉低PC9引脚，RGB发光二极管(发红色光)
     delay_ms(500);
@@ -44,10 +44,14 @@ void LED_Demo(void)
     led2=0; //拉高PC7引脚，RGB发光二极管(蓝色熄灭)
     delay_ms(500);
 }
+
 void LedTask(void *param)
 {
+	static int onoff=0;
     OutputPort *leds = (OutputPort*)param;
-    *leds = ! * leds;
+    *leds=onoff;
+	onoff=!onoff;
+	//*leds = ! * leds;
     //    led2 = key0;
 }
 
@@ -55,6 +59,7 @@ void LedTask(void *param)
 
 void main()
 {
+	SystemInit();
     TSys &sys = (TSys &)(Sys);
     sys.Name = (char*)namee;
     sys.Init();
@@ -63,12 +68,7 @@ void main()
         Sys.ShowInfo();
     #endif 
 
-//    Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
+    Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
-
-    while (1)
-    {
-        LED_Demo(); //调用LED流水灯例程
-    }
     Sys.Start();
 }
