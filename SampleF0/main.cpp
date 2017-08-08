@@ -250,16 +250,16 @@ void RTC_Demo(void *param)
 	printf("\r\n");
 }
 
-void RCC_Configuration(void)
-{  
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);//设置A端口时钟使能
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);//设置C端口时钟使能
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);//设置ADC端口端口复用使能	
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);//设置串口1使能
-}
+//void RCC_Configuration(void)
+//{  
+//	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);//设置A端口时钟使能
+//	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);//设置C端口时钟使能
+//	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);//设置ADC端口端口复用使能	
+//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);//设置串口1使能
+//}
 void BSP_Configuration(void)//硬件初始化函数
 {	
-	RCC_Configuration();//调用时钟初始化函数
+//	RCC_Configuration();//调用时钟初始化函数
 	
 	RTC_Initializes();
 }
