@@ -51,6 +51,8 @@ int main()
 
     Sys.Start();
 }
+
+Spi spi(Spi1);
 OutputPort nss(PA8, false,true);
 
 //指令表
@@ -70,81 +72,6 @@ OutputPort nss(PA8, false,true);
 #define W25X_DeviceID			0xAB 
 #define W25X_ManufactDeviceID	0x90 
 #define W25X_JedecDeviceID		0x9F 
-
-void RCC_Configuration(void)//时钟初始化函数
-{  
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);//设置A端口时钟使能
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);//设置B端口时钟使能
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);//设置C端口时钟使能
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);//设置SPI时钟使能
-}
-void W25QXX_GPIO(void)//flash控制管脚初始化函数
-{    
-	nss=1;//片选置高
-}
-void SPI1_GPIO(void)
-{
-	GPIO_InitTypeDef GPIO_InitStructure;
-
-	GPIO_PinAFConfig(GPIOB,GPIO_PinSource3,GPIO_AF_0);  
-	GPIO_PinAFConfig(GPIOB,GPIO_PinSource4,GPIO_AF_0);
-	GPIO_PinAFConfig(GPIOB,GPIO_PinSource5,GPIO_AF_0); 
-
-	/*!< Configure SPI_FLASH_SPI pins: SCK */
-	GPIO_InitStructure.GPIO_Pin    = GPIO_Pin_3;
-	GPIO_InitStructure.GPIO_Mode   = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_OType  = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_Speed  = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_PuPd   = GPIO_PuPd_NOPULL;
-	GPIO_Init(GPIOB, &GPIO_InitStructure); 
-
-	/*!< Configure SPI_FLASH_SPI pins: MISO */
-	GPIO_InitStructure.GPIO_Pin    = GPIO_Pin_4;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-
-	/*!< Configure SPI_FLASH_SPI pins: MOSI */
-	GPIO_InitStructure.GPIO_Pin    = GPIO_Pin_5;
-	GPIO_Init(GPIOB, &GPIO_InitStructure); 
-}
-
-void SPI1_Configation(void)//SPI通讯格式设置函数
-{
-	SPI_InitTypeDef  SPI_InitStructure;
-	
-	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
-	SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
-	SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
-	SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low;
-	SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge;
-	SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;	
-	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_64;
-	SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
-	SPI_InitStructure.SPI_CRCPolynomial = 7;
-	
-	SPI_Init(SPI1, &SPI_InitStructure);
-	SPI_RxFIFOThresholdConfig(SPI1, SPI_RxFIFOThreshold_QF);
-	SPI_Cmd(SPI1, ENABLE);
-}
-
-void BSP_Configuration(void)//硬件初始化函数
-{	
-	RCC_Configuration();//调用时钟初始化函数
-	W25QXX_GPIO();//调用25Qxx控制管脚初始化函数
-	SPI1_GPIO();//调用SPI标准通讯格式初始化函数
-	SPI1_Configation();//调用SPI通讯格式设置函数
-}
-
-
-static void NVIC_Configuration(void)//中断优先级设置函数
-{
-	NVIC_InitTypeDef   NVIC_InitStructure;
-
-	// rs232
-	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPriority = 0x01;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-}
 
 uint8_t SPI1_SendByte(uint8_t byte)
 {
@@ -268,8 +195,7 @@ void W25QXX_Demo(void)//例程
 }
 void w25q128test()
 {
-	BSP_Configuration();//调用硬件初始化函数
-	NVIC_Configuration();
+	nss=1;//片选置高
 	
 	W25QXX_Demo();
 	
