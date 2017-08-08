@@ -350,7 +350,7 @@ void TSys::Init()
                 CPUName = new String("STM32F103VG");
                 this->RAMSize = 768;
                 break;
-            #elif defined STM32F4
+         #elif defined STM32F4
             case 0X0413:
                 CPUName = new String("STM32F407ZG");
                 this->RAMSize = 192;
