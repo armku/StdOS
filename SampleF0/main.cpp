@@ -45,11 +45,6 @@ void RS232_GPIO(void)
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
   GPIO_Init(GPIOA, &GPIO_InitStructure);  
 }
-
-void BSP_Configuration(void)//硬件初始化函数
-{	
-	RS232_GPIO();
-}
 int main()
 {
 	Sys.Name = (char*)namee;
@@ -58,7 +53,7 @@ int main()
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 
-	BSP_Configuration(); //调用硬件初始化函数
+	RS232_GPIO(); //调用硬件初始化函数
 	Sys.AddTask(LedTask, &ledss, 0, 500, "LedTask");
 
     Sys.Start();
