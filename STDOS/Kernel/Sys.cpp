@@ -183,7 +183,7 @@ TSys::TSys()
 	#elif defined STM32F1
 		this->Clock = 72000000;
 	#elif defined STM32F4
-		this->Clock = 72000000;//168
+		this->Clock = 168000000;
 	#endif
     this->MessagePort = COM1;
 }
@@ -325,6 +325,10 @@ void TSys::Init()
     switch (this->DevID)
     {
 		#ifdef STM32F0
+			case 0X0448:
+				CPUName = new String("STM32F072VB");
+                this->RAMSize = 64;
+                break;
         #elif defined STM32F1
             case 0X0307:
                 CPUName = new String("STM32F103RD");
