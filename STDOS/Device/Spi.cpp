@@ -89,6 +89,10 @@ void Spi::Init(SPI spi, uint speedHz)
                 //        GPIO_PinAFConfig(_GROUP(ps[1]), _PIN(ps[1]), GPIO_AF_0);
                 //        GPIO_PinAFConfig(_GROUP(ps[2]), _PIN(ps[2]), GPIO_AF_0);
                 //        GPIO_PinAFConfig(_GROUP(ps[3]), _PIN(ps[3]), GPIO_AF_0)
+				this->SetPin(PB3, PB4, PB5);
+				GPIO_PinAFConfig(GPIOB, GPIO_PinSource3, GPIO_AF_0); //PB3复用为 SPI1
+                GPIO_PinAFConfig(GPIOB, GPIO_PinSource4, GPIO_AF_0); //PB4复用为 SPI1
+                GPIO_PinAFConfig(GPIOB, GPIO_PinSource5, GPIO_AF_0); //PB5复用为 SPI1
             #elif defined STM32F1
                 this->SetPin(PA5, PA6, PA7);//this->SetPin(PA5, PA6, PA7, PA4);                
             #elif defined STM32F4				
@@ -108,7 +112,10 @@ void Spi::Init(SPI spi, uint speedHz)
             break;
         case Spi2:
             #ifdef STM32F0
-
+				this->SetPin(PB13, PB14, PB15);
+				GPIO_PinAFConfig(GPIOB, GPIO_PinSource13, GPIO_AF_0); //PB13复用为 SPI2
+                GPIO_PinAFConfig(GPIOB, GPIO_PinSource14, GPIO_AF_0); //PB14复用为 SPI2
+                GPIO_PinAFConfig(GPIOB, GPIO_PinSource15, GPIO_AF_0); //PB15复用为 SPI2
             #elif defined STM32F1
                 //this->SetPin(PA5, PA6, PA7);//this->SetPin(PA5, PA6, PA7, PA4);                
             #elif defined STM32F4
@@ -182,7 +189,7 @@ void Spi::Init(SPI spi, uint speedHz)
 	else{}
     SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;// NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制    
     #ifdef STM32F0
-        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
+        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_64;
     #elif defined STM32F1
         SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_8;
     #elif defined STM32F4
@@ -195,7 +202,10 @@ void Spi::Init(SPI spi, uint speedHz)
         case Spi1:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
             #ifdef STM32F0
-
+				assert_param(IS_SPI_BAUDRATE_PRESCALER(SPI_BaudRatePrescaler)); //判断有效性
+                SPI1->CR1 &= 0XFFC7; //位3-5清零，用来设置波特率
+                SPI1->CR1 |= SPI_BaudRatePrescaler_64; //设置SPI1速度 设置为21M时钟,高速模式 
+                SPI_Cmd(SPI1, ENABLE); //使能SPI1
             #elif defined STM32F1
 
             #elif defined STM32F4
