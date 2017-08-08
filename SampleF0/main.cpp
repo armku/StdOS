@@ -54,16 +54,6 @@ typedef enum{
 #define SEC_DAY                   (24*3600)                //一天秒数
 #define SEC_YEAR                  (365*SEC_DAY)            //一年秒数(平年)
 
-void Company_Information(void)
-{
-	printf("******************************【众拳-独角兽STM32F072VB开发板】********************************\r\n"); 
-    printf("　论坛网址: http://www.zxkjmcu.com\r\n"); 
-    printf("　淘宝网店: http://zxkjmcu.taobao.com\r\n"); 
-    printf("　关注微信公众平台微信号【zxkj-ly】\r\n");     
-    printf("　STM32F0开发板技术交流QQ群【373645551】\r\n"); 
-    printf("　哈尔滨卓恩科技开发有限公司\r\n"); 
-    printf("*************************************************************************************************************\r\n"); 
-}
 /* 变量 ----------------------------------------------------------------------*/
 __IO uint32_t AsynchPrediv = 0, SynchPrediv = 0;
 
@@ -292,7 +282,6 @@ int main()
     #endif 
 	BSP_Configuration();//调用硬件初始化函数
 	NVIC_Configuration();//调用中断优先级初始化函数
-	Company_Information();
 	Sys.AddTask(LedTask, &ledss, 0, 500, "LedTask");
 	Sys.AddTask(RTC_Demo, &ledss, 0, 1000, "RTC_Demo");
 
