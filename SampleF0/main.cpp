@@ -31,13 +31,6 @@ void LedTask(void *param)
 
 #define namee "StdOS"
 
-
-void RCC_Configuration(void)//时钟初始化函数
-{  
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE); //设置A端口时钟使能
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); //设置串口1时钟使能
-}
-
 void RS232_GPIO(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;//定义一个GPIO_InitTypeDef类型的结构体
@@ -55,18 +48,7 @@ void RS232_GPIO(void)
 
 void BSP_Configuration(void)//硬件初始化函数
 {	
-	RCC_Configuration();
 	RS232_GPIO();
-}
-void Company_Information(void)//printf打印字符设计
-{
-	printf("******************************【众拳-独角兽STM32F072VB开发板】********************************\r\n"); 
-    printf("　论坛网址: http://www.zxkjmcu.com\r\n"); 
-    printf("　淘宝网店: http://zxkjmcu.taobao.com\r\n"); 
-    printf("　关注微信公众平台微信号【zxkj-ly】\r\n");     
-    printf("　STM32F0开发板技术交流QQ群【373645551】\r\n"); 
-    printf("　哈尔滨卓恩科技开发有限公司\r\n"); 
-    printf("*************************************************************************************************************\r\n"); 
 }
 int main()
 {
@@ -77,7 +59,6 @@ int main()
         Sys.ShowInfo();
     #endif 
 	BSP_Configuration(); //调用硬件初始化函数
-	Company_Information();
 	Sys.AddTask(LedTask, &ledss, 0, 500, "LedTask");
 
     Sys.Start();
