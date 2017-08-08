@@ -25,9 +25,8 @@ void LedTask(void *param)
 
 void main()
 {
-	TSys &sys = (TSys &)(Sys);
-    sys.Name = (char*)namee;
-    sys.Init();
+	Sys.Name = (char*)namee;
+    Sys.Init();
     #if DEBUG
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
