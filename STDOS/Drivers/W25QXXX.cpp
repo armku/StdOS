@@ -345,7 +345,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
             spi64.CPHA = CPHA_2Edge;
         #else 
         #endif 
-		spi64.SetNss(PA4);
+        spi64.SetNss(PA4);
         spi64.Open();
 
         /* Get SPI Flash Device ID */
@@ -616,14 +616,16 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
 }
 
 #if 0
-	//正点原子 探索者开发板
-	#if W25QXXXUSESPISOFT
+    //正点原子 探索者开发板
+    #if W25QXXXUSESPISOFT
         SpiSoft spi128;
     #else 
         Spi spi128(Spi1);
-    #endif     
+    #endif 
     W25Q128 w25q128(&spi128);
-    OutputPort nsspp;
+    #ifndef STM32F0
+        OutputPort nsspp;
+    #endif 
 
     //要写入到W25Q16的字符串数组
     const byte TEXT_Buffer[] = 
@@ -633,17 +635,23 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
 
     void w25q128test()
     {
-        nsspp.Invert = false;
-        nsspp.OpenDrain = false;
-        nsspp.Set(PG7);
-        nsspp = 1; //PG7输出1,防止NRF干扰SPI FLASH的通信 
+        #ifndef STM32F0
+            nsspp.Invert = false;
+            nsspp.OpenDrain = false;
+            nsspp.Set(PG7);
+            nsspp = 1; //PG7输出1,防止NRF干扰SPI FLASH的通信 
+        #endif 
 
-		#if W25QXXXUSESPISOFT
-			spi128.SetPin(PB3, PB4, PB5);
+        #if W25QXXXUSESPISOFT
+            spi128.SetPin(PB3, PB4, PB5);
             spi128.CPOL = CPOL_High;
             spi128.CPHA = CPHA_2Edge;
-		#endif
-		spi128.SetNss(PB14);
+        #endif 
+        #ifndef STM32F0
+            spi128.SetNss(PB14);
+        #else 
+            spi128.SetNss(PA8);
+        #endif 
         byte datatemp[sizeof(TEXT_Buffer)];
         uint FLASH_SIZE;
         w25q128.W25QXX_Init(); //W25QXX初始化
@@ -652,7 +660,7 @@ void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByte
         //检测不到W25Q128
         {
             printf("W25Q128 Check Failed!\r\n");
-			return;
+            return ;
         }
         printf("W25Q128 Ready!\r\n");
         FLASH_SIZE = 16 * 1024 * 1024; //FLASH 大小为16字节
