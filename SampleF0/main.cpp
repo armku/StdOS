@@ -33,10 +33,10 @@ void LedTask(void *param)
 /* 类型定义 ------------------------------------------------------------------*/
 typedef struct
 {
-  //uint8_t Year;
-  //uint8_t Month;
-  //uint8_t Date;
-  //uint8_t Week;
+  uint8_t Year;
+  uint8_t Month;
+  uint8_t Date;
+  uint8_t Week;
   uint8_t Hour;
   uint8_t Minute;
   uint8_t Second;
@@ -226,28 +226,29 @@ void RTC_Initializes(void)
 返 回 值 ： 无
 作    者 ： Huang Fugui
 *************************************************/
-void RTC_GetDateTime(RTC_DateTimeTypeDef *RTC_DateTimeStructure)
+void RTC_GetDateTime(DateTime &dt)
 {
   RTC_TimeTypeDef RTC_TimeStructure;
+  RTC_DateTypeDef RTC_DateStructure;
 
-  RTC_GetTime(RTC_Format_BIN, &RTC_TimeStructure);
-  RTC_DateTimeStructure->Hour = RTC_TimeStructure.RTC_Hours;
-  RTC_DateTimeStructure->Minute = RTC_TimeStructure.RTC_Minutes;
-  RTC_DateTimeStructure->Second = RTC_TimeStructure.RTC_Seconds;
+  RTC_GetTime(RTC_Format_BIN, &RTC_TimeStructure);	
+  RTC_GetDate(RTC_Format_BIN,&RTC_DateStructure);
+
+  dt.Year=RTC_DateStructure.RTC_Year+2000;
+  dt.Month=RTC_DateStructure.RTC_Month;
+  dt.Day=RTC_DateStructure.RTC_Date;
+	
+  dt.Hour = RTC_TimeStructure.RTC_Hours;
+  dt.Minute = RTC_TimeStructure.RTC_Minutes;
+  dt.Second = RTC_TimeStructure.RTC_Seconds;
 }
-
+DateTime now;
 void RTC_Demo(void *param)
 {
-	RTC_DateTimeTypeDef RTC_DateTimeStructure;
-
-	RTC_GetDateTime(&RTC_DateTimeStructure);   //读取当前时间		
-	printf("时间：%0.2d:%0.2d:%0.2d\r\n",
-	RTC_DateTimeStructure.Hour,
-	RTC_DateTimeStructure.Minute,
-	RTC_DateTimeStructure.Second);
+	RTC_GetDateTime(now);   //读取当前时间
+	now.Show();
+	printf("\r\n");
 }
-
-
 
 void RCC_Configuration(void)
 {  
@@ -262,16 +263,7 @@ void BSP_Configuration(void)//硬件初始化函数
 	
 	RTC_Initializes();
 }
-static void NVIC_Configuration(void)//中断优先级函数
-{
-	NVIC_InitTypeDef   NVIC_InitStructure;
 
-	// rs232
-	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPriority = 0x01;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-}
 int main()
 {
 	Sys.Name = (char*)namee;
@@ -281,7 +273,6 @@ int main()
         Sys.ShowInfo();
     #endif 
 	BSP_Configuration();//调用硬件初始化函数
-	NVIC_Configuration();//调用中断优先级初始化函数
 	Sys.AddTask(LedTask, &ledss, 0, 500, "LedTask");
 	Sys.AddTask(RTC_Demo, &ledss, 0, 1000, "RTC_Demo");
 
