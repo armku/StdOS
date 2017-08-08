@@ -382,7 +382,17 @@ void AlternatePort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F0
-
+		gpio->GPIO_Mode = GPIO_Mode_AF;
+		gpio->GPIO_Speed = GPIO_Speed_50MHz;
+        gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
+		if(!this->OpenDrain)
+		{
+			gpio->GPIO_PuPd = GPIO_PuPd_UP;
+		}
+		else
+		{
+			gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
+		}
     #elif defined STM32F1
         gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
     #elif defined STM32F4
@@ -407,7 +417,7 @@ void AnalogInPort::OnOpen(void *param)
     Port::OnOpen(param);
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F0
-
+		gpio->GPIO_Mode = GPIO_Mode_AN;
     #elif defined STM32F1
         gpio->GPIO_Mode = GPIO_Mode_AIN; //
     #elif defined STM32F4
@@ -433,7 +443,29 @@ void InputPort::OnOpen(void *param)
     Port::OnOpen(param);
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     #ifdef STM32F0
-
+		gpio->GPIO_Mode = GPIO_Mode_IN;
+        if (this->Floating)
+        {
+            gpio->GPIO_OType = GPIO_OType_OD;
+        }
+        else
+        {
+            gpio->GPIO_OType = GPIO_OType_PP;
+        }
+        switch (this->Pull)
+        {
+            case NOPULL:
+                gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
+                break;
+            case UP:
+                gpio->GPIO_PuPd = GPIO_PuPd_UP;
+                break;
+            case DOWN:
+                gpio->GPIO_PuPd = GPIO_PuPd_DOWN;
+                break;
+            default:
+                break;
+        }
     #elif defined STM32F1
         if (Floating)
             gpio->GPIO_Mode = GPIO_Mode_IN_FLOATING;
@@ -795,7 +827,7 @@ void SetEXIT(int pinIndex, bool enable)
 #endif 
 #if 0
     //≤‚ ‘¥˙¬Î
-     ?  ?  ?  ? PC13 PA0 InputPort exti(PC13); //PA1 PB3     PA0 PC13
+    InputPort exti(PC13); //PA1 PB3     PA0 PC13
     InputPort exti1(PA0);
     void OnKeyPress(InputPort *pin, bool down, void *param)
     {

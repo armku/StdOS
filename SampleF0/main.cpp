@@ -31,20 +31,6 @@ void LedTask(void *param)
 
 #define namee "StdOS"
 
-void RS232_GPIO(void)
-{
-  GPIO_InitTypeDef GPIO_InitStructure;//定义一个GPIO_InitTypeDef类型的结构体
-	
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_1); //定义PA9复用功能
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_1);  //定义PA10复用功能 
-	
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_10;//选择要控制的GPIOA引脚
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-  GPIO_Init(GPIOA, &GPIO_InitStructure);  
-}
 int main()
 {
 	Sys.Name = (char*)namee;
@@ -53,7 +39,6 @@ int main()
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 
-	RS232_GPIO(); //调用硬件初始化函数
 	Sys.AddTask(LedTask, &ledss, 0, 500, "LedTask");
 
     Sys.Start();
