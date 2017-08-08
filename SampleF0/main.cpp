@@ -38,16 +38,6 @@ void RCC_Configuration(void)//时钟初始化函数
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); //设置串口1时钟使能
 }
 
-static void NVIC_Configuration(void)//中断优先级初始化函数
-{
-	NVIC_InitTypeDef   NVIC_InitStructure;//定义一个NVIC_InitTypeDef类型的结构体
-
-	// rs232
-	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPriority = 0x01;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-}
 void RS232_GPIO(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;//定义一个GPIO_InitTypeDef类型的结构体
@@ -104,7 +94,6 @@ int main()
         Sys.ShowInfo();
     #endif 
 	BSP_Configuration(); //调用硬件初始化函数
-	NVIC_Configuration(); //调用中断优先级初始化函数
 	Company_Information();
 	Sys.AddTask(LedTask, &ledss, 0, 500, "LedTask");
 
