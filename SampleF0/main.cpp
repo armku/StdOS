@@ -82,7 +82,6 @@ void RCC_Configuration(void)//时钟初始化函数
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);//设置B端口时钟使能
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);//设置C端口时钟使能
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);//设置SPI时钟使能
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);//设置串口1时钟使能
 }
 void W25QXX_GPIO(void)//flash控制管脚初始化函数
 {    
@@ -115,16 +114,10 @@ void SPI1_GPIO(void)
 
 	/*!< Configure SPI_FLASH_SPI pins: MISO */
 	GPIO_InitStructure.GPIO_Pin    = GPIO_Pin_4;
-	GPIO_InitStructure.GPIO_Mode   = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_PuPd   = GPIO_PuPd_NOPULL;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 
 	/*!< Configure SPI_FLASH_SPI pins: MOSI */
 	GPIO_InitStructure.GPIO_Pin    = GPIO_Pin_5;
-	GPIO_InitStructure.GPIO_Mode   = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_OType  = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_Speed  = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_PuPd   = GPIO_PuPd_NOPULL;
 	GPIO_Init(GPIOB, &GPIO_InitStructure); 
 }
 
