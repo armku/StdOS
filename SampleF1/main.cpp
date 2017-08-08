@@ -34,14 +34,12 @@ void LedTask(void *param)
 #define namee "StdOS"
 
 int main(void)
-{
-    TSys &sys = (TSys &)(Sys);
-
-    sys.Name = (char*)namee;
+{    
+    Sys.Name = (char*)namee;
     byte aa = vers[0];
     aa = aa;
 
-    sys.Init();
+    Sys.Init();
     #if DEBUG
         Sys.MessagePort = COM1;
         Sys.ShowInfo();

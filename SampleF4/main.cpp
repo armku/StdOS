@@ -21,8 +21,7 @@ void SerialTest(void *param)
 
 int main(void)
 {
-	TSys &sys = (TSys &)(Sys);
-	sys.Init();
+	Sys.Init();
 	#if DEBUG
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
