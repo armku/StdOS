@@ -47,11 +47,9 @@ void LED_Demo(void)
 
 void LedTask(void *param)
 {
-	static int onoff=0;
-    OutputPort *leds = (OutputPort*)param;
-    *leds=onoff;
-	onoff=!onoff;
-	//*leds = ! * leds;
+	OutputPort *leds = (OutputPort*)param;
+    
+	*leds = ! * leds;
     //    led2 = key0;
 }
 
