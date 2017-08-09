@@ -237,7 +237,9 @@ void Spi::Init(SPI spi, uint speedHz)
         case Spi2:
         case Spi3:
             SPI_Init((SPI_TypeDef*)(this->_SPI), &SPI_InitStructure);
-			SPI_RxFIFOThresholdConfig((SPI_TypeDef*)(this->_SPI), SPI_RxFIFOThreshold_QF);
+			#ifdef STM32F0
+				SPI_RxFIFOThresholdConfig((SPI_TypeDef*)(this->_SPI), SPI_RxFIFOThreshold_QF);
+			#endif
             break;
         default:
             break;
