@@ -259,22 +259,23 @@
 #define AD7124_FILT_REG_FS(x)             (((x) & 0x7FF) << 0)
 
 #if AD7124SPISOFT
-AD7124::AD7124(SpiSoft *spi)
-#else
-AD7124::AD7124(Spi *spi)
-#endif
+    AD7124::AD7124(SpiSoft *spi)
+#else 
+    AD7124::AD7124(Spi *spi)
+#endif 
 {
-	
+
 }
 //返回-1,表示转换未完成
 int AD7124::Read(void)
 {
-	return 0;
+    return 0;
 }
+
 //读取AD转换是否正常
 bool AD7124::GetFlag(void)
 {
-	return true;
+    return true;
 }
 
 
@@ -283,24 +284,23 @@ bool AD7124::GetFlag(void)
 
 
 
-
-
-
-
-#ifdef _AD7124_H_1
-
-#ifndef __AD7124_SPI_H
-#define __AD7124_SPI_H
+#ifdef STM32F0
+    #include "stm32f0xx.h"
+#elif defined STM32F1
+    #include "stm32f10x.h"
+#elif defined STM32F4
+    #include "stm32f4xx.h"
+#endif 
 
 #include "stdint.h"
 
 /*
-	(SPI1 : AD7124-8)
-	PA4		:	SPI1-NSS	
-	PA5		:	SPI1-SCK
-	PA6		:	SPI1-MISO
-	PA7		:	SPI1-MOSI
-*/
+(SPI1 : AD7124-8)
+PA4		:	SPI1-NSS	
+PA5		:	SPI1-SCK
+PA6		:	SPI1-MISO
+PA7		:	SPI1-MOSI
+ */
 
 /*********************** 模拟SPI通信引脚 **************************************/
 #define SPI_NSS_PIN			GPIO_Pin_4
@@ -326,14 +326,10 @@ bool AD7124::GetFlag(void)
 #define SPI_MISO()		GPIO_ReadInputDataBit(SPI_MISO_PORT,SPI_MISO_PIN)
 
 void AD7124_SPI_Config(void);
-uint8_t spi8_run(uint8_t sendData);
+byte spi8_run(byte sendData);
 uint16_t spi16_run(uint16_t sendData);
 uint32_t spi24_run(uint32_t sendData);
 uint32_t spi32_run(uint32_t sendData);
-
-#endif
-#ifndef __AD7124_8_H
-#define __AD7124_8_H
 
 /******************************************************************************/
 /* Include Files                                                              */
@@ -352,291 +348,303 @@ void AD7124_Init(void);
 void AD7124_Config(void);
 void AD7124_ExInt_Config(void);
 
-uint32_t AD7124_Read_Reg(uint8_t reg, uint8_t bytes);
-void AD7124_Write_Reg(uint8_t reg, uint8_t bytes, uint32_t data);
+uint32_t AD7124_Read_Reg(byte reg, byte bytes);
+void AD7124_Write_Reg(byte reg, byte bytes, uint32_t data);
 
 void AD7124_Channel_Config(void);
 
 void AD7124_Test(void);
 
-uint8_t AD7124_Read_ID(void);
-uint8_t AD7124_Read_Status(void);
+byte AD7124_Read_ID(void);
+byte AD7124_Read_Status(void);
 void AD7124_Reset(void);
 void AD7124_Test(void);
 
 void AD7124_IntTask(void);
-#endif
-
-#include "stm32f10x.h"
-#include "ad7124_spi.h"
+float PT100_RtoT(float val)
+{
+    return val;
+}
 
 /*******************************************************************************
-  * @function	: AD7124_SPI_Config
-  * @brief		: SPI端口配置，模拟SPI
-  * @param		: 无
-  * @retval		: 无
-  * @notes		: 
-  *****************************************************************************/
+ * @function	: AD7124_SPI_Config
+ * @brief		: SPI端口配置，模拟SPI
+ * @param		: 无
+ * @retval		: 无
+ * @notes		: 
+ *****************************************************************************/
 void AD7124_SPI_Config(void)
 {
-	GPIO_InitTypeDef  GPIO_InitStructure;
-	//SPI_NSS
-	GPIO_InitStructure.GPIO_Pin = SPI_NSS_PIN;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_Init(SPI_NSS_PORT, &GPIO_InitStructure);
-	SPI_NSS_H();
-	//SPI_SCK
-	GPIO_InitStructure.GPIO_Pin = SPI_SCK_PIN;
-	GPIO_Init(SPI_SCK_PORT, &GPIO_InitStructure);
-	GPIO_ResetBits(SPI_SCK_PORT, SPI_SCK_PIN);
-	SPI_SCK_H();
-	//SPI_MOSI
-	GPIO_InitStructure.GPIO_Pin = SPI_MOSI_PIN;
-	GPIO_Init(SPI_MOSI_PORT, &GPIO_InitStructure);
-	GPIO_ResetBits(SPI_MOSI_PORT, SPI_MOSI_PIN);
-	SPI_MOSI_L();
-	//SPI_MISO
-	GPIO_InitStructure.GPIO_Pin = SPI_MISO_PIN;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;//GPIO_Mode_IPU;;//
-	GPIO_Init(SPI_MISO_PORT, &GPIO_InitStructure);
-	
-	SPI_NSS_L();
+    GPIO_InitTypeDef GPIO_InitStructure;
+    //SPI_NSS
+    GPIO_InitStructure.GPIO_Pin = SPI_NSS_PIN;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_Init(SPI_NSS_PORT, &GPIO_InitStructure);
+    SPI_NSS_H();
+    //SPI_SCK
+    GPIO_InitStructure.GPIO_Pin = SPI_SCK_PIN;
+    GPIO_Init(SPI_SCK_PORT, &GPIO_InitStructure);
+    GPIO_ResetBits(SPI_SCK_PORT, SPI_SCK_PIN);
+    SPI_SCK_H();
+    //SPI_MOSI
+    GPIO_InitStructure.GPIO_Pin = SPI_MOSI_PIN;
+    GPIO_Init(SPI_MOSI_PORT, &GPIO_InitStructure);
+    GPIO_ResetBits(SPI_MOSI_PORT, SPI_MOSI_PIN);
+    SPI_MOSI_L();
+    //SPI_MISO
+    GPIO_InitStructure.GPIO_Pin = SPI_MISO_PIN;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; //GPIO_Mode_IPU;;//
+    GPIO_Init(SPI_MISO_PORT, &GPIO_InitStructure);
+
+    SPI_NSS_L();
 }
 
 /*******************************************************************************
-	* @function	: SPI_Delay
-  * @brief		: SPI总线位延时
-  * @param		: 无
-  * @retval		: 无
-	* @notes		: 
-  *****************************************************************************/
+ * @function	: SPI_Delay
+ * @brief		: SPI总线位延时
+ * @param		: 无
+ * @retval		: 无
+ * @notes		: 
+ *****************************************************************************/
 static void SPI_Delay(void)
 {
-	uint8_t i; 
-	/*　
-	下面的时间是通过安富莱AX-Pro逻辑分析仪测试得到的。
-	CPU主频72MHz时，在内部Flash运行, MDK工程不优化
-	循环次数为10时，SCL频率 = 205KHz 
-	循环次数为7时，SCL频率 = 347KHz， SCL高电平时间1.5us，SCL低电平时间2.87us 
-	循环次数为5时，SCL频率 = 421KHz， SCL高电平时间1.25us，SCL低电平时间2.375us 
-	IAR工程编译效率高，不能设置为7
-	 */
-	for(i = 0; i < 10; i++);
+    byte i;
+    /*　
+    下面的时间是通过安富莱AX-Pro逻辑分析仪测试得到的。
+    CPU主频72MHz时，在内部Flash运行, MDK工程不优化
+    循环次数为10时，SCL频率 = 205KHz 
+    循环次数为7时，SCL频率 = 347KHz， SCL高电平时间1.5us，SCL低电平时间2.87us 
+    循环次数为5时，SCL频率 = 421KHz， SCL高电平时间1.25us，SCL低电平时间2.375us 
+    IAR工程编译效率高，不能设置为7
+     */
+    for (i = 0; i < 10; i++)
+        ;
 }
 
 /*******************************************************************************
-	* @function	: spi8_run
-  * @brief		: 读写spi 1个字节
-  * @param		: sendData
-  * @retval		: rcvData
-	* @notes		: 
-  *****************************************************************************/
-uint8_t spi8_run(uint8_t sendData)
+ * @function	: spi8_run
+ * @brief		: 读写spi 1个字节
+ * @param		: sendData
+ * @retval		: rcvData
+ * @notes		: 
+ *****************************************************************************/
+byte spi8_run(byte sendData)
 {
-	uint8_t spicnt = 8;
-	uint8_t rcvData = 0;
-	SPI_SCK_H();
-	SPI_MOSI_H();
-	while(spicnt-->0)
-	{
-		if(sendData & 0x80){
-			SPI_MOSI_H();
-		}
-		else{
-			SPI_MOSI_L();
-		}
-		SPI_Delay();
-		SPI_SCK_L();
-		sendData <<= 1;
-		SPI_Delay();SPI_Delay();
-		SPI_SCK_H();
-		rcvData <<=1;
-		rcvData |= SPI_MISO();
-	}
-	return rcvData;
+    byte spicnt = 8;
+    byte rcvData = 0;
+    SPI_SCK_H();
+    SPI_MOSI_H();
+    while (spicnt-- > 0)
+    {
+        if (sendData &0x80)
+        {
+            SPI_MOSI_H();
+        }
+        else
+        {
+            SPI_MOSI_L();
+        }
+        SPI_Delay();
+        SPI_SCK_L();
+        sendData <<= 1;
+        SPI_Delay();
+        SPI_Delay();
+        SPI_SCK_H();
+        rcvData <<= 1;
+        rcvData |= SPI_MISO();
+    }
+    return rcvData;
 }
 
 /*******************************************************************************
-	* @function	: spi16_run
-  * @brief		: 读写spi 2个字节
-  * @param		: sendData
-  * @retval		: rcvData
-	* @notes		: 
-  *****************************************************************************/
+ * @function	: spi16_run
+ * @brief		: 读写spi 2个字节
+ * @param		: sendData
+ * @retval		: rcvData
+ * @notes		: 
+ *****************************************************************************/
 uint16_t spi16_run(uint16_t sendData)
 {
-	uint8_t spicnt = 16;
-	uint16_t rcvData = 0;
-	SPI_SCK_H();
-	SPI_MOSI_H();
-	while(spicnt-->0)
-	{
-		if(sendData & 0x8000){
-			SPI_MOSI_H();
-		}
-		else{
-			SPI_MOSI_L();
-		}
-		SPI_Delay();
-		SPI_SCK_L();
-		sendData <<= 1;
-		SPI_Delay();SPI_Delay();
-		SPI_SCK_H();
-		rcvData <<= 1;
-		rcvData |= SPI_MISO();
-	}
-	return rcvData;
+    byte spicnt = 16;
+    uint16_t rcvData = 0;
+    SPI_SCK_H();
+    SPI_MOSI_H();
+    while (spicnt-- > 0)
+    {
+        if (sendData &0x8000)
+        {
+            SPI_MOSI_H();
+        }
+        else
+        {
+            SPI_MOSI_L();
+        }
+        SPI_Delay();
+        SPI_SCK_L();
+        sendData <<= 1;
+        SPI_Delay();
+        SPI_Delay();
+        SPI_SCK_H();
+        rcvData <<= 1;
+        rcvData |= SPI_MISO();
+    }
+    return rcvData;
 }
 
 /*******************************************************************************
-	* @function	: spi24_run
-  * @brief		: 读写spi 4个字节
-  * @param		: sendData
-  * @retval		: rcvData
-	* @notes		: 
-  *****************************************************************************/
+ * @function	: spi24_run
+ * @brief		: 读写spi 4个字节
+ * @param		: sendData
+ * @retval		: rcvData
+ * @notes		: 
+ *****************************************************************************/
 uint32_t spi24_run(uint32_t sendData)
 {
-	uint8_t spicnt = 24;
-	uint32_t rcvData = 0;
-	SPI_SCK_H();
-	SPI_MOSI_H();
-	while(spicnt-->0)
-	{
-		if(sendData & 0x800000){
-			SPI_MOSI_H();
-		}
-		else{
-			SPI_MOSI_L();
-		}
-		SPI_Delay();
-		SPI_SCK_L();
-		sendData <<= 1;
-		SPI_Delay();SPI_Delay();
-		SPI_SCK_H();
-		rcvData <<= 1;
-		rcvData |= SPI_MISO();
-	}
-	return rcvData;
+    byte spicnt = 24;
+    uint32_t rcvData = 0;
+    SPI_SCK_H();
+    SPI_MOSI_H();
+    while (spicnt-- > 0)
+    {
+        if (sendData &0x800000)
+        {
+            SPI_MOSI_H();
+        }
+        else
+        {
+            SPI_MOSI_L();
+        }
+        SPI_Delay();
+        SPI_SCK_L();
+        sendData <<= 1;
+        SPI_Delay();
+        SPI_Delay();
+        SPI_SCK_H();
+        rcvData <<= 1;
+        rcvData |= SPI_MISO();
+    }
+    return rcvData;
 }
 
 /*******************************************************************************
-	* @function	: SPI_Delay
-  * @brief		: SPI总线位延时
-  * @param		: sendData
-  * @retval		: rcvData
-	* @notes		: 
-  *****************************************************************************/
+ * @function	: SPI_Delay
+ * @brief		: SPI总线位延时
+ * @param		: sendData
+ * @retval		: rcvData
+ * @notes		: 
+ *****************************************************************************/
 uint32_t spi32_run(uint32_t sendData)
 {
-	uint8_t spicnt = 32;
-	uint32_t rcvData = 0;
-	SPI_SCK_H();
-	SPI_MOSI_H();
-	while(spicnt-->0)
-	{
-		if(sendData & 0x80000000){
-			SPI_MOSI_H();
-		}
-		else{
-			SPI_MOSI_L();
-		}
-		SPI_Delay();
-		SPI_SCK_L();
-		sendData <<= 1;
-		SPI_Delay();SPI_Delay();
-		SPI_SCK_H();
-		rcvData <<= 1;
-		rcvData |= SPI_MISO();
-	}
-	return rcvData;
-}
-
-/******************************************************************************/
-/* Include Files                                                              */
-/******************************************************************************/
-#include "stm32f10x.h"
-#include "ad7124.h"
-#include "ad7124_spi.h"
-#include "stdio.h"
-#include "pt100.h"
-#include "delay.h"
-#include "usart5.h"
-/*******************************************************************************
-  * @function	: AD7124_Read_Reg
-  * @brief		: 读取AD7124寄存器内容
-  * @param		: reg   寄存器地址
-  * @param		: bytes 寄存器大小
-  * @retval		: 读取的内容
-  * @notes		: 
-  *****************************************************************************/
-uint32_t AD7124_Read_Reg(uint8_t reg, uint8_t bytes)
-{
-	uint32_t retVal;
-	SPI_NSS_L();
-	spi8_run(AD7124_RD | reg);
-	if(bytes == 1){
-		retVal = spi8_run(0xFF);
-	}
-	else if(bytes == 2){
-		retVal = spi16_run(0xFFFF);
-	}
-	else if(bytes == 3){
-		retVal = spi24_run(0xFFFFFF);
-	}
-	SPI_NSS_H();
-	return retVal;
+    byte spicnt = 32;
+    uint32_t rcvData = 0;
+    SPI_SCK_H();
+    SPI_MOSI_H();
+    while (spicnt-- > 0)
+    {
+        if (sendData &0x80000000)
+        {
+            SPI_MOSI_H();
+        }
+        else
+        {
+            SPI_MOSI_L();
+        }
+        SPI_Delay();
+        SPI_SCK_L();
+        sendData <<= 1;
+        SPI_Delay();
+        SPI_Delay();
+        SPI_SCK_H();
+        rcvData <<= 1;
+        rcvData |= SPI_MISO();
+    }
+    return rcvData;
 }
 
 /*******************************************************************************
-  * @function	: AD7124_Read_Reg
-  * @brief		: 读取AD7124寄存器内容
-  * @param		: reg   寄存器地址
-  * @param		: bytes 寄存器大小
-  * @retval		: 读取的内容
-  * @notes		: 
-  *****************************************************************************/
-uint32_t AD7124_Read_Reg_NoCS(uint8_t reg, uint8_t bytes)
+ * @function	: AD7124_Read_Reg
+ * @brief		: 读取AD7124寄存器内容
+ * @param		: reg   寄存器地址
+ * @param		: bytes 寄存器大小
+ * @retval		: 读取的内容
+ * @notes		: 
+ *****************************************************************************/
+uint32_t AD7124_Read_Reg(byte reg, byte bytes)
 {
-	uint32_t retVal;
-	spi8_run(AD7124_RD | reg);
-	if(bytes == 1){
-		retVal = spi8_run(0xFF);
-	}
-	else if(bytes == 2){
-		retVal = spi16_run(0xFFFF);
-	}
-	else if(bytes == 3){
-		retVal = spi24_run(0xFFFFFF);
-	}
-	return retVal;
+    uint32_t retVal;
+    SPI_NSS_L();
+    spi8_run(AD7124_RD | reg);
+    if (bytes == 1)
+    {
+        retVal = spi8_run(0xFF);
+    }
+    else if (bytes == 2)
+    {
+        retVal = spi16_run(0xFFFF);
+    }
+    else if (bytes == 3)
+    {
+        retVal = spi24_run(0xFFFFFF);
+    }
+    SPI_NSS_H();
+    return retVal;
 }
 
 /*******************************************************************************
-  * @function	: AD7124_Write_Reg
-  * @brief		: 写AD7124寄存器
-  * @param		: reg	  寄存器地址
-  * @param		: bytes 寄存器大小
-  * @param		: data	写入的数据
-  * @retval		: 无
-  * @notes		: 
-  *****************************************************************************/
-void AD7124_Write_Reg(uint8_t reg, uint8_t bytes, uint32_t data)
+ * @function	: AD7124_Read_Reg
+ * @brief		: 读取AD7124寄存器内容
+ * @param		: reg   寄存器地址
+ * @param		: bytes 寄存器大小
+ * @retval		: 读取的内容
+ * @notes		: 
+ *****************************************************************************/
+uint32_t AD7124_Read_Reg_NoCS(byte reg, byte bytes)
 {
-	SPI_NSS_L();
-	spi8_run(AD7124_WR | reg);
-	if(bytes == 1){
-		spi8_run(data);
-	}
-	else if(bytes == 2){
-		spi16_run(data);
-	}
-	else if(bytes == 3){
-		spi24_run(data);
-	}
-	SPI_NSS_H();	
+    uint32_t retVal;
+    spi8_run(AD7124_RD | reg);
+    if (bytes == 1)
+    {
+        retVal = spi8_run(0xFF);
+    }
+    else if (bytes == 2)
+    {
+        retVal = spi16_run(0xFFFF);
+    }
+    else if (bytes == 3)
+    {
+        retVal = spi24_run(0xFFFFFF);
+    }
+    return retVal;
+}
+
+/*******************************************************************************
+ * @function	: AD7124_Write_Reg
+ * @brief		: 写AD7124寄存器
+ * @param		: reg	  寄存器地址
+ * @param		: bytes 寄存器大小
+ * @param		: data	写入的数据
+ * @retval		: 无
+ * @notes		: 
+ *****************************************************************************/
+void AD7124_Write_Reg(byte reg, byte bytes, uint32_t data)
+{
+    SPI_NSS_L();
+    spi8_run(AD7124_WR | reg);
+    if (bytes == 1)
+    {
+        spi8_run(data);
+    }
+    else if (bytes == 2)
+    {
+        spi16_run(data);
+    }
+    else if (bytes == 3)
+    {
+        spi24_run(data);
+    }
+    SPI_NSS_H();
 }
 
 //ADC_CONTROL			内部参考电压使能	低功率	连续转换模式	内部时钟不输出
@@ -666,7 +674,7 @@ void AD7124_Write_Reg(uint8_t reg, uint8_t bytes, uint32_t data)
 #define AD7124_FILT_REG_POST_FILTER(x)    (((x) & 0x7) << 17)
 #define AD7124_FILT_REG_SINGLE_CYCLE      (1 << 16)
 #define AD7124_FILT_REG_FS(x)             (((x) & 0x7FF) << 0)
-*/
+ */
 #define AD7124_FILT0_REG_DATA		AD7124_FILT_REG_FS(100)
 #define AD7124_FILT1_REG_DATA		AD7124_FILT_REG_FS(100)
 #define AD7124_FILT2_REG_DATA		AD7124_FILT_REG_FS(100)
@@ -675,37 +683,37 @@ void AD7124_Write_Reg(uint8_t reg, uint8_t bytes, uint32_t data)
 
 void AD7124_Config(void)
 {
-	AD7124_Write_Reg(AD7124_ADC_CTRL_REG, AD7124_ADC_CTRL_REG_BYTES, AD7124_ADC_CTRL_REG_DATA);
-	AD7124_Write_Reg(AD7124_IO_CTRL1_REG, AD7124_IO_CTRL1_REG_BYTES, AD7124_IO_CTRL1_REG_DATA);
-	AD7124_Write_Reg(AD7124_IO_CTRL2_REG, AD7124_IO_CTRL2_REG_BYTES, AD7124_IO_CTRL2_REG_DATA);
-	
-	AD7124_Write_Reg(AD7124_CFG0_REG, AD7124_CFG0_REG_BYTES, AD7124_CFG0_REG_DATA);
-	AD7124_Write_Reg(AD7124_CFG1_REG, AD7124_CFG1_REG_BYTES, AD7124_CFG1_REG_DATA);
-	AD7124_Write_Reg(AD7124_CFG2_REG, AD7124_CFG2_REG_BYTES, AD7124_CFG2_REG_DATA);
-	AD7124_Write_Reg(AD7124_CFG3_REG, AD7124_CFG3_REG_BYTES, AD7124_CFG3_REG_DATA);
-	AD7124_Write_Reg(AD7124_CFG4_REG, AD7124_CFG4_REG_BYTES, AD7124_CFG4_REG_DATA);
-	
-	AD7124_Write_Reg(AD7124_FILT0_REG, AD7124_FILT0_REG_BYTES, AD7124_FILT0_REG_DATA);
-	AD7124_Write_Reg(AD7124_FILT1_REG, AD7124_FILT1_REG_BYTES, AD7124_FILT1_REG_DATA);
-	AD7124_Write_Reg(AD7124_FILT2_REG, AD7124_FILT2_REG_BYTES, AD7124_FILT2_REG_DATA);
-	AD7124_Write_Reg(AD7124_FILT3_REG, AD7124_FILT3_REG_BYTES, AD7124_FILT3_REG_DATA);
-	AD7124_Write_Reg(AD7124_FILT4_REG, AD7124_FILT4_REG_BYTES, AD7124_FILT4_REG_DATA);
+    AD7124_Write_Reg(AD7124_ADC_CTRL_REG, AD7124_ADC_CTRL_REG_BYTES, AD7124_ADC_CTRL_REG_DATA);
+    AD7124_Write_Reg(AD7124_IO_CTRL1_REG, AD7124_IO_CTRL1_REG_BYTES, AD7124_IO_CTRL1_REG_DATA);
+    AD7124_Write_Reg(AD7124_IO_CTRL2_REG, AD7124_IO_CTRL2_REG_BYTES, AD7124_IO_CTRL2_REG_DATA);
+
+    AD7124_Write_Reg(AD7124_CFG0_REG, AD7124_CFG0_REG_BYTES, AD7124_CFG0_REG_DATA);
+    AD7124_Write_Reg(AD7124_CFG1_REG, AD7124_CFG1_REG_BYTES, AD7124_CFG1_REG_DATA);
+    AD7124_Write_Reg(AD7124_CFG2_REG, AD7124_CFG2_REG_BYTES, AD7124_CFG2_REG_DATA);
+    AD7124_Write_Reg(AD7124_CFG3_REG, AD7124_CFG3_REG_BYTES, AD7124_CFG3_REG_DATA);
+    AD7124_Write_Reg(AD7124_CFG4_REG, AD7124_CFG4_REG_BYTES, AD7124_CFG4_REG_DATA);
+
+    AD7124_Write_Reg(AD7124_FILT0_REG, AD7124_FILT0_REG_BYTES, AD7124_FILT0_REG_DATA);
+    AD7124_Write_Reg(AD7124_FILT1_REG, AD7124_FILT1_REG_BYTES, AD7124_FILT1_REG_DATA);
+    AD7124_Write_Reg(AD7124_FILT2_REG, AD7124_FILT2_REG_BYTES, AD7124_FILT2_REG_DATA);
+    AD7124_Write_Reg(AD7124_FILT3_REG, AD7124_FILT3_REG_BYTES, AD7124_FILT3_REG_DATA);
+    AD7124_Write_Reg(AD7124_FILT4_REG, AD7124_FILT4_REG_BYTES, AD7124_FILT4_REG_DATA);
 }
 
 /*******************************************************************************
-  * @function	: AD7124_Init
-  * @brief		: SPI端口配置，模拟SPI
-  * @param		: 无
-  * @retval		: 无
-  * @notes		: 
-  *****************************************************************************/
+ * @function	: AD7124_Init
+ * @brief		: SPI端口配置，模拟SPI
+ * @param		: 无
+ * @retval		: 无
+ * @notes		: 
+ *****************************************************************************/
 void AD7124_Init(void)
 {
-	AD7124_SPI_Config();		//SPI IO端口配置
-	AD7124_Config();				//ADC 配置
-	AD7124_Channel_Config();		//
-	AD7124_ExInt_Config();	//外部中断口配置
-	SPI_NSS_L();
+    AD7124_SPI_Config(); //SPI IO端口配置
+    AD7124_Config(); //ADC 配置
+    AD7124_Channel_Config(); //
+    AD7124_ExInt_Config(); //外部中断口配置
+    SPI_NSS_L();
 }
 
 //IO_CTRL_1_TEMP1				无数字输出 	数字输出禁用	PDSW关	IOUT1关闭			IOUT0=500uA	IOUT1_CH=0		IOUT0_CH=AIN0
@@ -773,162 +781,164 @@ void AD7124_Init(void)
 #define AD7124_ADTEMP_IO_CFG_CLR()			AD7124_Write_Reg(AD7124_IO_CTRL1_REG, AD7124_IO_CTRL1_REG_BYTES,  0);
 
 /*******************************************************************************
-  * @function	: AD7124_Channel_Config
-  * @brief		:	ADC通道配置
-  * @param		: 无
-  * @retval		: 无
-  * @notes		: 
-  *****************************************************************************/
+ * @function	: AD7124_Channel_Config
+ * @brief		:	ADC通道配置
+ * @param		: 无
+ * @retval		: 无
+ * @notes		: 
+ *****************************************************************************/
 void AD7124_Channel_Config(void)
 {
-	AD7124_Write_Reg(AD7124_IO_CTRL1_REG, AD7124_IO_CTRL1_REG_BYTES, 	AD7124_IO_CTRL1_REG_DATA_TEMP1_TEST);
-	AD7124_TEMP1_CH_CFG();
-	AD7124_TEMP1_RES_CH_CFG();
-	AD7124_FLOWA_CH_CFG();
-	AD7124_FLOWB_CH_CFG();
-	AD7124_BRDTEMP_CH_CFG();
-	AD7124_ADTEMP_CH_CFG();
+    AD7124_Write_Reg(AD7124_IO_CTRL1_REG, AD7124_IO_CTRL1_REG_BYTES, AD7124_IO_CTRL1_REG_DATA_TEMP1_TEST);
+    AD7124_TEMP1_CH_CFG();
+    AD7124_TEMP1_RES_CH_CFG();
+    AD7124_FLOWA_CH_CFG();
+    AD7124_FLOWB_CH_CFG();
+    AD7124_BRDTEMP_CH_CFG();
+    AD7124_ADTEMP_CH_CFG();
 }
 
 /*******************************************************************************
-  * @function	: AD7124_Read_ID
-  * @brief		: 读取AD7124 ID寄存器
-  * @param		: 无
-  * @retval		: 无
-  * @notes		: 
-  *****************************************************************************/
-uint8_t AD7124_Read_ID(void)
+ * @function	: AD7124_Read_ID
+ * @brief		: 读取AD7124 ID寄存器
+ * @param		: 无
+ * @retval		: 无
+ * @notes		: 
+ *****************************************************************************/
+byte AD7124_Read_ID(void)
 {
-	uint8_t retVal;
-	retVal = AD7124_Read_Reg(AD7124_ID_REG, AD7124_ID_REG_BYTES);
-	printf("ID:0x%02x\n",retVal);
-	return retVal;
+    byte retVal;
+    retVal = AD7124_Read_Reg(AD7124_ID_REG, AD7124_ID_REG_BYTES);
+    printf("ID:0x%02x\n", retVal);
+    return retVal;
 }
 
 /*******************************************************************************
-  * @function	: AD7124_Read_Status
-  * @brief		: 读取AD7124 状态寄存器
-  * @param		: 无
-  * @retval		: 无
-  * @notes		: 
-  *****************************************************************************/
-uint8_t AD7124_Read_Status(void)
+ * @function	: AD7124_Read_Status
+ * @brief		: 读取AD7124 状态寄存器
+ * @param		: 无
+ * @retval		: 无
+ * @notes		: 
+ *****************************************************************************/
+byte AD7124_Read_Status(void)
 {
-	uint8_t retVal;
-	retVal = AD7124_Read_Reg(AD7124_STATUS_REG, AD7124_STATUS_REG_BYTES);
-	printf("Status:0x%02x\n",retVal);
-	return retVal;
+    byte retVal;
+    retVal = AD7124_Read_Reg(AD7124_STATUS_REG, AD7124_STATUS_REG_BYTES);
+    printf("Status:0x%02x\n", retVal);
+    return retVal;
 }
+
 /*******************************************************************************
-  * @function	: AD7124_Get_Temp1
-  * @brief		: 获取温度1
-  * @param		: 无
-  * @retval		: 返回温度值
-  * @notes		: 
-  *****************************************************************************/
+ * @function	: AD7124_Get_Temp1
+ * @brief		: 获取温度1
+ * @param		: 无
+ * @retval		: 返回温度值
+ * @notes		: 
+ *****************************************************************************/
 float AD7124_Get_Temp1(void)
 {
-	uint32_t data;
-	float res;
-	float temp;
-	data = AD7124_Read_Reg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
-	printf("data:0x%08x\n",data);
-	res = (5110.0*data)/(16777215.0*16.0);
-//	fdata = ((data - 8388608)/13584) - 272.5;
-	printf("R:%0.4f\n",res);
-	temp = PT100_RtoT(res);
-	printf("T:%0.4f\n",temp);
-	return temp;
+    uint32_t data;
+    float res;
+    float temp;
+    data = AD7124_Read_Reg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
+    printf("data:0x%08x\n", data);
+    res = (5110.0 *data) / (16777215.0 *16.0);
+    //	fdata = ((data - 8388608)/13584) - 272.5;
+    printf("R:%0.4f\n", res);
+    temp = PT100_RtoT(res);
+    printf("T:%0.4f\n", temp);
+    return temp;
 }
 
 /*******************************************************************************
-  * @function	: AD7124_Get_Temp1
-  * @brief		: 获取温度1线路电阻
-  * @param		: 无
-  * @retval		: 返回温度值
-  * @notes		: 
-  *****************************************************************************/
+ * @function	: AD7124_Get_Temp1
+ * @brief		: 获取温度1线路电阻
+ * @param		: 无
+ * @retval		: 返回温度值
+ * @notes		: 
+ *****************************************************************************/
 float AD7124_Get_Temp1_Res(void)
 {
-	uint32_t data;
-	float res;
-	float temp;
-	data = AD7124_Read_Reg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
-	printf("data:0x%08x\n",data);
-	res = (5110.0*data)/(16777215.0*16.0);
-	printf("R:%0.4f\n",res);
-	temp = PT100_RtoT(res);
-	printf("T:%0.4f\n",temp);
-	return temp;
+    uint32_t data;
+    float res;
+    float temp;
+    data = AD7124_Read_Reg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
+    printf("data:0x%08x\n", data);
+    res = (5110.0 *data) / (16777215.0 *16.0);
+    printf("R:%0.4f\n", res);
+    temp = PT100_RtoT(res);
+    printf("T:%0.4f\n", temp);
+    return temp;
 }
 
 /*******************************************************************************
-  * @function	: AD7124_Reset
-  * @brief		: 获取温度1线路电阻
-  * @param		: 无
-  * @retval		: 返回温度值
-  * @notes		: 
-  *****************************************************************************/
+ * @function	: AD7124_Reset
+ * @brief		: 获取温度1线路电阻
+ * @param		: 无
+ * @retval		: 返回温度值
+ * @notes		: 
+ *****************************************************************************/
 void AD7124_Reset(void)
 {
-	SPI_NSS_L();
-	spi8_run(0xFF);
-	spi8_run(0xFF);
-	spi8_run(0xFF);
-	spi8_run(0xFF);
-	spi8_run(0xFF);
-	spi8_run(0xFF);
-	spi8_run(0xFF);
-	spi8_run(0xFF);
-	SPI_NSS_H();
+    SPI_NSS_L();
+    spi8_run(0xFF);
+    spi8_run(0xFF);
+    spi8_run(0xFF);
+    spi8_run(0xFF);
+    spi8_run(0xFF);
+    spi8_run(0xFF);
+    spi8_run(0xFF);
+    spi8_run(0xFF);
+    SPI_NSS_H();
 }
 
 float AD7124_Temp1_Test(void)
 {
-	uint32_t data;
-	float pt100_res;
-	float wire_res;
-	float temp;
+    uint32_t data;
+    float pt100_res;
+    float wire_res;
+    float temp;
 
-//	AD7124_Write_Reg(AD7124_ADC_CTRL_REG, AD7124_ADC_CTRL_REG_BYTES, 0X0004);
-	Delay_ms(50);
-	data = AD7124_Read_Reg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
-	
-	printf("data:0x%08x\n",data);
-	pt100_res = (5110.0*data)/(16777215.0*16.0);
-	printf("R:%0.4f\n",pt100_res);
-	temp = PT100_RtoT(pt100_res);
-	printf("T:%0.4f\n",temp);
-	
-//	AD7124_Write_Reg(AD7124_ADC_CTRL_REG, AD7124_ADC_CTRL_REG_BYTES, 0X0004);
-	Delay_ms(50);
-	data = AD7124_Read_Reg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
-	
-	printf("data:0x%08x\n",data);
-	wire_res = (2.5*data)/(16777215*128*0.001);
-	printf("R:%0.4f\n",wire_res);
-	
-	pt100_res = pt100_res-wire_res;
-	temp = PT100_RtoT(pt100_res);
-	printf("T:%0.4f\n",temp);
-	
-	return temp;
+    //	AD7124_Write_Reg(AD7124_ADC_CTRL_REG, AD7124_ADC_CTRL_REG_BYTES, 0X0004);
+    Sys.Sleep(50);
+    data = AD7124_Read_Reg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
+
+    printf("data:0x%08x\n", data);
+    pt100_res = (5110.0 *data) / (16777215.0 *16.0);
+    printf("R:%0.4f\n", pt100_res);
+    temp = PT100_RtoT(pt100_res);
+    printf("T:%0.4f\n", temp);
+
+    //	AD7124_Write_Reg(AD7124_ADC_CTRL_REG, AD7124_ADC_CTRL_REG_BYTES, 0X0004);
+    Sys.Sleep(50);
+    data = AD7124_Read_Reg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
+
+    printf("data:0x%08x\n", data);
+    wire_res = (2.5 *data) / (16777215 *128 * 0.001);
+    printf("R:%0.4f\n", wire_res);
+
+    pt100_res = pt100_res - wire_res;
+    temp = PT100_RtoT(pt100_res);
+    printf("T:%0.4f\n", temp);
+
+    return temp;
 }
+
 void AD7124_Test(void)
 {
-	uint32_t data;
-	float fdata;
-//	data = AD7124_Read_Reg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
-//	printf("data:0x%08x\n",data);
-//	fdata = 2.5*data/16777215;
-////	fdata = ((data - 8388608)/13584) - 272.5;
-//	printf("Volt:%0.4f\n",fdata);
-	
-	data = AD7124_Read_Reg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
-	
-	printf("data:0x%08x\n",data);
-	fdata = (2.5*data)/(16777215*128*0.001);
-	printf("R:%0.4f\n",fdata);
+    uint32_t data;
+    float fdata;
+    //	data = AD7124_Read_Reg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
+    //	printf("data:0x%08x\n",data);
+    //	fdata = 2.5*data/16777215;
+    ////	fdata = ((data - 8388608)/13584) - 272.5;
+    //	printf("Volt:%0.4f\n",fdata);
+
+    data = AD7124_Read_Reg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
+
+    printf("data:0x%08x\n", data);
+    fdata = (2.5 *data) / (16777215 *128 * 0.001);
+    printf("R:%0.4f\n", fdata);
 }
 
 #define EXINT_PORT					GPIOA
@@ -939,115 +949,117 @@ void AD7124_Test(void)
 #define RCC_EXINT_AFIO_CMD	RCC_APB2PeriphClockCmd
 
 /**********************************************************************************
-	* @function	: ExInt_Config
-  * @brief  	: ????IO?
-  * @param  	: ?
-  * @retval 	: ?
-	* @notes		: 
-  *********************************************************************************/
+ * @function	: ExInt_Config
+ * @brief  	: ????IO?
+ * @param  	: ?
+ * @retval 	: ?
+ * @notes		: 
+ *********************************************************************************/
 void AD7124_ExInt_Config(void)
 {
-	GPIO_InitTypeDef GPIO_InitStructure;
-	EXTI_InitTypeDef EXTI_InitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;
-	//NVIC
-	NVIC_InitStructure.NVIC_IRQChannel = EXTI9_5_IRQn; 
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-	//GPIO
-	RCC_EXINT_PORT_CMD(RCC_EXINT_PORT, ENABLE);  /* ??GPIO?? */
-	RCC_EXINT_AFIO_CMD(RCC_EXINT_AFIO, ENABLE);	
-	GPIO_InitStructure.GPIO_Pin = EXINT_PIN;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-	GPIO_Init(EXINT_PORT, &GPIO_InitStructure);
-	//EXTI Line
-	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource6);
-	//EXTI
-	EXTI_InitStructure.EXTI_Line = EXTI_Line6;
-	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
-	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-	EXTI_Init(&EXTI_InitStructure);
+    GPIO_InitTypeDef GPIO_InitStructure;
+    EXTI_InitTypeDef EXTI_InitStructure;
+    NVIC_InitTypeDef NVIC_InitStructure;
+    //NVIC
+    NVIC_InitStructure.NVIC_IRQChannel = EXTI9_5_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
+    //GPIO
+    RCC_EXINT_PORT_CMD(RCC_EXINT_PORT, ENABLE); /* ??GPIO?? */
+    RCC_EXINT_AFIO_CMD(RCC_EXINT_AFIO, ENABLE);
+    GPIO_InitStructure.GPIO_Pin = EXINT_PIN;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    GPIO_Init(EXINT_PORT, &GPIO_InitStructure);
+    //EXTI Line
+    GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource6);
+    //EXTI
+    EXTI_InitStructure.EXTI_Line = EXTI_Line6;
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    EXTI_Init(&EXTI_InitStructure);
 }
 
 void AD7124_ExInt_Disable(void)
 {
-//EXTI
-	EXTI_InitTypeDef EXTI_InitStructure;
-	EXTI_InitStructure.EXTI_Line = EXTI_Line6;
-	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
-	EXTI_InitStructure.EXTI_LineCmd = DISABLE;
-	EXTI_Init(&EXTI_InitStructure);
+    //EXTI
+    EXTI_InitTypeDef EXTI_InitStructure;
+    EXTI_InitStructure.EXTI_Line = EXTI_Line6;
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
+    EXTI_InitStructure.EXTI_LineCmd = DISABLE;
+    EXTI_Init(&EXTI_InitStructure);
 }
 
 #define AD7124_BUFSIZE 6
 uint32_t ad7124Buf[AD7124_BUFSIZE];
-uint8_t ad7124BufCnt = 0;
-uint8_t ad7124Int = 0;
+byte ad7124BufCnt = 0;
+byte ad7124Int = 0;
 
 void EXTI9_5_IRQHandler(void)
 {
-	uint32_t data;
-	if(EXTI_GetITStatus(EXTI_Line6) != RESET)
-	{
-		EXTI_ClearITPendingBit(EXTI_Line6);
-		ad7124Int = 1; 
-		AD7124_ExInt_Disable();
-		data = AD7124_Read_Reg_NoCS(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
-		ad7124Buf[ad7124BufCnt++] = data;
-		if(ad7124BufCnt == AD7124_BUFSIZE){
-			ad7124BufCnt = 0;
-		}
-		AD7124_ExInt_Config();
-	}
+    uint32_t data;
+    if (EXTI_GetITStatus(EXTI_Line6) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line6);
+        ad7124Int = 1;
+        AD7124_ExInt_Disable();
+        data = AD7124_Read_Reg_NoCS(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
+        ad7124Buf[ad7124BufCnt++] = data;
+        if (ad7124BufCnt == AD7124_BUFSIZE)
+        {
+            ad7124BufCnt = 0;
+        }
+        AD7124_ExInt_Config();
+    }
 }
 
 //测试
 void AD7124_IntTask(void)
 {
-	uint8_t cnt;
-//	float pt100;
-//	float wire;
-//	float temp;
-//	float volt;
-//	float flow;
-	if(ad7124Int == 0){
-		return;
-	}
-	ad7124Int = 0;
-	if(ad7124BufCnt == 0){
-		cnt = AD7124_BUFSIZE-1;
-	}else{
-		cnt = ad7124BufCnt-1;
-	}
-	//printf("ch(%d):%08x\n",cnt,ad7124Buf[cnt]);
-	//PT100
-	if(cnt == AD7124_BUFSIZE-1)
-	{
-//		//printf("ch0:0x%08x\n",ad7124Buf[0]);
-//		//printf("ch1:0x%08x\n",ad7124Buf[1]);
-//		pt100 = (5110.0*ad7124Buf[0])/(16777215.0*16.0);
-//		//printf("PT100:%0.4f\n",pt100);
-//		wire = (2.5*ad7124Buf[1])/(16777215*128*0.001);
-//		//printf("wire:%0.4f\n",wire);
-//		pt100 = pt100-wire;
-//		//printf("R:%0.4fR\n",pt100);
-//		temp = PT100_RtoT(pt100);
-//		printf("R=%0.4f, T=%0.4f\n",pt100,temp);
-//		
-//		volt = 2*(2.5*ad7124Buf[3])/16777215;
-//		flow = (volt-1.0)/4*2;
-//		printf("V=%0.4f, F=%0.4f\n",volt,flow);
-//		//printf("T:%0.4fC\n",temp);
-		
-		USART5_printf("0x%08x 0x%08x 0x%08x 0x%08x 0x%08x 0x%08x\n",ad7124Buf[0],ad7124Buf[1],ad7124Buf[2],ad7124Buf[3],ad7124Buf[4],ad7124Buf[5]);
-		//USART5_printf("01\n");
-	}
+    byte cnt;
+    //	float pt100;
+    //	float wire;
+    //	float temp;
+    //	float volt;
+    //	float flow;
+    if (ad7124Int == 0)
+    {
+        return ;
+    }
+    ad7124Int = 0;
+    if (ad7124BufCnt == 0)
+    {
+        cnt = AD7124_BUFSIZE - 1;
+    }
+    else
+    {
+        cnt = ad7124BufCnt - 1;
+    }
+    //printf("ch(%d):%08x\n",cnt,ad7124Buf[cnt]);
+    //PT100
+    if (cnt == AD7124_BUFSIZE - 1)
+    {
+        //		//printf("ch0:0x%08x\n",ad7124Buf[0]);
+        //		//printf("ch1:0x%08x\n",ad7124Buf[1]);
+        //		pt100 = (5110.0*ad7124Buf[0])/(16777215.0*16.0);
+        //		//printf("PT100:%0.4f\n",pt100);
+        //		wire = (2.5*ad7124Buf[1])/(16777215*128*0.001);
+        //		//printf("wire:%0.4f\n",wire);
+        //		pt100 = pt100-wire;
+        //		//printf("R:%0.4fR\n",pt100);
+        //		temp = PT100_RtoT(pt100);
+        //		printf("R=%0.4f, T=%0.4f\n",pt100,temp);
+        //		
+        //		volt = 2*(2.5*ad7124Buf[3])/16777215;
+        //		flow = (volt-1.0)/4*2;
+        //		printf("V=%0.4f, F=%0.4f\n",volt,flow);
+        //		//printf("T:%0.4fC\n",temp);
+
+        printf("0x%08x 0x%08x 0x%08x 0x%08x 0x%08x 0x%08x\n", ad7124Buf[0], ad7124Buf[1], ad7124Buf[2], ad7124Buf[3], ad7124Buf[4], ad7124Buf[5]);
+        //USART5_printf("01\n");
+    }
 }
-
-
-#endif
