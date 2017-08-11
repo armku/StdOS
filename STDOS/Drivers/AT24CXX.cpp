@@ -522,16 +522,15 @@ byte AT24CXX::CheckOk()
 
 #if 1
     #define EE_SIZE				256			  /* 24xx02总容量 */    
-       
+    #ifdef STM32F0
+        AT24CXX at2402(PB6, PB7, AT24C02);
+    #elif defined STM32F1
+        AT24CXX at2402(PB6, PB7, AT24C02);
+    #elif defined STM32F4
+        AT24CXX at2402(PB8, PB9, AT24C02);
+    #endif 
     void AT24C02Test()
     {
-		#ifdef STM32F0
-			AT24CXX at2402(PB6, PB7, AT24C02);
-		#elif defined STM32F1
-			AT24CXX at2402(PB6, PB7, AT24C02);
-		#elif defined STM32F4
-			AT24CXX at2402(PB8, PB9, AT24C02);
-		#endif
         printf("\r\n");
 
         ushort i;
@@ -555,7 +554,7 @@ byte AT24CXX::CheckOk()
             write_buf[i] = i;
         }
         /*------------------------------------------------------------------------------------*/
-        if (at2402.Write(0,write_buf, EE_SIZE) == 0)
+        if (at2402.Write(0, write_buf, EE_SIZE) == 0)
         {
             printf("写eeprom出错！\r\n");
             return ;
@@ -568,7 +567,7 @@ byte AT24CXX::CheckOk()
         /*写完之后需要适当的延时再去读，不然会出错*/
         Sys.Sleep(10);
         /*-----------------------------------------------------------------------------------*/
-        if (at2402.Read(0,read_buf, EE_SIZE) == 0)
+        if (at2402.Read(0, read_buf, EE_SIZE) == 0)
         {
             printf("读eeprom出错！\r\n");
             return ;
