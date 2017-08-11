@@ -25,7 +25,7 @@ public:
 	virtual void SetPin(Pin scl, Pin sda) = 0;
 	virtual void GetPin(Pin* scl = nullptr, Pin* sda = nullptr) = 0;
 
-	virtual void Open();		// 打开设备
+	virtual bool Open();		// 打开设备
 	virtual void Close();		// 关闭设备
 
 	virtual void Start() = 0;	// 开始会话

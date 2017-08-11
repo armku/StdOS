@@ -17,9 +17,9 @@ I2C::~I2C()
 	
 }
 // 打开设备
-void I2C::Open()
+bool I2C::Open()
 {
-	
+	return true;
 }
 // 关闭设备
 void I2C::Close()
