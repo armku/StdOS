@@ -37,7 +37,7 @@ static uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *pa
 }
 
 #define namee "StdOS"
-
+void AT24C02Test();
 int main(void)
 {    
     Sys.Name = (char*)namee;
@@ -50,7 +50,7 @@ int main(void)
         Sys.ShowInfo();
     #endif 	
 	SerialPort::GetMessagePort()->Register(OnUsart1Read);
-	
+	AT24C02Test();
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
     Sys.Start();	
