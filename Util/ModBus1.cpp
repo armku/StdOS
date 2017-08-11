@@ -36,7 +36,6 @@ void ModbusSlave1::Process(Buffer &bs, void *param)
 //处理数据帧
 void ModbusSlave1::DealFrame(Buffer &bs, void *param)
 {
-    SerialPort *sp = (SerialPort*)param;
     debug_printf("address:%d length:%d\r\n", this->Entity.address, this->Entity.reglength);
     ushort crc;
     switch (this->Entity.Function)
