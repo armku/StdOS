@@ -30,6 +30,11 @@ void LedTask(void *param)
     *leds = ! * leds;
     //    led2 = key0;
 }
+static uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
+{
+   bs.Show(true);
+    return 0;
+}
 
 #define namee "StdOS"
 
@@ -44,6 +49,7 @@ int main(void)
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 	
+	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 	
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
