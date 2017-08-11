@@ -60,16 +60,142 @@ SerialPort::~SerialPort()
     }
     RS485 = NULL;
 }
-
-void SerialPort::Init()
+void SerialPort::Set(COM index, int baudRate)
 {
-    this->Index=COM_NONE;
-    RS485 = NULL;
-    Error = 0;
-
-    Remap = 0;
+	
 }
+void SerialPort::Set(byte dataBits, byte parity, byte stopBits)
+{
+	
+}
+// 发送单一字节数据
+int SerialPort::SendData(byte data, int times)
+{
+    USART_TypeDef *const g_Uart_Ports[] = UARTS;
+    switch (this->Index)
+    {
+        case COM1:
+            while (USART_GetFlagStatus(g_Uart_Ports[0], USART_FLAG_TXE) == RESET && --times > 0){}
+            break;
+        case COM2:
+            while (USART_GetFlagStatus(g_Uart_Ports[1], USART_FLAG_TXE) == RESET && --times > 0){}
+            break;
+        case COM3:
+            while (USART_GetFlagStatus(g_Uart_Ports[2], USART_FLAG_TXE) == RESET && --times > 0){}
+            break;
+        case COM4:
+            while (USART_GetFlagStatus(g_Uart_Ports[3], USART_FLAG_TXE) == RESET && --times > 0){}
+            break;
+        case COM5:
+            while (USART_GetFlagStatus(g_Uart_Ports[4], USART_FLAG_TXE) == RESET && --times > 0){}
+            break;
+        default:
+            //while (USART_GetFlagStatus(g_Uart_Ports[0], USART_FLAG_TXE) == RESET && --times > 0){}
+            break;
+    }
+    //等待发送完毕
+    if (times > 0)
+    {
+        switch (this->Index)
+        {
+            case COM1:
+                USART_SendData(g_Uart_Ports[0], (ushort)data);
+                break;
+            case COM2:
+                USART_SendData(g_Uart_Ports[1], (ushort)data);
+                break;
+            case COM3:
+                USART_SendData(g_Uart_Ports[2], (ushort)data);
+                break;
+            case COM4:
+                USART_SendData(g_Uart_Ports[3], (ushort)data);
+                break;
+            case COM5:
+                USART_SendData(g_Uart_Ports[4], (ushort)data);
+                break;
+            default:
+                //USART_SendData(g_Uart_Ports[0], (ushort)data);
+                break;
+        }
+    }
+    else
+    {
+        Error++;
+    }
+    return 0;
+}
+// 刷出某个端口中的数据
+bool SerialPort::Flush(int times)
+{
+    //uint times = 3000;
+    //    while (USART_GetFlagStatus(_port, USART_FLAG_TXE) == RESET && --times > 0)
+    //        ;
+    //等待发送完毕
+    return times > 0;
+}
+void SerialPort::SetBaudRate(int baudRate)
+{
+	this->_baudRate=baudRate;
+	this->OnOpen();
+}
+#ifdef STM32F0
+	#define UART_IRQs {USART1_IRQn,USART2_IRQn}
+#elif defined STM32F1
+    #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
+#elif defined STM32F4 
+    #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn}
+#endif 
+void OnUsartReceive(ushort num, void *param);
 
+void SerialPort::Register(TransportHandler handler, void *param)
+{
+    ITransport::Register(handler, param);
+
+    const byte irqs[] = UART_IRQs;
+    byte irq = irqs[this->Index];
+    if (handler)
+    {
+        Interrupt.SetPriority(irq);
+        Interrupt.Activate(irq, OnUsartReceive, this);
+    }
+    else
+    {
+                Interrupt.Deactivate(irq);
+    }
+}
+void SerialPort::ChangePower(int level)
+{
+
+}
+void SerialPort::OnTxHandler()
+{
+	
+}
+void SerialPort::OnRxHandler()
+{
+	
+}
+SerialPort *_printf_sp;
+SerialPort *SerialPort::GetMessagePort()
+{
+    if (!_printf_sp)
+    {
+        if (Sys.MessagePort == COM_NONE)
+        {
+            return NULL;
+        }
+        _printf_sp = new SerialPort(COM(Sys.MessagePort));
+        _printf_sp->Open();
+    }
+
+    return _printf_sp;
+}
+#ifdef DEBUG
+	void SerialPort::Test()
+	{
+		
+	}
+#endif
 // 获取引脚
 void GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
 {
@@ -87,8 +213,6 @@ void GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
     *txPin = p[n];
     *rxPin = p[n + 1];
 }
-// 获取组和针脚
-#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
 // 打开串口
 bool SerialPort::OnOpen()
 {
@@ -298,68 +422,6 @@ void SerialPort::OnClose()
 	#elif defined STM32F4
     #endif 
 }
-
-// 发送单一字节数据
-int SerialPort::SendData(byte data, int times)
-{
-    USART_TypeDef *const g_Uart_Ports[] = UARTS;
-    switch (this->Index)
-    {
-        case COM1:
-            while (USART_GetFlagStatus(g_Uart_Ports[0], USART_FLAG_TXE) == RESET && --times > 0){}
-            break;
-        case COM2:
-            while (USART_GetFlagStatus(g_Uart_Ports[1], USART_FLAG_TXE) == RESET && --times > 0){}
-            break;
-        case COM3:
-            while (USART_GetFlagStatus(g_Uart_Ports[2], USART_FLAG_TXE) == RESET && --times > 0){}
-            break;
-        case COM4:
-            while (USART_GetFlagStatus(g_Uart_Ports[3], USART_FLAG_TXE) == RESET && --times > 0){}
-            break;
-        case COM5:
-            while (USART_GetFlagStatus(g_Uart_Ports[4], USART_FLAG_TXE) == RESET && --times > 0){}
-            break;
-        default:
-            //while (USART_GetFlagStatus(g_Uart_Ports[0], USART_FLAG_TXE) == RESET && --times > 0){}
-            break;
-    }
-    //等待发送完毕
-    if (times > 0)
-    {
-        switch (this->Index)
-        {
-            case COM1:
-                USART_SendData(g_Uart_Ports[0], (ushort)data);
-                break;
-            case COM2:
-                USART_SendData(g_Uart_Ports[1], (ushort)data);
-                break;
-            case COM3:
-                USART_SendData(g_Uart_Ports[2], (ushort)data);
-                break;
-            case COM4:
-                USART_SendData(g_Uart_Ports[3], (ushort)data);
-                break;
-            case COM5:
-                USART_SendData(g_Uart_Ports[4], (ushort)data);
-                break;
-            default:
-                //USART_SendData(g_Uart_Ports[0], (ushort)data);
-                break;
-        }
-    }
-    else
-    {
-        Error++;
-    }
-    return 0;
-}
-
-void SerialPort::ChangePower(int level){
-
-}
-
 // 向某个端口写入数据。如果size为0，则把data当作字符串，一直发送直到遇到\0为止
 bool SerialPort::OnWrite(const Buffer& bs)
 {
@@ -404,45 +466,74 @@ uint SerialPort::OnRead(Buffer &bs)
 	this->OnReceive(bs,this);
     return count;
 }
+void SerialPort::OnHandler(ushort num, void* param)
+{
+	
+}
+void SerialPort::Set485(bool flag)
+{
+	
+}
+void SerialPort::ReceiveTask()
+{
+	
+}
+void SerialPort::Init()
+{
+    this->Index=COM_NONE;
+    RS485 = NULL;
+    Error = 0;
 
-// 刷出某个端口中的数据
-bool SerialPort::Flush(int times)
-{
-    //uint times = 3000;
-    //    while (USART_GetFlagStatus(_port, USART_FLAG_TXE) == RESET && --times > 0)
-    //        ;
-    //等待发送完毕
-    return times > 0;
+    Remap = 0;
 }
-void SerialPort::SetBaudRate(int baudRate)
+bool SerialPort::OnSet()
 {
-	this->_baudRate=baudRate;
-	this->OnOpen();
+	return false;
 }
-#ifdef STM32F0
-	#define UART_IRQs {USART1_IRQn,USART2_IRQn}
-#elif defined STM32F1
-    #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
-#elif defined STM32F4 
-    #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn}
-#endif 
-void OnUsartReceive(ushort num, void *param);
-void SerialPort::Register(TransportHandler handler, void *param)
+void SerialPort::OnOpen2()
 {
-    ITransport::Register(handler, param);
 
-    const byte irqs[] = UART_IRQs;
-    byte irq = irqs[this->Index];
-    if (handler)
-    {
-        Interrupt.SetPriority(irq);
-        Interrupt.Activate(irq, OnUsartReceive, this);
-    }
-    else
-    {
-                Interrupt.Deactivate(irq);
-    }
 }
+void SerialPort::OnClose2()
+{
+
+}
+void SerialPort::OnWrite2()
+{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 获取组和针脚
+#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
+
+
+
+
+
+
+
+
+
+
 
 // 真正的串口中断函数
 void OnUsartReceive(ushort num, void *param)
@@ -477,7 +568,7 @@ void OnUsartReceive(ushort num, void *param)
     }
 }
 
-SerialPort *_printf_sp;
+
 bool isInFPutc; //正在串口输出
 extern "C"
 {
@@ -507,20 +598,7 @@ extern "C"
     }
 }
 
-SerialPort *SerialPort::GetMessagePort()
-{
-    if (!_printf_sp)
-    {
-        if (Sys.MessagePort == COM_NONE)
-        {
-            return NULL;
-        }
-        _printf_sp = new SerialPort(COM(Sys.MessagePort));
-        _printf_sp->Open();
-    }
 
-    return _printf_sp;
-}
 //测试代码
 /*
 ISO-V2:PB5控制485方向

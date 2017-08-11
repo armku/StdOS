@@ -87,4 +87,16 @@ private:
 	void OnWrite2();
 };
 
+// ´®¿ÚÉè±¸ÅäÖÃ
+class SerialConfig
+{
+public:
+	COM Com;
+	int Baudrate;
+
+	Pin	Power;
+	Pin Reset;
+	Pin	LowPower;
+};
+
 #endif
