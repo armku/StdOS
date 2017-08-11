@@ -504,37 +504,6 @@ void SerialPort::OnWrite2()
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 获取组和针脚
-#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
-
-
-
-
-
-
-
-
-
-
-
 // 真正的串口中断函数
 void OnUsartReceive(ushort num, void *param)
 {
