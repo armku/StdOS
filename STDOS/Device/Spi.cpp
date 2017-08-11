@@ -413,7 +413,7 @@ int Spi::GetPre(int index, uint &speedHz)
     }
     if (pre > SPI_BaudRatePrescaler_256)
     {
-        debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %d\r\n", index, speedHz, Sys.Clock);
+        debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, Sys.Clock);
         return  - 1;
     }
 

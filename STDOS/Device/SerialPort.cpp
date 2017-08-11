@@ -40,15 +40,7 @@ SerialPort::SerialPort()
 
 SerialPort::SerialPort(COM index, int baudRate)
 {
-    this->Index = index;
-    if (baudRate <= 0)
-    {
-        this->_baudRate = 115200;
-    }
-    else
-    {
-        this->_baudRate = baudRate;
-    }
+    this->Set(index,baudRate);    
 }
 
 // 析构时自动关闭
@@ -62,7 +54,20 @@ SerialPort::~SerialPort()
 }
 void SerialPort::Set(COM index, int baudRate)
 {
+	Index	= index;
+	_baudRate	= baudRate;
 	
+	// 根据系统时钟自动计算默认波特率
+	if(_baudRate <= 0)
+	{
+//		int clock = Sys.Clock;
+//		if(clock > 72)
+//			_baudRate = 2048000;
+//		else if (clock > 36)
+//			_baudRate = 1024000;
+//		else
+			_baudRate = 115200;
+	}
 }
 void SerialPort::Set(byte dataBits, byte parity, byte stopBits)
 {
