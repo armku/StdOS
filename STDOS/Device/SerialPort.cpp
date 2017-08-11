@@ -150,7 +150,38 @@ void SerialPort::SetBaudRate(int baudRate)
 #elif defined STM32F4 
     #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn}
 #endif 
-void OnUsartReceive(ushort num, void *param);
+// 真正的串口中断函数
+void OnUsartReceive(ushort num, void *param)
+{
+    SerialPort *sp = (SerialPort*)param;
+	USART_TypeDef *const g_Uart_Ports[] = UARTS;
+
+    //if (sp && sp->HasHandler())
+	if (sp)
+    {
+        if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
+        {
+            // 从栈分配，节省内存
+            byte buf[512];
+			Buffer bs(buf,512);
+            uint len = sp->Read(bs);
+            if (len)
+            {				
+                //len = sp->OnReceive(bs,param);
+//                #if 0
+//                    assert_param(len <= ArrayLength(buf));
+//                #endif 
+//                // 如果有数据，则反馈回去
+//                #if 0
+//                    if (len)
+//                    {
+//                        sp->Write(buf, len);
+//                    }
+//                #endif 
+            }
+        }
+    }
+}
 
 void SerialPort::Register(TransportHandler handler, void *param)
 {
@@ -165,7 +196,7 @@ void SerialPort::Register(TransportHandler handler, void *param)
     }
     else
     {
-                Interrupt.Deactivate(irq);
+        Interrupt.Deactivate(irq);
     }
 }
 void SerialPort::ChangePower(int level)
@@ -507,41 +538,6 @@ void SerialPort::OnWrite2()
 {
 
 }
-
-
-// 真正的串口中断函数
-void OnUsartReceive(ushort num, void *param)
-{
-    SerialPort *sp = (SerialPort*)param;
-	USART_TypeDef *const g_Uart_Ports[] = UARTS;
-
-    //if (sp && sp->HasHandler())
-	if (sp)
-    {
-        if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
-        {
-            // 从栈分配，节省内存
-            byte buf[512];
-			Buffer bs(buf,512);
-            uint len = sp->Read(bs);
-            if (len)
-            {				
-                //len = sp->OnReceive(bs,param);
-//                #if 0
-//                    assert_param(len <= ArrayLength(buf));
-//                #endif 
-//                // 如果有数据，则反馈回去
-//                #if 0
-//                    if (len)
-//                    {
-//                        sp->Write(buf, len);
-//                    }
-//                #endif 
-            }
-        }
-    }
-}
-
 
 bool isInFPutc; //正在串口输出
 extern "C"
