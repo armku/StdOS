@@ -60,7 +60,7 @@ int main()
         Sys.ShowInfo();
     #endif 
     
-	//TimeTest();
+	TimeTest();
 	tim67test();
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
@@ -78,7 +78,7 @@ Timer *timer2;
 void TimeTest()
 {
     // 初始化为输出
-    timer2 = new Timer(Timer6);
+    timer2 = new Timer(Timer7);
     abc.Bind(tim2refesh);
     timer2->Register(abc);
     timer2->Open();

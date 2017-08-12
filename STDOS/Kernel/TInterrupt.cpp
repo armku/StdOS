@@ -434,10 +434,16 @@ void TInterrupt::SetPriority(short irq, uint priority)const
             break;
         case 18:
             //ADC1_2_IRQn
+            //F0 TIM7
+			#ifdef STM32F0
+			nvic.NVIC_IRQChannel = TIM7_IRQn;
+			nvic.NVIC_IRQChannelPriority = 2;
+			nvic.NVIC_IRQChannelCmd = ENABLE;
+			#endif
             break;
         case 19:
             //CAN1_TX_IRQn
-            break;
+			break;
         case 20:
             //CAN1_RX0_IRQn
             break;

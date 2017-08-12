@@ -242,7 +242,12 @@ void Timer::Config()
             TIM_Cmd(TIM7, ENABLE);
 
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE); /*先关闭等待使用*/
-            Interrupt.SetPriority(55, 3);//TIM7_IRQn
+			#ifdef STM32F0
+				Interrupt.SetPriority(18, 3);//TIM7_IRQn
+			#elif defined STM32F1
+				Interrupt.SetPriority(55, 3);//TIM7_IRQn
+			#elif defined STM32F4
+			#endif
             break;
         case Timer8:
             break;
