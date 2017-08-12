@@ -249,7 +249,7 @@ void GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
     *txPin = p[n];
     *rxPin = p[n + 1];
 }
-#ifdef STM32F4
+#if defined(STM32F0) || defined(STM32F4)
 	#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
 #endif
 // ´ò¿ª´®¿Ú
