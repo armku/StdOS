@@ -52,7 +52,7 @@ Timer *timer2;
 void TimeTest()
 {
     // 初始化为输出
-    timer2 = new Timer(Timer6);
+    timer2 = new Timer(Timer3);
     abc.Bind(tim2refesh);
     timer2->Register(abc);
     timer2->Open();
