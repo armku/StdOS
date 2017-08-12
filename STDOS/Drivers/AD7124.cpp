@@ -301,7 +301,7 @@ PA5		:	SPI1-SCK
 PA6		:	SPI1-MISO
 PA7		:	SPI1-MOSI
  */
-
+#ifdef STM32F1
 /*********************** 模拟SPI通信引脚 **************************************/
 #define SPI_NSS_PIN			GPIO_Pin_4
 #define SPI_NSS_PORT		GPIOA
@@ -375,12 +375,12 @@ float PT100_RtoT(float val)
  *****************************************************************************/
 void AD7124_SPI_Config(void)
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
+	GPIO_InitTypeDef GPIO_InitStructure;
     //SPI_NSS
     GPIO_InitStructure.GPIO_Pin = SPI_NSS_PIN;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_Init(SPI_NSS_PORT, &GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_Init(SPI_NSS_PORT, &GPIO_InitStructure);
     SPI_NSS_H();
     //SPI_SCK
     GPIO_InitStructure.GPIO_Pin = SPI_SCK_PIN;
@@ -1063,3 +1063,4 @@ void AD7124_IntTask(void)
         //USART5_printf("01\n");
     }
 }
+#endif
