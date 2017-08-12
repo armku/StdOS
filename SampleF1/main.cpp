@@ -50,7 +50,7 @@ int main(void)
         Sys.ShowInfo();
     #endif 	
 	SerialPort::GetMessagePort()->Register(OnUsart1Read);
-	AT24C02Test();
+//	AT24C02Test();
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
     Sys.Start();	
