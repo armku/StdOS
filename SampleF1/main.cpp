@@ -79,6 +79,6 @@ int main(void)
         abc.Bind(tim2refesh);
         timer2->Register(abc);
         timer2->Open();
-        //	timer2->SetFrequency(1);
+        timer2->SetFrequency(1000);
         //	timer2->Config();
     }
