@@ -36,7 +36,7 @@ void LedTask(void *param)
 }
 
 #define namee "StdOS"
-//void AT24C02Test();
+
 uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
     bs.Show(true);
@@ -50,6 +50,7 @@ void TimerTask(void *param)
     printf("\r\n%d: cnt:%d", i++, time6cnt);
 }
 void TimeTest();
+void AT24C02Test();
 int main()
 {
     Sys.Name = (char*)namee;
@@ -58,7 +59,7 @@ int main()
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 
-    //	AT24C02Test();  
+    AT24C02Test();  
 	TimeTest();
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
