@@ -1,4 +1,6 @@
 /*
+
+F1:
 Timer6 Timer7 为基本定时器，只具备基础的定时功能
 Timer2 Timer3 Timer4 Timer5 为通用定时器，可以脉宽测量PWM 具有编码器接口
 Timer1 Timer8 高级定时器，具有基本定时器 通用定时器所有功能，三相六步电机，刹车功能，PWM死区控制
