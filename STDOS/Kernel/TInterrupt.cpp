@@ -20,10 +20,10 @@ void TInterrupt::Init()const
 
 }
 
-void TInterrupt::Process(uint num)const{
+void TInterrupt::Process(uint num)const
+{
 
 }
-
 // 注册中断函数（中断号，函数，参数）
 bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
 {
@@ -292,13 +292,20 @@ bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
     }
     return true;
 }
-
-//关闭中断
+// 解除中断注册
 bool TInterrupt::Deactivate(short irq)
 {
     return false;
 }
+// 开中断
+//bool TInterrupt::Enable(short irq) const{return false;}
+// 关中断
+//bool TInterrupt::Disable(short irq) const{return false;}
 
+// 是否开中断
+//bool TInterrupt::EnableState(short irq) const{return false;}
+// 是否挂起
+//bool TInterrupt::PendingState(short irq) const{return false;}
 // 设置优先级
 void TInterrupt::SetPriority(short irq, uint priority)const
 {
@@ -683,9 +690,9 @@ void TInterrupt::SetPriority(short irq, uint priority)const
 
     NVIC_Init(&nvic);
 }
-
 // 获取优先级
-void TInterrupt::GetPriority(short irq)const{
+void TInterrupt::GetPriority(short irq)const
+{
 
 }
 // 编码优先级
@@ -697,6 +704,11 @@ uint TInterrupt::EncodePriority(uint priorityGroup, uint preemptPriority, uint s
 // 解码优先级
 void TInterrupt::DecodePriority(uint priority, uint priorityGroup, uint *pPreemptPriority, uint *pSubPriority)const{
 
+}
+// 全局中断开关状态
+bool TInterrupt::GlobalState()
+{
+    return false;
 }
 // 打开全局中断
 void TInterrupt::GlobalEnable()
@@ -710,18 +722,12 @@ void TInterrupt::GlobalDisable()
     __ASM volatile("cpsid i");
 }
 
-// 全局中断开关状态
-bool TInterrupt::GlobalState()
-{
-    return false;
-}
 
 // 是否在中断里面
 bool TInterrupt::IsHandler()
 {
     return false;
 }
-
 // 系统挂起
 void TInterrupt::Halt(){}
 void TInterrupt::OnInit()const{}
@@ -734,7 +740,8 @@ bool TInterrupt::OnDeactivate(short irq)
 {
     return false;
 }
-
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 Lock::Lock(int &ref){}
 Lock::~Lock(){}
 
@@ -742,6 +749,60 @@ bool Lock::Wait(int ms)
 {
     return false;
 }
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //所有中断线处理
 void EXTI_IRQHandler(ushort num, void *param);
