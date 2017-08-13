@@ -78,10 +78,10 @@ Timer *timer2;
 void TimeTest()
 {
     // 初始化为输出
-    timer2 = new Timer(Timer7);
-    abc.Bind(tim2refesh);
-    timer2->Register(abc);
-    timer2->Open();
+//    timer2 = new Timer(Timer7);
+//    abc.Bind(tim2refesh);
+//    timer2->Register(abc);
+//    timer2->Open();
     //        timer2->SetFrequency(1000);
     //        timer2->Config();
 }
@@ -124,4 +124,9 @@ void tim67test()
     RCC_Configuration(); //调用时钟初始化函数声明
     NVIC_Configuration(); //调用中断优先级初始化函数声明
     TIM14_Configuration(); //调用TIM3初始化函数声明
+	
+	timer2 = new Timer(Timer7);
+    abc.Bind(tim2refesh);
+    timer2->Register(abc);
+    timer2->Open();
 }
