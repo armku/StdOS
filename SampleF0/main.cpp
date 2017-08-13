@@ -86,16 +86,6 @@ void TimeTest()
     //        timer2->Config();
 }
 
-
-extern "C"
-{
-    void TIM7_IRQHandler(void)
-    {
-        TIM_ClearITPendingBit(TIM7, TIM_IT_Update); //先清空中断标志位，以备下次使用。
-        time6cnt++;
-    }
-}
-
 void RCC_Configuration(void) //时钟初始化函数
 {
     RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE); //使能端口B时钟
