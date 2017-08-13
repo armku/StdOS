@@ -15,7 +15,8 @@ Timer *onTimerPortRcv[18];
 TInterrupt Interrupt;
 
 // 初始化中断向量表
-void TInterrupt::Init()const{
+void TInterrupt::Init()const
+{
 
 }
 

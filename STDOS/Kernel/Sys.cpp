@@ -24,6 +24,57 @@ extern "C"
     extern uint __heap_limit;
     extern uint __initial_sp;
 }
+// 构造函数
+TSys::TSys()
+{
+	#ifdef STM32F0
+		this->CystalClock=12;
+		this->Clock = 48;
+	#elif defined STM32F1
+		this->CystalClock=8;
+		this->Clock = 72;
+	#elif defined STM32F4
+		this->CystalClock=12;
+		this->Clock = 168;
+	#endif
+    this->MessagePort = COM1;
+	
+	Interrupt.Init();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 String *CPUName;
 void assert_failed2(cstring msg, cstring file, unsigned int line){}
@@ -175,19 +226,6 @@ void TSys::Delay(int us)const  // 微秒级延迟
         TimeSleep(us);
     }
 }
-
-TSys::TSys()
-{
-	#ifdef STM32F0
-		this->Clock = 48;
-	#elif defined STM32F1
-		this->Clock = 72;
-	#elif defined STM32F4
-		this->Clock = 168;
-	#endif
-    this->MessagePort = COM1;
-}
-
 
 UInt64 TSys::Ms()const  // 系统启动后的毫秒数
 {
