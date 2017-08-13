@@ -335,7 +335,7 @@ bool TSys::CheckMemory() const
 // 延迟异步重启
 void TSys::Reboot(int msDelay)const
 {
-    NVIC_SystemReset();
+    this->Reset();
 }
 // 系统跟踪
 void TSys::InitTrace(void* port) const
@@ -347,6 +347,7 @@ void TSys::Trace(int times) const
 // 重启系统
 void TSys::Reset() const
 {
+	NVIC_SystemReset();
 }
 void TSys::OnInit()
 {
