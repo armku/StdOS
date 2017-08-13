@@ -431,6 +431,12 @@ void TInterrupt::SetPriority(short irq, uint priority)const
             break;
         case 17:
             //DMA1_Channel7_IRQn
+            //F0 TIM6
+            #ifdef STM32F0
+                nvic.NVIC_IRQChannel = TIM6_DAC_IRQn;
+                nvic.NVIC_IRQChannelPriority = 2;
+                nvic.NVIC_IRQChannelCmd = ENABLE;
+            #endif 
             break;
         case 18:
             //ADC1_2_IRQn
@@ -870,7 +876,15 @@ void OnUsartReceive(ushort num, void *param);
             }
         }
     #elif defined STM32F0
-        void TIM7_IRQHandler(void)
+        void TIM6_IRQHandler(void)
+        {
+            TIM_ClearITPendingBit(TIM6, TIM_IT_Update); //先清空中断标志位，以备下次使用。
+            if (onTimerPortRcv[5])
+            {
+                onTimerPortRcv[5]->OnInterrupt();
+            }
+        }
+		void TIM7_IRQHandler(void)
         {
             TIM_ClearITPendingBit(TIM7, TIM_IT_Update); //先清空中断标志位，以备下次使用。
             if (onTimerPortRcv[6])
