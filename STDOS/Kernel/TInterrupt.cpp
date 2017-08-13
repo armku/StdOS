@@ -741,7 +741,6 @@ void EXTI_IRQHandler(ushort num, void *param);
 extern SerialPort *_printf_sp;
 void OnUsartReceive(ushort num, void *param);
 
-extern uint time6cnt;
 #ifdef __cplusplus
     extern "C"
     {
@@ -874,7 +873,10 @@ extern uint time6cnt;
         void TIM7_IRQHandler(void)
         {
             TIM_ClearITPendingBit(TIM7, TIM_IT_Update); //先清空中断标志位，以备下次使用。
-            time6cnt++;
+            if (onTimerPortRcv[6])
+            {
+                onTimerPortRcv[6]->OnInterrupt();
+            }
         }
     #endif 
     void EXTI0_IRQHandler()
