@@ -751,59 +751,6 @@ bool Lock::Wait(int ms)
 }
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //所有中断线处理
 void EXTI_IRQHandler(ushort num, void *param);
 extern SerialPort *_printf_sp;
@@ -1127,3 +1074,119 @@ void OnUsartReceive(ushort num, void *param);
         }
     }
 }
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+class CInterrupt
+{
+    public:
+        static void USB_LP_CAN1_RX0_IRQHandler();
+        static void TIM3_IRQHandler();
+};
+void CInterrupt::USB_LP_CAN1_RX0_IRQHandler()
+{
+    //        if(!g_bInterruptPause)        AndyUSB.USB_Istr();
+}
+
+void CInterrupt::TIM3_IRQHandler()
+{
+    //        if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
+    //        {
+    //                TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+    //                
+    //                g_nNowTime++;
+    //                
+    ////                if(0==(g_nNowTime%2))
+    //                {
+    //                        AndyHW.HwCallBackKeyScan();
+    //                }
+    //                AndyHW.HwCallBackOverCurrent();
+    //                AndyOS.sysCallBackTimer10ms();   //10mS
+    //        }
+}
+
+#ifdef __cplusplus
+    extern "C"
+    {
+    #endif 
+
+    void __initial_sp_ex(void);
+    void Reset_Handler(void);
+
+    #ifdef __cplusplus
+    }
+#endif 
+
+void Default_Handler(void);
+
+typedef void(*const ISR_t)(void);
+#if 0
+ISR_t IsrVector[] __attribute__ ((section("RESET"))) =
+{
+	__initial_sp_ex,
+	Reset_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	0,
+	0,
+	0,
+	0,
+	Default_Handler,
+	Default_Handler,
+	0,
+	Default_Handler,
+	Default_Handler,
+
+
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	CInterrupt::USB_LP_CAN1_RX0_IRQHandler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	CInterrupt::TIM3_IRQHandler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler,
+	Default_Handler
+};
+
+void Default_Handler(void)
+{
+    while (1);
+}
+#endif
