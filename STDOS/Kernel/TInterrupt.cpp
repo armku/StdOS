@@ -12,6 +12,7 @@
 
 #define NVIC_OFFSET					 ((uint)0x1000)
 #define ISRADDR (NVIC_VectTab_RAM+NVIC_OFFSET)
+#define ISRLENGTH   100	//中断数量
 
 TInterrupt Interrupt;
 
@@ -46,7 +47,7 @@ class CInterrupt
 
 extern "C"
 {
-	uint   IsrBuf[1024]   __attribute__ ((at(ISRADDR)));
+	uint   IsrBuf[ISRLENGTH]   __attribute__ ((at(ISRADDR)));
 	uint *vsrom= (uint *) NVIC_VectTab_FLASH;
 }
 
@@ -54,7 +55,7 @@ extern "C"
 void TInterrupt::Init()const
 {
 	//复制中断向量表
-	for(int i=0;i<1024;i++)
+	for(int i=0;i<ISRLENGTH;i++)
 	{
 		IsrBuf[i]=vsrom[i];
 	}
