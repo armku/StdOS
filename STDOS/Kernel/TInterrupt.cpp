@@ -43,6 +43,8 @@ class CInterrupt
 		static void EXTI2_IRQHandler();
 		static void EXTI3_IRQHandler();
 		static void EXTI4_IRQHandler();
+		static void EXTI9_5_IRQHandler();
+		static void EXTI15_10_IRQHandler();
 	
 };
 
@@ -76,6 +78,8 @@ void TInterrupt::Init()const
 	IsrBuf[24]=(uint)&(CInterrupt::EXTI2_IRQHandler);
 	IsrBuf[25]=(uint)&(CInterrupt::EXTI3_IRQHandler);
 	IsrBuf[26]=(uint)&(CInterrupt::EXTI4_IRQHandler);
+	IsrBuf[39]=(uint)&(CInterrupt::EXTI9_5_IRQHandler);
+	IsrBuf[56]=(uint)&(CInterrupt::EXTI15_10_IRQHandler);
 	
 }
 
@@ -829,112 +833,7 @@ void OnUsartReceive(ushort num, void *param);
         
     
     
-    void EXTI9_5_IRQHandler()
-    {
-        if (EXTI_GetITStatus(EXTI_Line5) != RESET)
-        {
-            #if defined(STM32F1) || defined(STM32F4)			
-                EXTI_IRQHandler(EXTI9_5_IRQn, 0);
-            #elif defined STM32F0
-                EXTI_IRQHandler(EXTI4_15_IRQn, 0);
-            #endif 
-            EXTI_ClearITPendingBit(EXTI_Line5);
-        }
-        if (EXTI_GetITStatus(EXTI_Line6) != RESET)
-        {
-            #if defined(STM32F1) || defined(STM32F4)			
-                EXTI_IRQHandler(EXTI9_5_IRQn, 0);
-            #elif defined STM32F0
-                EXTI_IRQHandler(EXTI4_15_IRQn, 0);
-            #endif 
-            EXTI_ClearITPendingBit(EXTI_Line6);
-        }
-        if (EXTI_GetITStatus(EXTI_Line7) != RESET)
-        {
-            #if defined(STM32F1) || defined(STM32F4)			
-                EXTI_IRQHandler(EXTI9_5_IRQn, 0);
-            #elif defined STM32F0
-                EXTI_IRQHandler(EXTI4_15_IRQn, 0);
-            #endif 
-            EXTI_ClearITPendingBit(EXTI_Line7);
-        }
-        if (EXTI_GetITStatus(EXTI_Line8) != RESET)
-        {
-            #if defined(STM32F1) || defined(STM32F4)			
-                EXTI_IRQHandler(EXTI9_5_IRQn, 0);
-            #elif defined STM32F0
-                EXTI_IRQHandler(EXTI4_15_IRQn, 0);
-            #endif 
-            EXTI_ClearITPendingBit(EXTI_Line8);
-        }
-        if (EXTI_GetITStatus(EXTI_Line9) != RESET)
-        {
-            #if defined(STM32F1) || defined(STM32F4)			
-                EXTI_IRQHandler(EXTI9_5_IRQn, 0);
-            #elif defined STM32F0
-                EXTI_IRQHandler(EXTI4_15_IRQn, 0);
-            #endif 
-            EXTI_ClearITPendingBit(EXTI_Line9);
-        }
-    }
-    /// IO 线中断，中断口为PC13
-    void EXTI15_10_IRQHandler(void)
-    {
-        if (EXTI_GetITStatus(EXTI_Line10) != RESET)
-        {
-            #if defined(STM32F1) || defined(STM32F4)			
-                EXTI_IRQHandler(EXTI15_10_IRQn, 0);
-            #elif defined STM32F0
-                EXTI_IRQHandler(EXTI4_15_IRQn, 0);
-            #endif 
-            EXTI_ClearITPendingBit(EXTI_Line10);
-        }
-        if (EXTI_GetITStatus(EXTI_Line11) != RESET)
-        {
-            #if defined(STM32F1) || defined(STM32F4)			
-                EXTI_IRQHandler(EXTI15_10_IRQn, 0);
-            #elif defined STM32F0
-                EXTI_IRQHandler(EXTI4_15_IRQn, 0);
-            #endif 
-            EXTI_ClearITPendingBit(EXTI_Line11);
-        }
-        if (EXTI_GetITStatus(EXTI_Line12) != RESET)
-        {
-            #if defined(STM32F1) || defined(STM32F4)			
-                EXTI_IRQHandler(EXTI15_10_IRQn, 0);
-            #elif defined STM32F0
-                EXTI_IRQHandler(EXTI4_15_IRQn, 0);
-            #endif 
-            EXTI_ClearITPendingBit(EXTI_Line12);
-        }
-        if (EXTI_GetITStatus(EXTI_Line13) != RESET)
-        {
-            #if defined(STM32F1) || defined(STM32F4)			
-                EXTI_IRQHandler(EXTI15_10_IRQn, 0);
-            #elif defined STM32F0
-                EXTI_IRQHandler(EXTI4_15_IRQn, 0);
-            #endif 
-            EXTI_ClearITPendingBit(EXTI_Line13);
-        }
-        if (EXTI_GetITStatus(EXTI_Line14) != RESET)
-        {
-            #if defined(STM32F1) || defined(STM32F4)			
-                EXTI_IRQHandler(EXTI15_10_IRQn, 0);
-            #elif defined STM32F0
-                EXTI_IRQHandler(EXTI4_15_IRQn, 0);
-            #endif 
-            EXTI_ClearITPendingBit(EXTI_Line14);
-        }
-        if (EXTI_GetITStatus(EXTI_Line15) != RESET)
-        {
-            #if defined(STM32F1) || defined(STM32F4)			
-                EXTI_IRQHandler(EXTI15_10_IRQn, 0);
-            #elif defined STM32F0
-                EXTI_IRQHandler(EXTI4_15_IRQn, 0);
-            #endif 
-            EXTI_ClearITPendingBit(EXTI_Line15);
-        }
-    }
+    
 }
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
@@ -1167,5 +1066,112 @@ void CInterrupt::EXTI4_IRQHandler()
             EXTI_IRQHandler(EXTI4_15_IRQn, 0);
         #endif 
         EXTI_ClearITPendingBit(EXTI_Line4);
+    }
+}
+
+void CInterrupt::EXTI9_5_IRQHandler()
+{
+    if (EXTI_GetITStatus(EXTI_Line5) != RESET)
+    {
+        #if defined(STM32F1) || defined(STM32F4)			
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+        #elif defined STM32F0
+            EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+        #endif 
+        EXTI_ClearITPendingBit(EXTI_Line5);
+    }
+    if (EXTI_GetITStatus(EXTI_Line6) != RESET)
+    {
+        #if defined(STM32F1) || defined(STM32F4)			
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+        #elif defined STM32F0
+            EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+        #endif 
+        EXTI_ClearITPendingBit(EXTI_Line6);
+    }
+    if (EXTI_GetITStatus(EXTI_Line7) != RESET)
+    {
+        #if defined(STM32F1) || defined(STM32F4)			
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+        #elif defined STM32F0
+            EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+        #endif 
+        EXTI_ClearITPendingBit(EXTI_Line7);
+    }
+    if (EXTI_GetITStatus(EXTI_Line8) != RESET)
+    {
+        #if defined(STM32F1) || defined(STM32F4)			
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+        #elif defined STM32F0
+            EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+        #endif 
+        EXTI_ClearITPendingBit(EXTI_Line8);
+    }
+    if (EXTI_GetITStatus(EXTI_Line9) != RESET)
+    {
+        #if defined(STM32F1) || defined(STM32F4)			
+            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+        #elif defined STM32F0
+            EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+        #endif 
+        EXTI_ClearITPendingBit(EXTI_Line9);
+    }
+}
+
+void CInterrupt::EXTI15_10_IRQHandler()
+{
+    if (EXTI_GetITStatus(EXTI_Line10) != RESET)
+    {
+        #if defined(STM32F1) || defined(STM32F4)			
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+        #elif defined STM32F0
+            EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+        #endif 
+        EXTI_ClearITPendingBit(EXTI_Line10);
+    }
+    if (EXTI_GetITStatus(EXTI_Line11) != RESET)
+    {
+        #if defined(STM32F1) || defined(STM32F4)			
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+        #elif defined STM32F0
+            EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+        #endif 
+        EXTI_ClearITPendingBit(EXTI_Line11);
+    }
+    if (EXTI_GetITStatus(EXTI_Line12) != RESET)
+    {
+        #if defined(STM32F1) || defined(STM32F4)			
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+        #elif defined STM32F0
+            EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+        #endif 
+        EXTI_ClearITPendingBit(EXTI_Line12);
+    }
+    if (EXTI_GetITStatus(EXTI_Line13) != RESET)
+    {
+        #if defined(STM32F1) || defined(STM32F4)			
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+        #elif defined STM32F0
+            EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+        #endif 
+        EXTI_ClearITPendingBit(EXTI_Line13);
+    }
+    if (EXTI_GetITStatus(EXTI_Line14) != RESET)
+    {
+        #if defined(STM32F1) || defined(STM32F4)			
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+        #elif defined STM32F0
+            EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+        #endif 
+        EXTI_ClearITPendingBit(EXTI_Line14);
+    }
+    if (EXTI_GetITStatus(EXTI_Line15) != RESET)
+    {
+        #if defined(STM32F1) || defined(STM32F4)			
+            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+        #elif defined STM32F0
+            EXTI_IRQHandler(EXTI4_15_IRQn, 0);
+        #endif 
+        EXTI_ClearITPendingBit(EXTI_Line15);
     }
 }
