@@ -179,20 +179,13 @@ void TInterrupt::SetPriority(short irq, uint priority)const
         case 9:
         case 10:
         case 23:
+        case 40:
             //EXTI0_IRQn
             //EXTI1_IRQn
             //EXTI2_IRQn
             //EXTI3_IRQn
             //EXTI4_IRQn
             //EXTI9_5_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = priority;
-            #elif defined STM32F0
-            #endif 
-            break;
-        case 40:
             //EXTI15_10_IRQn
             #if defined(STM32F1) || defined(STM32F4)
                 NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
