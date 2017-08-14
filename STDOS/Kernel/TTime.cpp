@@ -200,7 +200,7 @@ void TimeCost::Show(cstring format)const
     //systick中断服务函数,使用ucos时用到
     void SysTick_Handler(void)
     {
-        Time.Milliseconds++;
+        //Time.Milliseconds++;
     }
 
     //以下为汇编函数

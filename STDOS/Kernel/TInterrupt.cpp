@@ -19,6 +19,15 @@ extern "C"
 	uint   IsrBuf[1024]   __attribute__ ((at(ISRADDR)));
 	uint *vsrom= (uint *) NVIC_VectTab_FLASH;
 }
+
+class CInterrupt
+{
+    public:
+		static void SysTick_Handler();
+        static void USB_LP_CAN1_RX0_IRQHandler();
+        static void TIM3_IRQHandler();
+};
+
 // 初始化中断向量表
 void TInterrupt::Init()const
 {
@@ -29,6 +38,8 @@ void TInterrupt::Init()const
 	}
 	//中断向量表重映射
 	NVIC_SetVectorTable(NVIC_VectTab_RAM, NVIC_OFFSET);
+	
+	IsrBuf[15]=(uint)&(CInterrupt::SysTick_Handler);
 }
 
 void TInterrupt::Process(uint num)const
@@ -1091,12 +1102,6 @@ void OnUsartReceive(ushort num, void *param);
 }
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-class CInterrupt
-{
-    public:
-        static void USB_LP_CAN1_RX0_IRQHandler();
-        static void TIM3_IRQHandler();
-};
 void CInterrupt::USB_LP_CAN1_RX0_IRQHandler()
 {
     //        if(!g_bInterruptPause)        AndyUSB.USB_Istr();
@@ -1222,3 +1227,9 @@ ISR_t IsrVector[] __attribute__((at(FLASH_SAVE_ADDR)))=
 
 }
 #endif
+#include "TTime.h"
+void CInterrupt::SysTick_Handler()
+{
+	Time.Milliseconds++;
+}
+
