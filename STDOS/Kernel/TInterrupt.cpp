@@ -815,26 +815,7 @@ void OnUsartReceive(ushort num, void *param);
     int timer2testcnt123 = 0;
     int time2, time3, time4, time5, time6, time7;
         
-    #if defined(STM32F1) || defined(STM32F4)                
-       
-    #elif defined STM32F0
-        void TIM6_IRQHandler(void)
-        {
-            TIM_ClearITPendingBit(TIM6, TIM_IT_Update); //先清空中断标志位，以备下次使用。
-            if (onTimerPortRcv[5])
-            {
-                onTimerPortRcv[5]->OnInterrupt();
-            }
-        }
-		void TIM7_IRQHandler(void)
-        {
-            TIM_ClearITPendingBit(TIM7, TIM_IT_Update); //先清空中断标志位，以备下次使用。
-            if (onTimerPortRcv[6])
-            {
-                onTimerPortRcv[6]->OnInterrupt();
-            }
-        }
-    #endif 
+    
     void EXTI0_IRQHandler()
     {
         if (EXTI_GetITStatus(EXTI_Line0) != RESET)
@@ -1136,26 +1117,42 @@ void CInterrupt::TIM5_IRQHandler()
 
 void CInterrupt::TIM6_IRQHandler()
 {
-    if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
-    {
-        time6++;
+    #if defined(STM32F1) || defined(STM32F4)  
+        if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
+        {
+            time6++;
+            if (onTimerPortRcv[5])
+            {
+                onTimerPortRcv[5]->OnInterrupt();
+            }
+            TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
+        }
+    #elif defined STM32F0
+        TIM_ClearITPendingBit(TIM6, TIM_IT_Update); //先清空中断标志位，以备下次使用。
         if (onTimerPortRcv[5])
         {
             onTimerPortRcv[5]->OnInterrupt();
         }
-        TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
-    }
+    #endif 
 }
 
 void CInterrupt::TIM7_IRQHandler()
 {
-    if (TIM_GetITStatus(TIM7, TIM_IT_Update) != RESET)
-    {
-        time7++;
+    #if defined(STM32F1) || defined(STM32F4) 
+        if (TIM_GetITStatus(TIM7, TIM_IT_Update) != RESET)
+        {
+            time7++;
+            if (onTimerPortRcv[6])
+            {
+                onTimerPortRcv[6]->OnInterrupt();
+            }
+            TIM_ClearITPendingBit(TIM7, TIM_FLAG_Update);
+        }
+    #elif defined STM32F0
+        TIM_ClearITPendingBit(TIM7, TIM_IT_Update); //先清空中断标志位，以备下次使用。
         if (onTimerPortRcv[6])
         {
             onTimerPortRcv[6]->OnInterrupt();
         }
-        TIM_ClearITPendingBit(TIM7, TIM_FLAG_Update);
-    }
+    #endif 
 }
