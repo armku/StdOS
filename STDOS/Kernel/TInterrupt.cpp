@@ -90,7 +90,7 @@ void TInterrupt::Process(uint num)const
 
 }
 
-SerialPort *onSerialPortRcv[5];
+void *onSerialPortRcv[5];
 Timer *onTimerPortRcv[18];
 
 // 注册中断函数（中断号，函数，参数）
