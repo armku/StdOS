@@ -283,6 +283,7 @@ void CInterrupt::TIM3_IRQHandler()
 
 void CInterrupt::TIM4_IRQHandler()
 {
+	#if defined(STM32F1) || defined(STM32F4)  
     if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
     {
         if (onIsr[30])
@@ -291,10 +292,12 @@ void CInterrupt::TIM4_IRQHandler()
         }
         TIM_ClearITPendingBit(TIM4, TIM_FLAG_Update);
     }
+	#endif
 }
 
 void CInterrupt::TIM5_IRQHandler()
 {
+	#if defined(STM32F1) || defined(STM32F4)  
     if (TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET)
     {
         if (onIsr[50])
@@ -303,6 +306,7 @@ void CInterrupt::TIM5_IRQHandler()
         }
         TIM_ClearITPendingBit(TIM5, TIM_FLAG_Update);
     }
+	#endif
 }
 
 void CInterrupt::TIM6_IRQHandler()
@@ -318,10 +322,11 @@ void CInterrupt::TIM6_IRQHandler()
         }
     #elif defined STM32F0
         TIM_ClearITPendingBit(TIM6, TIM_IT_Update); //先清空中断标志位，以备下次使用。
-        if (onTimerPortRcv[5])
+        if (onIsr[TIM6_DAC_IRQn])
         {
-            onTimerPortRcv[5]->OnInterrupt();
+            ((Timer*)onIsr[TIM6_DAC_IRQn])->OnInterrupt();
         }
+            
     #endif 
 }
 
@@ -338,9 +343,9 @@ void CInterrupt::TIM7_IRQHandler()
         }
     #elif defined STM32F0
         TIM_ClearITPendingBit(TIM7, TIM_IT_Update); //先清空中断标志位，以备下次使用。
-        if (onTimerPortRcv[6])
+        if (onIsr[TIM7_IRQn])
         {
-            onTimerPortRcv[6]->OnInterrupt();
+            ((Timer*)onIsr[TIM7_IRQn])->OnInterrupt();
         }
     #endif 
 }
