@@ -10,11 +10,8 @@
     #include "stm32f4xx.h"
 #endif 
 
-SerialPort *onSerialPortRcv[5];
-Timer *onTimerPortRcv[18];
+
 TInterrupt Interrupt;
-#define NVIC_VectTab_FLASH           ((uint)0x08000000)
-#define NVIC_VectTab_RAM             ((uint)0x20000000)
 #define NVIC_OFFSET					 ((uint)0x1000)
 #define ISRADDR (NVIC_VectTab_RAM+NVIC_OFFSET)
 extern "C"
@@ -38,6 +35,10 @@ void TInterrupt::Process(uint num)const
 {
 
 }
+
+SerialPort *onSerialPortRcv[5];
+Timer *onTimerPortRcv[18];
+
 // 注册中断函数（中断号，函数，参数）
 bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
 {
