@@ -174,34 +174,17 @@ void TInterrupt::SetPriority(short irq, uint priority)const
     switch (irq)
     {
         case 6:
-            //EXTI0_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = priority;
-            #elif defined STM32F0
-            #endif 
-            break;
         case 7:
-            //EXTI1_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = priority;
-            #elif defined STM32F0
-            #endif 
-            break;
         case 8:
-            //EXTI2_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = priority;
-            #elif defined STM32F0
-            #endif 
-            break;
         case 9:
+        case 10:
+        case 23:
+            //EXTI0_IRQn
+            //EXTI1_IRQn
+            //EXTI2_IRQn
             //EXTI3_IRQn
+            //EXTI4_IRQn
+            //EXTI9_5_IRQn
             #if defined(STM32F1) || defined(STM32F4)
                 NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
                 nvic.NVIC_IRQChannelPreemptionPriority = 1;
@@ -209,8 +192,8 @@ void TInterrupt::SetPriority(short irq, uint priority)const
             #elif defined STM32F0
             #endif 
             break;
-        case 10:
-            //EXTI4_IRQn
+        case 40:
+            //EXTI15_10_IRQn
             #if defined(STM32F1) || defined(STM32F4)
                 NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
                 nvic.NVIC_IRQChannelPreemptionPriority = 1;
@@ -236,121 +219,17 @@ void TInterrupt::SetPriority(short irq, uint priority)const
                 nvic.NVIC_IRQChannelCmd = ENABLE;
             #endif 
             break;
-        case 23:
-            //EXTI9_5_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = priority;
-            #elif defined STM32F0
-            #endif 
-            break;
         case 28:
-            //TIM2_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-                nvic.NVIC_IRQChannelPreemptionPriority = 0;
-                nvic.NVIC_IRQChannelSubPriority = 3;
-            #elif defined STM32F0
-            #endif 
-            nvic.NVIC_IRQChannelCmd = ENABLE;
-            break;
-            #if defined(STM32F1) || defined(STM32F4)
-            case 29:
-                //TIM3_IRQn
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-                nvic.NVIC_IRQChannelPreemptionPriority = 0;
-                nvic.NVIC_IRQChannelSubPriority = 3;
-                nvic.NVIC_IRQChannelCmd = ENABLE;
-                break;
-            case 30:
-                //TIM4_IRQn
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-                nvic.NVIC_IRQChannelPreemptionPriority = 0;
-                nvic.NVIC_IRQChannelSubPriority = 3;
-                nvic.NVIC_IRQChannelCmd = ENABLE;
-                break;
-            #elif defined STM32F0
-            #endif 
-        case 37:
-            //USART1_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = priority;
-            #elif defined STM32F0
-            #endif 
-            break;
-        case 38:
-            //USART2_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = priority;
-            #elif defined STM32F0
-            #endif 
-            break;
-        case 39:
-            //USART3_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = priority;
-            #elif defined STM32F0
-            #endif 
-            break;
-        case 40:
-            //EXTI15_10_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = priority;
-            #elif defined STM32F0
-            #endif 
-            break;
+        case 29:
+        case 30:
         case 50:
-            //TIM5_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-                nvic.NVIC_IRQChannelPreemptionPriority = 0;
-                nvic.NVIC_IRQChannelSubPriority = 3;
-            #elif defined STM32F0
-            #endif 
-            nvic.NVIC_IRQChannelCmd = ENABLE;
-            break;
-        case 51:
-            //SPI3_IRQn
-            break;
-        case 52:
-            //UART4_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = priority;
-            #elif defined STM32F0
-            #endif 
-            break;
-        case 53:
-            //UART5_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = priority;
-            #elif defined STM32F0
-            #endif 
-            NVIC_Init(&nvic);
-            break;
         case 54:
-            //TIM6_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-                nvic.NVIC_IRQChannelPreemptionPriority = 0;
-                nvic.NVIC_IRQChannelSubPriority = 3;
-            #elif defined STM32F0
-            #endif 
-            nvic.NVIC_IRQChannelCmd = ENABLE;
-            break;
         case 55:
+            //TIM2_IRQn
+            //TIM3_IRQn
+            //TIM4_IRQn
+            //TIM5_IRQn
+            //TIM6_IRQn
             //TIM7_IRQn
             #if defined(STM32F1) || defined(STM32F4)
                 NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
@@ -359,6 +238,23 @@ void TInterrupt::SetPriority(short irq, uint priority)const
             #elif defined STM32F0
             #endif 
             nvic.NVIC_IRQChannelCmd = ENABLE;
+            break;
+        case 37:
+        case 38:
+        case 39:
+        case 52:
+        case 53:
+            //USART1_IRQn
+            //USART2_IRQn
+            //USART3_IRQn
+            //UART4_IRQn
+            //UART5_IRQn
+            #if defined(STM32F1) || defined(STM32F4)
+                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+                nvic.NVIC_IRQChannelPreemptionPriority = 1;
+                nvic.NVIC_IRQChannelSubPriority = priority;
+            #elif defined STM32F0
+            #endif 
             break;
         default:
             break;
