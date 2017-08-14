@@ -1131,14 +1131,17 @@ void CInterrupt::TIM3_IRQHandler()
 typedef void(*const ISR_t)(void);
 #if 1
 #define FLASH_SAVE_ADDR  0x0800DC00 				//设置FLASH 保存地址(必须为偶数) 保存在55k位置
-#define ISRADDR 0x20000000
+#define ISRADDR 0x20001000
 const ushort a[10] __attribute__((at(FLASH_SAVE_ADDR))) = 
 {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 };
 extern "C"
     {
-ISR_t IsrVector[] __attribute__ ((section("RESET1"))) __attribute__((at(FLASH_SAVE_ADDR)))=
+//ISR_t IsrVector[] __attribute__ ((section("RESET1"))) __attribute__((at(FLASH_SAVE_ADDR)))=
+uint   UART_RX_BUF1[1024]   __attribute__ ((at(ISRADDR)));
+uint   IsrBuf[1024]   __attribute__ ((at(ISRADDR+0x1000)));
+ISR_t IsrVector[] __attribute__((at(FLASH_SAVE_ADDR)))=
 {
 	__initial_sp_ex,
 	Reset_Handler,
