@@ -248,9 +248,6 @@ bool Lock::Wait(int ms)
 void EXTI_IRQHandler(ushort num, void *param);
 extern SerialPort *_printf_sp;
 void OnUsartReceive(ushort num, void *param);
-   
-int timer2testcnt123 = 0;
-int time2, time3, time4, time5, time6, time7;
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 void CInterrupt::Default_Handler()
@@ -324,15 +321,12 @@ void CInterrupt::TIM2_IRQHandler()
         }
         TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
     }
-    timer2testcnt123++;
-    time2++;
 }
 
 void CInterrupt::TIM3_IRQHandler()
 {
     if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
     {
-        time3++;
         if (onTimerPortRcv[2])
         {
             onTimerPortRcv[2]->OnInterrupt();
@@ -345,7 +339,6 @@ void CInterrupt::TIM4_IRQHandler()
 {
     if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
     {
-        time4++;
         if (onTimerPortRcv[3])
         {
             onTimerPortRcv[3]->OnInterrupt();
@@ -358,7 +351,6 @@ void CInterrupt::TIM5_IRQHandler()
 {
     if (TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET)
     {
-        time5++;
         if (onTimerPortRcv[4])
         {
             onTimerPortRcv[4]->OnInterrupt();
@@ -372,7 +364,6 @@ void CInterrupt::TIM6_IRQHandler()
     #if defined(STM32F1) || defined(STM32F4)  
         if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
         {
-            time6++;
             if (onTimerPortRcv[5])
             {
                 onTimerPortRcv[5]->OnInterrupt();
@@ -393,7 +384,6 @@ void CInterrupt::TIM7_IRQHandler()
     #if defined(STM32F1) || defined(STM32F4) 
         if (TIM_GetITStatus(TIM7, TIM_IT_Update) != RESET)
         {
-            time7++;
             if (onTimerPortRcv[6])
             {
                 onTimerPortRcv[6]->OnInterrupt();
