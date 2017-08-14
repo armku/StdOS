@@ -196,13 +196,7 @@ void TimeCost::Show(cstring format)const
     extern "C"
     {
     #endif 
-
-    //systick中断服务函数,使用ucos时用到
-    void SysTick_Handler(void)
-    {
-        //Time.Milliseconds++;
-    }
-
+    
     //以下为汇编函数
     void WFI_SET(void); //执行WFI指令    
     void MSR_MSP(uint addr); //设置堆栈地址

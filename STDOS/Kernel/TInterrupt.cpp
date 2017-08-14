@@ -23,7 +23,7 @@ extern "C"
 class CInterrupt
 {
     public:
-		static void SysTick_Handler();
+		static void SysTick_Handler();//systick中断服务函数
         static void USB_LP_CAN1_RX0_IRQHandler();
         static void TIM3_IRQHandler();
 };
