@@ -198,8 +198,6 @@ void TimeCost::Show(cstring format)const
     #endif 
     
     //以下为汇编函数
-    void WFI_SET(void); //执行WFI指令    
-    void MSR_MSP(uint addr); //设置堆栈地址
     //THUMB指令不支持汇编内联
     //采用如下方法实现执行汇编指令WFI  
     void WFI_SET(void)
