@@ -181,53 +181,6 @@ void TInterrupt::SetPriority(short irq, uint priority)const
         nvic.NVIC_IRQChannelCmd = ENABLE;
     #endif 
 
-    switch (irq)
-    {
-        case 6:
-        case 7:
-        case 8:
-        case 9:
-        case 10:
-        case 23:
-        case 40:
-            //EXTI0_IRQn
-            //EXTI1_IRQn
-            //EXTI2_IRQn
-            //EXTI3_IRQn
-            //EXTI4_IRQn
-            //EXTI9_5_IRQn
-            //EXTI15_10_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-                nvic.NVIC_IRQChannelPreemptionPriority = 1;
-                nvic.NVIC_IRQChannelSubPriority = priority;
-            #elif defined STM32F0
-            #endif 
-            break;
-        case 28:
-        case 29:
-        case 30:
-        case 50:
-        case 54:
-        case 55:
-            //TIM2_IRQn
-            //TIM3_IRQn
-            //TIM4_IRQn
-            //TIM5_IRQn
-            //TIM6_IRQn
-            //TIM7_IRQn
-            #if defined(STM32F1) || defined(STM32F4)
-                NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-                nvic.NVIC_IRQChannelPreemptionPriority = 0;
-                nvic.NVIC_IRQChannelSubPriority = 3;
-            #elif defined STM32F0
-            #endif 
-            nvic.NVIC_IRQChannelCmd = ENABLE;
-            break;
-        default:
-            break;
-    }
-
     NVIC_Init(&nvic);
 }
 // 获取优先级
