@@ -166,7 +166,12 @@
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>IsrVector</ItemText>
+          <ItemText>IsrBuf</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>vsram</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
