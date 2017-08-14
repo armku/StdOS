@@ -195,19 +195,10 @@ void TInterrupt::SetPriority(short irq, uint priority)const
             #endif 
             break;
         case 17:
-            //DMA1_Channel7_IRQn
-            //F0 TIM6
-            #ifdef STM32F0
-                nvic.NVIC_IRQChannel = TIM6_DAC_IRQn;
-                nvic.NVIC_IRQChannelPriority = 2;
-                nvic.NVIC_IRQChannelCmd = ENABLE;
-            #endif 
-            break;
         case 18:
-            //ADC1_2_IRQn
+            //F0 TIM6
             //F0 TIM7
             #ifdef STM32F0
-                nvic.NVIC_IRQChannel = TIM7_IRQn;
                 nvic.NVIC_IRQChannelPriority = 2;
                 nvic.NVIC_IRQChannelCmd = ENABLE;
             #endif 
