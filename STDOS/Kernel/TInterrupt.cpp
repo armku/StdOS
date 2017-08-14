@@ -24,6 +24,7 @@ class CInterrupt
 {
     public:
 		static void SysTick_Handler();//systick中断服务函数
+		static void USART1_IRQHandler();
         static void USB_LP_CAN1_RX0_IRQHandler();
         static void TIM3_IRQHandler();
 };
@@ -40,6 +41,7 @@ void TInterrupt::Init()const
 	NVIC_SetVectorTable(NVIC_VectTab_RAM, NVIC_OFFSET);
 	
 	IsrBuf[15]=(uint)&(CInterrupt::SysTick_Handler);
+	IsrBuf[53]=(uint)&(CInterrupt::USART1_IRQHandler);
 }
 
 void TInterrupt::Process(uint num)const
@@ -785,18 +787,7 @@ void OnUsartReceive(ushort num, void *param);
 #ifdef __cplusplus
     extern "C"
     {
-    #endif 
-    //串口1中断服务程序
-    //注意,读取USARTx->SR能避免莫名其妙的错误
-    /*
-     */
-    void USART1_IRQHandler(void) //串口1中断服务程序
-    {
-        if (onSerialPortRcv[0])
-        {
-            OnUsartReceive(0, onSerialPortRcv[0]);
-        }
-    }
+    #endif     
     void USART2_IRQHandler(void) //串口2中断服务程序
     {
         if (onSerialPortRcv[1])
@@ -1227,9 +1218,19 @@ ISR_t IsrVector[] __attribute__((at(FLASH_SAVE_ADDR)))=
 
 }
 #endif
+
+
 #include "TTime.h"
 void CInterrupt::SysTick_Handler()
 {
 	Time.Milliseconds++;
+}
+//注意,读取USARTx->SR能避免莫名其妙的错误
+void CInterrupt::USART1_IRQHandler()
+{
+	if (onSerialPortRcv[0])
+    {
+        OnUsartReceive(0, onSerialPortRcv[0]);
+    }
 }
 
