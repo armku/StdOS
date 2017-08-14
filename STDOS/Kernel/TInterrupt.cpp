@@ -91,34 +91,16 @@ void TInterrupt::Process(uint num)const
 
 }
 
-void *onSerialPortRcv[5];
+void *onIsr[ISRLENGTH];//中断
+
 Timer *onTimerPortRcv[18];
 
 // 注册中断函数（中断号，函数，参数）
 bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
 {
+	onIsr[irq]=param;
     switch (irq)
     {
-        case 37:
-            //USART1_IRQn
-            onSerialPortRcv[0] = param;
-            break;
-        case 38:
-            //USART2_IRQn
-            onSerialPortRcv[1] = param;
-            break;
-        case 39:
-            //USART3_IRQn
-            onSerialPortRcv[2] = param;
-            break;
-        case 52:
-            //UART4_IRQn
-            onSerialPortRcv[3] = param;
-            break;
-        case 53:
-            //UART5_IRQn
-            onSerialPortRcv[4] = param;
-            break;
         case 25:
             //TIM1_UP_IRQn
             onTimerPortRcv[0] = (Timer*)param;
@@ -266,49 +248,41 @@ void CInterrupt::SysTick_Handler()
 //注意,读取USARTx->SR能避免莫名其妙的错误
 void CInterrupt::USART1_IRQHandler()
 {
-    if (onSerialPortRcv[0])
+	if (onIsr[37])
     {
-        OnUsartReceive(0, onSerialPortRcv[0]);
+        OnUsartReceive(0, onIsr[37]);
     }
 }
 
 void CInterrupt::USART2_IRQHandler()
 {
-    if (onSerialPortRcv[1])
+    if (onIsr[38])
     {
-        //            SerialPort::OnUsartReceive(1, onSerialPortRcv[1]);
+        OnUsartReceive(1, onIsr[38]);
     }
 }
 
 void CInterrupt::USART3_IRQHandler()
 {
-    if (onSerialPortRcv[2])
+    if (onIsr[39])
     {
-        OnUsartReceive(2, onSerialPortRcv[2]);
-    }
-    uint8_t ch;
-
-    if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
-    {
-        //ch = USART1->DR;
-        ch = USART_ReceiveData(USART3);
-        printf("%c", ch); //将接受到的数据直接返回打印
+        OnUsartReceive(2, onIsr[39]);
     }
 }
 
 void CInterrupt::UART4_IRQHandler()
 {
-    if (onSerialPortRcv[3])
+    if (onIsr[52])
     {
-        //            SerialPort::OnUsartReceive(3, onSerialPortRcv[3]);
+        OnUsartReceive(3, onIsr[52]);
     }
 }
 
 void CInterrupt::UART5_IRQHandler()
 {
-    if (onSerialPortRcv[4])
+    if (onIsr[53])
     {
-        //           SerialPort::OnUsartReceive(4, onSerialPortRcv[4]);
+        OnUsartReceive(4, onIsr[53]);
     }
 }
 
