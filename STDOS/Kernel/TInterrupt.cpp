@@ -98,6 +98,26 @@ bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
 {
     switch (irq)
     {
+        case 37:
+            //USART1_IRQn
+            onSerialPortRcv[0] = param;
+            break;
+        case 38:
+            //USART2_IRQn
+            onSerialPortRcv[1] = param;
+            break;
+        case 39:
+            //USART3_IRQn
+            onSerialPortRcv[2] = param;
+            break;
+        case 52:
+            //UART4_IRQn
+            onSerialPortRcv[3] = param;
+            break;
+        case 53:
+            //UART5_IRQn
+            onSerialPortRcv[4] = param;
+            break;
         case 25:
             //TIM1_UP_IRQn
             onTimerPortRcv[0] = (Timer*)param;
@@ -114,29 +134,9 @@ bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
             //TIM4_IRQn
             onTimerPortRcv[3] = (Timer*)param;
             break;
-        case 37:
-            //USART1_IRQn
-            onSerialPortRcv[0] = (SerialPort*)param;
-            break;
-        case 38:
-            //USART2_IRQn
-            onSerialPortRcv[1] = (SerialPort*)param;
-            break;
-        case 39:
-            //USART3_IRQn
-            onSerialPortRcv[2] = (SerialPort*)param;
-            break;
         case 50:
             //TIM5_IRQn
             onTimerPortRcv[4] = (Timer*)param;
-            break;
-        case 52:
-            //UART4_IRQn
-            onSerialPortRcv[3] = (SerialPort*)param;
-            break;
-        case 53:
-            //UART5_IRQn
-            onSerialPortRcv[4] = (SerialPort*)param;
             break;
         case 54:
             //TIM6_IRQn
