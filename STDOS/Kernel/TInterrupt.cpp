@@ -19,91 +19,92 @@ TInterrupt Interrupt;
 class CInterrupt
 {
     public:
-		static void Default_Handler();
-		static void SysTick_Handler();//systick中断服务函数
-		
-		static void USART1_IRQHandler();
-		static void USART2_IRQHandler();
-		static void USART3_IRQHandler();
-		static void UART4_IRQHandler();
-		static void UART5_IRQHandler();
-		
-		static void TIM2_IRQHandler();
-		static void TIM3_IRQHandler();
-		static void TIM4_IRQHandler();
-		static void TIM5_IRQHandler();
-		static void TIM6_IRQHandler();
-		static void TIM7_IRQHandler();
-	
-		static void EXTI0_IRQHandler();
-		static void EXTI1_IRQHandler();
-		static void EXTI2_IRQHandler();
-		static void EXTI3_IRQHandler();
-		static void EXTI4_IRQHandler();
-		static void EXTI9_5_IRQHandler();
-		static void EXTI15_10_IRQHandler();
-	
+        static void Default_Handler();
+        static void SysTick_Handler(); //systick中断服务函数
+
+        static void USART1_IRQHandler();
+        static void USART2_IRQHandler();
+        static void USART3_IRQHandler();
+        static void UART4_IRQHandler();
+        static void UART5_IRQHandler();
+
+        static void TIM2_IRQHandler();
+        static void TIM3_IRQHandler();
+        static void TIM4_IRQHandler();
+        static void TIM5_IRQHandler();
+        static void TIM6_IRQHandler();
+        static void TIM7_IRQHandler();
+
+        static void EXTI0_IRQHandler();
+        static void EXTI1_IRQHandler();
+        static void EXTI2_IRQHandler();
+        static void EXTI3_IRQHandler();
+        static void EXTI4_IRQHandler();
+        static void EXTI9_5_IRQHandler();
+        static void EXTI15_10_IRQHandler();
+
 };
 
 extern "C"
 {
-	uint   IsrBuf[ISRLENGTH]   __attribute__ ((at(ISRADDR)));
-	uint *vsrom= (uint *) NVIC_VectTab_FLASH;
+    uint IsrBuf[ISRLENGTH] __attribute__((at(ISRADDR)));
+    uint *vsrom = (uint*)NVIC_VectTab_FLASH;
 }
 
 // 初始化中断向量表
 void TInterrupt::Init()const
 {
-	//复制中断向量表
-	for(int i=0;i<ISRLENGTH;i++)
-	{
-		IsrBuf[i]=vsrom[i];
-	}
-	//中断向量表重映射
-	NVIC_SetVectorTable(NVIC_VectTab_RAM, NVIC_OFFSET);
-	
-	IsrBuf[15]=(uint)&(CInterrupt::SysTick_Handler);
-	IsrBuf[53]=(uint)&(CInterrupt::USART1_IRQHandler);
-	IsrBuf[54]=(uint)&(CInterrupt::USART2_IRQHandler);
-	IsrBuf[55]=(uint)&(CInterrupt::USART3_IRQHandler);
-	IsrBuf[68]=(uint)&(CInterrupt::UART4_IRQHandler);
-	IsrBuf[69]=(uint)&(CInterrupt::UART5_IRQHandler);
-	
-	IsrBuf[44]=(uint)&(CInterrupt::TIM2_IRQHandler);
-	IsrBuf[45]=(uint)&(CInterrupt::TIM3_IRQHandler);
-	IsrBuf[46]=(uint)&(CInterrupt::TIM4_IRQHandler);
-	IsrBuf[66]=(uint)&(CInterrupt::TIM5_IRQHandler);
-	IsrBuf[70]=(uint)&(CInterrupt::TIM6_IRQHandler);
-	IsrBuf[71]=(uint)&(CInterrupt::TIM7_IRQHandler);
-	
-	IsrBuf[22]=(uint)&(CInterrupt::EXTI0_IRQHandler);
-	IsrBuf[23]=(uint)&(CInterrupt::EXTI1_IRQHandler);
-	IsrBuf[24]=(uint)&(CInterrupt::EXTI2_IRQHandler);
-	IsrBuf[25]=(uint)&(CInterrupt::EXTI3_IRQHandler);
-	IsrBuf[26]=(uint)&(CInterrupt::EXTI4_IRQHandler);
-	IsrBuf[39]=(uint)&(CInterrupt::EXTI9_5_IRQHandler);
-	IsrBuf[56]=(uint)&(CInterrupt::EXTI15_10_IRQHandler);
-	
-}
+    //复制中断向量表
+    for (int i = 0; i < ISRLENGTH; i++)
+    {
+        IsrBuf[i] = vsrom[i];
+    }
+    //中断向量表重映射
+    NVIC_SetVectorTable(NVIC_VectTab_RAM, NVIC_OFFSET);
 
-void TInterrupt::Process(uint num)const
-{
+    IsrBuf[15] = (uint) &(CInterrupt::SysTick_Handler);
+    IsrBuf[53] = (uint) &(CInterrupt::USART1_IRQHandler);
+    IsrBuf[54] = (uint) &(CInterrupt::USART2_IRQHandler);
+    IsrBuf[55] = (uint) &(CInterrupt::USART3_IRQHandler);
+    IsrBuf[68] = (uint) &(CInterrupt::UART4_IRQHandler);
+    IsrBuf[69] = (uint) &(CInterrupt::UART5_IRQHandler);
+
+    IsrBuf[44] = (uint) &(CInterrupt::TIM2_IRQHandler);
+    IsrBuf[45] = (uint) &(CInterrupt::TIM3_IRQHandler);
+    IsrBuf[46] = (uint) &(CInterrupt::TIM4_IRQHandler);
+    IsrBuf[66] = (uint) &(CInterrupt::TIM5_IRQHandler);
+    IsrBuf[70] = (uint) &(CInterrupt::TIM6_IRQHandler);
+    IsrBuf[71] = (uint) &(CInterrupt::TIM7_IRQHandler);
+
+    IsrBuf[22] = (uint) &(CInterrupt::EXTI0_IRQHandler);
+    IsrBuf[23] = (uint) &(CInterrupt::EXTI1_IRQHandler);
+    IsrBuf[24] = (uint) &(CInterrupt::EXTI2_IRQHandler);
+    IsrBuf[25] = (uint) &(CInterrupt::EXTI3_IRQHandler);
+    IsrBuf[26] = (uint) &(CInterrupt::EXTI4_IRQHandler);
+    IsrBuf[39] = (uint) &(CInterrupt::EXTI9_5_IRQHandler);
+    IsrBuf[56] = (uint) &(CInterrupt::EXTI15_10_IRQHandler);
 
 }
 
-void *onIsr[ISRLENGTH];//中断
+void TInterrupt::Process(uint num)const{
+
+}
+
+void *onIsr[ISRLENGTH]; //中断
 
 // 注册中断函数（中断号，函数，参数）
 bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
 {
-	onIsr[irq]=param;    
+    onIsr[irq] = param;
     return true;
 }
+
 // 解除中断注册
 bool TInterrupt::Deactivate(short irq)
 {
     return false;
 }
+
 // 开中断
 //bool TInterrupt::Enable(short irq) const{return false;}
 // 关中断
@@ -131,9 +132,9 @@ void TInterrupt::SetPriority(short irq, uint priority)const
 
     NVIC_Init(&nvic);
 }
+
 // 获取优先级
-void TInterrupt::GetPriority(short irq)const
-{
+void TInterrupt::GetPriority(short irq)const{
 
 }
 // 编码优先级
@@ -151,6 +152,7 @@ bool TInterrupt::GlobalState()
 {
     return false;
 }
+
 // 打开全局中断
 void TInterrupt::GlobalEnable()
 {
@@ -169,6 +171,7 @@ bool TInterrupt::IsHandler()
 {
     return false;
 }
+
 // 系统挂起
 void TInterrupt::Halt(){}
 void TInterrupt::OnInit()const{}
@@ -181,6 +184,7 @@ bool TInterrupt::OnDeactivate(short irq)
 {
     return false;
 }
+
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 Lock::Lock(int &ref){}
@@ -190,6 +194,7 @@ bool Lock::Wait(int ms)
 {
     return false;
 }
+
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 //所有中断线处理
@@ -200,9 +205,10 @@ void OnUsartReceive(ushort num, void *param);
 /////////////////////////////////////////////////////////////////////////////////
 void CInterrupt::Default_Handler()
 {
-    while (1);
+    while (1)
+        ;
 }
-   
+
 
 #include "TTime.h"
 void CInterrupt::SysTick_Handler()
@@ -213,7 +219,7 @@ void CInterrupt::SysTick_Handler()
 //注意,读取USARTx->SR能避免莫名其妙的错误
 void CInterrupt::USART1_IRQHandler()
 {
-	if (onIsr[37])
+    if (onIsr[37])
     {
         OnUsartReceive(0, onIsr[37]);
     }
@@ -258,8 +264,8 @@ void CInterrupt::TIM2_IRQHandler()
         if (onIsr[28])
         {
             ((Timer*)onIsr[28])->OnInterrupt();
-        }			
-		TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
+        }
+        TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
     }
 }
 
@@ -270,8 +276,8 @@ void CInterrupt::TIM3_IRQHandler()
         if (onIsr[29])
         {
             ((Timer*)onIsr[29])->OnInterrupt();
-        }			
-		TIM_ClearITPendingBit(TIM3, TIM_FLAG_Update);
+        }
+        TIM_ClearITPendingBit(TIM3, TIM_FLAG_Update);
     }
 }
 
@@ -282,8 +288,8 @@ void CInterrupt::TIM4_IRQHandler()
         if (onIsr[30])
         {
             ((Timer*)onIsr[30])->OnInterrupt();
-        }			
-		TIM_ClearITPendingBit(TIM4, TIM_FLAG_Update);
+        }
+        TIM_ClearITPendingBit(TIM4, TIM_FLAG_Update);
     }
 }
 
@@ -294,8 +300,8 @@ void CInterrupt::TIM5_IRQHandler()
         if (onIsr[50])
         {
             ((Timer*)onIsr[50])->OnInterrupt();
-        }			
-		TIM_ClearITPendingBit(TIM5, TIM_FLAG_Update);
+        }
+        TIM_ClearITPendingBit(TIM5, TIM_FLAG_Update);
     }
 }
 
@@ -304,11 +310,11 @@ void CInterrupt::TIM6_IRQHandler()
     #if defined(STM32F1) || defined(STM32F4)  
         if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
         {
-			if (onIsr[54])
+            if (onIsr[54])
             {
                 ((Timer*)onIsr[54])->OnInterrupt();
-            }			
-			TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
+            }
+            TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
         }
     #elif defined STM32F0
         TIM_ClearITPendingBit(TIM6, TIM_IT_Update); //先清空中断标志位，以备下次使用。
@@ -327,8 +333,8 @@ void CInterrupt::TIM7_IRQHandler()
             if (onIsr[55])
             {
                 ((Timer*)onIsr[55])->OnInterrupt();
-            }			
-			TIM_ClearITPendingBit(TIM7, TIM_FLAG_Update);
+            }
+            TIM_ClearITPendingBit(TIM7, TIM_FLAG_Update);
         }
     #elif defined STM32F0
         TIM_ClearITPendingBit(TIM7, TIM_IT_Update); //先清空中断标志位，以备下次使用。
