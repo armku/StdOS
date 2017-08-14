@@ -10,15 +10,10 @@
     #include "stm32f4xx.h"
 #endif 
 
-
-TInterrupt Interrupt;
 #define NVIC_OFFSET					 ((uint)0x1000)
 #define ISRADDR (NVIC_VectTab_RAM+NVIC_OFFSET)
-extern "C"
-{
-	uint   IsrBuf[1024]   __attribute__ ((at(ISRADDR)));
-	uint *vsrom= (uint *) NVIC_VectTab_FLASH;
-}
+
+TInterrupt Interrupt;
 
 class CInterrupt
 {
@@ -48,6 +43,12 @@ class CInterrupt
 		static void EXTI15_10_IRQHandler();
 	
 };
+
+extern "C"
+{
+	uint   IsrBuf[1024]   __attribute__ ((at(ISRADDR)));
+	uint *vsrom= (uint *) NVIC_VectTab_FLASH;
+}
 
 // 初始化中断向量表
 void TInterrupt::Init()const
