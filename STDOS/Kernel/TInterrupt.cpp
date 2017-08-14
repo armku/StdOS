@@ -93,45 +93,10 @@ void TInterrupt::Process(uint num)const
 
 void *onIsr[ISRLENGTH];//中断
 
-Timer *onTimerPortRcv[18];
-
 // 注册中断函数（中断号，函数，参数）
 bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
 {
-	onIsr[irq]=param;
-    switch (irq)
-    {
-        case 25:
-            //TIM1_UP_IRQn
-            onTimerPortRcv[0] = (Timer*)param;
-            break;
-        case 28:
-            //TIM2_IRQn
-            onTimerPortRcv[1] = (Timer*)param;
-            break;
-        case 29:
-            //TIM3_IRQn
-            onTimerPortRcv[2] = (Timer*)param;
-            break;
-        case 30:
-            //TIM4_IRQn
-            onTimerPortRcv[3] = (Timer*)param;
-            break;
-        case 50:
-            //TIM5_IRQn
-            onTimerPortRcv[4] = (Timer*)param;
-            break;
-        case 54:
-            //TIM6_IRQn
-            onTimerPortRcv[5] = (Timer*)param;
-            break;
-        case 55:
-            //TIM7_IRQn
-            onTimerPortRcv[6] = (Timer*)param;
-            break;
-        default:
-            break;
-    }
+	onIsr[irq]=param;    
     return true;
 }
 // 解除中断注册
@@ -290,11 +255,11 @@ void CInterrupt::TIM2_IRQHandler()
 {
     if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
     {
-        if (onTimerPortRcv[1])
+        if (onIsr[28])
         {
-            onTimerPortRcv[1]->OnInterrupt();
-        }
-        TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
+            ((Timer*)onIsr[28])->OnInterrupt();
+        }			
+		TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
     }
 }
 
@@ -302,11 +267,11 @@ void CInterrupt::TIM3_IRQHandler()
 {
     if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
     {
-        if (onTimerPortRcv[2])
+        if (onIsr[29])
         {
-            onTimerPortRcv[2]->OnInterrupt();
-        }
-        TIM_ClearITPendingBit(TIM3, TIM_FLAG_Update);
+            ((Timer*)onIsr[29])->OnInterrupt();
+        }			
+		TIM_ClearITPendingBit(TIM3, TIM_FLAG_Update);
     }
 }
 
@@ -314,11 +279,11 @@ void CInterrupt::TIM4_IRQHandler()
 {
     if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
     {
-        if (onTimerPortRcv[3])
+        if (onIsr[30])
         {
-            onTimerPortRcv[3]->OnInterrupt();
-        }
-        TIM_ClearITPendingBit(TIM4, TIM_FLAG_Update);
+            ((Timer*)onIsr[30])->OnInterrupt();
+        }			
+		TIM_ClearITPendingBit(TIM4, TIM_FLAG_Update);
     }
 }
 
@@ -326,11 +291,11 @@ void CInterrupt::TIM5_IRQHandler()
 {
     if (TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET)
     {
-        if (onTimerPortRcv[4])
+        if (onIsr[50])
         {
-            onTimerPortRcv[4]->OnInterrupt();
-        }
-        TIM_ClearITPendingBit(TIM5, TIM_FLAG_Update);
+            ((Timer*)onIsr[50])->OnInterrupt();
+        }			
+		TIM_ClearITPendingBit(TIM5, TIM_FLAG_Update);
     }
 }
 
@@ -339,11 +304,11 @@ void CInterrupt::TIM6_IRQHandler()
     #if defined(STM32F1) || defined(STM32F4)  
         if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
         {
-            if (onTimerPortRcv[5])
+			if (onIsr[54])
             {
-                onTimerPortRcv[5]->OnInterrupt();
-            }
-            TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
+                ((Timer*)onIsr[54])->OnInterrupt();
+            }			
+			TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
         }
     #elif defined STM32F0
         TIM_ClearITPendingBit(TIM6, TIM_IT_Update); //先清空中断标志位，以备下次使用。
@@ -359,11 +324,11 @@ void CInterrupt::TIM7_IRQHandler()
     #if defined(STM32F1) || defined(STM32F4) 
         if (TIM_GetITStatus(TIM7, TIM_IT_Update) != RESET)
         {
-            if (onTimerPortRcv[6])
+            if (onIsr[55])
             {
-                onTimerPortRcv[6]->OnInterrupt();
-            }
-            TIM_ClearITPendingBit(TIM7, TIM_FLAG_Update);
+                ((Timer*)onIsr[55])->OnInterrupt();
+            }			
+			TIM_ClearITPendingBit(TIM7, TIM_FLAG_Update);
         }
     #elif defined STM32F0
         TIM_ClearITPendingBit(TIM7, TIM_IT_Update); //先清空中断标志位，以备下次使用。
