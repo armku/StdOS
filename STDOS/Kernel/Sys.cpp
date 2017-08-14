@@ -36,13 +36,13 @@ String *CPUName;
 TSys::TSys()
 {
 	#ifdef STM32F0
-		this->CystalClock=12;
+		this->CystalClock=8;
 		this->Clock = 48;
 	#elif defined STM32F1
 		this->CystalClock=8;
 		this->Clock = 72;
 	#elif defined STM32F4
-		this->CystalClock=12;
+		this->CystalClock=8;
 		this->Clock = 168;
 	#endif
     this->MessagePort = COM1;
