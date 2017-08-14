@@ -25,6 +25,11 @@ class CInterrupt
     public:
 		static void SysTick_Handler();//systick中断服务函数
 		static void USART1_IRQHandler();
+		static void USART2_IRQHandler();
+		static void USART3_IRQHandler();
+		static void UART4_IRQHandler();
+		static void UART5_IRQHandler();
+		
         static void USB_LP_CAN1_RX0_IRQHandler();
         static void TIM3_IRQHandler();
 };
@@ -42,6 +47,10 @@ void TInterrupt::Init()const
 	
 	IsrBuf[15]=(uint)&(CInterrupt::SysTick_Handler);
 	IsrBuf[53]=(uint)&(CInterrupt::USART1_IRQHandler);
+	IsrBuf[54]=(uint)&(CInterrupt::USART2_IRQHandler);
+	IsrBuf[55]=(uint)&(CInterrupt::USART3_IRQHandler);
+	IsrBuf[68]=(uint)&(CInterrupt::UART4_IRQHandler);
+	IsrBuf[69]=(uint)&(CInterrupt::UART5_IRQHandler);
 }
 
 void TInterrupt::Process(uint num)const
@@ -788,42 +797,7 @@ void OnUsartReceive(ushort num, void *param);
     extern "C"
     {
     #endif     
-    void USART2_IRQHandler(void) //串口2中断服务程序
-    {
-        if (onSerialPortRcv[1])
-        {
-            //            SerialPort::OnUsartReceive(1, onSerialPortRcv[1]);
-        }
-    }
-    void USART3_IRQHandler(void) //串口3中断服务程序
-    {
-        if (onSerialPortRcv[2])
-        {
-            OnUsartReceive(2, onSerialPortRcv[2]);
-        }
-        uint8_t ch;
-
-        if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
-        {
-            //ch = USART1->DR;
-            ch = USART_ReceiveData(USART3);
-            printf("%c", ch); //将接受到的数据直接返回打印
-        }
-    }
-    void USART4_IRQHandler(void) //串口4中断服务程序
-    {
-        if (onSerialPortRcv[3])
-        {
-            //            SerialPort::OnUsartReceive(3, onSerialPortRcv[3]);
-        }
-    }
-    void USART5_IRQHandler(void) //串口5中断服务程序
-    {
-        if (onSerialPortRcv[4])
-        {
-            //           SerialPort::OnUsartReceive(4, onSerialPortRcv[4]);
-        }
-    }
+    
     int timer2testcnt123 = 0;
     int time2, time3, time4, time5, time6, time7;
     void TIM2_IRQHandler(void)
@@ -1223,14 +1197,55 @@ ISR_t IsrVector[] __attribute__((at(FLASH_SAVE_ADDR)))=
 #include "TTime.h"
 void CInterrupt::SysTick_Handler()
 {
-	Time.Milliseconds++;
+    Time.Milliseconds++;
 }
+
 //注意,读取USARTx->SR能避免莫名其妙的错误
 void CInterrupt::USART1_IRQHandler()
 {
-	if (onSerialPortRcv[0])
+    if (onSerialPortRcv[0])
     {
         OnUsartReceive(0, onSerialPortRcv[0]);
+    }
+}
+
+void CInterrupt::USART2_IRQHandler()
+{
+    if (onSerialPortRcv[1])
+    {
+        //            SerialPort::OnUsartReceive(1, onSerialPortRcv[1]);
+    }
+}
+
+void CInterrupt::USART3_IRQHandler()
+{
+    if (onSerialPortRcv[2])
+    {
+        OnUsartReceive(2, onSerialPortRcv[2]);
+    }
+    uint8_t ch;
+
+    if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+    {
+        //ch = USART1->DR;
+        ch = USART_ReceiveData(USART3);
+        printf("%c", ch); //将接受到的数据直接返回打印
+    }
+}
+
+void CInterrupt::UART4_IRQHandler()
+{
+    if (onSerialPortRcv[3])
+    {
+        //            SerialPort::OnUsartReceive(3, onSerialPortRcv[3]);
+    }
+}
+
+void CInterrupt::UART5_IRQHandler()
+{
+    if (onSerialPortRcv[4])
+    {
+        //           SerialPort::OnUsartReceive(4, onSerialPortRcv[4]);
     }
 }
 
