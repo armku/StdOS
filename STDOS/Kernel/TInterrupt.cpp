@@ -23,6 +23,7 @@ extern "C"
 class CInterrupt
 {
     public:
+		static void Default_Handler();
 		static void SysTick_Handler();//systick中断服务函数
 		
 		static void USART1_IRQHandler();
@@ -822,37 +823,16 @@ bool Lock::Wait(int ms)
 void EXTI_IRQHandler(ushort num, void *param);
 extern SerialPort *_printf_sp;
 void OnUsartReceive(ushort num, void *param);
-
-#ifdef __cplusplus
-    extern "C"
-    {
-    #endif     
-    
-    int timer2testcnt123 = 0;
-    int time2, time3, time4, time5, time6, time7;
-        
-    
-    
-    
-}
+   
+int timer2testcnt123 = 0;
+int time2, time3, time4, time5, time6, time7;
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-    extern "C"
-    {
-  
-
-    void __initial_sp_ex(void){}
-    void Reset_Handler(void);
-	void Default_Handler(void)
+void CInterrupt::Default_Handler()
 {
     while (1);
 }
    
-    }
- 
-
-
-
 
 #include "TTime.h"
 void CInterrupt::SysTick_Handler()
