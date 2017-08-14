@@ -1083,91 +1083,79 @@ void CInterrupt::UART5_IRQHandler()
 
 void CInterrupt::TIM2_IRQHandler()
 {
-	if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
+    if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
+    {
+        if (onTimerPortRcv[1])
         {
-            if (onTimerPortRcv[1])
-            {
-                onTimerPortRcv[1]->OnInterrupt();
-            }
-            TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
+            onTimerPortRcv[1]->OnInterrupt();
         }
-        timer2testcnt123++;
-        time2++;
-}
-void CInterrupt::TIM3_IRQHandler()
-{
-	if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
-        {
-            time3++;
-            if (onTimerPortRcv[2])
-            {
-                onTimerPortRcv[2]->OnInterrupt();
-            }
-            TIM_ClearITPendingBit(TIM3, TIM_FLAG_Update);
-        }
-}
-void CInterrupt::TIM4_IRQHandler()
-{
-	if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
-            {
-                time4++;
-                if (onTimerPortRcv[3])
-                {
-                    onTimerPortRcv[3]->OnInterrupt();
-                }
-                TIM_ClearITPendingBit(TIM4, TIM_FLAG_Update);
-            }
-}
-void CInterrupt::TIM5_IRQHandler()
-{
-	if (TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET)
-            {
-                time5++;
-                if (onTimerPortRcv[4])
-                {
-                    onTimerPortRcv[4]->OnInterrupt();
-                }
-                TIM_ClearITPendingBit(TIM5, TIM_FLAG_Update);
-            }
-}
-void CInterrupt::TIM6_IRQHandler()
-{
-	 if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
-            {
-                time6++;
-                if (onTimerPortRcv[5])
-                {
-                    onTimerPortRcv[5]->OnInterrupt();
-                }
-                TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
-            }
-}
-void CInterrupt::TIM7_IRQHandler()
-{
-	if (TIM_GetITStatus(TIM7, TIM_IT_Update) != RESET)
-            {
-                time7++;
-                if (onTimerPortRcv[6])
-                {
-                    onTimerPortRcv[6]->OnInterrupt();
-                }
-                TIM_ClearITPendingBit(TIM7, TIM_FLAG_Update);
-            }
+        TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
+    }
+    timer2testcnt123++;
+    time2++;
 }
 
-//void CInterrupt::TIM3_IRQHandler()
-//{
-//    //        if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
-//    //        {
-//    //                TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
-//    //                
-//    //                g_nNowTime++;
-//    //                
-//    ////                if(0==(g_nNowTime%2))
-//    //                {
-//    //                        AndyHW.HwCallBackKeyScan();
-//    //                }
-//    //                AndyHW.HwCallBackOverCurrent();
-//    //                AndyOS.sysCallBackTimer10ms();   //10mS
-//    //        }
-//}
+void CInterrupt::TIM3_IRQHandler()
+{
+    if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
+    {
+        time3++;
+        if (onTimerPortRcv[2])
+        {
+            onTimerPortRcv[2]->OnInterrupt();
+        }
+        TIM_ClearITPendingBit(TIM3, TIM_FLAG_Update);
+    }
+}
+
+void CInterrupt::TIM4_IRQHandler()
+{
+    if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
+    {
+        time4++;
+        if (onTimerPortRcv[3])
+        {
+            onTimerPortRcv[3]->OnInterrupt();
+        }
+        TIM_ClearITPendingBit(TIM4, TIM_FLAG_Update);
+    }
+}
+
+void CInterrupt::TIM5_IRQHandler()
+{
+    if (TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET)
+    {
+        time5++;
+        if (onTimerPortRcv[4])
+        {
+            onTimerPortRcv[4]->OnInterrupt();
+        }
+        TIM_ClearITPendingBit(TIM5, TIM_FLAG_Update);
+    }
+}
+
+void CInterrupt::TIM6_IRQHandler()
+{
+    if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
+    {
+        time6++;
+        if (onTimerPortRcv[5])
+        {
+            onTimerPortRcv[5]->OnInterrupt();
+        }
+        TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
+    }
+}
+
+void CInterrupt::TIM7_IRQHandler()
+{
+    if (TIM_GetITStatus(TIM7, TIM_IT_Update) != RESET)
+    {
+        time7++;
+        if (onTimerPortRcv[6])
+        {
+            onTimerPortRcv[6]->OnInterrupt();
+        }
+        TIM_ClearITPendingBit(TIM7, TIM_FLAG_Update);
+    }
+}
