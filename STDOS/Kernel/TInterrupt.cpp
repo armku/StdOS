@@ -24,14 +24,20 @@ class CInterrupt
 {
     public:
 		static void SysTick_Handler();//systick中断服务函数
+		
 		static void USART1_IRQHandler();
 		static void USART2_IRQHandler();
 		static void USART3_IRQHandler();
 		static void UART4_IRQHandler();
 		static void UART5_IRQHandler();
 		
-        static void USB_LP_CAN1_RX0_IRQHandler();
-        static void TIM3_IRQHandler();
+		static void TIM2_IRQHandler();
+		static void TIM3_IRQHandler();
+		static void TIM4_IRQHandler();
+		static void TIM5_IRQHandler();
+		static void TIM6_IRQHandler();
+		static void TIM7_IRQHandler();
+	
 };
 
 // 初始化中断向量表
@@ -1067,36 +1073,6 @@ void OnUsartReceive(ushort num, void *param);
 }
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-void CInterrupt::USB_LP_CAN1_RX0_IRQHandler()
-{
-    //        if(!g_bInterruptPause)        AndyUSB.USB_Istr();
-}
-
-void CInterrupt::TIM3_IRQHandler()
-{
-    //        if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
-    //        {
-    //                TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
-    //                
-    //                g_nNowTime++;
-    //                
-    ////                if(0==(g_nNowTime%2))
-    //                {
-    //                        AndyHW.HwCallBackKeyScan();
-    //                }
-    //                AndyHW.HwCallBackOverCurrent();
-    //                AndyOS.sysCallBackTimer10ms();   //10mS
-    //        }
-}
-
-
-
-
-
-
-
-
-
     extern "C"
     {
   
@@ -1112,86 +1088,6 @@ void CInterrupt::TIM3_IRQHandler()
  
 
 
-
-typedef void(*const ISR_t)(void);
-#if 1
-#define FLASH_SAVE_ADDR  0x0800DC00 				//设置FLASH 保存地址(必须为偶数) 保存在55k位置
-
-const ushort a[10] __attribute__((at(FLASH_SAVE_ADDR))) = 
-{
-    0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-};
-extern "C"
-    {
-//ISR_t IsrVector[] __attribute__ ((section("RESET1"))) __attribute__((at(FLASH_SAVE_ADDR)))=
-ISR_t IsrVector[] __attribute__((at(FLASH_SAVE_ADDR)))=
-{
-	__initial_sp_ex,
-	Reset_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	0,
-	0,
-	0,
-	0,
-	Default_Handler,
-	Default_Handler,
-	0,
-	Default_Handler,
-	Default_Handler,
-
-
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	CInterrupt::USB_LP_CAN1_RX0_IRQHandler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	CInterrupt::TIM3_IRQHandler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler,
-	Default_Handler
-};
-
-
-}
-#endif
 
 
 #include "TTime.h"
@@ -1249,3 +1145,49 @@ void CInterrupt::UART5_IRQHandler()
     }
 }
 
+void CInterrupt::TIM2_IRQHandler()
+{
+	
+}
+void CInterrupt::TIM3_IRQHandler()
+{
+	
+}
+void CInterrupt::TIM4_IRQHandler()
+{
+	
+}
+void CInterrupt::TIM5_IRQHandler()
+{
+	
+}
+void CInterrupt::TIM6_IRQHandler()
+{
+	
+}
+void CInterrupt::TIM7_IRQHandler()
+{
+	
+}
+
+//void CInterrupt::USB_LP_CAN1_RX0_IRQHandler()
+//{
+//    //        if(!g_bInterruptPause)        AndyUSB.USB_Istr();
+//}
+
+//void CInterrupt::TIM3_IRQHandler()
+//{
+//    //        if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
+//    //        {
+//    //                TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+//    //                
+//    //                g_nNowTime++;
+//    //                
+//    ////                if(0==(g_nNowTime%2))
+//    //                {
+//    //                        AndyHW.HwCallBackKeyScan();
+//    //                }
+//    //                AndyHW.HwCallBackOverCurrent();
+//    //                AndyOS.sysCallBackTimer10ms();   //10mS
+//    //        }
+//}
