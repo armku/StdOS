@@ -11,51 +11,125 @@
 #endif 
 
 #ifdef STM32F0
-	#define NVIC_VectTab_RAM             ((uint)0x20000000)
-	#define NVIC_VectTab_FLASH           ((uint)0x08000000)
-#endif
+    #define NVIC_VectTab_RAM             ((uint)0x20000000)
+    #define NVIC_VectTab_FLASH           ((uint)0x08000000)
+#endif 
 
 #ifdef STM32F0
-	#define NVIC_OFFSET					 ((uint)0x0000)
-#else
-	#define NVIC_OFFSET					 ((uint)0x1000)
-#endif
+    #define NVIC_OFFSET					 ((uint)0x0000)
+#else 
+    #define NVIC_OFFSET					 ((uint)0x1000)
+#endif 
 #define ISRADDR (NVIC_VectTab_RAM+NVIC_OFFSET)
 #if defined(STM32F1) || defined(STM32F4)
-	#define ISRLENGTH   100	//中断数量
+    #define ISRLENGTH   100	//中断数量
 #elif defined STM32F0
-	#define ISRLENGTH   60	//中断数量
-#endif
+    #define ISRLENGTH   60	//中断数量
+#endif 
 
 TInterrupt Interrupt;
 
 class CInterrupt
 {
     public:
-        static void Default_Handler();
-        static void SysTick_Handler(); //systick中断服务函数
+        //通用
+        static void Reset_Handler(); // Reset Handler
+        static void NMI_Handler();  // NMI Handler
+        static void HardFault_Handler(); // Hard Fault Handler
+        static void MemManage_Handler(); // MPU Fault Handler
+        static void BusFault_Handler(); // Bus Fault Handler
+        static void UsageFault_Handler(); // Usage Fault Handler
+        static void SVC_Handler(); // SVCall Handler
+        static void DebugMon_Handler(); // Debug Monitor Handler
+        static void PendSV_Handler(); // PendSV Handler
+        static void SysTick_Handler(); // SysTick Handler
+	
+        //STM32通用
+        static void WWDG_IRQHandler(); // Window Watchdog
+		static void RTC_IRQHandler(); // RTC through EXTI Line
+		static void FLASH_IRQHandler(); // FLASH
+		static void DMA1_Channel1_IRQHandler(); // DMA1 Channel 1
+		static void TIM2_IRQHandler(); // TIM2
+        static void TIM3_IRQHandler(); // TIM3
+		static void TIM7_IRQHandler(); // TIM7
+		static void USART1_IRQHandler(); // USART1
+        static void USART2_IRQHandler(); // USART2
+		static void SPI1_IRQHandler(); // SPI1
+        static void SPI2_IRQHandler(); // SPI2 
+		static void TIM1_CC_IRQHandler(); // TIM1 Capture Compare 
+		
+		
+        //F0        
+        static void PVD_VDDIO2_IRQHandler(); // PVD and VDDIO2 through EXTI Line detect
+        static void RCC_CRS_IRQHandler(); // RCC and CRS
+        static void EXTI0_1_IRQHandler(); // EXTI Line 0 and 1
+        static void EXTI2_3_IRQHandler(); // EXTI Line 2 and 3
+        static void EXTI4_15_IRQHandler(); // EXTI Line 4 to 15
+        static void TSC_IRQHandler(); // TS        
+        static void DMA1_Channel2_3_IRQHandler(); // DMA1 Channel 2 and Channel 3
+        static void DMA1_Channel4_5_6_7_IRQHandler(); // DMA1 Channel 4, Channel 5, Channel 6 and Channel 7
+        static void ADC1_COMP_IRQHandler(); // ADC1, COMP1 and COMP2 
+        static void TIM1_BRK_UP_TRG_COM_IRQHandler(); // TIM1 Break, Update, Trigger and Commutation               
+        static void TIM6_DAC_IRQHandler(); // TIM6 and DAC        
+        static void TIM14_IRQHandler(); // TIM14
+        static void TIM15_IRQHandler(); // TIM15
+        static void TIM16_IRQHandler(); // TIM16
+        static void TIM17_IRQHandler(); // TIM17
+        static void I2C1_IRQHandler(); // I2C1
+        static void I2C2_IRQHandler(); // I2C2             
+        static void USART3_4_IRQHandler(); // USART3 and USART4
+        static void CEC_CAN_IRQHandler(); // CEC and CAN
+        static void USB_IRQHandler(); // USB
 
-        static void USART1_IRQHandler();
-        static void USART2_IRQHandler();
-        static void USART3_IRQHandler();
-        static void UART4_IRQHandler();
-        static void UART5_IRQHandler();
-		static void USART3_4_IRQHandler();
-
-        static void TIM2_IRQHandler();
-        static void TIM3_IRQHandler();
-        static void TIM4_IRQHandler();
-        static void TIM5_IRQHandler();
-        static void TIM6_IRQHandler();
-        static void TIM7_IRQHandler();
-
-        static void EXTI0_IRQHandler();
-        static void EXTI1_IRQHandler();
-        static void EXTI2_IRQHandler();
-        static void EXTI3_IRQHandler();
-        static void EXTI4_IRQHandler();
-        static void EXTI9_5_IRQHandler();
-        static void EXTI15_10_IRQHandler();
+        //F3 F4        
+        //static void PVD_IRQHandler();  // PVD through EXTI Line detect
+        static void TAMPER_IRQHandler();  // Tamper 
+        //static void RCC_IRQHandler();  // RCC
+        static void EXTI0_IRQHandler();  // EXTI Line 0
+        static void EXTI1_IRQHandler();  // EXTI Line 1
+        static void EXTI2_IRQHandler(); // EXTI Line 2
+        static void EXTI3_IRQHandler();  // EXTI Line 3
+        static void EXTI4_IRQHandler();  // EXTI Line 4        
+        static void DMA1_Channel2_IRQHandler();  // DMA1 Channel 2
+        static void DMA1_Channel3_IRQHandler();  // DMA1 Channel 3
+        static void DMA1_Channel4_IRQHandler();  // DMA1 Channel 4
+        static void DMA1_Channel5_IRQHandler();  // DMA1 Channel 5
+        static void DMA1_Channel6_IRQHandler();  // DMA1 Channel 6
+        static void DMA1_Channel7_IRQHandler();  // DMA1 Channel 7
+        static void ADC1_2_IRQHandler();  // ADC1 & ADC2
+        static void USB_HP_CAN1_TX_IRQHandler();  // USB High Priority or CAN1 TX
+        static void USB_LP_CAN1_RX0_IRQHandler();  // USB Low  Priority or CAN1 RX0
+        static void CAN1_RX1_IRQHandler();  // CAN1 RX1
+        static void CAN1_SCE_IRQHandler();  // CAN1 SCE
+        static void EXTI9_5_IRQHandler();  // EXTI Line 9..5
+        static void TIM1_BRK_IRQHandler();  // TIM1 Break
+        static void TIM1_UP_IRQHandler();  // TIM1 Update
+        static void TIM1_TRG_COM_IRQHandler();  // TIM1 Trigger and Commutation               
+        static void TIM4_IRQHandler();  // TIM4
+        static void I2C1_EV_IRQHandler();  // I2C1 Event
+        static void I2C1_ER_IRQHandler();  // I2C1 Error
+        static void I2C2_EV_IRQHandler();  // I2C2 Event
+        static void I2C2_ER_IRQHandler();  // I2C2 Error              
+        static void USART3_IRQHandler(); // USART3
+        static void EXTI15_10_IRQHandler(); // EXTI Line 15..10
+        static void RTCAlarm_IRQHandler(); // RTC Alarm through EXTI Line
+        static void USBWakeUp_IRQHandler(); // USB Wakeup from suspend
+        static void TIM8_BRK_IRQHandler(); // TIM8 Break
+        static void TIM8_UP_IRQHandler(); // TIM8 Update
+        static void TIM8_TRG_COM_IRQHandler(); // TIM8 Trigger and Commutation
+        static void TIM8_CC_IRQHandler(); // TIM8 Capture Compare
+        static void ADC3_IRQHandler(); // ADC3
+        static void FSMC_IRQHandler(); // FSMC
+        static void SDIO_IRQHandler(); // SDIO
+        static void TIM5_IRQHandler(); // TIM5
+        static void SPI3_IRQHandler(); // SPI3
+        static void UART4_IRQHandler(); // UART4
+        static void UART5_IRQHandler(); // UART5
+        static void TIM6_IRQHandler(); // TIM6        
+        static void DMA2_Channel1_IRQHandler(); // DMA2 Channel1
+        static void DMA2_Channel2_IRQHandler(); // DMA2 Channel2
+        static void DMA2_Channel3_IRQHandler(); // DMA2 Channel3
+        static void DMA2_Channel4_5_IRQHandler(); // DMA2 Channel4 & Channel5
 
 };
 #include "TTime.h"
@@ -63,13 +137,13 @@ void *onIsr[ISRLENGTH]; //中断
 
 extern "C"
 {
-	#ifdef STM32F0
-		uint *VectorTable;
-		//uint VectorTable[ISRLENGTH] ;//__attribute__((at(ISRADDR)));
-    #else
-		uint VectorTable[ISRLENGTH] __attribute__((at(ISRADDR)));
-    #endif
-	uint *vsrom = (uint*)NVIC_VectTab_FLASH;
+    #ifdef STM32F0
+        uint *VectorTable;
+        //uint VectorTable[ISRLENGTH] ;//__attribute__((at(ISRADDR)));
+    #else 
+        uint VectorTable[ISRLENGTH] __attribute__((at(ISRADDR)));
+    #endif 
+    uint *vsrom = (uint*)NVIC_VectTab_FLASH;
 }
 
 // 初始化中断向量表
@@ -251,13 +325,6 @@ extern SerialPort *_printf_sp;
 void OnUsartReceive(ushort num, void *param);
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-void CInterrupt::Default_Handler()
-{
-    while (1)
-        ;
-}
-
-
 
 void CInterrupt::SysTick_Handler()
 {
@@ -283,36 +350,36 @@ void CInterrupt::USART2_IRQHandler()
 
 void CInterrupt::USART3_IRQHandler()
 {
-	#if defined(STM32F1) || defined(STM32F4)
-    if (onIsr[USART3_IRQn])
-    {
-        OnUsartReceive(2, onIsr[USART3_IRQn]);
-    }
-	#endif
+    #if defined(STM32F1) || defined(STM32F4)
+        if (onIsr[USART3_IRQn])
+        {
+            OnUsartReceive(2, onIsr[USART3_IRQn]);
+        }
+    #endif 
 }
-void CInterrupt::USART3_4_IRQHandler()
-{
-	
+
+void CInterrupt::USART3_4_IRQHandler(){
+
 }
 
 void CInterrupt::UART4_IRQHandler()
 {
-	#if defined(STM32F1) || defined(STM32F4)
-    if (onIsr[UART4_IRQn])
-    {
-        OnUsartReceive(3, onIsr[UART4_IRQn]);
-    }
-	#endif
+    #if defined(STM32F1) || defined(STM32F4)
+        if (onIsr[UART4_IRQn])
+        {
+            OnUsartReceive(3, onIsr[UART4_IRQn]);
+        }
+    #endif 
 }
 
 void CInterrupt::UART5_IRQHandler()
 {
-	#if defined(STM32F1) || defined(STM32F4)
-    if (onIsr[UART5_IRQn])
-    {
-        OnUsartReceive(4, onIsr[UART5_IRQn]);
-    }
-	#endif
+    #if defined(STM32F1) || defined(STM32F4)
+        if (onIsr[UART5_IRQn])
+        {
+            OnUsartReceive(4, onIsr[UART5_IRQn]);
+        }
+    #endif 
 }
 
 void CInterrupt::TIM2_IRQHandler()
@@ -341,30 +408,30 @@ void CInterrupt::TIM3_IRQHandler()
 
 void CInterrupt::TIM4_IRQHandler()
 {
-	#if defined(STM32F1) || defined(STM32F4)  
-    if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
-    {
-        if (onIsr[TIM4_IRQn])
+    #if defined(STM32F1) || defined(STM32F4)  
+        if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
         {
-            ((Timer*)onIsr[TIM4_IRQn])->OnInterrupt();
+            if (onIsr[TIM4_IRQn])
+            {
+                ((Timer*)onIsr[TIM4_IRQn])->OnInterrupt();
+            }
+            TIM_ClearITPendingBit(TIM4, TIM_FLAG_Update);
         }
-        TIM_ClearITPendingBit(TIM4, TIM_FLAG_Update);
-    }
-	#endif
+    #endif 
 }
 
 void CInterrupt::TIM5_IRQHandler()
 {
-	#if defined(STM32F1) || defined(STM32F4)  
-    if (TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET)
-    {
-        if (onIsr[TIM5_IRQn])
+    #if defined(STM32F1) || defined(STM32F4)  
+        if (TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET)
         {
-            ((Timer*)onIsr[TIM5_IRQn])->OnInterrupt();
+            if (onIsr[TIM5_IRQn])
+            {
+                ((Timer*)onIsr[TIM5_IRQn])->OnInterrupt();
+            }
+            TIM_ClearITPendingBit(TIM5, TIM_FLAG_Update);
         }
-        TIM_ClearITPendingBit(TIM5, TIM_FLAG_Update);
-    }
-	#endif
+    #endif 
 }
 
 void CInterrupt::TIM6_IRQHandler()
@@ -384,7 +451,7 @@ void CInterrupt::TIM6_IRQHandler()
         {
             ((Timer*)onIsr[TIM6_DAC_IRQn])->OnInterrupt();
         }
-            
+
     #endif 
 }
 
