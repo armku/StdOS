@@ -62,7 +62,7 @@ void *onIsr[ISRLENGTH]; //中断
 
 extern "C"
 {
-#pragma location = 0x20000000
+//#pragma location = 0x20000000
 	#ifdef STM32F0
 		uint *VectorTable;
 		//uint VectorTable[ISRLENGTH] ;//__attribute__((at(ISRADDR)));
@@ -70,11 +70,7 @@ extern "C"
 		uint VectorTable[ISRLENGTH] __attribute__((at(ISRADDR)));
     #endif
 	uint *vsrom = (uint*)NVIC_VectTab_FLASH;
-	
-	void SysTick_Handler()
-	{
-		Time.Milliseconds++;
-	}
+		
 	void TIM7_IRQHandler()
 	{
         TIM_ClearITPendingBit(TIM7, TIM_IT_Update); //先清空中断标志位，以备下次使用。
@@ -94,14 +90,14 @@ void TInterrupt::Init()const
     //复制中断向量表
     for (int i = 0; i < ISRLENGTH; i++)
     {
-        //VectorTable[i] = vsrom[i];
+        VectorTable[i] = vsrom[i];
     }
     //中断向量表重映射
 	#if defined(STM32F1) || defined(STM32F4)
 		NVIC_SetVectorTable(NVIC_VectTab_RAM, NVIC_OFFSET);
 	#elif defined STM32F0
 		RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
-		//SYSCFG_MemoryRemapConfig(SYSCFG_MemoryRemap_SRAM);
+		SYSCFG_MemoryRemapConfig(SYSCFG_MemoryRemap_SRAM);
 	#endif
 
     VectorTable[15] = (uint) &(CInterrupt::SysTick_Handler);
