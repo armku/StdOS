@@ -152,7 +152,6 @@ void Timer::Config()
         case Timer1:
             break;
         case Timer2:
-
             /* 设置TIM2CLK 为 72MHZ */
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
             TIM_DeInit(TIM2);
@@ -184,8 +183,8 @@ void Timer::Config()
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, DISABLE); /*先关闭等待使用*/
             Interrupt.SetPriority(29, 3); //TIM3_IRQn
             break;
+        case Timer4:
             #if defined(STM32F1) || defined(STM32F4)
-            case Timer4:
                 /* 设置TIM2CLK 为 72MHZ */
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
                 TIM_DeInit(TIM4);
@@ -200,8 +199,10 @@ void Timer::Config()
 
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, DISABLE); /*先关闭等待使用*/
                 Interrupt.SetPriority(30, 3); //TIM4_IRQn
-                break;
-            case Timer5:
+            #endif 
+            break;
+        case Timer5:
+            #if defined(STM32F1) || defined(STM32F4)
                 /* 设置TIM2CLK 为 72MHZ */
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
                 TIM_DeInit(TIM5);
@@ -216,8 +217,10 @@ void Timer::Config()
 
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, DISABLE); /*先关闭等待使用*/
                 Interrupt.SetPriority(50, 3); //TIM5_IRQn
-                break;
-            case Timer6:
+            #endif 
+            break;
+        case Timer6:
+            #if defined(STM32F1) || defined(STM32F4)
                 /* 设置TIM2CLK 为 72MHZ */
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
                 TIM_DeInit(TIM6);
@@ -232,50 +235,7 @@ void Timer::Config()
 
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, DISABLE); /*先关闭等待使用*/
                 Interrupt.SetPriority(54, 3); //TIM6_IRQn
-                break;
-            case Timer7:
-                /* 设置TIM2CLK 为 72MHZ */
-                RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
-                TIM_DeInit(TIM7);
-
-                TIM_TimeBaseInit(TIM7, &TIM_TimeBaseStructure);
-
-                TIM_ClearFlag(TIM7, TIM_FLAG_Update);
-
-                TIM_ITConfig(TIM7, TIM_IT_Update, ENABLE);
-                TIM_ClearFlag(TIM7, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
-                TIM_Cmd(TIM7, ENABLE);
-
-                RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE); /*先关闭等待使用*/
-                #ifdef STM32F1
-                    Interrupt.SetPriority(55, 3); //TIM7_IRQn
-                #elif defined STM32F4
-                #endif 
-                break;
-            case Timer8:
-                break;
-            case Timer9:
-                break;
-            case Timer10:
-                break;
-            case Timer11:
-                break;
-            case Timer12:
-                break;
-            case Timer13:
-                break;
-            case Timer14:
-                break;
-            case Timer15:
-                break;
-            case Timer16:
-                break;
-            case Timer17:
-                break;
-            case Timer18:
-                break;
             #elif defined STM32F0
-            case Timer6:
                 /* 设置TIM2CLK 为 48MHZ */
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
                 TIM_DeInit(TIM6);
@@ -290,8 +250,25 @@ void Timer::Config()
 
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, DISABLE); /*先关闭等待使用*/
                 Interrupt.SetPriority(17, 3); //TIM7_IRQn
-                break;
-            case Timer7:
+            #endif 
+            break;
+        case Timer7:
+            #if defined(STM32F1) || defined(STM32F4)
+                /* 设置TIM2CLK 为 72MHZ */
+                RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
+                TIM_DeInit(TIM7);
+
+                TIM_TimeBaseInit(TIM7, &TIM_TimeBaseStructure);
+
+                TIM_ClearFlag(TIM7, TIM_FLAG_Update);
+
+                TIM_ITConfig(TIM7, TIM_IT_Update, ENABLE);
+                TIM_ClearFlag(TIM7, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
+                TIM_Cmd(TIM7, ENABLE);
+
+                RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE); /*先关闭等待使用*/
+                Interrupt.SetPriority(55, 3); //TIM7_IRQn
+            #elif defined STM32F0
                 /* 设置TIM2CLK 为 48MHZ */
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
                 TIM_DeInit(TIM7);
@@ -306,8 +283,30 @@ void Timer::Config()
 
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE); /*先关闭等待使用*/
                 Interrupt.SetPriority(18, 3); //TIM7_IRQn
-                break;
             #endif 
+            break;
+        case Timer8:
+            break;
+        case Timer9:
+            break;
+        case Timer10:
+            break;
+        case Timer11:
+            break;
+        case Timer12:
+            break;
+        case Timer13:
+            break;
+        case Timer14:
+            break;
+        case Timer15:
+            break;
+        case Timer16:
+            break;
+        case Timer17:
+            break;
+        case Timer18:
+            break;
         default:
             break;
     }
