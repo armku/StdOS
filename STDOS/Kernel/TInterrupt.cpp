@@ -254,41 +254,41 @@ void CInterrupt::SysTick_Handler()
 //注意,读取USARTx->SR能避免莫名其妙的错误
 void CInterrupt::USART1_IRQHandler()
 {
-    if (onIsr[37])
+    if (onIsr[USART1_IRQn])
     {
-        OnUsartReceive(0, onIsr[37]);
+        OnUsartReceive(0, onIsr[USART1_IRQn]);
     }
 }
 
 void CInterrupt::USART2_IRQHandler()
 {
-    if (onIsr[38])
+    if (onIsr[USART2_IRQn])
     {
-        OnUsartReceive(1, onIsr[38]);
+        OnUsartReceive(1, onIsr[USART2_IRQn]);
     }
 }
 
 void CInterrupt::USART3_IRQHandler()
 {
-    if (onIsr[39])
+    if (onIsr[USART3_IRQn])
     {
-        OnUsartReceive(2, onIsr[39]);
+        OnUsartReceive(2, onIsr[USART3_IRQn]);
     }
 }
 
 void CInterrupt::UART4_IRQHandler()
 {
-    if (onIsr[52])
+    if (onIsr[UART4_IRQn])
     {
-        OnUsartReceive(3, onIsr[52]);
+        OnUsartReceive(3, onIsr[UART4_IRQn]);
     }
 }
 
 void CInterrupt::UART5_IRQHandler()
 {
-    if (onIsr[53])
+    if (onIsr[UART5_IRQn])
     {
-        OnUsartReceive(4, onIsr[53]);
+        OnUsartReceive(4, onIsr[UART5_IRQn]);
     }
 }
 
@@ -296,9 +296,9 @@ void CInterrupt::TIM2_IRQHandler()
 {
     if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
     {
-        if (onIsr[28])
+        if (onIsr[TIM2_IRQn])
         {
-            ((Timer*)onIsr[28])->OnInterrupt();
+            ((Timer*)onIsr[TIM2_IRQn])->OnInterrupt();
         }
         TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
     }
@@ -308,9 +308,9 @@ void CInterrupt::TIM3_IRQHandler()
 {
     if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
     {
-        if (onIsr[29])
+        if (onIsr[TIM3_IRQn])
         {
-            ((Timer*)onIsr[29])->OnInterrupt();
+            ((Timer*)onIsr[TIM3_IRQn])->OnInterrupt();
         }
         TIM_ClearITPendingBit(TIM3, TIM_FLAG_Update);
     }
@@ -321,9 +321,9 @@ void CInterrupt::TIM4_IRQHandler()
 	#if defined(STM32F1) || defined(STM32F4)  
     if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
     {
-        if (onIsr[30])
+        if (onIsr[TIM4_IRQn])
         {
-            ((Timer*)onIsr[30])->OnInterrupt();
+            ((Timer*)onIsr[TIM4_IRQn])->OnInterrupt();
         }
         TIM_ClearITPendingBit(TIM4, TIM_FLAG_Update);
     }
@@ -335,9 +335,9 @@ void CInterrupt::TIM5_IRQHandler()
 	#if defined(STM32F1) || defined(STM32F4)  
     if (TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET)
     {
-        if (onIsr[50])
+        if (onIsr[TIM5_IRQn])
         {
-            ((Timer*)onIsr[50])->OnInterrupt();
+            ((Timer*)onIsr[TIM5_IRQn])->OnInterrupt();
         }
         TIM_ClearITPendingBit(TIM5, TIM_FLAG_Update);
     }
@@ -349,9 +349,9 @@ void CInterrupt::TIM6_IRQHandler()
     #if defined(STM32F1) || defined(STM32F4)  
         if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
         {
-            if (onIsr[54])
+            if (onIsr[TIM6_IRQn])
             {
-                ((Timer*)onIsr[54])->OnInterrupt();
+                ((Timer*)onIsr[TIM6_IRQn])->OnInterrupt();
             }
             TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
         }
@@ -370,9 +370,9 @@ void CInterrupt::TIM7_IRQHandler()
     #if defined(STM32F1) || defined(STM32F4) 
         if (TIM_GetITStatus(TIM7, TIM_IT_Update) != RESET)
         {
-            if (onIsr[55])
+            if (onIsr[TIM7_IRQn])
             {
-                ((Timer*)onIsr[55])->OnInterrupt();
+                ((Timer*)onIsr[TIM7_IRQn])->OnInterrupt();
             }
             TIM_ClearITPendingBit(TIM7, TIM_FLAG_Update);
         }
