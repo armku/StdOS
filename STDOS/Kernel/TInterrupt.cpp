@@ -53,49 +53,63 @@ class CInterrupt
         static void EXTI15_10_IRQHandler();
 
 };
-
+#include "TTime.h"
 extern "C"
 {
-    uint IsrBuf[ISRLENGTH] __attribute__((at(ISRADDR)));
-    uint *vsrom = (uint*)NVIC_VectTab_FLASH;
+	#ifdef STM32F0
+		//uint *VectorTable;
+		uint VectorTable[ISRLENGTH] __attribute__((at(ISRADDR)));
+    #else
+		uint VectorTable[ISRLENGTH] __attribute__((at(ISRADDR)));
+    #endif
+	uint *vsrom = (uint*)NVIC_VectTab_FLASH;
+	
+	void SysTick_Handler()
+	{
+		Time.Milliseconds++;
+	}
 }
 
 // 初始化中断向量表
 void TInterrupt::Init()const
 {
+	#ifdef STM32F0
+//		VectorTable=(uint *)ISRADDR;
+	#endif
     //复制中断向量表
     for (int i = 0; i < ISRLENGTH; i++)
     {
-        IsrBuf[i] = vsrom[i];
+        VectorTable[i] = vsrom[i];
     }
     //中断向量表重映射
 	#if defined(STM32F1) || defined(STM32F4)
 		NVIC_SetVectorTable(NVIC_VectTab_RAM, NVIC_OFFSET);
 	#elif defined STM32F0
-		SYSCFG_MemoryRemapConfig(SYSCFG_MemoryRemap_SRAM);
+//		RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+//		SYSCFG_MemoryRemapConfig(SYSCFG_MemoryRemap_SRAM);
 	#endif
 
-    IsrBuf[15] = (uint) &(CInterrupt::SysTick_Handler);
-    IsrBuf[53] = (uint) &(CInterrupt::USART1_IRQHandler);
-    IsrBuf[54] = (uint) &(CInterrupt::USART2_IRQHandler);
-    IsrBuf[55] = (uint) &(CInterrupt::USART3_IRQHandler);
-    IsrBuf[68] = (uint) &(CInterrupt::UART4_IRQHandler);
-    IsrBuf[69] = (uint) &(CInterrupt::UART5_IRQHandler);
+    VectorTable[15] = (uint) &(CInterrupt::SysTick_Handler);
+    VectorTable[53] = (uint) &(CInterrupt::USART1_IRQHandler);
+    VectorTable[54] = (uint) &(CInterrupt::USART2_IRQHandler);
+    VectorTable[55] = (uint) &(CInterrupt::USART3_IRQHandler);
+    VectorTable[68] = (uint) &(CInterrupt::UART4_IRQHandler);
+    VectorTable[69] = (uint) &(CInterrupt::UART5_IRQHandler);
 
-    IsrBuf[44] = (uint) &(CInterrupt::TIM2_IRQHandler);
-    IsrBuf[45] = (uint) &(CInterrupt::TIM3_IRQHandler);
-    IsrBuf[46] = (uint) &(CInterrupt::TIM4_IRQHandler);
-    IsrBuf[66] = (uint) &(CInterrupt::TIM5_IRQHandler);
-    IsrBuf[70] = (uint) &(CInterrupt::TIM6_IRQHandler);
-    IsrBuf[71] = (uint) &(CInterrupt::TIM7_IRQHandler);
+    VectorTable[44] = (uint) &(CInterrupt::TIM2_IRQHandler);
+    VectorTable[45] = (uint) &(CInterrupt::TIM3_IRQHandler);
+    VectorTable[46] = (uint) &(CInterrupt::TIM4_IRQHandler);
+    VectorTable[66] = (uint) &(CInterrupt::TIM5_IRQHandler);
+    VectorTable[70] = (uint) &(CInterrupt::TIM6_IRQHandler);
+    VectorTable[71] = (uint) &(CInterrupt::TIM7_IRQHandler);
 
-    IsrBuf[22] = (uint) &(CInterrupt::EXTI0_IRQHandler);
-    IsrBuf[23] = (uint) &(CInterrupt::EXTI1_IRQHandler);
-    IsrBuf[24] = (uint) &(CInterrupt::EXTI2_IRQHandler);
-    IsrBuf[25] = (uint) &(CInterrupt::EXTI3_IRQHandler);
-    IsrBuf[26] = (uint) &(CInterrupt::EXTI4_IRQHandler);
-    IsrBuf[39] = (uint) &(CInterrupt::EXTI9_5_IRQHandler);
-    IsrBuf[56] = (uint) &(CInterrupt::EXTI15_10_IRQHandler);
+    VectorTable[22] = (uint) &(CInterrupt::EXTI0_IRQHandler);
+    VectorTable[23] = (uint) &(CInterrupt::EXTI1_IRQHandler);
+    VectorTable[24] = (uint) &(CInterrupt::EXTI2_IRQHandler);
+    VectorTable[25] = (uint) &(CInterrupt::EXTI3_IRQHandler);
+    VectorTable[26] = (uint) &(CInterrupt::EXTI4_IRQHandler);
+    VectorTable[39] = (uint) &(CInterrupt::EXTI9_5_IRQHandler);
+    VectorTable[56] = (uint) &(CInterrupt::EXTI15_10_IRQHandler);
 
 }
 
@@ -223,7 +237,7 @@ void CInterrupt::Default_Handler()
 }
 
 
-#include "TTime.h"
+
 void CInterrupt::SysTick_Handler()
 {
     Time.Milliseconds++;
