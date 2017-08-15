@@ -165,7 +165,7 @@ void Timer::Config()
             TIM_Cmd(TIM2, ENABLE);
 
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE); /*先关闭等待使用*/
-            Interrupt.SetPriority(28, 3); //TIM2_IRQn
+            Interrupt.SetPriority(TIM2_IRQn, 3); 
             break;
         case Timer3:
             /* 设置TIM2CLK 为 72MHZ */
@@ -181,7 +181,7 @@ void Timer::Config()
             TIM_Cmd(TIM3, ENABLE);
 
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, DISABLE); /*先关闭等待使用*/
-            Interrupt.SetPriority(29, 3); //TIM3_IRQn
+            Interrupt.SetPriority(TIM3_IRQn, 3);
             break;
         case Timer4:
             #if defined(STM32F1) || defined(STM32F4)
@@ -198,7 +198,7 @@ void Timer::Config()
                 TIM_Cmd(TIM4, ENABLE);
 
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, DISABLE); /*先关闭等待使用*/
-                Interrupt.SetPriority(30, 3); //TIM4_IRQn
+                Interrupt.SetPriority(TIM4_IRQn, 3);
             #endif 
             break;
         case Timer5:
@@ -216,7 +216,7 @@ void Timer::Config()
                 TIM_Cmd(TIM5, ENABLE);
 
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, DISABLE); /*先关闭等待使用*/
-                Interrupt.SetPriority(50, 3); //TIM5_IRQn
+                Interrupt.SetPriority(TIM5_IRQn, 3);
             #endif 
             break;
         case Timer6:
@@ -230,7 +230,7 @@ void Timer::Config()
 			RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, DISABLE); /*先关闭等待使用*/
                 
 			#if defined(STM32F1) || defined(STM32F4)
-                Interrupt.SetPriority(54, 3); //TIM6_IRQn
+                Interrupt.SetPriority(TIM6_IRQn, 3);
             #elif defined STM32F0
                 Interrupt.SetPriority(17, 3); //TIM7_IRQn
             #endif 
@@ -245,7 +245,7 @@ void Timer::Config()
             TIM_Cmd(TIM7, ENABLE);
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE); /*先关闭等待使用*/
             #if defined(STM32F1) || defined(STM32F4)
-                Interrupt.SetPriority(55, 3); //TIM7_IRQn
+                Interrupt.SetPriority(TIM7_IRQn, 3); //TIM7_IRQn
             #elif defined STM32F0
                 Interrupt.SetPriority(18, 3); //TIM7_IRQn
             #endif 
