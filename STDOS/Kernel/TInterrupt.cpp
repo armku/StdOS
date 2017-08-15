@@ -62,7 +62,6 @@ void *onIsr[ISRLENGTH]; //ÖÐ¶Ï
 
 extern "C"
 {
-//#pragma location = 0x20000000
 	#ifdef STM32F0
 		uint *VectorTable;
 		//uint VectorTable[ISRLENGTH] ;//__attribute__((at(ISRADDR)));
