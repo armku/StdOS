@@ -631,46 +631,44 @@ void Timer::OnClose()
         case Timer3:
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, DISABLE);
             break;
+        case Timer4:
             #if defined(STM32F1) || defined(STM32F4)
-            case Timer4:
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, DISABLE);
-                break;
-            case Timer5:
-                RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, DISABLE);
-                break;
-            case Timer6:
-                RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, DISABLE);
-                break;
-            case Timer7:
-                RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE);
-                break;
-            case Timer8:
-                break;
-            case Timer9:
-                break;
-            case Timer10:
-                break;
-            case Timer11:
-                break;
-            case Timer12:
-                break;
-            case Timer13:
-                break;
-            case Timer14:
-                break;
-            case Timer15:
-                break;
-            case Timer16:
-                break;
-            case Timer17:
-                break;
-            case Timer18:
-                break;
-            #elif defined STM32F0
-			case Timer7:
-                RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE);
-                break;            
             #endif 
+            break;
+        case Timer5:
+            #if defined(STM32F1) || defined(STM32F4)
+                RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, DISABLE);
+            #endif 
+            break;
+        case Timer6:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, DISABLE);
+            break;
+        case Timer7:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE);
+            break;
+        case Timer8:
+            break;
+        case Timer9:
+            break;
+        case Timer10:
+            break;
+        case Timer11:
+            break;
+        case Timer12:
+            break;
+        case Timer13:
+            break;
+        case Timer14:
+            break;
+        case Timer15:
+            break;
+        case Timer16:
+            break;
+        case Timer17:
+            break;
+        case Timer18:
+            break;
         default:
             break;
     }
