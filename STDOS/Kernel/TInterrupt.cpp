@@ -24,7 +24,7 @@
 #if defined(STM32F1) || defined(STM32F4)
 	#define ISRLENGTH   100	//中断数量
 #elif defined STM32F0
-	#define ISRLENGTH   64	//中断数量
+	#define ISRLENGTH   60	//中断数量
 #endif
 
 TInterrupt Interrupt;
