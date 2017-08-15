@@ -270,26 +270,32 @@ void CInterrupt::USART2_IRQHandler()
 
 void CInterrupt::USART3_IRQHandler()
 {
+	#if defined(STM32F1) || defined(STM32F4)
     if (onIsr[USART3_IRQn])
     {
         OnUsartReceive(2, onIsr[USART3_IRQn]);
     }
+	#endif
 }
 
 void CInterrupt::UART4_IRQHandler()
 {
+	#if defined(STM32F1) || defined(STM32F4)
     if (onIsr[UART4_IRQn])
     {
         OnUsartReceive(3, onIsr[UART4_IRQn]);
     }
+	#endif
 }
 
 void CInterrupt::UART5_IRQHandler()
 {
+	#if defined(STM32F1) || defined(STM32F4)
     if (onIsr[UART5_IRQn])
     {
         OnUsartReceive(4, onIsr[UART5_IRQn]);
     }
+	#endif
 }
 
 void CInterrupt::TIM2_IRQHandler()
