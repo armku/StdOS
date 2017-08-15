@@ -1,30 +1,28 @@
 #include "Task.h"
 #include "TTime.h"
 
-template <typename T1, typename T2> T1 sum(T1 x, T2 y)
+Task::Task()
 {
-    return x + y;
+	
 }
-void ShowTime(void * param);//显示时间
-void ShowStatus(void *param); // 显示状态
-uint mgid; // 总编号
-Task::Task(TaskScheduler *scheduler)
-{
-    Host = scheduler;
-
-    Times = 0;
-    CpuTime = 0;
-    SleepTime = 0;
-    Cost = 0;
-    Enable = true;
-}
+//Task::Task(const Task& task)
+//{
+//	
+//}
 Task::~Task()
 {
+	
 }
-/*Task::~Task()
+// 执行任务。返回是否正常执行。
+bool Task::Execute(UInt64 now)
 {
-if(ID) _Scheduler->Remove(ID);
-}*/
+	return false;
+}
+// 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
+void Task::Set(bool enable, int msNextTime)
+{
+	
+}
 // 显示状态
 void Task::ShowStatus()
 {
@@ -105,7 +103,38 @@ void Task::ShowStatus()
     }
     debug_printf(" %s\r\n", this->Enable ? " " : "禁用");
 }
+// 全局任务调度器
+TaskScheduler* Task::Scheduler()
+{
+	return NULL;
+}
+Task* Task::Get(int taskid)
+{
+	return NULL;
+}
+Task t;
+Task& Task::Current()
+{	
+	return t;
+}
+bool Task::CheckTime(UInt64 end, bool isSleep)
+{
+	return false;
+}
+void Task::Init()
+{
+	
+}
+Task::Task(TaskScheduler *scheduler)
+{
+    Host = scheduler;
 
+    Times = 0;
+    CpuTime = 0;
+    SleepTime = 0;
+    Cost = 0;
+    Enable = true;
+}
 bool Task::operator == (Task &tsk)
 {
     if (tsk.ID == this->ID)
@@ -114,6 +143,56 @@ bool Task::operator == (Task &tsk)
     }
     return false;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+template <typename T1, typename T2> T1 sum(T1 x, T2 y)
+{
+    return x + y;
+}
+void ShowTime(void * param);//显示时间
+void ShowStatus(void *param); // 显示状态
+uint mgid; // 总编号
+
+
+/*Task::~Task()
+{
+if(ID) _Scheduler->Remove(ID);
+}*/
+
+
 TaskScheduler::TaskScheduler(cstring name)
 {
     this->Name = name;
@@ -151,7 +230,7 @@ uint TaskScheduler::Add(Action func, void* param, int dueTime, int period, cstri
     }
 
     this->Count++;
-    _Tasks.Add(task);
+    _TasksOld.Add(task);
     #if DEBUG
         debug_printf("%s::添加%2d %-11s", Name, task->ID, task->Name);
         if (dueTime >= 1000000)
@@ -203,12 +282,12 @@ void TaskScheduler::Remove(uint taskid)
 {
     int i =  - 1;
 
-    while (_Tasks.MoveNext(i))
+    while (_TasksOld.MoveNext(i))
     {
-        Task *task = _Tasks[i];
+        Task *task = _TasksOld[i];
         if (task->ID == taskid)
         {
-            _Tasks.RemoveAt(i);
+            _TasksOld.RemoveAt(i);
             debug_printf("%s::删除任务%d 0x%08x\r\n", Name, task->ID, (unsigned int)task->Callback);
             // 首先清零ID，避免delete的时候再次删除
             task->ID = 0;
@@ -261,9 +340,9 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
     //Task* _cur = Current;
 
     int i =  - 1;
-    while (_Tasks.MoveNext(i))
+    while (_TasksOld.MoveNext(i))
     {
-        Task *task = _Tasks[i];
+        Task *task = _TasksOld[i];
         //if(task && task != _cur && task->Enable && task->NextTime <= now)
         if (task && task->Enable && task->NextTime <= now)
         {
@@ -391,9 +470,9 @@ Task *TaskScheduler::operator[](int taskid)
 {
     int i =  - 1;
 
-    while (_Tasks.MoveNext(i))
+    while (_TasksOld.MoveNext(i))
     {
-        Task *task = _Tasks[i];
+        Task *task = _TasksOld[i];
         if (task && task->ID == taskid)
         {
             return task;
