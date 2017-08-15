@@ -390,30 +390,34 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
         case Timer3:
             Interrupt.Activate(29, Timer::OnHandler, this);
             break;
+
+        case Timer4:
             #if defined(STM32F1) || defined(STM32F4)
-            case Timer4:
                 Interrupt.Activate(30, Timer::OnHandler, this);
-                break;
-            case Timer5:
-                Interrupt.Activate(50, Timer::OnHandler, this);
-                break;
-            case Timer6:
-                Interrupt.Activate(54, Timer::OnHandler, this);
-                break;
-            case Timer7:
-                Interrupt.Activate(55, Timer::OnHandler, this);
-                break;
-            case Timer8:
-                break;
-            #elif defined STM32F0
-            case Timer7:
-                Interrupt.Activate(55, Timer::OnHandler, this);
-                break;
             #endif 
+            break;
+        case Timer5:
+            #if defined(STM32F1) || defined(STM32F4)
+                Interrupt.Activate(50, Timer::OnHandler, this);
+            #endif 
+            break;
+        case Timer6:
+            #if defined(STM32F1) || defined(STM32F4)
+                Interrupt.Activate(54, Timer::OnHandler, this);
+            #endif 
+            break;
+        case Timer7:
+            #if defined(STM32F1) || defined(STM32F4)
+                Interrupt.Activate(55, Timer::OnHandler, this);
+            #elif defined STM32F0
+                Interrupt.Activate(55, Timer::OnHandler, this);
+            #endif 
+            break;
+        case Timer8:
+            break;
         default:
             break;
     }
-    //
 }
 
 void Timer::OnInterrupt()
