@@ -40,6 +40,7 @@ class CInterrupt
         static void USART3_IRQHandler();
         static void UART4_IRQHandler();
         static void UART5_IRQHandler();
+		static void USART3_4_IRQHandler();
 
         static void TIM2_IRQHandler();
         static void TIM3_IRQHandler();
@@ -69,58 +70,70 @@ extern "C"
 		uint VectorTable[ISRLENGTH] __attribute__((at(ISRADDR)));
     #endif
 	uint *vsrom = (uint*)NVIC_VectTab_FLASH;
-		
-	void TIM7_IRQHandler()
-	{
-        TIM_ClearITPendingBit(TIM7, TIM_IT_Update); //先清空中断标志位，以备下次使用。
-        if (onIsr[TIM7_IRQn])
-        {
-            ((Timer*)onIsr[TIM7_IRQn])->OnInterrupt();
-        }
-	}
 }
 
 // 初始化中断向量表
 void TInterrupt::Init()const
 {
-	#ifdef STM32F0
-		VectorTable=(uint *)ISRADDR;
-	#endif
+    #ifdef STM32F0
+        VectorTable = (uint*)ISRADDR;
+    #endif 
     //复制中断向量表
     for (int i = 0; i < ISRLENGTH; i++)
     {
         VectorTable[i] = vsrom[i];
     }
     //中断向量表重映射
-	#if defined(STM32F1) || defined(STM32F4)
-		NVIC_SetVectorTable(NVIC_VectTab_RAM, NVIC_OFFSET);
-	#elif defined STM32F0
-		RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
-		SYSCFG_MemoryRemapConfig(SYSCFG_MemoryRemap_SRAM);
-	#endif
+    #if defined(STM32F1) || defined(STM32F4)
+        NVIC_SetVectorTable(NVIC_VectTab_RAM, NVIC_OFFSET);
+    #elif defined STM32F0
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+        SYSCFG_MemoryRemapConfig(SYSCFG_MemoryRemap_SRAM);
+    #endif 
 
     VectorTable[15] = (uint) &(CInterrupt::SysTick_Handler);
-    VectorTable[53] = (uint) &(CInterrupt::USART1_IRQHandler);
-    VectorTable[54] = (uint) &(CInterrupt::USART2_IRQHandler);
-    VectorTable[55] = (uint) &(CInterrupt::USART3_IRQHandler);
-    VectorTable[68] = (uint) &(CInterrupt::UART4_IRQHandler);
-    VectorTable[69] = (uint) &(CInterrupt::UART5_IRQHandler);
 
-    VectorTable[44] = (uint) &(CInterrupt::TIM2_IRQHandler);
-    VectorTable[45] = (uint) &(CInterrupt::TIM3_IRQHandler);
-    VectorTable[46] = (uint) &(CInterrupt::TIM4_IRQHandler);
-    VectorTable[66] = (uint) &(CInterrupt::TIM5_IRQHandler);
-    VectorTable[70] = (uint) &(CInterrupt::TIM6_IRQHandler);
-    VectorTable[71] = (uint) &(CInterrupt::TIM7_IRQHandler);
+    #if defined(STM32F1) || defined(STM32F4)
+        VectorTable[53] = (uint) &(CInterrupt::USART1_IRQHandler);
+        VectorTable[54] = (uint) &(CInterrupt::USART2_IRQHandler);
+        VectorTable[55] = (uint) &(CInterrupt::USART3_IRQHandler);
+        VectorTable[68] = (uint) &(CInterrupt::UART4_IRQHandler);
+        VectorTable[69] = (uint) &(CInterrupt::UART5_IRQHandler);
 
-    VectorTable[22] = (uint) &(CInterrupt::EXTI0_IRQHandler);
-    VectorTable[23] = (uint) &(CInterrupt::EXTI1_IRQHandler);
-    VectorTable[24] = (uint) &(CInterrupt::EXTI2_IRQHandler);
-    VectorTable[25] = (uint) &(CInterrupt::EXTI3_IRQHandler);
-    VectorTable[26] = (uint) &(CInterrupt::EXTI4_IRQHandler);
-    VectorTable[39] = (uint) &(CInterrupt::EXTI9_5_IRQHandler);
-    VectorTable[56] = (uint) &(CInterrupt::EXTI15_10_IRQHandler);
+        VectorTable[44] = (uint) &(CInterrupt::TIM2_IRQHandler);
+        VectorTable[45] = (uint) &(CInterrupt::TIM3_IRQHandler);
+        VectorTable[46] = (uint) &(CInterrupt::TIM4_IRQHandler);
+        VectorTable[66] = (uint) &(CInterrupt::TIM5_IRQHandler);
+        VectorTable[70] = (uint) &(CInterrupt::TIM6_IRQHandler);
+        VectorTable[71] = (uint) &(CInterrupt::TIM7_IRQHandler);
 
+        VectorTable[22] = (uint) &(CInterrupt::EXTI0_IRQHandler);
+        VectorTable[23] = (uint) &(CInterrupt::EXTI1_IRQHandler);
+        VectorTable[24] = (uint) &(CInterrupt::EXTI2_IRQHandler);
+        VectorTable[25] = (uint) &(CInterrupt::EXTI3_IRQHandler);
+        VectorTable[26] = (uint) &(CInterrupt::EXTI4_IRQHandler);
+        VectorTable[39] = (uint) &(CInterrupt::EXTI9_5_IRQHandler);
+        VectorTable[56] = (uint) &(CInterrupt::EXTI15_10_IRQHandler);
+    #elif defined STM32F0
+        VectorTable[43] = (uint) &(CInterrupt::USART1_IRQHandler);
+        VectorTable[44] = (uint) &(CInterrupt::USART2_IRQHandler);
+        VectorTable[45] = (uint) &(CInterrupt::USART3_4_IRQHandler);
+
+        VectorTable[31] = (uint) &(CInterrupt::TIM2_IRQHandler);
+        VectorTable[32] = (uint) &(CInterrupt::TIM3_IRQHandler);
+        VectorTable[0] = (uint) &(CInterrupt::TIM4_IRQHandler);
+        VectorTable[0] = (uint) &(CInterrupt::TIM5_IRQHandler);
+        VectorTable[33] = (uint) &(CInterrupt::TIM6_IRQHandler);
+        VectorTable[34] = (uint) &(CInterrupt::TIM7_IRQHandler);
+
+        VectorTable[0] = (uint) &(CInterrupt::EXTI0_IRQHandler);
+        VectorTable[0] = (uint) &(CInterrupt::EXTI1_IRQHandler);
+        VectorTable[0] = (uint) &(CInterrupt::EXTI2_IRQHandler);
+        VectorTable[0] = (uint) &(CInterrupt::EXTI3_IRQHandler);
+        VectorTable[0] = (uint) &(CInterrupt::EXTI4_IRQHandler);
+        VectorTable[0] = (uint) &(CInterrupt::EXTI9_5_IRQHandler);
+        VectorTable[0] = (uint) &(CInterrupt::EXTI15_10_IRQHandler);
+    #endif 
 }
 
 void TInterrupt::Process(uint num)const{
@@ -276,6 +289,10 @@ void CInterrupt::USART3_IRQHandler()
         OnUsartReceive(2, onIsr[USART3_IRQn]);
     }
 	#endif
+}
+void CInterrupt::USART3_4_IRQHandler()
+{
+	
 }
 
 void CInterrupt::UART4_IRQHandler()
