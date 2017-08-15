@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _CHECKSUM_H
+#define	_CHECKSUM_H
 
 #include "Type.h"
 
@@ -24,3 +25,4 @@ class CheckSum
     private:
         unsigned long Reflect(unsigned long ref, char ch);
 };
+#endif

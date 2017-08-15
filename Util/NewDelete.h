@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _NEWDELETE_H
+#define _NEWDELETE_H
 
 #include "Type.h"
 
@@ -10,4 +11,4 @@
     void operator delete [](void *p);
 
 #endif
-
+#endif

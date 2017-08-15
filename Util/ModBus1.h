@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _MODBUS1_H
+#define _MODBUS1_H
 
 #include "Type.h"
 #include "Buffer.h"
@@ -67,3 +68,4 @@ class ModbusSlave1
 };
 extern ushort RegInputu161[];//ÊäÈë¼Ä´æÆ÷
 extern ushort RegHoilding161[];//±£³Ö¼Ä´æÆ÷
+#endif
