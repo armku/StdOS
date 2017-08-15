@@ -95,8 +95,8 @@ void TInterrupt::Init()const
 	#if defined(STM32F1) || defined(STM32F4)
 		NVIC_SetVectorTable(NVIC_VectTab_RAM, NVIC_OFFSET);
 	#elif defined STM32F0
-//		RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
-//		SYSCFG_MemoryRemapConfig(SYSCFG_MemoryRemap_SRAM);
+		RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+		//SYSCFG_MemoryRemapConfig(SYSCFG_MemoryRemap_SRAM);
 	#endif
 
     VectorTable[15] = (uint) &(CInterrupt::SysTick_Handler);
