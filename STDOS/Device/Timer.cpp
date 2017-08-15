@@ -390,7 +390,6 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
         case Timer3:
             Interrupt.Activate(29, Timer::OnHandler, this);
             break;
-
         case Timer4:
             #if defined(STM32F1) || defined(STM32F4)
                 Interrupt.Activate(30, Timer::OnHandler, this);
