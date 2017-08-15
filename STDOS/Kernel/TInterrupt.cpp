@@ -54,6 +54,8 @@ class CInterrupt
 
 };
 #include "TTime.h"
+void *onIsr[ISRLENGTH]; //中断
+
 extern "C"
 {
 	#ifdef STM32F0
@@ -67,6 +69,14 @@ extern "C"
 	void SysTick_Handler()
 	{
 		Time.Milliseconds++;
+	}
+	void TIM7_IRQHandler()
+	{
+        TIM_ClearITPendingBit(TIM7, TIM_IT_Update); //先清空中断标志位，以备下次使用。
+        if (onIsr[TIM7_IRQn])
+        {
+            ((Timer*)onIsr[TIM7_IRQn])->OnInterrupt();
+        }
 	}
 }
 
@@ -116,8 +126,6 @@ void TInterrupt::Init()const
 void TInterrupt::Process(uint num)const{
 
 }
-
-void *onIsr[ISRLENGTH]; //中断
 
 // 注册中断函数（中断号，函数，参数）
 bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
