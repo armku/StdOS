@@ -232,7 +232,7 @@ void Timer::Config()
 			#if defined(STM32F1) || defined(STM32F4)
                 Interrupt.SetPriority(TIM6_IRQn, 3);
             #elif defined STM32F0
-                Interrupt.SetPriority(17, 3); //TIM7_IRQn
+                Interrupt.SetPriority(TIM6_DAC_IRQn, 3);
             #endif 
             break;
         case Timer7:
@@ -244,11 +244,7 @@ void Timer::Config()
             TIM_ClearFlag(TIM7, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
             TIM_Cmd(TIM7, ENABLE);
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE); /*先关闭等待使用*/
-            #if defined(STM32F1) || defined(STM32F4)
-                Interrupt.SetPriority(TIM7_IRQn, 3); //TIM7_IRQn
-            #elif defined STM32F0
-                Interrupt.SetPriority(18, 3); //TIM7_IRQn
-            #endif 
+            Interrupt.SetPriority(TIM7_IRQn, 3); //TIM7_IRQn
             break;
         case Timer8:
             break;
