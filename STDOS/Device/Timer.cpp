@@ -414,6 +414,26 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
             break;
         case Timer8:
             break;
+        case Timer9:
+            break;
+        case Timer10:
+            break;
+        case Timer11:
+            break;
+        case Timer12:
+            break;
+        case Timer13:
+            break;
+        case Timer14:
+            break;
+        case Timer15:
+            break;
+        case Timer16:
+            break;
+        case Timer17:
+            break;
+        case Timer18:
+            break;
         default:
             break;
     }
@@ -430,88 +450,93 @@ void Timer::OnInterrupt()
 void Timer::ClockCmd(int idx, bool state)
 {
     FunctionalState st = state ? ENABLE : DISABLE;
-    switch (idx + 1)
+    switch (idx)
     {
-        case 1:
+        case Timer1:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, st);
             break;
-        case 2:
+        case Timer2:
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, st);
             break;
-        case 3:
+        case Timer3:
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, st);
             break;
-        case 4:
+        case Timer4:
             #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, st);
             #endif 
             break;
-        case 5:
+        case Timer5:
             #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, st);
             #endif 
             break;
-        case 6:
+        case Timer6:
             #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, st);
             #endif 
             break;
-        case 7:
+        case Timer7:
             #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, st);
             #endif 
             break;
-        case 8:
+        case Timer8:
             #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8, st);
             #endif 
             break;
-        case 9:
+        case Timer9:
             #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM9, st);
             #endif 
             break;
-        case 10:
+        case Timer10:
             #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM10, st);
             #endif 
             break;
-        case 11:
+        case Timer11:
             #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM11, st);
             #endif 
             break;
-        case 12:
+        case Timer12:
             #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM12, st);
             #endif 
             break;
-        case 13:
+        case Timer13:
             #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM13, st);
             #endif 
             break;
-        case 14:
+        case Timer14:
             #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM14, st);
             #endif 
             break;
-        case 15:
+        case Timer15:
             #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM15, st);
             #endif 
             break;
-        case 16:
+        case Timer16:
             #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM16, st);
             #endif 
             break;
-        case 17:
+        case Timer17:
             #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM17, st);
             #endif 
             break;
-        default:
+        case Timer18:
+			#if defined(STM32F1) && defined(STM32F4)
+                RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM18, st);
+            #endif 
+            break;
+		default:
             break;
     }
 }
