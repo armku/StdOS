@@ -16,12 +16,16 @@
 #endif
 
 #ifdef STM32F0
-	#define NVIC_OFFSET					 ((uint)0x1000)
+	#define NVIC_OFFSET					 ((uint)0x0000)
 #else
 	#define NVIC_OFFSET					 ((uint)0x1000)
 #endif
 #define ISRADDR (NVIC_VectTab_RAM+NVIC_OFFSET)
-#define ISRLENGTH   100	//中断数量
+#if defined(STM32F1) || defined(STM32F4)
+	#define ISRLENGTH   100	//中断数量
+#elif defined STM32F0
+	#define ISRLENGTH   64	//中断数量
+#endif
 
 TInterrupt Interrupt;
 
@@ -60,8 +64,8 @@ extern "C"
 {
 #pragma location = 0x20000000
 	#ifdef STM32F0
-		//uint *VectorTable;
-		uint VectorTable[ISRLENGTH] ;//__attribute__((at(ISRADDR)));
+		uint *VectorTable;
+		//uint VectorTable[ISRLENGTH] ;//__attribute__((at(ISRADDR)));
     #else
 		uint VectorTable[ISRLENGTH] __attribute__((at(ISRADDR)));
     #endif
@@ -85,12 +89,12 @@ extern "C"
 void TInterrupt::Init()const
 {
 	#ifdef STM32F0
-//		VectorTable=(uint *)ISRADDR;
+		VectorTable=(uint *)ISRADDR;
 	#endif
     //复制中断向量表
     for (int i = 0; i < ISRLENGTH; i++)
     {
-        VectorTable[i] = vsrom[i];
+        //VectorTable[i] = vsrom[i];
     }
     //中断向量表重映射
 	#if defined(STM32F1) || defined(STM32F4)
