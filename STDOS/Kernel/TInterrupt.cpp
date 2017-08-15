@@ -60,7 +60,11 @@ void TInterrupt::Init()const
         IsrBuf[i] = vsrom[i];
     }
     //中断向量表重映射
-    NVIC_SetVectorTable(NVIC_VectTab_RAM, NVIC_OFFSET);
+	#if defined(STM32F1) || defined(STM32F4)
+		NVIC_SetVectorTable(NVIC_VectTab_RAM, NVIC_OFFSET);
+	#elif defined STM32F0
+		SYSCFG_MemoryRemapConfig(SYSCFG_MemoryRemap_SRAM);
+	#endif
 
     IsrBuf[15] = (uint) &(CInterrupt::SysTick_Handler);
     IsrBuf[53] = (uint) &(CInterrupt::USART1_IRQHandler);
