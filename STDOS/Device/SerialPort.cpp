@@ -94,7 +94,13 @@ int SerialPort::SendData(byte data, int times)
         case COM5:
             while (USART_GetFlagStatus(g_Uart_Ports[4], USART_FLAG_TXE) == RESET && --times > 0){}
             break;
-        default:
+        case COM6:
+			break;
+		case COM7:
+			break;
+		case COM8:
+			break;
+		default:
             //while (USART_GetFlagStatus(g_Uart_Ports[0], USART_FLAG_TXE) == RESET && --times > 0){}
             break;
     }
@@ -118,7 +124,13 @@ int SerialPort::SendData(byte data, int times)
             case COM5:
                 USART_SendData(g_Uart_Ports[4], (ushort)data);
                 break;
-            default:
+            case COM6:
+				break;
+			case COM7:
+				break;
+			case COM8:
+				break;
+			default:
                 //USART_SendData(g_Uart_Ports[0], (ushort)data);
                 break;
         }
@@ -342,15 +354,27 @@ bool SerialPort::OnOpen()
         {
             switch (this->Index)
             {
-                case 0:
+                case COM1:
                     AFIO->MAPR |= AFIO_MAPR_USART1_REMAP;
                     break;
-                case 1:
+                case COM2:
                     AFIO->MAPR |= AFIO_MAPR_USART2_REMAP;
                     break;
-                case 2:
+                case COM3:
                     AFIO->MAPR |= AFIO_MAPR_USART3_REMAP_FULLREMAP;
                     break;
+				case COM4:
+					break;
+				case COM5:
+					break;
+				case COM6:
+					break;
+				case COM7:
+					break;
+				case COM8:
+					break;
+				default:
+					break;
             }
         }
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
@@ -379,7 +403,19 @@ bool SerialPort::OnOpen()
             case COM2:
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
                 break;
-            default:
+            case COM3:
+				break;
+			case COM4:
+				break;
+			case COM5:
+				break;
+			case COM6:
+				break;
+			case COM7:
+				break;
+			case COM8:
+				break;
+			default:
                 break;
         }
     #endif 
