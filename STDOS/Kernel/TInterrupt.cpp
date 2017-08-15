@@ -10,7 +10,16 @@
     #include "stm32f4xx.h"
 #endif 
 
-#define NVIC_OFFSET					 ((uint)0x1000)
+#ifdef STM32F0
+	#define NVIC_VectTab_RAM             ((uint)0x20000000)
+	#define NVIC_VectTab_FLASH           ((uint)0x08000000)
+#endif
+
+#ifdef STM32F0
+	#define NVIC_OFFSET					 ((uint)0x1000)
+#else
+	#define NVIC_OFFSET					 ((uint)0x1000)
+#endif
 #define ISRADDR (NVIC_VectTab_RAM+NVIC_OFFSET)
 #define ISRLENGTH   100	//ÖÐ¶ÏÊýÁ¿
 
