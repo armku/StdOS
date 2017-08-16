@@ -259,7 +259,40 @@ void TInterrupt::Init()const
 
     VectorTable[15] = (uint) &(CInterrupt::SysTick_Handler);
 
-    #if defined(STM32F1)
+    #if defined STM32F0
+        //VectorTable[16] = (uint) &(CInterrupt::WWDG_IRQHandler); // Window Watchdog
+        //VectorTable[17] = (uint) &(CInterrupt::PVD_VDDIO2_IRQHandler); // PVD and VDDIO2 through EXTI Line detect
+        //VectorTable[18] = (uint) &(CInterrupt::RTC_IRQHandler); // RTC through EXTI Line
+        //VectorTable[19] = (uint) &(CInterrupt::FLASH_IRQHandler); //FLASH
+        //VectorTable[20] = (uint) &(CInterrupt::RCC_CRS_IRQHandler); // RCC and CRS
+        //VectorTable[21] = (uint) &(CInterrupt::EXTI0_1_IRQHandler); // EXTI Line 0 and 1
+        //VectorTable[22] = (uint) &(CInterrupt::EXTI2_3_IRQHandler); // EXTI Line 2 and 3
+        //VectorTable[23] = (uint) &(CInterrupt::EXTI4_15_IRQHandler); // EXTI Line 4 to 15
+        //VectorTable[24] = (uint) &(CInterrupt::TSC_IRQHandler); // TS
+        //VectorTable[25] = (uint) &(CInterrupt::DMA1_Channel1_IRQHandler); // DMA1 Channel 1
+        //VectorTable[26] = (uint) &(CInterrupt::DMA1_Channel2_3_IRQHandler); // DMA1 Channel 2 and Channel 3
+        //VectorTable[27] = (uint) &(CInterrupt::DMA1_Channel4_5_6_7_IRQHandler); // DMA1 Channel 4, Channel 5, Channel 6 and Channel 7
+        //VectorTable[28] = (uint) &(CInterrupt::ADC1_COMP_IRQHandler); // ADC1, COMP1 and COMP2 
+        //VectorTable[29] = (uint) &(CInterrupt::TIM1_BRK_UP_TRG_COM_IRQHandler); // TIM1 Break, Update, Trigger and Commutation
+        //VectorTable[30] = (uint) &(CInterrupt::TIM1_CC_IRQHandler); // TIM1 Capture Compare
+        VectorTable[31] = (uint) &(CInterrupt::TIM2_IRQHandler); // TIM2
+        VectorTable[32] = (uint) &(CInterrupt::TIM3_IRQHandler); // TIM3
+        VectorTable[33] = (uint) &(CInterrupt::TIM6_DAC_IRQHandler); // TIM6 and DAC
+        VectorTable[34] = (uint) &(CInterrupt::TIM7_IRQHandler); // TIM7
+        //VectorTable[35] = (uint) &(CInterrupt::TIM14_IRQHandler); // TIM14
+        //VectorTable[36] = (uint) &(CInterrupt::TIM15_IRQHandler); // TIM15
+        //VectorTable[37] = (uint) &(CInterrupt::TIM16_IRQHandler); // TIM16
+        //VectorTable[38] = (uint) &(CInterrupt::TIM17_IRQHandler); // TIM17
+        //VectorTable[39] = (uint) &(CInterrupt::I2C1_IRQHandler); // I2C1
+        //VectorTable[40] = (uint) &(CInterrupt::I2C2_IRQHandler); // I2C2
+        //VectorTable[41] = (uint) &(CInterrupt::SPI1_IRQHandler); // SPI1
+        //VectorTable[42] = (uint) &(CInterrupt::SPI2_IRQHandler); // SPI2
+        VectorTable[43] = (uint) &(CInterrupt::USART1_IRQHandler); // USART1
+        VectorTable[44] = (uint) &(CInterrupt::USART2_IRQHandler); // USART2
+        VectorTable[45] = (uint) &(CInterrupt::USART3_4_IRQHandler); // USART3 and USART4
+        //VectorTable[46] = (uint) &(CInterrupt::CEC_CAN_IRQHandler); // CEC and CAN
+        //VectorTable[47] = (uint) &(CInterrupt::USB_IRQHandler); // USB        
+    #elif defined(STM32F1)
         //        VectorTable[16] = (uint) &(CInterrupt::WWDG_IRQHandler); // Window Watchdog
         //        VectorTable[17] = (uint) &(CInterrupt::PVD_IRQHandler); // PVD through EXTI Line detect
         //        VectorTable[18] = (uint) &(CInterrupt::TAMPER_IRQHandler); // Tamper
@@ -403,39 +436,6 @@ void TInterrupt::Init()const
         //        VectorTable[95] = (uint) &(CInterrupt::CRYP_IRQHandler); // CRYP crypto                                     
         //        VectorTable[96] = (uint) &(CInterrupt::HASH_RNG_IRQHandler); // Hash and Rng
         //        VectorTable[97] = (uint) &(CInterrupt::FPU_IRQHandler); // FPU
-    #elif defined STM32F0
-        //VectorTable[16] = (uint) &(CInterrupt::WWDG_IRQHandler); // Window Watchdog
-        //VectorTable[17] = (uint) &(CInterrupt::PVD_VDDIO2_IRQHandler); // PVD and VDDIO2 through EXTI Line detect
-        //VectorTable[18] = (uint) &(CInterrupt::RTC_IRQHandler); // RTC through EXTI Line
-        //VectorTable[19] = (uint) &(CInterrupt::FLASH_IRQHandler); //FLASH
-        //VectorTable[20] = (uint) &(CInterrupt::RCC_CRS_IRQHandler); // RCC and CRS
-        //VectorTable[21] = (uint) &(CInterrupt::EXTI0_1_IRQHandler); // EXTI Line 0 and 1
-        //VectorTable[22] = (uint) &(CInterrupt::EXTI2_3_IRQHandler); // EXTI Line 2 and 3
-        //VectorTable[23] = (uint) &(CInterrupt::EXTI4_15_IRQHandler); // EXTI Line 4 to 15
-        //VectorTable[24] = (uint) &(CInterrupt::TSC_IRQHandler); // TS
-        //VectorTable[25] = (uint) &(CInterrupt::DMA1_Channel1_IRQHandler); // DMA1 Channel 1
-        //VectorTable[26] = (uint) &(CInterrupt::DMA1_Channel2_3_IRQHandler); // DMA1 Channel 2 and Channel 3
-        //VectorTable[27] = (uint) &(CInterrupt::DMA1_Channel4_5_6_7_IRQHandler); // DMA1 Channel 4, Channel 5, Channel 6 and Channel 7
-        //VectorTable[28] = (uint) &(CInterrupt::ADC1_COMP_IRQHandler); // ADC1, COMP1 and COMP2 
-        //VectorTable[29] = (uint) &(CInterrupt::TIM1_BRK_UP_TRG_COM_IRQHandler); // TIM1 Break, Update, Trigger and Commutation
-        //VectorTable[30] = (uint) &(CInterrupt::TIM1_CC_IRQHandler); // TIM1 Capture Compare
-        VectorTable[31] = (uint) &(CInterrupt::TIM2_IRQHandler); // TIM2
-        VectorTable[32] = (uint) &(CInterrupt::TIM3_IRQHandler); // TIM3
-        VectorTable[33] = (uint) &(CInterrupt::TIM6_DAC_IRQHandler); // TIM6 and DAC
-        VectorTable[34] = (uint) &(CInterrupt::TIM7_IRQHandler); // TIM7
-        //VectorTable[35] = (uint) &(CInterrupt::TIM14_IRQHandler); // TIM14
-        //VectorTable[36] = (uint) &(CInterrupt::TIM15_IRQHandler); // TIM15
-        //VectorTable[37] = (uint) &(CInterrupt::TIM16_IRQHandler); // TIM16
-        //VectorTable[38] = (uint) &(CInterrupt::TIM17_IRQHandler); // TIM17
-        //VectorTable[39] = (uint) &(CInterrupt::I2C1_IRQHandler); // I2C1
-        //VectorTable[40] = (uint) &(CInterrupt::I2C2_IRQHandler); // I2C2
-        //VectorTable[41] = (uint) &(CInterrupt::SPI1_IRQHandler); // SPI1
-        //VectorTable[42] = (uint) &(CInterrupt::SPI2_IRQHandler); // SPI2
-        VectorTable[43] = (uint) &(CInterrupt::USART1_IRQHandler); // USART1
-        VectorTable[44] = (uint) &(CInterrupt::USART2_IRQHandler); // USART2
-        VectorTable[45] = (uint) &(CInterrupt::USART3_4_IRQHandler); // USART3 and USART4
-        //VectorTable[46] = (uint) &(CInterrupt::CEC_CAN_IRQHandler); // CEC and CAN
-        //VectorTable[47] = (uint) &(CInterrupt::USB_IRQHandler); // USB        
     #endif 
 }
 
@@ -559,7 +559,7 @@ void CInterrupt::SysTick_Handler()
 {
     Time.Milliseconds++;
 }
-
+uint com1cnt;
 //注意,读取USARTx->SR能避免莫名其妙的错误
 void CInterrupt::USART1_IRQHandler()
 {
@@ -567,6 +567,7 @@ void CInterrupt::USART1_IRQHandler()
     {
         OnUsartReceive(0, onIsr[USART1_IRQn]);
     }
+	com1cnt++;
 }
 
 void CInterrupt::USART2_IRQHandler()
