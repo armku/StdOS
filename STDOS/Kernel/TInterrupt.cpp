@@ -489,12 +489,30 @@ void CInterrupt::TIM5_IRQHandler()
 
 void CInterrupt::TIM6_IRQHandler()
 {
-    #if defined(STM32F1) || defined(STM32F4)  
+    #if defined(STM32F1)
         if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
         {
             if (onIsr[TIM6_IRQn])
             {
                 ((Timer*)onIsr[TIM6_IRQn])->OnInterrupt();
+            }
+            TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
+        }
+	#elif defined STM32F4
+		if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
+        {
+            if (onIsr[TIM6_DAC_IRQn])
+            {
+                ((Timer*)onIsr[TIM6_DAC_IRQn])->OnInterrupt();
+            }
+            TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
+        }
+	#elif defined STM32F0
+		if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
+        {
+            if (onIsr[TIM6_DAC_IRQn])
+            {
+                ((Timer*)onIsr[TIM6_DAC_IRQn])->OnInterrupt();
             }
             TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
         }
