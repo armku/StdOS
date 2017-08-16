@@ -80,11 +80,11 @@ class CInterrupt
 
         //F1       
         //static void WWDG_IRQHandler(); // Window Watchdog
-        static void PVD_IRQHandler(); // PVD through EXTI Line detect
+        //static void PVD_IRQHandler(); // PVD through EXTI Line detect
         static void TAMPER_IRQHandler(); // Tamper
         //static void RTC_IRQHandler(); // RTC
         //static void FLASH_IRQHandler(); // Flash
-        static void RCC_IRQHandler(); // RCC
+        //static void RCC_IRQHandler(); // RCC
         static void EXTI0_IRQHandler(); // EXTI Line 0
         static void EXTI1_IRQHandler(); // EXTI Line 1
         static void EXTI2_IRQHandler(); // EXTI Line 2
