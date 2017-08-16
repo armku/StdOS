@@ -235,24 +235,7 @@ extern "C"
     #else 
         uint VectorTable[ISRLENGTH] __attribute__((at(ISRADDR)));
     #endif 
-    uint *vsrom = (uint*)NVIC_VectTab_FLASH;
-	
-	void SysTick_Handler()
-{
-    CInterrupt::SysTick_Handler();
-}
-void TIM7_IRQHandler()
-{
-    CInterrupt::TIM7_IRQHandler();
-}
-void USART1_IRQHandler()
-{
-	//CInterrupt::USART1_IRQHandler();
-	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
-  {
-      USART_SendData(USART1,USART_ReceiveData(USART1));
-  }
-}
+    uint *vsrom = (uint*)NVIC_VectTab_FLASH;	
 }
 
 // 初始化中断向量表
@@ -271,7 +254,7 @@ void TInterrupt::Init()const
         NVIC_SetVectorTable(NVIC_VectTab_RAM, NVIC_OFFSET);
     #elif defined STM32F0
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
-        //SYSCFG_MemoryRemapConfig(SYSCFG_MemoryRemap_SRAM);
+        SYSCFG_MemoryRemapConfig(SYSCFG_MemoryRemap_SRAM);
     #endif 
 
     VectorTable[15] = (uint) &(CInterrupt::SysTick_Handler);
@@ -580,6 +563,11 @@ uint com1cnt;
 //注意,读取USARTx->SR能避免莫名其妙的错误
 void CInterrupt::USART1_IRQHandler()
 {
+	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
+  {
+      USART_SendData(USART1,USART_ReceiveData(USART1));
+  }
+  return;
     if (onIsr[USART1_IRQn])
     {
         OnUsartReceive(0, onIsr[USART1_IRQn]);
