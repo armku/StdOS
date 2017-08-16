@@ -89,10 +89,16 @@ int SerialPort::SendData(byte data, int times)
             while (USART_GetFlagStatus(g_Uart_Ports[2], USART_FLAG_TXE) == RESET && --times > 0){}
             break;
         case COM4:
-            while (USART_GetFlagStatus(g_Uart_Ports[3], USART_FLAG_TXE) == RESET && --times > 0){}
+			#if defined(STM32F1) || defined(STM32F4)
+				while (USART_GetFlagStatus(g_Uart_Ports[3], USART_FLAG_TXE) == RESET && --times > 0){}
+			#elif defined STM32F0
+			#endif
             break;
         case COM5:
-            while (USART_GetFlagStatus(g_Uart_Ports[4], USART_FLAG_TXE) == RESET && --times > 0){}
+			#if defined(STM32F1) || defined(STM32F4)
+				while (USART_GetFlagStatus(g_Uart_Ports[4], USART_FLAG_TXE) == RESET && --times > 0){}
+			#elif defined STM32F0
+			#endif
             break;
         case COM6:
 			break;
@@ -119,10 +125,16 @@ int SerialPort::SendData(byte data, int times)
                 USART_SendData(g_Uart_Ports[2], (ushort)data);
                 break;
             case COM4:
-                USART_SendData(g_Uart_Ports[3], (ushort)data);
+				#if defined(STM32F1) || defined(STM32F4)
+					USART_SendData(g_Uart_Ports[3], (ushort)data);
+				#elif defined STM32F0
+				#endif
                 break;
             case COM5:
-                USART_SendData(g_Uart_Ports[4], (ushort)data);
+				#if defined(STM32F1) || defined(STM32F4)
+					USART_SendData(g_Uart_Ports[4], (ushort)data);
+				#elif defined STM32F0
+				#endif
                 break;
             case COM6:
 				break;
