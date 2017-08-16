@@ -347,32 +347,30 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
         case Timer1:
             break;
         case Timer2:
-            Interrupt.Activate(28, Timer::OnHandler, this);
+            Interrupt.Activate(TIM2_IRQn, Timer::OnHandler, this);
             break;
         case Timer3:
-            Interrupt.Activate(29, Timer::OnHandler, this);
+            Interrupt.Activate(TIM3_IRQn, Timer::OnHandler, this);
             break;
         case Timer4:
             #if defined(STM32F1) || defined(STM32F4)
-                Interrupt.Activate(30, Timer::OnHandler, this);
+                Interrupt.Activate(TIM4_IRQn, Timer::OnHandler, this);
             #endif 
             break;
         case Timer5:
             #if defined(STM32F1) || defined(STM32F4)
-                Interrupt.Activate(50, Timer::OnHandler, this);
+                Interrupt.Activate(TIM5_IRQn, Timer::OnHandler, this);
             #endif 
             break;
         case Timer6:
             #if defined(STM32F1) || defined(STM32F4)
-                Interrupt.Activate(54, Timer::OnHandler, this);
+                Interrupt.Activate(TIM6_DAC_IRQn, Timer::OnHandler, this);
+			#elif defined STM32F0
+				Interrupt.Activate(TIM6_DAC_IRQn, Timer::OnHandler, this);
             #endif 
             break;
         case Timer7:
-            #if defined(STM32F1) || defined(STM32F4)
-                Interrupt.Activate(55, Timer::OnHandler, this);
-            #elif defined STM32F0
-                Interrupt.Activate(55, Timer::OnHandler, this);
-            #endif 
+            Interrupt.Activate(TIM7_IRQn, Timer::OnHandler, this);
             break;
         case Timer8:
             break;
@@ -387,12 +385,24 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
         case Timer13:
             break;
         case Timer14:
+			#if defined STM32F0
+				Interrupt.Activate(TIM14_IRQn, Timer::OnHandler, this);
+            #endif 
             break;
         case Timer15:
+            #if defined STM32F0
+				Interrupt.Activate(TIM15_IRQn, Timer::OnHandler, this);
+            #endif 
             break;
         case Timer16:
+            #if defined STM32F0
+				Interrupt.Activate(TIM16_IRQn, Timer::OnHandler, this);
+            #endif 
             break;
         case Timer17:
+            #if defined STM32F0
+				Interrupt.Activate(TIM17_IRQn, Timer::OnHandler, this);
+            #endif 
             break;
         case Timer18:
             break;
