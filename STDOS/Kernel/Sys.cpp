@@ -24,10 +24,10 @@ extern "C"
     extern uint __heap_limit;
     extern uint __initial_sp;
 }
-#define delay_ostickspersec 1000			//时钟频率
+//#define delay_ostickspersec 1000			//时钟频率
 
-byte fac_us = 0; //每个us需要的systick时钟数 
-UInt64 TicksPerms = 0;
+//byte fac_us = 0; //每个us需要的systick时钟数 
+//UInt64 TicksPerms = 0;
 String *CPUName;
 
 
@@ -62,17 +62,17 @@ void TSys::InitClock()
 void TSys::Init()
 {
     SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
-    #ifdef STM32F0
-		fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数   
-        TicksPerms = SystemCoreClock / delay_ostickspersec;
-	#elif defined STM32F1
-        fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数   
-        TicksPerms = SystemCoreClock / delay_ostickspersec;
-    #elif defined STM32F4
-        fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数   
-        TicksPerms = SystemCoreClock / delay_ostickspersec;
-    #endif 
-    SysTick_Config(TicksPerms); //配置SysTick tick is 1ms	
+//    #ifdef STM32F0
+//		fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数   
+//        TicksPerms = SystemCoreClock / delay_ostickspersec;
+//	#elif defined STM32F1
+//        fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数   
+//        TicksPerms = SystemCoreClock / delay_ostickspersec;
+//    #elif defined STM32F4
+//        fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数   
+//        TicksPerms = SystemCoreClock / delay_ostickspersec;
+//    #endif 
+//    SysTick_Config(TicksPerms); //配置SysTick tick is 1ms	
     #ifdef STM32F0
 	#elif defined STM32F1
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
