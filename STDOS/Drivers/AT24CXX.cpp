@@ -531,19 +531,19 @@ byte AT24CXX::CheckOk()
     #endif 
     void AT24C02Test()
     {
-		
-		HardI2C SoftI2C
-//初始化光强传感器BH750
-static SoftI2C iic;
-iic.SetPin(PB6,PB7);
-bh.IIC=&iic;
-bh.Init();
+        #if 0
+            HardI2C SoftI2C 
+            //初始化光强传感器BH750
+            static SoftI2C iic;
+            iic.SetPin(PB6, PB7);
+            bh.IIC = &iic;
+            bh.Init();
 
-bh.Read();//这样得到数据 
-		
-		
-		
-		
+            bh.Read(); //这样得到数据 
+        #endif 
+
+
+
         printf("\r\n");
 
         ushort i;
