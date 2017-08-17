@@ -44,11 +44,11 @@ uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 }
 
 uint time6cnt;
-extern uint com1cnt;
+
 void TimerTask(void *param)
 {
     static int i = 0;
-    printf("\r\n%d: cnt:%d %d", i++, time6cnt,com1cnt);
+    printf("\r\n%d: cnt:%d", i++, time6cnt);
 }
 void TimeTest();
 void tim67test();

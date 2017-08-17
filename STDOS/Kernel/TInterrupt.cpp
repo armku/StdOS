@@ -560,20 +560,14 @@ void CInterrupt::SysTick_Handler()
 {
     Time.Milliseconds++;
 }
-uint com1cnt;
+
 //注意,读取USARTx->SR能避免莫名其妙的错误
 void CInterrupt::USART1_IRQHandler()
-{
-	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
-  {
-      USART_SendData(USART1,USART_ReceiveData(USART1));
-  }
-  return;
+{	
     if (onIsr[USART1_IRQn])
     {
         OnUsartReceive(0, onIsr[USART1_IRQn]);
     }
-	com1cnt++;
 }
 
 void CInterrupt::USART2_IRQHandler()
