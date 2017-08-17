@@ -41,26 +41,27 @@ void TTime::UseRTC()
     Sys.AddTask(RtcRefresh, rtc, 100, 100, "Rtc");
 }
 extern uint time6cnt;
-Timer *timer2;
+Timer *timerTick;
 Delegate < Timer & > abc;
-void tim2refesh(void *param)
+void timTickrefesh(void *param)
 {
     time6cnt++;
+	Time.Milliseconds++;
 }
 void TTime::Init()
 {
 	// 初始化为输出
 	#if defined STM32F0
-		timer2 = new Timer(Timer7);
+		timerTick = new Timer(Timer7);
 	#elif defined STM32F1
-		timer2 = new Timer(Timer6);
+		timerTick = new Timer(Timer6);
 	#elif defined STM32F4
-		timer2 = new Timer(Timer3);
+		timerTick = new Timer(Timer3);
 	#endif
-    abc.Bind(tim2refesh);
-    timer2->Register(abc);
-    timer2->Open();
-    timer2->SetFrequency(1000);
+    abc.Bind(timTickrefesh);
+    timerTick->Register(abc);
+    timerTick->Open();
+    timerTick->SetFrequency(1000);
     //        timer2->Config();
 }
 // 当前滴答时钟

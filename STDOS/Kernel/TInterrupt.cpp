@@ -558,7 +558,7 @@ void OnUsartReceive(ushort num, void *param);
 
 void CInterrupt::SysTick_Handler()
 {
-    Time.Milliseconds++;
+    
 }
 
 //注意,读取USARTx->SR能避免莫名其妙的错误
