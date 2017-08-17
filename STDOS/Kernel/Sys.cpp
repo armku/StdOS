@@ -144,6 +144,7 @@ void TSys::Init()
             break;
     }
     //    this->Inited = 1;
+	Time.Init();
 }	
 void TSys::ShowInfo()const
 {

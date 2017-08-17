@@ -47,7 +47,7 @@ void TimerTask(void *param)
 
 #define namee "StdOS"
 void AT24C02Test();
-void TimeTest();
+
 int main(void)
 {
     Sys.Name = (char*)namee;
@@ -60,28 +60,9 @@ int main(void)
         Sys.ShowInfo();
     #endif 
     SerialPort::GetMessagePort()->Register(OnUsart1Read);
-    //	AT24C02Test();
-    TimeTest();
+    //	AT24C02Test();    
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
 
     Sys.Start();
-}
-
-Delegate < Timer & > abc;
-void tim2refesh(void *param)
-{
-    time6cnt++;
-}
-
-Timer *timer2;
-void TimeTest()
-{
-    // 初始化为输出
-    timer2 = new Timer(Timer6);
-    abc.Bind(tim2refesh);
-    timer2->Register(abc);
-    timer2->Open();
-    timer2->SetFrequency(1000);
-    //        timer2->Config();
 }

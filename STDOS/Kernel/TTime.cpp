@@ -1,5 +1,6 @@
 #include "TTime.h"
 #include "Device\RTC.h"
+#include "Device\Timer.h"
 
 #ifdef STM32F0
     #include "stm32f0xx.h"
@@ -39,9 +40,26 @@ void TTime::UseRTC()
     rtc->Init();
     Sys.AddTask(RtcRefresh, rtc, 100, 100, "Rtc");
 }
-
-void TTime::Init(){
-
+extern uint time6cnt;
+Timer *timer2;
+Delegate < Timer & > abc;
+void tim2refesh(void *param)
+{
+    time6cnt++;
+}
+void TTime::Init()
+{
+	// 初始化为输出
+	#if defined STM32F0
+	#elif defined STM32F1
+		timer2 = new Timer(Timer6);
+	#elif defined STM32F4
+	#endif
+    abc.Bind(tim2refesh);
+    timer2->Register(abc);
+    timer2->Open();
+    timer2->SetFrequency(1000);
+    //        timer2->Config();
 }
 // 当前滴答时钟
 uint TTime::CurrentTicks()const
