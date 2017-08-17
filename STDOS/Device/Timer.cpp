@@ -76,7 +76,7 @@ Timer::Timer(TIMER index)
     this->_index = index;
     this->Period = 1000; //默认1秒一次
 	#if defined(STM32F0)
-		this->Prescaler = 47999; //36000分频
+		this->Prescaler = 47999; //48000分频
 	#elif defined(STM32F1)
 		this->Prescaler = 71;
 	#elif defined(STM32F4)
