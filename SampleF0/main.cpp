@@ -52,7 +52,7 @@ void TimerTask(void *param)
 }
 void TimeTest();
 void tim67test();
-void NVIC_Configuration(void); //中断初始化函数声明
+
 int main()
 {
     Sys.Name = (char*)namee;
@@ -63,7 +63,6 @@ int main()
     #endif 
     
 	TimeTest();
-	NVIC_Configuration(); //调用中断优先级初始化函数
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
 

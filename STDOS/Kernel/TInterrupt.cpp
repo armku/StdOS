@@ -455,7 +455,7 @@ bool TInterrupt::Deactivate(short irq)
 {
     return false;
 }
-
+void NVIC_Configuration();//中断优先级初始化函数
 // 开中断
 //bool TInterrupt::Enable(short irq) const{return false;}
 // 关中断
@@ -477,10 +477,11 @@ void TInterrupt::SetPriority(short irq, uint priority)const
         nvic.NVIC_IRQChannelPreemptionPriority = 1;
         nvic.NVIC_IRQChannelSubPriority = priority;
     #elif defined STM32F0
-        nvic.NVIC_IRQChannelPriority = 2;
+//        nvic.NVIC_IRQChannelPriority = 2;
     #endif 
 
     NVIC_Init(&nvic);
+	NVIC_Configuration();
 }
 
 // 获取优先级
