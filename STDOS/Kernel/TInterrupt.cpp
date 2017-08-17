@@ -478,7 +478,6 @@ void TInterrupt::SetPriority(short irq, uint priority)const
         nvic.NVIC_IRQChannelSubPriority = priority;
     #elif defined STM32F0
         nvic.NVIC_IRQChannelPriority = 2;
-        nvic.NVIC_IRQChannelCmd = ENABLE;
     #endif 
 
     NVIC_Init(&nvic);
