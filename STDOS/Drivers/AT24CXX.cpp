@@ -520,7 +520,7 @@ byte AT24CXX::CheckOk()
     }
 }
 
-#if 1
+#if 0
     #define EE_SIZE				256			  /* 24xx02总容量 */    
     #ifdef STM32F0
         AT24CXX at2402(PB6, PB7, AT24C02);
@@ -531,6 +531,19 @@ byte AT24CXX::CheckOk()
     #endif 
     void AT24C02Test()
     {
+		
+		HardI2C SoftI2C
+//初始化光强传感器BH750
+static SoftI2C iic;
+iic.SetPin(PB6,PB7);
+bh.IIC=&iic;
+bh.Init();
+
+bh.Read();//这样得到数据 
+		
+		
+		
+		
         printf("\r\n");
 
         ushort i;

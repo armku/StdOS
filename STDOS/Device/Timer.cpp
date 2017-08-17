@@ -363,9 +363,9 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
             #endif 
             break;
         case Timer6:
-            #if defined(STM32F1) || defined(STM32F4)
-                Interrupt.Activate(TIM6_DAC_IRQn, Timer::OnHandler, this);
-			#elif defined STM32F0
+            #if defined(STM32F1) 
+                Interrupt.Activate(TIM6_IRQn, Timer::OnHandler, this);
+			#elif defined STM32F0 || defined(STM32F4)
 				Interrupt.Activate(TIM6_DAC_IRQn, Timer::OnHandler, this);
             #endif 
             break;

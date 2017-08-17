@@ -40,7 +40,7 @@ hd适用于大容量产品；
 小容量：FLASH≤32K
 中容量：64K≤FLASH≤128K
 大容量：256K≤FLASH
-
+hal hardware abstraction layer 硬件有关
 
 
 #include "Sys.h"
