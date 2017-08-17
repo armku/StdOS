@@ -51,9 +51,11 @@ void TTime::Init()
 {
 	// 初始化为输出
 	#if defined STM32F0
+		timer2 = new Timer(Timer7);
 	#elif defined STM32F1
 		timer2 = new Timer(Timer6);
 	#elif defined STM32F4
+		timer2 = new Timer(Timer3);
 	#endif
     abc.Bind(tim2refesh);
     timer2->Register(abc);
