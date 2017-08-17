@@ -455,7 +455,7 @@ bool TInterrupt::Deactivate(short irq)
 {
     return false;
 }
-void NVIC_Configuration();//中断优先级初始化函数
+
 // 开中断
 //bool TInterrupt::Enable(short irq) const{return false;}
 // 关中断
@@ -466,9 +466,11 @@ void NVIC_Configuration();//中断优先级初始化函数
 // 是否挂起
 //bool TInterrupt::PendingState(short irq) const{return false;}
 // 设置优先级
+void NVIC_Configuration();//中断优先级初始化函数
 void TInterrupt::SetPriority(short irq, uint priority)const
 {
     NVIC_InitTypeDef nvic;
+	
     nvic.NVIC_IRQChannelCmd = ENABLE;
     nvic.NVIC_IRQChannel = irq;
 
