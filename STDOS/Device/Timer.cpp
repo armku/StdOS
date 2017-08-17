@@ -80,7 +80,7 @@ Timer::Timer(TIMER index)
 	#elif defined(STM32F1)
 		this->Prescaler = 71;
 	#elif defined(STM32F4)
-		this->Prescaler = 71;
+		this->Prescaler = 167999;
 	#endif    
 }
 
