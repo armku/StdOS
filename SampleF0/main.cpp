@@ -61,7 +61,7 @@ int main()
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 
-    
+    SerialPort::GetMessagePort()->Register(OnUsart1Read);
 	TimeTest();
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
@@ -85,15 +85,4 @@ void TimeTest()
     timer2->Open();
     //        timer2->SetFrequency(1000);
     //        timer2->Config();
-}
-
-void NVIC_Configuration(void)//中断优先级初始化函数
-{
-	NVIC_InitTypeDef   NVIC_InitStructure;//定义一个NVIC_InitTypeDef类型的结构体
-
-	// rs232
-	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPriority = 0x01;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
 }

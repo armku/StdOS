@@ -466,7 +466,7 @@ bool TInterrupt::Deactivate(short irq)
 // 是否挂起
 //bool TInterrupt::PendingState(short irq) const{return false;}
 // 设置优先级
-void NVIC_Configuration();//中断优先级初始化函数
+
 void TInterrupt::SetPriority(short irq, uint priority)const
 {
     NVIC_InitTypeDef nvic;
@@ -483,7 +483,6 @@ void TInterrupt::SetPriority(short irq, uint priority)const
     #endif 
 
     NVIC_Init(&nvic);
-	NVIC_Configuration();
 }
 
 // 获取优先级
