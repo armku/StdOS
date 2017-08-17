@@ -483,6 +483,7 @@ void TInterrupt::SetPriority(short irq, uint priority)const
     #endif 
 
     NVIC_Init(&nvic);
+	NVIC_SetPriority((IRQn_Type)irq, priority);
 }
 
 // 获取优先级

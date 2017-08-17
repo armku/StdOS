@@ -80,7 +80,7 @@ void TSys::Init()
     #elif defined STM32F4
 	#endif 
 
-    NVIC_SetPriority(SysTick_IRQn, 0);
+//    NVIC_SetPriority(SysTick_IRQn, 0);
 
     #ifdef STM32F0
         void *p = (void*)0x1FFFF7AC;
