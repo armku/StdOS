@@ -11,8 +11,24 @@
 #include "Drivers\lcd_dr.h"
 #include "TInterrupt.h"
 #include "Timer.h"
+#include "TTime.h"
 
-
+class TTTTime
+{
+	public:
+		uint	Seconds;		// 全局秒数，系统启动后总秒数。累加
+		UInt64	Milliseconds;	// 全局毫秒数，系统启动后总毫秒（1000ms整部分）。累加
+		 uint CurrentTicks;	// 当前滴答时钟
+		UInt64 Current; 		// 当前毫秒数
+};
+TTTTime now;
+void Test12(void* param)
+{
+	now.Seconds=Time.Seconds;
+	now.Milliseconds=Time.Milliseconds;
+	now.Current=Time.Current();
+	now.CurrentTicks=Time.CurrentTicks();
+}
 const byte vers[] = "yyyy-MM-dd HH:mm:ss";
 #if 1
     OutputPort led1(PB0, false);
@@ -42,7 +58,7 @@ uint time6cnt;
 void TimerTask(void *param)
 {
     static int i = 0;
-    printf("\r\n%d: cnt:%d", i++, time6cnt);
+    //printf("\r\n%d: cnt:%d", i++, time6cnt);
 }
 
 #define namee "StdOS"
@@ -63,6 +79,7 @@ int main(void)
     //	AT24C02Test();    
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
+	Sys.AddTask(Test12,0,600,1000,"Test");
 
     Sys.Start();
 }

@@ -44,10 +44,17 @@ void TTime::UseRTC()
 extern uint time6cnt;
 Timer *timerTick;
 Delegate < Timer & > abc;
+static uint nowms=0;//当前毫秒数
 void timTickrefesh(void *param)
 {
+	nowms++;
+	if(nowms>=1000)
+	{
+		Time.Milliseconds+=1000;
+		Time.Seconds++;
+		nowms=0;
+	}
     time6cnt++;
-    Time.Milliseconds++;
 }
 
 static byte fac_us = 0; //us延时倍乘数			   
@@ -95,16 +102,17 @@ uint TTime::CurrentTicks()const
 // 当前毫秒数
 UInt64 TTime::Current()const
 {
-    UInt64 ret = 0;
-    #if defined(STM32F1) || defined(STM32F4)	
-        ret = this->Milliseconds *1000; //先转换为us
-        //        ret += (TicksPerms - SysTick->VAL) / fac_us;
-    #elif defined STM32F0
-        ret = this->Milliseconds *1000; //先转换为us
-        //        ret += (TicksPerms - SysTick->VAL) / fac_us;
-    #endif 
-    //return this->mCurrent *1000;
-    return ret;
+//    UInt64 ret = 0;
+//    #if defined(STM32F1) || defined(STM32F4)	
+//        ret = this->Milliseconds *1000; //先转换为us
+//        //        ret += (TicksPerms - SysTick->VAL) / fac_us;
+//    #elif defined STM32F0
+//        ret = this->Milliseconds *1000; //先转换为us
+//        //        ret += (TicksPerms - SysTick->VAL) / fac_us;
+//    #endif 
+//    //return this->mCurrent *1000;
+//    return ret;
+	return (this->Milliseconds+nowms)*1000;
 }
 
 // 设置时间
