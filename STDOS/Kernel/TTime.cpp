@@ -64,12 +64,13 @@ void TTime::Init()
 
     // 初始化为输出
     #if defined STM32F0
-        timerTick = new Timer(Timer7);
+		this->Index=6;        
     #elif defined STM32F1
-        timerTick = new Timer(Timer6);
+        this->Index=5;
     #elif defined STM32F4
-        timerTick = new Timer(Timer3);
+        this->Index=2;
     #endif 
+	timerTick = new Timer((TIMER)this->Index);
     abc.Bind(timTickrefesh);
     timerTick->Register(abc);
     timerTick->Open();
