@@ -102,7 +102,7 @@ uint TTime::CurrentTicks()const
 // 当前毫秒数
 UInt64 TTime::Current()const
 {
-	return (this->Milliseconds+nowms)*1000;
+	return this->Milliseconds+nowms;
 }
 
 // 设置时间
