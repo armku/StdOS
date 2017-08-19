@@ -102,16 +102,6 @@ uint TTime::CurrentTicks()const
 // 当前毫秒数
 UInt64 TTime::Current()const
 {
-//    UInt64 ret = 0;
-//    #if defined(STM32F1) || defined(STM32F4)	
-//        ret = this->Milliseconds *1000; //先转换为us
-//        //        ret += (TicksPerms - SysTick->VAL) / fac_us;
-//    #elif defined STM32F0
-//        ret = this->Milliseconds *1000; //先转换为us
-//        //        ret += (TicksPerms - SysTick->VAL) / fac_us;
-//    #endif 
-//    //return this->mCurrent *1000;
-//    return ret;
 	return (this->Milliseconds+nowms)*1000;
 }
 
