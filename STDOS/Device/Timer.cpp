@@ -79,7 +79,8 @@ Timer::Timer(TIMER index)
 	#if defined(STM32F0)
 		this->Prescaler = 47999; //48000分频
 	#elif defined(STM32F1)
-		this->Prescaler = 71;
+		this->Prescaler=36000-1;//则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=系统时钟/(分频系数+1) =1M
+		this->Period=2000-1;
 	#elif defined(STM32F4)
 		this->Prescaler = 167999;
 	#endif    
@@ -332,7 +333,6 @@ void Timer::SetFrequency(uint frequency)
 
     Prescaler = pre - 1;
     Period = p;
-
     this->Open();
 }
 
