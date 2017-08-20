@@ -44,16 +44,10 @@ void TTime::UseRTC()
 extern uint time6cnt;
 Timer *timerTick;
 Delegate < Timer & > abc;
-static uint nowms=0;//当前毫秒数
 void timTickrefesh(void *param)
-{
-	nowms++;
-	if(nowms>=1000)
-	{
-		Time.Milliseconds+=1000;
-		Time.Seconds++;
-		nowms=0;
-	}
+{	
+	Time.Milliseconds+=1000;
+	Time.Seconds++;
     time6cnt++;
 }
 
@@ -74,7 +68,7 @@ void TTime::Init()
     abc.Bind(timTickrefesh);
     timerTick->Register(abc);
     timerTick->Open();
-    timerTick->SetFrequency(1000);
+    //timerTick->SetFrequency(1000);
     //        timer2->Config();
 
     //初始化延迟函数
@@ -103,7 +97,19 @@ uint TTime::CurrentTicks()const
 // 当前毫秒数
 UInt64 TTime::Current()const
 {
-	return this->Milliseconds+nowms;
+	__IO ushort ms=0;
+	switch(this->Index)
+	{
+		case 5:
+			ms=(TIM6->CNT)>>1;
+			break;
+		case 6:
+			ms=(TIM7->CNT)>>1;
+			break;
+		default:
+			break;
+	}
+	return this->Milliseconds+ms;
 }
 
 // 设置时间

@@ -21,13 +21,13 @@ class TTTTime
 		 uint CurrentTicks;	// 当前滴答时钟
 		UInt64 Current; 		// 当前毫秒数
 };
-TTTTime now;
+TTTTime now123;
 void Test12(void* param)
 {
-	now.Seconds=Time.Seconds;
-	now.Milliseconds=Time.Milliseconds;
-	now.Current=Time.Current();
-	now.CurrentTicks=Time.CurrentTicks();
+	now123.Seconds=Time.Seconds;
+	now123.Milliseconds=Time.Milliseconds;
+	now123.Current=Time.Current();
+	now123.CurrentTicks=Time.CurrentTicks();
 }
 const byte vers[] = "yyyy-MM-dd HH:mm:ss";
 #if 1
