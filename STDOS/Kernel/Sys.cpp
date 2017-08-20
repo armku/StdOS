@@ -24,13 +24,8 @@ extern "C"
     extern uint __heap_limit;
     extern uint __initial_sp;
 }
-#define delay_ostickspersec 9000			//时钟频率
 
-byte fac_us = 0; //每个us需要的systick时钟数 
-UInt64 TicksPerms = 0;
 String *CPUName;
-
-
 
 // 构造函数
 TSys::TSys()
@@ -60,19 +55,7 @@ void TSys::InitClock()
 //SYSTICK的时钟固定为HCLK时钟的1/8
 //SYSCLK:系统时钟
 void TSys::Init()
-{
-    
-    #ifdef STM32F0
-		fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数   
-        TicksPerms = SystemCoreClock / delay_ostickspersec;
-	#elif defined STM32F1
-        fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数   
-        TicksPerms = SystemCoreClock / delay_ostickspersec;
-    #elif defined STM32F4
-        fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数   
-        TicksPerms = SystemCoreClock / delay_ostickspersec;
-    #endif 
-       
+{       
     #ifdef STM32F0
         void *p = (void*)0x1FFFF7AC;
     #elif defined STM32F1 
@@ -81,7 +64,6 @@ void TSys::Init()
         void *p = (void*)0x1FFFF7E8;
     #endif 
     memcpy(ID, p, ArrayLength(ID));
-
 
     this->CPUID = SCB->CPUID;
     uint MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本

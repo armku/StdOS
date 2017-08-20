@@ -10,9 +10,7 @@
     #include "stm32f4xx.h"
 #endif 
 
-//extern byte fac_us; //每个us需要的systick时钟数 
 TTime Time; //系统时间，不建议用户直接使用
-//extern UInt64 TicksPerms;
 
 void TTime::OnHandler(ushort num, void *param){
 
@@ -51,7 +49,7 @@ void timTickrefesh(void *param)
     time6cnt++;
 }
 
-static byte fac_us = 0; //us延时倍乘数			   
+static byte fac_us = 0; //us延时倍乘数 每个us需要的systick时钟数 			   
 static ushort fac_ms = 0; //ms延时倍乘数,在ucos下,代表每个节拍的ms数
 void TTime::Init()
 {
@@ -87,6 +85,13 @@ void TTime::Init()
         fac_ms = (u16)fac_us *1000; //非OS下,代表每个ms需要的systick时钟数   
     #endif
 	
+	#ifdef STM32F0
+		fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数 
+	#elif defined STM32F1
+        fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数 
+    #elif defined STM32F4
+        fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数 
+    #endif 
 	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
 	SysTick_Config(9000); //配置SysTick tick is 1ms	9000-1
 	#ifdef STM32F0
