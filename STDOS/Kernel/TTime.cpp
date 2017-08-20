@@ -85,7 +85,18 @@ void TTime::Init()
         fac_us = SYSCLK / 8; //不论是否使用OS,fac_us都需要使用
 
         fac_ms = (u16)fac_us *1000; //非OS下,代表每个ms需要的systick时钟数   
-    #endif 
+    #endif
+	
+	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
+	SysTick_Config(9000); //配置SysTick tick is 1ms	9000-1
+	#ifdef STM32F0
+	#elif defined STM32F1
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+        GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); //关闭jtag，保留swd	
+    #elif defined STM32F4
+	#endif 
+	//    NVIC_SetPriority(SysTick_IRQn, 0);
+	
 }
 
 // 当前滴答时钟
@@ -162,7 +173,7 @@ void TTime::Sleep(int nms, bool *running)const
 // 微秒级延迟
 void TTime::Delay(int nus)const
 {
-    #if 0
+    #if 1
         uint ticks;
         uint told, tnow, tcnt = 0;
         uint reload = 0;
