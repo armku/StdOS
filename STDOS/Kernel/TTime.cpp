@@ -101,6 +101,20 @@ void TTime::Init()
     #elif defined STM32F4
     #endif 
     NVIC_SetPriority(SysTick_IRQn, 0);
+	switch(this->Index)
+	{
+		case 2:
+			NVIC_SetPriority(TIM3_IRQn, 0);
+			break;
+		case 5:
+			NVIC_SetPriority(TIM6_IRQn, 0);
+			break;
+		case 6:
+			NVIC_SetPriority(TIM7_IRQn, 0);
+			break;
+		default:
+			break;
+	}
 
 }
 
