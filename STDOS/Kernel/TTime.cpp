@@ -117,6 +117,9 @@ UInt64 TTime::Current()const
     __IO ushort ms = 0;
     switch (this->Index)
     {
+		case 2:
+			ms=(TIM3->CNT) >> 1;
+			break;
         case 5:
             ms = (TIM6->CNT) >> 1;
             break;
