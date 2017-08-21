@@ -1,4 +1,5 @@
 #include "DateTime.h"
+#include "TTime.h"
 #include <stdio.h>
 
 //ida ok
@@ -146,7 +147,7 @@ Int64 DateTime::TotalMs()const
 //ida ok
 byte DateTime::DayOfWeek()const
 {
-    int v1; // r6@5
+    int v1; 
 
   v1 = (!(this->Year % 4) && this->Year % 100 || !(this->Year % 400))
     && this->Month > 2;
@@ -167,38 +168,54 @@ DateTime DateTime::Date()const
 }
 DateTime DateTime::AddYears(int value) const
 {
-  //?  
-  return *this;
+	DateTime ret(*this);
+	ret.ParseDays(this->TotalDays()+value);
+	return ret;
 }
 DateTime DateTime::AddMonths(int value) const
 {
-  //?  
-  return *this;
+  DateTime ret(*this);
+   int monsum = value + ret.Month;
+  int yeartmp = monsum / 12;
+  int montmp = monsum % 12;
+  if ( monsum % 12 <= 0 )
+  {
+    yeartmp = yeartmp - 1;
+    montmp = montmp + 12;
+  }
+  ret.Year = ret.Year + yeartmp;
+  ret.Month = montmp;
+  
+	return ret;
 }
 DateTime DateTime::AddDays(int value) const
 {
-  //?  
-  return *this;
+  DateTime ret(*this);
+	
+	ret.ParseDays(ret.TotalDays()+value);
+	return ret;
 }
 DateTime DateTime::AddHours(int value) const
 {
-  //?  
-  return *this;
+  return this->AddMinutes(value*3600);
 }
 DateTime DateTime::AddMinutes(int value) const
 {
-  //?  
-  return *this;
+  return this->AddMinutes(value*60);
 }
 DateTime DateTime::AddSeconds(int value) const
 {
-  //?  
-  return *this;
+  DateTime ret(*this);
+	
+	ret.Parse(ret.TotalSeconds()+value);
+	return ret;
 }
 DateTime DateTime::AddMilliseconds(Int64 value) const
 {
-  //?  
-  return *this;
+  DateTime ret(*this);
+	
+	ret.ParseMs(ret.TotalMs()+value);
+	return ret;
 }
 DateTime DateTime::Add(const TimeSpan& value) const
 {
@@ -222,32 +239,83 @@ DateTime DateTime::operator-(const TimeSpan& value)
 //}
 int DateTime::CompareTo(const DateTime& value) const
 {
-	//?  
-  return 0;
+	int ret=0;
+	if(this->Year==value.Year)
+	{
+		if(this->Month==value.Month)
+		{
+			if(this->Day==value.Day)
+			{
+				if(this->Hour==value.Hour)
+				{
+					if(this->Minute==value.Minute)
+					{
+						if(this->Second==value.Second)
+						{
+							if(this->Ms==value.Ms)
+							{
+								ret=0;
+							}
+							else
+							{
+								ret=this->Ms-value.Ms;
+							}
+						}
+						else
+						{
+							ret=this->Second-value.Second;
+						}
+					}
+					else
+					{
+						ret=this->Minute-value.Month;
+					}
+				}
+				else
+				{
+					ret=this->Hour-value.Hour;
+				}
+			}
+			else
+			{
+				ret=this->Day-value.Day;
+			}
+		}
+		else
+		{
+			ret=this->Month-value.Month;
+		}
+	}
+	else
+	{
+		ret=this->Year-value.Year;
+	}
+	
+  return ret;
 }
 bool operator==	(const DateTime& left, const DateTime& right)
 {
-	return true;
+	return left.CompareTo(right)==0;
 }
 bool operator!=	(const DateTime& left, const DateTime& right)
 {
-	return true;
+	return left.CompareTo(right)!=0;
 }
 bool operator>	(const DateTime& left, const DateTime& right)
 {
-	return true;
+	return left.CompareTo(right)>0;
 }
 bool operator<	(const DateTime& left, const DateTime& right)
 {
-	return true;
+	return left.CompareTo(right)<0;
 }
 bool operator>=	(const DateTime& left, const DateTime& right)
 {
-	return true;
+	return left.CompareTo(right)>=0;
 }
 bool operator<=	(const DateTime& left, const DateTime& right)
 {
-	return true;
+	return left.CompareTo(right)<=0;
 }
 
 //String DateTime::ToString() const
@@ -259,15 +327,9 @@ void DateTime::Show(bool newLine)const
 }
 //当前时间
 DateTime DateTime::Now()
-{
-    DateTime dt;
-    dt.Year = 2017;
-    dt.Month = 01;
-    dt.Day = 29;
-    dt.Hour = 10;
-    dt.Minute = 55;
-    dt.Second = 12;
-    return dt;
+{    
+    //return DateTime(TotalSeconds()+Time.Seconds);
+	return DateTime(0+Time.Seconds);
 }
 #if DEBUG
 void DateTime::Test()
