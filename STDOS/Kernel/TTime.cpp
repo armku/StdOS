@@ -107,7 +107,10 @@ void TTime::Init()
 			NVIC_SetPriority(TIM3_IRQn, 0);
 			break;
 		case 5:
-			NVIC_SetPriority(TIM6_IRQn, 0);
+			#if defined STM32F0
+			#else
+				NVIC_SetPriority(TIM6_IRQn, 0);
+			#endif
 			break;
 		case 6:
 			NVIC_SetPriority(TIM7_IRQn, 0);
