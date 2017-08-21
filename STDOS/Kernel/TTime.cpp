@@ -262,7 +262,7 @@ bool TimeWheel::Expired()
 ///////////////////////////////////////////////////////////////////////////
 TimeCost::TimeCost()
 {
-    this->Start = 0;
+    this->Reset();
 }
 
 void TimeCost::Reset(){}

@@ -117,6 +117,7 @@ void TSys::Init()
             break;
     }
     //    this->Inited = 1;
+	this->InitClock();
 	Time.Init();
 }	
 void TSys::ShowInfo()const
@@ -198,7 +199,7 @@ void TSys::SetStackTop(uint addr)
 // 系统启动后的毫秒数
 UInt64 TSys::Ms()const  
 {
-    return Time.Milliseconds;
+    return Time.Current();
 }
 // 系统绝对当前时间，秒
 uint TSys::Seconds()const  
