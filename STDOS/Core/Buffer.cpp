@@ -353,13 +353,7 @@ int __fastcall Buffer::operator[](int a1, int a2)
 }
 // 4B0: using guessed type int dword_4B0[4];
 
-//----- (000004C0) --------------------------------------------------------
-int __fastcall BufferRef::Set(int result, void *a2, int a3)
-{
-  *(_DWORD *)(result + 4) = a2;
-  *(_DWORD *)(result + 8) = a3;
-  return result;
-}
+
 
 //----- (000004C8) --------------------------------------------------------
 _DWORD *__fastcall Buffer::Sub(Buffer *this, int a2, int a3, int a4)
@@ -612,18 +606,7 @@ int  Buffer::CompareTo(Buffer *this, const Buffer *a2)
   return Buffer::CompareTo(this, (const void *)*(_QWORD *)((char *)a2 + 4), *(_QWORD *)((char *)a2 + 4) >> 32);
 }
 
-//----- (000007E8) --------------------------------------------------------
-int  Buffer::operator[](int a1, int a2)
-{
-  int v2; // r5@1
-  int v3; // r4@1
 
-  v2 = a1;
-  v3 = a2;
-  if ( a2 < 0 || *(_DWORD *)(a1 + 8) <= a2 )
-    assert_failed2((const char *)dword_830, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x4Bu);
-  return *(_BYTE *)(*(_DWORD *)(v2 + 4) + v3);
-}
 // 830: using guessed type int dword_830[4];
 
 //----- (00000840) --------------------------------------------------------
@@ -832,8 +815,16 @@ byte &Buffer::operator[](int i)
 byte Buffer::operator[](int i)const
 {
     return ((byte*)this->_Arr)[i];
+//}
+//int  Buffer::operator[](int i)
+//{
+  //auto v2 = this;
+	auto a2=i;
+  auto v3 = a2;
+  if ( a2 < 0 || this->_Length <= a2 )
+    assert_failed2((const char *)dword_830, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x4Bu);
+  return this->_Arr[a2];
 }
-
 // 原始拷贝、清零，不检查边界
 void Buffer::Copy(void *dest, const void *source, int len)
 {    
@@ -1197,5 +1188,6 @@ String  Buffer::ToString()const
 // 打包一个指针和长度指定的数据区
 void BufferRef::Set(void* ptr, int len)
 {
-	
+	this->_Arr=(char*)ptr;
+	this->_Length=len;
 }

@@ -12,10 +12,10 @@
 
 
 
-//int clock()
-//{
-//  return TTime::Current((TTime *)&Time);
-//}
+int clock()
+{
+  return  Time.Current();
+}
 
 //int __fastcall time(int *a1)
 //{
