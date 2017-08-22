@@ -1,3 +1,4 @@
+#include <string.h>
 #include "Sys.h"
 
 
@@ -31,43 +32,8 @@ int dword_4B0[4] = { 3867916516, 3068692384, 2358634378, 0 }; // weak
 int dword_600 = 2573; // weak
 int dword_830[4] = { 3867916516, 3068692384, 2358634378, 0 }; // weak
 void *off_934 = (void *)0x631; // weak
-// extern _UNKNOWN `vtable for'Object; weak
 
-
-//----- (00000000) --------------------------------------------------------
-int Buffer::Set(Buffer *this, int a2, int a3, int a4)
-{
-  Buffer *v4; // r5@1
-  int v5; // r4@1
-  int result; // r0@3
-  int v7; // r0@5
-
-  v4 = this;
-  v5 = a4;
-  if ( *((_DWORD *)this + 1) && a4 )
-  {
-    v7 = *((_DWORD *)this + 2);
-    if ( v7 - a3 > 0 )
-    {
-      if ( a4 < 0 || a4 > v7 - a3 )
-        v5 = v7 - a3;
-      if ( v5 )
-        _aeabi_memset(*((_DWORD *)v4 + 1) + a3, v5, a2);
-      result = v5;
-    }
-    else
-    {
-      result = 0;
-    }
-  }
-  else
-  {
-    result = 0;
-  }
-  return result;
-}
-// 9B8: using guessed type int __fastcall _aeabi_memset(_DWORD, _DWORD, _DWORD);
-
+#if 0
 //----- (00000040) --------------------------------------------------------
 _DWORD * Buffer::Sub(Buffer *this, int a2, int a3, int a4)
 {
@@ -789,7 +755,7 @@ int  Buffer::GetBuffer(Buffer *this)
 {
   return *((_DWORD *)this + 1);
 }
-
+#endif
 
 
 
@@ -985,18 +951,32 @@ int Buffer::Copy(const Buffer &src, int destIndex)
     return len;
 }
 
-// 用指定字节设置初始化一个区域
 int Buffer::Set(byte item, int index, int len)
 {
-    if (index + this->Length() < len)
+  int result; 
+  int v7;
+ 
+  if (this->_Length && len )
+  {
+    v7 = this->_Length;
+    if ( v7 - index > 0 )
     {
-        len = this->Length() - index;
+      if ( len < 0 || len > v7 - index )
+        len = v7 - index;
+      if ( len )
+        memset(this->_Arr + index, len, item);
+      result = len;
     }
-    for (int i = 0; i < len; i++)
+    else
     {
-        ((byte*)this->_Arr)[index + i] = item;
+      result = 0;
     }
-    return len;
+  }
+  else
+  {
+    result = 0;
+  }
+  return result;
 }
 void Buffer::Clear(byte item)
 {
