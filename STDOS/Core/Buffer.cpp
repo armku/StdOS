@@ -1,14 +1,23 @@
 #include "Sys.h"
 
+char chartmp[512];
+// 打包一个指针和长度指定的数据区
 Buffer::Buffer(void *ptr, int len)
 {
     this->_Arr = (char*)ptr;
     this->_Length = len; 
 }
 
-Buffer &Buffer::operator = (const Buffer &rhs)
+// 对象mov操作，指针和长度归我，清空对方
+Buffer::Buffer(Buffer&& rval)
 {
-    if (this->_Length < rhs._Length)
+
+}
+
+// 从另一个对象拷贝数据和长度，长度不足且扩容失败时报错
+Buffer& Buffer::operator = (const Buffer& rhs)
+{
+if (this->_Length < rhs._Length)
     {
         debug_printf("Error: Buffer copy: Buffer length mismath src: %d ,dst: %d \n", rhs._Length, this->_Length);
     }
@@ -22,7 +31,7 @@ Buffer &Buffer::operator = (const Buffer &rhs)
     }
     return  *this;	
 }
-
+// 从指针拷贝，使用我的长度
 Buffer &Buffer::operator = (const void *prt)
 {
     for (int i = 0; i < this->_Length; i++)
@@ -32,17 +41,20 @@ Buffer &Buffer::operator = (const void *prt)
     return  *this;
 }
 
-//设置长度，可自动扩容 
+// 设置数组长度。只能缩小不能扩大，子类可以扩展以实现自动扩容
 bool Buffer::SetLength(int len)
-{
-    
+{    
     {
         this->_Length = len;
     }
     return true;	
 }
+//virtual void Buffer::SetBuffer(void* ptr, int len)
+//{
 
-//设置指定位置的值，长度不足时报错
+//}
+
+// 设置指定位置的值，长度不足时自动扩容
 bool Buffer::SetAt(int index, byte value)
 {
     if (index >= this->_Length)
@@ -53,13 +65,7 @@ bool Buffer::SetAt(int index, byte value)
     return true;
 }
 
-//自我索引运算符[] 返回指定元素的第一个字节
-byte Buffer::operator[](int i)const
-{
-    return ((byte*)this->_Arr)[i];
-}
-
-//支持buf[i]=0x33的语法
+// 重载索引运算符[]，返回指定元素的第一个字节
 byte &Buffer::operator[](int i)
 {
     if ((i < 0) || (i > this->_Length))
@@ -69,8 +75,13 @@ byte &Buffer::operator[](int i)
     }
     return ((byte*)(this->_Arr))[i];
 }
+//自我索引运算符[] 返回指定元素的第一个字节
+byte Buffer::operator[](int i)const
+{
+    return ((byte*)this->_Arr)[i];
+}
 
-//原始拷贝 清零 不检查边界
+// 原始拷贝、清零，不检查边界
 void Buffer::Copy(void *dest, const void *source, int len)
 {
     for (int i = 0; i < len; i++)
@@ -78,7 +89,6 @@ void Buffer::Copy(void *dest, const void *source, int len)
         ((byte*)dest)[i] = ((byte*)source)[i];
     }
 }
-
 void Buffer::Zero(void *dest, int len)
 {
     for (int i = 0; i < len; i++)
@@ -86,8 +96,7 @@ void Buffer::Zero(void *dest, int len)
         ((byte*)dest)[i] = 0;
     }
 }
-
-//拷贝数据，默认-1长度表示当前长度 
+// 拷贝数据，默认-1长度表示当前长度
 int Buffer::Copy(int destIndex, const void *src, int len)
 {
     if (len ==  - 1)
@@ -104,8 +113,7 @@ int Buffer::Copy(int destIndex, const void *src, int len)
     }
 	return len;
 }
-
-//把数据复制到目标缓冲区，默认-1长度表示当前长度
+// 把数据复制到目标缓冲区，默认-1长度表示当前长度
 int Buffer::CopyTo(int destIndex, void *dest, int len)const
 {
     if (len ==  - 1)
@@ -122,8 +130,7 @@ int Buffer::CopyTo(int destIndex, void *dest, int len)const
     }
 	return len;
 }
-
-//拷贝数据，默认-1长度表示两者最小长度 
+// 拷贝数据，默认-1长度表示两者最小长度
 int Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
 {
     if (len ==  - 1)
@@ -141,7 +148,7 @@ int Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
     }
 	return len;
 }
-
+// 从另一个对象拷贝数据和长度，长度不足且扩容失败时报错
 int Buffer::Copy(const Buffer &src, int destIndex)
 {
     int len = this->Length();
@@ -155,7 +162,8 @@ int Buffer::Copy(const Buffer &src, int destIndex)
     }
     return len;
 }
-//用指定字节设置初始化一个区域
+
+// 用指定字节设置初始化一个区域
 int Buffer::Set(byte item, int index, int len)
 {
     if (index + this->Length() < len)
@@ -175,21 +183,20 @@ void Buffer::Clear(byte item)
         ((byte*)this->_Arr)[i] = item;
     }
 }
-
-//截取一个子缓冲区，默认-1长度表示剩余全部		
-Buffer Buffer::Sub(int index, int length)
+// 截取一个子缓冲区，默认-1长度表示剩余全部
+//### 这里逻辑可以考虑修改为，当len大于内部长度时，直接用内部长度而不报错，方便应用层免去比较长度的啰嗦
+Buffer Buffer::Sub(int index, int len)
 {
-    if (length < 0)
+if (len < 0)
     {
         return Buffer(((byte*)this->_Arr) + index, this->Length() - index);
     }
-    if (index + length > this->_Length)
+    if (index + len > this->_Length)
     {
-        length = this->_Length - index;
+        len = this->_Length - index;
     }
-    return Buffer(((byte*)this->_Arr) + index, length);
+    return Buffer(((byte*)this->_Arr) + index, len);
 }
-
 const Buffer Buffer::Sub(int index, int len)const
 {
     if (len < 0)
@@ -201,6 +208,62 @@ const Buffer Buffer::Sub(int index, int len)const
         len = this->_Length - index;
     }
     return Buffer(((byte*)this->_Arr) + index, len);
+}
+
+// 显示十六进制数据，指定分隔字符和换行长度
+String& Buffer::ToHex(String& str, char sep, int newLine) const
+{
+
+}
+// 显示十六进制数据，指定分隔字符和换行长度
+String Buffer::ToHex(char sep, int newLine) const
+{
+
+}
+
+ushort	Buffer::ToUInt16() const
+{
+
+}
+uint	Buffer::ToUInt32() const
+{
+
+}
+UInt64	Buffer::ToUInt64() const
+{
+
+}
+void Buffer::Write(ushort value, int index)
+{
+
+}
+void Buffer::Write(short value, int index)
+{
+
+}
+void Buffer::Write(uint value, int index)
+{
+
+}
+void Buffer::Write(int value, int index)
+{
+
+}
+void Buffer::Write(UInt64 value, int index)
+{
+
+}
+
+// 输出对象的字符串表示方式
+String &Buffer::ToStr(String &str)const
+{	
+    String *ret = new String();
+    return  *ret;
+}
+// 包装为字符串对象
+String Buffer::AsString() const
+{
+
 }
 
 int Buffer::CompareTo(const Buffer &bs)const
@@ -218,7 +281,6 @@ int Buffer::CompareTo(const Buffer &bs)const
     }
     return 0;
 }
-
 int Buffer::CompareTo(const void *ptr, int len)const
 {
     if (len > this->_Length)
@@ -239,8 +301,6 @@ int Buffer::CompareTo(const void *ptr, int len)const
     }
     return ret;
 }
-
-
 bool operator == (const Buffer &bs1, const Buffer &bs2)
 {
     if (bs1.Length() != bs2.Length())
@@ -256,8 +316,6 @@ bool operator == (const Buffer &bs1, const Buffer &bs2)
     }
     return true;
 }
-
-
 bool operator == (const Buffer &bs1, const void *ptr)
 {
     for (int i = 0; i < bs1.Length(); i++)
@@ -269,7 +327,6 @@ bool operator == (const Buffer &bs1, const void *ptr)
     }
     return true;
 }
-
 bool operator != (const Buffer &bs1, const Buffer &bs2)
 {
     if (bs1.Length() != bs2.Length())
@@ -285,7 +342,6 @@ bool operator != (const Buffer &bs1, const Buffer &bs2)
     }
     return false;
 }
-
 bool operator != (const Buffer &bs1, const void *ptr)
 {
     for (int i = 0; i < bs1.Length(); i++)
@@ -297,41 +353,6 @@ bool operator != (const Buffer &bs1, const void *ptr)
     }
     return false;
 }
-
-//void Buffer::Show(bool newLine)const
-//{
-//    if (newLine)
-//    {
-//        for (int i = 0; i < this->_Length - 1; i++)
-//        {
-//            printf("%02X ", ((byte*)(this->_Arr))[i]);
-//        }
-//        printf("%02X", ((byte*)(this->_Arr))[this->_Length - 1]);
-//    }
-//    else
-//    {
-//        printf("%s", ((byte*)(this->_Arr)));
-//    }    
-//    Object::Show(true);
-//}
-
-
-char chartmp[512];
-String &Buffer::ToStr(String &str)const
-{	
-    String *ret = new String();
-    return  *ret;
-}
-String  Buffer::ToString()const
-{
-	for(int i=0;i<this->_Length;i++)
-	{
-		chartmp[i]=this->_Arr[i];
-	}
-	chartmp[this->_Length]=0;
-    return String(chartmp);
-}
-
 
 #if DEBUG
     void Buffer::Test()
@@ -392,3 +413,39 @@ String  Buffer::ToString()const
 
     }
 #endif
+
+void Buffer::move(Buffer& rval)
+{
+
+}
+
+String  Buffer::ToString()const
+{
+	for(int i=0;i<this->_Length;i++)
+	{
+		chartmp[i]=this->_Arr[i];
+	}
+	chartmp[this->_Length]=0;
+    return String(chartmp);
+}
+
+// 打包一个指针和长度指定的数据区
+void BufferRef::Set(void* ptr, int len)
+{
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
