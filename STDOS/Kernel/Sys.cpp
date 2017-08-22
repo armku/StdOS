@@ -9,6 +9,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include <string.h>
 #include "Array.h"
 #include "TInterrupt.h"
+#include "SerialPort.h"
 
 #ifdef STM32F0
 	#include "stm32f0xx.h"
@@ -17,6 +18,78 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #elif defined STM32F4
 	#include "stm32f4xx.h"
 #endif
+
+uint Get_JTAG_ID(void)
+{
+  uint result;
+
+//  if ( vE00FFFE8 & 8 )
+//    result = (vE00FFFD0 << 8) & 0xFFF | ((uint)vE00FFFE4 >> 3) | (32 * (vE00FFFE8 & 7) + 1);
+//  else
+    result = 0;
+  return result;
+}
+int SmartOS_Log(const String *a1)
+{
+  const Buffer *v1; 
+  int result; 
+  SerialPort* v3; 
+
+  v1 = (const Buffer *)a1;
+  if (Sys.Clock  && Sys.MessagePort !=COM_NONE)
+  {
+    v3 = SerialPort::GetMessagePort();
+//    if ( v3 && v3->Remap)
+//      result = v3->Write(v1);
+//    else
+      result = 0;
+  }
+  else
+  {
+    result = 0;
+  }
+  return result;
+}
+void ExitCritical(void)
+{
+//  enable_irq();
+}
+void EnterCritical(void)
+{
+//  disable_irq();
+}
+//uint _REV(uint a1)
+//{
+//  return rev(a1);
+//}
+
+int REV16(ushort a1)
+{
+  return (ushort)REV16(a1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 TSys Sys; //系统参数
 extern "C"
 {
@@ -386,12 +459,6 @@ void TSys::Start()
 }
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-void EnterCritical()
-{
-}
-void ExitCritical()
-{
-}
 uint _REV(uint value)
 {
 	return value;
