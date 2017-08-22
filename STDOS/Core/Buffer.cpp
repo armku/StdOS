@@ -442,11 +442,7 @@ String *__fastcall Buffer::ToHex(Buffer *this, int a2, int a3, int a4)
 }
 // 994: using guessed type int String::String(void);
 
-//----- (00000630) --------------------------------------------------------
-String * Buffer::ToStr(Buffer *this, String *a2)
-{
-  return Buffer::ToHex(this, a2, 45, 32);
-}
+
 
 //----- (00000644) --------------------------------------------------------
 int  Buffer::CopyTo(Buffer *this, int a2, void *a3, int a4)
@@ -707,22 +703,21 @@ int  operator!=(Buffer *this, void *a2)
   }
   return result;
 }
-
 //----- (000008E6) --------------------------------------------------------
-int  operator!=(Buffer *this, int a2)
+int  operator!=(Buffer thi,int a2)
 {
   Buffer *v2; // r5@1
   const Buffer *v3; // r4@1
   int result; // r0@2
   int v5; // r6@7
 
-  v2 = this;
+  v2 = &thi;
   v3 = (const Buffer *)a2;
-  if ( *((_DWORD *)this + 1) == *(_DWORD *)(a2 + 4) )
+  if ( v2->_Length == *(_DWORD *)(a2 + 4) )
   {
     result = 0;
   }
-  else if ( *((_DWORD *)this + 1) && *(_DWORD *)(a2 + 4) )
+  else if ( v2->_Length && *(_DWORD *)(a2 + 4) )
   {
     v5 = Buffer::Length(this);
     if ( v5 == Buffer::Length(v3) )
@@ -736,28 +731,7 @@ int  operator!=(Buffer *this, int a2)
   }
   return result;
 }
-
-//----- (00000950) --------------------------------------------------------
-int  Buffer::Length(Buffer *this)
-{
-  return *((_DWORD *)this + 2);
-}
-
-//----- (00000958) --------------------------------------------------------
-_DWORD * Object::Object(_DWORD *result)
-{
-  *result = (char *)&`vtable for'Object + 8;
-  return result;
-}
-
-//----- (00000964) --------------------------------------------------------
-int  Buffer::GetBuffer(Buffer *this)
-{
-  return *((_DWORD *)this + 1);
-}
 #endif
-
-
 
 
 
@@ -1025,15 +999,15 @@ String Buffer::ToHex(char sep, int newLine) const
 
 ushort	Buffer::ToUInt16() const
 {
-
+	return 0;
 }
 uint	Buffer::ToUInt32() const
 {
-
+	return 0;
 }
 UInt64	Buffer::ToUInt64() const
 {
-
+	return 0;
 }
 void Buffer::Write(ushort value, int index)
 {
@@ -1059,8 +1033,7 @@ void Buffer::Write(UInt64 value, int index)
 // 输出对象的字符串表示方式
 String &Buffer::ToStr(String &str)const
 {	
-    String *ret = new String();
-    return  *ret;
+	return Buffer::ToHex(str, 45, 32);
 }
 // 包装为字符串对象
 String Buffer::AsString() const
@@ -1236,18 +1209,3 @@ void BufferRef::Set(void* ptr, int len)
 {
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
