@@ -30,7 +30,27 @@ String *CPUName;
 
 
 
+//int __fastcall fputc(int result)
+//{
+//  int v1; // r4@1
+//  const String *v2; // r0@4
+//  int v3; // [sp+0h] [bp-70h]@4
+//  String v4; // [sp+4h] [bp-6Ch]@4
 
+//  v1 = result;
+//  if ( dword_63C )
+//  {
+//    if ( (unsigned __int8)Sys != 255 )
+//    {
+//      v3 = (unsigned __int8)result;
+//      v2 = (const String *)String::String(&v4, &v3, 1);
+//      SmartOS_Log(v2);
+//      String::~String(&v4);
+//      result = v1;
+//    }
+//  }
+//  return result;
+//}
 
 //外部注册函数
 // 任务
@@ -89,6 +109,83 @@ void TimeSleep(uint us)
         Time.Delay(us);
     }
 }
+
+
+int SmartOS_printf(const char *format, ...);
+//int SmartOS_printf(int a1, int a2, int a3, int a4)
+//{
+//  int result; // r0@3
+//  int v5; // r4@5
+//  int v6; // r6@6
+//  Task *i; // r0@13
+//  int v8; // r1@14
+//  int v9; // r0@16
+//  int v10; // r5@17
+//  bool v11; // r0@21
+//  const String *v12; // r0@23
+//  int v13; // r5@23
+//  int v14; // [sp+0h] [bp-2D0h]@11
+//  int v15; // [sp+8h] [bp-2C8h]@11
+//  int *v16; // [sp+54h] [bp-27Ch]@17
+//  char v17[512]; // [sp+58h] [bp-278h]@14
+//  String v18; // [sp+258h] [bp-78h]@23
+//  int varg_r0; // [sp+2C0h] [bp-10h]@1
+//  int varg_r1; // [sp+2C4h] [bp-Ch]@1
+//  int varg_r2; // [sp+2C8h] [bp-8h]@1
+//  int varg_r3; // [sp+2CCh] [bp-4h]@1
+
+//  varg_r0 = a1;
+//  varg_r1 = a2;
+//  varg_r2 = a3;
+//  varg_r3 = a4;
+//  if ( dword_63C && (unsigned __int8)Sys != 255 )
+//  {
+//    v5 = 0;
+//    if ( byte_688 )
+//    {
+//      v6 = *(_BYTE *)(Task::Scheduler((Task *)(unsigned __int8)byte_688) + 54) - 1;
+//      if ( newline )
+//      {
+//        if ( v6 > 0 && (*(_BYTE *)varg_r0 || *(_BYTE *)(varg_r0 + 1) || *(_BYTE *)(varg_r0 + 2)) )
+//        {
+//          String::String(&v14, varg_r0);
+//          if ( v15 == 1 )
+//            v5 = 0;
+//          for ( i = 0; (signed int)i < v6; i = (Task *)((char *)i + 1) )
+//          {
+//            v8 = v5++;
+//            v17[v8] = 9;
+//          }
+//          v9 = Task::Current(i);
+//          v5 += _2snprintf(&v17[v5], 512 - v5, "%d=>", *(_DWORD *)(v9 + 4));
+//          String::~String((String *)&v14);
+//        }
+//      }
+//    }
+//    v16 = &varg_r1;
+//    v10 = _c89vsnprintf(&v17[v5], 512 - v5, varg_r0, &varg_r1);
+//    v16 = 0;
+//    if ( v10 )
+//    {
+//      v11 = *(&v17[v5 - 1] + v10) == 13 || *(&v17[v5 - 1] + v10) == 10;
+//      newline = v11;
+//      v12 = (const String *)String::String(&v18, v17, v5 + v10);
+//      v13 = SmartOS_Log(v12) + v10;
+//      String::~String(&v18);
+//      result = v13;
+//    }
+//    else
+//    {
+//      result = 0;
+//    }
+//  }
+//  else
+//  {
+//    result = 0;
+//  }
+//  return result;
+//}
+
 
 uint Get_JTAG_ID(void)
 {
@@ -155,6 +252,28 @@ TSys::TSys()
     this->MessagePort = COM1;
 	
 	Interrupt.Init();
+	
+	
+	
+	
+//	TSys *v1; // r4@1
+
+//  v1 = this;
+//  *((_DWORD *)this + 18) = &g_Config;
+//  TSys::OnInit(this);
+//  *((_DWORD *)v1 + 19) = 0;
+//  *((_WORD *)v1 + 12) = 6431;
+//  *((_DWORD *)v1 + 7) = 50469151;
+//  *((_DWORD *)v1 + 8) = 6431;
+//  *((_DWORD *)v1 + 9) = 6431;
+//  *((_DWORD *)v1 + 3) = "SmartOS_CPU";
+//  *((_DWORD *)v1 + 4) = "X3_nnhy";
+//  *((_DWORD *)v1 + 5) = &unk_6E8;
+//  TInterrupt::Init((TInterrupt *)&Interrupt);
+//  *((_DWORD *)v1 + 16) = 1;
+//  *((_DWORD *)v1 + 17) = 1;
+//  *((_BYTE *)v1 + 80) = 0;
+//  return v1;
 }
 // 初始化系统时钟
 void TSys::InitClock()
@@ -237,12 +356,87 @@ void TSys::Init()
             break;
     }
     //    this->Inited = 1;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	this->InitClock();
 	Time.Init();
 }		
 void TSys::ShowInfo() const
 {
 	this->OnShowInfo();
+	
+	
+//	TSys *v1; // r4@1
+//  int v2; // ST00_4@1
+//  int v3; // r3@1
+//  int v4; // r5@1
+//  int v5; // r6@1
+//  int v6; // r1@1
+//  int v7; // r2@1
+//  int v8; // r3@1
+//  Object *v9; // r0@1
+//  int v10; // r1@1
+//  int v11; // r2@1
+//  int v12; // r3@1
+//  int v13; // r3@1
+//  int v14; // r1@1
+//  int v15; // r2@1
+//  int v16; // r3@1
+//  String v18; // [sp+4h] [bp-1D4h]@1
+//  char v19; // [sp+58h] [bp-180h]@1
+//  char v20; // [sp+5Ch] [bp-17Ch]@1
+//  char v21; // [sp+60h] [bp-178h]@1
+//  char v22; // [sp+64h] [bp-174h]@1
+//  char v23; // [sp+70h] [bp-168h]@1
+//  String v24; // [sp+C4h] [bp-114h]@1
+//  int v25; // [sp+C8h] [bp-110h]@1
+//  String v26; // [sp+118h] [bp-C0h]@1
+//  int v27; // [sp+11Ch] [bp-BCh]@1
+//  String v28; // [sp+16Ch] [bp-6Ch]@1
+//  int v29; // [sp+170h] [bp-68h]@1
+
+//  v1 = this;
+//  v2 = *((_DWORD *)this + 5);
+//  SmartOS_printf(
+//    (int)"%s::%s Code:%04X %s \r\n",
+//    *(_QWORD *)((char *)v1 + 12) >> 32,
+//    *(_QWORD *)((char *)v1 + 12),
+//    *((_WORD *)this + 12));
+//  SmartOS_printf((int)"Build:%s %s\r\n", (int)"X3_nnhy", (int)"2017-08-10 23:23:39", v3);
+//  Version::Version((Version *)&v21, *((_DWORD *)v1 + 9));
+//  Version::Version((Version *)&v20, *((_DWORD *)v1 + 8));
+//  Version::Version((Version *)&v19, *((_DWORD *)v1 + 7));
+//  Version::ToString((Version *)&v24);
+//  v4 = v25;
+//  Version::ToString((Version *)&v26);
+//  v5 = v27;
+//  Version::ToString((Version *)&v28);
+//  SmartOS_printf((int)"AppVer:%s HardVer:%s CoreVer:%s\r\n", v29, v5, v4);
+//  String::~String(&v28);
+//  String::~String(&v26);
+//  String::~String(&v24);
+//  TSys::OnShowInfo(v1);
+//  SmartOS_printf((int)"ChipID:", v6, v7, v8);
+//  v9 = (Object *)ByteArray::ByteArray((ByteArray *)&v23, (char *)v1 + 40, 12, 0);
+//  Object::Show(v9, 0);
+//  Array::~Array((Array *)&v23);
+//  String::String(&v18, &dword_5AC);
+//  String::Copy(&v18, 0, (char *)v1 + 40, 12);
+//  String::Show(&v18, 1);
+//  SmartOS_printf((int)"Time : ", v10, v11, v12);
+//  DateTime::Now((DateTime *)&v22);
+//  DateTime::Show((DateTime *)&v22, 0);
+//  SmartOS_printf((int)" Start: %d/%d \r\n", *((_QWORD *)v1 + 8) >> 32, *((_QWORD *)v1 + 8), v13);
+//  SmartOS_printf((int)"\r\n", v14, v15, v16);
+//  return String::~String(&v18);
 }	
 uint TSys::HeapBase() const	// 堆起始地址，前面是静态分配内存
 {
@@ -267,6 +461,8 @@ UInt64 TSys::Ms()const
 uint TSys::Seconds()const  
 {
     return Time.Seconds;
+	
+	 //return Time + dword_6A0;
 }
 
 // 毫秒级延迟
@@ -287,6 +483,38 @@ void TSys::Sleep(int ms)const
         }
         TimeSleep(ms *1000);
     }
+	
+	
+	
+//	int v4; // r4@1
+//  int result; // r0@2
+//  TaskScheduler *v6; // r0@7
+//  int v7; // [sp+0h] [bp-18h]@1
+
+//  v7 = a4;
+//  v4 = a2;
+//  if ( *((_DWORD *)this + 19) )
+//  {
+//    result = (*((int (__fastcall **)(_DWORD))this + 19))(a2);
+//  }
+//  else
+//  {
+//    if ( a2 > 1000 )
+//      SmartOS_printf((int)dword_31C, a2, a3, a4);
+//    result = (unsigned __int8)byte_688;
+//    if ( byte_688 && v4 )
+//    {
+//      v7 = 0;
+//      v6 = (TaskScheduler *)Task::Scheduler(0);
+//      result = TaskScheduler::ExecuteForWait(v6, v4, (bool *)&v7);
+//      if ( result >= v4 )
+//        return result;
+//      v4 -= result;
+//    }
+//    if ( v4 )
+//      result = TTime::Sleep((TTime *)&Time, v4, 0);
+//  }
+//  return result;
 }	
 // 微秒级延迟
 void TSys::Delay(int us)const  
@@ -307,6 +535,42 @@ void TSys::Delay(int us)const
         }
         TimeSleep(us);
     }
+	
+	
+	
+//	 signed int v4; // r4@1
+//  int result; // r0@3
+//  TaskScheduler *v6; // r0@9
+//  int v7; // r6@9
+//  int v8; // r6@9
+//  int v9; // [sp+0h] [bp-20h]@1
+
+//  v9 = a4;
+//  v4 = a2;
+//  if ( *((_DWORD *)this + 19) && a2 >= 2000 )
+//  {
+//    result = (*((int (__fastcall **)(_DWORD))this + 19))((a2 + 500) / 1000);
+//  }
+//  else
+//  {
+//    if ( a2 > 1000000 )
+//      SmartOS_printf((int)dword_28C, a2, a3, a4);
+//    result = (unsigned __int8)byte_688;
+//    if ( byte_688 && v4 && v4 >= 1000 )
+//    {
+//      v9 = 0;
+//      v6 = (TaskScheduler *)Task::Scheduler((Task *)&loc_3E8);
+//      v7 = TaskScheduler::ExecuteForWait(v6, v4 / (signed int)&loc_3E8, (bool *)&v9);
+//      result = 1000;
+//      v8 = 1000 * v7;
+//      if ( v8 >= v4 )
+//        return result;
+//      v4 -= v8;
+//    }
+//    if ( v4 )
+//      result = TTime::Delay((TTime *)&Time, v4);
+//  }
+//  return result;
 }
 bool TSys::CheckMemory() const
 {
@@ -317,15 +581,47 @@ bool TSys::CheckMemory() const
 void TSys::Reboot(int msDelay)const
 {
     this->Reset();
+	
+//	 TSys *v2; // r5@1
+//  int v3; // r4@1
+//  __int64 v4; // ST00_8@3
+
+//  v2 = this;
+//  v3 = a2;
+//  if ( a2 <= 0 )
+//    TSys::Reset(this);
+//  TSys::AddTask(v2, (void (__cdecl *)(void *))&TSys::Reset, (void *)v2, v3, -1, (const char *)sub_3C8);
+//  return v4;
 }
 // 系统跟踪
 void TSys::InitTrace(void* port) const
 {
-	
+	//*(_DWORD *)trace = a2;
 }	
 void TSys::Trace(int times) const
 {
-	
+//	int v2; // r5@1
+//  int result; // r0@1
+//  OutputPort *v4; // r6@3
+//  char v5; // r0@3
+//  bool v6; // zf@2
+
+//  v2 = a2;
+//  result = *(_DWORD *)trace;
+//  if ( *(_DWORD *)trace )
+//  {
+//    while ( 1 )
+//    {
+//      result = v2;
+//      v6 = v2-- == 0;
+//      if ( v6 )
+//        break;
+//      v4 = *(OutputPort **)trace;
+//      v5 = (*(int (__fastcall **)(_DWORD))(*(_DWORD *)trace + 8))(*(_DWORD *)trace);
+//      OutputPort::Write(v4, v5 ^ 1);
+//    }
+//  }
+//  return result;
 }	
 
 
@@ -588,6 +884,19 @@ uint TSys::AddTask(Action func, void *param, int dueTime, int period, cstring na
     }
 
     return _Scheduler->Add(func, param, dueTime, period, name);
+	
+	
+	
+//	void (__cdecl *v6)(void *); // r4@1
+//  void *v7; // r5@1
+//  int v8; // r6@1
+//  TaskScheduler *v9; // r0@1
+
+//  v6 = a2;
+//  v7 = a3;
+//  v8 = a4;
+//  v9 = (TaskScheduler *)Task::Scheduler(this);
+//  return TaskScheduler::Add(v9, v6, v7, v8, a5, a6);
 }
 void TSys::RemoveTask(uint &taskid)const
 {
@@ -595,18 +904,104 @@ void TSys::RemoveTask(uint &taskid)const
         assert_ptr(_Scheduler);
     #endif 
     _Scheduler->Remove(taskid);
+	
+	
+	
+//	unsigned int *v2; // r4@1
+//  TaskScheduler *v3; // r0@2
+//  int result; // r0@3
+
+//  v2 = a2;
+//  if ( *a2 )
+//  {
+//    v3 = (TaskScheduler *)Task::Scheduler((Task *)*a2);
+//    TaskScheduler::Remove(v3, *v2);
+//  }
+//  result = 0;
+//  *v2 = 0;
+//  return result;
+	
+	
+	
+	
 }
 // 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
 bool TSys::SetTask(uint taskid, bool enable, int msNextTime)const
 {
     //    _Scheduler->SetTask(taskid, enable, msNextTime);
     return true;
+	
+	
+//	bool v4; // r6@1
+//  int v5; // r7@1
+//  signed int result; // r0@2
+//  Task *v7; // r0@4
+
+//  v4 = a3;
+//  v5 = a4;
+//  if ( a2 )
+//  {
+//    v7 = (Task *)Task::Get((Task *)a2, a2);
+//    if ( v7 )
+//    {
+//      Task::Set(v7, v4, v5);
+//      result = 1;
+//    }
+//    else
+//    {
+//      result = 0;
+//    }
+//  }
+//  else
+//  {
+//    result = 0;
+//  }
+//  return result;
 }
 
 // 改变任务周期
 bool TSys::SetTaskPeriod(uint taskid, int period) const
 {
 	return false;
+	
+	
+//	TSys *v3; // r7@1
+//  int v4; // r4@1
+//  signed int result; // r0@2
+//  int v6; // r0@4
+//  int v7; // r5@4
+//  __int64 v8; // r0@7
+
+//  v3 = this;
+//  v4 = a3;
+//  if ( a2 )
+//  {
+//    v6 = Task::Get((Task *)a2, a2);
+//    v7 = v6;
+//    if ( v6 )
+//    {
+//      if ( v4 )
+//      {
+//        *(_DWORD *)(v6 + 20) = v4;
+//        LODWORD(v8) = TSys::Ms(v3);
+//        *(_QWORD *)(v7 + 24) = v8 + v4;
+//      }
+//      else
+//      {
+//        *(_BYTE *)(v6 + 52) = 0;
+//      }
+//      result = 1;
+//    }
+//    else
+//    {
+//      result = 0;
+//    }
+//  }
+//  else
+//  {
+//    result = 0;
+//  }
+//  return result;
 }
 // 开始系统大循环
 void TSys::Start()
@@ -626,6 +1021,17 @@ void TSys::Start()
     {
         _Scheduler->Start();
     }
+	
+	
+	
+//	TSys *v1; // r4@1
+//  TaskScheduler *v2; // r0@1
+
+//  v1 = this;
+//  TSys::OnStart(this);
+//  *((_BYTE *)v1 + 80) = (unsigned int)SmartOS_printf;
+//  v2 = (TaskScheduler *)Task::Scheduler((Task *)SmartOS_printf);
+//  return TaskScheduler::Start(v2);
 }
 
 
