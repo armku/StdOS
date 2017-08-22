@@ -18,6 +18,77 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #elif defined STM32F4
 	#include "stm32f4xx.h"
 #endif
+TSys Sys; //系统参数
+extern "C"
+{
+    extern uint __heap_base;
+    extern uint __heap_limit;
+    extern uint __initial_sp;
+}
+
+String *CPUName;
+
+
+
+
+
+//外部注册函数
+// 任务
+// 任务类
+TaskScheduler *_Scheduler;
+void TimeSleep(uint us)
+{
+    // 在这段时间里面，去处理一下别的任务
+    if (_Scheduler && (us >= 1000))
+    {
+        // 记录当前正在执行任务
+        Task *task = _Scheduler->Current;
+
+        UInt64 start = Time.Current()*1000;
+        // 1ms一般不够调度新任务，留给硬件等待
+        UInt64 end = start + us - 1000;
+        // 如果休眠时间足够长，允许多次调度其它任务
+        int cost = 0;
+        while (true)
+        {
+            UInt64 start2 = Time.Current()*1000;
+            bool bb = false;
+            _Scheduler->Execute(us, bb);
+
+            UInt64 now = Time.Current()*1000;
+            cost += (int)(now - start2);
+
+            // us=0 表示释放一下CPU
+            if (!us)
+            {
+                return ;
+            }
+
+            if (now >= end)
+            {
+                break;
+            }
+        }
+
+        if (task)
+        {
+            _Scheduler->Current = task;
+            task->SleepTime += cost;
+        }
+
+        cost = (int)(Time.Current()*1000 - start);
+        if (cost > 0)
+        {
+            return ;
+        }
+
+        us -= cost;
+    }
+    if (us)
+    {
+        Time.Delay(us);
+    }
+}
 
 uint Get_JTAG_ID(void)
 {
@@ -68,38 +139,6 @@ int REV16(ushort a1)
   return (ushort)REV16(a1);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-TSys Sys; //系统参数
-extern "C"
-{
-    extern uint __heap_base;
-    extern uint __heap_limit;
-    extern uint __initial_sp;
-}
-
-String *CPUName;
-
 // 构造函数
 TSys::TSys()
 {
@@ -121,12 +160,8 @@ TSys::TSys()
 void TSys::InitClock()
 {
 	
-}
+}	
 // 初始化系统
-//初始化
-//初始化延迟函数
-//SYSTICK的时钟固定为HCLK时钟的1/8
-//SYSCLK:系统时钟
 void TSys::Init()
 {       
     #ifdef STM32F0
@@ -192,8 +227,106 @@ void TSys::Init()
     //    this->Inited = 1;
 	this->InitClock();
 	Time.Init();
+}		
+void TSys::ShowInfo() const
+{
+	this->OnShowInfo();
 }	
-void TSys::ShowInfo()const
+uint TSys::HeapBase() const	// 堆起始地址，前面是静态分配内存
+{
+	
+}	
+uint TSys::StackTop() const	// 栈顶，后面是初始化不清零区域
+{
+	
+}	
+void TSys::SetStackTop(uint addr)
+{
+	
+}	
+
+// 系统启动后的毫秒数
+UInt64 TSys::Ms()const  
+{
+    return Time.Current();
+}	
+
+// 系统绝对当前时间，秒
+uint TSys::Seconds()const  
+{
+    return Time.Seconds;
+}
+
+// 毫秒级延迟
+void TSys::Sleep(int ms)const  
+{
+    // 优先使用线程级睡眠
+    #if 0
+        if (OnSleep)
+        {
+            OnSleep(ms);
+        }
+        else
+    #endif 
+    {
+        if (ms > 1000)
+        {
+            debug_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！", ms);
+        }
+        TimeSleep(ms *1000);
+    }
+}	
+// 微秒级延迟
+void TSys::Delay(int us)const  
+{
+    // 如果延迟微秒数太大，则使用线程级睡眠
+    #if 0
+        if (OnSleep && us >= 2000)
+        {
+            OnSleep((us + 500) / 1000);
+        }
+        else
+    #endif 
+    {
+
+        if (us > 1000000)
+        {
+            debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！", us);
+        }
+        TimeSleep(us);
+    }
+}
+bool TSys::CheckMemory() const
+{
+	
+}	
+
+// 延迟异步重启
+void TSys::Reboot(int msDelay)const
+{
+    this->Reset();
+}
+// 系统跟踪
+void TSys::InitTrace(void* port) const
+{
+	
+}	
+void TSys::Trace(int times) const
+{
+	
+}	
+
+
+// 重启系统
+void TSys::Reset() const
+{
+	NVIC_SystemReset();
+}
+void TSys::OnInit()
+{
+	
+}	
+void TSys::OnShowInfo()const
 {
     uint Rx = 0;
     uint Px = 0;
@@ -254,158 +387,12 @@ void TSys::ShowInfo()const
 
     printf("Support: http://www.armku.com\n");
 }
-// 堆起始地址，前面是静态分配内存
-uint TSys::HeapBase() const
-{
-	return 0;
-}
-// 栈顶，后面是初始化不清零区域
-uint TSys::StackTop() const
-{
-	return 0;
-}
-
-void TSys::SetStackTop(uint addr)
-{
 	
-}
-// 系统启动后的毫秒数
-UInt64 TSys::Ms()const  
-{
-    return Time.Current();
-}
-// 系统绝对当前时间，秒
-uint TSys::Seconds()const  
-{
-    return Time.Seconds;
-}
-//外部注册函数
-// 任务
-// 任务类
-TaskScheduler *_Scheduler;
-void TimeSleep(uint us)
-{
-    // 在这段时间里面，去处理一下别的任务
-    if (_Scheduler && (us >= 1000))
-    {
-        // 记录当前正在执行任务
-        Task *task = _Scheduler->Current;
-
-        UInt64 start = Time.Current()*1000;
-        // 1ms一般不够调度新任务，留给硬件等待
-        UInt64 end = start + us - 1000;
-        // 如果休眠时间足够长，允许多次调度其它任务
-        int cost = 0;
-        while (true)
-        {
-            UInt64 start2 = Time.Current()*1000;
-            bool bb = false;
-            _Scheduler->Execute(us, bb);
-
-            UInt64 now = Time.Current()*1000;
-            cost += (int)(now - start2);
-
-            // us=0 表示释放一下CPU
-            if (!us)
-            {
-                return ;
-            }
-
-            if (now >= end)
-            {
-                break;
-            }
-        }
-
-        if (task)
-        {
-            _Scheduler->Current = task;
-            task->SleepTime += cost;
-        }
-
-        cost = (int)(Time.Current()*1000 - start);
-        if (cost > 0)
-        {
-            return ;
-        }
-
-        us -= cost;
-    }
-    if (us)
-    {
-        Time.Delay(us);
-    }
-}
-// 毫秒级延迟
-void TSys::Sleep(int ms)const  
-{
-    // 优先使用线程级睡眠
-    #if 0
-        if (OnSleep)
-        {
-            OnSleep(ms);
-        }
-        else
-    #endif 
-    {
-        if (ms > 1000)
-        {
-            debug_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！", ms);
-        }
-        TimeSleep(ms *1000);
-    }
-}
-
-// 微秒级延迟
-void TSys::Delay(int us)const  
-{
-    // 如果延迟微秒数太大，则使用线程级睡眠
-    #if 0
-        if (OnSleep && us >= 2000)
-        {
-            OnSleep((us + 500) / 1000);
-        }
-        else
-    #endif 
-    {
-
-        if (us > 1000000)
-        {
-            debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！", us);
-        }
-        TimeSleep(us);
-    }
-}
-bool TSys::CheckMemory() const
-{
-	return true;
-}
-// 延迟异步重启
-void TSys::Reboot(int msDelay)const
-{
-    this->Reset();
-}
-// 系统跟踪
-void TSys::InitTrace(void* port) const
-{
-}
-void TSys::Trace(int times) const
-{
-}
-// 重启系统
-void TSys::Reset() const
-{
-	NVIC_SystemReset();
-}
-void TSys::OnInit()
-{
-}
-void TSys::OnShowInfo() const
-{
-}
 void TSys::OnStart()
 {
-}
+	
+}	
+
 // 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
 uint TSys::AddTask(Action func, void *param, int dueTime, int period, cstring name)const
 {
@@ -419,7 +406,6 @@ uint TSys::AddTask(Action func, void *param, int dueTime, int period, cstring na
 
     return _Scheduler->Add(func, param, dueTime, period, name);
 }
-
 void TSys::RemoveTask(uint &taskid)const
 {
     #if 0
@@ -433,12 +419,13 @@ bool TSys::SetTask(uint taskid, bool enable, int msNextTime)const
     //    _Scheduler->SetTask(taskid, enable, msNextTime);
     return true;
 }
+
 // 改变任务周期
 bool TSys::SetTaskPeriod(uint taskid, int period) const
 {
 	return false;
 }
-//启动系统任务调度，该函数内部为死循环。*在此之间，添加的所有任务函数将得不到调度，所有睡眠方法无效！
+// 开始系统大循环
 void TSys::Start()
 {
     if (!_Scheduler)
@@ -457,6 +444,33 @@ void TSys::Start()
         _Scheduler->Start();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 uint _REV(uint value)
