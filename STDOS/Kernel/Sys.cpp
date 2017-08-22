@@ -159,7 +159,19 @@ TSys::TSys()
 // 初始化系统时钟
 void TSys::InitClock()
 {
-	
+//	TSys *v1; // r4@1
+//  int result; // r0@2
+//  int v3; // r0@3
+
+//  v1 = this;
+//  if ( *((_DWORD *)this + 1) != RCC_GetSysClock(this) || (result = *((_DWORD *)v1 + 2), result != HSE_VALUE) )
+//  {
+//    v3 = SetSysClock(*(_QWORD *)((char *)v1 + 4), *(_QWORD *)((char *)v1 + 4) >> 32);
+//    *((_DWORD *)v1 + 1) = RCC_GetSysClock(v3);
+//    result = *((_DWORD *)v1 + 1);
+//    SystemCoreClock = *((_DWORD *)v1 + 1);
+//  }
+//  return result;
 }	
 // 初始化系统
 void TSys::Init()
@@ -234,15 +246,15 @@ void TSys::ShowInfo() const
 }	
 uint TSys::HeapBase() const	// 堆起始地址，前面是静态分配内存
 {
-	
+//	return &_heap_base;
 }	
 uint TSys::StackTop() const	// 栈顶，后面是初始化不清零区域
 {
-	
+	//return (*((_WORD *)this + 31) << 10) + 536870656;
 }	
 void TSys::SetStackTop(uint addr)
 {
-	
+//	return _set_MSP(addr);
 }	
 
 // 系统启动后的毫秒数
@@ -298,7 +310,7 @@ void TSys::Delay(int us)const
 }
 bool TSys::CheckMemory() const
 {
-	
+	return true;
 }	
 
 // 延迟异步重启
@@ -321,10 +333,62 @@ void TSys::Trace(int times) const
 void TSys::Reset() const
 {
 	NVIC_SystemReset();
+//	vE000ED0C = (vE000ED0C & 0x700 | 0x5FA0000) + 4;
+//  __dsb();
+//  while ( 1 )
+//    ;
 }
 void TSys::OnInit()
 {
-	
+//	TSys *v1; // r4@1
+//  int v2; // r6@1
+//  int v3; // r3@1
+//  int v4; // r5@1
+//  signed int i; // r0@7
+//  int v6; // r8@13
+//  void *v7; // r0@13
+//  int v8; // r11@13
+//  int v9; // r3@13
+//  int result; // r0@13
+
+//  v1 = this;
+//  *((_DWORD *)this + 1) = 72000000;
+//  *((_DWORD *)this + 2) = HSE_VALUE;
+//  *(_BYTE *)this = 0;
+//  v2 = Get_JTAG_ID() == 1955;
+//  Buffer::Copy((TSys *)((char *)v1 + 40), (void *)0x1FFFF7E8, &loc_C, v3);
+//  *((_DWORD *)v1 + 14) = vE000ED00;
+//  v4 = vE0042000;
+//  if ( !vE0042000 && v2 )
+//    v4 = vE0042000;
+//  *((_WORD *)v1 + 27) = HIWORD(v4);
+//  *((_WORD *)v1 + 26) = v4 & 0xFFF;
+//  if ( v2 )
+//    *((_DWORD *)v1 + 1) = 120000000;
+//  Index = 0;
+//  *((_WORD *)v1 + 30) = v1FFFF7E0;
+//  if ( *((_WORD *)v1 + 30) != 0xFFFF )
+//  {
+//    *((_WORD *)v1 + 31) = (signed int)*((_WORD *)v1 + 30) >> 3;
+//    for ( i = 0; i < 11; ++i )
+//    {
+//      if ( MemSizes[i] == *((_WORD *)&Sys + 30) )
+//      {
+//        Index = i;
+//        break;
+//      }
+//    }
+//    *((_WORD *)v1 + 31) = RamSizes[2 * Index];
+//  }
+//  v6 = TSys::StackTop(v1);
+//  v7 = (void *)_get_MSP();
+//  v8 = v6 - (&_initial_sp - (_UNKNOWN *)v7);
+//  Buffer::Copy((Buffer *)(v6 - (&_initial_sp - (_UNKNOWN *)v7)), v7, (const void *)(&_initial_sp - (_UNKNOWN *)v7), v9);
+//  _set_MSP(v8);
+//  v40021018 |= 1u;
+//  result = v40010004 | 0x2000000;
+//  v40010004 |= 0x2000000u;
+//  return result;
 }	
 void TSys::OnShowInfo()const
 {
@@ -386,6 +450,125 @@ void TSys::OnShowInfo()const
     dt.Show();
 
     printf("Support: http://www.armku.com\n");
+	
+	
+	
+	
+	/////////////////////
+//	TSys *v1; // r4@1
+//  unsigned __int8 *v2; // r5@4
+//  int v3; // r1@18
+//  int v4; // r1@30
+//  int v5; // r0@30
+//  int v6; // r3@30
+//  int v7; // r2@30
+//  int v8; // r2@30
+//  int v9; // r1@30
+//  int v10; // r1@30
+//  int v11; // r1@37
+//  int v12; // r0@38
+//  int v13; // r1@38
+//  int v14; // r7@38
+
+//  v1 = this;
+//  SmartOS_printf("SmartOS::");
+//  if ( Get_JTAG_ID() == 1955 )
+//    SmartOS_printf("GD32");
+//  else
+//    SmartOS_printf("STM32");
+//  v2 = (unsigned __int8 *)v1 + 56;
+//  if ( (signed int)*((_WORD *)v1 + 26) <= 0 )
+//  {
+//    if ( *((_DWORD *)v1 + 14) )
+//    {
+//      if ( *((_DWORD *)v1 + 1) == 48000000 )
+//        SmartOS_printf("F130/F150");
+//      else
+//        SmartOS_printf("F103");
+//    }
+//  }
+//  else if ( *((_WORD *)v1 + 26) )
+//  {
+//    if ( *((_WORD *)v1 + 26) != 1040
+//      && *((_WORD *)v1 + 26) != 1042
+//      && *((_WORD *)v1 + 26) != 1044
+//      && *((_WORD *)v1 + 26) != 1072 )
+//    {
+//      if ( *((_WORD *)v1 + 26) == 1048 )
+//      {
+//        SmartOS_printf("F107");
+//      }
+//      else if ( *((_WORD *)v1 + 26) == 1042 )
+//      {
+//        SmartOS_printf("F130");
+//      }
+//      else if ( *((_WORD *)v1 + 26) != 1088 && *((_WORD *)v1 + 26) != 1092 )
+//      {
+//        v3 = *((_WORD *)v1 + 26);
+//        SmartOS_printf("F%03x");
+//      }
+//      else
+//      {
+//        SmartOS_printf("F030/F051");
+//      }
+//    }
+//    else
+//    {
+//      SmartOS_printf("F103");
+//    }
+//  }
+//  if ( Index >= 2 )
+//  {
+//    if ( Index >= 4 )
+//    {
+//      if ( Index >= 6 )
+//        SmartOS_printf(&dword_430);
+//      else
+//        SmartOS_printf(&dword_42C);
+//    }
+//    else
+//    {
+//      SmartOS_printf(&dword_428);
+//    }
+//  }
+//  else
+//  {
+//    SmartOS_printf(&dword_424);
+//  }
+//  v4 = (unsigned __int8)MemNames[Index];
+//  v5 = SmartOS_printf(&dword_438);
+//  RCC_GetSysClock(v5);
+//  v6 = *((_WORD *)v1 + 31);
+//  v7 = *((_WORD *)v1 + 30);
+//  SmartOS_printf(" %dMHz Flash:%dk RAM:%dk\r\n");
+//  v8 = *((_WORD *)v1 + 27);
+//  v9 = *((_WORD *)v1 + 26);
+//  SmartOS_printf("DevID:0x%04X RevID:0x%04X \r\n");
+//  v10 = *((_DWORD *)v1 + 14);
+//  SmartOS_printf("CPUID:%p");
+//  if ( *((_BYTE *)v1 + 59) == 65 )
+//    SmartOS_printf(" ARM:");
+//  if ( (*((_BYTE *)v1 + 58) & 0xF) == 12 )
+//  {
+//    SmartOS_printf(" ARMv6-M");
+//  }
+//  else if ( (*((_BYTE *)v1 + 58) & 0xF) == 15 )
+//  {
+//    SmartOS_printf(" ARMv7-M");
+//  }
+//  if ( (((unsigned int)*(_WORD *)v2 >> 4) & 0xFF0) == 3104 )
+//  {
+//    v11 = *v2 >> 4;
+//    SmartOS_printf(" Cortex-M%d:");
+//  }
+//  v12 = *((_BYTE *)v1 + 58);
+//  v13 = *v2 & 0xF;
+//  SmartOS_printf(" R%dp%d");
+//  SmartOS_printf("\r\n");
+//  TSys::HeapBase(v1);
+//  v14 = (*((_WORD *)v1 + 31) << 10) + 0x20000000;
+//  SmartOS_printf("Heap :(%p, %p) = 0x%x (%dk)\r\n");
+//  return SmartOS_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n");
 }
 	
 void TSys::OnStart()
