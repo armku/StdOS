@@ -58,10 +58,7 @@ _DWORD * Buffer::Sub(Buffer *this, int a2, int a3, int a4)
 }
 
 //----- (000000EC) --------------------------------------------------------
-int Buffer::Copy(Buffer *this, void *a2, const void *a3, int a4)
-{
-  return _aeabi_memmove(this, a2, a3);
-}
+
 // 9B4: using guessed type int __fastcall _aeabi_memmove(_DWORD, _DWORD, _DWORD);
 
 //----- (00000100) --------------------------------------------------------
@@ -482,13 +479,7 @@ int  Buffer::CopyTo(Buffer *this, int a2, void *a3, int a4)
 // 9B4: using guessed type int __fastcall _aeabi_memmove(_DWORD, _DWORD, _DWORD);
 
 //----- (00000690) --------------------------------------------------------
-int  Buffer::AsString(Buffer *this, int a2)
-{
-  __int64 v2; // r1@1
 
-  v2 = *(_QWORD *)(a2 + 4);
-  return String::String();
-}
 // 998: using guessed type int String::String(void);
 
 //----- (000006A4) --------------------------------------------------------
@@ -845,12 +836,10 @@ byte Buffer::operator[](int i)const
 
 // 原始拷贝、清零，不检查边界
 void Buffer::Copy(void *dest, const void *source, int len)
-{
-    for (int i = 0; i < len; i++)
-    {
-        ((byte*)dest)[i] = ((byte*)source)[i];
-    }
+{    
+	memmove(dest,source,len);
 }
+
 void Buffer::Zero(void *dest, int len)
 {
     for (int i = 0; i < len; i++)
@@ -892,6 +881,7 @@ int Buffer::CopyTo(int destIndex, void *dest, int len)const
     }
 	return len;
 }
+
 // 拷贝数据，默认-1长度表示两者最小长度
 int Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
 {
