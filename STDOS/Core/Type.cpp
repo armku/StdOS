@@ -19,14 +19,24 @@ String Object::ToString()const
 
 void Object::Show(bool newLine)const
 {
+	#if 1
     printf(this->ToString().GetBuffer());
 
     if (newLine)
     {
         printf("\r\n");
     }
+	#else	
+	char v6[512]; 
+	String v5(v6,512);  
+	v5=*this;	
+	v5.SetLength(0);  
+	v5.Show(newLine);
+	#endif
 }
 
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 const Type Object::GetType()const
 {
     Type ret;
@@ -35,7 +45,8 @@ const Type Object::GetType()const
     return ret;
 }
 
-Type::Type(){
+Type::Type()
+{
 
 }
 // Ãû³Æ
