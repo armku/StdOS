@@ -83,14 +83,12 @@ void TTime::UseRTC()
     Sys.AddTask(RtcRefresh, rtc, 100, 100, "Rtc");
 }
 
-extern uint time6cnt;
 Timer *timerTick;
 Delegate < Timer & > abc;
 void timTickrefesh(void *param)
 {
     Time.Milliseconds += 1000;
-    Time.Seconds++;
-    time6cnt++;
+    Time.Seconds++;    
 }
 
 static byte fac_us = 0; //us延时倍乘数 每个us需要的systick时钟数 			   
