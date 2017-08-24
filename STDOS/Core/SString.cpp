@@ -243,7 +243,11 @@ String String::ToString()const
 }
 
 // 调试输出字符串
-void String::Show(bool newLine)const{}
+void String::Show(bool newLine)const
+{
+	if(newLine)
+	printf("\n\r");//"0a0d"
+}
 
 // 格式化字符串，输出到现有字符串后面。方便我们连续格式化多个字符串
 String &String::Format(cstring format, ...)
