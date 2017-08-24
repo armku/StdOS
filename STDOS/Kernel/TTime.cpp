@@ -152,8 +152,9 @@ void TTime::Init()
 			break;
 		case 5:
 			#if defined STM32F0
-			#else
+			#elif defined STM32F1
 				NVIC_SetPriority(TIM6_IRQn, 0);
+			#elif defined STM32F4
 			#endif
 			break;
 		case 6:
