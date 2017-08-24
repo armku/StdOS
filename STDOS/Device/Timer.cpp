@@ -82,7 +82,8 @@ Timer::Timer(TIMER index)
 		this->Prescaler=36000-1;//则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=系统时钟/(分频系数+1) =1M
 		this->Period=2000-1;
 	#elif defined(STM32F4)
-		this->Prescaler = 167999;
+		this->Prescaler = 5000-1;
+		this->Period= 8400-1;
 	#endif    
 }
 
