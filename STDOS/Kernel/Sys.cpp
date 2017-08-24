@@ -27,31 +27,6 @@ extern "C"
 }
 
 String *CPUName;
-
-
-
-//int __fastcall fputc(int result)
-//{
-//  int v1; // r4@1
-//  const String *v2; // r0@4
-//  int v3; // [sp+0h] [bp-70h]@4
-//  String v4; // [sp+4h] [bp-6Ch]@4
-
-//  v1 = result;
-//  if ( dword_63C )
-//  {
-//    if ( (unsigned __int8)Sys != 255 )
-//    {
-//      v3 = (unsigned __int8)result;
-//      v2 = (const String *)String::String(&v4, &v3, 1);
-//      SmartOS_Log(v2);
-//      String::~String(&v4);
-//      result = v1;
-//    }
-//  }
-//  return result;
-//}
-
 //外部注册函数
 // 任务
 // 任务类
@@ -112,112 +87,8 @@ void TimeSleep(uint us)
 
 
 int SmartOS_printf(const char *format, ...);
-//int SmartOS_printf(int a1, int a2, int a3, int a4)
-//{
-//  int result; // r0@3
-//  int v5; // r4@5
-//  int v6; // r6@6
-//  Task *i; // r0@13
-//  int v8; // r1@14
-//  int v9; // r0@16
-//  int v10; // r5@17
-//  bool v11; // r0@21
-//  const String *v12; // r0@23
-//  int v13; // r5@23
-//  int v14; // [sp+0h] [bp-2D0h]@11
-//  int v15; // [sp+8h] [bp-2C8h]@11
-//  int *v16; // [sp+54h] [bp-27Ch]@17
-//  char v17[512]; // [sp+58h] [bp-278h]@14
-//  String v18; // [sp+258h] [bp-78h]@23
-//  int varg_r0; // [sp+2C0h] [bp-10h]@1
-//  int varg_r1; // [sp+2C4h] [bp-Ch]@1
-//  int varg_r2; // [sp+2C8h] [bp-8h]@1
-//  int varg_r3; // [sp+2CCh] [bp-4h]@1
-
-//  varg_r0 = a1;
-//  varg_r1 = a2;
-//  varg_r2 = a3;
-//  varg_r3 = a4;
-//  if ( dword_63C && (unsigned __int8)Sys != 255 )
-//  {
-//    v5 = 0;
-//    if ( byte_688 )
-//    {
-//      v6 = *(_BYTE *)(Task::Scheduler((Task *)(unsigned __int8)byte_688) + 54) - 1;
-//      if ( newline )
-//      {
-//        if ( v6 > 0 && (*(_BYTE *)varg_r0 || *(_BYTE *)(varg_r0 + 1) || *(_BYTE *)(varg_r0 + 2)) )
-//        {
-//          String::String(&v14, varg_r0);
-//          if ( v15 == 1 )
-//            v5 = 0;
-//          for ( i = 0; (signed int)i < v6; i = (Task *)((char *)i + 1) )
-//          {
-//            v8 = v5++;
-//            v17[v8] = 9;
-//          }
-//          v9 = Task::Current(i);
-//          v5 += _2snprintf(&v17[v5], 512 - v5, "%d=>", *(_DWORD *)(v9 + 4));
-//          String::~String((String *)&v14);
-//        }
-//      }
-//    }
-//    v16 = &varg_r1;
-//    v10 = _c89vsnprintf(&v17[v5], 512 - v5, varg_r0, &varg_r1);
-//    v16 = 0;
-//    if ( v10 )
-//    {
-//      v11 = *(&v17[v5 - 1] + v10) == 13 || *(&v17[v5 - 1] + v10) == 10;
-//      newline = v11;
-//      v12 = (const String *)String::String(&v18, v17, v5 + v10);
-//      v13 = SmartOS_Log(v12) + v10;
-//      String::~String(&v18);
-//      result = v13;
-//    }
-//    else
-//    {
-//      result = 0;
-//    }
-//  }
-//  else
-//  {
-//    result = 0;
-//  }
-//  return result;
-//}
 
 
-uint Get_JTAG_ID(void)
-{
-  uint result;
-
-//  if ( vE00FFFE8 & 8 )
-//    result = (vE00FFFD0 << 8) & 0xFFF | ((uint)vE00FFFE4 >> 3) | (32 * (vE00FFFE8 & 7) + 1);
-//  else
-    result = 0;
-  return result;
-}
-int SmartOS_Log(const String *a1)
-{
-  const Buffer *v1; 
-  int result; 
-  SerialPort* v3; 
-
-  v1 = (const Buffer *)a1;
-  if (Sys.Clock  && Sys.MessagePort !=COM_NONE)
-  {
-    v3 = SerialPort::GetMessagePort();
-//    if ( v3 && v3->Remap)
-//      result = v3->Write(v1);
-//    else
-      result = 0;
-  }
-  else
-  {
-    result = 0;
-  }
-  return result;
-}
 void ExitCritical(void)
 {
 //  enable_irq();
