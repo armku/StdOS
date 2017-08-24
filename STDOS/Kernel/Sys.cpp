@@ -300,7 +300,7 @@ void TSys::Init()
     #elif defined STM32F1 
         void *p = (void*)0x1FFFF7E8;
     #elif defined STM32F4 
-        void *p = (void*)0x1FFFF7E8;
+        void *p = (void*)0x1fff7a10;
     #endif 
     memcpy(ID, p, ArrayLength(ID));
 
@@ -314,7 +314,7 @@ void TSys::Init()
     #elif defined STM32F1 
         FlashSize = *(__IO ushort*)(0x1FFFF7E0); // ÈÝÁ¿
     #elif defined STM32F4 
-        FlashSize = *(__IO ushort*)(0x1FFFF7E0); // ÈÝÁ¿
+        FlashSize = *(__IO ushort*)(0X1FFF7a22); // ÈÝÁ¿
     #endif 
     switch (this->DevID)
     {
