@@ -30,9 +30,8 @@ void Test12(void* param)
 	now123.Current=Time.Current();
 	now123.CurrentTicks=Time.CurrentTicks();
 }
-const byte vers[] = "yyyy-MM-dd HH:mm:ss";
 #if 1
-    OutputPort led1(PA8, false);//PB0
+    OutputPort led1(PB0, false);
     OutputPort led2(PF7, false);
     OutputPort led3(PF8, false);
 #else 
@@ -79,8 +78,6 @@ void Rx8025Refresh(void *param)
 int main(void)
 {
     Sys.Name = (char*)namee;
-    byte aa = vers[0];
-    aa = aa;
 	#if DEBUG
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
