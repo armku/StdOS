@@ -141,67 +141,7 @@ TSys::TSys()
 }
 // 初始化系统时钟
 void TSys::InitClock()
-{
-	#ifdef STM32F0
-        void *p = (void*)0x1FFFF7AC;
-    #elif defined STM32F1 
-        void *p = (void*)0x1FFFF7E8;
-    #elif defined STM32F4 
-        void *p = (void*)0x1fff7a10;
-    #endif 
-    memcpy(this->ID, p, ArrayLength(ID));
-
-    this->CPUID = SCB->CPUID;
-    uint MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
-    this->RevID = MCUID >> 16;
-    this->DevID = MCUID &0x0FFF;
-
-    #ifdef STM32F0
-        this->FlashSize = *(__IO ushort*)(0x1FFFF7CC); // 容量
-    #elif defined STM32F1 
-        this->FlashSize = *(__IO ushort*)(0x1FFFF7E0); // 容量
-    #elif defined STM32F4 
-        this->FlashSize = *(__IO ushort*)(0X1FFF7a22); // 容量
-    #endif 
-    switch (this->DevID)
-    {
-		#ifdef STM32F0
-			case 0X0448:
-				CPUName = new String("STM32F072VB");
-                this->RAMSize = 64;
-                break;
-        #elif defined STM32F1
-            case 0X0307:
-                CPUName = new String("STM32F103RD");
-                this->RAMSize = 64;
-                break;
-            case 0x0410:
-                CPUName = new String("STM32F103C8");
-                this->RAMSize = 20;
-                break;
-            case 0X0414:
-                CPUName = new String("STM32F103ZE");
-                this->RAMSize = 64;
-                break;
-            case 0X0418:
-                CPUName = new String("STM32F105VC");
-                this->RAMSize = 64;
-                break;
-            case 0X0430:
-                CPUName = new String("STM32F103VG");
-                this->RAMSize = 768;
-                break;
-         #elif defined STM32F4
-            case 0X0413:
-                CPUName = new String("STM32F407ZG");
-                this->RAMSize = 192;
-                break;
-            #endif 
-        default:
-            CPUName = new String("未知");
-            this->RAMSize = 0;
-            break;
-    }
+{	    
     //    this->Inited = 1;
 }	
 // 初始化系统
@@ -311,7 +251,70 @@ void TSys::Reset() const
 }
 void TSys::OnInit()
 {
+	this->Clock=72000000;
+	this->CystalClock=HSE_VALUE;
+	this->MessagePort=COM1;
+	#ifdef STM32F0
+        Buffer::Copy(this->ID,(void *)0x1FFFF7AC,12);
+    #elif defined STM32F1 
+        Buffer::Copy(this->ID,(void *)0x1FFFF7E8,12);
+    #elif defined STM32F4 
+        Buffer::Copy(this->ID,(void *)0x1fff7a10,12);
+    #endif 	
 	
+	
+	
+	this->CPUID = SCB->CPUID;
+    uint MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
+    this->RevID = MCUID >> 16;
+    this->DevID = MCUID &0x0FFF;
+
+    #ifdef STM32F0
+        this->FlashSize = *(__IO ushort*)(0x1FFFF7CC); // 容量
+    #elif defined STM32F1 
+        this->FlashSize = *(__IO ushort*)(0x1FFFF7E0); // 容量
+    #elif defined STM32F4 
+        this->FlashSize = *(__IO ushort*)(0X1FFF7a22); // 容量
+    #endif 
+    switch (this->DevID)
+    {
+		#ifdef STM32F0
+			case 0X0448:
+				CPUName = new String("STM32F072VB");
+                this->RAMSize = 64;
+                break;
+        #elif defined STM32F1
+            case 0X0307:
+                CPUName = new String("STM32F103RD");
+                this->RAMSize = 64;
+                break;
+            case 0x0410:
+                CPUName = new String("STM32F103C8");
+                this->RAMSize = 20;
+                break;
+            case 0X0414:
+                CPUName = new String("STM32F103ZE");
+                this->RAMSize = 64;
+                break;
+            case 0X0418:
+                CPUName = new String("STM32F105VC");
+                this->RAMSize = 64;
+                break;
+            case 0X0430:
+                CPUName = new String("STM32F103VG");
+                this->RAMSize = 768;
+                break;
+         #elif defined STM32F4
+            case 0X0413:
+                CPUName = new String("STM32F407ZG");
+                this->RAMSize = 192;
+                break;
+            #endif 
+        default:
+            CPUName = new String("未知");
+            this->RAMSize = 0;
+            break;
+    }
 }	
 void TSys::OnShowInfo()const
 {
