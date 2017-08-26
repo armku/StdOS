@@ -2,10 +2,15 @@
 
 #if 1
 //-8
-OutputPort spi1nss(PE2,false,false);
-OutputPort spi1sck(PE4,false,false);
-OutputPort spi1miso(PE5,false,false);
-OutputPort spi1mosi(PE6,false,false);
+//OutputPort spi1nss(PE2,false,false);
+//OutputPort spi1sck(PE4,false,false);
+//OutputPort spi1miso(PE5,false,false);
+//OutputPort spi1mosi(PE6,false,false);
+
+OutputPort spi1nss(PA4,false,false);
+OutputPort spi1sck(PA5,false,false);
+OutputPort spi1miso(PA6,false,false);
+OutputPort spi1mosi(PA7,false,false);
 #else
 //-4
 OutputPort spi1nss(PG12,false,false);
@@ -638,9 +643,11 @@ void AD7124_Channel_Config(void)
 /*
 ¶ÁÈ¡AD7124 ID¼Ä´æÆ÷
 */
+byte adid71;
 byte AD7124_Read_ID(void)
 {
     auto retVal = AD7124_Read_Reg(AD7124_ID_REG, 1);
+	adid71=retVal;
     printf("ID:0x%02x\n", retVal);
     return retVal;
 }

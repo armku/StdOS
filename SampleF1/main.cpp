@@ -12,6 +12,7 @@
 #include "TInterrupt.h"
 #include "Timer.h"
 #include "TTime.h"
+#include "Drivers\RX8025T.h"
 
 class TTTTime
 {
@@ -64,23 +65,46 @@ void TimerTask(void *param)
 #define namee "StdOS"
 void AT24C02Test();
 
+RX8025T rx8025(PC1, PC2);
+void ad71248Test();
+DateTime now;
 
+void Rx8025Refresh(void *param)
+{
+    RX8025T *rx = (RX8025T*)param;
+    rx->LoadTime(now);
+    now.Show();
+    debug_printf("\r\n");
+}
 int main(void)
 {
     Sys.Name = (char*)namee;
     byte aa = vers[0];
     aa = aa;
-
+Sys.MessagePort = COM3;
     Sys.Init();
     #if DEBUG
-        Sys.MessagePort = COM1;
+        Sys.MessagePort = COM3;
         Sys.ShowInfo();
     #endif 
+	if (now.Year < 2017)
+    {
+        now.Year = 2017;
+        now.Month = 8;
+        now.Day = 24;
+        now.Hour = 11;
+        now.Minute = 20;
+        now.Second = 35;
+        rx8025.SaveTime(now);
+    }
     SerialPort::GetMessagePort()->Register(OnUsart1Read);
     //	AT24C02Test();    
+	ad71248Test();
+	
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
 	Sys.AddTask(Test12,0,600,1000,"Test");
+	Sys.AddTask(Rx8025Refresh, &rx8025, 100, 10000, "TimeUp");
 
     Sys.Start();
 }
