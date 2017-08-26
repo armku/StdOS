@@ -11,10 +11,12 @@
 #endif
 
 /* 通用同步/异步收发器(USART)针脚 ------------------------------------------------------------------*/
-#if defined(STM32F1) || defined(STM32F4) 
-#define UARTS {USART1, USART2, USART3, UART4, UART5,USART6}
+#if defined(STM32F1)
+	#define UARTS {USART1, USART2, USART3, UART4, UART5}
+#elif defined STM32F4
+	#define UARTS {USART1, USART2, USART3, UART4, UART5,USART6}
 #elif defined STM32F0
-#define UARTS {USART1, USART2, USART3}
+	#define UARTS {USART1, USART2, USART3}
 #endif
 #define UART_PINS {\
 /* TX   RX   CTS  RTS */	\
