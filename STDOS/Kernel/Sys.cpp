@@ -289,7 +289,9 @@ bool TSys::CheckMemory() const
 // 延迟异步重启
 void TSys::Reboot(int msDelay)const
 {
-    this->Reset();
+	if(msDelay<=0)
+		this->Reset();
+    //Sys.AddTask((void *)TSys::Reset,(void *)this,msDelay,-1,"");
 }
 // 系统跟踪
 void TSys::InitTrace(void* port) const
@@ -358,7 +360,8 @@ void TSys::OnShowInfo()const
     }
 
 
-    printf("STD_Embedded_Team::STD0801 Code:Demo Ver:0.0.6113 Build:%s\r\n","yyyy-MM-dd HH:mm:ss");
+    printf("%s::%s Code:%04X %s \r\n","stdos","std",12,"222");
+    printf("Build:%s %s\r\n","armku","yyyy-MM-dd HH:mm:ss");
     printf("STDOS::%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName->GetBuffer(), this->Clock, this->FlashSize, this->RAMSize);
     printf("DevID:0X%04X RevID:0X%04X\r\n", this->DevID, this->RevID);
     printf("CPUID:0X%X ARM:ARMv7-M Cortex-M3: R%dp%d\r\n", this->CPUID, Rx, Px);
@@ -414,21 +417,10 @@ bool TSys::SetTaskPeriod(uint taskid, int period) const
 // 开始系统大循环
 void TSys::Start()
 {
-    if (!_Scheduler)
-    {
-        _Scheduler = new TaskScheduler("Sys");
-    }
-
-    #if 0		
-        if (OnStart)
-        {
-            OnStart();
-        }
-        else
-    #endif 
-    {
-        _Scheduler->Start();
-    }
+	this->OnStart();
+	if (!_Scheduler)
+	_Scheduler=new TaskScheduler("Sys"); 
+	_Scheduler->Start();
 }
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
