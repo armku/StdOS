@@ -122,7 +122,22 @@ TSys::TSys()
 	#endif
     this->MessagePort = COM1;
 	
+	//this->Config=g_config;
+	this->OnInit();
+	this->MessagePort=COM1;
+	this->Name="stdos";
+	this->Company="armku";
+	this->Code=0x0201;
+	this->Ver=0x00;
+	this->ID[0]=0;
+	this->DevID=0x00;
+	this->RevID=0x00;
+	this->CPUID=0x00;	
+	
 	Interrupt.Init();
+	this->FlashSize=0x01;
+	this->RAMSize=0x01;
+	this->OnSleep=NULL;
 }
 // 初始化系统时钟
 void TSys::InitClock()
@@ -134,7 +149,7 @@ void TSys::InitClock()
     #elif defined STM32F4 
         void *p = (void*)0x1fff7a10;
     #endif 
-    memcpy(ID, p, ArrayLength(ID));
+    memcpy(this->ID, p, ArrayLength(ID));
 
     this->CPUID = SCB->CPUID;
     uint MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
@@ -142,11 +157,11 @@ void TSys::InitClock()
     this->DevID = MCUID &0x0FFF;
 
     #ifdef STM32F0
-        FlashSize = *(__IO ushort*)(0x1FFFF7CC); // 容量
+        this->FlashSize = *(__IO ushort*)(0x1FFFF7CC); // 容量
     #elif defined STM32F1 
-        FlashSize = *(__IO ushort*)(0x1FFFF7E0); // 容量
+        this->FlashSize = *(__IO ushort*)(0x1FFFF7E0); // 容量
     #elif defined STM32F4 
-        FlashSize = *(__IO ushort*)(0X1FFF7a22); // 容量
+        this->FlashSize = *(__IO ushort*)(0X1FFF7a22); // 容量
     #endif 
     switch (this->DevID)
     {
@@ -294,6 +309,7 @@ void TSys::Reset() const
 }
 void TSys::OnInit()
 {
+	
 }	
 void TSys::OnShowInfo()const
 {
