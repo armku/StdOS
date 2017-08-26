@@ -127,12 +127,7 @@ TSys::TSys()
 // 初始化系统时钟
 void TSys::InitClock()
 {
-
-}	
-// 初始化系统
-void TSys::Init()
-{       
-    #ifdef STM32F0
+	#ifdef STM32F0
         void *p = (void*)0x1FFFF7AC;
     #elif defined STM32F1 
         void *p = (void*)0x1FFFF7E8;
@@ -193,7 +188,10 @@ void TSys::Init()
             break;
     }
     //    this->Inited = 1;
-		
+}	
+// 初始化系统
+void TSys::Init()
+{    		
 	this->InitClock();
 	Time.Init();
 }		
