@@ -344,19 +344,19 @@ void TSys::OnShowInfo()const
     }
 
 
-    printf("STD_Embedded_Team::STD0801 Code:Demo Ver:0.0.6113 Build:%s\n", __DATE__);
-    printf("STDOS::%s %dMHz Flash:%dk RAM:%dk\n", CPUName->GetBuffer(), this->Clock, this->FlashSize, this->RAMSize);
-    printf("DevID:0X%04X RevID:0X%04X\n", this->DevID, this->RevID);
-    printf("CPUID:0X%X ARM:ARMv7-M Cortex-M3: R%dp%d\n", this->CPUID, Rx, Px);
-    printf("Heap :(0X%X, 0X%X) = 0X%X (%dk)\n", (uint) &__heap_base, (uint) &__heap_limit, HeapSize, HeapSize / 1024);
-    printf("Stack:(0X%X, 0X%X) = 0X%X (%dk)\n", (uint) &__heap_limit, (uint) &__initial_sp, StackSize, StackSize / 1024);
-    printf("ChipType:0x42455633 3\n");
-    printf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\n", ID[0], ID[1], ID[2], ID[3], ID[4], ID[5], ID[6], ID[7], ID[8], ID[9], ID[10], ID[11]);
+    printf("STD_Embedded_Team::STD0801 Code:Demo Ver:0.0.6113 Build:%s\r\n",__DATE__);
+    printf("STDOS::%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName->GetBuffer(), this->Clock, this->FlashSize, this->RAMSize);
+    printf("DevID:0X%04X RevID:0X%04X\r\n", this->DevID, this->RevID);
+    printf("CPUID:0X%X ARM:ARMv7-M Cortex-M3: R%dp%d\r\n", this->CPUID, Rx, Px);
+    printf("Heap :(0X%X, 0X%X) = 0X%X (%dk)\r\n", (uint) &__heap_base, (uint) &__heap_limit, HeapSize, HeapSize / 1024);
+    printf("Stack:(0X%X, 0X%X) = 0X%X (%dk)\r\n", (uint) &__heap_limit, (uint) &__initial_sp, StackSize, StackSize / 1024);
+    printf("ChipType:0x42455633 3\r\n");
+    printf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\r\n", ID[0], ID[1], ID[2], ID[3], ID[4], ID[5], ID[6], ID[7], ID[8], ID[9], ID[10], ID[11]);
     printf("Time : ");
-    DateTime dt;
-    dt.Show();
+    DateTime dt(Time.Seconds+Time.BaseSeconds);
+    dt.Show(true);
 
-    printf("Support: http://www.armku.com\n");
+    printf("Support: http://www.armku.com\r\n");
 }
 	
 void TSys::OnStart()

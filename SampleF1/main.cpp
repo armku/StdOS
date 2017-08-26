@@ -81,13 +81,12 @@ int main(void)
     Sys.Name = (char*)namee;
     byte aa = vers[0];
     aa = aa;
-Sys.MessagePort = COM3;
-    Sys.Init();
-    #if DEBUG
-        Sys.MessagePort = COM3;
+	#if DEBUG
+        Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 
-	if (now.Year < 2017)
+	Sys.Init();
+    if (now.Year < 2017)
     {
         now.Year = 2017;
         now.Month = 8;
@@ -99,12 +98,12 @@ Sys.MessagePort = COM3;
     }
     SerialPort::GetMessagePort()->Register(OnUsart1Read);
     //	AT24C02Test();    
-	ad71248Test();
+	//ad71248Test();
 	
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
 	Sys.AddTask(Test12,0,600,1000,"Test");
-	Sys.AddTask(Rx8025Refresh, &rx8025, 100, 10000, "TimeUp");
+//	Sys.AddTask(Rx8025Refresh, &rx8025, 100, 10000, "TimeUp");
 
     Sys.Start();
 }
