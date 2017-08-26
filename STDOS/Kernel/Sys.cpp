@@ -152,7 +152,16 @@ void TSys::Init()
 }		
 void TSys::ShowInfo() const
 {
+	printf("%s::%s Code:%04X %s \r\n","stdos","std",12,"222");
+    printf("Build:%s %s\r\n","armku","yyyy-MM-dd HH:mm:ss");
+    
 	this->OnShowInfo();
+	printf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\r\n", ID[0], ID[1], ID[2], ID[3], ID[4], ID[5], ID[6], ID[7], ID[8], ID[9], ID[10], ID[11]);
+    printf("Time : ");
+    DateTime dt(Time.Seconds+Time.BaseSeconds);
+    dt.Show(true);
+
+    printf("Support: http://www.armku.com\r\n");
 }	
 uint TSys::HeapBase() const	// 堆起始地址，前面是静态分配内存
 {
@@ -363,20 +372,22 @@ void TSys::OnShowInfo()const
     }
 
 
-    printf("%s::%s Code:%04X %s \r\n","stdos","std",12,"222");
-    printf("Build:%s %s\r\n","armku","yyyy-MM-dd HH:mm:ss");
-    printf("STDOS::%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName->GetBuffer(), this->Clock, this->FlashSize, this->RAMSize);
-    printf("DevID:0X%04X RevID:0X%04X\r\n", this->DevID, this->RevID);
-    printf("CPUID:0X%X ARM:ARMv7-M Cortex-M3: R%dp%d\r\n", this->CPUID, Rx, Px);
-    printf("Heap :(0X%X, 0X%X) = 0X%X (%dk)\r\n", (uint) &__heap_base, (uint) &__heap_limit, HeapSize, HeapSize / 1024);
-    printf("Stack:(0X%X, 0X%X) = 0X%X (%dk)\r\n", (uint) &__heap_limit, (uint) &__initial_sp, StackSize, StackSize / 1024);
+    printf("STDOS::");
+	printf("STM32");
+	printf("F103");
+	printf(" %dMHz Flash:%dk RAM:%dk\r\n", CPUName->GetBuffer(), this->Clock, this->FlashSize, this->RAMSize);
+	printf("DevID:0x%04X RevID:0x%04X \r\n", this->DevID, this->RevID);
+	SmartOS_printf("CPUID:%p",this->CPUID);
+	SmartOS_printf(" ARMv7-M");
+	SmartOS_printf(" Cortex-M%d:",3);
+	SmartOS_printf(" R%dp%d",Rx,Px);
+	SmartOS_printf("\r\n");
+	SmartOS_printf("Heap :(%p, %p) = 0x%x (%dk)\r\n",(uint) &__heap_base, (uint) &__heap_limit, HeapSize, HeapSize / 1024);
+	SmartOS_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", (uint) &__heap_limit, (uint) &__initial_sp, StackSize, StackSize / 1024);
+	
+	
     printf("ChipType:0x42455633 3\r\n");
-    printf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\r\n", ID[0], ID[1], ID[2], ID[3], ID[4], ID[5], ID[6], ID[7], ID[8], ID[9], ID[10], ID[11]);
-    printf("Time : ");
-    DateTime dt(Time.Seconds+Time.BaseSeconds);
-    dt.Show(true);
-
-    printf("Support: http://www.armku.com\r\n");
+    
 }
 	
 void TSys::OnStart()
