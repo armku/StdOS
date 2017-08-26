@@ -437,6 +437,37 @@ SmartIRQ::~SmartIRQ()
 }
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
+extern SerialPort *_printf_sp;
+extern "C"
+{
+    /* 重载fputc可以让用户程序使用printf函数 */
+    int fputc(int ch, FILE *f)
+    {
+		static bool isInFPutc; //正在串口输出
+        //        if (!Sys.Inited)
+        //            return ch;
+
+        if (Sys.MessagePort == COM_NONE)
+            return ch;
+
+        if (isInFPutc)
+            return ch;
+        isInFPutc = true;
+
+        // 检查并打开串口
+        //if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && _printf_sp == NULL)
+        if (_printf_sp == NULL)
+        {
+            _printf_sp = new SerialPort(COM(Sys.MessagePort));
+            _printf_sp->Open();
+        }
+        _printf_sp->SendData((byte)ch);
+        isInFPutc = false;
+        return ch;
+    }
+}
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 #if DEBUG
     // 函数栈。
     // 进入函数时压栈函数名，离开时弹出。便于异常时获取主线程调用列表

@@ -600,34 +600,7 @@ void SerialPort::OnWrite2()
 
 }
 
-bool isInFPutc; //正在串口输出
-extern "C"
-{
-    /* 重载fputc可以让用户程序使用printf函数 */
-    int fputc(int ch, FILE *f)
-    {
-        //        if (!Sys.Inited)
-        //            return ch;
 
-        if (Sys.MessagePort == COM_NONE)
-            return ch;
-
-        if (isInFPutc)
-            return ch;
-        isInFPutc = true;
-
-        // 检查并打开串口
-        //if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && _printf_sp == NULL)
-        if (_printf_sp == NULL)
-        {
-            _printf_sp = new SerialPort(COM(Sys.MessagePort));
-            _printf_sp->Open();
-        }
-        _printf_sp->SendData((byte)ch);
-        isInFPutc = false;
-        return ch;
-    }
-}
 
 
 //测试代码
