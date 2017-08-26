@@ -342,7 +342,7 @@ void TSys::OnShowInfo()const
     }
 
 
-    printf("STD_Embedded_Team::STD0801 Code:Demo Ver:0.0.6113 Build:%s\r\n",__DATE__);
+    printf("STD_Embedded_Team::STD0801 Code:Demo Ver:0.0.6113 Build:%s\r\n","yyyy-MM-dd HH:mm:ss");
     printf("STDOS::%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName->GetBuffer(), this->Clock, this->FlashSize, this->RAMSize);
     printf("DevID:0X%04X RevID:0X%04X\r\n", this->DevID, this->RevID);
     printf("CPUID:0X%X ARM:ARMv7-M Cortex-M3: R%dp%d\r\n", this->CPUID, Rx, Px);
