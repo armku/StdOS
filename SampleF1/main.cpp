@@ -31,7 +31,7 @@ void Test12(void* param)
 }
 const byte vers[] = "yyyy-MM-dd HH:mm:ss";
 #if 1
-    OutputPort led1(PB0, false);
+    OutputPort led1(PA8, false);//PB0
     OutputPort led2(PF7, false);
     OutputPort led3(PF8, false);
 #else 
