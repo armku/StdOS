@@ -12,7 +12,7 @@
 
 /* 通用同步/异步收发器(USART)针脚 ------------------------------------------------------------------*/
 #if defined(STM32F1) || defined(STM32F4) 
-#define UARTS {USART1, USART2, USART3, UART4, UART5}
+#define UARTS {USART1, USART2, USART3, UART4, UART5,USART6}
 #elif defined STM32F0
 #define UARTS {USART1, USART2, USART3}
 #endif
@@ -101,6 +101,10 @@ int SerialPort::SendData(byte data, int times)
 			#endif
             break;
         case COM6:
+			#if defined(STM32F1) || defined(STM32F4)
+				while (USART_GetFlagStatus(g_Uart_Ports[5], USART_FLAG_TXE) == RESET && --times > 0){}
+			#elif defined STM32F0
+			#endif
 			break;
 		case COM7:
 			break;
@@ -137,7 +141,11 @@ int SerialPort::SendData(byte data, int times)
 				#endif
                 break;
             case COM6:
-				break;
+				#if defined(STM32F1) || defined(STM32F4)
+					USART_SendData(g_Uart_Ports[5], (ushort)data);
+				#elif defined STM32F0
+				#endif
+                break;
 			case COM7:
 				break;
 			case COM8:
@@ -172,7 +180,7 @@ void SerialPort::SetBaudRate(int baudRate)
 #elif defined STM32F1
     #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
 #elif defined STM32F4 
-    #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn}
+    #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn,USART6_IRQn}
 #endif 
 // 真正的串口中断函数
 void OnUsartReceive(ushort num, void *param)
