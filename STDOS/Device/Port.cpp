@@ -129,25 +129,7 @@ void Port::Close()
 }
 
 void Port::Clear(){}
-bool Port::Read()const
-{
-    GPIO_TypeDef *group = _GROUP(this->_Pin);
-    return (group->IDR >> (this->_Pin &0xF)) &1;
-}
 
-void Port::OnOpen(void *param)
-{
-    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    #ifdef STM32F0
-		gpio->GPIO_Speed = GPIO_Speed_50MHz;
-    #elif defined STM32F1
-        gpio->GPIO_Speed = GPIO_Speed_50MHz;
-    #elif defined STM32F4
-        gpio->GPIO_Speed = GPIO_Speed_100MHz;
-    #endif 
-}
-
-void Port::OnClose(){}
 OutputPort::OutputPort(){}
 OutputPort::OutputPort(Pin pin)
 {
@@ -174,41 +156,11 @@ OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
 //    return GPIO_ReadOutputData(((GPIO_TypeDef *)this->State));
 //}
 
-bool OutputPort::Read()const
-{
-    return this->Invert ? !Port::Read(): Port::Read();
-}
+
 
 bool OutputPort::ReadInput()const
 {
     return this->Invert ? !Port::Read(): Port::Read();
-}
-
-
-void OutputPort::Write(bool value)const
-{
-    if (this->Invert)
-    {
-        if (value)
-        {
-            GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-        }
-        else
-        {
-            GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-        }
-    }
-    else
-    {
-        if (value)
-        {
-            GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-        }
-        else
-        {
-            GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-        }
-    }
 }
 
 #if 0   
