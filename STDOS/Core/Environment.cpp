@@ -21,12 +21,6 @@ UInt64 TEnvironment::Ms()const
 
 // 获取当前计算机上的处理器数
 int TEnvironment::ProcessorCount()const
-{
-	#ifdef STM32F0	
-		return 1;
-	#elif defined STM32F1
-		return 1;
-	#elif defined STM32F4
-		return 1;
-	#endif
+{	
+	return 1;
 }

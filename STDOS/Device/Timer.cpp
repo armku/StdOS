@@ -136,9 +136,6 @@ void Timer::Close() // Í£Ö¹¶¨Ê±Æ÷
     this->OnClose();
 }
 
-
-
-
 void Timer::Register(const Delegate < Timer & >  &dlg)
 {
     this->OnTick = dlg;

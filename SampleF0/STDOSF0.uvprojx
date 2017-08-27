@@ -408,11 +408,6 @@
               <FilePath>..\Util\CheckSum.cpp</FilePath>
             </File>
             <File>
-              <FileName>NewDelete.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Util\NewDelete.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Util\Util.cpp</FilePath>
@@ -1561,11 +1556,6 @@
               <FileName>CheckSum.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Util\CheckSum.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NewDelete.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Util\NewDelete.cpp</FilePath>
             </File>
             <File>
               <FileName>Util.cpp</FileName>
