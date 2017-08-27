@@ -390,16 +390,6 @@
           <GroupName>UserDriver</GroupName>
         </Group>
         <Group>
-          <GroupName>startup</GroupName>
-          <Files>
-            <File>
-              <FileName>startup_stm32f10x_hd.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\SYSTEM\STM32F1\startup\startup_stm32f10x_hd.s</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
@@ -578,9 +568,6 @@
               <FilePath>..\Doc\端口分配.txt</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>Modbus</GroupName>
         </Group>
         <Group>
           <GroupName>App</GroupName>
@@ -923,6 +910,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>STDOS</GroupName>
+          <Files>
+            <File>
+              <FileName>Config.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Config.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BootConfig.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\BootConfig.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
@@ -968,9 +970,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Message</GroupName>
-        </Group>
-        <Group>
           <GroupName>Net</GroupName>
           <Files>
             <File>
@@ -984,14 +983,129 @@
           <GroupName>Platform</GroupName>
           <Files>
             <File>
-              <FileName>BootConfig.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\BootConfig.cpp</FilePath>
+              <FileName>startup_stm32f10x_hd.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\startup_stm32f10x_hd.s</FilePath>
             </File>
             <File>
-              <FileName>Config.cpp</FileName>
+              <FileName>ADC.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Config.cpp</FilePath>
+              <FilePath>..\STDOS\Platform\STM32F1\ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Boot_F1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Boot_F1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CAN.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\CAN.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DAC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\DAC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DMA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\DMA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Flash.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Flash.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Interrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Power.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Power.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pwm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Pwm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\RTC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\SerialPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Spi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\WatchDog.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CortexM</GroupName>
+          <Files>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\CortexM\Interrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\CortexM\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Runtime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\CortexM\Runtime.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\CortexM\SerialPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\CortexM\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Thread.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\CortexM\Thread.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\CortexM\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1039,6 +1153,12 @@
               <FilePath>..\STDOS\Security\RSA.cpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Modbus</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Message</GroupName>
         </Group>
         <Group>
           <GroupName>TinyIP</GroupName>
@@ -1435,16 +1555,6 @@
           <GroupName>UserDriver</GroupName>
         </Group>
         <Group>
-          <GroupName>startup</GroupName>
-          <Files>
-            <File>
-              <FileName>startup_stm32f10x_hd.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\SYSTEM\STM32F1\startup\startup_stm32f10x_hd.s</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
@@ -1623,9 +1733,6 @@
               <FilePath>..\Doc\端口分配.txt</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>Modbus</GroupName>
         </Group>
         <Group>
           <GroupName>App</GroupName>
@@ -1968,6 +2075,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>STDOS</GroupName>
+          <Files>
+            <File>
+              <FileName>Config.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Config.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BootConfig.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\BootConfig.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
@@ -2013,9 +2135,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Message</GroupName>
-        </Group>
-        <Group>
           <GroupName>Net</GroupName>
           <Files>
             <File>
@@ -2029,14 +2148,129 @@
           <GroupName>Platform</GroupName>
           <Files>
             <File>
-              <FileName>BootConfig.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\BootConfig.cpp</FilePath>
+              <FileName>startup_stm32f10x_hd.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\startup_stm32f10x_hd.s</FilePath>
             </File>
             <File>
-              <FileName>Config.cpp</FileName>
+              <FileName>ADC.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Config.cpp</FilePath>
+              <FilePath>..\STDOS\Platform\STM32F1\ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Boot_F1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Boot_F1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CAN.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\CAN.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DAC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\DAC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DMA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\DMA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Flash.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Flash.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Interrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Power.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Power.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pwm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Pwm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\RTC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\SerialPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Spi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\WatchDog.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CortexM</GroupName>
+          <Files>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\CortexM\Interrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\CortexM\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Runtime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\CortexM\Runtime.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\CortexM\SerialPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\CortexM\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Thread.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\CortexM\Thread.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\CortexM\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2084,6 +2318,12 @@
               <FilePath>..\STDOS\Security\RSA.cpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Modbus</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Message</GroupName>
         </Group>
         <Group>
           <GroupName>TinyIP</GroupName>
