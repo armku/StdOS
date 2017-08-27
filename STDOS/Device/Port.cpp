@@ -122,51 +122,6 @@ bool Port::Empty()const
     return _Pin == P0;
 }
 
-bool Port::Open()
-{
-    if (this->Opened == false)
-    {
-        if (_Pin != P0)
-        {
-            // 打开时钟
-            int gi = _Pin >> 4;
-            #ifdef STM32F0
-                RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA << gi, ENABLE);
-            #elif defined STM32F1
-                RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << gi, ENABLE);
-                // PA15/PB3/PB4 需要关闭JTAG
-                switch (_Pin)
-                {
-                    case PA15:
-                    case PB3:
-                    case PB4:
-                        {
-                            debug_printf("Close JTAG for P%c%d\r\n", _PIN_NAME(_Pin));
-
-                            // PA15是jtag接口中的一员 想要使用 必须开启remap
-                            RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-                            GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
-                            break;
-                        }
-                }
-            #elif defined STM32F4
-                RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
-            #endif 
-
-            GPIO_InitTypeDef gpio;
-            // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
-            GPIO_StructInit(&gpio);
-            gpio.GPIO_Pin = 1 << (this->_Pin &0x0F);
-            this->OnOpen(&gpio);
-
-            GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
-        }
-
-        this->Opened = true;
-    }
-    return true;
-}
-
 void Port::Close()
 {
     this->OnClose();
@@ -303,46 +258,6 @@ void OutputPort::OnOpen(void *param)
     this->OpenPin(param);
 }
 
-void OutputPort::OpenPin(void *param)
-{
-    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-
-    #ifdef STM32F0
-		gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式	
-        if (this->OpenDrain)
-        {
-            gpio->GPIO_OType = GPIO_OType_OD;
-			gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;/*设置引脚模式为无上拉*/
-        }
-        else
-        {
-            gpio->GPIO_OType = GPIO_OType_PP;//通用推挽输出			
-			gpio->GPIO_PuPd = GPIO_PuPd_UP;/*设置引脚模式为上拉*/
-        }
-    #elif defined STM32F1
-        if (this->OpenDrain)
-        {
-            gpio->GPIO_Mode = GPIO_Mode_Out_OD;
-        }
-        else
-        {
-            gpio->GPIO_Mode = GPIO_Mode_Out_PP;
-        }
-    #elif defined STM32F4
-        gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式	
-        if (this->OpenDrain)
-        {
-            gpio->GPIO_OType = GPIO_OType_OD; //推挽输出
-            gpio->GPIO_PuPd = GPIO_PuPd_NOPULL; //            
-        }
-        else
-        {
-            gpio->GPIO_OType = GPIO_OType_PP; //推挽输出
-            gpio->GPIO_PuPd = GPIO_PuPd_UP; //上拉
-        }
-    #endif 
-}
-
 /*
 设置端口状态
  */
@@ -378,39 +293,6 @@ AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
     Set(pin);
 }
 
-void AlternatePort::OpenPin(void *param)
-{
-    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    #ifdef STM32F0
-		gpio->GPIO_Mode = GPIO_Mode_AF;
-		gpio->GPIO_Speed = GPIO_Speed_50MHz;
-        gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
-		if(!this->OpenDrain)
-		{
-			gpio->GPIO_PuPd = GPIO_PuPd_UP;
-		}
-		else
-		{
-			gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
-		}
-    #elif defined STM32F1
-        gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
-    #elif defined STM32F4
-        gpio->GPIO_Mode = GPIO_Mode_AF;
-		gpio->GPIO_Speed = GPIO_Speed_50MHz;
-        gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
-		if(!this->OpenDrain)
-		{
-			gpio->GPIO_PuPd = GPIO_PuPd_UP;
-		}
-		else
-		{
-			gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
-		}
-    #endif 
-    int i = 0;
-    i++;
-}
 
 void AnalogInPort::OnOpen(void *param)
 {
