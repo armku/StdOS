@@ -560,9 +560,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>App</GroupName>
-        </Group>
-        <Group>
           <GroupName>Core</GroupName>
           <Files>
             <File>
@@ -1021,6 +1018,9 @@
               <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>App</GroupName>
         </Group>
         <Group>
           <GroupName>Modbus</GroupName>
@@ -1593,9 +1593,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>App</GroupName>
-        </Group>
-        <Group>
           <GroupName>Core</GroupName>
           <Files>
             <File>
@@ -2054,6 +2051,9 @@
               <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>App</GroupName>
         </Group>
         <Group>
           <GroupName>Modbus</GroupName>
