@@ -817,11 +817,6 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Readme.MD</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STDOS\Device\Readme.MD</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1961,11 +1956,6 @@
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Readme.MD</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STDOS\Device\Readme.MD</FilePath>
             </File>
           </Files>
         </Group>
