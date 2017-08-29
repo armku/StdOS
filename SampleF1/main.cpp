@@ -14,6 +14,8 @@
 #include "TTime.h"
 #include "Drivers\RX8025T.h"
 
+#define USE3000 1
+
 class TTTTime
 {
     public:
@@ -32,7 +34,11 @@ void Test12(void *param)
 }
 
 #if 1
-    OutputPort led1(PB0, false);
+	#if USE3000
+    OutputPort led1(PA8, false);
+	#else
+	OutputPort led1(PB0, false);
+	#endif
     OutputPort led2(PF7, false);
     OutputPort led3(PF8, false);
 #else 
@@ -64,8 +70,11 @@ void TimerTask(void *param)
 
 #define namee "StdOS"
 void AT24C02Test();
-
+#if USE3000
 RX8025T rx8025(PC1, PC2);
+#else
+RX8025T rx8025(PC1, PC2);
+#endif
 void ad71248Test();
 DateTime now;
 
@@ -81,7 +90,11 @@ int main(void)
 {
     Sys.Name = (char*)namee;
     #if DEBUG
-        Sys.MessagePort = COM1;
+		#if USE3000
+        Sys.MessagePort = COM5;
+		#else
+		Sys.MessagePort = COM1;
+		#endif
         Sys.ShowInfo();
     #endif 
     Sys.Init();
