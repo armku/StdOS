@@ -40,7 +40,9 @@ void SerialPort::Set(COM index, int baudRate)
 }
 void SerialPort::Set(byte dataBits, byte parity, byte stopBits)
 {
-	
+	this->_dataBits=dataBits;
+	this->_parity=parity;
+	this->_stopBits=stopBits;
 }
 
 // 刷出某个端口中的数据
