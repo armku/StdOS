@@ -10,9 +10,38 @@
 	#include "stm32f4xx.h"
 #endif
 
-int SerialPort_GetPins(int a1, int a2)
+#define UART_PINS {\
+/* TX   RX   CTS  RTS */	\
+PA9, PA10,PA11,PA12,/* USART1 */	\
+PA2, PA3, PA0, PA1, /* USART2 */	\
+PB10,PB11,PB13,PB14,/* USART3 */	\
+PC10,PC11,P0,  P0,  /* UART4  */	\
+PC12, PD2,P0,  P0,  /* UART5  */	\
+}
+#define UART_PINS_FULLREMAP {\
+/* TX   RX   CTS  RTS */	\
+PB6, PB7, PA11,PA12,/* USART1 AFIO_MAPR_USART1_REMAP */	\
+PD5, PD6, PD3, PD4, /* USART2 AFIO_MAPR_USART2_REMAP */	\
+PD8, PD9, PD11,PD12,/* USART3 AFIO_MAPR_USART3_REMAP_FULLREMAP */	\
+PC10,PC11,P0,  P0,  /* UART4  */	\
+PC12, PD2,P0,  P0,  /* UART5  */	\
+}
+// 获取引脚
+void SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
 {
-  
+
+    *rxPin =  *txPin = P0;
+
+    const Pin g_Uart_Pins[] = UART_PINS;
+    const Pin g_Uart_Pins_Map[] = UART_PINS_FULLREMAP;
+    const Pin *p = g_Uart_Pins;
+    if (Remap)
+    {
+        p = g_Uart_Pins_Map;
+    }
+    int n = index << 2;
+    *txPin = p[n];
+    *rxPin = p[n + 1];
 }
 int SerialPort_Opening(int a1)
 {
@@ -33,22 +62,7 @@ int SerialPort_Closeing(int result)
 #elif defined STM32F0
 	#define UARTS {USART1, USART2, USART3}
 #endif
-#define UART_PINS {\
-/* TX   RX   CTS  RTS */	\
-PA9, PA10,PA11,PA12,/* USART1 */	\
-PA2, PA3, PA0, PA1, /* USART2 */	\
-PB10,PB11,PB13,PB14,/* USART3 */	\
-PC10,PC11,P0,  P0,  /* UART4  */	\
-PC12, PD2,P0,  P0,  /* UART5  */	\
-}
-#define UART_PINS_FULLREMAP {\
-/* TX   RX   CTS  RTS */	\
-PB6, PB7, PA11,PA12,/* USART1 AFIO_MAPR_USART1_REMAP */	\
-PD5, PD6, PD3, PD4, /* USART2 AFIO_MAPR_USART2_REMAP */	\
-PD8, PD9, PD11,PD12,/* USART3 AFIO_MAPR_USART3_REMAP_FULLREMAP */	\
-PC10,PC11,P0,  P0,  /* UART4  */	\
-PC12, PD2,P0,  P0,  /* UART5  */	\
-}
+
 #ifdef STM32F0
 	#define UART_IRQs {USART1_IRQn,USART2_IRQn}
 #elif defined STM32F1
@@ -104,23 +118,7 @@ void SerialPort::Register(TransportHandler handler, void *param)
         Interrupt.Deactivate(irq);
     }
 }
-// 获取引脚
-void GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
-{
 
-    *rxPin =  *txPin = P0;
-
-    const Pin g_Uart_Pins[] = UART_PINS;
-    const Pin g_Uart_Pins_Map[] = UART_PINS_FULLREMAP;
-    const Pin *p = g_Uart_Pins;
-    if (Remap)
-    {
-        p = g_Uart_Pins_Map;
-    }
-    int n = index << 2;
-    *txPin = p[n];
-    *rxPin = p[n + 1];
-}
 #if defined(STM32F0) || defined(STM32F4)
 	#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
 #endif
@@ -135,7 +133,7 @@ bool SerialPort::OnOpen()
     {
         return false;
     }
-    GetPins(&tx, &rx, this->Index);
+    SerialPort_GetPins(&tx, &rx, this->Index);
 //	this->Pins[0]=tx;
 //	this->Pins[1]=rx;
     //    debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);

@@ -95,7 +95,7 @@ void SerialPort::OnClose()
 
     //    Pin tx, rx;
 
-    //    GetPins(&tx, &rx);
+    //    SerialPort_GetPins(&tx, &rx);
 
     //    USART_DeInit(_port);
 
