@@ -125,17 +125,12 @@ void SerialPort::Register(TransportHandler handler, void *param)
 
 // 打开串口
 bool SerialPort::OnOpen()
-{
-    Pin rx, tx;
-
-
+{    
     if (COM_NONE == Sys.MessagePort)
     {
         return false;
     }
-    SerialPort_GetPins(&tx, &rx, this->Index);
-//	this->Pins[0]=tx;
-//	this->Pins[1]=rx;
+    SerialPort_GetPins(&this->Pins[0], &this->Pins[1], this->Index);
     //    debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
     #ifdef DEBUG        
 
@@ -180,7 +175,7 @@ bool SerialPort::OnOpen()
                 debug_printf(", StopBits_2");
                 break;
         }
-        debug_printf(") TX=P%c%d RX=P%c%d\r\n", _PIN_NAME(tx), _PIN_NAME(rx));
+        debug_printf(") TX=P%c%d RX=P%c%d\r\n", _PIN_NAME(this->Pins[0]), _PIN_NAME(this->Pins[1]));
 
         // 有可能是打开串口完成以后跳回来
         if (Opened)
@@ -199,8 +194,8 @@ bool SerialPort::OnOpen()
 	#elif defined STM32F4
 		AlternatePort rxx;
 	#endif
-    txx.Set(tx);
-    rxx.Set(rx);
+    txx.Set(this->Pins[0]);
+    rxx.Set(this->Pins[1]);
 
     // 不要关调试口，否则杯具
     //    if (_index != Sys.MessagePort)
