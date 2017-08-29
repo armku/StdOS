@@ -913,16 +913,6 @@
               <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>BufferPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\BufferPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitExpect.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Esp8266\WaitExpect.cpp</FilePath>
-            </File>
-            <File>
               <FileName>font.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\STDOS\Drivers\font.c</FilePath>
@@ -2106,16 +2096,6 @@
               <FileName>AT24CXX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BufferPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\BufferPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitExpect.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Esp8266\WaitExpect.cpp</FilePath>
             </File>
             <File>
               <FileName>font.c</FileName>
