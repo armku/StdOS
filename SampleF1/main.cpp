@@ -75,7 +75,9 @@ RX8025T rx8025(PC1, PC2);
 #else
 RX8025T rx8025(PC1, PC2);
 #endif
+#if USETEST
 void ad71248Test();
+#endif
 DateTime now;
 
 void Rx8025Refresh(void *param)
@@ -109,8 +111,10 @@ int main(void)
         rx8025.SaveTime(now);
     }
     SerialPort::GetMessagePort()->Register(OnUsart1Read);
-    //	AT24C02Test();    
-    //ad71248Test();
+    //	AT24C02Test();  
+	#if USETEST
+    ad71248Test();
+	#endif
 
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
