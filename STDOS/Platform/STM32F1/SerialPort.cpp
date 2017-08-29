@@ -117,7 +117,7 @@ void GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
     {
         p = g_Uart_Pins_Map;
     }
-    int n = index << 1;
+    int n = index << 2;
     *txPin = p[n];
     *rxPin = p[n + 1];
 }
@@ -136,7 +136,8 @@ bool SerialPort::OnOpen()
         return false;
     }
     GetPins(&tx, &rx, this->Index);
-
+//	this->Pins[0]=tx;
+//	this->Pins[1]=rx;
     //    debug_printf("Serial%d Open(%d, %d, %d, %d)\r\n", _index + 1, _baudRate, _parity, _dataBits, _stopBits);
     #ifdef DEBUG        
 
