@@ -1,5 +1,16 @@
 #include "Queue.h"
 
+void ExitCritical()
+{
+  ;
+}
+void EnterCritical()
+{
+  ;
+}
+
+
+
 byte buf[512];
 Queue::Queue():_s(buf,512)
 {	
@@ -9,12 +20,17 @@ Queue::Queue():_s(buf,512)
 
 void Queue::SetCapacity(int len)
 {
-    return ;
+    this->_s.SetLength(len);
 }
 
 void Queue::Clear()
 {
-    return ;
+	int v2=this->_s.Capacity();
+	this->_s.SetLength(v2);
+	//this->_s.5 6 7=0;
+//	this->_s._canWrite=0;
+//	this->_s._Size=0;
+//	this->_s._Capacity=0;
 }
 
 void Queue::Enqueue(byte dat)

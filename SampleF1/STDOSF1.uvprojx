@@ -568,9 +568,9 @@
           <GroupName>Core</GroupName>
           <Files>
             <File>
-              <FileName>Array.cpp</FileName>
+              <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Array.cpp</FilePath>
+              <FilePath>..\STDOS\Core\Type.cpp</FilePath>
             </File>
             <File>
               <FileName>Buffer.cpp</FileName>
@@ -581,6 +581,16 @@
               <FileName>ByteArray.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Array.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Array.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\SString.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
@@ -596,11 +606,6 @@
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Type.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Type.cpp</FilePath>
             </File>
             <File>
               <FileName>Random.cpp</FileName>
@@ -626,11 +631,6 @@
               <FileName>Dictionary.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Dictionary.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SString.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\SString.cpp</FilePath>
             </File>
             <File>
               <FileName>LinkedList.cpp</FileName>
@@ -1606,9 +1606,9 @@
           <GroupName>Core</GroupName>
           <Files>
             <File>
-              <FileName>Array.cpp</FileName>
+              <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Array.cpp</FilePath>
+              <FilePath>..\STDOS\Core\Type.cpp</FilePath>
             </File>
             <File>
               <FileName>Buffer.cpp</FileName>
@@ -1619,6 +1619,16 @@
               <FileName>ByteArray.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Array.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Array.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\SString.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
@@ -1634,11 +1644,6 @@
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Type.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Type.cpp</FilePath>
             </File>
             <File>
               <FileName>Random.cpp</FileName>
@@ -1664,11 +1669,6 @@
               <FileName>Dictionary.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Dictionary.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SString.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\SString.cpp</FilePath>
             </File>
             <File>
               <FileName>LinkedList.cpp</FileName>
