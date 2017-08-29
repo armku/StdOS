@@ -11,6 +11,22 @@
 #endif
 
 #if defined STM32F0
+	#define UART_PINS {\
+    /* TX   RX   CTS  RTS */	\
+    PA9, PA10,PA11,PA12,/* USART1 */	\
+    PA2, PA3, PA0, PA1, /* USART2 */	\
+    PB10,PB11,PB13,PB14,/* USART3 */	\
+    PC10,PC11,P0,  P0,  /* UART4  */	\
+    PC12, PD2,P0,  P0,  /* UART5  */	\
+    }
+    #define UART_PINS_FULLREMAP {\
+    /* TX   RX   CTS  RTS */	\
+    PB6, PB7, PA11,PA12,/* USART1 AFIO_MAPR_USART1_REMAP */	\
+    PD5, PD6, PD3, PD4, /* USART2 AFIO_MAPR_USART2_REMAP */	\
+    PD8, PD9, PD11,PD12,/* USART3 AFIO_MAPR_USART3_REMAP_FULLREMAP */	\
+    PC10,PC11,P0,  P0,  /* UART4  */	\
+    PC12, PD2,P0,  P0,  /* UART5  */	\
+    }
 #elif defined STM32F1
     #define UART_PINS {\
     /* TX   RX   CTS  RTS */	\
@@ -29,6 +45,22 @@
     PC12, PD2,P0,  P0,  /* UART5  */	\
     }
 #elif defined STM32F4
+	#define UART_PINS {\
+    /* TX   RX   CTS  RTS */	\
+    PA9, PA10,PA11,PA12,/* USART1 */	\
+    PA2, PA3, PA0, PA1, /* USART2 */	\
+    PB10,PB11,PB13,PB14,/* USART3 */	\
+    PC10,PC11,P0,  P0,  /* UART4  */	\
+    PC12, PD2,P0,  P0,  /* UART5  */	\
+    }
+    #define UART_PINS_FULLREMAP {\
+    /* TX   RX   CTS  RTS */	\
+    PB6, PB7, PA11,PA12,/* USART1 AFIO_MAPR_USART1_REMAP */	\
+    PD5, PD6, PD3, PD4, /* USART2 AFIO_MAPR_USART2_REMAP */	\
+    PD8, PD9, PD11,PD12,/* USART3 AFIO_MAPR_USART3_REMAP_FULLREMAP */	\
+    PC10,PC11,P0,  P0,  /* UART4  */	\
+    PC12, PD2,P0,  P0,  /* UART5  */	\
+    }
 #endif
 // 获取引脚
 void SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
@@ -199,7 +231,7 @@ bool SerialPort::OnOpen()
 		this->Ports[1]=new AlternatePort();
 	#endif
     this->Ports[0]->Set(this->Pins[0]);
-    this->Ports[0]->Set(this->Pins[1]);
+    this->Ports[1]->Set(this->Pins[1]);
 
     // 不要关调试口，否则杯具
     //    if (_index != Sys.MessagePort)
@@ -280,16 +312,16 @@ bool SerialPort::OnOpen()
     #endif 
 
     #ifdef STM32F0
-        GPIO_PinAFConfig(_GROUP(tx), _PIN(tx), GPIO_AF_1); //将IO口映射为USART接口
-        GPIO_PinAFConfig(_GROUP(rx), _PIN(rx), GPIO_AF_1);
+        GPIO_PinAFConfig(_GROUP(this->Pins[0]), _PIN(this->Pins[0]), GPIO_AF_1); //将IO口映射为USART接口
+        GPIO_PinAFConfig(_GROUP(this->Pins[1]), _PIN(this->Pins[1]), GPIO_AF_1);
     #elif defined STM32F1
 	#elif defined STM32F4
         const byte afs[] = 
         {
             GPIO_AF_USART1, GPIO_AF_USART2, GPIO_AF_USART3, GPIO_AF_UART4, GPIO_AF_UART5, GPIO_AF_USART6, GPIO_AF_UART7, GPIO_AF_UART8
         };
-		GPIO_PinAFConfig(_GROUP(tx),_PIN(tx),afs[Index]); //GPIOA9复用为USART1
-		GPIO_PinAFConfig(_GROUP(rx),_PIN(rx),afs[Index]); //GPIOA10复用为USART1
+		GPIO_PinAFConfig(_GROUP(this->Pins[0]),_PIN(this->Pins[0]),afs[Index]); //GPIOA9复用为USART1
+		GPIO_PinAFConfig(_GROUP(this->Pins[1]),_PIN(this->Pins[1]),afs[Index]); //GPIOA10复用为USART1
     #endif 
 
     USART_StructInit(&p);

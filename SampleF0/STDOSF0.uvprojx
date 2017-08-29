@@ -561,83 +561,6 @@
         </Group>
         <Group>
           <GroupName>App</GroupName>
-          <Files>
-            <File>
-              <FileName>ACZero.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\ACZero.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Alarm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Alarm.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BlinkPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\BlinkPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Button.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Button_GrayLevel.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Button_GrayLevel.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Button_magnetic.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Button_magnetic.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CommandPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\CommandPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FlushPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\FlushPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IR.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\IR.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IRcoding.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\IRcoding.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PowerUps.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\PowerUps.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PulsePort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\PulsePort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Raster.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Raster.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sensor.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Sensor.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sound.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Sound.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Core</GroupName>
@@ -812,11 +735,6 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Readme.MD</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STDOS\Device\Readme.MD</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -858,16 +776,6 @@
               <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>BufferPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\BufferPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitExpect.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Esp8266\WaitExpect.cpp</FilePath>
-            </File>
-            <File>
               <FileName>font.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\STDOS\Drivers\font.c</FilePath>
@@ -881,11 +789,6 @@
               <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Readme.MD</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STDOS\Drivers\Readme.MD</FilePath>
             </File>
             <File>
               <FileName>RX8025T.cpp</FileName>
@@ -1113,29 +1016,9 @@
               <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
             </File>
             <File>
-              <FileName>AES.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\AES.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Crc.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MD5.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\MD5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RC6.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RC6.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RSA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RSA.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1711,83 +1594,6 @@
         </Group>
         <Group>
           <GroupName>App</GroupName>
-          <Files>
-            <File>
-              <FileName>ACZero.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\ACZero.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Alarm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Alarm.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BlinkPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\BlinkPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Button.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Button_GrayLevel.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Button_GrayLevel.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Button_magnetic.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Button_magnetic.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CommandPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\CommandPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FlushPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\FlushPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IR.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\IR.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IRcoding.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\IRcoding.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PowerUps.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\PowerUps.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PulsePort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\PulsePort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Raster.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Raster.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sensor.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Sensor.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sound.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\App\Sound.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Core</GroupName>
@@ -1962,11 +1768,6 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Readme.MD</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STDOS\Device\Readme.MD</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -2008,16 +1809,6 @@
               <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>BufferPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\BufferPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitExpect.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Esp8266\WaitExpect.cpp</FilePath>
-            </File>
-            <File>
               <FileName>font.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\STDOS\Drivers\font.c</FilePath>
@@ -2031,11 +1822,6 @@
               <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Readme.MD</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STDOS\Drivers\Readme.MD</FilePath>
             </File>
             <File>
               <FileName>RX8025T.cpp</FileName>
@@ -2263,29 +2049,9 @@
               <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
             </File>
             <File>
-              <FileName>AES.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\AES.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Crc.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MD5.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\MD5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RC6.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RC6.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RSA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RSA.cpp</FilePath>
             </File>
           </Files>
         </Group>
