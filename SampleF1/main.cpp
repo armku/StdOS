@@ -14,7 +14,7 @@
 #include "TTime.h"
 #include "Drivers\RX8025T.h"
 
-#define USE3000 1
+#define USETEST 1
 
 class TTTTime
 {
@@ -34,7 +34,7 @@ void Test12(void *param)
 }
 
 #if 1
-	#if USE3000
+	#if USETEST
     OutputPort led1(PA8, false);
 	#else
 	OutputPort led1(PB0, false);
@@ -90,7 +90,7 @@ int main(void)
 {
     Sys.Name = (char*)namee;
     #if DEBUG
-		#if USE3000
+		#if USETEST
         Sys.MessagePort = COM5;
 		#else
 		Sys.MessagePort = COM1;
