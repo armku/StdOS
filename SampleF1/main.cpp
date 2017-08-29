@@ -70,23 +70,12 @@ void TimerTask(void *param)
 
 #define namee "StdOS"
 void AT24C02Test();
-#if USE3000
-RX8025T rx8025(PC1, PC2);
-#else
-RX8025T rx8025(PC1, PC2);
-#endif
+
 #if USETEST
 void ad71248Test();
+void RX8025Test();
 #endif
-DateTime now;
 
-void Rx8025Refresh(void *param)
-{
-    RX8025T *rx = (RX8025T*)param;
-    rx->LoadTime(now);
-    now.Show();
-    debug_printf("\r\n");
-}
 
 int main(void)
 {
@@ -100,26 +89,17 @@ int main(void)
         Sys.ShowInfo();
     #endif 
     Sys.Init();
-    if (now.Year < 2017)
-    {
-        now.Year = 2017;
-        now.Month = 8;
-        now.Day = 24;
-        now.Hour = 11;
-        now.Minute = 20;
-        now.Second = 35;
-        rx8025.SaveTime(now);
-    }
+	
     SerialPort::GetMessagePort()->Register(OnUsart1Read);
     //	AT24C02Test();  
 	#if USETEST
     ad71248Test();
+	RX8025Test();
 	#endif
 
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
     Sys.AddTask(Test12, 0, 600, 1000, "Test");
-    Sys.AddTask(Rx8025Refresh, &rx8025, 100, 1000, "TimeUp");
 
     Sys.Start();
 }

@@ -167,8 +167,9 @@ int RX8025T::SaveTime(DateTime &dt)
 	return this->RegWrite(SEC_ADDR,7);	
 }
 
-#if 0
-    RX8025T rx8025(PB6, PB7);
+#if 1
+    //RX8025T rx8025(PB6, PB7);
+    RX8025T rx8025(PC1, PC2);
     DateTime now;
     void Rx8025Refresh(void *param)
     {
