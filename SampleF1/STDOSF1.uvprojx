@@ -860,11 +860,6 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Readme.MD</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STDOS\Kernel\Readme.MD</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1026,29 +1021,9 @@
               <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
             </File>
             <File>
-              <FileName>AES.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\AES.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Crc.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MD5.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\MD5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RC6.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RC6.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RSA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RSA.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1923,11 +1898,6 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Readme.MD</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STDOS\Kernel\Readme.MD</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -2089,29 +2059,9 @@
               <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
             </File>
             <File>
-              <FileName>AES.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\AES.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Crc.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MD5.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\MD5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RC6.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RC6.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RSA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RSA.cpp</FilePath>
             </File>
           </Files>
         </Group>

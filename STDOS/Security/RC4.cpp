@@ -1,34 +1,5 @@
 #include "RC4.h"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #if 0
 void RC4::Init(byte*s,byte*key, uint Len)
 {
