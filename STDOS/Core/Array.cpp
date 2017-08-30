@@ -19,52 +19,66 @@ Array::~Array()
 }
 Array& Array::operator = (const Buffer& rhs)
 {
+	return *this;
 }
 Array& Array::operator = (const void* p)
 {
+	return *this;
 }
 Array& Array::operator = (Array&& rval)
 {
+	return *this;
 }
 // 设置数组长度。容量足够则缩小Length，否则扩容以确保数组容量足够大避免多次分配内存
 bool Array::SetLength(int len)
 {
+	return this->CheckCapacity(len,false);
 }
 bool Array::SetLength(int len, bool bak)
 {
+	int v5=this->_Length;
+	if(this->_Length<len)
+	{
+		int v6;
+		if(len)
+		{
+			v6=this->_Length;
+		}
+		else
+		{
+			v6=0;
+		}
+		if(!this->CheckCapacity(v6,bak))
+			return false;
+		if(this->_Length<v5)
+			this->_Length=v5;
+	}
+	else
+	{
+		this->_Length=v5;
+	}
+	return false;
 }
 // 拷贝数据，默认-1长度表示使用右边最大长度，左边不足时自动扩容
 int Array::Copy(int destIndex, const Buffer& src, int srcIndex, int len)
 {
-	Array *v5; 
-  int destIndex111;
-  const Buffer *src11;
-  int srcIndex111; 
-  int len11; 
-  int v10; 
-  int v11; 
-
-  v5 = this;
-  destIndex111 = destIndex;
-  src11 = &src;
-  srcIndex111 = srcIndex;
-  len11 = len;
-  v10 =src.Length();
-  v11 = v10 - srcIndex111;
+  int srclen =src.Length();
+  int v11 = srclen - srcIndex;
   if ( len >= 0 )
   {
     if ( len > v11 )
-      len11 = v10 - srcIndex111;
+      len = srclen - srcIndex;
   }
   else
   {
-    len11 = v10 - srcIndex111;
+    len = srclen - srcIndex;
     if ( v11 <= 0 )
       return 0;
   }
-  if (this->Length() < destIndex111 + len11 )
-	this->CheckCapacity(destIndex111 + len11,1);
-  //return Buffer::Copy(destIndex111, src11, srcIndex111, len11);
+  if (this->Length() < destIndex + len )
+	this->CheckCapacity(destIndex + len,1);
+  //return Buffer::Copy(destIndex, src, srcIndex, len);
+  return len;
 }
 
 // 设置数组元素为指定值，自动扩容
@@ -117,9 +131,11 @@ byte& Array::operator[](int i)
 
 bool operator==(const Array& bs1, const Array& bs2)
 {
+	return bs2.CompareTo(bs2)==0;
 }
 bool operator!=(const Array& bs1, const Array& bs2)
 {
+	return bs2.CompareTo(bs2)!=0;
 }
 
 #if DEBUG
