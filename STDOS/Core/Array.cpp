@@ -36,6 +36,35 @@ bool Array::SetLength(int len, bool bak)
 // 拷贝数据，默认-1长度表示使用右边最大长度，左边不足时自动扩容
 int Array::Copy(int destIndex, const Buffer& src, int srcIndex, int len)
 {
+	Array *v5; 
+  int destIndex111;
+  const Buffer *src11;
+  int srcIndex111; 
+  int len11; 
+  int v10; 
+  int v11; 
+
+  v5 = this;
+  destIndex111 = destIndex;
+  src11 = &src;
+  srcIndex111 = srcIndex;
+  len11 = len;
+  v10 =src.Length();
+  v11 = v10 - srcIndex111;
+  if ( len >= 0 )
+  {
+    if ( len > v11 )
+      len11 = v10 - srcIndex111;
+  }
+  else
+  {
+    len11 = v10 - srcIndex111;
+    if ( v11 <= 0 )
+      return 0;
+  }
+  if (this->Length() < destIndex111 + len11 )
+	this->CheckCapacity(destIndex111 + len11,1);
+  //return Buffer::Copy(destIndex111, src11, srcIndex111, len11);
 }
 
 // 设置数组元素为指定值，自动扩容
