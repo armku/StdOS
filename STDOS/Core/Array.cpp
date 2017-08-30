@@ -45,10 +45,29 @@ bool Array::SetItem(const void* data, int index, int count)
 // 设置数组。直接使用指针，不拷贝数据
 bool Array::Set(void* data, int len)
 {
+	if(this->Set((const void*)data,len))
+	{
+		this->_Size=1;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 // 设置数组。直接使用指针，不拷贝数据
 bool Array::Set(const void* data, int len)
 {
+	if((this->_needFree)&&(this->_Arr!=data))
+	{
+		//this->Alloc(this->_Length);
+	}
+	
+	this->_Arr=(char*)data;
+	this->_Length=len;
+	this->_Size=len;	
+	this->_needFree=false;
+	this->_canWrite=false;
 }
 // 清空已存储数据。
 void Array::Clear()
