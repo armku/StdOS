@@ -2,20 +2,7 @@
     #define __AD7124_8_H
 
     #include "stdint.h"
-
-    /*
-    (SPI1 : AD7124-8)
-    PA4		:	SPI1-NSS	
-    PA5		:	SPI1-SCK
-    PA6		:	SPI1-MISO
-    PA7		:	SPI1-MOSI
-     */
-
-    #define SPI_MISO_PIN		GPIO_Pin_6
-    #define SPI_MISO_PORT		GPIOA
-
-    #define SPI_MISO()		GPIO_ReadInputDataBit(SPI_MISO_PORT,SPI_MISO_PIN)
-
+   
     void AD7124_SPI_Config(void);
     uint8_t spi8_run(uint8_t sendData);
     uint16_t spi16_run(uint16_t sendData);

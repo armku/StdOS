@@ -86,7 +86,7 @@ uint8_t spi8_run(uint8_t sendData)
         SPI_Delay();
         spi1sck=1;
         rcvData <<= 1;
-        rcvData |= SPI_MISO();
+        rcvData |= spi1miso;
     }
     return rcvData;
 }
@@ -121,7 +121,7 @@ uint16_t spi16_run(uint16_t sendData)
         SPI_Delay();
         spi1sck=1;
         rcvData <<= 1;
-        rcvData |= SPI_MISO();
+        rcvData |= spi1miso;
     }
     return rcvData;
 }
@@ -156,7 +156,7 @@ uint32_t spi24_run(uint32_t sendData)
         SPI_Delay();
         spi1sck=1;
         rcvData <<= 1;
-        rcvData |= SPI_MISO();
+        rcvData |= spi1miso;
     }
     return rcvData;
 }
@@ -191,7 +191,7 @@ uint32_t spi32_run(uint32_t sendData)
         SPI_Delay();
         spi1sck=1;
         rcvData <<= 1;
-        rcvData |= SPI_MISO();
+        rcvData |= spi1miso;
     }
     return rcvData;
 }
