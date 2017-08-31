@@ -279,13 +279,13 @@ bool SerialPort::OnOpen()
 		{
 				case COM1:
 				case COM6:
-					break;
 					RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
+					break;
 				case COM2:
 				case COM3:
 				case COM4:
 				case COM5:
-					RCC->APB1ENR |= RCC_APB1ENR_USART2EN >> 1 << this->Index;
+					RCC->APB1ENR |= (RCC_APB1ENR_USART2EN >> 1) << this->Index;
 					break;
 				default:
 					break;
