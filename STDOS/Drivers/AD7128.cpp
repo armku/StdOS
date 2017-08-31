@@ -1,7 +1,12 @@
 #include "AD7128.h"
 #include "stm32f10x.h"
 #include "Sys.h"
+#include "Spi.h"
 
+OutputPort spi1nss(PA4, false, false);
+OutputPort spi1sck(PA5, false, false);
+OutputPort spi1miso(PA6, false, false);
+OutputPort spi1mosi(PA7, false, false);
 /*******************************************************************************
  * @function	: AD7124_SPI_Config
  * @brief		: SPI¶Ë¿ÚÅäÖÃ£¬Ä£ÄâSPI
@@ -11,30 +16,34 @@
  *****************************************************************************/
 void AD7124_SPI_Config(void)
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
+//    GPIO_InitTypeDef GPIO_InitStructure;
     //SPI_NSS
-    GPIO_InitStructure.GPIO_Pin = SPI_NSS_PIN;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_Init(SPI_NSS_PORT, &GPIO_InitStructure);
-    SPI_NSS_H();
+//    GPIO_InitStructure.GPIO_Pin = SPI_NSS_PIN;
+//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+//    GPIO_Init(SPI_NSS_PORT, &GPIO_InitStructure);
+    //SPI_NSS_H();
+	spi1nss=1;
     //SPI_SCK
-    GPIO_InitStructure.GPIO_Pin = SPI_SCK_PIN;
-    GPIO_Init(SPI_SCK_PORT, &GPIO_InitStructure);
-    GPIO_ResetBits(SPI_SCK_PORT, SPI_SCK_PIN);
-    SPI_SCK_H();
+//    GPIO_InitStructure.GPIO_Pin = SPI_SCK_PIN;
+//    GPIO_Init(SPI_SCK_PORT, &GPIO_InitStructure);
+//    GPIO_ResetBits(SPI_SCK_PORT, SPI_SCK_PIN);
+    //SPI_SCK_H();
+	spi1sck=1;
     //SPI_MOSI
-    GPIO_InitStructure.GPIO_Pin = SPI_MOSI_PIN;
-    GPIO_Init(SPI_MOSI_PORT, &GPIO_InitStructure);
-    GPIO_ResetBits(SPI_MOSI_PORT, SPI_MOSI_PIN);
-    SPI_MOSI_L();
+//    GPIO_InitStructure.GPIO_Pin = SPI_MOSI_PIN;
+//    GPIO_Init(SPI_MOSI_PORT, &GPIO_InitStructure);
+//    GPIO_ResetBits(SPI_MOSI_PORT, SPI_MOSI_PIN);
+    //SPI_MOSI_L();
+	spi1mosi=0;
     //SPI_MISO
-    GPIO_InitStructure.GPIO_Pin = SPI_MISO_PIN;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; //GPIO_Mode_IPU;;//
-    GPIO_Init(SPI_MISO_PORT, &GPIO_InitStructure);
+//    GPIO_InitStructure.GPIO_Pin = SPI_MISO_PIN;
+//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; //GPIO_Mode_IPU;;//
+//    GPIO_Init(SPI_MISO_PORT, &GPIO_InitStructure);
 
-    SPI_NSS_L();
+    //SPI_NSS_L();
+	spi1miso=0;
 }
 
 /*******************************************************************************
