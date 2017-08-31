@@ -42,8 +42,7 @@ void AD7124_SPI_Config(void)
 //    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; //GPIO_Mode_IPU;;//
 //    GPIO_Init(SPI_MISO_PORT, &GPIO_InitStructure);
 
-    //SPI_NSS_L();
-	spi1miso=0;
+    spi1nss=0;	
 }
 
 /*******************************************************************************
@@ -222,7 +221,7 @@ uint32_t spi32_run(uint32_t sendData)
 uint32_t AD7124_Read_Reg(uint8_t reg, uint8_t bytes)
 {
     uint32_t retVal;
-    SPI_NSS_L();
+    spi1nss=0;
     spi8_run(AD7124_RD | reg);
     if (bytes == 1)
     {
@@ -278,7 +277,7 @@ uint32_t AD7124_Read_Reg_NoCS(uint8_t reg, uint8_t bytes)
  *****************************************************************************/
 void AD7124_Write_Reg(uint8_t reg, uint8_t bytes, uint32_t data)
 {
-    SPI_NSS_L();
+    spi1nss=0;
     spi8_run(AD7124_WR | reg);
     if (bytes == 1)
     {
@@ -361,7 +360,7 @@ void AD7124_Init(void)
     AD7124_Config(); //ADC 配置
     AD7124_Channel_Config(); //
     AD7124_ExInt_Config(); //外部中断口配置
-    SPI_NSS_L();
+    spi1nss=0;
 }
 
 //IO_CTRL_1_TEMP1				无数字输出 	数字输出禁用	PDSW关	IOUT1关闭			IOUT0=500uA	IOUT1_CH=0		IOUT0_CH=AIN0
@@ -528,7 +527,7 @@ float AD7124_Get_Temp1_Res(void)
  *****************************************************************************/
 void AD7124_Reset(void)
 {
-    SPI_NSS_L();
+    spi1nss=0;
     spi8_run(0xFF);
     spi8_run(0xFF);
     spi8_run(0xFF);
