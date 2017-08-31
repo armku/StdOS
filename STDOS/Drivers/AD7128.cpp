@@ -7,6 +7,8 @@ OutputPort spi1nss(PA4);
 OutputPort spi1sck(PA5);
 InputPort spi1miso(PA6 );
 OutputPort spi1mosi(PA7);
+
+SpiSoft spi1;
 /*******************************************************************************
  * @function	: AD7124_SPI_Config
  * @brief		: SPI¶Ë¿ÚÅäÖÃ£¬Ä£ÄâSPI
@@ -31,7 +33,9 @@ void AD7124_SPI_Config(void)
     spi1miso.Invert = false;
     spi1mosi.Invert = false;
     spi1nss.Invert = false;
-
+	
+	spi1.SetPin(PA5,PA6,PA7);
+	spi1.SetNss(PA4);
 }
 
 /*******************************************************************************
