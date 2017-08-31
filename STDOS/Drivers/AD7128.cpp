@@ -3,10 +3,10 @@
 #include "Sys.h"
 #include "Spi.h"
 
-OutputPort spi1nss(PA4, false, false);
-OutputPort spi1sck(PA5, false, false);
-OutputPort spi1miso(PA6, false, false);
-OutputPort spi1mosi(PA7, false, false);
+OutputPort spi1nss(PA4);
+OutputPort spi1sck(PA5);
+InputPort spi1miso(PA6 );
+OutputPort spi1mosi(PA7);
 /*******************************************************************************
  * @function	: AD7124_SPI_Config
  * @brief		: SPI¶Ë¿ÚÅäÖÃ£¬Ä£ÄâSPI
@@ -26,6 +26,16 @@ void AD7124_SPI_Config(void)
 //    GPIO_Init(SPI_MISO_PORT, &GPIO_InitStructure);
 
     spi1nss=0;	
+	
+	spi1sck.Invert = false;
+    spi1miso.Invert = false;
+    spi1mosi.Invert = false;
+    spi1nss.Invert = false;
+
+    spi1sck.OpenDrain = false;
+    //spi1miso.OpenDrain = false;
+    spi1mosi.OpenDrain = false;
+    spi1nss.OpenDrain = false;
 }
 
 /*******************************************************************************
