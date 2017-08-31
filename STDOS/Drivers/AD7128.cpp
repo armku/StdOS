@@ -32,10 +32,6 @@ void AD7124_SPI_Config(void)
     spi1mosi.Invert = false;
     spi1nss.Invert = false;
 
-    spi1sck.OpenDrain = false;
-    //spi1miso.OpenDrain = false;
-    spi1mosi.OpenDrain = false;
-    spi1nss.OpenDrain = false;
 }
 
 /*******************************************************************************
