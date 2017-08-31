@@ -274,17 +274,22 @@ bool SerialPort::OnOpen()
 
     // 打开 UART 时钟。必须先打开串口时钟，才配置引脚
     #if defined(STM32F1) || defined(STM32F4) 
-        if (this->Index)
-        {
-            // COM2-5 on APB1
-            RCC->APB1ENR |= RCC_APB1ENR_USART2EN >> 1 << this->Index;
-        }
-        else
-        {
-            // COM1 on APB2
-            RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
-            //RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); //此代码功能同上行
-        }
+		switch(this->Index)
+		{
+				case COM1:
+				case COM6:
+					break;
+					RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
+				case COM2:
+				case COM3:
+				case COM4:
+				case COM5:
+					RCC->APB1ENR |= RCC_APB1ENR_USART2EN >> 1 << this->Index;
+					break;
+				default:
+					break;
+		}
+		//RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); //此代码功能同上行
 	#elif defined STM32F0
 		switch (this->Index)
         {
