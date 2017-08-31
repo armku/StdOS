@@ -91,7 +91,7 @@ uint8_t spi8_run(uint8_t sendData)
             spi1mosi=0;
         }
         SPI_Delay();
-        SPI_SCK_L();
+        spi1sck=0;
         sendData <<= 1;
         SPI_Delay();
         SPI_Delay();
@@ -126,7 +126,7 @@ uint16_t spi16_run(uint16_t sendData)
             spi1mosi=0;
         }
         SPI_Delay();
-        SPI_SCK_L();
+        spi1sck=0;
         sendData <<= 1;
         SPI_Delay();
         SPI_Delay();
@@ -161,7 +161,7 @@ uint32_t spi24_run(uint32_t sendData)
             spi1mosi=0;
         }
         SPI_Delay();
-        SPI_SCK_L();
+        spi1sck=0;
         sendData <<= 1;
         SPI_Delay();
         SPI_Delay();
@@ -196,7 +196,7 @@ uint32_t spi32_run(uint32_t sendData)
             spi1mosi=0;
         }
         SPI_Delay();
-        SPI_SCK_L();
+        spi1sck=0;
         sendData <<= 1;
         SPI_Delay();
         SPI_Delay();

@@ -25,9 +25,9 @@
 #define SPI_MOSI_PORT		GPIOA
 
 /********************  **************************************/
-#define SPI_NSS_L()		(SPI_NSS_PORT->BRR = SPI_NSS_PIN)
+//#define SPI_NSS_L()		(SPI_NSS_PORT->BRR = SPI_NSS_PIN)
 //#define SPI_NSS_H()		(SPI_NSS_PORT->BSRR = SPI_NSS_PIN)
-#define SPI_SCK_L()		(SPI_SCK_PORT->BRR = SPI_SCK_PIN)
+//#define SPI_SCK_L()		(SPI_SCK_PORT->BRR = SPI_SCK_PIN)
 //#define SPI_SCK_H()		(SPI_SCK_PORT->BSRR = SPI_SCK_PIN)
 #define SPI_MOSI_L()	(SPI_MOSI_PORT->BRR = SPI_MOSI_PIN)
 #define SPI_MOSI_H()	(SPI_MOSI_PORT->BSRR = SPI_MOSI_PIN)
