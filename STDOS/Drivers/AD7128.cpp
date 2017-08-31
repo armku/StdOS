@@ -16,26 +16,9 @@ OutputPort spi1mosi(PA7, false, false);
  *****************************************************************************/
 void AD7124_SPI_Config(void)
 {
-//    GPIO_InitTypeDef GPIO_InitStructure;
-    //SPI_NSS
-//    GPIO_InitStructure.GPIO_Pin = SPI_NSS_PIN;
-//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-//    GPIO_Init(SPI_NSS_PORT, &GPIO_InitStructure);
-    //spi1nss=1;
 	spi1nss=1;
-    //SPI_SCK
-//    GPIO_InitStructure.GPIO_Pin = SPI_SCK_PIN;
-//    GPIO_Init(SPI_SCK_PORT, &GPIO_InitStructure);
-//    GPIO_ResetBits(SPI_SCK_PORT, SPI_SCK_PIN);
-    //spi1sck=1;
 	spi1sck=1;
-    //SPI_MOSI
-//    GPIO_InitStructure.GPIO_Pin = SPI_MOSI_PIN;
-//    GPIO_Init(SPI_MOSI_PORT, &GPIO_InitStructure);
-//    GPIO_ResetBits(SPI_MOSI_PORT, SPI_MOSI_PIN);
-    //SPI_MOSI_L();
-	spi1mosi=0;
+ 	spi1mosi=0;
     //SPI_MISO
 //    GPIO_InitStructure.GPIO_Pin = SPI_MISO_PIN;
 //    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -79,12 +62,12 @@ uint8_t spi8_run(uint8_t sendData)
     uint8_t spicnt = 8;
     uint8_t rcvData = 0;
     spi1sck=1;
-    SPI_MOSI_H();
+    spi1mosi=1;
     while (spicnt-- > 0)
     {
         if (sendData &0x80)
         {
-            SPI_MOSI_H();
+            spi1mosi=1;
         }
         else
         {
@@ -114,12 +97,12 @@ uint16_t spi16_run(uint16_t sendData)
     uint8_t spicnt = 16;
     uint16_t rcvData = 0;
     spi1sck=1;
-    SPI_MOSI_H();
+    spi1mosi=1;
     while (spicnt-- > 0)
     {
         if (sendData &0x8000)
         {
-            SPI_MOSI_H();
+            spi1mosi=1;
         }
         else
         {
@@ -149,12 +132,12 @@ uint32_t spi24_run(uint32_t sendData)
     uint8_t spicnt = 24;
     uint32_t rcvData = 0;
     spi1sck=1;
-    SPI_MOSI_H();
+    spi1mosi=1;
     while (spicnt-- > 0)
     {
         if (sendData &0x800000)
         {
-            SPI_MOSI_H();
+            spi1mosi=1;
         }
         else
         {
@@ -184,12 +167,12 @@ uint32_t spi32_run(uint32_t sendData)
     uint8_t spicnt = 32;
     uint32_t rcvData = 0;
     spi1sck=1;
-    SPI_MOSI_H();
+    spi1mosi=1;
     while (spicnt-- > 0)
     {
         if (sendData &0x80000000)
         {
-            SPI_MOSI_H();
+            spi1mosi=1;
         }
         else
         {
