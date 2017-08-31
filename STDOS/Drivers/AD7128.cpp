@@ -22,13 +22,13 @@ void AD7124_SPI_Config(void)
 //    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 //    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 //    GPIO_Init(SPI_NSS_PORT, &GPIO_InitStructure);
-    //SPI_NSS_H();
+    //spi1nss=1;
 	spi1nss=1;
     //SPI_SCK
 //    GPIO_InitStructure.GPIO_Pin = SPI_SCK_PIN;
 //    GPIO_Init(SPI_SCK_PORT, &GPIO_InitStructure);
 //    GPIO_ResetBits(SPI_SCK_PORT, SPI_SCK_PIN);
-    //SPI_SCK_H();
+    //spi1sck=1;
 	spi1sck=1;
     //SPI_MOSI
 //    GPIO_InitStructure.GPIO_Pin = SPI_MOSI_PIN;
@@ -79,7 +79,7 @@ uint8_t spi8_run(uint8_t sendData)
 {
     uint8_t spicnt = 8;
     uint8_t rcvData = 0;
-    SPI_SCK_H();
+    spi1sck=1;
     SPI_MOSI_H();
     while (spicnt-- > 0)
     {
@@ -89,14 +89,14 @@ uint8_t spi8_run(uint8_t sendData)
         }
         else
         {
-            SPI_MOSI_L();
+            spi1mosi=0;
         }
         SPI_Delay();
         SPI_SCK_L();
         sendData <<= 1;
         SPI_Delay();
         SPI_Delay();
-        SPI_SCK_H();
+        spi1sck=1;
         rcvData <<= 1;
         rcvData |= SPI_MISO();
     }
@@ -114,7 +114,7 @@ uint16_t spi16_run(uint16_t sendData)
 {
     uint8_t spicnt = 16;
     uint16_t rcvData = 0;
-    SPI_SCK_H();
+    spi1sck=1;
     SPI_MOSI_H();
     while (spicnt-- > 0)
     {
@@ -124,14 +124,14 @@ uint16_t spi16_run(uint16_t sendData)
         }
         else
         {
-            SPI_MOSI_L();
+            spi1mosi=0;
         }
         SPI_Delay();
         SPI_SCK_L();
         sendData <<= 1;
         SPI_Delay();
         SPI_Delay();
-        SPI_SCK_H();
+        spi1sck=1;
         rcvData <<= 1;
         rcvData |= SPI_MISO();
     }
@@ -149,7 +149,7 @@ uint32_t spi24_run(uint32_t sendData)
 {
     uint8_t spicnt = 24;
     uint32_t rcvData = 0;
-    SPI_SCK_H();
+    spi1sck=1;
     SPI_MOSI_H();
     while (spicnt-- > 0)
     {
@@ -159,14 +159,14 @@ uint32_t spi24_run(uint32_t sendData)
         }
         else
         {
-            SPI_MOSI_L();
+            spi1mosi=0;
         }
         SPI_Delay();
         SPI_SCK_L();
         sendData <<= 1;
         SPI_Delay();
         SPI_Delay();
-        SPI_SCK_H();
+        spi1sck=1;
         rcvData <<= 1;
         rcvData |= SPI_MISO();
     }
@@ -184,7 +184,7 @@ uint32_t spi32_run(uint32_t sendData)
 {
     uint8_t spicnt = 32;
     uint32_t rcvData = 0;
-    SPI_SCK_H();
+    spi1sck=1;
     SPI_MOSI_H();
     while (spicnt-- > 0)
     {
@@ -194,14 +194,14 @@ uint32_t spi32_run(uint32_t sendData)
         }
         else
         {
-            SPI_MOSI_L();
+            spi1mosi=0;
         }
         SPI_Delay();
         SPI_SCK_L();
         sendData <<= 1;
         SPI_Delay();
         SPI_Delay();
-        SPI_SCK_H();
+        spi1sck=1;
         rcvData <<= 1;
         rcvData |= SPI_MISO();
     }
@@ -236,7 +236,7 @@ uint32_t AD7124_Read_Reg(uint8_t reg, uint8_t bytes)
     {
         retVal = spi24_run(0xFFFFFF);
     }
-    SPI_NSS_H();
+    spi1nss=1;
     return retVal;
 }
 
@@ -292,7 +292,7 @@ void AD7124_Write_Reg(uint8_t reg, uint8_t bytes, uint32_t data)
     {
         spi24_run(data);
     }
-    SPI_NSS_H();
+    spi1nss=1;
 }
 
 //ADC_CONTROL			内部参考电压使能	低功率	连续转换模式	内部时钟不输出
@@ -537,7 +537,7 @@ void AD7124_Reset(void)
     spi8_run(0xFF);
     spi8_run(0xFF);
     spi8_run(0xFF);
-    SPI_NSS_H();
+    spi1nss=1;
 }
 
 float AD7124_Temp1_Test(void)
