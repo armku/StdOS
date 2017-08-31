@@ -1,18 +1,26 @@
 #include "AD7124.h"
 
 #if 1
-//-8
-OutputPort spi1nss(PE2,false,false);
-OutputPort spi1sck(PE4,false,false);
-OutputPort spi1miso(PE5,false,false);
-OutputPort spi1mosi(PE6,false,false);
-#else
-//-4
-OutputPort spi1nss(PG12,false,false);
-OutputPort spi1sck(PG13,false,false);
-OutputPort spi1miso(PG14,false,false);
-OutputPort spi1mosi(PG15,false,false);
+    //-8
+    #if 1 //3000
+        OutputPort spi1nss(PA4, false, false);
+        OutputPort spi1sck(PA5, false, false);
+        OutputPort spi1miso(PA6, false, false);
+        OutputPort spi1mosi(PA7, false, false);
+    #else 
+        OutputPort spi1nss(PE2, false, false);
+        OutputPort spi1sck(PE4, false, false);
+        OutputPort spi1miso(PE5, false, false);
+        OutputPort spi1mosi(PE6, false, false);
+    #endif 
+#else 
+    //-4
+    OutputPort spi1nss(PG12, false, false);
+    OutputPort spi1sck(PG13, false, false);
+    OutputPort spi1miso(PG14, false, false);
+    OutputPort spi1mosi(PG15, false, false);
 #endif
+
 #define AD7124_WR				0x00
 #define AD7124_RD				0x40
 
@@ -1287,11 +1295,22 @@ ad7124_st_reg ad7124_regs[AD7124_REG_NO] =
 	{0x37, 0x500000, 3, 1}, /* AD7124_Gain_6 */
 	{0x38, 0x500000, 3, 1}, /* AD7124_Gain_7 */
 };
+ad7124_st_reg regss[10];
+ad7124_device ad71;
+ad7124_st_reg ad71reg;
+int32_t AD7124_ReadRegister(ad7124_device *device, ad7124_st_reg* pReg);
 void ad7124test(void* param)
 {
 //	auto data = AD7124_Read_Reg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
 //    printf("data:0x%08x\n", data);
 	AD7124_Read_ID();
+//	ad71.useCRC=false;
+//	ad71.regs=&regss[0];
+//	ad71.slave_select_id=0;
+//	ad71.check_ready=0;
+//	
+//	
+//	AD7124_ReadRegister(&ad71,&ad71reg);
 }
 void ad71248Test()
 {
