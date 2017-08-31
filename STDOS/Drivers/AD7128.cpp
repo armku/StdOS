@@ -3,7 +3,6 @@
 #include "Sys.h"
 #include "Spi.h"
 
-OutputPort spi1nss(PA4);
 OutputPort spi1sck(PA5);
 InputPort spi1miso(PA6 );
 OutputPort spi1mosi(PA7);
@@ -18,7 +17,10 @@ SpiSoft spi1;
  *****************************************************************************/
 void AD7124_SPI_Config(void)
 {
-	spi1nss=1;
+	spi1.SetPin(PA5,PA6,PA7);
+	spi1.SetNss(PA4);
+	
+	spi1.Stop();
 	spi1sck=1;
  	spi1mosi=0;
     //SPI_MISO
@@ -27,15 +29,13 @@ void AD7124_SPI_Config(void)
 //    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; //GPIO_Mode_IPU;;//
 //    GPIO_Init(SPI_MISO_PORT, &GPIO_InitStructure);
 
-    spi1nss=0;	
+    spi1.Start();	
 	
 	spi1sck.Invert = false;
     spi1miso.Invert = false;
     spi1mosi.Invert = false;
-    spi1nss.Invert = false;
 	
-	spi1.SetPin(PA5,PA6,PA7);
-	spi1.SetNss(PA4);
+	
 }
 
 /*******************************************************************************
@@ -214,7 +214,7 @@ uint32_t spi32_run(uint32_t sendData)
 uint32_t AD7124_Read_Reg(uint8_t reg, uint8_t bytes)
 {
     uint32_t retVal;
-    spi1nss=0;
+    spi1.Start();
     spi8_run(AD7124_RD | reg);
     if (bytes == 1)
     {
@@ -228,7 +228,7 @@ uint32_t AD7124_Read_Reg(uint8_t reg, uint8_t bytes)
     {
         retVal = spi24_run(0xFFFFFF);
     }
-    spi1nss=1;
+    spi1.Stop();
     return retVal;
 }
 
@@ -270,7 +270,7 @@ uint32_t AD7124_Read_Reg_NoCS(uint8_t reg, uint8_t bytes)
  *****************************************************************************/
 void AD7124_Write_Reg(uint8_t reg, uint8_t bytes, uint32_t data)
 {
-    spi1nss=0;
+    spi1.Start();
     spi8_run(AD7124_WR | reg);
     if (bytes == 1)
     {
@@ -284,7 +284,7 @@ void AD7124_Write_Reg(uint8_t reg, uint8_t bytes, uint32_t data)
     {
         spi24_run(data);
     }
-    spi1nss=1;
+    spi1.Stop();
 }
 
 //ADC_CONTROL			内部参考电压使能	低功率	连续转换模式	内部时钟不输出
@@ -353,7 +353,7 @@ void AD7124_Init(void)
     AD7124_Config(); //ADC 配置
     AD7124_Channel_Config(); //
     AD7124_ExInt_Config(); //外部中断口配置
-    spi1nss=0;
+    spi1.Start();
 }
 
 //IO_CTRL_1_TEMP1				无数字输出 	数字输出禁用	PDSW关	IOUT1关闭			IOUT0=500uA	IOUT1_CH=0		IOUT0_CH=AIN0
@@ -520,7 +520,7 @@ float AD7124_Get_Temp1_Res(void)
  *****************************************************************************/
 void AD7124_Reset(void)
 {
-    spi1nss=0;
+    spi1.Start();
     spi8_run(0xFF);
     spi8_run(0xFF);
     spi8_run(0xFF);
@@ -529,7 +529,7 @@ void AD7124_Reset(void)
     spi8_run(0xFF);
     spi8_run(0xFF);
     spi8_run(0xFF);
-    spi1nss=1;
+    spi1.Stop();
 }
 
 float AD7124_Temp1_Test(void)
