@@ -102,7 +102,15 @@ extern uint systickcnt;
 // 当前滴答时钟
 uint TTime::CurrentTicks()const
 {
-    return systickcnt;
+	SmartIRQ irq;
+
+    uint value = (SysTick->LOAD - SysTick->VAL);
+    if(SysTick->CTRL & SysTick_CTRL_COUNTFLAG)
+    {
+        systickcnt += SysTick->LOAD;
+    }
+
+    return systickcnt + value;
 }
 
 // 当前毫秒数

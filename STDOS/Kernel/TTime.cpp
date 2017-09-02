@@ -138,9 +138,6 @@ void TimeCost::Show(cstring format)const
 	
 }
 
-
-
-
 #ifdef __cplusplus
     extern "C"
     {
