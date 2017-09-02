@@ -83,14 +83,12 @@ void TSys::OnInit()
 	this->CystalClock=HSE_VALUE;
 	this->MessagePort=COM1;
 	#ifdef STM32F0
-        Buffer::Copy(this->ID,(void *)0x1FFFF7AC,12);
+        Buffer::Copy(this->ID,(void *)0x1FFFF7AC,ArrayLength(this->ID));
     #elif defined STM32F1 
-        Buffer::Copy(this->ID,(void *)0x1FFFF7E8,12);
+        Buffer::Copy(this->ID,(void *)0x1FFFF7E8,ArrayLength(this->ID));
     #elif defined STM32F4 
-        Buffer::Copy(this->ID,(void *)0x1fff7a10,12);
+        Buffer::Copy(this->ID,(void *)0x1fff7a10,ArrayLength(this->ID));
     #endif 	
-	
-	
 	
 	this->CPUID = SCB->CPUID;
     uint MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本

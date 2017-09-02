@@ -1,5 +1,6 @@
 #include <string.h>
 #include "Sys.h"
+#include "Buffer.h"
 
 char chartmp[512];
 // 打包一个指针和长度指定的数据区
