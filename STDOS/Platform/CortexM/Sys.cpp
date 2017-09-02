@@ -105,6 +105,10 @@ void TSys::OnInit()
     switch (this->DevID)
     {
 		#ifdef STM32F0
+			case 0X0440:
+				CPUName = new String("STM32F030C8");
+                this->RAMSize = 8;
+                break;
 			case 0X0448:
 				CPUName = new String("STM32F072VB");
                 this->RAMSize = 64;
