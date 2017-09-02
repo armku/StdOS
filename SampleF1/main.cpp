@@ -14,8 +14,6 @@
 #include "TTime.h"
 #include "Drivers\RX8025T.h"
 
-#define USETEST 1
-
 class TTTTime
 {
     public:
@@ -34,12 +32,8 @@ void Test12(void *param)
 }
 
 #if 1
-	#if USETEST
-    OutputPort led1(PA8, false);
-	#else
 	OutputPort led1(PB0, false);
-	#endif
-    OutputPort led2(PF7, false);
+	OutputPort led2(PF7, false);
     OutputPort led3(PF8, false);
 #else 
     OutputPort led1(PD0, false);
@@ -71,32 +65,18 @@ void TimerTask(void *param)
 #define namee "StdOS"
 void AT24C02Test();
 
-#if USETEST
-void ad71248Test();
-void RX8025Test();
-#endif
-
-
 int main(void)
 {
     Sys.Name = (char*)namee;
-    #if DEBUG
-		#if USETEST
-        Sys.MessagePort = COM5;
-		#else
-		Sys.MessagePort = COM1;
-		#endif
-        Sys.ShowInfo();
-    #endif 
     Sys.Init();
-	
+	#if DEBUG
+		Sys.MessagePort = COM1;
+		Sys.ShowInfo();
+    #endif 
+    
     SerialPort::GetMessagePort()->Register(OnUsart1Read);
     //	AT24C02Test();  
-	#if USETEST
-    ad71248Test();
-	RX8025Test();
-	#endif
-
+	
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
     Sys.AddTask(Test12, 0, 600, 1000, "Test");
