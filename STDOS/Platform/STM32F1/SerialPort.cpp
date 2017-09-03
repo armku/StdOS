@@ -154,6 +154,8 @@ void SerialPort::Register(TransportHandler handler, void *param)
     {
         Interrupt.Deactivate(irq);
     }
+//	this->_taskidRx= Sys.AddTask(this->ReceiveTask,this,-1,-1,"serialrcv");
+//	this->_task=Task.Get(this->_taskidRx);
 }
 
 #if defined(STM32F0) || defined(STM32F4)
