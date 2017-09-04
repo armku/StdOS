@@ -105,11 +105,15 @@ uint TTime::CurrentTicks()const
 	SmartIRQ irq;
 
     uint value = (SysTick->LOAD - SysTick->VAL);
+	#if defined STM32F0
+	#elif defined STM32F1
     if(SysTick->CTRL & SysTick_CTRL_COUNTFLAG)
     {
         systickcnt += SysTick->LOAD;
     }
-
+	#elif defined STM32F4
+	#endif
+	
     return systickcnt + value;
 }
 
