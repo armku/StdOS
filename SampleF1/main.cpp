@@ -72,9 +72,20 @@ String Test()
 
     return c;
 }
+class TESTABC
+{
+	public:
+		void aa(void* param)
+		{
+			printf("hello test\r\n");
+		}
+};
+TESTABC testabc;
 
 String SSTEST;
 
+
+void queuetest();
 int main(void)
 {
     Sys.Name = (char*)namee;
@@ -91,6 +102,36 @@ int main(void)
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
     Sys.AddTask(Test12, 0, 600, 1000, "Test");
-
+//	Sys.AddTask((void *(void*))(testabc.aa), 0, 600, 1000, "Test");
+	
+	queuetest();
     Sys.Start();
+}
+Queue txtest;
+class ctestrlt
+{
+	public:
+		int len;
+		int Capacity;
+};
+ctestrlt rlt;
+void queuetest()
+{
+	debug_printf("\r\n Queue Test begin\r\n");
+	
+	rlt.len=txtest.Length();
+	rlt.Capacity=txtest.Capacity();
+	
+	debug_printf("Length:%d\r\n",rlt.len);
+	debug_printf("Capacity:%d\r\n",rlt.Capacity);
+	
+	txtest.SetCapacity(50);
+	
+	rlt.len=txtest.Length();
+	rlt.Capacity=txtest.Capacity();
+	
+	debug_printf("Length:%d\r\n",rlt.len);
+	debug_printf("Capacity:%d\r\n",rlt.Capacity);
+	
+	debug_printf("\r\n Queue Test end\r\n");
 }

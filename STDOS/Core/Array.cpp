@@ -1,4 +1,5 @@
 #include "Array.h"
+#include <stdio.h>
 
 Array::Array(void *data, int len): Buffer(data, len)
 {
@@ -32,32 +33,29 @@ Array& Array::operator = (Array&& rval)
 // 设置数组长度。容量足够则缩小Length，否则扩容以确保数组容量足够大避免多次分配内存
 bool Array::SetLength(int len)
 {
-	return this->CheckCapacity(len,false);
+	return this->SetLength(len,false);
 }
 bool Array::SetLength(int len, bool bak)
-{
-	int v5=this->_Length;
-	if(this->_Length<len)
-	{
-		int v6;
-		if(len)
-		{
-			v6=this->_Length;
-		}
-		else
-		{
-			v6=0;
-		}
-		if(!this->CheckCapacity(v6,bak))
-			return false;
-		if(this->_Length<v5)
-			this->_Length=v5;
-	}
-	else
-	{
-		this->_Length=v5;
-	}
-	return false;
+{	  
+  int baklen; 
+   
+  if ( this->_Length < len )
+  {
+    if ( bak )
+      baklen = _Capacity ;
+    else
+      baklen = 0;
+    if ( CheckCapacity(len, baklen) )
+      return 0;
+    if( _Capacity  < len )
+      _Capacity = len;
+  }
+  else
+  {
+   _Capacity = len;
+  }
+  
+  return true;	
 }
 // 拷贝数据，默认-1长度表示使用右边最大长度，左边不足时自动扩容
 int Array::Copy(int destIndex, const Buffer& src, int srcIndex, int len)
