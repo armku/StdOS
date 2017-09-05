@@ -79,7 +79,26 @@ byte Queue::Dequeue()
 // 批量写入
 int Queue::Write(const Buffer &bs)
 {
-    return 0;
+	int ret=0;
+ int capacity =this->Capacity();
+  if ( !capacity )
+    this->_s.SetLength(64);
+  if(this->_size<capacity)
+  {
+	  int v6=bs.Length();
+	  if(this->_tail+v6 >capacity)
+	  {
+		  v6=capacity-this->_size;
+	  }
+  }
+  else
+  {
+	  ret=0;
+  }
+  
+  
+  
+    return ret;
 }
 
 // 批量读取
