@@ -90,6 +90,27 @@ int Queue::Write(const Buffer &bs)
 	  {
 		  v6=capacity-this->_size;
 	  }
+	  int v7 = 0;
+	  while(1)
+	  {
+		  int v8 = this->Capacity();
+		  int v9=v8-this->_head;
+		  if(v6 <=v9)
+			  break;
+		  //this->_s.Copy();
+		  v6-=v9;
+		  v7+=v9;
+		  this->_tail=0;
+	  }
+	  //this->_s.Copy();
+	  int v10=v7+v6;
+	  this->_head+=v6;
+	  if(this->_s.Length()<=this->_head)
+		  this->_head=this->_s.Length();
+	  EnterCritical();
+	  this->_size+=v10;
+	  ExitCritical();
+	  ret=v10;
   }
   else
   {
