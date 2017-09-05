@@ -151,6 +151,48 @@ void Array::move(Array& rval)
 // 检查容量。如果不足则扩大，并备份指定长度的数据
 bool Array::CheckCapacity(int len, int bak)
 {
+    bool ret;
+    int i;
+        Expand=true;
+    if (_Capacity >= len )
+    {
+        ret = true;
+    }
+    else if (Expand)
+    {
+        for (i = 64; i < _Length; i *= 2)
+            ;
+        auto v8 = _Size;
+        void *v9 = this->Alloc(i);
+        if (v9)
+        {
+            if (_Capacity < len)
+                len = _Capacity;
+            if (len > 0 && Expand)
+            {
+                Buffer v10(v9, i);
+                v10.Copy(0, _Arr, len);
+            }
+            
+            if (v8)
+            {
+                if (_Arr != v9)
+                    delete (_Arr);
+            }
+            Expand = v9;
+            _Capacity = i;            
+            ret = true;
+        }
+        else
+        {
+            ret = false;
+        }
+    }
+    else
+    {
+        ret = false;
+    }
+    return ret;
 }
 void *Array::Alloc(int len)
 {

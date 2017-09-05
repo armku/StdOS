@@ -9,12 +9,10 @@ void EnterCritical()
   ;
 }
 
-
-
-byte buf[512];
-Queue::Queue():_s(buf,512)
-{	
-	return ;
+byte buf[64];
+Queue::Queue():_s(buf,64)
+{		
+	this->Clear();
 }
 
 
@@ -27,20 +25,55 @@ void Queue::Clear()
 {
 	int v2=this->_s.Capacity();
 	this->_s.SetLength(v2);
-	//this->_s.5 6 7=0;
-//	this->_s._canWrite=0;
-//	this->_s._Size=0;
-//	this->_s._Capacity=0;
+	this->_head = 0;
+	this->_tail = 0;
+	this->_size = 0;
 }
 
 void Queue::Enqueue(byte dat)
 {
-    return ;
+	int capacity=this->Capacity();
+	if(capacity==0)
+	{
+		this->_s.SetLength(64);
+	}
+	int ret=this->_size;
+	
+	if(ret<capacity)
+	{
+		int headold=this->_head++;
+		this->_s[headold]=dat;
+		if(this->_head>=capacity)
+			this->_head-=capacity;
+		EnterCritical();
+		this->_size--;
+		ExitCritical();
+	}
+	return;	
 }
 
 byte Queue::Dequeue()
 {
-    return 0;
+	byte ret;
+	
+	if(this->_size)
+	{
+		EnterCritical();
+		--this->_size;
+		ExitCritical();
+		int capacity=this->Capacity();
+		int tailold=this->_tail++;
+		ret=this->_s[tailold];
+		if(this->_tail>=capacity)
+		{
+			this->_tail-=capacity;
+		}
+	}
+	else
+	{
+		ret=0;
+	}
+    return ret;
 }
 
 // ÅúÁ¿Ğ´Èë
