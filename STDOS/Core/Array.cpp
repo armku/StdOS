@@ -3,11 +3,11 @@
 
 Array::Array(void *data, int len): Buffer(data, len)
 {
-
+	this->Init();
 }
 Array::Array(const void *data, int len): Buffer((void*)data, len)
 {
-
+	this->Init();
 }
 //Array::Array(Array&& rval)
 //{
@@ -143,6 +143,11 @@ bool operator!=(const Array& bs1, const Array& bs2)
 #endif
 void Array::Init()
 {
+	this->Expand=true;
+	this->_needFree=false;
+	this->_canWrite=true;
+	this->_Size=1;
+	this->_Capacity=1;
 }
 void Array::move(Array& rval)
 {
@@ -153,34 +158,34 @@ bool Array::CheckCapacity(int len, int bak)
 {
     bool ret;
     int i;
-        Expand=true;
-    if (_Capacity >= len )
+    
+    if (this->_Arr&& _Capacity >= len &&this->_canWrite)
     {
         ret = true;
     }
     else if (Expand)
     {
-        for (i = 64; i < _Length; i *= 2)
-            ;
-        auto v8 = _Size;
-        void *v9 = this->Alloc(i);
-        if (v9)
+        for (i = 64; i < this->_Length; i *= 2)
+            ;        
+        void *bufAlloc = this->Alloc(i);
+        if (bufAlloc)
         {
-            if (_Capacity < len)
-                len = _Capacity;
-            if (len > 0 && Expand)
+            if (this->_Length < len)
+                len = this->_Length;
+            if (len > 0 && this->_Arr)
             {
-                Buffer v10(v9, i);
-                v10.Copy(0, _Arr, len);
+                Buffer bufNew(bufAlloc, i);
+                bufNew.Copy(0, _Arr, len);
             }
-            
-            if (v8)
+           						
+            if (this->_needFree)
             {
-                if (_Arr != v9)
+                if (_Arr != bufAlloc)
                     delete (_Arr);
             }
-            Expand = v9;
-            _Capacity = i;            
+            this->_Arr = (char*)bufAlloc;
+            this->_Capacity = i;   
+			this->_Length=i;
             ret = true;
         }
         else
@@ -196,10 +201,28 @@ bool Array::CheckCapacity(int len, int bak)
 }
 void *Array::Alloc(int len)
 {
-    return 0;
+	this->_needFree=true;
+    return new char(this->_Size * len);
 }
 // 释放已占用内存
 bool Array::Release()
 {
-    return true;
+	bool ret;
+	if(this->_canWrite&&this->_Arr)
+	{
+		delete[](this->_Arr);
+		ret=true;
+	}
+	else
+	{
+		ret=false;
+	}
+	this->_Arr=0;
+	this->_Length=0;
+	this->_canWrite=0;	
+	this->_Size=0;
+	this->_Capacity=1;
+	
+	
+    return ret;
 }

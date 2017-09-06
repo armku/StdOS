@@ -10,7 +10,7 @@ void EnterCritical()
 }
 
 byte buf[64];
-Queue::Queue():_s(buf,64)
+Queue::Queue():_s((void*)0,0)
 {		
 	this->Clear();
 }
