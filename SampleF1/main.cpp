@@ -108,32 +108,18 @@ int main(void)
     Sys.Start();
 }
 Queue txtest;
-class ctestrlt
-{
-	public:
-		int len;
-		int Capacity;
-};
-ctestrlt rlt;
+byte bufout[20];
 void queuetest()
 {
-	debug_printf("\r\n Queue Test begin\r\n");
+	debug_printf("\r\n Queue Test begin\r\n");	
+			
+	txtest.Enqueue(0x01);
+	txtest.Enqueue(0x02);
+	Buffer buf12(bufout,ArrayLength(bufout));
+	txtest.Read(buf12);
 	
-	rlt.len=txtest.Length();
-	rlt.Capacity=txtest.Capacity();
-	
-	debug_printf("Length:%d\r\n",rlt.len);
-	debug_printf("Capacity:%d\r\n",rlt.Capacity);
-	
-	txtest.SetCapacity(50);
-	
-//	txtest.Enqueue(0x01);
-//	txtest.Enqueue(0x02);
-	rlt.len=txtest.Length();
-	rlt.Capacity=txtest.Capacity();
-	
-	debug_printf("Length:%d\r\n",rlt.len);
-	debug_printf("Capacity:%d\r\n",rlt.Capacity);
-	
+	bufout[0]=txtest.Dequeue();
+	bufout[1]=txtest.Dequeue();		
+		
 	debug_printf("\r\n Queue Test end\r\n");
 }

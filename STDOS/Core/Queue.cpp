@@ -47,8 +47,7 @@ void Queue::Enqueue(byte dat)
 		EnterCritical();
 		this->_size++;
 		ExitCritical();
-	}
-	return;	
+	}	
 }
 
 byte Queue::Dequeue()

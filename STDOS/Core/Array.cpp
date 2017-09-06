@@ -133,7 +133,7 @@ byte Array::operator[](int i) const
 //    assert_failed2((const char *)"byte& Array::operator[](int i)", __FILE__,__LINE__);
   if ( this->_Size > 1 )
     i *= this->_Size;
-  return *(byte *)(this->_Arr[i]);
+  return this->_Arr[i];
 }
 byte& Array::operator[](int i)
 {
@@ -141,7 +141,7 @@ byte& Array::operator[](int i)
 //    assert_failed2((const char *)"byte& Array::operator[](int i)", __FILE__,__LINE__);
   if ( this->_Size > 1 )
     i *= this->_Size;
-  return *(byte *)(this->_Arr[i]);
+  return ((byte*)(this->_Arr))[i];
 }
 
 bool operator==(const Array& bs1, const Array& bs2)
