@@ -131,24 +131,9 @@ int Queue::Read(Buffer &bs)
 			{
 				buflen=this->_size;
 			}
-			int v6=0;
-			while(1)
+			for(int i=0;i<buflen;i++)
 			{
-				int v7 = this->Capacity();
-				int v8=v7-this->_tail;
-				if(buflen<=v8)
-					break;
-				//this->_s.CopyTo();
-				buflen-=v8;
-				v6+=v8;
-				this->_tail+=buflen;
-				if(this->_tail>=v7)
-				this->_tail-=v7;
-				//this->_s.CopyTo(,v9);
-				EnterCritical();
-				//this->_size-=v9;
-				ExitCritical();
-				//ret=v9;
+				bs[i]=this->Dequeue();
 			}
 		}
 		else
