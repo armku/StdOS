@@ -45,7 +45,7 @@ void Queue::Enqueue(byte dat)
 		if(this->_head>=capacity)
 			this->_head-=capacity;
 		EnterCritical();
-		this->_size--;
+		this->_size++;
 		ExitCritical();
 	}
 	return;	
