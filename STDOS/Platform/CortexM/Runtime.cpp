@@ -16,9 +16,11 @@
 #endif 
 
 #ifdef DEBUG
+extern "C"
+{
     extern uint __heap_base;
     extern uint __heap_limit;
-
+}
     void *operator new(uint size)
     {
         debug_printf(" new size: %d ", size);

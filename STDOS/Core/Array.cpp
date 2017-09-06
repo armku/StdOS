@@ -209,7 +209,7 @@ bool Array::CheckCapacity(int len, int bak)
                 bufNew.Copy(0, _Arr, len);
             }
            						
-            if (this->_needFree)
+            if (this->_Arr && this->_needFree)
             {
                 if (_Arr != bufAlloc)
                     delete (_Arr);

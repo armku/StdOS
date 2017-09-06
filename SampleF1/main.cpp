@@ -127,6 +127,8 @@ void queuetest()
 	
 	txtest.SetCapacity(50);
 	
+//	txtest.Enqueue(0x01);
+//	txtest.Enqueue(0x02);
 	rlt.len=txtest.Length();
 	rlt.Capacity=txtest.Capacity();
 	

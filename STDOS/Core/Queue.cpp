@@ -9,7 +9,6 @@ void EnterCritical()
   ;
 }
 
-byte buf[64];
 Queue::Queue():_s((void*)0,0)
 {		
 	this->Clear();
@@ -115,9 +114,7 @@ int Queue::Write(const Buffer &bs)
   else
   {
 	  ret=0;
-  }
-  
-  
+  } 
   
     return ret;
 }
