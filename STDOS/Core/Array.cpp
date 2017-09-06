@@ -10,12 +10,13 @@ Array::Array(const void *data, int len): Buffer((void*)data, len)
 {
 	this->Init();
 }
-//Array::Array(Array&& rval)
-//{
-//}
-//Array::Array(const Buffer& rhs)
-//{
-//}
+Array::Array(Array&& rval):Buffer(0,0)
+{
+}
+Array::Array(const Buffer& rhs):Buffer(0,0)
+{
+	this->Init();
+}
 Array::~Array()
 {
 }
