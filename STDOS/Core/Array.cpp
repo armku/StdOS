@@ -1,5 +1,6 @@
 #include "Array.h"
 #include <stdio.h>
+#include "Sys.h"
 
 Array::Array(void *data, int len): Buffer(data, len)
 {
@@ -113,6 +114,11 @@ bool Array::Set(const void* data, int len)
 // 清空已存储数据。
 void Array::Clear()
 {
+//	 if ( !*((_BYTE *)this + 14) )
+//    assert_failed2((const char *)dword_1F0, "E:\\Smart\\SmartOS\\Core\\Array.cpp", 0xECu);
+//  if ( !*((_DWORD *)pthis + 1) )
+//    assert_failed2((const char *)dword_204, "E:\\Smart\\SmartOS\\Core\\Array.cpp", 0xEDu);
+  this->Set(0, 0, this->_Size*this->_Capacity);
 }
 // 设置指定位置的值，不足时自动扩容
 void Array::SetItemAt(int i, const void* item)
@@ -122,9 +128,19 @@ void Array::SetItemAt(int i, const void* item)
 // 重载索引运算符[]，返回指定元素的第一个字节
 byte Array::operator[](int i) const
 {
+	//  if ( (!this->_Arr) || i < 0 || this->_Capacity <= i )
+//    assert_failed2((const char *)"byte& Array::operator[](int i)", __FILE__,__LINE__);
+  if ( this->_Size > 1 )
+    i *= this->_Size;
+  return *(byte *)(this->_Arr[i]);
 }
 byte& Array::operator[](int i)
 {
+//  if ( (!this->_Arr) || i < 0 || this->_Capacity <= i )
+//    assert_failed2((const char *)"byte& Array::operator[](int i)", __FILE__,__LINE__);
+  if ( this->_Size > 1 )
+    i *= this->_Size;
+  return *(byte *)(this->_Arr[i]);
 }
 
 bool operator==(const Array& bs1, const Array& bs2)
@@ -151,6 +167,20 @@ void Array::Init()
 }
 void Array::move(Array& rval)
 {
+	if(this->_Size&&(this->_Arr!=rval._Arr))
+	{
+		this->CheckCapacity(rval.Length(),0);
+	}
+	this->move(rval);
+	this->_Length=rval.Length();
+	this->_canWrite=rval._canWrite;
+	this->_Size=rval._Size;
+	this->_Capacity=rval._Capacity;
+	
+	
+	rval.Expand = false;
+	rval._Size = 0;
+	rval._Capacity = 0;	
 }
 
 // 检查容量。如果不足则扩大，并备份指定长度的数据
