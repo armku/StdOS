@@ -83,33 +83,17 @@ int Queue::Write(const Buffer &bs)
     if (capacity==0)
         this->_s.SetLength(64);
     if (this->_size < capacity)
-    {
+    {		
         int bslen = bs.Length();
         if (this->_size + bslen > capacity)
         {
             bslen = capacity - this->_size;
         }
-        int v7 = 0;
-        while (1)
-        {
-            int pcapacity = this->Capacity();
-            int v9 = pcapacity - this->_head;
-            if (bslen <= v9)
-                break;
-            this->_s.Copy(this->_head,bs,v7,pcapacity-this->_head);
-            bslen -= v9;
-            v7 += v9;
-            this->_tail = 0;
-        }
-        this->_s.Copy(this->_head,bs,v7,bslen);
-        int psize = v7 + bslen;
-        this->_head += bslen;
-        if (this->_s.Length() <= this->_head)
-            this->_head -= this->_s.Length();
-        EnterCritical();
-        this->_size += psize;
-        ExitCritical();
-        ret = psize;
+		for(int i=0;i<bslen;i++)
+		{
+			this->Enqueue(bs[i]);
+		}
+		ret=this->Length();
     }
     else
     {
