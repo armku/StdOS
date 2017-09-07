@@ -264,7 +264,7 @@ SmartIRQ::~SmartIRQ()
 }
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-extern SerialPort *_printf_sp;
+extern SerialPort *printf_sp;
 extern "C"
 {
     /* 重载fputc可以让用户程序使用printf函数 */
@@ -282,13 +282,13 @@ extern "C"
         isInFPutc = true;
 
         // 检查并打开串口
-        //if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && _printf_sp == NULL)
-        if (_printf_sp == NULL)
+        //if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && printf_sp == NULL)
+        if (printf_sp == NULL)
         {
-            _printf_sp = new SerialPort(COM(Sys.MessagePort));
-            _printf_sp->Open();
+            printf_sp = new SerialPort(COM(Sys.MessagePort));
+            printf_sp->Open();
         }
-        _printf_sp->SendData((byte)ch);
+        printf_sp->SendData((byte)ch);
         isInFPutc = false;
         return ch;
     }

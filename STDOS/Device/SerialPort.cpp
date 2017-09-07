@@ -78,20 +78,20 @@ void SerialPort::ChangePower(int level)
     this->Close();
 }
 
-SerialPort *_printf_sp;
+SerialPort *printf_sp;
 SerialPort *SerialPort::GetMessagePort()
 {
-    if (!_printf_sp)
+    if (!printf_sp)
     {
         if (Sys.MessagePort == COM_NONE)
         {
             return NULL;
         }
-        _printf_sp = new SerialPort(COM(Sys.MessagePort));
-        _printf_sp->Open();
+        printf_sp = new SerialPort(COM(Sys.MessagePort));
+        printf_sp->Open();
     }
 
-    return _printf_sp;
+    return printf_sp;
 }
 #ifdef DEBUG
 	void SerialPort::Test()
