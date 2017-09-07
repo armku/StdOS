@@ -23,20 +23,25 @@ SerialPort::~SerialPort()
 }
 void SerialPort::Set(COM index, int baudRate)
 {
-	Index	= index;
-	_baudRate	= baudRate;
-	
-	// 根据系统时钟自动计算默认波特率
-	if(_baudRate <= 0)
-	{
-//		int clock = Sys.Clock;
-//		if(clock > 72)
-//			_baudRate = 2048000;
-//		else if (clock > 36)
-//			_baudRate = 1024000;
-//		else
-			_baudRate = 115200;
-	}
+    this->Index = index;
+    this->_baudRate = baudRate;
+
+    // 根据系统时钟自动计算默认波特率
+    if (_baudRate <= 0)
+    {
+        //		int clock = Sys.Clock;
+        //		if(clock > 72)
+        //			_baudRate = 2048000;
+        //		else if (clock > 36)
+        //			_baudRate = 1024000;
+        //		else
+        _baudRate = 115200;
+    }
+    if (baudRate <= 9600)
+        this->ByteTime = 1000 / (baudRate / 10) + 1;
+    else
+        this->ByteTime = 1;
+    this->OnSet();
 }
 void SerialPort::Set(byte dataBits, byte parity, byte stopBits)
 {
@@ -48,22 +53,29 @@ void SerialPort::Set(byte dataBits, byte parity, byte stopBits)
 // 刷出某个端口中的数据
 bool SerialPort::Flush(int times)
 {
-    //uint times = 3000;
-    //    while (USART_GetFlagStatus(_port, USART_FLAG_TXE) == RESET && --times > 0)
-    //        ;
-    //等待发送完毕
-    return times > 0;
+  this->Set485(true);
+  while ( (!this->Tx.Empty()) && times > 0 )
+  {
+    times = this->SendData(this->Tx.Dequeue(), times);
+  }
+  this->Set485(false);
+  return times > 0;
 }
 void SerialPort::SetBaudRate(int baudRate)
 {
+	#if 0
+	this->Set(this->Index,baudRate);
+	#else
 	this->_baudRate=baudRate;
 	this->OnOpen();
+	#endif	
 }
 
 
 void SerialPort::ChangePower(int level)
 {
-
+	if (level)
+    this->Close();
 }
 
 SerialPort *_printf_sp;
