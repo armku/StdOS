@@ -79,18 +79,30 @@ void SerialPort::ChangePower(int level)
 }
 
 SerialPort *printf_sp;
+extern bool isInFPutc;
 SerialPort *SerialPort::GetMessagePort()
 {
-    if (!printf_sp)
-    {
-        if (Sys.MessagePort == COM_NONE)
-        {
-            return NULL;
-        }
-        printf_sp = new SerialPort(COM(Sys.MessagePort));
-        printf_sp->Open();
-    }
-
+	if (printf_sp && Sys.MessagePort != printf_sp->Index)
+	{
+		if ( printf_sp )
+			printf_sp->Close();
+		printf_sp=nullptr;
+	}
+	if ( !printf_sp )
+	{
+		if(Sys.MessagePort==COM_NONE)		
+			return nullptr;
+		if ( isInFPutc )
+			return nullptr;
+		isInFPutc = true;
+		
+		printf_sp=new SerialPort((COM)Sys.MessagePort);
+		printf_sp->Tx.SetCapacity(512);
+		printf_sp->Open();
+		
+		isInFPutc=false;
+	}
+	
     return printf_sp;
 }
 #ifdef DEBUG

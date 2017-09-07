@@ -7,9 +7,9 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "TTime.h"
 #include "Task.h"
 #include <string.h>
-#include "Array.h"
 #include "TInterrupt.h"
 #include "SerialPort.h"
+#include "Sys.h"
 
 #ifdef STM32F0
 	#include "stm32f0xx.h"
@@ -265,12 +265,12 @@ SmartIRQ::~SmartIRQ()
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 extern SerialPort *printf_sp;
+bool isInFPutc; //正在串口输出
 extern "C"
 {
     /* 重载fputc可以让用户程序使用printf函数 */
     int fputc(int ch, FILE *f)
-    {
-		static bool isInFPutc; //正在串口输出
+    {		
         //        if (!Sys.Inited)
         //            return ch;
 
