@@ -19,7 +19,13 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 	#include "stm32f4xx.h"
 #endif
 TSys Sys; //系统参数
-
+extern "C"
+{
+int SmartOS_printf(const char *format, ...)
+{	
+	return 0;
+}
+}
 //外部注册函数
 // 任务
 // 任务类
@@ -77,9 +83,6 @@ void TimeSleep(uint us)
         Time.Delay(us);
     }
 }
-
-
-int SmartOS_printf(const char *format, ...);
 
 // 构造函数
 TSys::TSys()
