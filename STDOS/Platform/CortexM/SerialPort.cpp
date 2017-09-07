@@ -79,7 +79,7 @@ void SerialPort::OnClose2()
 }
 void SerialPort::OnWrite2()
 {
-	while(this->Tx.Capacity())
+	while(!this->Tx.Empty())
 	{
 		this->SendData(this->Tx.Dequeue());
 	}	

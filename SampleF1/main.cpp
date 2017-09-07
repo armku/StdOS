@@ -52,6 +52,7 @@ void LedTask(void *param)
 uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
     bs.Show(true);
+	transport->Write(bs);
     return 0;
 }
 
