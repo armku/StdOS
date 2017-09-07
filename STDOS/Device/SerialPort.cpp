@@ -123,6 +123,32 @@ void SerialPort::OnClose()
 // 向某个端口写入数据。如果size为0，则把data当作字符串，一直发送直到遇到\0为止
 bool SerialPort::OnWrite(const Buffer& bs)
 {
+	bool ret;
+	int i=0;
+	
+	if(bs.Length())
+	{		
+		if(this->Tx.Capacity()==0)
+		{
+			for ( i = 64; bs.Length() > i && i < 1024; i *= 2 );
+			this->Tx.SetCapacity(i);
+		}
+		this->Tx.Write(bs);
+		this->Set485(true);
+		this->OnWrite2();
+		ret=true;
+	}
+	else
+	{
+		ret=false;
+	}
+	
+	
+	
+	
+	
+	
+	
     if (RS485)
     {
         *RS485 = true;
@@ -138,13 +164,21 @@ bool SerialPort::OnWrite(const Buffer& bs)
         Sys.Delay(200);
         *RS485 = false;
     }
-    return true;
+    return ret;
 }
 
 void SerialPort::Set485(bool flag)
 {
-	
+    if (this->RS485)
+    {
+        if (!flag)
+            Sys.Sleep(1);
+        this->RS485->Write(flag);
+        if (flag)
+            Sys.Sleep(1);
+    }
 }
+
 void SerialPort::ReceiveTask()
 {
 	
