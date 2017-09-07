@@ -108,12 +108,6 @@ SerialPort *SerialPort::GetMessagePort()
 	
     return printf_sp;
 }
-#ifdef DEBUG
-	void SerialPort::Test()
-	{
-		
-	}
-#endif
 
 // ¹Ø±Õ¶Ë¿Ú
 void SerialPort::OnClose()

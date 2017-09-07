@@ -153,11 +153,6 @@ bool operator!=(const Array& bs1, const Array& bs2)
 	return bs2.CompareTo(bs2)!=0;
 }
 
-#if DEBUG
-	void Array::Test()
-	{
-	}
-#endif
 void Array::Init()
 {
 	this->Expand=true;

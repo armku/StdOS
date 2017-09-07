@@ -1037,6 +1037,31 @@
         <Group>
           <GroupName>TokenNet</GroupName>
         </Group>
+        <Group>
+          <GroupName>Test</GroupName>
+          <Files>
+            <File>
+              <FileName>ArrayTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ArrayTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BufferTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\BufferTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DateTimeTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\DateTimeTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\SerialTest.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -2069,6 +2094,31 @@
         </Group>
         <Group>
           <GroupName>TokenNet</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Test</GroupName>
+          <Files>
+            <File>
+              <FileName>ArrayTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ArrayTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BufferTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\BufferTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DateTimeTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\DateTimeTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\SerialTest.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>

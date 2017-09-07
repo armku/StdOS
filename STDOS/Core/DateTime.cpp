@@ -2,12 +2,11 @@
 #include "TTime.h"
 #include <stdio.h>
 
-//ida ok
 DateTime::DateTime()
 {
     this->Init();
 }
-//ida ok
+
 DateTime::DateTime(int year, int month, int day)
 {
 	if(year<1970)
@@ -30,14 +29,14 @@ DateTime::DateTime(int year, int month, int day)
 	this->Second=0;
 	this->Ms=0;
 }
-//ida ok
+
 DateTime::DateTime(int seconds)
 {
    this->Parse(seconds);
    this->Ms = 0;
 
 }
-//ida ok
+
 DateTime::DateTime(const DateTime &value)
 {
 	*this=value;
@@ -46,7 +45,7 @@ DateTime::DateTime(DateTime&& value)
 {
   //?
 }
-//ida ok
+
 DateTime &DateTime::operator = (int seconds)
 {
     *this=(seconds);
@@ -63,7 +62,7 @@ DateTime &DateTime::operator = (const DateTime &value)
   }
     return  *this;
 }
-//ida ok
+
 DateTime &DateTime::Parse(int seconds)
 {
     this->Second = seconds % 60;
@@ -75,7 +74,6 @@ DateTime &DateTime::Parse(int seconds)
     return  *this;
 }
 
-//ida ok
 DateTime &DateTime::ParseMs(Int64 ms)
 {
     this->Parse(ms / 1000);
@@ -86,7 +84,7 @@ const int CummulativeDaysForMonth[] =
 {
     0, 0x1F, 0x3B, 0x5A, 0x78, 0x97, 0xB5, 0xD4, 0xF3, 0x111, 0x130, 0x14E, 0x16D
 };
-//ida ok
+
 DateTime &DateTime::ParseDays(int days)
 {
     int v2; // r2@3
@@ -115,7 +113,6 @@ DateTime &DateTime::ParseDays(int days)
     this->Day = daysRemain - (v5 + (CummulativeDaysForMonth[this->Month - 1])) + 1;
     return  *this;
 }
-//ida ok
 // 1970/1/1以来天数
 int DateTime::TotalDays()const
 {
@@ -131,20 +128,18 @@ int DateTime::TotalDays()const
        + this->Day
        - 1;
 }
-//ida ok
 // 1970/1/1以来秒数
 int DateTime::TotalSeconds()const
 {
     return this->Second
        + 60 * (this->Minute + 60 * (this->Hour + 24 * this->TotalDays()));
 }
-//ida ok
 // 1970/1/1以来毫秒数
 Int64 DateTime::TotalMs()const
 {
     return 1000 * this->TotalSeconds() + this->Ms;
 }
-//ida ok
+
 byte DateTime::DayOfWeek()const
 {
     int v1; 
@@ -331,12 +326,7 @@ DateTime DateTime::Now()
     //return DateTime(TotalSeconds()+Time.Seconds);
 	return DateTime(0+Time.Seconds);
 }
-#if DEBUG
-void DateTime::Test()
-{
-}
-#endif
-// ida ok
+
 void DateTime::Init()
 {
     this->Year = 1970;
