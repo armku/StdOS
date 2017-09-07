@@ -811,17 +811,3 @@ void CInterrupt::EXTI15_10_IRQHandler()
         EXTI_ClearITPendingBit(EXTI_Line15);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

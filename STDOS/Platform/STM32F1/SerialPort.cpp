@@ -371,18 +371,16 @@ uint SerialPort::OnRead(Buffer &bs)
     uint usTimeout = 2;
     UInt64 us = Time.Current() + usTimeout;
 
-    uint count = 0; // 收到的字节数    
-    while (count < this->MaxSize && Time.Current() < us)
+    while (Time.Current() < us)
     {
         // 轮询接收寄存器，收到数据则放入缓冲区
         if (USART_GetFlagStatus(g_Uart_Ports[this->Index], USART_FLAG_RXNE) != RESET)
         {
-            bs[count] = (byte)USART_ReceiveData(g_Uart_Ports[this->Index]);			
-            count++;   
+			this->Rx.Enqueue((byte)USART_ReceiveData(g_Uart_Ports[this->Index]));
 			us = Time.Current() + usTimeout;
         }
     }
-	bs.SetLength(count);
+	this->Rx.Read(bs);
 	this->OnReceive(bs,this);
-    return count;
+    return bs.Length();
 }
