@@ -79,7 +79,10 @@ void SerialPort::OnClose2()
 }
 void SerialPort::OnWrite2()
 {
-
+	while(this->Tx.Capacity())
+	{
+		this->SendData(this->Tx.Dequeue());
+	}	
 }
 // 发送单一字节数据
 int SerialPort::SendData(byte data, int times)

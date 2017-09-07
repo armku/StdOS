@@ -163,6 +163,7 @@ bool SerialPort::OnWrite(const Buffer& bs)
 		this->Tx.Write(bs);
 		this->Set485(true);
 		this->OnWrite2();
+		this->Set485(false);//Ìí¼Ó
 		ret=true;
 	}
 	else
@@ -170,27 +171,6 @@ bool SerialPort::OnWrite(const Buffer& bs)
 		ret=false;
 	}
 	
-	
-	
-	
-	
-	
-	
-    if (RS485)
-    {
-        *RS485 = true;
-    }
-
-	for(int i=0;i<bs.Length();i++)
-	{
-		this->SendData(bs[i]);
-	}
-
-    if (RS485)
-    {
-        Sys.Delay(200);
-        *RS485 = false;
-    }
     return ret;
 }
 
