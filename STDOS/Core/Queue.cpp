@@ -136,6 +136,7 @@ int Queue::Read(Buffer &bs)
             {
                 bs[i] = this->Dequeue();
             }
+			bs.SetLength(buflen);
         }
         else
         {
