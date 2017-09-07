@@ -11,6 +11,9 @@ SerialPort::SerialPort(COM index, int baudRate)
 {
     this->Set(index,baudRate);    
 }
+void SerialPort::OnInit()
+{
+}
 
 // 析构时自动关闭
 SerialPort::~SerialPort()
