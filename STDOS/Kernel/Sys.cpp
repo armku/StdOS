@@ -151,24 +151,30 @@ uint TSys::Seconds()const
 }
 
 // 毫秒级延迟
-void TSys::Sleep(int ms)const  
+void TSys::Sleep(int ms)const
 {
-    // 优先使用线程级睡眠
-    #if 0
-        if (OnSleep)
-        {
-            OnSleep(ms);
-        }
-        else
-    #endif 
+    if (this->OnSleep)
+    {
+        this->OnSleep(ms);
+    }
+    else
     {
         if (ms > 1000)
+            SmartOS_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！", ms);
+        if (ms)
         {
-            debug_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！", ms);
+            bool cancel = false;
+            int executems = Task::Scheduler()->ExecuteForWait(ms, cancel);
+            if (executems >= ms)
+                return ;
+            ms -= executems;
         }
-        TimeSleep(ms *1000);
+        if (ms)
+            Time.Sleep(ms, nullptr);
     }
-}	
+    return ;
+    TimeSleep(ms *1000);
+}
 // 微秒级延迟
 void TSys::Delay(int us)const
 {
@@ -183,10 +189,10 @@ void TSys::Delay(int us)const
         if (us && us >= 1000)
         {
             bool cancle = false;
-            int executetime = Task::Scheduler()->ExecuteForWait(us, cancle) *1000;
-            if (executetime >= us)
+            int executeus = Task::Scheduler()->ExecuteForWait(us, cancle) *1000;
+            if (executeus >= us)
                 return ;
-            us -= executetime;
+            us -= executeus;
         }
         if (us)
             Time.Delay(us);
@@ -194,14 +200,12 @@ void TSys::Delay(int us)const
     return ;
     TimeSleep(us);
 }
-
-
 // 延迟异步重启
 void TSys::Reboot(int msDelay)const
 {
-	if(msDelay<=0)
-		this->Reset();
-    //Sys.AddTask((void *)TSys::Reset,(void *)this,msDelay,-1,"");
+    if (msDelay <= 0)
+        this->Reset();
+    //this->AddTask(&this->Reset, this, pmsDelay,  - 1, "Reboot");
 }
 // 系统跟踪
 void TSys::InitTrace(void* port) const
