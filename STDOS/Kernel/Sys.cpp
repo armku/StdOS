@@ -212,17 +212,10 @@ void TSys::Trace(int times) const
 // 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
 uint TSys::AddTask(Action func, void *param, int dueTime, int period, cstring name)const
 {
-    // 屏蔽中断，否则可能有线程冲突
-    SmartIRQ irq;
-
-    if (!_Scheduler)
-    {
-        _Scheduler = new TaskScheduler("Sys");
-    }
-
-    return _Scheduler->Add(func, param, dueTime, period, name);
-
+    auto scheduler = Task::Scheduler();
+    return scheduler->Add(func, param, dueTime, period, name);
 }
+
 void TSys::RemoveTask(uint &taskid)const
 {
     #if 0
