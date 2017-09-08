@@ -233,14 +233,60 @@ void TSys::RemoveTask(uint &taskid)const
 // 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
 bool TSys::SetTask(uint taskid, bool enable, int msNextTime)const
 {
-    //    _Scheduler->SetTask(taskid, enable, msNextTime);
-    return true;
+    bool ret;
+    
+    if (taskid)
+    {
+       auto tsk = Task::Get(taskid);
+        if (tsk)
+        {
+            tsk->Set(enable, msNextTime);
+            ret = true;
+        }
+        else
+        {
+            ret = false;
+        }
+    }
+    else
+    {
+        ret = false;
+    }
+    return ret;
 }
 
 // 改变任务周期
-bool TSys::SetTaskPeriod(uint taskid, int period) const
-{
-	return false;
+bool TSys::SetTaskPeriod(uint taskid, int period)const
+{    
+    bool ret; 
+    Task* tsk;      
+   
+    if (taskid)
+    {
+        tsk = Task::Get(taskid);
+        if (tsk)
+        {
+            if (period)
+            {
+				tsk->Period=period;
+                tsk->NextTime=Sys.Ms()+period;
+            }
+            else
+            {
+				tsk->Enable=false;
+            }
+            ret = true;
+        }
+        else
+        {
+            ret = false;
+        }
+    }
+    else
+    {
+        ret = false;
+    }
+    return ret;
 }
 // 开始系统大循环
 void TSys::Start()

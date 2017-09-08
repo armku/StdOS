@@ -53,7 +53,6 @@ private:
 	void Init();
 	
 	
-		
 	
     private:
         Task(TaskScheduler *scheduler);
@@ -61,12 +60,6 @@ private:
         uint CpuTime; // 总耗费时间        
 		bool operator==(Task& tsk);
 };
-
-
-
-
-
-
 
 template<class T,int length> class FixedArray
 {
