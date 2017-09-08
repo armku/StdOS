@@ -7,7 +7,8 @@ Task::Task()
 }
 Task::~Task()
 {
-	
+	if(this->ID)
+	this->Host->Remove(this->ID);
 }
 // 执行任务。返回是否正常执行。
 bool Task::Execute(UInt64 now)
@@ -176,6 +177,22 @@ TaskScheduler::TaskScheduler(cstring name)
 // 创建任务，返回任务编号。dueTime首次调度时间ms，-1表示事件型任务，period调度间隔ms，-1表示仅处理一次
 uint TaskScheduler::Add(Action func, void* param, int dueTime, int period, cstring name)
 {
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     if (dueTime > 0)
     {
         dueTime *= 1000;
