@@ -98,7 +98,7 @@ void Task::ShowStatus()
     }
     debug_printf(" %s\r\n", this->Enable ? " " : "禁用");
 }
-extern TaskScheduler *_Scheduler;
+TaskScheduler *_Scheduler;
 // 全局任务调度器
 TaskScheduler* Task::Scheduler()
 {

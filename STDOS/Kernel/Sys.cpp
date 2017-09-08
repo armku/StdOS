@@ -29,7 +29,7 @@ int SmartOS_printf(const char *format, ...)
 //外部注册函数
 // 任务
 // 任务类
-TaskScheduler *_Scheduler;
+extern TaskScheduler *_Scheduler;
 void TimeSleep(uint us)
 {
     // 在这段时间里面，去处理一下别的任务
@@ -170,25 +170,29 @@ void TSys::Sleep(int ms)const
     }
 }	
 // 微秒级延迟
-void TSys::Delay(int us)const  
+void TSys::Delay(int us)const
 {
-    // 如果延迟微秒数太大，则使用线程级睡眠
-    #if 0
-        if (OnSleep && us >= 2000)
-        {
-            OnSleep((us + 500) / 1000);
-        }
-        else
-    #endif 
+    if (this->OnSleep && us >= 2000)
     {
-
-        if (us > 1000000)
-        {
-            debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！", us);
-        }
-        TimeSleep(us);
+        this->OnSleep((us + 500) / 1000);
     }
-
+    else
+    {
+        if (us > 1000000)
+            SmartOS_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！", us);
+        if (us && us >= 1000)
+        {
+            bool cancle = false;
+            int executetime = Task::Scheduler()->ExecuteForWait(us, cancle) *1000;
+            if (executetime >= us)
+                return ;
+            us -= executetime;
+        }
+        if (us)
+            Time.Delay(us);
+    }
+    return ;
+    TimeSleep(us);
 }
 
 
@@ -218,10 +222,10 @@ uint TSys::AddTask(Action func, void *param, int dueTime, int period, cstring na
 
 void TSys::RemoveTask(uint &taskid)const
 {
-    #if 0
-        assert_ptr(_Scheduler);
-    #endif 
-    _Scheduler->Remove(taskid);
+  if (taskid )
+  {
+    Task::Scheduler()->Remove(taskid);
+  }
 }
 // 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
 bool TSys::SetTask(uint taskid, bool enable, int msNextTime)const
@@ -285,9 +289,8 @@ bool TSys::SetTaskPeriod(uint taskid, int period)const
 void TSys::Start()
 {
 	this->OnStart();
-	if (!_Scheduler)
-	_Scheduler=new TaskScheduler("Sys"); 
-	_Scheduler->Start();
+	//this->=SmartOS_printf;
+	Task::Scheduler()->Start();
 }
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
