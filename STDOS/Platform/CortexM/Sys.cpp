@@ -70,9 +70,10 @@ int SmartOS_Log(const String *str)
 //{
 //  return (unsigned __int16)_REV16();
 //}
+
 void TSys::SetStackTop(uint addr)
 {
-//	return _set_MSP(addr);
+	//return __set_MSP(addr);
 }	
 void TSys::OnInit()
 {
