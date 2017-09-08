@@ -313,32 +313,16 @@ SmartIRQ::~SmartIRQ()
 }
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-extern SerialPort *printf_sp;
-bool isInFPutc; //正在串口输出
+int SmartOS_Log(const String *str);
 extern "C"
 {
     /* 重载fputc可以让用户程序使用printf函数 */
     int fputc(int ch, FILE *f)
-    {		
-        //        if (!Sys.Inited)
-        //            return ch;
-
-        if (Sys.MessagePort == COM_NONE)
-            return ch;
-
-        if (isInFPutc)
-            return ch;
-        isInFPutc = true;
-
-        // 检查并打开串口
-        //if ((port->CR1 &USART_CR1_UE) != USART_CR1_UE && printf_sp == NULL)
-        if (printf_sp == NULL)
-        {
-            printf_sp = new SerialPort(COM(Sys.MessagePort));
-            printf_sp->Open();
-        }
-        printf_sp->SendData((byte)ch);
-        isInFPutc = false;
+    {
+        char buf[1];
+        buf[0] = ch;
+        String str(buf, 1);
+        SmartOS_Log(&str);
         return ch;
     }
 }

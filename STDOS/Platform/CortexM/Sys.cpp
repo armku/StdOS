@@ -36,27 +36,24 @@ String *CPUName;
 //    result = 0;
 //  return result;
 //}
-//int SmartOS_Log(const String *a1)
-//{
-//  const Buffer *v1; // r5@1
-//  int result; // r0@3
-//  int v3; // r4@5
+int SmartOS_Log(const String *str)
+{
+    int ret;
 
-//  v1 = (const Buffer *)a1;
-//  if ( *((_DWORD *)&Sys + 1) && Sys != 255 )
-//  {
-//    v3 = SerialPort::GetMessagePort((SerialPort *)Sys);
-//    if ( v3 && *(_BYTE *)(v3 + 13) )
-//      result = ITransport::Write((ITransport *)v3, v1);
-//    else
-//      result = 0;
-//  }
-//  else
-//  {
-//    result = 0;
-//  }
-//  return result;
-//}
+    if (Sys.Clock && Sys.MessagePort != COM_NONE)
+    {
+        auto sp = SerialPort::GetMessagePort();
+        if (sp && sp->ByteTime)
+            ret = sp->Write(*str);
+        else
+            ret = 0;
+    }
+    else
+    {
+        ret = 0;
+    }
+    return ret;
+}
 //void ExitCritical(void)
 //{
 //  __enable_irq();

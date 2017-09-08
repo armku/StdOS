@@ -82,7 +82,7 @@ void SerialPort::ChangePower(int level)
 }
 
 SerialPort *printf_sp;
-extern bool isInFPutc;
+bool isInFPutc;//正在串口输出
 SerialPort *SerialPort::GetMessagePort()
 {
 	if (printf_sp && Sys.MessagePort != printf_sp->Index)
