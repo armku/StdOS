@@ -1,16 +1,30 @@
 #include "List.h"
 #include "stdio.h"
 
-IList::IList(){}
-IList::IList(const IList &list){
+IList::IList()
+{
+	this->Init();
+}
+IList::IList(const IList &list)
+{
+	this->Init();
+	*this=list;
+}
+IList::IList(IList && list)
+{
+	this->Init();
+	this->move(list);
+}
+IList::~IList()
+{
+	
+}
+IList &IList::operator = (const IList &list)
+{
 
 }
-IList::IList(IList && list){}
-IList::~IList(){}
-IList &IList::operator = (const IList &list){
-
-}
-IList &IList::operator = (IList && list){
+IList &IList::operator = (IList && list)
+{
 
 }
 // 添加单个元素
@@ -65,7 +79,9 @@ void * &IList::operator[](int i){
 #endif 
 void IList::Init()
 {
-    return ;
+    this->_Count=0;
+	this->_Capacity=0;
+	
 }
 
 bool IList::CheckCapacity(int count)
