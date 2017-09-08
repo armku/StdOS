@@ -71,12 +71,6 @@ void * &IList::operator[](int i){
 
 }
 
-#if DEBUG
-    void IList::Test()
-    {
-        return ;
-    }
-#endif 
 void IList::Init()
 {
     this->_Count=0;
