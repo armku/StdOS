@@ -30,7 +30,9 @@ IList &IList::operator = (IList && list)
 // 添加单个元素
 void IList::Add(void *item)
 {
-    return ;
+	this->CheckCapacity(this->_Capacity+1);
+	this->_Capacity++;
+	this->_Arr[this->_Count]=item;
 }
 
 // 添加多个元素
@@ -63,11 +65,18 @@ int IList::FindIndex(const void *item)const
 }
 
 // 释放所有指针指向的内存
-IList &IList::DeleteAll(){}
+IList &IList::DeleteAll()
+{
+	
+}
 
 // 重载索引运算符[]，返回指定元素的第一个
-void *IList::operator[](int i)const{}
-void * &IList::operator[](int i){
+void *IList::operator[](int i)const
+{
+	
+}
+void * &IList::operator[](int i)
+{
 
 }
 
