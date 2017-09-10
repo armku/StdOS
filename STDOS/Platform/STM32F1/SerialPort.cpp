@@ -367,21 +367,12 @@ bool SerialPort::OnOpen()
 //数据读取事件
 uint SerialPort::OnRead(Buffer &bs)
 {
-	USART_TypeDef *const g_Uart_Ports[] = UARTS;
-    // 在2ms内接收数据
-    uint usTimeout = 2;
-    UInt64 us = Time.Current() + usTimeout;
-	this->OnRxHandler();
-    while (Time.Current() < us)
+    USART_TypeDef *const g_Uart_Ports[] = UARTS;
+    this->OnRxHandler();
+    // 轮询接收寄存器，收到数据则放入缓冲区
+    if (USART_GetFlagStatus(g_Uart_Ports[this->Index], USART_FLAG_RXNE) != RESET)
     {
-        // 轮询接收寄存器，收到数据则放入缓冲区
-        if (USART_GetFlagStatus(g_Uart_Ports[this->Index], USART_FLAG_RXNE) != RESET)
-        {
-			this->Rx.Enqueue((byte)USART_ReceiveData(g_Uart_Ports[this->Index]));
-			us = Time.Current() + usTimeout;
-        }
+        this->Rx.Enqueue((byte)USART_ReceiveData(g_Uart_Ports[this->Index]));
     }
-	this->Rx.Read(bs);
-	this->OnReceive(bs,this);    
-	return bs.Length();	
+    return bs.Length();
 }

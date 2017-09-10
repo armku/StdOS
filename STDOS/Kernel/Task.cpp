@@ -23,6 +23,10 @@ void Task::Set(bool enable, int msNextTime)
 		this->NextTime=msNextTime+Sys.Ms();
 	}
 	this->Enable=enable;
+	if(enable)
+	{
+		Task::Scheduler()->SkipSleep();
+	}
 }
 // ÏÔÊ¾×´Ì¬
 void Task::ShowStatus()
