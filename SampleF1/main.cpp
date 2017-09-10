@@ -89,6 +89,7 @@ class TESTABC
 TESTABC testabc;
 
 String SSTEST;
+SerialPort *sp1;
 
 int main(void)
 {
@@ -99,6 +100,7 @@ int main(void)
         Sys.ShowInfo();
     #endif 
 
+	sp1=SerialPort::GetMessagePort();
     SerialPort::GetMessagePort()->Register(OnUsart1Read);
     //	AT24C02Test();  
     SSTEST = Test();

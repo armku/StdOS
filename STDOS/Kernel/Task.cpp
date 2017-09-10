@@ -18,6 +18,11 @@ bool Task::Execute(UInt64 now)
 // 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
 void Task::Set(bool enable, int msNextTime)
 {
+	if ( msNextTime >= 0 )
+	{
+		this->NextTime=msNextTime+Sys.Ms();
+	}
+	this->Enable=enable;
 }
 // 显示状态
 void Task::ShowStatus()
@@ -153,7 +158,7 @@ template <typename T1, typename T2> T1 sum(T1 x, T2 y)
     return x + y;
 }
 void ShowTime(void * param);//显示时间
-uint mgid; // 总编号
+uint mgid=0; // 总编号
 
 TaskScheduler::TaskScheduler(cstring name)
 {

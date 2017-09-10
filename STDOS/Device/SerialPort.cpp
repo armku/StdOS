@@ -1,6 +1,7 @@
 #include "TInterrupt.h"
 #include "TTime.h"
 #include "SerialPort.h"
+#include "Task.h"
 
 SerialPort::SerialPort()
 {
@@ -183,6 +184,7 @@ void SerialPort::Set485(bool flag)
 void SerialPort::ReceiveTask()
 {
 	printf("hello test\r\n");
+	((Task*)(this->_task))->Set(false,20);
 }
 
 //²âÊÔ´úÂë
