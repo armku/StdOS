@@ -23,13 +23,13 @@ extern "C"
 }
     void *operator new(uint size)
     {
-        debug_printf(" new size: %d ", size);
+        //debug_printf(" new size: %d ", size);
         void *p = malloc(size);
         if (!p)
             debug_printf("malloc failed! size=%d ", size);
         else
         {
-            debug_printf("0x%08x ", p);
+            //debug_printf("0x%08x ", p);
             // 如果堆只剩下64字节，则报告失败，要求用户扩大堆空间以免不测
             uint end = (uint) &__heap_limit;
             if ((uint)p + size + 0x40 >= end)
@@ -41,13 +41,13 @@ extern "C"
 
     void *operator new[](uint size)
     {
-        debug_printf(" new size[]: %d ", size);
+        //debug_printf(" new size[]: %d ", size);
         void *p = malloc(size);
         if (!p)
             debug_printf("malloc failed! size=%d ", size);
         else
         {
-            debug_printf("0x%08x ", p);
+            //debug_printf("0x%08x ", p);
             // 如果堆只剩下64字节，则报告失败，要求用户扩大堆空间以免不测
             uint end = (uint) &__heap_limit;
             if ((uint)p + size + 0x40 >= end)

@@ -155,7 +155,7 @@ void SerialPort::Register(TransportHandler handler, void *param)
     {
         Interrupt.Deactivate(irq);
     }
-	//this->_taskidRx= Sys.AddTask(&SerialPort::ReceiveTask,this,-1,-1,"serialrcv");
+	this->_taskidRx= Sys.AddTask(&SerialPort::ReceiveTask,this,-1,-1,"serialrcv");
 	this->_task=Task::Get(this->_taskidRx);
 }
 
@@ -371,7 +371,7 @@ uint SerialPort::OnRead(Buffer &bs)
     // 在2ms内接收数据
     uint usTimeout = 2;
     UInt64 us = Time.Current() + usTimeout;
-
+	this->OnRxHandler();
     while (Time.Current() < us)
     {
         // 轮询接收寄存器，收到数据则放入缓冲区
@@ -382,6 +382,6 @@ uint SerialPort::OnRead(Buffer &bs)
         }
     }
 	this->Rx.Read(bs);
-	this->OnReceive(bs,this);
-    return bs.Length();
+	this->OnReceive(bs,this);    
+	return bs.Length();	
 }

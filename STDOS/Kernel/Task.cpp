@@ -153,7 +153,6 @@ template <typename T1, typename T2> T1 sum(T1 x, T2 y)
     return x + y;
 }
 void ShowTime(void * param);//显示时间
-void ShowStatus(void *param); // 显示状态
 uint mgid; // 总编号
 
 
@@ -275,9 +274,9 @@ void TaskScheduler::Start()
     }
 
     #ifdef DEBUG
-        //Add(ShowStatus, this, 1 *1000, 30 *1000, "任务状态");
+		Sys.AddTask(&TaskScheduler::ShowStatus, this, 1 *1000, 30 *1000, "任务状态");
     #else 
-        Add(ShowTime, this, 2 *1000, 20 *1000, "时间显示");
+        Sys.AddTask(ShowTime, this, 2 *1000, 20 *1000, "时间显示");
     #endif 
 
     debug_printf("%s::准备就绪 开始循环处理%d个任务！\r\n\r\n", Name, Count);
@@ -372,70 +371,6 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
     }
 }
 
-//显示时间
-void ShowTime(void *param)
-{
-    UInt64 curms = Time.Milliseconds;
-    debug_printf("Time: %02lld:%02lld:%02lld.%03lld\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000);
-}
-
-// 显示状态
-void ShowStatus(void *param)
-{
-	#if 0
-    static UInt64 runCounts = 0;
-    float RunTimes = 0;
-    float RunTimesAvg = 0;
-    Task *tsk;
-    byte buf[1];
-
-    runCounts++;
-    TaskScheduler *ts = (TaskScheduler*)param;
-    UInt64 curms = Time.Ms();
-
-    //统计运行时间
-    RunTimes = 0;
-    RunTimesAvg = 0;
-    for (int j = 0; j < ts->Count; j++)
-    {
-        tsk = ts->_Tasks[j];
-        RunTimes += tsk->Cost *tsk->Times;
-        RunTimesAvg += tsk->Cost;
-    }
-    RunTimesAvg /= ts->Count;
-    //SRAM   0X20000000-0X3FFFFFFF 共512MB
-    //SCODE  0X00000000-0X1FFFFFFF 共512MB
-	debug_printf("\r\n");
-    debug_printf("Task::%s [%llu]", "ShowStatus", runCounts);
-    debug_printf("负载 %0.2f%% ", RunTimes / 10 / curms);
-    if (RunTimesAvg >= 1000)
-    {
-        debug_printf("平均 %3.1fms ", RunTimesAvg / ts->Count / 1000);
-    }
-    else
-    {
-        debug_printf("平均 %3.0fus ", RunTimesAvg / ts->Count);
-    }
-    debug_printf("当前 1970-01-01 23 00:00");
-    debug_printf("启动 ");
-    debug_printf("%02lld:%02lld:%02lld.%03lld ", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000);
-    debug_printf("堆 %u/%u", &(buf[0]) - 0X20000000, 1024);
-    debug_printf("\r\n");
-
-    int i =  - 1;
-    Task *task = ts->Current;
-    task->ShowStatus();
-    while (ts->_Tasks.MoveNext(i))
-    {
-        Task *task = ts->_Tasks[i];
-        if (task)
-        {
-            task->ShowStatus();
-        }
-    }
-	#endif
-}
-
 Task *TaskScheduler::operator[](int taskid)
 {
     int i =  - 1;
@@ -466,10 +401,65 @@ void TaskScheduler::Set(Task* tasks, int count)
 uint TaskScheduler::ExecuteForWait(uint msMax, bool& cancel)
 {
 }
+//显示时间
+void ShowTime(void *param)
+{
+    UInt64 curms = Time.Milliseconds;
+    debug_printf("Time: %02lld:%02lld:%02lld.%03lld\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000);
+}
 
 // 显示状态
 void TaskScheduler::ShowStatus()
 {
+    static UInt64 runCounts = 0;
+    float RunTimes = 0;
+    float RunTimesAvg = 0;
+    Task *tsk;
+    byte buf[1];
+
+    runCounts++;
+    UInt64 curms = Sys.Ms();
+
+    //统计运行时间
+    RunTimes = 0;
+    RunTimesAvg = 0;
+    for (int j = 0; j < this->Count; j++)
+    {
+        tsk = this->_Tasks[j];
+        RunTimes += tsk->Cost *tsk->Times;
+        RunTimesAvg += tsk->Cost;
+    }
+    RunTimesAvg /= this->Count;
+    //SRAM   0X20000000-0X3FFFFFFF 共512MB
+    //SCODE  0X00000000-0X1FFFFFFF 共512MB
+	debug_printf("\r\n");
+    debug_printf("Task::%s [%llu]", "ShowStatus", runCounts);
+    debug_printf("负载 %0.2f%% ", RunTimes / 10 / curms);
+    if (RunTimesAvg >= 1000)
+    {
+        debug_printf("平均 %3.1fms ", RunTimesAvg / this->Count / 1000);
+    }
+    else
+    {
+        debug_printf("平均 %3.0fus ", RunTimesAvg / this->Count);
+    }
+    debug_printf("当前 1970-01-01 23 00:00");
+    debug_printf("启动 ");
+    debug_printf("%02lld:%02lld:%02lld.%03lld ", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000);
+    debug_printf("堆 %u/%u", &(buf[0]) - 0X20000000, 1024);
+    debug_printf("\r\n");
+
+    int i =  - 1;
+    Task *task = this->Current;
+    task->ShowStatus();
+    while (this->_TasksOld.MoveNext(i))
+    {
+        Task *task = this->_Tasks[i];
+        if (task)
+        {
+            task->ShowStatus();
+        }
+    }	
 }	
 
 // 查找任务 返回使用此函数的首个任务的ID

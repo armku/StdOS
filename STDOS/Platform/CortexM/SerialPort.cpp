@@ -1,6 +1,7 @@
 #include "TInterrupt.h"
 #include "TTime.h"
 #include "SerialPort.h"
+#include "Task.h"
 
 #ifdef STM32F0
 	#include "stm32f0xx.h"
@@ -30,7 +31,7 @@ void SerialPort_Closeing()
 }
 void SerialPort::OnRxHandler()
 {
-	
+	((Task*)(this->_task))->Set(true,20);
 }
 void SerialPort::OnTxHandler()
 {

@@ -182,7 +182,7 @@ void SerialPort::Set485(bool flag)
 
 void SerialPort::ReceiveTask()
 {
-	
+	printf("hello test\r\n");
 }
 
 //²âÊÔ´úÂë
