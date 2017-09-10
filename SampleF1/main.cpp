@@ -74,20 +74,6 @@ String Test()
     return c;
 }
 
-class TESTABC
-{
-	public:
-		void ReceiveTask()
-		{
-			printf("hello test\r\n");
-		}
-		void bb()
-		{
-			Sys.AddTask(&TESTABC::ReceiveTask, this, 600, 1000, "Test");
-		}
-};
-TESTABC testabc;
-
 String SSTEST;
 SerialPort *sp1;
 
@@ -108,8 +94,6 @@ int main(void)
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
     Sys.AddTask(Test12, 0, 600, 1000, "Test");
-	
-	//testabc.bb();
 		
     Sys.Start();
 }
