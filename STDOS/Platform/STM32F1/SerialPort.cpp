@@ -1,6 +1,7 @@
 #include "TInterrupt.h"
 #include "TTime.h"
 #include "SerialPort.h"
+#include "Task.h"
 
 #ifdef STM32F0
 	#include "stm32f0xx.h"
@@ -154,8 +155,8 @@ void SerialPort::Register(TransportHandler handler, void *param)
     {
         Interrupt.Deactivate(irq);
     }
-//	this->_taskidRx= Sys.AddTask(this->ReceiveTask,this,-1,-1,"serialrcv");
-//	this->_task=Task.Get(this->_taskidRx);
+	//this->_taskidRx= Sys.AddTask(&SerialPort::ReceiveTask,this,-1,-1,"serialrcv");
+	this->_task=Task::Get(this->_taskidRx);
 }
 
 #if defined(STM32F0) || defined(STM32F4)

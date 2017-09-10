@@ -73,20 +73,23 @@ String Test()
 
     return c;
 }
+
 class TESTABC
 {
 	public:
-		void aa(void* param)
+		void ReceiveTask()
 		{
 			printf("hello test\r\n");
+		}
+		void bb()
+		{
+			Sys.AddTask(&TESTABC::ReceiveTask, this, 600, 1000, "Test");
 		}
 };
 TESTABC testabc;
 
 String SSTEST;
 
-
-void queuetest();
 int main(void)
 {
     Sys.Name = (char*)namee;
@@ -103,24 +106,8 @@ int main(void)
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
     Sys.AddTask(Test12, 0, 600, 1000, "Test");
-//	Sys.AddTask((void *(void*))(testabc.aa), 0, 600, 1000, "Test");
 	
-	queuetest();
-    Sys.Start();
-}
-Queue txtest;
-byte bufout[20];
-void queuetest()
-{
-	debug_printf("\r\n Queue Test begin\r\n");	
-			
-	txtest.Enqueue(0x01);
-	txtest.Enqueue(0x02);
-	Buffer buf12(bufout,ArrayLength(bufout));
-	txtest.Read(buf12);
-	
-	bufout[0]=txtest.Dequeue();
-	bufout[1]=txtest.Dequeue();		
+	testabc.bb();
 		
-	debug_printf("\r\n Queue Test end\r\n");
+    Sys.Start();
 }
