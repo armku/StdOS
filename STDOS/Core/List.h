@@ -49,10 +49,10 @@ public:
 
 private:
 	void**	_Arr;
-	int		_Count;
-	int		_Capacity;
+	int		_Count;//12
+	int		_Capacity;//4
 
-	void*	Arr[0x04];
+	void*	Arr[0x04];//8
 
 	void Init();
 	bool CheckCapacity(int count);
