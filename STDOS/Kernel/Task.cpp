@@ -111,12 +111,12 @@ TaskScheduler* Task::Scheduler()
 }
 Task* Task::Get(int taskid)
 {
-	return NULL;	
+	return (*Task::Scheduler())[taskid];
 }
-Task t;
+
 Task& Task::Current()
 {	
-	return t;
+	return *Task::Scheduler()->Current;
 	
 }
 bool Task::CheckTime(UInt64 end, bool isSleep)
@@ -154,13 +154,6 @@ template <typename T1, typename T2> T1 sum(T1 x, T2 y)
 }
 void ShowTime(void * param);//显示时间
 uint mgid; // 总编号
-
-
-/*Task::~Task()
-{
-if(ID) _Scheduler->Remove(ID);
-}*/
-
 
 TaskScheduler::TaskScheduler(cstring name)
 {
