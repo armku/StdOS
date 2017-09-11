@@ -1,5 +1,6 @@
 #include "Button.h"
 #include "string.h"
+#include <math.h>
 
 ///*默认按键去抖延时   70ms*/
 //static byte shake_time = 70;
@@ -13,9 +14,37 @@ void CButton::Attach(PressEvent event, Action action)
 {
     this->actions[event] = action;
 }
-
+//是否是组合按键
+bool ismulkey(ushort key)
+{
+	if(!key)
+	{
+		return false;
+	}
+	int keycnt=0;
+	for(int i=0;i<16;i++)
+	{
+		if((key&(1<<i))&&(key&((1<<i)^0xffff)))
+		{
+			keycnt++;
+		}
+	}
+	if(keycnt>1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}	
+}
 void CButton::Ticks()
 {
+	UInt64 cur=Sys.Ms()*1000;
+	if((cur -this->multilTimeIdle)<500)
+	{
+		return;
+	}
     if (this->ReadKey)
     {
         this->KeyCur = this->ReadKey();
@@ -80,6 +109,12 @@ void CButton::Ticks()
                 if (this->actions[PRESS_DOWN])
                 {
                     this->actions[PRESS_DOWN](this);
+					if(ismulkey(this->KeyOld))
+					{
+						this->multilTimeIdle=Sys.Ms()*1000;
+						this->KeyCur=0;
+						this->KeyOld=0;
+					}
                 }
                 this->state++;
             }
@@ -101,6 +136,7 @@ void CButton::Ticks()
                 if (this->actions[PRESS_UP])
                 {
                     this->actions[PRESS_UP](this);
+					
                 }
                 if(this->KeyCur==0)
 				{
