@@ -1065,6 +1065,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ArrayTest.cpp</FilePath>
             </File>
+            <File>
+              <FileName>AT24CXXTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\AT24CXXTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2127,6 +2132,11 @@
               <FileName>ArrayTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ArrayTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT24CXXTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\AT24CXXTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
