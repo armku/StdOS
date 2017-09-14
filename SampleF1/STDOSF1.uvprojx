@@ -588,9 +588,9 @@
               <FilePath>..\STDOS\Core\Array.cpp</FilePath>
             </File>
             <File>
-              <FileName>SString.cpp</FileName>
+              <FileName>String.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\SString.cpp</FilePath>
+              <FilePath>..\STDOS\Core\String.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
@@ -1656,9 +1656,9 @@
               <FilePath>..\STDOS\Core\Array.cpp</FilePath>
             </File>
             <File>
-              <FileName>SString.cpp</FileName>
+              <FileName>String.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\SString.cpp</FilePath>
+              <FilePath>..\STDOS\Core\String.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
