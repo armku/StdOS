@@ -112,24 +112,75 @@ void Buffer::Zero(void *dest, int len)
 // 拷贝数据，默认-1长度表示当前长度
 int Buffer::Copy(int destIndex, const void *src, int len)
 {
-    if (len ==  - 1)
-    {
-        len = this->_Length;
-    }
-    if (len <= 0)
-    {
+    int ret = 0;
+    if (!src)
         return 0;
-    }
-    for (int i = 0; i < len; i++)
+    if (!this->_Arr || !this->_Length)
+        return 0;
+    int copylen = this->_Length - destIndex;
+    if (len >= 0)
     {
-        ((byte*)(this->_Arr))[destIndex + i] = ((byte*)src)[i];
+        // if ( len > copylen && !(*(int (__fastcall **)(Buffer *, int))(*(_DWORD *)this + 12))(this, destIndex + len) )
+        if (len > copylen)
+        {
+            //SmartOS_printf("Buffer::Copy (0x%p, %d) <= (%d, 0x%p, %d) \r\n", *(_QWORD *)((char *)pthis + 4), pdestIndex);
+            //assert_failed2((const char *)dword_24C, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x95u);
+            len = copylen;
+        }
     }
-    return len;
+    else
+    {
+        if (copylen <= 0)
+        {
+            //      SmartOS_printf(
+            //        "Buffer::Copy (0x%p, %d) <= (%d, 0x%p, %d) \r\n",
+            //        *(_QWORD *)((char *)this + 4),
+            //        destIndex,
+            //        src,
+            //        len);
+            //      assert_failed2((const char *)dword_220, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x87u);
+            return 0;
+        }
+        len = this->_Length - destIndex;
+    }
+    if (this->_Arr)
+    {
+        if ((const void*)(&this->_Arr[destIndex]) == src)
+        {
+            ret = len;
+        }
+        else
+        {
+            if (len)
+                memmove(&(this->_Arr[destIndex]), src, len);
+            ret = len;
+        }
+    }
+    else
+    {
+        ret = 0;
+    }
+    return ret;
 }
 
 // 把数据复制到目标缓冲区，默认-1长度表示当前长度
 int Buffer::CopyTo(int destIndex, void *dest, int len)const
 {
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     if (len ==  - 1)
     {
         len = this->_Length;
