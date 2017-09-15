@@ -217,15 +217,21 @@ void Buffer::Clear(byte item)
 //### 这里逻辑可以考虑修改为，当len大于内部长度时，直接用内部长度而不报错，方便应用层免去比较长度的啰嗦
 Buffer Buffer::Sub(int index, int len)
 {
-    if (len < 0)
-    {
-        return Buffer(((byte*)this->_Arr) + index, this->Length() - index);
-    }
-    if (index + len > this->_Length)
-    {
-        len = this->_Length - index;
-    }
-    return Buffer(((byte*)this->_Arr) + index, len);
+	if ( index < 0 )
+	{
+		//assert_failed2("index >= 0", "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0xE6u);
+	}
+	if ( this->_Length <= index )
+	{
+		//assert_failed2("index < _Length", "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0xE7u);
+	}
+	if ( len < 0 )
+		len = this->_Length - index;
+	if ( index + len > this->_Length )
+	{
+		//assert_failed2("len <= _Length", "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0xE9u);
+	}
+	return Buffer(((byte*)this->_Arr) + index, len);	
 }
 
 const Buffer Buffer::Sub(int index, int len)const
