@@ -167,16 +167,7 @@ int Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
 // 从另一个对象拷贝数据和长度，长度不足且扩容失败时报错
 int Buffer::Copy(const Buffer &src, int destIndex)
 {
-    int len = this->Length();
-    if ((destIndex + this->Length()) > src.Length())
-    {
-        len = src.Length();
-    }
-    for (int i = 0; i < len; i++)
-    {
-        ((byte*)this->_Arr)[i + destIndex] = src[i];
-    }
-    return len;
+	return this->Copy(destIndex,src._Arr,src.Length());
 }
 
 int Buffer::Set(byte item, int index, int len)
@@ -236,7 +227,7 @@ Buffer Buffer::Sub(int index, int len)
 
 const Buffer Buffer::Sub(int index, int len)const
 {
-    if (len < 0)
+	if (len < 0)
     {
         return Buffer(((byte*)this->_Arr) + index, this->Length() - index);
     }
