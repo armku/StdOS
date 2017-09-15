@@ -2,6 +2,8 @@
 #include "Sys.h"
 #include "Buffer.h"
 
+static char bufferName[]="Buffer"; 
+
 char chartmp[512];
 // 打包一个指针和长度指定的数据区
 Buffer::Buffer(void *ptr, int len)
@@ -13,35 +15,36 @@ Buffer::Buffer(void *ptr, int len)
 // 对象mov操作，指针和长度归我，清空对方
 Buffer::Buffer(Buffer && rval)
 {
-	//到此
+	this->move(rval);
 }
 
 // 从另一个对象拷贝数据和长度，长度不足且扩容失败时报错
 Buffer &Buffer::operator = (const Buffer &rhs)
 {
-    if (this->_Length < rhs._Length)
+    int len = rhs.Length();
+    //if (!(*(int(__fastcall **)(Buffer *, int))(*(_DWORD*)pthis + 12))(this, len))
     {
-        debug_printf("Error: Buffer copy: Buffer length mismath src: %d ,dst: %d \n", rhs._Length, this->_Length);
+        //assert_failed2((const char*)dword_44C, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x29u); 
+            //debug_printf("Error: Buffer copy: Buffer length mismath src: %d ,dst: %d \n", rhs._Length, this->_Length);
     }
-    else
-    {
-        for (int i = 0; i < rhs.Length(); i++)
-        {
-            ((byte*)(this->_Arr))[i] = rhs.GetBuffer()[i];
-        }
-        this->_Length = rhs._Length;
-    }
+    this->Copy(rhs, 0);
     return  *this;
 }
 
 // 从指针拷贝，使用我的长度
 Buffer &Buffer::operator = (const void *prt)
 {
-    for (int i = 0; i < this->_Length; i++)
-    {
-        ((byte*)(this->_Arr))[i] = ((byte*)prt)[i];
-    }
+    if(prt)
+	{
+		this->Copy(this->_Arr,prt,this->_Length);
+	}
     return  *this;
+}
+// 对象mov操作，指针和长度归我，清空对方
+Buffer& Buffer::operator = (Buffer&& rval)
+{
+	this->move(rval);
+	return  *this;
 }
 
 // 设置数组长度。只能缩小不能扩大，子类可以扩展以实现自动扩容
@@ -81,11 +84,10 @@ bool Buffer::SetAt(int index, byte value)
 // 重载索引运算符[]，返回指定元素的第一个字节
 byte &Buffer::operator[](int i)
 {
-    if ((i < 0) || (i > this->_Length))
-    {
-        debug_printf("Error: [] length error");
-        return ((byte*)(this->_Arr))[0];
-    }
+	if ( i < 0 || this->_Length <= i )
+	{
+		//assert_failed2((const char *)dword_4B0, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x54u);//debug_printf("Error: [] length error");
+	}
     return ((byte*)(this->_Arr))[i];
 }
 
@@ -177,20 +179,6 @@ int Buffer::Copy(int destIndex, const void *src, int len)
 int Buffer::CopyTo(int destIndex, void *dest, int len)const
 {
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     if (len ==  - 1)
     {
         len = this->_Length;
@@ -267,21 +255,23 @@ void Buffer::Clear(byte item)
 //### 这里逻辑可以考虑修改为，当len大于内部长度时，直接用内部长度而不报错，方便应用层免去比较长度的啰嗦
 Buffer Buffer::Sub(int index, int len)
 {
-	if ( index < 0 )
-	{
-		//assert_failed2("index >= 0", "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0xE6u);
-	}
-	if ( this->_Length <= index )
-	{
-		//assert_failed2("index < _Length", "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0xE7u);
-	}
-	if ( len < 0 )
-		len = this->_Length - index;
-	if ( index + len > this->_Length )
-	{
-		//assert_failed2("len <= _Length", "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0xE9u);
-	}
-	return Buffer(((byte*)this->_Arr) + index, len);	
+    if (index < 0)
+    {
+        //assert_failed2("index >= 0", "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0xF0u);
+    }
+    if (len < 0)
+    {
+        len = this->_Length - index;
+    }
+    if (index + len > this->_Length)
+    {
+        SmartOS_printf("Buffer::Sub (%d, %d) > %d \r\n", index, len, this->_Length);
+    }
+    if (index + len > this->_Length)
+    {
+        //assert_failed2("index + len <= _Length", "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0xF6u);
+    }
+    return Buffer(((byte*)this->_Arr) + index, len);
 }
 
 const Buffer Buffer::Sub(int index, int len)const
@@ -298,8 +288,29 @@ const Buffer Buffer::Sub(int index, int len)const
 }
 
 // 显示十六进制数据，指定分隔字符和换行长度
-String &Buffer::ToHex(String &str, char sep, int newLine)const{
-
+String &Buffer::ToHex(String &str, char sep, int newLine)const
+{
+    auto buftmp = this->GetBuffer();
+    int icnt = 0;
+    while (this->Length() > icnt)
+    {
+        if (icnt)
+        {
+            if (newLine <= 0 || icnt != newLine *(icnt / newLine))
+            {
+                if (sep)
+                    str.Concat(sep);
+            }
+            else
+            {
+                str.Concat((const char*) &"\r\n");
+            }
+        }
+        str.Concat(*buftmp,  - 16);
+        ++icnt;
+        ++buftmp;
+    }
+    return str;
 }
 // 显示十六进制数据，指定分隔字符和换行长度
 String Buffer::ToHex(char sep, int newLine)const{
