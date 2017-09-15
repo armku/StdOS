@@ -181,30 +181,28 @@ int Buffer::Copy(const Buffer &src, int destIndex)
 
 int Buffer::Set(byte item, int index, int len)
 {
-    int result;
-    int v7;
-
-    if (this->_Length && len)
+    int ret;
+    
+    if (this->_Arr && len)
     {
-        v7 = this->_Length;
-        if (v7 - index > 0)
+        if (this->_Length - index > 0)
         {
-            if (len < 0 || len > v7 - index)
-                len = v7 - index;
+            if (len < 0 || len > this->_Length - index)
+                len = this->_Length - index;
             if (len)
                 memset(this->_Arr + index, len, item);
-            result = len;
+            ret = len;
         }
         else
         {
-            result = 0;
+            ret = 0;
         }
     }
     else
     {
-        result = 0;
+        ret = 0;
     }
-    return result;
+    return ret;
 }
 
 void Buffer::Clear(byte item)

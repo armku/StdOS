@@ -1,4 +1,4 @@
-#include "stdio.h"
+#include <stdio.h>
 #include "Type.h"
 #include "SString.h"
 
@@ -19,20 +19,11 @@ String Object::ToString()const
 
 void Object::Show(bool newLine)const
 {
-	#if 1
-    printf(this->ToString().GetBuffer());
-
-    if (newLine)
-    {
-        printf("\r\n");
-    }
-	#else	
-	char v6[512]; 
-	String v5(v6,512);  
-	v5=*this;	
-	v5.SetLength(0);  
-	v5.Show(newLine);
-	#endif
+	char bufch[512];
+	String strtmp(bufch,ArrayLength(bufch));
+	strtmp.SetLength(0);
+	this->ToStr(strtmp);	
+	strtmp.Show(newLine);
 }
 
 //////////////////////////////////////////////////////////////////
