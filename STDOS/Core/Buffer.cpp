@@ -13,7 +13,7 @@ Buffer::Buffer(void *ptr, int len)
 // 对象mov操作，指针和长度归我，清空对方
 Buffer::Buffer(Buffer && rval)
 {
-
+	//到此
 }
 
 // 从另一个对象拷贝数据和长度，长度不足且扩容失败时报错
@@ -47,10 +47,15 @@ Buffer &Buffer::operator = (const void *prt)
 // 设置数组长度。只能缩小不能扩大，子类可以扩展以实现自动扩容
 bool Buffer::SetLength(int len)
 {
+    if (this->_Length >= len)
     {
         this->_Length = len;
+        return true;
     }
-    return true;
+    else
+    {
+        return false;
+    }
 }
 
 //virtual void Buffer::SetBuffer(void* ptr, int len)
@@ -61,12 +66,16 @@ bool Buffer::SetLength(int len)
 // 设置指定位置的值，长度不足时自动扩容
 bool Buffer::SetAt(int index, byte value)
 {
-    if (index >= this->_Length)
+	//if ( this->_Length > index || (*(int (__fastcall **)(_DWORD, _DWORD))(*(_DWORD *)this + 12))(this, index + 1) )
+    if (this->_Length > index || this->_Arr)
+    {
+        this->_Arr[index] = value;
+        return true;
+    }
+    else
     {
         return false;
     }
-    ((byte*)this->_Arr)[index] = value;
-    return true;
 }
 
 // 重载索引运算符[]，返回指定元素的第一个字节
@@ -103,6 +112,7 @@ void Buffer::Copy(void *dest, const void *source, int len)
 
 void Buffer::Zero(void *dest, int len)
 {
+	//memclr(dest,len);
     for (int i = 0; i < len; i++)
     {
         ((byte*)dest)[i] = 0;
@@ -199,6 +209,7 @@ int Buffer::CopyTo(int destIndex, void *dest, int len)const
 // 拷贝数据，默认-1长度表示两者最小长度
 int Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
 {
+	//待处理
     if (len ==  - 1)
     {
         len = this->_Length;
@@ -249,10 +260,7 @@ int Buffer::Set(byte item, int index, int len)
 
 void Buffer::Clear(byte item)
 {
-    for (int i = 0; i < this->Length(); i++)
-    {
-        ((byte*)this->_Arr)[i] = item;
-    }
+	this->Set(item,0,this->_Length);	
 }
 
 // 截取一个子缓冲区，默认-1长度表示剩余全部
@@ -313,20 +321,26 @@ UInt64 Buffer::ToUInt64()const
     return 0;
 }
 
-void Buffer::Write(ushort value, int index){
-
+void Buffer::Write(ushort value, int index)
+{
+	((ushort*)this->_Arr)[index]=value;
 }
-void Buffer::Write(short value, int index){
-
+void Buffer::Write(short value, int index)
+{
+	((short*)this->_Arr)[index]=value;
 }
-void Buffer::Write(uint value, int index){
-
+void Buffer::Write(uint value, int index)
+{
+	((uint*)this->_Arr)[index]=value;
 }
-void Buffer::Write(int value, int index){
-
+void Buffer::Write(int value, int index)
+{
+	//(*(int (__cdecl **)(Buffer *, int, int *))(*(_DWORD *)this + 16))(this, index, &pvalue);
+	((int*)this->_Arr)[index]=value;
 }
-void Buffer::Write(UInt64 value, int index){
-
+void Buffer::Write(UInt64 value, int index)
+{
+	((UInt64*)this->_Arr)[index]=value;
 }
 
 // 输出对象的字符串表示方式
@@ -433,8 +447,12 @@ bool operator != (const Buffer &bs1, const void *ptr)
     return false;
 }
 
-void Buffer::move(Buffer &rval){
-
+void Buffer::move(Buffer &rval)
+{
+	this->_Arr=rval._Arr;
+	this->_Length=rval._Length;
+	rval._Arr=NULL;
+	rval._Length=0;
 }
 
 String Buffer::ToString()const
