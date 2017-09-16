@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __Task_H__
+#define __Task_H__
 
 #include "Kernel\Sys.h"
 
@@ -7,7 +8,7 @@ class TaskScheduler;
 // 任务
 class Task
 {
-	public:
+public:
 	TaskScheduler* Host;
 
 	uint	ID;			// 编号
@@ -236,7 +237,7 @@ private:
 	bool	_SkipSleep;	// 跳过最近一次睡眠，马上开始下一轮循环
 
 	friend class Task;
-	
+
 public:
 	cstring	Name;	// 系统名称
 	int		Count;		// 任务个数
@@ -283,10 +284,12 @@ public:
 
 	void ShowStatus();	// 显示状态
 
-    Task* operator[](int taskid);	
+    Task* operator[](int taskid);
 	
 	
 	
     private:        
         FixedArray < Task, 32 > _TasksOld;    
 };
+
+#endif
