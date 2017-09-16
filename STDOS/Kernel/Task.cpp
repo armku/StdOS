@@ -134,17 +134,13 @@ bool Task::CheckTime(UInt64 end, bool isSleep)
 }
 void Task::Init()
 {
-}
-Task::Task(TaskScheduler *scheduler)
-{
-    Host = scheduler;
-
-    Times = 0;
+	Times = 0;
     CpuTime = 0;
     SleepTime = 0;
     Cost = 0;
     Enable = true;
 }
+
 bool Task::operator == (Task &tsk)
 {
     if (tsk.ID == this->ID)
@@ -203,7 +199,7 @@ uint TaskScheduler::Add(Action func, void* param, int dueTime, int period, cstri
         period *= 1000;
     }
 
-    Task *task = new Task(this);
+    Task *task = new Task();
     task->ID = mgid++;
     task->Callback = func;
     task->Param = param;

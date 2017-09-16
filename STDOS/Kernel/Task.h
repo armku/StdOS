@@ -55,8 +55,6 @@ private:
 	
 	
 	
-    private:
-        Task(TaskScheduler *scheduler);
     public:        
         uint CpuTime; // 总耗费时间        
 		bool operator==(Task& tsk);
