@@ -20,7 +20,7 @@ void Task::Set(bool enable, int msNextTime)
 {
 	if ( msNextTime >= 0 )
 	{
-		this->NextTime=msNextTime+Sys.Ms();
+		this->NextTime=msNextTime+Sys.Ms()*1000;
 	}
 	this->Enable=enable;
 	if(enable)
