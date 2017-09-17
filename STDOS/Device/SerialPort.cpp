@@ -180,12 +180,13 @@ void SerialPort::Set485(bool flag)
             Sys.Sleep(1);
     }
 }
-char bs[512];
+
 void SerialPort::ReceiveTask()
 {
-	Buffer pbuf(bs,ArrayLength(bs));
-	this->Rx.Read(pbuf);
-	this->OnReceive(pbuf,this); 
+	char buf[512];
+	Buffer bs(buf,ArrayLength(buf));
+	this->Rx.Read(bs);
+	this->OnReceive(bs,this); 
 	((Task*)(this->_task))->Set(false,20);
 }
 
