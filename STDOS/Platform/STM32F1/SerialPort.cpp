@@ -121,7 +121,7 @@ void OnUsartReceive(ushort num, void *param)
         {
             // 从栈分配，节省内存
             byte buf[512];
-			Buffer bs(buf,512);
+			Buffer bs(buf,ArrayLength(buf));
             uint len = sp->Read(bs);
             if (len)
             {				
