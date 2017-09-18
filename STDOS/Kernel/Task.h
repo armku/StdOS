@@ -68,7 +68,7 @@ template<class T,int length> class FixedArray
 		void Add(T*);
 		void Remove(T&);
 		void RemoveAt(int pos=-1);
-		bool MoveNext(int pos);//到下一个节点
+//		bool MoveNext(int pos);//到下一个节点
 		T* Find(T&);
 		T *operator[](int taskid);
 		void PrintList();
@@ -153,41 +153,41 @@ T* FixedArray<T,length>::Find(T& t)
 	}
 	return 0;
 }
-template<class T,int length>
-bool FixedArray<T,length>::MoveNext(int pos)
-{
-	if(pos<0)
-	{	
-		if(mpCur)
-		{
-			mpCur=mpCur->pNext;
-			if(mpCur)
-			{
-				return true;
-			}
-			else
-			{				
-				return false;
-			}
-		}
-		else
-		{
-			mpCur=pFirst;
-			return true;
-		}
-	}
-	
-	
-	int i=0;
-	for(Node* p=pFirst;p;p=p->pNext,i++)
-	{
-		if(p&&(i==pos))
-		{
-			return true;
-		}
-	}
-	return false;
-}
+//template<class T,int length>
+//bool FixedArray<T,length>::MoveNext(int pos)
+//{
+//	if(pos<0)
+//	{	
+//		if(mpCur)
+//		{
+//			mpCur=mpCur->pNext;
+//			if(mpCur)
+//			{
+//				return true;
+//			}
+//			else
+//			{				
+//				return false;
+//			}
+//		}
+//		else
+//		{
+//			mpCur=pFirst;
+//			return true;
+//		}
+//	}
+//	
+//	
+//	int i=0;
+//	for(Node* p=pFirst;p;p=p->pNext,i++)
+//	{
+//		if(p&&(i==pos))
+//		{
+//			return true;
+//		}
+//	}
+//	return false;
+//}
 template<class T,int length>
 T* FixedArray<T,length>::operator[](int taskid)
 {	

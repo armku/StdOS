@@ -248,9 +248,7 @@ uint TaskScheduler::Add(Action func, void* param, int dueTime, int period, cstri
 
 void TaskScheduler::Remove(uint taskid)
 {
-    int i =  - 1;
-
-    while (_TasksOld.MoveNext(i))
+    for(int i=0;i<this->Count;i++)
     {
         Task *task = _TasksOld[i];
         if (task->ID == taskid)
@@ -317,10 +315,9 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
     // 需要跳过当前正在执行任务的调度
     //Task* _cur = Current;
 
-    int i1 =  - 1;
-    while (_TasksOld.MoveNext(i1))
+	for(int i=0;i<this->Count;i++)
     {
-        Task *task = _TasksOld[i1];
+        Task *task = _TasksOld[i];
         //if(task && task != _cur && task->Enable && task->NextTime <= now)
         if (task && task->Enable && task->NextTime <= now)
         {
@@ -382,9 +379,7 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
 
 Task *TaskScheduler::operator[](int taskid)
 {
-    int i =  - 1;
-
-    while (_TasksOld.MoveNext(i))
+    for(int i=0;i<this->Count;i++)
     {
         Task *task = _TasksOld[i];
         if (task && task->ID == taskid)
@@ -458,10 +453,9 @@ void TaskScheduler::ShowStatus()
     debug_printf("堆 %u/%u", &(buf[0]) - 0X20000000, 1024);
     debug_printf("\r\n");
 
-    int i =  - 1;
     Task *task = this->Current;
     task->ShowStatus();
-    while (this->_TasksOld.MoveNext(i))
+    for(int i=0;i<this->Count;i++)
     {
         Task *task = this->_Tasks[i];
         if (task)
