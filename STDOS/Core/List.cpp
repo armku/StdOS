@@ -159,6 +159,41 @@ void IList::Init()
 
 bool IList::CheckCapacity(int count)
 {
+	int i;
+	if(this->_Arr&&this->_Capacity>=count)
+	{
+		return true;
+	}
+	else
+	{
+		for(i=16;i<count;i*=2);
+		void* parrnew=operator new[](4 * i);
+		if(parrnew)
+		{
+			if(this->_Count>0 &&this->_Arr)
+			{
+				Buffer *buf=new Buffer(parrnew,4*i);
+				buf->Copy(0,this->_Arr,4*this->_Count);
+			}
+			if(this->_Arr)
+			{
+				if(this->_Arr!=this->Arr)
+					 operator delete[](this->_Arr);
+			}
+			this->_Arr=&parrnew;
+			this->_Capacity=i;
+			
+			
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	
+	
     if (count <= this->_Capacity)
     {
         return true;
