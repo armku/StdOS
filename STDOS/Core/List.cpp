@@ -151,8 +151,8 @@ void * &IList::operator[](int i)
 
 void IList::Init()
 {
-	this->_Arr=nullptr;	
-    this->_Count=this->_Capacity+20;
+	this->_Arr=this->Arr;	
+    this->_Count=0;
 	this->_Capacity=0;
 	//this->Arr=4;	
 }
