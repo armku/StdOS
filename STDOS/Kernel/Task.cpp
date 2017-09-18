@@ -212,6 +212,7 @@ uint TaskScheduler::Add(Action func, void* param, int dueTime, int period, cstri
     }
 
     this->Count++;
+    _Tasks.Add(task);
     _TasksOld.Add(task);
     #if DEBUG
         debug_printf("%s::Ìí¼Ó%2d %-11s", Name, task->ID, task->Name);
@@ -266,6 +267,16 @@ void TaskScheduler::Remove(uint taskid)
 
 void TaskScheduler::Start()
 {
+	#ifdef DEBUG
+	if(!this->Sleeping)
+	{
+		this->Add(&TaskScheduler::ShowStatus,this,10000,30000,"ShowStatus");
+	}
+	#endif
+	
+	
+	
+	
     if (Running)
     {
         return ;
