@@ -317,10 +317,10 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
     // 需要跳过当前正在执行任务的调度
     //Task* _cur = Current;
 
-    int i =  - 1;
-    while (_TasksOld.MoveNext(i))
+    int i1 =  - 1;
+    while (_TasksOld.MoveNext(i1))
     {
-        Task *task = _TasksOld[i];
+        Task *task = _TasksOld[i1];
         //if(task && task != _cur && task->Enable && task->NextTime <= now)
         if (task && task->Enable && task->NextTime <= now)
         {
