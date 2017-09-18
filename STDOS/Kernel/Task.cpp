@@ -268,9 +268,9 @@ void TaskScheduler::Remove(uint taskid)
 void TaskScheduler::Start()
 {
 	#ifdef DEBUG
-	if(!this->Sleeping)
+	if(!this->Running)
 	{
-		this->Add(&TaskScheduler::ShowStatus,this,10000,30000,"ShowStatus");
+		//this->Add(&TaskScheduler::ShowStatus,this,10000,30000,"ShowStatus");
 	}
 	#endif
 	
