@@ -16,14 +16,28 @@ class TaskTest
 
 #if DEBUG
 	#define SmartOS_printf debug_printf
+	List<TaskTest*>	_Tasks;
     void IList::Test()
     {
 //		TraceStack ts("TestList");
 //		SmartOS_printf("TestList......\r\n");		
 //		IList list;
 		
+		
+		
 		debug_printf("\r\n\r\n TestList begin");
-		List<TaskTest*>	_Tasks;	
+			
+		
+		TaskTest *t1=new TaskTest();
+		t1->aa=1;
+		t1->bb=2;
+		debug_printf("\r\n 原始t1:\r\n");
+		t1->show();
+		
+		
+		_Tasks.Add(t1);
+		debug_printf("\r\n 取出t1:\r\n");
+		_Tasks[0]->show();
 		
 		debug_printf("\r\n\r\n TestList end\r\n\r\n");
     }
