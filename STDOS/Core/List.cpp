@@ -44,15 +44,29 @@ IList &IList::operator = (IList && list)
 // 添加单个元素
 void IList::Add(void *item)
 {
-	this->CheckCapacity(this->_Capacity+1);
-	this->_Capacity++;
-	this->_Arr[this->_Count]=item;
+	this->CheckCapacity(this->_Count+1);
+	int pos=this->_Count;
+	this->_Count++;
+	this->_Arr[pos*4]=item;
 }
 
 // 添加多个元素
 void IList::Add(void **items, int count)
 {
-    return ;
+   if ( items && count )
+   {
+	   this->CheckCapacity(this->_Count+count);
+	   while(true)
+	   {
+		   if(count==0)
+			   break;
+		   count--;
+		   int pos=this->_Count;
+		   this->_Count++;
+		   this->_Arr[4*pos]=items;
+		   items++;
+	   }
+   }
 }
 
 // 删除指定位置元素
@@ -83,35 +97,38 @@ int IList::Remove(const void *item)
 
 void IList::Clear()
 {
-   this->_Capacity=0;
+   //this->Arr=nullptr;
 }
 
 // 查找指定项。不存在时返回-1
 int IList::FindIndex(const void *item)const
 {
-//    for (int i = 0; *(*this->_Arr) > i; ++i)
-//    {
-//        if (*(const void **)this->_Arr[4 *i] == item)
-//            return i;
-//        if (this->_Arr && !(*((this->_Arr[4 *i], item))
-//        {
-//            return i; 
-//        }
-//    }
-
-    return  - 1; 
+    for (int i = 0; this->_Count > i; ++i)
+    {
+        if ((const void*)(this->_Arr[4 *i]) == item)
+            return i;
+        if (this->Comparer(this->_Arr[4 *i], item))
+        {
+            return i;
+        }
+    }
+    return  - 1;
 }
 
 // 释放所有指针指向的内存
 IList &IList::DeleteAll()
 {
-	
+    for (int i = 0; this->_Count > i; ++i)
+    {
+        if (this->_Arr[4 *i])
+            operator delete (this->_Arr[4 *i]);
+    }
 }
 
 // 重载索引运算符[]，返回指定元素的第一个
 void *IList::operator[](int i)const
 {
-	if(i>0&&this->_Count>i)
+	if(i>=0&&this->_Count>i)
 	{
 		return this->_Arr[4*i];
 	}
@@ -122,7 +139,7 @@ void *IList::operator[](int i)const
 }
 void * &IList::operator[](int i)
 {
-	if(i>0&&this->_Count>i)
+	if(i>=0&&this->_Count>i)
 	{
 		return this->_Arr[4*i];
 	}

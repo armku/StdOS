@@ -1,11 +1,31 @@
 #include "List.h"
-#include "stdio.h"
+#include <stdio.h>
+#include "Sys.h"
+
+class TaskTest
+{
+	public:
+		int aa;
+		int bb;
+	void show()
+	{
+		debug_printf("aa:%d,bb:%d \r\n",aa,bb);
+	}
+};
 
 
 #if DEBUG
+	#define SmartOS_printf debug_printf
     void IList::Test()
     {
-        return ;
+//		TraceStack ts("TestList");
+//		SmartOS_printf("TestList......\r\n");		
+//		IList list;
+		
+		debug_printf("\r\n\r\n TestList begin");
+		List<TaskTest*>	_Tasks;	
+		
+		debug_printf("\r\n\r\n TestList end\r\n\r\n");
     }
 #endif 
 //#pragma once

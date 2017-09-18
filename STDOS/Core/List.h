@@ -48,9 +48,9 @@ public:
 #endif
 
 private:
-	void**	_Arr;
-	int		_Count;//12
-	int		_Capacity;//4
+	void**	_Arr;			//	2
+	int		_Count;//12			3
+	int		_Capacity;//4      
 
 	void*	Arr[0x04];//8
 
