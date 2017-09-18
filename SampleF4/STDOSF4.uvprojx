@@ -638,6 +638,11 @@
               <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
             </File>
             <File>
+              <FileName>String.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\String.cpp</FilePath>
+            </File>
+            <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
@@ -681,11 +686,6 @@
               <FileName>Dictionary.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Dictionary.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SString.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\SString.cpp</FilePath>
             </File>
             <File>
               <FileName>LinkedList.cpp</FileName>
@@ -1751,6 +1751,11 @@
               <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
             </File>
             <File>
+              <FileName>String.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\String.cpp</FilePath>
+            </File>
+            <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
@@ -1794,11 +1799,6 @@
               <FileName>Dictionary.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Dictionary.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SString.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\SString.cpp</FilePath>
             </File>
             <File>
               <FileName>LinkedList.cpp</FileName>
