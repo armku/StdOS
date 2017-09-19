@@ -11,8 +11,22 @@ static byte buftmp[10];
 
 String::String(cstring cstr): Array(cstr, ArrayLength(cstr))
 {
-    this->_Length = ArrayLength(cstr);
-    this->Copy(0, cstr, this->_Length);
+	int len;
+	this->init();
+	if(cstr)
+		len=strlen(cstr);
+	else
+		len=0;
+	this->_Length=len;
+	if(len)
+	{
+		this->_Arr=(char*)cstr;
+		this->_Capacity=len+1;
+		this->_needFree=false;
+	}
+	
+//    this->_Length = ArrayLength(cstr);
+//    this->Copy(0, cstr, this->_Length);
 }
 
 String::String(const String &str): Array(str.GetBuffer(), str.Length()){
@@ -245,8 +259,14 @@ String String::ToString()const
 // 调试输出字符串
 void String::Show(bool newLine)const
 {
-	if(newLine)
-	printf("\n\r");//"0a0d"
+    for (int i = 0;; ++i)
+    {
+        if (this->_Length <= i)
+            break;
+        SmartOS_printf("%c", this->_Arr[i]);
+    }
+    if (newLine)
+        printf("\r\n");
 }
 
 // 格式化字符串，输出到现有字符串后面。方便我们连续格式化多个字符串
