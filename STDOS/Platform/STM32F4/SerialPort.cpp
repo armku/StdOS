@@ -4,42 +4,6 @@
 #include "Task.h"
 #include "stm32f4xx.h"
 
-
-#if defined STM32F0
-	#define UART_PINS {\
-    /* TX   RX   CTS  RTS */	\
-    PA9, PA10,PA11,PA12,/* USART1 */	\
-    PA2, PA3, PA0, PA1, /* USART2 */	\
-    PB10,PB11,PB13,PB14,/* USART3 */	\
-    PC10,PC11,P0,  P0,  /* UART4  */	\
-    PC12, PD2,P0,  P0,  /* UART5  */	\
-    }
-    #define UART_PINS_FULLREMAP {\
-    /* TX   RX   CTS  RTS */	\
-    PB6, PB7, PA11,PA12,/* USART1 AFIO_MAPR_USART1_REMAP */	\
-    PD5, PD6, PD3, PD4, /* USART2 AFIO_MAPR_USART2_REMAP */	\
-    PD8, PD9, PD11,PD12,/* USART3 AFIO_MAPR_USART3_REMAP_FULLREMAP */	\
-    PC10,PC11,P0,  P0,  /* UART4  */	\
-    PC12, PD2,P0,  P0,  /* UART5  */	\
-    }
-#elif defined STM32F1
-    #define UART_PINS {\
-    /* TX   RX   CTS  RTS */	\
-    PA9, PA10,PA11,PA12,/* USART1 */	\
-    PA2, PA3, PA0, PA1, /* USART2 */	\
-    PB10,PB11,PB13,PB14,/* USART3 */	\
-    PC10,PC11,P0,  P0,  /* UART4  */	\
-    PC12, PD2,P0,  P0,  /* UART5  */	\
-    }
-    #define UART_PINS_FULLREMAP {\
-    /* TX   RX   CTS  RTS */	\
-    PB6, PB7, PA11,PA12,/* USART1 AFIO_MAPR_USART1_REMAP */	\
-    PD5, PD6, PD3, PD4, /* USART2 AFIO_MAPR_USART2_REMAP */	\
-    PD8, PD9, PD11,PD12,/* USART3 AFIO_MAPR_USART3_REMAP_FULLREMAP */	\
-    PC10,PC11,P0,  P0,  /* UART4  */	\
-    PC12, PD2,P0,  P0,  /* UART5  */	\
-    }
-#elif defined STM32F4
 	#define UART_PINS {\
     /* TX   RX   CTS  RTS */	\
     PA9, PA10,PA11,PA12,/* USART1 */	\
@@ -57,7 +21,6 @@
     PC10,PC11,P0,  P0,  /* UART4  */	\
     PC12, PD2,P0,  P0,  /* UART5  */	\
     }
-#endif
 // 获取引脚
 void SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
 {
@@ -87,21 +50,9 @@ int SerialPort_Closeing(int result)
 /////////////////////////////////////////////
 //////////////////////以下为移动/////////////
 /* 通用同步/异步收发器(USART)针脚 ------------------------------------------------------------------*/
-#if defined(STM32F1)
-	#define UARTS {USART1, USART2, USART3, UART4, UART5}
-#elif defined STM32F4
 	#define UARTS {USART1, USART2, USART3, UART4, UART5,USART6}
-#elif defined STM32F0
-	#define UARTS {USART1, USART2, USART3}
-#endif
 
-#ifdef STM32F0
-	#define UART_IRQs {USART1_IRQn,USART2_IRQn}
-#elif defined STM32F1
-    #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
-#elif defined STM32F4 
     #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn,USART6_IRQn}
-#endif 
 // 真正的串口中断函数
 void OnUsartReceive(ushort num, void *param)
 {
@@ -153,9 +104,7 @@ void SerialPort::Register(TransportHandler handler, void *param)
 	this->_task=Task::Get(this->_taskidRx);
 }
 
-#if defined(STM32F0) || defined(STM32F4)
 	#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
-#endif
 
 // 打开串口
 bool SerialPort::OnOpen()
@@ -192,14 +141,7 @@ bool SerialPort::OnOpen()
         }
         switch (_stopBits)
         {
-			#ifdef STM32F0
-            #elif defined STM32F1
-                case USART_StopBits_0_5:
-                    debug_printf(", StopBits_0_5");
-                    break;
-            #elif defined STM32F4
-			#endif 
-            case USART_StopBits_1:
+			case USART_StopBits_1:
                 debug_printf(", StopBits_1");
                 break;
             case USART_StopBits_1_5:
@@ -221,14 +163,8 @@ bool SerialPort::OnOpen()
 
     //串口引脚初始化
     this->Ports[0]=new AlternatePort();
-	#ifdef STM32F0
 		this->Ports[1]=new AlternatePort();
-	#elif defined STM32F1
-		this->Ports[1]=new InputPort();
-	#elif defined STM32F4
-		this->Ports[1]=new AlternatePort();
-	#endif
-    this->Ports[0]->Set(this->Pins[0]);
+	this->Ports[0]->Set(this->Pins[0]);
     this->Ports[1]->Set(this->Pins[1]);
 
     // 不要关调试口，否则杯具
@@ -237,42 +173,9 @@ bool SerialPort::OnOpen()
     // USART_DeInit其实就是关闭时钟，这里有点多此一举。但为了安全起见，还是使用
 
     // 检查重映射
-	#ifdef STM32F0
-    #elif defined STM32F1
-        if (Remap)
-        {
-            switch (this->Index)
-            {
-                case COM1:
-                    AFIO->MAPR |= AFIO_MAPR_USART1_REMAP;
-                    break;
-                case COM2:
-                    AFIO->MAPR |= AFIO_MAPR_USART2_REMAP;
-                    break;
-                case COM3:
-                    AFIO->MAPR |= AFIO_MAPR_USART3_REMAP_FULLREMAP;
-                    break;
-				case COM4:
-					break;
-				case COM5:
-					break;
-				case COM6:
-					break;
-				case COM7:
-					break;
-				case COM8:
-					break;
-				default:
-					break;
-            }
-        }
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-    #elif defined STM32F4
-	#endif 
-
+	
     // 打开 UART 时钟。必须先打开串口时钟，才配置引脚
-    #if defined(STM32F1) || defined(STM32F4) 
-		switch(this->Index)
+    	switch(this->Index)
 		{
 				case COM1:
 				case COM6:
@@ -288,45 +191,13 @@ bool SerialPort::OnOpen()
 					break;
 		}
 		//RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); //此代码功能同上行
-	#elif defined STM32F0
-		switch (this->Index)
-        {
-            case COM1:
-                RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
-                break; //开启时钟
-            case COM2:
-                RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
-                break;
-            case COM3:
-				break;
-			case COM4:
-				break;
-			case COM5:
-				break;
-			case COM6:
-				break;
-			case COM7:
-				break;
-			case COM8:
-				break;
-			default:
-                break;
-        }
-    #endif 
-
-    #ifdef STM32F0
-        GPIO_PinAFConfig(_GROUP(this->Pins[0]), _PIN(this->Pins[0]), GPIO_AF_1); //将IO口映射为USART接口
-        GPIO_PinAFConfig(_GROUP(this->Pins[1]), _PIN(this->Pins[1]), GPIO_AF_1);
-    #elif defined STM32F1
-	#elif defined STM32F4
-        const byte afs[] = 
+	    const byte afs[] = 
         {
             GPIO_AF_USART1, GPIO_AF_USART2, GPIO_AF_USART3, GPIO_AF_UART4, GPIO_AF_UART5, GPIO_AF_USART6, GPIO_AF_UART7, GPIO_AF_UART8
         };
 		GPIO_PinAFConfig(_GROUP(this->Pins[0]),_PIN(this->Pins[0]),afs[Index]); //GPIOA9复用为USART1
 		GPIO_PinAFConfig(_GROUP(this->Pins[1]),_PIN(this->Pins[1]),afs[Index]); //GPIOA10复用为USART1
-    #endif 
-
+    
     USART_StructInit(&p);
     p.USART_BaudRate = _baudRate;
     p.USART_WordLength = _dataBits;

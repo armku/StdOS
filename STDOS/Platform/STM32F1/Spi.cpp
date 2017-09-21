@@ -30,16 +30,7 @@ byte Spi::Write(byte data)
                     return ++Error;
                 // 超时处理
             }
-            #ifdef STM32F0
-                SPI_SendData8((SPI_TypeDef*)(this->_SPI), data);
-            #elif defined STM32F1
                 SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
-            #elif defined STM32F4
-                SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
-            #else 
-
-            #endif 
-
             //是否发送成功
             retry = Retry;
             while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
@@ -49,13 +40,7 @@ byte Spi::Write(byte data)
                 // 超时处理
             }
 
-            #ifdef STM32F0
-                return SPI_ReceiveData8((SPI_TypeDef*)(this->_SPI)); //返回通过SPIx最近接收的数据
-            #elif defined STM32F1
-                return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
-            #elif defined STM32F4 
-                return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
-            #endif 
+                return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));            
         default:
             return  0;
     }
@@ -88,64 +73,15 @@ void Spi::OnInit()
     switch (this->_index)
     {
         case Spi1:
-            #ifdef STM32F0
-                //				// SPI都在GPIO_AF_0分组内
-                //        GPIO_PinAFConfig(_GROUP(ps[1]), _PIN(ps[1]), GPIO_AF_0);
-                //        GPIO_PinAFConfig(_GROUP(ps[2]), _PIN(ps[2]), GPIO_AF_0);
-                //        GPIO_PinAFConfig(_GROUP(ps[3]), _PIN(ps[3]), GPIO_AF_0)
-				this->SetPin(PB3, PB4, PB5);
-				GPIO_PinAFConfig(GPIOB, GPIO_PinSource3, GPIO_AF_0); //PB3复用为 SPI1
-                GPIO_PinAFConfig(GPIOB, GPIO_PinSource4, GPIO_AF_0); //PB4复用为 SPI1
-                GPIO_PinAFConfig(GPIOB, GPIO_PinSource5, GPIO_AF_0); //PB5复用为 SPI1
-            #elif defined STM32F1
                 this->SetPin(PA5, PA6, PA7);//this->SetPin(PA5, PA6, PA7, PA4);                
-            #elif defined STM32F4				
-                this->SetPin(PB3, PB4, PB5);//this->SetPin(PB3, PB4, PB5, PB14);//this->SetPin(PA5, PA6, PA7, PA4);/原生SPI1
-                //				byte afs[] = 
-                //        {
-                //            GPIO_AF_SPI1, GPIO_AF_SPI2, GPIO_AF_SPI3, GPIO_AF_SPI4, GPIO_AF_SPI5, GPIO_AF_SPI6
-                //        };
-                //        GPIO_PinAFConfig(_GROUP(ps[1]), _PIN(ps[1]), afs[_index]);
-                //        GPIO_PinAFConfig(_GROUP(ps[2]), _PIN(ps[2]), afs[_index]);
-                //        GPIO_PinAFConfig(_GROUP(ps[3]), _PIN(ps[3]), afs[_index]);
-                GPIO_PinAFConfig(GPIOB, GPIO_PinSource3, GPIO_AF_SPI1); //PB3复用为 SPI1
-                GPIO_PinAFConfig(GPIOB, GPIO_PinSource4, GPIO_AF_SPI1); //PB4复用为 SPI1
-                GPIO_PinAFConfig(GPIOB, GPIO_PinSource5, GPIO_AF_SPI1); //PB5复用为 SPI1
-            #endif 
             this->_SPI = SPI1;
             break;
         case Spi2:
-            #ifdef STM32F0
-				this->SetPin(PB13, PB14, PB15);
-				GPIO_PinAFConfig(GPIOB, GPIO_PinSource13, GPIO_AF_0); //PB13复用为 SPI2
-                GPIO_PinAFConfig(GPIOB, GPIO_PinSource14, GPIO_AF_0); //PB14复用为 SPI2
-                GPIO_PinAFConfig(GPIOB, GPIO_PinSource15, GPIO_AF_0); //PB15复用为 SPI2
-            #elif defined STM32F1
-                //this->SetPin(PA5, PA6, PA7);//this->SetPin(PA5, PA6, PA7, PA4);                
-            #elif defined STM32F4
-                this->SetPin(PB13, PB14, PB15);//this->SetPin(PB13, PB14, PB15, PB12); //原生SPI2
-                GPIO_PinAFConfig(GPIOB, GPIO_PinSource13, GPIO_AF_SPI2); //PB13复用为 SPI2
-                GPIO_PinAFConfig(GPIOB, GPIO_PinSource14, GPIO_AF_SPI2); //PB14复用为 SPI2
-                GPIO_PinAFConfig(GPIOB, GPIO_PinSource15, GPIO_AF_SPI2); //PB15复用为 SPI2
-            #endif 
             this->_SPI = SPI2;
             break;
         case Spi3:
-            #ifdef STM32F0
-
-            #elif defined STM32F1
-                //this->SetPin(PA5, PA6, PA7);//this->SetPin(PA5, PA6, PA7, PA4);                
-            #elif defined STM32F4
-                this->SetPin(PC10, PC11, PC12);//this->SetPin(PC10, PC11, PC12, PA15);
-                GPIO_PinAFConfig(GPIOC, GPIO_PinSource10, GPIO_AF_SPI3); //PC10复用为 SPI3
-                GPIO_PinAFConfig(GPIOC, GPIO_PinSource11, GPIO_AF_SPI3); //PC11复用为 SPI3
-                GPIO_PinAFConfig(GPIOC, GPIO_PinSource12, GPIO_AF_SPI3); //PC12复用为 SPI3
-            #endif 
-			#if defined(STM32F1) || defined(STM32F4) 
             this->_SPI = SPI3;
-			#elif defined STM32F0
-			#endif
-            break;
+			break;
         default:
             break;
     }
@@ -161,11 +97,8 @@ void Spi::OnInit()
             RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
             break;
         case Spi3:
-			#if defined(STM32F1) || defined(STM32F4) 
-            RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
-			#elif defined STM32F0
-			#endif
-            break;
+			RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
+			break;
         default:
             break;
     }
@@ -192,46 +125,20 @@ void Spi::OnInit()
 	}
 	else{}
     SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;// NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制    
-    #ifdef STM32F0
-        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_64;
-    #elif defined STM32F1
         SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_8;
-    #elif defined STM32F4
-        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_256; //定义波特率预分频的值:波特率预分频值为256
-    #endif 
     SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB; // 高位在前。指定数据传输从MSB位还是LSB位开始:数据传输从MSB位开始
     SPI_InitStructure.SPI_CRCPolynomial = 7; // CRC值计算的多项式
     switch (this->_index)
     {
         case Spi1:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
-            #ifdef STM32F0
-				assert_param(IS_SPI_BAUDRATE_PRESCALER(SPI_BaudRatePrescaler)); //判断有效性
-                SPI1->CR1 &= 0XFFC7; //位3-5清零，用来设置波特率
-                SPI1->CR1 |= SPI_BaudRatePrescaler_64; //设置SPI1速度 设置为21M时钟,高速模式 
-                SPI_Cmd(SPI1, ENABLE); //使能SPI1
-            #elif defined STM32F1
-
-            #elif defined STM32F4
-                //SPI1速度设置函数
-                //SPI速度=fAPB2/分频系数
-                //@ref SPI_BaudRate_Prescaler:SPI_BaudRatePrescaler_2~SPI_BaudRatePrescaler_256  
-                //fAPB2时钟一般为84Mhz：
-                assert_param(IS_SPI_BAUDRATE_PRESCALER(SPI_BaudRatePrescaler)); //判断有效性
-                SPI1->CR1 &= 0XFFC7; //位3-5清零，用来设置波特率
-                SPI1->CR1 |= SPI_BaudRatePrescaler_4; //设置SPI1速度 设置为21M时钟,高速模式 
-                SPI_Cmd(SPI1, ENABLE); //使能SPI1
-            #endif 
             break;
         case Spi2:
             RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
             break;
         case Spi3:
-			#if defined(STM32F1) || defined(STM32F4) 
-            RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
-			#elif defined STM32F0
-			#endif
-            break;
+			RCC_APB2PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
+			break;
         default:
             break;
     }
@@ -241,10 +148,7 @@ void Spi::OnInit()
         case Spi2:
         case Spi3:
             SPI_Init((SPI_TypeDef*)(this->_SPI), &SPI_InitStructure);
-			#ifdef STM32F0
-				SPI_RxFIFOThresholdConfig((SPI_TypeDef*)(this->_SPI), SPI_RxFIFOThreshold_QF);
-			#endif
-            break;
+			break;
         default:
             break;
     }
@@ -307,14 +211,8 @@ ushort Spi::Write16(ushort data)
                     return ++Error;
                 // 超时处理
             }
-            #ifdef STM32F0
-                SPI_I2S_SendData16((SPI_TypeDef*)(this->_SPI), data);
-            #elif defined STM32F1
                 SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
-            #elif defined STM32F4
-                SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
-            #endif 
-
+            
             retry = Retry << 1;
             while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
             {
@@ -322,13 +220,7 @@ ushort Spi::Write16(ushort data)
                     return ++Error;
                 // 超时处理
             }
-            #ifdef STM32F0
-                return SPI_I2S_ReceiveData16((SPI_TypeDef*)(this->_SPI));
-            #elif defined STM32F1
-                return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
-            #elif defined STM32F4
-                return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
-            #endif 
+                return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));             
         default:
             return 0;
     }

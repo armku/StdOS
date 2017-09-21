@@ -11,29 +11,8 @@ bool Port::Open()
         {
             // 打开时钟
             int gi = _Pin >> 4;
-            #ifdef STM32F0
                 RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA << gi, ENABLE);
-            #elif defined STM32F1
-                RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << gi, ENABLE);
-                // PA15/PB3/PB4 需要关闭JTAG
-                switch (_Pin)
-                {
-                    case PA15:
-                    case PB3:
-                    case PB4:
-                        {
-                            debug_printf("Close JTAG for P%c%d\r\n", _PIN_NAME(_Pin));
-
-                            // PA15是jtag接口中的一员 想要使用 必须开启remap
-                            RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-                            GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
-                            break;
-                        }
-                }
-            #elif defined STM32F4
-                RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
-            #endif 
-
+            
             GPIO_InitTypeDef gpio;
             // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
             GPIO_StructInit(&gpio);
@@ -94,8 +73,7 @@ void OutputPort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
 
-    #ifdef STM32F0
-		gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式	
+    	gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式	
         if (this->OpenDrain)
         {
             gpio->GPIO_OType = GPIO_OType_OD;
@@ -105,29 +83,7 @@ void OutputPort::OpenPin(void *param)
         {
             gpio->GPIO_OType = GPIO_OType_PP;//通用推挽输出			
 			gpio->GPIO_PuPd = GPIO_PuPd_UP;/*设置引脚模式为上拉*/
-        }
-    #elif defined STM32F1
-        if (this->OpenDrain)
-        {
-            gpio->GPIO_Mode = GPIO_Mode_Out_OD;
-        }
-        else
-        {
-            gpio->GPIO_Mode = GPIO_Mode_Out_PP;
-        }
-    #elif defined STM32F4
-        gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式	
-        if (this->OpenDrain)
-        {
-            gpio->GPIO_OType = GPIO_OType_OD; //推挽输出
-            gpio->GPIO_PuPd = GPIO_PuPd_NOPULL; //            
-        }
-        else
-        {
-            gpio->GPIO_OType = GPIO_OType_PP; //推挽输出
-            gpio->GPIO_PuPd = GPIO_PuPd_UP; //上拉
-        }
-    #endif 
+        }    
 }
 void AnalogInPort::OpenPin(void* param)
 {
@@ -136,8 +92,7 @@ void AnalogInPort::OpenPin(void* param)
 void AlternatePort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    #ifdef STM32F0
-		gpio->GPIO_Mode = GPIO_Mode_AF;
+    	gpio->GPIO_Mode = GPIO_Mode_AF;
 		gpio->GPIO_Speed = GPIO_Speed_50MHz;
         gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
 		if(!this->OpenDrain)
@@ -148,21 +103,6 @@ void AlternatePort::OpenPin(void *param)
 		{
 			gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
 		}
-    #elif defined STM32F1
-        gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
-    #elif defined STM32F4
-        gpio->GPIO_Mode = GPIO_Mode_AF;
-		gpio->GPIO_Speed = GPIO_Speed_50MHz;
-        gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
-		if(!this->OpenDrain)
-		{
-			gpio->GPIO_PuPd = GPIO_PuPd_UP;
-		}
-		else
-		{
-			gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
-		}
-    #endif 
     int i = 0;
     i++;
 }
@@ -181,23 +121,12 @@ void InputPort::OpenPin(void* param)
 
 void SetEXIT(int pinIndex, bool enable);
 
-#if defined(STM32F1) || defined(STM32F4)
-    #if 0
-        static const int PORT_IRQns[] = 
-        {
-            EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
-            EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
-            EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
-        };
-    #endif 
-#elif defined(STM32F0)
     static const int PORT_IRQns[] = 
     {
         EXTI0_1_IRQn, EXTI0_1_IRQn,  // 基础
         EXTI2_3_IRQn, EXTI2_3_IRQn,  // 基础
         EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn  // EXTI15_10
     };
-#endif 
 GPIO_TypeDef *IndexToGroup(byte index)
 {
     return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
@@ -223,21 +152,13 @@ void AnalogInPort::OnOpen(void *param)
 {
     Port::OnOpen(param);
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    #ifdef STM32F0
-		gpio->GPIO_Mode = GPIO_Mode_AN;
-    #elif defined STM32F1
-        gpio->GPIO_Mode = GPIO_Mode_AIN; //
-    #elif defined STM32F4
-        gpio->GPIO_Mode = GPIO_Mode_AN;
-        //gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
-    #endif 
+    	gpio->GPIO_Mode = GPIO_Mode_AN;
 }
 void InputPort::OnOpen(void *param)
 {
     Port::OnOpen(param);
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    #ifdef STM32F0
-		gpio->GPIO_Mode = GPIO_Mode_IN;
+    	gpio->GPIO_Mode = GPIO_Mode_IN;
         if (this->Floating)
         {
             gpio->GPIO_OType = GPIO_OType_OD;
@@ -260,85 +181,11 @@ void InputPort::OnOpen(void *param)
             default:
                 break;
         }
-    #elif defined STM32F1
-        if (Floating)
-            gpio->GPIO_Mode = GPIO_Mode_IN_FLOATING;
-        else if (Pull == UP)
-            gpio->GPIO_Mode = GPIO_Mode_IPU;
-        else if (Pull == DOWN)
-            gpio->GPIO_Mode = GPIO_Mode_IPD;
-        // 这里很不确定，需要根据实际进行调整
-    #elif defined STM32F4
-        gpio->GPIO_Mode = GPIO_Mode_IN;
-        if (this->Floating)
-        {
-            gpio->GPIO_OType = GPIO_OType_OD;
-        }
-        else
-        {
-            gpio->GPIO_OType = GPIO_OType_PP;
-        }
-        switch (this->Pull)
-        {
-            case NOPULL:
-                gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
-                break;
-            case UP:
-                gpio->GPIO_PuPd = GPIO_PuPd_UP;
-                break;
-            case DOWN:
-                gpio->GPIO_PuPd = GPIO_PuPd_DOWN;
-                break;
-            default:
-                break;
-        }
-    #endif 
 }
 void GPIO_ISR(int num);
 //所有中断线处理
 void EXTI_IRQHandler(ushort num, void *param)
-{
-    #if defined(STM32F1) || defined(STM32F4)
-        // EXTI0 - EXTI4
-        if (num <= EXTI4_IRQn)
-        {
-            GPIO_ISR(num - EXTI0_IRQn);
-        }
-        else if (num == EXTI9_5_IRQn)
-        {
-            // EXTI5 - EXTI9
-            uint pending = EXTI->PR &EXTI->IMR &0x03E0; // pending bits 5..9
-            int num = 5;
-            pending >>= 5;
-            do
-            {
-                if (pending &1)
-                {
-                    GPIO_ISR(num);
-                }
-                num++;
-                pending >>= 1;
-            }
-            while (pending);
-        }
-        else if (num == EXTI15_10_IRQn)
-        {
-            // EXTI10 - EXTI15
-            uint pending = EXTI->PR &EXTI->IMR &0xFC00; // pending bits 10..15
-            int num = 10;
-            pending >>= 10;
-            do
-            {
-                if (pending &1)
-                {
-                    GPIO_ISR(num);
-                }
-                num++;
-                pending >>= 1;
-            }
-            while (pending);
-        }
-    #elif defined(STM32F0)
+{    
         switch (num)
         {
             case EXTI0_1_IRQn:
@@ -385,7 +232,6 @@ void EXTI_IRQHandler(ushort num, void *param)
                     while (pending);
                 }
         }
-    #endif 
 }
 
 //中断线打开、关闭

@@ -265,12 +265,7 @@ int STMFLASH::writeSector(uint addr)
         return 0;
     }
     FLASH_Unlock(); //解锁	
-	#ifdef STM32F0
-	#elif defined STM32F1
-    FLASH_ErasePage(addr); //擦除这个扇区
-	#elif defined STM32F4
-	#endif
-    writeNoCheck(addr, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
+	writeNoCheck(addr, Buff.buf16, this->sectorSize / 2); //写入整个扇区  
     FLASH_Lock(); //上锁
     return this->sectorSize;
 }
@@ -310,12 +305,7 @@ void STMFLASH::write(uint addr, ushort *pBuffer, ushort len)
         if (i < secremain)
         //需要擦除
         {
-			#ifdef STM32F0
-			#elif defined STM32F1
-            FLASH_ErasePage(secpos *this->sectorSize + STM32_FLASH_BASE); //擦除这个扇区
-			#elif defined STM32F4
-			#endif
-            for (i = 0; i < secremain; i++)
+			for (i = 0; i < secremain; i++)
             //复制
             {
                 Buff.buf16[i + secoff] = pBuffer[i];
@@ -360,39 +350,3 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
         addr += 2; //偏移2个字节.	
     }
 }
-
-#ifdef DEBUG
-    void STMFLASH::Test()
-    {
-        byte buftest1[3200];
-        uint addr = STM32_FLASH_BASE + 1024 * 36+10;
-        STMFLASH flash1;
-        flash1.SetFlashSize(512);
-        debug_printf("测试开始\r\n");
-        for (int i = 0; i < 1200; i++)
-        {
-            buftest1[i] = i % 200;
-        }
-
-        int wid = flash1.Write(addr, buftest1, 3200);
-        debug_printf("write ok\r\n");
-        for (int i = 0; i < 3200; i++)
-        {
-            buftest1[i] = 0;
-        }
-
-        int rid = flash1.Read(addr, buftest1, 3200);
-        debug_printf("read ok\r\n");
-        for (int i = 0; i < 1200; i++)
-        {
-            if (buftest1[i] != (i % 200))
-            {
-                debug_printf("测试失败，数据错误：%d\r\n", buftest1[i]);
-                return ;
-            }
-            //debug_printf("%d:%d\t", i, buftest1[i]);
-        }
-
-        debug_printf("测试成功\r\n");
-    }
-#endif

@@ -46,15 +46,11 @@ void Timer::SetFrequency(uint frequency)
     RCC_ClocksTypeDef clock;
     RCC_GetClocksFreq(&clock);
 
-    #if defined(STM32F1) || defined(STM32F4)
         uint clk = clock.PCLK1_Frequency;
         if ((uint)this->_index &0x00010000)
             clk = clock.PCLK2_Frequency;
         clk <<= 1;
-    #elif defined(STM32F0)
-        uint clk = clock.PCLK_Frequency << 1;
-    #endif 
-
+    
     assert_param(frequency > 0 && frequency <= clk);
 
     uint s = 1;
@@ -148,7 +144,6 @@ void Timer::Config()
             Interrupt.SetPriority(TIM3_IRQn, 3);
             break;
         case Timer4:
-            #if defined(STM32F1) || defined(STM32F4)
                 /* 设置TIM2CLK 为 72MHZ */
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
                 TIM_DeInit(TIM4);
@@ -163,10 +158,8 @@ void Timer::Config()
 
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, DISABLE); /*先关闭等待使用*/
                 Interrupt.SetPriority(TIM4_IRQn, 3);
-            #endif 
             break;
         case Timer5:
-            #if defined(STM32F1) || defined(STM32F4)
                 /* 设置TIM2CLK 为 72MHZ */
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
                 TIM_DeInit(TIM5);
@@ -181,7 +174,6 @@ void Timer::Config()
 
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, DISABLE); /*先关闭等待使用*/
                 Interrupt.SetPriority(TIM5_IRQn, 3);
-            #endif 
             break;
         case Timer6:
 			RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
@@ -193,13 +185,7 @@ void Timer::Config()
             TIM_Cmd(TIM6, ENABLE);
 			RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, DISABLE); /*先关闭等待使用*/
                 
-			#if defined(STM32F1)
-                Interrupt.SetPriority(TIM6_IRQn, 3);
-            #elif defined STM32F4
-				Interrupt.SetPriority(TIM6_DAC_IRQn, 3);
-			#elif defined STM32F0
-                Interrupt.SetPriority(TIM6_DAC_IRQn, 3);
-            #endif 
+			    Interrupt.SetPriority(TIM6_IRQn, 3);
             break;
         case Timer7:
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
@@ -240,15 +226,8 @@ void Timer::Config()
 }
 void Timer::OnInit()
 {
-	#if defined(STM32F0)
-		this->Prescaler = 47999; //48000分频
-	#elif defined(STM32F1)
 		this->Prescaler=36000-1;//则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=系统时钟/(分频系数+1) =1M
 		this->Period=2000-1;
-	#elif defined(STM32F4)
-		this->Prescaler = 5000-1;
-		this->Period= 8400-1;
-	#endif 
 }
 
 void Timer::OnOpen()
@@ -264,14 +243,10 @@ void Timer::OnOpen()
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
             break;
         case Timer4:
-            #if defined(STM32F1) || defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-            #endif 
             break;
         case Timer5:
-            #if defined(STM32F1) || defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
-            #endif 
             break;
         case Timer6:
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
@@ -310,15 +285,11 @@ void Timer::OnOpen()
         RCC_ClocksTypeDef clock;
         RCC_GetClocksFreq(&clock);
 
-        #if defined(STM32F1) || defined(STM32F4)
             uint clk = clock.PCLK1_Frequency;
             if ((uint)this->_index &0x00010000)
                 clk = clock.PCLK2_Frequency;
             clk <<= 1;
-        #elif defined(STM32F0)
-            uint clk = clock.PCLK_Frequency << 1;
-        #endif 
-
+        
         uint fre = clk / (Prescaler + 1) / Period;
         debug_printf("Timer%d::Start Prescaler=%d Period=%d Frequency=%d\r\n", _index + 1, Prescaler + 1, Period, fre);
     #endif 
@@ -337,14 +308,10 @@ void Timer::OnClose()
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, DISABLE);
             break;
         case Timer4:
-            #if defined(STM32F1) || defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, DISABLE);
-            #endif 
             break;
         case Timer5:
-            #if defined(STM32F1) || defined(STM32F4)
-                RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, DISABLE);
-            #endif 
+               RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, DISABLE);
             break;
         case Timer6:
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, DISABLE);
@@ -395,79 +362,49 @@ void Timer::ClockCmd(int idx, bool state)
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, st);
             break;
         case Timer4:
-            #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, st);
-            #endif 
             break;
         case Timer5:
-            #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, st);
-            #endif 
             break;
         case Timer6:
-            #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, st);
-            #endif 
             break;
         case Timer7:
-            #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, st);
-            #endif 
             break;
         case Timer8:
-            #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8, st);
-            #endif 
             break;
         case Timer9:
-            #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM9, st);
-            #endif 
             break;
         case Timer10:
-            #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM10, st);
-            #endif 
             break;
         case Timer11:
-            #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM11, st);
-            #endif 
             break;
         case Timer12:
-            #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM12, st);
-            #endif 
             break;
         case Timer13:
-            #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM13, st);
-            #endif 
             break;
         case Timer14:
-            #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM14, st);
-            #endif 
             break;
         case Timer15:
-            #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM15, st);
-            #endif 
             break;
         case Timer16:
-            #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM16, st);
-            #endif 
             break;
         case Timer17:
-            #if defined(STM32F1) && defined(STM32F4)
                 RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM17, st);
-            #endif 
             break;
         case Timer18:
-			#if defined(STM32F1) && defined(STM32F4)
-                RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM18, st);
-            #endif 
+			    //RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM18, st);
             break;
 		default:
             break;
@@ -487,11 +424,7 @@ void Timer::OnHandler(ushort num, void *param)
 //////////////////////////////////////////////////////////////
 /////////////////////////////////以下为添加////////////////////
 /* 定时器针脚 ------------------------------------------------------------------*/
-#if defined(STM32F1) || defined(STM32F4) 
     #define TIMS {TIM1, TIM2, TIM3, TIM4, TIM5, TIM6, TIM7, TIM8}
-#elif defined STM32F0
-    #define TIMS {TIM1, TIM2, TIM3}
-#endif 
 #define TIM_PINS {\
 PA8, PA9, PA10,PA11,/* TIM1 */	\
 PA0, PA1, PA2, PA3, /* TIM2 */	\
@@ -567,22 +500,14 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
             Interrupt.Activate(TIM3_IRQn, Timer::OnHandler, this);
             break;
         case Timer4:
-            #if defined(STM32F1) || defined(STM32F4)
                 Interrupt.Activate(TIM4_IRQn, Timer::OnHandler, this);
-            #endif 
             break;
         case Timer5:
-            #if defined(STM32F1) || defined(STM32F4)
                 Interrupt.Activate(TIM5_IRQn, Timer::OnHandler, this);
-            #endif 
             break;
         case Timer6:
-            #if defined(STM32F1) 
                 Interrupt.Activate(TIM6_IRQn, Timer::OnHandler, this);
-			#elif defined STM32F0 || defined(STM32F4)
-				Interrupt.Activate(TIM6_DAC_IRQn, Timer::OnHandler, this);
-            #endif 
-            break;
+			break;
         case Timer7:
             Interrupt.Activate(TIM7_IRQn, Timer::OnHandler, this);
             break;
@@ -599,24 +524,12 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
         case Timer13:
             break;
         case Timer14:
-			#if defined STM32F0
-				Interrupt.Activate(TIM14_IRQn, Timer::OnHandler, this);
-            #endif 
-            break;
+			break;
         case Timer15:
-            #if defined STM32F0
-				Interrupt.Activate(TIM15_IRQn, Timer::OnHandler, this);
-            #endif 
             break;
         case Timer16:
-            #if defined STM32F0
-				Interrupt.Activate(TIM16_IRQn, Timer::OnHandler, this);
-            #endif 
             break;
         case Timer17:
-            #if defined STM32F0
-				Interrupt.Activate(TIM17_IRQn, Timer::OnHandler, this);
-            #endif 
             break;
         case Timer18:
             break;
@@ -624,35 +537,3 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
             break;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
