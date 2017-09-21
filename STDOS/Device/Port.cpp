@@ -47,27 +47,7 @@ Port::Port()
  */
 Port &Port::Set(Pin pin)
 {
-    //assert_param(pin != P0);
-
-    this->_Pin = pin;
-    //    if (_Pin != P0)
-    //    {
-    //        this->State = IndexToGroup(pin >> 4);
-    //        //        PinBit = 1 << (pin &0x0F);
-    //    }
-    //    else
-    //    {
-    //        this->State = NULL;
-    //        //        PinBit = 0;
-    //    }
-    #ifdef STM32F0
-    #elif defined STM32F1
-        // 整组引脚的初始状态，析构时有选择恢复
-        //        if (_Pin != P0)
-        //            InitState = ((UInt64)((GPIO_TypeDef *)this->State)->CRH << 32) + ((GPIO_TypeDef *)this->State)->CRL;
-    #elif defined STM32F4
-    #endif 
-
+    this->_Pin = pin;    
 
     this->Open();
     return  *this;

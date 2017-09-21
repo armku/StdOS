@@ -26,16 +26,6 @@ extern "C"
     extern uint __initial_sp;
 }
 String *CPUName;
-//unsigned int Get_JTAG_ID(void)
-//{
-//  unsigned int result; // r0@2
-
-//  if ( vE00FFFE8 & 8 )
-//    result = (vE00FFFD0 << 8) & 0xFFF | ((unsigned int)vE00FFFE4 >> 3) | (32 * (vE00FFFE8 & 7) + 1);
-//  else
-//    result = 0;
-//  return result;
-//}
 int SmartOS_Log(const String *str)
 {
     int ret;
@@ -54,22 +44,6 @@ int SmartOS_Log(const String *str)
     }
     return ret;
 }
-//void ExitCritical(void)
-//{
-//  __enable_irq();
-//}
-//void EnterCritical(void)
-//{
-//  __disable_irq();
-//}
-//unsigned int  _REV(unsigned int a1)
-//{
-//  return __rev(a1);
-//}
-//int  _REV16(unsigned __int16 a1)
-//{
-//  return (unsigned __int16)_REV16();
-//}
 
 void TSys::SetStackTop(uint addr)
 {

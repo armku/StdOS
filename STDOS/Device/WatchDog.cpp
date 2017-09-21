@@ -27,11 +27,3 @@ void WatchDog::Start(uint msTimeOut,uint msFeed)
 	cur->Config(msTimeOut);
 	Sys.AddTask(FeedDogTask,&WatchDog::Current(),10,msFeed,"FeedDog");
 }
-//≤‚ ‘¥˙¬Î
-#if 0
-#if DEBUG
-        WatchDog::Start(20000, 10000);
-    #else 
-        WatchDog::Start();
-    #endif 
-#endif

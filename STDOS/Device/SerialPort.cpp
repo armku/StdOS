@@ -113,34 +113,7 @@ SerialPort *SerialPort::GetMessagePort()
 // 关闭端口
 void SerialPort::OnClose()
 {
-    //    debug_printf("~Serial%d Close\r\n", _index + 1);
-
-    //    Pin tx, rx;
-
-    //    SerialPort_GetPins(&tx, &rx);
-
-    //    USART_DeInit(_port);
-
-    // 检查重映射
-	#ifdef STM32F0
-    #elif defined STM32F1
-        if (Remap)
-        {
-            //            switch (_index)
-            //            {
-            //                case 0:
-            //                    AFIO->MAPR &= ~AFIO_MAPR_USART1_REMAP;
-            //                    break;
-            //                case 1:
-            //                    AFIO->MAPR &= ~AFIO_MAPR_USART2_REMAP;
-            //                    break;
-            //                case 2:
-            //                    AFIO->MAPR &= ~AFIO_MAPR_USART3_REMAP_FULLREMAP;
-            //                    break;
-            //            }
-        }
-	#elif defined STM32F4
-    #endif 
+    
 }
 // 向某个端口写入数据。如果size为0，则把data当作字符串，一直发送直到遇到\0为止
 bool SerialPort::OnWrite(const Buffer& bs)

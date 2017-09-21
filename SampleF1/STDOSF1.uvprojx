@@ -909,6 +909,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ListTest.cpp</FilePath>
             </File>
+            <File>
+              <FileName>WatchDogTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1815,6 +1820,11 @@
               <FileName>ListTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ListTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDogTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
             </File>
           </Files>
         </Group>

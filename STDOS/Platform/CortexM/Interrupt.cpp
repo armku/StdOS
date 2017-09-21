@@ -16,20 +16,6 @@ unsigned int GetIPSR(void)
 {
 //  return __get_CPSR();
 }
-//int UserHandler()
-//{
-////  unsigned int v0; // r0@1
-
-////  v0 = GetIPSR();
-////  return TInterrupt::Process((TInterrupt *)&Interrupt, v0);
-//}
-//int assert_failed(unsigned __int8 *a1, unsigned int a2)
-//{
-////  TInterrupt *v2; // r0@1
-
-////  v2 = (TInterrupt *)SmartOS_printf("Assert Failed! Line %d, %s\r\n");
-////  return TInterrupt::Halt(v2);
-//}
 // 注册中断函数（中断号，函数，参数）
 bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)
 {

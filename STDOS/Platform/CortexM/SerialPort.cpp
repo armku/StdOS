@@ -43,29 +43,11 @@ bool SerialPort::OnSet()
 }
 void SerialPort::Init()
 {
-    #if 0
-        *((_BYTE*)this + 64) =  - 1;
-        *((_DWORD*)this + 10) = 0;
-        *((_DWORD*)this + 11) = 0;
-        *((_DWORD*)this + 17) = 0;
-        *((_BYTE*)this + 36) = 0;
-        *((_WORD*)this + 7) = 1;
-        *((_BYTE*)this + 53) =  - 1;
-        *((_BYTE*)this + 52) =  - 1;
-        *((_DWORD*)this + 15) = 0;
-        *((_DWORD*)this + 14) = 0;
-        *((_BYTE*)this + 28) = 8;
-        *((_BYTE*)this + 29) = 0;
-        *((_BYTE*)this + 30) = 1;
-        *((_DWORD*)this + 35) = 0;
-
-    #else 
-        this->Index = COM_NONE;
+         this->Index = COM_NONE;
         RS485 = NULL;
         Error = 0;
 
         Remap = 0;
-    #endif 
     this->OnInit();
 }
 
