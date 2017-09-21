@@ -212,21 +212,21 @@ DateTime DateTime::AddMilliseconds(Int64 value) const
 	ret.ParseMs(ret.TotalMs()+value);
 	return ret;
 }
-DateTime DateTime::Add(const TimeSpan& value) const
-{
-  //?  
-  return *this;
-}
-DateTime DateTime::operator+(const TimeSpan& value)
-{
-	//?  
-  return *this;
-}
-DateTime DateTime::operator-(const TimeSpan& value)
-{
-	//?  
-  return *this;
-}
+//DateTime DateTime::Add(const TimeSpan& value) const
+//{
+//  //?  
+//  return *this;
+//}
+//DateTime DateTime::operator+(const TimeSpan& value)
+//{
+//	//?  
+//  return *this;
+//}
+//DateTime DateTime::operator-(const TimeSpan& value)
+//{
+//	//?  
+//  return *this;
+//}
 //TimeSpan DateTime::operator-(const DateTime& left, const DateTime& right)
 //{
 //	//?  

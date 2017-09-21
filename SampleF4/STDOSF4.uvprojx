@@ -660,16 +660,6 @@
               <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
             </File>
             <File>
-              <FileName>Stream.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Environment.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Environment.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Version.cpp</FilePath>
@@ -693,11 +683,6 @@
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Power.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Power.cpp</FilePath>
             </File>
             <File>
               <FileName>Pwm.cpp</FileName>
@@ -855,11 +840,6 @@
               <FilePath>..\STDOS\Platform\STM32F1\Port.cpp</FilePath>
             </File>
             <File>
-              <FileName>Power.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\Power.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Pwm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\Pwm.cpp</FilePath>
@@ -918,11 +898,6 @@
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\CortexM\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Thread.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Thread.cpp</FilePath>
             </File>
             <File>
               <FileName>Time.cpp</FileName>
@@ -1632,16 +1607,6 @@
               <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
             </File>
             <File>
-              <FileName>Stream.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Environment.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Environment.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Version.cpp</FilePath>
@@ -1665,11 +1630,6 @@
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Power.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Power.cpp</FilePath>
             </File>
             <File>
               <FileName>Pwm.cpp</FileName>
@@ -1827,11 +1787,6 @@
               <FilePath>..\STDOS\Platform\STM32F1\Port.cpp</FilePath>
             </File>
             <File>
-              <FileName>Power.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\Power.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Pwm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\Pwm.cpp</FilePath>
@@ -1890,11 +1845,6 @@
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\CortexM\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Thread.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Thread.cpp</FilePath>
             </File>
             <File>
               <FileName>Time.cpp</FileName>
