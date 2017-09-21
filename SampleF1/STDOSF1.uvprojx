@@ -387,9 +387,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>UserDriver</GroupName>
-        </Group>
-        <Group>
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
@@ -740,9 +737,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>STDOS</GroupName>
-        </Group>
-        <Group>
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
@@ -896,24 +890,6 @@
               <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>App</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Modbus</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Message</GroupName>
-        </Group>
-        <Group>
-          <GroupName>TinyIP</GroupName>
-        </Group>
-        <Group>
-          <GroupName>TinyNet</GroupName>
-        </Group>
-        <Group>
-          <GroupName>TokenNet</GroupName>
         </Group>
         <Group>
           <GroupName>Test</GroupName>
@@ -1333,9 +1309,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>UserDriver</GroupName>
-        </Group>
-        <Group>
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
@@ -1686,9 +1659,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>STDOS</GroupName>
-        </Group>
-        <Group>
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
@@ -1842,24 +1812,6 @@
               <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>App</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Modbus</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Message</GroupName>
-        </Group>
-        <Group>
-          <GroupName>TinyIP</GroupName>
-        </Group>
-        <Group>
-          <GroupName>TinyNet</GroupName>
-        </Group>
-        <Group>
-          <GroupName>TokenNet</GroupName>
         </Group>
         <Group>
           <GroupName>Test</GroupName>
