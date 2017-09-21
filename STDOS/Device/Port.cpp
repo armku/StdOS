@@ -10,35 +10,7 @@ Port::Port()
 #ifndef TINY	
     Port::~Port()
     {
-        #ifdef STM32F0
-        #elif defined STM32F1
-            // 恢复为初始化状态
-            //            ushort bits = PinBit;
-            //            int config = InitState &0xFFFFFFFF;
-            //            for (int i = 0; i < 16 && bits; i++, bits >>= 1)
-            //            {
-            //                if (i == 7)
-            //                    config = InitState >> 32;
-            //                if (bits &1)
-            //                {
-            //                    uint shift = (i &7) << 2; // 每引脚4位
-            //                    uint mask = 0xF << shift; // 屏蔽掉其它位
-
-            //                    GPIO_TypeDef *port = (GPIO_TypeDef *)this->State;
-            //                    if (i &0x08)
-            //                    {
-            //                        // bit 8 - 15
-            //                        port->CRH = port->CRH &~mask | (config &mask);
-            //                    }
-            //                    else
-            //                    {
-            //                        // bit 0-7
-            //                        port->CRL = port->CRL &~mask | (config &mask);
-            //                    }
-            //                }
-            //            }
-        #elif defined STM32F4
-        #endif 
+        
     }
 #endif 
 

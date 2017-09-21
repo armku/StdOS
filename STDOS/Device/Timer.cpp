@@ -10,16 +10,8 @@ void Timer::SetHandler(bool set){
 Timer::Timer(TIMER index)
 {
     this->_index = index;
-    this->Period = 1000; //默认1秒一次
-	#if defined(STM32F0)
-		this->Prescaler = 47999; //48000分频
-	#elif defined(STM32F1)
-		this->Prescaler=36000-1;//则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=系统时钟/(分频系数+1) =1M
-		this->Period=2000-1;
-	#elif defined(STM32F4)
-		this->Prescaler = 5000-1;
-		this->Period= 8400-1;
-	#endif    
+    this->Period = 1000; //默认1秒一次	  
+	this->OnInit();
 }
 
 Timer::~Timer()
