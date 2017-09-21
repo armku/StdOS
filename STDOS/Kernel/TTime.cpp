@@ -9,6 +9,7 @@
 #elif defined STM32F4
     #include "stm32f4xx.h"
 #endif 
+
 extern byte fac_us; //us延时倍乘数 每个us需要的systick时钟数 	
 int clock()
 {
@@ -61,25 +62,13 @@ void TTime::Delay(int nus)const
     uint ticks;
     uint told, tnow, tcnt = 0;
     uint reload = 0;
-    #if defined(STM32F1) || defined(STM32F4)
         reload = SysTick->LOAD; //LOAD的值
-    #elif defined STM32F0
-        reload = SysTick->LOAD; //LOAD的值
-    #endif 
     ticks = nus * fac_us; //需要的节拍数
     tcnt = 0;
-    #if defined(STM32F1) || defined(STM32F4)
         told = SysTick->VAL; //刚进入时的计数器值
-    #elif defined STM32F0
-        told = SysTick->VAL; //刚进入时的计数器值
-    #endif 
     while (1)
     {
-        #if defined(STM32F1) || defined(STM32F4)
             tnow = SysTick->VAL;
-        #elif defined STM32F0
-            tnow = SysTick->VAL;
-        #endif 
         if (tnow != told)
         {
             if (tnow < told)
@@ -108,8 +97,6 @@ void TimeWheel::Reset(uint ms)
 bool TimeWheel::Expired()
 {
     return true;
-	
-	TimeWheel *v1; // r4@1
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -148,11 +135,7 @@ void TimeCost::Show(cstring format)const
     //采用如下方法实现执行汇编指令WFI  
     void WFI_SET(void)
     {
-        #if defined(STM32F1) || defined(STM32F4)
             __ASM volatile("wfi");
-        #elif defined STM32F0
-            __ASM volatile("wfi");
-        #endif 
     }
 
     //设置栈顶地址
