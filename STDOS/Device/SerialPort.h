@@ -3,11 +3,10 @@
 
 #include "Core\Queue.h"
 #include "Port.h"
-#include "Power.h"
 #include "Net\ITransport.h"
 
 // ´®¿ÚÀà
-class SerialPort : public ITransport, public Power
+class SerialPort : public ITransport
 {
 private:
 	friend class ComProxy;
