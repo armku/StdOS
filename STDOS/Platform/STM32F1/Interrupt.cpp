@@ -2,23 +2,9 @@
 #include "TInterrupt.h"
 #include "Timer.h"
 
-#ifdef STM32F0
-    #include "stm32f0xx.h"
-#elif defined STM32F1
-    #include "stm32f10x.h"
-#elif defined STM32F4
-    #include "stm32f4xx.h"
-#endif 
-#ifdef STM32F0
-    #define NVIC_VectTab_RAM             ((uint)0x20000000)
-    #define NVIC_VectTab_FLASH           ((uint)0x08000000)
-#endif 
+#include "stm32f10x.h"
 
-#ifdef STM32F0
-    #define NVIC_OFFSET					 ((uint)0x0000)
-#else 
     #define NVIC_OFFSET					 ((uint)0x1000)
-#endif 
 #define ISRADDR (NVIC_VectTab_RAM+NVIC_OFFSET)
 #if defined(STM32F1) || defined(STM32F4)
     #define ISRLENGTH   100	//ÖÐ¶ÏÊýÁ¿

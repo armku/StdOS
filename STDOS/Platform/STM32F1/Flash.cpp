@@ -1,12 +1,5 @@
 #include "Flash.h"
-
-#ifdef STM32F0
-	#include "stm32f0xx.h"
-#elif defined STM32F1
-	#include "stm32f10x.h"
-#elif defined STM32F4
-	#include "stm32f4xx.h"
-#endif
+#include "stm32f10x.h"
 
 
 // 设置读保护   注意：解除读保护时会擦除所有 Flash 内容

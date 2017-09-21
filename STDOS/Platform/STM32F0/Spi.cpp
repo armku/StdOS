@@ -1,13 +1,7 @@
 #include "Sys.h"
 #include "Spi.h"
+#include "stm32f0xx.h"
 
-#ifdef STM32F0
-	#include "stm32f0xx.h"
-#elif defined STM32F1
-	#include "stm32f10x.h"
-#elif defined STM32F4
-	#include "stm32f4xx.h"
-#endif
 
 /* 串行外设接口(SPI)针脚 ------------------------------------------------------------------*/
 //#define SPI_NSS_PINS  {4, 28, 15} // PA4, PB12, PA15
