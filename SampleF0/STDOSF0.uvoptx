@@ -1332,7 +1332,7 @@
 
   <Group>
     <GroupName>Platform</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1355,7 +1355,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Platform\STM32F1\Flash.cpp</PathWithFileName>
+      <PathWithFileName>..\STDOS\Platform\STM32F0\Flash.cpp</PathWithFileName>
       <FilenameWithoutPath>Flash.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1367,7 +1367,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Platform\STM32F1\I2C.cpp</PathWithFileName>
+      <PathWithFileName>..\STDOS\Platform\STM32F0\I2C.cpp</PathWithFileName>
       <FilenameWithoutPath>I2C.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1379,7 +1379,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Platform\STM32F1\Interrupt.cpp</PathWithFileName>
+      <PathWithFileName>..\STDOS\Platform\STM32F0\Interrupt.cpp</PathWithFileName>
       <FilenameWithoutPath>Interrupt.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1391,7 +1391,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Platform\STM32F1\Port.cpp</PathWithFileName>
+      <PathWithFileName>..\STDOS\Platform\STM32F0\Port.cpp</PathWithFileName>
       <FilenameWithoutPath>Port.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1403,7 +1403,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Platform\STM32F1\Pwm.cpp</PathWithFileName>
+      <PathWithFileName>..\STDOS\Platform\STM32F0\Pwm.cpp</PathWithFileName>
       <FilenameWithoutPath>Pwm.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1415,7 +1415,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Platform\STM32F1\RTC.cpp</PathWithFileName>
+      <PathWithFileName>..\STDOS\Platform\STM32F0\RTC.cpp</PathWithFileName>
       <FilenameWithoutPath>RTC.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1427,7 +1427,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Platform\STM32F1\SerialPort.cpp</PathWithFileName>
+      <PathWithFileName>..\STDOS\Platform\STM32F0\SerialPort.cpp</PathWithFileName>
       <FilenameWithoutPath>SerialPort.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1439,7 +1439,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Platform\STM32F1\Spi.cpp</PathWithFileName>
+      <PathWithFileName>..\STDOS\Platform\STM32F0\Spi.cpp</PathWithFileName>
       <FilenameWithoutPath>Spi.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1451,7 +1451,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Platform\STM32F1\Timer.cpp</PathWithFileName>
+      <PathWithFileName>..\STDOS\Platform\STM32F0\Timer.cpp</PathWithFileName>
       <FilenameWithoutPath>Timer.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1463,7 +1463,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Platform\STM32F1\WatchDog.cpp</PathWithFileName>
+      <PathWithFileName>..\STDOS\Platform\STM32F0\WatchDog.cpp</PathWithFileName>
       <FilenameWithoutPath>WatchDog.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1592,7 +1592,7 @@
 
   <Group>
     <GroupName>Test</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
