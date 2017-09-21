@@ -598,24 +598,9 @@
               <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
             </File>
             <File>
-              <FileName>TimeSpan.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
-            </File>
-            <File>
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Random.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Random.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Delegate.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Delegate.cpp</FilePath>
             </File>
             <File>
               <FileName>Queue.cpp</FileName>
@@ -623,29 +608,9 @@
               <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
             </File>
             <File>
-              <FileName>Stream.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Dictionary.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Dictionary.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>LinkedList.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\LinkedList.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Environment.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Environment.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EventHandler.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\EventHandler.cpp</FilePath>
             </File>
             <File>
               <FileName>Version.cpp</FileName>
@@ -657,26 +622,6 @@
         <Group>
           <GroupName>Device</GroupName>
           <Files>
-            <File>
-              <FileName>ADC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\ADC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CAN.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\CAN.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DAC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\DAC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DMA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\DMA.cpp</FilePath>
-            </File>
             <File>
               <FileName>Flash.cpp</FileName>
               <FileType>8</FileType>
@@ -696,11 +641,6 @@
               <FileName>Power.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Power.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ProxyConfig.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\ProxyConfig.cpp</FilePath>
             </File>
             <File>
               <FileName>Pwm.cpp</FileName>
@@ -726,11 +666,6 @@
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>UTPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\UTPort.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDog.cpp</FileName>
@@ -806,18 +741,6 @@
         </Group>
         <Group>
           <GroupName>STDOS</GroupName>
-          <Files>
-            <File>
-              <FileName>Config.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Config.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BootConfig.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\BootConfig.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Kernel</GroupName>
@@ -826,11 +749,6 @@
               <FileName>TTime.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\TTime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitHandle.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
             <File>
               <FileName>Task.cpp</FileName>
@@ -846,16 +764,6 @@
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Heap.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Thread.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -876,31 +784,6 @@
               <FileName>startup_stm32f10x_hd.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\startup_stm32f10x_hd.s</FilePath>
-            </File>
-            <File>
-              <FileName>ADC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\ADC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Boot_F1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\Boot_F1.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CAN.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\CAN.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DAC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\DAC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DMA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\DMA.cpp</FilePath>
             </File>
             <File>
               <FileName>Flash.cpp</FileName>
@@ -988,11 +871,6 @@
               <FilePath>..\STDOS\Platform\CortexM\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>Thread.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Thread.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\CortexM\Time.cpp</FilePath>
@@ -1012,11 +890,6 @@
         <Group>
           <GroupName>Security</GroupName>
           <Files>
-            <File>
-              <FileName>RC4.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
-            </File>
             <File>
               <FileName>Crc.cpp</FileName>
               <FileType>8</FileType>
@@ -1671,24 +1544,9 @@
               <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
             </File>
             <File>
-              <FileName>TimeSpan.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
-            </File>
-            <File>
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Random.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Random.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Delegate.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Delegate.cpp</FilePath>
             </File>
             <File>
               <FileName>Queue.cpp</FileName>
@@ -1696,29 +1554,9 @@
               <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
             </File>
             <File>
-              <FileName>Stream.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Dictionary.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Dictionary.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>LinkedList.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\LinkedList.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Environment.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Environment.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EventHandler.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\EventHandler.cpp</FilePath>
             </File>
             <File>
               <FileName>Version.cpp</FileName>
@@ -1730,26 +1568,6 @@
         <Group>
           <GroupName>Device</GroupName>
           <Files>
-            <File>
-              <FileName>ADC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\ADC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CAN.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\CAN.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DAC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\DAC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DMA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\DMA.cpp</FilePath>
-            </File>
             <File>
               <FileName>Flash.cpp</FileName>
               <FileType>8</FileType>
@@ -1769,11 +1587,6 @@
               <FileName>Power.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Power.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ProxyConfig.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\ProxyConfig.cpp</FilePath>
             </File>
             <File>
               <FileName>Pwm.cpp</FileName>
@@ -1799,11 +1612,6 @@
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>UTPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\UTPort.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDog.cpp</FileName>
@@ -1879,18 +1687,6 @@
         </Group>
         <Group>
           <GroupName>STDOS</GroupName>
-          <Files>
-            <File>
-              <FileName>Config.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Config.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BootConfig.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\BootConfig.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Kernel</GroupName>
@@ -1899,11 +1695,6 @@
               <FileName>TTime.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\TTime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitHandle.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
             <File>
               <FileName>Task.cpp</FileName>
@@ -1919,16 +1710,6 @@
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Heap.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Thread.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1949,31 +1730,6 @@
               <FileName>startup_stm32f10x_hd.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\startup_stm32f10x_hd.s</FilePath>
-            </File>
-            <File>
-              <FileName>ADC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\ADC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Boot_F1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\Boot_F1.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CAN.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\CAN.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DAC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\DAC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DMA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\DMA.cpp</FilePath>
             </File>
             <File>
               <FileName>Flash.cpp</FileName>
@@ -2061,11 +1817,6 @@
               <FilePath>..\STDOS\Platform\CortexM\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>Thread.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Thread.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\CortexM\Time.cpp</FilePath>
@@ -2085,11 +1836,6 @@
         <Group>
           <GroupName>Security</GroupName>
           <Files>
-            <File>
-              <FileName>RC4.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\RC4.cpp</FilePath>
-            </File>
             <File>
               <FileName>Crc.cpp</FileName>
               <FileType>8</FileType>
