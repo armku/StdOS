@@ -2,14 +2,8 @@
 #include "TTime.h"
 #include "SerialPort.h"
 #include "Task.h"
+#include "stm32f4xx.h"
 
-#ifdef STM32F0
-	#include "stm32f0xx.h"
-#elif defined STM32F1
-	#include "stm32f10x.h"
-#elif defined STM32F4
-	#include "stm32f4xx.h"
-#endif
 
 #if defined STM32F0
 	#define UART_PINS {\

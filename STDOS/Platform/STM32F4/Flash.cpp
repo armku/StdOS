@@ -1,13 +1,5 @@
 #include "Flash.h"
-
-#ifdef STM32F0
-	#include "stm32f0xx.h"
-#elif defined STM32F1
-	#include "stm32f10x.h"
-#elif defined STM32F4
-	#include "stm32f4xx.h"
-#endif
-
+#include "stm32f4xx.h"
 
 // 设置读保护   注意：解除读保护时会擦除所有 Flash 内容
 bool Flash::ReadOutProtection(bool set)
@@ -368,39 +360,3 @@ void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
         addr += 2; //偏移2个字节.	
     }
 }
-
-#ifdef DEBUG
-    void STMFLASH::Test()
-    {
-        byte buftest1[3200];
-        uint addr = STM32_FLASH_BASE + 1024 * 36+10;
-        STMFLASH flash1;
-        flash1.SetFlashSize(512);
-        debug_printf("测试开始\r\n");
-        for (int i = 0; i < 1200; i++)
-        {
-            buftest1[i] = i % 200;
-        }
-
-        int wid = flash1.Write(addr, buftest1, 3200);
-        debug_printf("write ok\r\n");
-        for (int i = 0; i < 3200; i++)
-        {
-            buftest1[i] = 0;
-        }
-
-        int rid = flash1.Read(addr, buftest1, 3200);
-        debug_printf("read ok\r\n");
-        for (int i = 0; i < 1200; i++)
-        {
-            if (buftest1[i] != (i % 200))
-            {
-                debug_printf("测试失败，数据错误：%d\r\n", buftest1[i]);
-                return ;
-            }
-            //debug_printf("%d:%d\t", i, buftest1[i]);
-        }
-
-        debug_printf("测试成功\r\n");
-    }
-#endif

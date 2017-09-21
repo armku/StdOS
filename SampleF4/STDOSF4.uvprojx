@@ -949,6 +949,41 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\SerialTest.cpp</FilePath>
             </File>
+            <File>
+              <FileName>AT24CXXTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\AT24CXXTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ListTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ListTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RTCTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\RTCTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StringTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\StringTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimerTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\TimerTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDogTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FlashTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\FlashTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1895,6 +1930,41 @@
               <FileName>SerialTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\SerialTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT24CXXTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\AT24CXXTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ListTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ListTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RTCTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\RTCTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StringTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\StringTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimerTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\TimerTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDogTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FlashTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\FlashTest.cpp</FilePath>
             </File>
           </Files>
         </Group>

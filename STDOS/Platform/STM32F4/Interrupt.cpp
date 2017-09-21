@@ -1,14 +1,8 @@
 #include "SerialPort.h"
 #include "TInterrupt.h"
 #include "Timer.h"
+#include "stm32f4xx.h"
 
-#ifdef STM32F0
-    #include "stm32f0xx.h"
-#elif defined STM32F1
-    #include "stm32f10x.h"
-#elif defined STM32F4
-    #include "stm32f4xx.h"
-#endif 
 #ifdef STM32F0
     #define NVIC_VectTab_RAM             ((uint)0x20000000)
     #define NVIC_VectTab_FLASH           ((uint)0x08000000)
