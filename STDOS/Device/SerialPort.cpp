@@ -28,8 +28,7 @@ SerialPort::~SerialPort()
 void SerialPort::Set(COM index, int baudRate)
 {
     this->Index = index;
-    this->_baudRate = baudRate;
-
+    
     // 根据系统时钟自动计算默认波特率
     if (_baudRate <= 0)
     {
@@ -41,7 +40,8 @@ void SerialPort::Set(COM index, int baudRate)
         //		else
         _baudRate = 256000;
     }
-    if (baudRate <= 9600)
+    this->_baudRate = baudRate;
+	if (baudRate <= 9600)
         this->ByteTime = 1000 / (baudRate / 10) + 1;
     else
         this->ByteTime = 1;
