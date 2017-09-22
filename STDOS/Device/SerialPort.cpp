@@ -39,7 +39,7 @@ void SerialPort::Set(COM index, int baudRate)
         //		else if (clock > 36)
         //			_baudRate = 1024000;
         //		else
-        _baudRate = 115200;
+        _baudRate = 256000;
     }
     if (baudRate <= 9600)
         this->ByteTime = 1000 / (baudRate / 10) + 1;
