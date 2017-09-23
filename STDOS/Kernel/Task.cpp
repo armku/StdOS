@@ -290,6 +290,39 @@ void TaskScheduler::Stop()
 // 执行一次循环。指定最大可用时间
 void TaskScheduler::Execute(uint msMax, bool& cancel)
 {
+	UInt64 mscur=Sys.Ms();
+	
+	TimeCost tmcost;
+	int mscurMax = mscur + msMax;
+	for(int i=0;i<this->Count;i++)
+	{
+		Task* taskcur=this->_TasksOld[i];
+		if ( taskcur && taskcur->Enable && taskcur->Period)
+		{
+			if ( taskcur->CheckTime(mscurMax, msMax != -1) )
+			{
+				taskcur->Execute(mscur);
+				taskcur->Times++;
+			}
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     UInt64 now;
     now = Sys.Ms()*1000; // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
 
