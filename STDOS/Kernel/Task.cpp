@@ -174,22 +174,6 @@ TaskScheduler::TaskScheduler(cstring name)
 // 创建任务，返回任务编号。dueTime首次调度时间ms，-1表示事件型任务，period调度间隔ms，-1表示仅处理一次
 uint TaskScheduler::Add(Action func, void* param, int dueTime, int period, cstring name)
 {
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
     if (dueTime > 0)
     {
         dueTime *= 1000;
@@ -204,7 +188,7 @@ uint TaskScheduler::Add(Action func, void* param, int dueTime, int period, cstri
     task->Callback = func;
     task->Param = param;
     task->Period = period;
-    task->NextTime = Time.Current()*1000 + dueTime;
+    task->NextTime = Sys.Ms()*1000 + dueTime;
     task->Name = name;
     if (dueTime < 0)
     {
@@ -307,10 +291,10 @@ void TaskScheduler::Stop()
 void TaskScheduler::Execute(uint msMax, bool& cancel)
 {
     UInt64 now;
-    now = Time.Current()*1000; // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
+    now = Sys.Ms()*1000; // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
 
     UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
-    UInt64 end = Time.Current()*1000 + msMax;
+    UInt64 end = Sys.Ms()*1000 + msMax;
 
     // 需要跳过当前正在执行任务的调度
     //Task* _cur = Current;
@@ -328,7 +312,7 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
                 min = task->NextTime;
             }
 
-            UInt64 now2 = Time.Current()*1000;
+            UInt64 now2 = Sys.Ms()*1000;
             task->SleepTime = 0;
 
             this->Current = task;
@@ -337,7 +321,7 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
 
             // 累加任务执行次数和时间
             task->Times++;
-            int cost = (int)(Time.Current()*1000 - now2);
+            int cost = (int)(Sys.Ms()*1000 - now2);
             if (cost < 0)
             {
                 cost =  - cost;
@@ -359,13 +343,13 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
         }
 
         // 如果已经超出最大可用时间，则退出
-        if (!msMax || (Time.Current()*1000) > end)
+        if (!msMax || (Sys.Ms()*1000) > end)
         {
             return ;
         }
     }
     // 如果有最小时间，睡一会吧
-    now = Time.Current()*1000; // 当前时间
+    now = Sys.Ms()*1000; // 当前时间
     if (min != UInt64_Max && min > now)
     {
         min -= now;
