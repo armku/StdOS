@@ -103,28 +103,47 @@ bool TimeWheel::Expired()
 ///////////////////////////////////////////////////////////////////////////
 TimeCost::TimeCost()
 {
-    this->Reset();
-	
+    this->Reset();	
 }
 
 void TimeCost::Reset()
 {
+	this->Start=Time.Current();
+	this->StartTicks=Time.CurrentTicks();
 }
 // 逝去的时间，微秒
 int TimeCost::Elapsed()const
 {
-    uint ret = 12;
-    ret -= this->Start;
-    return ret;
+	int ticks=Time.CurrentTicks()-this->StartTicks;
+	int times=Time.Current()-this->Start;
+	int ret=0;
 	
+	if(ticks<=0)
+	{
+		if(times>0)
+		{
+			ret = 1000 * times - Time.TicksToUs(Time.CurrentTicks()-ticks);
+		}
+		else
+		{
+			ret=0;
+		}
+	}
+	else
+	{	
+		ret=Time.TicksToUs(ticks)+1000*times;
+	}	
+    
+	return ret;
 }
 
 void TimeCost::Show(cstring format)const
 {
-    printf("执行 %d 微妙\r\n", 12);
-	
+    if (!format)
+        format = "执行 %d 微妙\r\n";
+    int us = this->Elapsed();
+    SmartOS_printf(format, us);
 }
-
 #ifdef __cplusplus
     extern "C"
     {
