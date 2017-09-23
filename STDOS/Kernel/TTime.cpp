@@ -88,15 +88,25 @@ void TTime::Delay(int nus)const
 /////////////////////////////////////////////////////////////////////////////////////
 TimeWheel::TimeWheel(uint ms)
 {
+	this->Sleep=0;
+	this->Reset(ms);
 }
 
 void TimeWheel::Reset(uint ms)
 {
+	this->Expire=Time.Current()+ms;
 }
 // 是否已过期
 bool TimeWheel::Expired()
 {
-    return true;
+    if (Time.Current() < this->Expire)
+    {
+        if (this->Sleep)
+            Sys.Sleep(this->Sleep);
+        return false;
+    }
+    else
+        return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////
