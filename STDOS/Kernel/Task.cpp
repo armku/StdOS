@@ -130,7 +130,42 @@ Task& Task::Current()
 }
 bool Task::CheckTime(UInt64 end, bool isSleep)
 {
-	return false;
+	bool ret;
+	if(this->Deepth<this->MaxDeepth)
+	{
+		uint mscur=Sys.Ms();
+		if(this->Enable)
+		{
+			ret=false;
+		}
+		else if(end>=this->NextTime)
+		{
+			if(isSleep)
+			{
+				if(this->Event||(this->Period>=0))
+				{
+					ret=true;
+				}
+				else
+				{
+					ret=false;
+				}
+			}
+			else
+			{
+				ret=true;
+			}
+		}
+		else
+		{
+			ret=false;
+		}
+	}
+	else
+	{
+		ret=false;
+	}
+	return ret;
 }
 void Task::Init()
 {
