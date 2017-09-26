@@ -63,23 +63,10 @@ void TimerTask(void *param)
     printf("\r\n%d: cnt:%d", i++, time6cnt);
 }
 
-#define namee "StdOS"
-void AT24C02Test();
-String Test()
-{
-    String a = "aaaa";
-    String b = "bbbb";
-    String c = a + b;
-
-    return c;
-}
-
-String SSTEST;
 SerialPort *sp1;
 
 int main(void)
 {
-    Sys.Name = (char*)namee;
     Sys.Init();
     #if DEBUG
         Sys.MessagePort = COM1;
@@ -88,9 +75,7 @@ int main(void)
 
 	sp1=SerialPort::GetMessagePort();
     SerialPort::GetMessagePort()->Register(OnUsart1Read);
-    //	AT24C02Test();  
-    SSTEST = Test();
-	
+    
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
     Sys.AddTask(Test12, 0, 600, 1000, "Test");
