@@ -64,34 +64,34 @@ void Task::Set(bool enable, int msNextTime)
 // 显示状态
 void Task::ShowStatus()
 {
-    debug_printf("Task::%-12s %2d", Name, ID);
-    if (Times >= 1000000)
+    debug_printf("Task::%-12s %2d", this->Name, this->ID);
+    if (this->Times >= 1000000)
     {
-        debug_printf("[%d]", Times);
+        debug_printf("[%d]", this->Times);
     }
-    else if (Times >= 100000)
+    else if (this->Times >= 100000)
     {
-        debug_printf("[%d] ", Times);
+        debug_printf("[%d] ", this->Times);
     }
-    else if (Times >= 10000)
+    else if (this->Times >= 10000)
     {
-        debug_printf("[%d]  ", Times);
+        debug_printf("[%d]  ", this->Times);
     }
-    else if (Times >= 1000)
+    else if (this->Times >= 1000)
     {
-        debug_printf("[%d]   ", Times);
+        debug_printf("[%d]   ", this->Times);
     }
-    else if (Times >= 100)
+    else if (this->Times >= 100)
     {
-        debug_printf("[%d]    ", Times);
+        debug_printf("[%d]    ", this->Times);
     }
-    else if (Times >= 10)
+    else if (this->Times >= 10)
     {
-        debug_printf("[%d]     ", Times);
+        debug_printf("[%d]     ", this->Times);
     }
     else
     {
-        debug_printf("[%d]      ", Times);
+        debug_printf("[%d]      ", this->Times);
     }
     float cpuPercent = 0;
     cpuPercent = 0;
@@ -109,11 +109,11 @@ void Task::ShowStatus()
 
     if (Cost >= 1000)
     {
-        debug_printf("%3ums", Cost / 1000);
+        debug_printf("%3ums", this->Cost / 1000);
     }
     else
     {
-        debug_printf("%3uus", Cost);
+        debug_printf("%3uus", this->Cost);
     }
     if (this->MaxCost >= 1000000)
     {
@@ -129,15 +129,15 @@ void Task::ShowStatus()
     }
     if (this->Period >= 1000000)
     {
-        debug_printf(" 周期 %3lds ", Period / 1000000);
+        debug_printf(" 周期 %3lds ", this->Period / 1000000);
     }
     else if (this->Period >= 1000)
     {
-        debug_printf(" 周期 %3ldms", Period / 1000);
+        debug_printf(" 周期 %3ldms", this->Period / 1000);
     }
     else
     {
-        debug_printf(" 周期 %3ldus", Period);
+        debug_printf(" 周期 %3ldus", this->Period);
     }
     debug_printf(" %s\r\n", this->Enable ? " " : "禁用");
 }
@@ -164,6 +164,7 @@ Task& Task::Current()
 bool Task::CheckTime(UInt64 end, bool isSleep)
 {
 	bool ret;
+	
 	if(this->Deepth<this->MaxDeepth)
 	{
 		uint mscur=Sys.Ms();
@@ -278,7 +279,7 @@ uint TaskScheduler::Add(Action func, void* param, int dueTime, int period, cstri
     }
 
     this->Count++;
-    _Tasks.Add(task);
+    //_Tasks.Add(task);
     _TasksOld.Add(task);
     #if DEBUG
         debug_printf("%s::添加%2d %-11s", Name, task->ID, task->Name);
@@ -337,10 +338,7 @@ void TaskScheduler::Start()
 		//this->Add(&TaskScheduler::ShowStatus,this,10000,30000,"ShowStatus");
 	}
 	#endif
-	
-	
-	
-	
+		
     if (Running)
     {
         return ;
@@ -427,9 +425,12 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
             {
                 min = task->NextTime;
             }
-
+			bool cancel=false;
             this->Current = task;
-            task->Execute(Sys.Ms());
+			if(task->CheckTime(Sys.Ms(),cancel));
+			{
+				task->Execute(Sys.Ms());
+			}
             this->Current = NULL;
         }
     }
@@ -486,7 +487,7 @@ void TaskScheduler::ShowStatus()
     float RunTimesAvg = 0;
     Task *tsk;
     byte buf[1];
-return;
+
     runCounts++;
     UInt64 curms = Sys.Ms();
 
@@ -495,16 +496,14 @@ return;
     RunTimesAvg = 0;
     for (int j = 0; j < this->Count; j++)
     {
-        tsk = this->_Tasks[j];
+        tsk = this->_TasksOld[j];
         RunTimes += tsk->Cost *tsk->Times;
         RunTimesAvg += tsk->Cost;
     }
     RunTimesAvg /= this->Count;
     //SRAM   0X20000000-0X3FFFFFFF 共512MB
     //SCODE  0X00000000-0X1FFFFFFF 共512MB
-	debug_printf("\r\n");
-    debug_printf("Task::%s [%llu]", "ShowStatus", runCounts);
-    debug_printf("负载 %0.2f%% ", RunTimes / 10 / curms);
+	debug_printf("\r\nTask::%s [%llu]负载 %0.2f%% ", "ShowStatus", runCounts, RunTimes / 10 / curms);
     if (RunTimesAvg >= 1000)
     {
         debug_printf("平均 %3.1fms ", RunTimesAvg / this->Count / 1000);
@@ -514,18 +513,11 @@ return;
         debug_printf("平均 %3.0fus ", RunTimesAvg / this->Count);
     }
     debug_printf("当前 1970-01-01 23 00:00");
-    debug_printf("启动 ");
-    debug_printf("%02lld:%02lld:%02lld.%03lld ", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000);
-    debug_printf("堆 %u/%u", &(buf[0]) - 0X20000000, 1024);
-    debug_printf("\r\n");
-
-	
-    Task *task = this->Current;
-    task->ShowStatus();
-	
+    debug_printf("启动 %02lld:%02lld:%02lld.%03lld 堆 %u/%u\r\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000, &(buf[0]) - 0X20000000, 1024);
+    
     for(int i=0;i<this->Count;i++)
     {
-        Task *task = this->_Tasks[i];
+        Task *task = this->_TasksOld[i];
         if (task)
         {
             task->ShowStatus();
