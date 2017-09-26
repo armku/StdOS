@@ -13,7 +13,39 @@ Task::~Task()
 // 执行任务。返回是否正常执行。
 bool Task::Execute(UInt64 now)
 {
-	return false;	
+	TimeCost *pcostms;
+	if(this->Deepth<this->MaxDeepth)
+	{
+		this->Deepth++;
+		
+		if(this->Event)
+			this->Enable=false;
+		else
+			this->NextTime=this->Period+now;
+		
+		pcostms=new TimeCost();
+		
+		this->SleepTime=0;
+		
+		int costMsCurrent=pcostms->Elapsed();
+		if(this->MaxCost<costMsCurrent)
+			this->MaxCost=costMsCurrent;
+		this->Cost= (5*this->Cost+3*costMsCurrent)>>3;
+		this->CostMs=this->Cost/1000;
+		
+		if ( costMsCurrent > 500000 )
+			debug_printf("Task::Execute 任务:%s %d [%d] 执行时间过长 %dus 睡眠 %dus\r\n", this->Name, this->ID, this->Times,costMsCurrent, this->SleepTime);
+		if(!this->Event&&this->Period<0)
+			Task::Scheduler()->Remove(this->ID);
+		
+		
+		this->Deepth--;
+		return true;
+	}
+	else
+	{
+		return false;
+	}		
 }
 // 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
 void Task::Set(bool enable, int msNextTime)

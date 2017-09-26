@@ -17,19 +17,19 @@ public:
 	Action	Callback;	// 回调
 	void*	Param;		// 参数
 
-	int		Period;		// 周期ms
-	UInt64	NextTime;	// 下一次执行时间ms
+	int		Period;		// 周期ms 5
+	UInt64	NextTime;	// 下一次执行时间ms 3
 
 	int		Times;		// 执行次数
-	int		SleepTime;	// 当前睡眠时间us
-	int		Cost;		// 平均执行时间us
-	int		CostMs;		// 平均执行时间ms
-	int		MaxCost;	// 最大执行时间us
+	int		SleepTime;	// 当前睡眠时间us 9
+	int		Cost;		// 平均执行时间us 10
+	int		CostMs;		// 平均执行时间ms 11
+	int		MaxCost;	// 最大执行时间us 12
 
-	bool	Enable;		// 是否启用
-	bool	Event;		// 是否只执行一次后暂停的事件型任务
-	byte	Deepth;		// 当前深度
-	byte	MaxDeepth;	// 最大深度。默认1层，不允许重入
+	bool	Enable;		// 是否启用 52
+	bool	Event;		// 是否只执行一次后暂停的事件型任务 53
+	byte	Deepth;		// 当前深度 54
+	byte	MaxDeepth;	// 最大深度。默认1层，不允许重入 55
 
 	Task();
 	Task(const Task& task)	= delete;
