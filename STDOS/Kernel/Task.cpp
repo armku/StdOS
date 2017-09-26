@@ -416,13 +416,9 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
     UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
     UInt64 end = Sys.Ms()*1000 + msMax;
 
-    // 需要跳过当前正在执行任务的调度
-    //Task* _cur = Current;
-
-	for(int i=0;i<this->Count;i++)
+    for(int i=0;i<this->Count;i++)
     {
         Task *task = _TasksOld[i];
-        //if(task && task != _cur && task->Enable && task->NextTime <= now)
         if (task && task->Enable && task->NextTime <= now)
         {
             // 不能通过累加的方式计算下一次时间，因为可能系统时间被调整
@@ -432,51 +428,16 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
                 min = task->NextTime;
             }
 
-            UInt64 now2 = Sys.Ms()*1000;
-            task->SleepTime = 0;
-
             this->Current = task;
             task->Execute(Sys.Ms());
             this->Current = NULL;
-
-            // 累加任务执行次数和时间
-            task->Times++;
-            int cost = (int)(Sys.Ms()*1000 - now2);
-            if (cost < 0)
-            {
-                cost =  - cost;
-            }
-            //if(cost > 0)
-            {
-                task->MaxCost += cost - task->SleepTime;
-                task->Cost = task->MaxCost / task->Times;
-            }
-            if (cost > 500000)
-            {
-                debug_printf("Task::Execute 任务:%s %d [%d] 执行时间过长 %dus 睡眠 %dus\r\n", task->Name, task->ID, task->Times, cost, task->SleepTime);
-            }
-            // 如果只是一次性任务，在这里清理
-            if (task->Period < 0)
-            {
-                Remove(task->ID);
-            }
-        }
-
-        // 如果已经超出最大可用时间，则退出
-        if (!msMax || (Sys.Ms()*1000) > end)
-        {
-            return ;
         }
     }
     // 如果有最小时间，睡一会吧
     now = Sys.Ms()*1000; // 当前时间
     if (min != UInt64_Max && min > now)
     {
-        min -= now;
-        //debug_printf("TaskScheduler::Execute 等待下一次任务调度 %uus\r\n", (uint)min);           
-        //// 最大只允许睡眠1秒，避免Sys.Delay出现设计错误，同时也更人性化
-        //if(min > 1000000) min = 1000000;
-        //Sys.Delay(min);
+        min -= now;        
         Time.Delay(min);
     }
 	#endif
