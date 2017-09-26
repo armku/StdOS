@@ -519,7 +519,7 @@ void TaskScheduler::ShowStatus()
     float RunTimesAvg = 0;
     Task *tsk;
     byte buf[1];
-
+return;
     runCounts++;
     UInt64 curms = Sys.Ms();
 
@@ -555,7 +555,7 @@ void TaskScheduler::ShowStatus()
 	
     Task *task = this->Current;
     task->ShowStatus();
-	return;
+	
     for(int i=0;i<this->Count;i++)
     {
         Task *task = this->_Tasks[i];
