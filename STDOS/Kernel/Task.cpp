@@ -115,17 +115,17 @@ void Task::ShowStatus()
     {
         debug_printf("%3uus", Cost);
     }
-    if (CpuTime >= 1000000)
+    if (this->MaxCost >= 1000000)
     {
-        debug_printf(" 最大 %3ds ", CpuTime / 1000000);
+        debug_printf(" 最大 %3ds ", this->MaxCost / 1000000);
     }
-    else if (CpuTime >= 1000)
+    else if (this->MaxCost >= 1000)
     {
-        debug_printf(" 最大 %3dms", CpuTime / 1000);
+        debug_printf(" 最大 %3dms", this->MaxCost / 1000);
     }
     else
     {
-        debug_printf(" 最大 %3dus", CpuTime);
+        debug_printf(" 最大 %3dus", this->MaxCost);
     }
     if (this->Period >= 1000000)
     {
@@ -223,14 +223,14 @@ void Task::Init()
 	this->MaxDeepth=1;
 }
 
-bool Task::operator == (Task &tsk)
-{
-    if (tsk.ID == this->ID)
-    {
-        return true;
-    }
-    return false;
-}
+//bool Task::operator == (Task &tsk)
+//{
+//    if (tsk.ID == this->ID)
+//    {
+//        return true;
+//    }
+//    return false;
+//}
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
@@ -448,8 +448,8 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
             }
             //if(cost > 0)
             {
-                task->CpuTime += cost - task->SleepTime;
-                task->Cost = task->CpuTime / task->Times;
+                task->MaxCost += cost - task->SleepTime;
+                task->Cost = task->MaxCost / task->Times;
             }
             if (cost > 500000)
             {

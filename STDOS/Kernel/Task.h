@@ -52,12 +52,6 @@ private:
 
 	bool CheckTime(UInt64 end, bool isSleep);
 	void Init();
-	
-	
-	
-    public:        
-        uint CpuTime; // 总耗费时间        
-		bool operator==(Task& tsk);
 };
 
 template<class T,int length> class FixedArray
@@ -110,7 +104,7 @@ void FixedArray<T,length>::Add(T *t)
 template <class T,int length> void FixedArray<T,length>::Remove(T &t)
 {
         Node *q = 0; //用来定位待删除的节点
-        if (*(pFirst->pT) == t)
+        if (pFirst->pT->ID == t.ID)
         {
                 q = pFirst;
                 pFirst = pFirst->pNext; //待删除节点在链首时的脱链
@@ -120,7 +114,7 @@ template <class T,int length> void FixedArray<T,length>::Remove(T &t)
                 for (Node *p = pFirst; p->pNext; p = p->pNext)
                 //顺链查找
                 {
-                        if (*(p->pNext->pT) == t)
+                        if (p->pNext->pT->ID == t.ID)
                         {
                                 q = p->pNext;
                                 p->pNext = q->pNext;
