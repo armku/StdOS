@@ -369,71 +369,34 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
 
     Int64 v7;
     v7 =  - 1LL;
-    #if 0	
-        for (int i = 0; i < this->Count; i++)
+    for (int i = 0; i < this->Count; i++)
+    {
+        Task *taskcur = this->_TasksOld[i];
+        if (taskcur && taskcur->Callback && taskcur->Enable)
         {
-            Task *taskcur = this->_TasksOld[i];
-            if (taskcur && taskcur->Callback && taskcur->Enable)
+            if (taskcur->CheckTime(mscurMax, msMax !=  - 1))
             {
-                if (taskcur->CheckTime(mscurMax, msMax !=  - 1))
-                {
-                    if (taskcur->Execute(now))
-                        this->Times++;
-                    if (!msMax)
-                        return ;
-                    uint msEnd = Sys.Ms();
-                    if (mscurMax < msEnd)
-                        return ;
-                }
-                if (taskcur->Callback && taskcur->Enable)
-                {
-                    //				if(taskcur->Event)
-                    //					 v7 = 0LL;
-                    //				else if( (unsigned int)(*(_QWORD *)(taskcur + 24) >> 32) < (v7)+ (unsigned int)((unsigned int)*(_QWORD *)(taskcur + 24) < (unsigned int)v7) )
-                    //				{
-                    //					v7 = *(_QWORD *)(taskcur + 24);
-                    //				}
+                if (taskcur->Execute(now))
+                    this->Times++;
+                if (!msMax)
+                    return ;
+                uint msEnd = Sys.Ms();
+                if (mscurMax < msEnd)
+                    return ;
+            }
+            if (taskcur->Callback && taskcur->Enable)
+            {
+                //				if(taskcur->Event)
+                //					 v7 = 0LL;
+                //				else if( (unsigned int)(*(_QWORD *)(taskcur + 24) >> 32) < (v7)+ (unsigned int)((unsigned int)*(_QWORD *)(taskcur + 24) < (unsigned int)v7) )
+                //				{
+                //					v7 = *(_QWORD *)(taskcur + 24);
+                //				}
 
-                }
             }
         }
-        this->Cost = tmcost.Elapsed();
-
-    #else 
-        now = Sys.Ms(); // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
-
-        UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
-        UInt64 end = Sys.Ms()+msMax;
-
-        for (int i = 0; i < this->Count; i++)
-        {
-            Task *task = _TasksOld[i];
-            if (task && task->Enable && task->NextTime <= now)
-            {
-                // 不能通过累加的方式计算下一次时间，因为可能系统时间被调整
-                task->NextTime = now + task->Period;
-                if (task->NextTime < min)
-                {
-                    min = task->NextTime;
-                }
-                bool cancel = false;
-                this->Current = task;
-                if (task->CheckTime(Sys.Ms(), cancel))
-                    ;
-                {
-                    task->Execute(Sys.Ms());
-                }
-                this->Current = NULL;
-            }
-        }
-        // 如果有最小时间，睡一会吧
-        now = Sys.Ms(); // 当前时间
-        if (min != UInt64_Max && min > now)
-        {
-            min -= now;
-            Time.Sleep(min);
-        }
-    #endif 
+    }
+    this->Cost = tmcost.Elapsed();
 }
 
 Task *TaskScheduler::operator[](int taskid)
