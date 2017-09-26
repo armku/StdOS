@@ -267,21 +267,12 @@ TaskScheduler::TaskScheduler(cstring name)
 // 创建任务，返回任务编号。dueTime首次调度时间ms，-1表示事件型任务，period调度间隔ms，-1表示仅处理一次
 uint TaskScheduler::Add(Action func, void *param, int dueTime, int period, cstring name)
 {
-    if (dueTime > 0)
-    {
-        dueTime *= 1000;
-    }
-    if (period > 0)
-    {
-        period *= 1000;
-    }
-
     Task *task = new Task();
     task->ID = mgid++;
     task->Callback = func;
     task->Param = param;
     task->Period = period;
-    task->NextTime = Sys.Ms() *1000+dueTime;
+    task->NextTime = Sys.Ms()+dueTime;
     task->Name = name;
     if (dueTime < 0)
     {
@@ -293,31 +284,23 @@ uint TaskScheduler::Add(Action func, void *param, int dueTime, int period, cstri
     _TasksOld.Add(task);
     #if DEBUG
         debug_printf("%s::添加%2d %-11s", Name, task->ID, task->Name);
-        if (dueTime >= 1000000)
+        if (dueTime >= 1000)
         {
-            debug_printf("First = %3lds ", dueTime / 1000000);
-        }
-        else if (dueTime >= 1000)
-        {
-            debug_printf("First = %3ldms", dueTime / 1000);
+            debug_printf("First = %3lds", dueTime / 1000);
         }
         else
         {
-            debug_printf("First = %3ldus", dueTime);
+            debug_printf("First = %3ldms", dueTime);
         }
 
         // 输出长整型%ld，无符号长整型%llu
-        if (period >= 1000000)
+        if (period >= 1000)
         {
-            debug_printf(" Period = %3lds \r\n", period / 1000000);
-        }
-        else if (period >= 1000)
-        {
-            debug_printf(" Period = %3ldms\r\n", period / 1000);
+            debug_printf(" Period = %3lds\r\n", period / 1000);
         }
         else
         {
-            debug_printf(" Period = %3ldus\r\n", period);
+            debug_printf(" Period = %3ldms\r\n", period);
         }
     #endif 
     return task->ID;
@@ -417,11 +400,10 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
         this->Cost = tmcost.Elapsed();
 
     #else 
-
-        now = Sys.Ms() *1000; // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
+        now = Sys.Ms(); // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
 
         UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
-        UInt64 end = Sys.Ms() *1000+msMax;
+        UInt64 end = Sys.Ms()+msMax;
 
         for (int i = 0; i < this->Count; i++)
         {
@@ -445,11 +427,11 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
             }
         }
         // 如果有最小时间，睡一会吧
-        now = Sys.Ms() *1000; // 当前时间
+        now = Sys.Ms(); // 当前时间
         if (min != UInt64_Max && min > now)
         {
             min -= now;
-            Time.Delay(min);
+            Time.Sleep(min);
         }
     #endif 
 }
