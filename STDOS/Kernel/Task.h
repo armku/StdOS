@@ -14,7 +14,7 @@ public:
 	uint	ID;			// 编号
 	cstring	Name;		// 名称
 
-	Action	Callback;	// 回调
+	Action	Callback;	// 回调 4
 	void*	Param;		// 参数
 
 	int		Period;		// 周期ms 5
@@ -245,7 +245,7 @@ public:
 	byte	Deepth;		// 当前深度
 	byte	MaxDeepth;	// 最大深度。默认5层
 
-	int		Times;		// 执行次数
+	int		Times;		// 执行次数 14
 	int		Cost;		// 平均执行时间us
 	UInt64	TotalSleep;	// 所有任务的总睡眠时间ms
 	UInt64	LastTrace;	// 最后统计跟踪时间ms

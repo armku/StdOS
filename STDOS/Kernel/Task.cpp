@@ -372,40 +372,45 @@ void TaskScheduler::Stop()
 // 执行一次循环。指定最大可用时间
 void TaskScheduler::Execute(uint msMax, bool& cancel)
 {
-	UInt64 mscur=Sys.Ms();
-	#if 0
+	UInt64 now=Sys.Ms();
 	TimeCost tmcost;
-	int mscurMax = mscur + msMax;
+	int mscurMax = now + msMax;
+	
+	Int64 v7;
+	v7 = -1LL;
+	#if 0	
 	for(int i=0;i<this->Count;i++)
 	{
 		Task* taskcur=this->_TasksOld[i];
-		if ( taskcur && taskcur->Enable && taskcur->Period)
+		if ( taskcur && taskcur->Callback && taskcur->Enable)
 		{
 			if ( taskcur->CheckTime(mscurMax, msMax != -1) )
 			{
-				taskcur->Execute(mscur);
-				taskcur->Times++;
+				if( taskcur->Execute(now))
+					this->Times++;
+				if(!msMax)
+					return;
+				uint msEnd = Sys.Ms();
+				 if (mscurMax < msEnd)
+					return ;
+			}
+			if(taskcur->Callback&&taskcur->Enable)
+			{
+//				if(taskcur->Event)
+//					 v7 = 0LL;
+//				else if( (unsigned int)(*(_QWORD *)(taskcur + 24) >> 32) < (v7)+ (unsigned int)((unsigned int)*(_QWORD *)(taskcur + 24) < (unsigned int)v7) )
+//				{
+//					v7 = *(_QWORD *)(taskcur + 24);
+//				}
+					
 			}
 		}
 		
 	}
-	#endif
+	this->Cost=tmcost.Elapsed();
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-    UInt64 now;
+	#else
+	    
     now = Sys.Ms()*1000; // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
 
     UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
@@ -474,6 +479,7 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
         //Sys.Delay(min);
         Time.Delay(min);
     }
+	#endif
 }
 
 Task *TaskScheduler::operator[](int taskid)
