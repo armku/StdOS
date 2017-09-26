@@ -24,8 +24,10 @@ bool Task::Execute(UInt64 now)
 		TimeCost costms;		
 		this->SleepTime=0;
 		
+		// v7 = *(_DWORD *)(*(_DWORD *)pthis + 48);
+		//*(_DWORD *)(*(_DWORD *)pthis + 48) = pthis;
 		this->Callback(this->Param);
-		
+		//*(_DWORD *)(*(_DWORD *)pthis + 48) = v7;
 		
 		this->Times++;
 		int costMsCurrent=costms.Elapsed()-this->SleepTime;
@@ -345,7 +347,7 @@ void TaskScheduler::Start()
     }
 
     #ifdef DEBUG
-		//Sys.AddTask(&TaskScheduler::ShowStatus, this, 1 *1000, 30 *1000, "任务状态");
+		Sys.AddTask(&TaskScheduler::ShowStatus, this, 1 *1000, 30 *1000, "任务状态");
     #else 
         //Sys.AddTask(ShowTime, this, 2 *1000, 20 *1000, "时间显示");
     #endif 
@@ -550,8 +552,10 @@ void TaskScheduler::ShowStatus()
     debug_printf("堆 %u/%u", &(buf[0]) - 0X20000000, 1024);
     debug_printf("\r\n");
 
+	
     Task *task = this->Current;
     task->ShowStatus();
+	return;
     for(int i=0;i<this->Count;i++)
     {
         Task *task = this->_Tasks[i];
