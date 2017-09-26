@@ -13,25 +13,22 @@ Task::~Task()
 // 执行任务。返回是否正常执行。
 bool Task::Execute(UInt64 now)
 {
-	TimeCost *pcostms;
 	if(this->Deepth<this->MaxDeepth)
 	{
-		this->Deepth++;
-		
+		this->Deepth++;		
 		if(this->Event)
 			this->Enable=false;
 		else
 			this->NextTime=this->Period+now;
 		
-		pcostms=new TimeCost();
-		
+		TimeCost costms;		
 		this->SleepTime=0;
 		
 		this->Callback(this->Param);
 		
 		
 		this->Times++;
-		int costMsCurrent=pcostms->Elapsed();
+		int costMsCurrent=costms.Elapsed()-this->SleepTime;
 		if(this->MaxCost<costMsCurrent)
 			this->MaxCost=costMsCurrent;
 		this->Cost= (5*this->Cost+3*costMsCurrent)>>3;
@@ -41,8 +38,6 @@ bool Task::Execute(UInt64 now)
 			debug_printf("Task::Execute 任务:%s %d [%d] 执行时间过长 %dus 睡眠 %dus\r\n", this->Name, this->ID, this->Times,costMsCurrent, this->SleepTime);
 		if(!this->Event&&this->Period<0)
 			Task::Scheduler()->Remove(this->ID);
-		
-		
 		this->Deepth--;
 		return true;
 	}
