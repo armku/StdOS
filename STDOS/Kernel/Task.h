@@ -20,7 +20,7 @@ public:
 	int		Period;		// 周期ms 5
 	UInt64	NextTime;	// 下一次执行时间ms 3
 
-	int		Times;		// 执行次数
+	int		Times;		// 执行次数 8
 	int		SleepTime;	// 当前睡眠时间us 9
 	int		Cost;		// 平均执行时间us 10
 	int		CostMs;		// 平均执行时间ms 11

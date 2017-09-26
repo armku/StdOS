@@ -27,6 +27,10 @@ bool Task::Execute(UInt64 now)
 		
 		this->SleepTime=0;
 		
+		this->Callback(this->Param);
+		
+		
+		this->Times++;
 		int costMsCurrent=pcostms->Elapsed();
 		if(this->MaxCost<costMsCurrent)
 			this->MaxCost=costMsCurrent;
@@ -201,11 +205,25 @@ bool Task::CheckTime(UInt64 end, bool isSleep)
 }
 void Task::Init()
 {
-	Times = 0;
-    CpuTime = 0;
-    SleepTime = 0;
-    Cost = 0;
-    Enable = true;
+	this->ID	= 0;			// 编号
+	this->Name = nullptr;		// 名称
+
+	this->Callback = nullptr;	// 回调
+	this->Param = nullptr;		// 参数
+
+	this->Period = 0;		// 周期ms 5
+	this->NextTime = 0;	// 下一次执行时间ms 3
+	
+	this->Times = 0;		// 执行次数 8
+	this->SleepTime = 0;	// 当前睡眠时间us 9
+	this->Cost = 0;		// 平均执行时间us 10
+	this->CostMs = 0;		// 平均执行时间ms 11
+	this->MaxCost = 0;	// 最大执行时间us 12
+
+	this->Enable = true;		
+	this->Event	= false;		
+	this->Deepth = 0;	
+	this->MaxDeepth=1;
 }
 
 bool Task::operator == (Task &tsk)
@@ -358,7 +376,7 @@ void TaskScheduler::Stop()
 void TaskScheduler::Execute(uint msMax, bool& cancel)
 {
 	UInt64 mscur=Sys.Ms();
-	
+	#if 0
 	TimeCost tmcost;
 	int mscurMax = mscur + msMax;
 	for(int i=0;i<this->Count;i++)
@@ -374,7 +392,7 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
 		}
 		
 	}
-	
+	#endif
 	
 	
 	
@@ -416,7 +434,7 @@ void TaskScheduler::Execute(uint msMax, bool& cancel)
             task->SleepTime = 0;
 
             this->Current = task;
-            task->Callback(task->Param);
+            task->Execute(Sys.Ms());
             this->Current = NULL;
 
             // 累加任务执行次数和时间
