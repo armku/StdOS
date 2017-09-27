@@ -63,71 +63,18 @@ void InputPort_OpenEXTI(Pin pin)
 	GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource13);
 	
 	SetEXIT(pin&0X0F, true);
-	//Interrupt.SetPriority(PORT_IRQns[1], 1u);
+	Interrupt.SetPriority(PORT_IRQns[pin&0x0f], 1u);
 	//Interrupt.Activate(PORT_IRQns[v3],(void (__cdecl *)(unsigned __int16, void *))EXTI_IRQHandler,v1);
 }
- /**
-  * @brief  配置嵌套向量中断控制器NVIC
-  * @param  无
-  * @retval 无
-  */
-static void NVIC_ConfigurationPA0()
-{
-  NVIC_InitTypeDef NVIC_InitStructure;
-  
-  /* Configure one bit for preemption priority */
-  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-  
-  /* 配置中断源 */
-  NVIC_InitStructure.NVIC_IRQChannel = EXTI0_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);
-}
-
-
- /**
-  * @brief  配置 PA0 为线中断口，并设置中断优先级
-  * @param  无
-  * @retval 无
-  */
 void EXTI_Pxy_ConfigPA0()
 {	
 	InputPort_OpenEXTI(PA0);
-												
-	/* config the NVIC */
-	NVIC_ConfigurationPA0();
 }
 
-static void NVIC_ConfigurationPC13(void)
-{
-  NVIC_InitTypeDef NVIC_InitStructure;
-  
-  /* Configure one bit for preemption priority */
-  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-  
-  /* 配置中断源 */
-  NVIC_InitStructure.NVIC_IRQChannel = EXTI15_10_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);
-}
-
- /**
-  * @brief  配置 PC13 为线中断口，并设置中断优先级
-  * @param  无
-  * @retval 无
-  */
 void EXTI_Pxy_ConfigPC13(void)
 {	
 	InputPort_OpenEXTI(PC13);
-	
-	/* config the NVIC */
-	NVIC_ConfigurationPC13();
 }
-
 
 /*
 整组读取
