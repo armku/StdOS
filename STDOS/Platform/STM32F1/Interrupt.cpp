@@ -446,13 +446,14 @@ void CInterrupt::TIM7_IRQHandler()
             TIM_ClearITPendingBit(TIM7, TIM_FLAG_Update);
         }
 }
-
+extern uint time6cnt;
 void CInterrupt::EXTI0_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line0) != RESET)
     {
             EXTI_IRQHandler(EXTI0_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line0);
+		time6cnt++;
     }
 }
 
