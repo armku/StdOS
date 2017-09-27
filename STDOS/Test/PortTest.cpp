@@ -1,8 +1,6 @@
 #include "Port.h"
 
-
-void EXTI_Pxy_ConfigPA0();
-void EXTI_Pxy_ConfigPC13(void);
+void InputPort_OpenEXTI(Pin pin);
 #ifdef DEBUG
     //≤‚ ‘¥˙¬Î
     extern OutputPort led2;
@@ -30,8 +28,8 @@ void EXTI_Pxy_ConfigPC13(void);
     void InterruptTest()
     {
         /* exti line config */
-        EXTI_Pxy_ConfigPA0();
-        EXTI_Pxy_ConfigPC13();
+        InputPort_OpenEXTI(PA0);
+        InputPort_OpenEXTI(PC13);
 		
         exti1.UsePress();
 
@@ -65,15 +63,6 @@ void InputPort_OpenEXTI(Pin pin)
 	SetEXIT(pin&0X0F, true);
 	Interrupt.SetPriority(PORT_IRQns[pin&0x0f], 1u);
 	//Interrupt.Activate(PORT_IRQns[v3],(void (__cdecl *)(unsigned __int16, void *))EXTI_IRQHandler,v1);
-}
-void EXTI_Pxy_ConfigPA0()
-{	
-	InputPort_OpenEXTI(PA0);
-}
-
-void EXTI_Pxy_ConfigPC13(void)
-{	
-	InputPort_OpenEXTI(PC13);
 }
 
 /*
