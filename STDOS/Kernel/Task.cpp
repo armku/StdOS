@@ -131,17 +131,13 @@ void Task::ShowStatus()
     {
         debug_printf(" 最大 %3dus", this->MaxCost);
     }
-    if (this->Period >= 1000000)
+    if (this->Period >= 1000)
     {
-        debug_printf(" 周期 %3lds ", this->Period / 1000000);
-    }
-    else if (this->Period >= 1000)
-    {
-        debug_printf(" 周期 %3ldms", this->Period / 1000);
+        debug_printf(" 周期 %3lds", this->Period / 1000);
     }
     else
     {
-        debug_printf(" 周期 %3ldus", this->Period);
+        debug_printf(" 周期 %3ldms", this->Period);
     }
     debug_printf(" %s\r\n", this->Enable ? " " : "禁用");
 }
