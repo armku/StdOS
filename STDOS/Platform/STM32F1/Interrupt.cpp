@@ -451,9 +451,9 @@ void CInterrupt::EXTI0_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line0) != RESET)
     {
-            EXTI_IRQHandler(EXTI0_IRQn, 0);
+        EXTI_IRQHandler(EXTI0_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line0);
-		time6cnt++;
+        time6cnt++;
     }
 }
 
@@ -461,7 +461,7 @@ void CInterrupt::EXTI1_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line1) != RESET)
     {
-            EXTI_IRQHandler(EXTI0_IRQn, 0);
+        EXTI_IRQHandler(EXTI0_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line1);
     }
 }
@@ -470,7 +470,7 @@ void CInterrupt::EXTI2_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line2) != RESET)
     {
-            EXTI_IRQHandler(EXTI2_IRQn, 0);
+        EXTI_IRQHandler(EXTI2_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line2);
     }
 }
@@ -479,7 +479,7 @@ void CInterrupt::EXTI3_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line3) != RESET)
     {
-            EXTI_IRQHandler(EXTI3_IRQn, 0);
+        EXTI_IRQHandler(EXTI3_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line3);
     }
 }
@@ -488,7 +488,7 @@ void CInterrupt::EXTI4_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line4) != RESET)
     {
-            EXTI_IRQHandler(EXTI4_IRQn, 0);
+        EXTI_IRQHandler(EXTI4_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line4);
     }
 }
@@ -497,27 +497,27 @@ void CInterrupt::EXTI9_5_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line5) != RESET)
     {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+        EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line5);
     }
     if (EXTI_GetITStatus(EXTI_Line6) != RESET)
     {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+        EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line6);
     }
     if (EXTI_GetITStatus(EXTI_Line7) != RESET)
     {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+        EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line7);
     }
     if (EXTI_GetITStatus(EXTI_Line8) != RESET)
     {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+        EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line8);
     }
     if (EXTI_GetITStatus(EXTI_Line9) != RESET)
     {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
+        EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line9);
     }
 }
@@ -526,32 +526,33 @@ void CInterrupt::EXTI15_10_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line10) != RESET)
     {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+        EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line10);
     }
     if (EXTI_GetITStatus(EXTI_Line11) != RESET)
     {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+        EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line11);
     }
     if (EXTI_GetITStatus(EXTI_Line12) != RESET)
     {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+        EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line12);
     }
     if (EXTI_GetITStatus(EXTI_Line13) != RESET)
     {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+        EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line13);
+		time6cnt++;
     }
     if (EXTI_GetITStatus(EXTI_Line14) != RESET)
     {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+        EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line14);
     }
     if (EXTI_GetITStatus(EXTI_Line15) != RESET)
     {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
+        EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line15);
     }
 }

@@ -65,6 +65,7 @@ void TimerTask(void *param)
 SerialPort *sp1;
 /* exti line config */
 void EXTI_Pxy_ConfigPA0(); 
+void EXTI_Pxy_ConfigPC13(void);
 int main(void)
 {
     Sys.Init();
@@ -83,6 +84,7 @@ int main(void)
 	IList::Test();
 	/* exti line config */
 	EXTI_Pxy_ConfigPA0(); 
+	EXTI_Pxy_ConfigPC13();
 		
     Sys.Start();
 }
@@ -138,3 +140,48 @@ void EXTI_Pxy_ConfigPA0()
   EXTI_Init(&EXTI_InitStructure); 
 }
 
+static void NVIC_ConfigurationPC13(void)
+{
+  NVIC_InitTypeDef NVIC_InitStructure;
+  
+  /* Configure one bit for preemption priority */
+  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+  
+  /* 配置中断源 */
+  NVIC_InitStructure.NVIC_IRQChannel = EXTI15_10_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+  NVIC_Init(&NVIC_InitStructure);
+}
+
+
+ /**
+  * @brief  配置 PC13 为线中断口，并设置中断优先级
+  * @param  无
+  * @retval 无
+  */
+void EXTI_Pxy_ConfigPC13(void)
+{
+	GPIO_InitTypeDef GPIO_InitStructure; 
+	EXTI_InitTypeDef EXTI_InitStructure;
+
+	/* config the extiline clock and AFIO clock */
+	RCC_APB2PeriphClockCmd((RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO),ENABLE);
+												
+	/* config the NVIC */
+	NVIC_ConfigurationPC13();
+
+	/* EXTI line gpio config*/	
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;       
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;	 // 下拉输入
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
+
+	/* EXTI line mode config */
+  GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource13); 
+  EXTI_InitStructure.EXTI_Line = EXTI_Line13;
+  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising; //下降沿中断
+  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+  EXTI_Init(&EXTI_InitStructure); 
+}
