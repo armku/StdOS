@@ -36,8 +36,8 @@ public:
 		AF_7 = 7
 	};
 
-    Pin		_Pin;		// 引脚
-	bool	Opened;		// 是否已经打开
+    Pin		_Pin;		// 引脚   4
+	bool	Opened;		// 是否已经打开 8
 	byte    Index;		// 引脚自身次序编号，用于区分多引脚次序
 	void*	State;		// 用户状态数据
 
@@ -75,7 +75,7 @@ private:
 class OutputPort : public Port
 {
 public:
-    byte Invert		= 2;		// 是否倒置输入输出。默认2表示自动检测
+    byte Invert		= 2;		// 是否倒置输入输出。默认2表示自动检测  12
     bool OpenDrain	= false;	// 是否开漏输出
     byte Speed		= 50;		// 速度
 
@@ -150,11 +150,11 @@ public:
 
     ushort	ShakeTime	= 0;	// 设置 抖动时间。毫秒
 	ushort	PressTime	= 0;	// 获取 长按时间。毫秒
-    byte	Invert		= 2;	// 是否倒置输入输出。默认2表示自动检测
+    byte	Invert		= 2;	// 是否倒置输入输出。默认2表示自动检测 16
     bool	Floating	= true;	// 是否浮空输入
     PuPd	Pull		= UP;	// 上拉下拉电阻
 	//Trigger	Mode		= Both;	// 触发模式，上升沿下降沿
-	bool	HardEvent	= false;// 是否使用硬件事件。默认false
+	bool	HardEvent	= false;// 是否使用硬件事件。默认false 28
 
 	Delegate2<InputPort&, bool>	Press;	// 按下事件
 
@@ -168,7 +168,7 @@ public:
     virtual bool Read() const;
 
 	bool UsePress();
-	void OnPress(bool down);
+	void OnPress(bool down); 
 
     operator bool() const { return Read(); }
 
