@@ -24,6 +24,7 @@ void Port_OnOpen(Pin pin)
         GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
     }
 }
+
 void OpenPeriphClock(Pin pin)
 {
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << (pin >> 4),ENABLE);
@@ -108,16 +109,7 @@ void InputPort::OpenPin(void* param)
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
-void SetEXIT(int pinIndex, bool enable);
-
-    #if 0
-        static const int PORT_IRQns[] = 
-        {
-            EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5¸ö»ù´¡µÄ
-            EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
-            EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
-        };
-    #endif 
+   
 GPIO_TypeDef *IndexToGroup(byte index)
 {
     return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));

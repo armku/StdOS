@@ -23,6 +23,10 @@ void EXTI_Pxy_ConfigPC13(void);
         debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
     }
     InputPort key(PC13);
+	void led2flash(void *param)
+	{
+		OnKeyPress(&exti,false,param);
+	}
     void InterruptTest()
     {
         /* exti line config */
@@ -36,9 +40,32 @@ void EXTI_Pxy_ConfigPC13(void);
         key.Open();
         //        exti.Register(OnKeyPress);
         //        exti1.Register(OnKeyPress);
+		Sys.AddTask(led2flash,&led2,0,200,"led2");
     }
 #endif
 #include "stm32f10x.h"
+#include "TInterrupt.h"
+
+//中断线打开、关闭
+void SetEXIT(int pinIndex, bool enable);
+
+static const int PORT_IRQns[] = 
+{
+	EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
+	EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
+	EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
+};
+
+void InputPort_OpenEXTI(Pin pin)
+{
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA |RCC_APB2Periph_GPIOC| RCC_APB2Periph_AFIO,ENABLE);
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource0);
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource13);
+	
+	SetEXIT(pin&0X0F, true);
+	//Interrupt.SetPriority(PORT_IRQns[1], 1u);
+	//Interrupt.Activate(PORT_IRQns[v3],(void (__cdecl *)(unsigned __int16, void *))EXTI_IRQHandler,v1);
+}
  /**
   * @brief  配置嵌套向量中断控制器NVIC
   * @param  无
@@ -70,8 +97,7 @@ void EXTI_Pxy_ConfigPA0()
 	//GPIO_InitTypeDef GPIO_InitStructure; 
 	EXTI_InitTypeDef EXTI_InitStructure;
 
-	/* config the extiline clock and AFIO clock */
-	RCC_APB2PeriphClockCmd((RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO),ENABLE);
+	InputPort_OpenEXTI(PA0);
 												
 	/* config the NVIC */
 	NVIC_ConfigurationPA0();
@@ -80,14 +106,6 @@ void EXTI_Pxy_ConfigPA0()
   //GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;       
   //GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;	 // 下拉输入
   //GPIO_Init(GPIOA, &GPIO_InitStructure);
-
-	/* EXTI line mode config */
-  GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource0); 
-  EXTI_InitStructure.EXTI_Line = EXTI_Line0;
-  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising; //上升沿中断
-  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-  EXTI_Init(&EXTI_InitStructure); 
 }
 
 static void NVIC_ConfigurationPC13(void)
@@ -105,7 +123,6 @@ static void NVIC_ConfigurationPC13(void)
   NVIC_Init(&NVIC_InitStructure);
 }
 
-
  /**
   * @brief  配置 PC13 为线中断口，并设置中断优先级
   * @param  无
@@ -116,24 +133,16 @@ void EXTI_Pxy_ConfigPC13(void)
 	//GPIO_InitTypeDef GPIO_InitStructure; 
 	EXTI_InitTypeDef EXTI_InitStructure;
 
-	/* config the extiline clock and AFIO clock */
-	RCC_APB2PeriphClockCmd((RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO),ENABLE);
-												
-	/* config the NVIC */
-	NVIC_ConfigurationPC13();
+	InputPort_OpenEXTI(PC13);											
+	
 
 	/* EXTI line gpio config*/	
 //  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;       
 //  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;	 // 下拉输入
 //  GPIO_Init(GPIOC, &GPIO_InitStructure);
-
-	/* EXTI line mode config */
-  GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource13); 
-  EXTI_InitStructure.EXTI_Line = EXTI_Line13;
-  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising; //下降沿中断
-  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-  EXTI_Init(&EXTI_InitStructure); 
+	
+	/* config the NVIC */
+	NVIC_ConfigurationPC13();
 }
 
 
