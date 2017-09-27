@@ -4,9 +4,9 @@
 
 #include "stm32f10x.h"
 
-    #define NVIC_OFFSET					 ((uint)0x1000)
+#define NVIC_OFFSET	((uint)0x1000)
 #define ISRADDR (NVIC_VectTab_RAM+NVIC_OFFSET)
-    #define ISRLENGTH   100	//中断数量
+#define ISRLENGTH	100	//中断数量
 
 TInterrupt Interrupt;
 

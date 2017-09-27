@@ -21,17 +21,6 @@ bool TInterrupt::Deactivate(short irq)
     return false;
 }
 
-// 开中断
-//bool TInterrupt::Enable(short irq) const{return false;}
-// 关中断
-//bool TInterrupt::Disable(short irq) const{return false;}
-
-// 是否开中断
-//bool TInterrupt::EnableState(short irq) const{return false;}
-// 是否挂起
-//bool TInterrupt::PendingState(short irq) const{return false;}
-// 设置优先级
-
 // 系统挂起
 void TInterrupt::Halt(){}
 
