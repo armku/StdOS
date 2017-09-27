@@ -27,7 +27,6 @@ void InputPort_OpenEXTI(Pin pin);
 	}
     void InterruptTest()
     {
-        /* exti line config */
         InputPort_OpenEXTI(PA0);
         InputPort_OpenEXTI(PC13);
 		
@@ -41,30 +40,6 @@ void InputPort_OpenEXTI(Pin pin);
 		Sys.AddTask(led2flash,&led2,0,200,"led2");
     }
 #endif
-#include "stm32f10x.h"
-#include "TInterrupt.h"
-
-//中断线打开、关闭
-void SetEXIT(int pinIndex, bool enable);
-
-static const int PORT_IRQns[] = 
-{
-	EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
-	EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
-	EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
-};
-
-void InputPort_OpenEXTI(Pin pin)
-{
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA |RCC_APB2Periph_GPIOC| RCC_APB2Periph_AFIO,ENABLE);
-	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource0);
-	GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource13);
-	
-	SetEXIT(pin&0X0F, true);
-	Interrupt.SetPriority(PORT_IRQns[pin&0x0f], 1u);
-	//Interrupt.Activate(PORT_IRQns[v3],(void (__cdecl *)(unsigned __int16, void *))EXTI_IRQHandler,v1);
-}
-
 /*
 整组读取
  */
