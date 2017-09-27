@@ -93,19 +93,11 @@ static void NVIC_ConfigurationPA0()
   * @retval 无
   */
 void EXTI_Pxy_ConfigPA0()
-{
-	//GPIO_InitTypeDef GPIO_InitStructure; 
-	EXTI_InitTypeDef EXTI_InitStructure;
-
+{	
 	InputPort_OpenEXTI(PA0);
 												
 	/* config the NVIC */
 	NVIC_ConfigurationPA0();
-
-	/* EXTI line gpio config*/	
-  //GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;       
-  //GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;	 // 下拉输入
-  //GPIO_Init(GPIOA, &GPIO_InitStructure);
 }
 
 static void NVIC_ConfigurationPC13(void)
@@ -129,17 +121,8 @@ static void NVIC_ConfigurationPC13(void)
   * @retval 无
   */
 void EXTI_Pxy_ConfigPC13(void)
-{
-	//GPIO_InitTypeDef GPIO_InitStructure; 
-	EXTI_InitTypeDef EXTI_InitStructure;
-
-	InputPort_OpenEXTI(PC13);											
-	
-
-	/* EXTI line gpio config*/	
-//  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;       
-//  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;	 // 下拉输入
-//  GPIO_Init(GPIOC, &GPIO_InitStructure);
+{	
+	InputPort_OpenEXTI(PC13);
 	
 	/* config the NVIC */
 	NVIC_ConfigurationPC13();
