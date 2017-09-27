@@ -64,7 +64,7 @@ void TimerTask(void *param)
 
 SerialPort *sp1;
 /* exti line config */
-void EXTI_Pxy_Config(); 
+void EXTI_Pxy_ConfigPA0(); 
 int main(void)
 {
     Sys.Init();
@@ -82,7 +82,7 @@ int main(void)
 	
 	IList::Test();
 	/* exti line config */
-	EXTI_Pxy_Config(); 
+	EXTI_Pxy_ConfigPA0(); 
 		
     Sys.Start();
 }
@@ -92,7 +92,7 @@ int main(void)
   * @param  无
   * @retval 无
   */
-static void NVIC_Configuration()
+static void NVIC_ConfigurationPA0()
 {
   NVIC_InitTypeDef NVIC_InitStructure;
   
@@ -113,7 +113,7 @@ static void NVIC_Configuration()
   * @param  无
   * @retval 无
   */
-void EXTI_Pxy_Config()
+void EXTI_Pxy_ConfigPA0()
 {
 	GPIO_InitTypeDef GPIO_InitStructure; 
 	EXTI_InitTypeDef EXTI_InitStructure;
@@ -122,7 +122,7 @@ void EXTI_Pxy_Config()
 	RCC_APB2PeriphClockCmd((RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO),ENABLE);
 												
 	/* config the NVIC */
-	NVIC_Configuration();
+	NVIC_ConfigurationPA0();
 
 	/* EXTI line gpio config*/	
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;       
