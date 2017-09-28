@@ -34,6 +34,7 @@ typedef struct TIntState
 // 16ÌõÖĞ¶ÏÏß
 static IntState InterruptState[16];
 static bool hasInitState = false;
+//InputPort *
 void GPIO_ISR(int num) // 0 <= num <= 15
 {
     if (!hasInitState)

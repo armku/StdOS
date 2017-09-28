@@ -1,4 +1,5 @@
 #include "Port.h"
+#include "Platform\Pin.h"
 
 #ifdef DEBUG
     //测试代码
@@ -9,7 +10,7 @@
     {
         //led1.Write(onoff);
         led2 = !led2;
-        //    printf("中断引脚：P%c%d 值%d \r\n", _PIN_NAME(pin), down);
+        printf("中断引脚：P%c%d 值%d \r\n", _PIN_NAME(pin->_Pin), down);
     }
 
 
