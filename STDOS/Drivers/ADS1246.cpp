@@ -249,9 +249,9 @@ bool ADS1246::Online()
     uint adsCnt1 = 0;
     void adRead_1()
     {
-        SetEXIT(5, false);
+        SetEXIT(5, false,InputPort::Both);
         int adtmp = ads1246_1.Read();
-        SetEXIT(5, true);
+        SetEXIT(5, true,InputPort::Both);
     }
 
     void adRead_1();

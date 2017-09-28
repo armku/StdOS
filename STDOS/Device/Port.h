@@ -153,7 +153,7 @@ public:
     byte	Invert		= 2;	// 是否倒置输入输出。默认2表示自动检测 16
     bool	Floating	= true;	// 是否浮空输入
     PuPd	Pull		= UP;	// 上拉下拉电阻
-	//Trigger	Mode		= Both;	// 触发模式，上升沿下降沿
+	Trigger	Mode		= Both;	// 触发模式，上升沿下降沿
 	bool	HardEvent	= false;// 是否使用硬件事件。默认false 28
 
 	Delegate2<InputPort&, bool>	Press;	// 按下事件

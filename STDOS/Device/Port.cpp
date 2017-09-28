@@ -154,7 +154,7 @@ void InputPort::InputNoIRQTask(void* param)
 	InputPort *ip=(InputPort*)param;
 	ip->OnPress(ip->Opened);
 }
-void InputPort_OpenEXTI(Pin pin);
+void InputPort_OpenEXTI(Pin pin,InputPort::Trigger trigger);
 bool InputPort::UsePress()
 {
 	if(this->_Pin==P0)
@@ -162,7 +162,7 @@ bool InputPort::UsePress()
 		//assert_failed2((const char *)"%s,%d", __FILE__, 0x12);
 		return false;
 	}
-	InputPort_OpenEXTI(this->_Pin);
+	InputPort_OpenEXTI(this->_Pin,InputPort::Both);
 	this->HardEvent=this->OnRegister();
 //	if(!this->Opened &&!this->Floating)
 //	{
