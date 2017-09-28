@@ -4,16 +4,15 @@
 #ifdef DEBUG
     //≤‚ ‘¥˙¬Î
     extern OutputPort led2;    
-    
-    
+    InputPort key(PC13);
+	InputPort key0(PA0);
+	    
     void OnPress(InputPort &port, bool down)
     {
         debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
     }
 	
-    InputPort key(PC13);
-	InputPort key0(PA0);
-	void led2flash(void *param)
+    void led2flash(void *param)
 	{
 		led2 = !led2;
 	}
