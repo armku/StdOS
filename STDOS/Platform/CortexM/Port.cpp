@@ -39,7 +39,7 @@ static bool hasInitState = false;
 extern uint time6cnt;
 void GPIO_ISR(int num) // 0 <= num <= 15
 {
-	time6cnt++;
+	
 	if (!hasInitState)
     {
 //        return ;
@@ -49,6 +49,7 @@ void GPIO_ISR(int num) // 0 <= num <= 15
     {
         return ;
     }
+	
     #if 0
         uint bit = 1 << num;
     #endif 
@@ -56,10 +57,11 @@ void GPIO_ISR(int num) // 0 <= num <= 15
     //    value = InputPort::Read(state3->Pin);
     //byte line = EXTI_Line0 << num;
     // 如果未指定委托，则不处理
-    if (!state3->Handler)
+    if (!state3->Press)
     {
         return ;
     }
+	time6cnt++;
     #if 0
         // 默认20us抖动时间
         uint shakeTime = state->ShakeTime;
@@ -92,6 +94,11 @@ void GPIO_ISR(int num) // 0 <= num <= 15
     {
         // 新值value为true，说明是上升，第二个参数是down，所以取非
         state3->Handler(&(state3->inputport), value, state3->Param);
+    }
+	if (state3->Press)
+    {
+        // 新值value为true，说明是上升，第二个参数是down，所以取非
+        state3->Press((state3->inputport), value);
     }
 }
 
@@ -145,6 +152,7 @@ bool InputPort::OnRegister()
 	{
 		IntState *state=new IntState();
 		state->Press=this->Press;
+		state->inputport._Pin=this->_Pin;
 		InterruptState[this->_Pin&0x0f]=*state;
 	}
 	return true;
