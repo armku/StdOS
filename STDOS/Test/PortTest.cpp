@@ -1,6 +1,5 @@
 #include "Port.h"
 
-void InputPort_OpenEXTI(Pin pin);
 #ifdef DEBUG
     //≤‚ ‘¥˙¬Î
     extern OutputPort led2;
@@ -26,10 +25,7 @@ void InputPort_OpenEXTI(Pin pin);
 		OnKeyPress(&exti,false,param);
 	}
     void InterruptTest()
-    {
-        InputPort_OpenEXTI(PA0);
-        InputPort_OpenEXTI(PC13);
-		
+    {		
         exti1.UsePress();
 
         key.Press = OnPress;
