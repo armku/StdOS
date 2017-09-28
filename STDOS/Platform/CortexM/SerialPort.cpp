@@ -70,6 +70,10 @@ void SerialPort::OnWrite2()
 // 发送单一字节数据
 int SerialPort::SendData(byte data, int times)
 {
+	if(this->_baudRate<9600)
+	{
+		times=30000;
+	}
     USART_TypeDef *const g_Uart_Ports[] = UARTS;
     switch (this->Index)
     {
