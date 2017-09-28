@@ -330,8 +330,6 @@ void TInterrupt::OnInit()const
 }
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-//所有中断线处理
-void EXTI_IRQHandler(ushort num, void *param);
 void OnUsartReceive(ushort num, void *param);
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
@@ -469,13 +467,13 @@ void CInterrupt::TIM7_IRQHandler()
             TIM_ClearITPendingBit(TIM7, TIM_FLAG_Update);
         }     	
 }
-
+void GPIO_ISR(int num);
 void CInterrupt::EXTI0_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line0) != RESET)
     {
-            EXTI_IRQHandler(EXTI0_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line0);
+		GPIO_ISR(0);
     }
 }
 
@@ -483,8 +481,8 @@ void CInterrupt::EXTI1_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line1) != RESET)
     {
-            EXTI_IRQHandler(EXTI0_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line1);
+		GPIO_ISR(1);
     }
 }
 
@@ -492,8 +490,8 @@ void CInterrupt::EXTI2_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line2) != RESET)
     {
-            EXTI_IRQHandler(EXTI2_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line2);
+		GPIO_ISR(2);
     }
 }
 
@@ -501,8 +499,8 @@ void CInterrupt::EXTI3_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line3) != RESET)
     {
-            EXTI_IRQHandler(EXTI3_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line3);
+		GPIO_ISR(3);
     }
 }
 
@@ -510,8 +508,8 @@ void CInterrupt::EXTI4_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line4) != RESET)
     {
-            EXTI_IRQHandler(EXTI4_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line4);
+		GPIO_ISR(4);
     }
 }
 
@@ -519,28 +517,28 @@ void CInterrupt::EXTI9_5_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line5) != RESET)
     {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line5);
+		GPIO_ISR(5);
     }
     if (EXTI_GetITStatus(EXTI_Line6) != RESET)
     {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line6);
+		GPIO_ISR(6);
     }
     if (EXTI_GetITStatus(EXTI_Line7) != RESET)
     {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line7);
+		GPIO_ISR(7);
     }
     if (EXTI_GetITStatus(EXTI_Line8) != RESET)
     {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line8);
+		GPIO_ISR(8);
     }
     if (EXTI_GetITStatus(EXTI_Line9) != RESET)
     {
-            EXTI_IRQHandler(EXTI9_5_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line9);
+		GPIO_ISR(9);
     }
 }
 
@@ -548,32 +546,32 @@ void CInterrupt::EXTI15_10_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line10) != RESET)
     {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line10);
+		GPIO_ISR(10);
     }
     if (EXTI_GetITStatus(EXTI_Line11) != RESET)
     {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line11);
+		GPIO_ISR(11);
     }
     if (EXTI_GetITStatus(EXTI_Line12) != RESET)
     {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line12);
+		GPIO_ISR(12);
     }
     if (EXTI_GetITStatus(EXTI_Line13) != RESET)
     {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line13);
+		GPIO_ISR(13);
     }
     if (EXTI_GetITStatus(EXTI_Line14) != RESET)
     {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line14);
+		GPIO_ISR(14);
     }
     if (EXTI_GetITStatus(EXTI_Line15) != RESET)
     {
-            EXTI_IRQHandler(EXTI15_10_IRQn, 0);
         EXTI_ClearITPendingBit(EXTI_Line15);
+		GPIO_ISR(15);
     }
 }
