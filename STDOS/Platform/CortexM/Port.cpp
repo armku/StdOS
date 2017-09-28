@@ -37,6 +37,7 @@ static bool hasInitState = false;
 //InputPort *
 void GPIO_ISR(int num) // 0 <= num <= 15
 {
+	return ;
     if (!hasInitState)
     {
         return ;

@@ -68,10 +68,6 @@ bool Port::Open()
     }
     return true;
 }
-int EXTI_IRQHandler(int a1, void *a2)
-{
-	return 0;
-}
 void OutputPort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
@@ -148,50 +144,6 @@ void InputPort::OnOpen(void *param)
         else if (Pull == DOWN)
             gpio->GPIO_Mode = GPIO_Mode_IPD;
         // 这里很不确定，需要根据实际进行调整     
-}
-void GPIO_ISR(int num);
-//所有中断线处理
-void EXTI_IRQHandler(ushort num, void *param)
-{
-        // EXTI0 - EXTI4
-        if (num <= EXTI4_IRQn)
-        {
-            GPIO_ISR(num - EXTI0_IRQn);
-        }
-        else if (num == EXTI9_5_IRQn)
-        {
-            // EXTI5 - EXTI9
-            uint pending = EXTI->PR &EXTI->IMR &0x03E0; // pending bits 5..9
-            int num = 5;
-            pending >>= 5;
-            do
-            {
-                if (pending &1)
-                {
-                    GPIO_ISR(num);
-                }
-                num++;
-                pending >>= 1;
-            }
-            while (pending);
-        }
-        else if (num == EXTI15_10_IRQn)
-        {
-            // EXTI10 - EXTI15
-            uint pending = EXTI->PR &EXTI->IMR &0xFC00; // pending bits 10..15
-            int num = 10;
-            pending >>= 10;
-            do
-            {
-                if (pending &1)
-                {
-                    GPIO_ISR(num);
-                }
-                num++;
-                pending >>= 1;
-            }
-            while (pending);
-        } 
 }
 
 //中断线打开、关闭
