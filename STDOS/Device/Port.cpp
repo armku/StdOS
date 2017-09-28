@@ -164,13 +164,13 @@ bool InputPort::UsePress()
 	}
 	InputPort_OpenEXTI(this->_Pin);
 	this->HardEvent=this->OnRegister();
-	if(!this->Opened &&!this->Floating)
-	{
-		if(this->HardEvent)
-			this->Opened	=	Sys.AddTask(InputPort::InputTask,this,-1,-1,"InputTask");
-		else
-			this->Opened	=	Sys.AddTask(InputPort::InputNoIRQTask,this,100,100,"InputNoIRQTask");
-	}
+//	if(!this->Opened &&!this->Floating)
+//	{
+//		if(this->HardEvent)
+//			this->Opened	=	Sys.AddTask(InputPort::InputTask,this,-1,-1,"InputTask");
+//		else
+//			this->Opened	=	Sys.AddTask(InputPort::InputNoIRQTask,this,100,100,"InputNoIRQTask");
+//	}
 	
 	
     return true;

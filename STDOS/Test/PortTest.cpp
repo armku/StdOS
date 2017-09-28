@@ -23,7 +23,7 @@
     InputPort key(PC13);
 	void led2flash(void *param)
 	{
-		OnKeyPress(&exti,false,param);
+		led2 = !led2;
 	}
     void InterruptTest()
     {		

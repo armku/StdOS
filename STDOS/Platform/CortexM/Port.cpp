@@ -23,6 +23,7 @@ typedef struct TIntState
     Pin Pin;
     InputPort inputport;
     InputPort::IOReadHandler Handler; // 委托事件
+	Delegate2<InputPort&, bool>	Press;	// 按下事件
     void *Param; // 事件参数，一般用来作为事件挂载者的对象，然后借助静态方法调用成员方法	
     bool OldValue;
 
@@ -35,12 +36,13 @@ typedef struct TIntState
 static IntState InterruptState[16];
 static bool hasInitState = false;
 //InputPort *
+extern uint time6cnt;
 void GPIO_ISR(int num) // 0 <= num <= 15
 {
-	return ;
-    if (!hasInitState)
+	time6cnt++;
+	if (!hasInitState)
     {
-        return ;
+//        return ;
     }
     IntState *state3 = InterruptState + num;
     if (!state3)
@@ -139,6 +141,13 @@ void Port::Opening()
 }
 bool InputPort::OnRegister()
 {
+	if(this->Press)
+	{
+		IntState *state=new IntState();
+		state->Press=this->Press;
+		InterruptState[this->_Pin&0x0f]=*state;
+	}
+	return true;
 }
 void InputPort::ClosePin()
 {
