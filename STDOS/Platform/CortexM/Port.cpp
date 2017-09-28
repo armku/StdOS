@@ -22,7 +22,7 @@ typedef struct TIntState
 {
     Pin Pin;
     InputPort inputport;
-    InputPort::IOReadHandler Handler; // 委托事件
+    //InputPort::IOReadHandler Handler; // 委托事件
 	Delegate2<InputPort&, bool>	Press;	// 按下事件
     void *Param; // 事件参数，一般用来作为事件挂载者的对象，然后借助静态方法调用成员方法	
     bool OldValue;
@@ -90,11 +90,7 @@ void GPIO_ISR(int num) // 0 <= num <= 15
             return ;
         state->OldValue = value;
     #endif 
-    if (state3->Handler)
-    {
-        // 新值value为true，说明是上升，第二个参数是down，所以取非
-        state3->Handler(&(state3->inputport), value, state3->Param);
-    }
+    
 	if (state3->Press)
     {
         // 新值value为true，说明是上升，第二个参数是down，所以取非
