@@ -924,6 +924,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PortTest.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ADS1246Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ADS1246Test.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1845,6 +1850,11 @@
               <FileName>PortTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PortTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ADS1246Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ADS1246Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
