@@ -36,7 +36,6 @@ typedef struct TIntState
 static IntState InterruptState[16];
 static bool hasInitState = false;
 //InputPort *
-extern uint time6cnt;
 void GPIO_ISR(int num) // 0 <= num <= 15
 {
 	
@@ -60,8 +59,7 @@ void GPIO_ISR(int num) // 0 <= num <= 15
     if (!state3->Press)
     {
         return ;
-    }
-	time6cnt++;
+    }	
     #if 0
         // 默认20us抖动时间
         uint shakeTime = state->ShakeTime;
