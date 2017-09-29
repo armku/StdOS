@@ -1,5 +1,6 @@
 #include "SerialPort.h"
 #include "Timer.h"
+#include "Spi.h"
 
 OutputPort led1(PF9,false);
 OutputPort led2(PF10,false);
@@ -7,6 +8,7 @@ OutputPort led2(PF10,false);
 InputPort key1(PE3,true);
 InputPort key2(PE2,true);
 InputPort keyup(PA0,true,InputPort::DOWN);
+SpiSoft spi128;
 
 void LedTask(void *param)
 {

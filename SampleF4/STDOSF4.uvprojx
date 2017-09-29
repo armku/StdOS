@@ -774,6 +774,21 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AD7124.cpp</FilePath>
             </File>
+            <File>
+              <FileName>AD7124_8.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AD7124_8.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7124_regs.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AD7124_regs.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT45DB.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -980,14 +995,14 @@
               <FilePath>..\STDOS\Test\FlashTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>ADS1246Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ADS1246Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PortTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PortTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD1246Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\AD1246Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1761,6 +1776,21 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AD7124.cpp</FilePath>
             </File>
+            <File>
+              <FileName>AD7124_8.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AD7124_8.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7124_regs.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AD7124_regs.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT45DB.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1967,14 +1997,14 @@
               <FilePath>..\STDOS\Test\FlashTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>ADS1246Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ADS1246Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PortTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PortTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD1246Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\AD1246Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
