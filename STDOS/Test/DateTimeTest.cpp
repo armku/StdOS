@@ -2,9 +2,8 @@
 #include "TTime.h"
 #include <stdio.h>
 
-#if DEBUG
-void DateTime::Test()
-{
-}
+#ifdef DEBUG1
+	void DateTime::Test()
+	{
+	}
 #endif
-

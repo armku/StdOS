@@ -2,7 +2,7 @@
 #include "TTime.h"
 #include "SerialPort.h"
 
-#ifdef DEBUG
+#ifdef DEBUG1
 	void SerialPort::Test()
 	{
 		

@@ -1,7 +1,8 @@
 #include "Drivers\ADS1246.h"
 
 //测试代码
-#if 0
+#ifdef DEBUG1
+	void SetEXIT(int pinIndex, bool enable,InputPort::Trigger trigger);
     InputPort exti_1(PD5); //1246中断接口
     #if ADS1246SPISOFT
         SpiSoft spi1;
@@ -52,7 +53,7 @@
         #endif 
         spi1.SetNss(PE0);
         ads1246_1.Init();
-        exti_1.Register(adRead_1test);
+//        exti_1.Register(adRead_1test);
         Sys.AddTask(adResetChk, 0, 20000, 1000, "adSpeedchk");
     }
 #endif

@@ -2,7 +2,7 @@
 #include "Sys.h"
 #include "Buffer.h"
 
-#if DEBUG
+#ifdef DEBUG1
     void Buffer::Test()
     {
         #if 0

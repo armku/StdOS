@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "Sys.h"
 
-#if DEBUG
+#ifdef DEBUG1
 	void IList::Test()
     {
 //		TraceStack ts("TestList");

@@ -1,7 +1,7 @@
 #include "Port.h"
 #include "Platform\Pin.h"
 
-#ifdef DEBUG
+#ifdef DEBUG1
     //²âÊÔ´úÂë
     extern OutputPort led2;    
     InputPort key(PC13);

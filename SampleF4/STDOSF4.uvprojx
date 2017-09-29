@@ -1004,6 +1004,31 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AD1246Test.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ST7565RTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ST7565RTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXXTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\W25QXXXTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_drTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\lcd_drTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RX8025TTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\RX8025TTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT45DBTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\AT45DBTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2005,6 +2030,31 @@
               <FileName>AD1246Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AD1246Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7565RTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ST7565RTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXXTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\W25QXXXTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_drTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\lcd_drTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RX8025TTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\RX8025TTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT45DBTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\AT45DBTest.cpp</FilePath>
             </File>
           </Files>
         </Group>

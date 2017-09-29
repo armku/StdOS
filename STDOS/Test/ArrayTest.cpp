@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include "Sys.h"
 
-
-#if DEBUG
+#ifdef DEBUG1
 	void Array::Test()
 	{
 	}
