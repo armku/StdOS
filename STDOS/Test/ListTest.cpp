@@ -17,7 +17,7 @@
 		for(int i=0;i<16;i++)
 		{					
 			Task *k1=new Task();
-			k1->ID=i+10;
+			k1->ID=i;
 			_Tasks.Add(k1);
 		}
 		Task *kk2=_Tasks[1];
