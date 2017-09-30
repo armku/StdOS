@@ -105,9 +105,9 @@ int IList::FindIndex(const void *item)const
 {
     for (int i = 0; this->_Count > i; ++i)
     {
-        if ((const void*)(this->_Arr[4 *i]) == item)
+        if ((const void*)(this->_Arr[i]) == item)
             return i;
-        if (this->Comparer(this->_Arr[4 *i], item))
+        if (this->Comparer(this->_Arr[i], item))
         {
             return i;
         }
@@ -120,8 +120,8 @@ IList &IList::DeleteAll()
 {
     for (int i = 0; this->_Count > i; ++i)
     {
-        if (this->_Arr[4 *i])
-            operator delete (this->_Arr[4 *i]);
+        if (this->_Arr[i])
+            operator delete (this->_Arr[i]);
     }
 }
 
@@ -130,7 +130,7 @@ void *IList::operator[](int i)const
 {
 	if(i>=0&&this->_Count>i)
 	{
-		return this->_Arr[4*i];
+		return this->_Arr[i];
 	}
 	else
 	{
@@ -141,7 +141,7 @@ void * &IList::operator[](int i)
 {
 	if(i>=0&&this->_Count>i)
 	{
-		return this->_Arr[4*i];
+		return this->_Arr[i];
 	}
 	else
 	{
