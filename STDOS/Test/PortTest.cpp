@@ -15,7 +15,7 @@ K3:PE4
  */
 #include "Port.h"
 #include "Platform\Pin.h"
-void EXTIX_Init(void);
+//void EXTIX_Init(void);
 #ifdef DEBUG
 
     //测试代码
@@ -41,12 +41,14 @@ void EXTIX_Init(void);
         key.Press = OnPress;
         key.UsePress();
         key.Open();
-		EXTIX_Init();
+		//EXTIX_Init();
 
         Sys.AddTask(led2flash, &led2, 0, 200, "led2");
     }
 #endif 
+#ifdef STM32F4
 #include "stm32f4xx.h" 
+
 //外部中断0服务程序
 //void EXTI0_IRQHandler(void)
 //{
@@ -168,3 +170,4 @@ void EXTIX_Init(void)
     NVIC_Init(&NVIC_InitStructure); //配置
 
 }
+#endif
