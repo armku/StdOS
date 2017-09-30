@@ -72,6 +72,7 @@ void IList::Add(void **items, int count)
 // 删除指定位置元素
 void IList::RemoveAt(int index)
 {
+	return;
     if (this->_Capacity > 0 && index < this->_Capacity)
     {
         int v7 = _Capacity - 1-index;
