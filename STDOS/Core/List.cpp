@@ -145,7 +145,8 @@ void * &IList::operator[](int i)
 	}
 	else
 	{
-//		return nullptr;
+		//此处代码需要整理
+		return this->_Arr[0];;
 	}
 }
 
