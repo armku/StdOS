@@ -47,7 +47,7 @@ void IList::Add(void *item)
 	this->CheckCapacity(this->_Count+1);
 	int pos=this->_Count;
 	this->_Count++;
-	this->_Arr[pos*4]=item;
+	this->_Arr[pos]=item;
 }
 
 // 添加多个元素
@@ -155,7 +155,6 @@ void IList::Init()
 	this->_Arr=this->Arr;	
     this->_Count=0;
 	this->_Capacity=4;
-	//this->Arr=4;	
 }
 
 bool IList::CheckCapacity(int count)
