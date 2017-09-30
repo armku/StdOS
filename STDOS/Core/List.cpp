@@ -154,7 +154,7 @@ void IList::Init()
 {
 	this->_Arr=this->Arr;	
     this->_Count=0;
-	this->_Capacity=0;
+	this->_Capacity=4;
 	//this->Arr=4;	
 }
 
