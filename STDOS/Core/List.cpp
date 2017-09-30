@@ -63,7 +63,7 @@ void IList::Add(void **items, int count)
 		   count--;
 		   int pos=this->_Count;
 		   this->_Count++;
-		   this->_Arr[4*pos]=items;
+		   this->_Arr[pos]=items;
 		   items++;
 	   }
    }
