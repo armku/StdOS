@@ -277,12 +277,6 @@ public:
 	void ShowStatus();	// 显示状态
 
     Task* operator[](int taskid);
-	
-	
-	
-    private:        
-        //FixedArray < Task, 32 > _TasksOld; 
-		List<Task*>	_TasksOld;	// 任务列表
 };
 
 #endif

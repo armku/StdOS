@@ -277,7 +277,7 @@ uint TaskScheduler::Add(Action func, void *param, int dueTime, int period, cstri
 
     this->Count++;
     //_Tasks.Add(task);
-    _TasksOld.Add(task);
+    this->_Tasks.Add(task);
     #if DEBUG
         debug_printf("%s::添加%2d %-11s", Name, task->ID, task->Name);
         if (dueTime >= 1000)
@@ -306,10 +306,10 @@ void TaskScheduler::Remove(uint taskid)
 {
     for (int i = 0; i < this->Count; i++)
     {
-        Task *task = _TasksOld[i];
+        Task *task = this->_Tasks[i];
         if (task->ID == taskid)
         {
-            _TasksOld.RemoveAt(i);
+            this->_Tasks.RemoveAt(i);
             debug_printf("%s::删除任务%d 0x%08x\r\n", Name, task->ID, (unsigned int)task->Callback);
             // 首先清零ID，避免delete的时候再次删除
             task->ID = 0;
@@ -367,7 +367,7 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
     v7 =  - 1LL;
     for (int i = 0; i < this->Count; i++)
     {
-        Task *taskcur = this->_TasksOld[i];
+        Task *taskcur = this->_Tasks[i];
         if (taskcur && taskcur->Callback && taskcur->Enable)
         {
             if (taskcur->CheckTime(mscurMax, msMax !=  - 1))
@@ -399,7 +399,7 @@ Task *TaskScheduler::operator[](int taskid)
 {
     for (int i = 0; i < this->Count; i++)
     {
-        Task *task = _TasksOld[i];
+        Task *task = this->_Tasks[i];
         if (task && task->ID == taskid)
         {
             return task;
@@ -439,7 +439,7 @@ void TaskScheduler::ShowStatus()
     RunTimesAvg = 0;
     for (int j = 0; j < this->Count; j++)
     {
-        tsk = this->_TasksOld[j];
+        tsk = this->_Tasks[j];
         RunTimes += tsk->Cost *tsk->Times;
         RunTimesAvg += tsk->Cost;
     }
@@ -460,7 +460,7 @@ void TaskScheduler::ShowStatus()
 
     for (int i = 0; i < this->Count; i++)
     {
-        Task *task = this->_TasksOld[i];
+        Task *task = this->_Tasks[i];
         if (task)
         {
             task->ShowStatus();
