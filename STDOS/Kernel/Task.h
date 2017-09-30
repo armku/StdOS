@@ -281,7 +281,8 @@ public:
 	
 	
     private:        
-        FixedArray < Task, 32 > _TasksOld;    
+        //FixedArray < Task, 32 > _TasksOld; 
+		List<Task*>	_TasksOld;	// 任务列表
 };
 
 #endif
