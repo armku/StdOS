@@ -365,9 +365,11 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
 
     Int64 v7;
     v7 =  - 1LL;
+	UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
+    #if 0
     for (int i = 0; i < this->Count; i++)
     {
-        Task *taskcur = this->_Tasks[i];
+        Task *taskcur = this->_TasksOld[i];
         if (taskcur && taskcur->Callback && taskcur->Enable)
         {
             if (taskcur->CheckTime(mscurMax, msMax !=  - 1))
@@ -390,9 +392,48 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
                 //				}
 
             }
+			if (taskcur->NextTime < min)
+                {
+                    min = taskcur->NextTime;
+                }
         }
     }
     this->Cost = tmcost.Elapsed();
+	#else
+		now = Sys.Ms(); // 当前时间。减去系统启动时间，避免修改系统时间后导致调度停摆	
+
+        
+        //UInt64 end = Sys.Ms()+msMax;
+
+        for (int i = 0; i < this->Count; i++)
+        {
+            Task *taskcur = this->_Tasks[i];
+            if (taskcur && taskcur->Enable && taskcur->NextTime <= now)
+            {
+                // 不能通过累加的方式计算下一次时间，因为可能系统时间被调整
+                taskcur->NextTime = now + taskcur->Period;
+                if (taskcur->NextTime < min)
+                {
+                    min = taskcur->NextTime;
+                }
+                bool cancel = false;
+                this->Current = taskcur;
+                if (taskcur->CheckTime(Sys.Ms(), cancel))
+                    ;
+                {
+                    taskcur->Execute(Sys.Ms());
+                }
+                this->Current = NULL;
+            }
+        }        
+	#endif
+		// 如果有最小时间，睡一会吧
+        now = Sys.Ms(); // 当前时间
+        if (min != UInt64_Max && min > now)
+        {
+            min -= now;
+            Time.Sleep(min);
+        }
 }
 
 Task *TaskScheduler::operator[](int taskid)
