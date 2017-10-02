@@ -73,18 +73,18 @@ void IList::Add(void **items, int count)
 void IList::RemoveAt(int index)
 {
 	return;
-    if (this->_Capacity > 0 && index < this->_Capacity)
-    {
-        int v7 = _Capacity - 1-index;
-        if (_Capacity - 1 != index)
-        {
-			Buffer v88(this->Arr[4 * index], 4 * v7); 
-			v88.Copy(0,this->Arr[4 * (index+1)],4*v7);
-           //Buffer* v8 = (Buffer *)Buffer::Buffer(&pindex, *(_DWORD *)(this + 8) + 4 * index, 4 * v7);         
-			// Buffer::Copy(v8, 0, (const void*)(*(_DWORD*)(pthis + 8) + 4 *(v5 + 1)), 4 *v7);
-        }
-        this->_Capacity--;
-    }
+//    if (this->_Capacity > 0 && index < this->_Capacity)
+//    {
+//        int v7 = _Capacity - 1-index;
+//        if (_Capacity - 1 != index)
+//        {
+//			Buffer v88(this->Arr[4 * index], 4 * v7); 
+//			v88.Copy(0,this->Arr[4 * (index+1)],4*v7);
+//           //Buffer* v8 = (Buffer *)Buffer::Buffer(&pindex, *(_DWORD *)(this + 8) + 4 * index, 4 * v7);         
+//			// Buffer::Copy(v8, 0, (const void*)(*(_DWORD*)(pthis + 8) + 4 *(v5 + 1)), 4 *v7);
+//        }
+//        this->_Capacity--;
+//    }
 }
 
 // 删除指定元素
@@ -115,7 +115,7 @@ int IList::FindIndex(const void *item)const
     }
     return  - 1;
 }
-
+#if 0
 // 释放所有指针指向的内存
 IList &IList::DeleteAll()
 {
@@ -124,8 +124,9 @@ IList &IList::DeleteAll()
         if (this->_Arr[i])
             operator delete (this->_Arr[i]);
     }
+	
 }
-
+#endif
 // 重载索引运算符[]，返回指定元素的第一个
 void *IList::operator[](int i)const
 {
@@ -192,17 +193,6 @@ bool IList::CheckCapacity(int count)
 			return false;
 		}
 	}
-	
-	
-	
-    if (count <= this->_Capacity)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
 }
 
 void IList::move(IList &list)

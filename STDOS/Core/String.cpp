@@ -7,7 +7,7 @@
 #include <CType.h>
 #include "Sys.h"
 
-static byte buftmp[10];
+static char buftmp[10];
 
 String::String(cstring cstr): Array(cstr, ArrayLength(cstr))
 {
@@ -222,13 +222,22 @@ char String::operator[](int index)const
 
 char &String::operator[](int index)
 {
-    char ret = '0';
-    return ret;
+    return buftmp[0];
 }
 
 void String::GetBytes(byte *buf, int bufsize, int index)const{}
-ByteArray String::GetBytes()const{}
-ByteArray String::ToHex()const{}
+#if 0
+ByteArray String::GetBytes()const
+{
+	
+}
+#endif
+#if 0
+ByteArray String::ToHex()const
+{
+	
+}
+#endif
 int String::ToInt()const
 {
     return 0;
@@ -334,10 +343,18 @@ bool String::EndsWith(cstring str)const
 {
     return false;
 }
-
-StringSplit String::Split(const String &sep)const{}
-StringSplit String::Split(cstring sep)const{}
-
+#if 0
+StringSplit String::Split(const String &sep)const
+{
+	
+}
+#endif
+#if 0
+StringSplit String::Split(cstring sep)const
+{
+	
+}
+#endif
 String String::Substring(int start, int len)const
 {
     return  *this;
@@ -430,4 +447,7 @@ StringSplit::StringSplit(const String &str, cstring sep): _Str(str){
 
 }
 
-const String StringSplit::Next(){}
+const String StringSplit::Next()
+{
+	return NULL;
+}

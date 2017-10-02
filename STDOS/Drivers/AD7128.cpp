@@ -500,11 +500,11 @@ float AD7124_Get_Temp1(void)
 float AD7124_Get_Temp1_Res(void)
 {
     uint32_t data;
-    float res;
+//    float res;
     float temp;
     data = AD7124_Read_Reg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
     printf("data:0x%08x\n\r", data);
-    res = (5110.0 *data) / (16777215.0 *16.0);
+//    res = (5110.0 *data) / (16777215.0 *16.0);
     //	printf("R:%0.4f\n",res);
     //	temp = PT100_RtoT(res);
     printf("T:%0.4f\n\r", temp);

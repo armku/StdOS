@@ -15,6 +15,7 @@ extern void *onIsr[]; //中断
 unsigned int GetIPSR(void)
 {
 //  return __get_CPSR();
+	return 0;
 }
 // 注册中断函数（中断号，函数，参数）
 bool TInterrupt::Activate(short irq, InterruptCallback isr, void *param)

@@ -371,7 +371,7 @@ UInt64 CheckSum::CRC32Default(byte *pszBuf, UInt64 ulLength)
     unsigned long Result = 0xFFFFFFFF;
     unsigned long m_Table[256];
 
-    unsigned long ulPolynomial = 0x04C11DB7;
+//    unsigned long ulPolynomial = 0x04C11DB7;
 
 
     for (int i = 0; i <= 0xFF; i++)
@@ -379,7 +379,7 @@ UInt64 CheckSum::CRC32Default(byte *pszBuf, UInt64 ulLength)
         m_Table[i] = Reflect(i, 8) << 24;
         for (int j = 0; j < 8; j++)
         {
-            m_Table[i] = (m_Table[i] << 1) ^ (m_Table[i] &(1 << 31) ? ulPolynomial : 0);
+           // m_Table[i] = ((m_Table[i] << 1) ^ (m_Table[i] &(1 << 31)) ? ulPolynomial : 0);
         }
         m_Table[i] = Reflect(m_Table[i], 32);
     }

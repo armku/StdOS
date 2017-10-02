@@ -2,7 +2,7 @@
 #include "Sys.h"
 #include "Buffer.h"
 
-static char bufferName[]="Buffer"; 
+//static char bufferName[]="Buffer"; 
 
 char chartmp[512];
 // 打包一个指针和长度指定的数据区
@@ -99,11 +99,11 @@ byte Buffer::operator[](int i)const
     //int  Buffer::operator[](int i)
     //{
     //auto v2 = this;
-    auto a2 = i;
-    auto v3 = a2;
-    if (a2 < 0 || this->_Length <= a2)
-        assert_failed2("%s", __FILE__, 0x4Bu);
-    return this->_Arr[a2];
+//    auto a2 = i;
+//    auto v3 = a2;
+//    if (a2 < 0 || this->_Length <= a2)
+//        assert_failed2("%s", __FILE__, 0x4Bu);
+//    return this->_Arr[a2];
 }
 
 // 原始拷贝、清零，不检查边界
@@ -313,8 +313,9 @@ String &Buffer::ToHex(String &str, char sep, int newLine)const
     return str;
 }
 // 显示十六进制数据，指定分隔字符和换行长度
-String Buffer::ToHex(char sep, int newLine)const{
-
+String Buffer::ToHex(char sep, int newLine)const
+{
+	return NULL;
 }
 
 ushort Buffer::ToUInt16()const
@@ -361,8 +362,9 @@ String &Buffer::ToStr(String &str)const
 }
 
 // 包装为字符串对象
-String Buffer::AsString()const{
-
+String Buffer::AsString()const
+{
+	return NULL;
 }
 
 int Buffer::CompareTo(const Buffer &bs)const

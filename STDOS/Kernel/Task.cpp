@@ -361,10 +361,10 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
 {
     UInt64 now = Sys.Ms();
     TimeCost tmcost;
-    int mscurMax = now + msMax;
+//    int mscurMax = now + msMax;
 
-    Int64 v7;
-    v7 =  - 1LL;
+//    Int64 v7;
+//    v7 =  - 1LL;
 	UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
     #if 0
     for (int i = 0; i < this->Count; i++)
@@ -450,12 +450,18 @@ Task *TaskScheduler::operator[](int taskid)
 }
 
 // 查找任务 返回使用此函数的首个任务
-Task *TaskScheduler::FindTask(Action func){}
+Task *TaskScheduler::FindTask(Action func)
+{
+	return NULL;
+}
 // 跳过最近一次睡眠，马上开始下一轮循环
 void TaskScheduler::SkipSleep(){}
 // 使用外部缓冲区初始化任务列表，避免频繁的堆分配
 void TaskScheduler::Set(Task *tasks, int count){}
-uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel){}
+uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
+{
+	return 0;
+}
 //显示时间
 void ShowTime(void *param)
 {
@@ -512,5 +518,5 @@ void TaskScheduler::ShowStatus()
 // 查找任务 返回使用此函数的首个任务的ID
 uint TaskScheduler::FindID(Action func)
 {
-
+	return 0;
 }

@@ -177,7 +177,7 @@ void TSys::OnShowInfo()const
     printf("STDOS::");
 	printf("STM32");
 	printf("F103");
-	printf(" %dMHz Flash:%dk RAM:%dk\r\n", CPUName->GetBuffer(), this->Clock, this->FlashSize, this->RAMSize);
+	printf("%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName->GetBuffer(), this->Clock, this->FlashSize, this->RAMSize);
 	printf("DevID:0x%04X RevID:0x%04X \r\n", this->DevID, this->RevID);
 	SmartOS_printf("CPUID:%p",this->CPUID);
 	SmartOS_printf(" ARMv7-M");
@@ -203,8 +203,10 @@ void TSys::Reset() const
 uint TSys::HeapBase() const	// 堆起始地址，前面是静态分配内存
 {
 //	return &_heap_base;
+	return 0;
 }	
 uint TSys::StackTop() const	// 栈顶，后面是初始化不清零区域
 {
 	//return (*((_WORD *)this + 31) << 10) + 536870656;
+	return 0;
 }	

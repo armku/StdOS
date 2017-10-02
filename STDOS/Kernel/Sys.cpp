@@ -173,7 +173,7 @@ void TSys::Sleep(int ms)const
             Time.Sleep(ms, nullptr);
     }
     return ;
-    TimeSleep(ms *1000);
+//    TimeSleep(ms *1000);
 }
 // Œ¢√Îº∂—”≥Ÿ
 void TSys::Delay(int us)const
@@ -198,7 +198,7 @@ void TSys::Delay(int us)const
             Time.Delay(us);
     }
     return ;
-    TimeSleep(us);
+//    TimeSleep(us);
 }
 // —”≥Ÿ“Ï≤Ω÷ÿ∆Ù
 void TSys::Reboot(int msDelay)const

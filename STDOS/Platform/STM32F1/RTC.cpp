@@ -8,10 +8,11 @@ int AlarmHandler(void *a2, int a3, int a4)
 }
 int RTC_Configuration(int a1, int a2)
 {
-	
+	return 0;
 }
 int SYSCLKConfig_STOP(void)
 {
+	return 0;
 }
 bool RTC_WaitForLastTask2(unsigned int a1)
 {

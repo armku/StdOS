@@ -3,13 +3,14 @@
 
 int SetWatchDog( unsigned int a2)
 {
-  int v3; // r0@1
-  int v4; // r0@1
+//  int v3; // r0@1
+//  int v4; // r0@1
 
 //  IWDG_SetPrescaler();
 //  v3 = IWDG_SetReload(a2);
 //  v4 = IWDG_ReloadCounter(v3);
 //  return IWDG_Enable(v4);
+	return 0;
 }
 int OpenWatchDog(void)
 {
@@ -17,6 +18,7 @@ int OpenWatchDog(void)
 //  if ( RCC_GetFlagStatus(125) )
 //    RCC_ClearFlag();
 //  return IWDG_WriteAccessCmd(21845);
+	return 0;
 }
 // Î¹¹·
 void WatchDog::Feed()

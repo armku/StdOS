@@ -84,6 +84,7 @@ int Array::Copy(int destIndex, const Buffer& src, int srcIndex, int len)
 // 设置数组元素为指定值，自动扩容
 bool Array::SetItem(const void* data, int index, int count)
 {
+	return false;
 }
 // 设置数组。直接使用指针，不拷贝数据
 bool Array::Set(void* data, int len)
@@ -111,6 +112,8 @@ bool Array::Set(const void* data, int len)
 	this->_Size=len;	
 	this->_needFree=false;
 	this->_canWrite=false;
+	
+	return false;
 }
 // 清空已存储数据。
 void Array::Clear()

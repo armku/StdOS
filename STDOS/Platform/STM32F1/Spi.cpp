@@ -18,12 +18,13 @@
 // 基础读写
 byte Spi::Write(byte data)
 {
+	int retry;
     switch (this->_index)
     {
         case Spi1:
         case Spi2:
         case Spi3:
-            int retry = Retry;
+            retry = Retry;
             while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
             {
                 if (--retry <= 0)
@@ -198,13 +199,14 @@ void Spi::OnClose()
 }
 ushort Spi::Write16(ushort data)
 {
+	int retry;
     switch (this->_index)
     {
         case Spi1:
         case Spi2:
         case Spi3:
             // 双字节操作，超时次数加倍
-            int retry = Retry << 1;
+            retry = Retry << 1;
             while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
             {
                 if (--retry <= 0)

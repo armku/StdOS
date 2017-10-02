@@ -19,7 +19,7 @@ void timTickrefesh(void *param)
 }
 int gTicks = 0; //
 byte fac_us = 0; //us延时倍乘数 每个us需要的systick时钟数 			   
-static ushort fac_ms = 0; //ms延时倍乘数,在ucos下,代表每个节拍的ms数
+//static ushort fac_ms = 0; //ms延时倍乘数,在ucos下,代表每个节拍的ms数
 
 
 void TTime::Init()
@@ -51,13 +51,13 @@ void TTime::Init()
     #elif defined STM32F1
         SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
         fac_us = SystemCoreClock / 8000000; //为系统时钟的1/8  
-        fac_ms = (ushort)fac_us *1000; //代表每个ms需要的systick时钟数   
+//        fac_ms = (ushort)fac_us *1000; //代表每个ms需要的systick时钟数   
     #elif defined STM32F4
         uint SYSCLK = 168;
         SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
         fac_us = SYSCLK / 8; //不论是否使用OS,fac_us都需要使用
 
-        fac_ms = (u16)fac_us *1000; //非OS下,代表每个ms需要的systick时钟数   
+//        fac_ms = (u16)fac_us *1000; //非OS下,代表每个ms需要的systick时钟数   
     #endif 
 
     #ifdef STM32F0

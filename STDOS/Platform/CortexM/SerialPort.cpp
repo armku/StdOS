@@ -98,9 +98,10 @@ int SerialPort::SendData(byte data, int times)
 			#elif defined STM32F0
 			#endif
             break;
+		#if defined STM32F4
         case COM6:
 			#if defined(STM32F1) || defined(STM32F4)
-				while (USART_GetFlagStatus(g_Uart_Ports[5], USART_FLAG_TXE) == RESET && --times > 0){}
+				while (USART_GetFlagStatus(g_Uart_Ports[5], (USART_FLAG_TXE) == RESET) && --times > 0){}
 			#elif defined STM32F0
 			#endif
 			break;
@@ -108,6 +109,7 @@ int SerialPort::SendData(byte data, int times)
 			break;
 		case COM8:
 			break;
+		#endif
 		default:
             //while (USART_GetFlagStatus(g_Uart_Ports[0], USART_FLAG_TXE) == RESET && --times > 0){}
             break;
@@ -138,6 +140,7 @@ int SerialPort::SendData(byte data, int times)
 				#elif defined STM32F0
 				#endif
                 break;
+			#if defined STM32F4
             case COM6:
 				#if defined(STM32F1) || defined(STM32F4)
 					USART_SendData(g_Uart_Ports[5], (ushort)data);
@@ -148,6 +151,7 @@ int SerialPort::SendData(byte data, int times)
 				break;
 			case COM8:
 				break;
+			#endif
 			default:
                 //USART_SendData(g_Uart_Ports[0], (ushort)data);
                 break;

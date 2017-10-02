@@ -44,7 +44,7 @@ String Port::ToString()const
         ret += "P0";
     else
     {
-        ret += this->_Pin >> 4+'A';
+        ret += (this->_Pin >> 4)+'A';
         ret += ret.Concat(this->_Pin &0x0F, 10);
     }
 
