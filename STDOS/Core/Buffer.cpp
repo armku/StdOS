@@ -355,7 +355,7 @@ String &Buffer::ToStr(String &str)const
 // 包装为字符串对象
 String Buffer::AsString()const
 {
-	return NULL;
+	return String(this->_Arr,this->_Length);
 }
 
 int Buffer::CompareTo(const Buffer &bs)const
@@ -458,16 +458,16 @@ void Buffer::move(Buffer &rval)
 	rval._Arr=NULL;
 	rval._Length=0;
 }
-char chartmp[512];
-String Buffer::ToString()const
-{
-    for (int i = 0; i < this->_Length; i++)
-    {
-        chartmp[i] = this->_Arr[i];
-    }
-    chartmp[this->_Length] = 0;
-    return String(chartmp);
-}
+//char chartmp[512];
+//String Buffer::ToString()const
+//{
+//    for (int i = 0; i < this->_Length; i++)
+//    {
+//        chartmp[i] = this->_Arr[i];
+//    }
+//    chartmp[this->_Length] = 0;
+//    return String(chartmp);
+//}
 
 // 打包一个指针和长度指定的数据区
 void BufferRef::Set(void *ptr, int len)
