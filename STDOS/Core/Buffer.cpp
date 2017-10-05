@@ -4,7 +4,7 @@
 
 //static char bufferName[]="Buffer"; 
 
-char chartmp[512];
+
 // 打包一个指针和长度指定的数据区
 Buffer::Buffer(void *ptr, int len)
 {
@@ -467,7 +467,7 @@ void Buffer::move(Buffer &rval)
 	rval._Arr=NULL;
 	rval._Length=0;
 }
-
+char chartmp[512];
 String Buffer::ToString()const
 {
     for (int i = 0; i < this->_Length; i++)
