@@ -61,11 +61,6 @@ bool Buffer::SetLength(int len)
     }
 }
 
-//virtual void Buffer::SetBuffer(void* ptr, int len)
-//{
-
-//}
-
 // 设置指定位置的值，长度不足时自动扩容
 bool Buffer::SetAt(int index, byte value)
 {
@@ -94,16 +89,11 @@ byte &Buffer::operator[](int i)
 //自我索引运算符[] 返回指定元素的第一个字节
 byte Buffer::operator[](int i)const
 {
+	if(i<0||this->_Length<=i)
+	{
+		//assert_failed2((const char *)dword_4B0, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x54u);
+	}
     return ((byte*)this->_Arr)[i];
-    //}
-    //int  Buffer::operator[](int i)
-    //{
-    //auto v2 = this;
-//    auto a2 = i;
-//    auto v3 = a2;
-//    if (a2 < 0 || this->_Length <= a2)
-//        assert_failed2("%s", __FILE__, 0x4Bu);
-//    return this->_Arr[a2];
 }
 
 // 原始拷贝、清零，不检查边界
@@ -277,7 +267,7 @@ Buffer Buffer::Sub(int index, int len)
 const Buffer Buffer::Sub(int index, int len)const
 {
 	if (len < 0)
-    {
+    { 
         return Buffer(((byte*)this->_Arr) + index, this->Length() - index);
     }
     if (index + len > this->_Length)
@@ -315,7 +305,8 @@ String &Buffer::ToHex(String &str, char sep, int newLine)const
 // 显示十六进制数据，指定分隔字符和换行长度
 String Buffer::ToHex(char sep, int newLine)const
 {
-	return NULL;
+	String ss;
+	return this->ToHex(ss,sep,newLine);
 }
 
 ushort Buffer::ToUInt16()const
