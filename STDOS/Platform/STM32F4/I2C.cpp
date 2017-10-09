@@ -27,6 +27,7 @@ void HardI2C::OnClose()
 // 等待Ack，默认0表示采用全局Retry
 bool HardI2C::WaitAck(int retry)
 {
+	return false;
 }
 byte HardI2C::ReadByte()
 {

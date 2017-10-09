@@ -10,6 +10,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "TInterrupt.h"
 #include "SerialPort.h"
 #include "Sys.h"
+#include "stdarg.h"
 
 #ifdef STM32F0
 	#include "stm32f0xx.h"
@@ -19,13 +20,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 	#include "stm32f4xx.h"
 #endif
 TSys Sys; //系统参数
-extern "C"
-{
-int SmartOS_printf(const char *format, ...)
-{	
-	return 0;
-}
-}
+
 //外部注册函数
 // 任务
 // 任务类
@@ -324,6 +319,27 @@ extern "C"
         SmartOS_Log(&str);
         return ch;
     }
+	extern "C"
+{
+	int SmartOS_printf(const char *format, ...)
+	{	
+		static char sprint_buf[1024];
+		va_list args;
+
+		int n;
+		va_start(args, format);
+		n = vsprintf(sprint_buf, format, args);
+		va_end(args);
+		char buf[1];
+		for(int i=0;i<n;i++)
+		{
+			buf[0] = sprint_buf[i];
+			String str(buf, 1);
+			SmartOS_Log(&str);
+		}
+		return n;
+	}
+}
 }
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
