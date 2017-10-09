@@ -73,11 +73,11 @@ int HardRTC::Sleep(int ms)
 }
 void HardRTC::LoadTime()
 {
-    uint totalSeconds = 0;     
+//    uint totalSeconds = 0;     
 }
 void HardRTC::SaveTime()
 {
-    uint seconds = Time.Seconds + Time.BaseSeconds;    
+//    uint seconds = Time.Seconds + Time.BaseSeconds;    
 }
 
 #ifdef __cplusplus
