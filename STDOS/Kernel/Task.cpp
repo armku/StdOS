@@ -68,7 +68,7 @@ void Task::Set(bool enable, int msNextTime)
 // 显示状态
 void Task::ShowStatus()
 {
-    debug_printf("Task::%-12s %2d", this->Name, this->ID);
+	debug_printf("Task::%-12s %2d", this->Name, this->ID);
     if (this->Times >= 1000000)
     {
         debug_printf("[%d]", this->Times);
@@ -472,6 +472,7 @@ void ShowTime(void *param)
 // 显示状态
 void TaskScheduler::ShowStatus()
 {
+	
     static UInt64 runCounts = 0;
     float RunTimes = 0;
     float RunTimesAvg = 0;
@@ -480,7 +481,7 @@ void TaskScheduler::ShowStatus()
 
     runCounts++;
     UInt64 curms = Sys.Ms();
-
+	debug_printf("\r\n\r\n %lld \r\n\r\n",curms);
     //统计运行时间
     RunTimes = 0;
     RunTimesAvg = 0;
@@ -504,8 +505,8 @@ void TaskScheduler::ShowStatus()
     }
     debug_printf("当前 1970-01-01 23 00:00");
     debug_printf("启动 %02lld:%02lld:%02lld.%03lld 堆 %u/%u\r\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000, &(buf[0]) - 0X20000000, 1024);
-
-    for (int i = 0; i < this->Count; i++)
+	debug_printf("\r\n\r\n %lld--%lld \r\n\r\n",Sys.Ms(),Sys.Ms()-curms);
+	for (int i = 0; i < this->Count; i++)
     {
         Task *task = this->_Tasks[i];
         if (task)
@@ -513,6 +514,7 @@ void TaskScheduler::ShowStatus()
             task->ShowStatus();
         }
     }
+	debug_printf("\r\n\r\n %lld--%lld \r\n\r\n",Sys.Ms(),Sys.Ms()-curms);
 }
 
 // 查找任务 返回使用此函数的首个任务的ID
