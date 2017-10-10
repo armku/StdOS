@@ -4,17 +4,13 @@
 
 OutputPort led1(PF9,false);
 OutputPort led2(PF10,false);
-//InputPort key0(PE4,true);
-InputPort key1(PE3,true);
-InputPort key2(PE2,true);
-InputPort keyup(PA0,true,InputPort::DOWN);
 SpiSoft spi128;
 
 void LedTask(void *param)
 {
     OutputPort *leds = (OutputPort*)param;
     *leds = ! * leds;	
-    led2 = keyup;
+    //led2 = keyup;
 }
 
 uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
