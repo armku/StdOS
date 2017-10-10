@@ -21,7 +21,7 @@ K3:PE4
     //测试代码
     extern OutputPort led2;
     InputPort key(PC13);
-    InputPort key0(PA0);
+    InputPort key0(PA0,true,InputPort::DOWN);
 
     void OnPress(InputPort &port, bool down)
     {
@@ -48,10 +48,10 @@ K3:PE4
             Sys.AddTask(led2flash, &led2, 0, 200, "led2");
         #elif defined STM32F4
             //EXTIX_Init(); //初始化外部中断输入 
-			key0.Pull=InputPort::DOWN;
+			//key0.Pull=InputPort::DOWN;
 			key0.Press = OnPress;
             key0.UsePress();
-			key0.Pull=InputPort::DOWN;
+			//key0.Pull=InputPort::DOWN;
             key0.Open();
         #endif 
     }
