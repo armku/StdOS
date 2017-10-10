@@ -139,6 +139,7 @@ void Port::OnClose(){}
 
 void Port::Opening()
 {
+	//GPIO_StructInit();
 }
 bool InputPort::OnRegister()
 {

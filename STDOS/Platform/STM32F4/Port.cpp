@@ -6,26 +6,31 @@ GPIO_TypeDef *IndexToGroup(byte index);
 
 bool Port::Open()
 {
-    if (this->Opened == false)
+    if (this->_Pin == P0)
     {
-        if (_Pin != P0)
-        {
-            // 打开时钟
-            int gi = _Pin >> 4;
-                RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
-            
-            GPIO_InitTypeDef gpio;
-            // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
-            GPIO_StructInit(&gpio);
-            gpio.GPIO_Pin = 1 << (this->_Pin &0x0F);
-            this->OnOpen(&gpio);
-
-            GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
-        }
-
-        this->Opened = true;
+        return false;
     }
-    return true;
+    else if (this->Opened)
+    {
+        return true;
+    }
+    else
+    {
+        // 打开时钟
+        int gi = _Pin >> 4;
+        RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
+
+        GPIO_InitTypeDef gpio;
+        // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
+        GPIO_StructInit(&gpio);
+        gpio.GPIO_Pin = 1 << (this->_Pin &0x0F);
+        this->OnOpen(&gpio);
+
+        GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
+        this->Opening();
+        this->Opened = true;
+        return true;
+    }
 }
 
 int InputPort_CloseEXTI(const InputPort *a1)
@@ -136,29 +141,29 @@ void InputPort::OnOpen(void *param)
 {
     Port::OnOpen(param);
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-        gpio->GPIO_Mode = GPIO_Mode_IN;
-        if (this->Floating)
-        {
-            gpio->GPIO_OType = GPIO_OType_OD;
-        }
-        else
-        {
-            gpio->GPIO_OType = GPIO_OType_PP;
-        }
-        switch (this->Pull)
-        {
-            case NOPULL:
-                gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
-                break;
-            case UP:
-                gpio->GPIO_PuPd = GPIO_PuPd_UP;
-                break;
-            case DOWN:
-                gpio->GPIO_PuPd = GPIO_PuPd_DOWN;
-                break;
-            default:
-                break;
-        }
+    gpio->GPIO_Mode = GPIO_Mode_IN;
+    if (this->Floating)
+    {
+        gpio->GPIO_OType = GPIO_OType_OD;
+    }
+    else
+    {
+        gpio->GPIO_OType = GPIO_OType_PP;
+    }
+    switch (this->Pull)
+    {
+        case NOPULL:
+            gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
+            break;
+        case UP:
+            gpio->GPIO_PuPd = GPIO_PuPd_UP;
+            break;
+        case DOWN:
+            gpio->GPIO_PuPd = GPIO_PuPd_DOWN;
+            break;
+        default:
+            break;
+    }
 }
 void GPIO_ISR(int num);
 //中断线打开、关闭

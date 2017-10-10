@@ -3,8 +3,9 @@
 Port::Port()
 {
     this->_Pin = P0;
+	this->Opened=false;
+	this->Index=0;	
     this->State = NULL;
-    //this->PinBit = 0;
 }
 
 #ifndef TINY	
@@ -19,9 +20,13 @@ Port::Port()
  */
 Port &Port::Set(Pin pin)
 {
-    this->_Pin = pin;    
-
-    this->Open();
+    if(this->_Pin != pin)
+	{
+		if(this->_Pin!=P0)
+			this->Close();
+		this->_Pin=pin;	
+				
+	}
     return  *this;
 }
 
@@ -32,11 +37,19 @@ bool Port::Empty()const
 
 void Port::Close()
 {
-    this->OnClose();
-    this->Opened = false;
+	if(this->Opened)
+	{
+		if(this->_Pin!=P0)
+		{
+			this->Opened=false;
+		}
+	}
 }
 
-void Port::Clear(){}
+void Port::Clear()
+{
+	this->_Pin=P0;
+}
 String Port::ToString()const
 {
     String ret;
@@ -51,21 +64,30 @@ String Port::ToString()const
     return ret;
 }
 
-OutputPort::OutputPort(){}
-OutputPort::OutputPort(Pin pin)
+OutputPort::OutputPort()
 {
-    this->Opened = false;
-    Set(pin);
-    this->Write(0);
+	this->Invert = 2;
+	this->OpenDrain = 0;
+	this->Speed = 50;
 }
+OutputPort::OutputPort(Pin pin):OutputPort(pin,2,false,50)
+{}
 
 OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
 {
     this->Opened = false;
-    this->Invert = invert;
-    this->OpenDrain = openDrain;
-    Set(pin);
-    this->Write(0);
+    
+	this->Invert = 2;
+	this->OpenDrain = false;
+	this->Speed = 50;
+	this->OpenDrain = openDrain;
+	this->Speed=speed;
+	this->Invert = invert;
+    if(pin !=P0)
+	{
+		this->Set(pin);
+		this->Open();
+	}
 }
 
 bool OutputPort::ReadInput()const
@@ -117,24 +139,25 @@ void OutputPort::OnOpen(void *param)
     this->OpenPin(param);
 }
 
-AlternatePort::AlternatePort(): OutputPort()
+AlternatePort::AlternatePort(): OutputPort(P0,0,false,50)
+{}
+
+AlternatePort::AlternatePort(Pin pin):OutputPort(P0,0,false,50)
 {
-    this->Opened = false;
+	if(pin !=P0)
+	{
+		this->Set(pin);
+		this->Open();
+	}
 }
 
-AlternatePort::AlternatePort(Pin pin): OutputPort(pin)
+AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed):OutputPort(P0,invert,openDrain,speed)
 {
-    this->Opened = false;
-    this->OpenDrain = false;
-}
-
-AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
-{
-    //局部变量中，数据值不确定
-    this->Opened = false;
-    this->Invert = invert;
-    this->OpenDrain = openDrain;
-    Set(pin);
+    if(pin !=P0)
+	{
+		this->Set(pin);
+		this->Open();
+	}
 }
 
 InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
@@ -142,8 +165,11 @@ InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
     this->Opened = false;
     this->Floating = floating;
     this->Pull = pupd;
-    Set(pin);
-	this->Open();
+	if(pin != P0)
+	{
+		Set(pin);
+		this->Open();
+	}
 }
 
 InputPort::InputPort(){

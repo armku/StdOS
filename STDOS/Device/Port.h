@@ -37,7 +37,7 @@ public:
 	};
 
     Pin		_Pin;		// 引脚   4
-	bool	Opened;		// 是否已经打开 8
+	bool	Opened;		// 是否已经打开 8 5
 	byte    Index;		// 引脚自身次序编号，用于区分多引脚次序
 	void*	State;		// 用户状态数据
 
@@ -76,8 +76,8 @@ class OutputPort : public Port
 {
 public:
     byte Invert		= 2;		// 是否倒置输入输出。默认2表示自动检测  12
-    bool OpenDrain	= false;	// 是否开漏输出
-    byte Speed		= 50;		// 速度
+    bool OpenDrain	= false;	// 是否开漏输出 13
+    byte Speed		= 50;		// 速度 14
 
     OutputPort();
     OutputPort(Pin pin);
