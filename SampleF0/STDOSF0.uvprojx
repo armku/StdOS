@@ -895,11 +895,6 @@
               <FilePath>..\STDOS\Test\FlashTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>ADS1246Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ADS1246Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT24CXXTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AT24CXXTest.cpp</FilePath>
@@ -1820,11 +1815,6 @@
               <FileName>FlashTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\FlashTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1246Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ADS1246Test.cpp</FilePath>
             </File>
             <File>
               <FileName>AT24CXXTest.cpp</FileName>

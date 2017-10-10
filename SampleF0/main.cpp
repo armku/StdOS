@@ -52,12 +52,14 @@ void TimerTask(void *param)
 }
 
 int main()
-{
+{	
     Sys.Name = (char*)namee;
     Sys.Init();
     #if DEBUG
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
+		int aa=vers[0];
+		aa++;
     #endif 
     SerialPort::GetMessagePort()->Register(OnUsart1Read);
 	

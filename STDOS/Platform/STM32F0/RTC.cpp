@@ -8,10 +8,11 @@ int AlarmHandler(void *a2, int a3, int a4)
 }
 int RTC_Configuration(int a1, int a2)
 {
-	
+	return 0;
 }
 int SYSCLKConfig_STOP(void)
 {
+	return 0;
 }
 bool RTC_WaitForLastTask2(unsigned int a1)
 {
@@ -65,11 +66,11 @@ int HardRTC::Sleep(int ms)
 }
 void HardRTC::LoadTime()
 {
-    uint totalSeconds = 0;    
+//    uint totalSeconds = 0;    
 }
 void HardRTC::SaveTime()
 {
-    uint seconds = Time.Seconds + Time.BaseSeconds;    
+//    uint seconds = Time.Seconds + Time.BaseSeconds;    
 }
 
 #ifdef __cplusplus

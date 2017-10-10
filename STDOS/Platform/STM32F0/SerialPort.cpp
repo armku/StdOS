@@ -39,11 +39,11 @@ void SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
 }
 int SerialPort_Opening(int a1)
 {
-  
+	return 0;
 }
 int SerialPort_Closeing(int result)
 {
-  
+	return 0;
 }
 
 /////////////////////////////////////////////
