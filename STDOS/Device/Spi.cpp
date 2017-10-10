@@ -311,6 +311,10 @@ void SpiSoft::Open()
 		this->_clk=0;
 	}
 	this->Stop();
+	this->_clk.Open();
+	this->_miso.Open();
+	this->_mosi.Open();
+	this->_nss.Open();
 }
 void SpiSoft::Close()
 {
