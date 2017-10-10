@@ -4,30 +4,29 @@ F1:
 K0:PA0
 K1:PC13
 
-
 F4
 正点原子探索者
 K0:PA0
 K1:PE2
 K2:PE3
 K3:PE4
-
  */
+ 
 #include "Port.h"
 #include "Platform\Pin.h"
-//void EXTIX_Init(void);
+
 #ifdef DEBUG
 
     //测试代码
     extern OutputPort led2;
     InputPort key(PC13);
-	
-	#ifdef STM32F4
-    InputPort key0(PA0,true,InputPort::DOWN);
-	InputPort key1(PE2,true,InputPort::UP);
-	InputPort key2(PE3,true,InputPort::UP);
-	InputPort key3(PE4,true,InputPort::UP);
-	#endif
+
+    #ifdef STM32F4
+        InputPort key0(PA0, true, InputPort::DOWN);
+        InputPort key1(PE2, true, InputPort::UP);
+        InputPort key2(PE3, true, InputPort::UP);
+        InputPort key3(PE4, true, InputPort::UP);
+    #endif 
     void OnPress(InputPort &port, bool down)
     {
         debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
@@ -53,19 +52,19 @@ K3:PE4
             key0.Press = OnPress;
             key0.UsePress();
             key0.Open();
-		
-			key1.Press=OnPress;
-			key1.UsePress();
-			key1.Open();
-			
-			key2.Press=OnPress;
-			key2.UsePress();
-			key2.Open();
-			
-			key3.Press=OnPress;
-			key3.UsePress();
-			key3.Open();
-			
+
+            key1.Press = OnPress;
+            key1.UsePress();
+            key1.Open();
+
+            key2.Press = OnPress;
+            key2.UsePress();
+            key2.Open();
+
+            key3.Press = OnPress;
+            key3.UsePress();
+            key3.Open();
+
         #endif 
     }
-#endif 
+#endif
