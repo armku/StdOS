@@ -4,7 +4,6 @@
 
 OutputPort led1(PF9,false);
 OutputPort led2(PF10,false);
-SpiSoft spi128;
 
 void LedTask(void *param)
 {
@@ -25,6 +24,7 @@ void TimerTask(void *param)
 //    printf("\r\n%d: cnt:%d", i++, time6cnt);
 }
 void InterruptTest();
+void w25q128test();
 int main(void)
 {
 	Sys.Init();
@@ -37,5 +37,6 @@ int main(void)
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
 	InterruptTest();
+	w25q128test();
     Sys.Start();
 }

@@ -1,7 +1,7 @@
 #include "Drivers\W25QXXX.h"
 
 
-#ifdef DEBUG1
+#ifdef DEBUG
     //正点原子 探索者开发板
     #if W25QXXXUSESPISOFT
         SpiSoft spi128;
