@@ -361,18 +361,16 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
 {
     UInt64 now = Sys.Ms();
     TimeCost tmcost;
-//    int mscurMax = now + msMax;
 
-//    Int64 v7;
-//    v7 =  - 1LL;
 	UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
     #if 0
+	int mscurMax = now + msMax;
     for (int i = 0; i < this->Count; i++)
     {
-        Task *taskcur = this->_TasksOld[i];
+        Task *taskcur = this->_Tasks[i];
         if (taskcur && taskcur->Callback && taskcur->Enable)
         {
-            if (taskcur->CheckTime(mscurMax, msMax !=  - 1))
+            if (taskcur->CheckTime(mscurMax, msMax > 0))
             {
                 if (taskcur->Execute(now))
                     this->Times++;

@@ -19,9 +19,10 @@ K3:PE4
 
     //≤‚ ‘¥˙¬Î
     extern OutputPort led2;
-    InputPort key(PC13);
-
-    #ifdef STM32F4
+	#ifdef STM32F1
+		InputPort key0(PA0, true, InputPort::DOWN);
+        InputPort key(PC13);
+    #elif defined STM32F4
         InputPort key0(PA0, true, InputPort::DOWN);
         InputPort key1(PE2, true, InputPort::UP);
         InputPort key2(PE3, true, InputPort::UP);
