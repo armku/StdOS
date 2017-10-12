@@ -1,545 +1,271 @@
-/******************************************************************************/
-/***************************** Include Files **********************************/
-/******************************************************************************/
 #include "AD7124.h"
+#include "AD7124def.h"
 
-/* Error codes */
-#define INVALID_VAL -1 /* Invalid argument */
-#define COMM_ERR    -2 /* Communication error on receive */
-#define TIMEOUT     -3 /* A timeout has occured */
+#if AD7124SPISOFT
+    AD7124::AD7124(SpiSoft *spi)
+    {
+        this->pspi = spi;
+    }
+#else 
+    AD7124::AD7124(Spi *spi)
+    {
+        this->pspi = spi;
+    }
+#endif 
 
-/***************************************************************************//**
-* @brief Reads the value of the specified register without checking if the
-*        device is ready to accept user requests.
-*
-* @param device - The handler of the instance of the driver.
-* @param pReg - Pointer to the register structure holding info about the
-*               register to be read. The read value is stored inside the
-*               register structure.
-*
-* @return Returns 0 for success or negative error code.
-*******************************************************************************/
-int32_t AD7124_NoCheckReadRegister(ad7124_device *device, ad7124_st_reg* pReg)
+ushort AD7124::Write16(ushort sendData)
 {
-	int32_t ret       = 0;
-	uint8_t buffer[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-	uint8_t i         = 0;
-	uint8_t check8    = 0;
-	uint8_t msgBuf[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    ushort ret = 0;
+    ret = this->pspi->Write(sendData >> 8);
+    ret <<= 8;
+    ret += this->pspi->Write(sendData &0xff);
+    return ret;
 
-	if(!device || !pReg)
-		return INVALID_VAL;
+}
 
-	/* Build the Command word */
-	buffer[0] = AD7124_COMM_REG_WEN | AD7124_COMM_REG_RD |
-	  		AD7124_COMM_REG_RA(pReg->addr);
 
-	/* Read data from the device */
-	ret = SPI_Read(device->slave_select_id,
-			buffer,
-			((device->useCRC != AD7124_DISABLE_CRC) ? pReg->size + 1
-							: pReg->size) + 1);
-	if(ret < 0)
-		return ret;
+uint AD7124::Write24(uint sendData)
+{
+    uint ret = 0;
+    ret = this->pspi->Write(sendData >> 16);
+    ret <<= 8;
+    ret += this->pspi->Write(sendData >> 8);
+    ret <<= 8;
+    ret += this->pspi->Write(sendData &0xff);
+    return ret;
 
-	/* Check the CRC */
-	if(device->useCRC == AD7124_USE_CRC)
-	{
-		msgBuf[0] = AD7124_COMM_REG_WEN | AD7124_COMM_REG_RD | 
-		  		AD7124_COMM_REG_RA(pReg->addr);
-		for(i = 1; i < pReg->size + 2; ++i)
-		{
-			msgBuf[i] = buffer[i];
-		}
-		check8 = AD7124_ComputeCRC8(msgBuf, pReg->size + 2);
-	}
+}
 
-	if(check8 != 0)
-	{
-		/* ReadRegister checksum failed. */
-		return COMM_ERR;
-	}
+uint AD7124::Write32(uint sendData)
+{
+    uint ret = 0;
+    ret = this->pspi->Write(sendData >> 24);
+    ret <<= 8;
+    ret += this->pspi->Write(sendData >> 16);
+    ret <<= 8;
+    ret += this->pspi->Write(sendData >> 8);
+    ret <<= 8;
+    ret += this->pspi->Write(sendData &0xff);
+    return ret;
+}
 
-	/* Build the result */
-	pReg->value = 0;
-	for(i = 1; i < pReg->size + 1; i++)
-	{
-		pReg->value <<= 8;
-		pReg->value += buffer[i];
-	}
-
+uint AD7124::ReadReg(byte reg, byte bytes)
+{
+    uint retVal;
+    this->pspi->Start();
+    this->pspi->Write(AD7124_RD | reg);
+    if (bytes == 1)
+    {
+        retVal = this->pspi->Write(0xFF);
+    }
+    else if (bytes == 2)
+    {
+        retVal = Write16(0xFFFF);
+    }
+    else if (bytes == 3)
+    {
+        retVal = Write24(0xFFFFFF);
+    }
+    this->pspi->Stop();
+    return retVal;
+}
+//读取AD值
+uint AD7124::ReadRlt()
+{
+	this->pspi->Stop();
+	Sys.Delay(5);
+	uint ret= this->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
+	Sys.Delay(5);
+	this->pspi->Stop();
+	this->pspi->Start();
 	return ret;
 }
-
-/***************************************************************************//**
-* @brief Writes the value of the specified register without checking if the
-*        device is ready to accept user requests.
-*
-* @param device - The handler of the instance of the driver.
-* @param reg - Register structure holding info about the register to be written
-*
-* @return Returns 0 for success or negative error code.
-*******************************************************************************/
-int32_t AD7124_NoCheckWriteRegister(ad7124_device *device, ad7124_st_reg reg)
+//读取AD值
+uint AD7124::ReadRlt(byte& status)
 {
-	int32_t ret      = 0;
-	int32_t regValue = 0;
-	uint8_t wrBuf[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-	uint8_t i        = 0;
-	uint8_t crc8     = 0;
-
-	if(!device)
-		return INVALID_VAL;
-
-	/* Build the Command word */
-	wrBuf[0] = AD7124_COMM_REG_WEN | AD7124_COMM_REG_WR |
-	  		AD7124_COMM_REG_RA(reg.addr);
-
-	/* Fill the write buffer */
-	regValue = reg.value;
-	for(i = 0; i < reg.size; i++)
-	{
-		wrBuf[reg.size - i] = regValue & 0xFF;
-		regValue >>= 8;
-	}
-
-	/* Compute the CRC */
-	if(device->useCRC != AD7124_DISABLE_CRC)
-	{
-		crc8 = AD7124_ComputeCRC8(wrBuf, reg.size + 1);
-		wrBuf[reg.size + 1] = crc8;
-	}
-
-	/* Write data to the device */
-	ret = SPI_Write(device->slave_select_id,
-			wrBuf,
-			(device->useCRC != AD7124_DISABLE_CRC) ? reg.size + 2
-							: reg.size + 1);
-
-	return ret;
+	uint adin=this->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES+1);
+	status=adin&0xff;
+	adin>>=8;
+	return adin;
+}
+/*******************************************************************************
+ * @function	: ReadReg
+ * @brief		: 读取AD7124寄存器内容
+ * @param		: reg   寄存器地址
+ * @param		: bytes 寄存器大小
+ * @retval		: 读取的内容
+ * @notes		: 
+ *****************************************************************************/
+uint AD7124::ReadRegNoCS(byte reg, byte bytes)
+{
+    uint retVal;
+    this->pspi->Write(AD7124_RD | reg);
+    if (bytes == 1)
+    {
+        retVal = this->pspi->Write(0xFF);
+    }
+    else if (bytes == 2)
+    {
+        retVal = Write16(0xFFFF);
+    }
+    else if (bytes == 3)
+    {
+        retVal = Write24(0xFFFFFF);
+    }
+    return retVal;
 }
 
-/***************************************************************************//**
-* @brief Reads the value of the specified register only when the device is ready
-*        to accept user requests. If the device ready flag is deactivated the
-*        read operation will be executed without checking the device state.
-*
-* @param device - The handler of the instance of the driver.
-* @param pReg - Pointer to the register structure holding info about the
-*               register to be read. The read value is stored inside the
-*               register structure.
-*
-* @return Returns 0 for success or negative error code.
-*******************************************************************************/
-int32_t AD7124_ReadRegister(ad7124_device *device, ad7124_st_reg* pReg)
+/*******************************************************************************
+ * @function	: WriteReg
+ * @brief		: 写AD7124寄存器
+ * @param		: reg	  寄存器地址
+ * @param		: bytes 寄存器大小
+ * @param		: data	写入的数据
+ * @retval		: 无
+ * @notes		: 
+ *****************************************************************************/
+void AD7124::WriteReg(byte reg, byte bytes, uint data)
 {
-	int32_t ret;
+    this->pspi->Start();
+    this->pspi->Write(AD7124_WR | reg);
+    if (bytes == 1)
+    {
+        this->pspi->Write(data);
+    }
+    else if (bytes == 2)
+    {
+        Write16(data);
+    }
+    else if (bytes == 3)
+    {
+        Write24(data);
+    }
+    this->pspi->Stop();
+	this->pspi->Start();
+}
+
+/*******************************************************************************
+ * @function	: Init
+ * @brief		: SPI端口配置，模拟SPI
+ * @param		: 无
+ * @retval		: 无
+ * @notes		: 
+ *****************************************************************************/
+void AD7124::Init()
+{
+//    WriteReg(AD7124_ADC_CTRL_REG, AD7124_ADC_CTRL_REG_BYTES, AD7124_ADC_CTRL_REG_DATA);
+//    WriteReg(AD7124_IO_CTRL1_REG, AD7124_IO_CTRL1_REG_BYTES, AD7124_IO_CTRL1_REG_DATA);
+//    WriteReg(AD7124_IO_CTRL2_REG, AD7124_IO_CTRL2_REG_BYTES, AD7124_IO_CTRL2_REG_DATA);
+
+//    WriteReg(AD7124_CFG0_REG, AD7124_CFG0_REG_BYTES, AD7124_CFG0_REG_DATA);
+//    WriteReg(AD7124_CFG1_REG, AD7124_CFG1_REG_BYTES, AD7124_CFG1_REG_DATA);
+//    WriteReg(AD7124_CFG2_REG, AD7124_CFG2_REG_BYTES, AD7124_CFG2_REG_DATA);
+//    WriteReg(AD7124_CFG3_REG, AD7124_CFG3_REG_BYTES, AD7124_CFG3_REG_DATA);
+//    WriteReg(AD7124_CFG4_REG, AD7124_CFG4_REG_BYTES, AD7124_CFG4_REG_DATA);
+
+//    WriteReg(AD7124_FILT0_REG, AD7124_FILT0_REG_BYTES, AD7124_FILT0_REG_DATA);
+//    WriteReg(AD7124_FILT1_REG, AD7124_FILT1_REG_BYTES, AD7124_FILT1_REG_DATA);
+//    WriteReg(AD7124_FILT2_REG, AD7124_FILT2_REG_BYTES, AD7124_FILT2_REG_DATA);
+//    WriteReg(AD7124_FILT3_REG, AD7124_FILT3_REG_BYTES, AD7124_FILT3_REG_DATA);
+//    WriteReg(AD7124_FILT4_REG, AD7124_FILT4_REG_BYTES, AD7124_FILT4_REG_DATA);
+//	
+//    WriteReg(AD7124_IO_CTRL1_REG, AD7124_IO_CTRL1_REG_BYTES, AD7124_IO_CTRL1_REG_DATA_TEMP1_TEST);
+//    AD7124_TEMP1_CH_CFG();
+//    AD7124_TEMP1_RES_CH_CFG();
+//    AD7124_FLOWA_CH_CFG();
+//    AD7124_FLOWB_CH_CFG();
+//    AD7124_BRDTEMP_CH_CFG();
+//    AD7124_ADTEMP_CH_CFG();
 	
-	if (pReg->addr != AD7124_ERR_REG && device->check_ready)
-	{
-		ret = AD7124_WaitForSpiReady(device, device->spi_rdy_poll_cnt);
-		if (ret < 0)
-			return ret;
-	}
-	ret = AD7124_NoCheckReadRegister(device, pReg);
+	WriteReg(AD7124_CFG0_REG, 2, (1<<11)| (0 << 9) | (2 << 3)|(5<<0)); //双极性 开路检测电流源关闭  使用内部基准电压源 增益32倍（±78.125mv）用于测量大泵流压
+	WriteReg(AD7124_CFG1_REG, 2, (0<<11)| (0 << 9) | (2 << 3)|(5<<0)); //单极性 开路检测电流源关闭  使用内部基准电压源 增益32倍（±78.125mv）用于测量大泵计压
+	WriteReg(AD7124_CFG1_REG, 2, (0<<11)| (0 << 9) | (2 << 3)|(0<<0)); //单极性 开路检测电流源关闭  使用内部基准电压源 增益1倍（±2.5v）用于测量板子温度
+
 	
-	return ret;
-}
-
-/***************************************************************************//**
-* @brief Writes the value of the specified register only when the device is
-*        ready to accept user requests. If the device ready flag is deactivated
-*        the write operation will be executed without checking the device state.
-*
-* @param device - The handler of the instance of the driver.
-* @param reg - Register structure holding info about the register to be written
-*
-* @return Returns 0 for success or negative error code.
-*******************************************************************************/
-int32_t AD7124_WriteRegister(ad7124_device *device, ad7124_st_reg pReg)
-{
-	int32_t ret;
+	this->CHCONFIG[0]=	0x0000 |(0<<12)| (0 << 5) | (1 << 0);//使用第一种设置 AINP:0 AIN 1 大泵流压
+	this->CHCONFIG[1]=	0x0000 |(1<<12)| (2 << 5) | (3 << 0);//使用第二种配置 AINP:2 AIN 3 大泵计压
+	this->CHCONFIG[2]=	0x0000 |(0<<12)| (4 << 5) | (5 << 0);//使用第一种配置 AINP:4 AIN 5 小泵流压
+	this->CHCONFIG[3]=	0x0000 |(1<<12)| (6 << 5) | (7 << 0);//使用第二种配置 AINP:6 AIN 7 小泵计压
+	this->CHCONFIG[4]=	0x0000 |(1<<12)| (8 << 5) | (9 << 0);//使用第二种配置 AINP:8 AIN 9 大气压
+	this->CHCONFIG[5]=	0x0000 |(1<<12)| (11 << 5) | (12 << 0);//使用第二种配置 AINP:11 AIN 12 小泵计温
+	this->CHCONFIG[6]=	0x0000 |(1<<12)| (14 << 5) | (19 << 0);//使用第二种配置 AINP:14 AIN GND 板子温度
 	
-	if (device->check_ready)
-	{  
-		ret = AD7124_WaitForSpiReady(device, device->spi_rdy_poll_cnt);
-		if (ret < 0)
-			return ret;
-	}
-	ret = AD7124_NoCheckWriteRegister(device, pReg);
 	
-	return ret;
-}
-
-/***************************************************************************//**
-* @brief Resets the device.
-*
-* @param device - The handler of the instance of the driver.
-*
-* @return Returns 0 for success or negative error code.
-*******************************************************************************/
-int32_t AD7124_Reset(ad7124_device *device)
-{
-	int32_t ret = 0;
-	uint8_t wrBuf[8] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-
-	if(!device)
-		return INVALID_VAL;
-
-	ret = SPI_Write(device->slave_select_id, wrBuf, 8);
-
-	/* Wait for the reset to complete */
-	ret = AD7124_WaitToPowerOn(device, device->spi_rdy_poll_cnt);
-
-	return ret;
-}
-
-/***************************************************************************//**
-* @brief Waits until the device can accept read and write user actions.
-*
-* @param device - The handler of the instance of the driver.
-* @param timeout - Count representing the number of polls to be done until the
-*                  function returns.
-*
-* @return Returns 0 for success or negative error code.
-*******************************************************************************/
-int32_t AD7124_WaitForSpiReady(ad7124_device *device, uint32_t timeout)
-{
-	ad7124_st_reg *regs;
-	int32_t ret;
-	int8_t ready = 0;
-
-	if(!device)
-		return INVALID_VAL;
-
-	regs = device->regs;
-
-	while(!ready && --timeout)
-	{
-		/* Read the value of the Error Register */
-		ret = AD7124_ReadRegister(device, &regs[AD7124_Error]);
-		if(ret < 0)
-			return ret;
-
-		/* Check the SPI IGNORE Error bit in the Error Register */
-		ready = (regs[AD7124_Error].value &
-			 	AD7124_ERR_REG_SPI_IGNORE_ERR) == 0;
-	}
-
-	return timeout ? 0 : TIMEOUT;
-}
-
-/***************************************************************************//**
-* @brief Waits until the device finishes the power-on reset operation.
-*
-* @param device - The handler of the instance of the driver.
-* @param timeout - Count representing the number of polls to be done until the
-*                  function returns.
-*
-* @return Returns 0 for success or negative error code.
-*******************************************************************************/
-int32_t AD7124_WaitToPowerOn(ad7124_device *device, uint32_t timeout)
-{
-	ad7124_st_reg *regs;
-	int32_t ret;
-	int8_t powered_on = 0;
-
-	if(!device)
-		return INVALID_VAL;
-
-	regs = device->regs;
-
-	while(!powered_on && timeout--)
-	{
-		ret = AD7124_ReadRegister(device, &regs[AD7124_Status]);
-		if(ret < 0)
-			return ret;
-
-		/* Check the POR_FLAG bit in the Status Register */
-		powered_on = (regs[AD7124_Status].value &
-				AD7124_STATUS_REG_POR_FLAG) == 0;
-	}
-
-	return (timeout || powered_on) ? 0 : TIMEOUT;
-}
-
-/***************************************************************************//**
-* @brief Waits until a new conversion result is available.
-*
-* @param device - The handler of the instance of the driver.
-* @param timeout - Count representing the number of polls to be done until the
-*                  function returns if no new data is available.
-*
-* @return Returns 0 for success or negative error code.
-*******************************************************************************/
-int32_t AD7124_WaitForConvReady(ad7124_device *device, uint32_t timeout)
-{
-	ad7124_st_reg *regs;
-	int32_t ret;
-	int8_t ready = 0;
-
-	if(!device)
-		return INVALID_VAL;
-
-	regs = device->regs;
-
-	while(!ready && --timeout)
-	{
-		/* Read the value of the Status Register */
-		ret = AD7124_ReadRegister(device, &regs[AD7124_Status]);
-		if(ret < 0)
-			return ret;
-
-		/* Check the RDY bit in the Status Register */
-		ready = (regs[AD7124_Status].value &
-				AD7124_STATUS_REG_RDY) == 0;
-	}
-
-	return timeout ? 0 : TIMEOUT;
-}
-
-/***************************************************************************//**
-* @brief Reads the conversion result from the device.
-*
-* @param device - The handler of the instance of the driver.
-* @param pData - Pointer to store the read data.
-*
-* @return Returns 0 for success or negative error code.
-*******************************************************************************/
-int32_t AD7124_ReadData(ad7124_device *device, int32_t* pData)
-{
-	ad7124_st_reg *regs;
-	int32_t ret;
-
-	if(!device)
-		return INVALID_VAL;
-
-	regs = device->regs;
-
-	/* Read the value of the Data Register */
-	ret = AD7124_ReadRegister(device, &regs[AD7124_Data]);
-
-	/* Get the read result */
-	*pData = regs[AD7124_Data].value;
-
-	return ret;
-}
-
-/***************************************************************************//**
-* @brief Computes the CRC checksum for a data buffer.
-*
-* @param pBuf - Data buffer
-* @param bufSize - Data buffer size in bytes
-*
-* @return Returns the computed CRC checksum.
-*******************************************************************************/
-uint8_t AD7124_ComputeCRC8(uint8_t * pBuf, uint8_t bufSize)
-{
-	uint8_t i   = 0;
-	uint8_t crc = 0;
-
-	while(bufSize)
-	{
-		for(i = 0x80; i != 0; i >>= 1)
-		{
-			if(((crc & 0x80) != 0) != ((*pBuf & i) != 0)) /* MSB of CRC register XOR input Bit from Data */
-			{
-				crc <<= 1;
-				crc ^= AD7124_CRC8_POLYNOMIAL_REPRESENTATION;
-			}
-			else
-			{
-				crc <<= 1;
-			}
-		}
-		pBuf++;
-		bufSize--;
-	}
-	return crc;
-}
-
-/***************************************************************************//**
-* @brief Updates the CRC settings.
-*
-* @param device - The handler of the instance of the driver.
-*
-* @return None.
-*******************************************************************************/
-void AD7124_UpdateCRCSetting(ad7124_device *device)
-{
-	ad7124_st_reg *regs;
-
-	if(!device)
-		return;
-
-	regs = device->regs;
+    WriteReg(AD7124_CH0_MAP_REG, 2, this->CHCONFIG[0]); 
+	WriteReg(AD7124_CH1_MAP_REG, 2, this->CHCONFIG[1]); 
+	WriteReg(AD7124_CH2_MAP_REG, 2, this->CHCONFIG[2]); 
+	WriteReg(AD7124_CH3_MAP_REG, 2, this->CHCONFIG[3]); 
+	WriteReg(AD7124_CH4_MAP_REG, 2, this->CHCONFIG[4]); 
+	WriteReg(AD7124_CH5_MAP_REG, 2, this->CHCONFIG[5]); 
+	WriteReg(AD7124_CH6_MAP_REG, 2, this->CHCONFIG[6]); 
 	
-	/* Get CRC State. */
-	if (regs[AD7124_Error_En].value & AD7124_ERREN_REG_SPI_CRC_ERR_EN)
-	{
-		device->useCRC = AD7124_USE_CRC;
-	}
-	else
-	{
-		device->useCRC = AD7124_DISABLE_CRC;
-	}
-}
+//	WriteReg(AD7124_CH3_MAP_REG, 2, 0x0000 | (4 << 5) | (5 << 0)); //AINP:4 AIN 5 小泵流压
+//	WriteReg(AD7124_CH4_MAP_REG, 2, 0x0000 | (6 << 5) | (7 << 0)); //AINP:6 AIN 7 小泵计压
+//	WriteReg(AD7124_CH5_MAP_REG, 2, 0x0000 | (8 << 5) | (9 << 0)); //AINP:8 AIN 9 大气压
+//	WriteReg(AD7124_CH6_MAP_REG, 2, 0x0000 | (11 << 5) | (12 << 0)); //AINP:11 AIN 12 小泵计温
+//	WriteReg(AD7124_CH7_MAP_REG, 2, 0x8000 | (14 << 5) | (19 << 0)); //AINP:14 AIN DGND 板子温度
+//	WriteReg(AD7124_CH8_MAP_REG, 2, 0x0000 | (0 << 5) | (1 << 0)); //AINP:0 AIN 1
+//	WriteReg(AD7124_CH0_MAP_REG, 2, 0x0000 | (0 << 5) | (1 << 0)); //AINP:0 AIN 1
+//	WriteReg(AD7124_CH10_MAP_REG, 2, 0x0000 | (0 << 5) | (1 << 0)); //AINP:0 AIN 1
+//	WriteReg(AD7124_CH11_MAP_REG, 2, 0x0000 | (0 << 5) | (1 << 0)); //AINP:0 AIN 1
+//	WriteReg(AD7124_CH12_MAP_REG, 2, 0x0000 | (0 << 5) | (1 << 0)); //AINP:0 AIN 1
+//	WriteReg(AD7124_CH13_MAP_REG, 2, 0x0000 | (0 << 5) | (1 << 0)); //AINP:0 AIN 1
+//	WriteReg(AD7124_CH14_MAP_REG, 2, 0x0000 | (0 << 5) | (1 << 0)); //AINP:0 AIN 1
+//	WriteReg(AD7124_CH15_MAP_REG, 2, 0x0000 | (0 << 5) | (1 << 0)); //AINP:2 AIN 3
 
-/***************************************************************************//**
-* @brief Updates the device SPI interface settings.
-*
-* @param device - The handler of the instance of the driver.
-*
-* @return None.
-*******************************************************************************/
-void AD7124_UpdateDevSpiSettings(ad7124_device *device)
-{
-	ad7124_st_reg *regs;
-
-	if(!device)
-		return;
-
-	regs = device->regs;
+    WriteReg(AD7124_ADC_CTRL_REG, 2, (1<<10)|(1<<8)|(3<<6)); //状态寄存器传输使能 内部基准电压使能 全功率模式
 	
-	if (regs[AD7124_Error_En].value & AD7124_ERREN_REG_SPI_IGNORE_ERR_EN)
-	{
-		device->check_ready = 1;
-	}
-	else
-	{
-		device->check_ready = 0;
-	}
+    this->pspi->Start();
 }
 
-/***************************************************************************//**
-* @brief Initializes the AD7124.
-*
-* @param device - The handler of the instance of the driver.
-* @param slave_select - The Slave Chip Select Id to be passed to the SPI calls.
-* @param regs - The list of registers of the device (initialized or not) to be
-*               added to the instance of the driver.
-*
-* @return Returns 0 for success or negative error code.
-*******************************************************************************/
-int32_t AD7124_Setup(ad7124_device *device, int slave_select,
-			ad7124_st_reg *regs)
+/*******************************************************************************
+ * @function	: ReadID
+ * @brief		: 读取AD7124 ID寄存器
+ * @param		: 无
+ * @retval		: 无
+ * @notes		: 
+ *****************************************************************************/
+byte AD7124::ReadID()
 {
-	int32_t ret;
-	enum ad7124_registers regNr;
-
-	if(!device || !regs)
-		return INVALID_VAL;
-
-	device->regs = regs;
-	device->slave_select_id = slave_select;
-	device->spi_rdy_poll_cnt = 25000;
-
-	/* Initialize the SPI communication. */
-	ret = SPI_Init(0, 1000000, 1, 0);
-	if (ret < 0)
-		return ret;
-
-	/*  Reset the device interface.*/
-	ret = AD7124_Reset(device);
-	if (ret < 0)
-		return ret;
-	
-	/* Update the device structure with power-on/reset settings */
-	device->check_ready = 1;
-
-	/* Initialize registers AD7124_ADC_Control through AD7124_Filter_7. */
-	for(regNr = AD7124_Status; (regNr < AD7124_Offset_0) && !(ret < 0);	regNr=(ad7124_registers)(regNr+1))
-	{
-		if (regs[regNr].rw == AD7124_RW)
-		{
-			ret = AD7124_WriteRegister(device, regs[regNr]);
-			if (ret < 0)
-		  		break;
-		}
-		
-		/* Get CRC State and device SPI interface settings */
-		if (regNr == AD7124_Error_En)
-		{
-			AD7124_UpdateCRCSetting(device);
-			AD7124_UpdateDevSpiSettings(device);
-		}
-	}
-
-	return ret;
-}
-#include "Drivers\AD7124_8.h"
-//extern SpiSoft spi128;
-/***************************************************************************//**
- * @brief Initializes the SPI communication peripheral.
- *
- * @param lsbFirst - Transfer format (0 or 1).
- *                   Example: 0x0 - MSB first.
- *                            0x1 - LSB first.
- * @param clockFreq - SPI clock frequency (Hz).
- *                    Example: 1000 - SPI clock frequency is 1 kHz.
- * @param clockPol - SPI clock polarity (0 or 1).
- *                   Example: 0x0 - Idle state for clock is a low level; active
- *                                  state is a high level;
- *	                      0x1 - Idle state for clock is a high level; active
- *                                  state is a low level.
- * @param clockEdg - SPI clock edge (0 or 1).
- *                   Example: 0x0 - Serial output data changes on transition
- *                                  from idle clock state to active clock state;
- *                            0x1 - Serial output data changes on transition
- *                                  from active clock state to idle clock state.
- *
- * @return status - Result of the initialization procedure.
- *                  Example: 1 - if initialization was successful;
- *                           0 - if initialization was unsuccessful.
-*******************************************************************************/
-unsigned char SPI_Init(unsigned char lsbFirst,
-                       unsigned long clockFreq,
-                       unsigned char clockPol,
-                       unsigned char clockEdg)
-{
-    /* Add your code here. */
-	return 1;
+    byte retVal;
+    retVal = ReadReg(AD7124_ID_REG, AD7124_ID_REG_BYTES);
+    //debug_printf("ID:0x%02x\r\n", retVal);
+    return retVal;
 }
 
-/***************************************************************************//**
- * @brief Reads data from SPI.
- *
- * @param slaveDeviceId - The ID of the selected slave device.
- * @param data - Data represents the write buffer as an input parameter and the
- *               read buffer as an output parameter.
- * @param bytesNumber - Number of bytes to read.
- *
- * @return Number of read bytes.
-*******************************************************************************/
-unsigned char SPI_Read(unsigned char slaveDeviceId,
-                       unsigned char* data,
-                       unsigned char bytesNumber)
+/*******************************************************************************
+ * @function	: ReadStatus
+ * @brief		: 读取AD7124 状态寄存器
+ * @param		: 无
+ * @retval		: 无
+ * @notes		: 
+ *****************************************************************************/
+byte AD7124::ReadStatus()
 {
-    /* Add your code here. */
-	for(int i=0;i<bytesNumber;i++)
-	{
-//		data[i]=spi128.Write(0XFF);
-	}
-	return bytesNumber;
+    byte retVal;
+    retVal = ReadReg(AD7124_STATUS_REG, AD7124_STATUS_REG_BYTES);
+    //debug_printf("Status:0x%02x\r\n", retVal);
+	this->pspi->Start();
+    return retVal;
 }
 
-/***************************************************************************//**
- * @brief Writes data to SPI.
- *
- * @param slaveDeviceId - The ID of the selected slave device.
- * @param data - Data represents the write buffer.
- * @param bytesNumber - Number of bytes to write.
- *
- * @return Number of written bytes.
-*******************************************************************************/
-unsigned char SPI_Write(unsigned char slaveDeviceId,
-                        unsigned char* data,
-                        unsigned char bytesNumber)
+/*******************************************************************************
+ * @function	: Reset
+ * @brief		: 复位AD芯片
+ * @param		: 无
+ * @retval		: 无
+ * @notes		: 
+ *****************************************************************************/
+void AD7124::Reset()
 {
-    /* Add your code here. */
-	for(int i=0;i<bytesNumber;i++)
-	{
-//		spi128.Write(data[i]);
-	}
-	return bytesNumber;
+    this->pspi->Start();
+    this->pspi->Write(0xFF);
+    this->pspi->Write(0xFF);
+    this->pspi->Write(0xFF);
+    this->pspi->Write(0xFF);
+    this->pspi->Write(0xFF);
+    this->pspi->Write(0xFF);
+    this->pspi->Write(0xFF);
+    this->pspi->Write(0xFF);
+    this->pspi->Stop();
 }

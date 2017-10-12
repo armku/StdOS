@@ -1208,7 +1208,7 @@
 
   <Group>
     <GroupName>Drivers</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1351,8 +1351,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\AD7128.cpp</PathWithFileName>
-      <FilenameWithoutPath>AD7128.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\STDOS\Drivers\AD7124.cpp</PathWithFileName>
+      <FilenameWithoutPath>AD7124.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1436,7 +1436,7 @@
 
   <Group>
     <GroupName>Platform</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

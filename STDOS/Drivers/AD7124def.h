@@ -1,5 +1,5 @@
-#ifndef _AD7124DEF_H
-    #define _AD7124DEF_H
+#ifndef _AD7124DEF_8_H
+    #define _AD7124DEF_8_H
 
     /************************ AD7124 COMMS¼Ä´æÆ÷¶ÁÐ´¿ØÖÆ *************************************/
     #define AD7124_WR				0x00
