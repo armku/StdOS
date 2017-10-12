@@ -188,7 +188,7 @@ bool InputPort::UsePress()
 		//assert_failed2((const char *)"%s,%d", __FILE__, 0x12);
 		return false;
 	}
-	InputPort_OpenEXTI(this->_Pin,InputPort::Both);
+	InputPort_OpenEXTI(this->_Pin,this->Mode);
 	this->HardEvent=this->OnRegister();
 //	if(!this->Opened &&!this->Floating)
 //	{

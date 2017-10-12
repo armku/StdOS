@@ -152,7 +152,7 @@ void SetEXIT(int pinIndex, bool enable,InputPort::Trigger trigger=InputPort::Bot
     /* ≈‰÷√EXTI÷–∂œœﬂ */
     EXTI_InitTypeDef ext;
     EXTI_StructInit(&ext);
-    ext.EXTI_Line = EXTI_Line0 << pinIndex;
+    ext.EXTI_Line = EXTI_Line0 << (pinIndex&0X0F);
     ext.EXTI_Mode = EXTI_Mode_Interrupt;
 	switch(trigger)
 	{
@@ -184,7 +184,7 @@ void InputPort_OpenEXTI(Pin pin,InputPort::Trigger trigger=InputPort::Both)
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE);
 	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA+pin>>4, pin&0x0f);
 	
-	SetEXIT(pin&0X0F, true,trigger);
+	SetEXIT(pin, true,trigger);
 	Interrupt.SetPriority(PORT_IRQns[pin&0x0f], 1u);
 	//Interrupt.Activate(PORT_IRQns[v3],(void (__cdecl *)(unsigned __int16, void *))EXTI_IRQHandler,v1);
 }

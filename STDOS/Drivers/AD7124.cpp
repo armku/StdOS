@@ -468,7 +468,7 @@ int32_t AD7124_Setup(ad7124_device *device, int slave_select,
 	return ret;
 }
 #include "Drivers\AD7124_8.h"
-extern SpiSoft spi128;
+//extern SpiSoft spi128;
 /***************************************************************************//**
  * @brief Initializes the SPI communication peripheral.
  *
@@ -518,7 +518,7 @@ unsigned char SPI_Read(unsigned char slaveDeviceId,
     /* Add your code here. */
 	for(int i=0;i<bytesNumber;i++)
 	{
-		data[i]=spi128.Write(0XFF);
+//		data[i]=spi128.Write(0XFF);
 	}
 	return bytesNumber;
 }
@@ -539,7 +539,7 @@ unsigned char SPI_Write(unsigned char slaveDeviceId,
     /* Add your code here. */
 	for(int i=0;i<bytesNumber;i++)
 	{
-		spi128.Write(data[i]);
+//		spi128.Write(data[i]);
 	}
 	return bytesNumber;
 }
