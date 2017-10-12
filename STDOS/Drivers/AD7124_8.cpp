@@ -72,7 +72,13 @@ uint AD7124::ReadReg(byte reg, byte bytes)
 //读取AD值
 uint AD7124::ReadRlt()
 {
-	return this->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
+	this->pspi->Stop();
+	Sys.Delay(5);
+	uint ret= this->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
+	Sys.Delay(5);
+	this->pspi->Stop();
+	this->pspi->Start();
+	return ret;
 }
 //读取AD值
 uint AD7124::ReadRlt(byte& status)
