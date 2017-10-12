@@ -141,6 +141,7 @@ void AD7124::WriteReg(byte reg, byte bytes, uint data)
         Write24(data);
     }
     this->pspi->Stop();
+	this->pspi->Start();
 }
 
 /*******************************************************************************
@@ -244,6 +245,7 @@ byte AD7124::ReadStatus()
     byte retVal;
     retVal = ReadReg(AD7124_STATUS_REG, AD7124_STATUS_REG_BYTES);
     //debug_printf("Status:0x%02x\r\n", retVal);
+	this->pspi->Start();
     return retVal;
 }
 
