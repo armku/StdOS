@@ -20,6 +20,7 @@ InputPort key1232dout(PB14, true, InputPort::DOWN);
 void Show1232cnt(void* param)
 {
 	debug_printf("\r\n ADS1232CNT:%d value:%f",ads1232doutcnt);
+	ads1232.test();
 }
 void ADS1232Test()
 {

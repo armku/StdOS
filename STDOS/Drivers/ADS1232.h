@@ -8,8 +8,9 @@
             void Init();
             void SetPin(Pin pdout, Pin psclk, Pin ppwdn);
             int	Read();
+			void test();
         private:
-            OutputPort dout;
+            InputPort dout;
             OutputPort sclk;
             OutputPort pwdn;
 		private:
