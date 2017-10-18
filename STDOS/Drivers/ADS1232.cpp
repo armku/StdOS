@@ -1,10 +1,5 @@
 #include "ADS1232.h"
 
-void delay_short(int us)
-{
-	Sys.Delay(10);
-}
-
 void ADS1232::SetPin(Pin pdout, Pin psclk, Pin ppwdn)
 {
     this->dout.Set(pdout);
@@ -34,15 +29,15 @@ void ADS1232::test()
 
 void ADS1232::Init()
 {
-	return;
+	//return;
 	this->pwdn = 0; //复位1232，操作前先复位
-    delay_short(1000);
+	Sys.Delay(20);
     this->sclk = 0;
-    delay_short(1000);
-    delay_short(1000);
+    Sys.Delay(20);
+    Sys.Delay(20);
 //    this->dout = 1; //初始化引脚
     this->pwdn = 1; //开启1232
-    delay_short(1000);
+    Sys.Delay(20);
 	this->readCnt=0;
 }
 
@@ -67,7 +62,7 @@ int ADS1232::Read()
             break;
         }
     }
-    delay_short(33);
+    Sys.Delay(20);
     if (temp < 1000)
     {
         temp = 0;
