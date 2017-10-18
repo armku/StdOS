@@ -89,6 +89,7 @@ int main(void)
 	
 	IList::Test();
 	ADS1232Test();
+	//InterruptTest();
 	
 	//InterruptTest();
 		

@@ -15,6 +15,10 @@ void ADS1232::SetPin(Pin pdout, Pin psclk, Pin ppwdn)
 	this->sclk.OpenDrain=false;
 	this->pwdn.OpenDrain=false;
 	
+	//this->dout.Open();
+	//this->sclk.Open();
+	this->pwdn.Open();
+	
 	this->dout = 1;
 	this->sclk = 1;
 	this->pwdn = 1;
@@ -22,8 +26,7 @@ void ADS1232::SetPin(Pin pdout, Pin psclk, Pin ppwdn)
 
 void ADS1232::Init()
 {
-	return;
-    this->pwdn = 0; //复位1232，操作前先复位
+	this->pwdn = 0; //复位1232，操作前先复位
     delay_short(1000);
     this->sclk = 0;
     delay_short(1000);
@@ -37,8 +40,7 @@ void ADS1232::Init()
 
 int ADS1232::Read()
 {
-	return 0;
-    int temp = 0;
+	int temp = 0;
     byte i = 0;
     //        for(temp=0;temp<500;temp++)
     //        {
