@@ -163,9 +163,11 @@ bool SerialPort::OnOpen()
 
     //串口引脚初始化
     this->Ports[0]=new AlternatePort();
-		this->Ports[1]=new InputPort();
+	this->Ports[1]=new AlternatePort();
 	this->Ports[0]->Set(this->Pins[0]);
     this->Ports[1]->Set(this->Pins[1]);
+	this->Ports[0]->Open();
+	this->Ports[1]->Open();
 
     // 不要关调试口，否则杯具
     //    if (_index != Sys.MessagePort)
