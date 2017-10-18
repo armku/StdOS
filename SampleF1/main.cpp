@@ -14,6 +14,7 @@
 #include "TTime.h"
 #include "Drivers\RX8025T.h"
 
+
 class TTTTime
 {
     public:
@@ -23,8 +24,11 @@ class TTTTime
         UInt64 Current; // µ±«∞∫¡√Î ˝
 };
 TTTTime now123;
+//InputPort paa11(PA11,false);
+OutputPort paaa1(PA11);
 void Test12(void *param)
 {
+//	int aa=paa11;aa++;
     now123.Seconds = Time.Seconds;
     now123.Milliseconds = Time.Milliseconds;
     now123.Current = Time.Current();
@@ -47,6 +51,8 @@ void LedTask(void *param)
     auto leds = (OutputPort*)param;
     *leds = ! * leds;
     //    led2 = key0;
+	//paaa1=!paaa1;
+	paaa1=0;
 }
 
 uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
@@ -65,6 +71,7 @@ void TimerTask(void *param)
 SerialPort *sp1;
 
 void InterruptTest();
+void ADS1232Test();
 int main(void)
 {
     Sys.Init();
@@ -81,6 +88,7 @@ int main(void)
     Sys.AddTask(Test12, 0, 600, 1000, "Test");
 	
 	IList::Test();
+	ADS1232Test();
 	
 	//InterruptTest();
 		

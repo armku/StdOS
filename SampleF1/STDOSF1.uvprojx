@@ -665,19 +665,29 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
+              <FileName>ADS1232.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\ADS1232.cpp</FilePath>
+            </File>
+            <File>
               <FileName>ADS1246.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\ADS1246.cpp</FilePath>
             </File>
             <File>
-              <FileName>NPA.cpp</FileName>
+              <FileName>AD7124.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\NPA.cpp</FilePath>
+              <FilePath>..\STDOS\Drivers\AD7124.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AD7689.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NPA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\NPA.cpp</FilePath>
             </File>
             <File>
               <FileName>Button.cpp</FileName>
@@ -718,11 +728,6 @@
               <FileName>RX8025T.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\RX8025T.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7124.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\AD7124.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -963,6 +968,11 @@
               <FileName>W25QXXXTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\W25QXXXTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ADS1232Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ADS1232Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1627,19 +1637,29 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
+              <FileName>ADS1232.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\ADS1232.cpp</FilePath>
+            </File>
+            <File>
               <FileName>ADS1246.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\ADS1246.cpp</FilePath>
             </File>
             <File>
-              <FileName>NPA.cpp</FileName>
+              <FileName>AD7124.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\NPA.cpp</FilePath>
+              <FilePath>..\STDOS\Drivers\AD7124.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AD7689.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NPA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\NPA.cpp</FilePath>
             </File>
             <File>
               <FileName>Button.cpp</FileName>
@@ -1680,11 +1700,6 @@
               <FileName>RX8025T.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\RX8025T.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7124.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\AD7124.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1925,6 +1940,11 @@
               <FileName>W25QXXXTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\W25QXXXTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ADS1232Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ADS1232Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
