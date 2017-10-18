@@ -1,5 +1,5 @@
-#ifndef __AD7124_8_H
-    #define __AD7124_8_H
+#ifndef __AD7124_H
+    #define __AD7124_H
 
     #include "spi.h"
 
@@ -16,7 +16,8 @@
             #endif 
 			ushort CHCONFIG[16];//通道配置
 
-            void Init();		
+            void Init_8();		//8通道初始化
+			void Init_4();		//4通道初始化
             byte ReadID();		//读取ID
             byte ReadStatus();	//读取状态
             void Reset();		//复位
@@ -27,6 +28,7 @@
             int Read(void); //返回-1,表示转换未完成
             bool GetFlag(void); //读取AD转换是否正常
 			void WriteReg(byte reg, byte bytes, uint data);
+			void SetReadChannel(byte ch=0,byte chMax=7);//设置需要读取的通道，默认通道0
         private:
 			ushort Write16(ushort sendData);
             uint Write24(uint sendData);
