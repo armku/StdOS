@@ -2,6 +2,11 @@
 #include "Master.h"
 #include "Slave.h"
 
+/*
+测试数组 
+地址 功能码 地址Hi 地址Lo 个数Hi 个数Lo CrcLo Crc Hi
+01 03 00 00 00 01 84 0A
+*/
 bool Modbus::Read(Stream &ms)
 {
 	#if 0
