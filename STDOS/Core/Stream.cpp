@@ -1,6 +1,20 @@
 #include "ByteArray.h"
 #include "Stream.h"
 
+ushort _REV16(ushort a1)
+{
+  return (ushort)(a1 << 8) | (a1 >> 8);
+}
+uint _REV(uint a1)
+{
+  ushort v1;
+  uint v2;
+
+  v1 = a1;
+  v2 = _REV16(a1 >> 16);
+  return v2 | (_REV16(v1) << 16);
+}
+
 void Stream::Init(void *buf, int len)
 {
     if (!buf)
@@ -182,7 +196,7 @@ ByteArray Stream::ReadArray(){}
 
 int Stream::ReadByte(){}
 ushort Stream::ReadUInt16()
-{
+{	
     return 0;
 }
 
@@ -198,22 +212,43 @@ UInt64 Stream::ReadUInt64()
 
 bool Stream::Write(byte value)
 {
-    return false;
+	byte buf[1];
+	buf[0]=value;
+	const Buffer v3(buf,1);
+	return this->Write(v3);
 }
 
 bool Stream::Write(ushort value)
 {
-    return false;
+    ushort buf[1];
+	buf[0]=value;
+	const Buffer v3(buf,2);
+	if(!this->Little)
+		buf[0]= _REV16(buf[0]);
+	return this->Write(v3);
 }
 
 bool Stream::Write(uint value)
 {
-    return false;
+    uint buf[1];
+	buf[0]=value;
+	const Buffer v3(buf,4);
+	if(!this->Little)
+		buf[0]=_REV(buf[0]);
+	return this->Write(v3);
 }
 
 bool Stream::Write(UInt64 value)
 {
-    return false;
+	UInt64 buf[1];
+	buf[0]=value;
+	const Buffer v3(buf,8);
+	if(!this->Little)
+	{
+		uint hi=_REV(buf[0]>>32);
+		buf[0]=(_REV(buf[0])<<16)|hi;
+	}
+	return this->Write(v3);
 }
 
 // 读取指定长度的数据并返回首字节指针，移动数据流位置
