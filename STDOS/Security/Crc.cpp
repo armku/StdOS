@@ -1,4 +1,129 @@
 #include "Crc.h"
+
+
+/******************************************************
+*函数名称:CRC16RTU
+*输   入:pszBuf  要校验的数据
+        unLength 校验数据的长
+*输   出:校验值
+*功   能:循环冗余校验-16
+         （RTU标准-0xA001）
+*******************************************************/
+ushort Crc::CRC16RTU( byte * pszBuf, uint unLength)
+{
+	ushort CRC=0XFFFF;
+	uint CRC_count;
+
+	for(CRC_count=0;CRC_count<unLength;CRC_count++)
+	{
+		int i;
+
+		CRC=CRC^*(pszBuf+CRC_count);
+
+		for(i=0;i<8;i++)
+		{
+			if(CRC&1)
+			{
+				CRC>>=1;
+				CRC^=0xA001;
+			}
+			else
+			{ 
+                            CRC>>=1;
+			}
+				
+		}
+	}
+
+	return CRC;
+}
+/******************************************************
+*函数名称:CRC16CCITT
+*输   入:pszBuf  要校验的数据
+        unLength 校验数据的长
+*输   出:校验值
+*功   能:循环冗余校验-16
+         （CCITT标准-0x1021）
+01 03 00 00 00 01:0A84
+*******************************************************/
+ushort Crc::CRC16CCITT(byte * pszBuf, uint unLength)
+{
+
+	uint i, j;
+	ushort CrcReg = 0xFFFF;
+	ushort CurVal;
+
+	for (i = 0; i < unLength; i++) 
+	{
+		CurVal = pszBuf[i] << 8;
+
+		for (j = 0; j < 8; j++) 
+		{ 
+			if ((short)(CrcReg ^ CurVal) < 0)
+				CrcReg = (CrcReg << 1) ^ 0x1021;
+			else 
+				CrcReg <<= 1; 
+			CurVal <<= 1;            
+		}
+	}
+
+	return CrcReg;
+} 
+/******************************************************
+*函数名称:CRC16Default
+*输   入:pszBuf  要校验的数据
+        unLength 校验数据的长
+*输   出:校验值
+*功   能:循环冗余校验-16
+         （美国标准-0x8005）
+*******************************************************/
+ushort Crc::CRC16Default(byte * pszBuf, uint unLength)
+{
+	uint i, j;
+	ushort CrcReg = 0xFFFF;
+	ushort CurVal;
+
+	for (i = 0; i < unLength; i++) 
+	{
+		CurVal = pszBuf[i] << 8;
+
+		for (j = 0; j < 8; j++) 
+		{ 
+			if ((short)(CrcReg ^ CurVal) < 0)
+				CrcReg = (CrcReg << 1) ^ 0x8005;
+			else 
+				CrcReg <<= 1; 
+			CurVal <<= 1;            
+		}
+	}
+
+	return CrcReg;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #ifdef STM32F1
 	#include "stm32f10x.h"
 #endif

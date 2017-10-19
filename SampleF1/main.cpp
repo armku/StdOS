@@ -72,6 +72,7 @@ SerialPort *sp1;
 
 void InterruptTest();
 void ADS1232Test();
+#include "Security\crc.h"
 int main(void)
 {
     Sys.Init();
@@ -79,6 +80,7 @@ int main(void)
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 
+	
 
 	sp1=SerialPort::GetMessagePort();
     SerialPort::GetMessagePort()->Register(OnUsart1Read);

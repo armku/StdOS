@@ -1,4 +1,6 @@
 #include "Modbus.h"
+#include "Master.h"
+#include "Slave.h"
 
 bool Modbus::Read(Stream &ms)
 {

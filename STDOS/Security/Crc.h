@@ -1,4 +1,4 @@
-﻿#ifndef __CRC_H__
+#ifndef __CRC_H__
 #define __CRC_H__
 
 #include "Kernel\Sys.h"
@@ -7,10 +7,9 @@
 class Crc
 {
 public:
-    // CRC32校验
-    //uint Crc(const void* buf, uint len);
-    static uint Hash(const Buffer& arr, uint crc = 0);
-	static ushort Hash16(const Buffer& arr, ushort crc = 0xFFFF);
+    static ushort CRC16RTU( byte * pszBuf, uint unLength);
+	static ushort CRC16CCITT(byte * pszBuf, uint unLength);
+	static ushort CRC16Default(byte * pszBuf, uint unLength);
 };
 
 #endif
