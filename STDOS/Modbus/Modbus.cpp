@@ -48,18 +48,16 @@ bool Modbus::Read(Stream &ms)
 }
 
 void Modbus::Write(Stream &ms)
-{
-	#if 0
-	ms[0]=this->Address;
-	ms[1]=this->Code;
-	this->Crc2=GetCRC(this->Data,this->Length);
-	ms[this->Length+2]=this->Crc2&0xff;
-	ms[this->Length+3]=(this->Crc2>>8)&0xff;
+{	
+	ms.GetBuffer()[0]=this->Address;
+	ms.GetBuffer()[1]=this->Code;
+	this->Crc2=Crc::CRC16RTU(this->Data,this->Length);
+	ms.GetBuffer()[this->Length+2]=this->Crc2&0xff;
+	ms.GetBuffer()[this->Length+3]=(this->Crc2>>8)&0xff;
 	for(int i=0;i<this->Length;i++)
 	{
-		ms[2+i]=this->Data[i];
-	}
-	#endif
+		ms.GetBuffer()[2+i]=this->Data[i];
+	}	
 }
 
 void Modbus::SetError(ModbusErrors::Errors error){}
