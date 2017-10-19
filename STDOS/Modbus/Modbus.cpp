@@ -1,7 +1,8 @@
 #include "Modbus.h"
 
-bool Modbus::Read(Buffer &ms)
+bool Modbus::Read(Stream &ms)
 {
+	#if 0
 	if(ms.Length()<4)
 	{
 		return false;
@@ -17,6 +18,7 @@ bool Modbus::Read(Buffer &ms)
 	this->Crc<<=8;
 	this->Crc|=ms[ms.Length()-2];
 	this->Crc2=GetCRC(this->Data,this->Length);
+	#endif
 	if(this->Crc==this->Crc2)
 	{
 		return true;
@@ -25,10 +27,12 @@ bool Modbus::Read(Buffer &ms)
 	{
 		return false;
 	}
+	
 }
 
-void Modbus::Write(Buffer &ms)
+void Modbus::Write(Stream &ms)
 {
+	#if 0
 	ms[0]=this->Address;
 	ms[1]=this->Code;
 	this->Crc2=GetCRC(this->Data,this->Length);
@@ -38,6 +42,7 @@ void Modbus::Write(Buffer &ms)
 	{
 		ms[2+i]=this->Data[i];
 	}
+	#endif
 }
 
 void Modbus::SetError(ModbusErrors::Errors error){}
