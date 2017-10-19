@@ -1,4 +1,4 @@
-﻿#ifndef _Stream_H_
+#ifndef _Stream_H_
 #define _Stream_H_
 
 // 数据流
@@ -6,9 +6,9 @@
 class Stream
 {
 protected:
-	byte* _Buffer;	// 数据缓冲区。扩容后会重新分配缓冲区
-	int _Capacity;	// 缓冲区容量
-    int _Position;	// 游标位置
+	byte* _Buffer;	// 数据缓冲区。扩容后会重新分配缓冲区 1
+	int _Capacity;	// 缓冲区容量 2
+    int _Position;	// 游标位置 3
 
 	void Init(void* buf, int len);
 	virtual bool CheckRemain(int count);
