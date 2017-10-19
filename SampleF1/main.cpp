@@ -72,7 +72,7 @@ SerialPort *sp1;
 
 void InterruptTest();
 void ADS1232Test();
-#include "Security\crc.h"
+void ModbusTest();
 int main(void)
 {
     Sys.Init();
@@ -91,6 +91,7 @@ int main(void)
 	
 	IList::Test();
 	ADS1232Test();
+	ModbusTest();
 	//InterruptTest();
 	
 	//InterruptTest();

@@ -989,6 +989,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ADS1232Test.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ModbusTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ModbusTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1975,6 +1980,11 @@
               <FileName>ADS1232Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ADS1232Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ModbusTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
