@@ -11,7 +11,10 @@ void Stream::Init(void *buf, int len)
     this->_Buffer = (byte*)buf;
     this->_Capacity = len;
     this->_Position = 0;
-
+	this->Length=len;
+	this->Little=true;
+	this->CanWrite=true;
+	this->CanResize=true;
 }
 
 bool Stream::CheckRemain(int count)
