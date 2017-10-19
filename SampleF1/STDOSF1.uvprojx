@@ -609,6 +609,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Version.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Stream.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -728,6 +733,16 @@
               <FileName>RX8025T.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\RX8025T.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ModBus</GroupName>
+          <Files>
+            <File>
+              <FileName>Modbus.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Modbus\Modbus.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1581,6 +1596,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Version.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Stream.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1700,6 +1720,16 @@
               <FileName>RX8025T.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\RX8025T.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ModBus</GroupName>
+          <Files>
+            <File>
+              <FileName>Modbus.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Modbus\Modbus.cpp</FilePath>
             </File>
           </Files>
         </Group>
