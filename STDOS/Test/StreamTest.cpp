@@ -9,7 +9,7 @@ uint bufuint = 0x12345678;
 UInt64 bufuint64 = 0x12345678ABCDEF;
 void streamtest()
 {
-	streambuf.Little=false;
+	//streambuf.Little=false;
 	streambuf.SetCapacity(15);
 //	streambuf.Write(bufbyte);
 //	streambuf.Write(bufshort);

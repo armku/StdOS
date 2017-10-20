@@ -24,16 +24,16 @@ bool Modbus::Read(Stream &ms)
 	}
 	this->Address=ms.GetBuffer()[0];
 	this->Code=ms.GetBuffer()[1];
-	this->Length=ms.Capacity()-4;
+	this->Length=ms.Length-4;
 	for(int i=0;i<this->Length;i++)
 	{
 		this->Data[i]=ms.GetBuffer()[i+2];
 	}
-	this->Crc=ms.GetBuffer()[ms.Capacity()-1];
+	this->Crc=ms.GetBuffer()[ms.Length-1];
 	this->Crc<<=8;
-	this->Crc|=ms.GetBuffer()[ms.Capacity()-2];
+	this->Crc|=ms.GetBuffer()[ms.Length-2];
 	
-	this->Crc2=Crc::CRC16RTU(ms.GetBuffer(),ms.Capacity()-2);
+	this->Crc2=Crc::CRC16RTU(ms.GetBuffer(),ms.Length-2);
 	
 	
 	if(this->Crc==this->Crc2)
@@ -51,13 +51,15 @@ void Modbus::Write(Stream &ms)
 {	
 	ms.GetBuffer()[0]=this->Address;
 	ms.GetBuffer()[1]=this->Code;
-	this->Crc2=Crc::CRC16RTU(this->Data,this->Length);
-	ms.GetBuffer()[this->Length+2]=this->Crc2&0xff;
-	ms.GetBuffer()[this->Length+3]=(this->Crc2>>8)&0xff;
 	for(int i=0;i<this->Length;i++)
 	{
 		ms.GetBuffer()[2+i]=this->Data[i];
-	}	
+	}
+	
+	this->Crc2=Crc::CRC16RTU(ms.GetBuffer(),this->Length+2);
+	ms.GetBuffer()[this->Length+2]=this->Crc2&0xff;
+	ms.GetBuffer()[this->Length+3]=(this->Crc2>>8)&0xff;
+	ms.Length=this->Length+4;
 }
 
 void Modbus::SetError(ModbusErrors::Errors error){}
