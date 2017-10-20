@@ -13,27 +13,27 @@ Modbus::Modbus()
 }
 /*
 测试数组 
-地址 功能码 地址Hi 地址Lo 个数Hi 个数Lo CrcLo Crc Hi
-01 03 00 00 00 01 84 0A
+地址 功能码 地址Hi 地址Lo 个数Hi 个数Lo CrcLo CrcHi
+01     03    00     00     00    01    84     0A
 */
 bool Modbus::Read(Stream &ms)
 {
-	if(ms.Capacity()<4)
+	if(ms.Capacity()<5)
 	{
 		return false;
 	}
 	this->Address=ms.GetBuffer()[0];
 	this->Code=ms.GetBuffer()[1];
-	this->Length=ms.Capacity();
+	this->Length=ms.Capacity()-4;
 	for(int i=0;i<this->Length;i++)
 	{
 		this->Data[i]=ms.GetBuffer()[i+2];
 	}
-	this->Crc=ms.GetBuffer()[this->Length-1];
+	this->Crc=ms.GetBuffer()[ms.Capacity()-1];
 	this->Crc<<=8;
-	this->Crc|=ms.GetBuffer()[this->Length-2];
+	this->Crc|=ms.GetBuffer()[ms.Capacity()-2];
 	
-	this->Crc2=Crc::CRC16RTU(ms.GetBuffer(),this->Length-2);
+	this->Crc2=Crc::CRC16RTU(ms.GetBuffer(),ms.Capacity()-2);
 	
 	
 	if(this->Crc==this->Crc2)
