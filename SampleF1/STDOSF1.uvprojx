@@ -994,6 +994,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ModbusTest.cpp</FilePath>
             </File>
+            <File>
+              <FileName>StreamTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\StreamTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1985,6 +1990,11 @@
               <FileName>ModbusTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ModbusTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StreamTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\StreamTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
