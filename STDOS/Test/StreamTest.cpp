@@ -15,6 +15,11 @@ void streamtest()
 //	streambuf.Write(bufshort);
 //	streambuf.Write(bufuint);
 	streambuf.Write(bufuint64);
+	
+	streambuf.SetPosition(0);
+//	bufuint64=streambuf.ReadByte();
+//	bufuint64=streambuf.ReadUInt16();
+//	bufuint64=streambuf.ReadUInt32();
+	bufuint64=streambuf.ReadUInt64();
 }
-
 #endif

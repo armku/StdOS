@@ -160,7 +160,21 @@ int Stream::ReadEncodeInt()
 // 读取数据到字节数组，由字节数组指定大小。不包含长度前缀
 int Stream::Read(Buffer &bs)
 {
-    return 0;
+	if(bs.Length())
+	{
+		if(this->_Position+bs.Length()>=this->Length)
+		{
+			return 0;
+		}
+		for(int i=0;i<bs.Length();i++)
+		{
+			bs[i]=*this->Current();
+			this->_Position++;
+		}
+		return bs.Length();
+	}
+	else
+		return 0;
 }
 
 // 写入7位压缩编码整数
@@ -219,20 +233,65 @@ ByteArray Stream::ReadArray(){}
 //	return nullptr;
 //}
 
-int Stream::ReadByte(){}
+int Stream::ReadByte()
+{
+	if(this->_Position+1>=this->Length)
+		return -1;
+	else
+	{
+		byte v3=*this->Current();
+		if(this->Seek(1))
+			return v3;
+		else
+			return 0;
+	}
+}
 ushort Stream::ReadUInt16()
 {	
-    return 0;
+	ushort buf[1];
+	Buffer v3(buf,2);
+	if(this->Read(v3))	
+	{
+		if(!this->Little)
+			buf[0]=_REV16(buf[0]);
+		return buf[0];
+	}
+	else
+		return 0;
 }
 
 uint Stream::ReadUInt32()
 {
-    return 0;
+    uint buf[1];
+	Buffer v3(buf,4);
+	if(this->Read(v3))	
+	{
+		if(!this->Little)
+			buf[0]=_REV(buf[0]);
+		return buf[0];
+	}
+	else
+		return 0;
 }
 
 UInt64 Stream::ReadUInt64()
 {
-    return 0;
+    UInt64 buf[1];
+	Buffer v3(buf,8);
+	if(this->Read(v3))	
+	{
+		if(!this->Little)
+		{
+			uint hi=_REV(buf[0]);
+			uint lo=_REV(buf[0]>>32);
+			buf[0]=hi;
+			buf[0]<<=32;
+			buf[0]|=lo;
+		}
+		return buf[0];
+	}
+	else
+		return 0;
 }
 
 bool Stream::Write(byte value)
