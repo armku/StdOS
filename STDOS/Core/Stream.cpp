@@ -177,9 +177,17 @@ bool Stream::Write(const Buffer &bs)
 	{
 		if(this->CanWrite)
 		{
-			//if(this->_Position+=1;
-			if(1)
-			this->Length=this->_Position;
+			if(bslen+this->_Position<this->Length)
+			{
+				int i;
+				for(i=0;(i<bslen)&&(this->_Position<this->_Capacity);i++)
+				{
+					this->_Buffer[this->_Position]=bs[i];
+					this->_Position++;
+				}
+			}
+			else
+				return false;
 		}
 		else
 		{
@@ -263,7 +271,10 @@ bool Stream::Write(UInt64 value)
 	if(!this->Little)
 	{
 		uint hi=_REV(buf[0]>>32);
-		buf[0]=(_REV(buf[0])<<16)|hi;
+		uint lo=_REV(buf[0]);
+		buf[0]=lo;
+		buf[0]<<=32;
+		buf[0]|=hi;
 	}
 	return this->Write(v3);
 }

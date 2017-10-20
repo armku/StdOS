@@ -73,6 +73,7 @@ SerialPort *sp1;
 void InterruptTest();
 void ADS1232Test();
 void ModbusTest();
+void streamtest();
 int main(void)
 {
     Sys.Init();
@@ -91,6 +92,7 @@ int main(void)
 	
 	IList::Test();
 	//ADS1232Test();
+	streamtest();
 	ModbusTest();
 	//InterruptTest();
 	
