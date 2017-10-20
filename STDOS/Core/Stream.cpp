@@ -172,7 +172,24 @@ int Stream::WriteEncodeInt(int value)
 // 把字节数组的数据写入到数据流。不包含长度前缀
 bool Stream::Write(const Buffer &bs)
 {
-    return false;
+	int bslen=bs.Length();
+	if(bslen)
+	{
+		if(this->CanWrite)
+		{
+			//if(this->_Position+=1;
+			if(1)
+			this->Length=this->_Position;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		return true;
+	}
 }
 
 // 从数据流读取变长数据到字节数组。以压缩整数开头表示长度
