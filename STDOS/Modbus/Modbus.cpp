@@ -62,4 +62,7 @@ void Modbus::Write(Stream &ms)
 	ms.Length=this->Length+4;
 }
 
-void Modbus::SetError(ModbusErrors::Errors error){}
+void Modbus::SetError(ModbusErrors::Errors error)
+{
+	this->Error=error;
+}
