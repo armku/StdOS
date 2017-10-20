@@ -29,11 +29,11 @@ bool Modbus::Read(Stream &ms)
 	{
 		this->Data[i]=ms.GetBuffer()[i+2];
 	}
-	this->Crc=ms.GetBuffer()[this->Length-2];
+	this->Crc=ms.GetBuffer()[this->Length-1];
 	this->Crc<<=8;
-	this->Crc|=ms.GetBuffer()[this->Length-1];
+	this->Crc|=ms.GetBuffer()[this->Length-2];
 	
-	this->Crc2=Crc::CRC16RTU(this->Data,this->Length-2);
+	this->Crc2=Crc::CRC16RTU(ms.GetBuffer(),this->Length-2);
 	
 	
 	if(this->Crc==this->Crc2)
