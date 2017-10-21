@@ -28,7 +28,7 @@ TTTTime now123;
 OutputPort paaa1(PA11);
 void Test12(void *param)
 {
-//	int aa=paa11;aa++;
+    //	int aa=paa11;aa++;
     now123.Seconds = Time.Seconds;
     now123.Milliseconds = Time.Milliseconds;
     now123.Current = Time.Current();
@@ -51,13 +51,13 @@ void LedTask(void *param)
     auto leds = (OutputPort*)param;
     *leds = ! * leds;
     //    led2 = key0;
-	//paaa1=!paaa1;
-	paaa1=0;
+    //paaa1=!paaa1;
+    paaa1 = 0;
 }
 
 uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
-	transport->Write(bs);
+    transport->Write(bs);
     return 0;
 }
 
@@ -81,22 +81,22 @@ int main(void)
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 
-	
 
-	sp1=SerialPort::GetMessagePort();
+
+    sp1 = SerialPort::GetMessagePort();
     SerialPort::GetMessagePort()->Register(OnUsart1Read);
-    
+
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
-    Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
-    Sys.AddTask(Test12, 0, 600, 1000, "Test");
-	
-	IList::Test();
-	ADS1232Test();
-	//streamtest();
-	//ModbusTest();
-	//InterruptTest();
-	
-	//InterruptTest();
-		
+    //Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
+    //Sys.AddTask(Test12, 0, 600, 1000, "Test");
+
+    //IList::Test();
+    ADS1232Test();
+    //streamtest();
+    //ModbusTest();
+    //InterruptTest();
+
+    //InterruptTest();
+
     Sys.Start();
 }

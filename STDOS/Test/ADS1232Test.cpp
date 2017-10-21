@@ -7,7 +7,7 @@
     float ads1232value;
     void InputPort_OpenEXTI(Pin pin, InputPort::Trigger trigger);
     void SetEXIT(int pinIndex, bool enable, InputPort::Trigger trigger = InputPort::Both);
-    void OnPress1232(InputPort &port, bool down)
+    void OnADS1232Read(InputPort &port, bool down)
     {
         SetEXIT(PB14, true, InputPort::Falling);
         //debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
@@ -27,7 +27,7 @@
         ads1232.SetPin(PB14, PB13, PD5);
         ads1232.Init();
 
-        key1232dout.Press = OnPress1232;
+        key1232dout.Press = OnADS1232Read;
         key1232dout.UsePress();
         key1232dout.Open();
 
