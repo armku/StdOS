@@ -91,9 +91,9 @@ int main(void)
     Sys.AddTask(Test12, 0, 600, 1000, "Test");
 	
 	IList::Test();
-	//ADS1232Test();
-	streamtest();
-	ModbusTest();
+	ADS1232Test();
+	//streamtest();
+	//ModbusTest();
 	//InterruptTest();
 	
 	//InterruptTest();
