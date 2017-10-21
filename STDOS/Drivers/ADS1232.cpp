@@ -98,6 +98,7 @@ void ADS1232::SetGain(Gain gain)
 void ADS1232::test()
 {
     //this->dout=!this->dout;
+	this->sclk=0;
 }
 
 void ADS1232::Init()
