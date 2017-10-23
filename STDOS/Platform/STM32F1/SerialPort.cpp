@@ -53,6 +53,7 @@ int SerialPort_Closeing(int result)
 
     #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
 // 真正的串口中断函数
+	extern uint time6cnt;
 void OnUsartReceive(ushort num, void *param)
 {
     SerialPort *sp = (SerialPort*)param;
@@ -81,7 +82,8 @@ void OnUsartReceive(ushort num, void *param)
 //                    }
 //                #endif 
             }
-        }
+			time6cnt++;
+        }		
     }
 }
 void SerialPort::Register(TransportHandler handler, void *param)

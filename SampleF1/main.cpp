@@ -54,18 +54,19 @@ void LedTask(void *param)
     //paaa1=!paaa1;
     paaa1 = 0;
 }
-
+uint time6cnt;
 uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
+	time6cnt++;
     transport->Write(bs);
     return 0;
 }
 
-uint time6cnt;
+
 void TimerTask(void *param)
 {
     static int i = 0;
-    printf("\r\n%d: cnt:%d", i++, time6cnt++);
+    printf("\r\n%d: cnt:%d", i++, time6cnt);
 }
 
 SerialPort *sp1;
@@ -74,6 +75,8 @@ void InterruptTest();
 void ADS1232Test();
 void ModbusTest();
 void streamtest();
+
+SerialPort sp1t(COM1);
 int main(void)
 {
     Sys.Init();
@@ -85,13 +88,16 @@ int main(void)
 
     sp1 = SerialPort::GetMessagePort();
     SerialPort::GetMessagePort()->Register(OnUsart1Read);
+	
+	sp1t.Register(OnUsart1Read);
+	sp1t.Open();
 
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
-    //Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
+    Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
     //Sys.AddTask(Test12, 0, 600, 1000, "Test");
-
+	
     //IList::Test();
-    ADS1232Test();
+    //ADS1232Test();
     //streamtest();
     //ModbusTest();
     //InterruptTest();
