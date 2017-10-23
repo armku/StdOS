@@ -9,7 +9,7 @@
     void SetEXIT(int pinIndex, bool enable, InputPort::Trigger trigger = InputPort::Both);
     void OnADS1232Read(InputPort &port, bool down)
     {
-        SetEXIT(PB14, true, InputPort::Falling);
+        SetEXIT(PB14, false, InputPort::Falling);
         //debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
         ads1232doutcnt++;
 		ads1232.test();
