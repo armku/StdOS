@@ -999,6 +999,36 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\StreamTest.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ESP8266Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_esp8266.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Test\bsp_esp8266.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Test\bsp_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_usart1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Test\bsp_usart1.c</FilePath>
+            </File>
+            <File>
+              <FileName>Common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Test\Common.c</FilePath>
+            </File>
+            <File>
+              <FileName>test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Test\test.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1995,6 +2025,36 @@
               <FileName>StreamTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\StreamTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ESP8266Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_esp8266.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Test\bsp_esp8266.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Test\bsp_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_usart1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Test\bsp_usart1.c</FilePath>
+            </File>
+            <File>
+              <FileName>Common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Test\Common.c</FilePath>
+            </File>
+            <File>
+              <FileName>test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Test\test.c</FilePath>
             </File>
           </Files>
         </Group>
