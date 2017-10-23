@@ -1005,29 +1005,34 @@
               <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>bsp_esp8266.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Test\bsp_esp8266.c</FilePath>
+              <FileName>AD7124Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\AD7124Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>bsp_gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Test\bsp_gpio.c</FilePath>
+              <FileName>bsp_esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\bsp_esp8266.cpp</FilePath>
             </File>
             <File>
-              <FileName>bsp_usart1.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Test\bsp_usart1.c</FilePath>
+              <FileName>bsp_gpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\bsp_gpio.cpp</FilePath>
             </File>
             <File>
-              <FileName>Common.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Test\Common.c</FilePath>
+              <FileName>bsp_usart1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\bsp_usart1.cpp</FilePath>
             </File>
             <File>
-              <FileName>test.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Test\test.c</FilePath>
+              <FileName>Common.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\Common.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2032,29 +2037,34 @@
               <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>bsp_esp8266.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Test\bsp_esp8266.c</FilePath>
+              <FileName>AD7124Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\AD7124Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>bsp_gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Test\bsp_gpio.c</FilePath>
+              <FileName>bsp_esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\bsp_esp8266.cpp</FilePath>
             </File>
             <File>
-              <FileName>bsp_usart1.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Test\bsp_usart1.c</FilePath>
+              <FileName>bsp_gpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\bsp_gpio.cpp</FilePath>
             </File>
             <File>
-              <FileName>Common.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Test\Common.c</FilePath>
+              <FileName>bsp_usart1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\bsp_usart1.cpp</FilePath>
             </File>
             <File>
-              <FileName>test.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Test\test.c</FilePath>
+              <FileName>Common.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\Common.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\test.cpp</FilePath>
             </File>
           </Files>
         </Group>
