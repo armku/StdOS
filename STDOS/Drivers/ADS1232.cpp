@@ -125,16 +125,9 @@ void ADS1232::Init()
 
 int ADS1232::Read()
 {
-    return ;
     int temp = 0;
     byte i = 0;
-    //        for(temp=0;temp<500;temp++)
-    //        {
-    //            if (0 == ADS1232_DOUT)
-    //            {
-    //                break;
-    //            }
-    //        }
+    
     this->sclk = 0;
     for (temp = 0; temp < 1000; temp++)
     {
@@ -164,9 +157,9 @@ int ADS1232::Read()
         }
         //            this->sclk=1; // The 25th SCLK to force DOUT high
         //            this->sclk=0;
-        this->sclk = 1;
+//        this->sclk = 1;
 
-        this->sclk = 0;
+//        this->sclk = 0;
         if (temp &0x800000)
         {
             temp ^= 0Xffffff;
