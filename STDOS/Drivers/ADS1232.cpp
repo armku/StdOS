@@ -18,7 +18,7 @@ void ADS1232::SetPin(Pin pdout, Pin psclk, Pin ppwdn)
     this->sclk.Open();
     this->pwdn.Open();
 
-    //	this->dout = 1;
+    //this->dout = 1;
     this->sclk = 0;
     this->pwdn = 1;
 }
@@ -98,12 +98,19 @@ void ADS1232::SetGain(Gain gain)
 void ADS1232::test()
 {
     //this->dout=!this->dout;
-	this->sclk=0;
+	for(int i=0;i<24;i++)
+	{
+		this->sclk=1;
+	//	Sys.Delay(1);
+		this->sclk=0;
+	//	Sys.Delay(1);
+	}
+	
 }
 
 void ADS1232::Init()
 {
-    //return;
+    return;
     this->pwdn = 0; //复位1232，操作前先复位
     Sys.Delay(20);
     this->sclk = 0;

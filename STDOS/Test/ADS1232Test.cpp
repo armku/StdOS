@@ -13,7 +13,7 @@
         //debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
         ads1232doutcnt++;
 		ads1232.test();
-        ads1232value = ads1232.Read();
+        //ads1232value = ads1232.Read();
         InputPort_OpenEXTI(PB14, InputPort::Falling);
     }
     InputPort key1232dout(PB14, true, InputPort::DOWN);
