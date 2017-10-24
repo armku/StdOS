@@ -19,7 +19,7 @@ char cStr[1500] =
 ESP8266 esp;
 void ESP8266TEST()
 {    
-    esp.ESP8266_Init(); //初始化WiFi模块使用的接口和外设
+    esp.Init(); //初始化WiFi模块使用的接口和外设
     printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
     
 	uint8_t ucStatus;
@@ -30,39 +30,39 @@ void ESP8266TEST()
     };
     printf("\r\n正在配置 ESP8266 ......\r\n");
     macESP8266_CH_ENABLE();
-    esp.ESP8266_AT_Test();
-    esp.ESP8266_Net_Mode_Choose(STA);
-    while (!esp.ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd))
+    esp.AT_Test();
+    esp.Net_Mode_Choose(STA);
+    while (!esp.JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd))
         ;
-    esp.ESP8266_Enable_MultipleId(DISABLE);
-    while (!esp.ESP8266_Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0))
-        ;    while (!esp.ESP8266_UnvarnishSend())
+    esp.Enable_MultipleId(DISABLE);
+    while (!esp.Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0))
+        ;    while (!esp.UnvarnishSend())
         ;    printf("\r\n配置 ESP8266 完毕\r\n");
     while (1)
     {
-        sprintf(cStr, "ABCDEFGHIJKLMNOPQRSTUVWXYZ\r\nABCDEFGHIJKLMNOPQRSTUVWXYZ\r\nABCDEFGHIJKLMNOPQRSTUVWXYZ\r\nABCDEFGHIJKLMNOPQRSTUVWXYZ\r\n");
+        sprintf(cStr, "Hello world!\r\n");
 
-        esp.ESP8266_SendString(ENABLE, cStr, 0, Single_ID_0); //发送数据
+        esp.SendString(ENABLE, cStr, 0, Single_ID_0); //发送数据
         Sys.Sleep(100);
         if (ucTcpClosedFlag)
         //检测是否失去连接
         {
-            esp.ESP8266_ExitUnvarnishSend(); //退出透传模式
+            esp.ExitUnvarnishSend(); //退出透传模式
             do
-                ucStatus = esp.ESP8266_Get_LinkStatus();
+                ucStatus = esp.Get_LinkStatus();
             //获取连接状态
             while (!ucStatus);
             if (ucStatus == 4)
             //确认失去连接后重连
             {
                 printf("\r\n正在重连热点和服务器 ......\r\n");
-                while (!esp.ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd))
+                while (!esp.JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd))
                     ;
-                while (!esp.ESP8266_Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0))
+                while (!esp.Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0))
                     ;
                 printf("\r\n重连热点和服务器成功\r\n");
             }
-            while (!esp.ESP8266_UnvarnishSend());
+            while (!esp.UnvarnishSend());
         }
     }
 }

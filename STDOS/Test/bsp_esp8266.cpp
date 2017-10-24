@@ -4,10 +4,12 @@
 #include <string.h>  
 #include "Sys.h"
 
-
     #define macESP8266_CH_DISABLE()                GPIO_ResetBits ( GPIOG, GPIO_Pin_13 )
     #define macESP8266_RST_HIGH_LEVEL()            GPIO_SetBits ( GPIOG, GPIO_Pin_14 )
     #define macESP8266_RST_LOW_LEVEL()             GPIO_ResetBits ( GPIOG, GPIO_Pin_14 )
+	
+	#define macESP8266_Usart( fmt, ... )           USART_printf ( USART3, fmt, ##__VA_ARGS__ ) 
+    #define macPC_Usart( fmt, ... )                printf ( fmt, ##__VA_ARGS__ )   
 
 struct STRUCT_USARTx_Fram strEsp8266_Fram_Record = 
 {
@@ -18,10 +20,10 @@ struct STRUCT_USARTx_Fram strEsp8266_Fram_Record =
  * @param  无
  * @retval 无
  */
-void ESP8266::ESP8266_Init(void)
+void ESP8266::Init(void)
 {
-    ESP8266_GPIO_Config();
-    ESP8266_USART_Config();
+    this->GPIO_Config();
+    this->USART_Config();
     macESP8266_RST_HIGH_LEVEL();
     macESP8266_CH_DISABLE();
 }
@@ -30,7 +32,7 @@ void ESP8266::ESP8266_Init(void)
  * @param  无
  * @retval 无
  */
-void ESP8266::ESP8266_GPIO_Config(void)
+void ESP8266::GPIO_Config(void)
 {
     /*定义一个GPIO_InitTypeDef类型的结构体*/
     GPIO_InitTypeDef GPIO_InitStructure;
@@ -50,7 +52,7 @@ void ESP8266::ESP8266_GPIO_Config(void)
  * @param  无
  * @retval 无
  */
-void ESP8266::ESP8266_USART_Config(void)
+void ESP8266::USART_Config(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
     USART_InitTypeDef USART_InitStructure;
@@ -78,7 +80,7 @@ void ESP8266::ESP8266_USART_Config(void)
     /* 中断配置 */
     USART_ITConfig(USART3, USART_IT_RXNE, ENABLE); //使能串口接收中断 
     USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 	
-    ESP8266_USART_NVIC_Configuration();
+    this->USART_NVIC_Configuration();
     USART_Cmd(USART3, ENABLE);
 }
 
@@ -88,7 +90,7 @@ void ESP8266::ESP8266_USART_Config(void)
  * @param  无
  * @retval 无
  */
-void ESP8266::ESP8266_USART_NVIC_Configuration(void)
+void ESP8266::USART_NVIC_Configuration(void)
 {
     NVIC_InitTypeDef NVIC_InitStructure;
 
@@ -110,7 +112,7 @@ void ESP8266::ESP8266_USART_NVIC_Configuration(void)
  * 返回  : 无
  * 调用  ：被 ESP8266_AT_Test 调用
  */
-void ESP8266::ESP8266_Rst(void)
+void ESP8266::Rst(void)
 {
     #if 0
         ESP8266_Cmd("AT+RST", "OK", "ready", 2500);
@@ -131,7 +133,7 @@ void ESP8266::ESP8266_Rst(void)
  *         0，指令发送失败
  * 调用  ：被外部调用
  */
-bool ESP8266::ESP8266_Cmd(char *cmd, char *reply1, char *reply2, u32 waittime){
+bool ESP8266::Cmd(char *cmd, char *reply1, char *reply2, u32 waittime){
     strEsp8266_Fram_Record .InfBit .FramLength = 0; //从新开始接收新的数据包
     macESP8266_Usart("%s\r\n", cmd);
     if ((reply1 == 0) && (reply2 == 0))
@@ -164,7 +166,7 @@ bool ESP8266::ESP8266_Cmd(char *cmd, char *reply1, char *reply2, u32 waittime){
 //	while ( ! ESP8266_Cmd ( "AT", "OK", NULL, 500 ) ) ESP8266_Rst ();  	
 
 //}
-void ESP8266::ESP8266_AT_Test(void)
+void ESP8266::AT_Test(void)
 {
     char count = 0;
 
@@ -172,9 +174,9 @@ void ESP8266::ESP8266_AT_Test(void)
     Sys.Sleep(1000);
     while (count < 10)
     {
-        if (ESP8266_Cmd("AT", "OK", NULL, 500))
+        if (this->Cmd("AT", "OK", NULL, 500))
             return ;
-        ESP8266_Rst();
+        this->Rst();
         ++count;
     }
 }
@@ -186,18 +188,18 @@ void ESP8266::ESP8266_AT_Test(void)
  *         0，选择失败
  * 调用  ：被外部调用
  */
-bool ESP8266::ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode)
+bool ESP8266::Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode)
 {
     switch (enumMode)
     {
         case STA:
-            return ESP8266_Cmd("AT+CWMODE=1", "OK", "no change", 2500);
+            return this->Cmd("AT+CWMODE=1", "OK", "no change", 2500);
 
         case AP:
-            return ESP8266_Cmd("AT+CWMODE=2", "OK", "no change", 2500);
+            return this->Cmd("AT+CWMODE=2", "OK", "no change", 2500);
 
         case STA_AP:
-            return ESP8266_Cmd("AT+CWMODE=3", "OK", "no change", 2500);
+            return this->Cmd("AT+CWMODE=3", "OK", "no change", 2500);
 
         default:
             return false;
@@ -213,11 +215,11 @@ bool ESP8266::ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode)
  *         0，连接失败
  * 调用  ：被外部调用
  */
-bool ESP8266::ESP8266_JoinAP(char *pSSID, char *pPassWord)
+bool ESP8266::JoinAP(char *pSSID, char *pPassWord)
 {
     char cCmd[120];
     sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", pSSID, pPassWord);
-    return ESP8266_Cmd(cCmd, "OK", NULL, 5000);
+    return this->Cmd(cCmd, "OK", NULL, 5000);
 }
 /*
  * 函数名：ESP8266_BuildAP
@@ -229,11 +231,11 @@ bool ESP8266::ESP8266_JoinAP(char *pSSID, char *pPassWord)
  *         0，创建失败
  * 调用  ：被外部调用
  */
-bool ESP8266::ESP8266_BuildAP(char *pSSID, char *pPassWord, ENUM_AP_PsdMode_TypeDef enunPsdMode)
+bool ESP8266::BuildAP(char *pSSID, char *pPassWord, ENUM_AP_PsdMode_TypeDef enunPsdMode)
 {
     char cCmd[120];
     sprintf(cCmd, "AT+CWSAP=\"%s\",\"%s\",1,%d", pSSID, pPassWord, enunPsdMode);
-    return ESP8266_Cmd(cCmd, "OK", 0, 1000);
+    return this->Cmd(cCmd, "OK", 0, 1000);
 }
 /*
  * 函数名：ESP8266_Enable_MultipleId
@@ -243,11 +245,11 @@ bool ESP8266::ESP8266_BuildAP(char *pSSID, char *pPassWord, ENUM_AP_PsdMode_Type
  *         0，配置失败
  * 调用  ：被外部调用
  */
-bool ESP8266::ESP8266_Enable_MultipleId(FunctionalState enumEnUnvarnishTx)
+bool ESP8266::Enable_MultipleId(FunctionalState enumEnUnvarnishTx)
 {
     char cStr[20];
     sprintf(cStr, "AT+CIPMUX=%d", (enumEnUnvarnishTx ? 1 : 0));
-    return ESP8266_Cmd(cStr, "OK", 0, 500);
+    return this->Cmd(cStr, "OK", 0, 500);
 }
 /*
  * 函数名：ESP8266_Link_Server
@@ -260,7 +262,7 @@ bool ESP8266::ESP8266_Enable_MultipleId(FunctionalState enumEnUnvarnishTx)
  *         0，连接失败
  * 调用  ：被外部调用
  */
-bool ESP8266::ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char *ip, char *ComNum, ENUM_ID_NO_TypeDef id)
+bool ESP8266::Link_Server(ENUM_NetPro_TypeDef enumE, char *ip, char *ComNum, ENUM_ID_NO_TypeDef id)
 {
     char cStr[100] = 
     {
@@ -283,7 +285,7 @@ bool ESP8266::ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char *ip, char *Com
 
     else
         sprintf(cCmd, "AT+CIPSTART=%s", cStr);
-    return ESP8266_Cmd(cCmd, "OK", "ALREAY CONNECT", 4000);
+    return this->Cmd(cCmd, "OK", "ALREAY CONNECT", 4000);
 }
 
 
@@ -297,7 +299,7 @@ bool ESP8266::ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char *ip, char *Com
  *         0，操作失败
  * 调用  ：被外部调用
  */
-bool ESP8266::ESP8266_StartOrShutServer(FunctionalState enumMode, char *pPortNum, char *pTimeOver)
+bool ESP8266::StartOrShutServer(FunctionalState enumMode, char *pPortNum, char *pTimeOver)
 {
     char cCmd1[120], cCmd2[120];
 
@@ -305,12 +307,12 @@ bool ESP8266::ESP8266_StartOrShutServer(FunctionalState enumMode, char *pPortNum
     {
         sprintf(cCmd1, "AT+CIPSERVER=%d,%s", 1, pPortNum);
         sprintf(cCmd2, "AT+CIPSTO=%s", pTimeOver);
-        return (ESP8266_Cmd(cCmd1, "OK", 0, 500) && ESP8266_Cmd(cCmd2, "OK", 0, 500));
+        return (this->Cmd(cCmd1, "OK", 0, 500) && this->Cmd(cCmd2, "OK", 0, 500));
     }
     else
     {
         sprintf(cCmd1, "AT+CIPSERVER=%d,%s", 0, pPortNum);
-        return ESP8266_Cmd(cCmd1, "OK", 0, 500);
+        return this->Cmd(cCmd1, "OK", 0, 500);
     }
 }
 /*
@@ -323,9 +325,9 @@ bool ESP8266::ESP8266_StartOrShutServer(FunctionalState enumMode, char *pPortNum
  *         0，获取状态失败
  * 调用  ：被外部调用
  */
-uint8_t ESP8266::ESP8266_Get_LinkStatus(void)
+uint8_t ESP8266::Get_LinkStatus(void)
 {
-    if (ESP8266_Cmd("AT+CIPSTATUS", "OK", 0, 500))
+    if (this->Cmd("AT+CIPSTATUS", "OK", 0, 500))
     {
         if (strstr(strEsp8266_Fram_Record .Data_RX_BUF, "STATUS:2\r\n"))
             return 2;
@@ -343,10 +345,10 @@ uint8_t ESP8266::ESP8266_Get_LinkStatus(void)
  * 返回  : 端口（Id）的连接状态，低5位为有效位，分别对应Id5~0，某位若置1表该Id建立了连接，若被清0表该Id未建立连接
  * 调用  ：被外部调用
  */
-uint8_t ESP8266::ESP8266_Get_IdLinkStatus(void)
+uint8_t ESP8266::Get_IdLinkStatus(void)
 {
     uint8_t ucIdLinkStatus = 0x00;
-    if (ESP8266_Cmd("AT+CIPSTATUS", "OK", 0, 500))
+    if (this->Cmd("AT+CIPSTATUS", "OK", 0, 500))
     {
         if (strstr(strEsp8266_Fram_Record .Data_RX_BUF, "+CIPSTATUS:0,"))
             ucIdLinkStatus |= 0x01;
@@ -383,11 +385,11 @@ uint8_t ESP8266::ESP8266_Get_IdLinkStatus(void)
  *         1，获取成功
  * 调用  ：被外部调用
  */
-uint8_t ESP8266::ESP8266_Inquire_ApIp(char *pApIp, uint8_t ucArrayLength)
+uint8_t ESP8266::Inquire_ApIp(char *pApIp, uint8_t ucArrayLength)
 {
     char uc;
     char *pCh;
-    ESP8266_Cmd("AT+CIFSR", "OK", 0, 500);
+    this->Cmd("AT+CIFSR", "OK", 0, 500);
     pCh = strstr(strEsp8266_Fram_Record .Data_RX_BUF, "APIP,\"");
     if (pCh)
         pCh += 6;
@@ -412,11 +414,11 @@ uint8_t ESP8266::ESP8266_Inquire_ApIp(char *pApIp, uint8_t ucArrayLength)
  *         0，配置失败
  * 调用  ：被外部调用
  */
-bool ESP8266::ESP8266_UnvarnishSend(void)
+bool ESP8266::UnvarnishSend(void)
 {
-    if (!ESP8266_Cmd("AT+CIPMODE=1", "OK", 0, 500))
+    if (!this->Cmd("AT+CIPMODE=1", "OK", 0, 500))
         return false;
-    return ESP8266_Cmd("AT+CIPSEND", "OK", ">", 500);
+    return this->Cmd("AT+CIPSEND", "OK", ">", 500);
 }
 /*
  * 函数名：ESP8266_ExitUnvarnishSend
@@ -425,7 +427,7 @@ bool ESP8266::ESP8266_UnvarnishSend(void)
  * 返回  : 无
  * 调用  ：被外部调用
  */
-void ESP8266::ESP8266_ExitUnvarnishSend(void)
+void ESP8266::ExitUnvarnishSend(void)
 {
     Sys.Sleep(1000);
     macESP8266_Usart("+++");
@@ -442,7 +444,7 @@ void ESP8266::ESP8266_ExitUnvarnishSend(void)
  *         0，发送失败
  * 调用  ：被外部调用
  */
-bool ESP8266::ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char *pStr, u32 ulStrLength, ENUM_ID_NO_TypeDef ucId)
+bool ESP8266::SendString(FunctionalState enumEnUnvarnishTx, char *pStr, u32 ulStrLength, ENUM_ID_NO_TypeDef ucId)
 {
     char cStr[20];
     bool bRet = false;
@@ -457,8 +459,8 @@ bool ESP8266::ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char *pStr, 
             sprintf(cStr, "AT+CIPSEND=%d,%d", ucId, ulStrLength + 2);
         else
             sprintf(cStr, "AT+CIPSEND=%d", ulStrLength + 2);
-        ESP8266_Cmd(cStr, "> ", 0, 1000);
-        bRet = ESP8266_Cmd(pStr, "SEND OK", 0, 1000);
+        this->Cmd(cStr, "> ", 0, 1000);
+        bRet = this->Cmd(pStr, "SEND OK", 0, 1000);
     }
     return bRet;
 }
@@ -469,7 +471,7 @@ bool ESP8266::ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char *pStr, 
  * 返回  : 接收到的字符串首地址
  * 调用  ：被外部调用
  */
-char *ESP8266::ESP8266_ReceiveString(FunctionalState enumEnUnvarnishTx)
+char *ESP8266::ReceiveString(FunctionalState enumEnUnvarnishTx)
 {
     char *pRecStr = 0;
     strEsp8266_Fram_Record .InfBit .FramLength = 0;
