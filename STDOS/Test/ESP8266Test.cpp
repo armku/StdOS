@@ -14,10 +14,10 @@ char cStr[1500] =
 {
     0
 };
-void ESP8266_Init(); //初始化WiFi模块使用的接口和外设
+ESP8266 esp;
 void ESP8266TEST()
 {    
-    ESP8266_Init(); //初始化WiFi模块使用的接口和外设
+    esp.ESP8266_Init(); //初始化WiFi模块使用的接口和外设
     printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
     
 	uint8_t ucStatus;
@@ -28,13 +28,13 @@ void ESP8266TEST()
     };
     printf("\r\n正在配置 ESP8266 ......\r\n");
     macESP8266_CH_ENABLE();
-    ESP8266_AT_Test();
+    esp.ESP8266_AT_Test();
     ESP8266_Net_Mode_Choose(STA);
     while (!ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd))
         ;
     ESP8266_Enable_MultipleId(DISABLE);
     while (!ESP8266_Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0))
-        ;    while (!ESP8266_UnvarnishSend())
+        ;    while (!esp.ESP8266_UnvarnishSend())
         ;    printf("\r\n配置 ESP8266 完毕\r\n");
     while (1)
     {
@@ -45,9 +45,9 @@ void ESP8266TEST()
         if (ucTcpClosedFlag)
         //检测是否失去连接
         {
-            ESP8266_ExitUnvarnishSend(); //退出透传模式
+            esp.ESP8266_ExitUnvarnishSend(); //退出透传模式
             do
-                ucStatus = ESP8266_Get_LinkStatus();
+                ucStatus = esp.ESP8266_Get_LinkStatus();
             //获取连接状态
             while (!ucStatus);
             if (ucStatus == 4)
@@ -60,7 +60,7 @@ void ESP8266TEST()
                     ;
                 printf("\r\n重连热点和服务器成功\r\n");
             }
-            while (!ESP8266_UnvarnishSend());
+            while (!esp.ESP8266_UnvarnishSend());
         }
     }
 }

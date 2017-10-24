@@ -4,8 +4,6 @@
 #include <string.h>  
 #include "Sys.h"
 
-
-
 struct STRUCT_USARTx_Fram strEsp8266_Fram_Record = 
 {
     0
@@ -15,7 +13,7 @@ struct STRUCT_USARTx_Fram strEsp8266_Fram_Record =
  * @param  无
  * @retval 无
  */
-void ESP8266_Init(void)
+void ESP8266::ESP8266_Init(void)
 {
     ESP8266_GPIO_Config();
     ESP8266_USART_Config();
@@ -107,7 +105,7 @@ static void ESP8266_USART_NVIC_Configuration(void)
  * 返回  : 无
  * 调用  ：被 ESP8266_AT_Test 调用
  */
-void ESP8266_Rst(void)
+void ESP8266::ESP8266_Rst(void)
 {
     #if 0
         ESP8266_Cmd("AT+RST", "OK", "ready", 2500);
@@ -161,7 +159,7 @@ bool ESP8266_Cmd(char *cmd, char *reply1, char *reply2, u32 waittime){
 //	while ( ! ESP8266_Cmd ( "AT", "OK", NULL, 500 ) ) ESP8266_Rst ();  	
 
 //}
-void ESP8266_AT_Test(void)
+void ESP8266::ESP8266_AT_Test(void)
 {
     char count = 0;
 
@@ -320,7 +318,7 @@ bool ESP8266_StartOrShutServer(FunctionalState enumMode, char *pPortNum, char *p
  *         0，获取状态失败
  * 调用  ：被外部调用
  */
-uint8_t ESP8266_Get_LinkStatus(void)
+uint8_t ESP8266::ESP8266_Get_LinkStatus(void)
 {
     if (ESP8266_Cmd("AT+CIPSTATUS", "OK", 0, 500))
     {
@@ -340,7 +338,7 @@ uint8_t ESP8266_Get_LinkStatus(void)
  * 返回  : 端口（Id）的连接状态，低5位为有效位，分别对应Id5~0，某位若置1表该Id建立了连接，若被清0表该Id未建立连接
  * 调用  ：被外部调用
  */
-uint8_t ESP8266_Get_IdLinkStatus(void)
+uint8_t ESP8266::ESP8266_Get_IdLinkStatus(void)
 {
     uint8_t ucIdLinkStatus = 0x00;
     if (ESP8266_Cmd("AT+CIPSTATUS", "OK", 0, 500))
@@ -409,7 +407,7 @@ uint8_t ESP8266_Inquire_ApIp(char *pApIp, uint8_t ucArrayLength)
  *         0，配置失败
  * 调用  ：被外部调用
  */
-bool ESP8266_UnvarnishSend(void)
+bool ESP8266::ESP8266_UnvarnishSend(void)
 {
     if (!ESP8266_Cmd("AT+CIPMODE=1", "OK", 0, 500))
         return false;
@@ -422,7 +420,7 @@ bool ESP8266_UnvarnishSend(void)
  * 返回  : 无
  * 调用  ：被外部调用
  */
-void ESP8266_ExitUnvarnishSend(void)
+void ESP8266::ESP8266_ExitUnvarnishSend(void)
 {
     Sys.Sleep(1000);
     macESP8266_Usart("+++");
