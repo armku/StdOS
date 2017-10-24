@@ -67,7 +67,7 @@ static void ESP8266_USART_Config(void)
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
     GPIO_Init(macESP8266_USART_RX_PORT, &GPIO_InitStructure);
     /* USART1 mode config */
-    USART_InitStructure.USART_BaudRate = macESP8266_USART_BAUD_RATE;
+    USART_InitStructure.USART_BaudRate = 115200;
     USART_InitStructure.USART_WordLength = USART_WordLength_8b;
     USART_InitStructure.USART_StopBits = USART_StopBits_1;
     USART_InitStructure.USART_Parity = USART_Parity_No;

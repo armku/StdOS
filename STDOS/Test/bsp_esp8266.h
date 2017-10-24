@@ -1,35 +1,22 @@
 #ifndef  __BSP_ESP8266_H
 #define	 __BSP_ESP8266_H
-
-
-
 #include "stm32f10x.h"
 #include "common.h"
 #include <stdio.h>
-#include <stdbool.h>
-
-
 
 #if defined ( __CC_ARM   )
 #pragma anon_unions
 #endif
-
-
-
 /******************************* ESP8266 Êý¾ÝÀàÐÍ¶¨Òå ***************************/
 typedef enum{
 	STA,
   AP,
   STA_AP  
 } ENUM_Net_ModeTypeDef;
-
-
 typedef enum{
 	 enumTCP,
 	 enumUDP,
 } ENUM_NetPro_TypeDef;
-	
-
 typedef enum{
 	Multiple_ID_0 = 0,
 	Multiple_ID_1 = 1,
@@ -38,8 +25,6 @@ typedef enum{
 	Multiple_ID_4 = 4,
 	Single_ID_0 = 5,
 } ENUM_ID_NO_TypeDef;
-	
-
 typedef enum{
 	OPEN = 0,
 	WEP = 1,
@@ -47,9 +32,6 @@ typedef enum{
 	WPA2_PSK = 3,
 	WPA_WPA2_PSK = 4,
 } ENUM_AP_PsdMode_TypeDef;
-
-
-
 /******************************* ESP8266 Íâ²¿È«¾Ö±äÁ¿ÉùÃ÷ ***************************/
 #define RX_BUF_MAX_LEN     1024                                     //×î´ó½ÓÊÕ»º´æ×Ö½ÚÊý
 
@@ -67,23 +49,15 @@ extern struct  STRUCT_USARTx_Fram                                  //´®¿ÚÊý¾ÝÖ¡µ
 	
 } strEsp8266_Fram_Record;
 
-
-
 /******************************** ESP8266 Á¬½ÓÒý½Å¶¨Òå ***********************************/
 #define      macESP8266_CH_PD_APBxClock_FUN                   RCC_APB2PeriphClockCmd
 #define      macESP8266_CH_PD_CLK                             RCC_APB2Periph_GPIOG  
 #define      macESP8266_CH_PD_PORT                            GPIOG
 #define      macESP8266_CH_PD_PIN                             GPIO_Pin_13
-
 #define      macESP8266_RST_APBxClock_FUN                     RCC_APB2PeriphClockCmd
 #define      macESP8266_RST_CLK                               RCC_APB2Periph_GPIOG
 #define      macESP8266_RST_PORT                              GPIOG
 #define      macESP8266_RST_PIN                               GPIO_Pin_14
-
- 
-
-#define      macESP8266_USART_BAUD_RATE                       115200
-
 #define      macESP8266_USARTx                                USART3
 #define      macESP8266_USART_APBxClock_FUN                   RCC_APB1PeriphClockCmd
 #define      macESP8266_USART_CLK                             RCC_APB1Periph_USART3
@@ -95,22 +69,14 @@ extern struct  STRUCT_USARTx_Fram                                  //´®¿ÚÊý¾ÝÖ¡µ
 #define      macESP8266_USART_RX_PIN                          GPIO_Pin_11
 #define      macESP8266_USART_IRQ                             USART3_IRQn
 #define      macESP8266_USART_INT_FUN                         USART3_IRQHandler
-
-
-
 /*********************************************** ESP8266 º¯Êýºê¶¨Òå *******************************************/
 #define     macESP8266_Usart( fmt, ... )           USART_printf ( macESP8266_USARTx, fmt, ##__VA_ARGS__ ) 
 #define     macPC_Usart( fmt, ... )                printf ( fmt, ##__VA_ARGS__ )
 //#define     macPC_Usart( fmt, ... )                
-
 #define     macESP8266_CH_ENABLE()                 GPIO_SetBits ( macESP8266_CH_PD_PORT, macESP8266_CH_PD_PIN )
 #define     macESP8266_CH_DISABLE()                GPIO_ResetBits ( macESP8266_CH_PD_PORT, macESP8266_CH_PD_PIN )
-
 #define     macESP8266_RST_HIGH_LEVEL()            GPIO_SetBits ( macESP8266_RST_PORT, macESP8266_RST_PIN )
 #define     macESP8266_RST_LOW_LEVEL()             GPIO_ResetBits ( macESP8266_RST_PORT, macESP8266_RST_PIN )
-
-
-
 /****************************************** ESP8266 º¯ÊýÉùÃ÷ ***********************************************/
 void                     ESP8266_Init                        ( void );
 void                     ESP8266_Rst                         ( void );
@@ -129,9 +95,4 @@ bool                     ESP8266_UnvarnishSend               ( void );
 void                     ESP8266_ExitUnvarnishSend           ( void );
 bool                     ESP8266_SendString                  ( FunctionalState enumEnUnvarnishTx, char * pStr, u32 ulStrLength, ENUM_ID_NO_TypeDef ucId );
 char *                   ESP8266_ReceiveString               ( FunctionalState enumEnUnvarnishTx );
-
-
-
 #endif
-
-
