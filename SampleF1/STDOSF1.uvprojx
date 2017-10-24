@@ -1015,11 +1015,6 @@
               <FilePath>..\STDOS\Test\StreamTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>ESP8266Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD7124Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AD7124Test.cpp</FilePath>
@@ -1033,6 +1028,11 @@
               <FileName>Common.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\Common.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ESP8266Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2047,11 +2047,6 @@
               <FilePath>..\STDOS\Test\StreamTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>ESP8266Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD7124Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AD7124Test.cpp</FilePath>
@@ -2065,6 +2060,11 @@
               <FileName>Common.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\Common.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ESP8266Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
             </File>
           </Files>
         </Group>

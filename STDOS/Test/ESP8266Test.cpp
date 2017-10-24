@@ -2,9 +2,6 @@
 #include "stm32f10x.h"
 #include <stdarg.h>
 #include "bsp_esp8266.h"
-#include <stdio.h>  
-#include <string.h>  
-#include <stdbool.h>
 
 #define      macUser_ESP8266_ApSsid                       "NETGEAR77"                //要连接的热点的名称
 #define      macUser_ESP8266_ApPwd                        "18353217097"           //要连接的热点的密钥
