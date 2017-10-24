@@ -12,7 +12,6 @@
         SetEXIT(PB14, false, InputPort::Falling);
         //debug_printf("Press P%c%d down=%d\r\n", _PIN_NAME(port._Pin), down);
         ads1232doutcnt++;
-		//ads1232.test();
         ads1232value = ads1232.Read();
         InputPort_OpenEXTI(PB14, InputPort::Falling);
     }
@@ -20,8 +19,7 @@
 
     void Show1232cnt(void *param)
     {
-        debug_printf("\r\n ADS1232CNT:%d value:%f", ads1232doutcnt,ads1232value);
-        ads1232.test();
+        debug_printf("\r\n ADS1232CNT:%d value:%f", ads1232doutcnt,ads1232value/0X1000000*1.25);
     }
     void ADS1232Test()
     {

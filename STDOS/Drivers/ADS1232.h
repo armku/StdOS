@@ -22,7 +22,6 @@
             void SetSpeed(Speed speed = SPEED10);
             void SetGain(Gain gain = GAIN1);
             int Read();
-            void test();
         private:
             InputPort dout;
             OutputPort sclk;
