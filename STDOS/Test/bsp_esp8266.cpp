@@ -4,6 +4,11 @@
 #include <string.h>  
 #include "Sys.h"
 
+
+    #define macESP8266_CH_DISABLE()                GPIO_ResetBits ( GPIOG, GPIO_Pin_13 )
+    #define macESP8266_RST_HIGH_LEVEL()            GPIO_SetBits ( GPIOG, GPIO_Pin_14 )
+    #define macESP8266_RST_LOW_LEVEL()             GPIO_ResetBits ( GPIOG, GPIO_Pin_14 )
+
 struct STRUCT_USARTx_Fram strEsp8266_Fram_Record = 
 {
     0
@@ -126,7 +131,7 @@ void ESP8266::ESP8266_Rst(void)
  *         0，指令发送失败
  * 调用  ：被外部调用
  */
-bool ESP8266_Cmd(char *cmd, char *reply1, char *reply2, u32 waittime){
+bool ESP8266::ESP8266_Cmd(char *cmd, char *reply1, char *reply2, u32 waittime){
     strEsp8266_Fram_Record .InfBit .FramLength = 0; //从新开始接收新的数据包
     macESP8266_Usart("%s\r\n", cmd);
     if ((reply1 == 0) && (reply2 == 0))
@@ -181,7 +186,7 @@ void ESP8266::ESP8266_AT_Test(void)
  *         0，选择失败
  * 调用  ：被外部调用
  */
-bool ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode)
+bool ESP8266::ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode)
 {
     switch (enumMode)
     {
@@ -208,7 +213,7 @@ bool ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode)
  *         0，连接失败
  * 调用  ：被外部调用
  */
-bool ESP8266_JoinAP(char *pSSID, char *pPassWord)
+bool ESP8266::ESP8266_JoinAP(char *pSSID, char *pPassWord)
 {
     char cCmd[120];
     sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", pSSID, pPassWord);
@@ -224,7 +229,7 @@ bool ESP8266_JoinAP(char *pSSID, char *pPassWord)
  *         0，创建失败
  * 调用  ：被外部调用
  */
-bool ESP8266_BuildAP(char *pSSID, char *pPassWord, ENUM_AP_PsdMode_TypeDef enunPsdMode)
+bool ESP8266::ESP8266_BuildAP(char *pSSID, char *pPassWord, ENUM_AP_PsdMode_TypeDef enunPsdMode)
 {
     char cCmd[120];
     sprintf(cCmd, "AT+CWSAP=\"%s\",\"%s\",1,%d", pSSID, pPassWord, enunPsdMode);
@@ -238,7 +243,7 @@ bool ESP8266_BuildAP(char *pSSID, char *pPassWord, ENUM_AP_PsdMode_TypeDef enunP
  *         0，配置失败
  * 调用  ：被外部调用
  */
-bool ESP8266_Enable_MultipleId(FunctionalState enumEnUnvarnishTx)
+bool ESP8266::ESP8266_Enable_MultipleId(FunctionalState enumEnUnvarnishTx)
 {
     char cStr[20];
     sprintf(cStr, "AT+CIPMUX=%d", (enumEnUnvarnishTx ? 1 : 0));
@@ -255,7 +260,7 @@ bool ESP8266_Enable_MultipleId(FunctionalState enumEnUnvarnishTx)
  *         0，连接失败
  * 调用  ：被外部调用
  */
-bool ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char *ip, char *ComNum, ENUM_ID_NO_TypeDef id)
+bool ESP8266::ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char *ip, char *ComNum, ENUM_ID_NO_TypeDef id)
 {
     char cStr[100] = 
     {
@@ -292,7 +297,7 @@ bool ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char *ip, char *ComNum, ENUM
  *         0，操作失败
  * 调用  ：被外部调用
  */
-bool ESP8266_StartOrShutServer(FunctionalState enumMode, char *pPortNum, char *pTimeOver)
+bool ESP8266::ESP8266_StartOrShutServer(FunctionalState enumMode, char *pPortNum, char *pTimeOver)
 {
     char cCmd1[120], cCmd2[120];
 
@@ -378,7 +383,7 @@ uint8_t ESP8266::ESP8266_Get_IdLinkStatus(void)
  *         1，获取成功
  * 调用  ：被外部调用
  */
-uint8_t ESP8266_Inquire_ApIp(char *pApIp, uint8_t ucArrayLength)
+uint8_t ESP8266::ESP8266_Inquire_ApIp(char *pApIp, uint8_t ucArrayLength)
 {
     char uc;
     char *pCh;
@@ -437,7 +442,7 @@ void ESP8266::ESP8266_ExitUnvarnishSend(void)
  *         0，发送失败
  * 调用  ：被外部调用
  */
-bool ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char *pStr, u32 ulStrLength, ENUM_ID_NO_TypeDef ucId)
+bool ESP8266::ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char *pStr, u32 ulStrLength, ENUM_ID_NO_TypeDef ucId)
 {
     char cStr[20];
     bool bRet = false;
@@ -464,7 +469,7 @@ bool ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char *pStr, u32 ulStr
  * 返回  : 接收到的字符串首地址
  * 调用  ：被外部调用
  */
-char *ESP8266_ReceiveString(FunctionalState enumEnUnvarnishTx)
+char *ESP8266::ESP8266_ReceiveString(FunctionalState enumEnUnvarnishTx)
 {
     char *pRecStr = 0;
     strEsp8266_Fram_Record .InfBit .FramLength = 0;

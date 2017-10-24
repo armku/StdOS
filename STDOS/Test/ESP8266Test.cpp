@@ -3,6 +3,8 @@
 #include <stdarg.h>
 #include "bsp_esp8266.h"
 
+#define macESP8266_CH_ENABLE()                 GPIO_SetBits ( GPIOG, GPIO_Pin_13 )
+
 #define      macUser_ESP8266_ApSsid                       "NETGEAR77"                //要连接的热点的名称
 #define      macUser_ESP8266_ApPwd                        "18353217097"           //要连接的热点的密钥
 #define      macUser_ESP8266_TcpServer_IP                 "121.42.164.17"      //要连接的服务器的 IP
@@ -29,18 +31,18 @@ void ESP8266TEST()
     printf("\r\n正在配置 ESP8266 ......\r\n");
     macESP8266_CH_ENABLE();
     esp.ESP8266_AT_Test();
-    ESP8266_Net_Mode_Choose(STA);
-    while (!ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd))
+    esp.ESP8266_Net_Mode_Choose(STA);
+    while (!esp.ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd))
         ;
-    ESP8266_Enable_MultipleId(DISABLE);
-    while (!ESP8266_Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0))
+    esp.ESP8266_Enable_MultipleId(DISABLE);
+    while (!esp.ESP8266_Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0))
         ;    while (!esp.ESP8266_UnvarnishSend())
         ;    printf("\r\n配置 ESP8266 完毕\r\n");
     while (1)
     {
         sprintf(cStr, "ABCDEFGHIJKLMNOPQRSTUVWXYZ\r\nABCDEFGHIJKLMNOPQRSTUVWXYZ\r\nABCDEFGHIJKLMNOPQRSTUVWXYZ\r\nABCDEFGHIJKLMNOPQRSTUVWXYZ\r\n");
 
-        ESP8266_SendString(ENABLE, cStr, 0, Single_ID_0); //发送数据
+        esp.ESP8266_SendString(ENABLE, cStr, 0, Single_ID_0); //发送数据
         Sys.Sleep(100);
         if (ucTcpClosedFlag)
         //检测是否失去连接
@@ -54,9 +56,9 @@ void ESP8266TEST()
             //确认失去连接后重连
             {
                 printf("\r\n正在重连热点和服务器 ......\r\n");
-                while (!ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd))
+                while (!esp.ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd))
                     ;
-                while (!ESP8266_Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0))
+                while (!esp.ESP8266_Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0))
                     ;
                 printf("\r\n重连热点和服务器成功\r\n");
             }
