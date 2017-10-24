@@ -1034,11 +1034,6 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\Common.cpp</FilePath>
             </File>
-            <File>
-              <FileName>test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\test.cpp</FilePath>
-            </File>
           </Files>
         </Group>
       </Groups>
@@ -2070,11 +2065,6 @@
               <FileName>Common.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\Common.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\test.cpp</FilePath>
             </File>
           </Files>
         </Group>
