@@ -48,35 +48,19 @@ extern struct  STRUCT_USARTx_Fram                                  //´®¿ÚÊý¾ÝÖ¡µ
   }; 
 	
 } strEsp8266_Fram_Record;
-
 /******************************** ESP8266 Á¬½ÓÒý½Å¶¨Òå ***********************************/
-#define      macESP8266_CH_PD_APBxClock_FUN                   RCC_APB2PeriphClockCmd
-#define      macESP8266_CH_PD_CLK                             RCC_APB2Periph_GPIOG  
-#define      macESP8266_CH_PD_PORT                            GPIOG
-#define      macESP8266_CH_PD_PIN                             GPIO_Pin_13
-#define      macESP8266_RST_APBxClock_FUN                     RCC_APB2PeriphClockCmd
-#define      macESP8266_RST_CLK                               RCC_APB2Periph_GPIOG
-#define      macESP8266_RST_PORT                              GPIOG
-#define      macESP8266_RST_PIN                               GPIO_Pin_14
-#define      macESP8266_USARTx                                USART3
-#define      macESP8266_USART_APBxClock_FUN                   RCC_APB1PeriphClockCmd
-#define      macESP8266_USART_CLK                             RCC_APB1Periph_USART3
-#define      macESP8266_USART_GPIO_APBxClock_FUN              RCC_APB2PeriphClockCmd
-#define      macESP8266_USART_GPIO_CLK                        RCC_APB2Periph_GPIOB     
-#define      macESP8266_USART_TX_PORT                         GPIOB   
-#define      macESP8266_USART_TX_PIN                          GPIO_Pin_10
-#define      macESP8266_USART_RX_PORT                         GPIOB
-#define      macESP8266_USART_RX_PIN                          GPIO_Pin_11
-#define      macESP8266_USART_IRQ                             USART3_IRQn
 #define      macESP8266_USART_INT_FUN                         USART3_IRQHandler
 /*********************************************** ESP8266 º¯Êýºê¶¨Òå *******************************************/
-#define     macESP8266_Usart( fmt, ... )           USART_printf ( macESP8266_USARTx, fmt, ##__VA_ARGS__ ) 
+#define     macESP8266_Usart( fmt, ... )           USART_printf ( USART3, fmt, ##__VA_ARGS__ ) 
 #define     macPC_Usart( fmt, ... )                printf ( fmt, ##__VA_ARGS__ )
 //#define     macPC_Usart( fmt, ... )                
-#define     macESP8266_CH_ENABLE()                 GPIO_SetBits ( macESP8266_CH_PD_PORT, macESP8266_CH_PD_PIN )
-#define     macESP8266_CH_DISABLE()                GPIO_ResetBits ( macESP8266_CH_PD_PORT, macESP8266_CH_PD_PIN )
-#define     macESP8266_RST_HIGH_LEVEL()            GPIO_SetBits ( macESP8266_RST_PORT, macESP8266_RST_PIN )
-#define     macESP8266_RST_LOW_LEVEL()             GPIO_ResetBits ( macESP8266_RST_PORT, macESP8266_RST_PIN )
+#define     macESP8266_CH_ENABLE()                 GPIO_SetBits ( GPIOG, GPIO_Pin_13 )
+#define     macESP8266_CH_DISABLE()                GPIO_ResetBits ( GPIOG, GPIO_Pin_13 )
+#define     macESP8266_RST_HIGH_LEVEL()            GPIO_SetBits ( GPIOG, GPIO_Pin_14 )
+#define     macESP8266_RST_LOW_LEVEL()             GPIO_ResetBits ( GPIOG, GPIO_Pin_14 )
+static void ESP8266_GPIO_Config(void);
+static void ESP8266_USART_Config(void);
+static void ESP8266_USART_NVIC_Configuration(void);
 /****************************************** ESP8266 º¯ÊýÉùÃ÷ ***********************************************/
 void                     ESP8266_Init                        ( void );
 void                     ESP8266_Rst                         ( void );

@@ -4,9 +4,7 @@
 #include <string.h>  
 #include "Sys.h"
 
-static void ESP8266_GPIO_Config(void);
-static void ESP8266_USART_Config(void);
-static void ESP8266_USART_NVIC_Configuration(void);
+
 
 struct STRUCT_USARTx_Fram strEsp8266_Fram_Record = 
 {
@@ -34,15 +32,15 @@ static void ESP8266_GPIO_Config(void)
     /*定义一个GPIO_InitTypeDef类型的结构体*/
     GPIO_InitTypeDef GPIO_InitStructure;
     /* 配置 CH_PD 引脚*/
-    macESP8266_CH_PD_APBxClock_FUN(macESP8266_CH_PD_CLK, ENABLE);
-    GPIO_InitStructure.GPIO_Pin = macESP8266_CH_PD_PIN;
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOG, ENABLE);
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(macESP8266_CH_PD_PORT, &GPIO_InitStructure);
+    GPIO_Init(GPIOG, &GPIO_InitStructure);
     /* 配置 RST 引脚*/
-    macESP8266_RST_APBxClock_FUN(macESP8266_RST_CLK, ENABLE);
-    GPIO_InitStructure.GPIO_Pin = macESP8266_RST_PIN;
-    GPIO_Init(macESP8266_RST_PORT, &GPIO_InitStructure);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOG, ENABLE);
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14;
+    GPIO_Init(GPIOG, &GPIO_InitStructure);
 }
 /**
  * @brief  初始化ESP8266用到的 USART
@@ -54,18 +52,18 @@ static void ESP8266_USART_Config(void)
     GPIO_InitTypeDef GPIO_InitStructure;
     USART_InitTypeDef USART_InitStructure;
     /* config USART clock */
-    macESP8266_USART_APBxClock_FUN(macESP8266_USART_CLK, ENABLE);
-    macESP8266_USART_GPIO_APBxClock_FUN(macESP8266_USART_GPIO_CLK, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
     /* USART GPIO config */
     /* Configure USART Tx as alternate function push-pull */
-    GPIO_InitStructure.GPIO_Pin = macESP8266_USART_TX_PIN;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(macESP8266_USART_TX_PORT, &GPIO_InitStructure);
+    GPIO_Init(GPIOB, &GPIO_InitStructure);
     /* Configure USART Rx as input floating */
-    GPIO_InitStructure.GPIO_Pin = macESP8266_USART_RX_PIN;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    GPIO_Init(macESP8266_USART_RX_PORT, &GPIO_InitStructure);
+    GPIO_Init(GPIOB, &GPIO_InitStructure);
     /* USART1 mode config */
     USART_InitStructure.USART_BaudRate = 115200;
     USART_InitStructure.USART_WordLength = USART_WordLength_8b;
@@ -73,12 +71,12 @@ static void ESP8266_USART_Config(void)
     USART_InitStructure.USART_Parity = USART_Parity_No;
     USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
     USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-    USART_Init(macESP8266_USARTx, &USART_InitStructure);
+    USART_Init(USART3, &USART_InitStructure);
     /* 中断配置 */
-    USART_ITConfig(macESP8266_USARTx, USART_IT_RXNE, ENABLE); //使能串口接收中断 
-    USART_ITConfig(macESP8266_USARTx, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 	
+    USART_ITConfig(USART3, USART_IT_RXNE, ENABLE); //使能串口接收中断 
+    USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 	
     ESP8266_USART_NVIC_Configuration();
-    USART_Cmd(macESP8266_USARTx, ENABLE);
+    USART_Cmd(USART3, ENABLE);
 }
 
 
@@ -96,7 +94,7 @@ static void ESP8266_USART_NVIC_Configuration(void)
     NVIC_PriorityGroupConfig(macNVIC_PriorityGroup_x);
 
     /* Enable the USART2 Interrupt */
-    NVIC_InitStructure.NVIC_IRQChannel = macESP8266_USART_IRQ;
+    NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
@@ -146,7 +144,6 @@ bool ESP8266_Cmd(char *cmd, char *reply1, char *reply2, u32 waittime){
         return ((bool)strstr(strEsp8266_Fram_Record .Data_RX_BUF, reply1));
     else
         return ((bool)strstr(strEsp8266_Fram_Record .Data_RX_BUF, reply2));
-
 }
 /*
  * 函数名：ESP8266_AT_Test
