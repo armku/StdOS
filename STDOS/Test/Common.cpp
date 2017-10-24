@@ -4,7 +4,6 @@
 #include "Sys.h"
 
 static char *itoa(int value, char *string, int radix);
-
 /*
  * 函数名：USART2_printf
  * 描述  ：格式化输出，类似于C库中的printf，但这里没有用到C库
@@ -41,19 +40,16 @@ void USART_printf(USART_TypeDef *USARTx, char *Data, ...)
                     USART_SendData(USARTx, 0x0d);
                     Data++;
                     break;
-
                 case 'n':
                     //换行符
                     USART_SendData(USARTx, 0x0a);
                     Data++;
                     break;
-
                 default:
                     Data++;
                     break;
             }
         }
-
         else if (*Data == '%')
         {
             //
@@ -62,43 +58,31 @@ void USART_printf(USART_TypeDef *USARTx, char *Data, ...)
                 case 's':
                     //字符串
                     s = va_arg(ap, const char*);
-
                     for (;  *s; s++)
                     {
                         USART_SendData(USARTx,  *s);
                         while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
                             ;
                     }
-
                     Data++;
-
                     break;
-
                 case 'd':
                     //十进制
                     d = va_arg(ap, int);
-
                     itoa(d, buf, 10);
-
                     for (s = buf;  *s; s++)
                     {
                         USART_SendData(USARTx,  *s);
                         while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
                             ;
                     }
-
                     Data++;
-
                     break;
-
                 default:
                     Data++;
-
                     break;
-
             }
         }
-
         else
             USART_SendData(USARTx,  *Data++);
 
