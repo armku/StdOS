@@ -700,11 +700,6 @@
               <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Drivers\font.c</FilePath>
-            </File>
-            <File>
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\lcd_dr.cpp</FilePath>
@@ -723,6 +718,16 @@
               <FileName>AD7124.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AD7124.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Fonts</GroupName>
+          <Files>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Fonts\font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1632,11 +1637,6 @@
               <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STDOS\Drivers\font.c</FilePath>
-            </File>
-            <File>
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\lcd_dr.cpp</FilePath>
@@ -1655,6 +1655,16 @@
               <FileName>AD7124.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AD7124.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Fonts</GroupName>
+          <Files>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Fonts\font.c</FilePath>
             </File>
           </Files>
         </Group>

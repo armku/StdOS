@@ -3,7 +3,7 @@
 #include <math.h>
 
 #include "lcd_dr.h"
-#include "font.h"
+#include "Fonts\font.h"
 
 
 CLcd_DR::CLcd_DR(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs):CLcd(pinrs,pinsclk,pinsid,pinres,pincs)
