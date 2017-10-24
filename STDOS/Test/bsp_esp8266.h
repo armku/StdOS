@@ -72,14 +72,14 @@ class ESP8266
 #define     macESP8266_RST_HIGH_LEVEL()            GPIO_SetBits ( GPIOG, GPIO_Pin_14 )
 #define     macESP8266_RST_LOW_LEVEL()             GPIO_ResetBits ( GPIOG, GPIO_Pin_14 )
 /****************************************** ESP8266 º¯ÊýÉùÃ÷ ***********************************************/
-bool                     ESP8266_Cmd                         ( char * cmd, char * reply1, char * reply2, u32 waittime );
-bool                     ESP8266_Net_Mode_Choose             ( ENUM_Net_ModeTypeDef enumMode );
-bool                     ESP8266_JoinAP                      ( char * pSSID, char * pPassWord );
-bool                     ESP8266_BuildAP                     ( char * pSSID, char * pPassWord, ENUM_AP_PsdMode_TypeDef enunPsdMode );
-bool                     ESP8266_Enable_MultipleId           ( FunctionalState enumEnUnvarnishTx );
-bool                     ESP8266_Link_Server                 ( ENUM_NetPro_TypeDef enumE, char * ip, char * ComNum, ENUM_ID_NO_TypeDef id);
-bool                     ESP8266_StartOrShutServer           ( FunctionalState enumMode, char * pPortNum, char * pTimeOver );
-uint8_t                  ESP8266_Inquire_ApIp                ( char * pApIp, uint8_t ucArrayLength );
-bool                     ESP8266_SendString                  ( FunctionalState enumEnUnvarnishTx, char * pStr, u32 ulStrLength, ENUM_ID_NO_TypeDef ucId );
-char *                   ESP8266_ReceiveString               ( FunctionalState enumEnUnvarnishTx );
+bool ESP8266_Cmd(char *cmd, char *reply1, char *reply2, u32 waittime);
+bool ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode);
+bool ESP8266_JoinAP(char *pSSID, char *pPassWord);
+bool ESP8266_BuildAP(char *pSSID, char *pPassWord, ENUM_AP_PsdMode_TypeDef enunPsdMode);
+bool ESP8266_Enable_MultipleId(FunctionalState enumEnUnvarnishTx);
+bool ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char *ip, char *ComNum, ENUM_ID_NO_TypeDef id);
+bool ESP8266_StartOrShutServer(FunctionalState enumMode, char *pPortNum, char *pTimeOver);
+uint8_t ESP8266_Inquire_ApIp(char *pApIp, uint8_t ucArrayLength);
+bool ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char *pStr, u32 ulStrLength, ENUM_ID_NO_TypeDef ucId);
+char *ESP8266_ReceiveString(FunctionalState enumEnUnvarnishTx);
 #endif
