@@ -1,44 +1,3 @@
-/*
-*********************************************************************************************************
-*
-*	Ä£¿éÃû³Æ : ÏµÍ³Ê±ÖÓÅäÖÃÄ£¿é
-*	ÎÄ¼þÃû³Æ : system_stm32f4xx.c
-*	°æ    ±¾ : V1.5.0
-*	Ëµ    Ã÷ : ÆäÖÐµÄ SystemInit() º¯ÊýÅäÖÃÏµÍ³Ê±ÖÓ¡£Õâ¸öº¯Êý±»Æô¶¯ÎÄ¼þ£¨»ã±àÎÄ¼þ£©µ÷ÓÃ£¬Òò´Ëmain()º¯Êý
-*			   ²»±ØÖØ¸´µ÷ÓÃ¡£
-*
-*			  ÕâÊÇ¹Ì¼þ¿âÖÐÌá¹©µÄÎÄ¼þ£¬ÎÒÃÇ½öÐÞ¸ÄÁËÆäÖÐµÄ SystemInit_ExtMemCtl() º¯Êý¡£
-*
-*	Copyright (C), 2015-2016, °²¸»À³µç×Ó www.armfly.com
-*
-*********************************************************************************************************
-*/
-
-/*
-	¡¾°²¸»À³ÌáÊ¾¡¿
-	
-	1¡¢ È±Ê¡µÄÍâ²¿¾§ÕñÆµÂÊÊÇ25MHz£¬ PLL±¶Æµµ½ 168MHz ×÷ÎªCPUÏµÍ³Ê±ÖÓ¡£
-		Èç¹ûÍâ²¿¾§ÕñÆµÂÊ²»ÊÇ 25MHz£¬ ÇëÐÞ¸Ä  "stm32f4xx.h " ÎÄ¼þÖÐµÄ "HSE_VALUE" ºê¶¨Òå
-	     
-	2¡¢ Èç¹ûÐèÒª½«±äÁ¿¶¨Î»Íâ²¿SRAM£¬ Çë´ò¿ª  "DATA_IN_ExtSRAM" ºê¶¨Òå£¬È±Ê¡ÊÇ±»×¢ÊÍµôµÄ¡£
-		Èç¹ûÐèÒª½«±äÁ¿¶¨Î»Íâ²¿SDRAM£¬Çë´ò¿ª  "DATA_IN_ExtSDRAM" ºê¶¨Òå£¬È±Ê¡ÊÇ±»×¢ÊÍµôµÄ¡£
-	
-	3¡¢ Èç¹ûÐèÒª½«³ÌÐò¶¨Î»ÔÚCPUÄÚ²¿£¬Çë´ò¿ª "VECT_TAB_SRAM" ºê¶¨Òå£¬È±Ê¡ÊÇ±»×¢ÊÍµôµÄ¡£
-		SystemInit_ExtMemCtl() º¯ÊýÊÇÔÚmain()º¯ÊýÖ®Ç°±»Ö´ÐÐµÄ£¬ËüÖ÷ÒªÍê³ÉFSMC×ÜÏßµÄÅäÖÃ¡£Èç¹ûÍâ²¿SRAMµÄµØÖ·
-		ºÍSTµÄ°å×Ó²»Í¬£¬ÄÇÃ´ÄãÐèÒª¸ü¸ÄÕâ¸öº¯Êý¡£
-		
-		°²¸»À³STM32-V5¿ª·¢°åSRAM¿ÚÏßºÍST¹Ì¼þ¿âÈ±Ê¡Ó²¼þ²»Í¬Ö®´¦£º
-		a) Ôö¼ÓÁË PE5/FSMC_A21£¬ºÍÖ÷Æ¬Ñ¡Ò»ÆðÒëÂë¡£STµÄÃ»ÓÐÅäÖÃPE5¡£
-		b) Æ¬Ñ¡¹Ü½Å²»Í¬£¬STµÄÊÇPG9/FSMC_NE2, °²¸»À³µÄSTM32-V5ÊÇ PG10/FSMC_NE3
-	
-	4¡¢"DATA_IN_ExtSRAM" ºÍ "VECT_TAB_SRAM" ÕâÁ½¸öºêÒ²¿ÉÒÔÔÚ¹¤³ÌÅäÖÃÖÐ predefine ²ÎÊýÖÐÖ¸¶¨¡£
-	
-	5¡¢ SystemCoreClock È«¾Ö±äÁ¿±íÊ¾ÏµÍ³Ö÷Æµ£¨Hz£©£¬È±Ê¡ÊÇ 168000000. ÔÚC³ÌÐòÖÐ¿ÉÒÔÖ±½ÓÊ¹ÓÃ¸ÄÈ«¾Ö±äÁ¿¡£
-	   Èç¹û³ÌÐòÔÚÔËÐÐ¹ý³ÌÖÐ¶¯Ì¬ÐÞ¸ÄÁËPLL±¶ÆµÏµÊý£¬»òÕßÇÐ»»ÁËÊ±ÖÓÔ´£¬ÇëÎñ±ØÖ´ÐÐÒ»´Î SystemCoreClockUpdate()
-	   º¯Êý£¬Õâ¸öº¯Êý»á×Ô¶¯¸ù¾ÝPLL±¶Æµ²ÎÊý¼ÆËã³öÊµ¼ÊµÄÖ÷Æµ¡£
-	
-*/
-
 /**
   ******************************************************************************
   * @file    system_stm32f4xx.c
@@ -389,9 +348,9 @@
      through STLINK MCO pin of STM32F103 microcontroller. The frequency cannot be changed
      and is fixed at 8 MHz. 
      Hardware configuration needed for Nucleo Board:
-     ?SB54, SB55 OFF
-     ?R35 removed
-     ?SB16, SB50 ON */
+     – SB54, SB55 OFF
+     – R35 removed
+     – SB16, SB50 ON */
 /* #define USE_HSE_BYPASS */
 
 #if defined(USE_HSE_BYPASS)     
@@ -431,7 +390,7 @@
 #endif /* STM32F446xx */ 
 
 #if defined(STM32F40_41xxx) || defined(STM32F427_437xx) || defined(STM32F429_439xx) || defined(STM32F446xx)
-#define PLL_N      336
+#define PLL_N      360
 /* SYSCLK = PLL_VCO / PLL_P */
 #define PLL_P      2
 #endif /* STM32F40_41xxx || STM32F427_437x || STM32F429_439xx || STM32F446xx */
@@ -919,161 +878,6 @@ static void SetSysClock(void)
   */
 void SystemInit_ExtMemCtl(void)
 {
-#if 1
-/*
-¡¾°²¸»À³STM32-V5¿ª·¢°å Íâ²¿SRAM ¿ÚÏß·ÖÅä¡¿
-	PD0/FSMC_D2
-	PD1/FSMC_D3
-	PD4/FSMC_NOE		--- ¶Á¿ØÖÆÐÅºÅ£¬OE = Output Enable £¬ N ±íÊ¾µÍÓÐÐ§
-	PD5/FSMC_NWE		--- Ð´¿ØÖÆÐÅºÅ£¬WE = Output Enable £¬ N ±íÊ¾µÍÓÐÐ§
-	PD8/FSMC_D13
-	PD9/FSMC_D14
-	PD10/FSMC_D15
-	PD11/FSMC_CLE/FSMC_A16
-	PD12/FSMC_ALE/FSMC_A17
-	PD13/FSMC_A18
-	PD14/FSMC_D0
-	PD15/FSMC_D1
-
-	PE0/FSMC_NBL0		--- SRAM×Ö½ÚÑ¡Í¨
-	PE1/FSMC_NBL1		--- SRAM×Ö½ÚÑ¡Í¨
-	PE3/FSMC_A19
-	PE4/FSMC_A20		--- ºÍÖ÷Æ¬Ñ¡Ò»ÆðÒëÂë
-	PE5/FSMC_A21		--- ºÍÖ÷Æ¬Ñ¡Ò»ÆðÒëÂë
-	PE7/FSMC_D4
-	PE8/FSMC_D5
-	PE9/FSMC_D6
-	PE10/FSMC_D7
-	PE11/FSMC_D8
-	PE12/FSMC_D9
-	PE13/FSMC_D10
-	PE14/FSMC_D11
-	PE15/FSMC_D12
-
-	PF0/FSMC_A0
-	PF1/FSMC_A1
-	PF2/FSMC_A2
-	PF3/FSMC_A3
-	PF4/FSMC_A4
-	PF5/FSMC_A5
-	PF12/FSMC_A6
-	PF13/FSMC_A7
-	PF14/FSMC_A8
-	PF15/FSMC_A9
-
-	PG0/FSMC_A10
-	PG1/FSMC_A11
-	PG2/FSMC_A12
-	PG3/FSMC_A13
-	PG4/FSMC_A14
-	PG5/FSMC_A15
-
-	PG10/FSMC_NE3		--- Ö÷Æ¬Ñ¡£¨DM9000AEP ºÍ SRAM£©
-*/	
-   /* Enable GPIOD, GPIOE, GPIOF and GPIOG interface clock */
-  RCC->AHB1ENR   = 0x00000078;
-  
-  /* Connect PDx pins to FSMC Alternate function */
-  GPIOD->AFR[0]  = 0x00cc00cc;
-  GPIOD->AFR[1]  = 0xcc0ccccc;
-  /* Configure PDx pins in Alternate function mode */  
-  GPIOD->MODER   = 0xaaaa0a0a;
-  /* Configure PDx pins speed to 100 MHz */  
-  GPIOD->OSPEEDR = 0xffff0f0f;
-  /* Configure PDx pins Output type to push-pull */  
-  GPIOD->OTYPER  = 0x00000000;
-  /* No pull-up, pull-down for PDx pins */ 
-  GPIOD->PUPDR   = 0x00000000;
-
-#if 1	/* °²¸»À³STM32-V5 */
-  /* Connect PEx pins to FSMC Alternate function */
-  GPIOE->AFR[0]  = 0xc00cc0cc;
-  GPIOE->AFR[1]  = 0xcccccccc;
-  /* Configure PEx pins in Alternate function mode */ 
-  GPIOE->MODER   = 0xaaaa828a;
-  /* Configure PEx pins speed to 100 MHz */ 
-  GPIOE->OSPEEDR = (GPIO_Speed_100MHz << 15) | (GPIO_Speed_100MHz << 14) | (GPIO_Speed_100MHz << 13) | (GPIO_Speed_100MHz << 12)
-  		| (GPIO_Speed_100MHz << 11) | (GPIO_Speed_100MHz << 10) | (GPIO_Speed_100MHz << 9) | (GPIO_Speed_100MHz << 8)
-  		| (GPIO_Speed_100MHz << 7) | (GPIO_Speed_100MHz << 6) | (GPIO_Speed_100MHz << 5) | (GPIO_Speed_100MHz << 4)
-  		| (GPIO_Speed_100MHz << 3) | (GPIO_Speed_100MHz << 2) | (GPIO_Speed_100MHz << 1) | (GPIO_Speed_100MHz << 0);
-  /* Configure PEx pins Output type to push-pull */  
-  GPIOE->OTYPER  = 0x00000000;
-  /* No pull-up, pull-down for PEx pins */ 
-  GPIOE->PUPDR   = 0x00000000;
-#else	/* STÈ±Ê¡ */
-  /* Connect PEx pins to FSMC Alternate function */
-  GPIOE->AFR[0]  = 0xc00cc0cc;
-  GPIOE->AFR[1]  = 0xcccccccc;
-  /* Configure PEx pins in Alternate function mode */ 
-  GPIOE->MODER   = 0xaaaa828a;
-  /* Configure PEx pins speed to 100 MHz */ 
-  GPIOE->OSPEEDR = 0xffffc3cf;
-  /* Configure PEx pins Output type to push-pull */  
-  GPIOE->OTYPER  = 0x00000000;
-  /* No pull-up, pull-down for PEx pins */ 
-  GPIOE->PUPDR   = 0x00000000;
-#endif  
-
-  /* Connect PFx pins to FSMC Alternate function */
-  GPIOF->AFR[0]  = 0x00cccccc;
-  GPIOF->AFR[1]  = 0xcccc0000;
-  /* Configure PFx pins in Alternate function mode */   
-  GPIOF->MODER   = 0xaa000aaa;
-  /* Configure PFx pins speed to 100 MHz */ 
-  GPIOF->OSPEEDR = 0xff000fff;
-  /* Configure PFx pins Output type to push-pull */  
-  GPIOF->OTYPER  = 0x00000000;
-  /* No pull-up, pull-down for PFx pins */ 
-  GPIOF->PUPDR   = 0x00000000;
-
-  /* Connect PGx pins to FSMC Alternate function */
-  GPIOG->AFR[0]  = 0x00cccccc;
-  GPIOG->AFR[1]  = 0x000000c0;
-  /* Configure PGx pins in Alternate function mode */ 
-  GPIOG->MODER   = 0x00080aaa;
-  /* Configure PGx pins speed to 100 MHz */ 
-  GPIOG->OSPEEDR = 0x000c0fff;
-  /* Configure PGx pins Output type to push-pull */  
-  GPIOG->OTYPER  = 0x00000000;
-  /* No pull-up, pull-down for PGx pins */ 
-  GPIOG->PUPDR   = 0x00000000;
-  
-/*-- FSMC Configuration ------------------------------------------------------*/
-  /* Enable the FSMC interface clock */
-  RCC->AHB3ENR         = 0x00000001;
-
-  /* Configure and enable Bank1_SRAM2 */
-  FSMC_Bank1->BTCR[2]  = 0x00001015;
-  FSMC_Bank1->BTCR[3]  = 0x00010603;
-  FSMC_Bank1E->BWTR[2] = 0x0fffffff;
-/*
-  Bank1_SRAM2 is configured as follow:
-
-  p.FSMC_AddressSetupTime = 3;
-  p.FSMC_AddressHoldTime = 0;
-  p.FSMC_DataSetupTime = 6;
-  p.FSMC_BusTurnAroundDuration = 1;
-  p.FSMC_CLKDivision = 0;
-  p.FSMC_DataLatency = 0;
-  p.FSMC_AccessMode = FSMC_AccessMode_A;
-
-  FSMC_NORSRAMInitStructure.FSMC_Bank = FSMC_Bank1_NORSRAM2;
-  FSMC_NORSRAMInitStructure.FSMC_DataAddressMux = FSMC_DataAddressMux_Disable;
-  FSMC_NORSRAMInitStructure.FSMC_MemoryType = FSMC_MemoryType_PSRAM;
-  FSMC_NORSRAMInitStructure.FSMC_MemoryDataWidth = FSMC_MemoryDataWidth_16b;
-  FSMC_NORSRAMInitStructure.FSMC_BurstAccessMode = FSMC_BurstAccessMode_Disable;
-  FSMC_NORSRAMInitStructure.FSMC_AsynchronousWait = FSMC_AsynchronousWait_Disable;  
-  FSMC_NORSRAMInitStructure.FSMC_WaitSignalPolarity = FSMC_WaitSignalPolarity_Low;
-  FSMC_NORSRAMInitStructure.FSMC_WrapMode = FSMC_WrapMode_Disable;
-  FSMC_NORSRAMInitStructure.FSMC_WaitSignalActive = FSMC_WaitSignalActive_BeforeWaitState;
-  FSMC_NORSRAMInitStructure.FSMC_WriteOperation = FSMC_WriteOperation_Enable;
-  FSMC_NORSRAMInitStructure.FSMC_WaitSignal = FSMC_WaitSignal_Disable;
-  FSMC_NORSRAMInitStructure.FSMC_ExtendedMode = FSMC_ExtendedMode_Disable;
-  FSMC_NORSRAMInitStructure.FSMC_WriteBurst = FSMC_WriteBurst_Disable;
-  FSMC_NORSRAMInitStructure.FSMC_ReadWriteTimingStruct = &p;
-  FSMC_NORSRAMInitStructure.FSMC_WriteTimingStruct = &p;
-*/
-#else
 /*-- GPIOs Configuration -----------------------------------------------------*/
 /*
  +-------------------+--------------------+------------------+--------------+
@@ -1149,14 +953,14 @@ void SystemInit_ExtMemCtl(void)
   /* Enable the FMC/FSMC interface clock */
   RCC->AHB3ENR         |= 0x00000001;
   
-#if defined (STM32F427_437xx) || defined (STM32F429_439xx)
+#if defined(STM32F427_437xx) || defined(STM32F429_439xx) || defined(STM32F446xx)
   /* Configure and enable Bank1_SRAM2 */
   FMC_Bank1->BTCR[2]  = 0x00001011;
   FMC_Bank1->BTCR[3]  = 0x00000201;
   FMC_Bank1E->BWTR[2] = 0x0fffffff;
 #endif /* STM32F427_437xx || STM32F429_439xx */ 
 
-#if defined (STM32F40_41xxx)
+#if defined(STM32F40_41xxx)
   /* Configure and enable Bank1_SRAM2 */
   FSMC_Bank1->BTCR[2]  = 0x00001011;
   FSMC_Bank1->BTCR[3]  = 0x00000201;
@@ -1216,7 +1020,7 @@ void SystemInit_ExtMemCtl(void)
   FMC_NORSRAMInitStructure.FMC_ReadWriteTimingStruct = &NORSRAMTimingStructure;
   FMC_NORSRAMInitStructure.FMC_WriteTimingStruct = &NORSRAMTimingStructure;
 */
-#endif
+  
 }
 #endif /* DATA_IN_ExtSRAM */
   
