@@ -394,6 +394,11 @@
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\CMSIS\system_stm32f4xx.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_assert.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\CMSIS\stm32f4xx_assert.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -445,21 +450,6 @@
               <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_cryp_aes.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_aes.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_cryp_des.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_des.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_cryp_tdes.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_tdes.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_dac.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_dac.c</FilePath>
@@ -490,21 +480,6 @@
               <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_exti.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_flash_ramfunc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_flash_ramfunc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_fsmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_fsmc.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_gpio.c</FilePath>
@@ -513,16 +488,6 @@
               <FileName>stm32f4xx_hash.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_hash.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hash_md5.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_hash_md5.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hash_sha1.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_hash_sha1.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_i2c.c</FileName>
@@ -593,6 +558,46 @@
               <FileName>stm32f4xx_wwdg.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_wwdg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_cryp_aes.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_aes.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_cryp_des.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_des.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_cryp_tdes.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_tdes.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_flash_ramfunc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_flash_ramfunc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_fsmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_fsmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hash_md5.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_hash_md5.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hash_sha1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_hash_sha1.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1421,6 +1426,11 @@
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\CMSIS\system_stm32f4xx.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_assert.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\CMSIS\stm32f4xx_assert.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1472,21 +1482,6 @@
               <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_cryp_aes.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_aes.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_cryp_des.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_des.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_cryp_tdes.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_tdes.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_dac.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_dac.c</FilePath>
@@ -1517,21 +1512,6 @@
               <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_exti.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_flash_ramfunc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_flash_ramfunc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_fsmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_fsmc.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_gpio.c</FilePath>
@@ -1540,16 +1520,6 @@
               <FileName>stm32f4xx_hash.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_hash.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hash_md5.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_hash_md5.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hash_sha1.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_hash_sha1.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_i2c.c</FileName>
@@ -1620,6 +1590,46 @@
               <FileName>stm32f4xx_wwdg.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_wwdg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_cryp_aes.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_aes.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_cryp_des.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_des.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_cryp_tdes.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_tdes.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_flash_ramfunc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_flash_ramfunc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_fsmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_fsmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hash_md5.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_hash_md5.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hash_sha1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_hash_sha1.c</FilePath>
             </File>
           </Files>
         </Group>
