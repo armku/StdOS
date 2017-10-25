@@ -13,7 +13,9 @@
 
 #ifndef __BSP_MODBUS_H
 #define __BSP_MODBUS_H
-
+#ifdef __cplusplus
+ extern "C" {
+#endif /* __cplusplus */
 /* 借用KEY_FIFO 消息通知应用程序 */
 #define MSG_485_RX			0xFE	/* 此代码值需要和按键代码、红外遥控代码同意编码，保持唯一性 */
 
@@ -59,7 +61,9 @@ void MODBUS_SendWithCRC(uint8_t *_pBuf, uint8_t _ucLen);
 void MODBUS_ReciveNew(uint8_t _byte);		/* 被串口接收中断服务程序调用 */
 
 extern MODBUS_T g_tModbus;
-
+#ifdef __cplusplus
+ }
+#endif /* __cplusplus */
 #endif
 
 /***************************** 安富莱电子 www.armfly.com (END OF FILE) *********************************/

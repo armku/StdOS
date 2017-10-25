@@ -13,7 +13,9 @@
 
 #ifndef __BSP_KEY_H
 #define __BSP_KEY_H
-
+#ifdef __cplusplus
+ extern "C" {
+#endif /* __cplusplus */
 #define KEY_COUNT    10	   					/* 按键个数, 8个独立建 + 2个组合键 */
 
 /* 根据应用程序的功能重命名按键宏 */
@@ -166,7 +168,9 @@ uint8_t bsp_GetKey2(void);
 uint8_t bsp_GetKeyState(KEY_ID_E _ucKeyID);
 void bsp_SetKeyParam(uint8_t _ucKeyID, uint16_t _LongTime, uint8_t  _RepeatSpeed);
 void bsp_ClearKey(void);
-
+#ifdef __cplusplus
+ }
+#endif /* __cplusplus */
 #endif
 
 /***************************** 安富莱电子 www.armfly.com (END OF FILE) *********************************/

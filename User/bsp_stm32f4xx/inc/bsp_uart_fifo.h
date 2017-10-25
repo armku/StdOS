@@ -138,7 +138,9 @@ typedef struct
 	void (*SendOver)(void); 	/* 发送完毕的回调函数指针（主要用于RS485将发送模式切换为接收模式） */
 	void (*ReciveNew)(uint8_t _byte);	/* 串口收到数据的回调函数指针 */
 }UART_T;
-
+#ifdef __cplusplus
+ extern "C" {
+#endif /* __cplusplus */
 void bsp_InitUart(void);
 void comSendBuf(COM_PORT_E _ucPort, uint8_t *_ucaBuf, uint16_t _usLen);
 void comSendChar(COM_PORT_E _ucPort, uint8_t _ucByte);
@@ -151,6 +153,9 @@ void RS485_SendBuf(uint8_t *_ucaBuf, uint16_t _usLen);
 void RS485_SendStr(char *_pBuf);
 
 void bsp_Set485Baud(uint32_t _baud);
+#ifdef __cplusplus
+ }
+#endif /* __cplusplus */
 
 #endif
 
