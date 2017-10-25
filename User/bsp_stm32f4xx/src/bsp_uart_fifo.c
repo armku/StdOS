@@ -1221,6 +1221,8 @@ void USART6_IRQHandler(void)
 *	返 回 值: 无
 *********************************************************************************************************
 */
+//2017-10-25 修正
+#if 0
 int fputc(int ch, FILE *f)
 {
 #if 1	/* 将需要printf的字符通过串口中断FIFO发送出去，printf函数会立即返回 */
@@ -1263,5 +1265,5 @@ int fgetc(FILE *f)
 	return (int)USART_ReceiveData(USART1);
 #endif
 }
-
+#endif
 /***************************** 安富莱电子 www.armfly.com (END OF FILE) *********************************/

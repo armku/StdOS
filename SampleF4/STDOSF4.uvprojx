@@ -392,12 +392,7 @@
             <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\system_stm32f4xx.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_assert.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\stm32f4xx_assert.c</FilePath>
+              <FilePath>..\User\bsp_stm32f4xx\system_stm32f4xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1033,6 +1028,66 @@
               <FileName>AT45DBTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AT45DBTest.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BSP</GroupName>
+          <Files>
+            <File>
+              <FileName>stm32f4xx_assert.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\stm32f4xx_assert.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\bsp.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_led.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_modbus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_modbus.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_uart_fifo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_uart_fifo.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_user_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_user_lib.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\stm32f4xx_it.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Userarmfly</GroupName>
+          <Files>
+            <File>
+              <FileName>mainF4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\mainF4.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1424,12 +1479,7 @@
             <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\system_stm32f4xx.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_assert.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\stm32f4xx_assert.c</FilePath>
+              <FilePath>..\User\bsp_stm32f4xx\system_stm32f4xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2065,6 +2115,66 @@
               <FileName>AT45DBTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AT45DBTest.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BSP</GroupName>
+          <Files>
+            <File>
+              <FileName>stm32f4xx_assert.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\stm32f4xx_assert.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\bsp.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_led.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_modbus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_modbus.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_uart_fifo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_uart_fifo.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_user_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_user_lib.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\stm32f4xx_it.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Userarmfly</GroupName>
+          <Files>
+            <File>
+              <FileName>mainF4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\mainF4.c</FilePath>
             </File>
           </Files>
         </Group>
