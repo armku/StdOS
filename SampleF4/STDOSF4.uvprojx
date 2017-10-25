@@ -505,11 +505,6 @@
               <FileType>1</FileType>
               <FilePath>..\User\bsp_stm32f4xx\src\bsp_uart_fifo.c</FilePath>
             </File>
-            <File>
-              <FileName>stm32f4xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\stm32f4xx_it.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1022,11 +1017,6 @@
               <FileName>bsp_uart_fifo.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\bsp_stm32f4xx\src\bsp_uart_fifo.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\stm32f4xx_it.c</FilePath>
             </File>
           </Files>
         </Group>
