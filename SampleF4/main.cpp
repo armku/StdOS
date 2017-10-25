@@ -25,8 +25,10 @@ void TimerTask(void *param)
 }
 void InterruptTest();
 void w25q128test();
+int mainarmfly(void);
 int main(void)
 {
+	mainarmfly();
 	Sys.Init();
 	#if DEBUG
         Sys.MessagePort = COM1;
