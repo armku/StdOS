@@ -488,21 +488,6 @@
           <GroupName>Test</GroupName>
         </Group>
         <Group>
-          <GroupName>BSP</GroupName>
-          <Files>
-            <File>
-              <FileName>bsp_timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\src\bsp_timer.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_uart_fifo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\src\bsp_uart_fifo.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Userarmfly</GroupName>
           <Files>
             <File>
@@ -994,21 +979,6 @@
         </Group>
         <Group>
           <GroupName>Test</GroupName>
-        </Group>
-        <Group>
-          <GroupName>BSP</GroupName>
-          <Files>
-            <File>
-              <FileName>bsp_timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\src\bsp_timer.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_uart_fifo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\src\bsp_uart_fifo.c</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Userarmfly</GroupName>
