@@ -491,11 +491,6 @@
           <GroupName>BSP</GroupName>
           <Files>
             <File>
-              <FileName>stm32f4xx_assert.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\stm32f4xx_assert.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_led.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\bsp_stm32f4xx\src\bsp_led.c</FilePath>
@@ -1013,11 +1008,6 @@
         <Group>
           <GroupName>BSP</GroupName>
           <Files>
-            <File>
-              <FileName>stm32f4xx_assert.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\stm32f4xx_assert.c</FilePath>
-            </File>
             <File>
               <FileName>bsp_led.c</FileName>
               <FileType>1</FileType>
