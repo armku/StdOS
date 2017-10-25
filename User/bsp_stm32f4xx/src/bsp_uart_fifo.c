@@ -1,59 +1,10 @@
-/*
-*********************************************************************************************************
-*
-*	模块名称 : 串口中断+FIFO驱动模块
-*	文件名称 : bsp_uart_fifo.c
-*	版    本 : V1.0
-*	说    明 : 采用串口中断+FIFO模式实现多个串口的同时访问
-*	修改记录 :
-*		版本号  日期       作者    说明
-*		V1.0    2013-02-01 armfly  正式发布
-*		V1.1    2013-06-09 armfly  FiFo结构增加TxCount成员变量，方便判断缓冲区满; 增加 清FiFo的函数
-*		V1.2	2014-09-29 armfly  增加RS485 MODBUS接口。接收到新字节后，直接执行回调函数。
-*
-*	Copyright (C), 2013-2014, 安富莱电子 www.armfly.com
-*
-*********************************************************************************************************
-*/
-
 #include "bsp.h"
-
 
 /* 定义每个串口结构体变量 */
 #if UART1_FIFO_EN == 1
 	static UART_T g_tUart1;
 	static uint8_t g_TxBuf1[UART1_TX_BUF_SIZE];		/* 发送缓冲区 */
 	static uint8_t g_RxBuf1[UART1_RX_BUF_SIZE];		/* 接收缓冲区 */
-#endif
-
-#if UART2_FIFO_EN == 1
-	static UART_T g_tUart2;
-	static uint8_t g_TxBuf2[UART2_TX_BUF_SIZE];		/* 发送缓冲区 */
-	static uint8_t g_RxBuf2[UART2_RX_BUF_SIZE];		/* 接收缓冲区 */
-#endif
-
-#if UART3_FIFO_EN == 1
-	static UART_T g_tUart3;
-	static uint8_t g_TxBuf3[UART3_TX_BUF_SIZE];		/* 发送缓冲区 */
-	static uint8_t g_RxBuf3[UART3_RX_BUF_SIZE];		/* 接收缓冲区 */
-#endif
-
-#if UART4_FIFO_EN == 1
-	static UART_T g_tUart4;
-	static uint8_t g_TxBuf4[UART4_TX_BUF_SIZE];		/* 发送缓冲区 */
-	static uint8_t g_RxBuf4[UART4_RX_BUF_SIZE];		/* 接收缓冲区 */
-#endif
-
-#if UART5_FIFO_EN == 1
-	static UART_T g_tUart5;
-	static uint8_t g_TxBuf5[UART5_TX_BUF_SIZE];		/* 发送缓冲区 */
-	static uint8_t g_RxBuf5[UART5_RX_BUF_SIZE];		/* 接收缓冲区 */
-#endif
-
-#if UART6_FIFO_EN == 1
-	static UART_T g_tUart6;
-	static uint8_t g_TxBuf6[UART6_TX_BUF_SIZE];		/* 发送缓冲区 */
-	static uint8_t g_RxBuf6[UART6_RX_BUF_SIZE];		/* 接收缓冲区 */
 #endif
 
 static void UartVarInit(void);
@@ -77,11 +28,8 @@ void RS485_InitTXE(void);
 void bsp_InitUart(void)
 {
 	UartVarInit();		/* 必须先初始化全局变量,再配置硬件 */
-
 	InitHardUart();		/* 配置串口的硬件参数(波特率等) */
-
 	RS485_InitTXE();	/* 配置RS485芯片的发送使能硬件，配置为推挽输出 */
-
 	ConfigUartNVIC();	/* 配置串口中断 */
 }
 
@@ -102,47 +50,7 @@ UART_T *ComToUart(COM_PORT_E _ucPort)
 		#else
 			return 0;
 		#endif
-	}
-	else if (_ucPort == COM2)
-	{
-		#if UART2_FIFO_EN == 1
-			return &g_tUart2;
-		#else
-			return;
-		#endif
-	}
-	else if (_ucPort == COM3)
-	{
-		#if UART3_FIFO_EN == 1
-			return &g_tUart3;
-		#else
-			return 0;
-		#endif
-	}
-	else if (_ucPort == COM4)
-	{
-		#if UART4_FIFO_EN == 1
-			return &g_tUart4;
-		#else
-			return 0;
-		#endif
-	}
-	else if (_ucPort == COM5)
-	{
-		#if UART5_FIFO_EN == 1
-			return &g_tUart5;
-		#else
-			return 0;
-		#endif
-	}
-	else if (_ucPort == COM6)
-	{
-		#if UART6_FIFO_EN == 1
-			return &g_tUart6;
-		#else
-			return 0;
-		#endif
-	}
+	}	
 	else
 	{
 		/* 不做任何处理 */
@@ -403,92 +311,6 @@ static void UartVarInit(void)
 	g_tUart1.SendOver = 0;						/* 发送完毕后的回调函数 */
 	g_tUart1.ReciveNew = 0;						/* 接收到新数据后的回调函数 */
 #endif
-
-#if UART2_FIFO_EN == 1
-	g_tUart2.uart = USART2;						/* STM32 串口设备 */
-	g_tUart2.pTxBuf = g_TxBuf2;					/* 发送缓冲区指针 */
-	g_tUart2.pRxBuf = g_RxBuf2;					/* 接收缓冲区指针 */
-	g_tUart2.usTxBufSize = UART2_TX_BUF_SIZE;	/* 发送缓冲区大小 */
-	g_tUart2.usRxBufSize = UART2_RX_BUF_SIZE;	/* 接收缓冲区大小 */
-	g_tUart2.usTxWrite = 0;						/* 发送FIFO写索引 */
-	g_tUart2.usTxRead = 0;						/* 发送FIFO读索引 */
-	g_tUart2.usRxWrite = 0;						/* 接收FIFO写索引 */
-	g_tUart2.usRxRead = 0;						/* 接收FIFO读索引 */
-	g_tUart2.usRxCount = 0;						/* 接收到的新数据个数 */
-	g_tUart2.usTxCount = 0;						/* 待发送的数据个数 */
-	g_tUart2.SendBefor = 0;						/* 发送数据前的回调函数 */
-	g_tUart2.SendOver = 0;						/* 发送完毕后的回调函数 */
-	g_tUart2.ReciveNew = 0;						/* 接收到新数据后的回调函数 */
-#endif
-
-#if UART3_FIFO_EN == 1
-	g_tUart3.uart = USART3;						/* STM32 串口设备 */
-	g_tUart3.pTxBuf = g_TxBuf3;					/* 发送缓冲区指针 */
-	g_tUart3.pRxBuf = g_RxBuf3;					/* 接收缓冲区指针 */
-	g_tUart3.usTxBufSize = UART3_TX_BUF_SIZE;	/* 发送缓冲区大小 */
-	g_tUart3.usRxBufSize = UART3_RX_BUF_SIZE;	/* 接收缓冲区大小 */
-	g_tUart3.usTxWrite = 0;						/* 发送FIFO写索引 */
-	g_tUart3.usTxRead = 0;						/* 发送FIFO读索引 */
-	g_tUart3.usRxWrite = 0;						/* 接收FIFO写索引 */
-	g_tUart3.usRxRead = 0;						/* 接收FIFO读索引 */
-	g_tUart3.usRxCount = 0;						/* 接收到的新数据个数 */
-	g_tUart3.usTxCount = 0;						/* 待发送的数据个数 */
-	g_tUart3.SendBefor = RS485_SendBefor;		/* 发送数据前的回调函数 */
-	g_tUart3.SendOver = RS485_SendOver;			/* 发送完毕后的回调函数 */
-	g_tUart3.ReciveNew = RS485_ReciveNew;		/* 接收到新数据后的回调函数 */
-#endif
-
-#if UART4_FIFO_EN == 1
-	g_tUart4.uart = UART4;						/* STM32 串口设备 */
-	g_tUart4.pTxBuf = g_TxBuf4;					/* 发送缓冲区指针 */
-	g_tUart4.pRxBuf = g_RxBuf4;					/* 接收缓冲区指针 */
-	g_tUart4.usTxBufSize = UART4_TX_BUF_SIZE;	/* 发送缓冲区大小 */
-	g_tUart4.usRxBufSize = UART4_RX_BUF_SIZE;	/* 接收缓冲区大小 */
-	g_tUart4.usTxWrite = 0;						/* 发送FIFO写索引 */
-	g_tUart4.usTxRead = 0;						/* 发送FIFO读索引 */
-	g_tUart4.usRxWrite = 0;						/* 接收FIFO写索引 */
-	g_tUart4.usRxRead = 0;						/* 接收FIFO读索引 */
-	g_tUart4.usRxCount = 0;						/* 接收到的新数据个数 */
-	g_tUart4.usTxCount = 0;						/* 待发送的数据个数 */
-	g_tUart4.SendBefor = 0;						/* 发送数据前的回调函数 */
-	g_tUart4.SendOver = 0;						/* 发送完毕后的回调函数 */
-	g_tUart4.ReciveNew = 0;						/* 接收到新数据后的回调函数 */
-#endif
-
-#if UART5_FIFO_EN == 1
-	g_tUart5.uart = UART5;						/* STM32 串口设备 */
-	g_tUart5.pTxBuf = g_TxBuf5;					/* 发送缓冲区指针 */
-	g_tUart5.pRxBuf = g_RxBuf5;					/* 接收缓冲区指针 */
-	g_tUart5.usTxBufSize = UART5_TX_BUF_SIZE;	/* 发送缓冲区大小 */
-	g_tUart5.usRxBufSize = UART5_RX_BUF_SIZE;	/* 接收缓冲区大小 */
-	g_tUart5.usTxWrite = 0;						/* 发送FIFO写索引 */
-	g_tUart5.usTxRead = 0;						/* 发送FIFO读索引 */
-	g_tUart5.usRxWrite = 0;						/* 接收FIFO写索引 */
-	g_tUart5.usRxRead = 0;						/* 接收FIFO读索引 */
-	g_tUart5.usRxCount = 0;						/* 接收到的新数据个数 */
-	g_tUart5.usTxCount = 0;						/* 待发送的数据个数 */
-	g_tUart5.SendBefor = 0;						/* 发送数据前的回调函数 */
-	g_tUart5.SendOver = 0;						/* 发送完毕后的回调函数 */
-	g_tUart5.ReciveNew = 0;						/* 接收到新数据后的回调函数 */
-#endif
-
-
-#if UART6_FIFO_EN == 1
-	g_tUart6.uart = USART6;						/* STM32 串口设备 */
-	g_tUart6.pTxBuf = g_TxBuf6;					/* 发送缓冲区指针 */
-	g_tUart6.pRxBuf = g_RxBuf6;					/* 接收缓冲区指针 */
-	g_tUart6.usTxBufSize = UART6_TX_BUF_SIZE;	/* 发送缓冲区大小 */
-	g_tUart6.usRxBufSize = UART6_RX_BUF_SIZE;	/* 接收缓冲区大小 */
-	g_tUart6.usTxWrite = 0;						/* 发送FIFO写索引 */
-	g_tUart6.usTxRead = 0;						/* 发送FIFO读索引 */
-	g_tUart6.usRxWrite = 0;						/* 接收FIFO写索引 */
-	g_tUart6.usRxRead = 0;						/* 接收FIFO读索引 */
-	g_tUart6.usRxCount = 0;						/* 接收到的新数据个数 */
-	g_tUart6.usTxCount = 0;						/* 待发送的数据个数 */
-	g_tUart6.SendBefor = 0;						/* 发送数据前的回调函数 */
-	g_tUart6.SendOver = 0;						/* 发送完毕后的回调函数 */
-	g_tUart6.ReciveNew = 0;						/* 接收到新数据后的回调函数 */
-#endif
 }
 
 /*
@@ -582,318 +404,6 @@ static void InitHardUart(void)
 		如下语句解决第1个字节无法正确发送出去的问题 */
 	USART_ClearFlag(USART1, USART_FLAG_TC);     /* 清发送完成标志，Transmission Complete flag */
 #endif
-
-#if UART2_FIFO_EN == 1		/* 串口2 TX = PD5   RX = PD6 或  TX = PA2， RX = PA3  */
-	/* 第1步： 配置GPIO */
-	#if 0	/* 串口2 TX = PD5   RX = PD6 */
-		/* 打开 GPIO 时钟 */
-		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
-
-		/* 打开 UART 时钟 */
-		RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
-
-		/* 将 PD5 映射为 USART2_TX */
-		GPIO_PinAFConfig(GPIOD, GPIO_PinSource5, GPIO_AF_USART2);
-
-		/* 将 PD6 映射为 USART2_RX */
-		GPIO_PinAFConfig(GPIOD, GPIO_PinSource6, GPIO_AF_USART2);
-
-		/* 配置 USART Tx 为复用功能 */
-		GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;	/* 输出类型为推挽 */
-		GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;	/* 内部上拉电阻使能 */
-		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;	/* 复用模式 */
-
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
-		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-		GPIO_Init(GPIOD, &GPIO_InitStructure);
-
-		/* 配置 USART Rx 为复用功能 */
-		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
-		GPIO_Init(GPIOD, &GPIO_InitStructure);
-
-	#else	/* 串口2   TX = PA2， RX = PA3 */
-		/* 打开 GPIO 时钟 */
-		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
-
-		/* 打开 UART 时钟 */
-		RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
-
-		/* 将 PA2 映射为 USART2_TX. 在STM32-V5板中，PA2 管脚用于以太网 */
-		//GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_USART2);
-
-		/* 将 PA3 映射为 USART2_RX */
-		GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_USART2);
-
-		/* 配置 USART Tx 为复用功能 */
-		GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;	/* 输出类型为推挽 */
-		GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;	/* 内部上拉电阻使能 */
-		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;	/* 复用模式 */
-
-		//GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
-		//GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-		//GPIO_Init(GPIOA, &GPIO_InitStructure);
-
-		/* 配置 USART Rx 为复用功能 */
-		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
-		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-		GPIO_Init(GPIOA, &GPIO_InitStructure);
-	#endif
-
-	/* 第2步： 配置串口硬件参数 */
-	USART_InitStructure.USART_BaudRate = UART2_BAUD;	/* 波特率 */
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;
-	USART_InitStructure.USART_Parity = USART_Parity_No ;
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART_InitStructure.USART_Mode = USART_Mode_Rx;		/* 仅选择接收模式 */
-	USART_Init(USART2, &USART_InitStructure);
-
-	USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);	/* 使能接收中断 */
-	/*
-		USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
-		注意: 不要在此处打开发送中断
-		发送中断使能在SendUart()函数打开
-	*/
-	USART_Cmd(USART2, ENABLE);		/* 使能串口 */
-
-	/* CPU的小缺陷：串口配置好，如果直接Send，则第1个字节发送不出去
-		如下语句解决第1个字节无法正确发送出去的问题 */
-	USART_ClearFlag(USART2, USART_FLAG_TC);     /* 清发送完成标志，Transmission Complete flag */
-#endif
-
-#if UART3_FIFO_EN == 1			/* 串口3 TX = PB10   RX = PB11 */
-
-	/* 配置 PB2为推挽输出，用于切换 RS485芯片的收发状态 */
-	{
-		RCC_AHB1PeriphClockCmd(RCC_RS485_TXEN, ENABLE);
-
-		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;		/* 设为输出口 */
-		GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;		/* 设为推挽模式 */
-		GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;	/* 上下拉电阻不使能 */
-		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;	/* IO口最大速度 */
-
-		GPIO_InitStructure.GPIO_Pin = PIN_RS485_TXEN;
-		GPIO_Init(PORT_RS485_TXEN, &GPIO_InitStructure);
-	}
-
-	/* 打开 GPIO 时钟 */
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
-
-	/* 打开 UART 时钟 */
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
-
-	/* 将 PB10 映射为 USART3_TX */
-	GPIO_PinAFConfig(GPIOB, GPIO_PinSource10, GPIO_AF_USART3);
-
-	/* 将 PB11 映射为 USART3_RX */
-	GPIO_PinAFConfig(GPIOB, GPIO_PinSource11, GPIO_AF_USART3);
-
-	/* 配置 USART Tx 为复用功能 */
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;	/* 输出类型为推挽 */
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;	/* 内部上拉电阻使能 */
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;	/* 复用模式 */
-
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-
-	/* 配置 USART Rx 为复用功能 */
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-
-	/* 第2步： 配置串口硬件参数 */
-	USART_InitStructure.USART_BaudRate = UART3_BAUD;	/* 波特率 */
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;
-	USART_InitStructure.USART_Parity = USART_Parity_No ;
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-	USART_Init(USART3, &USART_InitStructure);
-
-	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);	/* 使能接收中断 */
-	/*
-		USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
-		注意: 不要在此处打开发送中断
-		发送中断使能在SendUart()函数打开
-	*/
-	USART_Cmd(USART3, ENABLE);		/* 使能串口 */
-
-	/* CPU的小缺陷：串口配置好，如果直接Send，则第1个字节发送不出去
-		如下语句解决第1个字节无法正确发送出去的问题 */
-	USART_ClearFlag(USART3, USART_FLAG_TC);     /* 清发送完成标志，Transmission Complete flag */
-#endif
-
-#if UART4_FIFO_EN == 1			/* 串口4 TX = PC10   RX = PC11 */
-	/* 第1步： 配置GPIO */
-
-	/* 打开 GPIO 时钟 */
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
-
-	/* 打开 UART 时钟 */
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);
-
-	/* 将 PC10 映射为 UART4_TX */
-	GPIO_PinAFConfig(GPIOC, GPIO_PinSource10, GPIO_AF_USART1);
-
-	/* 将 PC11 映射为 UART4_RX */
-	GPIO_PinAFConfig(GPIOC, GPIO_PinSource10, GPIO_AF_USART1);
-
-	/* 配置 USART Tx 为复用功能 */
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;	/* 输出类型为推挽 */
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;	/* 内部上拉电阻使能 */
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;	/* 复用模式 */
-
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
-
-	/* 配置 USART Rx 为复用功能 */
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
-
-	/* 第2步： 配置串口硬件参数 */
-	USART_InitStructure.USART_BaudRate = UART1_BAUD;	/* 波特率 */
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;
-	USART_InitStructure.USART_Parity = USART_Parity_No ;
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-	USART_Init(UART4, &USART_InitStructure);
-
-	USART_ITConfig(UART4, USART_IT_RXNE, ENABLE);	/* 使能接收中断 */
-	/*
-		USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
-		注意: 不要在此处打开发送中断
-		发送中断使能在SendUart()函数打开
-	*/
-	USART_Cmd(UART4, ENABLE);		/* 使能串口 */
-
-	/* CPU的小缺陷：串口配置好，如果直接Send，则第1个字节发送不出去
-		如下语句解决第1个字节无法正确发送出去的问题 */
-	USART_ClearFlag(UART4, USART_FLAG_TC);     /* 清发送完成标志，Transmission Complete flag */
-#endif
-
-#if UART5_FIFO_EN == 1			/* 串口5 TX = PC12   RX = PD2 */
-	/* 第1步： 配置GPIO */
-
-	/* 打开 GPIO 时钟 */
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC |RCC_AHB1Periph_GPIOD, ENABLE);
-
-	/* 打开 UART 时钟 */
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART5, ENABLE);
-
-	/* 将 PC12 映射为 UART5_TX */
-	GPIO_PinAFConfig(GPIOC, GPIO_PinSource12, GPIO_AF_UART5);
-
-	/* 将 PD2 映射为 UART5_RX */
-	GPIO_PinAFConfig(GPIOD, GPIO_PinSource2, GPIO_AF_UART5);
-
-	/* 配置 UART Tx 为复用功能 */
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;	/* 输出类型为推挽 */
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;	/* 内部上拉电阻使能 */
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;	/* 复用模式 */
-
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
-
-	/* 配置 UART Rx 为复用功能 */
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
-	GPIO_Init(GPIOD, &GPIO_InitStructure);
-
-	/* 第2步： 配置串口硬件参数 */
-	USART_InitStructure.USART_BaudRate = UART5_BAUD;	/* 波特率 */
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;
-	USART_InitStructure.USART_Parity = USART_Parity_No ;
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-	USART_Init(UART5, &USART_InitStructure);
-
-	USART_ITConfig(UART5, USART_IT_RXNE, ENABLE);	/* 使能接收中断 */
-	/*
-		USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
-		注意: 不要在此处打开发送中断
-		发送中断使能在SendUart()函数打开
-	*/
-	USART_Cmd(UART5, ENABLE);		/* 使能串口 */
-
-	/* CPU的小缺陷：串口配置好，如果直接Send，则第1个字节发送不出去
-		如下语句解决第1个字节无法正确发送出去的问题 */
-	USART_ClearFlag(UART5, USART_FLAG_TC);     /* 清发送完成标志，Transmission Complete flag */
-#endif
-
-#if UART6_FIFO_EN == 1			/* PG14/USART6_TX , PC7/USART6_RX,PG8/USART6_RTS, PG15/USART6_CTS */
-	/* 第1步： 配置GPIO */
-
-	/* 打开 GPIO 时钟 */
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC |RCC_AHB1Periph_GPIOG, ENABLE);
-
-	/* 打开 UART 时钟 */
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART6, ENABLE);
-
-	/* 将 PG14 映射为 USART6_TX */
-	GPIO_PinAFConfig(GPIOG, GPIO_PinSource14, GPIO_AF_USART6);
-
-	/* 将 PC7 映射为 USART6_RX */
-	GPIO_PinAFConfig(GPIOC, GPIO_PinSource7, GPIO_AF_USART6);
-
-	/* 将 PG8 映射为 USART6_RTS */
-	GPIO_PinAFConfig(GPIOG, GPIO_PinSource8, GPIO_AF_USART6);
-
-	/* 将 PG15 映射为 USART6_CTS */
-	GPIO_PinAFConfig(GPIOG, GPIO_PinSource15, GPIO_AF_USART6);
-
-	/* 配置 PG14/USART6_TX 为复用功能 */
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;	/* 输出类型为推挽 */
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;	/* 内部上拉电阻使能 */
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;	/* 复用模式 */
-
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOG, &GPIO_InitStructure);
-
-	/* 配置 PC7/USART6_RX 为复用功能 */
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
-
-	/* 配置 PG8/USART6_RTS 为复用功能 */
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
-	GPIO_Init(GPIOG, &GPIO_InitStructure);
-
-	/* 配置 PG15/USART6_CTS 为复用功能 */
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
-	GPIO_Init(GPIOG, &GPIO_InitStructure);
-
-	/* 第2步： 配置串口硬件参数 */
-	USART_InitStructure.USART_BaudRate = UART6_BAUD;	/* 波特率 */
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;
-	USART_InitStructure.USART_Parity = USART_Parity_No ;
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_RTS_CTS;	/* 选择硬件流控 */
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-	USART_Init(USART6, &USART_InitStructure);
-
-	USART_ITConfig(USART6, USART_IT_RXNE, ENABLE);	/* 使能接收中断 */
-	/*
-		USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
-		注意: 不要在此处打开发送中断
-		发送中断使能在SendUart()函数打开
-	*/
-	USART_Cmd(USART6, ENABLE);		/* 使能串口 */
-
-	/* CPU的小缺陷：串口配置好，如果直接Send，则第1个字节发送不出去
-		如下语句解决第1个字节无法正确发送出去的问题 */
-	USART_ClearFlag(USART6, USART_FLAG_TC);     /* 清发送完成标志，Transmission Complete flag */
-#endif
 }
 
 /*
@@ -918,46 +428,6 @@ static void ConfigUartNVIC(void)
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 #endif
-
-#if UART2_FIFO_EN == 1
-	/* 使能串口2中断 */
-	NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-#endif
-
-#if UART3_FIFO_EN == 1
-	/* 使能串口3中断t */
-	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-#endif
-
-#if UART4_FIFO_EN == 1
-	/* 使能串口4中断t */
-	NVIC_InitStructure.NVIC_IRQChannel = UART4_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-#endif
-
-#if UART5_FIFO_EN == 1
-	/* 使能串口5中断t */
-	NVIC_InitStructure.NVIC_IRQChannel = UART5_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 4;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-#endif
-
-#if UART6_FIFO_EN == 1
-	/* 使能串口6中断t */
-	NVIC_InitStructure.NVIC_IRQChannel = USART6_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 5;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-#endif
 }
 
 /*
@@ -974,32 +444,6 @@ static void UartSend(UART_T *_pUart, uint8_t *_ucaBuf, uint16_t _usLen)
 
 	for (i = 0; i < _usLen; i++)
 	{
-		/* 如果发送缓冲区已经满了，则等待缓冲区空 */
-	#if 0
-		/*
-			在调试GPRS例程时，下面的代码出现死机，while 死循环
-			原因： 发送第1个字节时 _pUart->usTxWrite = 1；_pUart->usTxRead = 0;
-			将导致while(1) 无法退出
-		*/
-		while (1)
-		{
-			uint16_t usRead;
-
-			DISABLE_INT();
-			usRead = _pUart->usTxRead;
-			ENABLE_INT();
-
-			if (++usRead >= _pUart->usTxBufSize)
-			{
-				usRead = 0;
-			}
-
-			if (usRead != _pUart->usTxWrite)
-			{
-				break;
-			}
-		}
-	#else
 		/* 当 _pUart->usTxBufSize == 1 时, 下面的函数会死掉(待完善) */
 		while (1)
 		{
@@ -1014,7 +458,7 @@ static void UartSend(UART_T *_pUart, uint8_t *_ucaBuf, uint16_t _usLen)
 				break;
 			}
 		}
-	#endif
+	
 
 		/* 将新数据填入发送缓冲区 */
 		_pUart->pTxBuf[_pUart->usTxWrite] = _ucaBuf[i];
@@ -1177,42 +621,6 @@ void USART1_IRQHandler(void)
 	UartIRQ(&g_tUart1);
 }
 #endif
-
-#if UART2_FIFO_EN == 1
-void USART2_IRQHandler(void)
-{
-	UartIRQ(&g_tUart2);
-}
-#endif
-
-#if UART3_FIFO_EN == 1
-void USART3_IRQHandler(void)
-{
-	UartIRQ(&g_tUart3);
-}
-#endif
-
-#if UART4_FIFO_EN == 1
-void UART4_IRQHandler(void)
-{
-	UartIRQ(&g_tUart4);
-}
-#endif
-
-#if UART5_FIFO_EN == 1
-void UART5_IRQHandler(void)
-{
-	UartIRQ(&g_tUart5);
-}
-#endif
-
-#if UART6_FIFO_EN == 1
-void USART6_IRQHandler(void)
-{
-	UartIRQ(&g_tUart6);
-}
-#endif
-
 /*
 *********************************************************************************************************
 *	函 数 名: fputc
