@@ -76,8 +76,8 @@ extern "C"  {
 #endif
 
 void bsp_Idle(void);
-void bsp_Init(void);
-static void NVIC_Configuration(void);
+//void bsp_Init(void);
+//static void NVIC_Configuration(void);
 #ifdef __cplusplus
 }
 #endif
