@@ -491,11 +491,6 @@
           <GroupName>BSP</GroupName>
           <Files>
             <File>
-              <FileName>bsp_led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\src\bsp_led.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\bsp_stm32f4xx\src\bsp_timer.c</FilePath>
@@ -1003,11 +998,6 @@
         <Group>
           <GroupName>BSP</GroupName>
           <Files>
-            <File>
-              <FileName>bsp_led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\src\bsp_led.c</FilePath>
-            </File>
             <File>
               <FileName>bsp_timer.c</FileName>
               <FileType>1</FileType>
