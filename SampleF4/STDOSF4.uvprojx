@@ -335,7 +335,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>STM32F4,DEBUG,STM32F40_41xxx, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\SYSTEM\STM32F4\CMSIS;..\SYSTEM\STM32F4\FWLIB\inc;..\Util</IncludePath>
+              <IncludePath>..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\SYSTEM\STM32F4\CMSIS;..\SYSTEM\STM32F4\FWLIB\inc;..\Util;..\User;..\User\bsp_stm32f4xx\inc;..\User\bsp_stm32f4xx</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -390,14 +390,14 @@
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>stm32f4xx_assert.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\CMSIS\stm32f4xx_assert.c</FilePath>
-            </File>
-            <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\system_stm32f4xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_assert.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\stm32f4xx_assert.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1422,14 +1422,14 @@
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>stm32f4xx_assert.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\CMSIS\stm32f4xx_assert.c</FilePath>
-            </File>
-            <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\system_stm32f4xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_assert.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\stm32f4xx_assert.c</FilePath>
             </File>
           </Files>
         </Group>
