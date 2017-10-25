@@ -496,24 +496,9 @@
               <FilePath>..\User\bsp_stm32f4xx\stm32f4xx_assert.c</FilePath>
             </File>
             <File>
-              <FileName>bsp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\bsp.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\src\bsp_key.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_led.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\bsp_stm32f4xx\src\bsp_led.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_modbus.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\src\bsp_modbus.c</FilePath>
             </File>
             <File>
               <FileName>bsp_timer.c</FileName>
@@ -524,11 +509,6 @@
               <FileName>bsp_uart_fifo.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\bsp_stm32f4xx\src\bsp_uart_fifo.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_user_lib.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\src\bsp_user_lib.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_it.c</FileName>
@@ -1039,24 +1019,9 @@
               <FilePath>..\User\bsp_stm32f4xx\stm32f4xx_assert.c</FilePath>
             </File>
             <File>
-              <FileName>bsp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\bsp.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\src\bsp_key.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_led.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\bsp_stm32f4xx\src\bsp_led.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_modbus.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\src\bsp_modbus.c</FilePath>
             </File>
             <File>
               <FileName>bsp_timer.c</FileName>
@@ -1067,11 +1032,6 @@
               <FileName>bsp_uart_fifo.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\bsp_stm32f4xx\src\bsp_uart_fifo.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_user_lib.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\src\bsp_user_lib.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_it.c</FileName>

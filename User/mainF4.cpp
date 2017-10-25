@@ -77,9 +77,7 @@ int main(void)
 
 	/* 进入主程序循环体 */
 	while (1)
-	{
-		bsp_Idle();		/* 这个函数在bsp.c文件。用户可以修改这个函数实现CPU休眠和喂狗 */
-
+	{		
 		if (bsp_CheckTimer(0))	/* 判断定时器超时时间 */
 		{
 			/* 每隔500ms 进来一次 */

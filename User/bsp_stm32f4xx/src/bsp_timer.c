@@ -129,13 +129,9 @@ void SysTick_ISR(void)
 		g_iRunTime = 0;
 	}
 
-	bsp_RunPer1ms();		/* 每隔1ms调用一次此函数，此函数在 bsp.c */
-
 	if (++s_count >= 10)
 	{
 		s_count = 0;
-
-		bsp_RunPer10ms();	/* 每隔10ms调用一次此函数，此函数在 bsp.c */
 	}
 }
 
@@ -193,7 +189,7 @@ void bsp_DelayMS(uint32_t n)
 
 	while (1)
 	{
-		bsp_Idle();				/* CPU空闲执行的操作， 见 bsp.c 和 bsp.h 文件 */
+//		bsp_Idle();				/* CPU空闲执行的操作， 见 bsp.c 和 bsp.h 文件 */
 
 		/*
 			等待延迟时间到

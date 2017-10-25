@@ -374,7 +374,7 @@ void RS485_SendStr(char *_pBuf)
 extern void MODBUS_ReciveNew(uint8_t _byte);
 void RS485_ReciveNew(uint8_t _byte)
 {
-	MODBUS_ReciveNew(_byte);
+//	MODBUS_ReciveNew(_byte);
 }
 
 /*
