@@ -862,12 +862,12 @@
     <File>
       <GroupNumber>18</GroupNumber>
       <FileNumber>21</FileNumber>
-      <FileType>1</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\mainF4.c</PathWithFileName>
-      <FilenameWithoutPath>mainF4.c</FilenameWithoutPath>
+      <PathWithFileName>..\User\mainF4.cpp</PathWithFileName>
+      <FilenameWithoutPath>mainF4.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

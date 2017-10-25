@@ -541,9 +541,9 @@
           <GroupName>Userarmfly</GroupName>
           <Files>
             <File>
-              <FileName>mainF4.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\mainF4.c</FilePath>
+              <FileName>mainF4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\mainF4.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1084,9 +1084,9 @@
           <GroupName>Userarmfly</GroupName>
           <Files>
             <File>
-              <FileName>mainF4.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\mainF4.c</FilePath>
+              <FileName>mainF4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\mainF4.cpp</FilePath>
             </File>
           </Files>
         </Group>

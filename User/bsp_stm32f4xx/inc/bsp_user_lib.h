@@ -11,7 +11,9 @@
 
 #ifndef __BSP_USER_LIB_H
 #define __BSP_USER_LIB_H
-
+#ifdef __cplusplus
+extern "C"  {
+#endif
 int str_len(char *_str);
 void str_cpy(char *_tar, char *_src);
 int str_cmp(char * s1, char * s2);
@@ -25,7 +27,9 @@ uint16_t LEBufToUint16(uint8_t *_pBuf);
 
 uint16_t CRC16_Modbus(uint8_t *_pBuf, uint16_t _usLen) ;
 int32_t  CaculTwoPoint(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x);
-
+#ifdef __cplusplus
+}
+#endif
 #endif
 
 /***************************** 安富莱电子 www.armfly.com (END OF FILE) *********************************/

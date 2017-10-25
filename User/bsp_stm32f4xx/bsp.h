@@ -71,12 +71,16 @@
 
 #include "bsp_modbus.h"
 #include "bsp_user_lib.h"
-
+#ifdef __cplusplus
+extern "C"  {
+#endif
 
 void bsp_Idle(void);
 void bsp_Init(void);
 static void NVIC_Configuration(void);
-
+#ifdef __cplusplus
+}
+#endif
 #endif
 
 /***************************** 安富莱电子 www.armfly.com (END OF FILE) *********************************/
