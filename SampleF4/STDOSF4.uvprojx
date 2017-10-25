@@ -378,6 +378,13 @@
       <Groups>
         <Group>
           <GroupName>USER</GroupName>
+          <Files>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\main.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>CMSIS</GroupName>
@@ -486,16 +493,6 @@
         </Group>
         <Group>
           <GroupName>Test</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Userarmfly</GroupName>
-          <Files>
-            <File>
-              <FileName>mainF4.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\mainF4.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
       </Groups>
     </Target>
@@ -871,6 +868,13 @@
       <Groups>
         <Group>
           <GroupName>USER</GroupName>
+          <Files>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\main.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>CMSIS</GroupName>
@@ -979,16 +983,6 @@
         </Group>
         <Group>
           <GroupName>Test</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Userarmfly</GroupName>
-          <Files>
-            <File>
-              <FileName>mainF4.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\mainF4.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
       </Groups>
     </Target>
