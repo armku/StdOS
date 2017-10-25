@@ -390,14 +390,14 @@
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>system_stm32f4xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\CMSIS\system_stm32f4xx.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_assert.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\CMSIS\stm32f4xx_assert.c</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f4xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\system_stm32f4xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1422,14 +1422,14 @@
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>system_stm32f4xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F4\CMSIS\system_stm32f4xx.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_assert.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\STM32F4\CMSIS\stm32f4xx_assert.c</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f4xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\system_stm32f4xx.c</FilePath>
             </File>
           </Files>
         </Group>
