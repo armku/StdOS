@@ -1,251 +1,63 @@
-#if 0
 #include "SerialPort.h"
 #include "Timer.h"
 #include "Spi.h"
+#if 0
+    OutputPort led1(PF9, false);
+    OutputPort led2(PF10, false);
 
-OutputPort led1(PF9,false);
-OutputPort led2(PF10,false);
-
-void LedTask(void *param)
-{
-    OutputPort *leds = (OutputPort*)param;
-    *leds = ! * leds;	
-    //led2 = keyup;
-}
-
-uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
-{
-    bs.Show(true);
-    return 0;
-}
-uint time6cnt;
-void TimerTask(void *param)
-{
-//    static int i = 0;
-//    printf("\r\n%d: cnt:%d", i++, time6cnt);
-}
-void InterruptTest();
-void w25q128test();
-#endif
-void mainarmfly(void);
-int main(void)
-{
-	mainarmfly();
-	#if 0
-	Sys.Init();
-	#if DEBUG
-        Sys.MessagePort = COM1;
-        Sys.ShowInfo();
-    #endif 		
-	SerialPort::GetMessagePort()->Register(OnUsart1Read);
-	
-	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
-	Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
-	InterruptTest();
-	w25q128test();
-    Sys.Start();
-	#endif
-}
-#include "stm32f4xx.h"
-/* 按键口对应的RCC时钟 */
-#define RCC_ALL_LED 	(RCC_AHB1Periph_GPIOC | RCC_AHB1Periph_GPIOF | RCC_AHB1Periph_GPIOI)
-
-#define GPIO_PORT_LED1  GPIOI
-#define GPIO_PIN_LED1	GPIO_Pin_10
-
-#define GPIO_PORT_LED2  GPIOF
-#define GPIO_PIN_LED2	GPIO_Pin_7
-
-#define GPIO_PORT_LED3  GPIOF
-#define GPIO_PIN_LED3	GPIO_Pin_8
-
-#define GPIO_PORT_LED4  GPIOC
-#define GPIO_PIN_LED4	GPIO_Pin_2
-/*
- *********************************************************************************************************
- *	函 数 名: bsp_LedOff
- *	功能说明: 熄灭指定的LED指示灯。
- *	形    参:  _no : 指示灯序号，范围 1 - 4
- *	返 回 值: 无
- *********************************************************************************************************
- */
-void bsp_LedOff(uint8_t _no)
-{
-    _no--;
-
-    if (_no == 0)
+    void LedTask(void *param)
     {
-        GPIO_PORT_LED1->BSRRL = GPIO_PIN_LED1;
+        OutputPort *leds = (OutputPort*)param;
+        *leds = ! * leds;
+        //led2 = keyup;
     }
-    else if (_no == 1)
-    {
-        GPIO_PORT_LED2->BSRRL = GPIO_PIN_LED2;
-    }
-    else if (_no == 2)
-    {
-        GPIO_PORT_LED3->BSRRL = GPIO_PIN_LED3;
-    }
-    else if (_no == 3)
-    {
-        GPIO_PORT_LED4->BSRRL = GPIO_PIN_LED4;
-    }
-}
 
-/*
- *********************************************************************************************************
- *	函 数 名: bsp_InitLed
- *	功能说明: 配置LED指示灯相关的GPIO,  该函数被 bsp_Init() 调用。
- *	形    参:  无
- *	返 回 值: 无
- *********************************************************************************************************
- */
-void bsp_InitLed(void)
-{
-    GPIO_InitTypeDef GPIO_InitStructure;
-
-    /* 打开GPIO时钟 */
-    RCC_AHB1PeriphClockCmd(RCC_ALL_LED, ENABLE);
-
-    /*
-    配置所有的LED指示灯GPIO为推挽输出模式
-    由于将GPIO设置为输出时，GPIO输出寄存器的值缺省是0，因此会驱动LED点亮.
-    这是我不希望的，因此在改变GPIO为输出前，先关闭LED指示灯
-     */
-    bsp_LedOff(1);
-    bsp_LedOff(2);
-    bsp_LedOff(3);
-    bsp_LedOff(4);
-
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT; /* 设为输出口 */
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; /* 设为推挽模式 */
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL; /* 上下拉电阻不使能 */
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz; /* IO口最大速度 */
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_LED1;
-    GPIO_Init(GPIO_PORT_LED1, &GPIO_InitStructure);
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_LED2;
-    GPIO_Init(GPIO_PORT_LED2, &GPIO_InitStructure);
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_LED3;
-    GPIO_Init(GPIO_PORT_LED3, &GPIO_InitStructure);
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_LED4;
-    GPIO_Init(GPIO_PORT_LED4, &GPIO_InitStructure);
-}
-
-/*
- *********************************************************************************************************
- *	函 数 名: bsp_LedOn
- *	功能说明: 点亮指定的LED指示灯。
- *	形    参:  _no : 指示灯序号，范围 1 - 4
- *	返 回 值: 无
- *********************************************************************************************************
- */
-void bsp_LedOn(uint8_t _no)
-{
-    _no--;
-
-    if (_no == 0)
+    uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
     {
-        GPIO_PORT_LED1->BSRRH = GPIO_PIN_LED1;
-    }
-    else if (_no == 1)
-    {
-        GPIO_PORT_LED2->BSRRH = GPIO_PIN_LED2;
-    }
-    else if (_no == 2)
-    {
-        GPIO_PORT_LED3->BSRRH = GPIO_PIN_LED3;
-    }
-    else if (_no == 3)
-    {
-        GPIO_PORT_LED4->BSRRH = GPIO_PIN_LED4;
-    }
-}
-/*
- *********************************************************************************************************
- *	函 数 名: bsp_LedToggle
- *	功能说明: 翻转指定的LED指示灯。
- *	形    参:  _no : 指示灯序号，范围 1 - 4
- *	返 回 值: 按键代码
- *********************************************************************************************************
- */
-void bsp_LedToggle(uint8_t _no)
-{
-    if (_no == 1)
-    {
-        GPIO_PORT_LED1->ODR ^= GPIO_PIN_LED1;
-    }
-    else if (_no == 2)
-    {
-        GPIO_PORT_LED2->ODR ^= GPIO_PIN_LED2;
-    }
-    else if (_no == 3)
-    {
-        GPIO_PORT_LED3->ODR ^= GPIO_PIN_LED3;
-    }
-    else if (_no == 4)
-    {
-        GPIO_PORT_LED4->ODR ^= GPIO_PIN_LED4;
-    }
-}
-
-/*
- *********************************************************************************************************
- *	函 数 名: bsp_IsLedOn
- *	功能说明: 判断LED指示灯是否已经点亮。
- *	形    参:  _no : 指示灯序号，范围 1 - 4
- *	返 回 值: 1表示已经点亮，0表示未点亮
- *********************************************************************************************************
- */
-uint8_t bsp_IsLedOn(uint8_t _no)
-{
-    if (_no == 1)
-    {
-        if ((GPIO_PORT_LED1->ODR &GPIO_PIN_LED1) == 0)
-        {
-            return 1;
-        }
+        bs.Show(true);
         return 0;
     }
-    else if (_no == 2)
+    uint time6cnt;
+    void TimerTask(void *param)
     {
-        if ((GPIO_PORT_LED2->ODR &GPIO_PIN_LED2) == 0)
-        {
-            return 1;
-        }
-        return 0;
+        //    static int i = 0;
+        //    printf("\r\n%d: cnt:%d", i++, time6cnt);
     }
-    else if (_no == 3)
-    {
-        if ((GPIO_PORT_LED3->ODR &GPIO_PIN_LED3) == 0)
-        {
-            return 1;
-        }
-        return 0;
-    }
-    else if (_no == 4)
-    {
-        if ((GPIO_PORT_LED4->ODR &GPIO_PIN_LED4) == 0)
-        {
-            return 1;
-        }
-        return 0;
-    }
-
-    return 0;
-}
-
+    void InterruptTest();
+    void w25q128test();
+#endif 
+OutputPort led1(PI10, false);
+OutputPort led2(PF7, false);
+OutputPort led3(PF8, false);
+OutputPort led4(PC2, false);
 void delay(int len)
 {
     for (int i = 0; i < len; i++)
         ;
 }
 
-void mainarmfly()
+void bsp_LedToggle(uint8_t _no)
 {
-    bsp_InitLed();
+    if (_no == 1)
+    {
+        led1 = !led1; //GPIO_PORT_LED1->ODR ^= GPIO_PIN_LED1;
+    }
+    else if (_no == 2)
+    {
+        led2 = !led2; //GPIO_PORT_LED2->ODR ^= GPIO_PIN_LED2;
+    }
+    else if (_no == 3)
+    {
+        led3 = !led3; //GPIO_PORT_LED3->ODR ^= GPIO_PIN_LED3;
+    }
+    else if (_no == 4)
+    {
+        led4 = !led4; //GPIO_PORT_LED4->ODR ^= GPIO_PIN_LED4;
+    }
+}
+
+int main(void)
+{
     while (1)
     {
         delay(2000000);
@@ -255,5 +67,18 @@ void mainarmfly()
         bsp_LedToggle(2);
         bsp_LedToggle(1);
     }
-}
+    #if 0
+        Sys.Init();
+        #if DEBUG
+            Sys.MessagePort = COM1;
+            Sys.ShowInfo();
+        #endif 
+        SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
+        Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
+        Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
+        InterruptTest();
+        w25q128test();
+        Sys.Start();
+    #endif 
+}
