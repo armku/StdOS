@@ -14,9 +14,6 @@ static void UartSend(UART_T *_pUart, uint8_t *_ucaBuf, uint16_t _usLen);
 static uint8_t UartGetChar(UART_T *_pUart, uint8_t *_pByte);
 static void UartIRQ(UART_T *_pUart);
 static void ConfigUartNVIC(void);
-
-void RS485_InitTXE(void);
-
 /*
 *********************************************************************************************************
 *	函 数 名: bsp_InitUart
@@ -28,8 +25,7 @@ void RS485_InitTXE(void);
 void bsp_InitUart(void)
 {
 	UartVarInit();		/* 必须先初始化全局变量,再配置硬件 */
-	InitHardUart();		/* 配置串口的硬件参数(波特率等) */
-	RS485_InitTXE();	/* 配置RS485芯片的发送使能硬件，配置为推挽输出 */
+	InitHardUart();		/* 配置串口的硬件参数(波特率等) */	
 	ConfigUartNVIC();	/* 配置串口中断 */
 }
 
@@ -166,30 +162,6 @@ void comClearRxFifo(COM_PORT_E _ucPort)
 	pUart->usRxWrite = 0;
 	pUart->usRxRead = 0;
 	pUart->usRxCount = 0;
-}
-
-/* 如果是RS485通信，请按如下格式编写函数， 我们仅举了 USART3作为RS485的例子 */
-
-/*
-*********************************************************************************************************
-*	函 数 名: RS485_InitTXE
-*	功能说明: 配置RS485发送使能口线 TXE
-*	形    参: 无
-*	返 回 值: 无
-*********************************************************************************************************
-*/
-void RS485_InitTXE(void)
-{
-	GPIO_InitTypeDef GPIO_InitStructure;
-
-	RCC_AHB1PeriphClockCmd(RCC_RS485_TXEN, ENABLE);	/* 打开GPIO时钟 */
-
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;		/* 设为输出口 */
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;		/* 设为推挽 */
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;	/* 无上拉电阻 */
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;	/* IO口最大速度 */
-	GPIO_InitStructure.GPIO_Pin = PIN_RS485_TXEN;
-	GPIO_Init(PORT_RS485_TXEN, &GPIO_InitStructure);
 }
 
 /*
