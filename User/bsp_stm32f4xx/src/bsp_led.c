@@ -1,53 +1,4 @@
-/*
-*********************************************************************************************************
-*
-*	模块名称 : LED指示灯驱动模块
-*	文件名称 : bsp_led.c
-*	版    本 : V1.0
-*	说    明 : 驱动LED指示灯
-*
-*	修改记录 :
-*		版本号  日期        作者     说明
-*		V1.0    2013-02-01 armfly  正式发布
-*
-*	Copyright (C), 2013-2014, 安富莱电子 www.armfly.com
-*
-*********************************************************************************************************
-*/
-
 #include "bsp.h"
-
-/*
-	该程序适用于安富莱STM32-X4、STM32-F4开发板
-
-	如果用于其它硬件，请修改GPIO定义和 IsKeyDown1 - IsKeyDown8 函数
-
-	如果用户的LED指示灯个数小于4个，可以将多余的LED全部定义为和第1个LED一样，并不影响程序功能
-*/
-
-#ifdef STM32_X3		/* 安富莱 STM32-X4 开发板 */
-	/*
-		安富莱STM32-X4 LED口线分配：
-			LED1       : PE2 (低电平点亮，高电平熄灭)
-			LED2       : PE3 (低电平点亮，高电平熄灭)
-			LED3       : PE4 (低电平点亮，高电平熄灭)
-			LED4       : PE5 (低电平点亮，高电平熄灭)
-	*/
-	#define RCC_ALL_LED 	RCC_AHB1Periph_GPIOE	/* 按键口对应的RCC时钟 */
-
-	#define GPIO_PORT_LED1  GPIOE
-	#define GPIO_PIN_LED1	GPIO_Pin_2
-
-	#define GPIO_PORT_LED2  GPIOE
-	#define GPIO_PIN_LED2	GPIO_Pin_3
-
-	#define GPIO_PORT_LED3  GPIOE
-	#define GPIO_PIN_LED3	GPIO_Pin_4
-
-	#define GPIO_PORT_LED4  GPIOE
-	#define GPIO_PIN_LED4	GPIO_Pin_5
-
-#else	/* STM32_F4 */
 	/*
 		安富莱STM32-V5 开发板LED口线分配：
 			LD1     : PI10/TP_NCS          (低电平点亮，高电平熄灭)
@@ -70,7 +21,6 @@
 
 	#define GPIO_PORT_LED4  GPIOC
 	#define GPIO_PIN_LED4	GPIO_Pin_2
-#endif
 
 /*
 *********************************************************************************************************
@@ -248,5 +198,3 @@ uint8_t bsp_IsLedOn(uint8_t _no)
 
 	return 0;
 }
-
-/***************************** 安富莱电子 www.armfly.com (END OF FILE) *********************************/
