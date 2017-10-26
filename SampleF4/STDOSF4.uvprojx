@@ -392,7 +392,7 @@
             <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\system_stm32f4xx.c</FilePath>
+              <FilePath>..\User\system_stm32f4xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1427,7 +1427,7 @@
             <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\bsp_stm32f4xx\system_stm32f4xx.c</FilePath>
+              <FilePath>..\User\system_stm32f4xx.c</FilePath>
             </File>
           </Files>
         </Group>
