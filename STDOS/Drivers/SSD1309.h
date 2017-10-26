@@ -31,21 +31,5 @@
             OutputPort _rd;
             OutputPort _sclk;
             OutputPort _sdin;
-
-            void OLED_CS_Clr();
-            void OLED_CS_Set();
-            void OLED_RST_Clr();
-            void OLED_RST_Set();
-            void OLED_DC_Clr();
-            void OLED_DC_Set();
-            void OLED_WR_Clr();
-            void OLED_WR_Set();
-            void OLED_RD_Clr();
-            void OLED_RD_Set();
-            void OLED_SCLK_Clr();
-            void OLED_SCLK_Set();
-            void OLED_SDIN_Clr();
-            void OLED_SDIN_Set();
-
     };
 #endif

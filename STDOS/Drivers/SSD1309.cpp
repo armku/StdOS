@@ -14,102 +14,40 @@
 #define X_WIDTH 	128
 #define Y_WIDTH 	64	    						  
 
-void SSD1309::SetPin(Pin cs,Pin res, Pin dc,Pin wr,Pin rd,Pin sclk,Pin sdin)
+void SSD1309::SetPin(Pin cs, Pin res, Pin dc, Pin wr, Pin rd, Pin sclk, Pin sdin)
 {
-	this->_cs.Set(cs);
-	this->_res.Set(res);
-	this->_dc.Set(dc);
-	this->_wr.Set(wr);
-	this->_rd.Set(rd);
-	this->_sclk.Set(sclk);
-	this->_sdin.Set(sdin);
-	
-	this->_cs.OpenDrain=false;
-	this->_res.OpenDrain=false;
-	this->_dc.OpenDrain=false;
-	this->_wr.OpenDrain=false;
-	this->_rd.OpenDrain=false;
-	this->_sclk.OpenDrain=false;
-	this->_sdin.OpenDrain=false;
-	
-	this->_cs.Invert=0;
-	this->_res.Invert=0;
-	this->_dc.Invert=0;
-	this->_wr.Invert=0;
-	this->_rd.Invert=0;
-	this->_sclk.Invert=0;
-	this->_sdin.Invert=0;
-	
-	this->_cs.Open();
-	this->_res.Open();
-	this->_dc.Open();
-	this->_wr.Open();
-	this->_rd.Open();
-	this->_sclk.Open();
-	this->_sdin.Open();
-}
-void  SSD1309::OLED_CS_Clr()  
-{
-	_cs=0;
-}
-void  SSD1309::OLED_CS_Set()  
-{
-	_cs=1;
-}
+    this->_cs.Set(cs);
+    this->_res.Set(res);
+    this->_dc.Set(dc);
+    this->_wr.Set(wr);
+    this->_rd.Set(rd);
+    this->_sclk.Set(sclk);
+    this->_sdin.Set(sdin);
 
-void  SSD1309::OLED_RST_Clr() 
-{
-	_res=0;
-}
-void  SSD1309::OLED_RST_Set() 
-{
-	_res=1;
-}
+    this->_cs.OpenDrain = false;
+    this->_res.OpenDrain = false;
+    this->_dc.OpenDrain = false;
+    this->_wr.OpenDrain = false;
+    this->_rd.OpenDrain = false;
+    this->_sclk.OpenDrain = false;
+    this->_sdin.OpenDrain = false;
 
-void  SSD1309::OLED_DC_Clr() 
-{
-	_dc=0;
-}
-void  SSD1309::OLED_DC_Set() 
-{
-	_dc=1;
-}
+    this->_cs.Invert = 0;
+    this->_res.Invert = 0;
+    this->_dc.Invert = 0;
+    this->_wr.Invert = 0;
+    this->_rd.Invert = 0;
+    this->_sclk.Invert = 0;
+    this->_sdin.Invert = 0;
 
-void  SSD1309::OLED_WR_Clr() 
-{
-	_wr=0;
+    this->_cs.Open();
+    this->_res.Open();
+    this->_dc.Open();
+    this->_wr.Open();
+    this->_rd.Open();
+    this->_sclk.Open();
+    this->_sdin.Open();
 }
-void  SSD1309::OLED_WR_Set() 
-{
-	_wr=1;
-}
-
-void  SSD1309::OLED_RD_Clr() 
-{
-	_rd=0;
-}
-void  SSD1309::OLED_RD_Set() 
-{
-	_rd=1;
-}
-
-void SSD1309::OLED_SCLK_Clr()
-{
-	_sclk=0;
-}
-void SSD1309::OLED_SCLK_Set()
-{
-	_sclk=1;
-}
-void  SSD1309::OLED_SDIN_Clr()
-{
-	_sdin=0;
-}
-void SSD1309::OLED_SDIN_Set()
-{	
-	_sdin=1;
-}
-
 
 #define OLED_CMD  0	//写命令
 #define OLED_DATA 1	//写数据
@@ -150,22 +88,22 @@ void SSD1309::OLED_SDIN_Set()
     {
         byte i;
         if (cmd)
-            OLED_DC_Set();
+            this->_dc = 1;
         else
-            OLED_DC_Clr();
-        OLED_CS_Clr();
+            this->_dc = 0;
+        this->_cs = 0;
         for (i = 0; i < 8; i++)
         {
-            OLED_SCLK_Clr();
+            this->_sclk = 0;
             if (dat &0x80)
-                OLED_SDIN_Set();
+                this->_sdin = 1;
             else
-                OLED_SDIN_Clr();
-            OLED_SCLK_Set();
+                this->_sdin = 0;
+            this->_sclk = 1;
             dat <<= 1;
         }
-        OLED_CS_Set();
-        OLED_DC_Set();
+        this->_cs = 1;
+        this->_dc = 1;
     }
 #endif 
 void SSD1309::OLED_Set_Pos(unsigned char x, unsigned char y)
@@ -329,16 +267,17 @@ void SSD1309::OLED_DrawBMP(unsigned char x0, unsigned char y0, unsigned char x1,
         }
     }
 }
+
 //初始化SSD1306					    
 void SSD1309::OLED_Init(void)
-{	
-    OLED_RST_Set();
-	Sys.Sleep(100);
-    //delay_ms(100);
-    OLED_RST_Clr();
+{
+    this->_res = 1;
     Sys.Sleep(100);
     //delay_ms(100);
-    OLED_RST_Set();
+    this->_res = 0;
+    Sys.Sleep(100);
+    //delay_ms(100);
+    this->_res = 1;
     OLED_WR_Byte(0xFD, OLED_CMD); //--turn off oled panel
     OLED_WR_Byte(0x12, OLED_CMD); //--turn off oled panel	
     OLED_WR_Byte(0xAE, OLED_CMD); //--turn off oled panel
@@ -374,4 +313,3 @@ void SSD1309::OLED_Init(void)
     OLED_Clear();
     OLED_Set_Pos(0, 0);
 }
-
