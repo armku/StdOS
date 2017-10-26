@@ -58,6 +58,12 @@ void bsp_LedToggle(uint8_t _no)
 
 int main(void)
 {
+	Sys.Init();
+	#if DEBUG
+            Sys.MessagePort = COM1;
+            Sys.ShowInfo();
+    #endif 
+	//SerialPort::GetMessagePort()->Register(OnUsart1Read);
     while (1)
     {
         delay(2000000);
@@ -67,13 +73,9 @@ int main(void)
         bsp_LedToggle(2);
         bsp_LedToggle(1);
     }
-    #if 0
-        Sys.Init();
-        #if DEBUG
-            Sys.MessagePort = COM1;
-            Sys.ShowInfo();
-        #endif 
-        SerialPort::GetMessagePort()->Register(OnUsart1Read);
+    #if 0        
+        
+        
 
         Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
         Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
