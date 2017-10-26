@@ -24,13 +24,13 @@
         private:
             uint oled_pow(byte m, byte n);
 
-            OutputPort cs;
-            OutputPort res;
-            OutputPort dc;
-            OutputPort wr;
-            OutputPort rd;
-            OutputPort sclk;
-            OutputPort sdin;
+            OutputPort _cs;
+            OutputPort _res;
+            OutputPort _dc;
+            OutputPort _wr;
+            OutputPort _rd;
+            OutputPort _sclk;
+            OutputPort _sdin;
 
             void OLED_CS_Clr();
             void OLED_CS_Set();
