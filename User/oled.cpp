@@ -1,55 +1,52 @@
 #include "stm32f10x.h"
-//位带操作,实现51类似的GPIO控制功能
-//具体实现思想,参考<<CM3权威指南>>第五章(87页~92页).
-//IO口操作宏定义
-#define BITBAND(addr, bitnum) ((addr & 0xF0000000)+0x2000000+((addr &0xFFFFF)<<5)+(bitnum<<2)) 
-#define MEM_ADDR(addr)  *((volatile unsigned long  *)(addr)) 
-#define BIT_ADDR(addr, bitnum)   MEM_ADDR(BITBAND(addr, bitnum)) 
-//IO口地址映射
-#define GPIOA_ODR_Addr    (GPIOA_BASE+12) //0x4001080C 
-#define GPIOB_ODR_Addr    (GPIOB_BASE+12) //0x40010C0C 
-#define GPIOC_ODR_Addr    (GPIOC_BASE+12) //0x4001100C 
-#define GPIOD_ODR_Addr    (GPIOD_BASE+12) //0x4001140C 
-#define GPIOE_ODR_Addr    (GPIOE_BASE+12) //0x4001180C 
-#define GPIOF_ODR_Addr    (GPIOF_BASE+12) //0x40011A0C    
-#define GPIOG_ODR_Addr    (GPIOG_BASE+12) //0x40011E0C    
-
-#define GPIOA_IDR_Addr    (GPIOA_BASE+8) //0x40010808 
-#define GPIOB_IDR_Addr    (GPIOB_BASE+8) //0x40010C08 
-#define GPIOC_IDR_Addr    (GPIOC_BASE+8) //0x40011008 
-#define GPIOD_IDR_Addr    (GPIOD_BASE+8) //0x40011408 
-#define GPIOE_IDR_Addr    (GPIOE_BASE+8) //0x40011808 
-#define GPIOF_IDR_Addr    (GPIOF_BASE+8) //0x40011A08 
-#define GPIOG_IDR_Addr    (GPIOG_BASE+8) //0x40011E08 
-
-//IO口操作,只对单一的IO口!
-//确保n的值小于16!
-#define PAout(n)   BIT_ADDR(GPIOA_ODR_Addr,n)  //输出 
-#define PAin(n)    BIT_ADDR(GPIOA_IDR_Addr,n)  //输入 
-
-#define PBout(n)   BIT_ADDR(GPIOB_ODR_Addr,n)  //输出 
-#define PBin(n)    BIT_ADDR(GPIOB_IDR_Addr,n)  //输入 
-
-#define PCout(n)   BIT_ADDR(GPIOC_ODR_Addr,n)  //输出 
-#define PCin(n)    BIT_ADDR(GPIOC_IDR_Addr,n)  //输入 
-
-#define PDout(n)   BIT_ADDR(GPIOD_ODR_Addr,n)  //输出 
-#define PDin(n)    BIT_ADDR(GPIOD_IDR_Addr,n)  //输入 
-
-#define PEout(n)   BIT_ADDR(GPIOE_ODR_Addr,n)  //输出 
-#define PEin(n)    BIT_ADDR(GPIOE_IDR_Addr,n)  //输入
-
-#define PFout(n)   BIT_ADDR(GPIOF_ODR_Addr,n)  //输出 
-#define PFin(n)    BIT_ADDR(GPIOF_IDR_Addr,n)  //输入
-
-#define PGout(n)   BIT_ADDR(GPIOG_ODR_Addr,n)  //输出 
-#define PGin(n)    BIT_ADDR(GPIOG_IDR_Addr,n)  //输入
-
 #include "Sys.h"
-#include "oled.h"
-#include "stdlib.h"
-#include "oledfont.h"  	 
-//#include "delay.h"
+#include "oledfont.h"  
+#include "Drivers\SSD1309.h"
+
+//OLED模式设置
+//0:4线串行模式
+//1:并行8080模式
+#define OLED_MODE 0
+#define SIZE 16
+#define XLevelL		0x00
+#define XLevelH		0x10
+#define Max_Column	128
+#define Max_Row		64
+#define Brightness	0xFF 
+#define X_WIDTH 	128
+#define Y_WIDTH 	64	    						  
+//-----------------OLED端口定义----------------  					   
+#define OLED_CS_Clr()  GPIO_ResetBits(GPIOD,GPIO_Pin_3)//CS
+#define OLED_CS_Set()  GPIO_SetBits(GPIOD,GPIO_Pin_3)
+
+#define OLED_RST_Clr() GPIO_ResetBits(GPIOD,GPIO_Pin_4)//RES
+#define OLED_RST_Set() GPIO_SetBits(GPIOD,GPIO_Pin_4)
+
+#define OLED_DC_Clr() GPIO_ResetBits(GPIOD,GPIO_Pin_5)//DC
+#define OLED_DC_Set() GPIO_SetBits(GPIOD,GPIO_Pin_5)
+
+#define OLED_WR_Clr() GPIO_ResetBits(GPIOG,GPIO_Pin_14)
+#define OLED_WR_Set() GPIO_SetBits(GPIOG,GPIO_Pin_14)
+
+#define OLED_RD_Clr() GPIO_ResetBits(GPIOG,GPIO_Pin_13)
+#define OLED_RD_Set() GPIO_SetBits(GPIOG,GPIO_Pin_13)
+
+
+
+//PC0~7,作为数据线
+#define DATAOUT(x) GPIO_Write(GPIOC,x);//输出  
+//使用4线串行接口时使用 
+
+#define OLED_SCLK_Clr() GPIO_ResetBits(GPIOD,GPIO_Pin_6)//CLK
+#define OLED_SCLK_Set() GPIO_SetBits(GPIOD,GPIO_Pin_6)
+
+#define OLED_SDIN_Clr() GPIO_ResetBits(GPIOD,GPIO_Pin_7)//DIN
+#define OLED_SDIN_Set() GPIO_SetBits(GPIOD,GPIO_Pin_7)
+
+
+#define OLED_CMD  0	//写命令
+#define OLED_DATA 1	//写数据
+
 //OLED的显存
 //存放格式如下.
 //[0]0 1 2 3 ... 127	
@@ -265,10 +262,12 @@ void OLED_DrawBMP(unsigned char x0, unsigned char y0, unsigned char x1, unsigned
         }
     }
 }
+
 void delay_ms(int ms)
 {
     Sys.Sleep(ms);
 }
+
 //初始化SSD1306					    
 void OLED_Init(void)
 {
@@ -295,7 +294,7 @@ void OLED_Init(void)
         GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15; //PG15 OUT推挽输出	  RST
         GPIO_Init(GPIOG, &GPIO_InitStructure);
         GPIO_SetBits(GPIOG, GPIO_Pin_15); //PG15 OUT  输出高
-    #endif
+    #endif 
     OLED_RST_Set();
     delay_ms(100);
     OLED_RST_Clr();
