@@ -62,7 +62,7 @@
     //向SSD1106写入一个字节。
     //dat:要写入的数据/命令
     //cmd:数据/命令标志 0,表示命令;1,表示数据;
-    void OLED_WR_Byte(byte dat, byte cmd)
+    void SSD1309::OLED_WR_Byte(byte dat, byte cmd)
     {
         DATAOUT(dat);
         if (cmd)
@@ -79,7 +79,7 @@
     //向SSD1106写入一个字节。
     //dat:要写入的数据/命令
     //cmd:数据/命令标志 0,表示命令;1,表示数据;
-    void OLED_WR_Byte(byte dat, byte cmd)
+    void SSD1309::OLED_WR_Byte(byte dat, byte cmd)
     {
         byte i;
         if (cmd)
@@ -101,7 +101,7 @@
         OLED_DC_Set();
     }
 #endif 
-void OLED_Set_Pos(unsigned char x, unsigned char y)
+void SSD1309::OLED_Set_Pos(unsigned char x, unsigned char y)
 {
     OLED_WR_Byte(0xb0 + y, OLED_CMD);
     OLED_WR_Byte(((x &0xf0) >> 4) | 0x10, OLED_CMD);
@@ -109,7 +109,7 @@ void OLED_Set_Pos(unsigned char x, unsigned char y)
 }
 
 //开启OLED显示    
-void OLED_Display_On(void)
+void SSD1309::OLED_Display_On(void)
 {
     OLED_WR_Byte(0X8D, OLED_CMD); //SET DCDC命令
     OLED_WR_Byte(0X14, OLED_CMD); //DCDC ON
@@ -117,7 +117,7 @@ void OLED_Display_On(void)
 }
 
 //关闭OLED显示     
-void OLED_Display_Off(void)
+void SSD1309::OLED_Display_Off(void)
 {
     OLED_WR_Byte(0X8D, OLED_CMD); //SET DCDC命令
     OLED_WR_Byte(0X10, OLED_CMD); //DCDC OFF
@@ -125,7 +125,7 @@ void OLED_Display_Off(void)
 }
 
 //清屏函数,清完屏,整个屏幕是黑色的!和没点亮一样!!!	  
-void OLED_Clear(void)
+void SSD1309::OLED_Clear(void)
 {
     byte i, n;
     for (i = 0; i < 8; i++)
@@ -144,7 +144,7 @@ void OLED_Clear(void)
 //y:0~63
 //mode:0,反白显示;1,正常显示				 
 //size:选择字体 16/12 
-void OLED_ShowChar(byte x, byte y, byte chr)
+void SSD1309::OLED_ShowChar(byte x, byte y, byte chr)
 {
     unsigned char c = 0, i = 0;
     c = chr - ' '; //得到偏移后的值			
@@ -172,7 +172,7 @@ void OLED_ShowChar(byte x, byte y, byte chr)
 }
 
 //m^n函数
-uint oled_pow(byte m, byte n)
+uint SSD1309::oled_pow(byte m, byte n)
 {
     uint result = 1;
     while (n--)
@@ -186,7 +186,7 @@ uint oled_pow(byte m, byte n)
 //size:字体大小
 //mode:模式	0,填充模式;1,叠加模式
 //num:数值(0~4294967295);	 		  
-void OLED_ShowNum(byte x, byte y, uint num, byte len, byte size)
+void SSD1309::OLED_ShowNum(byte x, byte y, uint num, byte len, byte size)
 {
     byte t, temp;
     byte enshow = 0;
@@ -209,7 +209,7 @@ void OLED_ShowNum(byte x, byte y, uint num, byte len, byte size)
 }
 
 //显示一个字符号串
-void OLED_ShowString(byte x, byte y, byte *chr)
+void SSD1309::OLED_ShowString(byte x, byte y, byte *chr)
 {
     unsigned char j = 0;
     while (chr[j] != '\0')
@@ -226,7 +226,7 @@ void OLED_ShowString(byte x, byte y, byte *chr)
 }
 
 //显示汉字
-void OLED_ShowCHinese(byte x, byte y, byte no)
+void SSD1309::OLED_ShowCHinese(byte x, byte y, byte no)
 {
     byte t, adder = 0;
     OLED_Set_Pos(x, y);
@@ -244,7 +244,7 @@ void OLED_ShowCHinese(byte x, byte y, byte no)
 }
 
 /***********功能描述：显示显示BMP图片128×64起始点坐标(x,y),x的范围0～127，y为页的范围0～7*****************/
-void OLED_DrawBMP(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1, unsigned char BMP[])
+void SSD1309::OLED_DrawBMP(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1, unsigned char BMP[])
 {
     unsigned int j = 0;
     unsigned char x, y;
@@ -262,14 +262,8 @@ void OLED_DrawBMP(unsigned char x0, unsigned char y0, unsigned char x1, unsigned
         }
     }
 }
-
-void delay_ms(int ms)
-{
-    Sys.Sleep(ms);
-}
-
 //初始化SSD1306					    
-void OLED_Init(void)
+void SSD1309::OLED_Init(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOD | RCC_APB2Periph_GPIOG, ENABLE); //使能PC,D,G端口时钟
@@ -296,9 +290,11 @@ void OLED_Init(void)
         GPIO_SetBits(GPIOG, GPIO_Pin_15); //PG15 OUT  输出高
     #endif 
     OLED_RST_Set();
-    delay_ms(100);
+	Sys.Sleep(100);
+    //delay_ms(100);
     OLED_RST_Clr();
-    delay_ms(100);
+    Sys.Sleep(100);
+    //delay_ms(100);
     OLED_RST_Set();
     OLED_WR_Byte(0xFD, OLED_CMD); //--turn off oled panel
     OLED_WR_Byte(0x12, OLED_CMD); //--turn off oled panel	
