@@ -3,23 +3,23 @@
 #include "Spi.h"
 
 #if 0
-//正点原子开发板F4
-OutputPort led1(PF9, false);
-OutputPort led2(PF10, false);
-#else
-//安福莱开发板F4-V5
-OutputPort led1(PI10, false);
-OutputPort led2(PF7, false);
-OutputPort led3(PF8, false);
-OutputPort led4(PC2, false);
-#endif
+    //正点原子开发板F4
+    OutputPort led1(PF9, false);
+    OutputPort led2(PF10, false);
+#else 
+    //安福莱开发板F4-V5
+    OutputPort led1(PI10, false);
+    OutputPort led2(PF7, false);
+    OutputPort led3(PF8, false);
+    OutputPort led4(PC2, false);
+#endif 
 void LedTask(void *param)
 {
     OutputPort *leds = (OutputPort*)param;
     *leds = ! * leds;
-	led2=!led2;
-	led3=!led3;
-	led4=!led4;
+    led2 = !led2;
+    led3 = !led3;
+    led4 = !led4;
     //led2 = keyup;
 }
 
@@ -51,5 +51,5 @@ int main(void)
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
     //InterruptTest();
     //w25q128test();    
-	Sys.Start();
+    Sys.Start();
 }
