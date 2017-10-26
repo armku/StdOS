@@ -59,6 +59,7 @@
 
     void ssd1309Test()
     {
+		ssd1309.SetPin(PD3,PD4,PD5,PD14,PD13,PD6,PD7);
         ssd1309.OLED_Init(); //≥ı ºªØOLED  
         ssd1309.OLED_Clear();
 

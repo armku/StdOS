@@ -1,5 +1,3 @@
-#include "stm32f10x.h"
-#include "Sys.h"
 #include "oledfont.h"  
 #include "Drivers\SSD1309.h"
 
@@ -15,33 +13,116 @@
 #define Brightness	0xFF 
 #define X_WIDTH 	128
 #define Y_WIDTH 	64	    						  
-//-----------------OLED端口定义----------------  					   
-#define OLED_CS_Clr()  GPIO_ResetBits(GPIOD,GPIO_Pin_3)//CS
-#define OLED_CS_Set()  GPIO_SetBits(GPIOD,GPIO_Pin_3)
 
-#define OLED_RST_Clr() GPIO_ResetBits(GPIOD,GPIO_Pin_4)//RES
-#define OLED_RST_Set() GPIO_SetBits(GPIOD,GPIO_Pin_4)
+void SSD1309::SetPin(Pin cs,Pin res, Pin dc,Pin wr,Pin rd,Pin sclk,Pin sdin)
+{
+	this->cs.Set(cs);
+	this->res.Set(res);
+	this->dc.Set(dc);
+	this->wr.Set(wr);
+	this->rd.Set(rd);
+	this->sclk.Set(sclk);
+	this->sdin.Set(sdin);
+	
+	this->cs.OpenDrain=false;
+	this->res.OpenDrain=false;
+	this->dc.OpenDrain=false;
+	this->wr.OpenDrain=false;
+	this->rd.OpenDrain=false;
+	this->sclk.OpenDrain=false;
+	this->sdin.OpenDrain=false;
+	
+	this->cs.Invert=0;
+	this->res.Invert=0;
+	this->dc.Invert=0;
+	this->wr.Invert=0;
+	this->rd.Invert=0;
+	this->sclk.Invert=0;
+	this->sdin.Invert=0;
+	
+	this->cs.Open();
+	this->res.Open();
+	this->dc.Open();
+	this->wr.Open();
+	this->rd.Open();
+	this->sclk.Open();
+	this->sdin.Open();
+}
+void  SSD1309::OLED_CS_Clr()  
+{
+	//GPIO_ResetBits(GPIOD,GPIO_Pin_3);//CS
+	cs=0;
+}
+void  SSD1309::OLED_CS_Set()  
+{
+	//GPIO_SetBits(GPIOD,GPIO_Pin_3);
+	cs=1;
+}
 
-#define OLED_DC_Clr() GPIO_ResetBits(GPIOD,GPIO_Pin_5)//DC
-#define OLED_DC_Set() GPIO_SetBits(GPIOD,GPIO_Pin_5)
+void  SSD1309::OLED_RST_Clr() 
+{
+	//GPIO_ResetBits(GPIOD,GPIO_Pin_4);//RES
+	res=0;
+}
+void  SSD1309::OLED_RST_Set() 
+{
+	//GPIO_SetBits(GPIOD,GPIO_Pin_4);
+	res=1;
+}
 
-#define OLED_WR_Clr() GPIO_ResetBits(GPIOG,GPIO_Pin_14)
-#define OLED_WR_Set() GPIO_SetBits(GPIOG,GPIO_Pin_14)
+void  SSD1309::OLED_DC_Clr() 
+{
+	//GPIO_ResetBits(GPIOD,GPIO_Pin_5);//DC
+	dc=0;
+}
+void  SSD1309::OLED_DC_Set() 
+{
+	//GPIO_SetBits(GPIOD,GPIO_Pin_5);
+	dc=1;
+}
 
-#define OLED_RD_Clr() GPIO_ResetBits(GPIOG,GPIO_Pin_13)
-#define OLED_RD_Set() GPIO_SetBits(GPIOG,GPIO_Pin_13)
+void  SSD1309::OLED_WR_Clr() 
+{
+	//GPIO_ResetBits(GPIOG,GPIO_Pin_14);
+	wr=0;
+}
+void  SSD1309::OLED_WR_Set() 
+{
+	//GPIO_SetBits(GPIOG,GPIO_Pin_14);
+	wr=1;
+}
 
+void  SSD1309::OLED_RD_Clr() 
+{
+	//GPIO_ResetBits(GPIOG,GPIO_Pin_13);
+	rd=0;
+}
+void  SSD1309::OLED_RD_Set() 
+{
+	//GPIO_SetBits(GPIOG,GPIO_Pin_13);
+	rd=1;
+}
 
-
-//PC0~7,作为数据线
-#define DATAOUT(x) GPIO_Write(GPIOC,x);//输出  
-//使用4线串行接口时使用 
-
-#define OLED_SCLK_Clr() GPIO_ResetBits(GPIOD,GPIO_Pin_6)//CLK
-#define OLED_SCLK_Set() GPIO_SetBits(GPIOD,GPIO_Pin_6)
-
-#define OLED_SDIN_Clr() GPIO_ResetBits(GPIOD,GPIO_Pin_7)//DIN
-#define OLED_SDIN_Set() GPIO_SetBits(GPIOD,GPIO_Pin_7)
+void SSD1309::OLED_SCLK_Clr()
+{
+	//GPIO_ResetBits(GPIOD,GPIO_Pin_6);//CLK
+	sclk=0;
+}
+void SSD1309::OLED_SCLK_Set()
+{
+	//GPIO_SetBits(GPIOD,GPIO_Pin_6);
+	sclk=1;
+}
+void  SSD1309::OLED_SDIN_Clr()
+{
+	//GPIO_ResetBits(GPIOD,GPIO_Pin_7);//DIN
+	sdin=0;
+}
+void SSD1309::OLED_SDIN_Set()
+{	
+	//GPIO_SetBits(GPIOD,GPIO_Pin_7);
+	sdin=1;
+}
 
 
 #define OLED_CMD  0	//写命令
@@ -264,31 +345,7 @@ void SSD1309::OLED_DrawBMP(unsigned char x0, unsigned char y0, unsigned char x1,
 }
 //初始化SSD1306					    
 void SSD1309::OLED_Init(void)
-{
-    GPIO_InitTypeDef GPIO_InitStructure;
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOD | RCC_APB2Periph_GPIOG, ENABLE); //使能PC,D,G端口时钟
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_3 | GPIO_Pin_8; //PD3,PD6推挽输出  
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; //推挽输出
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; //速度50MHz
-    GPIO_Init(GPIOD, &GPIO_InitStructure); //初始化GPIOD3,6
-    GPIO_SetBits(GPIOD, GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_3 | GPIO_Pin_8); //PD3,PD6 输出高
-
-    #if OLED_MODE==1
-
-        GPIO_InitStructure.GPIO_Pin = 0xFF; //PC0~7 OUT推挽输出
-        GPIO_Init(GPIOC, &GPIO_InitStructure);
-        GPIO_SetBits(GPIOC, 0xFF); //PC0~7输出高
-        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15; //PG13,14,15 OUT推挽输出
-        GPIO_Init(GPIOG, &GPIO_InitStructure);
-        GPIO_SetBits(GPIOG, GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15); //PG13,14,15 OUT  输出高
-    #else 
-        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1; //PC0,1 OUT推挽输出
-        GPIO_Init(GPIOC, &GPIO_InitStructure);
-        GPIO_SetBits(GPIOC, GPIO_Pin_0 | GPIO_Pin_1); //PC0,1 OUT  输出高
-        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15; //PG15 OUT推挽输出	  RST
-        GPIO_Init(GPIOG, &GPIO_InitStructure);
-        GPIO_SetBits(GPIOG, GPIO_Pin_15); //PG15 OUT  输出高
-    #endif 
+{	
     OLED_RST_Set();
 	Sys.Sleep(100);
     //delay_ms(100);

@@ -1,10 +1,12 @@
 #ifndef _SSD1309_H
     #define _SSD1309_H
     #include "Sys.h"
+    #include "Port.h"
 
     class SSD1309
     {
         public:
+            void SetPin(Pin cs, Pin res, Pin dc, Pin wr, Pin rd, Pin sclk, Pin sdin);
             //OLED¿ØÖÆÓÃº¯Êý
             void OLED_WR_Byte(byte dat, byte cmd);
             void OLED_Display_On(void);
@@ -21,6 +23,29 @@
             void OLED_DrawBMP(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1, unsigned char BMP[]);
         private:
             uint oled_pow(byte m, byte n);
+
+            OutputPort cs;
+            OutputPort res;
+            OutputPort dc;
+            OutputPort wr;
+            OutputPort rd;
+            OutputPort sclk;
+            OutputPort sdin;
+
+            void OLED_CS_Clr();
+            void OLED_CS_Set();
+            void OLED_RST_Clr();
+            void OLED_RST_Set();
+            void OLED_DC_Clr();
+            void OLED_DC_Set();
+            void OLED_WR_Clr();
+            void OLED_WR_Set();
+            void OLED_RD_Clr();
+            void OLED_RD_Set();
+            void OLED_SCLK_Clr();
+            void OLED_SCLK_Set();
+            void OLED_SDIN_Clr();
+            void OLED_SDIN_Set();
 
     };
 #endif
