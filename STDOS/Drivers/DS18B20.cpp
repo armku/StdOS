@@ -5,10 +5,6 @@
 #define HIGH  1
 #define LOW   0
 
-#define DS18B20_CLK     RCC_APB2Periph_GPIOD
-#define DS18B20_PIN     GPIO_Pin_6                  
-#define DS18B20_PORT		GPIOD 
-
 void DS18B20::SetPin(Pin pin)
 {
 	this->_dio.Set(pin);
@@ -38,13 +34,6 @@ typedef struct
  */
 void DS18B20::DS18B20_Mode_IPU()
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
-    /*选择要控制的DS18B20_PORT引脚*/
-    GPIO_InitStructure.GPIO_Pin = DS18B20_PIN;
-    /*设置引脚模式为浮空输入模式*/
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
-    /*调用库函数，初始化DS18B20_PORT*/
-    GPIO_Init(DS18B20_PORT, &GPIO_InitStructure);
 }
 
 
@@ -56,15 +45,6 @@ void DS18B20::DS18B20_Mode_IPU()
  */
 void DS18B20::DS18B20_Mode_Out_PP()
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
-    /*选择要控制的DS18B20_PORT引脚*/
-    GPIO_InitStructure.GPIO_Pin = DS18B20_PIN;
-    /*设置引脚模式为通用推挽输出*/
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
-    /*设置引脚速率为50MHz */
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    /*调用库函数，初始化DS18B20_PORT*/
-    GPIO_Init(DS18B20_PORT, &GPIO_InitStructure);
 }
 
 /*
@@ -98,6 +78,7 @@ byte DS18B20::Presence()
     /* 等待存在脉冲的到来，存在脉冲为一个60~240us的低电平信号 
      * 如果存在脉冲没有来则做超时处理，从机接收到主机的复位信号后，会在15~60us后给主机发一个存在脉冲
      */
+	this->_dio=1;
     while (this->_dio && pulse_time < 100)
     {
         pulse_time++;
@@ -137,6 +118,7 @@ byte DS18B20::ReadBit()
     /* 设置成输入，释放总线，由外部上拉电阻将总线拉高 */
     DS18B20_Mode_IPU();
     //Sys.Delay(2);
+	this->_dio=1;
 
     if (this->_dio == SET)
         dat = 1;
