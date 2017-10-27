@@ -16,7 +16,7 @@
         {
             t = 0;
         }
-        ssd1309.Clear(0);
+        ssd1309.Clear(0XFF);return;
         switch (++cnt)
         {
             case 1:

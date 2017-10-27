@@ -739,6 +739,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\SSD1106.cpp</FilePath>
             </File>
+            <File>
+              <FileName>DS18B20.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1058,6 +1063,11 @@
               <FileName>SSD1309Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\SSD1309Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS18B20Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1796,6 +1806,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\SSD1106.cpp</FilePath>
             </File>
+            <File>
+              <FileName>DS18B20.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2115,6 +2130,11 @@
               <FileName>SSD1309Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\SSD1309Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS18B20Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
             </File>
           </Files>
         </Group>

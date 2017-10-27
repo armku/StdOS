@@ -79,6 +79,7 @@ void streamtest();
 SerialPort sp1t(COM1);
 void ESP8266TEST();
 void ssd1309Test();
+void ds18b20test();
 int main(void)
 {
     Sys.Init();
@@ -103,8 +104,9 @@ int main(void)
     //streamtest();
     //ModbusTest();
     //InterruptTest();
-	ssd1309Test();
+	//ssd1309Test();
     //ESP8266TEST();
+	ds18b20test();
 
     Sys.Start();
 }
