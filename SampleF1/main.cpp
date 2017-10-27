@@ -65,8 +65,8 @@ uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 
 void TimerTask(void *param)
 {
-    static int i = 0;
-    printf("\r\n%d: cnt:%d", i++, time6cnt);
+//    static int i = 0;
+//    printf("\r\n%d: cnt:%d", i++, time6cnt);
 }
 
 SerialPort *sp1;

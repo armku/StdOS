@@ -1,35 +1,36 @@
 #ifndef _SSD1309_H
     #define _SSD1309_H
     #include "Sys.h"
-    #include "Port.h"
+    #include "Port.h"	
 
     class SSD1309
     {
         public:
-            void SetPin(Pin cs, Pin res, Pin dc, Pin wr, Pin rd, Pin sclk, Pin sdin);
+            void SetPinSpi(Pin sclk,Pin sdin,Pin dc,Pin res=P0,Pin cs=P0);
             void DisplayOn();
             void DisplayOff();
             void Init();
             void Clear();
-//            void DrawPoint(byte x, byte y, byte t);
-//            void Fill(byte x1, byte y1, byte x2, byte y2, byte dot);
             void ShowChar(byte x, byte y, byte chr);
             void ShowNum(byte x, byte y, uint num, byte len, byte size);
-            void ShowString(byte x, byte y, byte *p);
-            void SetPos(unsigned char x, unsigned char y);
-            void ShowCHinese(byte x, byte y, byte no);
-            void DrawBMP(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1, unsigned char BMP[]);
+            void ShowString(byte x, byte y, char *p);
+            void ShowCHinese(byte x, byte y, char *hz);
+			void DrawBMP(byte x0, byte y0, byte x1, byte y1, byte BMP[]);
         private:
-			void WRByte(byte dat, byte cmd);            
+			void SetPos(byte x, byte y);
+            void WRByte(byte dat, byte cmd);   
+			uint oled_pow(byte m, byte n);		
+			ushort SearchhzIndex(byte lo, byte hi); //≤È’“∫∫◊÷±‡¬ÎŒª÷√
+			void ShowCHinese11(byte x, byte y, byte no);            
 		private:
-            uint oled_pow(byte m, byte n);
-
-            OutputPort _cs;
+            //SPI
+			OutputPort _cs;
             OutputPort _res;
             OutputPort _dc;
-            OutputPort _wr;
-            OutputPort _rd;
             OutputPort _sclk;
             OutputPort _sdin;
+			//8080
+			OutputPort _wr;
+            OutputPort _rd;            
     };
 #endif

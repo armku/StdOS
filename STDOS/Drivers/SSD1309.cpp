@@ -14,37 +14,29 @@
 #define X_WIDTH 	128
 #define Y_WIDTH 	64	    						  
 
-void SSD1309::SetPin(Pin cs, Pin res, Pin dc, Pin wr, Pin rd, Pin sclk, Pin sdin)
+void SSD1309::SetPinSpi(Pin sclk,Pin sdin,Pin dc,Pin res,Pin cs)
 {
-    this->_cs.Set(cs);
+	this->_cs.Set(cs);
     this->_res.Set(res);
     this->_dc.Set(dc);
-    this->_wr.Set(wr);
-    this->_rd.Set(rd);
     this->_sclk.Set(sclk);
     this->_sdin.Set(sdin);
 
     this->_cs.OpenDrain = false;
     this->_res.OpenDrain = false;
     this->_dc.OpenDrain = false;
-    this->_wr.OpenDrain = false;
-    this->_rd.OpenDrain = false;
     this->_sclk.OpenDrain = false;
     this->_sdin.OpenDrain = false;
 
     this->_cs.Invert = 0;
     this->_res.Invert = 0;
     this->_dc.Invert = 0;
-    this->_wr.Invert = 0;
-    this->_rd.Invert = 0;
     this->_sclk.Invert = 0;
     this->_sdin.Invert = 0;
 
     this->_cs.Open();
     this->_res.Open();
     this->_dc.Open();
-    this->_wr.Open();
-    this->_rd.Open();
     this->_sclk.Open();
     this->_sdin.Open();
 }
@@ -106,7 +98,7 @@ void SSD1309::SetPin(Pin cs, Pin res, Pin dc, Pin wr, Pin rd, Pin sclk, Pin sdin
         this->_dc = 1;
     }
 #endif 
-void SSD1309::SetPos(unsigned char x, unsigned char y)
+void SSD1309::SetPos(byte x, byte y)
 {
     this->WRByte(0xb0 + y, OLED_CMD);
     this->WRByte(((x &0xf0) >> 4) | 0x10, OLED_CMD);
@@ -114,7 +106,7 @@ void SSD1309::SetPos(unsigned char x, unsigned char y)
 }
 
 //开启OLED显示    
-void SSD1309::DisplayOn(void)
+void SSD1309::DisplayOn()
 {
     this->WRByte(0X8D, OLED_CMD); //SET DCDC命令
     this->WRByte(0X14, OLED_CMD); //DCDC ON
@@ -122,7 +114,7 @@ void SSD1309::DisplayOn(void)
 }
 
 //关闭OLED显示     
-void SSD1309::DisplayOff(void)
+void SSD1309::DisplayOff()
 {
     this->WRByte(0X8D, OLED_CMD); //SET DCDC命令
     this->WRByte(0X10, OLED_CMD); //DCDC OFF
@@ -214,7 +206,7 @@ void SSD1309::ShowNum(byte x, byte y, uint num, byte len, byte size)
 }
 
 //显示一个字符号串
-void SSD1309::ShowString(byte x, byte y, byte *chr)
+void SSD1309::ShowString(byte x, byte y, char *chr)
 {
     unsigned char j = 0;
     while (chr[j] != '\0')
@@ -231,25 +223,45 @@ void SSD1309::ShowString(byte x, byte y, byte *chr)
 }
 
 //显示汉字
-void SSD1309::ShowCHinese(byte x, byte y, byte no)
+void SSD1309::ShowCHinese11(byte x, byte y, byte no)
 {
-    byte t, adder = 0;
+	byte t, adder = 0;
     this->SetPos(x, y);
     for (t = 0; t < 16; t++)
     {
-        this->WRByte(Hzk[2 *no][t], OLED_DATA);
+        this->WRByte(gb16ssd1309[no].Msk[t], OLED_DATA);
         adder += 1;
     }
     this->SetPos(x, y + 1);
     for (t = 0; t < 16; t++)
     {
-        this->WRByte(Hzk[2 *no + 1][t], OLED_DATA);
+        this->WRByte(gb16ssd1309[no].Msk[16+t], OLED_DATA);
         adder += 1;
     }
 }
+void SSD1309::ShowCHinese(byte x, byte y, char *hz)
+{
+	byte lo=hz[0];
+	byte hi=hz[1];
+	this->ShowCHinese11(x,y,this->SearchhzIndex(lo,hi));
+}
+//查找汉字编码位置
+ushort SSD1309::SearchhzIndex(byte lo, byte hi)
+{
+	ushort i = 0;
+    ushort maxcount = 251;
+	for (i = 0; i < maxcount; i++)
+	{
+		if ((gb16ssd1309[i].Index[0] == lo) && (gb16ssd1309[i].Index[1] == hi))
+		{
+			return i;
+		}
+	}
+    return 0;
+}
 
 /***********功能描述：显示显示BMP图片128×64起始点坐标(x,y),x的范围0～127，y为页的范围0～7*****************/
-void SSD1309::DrawBMP(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1, unsigned char BMP[])
+void SSD1309::DrawBMP(byte x0, byte y0, byte x1, byte y1, byte BMP[])
 {
     unsigned int j = 0;
     unsigned char x, y;
