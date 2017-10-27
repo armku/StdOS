@@ -60,7 +60,7 @@ void DS18B20::DS18B20_Mode_Out_PP()
     /*选择要控制的DS18B20_PORT引脚*/
     GPIO_InitStructure.GPIO_Pin = DS18B20_PIN;
     /*设置引脚模式为通用推挽输出*/
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
     /*设置引脚速率为50MHz */
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     /*调用库函数，初始化DS18B20_PORT*/
