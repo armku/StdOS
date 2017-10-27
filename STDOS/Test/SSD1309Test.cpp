@@ -1,8 +1,13 @@
 #include "Drivers\SSD1309.h"
+#include "Drivers\SSD1106.h"
 #include "Fonts\ssd1309bmp.h"
 
 #ifdef DEBUG
+	#if 0
 	SSD1309 ssd1309;
+	#else
+	SSD1106 ssd1309;
+	#endif
     void ssd1309routin(void *param)
     {
         static int cnt;
@@ -11,7 +16,7 @@
         {
             t = 0;
         }
-        ssd1309.Clear();
+        ssd1309.Clear(0);
         switch (++cnt)
         {
             case 1:

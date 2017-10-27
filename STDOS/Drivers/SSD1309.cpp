@@ -41,9 +41,6 @@ void SSD1309::SetPinSpi(Pin sclk,Pin sdin,Pin dc,Pin res,Pin cs)
     this->_sdin.Open();
 }
 
-#define OLED_CMD  0	//写命令
-#define OLED_DATA 1	//写数据
-
 //OLED的显存
 //存放格式如下.
 //[0]0 1 2 3 ... 127	
@@ -96,29 +93,39 @@ void SSD1309::SetPinSpi(Pin sclk,Pin sdin,Pin dc,Pin res,Pin cs)
         }
         this->_cs = 1;
         this->_dc = 1;
-    }
-#endif 
+    }	
+#endif
+//写命令
+void SSD1309::_wrcmd(byte cmd)
+{
+	this->WRByte(cmd,0);
+}
+//写数据
+void SSD1309::_wrdata(byte da)
+{
+	this->WRByte(da,1);
+}	
 void SSD1309::SetPos(byte x, byte y)
 {
-    this->WRByte(0xb0 + y, OLED_CMD);
-    this->WRByte(((x &0xf0) >> 4) | 0x10, OLED_CMD);
-    this->WRByte((x &0x0f) | 0x01, OLED_CMD);
+    this->_wrcmd(0xb0 + y);
+    this->_wrcmd(((x &0xf0) >> 4) | 0x10);
+    this->_wrcmd((x &0x0f) | 0x01);
 }
 
 //开启OLED显示    
 void SSD1309::DisplayOn()
 {
-    this->WRByte(0X8D, OLED_CMD); //SET DCDC命令
-    this->WRByte(0X14, OLED_CMD); //DCDC ON
-    this->WRByte(0XAF, OLED_CMD); //DISPLAY ON
+    this->_wrcmd(0X8D); //SET DCDC命令
+    this->_wrcmd(0X14); //DCDC ON
+    this->_wrcmd(0XAF); //DISPLAY ON
 }
 
 //关闭OLED显示     
 void SSD1309::DisplayOff()
 {
-    this->WRByte(0X8D, OLED_CMD); //SET DCDC命令
-    this->WRByte(0X10, OLED_CMD); //DCDC OFF
-    this->WRByte(0XAE, OLED_CMD); //DISPLAY OFF
+    this->_wrcmd(0X8D); //SET DCDC命令
+    this->_wrcmd(0X10); //DCDC OFF
+    this->_wrcmd(0XAE); //DISPLAY OFF
 }
 
 //清屏函数,清完屏,整个屏幕是黑色的!和没点亮一样!!!	  
@@ -127,11 +134,11 @@ void SSD1309::Clear(char ch)
     byte i, n;
     for (i = 0; i < 8; i++)
     {
-        this->WRByte(0xb0 + i, OLED_CMD); //设置页地址（0~7）
-        this->WRByte(0x00, OLED_CMD); //设置显示位置—列低地址
-        this->WRByte(0x10, OLED_CMD); //设置显示位置—列高地址   
+        this->_wrcmd(0xb0 + i); //设置页地址（0~7）
+        this->_wrcmd(0x00); //设置显示位置—列低地址
+        this->_wrcmd(0x10); //设置显示位置—列高地址   
         for (n = 0; n < 128; n++)
-            this->WRByte(ch, OLED_DATA);
+            this->_wrdata(ch);
     } //更新显示
 }
 
@@ -154,16 +161,16 @@ void SSD1309::ShowChar(byte x, byte y, byte chr)
     {
         this->SetPos(x, y);
         for (i = 0; i < 8; i++)
-            this->WRByte(F8X16[c *16+i], OLED_DATA);
+            this->_wrdata(F8X16[c *16+i]);
         this->SetPos(x, y + 1);
         for (i = 0; i < 8; i++)
-            this->WRByte(F8X16[c *16+i + 8], OLED_DATA);
+            this->_wrdata(F8X16[c *16+i + 8]);
     }
     else
     {
         this->SetPos(x, y + 1);
         for (i = 0; i < 6; i++)
-            this->WRByte(F6x8[c][i], OLED_DATA);
+            this->_wrdata(F6x8[c][i]);
 
     }
 }
@@ -237,13 +244,13 @@ void SSD1309::ShowCHinese11(byte x, byte y, byte no)
     this->SetPos(x, y);
     for (t = 0; t < 16; t++)
     {
-        this->WRByte(gb16ssd1309[no].Msk[t], OLED_DATA);
+        this->_wrdata(gb16ssd1309[no].Msk[t]);
         adder += 1;
     }
     this->SetPos(x, y + 1);
     for (t = 0; t < 16; t++)
     {
-        this->WRByte(gb16ssd1309[no].Msk[16+t], OLED_DATA);
+        this->_wrdata(gb16ssd1309[no].Msk[16+t]);
         adder += 1;
     }
 }
@@ -283,7 +290,7 @@ void SSD1309::DrawBMP(byte x0, byte y0, byte x1, byte y1, byte BMP[])
         this->SetPos(x0, y);
         for (x = x0; x < x1; x++)
         {
-            this->WRByte(BMP[j++], OLED_DATA);
+            this->_wrdata(BMP[j++]);
         }
     }
 }
@@ -293,76 +300,40 @@ void SSD1309::Init()
 {
     this->_res = 1;
     Sys.Sleep(100);
-    //delay_ms(100);
     this->_res = 0;
     Sys.Sleep(100);
-    //delay_ms(100);
     this->_res = 1;
-	#if SSD1106ENABLE
-	this->WRByte(0xAE,OLED_CMD);//--turn off oled panel
-	this->WRByte(0x02,OLED_CMD);//---set low column address
-	this->WRByte(0x10,OLED_CMD);//---set high column address
-	this->WRByte(0x40,OLED_CMD);//--set start line address  Set Mapping RAM Display Start Line (0x00~0x3F)
-	this->WRByte(0x81,OLED_CMD);//--set contrast control register
-	this->WRByte(0xCF,OLED_CMD); // Set SEG Output Current Brightness
-	this->WRByte(0xA1,OLED_CMD);//--Set SEG/Column Mapping     0xa0左右反置 0xa1正常
-	this->WRByte(0xC8,OLED_CMD);//Set COM/Row Scan Direction   0xc0上下反置 0xc8正常
-	this->WRByte(0xA6,OLED_CMD);//--set normal display
-	this->WRByte(0xA8,OLED_CMD);//--set multiplex ratio(1 to 64)
-	this->WRByte(0x3f,OLED_CMD);//--1/64 duty
-	this->WRByte(0xD3,OLED_CMD);//-set display offset	Shift Mapping RAM Counter (0x00~0x3F)
-	this->WRByte(0x00,OLED_CMD);//-not offset
-	this->WRByte(0xd5,OLED_CMD);//--set display clock divide ratio/oscillator frequency
-	this->WRByte(0x80,OLED_CMD);//--set divide ratio, Set Clock as 100 Frames/Sec
-	this->WRByte(0xD9,OLED_CMD);//--set pre-charge period
-	this->WRByte(0xF1,OLED_CMD);//Set Pre-Charge as 15 Clocks & Discharge as 1 Clock
-	this->WRByte(0xDA,OLED_CMD);//--set com pins hardware configuration
-	this->WRByte(0x12,OLED_CMD);
-	this->WRByte(0xDB,OLED_CMD);//--set vcomh
-	this->WRByte(0x40,OLED_CMD);//Set VCOM Deselect Level
-	this->WRByte(0x20,OLED_CMD);//-Set Page Addressing Mode (0x00/0x01/0x02)
-	this->WRByte(0x02,OLED_CMD);//
-	this->WRByte(0x8D,OLED_CMD);//--set Charge Pump enable/disable
-	this->WRByte(0x14,OLED_CMD);//--set(0x10) disable
-	this->WRByte(0xA4,OLED_CMD);// Disable Entire Display On (0xa4/0xa5)
-	this->WRByte(0xA6,OLED_CMD);// Disable Inverse Display On (0xa6/a7) 
-	this->WRByte(0xAF,OLED_CMD);//--turn on oled panel
-	
-	this->WRByte(0xAF,OLED_CMD); /*display ON*/ 
-	#elif SSD1309ENABLE
-    this->WRByte(0xFD, OLED_CMD); //--turn off oled panel
-    this->WRByte(0x12, OLED_CMD); //--turn off oled panel	
-    this->WRByte(0xAE, OLED_CMD); //--turn off oled panel
-    this->WRByte(0xD5, OLED_CMD); //---set low column address
-    this->WRByte(0xA0, OLED_CMD); //---set high column address
-    this->WRByte(0xA8, OLED_CMD); //--set start line address  Set Mapping RAM Display Start Line (0x00~0x3F)
-    this->WRByte(0x3F, OLED_CMD); //--set contrast control register
-    this->WRByte(0xD3, OLED_CMD); // Set SEG Output Current Brightness
-    this->WRByte(0x00, OLED_CMD); //--Set SEG/Column Mapping     0xa0左右反置 0xa1正常
-    this->WRByte(0x40, OLED_CMD); //Set COM/Row Scan Direction   0xc0上下反置 0xc8正常
-    this->WRByte(0xA1, OLED_CMD); //--set normal display
-    this->WRByte(0xC8, OLED_CMD); //--set multiplex ratio(1 to 64)
-    this->WRByte(0xDA, OLED_CMD); //--1/64 duty
-    this->WRByte(0x2, OLED_CMD); //-set display offset	Shift Mapping RAM Counter (0x00~0x3F)
-    this->WRByte(0x00, OLED_CMD); //-not offset
-    this->WRByte(0xd5, OLED_CMD); //--set display clock divide ratio/oscillator frequency
-    this->WRByte(0x80, OLED_CMD); //--set divide ratio, Set Clock as 100 Frames/Sec
-    this->WRByte(0xD9, OLED_CMD); //--set pre-charge period
-    this->WRByte(0xF1, OLED_CMD); //Set Pre-Charge as 15 Clocks & Discharge as 1 Clock
-    this->WRByte(0xDA, OLED_CMD); //--set com pins hardware configuration
-    this->WRByte(0x12, OLED_CMD);
-    this->WRByte(0x81, OLED_CMD); //--set vcomh
-    this->WRByte(0xBF, OLED_CMD); //Set VCOM Deselect Level
-    this->WRByte(0xD9, OLED_CMD); //-Set Page Addressing Mode (0x00/0x01/0x02)
-    this->WRByte(0x25, OLED_CMD); //
-    this->WRByte(0xDB, OLED_CMD); //--set Charge Pump enable/disable
-    this->WRByte(0x34, OLED_CMD); //--set(0x10) disable
-    this->WRByte(0xA4, OLED_CMD); // Disable Entire Display On (0xa4/0xa5)
-    this->WRByte(0xA6, OLED_CMD); // Disable Inverse Display On (0xa6/a7) 
-    this->WRByte(0xAF, OLED_CMD); //--turn on oled panel
-
-    this->WRByte(0xAF, OLED_CMD); /*display ON*/
-	#endif
+	this->_wrcmd(0xFD); //--turn off oled panel
+    this->_wrcmd(0x12); //--turn off oled panel	
+    this->_wrcmd(0xAE); //--turn off oled panel
+    this->_wrcmd(0xD5); //---set low column address
+    this->_wrcmd(0xA0); //---set high column address
+    this->_wrcmd(0xA8); //--set start line address  Set Mapping RAM Display Start Line (0x00~0x3F)
+    this->_wrcmd(0x3F); //--set contrast control register
+    this->_wrcmd(0xD3); // Set SEG Output Current Brightness
+    this->_wrcmd(0x00); //--Set SEG/Column Mapping     0xa0左右反置 0xa1正常
+    this->_wrcmd(0x40); //Set COM/Row Scan Direction   0xc0上下反置 0xc8正常
+    this->_wrcmd(0xA1); //--set normal display
+    this->_wrcmd(0xC8); //--set multiplex ratio(1 to 64)
+    this->_wrcmd(0xDA); //--1/64 duty
+    this->_wrcmd(0x2); //-set display offset	Shift Mapping RAM Counter (0x00~0x3F)
+    this->_wrcmd(0x00); //-not offset
+    this->_wrcmd(0xd5); //--set display clock divide ratio/oscillator frequency
+    this->_wrcmd(0x80); //--set divide ratio, Set Clock as 100 Frames/Sec
+    this->_wrcmd(0xD9); //--set pre-charge period
+    this->_wrcmd(0xF1); //Set Pre-Charge as 15 Clocks & Discharge as 1 Clock
+    this->_wrcmd(0xDA); //--set com pins hardware configuration
+    this->_wrcmd(0x12);
+    this->_wrcmd(0x81); //--set vcomh
+    this->_wrcmd(0xBF); //Set VCOM Deselect Level
+    this->_wrcmd(0xD9); //-Set Page Addressing Mode (0x00/0x01/0x02)
+    this->_wrcmd(0x25); //
+    this->_wrcmd(0xDB); //--set Charge Pump enable/disable
+    this->_wrcmd(0x34); //--set(0x10) disable
+    this->_wrcmd(0xA4); // Disable Entire Display On (0xa4/0xa5)
+    this->_wrcmd(0xA6); // Disable Inverse Display On (0xa6/a7) 
+    this->_wrcmd(0xAF); //--turn on oled panel
+    this->_wrcmd(0xAF); /*display ON*/
     this->Clear();
     this->SetPos(0, 0);
 }

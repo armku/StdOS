@@ -3,9 +3,6 @@
     #include "Sys.h"
     #include "Port.h"	
 	
-	#define SSD1106ENABLE	1   
-	#define SSD1309ENABLE   0
-
     class SSD1309
     {
         public:
@@ -19,13 +16,16 @@
             void ShowString(byte x, byte y, char *p,byte interval=0);
             void ShowCHinese(byte x, byte y, char *hz);
 			void DrawBMP(byte x0, byte y0, byte x1, byte y1, byte BMP[]);
-        private:
-			void SetPos(byte x, byte y);
-            void WRByte(byte dat, byte cmd);   
+        protected:
+			void SetPos(byte x, byte y);            
+			void _wrcmd(byte cmd);//Ð´ÃüÁî
+			void _wrdata(byte da);//Ð´Êý¾Ý			       
+		private:
 			uint oled_pow(byte m, byte n);		
 			ushort SearchhzIndex(byte lo, byte hi); //²éÕÒºº×Ö±àÂëÎ»ÖÃ
-			void ShowCHinese11(byte x, byte y, byte no);            
-		private:
+			void ShowCHinese11(byte x, byte y, byte no);     
+			void WRByte(byte dat, byte cmd);
+		protected:
             //SPI
 			OutputPort _cs;
             OutputPort _res;
