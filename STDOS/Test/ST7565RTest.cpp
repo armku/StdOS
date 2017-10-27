@@ -1,10 +1,10 @@
 #include "Drivers\ST7565R.h"
 
-#ifdef DEBUG1
-	CLcd lcddr1(PD3, PD6, PD7, PB3, PB4);
+#ifdef DEBUG
+	CLcd lcddr1;
 	void ST7565Rtest()
 	{
-		
+		lcddr1.SetPin(PD3, PD6, PD7, PB3, PB4);
 		lcddr1.Init();
 		for(int i=0;i<10;i++)
 		{
