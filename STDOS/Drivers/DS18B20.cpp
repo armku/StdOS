@@ -36,7 +36,7 @@ typedef struct
  * 输入  ：无
  * 输出  ：无
  */
-void DS18B20_Mode_IPU()
+void DS18B20::DS18B20_Mode_IPU()
 {
     GPIO_InitTypeDef GPIO_InitStructure;
     /*选择要控制的DS18B20_PORT引脚*/
@@ -70,7 +70,7 @@ void DS18B20::DS18B20_Mode_Out_PP()
 /*
  *主机给从机发送复位脉冲
  */
-void DS18B20::DS18B20_Rst()
+void DS18B20::Rest()
 {
     /* 主机设置为推挽输出 */
     DS18B20_Mode_Out_PP();
@@ -90,7 +90,7 @@ void DS18B20::DS18B20_Rst()
  * 0：成功
  * 1：失败
  */
-byte DS18B20::DS18B20_Presence()
+byte DS18B20::Presence()
 {
     byte pulse_time = 0;
     /* 主机设置为上拉输入 */
@@ -124,7 +124,7 @@ byte DS18B20::DS18B20_Presence()
 /*
  * 从DS18B20读取一个bit
  */
-byte DS18B20::DS18B20_Read_Bit()
+byte DS18B20::ReadBit()
 {
     byte dat;
 
@@ -151,13 +151,13 @@ byte DS18B20::DS18B20_Read_Bit()
 /*
  * 从DS18B20读一个字节，低位先行
  */
-byte DS18B20::DS18B20_Read_Byte()
+byte DS18B20::ReadByte()
 {
     byte i, j, dat = 0;
 
     for (i = 0; i < 8; i++)
     {
-        j = DS18B20_Read_Bit();
+        j = ReadBit();
         dat = (dat) | (j << i);
     }
 
@@ -167,7 +167,7 @@ byte DS18B20::DS18B20_Read_Byte()
 /*
  * 写一个字节到DS18B20，低位先行
  */
-void DS18B20::DS18B20_Write_Byte(byte dat)
+void DS18B20::WriteByte(byte dat)
 {
     byte i, testb;
     DS18B20_Mode_Out_PP();
@@ -199,19 +199,19 @@ void DS18B20::DS18B20_Write_Byte(byte dat)
     }
 }
 
-void DS18B20::DS18B20_Start()
+void DS18B20::Start()
 {
-    DS18B20_Rst();
-    DS18B20_Presence();
-    DS18B20_Write_Byte(0XCC); /* 跳过 ROM */
-    DS18B20_Write_Byte(0X44); /* 开始转换 */
+    Rest();
+    Presence();
+    this->WriteByte(0XCC); /* 跳过 ROM */
+    this->WriteByte(0X44); /* 开始转换 */
 }
 
 byte DS18B20::Init()
 {
-    DS18B20_Rst();
+    Rest();
 
-    return DS18B20_Presence();
+    return Presence();
 }
 
 /*
@@ -234,18 +234,18 @@ float DS18B20::GetTemp()
     short s_tem;
     float f_tem;
 
-    DS18B20_Rst();
-    DS18B20_Presence();
-    DS18B20_Write_Byte(0XCC); /* 跳过 ROM */
-    DS18B20_Write_Byte(0X44); /* 开始转换 */
+    Rest();
+    Presence();
+    this->WriteByte(0XCC); /* 跳过 ROM */
+    this->WriteByte(0X44); /* 开始转换 */
 
-    DS18B20_Rst();
-    DS18B20_Presence();
-    DS18B20_Write_Byte(0XCC); /* 跳过 ROM */
-    DS18B20_Write_Byte(0XBE); /* 读温度值 */
+    Rest();
+    Presence();
+    this->WriteByte(0XCC); /* 跳过 ROM */
+    this->WriteByte(0XBE); /* 读温度值 */
 
-    tplsb = DS18B20_Read_Byte();
-    tpmsb = DS18B20_Read_Byte();
+    tplsb = ReadByte();
+    tpmsb = ReadByte();
 
     s_tem = tpmsb << 8;
     s_tem = s_tem | tplsb;

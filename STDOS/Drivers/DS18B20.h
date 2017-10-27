@@ -8,13 +8,16 @@
 			void SetPin(Pin pin);
             float GetTemp();
 		private:
-			void DS18B20_Start();
-			void DS18B20_Write_Byte(byte dat);
-			byte DS18B20_Read_Byte();
-			byte DS18B20_Read_Bit();
-			byte DS18B20_Presence();
-			void DS18B20_Rst();
+			void Start();
+			void WriteByte(byte dat);
+			byte ReadByte();
+			byte ReadBit();
+			byte Presence();
+			void Rest();
+		
+		
 			void DS18B20_Mode_Out_PP();
+			void DS18B20_Mode_IPU();
 		private:
 			OutputPort _dio;
 
