@@ -10,20 +10,31 @@ CLcd::CLcd()
     this->ShadowReset();
 }
 
-CLcd::CLcd(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs)
+void CLcd::SetPin(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs)
 {
-	this->pPinRS.Invert=false;
-    this->pPinsclk.Invert=false;
-    this->pPinsid.Invert=false;
-    this->pPinres.Invert=false;
-    this->pPincs.Invert=false;
-	
-    this->pPinRS.Set(pinrs);
+	this->pPinRS.Set(pinrs);
     this->pPinsclk.Set(pinsclk);
     this->pPinsid.Set(pinsid);
     this->pPinres.Set(pinres);
     this->pPincs.Set(pincs);
-    this->ShadowReset();
+	
+	this->pPinRS.OpenDrain=false;
+    this->pPinsclk.OpenDrain=false;
+    this->pPinsid.OpenDrain=false;
+    this->pPinres.OpenDrain=false;
+    this->pPincs.OpenDrain=false; 
+	
+	this->pPinRS.Invert=0;
+    this->pPinsclk.Invert=0;
+    this->pPinsid.Invert=0;
+    this->pPinres.Invert=0;
+    this->pPincs.Invert=0;    
+	
+	this->pPinRS.Open();
+    this->pPinsclk.Open();
+    this->pPinsid.Open();
+    this->pPinres.Open();
+    this->pPincs.Open();
 }
 /********************************************************************************************************
 º¯ Êý Ãû: Init

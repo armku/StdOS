@@ -11,8 +11,8 @@
     class CLcd
     {
         public:
-            CLcd(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs);
             CLcd();
+			void SetPin(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs);
 
             void Init(); //初始化
             void Cls(ushort x0 = 0, ushort y0 = 0, ushort width = 128, ushort height = 64); //清理指定位置

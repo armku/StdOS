@@ -29,7 +29,7 @@
     extern const byte ascii_table_8x16[95][16];
     extern const byte ascii_table_5x8[95][5];
     extern const byte ascii_table_4x8[][4];
-    extern typFNT_GB16 const GB_16[];
+    extern const typFNT_GB16 GB_16[];
 	extern const byte ascBolt[][16];
 	extern const byte ascii_table_6x12[][12];
 	extern const byte nAsciiDot6X16[][16] ;
@@ -41,14 +41,14 @@
     /////////////////////////////////////////////////////////////////////////
     extern typFNT_GB12 const GB_12[];
     
-    extern byte const FONT_UNIT[][10]; //单位
-    extern byte const FONT_CHANNEL[][10]; //输入通道
-    extern byte const FONT_INPUT_TYPE[][10]; //输入类型
-    extern byte const FONT_ALARM_TYPE[][10]; //报警类型;
-    extern byte const FONT_OUTPUT_TYPE[][10];          
-    extern byte const FONT_CONTROL_MANNER[][10];
-    extern byte const FONT_CONTROL_SE[][10];
-    extern uint const FONT_BAUD_RATE[];	
+    extern const char FONT_UNIT[][10]; //单位
+    extern const char FONT_CHANNEL[][10]; //输入通道
+    extern const char FONT_INPUT_TYPE[][10]; //输入类型
+    extern const char FONT_ALARM_TYPE[][10]; //报警类型;
+    extern const char FONT_OUTPUT_TYPE[][10];          
+    extern const char FONT_CONTROL_MANNER[][10];
+    extern const char FONT_CONTROL_SE[][10];
+    extern const uint FONT_BAUD_RATE[];	
     #ifdef __cplusplus
     }
 #endif

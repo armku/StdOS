@@ -5,8 +5,7 @@
 #include "lcd_dr.h"
 #include "Fonts\font.h"
 
-
-CLcd_DR::CLcd_DR(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs):CLcd(pinrs,pinsclk,pinsid,pinres,pincs)
+CLcd_DR::CLcd_DR()
 {}
 /*********************************************************************************************************
 函 数 名: DisplayChar4x8
@@ -30,7 +29,7 @@ void CLcd_DR::DisplayChar4x8(ushort x, ushort y, byte ch)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd_DR::DisplayString4x8(ushort x, ushort y, byte *text)
+void CLcd_DR::DisplayString4x8(ushort x, ushort y, char *text)
 {
 	while(*text)
 	{
@@ -61,7 +60,7 @@ void CLcd_DR::DisplayChar5x8(ushort x, ushort y, byte ch)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd_DR::DisplayString5x8(ushort x, ushort y, byte *text)
+void CLcd_DR::DisplayString5x8(ushort x, ushort y, char *text)
 {
 	while(*text)
 	{
@@ -133,7 +132,7 @@ void CLcd_DR::DisplayChar8x16Bolt(ushort x, ushort y, byte ch)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd_DR::DisplayString8x16(ushort x, ushort y, byte *text)
+void CLcd_DR::DisplayString8x16(ushort x, ushort y, char *text)
 {
 	while(*text)
 	{
@@ -218,7 +217,7 @@ void CLcd_DR::DisplayHEX(ushort x,ushort y,byte da,Font font)
 形    参：坐标 显示内容 字体选择 是否实体
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd_DR::DisplayStr(ushort x, ushort y, byte *text, Font font)
+void CLcd_DR::DisplayStr(ushort x, ushort y, char *text, Font font)
 {
     while (*text)
     {
@@ -299,27 +298,27 @@ void CLcd_DR::DisplayStr(ushort x, ushort y, byte *text, Font font)
 //显示数值 float类型
 void CLcd_DR::DispVal(ushort x, ushort y, float val, int8_t wei, Font font) 
 {	
-	byte dat[20];//字体选择 用于sprintf转换
+	char dat[20];//字体选择 用于sprintf转换
     switch (wei)
     {
         case 0:
-            snprintf((char*)dat, 8, "%6.0f", val);
+            snprintf(dat, 8, "%6.0f", val);
             this->DisplayStr(x, y, dat, font);
             break;
         case 1:
-            snprintf((char*)dat, 8, "%6.1f", val);
+            snprintf(dat, 8, "%6.1f", val);
             this->DisplayStr(x, y, dat, font);
             break;
         case 2:
-            snprintf((char*)dat, 8, "%6.2f", val);
+            snprintf(dat, 8, "%6.2f", val);
             this->DisplayStr(x, y, dat, font);
             break;
         case 3:
-            snprintf((char*)dat, 8, "%6.3f", val);
+            snprintf(dat, 8, "%6.3f", val);
             this->DisplayStr(x, y, dat, font);
             break;
         case 4:
-            snprintf((char*)dat, 8, "%.*f", 4, val);
+            snprintf(dat, 8, "%.*f", 4, val);
             this->DisplayStr(x, y, dat, font);
             break;
         default:
@@ -329,7 +328,7 @@ void CLcd_DR::DispVal(ushort x, ushort y, float val, int8_t wei, Font font)
 //显示数值 固定位置反显
 void CLcd_DR::DispValu(ushort x, ushort y, ushort val, int wei, byte reversebit, Font font)
 {
-    byte dat[20]; //字体选择 用于sprintf转换
+    char dat[20]; //字体选择 用于sprintf转换
     byte pos = 0;
     if (wei > 3)
     {

@@ -1664,7 +1664,7 @@ const byte ascii_table_5x8[95][5]={
 0x04,0x02,0x02,0x02,0x01,//~
 };
 		
-byte const ascii_table_4x8[][4]={
+const byte ascii_table_4x8[][4]={
 {0x00,0x00,0x00,0x00},/*  */
 {0x00,0x00,0x5E,0x00},/*"!",0*/
 {0x00,0x0E,0x00,0x0E},/*"未命名文件"," */
@@ -1767,7 +1767,7 @@ byte const ascii_table_4x8[][4]={
 // 汉字字模表                                                          //
 // 汉字库: 宋体16.dot 纵向取模下高位,数据排列:从左到右从上到下         //
 /////////////////////////////////////////////////////////////////////////
-typFNT_GB16 const  GB_16[] =          // 数据表
+const typFNT_GB16 GB_16[] =          // 数据表
 {
 "  ",{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00},/*" ",1*/
 "组",{0x20,0x30,0xAC,0x63,0x30,0x00,0x00,0xFE,0x22,0x22,0x22,0x22,0xFE,0x00,0x00,0x00,0x22,0x67,0x22,0x12,0x12,0x40,0x40,0x7F,0x42,0x42,0x42,0x42,0x7F,0x40,0x40,0x00},/*"组",0*/
@@ -2244,7 +2244,7 @@ typFNT_GB16 const  GB_16[] =          // 数据表
 // 汉字字模表                                                          //
 // 汉字库: 宋体12.dot 纵向取模下高位,数据排列:从左到右从上到下         //
 /////////////////////////////////////////////////////////////////////////
- typFNT_GB12 const  GB_12[] =          // 数据表
+ const typFNT_GB12 GB_12[] =          // 数据表
 {
 "组",{0x98,0xD4,0xB3,0x88,0x00,0xFE,0x92,0x92,0x92,0xFE,0x00,0x00,0x04,0x04,0x02,0x02,0x08,0x0F,0x08,0x08,0x08,0x0F,0x08,0x00},/*"组",0*/
 "态",{0x44,0x44,0x24,0x14,0x0C,0xA7,0x4C,0x14,0x24,0x44,0x44,0x00,0x04,0x03,0x00,0x07,0x08,0x08,0x0B,0x08,0x0C,0x01,0x06,0x00},/*"态",1*/
@@ -2455,7 +2455,7 @@ typFNT_GB16 const  GB_16[] =          // 数据表
 
 };
 //单位
-byte const FONT_UNIT[][10] =
+const char FONT_UNIT[][10] =
 {
     "℃",  //0
     "Kgf",  //1
@@ -2512,13 +2512,13 @@ byte const FONT_UNIT[][10] =
 };
 
 //输入通道
-byte const FONT_CHANNEL[][10] =  //Channel[][10]=
+const char FONT_CHANNEL[][10] =
 {
     "01", "02", "03", "04", "05", "06", 
 };
 
 //输入类型
-byte const FONT_INPUT_TYPE[][10] = 
+const char FONT_INPUT_TYPE[][10] = 
 {
     "4-20mA",  //0
     "20mA",  //1
@@ -2555,29 +2555,29 @@ byte const FONT_INPUT_TYPE[][10] =
 };
 
 //报警类型
-byte const FONT_ALARM_TYPE[][10] = 
+const char FONT_ALARM_TYPE[][10] = 
 {
     "NO", "AH", "AL", 
 };
 
 //报警类型
-byte const FONT_OUTPUT_TYPE[][10] = 
+const char FONT_OUTPUT_TYPE[][10] = 
 {
     "0-20mA"
 };
 
 //手动方式
-byte const FONT_CONTROL_MANNER[][10] = 
+const char FONT_CONTROL_MANNER[][10] = 
 {
     "CMOD", "DMOD", 
 };
 //手动方式
-byte const FONT_CONTROL_SE[][10] = 
+const char FONT_CONTROL_SE[][10] = 
 {
     "OFF", "ON", 
 };
 //波特率
-uint const FONT_BAUD_RATE[] = 
+const uint FONT_BAUD_RATE[] = 
 {
     1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 
 };
