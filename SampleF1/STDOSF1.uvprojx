@@ -734,6 +734,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\SSD1309.cpp</FilePath>
             </File>
+            <File>
+              <FileName>SSD1106.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\SSD1106.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1785,6 +1790,11 @@
               <FileName>SSD1309.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\SSD1309.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1106.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\SSD1106.cpp</FilePath>
             </File>
           </Files>
         </Group>

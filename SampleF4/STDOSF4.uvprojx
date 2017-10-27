@@ -767,6 +767,16 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
             </File>
+            <File>
+              <FileName>SSD1106.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\SSD1106.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1309.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\SSD1309.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -776,6 +786,16 @@
               <FileName>font.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\STDOS\Fonts\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309bmp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Fonts\ssd1309bmp.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Fonts\ssd1309font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1036,6 +1056,11 @@
               <FileName>WatchDogTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1309Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\SSD1309Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1802,6 +1827,16 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
             </File>
+            <File>
+              <FileName>SSD1106.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\SSD1106.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1309.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\SSD1309.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1811,6 +1846,16 @@
               <FileName>font.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\STDOS\Fonts\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309bmp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Fonts\ssd1309bmp.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Fonts\ssd1309font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2071,6 +2116,11 @@
               <FileName>WatchDogTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1309Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\SSD1309Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
