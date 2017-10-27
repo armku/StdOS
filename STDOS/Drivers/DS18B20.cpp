@@ -12,16 +12,6 @@ void DS18B20::SetPin(Pin pin)
 	this->_dio.Open();
 }
 
-typedef struct
-{
-    byte humi_int; //湿度的整数部分
-    byte humi_deci; //湿度的小数部分
-    byte temp_int; //温度的整数部分
-    byte temp_deci; //温度的小数部分
-    byte check_sum; //校验和
-
-} DS18B20_Data_TypeDef;
-
 /*
  *主机给从机发送复位脉冲
  */
@@ -107,7 +97,7 @@ byte DS18B20::ReadByte()
 
     for (i = 0; i < 8; i++)
     {
-        j = ReadBit();
+        j = this->ReadBit();
         dat = (dat) | (j << i);
     }
 
@@ -182,18 +172,18 @@ float DS18B20::GetTemp()
     short s_tem;
     float f_tem;
 
-    Rest();
-    Presence();
+    this->Rest();
+    this->Presence();
     this->WriteByte(0XCC); /* 跳过 ROM */
     this->WriteByte(0X44); /* 开始转换 */
 
-    Rest();
-    Presence();
+    this->Rest();
+    this->Presence();
     this->WriteByte(0XCC); /* 跳过 ROM */
     this->WriteByte(0XBE); /* 读温度值 */
 
-    tplsb = ReadByte();
-    tpmsb = ReadByte();
+    tplsb = this->ReadByte();
+    tpmsb = this->ReadByte();
 
     s_tem = tpmsb << 8;
     s_tem = s_tem | tplsb;
