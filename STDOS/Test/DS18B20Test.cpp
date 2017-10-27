@@ -8,10 +8,11 @@
         printf("ÎÂ¶È %.1f \r\n", ds18.GetTemp());
     }
     void ds18b20test()
-    {
+    {		
 		ds18.SetPin(PD6);
-        while (ds18.Init())
-        {
+        for(int i=0;i<100;i++)
+		{
+			if(ds18.Init())        
             printf("no ds18b20 exit \r\n");
         }
         Sys.AddTask(ds18b20routin, 0, 100, 1000, "ds18b20routin");

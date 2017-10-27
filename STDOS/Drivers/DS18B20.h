@@ -14,10 +14,6 @@
 			byte ReadBit();
 			byte Presence();
 			void Rest();
-		
-		
-			void DS18B20_Mode_Out_PP();
-			void DS18B20_Mode_IPU();
 		private:
 			OutputPort _dio;
 

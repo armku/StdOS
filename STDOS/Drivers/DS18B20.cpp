@@ -1,9 +1,5 @@
 #include "DS18B20.h"
-#include "stm32f10x.h"
 #include "Sys.h"
-
-#define HIGH  1
-#define LOW   0
 
 void DS18B20::SetPin(Pin pin)
 {
@@ -27,40 +23,15 @@ typedef struct
 } DS18B20_Data_TypeDef;
 
 /*
- * 函数名：DS18B20_Mode_IPU
- * 描述  ：使DS18B20-DATA引脚变为输入模式
- * 输入  ：无
- * 输出  ：无
- */
-void DS18B20::DS18B20_Mode_IPU()
-{
-}
-
-
-/*
- * 函数名：DS18B20_Mode_Out_PP
- * 描述  ：使DS18B20-DATA引脚变为输出模式
- * 输入  ：无
- * 输出  ：无
- */
-void DS18B20::DS18B20_Mode_Out_PP()
-{
-}
-
-/*
  *主机给从机发送复位脉冲
  */
 void DS18B20::Rest()
 {
-    /* 主机设置为推挽输出 */
-    DS18B20_Mode_Out_PP();
-	this->_dio=0;
-    //DS18B20_DATA_OUT(LOW);
+    this->_dio=0;
     /* 主机至少产生480us的低电平复位信号 */
     Sys.Delay(750);
     /* 主机在产生复位信号后，需将总线拉高 */
 	this->_dio=1;
-    //DS18B20_DATA_OUT(HIGH);
     /*从机接收到主机的复位信号后，会在15~60us后给主机发一个存在脉冲*/
     Sys.Delay(15);
 }
@@ -74,7 +45,6 @@ byte DS18B20::Presence()
 {
     byte pulse_time = 0;
     /* 主机设置为上拉输入 */
-    DS18B20_Mode_IPU();
     /* 等待存在脉冲的到来，存在脉冲为一个60~240us的低电平信号 
      * 如果存在脉冲没有来则做超时处理，从机接收到主机的复位信号后，会在15~60us后给主机发一个存在脉冲
      */
@@ -110,17 +80,15 @@ byte DS18B20::ReadBit()
     byte dat;
 
     /* 读0和读1的时间至少要大于60us */
-    DS18B20_Mode_Out_PP();
     /* 读时间的起始：必须由主机产生 >1us <15us 的低电平信号 */
     this->_dio=0;
 	Sys.Delay(10);
 
     /* 设置成输入，释放总线，由外部上拉电阻将总线拉高 */
-    DS18B20_Mode_IPU();
     //Sys.Delay(2);
 	this->_dio=1;
 
-    if (this->_dio == SET)
+    if (this->_dio)
         dat = 1;
     else
         dat = 0;
@@ -152,7 +120,6 @@ byte DS18B20::ReadByte()
 void DS18B20::WriteByte(byte dat)
 {
     byte i, testb;
-    DS18B20_Mode_Out_PP();
 
     for (i = 0; i < 8; i++)
     {
@@ -183,17 +150,16 @@ void DS18B20::WriteByte(byte dat)
 
 void DS18B20::Start()
 {
-    Rest();
-    Presence();
+    this->Rest();
+    this->Presence();
     this->WriteByte(0XCC); /* 跳过 ROM */
     this->WriteByte(0X44); /* 开始转换 */
 }
 
 byte DS18B20::Init()
 {
-    Rest();
-
-    return Presence();
+    this->Rest();
+    return this->Presence();
 }
 
 /*
