@@ -10,10 +10,10 @@
             void DisplayOn();
             void DisplayOff();
             void Init();
-            void Clear();
+            void Clear(char ch=0x00);
             void ShowChar(byte x, byte y, byte chr);
             void ShowNum(byte x, byte y, uint num, byte len, byte size);
-            void ShowString(byte x, byte y, char *p);
+            void ShowString(byte x, byte y, char *p,byte interval=0);
             void ShowCHinese(byte x, byte y, char *hz);
 			void DrawBMP(byte x0, byte y0, byte x1, byte y1, byte BMP[]);
         private:

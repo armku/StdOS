@@ -15,18 +15,11 @@
         switch (++cnt)
         {
             case 1:
-                ssd1309.ShowCHinese(0, 0, "中"); //中
-                ssd1309.ShowCHinese(18, 0, "景"); //景
-                ssd1309.ShowCHinese(36, 0, "园"); //园
-                ssd1309.ShowCHinese(54, 0, "电"); //电
-                ssd1309.ShowCHinese(72, 0, "子"); //子
-                ssd1309.ShowCHinese(90, 0, "科"); //科
-                ssd1309.ShowCHinese(108, 0, "技"); //技
+                ssd1309.ShowString(0, 0, "中景园电子科技",2); 
                 ssd1309.ShowString(0, 3, "1.54' OLED TEST");
-                //OLED_ShowString(8,2,"ZHONGJINGYUAN");  
-                //	OLED_ShowString(20,4,"2014/05/01");  
                 ssd1309.ShowString(0, 6, "ASCII:");
                 ssd1309.ShowString(63, 6, "CODE:");
+				t='P';
                 ssd1309.ShowChar(48, 6, t); //显示ASCII字符	  
                 ssd1309.ShowNum(103, 6, t, 3, 16); //显示ASCII字符的码值 
                 break;
@@ -35,20 +28,16 @@
                 ssd1309.ShowString(8, 2, "ZHONGJINGYUAN");
                 ssd1309.ShowString(20, 4, "2014/05/01");
                 ssd1309.ShowString(0, 6, "ASCII:");
-                ssd1309.ShowString(63, 6, "CODE:");
-                ssd1309.ShowCHinese(0, 0, "中"); 
-                ssd1309.ShowCHinese(18, 0, "景"); 
-                ssd1309.ShowCHinese(36, 0, "园"); 
-                ssd1309.ShowCHinese(54, 0, "电"); 
-                ssd1309.ShowCHinese(72, 0, "子"); 
-                ssd1309.ShowCHinese(90, 0, "科");
-				ssd1309.ShowCHinese(108, 0, "技");
+                ssd1309.ShowString(63, 6, "CODE:"); 
                 break;
             case 3:
                 ssd1309.DrawBMP(0, 0, 128, 8, BMP1); //图片显示(图片显示慎用，生成的字表较大，会占用较多空间，FLASH空间8K以下慎用) 
                 break;
             case 4:
                 ssd1309.DrawBMP(0, 0, 128, 8, BMP2);
+				break;
+            case 5:
+                ssd1309.Clear(0XFF);
 				cnt=0;
                 break;
             default:

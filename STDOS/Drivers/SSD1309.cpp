@@ -122,7 +122,7 @@ void SSD1309::DisplayOff()
 }
 
 //清屏函数,清完屏,整个屏幕是黑色的!和没点亮一样!!!	  
-void SSD1309::Clear()
+void SSD1309::Clear(char ch)
 {
     byte i, n;
     for (i = 0; i < 8; i++)
@@ -131,7 +131,7 @@ void SSD1309::Clear()
         this->WRByte(0x00, OLED_CMD); //设置显示位置—列低地址
         this->WRByte(0x10, OLED_CMD); //设置显示位置—列高地址   
         for (n = 0; n < 128; n++)
-            this->WRByte(0, OLED_DATA);
+            this->WRByte(ch, OLED_DATA);
     } //更新显示
 }
 
@@ -204,24 +204,32 @@ void SSD1309::ShowNum(byte x, byte y, uint num, byte len, byte size)
         this->ShowChar(x + (size / 2) *t, y, temp + '0');
     }
 }
-
 //显示一个字符号串
-void SSD1309::ShowString(byte x, byte y, char *chr)
+void SSD1309::ShowString(byte x, byte y, char *chr, byte interval)
 {
     unsigned char j = 0;
     while (chr[j] != '\0')
     {
-        this->ShowChar(x, y, chr[j]);
-        x += 8;
-        if (x > 120)
+        if (chr[j] < 0x80)
         {
-            x = 0;
-            y += 2;
+            this->ShowChar(x, y, chr[j]);
+            x += 8;
+            if (x > 120)
+            {
+                x = 0;
+                y += 2;
+            }
+            j++;
         }
-        j++;
+        else
+        {
+			this->ShowCHinese(x,y,chr+j);
+			j++;
+			j++;
+			x+=16+interval;
+        }
     }
 }
-
 //显示汉字
 void SSD1309::ShowCHinese11(byte x, byte y, byte no)
 {
