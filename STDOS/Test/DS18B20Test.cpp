@@ -9,7 +9,7 @@
     }
     void ds18b20test()
     {
-		ds18.SetPin(PB10);
+		ds18.SetPin(PD6);
         while (ds18.Init())
         {
             printf("no ds18b20 exit \r\n");

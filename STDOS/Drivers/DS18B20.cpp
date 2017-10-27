@@ -5,9 +5,9 @@
 #define HIGH  1
 #define LOW   0
 
-#define DS18B20_CLK     RCC_APB2Periph_GPIOB
-#define DS18B20_PIN     GPIO_Pin_10                  
-#define DS18B20_PORT		GPIOB 
+#define DS18B20_CLK     RCC_APB2Periph_GPIOD
+#define DS18B20_PIN     GPIO_Pin_6                  
+#define DS18B20_PORT		GPIOD 
 
 void DS18B20::SetPin(Pin pin)
 {
