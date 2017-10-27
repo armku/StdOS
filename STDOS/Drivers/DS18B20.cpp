@@ -9,13 +9,6 @@
 #define DS18B20_PIN     GPIO_Pin_10                  
 #define DS18B20_PORT		GPIOB 
 
-//读取引脚的电平
-byte DS18B20::DS18B20_DATA_IN()
-{
-	return this->_dio;
-	//return GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_10);
-}
-
 void DS18B20::SetPin(Pin pin)
 {
 	this->_dio.Set(pin);
@@ -105,7 +98,7 @@ byte DS18B20::DS18B20_Presence()
     /* 等待存在脉冲的到来，存在脉冲为一个60~240us的低电平信号 
      * 如果存在脉冲没有来则做超时处理，从机接收到主机的复位信号后，会在15~60us后给主机发一个存在脉冲
      */
-    while (DS18B20_DATA_IN() && pulse_time < 100)
+    while (this->_dio && pulse_time < 100)
     {
         pulse_time++;
         Sys.Delay(1);
@@ -117,7 +110,7 @@ byte DS18B20::DS18B20_Presence()
         pulse_time = 0;
 
     /* 存在脉冲到来，且存在的时间不能超过240us */
-    while (!DS18B20_DATA_IN() && pulse_time < 240)
+    while (!this->_dio && pulse_time < 240)
     {
         pulse_time++;
         Sys.Delay(1);
@@ -139,14 +132,13 @@ byte DS18B20::DS18B20_Read_Bit()
     DS18B20_Mode_Out_PP();
     /* 读时间的起始：必须由主机产生 >1us <15us 的低电平信号 */
     this->_dio=0;
-	//DS18B20_DATA_OUT(LOW);
-    Sys.Delay(10);
+	Sys.Delay(10);
 
     /* 设置成输入，释放总线，由外部上拉电阻将总线拉高 */
     DS18B20_Mode_IPU();
     //Sys.Delay(2);
 
-    if (DS18B20_DATA_IN() == SET)
+    if (this->_dio == SET)
         dat = 1;
     else
         dat = 0;
@@ -187,24 +179,20 @@ void DS18B20::DS18B20_Write_Byte(byte dat)
         /* 写0和写1的时间至少要大于60us */
         if (testb)
         {
-            //DS18B20_DATA_OUT(LOW);
-			this->_dio=0;
+            this->_dio=0;
             /* 1us < 这个延时 < 15us */
             Sys.Delay(8);
 
-            //DS18B20_DATA_OUT(HIGH);
-			this->_dio=1;
+            this->_dio=1;
             Sys.Delay(58);
         }
         else
         {
-            //DS18B20_DATA_OUT(LOW);
-			this->_dio=0;
+            this->_dio=0;
             /* 60us < Tx 0 < 120us */
             Sys.Delay(70);
 
-            //DS18B20_DATA_OUT(HIGH);
-			this->_dio=1;
+            this->_dio=1;
             /* 1us < Trec(恢复时间) < 无穷大*/
             Sys.Delay(2);
         }

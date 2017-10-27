@@ -15,8 +15,6 @@
 			byte DS18B20_Presence();
 			void DS18B20_Rst();
 			void DS18B20_Mode_Out_PP();
-		
-			byte DS18B20_DATA_IN();
 		private:
 			OutputPort _dio;
 
