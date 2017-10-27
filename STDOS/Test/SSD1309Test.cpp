@@ -48,7 +48,11 @@
 
     void ssd1309Test()
     {
+		#ifdef STM32F1
 		ssd1309.SetPinSpi(PD6,PD7,PD5,PD4,PD3);
+		#elif defined STM32F4
+		ssd1309.SetPinSpi(PH15,PH2,PC13,PI11,PI8);
+		#endif
         ssd1309.Init(); //≥ı ºªØOLED 
 
         Sys.AddTask(ssd1309routin, 0, 100, 1000, "ssd1309routin");

@@ -38,7 +38,7 @@ void TimerTask(void *param)
 
 void InterruptTest();
 void w25q128test();
-
+void ssd1309Test();
 int main(void)
 {
     Sys.Init();
@@ -50,6 +50,7 @@ int main(void)
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
     //InterruptTest();
-    //w25q128test();    
+    //w25q128test();  
+	ssd1309Test();
     Sys.Start();
 }
