@@ -298,6 +298,38 @@ void SSD1309::Init()
     Sys.Sleep(100);
     //delay_ms(100);
     this->_res = 1;
+	#if SSD1106ENABLE
+	this->WRByte(0xAE,OLED_CMD);//--turn off oled panel
+	this->WRByte(0x02,OLED_CMD);//---set low column address
+	this->WRByte(0x10,OLED_CMD);//---set high column address
+	this->WRByte(0x40,OLED_CMD);//--set start line address  Set Mapping RAM Display Start Line (0x00~0x3F)
+	this->WRByte(0x81,OLED_CMD);//--set contrast control register
+	this->WRByte(0xCF,OLED_CMD); // Set SEG Output Current Brightness
+	this->WRByte(0xA1,OLED_CMD);//--Set SEG/Column Mapping     0xa0左右反置 0xa1正常
+	this->WRByte(0xC8,OLED_CMD);//Set COM/Row Scan Direction   0xc0上下反置 0xc8正常
+	this->WRByte(0xA6,OLED_CMD);//--set normal display
+	this->WRByte(0xA8,OLED_CMD);//--set multiplex ratio(1 to 64)
+	this->WRByte(0x3f,OLED_CMD);//--1/64 duty
+	this->WRByte(0xD3,OLED_CMD);//-set display offset	Shift Mapping RAM Counter (0x00~0x3F)
+	this->WRByte(0x00,OLED_CMD);//-not offset
+	this->WRByte(0xd5,OLED_CMD);//--set display clock divide ratio/oscillator frequency
+	this->WRByte(0x80,OLED_CMD);//--set divide ratio, Set Clock as 100 Frames/Sec
+	this->WRByte(0xD9,OLED_CMD);//--set pre-charge period
+	this->WRByte(0xF1,OLED_CMD);//Set Pre-Charge as 15 Clocks & Discharge as 1 Clock
+	this->WRByte(0xDA,OLED_CMD);//--set com pins hardware configuration
+	this->WRByte(0x12,OLED_CMD);
+	this->WRByte(0xDB,OLED_CMD);//--set vcomh
+	this->WRByte(0x40,OLED_CMD);//Set VCOM Deselect Level
+	this->WRByte(0x20,OLED_CMD);//-Set Page Addressing Mode (0x00/0x01/0x02)
+	this->WRByte(0x02,OLED_CMD);//
+	this->WRByte(0x8D,OLED_CMD);//--set Charge Pump enable/disable
+	this->WRByte(0x14,OLED_CMD);//--set(0x10) disable
+	this->WRByte(0xA4,OLED_CMD);// Disable Entire Display On (0xa4/0xa5)
+	this->WRByte(0xA6,OLED_CMD);// Disable Inverse Display On (0xa6/a7) 
+	this->WRByte(0xAF,OLED_CMD);//--turn on oled panel
+	
+	this->WRByte(0xAF,OLED_CMD); /*display ON*/ 
+	#elif SSD1309ENABLE
     this->WRByte(0xFD, OLED_CMD); //--turn off oled panel
     this->WRByte(0x12, OLED_CMD); //--turn off oled panel	
     this->WRByte(0xAE, OLED_CMD); //--turn off oled panel
@@ -330,6 +362,7 @@ void SSD1309::Init()
     this->WRByte(0xAF, OLED_CMD); //--turn on oled panel
 
     this->WRByte(0xAF, OLED_CMD); /*display ON*/
+	#endif
     this->Clear();
     this->SetPos(0, 0);
 }

@@ -2,6 +2,9 @@
     #define _SSD1309_H
     #include "Sys.h"
     #include "Port.h"	
+	
+	#define SSD1106ENABLE	1   
+	#define SSD1309ENABLE   0
 
     class SSD1309
     {
