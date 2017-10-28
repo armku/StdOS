@@ -10,11 +10,11 @@
     void ds18b20test()
     {	
 		#ifdef STM32F1
-		#if 1
-			ds18.SetPin(PB10);
-		#else
-			ds18.SetPin(PD6);
-		#endif
+			#if 1
+				ds18.SetPin(PB10);
+			#else
+				ds18.SetPin(PD6);
+			#endif
 		#elif defined STM32F4
 			ds18.SetPin(PB1);
 		#endif
