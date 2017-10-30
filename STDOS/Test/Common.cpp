@@ -75,11 +75,83 @@ static char *itoa(int value, char *string, int radix)
  *            		 USART2_printf( USART2, "\r\n %d \r\n", i );
  *            		 USART2_printf( USART2, "\r\n %s \r\n", j );
  */
+void vs_printf(char *buf,int len, char *Data, ...)
+{
+    const char *s;
+    int d;
+    char buft[16];
+	
+	int pos=0;
+
+
+    va_list ap;
+    va_start(ap, Data);
+
+    while (*Data != 0)
+    // 判断是否到达字符串结束符
+    {
+        if (*Data == 0x5c)
+        //'\'
+        {
+            switch (*++Data)
+            {
+                case 'r':
+                    //回车符
+					buf[pos++]=0x0d;
+                    Data++;
+                    break;
+                case 'n':
+                    //换行符
+                    buf[pos++]=0x0a;
+                    Data++;
+                    break;
+                default:
+                    Data++;
+                    break;
+            }
+        }
+        else if (*Data == '%')
+        {
+            //
+            switch (*++Data)
+            {
+                case 's':
+                    //字符串
+                    s = va_arg(ap, const char*);
+                    for (;  *s; s++)
+                    {
+                        buf[pos++]=*s;
+						if(pos>=len)
+							return;
+                    }
+                    Data++;
+                    break;
+                case 'd':
+                    //十进制
+                    d = va_arg(ap, int);
+                    itoa(d, buft, 10);
+                    for (s = buft;  *s; s++)
+                    {
+                        buf[pos++]=*s;
+                    }
+                    Data++;
+                    break;
+                default:
+                    Data++;
+                    break;
+            }
+        }
+        else
+            buf[pos++]=*Data++;
+		if(pos>=len)
+			return;
+    }
+}
 void USART_printf(USART_TypeDef *USARTx, char *Data, ...)
 {
     const char *s;
     int d;
-    char buf[16];
+    char buft[16];
 
 
     va_list ap;
@@ -127,8 +199,8 @@ void USART_printf(USART_TypeDef *USARTx, char *Data, ...)
                 case 'd':
                     //十进制
                     d = va_arg(ap, int);
-                    itoa(d, buf, 10);
-                    for (s = buf;  *s; s++)
+                    itoa(d, buft, 10);
+                    for (s = buft;  *s; s++)
                     {
                         USART_SendData(USARTx,  *s);
                         while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
