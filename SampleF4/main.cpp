@@ -40,6 +40,7 @@ void InterruptTest();
 void w25q128test();
 void ssd1309Test();
 void ds18b20test();
+void SRamTest();
 int main(void)
 {
     Sys.Init();
@@ -53,6 +54,7 @@ int main(void)
     //InterruptTest();
     //w25q128test();  
 	//ssd1309Test();
-	ds18b20test();
+	//ds18b20test();
+	SRamTest();
     Sys.Start();
 }

@@ -384,6 +384,11 @@
               <FileType>8</FileType>
               <FilePath>.\main.cpp</FilePath>
             </File>
+            <File>
+              <FileName>SRamTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\SRamTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -896,6 +901,11 @@
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\WatchDog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FSMC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F4\FSMC.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1454,6 +1464,11 @@
               <FileType>8</FileType>
               <FilePath>.\main.cpp</FilePath>
             </File>
+            <File>
+              <FileName>SRamTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\SRamTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1966,6 +1981,11 @@
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\WatchDog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FSMC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F4\FSMC.cpp</FilePath>
             </File>
           </Files>
         </Group>
