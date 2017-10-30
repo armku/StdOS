@@ -401,8 +401,10 @@ extern "C"
      *            		 USART2_printf( USART2, "\r\n %d \r\n", i );
      *            		 USART2_printf( USART2, "\r\n %s \r\n", j );
      */
-    int vs_printf(char *buf, int len, char *Data, ...)
+    int SmartOS_printf1(const char *Data, ...)
     {
+		static char buf[1024];
+		const int len=1024;
         const char *s;
         int d;
         char buft[16];
@@ -448,11 +450,21 @@ extern "C"
                         {
                             buf[pos++] =  *s;
                             if (pos >= len)
-                                return pos;
+                                goto SmartOS_printfret;
                         }
                         Data++;
                         break;
                     case 'd':
+                        //十进制
+                        d = va_arg(ap, int);
+                        itoa(d, buft, 10);
+                        for (s = buft;  *s; s++)
+                        {
+                            buf[pos++] =  *s;
+                        }
+                        Data++;
+                        break;
+                    case 'u':
                         //十进制
                         d = va_arg(ap, int);
                         itoa(d, buft, 10);
@@ -472,6 +484,9 @@ extern "C"
             if (pos >= len)
                 return pos;
         }
+		SmartOS_printfret:		
+		String str(buf, pos);
+        SmartOS_Log(&str);
 		return pos;
     }
     int SmartOS_printf(const char *format, ...)
