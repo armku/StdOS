@@ -1416,7 +1416,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Fonts\font.c</PathWithFileName>
+      <PathWithFileName>..\User\fonts\font.c</PathWithFileName>
       <FilenameWithoutPath>font.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1428,8 +1428,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Fonts\ssd1309font.c</PathWithFileName>
-      <FilenameWithoutPath>ssd1309font.c</FilenameWithoutPath>
+      <PathWithFileName>..\User\fonts\ssd1309bmp.c</PathWithFileName>
+      <FilenameWithoutPath>ssd1309bmp.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1440,8 +1440,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Fonts\ssd1309bmp.c</PathWithFileName>
-      <FilenameWithoutPath>ssd1309bmp.c</FilenameWithoutPath>
+      <PathWithFileName>..\User\fonts\ssd1309font.c</PathWithFileName>
+      <FilenameWithoutPath>ssd1309font.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

@@ -335,7 +335,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>STM32F0,DEBUG,STM32F072, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\SYSTEM\STM32F0\CMSIS;..\SYSTEM\STM32F0\FWLib\inc;..\Util</IncludePath>
+              <IncludePath>..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\SYSTEM\STM32F0\CMSIS;..\SYSTEM\STM32F0\FWLib\inc;..\Util;..\User</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -727,7 +727,7 @@
             <File>
               <FileName>font.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\STDOS\Fonts\font.c</FilePath>
+              <FilePath>..\User\fonts\font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1272,7 +1272,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,STM32F1</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\Util\inc;..\SYSTEM\CMSIS;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc</IncludePath>
+              <IncludePath>..\SYSTEM\FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\Util\inc;..\SYSTEM\CMSIS;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc;..\User\fonts</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1664,7 +1664,7 @@
             <File>
               <FileName>font.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\STDOS\Fonts\font.c</FilePath>
+              <FilePath>..\User\fonts\font.c</FilePath>
             </File>
           </Files>
         </Group>

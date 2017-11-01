@@ -335,7 +335,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>STM32F4,DEBUG,STM32F40_41xxx, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\SYSTEM\STM32F4\CMSIS;..\SYSTEM\STM32F4\FWLIB\inc;..\Util;..\User;..\User\bsp_stm32f4xx\inc;..\User\bsp_stm32f4xx</IncludePath>
+              <IncludePath>..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\SYSTEM\STM32F4\CMSIS;..\SYSTEM\STM32F4\FWLIB\inc;..\Util;..\User;..\User\bsp_stm32f4xx\inc;..\User\bsp_stm32f4xx;..\emWin\GUI_X;..\emWin\Config;..\emWin\Include;..\emWin\emWinTask</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -795,17 +795,52 @@
             <File>
               <FileName>font.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\STDOS\Fonts\font.c</FilePath>
+              <FilePath>..\User\fonts\font.c</FilePath>
             </File>
             <File>
               <FileName>ssd1309bmp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\STDOS\Fonts\ssd1309bmp.c</FilePath>
+              <FilePath>..\User\fonts\ssd1309bmp.c</FilePath>
+            </File>
+            <File>
+              <FileName>asc16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fonts\asc16.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fonts\hz12.c</FilePath>
+            </File>
+            <File>
+              <FileName>asc12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fonts\asc12.c</FilePath>
+            </File>
+            <File>
+              <FileName>ra8875_asc_width.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fonts\ra8875_asc_width.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz24.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fonts\hz24.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fonts\hz16.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fonts\hz32.c</FilePath>
             </File>
             <File>
               <FileName>ssd1309font.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\STDOS\Fonts\ssd1309font.c</FilePath>
+              <FilePath>..\User\fonts\ssd1309font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1081,6 +1116,126 @@
               <FileName>DS18B20Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>bsp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\bsp.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_tim_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_tim_pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_spi_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_spi_bus.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_i2c_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_i2c_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_eeprom_24xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_eeprom_24xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>LCDDRIVER</GroupName>
+          <Files>
+            <File>
+              <FileName>bsp_tft_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_tft_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_touch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_touch.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCD_RA8875.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\LCD_RA8875.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_ra8875_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_ra8875_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_ra8875_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_ra8875_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>param.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\param.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDRV_Template.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\emWin\DisplayDriver\GUIDRV_Template.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>GUI/X</GroupName>
+          <Files>
+            <File>
+              <FileName>GUI_X.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\emWin\GUI_X\GUI_X.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>GUI/CONFIG</GroupName>
+          <Files>
+            <File>
+              <FileName>GUIConf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\emWin\Config\GUIConf.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCDConf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\emWin\Config\LCDConf.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>GUI/DEMO</GroupName>
+          <Files>
+            <File>
+              <FileName>MainTask.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\emWin\emWinTask\MainTask.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>GUI/Lib</GroupName>
+          <Files>
+            <File>
+              <FileName>STemWin528_CM4_Keil_ot.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\emWin\GUILib\STemWin528_CM4_Keil_ot.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -1875,17 +2030,52 @@
             <File>
               <FileName>font.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\STDOS\Fonts\font.c</FilePath>
+              <FilePath>..\User\fonts\font.c</FilePath>
             </File>
             <File>
               <FileName>ssd1309bmp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\STDOS\Fonts\ssd1309bmp.c</FilePath>
+              <FilePath>..\User\fonts\ssd1309bmp.c</FilePath>
+            </File>
+            <File>
+              <FileName>asc16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fonts\asc16.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fonts\hz12.c</FilePath>
+            </File>
+            <File>
+              <FileName>asc12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fonts\asc12.c</FilePath>
+            </File>
+            <File>
+              <FileName>ra8875_asc_width.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fonts\ra8875_asc_width.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz24.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fonts\hz24.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fonts\hz16.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fonts\hz32.c</FilePath>
             </File>
             <File>
               <FileName>ssd1309font.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\STDOS\Fonts\ssd1309font.c</FilePath>
+              <FilePath>..\User\fonts\ssd1309font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2161,6 +2351,126 @@
               <FileName>DS18B20Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>bsp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\bsp.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_tim_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_tim_pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_spi_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_spi_bus.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_i2c_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_i2c_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_eeprom_24xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_eeprom_24xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>LCDDRIVER</GroupName>
+          <Files>
+            <File>
+              <FileName>bsp_tft_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_tft_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_touch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_touch.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCD_RA8875.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\LCD_RA8875.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_ra8875_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_ra8875_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_ra8875_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\bsp_ra8875_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>param.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_stm32f4xx\src\param.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDRV_Template.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\emWin\DisplayDriver\GUIDRV_Template.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>GUI/X</GroupName>
+          <Files>
+            <File>
+              <FileName>GUI_X.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\emWin\GUI_X\GUI_X.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>GUI/CONFIG</GroupName>
+          <Files>
+            <File>
+              <FileName>GUIConf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\emWin\Config\GUIConf.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCDConf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\emWin\Config\LCDConf.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>GUI/DEMO</GroupName>
+          <Files>
+            <File>
+              <FileName>MainTask.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\emWin\emWinTask\MainTask.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>GUI/Lib</GroupName>
+          <Files>
+            <File>
+              <FileName>STemWin528_CM4_Keil_ot.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\emWin\GUILib\STemWin528_CM4_Keil_ot.lib</FilePath>
             </File>
           </Files>
         </Group>
