@@ -1,5 +1,6 @@
 #ifndef _BSP_KEY_H
 #define _BSP_KEY_H
+	#include "Sys.h"
 	 #define KEY_COUNT    3	   					/* 按键个数, 8个独立建 + 2个组合键 */
 
     /* 根据应用程序的功能重命名按键宏 */
@@ -35,14 +36,14 @@
     typedef struct
     {
         /* 下面是一个函数指针，指向判断按键手否按下的函数 */
-        uint8_t(*IsKeyDownFunc)(void); /* 按键按下的判断函数,1表示按下 */
+        byte(*IsKeyDownFunc)(void); /* 按键按下的判断函数,1表示按下 */
 
-        uint8_t Count; /* 滤波器计数器 */
-        uint16_t LongCount; /* 长按计数器 */
-        uint16_t LongTime; /* 按键按下持续时间, 0表示不检测长按 */
-        uint8_t State; /* 按键当前状态（按下还是弹起） */
-        uint8_t RepeatSpeed; /* 连续按键周期 */
-        uint8_t RepeatCount; /* 连续按键计数器 */
+        byte Count; /* 滤波器计数器 */
+        ushort LongCount; /* 长按计数器 */
+        ushort LongTime; /* 按键按下持续时间, 0表示不检测长按 */
+        byte State; /* 按键当前状态（按下还是弹起） */
+        byte RepeatSpeed; /* 连续按键周期 */
+        byte RepeatCount; /* 连续按键计数器 */
     } KEY_T;
 
     /*
@@ -75,10 +76,10 @@
     class KEY_FIFO_T
     {
         public:
-            uint8_t Buf[KEY_FIFO_SIZE]; /* 键值缓冲区 */
-            uint8_t Read; /* 缓冲区读指针1 */
-            uint8_t Write; /* 缓冲区写指针 */
-            uint8_t Read2; /* 缓冲区读指针2 */
+            byte Buf[KEY_FIFO_SIZE]; /* 键值缓冲区 */
+            byte Read; /* 缓冲区读指针1 */
+            byte Write; /* 缓冲区写指针 */
+            byte Read2; /* 缓冲区读指针2 */
     };
 
     class Key
@@ -87,16 +88,16 @@
             /* 供外部调用的函数声明 */
             void bsp_InitKey();
             void bsp_KeyScan();
-            void bsp_PutKey(uint8_t _KeyCode);
-            uint8_t bsp_GetKey();
-            uint8_t bsp_GetKey2();
-            uint8_t bsp_GetKeyState(KEY_ID_E _ucKeyID);
-            void bsp_SetKeyParam(uint8_t _ucKeyID, uint16_t _LongTime, uint8_t _RepeatSpeed);
+            void bsp_PutKey(byte _KeyCode);
+            byte bsp_GetKey();
+            byte bsp_GetKey2();
+            byte bsp_GetKeyState(KEY_ID_E _ucKeyID);
+            void bsp_SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed);
             void bsp_ClearKey();
         private:
             void bsp_InitKeyHard();
             void bsp_InitKeyVar();
-            void bsp_DetectKey(uint8_t i);
+            void bsp_DetectKey(byte i);
     };
     extern Key keytest;
 

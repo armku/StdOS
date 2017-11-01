@@ -24,21 +24,21 @@ static KEY_FIFO_T s_tKey; /* 按键FIFO变量,结构体 */
  */
 /* 安富莱 STM32-V4 开发板 */
 #if 1	/* 为了区分3个事件:　K1单独按下, K2单独按下， K1和K2同时按下 */
-    uint8_t IsKeyDown1()
+    byte IsKeyDown1()
     {
         if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) == 0)
             return 1;
         else
             return 0;
     }
-    uint8_t IsKeyDown2()
+    byte IsKeyDown2()
     {
         if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) != 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) != 0)
             return 1;
         else
             return 0;
     }    
-    uint8_t IsKeyDown9() /* K1 K2组合键 */
+    byte IsKeyDown9() /* K1 K2组合键 */
     {
         if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) != 0)
             return 1;
@@ -69,7 +69,7 @@ void Key::bsp_InitKey(void)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Key::bsp_PutKey(uint8_t _KeyCode)
+void Key::bsp_PutKey(byte _KeyCode)
 {
     s_tKey.Buf[s_tKey.Write] = _KeyCode;
 
@@ -87,9 +87,9 @@ void Key::bsp_PutKey(uint8_t _KeyCode)
  *	返 回 值: 按键代码
  *********************************************************************************************************
  */
-uint8_t Key::bsp_GetKey(void)
+byte Key::bsp_GetKey(void)
 {
-    uint8_t ret;
+    byte ret;
 
     if (s_tKey.Read == s_tKey.Write)
     {
@@ -115,9 +115,9 @@ uint8_t Key::bsp_GetKey(void)
  *	返 回 值: 按键代码
  *********************************************************************************************************
  */
-uint8_t Key::bsp_GetKey2(void)
+byte Key::bsp_GetKey2(void)
 {
-    uint8_t ret;
+    byte ret;
 
     if (s_tKey.Read2 == s_tKey.Write)
     {
@@ -143,7 +143,7 @@ uint8_t Key::bsp_GetKey2(void)
  *	返 回 值: 1 表示按下， 0 表示未按下
  *********************************************************************************************************
  */
-uint8_t Key::bsp_GetKeyState(KEY_ID_E _ucKeyID)
+byte Key::bsp_GetKeyState(KEY_ID_E _ucKeyID)
 {
     return s_tBtn[_ucKeyID].State;
 }
@@ -158,7 +158,7 @@ uint8_t Key::bsp_GetKeyState(KEY_ID_E _ucKeyID)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Key::bsp_SetKeyParam(uint8_t _ucKeyID, uint16_t _LongTime, uint8_t _RepeatSpeed)
+void Key::bsp_SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed)
 {
     s_tBtn[_ucKeyID].LongTime = _LongTime; /* 长按时间 0 表示不检测长按键事件 */
     s_tBtn[_ucKeyID].RepeatSpeed = _RepeatSpeed; /* 按键连发的速度，0表示不支持连发 */
@@ -215,7 +215,7 @@ void Key::bsp_InitKeyHard()
  */
 void Key::bsp_InitKeyVar()
 {
-    uint8_t i;
+    byte i;
 
     /* 对按键FIFO读写指针清零 */
     s_tKey.Read = 0;
@@ -265,7 +265,7 @@ void Key::bsp_InitKeyVar()
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Key::bsp_DetectKey(uint8_t i)
+void Key::bsp_DetectKey(byte i)
 {
     KEY_T *pBtn;
 
@@ -295,7 +295,7 @@ void Key::bsp_DetectKey(uint8_t i)
                 pBtn->State = 1;
 
                 /* 发送按钮按下的消息 */
-                bsp_PutKey((uint8_t)(3 *i + 1));
+                bsp_PutKey((byte)(3 *i + 1));
             }
 
             if (pBtn->LongTime > 0)
@@ -306,7 +306,7 @@ void Key::bsp_DetectKey(uint8_t i)
                     if (++pBtn->LongCount == pBtn->LongTime)
                     {
                         /* 键值放入按键FIFO */
-                        bsp_PutKey((uint8_t)(3 *i + 3));
+                        bsp_PutKey((byte)(3 *i + 3));
                     }
                 }
                 else
@@ -317,7 +317,7 @@ void Key::bsp_DetectKey(uint8_t i)
                         {
                             pBtn->RepeatCount = 0;
                             /* 常按键后，每隔10ms发送1个按键 */
-                            bsp_PutKey((uint8_t)(3 *i + 1));
+                            bsp_PutKey((byte)(3 *i + 1));
                         }
                     }
                 }
@@ -341,7 +341,7 @@ void Key::bsp_DetectKey(uint8_t i)
                 pBtn->State = 0;
 
                 /* 发送按钮弹起的消息 */
-                bsp_PutKey((uint8_t)(3 *i + 2));
+                bsp_PutKey((byte)(3 *i + 2));
             }
         }
 
@@ -360,14 +360,13 @@ void Key::bsp_DetectKey(uint8_t i)
  */
 void Key::bsp_KeyScan()
 {
-    uint8_t i;
+    byte i;
 
     for (i = 0; i < KEY_COUNT; i++)
     {
         bsp_DetectKey(i);
     }
 }
-#include "Sys.h"
 #ifdef DEBUG
 void readkeyroutin(void * param)
 {
