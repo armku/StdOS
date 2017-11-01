@@ -19,7 +19,7 @@
     /* 按键ID, 主要用于bsp_KeyState()函数的入口参数 */
     typedef enum
     {
-        KID_K1 = 0, KID_K2, KID_K3, KID_JOY_U, KID_JOY_D, KID_JOY_L, KID_JOY_R, KID_JOY_OK
+        KID_K1 = 0, KID_K2, KID_K3, KID_JOY_U
     } KEY_ID_E;
 
     /*

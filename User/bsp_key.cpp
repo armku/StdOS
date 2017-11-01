@@ -23,29 +23,30 @@ static KEY_FIFO_T s_tKey; /* 按键FIFO变量,结构体 */
  *********************************************************************************************************
  */
 /* 安富莱 STM32-V4 开发板 */
-#if 1	/* 为了区分3个事件:　K1单独按下, K2单独按下， K1和K2同时按下 */
-    byte IsKeyDown1()
-    {
-        if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) == 0)
-            return 1;
-        else
-            return 0;
-    }
-    byte IsKeyDown2()
-    {
-        if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) != 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) != 0)
-            return 1;
-        else
-            return 0;
-    }    
-    byte IsKeyDown9() /* K1 K2组合键 */
-    {
-        if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) != 0)
-            return 1;
-        else
-            return 0;
-    }
-#endif 
+/* 为了区分3个事件:　K1单独按下, K2单独按下， K1和K2同时按下 */
+byte IsKeyDown1()
+{
+    if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) == 0)
+        return 1;
+    else
+        return 0;
+}
+
+byte IsKeyDown2()
+{
+    if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) != 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) != 0)
+        return 1;
+    else
+        return 0;
+}
+
+byte IsKeyDown9() /* K1 K2组合键 */
+{
+    if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) != 0)
+        return 1;
+    else
+        return 0;
+}
 
 /*
  *********************************************************************************************************
@@ -240,15 +241,6 @@ void Key::bsp_InitKeyVar()
     s_tBtn[KID_JOY_U].LongTime = 100;
     s_tBtn[KID_JOY_U].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */
 
-    s_tBtn[KID_JOY_D].LongTime = 100;
-    s_tBtn[KID_JOY_D].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */
-
-    s_tBtn[KID_JOY_L].LongTime = 100;
-    s_tBtn[KID_JOY_L].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */
-
-    s_tBtn[KID_JOY_R].LongTime = 100;
-    s_tBtn[KID_JOY_R].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */
-
     /* 判断按键按下的函数 */
     s_tBtn[0].IsKeyDownFunc = IsKeyDown1;
     s_tBtn[1].IsKeyDownFunc = IsKeyDown2;
@@ -367,21 +359,22 @@ void Key::bsp_KeyScan()
         bsp_DetectKey(i);
     }
 }
-#ifdef DEBUG
-void readkeyroutin(void * param)
-{
-	keytest.bsp_KeyScan();
-}
-void keycoderoutin(void* param)
-{
-	int aa=keytest.bsp_GetKey();
-	printf("键码：%d\r\n",aa);
-}
 
-void keyTest()
-{
-	keytest.bsp_InitKey();
-	Sys.AddTask(readkeyroutin,0,0,10,"readkeyroutin");
-	Sys.AddTask(keycoderoutin,0,0,1000,"keycoderoutin");
-}
+#ifdef DEBUG
+    void readkeyroutin(void *param)
+    {
+        keytest.bsp_KeyScan();
+    }
+    void keycoderoutin(void *param)
+    {
+        int aa = keytest.bsp_GetKey();
+        printf("键码：%d\r\n", aa);
+    }
+
+    void keyTest()
+    {
+        keytest.bsp_InitKey();
+        Sys.AddTask(readkeyroutin, 0, 0, 10, "readkeyroutin");
+        Sys.AddTask(keycoderoutin, 0, 0, 1000, "keycoderoutin");
+    }
 #endif
