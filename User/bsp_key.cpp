@@ -3,31 +3,13 @@
 
 Key keytest;
 /* 按键口对应的RCC时钟 */
-#define RCC_ALL_KEY 	(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOC | RCC_APB2Periph_GPIOD | RCC_APB2Periph_GPIOG)
+#define RCC_ALL_KEY 	(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOC)
 
 #define GPIO_PORT_K1    GPIOC
 #define GPIO_PIN_K1	    GPIO_Pin_13
 
 #define GPIO_PORT_K2    GPIOA
 #define GPIO_PIN_K2	    GPIO_Pin_0
-
-#define GPIO_PORT_K3    GPIOG
-#define GPIO_PIN_K3	    GPIO_Pin_8
-
-#define GPIO_PORT_K4    GPIOG
-#define GPIO_PIN_K4	    GPIO_Pin_15
-
-#define GPIO_PORT_K5    GPIOD
-#define GPIO_PIN_K5	    GPIO_Pin_3
-
-#define GPIO_PORT_K6    GPIOG
-#define GPIO_PIN_K6	    GPIO_Pin_14
-
-#define GPIO_PORT_K7    GPIOG
-#define GPIO_PIN_K7	    GPIO_Pin_13
-
-#define GPIO_PORT_K8    GPIOG
-#define GPIO_PIN_K8	    GPIO_Pin_7
 
 static KEY_T s_tBtn[KEY_COUNT];
 static KEY_FIFO_T s_tKey; /* 按键FIFO变量,结构体 */
@@ -44,118 +26,26 @@ static KEY_FIFO_T s_tKey; /* 按键FIFO变量,结构体 */
 #if 1	/* 为了区分3个事件:　K1单独按下, K2单独按下， K1和K2同时按下 */
     uint8_t IsKeyDown1()
     {
-        if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) == 0 && (GPIO_PORT_K3->IDR &GPIO_PIN_K3) != 0)
+        if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) == 0)
             return 1;
         else
             return 0;
     }
     uint8_t IsKeyDown2()
     {
-        if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) != 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) != 0 && (GPIO_PORT_K3->IDR &GPIO_PIN_K3) != 0)
+        if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) != 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) != 0)
             return 1;
         else
             return 0;
-    }
-    uint8_t IsKeyDown3()
-    {
-        if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) != 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) == 0 && (GPIO_PORT_K3->IDR &GPIO_PIN_K3) == 0)
-            return 1;
-        else
-            return 0;
-    }
+    }    
     uint8_t IsKeyDown9() /* K1 K2组合键 */
     {
-        if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) != 0 && (GPIO_PORT_K3->IDR &GPIO_PIN_K3) != 0)
+        if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) != 0)
             return 1;
         else
             return 0;
     }
-    uint8_t IsKeyDown10() /* K2 K3组合键 */
-    {
-        if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) != 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) != 0 && (GPIO_PORT_K3->IDR &GPIO_PIN_K3) == 0)
-            return 1;
-        else
-            return 0;
-    }
-#else 
-    uint8_t IsKeyDown1()
-    {
-        if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) == 0)
-            return 1;
-        else
-            return 0;
-    }
-    uint8_t IsKeyDown2()
-    {
-        if ((GPIO_PORT_K2->IDR &GPIO_PIN_K2) != 0)
-            return 1;
-        else
-            return 0;
-    }
-    uint8_t IsKeyDown3()
-    {
-        if ((GPIO_PORT_K3->IDR &GPIO_PIN_K3) == 0)
-            return 1;
-        else
-            return 0;
-    }
-
-    uint8_t IsKeyDown9()
-    {
-        if (IsKeyDown1() && IsKeyDown2())
-            return 1;
-        else
-            return 0;
-    } /* K1 K2组合键 */
-    uint8_t IsKeyDown10()
-    {
-        if (IsKeyDown2() && IsKeyDown3())
-            return 1;
-        else
-            return 0;
-    } /* K2 K3组合键 */
 #endif 
-
-/* 5方向摇杆 */
-uint8_t IsKeyDown4()
-{
-    if ((GPIO_PORT_K4->IDR &GPIO_PIN_K4) == 0)
-        return 1;
-    else
-        return 0;
-}
-
-uint8_t IsKeyDown5()
-{
-    if ((GPIO_PORT_K5->IDR &GPIO_PIN_K5) == 0)
-        return 1;
-    else
-        return 0;
-}
-
-uint8_t IsKeyDown6()
-{
-    if ((GPIO_PORT_K6->IDR &GPIO_PIN_K6) == 0)
-        return 1;
-    else
-        return 0;
-}
-
-uint8_t IsKeyDown7()
-{
-    if ((GPIO_PORT_K7->IDR &GPIO_PIN_K7) == 0)
-        return 1;
-    else
-        return 0;
-}
-
-uint8_t IsKeyDown8()
-{
-    if ((GPIO_PORT_K8->IDR &GPIO_PIN_K8) == 0)
-        return 1;
-    else
-        return 0;
-}
 
 /*
  *********************************************************************************************************
@@ -313,24 +203,6 @@ void Key::bsp_InitKeyHard()
 
     GPIO_InitStructure.GPIO_Pin = GPIO_PIN_K2;
     GPIO_Init(GPIO_PORT_K2, &GPIO_InitStructure);
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_K3;
-    GPIO_Init(GPIO_PORT_K3, &GPIO_InitStructure);
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_K4;
-    GPIO_Init(GPIO_PORT_K4, &GPIO_InitStructure);
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_K5;
-    GPIO_Init(GPIO_PORT_K5, &GPIO_InitStructure);
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_K6;
-    GPIO_Init(GPIO_PORT_K6, &GPIO_InitStructure);
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_K7;
-    GPIO_Init(GPIO_PORT_K7, &GPIO_InitStructure);
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_K8;
-    GPIO_Init(GPIO_PORT_K8, &GPIO_InitStructure);
 }
 
 /*
@@ -380,16 +252,9 @@ void Key::bsp_InitKeyVar()
     /* 判断按键按下的函数 */
     s_tBtn[0].IsKeyDownFunc = IsKeyDown1;
     s_tBtn[1].IsKeyDownFunc = IsKeyDown2;
-    s_tBtn[2].IsKeyDownFunc = IsKeyDown3;
-    s_tBtn[3].IsKeyDownFunc = IsKeyDown4;
-    s_tBtn[4].IsKeyDownFunc = IsKeyDown5;
-    s_tBtn[5].IsKeyDownFunc = IsKeyDown6;
-    s_tBtn[6].IsKeyDownFunc = IsKeyDown7;
-    s_tBtn[7].IsKeyDownFunc = IsKeyDown8;
 
     /* 组合键 */
-    s_tBtn[8].IsKeyDownFunc = IsKeyDown9;
-    s_tBtn[9].IsKeyDownFunc = IsKeyDown10;
+    s_tBtn[2].IsKeyDownFunc = IsKeyDown9;
 }
 
 /*
