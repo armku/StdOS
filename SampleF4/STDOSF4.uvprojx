@@ -335,7 +335,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>STM32F4,DEBUG,STM32F40_41xxx, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\SYSTEM\STM32F4\CMSIS;..\SYSTEM\STM32F4\FWLIB\inc;..\Util;..\User;..\User\bsp_stm32f4xx\inc;..\User\bsp_stm32f4xx</IncludePath>
+              <IncludePath>..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\SYSTEM\STM32F4\CMSIS;..\SYSTEM\STM32F4\FWLIB\inc;..\Util;..\User</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
