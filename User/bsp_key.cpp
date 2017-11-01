@@ -12,7 +12,7 @@ Key keytest;
 #define GPIO_PIN_K2	    GPIO_Pin_0
 
 static KEY_T s_tBtn[KEY_COUNT];
-static KEY_FIFO_T s_tKey; /* 按键FIFO变量,结构体 */
+KEY_FIFO_T s_tKey; /* 按键FIFO变量,结构体 */
 
 /*
  *********************************************************************************************************
@@ -72,12 +72,7 @@ void Key::bsp_InitKey(void)
  */
 void Key::bsp_PutKey(byte _KeyCode)
 {
-    s_tKey.Buf[s_tKey.Write] = _KeyCode;
-
-    if (++s_tKey.Write >= KEY_FIFO_SIZE)
-    {
-        s_tKey.Write = 0;
-    }
+	s_tKey.Push(_KeyCode);
 }
 
 /*
@@ -90,22 +85,7 @@ void Key::bsp_PutKey(byte _KeyCode)
  */
 byte Key::bsp_GetKey(void)
 {
-    byte ret;
-
-    if (s_tKey.Read == s_tKey.Write)
-    {
-        return KEY_NONE;
-    }
-    else
-    {
-        ret = s_tKey.Buf[s_tKey.Read];
-
-        if (++s_tKey.Read >= KEY_FIFO_SIZE)
-        {
-            s_tKey.Read = 0;
-        }
-        return ret;
-    }
+    return s_tKey.Pop();
 }
 
 /*
@@ -118,22 +98,7 @@ byte Key::bsp_GetKey(void)
  */
 byte Key::bsp_GetKey2(void)
 {
-    byte ret;
-
-    if (s_tKey.Read2 == s_tKey.Write)
-    {
-        return KEY_NONE;
-    }
-    else
-    {
-        ret = s_tKey.Buf[s_tKey.Read2];
-
-        if (++s_tKey.Read2 >= KEY_FIFO_SIZE)
-        {
-            s_tKey.Read2 = 0;
-        }
-        return ret;
-    }
+	return s_tKey.Pop2();
 }
 
 /*
@@ -177,7 +142,7 @@ void Key::bsp_SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed)
  */
 void Key::bsp_ClearKey()
 {
-    s_tKey.Read = s_tKey.Write;
+    s_tKey.Clear();
 }
 
 /*
@@ -219,9 +184,7 @@ void Key::bsp_InitKeyVar()
     byte i;
 
     /* 对按键FIFO读写指针清零 */
-    s_tKey.Read = 0;
-    s_tKey.Write = 0;
-    s_tKey.Read2 = 0;
+    s_tKey.Init();
 
     /* 给每个按键结构体成员变量赋一组缺省值 */
     for (i = 0; i < KEY_COUNT; i++)

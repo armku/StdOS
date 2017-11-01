@@ -75,6 +75,63 @@
     #define KEY_FIFO_SIZE	10
     class KEY_FIFO_T
     {
+		public:
+			void Init()
+			{
+				this->Write=0;
+				this->Read=0;
+				this->Read2=0;
+			}
+			void Clear()
+			{
+				this->Read=this->Write;
+			}
+			void Push(byte da)
+			{
+				this->Buf[this->Write]=da;
+				if (++this->Write >= KEY_FIFO_SIZE)
+				{
+					this->Write = 0;
+				}				
+			}
+			byte Pop()
+			{
+				byte ret;
+
+				if (this->Read == this->Write)
+				{
+					return KEY_NONE;
+				}
+				else
+				{
+					ret = this->Buf[this->Read];
+
+					if (++this->Read >= KEY_FIFO_SIZE)
+					{
+						this->Read = 0;
+					}
+					return ret;
+				}
+			}
+			byte Pop2()
+			{
+				byte ret;
+
+				if (this->Read2 == this->Write)
+				{
+					return KEY_NONE;
+				}
+				else
+				{
+					ret = this->Buf[this->Read2];
+
+					if (++this->Read2 >= KEY_FIFO_SIZE)
+					{
+						this->Read2 = 0;
+					}
+					return ret;
+				}
+			}
         public:
             byte Buf[KEY_FIFO_SIZE]; /* 键值缓冲区 */
             byte Read; /* 缓冲区读指针1 */
