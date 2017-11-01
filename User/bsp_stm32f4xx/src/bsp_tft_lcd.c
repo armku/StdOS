@@ -51,6 +51,7 @@
 
 #include "bsp.h"
 #include "fonts/fonts.h"
+#include "fonts/font.h"
 
 /* 下面3个变量，主要用于使程序同时支持不同的屏 */
 uint16_t g_ChipID ;		/* 驱动芯片ID */

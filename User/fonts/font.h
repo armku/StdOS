@@ -33,6 +33,13 @@
 	extern const byte ascBolt[][16];
 	extern const byte ascii_table_6x12[][12];
 	extern const byte nAsciiDot6X16[][16] ;
+	
+	extern unsigned char const g_Ascii12[];
+	extern unsigned char const g_Ascii16[];
+	
+	extern unsigned char const g_RA8875_Ascii16_width[];
+	extern unsigned char const g_RA8875_Ascii24_width[];
+	extern unsigned char const g_RA8875_Ascii32_width[];
 
 
     /////////////////////////////////////////////////////////////////////////

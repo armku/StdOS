@@ -26,6 +26,7 @@
 *	返 回 值: 无
 *********************************************************************************************************
 */
+void MainTask(void);
 void bsp_Init(void)
 {
 	/* 使能CRC 因为使用STemWin前必须要使能 */
@@ -44,6 +45,7 @@ void bsp_Init(void)
 	
 	LCD_InitHard();	       /* 初始化显示器硬件(配置GPIO和FSMC,给LCD发送初始化指令) */
 	TOUCH_InitHard();
+	MainTask();
 }
 
 /*

@@ -41,6 +41,7 @@ void w25q128test();
 void ssd1309Test();
 void ds18b20test();
 void SRamTest();
+void bsp_Init(void);
 int main(void)
 {
     Sys.Init();
@@ -48,13 +49,14 @@ int main(void)
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 
-    //SerialPort::GetMessagePort()->Register(OnUsart1Read);
+    SerialPort::GetMessagePort()->Register(OnUsart1Read);
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
     //InterruptTest();
     //w25q128test();  
 	//ssd1309Test();
 	//ds18b20test();
-	SRamTest();
+	//SRamTest();
+	bsp_Init();
     Sys.Start();
 }
