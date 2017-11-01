@@ -1,15 +1,11 @@
 #include "stm32f10x.h"
 #include "bsp_key.h"
+#include "Port.h"
 
 Key keytest;
-/* 按键口对应的RCC时钟 */
-#define RCC_ALL_KEY 	(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOC)
 
-#define GPIO_PORT_K1    GPIOC
-#define GPIO_PIN_K1	    GPIO_Pin_13
-
-#define GPIO_PORT_K2    GPIOA
-#define GPIO_PIN_K2	    GPIO_Pin_0
+OutputPort key11(PC13);
+OutputPort key22(PA0);
 
 static KEY_T s_tBtn[KEY_COUNT];
 KEY_FIFO_T s_tKey; /* 按键FIFO变量,结构体 */
@@ -26,7 +22,7 @@ KEY_FIFO_T s_tKey; /* 按键FIFO变量,结构体 */
 /* 为了区分3个事件:　K1单独按下, K2单独按下， K1和K2同时按下 */
 byte IsKeyDown1()
 {
-    if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) == 0)
+    if (key11 == 0 && key22 == 0)
         return 1;
     else
         return 0;
@@ -34,7 +30,7 @@ byte IsKeyDown1()
 
 byte IsKeyDown2()
 {
-    if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) != 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) != 0)
+    if (key11 != 0 && key22 != 0)
         return 1;
     else
         return 0;
@@ -42,7 +38,7 @@ byte IsKeyDown2()
 
 byte IsKeyDown9() /* K1 K2组合键 */
 {
-    if ((GPIO_PORT_K1->IDR &GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR &GPIO_PIN_K2) != 0)
+    if (key11 == 0 && key22 != 0)
         return 1;
     else
         return 0;
@@ -56,10 +52,9 @@ byte IsKeyDown9() /* K1 K2组合键 */
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Key::bsp_InitKey(void)
+void Key::InitKey(void)
 {
-    bsp_InitKeyVar(); /* 初始化按键变量 */
-    bsp_InitKeyHard(); /* 初始化按键硬件 */
+    InitKeyVar(); /* 初始化按键变量 */
 }
 
 /*
@@ -70,37 +65,10 @@ void Key::bsp_InitKey(void)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Key::bsp_PutKey(byte _KeyCode)
+void Key::PutKey(byte _KeyCode)
 {
 	s_tKey.Push(_KeyCode);
 }
-
-/*
- *********************************************************************************************************
- *	函 数 名: bsp_GetKey
- *	功能说明: 从按键FIFO缓冲区读取一个键值。
- *	形    参:  无
- *	返 回 值: 按键代码
- *********************************************************************************************************
- */
-byte Key::bsp_GetKey(void)
-{
-    return s_tKey.Pop();
-}
-
-/*
- *********************************************************************************************************
- *	函 数 名: bsp_GetKey2
- *	功能说明: 从按键FIFO缓冲区读取一个键值。独立的读指针。
- *	形    参:  无
- *	返 回 值: 按键代码
- *********************************************************************************************************
- */
-byte Key::bsp_GetKey2(void)
-{
-	return s_tKey.Pop2();
-}
-
 /*
  *********************************************************************************************************
  *	函 数 名: bsp_GetKeyState
@@ -109,7 +77,7 @@ byte Key::bsp_GetKey2(void)
  *	返 回 值: 1 表示按下， 0 表示未按下
  *********************************************************************************************************
  */
-byte Key::bsp_GetKeyState(KEY_ID_E _ucKeyID)
+byte Key::GetKeyState(KEY_ID_E _ucKeyID)
 {
     return s_tBtn[_ucKeyID].State;
 }
@@ -124,53 +92,12 @@ byte Key::bsp_GetKeyState(KEY_ID_E _ucKeyID)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Key::bsp_SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed)
+void Key::SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed)
 {
     s_tBtn[_ucKeyID].LongTime = _LongTime; /* 长按时间 0 表示不检测长按键事件 */
     s_tBtn[_ucKeyID].RepeatSpeed = _RepeatSpeed; /* 按键连发的速度，0表示不支持连发 */
     s_tBtn[_ucKeyID].RepeatCount = 0; /* 连发计数器 */
 }
-
-
-/*
- *********************************************************************************************************
- *	函 数 名: bsp_ClearKey
- *	功能说明: 清空按键FIFO缓冲区
- *	形    参：无
- *	返 回 值: 按键代码
- *********************************************************************************************************
- */
-void Key::bsp_ClearKey()
-{
-    s_tKey.Clear();
-}
-
-/*
- *********************************************************************************************************
- *	函 数 名: bsp_InitKeyHard
- *	功能说明: 配置按键对应的GPIO
- *	形    参:  无
- *	返 回 值: 无
- *********************************************************************************************************
- */
-void Key::bsp_InitKeyHard()
-{
-    GPIO_InitTypeDef GPIO_InitStructure;
-
-    /* 第1步：打开GPIO时钟 */
-    RCC_APB2PeriphClockCmd(RCC_ALL_KEY, ENABLE);
-
-    /* 第2步：配置所有的按键GPIO为浮动输入模式(实际上CPU复位后就是输入状态) */
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; /* 输入浮空模式 */
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_K1;
-    GPIO_Init(GPIO_PORT_K1, &GPIO_InitStructure);
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_K2;
-    GPIO_Init(GPIO_PORT_K2, &GPIO_InitStructure);
-}
-
 /*
  *********************************************************************************************************
  *	函 数 名: bsp_InitKeyVar
@@ -179,7 +106,7 @@ void Key::bsp_InitKeyHard()
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Key::bsp_InitKeyVar()
+void Key::InitKeyVar()
 {
     byte i;
 
@@ -220,7 +147,7 @@ void Key::bsp_InitKeyVar()
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Key::bsp_DetectKey(byte i)
+void Key::DetectKey(byte i)
 {
     KEY_T *pBtn;
 
@@ -250,7 +177,7 @@ void Key::bsp_DetectKey(byte i)
                 pBtn->State = 1;
 
                 /* 发送按钮按下的消息 */
-                bsp_PutKey((byte)(3 *i + 1));
+                PutKey((byte)(3 *i + 1));
             }
 
             if (pBtn->LongTime > 0)
@@ -261,7 +188,7 @@ void Key::bsp_DetectKey(byte i)
                     if (++pBtn->LongCount == pBtn->LongTime)
                     {
                         /* 键值放入按键FIFO */
-                        bsp_PutKey((byte)(3 *i + 3));
+                        PutKey((byte)(3 *i + 3));
                     }
                 }
                 else
@@ -272,7 +199,7 @@ void Key::bsp_DetectKey(byte i)
                         {
                             pBtn->RepeatCount = 0;
                             /* 常按键后，每隔10ms发送1个按键 */
-                            bsp_PutKey((byte)(3 *i + 1));
+                            PutKey((byte)(3 *i + 1));
                         }
                     }
                 }
@@ -296,7 +223,7 @@ void Key::bsp_DetectKey(byte i)
                 pBtn->State = 0;
 
                 /* 发送按钮弹起的消息 */
-                bsp_PutKey((byte)(3 *i + 2));
+                PutKey((byte)(3 *i + 2));
             }
         }
 
@@ -313,30 +240,39 @@ void Key::bsp_DetectKey(byte i)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Key::bsp_KeyScan()
+void Key::KeyScan()
 {
     byte i;
 
     for (i = 0; i < KEY_COUNT; i++)
     {
-        bsp_DetectKey(i);
+        DetectKey(i);
     }
 }
 
 #ifdef DEBUG
     void readkeyroutin(void *param)
     {
-        keytest.bsp_KeyScan();
+        keytest.KeyScan();
     }
     void keycoderoutin(void *param)
     {
-        int aa = keytest.bsp_GetKey();
+        int aa = s_tKey.Pop();
         printf("键码：%d\r\n", aa);
     }
 
     void keyTest()
     {
-        keytest.bsp_InitKey();
+		key11.OpenDrain=false;
+		key22.OpenDrain=false;
+		
+		key11.Invert=0;
+		key22.Invert=0;
+		
+		key11.Open();
+		key22.Open();
+		
+        keytest.InitKey();
         Sys.AddTask(readkeyroutin, 0, 0, 10, "readkeyroutin");
         Sys.AddTask(keycoderoutin, 0, 0, 1000, "keycoderoutin");
     }

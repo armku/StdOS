@@ -143,18 +143,14 @@
     {
         public:
             /* 供外部调用的函数声明 */
-            void bsp_InitKey();
-            void bsp_KeyScan();
-            void bsp_PutKey(byte _KeyCode);
-            byte bsp_GetKey();
-            byte bsp_GetKey2();
-            byte bsp_GetKeyState(KEY_ID_E _ucKeyID);
-            void bsp_SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed);
-            void bsp_ClearKey();
+            void InitKey();
+            void KeyScan();
+            void PutKey(byte _KeyCode);
+            byte GetKeyState(KEY_ID_E _ucKeyID);
+            void SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed);            
         private:
-            void bsp_InitKeyHard();
-            void bsp_InitKeyVar();
-            void bsp_DetectKey(byte i);
+            void InitKeyVar();
+            void DetectKey(byte i);
     };
     extern Key keytest;
 
