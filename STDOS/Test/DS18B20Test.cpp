@@ -10,7 +10,7 @@
     void ds18b20test()
     {	
 		#ifdef STM32F1
-			#if 1
+			#if 0
 				ds18.SetPin(PB10);
 			#else
 				ds18.SetPin(PD6);

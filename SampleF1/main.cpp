@@ -81,6 +81,7 @@ void ESP8266TEST();
 void ssd1309Test();
 void ds18b20test();
 void ST7565Rtest();
+void keyTest();
 int main(void)
 {
     Sys.Init();
@@ -107,7 +108,8 @@ int main(void)
     //InterruptTest();
 	//ssd1309Test();
     //ESP8266TEST();
-	ds18b20test();
+	//ds18b20test();
+	keyTest();
 	//ST7565Rtest();
 
     Sys.Start();
