@@ -159,11 +159,12 @@ void Key::DetectKey(byte i)
     KEY_T *pBtn;
 
     //如果没有初始化按键函数，则报错
+	#ifdef DEBUG
     if (s_tBtn[i].IsKeyDownFunc == 0)
     {
         printf("Fault : DetectButton(), s_tBtn[i].IsKeyDownFunc undefine");
     }
-
+	#endif
 
     pBtn = &s_tBtn[i];
     if (pBtn->IsKeyDownFunc())
