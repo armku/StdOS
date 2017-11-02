@@ -53,7 +53,7 @@
             byte RepeatSpeed; /* 连续按键周期 */
             byte RepeatCount; /* 连续按键计数器 */
     };
-    class KEY_FIFO_T
+    class KEY_FIFO
     {
         public:
             void Init();
@@ -83,6 +83,6 @@
         private:
             void DetectKey(byte i);
 		private:
-			KEY_FIFO_T s_tKey; /* 按键FIFO变量,结构体 */            
+			KEY_FIFO s_tKey; /* 按键FIFO变量,结构体 */            
     };
 #endif

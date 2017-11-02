@@ -1,19 +1,19 @@
 #include "bsp_key.h"
 #include "Port.h"
 
-void KEY_FIFO_T::Init()
+void KEY_FIFO::Init()
 {
     this->Write = 0;
     this->Read = 0;
     this->Read2 = 0;
 }
 
-void KEY_FIFO_T::Clear()
+void KEY_FIFO::Clear()
 {
     this->Read = this->Write;
 }
 
-void KEY_FIFO_T::Push(byte da)
+void KEY_FIFO::Push(byte da)
 {
     this->Buf[this->Write] = da;
     if (++this->Write >= this->_bufSize)
@@ -22,7 +22,7 @@ void KEY_FIFO_T::Push(byte da)
     }
 }
 
-byte KEY_FIFO_T::Pop()
+byte KEY_FIFO::Pop()
 {
     byte ret;
 
@@ -42,7 +42,7 @@ byte KEY_FIFO_T::Pop()
     }
 }
 
-byte KEY_FIFO_T::Pop2()
+byte KEY_FIFO::Pop2()
 {
     byte ret;
 
@@ -137,8 +137,6 @@ void Key::InitKeyVar()
     /* 比如，我们希望按键1按下超过1秒后，自动重发相同键值 */
     s_tBtn[KID_JOY_U].LongTime = 100;
     s_tBtn[KID_JOY_U].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */
-
-
 }
 
 /*
@@ -152,14 +150,13 @@ void Key::InitKeyVar()
 void Key::DetectKey(byte i)
 {
     KEY_T *pBtn;
-
-    /*
-    如果没有初始化按键函数，则报错
+    
+    //如果没有初始化按键函数，则报错
     if (s_tBtn[i].IsKeyDownFunc == 0)
     {
     printf("Fault : DetectButton(), s_tBtn[i].IsKeyDownFunc undefine");
     }
-     */
+     
 
     pBtn = &s_tBtn[i];
     if (pBtn->IsKeyDownFunc())
