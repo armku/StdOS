@@ -244,9 +244,30 @@ void Key::KeyScan()
     }
     void keycoderoutin(void *param)
     {
-        int aa = s_tKey.Pop();
-		if(aa!=KEY_NONE)
-        printf("键码：%d\r\n", aa);
+        int ucKeyCode = s_tKey.Pop();
+		if(ucKeyCode!=KEY_NONE)
+		{
+			switch (ucKeyCode)
+			{
+				case KEY_1_DOWN:		/* 摇杆LEFT键按下, 控制LED显示流动 */
+					printf("键码：%d KEY_1_DOWN\r\n", ucKeyCode);
+					break;
+				case KEY_2_DOWN:		/* 摇杆RIGHT键按下 */
+					printf("键码：%d KEY_2_DOWN\r\n", ucKeyCode);
+					break;
+				case KEY_9_DOWN:		/* 摇杆UP键按下 */
+					printf("键码：%d KEY_9_DOWN\r\n", ucKeyCode);
+					break;
+				case KEY_1_UP:		/* 摇杆DOWN键按下 */
+					printf("键码：%d KEY_1_UP\r\n", ucKeyCode);
+					break;
+				case KEY_1_LONG:		/* 摇杆OK键按下 */
+					printf("键码：%d KEY_1_LONG\r\n", ucKeyCode);
+					break;
+				default:
+					break;
+			}
+		}
     }
 
     void keyTest()

@@ -33,10 +33,11 @@
     /*
     每个按键对应1个全局的结构体变量。
      */
-    typedef struct
+    class KEY_T
     {
+		public:
         /* 下面是一个函数指针，指向判断按键手否按下的函数 */
-        byte(*IsKeyDownFunc)(void); /* 按键按下的判断函数,1表示按下 */
+        byte(*IsKeyDownFunc)(); /* 按键按下的判断函数,1表示按下 */
 
         byte Count; /* 滤波器计数器 */
         ushort LongCount; /* 长按计数器 */
@@ -44,7 +45,7 @@
         byte State; /* 按键当前状态（按下还是弹起） */
         byte RepeatSpeed; /* 连续按键周期 */
         byte RepeatCount; /* 连续按键计数器 */
-    } KEY_T;
+    } ;
 
     /*
     定义键值代码, 必须按如下次序定时每个键的按下、弹起和长按事件
