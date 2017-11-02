@@ -3,35 +3,11 @@
     #include "Sys.h"
     #define KEY_COUNT    3	   					/* 按键个数, 2个独立建 + 1个组合键 */
 
-    /* 按键ID, 主要用于bsp_KeyState()函数的入口参数 */
+	/* 按键ID, 主要用于bsp_KeyState()函数的入口参数 */
     typedef enum
     {
         KID_K1 = 0, KID_K2, KID_K3
-    } KEY_ID_E;
-    /*
-    定义键值代码, 必须按如下次序定时每个键的按下、弹起和长按事件
-
-    推荐使用enum, 不用#define，原因：
-    (1) 便于新增键值,方便调整顺序，使代码看起来舒服点
-    (2) 编译器可帮我们避免键值重复。
-     */
-    typedef enum
-    {
-        KEY_NONE = 0,  /* 0 表示按键事件 */
-
-        KEY_1_DOWN,  /* 1键按下 */
-        KEY_1_UP,  /* 1键弹起 */
-        KEY_1_LONG,  /* 1键长按 */
-
-        KEY_2_DOWN,  /* 2键按下 */
-        KEY_2_UP,  /* 2键弹起 */
-        KEY_2_LONG,  /* 2键长按 */
-
-        /* 组合键 */
-        KEY_9_DOWN,  /* 9键按下 */
-        KEY_9_UP,  /* 9键弹起 */
-        KEY_9_LONG,  /* 9键长按 */
-    } KEY_ENUM;
+    } KEY_ID_E;    
     /*
     按键滤波时间50ms, 单位10ms。
     只有连续检测到50ms状态不变才认为有效，包括弹起和按下两种事件

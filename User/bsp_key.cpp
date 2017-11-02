@@ -1,6 +1,32 @@
 #include "bsp_key.h"
 #include "Port.h"
 
+
+    /*
+    定义键值代码, 必须按如下次序定时每个键的按下、弹起和长按事件
+
+    推荐使用enum, 不用#define，原因：
+    (1) 便于新增键值,方便调整顺序，使代码看起来舒服点
+    (2) 编译器可帮我们避免键值重复。
+     */
+    typedef enum
+    {
+        KEY_NONE = 0,  /* 0 表示按键事件 */
+
+        KEY_1_DOWN,  /* 1键按下 */
+        KEY_1_UP,  /* 1键弹起 */
+        KEY_1_LONG,  /* 1键长按 */
+
+        KEY_2_DOWN,  /* 2键按下 */
+        KEY_2_UP,  /* 2键弹起 */
+        KEY_2_LONG,  /* 2键长按 */
+
+        /* 组合键 */
+        KEY_9_DOWN,  /* 9键按下 */
+        KEY_9_UP,  /* 9键弹起 */
+        KEY_9_LONG,  /* 9键长按 */
+    } KEY_ENUM;
+
 void KEY_FIFO::Init()
 {
     this->Write = 0;
