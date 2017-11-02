@@ -53,7 +53,6 @@
             byte RepeatSpeed; /* 连续按键周期 */
             byte RepeatCount; /* 连续按键计数器 */
     };
-    #define KEY_FIFO_SIZE	10 /* 按键FIFO用到变量 */
     class KEY_FIFO_T
     {
         public:
@@ -62,8 +61,9 @@
             void Push(byte da);
             byte Pop();
             byte Pop2();
-        public:
-            byte Buf[KEY_FIFO_SIZE]; /* 键值缓冲区 */
+        private:
+			const int _bufSize=10;
+            byte Buf[10]; /* 键值缓冲区 */
             byte Read; /* 缓冲区读指针1 */
             byte Write; /* 缓冲区写指针 */
             byte Read2; /* 缓冲区读指针2 */

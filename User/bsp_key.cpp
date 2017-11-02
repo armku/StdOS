@@ -16,7 +16,7 @@ void KEY_FIFO_T::Clear()
 void KEY_FIFO_T::Push(byte da)
 {
     this->Buf[this->Write] = da;
-    if (++this->Write >= KEY_FIFO_SIZE)
+    if (++this->Write >= this->_bufSize)
     {
         this->Write = 0;
     }
@@ -34,7 +34,7 @@ byte KEY_FIFO_T::Pop()
     {
         ret = this->Buf[this->Read];
 
-        if (++this->Read >= KEY_FIFO_SIZE)
+        if (++this->Read >= this->_bufSize)
         {
             this->Read = 0;
         }
@@ -54,7 +54,7 @@ byte KEY_FIFO_T::Pop2()
     {
         ret = this->Buf[this->Read2];
 
-        if (++this->Read2 >= KEY_FIFO_SIZE)
+        if (++this->Read2 >= this->_bufSize)
         {
             this->Read2 = 0;
         }
