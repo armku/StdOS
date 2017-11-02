@@ -389,7 +389,7 @@ byte UartGetChar(UART_T *_pUart, byte *_pByte)
  *********************************************************************************************************
  */
 void UartIRQ(UART_T *_pUart)
-{
+{	
     /* 处理接收中断  */
     if (USART_GetITStatus(_pUart->uart, USART_IT_RXNE) != RESET)
     {
@@ -461,7 +461,7 @@ void UartIRQ(UART_T *_pUart)
      *	返 回 值: 无
      *********************************************************************************************************
      */
-    void USART1_IRQHandler(void)
+    void USART1_IRQHandler()
     {
         UartIRQ(&g_tUart1);
     }
