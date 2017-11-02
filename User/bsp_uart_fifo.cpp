@@ -8,17 +8,17 @@ Usart_T usart1;
 UART_T g_tUart1;
 #define UART1_TX_BUF_SIZE	1*1024
 #define UART1_RX_BUF_SIZE	1*1024
-uint8_t g_TxBuf1[UART1_TX_BUF_SIZE]; /* 发送缓冲区 */
-uint8_t g_RxBuf1[UART1_RX_BUF_SIZE]; /* 接收缓冲区 */
+byte g_TxBuf1[UART1_TX_BUF_SIZE]; /* 发送缓冲区 */
+byte g_RxBuf1[UART1_RX_BUF_SIZE]; /* 接收缓冲区 */
 void UartVarInit(void);
 
 void InitHardUart(void);
-void UartSend(UART_T *_pUart, uint8_t *_ucaBuf, uint16_t _usLen);
-uint8_t UartGetChar(UART_T *_pUart, uint8_t *_pByte);
+void UartSend(UART_T *_pUart, byte *_ucaBuf, ushort _usLen);
+byte UartGetChar(UART_T *_pUart, byte *_pByte);
 void UartIRQ(UART_T *_pUart);
 void ConfigUartNVIC(void);
 
-void FIFO::SetBuf(uint8_t *buf, int len)
+void FIFO::SetBuf(byte *buf, int len)
 {
     if (len >= 0)
     {
@@ -28,7 +28,7 @@ void FIFO::SetBuf(uint8_t *buf, int len)
     this->Clear();
 }
 
-void FIFO::Push(uint8_t da)
+void FIFO::Push(byte da)
 {
     this->Buf[this->Write] = da;
     if (++this->Write >= this->BufSize)
@@ -41,9 +41,9 @@ void FIFO::Push(uint8_t da)
     }
 }
 
-uint8_t FIFO::Pop()
+byte FIFO::Pop()
 {
-    uint8_t ret = this->Buf[this->Read];
+    byte ret = this->Buf[this->Read];
     if (++this->Read >= this->BufSize)
     {
         this->Read = 0;
@@ -122,7 +122,7 @@ UART_T *ComToUart(COM _ucPort)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void comSendBuf(COM _ucPort, uint8_t *_ucaBuf, uint16_t _usLen)
+void comSendBuf(COM _ucPort, byte *_ucaBuf, ushort _usLen)
 {
     UART_T *pUart;
 
@@ -149,7 +149,7 @@ void comSendBuf(COM _ucPort, uint8_t *_ucaBuf, uint16_t _usLen)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void comSendChar(COM _ucPort, uint8_t _ucByte)
+void comSendChar(COM _ucPort, byte _ucByte)
 {
     comSendBuf(_ucPort, &_ucByte, 1);
 }
@@ -163,7 +163,7 @@ void comSendChar(COM _ucPort, uint8_t _ucByte)
  *	返 回 值: 0 表示无数据, 1 表示读取到有效字节
  *********************************************************************************************************
  */
-uint8_t Usart_T::comGetChar(COM _ucPort, uint8_t *_pByte)
+byte Usart_T::comGetChar(COM _ucPort, byte *_pByte)
 {
     UART_T *pUart;
 
@@ -225,8 +225,8 @@ void Usart_T::comClearRxFifo(COM _ucPort)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-extern void MODBUS_ReciveNew(uint8_t _byte);
-void RS485_ReciveNew(uint8_t _byte)
+extern void MODBUS_ReciveNew(byte _byte);
+void RS485_ReciveNew(byte _byte)
 {
     //MODBUS_ReciveNew(_byte);
 }
@@ -333,7 +333,7 @@ void ConfigUartNVIC(void)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void UartSend(UART_T *_pUart, uint8_t *_ucaBuf, uint16_t _usLen)
+void UartSend(UART_T *_pUart, byte *_ucaBuf, ushort _usLen)
 {
     #if 1	
         for (int i = 0; i < _usLen; i++)
@@ -367,7 +367,7 @@ void UartSend(UART_T *_pUart, uint8_t *_ucaBuf, uint16_t _usLen)
  *	返 回 值: 0 表示无数据  1表示读取到数据
  *********************************************************************************************************
  */
-uint8_t UartGetChar(UART_T *_pUart, uint8_t *_pByte)
+byte UartGetChar(UART_T *_pUart, byte *_pByte)
 {
     if (_pUart->rx.Empty())
     {
@@ -394,7 +394,7 @@ void UartIRQ(UART_T *_pUart)
     if (USART_GetITStatus(_pUart->uart, USART_IT_RXNE) != RESET)
     {
         /* 从串口接收数据寄存器读取数据存放到接收FIFO */
-        uint8_t ch;
+        byte ch;
 
         ch = USART_ReceiveData(_pUart->uart);
         _pUart->rx.Push(ch);
@@ -490,7 +490,7 @@ void UartIRQ(UART_T *_pUart)
     int fgetc(FILE *f)
     {
         /* 从串口接收FIFO中取1个数据, 只有取到数据才返回 */
-        uint8_t ucData;
+        byte ucData;
 
         while (usart1.comGetChar(COM1, &ucData) == 0)
             ;
