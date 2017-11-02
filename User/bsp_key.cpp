@@ -252,6 +252,10 @@ byte Key::GetKeyCode()
 {
 	return this->s_tKey.Pop();
 }
+void Key::SetKeyDetectFunc( byte (*func) (),byte pos)
+{
+	this->s_tBtn[pos].IsKeyDownFunc = func;
+}
 
 #ifdef DEBUG
 	
@@ -341,11 +345,9 @@ byte Key::GetKeyCode()
 		keytest.InitKeyVar();
 
         /* 判断按键按下的函数 */
-        keytest.s_tBtn[0].IsKeyDownFunc = IsKeyDown1;
-        keytest.s_tBtn[1].IsKeyDownFunc = IsKeyDown2;
-
-        /* 组合键 */
-        keytest.s_tBtn[2].IsKeyDownFunc = IsKeyDown9;
+		keytest.SetKeyDetectFunc(IsKeyDown1,0);
+		keytest.SetKeyDetectFunc(IsKeyDown2,1);
+		keytest.SetKeyDetectFunc(IsKeyDown9,2);//组合按键
         
         Sys.AddTask(readkeyroutin, &keytest, 0, 10, "readkeyroutin");
         Sys.AddTask(keycoderoutin, &keytest, 6, 10, "keycoderoutin");

@@ -42,8 +42,7 @@
     class KEY_T /*每个按键对应1个全局的结构体变量。
      */
     {
-        public:
-            /* 下面是一个函数指针，指向判断按键手否按下的函数 */
+        public:            
             byte(*IsKeyDownFunc)(); /* 按键按下的判断函数,1表示按下 */
 
             byte Count; /* 滤波器计数器 */
@@ -78,11 +77,14 @@
             byte GetKeyState(KEY_ID_E _ucKeyID);
             void SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed);
 			byte GetKeyCode();
+		
+			void SetKeyDetectFunc( byte (*func) (),byte pos=0);
         public:
-            KEY_T s_tBtn[KEY_COUNT];
+            
         private:
             void DetectKey(byte i);
 		private:
-			KEY_FIFO s_tKey; /* 按键FIFO变量,结构体 */            
+			KEY_FIFO s_tKey;     
+			KEY_T s_tBtn[KEY_COUNT];
     };
 #endif
