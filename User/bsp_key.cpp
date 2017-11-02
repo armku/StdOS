@@ -1,31 +1,36 @@
 #include "bsp_key.h"
 #include "Port.h"
+/*
+定义键值代码, 必须按如下次序定时每个键的按下、弹起和长按事件
 
+推荐使用enum, 不用#define，原因：
+(1) 便于新增键值,方便调整顺序，使代码看起来舒服点
+(2) 编译器可帮我们避免键值重复。
+ */
+typedef enum
+{
+    KEY_NONE = 0,  /* 0 表示按键事件 */
 
-    /*
-    定义键值代码, 必须按如下次序定时每个键的按下、弹起和长按事件
+    KEY_1_DOWN,  /* 1键按下 */
+    KEY_1_UP,  /* 1键弹起 */
+    KEY_1_LONG,  /* 1键长按 */
 
-    推荐使用enum, 不用#define，原因：
-    (1) 便于新增键值,方便调整顺序，使代码看起来舒服点
-    (2) 编译器可帮我们避免键值重复。
-     */
-    typedef enum
-    {
-        KEY_NONE = 0,  /* 0 表示按键事件 */
+    KEY_2_DOWN,  /* 2键按下 */
+    KEY_2_UP,  /* 2键弹起 */
+    KEY_2_LONG,  /* 2键长按 */
 
-        KEY_1_DOWN,  /* 1键按下 */
-        KEY_1_UP,  /* 1键弹起 */
-        KEY_1_LONG,  /* 1键长按 */
-
-        KEY_2_DOWN,  /* 2键按下 */
-        KEY_2_UP,  /* 2键弹起 */
-        KEY_2_LONG,  /* 2键长按 */
-
-        /* 组合键 */
-        KEY_9_DOWN,  /* 9键按下 */
-        KEY_9_UP,  /* 9键弹起 */
-        KEY_9_LONG,  /* 9键长按 */
-    } KEY_ENUM;
+    /* 组合键 */
+    KEY_9_DOWN,  /* 9键按下 */
+    KEY_9_UP,  /* 9键弹起 */
+    KEY_9_LONG,  /* 9键长按 */
+} KEY_ENUM;
+/*
+按键滤波时间50ms, 单位10ms。
+只有连续检测到50ms状态不变才认为有效，包括弹起和按下两种事件
+即使按键电路不做硬件滤波，该滤波机制也可以保证可靠地检测到按键事件
+ */
+#define KEY_FILTER_TIME   5
+#define KEY_LONG_TIME     100			/* 单位10ms， 持续1秒，认为长按事件 */ 
 
 void KEY_FIFO::Init()
 {
@@ -162,7 +167,7 @@ void Key::InitKeyVar()
     /* 如果需要单独更改某个按键的参数，可以在此单独重新赋值 */
     /* 比如，我们希望按键1按下超过1秒后，自动重发相同键值 */
     s_tBtn[KID_K3].LongTime = 100;
-    s_tBtn[KID_K3].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */	
+    s_tBtn[KID_K3].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */
 }
 
 /*
@@ -176,13 +181,13 @@ void Key::InitKeyVar()
 void Key::DetectKey(byte i)
 {
     KEY_T *pBtn;
-    
+
     //如果没有初始化按键函数，则报错
     if (s_tBtn[i].IsKeyDownFunc == 0)
     {
-		printf("Fault : DetectButton(), s_tBtn[i].IsKeyDownFunc undefine");
+        printf("Fault : DetectButton(), s_tBtn[i].IsKeyDownFunc undefine");
     }
-     
+
 
     pBtn = &s_tBtn[i];
     if (pBtn->IsKeyDownFunc())
@@ -256,6 +261,7 @@ void Key::DetectKey(byte i)
         pBtn->RepeatCount = 0;
     }
 }
+
 /*
  *********************************************************************************************************
  *	函 数 名: bsp_KeyScan
@@ -273,25 +279,27 @@ void Key::KeyScan()
         this->DetectKey(i);
     }
 }
+
 byte Key::GetKeyCode()
 {
-	return this->s_tKey.Pop();
+    return this->s_tKey.Pop();
 }
-void Key::SetKeyDetectFunc( byte (*func) (),byte pos)
+
+void Key::SetKeyDetectFunc(byte(*func)(), byte pos)
 {
-	this->s_tBtn[pos].IsKeyDownFunc = func;
+    this->s_tBtn[pos].IsKeyDownFunc = func;
 }
 
 #ifdef DEBUG
-	
+
     void readkeyroutin(void *param)
     {
-		Key * key=(Key*)param;
+        Key *key = (Key*)param;
         key->KeyScan();
     }
     void keycoderoutin(void *param)
     {
-		Key * key=(Key*)param;
+        Key *key = (Key*)param;
         int ucKeyCode = key->GetKeyCode();
         if (ucKeyCode != KEY_NONE)
         {
@@ -355,7 +363,7 @@ void Key::SetKeyDetectFunc( byte (*func) (),byte pos)
         else
             return 0;
     }
-	Key keytest;
+    Key keytest;
     void keyTest()
     {
         key11.OpenDrain = false;
@@ -366,14 +374,14 @@ void Key::SetKeyDetectFunc( byte (*func) (),byte pos)
 
         key11.Open();
         key22.Open();
-		
-		keytest.InitKeyVar();
+
+        keytest.InitKeyVar();
 
         /* 判断按键按下的函数 */
-		keytest.SetKeyDetectFunc(IsKeyDown1,0);
-		keytest.SetKeyDetectFunc(IsKeyDown2,1);
-		keytest.SetKeyDetectFunc(IsKeyDown9,2);//组合按键
-        
+        keytest.SetKeyDetectFunc(IsKeyDown1, 0);
+        keytest.SetKeyDetectFunc(IsKeyDown2, 1);
+        keytest.SetKeyDetectFunc(IsKeyDown9, 2); //组合按键
+
         Sys.AddTask(readkeyroutin, &keytest, 0, 10, "readkeyroutin");
         Sys.AddTask(keycoderoutin, &keytest, 6, 10, "keycoderoutin");
     }
