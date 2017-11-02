@@ -385,11 +385,6 @@
               <FilePath>.\main.cpp</FilePath>
             </File>
             <File>
-              <FileName>bsp_key.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\bsp_key.cpp</FilePath>
-            </File>
-            <File>
               <FileName>bsp_uart_fifo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\bsp_uart_fifo.cpp</FilePath>
@@ -705,11 +700,6 @@
               <FilePath>..\STDOS\Drivers\NPA.cpp</FilePath>
             </File>
             <File>
-              <FileName>Button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Button.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ST7565R.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\ST7565R.cpp</FilePath>
@@ -753,6 +743,11 @@
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bspkey.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\bspkey.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1078,6 +1073,11 @@
               <FileName>DS18B20Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bspkeytest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\bspkeytest.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1462,11 +1462,6 @@
               <FilePath>.\main.cpp</FilePath>
             </File>
             <File>
-              <FileName>bsp_key.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\bsp_key.cpp</FilePath>
-            </File>
-            <File>
               <FileName>bsp_uart_fifo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\bsp_uart_fifo.cpp</FilePath>
@@ -1782,11 +1777,6 @@
               <FilePath>..\STDOS\Drivers\NPA.cpp</FilePath>
             </File>
             <File>
-              <FileName>Button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Button.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ST7565R.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\ST7565R.cpp</FilePath>
@@ -1830,6 +1820,11 @@
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bspkey.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\bspkey.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2155,6 +2150,11 @@
               <FileName>DS18B20Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bspkeytest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\bspkeytest.cpp</FilePath>
             </File>
           </Files>
         </Group>
