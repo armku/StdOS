@@ -1,7 +1,6 @@
 #include "bsp_key.h"
 #include "Port.h"
 
-Key keytest;
 void KEY_FIFO_T::Init()
 {
     this->Write = 0;
@@ -254,13 +253,16 @@ void Key::KeyScan()
 }
 
 #ifdef DEBUG
+	
     void readkeyroutin(void *param)
     {
-        keytest.KeyScan();
+		Key * key=(Key*)param;
+        key->KeyScan();
     }
     void keycoderoutin(void *param)
     {
-        int ucKeyCode = keytest.s_tKey.Pop();
+		Key * key=(Key*)param;
+        int ucKeyCode = key->s_tKey.Pop();
         if (ucKeyCode != KEY_NONE)
         {
             switch (ucKeyCode)
@@ -323,7 +325,7 @@ void Key::KeyScan()
         else
             return 0;
     }
-
+	Key keytest;
     void keyTest()
     {
         key11.OpenDrain = false;
@@ -344,7 +346,7 @@ void Key::KeyScan()
         /* ×éºÏ¼ü */
         keytest.s_tBtn[2].IsKeyDownFunc = IsKeyDown9;
         
-        Sys.AddTask(readkeyroutin, 0, 0, 10, "readkeyroutin");
-        Sys.AddTask(keycoderoutin, 0, 6, 10, "keycoderoutin");
+        Sys.AddTask(readkeyroutin, &keytest, 0, 10, "readkeyroutin");
+        Sys.AddTask(keycoderoutin, &keytest, 6, 10, "keycoderoutin");
     }
 #endif

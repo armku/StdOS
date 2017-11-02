@@ -83,7 +83,4 @@
         private:
             void DetectKey(byte i);
     };
-    extern Key keytest;
-
-
 #endif
