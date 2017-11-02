@@ -6,6 +6,69 @@ Key keytest;
 
 OutputPort key11(PA0);
 OutputPort key22(PC13);
+
+
+void KEY_FIFO_T::Init()
+{
+    this->Write = 0;
+    this->Read = 0;
+    this->Read2 = 0;
+}
+
+void KEY_FIFO_T::Clear()
+{
+    this->Read = this->Write;
+}
+
+void KEY_FIFO_T::Push(byte da)
+{
+    this->Buf[this->Write] = da;
+    if (++this->Write >= KEY_FIFO_SIZE)
+    {
+        this->Write = 0;
+    }
+}
+
+byte KEY_FIFO_T::Pop()
+{
+    byte ret;
+
+    if (this->Read == this->Write)
+    {
+        return KEY_NONE;
+    }
+    else
+    {
+        ret = this->Buf[this->Read];
+
+        if (++this->Read >= KEY_FIFO_SIZE)
+        {
+            this->Read = 0;
+        }
+        return ret;
+    }
+}
+
+byte KEY_FIFO_T::Pop2()
+{
+    byte ret;
+
+    if (this->Read2 == this->Write)
+    {
+        return KEY_NONE;
+    }
+    else
+    {
+        ret = this->Buf[this->Read2];
+
+        if (++this->Read2 >= KEY_FIFO_SIZE)
+        {
+            this->Read2 = 0;
+        }
+        return ret;
+    }
+}
+
 /*
  *********************************************************************************************************
  *	函 数 名: IsKeyDownX
@@ -48,8 +111,9 @@ byte IsKeyDown9() /* K1 K2组合键 */
  */
 void Key::PutKey(byte _KeyCode)
 {
-	s_tKey.Push(_KeyCode);
+    s_tKey.Push(_KeyCode);
 }
+
 /*
  *********************************************************************************************************
  *	函 数 名: bsp_GetKeyState
@@ -79,6 +143,7 @@ void Key::SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed)
     s_tBtn[_ucKeyID].RepeatSpeed = _RepeatSpeed; /* 按键连发的速度，0表示不支持连发 */
     s_tBtn[_ucKeyID].RepeatCount = 0; /* 连发计数器 */
 }
+
 /*
  *********************************************************************************************************
  *	函 数 名: bsp_InitKeyVar
@@ -239,42 +304,47 @@ void Key::KeyScan()
     void keycoderoutin(void *param)
     {
         int ucKeyCode = keytest.s_tKey.Pop();
-		if(ucKeyCode!=KEY_NONE)
-		{
-			switch (ucKeyCode)
-			{
-				case KEY_1_DOWN:		/* 摇杆LEFT键按下, 控制LED显示流动 */
-					printf("键码：%d KEY_1_DOWN\r\n", ucKeyCode);
-					break;
-				case KEY_2_DOWN:		/* 摇杆RIGHT键按下 */
-					printf("键码：%d KEY_2_DOWN\r\n", ucKeyCode);
-					break;
-				case KEY_9_DOWN:		/* 摇杆UP键按下 */
-					printf("键码：%d KEY_9_DOWN\r\n", ucKeyCode);
-					break;
-				case KEY_1_UP:		/* 摇杆DOWN键按下 */
-					printf("键码：%d KEY_1_UP\r\n", ucKeyCode);
-					break;
-				case KEY_1_LONG:		/* 摇杆OK键按下 */
-					printf("键码：%d KEY_1_LONG\r\n", ucKeyCode);
-					break;
-				default:
-					break;
-			}
-		}
+        if (ucKeyCode != KEY_NONE)
+        {
+            switch (ucKeyCode)
+            {
+                case KEY_1_DOWN:
+                     /* 摇杆LEFT键按下, 控制LED显示流动 */
+                    printf("键码：%d KEY_1_DOWN\r\n", ucKeyCode);
+                    break;
+                case KEY_2_DOWN:
+                     /* 摇杆RIGHT键按下 */
+                    printf("键码：%d KEY_2_DOWN\r\n", ucKeyCode);
+                    break;
+                case KEY_9_DOWN:
+                     /* 摇杆UP键按下 */
+                    printf("键码：%d KEY_9_DOWN\r\n", ucKeyCode);
+                    break;
+                case KEY_1_UP:
+                     /* 摇杆DOWN键按下 */
+                    printf("键码：%d KEY_1_UP\r\n", ucKeyCode);
+                    break;
+                case KEY_1_LONG:
+                     /* 摇杆OK键按下 */
+                    printf("键码：%d KEY_1_LONG\r\n", ucKeyCode);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     void keyTest()
     {
-		key11.OpenDrain=false;
-		key22.OpenDrain=false;
-		
-		key11.Invert=0;
-		key22.Invert=0;
-		
-		key11.Open();
-		key22.Open();
-		
+        key11.OpenDrain = false;
+        key22.OpenDrain = false;
+
+        key11.Invert = 0;
+        key22.Invert = 0;
+
+        key11.Open();
+        key22.Open();
+
         keytest.InitKeyVar();
         Sys.AddTask(readkeyroutin, 0, 0, 10, "readkeyroutin");
         Sys.AddTask(keycoderoutin, 0, 6, 10, "keycoderoutin");
