@@ -39,6 +39,7 @@
      */
     #define KEY_FILTER_TIME   5
     #define KEY_LONG_TIME     100			/* 单位10ms， 持续1秒，认为长按事件 */    
+	class Key;
     class KEY_T /*每个按键对应1个全局的结构体变量。
      */
     {
@@ -51,6 +52,8 @@
             byte State; /* 按键当前状态（按下还是弹起） */
             byte RepeatSpeed; /* 连续按键周期 */
             byte RepeatCount; /* 连续按键计数器 */
+		public:
+			//void CheckKey();			
     };
     class KEY_FIFO
     {
