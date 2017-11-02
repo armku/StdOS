@@ -1,13 +1,7 @@
-#include "stm32f10x.h"
 #include "bsp_key.h"
 #include "Port.h"
 
 Key keytest;
-
-OutputPort key11(PA0);
-OutputPort key22(PC13);
-
-
 void KEY_FIFO_T::Init()
 {
     this->Write = 0;
@@ -67,38 +61,6 @@ byte KEY_FIFO_T::Pop2()
         }
         return ret;
     }
-}
-
-/*
- *********************************************************************************************************
- *	函 数 名: IsKeyDownX
- *	功能说明: 判断按键是否按下
- *	形    参: 无
- *	返 回 值: 返回值1 表示按下，0表示未按下
- *********************************************************************************************************
- */
-byte IsKeyDown1()
-{
-    if (key11 != 0 && key22 != 0)
-        return 1;
-    else
-        return 0;
-}
-
-byte IsKeyDown2()
-{
-    if (key11 == 0 && key22 == 0)
-        return 1;
-    else
-        return 0;
-}
-
-byte IsKeyDown9() /* K1 K2组合键 */
-{
-    if (key11 != 0 && key22 == 0)
-        return 1;
-    else
-        return 0;
 }
 
 /*
@@ -177,12 +139,7 @@ void Key::InitKeyVar()
     s_tBtn[KID_JOY_U].LongTime = 100;
     s_tBtn[KID_JOY_U].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */
 
-    /* 判断按键按下的函数 */
-    s_tBtn[0].IsKeyDownFunc = IsKeyDown1;
-    s_tBtn[1].IsKeyDownFunc = IsKeyDown2;
 
-    /* 组合键 */
-    s_tBtn[2].IsKeyDownFunc = IsKeyDown9;
 }
 
 /*
@@ -309,29 +266,62 @@ void Key::KeyScan()
             switch (ucKeyCode)
             {
                 case KEY_1_DOWN:
-                     /* 摇杆LEFT键按下, 控制LED显示流动 */
+                    /* 摇杆LEFT键按下, 控制LED显示流动 */
                     printf("键码：%d KEY_1_DOWN\r\n", ucKeyCode);
                     break;
                 case KEY_2_DOWN:
-                     /* 摇杆RIGHT键按下 */
+                    /* 摇杆RIGHT键按下 */
                     printf("键码：%d KEY_2_DOWN\r\n", ucKeyCode);
                     break;
                 case KEY_9_DOWN:
-                     /* 摇杆UP键按下 */
+                    /* 摇杆UP键按下 */
                     printf("键码：%d KEY_9_DOWN\r\n", ucKeyCode);
                     break;
                 case KEY_1_UP:
-                     /* 摇杆DOWN键按下 */
+                    /* 摇杆DOWN键按下 */
                     printf("键码：%d KEY_1_UP\r\n", ucKeyCode);
                     break;
                 case KEY_1_LONG:
-                     /* 摇杆OK键按下 */
+                    /* 摇杆OK键按下 */
                     printf("键码：%d KEY_1_LONG\r\n", ucKeyCode);
                     break;
                 default:
                     break;
             }
         }
+    }
+    OutputPort key11(PA0);
+    OutputPort key22(PC13);
+    /*
+     *********************************************************************************************************
+     *	函 数 名: IsKeyDownX
+     *	功能说明: 判断按键是否按下
+     *	形    参: 无
+     *	返 回 值: 返回值1 表示按下，0表示未按下
+     *********************************************************************************************************
+     */
+    byte IsKeyDown1()
+    {
+        if (key11 != 0 && key22 != 0)
+            return 1;
+        else
+            return 0;
+    }
+
+    byte IsKeyDown2()
+    {
+        if (key11 == 0 && key22 == 0)
+            return 1;
+        else
+            return 0;
+    }
+
+    byte IsKeyDown9() /* K1 K2组合键 */
+    {
+        if (key11 != 0 && key22 == 0)
+            return 1;
+        else
+            return 0;
     }
 
     void keyTest()
@@ -344,8 +334,16 @@ void Key::KeyScan()
 
         key11.Open();
         key22.Open();
+		
+		keytest.InitKeyVar();
 
-        keytest.InitKeyVar();
+        /* 判断按键按下的函数 */
+        keytest.s_tBtn[0].IsKeyDownFunc = IsKeyDown1;
+        keytest.s_tBtn[1].IsKeyDownFunc = IsKeyDown2;
+
+        /* 组合键 */
+        keytest.s_tBtn[2].IsKeyDownFunc = IsKeyDown9;
+        
         Sys.AddTask(readkeyroutin, 0, 0, 10, "readkeyroutin");
         Sys.AddTask(keycoderoutin, 0, 6, 10, "keycoderoutin");
     }
