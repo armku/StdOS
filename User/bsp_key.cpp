@@ -245,6 +245,7 @@ void Key::KeyScan()
     void keycoderoutin(void *param)
     {
         int aa = s_tKey.Pop();
+		if(aa!=KEY_NONE)
         printf("МќТыЃК%d\r\n", aa);
     }
 
@@ -261,6 +262,6 @@ void Key::KeyScan()
 		
         keytest.InitKeyVar();
         Sys.AddTask(readkeyroutin, 0, 0, 10, "readkeyroutin");
-        Sys.AddTask(keycoderoutin, 0, 0, 1000, "keycoderoutin");
+        Sys.AddTask(keycoderoutin, 0, 6, 10, "keycoderoutin");
     }
 #endif
