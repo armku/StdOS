@@ -4,11 +4,10 @@
 
 Key keytest;
 
-OutputPort key11(PC13);
-OutputPort key22(PA0);
+OutputPort key11(PA0);
+OutputPort key22(PC13);
 
 static KEY_T s_tBtn[KEY_COUNT];
-KEY_FIFO_T s_tKey; /* 按键FIFO变量,结构体 */
 
 /*
  *********************************************************************************************************
@@ -18,17 +17,7 @@ KEY_FIFO_T s_tKey; /* 按键FIFO变量,结构体 */
  *	返 回 值: 返回值1 表示按下，0表示未按下
  *********************************************************************************************************
  */
-/* 安富莱 STM32-V4 开发板 */
-/* 为了区分3个事件:　K1单独按下, K2单独按下， K1和K2同时按下 */
 byte IsKeyDown1()
-{
-    if (key11 == 0 && key22 == 0)
-        return 1;
-    else
-        return 0;
-}
-
-byte IsKeyDown2()
 {
     if (key11 != 0 && key22 != 0)
         return 1;
@@ -36,9 +25,17 @@ byte IsKeyDown2()
         return 0;
 }
 
+byte IsKeyDown2()
+{
+    if (key11 == 0 && key22 == 0)
+        return 1;
+    else
+        return 0;
+}
+
 byte IsKeyDown9() /* K1 K2组合键 */
 {
-    if (key11 == 0 && key22 != 0)
+    if (key11 != 0 && key22 == 0)
         return 1;
     else
         return 0;
@@ -244,7 +241,7 @@ void Key::KeyScan()
     }
     void keycoderoutin(void *param)
     {
-        int ucKeyCode = s_tKey.Pop();
+        int ucKeyCode = keytest.s_tKey.Pop();
 		if(ucKeyCode!=KEY_NONE)
 		{
 			switch (ucKeyCode)

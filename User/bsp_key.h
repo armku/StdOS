@@ -147,7 +147,9 @@
             void KeyScan();
             void PutKey(byte _KeyCode);
             byte GetKeyState(KEY_ID_E _ucKeyID);
-            void SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed);            
+            void SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed);  
+		public:
+			KEY_FIFO_T s_tKey; /* 按键FIFO变量,结构体 */
         private:
             void DetectKey(byte i);
     };
