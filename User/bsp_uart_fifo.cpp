@@ -359,7 +359,7 @@ void ConfigUartNVIC(void)
  */
 void UartSend(UART_T *_pUart, uint8_t *_ucaBuf, uint16_t _usLen)
 {
-    #if 0	
+    #if 1	
         for (int i = 0; i < _usLen; i++)
         {
             //DISABLE_INT();
@@ -526,7 +526,7 @@ void UartIRQ(UART_T *_pUart)
 #ifdef DEBUG
     void FifoTest()
     {
-        NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+		ConfigUartNVIC();
         usart1.bsp_InitUart(); /* 初始化串口驱动 */
     }
 
