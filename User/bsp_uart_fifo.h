@@ -1,15 +1,15 @@
 #ifndef _BSP_USART_FIFO_H_
     #define _BSP_USART_FIFO_H_
-    
+    #include "Sys.h"
     /* ¶¨Òå¶Ë¿ÚºÅ */
-    typedef enum
-    {
-        COM1 = 0,  /* USART1  PA9, PA10 */
-        COM2 = 1,  /* USART2, PA2, PA3 */
-        COM3 = 2,  /* USART3, PB10, PB11 */
-        COM4 = 3,  /* UART4, PC10, PC11 */
-        COM5 = 4,  /* UART5, PC12, PD2 */
-    } COM_PORT_E;
+//    typedef enum
+//    {
+//        COM1 = 0,  /* USART1  PA9, PA10 */
+//        COM2 = 1,  /* USART2, PA2, PA3 */
+//        COM3 = 2,  /* USART3, PB10, PB11 */
+//        COM4 = 3,  /* UART4, PC10, PC11 */
+//        COM5 = 4,  /* UART5, PC12, PD2 */
+//    } COM_PORT_E;
         
 	class FIFO
 	{
@@ -45,11 +45,10 @@
     {
         public:
             void bsp_InitUart(void);                       
-            uint8_t comGetChar(COM_PORT_E _ucPort, uint8_t *_pByte);
+            uint8_t comGetChar(COM _ucPort, uint8_t *_pByte);
 
-            void comClearTxFifo(COM_PORT_E _ucPort);
-            void comClearRxFifo(COM_PORT_E _ucPort);
-            void bsp_SetUart1Baud(uint32_t _baud);
+            void comClearTxFifo(COM _ucPort);
+            void comClearRxFifo(COM _ucPort);
 		public:
             
     };

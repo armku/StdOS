@@ -2,13 +2,12 @@
 #include "bsp_uart_fifo.h"
 #include <stdio.h>
 
-#define UART1_TX_BUF_SIZE	1*1024
-#define UART1_RX_BUF_SIZE	1*1024
-
 Usart_T usart1;
 
 /* 定义每个串口结构体变量 */
 UART_T g_tUart1;
+#define UART1_TX_BUF_SIZE	1*1024
+#define UART1_RX_BUF_SIZE	1*1024
 uint8_t g_TxBuf1[UART1_TX_BUF_SIZE]; /* 发送缓冲区 */
 uint8_t g_RxBuf1[UART1_RX_BUF_SIZE]; /* 接收缓冲区 */
 void UartVarInit(void);
@@ -100,7 +99,7 @@ void Usart_T::bsp_InitUart(void)
  *	返 回 值: uart指针
  *********************************************************************************************************
  */
-UART_T *ComToUart(COM_PORT_E _ucPort)
+UART_T *ComToUart(COM _ucPort)
 {
     if (_ucPort == COM1)
     {
@@ -123,7 +122,7 @@ UART_T *ComToUart(COM_PORT_E _ucPort)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void comSendBuf(COM_PORT_E _ucPort, uint8_t *_ucaBuf, uint16_t _usLen)
+void comSendBuf(COM _ucPort, uint8_t *_ucaBuf, uint16_t _usLen)
 {
     UART_T *pUart;
 
@@ -150,7 +149,7 @@ void comSendBuf(COM_PORT_E _ucPort, uint8_t *_ucaBuf, uint16_t _usLen)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void comSendChar(COM_PORT_E _ucPort, uint8_t _ucByte)
+void comSendChar(COM _ucPort, uint8_t _ucByte)
 {
     comSendBuf(_ucPort, &_ucByte, 1);
 }
@@ -164,7 +163,7 @@ void comSendChar(COM_PORT_E _ucPort, uint8_t _ucByte)
  *	返 回 值: 0 表示无数据, 1 表示读取到有效字节
  *********************************************************************************************************
  */
-uint8_t Usart_T::comGetChar(COM_PORT_E _ucPort, uint8_t *_pByte)
+uint8_t Usart_T::comGetChar(COM _ucPort, uint8_t *_pByte)
 {
     UART_T *pUart;
 
@@ -185,7 +184,7 @@ uint8_t Usart_T::comGetChar(COM_PORT_E _ucPort, uint8_t *_pByte)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Usart_T::comClearTxFifo(COM_PORT_E _ucPort)
+void Usart_T::comClearTxFifo(COM _ucPort)
 {
     UART_T *pUart;
 
@@ -206,7 +205,7 @@ void Usart_T::comClearTxFifo(COM_PORT_E _ucPort)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Usart_T::comClearRxFifo(COM_PORT_E _ucPort)
+void Usart_T::comClearRxFifo(COM _ucPort)
 {
     UART_T *pUart;
 
@@ -218,29 +217,6 @@ void Usart_T::comClearRxFifo(COM_PORT_E _ucPort)
 
     pUart->rx.Clear();
 }
-
-/*
- *********************************************************************************************************
- *	函 数 名: bsp_SetUart1Baud
- *	功能说明: 修改UART1波特率
- *	形    参: 无
- *	返 回 值: 无
- *********************************************************************************************************
- */
-void Usart_T::bsp_SetUart1Baud(uint32_t _baud)
-{
-    USART_InitTypeDef USART_InitStructure;
-
-    /* 第2步： 配置串口硬件参数 */
-    USART_InitStructure.USART_BaudRate = _baud; /* 波特率 */
-    USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-    USART_InitStructure.USART_StopBits = USART_StopBits_1;
-    USART_InitStructure.USART_Parity = USART_Parity_No;
-    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-    USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-    USART_Init(USART2, &USART_InitStructure);
-}
-
 /*
  *********************************************************************************************************
  *	函 数 名: RS485_ReciveNew
