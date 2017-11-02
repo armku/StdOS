@@ -6,9 +6,6 @@ Key keytest;
 
 OutputPort key11(PA0);
 OutputPort key22(PC13);
-
-static KEY_T s_tBtn[KEY_COUNT];
-
 /*
  *********************************************************************************************************
  *	º¯ Êý Ãû: IsKeyDownX

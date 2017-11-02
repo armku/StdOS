@@ -150,6 +150,7 @@
             void SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed);  
 		public:
 			KEY_FIFO_T s_tKey; /* 按键FIFO变量,结构体 */
+			KEY_T s_tBtn[KEY_COUNT];
         private:
             void DetectKey(byte i);
     };
