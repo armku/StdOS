@@ -7,7 +7,24 @@
     typedef enum
     {
         KID_K1 = 0, KID_K2, KID_K3
-    } KEY_ID_E;
+    } KEY_ID_E;		
+	typedef enum
+	{
+		KEY_NONE = 0,  /* 0 表示按键事件 */
+
+		KEY_1_DOWN,  /* 1键按下 */
+		KEY_1_UP,  /* 1键弹起 */
+		KEY_1_LONG,  /* 1键长按 */
+
+		KEY_2_DOWN,  /* 2键按下 */
+		KEY_2_UP,  /* 2键弹起 */
+		KEY_2_LONG,  /* 2键长按 */
+
+		/* 组合键 */
+		KEY_9_DOWN,  /* 9键按下 */
+		KEY_9_UP,  /* 9键弹起 */
+		KEY_9_LONG,  /* 9键长按 */
+	} KEY_ENUM;
     class KEY_T /*每个按键对应1个全局的结构体变量。
      */
     {
