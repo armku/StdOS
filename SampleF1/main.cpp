@@ -82,6 +82,7 @@ void ssd1309Test();
 void ds18b20test();
 void ST7565Rtest();
 void keyTest();
+void FifoTest();
 int main(void)
 {
     Sys.Init();
@@ -110,6 +111,7 @@ int main(void)
     //ESP8266TEST();
 	//ds18b20test();
 	keyTest();
+	FifoTest();
 	//ST7565Rtest();
 
     Sys.Start();

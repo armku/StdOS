@@ -359,21 +359,27 @@ void ConfigUartNVIC(void)
  */
 void UartSend(UART_T *_pUart, uint8_t *_ucaBuf, uint16_t _usLen)
 {
-    for (int i = 0; i < _usLen; i++)
-    {
-        //DISABLE_INT();
-        while (1)
+    #if 0	
+        for (int i = 0; i < _usLen; i++)
         {
-            if (!_pUart->tx.Full())
+            //DISABLE_INT();
+            while (1)
             {
-                break;
+                if (!_pUart->tx.Full())
+                {
+                    break;
+                }
             }
+            //ENABLE_INT();
+            _pUart->tx.Push(_ucaBuf[i]);
         }
-        //ENABLE_INT();
-        _pUart->tx.Push(_ucaBuf[i]);
-    }
 
-    USART_ITConfig(_pUart->uart, USART_IT_TXE, ENABLE);
+        USART_ITConfig(_pUart->uart, USART_IT_TXE, ENABLE);
+    #else 
+        USART_SendData(_pUart->uart, _ucaBuf[0]);
+        while (USART_GetFlagStatus(_pUart->uart, USART_FLAG_TXE) == RESET)
+            ;
+    #endif 
 }
 
 /*
@@ -516,4 +522,12 @@ void UartIRQ(UART_T *_pUart)
     }
     #ifdef __cplusplus
     }
+#endif 
+#ifdef DEBUG
+    void FifoTest()
+    {
+        NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+        usart1.bsp_InitUart(); /* 初始化串口驱动 */
+    }
+
 #endif
