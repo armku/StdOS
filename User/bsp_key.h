@@ -6,7 +6,7 @@
     /* 按键ID, 主要用于bsp_KeyState()函数的入口参数 */
     typedef enum
     {
-        KID_K1 = 0, KID_K2, KID_K3, KID_JOY_U
+        KID_K1 = 0, KID_K2, KID_K3
     } KEY_ID_E;
     /*
     定义键值代码, 必须按如下次序定时每个键的按下、弹起和长按事件

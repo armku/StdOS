@@ -135,8 +135,8 @@ void Key::InitKeyVar()
 
     /* 如果需要单独更改某个按键的参数，可以在此单独重新赋值 */
     /* 比如，我们希望按键1按下超过1秒后，自动重发相同键值 */
-    s_tBtn[KID_JOY_U].LongTime = 100;
-    s_tBtn[KID_JOY_U].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */	
+    s_tBtn[KID_K3].LongTime = 100;
+    s_tBtn[KID_K3].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */	
 }
 
 /*
