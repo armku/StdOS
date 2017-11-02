@@ -251,6 +251,10 @@ void Key::KeyScan()
         this->DetectKey(i);
     }
 }
+byte Key::GetKeyCode()
+{
+	return this->s_tKey.Pop();
+}
 
 #ifdef DEBUG
 	
@@ -262,7 +266,7 @@ void Key::KeyScan()
     void keycoderoutin(void *param)
     {
 		Key * key=(Key*)param;
-        int ucKeyCode = key->s_tKey.Pop();
+        int ucKeyCode = key->GetKeyCode();
         if (ucKeyCode != KEY_NONE)
         {
             switch (ucKeyCode)
