@@ -56,7 +56,6 @@ int main(void)
     //w25q128test();  
 	//ssd1309Test();
 	//ds18b20test();
-	//SRamTest();
-	bsp_Init();
+	//SRamTest();	
     Sys.Start();
 }

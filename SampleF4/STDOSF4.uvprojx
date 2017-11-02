@@ -743,11 +743,6 @@
               <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
             </File>
             <File>
-              <FileName>Button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Button.cpp</FilePath>
-            </File>
-            <File>
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\lcd_dr.cpp</FilePath>
@@ -786,6 +781,11 @@
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bspkey.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\bspkey.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1081,6 +1081,11 @@
               <FileName>DS18B20Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bspkeytest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\bspkeytest.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1823,11 +1828,6 @@
               <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
             </File>
             <File>
-              <FileName>Button.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\Button.cpp</FilePath>
-            </File>
-            <File>
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\lcd_dr.cpp</FilePath>
@@ -1866,6 +1866,11 @@
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bspkey.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\bspkey.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2161,6 +2166,11 @@
               <FileName>DS18B20Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bspkeytest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\bspkeytest.cpp</FilePath>
             </File>
           </Files>
         </Group>
