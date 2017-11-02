@@ -46,19 +46,6 @@ byte IsKeyDown9() /* K1 K2组合键 */
 
 /*
  *********************************************************************************************************
- *	函 数 名: bsp_InitKey
- *	功能说明: 初始化按键. 该函数被 bsp_Init() 调用。
- *	形    参:  无
- *	返 回 值: 无
- *********************************************************************************************************
- */
-void Key::InitKey(void)
-{
-    InitKeyVar(); /* 初始化按键变量 */
-}
-
-/*
- *********************************************************************************************************
  *	函 数 名: bsp_PutKey
  *	功能说明: 将1个键值压入按键FIFO缓冲区。可用于模拟一个按键。
  *	形    参:  _KeyCode : 按键代码
@@ -246,7 +233,7 @@ void Key::KeyScan()
 
     for (i = 0; i < KEY_COUNT; i++)
     {
-        DetectKey(i);
+        this->DetectKey(i);
     }
 }
 
@@ -272,7 +259,7 @@ void Key::KeyScan()
 		key11.Open();
 		key22.Open();
 		
-        keytest.InitKey();
+        keytest.InitKeyVar();
         Sys.AddTask(readkeyroutin, 0, 0, 10, "readkeyroutin");
         Sys.AddTask(keycoderoutin, 0, 0, 1000, "keycoderoutin");
     }

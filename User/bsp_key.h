@@ -142,14 +142,12 @@
     class Key
     {
         public:
-            /* 供外部调用的函数声明 */
-            void InitKey();
+            void InitKeyVar();
             void KeyScan();
             void PutKey(byte _KeyCode);
             byte GetKeyState(KEY_ID_E _ucKeyID);
             void SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed);            
         private:
-            void InitKeyVar();
             void DetectKey(byte i);
     };
     extern Key keytest;
