@@ -475,30 +475,7 @@ void USART1_IRQHandlerCOM1(void)
     }
 #endif 
 
-#ifdef DEBUG
-    /* 定义例程名和例程发布日期 */
-    #define EXAMPLE_NAME	"V4-003_串口和PC机通信（串口中断、FIFO机制）"
-    #define EXAMPLE_DATE	"2015-08-30"
-    #define DEMO_VER		"1.0"
-    void PrintfLogo()
-    {
-        printf("*************************************************************\n\r");
-        printf("* 例程名称   : %s\r\n", EXAMPLE_NAME); /* 打印例程名称 */
-        printf("* 例程版本   : %s\r\n", DEMO_VER); /* 打印例程版本 */
-        printf("* 发布日期   : %s\r\n", EXAMPLE_DATE); /* 打印例程日期 */
-
-        /* 打印ST固件库版本，宏定义在 stm32f4xx.h 文件 */
-        printf("* 固件库版本 : %d.%d.%d\r\n", __STM32F10X_STDPERIPH_VERSION_MAIN, __STM32F10X_STDPERIPH_VERSION_SUB1, __STM32F10X_STDPERIPH_VERSION_SUB2);
-
-        /* 打印 CMSIS 版本. 宏定义在 core_cm4.h 文件 */
-        printf("* CMSIS版本  : %X.%02X\r\n", __CM3_CMSIS_VERSION_MAIN, __CM3_CMSIS_VERSION_SUB);
-
-        printf("* \n\r"); /* 打印一行空格 */
-        printf("* QQ    : 1295744630 \r\n");
-        printf("* Email : armfly@qq.com \r\n");
-        printf("* Copyright www.armfly.com 安富莱电子\r\n");
-        printf("*************************************************************\n\r");
-    }
+#ifdef DEBUG    
     void fiforoutin(void *param)
     {
         uint8_t read;
@@ -524,8 +501,7 @@ void USART1_IRQHandlerCOM1(void)
     void FifoTest()
     {
         NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
-        bsp_InitUart(); /* 初始化串口驱动 */
-        PrintfLogo();
-        Sys.AddTask(fiforoutin, 0, 0, 200, "fiforoutin");
+        bsp_InitUart(); 
+        Sys.AddTask(fiforoutin, 0, 0, 100, "fiforoutin");
     }
 #endif
