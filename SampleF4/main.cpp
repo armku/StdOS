@@ -42,13 +42,6 @@ void ssd1309Test();
 void ds18b20test();
 void SRamTest();
 void bsp_Init(void);
-#ifdef __cplusplus
- extern "C" {
-#endif
-void MainTask(void);
-#ifdef __cplusplus
-}
-#endif
 int main(void)
 {
     Sys.Init();
@@ -62,8 +55,8 @@ int main(void)
     //InterruptTest();
     //w25q128test();  
 	//ssd1309Test();
-	//ds18b20test();
-	//SRamTest();	
-	MainTask();
+	ds18b20test();
+	//SRamTest();
+	
     Sys.Start();
 }
