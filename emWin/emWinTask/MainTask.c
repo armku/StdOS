@@ -306,16 +306,29 @@ static void _cbCallback(WM_MESSAGE * pMsg)
 	}
 }
 
-/*
-*********************************************************************************************************
-*	函 数 名: MainTask
-*	功能说明: GUI主函数
-*	形    参: 无
-*	返 回 值: 无
-*********************************************************************************************************
-*/
+#include "stm32f4xx.h"
+void bsp_InitI2C(void);
+void bsp_InitSPIBus(void);
+void LCD_InitHard(void);
+void TOUCH_InitHard(void);
 void MainTask(void) 
 {
+	/* 使能CRC 因为使用STemWin前必须要使能 */
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_CRC, ENABLE);
+	
+	/* 设置NVIC优先级分组为Group4：0-15个抢占式优先级，0个响应式优先级 */
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+	
+	//bsp_InitKey(); 	       /* 按键初始化 */	
+	
+	//bsp_InitI2C();
+	
+	bsp_InitSPIBus();	   /* 配置SPI总线 */
+	
+	//bsp_InitTimer();	   /* 初始化系统滴答定时器 */
+	
+	LCD_InitHard();	       /* 初始化显示器硬件(配置GPIO和FSMC,给LCD发送初始化指令) */
+	//TOUCH_InitHard();
 	/* 初始化 */ 
 	GUI_Init();
 	GUI_CURSOR_Show();
@@ -323,12 +336,12 @@ void MainTask(void)
 	/* 设置桌面窗口的回调函数 */
 	WM_SetCallback(WM_HBKWIN, _cbBkWindow);  
 	WM_SetCreateFlags(WM_CF_MEMDEV);  /* 使能窗口使用内存设备，防止闪烁 */
-	
-	while (1) 
-	{
-		GUI_ExecDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), &_cbCallback, 0, 0, 0);
-		GUI_Delay(1000);
-	}
+	GUI_ExecDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), &_cbCallback, 0, 0, 0);
+//	while (1) 
+//	{
+//		GUI_ExecDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), &_cbCallback, 0, 0, 0);
+//		GUI_Delay(1000);
+//	}
 }
 
 
