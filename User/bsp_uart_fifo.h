@@ -5,43 +5,32 @@
 	class FIFO
 	{
 		public:
-			void SetBuf(byte *buf,int len);
-			void Push(byte da);
-			byte Pop();
+			void SetBuf(uint8_t *buf, int len);
+			int Push(uint8_t da);
+			int Pop(uint8_t *da);
+			bool BufIsEmpty();
+			bool BufIsFull();
 			void Clear();
-			bool Full();//缓冲区满
-			bool Empty();//缓冲区空			
-		private:
-			byte *Buf; /* 发送缓冲区 */
-			ushort BufSize; /* 发送缓冲区大小 */
-			__IO ushort Write; /* 发送缓冲区写指针 */
-			__IO ushort Read; /* 发送缓冲区读指针 */
-			__IO ushort Count; /* 等待发送的数据个数 */
-			
-			
-	};   
+		public:
+			uint8_t *pBuf; /* 缓冲区 */			
+			int Read; /* 缓冲区读指针 */
+			int Count; /* 数据个数 */
+			int BufSize; /* 缓冲区大小 */
+		private:			
+			int Write; /* 缓冲区写指针 */			
+	};
+
     class UART_T
     {
         public:
             USART_TypeDef *uart; /* STM32内部串口设备指针 */
-		
 			FIFO tx;
 			FIFO rx;
-
-            void(*SendBefor)(void); /* 开始发送之前的回调函数指针（主要用于RS485切换到发送模式） */
-            void(*SendOver)(void); /* 发送完毕的回调函数指针（主要用于RS485将发送模式切换为接收模式） */
-            void(*ReciveNew)(byte _byte); /* 串口收到数据的回调函数指针 */
+            void(*ReciveNew)(uint8_t _byte); /* 串口收到数据的回调函数指针 */
     };
-    class Usart_T
-    {
-        public:
-            void bsp_InitUart(void);                       
-            byte comGetChar(COM _ucPort, byte *_pByte);
 
-            void comClearTxFifo(COM _ucPort);
-            void comClearRxFifo(COM _ucPort);
-		public:
-            
-    };
-    extern Usart_T usart1;
+    void bsp_InitUart(void);
+    void comSendBuf(COM _ucPort, uint8_t *_ucaBuf, int _usLen);
+    void comSendChar(COM _ucPort, uint8_t _ucByte);
+    uint8_t comGetChar(COM _ucPort, uint8_t *_pByte);
 #endif

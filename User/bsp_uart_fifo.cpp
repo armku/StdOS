@@ -2,48 +2,59 @@
 #include "bsp_uart_fifo.h"
 #include <stdio.h>
 
-Usart_T usart1;
+#define ENABLE_INT()	__set_PRIMASK(0)	/* 使能全局中断 */
+#define DISABLE_INT()	__set_PRIMASK(1)	/* 禁止全局中断 */
 
-/* 定义每个串口结构体变量 */
-UART_T g_tUart1;
 #define UART1_TX_BUF_SIZE	1*1024
 #define UART1_RX_BUF_SIZE	1*1024
-byte g_TxBuf1[UART1_TX_BUF_SIZE]; /* 发送缓冲区 */
-byte g_RxBuf1[UART1_RX_BUF_SIZE]; /* 接收缓冲区 */
+
+UART_T g_tUart1;
+uint8_t g_TxBuf1[UART1_TX_BUF_SIZE]; /* 发送缓冲区 */
+uint8_t g_RxBuf1[UART1_RX_BUF_SIZE]; /* 接收缓冲区 */
+
 void UartVarInit(void);
 
 void InitHardUart(void);
-void UartSend(UART_T *_pUart, byte *_ucaBuf, ushort _usLen);
-byte UartGetChar(UART_T *_pUart, byte *_pByte);
+void UartSend(UART_T *_pUart, uint8_t *_ucaBuf, int _usLen);
+uint8_t UartGetChar(UART_T *_pUart, uint8_t *_pByte);
 void UartIRQ(UART_T *_pUart);
 void ConfigUartNVIC(void);
 
-void FIFO::SetBuf(byte *buf, int len)
+void FIFO::SetBuf(uint8_t *buf, int len)
 {
     if (len >= 0)
     {
-        this->Buf = buf;
+        this->pBuf = buf;
         this->BufSize = len;
     }
     this->Clear();
 }
-
-void FIFO::Push(byte da)
+void FIFO::Clear()
 {
-    this->Buf[this->Write] = da;
+    this->Write = 0;
+    this->Read = 0;
+    this->Count = 0;
+}
+int FIFO::Push(uint8_t da)
+{
+	this->pBuf[this->Write] = da;
     if (++this->Write >= this->BufSize)
     {
         this->Write = 0;
     }
-    if (this->Count < this->BufSize)
+    //if (this->Count < this->BufSize)
     {
         this->Count++;
+		return 0;
     }
+	//else
+	{
+		return -1;
+	}
 }
-
-byte FIFO::Pop()
+int FIFO::Pop(uint8_t *da)
 {
-    byte ret = this->Buf[this->Read];
+    *da = this->pBuf[this->Read];
     if (++this->Read >= this->BufSize)
     {
         this->Read = 0;
@@ -51,29 +62,21 @@ byte FIFO::Pop()
     if (this->Count)
     {
         this->Count--;
+		return 0;
     }
-    return ret;
+	else
+	{
+		return -1;
+	}
 }
-
-void FIFO::Clear()
+bool FIFO::BufIsEmpty()
 {
-    this->Write = 0;
-    this->Read = 0;
-    this->Count = 0;
+	return this->Count==0;
 }
-
-//缓冲区满
-bool FIFO::Full()
+bool FIFO::BufIsFull()
 {
-    return this->Count >= this->BufSize;
+	return this->Count>=this->BufSize;
 }
-
-//缓冲区空
-bool FIFO::Empty()
-{
-    return this->Count == 0;
-}
-
 /*
  *********************************************************************************************************
  *	函 数 名: bsp_InitUart
@@ -82,13 +85,13 @@ bool FIFO::Empty()
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Usart_T::bsp_InitUart(void)
+void bsp_InitUart(void)
 {
-    UartVarInit();
+    UartVarInit(); /* 必须先初始化全局变量,再配置硬件 */
 
-    InitHardUart();
+    InitHardUart(); /* 配置串口的硬件参数(波特率等) */
 
-    ConfigUartNVIC();
+    ConfigUartNVIC(); /* 配置串口中断 */
 }
 
 /*
@@ -122,7 +125,7 @@ UART_T *ComToUart(COM _ucPort)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void comSendBuf(COM _ucPort, byte *_ucaBuf, ushort _usLen)
+void comSendBuf(COM _ucPort, uint8_t *_ucaBuf, int _usLen)
 {
     UART_T *pUart;
 
@@ -131,12 +134,6 @@ void comSendBuf(COM _ucPort, byte *_ucaBuf, ushort _usLen)
     {
         return ;
     }
-
-    if (pUart->SendBefor != 0)
-    {
-        pUart->SendBefor(); /* 如果是RS485通信，可以在这个函数中将RS485设置为发送模式 */
-    }
-
     UartSend(pUart, _ucaBuf, _usLen);
 }
 
@@ -149,7 +146,7 @@ void comSendBuf(COM _ucPort, byte *_ucaBuf, ushort _usLen)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void comSendChar(COM _ucPort, byte _ucByte)
+void comSendChar(COM _ucPort, uint8_t _ucByte)
 {
     comSendBuf(_ucPort, &_ucByte, 1);
 }
@@ -163,7 +160,7 @@ void comSendChar(COM _ucPort, byte _ucByte)
  *	返 回 值: 0 表示无数据, 1 表示读取到有效字节
  *********************************************************************************************************
  */
-byte Usart_T::comGetChar(COM _ucPort, byte *_pByte)
+uint8_t comGetChar(COM _ucPort, uint8_t *_pByte)
 {
     UART_T *pUart;
 
@@ -178,61 +175,6 @@ byte Usart_T::comGetChar(COM _ucPort, byte *_pByte)
 
 /*
  *********************************************************************************************************
- *	函 数 名: comClearTxFifo
- *	功能说明: 清零串口发送缓冲区
- *	形    参: _ucPort: 端口号(COM1 - COM6)
- *	返 回 值: 无
- *********************************************************************************************************
- */
-void Usart_T::comClearTxFifo(COM _ucPort)
-{
-    UART_T *pUart;
-
-    pUart = ComToUart(_ucPort);
-    if (pUart == 0)
-    {
-        return ;
-    }
-
-    pUart->tx.Clear();
-}
-
-/*
- *********************************************************************************************************
- *	函 数 名: comClearRxFifo
- *	功能说明: 清零串口接收缓冲区
- *	形    参: _ucPort: 端口号(COM1 - COM6)
- *	返 回 值: 无
- *********************************************************************************************************
- */
-void Usart_T::comClearRxFifo(COM _ucPort)
-{
-    UART_T *pUart;
-
-    pUart = ComToUart(_ucPort);
-    if (pUart == 0)
-    {
-        return ;
-    }
-
-    pUart->rx.Clear();
-}
-/*
- *********************************************************************************************************
- *	函 数 名: RS485_ReciveNew
- *	功能说明: 接收到新的数据
- *	形    参: _byte 接收到的新数据
- *	返 回 值: 无
- *********************************************************************************************************
- */
-extern void MODBUS_ReciveNew(byte _byte);
-void RS485_ReciveNew(byte _byte)
-{
-    //MODBUS_ReciveNew(_byte);
-}
-
-/*
- *********************************************************************************************************
  *	函 数 名: UartVarInit
  *	功能说明: 初始化串口相关的变量
  *	形    参: 无
@@ -242,10 +184,10 @@ void RS485_ReciveNew(byte _byte)
 void UartVarInit(void)
 {
     g_tUart1.uart = USART1; /* STM32 串口设备 */
-    g_tUart1.tx.SetBuf(g_TxBuf1, UART1_TX_BUF_SIZE);
-    g_tUart1.rx.SetBuf(g_RxBuf1, UART1_RX_BUF_SIZE);
-    g_tUart1.SendBefor = 0; /* 发送数据前的回调函数 */
-    g_tUart1.SendOver = 0; /* 发送完毕后的回调函数 */
+	g_tUart1.tx.SetBuf(g_TxBuf1,UART1_TX_BUF_SIZE);
+	g_tUart1.rx.SetBuf(g_RxBuf1,UART1_RX_BUF_SIZE);
+	g_tUart1.tx.Clear();
+	g_tUart1.rx.Clear();
     g_tUart1.ReciveNew = 0; /* 接收到新数据后的回调函数 */
 }
 
@@ -261,8 +203,6 @@ void InitHardUart(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
     USART_InitTypeDef USART_InitStructure;
-
-    /* 串口1 TX = PA9   RX = PA10 或 TX = PB6   RX = PB7*/
 
     /* 第1步：打开GPIO和USART部件的时钟 */
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
@@ -315,14 +255,12 @@ void InitHardUart(void)
 void ConfigUartNVIC(void)
 {
     NVIC_InitTypeDef NVIC_InitStructure;
-
-    /* Configure the NVIC Preemption Priority Bits */
-    /*	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);  --- 在 bsp.c 中 bsp_Init() 中配置中断优先级组 */
     /* 使能串口1中断 */
     NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
+
 }
 
 /*
@@ -333,29 +271,23 @@ void ConfigUartNVIC(void)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void UartSend(UART_T *_pUart, byte *_ucaBuf, ushort _usLen)
+void UartSend(UART_T *_pUart, uint8_t *_ucaBuf, int _usLen)
 {
-    #if 1	
-        for (int i = 0; i < _usLen; i++)
-        {
-            //DISABLE_INT();
-            while (1)
-            {
-                if (!_pUart->tx.Full())
-                {
-                    break;
-                }
-            }
-            //ENABLE_INT();
-            _pUart->tx.Push(_ucaBuf[i]);
-        }
+    uint16_t i;
 
-        USART_ITConfig(_pUart->uart, USART_IT_TXE, ENABLE);
-    #else 
-        USART_SendData(_pUart->uart, _ucaBuf[0]);
-        while (USART_GetFlagStatus(_pUart->uart, USART_FLAG_TXE) == RESET)
-            ;
-    #endif 
+    for (i = 0; i < _usLen; i++)
+    {
+        /* 如果发送缓冲区已经满了，则等待缓冲区空 */
+        #if 0
+        #else 
+            /* 当 _pUart->usTxBufSize == 1 时, 下面的函数会死掉(待完善) */			
+			while(_pUart->tx.BufIsFull());
+        #endif 
+
+        /* 将新数据填入发送缓冲区 */		
+		_pUart->tx.Push(_ucaBuf[i]);
+    }
+    USART_ITConfig(_pUart->uart, USART_IT_TXE, ENABLE);
 }
 
 /*
@@ -367,17 +299,47 @@ void UartSend(UART_T *_pUart, byte *_ucaBuf, ushort _usLen)
  *	返 回 值: 0 表示无数据  1表示读取到数据
  *********************************************************************************************************
  */
-byte UartGetChar(UART_T *_pUart, byte *_pByte)
+uint8_t UartGetChar(UART_T *_pUart, uint8_t *_pByte)
 {
-    if (_pUart->rx.Empty())
+	#if 1
+	uint16_t usCount;
+
+    /* usRxWrite 变量在中断函数中被改写，主程序读取该变量时，必须进行临界区保护 */
+    DISABLE_INT();
+    usCount = _pUart->rx.Count;
+    ENABLE_INT();
+
+    /* 如果读和写索引相同，则返回0 */
+    //if (_pUart->usRxRead == usRxWrite)
+    if (usCount == 0)
+    /* 已经没有数据 */
     {
         return 0;
     }
     else
     {
-        *_pByte = _pUart->rx.Pop(); /* 从串口接收FIFO取1个数据 */
+		#if 1
+        *_pByte = _pUart->rx.pBuf[_pUart->rx.Read]; /* 从串口接收FIFO取1个数据 */
+
+        /* 改写FIFO读索引 */
+        DISABLE_INT();
+        if (++_pUart->rx.Read >= _pUart->rx.BufSize)
+        {
+            _pUart->rx.Read = 0;
+        }
+        _pUart->rx.Count--;
+        ENABLE_INT();
+		#else
+		_pUart->rx.Pop(_pByte);
+		#endif
         return 1;
     }
+	#else
+	if(_pUart->rx.BufIsEmpty())
+		return 0;
+	_pUart->rx.Pop(_pByte);
+	return 1;
+	#endif
 }
 
 /*
@@ -389,16 +351,19 @@ byte UartGetChar(UART_T *_pUart, byte *_pByte)
  *********************************************************************************************************
  */
 void UartIRQ(UART_T *_pUart)
-{	
+{
     /* 处理接收中断  */
     if (USART_GetITStatus(_pUart->uart, USART_IT_RXNE) != RESET)
     {
         /* 从串口接收数据寄存器读取数据存放到接收FIFO */
-        byte ch;
+        uint8_t ch;
 
         ch = USART_ReceiveData(_pUart->uart);
-        _pUart->rx.Push(ch);
+		_pUart->rx.Push(ch);
+		
         /* 回调函数,通知应用程序收到新数据,一般是发送1个消息或者设置一个标记 */
+        //if (_pUart->usRxWrite == _pUart->usRxRead)
+        //if (_pUart->usRxCount == 1)
         {
             if (_pUart->ReciveNew)
             {
@@ -411,7 +376,7 @@ void UartIRQ(UART_T *_pUart)
     if (USART_GetITStatus(_pUart->uart, USART_IT_TXE) != RESET)
     {
         //if (_pUart->usTxRead == _pUart->usTxWrite)
-        if (_pUart->tx.Empty())
+        if(_pUart->tx.BufIsEmpty())
         {
             /* 发送缓冲区的数据已取完时， 禁止发送缓冲区空中断 （注意：此时最后1个数据还未真正发送完毕）*/
             USART_ITConfig(_pUart->uart, USART_IT_TXE, DISABLE);
@@ -421,30 +386,28 @@ void UartIRQ(UART_T *_pUart)
         }
         else
         {
-            /* 从发送FIFO取1个字节写入串口发送数据寄存器 */
-            USART_SendData(_pUart->uart, _pUart->tx.Pop());
+            /* 从发送FIFO取1个字节写入串口发送数据寄存器 */			
+			uint8_t ch;
+			if(_pUart->tx.Pop(&ch)==0)
+				USART_SendData(_pUart->uart, ch);
         }
 
     }
     /* 数据bit位全部发送完毕的中断 */
     else if (USART_GetITStatus(_pUart->uart, USART_IT_TC) != RESET)
     {
-        if (_pUart->tx.Empty())
+        //if (_pUart->usTxRead == _pUart->usTxWrite)
+		if(_pUart->tx.BufIsEmpty())
         {
             /* 如果发送FIFO的数据全部发送完毕，禁止数据发送完毕中断 */
             USART_ITConfig(_pUart->uart, USART_IT_TC, DISABLE);
-
-            /* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
-            if (_pUart->SendOver)
-            {
-                _pUart->SendOver();
-            }
         }
         else
         {
             /* 正常情况下，不会进入此分支 */
-            /* 如果发送FIFO的数据还未完毕，则从发送FIFO取1个数据写入发送数据寄存器 */
-            USART_SendData(_pUart->uart, _pUart->tx.Pop());
+			uint8_t ch;
+			if(_pUart->tx.Pop(&ch)==0)
+				USART_SendData(_pUart->uart, ch);
         }
     }
 }
@@ -461,7 +424,8 @@ void UartIRQ(UART_T *_pUart)
      *	返 回 值: 无
      *********************************************************************************************************
      */
-    void USART1_IRQHandler()
+
+    void USART1_IRQHandler(void)
     {
         UartIRQ(&g_tUart1);
     }
@@ -475,8 +439,18 @@ void UartIRQ(UART_T *_pUart)
      */
     int fputc(int ch, FILE *f)
     {
-        comSendChar(COM1, ch);
-        return ch;
+        #if 1	/* 将需要printf的字符通过串口中断FIFO发送出去，printf函数会立即返回 */
+            comSendChar(COM1, ch);
+            return ch;
+        #else /* 采用阻塞方式发送每个字符,等待数据发送完毕 */
+            /* 写一个字节到USART1 */
+            USART_SendData(USART1, (uint8_t)ch);
+
+            /* 等待发送结束 */
+            while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET){}
+
+            return ch;
+        #endif 
     }
 
     /*
@@ -489,21 +463,75 @@ void UartIRQ(UART_T *_pUart)
      */
     int fgetc(FILE *f)
     {
-        /* 从串口接收FIFO中取1个数据, 只有取到数据才返回 */
-        byte ucData;
 
-        while (usart1.comGetChar(COM1, &ucData) == 0)
-            ;
-        return ucData;
+        #if 1	/* 从串口接收FIFO中取1个数据, 只有取到数据才返回 */
+            uint8_t ucData;
+
+            while (comGetChar(COM1, &ucData) == 0)
+                ;
+
+            return ucData;
+        #else 
+            /* 等待串口1输入数据 */
+            while (USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET)
+                ;
+
+            return (int)USART_ReceiveData(USART1);
+        #endif 
     }
     #ifdef __cplusplus
     }
-#endif 
-#ifdef DEBUG
-    void FifoTest()
-    {
-		ConfigUartNVIC();
-        usart1.bsp_InitUart(); /* 初始化串口驱动 */
-    }
-
 #endif
+	/* 定义例程名和例程发布日期 */
+#define EXAMPLE_NAME	"V4-003_串口和PC机通信（串口中断、FIFO机制）"
+#define EXAMPLE_DATE	"2015-08-30"
+#define DEMO_VER		"1.0"
+void PrintfLogo()
+{
+	printf("*************************************************************\n\r");
+	printf("* 例程名称   : %s\r\n", EXAMPLE_NAME);	/* 打印例程名称 */
+	printf("* 例程版本   : %s\r\n", DEMO_VER);		/* 打印例程版本 */
+	printf("* 发布日期   : %s\r\n", EXAMPLE_DATE);	/* 打印例程日期 */
+
+	/* 打印ST固件库版本，宏定义在 stm32f4xx.h 文件 */
+	printf("* 固件库版本 : %d.%d.%d\r\n", __STM32F10X_STDPERIPH_VERSION_MAIN,
+			__STM32F10X_STDPERIPH_VERSION_SUB1,__STM32F10X_STDPERIPH_VERSION_SUB2);
+
+	/* 打印 CMSIS 版本. 宏定义在 core_cm4.h 文件 */
+	printf("* CMSIS版本  : %X.%02X\r\n", __CM3_CMSIS_VERSION_MAIN, __CM3_CMSIS_VERSION_SUB);
+
+	printf("* \n\r");	/* 打印一行空格 */
+	printf("* QQ    : 1295744630 \r\n");
+	printf("* Email : armfly@qq.com \r\n");
+	printf("* Copyright www.armfly.com 安富莱电子\r\n");
+	printf("*************************************************************\n\r");
+}
+void fiforoutin(void * param)
+{
+	uint8_t read;	
+	if (comGetChar(COM1, &read))
+		{
+			switch (read)
+			{
+				case '1':
+					printf("接收：1\n\r");
+					break;
+				case '2':					
+					printf("接收：2\n\r");
+					break;
+				case '3':					
+					printf("接收：3\n\r");
+					break;
+				case '4':					
+					printf("接收：4\n\r");
+					break;	
+			}
+		}
+}
+void FifoTest()
+{
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);	
+	bsp_InitUart();		/* 初始化串口驱动 */
+	PrintfLogo();
+	Sys.AddTask(fiforoutin,0,0,200,"fiforoutin");
+}
