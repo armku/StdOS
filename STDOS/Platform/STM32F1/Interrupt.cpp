@@ -322,15 +322,13 @@ void CInterrupt::SysTick_Handler()
 		systickcnt++;
 	}
 }
-void USART1_IRQHandlerCOM1();
 //注意,读取USARTx->SR能避免莫名其妙的错误
 void CInterrupt::USART1_IRQHandler()
 {	
-//    if (onIsr[USART1_IRQn])
-//    {
-//        OnUsartReceive(0, onIsr[USART1_IRQn]);
-//    }
-	USART1_IRQHandlerCOM1();
+    if (onIsr[USART1_IRQn])
+    {
+        OnUsartReceive(0, onIsr[USART1_IRQn]);
+    }
 }
 
 void CInterrupt::USART2_IRQHandler()

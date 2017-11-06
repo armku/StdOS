@@ -384,11 +384,6 @@
               <FileType>8</FileType>
               <FilePath>.\main.cpp</FilePath>
             </File>
-            <File>
-              <FileName>bsp_uart_fifo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\bsp_uart_fifo.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1460,11 +1455,6 @@
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\main.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_uart_fifo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\bsp_uart_fifo.cpp</FilePath>
             </File>
           </Files>
         </Group>

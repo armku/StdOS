@@ -110,7 +110,6 @@ int main(void)
     //ESP8266TEST();
 	//ds18b20test();
 	keyTest();
-	FifoTest();
 	//ST7565Rtest();
 
     Sys.Start();

@@ -320,14 +320,14 @@ int SmartOS_Log(const String *str);
 extern "C"
 {
     /* 重载fputc可以让用户程序使用printf函数 */
-//    int fputc(int ch, FILE *f)
-//    {
-//        char buf[1];
-//        buf[0] = ch;
-//        String str(buf, 1);
-//        SmartOS_Log(&str);
-//        return ch;
-//    }
+    int fputc(int ch, FILE *f)
+    {
+        char buf[1];
+        buf[0] = ch;
+        String str(buf, 1);
+        SmartOS_Log(&str);
+        return ch;
+    }
 
     /*
      * 函数名：itoa
