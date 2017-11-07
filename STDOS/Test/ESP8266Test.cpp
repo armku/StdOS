@@ -2,6 +2,7 @@
 #include "stm32f10x.h"
 #include <stdarg.h>
 #include "bsp_esp8266.h"
+#include "SerialPort.h"
 
 #define macESP8266_CH_ENABLE()                 GPIO_SetBits ( GPIOG, GPIO_Pin_13 )
 
@@ -17,8 +18,20 @@ char cStr[1500] =
     0
 };
 ESP8266 esp;
+SerialPort espcom3(COM3);
+uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
+{
+	//transport->Write(bs);
+	debug_printf("com3:\r\n");
+	bs.Show();
+	
+    return 0;
+}
 void ESP8266TEST()
 {    
+	espcom3.Register(OnUsart3Read);
+	espcom3.SetBaudRate(115200);
+	espcom3.Open();
     esp.Init(); //初始化WiFi模块使用的接口和外设
     printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
     

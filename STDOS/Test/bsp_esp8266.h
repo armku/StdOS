@@ -1,6 +1,7 @@
 #ifndef __BSP_ESP8266_H
     #define __BSP_ESP8266_H
 	#include "Type.h"
+	#include "Port.h"
     #include "stm32f10x.h"
 
     #if defined ( __CC_ARM   )
@@ -49,8 +50,7 @@
             uint8_t Get_IdLinkStatus(void);
             bool UnvarnishSend(void);
             void ExitUnvarnishSend(void);
-            void GPIO_Config(void);
-            void USART_Config(void);
+            void GPIO_Config(void);            
             void USART_NVIC_Configuration(void);
             bool Cmd(char *cmd, char *reply1, char *reply2, u32 waittime);
             bool Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode);
@@ -62,5 +62,8 @@
             uint8_t Inquire_ApIp(char *pApIp, uint8_t ucArrayLength);
             bool SendString(FunctionalState enumEnUnvarnishTx, char *pStr, u32 ulStrLength, ENUM_ID_NO_TypeDef ucId);
             char *ReceiveString(FunctionalState enumEnUnvarnishTx);
+		private:
+			OutputPort chpd;
+			OutputPort rst;
     };    
 #endif

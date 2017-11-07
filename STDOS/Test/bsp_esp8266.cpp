@@ -4,12 +4,8 @@
 #include <string.h>  
 #include "Sys.h"
 
-    #define macESP8266_CH_DISABLE()                GPIO_ResetBits ( GPIOG, GPIO_Pin_13 )
-    #define macESP8266_RST_HIGH_LEVEL()            GPIO_SetBits ( GPIOG, GPIO_Pin_14 )
-    #define macESP8266_RST_LOW_LEVEL()             GPIO_ResetBits ( GPIOG, GPIO_Pin_14 )
-	
-	#define macESP8266_Usart( fmt, ... )           USART_printf ( USART3, fmt, ##__VA_ARGS__ ) 
-    #define macPC_Usart( fmt, ... )                printf ( fmt, ##__VA_ARGS__ )   
+#define macESP8266_Usart( fmt, ... )           USART_printf ( USART3, fmt, ##__VA_ARGS__ ) 
+#define macPC_Usart( fmt, ... )                printf ( fmt, ##__VA_ARGS__ )   
 
 struct STRUCT_USARTx_Fram strEsp8266_Fram_Record = 
 {
@@ -23,9 +19,8 @@ struct STRUCT_USARTx_Fram strEsp8266_Fram_Record =
 void ESP8266::Init(void)
 {
     this->GPIO_Config();
-    this->USART_Config();
-    macESP8266_RST_HIGH_LEVEL();
-    macESP8266_CH_DISABLE();
+	this->rst=1;
+    this->chpd=0;
 }
 /**
  * @brief  初始化ESP8266用到的GPIO引脚
@@ -33,57 +28,17 @@ void ESP8266::Init(void)
  * @retval 无
  */
 void ESP8266::GPIO_Config(void)
-{
-    /*定义一个GPIO_InitTypeDef类型的结构体*/
-    GPIO_InitTypeDef GPIO_InitStructure;
-    /* 配置 CH_PD 引脚*/
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOG, ENABLE);
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOG, &GPIO_InitStructure);
-    /* 配置 RST 引脚*/
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOG, ENABLE);
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14;
-    GPIO_Init(GPIOG, &GPIO_InitStructure);
+{	
+	this->chpd.Set(PG13);
+	this->rst.Set(PG14);
+	
+	this->chpd.OpenDrain=false;
+	this->rst.OpenDrain=false;
+	this->chpd.Invert=0;
+	this->rst.Invert=0;
+	this->chpd.Open();
+	this->rst.Open();
 }
-/**
- * @brief  初始化ESP8266用到的 USART
- * @param  无
- * @retval 无
- */
-void ESP8266::USART_Config(void)
-{
-    GPIO_InitTypeDef GPIO_InitStructure;
-    USART_InitTypeDef USART_InitStructure;
-    /* config USART clock */
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-    /* USART GPIO config */
-    /* Configure USART Tx as alternate function push-pull */
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
-    /* Configure USART Rx as input floating */
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
-    /* USART1 mode config */
-    USART_InitStructure.USART_BaudRate = 115200;
-    USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-    USART_InitStructure.USART_StopBits = USART_StopBits_1;
-    USART_InitStructure.USART_Parity = USART_Parity_No;
-    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-    USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-    USART_Init(USART3, &USART_InitStructure);
-    /* 中断配置 */
-    USART_ITConfig(USART3, USART_IT_RXNE, ENABLE); //使能串口接收中断 
-    USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 	
-    this->USART_NVIC_Configuration();
-    USART_Cmd(USART3, ENABLE);
-}
-
 
 /**
  * @brief  配置 ESP8266 USART 的 NVIC 中断
@@ -118,9 +73,9 @@ void ESP8266::Rst(void)
         ESP8266_Cmd("AT+RST", "OK", "ready", 2500);
 
     #else 
-        macESP8266_RST_LOW_LEVEL();
+		this->rst=0;
         Sys.Sleep(500);
-        macESP8266_RST_HIGH_LEVEL();
+		this->rst=1;
     #endif 
 }
 /*
@@ -169,8 +124,8 @@ bool ESP8266::Cmd(char *cmd, char *reply1, char *reply2, u32 waittime){
 void ESP8266::AT_Test(void)
 {
     char count = 0;
-
-    macESP8266_RST_HIGH_LEVEL();
+	
+	this->rst=1;
     Sys.Sleep(1000);
     while (count < 10)
     {
