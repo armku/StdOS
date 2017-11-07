@@ -84,6 +84,8 @@ private:
 	void OnOpen2();
 	void OnClose2();
 	void OnWrite2();
+public:
+	void ReceiveTask2();//接收到数据启动延时接收
 };
 
 // 串口设备配置

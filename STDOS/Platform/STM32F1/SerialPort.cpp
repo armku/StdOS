@@ -3,6 +3,7 @@
 #include "SerialPort.h"
 #include "Task.h"
 #include "stm32f10x.h"
+#include "Fifo.h"
 
     #define UART_PINS {\
     /* TX   RX   CTS  RTS */	\
@@ -53,7 +54,6 @@ int SerialPort_Closeing(int result)
 
     #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
 // 真正的串口中断函数
-	extern uint time6cnt;
 void OnUsartReceive(ushort num, void *param)
 {
     SerialPort *sp = (SerialPort*)param;
@@ -61,28 +61,15 @@ void OnUsartReceive(ushort num, void *param)
 
     //if (sp && sp->HasHandler())
 	if (sp)
-    {
+    {		
         if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
-        {
-            // 从栈分配，节省内存
-            byte buf[512];
-			Buffer bs(buf,ArrayLength(buf));
-            uint len = sp->Read(bs);
-            if (len)
-            {				
-                //len = sp->OnReceive(bs,param);
-//                #if 0
-//                    assert_param(len <= ArrayLength(buf));
-//                #endif 
-//                // 如果有数据，则反馈回去
-//                #if 0
-//                    if (len)
-//                    {
-//                        sp->Write(buf, len);
-//                    }
-//                #endif 
-            }
-			time6cnt++;
+        {			
+			byte ch=USART_ReceiveData(g_Uart_Ports[sp->Index]);
+			if(sp->Index<10)
+			{
+				sp->Rx.Enqueue(ch);
+			}
+			sp->ReceiveTask2();
         }		
     }
 }

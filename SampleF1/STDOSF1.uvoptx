@@ -123,7 +123,6 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name></Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -151,7 +150,40 @@
           <Name></Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>93</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134223330</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>D:\job\git\鍗曠墖鏈?STM32\STDOS - master\STDOS\Platform\STM32F1\SerialPort.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\STD\../STDOS/Platform/STM32F1/SerialPort.cpp\93</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>91</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134223322</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>D:\job\git\鍗曠墖鏈?STM32\STDOS - master\STDOS\Platform\STM32F1\SerialPort.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\STD\../STDOS/Platform/STM32F1/SerialPort.cpp\91</Expression>
+        </Bp>
+      </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
@@ -192,6 +224,11 @@
           <count>7</count>
           <WinNumber>1</WinNumber>
           <ItemText>ads1232doutcnt,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>8</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>uartFifo</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
@@ -1537,7 +1574,7 @@
 
   <Group>
     <GroupName>Net</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

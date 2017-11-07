@@ -156,6 +156,14 @@ void SerialPort::Set485(bool flag)
 
 void SerialPort::ReceiveTask()
 {
+//	char buf[512];
+//	Buffer bs(buf,ArrayLength(buf));
+//	this->Rx.Read(bs);
+//	this->OnReceive(bs,this); 
+//	((Task*)(this->_task))->Set(false,20);
+}
+void SerialPort::ReceiveTask2()
+{
 	char buf[512];
 	Buffer bs(buf,ArrayLength(buf));
 	this->Rx.Read(bs);

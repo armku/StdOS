@@ -82,6 +82,7 @@ void ds18b20test();
 void ST7565Rtest();
 void keyTest();
 void FifoTest();
+void SerialPortTest();
 int main(void)
 {
     Sys.Init();
@@ -110,6 +111,7 @@ int main(void)
     //ESP8266TEST();
 	//ds18b20test();
 	keyTest();
+	SerialPortTest();
 	//ST7565Rtest();
 
     Sys.Start();
