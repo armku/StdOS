@@ -22,7 +22,7 @@ SerialPort espcom3(COM3);
 uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
 	//transport->Write(bs);
-	debug_printf("com3:\r\n");
+	debug_printf("com3: %d\r\n",bs.Length());
 	bs.Show();
 	
     return 0;
