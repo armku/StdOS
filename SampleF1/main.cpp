@@ -83,7 +83,6 @@ void ST7565Rtest();
 void keyTest();
 void FifoTest();
 void SerialPortTest();
-void BufferTest();
 int main(void)
 {
     Sys.Init();
@@ -113,19 +112,7 @@ int main(void)
 	//ds18b20test();
 	keyTest();
 	SerialPortTest();
-	BufferTest();
 	//ST7565Rtest();
 
     Sys.Start();
-}
-void BufferTest()
-{
-	byte buf[3];
-	buf[0]='0';
-	buf[1]='1';
-	buf[2]='2';
-	Buffer bs(buf,3);
-	debug_printf("Buffer≤‚ ‘\r\n");
-	bs.Show();
-	debug_printf("Buffer≤‚ ‘END\r\n");
 }

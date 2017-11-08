@@ -93,7 +93,7 @@
         keytest.SetKeyDetectFunc(IsKeyDown2, 1);
         keytest.SetKeyDetectFunc(IsKeyDown9, 2); //×éºÏ°´¼ü
 
-        Sys.AddTask(readkeyroutin, &keytest, 0, 10, "readkeyroutin");
-        Sys.AddTask(keycoderoutin, &keytest, 6, 10, "keycoderoutin");
+        Sys.AddTask(readkeyroutin, &keytest, 0, 10, "keyrread");
+        Sys.AddTask(keycoderoutin, &keytest, 6, 10, "keyroutin");
     }
 #endif
