@@ -25,8 +25,8 @@ void LedTask(void *param)
 
 uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
-    //bs.Show(true);
-	transport->Write(bs);
+    bs.Show();
+	//transport->Write(bs);
     return 0;
 }
 
@@ -56,7 +56,7 @@ int main(void)
     //InterruptTest();
     //w25q128test();  
 	//ssd1309Test();
-	ds18b20test();
+	//ds18b20test();
 	//SRamTest();
 	
     Sys.Start();

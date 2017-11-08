@@ -349,7 +349,56 @@ void Buffer::Write(UInt64 value, int index)
 // 输出对象的字符串表示方式
 String &Buffer::ToStr(String &str)const
 {
+	#if 0
     return Buffer::ToHex(str, 45, 32);
+	#else
+	str[0]='A';
+	str[1]='B';
+	str[2]='C';
+	str[3]='D';
+	str[4]='D';
+	str[5]='D';
+	return str;
+	#endif
+}
+static void ShowChar(char c)
+{
+	if(c>=10)
+	{
+		printf("%c",c-10+'A');
+	}
+	else
+	{
+		printf("%c",c+'0');
+	}
+}
+void Buffer::Show(bool newLine)const
+{	
+	for(int i=0;i<this->_Length;i++)
+	{
+		printf("%c",this->_Arr[i]);
+	}	
+	if(newLine)
+	{
+		printf("\r\n");
+	}
+}
+void Buffer::ShowHex(bool newLine) const
+{
+	for(int i=0;i<this->_Length;i++)
+	{
+		ShowChar(this->_Arr[i]>>4);
+		ShowChar(this->_Arr[i]&0x0F);
+		if(i!=this->_Length-1)
+		{
+			printf("-");
+		}
+	}
+	
+	if(newLine)
+	{
+		printf("\r\n");
+	}
 }
 
 // 包装为字符串对象
