@@ -143,3 +143,7 @@ float GetTFromPT100(float om)
 
     return ret;
 }
+template <typename T1, typename T2> T1 sum(T1 x, T2 y)
+{
+    return x + y;
+}
