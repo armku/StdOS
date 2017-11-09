@@ -8,7 +8,7 @@
         Key *key = (Key*)param;
         key->KeyScan();
     }
-    void keycoderoutin(void *param)
+    void keyDeal(void *param)
     {
         Key *key = (Key*)param;
         int ucKeyCode = key->GetKeyCode();
@@ -94,6 +94,6 @@
         keytest.SetKeyDetectFunc(IsKeyDown9, 2); //×éºÏ°´¼ü
 
         Sys.AddTask(readkeyroutin, &keytest, 0, 10, "keyrread");
-        Sys.AddTask(keycoderoutin, &keytest, 6, 10, "keyroutin");
+        Sys.AddTask(keyDeal, &keytest, 6, 10, "keyDeal");
     }
 #endif
