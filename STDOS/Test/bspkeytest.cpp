@@ -43,14 +43,7 @@
     }
     OutputPort key11(PA0);
     OutputPort key22(PC13);
-    /*
-     *********************************************************************************************************
-     *	函 数 名: IsKeyDownX
-     *	功能说明: 判断按键是否按下
-     *	形    参: 无
-     *	返 回 值: 返回值1 表示按下，0表示未按下
-     *********************************************************************************************************
-     */
+    //功能说明: 判断按键是否按下,返回值1 表示按下，0表示未按下
     byte IsKeyDown1()
     {
         if (key11 != 0 && key22 != 0)
@@ -67,7 +60,7 @@
             return 0;
     }
 
-    byte IsKeyDown9() /* K1 K2组合键 */
+    byte IsKeyDown9()
     {
         if (key11 != 0 && key22 == 0)
             return 1;
@@ -91,7 +84,7 @@
         /* 判断按键按下的函数 */
         keytest.SetKeyDetectFunc(IsKeyDown1, 0);
         keytest.SetKeyDetectFunc(IsKeyDown2, 1);
-        keytest.SetKeyDetectFunc(IsKeyDown9, 2); //组合按键
+        keytest.SetKeyDetectFunc(IsKeyDown9, 2);
 
         Sys.AddTask(readkeyroutin, &keytest, 0, 10, "keyrread");
         Sys.AddTask(keyDeal, &keytest, 6, 10, "keyDeal");

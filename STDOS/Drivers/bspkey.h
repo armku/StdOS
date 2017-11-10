@@ -1,7 +1,7 @@
 #ifndef _BSP_KEY_H
     #define _BSP_KEY_H
     #include "Sys.h"
-    #define KEY_COUNT    3	   					/* 按键个数, 2个独立建 + 1个组合键 */
+    #define KEY_COUNT    3	   					/* 按键个数 */
 
     /* 按键ID, 主要用于bsp_KeyState()函数的入口参数 */
     typedef enum
