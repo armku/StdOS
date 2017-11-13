@@ -7,7 +7,10 @@ PwmSolo::PwmSolo(Pin pin, uint frq, uint duty): AlternatePort(pin)
     this->freq = frq;
     this->duty = duty;
 }
-
+void PwmSolo::Init()
+{
+	this->OnInit();
+}
 //ÉèÖÃÊä³ö±ÈÀı£¬0-100
 void PwmSolo::SetOutPercent(float per)
 {

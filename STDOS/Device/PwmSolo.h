@@ -10,6 +10,8 @@
             void Init();
             void SetOut(ushort pwmValue); //设置输出值
             void SetOutPercent(float per); //设置输出比例，0-100		
+		protected:
+			void OnInit();//初始化
         private:
             uint freq; //频率
             uint duty; //输出值
