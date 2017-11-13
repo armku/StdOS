@@ -669,6 +669,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -883,6 +888,11 @@
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\Time.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\PwmSolo.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1756,6 +1766,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1970,6 +1985,11 @@
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\Time.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F1\PwmSolo.cpp</FilePath>
             </File>
           </Files>
         </Group>
