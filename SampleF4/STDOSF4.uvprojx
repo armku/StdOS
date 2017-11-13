@@ -907,6 +907,16 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\FSMC.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F4\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F4\Time.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1991,6 +2001,16 @@
               <FileName>FSMC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\FSMC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F4\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F4\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>

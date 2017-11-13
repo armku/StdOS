@@ -824,6 +824,16 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F0\WatchDog.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F0\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F0\Time.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1765,6 +1775,16 @@
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F0\WatchDog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F0\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F0\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
