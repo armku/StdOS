@@ -1,7 +1,6 @@
 #include "Port.h"
 #include "stm32f4xx.h"
 
-
 GPIO_TypeDef *IndexToGroup(byte index);
 
 bool Port::Open()
@@ -33,22 +32,6 @@ bool Port::Open()
     }
 }
 
-int InputPort_CloseEXTI(const InputPort *a1)
-{
-//  _INTERNAL_8_Port_cpp_4e0cfc97 *v1; // r5@1
-//  const InputPort *v2; // r4@1
-//  int v3; // r2@1
-//  int result; // r0@1
-
-//  v1 = a1;
-//  v2 = (const InputPort *)Bits2Index(1 << (*((_BYTE *)a1 + 4) & 0xF));
-//  SetEXIT(v2, 0, 3);
-//  result = _INTERNAL_8_Port_cpp_4e0cfc97::IsOnlyExOfInt(v1, v2, v3);
-//  if ( result )
-//    result = TInterrupt::Deactivate((TInterrupt *)&Interrupt, *((_BYTE *)v2 + (_DWORD)PORT_IRQns));
-//  return result;
-	return 0;
-}
 void OutputPort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
@@ -99,8 +82,6 @@ void InputPort::OpenPin(void* param)
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
-void SetEXIT(int pinIndex, bool enable,InputPort::Trigger trigger);
-
     #if 0
         static const int PORT_IRQns[] = 
         {
@@ -134,8 +115,8 @@ void AnalogInPort::OnOpen(void *param)
 {
     Port::OnOpen(param);
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-        gpio->GPIO_Mode = GPIO_Mode_AN;
-        //gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
+    gpio->GPIO_Mode = GPIO_Mode_AN;
+    //gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
 }
 void InputPort::OnOpen(void *param)
 {
@@ -236,13 +217,7 @@ void OutputPort::Write(bool value)const
 void Port::OnOpen(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    #ifdef STM32F0
-		gpio->GPIO_Speed = GPIO_Speed_50MHz;
-    #elif defined STM32F1
-        gpio->GPIO_Speed = GPIO_Speed_50MHz;
-    #elif defined STM32F4
-        gpio->GPIO_Speed = GPIO_Speed_100MHz;
-    #endif 
+    gpio->GPIO_Speed = GPIO_Speed_100MHz;
 }
 bool Port::Read()const
 {

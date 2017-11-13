@@ -27,26 +27,6 @@ bool Port::Open()
     return true;
 }
 
-//int OpenPeriphClock(signed int a1)
-//{
-//  return RCC_APB2PeriphClockCmd(4 << (a1 >> 4));
-//}
-int InputPort_CloseEXTI(const InputPort *a1)
-{
-//  _INTERNAL_8_Port_cpp_4e0cfc97 *v1; // r5@1
-//  const InputPort *v2; // r4@1
-//  int v3; // r2@1
-//  int result; // r0@1
-
-//  v1 = a1;
-//  v2 = (const InputPort *)Bits2Index(1 << (*((_BYTE *)a1 + 4) & 0xF));
-//  SetEXIT(v2, 0, 3);
-//  result = _INTERNAL_8_Port_cpp_4e0cfc97::IsOnlyExOfInt(v1, v2, v3);
-//  if ( result )
-//    result = TInterrupt::Deactivate((TInterrupt *)&Interrupt, *((_BYTE *)v2 + (_DWORD)PORT_IRQns));
-//  return result;
-	return 0;
-}
 void OutputPort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
@@ -223,13 +203,7 @@ void OutputPort::Write(bool value)const
 void Port::OnOpen(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    #ifdef STM32F0
-		gpio->GPIO_Speed = GPIO_Speed_50MHz;
-    #elif defined STM32F1
-        gpio->GPIO_Speed = GPIO_Speed_50MHz;
-    #elif defined STM32F4
-        gpio->GPIO_Speed = GPIO_Speed_100MHz;
-    #endif 
+	gpio->GPIO_Speed = GPIO_Speed_50MHz;
 }
 bool Port::Read()const
 {

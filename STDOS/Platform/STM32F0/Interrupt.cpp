@@ -4,11 +4,11 @@
 #include "stm32f0xx.h"
 
 #define NVIC_VectTab_RAM             ((uint)0x20000000)
-    #define NVIC_VectTab_FLASH           ((uint)0x08000000)
+#define NVIC_VectTab_FLASH           ((uint)0x08000000)
 
-    #define NVIC_OFFSET					 ((uint)0x0000)
+#define NVIC_OFFSET					 ((uint)0x0000)
 #define ISRADDR (NVIC_VectTab_RAM+NVIC_OFFSET)
-    #define ISRLENGTH   60	//中断数量
+#define ISRLENGTH   60	//中断数量
 
 TInterrupt Interrupt;
 
@@ -213,127 +213,122 @@ void *onIsr[ISRLENGTH]; //中断
 
 extern "C"
 {
-        uint *VectorTable;
-    uint *vsrom = (uint*)NVIC_VectTab_FLASH;	
+    uint *VectorTable;
+    uint *vsrom = (uint*)NVIC_VectTab_FLASH;
 }
 
 
-void FaultHandler()
-{
-}
-void FAULT_SubHandler()
-{
-}
+void FaultHandler(){}
+void FAULT_SubHandler(){}
 
 // 解码优先级
-void TInterrupt::DecodePriority (uint priority, uint priorityGroup, uint* pPreemptPriority, uint* pSubPriority) const
-{
-	
+void TInterrupt::DecodePriority(uint priority, uint priorityGroup, uint *pPreemptPriority, uint *pSubPriority)const{
+
 }
 // 编码优先级
-uint TInterrupt::EncodePriority (uint priorityGroup, uint preemptPriority, uint subPriority) const
+uint TInterrupt::EncodePriority(uint priorityGroup, uint preemptPriority, uint subPriority)const
 {
-	return 0;
+    return 0;
 }
+
 void TInterrupt::OnInit()const
 {
-	    VectorTable = (uint*)ISRADDR;
+    VectorTable = (uint*)ISRADDR;
     //复制中断向量表
     for (int i = 0; i < ISRLENGTH; i++)
     {
         VectorTable[i] = vsrom[i];
     }
     //中断向量表重映射
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
-        SYSCFG_MemoryRemapConfig(SYSCFG_MemoryRemap_SRAM);
-    
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+    SYSCFG_MemoryRemapConfig(SYSCFG_MemoryRemap_SRAM);
+
     VectorTable[15] = (uint) &(CInterrupt::SysTick_Handler);
 
-        //VectorTable[16] = (uint) &(CInterrupt::WWDG_IRQHandler); // Window Watchdog
-        //VectorTable[17] = (uint) &(CInterrupt::PVD_VDDIO2_IRQHandler); // PVD and VDDIO2 through EXTI Line detect
-        //VectorTable[18] = (uint) &(CInterrupt::RTC_IRQHandler); // RTC through EXTI Line
-        //VectorTable[19] = (uint) &(CInterrupt::FLASH_IRQHandler); //FLASH
-        //VectorTable[20] = (uint) &(CInterrupt::RCC_CRS_IRQHandler); // RCC and CRS
-        //VectorTable[21] = (uint) &(CInterrupt::EXTI0_1_IRQHandler); // EXTI Line 0 and 1
-        //VectorTable[22] = (uint) &(CInterrupt::EXTI2_3_IRQHandler); // EXTI Line 2 and 3
-        //VectorTable[23] = (uint) &(CInterrupt::EXTI4_15_IRQHandler); // EXTI Line 4 to 15
-        //VectorTable[24] = (uint) &(CInterrupt::TSC_IRQHandler); // TS
-        //VectorTable[25] = (uint) &(CInterrupt::DMA1_Channel1_IRQHandler); // DMA1 Channel 1
-        //VectorTable[26] = (uint) &(CInterrupt::DMA1_Channel2_3_IRQHandler); // DMA1 Channel 2 and Channel 3
-        //VectorTable[27] = (uint) &(CInterrupt::DMA1_Channel4_5_6_7_IRQHandler); // DMA1 Channel 4, Channel 5, Channel 6 and Channel 7
-        //VectorTable[28] = (uint) &(CInterrupt::ADC1_COMP_IRQHandler); // ADC1, COMP1 and COMP2 
-        //VectorTable[29] = (uint) &(CInterrupt::TIM1_BRK_UP_TRG_COM_IRQHandler); // TIM1 Break, Update, Trigger and Commutation
-        //VectorTable[30] = (uint) &(CInterrupt::TIM1_CC_IRQHandler); // TIM1 Capture Compare
-        VectorTable[31] = (uint) &(CInterrupt::TIM2_IRQHandler); // TIM2
-        VectorTable[32] = (uint) &(CInterrupt::TIM3_IRQHandler); // TIM3
-        VectorTable[33] = (uint) &(CInterrupt::TIM6_DAC_IRQHandler); // TIM6 and DAC
-        VectorTable[34] = (uint) &(CInterrupt::TIM7_IRQHandler); // TIM7
-        //VectorTable[35] = (uint) &(CInterrupt::TIM14_IRQHandler); // TIM14
-        //VectorTable[36] = (uint) &(CInterrupt::TIM15_IRQHandler); // TIM15
-        //VectorTable[37] = (uint) &(CInterrupt::TIM16_IRQHandler); // TIM16
-        //VectorTable[38] = (uint) &(CInterrupt::TIM17_IRQHandler); // TIM17
-        //VectorTable[39] = (uint) &(CInterrupt::I2C1_IRQHandler); // I2C1
-        //VectorTable[40] = (uint) &(CInterrupt::I2C2_IRQHandler); // I2C2
-        //VectorTable[41] = (uint) &(CInterrupt::SPI1_IRQHandler); // SPI1
-        //VectorTable[42] = (uint) &(CInterrupt::SPI2_IRQHandler); // SPI2
-        VectorTable[43] = (uint) &(CInterrupt::USART1_IRQHandler); // USART1
-        VectorTable[44] = (uint) &(CInterrupt::USART2_IRQHandler); // USART2
-        VectorTable[45] = (uint) &(CInterrupt::USART3_4_IRQHandler); // USART3 and USART4
-        //VectorTable[46] = (uint) &(CInterrupt::CEC_CAN_IRQHandler); // CEC and CAN
-        //VectorTable[47] = (uint) &(CInterrupt::USB_IRQHandler); // USB 
+    //VectorTable[16] = (uint) &(CInterrupt::WWDG_IRQHandler); // Window Watchdog
+    //VectorTable[17] = (uint) &(CInterrupt::PVD_VDDIO2_IRQHandler); // PVD and VDDIO2 through EXTI Line detect
+    //VectorTable[18] = (uint) &(CInterrupt::RTC_IRQHandler); // RTC through EXTI Line
+    //VectorTable[19] = (uint) &(CInterrupt::FLASH_IRQHandler); //FLASH
+    //VectorTable[20] = (uint) &(CInterrupt::RCC_CRS_IRQHandler); // RCC and CRS
+    //VectorTable[21] = (uint) &(CInterrupt::EXTI0_1_IRQHandler); // EXTI Line 0 and 1
+    //VectorTable[22] = (uint) &(CInterrupt::EXTI2_3_IRQHandler); // EXTI Line 2 and 3
+    //VectorTable[23] = (uint) &(CInterrupt::EXTI4_15_IRQHandler); // EXTI Line 4 to 15
+    //VectorTable[24] = (uint) &(CInterrupt::TSC_IRQHandler); // TS
+    //VectorTable[25] = (uint) &(CInterrupt::DMA1_Channel1_IRQHandler); // DMA1 Channel 1
+    //VectorTable[26] = (uint) &(CInterrupt::DMA1_Channel2_3_IRQHandler); // DMA1 Channel 2 and Channel 3
+    //VectorTable[27] = (uint) &(CInterrupt::DMA1_Channel4_5_6_7_IRQHandler); // DMA1 Channel 4, Channel 5, Channel 6 and Channel 7
+    //VectorTable[28] = (uint) &(CInterrupt::ADC1_COMP_IRQHandler); // ADC1, COMP1 and COMP2 
+    //VectorTable[29] = (uint) &(CInterrupt::TIM1_BRK_UP_TRG_COM_IRQHandler); // TIM1 Break, Update, Trigger and Commutation
+    //VectorTable[30] = (uint) &(CInterrupt::TIM1_CC_IRQHandler); // TIM1 Capture Compare
+    VectorTable[31] = (uint) &(CInterrupt::TIM2_IRQHandler); // TIM2
+    VectorTable[32] = (uint) &(CInterrupt::TIM3_IRQHandler); // TIM3
+    VectorTable[33] = (uint) &(CInterrupt::TIM6_DAC_IRQHandler); // TIM6 and DAC
+    VectorTable[34] = (uint) &(CInterrupt::TIM7_IRQHandler); // TIM7
+    //VectorTable[35] = (uint) &(CInterrupt::TIM14_IRQHandler); // TIM14
+    //VectorTable[36] = (uint) &(CInterrupt::TIM15_IRQHandler); // TIM15
+    //VectorTable[37] = (uint) &(CInterrupt::TIM16_IRQHandler); // TIM16
+    //VectorTable[38] = (uint) &(CInterrupt::TIM17_IRQHandler); // TIM17
+    //VectorTable[39] = (uint) &(CInterrupt::I2C1_IRQHandler); // I2C1
+    //VectorTable[40] = (uint) &(CInterrupt::I2C2_IRQHandler); // I2C2
+    //VectorTable[41] = (uint) &(CInterrupt::SPI1_IRQHandler); // SPI1
+    //VectorTable[42] = (uint) &(CInterrupt::SPI2_IRQHandler); // SPI2
+    VectorTable[43] = (uint) &(CInterrupt::USART1_IRQHandler); // USART1
+    VectorTable[44] = (uint) &(CInterrupt::USART2_IRQHandler); // USART2
+    VectorTable[45] = (uint) &(CInterrupt::USART3_4_IRQHandler); // USART3 and USART4
+    //VectorTable[46] = (uint) &(CInterrupt::CEC_CAN_IRQHandler); // CEC and CAN
+    //VectorTable[47] = (uint) &(CInterrupt::USB_IRQHandler); // USB 
 }
+
 // 打开全局中断
 void TInterrupt::GlobalEnable()
 {
     __ASM volatile("cpsie i");
 }
+
 bool TInterrupt::OnDeactivate(short irq)
 {
     return false;
 }
+
 // 关闭全局中断
 void TInterrupt::GlobalDisable()
 {
     __ASM volatile("cpsid i");
 }
+
 void TInterrupt::SetPriority(short irq, uint priority)const
 {
     NVIC_InitTypeDef nvic;
-	
+
     nvic.NVIC_IRQChannelCmd = ENABLE;
     nvic.NVIC_IRQChannel = irq;
 
-    #if defined(STM32F1) || defined(STM32F4)
-        NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-        nvic.NVIC_IRQChannelPreemptionPriority = 1;
-        nvic.NVIC_IRQChannelSubPriority = priority;
-    #elif defined STM32F0
-		nvic.NVIC_IRQChannelPriority = priority;
-    #endif 
+    nvic.NVIC_IRQChannelPriority = priority;
 
     NVIC_Init(&nvic);
-	NVIC_SetPriority((IRQn_Type)irq, priority);
+    NVIC_SetPriority((IRQn_Type)irq, priority);
 }
+
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 void OnUsartReceive(ushort num, void *param);
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-uint systickcnt=0;
+uint systickcnt = 0;
 void CInterrupt::SysTick_Handler()
 {
-	static uint tickCnt=0;
-	tickCnt++;
-	if(tickCnt>1000)
-	{
-		tickCnt=0;
-		systickcnt++;
-	}
+    static uint tickCnt = 0;
+    tickCnt++;
+    if (tickCnt > 1000)
+    {
+        tickCnt = 0;
+        systickcnt++;
+    }
 }
 
 //注意,读取USARTx->SR能避免莫名其妙的错误
 void CInterrupt::USART1_IRQHandler()
-{	
+{
     if (onIsr[USART1_IRQn])
     {
         OnUsartReceive(0, onIsr[USART1_IRQn]);
@@ -348,23 +343,20 @@ void CInterrupt::USART2_IRQHandler()
     }
 }
 
-void CInterrupt::USART3_IRQHandler()
-{
-   
+void CInterrupt::USART3_IRQHandler(){
+
 }
 
 void CInterrupt::USART3_4_IRQHandler(){
 
 }
 
-void CInterrupt::UART4_IRQHandler()
-{
-   
+void CInterrupt::UART4_IRQHandler(){
+
 }
 
-void CInterrupt::UART5_IRQHandler()
-{
-   
+void CInterrupt::UART5_IRQHandler(){
+
 }
 
 void CInterrupt::TIM2_IRQHandler()
@@ -391,53 +383,52 @@ void CInterrupt::TIM3_IRQHandler()
     }
 }
 
-void CInterrupt::TIM4_IRQHandler()
-{
-    
+void CInterrupt::TIM4_IRQHandler(){
+
 }
 
-void CInterrupt::TIM5_IRQHandler()
-{
-    
+void CInterrupt::TIM5_IRQHandler(){
+
 }
 
 void CInterrupt::TIM6_IRQHandler()
 {
-   
-        if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
-        {
-            if (onIsr[TIM6_DAC_IRQn])
-            {
-                ((Timer*)onIsr[TIM6_DAC_IRQn])->OnInterrupt();
-            }
-            TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
-        } 
-}
 
-void CInterrupt::TIM6_DAC_IRQHandler()
-{
-        TIM_ClearITPendingBit(TIM6, TIM_IT_Update); //先清空中断标志位，以备下次使用。
+    if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
+    {
         if (onIsr[TIM6_DAC_IRQn])
         {
             ((Timer*)onIsr[TIM6_DAC_IRQn])->OnInterrupt();
         }
+        TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
+    }
+}
+
+void CInterrupt::TIM6_DAC_IRQHandler()
+{
+    TIM_ClearITPendingBit(TIM6, TIM_IT_Update); //先清空中断标志位，以备下次使用。
+    if (onIsr[TIM6_DAC_IRQn])
+    {
+        ((Timer*)onIsr[TIM6_DAC_IRQn])->OnInterrupt();
+    }
 }
 
 void CInterrupt::TIM7_IRQHandler()
-{    
-        TIM_ClearITPendingBit(TIM7, TIM_IT_Update); //先清空中断标志位，以备下次使用。
-        if (onIsr[TIM7_IRQn])
-        {
-            ((Timer*)onIsr[TIM7_IRQn])->OnInterrupt();
-        }	
+{
+    TIM_ClearITPendingBit(TIM7, TIM_IT_Update); //先清空中断标志位，以备下次使用。
+    if (onIsr[TIM7_IRQn])
+    {
+        ((Timer*)onIsr[TIM7_IRQn])->OnInterrupt();
+    }
 }
+
 void GPIO_ISR(int num);
 void CInterrupt::EXTI0_IRQHandler()
 {
     if (EXTI_GetITStatus(EXTI_Line0) != RESET)
-    {        
+    {
         EXTI_ClearITPendingBit(EXTI_Line0);
-		GPIO_ISR(0);
+        GPIO_ISR(0);
     }
 }
 
@@ -446,7 +437,7 @@ void CInterrupt::EXTI1_IRQHandler()
     if (EXTI_GetITStatus(EXTI_Line1) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line1);
-		GPIO_ISR(1);
+        GPIO_ISR(1);
     }
 }
 
@@ -455,7 +446,7 @@ void CInterrupt::EXTI2_IRQHandler()
     if (EXTI_GetITStatus(EXTI_Line2) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line2);
-		GPIO_ISR(2);
+        GPIO_ISR(2);
     }
 }
 
@@ -464,7 +455,7 @@ void CInterrupt::EXTI3_IRQHandler()
     if (EXTI_GetITStatus(EXTI_Line3) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line3);
-		GPIO_ISR(3);
+        GPIO_ISR(3);
     }
 }
 
@@ -473,7 +464,7 @@ void CInterrupt::EXTI4_IRQHandler()
     if (EXTI_GetITStatus(EXTI_Line4) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line4);
-		GPIO_ISR(4);
+        GPIO_ISR(4);
     }
 }
 
@@ -482,27 +473,27 @@ void CInterrupt::EXTI9_5_IRQHandler()
     if (EXTI_GetITStatus(EXTI_Line5) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line5);
-		GPIO_ISR(5);
+        GPIO_ISR(5);
     }
     if (EXTI_GetITStatus(EXTI_Line6) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line6);
-		GPIO_ISR(6);
+        GPIO_ISR(6);
     }
     if (EXTI_GetITStatus(EXTI_Line7) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line7);
-		GPIO_ISR(7);
+        GPIO_ISR(7);
     }
     if (EXTI_GetITStatus(EXTI_Line8) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line8);
-		GPIO_ISR(8);
+        GPIO_ISR(8);
     }
     if (EXTI_GetITStatus(EXTI_Line9) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line9);
-		GPIO_ISR(9);
+        GPIO_ISR(9);
     }
 }
 
@@ -511,31 +502,31 @@ void CInterrupt::EXTI15_10_IRQHandler()
     if (EXTI_GetITStatus(EXTI_Line10) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line10);
-		GPIO_ISR(10);
+        GPIO_ISR(10);
     }
     if (EXTI_GetITStatus(EXTI_Line11) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line11);
-		GPIO_ISR(11);
+        GPIO_ISR(11);
     }
     if (EXTI_GetITStatus(EXTI_Line12) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line12);
-		GPIO_ISR(12);
+        GPIO_ISR(12);
     }
     if (EXTI_GetITStatus(EXTI_Line13) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line13);
-		GPIO_ISR(13);
+        GPIO_ISR(13);
     }
     if (EXTI_GetITStatus(EXTI_Line14) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line14);
-		GPIO_ISR(14);
+        GPIO_ISR(14);
     }
     if (EXTI_GetITStatus(EXTI_Line15) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_Line15);
-		GPIO_ISR(15);
+        GPIO_ISR(15);
     }
 }
