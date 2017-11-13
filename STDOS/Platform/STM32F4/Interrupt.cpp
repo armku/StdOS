@@ -328,6 +328,38 @@ void TInterrupt::OnInit()const
         //        VectorTable[97] = (uint) &(CInterrupt::FPU_IRQHandler); // FPU
     
 }
+// 打开全局中断
+void TInterrupt::GlobalEnable()
+{
+    __ASM volatile("cpsie i");
+}
+bool TInterrupt::OnDeactivate(short irq)
+{
+    return false;
+}
+// 关闭全局中断
+void TInterrupt::GlobalDisable()
+{
+    __ASM volatile("cpsid i");
+}
+void TInterrupt::SetPriority(short irq, uint priority)const
+{
+    NVIC_InitTypeDef nvic;
+	
+    nvic.NVIC_IRQChannelCmd = ENABLE;
+    nvic.NVIC_IRQChannel = irq;
+
+    #if defined(STM32F1) || defined(STM32F4)
+        NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+        nvic.NVIC_IRQChannelPreemptionPriority = 1;
+        nvic.NVIC_IRQChannelSubPriority = priority;
+    #elif defined STM32F0
+		nvic.NVIC_IRQChannelPriority = priority;
+    #endif 
+
+    NVIC_Init(&nvic);
+	NVIC_SetPriority((IRQn_Type)irq, priority);
+}
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 void OnUsartReceive(ushort num, void *param);

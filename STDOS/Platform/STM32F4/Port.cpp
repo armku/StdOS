@@ -208,3 +208,44 @@ void InputPort_OpenEXTI(Pin pin,InputPort::Trigger trigger=InputPort::Both)
 	Interrupt.SetPriority(PORT_IRQns[pin&0x0f], 1u);
 	//Interrupt.Activate(PORT_IRQns[v3],(void (__cdecl *)(unsigned __int16, void *))EXTI_IRQHandler,v1);
 }
+void OutputPort::Write(bool value)const
+{
+    if (this->Invert)
+    {
+        if (value)
+        {
+            GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+        }
+        else
+        {
+            GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+        }
+    }
+    else
+    {
+        if (value)
+        {
+            GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+        }
+        else
+        {
+            GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+        }
+    }
+}
+void Port::OnOpen(void *param)
+{
+    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+    #ifdef STM32F0
+		gpio->GPIO_Speed = GPIO_Speed_50MHz;
+    #elif defined STM32F1
+        gpio->GPIO_Speed = GPIO_Speed_50MHz;
+    #elif defined STM32F4
+        gpio->GPIO_Speed = GPIO_Speed_100MHz;
+    #endif 
+}
+bool Port::Read()const
+{
+    GPIO_TypeDef *group = _GROUP(this->_Pin);
+    return (group->IDR >> (this->_Pin &0xF)) &1;
+}
