@@ -1099,6 +1099,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\bspkeytest.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSoloTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2195,6 +2200,11 @@
               <FileName>bspkeytest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\bspkeytest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSoloTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
