@@ -1,19 +1,20 @@
 #include "PwmSolo.h"
 #include "stm32f10x.h"
 
-PwmSolo::PwmSolo(uint frq, uint duty)
+PwmSolo::PwmSolo(uint frq, uint duty,bool invert)
 {
-    this->freq = frq;
-    this->duty = duty;
+    this->_freq = frq;
+    this->_duty = duty;
+	this->_invert=invert;
 }
 void PwmSolo::Open()
 {
-	this->OnOpen();
+	this->OnOpen2();
 	AlternatePort::Open();	
 }
 //ÉèÖÃÊä³ö±ÈÀı£¬0-100
 void PwmSolo::SetOutPercent(float per)
 {
-    this->duty = this->freq *per / 100;
-    this->SetOut(this->duty);
+    this->_duty = this->_freq *per / 100;
+    this->SetOut(this->_duty);
 }
