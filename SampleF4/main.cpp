@@ -42,7 +42,8 @@ void w25q128test();
 void ssd1309Test();
 void ds18b20test();
 void SRamTest();
-void bsp_Init(void);
+void bsp_Init();
+void PwmSoloTest();
 int main(void)
 {
     Sys.Init();
@@ -58,6 +59,7 @@ int main(void)
 	//ssd1309Test();
 	//ds18b20test();
 	//SRamTest();
+	PwmSoloTest();
 	
     Sys.Start();
 }

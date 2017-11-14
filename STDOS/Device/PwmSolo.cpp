@@ -1,5 +1,4 @@
 #include "PwmSolo.h"
-#include "stm32f10x.h"
 
 PwmSolo::PwmSolo(uint frq, uint duty,bool invert)
 {
