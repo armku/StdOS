@@ -83,6 +83,7 @@ void ST7565Rtest();
 void keyTest();
 void FifoTest();
 void SerialPortTest();
+void PwmSoloTest();
 int main(void)
 {
     Sys.Init();
@@ -113,6 +114,7 @@ int main(void)
 	keyTest();
 	SerialPortTest();
 	//ST7565Rtest();
+	PwmSoloTest();
 
     Sys.Start();
 }

@@ -1,7 +1,7 @@
 #include "PwmSolo.h"
 #include "stm32f10x.h"
 
-void PwmSolo::OnInit()
+void PwmSolo::OnOpen()
 {
     TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
     TIM_OCInitTypeDef TIM_OCInitStructure;

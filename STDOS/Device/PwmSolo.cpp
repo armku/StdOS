@@ -1,15 +1,15 @@
 #include "PwmSolo.h"
 #include "stm32f10x.h"
 
-
-PwmSolo::PwmSolo(Pin pin, uint frq, uint duty): AlternatePort(pin)
+PwmSolo::PwmSolo(uint frq, uint duty)
 {
     this->freq = frq;
     this->duty = duty;
 }
-void PwmSolo::Init()
+void PwmSolo::Open()
 {
-	this->OnInit();
+	this->OnOpen();
+	AlternatePort::Open();	
 }
 //ÉèÖÃÊä³ö±ÈÀı£¬0-100
 void PwmSolo::SetOutPercent(float per)
