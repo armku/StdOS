@@ -124,6 +124,13 @@ void PwmSolo::OnOpen2()
             break;
             //TIM4_CH2
         case PD13:
+//            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE); 	
+//			GPIO_PinAFConfig(GPIOD, GPIO_PinSource13, GPIO_AF_TIM4);
+//			TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
+//			TIM_OC2Init(TIM4, &TIM_OCInitStructure);
+//			TIM_OC2PreloadConfig(TIM4, TIM_OCPreload_Enable);
+//			TIM_ARRPreloadConfig(TIM4, ENABLE);
+//			TIM_Cmd(TIM4, ENABLE);
             break;
             //TIM4_CH3
         case PD14:
