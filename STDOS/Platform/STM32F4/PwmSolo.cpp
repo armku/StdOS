@@ -126,17 +126,37 @@ void PwmSolo::OnOpen2()
             break;
             //TIM10_CH1
         case PF6:
+            RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM10, ENABLE); 	
+			GPIO_PinAFConfig(GPIOF, GPIO_PinSource6, GPIO_AF_TIM10);
+			TIM_TimeBaseInit(TIM10, &TIM_TimeBaseStructure);
+			TIM_OC1Init(TIM10, &TIM_OCInitStructure);
+			TIM_OC1PreloadConfig(TIM10, TIM_OCPreload_Enable);
+			TIM_ARRPreloadConfig(TIM10, ENABLE);
+			TIM_Cmd(TIM10, ENABLE);
             break;
             //TIM11-CH1
         case PF7:
+            RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM11, ENABLE); 	
+			GPIO_PinAFConfig(GPIOF, GPIO_PinSource7, GPIO_AF_TIM11);
+			TIM_TimeBaseInit(TIM11, &TIM_TimeBaseStructure);
+			TIM_OC1Init(TIM11, &TIM_OCInitStructure);
+			TIM_OC1PreloadConfig(TIM11, TIM_OCPreload_Enable);
+			TIM_ARRPreloadConfig(TIM11, ENABLE);
+			TIM_Cmd(TIM11, ENABLE);
             break;
             //TIM13_CH1
         case PF8:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM13, ENABLE); 	
+			GPIO_PinAFConfig(GPIOF, GPIO_PinSource8, GPIO_AF_TIM13);
+			TIM_TimeBaseInit(TIM13, &TIM_TimeBaseStructure);
+			TIM_OC1Init(TIM13, &TIM_OCInitStructure);
+			TIM_OC1PreloadConfig(TIM13, TIM_OCPreload_Enable);
+			TIM_ARRPreloadConfig(TIM13, ENABLE);
+			TIM_Cmd(TIM13, ENABLE);
             break;
             //TIM14_CH1
         case PF9:
 			RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM14, ENABLE); //TIM14时钟使能    
-			RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOF, ENABLE); //使能PORTF时钟	
 			GPIO_PinAFConfig(GPIOF, GPIO_PinSource9, GPIO_AF_TIM14); //GPIOF9复用为定时器14
 			TIM_TimeBaseInit(TIM14, &TIM_TimeBaseStructure); //初始化定时器14
 			TIM_OC1Init(TIM14, &TIM_OCInitStructure); //根据T指定的参数初始化外设TIM1 4OC1
