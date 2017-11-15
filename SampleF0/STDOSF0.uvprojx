@@ -659,6 +659,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -834,6 +839,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F0\Time.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F0\PwmSolo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -953,6 +963,11 @@
               <FileName>bspkeytest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\bspkeytest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSoloTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1611,6 +1626,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1786,6 +1806,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F0\Time.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F0\PwmSolo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1905,6 +1930,11 @@
               <FileName>bspkeytest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\bspkeytest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSoloTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
             </File>
           </Files>
         </Group>

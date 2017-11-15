@@ -1,13 +1,16 @@
 #include "PwmSolo.h"
-#include "stm32f4xx.h" 
 
 #ifdef DEBUG
-    PwmSolo pwm(10000, 2700, false);
-    //PwmSolo pwm(500-1, 84-1, false);
+    //PwmSolo pwm(10000, 2700, false);
+    PwmSolo pwm(10000, 270, false);
     PwmSolo pwm1[3];
     void PwmSoloTest()
     {
-        #ifdef STM32F1
+		#ifdef STM32F0
+            pwm.Set(PF9);
+            pwm.Open();
+            pwm.SetOutPercent(5);
+        #elif defined STM32F1
             pwm.Set(PA3);
             pwm.Open();
             pwm.SetOutPercent(5);
@@ -22,7 +25,7 @@
             }
         #elif defined STM32F4
 
-            pwm.Set(PF9);
+            pwm.Set(PF7);
             pwm.Open();
             pwm.SetOutPercent(50);
         #endif 

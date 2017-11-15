@@ -51,7 +51,7 @@ void TimerTask(void *param)
     static int i = 0;
     printf("\r\n%d: cnt:%d", i++, time6cnt);
 }
-
+void PwmSoloTest();
 int main()
 {	
     Sys.Name = (char*)namee;
@@ -66,6 +66,8 @@ int main()
 	
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
+	
+	PwmSoloTest();
 
     Sys.Start();
 }
