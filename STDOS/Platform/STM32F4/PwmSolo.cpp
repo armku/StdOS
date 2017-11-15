@@ -3,8 +3,6 @@
 
 void PwmSolo::OnOpen2()
 {
-    //u32 arr = 500-1;
-    //u32 psc = 84-1;
     TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
     TIM_OCInitTypeDef TIM_OCInitStructure;
 
@@ -21,9 +19,23 @@ void PwmSolo::OnOpen2()
     {
         //TIM2_CH1
         case PA0:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE); 	
+			GPIO_PinAFConfig(GPIOA, GPIO_PinSource0, GPIO_AF_TIM2);
+			TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+			TIM_OC1Init(TIM2, &TIM_OCInitStructure);
+			TIM_OC1PreloadConfig(TIM2, TIM_OCPreload_Enable);
+			TIM_ARRPreloadConfig(TIM2, ENABLE);
+			TIM_Cmd(TIM2, ENABLE);
             break;
             //TIM5_CH2
         case PA1:
+//            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE); 	
+//			GPIO_PinAFConfig(GPIOA, GPIO_PinSource1, GPIO_AF_TIM5);
+//			TIM_TimeBaseInit(TIM5, &TIM_TimeBaseStructure);
+//			TIM_OC2Init(TIM5, &TIM_OCInitStructure);
+//			TIM_OC2PreloadConfig(TIM5, TIM_OCPreload_Enable);
+//			TIM_ARRPreloadConfig(TIM5, ENABLE);
+//			TIM_Cmd(TIM5, ENABLE);
             break;
             //TIM9_CH1
         case PA2:
@@ -39,9 +51,23 @@ void PwmSolo::OnOpen2()
             break;
             //TIM3_CH3
         case PB0:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); 	
+			GPIO_PinAFConfig(GPIOB, GPIO_PinSource0, GPIO_AF_TIM3);
+			TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
+			TIM_OC3Init(TIM3, &TIM_OCInitStructure);
+			TIM_OC3PreloadConfig(TIM3, TIM_OCPreload_Enable);
+			TIM_ARRPreloadConfig(TIM3, ENABLE);
+			TIM_Cmd(TIM3, ENABLE);
             break;
             //TIM3_CH4
         case PB1:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); 	
+			GPIO_PinAFConfig(GPIOB, GPIO_PinSource1, GPIO_AF_TIM3);
+			TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
+			TIM_OC4Init(TIM3, &TIM_OCInitStructure);
+			TIM_OC4PreloadConfig(TIM3, TIM_OCPreload_Enable);
+			TIM_ARRPreloadConfig(TIM3, ENABLE);
+			TIM_Cmd(TIM3, ENABLE);
             break;
             //TIM1_CH2
         case PE11:
@@ -75,9 +101,23 @@ void PwmSolo::OnOpen2()
             break;
             //TIM12_CH1
         case PB14:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM12, ENABLE); 	
+			GPIO_PinAFConfig(GPIOB, GPIO_PinSource14, GPIO_AF_TIM12);
+			TIM_TimeBaseInit(TIM12, &TIM_TimeBaseStructure);
+			TIM_OC1Init(TIM12, &TIM_OCInitStructure);
+			TIM_OC1PreloadConfig(TIM12, TIM_OCPreload_Enable);
+			TIM_ARRPreloadConfig(TIM12, ENABLE);
+			TIM_Cmd(TIM12, ENABLE);
             break;
             //TIM12_CH2
         case PB15:
+            RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM12, ENABLE); 	
+			GPIO_PinAFConfig(GPIOB, GPIO_PinSource15, GPIO_AF_TIM12);
+			TIM_TimeBaseInit(TIM12, &TIM_TimeBaseStructure);
+			TIM_OC2Init(TIM12, &TIM_OCInitStructure);
+			TIM_OC2PreloadConfig(TIM12, TIM_OCPreload_Enable);
+			TIM_ARRPreloadConfig(TIM12, ENABLE);
+			TIM_Cmd(TIM12, ENABLE);
             break;
             //TIM4_CH1
         case PD12:
@@ -93,15 +133,43 @@ void PwmSolo::OnOpen2()
             break;
             //TIM8_CH1 TIM3_CH1
         case PC6:
+//            RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8, ENABLE); 	
+//			GPIO_PinAFConfig(GPIOC, GPIO_PinSource6, GPIO_AF_TIM8);
+//			TIM_TimeBaseInit(TIM8, &TIM_TimeBaseStructure);
+//			TIM_OC1Init(TIM8, &TIM_OCInitStructure);
+//			TIM_OC1PreloadConfig(TIM8, TIM_OCPreload_Enable);
+//			TIM_ARRPreloadConfig(TIM8, ENABLE);
+//			TIM_Cmd(TIM8, ENABLE);
             break;
             //TIM8_CH2 TIM3_CH2
         case PC7:
+//            RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8, ENABLE); 	
+//			GPIO_PinAFConfig(GPIOC, GPIO_PinSource7, GPIO_AF_TIM8);
+//			TIM_TimeBaseInit(TIM8, &TIM_TimeBaseStructure);
+//			TIM_OC2Init(TIM8, &TIM_OCInitStructure);
+//			TIM_OC2PreloadConfig(TIM8, TIM_OCPreload_Enable);
+//			TIM_ARRPreloadConfig(TIM8, ENABLE);
+//			TIM_Cmd(TIM8, ENABLE);
             break;
             //TIM8_CH3 TIM3_CH3
         case PC8:
+//            RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8, ENABLE); 	
+//			GPIO_PinAFConfig(GPIOC, GPIO_PinSource7, GPIO_AF_TIM8);
+//			TIM_TimeBaseInit(TIM8, &TIM_TimeBaseStructure);
+//			TIM_OC3Init(TIM8, &TIM_OCInitStructure);
+//			TIM_OC3PreloadConfig(TIM8, TIM_OCPreload_Enable);
+//			TIM_ARRPreloadConfig(TIM8, ENABLE);
+//			TIM_Cmd(TIM8, ENABLE);
             break;
             //TIM8_CH4 TIM3_CH4
         case PC9:
+//            RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8, ENABLE); 	
+//			GPIO_PinAFConfig(GPIOC, GPIO_PinSource7, GPIO_AF_TIM8);
+//			TIM_TimeBaseInit(TIM8, &TIM_TimeBaseStructure);
+//			TIM_OC4Init(TIM8, &TIM_OCInitStructure);
+//			TIM_OC4PreloadConfig(TIM8, TIM_OCPreload_Enable);
+//			TIM_ARRPreloadConfig(TIM8, ENABLE);
+//			TIM_Cmd(TIM8, ENABLE);
             break;
             //TIM1_CH2
         case PA9:
@@ -120,9 +188,23 @@ void PwmSolo::OnOpen2()
             break;
             //TIM9_CH1
         case PE5:
+            RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM9, ENABLE); 	
+			GPIO_PinAFConfig(GPIOE, GPIO_PinSource5, GPIO_AF_TIM9);
+			TIM_TimeBaseInit(TIM9, &TIM_TimeBaseStructure);
+			TIM_OC1Init(TIM9, &TIM_OCInitStructure);
+			TIM_OC1PreloadConfig(TIM9, TIM_OCPreload_Enable);
+			TIM_ARRPreloadConfig(TIM9, ENABLE);
+			TIM_Cmd(TIM9, ENABLE);
             break;
             //TIM9_CH2
         case PE6:
+            RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM9, ENABLE); 	
+			GPIO_PinAFConfig(GPIOE, GPIO_PinSource6, GPIO_AF_TIM9);
+			TIM_TimeBaseInit(TIM9, &TIM_TimeBaseStructure);
+			TIM_OC2Init(TIM9, &TIM_OCInitStructure);
+			TIM_OC2PreloadConfig(TIM9, TIM_OCPreload_Enable);
+			TIM_ARRPreloadConfig(TIM9, ENABLE);
+			TIM_Cmd(TIM9, ENABLE);
             break;
             //TIM10_CH1
         case PF6:
