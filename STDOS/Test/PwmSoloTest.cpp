@@ -2,8 +2,8 @@
 #include "stm32f4xx.h" 
 
 #ifdef DEBUG
-    //PwmSolo pwm(10000, 2700, false);
-    PwmSolo pwm(500-1, 84-1, false);
+    PwmSolo pwm(10000, 2700, false);
+    //PwmSolo pwm(500-1, 84-1, false);
     PwmSolo pwm1[3];
     void PwmSoloTest()
     {
@@ -25,7 +25,6 @@
             pwm.Set(PF9);
             pwm.Open();
             pwm.SetOutPercent(50);
-            //TIM_SetCompare1(TIM14, 200);
         #endif 
     }
 #endif
