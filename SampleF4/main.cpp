@@ -10,7 +10,7 @@
     //°²¸£À³¿ª·¢°åF4-V5
     OutputPort led1(PI10, false);
     OutputPort led2(PF7, false);
-    OutputPort led3(PF8, false);
+    OutputPort led3(PC2, false);
     OutputPort led4(PC2, false);
 #endif 
 void LedTask(void *param)

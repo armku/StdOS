@@ -8,8 +8,8 @@ PwmSolo::PwmSolo(uint frq, uint duty,bool invert)
 }
 void PwmSolo::Open()
 {
-	this->OnOpen2();
-	AlternatePort::Open();	
+	AlternatePort::Open();
+	this->OnOpen2();		
 }
 //ÉèÖÃÊä³ö±ÈÀı£¬0-100
 void PwmSolo::SetOutPercent(float per)
