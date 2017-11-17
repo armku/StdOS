@@ -33,13 +33,13 @@
     {
 		#ifdef ISOV2
 			port485.Set(PB5);
-		#elif define ISOV3
+		#elif defined ISOV3
 			port485.Set(PC2);
 		#endif 
 		port485.OpenDrain = false;
 		port485.Invert = 0;
 		port485.Open();
-		//port485=1;
+		port485=0;
 
         //        //com485.RS485=&port485;
         //        com485.SetBaudRate(115200);
@@ -51,7 +51,7 @@
         uint8_t temp;
         while (1)
         {
-            GPIO_ResetBits(GPIOC, GPIO_Pin_2); //进入接收模式
+            //GPIO_ResetBits(GPIOC, GPIO_Pin_2); //进入接收模式
             while (USART_GetFlagStatus(USART2, USART_FLAG_RXNE) != SET)
                 ;
             //轮询直到485接收到数据
