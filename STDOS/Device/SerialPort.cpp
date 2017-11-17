@@ -160,10 +160,11 @@ void SerialPort::ReceiveTask()
 	Buffer bs(buf,ArrayLength(buf));
 	this->Rx.Read(bs);
 	this->OnReceive(bs,this); 
-	//((Task*)(this->_task))->Set(false,20);
+	((Task*)(this->_task))->Set(false,20);
 }
+
 void SerialPort::ReceiveTask2()
 {
-	this->ReceiveTask();
-	((Task*)(this->_task))->Set(true,2000);
+	//this->ReceiveTask();	
+	((Task*)(this->_task))->Set(true,20);	
 }
