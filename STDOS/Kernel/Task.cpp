@@ -163,7 +163,6 @@ Task *Task::Get(int taskid)
 Task &Task::Current()
 {
     return  *Task::Scheduler()->Current;
-
 }
 
 bool Task::CheckTime(UInt64 end, bool isSleep)
