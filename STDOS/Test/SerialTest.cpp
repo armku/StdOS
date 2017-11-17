@@ -3,7 +3,7 @@
 #include "SerialPort.h"
 #include "Fifo.h"
 
-#define DEBUGSerialPort
+//#define DEBUGSerialPort
 
 #ifdef DEBUGSerialPort
     void SerialPort::Test(){
