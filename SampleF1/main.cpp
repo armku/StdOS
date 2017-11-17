@@ -57,7 +57,8 @@ uint time6cnt;
 uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
 	time6cnt++;
-    transport->Write(bs);
+    //transport->Write(bs);
+	bs.ShowHex();
     return 0;
 }
 
@@ -112,7 +113,7 @@ int main(void)
     //ESP8266TEST();
 	//ds18b20test();
 	//keyTest();
-	SerialPortTest();
+	//SerialPortTest();
 	//ST7565Rtest();
 //	PwmSoloTest();
 
