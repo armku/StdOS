@@ -25,12 +25,12 @@ bool SerialPort::OnSet()
 }
 void SerialPort::Init()
 {
-         this->Index = COM_NONE;
-        RS485 = NULL;
-        Error = 0;
+	this->Index = COM_NONE;
+	RS485 = NULL;
+	Error = 0;
 
-        Remap = 0;
-    this->OnInit();
+	Remap = 0;
+	this->OnInit();
 }
 
 void SerialPort::OnOpen2()
