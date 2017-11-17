@@ -76,7 +76,7 @@ void ADS1232Test();
 void ModbusTest();
 void streamtest();
 
-SerialPort sp1t(COM1);
+//SerialPort sp1t(COM1);
 void ESP8266TEST();
 void ssd1309Test();
 void ds18b20test();
@@ -97,8 +97,8 @@ int main(void)
     sp1 = SerialPort::GetMessagePort();
     SerialPort::GetMessagePort()->Register(OnUsart1Read);
 	
-	sp1t.Register(OnUsart1Read);
-	sp1t.Open();
+//	sp1t.Register(OnUsart1Read);
+//	sp1t.Open();
 
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
