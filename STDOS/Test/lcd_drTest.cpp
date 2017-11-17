@@ -1,6 +1,8 @@
 #include "Drivers\lcd_dr.h"
 
-#ifdef DEBUG1
+//#define DEBUGCLcd_DRtest
+
+#ifdef DEBUGCLcd_DRtest
 	CLcd_DR lcddr(PD3, PD6, PD7, PB3, PB4);
 	void CLcd_DRtest()
 	{

@@ -1,6 +1,8 @@
 
+//#define DEBUGWatchDogTest
+
 //ฒโสิด๚ย๋
-#if 0
+#ifdef DEBUGWatchDogTest
 	#if DEBUG
         WatchDog::Start(20000, 10000);
     #else 

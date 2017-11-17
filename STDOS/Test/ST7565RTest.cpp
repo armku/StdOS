@@ -1,6 +1,8 @@
 #include "Drivers\ST7565R.h"
 
-#ifdef DEBUG
+//#define DEBUGST7565Rtest
+
+#ifdef DEBUGST7565Rtest
 	CLcd lcddr1;
 	void ST7565Rtest()
 	{

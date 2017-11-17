@@ -170,9 +170,3 @@ void SerialPort::ReceiveTask2()
 	this->OnReceive(bs,this); 
 	((Task*)(this->_task))->Set(false,20);
 }
-
-//测试代码
-/*
-ISO-V2:PB5控制485方向
-ISO-V3:PC2控制485方向
- */

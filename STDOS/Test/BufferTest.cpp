@@ -2,7 +2,9 @@
 #include "Sys.h"
 #include "Buffer.h"
 
-#ifdef DEBUG1
+//#define DEBUGBufferTest
+
+#ifdef DEBUGBufferTest
     void Buffer::Test()
     {
         #if 0

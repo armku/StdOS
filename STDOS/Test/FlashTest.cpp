@@ -1,6 +1,8 @@
 #include "Flash.h"
 
-#ifdef DEBUG1
+//#define DEBUGSTMFLASHTest
+
+#ifdef DEBUGSTMFLASHTest
     void STMFLASH::Test()
     {
         byte buftest1[3200];

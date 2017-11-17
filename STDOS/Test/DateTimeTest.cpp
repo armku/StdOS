@@ -2,7 +2,9 @@
 #include "TTime.h"
 #include <stdio.h>
 
-#ifdef DEBUG1
+#define DEBUGDateTimeTest
+
+#ifdef DEBUGDateTimeTest
 	void DateTime::Test()
 	{
 	}

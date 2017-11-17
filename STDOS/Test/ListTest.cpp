@@ -3,7 +3,9 @@
 #include "Sys.h"
 #include "Task.h"
 
-#ifdef DEBUG
+//#define DEBUGIListTest
+
+#ifdef DEBUGIListTest
 	List<Task*>	_Tasks;	// 任务列表	
 	void IList::Test()
     {

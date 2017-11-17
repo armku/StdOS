@@ -3,7 +3,7 @@
 #include <CType.h>
 #include "Sys.h"
 
-
+//#define DEBUGStringTest
 
 
 
@@ -636,25 +636,22 @@
 //    this->_Length = strlen((char*)((byte*)(this->_Arr)));
 //}
 
-#ifdef DEBUG
-    #if 0
-        void String::Test()
-        {
-            char err[] = "String Err\r\n";
-            //默认空字符串，使用内部数据区
-            String str;
-            assert(str.Length() == 0, err);
-            assert(str.Capacity() == 0x40 - 1, err);
+#ifdef DEBUGStringTest
+    
+	void String::Test()
+	{
+		char err[] = "String Err\r\n";
+		//默认空字符串，使用内部数据区
+		String str;
+		assert(str.Length() == 0, err);
+		assert(str.Capacity() == 0x40 - 1, err);
 
-            String str1("456");
-            assert(str1 == "456", err);
-            assert(str1.GetBuffer() == "456", err);
-
-            //		char err1[] = "String(const String& str)";
-
-
-        }
-    #endif 
+		String str1("456");
+		assert(str1 == "456", err);
+		assert(str1.GetBuffer() == "456", err);
+		//		char err1[] = "String(const String& str)";
+	}
+   
 #endif
 
 

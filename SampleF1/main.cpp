@@ -111,10 +111,11 @@ int main(void)
 	//ssd1309Test();
     //ESP8266TEST();
 	//ds18b20test();
-	keyTest();
+	//keyTest();
 	SerialPortTest();
 	//ST7565Rtest();
-	PwmSoloTest();
+//	PwmSoloTest();
 
     Sys.Start();
 }
+

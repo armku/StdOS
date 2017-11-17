@@ -1,8 +1,9 @@
 #include "Timer.h"
 #include "TInterrupt.h"
 
-//¶¨Ê±Æ÷²âÊÔ
-#ifdef DEBUG1
+//#define DEBUGTimeTest
+
+#ifdef DEBUGTimeTest
     extern uint time2cnt;
     Delegate < Timer & > abc;
     void tim2refesh(void *param)

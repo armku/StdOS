@@ -1,6 +1,8 @@
 #include "Modbus\modbus.h"
 
-#ifdef DEBUG
+//#define DEBUGModbusTest
+
+#ifdef DEBUGModbusTest
 
 	byte ModbusTestbuf[]={0x01, 0x03, 0x00, 0x00, 0x00, 0x01, 0x84, 0x0A};
 	byte ModbusTestBufout[10];

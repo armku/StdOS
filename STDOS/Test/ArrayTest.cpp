@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include "Sys.h"
 
-#ifdef DEBUG1
+//#define DEBUGArrayTest
+
+#ifdef DEBUGArrayTest
 	void Array::Test()
 	{
 	}

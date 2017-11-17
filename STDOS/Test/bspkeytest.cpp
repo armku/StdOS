@@ -1,7 +1,9 @@
 #include "Drivers/bspkey.h"
 #include "Port.h"
 
-#ifdef DEBUG
+#define DEBUGkeyTest
+
+#ifdef DEBUGkeyTest
 
     void readkeyroutin(void *param)
     {

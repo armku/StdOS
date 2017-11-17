@@ -1,7 +1,9 @@
 #include "Drivers\AD7124.h"
 #include "Drivers\AD7124def.h"
 
+#define DEBUGad71248Test
 
+#ifdef DEBUGad71248Test
 /*******************************************************************************
  * @function	: GetTemp1
  * @brief		: »ñÈ¡ÎÂ¶È1
@@ -103,4 +105,5 @@ void ad71248Test()
 
     Sys.AddTask(ad7124test, &ad, 1000, 2000, "7124-8test");
 }
+#endif
 #endif
