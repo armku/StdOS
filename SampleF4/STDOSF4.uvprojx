@@ -707,6 +707,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -913,9 +918,14 @@
               <FilePath>..\STDOS\Platform\STM32F4\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>Time.cpp</FileName>
+              <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Time.cpp</FilePath>
+              <FilePath>..\STDOS\Platform\STM32F4\PwmSolo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F4\TTime.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1096,6 +1106,11 @@
               <FileName>bspkeytest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\bspkeytest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSoloTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1802,6 +1817,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2008,9 +2028,14 @@
               <FilePath>..\STDOS\Platform\STM32F4\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>Time.cpp</FileName>
+              <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Time.cpp</FilePath>
+              <FilePath>..\STDOS\Platform\STM32F4\PwmSolo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F4\TTime.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2191,6 +2216,11 @@
               <FileName>bspkeytest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\bspkeytest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSoloTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
             </File>
           </Files>
         </Group>

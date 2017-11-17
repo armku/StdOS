@@ -12,13 +12,6 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "Sys.h"
 #include "stdarg.h"
 
-#ifdef STM32F0
-    #include "stm32f0xx.h"
-#elif defined STM32F1
-    #include "stm32f10x.h"
-#elif defined STM32F4
-    #include "stm32f4xx.h"
-#endif 
 TSys Sys; //系统参数
 
 //外部注册函数
@@ -296,22 +289,6 @@ void TSys::Start()
     this->OnStart();
     //this->=SmartOS_printf;
     Task::Scheduler()->Start();
-}
-
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-SmartIRQ::SmartIRQ(bool enable)
-{
-    _state = __get_PRIMASK();
-    if (enable)
-        __enable_irq();
-    else
-        __disable_irq();
-}
-
-SmartIRQ::~SmartIRQ()
-{
-    __set_PRIMASK(_state);
 }
 
 /////////////////////////////////////////////////////////////////////////////

@@ -1538,8 +1538,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Platform\STM32F0\Time.cpp</PathWithFileName>
-      <FilenameWithoutPath>Time.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\STDOS\Platform\STM32F0\PwmSolo.cpp</PathWithFileName>
+      <FilenameWithoutPath>PwmSolo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1550,8 +1550,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Platform\STM32F0\PwmSolo.cpp</PathWithFileName>
-      <FilenameWithoutPath>PwmSolo.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\STDOS\Platform\STM32F0\TTime.cpp</PathWithFileName>
+      <FilenameWithoutPath>TTime.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

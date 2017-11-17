@@ -59,7 +59,7 @@ int main(void)
 	//ssd1309Test();
 	//ds18b20test();
 	//SRamTest();
-	PwmSoloTest();
+	//PwmSoloTest();
 	
     Sys.Start();
 }

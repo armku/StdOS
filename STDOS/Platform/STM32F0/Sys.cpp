@@ -107,13 +107,26 @@ void TSys::OnShowInfo()const
     SmartOS_printf("Heap :(%p, %p) = 0x%x (%dk)\r\n", (uint) &__heap_base, (uint) &__heap_limit, HeapSize, HeapSize / 1024);
     SmartOS_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", (uint) &__heap_limit, (uint) &__initial_sp, StackSize, StackSize / 1024);
 
-
     printf("ChipType:0x42455633 3\r\n");
-
 }
 
 // ÷ÿ∆ÙœµÕ≥
 void TSys::Reset()const
 {
     NVIC_SystemReset();
+}
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+SmartIRQ::SmartIRQ(bool enable)
+{
+    _state = __get_PRIMASK();
+    if (enable)
+        __enable_irq();
+    else
+        __disable_irq();
+}
+
+SmartIRQ::~SmartIRQ()
+{
+    __set_PRIMASK(_state);
 }

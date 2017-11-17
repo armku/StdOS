@@ -76,3 +76,53 @@ UInt64 TTime::Current()const
     }
     return this->Milliseconds + ms;
 }
+// 微秒级延迟
+void TTime::Delay(int nus)const
+{
+    uint ticks;
+    uint told, tnow, tcnt = 0;
+    uint reload = 0;
+        reload = SysTick->LOAD; //LOAD的值
+    ticks = nus * fac_us; //需要的节拍数
+    tcnt = 0;
+        told = SysTick->VAL; //刚进入时的计数器值
+    while (1)
+    {
+            tnow = SysTick->VAL;
+        if (tnow != told)
+        {
+            if (tnow < told)
+                tcnt += told - tnow;
+            //这里注意一下SYSTICK是一个递减的计数器就可以了.
+            else
+                tcnt += reload - tnow + told;
+            told = tnow;
+            if (tcnt >= ticks)
+                break;
+            //时间超过/等于要延迟的时间,则退出.
+        }
+    }
+}
+#ifdef __cplusplus
+    extern "C"
+    {
+    #endif 
+
+    //以下为汇编函数
+    //THUMB指令不支持汇编内联
+    //采用如下方法实现执行汇编指令WFI  
+    void WFI_SET(void)
+    {
+            __ASM volatile("wfi");
+    }
+
+    //设置栈顶地址
+    //addr:栈顶地址
+    __asm void MSR_MSP(uint addr)
+    {
+        MSR MSP, r0  //set Main Stack value
+        BX r14
+    }
+    #ifdef __cplusplus
+    }
+#endif

@@ -835,14 +835,14 @@
               <FilePath>..\STDOS\Platform\STM32F0\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>Time.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F0\Time.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F0\PwmSolo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F0\TTime.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1802,14 +1802,14 @@
               <FilePath>..\STDOS\Platform\STM32F0\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>Time.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F0\Time.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F0\PwmSolo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Platform\STM32F0\TTime.cpp</FilePath>
             </File>
           </Files>
         </Group>
