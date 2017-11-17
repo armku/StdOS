@@ -165,6 +165,6 @@ void SerialPort::ReceiveTask()
 
 void SerialPort::ReceiveTask2()
 {
-	this->ReceiveTask();	
+	//this->ReceiveTask();	
 	((Task*)(this->_task))->Set(true,20);	
 }
