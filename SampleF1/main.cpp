@@ -57,8 +57,8 @@ uint time6cnt;
 uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
 	time6cnt++;
-    //transport->Write(bs);
-	bs.ShowHex();
+    transport->Write(bs);
+	//bs.ShowHex();
     return 0;
 }
 

@@ -70,7 +70,7 @@ void OnUsartReceive(ushort num, void *param)
             {
                 sp->Rx.Enqueue(ch);
             }
-            sp->ReceiveTask2();
+			sp->ReceiveTask2();
         }
     }
 }
