@@ -327,7 +327,7 @@ void TaskScheduler::Start()
     }
 
     #ifdef DEBUG
-        Sys.AddTask(&TaskScheduler::ShowStatus, this, 1 *1000, 30 *1000, "任务状态");
+        Sys.AddTask(&TaskScheduler::ShowStatus, this, 1 *1000, 3 *1000, "任务状态");
     #else 
         //Sys.AddTask(ShowTime, this, 2 *1000, 20 *1000, "时间显示");
     #endif 

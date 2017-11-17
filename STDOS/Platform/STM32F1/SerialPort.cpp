@@ -3,7 +3,6 @@
 #include "SerialPort.h"
 #include "Task.h"
 #include "stm32f10x.h"
-#include "Fifo.h"
 
 #define UART_PINS {\
 /* TX   RX   CTS  RTS */	\
