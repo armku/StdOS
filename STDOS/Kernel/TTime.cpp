@@ -107,7 +107,8 @@ int TimeCost::Elapsed()const
 	{	
 		ret=Time.TicksToUs(ticks)+1000*times;
 	}	
-    
+    if(ret<0)
+		ret=0;
 	return ret;
 }
 
