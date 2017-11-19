@@ -35,7 +35,7 @@ bool Task::Execute(UInt64 now)
         int costMsCurrent = costms.Elapsed() - this->SleepTime;
         if (this->MaxCost < costMsCurrent)
             this->MaxCost = costMsCurrent;
-        this->Cost = (5 *this->Cost + 3 * costMsCurrent) >> 3;
+        this->Cost = (5 *this->Cost + 3 * costMsCurrent) /8;
         this->CostMs = this->Cost / 1000;
 
         if (costMsCurrent > 500000)
