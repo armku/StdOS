@@ -875,9 +875,9 @@
               <FilePath>..\STDOS\Platform\CortexM\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>Time.cpp</FileName>
+              <FileName>TTime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Time.cpp</FilePath>
+              <FilePath>..\STDOS\Platform\CortexM\TTime.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1842,9 +1842,9 @@
               <FilePath>..\STDOS\Platform\CortexM\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>Time.cpp</FileName>
+              <FileName>TTime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Time.cpp</FilePath>
+              <FilePath>..\STDOS\Platform\CortexM\TTime.cpp</FilePath>
             </File>
           </Files>
         </Group>
