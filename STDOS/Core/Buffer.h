@@ -118,7 +118,7 @@ public:
 	virtual String ToString() const;
 public:
 	virtual void Show(bool newLine = false) const;
-	virtual void ShowHex(bool newLine = false) const;
+	virtual void ShowHex(bool newLine = false,char sep='-') const;
 };
 
 // 带引用计数的缓冲区

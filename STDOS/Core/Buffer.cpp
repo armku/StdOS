@@ -383,7 +383,7 @@ void Buffer::Show(bool newLine)const
 		printf("\r\n");
 	}
 }
-void Buffer::ShowHex(bool newLine) const
+void Buffer::ShowHex(bool newLine,char sep) const
 {
 	for(int i=0;i<this->_Length;i++)
 	{
@@ -391,7 +391,7 @@ void Buffer::ShowHex(bool newLine) const
 		ShowChar(this->_Arr[i]&0x0F);
 		if(i!=this->_Length-1)
 		{
-			printf("-");
+			printf("%c",sep);
 		}
 	}
 	
