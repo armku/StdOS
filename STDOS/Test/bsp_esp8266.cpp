@@ -74,7 +74,7 @@
     void ESP8266::Rst(void)
     {
         #if 0
-            ESP8266_Cmd("AT+RST", "OK", "ready", 2500);
+            ESP8266_Cmd("AT+RST", "OK", "ready", 250);
 
         #else 
             this->rst = 0;
@@ -153,13 +153,13 @@
         switch (enumMode)
         {
             case STA:
-                return this->Cmd("AT+CWMODE=1", "OK", "no change", 2500);
+                return this->Cmd("AT+CWMODE=1", "OK", "no change", 250);
 
             case AP:
-                return this->Cmd("AT+CWMODE=2", "OK", "no change", 2500);
+                return this->Cmd("AT+CWMODE=2", "OK", "no change", 250);
 
             case STA_AP:
-                return this->Cmd("AT+CWMODE=3", "OK", "no change", 2500);
+                return this->Cmd("AT+CWMODE=3", "OK", "no change", 250);
 
             default:
                 return false;
@@ -179,7 +179,7 @@
     {
         char cCmd[120];
         sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", pSSID, pPassWord);
-        return this->Cmd(cCmd, "OK", NULL, 5000);
+        return this->Cmd(cCmd, "OK", NULL, 500);
     }
     /*
      * 函数名：ESP8266_BuildAP
@@ -195,7 +195,7 @@
     {
         char cCmd[120];
         sprintf(cCmd, "AT+CWSAP=\"%s\",\"%s\",1,%d", pSSID, pPassWord, enunPsdMode);
-        return this->Cmd(cCmd, "OK", 0, 1000);
+        return this->Cmd(cCmd, "OK", 0, 100);
     }
     /*
      * 函数名：ESP8266_Enable_MultipleId
@@ -245,7 +245,7 @@
 
         else
             sprintf(cCmd, "AT+CIPSTART=%s", cStr);
-        return this->Cmd(cCmd, "OK", "ALREAY CONNECT", 4000);
+        return this->Cmd(cCmd, "OK", "ALREAY CONNECT", 400);
     }
 
 
@@ -389,7 +389,7 @@
      */
     void ESP8266::ExitUnvarnishSend(void)
     {
-        Sys.Sleep(1000);
+        Sys.Sleep(100);
         macESP8266_Usart("+++");
         Sys.Sleep(500);
     }
@@ -420,7 +420,7 @@
             else
                 sprintf(cStr, "AT+CIPSEND=%d", ulStrLength + 2);
             this->Cmd(cStr, "> ", 0, 1000);
-            bRet = this->Cmd(pStr, "SEND OK", 0, 1000);
+            bRet = this->Cmd(pStr, "SEND OK", 0, 100);
         }
         return bRet;
     }

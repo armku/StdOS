@@ -109,7 +109,7 @@ int main(void)
     //ESP8266TEST();
 	//ds18b20test();
 	//keyTest();
-	SerialPortTest();
+	//SerialPortTest();
 	//ST7565Rtest();
 //	PwmSoloTest();
 
