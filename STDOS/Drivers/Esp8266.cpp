@@ -11,7 +11,7 @@ struct STRUCT_USARTx_Fram strEsp8266_Fram_Record =
 
 void Delay_ms(int ms)
 {
-	Sys.Sleep(999);
+	Sys.Sleep(500);
 }
 
 /**
