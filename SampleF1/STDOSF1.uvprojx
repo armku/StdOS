@@ -754,6 +754,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\bspkey.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Esp8266.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1070,19 +1075,9 @@
               <FilePath>..\STDOS\Test\AD7124Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>bsp_esp8266.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\bsp_esp8266.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Common.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\Common.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ESP8266Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
             </File>
             <File>
               <FileName>SSD1309Test.cpp</FileName>
@@ -1103,6 +1098,11 @@
               <FileName>PwmSoloTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Esp8266Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\Esp8266Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1856,6 +1856,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\bspkey.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\Esp8266.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2172,19 +2177,9 @@
               <FilePath>..\STDOS\Test\AD7124Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>bsp_esp8266.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\bsp_esp8266.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Common.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\Common.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ESP8266Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
             </File>
             <File>
               <FileName>SSD1309Test.cpp</FileName>
@@ -2205,6 +2200,11 @@
               <FileName>PwmSoloTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Esp8266Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\Esp8266Test.cpp</FilePath>
             </File>
           </Files>
         </Group>

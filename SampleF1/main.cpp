@@ -76,7 +76,7 @@ void ADS1232Test();
 void ModbusTest();
 void streamtest();
 
-void ESP8266TEST();
+void ESP8266Test();
 void ssd1309Test();
 void ds18b20test();
 void ST7565Rtest();
@@ -106,7 +106,7 @@ int main(void)
     //ModbusTest();
     //InterruptTest();
 	//ssd1309Test();
-    //ESP8266TEST();
+    ESP8266Test();
 	//ds18b20test();
 	//keyTest();
 	//SerialPortTest();

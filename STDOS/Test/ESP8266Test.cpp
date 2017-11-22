@@ -1,89 +1,108 @@
-#include "Sys.h"
-#include "stm32f10x.h"
-#include <stdarg.h>
-#include "bsp_esp8266.h"
-#include "SerialPort.h"
+#include "Drivers\Esp8266.h"
+#include <stdio.h>  
+#include <string.h>  
+#include <stdbool.h>
 
-//#define DEBUGESP8266TEST
+void Delay_ms(int ms);
 
-#ifdef DEBUGESP8266TEST
+#define ESP8266TEST
 
-    #define macESP8266_CH_ENABLE()                 GPIO_SetBits ( GPIOG, GPIO_Pin_13 )
-
-    #define macUser_ESP8266_ApSsid                       "NETGEAR77"                //要连接的热点的名称
-    #define macUser_ESP8266_ApPwd                        "18353217097"           //要连接的热点的密钥
-    #define macUser_ESP8266_TcpServer_IP                 "121.42.164.17"      //要连接的服务器的 IP
-    #define macUser_ESP8266_TcpServer_Port               "8000"               //要连接的服务器的端口
+#ifdef ESP8266TEST
+    #define ApSsid                     "dd-wrt"               //要连接的热点的名称
+    //#define ApSsid                       "NETGEAR77"        //要连接的热点的名称
+    #define ApPwd                        "18353217097"        //要连接的热点的密钥
+    #define TcpServer_IP                 "121.42.164.17"      //要连接的服务器的 IP
+    #define TcpServer_Port               "8000"               //要连接的服务器的端口
 
     volatile uint8_t ucTcpClosedFlag = 0;
-
+    Esp8266 esp;
     char cStr[1500] = 
     {
         0
     };
-    ESP8266 esp;
-    SerialPort espcom3(COM3);
-    uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
+    /**
+     * @brief  ESP8266 （Sta Tcp Client）透传
+     * @param  无
+     * @retval 无
+     */
+    void ESP8266Test()
     {
-        //transport->Write(bs);
-        debug_printf("com3: %d\r\n", bs.Length());
-        bs.Show();
-
-        return 0;
-    }
-    void ESP8266TEST()
-    {
-        espcom3.Register(OnUsart3Read);
-        espcom3.SetBaudRate(115200);
-        espcom3.Open();
         esp.Init(); //初始化WiFi模块使用的接口和外设
         printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
 
         uint8_t ucStatus;
-
         char cStr[100] = 
         {
             0
         };
         printf("\r\n正在配置 ESP8266 ......\r\n");
         macESP8266_CH_ENABLE();
-        esp.AT_Test();
-        esp.Net_Mode_Choose(STA);
-        while (!esp.JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd))
+        esp.Test();
+        esp.NetModeChoose(Esp8266::STA);
+        while (!esp.JoinAP(ApSsid, ApPwd))
             ;
-        esp.Enable_MultipleId(DISABLE);
-        while (!esp.Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0))
+        esp.EnableMultipleId(DISABLE);
+        while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
             ;
         while (!esp.UnvarnishSend())
             ;
         printf("\r\n配置 ESP8266 完毕\r\n");
         while (1)
         {
-            sprintf(cStr, "Hello world!\r\n");
-
-            esp.SendString(ENABLE, cStr, 0, Single_ID_0); //发送数据
-            Sys.Sleep(100);
+            sprintf(cStr, "hello world!\r\n");
+            esp.SendString(ENABLE, cStr, 0, Esp8266::SingleID0); //发送数据		
+            Delay_ms(10000);
             if (ucTcpClosedFlag)
             //检测是否失去连接
             {
-                esp.ExitUnvarnishSend(); //退出透传模式
+                esp.ExitUnvarnishSend(); //退出透传模式			
                 do
-                    ucStatus = esp.Get_LinkStatus();
+                    ucStatus = esp.GetLinkStatus();
                 //获取连接状态
                 while (!ucStatus);
                 if (ucStatus == 4)
                 //确认失去连接后重连
                 {
                     printf("\r\n正在重连热点和服务器 ......\r\n");
-                    while (!esp.JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd))
+                    while (!esp.JoinAP(ApSsid, ApPwd))
                         ;
-                    while (!esp.Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0))
+                    while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
                         ;
                     printf("\r\n重连热点和服务器成功\r\n");
                 }
                 while (!esp.UnvarnishSend())
                     ;
+
             }
         }
     }
+    #ifdef __cplusplus
+        extern "C"
+        {
+        #endif 
+        void USART3_IRQHandler(void)
+        {
+            uint8_t ucCh;
+
+            if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+            {
+                ucCh = USART_ReceiveData(USART3);
+
+                if (strEsp8266_Fram_Record .InfBit .FramLength < (RX_BUF_MAX_LEN - 1))
+                //预留1个字节写结束符
+                    strEsp8266_Fram_Record .Data_RX_BUF[strEsp8266_Fram_Record .InfBit .FramLength++] = ucCh;
+            }
+
+            if (USART_GetITStatus(USART3, USART_IT_IDLE) == SET)
+            //数据帧接收完毕
+            {
+                strEsp8266_Fram_Record .InfBit .FramFinishFlag = 1;
+
+                ucCh = USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
+                ucTcpClosedFlag = strstr(strEsp8266_Fram_Record .Data_RX_BUF, "CLOSED\r\n") ? 1 : 0;
+            }
+        }
+        #ifdef __cplusplus
+        }
+    #endif 
 #endif
