@@ -64,7 +64,7 @@
 			public:
 			volatile bool FlagTcpClosed;//是否断开连接
 			
-			OutputPort pChEnable;
+			OutputPort portEnable;
 			
     };    
 	

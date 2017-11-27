@@ -29,16 +29,16 @@ void Esp8266::Init()
 //设置引脚
 void Esp8266::SetPin(Pin pinChEn)
 {
-	this->pChEnable.Set(pinChEn);
-	this->pChEnable.OpenDrain = false;
-	this->pChEnable.Invert=0;
+	this->portEnable.Set(pinChEn);
+	this->portEnable.OpenDrain = false;
+	this->portEnable.Invert=0;
 	
-	this->pChEnable.Open();
+	this->portEnable.Open();
 }
 //设置芯片有效
 void Esp8266::ChipEnable(bool en)
 {
-	this->pChEnable=en;
+	this->portEnable=en;
 }
 /**
  * @brief  初始化ESP8266用到的GPIO引脚
