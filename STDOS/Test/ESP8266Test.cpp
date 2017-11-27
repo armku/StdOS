@@ -32,25 +32,27 @@
             case 0:
                 debug_printf("\r\n正在测试在线 ESP8266 ......\r\n");
                 esp.Test();
+				esp.NetModeChoose(Esp8266::STA);
                 esp.RunStep++;
                 break;
-			case 1:
-				esp.NetModeChoose(Esp8266::STA);
+			case 1:				
+				debug_printf("\r\n正在重连热点和服务器 ......\r\n");
                 while (!esp.JoinAP(ApSsid, ApPwd))
                     ;
                 esp.EnableMultipleId(DISABLE);
-                while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
-                    ;
-                while (!esp.UnvarnishSend())
-                    ;
-                debug_printf("\r\n配置 ESP8266 完毕\r\n");
                 esp.RunStep++;
                 break;
             case 2:
-				esp.RunStep++;
+				while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
+                    ;
+				debug_printf("\r\n重连热点和服务器成功\r\n");
+                esp.RunStep++;
                 break;
             case 3:
-				esp.RunStep++;
+				while (!esp.UnvarnishSend())
+                    ;
+                debug_printf("\r\n配置 ESP8266 完毕\r\n");
+                esp.RunStep++;
                 break;
             case 4:
                 debug_printf(cStr, "%d hello world!\r\n", ++icnt);
@@ -68,6 +70,7 @@
                     if (ucStatus == 4)
                     //确认失去连接后重连
                     {
+						//esp.RunStep=1;
                         debug_printf("\r\n正在重连热点和服务器 ......\r\n");
                         while (!esp.JoinAP(ApSsid, ApPwd))
                             ;
@@ -80,7 +83,11 @@
 
                 }
                 break;
-            default:
+            case 5:
+				//重新连接
+				esp.RunStep=4;
+                break;
+			default:
                 esp.RunStep = 0;
                 break;
         }
