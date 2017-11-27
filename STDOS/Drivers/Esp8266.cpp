@@ -549,13 +549,13 @@ void Esp8266::USART_printf(char *Data, ...)
             {
                 case 'r':
                     //回车符
-                    USART_SendData(USARTx, 0x0d);
+					this->SendData(0x0d);
                     Data++;
                     break;
 
                 case 'n':
                     //换行符
-                    USART_SendData(USARTx, 0x0a);
+                    this->SendData(0x0a);
                     Data++;
                     break;
 
@@ -575,9 +575,7 @@ void Esp8266::USART_printf(char *Data, ...)
                     s = va_arg(ap, const char*);
                     for (;  *s; s++)
                     {
-                        USART_SendData(USARTx,  *s);
-                        while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
-                            ;
+                        this->SendData(*s);
                     }
                     Data++;
                     break;
@@ -587,9 +585,7 @@ void Esp8266::USART_printf(char *Data, ...)
                     itoa(d, buf, 10);
                     for (s = buf;  *s; s++)
                     {
-                        USART_SendData(USARTx,  *s);
-                        while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
-                            ;
+                        this->SendData(*s);
                     }
                     Data++;
                     break;
@@ -599,10 +595,7 @@ void Esp8266::USART_printf(char *Data, ...)
             }
         }
         else
-            USART_SendData(USARTx,  *Data++);
-
-        while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
-            ;
+            this->SendData(*Data++);
     }
 }
 //发送数据
