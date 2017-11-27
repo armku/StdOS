@@ -61,7 +61,6 @@
             void USART_printf(char *Data, ...);
         private:
 			SerialPort *psp;
-			void SendData(char ch);//发送数据
 			void SendData(char *buf,int len);
         public:
             volatile bool FlagTcpClosed; //是否断开连接
