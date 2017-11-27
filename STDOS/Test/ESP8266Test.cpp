@@ -60,8 +60,7 @@
 		bs.Show(true);
 		return 0;
 	}
-    void USARTConfig();
-	SerialPort sp3(COM3);
+    SerialPort sp3(COM3);
     /**
      * @brief  ESP8266 （Sta Tcp Client）透传
      * @param  无
@@ -71,7 +70,7 @@
     {
         static int icnt = 0;
         esp.SetPin(PG13, PG14);
-        USARTConfig();
+        USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 		
 		sp3.SetBaudRate(115200);
 		sp3.Register(OnUsart3Read);
@@ -101,17 +100,5 @@
         printf("\r\n配置 ESP8266 完毕\r\n");
         Sys.AddTask(espRoutin, 0, 0, 500, "espRoutin");
 
-    }
-
-    /**
-     * @brief  初始化ESP8266用到的 USART
-     * @param  无
-     * @retval 无
-     */
-    void USARTConfig()
-    {
-        USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 	
-
-        USART_Cmd(USART3, ENABLE);
     }
 #endif
