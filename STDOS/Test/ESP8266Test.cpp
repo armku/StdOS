@@ -3,6 +3,7 @@
 #include <string.h>  
 #include <stdbool.h>
 #include "stm32f10x.h" 
+#include "Sys.h"
 
 #define ESP8266TEST
 
@@ -15,8 +16,45 @@
     #define TcpServer_Port               "8000"               //要连接的服务器的端口
 	
 	#define macESP8266_CH_ENABLE()                 GPIO_SetBits ( GPIOG, GPIO_Pin_13 )
+	Esp8266 esp;
+	
+	void espRoutin(void * param)
+	{
+		uint8_t ucStatus;
+		static int icnt=0;
+		char cStr[100] = 
+        {
+            0
+        };
+		sprintf(cStr, "%d hello world!\r\n",++icnt);
+            esp.SendString(ENABLE, cStr, 0, Esp8266::SingleID0); //发送数据	
+			printf("发送数据: %s\r\n",cStr);
+            Delay_ms(500);
+            if (esp.FlagTcpClosed)
+            //检测是否失去连接
+            {
+                esp.ExitUnvarnishSend(); //退出透传模式			
+                do
+                    ucStatus = esp.GetLinkStatus();
+                //获取连接状态
+                while (!ucStatus);
+                if (ucStatus == 4)
+                //确认失去连接后重连
+                {
+                    printf("\r\n正在重连热点和服务器 ......\r\n");
+                    while (!esp.JoinAP(ApSsid, ApPwd))
+                        ;
+                    while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
+                        ;
+                    printf("\r\n重连热点和服务器成功\r\n");
+                }
+                while (!esp.UnvarnishSend())
+                    ;
 
-    Esp8266 esp;
+            }
+	}
+
+    
 	
     /**
      * @brief  ESP8266 （Sta Tcp Client）透传
@@ -46,34 +84,35 @@
         while (!esp.UnvarnishSend())
             ;
         printf("\r\n配置 ESP8266 完毕\r\n");
-        while (1)
-        {
-            sprintf(cStr, "%d hello world!\r\n",++icnt);
-            esp.SendString(ENABLE, cStr, 0, Esp8266::SingleID0); //发送数据	
-			printf("发送数据: %s\r\n",cStr);
-            Delay_ms(500);
-            if (esp.FlagTcpClosed)
-            //检测是否失去连接
-            {
-                esp.ExitUnvarnishSend(); //退出透传模式			
-                do
-                    ucStatus = esp.GetLinkStatus();
-                //获取连接状态
-                while (!ucStatus);
-                if (ucStatus == 4)
-                //确认失去连接后重连
-                {
-                    printf("\r\n正在重连热点和服务器 ......\r\n");
-                    while (!esp.JoinAP(ApSsid, ApPwd))
-                        ;
-                    while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
-                        ;
-                    printf("\r\n重连热点和服务器成功\r\n");
-                }
-                while (!esp.UnvarnishSend())
-                    ;
+		Sys.AddTask(espRoutin,0,0,500,"espRoutin");
+//        while (1)
+//        {
+//            sprintf(cStr, "%d hello world!\r\n",++icnt);
+//            esp.SendString(ENABLE, cStr, 0, Esp8266::SingleID0); //发送数据	
+//			printf("发送数据: %s\r\n",cStr);
+//            Delay_ms(500);
+//            if (esp.FlagTcpClosed)
+//            //检测是否失去连接
+//            {
+//                esp.ExitUnvarnishSend(); //退出透传模式			
+//                do
+//                    ucStatus = esp.GetLinkStatus();
+//                //获取连接状态
+//                while (!ucStatus);
+//                if (ucStatus == 4)
+//                //确认失去连接后重连
+//                {
+//                    printf("\r\n正在重连热点和服务器 ......\r\n");
+//                    while (!esp.JoinAP(ApSsid, ApPwd))
+//                        ;
+//                    while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
+//                        ;
+//                    printf("\r\n重连热点和服务器成功\r\n");
+//                }
+//                while (!esp.UnvarnishSend())
+//                    ;
 
-            }
-        }
+//            }
+//        }
     }
 #endif
