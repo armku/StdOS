@@ -251,6 +251,10 @@ bool SerialPort::OnOpen()
     USART_Init(g_Uart_Ports[this->Index], &p);
 
     USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_RXNE, ENABLE); // 串口接收中断配置
+	if(this->Index==2)
+	{
+		USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
+	}
     // 初始化的时候会关闭所有中断，这里不需要单独关闭发送中断
     //USART_ITConfig(_port, USART_IT_TXE, DISABLE); // 不需要发送中断
 

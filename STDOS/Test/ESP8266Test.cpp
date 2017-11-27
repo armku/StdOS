@@ -70,7 +70,6 @@
     {
         static int icnt = 0;
         esp.SetPin(PG13, PG14);
-        USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 		
 		sp3.SetBaudRate(115200);
 		sp3.Register(OnUsart3Read);
