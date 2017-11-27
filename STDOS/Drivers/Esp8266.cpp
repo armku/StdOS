@@ -16,7 +16,6 @@ Fram_T strEsp8266_Fram_Record =
  */
 void Esp8266::Init()
 {
-    this->USARTConfig();
     this->ChipReset(true);
 	this->ChipEnable(false);
 	
@@ -46,68 +45,6 @@ void Esp8266::ChipEnable(bool en)
 void Esp8266::ChipReset(bool rst)
 {
 	this->portReset=rst;
-}
-/**
- * @brief  初始化ESP8266用到的 USART
- * @param  无
- * @retval 无
- */
-void Esp8266::USARTConfig()
-{
-    GPIO_InitTypeDef GPIO_InitStructure;
-    USART_InitTypeDef USART_InitStructure;
-
-
-    /* config USART clock */
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-
-    /* USART GPIO config */
-    /* Configure USART Tx as alternate function push-pull */
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
-
-    /* Configure USART Rx as input floating */
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
-
-    /* USART1 mode config */
-    USART_InitStructure.USART_BaudRate = 115200;
-    USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-    USART_InitStructure.USART_StopBits = USART_StopBits_1;
-    USART_InitStructure.USART_Parity = USART_Parity_No;
-    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-    USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-    USART_Init(USART3, &USART_InitStructure);
-
-
-    /* 中断配置 */
-    USART_ITConfig(USART3, USART_IT_RXNE, ENABLE); //使能串口接收中断 
-    USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 	
-
-    this->USARTNVICConfiguration();
-    USART_Cmd(USART3, ENABLE);
-}
-
-/**
- * @brief  配置 ESP8266 USART 的 NVIC 中断
- * @param  无
- * @retval 无
- */
-void Esp8266::USARTNVICConfiguration()
-{
-    NVIC_InitTypeDef NVIC_InitStructure;
-    /* Configure the NVIC Preemption Priority Bits */
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-    /* Enable the USART2 Interrupt */
-    NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init(&NVIC_InitStructure);
 }
 
 /*

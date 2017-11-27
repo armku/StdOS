@@ -55,9 +55,6 @@
             bool SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, ENUMIDNOTypeDef ucId);
             char *ReceiveString(bool enumEnUnvarnishTx);
         private:
-            void USARTConfig();
-            void USARTNVICConfiguration();
-		
 			char *itoa(int value, char *string, int radix);
 			void USART_printf(char *Data, ...);
 		private:
