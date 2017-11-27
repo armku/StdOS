@@ -2,7 +2,6 @@
 #include <stdio.h>  
 #include <string.h>  
 #include <stdbool.h>
-#include "stm32f10x.h" 
 
 Fram_T strEsp8266_Fram_Record = 
 {
@@ -597,6 +596,7 @@ void Esp8266::USART_printf(char *Data, ...)
             this->SendData(*Data++);
     }
 }
+#include "stm32f10x.h" 
 //·¢ËÍÊı¾İ
 void Esp8266::SendData(char ch)
 {
