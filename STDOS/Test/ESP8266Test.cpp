@@ -41,7 +41,7 @@
                 while (!esp.UnvarnishSend())
                     ;
                 printf("\r\n≈‰÷√ ESP8266 ÕÍ±œ\r\n");
-                esp.RunStep = 1;
+                esp.RunStep++;
                 break;
             case 1:
                 sprintf(cStr, "%d hello world!\r\n", ++icnt);
