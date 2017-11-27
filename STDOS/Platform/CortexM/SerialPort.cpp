@@ -51,13 +51,8 @@ void SerialPort::OnWrite2()
 		}	
 	#else
 		char buf[200];
-		int bufpos=0;
-		
-		while(!this->Tx.Empty())
-		{
-			buf[bufpos++]=this->Tx.Dequeue();
-		}
-		Buffer bs(buf,bufpos);
+		Buffer bs(buf,ArrayLength(buf));
+		this->Tx.Read(bs);
 		this->OnWrite3(bs);
 	#endif
 }
