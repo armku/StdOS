@@ -533,6 +533,11 @@ void Esp8266::USART_printf(char *Data, ...)
     const char *s;
     int d;
     char buf[16];
+	
+	char bufSend[200];
+	int bufSendPos;
+	
+	bufSendPos=0;
 
     va_list ap;
     va_start(ap, Data);
@@ -595,6 +600,7 @@ void Esp8266::USART_printf(char *Data, ...)
         else
             this->SendData(*Data++);
     }
+	this->SendData(&bufSend[0],bufSendPos);
 }
 #include "stm32f10x.h" 
 //·¢ËÍÊı¾İ
