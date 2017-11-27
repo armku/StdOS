@@ -55,7 +55,7 @@
                 esp.RunStep++;
                 break;
             case 4:
-                debug_printf(cStr, "%d hello world!\r\n", ++icnt);
+                sprintf(cStr, "%d hello world!\r\n", ++icnt);
                 esp.SendString(ENABLE, cStr, 0, Esp8266::SingleID0); //发送数据	
                 debug_printf("发送数据: %s\r\n", cStr);
                 Delay_ms(500);
