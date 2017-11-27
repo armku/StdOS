@@ -43,18 +43,11 @@ void SerialPort::OnClose2()
 
 }
 void SerialPort::OnWrite2()
-{
-	#if 0
-		while(!this->Tx.Empty())
-		{
-			this->SendData(this->Tx.Dequeue());
-		}	
-	#else
-		char buf[200];
-		Buffer bs(buf,ArrayLength(buf));
-		this->Tx.Read(bs);
-		this->OnWrite3(bs);
-	#endif
+{	
+	char buf[200];
+	Buffer bs(buf,ArrayLength(buf));
+	this->Tx.Read(bs);
+	this->OnWrite3(bs);
 }
 void SerialPort::OnWrite3(const Buffer &bs)//add
 {
