@@ -53,6 +53,12 @@
 
         }
     }
+	uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
+	{
+		//transport->Write(bs);
+		bs.Show(true);
+		return 0;
+	}
     void USARTConfig();
 	SerialPort sp3(COM3);
     /**
@@ -65,6 +71,11 @@
         static int icnt = 0;
         esp.SetPin(PG13, PG14);
         USARTConfig();
+		
+		sp3.SetBaudRate(115200);
+		sp3.Register(OnUsart3Read);
+		sp3.Open();
+		
 		esp.SetSerialPort(&sp3);
         esp.Init(); //初始化WiFi模块使用的接口和外设
         printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
