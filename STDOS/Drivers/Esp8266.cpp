@@ -31,13 +31,13 @@ void Esp8266::SetPin(Pin pinChEn, Pin pinReset)
     this->portEnable.OpenDrain = false;
     this->portEnable.Invert = 0;
 
-    this->portReset.Set(pinReset);
-    this->portReset.OpenDrain = false;
-    this->portReset.Invert = 0;
+    this->_Reset.Set(pinReset);
+    this->_Reset.OpenDrain = false;
+    this->_Reset.Invert = 0;
 
     this->portEnable.Open();
 
-    this->portReset.Open();
+    this->_Reset.Open();
 }
 void Esp8266::SetSerialPort(SerialPort *sp)
 {
@@ -53,7 +53,7 @@ void Esp8266::ChipEnable(bool en)
 //Ð¾Æ¬¸´Î»
 void Esp8266::ChipReset(bool rst)
 {
-    this->portReset = rst;
+    this->_Reset = rst;
 	this->RunStep=0;
 }
 

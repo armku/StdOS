@@ -67,7 +67,7 @@
 			int RunStep;//运行步骤
 
             OutputPort portEnable; // 芯片使能
-            OutputPort portReset; // 芯片复位
+            OutputPort _Reset; // 重置
     };
 
     void Delay_ms(int ms);
