@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "DateTime.h"
-#include "TTime.h"
 
 DateTime::DateTime()
 {
@@ -324,7 +323,7 @@ void DateTime::Show(bool newLine)const
 DateTime DateTime::Now()
 {    
     //return DateTime(TotalSeconds()+Time.Seconds);
-	return DateTime(0+Time.Seconds);
+	//return DateTime(0+Time.Seconds);
 }
 
 void DateTime::Init()
