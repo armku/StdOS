@@ -85,6 +85,7 @@ void OnUsartReceive(ushort num, void *param)
         if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
         {
             ucCh = USART_ReceiveData(USART3);
+			//sp->Rx.Enqueue(ucCh);
 
             if (strEsp8266_Fram_Record .Length < (RX_BUF_MAX_LEN - 1))
             //预留1个字节写结束符
@@ -98,6 +99,7 @@ void OnUsartReceive(ushort num, void *param)
 
             ucCh = USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
             esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record .RxBuf, "CLOSED\r\n") ? 1 : 0;
+			sp->ReceiveTask3();
         }
 	}
 }
