@@ -57,10 +57,8 @@ void SerialPort::OnWrite2()
 		{
 			buf[bufpos++]=this->Tx.Dequeue();
 		}
-		for(int i=0;i<bufpos;i++)
-		{
-			this->SendData(buf[i]);
-		}
+		Buffer bs(buf,bufpos);
+		this->OnWrite3(bs);
 	#endif
 }
 void SerialPort::OnWrite3(const Buffer &bs)//add
