@@ -1,5 +1,6 @@
 #include <string.h>
-#include "Sys.h"
+#include <stdio.h>
+#include "SString.h"
 #include "Buffer.h"
 
 //static char bufferName[]="Buffer"; 
@@ -255,7 +256,7 @@ Buffer Buffer::Sub(int index, int len)
     }
     if (index + len > this->_Length)
     {
-        SmartOS_printf("Buffer::Sub (%d, %d) > %d \r\n", index, len, this->_Length);
+        //debug_printf("Buffer::Sub (%d, %d) > %d \r\n", index, len, this->_Length);
     }
     if (index + len > this->_Length)
     {
