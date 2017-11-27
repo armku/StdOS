@@ -1,5 +1,7 @@
 #ifndef __BSP_ESP8266_H
     #define __BSP_ESP8266_H
+	
+	#include "Port.h"
         
     #define RX_BUF_MAX_LEN     1024 
 
@@ -34,6 +36,7 @@
             } ENUMAPPsdModeTypeDef;
             void Init();
             void Rst();
+			void SetPin(Pin pinChEn);//设置引脚
             bool Cmd(char *cmd, char *reply1, char *reply2, int waittime);
             void Test();
             bool NetModeChoose(ENUMNetModeTypeDef enumMode);
@@ -59,6 +62,9 @@
 		private:
 			public:
 			volatile bool FlagTcpClosed;//是否断开连接
+			
+			OutputPort pChEnable;
+			
     };    
 	
 	void Delay_ms(int ms);

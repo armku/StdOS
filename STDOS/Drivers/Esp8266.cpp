@@ -27,7 +27,15 @@ void Esp8266::Init()
 	
 	this->FlagTcpClosed=0;//是否断开连接
 }
-
+//设置引脚
+void Esp8266::SetPin(Pin pinChEn)
+{
+	this->pChEnable.Set(pinChEn);
+	this->pChEnable.OpenDrain = false;
+	this->pChEnable.Invert=0;
+	
+	this->pChEnable.Open();
+}
 /**
  * @brief  初始化ESP8266用到的GPIO引脚
  * @param  无
