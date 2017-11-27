@@ -20,6 +20,8 @@ void Esp8266::Init()
 	
 	this->RunStep=0;
     this->FlagTcpClosed = 0; //是否断开连接
+	
+	this->ChipEnable();
 }
 
 //设置引脚

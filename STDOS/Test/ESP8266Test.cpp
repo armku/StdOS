@@ -29,9 +29,20 @@
 
         switch (esp.RunStep)
         {
-			case 0:
-				esp.RunStep=1;
-				break;
+            case 0:
+                printf("\r\n正在配置 ESP8266 ......\r\n");
+                esp.Test();
+                esp.NetModeChoose(Esp8266::STA);
+                while (!esp.JoinAP(ApSsid, ApPwd))
+                    ;
+                esp.EnableMultipleId(DISABLE);
+                while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
+                    ;
+                while (!esp.UnvarnishSend())
+                    ;
+                printf("\r\n配置 ESP8266 完毕\r\n");
+                esp.RunStep = 1;
+                break;
             case 1:
                 sprintf(cStr, "%d hello world!\r\n", ++icnt);
                 esp.SendString(ENABLE, cStr, 0, Esp8266::SingleID0); //发送数据	
@@ -61,7 +72,7 @@
                 }
                 break;
             default:
-				esp.RunStep=0;
+                esp.RunStep = 0;
                 break;
         }
     }
@@ -80,7 +91,6 @@
      */
     void ESP8266Test()
     {
-        static int icnt = 0;
         esp.SetPin(PG13, PG14);
 
         sp3.SetBaudRate(115200);
@@ -88,27 +98,8 @@
         sp3.Open();
 
         esp.SetSerialPort(&sp3);
-        esp.Init(); //初始化WiFi模块使用的接口和外设
-        printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
+        esp.Init();
 
-        uint8_t ucStatus;
-        char cStr[100] = 
-        {
-            0
-        };
-        printf("\r\n正在配置 ESP8266 ......\r\n");
-
-        esp.ChipEnable();
-        esp.Test();
-        esp.NetModeChoose(Esp8266::STA);
-        while (!esp.JoinAP(ApSsid, ApPwd))
-            ;
-        esp.EnableMultipleId(DISABLE);
-        while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
-            ;
-        while (!esp.UnvarnishSend())
-            ;
-        printf("\r\n配置 ESP8266 完毕\r\n");
         Sys.AddTask(espRoutin, 0, 0, 500, "espRoutin");
 
     }
