@@ -1,11 +1,7 @@
-/*
-½øÐÐµ½×Ö·û´®ËÑË÷
- */
-
-#include "SString.h"
-#include <string.h>
 #include <CType.h>
-#include "Sys.h"
+#include <stdio.h>
+#include <string.h>
+#include "SString.h"
 
 static char buftmp[10];
 
@@ -272,7 +268,7 @@ void String::Show(bool newLine)const
     {
         if (this->_Length <= i)
             break;
-        SmartOS_printf("%c", this->_Arr[i]);
+        printf("%c", this->_Arr[i]);
     }
     if (newLine)
         printf("\r\n");

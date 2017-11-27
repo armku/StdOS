@@ -1,6 +1,5 @@
-#include "Array.h"
 #include <stdio.h>
-#include "Sys.h"
+#include "Array.h"
 
 Array::Array(void *data, int len): Buffer(data, len)
 {
