@@ -29,7 +29,10 @@
 
         switch (esp.RunStep)
         {
-            case 0:
+			case 0:
+				esp.RunStep=1;
+				break;
+            case 1:
                 sprintf(cStr, "%d hello world!\r\n", ++icnt);
                 esp.SendString(ENABLE, cStr, 0, Esp8266::SingleID0); //发送数据	
                 printf("发送数据: %s\r\n", cStr);
@@ -58,6 +61,7 @@
                 }
                 break;
             default:
+				esp.RunStep=0;
                 break;
         }
     }
