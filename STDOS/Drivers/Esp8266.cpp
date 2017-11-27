@@ -45,7 +45,11 @@ void Esp8266::ChipEnable(bool en)
 {
 	this->portEnable=en;
 }
-
+//芯片复位
+void Esp8266::ChipReset(bool rst)
+{
+	this->portReset=rst;
+}
 /**
  * @brief  初始化ESP8266用到的 USART
  * @param  无
