@@ -54,7 +54,6 @@
             bool SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, ENUMIDNOTypeDef ucId);
             char *ReceiveString(bool enumEnUnvarnishTx);
         private:
-            void GPIOConfig();
             void USARTConfig();
             void USARTNVICConfiguration();
 		
