@@ -373,30 +373,32 @@ void CInterrupt::USART2_IRQHandler()
 extern Esp8266 esp;
 void CInterrupt::USART3_IRQHandler()
 {
-    //    if (onIsr[USART3_IRQn])
-    //    {
-    //        OnUsartReceive(2, onIsr[USART3_IRQn]);
-    //    }
+    #if 0
+        if (onIsr[USART3_IRQn])
+        {
+            OnUsartReceive(2, onIsr[USART3_IRQn]);
+        }
+    #else 
+        uint8_t ucCh;
 
-    uint8_t ucCh;
+        if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+        {
+            ucCh = USART_ReceiveData(USART3);
 
-    if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
-    {
-        ucCh = USART_ReceiveData(USART3);
+            if (strEsp8266_Fram_Record .Length < (RX_BUF_MAX_LEN - 1))
+            //预留1个字节写结束符
+                strEsp8266_Fram_Record .RxBuf[strEsp8266_Fram_Record .Length++] = ucCh;
+        }
 
-        if (strEsp8266_Fram_Record .Length < (RX_BUF_MAX_LEN - 1))
-        //预留1个字节写结束符
-            strEsp8266_Fram_Record .RxBuf[strEsp8266_Fram_Record .Length++] = ucCh;
-    }
+        if (USART_GetITStatus(USART3, USART_IT_IDLE) == SET)
+        //数据帧接收完毕
+        {
+            strEsp8266_Fram_Record .FlagFinish = 1;
 
-    if (USART_GetITStatus(USART3, USART_IT_IDLE) == SET)
-    //数据帧接收完毕
-    {
-        strEsp8266_Fram_Record .FlagFinish = 1;
-
-        ucCh = USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
-        esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record .RxBuf, "CLOSED\r\n") ? 1 : 0;
-    }
+            ucCh = USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
+            esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record .RxBuf, "CLOSED\r\n") ? 1 : 0;
+        }
+    #endif 
 }
 
 void CInterrupt::USART3_4_IRQHandler(){
