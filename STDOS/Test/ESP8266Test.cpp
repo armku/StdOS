@@ -56,6 +56,7 @@
 	uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 	{
 		//transport->Write(bs);
+		debug_printf("收到数据:\r\n");
 		bs.Show(true);
 		return 0;
 	}
