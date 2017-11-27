@@ -535,7 +535,6 @@ void Esp8266::USART_printf(char *Data, ...)
     int d;
     char buf[16];
 
-    USART_TypeDef *USARTx = USART3;
     va_list ap;
     va_start(ap, Data);
 
