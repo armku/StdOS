@@ -605,17 +605,21 @@ void Esp8266::USART_printf(char *Data, ...)
 }
 #include "stm32f10x.h" 
 //·¢ËÍÊý¾Ý
-void Esp8266::SendData(char *buf,int len)
+void Esp8266::SendData(char *buf, int len)
 {
-	#if 1
-	USART_TypeDef *USARTx = USART3;
-	for(int i=0;i<len;i++)
-	{
-		USART_SendData(USARTx,  buf[i]);
-		while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
-		;
-	}
-	#else
-	
-	#endif
+    #if 1
+        USART_TypeDef *USARTx = USART3;
+        for (int i = 0; i < len; i++)
+        {
+            USART_SendData(USARTx, buf[i]);
+            while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
+                ;
+        }
+    #else 
+        if (this->psp)
+        {
+            Buffer bs(buf, len);
+            this->psp->Write(bs);
+        }
+    #endif 
 }
