@@ -104,23 +104,6 @@
     }
 
     /**
-     * @brief  配置 ESP8266 USART 的 NVIC 中断
-     * @param  无
-     * @retval 无
-     */
-    void USARTNVICConfiguration()
-    {
-        NVIC_InitTypeDef NVIC_InitStructure;
-        /* Configure the NVIC Preemption Priority Bits */
-        NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-        /* Enable the USART2 Interrupt */
-        NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;
-        NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-        NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-        NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-        NVIC_Init(&NVIC_InitStructure);
-    }
-    /**
      * @brief  初始化ESP8266用到的 USART
      * @param  无
      * @retval 无
@@ -161,7 +144,6 @@
         USART_ITConfig(USART3, USART_IT_RXNE, ENABLE); //使能串口接收中断 
         USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 	
 
-        USARTNVICConfiguration();
         USART_Cmd(USART3, ENABLE);
     }
 #endif
