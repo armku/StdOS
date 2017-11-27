@@ -84,6 +84,7 @@ private:
 	void OnOpen2();
 	void OnClose2();
 	void OnWrite2();
+	void OnWrite3(const Buffer &bs);//add
 public:
 	void ReceiveTask2();//接收到数据启动延时接收
 	void ReceiveTask3();//空闲中断收到数据接收完成。

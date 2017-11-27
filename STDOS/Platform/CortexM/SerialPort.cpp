@@ -49,6 +49,13 @@ void SerialPort::OnWrite2()
 		this->SendData(this->Tx.Dequeue());
 	}	
 }
+void SerialPort::OnWrite3(const Buffer &bs)//add
+{
+	for(int i=0;i<bs.Length();i++)
+	{
+		this->SendData(bs[i]);
+	}
+}
 
 void SerialPort::OnHandler(ushort num, void* param)
 {
