@@ -30,9 +30,12 @@
         switch (esp.RunStep)
         {
             case 0:
-                printf("\r\n正在配置 ESP8266 ......\r\n");
+                debug_printf("\r\n正在测试在线 ESP8266 ......\r\n");
                 esp.Test();
-                esp.NetModeChoose(Esp8266::STA);
+                esp.RunStep++;
+                break;
+			case 1:
+				esp.NetModeChoose(Esp8266::STA);
                 while (!esp.JoinAP(ApSsid, ApPwd))
                     ;
                 esp.EnableMultipleId(DISABLE);
@@ -40,11 +43,8 @@
                     ;
                 while (!esp.UnvarnishSend())
                     ;
-                printf("\r\n配置 ESP8266 完毕\r\n");
+                debug_printf("\r\n配置 ESP8266 完毕\r\n");
                 esp.RunStep++;
-                break;
-			case 1:
-				esp.RunStep++;
                 break;
             case 2:
 				esp.RunStep++;
@@ -53,9 +53,9 @@
 				esp.RunStep++;
                 break;
             case 4:
-                sprintf(cStr, "%d hello world!\r\n", ++icnt);
+                debug_printf(cStr, "%d hello world!\r\n", ++icnt);
                 esp.SendString(ENABLE, cStr, 0, Esp8266::SingleID0); //发送数据	
-                printf("发送数据: %s\r\n", cStr);
+                debug_printf("发送数据: %s\r\n", cStr);
                 Delay_ms(500);
                 if (esp.FlagTcpClosed)
                 //检测是否失去连接
@@ -68,12 +68,12 @@
                     if (ucStatus == 4)
                     //确认失去连接后重连
                     {
-                        printf("\r\n正在重连热点和服务器 ......\r\n");
+                        debug_printf("\r\n正在重连热点和服务器 ......\r\n");
                         while (!esp.JoinAP(ApSsid, ApPwd))
                             ;
                         while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
                             ;
-                        printf("\r\n重连热点和服务器成功\r\n");
+                        debug_printf("\r\n重连热点和服务器成功\r\n");
                     }
                     while (!esp.UnvarnishSend())
                         ;
