@@ -36,7 +36,7 @@
             } ENUMAPPsdModeTypeDef;
             void Init();
             void Rst();
-			void SetPin(Pin pinChEn);//设置引脚
+			void SetPin(Pin pinChEn,Pin pinReset);//设置引脚
 			void ChipEnable(bool en=true);//设置芯片有效
             bool Cmd(char *cmd, char *reply1, char *reply2, int waittime);
             void Test();
@@ -64,8 +64,8 @@
 			public:
 			volatile bool FlagTcpClosed;//是否断开连接
 			
-			OutputPort portEnable;
-			
+			OutputPort portEnable;	// 芯片使能
+			OutputPort portReset;		// 芯片复位
     };    
 	
 	void Delay_ms(int ms);

@@ -61,7 +61,7 @@
     void ESP8266Test()
     {
 		static int icnt=0;
-		esp.SetPin(PG13);
+		esp.SetPin(PG13,PG14);
         esp.Init(); //初始化WiFi模块使用的接口和外设
         printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
 

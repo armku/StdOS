@@ -27,13 +27,19 @@ void Esp8266::Init()
 	this->FlagTcpClosed=0;//是否断开连接
 }
 //设置引脚
-void Esp8266::SetPin(Pin pinChEn)
+void Esp8266::SetPin(Pin pinChEn,Pin pinReset)
 {
 	this->portEnable.Set(pinChEn);
 	this->portEnable.OpenDrain = false;
 	this->portEnable.Invert=0;
 	
+	this->portReset.Set(pinReset);
+	this->portReset.OpenDrain=false;
+	this->portReset.Invert=0;
+	
 	this->portEnable.Open();
+	
+	this->portReset.Open();
 }
 //设置芯片有效
 void Esp8266::ChipEnable(bool en)
