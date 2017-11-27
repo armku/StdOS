@@ -15,7 +15,6 @@
     #define TcpServer_IP                 "192.168.0.120"      //要连接的服务器的 IP
     #define TcpServer_Port               "8000"               //要连接的服务器的端口
 	
-	#define macESP8266_CH_ENABLE()                 GPIO_SetBits ( GPIOG, GPIO_Pin_13 )
 	Esp8266 esp;
 	
 	void espRoutin(void * param)
@@ -73,7 +72,6 @@
         printf("\r\n正在配置 ESP8266 ......\r\n");
 		esp.SetPin(PG13);
 		esp.ChipEnable();
-        //macESP8266_CH_ENABLE();
         esp.Test();
         esp.NetModeChoose(Esp8266::STA);
         while (!esp.JoinAP(ApSsid, ApPwd))
