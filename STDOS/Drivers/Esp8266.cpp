@@ -536,6 +536,7 @@ void Esp8266::USART_printf(char *Data, ...)
 	
 	char bufSend[200];
 	int bufSendPos;
+	int bufSendMax=ArrayLength(bufSend);
 	
 	bufSendPos=0;
 
@@ -552,13 +553,13 @@ void Esp8266::USART_printf(char *Data, ...)
             {
                 case 'r':
                     //»Ø³µ·û
-					this->SendData(0x0d);
+					bufSend[bufSendPos++]=0X0D;
                     Data++;
                     break;
 
                 case 'n':
                     //»»ÐÐ·û
-                    this->SendData(0x0a);
+                    bufSend[bufSendPos++]=0X0A;
                     Data++;
                     break;
 
@@ -578,7 +579,7 @@ void Esp8266::USART_printf(char *Data, ...)
                     s = va_arg(ap, const char*);
                     for (;  *s; s++)
                     {
-                        this->SendData(*s);
+                        bufSend[bufSendPos++]=*s;
                     }
                     Data++;
                     break;
@@ -588,7 +589,7 @@ void Esp8266::USART_printf(char *Data, ...)
                     itoa(d, buf, 10);
                     for (s = buf;  *s; s++)
                     {
-                        this->SendData(*s);
+                        bufSend[bufSendPos++]=*s;
                     }
                     Data++;
                     break;
@@ -598,7 +599,7 @@ void Esp8266::USART_printf(char *Data, ...)
             }
         }
         else
-            this->SendData(*Data++);
+            bufSend[bufSendPos++]=*Data++;
     }
 	this->SendData(&bufSend[0],bufSendPos);
 }
