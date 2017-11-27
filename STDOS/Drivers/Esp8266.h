@@ -1,17 +1,17 @@
 #ifndef __BSP_ESP8266_H
     #define __BSP_ESP8266_H
-	
-	#include "Port.h"
-        
+
+    #include "Port.h"
+
     #define RX_BUF_MAX_LEN     1024 
 
-    typedef struct   
+    typedef struct
     {
         char RxBuf[RX_BUF_MAX_LEN];
         int Length;
-		int FlagFinish;
-    }Fram_T;
-    	
+        int FlagFinish;
+    } Fram_T;
+
     class Esp8266
     {
         public:
@@ -36,9 +36,9 @@
             } ENUMAPPsdModeTypeDef;
             void Init();
             void Rst();
-			void SetPin(Pin pinChEn,Pin pinReset);//设置引脚
-			void ChipEnable(bool en=true);//设置芯片有效
-			void ChipReset(bool rst=false);//芯片复位
+            void SetPin(Pin pinChEn, Pin pinReset); //设置引脚
+            void ChipEnable(bool en = true); //设置芯片有效
+            void ChipReset(bool rst = false); //芯片复位
             bool Cmd(char *cmd, char *reply1, char *reply2, int waittime);
             void Test();
             bool NetModeChoose(ENUMNetModeTypeDef enumMode);
@@ -55,16 +55,16 @@
             bool SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, ENUMIDNOTypeDef ucId);
             char *ReceiveString(bool enumEnUnvarnishTx);
         private:
-			char *itoa(int value, char *string, int radix);
-			void USART_printf(char *Data, ...);
-		private:
-			public:
-			volatile bool FlagTcpClosed;//是否断开连接
-			
-			OutputPort portEnable;	// 芯片使能
-			OutputPort portReset;		// 芯片复位
-    };    
-	
-	void Delay_ms(int ms);
-	extern Fram_T strEsp8266_Fram_Record;
+            char *itoa(int value, char *string, int radix);
+            void USART_printf(char *Data, ...);
+        private:
+        public:
+            volatile bool FlagTcpClosed; //是否断开连接
+
+            OutputPort portEnable; // 芯片使能
+            OutputPort portReset; // 芯片复位
+    };
+
+    void Delay_ms(int ms);
+    extern Fram_T strEsp8266_Fram_Record;
 #endif
