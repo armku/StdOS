@@ -17,7 +17,8 @@ void Esp8266::Init()
 {
     this->ChipReset(true);
     this->ChipEnable(false);
-
+	
+	this->RunStep=0;
     this->FlagTcpClosed = 0; //是否断开连接
 }
 
@@ -51,6 +52,7 @@ void Esp8266::ChipEnable(bool en)
 void Esp8266::ChipReset(bool rst)
 {
     this->portReset = rst;
+	this->RunStep=0;
 }
 
 /*
