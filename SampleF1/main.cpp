@@ -115,4 +115,7 @@ int main(void)
 
     Sys.Start();
 }
-
+void Delay_ms(int ms)
+{
+	Sys.Sleep(ms);
+}

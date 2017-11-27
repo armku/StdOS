@@ -2,24 +2,22 @@
 #include <stdio.h>  
 #include <string.h>  
 #include <stdbool.h>
-
-void Delay_ms(int ms);
+#include "stm32f10x.h" 
 
 #define ESP8266TEST
 
 #ifdef ESP8266TEST
-    #define ApSsid                     "dd-wrt"               //要连接的热点的名称
-    //#define ApSsid                       "NETGEAR77"        //要连接的热点的名称
+    //#define ApSsid                     "dd-wrt"               //要连接的热点的名称
+    #define ApSsid                       "NETGEAR77"        //要连接的热点的名称
     #define ApPwd                        "18353217097"        //要连接的热点的密钥
-    #define TcpServer_IP                 "121.42.164.17"      //要连接的服务器的 IP
+    //#define TcpServer_IP                 "121.42.164.17"      //要连接的服务器的 IP
+    #define TcpServer_IP                 "192.168.0.120"      //要连接的服务器的 IP
     #define TcpServer_Port               "8000"               //要连接的服务器的端口
+	
+	#define macESP8266_CH_ENABLE()                 GPIO_SetBits ( GPIOG, GPIO_Pin_13 )
 
-    volatile uint8_t ucTcpClosedFlag = 0;
     Esp8266 esp;
-    char cStr[1500] = 
-    {
-        0
-    };
+	
     /**
      * @brief  ESP8266 （Sta Tcp Client）透传
      * @param  无
@@ -27,6 +25,7 @@ void Delay_ms(int ms);
      */
     void ESP8266Test()
     {
+		static int icnt=0;
         esp.Init(); //初始化WiFi模块使用的接口和外设
         printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
 
@@ -49,10 +48,11 @@ void Delay_ms(int ms);
         printf("\r\n配置 ESP8266 完毕\r\n");
         while (1)
         {
-            sprintf(cStr, "hello world!\r\n");
-            esp.SendString(ENABLE, cStr, 0, Esp8266::SingleID0); //发送数据		
-            Delay_ms(10000);
-            if (ucTcpClosedFlag)
+            sprintf(cStr, "%d hello world!\r\n",++icnt);
+            esp.SendString(ENABLE, cStr, 0, Esp8266::SingleID0); //发送数据	
+			printf("发送数据: %s\r\n",cStr);
+            Delay_ms(500);
+            if (esp.FlagTcpClosed)
             //检测是否失去连接
             {
                 esp.ExitUnvarnishSend(); //退出透传模式			
@@ -88,18 +88,18 @@ void Delay_ms(int ms);
             {
                 ucCh = USART_ReceiveData(USART3);
 
-                if (strEsp8266_Fram_Record .InfBit .FramLength < (RX_BUF_MAX_LEN - 1))
+                if (strEsp8266_Fram_Record .Length < (RX_BUF_MAX_LEN - 1))
                 //预留1个字节写结束符
-                    strEsp8266_Fram_Record .Data_RX_BUF[strEsp8266_Fram_Record .InfBit .FramLength++] = ucCh;
+                    strEsp8266_Fram_Record .RxBuf[strEsp8266_Fram_Record .Length++] = ucCh;
             }
 
             if (USART_GetITStatus(USART3, USART_IT_IDLE) == SET)
             //数据帧接收完毕
             {
-                strEsp8266_Fram_Record .InfBit .FramFinishFlag = 1;
+                strEsp8266_Fram_Record .FlagFinish = 1;
 
                 ucCh = USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
-                ucTcpClosedFlag = strstr(strEsp8266_Fram_Record .Data_RX_BUF, "CLOSED\r\n") ? 1 : 0;
+                esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record .RxBuf, "CLOSED\r\n") ? 1 : 0;
             }
         }
         #ifdef __cplusplus

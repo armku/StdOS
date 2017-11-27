@@ -1,18 +1,17 @@
 #include "Esp8266.h"
-#include "Sys.h"
 #include <stdio.h>  
 #include <string.h>  
 #include <stdbool.h>
+#include "stm32f10x.h" 
 
-struct STRUCT_USARTx_Fram strEsp8266_Fram_Record = 
+#define macESP8266_CH_DISABLE()                GPIO_ResetBits ( GPIOG, GPIO_Pin_13 )
+#define macESP8266_RST_HIGH_LEVEL()            GPIO_SetBits ( GPIOG, GPIO_Pin_14 )
+#define macESP8266_RST_LOW_LEVEL()             GPIO_ResetBits ( GPIOG, GPIO_Pin_14 )
+
+Fram_T strEsp8266_Fram_Record = 
 {
     0
 };
-
-void Delay_ms(int ms)
-{
-	Sys.Sleep(500);
-}
 
 /**
  * @brief  ESP8266初始化函数
@@ -25,6 +24,8 @@ void Esp8266::Init()
     this->USARTConfig();
     macESP8266_RST_HIGH_LEVEL();
     macESP8266_CH_DISABLE();
+	
+	this->FlagTcpClosed=0;//是否断开连接
 }
 
 /**
@@ -141,9 +142,9 @@ void Esp8266::Rst()
  *         0，指令发送失败
  * 调用  ：被外部调用
  */
-bool Esp8266::Cmd(char *cmd, char *reply1, char *reply2, u32 waittime)
+bool Esp8266::Cmd(char *cmd, char *reply1, char *reply2, int waittime)
 {
-    strEsp8266_Fram_Record .InfBit .FramLength = 0; //从新开始接收新的数据包
+    strEsp8266_Fram_Record .Length = 0; //从新开始接收新的数据包
 
     this->USART_printf("%s\r\n", cmd);
 
@@ -153,18 +154,18 @@ bool Esp8266::Cmd(char *cmd, char *reply1, char *reply2, u32 waittime)
 
     Delay_ms(waittime); //延时
 
-    strEsp8266_Fram_Record .Data_RX_BUF[strEsp8266_Fram_Record .InfBit .FramLength] = '\0';
+    strEsp8266_Fram_Record .RxBuf[strEsp8266_Fram_Record .Length] = '\0';
 
-    printf("%s", strEsp8266_Fram_Record .Data_RX_BUF);
+    printf("%s", strEsp8266_Fram_Record .RxBuf);
 
     if ((reply1 != 0) && (reply2 != 0))
-        return ((bool)strstr(strEsp8266_Fram_Record .Data_RX_BUF, reply1) || (bool)strstr(strEsp8266_Fram_Record .Data_RX_BUF, reply2));
+        return ((bool)strstr(strEsp8266_Fram_Record .RxBuf, reply1) || (bool)strstr(strEsp8266_Fram_Record .RxBuf, reply2));
 
     else if (reply1 != 0)
-        return ((bool)strstr(strEsp8266_Fram_Record .Data_RX_BUF, reply1));
+        return ((bool)strstr(strEsp8266_Fram_Record .RxBuf, reply1));
 
     else
-        return ((bool)strstr(strEsp8266_Fram_Record .Data_RX_BUF, reply2));
+        return ((bool)strstr(strEsp8266_Fram_Record .RxBuf, reply2));
 }
 
 /*
@@ -265,7 +266,7 @@ bool Esp8266::BuildAP(char *pSSID, char *pPassWord, ENUMAPPsdModeTypeDef enunPsd
  *         0，配置失败
  * 调用  ：被外部调用
  */
-bool Esp8266::EnableMultipleId(FunctionalState enumEnUnvarnishTx)
+bool Esp8266::EnableMultipleId(bool enumEnUnvarnishTx)
 {
     char cStr[20];
     sprintf(cStr, "AT+CIPMUX=%d", (enumEnUnvarnishTx ? 1 : 0));
@@ -318,7 +319,7 @@ bool Esp8266::LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, ENUMID
  *         0，操作失败
  * 调用  ：被外部调用
  */
-bool Esp8266::StartOrShutServer(FunctionalState enumMode, char *pPortNum, char *pTimeOver)
+bool Esp8266::StartOrShutServer(bool enumMode, char *pPortNum, char *pTimeOver)
 {
     char cCmd1[120], cCmd2[120];
 
@@ -348,17 +349,17 @@ bool Esp8266::StartOrShutServer(FunctionalState enumMode, char *pPortNum, char *
  *         0，获取状态失败
  * 调用  ：被外部调用
  */
-uint8_t Esp8266::GetLinkStatus()
+int Esp8266::GetLinkStatus()
 {
     if (this->Cmd("AT+CIPSTATUS", "OK", 0, 500))
     {
-        if (strstr(strEsp8266_Fram_Record .Data_RX_BUF, "STATUS:2\r\n"))
+        if (strstr(strEsp8266_Fram_Record .RxBuf, "STATUS:2\r\n"))
             return 2;
 
-        else if (strstr(strEsp8266_Fram_Record .Data_RX_BUF, "STATUS:3\r\n"))
+        else if (strstr(strEsp8266_Fram_Record .RxBuf, "STATUS:3\r\n"))
             return 3;
 
-        else if (strstr(strEsp8266_Fram_Record .Data_RX_BUF, "STATUS:4\r\n"))
+        else if (strstr(strEsp8266_Fram_Record .RxBuf, "STATUS:4\r\n"))
             return 4;
     }
     return 0;
@@ -371,34 +372,34 @@ uint8_t Esp8266::GetLinkStatus()
  * 返回  : 端口（Id）的连接状态，低5位为有效位，分别对应Id5~0，某位若置1表该Id建立了连接，若被清0表该Id未建立连接
  * 调用  ：被外部调用
  */
-uint8_t Esp8266::GetIdLinkStatus()
+int Esp8266::GetIdLinkStatus()
 {
     uint8_t ucIdLinkStatus = 0x00;
 
 
     if (this->Cmd("AT+CIPSTATUS", "OK", 0, 500))
     {
-        if (strstr(strEsp8266_Fram_Record .Data_RX_BUF, "+CIPSTATUS:0,"))
+        if (strstr(strEsp8266_Fram_Record .RxBuf, "+CIPSTATUS:0,"))
             ucIdLinkStatus |= 0x01;
         else
             ucIdLinkStatus &= ~0x01;
 
-        if (strstr(strEsp8266_Fram_Record .Data_RX_BUF, "+CIPSTATUS:1,"))
+        if (strstr(strEsp8266_Fram_Record .RxBuf, "+CIPSTATUS:1,"))
             ucIdLinkStatus |= 0x02;
         else
             ucIdLinkStatus &= ~0x02;
 
-        if (strstr(strEsp8266_Fram_Record .Data_RX_BUF, "+CIPSTATUS:2,"))
+        if (strstr(strEsp8266_Fram_Record .RxBuf, "+CIPSTATUS:2,"))
             ucIdLinkStatus |= 0x04;
         else
             ucIdLinkStatus &= ~0x04;
 
-        if (strstr(strEsp8266_Fram_Record .Data_RX_BUF, "+CIPSTATUS:3,"))
+        if (strstr(strEsp8266_Fram_Record .RxBuf, "+CIPSTATUS:3,"))
             ucIdLinkStatus |= 0x08;
         else
             ucIdLinkStatus &= ~0x08;
 
-        if (strstr(strEsp8266_Fram_Record .Data_RX_BUF, "+CIPSTATUS:4,"))
+        if (strstr(strEsp8266_Fram_Record .RxBuf, "+CIPSTATUS:4,"))
             ucIdLinkStatus |= 0x10;
         else
             ucIdLinkStatus &= ~0x10;
@@ -415,12 +416,12 @@ uint8_t Esp8266::GetIdLinkStatus()
  *         1，获取成功
  * 调用  ：被外部调用
  */
-uint8_t Esp8266::InquireApIp(char *pApIp, uint8_t ucArrayLength)
+int Esp8266::InquireApIp(char *pApIp, int ucArrayLength)
 {
     char uc;
     char *pCh;
     this->Cmd("AT+CIFSR", "OK", 0, 500);
-    pCh = strstr(strEsp8266_Fram_Record .Data_RX_BUF, "APIP,\"");
+    pCh = strstr(strEsp8266_Fram_Record .RxBuf, "APIP,\"");
     if (pCh)
         pCh += 6;
     else
@@ -460,7 +461,7 @@ bool Esp8266::UnvarnishSend()
  * 返回  : 无
  * 调用  ：被外部调用
  */
-void Esp8266::ExitUnvarnishSend(void)
+void Esp8266::ExitUnvarnishSend()
 {
     Delay_ms(1000);
     this->USART_printf("+++");
@@ -478,7 +479,7 @@ void Esp8266::ExitUnvarnishSend(void)
  *         0，发送失败
  * 调用  ：被外部调用
  */
-bool Esp8266::SendString(FunctionalState enumEnUnvarnishTx, char *pStr, u32 ulStrLength, ENUMIDNOTypeDef ucId)
+bool Esp8266::SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, ENUMIDNOTypeDef ucId)
 {
     char cStr[20];
     bool bRet = false;
@@ -507,20 +508,20 @@ bool Esp8266::SendString(FunctionalState enumEnUnvarnishTx, char *pStr, u32 ulSt
  * 返回  : 接收到的字符串首地址
  * 调用  ：被外部调用
  */
-char *Esp8266::ReceiveString(FunctionalState enumEnUnvarnishTx)
+char *Esp8266::ReceiveString(bool enumEnUnvarnishTx)
 {
     char *pRecStr = 0;
-    strEsp8266_Fram_Record .InfBit .FramLength = 0;
-    strEsp8266_Fram_Record .InfBit .FramFinishFlag = 0;
-    while (!strEsp8266_Fram_Record .InfBit .FramFinishFlag)
+    strEsp8266_Fram_Record .Length = 0;
+    strEsp8266_Fram_Record .FlagFinish = 0;
+    while (!strEsp8266_Fram_Record .FlagFinish)
         ;
-    strEsp8266_Fram_Record .Data_RX_BUF[strEsp8266_Fram_Record .InfBit .FramLength] = '\0';
+    strEsp8266_Fram_Record .RxBuf[strEsp8266_Fram_Record .Length] = '\0';
     if (enumEnUnvarnishTx)
-        pRecStr = strEsp8266_Fram_Record .Data_RX_BUF;
+        pRecStr = strEsp8266_Fram_Record .RxBuf;
     else
     {
-        if (strstr(strEsp8266_Fram_Record .Data_RX_BUF, "+IPD"))
-            pRecStr = strEsp8266_Fram_Record .Data_RX_BUF;
+        if (strstr(strEsp8266_Fram_Record .RxBuf, "+IPD"))
+            pRecStr = strEsp8266_Fram_Record .RxBuf;
     }
     return pRecStr;
 }
