@@ -605,3 +605,10 @@ void Esp8266::SendData(char ch)
     while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
     ;
 }
+void Esp8266::SendData(char *buf,int len)
+{
+	for(int i=0;i<len;i++)
+	{
+		this->SendData(buf[i]);
+	}
+}
