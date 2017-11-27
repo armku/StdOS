@@ -54,6 +54,11 @@ int SerialPort_Closeing(int result)
 #define UARTS {USART1, USART2, USART3, UART4, UART5}
 
 #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
+
+#include "Drivers\Esp8266.h"
+#include "stdio.h"
+#include <string.h> 
+extern Esp8266 esp;
 // 真正的串口中断函数
 void OnUsartReceive(ushort num, void *param)
 {
@@ -61,7 +66,7 @@ void OnUsartReceive(ushort num, void *param)
     USART_TypeDef *const g_Uart_Ports[] = UARTS;
 
     //if (sp && sp->HasHandler())
-    if (sp)
+    if ((sp)&&(num!=2))
     {
         if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
         {
@@ -73,6 +78,28 @@ void OnUsartReceive(ushort num, void *param)
 			sp->ReceiveTask2();
         }
     }
+	if(num==2)
+	{
+		uint8_t ucCh;
+
+        if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+        {
+            ucCh = USART_ReceiveData(USART3);
+
+            if (strEsp8266_Fram_Record .Length < (RX_BUF_MAX_LEN - 1))
+            //预留1个字节写结束符
+                strEsp8266_Fram_Record .RxBuf[strEsp8266_Fram_Record .Length++] = ucCh;
+        }
+
+        if (USART_GetITStatus(USART3, USART_IT_IDLE) == SET)
+        //数据帧接收完毕
+        {
+            strEsp8266_Fram_Record .FlagFinish = 1;
+
+            ucCh = USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
+            esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record .RxBuf, "CLOSED\r\n") ? 1 : 0;
+        }
+	}
 }
 
 void SerialPort::Register(TransportHandler handler, void *param)
