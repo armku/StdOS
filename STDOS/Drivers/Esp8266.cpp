@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include "stm32f10x.h" 
 
-#define macESP8266_CH_DISABLE()                GPIO_ResetBits ( GPIOG, GPIO_Pin_13 )
+//#define macESP8266_CH_DISABLE()                GPIO_ResetBits ( GPIOG, GPIO_Pin_13 )
 #define macESP8266_RST_HIGH_LEVEL()            GPIO_SetBits ( GPIOG, GPIO_Pin_14 )
 #define macESP8266_RST_LOW_LEVEL()             GPIO_ResetBits ( GPIOG, GPIO_Pin_14 )
 
@@ -23,7 +23,8 @@ void Esp8266::Init()
     this->GPIOConfig();
     this->USARTConfig();
     macESP8266_RST_HIGH_LEVEL();
-    macESP8266_CH_DISABLE();
+	this->ChipEnable(false);
+//    macESP8266_CH_DISABLE();
 	
 	this->FlagTcpClosed=0;//是否断开连接
 }
@@ -55,7 +56,7 @@ void Esp8266::GPIOConfig()
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOG, &GPIO_InitStructure);
+    //GPIO_Init(GPIOG, &GPIO_InitStructure);
     /* 配置 RST 引脚*/
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOG, ENABLE);
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14;
