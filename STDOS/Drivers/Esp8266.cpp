@@ -17,34 +17,37 @@ Fram_T strEsp8266_Fram_Record =
 void Esp8266::Init()
 {
     this->ChipReset(true);
-	this->ChipEnable(false);
-	
-	this->FlagTcpClosed=0;//是否断开连接
+    this->ChipEnable(false);
+
+    this->FlagTcpClosed = 0; //是否断开连接
 }
+
 //设置引脚
-void Esp8266::SetPin(Pin pinChEn,Pin pinReset)
+void Esp8266::SetPin(Pin pinChEn, Pin pinReset)
 {
-	this->portEnable.Set(pinChEn);
-	this->portEnable.OpenDrain = false;
-	this->portEnable.Invert=0;
-	
-	this->portReset.Set(pinReset);
-	this->portReset.OpenDrain=false;
-	this->portReset.Invert=0;
-	
-	this->portEnable.Open();
-	
-	this->portReset.Open();
+    this->portEnable.Set(pinChEn);
+    this->portEnable.OpenDrain = false;
+    this->portEnable.Invert = 0;
+
+    this->portReset.Set(pinReset);
+    this->portReset.OpenDrain = false;
+    this->portReset.Invert = 0;
+
+    this->portEnable.Open();
+
+    this->portReset.Open();
 }
+
 //设置芯片有效
 void Esp8266::ChipEnable(bool en)
 {
-	this->portEnable=en;
+    this->portEnable = en;
 }
+
 //芯片复位
 void Esp8266::ChipReset(bool rst)
 {
-	this->portReset=rst;
+    this->portReset = rst;
 }
 
 /*
@@ -59,9 +62,9 @@ void Esp8266::Rst()
     #if 0
         this->Cmd("AT+RST", "OK", "ready", 2500);
     #else 
-		this->ChipReset(false);
+        this->ChipReset(false);
         Delay_ms(500);
-		this->ChipReset(true);
+        this->ChipReset(true);
     #endif 
 
 }
@@ -122,7 +125,7 @@ void Esp8266::Test()
 {
     char count = 0;
 
-	this->ChipReset(true);
+    this->ChipReset(true);
     Delay_ms(1000);
     while (count < 10)
     {
@@ -462,7 +465,7 @@ char *Esp8266::ReceiveString(bool enumEnUnvarnishTx)
 
 char *Esp8266::itoa(int value, char *string, int radix)
 {
-	int i, d;
+    int i, d;
     int flag = 0;
     char *ptr = string;
 
@@ -507,6 +510,7 @@ char *Esp8266::itoa(int value, char *string, int radix)
 
     return string;
 }
+
 #include <stdarg.h>
 /*
  * 函数名：USART2_printf
@@ -527,7 +531,7 @@ void Esp8266::USART_printf(char *Data, ...)
     int d;
     char buf[16];
 
-	USART_TypeDef *USARTx=USART3;
+    USART_TypeDef *USARTx = USART3;
     va_list ap;
     va_start(ap, Data);
 
