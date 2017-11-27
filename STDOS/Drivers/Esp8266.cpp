@@ -4,8 +4,8 @@
 #include <stdbool.h>
 #include "stm32f10x.h" 
 
-#define macESP8266_RST_HIGH_LEVEL()            GPIO_SetBits ( GPIOG, GPIO_Pin_14 )
-#define macESP8266_RST_LOW_LEVEL()             GPIO_ResetBits ( GPIOG, GPIO_Pin_14 )
+//#define macESP8266_RST_HIGH_LEVEL()            GPIO_SetBits ( GPIOG, GPIO_Pin_14 )
+//#define macESP8266_RST_LOW_LEVEL()             GPIO_ResetBits ( GPIOG, GPIO_Pin_14 )
 
 Fram_T strEsp8266_Fram_Record = 
 {
@@ -20,7 +20,8 @@ Fram_T strEsp8266_Fram_Record =
 void Esp8266::Init()
 {
     this->USARTConfig();
-    macESP8266_RST_HIGH_LEVEL();
+    this->ChipReset(true);
+	//macESP8266_RST_HIGH_LEVEL();
 	this->ChipEnable(false);
 	
 	this->FlagTcpClosed=0;//是否断开连接
@@ -126,9 +127,11 @@ void Esp8266::Rst()
         this->Cmd("AT+RST", "OK", "ready", 2500);
 
     #else 
-        macESP8266_RST_LOW_LEVEL();
+		this->ChipReset(false);
+        //macESP8266_RST_LOW_LEVEL();
         Delay_ms(500);
-        macESP8266_RST_HIGH_LEVEL();
+		this->ChipReset(true);
+//        macESP8266_RST_HIGH_LEVEL();
     #endif 
 
 }
@@ -189,7 +192,8 @@ void Esp8266::Test()
 {
     char count = 0;
 
-    macESP8266_RST_HIGH_LEVEL();
+	this->ChipReset(true);
+    //macESP8266_RST_HIGH_LEVEL();
     Delay_ms(1000);
     while (count < 10)
     {
