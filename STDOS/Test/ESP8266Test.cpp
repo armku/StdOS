@@ -71,6 +71,7 @@
             0
         };
         printf("\r\n’˝‘⁄≈‰÷√ ESP8266 ......\r\n");
+		esp.SetPin(PG13);
         macESP8266_CH_ENABLE();
         esp.Test();
         esp.NetModeChoose(Esp8266::STA);

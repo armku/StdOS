@@ -36,6 +36,11 @@ void Esp8266::SetPin(Pin pinChEn)
 	
 	this->pChEnable.Open();
 }
+//设置芯片有效
+void Esp8266::ChipEnable(bool en)
+{
+	this->pChEnable=en;
+}
 /**
  * @brief  初始化ESP8266用到的GPIO引脚
  * @param  无

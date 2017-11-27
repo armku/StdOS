@@ -37,6 +37,7 @@
             void Init();
             void Rst();
 			void SetPin(Pin pinChEn);//设置引脚
+			void ChipEnable(bool en=true);//设置芯片有效
             bool Cmd(char *cmd, char *reply1, char *reply2, int waittime);
             void Test();
             bool NetModeChoose(ENUMNetModeTypeDef enumMode);
