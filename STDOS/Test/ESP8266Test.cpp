@@ -43,7 +43,16 @@
                 printf("\r\n配置 ESP8266 完毕\r\n");
                 esp.RunStep++;
                 break;
-            case 1:
+			case 1:
+				esp.RunStep++;
+                break;
+            case 2:
+				esp.RunStep++;
+                break;
+            case 3:
+				esp.RunStep++;
+                break;
+            case 4:
                 sprintf(cStr, "%d hello world!\r\n", ++icnt);
                 esp.SendString(ENABLE, cStr, 0, Esp8266::SingleID0); //发送数据	
                 printf("发送数据: %s\r\n", cStr);
