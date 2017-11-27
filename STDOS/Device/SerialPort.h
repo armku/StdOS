@@ -86,6 +86,7 @@ private:
 	void OnWrite2();
 public:
 	void ReceiveTask2();//接收到数据启动延时接收
+	void ReceiveTask3();//空闲中断收到数据接收完成。
 };
 
 // 串口设备配置
