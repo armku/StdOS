@@ -2,6 +2,7 @@
     #define __BSP_ESP8266_H
 
     #include "Port.h"
+	#include "SerialPort.h"
 
     #define RX_BUF_MAX_LEN     1024 
 
@@ -37,6 +38,7 @@
             void Init();
             void Rst();
             void SetPin(Pin pinChEn, Pin pinReset); //设置引脚
+			void SetSerialPort(SerialPort *sp);
             void ChipEnable(bool en = true); //设置芯片有效
             void ChipReset(bool rst = false); //芯片复位
             bool Cmd(char *cmd, char *reply1, char *reply2, int waittime);
@@ -58,6 +60,8 @@
             char *itoa(int value, char *string, int radix);
             void USART_printf(char *Data, ...);
         private:
+			SerialPort *psp;
+			void SendData(char ch);//发送数据
         public:
             volatile bool FlagTcpClosed; //是否断开连接
 

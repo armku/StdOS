@@ -3,6 +3,7 @@
 #include <string.h>  
 #include <stdbool.h>
 #include "stm32f10x.h" 
+#include "SerialPort.h"
 #include "Sys.h"
 
 #define ESP8266TEST
@@ -53,6 +54,7 @@
         }
     }
     void USARTConfig();
+	SerialPort sp3(COM3);
     /**
      * @brief  ESP8266 （Sta Tcp Client）透传
      * @param  无
@@ -63,6 +65,7 @@
         static int icnt = 0;
         esp.SetPin(PG13, PG14);
         USARTConfig();
+		esp.SetSerialPort(&sp3);
         esp.Init(); //初始化WiFi模块使用的接口和外设
         printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
 

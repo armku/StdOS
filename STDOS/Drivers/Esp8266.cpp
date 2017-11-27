@@ -37,6 +37,10 @@ void Esp8266::SetPin(Pin pinChEn, Pin pinReset)
 
     this->portReset.Open();
 }
+void Esp8266::SetSerialPort(SerialPort *sp)
+{
+	this->psp=sp;
+}
 
 //设置芯片有效
 void Esp8266::ChipEnable(bool en)
@@ -600,4 +604,12 @@ void Esp8266::USART_printf(char *Data, ...)
         while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
             ;
     }
+}
+//发送数据
+void Esp8266::SendData(char ch)
+{
+	USART_TypeDef *USARTx = USART3;
+	USART_SendData(USARTx,  ch);
+    while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
+    ;
 }
