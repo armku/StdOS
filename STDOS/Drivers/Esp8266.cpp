@@ -53,18 +53,18 @@ void Esp8266::ChipEnable(bool en)
  */
 void Esp8266::GPIOConfig()
 {
-    /*定义一个GPIO_InitTypeDef类型的结构体*/
-    GPIO_InitTypeDef GPIO_InitStructure;
-    /* 配置 CH_PD 引脚*/
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOG, ENABLE);
-    //GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    //GPIO_Init(GPIOG, &GPIO_InitStructure);
-    /* 配置 RST 引脚*/
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOG, ENABLE);
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14;
-    GPIO_Init(GPIOG, &GPIO_InitStructure);
+//    /*定义一个GPIO_InitTypeDef类型的结构体*/
+//    GPIO_InitTypeDef GPIO_InitStructure;
+//    /* 配置 CH_PD 引脚*/
+//    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOG, ENABLE);
+//    //GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
+//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+//    //GPIO_Init(GPIOG, &GPIO_InitStructure);
+//    /* 配置 RST 引脚*/
+//    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOG, ENABLE);
+//    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14;
+//    GPIO_Init(GPIOG, &GPIO_InitStructure);
 }
 
 /**
