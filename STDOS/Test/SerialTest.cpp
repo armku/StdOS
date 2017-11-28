@@ -1,7 +1,6 @@
 #include "TInterrupt.h"
 #include "TTime.h"
 #include "SerialPort.h"
-#include "Fifo.h"
 
 //#define DEBUGSerialPort
 

@@ -614,11 +614,6 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
             </File>
-            <File>
-              <FileName>FIFO.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\FIFO.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1715,11 +1710,6 @@
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FIFO.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\FIFO.cpp</FilePath>
             </File>
           </Files>
         </Group>
