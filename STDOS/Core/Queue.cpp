@@ -137,8 +137,8 @@ FIFO::FIFO()
 {
     this->pBuf = 0;
     this->BufSize = 0;
-    this->Read = 0;
-    this->Write = 0;
+    this->_read = 0;
+    this->_write = 0;
 }
 
 void FIFO::SetBuf(void *buf, int len)
@@ -153,9 +153,9 @@ void FIFO::SetBuf(void *buf, int len)
 
 void FIFO::Clear()
 {
-    this->Write = 0;
-    this->Read = 0;
-    this->Count = 0;
+    this->_write = 0;
+    this->_read = 0;
+    this->_count = 0;
 }
 
 int FIFO::Push(byte da)
@@ -164,14 +164,14 @@ int FIFO::Push(byte da)
     {
         return  - 1;
     }
-    this->pBuf[this->Write] = da;
-    if (++this->Write >= this->BufSize)
+    this->pBuf[this->_write] = da;
+    if (++this->_write >= this->BufSize)
     {
-        this->Write = 0;
+        this->_write = 0;
     }
-    if (this->Count < this->BufSize)
+    if (this->_count < this->BufSize)
     {
-        this->Count++;
+        this->_count++;
         return 0;
     }
     else
@@ -182,14 +182,14 @@ int FIFO::Push(byte da)
 
 int FIFO::Pop(byte *da)
 {
-    *da = this->pBuf[this->Read];
-    if (++this->Read >= this->BufSize)
+    *da = this->pBuf[this->_read];
+    if (++this->_read >= this->BufSize)
     {
-        this->Read = 0;
+        this->_read = 0;
     }
-    if (this->Count)
+    if (this->_count)
     {
-        this->Count--;
+        this->_count--;
         return 0;
     }
     else
@@ -200,11 +200,11 @@ int FIFO::Pop(byte *da)
 
 bool FIFO::Empty()
 {
-    return this->Count == 0;
+    return this->_count == 0;
 }
 
 bool FIFO::Full()
 {
-    return this->Count >= this->BufSize;
+    return this->_count >= this->BufSize;
 }
 

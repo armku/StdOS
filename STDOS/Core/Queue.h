@@ -17,10 +17,10 @@ class FIFO
 		void Clear();					
 	private:			
 		byte *pBuf; /* 缓冲区 */		
-		int Write; /* 缓冲区写指针 */
+		int _write; /* 缓冲区写指针 */
 		int BufSize; /* 缓冲区大小 */
-		int Read; /* 缓冲区读指针 */
-		int Count; /* 数据个数 */	
+		int _read; /* 缓冲区读指针 */
+		int _count; /* 数据个数 */	
 };
 class Queue
 {
