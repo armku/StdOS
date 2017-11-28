@@ -12,8 +12,10 @@ class FIFO
 		void SetBuf(void *buf, int len);
 		int Push(byte da);
 		int Pop(byte *da);
-		bool Empty();
-		bool Full();
+		bool Empty() const { return _count == 0; }	// 队列空
+		int Capacity() const { return BufSize; }	// 队列容量
+		bool Full() const { return this->_count >= this->BufSize;}// 队列满
+		int Length() const { return _count; }		// 队列大小
 		void Clear();					
 	private:			
 		byte *pBuf; /* 缓冲区 */		
