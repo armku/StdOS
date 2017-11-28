@@ -133,7 +133,7 @@
 //    }
 //    return ret;
 //}
-FIFO::FIFO()
+Queue::Queue()
 {
     this->pBuf = 0;
     this->_capacity = 0;
@@ -141,7 +141,7 @@ FIFO::FIFO()
     this->_write = 0;
 }
 
-void FIFO::SetBuf(void *buf, int len)
+void Queue::SetBuf(void *buf, int len)
 {
     if (len >= 0)
     {
@@ -151,14 +151,14 @@ void FIFO::SetBuf(void *buf, int len)
     this->Clear();
 }
 
-void FIFO::Clear()
+void Queue::Clear()
 {
     this->_write = 0;
     this->_read = 0;
     this->_count = 0;
 }
 
-int FIFO::Enqueue(byte da)
+int Queue::Enqueue(byte da)
 {
     if (this->pBuf == 0)
     {
@@ -180,7 +180,7 @@ int FIFO::Enqueue(byte da)
     }
 }
 
-byte FIFO::Dequeue()
+byte Queue::Dequeue()
 {
     byte ret = this->pBuf[this->_read];
     if (++this->_read >= this->_capacity)
@@ -199,7 +199,7 @@ byte FIFO::Dequeue()
 	return ret;
 }
 // 批量写入
-int FIFO::Write(const Buffer& bs)
+int Queue::Write(const Buffer& bs)
 {
 	for(int i=0;i<bs.Length();i++)
 	{
@@ -208,7 +208,7 @@ int FIFO::Write(const Buffer& bs)
 	return bs.Length();
 }
 // 批量读取
-int FIFO::Read(Buffer& bs)
+int Queue::Read(Buffer& bs)
 {
 	int len=this->Length();
 	for(int i=0;i<len;i++)
