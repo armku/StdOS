@@ -32,25 +32,25 @@ class FIFO
 class Queue:public FIFO
 {
 private:
-	Array _s;	// 数据流
-	int _head;		// 头部位置
-    int _tail;		// 尾部位置
-	int _size;		// 长度
+//	Array _s;	// 数据流
+//	int _head;		// 头部位置
+//    int _tail;		// 尾部位置
+//	int _size;		// 长度
 
 public:
-	Queue();
+//	Queue();
 
-	bool Empty() const { return _size == 0; }	// 队列空
-	int Capacity() const { return _s.Capacity(); }	// 队列容量
-	int Length() const { return _size; }		// 队列大小
+//	bool Empty() const { return _size == 0; }	// 队列空
+//	int Capacity() const { return _s.Capacity(); }	// 队列容量
+//	int Length() const { return _size; }		// 队列大小
 	void SetCapacity(int len);
 
-	void Clear();
+//	void Clear();
 
-	void Enqueue(byte dat);
-	byte Dequeue();
+//	void Enqueue(byte dat);
+//	byte Dequeue();
 
-	int Write(const Buffer& bs);	// 批量写入
-	int Read(Buffer& bs);		// 批量读取
+//	int Write(const Buffer& bs);	// 批量写入
+//	int Read(Buffer& bs);		// 批量读取
 };
 #endif
