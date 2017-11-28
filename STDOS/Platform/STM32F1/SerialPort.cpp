@@ -66,7 +66,7 @@ void OnUsartReceive(ushort num, void *param)
     USART_TypeDef *const g_Uart_Ports[] = UARTS;
 
     //if (sp && sp->HasHandler())
-    if ((sp)&&(num!=COM3))
+    if ((sp)&&(num!=COM3)&&(num !=COM1))
     {
         if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
         {
@@ -78,6 +78,18 @@ void OnUsartReceive(ushort num, void *param)
 			sp->ReceiveTask2();
         }
     }
+	if(num == COM1)
+	{
+		if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
+        {
+            byte ch = USART_ReceiveData(g_Uart_Ports[sp->Index]);
+            if (sp->Index < 10)
+            {
+                sp->Rx.Enqueue(ch);
+            }
+			sp->ReceiveTask2();
+        }
+	}
 	if(num==COM3)
 	{
 		uint8_t ucCh;
