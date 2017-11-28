@@ -77,7 +77,7 @@ private:
 
 	void*	_task;
 	uint	_taskidRx;
-	void ReceiveTask();
+	//void ReceiveTask();
 
 	void OnInit();
 	bool OnSet();
@@ -86,6 +86,7 @@ private:
 	void OnWrite2();
 	void OnWrite3(const Buffer &bs);//add
 public:
+	void ReceiveTask();//临时修改
 	void ReceiveTask2();//接收到数据启动延时接收
 	void ReceiveTask3();//空闲中断收到数据接收完成。
 };
