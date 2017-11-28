@@ -95,7 +95,7 @@ void OnUsartReceive(ushort num, void *param)
 			sp->ReceiveTask3();			
         }
     }
-	if(num==COM3)
+	if((num==COM3)&&(sp))
 	{
         if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
         {
