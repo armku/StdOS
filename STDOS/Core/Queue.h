@@ -10,8 +10,8 @@ class FIFO
 	public:
 		FIFO();
 		void SetBuf(void *buf, int len);
-		int Push(byte da);
-		int Pop(byte *da);
+		int Enqueue(byte da);
+		int Dequeue(byte *da);
 		bool Empty() const { return _count == 0; }	// 队列空
 		int Capacity() const { return _capacity; }	// 队列容量
 		bool Full() const { return this->_count >= this->_capacity;}// 队列满
@@ -24,7 +24,7 @@ class FIFO
 		int _read; /* 缓冲区读指针 */
 		int _count; /* 数据个数 */	
 };
-class Queue
+class Queue:public FIFO
 {
 private:
 	Array _s;	// 数据流

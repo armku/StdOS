@@ -158,7 +158,7 @@ void FIFO::Clear()
     this->_count = 0;
 }
 
-int FIFO::Push(byte da)
+int FIFO::Enqueue(byte da)
 {
     if (this->pBuf == 0)
     {
@@ -180,7 +180,7 @@ int FIFO::Push(byte da)
     }
 }
 
-int FIFO::Pop(byte *da)
+int FIFO::Dequeue(byte *da)
 {
     *da = this->pBuf[this->_read];
     if (++this->_read >= this->_capacity)
