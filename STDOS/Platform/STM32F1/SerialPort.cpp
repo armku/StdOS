@@ -88,13 +88,10 @@ void OnUsartReceive(ushort num, void *param)
             {
                 sp->Rx.Enqueue(ch);
             }
-			sp->ReceiveTask2();
         }
 		 if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_IDLE) == SET)
         //数据帧接收完毕
         {
-            strEsp8266_Fram_Record .FlagFinish = 1;
-
             ch = USART_ReceiveData(g_Uart_Ports[sp->Index]); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)            
 			sp->ReceiveTask();
         }
@@ -270,7 +267,7 @@ bool SerialPort::OnOpen()
     USART_Init(g_Uart_Ports[this->Index], &p);
 
     USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_RXNE, ENABLE); // 串口接收中断配置
-	if(this->Index==COM3)
+	if(this->Index==COM1 || this->Index == COM3)
 	{
 		USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 	}
