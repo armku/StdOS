@@ -67,7 +67,7 @@ void OnUsartReceive(ushort num, void *param)
 	byte ch;
 
     //if (sp && sp->HasHandler())
-    if ((sp)&&(num!=COM3)&&(num !=COM1))
+    if ((sp)&&(num!=COM3))
     {
         if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
         {
@@ -76,26 +76,14 @@ void OnUsartReceive(ushort num, void *param)
             {
                 sp->Rx.Enqueue(ch);
             }
-			sp->ReceiveTask2();
         }
-    }
-	if(num == COM1)
-	{
-		if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
-        {
-            ch = USART_ReceiveData(g_Uart_Ports[sp->Index]);
-            if (sp->Index < 10)
-            {
-                sp->Rx.Enqueue(ch);
-            }
-        }
-		 if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_IDLE) == SET)
+		if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_IDLE) == SET)
         //数据帧接收完毕
         {
             ch = USART_ReceiveData(g_Uart_Ports[sp->Index]); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)            
 			sp->ReceiveTask();
         }
-	}
+    }
 	if(num==COM3)
 	{
         if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
