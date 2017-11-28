@@ -136,7 +136,7 @@ int Queue::Read(Buffer &bs)
 FIFO::FIFO()
 {
     this->pBuf = 0;
-    this->BufSize = 0;
+    this->_capacity = 0;
     this->_read = 0;
     this->_write = 0;
 }
@@ -146,7 +146,7 @@ void FIFO::SetBuf(void *buf, int len)
     if (len >= 0)
     {
         this->pBuf = (byte*)buf;
-        this->BufSize = len;
+        this->_capacity = len;
     }
     this->Clear();
 }
@@ -165,11 +165,11 @@ int FIFO::Push(byte da)
         return  - 1;
     }
     this->pBuf[this->_write] = da;
-    if (++this->_write >= this->BufSize)
+    if (++this->_write >= this->_capacity)
     {
         this->_write = 0;
     }
-    if (this->_count < this->BufSize)
+    if (this->_count < this->_capacity)
     {
         this->_count++;
         return 0;
@@ -183,7 +183,7 @@ int FIFO::Push(byte da)
 int FIFO::Pop(byte *da)
 {
     *da = this->pBuf[this->_read];
-    if (++this->_read >= this->BufSize)
+    if (++this->_read >= this->_capacity)
     {
         this->_read = 0;
     }

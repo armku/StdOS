@@ -13,14 +13,14 @@ class FIFO
 		int Push(byte da);
 		int Pop(byte *da);
 		bool Empty() const { return _count == 0; }	// 队列空
-		int Capacity() const { return BufSize; }	// 队列容量
-		bool Full() const { return this->_count >= this->BufSize;}// 队列满
+		int Capacity() const { return _capacity; }	// 队列容量
+		bool Full() const { return this->_count >= this->_capacity;}// 队列满
 		int Length() const { return _count; }		// 队列大小
 		void Clear();					
 	private:			
 		byte *pBuf; /* 缓冲区 */		
 		int _write; /* 缓冲区写指针 */
-		int BufSize; /* 缓冲区大小 */
+		int _capacity; /* 缓冲区大小 */
 		int _read; /* 缓冲区读指针 */
 		int _count; /* 数据个数 */	
 };
