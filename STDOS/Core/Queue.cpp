@@ -198,12 +198,12 @@ int FIFO::Pop(byte *da)
     }
 }
 
-bool FIFO::BufIsEmpty()
+bool FIFO::Empty()
 {
     return this->Count == 0;
 }
 
-bool FIFO::BufIsFull()
+bool FIFO::Full()
 {
     return this->Count >= this->BufSize;
 }

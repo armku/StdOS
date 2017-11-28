@@ -12,8 +12,8 @@ class FIFO
 		void SetBuf(void *buf, int len);
 		int Push(byte da);
 		int Pop(byte *da);
-		bool BufIsEmpty();
-		bool BufIsFull();
+		bool Empty();
+		bool Full();
 		void Clear();					
 	private:			
 		byte *pBuf; /* »º³åÇø */		
