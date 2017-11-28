@@ -81,7 +81,7 @@ void OnUsartReceive(ushort num, void *param)
         //数据帧接收完毕
         {
             ch = USART_ReceiveData(g_Uart_Ports[sp->Index]); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)            
-			sp->ReceiveTask();
+			sp->ReceiveTask3();
         }
     }
 	if(num==COM3)
