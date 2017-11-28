@@ -99,6 +99,8 @@
         bs.Show(true);
         return 0;
     }
+	char com3bufrx[100];
+	char com3buftx[100];
     SerialPort sp3(COM3);
     /**
      * @brief  ESP8266 £¨Sta Tcp Client£©Í¸´«
@@ -111,6 +113,8 @@
 
         sp3.SetBaudRate(115200);
         sp3.Register(OnUsart3Read);
+		sp3.Rx.SetBuf(com3bufrx,ArrayLength(com3bufrx));
+		sp3.Tx.SetBuf(com3buftx,ArrayLength(com3buftx));
         sp3.Open();
 
         esp.SetSerialPort(&sp3);

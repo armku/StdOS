@@ -78,7 +78,7 @@ void OnUsartReceive(ushort num, void *param)
             //Ô¤Áô1¸ö×Ö½ÚÐ´½áÊø·û
                 strEsp8266_Fram_Record .RxBuf[strEsp8266_Fram_Record .Length++] = ch;
 			}
-			else if (sp->Index < 10)
+			//else if (sp->Index < 10)
             {
                 sp->Rx.Enqueue(ch);
             }
