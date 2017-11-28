@@ -10,13 +10,18 @@ class FIFO
 	public:
 		FIFO();
 		void SetBuf(void *buf, int len);
-		int Enqueue(byte da);
-		int Dequeue(byte *da);
+		
 		bool Empty() const { return _count == 0; }	// 队列空
 		int Capacity() const { return _capacity; }	// 队列容量
 		bool Full() const { return this->_count >= this->_capacity;}// 队列满
 		int Length() const { return _count; }		// 队列大小
-		void Clear();					
+		void Clear();
+
+		int Enqueue(byte da);
+		byte Dequeue();
+		
+		int Write(const Buffer& bs);	// 批量写入
+		int Read(Buffer& bs);		// 批量读取
 	private:			
 		byte *pBuf; /* 缓冲区 */		
 		int _write; /* 缓冲区写指针 */

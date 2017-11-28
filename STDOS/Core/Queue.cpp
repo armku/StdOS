@@ -180,9 +180,9 @@ int FIFO::Enqueue(byte da)
     }
 }
 
-int FIFO::Dequeue(byte *da)
+byte FIFO::Dequeue()
 {
-    *da = this->pBuf[this->_read];
+    byte ret = this->pBuf[this->_read];
     if (++this->_read >= this->_capacity)
     {
         this->_read = 0;
@@ -190,10 +190,11 @@ int FIFO::Dequeue(byte *da)
     if (this->_count)
     {
         this->_count--;
-        return 0;
+        //return 0;
     }
     else
     {
-        return  - 1;
+        //return  - 1;
     }
+	return ret;
 }
