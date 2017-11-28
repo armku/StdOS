@@ -63,25 +63,27 @@ byte Queue::Dequeue()
     {
         //return  - 1;
     }
-	return ret;
+    return ret;
 }
+
 // 批量写入
-int Queue::Write(const Buffer& bs)
+int Queue::Write(const Buffer &bs)
 {
-	for(int i=0;i<bs.Length();i++)
-	{
-		this->Enqueue(bs[i]);
-	}
-	return bs.Length();
+    for (int i = 0; i < bs.Length(); i++)
+    {
+        this->Enqueue(bs[i]);
+    }
+    return bs.Length();
 }
+
 // 批量读取
-int Queue::Read(Buffer& bs)
+int Queue::Read(Buffer &bs)
 {
-	int len=this->Length();
-	for(int i=0;i<len;i++)
-	{
-		bs[i]=this->Dequeue();
-	}
-	bs.SetLength(len);
-	return len;
-}	
+    int len = this->Length();
+    for (int i = 0; i < len; i++)
+    {
+        bs[i] = this->Dequeue();
+    }
+    bs.SetLength(len);
+    return len;
+}
