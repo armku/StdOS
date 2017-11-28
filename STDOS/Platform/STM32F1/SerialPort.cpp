@@ -72,16 +72,17 @@ void OnUsartReceive(ushort num, void *param)
         if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
         {
             ch = USART_ReceiveData(g_Uart_Ports[sp->Index]);
-            if (sp->Index < 10)
-            {
-                sp->Rx.Enqueue(ch);
-            }
-			if(num ==COM3)
+            if(num ==COM3)
 			{
 				if (strEsp8266_Fram_Record .Length < (RX_BUF_MAX_LEN - 1))
             //预留1个字节写结束符
                 strEsp8266_Fram_Record .RxBuf[strEsp8266_Fram_Record .Length++] = ch;
 			}
+			else if (sp->Index < 10)
+            {
+                sp->Rx.Enqueue(ch);
+            }
+			
         }
 		if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_IDLE) == SET)
         //数据帧接收完毕
