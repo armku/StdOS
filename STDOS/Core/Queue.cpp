@@ -16,10 +16,10 @@
 //}
 
 
-void Queue::SetCapacity(int len)
-{
-//    this->_s.SetLength(len);
-}
+//void Queue::SetCapacity(int len)
+//{
+////    this->_s.SetLength(len);
+//}
 
 //void Queue::Clear()
 //{

@@ -43,7 +43,7 @@ public:
 //	bool Empty() const { return _size == 0; }	// 队列空
 //	int Capacity() const { return _s.Capacity(); }	// 队列容量
 //	int Length() const { return _size; }		// 队列大小
-	void SetCapacity(int len);
+//	void SetCapacity(int len);
 
 //	void Clear();
 

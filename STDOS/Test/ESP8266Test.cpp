@@ -12,8 +12,8 @@
     //#define ApSsid                     "dd-wrt"               //要连接的热点的名称
     #define ApSsid                       "NETGEAR77"        //要连接的热点的名称
     #define ApPwd                        "18353217097"        //要连接的热点的密钥
-    //#define TcpServer_IP                 "121.42.164.17"      //要连接的服务器的 IP
-    #define TcpServer_IP                 "192.168.0.120"      //要连接的服务器的 IP
+    #define TcpServer_IP                 "121.42.164.17"      //要连接的服务器的 IP
+    //#define TcpServer_IP                 "192.168.0.120"      //要连接的服务器的 IP
     #define TcpServer_Port               "8000"               //要连接的服务器的端口
 
     Esp8266 esp;
