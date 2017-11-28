@@ -64,13 +64,14 @@ void OnUsartReceive(ushort num, void *param)
 {
     SerialPort *sp = (SerialPort*)param;
     USART_TypeDef *const g_Uart_Ports[] = UARTS;
+	byte ch;
 
     //if (sp && sp->HasHandler())
     if ((sp)&&(num!=COM3)&&(num !=COM1))
     {
         if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
         {
-            byte ch = USART_ReceiveData(g_Uart_Ports[sp->Index]);
+            ch = USART_ReceiveData(g_Uart_Ports[sp->Index]);
             if (sp->Index < 10)
             {
                 sp->Rx.Enqueue(ch);
@@ -82,7 +83,7 @@ void OnUsartReceive(ushort num, void *param)
 	{
 		if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
         {
-            byte ch = USART_ReceiveData(g_Uart_Ports[sp->Index]);
+            ch = USART_ReceiveData(g_Uart_Ports[sp->Index]);
             if (sp->Index < 10)
             {
                 sp->Rx.Enqueue(ch);
@@ -92,16 +93,14 @@ void OnUsartReceive(ushort num, void *param)
 	}
 	if(num==COM3)
 	{
-		uint8_t ucCh;
-
         if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
         {
-            ucCh = USART_ReceiveData(USART3);
+            ch = USART_ReceiveData(USART3);
 			//sp->Rx.Enqueue(ucCh);
 
             if (strEsp8266_Fram_Record .Length < (RX_BUF_MAX_LEN - 1))
             //预留1个字节写结束符
-                strEsp8266_Fram_Record .RxBuf[strEsp8266_Fram_Record .Length++] = ucCh;
+                strEsp8266_Fram_Record .RxBuf[strEsp8266_Fram_Record .Length++] = ch;
         }
 
         if (USART_GetITStatus(USART3, USART_IT_IDLE) == SET)
@@ -109,7 +108,7 @@ void OnUsartReceive(ushort num, void *param)
         {
             strEsp8266_Fram_Record .FlagFinish = 1;
 
-            ucCh = USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
+            ch = USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
             esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record .RxBuf, "CLOSED\r\n") ? 1 : 0;
 			sp->ReceiveTask3();
         }
