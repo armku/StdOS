@@ -85,8 +85,6 @@ void FifoTest();
 void SerialPortTest();
 void PwmSoloTest();
 
-char com1tx[500];
-char com1rx[500];
 int main(void)
 {
     Sys.Init();
@@ -97,9 +95,7 @@ int main(void)
 
 
     sp1 = SerialPort::GetMessagePort();
-	sp1->Tx.SetBuf(com1tx,ArrayLength(com1tx));
-	sp1->Rx.SetBuf(com1rx,ArrayLength(com1rx));
-    SerialPort::GetMessagePort()->Register(OnUsart1Read);
+	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 	
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");

@@ -84,6 +84,7 @@ void SerialPort::ChangePower(int level)
 
 SerialPort *printf_sp;
 bool isInFPutc;//正在串口输出
+static char com1rx[512],com1tx[512];
 SerialPort *SerialPort::GetMessagePort()
 {
 	if (printf_sp && Sys.MessagePort != printf_sp->Index)
@@ -101,7 +102,8 @@ SerialPort *SerialPort::GetMessagePort()
 		isInFPutc = true;
 		
 		printf_sp=new SerialPort((COM)Sys.MessagePort);
-		printf_sp->Tx.SetCapacity(512);
+		printf_sp->Tx.SetBuf(com1tx,ArrayLength(com1tx));
+		printf_sp->Rx.SetBuf(com1rx,ArrayLength(com1rx));
 		printf_sp->Open();
 		
 		isInFPutc=false;
