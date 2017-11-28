@@ -66,7 +66,7 @@ void OnUsartReceive(ushort num, void *param)
     USART_TypeDef *const g_Uart_Ports[] = UARTS;
 
     //if (sp && sp->HasHandler())
-    if ((sp)&&(num!=2))
+    if ((sp)&&(num!=COM3))
     {
         if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
         {
@@ -78,7 +78,7 @@ void OnUsartReceive(ushort num, void *param)
 			sp->ReceiveTask2();
         }
     }
-	if(num==2)
+	if(num==COM3)
 	{
 		uint8_t ucCh;
 
@@ -251,7 +251,7 @@ bool SerialPort::OnOpen()
     USART_Init(g_Uart_Ports[this->Index], &p);
 
     USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_RXNE, ENABLE); // 串口接收中断配置
-	if(this->Index==2)
+	if(this->Index==COM3)
 	{
 		USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 	}
