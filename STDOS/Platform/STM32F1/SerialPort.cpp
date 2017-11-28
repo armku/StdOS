@@ -97,9 +97,9 @@ void OnUsartReceive(ushort num, void *param)
     }
 	if(num==COM3)
 	{
-        if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+        if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
         {
-            ch = USART_ReceiveData(USART3);
+            ch = USART_ReceiveData(g_Uart_Ports[sp->Index]);
 			//sp->Rx.Enqueue(ucCh);
 
             if (strEsp8266_Fram_Record .Length < (RX_BUF_MAX_LEN - 1))
@@ -107,12 +107,12 @@ void OnUsartReceive(ushort num, void *param)
                 strEsp8266_Fram_Record .RxBuf[strEsp8266_Fram_Record .Length++] = ch;
         }
 
-        if (USART_GetITStatus(USART3, USART_IT_IDLE) == SET)
+        if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_IDLE) == SET)
         //数据帧接收完毕
         {
             strEsp8266_Fram_Record .FlagFinish = 1;
 
-            ch = USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
+            ch = USART_ReceiveData(g_Uart_Ports[sp->Index]); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
             esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record .RxBuf, "CLOSED\r\n") ? 1 : 0;
 			sp->ReceiveTask3();
         }
