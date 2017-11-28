@@ -122,12 +122,7 @@ bool SerialPort::OnWrite(const Buffer& bs)
 	int i=0;
 	
 	if(bs.Length())
-	{		
-		if(this->Tx.Capacity()==0)
-		{
-			for ( i = 64; bs.Length() > i && i < 1024; i *= 2 );
-			this->Tx.SetCapacity(i);
-		}
+	{	
 		this->Tx.Write(bs);
 		this->Set485(true);
 		this->OnWrite2();
