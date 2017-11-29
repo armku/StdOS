@@ -247,8 +247,11 @@ void Esp8266::OnReceive(Buffer& bs)
 }
 
 
-
-
+//—≠ª∑‘À––
+void Esp8266::Routin(void * param)
+{
+	
+}
 
 
 

@@ -145,6 +145,8 @@
 
 			// 数据到达
 			void OnReceive(Buffer& bs);
+			
+			void Routin(void * param);//循环运行
 		
 		
 		

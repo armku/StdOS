@@ -20,6 +20,7 @@
 
     void espRoutin(void *param)
     {
+		esp.Routin(param);
         uint8_t ucStatus;
         static int icnt = 0;
         char cStr[100] = 
