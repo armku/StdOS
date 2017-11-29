@@ -54,30 +54,16 @@ void Esp8266::RemoveLed(){}
 bool Esp8266::Test(int times, int interval)
 {
     char count = 0;
-
-    #if 0
-        for (int i = 0; i < times;  == i)
-        {
-            if (i > 0)
-                this->Reset();
-            if (AT::SendCmd())
-            {
-                return1 ??
-            }
-        }
-        return 0;
-
-    #else 
-        this->_Reset = 1;
-        Delay_ms(1000-1);
-        while (count < times)
-        {
-            if (this->SendCmdNew("AT", "OK", NULL, interval))
-                return ;
-            this->Rst();
-            ++count;
-        }
-    #endif 
+    
+	this->_Reset = 1;
+	Delay_ms(1000-1);
+	while (count < times)
+	{
+		if (this->SendCmdNew("AT", "OK", NULL, interval))
+			return ;
+		this->Rst();
+		++count;
+	}
     return true;
 }
 
