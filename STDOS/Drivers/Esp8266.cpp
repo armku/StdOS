@@ -246,11 +246,89 @@ void Esp8266::OnReceive(Buffer& bs)
 	
 }
 
-
+ //#define ApSsid                     "dd-wrt"               //要连接的热点的名称
+    #define ApSsid                       "NETGEAR77"        //要连接的热点的名称
+    #define ApPwd                        "18353217097"        //要连接的热点的密钥
+    //#define TcpServer_IP                 "121.42.164.17"      //要连接的服务器的 IP
+    #define TcpServer_IP                 "192.168.0.120"      //要连接的服务器的 IP
+    #define TcpServer_Port               "8000"               //要连接的服务器的端口
 //循环运行
 void Esp8266::Routin(void * param)
 {
-	
+	uint8_t ucStatus;
+        static int icnt = 0;
+        char cStr[100] = 
+        {
+            0
+        };
+		
+
+        switch (this->RunStep)
+        {
+            case 0:
+                debug_printf("\r\n正在测试在线 ESP8266 ......\r\n");
+                this->Test();
+				break;
+			case 1:
+                this->SetMode(NetworkType::Station);
+                break;
+			case 2:				
+				debug_printf("\r\n正在重连热点和服务器 ......\r\n");
+                while (!this->JoinAP(ApSsid, ApPwd))
+                    ;
+                break;
+            case 3:				
+				this->EnableMultipleId(false);
+                break;
+            case 4:
+				while (!this->LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
+                    ;
+				debug_printf("\r\n重连热点和服务器成功\r\n");
+                this->RunStep++;
+                break;
+            case 5:
+				while (!this->UnvarnishSend())
+                    ;
+                debug_printf("\r\n配置 ESP8266 完毕\r\n");
+                this->RunStep++;
+                break;
+            case 6:				
+                sprintf(cStr, "%d hello world!\r\n", ++icnt);
+                this->SendString(true, cStr, 0, Esp8266::SingleID0); //发送数据	
+                debug_printf("发送数据: %s", cStr);
+                Delay_ms(500);
+                if (this->FlagTcpClosed)
+                //检测是否失去连接
+                {
+                    this->ExitUnvarnishSend(); //退出透传模式			
+                    do
+                        ucStatus = this->GetLinkStatus();
+                    //获取连接状态
+                    while (!ucStatus);
+                    if (ucStatus == 4)
+                    //确认失去连接后重连
+                    {
+						//esp.RunStep=1;
+                        debug_printf("\r\n正在重连热点和服务器 ......\r\n");
+                        while (!this->JoinAP(ApSsid, ApPwd))
+                            ;
+                        while (!this->LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
+                            ;
+                        debug_printf("\r\n重连热点和服务器成功\r\n");
+                    }
+                    while (!this->UnvarnishSend())
+                        ;
+
+                }
+                break;
+            case 77:
+				//重新连接
+				this->RunStep=4;
+                break;
+			default:
+                this->RunStep = 0;
+                break;
+        }
 }
 
 
