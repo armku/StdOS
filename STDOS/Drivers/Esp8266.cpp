@@ -38,9 +38,65 @@ bool Esp8266::Config()
 {
 	
 }
+void Esp8266::SetLed(Pin led)
+{
+}
+void Esp8266::SetLed(OutputPort& led)
+{
+}
+void Esp8266::RemoveLed()
+{
+}
 
+/*
+ * 函数名：ESP8266_AT_Test
+ * 描述  ：对WF-ESP8266模块进行AT测试启动
+ * 输入  ：无
+ * 返回  : 无
+ * 调用  ：被外部调用
+ */
+//void ESP8266_AT_Test ( void )
+//{
+//	macESP8266_RST_HIGH_LEVEL();
+//	
+//	Delay_ms ( 1000 ); 
+//	
+//	while ( ! this->Cmd ( "AT", "OK", NULL, 500 ) ) ESP8266_Rst ();  	
 
-
+//}
+bool Esp8266::Test(int times , int interval )
+{
+    char count = 0;
+	
+	#if 0
+	for(int i=0;i<times;==i)
+	{
+		if(i>0)
+			this->Reset();
+		if(AT::SendCmd())
+		{
+			return1；
+		}
+	}
+	return 0;
+		
+	#else
+	this->_Reset=1;
+    Delay_ms(1000-1);
+    while (count < times)
+    {
+        if (this->Cmd("AT", "OK", NULL, interval))
+            return ;
+        this->Rst();
+        ++count;
+    }
+	#endif
+	return true;
+}
+bool Esp8266::Sleep(uint ms)
+{
+	
+}
 
 
 
@@ -152,10 +208,7 @@ bool Esp8266::Reset(bool soft)
 	}
 	
 }
-bool Esp8266::Sleep(uint ms)
-{
-	
-}
+
 
 /*
  * 函数名：this->Cmd
@@ -193,51 +246,6 @@ bool Esp8266::Cmd(char *cmd, char *reply1, char *reply2, int waittime)
         return ((bool)strstr(strEsp8266_Fram_Record .RxBuf, reply2));
 }
 
-/*
- * 函数名：ESP8266_AT_Test
- * 描述  ：对WF-ESP8266模块进行AT测试启动
- * 输入  ：无
- * 返回  : 无
- * 调用  ：被外部调用
- */
-//void ESP8266_AT_Test ( void )
-//{
-//	macESP8266_RST_HIGH_LEVEL();
-//	
-//	Delay_ms ( 1000 ); 
-//	
-//	while ( ! this->Cmd ( "AT", "OK", NULL, 500 ) ) ESP8266_Rst ();  	
-
-//}
-bool Esp8266::Test(int times , int interval )
-{
-    char count = 0;
-	
-	#if 0
-	for(int i=0;i<times;==i)
-	{
-		if(i>0)
-			this->Reset();
-		if(AT::SendCmd())
-		{
-			return1；
-		}
-	}
-	return 0;
-		
-	#else
-	this->_Reset=1;
-    Delay_ms(1000-1);
-    while (count < times)
-    {
-        if (this->Cmd("AT", "OK", NULL, interval))
-            return ;
-        this->Rst();
-        ++count;
-    }
-	#endif
-	return true;
-}
 
 /*
  * 函数名：ESP8266_Net_Mode_Choose

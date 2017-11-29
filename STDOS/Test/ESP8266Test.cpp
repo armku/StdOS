@@ -95,8 +95,20 @@
     uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
     {
         //transport->Write(bs);
-        debug_printf("收到数据:\r\n");
-        bs.Show(true);
+//        debug_printf("收到数据:\r\n");
+//        bs.Show(true);
+		
+		SerialPort *sp=(SerialPort*)transport;
+		strEsp8266_Fram_Record .Length=sp->Rx.Length();
+				for(int i=0;i<strEsp8266_Fram_Record .Length;i++)
+				{
+					strEsp8266_Fram_Record .RxBuf[i]=sp->Rx.Dequeue();
+				}
+				sp->Rx.Clear();
+				strEsp8266_Fram_Record .FlagFinish = 1;
+				esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record .RxBuf, "CLOSED\r\n") ? 1 : 0;
+		
+		
         return 0;
     }
 	

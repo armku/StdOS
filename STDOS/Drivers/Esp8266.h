@@ -62,27 +62,27 @@
 			/******************************** 基础AT指令 ********************************/
 			bool Test(int times = 10, int interval = 500);
 			bool Reset(bool soft);
-			String GetVersion();
+//			String GetVersion();
 			bool Sleep(uint ms);
-			bool Echo(bool open);
+//			bool Echo(bool open);
 			// 恢复出厂设置，将擦写所有保存到Flash的参数，恢复为默认参数。会导致模块重启
-			bool Restore();
+//			bool Restore();
 
 			/******************************** WiFi功能指令 ********************************/
 				// 获取模式
-			NetworkType GetMode();
-			// 设置模式。需要重启
-			bool SetMode(NetworkType mode);
+//			NetworkType GetMode();
+//			// 设置模式。需要重启
+//			bool SetMode(NetworkType mode);
 
 			// 连接AP相关
-			String GetJoinAP();
+//			String GetJoinAP();
 			bool JoinAP(const String& ssid, const String& pass);
 			bool UnJoinAP();
-			bool SetAutoConn(bool enable);
+//			bool SetAutoConn(bool enable);
 
-			String LoadAPs();
-			String GetAP();
-			bool SetAP(const String& ssid, const String& pass, byte channel, byte ecn = 0, byte maxConnect = 4, bool hidden = false);
+//			String LoadAPs();
+//			String GetAP();
+//			bool SetAP(const String& ssid, const String& pass, byte channel, byte ecn = 0, byte maxConnect = 4, bool hidden = false);
 			// 查询连接到AP的Stations信息。无法查询DHCP接入
 //			String LoadStations();
 
