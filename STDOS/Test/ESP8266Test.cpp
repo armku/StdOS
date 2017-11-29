@@ -21,13 +21,10 @@
     {
         //transport->Write(bs);
 //        debug_printf("收到数据:\r\n");
-//        bs.Show(true);
+        bs.Show(true);
 		
-		SerialPort *sp=(SerialPort*)transport;
 		esp.OnReceive(bs);
-		
-		
-		
+				
         return 0;
     }
 	
