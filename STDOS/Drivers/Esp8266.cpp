@@ -139,7 +139,41 @@ bool Esp8266::EnableMultipleId(bool enumEnUnvarnishTx)
     sprintf(cStr, "AT+CIPMUX=%d", (enumEnUnvarnishTx ? 1 : 0));
     return this->SendCmdNew(cStr, "OK", 0, 500);
 }
-
+/*
+ * 函数名：ESP8266_Link_Server
+ * 描述  ：WF-ESP8266模块连接外部服务器
+ * 输入  ：enumE，网络协议
+ *       ：ip，服务器IP字符串
+ *       ：ComNum，服务器端口字符串
+ *       ：id，模块连接服务器的ID
+ * 返回  : 1，连接成功
+ *         0，连接失败
+ * 调用  ：被外部调用
+ */
+bool Esp8266::LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, ENUMIDNOTypeDef id)
+{
+    char cStr[100] = 
+    {
+        0
+    }
+    , cCmd[120];
+    switch (enumE)
+    {
+        case enumTCP:
+            sprintf(cStr, "\"%s\",\"%s\",%s", "TCP", ip, ComNum);
+            break;
+        case enumUDP:
+            sprintf(cStr, "\"%s\",\"%s\",%s", "UDP", ip, ComNum);
+            break;
+        default:
+            break;
+    }
+    if (id < 5)
+        sprintf(cCmd, "AT+CIPSTART=%d,%s", id, cStr);
+    else
+        sprintf(cCmd, "AT+CIPSTART=%s", cStr);
+    return this->SendCmd(cCmd, "OK", "ALREAY CONNECT", 4000);
+}
 /*
  * 函数名：SendCmd
  * 描述  ：对WF-ESP8266模块发送AT指令
@@ -271,41 +305,7 @@ bool Esp8266::BuildAP(char *pSSID, char *pPassWord, ENUMAPPsdModeTypeDef enunPsd
 
 
 
-/*
- * 函数名：ESP8266_Link_Server
- * 描述  ：WF-ESP8266模块连接外部服务器
- * 输入  ：enumE，网络协议
- *       ：ip，服务器IP字符串
- *       ：ComNum，服务器端口字符串
- *       ：id，模块连接服务器的ID
- * 返回  : 1，连接成功
- *         0，连接失败
- * 调用  ：被外部调用
- */
-bool Esp8266::LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, ENUMIDNOTypeDef id)
-{
-    char cStr[100] = 
-    {
-        0
-    }
-    , cCmd[120];
-    switch (enumE)
-    {
-        case enumTCP:
-            sprintf(cStr, "\"%s\",\"%s\",%s", "TCP", ip, ComNum);
-            break;
-        case enumUDP:
-            sprintf(cStr, "\"%s\",\"%s\",%s", "UDP", ip, ComNum);
-            break;
-        default:
-            break;
-    }
-    if (id < 5)
-        sprintf(cCmd, "AT+CIPSTART=%d,%s", id, cStr);
-    else
-        sprintf(cCmd, "AT+CIPSTART=%s", cStr);
-    return this->SendCmd(cCmd, "OK", "ALREAY CONNECT", 4000);
-}
+
 
 /*
  * 函数名：StartOrShutServer
