@@ -33,21 +33,17 @@
             case 0:
                 debug_printf("\r\n正在测试在线 ESP8266 ......\r\n");
                 esp.Test();
-				//esp.RunStep++;
-                break;
+				break;
 			case 1:
                 esp.SetMode(NetworkType::Station);
-                //esp.RunStep++;
                 break;
 			case 2:				
 				debug_printf("\r\n正在重连热点和服务器 ......\r\n");
                 while (!esp.JoinAP(ApSsid, ApPwd))
                     ;
-                //esp.RunStep++;
                 break;
             case 3:				
 				esp.EnableMultipleId(DISABLE);
-                //esp.RunStep++;
                 break;
             case 4:
 				while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
