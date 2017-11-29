@@ -235,6 +235,24 @@ bool Esp8266::SendCmd(char *cmd, char *reply1, char *reply2, int waittime)
 
 
 
+// 处理收到的数据包
+void Esp8266::Process()
+{
+	
+}
+// 数据到达
+void Esp8266::OnReceive(Buffer& bs)
+{
+	
+}
+
+
+
+
+
+
+
+
 
 
 
