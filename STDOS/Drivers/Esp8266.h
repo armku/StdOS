@@ -36,7 +36,7 @@
 //			AT		At;		// AT操作对象
 		SerialPort*	Port;	// 传输口 代替AT指令
 
-//			NetworkType	WorkMode;	// 工作模式
+			NetworkType	WorkMode;	// 工作模式
 
 //			IDataPort*	Led;	// 指示灯
 
@@ -79,8 +79,8 @@
 			/******************************** WiFi功能指令 ********************************/
 				// 获取模式
 //			NetworkType GetMode();
-//			// 设置模式。需要重启
-//			bool SetMode(NetworkType mode);
+			// 设置模式。需要重启
+			bool SetMode(NetworkType mode);
 
 			// 连接AP相关
 //			String GetJoinAP();

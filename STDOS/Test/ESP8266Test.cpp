@@ -33,11 +33,10 @@
             case 0:
                 debug_printf("\r\n正在测试在线 ESP8266 ......\r\n");
                 esp.Test();
-				esp.NetModeChoose(Esp8266::STA);
-                esp.RunStep++;
+				esp.RunStep++;
                 break;
 			case 1:
-                esp.NetModeChoose(Esp8266::STA);
+                esp.SetMode(NetworkType::Station);
                 esp.RunStep++;
                 break;
 			case 2:				

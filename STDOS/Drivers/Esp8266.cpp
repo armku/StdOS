@@ -181,7 +181,22 @@ bool Esp8266::NetModeChoose(ENUMNetModeTypeDef enumMode)
             return false;
     }
 }
-
+// 设置模式。需要重启
+bool Esp8266::SetMode(NetworkType mode)
+{
+	this->WorkMode=mode;
+	switch (this->WorkMode)
+    {
+        case NetworkType::Station:
+            return this->SendCmd("AT+CWMODE=1", "OK", "no change", 2500);
+        case NetworkType::AP:
+            return this->SendCmd("AT+CWMODE=2", "OK", "no change", 2500);
+        case NetworkType::STA_AP:
+            return this->SendCmd("AT+CWMODE=3", "OK", "no change", 2500);
+        default:
+            return false;
+    }
+}
 
 
 
