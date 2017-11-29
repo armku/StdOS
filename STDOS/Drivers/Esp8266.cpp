@@ -104,7 +104,22 @@ bool Esp8266::SetMode(NetworkType mode)
             return false;
     }
 }
-
+/*
+ * 函数名：ESP8266_JoinAP
+ * 描述  ：WF-ESP8266模块连接外部WiFi
+ * 输入  ：pSSID，WiFi名称字符串
+ *       ：pPassWord，WiFi密码字符串
+ * 返回  : 1，连接成功
+ *         0，连接失败
+ * 调用  ：被外部调用
+ */
+bool Esp8266::JoinAP(char *ssid, char *pass)
+{
+    char cCmd[120];
+	this->cmdType=EspCmdType::JoinAP;
+    sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", ssid, pass);
+    return this->SendCmdNew(cCmd, "OK", NULL, 5000);
+}
 
 
 
@@ -218,22 +233,6 @@ void Esp8266::SetPin(Pin pinChEn, Pin pinReset)
 void Esp8266::ChipEnable(bool en)
 {
     this->portEnable = en;
-}
-
-/*
- * 函数名：ESP8266_JoinAP
- * 描述  ：WF-ESP8266模块连接外部WiFi
- * 输入  ：pSSID，WiFi名称字符串
- *       ：pPassWord，WiFi密码字符串
- * 返回  : 1，连接成功
- *         0，连接失败
- * 调用  ：被外部调用
- */
-bool Esp8266::JoinAP(char *ssid, char *pass)
-{
-    char cCmd[120];
-    sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", ssid, pass);
-    return this->SendCmd(cCmd, "OK", NULL, 5000);
 }
 
 /*
