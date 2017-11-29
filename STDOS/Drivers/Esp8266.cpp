@@ -66,6 +66,7 @@ bool Esp8266::Test(int times, int interval)
 //		++count;
 //	}
 	#else
+	this->cmdType=EspCmdType::TEST;
 	this->SendCmdNew("AT", NULL, NULL, interval);
 	#endif
     return true;
@@ -90,14 +91,15 @@ bool Esp8266::Sleep(uint ms)
 bool Esp8266::SetMode(NetworkType mode)
 {
 	this->WorkMode=mode;
+	this->cmdType=EspCmdType::SetMode;
 	switch (this->WorkMode)
     {
         case NetworkType::Station:
-            return this->SendCmd("AT+CWMODE=1", "OK", "no change", 2500);
+            return this->SendCmdNew("AT+CWMODE=1", "OK", "no change", 2500);
         case NetworkType::AP:
-            return this->SendCmd("AT+CWMODE=2", "OK", "no change", 2500);
+            return this->SendCmdNew("AT+CWMODE=2", "OK", "no change", 2500);
         case NetworkType::STA_AP:
-            return this->SendCmd("AT+CWMODE=3", "OK", "no change", 2500);
+            return this->SendCmdNew("AT+CWMODE=3", "OK", "no change", 2500);
         default:
             return false;
     }
