@@ -172,7 +172,7 @@ bool Esp8266::LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, ENUMID
         sprintf(cCmd, "AT+CIPSTART=%d,%s", id, cStr);
     else
         sprintf(cCmd, "AT+CIPSTART=%s", cStr);
-    return this->SendCmd(cCmd, "OK", "ALREAY CONNECT", 4000);
+    return this->SendCmd(cCmd, "OK", "ALREAY CONNECT", 999);
 }
 /*
  * º¯ÊıÃû£ºSendCmd
