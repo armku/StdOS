@@ -143,7 +143,7 @@
 		
 		
 		
-		
+		bool SendCmd(char *cmd, char *reply1, char *reply2, int waittime);
 		
 		
 		
@@ -181,7 +181,7 @@
 			
             void ChipEnable(bool en = true); //设置芯片有效
             void ChipReset(bool rst = false); //芯片复位
-            bool SendCmd(char *cmd, char *reply1, char *reply2, int waittime);
+            
 			bool NetModeChoose(ENUMNetModeTypeDef enumMode);
             bool JoinAP(char *ssid, char *pass);
             bool BuildAP(char *pSSID, char *pPassWord, ENUMAPPsdModeTypeDef enunPsdMode);
