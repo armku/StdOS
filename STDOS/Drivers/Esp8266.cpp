@@ -72,7 +72,7 @@ bool Esp8266::Test(int times, int interval)
         Delay_ms(1000-1);
         while (count < times)
         {
-            if (this->SendCmd("AT", "OK", NULL, interval))
+            if (this->SendCmdNew("AT", "OK", NULL, interval))
                 return ;
             this->Rst();
             ++count;
@@ -89,6 +89,42 @@ bool Esp8266::Sleep(uint ms)
 
 
 
+
+/*
+ * 函数名：SendCmd
+ * 描述  ：对WF-ESP8266模块发送AT指令
+ * 输入  ：cmd，待发送的指令
+ *         reply1，reply2，期待的响应，为NULL表不需响应，两者为或逻辑关系
+ *         waittime，等待响应的时间
+ * 返回  : 1，指令发送成功
+ *         0，指令发送失败
+ * 调用  ：被外部调用
+ */
+bool Esp8266::SendCmdNew(char *cmd, char *reply1, char *reply2, int waittime)
+{
+    strEsp8266_Fram_Record .Length = 0; //从新开始接收新的数据包
+
+    this->USART_printf("%s\r\n", cmd);
+
+    if ((reply1 == 0) && (reply2 == 0))
+    //不需要接收数据
+        return true;
+
+    Delay_ms(waittime); //延时
+
+    strEsp8266_Fram_Record .RxBuf[strEsp8266_Fram_Record .Length] = '\0';
+
+    debug_printf("%s", strEsp8266_Fram_Record .RxBuf);
+
+    if ((reply1 != 0) && (reply2 != 0))
+        return ((bool)strstr(strEsp8266_Fram_Record .RxBuf, reply1) || (bool)strstr(strEsp8266_Fram_Record .RxBuf, reply2));
+
+    else if (reply1 != 0)
+        return ((bool)strstr(strEsp8266_Fram_Record .RxBuf, reply1));
+
+    else
+        return ((bool)strstr(strEsp8266_Fram_Record .RxBuf, reply2));
+}
 
 /*
  * 函数名：SendCmd
@@ -125,8 +161,6 @@ bool Esp8266::SendCmd(char *cmd, char *reply1, char *reply2, int waittime)
     else
         return ((bool)strstr(strEsp8266_Fram_Record .RxBuf, reply2));
 }
-
-
 
 
 

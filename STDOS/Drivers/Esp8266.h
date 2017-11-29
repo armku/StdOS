@@ -143,6 +143,7 @@
 		
 		
 		
+		bool SendCmdNew(char *cmd, char *reply1, char *reply2, int waittime);
 		bool SendCmd(char *cmd, char *reply1, char *reply2, int waittime);
 		
 		
