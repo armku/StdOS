@@ -104,27 +104,11 @@ bool Esp8266::Sleep(uint ms)
 bool Esp8266::SendCmdNew(char *cmd, char *reply1, char *reply2, int waittime)
 {
     strEsp8266_Fram_Record .Length = 0; //从新开始接收新的数据包
+	this->Port->Rx.Clear();
 
     this->USART_printf("%s\r\n", cmd);
 
-    if ((reply1 == 0) && (reply2 == 0))
-    //不需要接收数据
-        return true;
-
-    Delay_ms(waittime); //延时
-
-    strEsp8266_Fram_Record .RxBuf[strEsp8266_Fram_Record .Length] = '\0';
-
-    debug_printf("%s", strEsp8266_Fram_Record .RxBuf);
-
-    if ((reply1 != 0) && (reply2 != 0))
-        return ((bool)strstr(strEsp8266_Fram_Record .RxBuf, reply1) || (bool)strstr(strEsp8266_Fram_Record .RxBuf, reply2));
-
-    else if (reply1 != 0)
-        return ((bool)strstr(strEsp8266_Fram_Record .RxBuf, reply1));
-
-    else
-        return ((bool)strstr(strEsp8266_Fram_Record .RxBuf, reply2));
+    return true;
 }
 
 /*
