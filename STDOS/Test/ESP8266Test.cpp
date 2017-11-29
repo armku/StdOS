@@ -26,6 +26,7 @@
         {
             0
         };
+		
 
         switch (esp.RunStep)
         {
@@ -99,14 +100,20 @@
 //        bs.Show(true);
 		
 		SerialPort *sp=(SerialPort*)transport;
-		strEsp8266_Fram_Record .Length=sp->Rx.Length();
-				for(int i=0;i<strEsp8266_Fram_Record .Length;i++)
+		
+		switch(esp.cmdType)
+		{
+			case EspCmdType::TEST:
+				if(strstr(strEsp8266_Fram_Record .RxBuf, "OK\r\n"))
 				{
-					strEsp8266_Fram_Record .RxBuf[i]=sp->Rx.Dequeue();
+					esp.cmdType=EspCmdType::NONE;
+					esp.RunStep=1;
 				}
-				sp->Rx.Clear();
-				strEsp8266_Fram_Record .FlagFinish = 1;
-				esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record .RxBuf, "CLOSED\r\n") ? 1 : 0;
+				break;
+			case EspCmdType::NONE:
+			default:
+				break;
+		}
 		
 		
         return 0;

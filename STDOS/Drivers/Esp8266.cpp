@@ -53,17 +53,21 @@ void Esp8266::RemoveLed(){}
 //}
 bool Esp8266::Test(int times, int interval)
 {
-    char count = 0;
-    
-	this->_Reset = 1;
-	Delay_ms(1000-1);
-	while (count < times)
-	{
-		if (this->SendCmdNew("AT", "OK", NULL, interval))
-			return ;
-		this->Reset(false);
-		++count;
-	}
+	#if 0
+//    char count = 0;    	
+//	this->_Reset = 1;
+//	this->cmdType=EspCmdType::TEST;
+//	Delay_ms(1000-1);
+//	while (count < times)
+//	{
+//		if (this->SendCmdNew("AT", "OK", NULL, interval))
+//			return ;
+//		this->Reset(false);
+//		++count;
+//	}
+	#else
+	this->SendCmdNew("AT", NULL, NULL, interval);
+	#endif
     return true;
 }
 bool Esp8266::Reset(bool soft)

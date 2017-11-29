@@ -15,6 +15,13 @@
 	#include "SerialPort.h"
 
     #define RX_BUF_MAX_LEN     1024 
+	
+	enum class EspCmdType
+	{
+		NONE,//没有指令
+		TEST,//测试指令
+		
+	};
 
     typedef struct
     {
@@ -27,7 +34,7 @@
     {
         public:
 //			AT		At;		// AT操作对象
-		ITransport*	Port;	// 传输口 代替AT指令
+		SerialPort*	Port;	// 传输口 代替AT指令
 
 //			NetworkType	WorkMode;	// 工作模式
 
@@ -39,6 +46,7 @@
 
 //			// 多个硬件socket
 //			void*	Sockets[5];
+			EspCmdType cmdType;//指令类型
 
 			Esp8266();
 			virtual ~Esp8266();
