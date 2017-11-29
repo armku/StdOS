@@ -48,7 +48,7 @@ void Esp8266::RemoveLed(){}
 //	
 //	Delay_ms ( 1000 ); 
 //	
-//	while ( ! this->Cmd ( "AT", "OK", NULL, 500 ) ) ESP8266_Rst ();  	
+//	while ( ! this->SendCmd ( "AT", "OK", NULL, 500 ) ) ESP8266_Rst ();  	
 
 //}
 bool Esp8266::Test(int times, int interval)
@@ -72,7 +72,7 @@ bool Esp8266::Test(int times, int interval)
         Delay_ms(1000-1);
         while (count < times)
         {
-            if (this->Cmd("AT", "OK", NULL, interval))
+            if (this->SendCmd("AT", "OK", NULL, interval))
                 return ;
             this->Rst();
             ++count;
@@ -176,7 +176,7 @@ void Esp8266::ChipReset(bool rst)
 void Esp8266::Rst()
 {
     #if 0
-        this->Cmd("AT+RST", "OK", "ready", 2500);
+        this->SendCmd("AT+RST", "OK", "ready", 2500);
     #else 
         this->ChipReset(false);
         Delay_ms(500);
@@ -200,7 +200,7 @@ bool Esp8266::Reset(bool soft)
 
 
 /*
- * 函数名：this->Cmd
+ * 函数名：this->SendCmd
  * 描述  ：对WF-ESP8266模块发送AT指令
  * 输入  ：cmd，待发送的指令
  *         reply1，reply2，期待的响应，为NULL表不需响应，两者为或逻辑关系
@@ -209,7 +209,7 @@ bool Esp8266::Reset(bool soft)
  *         0，指令发送失败
  * 调用  ：被外部调用
  */
-bool Esp8266::Cmd(char *cmd, char *reply1, char *reply2, int waittime)
+bool Esp8266::SendCmd(char *cmd, char *reply1, char *reply2, int waittime)
 {
     strEsp8266_Fram_Record .Length = 0; //从新开始接收新的数据包
 
@@ -249,13 +249,13 @@ bool Esp8266::NetModeChoose(ENUMNetModeTypeDef enumMode)
     switch (enumMode)
     {
         case STA:
-            return this->Cmd("AT+CWMODE=1", "OK", "no change", 2500);
+            return this->SendCmd("AT+CWMODE=1", "OK", "no change", 2500);
 
         case AP:
-            return this->Cmd("AT+CWMODE=2", "OK", "no change", 2500);
+            return this->SendCmd("AT+CWMODE=2", "OK", "no change", 2500);
 
         case STA_AP:
-            return this->Cmd("AT+CWMODE=3", "OK", "no change", 2500);
+            return this->SendCmd("AT+CWMODE=3", "OK", "no change", 2500);
 
         default:
             return false;
@@ -275,7 +275,7 @@ bool Esp8266::JoinAP(char *ssid, char *pass)
 {
     char cCmd[120];
     sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", ssid, pass);
-    return this->Cmd(cCmd, "OK", NULL, 5000);
+    return this->SendCmd(cCmd, "OK", NULL, 5000);
 }
 
 /*
@@ -292,7 +292,7 @@ bool Esp8266::BuildAP(char *pSSID, char *pPassWord, ENUMAPPsdModeTypeDef enunPsd
 {
     char cCmd[120];
     sprintf(cCmd, "AT+CWSAP=\"%s\",\"%s\",1,%d", pSSID, pPassWord, enunPsdMode);
-    return this->Cmd(cCmd, "OK", 0, 1000);
+    return this->SendCmd(cCmd, "OK", 0, 1000);
 }
 
 /*
@@ -307,7 +307,7 @@ bool Esp8266::EnableMultipleId(bool enumEnUnvarnishTx)
 {
     char cStr[20];
     sprintf(cStr, "AT+CIPMUX=%d", (enumEnUnvarnishTx ? 1 : 0));
-    return this->Cmd(cStr, "OK", 0, 500);
+    return this->SendCmd(cStr, "OK", 0, 500);
 }
 
 /*
@@ -343,7 +343,7 @@ bool Esp8266::LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, ENUMID
         sprintf(cCmd, "AT+CIPSTART=%d,%s", id, cStr);
     else
         sprintf(cCmd, "AT+CIPSTART=%s", cStr);
-    return this->Cmd(cCmd, "OK", "ALREAY CONNECT", 4000);
+    return this->SendCmd(cCmd, "OK", "ALREAY CONNECT", 4000);
 }
 
 /*
@@ -366,13 +366,13 @@ bool Esp8266::StartOrShutServer(bool enumMode, char *pPortNum, char *pTimeOver)
 
         sprintf(cCmd2, "AT+CIPSTO=%s", pTimeOver);
 
-        return (this->Cmd(cCmd1, "OK", 0, 500) && this->Cmd(cCmd2, "OK", 0, 500));
+        return (this->SendCmd(cCmd1, "OK", 0, 500) && this->SendCmd(cCmd2, "OK", 0, 500));
     }
     else
     {
         sprintf(cCmd1, "AT+CIPSERVER=%d,%s", 0, pPortNum);
 
-        return this->Cmd(cCmd1, "OK", 0, 500);
+        return this->SendCmd(cCmd1, "OK", 0, 500);
     }
 }
 
@@ -388,7 +388,7 @@ bool Esp8266::StartOrShutServer(bool enumMode, char *pPortNum, char *pTimeOver)
  */
 int Esp8266::GetLinkStatus()
 {
-    if (this->Cmd("AT+CIPSTATUS", "OK", 0, 500))
+    if (this->SendCmd("AT+CIPSTATUS", "OK", 0, 500))
     {
         if (strstr(strEsp8266_Fram_Record .RxBuf, "STATUS:2\r\n"))
             return 2;
@@ -414,7 +414,7 @@ int Esp8266::GetIdLinkStatus()
     uint8_t ucIdLinkStatus = 0x00;
 
 
-    if (this->Cmd("AT+CIPSTATUS", "OK", 0, 500))
+    if (this->SendCmd("AT+CIPSTATUS", "OK", 0, 500))
     {
         if (strstr(strEsp8266_Fram_Record .RxBuf, "+CIPSTATUS:0,"))
             ucIdLinkStatus |= 0x01;
@@ -457,7 +457,7 @@ int Esp8266::InquireApIp(char *pApIp, int ucArrayLength)
 {
     char uc;
     char *pCh;
-    this->Cmd("AT+CIFSR", "OK", 0, 500);
+    this->SendCmd("AT+CIFSR", "OK", 0, 500);
     pCh = strstr(strEsp8266_Fram_Record .RxBuf, "APIP,\"");
     if (pCh)
         pCh += 6;
@@ -486,9 +486,9 @@ int Esp8266::InquireApIp(char *pApIp, int ucArrayLength)
  */
 bool Esp8266::UnvarnishSend()
 {
-    if (!this->Cmd("AT+CIPMODE=1", "OK", 0, 500))
+    if (!this->SendCmd("AT+CIPMODE=1", "OK", 0, 500))
         return false;
-    return this->Cmd("AT+CIPSEND", "OK", ">", 500);
+    return this->SendCmd("AT+CIPSEND", "OK", ">", 500);
 }
 
 /*
@@ -531,8 +531,8 @@ bool Esp8266::SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, EN
             sprintf(cStr, "AT+CIPSEND=%d,%d", ucId, ulStrLength + 2);
         else
             sprintf(cStr, "AT+CIPSEND=%d", ulStrLength + 2);
-        this->Cmd(cStr, "> ", 0, 1000);
-        bRet = this->Cmd(pStr, "SEND OK", 0, 1000);
+        this->SendCmd(cStr, "> ", 0, 1000);
+        bRet = this->SendCmd(pStr, "SEND OK", 0, 1000);
     }
     return bRet;
 }
