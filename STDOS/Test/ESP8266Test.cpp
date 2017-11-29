@@ -12,8 +12,8 @@
     //#define ApSsid                     "dd-wrt"               //要连接的热点的名称
     #define ApSsid                       "NETGEAR77"        //要连接的热点的名称
     #define ApPwd                        "18353217097"        //要连接的热点的密钥
-    #define TcpServer_IP                 "121.42.164.17"      //要连接的服务器的 IP
-    //#define TcpServer_IP                 "192.168.0.120"      //要连接的服务器的 IP
+    //#define TcpServer_IP                 "121.42.164.17"      //要连接的服务器的 IP
+    #define TcpServer_IP                 "192.168.0.120"      //要连接的服务器的 IP
     #define TcpServer_Port               "8000"               //要连接的服务器的端口
 
     Esp8266 esp;
@@ -54,10 +54,10 @@
                 debug_printf("\r\n配置 ESP8266 完毕\r\n");
                 esp.RunStep++;
                 break;
-            case 4:
+            case 4:				
                 sprintf(cStr, "%d hello world!\r\n", ++icnt);
                 esp.SendString(ENABLE, cStr, 0, Esp8266::SingleID0); //发送数据	
-                debug_printf("发送数据: %s\r\n", cStr);
+                debug_printf("发送数据: %s", cStr);
                 Delay_ms(500);
                 if (esp.FlagTcpClosed)
                 //检测是否失去连接
