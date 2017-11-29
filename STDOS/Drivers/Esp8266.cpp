@@ -61,7 +61,7 @@ bool Esp8266::Test(int times, int interval)
 	{
 		if (this->SendCmdNew("AT", "OK", NULL, interval))
 			return ;
-		this->Rst();
+		this->Reset(false);
 		++count;
 	}
     return true;
@@ -84,24 +84,6 @@ void Esp8266::ChipReset(bool rst)
     this->RunStep = 0;
 }
 
-/*
- * 函数名：ESP8266_Rst
- * 描述  ：重启WF-ESP8266模块
- * 输入  ：无
- * 返回  : 无
- * 调用  ：被 ESP8266_AT_Test 调用
- */
-void Esp8266::Rst()
-{
-//    #if 0
-//        this->SendCmd("AT+RST", "OK", "ready", 2500);
-//    #else 
-//        this->ChipReset(false);
-//        Delay_ms(500);
-//        this->ChipReset(true);
-//    #endif
-	this->Reset(false);
-}
 bool Esp8266::Sleep(uint ms)
 {
 
