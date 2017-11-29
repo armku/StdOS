@@ -36,26 +36,30 @@
 				esp.NetModeChoose(Esp8266::STA);
                 esp.RunStep++;
                 break;
-			case 1:				
+			case 1:
+                esp.NetModeChoose(Esp8266::STA);
+                esp.RunStep++;
+                break;
+			case 2:				
 				debug_printf("\r\n正在重连热点和服务器 ......\r\n");
                 while (!esp.JoinAP(ApSsid, ApPwd))
                     ;
                 esp.EnableMultipleId(DISABLE);
                 esp.RunStep++;
                 break;
-            case 2:
+            case 3:
 				while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
                     ;
 				debug_printf("\r\n重连热点和服务器成功\r\n");
                 esp.RunStep++;
                 break;
-            case 3:
+            case 4:
 				while (!esp.UnvarnishSend())
                     ;
                 debug_printf("\r\n配置 ESP8266 完毕\r\n");
                 esp.RunStep++;
                 break;
-            case 4:				
+            case 5:				
                 sprintf(cStr, "%d hello world!\r\n", ++icnt);
                 esp.SendString(ENABLE, cStr, 0, Esp8266::SingleID0); //发送数据	
                 debug_printf("发送数据: %s", cStr);
@@ -84,7 +88,7 @@
 
                 }
                 break;
-            case 5:
+            case 6:
 				//重新连接
 				esp.RunStep=4;
                 break;
