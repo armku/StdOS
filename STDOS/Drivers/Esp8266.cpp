@@ -120,8 +120,25 @@ bool Esp8266::JoinAP(char *ssid, char *pass)
     sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", ssid, pass);
     return this->SendCmdNew(cCmd, "OK", NULL, 5000);
 }
-
-
+bool Esp8266::JoinAP(const String& ssid, const String& pass)
+{
+	return true;
+}
+/*
+ * 函数名：ESP8266_Enable_MultipleId
+ * 描述  ：WF-ESP8266模块启动多连接
+ * 输入  ：enumEnUnvarnishTx，配置是否多连接
+ * 返回  : 1，配置成功
+ *         0，配置失败
+ * 调用  ：被外部调用
+ */
+bool Esp8266::EnableMultipleId(bool enumEnUnvarnishTx)
+{
+    char cStr[20];
+	this->cmdType=EspCmdType::EnableMultipleId;
+    sprintf(cStr, "AT+CIPMUX=%d", (enumEnUnvarnishTx ? 1 : 0));
+    return this->SendCmdNew(cStr, "OK", 0, 500);
+}
 
 /*
  * 函数名：SendCmd
@@ -252,20 +269,7 @@ bool Esp8266::BuildAP(char *pSSID, char *pPassWord, ENUMAPPsdModeTypeDef enunPsd
     return this->SendCmd(cCmd, "OK", 0, 1000);
 }
 
-/*
- * 函数名：ESP8266_Enable_MultipleId
- * 描述  ：WF-ESP8266模块启动多连接
- * 输入  ：enumEnUnvarnishTx，配置是否多连接
- * 返回  : 1，配置成功
- *         0，配置失败
- * 调用  ：被外部调用
- */
-bool Esp8266::EnableMultipleId(bool enumEnUnvarnishTx)
-{
-    char cStr[20];
-    sprintf(cStr, "AT+CIPMUX=%d", (enumEnUnvarnishTx ? 1 : 0));
-    return this->SendCmd(cStr, "OK", 0, 500);
-}
+
 
 /*
  * 函数名：ESP8266_Link_Server

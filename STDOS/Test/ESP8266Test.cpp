@@ -135,6 +135,13 @@
 					esp.RunStep=3;
 				}
 				break;
+			case EspCmdType::EnableMultipleId:
+				if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
+				{
+					esp.cmdType=EspCmdType::NONE;
+					esp.RunStep=4;
+				}
+				break;
 			case EspCmdType::NONE:
 			default:
 				break;

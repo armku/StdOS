@@ -22,6 +22,7 @@
 		TEST,//测试指令
 		SetMode,//设置工作模式
 		JoinAP,
+		EnableMultipleId,
 		
 	};
 
