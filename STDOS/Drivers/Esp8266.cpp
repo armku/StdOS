@@ -247,7 +247,45 @@ void Esp8266::Process()
 // 数据到达
 void Esp8266::OnReceive(Buffer& bs)
 {
-	
+	switch(this->cmdType)
+	{
+		case EspCmdType::TEST:
+			if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
+			{
+				this->cmdType=EspCmdType::NONE;
+				this->RunStep=1;
+			}
+			break;
+		case EspCmdType::SetMode:
+			if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
+			{
+				this->cmdType=EspCmdType::NONE;
+				this->RunStep=2;
+			}
+			if(strstr(strEsp8266_Fram_Record .RxBuf, "no change"))
+			{
+				this->cmdType=EspCmdType::NONE;
+				this->RunStep=2;
+			}
+			break;
+		case EspCmdType::JoinAP:
+			if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
+			{
+				this->cmdType=EspCmdType::NONE;
+				this->RunStep=3;
+			}
+			break;
+		case EspCmdType::EnableMultipleId:
+			if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
+			{
+				this->cmdType=EspCmdType::NONE;
+				this->RunStep=4;
+			}
+			break;
+		case EspCmdType::NONE:
+		default:
+			break;
+	}
 }
 
  //#define ApSsid                     "dd-wrt"               //要连接的热点的名称

@@ -24,46 +24,8 @@
 //        bs.Show(true);
 		
 		SerialPort *sp=(SerialPort*)transport;
+		esp.OnReceive(bs);
 		
-		switch(esp.cmdType)
-		{
-			case EspCmdType::TEST:
-				if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
-				{
-					esp.cmdType=EspCmdType::NONE;
-					esp.RunStep=1;
-				}
-				break;
-			case EspCmdType::SetMode:
-				if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
-				{
-					esp.cmdType=EspCmdType::NONE;
-					esp.RunStep=2;
-				}
-				if(strstr(strEsp8266_Fram_Record .RxBuf, "no change"))
-				{
-					esp.cmdType=EspCmdType::NONE;
-					esp.RunStep=2;
-				}
-				break;
-			case EspCmdType::JoinAP:
-				if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
-				{
-					esp.cmdType=EspCmdType::NONE;
-					esp.RunStep=3;
-				}
-				break;
-			case EspCmdType::EnableMultipleId:
-				if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
-				{
-					esp.cmdType=EspCmdType::NONE;
-					esp.RunStep=4;
-				}
-				break;
-			case EspCmdType::NONE:
-			default:
-				break;
-		}
 		
 		
         return 0;
