@@ -9,44 +9,31 @@ Fram_T strEsp8266_Fram_Record =
 };
 
 
-Esp8266::Esp8266()
-{
-}
-Esp8266::~Esp8266()
-{
-}
-void Esp8266::Init(ITransport* port)
-{
-}
+Esp8266::Esp8266(){}
+Esp8266::~Esp8266(){}
+void Esp8266::Init(ITransport *port){}
 char com3bufrx[100];
 char com3buftx[100];
 void Esp8266::Init(COM idx, int baudrate)
 {
-	auto sp=new SerialPort(idx);
-	
-	sp->SetBaudRate(baudrate);
-	sp->Rx.SetBuf(com3bufrx,ArrayLength(com3bufrx));
-	sp->Tx.SetBuf(com3buftx,ArrayLength(com3buftx));
-	
-	this->Port=sp;
+    auto sp = new SerialPort(idx);
+
+    sp->SetBaudRate(baudrate);
+    sp->Rx.SetBuf(com3bufrx, ArrayLength(com3bufrx));
+    sp->Tx.SetBuf(com3buftx, ArrayLength(com3buftx));
+
+    this->Port = sp;
 }
-void Esp8266::Set(Pin power, Pin rst, Pin low)
-{
-	
+
+void Esp8266::Set(Pin power, Pin rst, Pin low){
+
 }
-bool Esp8266::Config()
-{
-	
+bool Esp8266::Config(){
+
 }
-void Esp8266::SetLed(Pin led)
-{
-}
-void Esp8266::SetLed(OutputPort& led)
-{
-}
-void Esp8266::RemoveLed()
-{
-}
+void Esp8266::SetLed(Pin led){}
+void Esp8266::SetLed(OutputPort &led){}
+void Esp8266::RemoveLed(){}
 
 /*
  * 函数名：ESP8266_AT_Test
@@ -64,38 +51,39 @@ void Esp8266::RemoveLed()
 //	while ( ! this->Cmd ( "AT", "OK", NULL, 500 ) ) ESP8266_Rst ();  	
 
 //}
-bool Esp8266::Test(int times , int interval )
+bool Esp8266::Test(int times, int interval)
 {
     char count = 0;
-	
-	#if 0
-	for(int i=0;i<times;==i)
-	{
-		if(i>0)
-			this->Reset();
-		if(AT::SendCmd())
-		{
-			return1；
-		}
-	}
-	return 0;
-		
-	#else
-	this->_Reset=1;
-    Delay_ms(1000-1);
-    while (count < times)
-    {
-        if (this->Cmd("AT", "OK", NULL, interval))
-            return ;
-        this->Rst();
-        ++count;
-    }
-	#endif
-	return true;
+
+    #if 0
+        for (int i = 0; i < times;  == i)
+        {
+            if (i > 0)
+                this->Reset();
+            if (AT::SendCmd())
+            {
+                return1 ??
+            }
+        }
+        return 0;
+
+    #else 
+        this->_Reset = 1;
+        Delay_ms(1000-1);
+        while (count < times)
+        {
+            if (this->Cmd("AT", "OK", NULL, interval))
+                return ;
+            this->Rst();
+            ++count;
+        }
+    #endif 
+    return true;
 }
+
 bool Esp8266::Sleep(uint ms)
 {
-	
+
 }
 
 
@@ -142,11 +130,11 @@ void Esp8266::Init()
 {
     this->ChipReset(true);
     this->ChipEnable(false);
-	
-	this->RunStep=0;
+
+    this->RunStep = 0;
     this->FlagTcpClosed = 0; //是否断开连接
-	
-	this->ChipEnable();
+
+    this->ChipEnable();
 }
 
 //设置引脚
@@ -175,7 +163,7 @@ void Esp8266::ChipEnable(bool en)
 void Esp8266::ChipReset(bool rst)
 {
     this->_Reset = rst;
-	this->RunStep=0;
+    this->RunStep = 0;
 }
 
 /*
@@ -196,17 +184,18 @@ void Esp8266::Rst()
     #endif 
 
 }
+
 bool Esp8266::Reset(bool soft)
 {
-	if(soft)
-	{
-		//"AT+RST"
-	}
-	else
-	{
-		this->_Reset.Down(100);
-	}
-	
+    if (soft)
+    {
+        //"AT+RST"
+    }
+    else
+    {
+        this->_Reset.Down(100);
+    }
+
 }
 
 
@@ -641,12 +630,12 @@ void Esp8266::USART_printf(char *Data, ...)
     const char *s;
     int d;
     char buf[16];
-	
-	char bufSend[200];
-	int bufSendPos;
-	int bufSendMax=ArrayLength(bufSend);
-	
-	bufSendPos=0;
+
+    char bufSend[200];
+    int bufSendPos;
+    int bufSendMax = ArrayLength(bufSend);
+
+    bufSendPos = 0;
 
     va_list ap;
     va_start(ap, Data);
@@ -661,13 +650,13 @@ void Esp8266::USART_printf(char *Data, ...)
             {
                 case 'r':
                     //回车符
-					bufSend[bufSendPos++]=0X0D;
+                    bufSend[bufSendPos++] = 0X0D;
                     Data++;
                     break;
 
                 case 'n':
                     //换行符
-                    bufSend[bufSendPos++]=0X0A;
+                    bufSend[bufSendPos++] = 0X0A;
                     Data++;
                     break;
 
@@ -687,7 +676,7 @@ void Esp8266::USART_printf(char *Data, ...)
                     s = va_arg(ap, const char*);
                     for (;  *s; s++)
                     {
-                        bufSend[bufSendPos++]=*s;
+                        bufSend[bufSendPos++] =  *s;
                     }
                     Data++;
                     break;
@@ -697,7 +686,7 @@ void Esp8266::USART_printf(char *Data, ...)
                     itoa(d, buf, 10);
                     for (s = buf;  *s; s++)
                     {
-                        bufSend[bufSendPos++]=*s;
+                        bufSend[bufSendPos++] =  *s;
                     }
                     Data++;
                     break;
@@ -707,10 +696,11 @@ void Esp8266::USART_printf(char *Data, ...)
             }
         }
         else
-            bufSend[bufSendPos++]=*Data++;
+            bufSend[bufSendPos++] =  *Data++;
     }
-	this->SendData(&bufSend[0],bufSendPos);
+    this->SendData(&bufSend[0], bufSendPos);
 }
+
 #include "stm32f10x.h" 
 //发送数据
 void Esp8266::SendData(char *buf, int len)
