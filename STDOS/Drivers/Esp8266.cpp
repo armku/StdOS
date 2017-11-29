@@ -25,7 +25,7 @@ void Esp8266::Init(COM idx, int baudrate)
 
     this->Port = sp;
 	
-	//this->_task = Sys.AddTask(&Esp8266::Routin,this,0.500,"esp1");
+	this->_task = Sys.AddTask(&Esp8266::Routin, this,  500,  500, "espRtn");
 	//this->_task = Sys.AddTask(&SerialPort::ReceiveTask, this,  - 1,  - 1, "serialrcv");
 }
 
@@ -295,7 +295,7 @@ void Esp8266::OnReceive(Buffer& bs)
     #define TcpServer_IP                 "192.168.0.120"      //要连接的服务器的 IP
     #define TcpServer_Port               "8000"               //要连接的服务器的端口
 //循环运行
-void Esp8266::Routin(void * param)
+void Esp8266::Routin()
 {
 	uint8_t ucStatus;
         static int icnt = 0;

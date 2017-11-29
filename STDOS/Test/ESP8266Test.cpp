@@ -8,15 +8,10 @@
 
 #define ESP8266TEST
 
-#ifdef ESP8266TEST
-   
+#ifdef ESP8266TEST   
 
     Esp8266 esp;
-
-    void espRoutin(void *param)
-    {
-		esp.Routin(param);        
-    }
+   
     uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
     {
         //transport->Write(bs);
@@ -44,8 +39,5 @@
         //esp.SetSerialPort(&sp3);
 		
         esp.Init();
-
-        Sys.AddTask(espRoutin, 0, 0, 500, "espRoutin");
-
     }
 #endif
