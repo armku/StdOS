@@ -77,12 +77,6 @@ bool Esp8266::Reset(bool soft)
         this->_Reset.Down(100);
     }
 }
-//Ð¾Æ¬¸´Î»
-void Esp8266::ChipReset(bool rst)
-{
-    this->_Reset = rst;
-    this->RunStep = 0;
-}
 
 bool Esp8266::Sleep(uint ms)
 {
@@ -200,7 +194,7 @@ bool Esp8266::SendCmd(char *cmd, char *reply1, char *reply2, int waittime)
  */
 void Esp8266::Init()
 {
-    this->ChipReset(true);
+    this->_Reset=1;
     this->ChipEnable(false);
 
     this->RunStep = 0;

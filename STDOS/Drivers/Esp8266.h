@@ -180,7 +180,6 @@
             void SetPin(Pin pinChEn, Pin pinReset); //设置引脚
 			
             void ChipEnable(bool en = true); //设置芯片有效
-            void ChipReset(bool rst = false); //芯片复位
             
 			bool NetModeChoose(ENUMNetModeTypeDef enumMode);
             bool JoinAP(char *ssid, char *pass);
