@@ -562,6 +562,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>App</GroupName>
+          <Files>
+            <File>
+              <FileName>AT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\AT.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Core</GroupName>
           <Files>
             <File>
@@ -818,6 +828,21 @@
               <FileName>ITransport.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NetworkInterface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\NetworkInterface.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Socket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Socket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MacAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\MacAddress.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1659,6 +1684,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>App</GroupName>
+          <Files>
+            <File>
+              <FileName>AT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\AT.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Core</GroupName>
           <Files>
             <File>
@@ -1915,6 +1950,21 @@
               <FileName>ITransport.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NetworkInterface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\NetworkInterface.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Socket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\Socket.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MacAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Net\MacAddress.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,4 +1,4 @@
-﻿#ifndef _NetworkInterface_H_
+#ifndef _NetworkInterface_H_
 #define _NetworkInterface_H_
 
 #include "IPAddress.h"
@@ -60,7 +60,7 @@ public:
 	bool Active() const;
 
 	// 应用配置
-	virtual bool Config() = 0;
+//	virtual bool Config() = 0;
 
 	// 保存和加载网络配置
 	void InitConfig();
@@ -68,35 +68,35 @@ public:
 	bool SaveConfig() const;
 	void ShowConfig() const;
 
-	virtual Socket* CreateSocket(NetType type) = 0;
+//	virtual Socket* CreateSocket(NetType type) = 0;
 	Socket* CreateClient(const NetUri& uri);
 	Socket* CreateRemote(const NetUri& uri);
 
 	// DNS解析。默认仅支持字符串IP地址解析
-	virtual IPAddress QueryDNS(const String& domain);
-	// 启用DNS
-	virtual bool EnableDNS() { return false; }
-	// 启用DHCP
-	virtual bool EnableDHCP() { return false; }
+//	virtual IPAddress QueryDNS(const String& domain);
+//	// 启用DNS
+//	virtual bool EnableDNS() { return false; }
+//	// 启用DHCP
+//	virtual bool EnableDHCP() { return false; }
 
 protected:
 	uint	_taskLink;
 	uint	_retry;
 
 	// 打开与关闭
-	virtual bool OnOpen()	= 0;
-	virtual void OnClose()	= 0;
+//	virtual bool OnOpen()	= 0;
+//	virtual void OnClose()	= 0;
 
 	// 循环检测连接
-	virtual void OnLoop();
-	virtual bool OnLink(uint retry) { return true; }
-	virtual bool CheckLink() { return Linked; }
+//	virtual void OnLoop();
+//	virtual bool OnLink(uint retry) { return true; }
+//	virtual bool CheckLink() { return Linked; }
 
 	// 保存和加载网络配置
-	virtual void OnInitConfig() {}
-	virtual void OnLoadConfig(const Buffer& buf) {}
-	virtual void OnSaveConfig(Buffer& buf) const {}
-	virtual void OnShowConfig() const {}
+//	virtual void OnInitConfig() {}
+//	virtual void OnLoadConfig(const Buffer& buf) {}
+//	virtual void OnSaveConfig(Buffer& buf) const {}
+//	virtual void OnShowConfig() const {}
 
 public:
 	// 全局静态
@@ -123,10 +123,10 @@ public:
 
 protected:
 	// 保存和加载网络配置
-	virtual void OnInitConfig();
-	virtual void OnLoadConfig(const Buffer& buf);
-	virtual void OnSaveConfig(Buffer& buf) const;
-	virtual void OnShowConfig() const;
+//	virtual void OnInitConfig();
+//	virtual void OnLoadConfig(const Buffer& buf);
+//	virtual void OnSaveConfig(Buffer& buf) const;
+//	virtual void OnShowConfig() const;
 };
 
 #endif

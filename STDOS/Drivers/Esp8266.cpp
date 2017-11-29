@@ -8,6 +8,57 @@ Fram_T strEsp8266_Fram_Record =
     0
 };
 
+
+Esp8266::Esp8266()
+{
+}
+Esp8266::~Esp8266()
+{
+}
+
+bool Esp8266::Config()
+{
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * @brief  ESP8266初始化函数
  * @param  无
@@ -75,6 +126,22 @@ void Esp8266::Rst()
     #endif 
 
 }
+bool Esp8266::Reset(bool soft)
+{
+	if(soft)
+	{
+		//"AT+RST"
+	}
+	else
+	{
+		this->_Reset.Down(100);
+	}
+	
+}
+bool Esp8266::Sleep(uint ms)
+{
+	
+}
 
 /*
  * 函数名：this->Cmd
@@ -128,10 +195,23 @@ bool Esp8266::Cmd(char *cmd, char *reply1, char *reply2, int waittime)
 //	while ( ! this->Cmd ( "AT", "OK", NULL, 500 ) ) ESP8266_Rst ();  	
 
 //}
-void Esp8266::Test(int times , int interval )
+bool Esp8266::Test(int times , int interval )
 {
     char count = 0;
-
+	
+	#if 0
+	for(int i=0;i<times;==i)
+	{
+		if(i>0)
+			this->Reset();
+		if(AT::SendCmd())
+		{
+			return1；
+		}
+	}
+	return 0;
+		
+	#else
 	this->_Reset=1;
     Delay_ms(1000-1);
     while (count < times)
@@ -141,6 +221,8 @@ void Esp8266::Test(int times , int interval )
         this->Rst();
         ++count;
     }
+	#endif
+	return true;
 }
 
 /*
@@ -178,10 +260,10 @@ bool Esp8266::NetModeChoose(ENUMNetModeTypeDef enumMode)
  *         0，连接失败
  * 调用  ：被外部调用
  */
-bool Esp8266::JoinAP(char *pSSID, char *pPassWord)
+bool Esp8266::JoinAP(char *ssid, char *pass)
 {
     char cCmd[120];
-    sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", pSSID, pPassWord);
+    sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", ssid, pass);
     return this->Cmd(cCmd, "OK", NULL, 5000);
 }
 
