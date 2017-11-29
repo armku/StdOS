@@ -66,7 +66,42 @@ bool Esp8266::Test(int times, int interval)
 	}
     return true;
 }
+bool Esp8266::Reset(bool soft)
+{
+    if (soft)
+    {
+        this->SendCmd("AT+RST", "OK", "ready", 2500);
+    }
+    else
+    {
+        this->_Reset.Down(100);
+    }
+}
+//芯片复位
+void Esp8266::ChipReset(bool rst)
+{
+    this->_Reset = rst;
+    this->RunStep = 0;
+}
 
+/*
+ * 函数名：ESP8266_Rst
+ * 描述  ：重启WF-ESP8266模块
+ * 输入  ：无
+ * 返回  : 无
+ * 调用  ：被 ESP8266_AT_Test 调用
+ */
+void Esp8266::Rst()
+{
+//    #if 0
+//        this->SendCmd("AT+RST", "OK", "ready", 2500);
+//    #else 
+//        this->ChipReset(false);
+//        Delay_ms(500);
+//        this->ChipReset(true);
+//    #endif
+	this->Reset(false);
+}
 bool Esp8266::Sleep(uint ms)
 {
 
@@ -214,44 +249,7 @@ void Esp8266::ChipEnable(bool en)
     this->portEnable = en;
 }
 
-//芯片复位
-void Esp8266::ChipReset(bool rst)
-{
-    this->_Reset = rst;
-    this->RunStep = 0;
-}
 
-/*
- * 函数名：ESP8266_Rst
- * 描述  ：重启WF-ESP8266模块
- * 输入  ：无
- * 返回  : 无
- * 调用  ：被 ESP8266_AT_Test 调用
- */
-void Esp8266::Rst()
-{
-    #if 0
-        this->SendCmd("AT+RST", "OK", "ready", 2500);
-    #else 
-        this->ChipReset(false);
-        Delay_ms(500);
-        this->ChipReset(true);
-    #endif 
-
-}
-
-bool Esp8266::Reset(bool soft)
-{
-    if (soft)
-    {
-        //"AT+RST"
-    }
-    else
-    {
-        this->_Reset.Down(100);
-    }
-
-}
 
 /*
  * 函数名：ESP8266_Net_Mode_Choose
