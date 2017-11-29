@@ -15,14 +15,24 @@ Esp8266::Esp8266()
 Esp8266::~Esp8266()
 {
 }
-void Init(ITransport* port)
+void Esp8266::Init(ITransport* port)
 {
 }
-void Init(COM idx, int baudrate)
+char com3bufrx[100];
+char com3buftx[100];
+void Esp8266::Init(COM idx, int baudrate)
 {
+	auto sp=new SerialPort(idx);
+	
+	sp->SetBaudRate(baudrate);
+	sp->Rx.SetBuf(com3bufrx,ArrayLength(com3bufrx));
+	sp->Tx.SetBuf(com3buftx,ArrayLength(com3buftx));
+	
+	this->Port=sp;
 }
-void Set(Pin power, Pin rst, Pin low)
+void Esp8266::Set(Pin power, Pin rst, Pin low)
 {
+	
 }
 bool Esp8266::Config()
 {
