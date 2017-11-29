@@ -1,7 +1,8 @@
-#include "Esp8266.h"
 #include <stdio.h>  
 #include <string.h>  
 #include <stdbool.h>
+#include "Esp8266.h"
+#include "Sys.h"
 
 Fram_T strEsp8266_Fram_Record = 
 {
@@ -23,6 +24,9 @@ void Esp8266::Init(COM idx, int baudrate)
     sp->Tx.SetBuf(com3buftx, ArrayLength(com3buftx));
 
     this->Port = sp;
+	
+	//this->_task = Sys.AddTask(&Esp8266::Routin,this,0.500,"esp1");
+	//this->_task = Sys.AddTask(&SerialPort::ReceiveTask, this,  - 1,  - 1, "serialrcv");
 }
 
 void Esp8266::Set(Pin power, Pin rst, Pin low){

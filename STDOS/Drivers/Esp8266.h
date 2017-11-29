@@ -127,7 +127,7 @@
 //			bool GetAPs(const Pair& args, Stream& result);
 
 //		private:
-//			uint		_task;		// 调度任务
+			uint		_task;		// 调度任务
 			//ByteArray	_Buffer;	// 待处理数据包
 			//IPEndPoint	_Remote;	// 当前数据包远程地址
 
