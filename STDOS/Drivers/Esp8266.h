@@ -165,10 +165,7 @@
 		
 		
 		public:
-            typedef enum
-            {
-                    STA, AP, STA_AP
-            } ENUMNetModeTypeDef;
+            
             typedef enum
             {
                     enumTCP, enumUDP, 
@@ -187,9 +184,7 @@
             void Init();            
             void SetPin(Pin pinChEn, Pin pinReset); //设置引脚
 			
-            void ChipEnable(bool en = true); //设置芯片有效
-            
-			bool NetModeChoose(ENUMNetModeTypeDef enumMode);
+            void ChipEnable(bool en = true); //设置芯片有效			
             bool JoinAP(char *ssid, char *pass);
             bool BuildAP(char *pSSID, char *pPassWord, ENUMAPPsdModeTypeDef enunPsdMode);
             bool EnableMultipleId(bool enumEnUnvarnishTx);

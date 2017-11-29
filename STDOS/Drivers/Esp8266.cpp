@@ -86,7 +86,22 @@ bool Esp8266::Sleep(uint ms)
 {
 
 }
-
+// 设置模式。需要重启
+bool Esp8266::SetMode(NetworkType mode)
+{
+	this->WorkMode=mode;
+	switch (this->WorkMode)
+    {
+        case NetworkType::Station:
+            return this->SendCmd("AT+CWMODE=1", "OK", "no change", 2500);
+        case NetworkType::AP:
+            return this->SendCmd("AT+CWMODE=2", "OK", "no change", 2500);
+        case NetworkType::STA_AP:
+            return this->SendCmd("AT+CWMODE=3", "OK", "no change", 2500);
+        default:
+            return false;
+    }
+}
 
 
 
@@ -148,55 +163,6 @@ bool Esp8266::SendCmd(char *cmd, char *reply1, char *reply2, int waittime)
 }
 
 
-
-
-
-
-
-
-
-
-/*
- * 函数名：ESP8266_Net_Mode_Choose
- * 描述  ：选择WF-ESP8266模块的工作模式
- * 输入  ：enumMode，工作模式
- * 返回  : 1，选择成功
- *         0，选择失败
- * 调用  ：被外部调用
- */
-bool Esp8266::NetModeChoose(ENUMNetModeTypeDef enumMode)
-{
-    switch (enumMode)
-    {
-        case STA:
-            return this->SendCmd("AT+CWMODE=1", "OK", "no change", 2500);
-
-        case AP:
-            return this->SendCmd("AT+CWMODE=2", "OK", "no change", 2500);
-
-        case STA_AP:
-            return this->SendCmd("AT+CWMODE=3", "OK", "no change", 2500);
-
-        default:
-            return false;
-    }
-}
-// 设置模式。需要重启
-bool Esp8266::SetMode(NetworkType mode)
-{
-	this->WorkMode=mode;
-	switch (this->WorkMode)
-    {
-        case NetworkType::Station:
-            return this->SendCmd("AT+CWMODE=1", "OK", "no change", 2500);
-        case NetworkType::AP:
-            return this->SendCmd("AT+CWMODE=2", "OK", "no change", 2500);
-        case NetworkType::STA_AP:
-            return this->SendCmd("AT+CWMODE=3", "OK", "no change", 2500);
-        default:
-            return false;
-    }
-}
 
 
 
