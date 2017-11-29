@@ -117,7 +117,7 @@
 		sp3.Tx.SetBuf(com3buftx,ArrayLength(com3buftx));
         sp3.Open();
 
-        esp.SetSerialPort(&sp3);
+        //esp.SetSerialPort(&sp3);
         esp.Init();
 
         Sys.AddTask(espRoutin, 0, 0, 500, "espRoutin");

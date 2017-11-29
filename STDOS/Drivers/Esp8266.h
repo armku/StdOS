@@ -27,6 +27,7 @@
     {
         public:
 //			AT		At;		// AT操作对象
+		ITransport*	Port;	// 传输口 代替AT指令
 
 //			NetworkType	WorkMode;	// 工作模式
 
@@ -83,26 +84,26 @@
 			String GetAP();
 			bool SetAP(const String& ssid, const String& pass, byte channel, byte ecn = 0, byte maxConnect = 4, bool hidden = false);
 			// 查询连接到AP的Stations信息。无法查询DHCP接入
-			String LoadStations();
+//			String LoadStations();
 
-			bool GetDHCP(bool* sta, bool* ap);
-			bool SetDHCP(NetworkType mode, bool enable);
+//			bool GetDHCP(bool* sta, bool* ap);
+//			bool SetDHCP(NetworkType mode, bool enable);
 
-			MacAddress GetMAC(bool sta);
-			bool SetMAC(bool sta, const MacAddress& mac);
+//			MacAddress GetMAC(bool sta);
+//			bool SetMAC(bool sta, const MacAddress& mac);
 
-			IPAddress GetIP(bool sta);
+//			IPAddress GetIP(bool sta);
 
 			/******************************** TCP/IP ********************************/
-			String GetStatus();
-			bool GetMux();
-			bool SetMux(bool enable);
+//			String GetStatus();
+//			bool GetMux();
+//			bool SetMux(bool enable);
 
-			bool Update();
+//			bool Update();
 
-			bool Ping(const IPAddress& ip);
+//			bool Ping(const IPAddress& ip);
 
-			bool SetIPD(bool enable);
+//			bool SetIPD(bool enable);
 
 			/******************************** 发送指令 ********************************/
 				// 设置无线组网密码。匹配令牌协议
@@ -110,12 +111,12 @@
 			// 获取无线名称。
 //			bool GetWiFi(const Pair& args, Stream& result);
 			// 获取可用APs
-			String* APs;
-			void GetAPsTask();
+//			String* APs;
+//			void GetAPsTask();
 //			bool GetAPs(const Pair& args, Stream& result);
 
 		private:
-			uint		_task;		// 调度任务
+//			uint		_task;		// 调度任务
 			//ByteArray	_Buffer;	// 待处理数据包
 			//IPEndPoint	_Remote;	// 当前数据包远程地址
 
@@ -125,8 +126,8 @@
 //			// 检测连接
 //			virtual bool OnLink(uint retry);
 
-			bool CheckReady();
-			void OpenAP();
+//			bool CheckReady();
+//			void OpenAP();
 
 			// 处理收到的数据包
 			void Process();
@@ -177,7 +178,7 @@
             void Init();
             void Rst();
             void SetPin(Pin pinChEn, Pin pinReset); //设置引脚
-			void SetSerialPort(SerialPort *sp);
+			
             void ChipEnable(bool en = true); //设置芯片有效
             void ChipReset(bool rst = false); //芯片复位
             bool Cmd(char *cmd, char *reply1, char *reply2, int waittime);
@@ -197,8 +198,7 @@
         private:
             char *itoa(int value, char *string, int radix);
             void USART_printf(char *Data, ...);
-        private:
-			SerialPort *psp;
+        private:			
 			void SendData(char *buf,int len);
         public:
             volatile bool FlagTcpClosed; //是否断开连接

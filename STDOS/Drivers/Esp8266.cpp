@@ -15,7 +15,15 @@ Esp8266::Esp8266()
 Esp8266::~Esp8266()
 {
 }
-
+void Init(ITransport* port)
+{
+}
+void Init(COM idx, int baudrate)
+{
+}
+void Set(Pin power, Pin rst, Pin low)
+{
+}
 bool Esp8266::Config()
 {
 	
@@ -89,10 +97,6 @@ void Esp8266::SetPin(Pin pinChEn, Pin pinReset)
     this->portEnable.Open();
 
     this->_Reset.Open();
-}
-void Esp8266::SetSerialPort(SerialPort *sp)
-{
-	this->psp=sp;
 }
 
 //…Ë÷√–æ∆¨”––ß
