@@ -128,15 +128,15 @@ bool Esp8266::Cmd(char *cmd, char *reply1, char *reply2, int waittime)
 //	while ( ! this->Cmd ( "AT", "OK", NULL, 500 ) ) ESP8266_Rst ();  	
 
 //}
-void Esp8266::Test()
+void Esp8266::Test(int times , int interval )
 {
     char count = 0;
 
-    this->ChipReset(true);
-    Delay_ms(1000);
-    while (count < 10)
+	this->_Reset=1;
+    Delay_ms(1000-1);
+    while (count < times)
     {
-        if (this->Cmd("AT", "OK", NULL, 500))
+        if (this->Cmd("AT", "OK", NULL, interval))
             return ;
         this->Rst();
         ++count;

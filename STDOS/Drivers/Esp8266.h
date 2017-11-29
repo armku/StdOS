@@ -42,7 +42,7 @@
             void ChipEnable(bool en = true); //设置芯片有效
             void ChipReset(bool rst = false); //芯片复位
             bool Cmd(char *cmd, char *reply1, char *reply2, int waittime);
-            void Test();
+            void Test(int times = 10, int interval = 500);
             bool NetModeChoose(ENUMNetModeTypeDef enumMode);
             bool JoinAP(char *pSSID, char *pPassWord);
             bool BuildAP(char *pSSID, char *pPassWord, ENUMAPPsdModeTypeDef enunPsdMode);
