@@ -141,7 +141,7 @@ void SerialPort::Register(TransportHandler handler, void *param)
     byte irq = irqs[this->Index];
     if (handler)
     {
-        Interrupt.SetPriority(irq, 1);
+        Interrupt.SetPriority(irq, 0);
         Interrupt.Activate(irq, OnUsartReceive, this);
     }
     else
@@ -381,7 +381,7 @@ int SerialPort::SendData(byte data, int times)
 void SerialPort::OnWrite2()
 {		
 	USART_TypeDef *const g_Uart_Ports[] = UARTS;
-	#if 1	
+	#if 0	
 	char buf[200];
 	Buffer bs(buf,ArrayLength(buf));
 	this->Tx.Read(bs);
