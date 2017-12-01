@@ -87,6 +87,7 @@ bool isInFPutc;//正在串口输出
 static char com1rx[64],com1tx[64];
 uint OnUsart1Read123(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
+	//临时借调用
 }
 SerialPort *SerialPort::GetMessagePort()
 {
