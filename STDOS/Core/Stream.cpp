@@ -41,7 +41,7 @@ bool Stream::CheckRemain(int count)
     {
         if (this->_Buffer)
         {
-            //SmartOS_printf("(%d - %d) = %d  %d \r\n",this);
+            //debug_printf("(%d - %d) = %d  %d \r\n",this);
         }
         else
         {
@@ -103,7 +103,7 @@ bool Stream::SetPosition(int p)
     }
     else
     {
-        //SmartOS_printf((const char *)sub_2F4);
+        //debug_printf((const char *)sub_2F4);
         return false;
     }
 }

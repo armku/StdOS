@@ -126,7 +126,7 @@ int Buffer::Copy(int destIndex, const void *src, int len)
         // if ( len > copylen && !(*(int (__fastcall **)(Buffer *, int))(*(_DWORD *)this + 12))(this, destIndex + len) )
         if (len > copylen)
         {
-            //SmartOS_printf("Buffer::Copy (0x%p, %d) <= (%d, 0x%p, %d) \r\n", *(_QWORD *)((char *)pthis + 4), pdestIndex);
+            //debug_printf("Buffer::Copy (0x%p, %d) <= (%d, 0x%p, %d) \r\n", *(_QWORD *)((char *)pthis + 4), pdestIndex);
             //assert_failed2((const char *)dword_24C, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x95u);
             len = copylen;
         }
@@ -135,7 +135,7 @@ int Buffer::Copy(int destIndex, const void *src, int len)
     {
         if (copylen <= 0)
         {
-            //      SmartOS_printf(
+            //      debug_printf(
             //        "Buffer::Copy (0x%p, %d) <= (%d, 0x%p, %d) \r\n",
             //        *(_QWORD *)((char *)this + 4),
             //        destIndex,

@@ -19,7 +19,7 @@ void Port_OnOpen(Pin pin)
             portname = 95;
         else
             portname = (pin >> 4) + 'A';
-        SmartOS_printf("Close JTAG Pin P%c%d \r\n", portname, pinindex);
+        debug_printf("Close JTAG Pin P%c%d \r\n", portname, pinindex);
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << (pin >> 4), ENABLE);
         GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
     }

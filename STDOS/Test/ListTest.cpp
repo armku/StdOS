@@ -10,7 +10,7 @@
 	void IList::Test()
     {
 //		TraceStack ts("TestList");
-//		SmartOS_printf("TestList......\r\n");		
+//		debug_printf("TestList......\r\n");		
 //		IList list;
 		
 			

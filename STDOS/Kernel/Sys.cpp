@@ -150,7 +150,7 @@ void TSys::Sleep(int ms)const
     else
     {
         if (ms > 1000)
-            SmartOS_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！", ms);
+            debug_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！", ms);
         if (ms)
         {
             bool cancel = false;
@@ -176,7 +176,7 @@ void TSys::Delay(int us)const
     else
     {
         if (us > 1000000)
-            SmartOS_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！", us);
+            debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！", us);
         if (us && us >= 1000)
         {
             bool cancle = false;
@@ -287,7 +287,7 @@ bool TSys::SetTaskPeriod(uint taskid, int period)const
 void TSys::Start()
 {
     this->OnStart();
-    //this->=SmartOS_printf;
+    //this->=debug_printf;
     Task::Scheduler()->Start();
 }
 

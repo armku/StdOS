@@ -95,13 +95,13 @@ void TSys::OnShowInfo()const
     printf("F103");
     printf("%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName->GetBuffer(), this->Clock, this->FlashSize, this->RAMSize);
     printf("DevID:0x%04X RevID:0x%04X \r\n", this->DevID, this->RevID);
-    SmartOS_printf("CPUID:%p", this->CPUID);
-    SmartOS_printf(" ARMv7-M");
-    SmartOS_printf(" Cortex-M%d:", 3);
-    SmartOS_printf(" R%dp%d", Rx, Px);
-    SmartOS_printf("\r\n");
-    SmartOS_printf("Heap :(%p, %p) = 0x%x (%dk)\r\n", (uint) &__heap_base, (uint) &__heap_limit, HeapSize, HeapSize / 1024);
-    SmartOS_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", (uint) &__heap_limit, (uint) &__initial_sp, StackSize, StackSize / 1024);
+    debug_printf("CPUID:%p", this->CPUID);
+    debug_printf(" ARMv7-M");
+    debug_printf(" Cortex-M%d:", 3);
+    debug_printf(" R%dp%d", Rx, Px);
+    debug_printf("\r\n");
+    debug_printf("Heap :(%p, %p) = 0x%x (%dk)\r\n", (uint) &__heap_base, (uint) &__heap_limit, HeapSize, HeapSize / 1024);
+    debug_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", (uint) &__heap_limit, (uint) &__initial_sp, StackSize, StackSize / 1024);
 
     printf("ChipType:0x42455633 3\r\n");
 }

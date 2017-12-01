@@ -117,5 +117,5 @@ void TimeCost::Show(cstring format)const
     if (!format)
         format = "Ö´ÐÐ %d Î¢Ãî\r\n";
     int us = this->Elapsed();
-    SmartOS_printf(format, us);
+    debug_printf(format, us);
 }
