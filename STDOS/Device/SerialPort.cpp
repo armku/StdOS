@@ -85,6 +85,9 @@ void SerialPort::ChangePower(int level)
 SerialPort *printf_sp;
 bool isInFPutc;//正在串口输出
 static char com1rx[64],com1tx[64];
+uint OnUsart1Read123(ITransport *transport, Buffer &bs, void *para, void *para2)
+{
+}
 SerialPort *SerialPort::GetMessagePort()
 {
 	if (printf_sp && Sys.MessagePort != printf_sp->Index)
@@ -104,6 +107,7 @@ SerialPort *SerialPort::GetMessagePort()
 		printf_sp=new SerialPort((COM)Sys.MessagePort);
 		printf_sp->Tx.SetBuf(com1tx,ArrayLength(com1tx));
 		printf_sp->Rx.SetBuf(com1rx,ArrayLength(com1rx));
+		printf_sp->Register(OnUsart1Read123);
 		printf_sp->Open();
 		
 		isInFPutc=false;
@@ -126,9 +130,9 @@ bool SerialPort::OnWrite(const Buffer& bs)
 	if(bs.Length())
 	{	
 		this->Tx.Write(bs);
-		this->Set485(true);
+		//this->Set485(true);
 		this->OnWrite2();
-		this->Set485(false);//添加
+		//this->Set485(false);//添加
 		ret=true;
 	}
 	else

@@ -83,7 +83,7 @@ private:
 	bool OnSet();
 	void OnOpen2();
 	void OnClose2();
-	void OnWrite2();
+	void OnWrite2();//调用发送中断
 	void OnWrite3(const Buffer &bs);//add
 public:
 	void ReceiveTask();//临时修改
