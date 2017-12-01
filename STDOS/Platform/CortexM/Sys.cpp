@@ -12,24 +12,6 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "SerialPort.h"
 
 String *CPUName;
-int SmartOS_Log(const String *str)
-{
-    int ret;
-
-    if (Sys.Clock && Sys.MessagePort != COM_NONE)
-    {
-        auto sp = SerialPort::GetMessagePort();
-        if (sp && sp->ByteTime)
-            ret = sp->Write(*str);
-        else
-            ret = 0;
-    }
-    else
-    {
-        ret = 0;
-    }
-    return ret;
-}
 
 void TSys::SetStackTop(uint addr)
 {
