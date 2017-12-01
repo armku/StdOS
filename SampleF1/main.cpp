@@ -107,7 +107,7 @@ int main(void)
     //ModbusTest();
     //InterruptTest();
 	//ssd1309Test();
-    ESP8266Test();
+    //ESP8266Test();
 	//ds18b20test();
 	//keyTest();
 	//SerialPortTest();
