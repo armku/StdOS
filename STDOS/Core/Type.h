@@ -54,6 +54,8 @@ public:
 // 数组清零，固定长度
 //#define ArrayZero(arr) memset(arr, 0, sizeof(arr))
 
+int StdPrintf(const char *format, ...); //代替 printf
+
 // 弱函数
 #if defined(_MSC_VER)
 #define WEAK

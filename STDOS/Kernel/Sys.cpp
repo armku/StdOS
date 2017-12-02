@@ -314,18 +314,10 @@ int StdPrintf(const char *format, ...)
 	va_start(args, format);
 	n = vsprintf(sprint_buf, format, args);
 	va_end(args);
-	#if 0
-	char buf[1];
-	for (int i = 0; i < n; i++)
-	{
-		buf[0] = sprint_buf[i];
-		String str(buf, 1);
-		//SmartOS_Log(&str);
-	}
-	#else
+	
 	Buffer bs(sprint_buf,n);
 	SerialPort::GetMessagePort()->Write(bs);
-	#endif
+	
 	return n;
 }
 
