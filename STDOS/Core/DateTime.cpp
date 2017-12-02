@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "DateTime.h"
 
 DateTime::DateTime()

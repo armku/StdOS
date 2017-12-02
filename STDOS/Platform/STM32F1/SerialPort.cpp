@@ -57,7 +57,6 @@ int SerialPort_Closeing(int result)
 #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
 
 #include "Drivers\Esp8266.h"
-#include "stdio.h"
 #include <string.h> 
 extern Esp8266 esp;
 // 真正的串口中断函数

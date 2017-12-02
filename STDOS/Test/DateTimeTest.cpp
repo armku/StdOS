@@ -1,6 +1,5 @@
 #include "DateTime.h"
 #include "TTime.h"
-#include <stdio.h>
 
 #define DEBUGDateTimeTest
 

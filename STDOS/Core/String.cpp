@@ -1,5 +1,3 @@
-#include <CType.h>
-#include <stdio.h>
 #include <string.h>
 #include "SString.h"
 

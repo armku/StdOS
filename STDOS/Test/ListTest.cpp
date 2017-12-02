@@ -1,5 +1,4 @@
 #include "List.h"
-#include <stdio.h>
 #include "Sys.h"
 #include "Task.h"
 

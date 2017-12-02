@@ -1,5 +1,4 @@
 #include "Drivers\Esp8266.h"
-#include <stdio.h>  
 #include <string.h>  
 #include <stdbool.h>
 #include "stm32f10x.h" 

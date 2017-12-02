@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "Array.h"
 
 Array::Array(void *data, int len): Buffer(data, len)
