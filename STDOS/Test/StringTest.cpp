@@ -618,8 +618,8 @@
 #if 0
     void String::Show(bool newLine)const
     {
-        printf("%s", ((byte*)(this->_Arr)));
-        newLine ? printf("\n"): 0;
+        debug_printf("%s", ((byte*)(this->_Arr)));
+        newLine ? debug_printf("\n"): 0;
     }
 #endif 
 //³õÊ¼»¯ÈÝÆ÷

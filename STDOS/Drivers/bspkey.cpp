@@ -162,7 +162,7 @@ void Key::DetectKey(byte i)
 	#ifdef DEBUG
     if (s_tBtn[i].IsKeyDownFunc == 0)
     {
-        printf("Fault : DetectButton(), s_tBtn[i].IsKeyDownFunc undefine");
+        StdPrintf("Fault : DetectButton(), s_tBtn[i].IsKeyDownFunc undefine");
     }
 	#endif
 

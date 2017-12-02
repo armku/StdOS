@@ -20,23 +20,23 @@
             {
                 case KEYDOWN_1:
                     /* 摇杆LEFT键按下, 控制LED显示流动 */
-                    printf("键码：%d KEY_1_DOWN\r\n", ucKeyCode);
+                    debug_printf("键码：%d KEY_1_DOWN\r\n", ucKeyCode);
                     break;
                 case KEYDOWN_2:
                     /* 摇杆RIGHT键按下 */
-                    printf("键码：%d KEY_2_DOWN\r\n", ucKeyCode);
+                    debug_printf("键码：%d KEY_2_DOWN\r\n", ucKeyCode);
                     break;
                 case KEYDOWN_9:
                     /* 摇杆UP键按下 */
-                    printf("键码：%d KEY_9_DOWN\r\n", ucKeyCode);
+                    debug_printf("键码：%d KEY_9_DOWN\r\n", ucKeyCode);
                     break;
                 case KEYUP_1:
                     /* 摇杆DOWN键按下 */
-                    printf("键码：%d KEY_1_UP\r\n", ucKeyCode);
+                    debug_printf("键码：%d KEY_1_UP\r\n", ucKeyCode);
                     break;
                 case KEYLONG_1:
                     /* 摇杆OK键按下 */
-                    printf("键码：%d KEY_1_LONG\r\n", ucKeyCode);
+                    debug_printf("键码：%d KEY_1_LONG\r\n", ucKeyCode);
                     break;
                 default:
                     break;

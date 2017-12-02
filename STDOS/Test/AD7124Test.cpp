@@ -22,7 +22,7 @@ float AD7124::GetTemp1()
     //	fdata = ((data - 8388608)/13584) - 272.5;
     debug_printf("R:%0.4f\n\r", res);
     //	temp = PT100_RtoT(res);
-    //	printf("T:%0.4f\n",temp);
+    //	debug_printf("T:%0.4f\n",temp);
     return temp;
 }
 
@@ -41,7 +41,7 @@ float AD7124::GetTemp1Res()
     data = ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
     debug_printf("data:0x%08x\n\r", data);
 //    res = (5110.0 *data) / (16777215.0 *16.0);
-    //	printf("R:%0.4f\n",res);
+    //	debug_printf("R:%0.4f\n",res);
     //	temp = PT100_RtoT(res);
     debug_printf("T:%0.4f\n\r", temp);
     return temp;
@@ -58,23 +58,23 @@ float AD7124::Temp1Test()
     Sys.Sleep(50);
     data = ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
 
-    printf("data:0x%08x\n", data);
+    debug_printf("data:0x%08x\n", data);
     pt100_res = (5110.0 *data) / (16777215.0 *16.0);
-    printf("R:%0.4f\n", pt100_res);
+    debug_printf("R:%0.4f\n", pt100_res);
     //	temp = PT100_RtoT(pt100_res);
-    //	printf("T:%0.4f\n",temp);
+    //	debug_printf("T:%0.4f\n",temp);
 
     //	WriteReg(AD7124_ADC_CTRL_REG, AD7124_ADC_CTRL_REG_BYTES, 0X0004);
     Sys.Sleep(50);
     data = ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
 
-    printf("data:0x%08x\n", data);
+    debug_printf("data:0x%08x\n", data);
     wire_res = (2.5 *data) / (16777215 *128 * 0.001);
-    printf("R:%0.4f\n", wire_res);
+    debug_printf("R:%0.4f\n", wire_res);
 
     pt100_res = pt100_res - wire_res;
     //	temp = PT100_RtoT(pt100_res);
-    //	printf("T:%0.4f\n",temp);
+    //	debug_printf("T:%0.4f\n",temp);
 
     return temp;
 }
@@ -92,9 +92,9 @@ void ad7124test(void *param)
 	   
 	auto data = ad7->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
 
-    printf("data:0x%08x\r\n", data);
+    debug_printf("data:0x%08x\r\n", data);
     auto fdata = (2.5 *data) / (16777215 *128 * 0.001);
-    printf("R:%0.4f\r\n", fdata);
+    debug_printf("R:%0.4f\r\n", fdata);
 }
 
 void ad71248Test()

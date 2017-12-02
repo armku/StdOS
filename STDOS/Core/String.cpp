@@ -268,10 +268,10 @@ void String::Show(bool newLine)const
     {
         if (this->_Length <= i)
             break;
-        printf("%c", this->_Arr[i]);
+        StdPrintf("%c", this->_Arr[i]);
     }
     if (newLine)
-        printf("\r\n");
+        StdPrintf("\r\n");
 }
 
 // 格式化字符串，输出到现有字符串后面。方便我们连续格式化多个字符串

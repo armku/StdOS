@@ -4,7 +4,7 @@
 
 void assert_failed(byte *file, uint line, char *errstr)
 {
-    printf("%s(%d):    %s\n", file, line, errstr);
+    StdPrintf("%s(%d):    %s\n", file, line, errstr);
 }
 
 String &Object::ToStr(String &str)const

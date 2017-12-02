@@ -149,7 +149,7 @@ bool W25Q64::WritePage(uint addr, byte *pBuffer, uint NumByteToWrite)
     if (NumByteToWrite > this->PageSize)
     {
         NumByteToWrite = this->PageSize;
-        //printf("\n\r Err: this->PageWrite too large!");
+        //StdPrintf("\n\r Err: this->PageWrite too large!");
     }
 
     while (NumByteToWrite--)
@@ -338,7 +338,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
     {
         TestStatus TransferStatus1 = FAILED;
 
-        printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
+        StdPrintf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
         #if W25QXXXUSESPISOFT
             spi64.SetPin(PA5, PA6, PA7);
             spi64.CPOL = CPOL_High;
@@ -353,13 +353,13 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
         //		return;
         Sys.Delay(10);
 
-        printf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", w25q64.ID, w25q64.DeviceID);
+        StdPrintf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", w25q64.ID, w25q64.DeviceID);
 
         /* Check the SPI Flash ID */
         if (w25q64.ID == sFLASH_ID)
         /* #define  sFLASH_ID  0XEF4017 */
         {
-            printf("\r\n 检测到华邦串行flash W25Q64 !\r\n");
+            StdPrintf("\r\n 检测到华邦串行flash W25Q64 !\r\n");
 
             /* Erase FLASH Sector to write on */
             w25q64.EraseSector(FLASH_SectorToErase);
@@ -367,31 +367,31 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
             /* 将发送缓冲区的数据写到flash中 */
             w25q64.Write(FLASH_WriteAddress, Tx_Buffer, BufferSize);
             w25q64.Write(252, Tx_Buffer, BufferSize);
-            printf("\r\n 写入的数据为：%s \r\t", Tx_Buffer);
+            StdPrintf("\r\n 写入的数据为：%s \r\t", Tx_Buffer);
 
             /* 将刚刚写入的数据读出来放到接收缓冲区中 */
             w25q64.Read(FLASH_ReadAddress, Rx_Buffer, BufferSize);
-            printf("\r\n 读出的数据为：%s \r\n", Rx_Buffer);
+            StdPrintf("\r\n 读出的数据为：%s \r\n", Rx_Buffer);
 
             /* 检查写入的数据与读出的数据是否相等 */
             TransferStatus1 = Buffercmp(Tx_Buffer, Rx_Buffer, BufferSize);
 
             if (PASSED == TransferStatus1)
             {
-                printf("\r\n 8M串行flash(W25Q64)测试成功!\n\r");
+                StdPrintf("\r\n 8M串行flash(W25Q64)测试成功!\n\r");
             }
             else
             {
-                printf("\r\n 8M串行flash(W25Q64)测试失败!\n\r");
+                StdPrintf("\r\n 8M串行flash(W25Q64)测试失败!\n\r");
             }
         } // if (FlashID == sFLASH_ID)
         else
         {
-            printf("\r\n 获取不到 W25Q64 ID!\n\r");
+            StdPrintf("\r\n 获取不到 W25Q64 ID!\n\r");
         }
 
         w25q64.PowerDown();
-        printf("\r\n\n\r");
+        StdPrintf("\r\n\n\r");
     }
 #endif 
 
@@ -435,7 +435,7 @@ uint W25Q128::ReadID()
 bool W25Q128::EraseSector(uint sectorAddr)
 {
     //监视falsh擦除情况,测试用   
-    printf("fe:%x\r\n", sectorAddr);
+    StdPrintf("fe:%x\r\n", sectorAddr);
     sectorAddr *= 4096;
     this->WriteEnable(); //SET WEL 	 
     this->WaitForEnd();
@@ -498,7 +498,7 @@ bool W25Q128::Write(uint WriteAddr, byte *pBuffer, uint NumByteToWrite)
     secpos = WriteAddr / 4096; //扇区地址  
     secoff = WriteAddr % 4096; //在扇区内的偏移
     secremain = 4096-secoff; //扇区剩余空间大小   
-    //printf("ad:%X,nb:%X\r\n",WriteAddr,NumByteToWrite);//测试用
+    //StdPrintf("ad:%X,nb:%X\r\n",WriteAddr,NumByteToWrite);//测试用
     if (NumByteToWrite <= secremain)
         secremain = NumByteToWrite;
     //不大于4096个字节

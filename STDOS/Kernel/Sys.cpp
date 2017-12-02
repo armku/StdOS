@@ -114,16 +114,16 @@ void TSys::Init()
 
 void TSys::ShowInfo()const
 {
-    printf("%s::%s Code:%04X %s \r\n", "stdos", "std", 12, "222");
-    printf("Build:%s %s\r\n", "armku", "yyyy-MM-dd HH:mm:ss");
+    StdPrintf("%s::%s Code:%04X %s \r\n", "stdos", "std", 12, "222");
+    StdPrintf("Build:%s %s\r\n", "armku", "yyyy-MM-dd HH:mm:ss");
 
     this->OnShowInfo();
-    printf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\r\n", ID[0], ID[1], ID[2], ID[3], ID[4], ID[5], ID[6], ID[7], ID[8], ID[9], ID[10], ID[11]);
-    printf("Time : ");
+    StdPrintf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\r\n", ID[0], ID[1], ID[2], ID[3], ID[4], ID[5], ID[6], ID[7], ID[8], ID[9], ID[10], ID[11]);
+    StdPrintf("Time : ");
     DateTime dt(Time.Seconds + Time.BaseSeconds);
     dt.Show(true);
 
-    printf("Support: http://www.armku.com\r\n");
+    StdPrintf("Support: http://www.armku.com\r\n");
 }
 
 // 系统启动后的毫秒数
@@ -295,7 +295,7 @@ void TSys::Start()
 /////////////////////////////////////////////////////////////////////////////
 extern "C"
 {
-    /* 重载fputc可以让用户程序使用printf函数 */
+    /* 重载fputc可以让用户程序使用StdPrintf函数 */
     int fputc(int ch, FILE *f)
     {
 		char buf[1];

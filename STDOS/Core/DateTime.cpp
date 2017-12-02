@@ -317,7 +317,7 @@ bool operator<=	(const DateTime& left, const DateTime& right)
 //}
 void DateTime::Show(bool newLine)const
 {
-    printf("%04d-%02d-%02d %02d:%02d:%02d", this->Year, this->Month, this->Day, this->Hour, this->Minute, this->Second);
+    StdPrintf("%04d-%02d-%02d %02d:%02d:%02d", this->Year, this->Month, this->Day, this->Hour, this->Minute, this->Second);
 }
 //当前时间
 DateTime DateTime::Now()

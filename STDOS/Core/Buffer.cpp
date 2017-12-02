@@ -366,22 +366,22 @@ static void ShowChar(char c)
 {
 	if(c>=10)
 	{
-		printf("%c",c-10+'A');
+		StdPrintf("%c",c-10+'A');
 	}
 	else
 	{
-		printf("%c",c+'0');
+		StdPrintf("%c",c+'0');
 	}
 }
 void Buffer::Show(bool newLine)const
 {	
 	for(int i=0;i<this->_Length;i++)
 	{
-		printf("%c",this->_Arr[i]);
+		StdPrintf("%c",this->_Arr[i]);
 	}	
 	if(newLine)
 	{
-		printf("\r\n");
+		StdPrintf("\r\n");
 	}
 }
 void Buffer::ShowHex(bool newLine,char sep) const
@@ -392,13 +392,13 @@ void Buffer::ShowHex(bool newLine,char sep) const
 		ShowChar(this->_Arr[i]&0x0F);
 		if(i!=this->_Length-1)
 		{
-			printf("%c",sep);
+			StdPrintf("%c",sep);
 		}
 	}
 	
 	if(newLine)
 	{
-		printf("\r\n");
+		StdPrintf("\r\n");
 	}
 }
 
