@@ -381,11 +381,18 @@ int SerialPort::SendData(byte data, int times)
 void SerialPort::OnWrite2()
 {		
 	USART_TypeDef *const g_Uart_Ports[] = UARTS;
-	#if 0	
-	char buf[200];
-	Buffer bs(buf,ArrayLength(buf));
-	this->Tx.Read(bs);
-	this->OnWrite3(bs);
+	#if 1	
+		if(Sys.MessagePort=this->Index)
+		{
+			char buf[200];
+			Buffer bs(buf,ArrayLength(buf));
+			this->Tx.Read(bs);
+			this->OnWrite3(bs);
+		}
+		else
+		{
+			USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_TXE, ENABLE);
+		}
 	#else
 	USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_TXE, ENABLE);
 	#endif
