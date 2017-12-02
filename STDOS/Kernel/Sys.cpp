@@ -290,21 +290,9 @@ void TSys::Start()
     //this->=debug_printf;
     Task::Scheduler()->Start();
 }
-
+#include <stdio.h>
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-extern "C"
-{
-    /* 重载fputc可以让用户程序使用StdPrintf函数 */
-    int fputc(int ch, FILE *f)
-    {
-		char buf[1];
-        buf[0] = ch;
-		Buffer bs(buf,1);
-        SerialPort::GetMessagePort()->Write(bs);
-        return ch;
-    }
-}
 int StdPrintf(const char *format, ...)
 {
 	static char sprint_buf[1024];

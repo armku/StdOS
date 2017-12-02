@@ -2,7 +2,6 @@
 #define _Sys_H_
 
 #include <stdint.h>
-#include <stdio.h>
 #include <stddef.h>
 
 #include "Core\Type.h"
