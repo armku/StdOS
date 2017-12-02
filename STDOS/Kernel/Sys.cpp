@@ -304,31 +304,29 @@ extern "C"
         SerialPort::GetMessagePort()->Write(bs);
         return ch;
     }
-	#ifdef DEBUG
-	int debug_printf(const char *format, ...)
-    {
-        static char sprint_buf[1024];
-        va_list args;
+}
+int StdPrintf(const char *format, ...)
+{
+	static char sprint_buf[1024];
+	va_list args;
 
-        int n;
-        va_start(args, format);
-        n = vsprintf(sprint_buf, format, args);
-        va_end(args);
-		#if 0
-        char buf[1];
-        for (int i = 0; i < n; i++)
-        {
-            buf[0] = sprint_buf[i];
-            String str(buf, 1);
-            //SmartOS_Log(&str);
-        }
-		#else
-		Buffer bs(sprint_buf,n);
-		SerialPort::GetMessagePort()->Write(bs);
-		#endif
-        return n;
-    }
+	int n;
+	va_start(args, format);
+	n = vsprintf(sprint_buf, format, args);
+	va_end(args);
+	#if 0
+	char buf[1];
+	for (int i = 0; i < n; i++)
+	{
+		buf[0] = sprint_buf[i];
+		String str(buf, 1);
+		//SmartOS_Log(&str);
+	}
+	#else
+	Buffer bs(sprint_buf,n);
+	SerialPort::GetMessagePort()->Write(bs);
 	#endif
+	return n;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

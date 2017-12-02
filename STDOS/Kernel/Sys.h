@@ -26,8 +26,9 @@
 extern "C"
 {
 #if defined(DEBUG)
-	#define printf debug_printf
-	int debug_printf(const char *format, ...);
+	//#define printf debug_printf
+	#define debug_printf StdPrintf
+	int StdPrintf(const char *format, ...);
 #else
 	#define debug_printf(format, ...)
 #endif
