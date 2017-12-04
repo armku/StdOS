@@ -206,7 +206,7 @@
             char *itoa(int value, char *string, int radix);
             void USART_printf(char *Data, ...);
         private:			
-			void SendData(char *buf,int len);
+			void SendData1(char *buf,int len);
         public:
             volatile bool FlagTcpClosed; //是否断开连接
 			int RunStep;//运行步骤

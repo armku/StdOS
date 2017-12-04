@@ -291,8 +291,8 @@ void Esp8266::OnReceive(Buffer& bs)
     #define ApSsid                       "NETGEAR77"        //要连接的热点的名称
     #define ApPwd                        "18353217097"        //要连接的热点的密钥
     //#define TcpServer_IP                 "121.42.164.17"      //要连接的服务器的 IP
-    #define TcpServer_IP                 "192.168.0.120"      //要连接的服务器的 IP
-    #define TcpServer_Port               "8000"               //要连接的服务器的端口
+    #define TcpServer_IP                 "192.168.0.169"      //要连接的服务器的 IP
+    #define TcpServer_Port               "8888"               //要连接的服务器的端口
 //循环运行
 void Esp8266::Routin()
 {
@@ -799,12 +799,17 @@ void Esp8266::USART_printf(char *Data, ...)
         else
             bufSend[bufSendPos++] =  *Data++;
     }
-    this->SendData(&bufSend[0], bufSendPos);
+	#if 1
+	Buffer bs(bufSend,bufSendPos);
+	this->Port->Write(bs);
+	#else
+    this->SendData1(&bufSend[0], bufSendPos);
+	#endif
 }
 
 #include "stm32f10x.h" 
 //发送数据
-void Esp8266::SendData(char *buf, int len)
+void Esp8266::SendData1(char *buf, int len)
 {
     #if 1
         USART_TypeDef *USARTx = USART3;
