@@ -334,24 +334,14 @@ void Esp8266::Routin()
 				this->cmdType=EspCmdType::EEnableMultipleId;
                 break;
             case 4:
-				#if 0
-				while (!this->LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
-                    ;
-				#else
 				this->LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0);
-				#endif
+				
 				debug_printf("\r\n重连热点和服务器成功\r\n");
-                //this->RunStep++;
                 break;
             case 5:
-				#if 0
-				while (!this->UnvarnishSend())
-                    ;
-				#else
 				this->UnvarnishSend();
-				#endif
-                debug_printf("\r\n配置 ESP8266 完毕\r\n");
-                //this->RunStep++;
+				this->cmdType=EspCmdType::EUnvarnishSend;
+				debug_printf("\r\n配置 ESP8266 完毕\r\n");
                 break;
             case 6:				
                 sprintf(cStr, "%d hello world!\r\n", ++icnt);
@@ -584,8 +574,7 @@ int Esp8266::InquireApIp(char *pApIp, int ucArrayLength)
  * 调用  ：被外部调用
  */
 bool Esp8266::UnvarnishSend()
-{
-	this->cmdType=EspCmdType::EUnvarnishSend;
+{	
     if (!this->SendCmdNew("AT+CIPMODE=1", "OK", 0, 500))
         return false;
     return this->SendCmdNew("AT+CIPSEND", "OK", ">", 500);
