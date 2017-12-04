@@ -100,6 +100,6 @@ void SRamTest()
 {
 	fsmc.InitExtSRAM();
 	byte ret=bsp_TestExtSRAM();
-	printf("内存测试错误数：%d \r\n",ret);
+	debug_printf("内存测试错误数：%d \r\n",ret);
 	
 }
