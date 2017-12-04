@@ -88,6 +88,7 @@ static char com1rx[1024],com1tx[1024];
 uint OnUsart1Read123(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
 	//临时借调用
+	return 0;
 }
 SerialPort *SerialPort::GetMessagePort()
 {
@@ -126,7 +127,6 @@ void SerialPort::OnClose()
 bool SerialPort::OnWrite(const Buffer& bs)
 {
 	bool ret;
-	int i=0;
 	
 	if(bs.Length())
 	{	
@@ -175,4 +175,129 @@ void SerialPort::ReceiveTask2()
 void SerialPort::ReceiveTask3()
 {
 	((Task*)(this->_task))->Set(true,1);	
+}
+static char *itoa(int value, char *string, int radix)
+{
+    int i, d;
+    int flag = 0;
+    char *ptr = string;
+
+    /* This implementation only works for decimal numbers. */
+    if (radix != 10)
+    {
+        *ptr = 0;
+        return string;
+    }
+
+    if (!value)
+    {
+        *ptr++ = 0x30;
+        *ptr = 0;
+        return string;
+    }
+
+    /* if this is a negative value insert the minus sign. */
+    if (value < 0)
+    {
+        *ptr++ = '-';
+
+        /* Make the value positive. */
+        value *=  - 1;
+
+    }
+
+    for (i = 10000; i > 0; i /= 10)
+    {
+        d = value / i;
+
+        if (d || flag)
+        {
+            *ptr++ = (char)(d + 0x30);
+            value -= (d *i);
+            flag = 1;
+        }
+    }
+
+    /* Null terminate the string. */
+    *ptr = 0;
+
+    return string;
+}
+#include <stdarg.h>
+//模拟printf
+void SerialPort::Printf(char *Data, ...)
+{
+	const char *s;
+    int d;
+    char buf[16];
+
+    char bufSend[200];
+    int bufSendPos;
+    //int bufSendMax = ArrayLength(bufSend);
+
+    bufSendPos = 0;
+
+    va_list ap;
+    va_start(ap, Data);
+
+    while (*Data != 0)
+    // 判断是否到达字符串结束符
+    {
+        if (*Data == 0x5c)
+        //'\'
+        {
+            switch (*++Data)
+            {
+                case 'r':
+                    //回车符
+                    bufSend[bufSendPos++] = 0X0D;
+                    Data++;
+                    break;
+
+                case 'n':
+                    //换行符
+                    bufSend[bufSendPos++] = 0X0A;
+                    Data++;
+                    break;
+
+                default:
+                    Data++;
+                    break;
+            }
+        }
+
+        else if (*Data == '%')
+        {
+            //
+            switch (*++Data)
+            {
+                case 's':
+                    //字符串
+                    s = va_arg(ap, const char*);
+                    for (;  *s; s++)
+                    {
+                        bufSend[bufSendPos++] =  *s;
+                    }
+                    Data++;
+                    break;
+                case 'd':
+                    //十进制
+                    d = va_arg(ap, int);
+                    itoa(d, buf, 10);
+                    for (s = buf;  *s; s++)
+                    {
+                        bufSend[bufSendPos++] =  *s;
+                    }
+                    Data++;
+                    break;
+                default:
+                    Data++;
+                    break;
+            }
+        }
+        else
+            bufSend[bufSendPos++] =  *Data++;
+    }
+	Buffer bs(bufSend,bufSendPos);
+	this->Write(bs);
 }

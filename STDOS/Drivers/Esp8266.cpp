@@ -714,7 +714,7 @@ static char *itoa(int value, char *string, int radix)
 
 #include <stdarg.h>
 /*
- * 函数名：USART2_printf
+ * 函数名：USART2_printf 
  * 描述  ：格式化输出，类似于C库中的printf，但这里没有用到C库
  * 输入  ：-USARTx 串口通道，这里只用到了串口2，即USART2
  *		     -Data   要发送到串口的内容的指针
@@ -734,7 +734,7 @@ void Esp8266::USART_printf(char *Data, ...)
 
     char bufSend[200];
     int bufSendPos;
-    int bufSendMax = ArrayLength(bufSend);
+//    int bufSendMax = ArrayLength(bufSend);
 
     bufSendPos = 0;
 

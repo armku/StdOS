@@ -88,6 +88,7 @@ public:
 	void ReceiveTask();//临时修改
 	void ReceiveTask2();//接收到数据启动延时接收
 	void ReceiveTask3();//空闲中断收到数据接收完成。
+	void Printf(char *Data, ...);//模拟printf
 };
 
 // 串口设备配置
