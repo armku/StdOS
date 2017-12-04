@@ -84,7 +84,7 @@ void SerialPort::ChangePower(int level)
 
 SerialPort *printf_sp;
 bool isInFPutc;//正在串口输出
-static char com1rx[64],com1tx[64];
+static char com1rx[1024],com1tx[1024];
 uint OnUsart1Read123(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
 	//临时借调用

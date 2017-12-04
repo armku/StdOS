@@ -112,7 +112,6 @@ int main(void)
 	//SerialPortTest();
 	//ST7565Rtest();
 //	PwmSoloTest();
-
     Sys.Start();
 }
 void Delay_ms(int ms)
