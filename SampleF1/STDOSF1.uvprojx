@@ -1095,11 +1095,6 @@
               <FilePath>..\STDOS\Test\AD7124Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>Common.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\Common.cpp</FilePath>
-            </File>
-            <File>
               <FileName>SSD1309Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\SSD1309Test.cpp</FilePath>
@@ -2215,11 +2210,6 @@
               <FileName>AD7124Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AD7124Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Common.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\Common.cpp</FilePath>
             </File>
             <File>
               <FileName>SSD1309Test.cpp</FileName>
