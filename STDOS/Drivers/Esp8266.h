@@ -203,7 +203,6 @@
             bool SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, ENUMIDNOTypeDef ucId);
             char *ReceiveString(bool enumEnUnvarnishTx);
         private:
-            char *itoa(int value, char *string, int radix);
             void USART_printf(char *Data, ...);
         public:
             volatile bool FlagTcpClosed; //是否断开连接

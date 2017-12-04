@@ -664,7 +664,7 @@ char *Esp8266::ReceiveString(bool enumEnUnvarnishTx)
     return pRecStr;
 }
 
-char *Esp8266::itoa(int value, char *string, int radix)
+static char *itoa(int value, char *string, int radix)
 {
     int i, d;
     int flag = 0;
