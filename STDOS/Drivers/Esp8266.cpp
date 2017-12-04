@@ -55,7 +55,11 @@ void Esp8266::RemoveLed(){}
 //}
 bool Esp8266::Test(int times, int interval)
 {	
+	#if 0
 	this->SendCmdNew("AT", NULL, NULL, interval);
+	#else
+	this->Port->Printf("AT\r\n");
+	#endif
     return true;
 }
 bool Esp8266::Reset(bool soft)
