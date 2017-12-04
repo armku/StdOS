@@ -57,29 +57,42 @@ void Esp8266::OnReceive(Buffer &bs)
 				this->RunStep = 2;
 			}			
 			break;
-        case EspCmdType::EJoinAP: if (strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
-        {
-            this->cmdType = EspCmdType::ENONE;
-            this->RunStep = 3;
-        }
-        break;
-        case EspCmdType::EEnableMultipleId: if (strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
-        {
-            this->cmdType = EspCmdType::ENONE;
-            this->RunStep = 4;
-        }
-        break;
-        case EspCmdType::ELinkServer: if (strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
-        {
-            this->cmdType = EspCmdType::ENONE;
-            this->RunStep = 5;
-        }
-        if (strstr(strEsp8266_Fram_Record .RxBuf, "ALREADY CONNECTED"))
-        {
-            this->cmdType = EspCmdType::ENONE;
-            this->RunStep = 5;
-        }
-        break;
+        case EspCmdType::EJoinAP: 
+			if ((this->bufrcvcnt)&&(strstr(strEsp8266_Fram_Record .RxBuf, this->bufrcv1)))
+			{
+				this->cmdType = EspCmdType::ENONE;
+				this->RunStep = 3;
+			}			
+			if ((this->bufrcvcnt==2)&&(strstr(strEsp8266_Fram_Record .RxBuf, this->bufrcv2)))
+			{
+				this->cmdType = EspCmdType::ENONE;
+				this->RunStep = 3;
+			}			
+			break;
+        case EspCmdType::EEnableMultipleId: 
+			if ((this->bufrcvcnt)&&(strstr(strEsp8266_Fram_Record .RxBuf, this->bufrcv1)))
+			{
+				this->cmdType = EspCmdType::ENONE;
+				this->RunStep = 4;
+			}			
+			if ((this->bufrcvcnt==2)&&(strstr(strEsp8266_Fram_Record .RxBuf, this->bufrcv2)))
+			{
+				this->cmdType = EspCmdType::ENONE;
+				this->RunStep = 4;
+			}			
+			break;
+        case EspCmdType::ELinkServer: 
+			if ((this->bufrcvcnt)&&(strstr(strEsp8266_Fram_Record .RxBuf, this->bufrcv1)))
+			{
+				this->cmdType = EspCmdType::ENONE;
+				this->RunStep = 5;
+			}			
+			if ((this->bufrcvcnt==2)&&(strstr(strEsp8266_Fram_Record .RxBuf, this->bufrcv2)))
+			{
+				this->cmdType = EspCmdType::ENONE;
+				this->RunStep = 5;
+			}			
+			break;
         case EspCmdType::EUnvarnishSend: if (strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
         {
             this->cmdType = EspCmdType::ENONE;
