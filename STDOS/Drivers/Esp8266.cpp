@@ -799,31 +799,6 @@ void Esp8266::USART_printf(char *Data, ...)
         else
             bufSend[bufSendPos++] =  *Data++;
     }
-	#if 1
 	Buffer bs(bufSend,bufSendPos);
 	this->Port->Write(bs);
-	#else
-    this->SendData1(&bufSend[0], bufSendPos);
-	#endif
-}
-
-#include "stm32f10x.h" 
-//·¢ËÍÊý¾Ý
-void Esp8266::SendData1(char *buf, int len)
-{
-    #if 1
-        USART_TypeDef *USARTx = USART3;
-        for (int i = 0; i < len; i++)
-        {
-            USART_SendData(USARTx, buf[i]);
-            while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
-                ;
-        }
-    #else 
-        if (this->psp)
-        {
-            Buffer bs(buf, len);
-            this->psp->Write(bs);
-        }
-    #endif 
 }
