@@ -9,7 +9,6 @@ Fram_T strEsp8266_Fram_Record =
     0
 };
 
-
 Esp8266::Esp8266(){}
 Esp8266::~Esp8266(){}
 void Esp8266::Init(ITransport *port){}
@@ -192,7 +191,7 @@ bool Esp8266::SendCmdNew(char *cmd, char *reply1, char *reply2, int waittime)
     strEsp8266_Fram_Record .Length = 0; //从新开始接收新的数据包
 	this->Port->Rx.Clear();
 
-    this->USART_printf("%s\r\n", cmd);
+    this->Port->Printf("%s\r\n", cmd);
 
     return true;
 }
@@ -211,7 +210,7 @@ bool Esp8266::SendCmd(char *cmd, char *reply1, char *reply2, int waittime)
 {
     strEsp8266_Fram_Record .Length = 0; //从新开始接收新的数据包
 
-    this->USART_printf("%s\r\n", cmd);
+    this->Port->Printf("%s\r\n", cmd);
 
     if ((reply1 == 0) && (reply2 == 0))
     //不需要接收数据
@@ -602,7 +601,7 @@ bool Esp8266::UnvarnishSend()
 void Esp8266::ExitUnvarnishSend()
 {
     Delay_ms(1000);
-    this->USART_printf("+++");
+    this->Port->Printf("+++");
     Delay_ms(500);
 }
 
@@ -623,7 +622,7 @@ bool Esp8266::SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, EN
     bool bRet = false;
     if (enumEnUnvarnishTx)
     {
-        this->USART_printf("%s", pStr);
+        this->Port->Printf("%s", pStr);
         bRet = true;
     }
     else
@@ -662,143 +661,4 @@ char *Esp8266::ReceiveString(bool enumEnUnvarnishTx)
             pRecStr = strEsp8266_Fram_Record .RxBuf;
     }
     return pRecStr;
-}
-
-static char *itoa(int value, char *string, int radix)
-{
-    int i, d;
-    int flag = 0;
-    char *ptr = string;
-
-    /* This implementation only works for decimal numbers. */
-    if (radix != 10)
-    {
-        *ptr = 0;
-        return string;
-    }
-
-    if (!value)
-    {
-        *ptr++ = 0x30;
-        *ptr = 0;
-        return string;
-    }
-
-    /* if this is a negative value insert the minus sign. */
-    if (value < 0)
-    {
-        *ptr++ = '-';
-
-        /* Make the value positive. */
-        value *=  - 1;
-
-    }
-
-    for (i = 10000; i > 0; i /= 10)
-    {
-        d = value / i;
-
-        if (d || flag)
-        {
-            *ptr++ = (char)(d + 0x30);
-            value -= (d *i);
-            flag = 1;
-        }
-    }
-
-    /* Null terminate the string. */
-    *ptr = 0;
-
-    return string;
-}
-
-#include <stdarg.h>
-/*
- * 函数名：USART2_printf 
- * 描述  ：格式化输出，类似于C库中的printf，但这里没有用到C库
- * 输入  ：-USARTx 串口通道，这里只用到了串口2，即USART2
- *		     -Data   要发送到串口的内容的指针
- *			   -...    其他参数
- * 输出  ：无
- * 返回  ：无 
- * 调用  ：外部调用
- *         典型应用USART2_printf( USART2, "\r\n this is a demo \r\n" );
- *            		 USART2_printf( USART2, "\r\n %d \r\n", i );
- *            		 USART2_printf( USART2, "\r\n %s \r\n", j );
- */
-void Esp8266::USART_printf(char *Data, ...)
-{
-    const char *s;
-    int d;
-    char buf[16];
-
-    char bufSend[200];
-    int bufSendPos;
-//    int bufSendMax = ArrayLength(bufSend);
-
-    bufSendPos = 0;
-
-    va_list ap;
-    va_start(ap, Data);
-
-    while (*Data != 0)
-    // 判断是否到达字符串结束符
-    {
-        if (*Data == 0x5c)
-        //'\'
-        {
-            switch (*++Data)
-            {
-                case 'r':
-                    //回车符
-                    bufSend[bufSendPos++] = 0X0D;
-                    Data++;
-                    break;
-
-                case 'n':
-                    //换行符
-                    bufSend[bufSendPos++] = 0X0A;
-                    Data++;
-                    break;
-
-                default:
-                    Data++;
-                    break;
-            }
-        }
-
-        else if (*Data == '%')
-        {
-            //
-            switch (*++Data)
-            {
-                case 's':
-                    //字符串
-                    s = va_arg(ap, const char*);
-                    for (;  *s; s++)
-                    {
-                        bufSend[bufSendPos++] =  *s;
-                    }
-                    Data++;
-                    break;
-                case 'd':
-                    //十进制
-                    d = va_arg(ap, int);
-                    itoa(d, buf, 10);
-                    for (s = buf;  *s; s++)
-                    {
-                        bufSend[bufSendPos++] =  *s;
-                    }
-                    Data++;
-                    break;
-                default:
-                    Data++;
-                    break;
-            }
-        }
-        else
-            bufSend[bufSendPos++] =  *Data++;
-    }
-	Buffer bs(bufSend,bufSendPos);
-	this->Port->Write(bs);
 }

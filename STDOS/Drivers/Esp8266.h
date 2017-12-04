@@ -202,8 +202,6 @@
             void ExitUnvarnishSend();
             bool SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, ENUMIDNOTypeDef ucId);
             char *ReceiveString(bool enumEnUnvarnishTx);
-        private:
-            void USART_printf(char *Data, ...);
         public:
             volatile bool FlagTcpClosed; //是否断开连接
 			int RunStep;//运行步骤
