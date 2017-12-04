@@ -94,11 +94,11 @@ void TSys::OnShowInfo()const
     }
 
 
-    printf("STDOS::");
-    printf("STM32");
-    printf("F103");
-    printf("%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName->GetBuffer(), this->Clock, this->FlashSize, this->RAMSize);
-    printf("DevID:0x%04X RevID:0x%04X \r\n", this->DevID, this->RevID);
+    debug_printf("STDOS::");
+    debug_printf("STM32");
+    debug_printf("F103");
+    debug_printf("%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName->GetBuffer(), this->Clock, this->FlashSize, this->RAMSize);
+    debug_printf("DevID:0x%04X RevID:0x%04X \r\n", this->DevID, this->RevID);
     debug_printf("CPUID:%p", this->CPUID);
     debug_printf(" ARMv7-M");
     debug_printf(" Cortex-M%d:", 3);
@@ -107,7 +107,7 @@ void TSys::OnShowInfo()const
     debug_printf("Heap :(%p, %p) = 0x%x (%dk)\r\n", (uint) &__heap_base, (uint) &__heap_limit, HeapSize, HeapSize / 1024);
     debug_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", (uint) &__heap_limit, (uint) &__initial_sp, StackSize, StackSize / 1024);
 
-    printf("ChipType:0x42455633 3\r\n");
+    debug_printf("ChipType:0x42455633 3\r\n");
 }
 
 // ÷ÿ∆ÙœµÕ≥

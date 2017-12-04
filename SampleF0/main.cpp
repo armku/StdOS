@@ -48,8 +48,8 @@ uint time6cnt;
 
 void TimerTask(void *param)
 {
-    static int i = 0;
-    printf("\r\n%d: cnt:%d", i++, time6cnt);
+//    static int i = 0;
+//    debug_printf("\r\n%d: cnt:%d", i++, time6cnt);
 }
 void PwmSoloTest();
 int main()

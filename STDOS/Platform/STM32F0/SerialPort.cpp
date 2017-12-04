@@ -56,19 +56,66 @@ void OnUsartReceive(ushort num, void *param)
 {
     SerialPort *sp = (SerialPort*)param;
 	USART_TypeDef *const g_Uart_Ports[] = UARTS;
+	volatile byte ch;
 
     //if (sp && sp->HasHandler())
 	if (sp)
     {		
         if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
         {			
-			byte ch=USART_ReceiveData(g_Uart_Ports[sp->Index]);
-			if(sp->Index<10)
+			ch=USART_ReceiveData(g_Uart_Ports[sp->Index]);
+			sp->Rx.Enqueue(ch);
+        }	
+		if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_IDLE) == SET)
+        //数据帧接收完毕
+        {
+            ch = USART_ReceiveData(g_Uart_Ports[sp->Index]); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)            
+			
+			sp->ReceiveTask3();			
+        }
+		/* 处理发送缓冲区空中断 */
+		if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_TXE) != RESET)
+		{
+			if (sp->Tx.Empty())
 			{
-				sp->Rx.Enqueue(ch);
+				/* 发送缓冲区的数据已取完时， 禁止发送缓冲区空中断 （注意：此时最后1个数据还未真正发送完毕）*/
+				USART_ITConfig(g_Uart_Ports[sp->Index], USART_IT_TXE, DISABLE);
+				/* 使能数据发送完毕中断 */
+				USART_ITConfig(g_Uart_Ports[sp->Index], USART_IT_TC, ENABLE);
 			}
-			sp->ReceiveTask2();
-        }		
+			else
+			{
+				/* 从发送FIFO取1个字节写入串口发送数据寄存器 */
+				USART_SendData(g_Uart_Ports[sp->Index], sp->Tx.Dequeue());
+			}
+
+		}
+		/* 数据bit位全部发送完毕的中断 */
+		else if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_TC) != RESET)
+		{
+			if (sp->Tx.Empty())
+			{
+				/* 如果发送FIFO的数据全部发送完毕，禁止数据发送完毕中断 */
+				USART_ITConfig(g_Uart_Ports[sp->Index], USART_IT_TC, DISABLE);
+
+				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
+				//            if (_pUart->SendOver)
+				//            {
+				//                _pUart->SendOver();
+				//            }
+				sp->Tx.Clear();
+				if(sp->RS485)
+				{
+					sp->RS485=0;
+				}
+			}
+			else
+			{
+				/* 正常情况下，不会进入此分支 */
+				/* 如果发送FIFO的数据还未完毕，则从发送FIFO取1个数据写入发送数据寄存器 */
+				USART_SendData(g_Uart_Ports[sp->Index], sp->Tx.Dequeue());
+			}
+		}		
     }
 }
 void SerialPort::Register(TransportHandler handler, void *param)
@@ -199,6 +246,7 @@ bool SerialPort::OnOpen()
     USART_Init(g_Uart_Ports[this->Index], &p);
 
     USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_RXNE, ENABLE); // 串口接收中断配置
+	//USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
     // 初始化的时候会关闭所有中断，这里不需要单独关闭发送中断
     //USART_ITConfig(_port, USART_IT_TXE, DISABLE); // 不需要发送中断
 
@@ -288,4 +336,10 @@ int SerialPort::SendData(byte data, int times)
         Error++;
     }
     return 0;
+}
+//调用中断发送
+void SerialPort::OnWrite2()
+{		
+	USART_TypeDef *const g_Uart_Ports[] = UARTS;	
+	USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_TXE, ENABLE);
 }

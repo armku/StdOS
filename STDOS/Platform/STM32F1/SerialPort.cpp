@@ -64,7 +64,7 @@ void OnUsartReceive(ushort num, void *param)
 {
     SerialPort *sp = (SerialPort*)param;
     USART_TypeDef *const g_Uart_Ports[] = UARTS;
-	byte ch;
+	volatile byte ch;
 
     //if (sp && sp->HasHandler())
     if (sp)
@@ -387,4 +387,3 @@ void SerialPort::OnWrite2()
 	USART_TypeDef *const g_Uart_Ports[] = UARTS;	
 	USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_TXE, ENABLE);
 }
-
