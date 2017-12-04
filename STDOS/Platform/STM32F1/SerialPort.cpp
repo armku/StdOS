@@ -56,9 +56,6 @@ int SerialPort_Closeing(int result)
 
 #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
 
-#include "Drivers\Esp8266.h"
-#include <string.h> 
-extern Esp8266 esp;
 // 真正的串口中断函数
 void OnUsartReceive(ushort num, void *param)
 {
@@ -77,18 +74,7 @@ void OnUsartReceive(ushort num, void *param)
 		if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_IDLE) == SET)
         //数据帧接收完毕
         {
-            ch = USART_ReceiveData(g_Uart_Ports[sp->Index]); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)            
-			if(num ==COM3)
-			{
-				strEsp8266_Fram_Record .Length=sp->Rx.Length();
-				for(int i=0;i<strEsp8266_Fram_Record .Length;i++)
-				{
-					strEsp8266_Fram_Record .RxBuf[i]=sp->Rx.Dequeue();
-				}
-				sp->Rx.Clear();
-				strEsp8266_Fram_Record .FlagFinish = 1;
-				esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record .RxBuf, "CLOSED\r\n") ? 1 : 0;
-			}
+            ch = USART_ReceiveData(g_Uart_Ports[sp->Index]); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)    
 			sp->ReceiveTask3();			
         }
 		/* 处理发送缓冲区空中断 */
@@ -117,10 +103,6 @@ void OnUsartReceive(ushort num, void *param)
 				USART_ITConfig(g_Uart_Ports[sp->Index], USART_IT_TC, DISABLE);
 
 				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
-				//            if (_pUart->SendOver)
-				//            {
-				//                _pUart->SendOver();
-				//            }
 				sp->Tx.Clear();
 				if(sp->RS485)
 				{

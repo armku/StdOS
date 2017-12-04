@@ -23,6 +23,8 @@
 		SetMode,//设置工作模式
 		JoinAP,
 		EnableMultipleId,
+		LinkServer,
+		UnvarnishSend,
 		
 	};
 
@@ -191,7 +193,6 @@
 			
             void ChipEnable(bool en = true); //设置芯片有效			
             bool JoinAP(char *ssid, char *pass);
-            bool BuildAP(char *pSSID, char *pPassWord, ENUMAPPsdModeTypeDef enunPsdMode);
             bool EnableMultipleId(bool enumEnUnvarnishTx);
             bool LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, ENUMIDNOTypeDef id);
             bool StartOrShutServer(bool enumMode, char *pPortNum, char *pTimeOver);
@@ -201,7 +202,6 @@
             bool UnvarnishSend();
             void ExitUnvarnishSend();
             bool SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, ENUMIDNOTypeDef ucId);
-            char *ReceiveString(bool enumEnUnvarnishTx);
         public:
             volatile bool FlagTcpClosed; //是否断开连接
 			int RunStep;//运行步骤

@@ -154,6 +154,7 @@ bool Esp8266::EnableMultipleId(bool enumEnUnvarnishTx)
  */
 bool Esp8266::LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, ENUMIDNOTypeDef id)
 {
+	this->cmdType=EspCmdType::LinkServer;
     char cStr[100] = 
     {
         0
@@ -174,7 +175,7 @@ bool Esp8266::LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, ENUMID
         sprintf(cCmd, "AT+CIPSTART=%d,%s", id, cStr);
     else
         sprintf(cCmd, "AT+CIPSTART=%s", cStr);
-    return this->SendCmd(cCmd, "OK", "ALREAY CONNECT", 999);
+    return this->SendCmdNew(cCmd, "OK", "ALREAY CONNECT", 999);
 }
 /*
  * 函数名：SendCmd
@@ -232,11 +233,6 @@ bool Esp8266::SendCmd(char *cmd, char *reply1, char *reply2, int waittime)
         return ((bool)strstr(strEsp8266_Fram_Record .RxBuf, reply2));
 }
 
-
-
-
-
-
 // 处理收到的数据包
 void Esp8266::Process()
 {
@@ -245,6 +241,16 @@ void Esp8266::Process()
 // 数据到达
 void Esp8266::OnReceive(Buffer& bs)
 {
+	strEsp8266_Fram_Record .Length=bs.Length();
+	for(int i=0;i<strEsp8266_Fram_Record .Length;i++)
+	{
+		strEsp8266_Fram_Record .RxBuf[i]=bs[i];
+	}	
+	strEsp8266_Fram_Record .FlagFinish = 1;
+	this->FlagTcpClosed = strstr(strEsp8266_Fram_Record .RxBuf, "CLOSED\r\n") ? 1 : 0;
+	
+	
+	
 	switch(this->cmdType)
 	{
 		case EspCmdType::TEST:
@@ -280,6 +286,25 @@ void Esp8266::OnReceive(Buffer& bs)
 				this->RunStep=4;
 			}
 			break;
+		case EspCmdType::LinkServer:
+			if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
+			{
+				this->cmdType=EspCmdType::NONE;
+				this->RunStep=5;
+			}
+			if(strstr(strEsp8266_Fram_Record .RxBuf, "ALREADY CONNECTED"))
+			{
+				this->cmdType=EspCmdType::NONE;
+				this->RunStep=5;
+			}
+			break;
+		case EspCmdType::UnvarnishSend:
+			if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
+			{
+				this->cmdType=EspCmdType::NONE;
+				this->RunStep=6;
+			}
+			break;
 		case EspCmdType::NONE:
 		default:
 			break;
@@ -300,8 +325,7 @@ void Esp8266::Routin()
         char cStr[100] = 
         {
             0
-        };
-		
+        };		
 
         switch (this->RunStep)
         {
@@ -314,23 +338,34 @@ void Esp8266::Routin()
                 break;
 			case 2:				
 				debug_printf("\r\n正在重连热点和服务器 ......\r\n");
-                while (!this->JoinAP(ApSsid, ApPwd))
+                #if 0
+				while (!this->JoinAP(ApSsid, ApPwd))
                     ;
+				#endif
+				this->JoinAP(ApSsid, ApPwd);
                 break;
             case 3:				
 				this->EnableMultipleId(false);
                 break;
             case 4:
+				#if 0
 				while (!this->LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
                     ;
+				#else
+				this->LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0);
+				#endif
 				debug_printf("\r\n重连热点和服务器成功\r\n");
-                this->RunStep++;
+                //this->RunStep++;
                 break;
             case 5:
+				#if 0
 				while (!this->UnvarnishSend())
                     ;
+				#else
+				this->UnvarnishSend();
+				#endif
                 debug_printf("\r\n配置 ESP8266 完毕\r\n");
-                this->RunStep++;
+                //this->RunStep++;
                 break;
             case 6:				
                 sprintf(cStr, "%d hello world!\r\n", ++icnt);
@@ -358,7 +393,6 @@ void Esp8266::Routin()
                     }
                     while (!this->UnvarnishSend())
                         ;
-
                 }
                 break;
             case 77:
@@ -426,27 +460,6 @@ void Esp8266::ChipEnable(bool en)
 }
 
 /*
- * 函数名：ESP8266_BuildAP
- * 描述  ：WF-ESP8266模块创建WiFi热点
- * 输入  ：pSSID，WiFi名称字符串
- *       ：pPassWord，WiFi密码字符串
- *       ：enunPsdMode，WiFi加密方式代号字符串
- * 返回  : 1，创建成功
- *         0，创建失败
- * 调用  ：被外部调用
- */
-bool Esp8266::BuildAP(char *pSSID, char *pPassWord, ENUMAPPsdModeTypeDef enunPsdMode)
-{
-    char cCmd[120];
-    sprintf(cCmd, "AT+CWSAP=\"%s\",\"%s\",1,%d", pSSID, pPassWord, enunPsdMode);
-    return this->SendCmd(cCmd, "OK", 0, 1000);
-}
-
-
-
-
-
-/*
  * 函数名：StartOrShutServer
  * 描述  ：WF-ESP8266模块开启或关闭服务器模式
  * 输入  ：enumMode，开启/关闭
@@ -466,13 +479,13 @@ bool Esp8266::StartOrShutServer(bool enumMode, char *pPortNum, char *pTimeOver)
 
         sprintf(cCmd2, "AT+CIPSTO=%s", pTimeOver);
 
-        return (this->SendCmd(cCmd1, "OK", 0, 500) && this->SendCmd(cCmd2, "OK", 0, 500));
+        return (this->SendCmdNew(cCmd1, "OK", 0, 500) && this->SendCmd(cCmd2, "OK", 0, 500));
     }
     else
     {
         sprintf(cCmd1, "AT+CIPSERVER=%d,%s", 0, pPortNum);
 
-        return this->SendCmd(cCmd1, "OK", 0, 500);
+        return this->SendCmdNew(cCmd1, "OK", 0, 500);
     }
 }
 
@@ -488,7 +501,7 @@ bool Esp8266::StartOrShutServer(bool enumMode, char *pPortNum, char *pTimeOver)
  */
 int Esp8266::GetLinkStatus()
 {
-    if (this->SendCmd("AT+CIPSTATUS", "OK", 0, 500))
+    if (this->SendCmdNew("AT+CIPSTATUS", "OK", 0, 500))
     {
         if (strstr(strEsp8266_Fram_Record .RxBuf, "STATUS:2\r\n"))
             return 2;
@@ -586,9 +599,10 @@ int Esp8266::InquireApIp(char *pApIp, int ucArrayLength)
  */
 bool Esp8266::UnvarnishSend()
 {
-    if (!this->SendCmd("AT+CIPMODE=1", "OK", 0, 500))
+	this->cmdType=EspCmdType::UnvarnishSend;
+    if (!this->SendCmdNew("AT+CIPMODE=1", "OK", 0, 500))
         return false;
-    return this->SendCmd("AT+CIPSEND", "OK", ">", 500);
+    return this->SendCmdNew("AT+CIPSEND", "OK", ">", 500);
 }
 
 /*
@@ -632,33 +646,7 @@ bool Esp8266::SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, EN
         else
             sprintf(cStr, "AT+CIPSEND=%d", ulStrLength + 2);
         this->SendCmd(cStr, "> ", 0, 1000);
-        bRet = this->SendCmd(pStr, "SEND OK", 0, 1000);
+        bRet = this->SendCmdNew(pStr, "SEND OK", 0, 1000);
     }
     return bRet;
-}
-
-
-/*
- * 函数名：ESP8266_ReceiveString
- * 描述  ：WF-ESP8266模块接收字符串
- * 输入  ：enumEnUnvarnishTx，声明是否已使能了透传模式
- * 返回  : 接收到的字符串首地址
- * 调用  ：被外部调用
- */
-char *Esp8266::ReceiveString(bool enumEnUnvarnishTx)
-{
-    char *pRecStr = 0;
-    strEsp8266_Fram_Record .Length = 0;
-    strEsp8266_Fram_Record .FlagFinish = 0;
-    while (!strEsp8266_Fram_Record .FlagFinish)
-        ;
-    strEsp8266_Fram_Record .RxBuf[strEsp8266_Fram_Record .Length] = '\0';
-    if (enumEnUnvarnishTx)
-        pRecStr = strEsp8266_Fram_Record .RxBuf;
-    else
-    {
-        if (strstr(strEsp8266_Fram_Record .RxBuf, "+IPD"))
-            pRecStr = strEsp8266_Fram_Record .RxBuf;
-    }
-    return pRecStr;
 }
