@@ -130,8 +130,10 @@ bool SerialPort::OnWrite(const Buffer& bs)
 	
 	if(bs.Length())
 	{	
+		TInterrupt::GlobalDisable();
 		this->Tx.Write(bs);
-		//this->Set485(true);
+		TInterrupt::GlobalEnable();
+		this->Set485(true);
 		this->OnWrite2();
 		//this->Set485(false);//Ìí¼Ó
 		ret=true;

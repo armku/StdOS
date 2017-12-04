@@ -121,6 +121,11 @@ void OnUsartReceive(ushort num, void *param)
 				//            {
 				//                _pUart->SendOver();
 				//            }
+				sp->Tx.Clear();
+				if(sp->RS485)
+				{
+					sp->RS485=0;
+				}
 			}
 			else
 			{
@@ -379,21 +384,7 @@ int SerialPort::SendData(byte data, int times)
 //调用中断发送
 void SerialPort::OnWrite2()
 {		
-	USART_TypeDef *const g_Uart_Ports[] = UARTS;
-	#if 1	
-		if(Sys.MessagePort=this->Index)
-		{
-			char buf[200];
-			Buffer bs(buf,ArrayLength(buf));
-			this->Tx.Read(bs);
-			this->OnWrite3(bs);
-		}
-		else
-		{
-			USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_TXE, ENABLE);
-		}
-	#else
+	USART_TypeDef *const g_Uart_Ports[] = UARTS;	
 	USART_ITConfig(g_Uart_Ports[this->Index], USART_IT_TXE, ENABLE);
-	#endif
 }
 

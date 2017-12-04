@@ -42,20 +42,6 @@ void SerialPort::OnClose2()
 {
 
 }
-//void SerialPort::OnWrite2()
-//{	
-//	char buf[200];
-//	Buffer bs(buf,ArrayLength(buf));
-//	this->Tx.Read(bs);
-//	this->OnWrite3(bs);
-//}
-void SerialPort::OnWrite3(const Buffer &bs)//add
-{
-	for(int i=0;i<bs.Length();i++)
-	{
-		this->SendData(bs[i]);
-	}
-}
 
 void SerialPort::OnHandler(ushort num, void* param)
 {
