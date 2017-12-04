@@ -55,11 +55,7 @@ void Esp8266::RemoveLed(){}
 //}
 bool Esp8266::Test(int times, int interval)
 {
-    #if 0
-        this->SendCmdNew("AT", NULL, NULL, interval);
-    #else 
-        this->Port->Printf("AT\r\n");
-    #endif 
+    this->Port->Printf("AT\r\n");
     return true;
 }
 
@@ -85,12 +81,16 @@ bool Esp8266::SetMode(NetworkType mode)
 
     switch (this->WorkMode)
     {
-        case NetworkType::Station: return this->SendCmdNew("AT+CWMODE=1", "OK", "no change", 2500);
-        case NetworkType::AP: return this->SendCmdNew("AT+CWMODE=2", "OK", "no change", 2500);
-        case NetworkType::STA_AP: return this->SendCmdNew("AT+CWMODE=3", "OK", "no change", 2500);
+        case NetworkType::Station: 
+			return this->SendCmdNew("AT+CWMODE=1", "OK", "no change", 2500);
+        case NetworkType::AP: 
+			return this->SendCmdNew("AT+CWMODE=2", "OK", "no change", 2500);
+        case NetworkType::STA_AP: 
+			return this->SendCmdNew("AT+CWMODE=3", "OK", "no change", 2500);
         default:
             return false;
     }
+	return true;
 }
 
 /*
