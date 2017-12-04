@@ -54,23 +54,8 @@ void Esp8266::RemoveLed(){}
 
 //}
 bool Esp8266::Test(int times, int interval)
-{
-	#if 0
-//    char count = 0;    	
-//	this->_Reset = 1;
-//	this->cmdType=EspCmdType::TEST;
-//	Delay_ms(1000-1);
-//	while (count < times)
-//	{
-//		if (this->SendCmdNew("AT", "OK", NULL, interval))
-//			return ;
-//		this->Reset(false);
-//		++count;
-//	}
-	#else
-	this->cmdType=EspCmdType::TEST;
+{	
 	this->SendCmdNew("AT", NULL, NULL, interval);
-	#endif
     return true;
 }
 bool Esp8266::Reset(bool soft)
@@ -93,7 +78,7 @@ bool Esp8266::Sleep(uint ms)
 bool Esp8266::SetMode(NetworkType mode)
 {
 	this->WorkMode=mode;
-	this->cmdType=EspCmdType::SetMode;
+	
 	switch (this->WorkMode)
     {
         case NetworkType::Station:
@@ -118,7 +103,7 @@ bool Esp8266::SetMode(NetworkType mode)
 bool Esp8266::JoinAP(char *ssid, char *pass)
 {
     char cCmd[120];
-	this->cmdType=EspCmdType::JoinAP;
+	
     sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", ssid, pass);
     return this->SendCmdNew(cCmd, "OK", NULL, 5000);
 }
@@ -137,7 +122,7 @@ bool Esp8266::JoinAP(const String& ssid, const String& pass)
 bool Esp8266::EnableMultipleId(bool enumEnUnvarnishTx)
 {
     char cStr[20];
-	this->cmdType=EspCmdType::EnableMultipleId;
+	
     sprintf(cStr, "AT+CIPMUX=%d", (enumEnUnvarnishTx ? 1 : 0));
     return this->SendCmdNew(cStr, "OK", 0, 500);
 }
@@ -154,7 +139,7 @@ bool Esp8266::EnableMultipleId(bool enumEnUnvarnishTx)
  */
 bool Esp8266::LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, ENUMIDNOTypeDef id)
 {
-	this->cmdType=EspCmdType::LinkServer;
+	this->cmdType=EspCmdType::ELinkServer;
     char cStr[100] = 
     {
         0
@@ -253,59 +238,59 @@ void Esp8266::OnReceive(Buffer& bs)
 	
 	switch(this->cmdType)
 	{
-		case EspCmdType::TEST:
+		case EspCmdType::ETEST:
 			if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
 			{
-				this->cmdType=EspCmdType::NONE;
+				this->cmdType=EspCmdType::ENONE;
 				this->RunStep=1;
 			}
 			break;
-		case EspCmdType::SetMode:
+		case EspCmdType::ESetMode:
 			if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
 			{
-				this->cmdType=EspCmdType::NONE;
+				this->cmdType=EspCmdType::ENONE;
 				this->RunStep=2;
 			}
 			if(strstr(strEsp8266_Fram_Record .RxBuf, "no change"))
 			{
-				this->cmdType=EspCmdType::NONE;
+				this->cmdType=EspCmdType::ENONE;
 				this->RunStep=2;
 			}
 			break;
-		case EspCmdType::JoinAP:
+		case EspCmdType::EJoinAP:
 			if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
 			{
-				this->cmdType=EspCmdType::NONE;
+				this->cmdType=EspCmdType::ENONE;
 				this->RunStep=3;
 			}
 			break;
-		case EspCmdType::EnableMultipleId:
+		case EspCmdType::EEnableMultipleId:
 			if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
 			{
-				this->cmdType=EspCmdType::NONE;
+				this->cmdType=EspCmdType::ENONE;
 				this->RunStep=4;
 			}
 			break;
-		case EspCmdType::LinkServer:
+		case EspCmdType::ELinkServer:
 			if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
 			{
-				this->cmdType=EspCmdType::NONE;
+				this->cmdType=EspCmdType::ENONE;
 				this->RunStep=5;
 			}
 			if(strstr(strEsp8266_Fram_Record .RxBuf, "ALREADY CONNECTED"))
 			{
-				this->cmdType=EspCmdType::NONE;
+				this->cmdType=EspCmdType::ENONE;
 				this->RunStep=5;
 			}
 			break;
-		case EspCmdType::UnvarnishSend:
+		case EspCmdType::EUnvarnishSend:
 			if(strstr(strEsp8266_Fram_Record .RxBuf, "OK"))
 			{
-				this->cmdType=EspCmdType::NONE;
+				this->cmdType=EspCmdType::ENONE;
 				this->RunStep=6;
 			}
 			break;
-		case EspCmdType::NONE:
+		case EspCmdType::ENONE:
 		default:
 			break;
 	}
@@ -332,20 +317,21 @@ void Esp8266::Routin()
             case 0:
                 debug_printf("\r\n正在测试在线 ESP8266 ......\r\n");
                 this->Test();
+				this->cmdType=EspCmdType::ETEST;
 				break;
 			case 1:
+                debug_printf("\r\n正在设置工作模式 ......\r\n");
                 this->SetMode(NetworkType::Station);
+				this->cmdType=EspCmdType::ESetMode;
                 break;
 			case 2:				
-				debug_printf("\r\n正在重连热点和服务器 ......\r\n");
-                #if 0
-				while (!this->JoinAP(ApSsid, ApPwd))
-                    ;
-				#endif
+				debug_printf("\r\n正在重连热点和服务器 ......\r\n");                
 				this->JoinAP(ApSsid, ApPwd);
+				this->cmdType=EspCmdType::EJoinAP;
                 break;
             case 3:				
 				this->EnableMultipleId(false);
+				this->cmdType=EspCmdType::EEnableMultipleId;
                 break;
             case 4:
 				#if 0
@@ -599,7 +585,7 @@ int Esp8266::InquireApIp(char *pApIp, int ucArrayLength)
  */
 bool Esp8266::UnvarnishSend()
 {
-	this->cmdType=EspCmdType::UnvarnishSend;
+	this->cmdType=EspCmdType::EUnvarnishSend;
     if (!this->SendCmdNew("AT+CIPMODE=1", "OK", 0, 500))
         return false;
     return this->SendCmdNew("AT+CIPSEND", "OK", ">", 500);
