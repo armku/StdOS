@@ -41,7 +41,7 @@ void Esp8266::OnReceive(Buffer &bs)
 			if ((this->bufrcvcnt)&&(strstr(strEsp8266_Fram_Record .RxBuf, this->bufrcv1)))
 			{
 				this->cmdType = EspCmdType::ENONE;
-				this->RunStep = 1;
+				//this->RunStep = 1;
 			}
 			break;
         case EspCmdType::ESetMode: 
@@ -116,7 +116,6 @@ void Esp8266::Routin()
     switch (this->RunStep)
     {
         case 0:
-            debug_printf("\r\n正在测试在线 ESP8266 ......\r\n");
             this->Test();            
             break;
         case 1:
@@ -184,9 +183,13 @@ void Esp8266::Init(COM idx, int baudrate)
     sp->SetBaudRate(baudrate);
     sp->Rx.SetBuf(com3bufrx, ArrayLength(com3bufrx));
     sp->Tx.SetBuf(com3buftx, ArrayLength(com3buftx));
-
+	
+	
     this->Port = sp;
+	
 	this->At.Port=sp;
+	this->At.Open();
+	
 
     this->_task = Sys.AddTask(&Esp8266::Routin, this, 500, 500, "espRtn");
 }

@@ -32,7 +32,7 @@
         esp.SetPin(PG13, PG14);
 		esp.Init(COM3,115200);
         
-        esp.Port->Register(OnUsart3Read);
+        //esp.Port->Register(OnUsart3Read);
         esp.Port->Open();
 
         //esp.SetSerialPort(&sp3);
