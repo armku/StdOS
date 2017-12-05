@@ -25,7 +25,10 @@
 		EEnableMultipleId,
 		ELinkServer,
 		EUnvarnishSend,
-		
+		EExitUnvarnishSend,
+		EStartOrShutServer,
+		EGetIdLinkStatus,
+		EGetLinkStatus,
 	};
 
     typedef struct
@@ -155,20 +158,7 @@
 			void Routin();//循环运行
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		bool SendCmdNew(char *cmd, char *reply1, char *reply2, int waittime);
-		bool SendCmd(char *cmd, char *reply1, char *reply2, int waittime);
-		
-		
-		
-		
-		
+			
 		
 		
 		
@@ -199,13 +189,9 @@
             bool JoinAP(char *ssid, char *pass);
             bool EnableMultipleId(bool enumEnUnvarnishTx);
             bool LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, ENUMIDNOTypeDef id);
-            bool StartOrShutServer(bool enumMode, char *pPortNum, char *pTimeOver);
             int GetLinkStatus();
-            int GetIdLinkStatus();
-            int InquireApIp(char *pApIp, int ucArrayLength);
             bool UnvarnishSend();
             void ExitUnvarnishSend();
-            bool SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, ENUMIDNOTypeDef ucId);
         public:
             volatile bool FlagTcpClosed; //是否断开连接
 			int RunStep;//运行步骤
