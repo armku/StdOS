@@ -26,8 +26,9 @@ float AT::GetLongitude()
 }
 // 打开与关闭
 bool AT::Open()
-{
+{	
 	this->Port->Register(AT::OnPortReceive);
+	this->Port->Open();
 }
 void AT::Close()
 {

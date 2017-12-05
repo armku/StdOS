@@ -1,4 +1,4 @@
-﻿#ifndef __AT_H__
+#ifndef __AT_H__
 #define __AT_H__
 
 // GPRS的AT指令集 GSM 07.07
