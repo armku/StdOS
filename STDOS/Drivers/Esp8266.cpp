@@ -186,6 +186,7 @@ void Esp8266::Init(COM idx, int baudrate)
     sp->Tx.SetBuf(com3buftx, ArrayLength(com3buftx));
 
     this->Port = sp;
+	this->At.Port=sp;
 
     this->_task = Sys.AddTask(&Esp8266::Routin, this, 500, 500, "espRtn");
 }
@@ -219,7 +220,7 @@ void Esp8266::SetRcv(char *rcv1, char *rcv2,int rcvcnt)
 }
 bool Esp8266::Test(int times, int interval)
 {
-    this->Port->Printf("AT\r\n");
+    this->At.SendCmd("AT");
 	this->SetRcv("OK",NULL,1);
 	this->cmdType = EspCmdType::ETEST;
     return true;
@@ -229,7 +230,7 @@ bool Esp8266::Reset(bool soft)
 {
     if (soft)
     {
-        this->Port->Printf("AT+RST\r\n");
+        this->At.SendCmd("AT+RST");
 		this->SetRcv("OK", "ready",2);
 		//this->cmdType = EspCmdType::ESetMode;
     }
@@ -250,13 +251,13 @@ bool Esp8266::SetMode(NetworkType mode)
     switch (this->WorkMode)
     {
         case NetworkType::Station: 
-			this->Port->Printf("AT+CWMODE=1\r\n");
+			this->At.SendCmd("AT+CWMODE=1");
 			break;
         case NetworkType::AP: 
-			this->Port->Printf("AT+CWMODE=2\r\n");
+			this->At.SendCmd("AT+CWMODE=2");
 			break;
         case NetworkType::STA_AP: 
-			this->Port->Printf("AT+CWMODE=3\r\n");
+			this->At.SendCmd("AT+CWMODE=3");
 			break;
         default:
             return false;
@@ -419,7 +420,7 @@ void Esp8266::ChipEnable(bool en)
  */
 int Esp8266::GetLinkStatus()
 {
-    this->Port->Printf("AT+CIPSTATUS");
+    this->At.SendCmd("AT+CIPSTATUS");
     
 	if (strstr(strEsp8266_Fram_Record .RxBuf, "STATUS:2\r\n"))
 		return 2;
@@ -444,7 +445,7 @@ int Esp8266::GetLinkStatus()
  */
 bool Esp8266::UnvarnishSend()
 {	
-	this->Port->Printf("AT+CIPMODE=1\r\n");    	
+	this->At.SendCmd("AT+CIPMODE=1");    	
 	this->SetRcv("OK", NULL,1);
 	this->cmdType = EspCmdType::EUnvarnishSend;
 	return true;
@@ -459,7 +460,7 @@ bool Esp8266::UnvarnishSend()
  */
 void Esp8266::ExitUnvarnishSend()
 {	
-	this->Port->Printf("+++\r\n");    	
+	this->At.SendCmd("+++");    	
 	this->SetRcv("OK", NULL,1);
 	this->cmdType = EspCmdType::EExitUnvarnishSend;	
 }
