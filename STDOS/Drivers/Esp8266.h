@@ -45,7 +45,7 @@
 			char bufrcv2[20];//接收的响应字符串2
 			char bufrcvcnt;//接收的响应字符串数量
 			void SetRcv(char *rcv1, char *rcv2,int rcvcnt);//设置接收的字符串
-//			AT		At;		// AT操作对象
+			AT		At;		// AT操作对象
 		SerialPort*	Port;	// 传输口 代替AT指令
 
 			NetworkType	WorkMode;	// 工作模式
