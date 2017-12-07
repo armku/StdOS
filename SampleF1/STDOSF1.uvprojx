@@ -819,6 +819,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
             </File>
+            <File>
+              <FileName>WaitHandle.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1935,6 +1940,11 @@
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaitHandle.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
           </Files>
         </Group>

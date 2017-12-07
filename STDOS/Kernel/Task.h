@@ -11,7 +11,7 @@ class Task
 public:
 	TaskScheduler* Host;
 
-	uint	ID;			// ±àºÅ
+	uint	ID;			// ±àºÅ 4
 	cstring	Name;		// Ãû³Æ
 
 	Action	Callback;	// »Øµ÷ 4
