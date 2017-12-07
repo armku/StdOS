@@ -452,7 +452,33 @@ void TaskScheduler::SkipSleep(){}
 void TaskScheduler::Set(Task *tasks, int count){}
 uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
 {
-	return 0;
+	uint ret = 0;
+	if(this->Deepth<MaxDeepth)
+	{
+		this->Deepth++;
+		//auto v7=this->MaxCost;
+		auto v8=Sys.Ms();
+		auto v13=v8+msMax;
+		auto v9 =msMax;
+		TimeCost v12;
+		while(v9>=0 && !cancel)
+		{
+			this->Execute(v9,cancel);
+			auto v10 =Sys.Ms();
+			v9=v13-v10;
+		}
+		//this->MaxCost=v7;
+		auto v11=Sys.Ms()-v8;
+//		if(v7)
+//			v7=v7;
+		--this->Deepth;
+		ret=v11;
+	}
+	else
+	{
+		ret=false;
+	}
+	return ret;
 }
 //œ‘ æ ±º‰
 void ShowTime(void *param)
