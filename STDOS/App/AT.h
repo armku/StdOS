@@ -8,7 +8,7 @@ public:
 	ITransport*	Port;	// 传输口
 	
 
-	cstring	DataKey;	// 数据关键字
+	cstring	DataKey;	// 数据关键字 1
 
 	Delegate<Buffer&>	Received;
 
@@ -34,7 +34,7 @@ public:
 	bool WaitForCmd(cstring expect, uint msTimeout);
 
 private:
-	void*		_Expect;	// 等待内容
+	void*		_Expect;	// 等待内容 4
 
 	// 分析关键字。返回被用掉的字节数
 	uint ParseReply(const Buffer& bs);
