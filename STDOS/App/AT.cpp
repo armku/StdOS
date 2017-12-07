@@ -36,6 +36,13 @@ void AT::Close()
 }
 String AT::Send(const String& cmd, cstring expect, cstring expect2, uint msTimeout, bool trim)
 {
+	
+	
+	
+	
+	
+	
+	
 	auto p=(SerialPort*)this->Port;
 	if(this->Port)
 	{
@@ -60,10 +67,13 @@ bool AT::SendCmd(const String& cmd, uint msTimeout)
 // 引发数据到达事件
 uint AT::OnReceive(Buffer& bs, void* param)
 {
+	bs.Show();
 	return 1;
 }
+#include "Drivers\Esp8266.h"
+extern Esp8266 esp;
 uint AT::OnPortReceive(ITransport* sender, Buffer& bs, void* param, void* param2)
 {
-	bs.Show();
+	return esp.At.OnReceive(bs,param);
 	//return this->OnReceive(bs, sender, param);
 }
