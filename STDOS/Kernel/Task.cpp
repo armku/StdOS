@@ -455,24 +455,43 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
 	uint ret = 0;
 	if(this->Deepth<MaxDeepth)
 	{
+		#if 0
 		this->Deepth++;
 		//auto v7=this->MaxCost;
-		auto v8=Sys.Ms();
-		auto v13=v8+msMax;
-		auto v9 =msMax;
-		TimeCost v12;
-		while(v9>=0 && !cancel)
+		auto msBegin = Sys.Ms();
+		auto msEnd=Sys.Ms()+msMax;
+		auto msRemain =msMax;
+		while(msRemain>=0 && !cancel)
 		{
-			this->Execute(v9,cancel);
-			auto v10 =Sys.Ms();
-			v9=v13-v10;
+			this->Execute(msRemain,cancel);			
+			msRemain=msEnd-Sys.Ms();
 		}
 		//this->MaxCost=v7;
-		auto v11=Sys.Ms()-v8;
+		auto v10=Sys.Ms()-msBegin;
+		//auto v11=Sys.Ms()-v8;
 //		if(v7)
 //			v7=v7;
+		this->Deepth--;
+		//ret=v11;
+		#else
+		++this->Deepth;
+		auto maxCost = this->MaxCost;
+		auto msBegin = Sys.Ms();
+		auto msEndMax = msBegin + msMax;
+		auto pppmsMax = msMax;
+		TimeCost tmcost;
+		while ( pppmsMax > 0 && !cancel )
+		{
+		  this->Execute(pppmsMax, cancel);
+		  pppmsMax = msEndMax - Sys.Ms();
+		}
+		*((_DWORD *)ppthis + 12) = maxCost;
+		auto msUsed = Sys.Ms() - msBegin;
+		if ( maxCost )
+		  *(_DWORD *)(MaxCost + 36) += vC58((TimeCost *)&tmcost);
 		--this->Deepth;
-		ret=v11;
+		ret = msUsed;
+		#endif
 	}
 	else
 	{
