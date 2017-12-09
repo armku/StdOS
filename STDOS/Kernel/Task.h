@@ -73,7 +73,7 @@ public:
 
 	int		Times;		// 执行次数 14
 	int		Cost;		// 平均执行时间us
-	UInt64	TotalSleep;	// 所有任务的总睡眠时间ms
+	UInt64	TotalSleep;	// 所有任务的总睡眠时间ms 12
 	UInt64	LastTrace;	// 最后统计跟踪时间ms
 
 	typedef void (*SAction)(int ms);

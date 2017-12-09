@@ -455,27 +455,9 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
 	uint ret = 0;
 	if(this->Deepth<MaxDeepth)
 	{
-		#if 0
-		this->Deepth++;
-		//auto v7=this->MaxCost;
-		auto msBegin = Sys.Ms();
-		auto msEnd=Sys.Ms()+msMax;
-		auto msRemain =msMax;
-		while(msRemain>=0 && !cancel)
-		{
-			this->Execute(msRemain,cancel);			
-			msRemain=msEnd-Sys.Ms();
-		}
-		//this->MaxCost=v7;
-		auto v10=Sys.Ms()-msBegin;
-		//auto v11=Sys.Ms()-v8;
-//		if(v7)
-//			v7=v7;
-		this->Deepth--;
-		//ret=v11;
-		#else
 		++this->Deepth;
-		auto maxCost = this->MaxCost;
+			
+		auto maxCost = this->TotalSleep;
 		auto msBegin = Sys.Ms();
 		auto msEndMax = msBegin + msMax;
 		auto pppmsMax = msMax;
@@ -485,13 +467,13 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
 		  this->Execute(pppmsMax, cancel);
 		  pppmsMax = msEndMax - Sys.Ms();
 		}
-		*((_DWORD *)ppthis + 12) = maxCost;
+		this->TotalSleep = maxCost;
 		auto msUsed = Sys.Ms() - msBegin;
 		if ( maxCost )
-		  *(_DWORD *)(MaxCost + 36) += vC58((TimeCost *)&tmcost);
+		  LastTrace += tmcost.Elapsed();
+		
 		--this->Deepth;
 		ret = msUsed;
-		#endif
 	}
 	else
 	{
