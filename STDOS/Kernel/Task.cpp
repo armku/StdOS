@@ -356,70 +356,53 @@ void TaskScheduler::Stop()
 // 执行一次循环。指定最大可用时间
 void TaskScheduler::Execute(uint msMax, bool &cancel)
 {
-    UInt64 now = Sys.Ms();
+    UInt64 mscur = Sys.Ms();
     TimeCost tmcost;
 
     UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
 
-    int mscurMax = now + msMax;
+    int mscurMax = mscur + msMax;
     for (int i = 0; i < this->Count; i++)
     {
         if (cancel)
             return ;
         Task *taskcur = this->_Tasks[i];
-        if (taskcur && taskcur->Callback && taskcur->Enable && taskcur->NextTime <= now)
-        {
-            #if 0
-                if (taskcur->CheckTime(mscurMax, msMax > 0))
-                {
-                    if (taskcur->Execute(now))
-                        this->Times++;
-                    if (!msMax)
-                        return ;
-                    uint msEnd = Sys.Ms();
-                    if (mscurMax < msEnd)
-                        return ;
-                }
-                if (taskcur->Callback && taskcur->Enable)
-                {
-                    //				if(taskcur->Event)
-                    //					 v7 = 0LL;
-                    //				else if( (unsigned int)(*(_QWORD *)(taskcur + 24) >> 32) < (v7)+ (unsigned int)((unsigned int)*(_QWORD *)(taskcur + 24) < (unsigned int)v7) )
-                    //				{
-                    //					v7 = *(_QWORD *)(taskcur + 24);
-                    //				}
-
-                }
-                if (taskcur->NextTime < min)
-                {
-                    min = taskcur->NextTime;
-                }
-            #else 
-                // 不能通过累加的方式计算下一次时间，因为可能系统时间被调整
-                taskcur->NextTime = now + taskcur->Period;
-                if (taskcur->NextTime < min)
-                {
-                    min = taskcur->NextTime;
-                }
-                bool cancel = false;
-                this->Current = taskcur;
-                if (taskcur->CheckTime(Sys.Ms(), cancel))
-                    ;
-                {
-                    taskcur->Execute(Sys.Ms());
-                }
-                this->Current = NULL;
-            #endif 
+        if (taskcur && taskcur->Callback && taskcur->Enable && taskcur->NextTime <= mscur)
+        {            
+			if(taskcur->CheckTime(mscurMax,msMax != -1))
+			{
+				if(taskcur->Execute(mscur))
+				{
+					this->Times++;
+				}
+				if(!msMax)
+					return;
+				auto msend = Sys.Ms();
+			}
+			// 不能通过累加的方式计算下一次时间，因为可能系统时间被调整
+			taskcur->NextTime = mscur + taskcur->Period;
+			if (taskcur->NextTime < min)
+			{
+				min = taskcur->NextTime;
+			}
+			bool cancel = false;
+			this->Current = taskcur;
+			if (taskcur->CheckTime(Sys.Ms(), cancel))
+				;
+			{
+				taskcur->Execute(Sys.Ms());
+			}
+			this->Current = NULL;			
         }
     }
 
     this->Cost = tmcost.Elapsed();
 
     // 如果有最小时间，睡一会吧
-    now = Sys.Ms(); // 当前时间
-    if (min != UInt64_Max && min > now)
+    mscur = Sys.Ms(); // 当前时间
+    if (min != UInt64_Max && min > mscur)
     {
-        min -= now;
+        min -= mscur;
         Time.Sleep(min);
     }
 }
