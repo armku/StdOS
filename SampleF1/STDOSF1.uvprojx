@@ -1124,6 +1124,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\Esp8266Test.cpp</FilePath>
             </File>
+            <File>
+              <FileName>WaitHandleTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\WaitHandleTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2245,6 +2250,11 @@
               <FileName>Esp8266Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\Esp8266Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaitHandleTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\WaitHandleTest.cpp</FilePath>
             </File>
           </Files>
         </Group>

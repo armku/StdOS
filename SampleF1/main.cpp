@@ -83,6 +83,7 @@ void keyTest();
 void FifoTest();
 void SerialPortTest();
 void PwmSoloTest();
+void WaitHandleTest();
 
 int main(void)
 {
@@ -106,14 +107,16 @@ int main(void)
     //ModbusTest();
     //InterruptTest();
 	//ssd1309Test();
-    ESP8266Test();
+    //ESP8266Test();
 	//ds18b20test();
 	//keyTest();
 	//SerialPortTest();
 	//ST7565Rtest();
 //	PwmSoloTest();
+	WaitHandleTest();
     Sys.Start();
 }
+
 void Delay_ms(int ms)
 {
 	Sys.Sleep(ms);
