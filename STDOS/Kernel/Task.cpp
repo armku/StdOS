@@ -172,33 +172,36 @@ bool Task::CheckTime(UInt64 end, bool isSleep)
     if (this->Deepth < this->MaxDeepth)
     {
         uint mscur = Sys.Ms();
-        //		if(!this->Enable)
-        //		{
-        //			ret=false;
-        //		}
-        //		else 
-        if (end >= this->NextTime)
-        {
-            if (isSleep)
-            {
-                if (this->Event || (this->Period >= 0))
-                {
-                    ret = true;
-                }
-                else
-                {
-                    ret = false;
-                }
-            }
-            else
-            {
-                ret = true;
-            }
-        }
-        else
-        {
-            ret = false;
-        }
+		if(!this->Enable)
+		{
+			ret=false;
+		}
+		else if(this->NextTime && (mscur<this->NextTime))
+		{
+			ret = false;
+		}
+		else if(end >= mscur)
+		{
+			if(isSleep)
+			{
+				if(this->Event || this->Times > 0)
+				{
+					ret = true;
+				}
+				else
+				{
+					ret = false;
+				}
+			}
+			else
+			{
+				ret = 1;
+			}
+		}
+		else
+		{
+			ret = 0;
+		}
     }
     else
     {
@@ -361,10 +364,12 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
     int mscurMax = now + msMax;
     for (int i = 0; i < this->Count; i++)
     {
-		Task *taskcur = this->_Tasks[i];
-        #if 0            
-            if (taskcur && taskcur->Callback && taskcur->Enable)
-            {
+        if (cancel)
+            return ;
+        Task *taskcur = this->_Tasks[i];
+        if (taskcur && taskcur->Callback && taskcur->Enable && taskcur->NextTime <= now)
+        {
+            #if 0
                 if (taskcur->CheckTime(mscurMax, msMax > 0))
                 {
                     if (taskcur->Execute(now))
@@ -389,10 +394,7 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
                 {
                     min = taskcur->NextTime;
                 }
-            }
-        #else             
-            if (taskcur && taskcur->Enable && taskcur->NextTime <= now)
-            {
+            #else 
                 // 不能通过累加的方式计算下一次时间，因为可能系统时间被调整
                 taskcur->NextTime = now + taskcur->Period;
                 if (taskcur->NextTime < min)
@@ -407,8 +409,8 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
                     taskcur->Execute(Sys.Ms());
                 }
                 this->Current = NULL;
-            }
-        #endif 
+            #endif 
+        }
     }
 
     this->Cost = tmcost.Elapsed();
