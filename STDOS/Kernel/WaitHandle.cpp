@@ -12,8 +12,7 @@ bool WaitHandle::WaitOne(int ms)
 {
     if (ms ==  - 1)
         ms = 0x7FFFFFFF;
-    TaskScheduler *v4 = Task::Scheduler();
-    v4->ExecuteForWait(ms, Result);
+    Task::Scheduler()->ExecuteForWait(ms, Result);
     return this->Result;
 }
 	
