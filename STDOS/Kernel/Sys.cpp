@@ -162,8 +162,6 @@ void TSys::Sleep(int ms)const
         if (ms)
             Time.Sleep(ms, nullptr);
     }
-    return ;
-    //    TimeSleep(ms *1000);
 }
 
 // Œ¢√Îº∂—”≥Ÿ

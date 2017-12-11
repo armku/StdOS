@@ -7,9 +7,9 @@
 void WaitHandletest1(void * param)
 {
 	static int icnt=0;
-	WaitHandle handle;
+	//WaitHandle handle;
 	debug_printf("%03d %d\r\n",icnt++,Sys.Ms());
-	handle.WaitOne(3000);
+	//handle.WaitOne(3000);
 	Sys.Sleep(200);
 	// handle.Result = true;	// 最大等待3000ms，除非其他任务把Result设置为true
 	
