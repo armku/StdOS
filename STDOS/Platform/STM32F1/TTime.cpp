@@ -51,18 +51,17 @@ void TTime::Init()
     }
 }
 
-extern uint systickcnt;
 // 当前滴答时钟
 uint TTime::CurrentTicks()const
 {
     SmartIRQ irq;
 
-    uint value = (SysTick->LOAD - SysTick->VAL);
-    if (SysTick->CTRL &SysTick_CTRL_COUNTFLAG)
-    {
-        systickcnt += SysTick->LOAD;
-    }
-    return systickcnt + value;
+//    uint value = (SysTick->LOAD - SysTick->VAL);
+//    if (SysTick->CTRL &SysTick_CTRL_COUNTFLAG)
+//    {
+//        systickcnt += SysTick->LOAD;
+//    }
+    return SysTick->LOAD - SysTick->VAL;
 }
 
 // 当前毫秒数

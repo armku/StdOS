@@ -11,7 +11,7 @@ void WaitHandletest1(void * param)
 	debug_printf("%03d %d\r\n",icnt,Sys.Ms());
 	handle.WaitOne(300);
 	//Sys.Sleep(200);
-	// handle.Result = true;	// 最大等待3000ms，除非其他任务把Result设置为true
+	handle.Result = true;	// 最大等待3000ms，除非其他任务把Result设置为true
 	
 	debug_printf("%03d %d\r\n",icnt++,Sys.Ms());
 }

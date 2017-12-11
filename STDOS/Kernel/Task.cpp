@@ -32,7 +32,13 @@ bool Task::Execute(UInt64 now)
         //*(_DWORD *)(*(_DWORD *)pthis + 48) = v7;
 
         this->Times++;
+		int cms=costms.Elapsed();
         int costMsCurrent = costms.Elapsed() - this->SleepTime;
+		int aa=1;
+		if(this->SleepTime>0)
+		{
+			aa=2;
+		}
         if (this->MaxCost < costMsCurrent)
             this->MaxCost = costMsCurrent;
         this->Cost = (5 *this->Cost + 3 * costMsCurrent) / 8;
@@ -438,7 +444,7 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
     if (this->Deepth < MaxDeepth)
     {
         ++this->Deepth;
-
+				
         int maxCost = this->TotalSleep;
         int msBegin = Sys.Ms();
         int msEndMax = msBegin + msMax;
@@ -451,6 +457,8 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
         }
         this->TotalSleep = maxCost;
         int msUsed = Sys.Ms() - msBegin;
+		this->Current->SleepTime+=msUsed*1000;
+		
         if (maxCost)
             LastTrace += tmcost.Elapsed();
 
