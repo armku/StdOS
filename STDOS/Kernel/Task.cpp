@@ -457,7 +457,7 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
         }
         this->TotalSleep = maxCost;
         int msUsed = Sys.Ms() - msBegin;
-		this->Current->SleepTime+=msUsed*1000;
+		this->Current->SleepTime+=tmcost.Elapsed();
 		
         if (maxCost)
             LastTrace += tmcost.Elapsed();
