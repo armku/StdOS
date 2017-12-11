@@ -26,19 +26,13 @@ bool Task::Execute(UInt64 now)
         TimeCost costms;
         this->SleepTime = 0;
 
-        // v7 = *(_DWORD *)(*(_DWORD *)pthis + 48);
-        //*(_DWORD *)(*(_DWORD *)pthis + 48) = pthis;
         this->Callback(this->Param);
-        //*(_DWORD *)(*(_DWORD *)pthis + 48) = v7;
 
         this->Times++;
 		int cms=costms.Elapsed();
         int costMsCurrent = costms.Elapsed() - this->SleepTime;
-		int aa=1;
-		if(this->SleepTime>0)
-		{
-			aa=2;
-		}
+		if(costMsCurrent<0)
+			costMsCurrent=30;//Òì³£ÉèÖÃÎª3us		
         if (this->MaxCost < costMsCurrent)
             this->MaxCost = costMsCurrent;
         this->Cost = (5 *this->Cost + 3 * costMsCurrent) / 8;
@@ -445,23 +439,21 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
     {
         ++this->Deepth;
 				
-        int maxCost = this->TotalSleep;
+		Task* tskcur=this->Current;
         int msBegin = Sys.Ms();
         int msEndMax = msBegin + msMax;
-        int pppmsMax = msMax;
+        int msRemain = msMax;
         TimeCost tmcost;
-        while (pppmsMax > 0 && !cancel)
+        while (msRemain > 0 && !cancel)
         {
-            this->Execute(pppmsMax, cancel);
-            pppmsMax = msEndMax - Sys.Ms();
+            this->Execute(msRemain, cancel);
+            msRemain = msEndMax - Sys.Ms();
         }
-        this->TotalSleep = maxCost;
+		auto sleepus = tmcost.Elapsed();
+        this->TotalSleep += sleepus/1000;
         int msUsed = Sys.Ms() - msBegin;
-		this->Current->SleepTime+=tmcost.Elapsed();
-		
-        if (maxCost)
-            LastTrace += tmcost.Elapsed();
-
+		tskcur->SleepTime+=sleepus;
+		        
         --this->Deepth;
         ret = msUsed;
     }
