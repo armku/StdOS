@@ -63,7 +63,7 @@ private:
 	friend class Task;
 
 public:
-	cstring	Name;	// 系统名称
+	cstring	Name;	// 系统名称 4
 	int		Count;		// 任务个数
 	Task*	Current;	// 正在执行的任务
 	bool	Running;	// 是否正在运行

@@ -251,6 +251,8 @@ TaskScheduler::TaskScheduler(cstring name)
     this->Name = name;
 
     mgid = 1;
+	this->Deepth = 0;
+	this->MaxDeepth = 8;
 
     this->Running = false;
     this->Current = NULL;
@@ -437,10 +439,10 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
     {
         ++this->Deepth;
 
-        auto maxCost = this->TotalSleep;
-        auto msBegin = Sys.Ms();
-        auto msEndMax = msBegin + msMax;
-        auto pppmsMax = msMax;
+        int maxCost = this->TotalSleep;
+        int msBegin = Sys.Ms();
+        int msEndMax = msBegin + msMax;
+        int pppmsMax = msMax;
         TimeCost tmcost;
         while (pppmsMax > 0 && !cancel)
         {
@@ -448,7 +450,7 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
             pppmsMax = msEndMax - Sys.Ms();
         }
         this->TotalSleep = maxCost;
-        auto msUsed = Sys.Ms() - msBegin;
+        int msUsed = Sys.Ms() - msBegin;
         if (maxCost)
             LastTrace += tmcost.Elapsed();
 
