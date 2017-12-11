@@ -96,7 +96,7 @@ int TimeCost::Elapsed()const
 	{
 		if(times>0)
 		{
-			ret = 1000 * times - Time.TicksToUs(Time.CurrentTicks()-ticks);
+			ret = 1000 * times - Time.TicksToUs(-ticks);
 		}
 		else
 		{
