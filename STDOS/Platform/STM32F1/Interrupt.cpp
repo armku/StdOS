@@ -341,12 +341,12 @@ void OnUsartReceive(ushort num, void *param);
 /////////////////////////////////////////////////////////////////////////////////
 void CInterrupt::SysTick_Handler()
 {
-    static uint tickCnt = 0;
-    tickCnt++;
-    if (tickCnt > 1000)
-    {
-        tickCnt = 0;
-    }
+//    static uint tickCnt = 0;
+//    tickCnt++;
+//    if (tickCnt > 1000)
+//    {
+//        tickCnt = 0;
+//    }
 }
 
 //注意,读取USARTx->SR能避免莫名其妙的错误
