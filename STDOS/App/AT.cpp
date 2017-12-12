@@ -1,5 +1,4 @@
 #include  "Sys.h"
-#include "Net\ITransport.h"
 #include "Device\SerialPort.h"
 #include "AT.h"
 #include "Buffer.h"
@@ -98,6 +97,7 @@ uint AT::ParseReply(const Buffer& bs)
 uint AT::OnReceive(Buffer& bs, void* param)
 {
 	uint ret=0;
+	bs.Show();
 	return;
 	if(bs.Length())
 	{

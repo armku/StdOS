@@ -112,7 +112,7 @@ void Esp8266::Routin()
     {
         0
     };
-
+	return;
     switch (this->RunStep)
     {
         case 0:

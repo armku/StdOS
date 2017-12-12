@@ -1,6 +1,8 @@
 #ifndef __AT_H__
 #define __AT_H__
 
+#include "Net\ITransport.h"
+
 // GPRS的AT指令集 GSM 07.07
 class AT
 {
