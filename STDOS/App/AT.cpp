@@ -86,9 +86,9 @@ String AT::Send(const String& cmd, uint msTimeout, bool trim)
 bool AT::SendCmd(const String& cmd, uint msTimeout)
 {	
 	debug_printf("\r\nSend CMD: ");
+	auto strrcv= this->Send(cmd,msTimeout,false);
 	
-	auto rstr=this->Send(cmd,msTimeout);
-	return rstr.Contains("OK");
+	return strrcv.Contains("OK");
 }
 // 分析关键字。返回被用掉的字节数
 uint AT::ParseReply(const Buffer& bs)
