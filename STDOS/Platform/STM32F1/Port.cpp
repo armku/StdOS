@@ -189,6 +189,8 @@ void InputPort_OpenEXTI(Pin pin, InputPort::Trigger trigger = InputPort::Both)
 
 void OutputPort::Write(bool value)const
 {
+	if(this->_Pin == P0)
+		return;
     if (this->Invert)
     {
         if (value)

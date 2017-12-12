@@ -191,16 +191,14 @@ void Esp8266::Init(COM idx, int baudrate)
 	this->At.Open();
 	
 	this->_Reset = 1;
-	this->portEnable = 0;
+//	this->portEnable = 0;
 
     this->RunStep = 0;
     this->FlagTcpClosed = 0; //是否断开连接
 
-    this->portEnable=1;
+//    this->portEnable=1;
 	
-	return;
-
-    this->_task = Sys.AddTask(&Esp8266::Routin, this, 500, 500, "espRtn");
+    this->_task = Sys.AddTask(&Esp8266::Routin, this, 500, 1000, "espRtn");
 }
 
 void Esp8266::Set(Pin power, Pin rst, Pin low){
