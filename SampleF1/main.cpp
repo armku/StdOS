@@ -107,13 +107,13 @@ int main(void)
     //ModbusTest();
     //InterruptTest();
 	//ssd1309Test();
-    //ESP8266Test();
+    ESP8266Test();
 	//ds18b20test();
 	//keyTest();
 	//SerialPortTest();
 	//ST7565Rtest();
-//	PwmSoloTest();
-	WaitHandleTest();
+	//PwmSoloTest();
+	//WaitHandleTest();
     Sys.Start();
 }
 

@@ -192,6 +192,7 @@ void Esp8266::Init(COM idx, int baudrate)
 	
 
     this->_task = Sys.AddTask(&Esp8266::Routin, this, 500, 500, "espRtn");
+	this->Init();
 }
 
 void Esp8266::Set(Pin power, Pin rst, Pin low){

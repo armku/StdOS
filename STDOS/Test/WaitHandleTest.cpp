@@ -1,7 +1,7 @@
 #include "Sys.h"
 #include "WaitHandle.h"
 
-#define WAITHANDLETEST
+//#define WAITHANDLETEST
 #ifdef WAITHANDLETEST
 
 void WaitHandletest1(void * param)

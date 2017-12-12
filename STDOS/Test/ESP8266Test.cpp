@@ -10,18 +10,7 @@
 #ifdef ESP8266TEST   
 
     Esp8266 esp;
-   
-    uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
-    {
-        //transport->Write(bs);
-//        debug_printf("收到数据:\r\n");
-        bs.Show(true);
-		
-		esp.OnReceive(bs);
-				
-        return 0;
-    }
-	
+       
     /**
      * @brief  ESP8266 （Sta Tcp Client）透传
      * @param  无
@@ -31,12 +20,5 @@
     {
         esp.SetPin(PG13, PG14);
 		esp.Init(COM3,115200);
-        
-        //esp.Port->Register(OnUsart3Read);
-        esp.Port->Open();
-
-        //esp.SetSerialPort(&sp3);
-		
-        esp.Init();
     }
 #endif
