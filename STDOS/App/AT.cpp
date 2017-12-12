@@ -98,7 +98,7 @@ uint AT::ParseReply(const Buffer& bs)
 uint AT::OnReceive(Buffer& bs, void* param)
 {
 	uint ret=0;
-	
+	return;
 	if(bs.Length())
 	{
 		auto v20=bs.AsString();
