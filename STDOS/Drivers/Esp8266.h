@@ -197,7 +197,6 @@
 
             OutputPort portEnable; // Ð¾Æ¬Ê¹ÄÜ
     };
-
-    void Delay_ms(int ms);
+    
     extern Fram_T strEsp8266_Fram_Record;
 #endif

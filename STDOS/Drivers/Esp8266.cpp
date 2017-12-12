@@ -142,7 +142,7 @@ void Esp8266::Routin()
         case 6:
             this->Port->Printf("%d hello world!\r\n", ++icnt);
             debug_printf("发送数据: %d hello world!\r\n", ++icnt);
-            Delay_ms(500);
+            Sys.Sleep(500);
             if (this->FlagTcpClosed)
             //检测是否失去连接
             {
