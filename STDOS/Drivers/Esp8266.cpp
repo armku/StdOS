@@ -190,17 +190,17 @@ void Esp8266::Init(COM idx, int baudrate)
 	this->At.Port=sp;
 	this->At.Open();
 	
-
-    this->_task = Sys.AddTask(&Esp8266::Routin, this, 500, 500, "espRtn");
-	
 	this->_Reset = 1;
-    this->ChipEnable(false);
+	this->portEnable = 0;
 
     this->RunStep = 0;
     this->FlagTcpClosed = 0; //是否断开连接
 
-    this->ChipEnable();
+    this->portEnable=1;
 	
+	return;
+
+    this->_task = Sys.AddTask(&Esp8266::Routin, this, 500, 500, "espRtn");
 }
 
 void Esp8266::Set(Pin power, Pin rst, Pin low){
@@ -392,12 +392,6 @@ void Esp8266::SetPin(Pin pinChEn, Pin pinReset)
     this->portEnable.Open();
 
     this->_Reset.Open();
-}
-
-//设置芯片有效
-void Esp8266::ChipEnable(bool en)
-{
-    this->portEnable = en;
 }
 
 /*

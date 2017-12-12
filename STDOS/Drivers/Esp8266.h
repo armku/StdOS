@@ -185,7 +185,6 @@
                      
             void SetPin(Pin pinChEn, Pin pinReset); //设置引脚
 			
-            void ChipEnable(bool en = true); //设置芯片有效			
             bool JoinAP(char *ssid, char *pass);
             bool EnableMultipleId(bool enumEnUnvarnishTx);
             bool LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, ENUMIDNOTypeDef id);
