@@ -12,6 +12,8 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "Sys.h"
 #include "stdarg.h"
 
+SystemConfig g_Config;//系统配置
+
 TSys Sys; //系统参数
 
 //外部注册函数
@@ -87,8 +89,22 @@ TSys::TSys()
     #endif 
     this->MessagePort = COM1;
 
-    //this->Config=g_config;
+    this->Config=&g_Config;
     this->OnInit();
+	
+//	*((_DWORD *)pthis + 19) = 0;
+//	*((_WORD *)pthis + 12) = 6450;
+//	*((_DWORD *)pthis + 7) = 50469170;
+//	*((_DWORD *)pthis + 8) = 6450;
+//	*((_DWORD *)pthis + 9) = 6450;
+//	*((_DWORD *)pthis + 3) = "SmartOS_CPU";
+//	*((_DWORD *)pthis + 4) = "X3_nnhy";
+//	*((_DWORD *)pthis + 5) = &unk_6E8;
+//	TInterrupt::Init((TInterrupt *)&Interrupt);
+//	*((_DWORD *)pthis + 16) = 1;
+//	*((_DWORD *)pthis + 17) = 1;
+//	*((_BYTE *)pthis + 80) = 0;
+	
     this->MessagePort = COM1;
     this->Name = "stdos";
     this->Company = "armku";
@@ -195,7 +211,7 @@ void TSys::Reboot(int msDelay)const
 {
     if (msDelay <= 0)
         this->Reset();
-    //this->AddTask(&this->Reset, this, pmsDelay,  - 1, "Reboot");
+	Sys.AddTask((void (TSys::*)())&TSys::Reset,(TSys *)this,msDelay,-1,"Reset");
 }
 
 // 系统跟踪

@@ -71,18 +71,18 @@ public:
     uint	Clock;  	// 系统时钟
     uint	CystalClock;// 晶振时钟
 
-	cstring	Name;		// 系统名称
-	cstring	Company;	// 系统厂商
-	ushort	Code;		// 产品代码
-	ushort	Ver;		// 系统版本
+	cstring	Name;		// 系统名称 3
+	cstring	Company;	// 系统厂商 4
+	ushort	Code;		// 产品代码 5
+	ushort	Ver;		// 系统版本 6
     byte	ID[12];		// 芯片ID。
     ushort	DevID;		// MCU编码。低字设备版本，高字子版本
     ushort	RevID;		// MCU编码。低字设备版本，高字子版本
-    uint	CPUID;		// CPUID
-    ushort	FlashSize;	// 芯片Flash容量。
-    ushort	RAMSize;	// 芯片RAM容量
+    uint	CPUID;		// CPUID 
+    ushort	FlashSize;	// 芯片Flash容量。 16
+    ushort	RAMSize;	// 芯片RAM容量 17
 
-	const SystemConfig*	Config;	// 系统设置
+	const SystemConfig*	Config;	// 系统设置 18
 
     TSys();				// 构造函数
 

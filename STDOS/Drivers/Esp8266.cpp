@@ -182,8 +182,7 @@ void Esp8266::Init(COM idx, int baudrate)
 
     sp->SetBaudRate(baudrate);
     sp->Rx.SetBuf(com3bufrx, ArrayLength(com3bufrx));
-    sp->Tx.SetBuf(com3buftx, ArrayLength(com3buftx));
-	
+    sp->Tx.SetBuf(com3buftx, ArrayLength(com3buftx));	
 	
     this->Port = sp;
 	
@@ -191,12 +190,12 @@ void Esp8266::Init(COM idx, int baudrate)
 	this->At.Open();
 	
 	this->_Reset = 1;
-//	this->portEnable = 0;
-
+	this->portEnable = 0;
+	
     this->RunStep = 0;
     this->FlagTcpClosed = 0; //是否断开连接
 
-//    this->portEnable=1;
+	this->portEnable=1;
 	
     this->_task = Sys.AddTask(&Esp8266::Routin, this, 500, 1000, "espRtn");
 }
@@ -204,8 +203,9 @@ void Esp8266::Init(COM idx, int baudrate)
 void Esp8266::Set(Pin power, Pin rst, Pin low){
 
 }
-bool Esp8266::Config(){
-
+bool Esp8266::Config()
+{
+	return false;
 }
 void Esp8266::SetLed(Pin led){}
 void Esp8266::SetLed(OutputPort &led){}
@@ -248,10 +248,12 @@ bool Esp8266::Reset(bool soft)
     {
         this->_Reset.Down(100);
     }
+	return false;
 }
 
-bool Esp8266::Sleep(uint ms){
-
+bool Esp8266::Sleep(uint ms)
+{
+	return false;
 }
 // 设置模式。需要重启
 bool Esp8266::SetMode(NetworkType mode)
@@ -291,6 +293,8 @@ bool Esp8266::JoinAP(char *ssid, char *pass)
 	this->Port->Printf("AT+CWJAP=\"%s\\r\n", ssid, pass);
 	this->SetRcv("OK", NULL,1);
 	this->cmdType = EspCmdType::EJoinAP;
+	
+	return false;
 }
 
 bool Esp8266::JoinAP(const String &ssid, const String &pass)
@@ -311,6 +315,8 @@ bool Esp8266::EnableMultipleId(bool enumEnUnvarnishTx)
 	this->Port->Printf("AT+CIPMUX=%d\r\n", (enumEnUnvarnishTx ? 1 : 0));
 	this->SetRcv("OK", NULL,1);
 	this->cmdType = EspCmdType::EJoinAP;
+	
+	return false;
 }
 
 /*
