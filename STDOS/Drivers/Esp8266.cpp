@@ -192,7 +192,15 @@ void Esp8266::Init(COM idx, int baudrate)
 	
 
     this->_task = Sys.AddTask(&Esp8266::Routin, this, 500, 500, "espRtn");
-	this->Init();
+	
+	this->_Reset = 1;
+    this->ChipEnable(false);
+
+    this->RunStep = 0;
+    this->FlagTcpClosed = 0; //是否断开连接
+
+    this->ChipEnable();
+	
 }
 
 void Esp8266::Set(Pin power, Pin rst, Pin low){
@@ -369,26 +377,6 @@ void Esp8266::Process(){
 
 
 
-
-
-
-
-
-/**
- * @brief  ESP8266初始化函数
- * @param  无
- * @retval 无
- */
-void Esp8266::Init()
-{
-    this->_Reset = 1;
-    this->ChipEnable(false);
-
-    this->RunStep = 0;
-    this->FlagTcpClosed = 0; //是否断开连接
-
-    this->ChipEnable();
-}
 
 //设置引脚
 void Esp8266::SetPin(Pin pinChEn, Pin pinReset)

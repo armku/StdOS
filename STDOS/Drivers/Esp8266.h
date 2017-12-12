@@ -182,7 +182,7 @@
             {
                     OPEN = 0, WEP = 1, WPA_PSK = 2, WPA2_PSK = 3, WPA_WPA2_PSK = 4, 
             } ENUMAPPsdModeTypeDef;
-            void Init();            
+                     
             void SetPin(Pin pinChEn, Pin pinReset); //设置引脚
 			
             void ChipEnable(bool en = true); //设置芯片有效			
