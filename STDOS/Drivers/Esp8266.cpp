@@ -112,6 +112,7 @@ void Esp8266::Routin()
     {
         0
     };
+	this->Test(); 
 	return;
     switch (this->RunStep)
     {
@@ -230,6 +231,17 @@ void Esp8266::SetRcv(char *rcv1, char *rcv2,int rcvcnt)
 }
 bool Esp8266::Test(int times, int interval)
 {
+	for(int i=0;i<times;i++)
+	{
+		if(i>0)
+			this->Reset(0);
+		if(this->At.SendCmd("AT",interval))
+		{
+			return true;
+		}
+	}
+	return false;
+	
     this->At.SendCmd("AT");
 	this->SetRcv("OK",NULL,1);
 	this->cmdType = EspCmdType::ETEST;
