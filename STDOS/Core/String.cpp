@@ -1,4 +1,5 @@
 #include <string.h>
+#include <ctype.h>
 #include "SString.h"
 
 static char buftmp[10];
@@ -286,7 +287,7 @@ int String::IndexOf(const char ch, int startIndex)const
 		{
 			for(int i=startIndex;i<this->Length();i++)
 			{
-				if(this->Arr[i]==ch)
+				if(this->_Arr[i]==ch)
 					return i;
 			}
 			return -1;
@@ -406,11 +407,19 @@ String String::Remove(int index, int count)const
 
 String String::ToLower()const
 {
+	for(int i=0;i<this->Length();i++)
+	{
+		this->_Arr[i]=tolower(this->_Arr[i]);
+	}
     return  *this;
 }
 
 String String::ToUpper()const
 {
+	for(int i=0;i<this->Length();i++)
+	{
+		this->_Arr[i]=toupper(this->_Arr[i]);
+	}
     return  *this;
 }
 
