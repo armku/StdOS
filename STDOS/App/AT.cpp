@@ -54,23 +54,14 @@ bool AT::Open()
 {	
 	this->Port->Register(AT::OnPortReceive);
 	this->Port->Open();
+	return true;
 }
 void AT::Close()
 {
 	
 }
 String AT::Send(const String& cmd, cstring expect, cstring expect2, uint msTimeout, bool trim)
-{
-	String st("AT");
-	
-//	if((cmd.StartsWith(st,0) &&(!cmd.StartsWitdh("\r\n")))
-//	{
-//		
-//	}
-	
-	
-	
-	
+{			
 	auto p=(SerialPort*)this->Port;
 	if(this->Port)
 	{
@@ -83,7 +74,13 @@ String AT::Send(const String& cmd, cstring expect, cstring expect2, uint msTimeo
 }
 String AT::Send(const String& cmd, uint msTimeout, bool trim)
 {
-	return this->Send(cmd,"OK","ERROR",msTimeout,trim);;
+	String pcmd=cmd;
+	if((cmd.StartsWith("AT",0)) &&(!cmd.EndsWith("\r\n")))
+	{
+		pcmd.Concat("\r\n");
+	}
+	
+	return this->Send(pcmd,"OK","ERROR",msTimeout,trim);;
 }
 
 // 发送命令，自动检测并加上\r\n，等待响应OK
