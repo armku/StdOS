@@ -2,6 +2,7 @@
 #include "Device\SerialPort.h"
 #include "AT.h"
 #include "Buffer.h"
+#include "SString.h"
 
 static float latitude;
 static float longitude;
@@ -60,9 +61,12 @@ void AT::Close()
 }
 String AT::Send(const String& cmd, cstring expect, cstring expect2, uint msTimeout, bool trim)
 {
+	String st("AT");
 	
-	
-	
+//	if((cmd.StartsWith(st,0) &&(!cmd.StartsWitdh("\r\n")))
+//	{
+//		
+//	}
 	
 	
 	

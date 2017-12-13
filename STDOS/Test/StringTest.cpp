@@ -3,6 +3,21 @@
 #include <CType.h>
 #include "Sys.h"
 
+#define STRINGTEST
+
+#ifdef STRINGTEST
+	void StrintTest()
+	{
+		
+	}
+
+
+#endif
+
+
+
+
+
 //#define DEBUGStringTest
 
 

@@ -84,6 +84,7 @@ void FifoTest();
 void SerialPortTest();
 void PwmSoloTest();
 void WaitHandleTest();
+void StrintTest();
 
 void resettt(void * param)
 {
@@ -109,13 +110,14 @@ int main(void)
     //Sys.AddTask(Test12, 0, 600, 1000, "Test");
 	Sys.AddTask(resettt,0,1000,1000,"rstask");
 	
+	StrintTest();
     //IList::Test();
     //ADS1232Test();
     //streamtest();
     //ModbusTest();
     //InterruptTest();
 	//ssd1309Test();
-    ESP8266Test();
+    //ESP8266Test();
 	//ds18b20test();
 	//keyTest();
 	//SerialPortTest();
