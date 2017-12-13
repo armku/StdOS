@@ -3,6 +3,7 @@
 #include "AT.h"
 #include "Buffer.h"
 #include "SString.h"
+#include "WaitHandle.h"
 
 static float latitude;
 static float longitude;
@@ -61,16 +62,21 @@ void AT::Close()
 	
 }
 String AT::Send(const String& cmd, cstring expect, cstring expect2, uint msTimeout, bool trim)
-{			
+{	
+	cmd.Trim();
+	cmd.Show();
 	auto p=(SerialPort*)this->Port;
 	if(this->Port)
 	{
 		p->Write(cmd);
 		if(!cmd.EndsWith("\r\n"))
-			p->Printf("\r\n");
-		cmd.Show();
+			p->Printf("\r\n");		
 	}
-	Sys.Sleep(msTimeout);
+	
+	WaitHandle waitHandle;
+	
+	waitHandle.WaitOne(msTimeout);
+	return "OK";
 }
 String AT::Send(const String& cmd, uint msTimeout, bool trim)
 {
@@ -88,7 +94,7 @@ bool AT::SendCmd(const String& cmd, uint msTimeout)
 {	
 	debug_printf("\r\nSend CMD: ");
 	auto strrcv= this->Send(cmd,msTimeout,false);
-	
+	return "OK";
 	return strrcv.Contains("OK");
 }
 // 分析关键字。返回被用掉的字节数

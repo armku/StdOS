@@ -280,17 +280,32 @@ String &String::Format(cstring format, ...)
 
 int String::IndexOf(const char ch, int startIndex)const
 {
-    return 0;
+	if(startIndex >=0)
+	{
+		if(this->Length() > startIndex)
+		{
+			for(int i=startIndex;i<this->Length();i++)
+			{
+				if(this->Arr[i]==ch)
+					return i;
+			}
+			return -1;
+		}
+		else
+			return -1;
+	}
+	else
+		return -1;
 }
 
 int String::IndexOf(const String &str, int startIndex)const
 {
-    return 0;
+    return this->Search(this->Arr,this->Length(),startIndex,0);
 }
 
 int String::IndexOf(cstring str, int startIndex)const
 {
-    return 0;
+	return this->Search(str,strlen(str),startIndex,0);
 }
 
 int String::LastIndexOf(const char ch, int startIndex)const
@@ -310,12 +325,12 @@ int String::LastIndexOf(cstring str, int startIndex)const
 
 bool String::Contains(const String &str)const
 {
-    return false;
+    return this->IndexOf(str,0)>0;
 }
 
 bool String::Contains(cstring str)const
 {
-    return false;
+	return this->IndexOf(str,0)>0;
 }
 
 bool String::StartsWith(const String &str, int startIndex)const
