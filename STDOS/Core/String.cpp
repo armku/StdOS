@@ -13,15 +13,12 @@ String::String(cstring cstr): Array(cstr, ArrayLength(cstr))
 	else
 		len=0;
 	this->_Length=len;
-	if(len)
+	if(this->_Length)
 	{
 		this->_Arr=(char*)cstr;
-		this->_Capacity=len+1;
-		this->_needFree=false;
+		this->_Capacity=this->_Length+1;
+		this->_canWrite=false;
 	}
-	
-//    this->_Length = ArrayLength(cstr);
-//    this->Copy(0, cstr, this->_Length);
 }
 
 String::String(const String &str): Array(str.GetBuffer(), str.Length()){
@@ -407,6 +404,8 @@ String String::Remove(int index, int count)const
 
 String String::ToLower()const
 {
+	if(!this->_canWrite)
+		return *this;
 	for(int i=0;i<this->Length();i++)
 	{
 		this->_Arr[i]=tolower(this->_Arr[i]);
@@ -416,6 +415,8 @@ String String::ToLower()const
 
 String String::ToUpper()const
 {
+	if(!this->_canWrite)
+		return *this;
 	for(int i=0;i<this->Length();i++)
 	{
 		this->_Arr[i]=toupper(this->_Arr[i]);
