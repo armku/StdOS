@@ -4,6 +4,13 @@
 
 static char buftmp[10];
 
+
+
+
+
+
+
+
 String::String(cstring cstr): Array(cstr, ArrayLength(cstr))
 {
 	int len;
@@ -376,9 +383,33 @@ String String::TrimEnd()const
 {
     return  *this;
 }
-
+void trim(char *buf,int& len,bool left=true,bool right=true)
+{
+	int start=0;
+	int end = len-1;
+	if(buf)
+	{
+		if(left)
+		{
+			while(isspace(buf[start]))
+				++start;
+		}
+		
+		if(right)
+		{
+			while(isspace(buf[end])&&end>start)
+				--end;
+		}
+		buf=buf+start;
+		len=end-start;		
+	}
+	
+}
 String String::Trim()const
 {
+	int len=this->_Length;
+	trim(this->_Arr,len,true,true);
+	//this->_Length=len;
     return  *this;
 }
 

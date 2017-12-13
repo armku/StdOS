@@ -12,11 +12,11 @@
 		
 		debug_printf("\r\nString Test Begin\r\n");
 				
-		str.Show();
-		str.ToLower();
-		str.Show();
-		str.ToUpper();
-		str.Show();
+//		str.Show();
+//		str.ToLower();
+//		str.Show();
+//		str.ToUpper();
+//		str.Show();
 		
 		debug_printf("\r\nString Test End\r\n");
 	}
