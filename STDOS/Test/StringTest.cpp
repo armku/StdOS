@@ -7,23 +7,36 @@
 
 #ifdef STRINGTEST
 	void TestNum10();
+	void TestNumTrim();
 	
 	void StrintTest()
 	{
 		TestNum10();
-		
+		TestNumTrim();
 	}
 	
 	void TestNum10()
 	{
 		String str("Hello world");
-		debug_printf("\r\nString Test Begin\r\n");
+		debug_printf("\r\nString Test ToLower() ToUpper() Begin\r\n");
 				
-		str.Show();
+		str.Show(true);
 		str.ToLower();
-		str.Show();
+		str.Show(true);
 		str.ToUpper();
-		str.Show();
+		str.Show(true);
+		
+		debug_printf("\r\nString Test End\r\n");
+	}
+	void TestNumTrim()
+	{
+		char buf[]={"  Hello world   "};
+		String str(buf);
+		debug_printf("\r\nString Test ToLower() ToUpper() Begin\r\n");
+		str.Show(true);
+		
+		str.Trim();
+		str.Show(true);
 		
 		debug_printf("\r\nString Test End\r\n");
 	}

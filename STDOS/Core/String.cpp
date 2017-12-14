@@ -394,6 +394,12 @@ void trim(char *buf,int& len,bool left=true,bool right=true)
 			while(isspace(buf[start]))
 				++start;
 		}
+		int lent=start;
+		for(int i=0;(i<len)&&(start<len);i++,start++)
+		{
+			buf[i]=buf[start];
+		}
+		len-=lent;
 		
 		if(right)
 		{
@@ -409,6 +415,7 @@ String String::Trim()const
 {
 	int len=this->_Length;
 	trim(this->_Arr,len,true,true);
+	
 	//this->_Length=len;
     return  *this;
 }
