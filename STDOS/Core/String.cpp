@@ -374,34 +374,20 @@ String String::Substring(int start, int len)const
     return  *this;
 }
 
-String String::TrimStart()const
-{
-    return  *this;
-}
-
-String String::TrimEnd()const
-{
-    return  *this;
-}
-void trim(char *buf,int& len,bool left=true,bool right=true)
+void trim(char * &buf,int& len,bool Start=true,bool End=true)
 {
 	int start=0;
 	int end = len-1;
 	if(buf)
 	{
-		if(left)
+		if(Start)
 		{
 			while(isspace(buf[start]))
 				++start;
 		}
-		int lent=start;
-		for(int i=0;(i<len)&&(start<len);i++,start++)
-		{
-			buf[i]=buf[start];
-		}
-		len-=lent;
 		
-		if(right)
+		
+		if(End)
 		{
 			while(isspace(buf[end])&&end>start)
 				--end;
@@ -411,10 +397,27 @@ void trim(char *buf,int& len,bool left=true,bool right=true)
 	}
 	
 }
+String String::TrimStart()const
+{
+	char *buf=this->_Arr;
+	int len=this->_Length;
+	trim(buf,len,true,false);
+	
+    return  *this;
+}
+
+String String::TrimEnd()const
+{
+	char *buf=this->_Arr;
+	int len=this->_Length;
+	trim(buf,len,false,true);
+    return  *this;
+}
 String String::Trim()const
 {
+	char *buf=this->_Arr;
 	int len=this->_Length;
-	trim(this->_Arr,len,true,true);
+	trim(buf,len,true,true);
 	
 	//this->_Length=len;
     return  *this;
