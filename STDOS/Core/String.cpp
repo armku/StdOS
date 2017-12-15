@@ -316,22 +316,22 @@ bool String::EqualsIgnoreCase(cstring cstr)const
 
 bool String::operator < (const String &rhs)const
 {
-    return false;
+	return this->CompareTo(rhs)<0;
 }
 
 bool String::operator > (const String &rhs)const
 {
-    return false;
+    return this->CompareTo(rhs)>0;
 }
 
 bool String::operator <= (const String &rhs)const
 {
-    return false;
+   return this->CompareTo(rhs)<=0;
 }
 
 bool String::operator >= (const String &rhs)const
 {
-    return false;
+    return this->CompareTo(rhs)>=0;
 }
 
 char String::operator[](int index)const
