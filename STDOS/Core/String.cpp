@@ -467,12 +467,38 @@ bool String::Contains(cstring str)const
 
 bool String::StartsWith(const String &str, int startIndex)const
 {
-    return false;
+	if(this->_Arr && str)
+	{
+		int len=str._Length;
+		if(len)
+		{
+			if((len+startIndex) <= this->_Length)
+				return strncmp(this->_Arr+startIndex,str._Arr,len)==0;
+			else
+				return false;
+		}
+		return false;
+	}
+	else
+		return false;
 }
 
 bool String::StartsWith(cstring str, int startIndex)const
 {
-    return false;
+	if(this->_Arr && str)
+	{
+		int len=strlen(str);
+		if(len)
+		{
+			if((len+startIndex) <= this->_Length)
+				return strncmp(this->_Arr+startIndex,str,len)==0;
+			else
+				return false;
+		}
+		return false;
+	}
+	else
+		return false;
 }
 
 bool String::EndsWith(const String &str)const
@@ -552,6 +578,11 @@ String String::Trim()const
 
 String String::Replace(char find, char replace)const
 {
+	for(int i=0;i<this->_Length;i++)
+	{
+		if(this->_Arr[i]==find)
+			this->_Arr[i]=replace;
+	}
     return  *this;
 }
 
@@ -663,13 +694,38 @@ void *String::Alloc(int len)
 }
 bool String::CheckCapacity(int size)
 {
+	void *src=this->_Arr;
 	this->Array::CheckCapacity(size+1,true);
-	//if(
-	return false;
+	if(src == this->_Arr)
+		return true;
+	else
+	{
+		return true;
+	}
 }
 int String::Search(cstring str, int len, int startIndex, bool rev)const
 {
-    return 0;
+	if(str)
+	{
+		if(startIndex >= 0)
+		{
+			if(startIndex <= this->_Length)
+			{
+				for(int i=0;i<this->_Length;i++)
+				{
+					if(!strncmp(str,this->_Arr+startIndex+i,len))
+						return i;
+				}
+				return -1;
+			}
+			else
+				return -1;
+		}
+		else
+			return -1;
+	}
+	else
+		return -1;
 }
 
 StringSplit::StringSplit(const String &str, cstring sep): _Str(str){
