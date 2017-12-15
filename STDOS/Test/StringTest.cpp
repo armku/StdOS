@@ -3,7 +3,7 @@
 #include <CType.h>
 #include "Sys.h"
 
-#define STRINGTEST
+//#define STRINGTEST
 
 #ifdef STRINGTEST
 	void TestNum10();
