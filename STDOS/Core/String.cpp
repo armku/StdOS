@@ -649,10 +649,22 @@ bool String::CopyOrWrite()
 
 void *String::Alloc(int len)
 {
+	if(len>64)
+	{
+		this->_Size=1;
+		this->_Arr=new char(len);
+	}
+	else
+	{
+		this->_Size=0;
+		
+	}
     return this;
 }
 bool String::CheckCapacity(int size)
 {
+	this->Array::CheckCapacity(size+1,true);
+	//if(
 	return false;
 }
 int String::Search(cstring str, int len, int startIndex, bool rev)const
