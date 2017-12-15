@@ -4,7 +4,33 @@
 
 static char buftmp[10];
 
-
+String utohex(uint ch,int a2,char *buf,bool uppercase)
+{
+	if(buf)
+	{
+		int v6 = 2*a2&0xff;
+		buf[v6]=0;
+		char * v7=&buf[v6-1];
+		int Aa;
+		if(uppercase)
+			Aa='A';
+		else
+			Aa='a';
+		for(int i=0;i<v6;i++)
+		{
+			int v11=ch&0x0f;
+			ch>>=4;
+			if(v11 >=10)
+				*v7--=v11+Aa-10;
+			else
+				*v7-- = v11+'0';
+			
+		}
+		return buf;
+	}
+	else
+		return NULL;
+}
 
 
 
@@ -61,35 +87,76 @@ String::String(double value, int decimalPlaces): Array(buftmp, 10){}
 // 设置数组长度。改变长度后，确保最后以0结尾
 bool String::SetLength(int length, bool bak)
 {
-    return false;
+	String str;
+	if(this->_Length<=length)
+	{		
+		if(!this->CheckCapacity(length+1,bak))
+			return false;
+		if(this->_Length < length)
+			this->_Length=length;		
+	}
+	else
+	{
+		this->_Length=length;
+	}
+	this->_Arr[this->_Length]=0;
+    return true;
 }
 
 // 拷贝数据，默认-1长度表示当前长度
 int String::Copy(int destIndex, const void *src, int len)
 {
-    return 0;
+	int ret=Buffer::Copy(destIndex,src,len);
+	if(ret)
+		((char*)src)[ret]=0;
+	else
+		ret = 0;
+	return ret;
 }
 
 // 把数据复制到目标缓冲区，默认-1长度表示当前长度
 int String::CopyTo(int srcIndex, void *dest, int len)const
 {
-    return 0;
+	int ret = this->CopyTo(srcIndex,dest,len);
+	if(ret)
+		((char*)dest)[ret]=0;
+	else
+		ret=0;
+    return ret;
 }
 
 // 为被赋值对象建立一个备份。
 // 如果值为空或无效，或者内存分配失败，字符串将会被标记为无效
 String &String::operator = (const String &rhs)
 {
+	//未验证
+	if(*this!=rhs)
+	{
+		if(this->_Arr)
+			this->copy(rhs._Arr,rhs._Length);
+		else
+			this->release();
+	}
     return  *this;
 }
 
 String &String::operator = (cstring cstr)
 {
+	if(cstr)
+	{
+		this->copy(cstr,strlen(cstr));
+	}
+	else
+	{
+		this->release();
+	}
     return  *this;
 }
 
 String &String::operator = (String && rval)
 {
+	if(*this !=rval)
+		this->move(rval);
     return  *this;
 }
 
@@ -101,27 +168,53 @@ bool String::Concat(const Object &obj)
 
 bool String::Concat(const String &str)
 {
-    return false;
+	return this->Concat(str._Arr,str._Length);
 }
 
 bool String::Concat(cstring cstr)
 {
-    return false;
+	if(cstr)
+	{
+		return this->Concat(cstr,strlen(cstr));
+	}
+	else
+		return false;
 }
 
 bool String::Concat(bool value)
 {
-    return false;
+	const char * cstr;
+	if(value)
+		cstr= "true";
+	else
+		cstr = "false";
+    return this->Concat(cstr);
 }
 
 bool String::Concat(char c)
 {
-    return false;
+	if(this->CheckCapacity(this->_Length+1))
+	{
+		this->_Length++;
+		this->_Arr[this->_Length-1]=c;
+		return true;
+	}
+	else
+		return false;
 }
 
 bool String::Concat(byte c, int radix)
 {
-    return false;
+	if(radix !=16 && radix != -16)
+	{
+	}
+	else if(this->CheckCapacity(this->_Length+2))
+	{
+		utohex(c,1,this->_Arr+this->_Length,true);
+		this->_Length+=2;
+	}
+	else
+		return false;
 }
 
 bool String::Concat(short num, int radix)
@@ -131,7 +224,16 @@ bool String::Concat(short num, int radix)
 
 bool String::Concat(ushort num, int radix)
 {
-    return false;
+    if(radix !=16 && radix != -16)
+	{
+	}
+	else if(this->CheckCapacity(this->_Length+2))
+	{
+		utohex(num,2,this->_Arr+this->_Length,true);
+		this->_Length+=4;
+	}
+	else
+		return false;
 }
 
 bool String::Concat(int num, int radix)
@@ -141,7 +243,16 @@ bool String::Concat(int num, int radix)
 
 bool String::Concat(uint num, int radix)
 {
-    return false;
+    if(radix !=16 && radix != -16)
+	{
+	}
+	else if(this->CheckCapacity(this->_Length+2))
+	{
+		utohex(num,4,this->_Arr+this->_Length,true);
+		this->_Length+=8;
+	}
+	else
+		return false;
 }
 
 bool String::Concat(Int64 num, int radix)
@@ -151,7 +262,16 @@ bool String::Concat(Int64 num, int radix)
 
 bool String::Concat(UInt64 num, int radix)
 {
-    return false;
+    if(radix !=16 && radix != -16)
+	{
+	}
+	else if(this->CheckCapacity(this->_Length+2))
+	{
+		utohex(num,8,this->_Arr+this->_Length,true);
+		this->_Length+=16;
+	}
+	else
+		return false;
 }
 
 bool String::Concat(float num, int decimalPlaces)
@@ -216,12 +336,19 @@ bool String::operator >= (const String &rhs)const
 
 char String::operator[](int index)const
 {
-    return '0';
+	if(this->_Length > index && this->_Arr)
+		return this->_Arr[index];
+	else
+		return 0;
 }
 
 char &String::operator[](int index)
 {
-    return buftmp[0];
+	char aa;
+	if(this->_Length> index && this->_Arr)
+		return this->_Arr[index];
+	else
+		return aa;
 }
 
 void String::GetBytes(byte *buf, int bufsize, int index)const{}
@@ -474,11 +601,38 @@ int String::Compare(const void *v1, const void *v2)
 #if DEBUG
     void String::Test(){}
 #endif 
-void String::init(){}
-void String::release(){}
+void String::init()
+{
+	this->_Arr=this->Arr;
+	this->_Capacity = 63;
+	this->_canWrite=false;
+	this->_needFree = false;
+}
+void String::release()
+{
+	this->Array::Release();
+	this->init();
+}
 bool String::Concat(cstring cstr, int length)
 {
-    return false;
+	if(cstr)
+	{
+		if(length)
+		{
+			if(this->CheckCapacity(this->_Length+length))
+			{
+				Buffer bs((void*)cstr,length);
+				this->Buffer::Copy(bs);
+				return true;
+			}
+			else
+				return false;
+		}
+		else
+			return true;
+	}
+	else	
+		return false;
 }
 
 String &String::copy(cstring cstr, int length)
@@ -497,7 +651,10 @@ void *String::Alloc(int len)
 {
     return this;
 }
-
+bool String::CheckCapacity(int size)
+{
+	return false;
+}
 int String::Search(cstring str, int len, int startIndex, bool rev)const
 {
     return 0;
@@ -511,3 +668,4 @@ const String StringSplit::Next()
 {
 	return NULL;
 }
+

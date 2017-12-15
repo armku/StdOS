@@ -155,7 +155,6 @@ public:
 
 private:
 	char	Arr[0x40];
-	int _length123;
 	void init();
 	void release();
 	bool Concat(cstring cstr, int length);

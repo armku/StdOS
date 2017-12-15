@@ -28,6 +28,8 @@
 		
 		debug_printf("\r\nString Test End\r\n");
 	}
+	String utohex(uint ch,int a2,char *buf,bool uppercase);
+	char buftest[20];
 	void TestNumTrim()
 	{
 		char buf[]={"  Hello world   "};
@@ -38,6 +40,11 @@
 		auto strtrim= str.Trim();
 		auto ll=strtrim.Length();
 		strtrim.Show(true);
+		char cc=0x3a;
+		strtrim.Concat(cc,1);
+		strtrim.Show();
+		
+		utohex(0x12D4,2,buftest,true);
 		
 		debug_printf("\r\nString Test End\r\n");
 	}

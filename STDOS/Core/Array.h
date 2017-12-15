@@ -59,10 +59,10 @@ public:
 #endif
 
 protected:
-	bool	_needFree;	// 是否需要释放
-	bool	_canWrite;	// 是否可写 String(14)
+	bool	_needFree;	// 是否需要释放 string(4)
+	bool	_canWrite;	// 是否可写 string(8)
 	byte	_Size;		// 单个元素大小。字节
-	int		_Capacity;	// 最大个数。非字节数 string(8)
+	int		_Capacity;	// 最大个数。非字节数 string(16)
 
 	void Init();
 	void move(Array& rval);
