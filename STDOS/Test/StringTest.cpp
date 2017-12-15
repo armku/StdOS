@@ -35,8 +35,9 @@
 		debug_printf("\r\nString Test ToLower() ToUpper() Begin\r\n");
 		str.Show(true);
 		
-		str.Trim();
-		str.Show(true);
+		auto strtrim= str.Trim();
+		auto ll=strtrim.Length();
+		strtrim.Show(true);
 		
 		debug_printf("\r\nString Test End\r\n");
 	}

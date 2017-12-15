@@ -376,51 +376,51 @@ String String::Substring(int start, int len)const
 
 void trim(char * &buf,int& len,bool Start=true,bool End=true)
 {
-	int start=0;
-	int end = len-1;
+	int posstart=0;
+	int posend = len-1;
 	if(buf)
 	{
 		if(Start)
 		{
-			while(isspace(buf[start]))
-				++start;
+			while(isspace(buf[posstart]))
+				++posstart;
 		}
 		
 		
 		if(End)
 		{
-			while(isspace(buf[end])&&end>start)
-				--end;
+			while(isspace(buf[posend])&&posend>posstart)
+				--posend;
 		}
-		buf=buf+start;
-		len=end-start;		
+		buf=buf+posstart; 
+		len=posend-posstart+1;		
 	}
 	
 }
 String String::TrimStart()const
 {
-	char *buf=this->_Arr;
-	int len=this->_Length;
-	trim(buf,len,true,false);
-	
-    return  *this;
+    char *buf = this->_Arr;
+    int len = this->_Length;
+    trim(buf, len, true, false);
+
+    return String(buf, len);
 }
 
 String String::TrimEnd()const
 {
-	char *buf=this->_Arr;
-	int len=this->_Length;
-	trim(buf,len,false,true);
-    return  *this;
+    char *buf = this->_Arr;
+    int len = this->_Length;
+    trim(buf, len, false, true);
+    return String(buf, len);
 }
+
 String String::Trim()const
 {
-	char *buf=this->_Arr;
-	int len=this->_Length;
-	trim(buf,len,true,true);
-	
-	//this->_Length=len;
-    return  *this;
+    char *buf = this->_Arr;
+    int len = this->_Length;
+    trim(buf, len, true, true);
+
+    return String(buf, len);
 }
 
 String String::Replace(char find, char replace)const
