@@ -484,18 +484,18 @@ bool String::EndsWith(cstring str)const
 {
     return false;
 }
-#if 0
+
 StringSplit String::Split(const String &sep)const
 {
-	
+	return StringSplit(*this,sep._Arr);
 }
-#endif
-#if 0
+
+
 StringSplit String::Split(cstring sep)const
 {
-	
+	return StringSplit(*this,sep);
 }
-#endif
+
 String String::Substring(int start, int len)const
 {
     return  *this;

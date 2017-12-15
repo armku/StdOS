@@ -76,7 +76,7 @@ String AT::Send(const String& cmd, cstring expect, cstring expect2, uint msTimeo
 	WaitHandle waitHandle;
 	
 	waitHandle.WaitOne(msTimeout);
-	return "OK";
+	return "OK123";
 }
 String AT::Send(const String& cmd, uint msTimeout, bool trim)
 {
@@ -106,10 +106,32 @@ uint AT::ParseReply(const Buffer& bs)
 uint AT::OnReceive(Buffer& bs, void* param)
 {
 	uint ret=0;
-	bs.Show();
-	return;
+	
 	if(bs.Length())
 	{
+		
+		String str=bs.AsString();
+		
+		StringSplit strsplit=str.Split("\r\n");
+		
+		String str1 = strsplit.Next();
+		if(str1.Contains("+UGNSINF: 1"))
+		{
+			String str2 = strsplit.Next();
+			str2=strsplit.Next();
+			str2=strsplit.Next();
+			latitude = str2.ToFloat();
+			str2=strsplit.Next();
+			longitude=str2.ToFloat();
+			return 0;
+		}
+		
+		
+		
+		
+		
+		
+		
 		auto v20=bs.AsString();
 		//v20.Split('a');
 		auto v18=v20;
