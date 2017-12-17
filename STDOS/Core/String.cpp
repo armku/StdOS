@@ -503,12 +503,44 @@ bool String::StartsWith(cstring str, int startIndex)const
 
 bool String::EndsWith(const String &str)const
 {
-    return false;
+    if(this->_Arr && str)
+	{
+		int len=str.Length();
+		if(len)
+		{
+			if(this->_Length>=len)
+			{
+				return (strncmp(this->_Arr+this->_Length - len,str._Arr,_Length)==0);
+			}
+			else
+				return false;
+		}
+		else
+			return false;
+	}
+	else
+		return false;
 }
 
 bool String::EndsWith(cstring str)const
 {
-    return false;
+	if(this->_Arr && str)
+	{
+		int len=strlen(str);
+		if(len)
+		{
+			if(this->_Length>=len)
+			{
+				return (strncmp(this->_Arr+this->_Length - len,str,_Length)==0);
+			}
+			else
+				return false;
+		}
+		else
+			return false;
+	}
+	else
+		return false;
 }
 
 StringSplit String::Split(const String &sep)const
@@ -524,7 +556,12 @@ StringSplit String::Split(cstring sep)const
 
 String String::Substring(int start, int len)const
 {
-    return  *this;
+//	char * ret;
+//	if(len < 0 )
+//		ret=this->_Arr-start;
+//	if(this->_Arr-start < len)
+//		ret=this->_Arr-start;
+	return String(this->_Arr+start,len);
 }
 
 void trim(char * &buf,int& len,bool Start=true,bool End=true)
