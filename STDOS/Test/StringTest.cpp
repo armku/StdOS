@@ -28,7 +28,8 @@
 		TestNumTrim();
 		Testconv();
 	}
-	
+	byte chchar='A';
+	String suchar(chchar,16);
 	void TestNum10()
 	{
 		String str("Hello world");
@@ -39,6 +40,7 @@
 		str.Show(true);
 		str.ToUpper();
 		str.Show(true);
+		String suchar1(chchar,16);
 		
 		debug_printf("\r\nString Test End\r\n");
 	}

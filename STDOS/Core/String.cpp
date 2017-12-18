@@ -33,11 +33,6 @@ String utohex(uint ch,int a2,char *buf,bool uppercase)
 		return NULL;
 }
 
-
-
-
-
-
 String::String(cstring cstr): Array(cstr, ArrayLength(cstr))
 {
 	int len;
@@ -74,16 +69,58 @@ String::String(cstring str, int length): Array(str, length){}
 String::String(bool value): Array(value ? "true" : "false", value ? 5 : 6){
 
 }
-String::String(char c): Array(buftmp, 10){}
-String::String(byte value, int radix): Array(buftmp, 10){}
-String::String(short value, int radix): Array(buftmp, 10){}
-String::String(ushort value, int radix): Array(buftmp, 10){}
-String::String(int value, int radix): Array(buftmp, 10){}
-String::String(uint value, int radix): Array(buftmp, 10){}
-String::String(Int64 value, int radix): Array(buftmp, 10){}
-String::String(UInt64 value, int radix): Array(buftmp, 10){}
-String::String(float value, int decimalPlaces): Array(buftmp, 10){}
-String::String(double value, int decimalPlaces): Array(buftmp, 10){}
+String::String(char c): Array(buftmp, 0)
+{
+	this->init();
+	this->_Arr[0]=c;
+	this->_Length=1;
+	
+}
+String::String(byte value, int radix): Array(buftmp, 0)
+{
+	this->init();
+	this->Concat(value,radix);
+}
+String::String(short value, int radix): Array(buftmp, 0)
+{
+	this->init();
+	this->Concat(value,radix);
+}
+String::String(ushort value, int radix): Array(buftmp, 0)
+{
+	this->init();
+	this->Concat(value,radix);
+}
+String::String(int value, int radix): Array(buftmp, 0)
+{
+	this->init();
+	this->Concat(value,radix);
+}
+String::String(uint value, int radix): Array(buftmp, 0)
+{
+	this->init();
+	this->Concat(value,radix);
+}
+String::String(Int64 value, int radix): Array(buftmp, 0)
+{
+	this->init();
+	this->Concat(value,radix);
+}
+String::String(UInt64 value, int radix): Array(buftmp, 0)
+{
+	this->init();
+	this->Concat(value,radix);
+}
+String::String(float value, int decimalPlaces): Array(buftmp, 0)
+{
+	this->init();
+	this->Concat(value,decimalPlaces);
+}
+String::String(double value, int decimalPlaces): Array(buftmp, 0)
+{
+	this->init();
+	this->Concat(value,decimalPlaces);
+}
 
 // 设置数组长度。改变长度后，确保最后以0结尾
 bool String::SetLength(int length, bool bak)
@@ -212,7 +249,7 @@ bool String::Concat(byte c, int radix)
 	else if(this->CheckCapacity(this->_Length+2))
 	{
 		utohex(c,1,this->_Arr+this->_Length,true);
-		this->_Length+=2;
+		this->_Length+=2;		
 	}
 	else
 		return false;
@@ -740,7 +777,7 @@ void String::init()
 {
 	this->_Arr=this->Arr;
 	this->_Capacity = 63;
-	this->_canWrite=false;
+	this->_canWrite=true;
 	this->_needFree = false;
 }
 void String::release()
