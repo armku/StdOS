@@ -5,6 +5,44 @@
 
 static char buftmp[10];
 
+int ltoa(Int64 value,char *buf,int radix)
+{
+	if(buf)
+	{
+		if(radix<= 36 && radix > 1)
+		{
+			bool v6 = radix == 10 && value < 0;
+			UInt64 v7;
+			if(v6)
+			{
+				v7 = -value;
+				v7++;
+			}
+			else
+			{
+				v7 = value;
+			}
+			while(v7)
+			{
+				UInt64 v8 = v7%radix;
+				v7/=(UInt64)radix;
+				if(v8 >= 10)
+					*buf++=v8+'A';
+				else
+					*buf++=v8+'0';
+			}
+		}
+		else
+			return false;
+	}
+	else
+		return false;
+}
+int itoa(int value,char *buf,int radix)
+{
+	return ltoa(value,buf,radix);
+}
+
 String utohex(uint ch,int a2,char *buf,bool uppercase)
 {
 	if(buf)
@@ -32,6 +70,7 @@ String utohex(uint ch,int a2,char *buf,bool uppercase)
 	else
 		return NULL;
 }
+
 
 String::String(cstring cstr): Array(cstr, ArrayLength(cstr))
 {
