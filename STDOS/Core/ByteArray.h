@@ -42,6 +42,8 @@ protected:
 	virtual void* Alloc(int len);
 
 	void move(ByteArray& rval);
+public:
+	virtual void Show(bool newLine = false) const;
 };
 
 #endif

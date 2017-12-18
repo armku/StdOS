@@ -102,7 +102,7 @@ int main(void)
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
     //Sys.AddTask(Test12, 0, 600, 1000, "Test");
 	
-	StrintTest();
+	//StrintTest();
     //IList::Test();
     //ADS1232Test();
     //streamtest();

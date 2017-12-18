@@ -125,3 +125,14 @@ void ByteArray::move(ByteArray& rval)
 		
 	}
 }
+#include <stdio.h>
+void ByteArray::Show(bool newLine) const
+{
+	for(int i=0;i<this->_Length-1;i++)
+	{
+		StdPrintf("%02X-",this->_Arr[i]);
+	}
+	StdPrintf("%02X",this->_Arr[this->_Length-1]);
+	if(newLine)
+		StdPrintf("\r\n");
+}

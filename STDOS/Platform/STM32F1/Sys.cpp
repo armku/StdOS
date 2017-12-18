@@ -15,7 +15,6 @@ extern "C"
     extern uint __heap_limit;
     extern uint __initial_sp;
 }
-
 extern String *CPUName;
 void TSys::OnInit()
 {

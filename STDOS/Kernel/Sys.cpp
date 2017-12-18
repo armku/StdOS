@@ -110,7 +110,6 @@ TSys::TSys()
     this->Company = "armku";
     this->Code = 0x0201;
     this->Ver = 0x00;
-    this->ID[0] = 0;
     this->DevID = 0x00;
     this->RevID = 0x00;
     this->CPUID = 0x00;
@@ -133,8 +132,10 @@ void TSys::ShowInfo()const
     StdPrintf("%s::%s Code:%04X %s \r\n", "stdos", "std", 12, "222");
     StdPrintf("Build:%s %s\r\n", "armku", "yyyy-MM-dd HH:mm:ss");
 
-    this->OnShowInfo();
-    StdPrintf("ChipID:%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X-%02X\r\n", ID[0], ID[1], ID[2], ID[3], ID[4], ID[5], ID[6], ID[7], ID[8], ID[9], ID[10], ID[11]);
+    this->OnShowInfo();	
+    StdPrintf("ChipID:");
+	ByteArray baid(this->ID,12);
+	baid.Show();StdPrintf("\r\n");
     StdPrintf("Time : ");
     DateTime dt(Time.Seconds + Time.BaseSeconds);
     dt.Show(true);
