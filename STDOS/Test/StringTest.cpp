@@ -3,16 +3,26 @@
 #include <CType.h>
 #include "Sys.h"
 
-//#define STRINGTEST
+#define STRINGTEST
 
 #ifdef STRINGTEST
 	void TestNum10();
 	void TestNumTrim();
 	
+	int convint;
+	void Testconv()
+	{
+		char strch[]={"-1234.5 11.2 332"};
+		String str(strch,ArrayLength(strch));
+		convint=str.ToInt();
+		debug_printf("\r\n int aa = %d \r\n",convint);
+	}
+	
 	void StrintTest()
 	{
 		TestNum10();
 		TestNumTrim();
+		Testconv();
 	}
 	
 	void TestNum10()

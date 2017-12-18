@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include "SString.h"
 
@@ -366,7 +367,17 @@ ByteArray String::ToHex()const
 #endif
 int String::ToInt()const
 {
-    return 0;
+	if(this->_Arr)
+	{
+		if(isdigit(this->_Arr[0])||this->_Arr[0]=='-')
+		{
+			return atoi(this->_Arr);
+		}
+		else
+			return 0;
+	}
+	else
+      return 0;
 }
 
 float String::ToFloat()const
@@ -442,17 +453,27 @@ int String::IndexOf(cstring str, int startIndex)const
 
 int String::LastIndexOf(const char ch, int startIndex)const
 {
-    return 0;
+	if(this->_Length > startIndex)
+	{
+		for(int i=this->_Length-1;i>startIndex;i--)
+		{
+			if(this->_Arr[i]==ch)
+				return i;
+		}
+		return -1;
+	}
+	else
+		return -1;
 }
 
 int String::LastIndexOf(const String &str, int startIndex)const
 {
-    return 0;
+    return this->Search(str._Arr,str._Length,startIndex,1);
 }
 
 int String::LastIndexOf(cstring str, int startIndex)const
 {
-    return 0;
+	return this->Search(str,strlen(str),startIndex,1);
 }
 
 bool String::Contains(const String &str)const
