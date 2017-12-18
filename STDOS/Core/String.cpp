@@ -352,19 +352,45 @@ char &String::operator[](int index)
 		return aa;
 }
 
-void String::GetBytes(byte *buf, int bufsize, int index)const{}
-#if 0
+void String::GetBytes(byte *buf, int bufsize, int index)const
+{
+	if(bufsize && buf)
+	{
+		if(this->_Length > index)
+		{
+			if(this->_Length - index < bufsize)
+				bufsize= this->_Length- index;
+			Buffer* buft=new Buffer(buf,bufsize);
+			buft->Copy(0,this->_Arr+index,bufsize);
+		}
+		else
+		{
+			buf[0]=0;
+		}
+	}
+}
+
 ByteArray String::GetBytes()const
 {
-	
+//	ByteArray ret(0);
+//	ret.SetLength(this->_Length);
+//	this->GetBytes(ret._Arr,this->_Length,0);
+//	return ret;
 }
-#endif
-#if 0
+
 ByteArray String::ToHex()const
 {
-	
+//	ByteArray ret;
+//	
+//	ret.SetLength(this->_Length/2);
+//	for(int i=0;i<this->_Length;i+=2)
+//	{
+//		
+//	}
+//	
+//	return ret;
 }
-#endif
+
 int String::ToInt()const
 {
 	if(this->_Arr)
@@ -382,12 +408,32 @@ int String::ToInt()const
 
 float String::ToFloat()const
 {
-    return 0;
+	if(this->_Arr)
+	{
+		if(isdigit(this->_Arr[0])||this->_Arr[0]=='-')
+		{
+			return atof(this->_Arr);
+		}
+		else
+			return 0;
+	}
+	else 
+		return 0;
 }
 
 double String::ToDouble()const
 {
-    return 0;
+    if(this->_Arr)
+	{
+		if(isdigit(this->_Arr[0])||this->_Arr[0]=='-')
+		{
+			return atof(this->_Arr);
+		}
+		else
+			return 0;
+	}
+	else 
+		return 0;
 }
 
 // 输出对象的字符串表示方式

@@ -110,7 +110,7 @@ public:
 #endif
 
 protected:
-    char*	_Arr;		// 数据指针 string(4)
+    char*	_Arr;		// 数据指针 string(4) string(2)
 	int		_Length;	// 长度 string(8)
 
 	void move(Buffer& rval);

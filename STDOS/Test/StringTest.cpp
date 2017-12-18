@@ -10,11 +10,15 @@
 	void TestNumTrim();
 	
 	int convint;
+	float convf;
+	byte bufgetbytes[10];
 	void Testconv()
 	{
 		char strch[]={"-1234.5 11.2 332"};
 		String str(strch,ArrayLength(strch));
 		convint=str.ToInt();
+		convf=str.ToFloat();
+		str.GetBytes(bufgetbytes,5,1);
 		debug_printf("\r\n int aa = %d \r\n",convint);
 	}
 	

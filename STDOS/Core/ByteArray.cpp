@@ -14,7 +14,7 @@
     ByteArray::ByteArray(void *data, int length, bool copy){
 
     }
-    explicit ByteArray::ByteArray(const Buffer &arr){
+    ByteArray::ByteArray(const Buffer &arr){
 
     }
     ByteArray::ByteArray(ByteArray && rval){
