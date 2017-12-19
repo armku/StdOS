@@ -27,7 +27,7 @@ int ltoa(Int64 value,char *buf,int radix)
 				UInt64 v8 = v7%radix;
 				v7/=(UInt64)radix;
 				if(v8 >= 10)
-					*buf++=v8+'A';
+					*buf++=v8+'W';
 				else
 					*buf++=v8+'0';
 			}
@@ -282,8 +282,16 @@ bool String::Concat(char c)
 
 bool String::Concat(byte c, int radix)
 {
+	char buf[20];
+	for(int i=0;i<20;i++)
+	{
+		buf[i]=0;
+	}
 	if(radix !=16 && radix != -16)
 	{
+		itoa(c,buf,radix);
+		this->Concat(buf,strlen(buf));
+		
 	}
 	else if(this->CheckCapacity(this->_Length+2))
 	{
@@ -296,13 +304,38 @@ bool String::Concat(byte c, int radix)
 
 bool String::Concat(short num, int radix)
 {
-    return false;
+    char buf[20];
+	for(int i=0;i<20;i++)
+	{
+		buf[i]=0;
+	}
+	if(radix !=16 && radix != -16)
+	{
+		itoa(num,buf,radix);
+		this->Concat(buf,strlen(buf));
+		
+	}
+	else if(this->CheckCapacity(this->_Length+2))
+	{
+		utohex(num,1,this->_Arr+this->_Length,true);
+		this->_Length+=2;		
+	}
+	else
+		return false;
 }
 
 bool String::Concat(ushort num, int radix)
 {
-    if(radix !=16 && radix != -16)
+    char buf[20];
+	for(int i=0;i<20;i++)
 	{
+		buf[i]=0;
+	}
+	if(radix !=16 && radix != -16)
+	{
+		itoa(num,buf,radix);
+		this->Concat(buf,strlen(buf));
+		
 	}
 	else if(this->CheckCapacity(this->_Length+2))
 	{
@@ -315,13 +348,38 @@ bool String::Concat(ushort num, int radix)
 
 bool String::Concat(int num, int radix)
 {
-    return false;
+    char buf[20];
+	for(int i=0;i<20;i++)
+	{
+		buf[i]=0;
+	}
+	if(radix !=16 && radix != -16)
+	{
+		itoa(num,buf,radix);
+		this->Concat(buf,strlen(buf));
+		
+	}
+	else if(this->CheckCapacity(this->_Length+2))
+	{
+		utohex(num,8,this->_Arr+this->_Length,true);
+		this->_Length+=16;
+	}
+	else
+		return false;
 }
 
 bool String::Concat(uint num, int radix)
 {
-    if(radix !=16 && radix != -16)
+    char buf[20];
+	for(int i=0;i<20;i++)
 	{
+		buf[i]=0;
+	}
+	if(radix !=16 && radix != -16)
+	{
+		itoa(num,buf,radix);
+		this->Concat(buf,strlen(buf));
+		
 	}
 	else if(this->CheckCapacity(this->_Length+2))
 	{
@@ -334,13 +392,38 @@ bool String::Concat(uint num, int radix)
 
 bool String::Concat(Int64 num, int radix)
 {
-    return false;
+    char buf[20];
+	for(int i=0;i<20;i++)
+	{
+		buf[i]=0;
+	}
+	if(radix !=16 && radix != -16)
+	{
+		itoa(num,buf,radix);
+		this->Concat(buf,strlen(buf));
+		
+	}
+	else if(this->CheckCapacity(this->_Length+2))
+	{
+		utohex(num,8,this->_Arr+this->_Length,true);
+		this->_Length+=16;
+	}
+	else
+		return false;
 }
 
 bool String::Concat(UInt64 num, int radix)
 {
-    if(radix !=16 && radix != -16)
+    char buf[20];
+	for(int i=0;i<20;i++)
 	{
+		buf[i]=0;
+	}
+	if(radix !=16 && radix != -16)
+	{
+		itoa(num,buf,radix);
+		this->Concat(buf,strlen(buf));
+		
 	}
 	else if(this->CheckCapacity(this->_Length+2))
 	{
@@ -806,7 +889,21 @@ String String::ToUpper()const
 // 静态比较器。比较两个字符串指针
 int String::Compare(const void *v1, const void *v2)
 {
-    return 0;
+    if(v2)
+	{
+		if(v1)
+		{
+			return strncmp((const char *)v2,(const char *)v1,strlen((const char *)v2));
+		}
+		else 
+			return 1;
+	}
+	else if(v2 == v1)
+	{
+		return 0;
+	}
+	else
+		return -1;
 }
 
 #if DEBUG
