@@ -61,6 +61,14 @@ uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
     return 0;
 }
 
+uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
+{
+	time6cnt++;
+    //transport->Write(bs);
+	bs.Show(true);
+    return 0;
+}
+
 
 void TimerTask(void *param)
 {
@@ -69,6 +77,8 @@ void TimerTask(void *param)
 }
 
 SerialPort *sp1;
+SerialPort *sp2;
+SerialPort *sp3;
 
 void InterruptTest();
 void ADS1232Test();
@@ -86,6 +96,14 @@ void PwmSoloTest();
 void WaitHandleTest();
 void StrintTest();
 
+void Test(void * param)
+{
+	auto aa="helloworld";
+	Buffer bs((char *)aa,ArrayLength(aa));
+	sp2->Write(bs);
+	bs.Show();
+}
+
 int main(void)
 {
     Sys.Init();
@@ -93,13 +111,18 @@ int main(void)
         Sys.MessagePort = COM1;
         Sys.ShowInfo();
     #endif 
-
+	
 
     sp1 = SerialPort::GetMessagePort();
 	SerialPort::GetMessagePort()->Register(OnUsart1Read);
+		
+	sp3=new SerialPort(COM3);
+	sp3->Register(OnUsart3Read);
+	sp3->Open();
 	
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
+	Sys.AddTask(Test,0,2000,2000,"Test");
     //Sys.AddTask(Test12, 0, 600, 1000, "Test");
 	
 	//StrintTest();
