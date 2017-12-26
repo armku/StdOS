@@ -22,11 +22,14 @@
 	  #elif defined STM32F4
 		ds18.SetPin(PB1);
 	  #endif 
-	  for (int i = 0; i < 100; i++)
+	  int i;
+	  for( i = 0; i < 100; i++)
 	  {
-		if (ds18.Init())
-		  debug_printf("no ds18b20 exit \r\n");
+		if (ds18.Init()==0)
+		  break;
 	  }
+	  if(i>=100)
+		  debug_printf("no ds18b20 exit \r\n");
 	  Sys.AddTask(ds18b20routin, 0, 100, 1000, "ds18b20routin");
 	}
 #endif
