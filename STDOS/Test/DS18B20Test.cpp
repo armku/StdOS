@@ -30,6 +30,7 @@
 	  }
 	  if(i>=100)
 		  debug_printf("no ds18b20 exit \r\n");
+	  ds18.ReadId();
 	  Sys.AddTask(ds18b20routin, 0, 100, 1000, "ds18b20routin");
 	}
 #endif

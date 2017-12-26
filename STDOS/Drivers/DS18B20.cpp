@@ -152,7 +152,19 @@ byte DS18B20::Init()
     this->Rest();
     return this->Presence();
 }
+/**
+ * @brief  在匹配 ROM 情况下获取 DS18B20 温度值 
+ * @param  ds18b20_id：用于存放 DS18B20 序列号的数组的首地址
+ * @retval 无
+ */
+void DS18B20::ReadId()
+{  
+  this->WriteByte(0x33); //读取序列号
 
+  for (int uc = 0; uc < 8; uc++)
+    this->id[uc] = this->ReadByte();
+
+}
 /*
  * 存储的温度是16 位的带符号扩展的二进制补码形式
  * 当工作在12位分辨率时，其中5个符号位，7个整数位，4个小数位

@@ -7,6 +7,7 @@
             byte Init();	
 			void SetPin(Pin pin);
             float GetTemp();
+			void ReadId();
 		private:
 			void Start();
 			void WriteByte(byte dat);
@@ -16,6 +17,7 @@
 			void Rest();
 		private:
 			OutputPort _dio;
+			char id[8];//…Ë±∏ID
 
     };	
 #endif
