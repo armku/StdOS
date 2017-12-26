@@ -70,13 +70,12 @@ uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 }
 
 
-void TimerTask(void *param)
-{
-//    static int i = 0;
-//    debug_printf("\r\n%d: cnt:%d", i++, time6cnt);
-}
+//void TimerTask(void *param)
+//{
+////    static int i = 0;
+////    debug_printf("\r\n%d: cnt:%d", i++, time6cnt);
+//}
 
-SerialPort *sp1;
 //SerialPort *sp2;
 //SerialPort *sp3;
 
@@ -113,15 +112,14 @@ int main(void)
     #endif 
 	
 
-    sp1 = SerialPort::GetMessagePort();
-	SerialPort::GetMessagePort()->Register(OnUsart1Read);
+    SerialPort::GetMessagePort()->Register(OnUsart1Read);
 		
 //	sp3=new SerialPort(COM3);
 //	sp3->Register(OnUsart3Read);
 //	sp3->Open();
 	
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
-    Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
+//    Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
 //	Sys.AddTask(Test,0,2000,2000,"Test");
     //Sys.AddTask(Test12, 0, 600, 1000, "Test");
 	
