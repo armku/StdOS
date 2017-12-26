@@ -133,7 +133,7 @@ int main(void)
     //InterruptTest();
 	//ssd1309Test();
     //ESP8266Test();
-	//ds18b20test();
+	ds18b20test();
 	//keyTest();
 	//SerialPortTest();
 	//ST7565Rtest();

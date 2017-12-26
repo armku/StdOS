@@ -2,7 +2,7 @@
 #include "Drivers\SSD1106.h"
 #include "Fonts\ssd1309bmp.h"
 
-#define DEBUGssd1309Test
+//#define DEBUGssd1309Test
 
 #ifdef DEBUGssd1309Test
 	#if 0
