@@ -43,7 +43,7 @@ public:
 	uint UsToTicks(uint us) const;
 };
 
-extern TTime Time;
+extern TTime Time; //extern const TTime Time
 
 // 时间轮。用于超时处理
 class TimeWheel

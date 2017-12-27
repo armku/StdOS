@@ -23,13 +23,9 @@ void TTime::Init()
     timerTick->Open();
     //timerTick->SetFrequency(1000);
     //        timer2->Config();
-
-    //初始化延迟函数
-    //SYSTICK的时钟固定为HCLK时钟的1/8
-    //SYSCLK:系统时钟
-    SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
-    SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
+   
     SysTick_Config(9000); //配置SysTick tick is 9ms	9000
+	SysTick->CTRL  = SysTick_CTRL_ENABLE_Msk;                    /* Enable SysTick IRQ and SysTick Timer */
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
     GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); //关闭jtag，保留swd	
     NVIC_SetPriority(SysTick_IRQn, 0);
@@ -85,35 +81,41 @@ UInt64 TTime::Current()const
 // 微秒级延迟
 void TTime::Delay(int nus)const
 {
-    uint ticks=0;
-    uint told=0;
-	uint tnow=0;
-	uint tcnt = 0;
-	uint tin = 0;//刚进入时的时间
-    uint reload = 0;
-	if(nus > 1000)
-		nus=1000;
-    reload = SysTick->LOAD; //LOAD的值
-    ticks = nus * gTicks; //需要的节拍数
-    tcnt = 0;
-    tin = SysTick->VAL; //刚进入时的计数器值
-	
-    while (1)
-    {
-        tnow = SysTick->VAL;
-        if (tnow != told)
-        {
-            if (tnow < tin)
-                tcnt = tin - tnow;
-            //这里注意一下SYSTICK是一个递减的计数器就可以了.
-            else
-                tcnt = reload - tnow + tin;
-            told = tnow;
-            if (tcnt >= ticks)
-                break;
-            //时间超过/等于要延迟的时间,则退出.
-        }
-    }
+	int sumus;
+	int summs;
+	int startTicks;
+	uint stopTicks;
+	int ticksPerMs;
+	if(nus > 0)
+	{
+		if(nus > 100)
+			sumus = nus-1;
+		summs = this->Current();
+		if(sumus >= 1000)
+		{
+			summs+=sumus/1000;
+			sumus%=1000;
+		}
+		startTicks = this->CurrentTicks();
+		stopTicks = startTicks+this->UsToTicks(sumus);
+		ticksPerMs = this->UsToTicks(1000);
+		if(stopTicks >= ticksPerMs)
+		{
+			++summs;
+			stopTicks -= ticksPerMs;
+		}
+		while(true)
+		{
+			if(this->Current() - summs >0)
+				break;
+			if(this->Current() == summs)
+			{
+				if(this->CurrentTicks() >= stopTicks)
+					break;
+			}
+		}
+		
+	}
 }
 #ifdef __cplusplus
     extern "C"

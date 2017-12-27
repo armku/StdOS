@@ -102,7 +102,18 @@ void StrintTest();
 ////	sp2->Write(bs);
 //	bs.Show();
 //}
-
+class timelook
+{
+	public:
+		UInt64 curticks;
+		int current;
+};
+timelook tl;
+void timetest(void * param)
+{
+	tl.curticks = Time.CurrentTicks();
+	tl.current = Time.Current();
+}
 int main(void)
 {
     Sys.Init();
@@ -122,6 +133,7 @@ int main(void)
 //    Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
 //	Sys.AddTask(Test,0,2000,2000,"Test");
     //Sys.AddTask(Test12, 0, 600, 1000, "Test");
+	Sys.AddTask(timetest,0,0,1000,"timetest");
 	
 	//StrintTest();
     //IList::Test();
