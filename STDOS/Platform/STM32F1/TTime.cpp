@@ -99,7 +99,7 @@ void TTime::Delay(int nus)const
 		}
 		while(true)
 		{
-			if(this->Current() - summs >0)
+			if(this->Current() > summs)
 				break;
 			if(this->Current() == summs)				
 			{
