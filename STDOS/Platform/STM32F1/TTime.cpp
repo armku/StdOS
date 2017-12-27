@@ -51,7 +51,7 @@ uint TTime::CurrentTicks()const
     return SysTick->LOAD - SysTick->VAL;
 }
 
-// 当前毫秒数
+// 当前毫秒数 计数值2000
 UInt64 TTime::Current()const
 {
     __IO ushort ms = 0;
@@ -101,7 +101,7 @@ void TTime::Delay(int nus)const
 		{
 			if(this->Current() - summs >0)
 				break;
-			if(this->Current() == summs)
+			if(this->Current() == summs)				
 			{
 				if(this->CurrentTicks() >= stopTicks)
 					break;
