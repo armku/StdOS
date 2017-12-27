@@ -204,7 +204,6 @@ void TSys::Delay(int us)const
             Time.Delay(us);
     }
     return ;
-    //    TimeSleep(us);
 }
 
 // —”≥Ÿ“Ï≤Ω÷ÿ∆Ù
