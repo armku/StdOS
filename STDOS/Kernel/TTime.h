@@ -13,7 +13,7 @@ private:
 
 public:
     uint	Seconds;		// 全局秒数，系统启动后总秒数。累加
-	UInt64	Milliseconds;	// 全局毫秒数，系统启动后总毫秒（1000ms整部分）。累加
+	UInt64	Milliseconds;	// 全局毫秒数，系统启动后总毫秒（1000ms整部分）。累加 1
     uint	BaseSeconds;	// 基准秒数。系统启动时相对于1970年的秒数，时间调节，加上Seconds得到当前时间Now()
     //byte	Ticks;			// 每微秒的时钟滴答数
 	byte	Index;			// 定时器
