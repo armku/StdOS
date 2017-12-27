@@ -75,8 +75,8 @@ UInt64 TTime::Current()const
 void TTime::Delay(int nus)const
 {
 	int sumus;
-	int summs;
-	int startTicks;
+	UInt64 summs;
+	uint startTicks;
 	uint stopTicks;
 	int ticksPerMs;
 	if(nus > 0)
