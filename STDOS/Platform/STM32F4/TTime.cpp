@@ -9,7 +9,6 @@
 extern Timer *timerTick;
 extern Delegate < Timer & > abc;
 extern int gTicks; //
-extern byte fac_us; //us延时倍乘数 每个us需要的systick时钟数 	
 void timTickrefesh(void *param);
 void TTime::Init()
 {
@@ -28,14 +27,10 @@ void TTime::Init()
     //初始化延迟函数
     //SYSTICK的时钟固定为HCLK时钟的1/8
     //SYSCLK:系统时钟
-        uint SYSCLK = 168;
-        SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
-        fac_us = SYSCLK / 8; //不论是否使用OS,fac_us都需要使用
-
-//        fac_ms = (u16)fac_us *1000; //非OS下,代表每个ms需要的systick时钟数   
-        fac_us = SystemCoreClock / 8000000 * 8; //为系统时钟的1/8 //非OS下,代表每个us需要的systick时钟数 
-    SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
-    SysTick_Config(9000); //配置SysTick tick is 9ms	9000
+//        uint SYSCLK = 168;
+	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);  
+	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
+	SysTick_Config(9000); //配置SysTick tick is 9ms	9000
     NVIC_SetPriority(SysTick_IRQn, 0);
 	switch(this->Index)
 	{
@@ -89,7 +84,7 @@ void TTime::Delay(int nus)const
     uint told, tnow, tcnt = 0;
     uint reload = 0;
         reload = SysTick->LOAD; //LOAD的值
-    ticks = nus * fac_us; //需要的节拍数
+    ticks = nus * gTicks; //需要的节拍数
     tcnt = 0;
         told = SysTick->VAL; //刚进入时的计数器值
     while (1)

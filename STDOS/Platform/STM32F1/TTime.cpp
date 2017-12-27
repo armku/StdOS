@@ -9,7 +9,6 @@
 extern Timer *timerTick;
 extern Delegate < Timer & > abc;
 extern int gTicks; //
-extern byte fac_us; //us延时倍乘数 每个us需要的systick时钟数 	
 void timTickrefesh(void *param);
 void TTime::Init()
 {
@@ -29,7 +28,6 @@ void TTime::Init()
     //SYSTICK的时钟固定为HCLK时钟的1/8
     //SYSCLK:系统时钟
     SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
-    fac_us = SystemCoreClock / 8000000; //为系统时钟的1/8  
     SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
     SysTick_Config(9000); //配置SysTick tick is 9ms	9000
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
@@ -87,23 +85,29 @@ UInt64 TTime::Current()const
 // 微秒级延迟
 void TTime::Delay(int nus)const
 {
-    uint ticks;
-    uint told, tnow, tcnt = 0;
+    uint ticks=0;
+    uint told=0;
+	uint tnow=0;
+	uint tcnt = 0;
+	uint tin = 0;//刚进入时的时间
     uint reload = 0;
-        reload = SysTick->LOAD; //LOAD的值
-    ticks = nus * fac_us; //需要的节拍数
+	if(nus > 1000)
+		nus=1000;
+    reload = SysTick->LOAD; //LOAD的值
+    ticks = nus * gTicks; //需要的节拍数
     tcnt = 0;
-        told = SysTick->VAL; //刚进入时的计数器值
+    tin = SysTick->VAL; //刚进入时的计数器值
+	
     while (1)
     {
-            tnow = SysTick->VAL;
+        tnow = SysTick->VAL;
         if (tnow != told)
         {
-            if (tnow < told)
-                tcnt += told - tnow;
+            if (tnow < tin)
+                tcnt = tin - tnow;
             //这里注意一下SYSTICK是一个递减的计数器就可以了.
             else
-                tcnt += reload - tnow + told;
+                tcnt = reload - tnow + tin;
             told = tnow;
             if (tcnt >= ticks)
                 break;

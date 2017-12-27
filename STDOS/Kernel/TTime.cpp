@@ -2,7 +2,7 @@
 #include "Device\RTC.h"
 #include "Device\Timer.h"
 
-extern byte fac_us; //us延时倍乘数 每个us需要的systick时钟数 	
+
 int clock()
 {
   return  Time.Current();

@@ -32,7 +32,7 @@ void DS18B20::Rest()
  * 0：成功
  * 1：失败
  */
-byte DS18B20::Presence()
+bool DS18B20::Presence()
 {
     byte pulse_time = 0;
     /* 主机设置为上拉输入 */
@@ -47,7 +47,7 @@ byte DS18B20::Presence()
     }
     /* 经过100us后，存在脉冲都还没有到来*/
     if (pulse_time >= 100)
-        return 1;
+        return false;
     else
         pulse_time = 0;
 
@@ -58,9 +58,9 @@ byte DS18B20::Presence()
         Sys.Delay(1);
     }
     if (pulse_time >= 240)
-        return 1;
+        return false;
     else
-        return 0;
+        return true;
 }
 
 /*
@@ -150,7 +150,7 @@ void DS18B20::Start()
 byte DS18B20::Init()
 {
     this->Rest();
-    return this->Presence();
+    return 0;
 }
 /**
  * @brief  在匹配 ROM 情况下获取 DS18B20 温度值 

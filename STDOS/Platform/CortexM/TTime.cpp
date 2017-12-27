@@ -9,8 +9,7 @@ void timTickrefesh(void *param)
     Time.Milliseconds += 1000;
     Time.Seconds++;    
 }
-int gTicks = 0; //
-byte fac_us = 0; //us延时倍乘数 每个us需要的systick时钟数 			   
+int gTicks = 0; //每个us需要的systick时钟数 	
 
 void TTime::OnHandler(ushort num, void *param)
 {

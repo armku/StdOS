@@ -8,15 +8,16 @@
 			void SetPin(Pin pin);
             float GetTemp();
 			void ReadId();
+			bool Presence();
 		private:
 			void Start();
 			void WriteByte(byte dat);
 			byte ReadByte();
-			byte ReadBit();
-			byte Presence();
+			byte ReadBit();			
 			void Rest();
 		private:
 			OutputPort _dio;
+		public:
 			char id[8];//…Ë±∏ID
 
     };	
