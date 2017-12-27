@@ -184,12 +184,12 @@ float DS18B20::GetTemp()
     byte tpmsb, tplsb;
     short s_tem;
     float f_tem;
-
+#if 0
     this->Rest();
     this->Presence();
     this->WriteByte(0XCC); /* 跳过 ROM */
     this->WriteByte(0X44); /* 开始转换 */
-
+#else
     this->Rest();
     this->Presence();
     this->WriteByte(0XCC); /* 跳过 ROM */
@@ -197,7 +197,7 @@ float DS18B20::GetTemp()
 
     tplsb = this->ReadByte();
     tpmsb = this->ReadByte();
-
+#endif
     s_tem = tpmsb << 8;
     s_tem = s_tem | tplsb;
 
