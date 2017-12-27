@@ -48,13 +48,6 @@ void TTime::Init()
 // µ±Ç°µÎ´ðÊ±ÖÓ
 uint TTime::CurrentTicks()const
 {
-    SmartIRQ irq;
-
-//    uint value = (SysTick->LOAD - SysTick->VAL);
-//    if (SysTick->CTRL &SysTick_CTRL_COUNTFLAG)
-//    {
-//        systickcnt += SysTick->LOAD;
-//    }
     return SysTick->LOAD - SysTick->VAL;
 }
 
