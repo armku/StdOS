@@ -78,7 +78,8 @@ void TTime::Delay(int nus)const
 	UInt64 summs;
 	uint startTicks;
 	uint stopTicks;
-	int ticksPerMs;
+	static uint ticksPerMs=0;
+	sumus=nus;
 	if(nus > 0)
 	{
 		if(nus > 100)
@@ -91,6 +92,7 @@ void TTime::Delay(int nus)const
 		}
 		startTicks = this->CurrentTicks();
 		stopTicks = startTicks+this->UsToTicks(sumus);
+		if(ticksPerMs <10)
 		ticksPerMs = this->UsToTicks(1000);
 		if(stopTicks >= ticksPerMs)
 		{
