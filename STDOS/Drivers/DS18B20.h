@@ -15,6 +15,7 @@
 			byte ReadByte();
 			byte ReadBit();			
 			void Rest();
+			void SkipRom();
 		private:
 			OutputPort _dio;
 		public:

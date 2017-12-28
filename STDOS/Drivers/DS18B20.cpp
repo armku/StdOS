@@ -1,6 +1,15 @@
 #include "DS18B20.h"
 #include "Sys.h"
 
+//us级别延时 <100us时使用
+static void delayus(uint nus)
+{
+	for(int i=0;i<nus;i++)
+	{
+		for(int j=0;j<10;j++);
+	}
+}	
+
 void DS18B20::SetPin(Pin pin)
 {
 	this->_dio.Set(pin);
@@ -23,8 +32,6 @@ void DS18B20::Rest()
     Sys.Delay(750);
     /* 主机在产生复位信号后，需将总线拉高 */
 	this->_dio=1;
-    /*从机接收到主机的复位信号后，会在15~60us后给主机发一个存在脉冲*/
-    Sys.Delay(15);
 }
 
 /*
@@ -43,7 +50,7 @@ bool DS18B20::Presence()
     while (this->_dio && pulse_time < 100)
     {
         pulse_time++;
-        Sys.Delay(1);
+        delayus(1);
     }
     /* 经过100us后，存在脉冲都还没有到来*/
     if (pulse_time >= 100)
@@ -55,7 +62,7 @@ bool DS18B20::Presence()
     while (!this->_dio && pulse_time < 240)
     {
         pulse_time++;
-        Sys.Delay(1);
+        delayus(1);
     }
     if (pulse_time >= 240)
         return false;
@@ -73,7 +80,7 @@ byte DS18B20::ReadBit()
     /* 读0和读1的时间至少要大于60us */
     /* 读时间的起始：必须由主机产生 >1us <15us 的低电平信号 */
     this->_dio=0;
-	Sys.Delay(10);
+	delayus(10);
 
     /* 设置成输入，释放总线，由外部上拉电阻将总线拉高 */
     //Sys.Delay(2);
@@ -84,7 +91,7 @@ byte DS18B20::ReadBit()
     else
         dat = 0;
     /* 这个延时参数请参考时序图 */
-    Sys.Delay(45);
+    delayus(45);
 
     return dat;
 }
@@ -121,20 +128,20 @@ void DS18B20::WriteByte(byte dat)
         {
             this->_dio=0;
             /* 1us < 这个延时 < 15us */
-            Sys.Delay(8);
+            delayus(8);
 
             this->_dio=1;
-            Sys.Delay(58);
+            delayus(58);
         }
         else
         {
             this->_dio=0;
             /* 60us < Tx 0 < 120us */
-            Sys.Delay(70);
+            delayus(70);
 
             this->_dio=1;
             /* 1us < Trec(恢复时间) < 无穷大*/
-            Sys.Delay(2);
+            delayus(2);
         }
     }
 }
@@ -165,6 +172,15 @@ void DS18B20::ReadId()
     this->id[uc] = this->ReadByte();
 
 }
+void DS18B20::SkipRom()
+{
+  this->Rest();
+
+  this->Presence();
+
+  this->WriteByte(0XCC); /* 跳过 ROM */
+
+}
 /*
  * 存储的温度是16 位的带符号扩展的二进制补码形式
  * 当工作在12位分辨率时，其中5个符号位，7个整数位，4个小数位
@@ -184,15 +200,12 @@ float DS18B20::GetTemp()
     byte tpmsb, tplsb;
     short s_tem;
     float f_tem;
-#if 0
-    this->Rest();
-    this->Presence();
-    this->WriteByte(0XCC); /* 跳过 ROM */
+
+	this->SkipRom();
     this->WriteByte(0X44); /* 开始转换 */
-#else
-    this->Rest();
-    this->Presence();
-    this->WriteByte(0XCC); /* 跳过 ROM */
+
+    this->SkipRom();
+#if 1  
     this->WriteByte(0XBE); /* 读温度值 */
 
     tplsb = this->ReadByte();
