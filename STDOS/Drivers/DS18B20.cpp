@@ -1,7 +1,8 @@
 #include "DS18B20.h"
 #include "Sys.h"
 
-//us级别延时 <100us时使用
+//us级别延时 <100us时使用 
+//72M
 static void delayus(uint nus)
 {
 	for(int i=0;i<nus;i++)
