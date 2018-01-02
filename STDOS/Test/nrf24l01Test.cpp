@@ -78,6 +78,8 @@
 	Spi nspi(Spi1,CPOL_Low,CPHA_1Edge,9000000);
     void n24l01Test()
     {	
+		nspi.SetPin(PA5,PA6,PA7);
+		//nspi.Open();
 		n2401._CSN.Set(PG15);
 		n2401._CSN.Invert=0;
 		n2401._CSN.OpenDrain=true;

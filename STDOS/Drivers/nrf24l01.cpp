@@ -73,6 +73,7 @@ NRF24L01::NRF24L01()
  */
 void NRF24L01::Init(Spi* spi, Pin ce, Pin irq, Pin power)
 {
+	#if 1
     GPIO_InitTypeDef GPIO_InitStructure;
 
     /*开启相应IO端口的时钟*/
@@ -84,7 +85,7 @@ void NRF24L01::Init(Spi* spi, Pin ce, Pin irq, Pin power)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; //复用功能
     GPIO_Init(GPIOA, &GPIO_InitStructure);
-   	
+   	#endif
     /* 这是自定义的宏，用于拉高csn引脚，NRF进入空闲状态 */
     this->_CSN = 1;
 	
