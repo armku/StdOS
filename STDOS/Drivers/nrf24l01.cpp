@@ -89,7 +89,7 @@ void Delay(__IO u32 nCount)
  * @param  无
  * @retval 无
  */
-void SPI_NRF_Init(void)
+void SPI_NRF_Init()
 {
     SPI_InitTypeDef SPI_InitStructure;
     GPIO_InitTypeDef GPIO_InitStructure;
@@ -281,7 +281,7 @@ byte SPI_NRF_WriteBuf(byte reg, byte *pBuf, byte bytes)
  * @param  无
  * @retval 无
  */
-void NRF_RX_Mode(void)
+void NRF_RX_Mode()
 
 {
     NRF_CE_LOW();
@@ -314,7 +314,7 @@ void NRF_RX_Mode(void)
  * @param  无
  * @retval 无
  */
-void NRF_TX_Mode(void)
+void NRF_TX_Mode()
 {
     NRF_CE_LOW();
 
@@ -349,7 +349,7 @@ void NRF_TX_Mode(void)
  * @param  无
  * @retval SUCCESS/ERROR 连接正常/连接失败
  */
-byte NRF_Check(void)
+byte NRF_Check()
 {
     byte buf[5] = 
     {
