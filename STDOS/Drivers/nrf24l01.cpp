@@ -124,6 +124,7 @@ void NRF24L01::SPI_NRF_Init()
  */
 byte NRF24L01::SPI_NRF_RW(byte dat)
 {
+	#if 0
     /* 当 SPI发送缓冲器非空时等待 */
     while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET)
         ;
@@ -137,6 +138,9 @@ byte NRF24L01::SPI_NRF_RW(byte dat)
 
     /* Return the byte read from the SPI bus */
     return SPI_I2S_ReceiveData(SPI1);
+	#else
+	return this->_spi->Write(dat);
+	#endif
 }
 
 /**
