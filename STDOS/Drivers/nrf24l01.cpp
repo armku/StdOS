@@ -73,7 +73,7 @@ void Delay(__IO u32 nCount)
  */
 void NRF24L01::SPI_NRF_Init()
 {
-    SPI_InitTypeDef SPI_InitStructure;
+//    SPI_InitTypeDef SPI_InitStructure;
     GPIO_InitTypeDef GPIO_InitStructure;
 
     /*开启相应IO端口的时钟*/
@@ -81,7 +81,7 @@ void NRF24L01::SPI_NRF_Init()
         RCC_APB2Periph_GPIOG, ENABLE);
 
     /*使能SPI1时钟*/
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
+//    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
 
     /*配置 SPI_NRF_SPI的 SCK,MISO,MOSI引脚，GPIOA^5,GPIOA^6,GPIOA^7 */
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;
