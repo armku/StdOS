@@ -96,6 +96,11 @@ void NRF24L01::Init(Spi* spi, Pin ce, Pin irq, Pin power)
     /* 这是自定义的宏，用于拉高csn引脚，NRF进入空闲状态 */
     this->_CSN = 1;
 	
+	this->_CE.Set(ce);
+	this->_CE.Invert=0;
+	this->_CE.OpenDrain=true;
+	this->_CE.Open();
+	
 	this->_spi=spi;
 	this->_spi->Open();
 
