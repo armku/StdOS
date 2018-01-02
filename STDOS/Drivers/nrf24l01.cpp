@@ -1,11 +1,7 @@
 #include "nrf24l01.h"
 #include "stm32f10x.h"
-    
-
-#define TX_ADR_WIDTH 	5  	//发射地址宽度
+ 
     #define TX_PLOAD_WIDTH  4   //发射数据通道有效数据宽度0~32Byte 
-
-    #define RX_ADR_WIDTH    5
     #define RX_PLOAD_WIDTH  4
 
 	#define CHANAL 40	//频道选择 
@@ -49,14 +45,6 @@
 
 byte RX_BUF[RX_PLOAD_WIDTH]; //接收数据缓存
 byte TX_BUF[TX_PLOAD_WIDTH]; //发射数据缓存
-byte TX_ADDRESS[TX_ADR_WIDTH] = 
-{
-    0x34, 0x43, 0x10, 0x10, 0x01
-}; // 定义一个静态发送地址
-byte RX_ADDRESS[RX_ADR_WIDTH] = 
-{
-    0x34, 0x43, 0x10, 0x10, 0x01
-};
 
 void Delay(__IO u32 nCount)
 {
@@ -65,6 +53,21 @@ void Delay(__IO u32 nCount)
 }
 NRF24L01::NRF24L01()
 {
+	this->Local[0]=0x34;
+	this->Local[1]=0x43;
+	this->Local[2]=0x10;
+	this->Local[3]=0x10;
+	this->Local[4]=0x01;
+	
+	this->Remote[0]=0x34;
+	this->Remote[1]=0x43;
+	this->Remote[2]=0x10;
+	this->Remote[3]=0x10;
+	this->Remote[4]=0x01;	
+}
+NRF24L01::~NRF24L01()
+{
+	
 }
 /**
  * @brief  SPI的 I/O配置
@@ -226,7 +229,7 @@ void NRF24L01::RX_Mode()
 {
     this->_CE = 0;
 
-    this->WriteBuf(NRF_WRITE_REG + RX_ADDR_P0, RX_ADDRESS, RX_ADR_WIDTH); 
+    this->WriteBuf(NRF_WRITE_REG + RX_ADDR_P0, this->Local, 5); 
         //写RX节点地址
 
     this->WriteReg(NRF_WRITE_REG + EN_AA, 0x01); //使能通道0的自动应答    
@@ -258,10 +261,10 @@ void NRF24L01::TX_Mode()
 {
     this->_CE = 0;
 
-    this->WriteBuf(NRF_WRITE_REG + TX_ADDR, TX_ADDRESS, TX_ADR_WIDTH); 
+    this->WriteBuf(NRF_WRITE_REG + TX_ADDR, this->Remote, 5); 
         //写TX节点地址 
 
-    this->WriteBuf(NRF_WRITE_REG + RX_ADDR_P0, RX_ADDRESS, RX_ADR_WIDTH); 
+    this->WriteBuf(NRF_WRITE_REG + RX_ADDR_P0, this->Local, 5); 
         //设置TX节点地址,主要为了使能ACK   
 
     this->WriteReg(NRF_WRITE_REG + EN_AA, 0x01); //使能通道0的自动应答    
@@ -289,7 +292,7 @@ void NRF24L01::TX_Mode()
  * @param  无
  * @retval SUCCESS/ERROR 连接正常/连接失败
  */
-byte NRF24L01::Check()
+bool NRF24L01::Check()
 {
     byte buf[5] = 
     {
