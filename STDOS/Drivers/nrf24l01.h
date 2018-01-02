@@ -24,7 +24,7 @@
 			byte NRF_Tx_Dat(byte *txbuf);
 			byte NRF_Check();
 			
-		private:
+		//private:
 			Spi*		_spi;
 			OutputPort	_CE;
 			InputPort	Irq;

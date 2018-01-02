@@ -60,8 +60,8 @@
     #define NRF_CSN_HIGH()      GPIO_SetBits(GPIOG, GPIO_Pin_15)
     #define NRF_CSN_LOW()       GPIO_ResetBits(GPIOG, GPIO_Pin_15)		        
         //csn置低
-    #define NRF_CE_HIGH()	      GPIO_SetBits(GPIOG,GPIO_Pin_8)
-    #define NRF_CE_LOW()	      GPIO_ResetBits(GPIOG,GPIO_Pin_8)			      //CE置低
+    //#define NRF_CE_HIGH()	      GPIO_SetBits(GPIOG,GPIO_Pin_8)
+    //#define NRF_CE_LOW()	      GPIO_ResetBits(GPIOG,GPIO_Pin_8)			      //CE置低
     #define NRF_Read_IRQ()		  GPIO_ReadInputDataBit ( GPIOC, GPIO_Pin_4)  
         //中断引脚
 
@@ -174,7 +174,8 @@ byte NRF24L01::SPI_NRF_RW(byte dat)
 byte NRF24L01::SPI_NRF_WriteReg(byte reg, byte dat)
 {
     byte status;
-    NRF_CE_LOW();
+    //NRF_CE_LOW();
+	this->_CE = 0;
     /*置低CSN，使能SPI传输*/
     NRF_CSN_LOW();
 
@@ -201,7 +202,8 @@ byte NRF24L01::SPI_NRF_ReadReg(byte reg)
 {
     byte reg_val;
 
-    NRF_CE_LOW();
+    //NRF_CE_LOW();
+	this->_CE = 0;
     /*置低CSN，使能SPI传输*/
     NRF_CSN_LOW();
 
@@ -229,7 +231,8 @@ byte NRF24L01::SPI_NRF_ReadBuf(byte reg, byte *pBuf, byte bytes)
 {
     byte status, byte_cnt;
 
-    NRF_CE_LOW();
+    //NRF_CE_LOW();
+	this->_CE = 0;
     /*置低CSN，使能SPI传输*/
     NRF_CSN_LOW();
 
@@ -258,7 +261,8 @@ byte NRF24L01::SPI_NRF_ReadBuf(byte reg, byte *pBuf, byte bytes)
 byte NRF24L01::SPI_NRF_WriteBuf(byte reg, byte *pBuf, byte bytes)
 {
     byte status, byte_cnt;
-    NRF_CE_LOW();
+    //NRF_CE_LOW();
+	this->_CE = 0;
     /*置低CSN，使能SPI传输*/
     NRF_CSN_LOW();
 
@@ -284,7 +288,8 @@ byte NRF24L01::SPI_NRF_WriteBuf(byte reg, byte *pBuf, byte bytes)
 void NRF24L01::NRF_RX_Mode()
 
 {
-    NRF_CE_LOW();
+    //NRF_CE_LOW();
+	this->_CE = 0;
 
     SPI_NRF_WriteBuf(NRF_WRITE_REG + RX_ADDR_P0, RX_ADDRESS, RX_ADR_WIDTH); 
         //写RX节点地址
@@ -305,7 +310,8 @@ void NRF24L01::NRF_RX_Mode()
         //配置基本工作模式的参数;PWR_UP,EN_CRC,16BIT_CRC,接收模式 
 
     /*CE拉高，进入接收模式*/
-    NRF_CE_HIGH();
+    //NRF_CE_HIGH();
+	this->_CE = 1;
 
 }
 
@@ -316,7 +322,8 @@ void NRF24L01::NRF_RX_Mode()
  */
 void NRF24L01::NRF_TX_Mode()
 {
-    NRF_CE_LOW();
+    //NRF_CE_LOW();
+	this->_CE = 0;
 
     SPI_NRF_WriteBuf(NRF_WRITE_REG + TX_ADDR, TX_ADDRESS, TX_ADR_WIDTH); 
         //写TX节点地址 
@@ -340,7 +347,8 @@ void NRF24L01::NRF_TX_Mode()
         //配置基本工作模式的参数;PWR_UP,EN_CRC,16BIT_CRC,发射模式,开启所有中断
 
     /*CE拉高，进入发送模式*/
-    NRF_CE_HIGH();
+    //NRF_CE_HIGH();
+	this->_CE = 1;
     Delay(0xffff); //CE要拉高一段时间才进入发送模式
 }
 
@@ -390,13 +398,15 @@ byte NRF24L01::NRF_Tx_Dat(byte *txbuf)
     byte state;
 
     /*ce为低，进入待机模式1*/
-    NRF_CE_LOW();
+    //NRF_CE_LOW();
+	this->_CE = 0;
 
     /*写数据到TX BUF 最大 32个字节*/
     SPI_NRF_WriteBuf(WR_TX_PLOAD, txbuf, TX_PLOAD_WIDTH);
 
     /*CE为高，txbuf非空，发送数据包 */
-    NRF_CE_HIGH();
+    //NRF_CE_HIGH();
+	this->_CE = 1;
 
     /*等待发送完成中断 */
     while (NRF_Read_IRQ() != 0)
@@ -433,12 +443,14 @@ byte NRF24L01::NRF_Tx_Dat(byte *txbuf)
 byte NRF24L01::NRF_Rx_Dat(byte *rxbuf)
 {
     byte state;
-    NRF_CE_HIGH(); //进入接收状态
+    //NRF_CE_HIGH(); //进入接收状态
+	this->_CE = 1;
     /*等待接收中断*/
     while (NRF_Read_IRQ() != 0)
         ;
 
-    NRF_CE_LOW(); //进入待机状态
+    //NRF_CE_LOW(); //进入待机状态
+	this->_CE = 0;
     /*读取status寄存器的值  */
     state = SPI_NRF_ReadReg(STATUS);
 
