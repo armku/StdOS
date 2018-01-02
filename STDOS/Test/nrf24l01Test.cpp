@@ -83,7 +83,7 @@
 		n2401._CSN.OpenDrain=true;
 		n2401._CSN.Open();
 	
-        n2401.Init(&nspi,PG8);
+        n2401.Init(&nspi,PG8,PC4);
         debug_printf("\r\n 这是一个 NRF24L01 无线传输实验 \r\n");
         debug_printf("\r\n 这是无线传输 主机端 的反馈信息\r\n");
         debug_printf("\r\n   正在检测NRF与MCU是否正常连接。。。\r\n");

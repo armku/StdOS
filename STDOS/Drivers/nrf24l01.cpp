@@ -47,8 +47,6 @@
     #define RX_PW_P5    0x16  // 'RX payload width, pipe5' register address
     #define FIFO_STATUS 0x17  // 'FIFO Status Register' register address
 
-    #define NRF_Read_IRQ()		  GPIO_ReadInputDataBit ( GPIOC, GPIO_Pin_4)  
-        //中断引脚
 byte RX_BUF[RX_PLOAD_WIDTH]; //接收数据缓存
 byte TX_BUF[TX_PLOAD_WIDTH]; //发射数据缓存
 byte TX_ADDRESS[TX_ADR_WIDTH] = 
@@ -86,13 +84,7 @@ void NRF24L01::Init(Spi* spi, Pin ce, Pin irq, Pin power)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; //复用功能
     GPIO_Init(GPIOA, &GPIO_InitStructure);
-   
-    /*配置SPI_NRF_SPI的IRQ引脚*/
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; //上拉输入
-    GPIO_Init(GPIOC, &GPIO_InitStructure);
-
+   	
     /* 这是自定义的宏，用于拉高csn引脚，NRF进入空闲状态 */
     this->_CSN = 1;
 	
@@ -100,6 +92,12 @@ void NRF24L01::Init(Spi* spi, Pin ce, Pin irq, Pin power)
 	this->_CE.Invert=0;
 	this->_CE.OpenDrain=true;
 	this->_CE.Open();
+	
+	this->Irq.Set(irq);
+	this->Irq.Floating=false;
+	this->Irq.Invert=0;
+	this->Irq.Pull=InputPort::UP;
+	this->Irq.Open();
 	
 	this->_spi=spi;
 	this->_spi->Open();
@@ -340,7 +338,7 @@ byte NRF24L01::Tx_Dat(byte *txbuf)
 	this->_CE = 1;
 
     /*等待发送完成中断 */
-    while (NRF_Read_IRQ() != 0)
+    while (this->Irq != 0)
         ;
 
     /*读取状态寄存器的值 */
@@ -377,7 +375,7 @@ byte NRF24L01::Rx_Dat(byte *rxbuf)
    //进入接收状态
 	this->_CE = 1;
     /*等待接收中断*/
-    while (NRF_Read_IRQ() != 0)
+    while (this->Irq != 0)
         ;
 
     //进入待机状态
