@@ -98,22 +98,22 @@ void NRF24L01::SPI_NRF_Init()
     /* 这是自定义的宏，用于拉高csn引脚，NRF进入空闲状态 */
     this->_CSN = 1;
 
-    SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; 
-        //双线全双工
-    SPI_InitStructure.SPI_Mode = SPI_Mode_Master; //主模式
-    SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b; //数据大小8位
-    SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low; //时钟极性，空闲时为低
-    SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge; 
-        //第1个边沿有效，上升沿为采样时刻
-    SPI_InitStructure.SPI_NSS = SPI_NSS_Soft; //NSS信号由软件产生
-    SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_8; 
-        //8分频，9MHz
-    SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB; //高位在前
-    SPI_InitStructure.SPI_CRCPolynomial = 7;
-    SPI_Init(SPI1, &SPI_InitStructure);
+//    SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; 
+//        //双线全双工
+//    SPI_InitStructure.SPI_Mode = SPI_Mode_Master; //主模式
+//    SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b; //数据大小8位
+//    SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low; //时钟极性，空闲时为低
+//    SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge; 
+//        //第1个边沿有效，上升沿为采样时刻
+//    SPI_InitStructure.SPI_NSS = SPI_NSS_Soft; //NSS信号由软件产生
+//    SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_8; 
+//        //8分频，9MHz
+//    SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB; //高位在前
+//    SPI_InitStructure.SPI_CRCPolynomial = 7;
+//    SPI_Init(SPI1, &SPI_InitStructure);
 
-    /* Enable SPI1  */
-    SPI_Cmd(SPI1, ENABLE);
+//    /* Enable SPI1  */
+//    SPI_Cmd(SPI1, ENABLE);
 }
 
 /**
