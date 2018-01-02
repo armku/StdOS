@@ -57,8 +57,8 @@
     //#define NRF_CE_LOW()	      GPIO_ResetBits(GPIOA,GPIO_Pin_2)			      //CE置低
     //#define NRF_Read_IRQ()		  GPIO_ReadInputDataBit ( GPIOA, GPIO_Pin_3)  //中断引脚
 
-    #define NRF_CSN_HIGH()      GPIO_SetBits(GPIOG, GPIO_Pin_15)
-    #define NRF_CSN_LOW()       GPIO_ResetBits(GPIOG, GPIO_Pin_15)		        
+    //#define NRF_CSN_HIGH()      GPIO_SetBits(GPIOG, GPIO_Pin_15)
+    //#define NRF_CSN_LOW()       GPIO_ResetBits(GPIOG, GPIO_Pin_15)		        
         //csn置低
     //#define NRF_CE_HIGH()	      GPIO_SetBits(GPIOG,GPIO_Pin_8)
     //#define NRF_CE_LOW()	      GPIO_ResetBits(GPIOG,GPIO_Pin_8)			      //CE置低
@@ -121,7 +121,8 @@ void NRF24L01::SPI_NRF_Init()
     GPIO_Init(GPIOC, &GPIO_InitStructure);
 
     /* 这是自定义的宏，用于拉高csn引脚，NRF进入空闲状态 */
-    NRF_CSN_HIGH();
+    //NRF_CSN_HIGH();
+	this->_CSN = 1;
 
     SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; 
         //双线全双工
@@ -177,7 +178,8 @@ byte NRF24L01::SPI_NRF_WriteReg(byte reg, byte dat)
     //NRF_CE_LOW();
 	this->_CE = 0;
     /*置低CSN，使能SPI传输*/
-    NRF_CSN_LOW();
+    //NRF_CSN_LOW();
+	this->_CSN = 0;
 
     /*发送命令及寄存器号 */
     status = SPI_NRF_RW(reg);
@@ -186,7 +188,8 @@ byte NRF24L01::SPI_NRF_WriteReg(byte reg, byte dat)
     SPI_NRF_RW(dat);
 
     /*CSN拉高，完成*/
-    NRF_CSN_HIGH();
+    //NRF_CSN_HIGH();
+	this->_CSN = 1;
 
     /*返回状态寄存器的值*/
     return (status);
@@ -205,7 +208,8 @@ byte NRF24L01::SPI_NRF_ReadReg(byte reg)
     //NRF_CE_LOW();
 	this->_CE = 0;
     /*置低CSN，使能SPI传输*/
-    NRF_CSN_LOW();
+    //NRF_CSN_LOW();
+	this->_CSN = 0;
 
     /*发送寄存器号*/
     SPI_NRF_RW(reg);
@@ -214,7 +218,8 @@ byte NRF24L01::SPI_NRF_ReadReg(byte reg)
     reg_val = SPI_NRF_RW(NOP);
 
     /*CSN拉高，完成*/
-    NRF_CSN_HIGH();
+    //NRF_CSN_HIGH();
+	this->_CSN = 1;
 
     return reg_val;
 }
@@ -234,7 +239,8 @@ byte NRF24L01::SPI_NRF_ReadBuf(byte reg, byte *pBuf, byte bytes)
     //NRF_CE_LOW();
 	this->_CE = 0;
     /*置低CSN，使能SPI传输*/
-    NRF_CSN_LOW();
+    //NRF_CSN_LOW();
+	this->_CSN = 0;
 
     /*发送寄存器号*/
     status = SPI_NRF_RW(reg);
@@ -245,7 +251,8 @@ byte NRF24L01::SPI_NRF_ReadBuf(byte reg, byte *pBuf, byte bytes)
     //从NRF24L01读取数据  
 
     /*CSN拉高，完成*/
-    NRF_CSN_HIGH();
+    //NRF_CSN_HIGH();
+	this->_CSN = 1;
 
     return status; //返回寄存器状态值
 }
@@ -264,7 +271,8 @@ byte NRF24L01::SPI_NRF_WriteBuf(byte reg, byte *pBuf, byte bytes)
     //NRF_CE_LOW();
 	this->_CE = 0;
     /*置低CSN，使能SPI传输*/
-    NRF_CSN_LOW();
+    //NRF_CSN_LOW();
+	this->_CSN = 0;
 
     /*发送寄存器号*/
     status = SPI_NRF_RW(reg);
@@ -275,7 +283,8 @@ byte NRF24L01::SPI_NRF_WriteBuf(byte reg, byte *pBuf, byte bytes)
     //写数据到缓冲区 	 
 
     /*CSN拉高，完成*/
-    NRF_CSN_HIGH();
+    //NRF_CSN_HIGH();
+	this->_CSN = 1;
 
     return (status); //返回NRF24L01的状态 		
 }

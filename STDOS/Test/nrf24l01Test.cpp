@@ -78,6 +78,11 @@
 		n2401._CE.OpenDrain=true;
 		n2401._CE.Open();
 		
+		n2401._CSN.Set(PG15);
+		n2401._CSN.Invert=0;
+		n2401._CSN.OpenDrain=true;
+		n2401._CSN.Open();
+		
         n2401.SPI_NRF_Init();
         debug_printf("\r\n 这是一个 NRF24L01 无线传输实验 \r\n");
         debug_printf("\r\n 这是无线传输 主机端 的反馈信息\r\n");
