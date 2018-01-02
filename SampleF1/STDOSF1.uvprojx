@@ -764,6 +764,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\Esp8266.cpp</FilePath>
             </File>
+            <File>
+              <FileName>nrf24l01.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\nrf24l01.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1128,6 +1133,11 @@
               <FileName>WaitHandleTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\WaitHandleTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>nrf24l01Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\nrf24l01Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1891,6 +1901,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\Esp8266.cpp</FilePath>
             </File>
+            <File>
+              <FileName>nrf24l01.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\nrf24l01.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2255,6 +2270,11 @@
               <FileName>WaitHandleTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\WaitHandleTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>nrf24l01Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\nrf24l01Test.cpp</FilePath>
             </File>
           </Files>
         </Group>

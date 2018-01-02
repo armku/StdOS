@@ -94,6 +94,7 @@ void SerialPortTest();
 void PwmSoloTest();
 void WaitHandleTest();
 void StrintTest();
+void n24l01Test();
 
 //void Test(void * param)
 //{
@@ -131,7 +132,8 @@ int main(void)
     //InterruptTest();
 	//ssd1309Test();
     //ESP8266Test();
-	ds18b20test();
+	//ds18b20test();
+	n24l01Test();
 	//keyTest();
 	//SerialPortTest();
 	//ST7565Rtest();
