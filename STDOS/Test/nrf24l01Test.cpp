@@ -1,5 +1,6 @@
 #include "Drivers\nrf24l01.h"
 #include "Sys.h"
+#include "stm32f10x.h"
 
 #define nrf24l01Test
 

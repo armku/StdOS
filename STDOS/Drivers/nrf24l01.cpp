@@ -1,4 +1,6 @@
 #include "nrf24l01.h"
+#include "stm32f10x.h"
+    
 
 #define TX_ADR_WIDTH 	5  	//发射地址宽度
     #define TX_PLOAD_WIDTH  4   //发射数据通道有效数据宽度0~32Byte 

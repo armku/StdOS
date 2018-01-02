@@ -2,11 +2,9 @@
     #define _NRF24L01_H
 
 	#include "Type.h"
-    #include "stm32f10x.h"
 
     #define MAX_RT      0x10 //达到最大重发次数中断标志位
     #define TX_DS		0x20 //发送完成中断标志位	  // 
-
     #define RX_DR		0x40 //接收到数据中断标志位
 
     void SPI_NRF_Init(void);
