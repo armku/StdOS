@@ -10,12 +10,12 @@
      * PA1  -  PG15  cs片选
      * PA3  -  PC4   irq中断
      */
-    u8 status; //用于判断接收/发送状态
-    u8 txbuf[4] = 
+    byte status; //用于判断接收/发送状态
+    byte txbuf[4] = 
     {
         0, 1, 2, 3
     }; //发送缓冲
-    u8 rxbuf[4]; //接收缓冲
+    byte rxbuf[4]; //接收缓冲
     int i = 0;
 
     void n2404Routin(void *param)

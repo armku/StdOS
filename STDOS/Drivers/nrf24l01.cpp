@@ -1,12 +1,77 @@
 #include "nrf24l01.h"
 
-u8 RX_BUF[RX_PLOAD_WIDTH]; //接收数据缓存
-u8 TX_BUF[TX_PLOAD_WIDTH]; //发射数据缓存
-u8 TX_ADDRESS[TX_ADR_WIDTH] = 
+#define TX_ADR_WIDTH 	5  	//发射地址宽度
+    #define TX_PLOAD_WIDTH  4   //发射数据通道有效数据宽度0~32Byte 
+
+    #define RX_ADR_WIDTH    5
+    #define RX_PLOAD_WIDTH  4
+
+
+
+    #define CHANAL 40	//频道选择 
+
+    // SPI(nRF24L01) commands ,	NRF的SPI命令宏定义，详见NRF功能使用文档
+    #define NRF_READ_REG    0x00  // Define read command to register
+    #define NRF_WRITE_REG   0x20  // Define write command to register
+    #define RD_RX_PLOAD 0x61  // Define RX payload register address
+    #define WR_TX_PLOAD 0xA0  // Define TX payload register address
+    #define FLUSH_TX    0xE1  // Define flush TX register command
+    #define FLUSH_RX    0xE2  // Define flush RX register command
+    #define REUSE_TX_PL 0xE3  // Define reuse TX payload register command
+    #define NOP         0xFF  
+        // Define No Operation, might be used to read status register
+
+    // SPI(nRF24L01) registers(addresses) ，NRF24L01 相关寄存器地址的宏定义
+    #define CONFIG      0x00  // 'Config' register address
+    #define EN_AA       0x01  // 'Enable Auto Acknowledgment' register address
+    #define EN_RXADDR   0x02  // 'Enabled RX addresses' register address
+    #define SETUP_AW    0x03  // 'Setup address width' register address
+    #define SETUP_RETR  0x04  // 'Setup Auto. Retrans' register address
+    #define RF_CH       0x05  // 'RF channel' register address
+    #define RF_SETUP    0x06  // 'RF setup' register address
+    #define STATUS      0x07  // 'Status' register address
+    #define OBSERVE_TX  0x08  // 'Observe TX' register address
+    #define CD          0x09  // 'Carrier Detect' register address
+    #define RX_ADDR_P0  0x0A  // 'RX address pipe0' register address
+    #define RX_ADDR_P1  0x0B  // 'RX address pipe1' register address
+    #define RX_ADDR_P2  0x0C  // 'RX address pipe2' register address
+    #define RX_ADDR_P3  0x0D  // 'RX address pipe3' register address
+    #define RX_ADDR_P4  0x0E  // 'RX address pipe4' register address
+    #define RX_ADDR_P5  0x0F  // 'RX address pipe5' register address
+    #define TX_ADDR     0x10  // 'TX address' register address
+    #define RX_PW_P0    0x11  // 'RX payload width, pipe0' register address
+    #define RX_PW_P1    0x12  // 'RX payload width, pipe1' register address
+    #define RX_PW_P2    0x13  // 'RX payload width, pipe2' register address
+    #define RX_PW_P3    0x14  // 'RX payload width, pipe3' register address
+    #define RX_PW_P4    0x15  // 'RX payload width, pipe4' register address
+    #define RX_PW_P5    0x16  // 'RX payload width, pipe5' register address
+    #define FIFO_STATUS 0x17  // 'FIFO Status Register' register address
+
+    
+
+    //#define NRF_CSN_HIGH()      GPIO_SetBits(GPIOA, GPIO_Pin_1)
+    //#define NRF_CSN_LOW()       GPIO_ResetBits(GPIOA, GPIO_Pin_1)		        //csn置低
+    //#define NRF_CE_HIGH()	      GPIO_SetBits(GPIOA,GPIO_Pin_2)
+    //#define NRF_CE_LOW()	      GPIO_ResetBits(GPIOA,GPIO_Pin_2)			      //CE置低
+    //#define NRF_Read_IRQ()		  GPIO_ReadInputDataBit ( GPIOA, GPIO_Pin_3)  //中断引脚
+
+    #define NRF_CSN_HIGH()      GPIO_SetBits(GPIOG, GPIO_Pin_15)
+    #define NRF_CSN_LOW()       GPIO_ResetBits(GPIOG, GPIO_Pin_15)		        
+        //csn置低
+    #define NRF_CE_HIGH()	      GPIO_SetBits(GPIOG,GPIO_Pin_8)
+    #define NRF_CE_LOW()	      GPIO_ResetBits(GPIOG,GPIO_Pin_8)			      //CE置低
+    #define NRF_Read_IRQ()		  GPIO_ReadInputDataBit ( GPIOC, GPIO_Pin_4)  
+        //中断引脚
+
+
+
+byte RX_BUF[RX_PLOAD_WIDTH]; //接收数据缓存
+byte TX_BUF[TX_PLOAD_WIDTH]; //发射数据缓存
+byte TX_ADDRESS[TX_ADR_WIDTH] = 
 {
     0x34, 0x43, 0x10, 0x10, 0x01
 }; // 定义一个静态发送地址
-u8 RX_ADDRESS[RX_ADR_WIDTH] = 
+byte RX_ADDRESS[RX_ADR_WIDTH] = 
 {
     0x34, 0x43, 0x10, 0x10, 0x01
 };
@@ -80,7 +145,7 @@ void SPI_NRF_Init(void)
  *		@arg dat 
  * @retval  读取得的数据
  */
-u8 SPI_NRF_RW(u8 dat)
+byte SPI_NRF_RW(byte dat)
 {
     /* 当 SPI发送缓冲器非空时等待 */
     while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET)
@@ -104,9 +169,9 @@ u8 SPI_NRF_RW(u8 dat)
  *		@arg dat:将要向寄存器写入的数据
  * @retval  NRF的status寄存器的状态
  */
-u8 SPI_NRF_WriteReg(u8 reg, u8 dat)
+byte SPI_NRF_WriteReg(byte reg, byte dat)
 {
-    u8 status;
+    byte status;
     NRF_CE_LOW();
     /*置低CSN，使能SPI传输*/
     NRF_CSN_LOW();
@@ -130,9 +195,9 @@ u8 SPI_NRF_WriteReg(u8 reg, u8 dat)
  *		@arg reg:NRF的命令+寄存器地址
  * @retval  寄存器中的数据
  */
-u8 SPI_NRF_ReadReg(u8 reg)
+byte SPI_NRF_ReadReg(byte reg)
 {
-    u8 reg_val;
+    byte reg_val;
 
     NRF_CE_LOW();
     /*置低CSN，使能SPI传输*/
@@ -158,9 +223,9 @@ u8 SPI_NRF_ReadReg(u8 reg)
  * 	@arg bytes: pBuf的数据长度
  * @retval  NRF的status寄存器的状态
  */
-u8 SPI_NRF_ReadBuf(u8 reg, u8 *pBuf, u8 bytes)
+byte SPI_NRF_ReadBuf(byte reg, byte *pBuf, byte bytes)
 {
-    u8 status, byte_cnt;
+    byte status, byte_cnt;
 
     NRF_CE_LOW();
     /*置低CSN，使能SPI传输*/
@@ -188,9 +253,9 @@ u8 SPI_NRF_ReadBuf(u8 reg, u8 *pBuf, u8 bytes)
  * 	@arg bytes: pBuf的数据长度
  * @retval  NRF的status寄存器的状态
  */
-u8 SPI_NRF_WriteBuf(u8 reg, u8 *pBuf, u8 bytes)
+byte SPI_NRF_WriteBuf(byte reg, byte *pBuf, byte bytes)
 {
-    u8 status, byte_cnt;
+    byte status, byte_cnt;
     NRF_CE_LOW();
     /*置低CSN，使能SPI传输*/
     NRF_CSN_LOW();
@@ -282,14 +347,14 @@ void NRF_TX_Mode(void)
  * @param  无
  * @retval SUCCESS/ERROR 连接正常/连接失败
  */
-u8 NRF_Check(void)
+byte NRF_Check(void)
 {
-    u8 buf[5] = 
+    byte buf[5] = 
     {
         0xC2, 0xC2, 0xC2, 0xC2, 0xC2
     };
-    u8 buf1[5];
-    u8 i;
+    byte buf1[5];
+    byte i;
 
     /*写入5个字节的地址.  */
     SPI_NRF_WriteBuf(NRF_WRITE_REG + TX_ADDR, buf, 5);
@@ -318,9 +383,9 @@ u8 NRF_Check(void)
  *		@arg txBuf：存储了将要发送的数据的数组，外部定义	
  * @retval  发送结果，成功返回TXDS,失败返回MAXRT或ERROR
  */
-u8 NRF_Tx_Dat(u8 *txbuf)
+byte NRF_Tx_Dat(byte *txbuf)
 {
-    u8 state;
+    byte state;
 
     /*ce为低，进入待机模式1*/
     NRF_CE_LOW();
@@ -363,9 +428,9 @@ u8 NRF_Tx_Dat(u8 *txbuf)
  * @retval 
  *		@arg 接收结果
  */
-u8 NRF_Rx_Dat(u8 *rxbuf)
+byte NRF_Rx_Dat(byte *rxbuf)
 {
-    u8 state;
+    byte state;
     NRF_CE_HIGH(); //进入接收状态
     /*等待接收中断*/
     while (NRF_Read_IRQ() != 0)
