@@ -65,13 +65,15 @@ void Delay(__IO u32 nCount)
     for (; nCount != 0; nCount--)
         ;
 }
-
+NRF24L01::NRF24L01()
+{
+}
 /**
  * @brief  SPI的 I/O配置
  * @param  无
  * @retval 无
  */
-void NRF24L01::Init()
+void NRF24L01::Init(Spi* spi, Pin ce, Pin irq, Pin power)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
 
@@ -93,6 +95,9 @@ void NRF24L01::Init()
 
     /* 这是自定义的宏，用于拉高csn引脚，NRF进入空闲状态 */
     this->_CSN = 1;
+	
+	this->_spi=spi;
+	this->_spi->Open();
 
 }
 

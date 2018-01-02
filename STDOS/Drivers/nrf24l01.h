@@ -10,12 +10,9 @@
 	class NRF24L01 
 	{
 		public:
+			NRF24L01();
 			void Init();
-			byte ReadReg(byte reg);
-			byte WriteReg(byte reg, byte dat);
-
-			byte ReadBuf(byte reg, byte *pBuf, byte bytes);
-			byte WriteBuf(byte reg, byte *pBuf, byte bytes);
+			void Init(Spi* spi, Pin ce = P0, Pin irq = P0, Pin power = P0);
 
 			void TX_Mode();
 			void RX_Mode();
@@ -29,6 +26,14 @@
 			OutputPort _CSN;
 			InputPort	Irq;
 			OutputPort	_Power;	// 设置控制2401电源的引脚  直接进行对2401的通断电操作，以免死机对setPower无效
+		private:
+			byte WriteBuf(byte reg, const Buffer& bs);
+			byte ReadBuf(byte reg, Buffer& bs);
+			byte ReadReg(byte reg);
+			byte WriteReg(byte reg, byte dat);
+		
+			byte ReadBuf(byte reg, byte *pBuf, byte bytes);
+			byte WriteBuf(byte reg, byte *pBuf, byte bytes);
 	};
 
 #endif

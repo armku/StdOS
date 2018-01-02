@@ -19,15 +19,17 @@
     byte rxbuf[4]; //接收缓冲
     int i = 0;
 	
-	NRF24L01 n2401;
+	
 
     void n2404Routin(void *param)
     {
+		NRF24L01 *n24l01=(NRF24L01*)param;
+		
         debug_printf("\r\n 主机端 进入自应答发送模式\r\n");
-        n2401.TX_Mode();
+        n24l01->TX_Mode();
 
         /*开始发送数据*/
-        status = n2401.Tx_Dat(txbuf);
+        status = n24l01->Tx_Dat(txbuf);
 
         /*判断发送状态*/
         switch (status)
@@ -48,10 +50,10 @@
         }
 
         debug_printf("\r\n 主机端 进入接收模式。 \r\n");
-        n2401.RX_Mode();
+        n24l01->RX_Mode();
 
         /*等待接收数据*/
-        status = n2401.Rx_Dat(rxbuf);
+        status = n24l01->Rx_Dat(rxbuf);
 
         /*判断接收状态*/
         switch (status)
@@ -71,6 +73,9 @@
                 break;
         }
     }
+	NRF24L01 n2401;
+	
+	Spi nspi(Spi1,CPOL_Low,CPHA_1Edge,9000000);
     void n24l01Test()
     {
 		n2401._CE.Set(PG8);
@@ -82,11 +87,8 @@
 		n2401._CSN.Invert=0;
 		n2401._CSN.OpenDrain=true;
 		n2401._CSN.Open();
-		
-		n2401._spi=new Spi(Spi1,CPOL_Low,CPHA_1Edge,9000000);
-		n2401._spi->Open();
-		
-        n2401.Init();
+	
+        n2401.Init(&nspi);
         debug_printf("\r\n 这是一个 NRF24L01 无线传输实验 \r\n");
         debug_printf("\r\n 这是无线传输 主机端 的反馈信息\r\n");
         debug_printf("\r\n   正在检测NRF与MCU是否正常连接。。。\r\n");
@@ -99,7 +101,7 @@
             debug_printf("\r\n      NRF与MCU连接成功！\r\n");
         else
             debug_printf("\r\n  NRF与MCU连接失败，请重新检查接线。\r\n");
-        Sys.AddTask(n2404Routin, 0, 0, 1000, "n2404Routin ");
+        Sys.AddTask(n2404Routin, &n2401, 0, 1000, "n2404Routin ");
 
     }
 
