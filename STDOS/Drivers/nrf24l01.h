@@ -19,11 +19,10 @@
 			byte Rx_Dat(byte *rxbuf);
 			byte Tx_Dat(byte *txbuf);
 			byte Check();
-			
-		//private:
-			Spi*		_spi;
-			OutputPort	_CE;
 			OutputPort _CSN;
+		private:
+			Spi*		_spi;
+			OutputPort	_CE;			
 			InputPort	Irq;
 			OutputPort	_Power;	// 设置控制2401电源的引脚  直接进行对2401的通断电操作，以免死机对setPower无效
 		private:
