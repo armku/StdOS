@@ -71,7 +71,7 @@ void Delay(__IO u32 nCount)
  * @param  无
  * @retval 无
  */
-void NRF24L01::SPI_NRF_Init()
+void NRF24L01::Init()
 {
     GPIO_InitTypeDef GPIO_InitStructure;
 
@@ -103,7 +103,7 @@ void NRF24L01::SPI_NRF_Init()
  *		@arg dat:将要向寄存器写入的数据
  * @retval  NRF的status寄存器的状态
  */
-byte NRF24L01::SPI_NRF_WriteReg(byte reg, byte dat)
+byte NRF24L01::WriteReg(byte reg, byte dat)
 {
     byte status;
     this->_CE = 0;
@@ -129,7 +129,7 @@ byte NRF24L01::SPI_NRF_WriteReg(byte reg, byte dat)
  *		@arg reg:NRF的命令+寄存器地址
  * @retval  寄存器中的数据
  */
-byte NRF24L01::SPI_NRF_ReadReg(byte reg)
+byte NRF24L01::ReadReg(byte reg)
 {
     byte reg_val;
 
@@ -157,7 +157,7 @@ byte NRF24L01::SPI_NRF_ReadReg(byte reg)
  * 	@arg bytes: pBuf的数据长度
  * @retval  NRF的status寄存器的状态
  */
-byte NRF24L01::SPI_NRF_ReadBuf(byte reg, byte *pBuf, byte bytes)
+byte NRF24L01::ReadBuf(byte reg, byte *pBuf, byte bytes)
 {
     byte status, byte_cnt;
 
@@ -187,7 +187,7 @@ byte NRF24L01::SPI_NRF_ReadBuf(byte reg, byte *pBuf, byte bytes)
  * 	@arg bytes: pBuf的数据长度
  * @retval  NRF的status寄存器的状态
  */
-byte NRF24L01::SPI_NRF_WriteBuf(byte reg, byte *pBuf, byte bytes)
+byte NRF24L01::WriteBuf(byte reg, byte *pBuf, byte bytes)
 {
     byte status, byte_cnt;
 	this->_CE = 0;
@@ -213,26 +213,26 @@ byte NRF24L01::SPI_NRF_WriteBuf(byte reg, byte *pBuf, byte bytes)
  * @param  无
  * @retval 无
  */
-void NRF24L01::NRF_RX_Mode()
+void NRF24L01::RX_Mode()
 {
     this->_CE = 0;
 
-    SPI_NRF_WriteBuf(NRF_WRITE_REG + RX_ADDR_P0, RX_ADDRESS, RX_ADR_WIDTH); 
+    this->WriteBuf(NRF_WRITE_REG + RX_ADDR_P0, RX_ADDRESS, RX_ADR_WIDTH); 
         //写RX节点地址
 
-    SPI_NRF_WriteReg(NRF_WRITE_REG + EN_AA, 0x01); //使能通道0的自动应答    
+    this->WriteReg(NRF_WRITE_REG + EN_AA, 0x01); //使能通道0的自动应答    
 
-    SPI_NRF_WriteReg(NRF_WRITE_REG + EN_RXADDR, 0x01); //使能通道0的接收地址    
+    this->WriteReg(NRF_WRITE_REG + EN_RXADDR, 0x01); //使能通道0的接收地址    
 
-    SPI_NRF_WriteReg(NRF_WRITE_REG + RF_CH, CHANAL); //设置RF通信频率    
+    this->WriteReg(NRF_WRITE_REG + RF_CH, CHANAL); //设置RF通信频率    
 
-    SPI_NRF_WriteReg(NRF_WRITE_REG + RX_PW_P0, RX_PLOAD_WIDTH); 
+    this->WriteReg(NRF_WRITE_REG + RX_PW_P0, RX_PLOAD_WIDTH); 
         //选择通道0的有效数据宽度      
 
-    SPI_NRF_WriteReg(NRF_WRITE_REG + RF_SETUP, 0x0f); 
+    this->WriteReg(NRF_WRITE_REG + RF_SETUP, 0x0f); 
         //设置TX发射参数,0db增益,2Mbps,低噪声增益开启   
 
-    SPI_NRF_WriteReg(NRF_WRITE_REG + CONFIG, 0x0f); 
+    this->WriteReg(NRF_WRITE_REG + CONFIG, 0x0f); 
         //配置基本工作模式的参数;PWR_UP,EN_CRC,16BIT_CRC,接收模式 
 
     /*CE拉高，进入接收模式*/
@@ -245,29 +245,29 @@ void NRF24L01::NRF_RX_Mode()
  * @param  无
  * @retval 无
  */
-void NRF24L01::NRF_TX_Mode()
+void NRF24L01::TX_Mode()
 {
     this->_CE = 0;
 
-    SPI_NRF_WriteBuf(NRF_WRITE_REG + TX_ADDR, TX_ADDRESS, TX_ADR_WIDTH); 
+    this->WriteBuf(NRF_WRITE_REG + TX_ADDR, TX_ADDRESS, TX_ADR_WIDTH); 
         //写TX节点地址 
 
-    SPI_NRF_WriteBuf(NRF_WRITE_REG + RX_ADDR_P0, RX_ADDRESS, RX_ADR_WIDTH); 
+    this->WriteBuf(NRF_WRITE_REG + RX_ADDR_P0, RX_ADDRESS, RX_ADR_WIDTH); 
         //设置TX节点地址,主要为了使能ACK   
 
-    SPI_NRF_WriteReg(NRF_WRITE_REG + EN_AA, 0x01); //使能通道0的自动应答    
+    this->WriteReg(NRF_WRITE_REG + EN_AA, 0x01); //使能通道0的自动应答    
 
-    SPI_NRF_WriteReg(NRF_WRITE_REG + EN_RXADDR, 0x01); //使能通道0的接收地址  
+    this->WriteReg(NRF_WRITE_REG + EN_RXADDR, 0x01); //使能通道0的接收地址  
 
-    SPI_NRF_WriteReg(NRF_WRITE_REG + SETUP_RETR, 0x1a); 
+    this->WriteReg(NRF_WRITE_REG + SETUP_RETR, 0x1a); 
         //设置自动重发间隔时间:500us + 86us;最大自动重发次数:10次
 
-    SPI_NRF_WriteReg(NRF_WRITE_REG + RF_CH, CHANAL); //设置RF通道为CHANAL
+    this->WriteReg(NRF_WRITE_REG + RF_CH, CHANAL); //设置RF通道为CHANAL
 
-    SPI_NRF_WriteReg(NRF_WRITE_REG + RF_SETUP, 0x0f); 
+    this->WriteReg(NRF_WRITE_REG + RF_SETUP, 0x0f); 
         //设置TX发射参数,0db增益,2Mbps,低噪声增益开启   
 
-    SPI_NRF_WriteReg(NRF_WRITE_REG + CONFIG, 0x0e); 
+    this->WriteReg(NRF_WRITE_REG + CONFIG, 0x0e); 
         //配置基本工作模式的参数;PWR_UP,EN_CRC,16BIT_CRC,发射模式,开启所有中断
 
     /*CE拉高，进入发送模式*/
@@ -280,7 +280,7 @@ void NRF24L01::NRF_TX_Mode()
  * @param  无
  * @retval SUCCESS/ERROR 连接正常/连接失败
  */
-byte NRF24L01::NRF_Check()
+byte NRF24L01::Check()
 {
     byte buf[5] = 
     {
@@ -290,10 +290,10 @@ byte NRF24L01::NRF_Check()
     byte i;
 
     /*写入5个字节的地址.  */
-    SPI_NRF_WriteBuf(NRF_WRITE_REG + TX_ADDR, buf, 5);
+    this->WriteBuf(NRF_WRITE_REG + TX_ADDR, buf, 5);
 
     /*读出写入的地址 */
-    SPI_NRF_ReadBuf(TX_ADDR, buf1, 5);
+    this->ReadBuf(TX_ADDR, buf1, 5);
 
     /*比较*/
     for (i = 0; i < 5; i++)
@@ -316,7 +316,7 @@ byte NRF24L01::NRF_Check()
  *		@arg txBuf：存储了将要发送的数据的数组，外部定义	
  * @retval  发送结果，成功返回TXDS,失败返回MAXRT或ERROR
  */
-byte NRF24L01::NRF_Tx_Dat(byte *txbuf)
+byte NRF24L01::Tx_Dat(byte *txbuf)
 {
     byte state;
 
@@ -324,7 +324,7 @@ byte NRF24L01::NRF_Tx_Dat(byte *txbuf)
 	this->_CE = 0;
 
     /*写数据到TX BUF 最大 32个字节*/
-    SPI_NRF_WriteBuf(WR_TX_PLOAD, txbuf, TX_PLOAD_WIDTH);
+    this->WriteBuf(WR_TX_PLOAD, txbuf, TX_PLOAD_WIDTH);
 
     /*CE为高，txbuf非空，发送数据包 */
 	this->_CE = 1;
@@ -334,12 +334,12 @@ byte NRF24L01::NRF_Tx_Dat(byte *txbuf)
         ;
 
     /*读取状态寄存器的值 */
-    state = SPI_NRF_ReadReg(STATUS);
+    state = this->ReadReg(STATUS);
 
     /*清除TX_DS或MAX_RT中断标志*/
-    SPI_NRF_WriteReg(NRF_WRITE_REG + STATUS, state);
+    this->WriteReg(NRF_WRITE_REG + STATUS, state);
 
-    SPI_NRF_WriteReg(FLUSH_TX, NOP); //清除TX FIFO寄存器 
+    this->WriteReg(FLUSH_TX, NOP); //清除TX FIFO寄存器 
 
     /*判断中断类型*/
     if (state &MAX_RT)
@@ -361,7 +361,7 @@ byte NRF24L01::NRF_Tx_Dat(byte *txbuf)
  * @retval 
  *		@arg 接收结果
  */
-byte NRF24L01::NRF_Rx_Dat(byte *rxbuf)
+byte NRF24L01::Rx_Dat(byte *rxbuf)
 {
     byte state;
    //进入接收状态
@@ -373,17 +373,17 @@ byte NRF24L01::NRF_Rx_Dat(byte *rxbuf)
     //进入待机状态
 	this->_CE = 0;
     /*读取status寄存器的值  */
-    state = SPI_NRF_ReadReg(STATUS);
+    state = this->ReadReg(STATUS);
 
     /* 清除中断标志*/
-    SPI_NRF_WriteReg(NRF_WRITE_REG + STATUS, state);
+    this->WriteReg(NRF_WRITE_REG + STATUS, state);
 
     /*判断是否接收到数据*/
     if (state &RX_DR)
     //接收到数据
     {
-        SPI_NRF_ReadBuf(RD_RX_PLOAD, rxbuf, RX_PLOAD_WIDTH); //读取数据
-        SPI_NRF_WriteReg(FLUSH_RX, NOP); //清除RX FIFO寄存器
+        this->ReadBuf(RD_RX_PLOAD, rxbuf, RX_PLOAD_WIDTH); //读取数据
+        this->WriteReg(FLUSH_RX, NOP); //清除RX FIFO寄存器
         return RX_DR;
     }
     else

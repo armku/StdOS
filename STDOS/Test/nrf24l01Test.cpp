@@ -24,10 +24,10 @@
     void n2404Routin(void *param)
     {
         debug_printf("\r\n 主机端 进入自应答发送模式\r\n");
-        n2401.NRF_TX_Mode();
+        n2401.TX_Mode();
 
         /*开始发送数据*/
-        status = n2401.NRF_Tx_Dat(txbuf);
+        status = n2401.Tx_Dat(txbuf);
 
         /*判断发送状态*/
         switch (status)
@@ -48,10 +48,10 @@
         }
 
         debug_printf("\r\n 主机端 进入接收模式。 \r\n");
-        n2401.NRF_RX_Mode();
+        n2401.RX_Mode();
 
         /*等待接收数据*/
-        status = n2401.NRF_Rx_Dat(rxbuf);
+        status = n2401.Rx_Dat(rxbuf);
 
         /*判断接收状态*/
         switch (status)
@@ -86,13 +86,13 @@
 		n2401._spi=new Spi(Spi1,CPOL_Low,CPHA_1Edge,9000000);
 		n2401._spi->Open();
 		
-        n2401.SPI_NRF_Init();
+        n2401.Init();
         debug_printf("\r\n 这是一个 NRF24L01 无线传输实验 \r\n");
         debug_printf("\r\n 这是无线传输 主机端 的反馈信息\r\n");
         debug_printf("\r\n   正在检测NRF与MCU是否正常连接。。。\r\n");
 
         /*检测NRF模块与MCU的连接*/
-        status = n2401.NRF_Check();
+        status = n2401.Check();
 
         /*判断连接状态*/
         if (status == SUCCESS)
