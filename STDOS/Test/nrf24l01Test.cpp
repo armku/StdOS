@@ -18,14 +18,16 @@
     }; //发送缓冲
     byte rxbuf[4]; //接收缓冲
     int i = 0;
+	
+	NRF24L01 n2401;
 
     void n2404Routin(void *param)
     {
         debug_printf("\r\n 主机端 进入自应答发送模式\r\n");
-        NRF_TX_Mode();
+        n2401.NRF_TX_Mode();
 
         /*开始发送数据*/
-        status = NRF_Tx_Dat(txbuf);
+        status = n2401.NRF_Tx_Dat(txbuf);
 
         /*判断发送状态*/
         switch (status)
@@ -46,10 +48,10 @@
         }
 
         debug_printf("\r\n 主机端 进入接收模式。 \r\n");
-        NRF_RX_Mode();
+        n2401.NRF_RX_Mode();
 
         /*等待接收数据*/
-        status = NRF_Rx_Dat(rxbuf);
+        status = n2401.NRF_Rx_Dat(rxbuf);
 
         /*判断接收状态*/
         switch (status)
@@ -72,13 +74,13 @@
     void n24l01Test()
     {
 
-        SPI_NRF_Init();
+        n2401.SPI_NRF_Init();
         debug_printf("\r\n 这是一个 NRF24L01 无线传输实验 \r\n");
         debug_printf("\r\n 这是无线传输 主机端 的反馈信息\r\n");
         debug_printf("\r\n   正在检测NRF与MCU是否正常连接。。。\r\n");
 
         /*检测NRF模块与MCU的连接*/
-        status = NRF_Check();
+        status = n2401.NRF_Check();
 
         /*判断连接状态*/
         if (status == SUCCESS)

@@ -89,7 +89,7 @@ void Delay(__IO u32 nCount)
  * @param  无
  * @retval 无
  */
-void SPI_NRF_Init()
+void NRF24L01::SPI_NRF_Init()
 {
     SPI_InitTypeDef SPI_InitStructure;
     GPIO_InitTypeDef GPIO_InitStructure;
@@ -147,7 +147,7 @@ void SPI_NRF_Init()
  *		@arg dat 
  * @retval  读取得的数据
  */
-byte SPI_NRF_RW(byte dat)
+byte NRF24L01::SPI_NRF_RW(byte dat)
 {
     /* 当 SPI发送缓冲器非空时等待 */
     while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET)
@@ -171,7 +171,7 @@ byte SPI_NRF_RW(byte dat)
  *		@arg dat:将要向寄存器写入的数据
  * @retval  NRF的status寄存器的状态
  */
-byte SPI_NRF_WriteReg(byte reg, byte dat)
+byte NRF24L01::SPI_NRF_WriteReg(byte reg, byte dat)
 {
     byte status;
     NRF_CE_LOW();
@@ -197,7 +197,7 @@ byte SPI_NRF_WriteReg(byte reg, byte dat)
  *		@arg reg:NRF的命令+寄存器地址
  * @retval  寄存器中的数据
  */
-byte SPI_NRF_ReadReg(byte reg)
+byte NRF24L01::SPI_NRF_ReadReg(byte reg)
 {
     byte reg_val;
 
@@ -225,7 +225,7 @@ byte SPI_NRF_ReadReg(byte reg)
  * 	@arg bytes: pBuf的数据长度
  * @retval  NRF的status寄存器的状态
  */
-byte SPI_NRF_ReadBuf(byte reg, byte *pBuf, byte bytes)
+byte NRF24L01::SPI_NRF_ReadBuf(byte reg, byte *pBuf, byte bytes)
 {
     byte status, byte_cnt;
 
@@ -255,7 +255,7 @@ byte SPI_NRF_ReadBuf(byte reg, byte *pBuf, byte bytes)
  * 	@arg bytes: pBuf的数据长度
  * @retval  NRF的status寄存器的状态
  */
-byte SPI_NRF_WriteBuf(byte reg, byte *pBuf, byte bytes)
+byte NRF24L01::SPI_NRF_WriteBuf(byte reg, byte *pBuf, byte bytes)
 {
     byte status, byte_cnt;
     NRF_CE_LOW();
@@ -281,7 +281,7 @@ byte SPI_NRF_WriteBuf(byte reg, byte *pBuf, byte bytes)
  * @param  无
  * @retval 无
  */
-void NRF_RX_Mode()
+void NRF24L01::NRF_RX_Mode()
 
 {
     NRF_CE_LOW();
@@ -314,7 +314,7 @@ void NRF_RX_Mode()
  * @param  无
  * @retval 无
  */
-void NRF_TX_Mode()
+void NRF24L01::NRF_TX_Mode()
 {
     NRF_CE_LOW();
 
@@ -349,7 +349,7 @@ void NRF_TX_Mode()
  * @param  无
  * @retval SUCCESS/ERROR 连接正常/连接失败
  */
-byte NRF_Check()
+byte NRF24L01::NRF_Check()
 {
     byte buf[5] = 
     {
@@ -385,7 +385,7 @@ byte NRF_Check()
  *		@arg txBuf：存储了将要发送的数据的数组，外部定义	
  * @retval  发送结果，成功返回TXDS,失败返回MAXRT或ERROR
  */
-byte NRF_Tx_Dat(byte *txbuf)
+byte NRF24L01::NRF_Tx_Dat(byte *txbuf)
 {
     byte state;
 
@@ -430,7 +430,7 @@ byte NRF_Tx_Dat(byte *txbuf)
  * @retval 
  *		@arg 接收结果
  */
-byte NRF_Rx_Dat(byte *rxbuf)
+byte NRF24L01::NRF_Rx_Dat(byte *rxbuf)
 {
     byte state;
     NRF_CE_HIGH(); //进入接收状态
