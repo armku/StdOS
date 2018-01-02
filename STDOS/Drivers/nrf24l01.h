@@ -11,7 +11,6 @@
 	{
 		public:
 			void SPI_NRF_Init();
-			byte SPI_NRF_RW(byte dat);
 			byte SPI_NRF_ReadReg(byte reg);
 			byte SPI_NRF_WriteReg(byte reg, byte dat);
 

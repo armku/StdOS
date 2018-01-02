@@ -73,16 +73,12 @@ void Delay(__IO u32 nCount)
  */
 void NRF24L01::SPI_NRF_Init()
 {
-//    SPI_InitTypeDef SPI_InitStructure;
     GPIO_InitTypeDef GPIO_InitStructure;
 
     /*开启相应IO端口的时钟*/
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOC |
         RCC_APB2Periph_GPIOG, ENABLE);
-
-    /*使能SPI1时钟*/
-//    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
-
+    
     /*配置 SPI_NRF_SPI的 SCK,MISO,MOSI引脚，GPIOA^5,GPIOA^6,GPIOA^7 */
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
@@ -98,49 +94,6 @@ void NRF24L01::SPI_NRF_Init()
     /* 这是自定义的宏，用于拉高csn引脚，NRF进入空闲状态 */
     this->_CSN = 1;
 
-//    SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; 
-//        //双线全双工
-//    SPI_InitStructure.SPI_Mode = SPI_Mode_Master; //主模式
-//    SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b; //数据大小8位
-//    SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low; //时钟极性，空闲时为低
-//    SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge; 
-//        //第1个边沿有效，上升沿为采样时刻
-//    SPI_InitStructure.SPI_NSS = SPI_NSS_Soft; //NSS信号由软件产生
-//    SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_8; 
-//        //8分频，9MHz
-//    SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB; //高位在前
-//    SPI_InitStructure.SPI_CRCPolynomial = 7;
-//    SPI_Init(SPI1, &SPI_InitStructure);
-
-//    /* Enable SPI1  */
-//    SPI_Cmd(SPI1, ENABLE);
-}
-
-/**
- * @brief   用于向NRF读/写一字节数据
- * @param   写入的数据
- *		@arg dat 
- * @retval  读取得的数据
- */
-byte NRF24L01::SPI_NRF_RW(byte dat)
-{
-	#if 0
-    /* 当 SPI发送缓冲器非空时等待 */
-    while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET)
-        ;
-
-    /* 通过 SPI2发送一字节数据 */
-    SPI_I2S_SendData(SPI1, dat);
-
-    /* 当SPI接收缓冲器为空时等待 */
-    while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET)
-        ;
-
-    /* Return the byte read from the SPI bus */
-    return SPI_I2S_ReceiveData(SPI1);
-	#else
-	return this->_spi->Write(dat);
-	#endif
 }
 
 /**
@@ -158,10 +111,10 @@ byte NRF24L01::SPI_NRF_WriteReg(byte reg, byte dat)
 	this->_CSN = 0;
 
     /*发送命令及寄存器号 */
-    status = SPI_NRF_RW(reg);
+    status = this->_spi->Write(reg);
 
     /*向寄存器写入数据*/
-    SPI_NRF_RW(dat);
+    this->_spi->Write(dat);
 
     /*CSN拉高，完成*/
 	this->_CSN = 1;
@@ -185,10 +138,10 @@ byte NRF24L01::SPI_NRF_ReadReg(byte reg)
 	this->_CSN = 0;
 
     /*发送寄存器号*/
-    SPI_NRF_RW(reg);
+    this->_spi->Write(reg);
 
     /*读取寄存器的值 */
-    reg_val = SPI_NRF_RW(NOP);
+    reg_val = this->_spi->Write(NOP);
 
     /*CSN拉高，完成*/
 	this->_CSN = 1;
@@ -213,11 +166,11 @@ byte NRF24L01::SPI_NRF_ReadBuf(byte reg, byte *pBuf, byte bytes)
 	this->_CSN = 0;
 
     /*发送寄存器号*/
-    status = SPI_NRF_RW(reg);
+    status = this->_spi->Write(reg);
 
     /*读取缓冲区数据*/
     for (byte_cnt = 0; byte_cnt < bytes; byte_cnt++)
-        pBuf[byte_cnt] = SPI_NRF_RW(NOP);
+        pBuf[byte_cnt] = this->_spi->Write(NOP);
     //从NRF24L01读取数据  
 
     /*CSN拉高，完成*/
@@ -242,11 +195,11 @@ byte NRF24L01::SPI_NRF_WriteBuf(byte reg, byte *pBuf, byte bytes)
 	this->_CSN = 0;
 
     /*发送寄存器号*/
-    status = SPI_NRF_RW(reg);
+    status = this->_spi->Write(reg);
 
     /*向缓冲区写入数据*/
     for (byte_cnt = 0; byte_cnt < bytes; byte_cnt++)
-        SPI_NRF_RW(*pBuf++);
+        this->_spi->Write(*pBuf++);
     //写数据到缓冲区 	 
 
     /*CSN拉高，完成*/
