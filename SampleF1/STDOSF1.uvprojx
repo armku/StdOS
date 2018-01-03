@@ -569,6 +569,16 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\App\AT.cpp</FilePath>
             </File>
+            <File>
+              <FileName>BlinkPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\BlinkPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FlushPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\FlushPort.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1138,6 +1148,16 @@
               <FileName>nrf24l01Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\nrf24l01Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BlinkPortTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\BlinkPortTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FlushPortTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\FlushPortTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1706,6 +1726,16 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\App\AT.cpp</FilePath>
             </File>
+            <File>
+              <FileName>BlinkPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\BlinkPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FlushPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\FlushPort.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2275,6 +2305,16 @@
               <FileName>nrf24l01Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\nrf24l01Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BlinkPortTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\BlinkPortTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FlushPortTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\FlushPortTest.cpp</FilePath>
             </File>
           </Files>
         </Group>

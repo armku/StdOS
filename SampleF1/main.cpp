@@ -95,6 +95,7 @@ void PwmSoloTest();
 void WaitHandleTest();
 void StrintTest();
 void n24l01Test();
+void BlinkPortTest();
 
 //void Test(void * param)
 //{
@@ -119,7 +120,7 @@ int main(void)
 //	sp3->Register(OnUsart3Read);
 //	sp3->Open();
 	
-    Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
+    //Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 //    Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
 //	Sys.AddTask(Test,0,2000,2000,"Test");
     //Sys.AddTask(Test12, 0, 600, 1000, "Test");
@@ -133,11 +134,12 @@ int main(void)
 	//ssd1309Test();
     //ESP8266Test();
 	//ds18b20test();
-	n24l01Test();
+	//n24l01Test();
 	//keyTest();
 	//SerialPortTest();
 	//ST7565Rtest();
 	//PwmSoloTest();
 	//WaitHandleTest();
+	BlinkPortTest();
     Sys.Start();
 }
