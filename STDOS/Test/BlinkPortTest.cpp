@@ -3,7 +3,7 @@
 #define _BLINKPORT_H
 
 #ifdef _BLINKPORT_H
-	OutputPort ledBlink(PB0, false);
+	OutputPort ledBlink(PB0, true);
 	BlinkPort bp;
 	void BlinkPortTest()
 	{
