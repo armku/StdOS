@@ -140,6 +140,6 @@ int main(void)
 	//ST7565Rtest();
 	//PwmSoloTest();
 	//WaitHandleTest();
-	BlinkPortTest();
+	//BlinkPortTest();
     Sys.Start();
 }

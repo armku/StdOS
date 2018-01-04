@@ -1,8 +1,8 @@
 #include "App/BlinkPort.h"
 
-#define _BLINKPORT_H
+//#define _BLINKPORTTEST_H
 
-#ifdef _BLINKPORT_H
+#ifdef _BLINKPORTTEST_H
 	void BlinkRoutin(void * param)
 	{
 		BlinkPort* bph=(BlinkPort*)param;
