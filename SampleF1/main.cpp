@@ -96,6 +96,7 @@ void WaitHandleTest();
 void StrintTest();
 void n24l01Test();
 void BlinkPortTest();
+void FlushPortTest();
 
 //void Test(void * param)
 //{
@@ -141,5 +142,6 @@ int main(void)
 	//PwmSoloTest();
 	//WaitHandleTest();
 	//BlinkPortTest();
+	FlushPortTest();
     Sys.Start();
 }

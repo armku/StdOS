@@ -1,4 +1,4 @@
-﻿#ifndef __FlushPort_H__
+#ifndef __FlushPort_H__
 #define __FlushPort_H__
 
 #include "Kernel\Sys.h"
@@ -11,14 +11,14 @@
 class FlushPort : public IDataPort
 {
 private:
-	uint	_tid;
+	uint	_tid; //4
 
 public:
-	OutputPort*	Port;
+	OutputPort*	Port; //8
 
-	int		Fast;	// 快闪间隔，默认50毫秒
-	int		Slow;	// 慢闪间隔，默认1000毫秒
-	int		Count;	// 剩余快闪次数
+	int		Fast;	// 快闪间隔，默认50毫秒 12
+	int		Slow;	// 慢闪间隔，默认1000毫秒 16
+	int		Count;	// 剩余快闪次数 20
 
 	FlushPort();
 	virtual ~FlushPort();
