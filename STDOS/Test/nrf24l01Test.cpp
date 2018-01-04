@@ -1,105 +1,75 @@
-#include "Drivers\nrf24l01.h"
-#include "Sys.h"
-#include "stm32f10x.h"
+ï»¿#include "Drivers\NRF24L01.h"
 
-#define nrf24l01Test
+extern NRF24L01* Create2401();
 
-#ifdef nrf24l01Test
+//const char tx_buf[] = "It's 0123456789AB Time:";
 
-    /*
-     * PA2  -  PG8   ceÊ¹ÄÜ
-     * PA1  -  PG15  csÆ¬Ñ¡
-     * PA3  -  PC4   irqÖÐ¶Ï
-     */
-    byte status; //ÓÃÓÚÅÐ¶Ï½ÓÊÕ/·¢ËÍ×´Ì¬
-    byte txbuf[4] = 
+NRF24L01* nrf;
+
+void OnSend(void* param)
+{
+	// æœ€åŽ4ä¸ªå­—èŠ‚ä¿®æ”¹ä¸ºç§’æ•°
+	// å¤§æ¦‚4.86%çš„è¯¯å·®
+    //uint s = _REV(Sys.Ms() >> 10);
+	String str("It's ");
+	//str.SetLength(str.Length() - 8);
+	//str.Append(s, 16, 8);
+	str += Buffer(Sys.ID, 12);
+	str += " Time:";
+	str += Sys.Seconds();
+
+    //nrf->SetMode(false);
+    if(!nrf->Write(str.GetBytes()))
     {
-        0, 1, 2, 3
-    }; //·¢ËÍ»º³å
-    byte rxbuf[4]; //½ÓÊÕ»º³å
-    int i = 0;
-	
-	
-
-    void n2404Routin(void *param)
-    {
-		NRF24L01 *n24l01=(NRF24L01*)param;
-		
-        debug_printf("\r\n Ö÷»ú¶Ë ½øÈë×ÔÓ¦´ð·¢ËÍÄ£Ê½\r\n");
-        n24l01->TX_Mode();
-
-        /*¿ªÊ¼·¢ËÍÊý¾Ý*/
-        status = n24l01->Tx_Dat(txbuf);
-
-        /*ÅÐ¶Ï·¢ËÍ×´Ì¬*/
-        switch (status)
-        {
-            case MAX_RT:
-                debug_printf(
-                    "\r\n Ö÷»ú¶Ë Ã»½ÓÊÕµ½Ó¦´ðÐÅºÅ£¬·¢ËÍ´ÎÊý³¬¹ýÏÞ¶¨Öµ£¬·¢ËÍÊ§°Ü¡£ \r\n");
-                break;
-
-            case ERROR:
-                debug_printf("\r\n Î´ÖªÔ­Òòµ¼ÖÂ·¢ËÍÊ§°Ü¡£ \r\n");
-                break;
-
-            case TX_DS:
-                debug_printf(
-                    "\r\n Ö÷»ú¶Ë ½ÓÊÕµ½ ´Ó»ú¶Ë µÄÓ¦´ðÐÅºÅ£¬·¢ËÍ³É¹¦£¡ \r\n");
-                break;
-        }
-
-        debug_printf("\r\n Ö÷»ú¶Ë ½øÈë½ÓÊÕÄ£Ê½¡£ \r\n");
-        n24l01->RX_Mode();
-
-        /*µÈ´ý½ÓÊÕÊý¾Ý*/
-        status = n24l01->Rx_Dat(rxbuf);
-
-        /*ÅÐ¶Ï½ÓÊÕ×´Ì¬*/
-        switch (status)
-        {
-            case RX_DR:
-                for (i = 0; i < 4; i++)
-                {
-                    debug_printf(
-                        "\r\n Ö÷»ú¶Ë ½ÓÊÕµ½ ´Ó»ú¶Ë ·¢ËÍµÄÊý¾ÝÎª£º%d \r\n",
-                        rxbuf[i]);
-                    txbuf[i] = rxbuf[i];
-                }
-                break;
-
-            case ERROR:
-                debug_printf("\r\n Ö÷»ú¶Ë ½ÓÊÕ³ö´í¡£   \r\n");
-                break;
-        }
+        debug_printf ("Test Send Error 0x%02x\r\n", nrf->Status);
+        nrf->ShowStatus();
     }
-	NRF24L01 n2401;
-	
-	Spi nspi(Spi1,CPOL_Low,CPHA_1Edge,9000000);
-    void n24l01Test()
-    {	
-		nspi.SetPin(PA5,PA6,PA7);
-		//nspi.Open();
-		n2401._CSN.Set(PG15);
-		n2401._CSN.Invert=0;
-		n2401._CSN.OpenDrain=true;
-		n2401._CSN.Open();
-	
-        n2401.Init(&nspi,PG8,PC4);
-        debug_printf("\r\n ÕâÊÇÒ»¸ö NRF24L01 ÎÞÏß´«ÊäÊµÑé \r\n");
-        debug_printf("\r\n ÕâÊÇÎÞÏß´«Êä Ö÷»ú¶Ë µÄ·´À¡ÐÅÏ¢\r\n");
-        debug_printf("\r\n   ÕýÔÚ¼ì²âNRFÓëMCUÊÇ·ñÕý³£Á¬½Ó¡£¡£¡£\r\n");
+    //nrf->SetMode(true);
+}
 
-        /*¼ì²âNRFÄ£¿éÓëMCUµÄÁ¬½Ó*/
-        status = n2401.Check();
+void OnReceive(void* param)
+{
+    ByteArray bs;
+	uint len = nrf->Read(bs);
+    if(len)
+    {
+		bs.Show(true);
+    }
+}
 
-        /*ÅÐ¶ÏÁ¬½Ó×´Ì¬*/
-        if (status == SUCCESS)
-            debug_printf("\r\n      NRFÓëMCUÁ¬½Ó³É¹¦£¡\r\n");
-        else
-            debug_printf("\r\n  NRFÓëMCUÁ¬½ÓÊ§°Ü£¬ÇëÖØÐÂ¼ì²é½ÓÏß¡£\r\n");
-        Sys.AddTask(n2404Routin, &n2401, 0, 1000, "n2404Routin ");
+uint OnReceive(ITransport* transport, Buffer& bs, void* param, void* param2)
+{
+	bs.Show(true);
 
+	return 0;
+}
+
+void TestNRF24L01()
+{
+    debug_printf("\r\n");
+    debug_printf("TestNRF24L01 Start......\r\n");
+
+    // ä¿®æ”¹æ•°æ®ï¼ŒåŠ ä¸Šç³»ç»ŸID
+    //byte* p = tx_buf + 5;
+    //Sys.ToHex(p, (byte*)Sys.ID, 6);
+	//String str(tx_buf);
+	//str.SetLength(5);
+	//str.Append(ByteArray(Sys.ID, 6));
+
+    nrf = Create2401();
+    //nrf->Timeout = 1000;
+    nrf->Channel = 0;
+    nrf->AutoAnswer = false;
+    if(!nrf->Check())
+        debug_printf("è¯·æ£€æŸ¥çº¿è·¯\r\n");
+    else
+    {
+        //nrf->Config();
+        //nrf->SetMode(true);
+        //Sys.AddTask(OnReceive, nullptr, 0, 1);
+		//nrf->Register(OnReceive, nrf);
+        Sys.AddTask(OnSend, nullptr, 0, 1000);
     }
 
-#endif
+    debug_printf("TestNRF24L01 Finish!\r\n");
+}

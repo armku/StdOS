@@ -1159,6 +1159,56 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\FlushPortTest.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ADCTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ADCTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CrcTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\CrcTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DictionaryTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\DictionaryTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EthernetTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\EthernetTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InvokeTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\InvokeTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IRTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\IRTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>JsonTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\JsonTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MessageTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\MessageTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PulsePortTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PulsePortTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ThreadTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ThreadTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2315,6 +2365,56 @@
               <FileName>FlushPortTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\FlushPortTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ADCTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ADCTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CrcTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\CrcTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DictionaryTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\DictionaryTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EthernetTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\EthernetTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InvokeTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\InvokeTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IRTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\IRTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>JsonTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\JsonTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MessageTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\MessageTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PulsePortTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PulsePortTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ThreadTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ThreadTest.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,62 +1,72 @@
-#include "TInterrupt.h"
-#include "TTime.h"
-#include "SerialPort.h"
+﻿#include "Device\SerialPort.h"
 
-//#define DEBUGSerialPort
+#ifdef DEBUG
+static uint OnUsartRead(ITransport* transport, Buffer& bs, void* param, void* param2)
+{
+	auto sp	= (SerialPort*)param;
+	debug_printf("%s 收到：", sp->Name);
+	bs.Show(true);
+	bs.AsString().Show(true);
 
-#ifdef DEBUGSerialPort
-    void SerialPort::Test(){
-
-    }
-    void Rs485Test();
-    void SerialPortTest()
-    {
-        Rs485Test();
-    }
-    //#define ISOV2
-    #define ISOV3
-
-    uint OnUsart485Read(ITransport *transport, Buffer &bs, void *para, void *para2)
-        {
-            //transport->Write(bs);
-            bs.ShowHex();
-            return 0;
-        }
-
-    OutputPort port485;
-		
-	uint OnUsart2Read(ITransport *transport, Buffer &bs, void *para, void *para2)
+	// 原路发回去
+	// 部分核心板COM4用于WiFi模块
+	if(!bs.AsString().Contains("ERROR"))
 	{
-		time6cnt++;
-		transport->Write(bs);
-		bs.Show(true);
-		return 0;
+		String str	= sp->Name;
+		str	+= " 收到：";
+		str	+= bs.AsString();
+		sp->Write(str);
 	}
-	char tx2[500],rx2[500];
 
-    SerialPort com485(COM2);
-    void USART2_Config();
-    void Rs485Test()
-    {
-		#ifdef ISOV2
-			port485.Set(PB5);
-		#elif defined ISOV3
-			port485.Set(PC2);
-		#endif 
-		port485.OpenDrain = false;
-		port485.Invert = 0;
-		port485.Open();
-		port485=0;
+    return 0;
+}
 
-        com485.RS485=&port485;
-        com485.SetBaudRate(115200);
-        com485.Register(OnUsart485Read);
-        com485.Open();
-		
-		sp2=new SerialPort(COM2);	
-		sp2->Register(OnUsart2Read);
-		sp2->Open();
-		sp2->Tx.SetBuf(tx2,100);
-		sp2->Rx.SetBuf(rx2,100);
-    }
-#endif 
+static void TestSerialTask(void* param)
+{
+    debug_printf("\r\n\r\n");
+    debug_printf("测试串口开始......\r\n");
+
+	COM coms[]	= {COM2, COM3, COM4, COM5};
+	List<SerialPort*> list;
+
+	// 创建待测试对象
+	for(int i=0; i<ArrayLength(coms); i++)
+	{
+		auto sp	= new SerialPort(coms[i], 115200);
+		sp->Register(OnUsartRead, sp);
+		// COM5是RS485
+		if(coms[i] == COM5) sp->RS485	= new OutputPort(PC9, false);
+		sp->Open();
+
+		list.Add(sp);
+	}
+
+	// 串口输出
+	String str = "万家灯火，无声物联！\r\n";
+	debug_printf("向所有串口输出：");
+	str.Show();
+	for(int k=0; k<5; k++)
+	{
+		debug_printf("第 %d 次输出\r\n", k+1);
+		for(int i=0; i<list.Count(); i++)
+		{
+			auto sp	= list[i];
+			sp->Write(str);
+		}
+		Sys.Sleep(1000);
+	}
+
+    /*// 等待输入
+    Sys.Sleep(60000);
+
+	// 销毁
+	list.DeleteAll();*/
+
+    debug_printf("\r\n测试串口完成\r\n\r\n");
+}
+
+void SerialPort::Test()
+{
+    Sys.AddTask(TestSerialTask, nullptr, 1000, -1, "串口测试");
+}
+#endif
