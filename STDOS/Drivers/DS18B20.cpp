@@ -6,14 +6,14 @@
 static void delayus(uint nus)
 {
 	/*
-	F072 48MHz	750us->us
+	F072 48MHz	750us->758us
 	F103 72MHz  750us->794us
 	F407 168MHz 750us->759us
 	*/
 	for(int i=0;i<nus;i++)
 	{
 		#ifdef STM32F0
-		for(int j=0;j<10;j++);
+		for(int j=0;j<6;j++);
 		#elif defined STM32F1
 		for(int j=0;j<9;j++);
 		#elif defined STM32F4
