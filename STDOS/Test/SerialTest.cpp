@@ -1,6 +1,7 @@
-﻿#include "Device\SerialPort.h"
+#include "Device\SerialPort.h"
 
-#ifdef DEBUG
+//#define _SERIALTEST_H
+#ifdef	_SERIALTEST_H
 static uint OnUsartRead(ITransport* transport, Buffer& bs, void* param, void* param2)
 {
 	auto sp	= (SerialPort*)param;

@@ -1,6 +1,7 @@
-﻿#include "Kernel\Sys.h"
+#include "Kernel\Sys.h"
 
-#if DEBUG
+//#define _ARRAYTEST_H
+#ifdef _ARRAYTEST_H
 static void TestAssign()
 {
 	byte buf[] = {6,7,8,9};

@@ -1,7 +1,9 @@
-﻿#include "Core\SString.h"
+#include "Core\SString.h"
 #include "Kernel\TTime.h"
 
-#if DEBUG
+//#define _STRINGTEST_H
+
+#ifdef _STRINGTEST_H
 
 /*static String TestMove(String& ss)
 {

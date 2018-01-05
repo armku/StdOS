@@ -1,7 +1,9 @@
-﻿#include "Kernel\Sys.h"
+#include "Kernel\Sys.h"
 #include "Device\Port.h"
 #include "Device\Timer.h"
 
+#define _TIMERTEST_H
+#ifdef _TIMERTEST_H
 //Timer* timer;
 
 void TimerTask(OutputPort& led, Timer& timer)
@@ -49,3 +51,4 @@ void TestTimer(OutputPort& led)
 
     debug_printf("\r\n TestTimer Finish!\r\n");
 }
+#endif

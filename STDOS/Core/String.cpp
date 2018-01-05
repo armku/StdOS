@@ -906,9 +906,6 @@ int String::Compare(const void *v1, const void *v2)
 		return -1;
 }
 
-#if DEBUG
-    void String::Test(){}
-#endif 
 void String::init()
 {
 	this->_Arr=this->Arr;

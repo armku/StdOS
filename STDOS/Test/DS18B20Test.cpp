@@ -20,7 +20,7 @@
 		  ds18.SetPin(PD6);
 		#endif 
 	  #elif defined STM32F4
-		ds18.SetPin(PB1);
+		ds18.SetPin(PG9);
 	  #endif 
 	  int i;
 		ds18.Init();

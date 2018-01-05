@@ -1,6 +1,8 @@
-﻿#include "Device\Flash.h"
+#include "Device\Flash.h"
 #include <stdlib.h>
 
+//#define _FLASHTEST_H
+#ifdef _FLASHTEST_H
 void TestFlash()
 {
     debug_printf("\r\n\r\n");
@@ -52,3 +54,4 @@ void TestFlash()
 
     debug_printf("\r\nTestFlash Finish!\r\n");
 }
+#endif

@@ -1,6 +1,7 @@
-﻿#include "Kernel\Sys.h"
+#include "Kernel\Sys.h"
 
-#if DEBUG
+//#define _DATETIMETEST_H
+#ifdef _DATETIMETEST_H
 static void TestCtor()
 {
 	TS("TestCtor");

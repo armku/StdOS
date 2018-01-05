@@ -1,4 +1,7 @@
-﻿#include "Drivers\NRF24L01.h"
+#include "Drivers\NRF24L01.h"
+
+//#define _NRF24L01TEST_H
+#ifdef _NRF24L01TEST_H
 
 extern NRF24L01* Create2401();
 
@@ -73,3 +76,4 @@ void TestNRF24L01()
 
     debug_printf("TestNRF24L01 Finish!\r\n");
 }
+#endif

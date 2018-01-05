@@ -1,8 +1,8 @@
 
-//#define DEBUGWatchDogTest
+//#define _WATCHDOGTEST_H
 
 //≤‚ ‘¥˙¬Î
-#ifdef DEBUGWatchDogTest
+#ifdef _WATCHDOGTEST_H
 	#if DEBUG
         WatchDog::Start(20000, 10000);
     #else 

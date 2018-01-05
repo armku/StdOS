@@ -1,6 +1,6 @@
 #include "PwmSolo.h"
 
-#define DEBUGPwmSoloTest
+//#define DEBUGPwmSoloTest
 
 #ifdef DEBUGPwmSoloTest
     PwmSolo pwm(10000, 2700, false);

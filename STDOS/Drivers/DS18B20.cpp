@@ -5,9 +5,20 @@
 //72M
 static void delayus(uint nus)
 {
+	/*
+	F072 48MHz	750us->us
+	F103 72MHz  750us->794us
+	F407 168MHz 750us->759us
+	*/
 	for(int i=0;i<nus;i++)
 	{
+		#ifdef STM32F0
 		for(int j=0;j<10;j++);
+		#elif defined STM32F1
+		for(int j=0;j<9;j++);
+		#elif defined STM32F4
+		for(int j=0;j<40;j++);
+		#endif
 	}
 }	
 
@@ -30,7 +41,7 @@ void DS18B20::Rest()
 {
     this->_dio=0;
     /* 主机至少产生480us的低电平复位信号 */
-    Sys.Delay(750);
+    delayus(750);
     /* 主机在产生复位信号后，需将总线拉高 */
 	this->_dio=1;
 }

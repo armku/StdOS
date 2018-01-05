@@ -1,7 +1,7 @@
 #include "Drivers/bspkey.h"
 #include "Port.h"
 
-#define DEBUGkeyTest
+//#define DEBUGkeyTest
 
 #ifdef DEBUGkeyTest
 
