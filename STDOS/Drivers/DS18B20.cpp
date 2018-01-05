@@ -1,27 +1,6 @@
 #include "DS18B20.h"
 #include "Sys.h"
 
-//us级别延时 <100us时使用 
-//72M
-static void delayus(uint nus)
-{
-	/*
-	F072 48MHz	750us->758us
-	F103 72MHz  750us->794us
-	F407 168MHz 750us->759us
-	*/
-	for(int i=0;i<nus;i++)
-	{
-		#ifdef STM32F0
-		for(int j=0;j<6;j++);
-		#elif defined STM32F1
-		for(int j=0;j<9;j++);
-		#elif defined STM32F4
-		for(int j=0;j<40;j++);
-		#endif
-	}
-}	
-
 void DS18B20::SetPin(Pin pin)
 {
 	this->_dio.Set(pin);
@@ -41,7 +20,7 @@ void DS18B20::Rest()
 {
     this->_dio=0;
     /* 主机至少产生480us的低电平复位信号 */
-    delayus(750);
+    Sys.DelayUs(750);
     /* 主机在产生复位信号后，需将总线拉高 */
 	this->_dio=1;
 }
@@ -62,7 +41,7 @@ bool DS18B20::Presence()
     while (this->_dio && pulse_time < 100)
     {
         pulse_time++;
-        delayus(1);
+        Sys.DelayUs(1);
     }
     /* 经过100us后，存在脉冲都还没有到来*/
     if (pulse_time >= 100)
@@ -74,7 +53,7 @@ bool DS18B20::Presence()
     while (!this->_dio && pulse_time < 240)
     {
         pulse_time++;
-        delayus(1);
+        Sys.DelayUs(1);
     }
     if (pulse_time >= 240)
         return false;
@@ -92,7 +71,7 @@ byte DS18B20::ReadBit()
     /* 读0和读1的时间至少要大于60us */
     /* 读时间的起始：必须由主机产生 >1us <15us 的低电平信号 */
     this->_dio=0;
-	delayus(10);
+	Sys.DelayUs(10);
 
     /* 设置成输入，释放总线，由外部上拉电阻将总线拉高 */
     //Sys.Delay(2);
@@ -103,7 +82,7 @@ byte DS18B20::ReadBit()
     else
         dat = 0;
     /* 这个延时参数请参考时序图 */
-    delayus(45);
+    Sys.DelayUs(45);
 
     return dat;
 }
@@ -140,20 +119,20 @@ void DS18B20::WriteByte(byte dat)
         {
             this->_dio=0;
             /* 1us < 这个延时 < 15us */
-            delayus(8);
+            Sys.DelayUs(8);
 
             this->_dio=1;
-            delayus(58);
+            Sys.DelayUs(58);
         }
         else
         {
             this->_dio=0;
             /* 60us < Tx 0 < 120us */
-            delayus(70);
+            Sys.DelayUs(70);
 
             this->_dio=1;
             /* 1us < Trec(恢复时间) < 无穷大*/
-            delayus(2);
+            Sys.DelayUs(2);
         }
     }
 }

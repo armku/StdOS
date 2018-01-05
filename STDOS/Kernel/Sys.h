@@ -97,7 +97,8 @@ public:
 	uint	Seconds() const;	// 系统绝对当前时间，秒
 
     void Sleep(int ms) const; // 毫秒级延迟
-    void Delay(int us) const; // 微秒级延迟
+    void Delay(int us) const; // 微秒级延迟 100us下不精确
+	void DelayUs(int nus) const;//微妙级延时，精确，适用于1ms以下延时
 	typedef void (*FuncI32)(int param);
 	FuncI32 OnSleep;
 
