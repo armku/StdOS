@@ -35,10 +35,14 @@ void TTime::Init()
             NVIC_SetPriority(TIM3_IRQn, 0);
             break;
         case 5:
+			#ifndef STM32F10X_MD
             NVIC_SetPriority(TIM6_IRQn, 0);
+			#endif
             break;
         case 6:
+			#ifndef STM32F10X_MD
             NVIC_SetPriority(TIM7_IRQn, 0);
+			#endif
             break;
         default:
             break;

@@ -53,8 +53,11 @@ int SerialPort_Closeing(int result)
 //////////////////////以下为移动/////////////
 /* 通用同步/异步收发器(USART)针脚 ------------------------------------------------------------------*/
 #define UARTS {USART1, USART2, USART3, UART4, UART5}
-
+#ifdef STM32F10X_MD
+#define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn}
+#else
 #define UART_IRQs {USART1_IRQn,USART2_IRQn,USART3_IRQn,UART4_IRQn,UART5_IRQn}
+#endif
 
 // 真正的串口中断函数
 void OnUsartReceive(ushort num, void *param)

@@ -173,7 +173,9 @@ void Timer::Config()
                 TIM_Cmd(TIM5, ENABLE);
 
                 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, DISABLE); /*先关闭等待使用*/
+				#ifndef STM32F10X_MD
                 Interrupt.SetPriority(TIM5_IRQn, 3);
+				#endif
             break;
         case Timer6:
 			RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
@@ -184,8 +186,9 @@ void Timer::Config()
 			TIM_ClearFlag(TIM6, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
             TIM_Cmd(TIM6, ENABLE);
 			RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, DISABLE); /*先关闭等待使用*/
-                
+            #ifndef STM32F10X_MD
 			    Interrupt.SetPriority(TIM6_IRQn, 3);
+			#endif
             break;
         case Timer7:
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
@@ -196,7 +199,9 @@ void Timer::Config()
             TIM_ClearFlag(TIM7, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
             TIM_Cmd(TIM7, ENABLE);
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE); /*先关闭等待使用*/
+			#ifndef STM32F10X_MD
             Interrupt.SetPriority(TIM7_IRQn, 3); //TIM7_IRQn
+			#endif
             break;
         case Timer8:
             break;
@@ -503,13 +508,19 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
                 Interrupt.Activate(TIM4_IRQn, Timer::OnHandler, this);
             break;
         case Timer5:
+			#ifndef STM32F10X_MD
                 Interrupt.Activate(TIM5_IRQn, Timer::OnHandler, this);
+			#endif
             break;
         case Timer6:
+			#ifndef STM32F10X_MD
                 Interrupt.Activate(TIM6_IRQn, Timer::OnHandler, this);
+			#endif
 			break;
         case Timer7:
-            Interrupt.Activate(TIM7_IRQn, Timer::OnHandler, this);
+			#ifndef STM32F10X_MD
+				Interrupt.Activate(TIM7_IRQn, Timer::OnHandler, this);
+			#endif
             break;
         case Timer8:
             break;
