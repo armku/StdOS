@@ -201,7 +201,12 @@ void TSys::Delay(int us)const
             us -= executeus;
         }
         if (us)
-            Time.Delay(us);
+		{
+			if(us > 800)
+				Time.Delay(us);
+			else
+				Time.DelayUs(us);
+		}
     }
     return ;
 }
@@ -296,37 +301,7 @@ bool TSys::SetTaskPeriod(uint taskid, int period)const
     }
     return ret;
 }
-//us级别延时 <100us时使用 
-//72M
-static void delayus(int nus)
-{
-	/*
-	F072 48MHz	750us->774us
-	F103 72MHz  750us->753us
-	F407 168MHz 750us->759us
-	*/
-	for(int i=0;i<nus;i++)
-	{
-		#ifdef STM32F0
-		for(int j=0;j<7;j++);
-		#elif defined STM32F1
-		for(int j=0;j<10;j++);
-		#elif defined STM32F4
-		for(int j=0;j<40;j++);
-		#endif
-	}
-}	
 
-//微妙级延时，精确，适用于1ms以下延时
-/*
-F072 48MHz	750us->758us
-F103 72MHz  750us->794us
-F407 168MHz 750us->759us
-*/
-void TSys::DelayUs(int nus) const
-{
-	delayus(nus);
-}
 // 开始系统大循环
 void TSys::Start()
 {

@@ -38,6 +38,7 @@ public:
 
 	void Sleep(int ms, bool* running = nullptr) const;
     void Delay(int us) const;	// 微秒级延迟
+	void DelayUs(int nus) const; //us延时，100us以下精确
 
 	uint TicksToUs(uint ticks) const;
 	uint UsToTicks(uint us) const;

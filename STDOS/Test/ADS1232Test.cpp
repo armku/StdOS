@@ -121,15 +121,15 @@
     {
         unsigned char i = 0;
         AD_PDWN = 0;
-        DelayUs(20); //使其复位 		 
+        Sys.Delay(20); //使其复位 		 
         ADS123X_SPEED_CONFIG(_80_SPS);
         ADS123X_GAIN_CONFIG(ADC_GX_128);
         AD_SCLK = 1;
-        DelayUs(20);
+        Sys.Delay(20);
         AD_SCLK = 0;
-        DelayUs(20); //拉高RDY
+        Sys.Delay(20); //拉高RDY
         AD_PDWN = 1;
-        DelayUs(20); //拉高RST
+        Sys.Delay(20); //拉高RST
         DelayMs(10); //等待10MS
         AD_Dout = 1;
         DelayMs(10);

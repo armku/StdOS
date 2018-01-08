@@ -122,11 +122,11 @@ void SoftI2C::Start()
     /* 当SCL高电平时，SDA出现一个下跳沿表示I2C总线启动信号 */
     this->SDA = 1;
     this->SCL = 1;
-	Sys.DelayUs(1);
+	Sys.Delay(1);
     this->SDA = 0;
-    Sys.DelayUs(1);
+    Sys.Delay(1);
     this->SCL = 0;
-    Sys.DelayUs(1);
+    Sys.Delay(1);
 }
 
 void SoftI2C::Stop()
@@ -134,7 +134,7 @@ void SoftI2C::Stop()
     /* 当SCL高电平时，SDA出现一个上跳沿表示I2C总线停止信号 */
     this->SDA = 0;
     this->SCL = 1;
-    Sys.DelayUs(1);
+    Sys.Delay(1);
     this->SDA = 1;
 }
 
@@ -153,16 +153,16 @@ void SoftI2C::WriteByte(byte dat)
         {
             this->SDA = 0;
         }
-        Sys.DelayUs(1);
+        Sys.Delay(1);
         this->SCL = 1;
-        Sys.DelayUs(1);
+        Sys.Delay(1);
         this->SCL = 0;
         if (i == 7)
         {
             this->SDA = 1; // 释放总线
         }
         dat <<= 1; /* 左移一个bit */
-        Sys.DelayUs(1);
+        Sys.Delay(1);
     }
 }
 
@@ -177,13 +177,13 @@ byte SoftI2C::ReadByte()
     {
         value <<= 1;
         this->SCL = 1;
-        Sys.DelayUs(1);
+        Sys.Delay(1);
         if (this->SDA.ReadInput())
         {
             value++;
         }
         this->SCL = 0;
-        Sys.DelayUs(1);
+        Sys.Delay(1);
     }
     return value;
 }
@@ -193,22 +193,22 @@ void SoftI2C::Ack(bool ack)
     if (ack)
     {
         this->SDA = 0; /* CPU驱动SDA = 0 */
-        Sys.DelayUs(1);
+        Sys.Delay(1);
         this->SCL = 1; /* CPU产生1个时钟 */
-        Sys.DelayUs(1);
+        Sys.Delay(1);
         this->SCL = 0;
-        Sys.DelayUs(1);
+        Sys.Delay(1);
         this->SDA = 1;
         /*CPU释放SDA总线 */
     }
     else
     {
         this->SDA = 1; /* CPU驱动SDA = 1 */
-        Sys.DelayUs(1);
+        Sys.Delay(1);
         this->SCL = 1; /* CPU产生1个时钟 */
-        Sys.DelayUs(1);
+        Sys.Delay(1);
         this->SCL = 0;
-        Sys.DelayUs(1);
+        Sys.Delay(1);
     }
 }
 
@@ -220,9 +220,9 @@ bool SoftI2C::WaitAck(int retry)
     byte re;
 
     this->SDA = 1; /* CPU释放SDA总线 */
-    Sys.DelayUs(1);
+    Sys.Delay(1);
     this->SCL = 1; /* CPU驱动SCL = 1, 此时器件会返回ACK应答 */
-    Sys.DelayUs(1);
+    Sys.Delay(1);
 
     if (this->SDA.ReadInput())
     /* CPU读取SDA口线状态 */
@@ -234,7 +234,7 @@ bool SoftI2C::WaitAck(int retry)
         re = 0;
     }
     this->SCL = 0;
-    Sys.DelayUs(1);
+    Sys.Delay(1);
     return re;
 }
 

@@ -202,9 +202,9 @@ byte SpiSoft::Write(byte data)
                 {
                     this->_mosi = 0;
                 }
-                Sys.DelayUs(this->delayus);
+                Sys.Delay(this->delayus);
                 this->_clk = 1;
-                Sys.DelayUs(this->delayus);
+                Sys.Delay(this->delayus);
                 this->_clk = 0;
                 ret <<= 1;
                 if (this->_miso.Read())
@@ -220,7 +220,7 @@ byte SpiSoft::Write(byte data)
             for (i = 0; i < 8; i++)
             {
                 this->_clk = 1;
-                Sys.DelayUs(this->delayus);
+                Sys.Delay(this->delayus);
                 if (data &(1 << (8-i - 1)))
                 {
                     this->_mosi = 1;
@@ -229,7 +229,7 @@ byte SpiSoft::Write(byte data)
                 {
                     this->_mosi = 0;
                 }
-                Sys.DelayUs(this->delayus);
+                Sys.Delay(this->delayus);
                 this->_clk = 0;
                 ret <<= 1;
                 if (this->_miso.Read())
@@ -255,9 +255,9 @@ byte SpiSoft::Write(byte data)
                 {
                     this->_mosi = 0;
                 }
-                Sys.DelayUs(this->delayus);
+                Sys.Delay(this->delayus);
                 this->_clk = 0;
-                Sys.DelayUs(this->delayus);
+                Sys.Delay(this->delayus);
                 this->_clk = 1;
                 ret <<= 1;
                 if (this->_miso.Read())
@@ -273,7 +273,7 @@ byte SpiSoft::Write(byte data)
             for (i = 0; i < 8; i++)
             {
                 this->_clk = 0;
-                Sys.DelayUs(this->delayus);
+                Sys.Delay(this->delayus);
                 if (data &(1 << (8-i - 1)))
                 {
                     this->_mosi = 1;
@@ -282,9 +282,9 @@ byte SpiSoft::Write(byte data)
                 {
                     this->_mosi = 0;
                 }
-                Sys.DelayUs(this->delayus);
+                Sys.Delay(this->delayus);
                 this->_clk = 1;
-                Sys.DelayUs(this->delayus);
+                Sys.Delay(this->delayus);
                 ret <<= 1;
                 if (this->_miso.Read())
                 {
@@ -323,7 +323,7 @@ void SpiSoft::Close()
 	{
 		this->_clk=0;
 		this->_mosi=1;
-		Sys.DelayUs(this->delayus);
+		Sys.Delay(this->delayus);
 		this->_clk=1;
 		this->_mosi=0;
 	}

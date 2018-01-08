@@ -351,7 +351,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
         /* Get SPI Flash Device ID */
         w25q64.DeviceID = w25q64.ReadDeviceID();
         //		return;
-        Sys.DelayUs(10);
+        Sys.Delay(10);
 
         StdPrintf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", w25q64.ID, w25q64.DeviceID);
 

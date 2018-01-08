@@ -101,6 +101,17 @@ void TTime::Delay(int nus)const
         }
     }
 }
+//us延时，100us以下精确
+void TTime::DelayUs(int nus) const
+{
+	/*
+	F072 48MHz	750us->774us
+	*/
+	for(int i=0;i<nus;i++)
+	{
+		for(int j=0;j<7;j++);		
+	}
+}
 #ifdef __cplusplus
     extern "C"
     {
