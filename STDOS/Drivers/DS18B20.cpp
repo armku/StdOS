@@ -74,7 +74,7 @@ byte DS18B20::ReadBit()
 	Sys.DelayUs(10);
 
     /* 设置成输入，释放总线，由外部上拉电阻将总线拉高 */
-    //Sys.Delay(2);
+    //Sys.DelayUs(2);
 	this->_dio=1;
 
     if (this->_dio)
