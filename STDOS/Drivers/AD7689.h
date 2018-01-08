@@ -28,7 +28,6 @@
             byte chCurrent; //当前通道
             byte chDelayCnt; //通道延时时间，用于数据稳定        
 		private:
-            void Delay(uint nTime);
             ushort AD_Read(void);
             ushort AD_Write(ushort sdat);
 			byte getNextCH(); //获取下次转换通道		

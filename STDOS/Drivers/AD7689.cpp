@@ -34,27 +34,21 @@ void CAD7689::SetPin(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
     this->ppinsdo.Set(pinsdo);
     this->ppincnv.Set(pincnv);
 }
-void CAD7689::Delay(uint nTime)
-{
-    uint i;
-    for (i = 0; i < nTime; i++)
-        ;
-}
 
 ushort CAD7689::AD_Read(void)
 {
     ushort dat = 0;
     uint i;
     this->ppincnv=0;
-    this->Delay(40);
+    Sys.DelayUs(40);
     for (i = 0; i < 16; i++)
     {
         this->ppinsck=1;
-        this->Delay(40);
+        Sys.DelayUs(40);
         dat <<= 1;
         dat += this->ppinsdo.Read();
         this->ppinsck=0;
-        this->Delay(40);
+        Sys.DelayUs(40);
     }
     this->ppincnv=1;
     return dat;
@@ -65,21 +59,21 @@ ushort CAD7689::AD_Write(ushort sdat)
     ushort dat = 0;
     uint i;
     this->ppincnv=0;
-    this->Delay(50);
+    Sys.DelayUs(50);
     for (i = 0; i < 16; i++)
     {
         ((sdat &0x8000) > 0) ? this->ppinsdi=1: this->ppinsdi=0;
         dat <<= 1;
         dat += this->ppinsdo.Read();
-        this->Delay(50);
+        Sys.DelayUs(50);
         this->ppinsck=0;
-        this->Delay(50);
+        Sys.DelayUs(50);
         sdat <<= 1;
         this->ppinsck=1;
     }
-    this->Delay(50);
+    Sys.DelayUs(50);
     this->ppinsdi=0;
-    this->Delay(50);
+    Sys.DelayUs(50);
     this->ppincnv=1;
     return dat;
 }
@@ -93,9 +87,9 @@ void CAD7689::Init(void)
 
     //³õÊ¼»¯ÅäÖÃ
     this->ppincnv=0;
-    this->Delay(100);
+    Sys.DelayUs(100);
     this->ppincnv=1;
-    this->Delay(10000);
+    Sys.DelayUs(10000);
 
 }
 
