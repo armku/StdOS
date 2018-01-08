@@ -141,9 +141,7 @@ private:
 	OutputPort	SDA;	// 数据。开漏输出，直接具备读写功能
 
 	virtual void OnOpen();
-	virtual void OnClose();
-	
-	void Delay();
+	virtual void OnClose();	
 };
 
 /*
