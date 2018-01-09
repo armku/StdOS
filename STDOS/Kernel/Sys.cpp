@@ -16,64 +16,6 @@ SystemConfig g_Config;//系统配置
 
 TSys Sys; //系统参数
 
-//外部注册函数
-// 任务
-// 任务类
-extern TaskScheduler *_Scheduler;
-void TimeSleep(uint us)
-{
-    // 在这段时间里面，去处理一下别的任务
-    if (_Scheduler && (us >= 1000))
-    {
-        // 记录当前正在执行任务
-        Task *task = _Scheduler->Current;
-
-        UInt64 start = Time.Current() *1000;
-        // 1ms一般不够调度新任务，留给硬件等待
-        UInt64 end = start + us - 1000;
-        // 如果休眠时间足够长，允许多次调度其它任务
-        int cost = 0;
-        while (true)
-        {
-            UInt64 start2 = Time.Current() *1000;
-            bool bb = false;
-            _Scheduler->Execute(us, bb);
-
-            UInt64 now = Time.Current() *1000;
-            cost += (int)(now - start2);
-
-            // us=0 表示释放一下CPU
-            if (!us)
-            {
-                return ;
-            }
-
-            if (now >= end)
-            {
-                break;
-            }
-        }
-
-        if (task)
-        {
-            _Scheduler->Current = task;
-            task->SleepTime += cost;
-        }
-
-        cost = (int)(Time.Current() *1000-start);
-        if (cost > 0)
-        {
-            return ;
-        }
-
-        us -= cost;
-    }
-    if (us)
-    {
-        Time.Delay(us);
-    }
-}
-
 // 构造函数
 TSys::TSys()
 {
