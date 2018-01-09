@@ -20,7 +20,7 @@ void DS18B20::Rest()
 {
     this->_dio=0;
     /* 主机至少产生480us的低电平复位信号 */
-    Sys.Delay(750);
+    Sys.Delay(480);
     /* 主机在产生复位信号后，需将总线拉高 */
 	this->_dio=1;
 }
