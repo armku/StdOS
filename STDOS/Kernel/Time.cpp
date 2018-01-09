@@ -45,7 +45,42 @@ void TTime::SetTime(UInt64 seconds)
 //对72M条件下,nms<=1864 
 void TTime::Sleep(int nms, bool *running)const
 {
-    this->Delay(nms *1000);
+	if( nms > 0 )
+	{
+		Int64 current = Time.Current();
+		Int64 endcurrent = current + nms;
+		if(this->OnSleep && nms >= 10 )
+		{
+			while(nms >= 10)
+			{
+				this->OnSleep(nms);
+				if(running)
+				{
+					if(!*running)
+						break;
+				}
+				nms = endcurrent-Time.Current();
+			}
+		}
+		if(nms)
+		{
+			if(!running || *running !=0)
+			{
+				while(1)
+				{
+					Int64 current1 = Time.Current();
+					if(0 >= endcurrent + current1 < endcurrent)
+						break;
+					if(running)
+					{
+						if(!*running)
+							break;
+					}
+				}
+			}
+		}
+		
+	}
 }
 // 微秒级延迟
 void TTime::Delay(int nus)const

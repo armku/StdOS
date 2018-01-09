@@ -105,6 +105,13 @@ void FlushPortTest();
 ////	sp2->Write(bs);
 //	bs.Show();
 //}
+void Test(void * param)
+{
+	int cur=Time.Current();	
+	Sys.Sleep(20);
+	int cur2=Time.Current();
+	debug_printf("\r\n aa:%ld--%ld %ld",cur,cur2,cur2-cur);
+}
 
 int main(void)
 {
@@ -125,6 +132,7 @@ int main(void)
 //    Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
 //	Sys.AddTask(Test,0,2000,2000,"Test");
     //Sys.AddTask(Test12, 0, 600, 1000, "Test");
+	Sys.AddTask(Test, 0, 600, 1000, "Test");
 	
 	//StrintTest();
     //IList::Test();
