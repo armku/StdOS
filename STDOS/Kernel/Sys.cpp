@@ -202,10 +202,7 @@ void TSys::Delay(int us)const
         }
         if (us)
 		{
-			if(us > 800)
-				Time.Delay(us);
-			else
-				Time.DelayUs(us);
+			Time.Delay(us);
 		}
     }
     return ;

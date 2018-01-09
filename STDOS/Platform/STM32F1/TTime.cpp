@@ -75,47 +75,7 @@ UInt64 TTime::Current()const
     }
     return this->Milliseconds + ms;
 }
-// 微秒级延迟
-void TTime::Delay(int nus)const
-{
-	int sumus;
-	UInt64 summs;
-	uint startTicks;
-	uint stopTicks;
-	static uint ticksPerMs=0;
-	sumus=nus;
-	if(nus > 0)
-	{
-		if(nus > 100)
-			sumus = nus-1;
-		summs = this->Current();
-		if(sumus >= 1000)
-		{
-			summs+=sumus/1000;
-			sumus%=1000;
-		}
-		startTicks = this->CurrentTicks();
-		stopTicks = startTicks+this->UsToTicks(sumus);
-		if(ticksPerMs <10)
-		ticksPerMs = this->UsToTicks(1000);
-		if(stopTicks >= ticksPerMs)
-		{
-			++summs;
-			stopTicks -= ticksPerMs;
-		}
-		while(true)
-		{
-			if(this->Current() > summs)
-				break;
-			if(this->Current() == summs)				
-			{
-				if(this->CurrentTicks() >= stopTicks)
-					break;
-			}
-		}
-		
-	}
-}
+
 //us延时，100us以下精确
 void TTime::DelayUs(int nus) const
 {

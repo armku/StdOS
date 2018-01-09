@@ -47,7 +47,51 @@ void TTime::Sleep(int nms, bool *running)const
 {
     this->Delay(nms *1000);
 }
-
+// Œ¢√Îº∂—”≥Ÿ
+void TTime::Delay(int nus)const
+{
+	int sumus;
+	UInt64 summs;
+	uint startTicks;
+	uint stopTicks;
+	static uint ticksPerMs=0;
+	sumus=nus;
+	if(nus < 800)
+	{
+		this->DelayUs(nus);
+	}
+	else if(nus > 0)
+	{
+		if(nus > 100)
+			sumus = nus-1;
+		summs = this->Current();
+		if(sumus >= 1000)
+		{
+			summs+=sumus/1000;
+			sumus%=1000;
+		}
+		startTicks = this->CurrentTicks();
+		stopTicks = startTicks+this->UsToTicks(sumus);
+		if(ticksPerMs <10)
+		ticksPerMs = this->UsToTicks(1000);
+		if(stopTicks >= ticksPerMs)
+		{
+			++summs;
+			stopTicks -= ticksPerMs;
+		}
+		while(true)
+		{
+			if(this->Current() > summs)
+				break;
+			if(this->Current() == summs)				
+			{
+				if(this->CurrentTicks() >= stopTicks)
+					break;
+			}
+		}		
+	}
+	else{}
+}
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 TimeWheel::TimeWheel(uint ms)
