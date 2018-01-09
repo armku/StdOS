@@ -67,7 +67,7 @@ int main()
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
 	
-	PwmSoloTest();
+	//PwmSoloTest();
 
     Sys.Start();
 }

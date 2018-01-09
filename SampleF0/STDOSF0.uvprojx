@@ -745,11 +745,6 @@
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
-              <FileName>TTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\TTime.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
@@ -763,6 +758,11 @@
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -845,9 +845,9 @@
               <FilePath>..\STDOS\Platform\STM32F0\PwmSolo.cpp</FilePath>
             </File>
             <File>
-              <FileName>TTime.cpp</FileName>
+              <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F0\TTime.cpp</FilePath>
+              <FilePath>..\STDOS\Platform\STM32F0\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -880,9 +880,9 @@
               <FilePath>..\STDOS\Platform\CortexM\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>TTime.cpp</FileName>
+              <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\TTime.cpp</FilePath>
+              <FilePath>..\STDOS\Platform\CortexM\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1722,11 +1722,6 @@
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
-              <FileName>TTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\TTime.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
@@ -1740,6 +1735,11 @@
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1822,9 +1822,9 @@
               <FilePath>..\STDOS\Platform\STM32F0\PwmSolo.cpp</FilePath>
             </File>
             <File>
-              <FileName>TTime.cpp</FileName>
+              <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F0\TTime.cpp</FilePath>
+              <FilePath>..\STDOS\Platform\STM32F0\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1857,9 +1857,9 @@
               <FilePath>..\STDOS\Platform\CortexM\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>TTime.cpp</FileName>
+              <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\TTime.cpp</FilePath>
+              <FilePath>..\STDOS\Platform\CortexM\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
