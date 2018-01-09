@@ -37,11 +37,12 @@ public:
 	void SetTime(UInt64 seconds);	// 设置时间
 
 	void Sleep(int ms, bool* running = nullptr) const;
-    void Delay(int us) const;	// 微秒级延迟
-	void DelayUs(int nus) const; //us延时，100us以下精确
+    void Delay(int us) const;	// 微秒级延迟	
 
 	uint TicksToUs(uint ticks) const;
 	uint UsToTicks(uint us) const;
+	private:
+		void DelayUs(int nus) const; //us延时，100us以下精确
 };
 
 extern TTime Time; //extern const TTime Time
