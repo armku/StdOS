@@ -12,7 +12,7 @@ void CNPA::SetPin(Pin pinsck, Pin pinsda)
 {
 	this->pi2c.SetPin(pinsck, pinsda);
 }
-int CNPA::Read(void)
+int CNPA::Read()
 {
     byte buf1, buf2;
     int buf;
@@ -31,4 +31,9 @@ int CNPA::Read(void)
     this->pi2c.Stop();
     buf = (buf1 << 8) | buf2;
     return buf;
+}
+//读取大气压值
+float CNPA::ReadP()
+{
+	return this->Read() * 0.007278646;
 }
