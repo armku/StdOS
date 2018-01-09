@@ -38,17 +38,11 @@ void TTime::SetTime(UInt64 seconds)
 {
 }
 //延时nms
-//注意nms的范围
-//SysTick->LOAD为24位寄存器,所以,最大延时为:
-//nms<=0xffffff*8*1000/SYSCLK
-//SYSCLK单位为Hz,nms单位为ms
-//对72M条件下,nms<=1864 
 void TTime::Sleep(int nms, bool *running)const
 {
 	if( nms > 0 )
 	{
-		Int64 current = Time.Current();
-		Int64 endcurrent = current + nms;
+		Int64 endcurrent = Time.Current() + nms;
 		if(this->OnSleep && nms >= 10 )
 		{
 			while(nms >= 10)
@@ -67,9 +61,8 @@ void TTime::Sleep(int nms, bool *running)const
 			if(!running || *running !=0)
 			{
 				while(1)
-				{
-					Int64 current1 = Time.Current();
-					if(0 >= endcurrent + current1 < endcurrent)
+				{					
+					if(((endcurrent + Time.Current()) >= endcurrent))
 						break;
 					if(running)
 					{
@@ -78,8 +71,7 @@ void TTime::Sleep(int nms, bool *running)const
 					}
 				}
 			}
-		}
-		
+		}		
 	}
 }
 // 微秒级延迟
