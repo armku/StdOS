@@ -634,6 +634,26 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Thread.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Heap.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Environment.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Environment.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeSpan.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -830,14 +850,14 @@
               <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>WaitHandle.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Time.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaitHandle.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1841,6 +1861,26 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Thread.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Heap.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Environment.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\Environment.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeSpan.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2037,14 +2077,14 @@
               <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>WaitHandle.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Time.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaitHandle.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
           </Files>
         </Group>
