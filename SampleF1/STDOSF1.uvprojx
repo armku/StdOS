@@ -554,11 +554,6 @@
               <FileType>5</FileType>
               <FilePath>..\Doc\端口功能.txt</FilePath>
             </File>
-            <File>
-              <FileName>端口分配.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Doc\端口分配.txt</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -633,16 +628,6 @@
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Thread.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Heap.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
             </File>
             <File>
               <FileName>Environment.cpp</FileName>
@@ -858,6 +843,16 @@
               <FileName>WaitHandle.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Heap.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Thread.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1781,11 +1776,6 @@
               <FileType>5</FileType>
               <FilePath>..\Doc\端口功能.txt</FilePath>
             </File>
-            <File>
-              <FileName>端口分配.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Doc\端口分配.txt</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1860,16 +1850,6 @@
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Thread.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Heap.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
             </File>
             <File>
               <FileName>Environment.cpp</FileName>
@@ -2085,6 +2065,16 @@
               <FileName>WaitHandle.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Heap.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Thread.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
             </File>
           </Files>
         </Group>
