@@ -545,14 +545,9 @@
           <GroupName>DOC</GroupName>
           <Files>
             <File>
-              <FileName>readme.txt</FileName>
+              <FileName>Readme.MD</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Doc\readme.txt</FilePath>
-            </File>
-            <File>
-              <FileName>端口功能.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Doc\端口功能.txt</FilePath>
+              <FilePath>..\Doc\Readme.MD</FilePath>
             </File>
           </Files>
         </Group>
@@ -1767,14 +1762,9 @@
           <GroupName>DOC</GroupName>
           <Files>
             <File>
-              <FileName>readme.txt</FileName>
+              <FileName>Readme.MD</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Doc\readme.txt</FilePath>
-            </File>
-            <File>
-              <FileName>端口功能.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Doc\端口功能.txt</FilePath>
+              <FilePath>..\Doc\Readme.MD</FilePath>
             </File>
           </Files>
         </Group>
