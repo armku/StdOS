@@ -1,6 +1,7 @@
 #include "RTC.h"
 #include "TTime.h"
 
+static HardRTC ihardRtc;
 HardRTC::HardRTC()
 {
     this->LowPower = true;
@@ -9,7 +10,7 @@ HardRTC::HardRTC()
 
 HardRTC *HardRTC::Instance()
 {
-    return new HardRTC();
+    return &ihardRtc;
 }
 
 void HardRTC::Start(bool lowpower, bool external)
