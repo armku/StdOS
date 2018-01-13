@@ -107,7 +107,21 @@ void HardRTC::SaveTime()
 
         RTC_WaitForLastTask(); //等待最近一次对RTC寄存器的写操作完成
 }
+//设置时间
+void HardRTC::SetTime(uint seconds)
+{	
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);	//使能PWR和BKP外设时钟  
+	PWR_BackupAccessCmd(ENABLE);	//使能RTC和后备寄存器访问 
+	RTC_SetCounter(seconds);	//设置RTC计数器的值
 
+	RTC_WaitForLastTask();	//等待最近一次对RTC寄存器的写操作完成  
+}
+//读取时间
+DateTime& HardRTC::GetTime(DateTime & dt)
+{
+	dt=RTC_GetCounter() + 8 * 60 * 60;
+	return dt;
+}
 #ifdef __cplusplus
 /* 秒中断标志，进入秒中断时置1，当时间被刷新之后清0 */
 __IO uint32_t TimeDisplay = 0;
