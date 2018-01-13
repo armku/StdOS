@@ -569,6 +569,16 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\App\FlushPort.cpp</FilePath>
             </File>
+            <File>
+              <FileName>bspkey.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\bspkey.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_dr.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\lcd_dr.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -735,11 +745,6 @@
               <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>lcd_dr.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\lcd_dr.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
@@ -763,11 +768,6 @@
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>bspkey.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\bspkey.cpp</FilePath>
             </File>
             <File>
               <FileName>Esp8266.cpp</FileName>
@@ -1786,6 +1786,16 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\App\FlushPort.cpp</FilePath>
             </File>
+            <File>
+              <FileName>bspkey.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\bspkey.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_dr.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\lcd_dr.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1952,11 +1962,6 @@
               <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>lcd_dr.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\lcd_dr.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
@@ -1980,11 +1985,6 @@
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>bspkey.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\bspkey.cpp</FilePath>
             </File>
             <File>
               <FileName>Esp8266.cpp</FileName>

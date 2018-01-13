@@ -2,7 +2,7 @@
 #define _LCD_DR_H
 
     #include <stdint.h>
-    #include "ST7565R.h"
+    #include "Drivers\ST7565R.h"
 
     typedef enum
     {

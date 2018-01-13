@@ -6,7 +6,7 @@
 #include "List.h"
 #include "Spi.h"
 #include "Flash.h"
-#include "Drivers\lcd_dr.h"
+#include "App\lcd_dr.h"
 #include "TInterrupt.h"
 #include "Timer.h"
 #include "TTime.h"

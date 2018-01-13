@@ -547,6 +547,31 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>App</GroupName>
+          <Files>
+            <File>
+              <FileName>BlinkPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\BlinkPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bspkey.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\bspkey.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FlushPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\FlushPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_dr.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\lcd_dr.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Core</GroupName>
           <Files>
             <File>
@@ -700,11 +725,6 @@
               <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>lcd_dr.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\lcd_dr.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
@@ -718,11 +738,6 @@
               <FileName>AD7124.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AD7124.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>bspkey.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\bspkey.cpp</FilePath>
             </File>
             <File>
               <FileName>DS18B20.cpp</FileName>
@@ -1534,6 +1549,31 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>App</GroupName>
+          <Files>
+            <File>
+              <FileName>BlinkPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\BlinkPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bspkey.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\bspkey.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FlushPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\FlushPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_dr.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\lcd_dr.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Core</GroupName>
           <Files>
             <File>
@@ -1687,11 +1727,6 @@
               <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>lcd_dr.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\lcd_dr.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
@@ -1705,11 +1740,6 @@
               <FileName>AD7124.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\AD7124.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>bspkey.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\bspkey.cpp</FilePath>
             </File>
             <File>
               <FileName>DS18B20.cpp</FileName>
