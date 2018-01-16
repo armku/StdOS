@@ -79,6 +79,11 @@ void HardRTC::SaveTime()
 {
 //    uint seconds = Time.Seconds + Time.BaseSeconds;    
 }
+//设置时间
+void HardRTC::SetTime(uint seconds)
+{
+
+}
 
 #ifdef __cplusplus
 /* 秒中断标志，进入秒中断时置1，当时间被刷新之后清0 */
