@@ -84,7 +84,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\..\STDOS\STDOS;..\..\..\STDOS\SYSTEM\STM32F1\CMSIS;..\..\..\STDOS\SYSTEM\STM32F1\FWLib\inc;..\..\..\STDOS\STDOS\Kernel;..\..\..\STDOS\STDOS\Device;..\..\..\STDOS\STDOS\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\STDOS\STDOS;..\..\..\STDOS\SYSTEM\STM32F1\CMSIS;..\..\..\STDOS\SYSTEM\STM32F1\FWLib\inc;..\..\..\STDOS\STDOS\Kernel;..\..\..\STDOS\STDOS\Device;..\..\..\STDOS\STDOS\Core;..\..\..\STDOS\SYSTEM\STM32F1\startup;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>STM32F10X_HD;STM32F1;DEBUG;USE_STDPERIPH_DRIVER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -109,7 +110,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\..\STDOS\STDOS;..\..\..\STDOS\SYSTEM\STM32F1\CMSIS;..\..\..\STDOS\SYSTEM\STM32F1\FWLib\inc;..\..\..\STDOS\STDOS\Kernel;..\..\..\STDOS\STDOS\Device;..\..\..\STDOS\STDOS\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\STDOS\STDOS;..\..\..\STDOS\SYSTEM\STM32F1\CMSIS;..\..\..\STDOS\SYSTEM\STM32F1\FWLib\inc;..\..\..\STDOS\STDOS\Kernel;..\..\..\STDOS\STDOS\Device;..\..\..\STDOS\STDOS\Core;..\..\..\STDOS\SYSTEM\STM32F1\startup;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>STM32F10X_HD;STM32F1;DEBUG;USE_STDPERIPH_DRIVER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
