@@ -292,8 +292,8 @@ void TInterrupt::OnInit()const
     //        VectorTable[65] = (uint) &(CInterrupt::SDIO_IRQHandler); // SDIO                                            
     //        VectorTable[66] = (uint) &(CInterrupt::TIM5_IRQHandler); // TIM5                                            
     //        VectorTable[67] = (uint) &(CInterrupt::SPI3_IRQHandler); // SPI3                                            
-    //        VectorTable[68] = (uint) &(CInterrupt::UART4_IRQHandler); // UART4                                           
-    //        VectorTable[69] = (uint) &(CInterrupt::UART5_IRQHandler); // UART5                                           
+    VectorTable[68] = (uint) &(CInterrupt::UART4_IRQHandler); // UART4                                           
+    VectorTable[69] = (uint) &(CInterrupt::UART5_IRQHandler); // UART5                                           
     VectorTable[70] = (uint) &(CInterrupt::TIM6_DAC_IRQHandler); // TIM6 and DAC1&2 underrun errors                   
     VectorTable[71] = (uint) &(CInterrupt::TIM7_IRQHandler); // TIM7                   
     //        VectorTable[72] = (uint) &(CInterrupt::DMA2_Stream0_IRQHandler); // DMA2 Stream 0                                   
