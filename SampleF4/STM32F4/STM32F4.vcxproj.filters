@@ -123,75 +123,6 @@
     <ClCompile Include="..\..\Util\Util.cpp">
       <Filter>Util</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\misc.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_adc.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_bkp.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_can.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_cec.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_crc.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_dac.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_dbgmcu.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_dma.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_exti.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_flash.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_fsmc.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_gpio.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_i2c.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_iwdg.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_pwr.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_rcc.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_rtc.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_sdio.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_spi.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_tim.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_usart.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLib\src\stm32f10x_wwdg.c">
-      <Filter>FWLIB</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\STDOS\Platform\CortexM\Interrupt.cpp">
       <Filter>CortexM</Filter>
     </ClCompile>
@@ -521,6 +452,126 @@
     </ClCompile>
     <ClCompile Include="..\..\STDOS\Device\WatchDog.cpp">
       <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\misc.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_adc.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_can.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cec.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_crc.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_aes.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_des.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_cryp_tdes.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_dac.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_dbgmcu.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_dcmi.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_dma.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_dma2d.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_exti.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_flash.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_flash_ramfunc.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_fmc.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_fmpi2c.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_fsmc.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_gpio.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_hash.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_hash_md5.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_hash_sha1.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_i2c.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_iwdg.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_ltdc.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_pwr.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_qspi.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_rcc.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_rng.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_rtc.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_sai.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_sdio.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_spdifrx.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_spi.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_syscfg.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_tim.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_usart.c">
+      <Filter>FWLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SYSTEM\STM32F4\FWLIB\src\stm32f4xx_wwdg.c">
+      <Filter>FWLIB</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
