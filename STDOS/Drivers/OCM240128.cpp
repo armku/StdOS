@@ -58,10 +58,6 @@ extern const byte  GB3212[][32];
 #define  LCD_CMD_GPIO     GPIOA
 #define  GPIOCLK_CMD      RCC_APB2Periph_GPIOA
 
-#define  STA0      GPIO_Pin_8
-#define  STA1      GPIO_Pin_9
-#define  STA3      GPIO_Pin_11
-
 #define  LCD_GPIO_DAT   GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15
 #define  LCD_GPIO_CMD	  GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_6|GPIO_Pin_7
 
