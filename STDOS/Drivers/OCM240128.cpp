@@ -68,13 +68,7 @@ extern const byte  GB3212[][32];
 #define  LCD_GPIO_DAT   GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15
 #define  LCD_GPIO_CMD	  GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_6|GPIO_Pin_7
 
-//#define    LCD_WR(x)   x ? GPIO_SetBits(LCD_CMD_GPIO,WR):  GPIO_ResetBits(LCD_CMD_GPIO,WR)
-
-//#define    LCD_RD(x)   x ? GPIO_SetBits(LCD_CMD_GPIO,RD):  GPIO_ResetBits(LCD_CMD_GPIO,RD)
-//#define    LCD_CE(x)   x ? GPIO_SetBits(LCD_CMD_GPIO,CE):  GPIO_ResetBits(LCD_CMD_GPIO,CE)
 #define    LCD_CD(x)   x ? GPIO_SetBits(LCD_CMD_GPIO,CD):  GPIO_ResetBits(LCD_CMD_GPIO,CD)
-#define    LCD_FS(x)   x ? GPIO_SetBits(LCD_CMD_GPIO,FS):  GPIO_ResetBits(LCD_CMD_GPIO,FS)
-#define    LCD_LED(x)  x ? GPIO_SetBits(LCD_CMD_GPIO,LED): GPIO_ResetBits(LCD_CMD_GPIO,LED)
 
 #define  LCD_WriteData(x)   {LCD_DATA_GPIO->BSRR = x<<8 & 0xff00;LCD_DATA_GPIO->BRR = ((~x)<<8) & 0xff00;}  //高8位的数据
 
@@ -147,10 +141,8 @@ void OCM240128::LCD_busy_check(byte autowr)
 {
 	LCD_DataPort_In();
 	LCD_CD(1);
-	//LCD_WR(1);
 	this->pinwr = 1;
 	this->pinrd = 0;
-	/*LCD_RD(0);*/
 	if (autowr)
 	{
 		while (Text_STA3 == 0);
@@ -163,7 +155,6 @@ void OCM240128::LCD_busy_check(byte autowr)
 		};
 	}
 	this->pinrd = 1;
-	/*LCD_RD(1);*/
 	LCD_DataPort_Out();
 }
 /************************************************************************************************
@@ -177,12 +168,9 @@ void OCM240128::LCD_Wcmd (byte cmd)
 	LCD_busy_check(0);
 	LCD_CD(1);
 	this->pinrd = 1;
-	/*LCD_RD(1);*/
 	LCD_WriteData(cmd);
 	this->pinwr = 0;
 	this->pinwr = 1;
-	/*LCD_WR(0);
-	LCD_WR(1);*/
 }
 
 /************************************************************************************************
@@ -196,12 +184,9 @@ void OCM240128::LCD_Wdata(byte dat)
 	LCD_busy_check(0);
 	LCD_CD(0);
 	this->pinrd = 1;
-	/*LCD_RD(1);*/
 	LCD_WriteData(dat);
 	this->pinwr = 0;
 	this->pinwr = 1;
-	/*LCD_WR(0);
-	LCD_WR(1);*/
 }
 /************************************************************************************************
 @f_name: void LCD12684_Wdat_L(byte dat)
@@ -414,13 +399,10 @@ void OCM240128::LCD_TEST()
 ************************************************************************************************/
 void OCM240128::LCD_Init()
 {	
-  LCD_FS(0);
+	this->pinfs = 0;
   this->pince = 0;
-	/*LCD_CE(0);*/
 	this->pinwr = 1;
-	/*LCD_WR(1);*/
 	this->pinrd = 1;
-	/*LCD_RD(1);*/
 	
   LCD_Wdata2_cmd(0x00, 0x00, 0x40);
   LCD_Wdata2_cmd(0x20, 0x00, 0x41);
@@ -430,7 +412,7 @@ void OCM240128::LCD_Init()
   LCD_Wcmd(0x80);
   LCD_Wcmd(0x98);
   this->pince = 1;
-	/*LCD_LED(1);*/
+  /*this->pinled = 1;*/
 }
 
 void OCM240128::LCD_Clr()
