@@ -7,7 +7,7 @@
 OCM240128 ocm;
 void OCM240128Test()
 {
-	ocm.SetPin(PA6,PA7,PA5,PA1,PA0,PA8,PA9,PA11);
+	ocm.SetPin(PA6,PA7,PA5,PA1,PA0,PA8,PA9,PA11,PA4);
 	ocm.LCD_DataPort_Out();
 	ocm.LCD_CMDPort_Out();
 	ocm.LCD_Init();		 //“∫æß≥ı ºªØ

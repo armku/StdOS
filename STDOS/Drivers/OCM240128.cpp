@@ -10,6 +10,7 @@ OCM240128::OCM240128()
 	this->pinsta1.Invert = 0;
 	this->pinsta2.Invert = 0;
 	this->pinsta3.Invert = 0;
+	this->pincd.Invert = 0;
 
 	this->pince.OpenDrain = false;
 	this->pinwr.OpenDrain = false;
@@ -19,9 +20,10 @@ OCM240128::OCM240128()
 	this->pinsta1.OpenDrain = false;
 	this->pinsta2.OpenDrain = false;
 	this->pinsta3.OpenDrain = false;
+	this->pincd.OpenDrain = false;
 }
 
-void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led, Pin sta1, Pin sta2, Pin sta3)
+void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led, Pin sta1, Pin sta2, Pin sta3,Pin cd)
 {
 	this->pince.Set(ce);
 	this->pinwr.Set(wr);
@@ -31,6 +33,7 @@ void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led, Pin sta1, Pin st
 	this->pinsta1.Set(sta1);
 	this->pinsta2.Set(sta2);
 	this->pinsta3.Set(sta3);	
+	this->pincd.Set(cd);
 
 	this->pince.Open();
 	this->pinwr.Open();
@@ -40,6 +43,7 @@ void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led, Pin sta1, Pin st
 	this->pinsta1.Open();
 	this->pinsta2.Open();
 	this->pinsta3.Open();
+	this->pincd.Open();
 }
 
 extern const byte  ascii_table_8x16[95][16];
