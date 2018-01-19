@@ -5,7 +5,7 @@ class OCM240128
 {
 public:
 	OCM240128();
-	void SetPin(Pin ce = P0, Pin wr = P0, Pin rd = P0, Pin fs = P0, Pin led = P0, Pin sta1 = P0, Pin sta2 = P0, Pin sta3 = P0,Pin cd=P0);
+	void SetPin(Pin ce = P0, Pin wr = P0, Pin rd = P0, Pin fs = P0, Pin led = P0, Pin sta0 = P0, Pin sta1 = P0, Pin sta3 = P0,Pin cd=P0);
 	void LCD_DataPort_Out();//将数据总线定义为输出
 	void LCD_CMDPort_Out();//将命令总线定义为输出
 	void LCD_DataPort_In();
@@ -32,8 +32,8 @@ private:
 	OutputPort pince;
 	OutputPort pinfs;
 	OutputPort pinled;
+	OutputPort pinsta0;
 	OutputPort pinsta1;
-	OutputPort pinsta2;
 	OutputPort pinsta3;
 	OutputPort pincd;
 };
