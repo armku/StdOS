@@ -67,10 +67,6 @@ extern const byte  GB3212[][32];
 
 #define  LCD_WriteData(x)   {LCD_DATA_GPIO->BSRR = x<<8 & 0xff00;LCD_DATA_GPIO->BRR = ((~x)<<8) & 0xff00;}  //高8位的数据
 
-#define  Text_STA0	   GPIO_ReadInputDataBit(LCD_DATA_GPIO ,STA0)
-#define  Text_STA1	   GPIO_ReadInputDataBit(LCD_DATA_GPIO ,STA1) 
-#define  Text_STA3	   GPIO_ReadInputDataBit(LCD_DATA_GPIO ,STA3) 
-
 /************************************************************************************************
 @f_name: void LCD12864_DataPort_Out(void)
 @brief:	 将数据总线定义为输出
@@ -140,11 +136,14 @@ void OCM240128::LCD_busy_check(byte autowr)
 	this->pinrd = 0;
 	if (autowr)
 	{
-		while (Text_STA3 == 0);
+		while (this->pinsta3==0)
+		{
+			
+		}
 	}
 	else
 	{
-		while ((Text_STA0 == 0) || (Text_STA1 == 0))
+		while((this->pinsta0==0)||(this->pinsta1==0))
 		{
 			Sys.Delay(10);
 		};
