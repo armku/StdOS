@@ -55,8 +55,6 @@ extern const byte  GB3212[][32];
 //**************************************************************************************************************************
 #define  LCD_DATA_GPIO    GPIOE
 #define  GPIOCLK_DATA     RCC_APB2Periph_GPIOE
-#define  LCD_CMD_GPIO     GPIOA
-#define  GPIOCLK_CMD      RCC_APB2Periph_GPIOA
 
 #define  LCD_GPIO_DAT   GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15
 #define  LCD_GPIO_CMD	  GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_6|GPIO_Pin_7
@@ -75,8 +73,7 @@ void OCM240128::LCD_WriteData(byte da)
 ************************************************************************************************/
 void OCM240128::LCD_DataPort_Out()
 {
-	GPIO_InitTypeDef  GPIO_InitStructure;	//定义结构体			
-	RCC_APB2PeriphClockCmd(GPIOCLK_DATA, ENABLE);  //
+	GPIO_InitTypeDef  GPIO_InitStructure;	//定义结构体
 
 	GPIO_InitStructure.GPIO_Pin  = LCD_GPIO_DAT;		//数据口配置成推挽输出模式
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;   //推挽输出
@@ -91,8 +88,7 @@ void OCM240128::LCD_DataPort_Out()
 ************************************************************************************************/
 void OCM240128::LCD_DataPort_In()
 {
-	GPIO_InitTypeDef  GPIO_InitStructure;	//定义结构体			
-	RCC_APB2PeriphClockCmd(GPIOCLK_DATA, ENABLE);  //
+	GPIO_InitTypeDef  GPIO_InitStructure;	//定义结构体
 
 	GPIO_InitStructure.GPIO_Pin  = LCD_GPIO_DAT;		//数据口配置成浮空输入模式
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;   //浮空输入模式 
@@ -106,13 +102,11 @@ void OCM240128::LCD_DataPort_In()
 ************************************************************************************************/
 void OCM240128::LCD_CMDPort_Out()
 {
-	GPIO_InitTypeDef  GPIO_InitStructure;	//定义结构体			
-	RCC_APB2PeriphClockCmd(GPIOCLK_CMD, ENABLE);  //
+	GPIO_InitTypeDef  GPIO_InitStructure;	//定义结构体
 
 	GPIO_InitStructure.GPIO_Pin  = LCD_GPIO_CMD;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;  //推挽输出   
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(LCD_CMD_GPIO , &GPIO_InitStructure);	  //初始化IO口配置  
 }
 /************************************************************************************************
 @f_name: void NOP(void)
