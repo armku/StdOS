@@ -2,14 +2,51 @@
 
 OCM240128::OCM240128()
 {
-	
+	this->pince.Invert = 0;
+	this->pinwr.Invert = 0;
+	this->pinrd.Invert = 0;
+	this->pinfs.Invert = 0;
+	this->pinled.Invert = 0;
+	this->pinsta1.Invert = 0;
+	this->pinsta2.Invert = 0;
+	this->pinsta3.Invert = 0;
+
+	this->pince.OpenDrain = false;
+	this->pinwr.OpenDrain = false;
+	this->pinrd.OpenDrain = false;
+	this->pinfs.OpenDrain = false;
+	this->pinled.OpenDrain = false;
+	this->pinsta1.OpenDrain = false;
+	this->pinsta2.OpenDrain = false;
+	this->pinsta3.OpenDrain = false;
 }
-#include "stm32f10x.h"	
+
+void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led, Pin sta1, Pin sta2, Pin sta3)
+{
+	this->pince.Set(ce);
+	this->pinwr.Set(wr);
+	this->pinrd.Set(rd);
+	this->pinfs.Set(fs);
+	this->pinled.Set(led);
+	this->pinsta1.Set(sta1);
+	this->pinsta2.Set(sta2);
+	this->pinsta3.Set(sta3);	
+
+	this->pince.Open();
+	this->pinwr.Open();
+	this->pinrd.Open();
+	this->pinfs.Open();
+	this->pinled.Open();
+	this->pinsta1.Open();
+	this->pinsta2.Open();
+	this->pinsta3.Open();
+}
+
 extern const byte  ascii_table_8x16[95][16];
 extern const byte  hanzi_16x16[][32];
 extern const byte  shuzi_16x16[][32];
 extern const byte  GB3212[][32];
-
+#include "stm32f10x.h"	
 //管脚定义，移植修改区
 //**************************************************************************************************************************
 #define  LCD_DATA_GPIO    GPIOE
@@ -31,9 +68,10 @@ extern const byte  GB3212[][32];
 #define  LCD_GPIO_DAT   GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15
 #define  LCD_GPIO_CMD	  GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_6|GPIO_Pin_7
 
-#define    LCD_WR(x)   x ? GPIO_SetBits(LCD_CMD_GPIO,WR):  GPIO_ResetBits(LCD_CMD_GPIO,WR)
-#define    LCD_RD(x)   x ? GPIO_SetBits(LCD_CMD_GPIO,RD):  GPIO_ResetBits(LCD_CMD_GPIO,RD)
-#define    LCD_CE(x)   x ? GPIO_SetBits(LCD_CMD_GPIO,CE):  GPIO_ResetBits(LCD_CMD_GPIO,CE)
+//#define    LCD_WR(x)   x ? GPIO_SetBits(LCD_CMD_GPIO,WR):  GPIO_ResetBits(LCD_CMD_GPIO,WR)
+
+//#define    LCD_RD(x)   x ? GPIO_SetBits(LCD_CMD_GPIO,RD):  GPIO_ResetBits(LCD_CMD_GPIO,RD)
+//#define    LCD_CE(x)   x ? GPIO_SetBits(LCD_CMD_GPIO,CE):  GPIO_ResetBits(LCD_CMD_GPIO,CE)
 #define    LCD_CD(x)   x ? GPIO_SetBits(LCD_CMD_GPIO,CD):  GPIO_ResetBits(LCD_CMD_GPIO,CD)
 #define    LCD_FS(x)   x ? GPIO_SetBits(LCD_CMD_GPIO,FS):  GPIO_ResetBits(LCD_CMD_GPIO,FS)
 #define    LCD_LED(x)  x ? GPIO_SetBits(LCD_CMD_GPIO,LED): GPIO_ResetBits(LCD_CMD_GPIO,LED)
@@ -44,12 +82,6 @@ extern const byte  GB3212[][32];
 #define  Text_STA1	   GPIO_ReadInputDataBit(LCD_DATA_GPIO ,STA1) 
 #define  Text_STA3	   GPIO_ReadInputDataBit(LCD_DATA_GPIO ,STA3) 
 
-/************************************************************************************************
- //FILE:液晶12864驱动程序
- //VERS:1.0
- //AUTHOR:刘志同
- //DATE:2016/10/17
-************************************************************************************************/
 /************************************************************************************************
 @f_name: void LCD12864_DataPort_Out(void)
 @brief:	 将数据总线定义为输出
@@ -115,8 +147,10 @@ void OCM240128::LCD_busy_check(byte autowr)
 {
 	LCD_DataPort_In();
 	LCD_CD(1);
-	LCD_WR(1);
-	LCD_RD(0);
+	//LCD_WR(1);
+	this->pinwr = 1;
+	this->pinrd = 0;
+	/*LCD_RD(0);*/
 	if (autowr)
 	{
 		while (Text_STA3 == 0);
@@ -128,7 +162,8 @@ void OCM240128::LCD_busy_check(byte autowr)
 			Sys.Delay(10);
 		};
 	}
-	LCD_RD(1);
+	this->pinrd = 1;
+	/*LCD_RD(1);*/
 	LCD_DataPort_Out();
 }
 /************************************************************************************************
@@ -141,10 +176,13 @@ void OCM240128::LCD_Wcmd (byte cmd)
 {
 	LCD_busy_check(0);
 	LCD_CD(1);
-	LCD_RD(1);
+	this->pinrd = 1;
+	/*LCD_RD(1);*/
 	LCD_WriteData(cmd);
-	LCD_WR(0);
-	LCD_WR(1);
+	this->pinwr = 0;
+	this->pinwr = 1;
+	/*LCD_WR(0);
+	LCD_WR(1);*/
 }
 
 /************************************************************************************************
@@ -157,10 +195,13 @@ void OCM240128::LCD_Wdata(byte dat)
 {
 	LCD_busy_check(0);
 	LCD_CD(0);
-	LCD_RD(1);
+	this->pinrd = 1;
+	/*LCD_RD(1);*/
 	LCD_WriteData(dat);
-	LCD_WR(0);
-	LCD_WR(1);
+	this->pinwr = 0;
+	this->pinwr = 1;
+	/*LCD_WR(0);
+	LCD_WR(1);*/
 }
 /************************************************************************************************
 @f_name: void LCD12684_Wdat_L(byte dat)
@@ -374,9 +415,12 @@ void OCM240128::LCD_TEST()
 void OCM240128::LCD_Init()
 {	
   LCD_FS(0);
-	LCD_CE(0);
-	LCD_WR(1);
-	LCD_RD(1);
+  this->pince = 0;
+	/*LCD_CE(0);*/
+	this->pinwr = 1;
+	/*LCD_WR(1);*/
+	this->pinrd = 1;
+	/*LCD_RD(1);*/
 	
   LCD_Wdata2_cmd(0x00, 0x00, 0x40);
   LCD_Wdata2_cmd(0x20, 0x00, 0x41);
@@ -385,7 +429,8 @@ void OCM240128::LCD_Init()
   LCD_Wcmd(0xa1); //光标形状
   LCD_Wcmd(0x80);
   LCD_Wcmd(0x98);
-	LCD_LED(1);
+  this->pince = 1;
+	/*LCD_LED(1);*/
 }
 
 void OCM240128::LCD_Clr()

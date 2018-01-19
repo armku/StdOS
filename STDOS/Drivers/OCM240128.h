@@ -1,10 +1,11 @@
 #ifndef _OCM240128_H
 #define _OCM240128_H
-#include "Sys.h"
+#include "Device\Port.h"
 class OCM240128
 {
 public:
 	OCM240128();
+	void SetPin(Pin ce = P0, Pin wr = P0, Pin rd = P0, Pin fs = P0, Pin led = P0, Pin sta1 = P0, Pin sta2 = P0, Pin sta3 = P0);
 	void LCD_DataPort_Out();//将数据总线定义为输出
 	void LCD_CMDPort_Out();//将命令总线定义为输出
 	void LCD_DataPort_In();
@@ -26,7 +27,14 @@ public:
 	void LCD_Clr();//	清屏
 	void LCD_Clr_char(byte x, byte y, ushort count);
 private:
-
+	OutputPort pinwr;
+	OutputPort pinrd;
+	OutputPort pince;
+	OutputPort pinfs;
+	OutputPort pinled;
+	OutputPort pinsta1;
+	OutputPort pinsta2;
+	OutputPort pinsta3;
 };
 extern const byte  ascii_table_8x16[95][16];
 extern const byte  hanzi_16x16[][32];
