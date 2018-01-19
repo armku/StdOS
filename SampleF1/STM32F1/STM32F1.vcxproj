@@ -154,8 +154,11 @@
     <ClCompile Include="..\..\STDOS\Drivers\AT45DB.cpp" />
     <ClCompile Include="..\..\STDOS\Drivers\DS18B20.cpp" />
     <ClCompile Include="..\..\STDOS\Drivers\Esp8266.cpp" />
+    <ClCompile Include="..\..\STDOS\Drivers\GPS.cpp" />
     <ClCompile Include="..\..\STDOS\Drivers\NPA.cpp" />
     <ClCompile Include="..\..\STDOS\Drivers\nrf24l01.cpp" />
+    <ClCompile Include="..\..\STDOS\Drivers\OCM240128.cpp" />
+    <ClCompile Include="..\..\STDOS\Drivers\PCF8563.cpp" />
     <ClCompile Include="..\..\STDOS\Drivers\RX8025T.cpp" />
     <ClCompile Include="..\..\STDOS\Drivers\SSD1106.cpp" />
     <ClCompile Include="..\..\STDOS\Drivers\SSD1309.cpp" />
@@ -214,6 +217,7 @@
     <ClCompile Include="..\..\STDOS\Test\EthernetTest.cpp" />
     <ClCompile Include="..\..\STDOS\Test\FlashTest.cpp" />
     <ClCompile Include="..\..\STDOS\Test\FlushPortTest.cpp" />
+    <ClCompile Include="..\..\STDOS\Test\GPSTest.cpp" />
     <ClCompile Include="..\..\STDOS\Test\InvokeTest.cpp" />
     <ClCompile Include="..\..\STDOS\Test\IRTest.cpp" />
     <ClCompile Include="..\..\STDOS\Test\JsonTest.cpp" />
@@ -222,6 +226,8 @@
     <ClCompile Include="..\..\STDOS\Test\MessageTest.cpp" />
     <ClCompile Include="..\..\STDOS\Test\ModbusTest.cpp" />
     <ClCompile Include="..\..\STDOS\Test\nrf24l01Test.cpp" />
+    <ClCompile Include="..\..\STDOS\Test\OCM240128Test.cpp" />
+    <ClCompile Include="..\..\STDOS\Test\PCF8563.cpp" />
     <ClCompile Include="..\..\STDOS\Test\PortTest.cpp" />
     <ClCompile Include="..\..\STDOS\Test\PulsePortTest.cpp" />
     <ClCompile Include="..\..\STDOS\Test\PwmSoloTest.cpp" />

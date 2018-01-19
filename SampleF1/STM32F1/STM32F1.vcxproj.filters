@@ -522,5 +522,23 @@
     <ClCompile Include="..\..\STDOS\Device\WatchDog.cpp">
       <Filter>Device</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\STDOS\Test\GPSTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\STDOS\Test\OCM240128Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\STDOS\Test\PCF8563.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\STDOS\Drivers\GPS.cpp">
+      <Filter>Drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\STDOS\Drivers\OCM240128.cpp">
+      <Filter>Drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\STDOS\Drivers\PCF8563.cpp">
+      <Filter>Drivers</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -11,11 +11,12 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103VE</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F1xx_DFP.2.0.0</PackID>
+          <PackID>Keil.STM32F1xx_DFP.1.1.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x10000) IROM(0x08000000,0x80000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -779,6 +780,21 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\nrf24l01.cpp</FilePath>
             </File>
+            <File>
+              <FileName>OCM240128.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\OCM240128.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PCF8563.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\PCF8563.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\GPS.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1219,6 +1235,21 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ThreadTest.cpp</FilePath>
             </File>
+            <File>
+              <FileName>OCM240128Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\OCM240128Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PCF8563.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PCF8563.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPSTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\GPSTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1228,11 +1259,12 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F1xx_DFP.2.0.0</PackID>
+          <PackID>Keil.STM32F1xx_DFP.1.1.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IROM(0x08000000,0x10000) IRAM(0x20000000,0x5000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -1996,6 +2028,21 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\nrf24l01.cpp</FilePath>
             </File>
+            <File>
+              <FileName>OCM240128.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\OCM240128.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PCF8563.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\PCF8563.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\GPS.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2435,6 +2482,21 @@
               <FileName>ThreadTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ThreadTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OCM240128Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\OCM240128Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PCF8563.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PCF8563.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPSTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\GPSTest.cpp</FilePath>
             </File>
           </Files>
         </Group>

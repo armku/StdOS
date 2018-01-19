@@ -53,7 +53,7 @@ uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 
 //SerialPort *sp2;
 //SerialPort *sp3;
-
+void OCM240128Test();
 int main(void)
 {
     Sys.Init();
@@ -69,6 +69,6 @@ int main(void)
 //	sp3->Open();
 	
     //Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
-		
+		OCM240128Test();
     Sys.Start();
 }
