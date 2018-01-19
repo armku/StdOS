@@ -26,6 +26,7 @@ public:
 	void LCD_Init();//“∫æß≥ı ºªØ
 	void LCD_Clr();//	«Â∆¡
 	void LCD_Clr_char(byte x, byte y, ushort count);
+	void LCD_WriteData(byte da);
 private:
 	OutputPort pinwr;
 	OutputPort pinrd;
