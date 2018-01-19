@@ -102,11 +102,6 @@ void OCM240128::LCD_DataPort_In()
 ************************************************************************************************/
 void OCM240128::LCD_CMDPort_Out()
 {
-	GPIO_InitTypeDef  GPIO_InitStructure;	//定义结构体
-
-	GPIO_InitStructure.GPIO_Pin  = LCD_GPIO_CMD;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;  //推挽输出   
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 }
 /************************************************************************************************
 @f_name: void NOP(void)
