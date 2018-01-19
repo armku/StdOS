@@ -58,21 +58,12 @@ extern const byte  GB3212[][32];
 #define  LCD_CMD_GPIO     GPIOA
 #define  GPIOCLK_CMD      RCC_APB2Periph_GPIOA
 
-#define  WR		     GPIO_Pin_7
-#define  RD		     GPIO_Pin_5
-#define  CE		     GPIO_Pin_6
-#define  CD		     GPIO_Pin_4
-#define  FS		     GPIO_Pin_1
-#define  LED		   GPIO_Pin_0
-
 #define  STA0      GPIO_Pin_8
 #define  STA1      GPIO_Pin_9
 #define  STA3      GPIO_Pin_11
 
 #define  LCD_GPIO_DAT   GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15
 #define  LCD_GPIO_CMD	  GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_6|GPIO_Pin_7
-
-#define    LCD_CD(x)   x ? GPIO_SetBits(LCD_CMD_GPIO,CD):  GPIO_ResetBits(LCD_CMD_GPIO,CD)
 
 #define  LCD_WriteData(x)   {LCD_DATA_GPIO->BSRR = x<<8 & 0xff00;LCD_DATA_GPIO->BRR = ((~x)<<8) & 0xff00;}  //高8位的数据
 
@@ -144,7 +135,7 @@ void OCM240128::NOP()
 void OCM240128::LCD_busy_check(byte autowr)
 {
 	LCD_DataPort_In();
-	LCD_CD(1);
+	this->pincd = 1;
 	this->pinwr = 1;
 	this->pinrd = 0;
 	if (autowr)
@@ -170,7 +161,7 @@ void OCM240128::LCD_busy_check(byte autowr)
 void OCM240128::LCD_Wcmd (byte cmd)
 {
 	LCD_busy_check(0);
-	LCD_CD(1);
+	this->pincd = 1;
 	this->pinrd = 1;
 	LCD_WriteData(cmd);
 	this->pinwr = 0;
@@ -186,7 +177,7 @@ void OCM240128::LCD_Wcmd (byte cmd)
 void OCM240128::LCD_Wdata(byte dat)
 {
 	LCD_busy_check(0);
-	LCD_CD(0);
+	this->pincd = 0;
 	this->pinrd = 1;
 	LCD_WriteData(dat);
 	this->pinwr = 0;
