@@ -54,14 +54,14 @@ extern const byte  GB3212[][32];
 //管脚定义，移植修改区
 //**************************************************************************************************************************
 #define  LCD_DATA_GPIO    GPIOE
-#define  GPIOCLK_DATA     RCC_APB2Periph_GPIOE
 
 #define  LCD_GPIO_DAT   GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15
 
 //高8位的数据
 void OCM240128::LCD_WriteData(byte da)
 {
-	LCD_DATA_GPIO->BSRR = da << 8 & 0xff00; LCD_DATA_GPIO->BRR = ((~da) << 8) & 0xff00;
+	LCD_DATA_GPIO->BSRR = da << 8 & 0xff00; 
+	LCD_DATA_GPIO->BRR = ((~da) << 8) & 0xff00;
 }
 
 /************************************************************************************************
