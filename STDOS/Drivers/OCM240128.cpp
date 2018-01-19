@@ -93,15 +93,7 @@ void OCM240128::LCD_DataPort_In()
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;   //浮空输入模式 
 	GPIO_Init(LCD_DATA_GPIO , &GPIO_InitStructure);    //IO口初始化函数（使能上述配置）	  
 }
-/************************************************************************************************
-@f_name: void LCD12864_CMDPort_Out(void)
-@brief:	 将命令总线定义为输出
-@param:	 None
-@return: None
-************************************************************************************************/
-void OCM240128::LCD_CMDPort_Out()
-{
-}
+
 /************************************************************************************************
 @f_name: void NOP(void)
 @brief:	 延时函数

@@ -9,7 +9,6 @@ void OCM240128Test()
 {
 	ocm.SetPin(PA6,PA7,PA5,PA1,PA0,PE8,PE9,PE11,PA4);
 	ocm.LCD_DataPort_Out();
-	ocm.LCD_CMDPort_Out();
 	ocm.LCD_Init();		 //“∫æß≥ı ºªØ
 	ocm.LCD_Clr();		 //	«Â∆¡
 	ocm.LCD_TEST();
