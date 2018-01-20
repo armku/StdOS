@@ -165,6 +165,23 @@ void OCM240128::Displaydot8x16(byte x, byte y, byte *text, byte mode)
 		j = add >> 8;
 	}
 }
+void OCM240128::DispDot8x16(byte x, byte y, byte *text, byte mode)
+{
+	ushort add = y * 0x20 + x + 0x800;
+	byte i = add;
+	byte j = add >> 8;
+	for (int k = 0; k < 16; k++)
+	{
+		this->wcmd2(i, j, 0x24);
+		if (mode)
+			this->wcmd(text[k], 0xc0);
+		else
+			this->wcmd(~text[k], 0xc0);
+		add = add + 0x20;
+		i = add;
+		j = add >> 8;
+	}
+}
 
 void OCM240128::DispDot16x16(byte x, byte y, byte *text, byte mode)
 {
