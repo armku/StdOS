@@ -54,11 +54,12 @@ uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 //SerialPort *sp2;
 //SerialPort *sp3;
 void OCM240128Test();
+void PCF8563Test();
 int main(void)
 {
     Sys.Init();
     #if DEBUG
-        Sys.MessagePort = COM1;
+        Sys.MessagePort = COM3;
         Sys.ShowInfo();
     #endif 	
 
@@ -70,5 +71,6 @@ int main(void)
 	
     //Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 		OCM240128Test();
+		PCF8563Test();
     Sys.Start();
 }

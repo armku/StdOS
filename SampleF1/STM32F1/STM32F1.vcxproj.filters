@@ -528,9 +528,6 @@
     <ClCompile Include="..\..\STDOS\Test\OCM240128Test.cpp">
       <Filter>Test</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\STDOS\Test\PCF8563.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\STDOS\Drivers\GPS.cpp">
       <Filter>Drivers</Filter>
     </ClCompile>
@@ -542,6 +539,9 @@
     </ClCompile>
     <ClCompile Include="..\..\STDOS\App\LCDOCM.cpp">
       <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\STDOS\Test\PCF8563Test.cpp">
+      <Filter>Test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

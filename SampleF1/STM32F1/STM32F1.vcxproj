@@ -228,7 +228,7 @@
     <ClCompile Include="..\..\STDOS\Test\ModbusTest.cpp" />
     <ClCompile Include="..\..\STDOS\Test\nrf24l01Test.cpp" />
     <ClCompile Include="..\..\STDOS\Test\OCM240128Test.cpp" />
-    <ClCompile Include="..\..\STDOS\Test\PCF8563.cpp" />
+    <ClCompile Include="..\..\STDOS\Test\PCF8563Test.cpp" />
     <ClCompile Include="..\..\STDOS\Test\PortTest.cpp" />
     <ClCompile Include="..\..\STDOS\Test\PulsePortTest.cpp" />
     <ClCompile Include="..\..\STDOS\Test\PwmSoloTest.cpp" />

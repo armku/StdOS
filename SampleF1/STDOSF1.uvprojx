@@ -1246,14 +1246,14 @@
               <FilePath>..\STDOS\Test\OCM240128Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>PCF8563.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PCF8563.cpp</FilePath>
-            </File>
-            <File>
               <FileName>GPSTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\GPSTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PCF8563Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PCF8563Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2499,14 +2499,14 @@
               <FilePath>..\STDOS\Test\OCM240128Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>PCF8563.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PCF8563.cpp</FilePath>
-            </File>
-            <File>
               <FileName>GPSTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\GPSTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PCF8563Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PCF8563Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
