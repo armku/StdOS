@@ -54,7 +54,6 @@ void OCM240128Test()
 
 	
 	ocm.SetPin(PA6,PA7,PA5,PA1,PA0,PE8,PE9,PE11,PA4);
-//	ocm.LCD_DataPort_Out();
 	ocm.LCD_Init();		 //液晶初始化
 	ocm.LCD_Clr();		 //	清屏
 	ocm.LCD_TEST();
@@ -70,8 +69,19 @@ void OCM240128Test()
 //高8位的数据
 void OCM240128::LCD_WriteData(byte da)
 {
+#if 0
 	LCD_DATA_GPIO->BSRR = da << 8 & 0xff00; 
 	LCD_DATA_GPIO->BRR = ((~da) << 8) & 0xff00;
+#else
+	ocmd0 = da & (1 << 0);
+	ocmd1 = da & (1 << 1);
+	ocmd2 = da & (1 << 2);
+	ocmd3 = da & (1 << 3);
+	ocmd4 = da & (1 << 4);
+	ocmd5 = da & (1 << 5);
+	ocmd6 = da & (1 << 6);
+	ocmd7 = da & (1 << 7);
+#endif
 }
 
 #endif //  _OCM240128TEST
