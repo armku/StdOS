@@ -13,7 +13,6 @@ public:
 	void Display_shuzi_16x16(byte x, byte y, byte text);
 	void Draw_hline(byte x, byte y, ushort count);
 	void Draw_vline(byte x, byte y, ushort count);
-	void LCD_TEST();
 	void Init();//“∫æß≥ı ºªØ
 	void Clr();//	«Â∆¡
 	void Clrchar(byte x, byte y, ushort count);	
