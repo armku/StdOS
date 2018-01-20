@@ -14,6 +14,50 @@ void OCM240128Test()
 	ocm.LCD_TEST();
 }
 
+#include "stm32f10x.h"	
+//管脚定义，移植修改区
+//**************************************************************************************************************************
+#define  LCD_DATA_GPIO    GPIOE
+
+#define  LCD_GPIO_DAT   GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15
+
+//高8位的数据
+void OCM240128::LCD_WriteData(byte da)
+{
+	LCD_DATA_GPIO->BSRR = da << 8 & 0xff00; 
+	LCD_DATA_GPIO->BRR = ((~da) << 8) & 0xff00;
+}
+
+/************************************************************************************************
+@f_name: void LCD12864_DataPort_Out(void)
+@brief:	 将数据总线定义为输出
+@param:	 None
+@return: None
+************************************************************************************************/
+void OCM240128::LCD_DataPort_Out()
+{
+	GPIO_InitTypeDef  GPIO_InitStructure;	//定义结构体
+
+	GPIO_InitStructure.GPIO_Pin  = LCD_GPIO_DAT;		//数据口配置成推挽输出模式
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;   //推挽输出
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;  
+	GPIO_Init(LCD_DATA_GPIO , &GPIO_InitStructure);    //IO口初始化函数（使能上述配置）	  
+}
+/************************************************************************************************
+@f_name: void LCD12864_DataPort_In(void)
+@brief:	 将数据总线定义为输入
+@param:	 None
+@return: None
+************************************************************************************************/
+void OCM240128::LCD_DataPort_In()
+{
+	GPIO_InitTypeDef  GPIO_InitStructure;	//定义结构体
+
+	GPIO_InitStructure.GPIO_Pin  = LCD_GPIO_DAT;		//数据口配置成浮空输入模式
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;   //浮空输入模式 
+	GPIO_Init(LCD_DATA_GPIO , &GPIO_InitStructure);    //IO口初始化函数（使能上述配置）	  
+}
+
 #endif //  _OCM240128TEST
 
 const byte  hanzi_16x16[][32]={
