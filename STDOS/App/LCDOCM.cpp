@@ -20,7 +20,7 @@ void LCDOCM::Display_string_16x16(byte x, byte y, byte *text, byte num, byte mod
 }
 void LCDOCM::Display_shuzi_16x16(byte x, byte y, byte text)
 {
-	this->DispDot16(x,y,(byte*)shuzi_16x16[text],0);
+	this->DispDot16x16(x,y,(byte*)shuzi_16x16[text],0);
 }
 
 
@@ -41,7 +41,7 @@ void LCDOCM::DisplayHz16x16(byte x, byte y, byte *text, byte mode)
 		add1 = qh - 48;
 	else
 		add1 = ((qh - 0xb0) * 94 + (ql - 0x96));
-	this->DispDot16(x, y, (byte*)GB3212[add1], mode);
+	this->DispDot16x16(x, y, (byte*)GB3212[add1], mode);
 }
 
 

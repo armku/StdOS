@@ -166,7 +166,7 @@ void OCM240128::Displaydot8x16(byte x, byte y, byte *text, byte mode)
 	}
 }
 
-void OCM240128::DispDot16(byte x, byte y, byte *text, byte mode)
+void OCM240128::DispDot16x16(byte x, byte y, byte *text, byte mode)
 {
 	ushort add = y * 0x20 + x + 0x800;
 	byte i = add;
