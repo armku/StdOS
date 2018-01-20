@@ -12,7 +12,4 @@ public:
 	void Clrchar(byte x, byte y, ushort count);
 };
 
-extern const byte  hanzi_16x16[][32];
-
-
 #endif // _LCDOCM_H

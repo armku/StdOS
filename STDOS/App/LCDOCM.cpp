@@ -1,4 +1,5 @@
 #include "LCDOCM.h"
+extern const byte  hanzi_16x16[][32];
 extern const byte  ascii_table_8x16[95][16];
 extern const byte  shuzi_16x16[][32];
 extern const byte  GB3212[][32];
