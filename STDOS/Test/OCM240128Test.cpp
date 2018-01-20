@@ -5,10 +5,56 @@
 #ifdef  _OCM240128TEST
 
 OCM240128 ocm;
+
+OutputPort ocmd0;
+OutputPort ocmd1;
+OutputPort ocmd2;
+OutputPort ocmd3;
+OutputPort ocmd4;
+OutputPort ocmd5;
+OutputPort ocmd6;
+OutputPort ocmd7;
 void OCM240128Test()
 {
+	ocmd0.Invert = 0;
+	ocmd1.Invert = 0;
+	ocmd2.Invert = 0;
+	ocmd3.Invert = 0;
+	ocmd4.Invert = 0;
+	ocmd5.Invert = 0;
+	ocmd6.Invert = 0;
+	ocmd7.Invert = 0;
+
+	ocmd0.OpenDrain = false;
+	ocmd1.OpenDrain = false;
+	ocmd2.OpenDrain = false;
+	ocmd3.OpenDrain = false;
+	ocmd4.OpenDrain = false;
+	ocmd5.OpenDrain = false;
+	ocmd6.OpenDrain = false;
+	ocmd7.OpenDrain = false;
+
+	ocmd0.Set(PE8);
+	ocmd1.Set(PE9);
+	ocmd2.Set(PE10);
+	ocmd3.Set(PE11);
+	ocmd4.Set(PE12);
+	ocmd5.Set(PE13);
+	ocmd6.Set(PE14);
+	ocmd7.Set(PE15);
+
+	ocmd0.Open();
+	ocmd1.Open();
+	ocmd2.Open();
+	ocmd3.Open();
+	ocmd4.Open();
+	ocmd5.Open();
+	ocmd6.Open();
+	ocmd7.Open();
+
+	
 	ocm.SetPin(PA6,PA7,PA5,PA1,PA0,PE8,PE9,PE11,PA4);
-	ocm.LCD_DataPort_Out();
+//	ocm.LCD_DataPort_Out();
 	ocm.LCD_Init();		 //液晶初始化
 	ocm.LCD_Clr();		 //	清屏
 	ocm.LCD_TEST();
@@ -26,36 +72,6 @@ void OCM240128::LCD_WriteData(byte da)
 {
 	LCD_DATA_GPIO->BSRR = da << 8 & 0xff00; 
 	LCD_DATA_GPIO->BRR = ((~da) << 8) & 0xff00;
-}
-
-/************************************************************************************************
-@f_name: void LCD12864_DataPort_Out(void)
-@brief:	 将数据总线定义为输出
-@param:	 None
-@return: None
-************************************************************************************************/
-void OCM240128::LCD_DataPort_Out()
-{
-	GPIO_InitTypeDef  GPIO_InitStructure;	//定义结构体
-
-	GPIO_InitStructure.GPIO_Pin  = LCD_GPIO_DAT;		//数据口配置成推挽输出模式
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;   //推挽输出
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;  
-	GPIO_Init(LCD_DATA_GPIO , &GPIO_InitStructure);    //IO口初始化函数（使能上述配置）	  
-}
-/************************************************************************************************
-@f_name: void LCD12864_DataPort_In(void)
-@brief:	 将数据总线定义为输入
-@param:	 None
-@return: None
-************************************************************************************************/
-void OCM240128::LCD_DataPort_In()
-{
-	GPIO_InitTypeDef  GPIO_InitStructure;	//定义结构体
-
-	GPIO_InitStructure.GPIO_Pin  = LCD_GPIO_DAT;		//数据口配置成浮空输入模式
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;   //浮空输入模式 
-	GPIO_Init(LCD_DATA_GPIO , &GPIO_InitStructure);    //IO口初始化函数（使能上述配置）	  
 }
 
 #endif //  _OCM240128TEST

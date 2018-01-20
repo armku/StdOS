@@ -68,26 +68,30 @@ void OCM240128::NOP()
 ************************************************************************************************/
 void OCM240128::LCD_busy_check(byte autowr)
 {
-	LCD_DataPort_In();
-	this->pincd = 1;
-	this->pinwr = 1;
-	this->pinrd = 0;
-	if (autowr)
-	{
-		while (this->pinsta3==0)
-		{
-			
-		}
-	}
-	else
-	{
-		while((this->pinsta0==0)||(this->pinsta1==0))
-		{
-			Sys.Delay(10);
-		};
-	}
-	this->pinrd = 1;
-	LCD_DataPort_Out();
+	#if 0
+//	LCD_DataPort_In();
+//	this->pincd = 1;
+//	this->pinwr = 1;
+//	this->pinrd = 0;
+//	if (autowr)
+//	{
+//		while (this->pinsta3==0)
+//		{
+//			
+//		}
+//	}
+//	else
+//	{
+//		while((this->pinsta0==0)||(this->pinsta1==0))
+//		{
+//			Sys.Delay(10);
+//		};
+//	}
+//	this->pinrd = 1;
+//	LCD_DataPort_Out();
+	#else
+	Sys.Delay(10);
+	#endif
 }
 /************************************************************************************************
 @f_name: void LCD12684_Wcmd_L(byte dat)
