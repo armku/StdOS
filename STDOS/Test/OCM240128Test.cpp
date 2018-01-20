@@ -59,20 +59,9 @@ void OCM240128Test()
 	ocm.LCD_TEST();
 }
 
-#include "stm32f10x.h"	
-//管脚定义，移植修改区
-//**************************************************************************************************************************
-#define  LCD_DATA_GPIO    GPIOE
-
-#define  LCD_GPIO_DAT   GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15
-
 //高8位的数据
 void OCM240128::LCD_WriteData(byte da)
 {
-#if 0
-	LCD_DATA_GPIO->BSRR = da << 8 & 0xff00; 
-	LCD_DATA_GPIO->BRR = ((~da) << 8) & 0xff00;
-#else
 	ocmd0 = da & (1 << 0);
 	ocmd1 = da & (1 << 1);
 	ocmd2 = da & (1 << 2);
@@ -81,11 +70,8 @@ void OCM240128::LCD_WriteData(byte da)
 	ocmd5 = da & (1 << 5);
 	ocmd6 = da & (1 << 6);
 	ocmd7 = da & (1 << 7);
-#endif
 }
-
 #endif //  _OCM240128TEST
-
 const byte  hanzi_16x16[][32]={
 /*--  ??:  ?  --*/
 /*--  ??12;  ??????????:?x?=16x16   --*/
