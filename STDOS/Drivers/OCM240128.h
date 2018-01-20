@@ -6,7 +6,6 @@ class OCM240128
 public:
 	OCM240128();
 	void SetPin(Pin ce = P0, Pin wr = P0, Pin rd = P0, Pin fs = P0, Pin led = P0, Pin sta0 = P0, Pin sta1 = P0, Pin sta3 = P0,Pin cd=P0);
-	void NOP();//ÑÓÊ±º¯Êý
 	void LCD_busy_check(byte autowr);//¼ì²âÃ¦×´Ì¬
 	void LCD_Wcmd(byte cmd);
 	void LCD_Wdata(byte dat);
