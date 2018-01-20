@@ -148,6 +148,7 @@ void OCM240128::wcmd2(byte dat1, byte dat2, byte cmd)
 ************************************************************************************************/
 void OCM240128::Displaydot8x16(byte x, byte y, byte *text, byte mode)
 {
+#if 0
 	ushort add;
 	byte i, j, k;
 	add = y * 0x20 + x + 0x800;
@@ -164,6 +165,9 @@ void OCM240128::Displaydot8x16(byte x, byte y, byte *text, byte mode)
 		i = add;
 		j = add >> 8;
 	}
+#else
+	this->DispDot8x16(x,y, (byte*)ascii_table_8x16[*text - 32],mode);
+#endif
 }
 void OCM240128::DispDot8x16(byte x, byte y, byte *text, byte mode)
 {
