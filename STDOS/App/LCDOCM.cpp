@@ -1,6 +1,6 @@
 #include "LCDOCM.h"
 
-void LCDOCM::Display_string_8x16(byte x, byte y, byte *text, byte num, byte mode)
+void LCDOCM::DispStrAsc8x16(byte x, byte y, byte *text, byte num, byte mode)
 {
 	while (*text != 0)//数据未结束
 	{
@@ -9,7 +9,7 @@ void LCDOCM::Display_string_8x16(byte x, byte y, byte *text, byte num, byte mode
 		x += 1;
 	}
 }
-void LCDOCM::Display_string_16x16(byte x, byte y, byte *text, byte num, byte mode)
+void LCDOCM::DispStrHz16x16(byte x, byte y, byte *text, byte num, byte mode)
 {
 	while (*text != 0)//数据未结束
 	{
@@ -18,7 +18,7 @@ void LCDOCM::Display_string_16x16(byte x, byte y, byte *text, byte num, byte mod
 		x += 2;
 	}
 }
-void LCDOCM::Display_shuzi_16x16(byte x, byte y, byte text)
+void LCDOCM::DispAscNum16x16(byte x, byte y, byte text)
 {
 	this->DispDot16x16(x,y,(byte*)shuzi_16x16[text],0);
 }
