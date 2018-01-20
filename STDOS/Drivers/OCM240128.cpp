@@ -46,11 +46,6 @@ void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led, Pin sta0, Pin st
 	this->pincd.Open();
 }
 
-extern const byte  ascii_table_8x16[95][16];
-extern const byte  hanzi_16x16[][32];
-extern const byte  shuzi_16x16[][32];
-extern const byte  GB3212[][32];
-
 /************************************************************************************************
 @f_name: byte LCD12864_busy(void)
 @brief:	 ¼ì²âÃ¦×´Ì¬
@@ -140,35 +135,6 @@ void OCM240128::wcmd2(byte dat1, byte dat2, byte cmd)
 	this->wcmd(cmd);
 }
 
-/************************************************************************************************
-@f_name: void Display8x16(byte hh,ushort page,ushort column,byte text)
-@brief:	 ÏÔÊ¾×Ö·û
-@param:	 None
-@return: None
-************************************************************************************************/
-void OCM240128::Displaydot8x16(byte x, byte y, byte *text, byte mode)
-{
-#if 0
-	ushort add;
-	byte i, j, k;
-	add = y * 0x20 + x + 0x800;
-	i = add;
-	j = add >> 8;
-	for (k = 0; k < 16; k++)
-	{
-		this->wcmd2(i, j, 0x24);
-		if (mode)
-			this->wcmd(ascii_table_8x16[*text - 32][k], 0xc0);
-		else
-			this->wcmd(~ascii_table_8x16[*text - 32][k], 0xc0);
-		add = add + 0x20;
-		i = add;
-		j = add >> 8;
-	}
-#else
-	this->DispDot8x16(x,y, (byte*)ascii_table_8x16[*text - 32],mode);
-#endif
-}
 void OCM240128::DispDot8x16(byte x, byte y, byte *text, byte mode)
 {
 	ushort add = y * 0x20 + x + 0x800;
@@ -282,7 +248,7 @@ void OCM240128::Clrchar(byte x, byte y, ushort count)
 	byte i;
 	for (i = 0; i < count; i++)
 	{
-		this->Displaydot8x16(x, y, 0, 1);
+		this->DispDot8x16(x, y, 0, 1);
 		x += 1;
 	}
 }

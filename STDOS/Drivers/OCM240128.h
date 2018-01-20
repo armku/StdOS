@@ -9,7 +9,7 @@ public:
 	void Init();//“∫æß≥ı ºªØ
 	void Clr();//	«Â∆¡
 	void Clrchar(byte x, byte y, ushort count);
-	void Displaydot8x16(byte x, byte y, byte *text, byte mode);
+	
 	void DispDot8x16(byte x, byte y, byte *text, byte mode);
 	void DispDot16x16(byte x, byte y, byte *text, byte mode);
 	void Draw_hline(byte x, byte y, ushort count);
