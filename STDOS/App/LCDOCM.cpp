@@ -13,7 +13,7 @@ void LCDOCM::Display_string_16x16(byte x, byte y, byte *text, byte num, byte mod
 {
 	while (*text != 0)//Êý¾ÝÎ´½áÊø
 	{
-		this->Displaydot16x16(x, y, text, mode);
+		this->DisplayHz16x16(x, y, text, mode);
 		text += 2;
 		x += 2;
 	}

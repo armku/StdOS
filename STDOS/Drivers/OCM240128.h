@@ -10,7 +10,7 @@ public:
 	void Clr();//	«Â∆¡
 	void Clrchar(byte x, byte y, ushort count);
 	void Displaydot8x16(byte x, byte y, byte *text, byte mode);
-	void Displaydot16x16(byte x, byte y, byte *text, byte mode);
+	void DisplayHz16x16(byte x, byte y, byte *text, byte mode);
 	void DispDot16(byte x, byte y, byte *text, byte mode);
 	void Draw_hline(byte x, byte y, ushort count);
 	void Draw_vline(byte x, byte y, ushort count);

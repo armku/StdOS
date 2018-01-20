@@ -173,10 +173,8 @@ void OCM240128::Displaydot8x16(byte x, byte y, byte *text, byte mode)
 @param:	 None
 @return: None
 ************************************************************************************************/
-void OCM240128::Displaydot16x16(byte x, byte y, byte *text, byte mode)
+void OCM240128::DisplayHz16x16(byte x, byte y, byte *text, byte mode)
 {
-	ushort add;
-	byte i, j, k;
 	byte qh, ql;
 	ushort add1;
 
