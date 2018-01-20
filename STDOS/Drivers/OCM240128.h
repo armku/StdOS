@@ -5,12 +5,7 @@ class OCM240128
 {
 public:
 	OCM240128();
-	void SetPin(Pin ce = P0, Pin wr = P0, Pin rd = P0, Pin fs = P0, Pin led = P0, Pin sta0 = P0, Pin sta1 = P0, Pin sta3 = P0,Pin cd=P0);
-	void LCD_busy_check(byte autowr);//ºÏ≤‚√¶◊¥Ã¨
-	void LCD_Wcmd(byte cmd);
-	void LCD_Wdata(byte dat);
-	void LCD_Wdata_cmd(byte dat, byte cmd);
-	void LCD_Wdata2_cmd(byte dat1, byte dat2, byte cmd);
+	void SetPin(Pin ce = P0, Pin wr = P0, Pin rd = P0, Pin fs = P0, Pin led = P0, Pin sta0 = P0, Pin sta1 = P0, Pin sta3 = P0,Pin cd=P0);	
 	void Display_char_8x16(byte x, byte y, byte *text, byte mode);
 	void Display_string_8x16(byte x, byte y, byte *text, byte num, byte mode);
 	void Display_str_16x16(byte x, byte y, byte *text, byte mode);
@@ -19,10 +14,16 @@ public:
 	void Draw_hline(byte x, byte y, ushort count);
 	void Draw_vline(byte x, byte y, ushort count);
 	void LCD_TEST();
-	void LCD_Init();//“∫æß≥ı ºªØ
-	void LCD_Clr();//	«Â∆¡
-	void LCD_Clr_char(byte x, byte y, ushort count);
-	void LCD_WriteData(byte da);
+	void Init();//“∫æß≥ı ºªØ
+	void Clr();//	«Â∆¡
+	void Clrchar(byte x, byte y, ushort count);	
+private:
+	void busycheck(byte autowr);//ºÏ≤‚√¶◊¥Ã¨
+	void wcmd(byte cmd);
+	void wdata(byte dat);
+	void wcmd(byte dat, byte cmd);
+	void wcmd2(byte dat1, byte dat2, byte cmd);
+	void writedata(byte da);
 private:
 	OutputPort pinwr;
 	OutputPort pinrd;

@@ -57,7 +57,7 @@ extern const byte  GB3212[][32];
 @param:	 None
 @return: None
 ************************************************************************************************/
-void OCM240128::LCD_busy_check(byte autowr)
+void OCM240128::busycheck(byte autowr)
 {
 	#if 0
 //	LCD_DataPort_In();
@@ -90,12 +90,12 @@ void OCM240128::LCD_busy_check(byte autowr)
 @param:	 byte dat  输入指令
 @return: None
 ************************************************************************************************/
-void OCM240128::LCD_Wcmd (byte cmd)
+void OCM240128::wcmd (byte cmd)
 {
-	LCD_busy_check(0);
+	this->busycheck(0);
 	this->pincd = 1;
 	this->pinrd = 1;
-	LCD_WriteData(cmd);
+	this->writedata(cmd);
 	this->pinwr = 0;
 	this->pinwr = 1;
 }
@@ -106,12 +106,12 @@ void OCM240128::LCD_Wcmd (byte cmd)
 @param:	 byte dat  输入指令
 @return: None
 ************************************************************************************************/
-void OCM240128::LCD_Wdata(byte dat)
+void OCM240128::wdata(byte dat)
 {
-	LCD_busy_check(0);
+	this->busycheck(0);
 	this->pincd = 0;
 	this->pinrd = 1;
-	LCD_WriteData(dat);
+	this->writedata(dat);
 	this->pinwr = 0;
 	this->pinwr = 1;
 }
@@ -121,10 +121,10 @@ void OCM240128::LCD_Wdata(byte dat)
 @param:	 byte dat 输入数据
 @return: None
 ************************************************************************************************/
-void OCM240128::LCD_Wdata_cmd (byte dat,byte cmd)
+void OCM240128::wcmd (byte dat,byte cmd)
 {
-	LCD_Wdata(dat);
-	LCD_Wcmd(cmd);
+	this->wdata(dat);
+	this->wcmd(cmd);
 }
 
 /************************************************************************************************
@@ -133,11 +133,11 @@ void OCM240128::LCD_Wdata_cmd (byte dat,byte cmd)
 @param:	 byte dat 输入数据
 @return: None
 ************************************************************************************************/
-void OCM240128::LCD_Wdata2_cmd (byte dat1,byte dat2,byte cmd)
+void OCM240128::wcmd2 (byte dat1,byte dat2,byte cmd)
 {
-	LCD_Wdata(dat1);
-	LCD_Wdata(dat2);
-	LCD_Wcmd(cmd);
+	this->wdata(dat1);
+	this->wdata(dat2);
+	this->wcmd(cmd);
 }
 
 /************************************************************************************************
@@ -155,11 +155,11 @@ void OCM240128::Display_char_8x16(byte x,byte y,byte *text,byte mode)
 	j=add>>8;
 	for (k = 0; k < 16; k++)
   {
-    LCD_Wdata2_cmd(i, j, 0x24);
+    this->wcmd2(i, j, 0x24);
 		if(mode)
-    LCD_Wdata_cmd(ascii_table_8x16[*text-32][k], 0xc0);
+    this->wcmd(ascii_table_8x16[*text-32][k], 0xc0);
 		else
-		LCD_Wdata_cmd(~ascii_table_8x16[*text-32][k], 0xc0);	
+		this->wcmd(~ascii_table_8x16[*text-32][k], 0xc0);	
     add = add + 0x20;
 		i=add;
 		j=add>>8;
@@ -201,13 +201,13 @@ void OCM240128::Display_str_16x16(byte x,byte y,byte *text,byte mode)
 //	{
 //				for (k = 0; k < 32; k=k+2)
 //		{
-//			LCD_Wdata2_cmd(i, j, 0x24);
+//			this->wcmd2(i, j, 0x24);
 //			if(mode)
-//			{LCD_Wdata_cmd(GB3212[11][k], 0xc0);
-//			LCD_Wdata_cmd(GB3212[11][k+1], 0xc0);}
+//			{this->wcmd(GB3212[11][k], 0xc0);
+//			this->wcmd(GB3212[11][k+1], 0xc0);}
 //			else
-//			{LCD_Wdata_cmd(~GB3212[11][k], 0xc0);
-//			LCD_Wdata_cmd(~GB3212[11][k+1], 0xc0);}			
+//			{this->wcmd(~GB3212[11][k], 0xc0);
+//			this->wcmd(~GB3212[11][k+1], 0xc0);}			
 //			add = add + 0x20;
 //			i=add;
 //			j=add>>8;
@@ -217,13 +217,13 @@ void OCM240128::Display_str_16x16(byte x,byte y,byte *text,byte mode)
 	{
 		for (k = 0; k < 32; k=k+2)
 		{
-			LCD_Wdata2_cmd(i, j, 0x24);
+			this->wcmd2(i, j, 0x24);
 			if(mode)
-			{LCD_Wdata_cmd(GB3212[add1][k], 0xc0);
-			LCD_Wdata_cmd(GB3212[add1][k+1], 0xc0);}
+			{this->wcmd(GB3212[add1][k], 0xc0);
+			this->wcmd(GB3212[add1][k+1], 0xc0);}
 			else
-			{LCD_Wdata_cmd(~GB3212[add1][k], 0xc0);
-			LCD_Wdata_cmd(~GB3212[add1][k+1], 0xc0);}			
+			{this->wcmd(~GB3212[add1][k], 0xc0);
+			this->wcmd(~GB3212[add1][k+1], 0xc0);}			
 			add = add + 0x20;
 			i=add;
 			j=add>>8;
@@ -250,9 +250,9 @@ void OCM240128::Display_shuzi_16x16(byte x,byte y,byte text)
 	j=add>>8;
 	for (k = 0; k < 32; k=k+2)
   {
-    LCD_Wdata2_cmd(i, j, 0x24);
-    LCD_Wdata_cmd(shuzi_16x16[text][k], 0xc0);
-		LCD_Wdata_cmd(shuzi_16x16[text][k+1], 0xc0);
+    this->wcmd2(i, j, 0x24);
+    this->wcmd(shuzi_16x16[text][k], 0xc0);
+		this->wcmd(shuzi_16x16[text][k+1], 0xc0);
     add = add + 0x20;
 		i=add;
 		j=add>>8;
@@ -268,10 +268,10 @@ void OCM240128::Draw_hline(byte x,byte y,ushort count)
 	add = y * 0x20 + x + 0x800;
 	i=add;
 	j=add>>8;
-  LCD_Wdata2_cmd(i, j, 0x24);
+  this->wcmd2(i, j, 0x24);
   for (i = 0; i < count; i++)
   {
-    LCD_Wdata_cmd(0xff, 0xc0);
+    this->wcmd(0xff, 0xc0);
   }
 }
 
@@ -285,8 +285,8 @@ void OCM240128::Draw_vline(byte x, byte y,ushort count)
 	j=add>>8;
   for (k = 0; k < count; k++)
   {
-    LCD_Wdata2_cmd(i, j, 0x24);
-    LCD_Wdata_cmd(0x01, 0xc0);
+    this->wcmd2(i, j, 0x24);
+    this->wcmd(0x01, 0xc0);
     add = add + 0x20;
 		i=add;
 		j=add>>8;
@@ -324,38 +324,38 @@ void OCM240128::LCD_TEST()
 @param:	 None
 @return: None
 ************************************************************************************************/
-void OCM240128::LCD_Init()
+void OCM240128::Init()
 {	
 	this->pinfs = 0;
   this->pince = 0;
 	this->pinwr = 1;
 	this->pinrd = 1;
 	
-  LCD_Wdata2_cmd(0x00, 0x00, 0x40);
-  LCD_Wdata2_cmd(0x20, 0x00, 0x41);
-  LCD_Wdata2_cmd(0x00, 0x08, 0x42);
-  LCD_Wdata2_cmd(0x20, 0x00, 0x43);
-  LCD_Wcmd(0xa1); //光标形状
-  LCD_Wcmd(0x80);
-  LCD_Wcmd(0x98);
+  this->wcmd2(0x00, 0x00, 0x40);
+  this->wcmd2(0x20, 0x00, 0x41);
+  this->wcmd2(0x00, 0x08, 0x42);
+  this->wcmd2(0x20, 0x00, 0x43);
+  this->wcmd(0xa1); //光标形状
+  this->wcmd(0x80);
+  this->wcmd(0x98);
   this->pince = 1;
   /*this->pinled = 1;*/
 }
 
-void OCM240128::LCD_Clr()
+void OCM240128::Clr()
 {
   ushort i;
-  LCD_Wdata2_cmd(0x00, 0x00, 0x24);
-  LCD_Wcmd(0xb0);
+  this->wcmd2(0x00, 0x00, 0x24);
+  this->wcmd(0xb0);
   for (i = 0; i < 8192; i++)
   {
-    LCD_Wdata(0);
+    this->wdata(0);
   }
-  LCD_Wcmd(0xb2);
-  LCD_Wcmd(0x98); //禁止光标闪动
+  this->wcmd(0xb2);
+  this->wcmd(0x98); //禁止光标闪动
 }
 
-void OCM240128::LCD_Clr_char(byte x, byte y,ushort count)
+void OCM240128::Clrchar(byte x, byte y,ushort count)
 {
 	byte i;
 	for(i=0;i<count;i++)
