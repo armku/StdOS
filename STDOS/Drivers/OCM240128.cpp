@@ -12,6 +12,15 @@ OCM240128::OCM240128()
 	this->pinsta3.Invert = 0;
 	this->pincd.Invert = 0;
 
+	this->data0.Invert = 0;
+	this->data1.Invert = 0;
+	this->data2.Invert = 0;
+	this->data3.Invert = 0;
+	this->data4.Invert = 0;
+	this->data5.Invert = 0;
+	this->data6.Invert = 0;
+	this->data7.Invert = 0;
+
 	this->pince.OpenDrain = false;
 	this->pinwr.OpenDrain = false;
 	this->pinrd.OpenDrain = false;
@@ -21,6 +30,15 @@ OCM240128::OCM240128()
 	this->pinsta1.OpenDrain = false;
 	this->pinsta3.OpenDrain = false;
 	this->pincd.OpenDrain = false;
+
+	this->data0.OpenDrain = false;
+	this->data1.OpenDrain = false;
+	this->data2.OpenDrain = false;
+	this->data3.OpenDrain = false;
+	this->data4.OpenDrain = false;
+	this->data5.OpenDrain = false;
+	this->data6.OpenDrain = false;
+	this->data7.OpenDrain = false;
 }
 
 void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led, Pin sta0, Pin sta1, Pin sta3, Pin cd)
@@ -44,6 +62,37 @@ void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led, Pin sta0, Pin st
 	this->pinsta1.Open();
 	this->pinsta3.Open();
 	this->pincd.Open();
+}
+void OCM240128::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d6, Pin d7)
+{
+	this->data0.Set(d0);
+	this->data1.Set(d1);
+	this->data2.Set(d2);
+	this->data3.Set(d3);
+	this->data4.Set(d4);
+	this->data5.Set(d5);
+	this->data6.Set(d6);
+	this->data7.Set(d7);
+
+	this->data0.Open();
+	this->data1.Open();
+	this->data2.Open();
+	this->data3.Open();
+	this->data4.Open();
+	this->data5.Open();
+	this->data6.Open();
+	this->data7.Open();
+}
+void OCM240128::writedata(byte da)
+{
+	this->data0 = da & (1 << 0);
+	this->data1 = da & (1 << 1);
+	this->data2 = da & (1 << 2);
+	this->data3 = da & (1 << 3);
+	this->data4 = da & (1 << 4);
+	this->data5 = da & (1 << 5);
+	this->data6 = da & (1 << 6);
+	this->data7 = da & (1 << 7);
 }
 /************************************************************************************************
 @f_name: void LCD12864_Init(void)

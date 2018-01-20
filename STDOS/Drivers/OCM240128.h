@@ -6,6 +6,7 @@ class OCM240128
 public:
 	OCM240128();
 	void SetPin(Pin ce = P0, Pin wr = P0, Pin rd = P0, Pin fs = P0, Pin led = P0, Pin sta0 = P0, Pin sta1 = P0, Pin sta3 = P0,Pin cd=P0);	
+	void SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d6, Pin d7);
 	void Init();//“∫æß≥ı ºªØ
 	void Clr();//	«Â∆¡
 		
@@ -30,6 +31,15 @@ private:
 	OutputPort pinsta1;
 	OutputPort pinsta3;
 	OutputPort pincd;
+
+	OutputPort data0;
+	OutputPort data1;
+	OutputPort data2;
+	OutputPort data3;
+	OutputPort data4;
+	OutputPort data5;
+	OutputPort data6;
+	OutputPort data7;
 };
 
 #endif
