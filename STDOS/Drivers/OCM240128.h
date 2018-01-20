@@ -6,7 +6,8 @@ class OCM240128
 public:
 	OCM240128();
 	void SetPin(Pin ce = P0, Pin wr = P0, Pin rd = P0, Pin fs = P0, Pin led = P0, Pin sta0 = P0, Pin sta1 = P0, Pin sta3 = P0,Pin cd=P0);	
-	void Display_char_8x16(byte x, byte y, byte *text, byte mode);
+	void Display8x16(byte x, byte y, byte *text, byte mode);
+	
 	void Display_string_8x16(byte x, byte y, byte *text, byte num, byte mode);
 	void Display_str_16x16(byte x, byte y, byte *text, byte mode);
 	void Display_string_16x16(byte x, byte y, byte *text, byte num, byte mode);
@@ -34,6 +35,13 @@ private:
 	OutputPort pinsta3;
 	OutputPort pincd;
 };
+
+class LCDOCM:public OCM240128
+{
+	public:
+		
+};
+
 extern const byte  ascii_table_8x16[95][16];
 extern const byte  hanzi_16x16[][32];
 extern const byte  shuzi_16x16[][32];

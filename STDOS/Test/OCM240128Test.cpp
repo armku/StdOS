@@ -4,7 +4,7 @@
 #define _OCM240128TEST
 #ifdef  _OCM240128TEST
 
-OCM240128 ocm;
+LCDOCM ocm;
 
 OutputPort ocmd0;
 OutputPort ocmd1;

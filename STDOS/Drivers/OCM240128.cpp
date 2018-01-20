@@ -141,12 +141,12 @@ void OCM240128::wcmd2 (byte dat1,byte dat2,byte cmd)
 }
 
 /************************************************************************************************
-@f_name: void Display_char_8x16(byte hh,ushort page,ushort column,byte text)
+@f_name: void Display8x16(byte hh,ushort page,ushort column,byte text)
 @brief:	 显示字符
 @param:	 None
 @return: None
 ************************************************************************************************/
-void OCM240128::Display_char_8x16(byte x,byte y,byte *text,byte mode)
+void OCM240128::Display8x16(byte x,byte y,byte *text,byte mode)
 {
 	ushort add;
 	byte i,j,k;
@@ -170,7 +170,7 @@ void OCM240128::Display_string_8x16(byte x,byte y,byte *text,byte num,byte mode)
 {
 	while(*text!=0)//数据未结束
 	{  						     
-		Display_char_8x16(x,y,text,mode);
+		this->Display8x16(x,y,text,mode);
 		text+=1;
 		x+=1;		
 	}		
@@ -334,7 +334,7 @@ void OCM240128::Clrchar(byte x, byte y,ushort count)
 	byte i;
 	for(i=0;i<count;i++)
 	{  						     
-		Display_char_8x16(x,y,0,1);
+		this->Display8x16(x,y,0,1);
 		x+=1;		
 	}		
 }
