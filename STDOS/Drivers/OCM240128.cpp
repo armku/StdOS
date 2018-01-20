@@ -166,26 +166,6 @@ void OCM240128::Displaydot8x16(byte x, byte y, byte *text, byte mode)
 	}
 }
 
-
-/************************************************************************************************
-@f_name: void Display_char_8x16(byte hh,ushort page,ushort column,byte text)
-@brief:	 ÏÔÊ¾×Ö·û
-@param:	 None
-@return: None
-************************************************************************************************/
-void OCM240128::DisplayHz16x16(byte x, byte y, byte *text, byte mode)
-{
-	byte qh, ql;
-	ushort add1;
-
-	qh = *text;
-	ql = *(text + 1);
-	if (qh < 58)
-		add1 = qh - 48;
-	else
-		add1 = ((qh - 0xb0) * 94 + (ql - 0x96));	
-	this->DispDot16(x,y,(byte*)GB3212[add1],mode);
-}
 void OCM240128::DispDot16(byte x, byte y, byte *text, byte mode)
 {
 	ushort add = y * 0x20 + x + 0x800;
