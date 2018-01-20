@@ -580,6 +580,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\App\lcd_dr.cpp</FilePath>
             </File>
+            <File>
+              <FileName>LCDOCM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\LCDOCM.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1827,6 +1832,11 @@
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\App\lcd_dr.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>LCDOCM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\App\LCDOCM.cpp</FilePath>
             </File>
           </Files>
         </Group>

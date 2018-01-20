@@ -540,5 +540,8 @@
     <ClCompile Include="..\..\STDOS\Drivers\PCF8563.cpp">
       <Filter>Drivers</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\STDOS\App\LCDOCM.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
-#include "Drivers\OCM240128.h"
+#include "App\LCDOCM.h"
+#include "Device\Port.h"
 #include "Sys.h"
 
 #define _OCM240128TEST

@@ -123,6 +123,7 @@
     <ClCompile Include="..\..\STDOS\App\BlinkPort.cpp" />
     <ClCompile Include="..\..\STDOS\App\bspkey.cpp" />
     <ClCompile Include="..\..\STDOS\App\FlushPort.cpp" />
+    <ClCompile Include="..\..\STDOS\App\LCDOCM.cpp" />
     <ClCompile Include="..\..\STDOS\App\lcd_dr.cpp" />
     <ClCompile Include="..\..\STDOS\Core\Array.cpp" />
     <ClCompile Include="..\..\STDOS\Core\Buffer.cpp" />
