@@ -243,12 +243,3 @@ void OCM240128::Clr()
 	this->wcmd(0x98); //Ω˚÷ππ‚±Í…¡∂Ø
 }
 
-void OCM240128::Clrchar(byte x, byte y, ushort count)
-{
-	byte i;
-	for (i = 0; i < count; i++)
-	{
-		this->DispDot8x16(x, y, 0, 1);
-		x += 1;
-	}
-}
