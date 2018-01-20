@@ -181,7 +181,7 @@ void OCM240128::Display_string_8x16(byte x,byte y,byte *text,byte num,byte mode)
 @param:	 None
 @return: None
 ************************************************************************************************/
-void OCM240128::Display_str_16x16(byte x,byte y,byte *text,byte mode)
+void OCM240128::Displaydot16x16(byte x,byte y,byte *text,byte mode)
 {
 	ushort add;
 	byte i,j,k;
@@ -235,7 +235,7 @@ void OCM240128::Display_string_16x16(byte x,byte y,byte *text,byte num,byte mode
 {
     while(*text!=0)//Êý¾ÝÎ´½áÊø
     {  						     
-			Display_str_16x16(x,y,text,mode);
+			this->Displaydot16x16(x,y,text,mode);
 			text+=2;
       x+=2;		
     }						    

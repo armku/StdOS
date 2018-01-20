@@ -71,8 +71,8 @@ void OCM240128Test()
 	ocm.Display_shuzi_16x16(18,32,9);
 	ocm.Display_shuzi_16x16(20,32,10);
 
-	ocm.Display_str_16x16(0,48,(byte*)"가",0);
-	ocm.Display_str_16x16(2,48,(byte*)"각",1);
+	ocm.Displaydot16x16(0,48,(byte*)"가",0);
+	ocm.Displaydot16x16(2,48,(byte*)"각",1);
 	ocm.Display_string_16x16(0,64,(byte*)"가각간",3,1);
 	ocm.Display_string_16x16(1,80,(byte*)"가각간",3,0);
 	
