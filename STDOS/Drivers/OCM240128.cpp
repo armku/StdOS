@@ -146,7 +146,7 @@ void OCM240128::wcmd2 (byte dat1,byte dat2,byte cmd)
 @param:	 None
 @return: None
 ************************************************************************************************/
-void OCM240128::Display8x16(byte x,byte y,byte *text,byte mode)
+void OCM240128::Displaydot8x16(byte x,byte y,byte *text,byte mode)
 {
 	ushort add;
 	byte i,j,k;
@@ -170,7 +170,7 @@ void OCM240128::Display_string_8x16(byte x,byte y,byte *text,byte num,byte mode)
 {
 	while(*text!=0)//Êý¾ÝÎ´½áÊø
 	{  						     
-		this->Display8x16(x,y,text,mode);
+		this->Displaydot8x16(x,y,text,mode);
 		text+=1;
 		x+=1;		
 	}		
@@ -334,7 +334,7 @@ void OCM240128::Clrchar(byte x, byte y,ushort count)
 	byte i;
 	for(i=0;i<count;i++)
 	{  						     
-		this->Display8x16(x,y,0,1);
+		this->Displaydot8x16(x,y,0,1);
 		x+=1;		
 	}		
 }
