@@ -342,5 +342,176 @@
     <ClCompile Include="..\STDOS\Kernel\WaitHandle.cpp">
       <Filter>Kernel</Filter>
     </ClCompile>
+    <ClCompile Include="..\STDOS\Modbus\Modbus.cpp">
+      <Filter>Modbus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Net\ITransport.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Net\MacAddress.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Net\NetworkInterface.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Net\Socket.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Util\CheckSum.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Util\ModBus1.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Util\Util.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\User\SRamTest.cpp">
+      <Filter>User</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\AD1246Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\AD7124Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\ADCTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\ADS1232Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\ArrayTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\AT24CXXTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\AT45DBTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\BlinkPortTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\bspkeytest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\BufferTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\CrcTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\DateTimeTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\DictionaryTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\DS18B20Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\ESP8266Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\EthernetTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\FlashTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\FlushPortTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\GPSTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\InvokeTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\IRTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\JsonTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\lcd_drTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\ListTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\MessageTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\ModbusTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\nrf24l01Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\OCM240128Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\PCF8563Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\PortTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\PulsePortTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\PwmSoloTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\RX8025TTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\SerialTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\SSD1309Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\ST7565RTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\StreamTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\StringTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\ThreadTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\TimerTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\W25QXXXTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\WaitHandleTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Test\WatchDogTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Storage\Storage.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Security\CheckSum.cpp">
+      <Filter>Security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Security\Crc.cpp">
+      <Filter>Security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STDOS\Security\Parity.cpp">
+      <Filter>Security</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>User</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
