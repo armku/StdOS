@@ -8,8 +8,7 @@ public:
 	void SetPin(Pin ce = P0, Pin wr = P0, Pin rd = P0, Pin fs = P0, Pin led = P0, Pin sta0 = P0, Pin sta1 = P0, Pin sta3 = P0,Pin cd=P0);	
 	void Init();//“∫æß≥ı ºªØ
 	void Clr();//	«Â∆¡
-	
-	
+		
 	void DispDot8x16(byte x, byte y, byte *text, byte mode);
 	void DispDot16x16(byte x, byte y, byte *text, byte mode);
 	void Draw_hline(byte x, byte y, ushort count);

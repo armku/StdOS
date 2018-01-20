@@ -45,7 +45,114 @@ void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led, Pin sta0, Pin st
 	this->pinsta3.Open();
 	this->pincd.Open();
 }
+/************************************************************************************************
+@f_name: void LCD12864_Init(void)
+@brief:	 液晶初始化
+@param:	 None
+@return: None
+************************************************************************************************/
+void OCM240128::Init()
+{
+	this->pinfs = 0;
+	this->pince = 0;
+	this->pinwr = 1;
+	this->pinrd = 1;
 
+	this->wcmd2(0x00, 0x00, 0x40);
+	this->wcmd2(0x20, 0x00, 0x41);
+	this->wcmd2(0x00, 0x08, 0x42);
+	this->wcmd2(0x20, 0x00, 0x43);
+	this->wcmd(0xa1); //光标形状
+	this->wcmd(0x80);
+	this->wcmd(0x98);
+	this->pince = 1;
+	/*this->pinled = 1;*/
+}
+
+void OCM240128::Clr()
+{
+	ushort i;
+	this->wcmd2(0x00, 0x00, 0x24);
+	this->wcmd(0xb0);
+	for (i = 0; i < 8192; i++)
+	{
+		this->wdata(0);
+	}
+	this->wcmd(0xb2);
+	this->wcmd(0x98); //禁止光标闪动
+}
+
+void OCM240128::DispDot8x16(byte x, byte y, byte *text, byte mode)
+{
+	ushort add = y * 0x20 + x + 0x800;
+	byte i = add;
+	byte j = add >> 8;
+	for (int k = 0; k < 16; k++)
+	{
+		this->wcmd2(i, j, 0x24);
+		if (mode)
+			this->wcmd(text[k], 0xc0);
+		else
+			this->wcmd(~text[k], 0xc0);
+		add = add + 0x20;
+		i = add;
+		j = add >> 8;
+	}
+}
+
+void OCM240128::DispDot16x16(byte x, byte y, byte *text, byte mode)
+{
+	ushort add = y * 0x20 + x + 0x800;
+	byte i = add;
+	byte j = add >> 8;
+	for (int k = 0; k < 32; k = k + 2)
+		{
+			this->wcmd2(i, j, 0x24);
+			if (mode)
+			{
+				this->wcmd(text[k], 0xc0);
+				this->wcmd(text[k + 1], 0xc0);
+			}
+			else
+			{
+				this->wcmd(~text[k], 0xc0);
+				this->wcmd(~text[k + 1], 0xc0);
+			}			
+		}
+}
+
+//画横线
+void OCM240128::Draw_hline(byte x, byte y, ushort count)
+{
+	ushort add;
+	byte i, j;
+	add = y * 0x20 + x + 0x800;
+	i = add;
+	j = add >> 8;
+	this->wcmd2(i, j, 0x24);
+	for (i = 0; i < count; i++)
+	{
+		this->wcmd(0xff, 0xc0);
+	}
+}
+
+//画竖线
+void OCM240128::Draw_vline(byte x, byte y, ushort count)
+{
+	ushort add;
+	byte i, j, k;
+	add = y * 0x20 + x + 0x800;
+	i = add;
+	j = add >> 8;
+	for (k = 0; k < count; k++)
+	{
+		this->wcmd2(i, j, 0x24);
+		this->wcmd(0x01, 0xc0);
+		add = add + 0x20;
+		i = add;
+		j = add >> 8;
+	}
+}
 /************************************************************************************************
 @f_name: byte LCD12864_busy(void)
 @brief:	 检测忙状态
@@ -134,112 +241,3 @@ void OCM240128::wcmd2(byte dat1, byte dat2, byte cmd)
 	this->wdata(dat2);
 	this->wcmd(cmd);
 }
-
-void OCM240128::DispDot8x16(byte x, byte y, byte *text, byte mode)
-{
-	ushort add = y * 0x20 + x + 0x800;
-	byte i = add;
-	byte j = add >> 8;
-	for (int k = 0; k < 16; k++)
-	{
-		this->wcmd2(i, j, 0x24);
-		if (mode)
-			this->wcmd(text[k], 0xc0);
-		else
-			this->wcmd(~text[k], 0xc0);
-		add = add + 0x20;
-		i = add;
-		j = add >> 8;
-	}
-}
-
-void OCM240128::DispDot16x16(byte x, byte y, byte *text, byte mode)
-{
-	ushort add = y * 0x20 + x + 0x800;
-	byte i = add;
-	byte j = add >> 8;
-	for (int k = 0; k < 32; k = k + 2)
-		{
-			this->wcmd2(i, j, 0x24);
-			if (mode)
-			{
-				this->wcmd(text[k], 0xc0);
-				this->wcmd(text[k + 1], 0xc0);
-			}
-			else
-			{
-				this->wcmd(~text[k], 0xc0);
-				this->wcmd(~text[k + 1], 0xc0);
-			}			
-		}
-}
-
-//画横线
-void OCM240128::Draw_hline(byte x, byte y, ushort count)
-{
-	ushort add;
-	byte i, j;
-	add = y * 0x20 + x + 0x800;
-	i = add;
-	j = add >> 8;
-	this->wcmd2(i, j, 0x24);
-	for (i = 0; i < count; i++)
-	{
-		this->wcmd(0xff, 0xc0);
-	}
-}
-
-//画竖线
-void OCM240128::Draw_vline(byte x, byte y, ushort count)
-{
-	ushort add;
-	byte i, j, k;
-	add = y * 0x20 + x + 0x800;
-	i = add;
-	j = add >> 8;
-	for (k = 0; k < count; k++)
-	{
-		this->wcmd2(i, j, 0x24);
-		this->wcmd(0x01, 0xc0);
-		add = add + 0x20;
-		i = add;
-		j = add >> 8;
-	}
-}
-/************************************************************************************************
-@f_name: void LCD12864_Init(void)
-@brief:	 液晶初始化
-@param:	 None
-@return: None
-************************************************************************************************/
-void OCM240128::Init()
-{
-	this->pinfs = 0;
-	this->pince = 0;
-	this->pinwr = 1;
-	this->pinrd = 1;
-
-	this->wcmd2(0x00, 0x00, 0x40);
-	this->wcmd2(0x20, 0x00, 0x41);
-	this->wcmd2(0x00, 0x08, 0x42);
-	this->wcmd2(0x20, 0x00, 0x43);
-	this->wcmd(0xa1); //光标形状
-	this->wcmd(0x80);
-	this->wcmd(0x98);
-	this->pince = 1;
-	/*this->pinled = 1;*/
-}
-
-void OCM240128::Clr()
-{
-	ushort i;
-	this->wcmd2(0x00, 0x00, 0x24);
-	this->wcmd(0xb0);
-	for (i = 0; i < 8192; i++)
-	{
-		this->wdata(0);
-	}
-	this->wcmd(0xb2);
-	this->wcmd(0x98); //禁止光标闪动
-}
-
