@@ -1,8 +1,9 @@
-#include "stm32f10x.h"
 #include "TInterrupt.h"
 #include "TTime.h"
 #include "SerialPort.h"
 #include "Task.h"
+//#include "_Core.h"
+#include "stm32f10x.h"
 
 
 #define UART_PINS {\

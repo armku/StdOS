@@ -1,4 +1,5 @@
 #include "I2C.h"
+//#include "_Core.h"
 #include "stm32f10x.h"
 
 bool HardI2C::SendAddress(int addr, bool tx)

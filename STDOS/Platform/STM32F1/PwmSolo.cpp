@@ -1,4 +1,5 @@
 #include "PwmSolo.h"
+//#include "_Core.h"
 #include "stm32f10x.h"
 
 void PwmSolo::OnOpen2()

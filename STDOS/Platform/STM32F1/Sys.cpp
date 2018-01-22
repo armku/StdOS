@@ -7,6 +7,7 @@
 #include "Array.h"
 #include "TInterrupt.h"
 #include "SerialPort.h"
+//#include "_Core.h"
 #include "stm32f10x.h"
 
 extern "C"

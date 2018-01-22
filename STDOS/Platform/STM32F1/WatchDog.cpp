@@ -1,4 +1,5 @@
 #include "WatchDog.h"
+//#include "_Core.h"
 #include "stm32f10x.h"
 
 int SetWatchDog( unsigned int a2)
