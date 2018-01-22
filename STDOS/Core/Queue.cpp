@@ -1,14 +1,37 @@
 #include "Queue.h"
 
-#if _USEARRAY
 Queue::Queue()
 {
-    this->pBuf = 0;
-    this->_capacity = 0;
-    this->_read = 0;
-    this->_write = 0;
+#if _USEARRAY
+	this->pBuf = 0;
+	this->_capacity = 0;
+	this->_read = 0;
+	this->_write = 0;
+#else
+	this->pBuf = 0;
+	this->_capacity = 0;
+	this->_read = 0;
+	this->_write = 0;
+#endif
+}
+void Queue::Clear()
+{
+#if _USEARRAY
+	this->_write = 0;
+	this->_read = 0;
+	this->_count = 0;
+#else
+	this->_write = 0;
+	this->_read = 0;
+	this->_size = 0;
+#endif
 }
 
+
+
+
+
+#if _USEARRAY
 void Queue::SetBuf(void *buf, int len)
 {
     if (len >= 0)
@@ -19,12 +42,6 @@ void Queue::SetBuf(void *buf, int len)
     this->Clear();
 }
 
-void Queue::Clear()
-{
-    this->_write = 0;
-    this->_read = 0;
-    this->_count = 0;
-}
 
 int Queue::Enqueue(byte da)
 {
@@ -89,13 +106,6 @@ int Queue::Read(Buffer &bs)
     return len;
 }
 #else
-Queue::Queue()
-{
-	this->pBuf = 0;
-	this->_capacity = 0;
-	this->_read = 0;
-	this->_write = 0;
-}
 
 void Queue::SetBuf(void *buf, int len)
 {
@@ -105,13 +115,6 @@ void Queue::SetBuf(void *buf, int len)
 		this->_capacity = len;
 	}
 	this->Clear();
-}
-
-void Queue::Clear()
-{
-	this->_write = 0;
-	this->_read = 0;
-	this->_count = 0;
 }
 
 int Queue::Enqueue(byte da)
@@ -125,9 +128,9 @@ int Queue::Enqueue(byte da)
 	{
 		this->_write = 0;
 	}
-	if (this->_count < this->_capacity)
+	if (this->_size < this->_capacity)
 	{
-		this->_count++;
+		this->_size++;
 		return 0;
 	}
 	else
@@ -143,9 +146,9 @@ byte Queue::Dequeue()
 	{
 		this->_read = 0;
 	}
-	if (this->_count)
+	if (this->_size)
 	{
-		this->_count--;
+		this->_size--;
 		//return 0;
 	}
 	else
