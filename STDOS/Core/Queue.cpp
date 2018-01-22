@@ -10,8 +10,8 @@ Queue::Queue()
 #else
 	this->pBuf = 0;
 	this->_capacity = 0;
-	this->_read = 0;
-	this->_write = 0;
+	this->_tail = 0;
+	this->_head = 0;
 #endif
 }
 void Queue::Clear()
@@ -21,8 +21,8 @@ void Queue::Clear()
 	this->_read = 0;
 	this->_count = 0;
 #else
-	this->_write = 0;
-	this->_read = 0;
+	this->_head = 0;
+	this->_tail = 0;
 	this->_size = 0;
 #endif
 }
@@ -117,34 +117,34 @@ void Queue::SetBuf(void *buf, int len)
 	this->Clear();
 }
 
-int Queue::Enqueue(byte da)
+void Queue::Enqueue(byte da)
 {
 	if (this->pBuf == 0)
 	{
-		return  -1;
+		return;
 	}
-	this->pBuf[this->_write] = da;
-	if (++this->_write >= this->_capacity)
+	this->pBuf[this->_head] = da;
+	if (++this->_head >= this->_capacity)
 	{
-		this->_write = 0;
+		this->_head = 0;
 	}
 	if (this->_size < this->_capacity)
 	{
 		this->_size++;
-		return 0;
+		return;
 	}
 	else
 	{
-		return  -1;
+		return;
 	}
 }
 
 byte Queue::Dequeue()
 {
-	byte ret = this->pBuf[this->_read];
-	if (++this->_read >= this->_capacity)
+	byte ret = this->pBuf[this->_tail];
+	if (++this->_tail >= this->_capacity)
 	{
-		this->_read = 0;
+		this->_tail = 0;
 	}
 	if (this->_size)
 	{
