@@ -149,12 +149,8 @@ bool SerialPort::OnWrite(const Buffer& bs)
 void SerialPort::Set485(bool flag)
 {
     if (this->RS485)
-    {
-        if (!flag)
-            Sys.Sleep(1);
+    {       
         this->RS485->Write(flag);
-        if (flag)
-            Sys.Sleep(1);
     }
 }
 

@@ -110,7 +110,7 @@ void OnUsartReceive(ushort num, void *param)
 				sp->Tx.Clear();
 				if(sp->RS485)
 				{
-					sp->RS485=0;
+					*sp->RS485=0;
 				}
 			}
 			else

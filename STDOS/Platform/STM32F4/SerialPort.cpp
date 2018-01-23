@@ -106,10 +106,10 @@ void OnUsartReceive(ushort num, void *param)
 				//            {
 				//                _pUart->SendOver();
 				//            }
-				sp->Tx.Clear();
+				sp->Tx.Clear();			
 				if(sp->RS485)
 				{
-					sp->RS485=0;
+					*sp->RS485=0;
 				}
 			}
 			else
