@@ -2,7 +2,7 @@
 #include "Timer.h"
 #include "Spi.h"
 
-#if 0
+#if 1
     //正点原子开发板F4
     OutputPort led1(PF9, false);
     OutputPort led2(PF10, false);
@@ -18,8 +18,8 @@ void LedTask(void *param)
     OutputPort *leds = (OutputPort*)param;
     *leds = ! * leds;
     led2 = !led2;
-    led3 = !led3;
-    led4 = !led4;
+//    led3 = !led3;
+//    led4 = !led4;
     //led2 = keyup;
 }
 
