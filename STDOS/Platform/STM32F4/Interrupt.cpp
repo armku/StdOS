@@ -311,7 +311,7 @@ void TInterrupt::OnInit()const
     //        VectorTable[84] = (uint) &(CInterrupt::DMA2_Stream5_IRQHandler); // DMA2 Stream 5                                   
     //        VectorTable[85] = (uint) &(CInterrupt::DMA2_Stream6_IRQHandler); // DMA2 Stream 6                                   
     //        VectorTable[86] = (uint) &(CInterrupt::DMA2_Stream7_IRQHandler); // DMA2 Stream 7                                   
-    //        VectorTable[87] = (uint) &(CInterrupt::USART6_IRQHandler); // USART6                                           
+    VectorTable[87] = (uint) &(CInterrupt::USART6_IRQHandler); // USART6                                           
     //        VectorTable[88] = (uint) &(CInterrupt::I2C3_EV_IRQHandler); // I2C3 event                                             
     //        VectorTable[89] = (uint) &(CInterrupt::I2C3_ER_IRQHandler); // I2C3 error                                             
     //        VectorTable[90] = (uint) &(CInterrupt::OTG_HS_EP1_OUT_IRQHandler); // USB OTG HS End Point 1 Out                      
@@ -407,6 +407,14 @@ void CInterrupt::UART5_IRQHandler()
     if (onIsr[UART5_IRQn])
     {
         OnUsartReceive(4, onIsr[UART5_IRQn]);
+    }
+}
+
+void CInterrupt::USART6_IRQHandler()
+{
+    if (onIsr[USART6_IRQn])
+    {
+        OnUsartReceive(5, onIsr[USART6_IRQn]);
     }
 }
 
