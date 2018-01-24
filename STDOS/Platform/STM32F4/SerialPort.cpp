@@ -239,9 +239,59 @@ bool SerialPort::OnOpen()
 
     USART_StructInit(&p);
     p.USART_BaudRate = _baudRate;
-    p.USART_WordLength = _dataBits;
-    p.USART_StopBits = _stopBits;
-    p.USART_Parity = _parity;
+
+/*
+#define USART_WordLength_8b                  ((uint16_t)0x0000)
+#define USART_WordLength_9b                  ((uint16_t)0x1000)
+*/
+	switch (this->_dataBits)
+	{
+	case 8:
+		p.USART_WordLength = USART_WordLength_8b;
+		break;
+	case 9:
+		p.USART_WordLength = USART_WordLength_9b;
+		break;
+	default:
+		p.USART_WordLength = USART_WordLength_8b;
+		break;
+	}
+/*
+#define USART_StopBits_1                     ((uint16_t)0x0000)
+#define USART_StopBits_0_5                   ((uint16_t)0x1000)
+#define USART_StopBits_2                     ((uint16_t)0x2000)
+#define USART_StopBits_1_5                   ((uint16_t)0x3000)
+*/
+	switch (this->_stopBits)
+	{
+	case 0:
+		p.USART_StopBits = USART_StopBits_1;
+		break;
+	case 1:
+		p.USART_StopBits = USART_StopBits_1;
+		break;
+	case 2:
+		p.USART_StopBits = USART_StopBits_2;
+		break;
+	default:
+		p.USART_StopBits = USART_StopBits_1;
+		break;
+	}
+/*
+#define USART_Parity_No                      ((uint16_t)0x0000)
+#define USART_Parity_Even                    ((uint16_t)0x0400)
+#define USART_Parity_Odd                     ((uint16_t)0x0600)
+*/
+	switch (this->_parity)
+	{
+	case 0:
+		p.USART_Parity = USART_Parity_No;
+		break;
+	default:
+		p.USART_Parity = USART_Parity_No;
+		break;
+	}
+       
     USART_TypeDef *const g_Uart_Ports[] = UARTS;
     USART_Init(g_Uart_Ports[this->Index], &p);
 

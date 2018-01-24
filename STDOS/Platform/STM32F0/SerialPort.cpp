@@ -239,9 +239,57 @@ bool SerialPort::OnOpen()
 
     USART_StructInit(&p);
     p.USART_BaudRate = _baudRate;
-    p.USART_WordLength = _dataBits;
-    p.USART_StopBits = _stopBits;
-    p.USART_Parity = _parity;
+/*
+#define USART_WordLength_8b                  ((uint32_t)0x00000000)
+#define USART_WordLength_9b                  USART_CR1_M // should be ((uint32_t)0x00001000)
+#define USART_WordLength_7b                  ((uint32_t)0x10001000) //< only available for STM32F072 and STM32F030 devices
+*/
+	switch (this->_dataBits)
+	{
+	case 8:
+		p.USART_WordLength = USART_WordLength_8b;
+		break;
+	case 9:
+		p.USART_WordLength = USART_WordLength_9b;
+		break;
+	default:
+		p.USART_WordLength = USART_WordLength_8b;
+		break;
+	}
+/*
+#define USART_StopBits_1                     ((uint32_t)0x00000000)
+#define USART_StopBits_2                     USART_CR2_STOP_1
+#define USART_StopBits_1_5                   (USART_CR2_STOP_0 | USART_CR2_STOP_1)
+*/
+	switch (this->_stopBits)
+	{
+	case 0:
+		p.USART_StopBits = USART_StopBits_1;
+		break;
+	case 1:
+		p.USART_StopBits = USART_StopBits_1;
+		break;
+	case 2:
+		p.USART_StopBits = USART_StopBits_2;
+		break;
+	default:
+		p.USART_StopBits = USART_StopBits_1;
+		break;
+	}
+/*
+#define USART_Parity_No                      ((uint32_t)0x00000000)
+#define USART_Parity_Even                    USART_CR1_PCE
+#define USART_Parity_Odd                     (USART_CR1_PCE | USART_CR1_PS)
+*/
+	switch (this->_parity)
+	{
+	case 0:
+		p.USART_Parity = USART_Parity_No;
+		break;
+	default:
+		p.USART_Parity = USART_Parity_No;
+		break;
+	}
     USART_TypeDef *const g_Uart_Ports[] = UARTS;
     USART_Init(g_Uart_Ports[this->Index], &p);
 
