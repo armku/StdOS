@@ -8,7 +8,7 @@
 /* TX   RX   CTS  RTS */	\
 PA9, PA10,PA11,PA12,/* USART1 */	\
 PA2, PA3, PD7, PD4, /* USART2 */	\
-PD8,PD9,PB13,PB14,/* USART3 */	\
+PB10,PB11,PB13,PB14,/* USART3 */	\
 PA0,PA1,P0,  P0,  /* UART4  */	\
 PC12, PD2,P0,  P0,  /* UART5  */	\
 PC6, PC7,PG7,  PG8,  /* USART6  */	\

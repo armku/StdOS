@@ -44,6 +44,22 @@ void ds18b20test();
 void SRamTest();
 void bsp_Init();
 void PwmSoloTest();
+
+SerialPort gascom(COM3);
+static char com4rx[1024],com4tx[1024];
+uint OnUsart4Read(ITransport *transport, Buffer &bs, void *para, void *para2)
+{
+	bs.Show();
+    return 0;
+}
+void gpsinit()
+{
+	gascom.Tx.SetBuf(com4tx,ArrayLength(com4tx));
+	gascom.Rx.SetBuf(com4rx,ArrayLength(com4rx));
+	gascom.SetBaudRate(38400);
+	gascom.Register(OnUsart4Read);
+	gascom.Open();
+}
 int main(void)
 {
     Sys.Init();
@@ -60,6 +76,6 @@ int main(void)
 	//ds18b20test();
 	//SRamTest();
 	//PwmSoloTest();
-	
+	gpsinit();
     Sys.Start();
 }
