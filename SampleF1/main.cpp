@@ -46,31 +46,33 @@ uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
 	time6cnt++;
-    //transport->Write(bs);
+    transport->Write(bs);
 	bs.Show(true);
     return 0;
 }
 
-//SerialPort *sp2;
-//SerialPort *sp3;
+SerialPort *sp3;
 void OCM240128Test();
-void PCF8563Test();
+
+byte com3rx[500],com3tx[500];
 int main(void)
 {
-    Sys.Init();
-    #if DEBUG
-        Sys.MessagePort = COM3;
-        Sys.ShowInfo();
-    #endif 	
+	Sys.Init();
+#if DEBUG
+	Sys.MessagePort = COM1;
+	Sys.ShowInfo();
+#endif 	
 
-    SerialPort::GetMessagePort()->Register(OnUsart1Read);
-		
-//	sp3=new SerialPort(COM3);
-//	sp3->Register(OnUsart3Read);
-//	sp3->Open();
-	
-    //Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
-		OCM240128Test();
-		PCF8563Test();
-    Sys.Start();
+	SerialPort::GetMessagePort()->Register(OnUsart1Read);
+
+	sp3 = new SerialPort(COM3);
+	sp3->Rx.SetBuf(com3rx, ArrayLength(com3rx));
+	sp3->Tx.SetBuf(com3tx, ArrayLength(com3tx));
+	sp3->Register(OnUsart3Read);
+	sp3->SetBaudRate(115200);
+	sp3->Open();
+
+	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
+	OCM240128Test();
+	Sys.Start();
 }

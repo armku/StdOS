@@ -66,13 +66,8 @@ bool SerialPort::Flush(int times)
   return times > 0;
 }
 void SerialPort::SetBaudRate(int baudRate)
-{
-	#if 0
-	this->Set(this->Index,baudRate);
-	#else
+{	
 	this->_baudRate=baudRate;
-	this->OnOpen();
-	#endif	
 }
 
 

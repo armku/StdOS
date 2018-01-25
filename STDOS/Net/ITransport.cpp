@@ -14,11 +14,24 @@ ITransport::~ITransport(){}
 // 打开传输口
 bool ITransport::Open()
 {
-    return this->OnOpen();
+	if (!this->Opened)
+		this->OnOpen();
+	this->Opened = true;
+	if (!this->Opened)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 // 关闭传输口
-void ITransport::Close(){}
+void ITransport::Close()
+{
+	this->Opened = false;
+}
 
 // 发送数据
 bool ITransport::Write(const Buffer &bs)
