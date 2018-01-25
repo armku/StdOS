@@ -58,12 +58,12 @@ int main(void)
 
 	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
-	sp3 = new SerialPort(COM3);
+	/*sp3 = new SerialPort(COM3);
 	sp3->Rx.SetBuf(com3rx, ArrayLength(com3rx));
 	sp3->Tx.SetBuf(com3tx, ArrayLength(com3tx));
 	sp3->Register(OnUsart3Read);
 	sp3->SetBaudRate(38400);
-	sp3->Open();
+	sp3->Open();*/
 
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	Sys.Start();
