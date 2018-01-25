@@ -37,14 +37,7 @@ uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
     return 0;
 }
 
-uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
-{	    
-	bs.Show(true);	
-    return 0;
-}
-
-SerialPort *sp3;
-byte com3rx[500],com3tx[500];
+void GPSTest();
 
 int main(void)
 {
@@ -55,13 +48,8 @@ int main(void)
 #endif 	
 
 	SerialPort::GetMessagePort()->Register(OnUsart1Read);
-
-	sp3 = new SerialPort(COM3);
-	sp3->Rx.SetBuf(com3rx, ArrayLength(com3rx));
-	sp3->Tx.SetBuf(com3tx, ArrayLength(com3tx));
-	sp3->Register(OnUsart3Read);
-	sp3->SetBaudRate(38400);
-	sp3->Open();
+		
+	GPSTest();
 
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	Sys.Start();
