@@ -1,6 +1,6 @@
 #include "App\LCDOCM.h"
 
-#define _OCM240128TEST
+//#define _OCM240128TEST
 #ifdef  _OCM240128TEST
 
 LCDOCM ocm;

@@ -34,27 +34,25 @@ void LedTask(void *param)
     //paaa1=!paaa1;
     paaa1 = 0;
 }
-uint time6cnt;
+
 uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
-	time6cnt++;
     //transport->Write(bs);
 	bs.Show(true);
     return 0;
 }
 
 uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
-{
-	time6cnt++;
-    transport->Write(bs);
-	bs.Show(true);
+{	
+    /*transport->Write(bs);
+	bs.Show(true);*/
+	debug_printf("hehe\r\n");
     return 0;
 }
 
 SerialPort *sp3;
-void OCM240128Test();
-
 byte com3rx[500],com3tx[500];
+
 int main(void)
 {
 	Sys.Init();
@@ -69,10 +67,9 @@ int main(void)
 	sp3->Rx.SetBuf(com3rx, ArrayLength(com3rx));
 	sp3->Tx.SetBuf(com3tx, ArrayLength(com3tx));
 	sp3->Register(OnUsart3Read);
-	sp3->SetBaudRate(115200);
+	sp3->SetBaudRate(38400);
 	sp3->Open();
 
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
-	OCM240128Test();
 	Sys.Start();
 }

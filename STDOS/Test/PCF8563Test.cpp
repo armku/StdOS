@@ -2,7 +2,7 @@
 #include "stdio.h"
 #include "Sys.h"
 
-#define _PCF8563TEST
+//#define _PCF8563TEST
 #ifdef _PCF8563TEST
 
 PCF8563 pcf;
