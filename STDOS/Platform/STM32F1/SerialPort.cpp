@@ -5,7 +5,6 @@
 //#include "_Core.h"
 #include "stm32f10x.h"
 
-
 #define UART_PINS {\
 /* TX   RX   CTS  RTS */	\
 PA9, PA10,PA11,PA12,/* USART1 */	\
@@ -25,7 +24,6 @@ PC12, PD2,P0,  P0,  /* UART5  */	\
 // »ñÈ¡Òý½Å
 void SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
 {
-
     *rxPin =  *txPin = P0;
 
     const Pin g_Uart_Pins[] = UART_PINS;

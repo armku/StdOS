@@ -10,8 +10,8 @@ byte USART1_TX_BUF[USART3_MAX_RECV_LEN]; 					//串口1,发送缓存区
 uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
 	bs.Show(true);
-	gps1216.Analysis((byte*)USART1_TX_BUF);//分析字符串
-	gps1216.Show();				//显示信息	
+//	gps1216.Analysis((byte*)USART1_TX_BUF);//分析字符串
+//	gps1216.Show();				//显示信息	
 	return 0;
 }
 
@@ -43,7 +43,7 @@ void GPSTest()
 		printf("%s", "S1216F8-BD Set Done!!");
 		delay_ms(500);
 	}
-	#endif
+#endif
 }
 #if 0
 //发送一批数据给SkyTraF8-BD，这里通过串口3发送
