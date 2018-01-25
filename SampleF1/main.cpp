@@ -12,9 +12,6 @@
 #include "TTime.h"
 #include "Drivers\RX8025T.h"
 
-//InputPort paa11(PA11,false);
-OutputPort paaa1(PA11);
-
 #if 1
     OutputPort led1(PB0, false);
     OutputPort led2(PF7, false);
@@ -31,8 +28,6 @@ void LedTask(void *param)
     auto leds = (OutputPort*)param;
     *leds = ! * leds;
     //    led2 = key0;
-    //paaa1=!paaa1;
-    paaa1 = 0;
 }
 
 uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)

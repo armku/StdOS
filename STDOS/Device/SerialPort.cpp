@@ -70,7 +70,6 @@ void SerialPort::SetBaudRate(int baudRate)
 	this->_baudRate=baudRate;
 }
 
-
 void SerialPort::ChangePower(int level)
 {
 	if (level)
