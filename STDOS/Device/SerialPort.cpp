@@ -157,11 +157,6 @@ void SerialPort::ReceiveTask()
 	((Task*)(this->_task))->Set(false,20);
 }
 
-//空闲中断收到数据接收完成。
-void SerialPort::ReceiveTask3()
-{
-	((Task*)(this->_task))->Set(true,0);	
-}
 static char *itoa(int value, char *string, int radix)
 {
     int i, d;

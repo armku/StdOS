@@ -77,16 +77,14 @@ private:
 
 	void*	_task;
 	uint	_taskidRx;
-	//void ReceiveTask();
+	void ReceiveTask();
 
 	void OnInit();
 	bool OnSet();
 	void OnOpen2();
 	void OnClose2();
 	void OnWrite2();//调用发送中断
-public:
-	void ReceiveTask();//临时修改
-	void ReceiveTask3();//空闲中断收到数据接收完成。
+public:	
 	void Printf(char *Data, ...);//模拟printf
 };
 

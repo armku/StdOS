@@ -13,7 +13,7 @@ void SerialPort_Closeing()
 }
 void SerialPort::OnRxHandler()
 {
-	((Task*)(this->_task))->Set(true,20);	
+	((Task*)(this->_task))->Set(true,0);	
 }
 void SerialPort::OnTxHandler()
 {
