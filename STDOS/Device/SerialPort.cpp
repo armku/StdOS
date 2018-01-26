@@ -154,7 +154,7 @@ void SerialPort::ReceiveTask()
 	Buffer bs(buf,ArrayLength(buf));
 	this->Rx.Read(bs);
 	this->OnReceive(bs,this); 
-	((Task*)(this->_task))->Set(false,20);
+	((Task*)(this->_task))->Set(false,0);
 }
 
 static char *itoa(int value, char *string, int radix)
