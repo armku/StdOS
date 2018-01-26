@@ -157,10 +157,6 @@ void SerialPort::ReceiveTask()
 	((Task*)(this->_task))->Set(false,20);
 }
 
-void SerialPort::ReceiveTask2()
-{
-	((Task*)(this->_task))->Set(true,20);	
-}
 //空闲中断收到数据接收完成。
 void SerialPort::ReceiveTask3()
 {
