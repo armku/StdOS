@@ -1,9 +1,12 @@
 #include <string.h>
 #include <stdio.h>
 #include "GPS.h"
+#include "Sys.h"
 
 GPS_S1216::GPS_S1216()
 {
+	this->gpsx.ewhemi = 'E';
+	this->gpsx.nshemi = 'N';
 }
 
 //从buf里面得到第cx个逗号所在的位置
@@ -301,20 +304,20 @@ void GPS_S1216::Show()
 	const byte*fixmode_tbl[4] = { "Fail","Fail"," 2D "," 3D " };	//fix mode字符串 
 	float tp;
 	tp = this->gpsx.longitude;
-	printf("Longitude:%.5f %1c   ", tp /= 100000, this->gpsx.ewhemi);	//得到经度字符串
+	debug_printf("Longitude:%.5f %1c   ", tp /= 100000, this->gpsx.ewhemi);	//得到经度字符串
 	tp = this->gpsx.latitude;
-	printf("Latitude:%.5f %1c   ", tp /= 100000, this->gpsx.nshemi);	//得到纬度字符串
+	debug_printf("Latitude:%.5f %1c   ", tp /= 100000, this->gpsx.nshemi);	//得到纬度字符串
 	tp = this->gpsx.altitude;
-	printf("Altitude:%.1fm     ", tp /= 10);	    			//得到高度字符串
+	debug_printf("Altitude:%.1fm     ", tp /= 10);	    			//得到高度字符串
 	tp = this->gpsx.speed;
-	printf("Speed:%.3fkm/h     ", tp /= 1000);		    		//得到速度字符串	
+	debug_printf("Speed:%.3fkm/h     ", tp /= 1000);		    		//得到速度字符串	
 	if (this->gpsx.fixmode <= 3)														//定位状态
 	{
-		printf("Fix Mode:%s", fixmode_tbl[this->gpsx.fixmode]);
+		debug_printf("Fix Mode:%s", fixmode_tbl[this->gpsx.fixmode]);
 	}
-	printf("GPS+BD Valid satellite:%02d", this->gpsx.posslnum);	 		//用于定位的GPS卫星数
-	printf("GPS Visible satellite:%02d", this->gpsx.svnum % 100);	 		//可见GPS卫星数
-	printf("BD Visible satellite:%02d", this->gpsx.beidou_svnum % 100);	 		//可见北斗卫星数
-	printf("UTC Date:%04d/%02d/%02d   ", this->gpsx.utc.year, this->gpsx.utc.month, this->gpsx.utc.date);	//显示UTC日期
-	printf("UTC Time:%02d:%02d:%02d   ", this->gpsx.utc.hour, this->gpsx.utc.min, this->gpsx.utc.sec);	//显示UTC时间
+	debug_printf("GPS+BD Valid satellite:%02d", this->gpsx.posslnum);	 		//用于定位的GPS卫星数
+	debug_printf("GPS Visible satellite:%02d", this->gpsx.svnum % 100);	 		//可见GPS卫星数
+	debug_printf("BD Visible satellite:%02d", this->gpsx.beidou_svnum % 100);	 		//可见北斗卫星数
+	debug_printf("UTC Date:%04d/%02d/%02d   ", this->gpsx.utc.year, this->gpsx.utc.month, this->gpsx.utc.date);	//显示UTC日期
+	debug_printf("UTC Time:%02d:%02d:%02d   ", this->gpsx.utc.hour, this->gpsx.utc.min, this->gpsx.utc.sec);	//显示UTC时间
 }
