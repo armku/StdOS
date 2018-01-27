@@ -1,5 +1,5 @@
 #include "FSMC.h"
-#include "stm32f4xx.h"
+#include "Platform\stm32.h"
 
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))

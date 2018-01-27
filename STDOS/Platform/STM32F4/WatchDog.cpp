@@ -1,6 +1,5 @@
 #include "WatchDog.h"
-#include "stm32f4xx.h"
-
+#include "Platform\stm32.h"
 
 int SetWatchDog( unsigned int a2)
 {

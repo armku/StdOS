@@ -1,7 +1,7 @@
 #include "SerialPort.h"
 #include "TInterrupt.h"
 #include "Timer.h"
-#include "stm32f4xx.h"
+#include "Platform\stm32.h"
 
 #define NVIC_OFFSET					 ((uint)0x1000)
 #define ISRADDR (NVIC_VectTab_RAM+NVIC_OFFSET)

@@ -1,5 +1,5 @@
 #include "Pwm.h"
-#include "stm32f4xx.h"
+#include "Platform\stm32.h"
 
 /*
 TIM2 PA0,PA1,PA2,PA3

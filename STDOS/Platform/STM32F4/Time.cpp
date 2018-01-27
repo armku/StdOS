@@ -4,7 +4,7 @@
 #include "TTime.h"
 #include "Device\RTC.h"
 #include "Device\Timer.h"
-#include "stm32f4xx.h"
+#include "Platform\stm32.h"
 
 extern Timer *timerTick;
 extern Delegate < Timer & > abc;

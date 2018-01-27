@@ -1,7 +1,7 @@
-﻿#ifndef _PIN_STM32F4_H_
+#ifndef _PIN_STM32F4_H_
 #define _PIN_STM32F4_H_
 
-#include "Pin.h"
+#include "../Pin.h"
 
 /* 通用同步/异步收发器(USART)针脚 ------------------------------------------------------------------*/
 #ifdef STM32F427X 

@@ -1,5 +1,5 @@
 #include "Port.h"
-#include "stm32f4xx.h"
+#include "Platform\stm32.h"
 
 GPIO_TypeDef *IndexToGroup(byte index);
 

@@ -28,8 +28,7 @@ TIM1 TIM8
 */
 #include "Timer.h"
 #include "TInterrupt.h"
-#include "stm32f4xx.h"
-
+#include "Platform\stm32.h"
 
 uint Timer::GetCounter()
 {

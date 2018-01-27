@@ -2,7 +2,7 @@
 #include "TTime.h"
 #include "SerialPort.h"
 #include "Task.h"
-#include "stm32f4xx.h"
+#include "Platform\stm32.h"
 
 #define UART_PINS {\
 /* TX   RX   CTS  RTS */	\
@@ -73,7 +73,7 @@ void OnUsartReceive(ushort num, void *param)
         //数据帧接收完毕
         {
             ch = USART_ReceiveData(g_Uart_Ports[sp->Index]); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
-			sp->ReceiveTask3();			
+			sp->OnRxHandler();			
         }
 		/* 处理发送缓冲区空中断 */
 		if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_TXE) != RESET)
