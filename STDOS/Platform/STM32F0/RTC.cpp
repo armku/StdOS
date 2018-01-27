@@ -1,6 +1,6 @@
 #include "RTC.h"
 #include "TTime.h"
-#include "stm32f0xx.h"
+#include "Platform\stm32.h"
 
 int AlarmHandler(void *a2, int a3, int a4)
 {

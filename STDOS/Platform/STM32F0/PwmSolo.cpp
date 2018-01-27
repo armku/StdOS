@@ -1,5 +1,5 @@
 #include "PwmSolo.h"
-#include "stm32f0xx.h"
+#include "Platform\stm32.h"
 
 void PwmSolo::OnOpen2()
 {	

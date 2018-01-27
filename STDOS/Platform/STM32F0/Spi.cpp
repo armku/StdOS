@@ -1,7 +1,6 @@
 #include "Sys.h"
 #include "Spi.h"
-#include "stm32f0xx.h"
-
+#include "Platform\stm32.h"
 
 /* 串行外设接口(SPI)针脚 ------------------------------------------------------------------*/
 //#define SPI_NSS_PINS  {4, 28, 15} // PA4, PB12, PA15

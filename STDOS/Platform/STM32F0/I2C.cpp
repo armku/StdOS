@@ -1,5 +1,5 @@
 #include "I2C.h"
-#include "stm32f0xx.h"
+#include "Platform\stm32.h"
 
 bool HardI2C::SendAddress(int addr, bool tx)
 {

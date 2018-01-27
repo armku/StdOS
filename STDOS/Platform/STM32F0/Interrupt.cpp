@@ -1,7 +1,7 @@
 #include "SerialPort.h"
 #include "TInterrupt.h"
 #include "Timer.h"
-#include "stm32f0xx.h"
+#include "Platform\stm32.h"
 
 #define NVIC_VectTab_RAM             ((uint)0x20000000)
 #define NVIC_VectTab_FLASH           ((uint)0x08000000)

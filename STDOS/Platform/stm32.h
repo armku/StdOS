@@ -1,4 +1,4 @@
-﻿#ifndef __STM32_H
+#ifndef __STM32_H
 #define __STM32_H
 
 #if !defined(STM32F0) && !defined(STM32F1) && !defined(STM32F4) && !defined(GD32F150)
@@ -66,7 +66,7 @@
 	#include "stm32f3xx.h"
 #elif defined(STM32F0)
 	#include "stm32f0xx.h"
-	#include "Pin_STM32F0.h"
+	#include "STM32F0/Pin_STM32F0.h"
 #elif defined(GD32F150)
 	#include "stm32f0xx.h"
 #else
