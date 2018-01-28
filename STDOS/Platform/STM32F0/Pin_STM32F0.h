@@ -1,4 +1,4 @@
-﻿#ifndef _PIN_STM32F0_H_
+#ifndef _PIN_STM32F0_H_
 #define _PIN_STM32F0_H_ 1
 
 #include "..\Pin.h"
@@ -10,7 +10,7 @@
 	//PA9		PA10	COM1	AF1
 	//PA14		PA15	COM2	AF1
 	//PB6		PB7		COM1	AF0
-#if defined (STM32F0XX_MD) || defined (STM32F030X8)
+#if defined (STM32F0XX_MD) || defined (STM32F030X8) || defined (STM32F072)
 	#define UARTS {USART1, USART2}
 	#define UART_IRQs {USART1_IRQn, USART2_IRQn}
 	#define UART_PINS {\
@@ -37,7 +37,7 @@
 #endif
 
 /* 定时器针脚 ------------------------------------------------------------------*/
-#if defined (STM32F0XX_MD) || defined (STM32F030X8)
+#if defined (STM32F0XX_MD) || defined (STM32F030X8) || defined (STM32F072)
 	#define TIMS {TIM1, TIM2, TIM3, 0, 0, TIM6, 0, 0, 0, 0, 0, 0, 0, TIM14, TIM15, TIM16, TIM17}
 	#define TIM_IRQns {TIM1_BRK_UP_TRG_COM_IRQn, TIM2_IRQn, TIM3_IRQn, 0, 0, TIM6_DAC_IRQn, 0, 0, 0, 0, 0, 0, 0, TIM14_IRQn, TIM15_IRQn, TIM16_IRQn, TIM17_IRQn}
 #elif defined (STM32F0XX_LD) || defined (STM32F030X6)
