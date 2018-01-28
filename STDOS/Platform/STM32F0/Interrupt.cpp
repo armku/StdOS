@@ -407,10 +407,12 @@ void CInterrupt::TIM6_DAC_IRQHandler()
 void CInterrupt::TIM7_IRQHandler()
 {
     TIM_ClearITPendingBit(TIM7, TIM_IT_Update); //先清空中断标志位，以备下次使用。
-    if (onIsr[TIM7_IRQn])
+    #if 0
+	if (onIsr[TIM7_IRQn])
     {
         ((Timer*)onIsr[TIM7_IRQn])->OnInterrupt();
     }
+	#endif
 }
 
 void GPIO_ISR(int num);

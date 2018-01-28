@@ -165,7 +165,9 @@ void Timer::Config()
             TIM_ClearFlag(TIM7, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
             TIM_Cmd(TIM7, ENABLE);
             RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE); /*先关闭等待使用*/
+			#if 0
             Interrupt.SetPriority(TIM7_IRQn, 3); //TIM7_IRQn
+			#endif
             break;
         case Timer8:
             break;
@@ -453,7 +455,9 @@ void Timer::Register(const Delegate < Timer & >  &dlg)
             	Interrupt.Activate(TIM6_DAC_IRQn, Timer::OnHandler, this);
             break;
         case Timer7:
+			#if 0
             Interrupt.Activate(TIM7_IRQn, Timer::OnHandler, this);
+			#endif
             break;
         case Timer8:
             break;

@@ -4,26 +4,9 @@
 #include "Task.h"
 #include "Platform\stm32.h"
 
-	#define UART_PINS {\
-    /* TX   RX   CTS  RTS */	\
-    PA9, PA10,PA11,PA12,/* USART1 */	\
-    PA2, PA3, PA0, PA1, /* USART2 */	\
-    PB10,PB11,PB13,PB14,/* USART3 */	\
-    PC10,PC11,P0,  P0,  /* UART4  */	\
-    PC12, PD2,P0,  P0,  /* UART5  */	\
-    }
-    #define UART_PINS_FULLREMAP {\
-    /* TX   RX   CTS  RTS */	\
-    PB6, PB7, PA11,PA12,/* USART1 AFIO_MAPR_USART1_REMAP */	\
-    PD5, PD6, PD3, PD4, /* USART2 AFIO_MAPR_USART2_REMAP */	\
-    PD8, PD9, PD11,PD12,/* USART3 AFIO_MAPR_USART3_REMAP_FULLREMAP */	\
-    PC10,PC11,P0,  P0,  /* UART4  */	\
-    PC12, PD2,P0,  P0,  /* UART5  */	\
-    }
 // 获取引脚
 void SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
 {
-
     *rxPin =  *txPin = P0;
 
     const Pin g_Uart_Pins[] = UART_PINS;
@@ -45,12 +28,7 @@ int SerialPort_Closeing(int result)
 {
 	return 0;
 }
-
-/////////////////////////////////////////////
 //////////////////////以下为移动/////////////
-/* 通用同步/异步收发器(USART)针脚 ------------------------------------------------------------------*/
-	#define UARTS {USART1, USART2, USART3}
-	#define UART_IRQs {USART1_IRQn,USART2_IRQn}
 // 真正的串口中断函数
 void OnUsartReceive(ushort num, void *param)
 {
@@ -136,9 +114,7 @@ void SerialPort::Register(TransportHandler handler, void *param)
 	this->_taskidRx= Sys.AddTask(&SerialPort::ReceiveTask,this,-1,-1,"serialrcv");
 	this->_task=Task::Get(this->_taskidRx);
 }
-
-	#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
-
+#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
 // 打开串口
 bool SerialPort::OnOpen()
 {    

@@ -38,7 +38,7 @@ void TTime::Init()
 		case 5:
 			break;
 		case 6:
-			NVIC_SetPriority(TIM7_IRQn, 0);
+			//NVIC_SetPriority(TIM7_IRQn, 0);
 			break;
 		default:
 			break;
