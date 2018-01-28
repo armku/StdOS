@@ -214,7 +214,6 @@ extern "C"
     uint *vsrom = (uint*)NVIC_VectTab_FLASH;
 }
 
-
 void FaultHandler(){}
 void FAULT_SubHandler(){}
 

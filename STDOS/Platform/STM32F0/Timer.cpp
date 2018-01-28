@@ -370,7 +370,6 @@ void Timer::OnHandler(ushort num, void *param)
         timer->OnInterrupt();
 }
 /////////////////////////////////以下为添加////////////////////
-
 static TIM_TypeDef *const g_Timers[] = TIMS;
 const byte Timer::TimerCount = ArrayLength(g_Timers);
 extern Timer **Timers; // 已经实例化的定时器对象

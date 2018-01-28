@@ -1,20 +1,6 @@
 #include "Pwm.h"
 #include "Platform\stm32.h"
 
-/*
-TIM2 PA0,PA1,PA2,PA3
-TIM3 PA6,PA7,PB0,PB1
-TIM4 PB6,PB7,PB8,PB9
-TIM5 
-remap
-
-TIM1 PE9,PE11,PE13,PE14
-TIM2 PA15,PB3,PB10,PB11
-TIM3 PC6,PC7,PC8,PC9
-TIM4 PD12,PD13,PD14,PD15
-TIM5 
-*/
-
 void Pwm::Open()
 {
     /*
@@ -162,8 +148,6 @@ void Pwm::Open()
     }
 }
 
-
-
 void Pwm::Close()
 {
     Timer::Close();
@@ -285,7 +269,6 @@ void PwmData::OnInterrupt(){
 
 }
 void PwmData::Config(){}
-/////////////////////////////////////////////////////////////
 ////////////////////////////////////////以下为添加
 void Pwm::SetPulse(int idx, ushort pulse)
 {
@@ -404,8 +387,6 @@ void Pwm::SetPulse(int idx, ushort pulse)
 			break;
 	}
 }
-
-
 #if 0
 	//呼吸灯例程
     Pwm pwm(Timer3);
