@@ -707,6 +707,61 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>nmea</GroupName>
+          <Files>
+            <File>
+              <FileName>context.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\context.c</FilePath>
+            </File>
+            <File>
+              <FileName>generate.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\generate.c</FilePath>
+            </File>
+            <File>
+              <FileName>generator.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\generator.c</FilePath>
+            </File>
+            <File>
+              <FileName>gmath.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\gmath.c</FilePath>
+            </File>
+            <File>
+              <FileName>info.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\info.c</FilePath>
+            </File>
+            <File>
+              <FileName>parse.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\parse.c</FilePath>
+            </File>
+            <File>
+              <FileName>parser.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\parser.c</FilePath>
+            </File>
+            <File>
+              <FileName>sentence.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\sentence.c</FilePath>
+            </File>
+            <File>
+              <FileName>time.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\time.c</FilePath>
+            </File>
+            <File>
+              <FileName>tok.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\tok.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
@@ -798,6 +853,11 @@
               <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\GPS_S1216.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS_ATGM332D.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\GPS_ATGM332D.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1253,6 +1313,11 @@
               <FileName>GPS_S1216Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\GPS_S1216Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS_ATGM332DTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\GPS_ATGM332DTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1959,6 +2024,61 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>nmea</GroupName>
+          <Files>
+            <File>
+              <FileName>context.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\context.c</FilePath>
+            </File>
+            <File>
+              <FileName>generate.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\generate.c</FilePath>
+            </File>
+            <File>
+              <FileName>generator.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\generator.c</FilePath>
+            </File>
+            <File>
+              <FileName>gmath.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\gmath.c</FilePath>
+            </File>
+            <File>
+              <FileName>info.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\info.c</FilePath>
+            </File>
+            <File>
+              <FileName>parse.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\parse.c</FilePath>
+            </File>
+            <File>
+              <FileName>parser.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\parser.c</FilePath>
+            </File>
+            <File>
+              <FileName>sentence.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\sentence.c</FilePath>
+            </File>
+            <File>
+              <FileName>time.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\time.c</FilePath>
+            </File>
+            <File>
+              <FileName>tok.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STDOS\Drivers\nmea\tok.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
@@ -2050,6 +2170,11 @@
               <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\GPS_S1216.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS_ATGM332D.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\GPS_ATGM332D.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2505,6 +2630,11 @@
               <FileName>GPS_S1216Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\GPS_S1216Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS_ATGM332DTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\GPS_ATGM332DTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
