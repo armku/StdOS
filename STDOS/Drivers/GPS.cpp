@@ -352,11 +352,11 @@ void GPS_S1216::Show()
 	debug_printf("速度:%.3fkm/h ", tp /= 1000);		    		//得到速度字符串	
 	if (this->gpsx.fixmode <= 3)														//定位状态
 	{
-		debug_printf("Fix Mode:%s", fixmode_tbl[this->gpsx.fixmode]);
+		debug_printf("定位模式:%s", fixmode_tbl[this->gpsx.fixmode]);
 	}
 	debug_printf("GPS+BD有效:%02d ", this->gpsx.posslnum);	 		//用于定位的GPS卫星数
 	debug_printf("GPS可见:%02d ", this->gpsx.svnum % 100);	 		//可见GPS卫星数
-	debug_printf("BD可见e:%02d ", this->gpsx.beidou_svnum % 100);	 		//可见北斗卫星数
+	debug_printf("BD可见:%02d ", this->gpsx.beidou_svnum % 100);	 		//可见北斗卫星数
 	debug_printf("UTC:%04d-%02d-%02d ", this->gpsx.utc.year, this->gpsx.utc.month, this->gpsx.utc.date);	//显示UTC日期
 	debug_printf("%02d:%02d:%02d", this->gpsx.utc.hour, this->gpsx.utc.min, this->gpsx.utc.sec);	//显示UTC时间
 }
