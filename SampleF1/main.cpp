@@ -50,7 +50,7 @@ int main(void)
 
 	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 		
-	GPS_ATGM332DTest();
+	GPSTest();
 
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	Sys.Start();
