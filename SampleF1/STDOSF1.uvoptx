@@ -1494,8 +1494,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\GPS.cpp</PathWithFileName>
-      <FilenameWithoutPath>GPS.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\STDOS\Drivers\GPS_S1216.cpp</PathWithFileName>
+      <FilenameWithoutPath>GPS_S1216.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1715,7 +1715,7 @@
 
   <Group>
     <GroupName>Platform</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2035,7 +2035,7 @@
 
   <Group>
     <GroupName>Test</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2538,8 +2538,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\GPSTest.cpp</PathWithFileName>
-      <FilenameWithoutPath>GPSTest.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\STDOS\Test\PCF8563Test.cpp</PathWithFileName>
+      <FilenameWithoutPath>PCF8563Test.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2550,8 +2550,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\PCF8563Test.cpp</PathWithFileName>
-      <FilenameWithoutPath>PCF8563Test.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\STDOS\Test\GPS_S1216Test.cpp</PathWithFileName>
+      <FilenameWithoutPath>GPS_S1216Test.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

@@ -795,9 +795,9 @@
               <FilePath>..\STDOS\Drivers\PCF8563.cpp</FilePath>
             </File>
             <File>
-              <FileName>GPS.cpp</FileName>
+              <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\GPS.cpp</FilePath>
+              <FilePath>..\STDOS\Drivers\GPS_S1216.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1245,14 +1245,14 @@
               <FilePath>..\STDOS\Test\OCM240128Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>GPSTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\GPSTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PCF8563Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PCF8563Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS_S1216Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\GPS_S1216Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2047,9 +2047,9 @@
               <FilePath>..\STDOS\Drivers\PCF8563.cpp</FilePath>
             </File>
             <File>
-              <FileName>GPS.cpp</FileName>
+              <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\GPS.cpp</FilePath>
+              <FilePath>..\STDOS\Drivers\GPS_S1216.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2497,14 +2497,14 @@
               <FilePath>..\STDOS\Test\OCM240128Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>GPSTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\GPSTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PCF8563Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PCF8563Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS_S1216Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\GPS_S1216Test.cpp</FilePath>
             </File>
           </Files>
         </Group>

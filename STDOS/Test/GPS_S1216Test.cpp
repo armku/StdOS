@@ -1,5 +1,5 @@
 #include "Sys.h"
-#include "Drivers\GPS.h"
+#include "Drivers\GPS_S1216.h"
 #include "Device\SerialPort.h"
 
 #define _GPSTEST
