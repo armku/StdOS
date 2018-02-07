@@ -2,7 +2,7 @@
 #include "Sys.h"
 #include "Device\SerialPort.h"
 
-#define _GPS_ATGM332DTest
+//#define _GPS_ATGM332DTest
 #ifdef _GPS_ATGM332DTest
 uint OnUsart2Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {

@@ -37,9 +37,6 @@ uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
     return 0;
 }
 
-void GPSTest();
-void GPS_ATGM332DTest();
-
 int main(void)
 {
 	Sys.Init();
@@ -49,9 +46,7 @@ int main(void)
 #endif 	
 
 	SerialPort::GetMessagePort()->Register(OnUsart1Read);
-		
-	GPSTest();
-
+			
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	Sys.Start();
 }
