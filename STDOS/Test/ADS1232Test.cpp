@@ -1,6 +1,6 @@
 #include "Drivers\ADS1232.h"
 
-//#define DEBUGADS1232Test
+#define DEBUGADS1232Test
 
 #ifdef DEBUGADS1232Test
     ADS1232 ads1232;
@@ -24,8 +24,8 @@
     }
     void ADS1232Test()
     {
-        ads1232.SetPin(PB14, PB13, PD5);
-        ads1232.Init();
+        ads1232.SetPin(PB14, PB13, PB12);
+        //ads1232.Init();
 
         key1232dout.Press = OnADS1232Read;
         key1232dout.UsePress();

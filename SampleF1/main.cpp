@@ -36,7 +36,7 @@ uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 	bs.Show(true);
     return 0;
 }
-
+void ADS1232Test();
 int main(void)
 {
 	Sys.Init();
@@ -44,6 +44,7 @@ int main(void)
 	Sys.MessagePort = COM1;
 	Sys.ShowInfo();
 #endif 	
+	ADS1232Test();
 
 	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 			
