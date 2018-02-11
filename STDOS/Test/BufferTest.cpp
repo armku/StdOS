@@ -1,7 +1,7 @@
 #include "Kernel\Sys.h"
 
-//#define _BUFFERTEST_H
-#ifdef _BUFFERTEST_H
+//#define _BUFFER_TEST_H
+#ifdef _BUFFER_TEST_H
 static void TestAssign()
 {
 	byte buf[]	= { 1, 2, 3, 4 };

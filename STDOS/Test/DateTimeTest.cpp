@@ -1,7 +1,7 @@
 #include "Kernel\Sys.h"
 
-//#define _DATETIMETEST_H
-#ifdef _DATETIMETEST_H
+//#define _DATETIME_TEST_H
+#ifdef _DATETIME_TEST_H
 static void TestCtor()
 {
 	TS("TestCtor");

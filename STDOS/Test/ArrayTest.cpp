@@ -1,7 +1,7 @@
 #include "Kernel\Sys.h"
 
-//#define _ARRAYTEST_H
-#ifdef _ARRAYTEST_H
+//#define _ARRAY_TEST_H
+#ifdef _ARRAY_TEST_H
 static void TestAssign()
 {
 	byte buf[] = {6,7,8,9};

@@ -1,8 +1,8 @@
 #include "App/FlushPort.h"
 
-//#define _FLUSHPORTTEST_H
+//#define _FLUSHPORT_TEST_H
 
-#ifdef _FLUSHPORTTEST_H
+#ifdef _FLUSHPORT_TEST_H
 
 	void FlushRoutin(void * param)
 	{

@@ -2,8 +2,8 @@
 #include "Device\Port.h"
 #include "Device\Timer.h"
 
-//#define _TIMERTEST_H
-#ifdef _TIMERTEST_H
+//#define _TIMER_TEST_H
+#ifdef _TIMER_TEST_H
 //Timer* timer;
 
 void TimerTask(OutputPort& led, Timer& timer)

@@ -15,9 +15,9 @@ K3:PE4
 #include "Port.h"
 #include "Platform\Pin.h"
 
-//#define DEBUGPortTest
+//#define _PORT_TEST_H
 
-#ifdef DEBUGPortTest
+#ifdef _PORT_TEST_H
 
     //≤‚ ‘¥˙¬Î
     extern OutputPort led2;

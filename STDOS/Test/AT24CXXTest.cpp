@@ -1,7 +1,7 @@
 #include "..\Drivers\AT24CXX.h"
- DEBUGAT24C02Test
 
-#ifdef _AT24CXX_TEST
+//#define _AT24CXX_TEST_H
+#ifdef _AT24CXX_TEST_H
     #define EE_SIZE				256			  /* 24xx02总容量 */    
     #ifdef STM32F0
         AT24CXX at2402(PB6, PB7, AT24C02);
@@ -89,4 +89,3 @@
         debug_printf("eeprom读写测试成功\r\n");
     }
 #endif
-

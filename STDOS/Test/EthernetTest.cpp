@@ -7,8 +7,8 @@
 //#include "TinyIP\Tcp.h"
 //#include "TinyIP\Udp.h"
 
-//#define ETHERNET_TEST
-#ifdef ETHERNET_TEST
+//#define _ETHERNET_TEST_H
+#ifdef _ETHERNET_TEST_H
 TinyIP* tip;
 
 bool OnPing(IcmpSocket* socket, ICMP_HEADER* icmp, byte* buf, uint len)

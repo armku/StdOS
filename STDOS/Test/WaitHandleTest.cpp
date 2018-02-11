@@ -1,8 +1,8 @@
 #include "Sys.h"
 #include "WaitHandle.h"
 
-//#define WAITHANDLETEST
-#ifdef WAITHANDLETEST
+//#define _WAITHANDLE_TEST_H
+#ifdef _WAITHANDLE_TEST_H
 
 void WaitHandletest1(void * param)
 {

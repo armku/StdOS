@@ -4,8 +4,8 @@
 //#include "TinyNet\TinyClient.h"
 //#include "TinyNet\TinyMessage.h"
 
-//#define _MESSAGE_TEST
-#ifdef _MESSAGE_TEST
+//#define _MESSAGE_TEST_H
+#ifdef _MESSAGE_TEST_H
 // 消息处理函数
 bool OpenLed(Message& msg, void* param)
 {

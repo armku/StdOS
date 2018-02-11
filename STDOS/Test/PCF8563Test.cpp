@@ -2,8 +2,8 @@
 #include "stdio.h"
 #include "Sys.h"
 
-//#define _PCF8563TEST
-#ifdef _PCF8563TEST
+//#define _PCF8563_TEST_H
+#ifdef _PCF8563_TEST_H
 
 PCF8563 pcf;
 

@@ -2,8 +2,8 @@
 #include "Drivers\GPS_S1216.h"
 #include "Device\SerialPort.h"
 
-//#define _GPSTEST
-#ifdef _GPSTEST
+//#define _GPS_TEST_H
+#ifdef _GPS_TEST_H
 GPS_S1216 gps1216;
 #define USART3_MAX_RECV_LEN		600					//最大接收缓存字节数
 byte USART1_TX_BUF[USART3_MAX_RECV_LEN]; 					//串口1,发送缓存区

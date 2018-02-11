@@ -1,8 +1,8 @@
 #include "Kernel\Sys.h"
 //#include "Message\Json.h"
 
-//#define _JSON_TEST
-#ifdef _JSON_TEST
+//#define _JSON_TEST_H
+#ifdef _JSON_TEST_H
 static cstring jsonstr =
 "{\
 	\"id\": 3141,			\

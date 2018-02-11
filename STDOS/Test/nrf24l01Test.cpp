@@ -1,7 +1,7 @@
 #include "Drivers\NRF24L01.h"
 
-//#define _NRF24L01TEST_H
-#ifdef _NRF24L01TEST_H
+//#define _NRF24L01_TEST_H
+#ifdef _NRF24L01_TEST_H
 
 extern NRF24L01* Create2401();
 

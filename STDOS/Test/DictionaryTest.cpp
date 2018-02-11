@@ -1,8 +1,8 @@
 #include "Kernel\Sys.h"
 //#include "Core\Dictionary.h"
 
-//#define _DICTIONARY_TEST
-#ifdef _DICTIONARY_TEST
+//#define _DICTIONARY_TEST_H
+#ifdef _DICTIONARY_TEST_H
 void IDictionary::Test()
 {
 	TS("TestDictionary");

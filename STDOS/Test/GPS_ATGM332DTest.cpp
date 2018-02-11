@@ -2,8 +2,8 @@
 #include "Sys.h"
 #include "Device\SerialPort.h"
 
-//#define _GPS_ATGM332DTest
-#ifdef _GPS_ATGM332DTest
+//#define _GPS_ATGM332D_TEST_H
+#ifdef _GPS_ATGM332D_TEST_H
 uint OnUsart2Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
 		bs.Show(true);
