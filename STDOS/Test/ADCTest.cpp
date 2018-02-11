@@ -1,7 +1,8 @@
 #include "Kernel\Sys.h"
-#if 0
-#include "Device\ADC.h"
+//#include "Device\ADC.h"
 
+//#define _ADC_TEST
+#ifdef _ADC_TEST
 void TestADC()
 {
     debug_printf("\r\n\r\n");

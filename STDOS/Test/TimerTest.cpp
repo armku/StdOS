@@ -2,7 +2,7 @@
 #include "Device\Port.h"
 #include "Device\Timer.h"
 
-#define _TIMERTEST_H
+//#define _TIMERTEST_H
 #ifdef _TIMERTEST_H
 //Timer* timer;
 

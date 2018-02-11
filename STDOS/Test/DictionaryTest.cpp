@@ -1,8 +1,8 @@
 #include "Kernel\Sys.h"
-#if 0
-#include "Core\Dictionary.h"
+//#include "Core\Dictionary.h"
 
-#if DEBUG
+//#define _DICTIONARY_TEST
+#ifdef _DICTIONARY_TEST
 void IDictionary::Test()
 {
 	TS("TestDictionary");
@@ -79,5 +79,4 @@ void IDictionary::Test()
 
 	debug_printf("TestDictionary测试完毕......\r\n");
 }
-#endif
 #endif

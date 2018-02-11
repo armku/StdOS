@@ -1,13 +1,14 @@
 #include "Kernel\Sys.h"
-#if 0
-#include "Drivers\Enc28j60.h"
+//#include "Drivers\Enc28j60.h"
 #include "Device\SerialPort.h"
-#include "TinyIP\TinyIP.h"
-#include "TinyIP\Arp.h"
-#include "TinyIP\Icmp.h"
-#include "TinyIP\Tcp.h"
-#include "TinyIP\Udp.h"
+//#include "TinyIP\TinyIP.h"
+//#include "TinyIP\Arp.h"
+//#include "TinyIP\Icmp.h"
+//#include "TinyIP\Tcp.h"
+//#include "TinyIP\Udp.h"
 
+//#define ETHERNET_TEST
+#ifdef ETHERNET_TEST
 TinyIP* tip;
 
 bool OnPing(IcmpSocket* socket, ICMP_HEADER* icmp, byte* buf, uint len)

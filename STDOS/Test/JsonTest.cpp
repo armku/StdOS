@@ -1,8 +1,8 @@
 #include "Kernel\Sys.h"
-#if 0
-#include "Message\Json.h"
+//#include "Message\Json.h"
 
-#if DEBUG
+//#define _JSON_TEST
+#ifdef _JSON_TEST
 static cstring jsonstr =
 "{\
 	\"id\": 3141,			\
@@ -130,5 +130,4 @@ void Json::Test()
 	debug_printf("TestJson 测试完毕......\r\n");
 
 }
-#endif
 #endif

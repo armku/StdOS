@@ -1,6 +1,6 @@
 #include "..\Drivers\AT24CXX.h"
 
-#define DEBUGAT24C02Test
+//#define DEBUGAT24C02Test
 
 #ifdef DEBUGAT24C02Test
     #define EE_SIZE				256			  /* 24xx02×ÜÈÝÁ¿ */    

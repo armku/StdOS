@@ -1,7 +1,7 @@
 #include "Drivers\DS18B20.h"
 #include "Sys.h"
 
-#define DEBUGds18b20test
+//#define DEBUGds18b20test
 
 #ifdef DEBUGds18b20test
 	DS18B20 ds18;

@@ -1,7 +1,8 @@
-#if 0
-#include "App\PulsePort.h"
+//#include "App\PulsePort.h"
 #include "Device\Port.h"
 
+//#define _PORT_TEST
+#ifdef _PORT_TEST
 void InitPort();
 
 void TestPulsePort()

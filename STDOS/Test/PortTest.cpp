@@ -15,7 +15,7 @@ K3:PE4
 #include "Port.h"
 #include "Platform\Pin.h"
 
-#define DEBUGPortTest
+//#define DEBUGPortTest
 
 #ifdef DEBUGPortTest
 

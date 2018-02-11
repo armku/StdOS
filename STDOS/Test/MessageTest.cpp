@@ -1,11 +1,11 @@
 #include "Kernel\Sys.h"
 #include "Device\SerialPort.h"
 #include "Drivers\NRF24L01.h"
-#if 0
-#include "TinyNet\TinyClient.h"
+//#include "TinyNet\TinyClient.h"
+//#include "TinyNet\TinyMessage.h"
 
-#include "TinyNet\TinyMessage.h"
-
+//#define _MESSAGE_TEST
+#ifdef _MESSAGE_TEST
 // 消息处理函数
 bool OpenLed(Message& msg, void* param)
 {

@@ -1,6 +1,6 @@
 #include "Drivers\ADS1232.h"
 
-#define DEBUGADS1232Test
+//#define DEBUGADS1232Test
 
 #ifdef DEBUGADS1232Test
     ADS1232 ads1232;

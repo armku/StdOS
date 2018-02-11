@@ -1,7 +1,7 @@
 #include "Drivers\AD7124.h"
 #include "Drivers\AD7124def.h"
 
-#define DEBUGad71248Test
+//#define DEBUGad71248Test
 
 #ifdef DEBUGad71248Test
 /*******************************************************************************
