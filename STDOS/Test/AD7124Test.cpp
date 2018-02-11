@@ -1,9 +1,9 @@
 #include "Drivers\AD7124.h"
 #include "Drivers\AD7124def.h"
 
-//#define DEBUGad71248Test
+//#define _AD7124_TEST
 
-#ifdef DEBUGad71248Test
+#ifdef _AD7124_TEST
 /*******************************************************************************
  * @function	: GetTemp1
  * @brief		: »ñÈ¡ÎÂ¶È1

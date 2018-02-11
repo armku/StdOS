@@ -1,8 +1,8 @@
 #include "Drivers\ADS1246.h"
 
-//#define DEBUGADS1246Test
+//#define _ADS1246_TEST
 
-#ifdef DEBUGADS1246Test
+#ifdef _ADS1246_TEST
 	void SetEXIT(int pinIndex, bool enable,InputPort::Trigger trigger);
     InputPort exti_1(PD5); //1246ÖÐ¶Ï½Ó¿Ú
     #if ADS1246SPISOFT

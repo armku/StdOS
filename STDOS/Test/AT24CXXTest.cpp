@@ -1,8 +1,7 @@
 #include "..\Drivers\AT24CXX.h"
+ DEBUGAT24C02Test
 
-//#define DEBUGAT24C02Test
-
-#ifdef DEBUGAT24C02Test
+#ifdef _AT24CXX_TEST
     #define EE_SIZE				256			  /* 24xx02×ÜÈÝÁ¿ */    
     #ifdef STM32F0
         AT24CXX at2402(PB6, PB7, AT24C02);

@@ -1,8 +1,8 @@
 #include "Drivers\ADS1232.h"
 
-//#define DEBUGADS1232Test
+//#define _ADS1232_TEST
 
-#ifdef DEBUGADS1232Test
+#ifdef _ADS1232_TEST
     ADS1232 ads1232;
     int ads1232doutcnt;
     float ads1232value;
