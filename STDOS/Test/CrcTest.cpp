@@ -1,7 +1,8 @@
 #include "Kernel\Sys.h"
-#if 0
 #include "Security\Crc.h"
 
+//#define _CRC_TEST_H
+#ifdef _CRC_TEST_H
 static const uint DataBuffer[] =
 {
     0x00001021, 0x20423063, 0x408450a5, 0x60c670e7, 0x9129a14a, 0xb16bc18c,

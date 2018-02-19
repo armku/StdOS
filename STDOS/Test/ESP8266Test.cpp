@@ -5,9 +5,9 @@
 #include "SerialPort.h"
 #include "Sys.h"
 
-//#define ESP8266TEST
+//#define _ESP8266_TEST_H
 
-#ifdef ESP8266TEST   
+#ifdef _ESP8266_TEST_H   
 
     Esp8266 esp;
        

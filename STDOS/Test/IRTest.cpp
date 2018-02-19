@@ -1,8 +1,8 @@
-#if 0
-#include "App\IR.h"
+//#include "App\IR.h"
 #include "Kernel\Sys.h"
 
-
+//#define _IR_TEST_H
+#ifdef _IR_TEST_H
 /* ∫ÏÕ‚
 Pwm * IRFREQ()
 {

@@ -1,8 +1,9 @@
 #include "Kernel\Sys.h"
-#if 0
-#include "Message/BinaryPair.h"
-#include "TokenNet/TokenClient.h"
+//#include "Message/BinaryPair.h"
+//#include "TokenNet/TokenClient.h"
 
+//#define _INVOKE_TEST_H
+#ifdef _INVOKE_TEST_H
 bool InvokeFun(void* param, const Pair& args, Stream& result)
 {
 	byte rt;

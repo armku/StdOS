@@ -1,8 +1,8 @@
 #include "Drivers\RX8025T.h"
 
-//#define DEBUGRX8025Test
+//#define _RX8025T_TEST_H
 
-#ifdef DEBUGRX8025Test
+#ifdef _RX8025T_TEST_H
     //RX8025T rx8025(PB6, PB7);
     RX8025T rx8025(PC1, PC2);
     DateTime now;

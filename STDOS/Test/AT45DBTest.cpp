@@ -1,7 +1,7 @@
 #include "Drivers\AT45DB.h"
 
-//#define _AT45DBTEST_H
-#ifdef _AT45DBTEST_H
+//#define _AT45DB_TEST_H
+#ifdef _AT45DB_TEST_H
 const byte Tx_Buffer[] = "STM32F10x SPI Firmware Library Example: communication with an AT45DB SPI FLASH";
 Spi* _spi;
 

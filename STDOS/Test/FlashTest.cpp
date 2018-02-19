@@ -1,8 +1,8 @@
 #include "Device\Flash.h"
 #include <stdlib.h>
 
-//#define _FLASHTEST_H
-#ifdef _FLASHTEST_H
+//#define _FLASH_TEST_H
+#ifdef _FLASH_TEST_H
 void TestFlash()
 {
     debug_printf("\r\n\r\n");

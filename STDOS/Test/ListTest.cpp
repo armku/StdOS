@@ -1,8 +1,8 @@
 #include "Kernel\Sys.h"
 #include "Core\List.h"
 
-//#define _LISTTEST_H 
-#ifdef _LISTTEST_H
+//#define _LIST_TEST_H 
+#ifdef _LIST_TEST_H
 static void TestEntity(IList& list)
 {
 	//不同长度的原始数据

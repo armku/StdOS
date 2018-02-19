@@ -1,8 +1,9 @@
 #include "Kernel\Sys.h"
 #include "Device\Port.h"
-#if 0
 #include "Kernel\Thread.h"
 
+//#define _THREAD_TEST_H
+#ifdef _THREAD_TEST_H
 Thread* th;
 
 void ThreadTask(void* param)

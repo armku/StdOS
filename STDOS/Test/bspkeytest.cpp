@@ -1,9 +1,9 @@
 #include "App/bspkey.h"
 #include "Port.h"
 
-//#define DEBUGkeyTest
+//#define _BSPKEY_TEST_H
 
-#ifdef DEBUGkeyTest
+#ifdef _BSPKEY_TEST_H
 
     void readkeyroutin(void *param)
     {

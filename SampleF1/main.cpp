@@ -44,7 +44,7 @@ int main(void)
 	Sys.MessagePort = COM1;
 	Sys.ShowInfo();
 #endif 	
-	ADS1232Test();
+	//ADS1232Test();
 
 	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 			
