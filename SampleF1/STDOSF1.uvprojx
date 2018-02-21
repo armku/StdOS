@@ -859,6 +859,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\GPS_ATGM332D.cpp</FilePath>
             </File>
+            <File>
+              <FileName>DS1302.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\DS1302.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1318,6 +1323,11 @@
               <FileName>GPS_ATGM332DTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\GPS_ATGM332DTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS1302Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\DS1302Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2176,6 +2186,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\GPS_ATGM332D.cpp</FilePath>
             </File>
+            <File>
+              <FileName>DS1302.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\DS1302.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2635,6 +2650,11 @@
               <FileName>GPS_ATGM332DTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\GPS_ATGM332DTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS1302Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\DS1302Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
