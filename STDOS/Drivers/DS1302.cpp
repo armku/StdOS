@@ -89,15 +89,13 @@ void DS1302::set1302()
 {
 	byte   i;
 	this->prst = 1;
-	for (i = 0; i < 180; i++)
-		;
+	Sys.Delay(10);
 }
 void DS1302::reset1302()
 {
 	byte   i;
 	this->prst = 0;
-	for (i = 0; i < 180; i++)
-		;
+	Sys.Delay(10);
 }
 /********************************************************************
 *
@@ -122,11 +120,11 @@ void DS1302::Bytein(byte ucDa)
 		{
 			this->pio = 0; /*相当于汇编中的 RRC */
 		}
-		Sys.Delay(2);
+		Sys.Delay(1);
 		this->psck = 1;
-		Sys.Delay(2);
+		Sys.Delay(1);
 		this->psck = 0;
-		Sys.Delay(2);
+		Sys.Delay(1);
 		ucDa = ucDa >> 1;
 	}
 }
@@ -152,11 +150,11 @@ byte DS1302::Byteout()
 		{
 			ucDa |= 0X80;
 		}
-		Sys.Delay(2);
+		Sys.Delay(1);
 		this->psck = 1;
-		Sys.Delay(2);
+		Sys.Delay(1);
 		this->psck = 0;
-		Sys.Delay(2);
+		Sys.Delay(1);
 	}
 	return (ucDa);
 }
