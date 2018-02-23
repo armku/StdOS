@@ -34,7 +34,8 @@
             virtual bool Write(uint addr, const Buffer &bs)const;
             virtual bool Read(uint addr, Buffer &bs)const;
         public:
-            AT24CXX(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr = 0xA0, uint wnms = 5); //写延时时间       
+            AT24CXX(EW24XXType devtype, byte devaddr = 0xA0, uint wnms = 5); //写延时时间
+			void SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect = P0);
             byte CheckOk();
             int Read(uint addr, void *pBuffer, int size, ushort bufpos = 0);
             int Write(uint addr, void *pBuffer, int size, ushort bufpos = 0);

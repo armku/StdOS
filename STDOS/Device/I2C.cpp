@@ -92,8 +92,8 @@ bool I2C::SendSubAddr(int addr)
 SoftI2C::SoftI2C(uint speedHz)
 {
 	this->_delay=4;
-	this->SCL.OpenDrain = true;
-    this->SDA.OpenDrain = true;
+	this->SCL.OpenDrain = false;
+    this->SDA.OpenDrain = false;
 	this->SCL.Invert = false;
 	this->SDA.Invert = false;    
 }
@@ -121,6 +121,7 @@ void SoftI2C::Start()
 {
     /* 当SCL高电平时，SDA出现一个下跳沿表示I2C总线启动信号 */
     this->SDA = 1;
+	Sys.Delay(1);
     this->SCL = 1;
 	Sys.Delay(1);
     this->SDA = 0;

@@ -16,16 +16,27 @@ bool AT24CXX::Read(uint addr, Buffer &bs)const
 {
     return false;
 }
-
-AT24CXX::AT24CXX(Pin pinsck, Pin pinsda, EW24XXType devtype, byte devaddr, uint wnms)
+//写延时时间
+AT24CXX::AT24CXX(EW24XXType devtype, byte devaddr, uint wnms)
 {
-    this->IIC.SetPin(pinsck, pinsda);
-    this->deviceType = devtype;
-    this->Address = devaddr;
-    this->pageSize = this->jsPageSize(devtype);
-    this->writedelaynms = wnms;
+	this->deviceType = devtype;
+	this->Address = devaddr;
+	this->pageSize = this->jsPageSize(devtype);
+	this->writedelaynms = wnms;
 }
 
+void AT24CXX::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
+{
+	this->IIC.SetPin(pinscl, pinsda);
+	if (pinwriteprotect != P0)
+	{
+		this->pinWP = new OutputPort();
+		this->pinWP->OpenDrain = false;
+		this->pinWP->Invert = false;
+		this->pinWP->Open();
+		*this->pinWP = 1;
+	}
+}
 /*
  *********************************************************************************************************
  *	函 数 名: Read
