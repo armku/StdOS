@@ -60,6 +60,7 @@ TSys::TSys()
     this->FlashSize = 0x01;
     this->RAMSize = 0x01;
     this->OnSleep = NULL;
+	this->Started = false;
 }
 
 // 初始化系统
@@ -102,6 +103,15 @@ uint TSys::Seconds()const
 // 毫秒级延迟
 void TSys::Sleep(int ms)const
 {
+	if (!this->Started)
+	{
+		//用于系统没启动时延时使用
+		for (int i = 0; i < ms; i++)
+		{
+			this->Delay(999);
+		}
+		return;
+	}
     if (this->OnSleep)
     {
         this->OnSleep(ms);
@@ -247,6 +257,7 @@ void TSys::Start()
     this->OnStart();
     //this->=debug_printf;
     Task::Scheduler()->Start();
+	this->Started = true;
 }
 #include <stdio.h>
 /////////////////////////////////////////////////////////////////////////////
