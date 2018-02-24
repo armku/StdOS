@@ -30,11 +30,11 @@ void AT24CXX::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
 	this->IIC.SetPin(pinscl, pinsda);
 	if (pinwriteprotect != P0)
 	{
-		this->pinWP = new OutputPort();
-		this->pinWP->OpenDrain = false;
-		this->pinWP->Invert = false;
-		this->pinWP->Open();
-		*this->pinWP = 1;
+		this->pinWP.Set(pinwriteprotect);
+		this->pinWP.OpenDrain = false;
+		this->pinWP.Invert = false;
+		this->pinWP.Open();
+		this->pinWP = 1;
 	}
 }
 /*
@@ -72,9 +72,11 @@ int AT24CXX::Write(uint addr, void *pBuffer, int size, ushort bufpos)
             break;
         }
     }
+	/*debug_printf("read ok\r\n");*/
     if (i >= size)
     {
         //´æ´¢ÄÚÈİÏàÍ¬£¬²»ĞèÒªĞ´Èë
+		/*debug_printf("ÄÚÈİÏàÍ¬£¬²»ĞèÒªĞ´Èë\r\n");*/
         return size;
     }
     return this->bufwr(addr, (byte*)pBuffer, size, bufpos, 1);
@@ -228,10 +230,11 @@ int AT24CXX::bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr) //
     bytesLeave = size;
     curAddr = addr;
     bufaddr = bufpos;
-    if (this->pinWP)
+    if (wr==1)
     {
-        *this->pinWP = 0;
+        this->pinWP = 0;
     }
+	/*debug_printf("read count %d\r\n",size);*/
     if (pageStart)
     {
         //¶ÁÈ¡²»ÊÇÒ³ÆğÊ¼µØÖ·µÄÄÚÈİ
@@ -239,18 +242,15 @@ int AT24CXX::bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr) //
         if ((pageStart + bytesLeave) < this->pageSize)
         {
             if (wr)
-            {
+            {				
                 this->writePage(buf, bufaddr, curAddr, bytesLeave);
+				Sys.Sleep(this->writedelaynms);
             }
             else
             {
                 this->readPage(buf, bufaddr, curAddr, bytesLeave);
             }
             bytesLeave -= bytesLeave;
-            if (wr)
-            {
-                Sys.Sleep(this->writedelaynms);
-            }
             return 0;
         }
         //Ò»´Î¶ÁÈ¡²»Íæ
@@ -258,7 +258,8 @@ int AT24CXX::bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr) //
         {
             if (wr)
             {
-                this->writePage(buf, bufaddr, curAddr, this->pageSize - pageStart);
+				this->writePage(buf, bufaddr, curAddr, this->pageSize - pageStart);
+				Sys.Sleep(this->writedelaynms);
             }
             else
             {
@@ -267,10 +268,6 @@ int AT24CXX::bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr) //
             bytesLeave -= (this->pageSize - pageStart);
             curAddr += (this->pageSize - pageStart);
             bufaddr += (this->pageSize - pageStart);
-            if (wr)
-            {
-                Sys.Sleep(this->writedelaynms);
-            }
         }
     }
 
@@ -280,7 +277,8 @@ int AT24CXX::bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr) //
         {
             if (wr)
             {
-                this->writePage(buf, bufaddr, curAddr, this->pageSize);
+				this->writePage(buf, bufaddr, curAddr, this->pageSize);
+				Sys.Sleep(this->writedelaynms);
             }
             else
             {
@@ -289,34 +287,29 @@ int AT24CXX::bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr) //
             bytesLeave -= this->pageSize;
             curAddr += this->pageSize;
             bufaddr += this->pageSize;
-            if (wr)
-            {
-                Sys.Sleep(this->writedelaynms);
-            }
         }
         else
         {
+			debug_printf("read size %d\r\n", bytesLeave);
             if (wr)
             {
-                this->writePage(buf, bufaddr, curAddr, bytesLeave);
+				this->writePage(buf, bufaddr, curAddr, bytesLeave);				
+				Sys.Sleep(this->writedelaynms);
             }
             else
             {
+				debug_printf("read size1 %d\r\n", bytesLeave);
                 this->readPage(buf, bufaddr, curAddr, bytesLeave);
             }
 
             curAddr += bytesLeave;
             bufaddr += bytesLeave;
-            bytesLeave -= bytesLeave;
-            if (wr)
-            {
-                Sys.Sleep(this->writedelaynms);
-            }
+            bytesLeave -= bytesLeave;            
         }
     }
-    if (this->pinWP)
+	if (wr == 1)
     {
-        *this->pinWP = 1;
+        this->pinWP = 1;
     }
     return size;
 }
@@ -325,9 +318,8 @@ int AT24CXX::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ
 {
     uint i, m;
     ushort usAddr;
-
-    usAddr = addr;
-
+	//debug_printf("Ò³Ğ´\r\n"); //return;
+    usAddr = addr;	
     /*¡¡µÚ£°²½£º·¢Í£Ö¹ĞÅºÅ£¬Æô¶¯ÄÚ²¿Ğ´²Ù×÷¡¡*/
     this->IIC.Stop();
 
@@ -393,14 +385,14 @@ int AT24CXX::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ
 
     cmd_Writefail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ */
     /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->IIC.Stop();
+    this->IIC.Stop();	
     return 1;
 }
 
 int AT24CXX::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚ¶Á
 {
-    uint i;
-
+    uint i;	
+	//debug_printf("read a page\r\n");
     /* µÚ1²½£º·¢ÆğI2C×ÜÏßÆô¶¯ĞÅºÅ */
     this->IIC.Start();
 

@@ -40,7 +40,7 @@
             int Read(uint addr, void *pBuffer, int size, ushort bufpos = 0);
             int Write(uint addr, void *pBuffer, int size, ushort bufpos = 0);
             
-            OutputPort *pinWP; //保护引脚
+            OutputPort pinWP; //保护引脚
         private:
             byte checkDevice();
             ushort jsPageSize(uint type); //计算存储页大小

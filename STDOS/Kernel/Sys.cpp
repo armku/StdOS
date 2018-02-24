@@ -108,7 +108,8 @@ void TSys::Sleep(int ms)const
 		//用于系统没启动时延时使用
 		for (int i = 0; i < ms; i++)
 		{
-			this->Delay(999);
+			this->Delay(500);
+			this->Delay(500);
 		}
 		return;
 	}
