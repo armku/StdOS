@@ -19,7 +19,7 @@ void AT24C02Test()
 #ifdef STM32F0
 	at2402.SetPin(PB6, PB7);
 #elif defined STM32F1
-	at2402.SetPin(PB6, PB7);
+	at2402.SetPin(PB6, PB7,PA0);
 #elif defined STM32F4
 	at2402.SetPin(PI9, PI10);
 #endif 
