@@ -93,7 +93,7 @@ SoftI2C::SoftI2C(uint speedHz)
 {
 	this->_delay=4;
 	this->SCL.OpenDrain = false;
-    this->SDA.OpenDrain = true;
+    this->SDA.OpenDrain = true;//此处设置错误将导致IIC异常
 	this->SCL.Invert = false;
 	this->SDA.Invert = false;
 }
