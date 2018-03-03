@@ -4,7 +4,10 @@
 #define macI2C_RD	1		/* ¶Á¿ØÖÆbit */
 
 
-AT24CXX::AT24CXX(){}
+AT24CXX::AT24CXX()
+{
+	
+}
 AT24CXX::~AT24CXX(){}
 
 bool AT24CXX::Write(uint addr, const Buffer &bs)const

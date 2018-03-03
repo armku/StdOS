@@ -93,9 +93,9 @@ SoftI2C::SoftI2C(uint speedHz)
 {
 	this->_delay=4;
 	this->SCL.OpenDrain = false;
-    this->SDA.OpenDrain = false;
+    this->SDA.OpenDrain = true;
 	this->SCL.Invert = false;
-	this->SDA.Invert = false;    
+	this->SDA.Invert = false;
 }
 SoftI2C::~SoftI2C(){}
 
@@ -104,12 +104,11 @@ void SoftI2C::SetPin(Pin scl, Pin sda)
 	this->SCL.Set(scl);
     this->SDA.Set(sda);
 	
+	this->SDA = 1;
+	this->SCL = 1;
+
 	this->SCL.Open();
 	this->SDA.Open();
-
-    this->SCL = 0;
-    this->SDA = 1;
-    this->SCL = 1;
 }
 
 void SoftI2C::GetPin(Pin *scl, Pin *sda)
