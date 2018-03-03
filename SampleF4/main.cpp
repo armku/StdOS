@@ -1,6 +1,4 @@
 #include "SerialPort.h"
-#include "Timer.h"
-#include "Spi.h"
 
 #if 1
     //正点原子开发板F4
@@ -37,14 +35,6 @@ void TimerTask(void *param)
     //    printf("\r\n%d: cnt:%d", i++, time6cnt);
 }
 
-void InterruptTest();
-void w25q128test();
-void ssd1309Test();
-void ds18b20test();
-void SRamTest();
-void bsp_Init();
-void PwmSoloTest();
-
 SerialPort gascom(COM3);
 static char com4rx[1024],com4tx[1024];
 uint OnUsart4Read(ITransport *transport, Buffer &bs, void *para, void *para2)
@@ -70,12 +60,7 @@ int main(void)
     SerialPort::GetMessagePort()->Register(OnUsart1Read);
     Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
     Sys.AddTask(TimerTask, &led1, 0, 1000, "TimerTask");
-    //InterruptTest();
-    //w25q128test();  
-	//ssd1309Test();
-	//ds18b20test();
-	//SRamTest();
-	//PwmSoloTest();
+    
 	gpsinit();
     Sys.Start();
 }

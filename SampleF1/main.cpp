@@ -1,16 +1,4 @@
 #include "SerialPort.h"
-#include "Drivers\AT24CXX.h"
-#include "Drivers\W25QXXX.h"
-#include "SString.h"
-#include "string.h"
-#include "List.h"
-#include "Spi.h"
-#include "Flash.h"
-#include "App\lcd_dr.h"
-#include "TInterrupt.h"
-#include "Timer.h"
-#include "TTime.h"
-#include "Drivers\RX8025T.h"
 
 #if 1
     OutputPort led1(PB0, false);
@@ -36,7 +24,6 @@ uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 	bs.Show(true);
     return 0;
 }
-void ADS1232Test();
 int main(void)
 {
 	Sys.Init();
@@ -44,8 +31,7 @@ int main(void)
 	Sys.MessagePort = COM1;
 	Sys.ShowInfo();
 #endif 	
-	//ADS1232Test();
-
+	
 	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 			
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
