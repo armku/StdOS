@@ -392,6 +392,26 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>Bsp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BspPlatform</GroupName>
+          <Files>
+            <File>
+              <FileName>BspPlatform.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\BspPlatform\BspPlatform.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
@@ -1150,7 +1170,7 @@
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F1xx_DFP.2.0.0</PackID>
+          <PackID>Keil.STM32F1xx_DFP.1.1.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IROM(0x08000000,0x10000) IRAM(0x20000000,0x5000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -1523,6 +1543,26 @@
               <FileName>SRamTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\SRamTest.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>Bsp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BspPlatform</GroupName>
+          <Files>
+            <File>
+              <FileName>BspPlatform.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\BspPlatform\BspPlatform.c</FilePath>
             </File>
           </Files>
         </Group>

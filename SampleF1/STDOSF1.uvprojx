@@ -387,6 +387,26 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>Bsp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BspPlatform</GroupName>
+          <Files>
+            <File>
+              <FileName>BspPlatform.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\BspPlatform\BspPlatform.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
@@ -1710,6 +1730,26 @@
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\main.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>Bsp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BspPlatform</GroupName>
+          <Files>
+            <File>
+              <FileName>BspPlatform.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\BspPlatform\BspPlatform.c</FilePath>
             </File>
           </Files>
         </Group>
