@@ -1,3 +1,6 @@
+/*
+init some hardware
+*/
 #ifndef _BSPPLATFORM_H
 #define _BSPPLATFORM_H
 #ifdef __cplusplus
