@@ -282,19 +282,7 @@ void SerialPort::Printf(char *Data, ...)
 	Buffer bs(bufSend,bufSendPos);
 	this->Write(bs);
 }
-#include "TInterrupt.h"
-#include "TTime.h"
-#include "SerialPort.h"
-#include "Task.h"
 
-void SerialPort_Opening()
-{
-	;
-}
-void SerialPort_Closeing()
-{
-	;
-}
 void SerialPort::OnRxHandler()
 {
 	((Task*)(this->_task))->Set(true, 0);
@@ -331,4 +319,3 @@ void SerialPort::OnHandler(ushort num, void* param)
 {
 
 }
-

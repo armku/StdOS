@@ -232,12 +232,6 @@ InputPort& InputPort::Init(Pin pin, bool invert)
 	this->Invert=invert;
 	return *this;
 }
-#include "Port.h"
-
-int IndexToGroup(int a1)
-{
-	return (a1 << 10) + 1073809408;
-}
 
 /* 中断状态结构体 */
 /* 一共16条中断线，意味着同一条线每一组只能有一个引脚使用中断 */
