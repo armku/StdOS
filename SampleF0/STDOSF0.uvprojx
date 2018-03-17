@@ -397,6 +397,9 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>BspDriver</GroupName>
+        </Group>
+        <Group>
           <GroupName>BspPlatform</GroupName>
           <Files>
             <File>
@@ -1417,6 +1420,9 @@
               <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>BspDriver</GroupName>
         </Group>
         <Group>
           <GroupName>BspPlatform</GroupName>
