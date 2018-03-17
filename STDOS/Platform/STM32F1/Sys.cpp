@@ -16,7 +16,7 @@ extern "C"
     extern uint __heap_limit;
     extern uint __initial_sp;
 }
-extern String *CPUName;
+static String *CPUName;
 void TSys::OnInit()
 {
     this->Clock = 72000000;

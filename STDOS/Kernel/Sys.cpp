@@ -34,19 +34,6 @@ TSys::TSys()
 	this->Config = &g_Config;
 	this->OnInit();
 
-	//	*((_DWORD *)pthis + 19) = 0;
-	//	*((_WORD *)pthis + 12) = 6450;
-	//	*((_DWORD *)pthis + 7) = 50469170;
-	//	*((_DWORD *)pthis + 8) = 6450;
-	//	*((_DWORD *)pthis + 9) = 6450;
-	//	*((_DWORD *)pthis + 3) = "SmartOS_CPU";
-	//	*((_DWORD *)pthis + 4) = "X3_nnhy";
-	//	*((_DWORD *)pthis + 5) = &unk_6E8;
-	//	TInterrupt::Init((TInterrupt *)&Interrupt);
-	//	*((_DWORD *)pthis + 16) = 1;
-	//	*((_DWORD *)pthis + 17) = 1;
-	//	*((_BYTE *)pthis + 80) = 0;
-
 	this->MessagePort = COM1;
 	this->Name = "stdos";
 	this->Company = "armku";
@@ -65,7 +52,6 @@ TSys::TSys()
 // 初始化系统
 void TSys::Init()
 {
-	this->InitClock();
 	Time.Init();
 }
 
@@ -95,8 +81,6 @@ UInt64 TSys::Ms()const
 uint TSys::Seconds()const
 {
 	return Time.Seconds;
-
-	//return Time + dword_6A0;
 }
 
 // 毫秒级延迟
@@ -230,7 +214,6 @@ bool TSys::SetTaskPeriod(uint taskid, int period)const
 // 开始系统大循环
 void TSys::Start()
 {
-	this->OnStart();
 	//this->=debug_printf;
 	this->Started = true;
 	Task::Scheduler()->Start();
@@ -253,40 +236,3 @@ int StdPrintf(const char *format, ...)
 
 	return n;
 }
-
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-#if DEBUG
-	// 函数栈。
-	// 进入函数时压栈函数名，离开时弹出。便于异常时获取主线程调用列表
-TraceStack::TraceStack(cstring name) {}
-TraceStack::~TraceStack() {}
-
-void TraceStack::Show() {}
-
-#endif
-/*
-系统能自动识别常见芯片类型、主频、Flash大小、Ram大小
-Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
-毫秒级睡眠期间，系统将会安排执行其他耗时较短的任务。如果没有可用任务，系统将会进入低功耗模式，以节省能耗
-
-*/
-#include "TTime.h"
-#include "Task.h"
-#include <string.h>
-#include "Array.h"
-#include "TInterrupt.h"
-#include "SerialPort.h"
-
-String *CPUName;
-
-void TSys::OnStart()
-{
-
-}
-// 初始化系统时钟
-void TSys::InitClock()
-{
-	//    this->Inited = 1;
-}
-

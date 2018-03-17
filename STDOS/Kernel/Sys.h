@@ -68,8 +68,7 @@ public:
 
     TSys();				// 构造函数
 
-	void InitClock();	// 初始化系统时钟
-    void Init();     	// 初始化系统
+	void Init();     	// 初始化系统
 	void ShowInfo() const;
 	
 	UInt64	Ms() const;		// 系统启动后的毫秒数
@@ -86,7 +85,6 @@ private:
     void Reset() const;
 	void OnInit();
 	void OnShowInfo() const;
-	void OnStart();
 
 public:
 	// 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
@@ -151,26 +149,6 @@ public:
 private:
 	uint _state;
 };
-
-#if DEBUG
-// 函数栈。
-// 进入函数时压栈函数名，离开时弹出。便于异常时获取主线程调用列表
-class TraceStack
-{
-public:
-	TraceStack(cstring name);
-	~TraceStack();
-
-	static void Show();
-};
-
-#define TS(name) TraceStack __ts(name)
-
-#else
-
-#define TS(name) ((void)0)
-
-#endif
 
 // 编译信息兼容性处理
 #ifndef __BUILD_DATE__
