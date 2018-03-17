@@ -870,6 +870,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Time.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Runtime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Runtime.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -959,41 +964,6 @@
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\Time.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>CortxM</GroupName>
-          <Files>
-            <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Interrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Runtime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Runtime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\SerialPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sys.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Time.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2013,6 +1983,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Time.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Runtime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Kernel\Runtime.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2102,41 +2077,6 @@
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\Time.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>CortxM</GroupName>
-          <Files>
-            <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Interrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Runtime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Runtime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\SerialPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sys.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Time.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\CortexM\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
