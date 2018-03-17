@@ -8,9 +8,6 @@
 // 这样子可以避免频繁使用微秒时带来长整型乘除法
 class TTime
 {
-private:
-    static void OnHandler(ushort num, void* param);
-
 public:
     uint	Seconds;		// 全局秒数，系统启动后总秒数。累加
 	UInt64	Milliseconds;	// 全局毫秒数，系统启动后总毫秒（1000ms整部分）。累加 1
@@ -33,7 +30,6 @@ public:
 
     uint CurrentTicks() const;	// 当前滴答时钟
 	UInt64 Current() const; 		// 当前毫秒数
-	void SetTime(UInt64 seconds);	// 设置时间
 
 	void Sleep(int ms, bool* running = nullptr) const;
     void Delay(int us) const;	// 微秒级延迟	
