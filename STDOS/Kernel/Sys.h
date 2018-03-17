@@ -42,24 +42,6 @@ void assert_failed2(cstring msg, cstring file, unsigned int line);
 
 #endif
 
-// 关键性代码放到开头
-#if !defined(TINY) && defined(USEROOT)
-	#define INROOT __attribute__((section(".InRoot")))
-#else
-	#define INROOT
-#endif
-
-#if defined(BOOT) || defined(APP)
-struct HandlerRemap
-{
-	Func pUserHandler;
-	void* Reserved1;
-	void* Reserved2;
-	void* Reserved3;
-};
-extern struct HandlerRemap StrBoot;
-#endif
-
 class SystemConfig;
 
 // 系统类
@@ -89,25 +71,16 @@ public:
 	void InitClock();	// 初始化系统时钟
     void Init();     	// 初始化系统
 	void ShowInfo() const;
-	uint HeapBase() const;	// 堆起始地址，前面是静态分配内存
-	uint StackTop() const;	// 栈顶，后面是初始化不清零区域
-	void SetStackTop(uint addr);
-
+	
 	UInt64	Ms() const;		// 系统启动后的毫秒数
 	uint	Seconds() const;	// 系统绝对当前时间，秒
 
     void Sleep(int ms) const; // 毫秒级延迟
     void Delay(int us) const; // 微秒级延迟
-
-	bool CheckMemory() const;
-
+	
 	// 延迟异步重启
 	void Reboot(int msDelay = 0) const;
-
-	// 系统跟踪
-	void InitTrace(void* port) const;
-	void Trace(int times = 1) const;
-
+		
 private:
 	// 重启系统
     void Reset() const;
@@ -163,9 +136,6 @@ public:
 
 void EnterCritical();
 void ExitCritical();
-
-//extern uint32_t __REV(uint32_t value);
-//extern uint32_t __REV16(uint16_t value);
 
 uint _REV(uint value);
 ushort _REV16(ushort value);

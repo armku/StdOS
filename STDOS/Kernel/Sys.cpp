@@ -154,16 +154,6 @@ void TSys::Reboot(int msDelay)const
 	Sys.AddTask((void (TSys::*)())&TSys::Reset, (TSys *)this, msDelay, -1, "Reset");
 }
 
-// 系统跟踪
-void TSys::InitTrace(void *port)const
-{
-	//*(_DWORD *)trace = a2;
-}
-
-void TSys::Trace(int times)const {
-
-}
-
 // 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
 uint TSys::AddTask(Action func, void *param, int dueTime, int period, cstring name)const
 {
@@ -290,11 +280,6 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 
 String *CPUName;
 
-void TSys::SetStackTop(uint addr)
-{
-	//return __set_MSP(addr);
-}
-
 void TSys::OnStart()
 {
 
@@ -305,18 +290,3 @@ void TSys::InitClock()
 	//    this->Inited = 1;
 }
 
-bool TSys::CheckMemory() const
-{
-	return true;
-}
-
-uint TSys::HeapBase() const	// 堆起始地址，前面是静态分配内存
-{
-	//	return &_heap_base;
-	return 0;
-}
-uint TSys::StackTop() const	// 栈顶，后面是初始化不清零区域
-{
-	//return (*((_WORD *)this + 31) << 10) + 536870656;
-	return 0;
-}
