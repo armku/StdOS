@@ -257,8 +257,8 @@ void TSys::Start()
 {
     this->OnStart();
     //this->=debug_printf;
-    Task::Scheduler()->Start();
 	this->Started = true;
+    Task::Scheduler()->Start();	
 }
 #include <stdio.h>
 /////////////////////////////////////////////////////////////////////////////
