@@ -14,10 +14,6 @@ Timer::~Timer()
 {
     if (Opened)
         Close();
-    #if 0
-        if (_Handler)
-            Register(NULL);
-    #endif 
     Timers[_index] = NULL;
 }
 
@@ -36,9 +32,6 @@ void Timer::Close() // 停止定时器
 
     // 关闭时钟
     ClockCmd(_index, false);
-    //    TIM_ITConfig(_port, TIM_IT_Update, DISABLE);
-    //    TIM_ClearITPendingBit(_port, TIM_IT_Update); // 仅清除中断标志位 关闭不可靠
-    //    TIM_Cmd(_port, DISABLE);
     this->OnClose();
 }
 
