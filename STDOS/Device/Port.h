@@ -23,28 +23,13 @@ Port::Close
 // 子类初始化时先通过SetPort设置端口，备份引脚状态，然后Config通过gpio结构体配置端口，端口销毁时恢复引脚状态
 class Port
 {
-public:
-	enum GPIO_AF
-	{
-		AF_0 = 0,
-		AF_1 = 1,
-		AF_2 = 2,
-		AF_3 = 3,
-		AF_4 = 4,
-		AF_5 = 5,
-		AF_6 = 6,
-		AF_7 = 7
-	};
-
+public:	
     Pin		_Pin;		// 引脚   4
 	bool	Opened;		// 是否已经打开 8 5
 	byte    Index;		// 引脚自身次序编号，用于区分多引脚次序
 	void*	State;		// 用户状态数据
 
 	Port();
-#ifndef TINY
-	virtual ~Port();
-#endif
 
     Port& Set(Pin pin);	// 设置引脚
 	bool Empty() const;
@@ -53,7 +38,6 @@ public:
 	void Close();
 	void Clear();
 
-	void AFConfig(GPIO_AF GPIO_AF) const;
 	static void RemapConfig(uint param, bool sta);
 
     virtual bool Read() const;
@@ -63,10 +47,6 @@ public:
 protected:
     // 配置过程
     virtual void OnOpen(void* param);
-	virtual void OnClose();
-
-private:
-	void Opening();
 };
 
 /******************************** OutputPort ********************************/
@@ -168,13 +148,11 @@ public:
     virtual bool Read() const;
 
 	bool UsePress();
-	void OnPress(bool down); 
 
     operator bool() const { return Read(); }
 
 protected:
     virtual void OnOpen(void* param);
-	virtual void OnClose();
 
 private:
 	bool	_IRQ	= false;
@@ -182,12 +160,8 @@ private:
 	uint	_task	= 0;	// 输入任务
 	int		_Start	= 0;	// 开始按下时间
 	int		_Last	= 0;	// 最后一次触发时间
-	static void InputTask(void* param);
-	static void InputNoIRQTask(void* param);
-
 private:
 	void OpenPin(void* param);
-	void ClosePin();
 	bool OnRegister();
 	byte	_Value;	// 当前值
 };

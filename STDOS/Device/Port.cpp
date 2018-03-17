@@ -8,13 +8,6 @@ Port::Port()
     this->State = NULL;
 }
 
-#ifndef TINY	
-    Port::~Port()
-    {
-        this->Close();
-    }
-#endif 
-
 /*
 单一引脚初始化
  */
@@ -175,11 +168,6 @@ InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
 InputPort::InputPort(){
 
 }
-void InputPort::InputNoIRQTask(void* param)
-{
-	InputPort *ip=(InputPort*)param;
-	ip->OnPress(ip->Opened);
-}
 void InputPort_OpenEXTI(Pin pin,InputPort::Trigger trigger);
 bool InputPort::UsePress()
 {
@@ -189,23 +177,9 @@ bool InputPort::UsePress()
 		return false;
 	}
 	InputPort_OpenEXTI(this->_Pin,this->Mode);
-	this->HardEvent=this->OnRegister();
-//	if(!this->Opened &&!this->Floating)
-//	{
-//		if(this->HardEvent)
-//			this->Opened	=	Sys.AddTask(InputPort::InputTask,this,-1,-1,"InputTask");
-//		else
-//			this->Opened	=	Sys.AddTask(InputPort::InputNoIRQTask,this,100,100,"InputNoIRQTask");
-//	}
-	
+	this->HardEvent=this->OnRegister();	
 	
     return true;
-}
-
-void InputPort::OnClose()
-{
-	this->OnClose();
-	this->ClosePin();
 }
 
 InputPort::~InputPort()
@@ -217,14 +191,6 @@ InputPort::~InputPort()
 bool InputPort::Read()const
 {
     return this->Invert ? !Port::Read(): Port::Read();
-}
-void InputPort::OnPress(bool down)
-{
-	
-}
-void InputPort::InputTask(void* param)
-{
-	
 }
 InputPort& InputPort::Init(Pin pin, bool invert)
 {
@@ -252,7 +218,7 @@ typedef struct TIntState
 // 16条中断线
 static IntState InterruptState[16];
 static bool hasInitState = false;
-//InputPort *
+
 void GPIO_ISR(int num) // 0 <= num <= 15
 {
 
@@ -266,44 +232,12 @@ void GPIO_ISR(int num) // 0 <= num <= 15
 		return;
 	}
 
-#if 0
-	uint bit = 1 << num;
-#endif 
 	bool value;
-	//    value = InputPort::Read(state3->Pin);
-	//byte line = EXTI_Line0 << num;
 	// 如果未指定委托，则不处理
 	if (!state3->Press)
 	{
 		return;
 	}
-#if 0
-	// 默认20us抖动时间
-	uint shakeTime = state->ShakeTime;
-#endif 
-#if 0
-	do
-	{
-		EXTI->PR = bit; // 重置挂起位
-		value = InputPort::Read(state->Pin); // 获取引脚状态
-		if (shakeTime > 0)
-		{
-			// 值必须有变动才触发
-			if (value == state->OldValue)
-			{
-				return;
-			}
-			Time.Sleep(shakeTime); // 避免抖动
-		}
-	} while (EXTI->PR &bit); // 如果再次挂起则重复
-#endif 
-							 //EXTI_ClearITPendingBit(line);
-#if 0
-							 // 值必须有变动才触发
-	if (shakeTime > 0 && value == state->OldValue)
-		return;
-	state->OldValue = value;
-#endif 
 
 	if (state3->Press)
 	{
@@ -312,12 +246,6 @@ void GPIO_ISR(int num) // 0 <= num <= 15
 	}
 }
 
-void Port::OnClose() {}
-
-void Port::Opening()
-{
-	//GPIO_StructInit();
-}
 bool InputPort::OnRegister()
 {
 	if (this->Press)
@@ -328,10 +256,6 @@ bool InputPort::OnRegister()
 		InterruptState[this->_Pin & 0x0f] = *state;
 	}
 	return true;
-}
-void InputPort::ClosePin()
-{
-
 }
 bool OutputPort::Read()const
 {

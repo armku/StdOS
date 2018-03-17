@@ -26,7 +26,6 @@ bool Port::Open()
         this->OnOpen(&gpio);
 
         GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
-        this->Opening();
         this->Opened = true;
         return true;
     }
