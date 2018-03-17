@@ -668,11 +668,6 @@
           <GroupName>Device</GroupName>
           <Files>
             <File>
-              <FileName>Flash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Flash.cpp</FilePath>
-            </File>
-            <File>
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
@@ -1647,11 +1642,6 @@
         <Group>
           <GroupName>Device</GroupName>
           <Files>
-            <File>
-              <FileName>Flash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Flash.cpp</FilePath>
-            </File>
             <File>
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
