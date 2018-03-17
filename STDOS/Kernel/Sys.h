@@ -98,8 +98,6 @@ public:
 
     void Sleep(int ms) const; // ∫¡√Îº∂—”≥Ÿ
     void Delay(int us) const; // Œ¢√Îº∂—”≥Ÿ
-	typedef void (*FuncI32)(int param);
-	FuncI32 OnSleep;
 
 	bool CheckMemory() const;
 
