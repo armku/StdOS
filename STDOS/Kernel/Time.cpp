@@ -14,19 +14,7 @@ void TTime::Sleep(int nms, bool *running)const
 	if( nms > 0 )
 	{
 		Int64 endcurrent = Time.Current() + nms;
-		if(this->OnSleep && nms >= 10 )
-		{
-			while(nms >= 10)
-			{
-				this->OnSleep(nms);
-				if(running)
-				{
-					if(!*running)
-						break;
-				}
-				nms = endcurrent-Time.Current();
-			}
-		}
+		
 		if(nms)
 		{
 			if(!running || *running !=0)
@@ -193,4 +181,3 @@ uint TTime::UsToTicks(uint us)const
 		result = 0;
 	return result;
 }
-

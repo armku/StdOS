@@ -18,12 +18,6 @@ public:
 	byte	Div;			// 分频系数。最大分频64k，无法让大于64M主频的芯片分配得到1k时钟
 #endif
 
-	Func OnInit;
-	Func OnLoad;
-	Func OnSave;
-	typedef void (*FuncInt)(int);
-	FuncInt OnSleep;
-
     TTime();
 
 	void Init();
