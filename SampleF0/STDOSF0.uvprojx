@@ -394,6 +394,11 @@
               <FileType>8</FileType>
               <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
             </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\font.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -766,16 +771,6 @@
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Fonts</GroupName>
-          <Files>
-            <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\fonts\font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1409,6 +1404,11 @@
               <FileType>8</FileType>
               <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
             </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\font.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1781,16 +1781,6 @@
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Fonts</GroupName>
-          <Files>
-            <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\fonts\font.c</FilePath>
             </File>
           </Files>
         </Group>
