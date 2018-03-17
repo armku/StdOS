@@ -937,16 +937,6 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Heap.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Thread.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1291,11 +1281,6 @@
               <FileName>PulsePortTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PulsePortTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ThreadTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ThreadTest.cpp</FilePath>
             </File>
             <File>
               <FileName>OCM240128Test.cpp</FileName>
@@ -2257,16 +2242,6 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Heap.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Thread.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -2611,11 +2586,6 @@
               <FileName>PulsePortTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PulsePortTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ThreadTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ThreadTest.cpp</FilePath>
             </File>
             <File>
               <FileName>OCM240128Test.cpp</FileName>

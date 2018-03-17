@@ -802,16 +802,6 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Time.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Thread.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Heap.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1826,16 +1816,6 @@
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Time.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Thread.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Thread.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Heap.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Heap.cpp</FilePath>
             </File>
           </Files>
         </Group>
