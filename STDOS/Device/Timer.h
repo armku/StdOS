@@ -11,7 +11,6 @@ protected:
 	byte	_index;		// 第几个定时器，从0开始
 	Delegate<Timer&>	OnTick;	// 带this参数
 
-	void SetHandler(bool set);
 public:
 	void*	_Timer;
 	bool	Opened;	// 可能在中断里关闭自己

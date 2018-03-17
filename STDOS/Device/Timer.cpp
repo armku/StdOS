@@ -3,10 +3,6 @@
 
 Timer **Timers = NULL; // 已经实例化的定时器对象
 
-void Timer::SetHandler(bool set){
-
-}
-
 Timer::Timer(TIMER index)
 {
     this->_index = index;
