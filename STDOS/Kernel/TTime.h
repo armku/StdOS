@@ -29,7 +29,6 @@ public:
 
     TTime();
 
-	void UseRTC();			// 使用RTC，必须在Init前调用
 	void Init();
 
     uint CurrentTicks() const;	// 当前滴答时钟

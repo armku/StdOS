@@ -1,12 +1,5 @@
 #include "TTime.h"
-#include "Device\RTC.h"
 #include "Device\Timer.h"
-
-
-int clock()
-{
-  return  Time.Current();
-}
 
 TTime Time; //系统时间，不建议用户直接使用
 
@@ -15,24 +8,6 @@ TTime::TTime()
     this->BaseSeconds = 0;
     this->Seconds = 0;
 }
-
-void RtcRefresh(void *param)
-{
-    HardRTC *rtc = (HardRTC*)param;
-    rtc->LoadTime();
-}
-
-// 使用RTC，必须在Init前调用
-void TTime::UseRTC()
-{
-    HardRTC *rtc = HardRTC::Instance();
-    rtc->LowPower = false;
-    rtc->External = false;
-
-    rtc->Init();
-    Sys.AddTask(RtcRefresh, rtc, 100, 100, "Rtc");
-}
-
 // 设置时间
 void TTime::SetTime(UInt64 seconds)
 {
@@ -190,9 +165,6 @@ void TimeCost::Show(cstring format)const
     int us = this->Elapsed();
     debug_printf(format, us);
 }
-#include "TTime.h"
-#include "Device\RTC.h"
-#include "Device\Timer.h"
 
 Timer *timerTick;
 Delegate < Timer & > abc;
