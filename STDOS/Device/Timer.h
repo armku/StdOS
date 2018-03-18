@@ -19,7 +19,6 @@ public:
 	uint	Period;		// 周期。实际值，此时无需减一。
 
 	Timer(TIMER index);
-	virtual ~Timer();
 
 	virtual void Open();	// 开始定时器
 	virtual void Close();	// 停止定时器

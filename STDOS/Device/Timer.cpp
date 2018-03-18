@@ -10,13 +10,6 @@ Timer::Timer(TIMER index)
 	this->OnInit();
 }
 
-Timer::~Timer()
-{
-    if (Opened)
-        Close();
-    Timers[_index] = NULL;
-}
-
 void Timer::Open() // 开始定时器
 {
     this->Config();

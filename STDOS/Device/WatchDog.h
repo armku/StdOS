@@ -11,8 +11,7 @@ private:
 
 public:
 	//WatchDog(uint ms = 3000);
-	~WatchDog();
-
+	
 	uint Timeout; // 当前超时时间
 
 	bool Config(uint ms);	// 配置看门狗喂狗重置时间，超过该时间将重启MCU

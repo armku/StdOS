@@ -5,11 +5,6 @@ WatchDog::WatchDog()
 	this->Timeout=3000;
 }
 
-WatchDog::~WatchDog()
-{
-    ConfigMax();
-}
-
 WatchDog* cur;
 WatchDog& WatchDog::Current()
 {
