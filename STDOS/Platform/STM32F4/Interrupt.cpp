@@ -217,16 +217,6 @@ extern "C"
 void FaultHandler(){}
 void FAULT_SubHandler(){}
 
-// 解码优先级
-void TInterrupt::DecodePriority(uint priority, uint priorityGroup, uint *pPreemptPriority, uint *pSubPriority)const{
-
-}
-// 编码优先级
-uint TInterrupt::EncodePriority(uint priorityGroup, uint preemptPriority, uint subPriority)const
-{
-    return 0;
-}
-
 void TInterrupt::OnInit()const
 {
     //复制中断向量表
@@ -328,11 +318,6 @@ void TInterrupt::OnInit()const
 void TInterrupt::GlobalEnable()
 {
     __ASM volatile("cpsie i");
-}
-
-bool TInterrupt::OnDeactivate(short irq)
-{
-    return false;
 }
 
 // 关闭全局中断

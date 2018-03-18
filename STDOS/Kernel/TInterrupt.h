@@ -17,16 +17,10 @@ public:
     // 设置优先级
     void SetPriority(short irq, uint priority = 1) const;
 
-    // 编码优先级
-    uint EncodePriority (uint priorityGroup, uint preemptPriority, uint subPriority) const;
-    // 解码优先级
-    void DecodePriority (uint priority, uint priorityGroup, uint* pPreemptPriority, uint* pSubPriority) const;
-
     static void GlobalEnable();	// 打开全局中断
     static void GlobalDisable();	// 关闭全局中断
 private:
 	void OnInit() const;
-	bool OnDeactivate(short irq);
 };
 
 // 全局中断类对象
