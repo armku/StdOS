@@ -214,106 +214,112 @@ bool AT24CXX::Write(ushort address, byte da)
     this->IIC.Stop();
     return true;
 }
+//¶ÁĞ´¼¯ÖĞ²Ù×÷1Ğ´ 0¶Á
+int AT24CXX::bufwr(ushort addr, Buffer &bs, byte wr)
+{
+	uint curAddr;
+	uint pageStart; //Ò³ÄÚÆğÊ¼µØÖ·
+	uint bytesLeave; //»¹Ê£¶àÉÙ×Ö½Ú¶ÁÈ¡
+	ushort bufaddr;
+	
+	pageStart = addr % this->pageSize;
+	bytesLeave = bs.Length();
+	curAddr = addr;
+	bufaddr = 0;
+	if (wr == 1)
+	{
+		this->pinWP = 0;
+	}
+	/*debug_printf("read count %d\r\n",size);*/
+	if (pageStart)
+	{
+		//¶ÁÈ¡²»ÊÇÒ³ÆğÊ¼µØÖ·µÄÄÚÈİ
+		//Ò»´ÎÄÜ¶ÁÍê
+		if ((pageStart + bytesLeave) < this->pageSize)
+		{
+			if (wr)
+			{
+				this->writePage(bs.GetBuffer(), bufaddr, curAddr, bytesLeave);
+				Sys.Sleep(this->writedelaynms);
+			}
+			else
+			{
+				this->readPage(bs.GetBuffer(), bufaddr, curAddr, bytesLeave);
+			}
+			bytesLeave -= bytesLeave;
+			return 0;
+		}
+		//Ò»´Î¶ÁÈ¡²»Íæ
+		else
+		{
+			if (wr)
+			{
+				this->writePage(bs.GetBuffer(), bufaddr, curAddr, this->pageSize - pageStart);
+				Sys.Sleep(this->writedelaynms);
+			}
+			else
+			{
+				this->readPage(bs.GetBuffer(), bufaddr, curAddr, this->pageSize - pageStart);
+			}
+			bytesLeave -= (this->pageSize - pageStart);
+			curAddr += (this->pageSize - pageStart);
+			bufaddr += (this->pageSize - pageStart);
+		}
+	}
 
+	while (bytesLeave > 0)
+	{
+		if (bytesLeave > this->pageSize)
+		{
+			if (wr)
+			{
+				this->writePage(bs.GetBuffer(), bufaddr, curAddr, this->pageSize);
+				Sys.Sleep(this->writedelaynms);
+			}
+			else
+			{
+				this->readPage(bs.GetBuffer(), bufaddr, curAddr, this->pageSize);
+			}
+			bytesLeave -= this->pageSize;
+			curAddr += this->pageSize;
+			bufaddr += this->pageSize;
+		}
+		else
+		{
+			debug_printf("read size %d\r\n", bytesLeave);
+			if (wr)
+			{
+				this->writePage(bs.GetBuffer(), bufaddr, curAddr, bytesLeave);
+				Sys.Sleep(this->writedelaynms);
+			}
+			else
+			{
+				debug_printf("read size1 %d\r\n", bytesLeave);
+				this->readPage(bs.GetBuffer(), bufaddr, curAddr, bytesLeave);
+			}
+
+			curAddr += bytesLeave;
+			bufaddr += bytesLeave;
+			bytesLeave -= bytesLeave;
+		}
+	}
+	if (wr == 1)
+	{
+		this->pinWP = 1;
+	}
+	return bs.Length();
+}
 int AT24CXX::bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr) //¶ÁĞ´¼¯ÖĞ²Ù×÷1Ğ´ 0¶Á
 {
-    uint curAddr;
-    uint pageStart; //Ò³ÄÚÆğÊ¼µØÖ·
-    uint bytesLeave; //»¹Ê£¶àÉÙ×Ö½Ú¶ÁÈ¡
-    ushort bufaddr;
-
-    pageStart = addr % this->pageSize;
-    bytesLeave = size;
-    curAddr = addr;
-    bufaddr = bufpos;
-    if (wr==1)
-    {
-        this->pinWP = 0;
-    }
-	/*debug_printf("read count %d\r\n",size);*/
-    if (pageStart)
-    {
-        //¶ÁÈ¡²»ÊÇÒ³ÆğÊ¼µØÖ·µÄÄÚÈİ
-        //Ò»´ÎÄÜ¶ÁÍê
-        if ((pageStart + bytesLeave) < this->pageSize)
-        {
-            if (wr)
-            {				
-                this->writePage(buf, bufaddr, curAddr, bytesLeave);
-				Sys.Sleep(this->writedelaynms);
-            }
-            else
-            {
-                this->readPage(buf, bufaddr, curAddr, bytesLeave);
-            }
-            bytesLeave -= bytesLeave;
-            return 0;
-        }
-        //Ò»´Î¶ÁÈ¡²»Íæ
-        else
-        {
-            if (wr)
-            {
-				this->writePage(buf, bufaddr, curAddr, this->pageSize - pageStart);
-				Sys.Sleep(this->writedelaynms);
-            }
-            else
-            {
-                this->readPage(buf, bufaddr, curAddr, this->pageSize - pageStart);
-            }
-            bytesLeave -= (this->pageSize - pageStart);
-            curAddr += (this->pageSize - pageStart);
-            bufaddr += (this->pageSize - pageStart);
-        }
-    }
-
-    while (bytesLeave > 0)
-    {
-        if (bytesLeave > this->pageSize)
-        {
-            if (wr)
-            {
-				this->writePage(buf, bufaddr, curAddr, this->pageSize);
-				Sys.Sleep(this->writedelaynms);
-            }
-            else
-            {
-                this->readPage(buf, bufaddr, curAddr, this->pageSize);
-            }
-            bytesLeave -= this->pageSize;
-            curAddr += this->pageSize;
-            bufaddr += this->pageSize;
-        }
-        else
-        {
-			debug_printf("read size %d\r\n", bytesLeave);
-            if (wr)
-            {
-				this->writePage(buf, bufaddr, curAddr, bytesLeave);				
-				Sys.Sleep(this->writedelaynms);
-            }
-            else
-            {
-				debug_printf("read size1 %d\r\n", bytesLeave);
-                this->readPage(buf, bufaddr, curAddr, bytesLeave);
-            }
-
-            curAddr += bytesLeave;
-            bufaddr += bytesLeave;
-            bytesLeave -= bytesLeave;            
-        }
-    }
-	if (wr == 1)
-    {
-        this->pinWP = 1;
-    }
-    return size;
+	Buffer bs(buf+bufpos,size);
+	return this->bufwr(addr,bs,wr);
 }
 
-int AT24CXX::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ´
+int AT24CXX::writePage(ushort addr, Buffer &bs) //Ò³ÄÚĞ´
 {
-    uint i, m;
+    uint m;
     ushort usAddr;
+
 	//debug_printf("Ò³Ğ´\r\n"); //return;
     usAddr = addr;	
     /*¡¡µÚ£°²½£º·¢Í£Ö¹ĞÅºÅ£¬Æô¶¯ÄÚ²¿Ğ´²Ù×÷¡¡*/
@@ -360,11 +366,11 @@ int AT24CXX::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ
         goto cmd_Writefail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
     }
 
-    for (i = 0; i < size; i++)
+    for (int i = 0; i < bs.Length(); i++)
     {
 
         /* µÚ6²½£º¿ªÊ¼Ğ´ÈëÊı¾İ */
-        this->IIC.WriteByte(buf[bufpos + i]);
+        this->IIC.WriteByte(bs[i]);
 
         /* µÚ7²½£º·¢ËÍACK */
         if (this->IIC.WaitAck() != 0)
@@ -384,77 +390,86 @@ int AT24CXX::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ
     this->IIC.Stop();	
     return 1;
 }
+int AT24CXX::writePage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚĞ´
+{
+	Buffer bs(buf+bufpos,size);
+	return this->writePage(addr,bs);
+}
+//Ò³ÄÚ¶Á
+int AT24CXX::readPage(ushort addr, Buffer &bs)
+{	
+	//debug_printf("read a page\r\n");
+	/* µÚ1²½£º·¢ÆğI2C×ÜÏßÆô¶¯ĞÅºÅ */
+	this->IIC.Start();
 
+	/* µÚ2²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
+	this->IIC.WriteByte(this->Address | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
+
+													/* µÚ3²½£ºµÈ´ıACK */
+	if (this->IIC.WaitAck() != 0)
+	{
+		goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
+	}
+	if (this->deviceType > AT24C16)
+	{
+		/* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
+		this->IIC.WriteByte((byte)((addr) >> 8));
+
+		/* µÚ5²½£ºµÈ´ıACK */
+		if (this->IIC.WaitAck() != 0)
+		{
+			goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
+		}
+	}
+	/* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
+	this->IIC.WriteByte((byte)addr);
+
+	/* µÚ5²½£ºµÈ´ıACK */
+	if (this->IIC.WaitAck() != 0)
+	{
+		goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
+	}
+
+	/* µÚ6²½£ºÖØĞÂÆô¶¯I2C×ÜÏß¡£Ç°ÃæµÄ´úÂëµÄÄ¿µÄÏòEEPROM´«ËÍµØÖ·£¬ÏÂÃæ¿ªÊ¼¶ÁÈ¡Êı¾İ */
+	this->IIC.Start();
+
+	/* µÚ7²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
+	this->IIC.WriteByte(this->Address | macI2C_RD); /* ´Ë´¦ÊÇ¶ÁÖ¸Áî */
+
+													/* µÚ8²½£º·¢ËÍACK */
+	if (this->IIC.WaitAck() != 0)
+	{
+		goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
+	}
+
+	/* µÚ9²½£ºÑ­»·¶ÁÈ¡Êı¾İ */
+	for (int i = 0; i < bs.Length(); i++)
+	{
+		bs[i] = this->IIC.ReadByte(); /* ¶Á1¸ö×Ö½Ú */
+
+												/* Ã¿¶ÁÍê1¸ö×Ö½Úºó£¬ĞèÒª·¢ËÍAck£¬ ×îºóÒ»¸ö×Ö½Ú²»ĞèÒªAck£¬·¢Nack */
+		if (i != bs.Length() - 1)
+		{
+			this->IIC.Ack(true); /* ÖĞ¼ä×Ö½Ú¶ÁÍêºó£¬CPU²úÉúACKĞÅºÅ(Çı¶¯SDA = 0) */
+		}
+		else
+		{
+			this->IIC.Ack(false); /* ×îºó1¸ö×Ö½Ú¶ÁÍêºó£¬CPU²úÉúNACKĞÅºÅ(Çı¶¯SDA = 1) */
+		}
+	}
+	/* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
+	this->IIC.Stop();
+	return 0; /* Ö´ĞĞ³É¹¦ */
+
+cmd_Readfail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ */
+			   /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
+	this->IIC.Stop();
+	return 1;
+}
 int AT24CXX::readPage(byte *buf, ushort bufpos, ushort addr, uint size) //Ò³ÄÚ¶Á
 {
-    uint i;	
-	//debug_printf("read a page\r\n");
-    /* µÚ1²½£º·¢ÆğI2C×ÜÏßÆô¶¯ĞÅºÅ */
-    this->IIC.Start();
-
-    /* µÚ2²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
-    this->IIC.WriteByte(this->Address | macI2C_WR); /* ´Ë´¦ÊÇĞ´Ö¸Áî */
-
-    /* µÚ3²½£ºµÈ´ıACK */
-    if (this->IIC.WaitAck() != 0)
-    {
-        goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
-    }
-    if (this->deviceType > AT24C16)
-    {
-        /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-        this->IIC.WriteByte((byte)((addr) >> 8));
-
-        /* µÚ5²½£ºµÈ´ıACK */
-        if (this->IIC.WaitAck() != 0)
-        {
-            goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
-        }
-    }
-    /* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓĞ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ĞèÒªÁ¬·¢¶à¸öµØÖ· */
-    this->IIC.WriteByte((byte)addr);
-
-    /* µÚ5²½£ºµÈ´ıACK */
-    if (this->IIC.WaitAck() != 0)
-    {
-        goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
-    }
-
-    /* µÚ6²½£ºÖØĞÂÆô¶¯I2C×ÜÏß¡£Ç°ÃæµÄ´úÂëµÄÄ¿µÄÏòEEPROM´«ËÍµØÖ·£¬ÏÂÃæ¿ªÊ¼¶ÁÈ¡Êı¾İ */
-    this->IIC.Start();
-
-    /* µÚ7²½£º·¢Æğ¿ØÖÆ×Ö½Ú£¬¸ß7bitÊÇµØÖ·£¬bit0ÊÇ¶ÁĞ´¿ØÖÆÎ»£¬0±íÊ¾Ğ´£¬1±íÊ¾¶Á */
-    this->IIC.WriteByte(this->Address | macI2C_RD); /* ´Ë´¦ÊÇ¶ÁÖ¸Áî */
-
-    /* µÚ8²½£º·¢ËÍACK */
-    if (this->IIC.WaitAck() != 0)
-    {
-        goto cmd_Readfail; /* EEPROMÆ÷¼şÎŞÓ¦´ğ */
-    }
-
-    /* µÚ9²½£ºÑ­»·¶ÁÈ¡Êı¾İ */
-    for (i = 0; i < size; i++)
-    {
-        buf[bufpos + i] = this->IIC.ReadByte(); /* ¶Á1¸ö×Ö½Ú */
-
-        /* Ã¿¶ÁÍê1¸ö×Ö½Úºó£¬ĞèÒª·¢ËÍAck£¬ ×îºóÒ»¸ö×Ö½Ú²»ĞèÒªAck£¬·¢Nack */
-        if (i != size - 1)
-        {
-            this->IIC.Ack(true); /* ÖĞ¼ä×Ö½Ú¶ÁÍêºó£¬CPU²úÉúACKĞÅºÅ(Çı¶¯SDA = 0) */
-        }
-        else
-        {
-            this->IIC.Ack(false); /* ×îºó1¸ö×Ö½Ú¶ÁÍêºó£¬CPU²úÉúNACKĞÅºÅ(Çı¶¯SDA = 1) */
-        }
-    }
-    /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->IIC.Stop();
-    return 0; /* Ö´ĞĞ³É¹¦ */
-
-    cmd_Readfail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ */
-    /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ĞÅºÅ */
-    this->IIC.Stop();
-    return 1;
+	Buffer bs(buf + bufpos, size);
+	return this->readPage(addr,bs);    
 }
 
 ushort AT24CXX::jsPageSize(uint type) //¼ÆËã´æ´¢Ò³´óĞ¡

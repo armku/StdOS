@@ -42,8 +42,11 @@
             byte checkDevice();
             ushort jsPageSize(uint type); //计算存储页大小
             int writePage(byte *buf, ushort bufpos, ushort addr, uint size); //页内写
+			int writePage(ushort addr, Buffer &bs); //页内写
             int readPage(byte *buf, ushort bufpos, ushort addr, uint size); //页内读
+			int readPage(ushort addr, Buffer &bs); //页内读
             int bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr); //读写集中操作1写 0读
+			int bufwr(ushort addr, Buffer &bs, byte wr); //读写集中操作1写 0读
 
             EW24XXType deviceType; //器件类型
             uint pageSize; //存储页大小
