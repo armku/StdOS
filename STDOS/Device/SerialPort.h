@@ -49,55 +49,28 @@ public:
 	void SetBaudRate(int baudRate = 0);
 
 	virtual void Register(TransportHandler handler, void* param = nullptr);
-
-	// 电源等级变更（如进入低功耗模式）时调用
-	virtual void ChangePower(int level);
-
+	
 	virtual String& ToStr(String& str) const { return str + Name; }
 
-	void OnTxHandler();
 	void OnRxHandler();
 
 	static SerialPort* GetMessagePort();
-
-#ifdef DEBUG
-	static void Test();
-#endif
-
 protected:
 	virtual bool OnOpen();
-	virtual void OnClose();
 
 	virtual bool OnWrite(const Buffer& bs);
 	virtual uint OnRead(Buffer& bs);
 
 private:
-	static void OnHandler(ushort num, void* param);
 	void Set485(bool flag);
 
 	void*	_task;
 	uint	_taskidRx;
 	void ReceiveTask();
 
-	void OnInit();
-	bool OnSet();
-	void OnOpen2();
-	void OnClose2();
 	void OnWrite2();//调用发送中断
 public:	
 	void Printf(char *Data, ...);//模拟printf
-};
-
-// 串口设备配置
-class SerialConfig
-{
-public:
-	COM Com;
-	int Baudrate;
-
-	Pin	Power;
-	Pin Reset;
-	Pin	LowPower;
 };
 
 #endif

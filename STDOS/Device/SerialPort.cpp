@@ -1,5 +1,4 @@
 #include "TInterrupt.h"
-#include "TTime.h"
 #include "SerialPort.h"
 #include "Task.h"
 
@@ -11,9 +10,6 @@ SerialPort::SerialPort()
 SerialPort::SerialPort(COM index, int baudRate)
 {
     this->Set(index,baudRate);    
-}
-void SerialPort::OnInit()
-{
 }
 
 // 析构时自动关闭
@@ -45,7 +41,6 @@ void SerialPort::Set(COM index, int baudRate)
         this->ByteTime = 1000 / (this->_baudRate / 10) + 1;
     else
         this->ByteTime = 1;
-    this->OnSet();
 }
 void SerialPort::Set(byte dataBits, byte parity, byte stopBits)
 {
@@ -68,12 +63,6 @@ bool SerialPort::Flush(int times)
 void SerialPort::SetBaudRate(int baudRate)
 {	
 	this->_baudRate=baudRate;
-}
-
-void SerialPort::ChangePower(int level)
-{
-	if (level)
-    this->Close();
 }
 
 SerialPort *printf_sp;
@@ -112,11 +101,6 @@ SerialPort *SerialPort::GetMessagePort()
     return printf_sp;
 }
 
-// 关闭端口
-void SerialPort::OnClose()
-{
-    
-}
 // 向某个端口写入数据。如果size为0，则把data当作字符串，一直发送直到遇到\0为止
 bool SerialPort::OnWrite(const Buffer& bs)
 {
@@ -287,14 +271,7 @@ void SerialPort::OnRxHandler()
 {
 	((Task*)(this->_task))->Set(true, 0);
 }
-void SerialPort::OnTxHandler()
-{
 
-}
-bool SerialPort::OnSet()
-{
-	return false;
-}
 void SerialPort::Init()
 {
 	this->Index = COM_NONE;
@@ -302,20 +279,4 @@ void SerialPort::Init()
 	Error = 0;
 
 	Remap = 0;
-	this->OnInit();
-}
-
-void SerialPort::OnOpen2()
-{
-
-}
-
-void SerialPort::OnClose2()
-{
-
-}
-
-void SerialPort::OnHandler(ushort num, void* param)
-{
-
 }
