@@ -948,11 +948,6 @@
               <FilePath>..\STDOS\Platform\STM32F1\Flash.cpp</FilePath>
             </File>
             <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\I2C.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Interrupt.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\Interrupt.cpp</FilePath>
@@ -2206,11 +2201,6 @@
               <FileName>Flash.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\Flash.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\I2C.cpp</FilePath>
             </File>
             <File>
               <FileName>Interrupt.cpp</FileName>

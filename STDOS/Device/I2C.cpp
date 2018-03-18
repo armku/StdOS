@@ -1,65 +1,5 @@
 #include "I2C.h"
 
-I2C::I2C()
-{
-	
-}
-I2C::~I2C()
-{
-	
-}
-// 打开设备
-bool I2C::Open()
-{
-	return true;
-}
-// 关闭设备
-void I2C::Close()
-{
-	
-}
-// 新会话向指定地址写入
-bool I2C::Write(int addr, const Buffer &bs)
-{
-    return false;
-}
-
-bool I2C::Write(int addr, byte data)
-{
-    return false;
-}
-
-// 新会话从指定地址读取
-uint I2C::Read(int addr, Buffer &bs)
-{
-    return 0;
-}
-
-byte I2C::Read(int addr)
-{
-    return 0;
-}
-
-ushort I2C::Read2(int addr)
-{
-    return 0;
-}
-
-uint I2C::Read4(int addr)
-{
-    return 0;
-}
-
-bool I2C::SendAddress(int addr, bool tx)
-{
-    return false;
-}
-
-bool I2C::SendSubAddr(int addr)
-{
-    return false;
-}
-
 // 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
 SoftI2C::SoftI2C(uint speedHz)
 {
@@ -69,7 +9,6 @@ SoftI2C::SoftI2C(uint speedHz)
 	this->SCL.Invert = false;
 	this->SDA.Invert = false;
 }
-SoftI2C::~SoftI2C(){}
 
 void SoftI2C::SetPin(Pin scl, Pin sda)
 {
@@ -178,7 +117,6 @@ void SoftI2C::Ack(bool ack)
         Sys.Delay(1);
     }
 }
-
 //等待应答信号到来
 //返回值：1，接收应答失败
 //        0，接收应答成功
