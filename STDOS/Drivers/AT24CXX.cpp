@@ -5,21 +5,7 @@
 
 bool AT24CXX::Write(uint addr, Buffer &bs)
 {
-	byte pbuf[1300];
-	Buffer buftmp(pbuf, bs.Length());
-
-	this->bufwr(addr, buftmp, 0);
-	int flgchg = 0;
-	for (int i = 0; i < bs.Length(); i++)
-	{
-		if (bs[i] != buftmp[i])
-		{
-			flgchg = 1;
-			break;
-		}
-	}
-	if (flgchg)
-		this->bufwr(addr, bs, 1);
+	this->bufwr(addr, bs, 1);
 	return true;
 }
 
@@ -36,7 +22,6 @@ AT24CXX::AT24CXX(EW24XXType devtype, byte devaddr, uint wnms)
 	this->pageSize = this->jsPageSize(devtype);
 	this->writedelaynms = wnms;
 }
-
 void AT24CXX::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
 {
 	this->IIC.SetPin(pinscl, pinsda);
@@ -65,7 +50,6 @@ int AT24CXX::Read(uint addr, void *pBuffer, int size, ushort bufpos)
 	this->Read(addr, bs);
 	return size;
 }
-
 /*
  *********************************************************************************************************
  *	函 数 名: Write
@@ -86,8 +70,7 @@ int AT24CXX::Write(uint addr, void *pBuffer, int size, ushort bufpos)
 byte AT24CXX::Read(ushort address)
 {
 	byte ret = 0;
-
-
+	
 	/* 第1步：发起I2C总线启动信号 */
 	this->IIC.Start();
 
@@ -130,15 +113,11 @@ byte AT24CXX::Read(ushort address)
 	{
 		goto cmd_Readbytefail; /* EEPROM器件无应答 */
 	}
-
 	/* 第9步：循环读取数据 */
-
 	ret = this->IIC.ReadByte(); /* 读1个字节 */
-
-
+	
 	this->IIC.Ack(false); /* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
-
-
+	
 	/* 发送I2C总线停止信号 */
 	this->IIC.Stop();
 	return ret; /* 执行成功 */
@@ -197,9 +176,7 @@ bool AT24CXX::Write(ushort address, byte da)
 	{
 		goto cmd_Writebytefail; /* EEPROM器件无应答 */
 	}
-
-
-
+	
 	/* 第6步：开始写入数据 */
 	this->IIC.WriteByte(da);
 
@@ -245,7 +222,6 @@ int AT24CXX::bufwr(ushort addr, Buffer &bs, byte wr)
 			if (wr)
 			{
 				this->writePage(bs.GetBuffer(), bufaddr, curAddr, bytesLeave);
-				Sys.Sleep(this->writedelaynms);
 			}
 			else
 			{
@@ -260,7 +236,6 @@ int AT24CXX::bufwr(ushort addr, Buffer &bs, byte wr)
 			if (wr)
 			{
 				this->writePage(bs.GetBuffer(), bufaddr, curAddr, this->pageSize - pageStart);
-				Sys.Sleep(this->writedelaynms);
 			}
 			else
 			{
@@ -279,7 +254,6 @@ int AT24CXX::bufwr(ushort addr, Buffer &bs, byte wr)
 			if (wr)
 			{
 				this->writePage(bs.GetBuffer(), bufaddr, curAddr, this->pageSize);
-				Sys.Sleep(this->writedelaynms);
 			}
 			else
 			{
@@ -295,7 +269,6 @@ int AT24CXX::bufwr(ushort addr, Buffer &bs, byte wr)
 			if (wr)
 			{
 				this->writePage(bs.GetBuffer(), bufaddr, curAddr, bytesLeave);
-				Sys.Sleep(this->writedelaynms);
 			}
 			else
 			{
@@ -324,6 +297,25 @@ int AT24CXX::writePage(ushort addr, Buffer &bs) //页内写
 {
 	uint m;
 	ushort usAddr;
+	byte buftmp[256];
+
+	//非法长度，直接返回
+	if (bs.Length() > 256)
+		return;
+	Buffer bstmp(buftmp,bs.Length());
+	this->readPage(addr,bstmp);
+	bool flagchgs = false;
+	for (int i = 0; i < bs.Length(); i++)
+	{
+		if (bs[i] != bstmp[i])
+		{
+			flagchgs = true;
+			break;
+		}
+	}
+	//存储值与之前相等，不需要更新
+	if (!flagchgs)
+		return;
 
 	//debug_printf("页写\r\n"); //return;
 	usAddr = addr;
@@ -388,6 +380,7 @@ int AT24CXX::writePage(ushort addr, Buffer &bs) //页内写
 
 	/* 命令执行成功，发送I2C总线停止信号 */
 	this->IIC.Stop();
+	Sys.Sleep(this->writedelaynms);
 	return 0;
 
 cmd_Writefail:  /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
