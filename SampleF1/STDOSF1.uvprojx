@@ -722,11 +722,6 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
-            <File>
-              <FileName>PwmSolo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1986,11 +1981,6 @@
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSolo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
             </File>
           </Files>
         </Group>
