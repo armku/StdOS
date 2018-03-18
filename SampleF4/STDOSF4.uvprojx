@@ -736,11 +736,6 @@
               <FilePath>..\STDOS\Device\Port.cpp</FilePath>
             </File>
             <File>
-              <FileName>Pwm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Pwm.cpp</FilePath>
-            </File>
-            <File>
               <FileName>RTC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\RTC.cpp</FilePath>
@@ -1109,6 +1104,11 @@
               <FileName>PwmSoloTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PwmTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1844,11 +1844,6 @@
               <FilePath>..\STDOS\Device\Port.cpp</FilePath>
             </File>
             <File>
-              <FileName>Pwm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Pwm.cpp</FilePath>
-            </File>
-            <File>
               <FileName>RTC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\RTC.cpp</FilePath>
@@ -2217,6 +2212,11 @@
               <FileName>PwmSoloTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PwmTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
