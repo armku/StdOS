@@ -16,15 +16,6 @@ void HardI2C::Stop()
 void HardI2C::Start()
 {
 }
-void HardI2C::OnInit()
-{
-}
-void HardI2C::OnOpen()
-{
-}
-void HardI2C::OnClose()
-{
-}
 // 等待Ack，默认0表示采用全局Retry
 bool HardI2C::WaitAck(int retry)
 {

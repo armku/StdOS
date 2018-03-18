@@ -23,7 +23,6 @@ public:
 	virtual ~I2C();
 
 	virtual void SetPin(Pin scl, Pin sda) = 0;
-	virtual void GetPin(Pin* scl = nullptr, Pin* sda = nullptr) = 0;
 
 	virtual bool Open();		// 打开设备
 	virtual void Close();		// 关闭设备
@@ -46,8 +45,6 @@ public:
 	virtual uint Read4(int addr);
 
 protected:
-	virtual void OnOpen() = 0;	// 打开设备
-	virtual void OnClose() = 0;	// 外部设备
 
 	virtual bool SendAddress(int addr, bool tx);
 	virtual bool SendSubAddr(int addr);
@@ -85,7 +82,6 @@ public:
     virtual ~HardI2C();
 
 	virtual void SetPin(Pin scl, Pin sda);
-	virtual void GetPin(Pin* scl = nullptr, Pin* sda = nullptr);
 
 	virtual void Start();
 	virtual void Stop();
@@ -107,10 +103,6 @@ private:
 	AlternatePort SDA;
 
 	virtual bool SendAddress(int addr, bool tx = true);
-
-	void OnInit();
-	virtual void OnOpen();
-	virtual void OnClose();
 };
 
 // 软件模拟I2C
@@ -124,7 +116,6 @@ public:
     virtual ~SoftI2C();
 
 	virtual void SetPin(Pin scl, Pin sda);
-	virtual void GetPin(Pin* scl = nullptr, Pin* sda = nullptr);
 
 	virtual void Start();
 	virtual void Stop();
@@ -139,9 +130,6 @@ private:
 
 	OutputPort	SCL;	// 时钟。开漏输出
 	OutputPort	SDA;	// 数据。开漏输出，直接具备读写功能
-
-	virtual void OnOpen();
-	virtual void OnClose();	
 };
 
 /*
@@ -155,5 +143,4 @@ SCL为高时，SDA下降沿表示开始，SDA上升沿表示停止。
 感谢夏宇@10068953
 
 */
-
 #endif
