@@ -79,14 +79,6 @@ void Spi::SetNss(Pin nss)
 	this->Open();
 }
 
-void Spi::GetPin(Pin *clk, Pin *miso, Pin *mosi, Pin *nss)
-{
-    //    nss=&this->Pins[0];
-    //    clk=&this->Pins[1];
-    //    miso=&this->Pins[2];
-    //    mosi=&this->Pins[3];
-}
-
 void Spi::Open()
 {
 	this->Stop();
