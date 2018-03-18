@@ -24,10 +24,7 @@
         public:
             SoftI2C IIC; // I2C通信口
             byte Address; // 设备地址
-
-            AT24CXX();
-            virtual ~AT24CXX();
-
+			
             bool Write(ushort addr, byte data);
             byte Read(ushort addr);
 			
