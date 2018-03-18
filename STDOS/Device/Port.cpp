@@ -182,11 +182,6 @@ bool InputPort::UsePress()
     return true;
 }
 
-InputPort::~InputPort()
-{    
-	//Sys.RemoveTask(InputPort::InputTask);
-}
-
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
 bool InputPort::Read()const
 {

@@ -140,7 +140,6 @@ public:
 
 	InputPort();
     InputPort(Pin pin, bool floating = true, PuPd pull = UP);
-    virtual ~InputPort();
 
 	InputPort& Init(Pin pin, bool invert);
 
