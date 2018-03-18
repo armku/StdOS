@@ -109,10 +109,6 @@ void SerialPort::Register(TransportHandler handler, void *param)
         Interrupt.SetPriority(irq, 1);
         Interrupt.Activate(irq, OnUsartReceive, this);
     }
-    else
-    {
-        Interrupt.Deactivate(irq);
-    }
     this->_taskidRx = Sys.AddTask(&SerialPort::ReceiveTask, this,  - 1,  - 1, "serialrcv");
     this->_task = Task::Get(this->_taskidRx);
 }
