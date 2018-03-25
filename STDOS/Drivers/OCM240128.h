@@ -10,17 +10,17 @@ public:
 	void Init();//Òº¾§³õÊ¼»¯
 	void Clr();//	ÇåÆÁ
 		
-	void DispDot8x16(byte x, byte y, byte *text, byte mode);
-	void DispDot16x16(byte x, byte y, byte *text, byte mode);
-	void Draw_hline(byte x, byte y, uint16_t count);
-	void Draw_vline(byte x, byte y, uint16_t count);
+	void DispDot8x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t mode);
+	void DispDot16x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t mode);
+	void Draw_hline(uint8_t x, uint8_t y, uint16_t count);
+	void Draw_vline(uint8_t x, uint8_t y, uint16_t count);
 private:
-	void busycheck(byte autowr);//¼ì²âÃ¦×´Ì¬
-	void wcmd(byte cmd);
-	void wdata(byte dat);
-	void wcmd(byte dat, byte cmd);
-	void wcmd2(byte dat1, byte dat2, byte cmd);
-	void writedata(byte da);
+	void busycheck(uint8_t autowr);//¼ì²âÃ¦×´Ì¬
+	void wcmd(uint8_t cmd);
+	void wdata(uint8_t dat);
+	void wcmd(uint8_t dat, uint8_t cmd);
+	void wcmd2(uint8_t dat1, uint8_t dat2, uint8_t cmd);
+	void writedata(uint8_t da);
 private:
 	OutputPort pinwr;
 	OutputPort pinrd;

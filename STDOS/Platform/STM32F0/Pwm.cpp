@@ -321,10 +321,10 @@ Pwm::~Pwm()
 }
 
 // …Ë÷√’ºø’±»£¨0~255
-void Pwm::SetDuty(int idx, byte duty)
+void Pwm::SetDuty(int idx, uint8_t duty)
 {
 }
-byte Pwm::GetDuty(int idx)
+uint8_t Pwm::GetDuty(int idx)
 {
 	return 0;
 }

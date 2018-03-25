@@ -135,7 +135,7 @@ DateTime Version::Compile()const
 
     return  *dt;
 }
-const byte mon_table[12]={31,28,31,30,31,30,31,31,30,31,30,31}; 
+const uint8_t mon_table[12]={31,28,31,30,31,30,31,31,30,31,30,31}; 
 #define leapyear(year)		((year) % 4 == 0)
 #define days_in_year(a) 	(leapyear(a) ? 366 : 365)
 #define days_in_month(a) 	(mon_table[(a) - 1])

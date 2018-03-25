@@ -10,9 +10,9 @@ void IDictionary::Test()
 	debug_printf("TestDictionary......\r\n");
 
 	//不同长度的原始数据
-	byte buf1[] = {1,2,3,4,5};
-	byte buf2[] = {6,7,8,9};
-	byte buf3[] = {10,11,12,13,14,15,16,17,18,19,20};
+	uint8_t buf1[] = {1,2,3,4,5};
+	uint8_t buf2[] = {6,7,8,9};
+	uint8_t buf3[] = {10,11,12,13,14,15,16,17,18,19,20};
 
 	IDictionary dic;
 	dic.Add("buf1", buf1);

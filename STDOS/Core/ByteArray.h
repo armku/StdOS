@@ -8,7 +8,7 @@ class ByteArray : public Array
 {
 public:
 	explicit ByteArray(int length = 0);
-	ByteArray(byte item, int length);
+	ByteArray(uint8_t item, int length);
 	// 因为使用外部指针，这里初始化时没必要分配内存造成浪费
 	ByteArray(const void* data, int length, bool copy = false);
 	ByteArray(void* data, int length, bool copy = false);
@@ -37,7 +37,7 @@ public:
 #endif
 
 protected:
-	byte	Arr[0x40];	// 内部缓冲区
+	uint8_t	Arr[0x40];	// 内部缓冲区
 
 	virtual void* Alloc(int len);
 

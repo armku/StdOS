@@ -31,13 +31,13 @@ public:
 	bool ErasePage(uint32_t pageAddr);
 
     // 写入一页
-	bool WritePage(uint32_t addr, byte* buf, uint32_t count);
+	bool WritePage(uint32_t addr, uint8_t* buf, uint32_t count);
     // 读取一页
-	bool ReadPage(uint32_t addr, byte* buf, uint32_t count);
+	bool ReadPage(uint32_t addr, uint8_t* buf, uint32_t count);
     // 写入数据
-	bool Write(uint32_t addr, byte* buf, uint32_t count);
+	bool Write(uint32_t addr, uint8_t* buf, uint32_t count);
     // 读取数据
-	bool Read(uint32_t addr, byte* buf, uint32_t count);
+	bool Read(uint32_t addr, uint8_t* buf, uint32_t count);
 };
 
 /*

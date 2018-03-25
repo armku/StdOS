@@ -9,11 +9,11 @@ class DateTime
 {
 public:
 	short	Year;
-	byte	Month;
-	byte	Day;
-	byte	Hour;
-	byte	Minute;
-	byte	Second;
+	uint8_t	Month;
+	uint8_t	Day;
+	uint8_t	Hour;
+	uint8_t	Minute;
+	uint8_t	Second;
 	short	Ms;
 
 	DateTime();
@@ -38,7 +38,7 @@ public:
 	int64_t TotalMs() const;
 
 	// 获取星期，0~6表示星期天到星期六
-	byte DayOfWeek() const;
+	uint8_t DayOfWeek() const;
 	// 取时间日期的日期部分
 	DateTime Date() const;
 
@@ -77,7 +77,7 @@ public:
 	f短全部 M/d/yy HH:mm
 	F长全部 yyyy-MM-dd HH:mm:ss
 	*/
-	//cstring GetString(byte kind = 'F', char* str = nullptr);
+	//cstring GetString(uint8_t kind = 'F', char* str = nullptr);
 
 	// 当前时间
 	static DateTime Now();

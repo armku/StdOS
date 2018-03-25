@@ -14,26 +14,26 @@ extern "C"
 	/////////////////////////////////////////////////////////////////////////
 	typedef struct  // 汉字字模数据结构
 	{
-		byte Index[3]; // 汉字内码索引
-		byte Msk[32]; // 点阵码数据
+		uint8_t Index[3]; // 汉字内码索引
+		uint8_t Msk[32]; // 点阵码数据
 	} typFNT_GB16;
 	// 汉字表：
 	// 测量显示通道设置报警输出打印系统密码修改开锁
 
 	typedef struct  // 汉字字模数据结构
 	{
-		byte Index[3]; // 汉字内码索引
-		byte Msk[24]; // 点阵码数据
+		uint8_t Index[3]; // 汉字内码索引
+		uint8_t Msk[24]; // 点阵码数据
 	} typFNT_GB12;
 
 
-	extern const byte ascii_table_8x16[95][16];
-	extern const byte ascii_table_5x8[95][5];
-	extern const byte ascii_table_4x8[][4];
+	extern const uint8_t ascii_table_8x16[95][16];
+	extern const uint8_t ascii_table_5x8[95][5];
+	extern const uint8_t ascii_table_4x8[][4];
 	extern const typFNT_GB16 GB_16[];
-	extern const byte ascBolt[][16];
-	extern const byte ascii_table_6x12[][12];
-	extern const byte nAsciiDot6X16[][16];
+	extern const uint8_t ascBolt[][16];
+	extern const uint8_t ascii_table_6x12[][12];
+	extern const uint8_t nAsciiDot6X16[][16];
 
 	extern unsigned char const g_Ascii12[];
 	extern unsigned char const g_Ascii16[];

@@ -66,7 +66,7 @@ OutputPort::OutputPort()
 OutputPort::OutputPort(Pin pin):OutputPort(pin,2,false,50)
 {}
 
-OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed)
+OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain, uint8_t speed)
 {
     this->Opened = false;
     
@@ -144,7 +144,7 @@ AlternatePort::AlternatePort(Pin pin):OutputPort(P0,0,false,50)
 	}
 }
 
-AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed):OutputPort(P0,invert,openDrain,speed)
+AlternatePort::AlternatePort(Pin pin, uint8_t invert, bool openDrain, uint8_t speed):OutputPort(P0,invert,openDrain,speed)
 {
     if(pin !=P0)
 	{

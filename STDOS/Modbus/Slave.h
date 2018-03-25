@@ -10,13 +10,13 @@ private:
 	ITransport*	_port;	// 传输口
 
 public:
-	byte	Address;	// 地址
+	uint8_t	Address;	// 地址
 	
 	Slave(ITransport* port);
 	~Slave();
 
 private:
-	static void OnReceive(ITransport* transport, byte* buf, uint32_t len, void* param);
+	static void OnReceive(ITransport* transport, uint8_t* buf, uint32_t len, void* param);
 
 	// 分发处理消息。返回值决定是否响应
 	bool Dispatch(Modbus& entity);

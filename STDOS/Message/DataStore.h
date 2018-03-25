@@ -16,7 +16,7 @@ public:
 
 	// 写入数据 offset 为虚拟地址
 	int Write(uint32_t offset, const Buffer& bs);
-	int Write(uint32_t offset, byte data) { return Write(offset, Buffer(&data, 1)); }
+	int Write(uint32_t offset, uint8_t data) { return Write(offset, Buffer(&data, 1)); }
 	// 读取数据 offset 为虚拟地址
 	int Read(uint32_t offset, Buffer& bs);
 
@@ -38,10 +38,10 @@ class IDataPort
 {
 public:
 	virtual int Size() const { return 1; };
-	virtual int Write(byte* data) { return Size(); };
-	virtual int Read(byte* data) { return Size(); };
+	virtual int Write(uint8_t* data) { return Size(); };
+	virtual int Read(uint8_t* data) { return Size(); };
 
-	int Write(int data) { return Write((byte*)&data); }
+	int Write(int data) { return Write((uint8_t*)&data); }
 };
 
 /****************************** 字节数据操作接口 ************************************/
@@ -55,8 +55,8 @@ public:
 	ByteDataPort();
 	virtual ~ByteDataPort();
 
-	virtual int Write(byte* data);
-	virtual int Read(byte* data) { *data = OnRead(); return Size(); };
+	virtual int Write(uint8_t* data);
+	virtual int Read(uint8_t* data) { *data = OnRead(); return Size(); };
 
 	// 让父类的所有Write函数在这里可见
 	using IDataPort::Write;
@@ -67,13 +67,13 @@ public:
 	void DelayClose(int second);
 
 protected:
-	byte	Next;	// 开关延迟后的下一个状态
+	uint8_t	Next;	// 开关延迟后的下一个状态
 	uint32_t	_tid;
 	void StartAsync(int ms);
 	static void AsyncTask(void* param);
 
-	virtual int OnWrite(byte data) { return OnRead(); };
-	virtual byte OnRead() { return Size(); };
+	virtual int OnWrite(uint8_t data) { return OnRead(); };
+	virtual uint8_t OnRead() { return Size(); };
 };
 
 #include "Device\Port.h"
@@ -87,8 +87,8 @@ public:
 	DataOutputPort(OutputPort* port = nullptr) { Port = port; }
 
 protected:
-	virtual int OnWrite(byte data);
-	virtual byte OnRead();
+	virtual int OnWrite(uint8_t data);
+	virtual uint8_t OnRead();
 
 	String ToString() const;
 };
@@ -101,8 +101,8 @@ public:
 
 	DataInputPort(InputPort* port = nullptr) { Port = port; }
 
-	virtual int Write(byte* data);
-	virtual int Read(byte* data);
+	virtual int Write(uint8_t* data);
+	virtual int Read(uint8_t* data);
 
 	String ToString() const;
 };

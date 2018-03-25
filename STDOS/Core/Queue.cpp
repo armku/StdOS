@@ -29,7 +29,7 @@ void Queue::Clear()
 	this->_size = 0;
 #endif
 }
-void Queue::Enqueue(byte da)
+void Queue::Enqueue(uint8_t da)
 {
 #if _USEARRAY	
 	int capacity;
@@ -70,7 +70,7 @@ void Queue::Enqueue(byte da)
 #endif
 }
 
-byte Queue::Dequeue()
+uint8_t Queue::Dequeue()
 {
 #if _USEARRAY	
 	int result;
@@ -96,7 +96,7 @@ byte Queue::Dequeue()
 	}
 	return result;
 #else
-	byte ret = this->pBuf[this->_tail];
+	uint8_t ret = this->pBuf[this->_tail];
 	if (++this->_tail >= this->_capacity)
 	{
 		this->_tail = 0;
@@ -242,7 +242,7 @@ void Queue::SetBuf(void *buf, int len)
 {
 	if (len >= 0)
 	{
-		this->pBuf = (byte*)buf;
+		this->pBuf = (uint8_t*)buf;
 		this->_capacity = len;
 	}
 	this->Clear();

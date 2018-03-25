@@ -16,7 +16,7 @@ bool Flash::EraseBlock(uint32_t address) const
 	return false;
 }
 // 写块
-bool Flash::WriteBlock(uint32_t address, const byte* buf, int len, bool inc) const
+bool Flash::WriteBlock(uint32_t address, const uint8_t* buf, int len, bool inc) const
 {
 	return false;
 }
@@ -47,7 +47,7 @@ class STMFLASH
 
 static union Buff
 {
-    byte buf[2048];
+    uint8_t buf[2048];
     uint16_t buf16[1024];
 } Buff;
 
@@ -88,10 +88,10 @@ int STMFLASH::Read(uint32_t addr, void *pBuf, int len)
     {
         //起始地址为奇数
         uint16_t tmp1 = this->readHalfWord(addr - 1);
-        ((byte*)pBuf)[0] = tmp1 &0xff;
+        ((uint8_t*)pBuf)[0] = tmp1 &0xff;
         addr++;
         len--;
-        pBuf = ((byte*)pBuf) + 1;
+        pBuf = ((uint8_t*)pBuf) + 1;
     }
     while (len > 1)
     {
@@ -100,13 +100,13 @@ int STMFLASH::Read(uint32_t addr, void *pBuf, int len)
         addr++;
         len--;
         len--;
-        pBuf = ((byte*)pBuf) + 2;
+        pBuf = ((uint8_t*)pBuf) + 2;
     }
     if (len)
     {
         //没有对齐
         uint16_t tmp = this->readHalfWord(addr);
-        ((byte*)pBuf)[0] = tmp &0xff;
+        ((uint8_t*)pBuf)[0] = tmp &0xff;
     }
 
     return len;
@@ -165,7 +165,7 @@ int STMFLASH::Write(uint32_t addr, void *pBuf, int len, bool protecold)
         }
         for (int i = 0; i < writeSize; i++)
         {
-            Buff.buf[sec1pos + i] = ((byte*)pBuf)[i];
+            Buff.buf[sec1pos + i] = ((uint8_t*)pBuf)[i];
         }
 
 
@@ -184,7 +184,7 @@ int STMFLASH::Write(uint32_t addr, void *pBuf, int len, bool protecold)
         }
         for (int i = 0; i < this->flashSize; i++)
         {
-            Buff.buf[i] = ((byte*)pBuf)[addr1 + i];
+            Buff.buf[i] = ((uint8_t*)pBuf)[addr1 + i];
         }
         this->writeSector(addr1);
         addr1 += this->flashSize;
@@ -197,7 +197,7 @@ int STMFLASH::Write(uint32_t addr, void *pBuf, int len, bool protecold)
     }
     for (int i = 0; i < len1; i++)
     {
-        Buff.buf[i] = ((byte*)addr1)[i];
+        Buff.buf[i] = ((uint8_t*)addr1)[i];
     }
     this->writeSector(addr1);
     return len;

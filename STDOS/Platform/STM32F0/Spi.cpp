@@ -3,7 +3,7 @@
 #include "Platform\stm32.h"
 
 // »ù´¡¶ÁĞ´
-byte Spi::Write(byte data)
+uint8_t Spi::Write(uint8_t data)
 {
 	int retry;
 	switch (this->_index)

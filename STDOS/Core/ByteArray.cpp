@@ -1,14 +1,14 @@
 #include "ByteArray.h"
 #include "stddef.h"
 
-byte bytearraybuf[10];
+uint8_t bytearraybuf[10];
 
 ByteArray::ByteArray(int length ):Array(bytearraybuf,ArrayLength(bytearraybuf))
 {
 	this->Array::SetLength(length);
 }
 
-ByteArray::ByteArray(byte item, int length):Array(&item,length)
+ByteArray::ByteArray(uint8_t item, int length):Array(&item,length)
 {
 	this->Array::SetLength(length);
 	this->Buffer::Set(item,0,length);
@@ -71,12 +71,12 @@ ByteArray& ByteArray::operator = (ByteArray&& rval)
 // 保存到普通字节数组，首字节为长度
 int ByteArray::Load(const void* data, int maxsize)
 {
-	if(*(byte*)data>maxsize)
-		maxsize=*(byte*)data;
+	if(*(uint8_t*)data>maxsize)
+		maxsize=*(uint8_t*)data;
 	int i;
 	for(i=0;i<maxsize;i++)
 	{
-		this->_Arr[i]=((byte*)data)[i+1];
+		this->_Arr[i]=((uint8_t*)data)[i+1];
 	}
 	
 	return i;
@@ -91,10 +91,10 @@ int ByteArray::Save(void* data, int maxsize) const
 	else
 		maxsize= this->_Length;
 	int i;
-	*(byte*)data = maxsize;
+	*(uint8_t*)data = maxsize;
 	for(int i=0;i<maxsize;i++)
 	{
-		((byte*)data)[i+1]=this->_Arr[i];
+		((uint8_t*)data)[i+1]=this->_Arr[i];
 	}
 	return i;
 }

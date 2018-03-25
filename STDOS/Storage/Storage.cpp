@@ -10,7 +10,7 @@ bool BlockStorage::Read(uint32_t address, Buffer& bs) const
 		return false;
 	}
 	// Çå¿Õ
-    bool BlockStorage::Memset(uint32_t address, byte data, int len) const
+    bool BlockStorage::Memset(uint32_t address, uint8_t data, int len) const
 	{
 		return false;
 	}

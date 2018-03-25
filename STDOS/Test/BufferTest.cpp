@@ -4,8 +4,8 @@
 #ifdef _BUFFER_TEST_H
 static void TestAssign()
 {
-	byte buf[]	= { 1, 2, 3, 4 };
-	byte bts[]	= { 5, 6, 7, 8, 9, 10 };
+	uint8_t buf[]	= { 1, 2, 3, 4 };
+	uint8_t bts[]	= { 5, 6, 7, 8, 9, 10 };
 	Buffer bs(buf, sizeof(buf));
 
 	auto err	= "Buffer& operator = (const void* ptr)";
@@ -20,8 +20,8 @@ static void TestAssign()
 
 static void TestAssign2()
 {
-	byte buf[]	= { 1, 2, 3, 4 };
-	byte bts[]	= { 5, 6, 7 };
+	uint8_t buf[]	= { 1, 2, 3, 4 };
+	uint8_t bts[]	= { 5, 6, 7 };
 	Buffer bs(buf, sizeof(buf));
 	Buffer bs2(bts, sizeof(bts));
 
@@ -41,7 +41,7 @@ static void TestAssign2()
 
 static void TestCopy(const Buffer& bs)
 {
-	byte buf[5];
+	uint8_t buf[5];
 	buf[4]	= '\0';
 	Buffer bs2(buf, 4);
 
@@ -61,14 +61,14 @@ static void TestCopy(const Buffer& bs)
 	// 从指针拷贝，使用我的长度
 	bs2	= cs + 8;
 	debug_printf("bs2	= cs + 8 => %s\r\n", buf);
-	assert(bs2.GetBuffer() != (byte*)(cs + 8), err);
+	assert(bs2.GetBuffer() != (uint8_t*)(cs + 8), err);
 	assert(bs2.Length() == 4, err);
 	assert(bs2 == cs + 8, err);
 }
 
 static void TestCopy2()
 {
-	byte buf[]	= { 1, 2, 3, 4 };
+	uint8_t buf[]	= { 1, 2, 3, 4 };
 	Buffer bs(buf, sizeof(buf));
 
 	auto err	= "自我局部拷贝，不重叠";
@@ -87,7 +87,7 @@ void Buffer::Test()
 	char cs[] = "This is Buffer Test.";
 	Buffer bs(cs, sizeof(cs));
 	debug_printf("Buffer bs(cs, strlen(cs)) => %s\r\n", cs);
-	assert(bs.GetBuffer() == (byte*)cs, "GetBuffer()");
+	assert(bs.GetBuffer() == (uint8_t*)cs, "GetBuffer()");
 	assert(bs == cs, "Buffer(void* p = nullptr, int len = 0)");
 
 	TestAssign();
@@ -105,8 +105,8 @@ void Buffer::Test()
 	// 索引访问
 	bs[8]++;
 	debug_printf("bs[8]++ => %s\r\n", cs);
-	assert(cs[8] == 'C', "byte& operator[](int i)");
-	assert(bs == cs, "byte& operator[](int i)");
+	assert(cs[8] == 'C', "uint8_t& operator[](int i)");
+	assert(bs == cs, "uint8_t& operator[](int i)");
 
 	// 拷贝数据，默认-1长度表示当前长度
 	char abc[]	= "abcd";
@@ -124,19 +124,19 @@ void Buffer::Test()
 	// 用指定字节设置初始化一个区域
 	bs.Set('x', 3, 2);
 	debug_printf("Set('x', 3, 2) => %s\r\n", cs);
-	assert(cs[3] == 'x' || cs[4] == 'x', "int Set(byte item, int index, int len)");
+	assert(cs[3] == 'x' || cs[4] == 'x', "int Set(uint8_t item, int index, int len)");
 
 	// 截取一个子缓冲区
 	auto bs3	= bs.Sub(3, 2);
 	debug_printf("bs.Sub(3, 2) => %s\r\n", bs3.GetBuffer());
-	assert(bs3.GetBuffer() == (byte*)(cs + 3), "Buffer Sub(int index, int len)");
+	assert(bs3.GetBuffer() == (uint8_t*)(cs + 3), "Buffer Sub(int index, int len)");
 	assert(bs3[0] == 'x' || bs3[1] == 'x', "Buffer Sub(int index, int len)");
 
 	bs.Clear();
 	assert(cs[0] == 0 && cs[bs.Length() - 1] == 0, "void Clear()");
 
 	// 转为十六进制字符串
-	byte bts[]	= { 0xAB, 0x34, 0xfe };
+	uint8_t bts[]	= { 0xAB, 0x34, 0xfe };
 	Buffer bs4(bts, 3);
 	auto str	= bs4.ToHex('#', 2);
 	assert(str == "AB#34\r\nFE", "String ToHex(char sep = 0, int newLine = 0)");
@@ -145,7 +145,7 @@ void Buffer::Test()
 
 	Buffer bs5(cs, sizeof(cs));
 	debug_printf("Buffer(T (&arr)[N]) => %s\r\n", cs);
-	assert(bs5.GetBuffer() == (byte*)cs, "Buffer(T (&arr)[N])");
+	assert(bs5.GetBuffer() == (uint8_t*)cs, "Buffer(T (&arr)[N])");
 	assert(bs5 == cs, "Buffer(void* p = nullptr, int len = 0)");
 
 	/*Buffer bs7(cs);

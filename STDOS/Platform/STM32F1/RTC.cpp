@@ -19,12 +19,12 @@ bool RTC_WaitForLastTask2(unsigned int a1)
 {
 	return false;
 }
-uint32_t HardRTC::ReadBackup(byte addr)
+uint32_t HardRTC::ReadBackup(uint8_t addr)
 {
     return 0;
 }
 
-void HardRTC::WriteBackup(byte addr, uint32_t value)
+void HardRTC::WriteBackup(uint8_t addr, uint32_t value)
 {
     addr = addr;
     value = value;

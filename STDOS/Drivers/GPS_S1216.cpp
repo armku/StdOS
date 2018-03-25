@@ -8,16 +8,16 @@ __packed typedef struct
 {
 	uint16_t sos;            //启动序列，固定为0XA0A1
 	uint16_t PL;             //有效数据长度0X0009； 
-	byte id;             //ID，固定为0X08
-	byte GGA;            //1~255（s）,0:disable
-	byte GSA;            //1~255（s）,0:disable
-	byte GSV;            //1~255（s）,0:disable
-	byte GLL;            //1~255（s）,0:disable
-	byte RMC;            //1~255（s）,0:disable
-	byte VTG;            //1~255（s）,0:disable
-	byte ZDA;            //1~255（s）,0:disable
-	byte Attributes;     //配置数据保存位置 ,0保存到SRAM，1保存到SRAM&FLASH，2临时保存
-	byte CS;             //校验值
+	uint8_t id;             //ID，固定为0X08
+	uint8_t GGA;            //1~255（s）,0:disable
+	uint8_t GSA;            //1~255（s）,0:disable
+	uint8_t GSV;            //1~255（s）,0:disable
+	uint8_t GLL;            //1~255（s）,0:disable
+	uint8_t RMC;            //1~255（s）,0:disable
+	uint8_t VTG;            //1~255（s）,0:disable
+	uint8_t ZDA;            //1~255（s）,0:disable
+	uint8_t Attributes;     //配置数据保存位置 ,0保存到SRAM，1保存到SRAM&FLASH，2临时保存
+	uint8_t CS;             //校验值
 	uint16_t end;            //结束符:0X0D0A  
 }SkyTra_outmsg;
 //////////////////////////////////////////////////////////////////////////////////////////////////// 	
@@ -26,9 +26,9 @@ __packed typedef struct
 {
 	uint16_t sos;            //启动序列，固定为0XA0A1
 	uint16_t PL;             //有效数据长度0X0002； 
-	byte id;             //ID，固定为0X83
-	byte ACK_ID;         //ACK ID may further consist of message ID and message sub-ID which will become 3 bytes of ACK message
-	byte CS;             //校验值
+	uint8_t id;             //ID，固定为0X83
+	uint8_t ACK_ID;         //ACK ID may further consist of message ID and message sub-ID which will become 3 bytes of ACK message
+	uint8_t CS;             //校验值
 	uint16_t end;            //结束符 
 }SkyTra_ACK;
 //////////////////////////////////////////////////////////////////////////////////////////////////// 	
@@ -37,9 +37,9 @@ __packed typedef struct
 {
 	uint16_t sos;            //启动序列，固定为0XA0A1
 	uint16_t PL;             //有效数据长度0X0002； 
-	byte id;             //ID，固定为0X84
-	byte NACK_ID;         //ACK ID may further consist of message ID and message sub-ID which will become 3 bytes of ACK message
-	byte CS;             //校验值
+	uint8_t id;             //ID，固定为0X84
+	uint8_t NACK_ID;         //ACK ID may further consist of message ID and message sub-ID which will become 3 bytes of ACK message
+	uint8_t CS;             //校验值
 	uint16_t end;            //结束符 
 }SkyTra_NACK;
 GPS_S1216::GPS_S1216()
@@ -51,9 +51,9 @@ GPS_S1216::GPS_S1216()
 //从buf里面得到第cx个逗号所在的位置
 //返回值:0~0XFE,代表逗号所在位置的偏移.
 //       0XFF,代表不存在第cx个逗号							  
-byte GPS_S1216::NMEA_Comma_Pos(byte *buf, byte cx)
+uint8_t GPS_S1216::NMEA_Comma_Pos(uint8_t *buf, uint8_t cx)
 {
-	byte *p = buf;
+	uint8_t *p = buf;
 	while (cx)
 	{
 		if (*buf == '*' || *buf<' ' || *buf>'z')
@@ -65,7 +65,7 @@ byte GPS_S1216::NMEA_Comma_Pos(byte *buf, byte cx)
 }
 //m^n函数
 //返回值:m^n次方.
-uint32_t GPS_S1216::NMEA_Pow(byte m, byte n)
+uint32_t GPS_S1216::NMEA_Pow(uint8_t m, uint8_t n)
 {
 	uint32_t result = 1;
 	while (n--)
@@ -76,12 +76,12 @@ uint32_t GPS_S1216::NMEA_Pow(byte m, byte n)
 //buf:数字存储区
 //dx:小数点位数,返回给调用函数
 //返回值:转换后的数值
-int GPS_S1216::NMEA_Str2num(byte *buf, byte*dx)
+int GPS_S1216::NMEA_Str2num(uint8_t *buf, uint8_t*dx)
 {
-	byte *p = buf;
+	uint8_t *p = buf;
 	uint32_t ires = 0, fres = 0;
-	byte ilen = 0, flen = 0, i;
-	byte mask = 0;
+	uint8_t ilen = 0, flen = 0, i;
+	uint8_t mask = 0;
 	int res;
 	while (1) //得到整数和小数的长度
 	{
@@ -128,19 +128,19 @@ int GPS_S1216::NMEA_Str2num(byte *buf, byte*dx)
 //分析GPGSV信息
 //gpsx:nmea信息结构体
 //buf:接收到的GPS数据缓冲区首地址
-void GPS_S1216::NMEA_GPGSV_Analysis(byte *buf)
+void GPS_S1216::NMEA_GPGSV_Analysis(uint8_t *buf)
 {
-	byte *p, *p1, dx;
-	byte len, i, j, slx = 0;
-	byte posx;
+	uint8_t *p, *p1, dx;
+	uint8_t len, i, j, slx = 0;
+	uint8_t posx;
 	p = buf;
-	p1 = (byte*)strstr((const char *)p, "$GPGSV");
+	p1 = (uint8_t*)strstr((const char *)p, "$GPGSV");
 	len = p1[7] - '0';								//得到GPGSV的条数
 	posx = NMEA_Comma_Pos(p1, 3); 					//得到可见卫星总数
 	if (posx != 0XFF) this->gpsx.svnum = NMEA_Str2num(p1 + posx, &dx);
 	for (i = 0; i < len; i++)
 	{
-		p1 = (byte*)strstr((const char *)p, "$GPGSV");
+		p1 = (uint8_t*)strstr((const char *)p, "$GPGSV");
 		for (j = 0; j < 4; j++)
 		{
 			posx = NMEA_Comma_Pos(p1, 4 + j * 4);
@@ -171,20 +171,20 @@ void GPS_S1216::NMEA_GPGSV_Analysis(byte *buf)
 //分析BDGSV信息
 //gpsx:nmea信息结构体
 //buf:接收到的GPS数据缓冲区首地址
-void GPS_S1216::NMEA_BDGSV_Analysis(byte *buf)
+void GPS_S1216::NMEA_BDGSV_Analysis(uint8_t *buf)
 {
-	byte *p, *p1, dx;
-	byte len, i, j, slx = 0;
-	byte posx;
+	uint8_t *p, *p1, dx;
+	uint8_t len, i, j, slx = 0;
+	uint8_t posx;
 	p = buf;
-	p1 = (byte*)strstr((const char *)p, "$BDGSV");
+	p1 = (uint8_t*)strstr((const char *)p, "$BDGSV");
 	len = p1[7] - '0';								//得到BDGSV的条数
 	posx = NMEA_Comma_Pos(p1, 3); 					//得到可见北斗卫星总数
 	if (posx != 0XFF)
 		this->gpsx.beidou_svnum = NMEA_Str2num(p1 + posx, &dx);
 	for (i = 0; i < len; i++)
 	{
-		p1 = (byte*)strstr((const char *)p, "$BDGSV");
+		p1 = (uint8_t*)strstr((const char *)p, "$BDGSV");
 		for (j = 0; j < 4; j++)
 		{
 			posx = NMEA_Comma_Pos(p1, 4 + j * 4);
@@ -215,11 +215,11 @@ void GPS_S1216::NMEA_BDGSV_Analysis(byte *buf)
 //分析GNGGA信息
 //gpsx:nmea信息结构体
 //buf:接收到的GPS数据缓冲区首地址
-void GPS_S1216::NMEA_GNGGA_Analysis(byte *buf)
+void GPS_S1216::NMEA_GNGGA_Analysis(uint8_t *buf)
 {
-	byte *p1, dx;
-	byte posx;
-	p1 = (byte*)strstr((const char *)buf, "$GNGGA");
+	uint8_t *p1, dx;
+	uint8_t posx;
+	p1 = (uint8_t*)strstr((const char *)buf, "$GNGGA");
 	posx = NMEA_Comma_Pos(p1, 6);								//得到GPS状态
 	if (posx != 0XFF)
 		this->gpsx.gpssta = NMEA_Str2num(p1 + posx, &dx);
@@ -233,12 +233,12 @@ void GPS_S1216::NMEA_GNGGA_Analysis(byte *buf)
 //分析GNGSA信息
 //gpsx:nmea信息结构体
 //buf:接收到的GPS数据缓冲区首地址
-void GPS_S1216::NMEA_GNGSA_Analysis(byte *buf)
+void GPS_S1216::NMEA_GNGSA_Analysis(uint8_t *buf)
 {
-	byte *p1, dx;
-	byte posx;
-	byte i;
-	p1 = (byte*)strstr((const char *)buf, "$GNGSA");
+	uint8_t *p1, dx;
+	uint8_t posx;
+	uint8_t i;
+	p1 = (uint8_t*)strstr((const char *)buf, "$GNGSA");
 	posx = NMEA_Comma_Pos(p1, 2);								//得到定位类型
 	if (posx != 0XFF)
 		this->gpsx.fixmode = NMEA_Str2num(p1 + posx, &dx);
@@ -263,13 +263,13 @@ void GPS_S1216::NMEA_GNGSA_Analysis(byte *buf)
 //分析GNRMC信息
 //gpsx:nmea信息结构体
 //buf:接收到的GPS数据缓冲区首地址
-void GPS_S1216::NMEA_GNRMC_Analysis(byte *buf)
+void GPS_S1216::NMEA_GNRMC_Analysis(uint8_t *buf)
 {
-	byte *p1, dx;
-	byte posx;
+	uint8_t *p1, dx;
+	uint8_t posx;
 	uint32_t temp;
 	float rs;
-	p1 = (byte*)strstr((const char *)buf, "$GNRMC");//"$GNRMC",经常有&和GNRMC分开的情况,故只判断GPRMC.
+	p1 = (uint8_t*)strstr((const char *)buf, "$GNRMC");//"$GNRMC",经常有&和GNRMC分开的情况,故只判断GPRMC.
 	posx = NMEA_Comma_Pos(p1, 1);								//得到UTC时间
 	if (posx != 0XFF)
 	{
@@ -311,11 +311,11 @@ void GPS_S1216::NMEA_GNRMC_Analysis(byte *buf)
 //分析GNVTG信息
 //gpsx:nmea信息结构体
 //buf:接收到的GPS数据缓冲区首地址
-void GPS_S1216::NMEA_GNVTG_Analysis(byte *buf)
+void GPS_S1216::NMEA_GNVTG_Analysis(uint8_t *buf)
 {
-	byte *p1, dx;
-	byte posx;
-	p1 = (byte*)strstr((const char *)buf, "$GNVTG");
+	uint8_t *p1, dx;
+	uint8_t posx;
+	p1 = (uint8_t*)strstr((const char *)buf, "$GNVTG");
 	posx = NMEA_Comma_Pos(p1, 7);								//得到地面速率
 	if (posx != 0XFF)
 	{
@@ -327,7 +327,7 @@ void GPS_S1216::NMEA_GNVTG_Analysis(byte *buf)
 //提取NMEA-0183信息
 //gpsx:nmea信息结构体
 //buf:接收到的GPS数据缓冲区首地址
-void GPS_S1216::Analysis(byte *buf)
+void GPS_S1216::Analysis(uint8_t *buf)
 {
 	this->NMEA_GPGSV_Analysis(buf);	//GPGSV解析
 	this->NMEA_BDGSV_Analysis(buf);	//BDGSV解析
@@ -340,7 +340,7 @@ void GPS_S1216::Analysis(byte *buf)
 //显示GPS定位信息 
 void GPS_S1216::Show()
 {
-	const byte*fixmode_tbl[4] = { "Fail","Fail"," 2D "," 3D " };	//fix mode字符串 
+	const uint8_t*fixmode_tbl[4] = { "Fail","Fail"," 2D "," 3D " };	//fix mode字符串 
 	float tp;
 	tp = this->gpsx.longitude;
 	debug_printf("经度:%.5f %1c ", tp /= 100000, this->gpsx.ewhemi);	//得到经度字符串

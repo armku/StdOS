@@ -3,7 +3,7 @@
 #include "string.h"
 #include "Util.h"
 
-byte reginbuf[200]; //输入寄存器
+uint8_t reginbuf[200]; //输入寄存器
 uint16_t RegInputu16[40];//输入寄存器
 uint16_t RegHoilding16[(22*16+8*12+4+16+5)*2];
 
@@ -14,7 +14,7 @@ void ModbusSlave1::Process(Buffer &bs, void *param)
     bs.Show(true);
     if (IsFrameOK(bs))
     {
-        byte *buf = bs.GetBuffer();
+        uint8_t *buf = bs.GetBuffer();
         debug_printf("正确数据帧 %d %d\r\n", buf[0], buf[1]);
 
         //广播地址或本机地址，响应
@@ -67,8 +67,8 @@ void ModbusSlave1::DealFrame(Buffer &bs, void *param)
 /// 计算CRC校验码(0：地位，1：高位)
 /// </summary>
 /// <param name="byteData">输入参数：CRC值</param>
-/// <returns>返回值：byte[]，2位，0：地位，1：高位</returns>
-uint16_t ModbusSlave1::GetCRC(byte *byteData, int len)
+/// <returns>返回值：uint8_t[]，2位，0：地位，1：高位</returns>
+uint16_t ModbusSlave1::GetCRC(uint8_t *byteData, int len)
 {
     uint16_t wCrc = 0xFFFF;
     for (int i = 0; i < len; i++)

@@ -29,14 +29,14 @@
      */
     {
         public:
-            byte(*IsKeyDownFunc)(); /* 按键按下的判断函数,1表示按下 */
+            uint8_t(*IsKeyDownFunc)(); /* 按键按下的判断函数,1表示按下 */
 
-            byte Count; /* 滤波器计数器 */
+            uint8_t Count; /* 滤波器计数器 */
             uint16_t LongCount; /* 长按计数器 */
             uint16_t LongTime; /* 按键按下持续时间, 0表示不检测长按 */
-            byte State; /* 按键当前状态（按下还是弹起） */
-            byte RepeatSpeed; /* 连续按键周期 */
-            byte RepeatCount; /* 连续按键计数器 */
+            uint8_t State; /* 按键当前状态（按下还是弹起） */
+            uint8_t RepeatSpeed; /* 连续按键周期 */
+            uint8_t RepeatCount; /* 连续按键计数器 */
         public:
             //void CheckKey();			
     };
@@ -45,15 +45,15 @@
         public:
             void Init();
             void Clear();
-            void Push(byte da);
-            byte Pop();
-            byte Pop2();
+            void Push(uint8_t da);
+            uint8_t Pop();
+            uint8_t Pop2();
         private:
             const int _bufSize = 10;
-            byte Buf[10]; /* 键值缓冲区 */
-            byte Read; /* 缓冲区读指针1 */
-            byte Write; /* 缓冲区写指针 */
-            byte Read2; /* 缓冲区读指针2 */
+            uint8_t Buf[10]; /* 键值缓冲区 */
+            uint8_t Read; /* 缓冲区读指针1 */
+            uint8_t Write; /* 缓冲区写指针 */
+            uint8_t Read2; /* 缓冲区读指针2 */
     };
 
     class Key
@@ -61,16 +61,16 @@
         public:
             void InitKeyVar();
             void KeyScan();
-            void PutKey(byte _KeyCode);
-            byte GetKeyState(KEY_ID_E _ucKeyID);
-            void SetKeyParam(byte _ucKeyID, uint16_t _LongTime, byte _RepeatSpeed);
-            byte GetKeyCode();
+            void PutKey(uint8_t _KeyCode);
+            uint8_t GetKeyState(KEY_ID_E _ucKeyID);
+            void SetKeyParam(uint8_t _ucKeyID, uint16_t _LongTime, uint8_t _RepeatSpeed);
+            uint8_t GetKeyCode();
 
-            void SetKeyDetectFunc(byte(*func)(), byte pos = 0);
+            void SetKeyDetectFunc(uint8_t(*func)(), uint8_t pos = 0);
         public:
 
         private:
-            void DetectKey(byte i);
+            void DetectKey(uint8_t i);
         private:
             KEY_FIFO s_tKey;
             KEY_T s_tBtn[KEY_COUNT];

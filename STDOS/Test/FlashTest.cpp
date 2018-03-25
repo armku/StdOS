@@ -8,7 +8,7 @@ void TestFlash()
     debug_printf("\r\n\r\n");
     debug_printf("TestFlash Start......\r\n");
 
-    byte buf[] = "STM32F10x SPI Firmware Library Example: communication with an AT45DB SPI FLASH";
+    uint8_t buf[] = "STM32F10x SPI Firmware Library Example: communication with an AT45DB SPI FLASH";
     int size = ArrayLength(buf);
 
     Flash flash;
@@ -19,7 +19,7 @@ void TestFlash()
     debug_printf("FlashSize: %d(%p) Bytes  Block: %d Bytes\r\n", flash.Size, flash.Size, flash.Block);
     flash.Erase(addr, 0x100);
 
-	byte bb[0x100];
+	uint8_t bb[0x100];
     ByteArray bs;
 	bs.Set(bb, ArrayLength(bb));
 	bs.SetLength(size);

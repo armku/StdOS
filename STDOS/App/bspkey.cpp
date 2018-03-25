@@ -20,7 +20,7 @@ void KEY_FIFO::Clear()
     this->Read = this->Write;
 }
 
-void KEY_FIFO::Push(byte da)
+void KEY_FIFO::Push(uint8_t da)
 {
     this->Buf[this->Write] = da;
     if (++this->Write >= this->_bufSize)
@@ -29,9 +29,9 @@ void KEY_FIFO::Push(byte da)
     }
 }
 
-byte KEY_FIFO::Pop()
+uint8_t KEY_FIFO::Pop()
 {
-    byte ret;
+    uint8_t ret;
 
     if (this->Read == this->Write)
     {
@@ -49,9 +49,9 @@ byte KEY_FIFO::Pop()
     }
 }
 
-byte KEY_FIFO::Pop2()
+uint8_t KEY_FIFO::Pop2()
 {
-    byte ret;
+    uint8_t ret;
 
     if (this->Read2 == this->Write)
     {
@@ -77,7 +77,7 @@ byte KEY_FIFO::Pop2()
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Key::PutKey(byte _KeyCode)
+void Key::PutKey(uint8_t _KeyCode)
 {
     s_tKey.Push(_KeyCode);
 }
@@ -90,7 +90,7 @@ void Key::PutKey(byte _KeyCode)
  *	返 回 值: 1 表示按下， 0 表示未按下
  *********************************************************************************************************
  */
-byte Key::GetKeyState(KEY_ID_E _ucKeyID)
+uint8_t Key::GetKeyState(KEY_ID_E _ucKeyID)
 {
     return s_tBtn[_ucKeyID].State;
 }
@@ -105,7 +105,7 @@ byte Key::GetKeyState(KEY_ID_E _ucKeyID)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Key::SetKeyParam(byte _ucKeyID, uint16_t _LongTime, byte _RepeatSpeed)
+void Key::SetKeyParam(uint8_t _ucKeyID, uint16_t _LongTime, uint8_t _RepeatSpeed)
 {
     s_tBtn[_ucKeyID].LongTime = _LongTime; /* 长按时间 0 表示不检测长按键事件 */
     s_tBtn[_ucKeyID].RepeatSpeed = _RepeatSpeed; /* 按键连发的速度，0表示不支持连发 */
@@ -122,7 +122,7 @@ void Key::SetKeyParam(byte _ucKeyID, uint16_t _LongTime, byte _RepeatSpeed)
  */
 void Key::InitKeyVar()
 {
-    byte i;
+    uint8_t i;
 
     /* 对按键FIFO读写指针清零 */
     s_tKey.Init();
@@ -154,7 +154,7 @@ void Key::InitKeyVar()
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Key::DetectKey(byte i)
+void Key::DetectKey(uint8_t i)
 {
     KEY_T *pBtn;
 
@@ -184,7 +184,7 @@ void Key::DetectKey(byte i)
                 pBtn->State = 1;
 
                 /* 发送按钮按下的消息 */
-                PutKey((byte)(3 *i + 1));
+                PutKey((uint8_t)(3 *i + 1));
             }
 
             if (pBtn->LongTime > 0)
@@ -195,7 +195,7 @@ void Key::DetectKey(byte i)
                     if (++pBtn->LongCount == pBtn->LongTime)
                     {
                         /* 键值放入按键FIFO */
-                        PutKey((byte)(3 *i + 3));
+                        PutKey((uint8_t)(3 *i + 3));
                     }
                 }
                 else
@@ -206,7 +206,7 @@ void Key::DetectKey(byte i)
                         {
                             pBtn->RepeatCount = 0;
                             /* 常按键后，每隔10ms发送1个按键 */
-                            PutKey((byte)(3 *i + 1));
+                            PutKey((uint8_t)(3 *i + 1));
                         }
                     }
                 }
@@ -230,7 +230,7 @@ void Key::DetectKey(byte i)
                 pBtn->State = 0;
 
                 /* 发送按钮弹起的消息 */
-                PutKey((byte)(3 *i + 2));
+                PutKey((uint8_t)(3 *i + 2));
             }
         }
 
@@ -249,7 +249,7 @@ void Key::DetectKey(byte i)
  */
 void Key::KeyScan()
 {
-    byte i;
+    uint8_t i;
 
     for (i = 0; i < KEY_COUNT; i++)
     {
@@ -257,12 +257,12 @@ void Key::KeyScan()
     }
 }
 
-byte Key::GetKeyCode()
+uint8_t Key::GetKeyCode()
 {
     return this->s_tKey.Pop();
 }
 
-void Key::SetKeyDetectFunc(byte(*func)(), byte pos)
+void Key::SetKeyDetectFunc(uint8_t(*func)(), uint8_t pos)
 {
     this->s_tBtn[pos].IsKeyDownFunc = func;
 }

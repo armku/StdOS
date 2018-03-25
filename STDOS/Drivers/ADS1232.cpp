@@ -109,7 +109,7 @@ void ADS1232::Init()
 int ADS1232::Read()
 {
     int temp = 0;
-    byte i = 0;
+    uint8_t i = 0;
     
     this->sclk = 0;
     for (temp = 0; temp < 1000; temp++)

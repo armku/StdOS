@@ -11,15 +11,15 @@ class SerialPort : public ITransport
 private:
 	friend class ComProxy;
 	int		_baudRate;
-	byte	_dataBits;
-	byte	_parity;
-	byte	_stopBits;
+	uint8_t	_dataBits;
+	uint8_t	_parity;
+	uint8_t	_stopBits;
 
 	void Init();
 
 public:
 	char 		Name[5];	// 名称。COMxx，后面1字节\0表示结束
-	byte		Remap;		// 重映射组
+	uint8_t		Remap;		// 重映射组
 	OutputPort* RS485;		// RS485使能引脚
 	int 		Error;		// 错误计数
 	int			ByteTime;	// 字节间隔，最小1ms
@@ -40,9 +40,9 @@ public:
 	virtual ~SerialPort();
 
 	void Set(COM index, int baudRate = 0);
-	void Set(byte dataBits, byte parity, byte stopBits);
+	void Set(uint8_t dataBits, uint8_t parity, uint8_t stopBits);
 
-	int SendData(byte data, int times = 3000);
+	int SendData(uint8_t data, int times = 3000);
 
 	bool Flush(int times = 3000);
 

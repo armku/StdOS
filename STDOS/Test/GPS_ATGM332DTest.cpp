@@ -7,13 +7,13 @@
 uint32_t OnUsart2Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
 		bs.Show(true);
-	//gps1216.Analysis((byte*)bs.GetBuffer());//分析字符串
+	//gps1216.Analysis((uint8_t*)bs.GetBuffer());//分析字符串
 	//gps1216.Show();				//显示信息	
 	return 0;
 }
 
 SerialPort *sp2;
-byte com2rx[500], com2tx[500];
+uint8_t com2rx[500], com2tx[500];
 void GPS_ATGM332DTest()
 {
 	sp2 = new SerialPort(COM2);

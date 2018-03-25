@@ -48,7 +48,7 @@ class SystemConfig;
 class TSys
 {
 public:
-    byte	MessagePort;// 消息口，默认0表示USART1
+    uint8_t	MessagePort;// 消息口，默认0表示USART1
 
     uint32_t	Clock;  	// 系统时钟
     uint32_t	CystalClock;// 晶振时钟
@@ -57,7 +57,7 @@ public:
 	cstring	Company;	// 系统厂商 4
 	uint16_t	Code;		// 产品代码 5
 	uint16_t	Ver;		// 系统版本 6
-    byte	ID[12];		// 芯片ID。
+    uint8_t	ID[12];		// 芯片ID。
     uint16_t	DevID;		// MCU编码。低字设备版本，高字子版本
     uint16_t	RevID;		// MCU编码。低字设备版本，高字子版本
     uint32_t	CPUID;		// CPUID 

@@ -16,7 +16,7 @@ OutputPort ledss[] =
 void LedTask(void *param)
 {
 #ifdef STM32F0
-	static byte flag = 1;
+	static uint8_t flag = 1;
 	OutputPort *leds = (OutputPort*)param;
 
 	flag <<= 1;

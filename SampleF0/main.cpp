@@ -3,7 +3,7 @@
 
 #define namee "StdOS"
 
-const byte vers[] = "yyyy-MM-dd HH:mm:ss";
+const uint8_t vers[] = "yyyy-MM-dd HH:mm:ss";
 
 int main()
 {

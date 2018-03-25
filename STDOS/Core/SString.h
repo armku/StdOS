@@ -21,7 +21,7 @@ public:
 	String(cstring str, int length);
 	explicit String(bool value);
 	explicit String(char c);
-	explicit String(byte value, int radix = 10);
+	explicit String(uint8_t value, int radix = 10);
 	explicit String(short value, int radix = 10);
 	explicit String(uint16_t value, int radix = 10);
 	explicit String(int value, int radix = 10);
@@ -58,7 +58,7 @@ public:
 	bool Concat(cstring cstr);
 	bool Concat(bool value);
 	bool Concat(char c);
-	bool Concat(byte c, int radix = 10);
+	bool Concat(uint8_t c, int radix = 10);
 	bool Concat(short num, int radix = 10);
 	bool Concat(uint16_t num, int radix = 10);
 	bool Concat(int num, int radix = 10);
@@ -99,10 +99,10 @@ public:
 	//void SetAt(int index, char c);
 	char operator [] (int index) const;
 	char& operator [] (int index);
-	void GetBytes(byte* buf, int bufsize, int index=0) const;
+	void GetBytes(uint8_t* buf, int bufsize, int index=0) const;
 	ByteArray GetBytes() const;
 	ByteArray ToHex() const;
-	void ToArray(char* buf, int bufsize, int index=0) const { GetBytes((byte*)buf, bufsize, index); }
+	void ToArray(char* buf, int bufsize, int index=0) const { GetBytes((uint8_t*)buf, bufsize, index); }
 
 	int ToInt() const;
 	float ToFloat() const;

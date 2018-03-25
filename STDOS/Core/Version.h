@@ -5,8 +5,8 @@
 class Version
 {
 public:
-	byte	Major;	// 主版本
-	byte	Minor;	// 次版本
+	uint8_t	Major;	// 主版本
+	uint8_t	Minor;	// 次版本
 	short	Build;	// 编译时间。2000年以来天数
 
 	Version();

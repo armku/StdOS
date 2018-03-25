@@ -7,7 +7,7 @@
 class Stream
 {
 protected:
-	byte* _Buffer;	// 数据缓冲区。扩容后会重新分配缓冲区 1
+	uint8_t* _Buffer;	// 数据缓冲区。扩容后会重新分配缓冲区 1
 	int _Capacity;	// 缓冲区容量 2
     int _Position;	// 游标位置 3
 
@@ -40,9 +40,9 @@ public:
 	bool Seek(int offset);
 
 	// 数据流指针。注意：扩容后指针会改变！
-    byte* GetBuffer() const;
+    uint8_t* GetBuffer() const;
 	// 数据流当前位置指针。注意：扩容后指针会改变！
-    byte* Current() const;
+    uint8_t* Current() const;
 
 	// 读取7位压缩编码整数
 	int ReadEncodeInt();
@@ -68,11 +68,11 @@ public:
 	uint32_t	ReadUInt32();
 	uint64_t	ReadUInt64();
 
-	bool Write(byte value);
+	bool Write(uint8_t value);
 	bool Write(uint16_t value);
 	bool Write(uint32_t value);
 	bool Write(uint64_t value);
-	//bool Write(int8_t value)	{ return Write((byte)value); }
+	//bool Write(int8_t value)	{ return Write((uint8_t)value); }
 	bool Write(short value)	{ return Write((uint16_t)value); }
 	bool Write(int value)	{ return Write((uint32_t)value); }
 	bool Write(int64_t value)	{ return Write((uint64_t)value); }
@@ -92,7 +92,7 @@ public:
 	}
 
 	// 读取指定长度的数据并返回首字节指针，移动数据流位置
-	byte* ReadBytes(int count = -1);
+	uint8_t* ReadBytes(int count = -1);
 
 	// 读取一个字节，不移动游标。如果没有可用数据，则返回-1
 	int Peek() const;
@@ -102,7 +102,7 @@ public:
 class MemoryStream : public Stream
 {
 private:
-	byte _Arr[0x40];	// 内部缓冲区。较小内存需要时，直接使用栈分配，提高性能。
+	uint8_t _Arr[0x40];	// 内部缓冲区。较小内存需要时，直接使用栈分配，提高性能。
 	bool _needFree;		// 是否自动释放
 	//bool _resize;		// 是否可以自动扩容
 

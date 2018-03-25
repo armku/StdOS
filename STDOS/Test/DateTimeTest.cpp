@@ -12,9 +12,9 @@ static void TestCtor()
 	assert(dt.Hour == 0 && dt.Minute == 0 && dt.Second == 0 && dt.Ms == 0, "DateTime()");
 
     DateTime dt2(2016, 5, 18);
-	assert(dt2.Year == 2016 && dt2.Month == 5 && dt2.Day == 18, "DateTime(uint16_t year, byte month, byte day)");
-	assert(dt2.DayOfWeek() == 3, "DateTime(uint16_t year, byte month, byte day)");
-	assert(dt2.Hour == 0 && dt2.Minute == 0 && dt2.Second == 0 && dt2.Ms == 0, "DateTime(uint16_t year, byte month, byte day)");
+	assert(dt2.Year == 2016 && dt2.Month == 5 && dt2.Day == 18, "DateTime(uint16_t year, uint8_t month, uint8_t day)");
+	assert(dt2.DayOfWeek() == 3, "DateTime(uint16_t year, uint8_t month, uint8_t day)");
+	assert(dt2.Hour == 0 && dt2.Minute == 0 && dt2.Second == 0 && dt2.Ms == 0, "DateTime(uint16_t year, uint8_t month, uint8_t day)");
 
     DateTime dt3(1463443233);
 	assert(dt3.Year == 2016 && dt3.Month == 5 && dt3.Day == 17, "DateTime(uint32_t seconds)");

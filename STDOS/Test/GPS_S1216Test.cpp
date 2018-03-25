@@ -6,17 +6,17 @@
 #ifdef _GPS_TEST_H
 GPS_S1216 gps1216;
 #define USART3_MAX_RECV_LEN		600					//最大接收缓存字节数
-byte USART1_TX_BUF[USART3_MAX_RECV_LEN]; 					//串口1,发送缓存区
+uint8_t USART1_TX_BUF[USART3_MAX_RECV_LEN]; 					//串口1,发送缓存区
 uint32_t OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
 //	bs.Show(true);
-	gps1216.Analysis((byte*)bs.GetBuffer());//分析字符串
+	gps1216.Analysis((uint8_t*)bs.GetBuffer());//分析字符串
 	gps1216.Show();				//显示信息	
 	return 0;
 }
 
 SerialPort *sp3;
-byte com3rx[500], com3tx[500];
+uint8_t com3rx[500], com3tx[500];
 void GPSTest()
 {
 	sp3 = new SerialPort(COM2);
@@ -49,7 +49,7 @@ void GPSTest()
 //发送一批数据给SkyTraF8-BD，这里通过串口3发送
 //dbuf：数据缓存首地址
 //len：要发送的字节数
-void SendBuffer(byte* dbuf, uint16_t len)
+void SendBuffer(uint8_t* dbuf, uint16_t len)
 {
 	uint16_t j;
 	for (j = 0; j < len; j++)//循环发送数据
@@ -63,7 +63,7 @@ const uint32_t BAUD_id[9] = { 4800,9600,19200,38400,57600,115200,230400,460800,9
 																					//配置SkyTra_GPS/北斗模块波特率
 																					//baud_id:0~8，对应波特率,4800/9600/19200/38400/57600/115200/230400/460800/921600	  
 																					//返回值:0,执行成功;其他,执行失败(这里不会返回0了)
-byte GPS_S1216::SkyTra_Cfg_Prt(uint32_t baud_id, byte* buf, int& len)
+uint8_t GPS_S1216::SkyTra_Cfg_Prt(uint32_t baud_id, uint8_t* buf, int& len)
 {
 	SkyTra_baudrate *cfg_prt = (SkyTra_baudrate *)buf;
 	cfg_prt->sos = 0XA1A0;		//引导序列(小端模式)
@@ -74,7 +74,7 @@ byte GPS_S1216::SkyTra_Cfg_Prt(uint32_t baud_id, byte* buf, int& len)
 	cfg_prt->Attributes = 1; 		  //保存到SRAM&FLASH
 	cfg_prt->CS = cfg_prt->id^cfg_prt->com_port^cfg_prt->Baud_id^cfg_prt->Attributes;
 	cfg_prt->end = 0X0A0D;        //发送结束符(小端模式)
-	SendBuffer((byte*)cfg_prt, sizeof(SkyTra_baudrate));//发送数据给SkyTra   
+	SendBuffer((uint8_t*)cfg_prt, sizeof(SkyTra_baudrate));//发送数据给SkyTra   
 	delay_ms(200);				//等待发送完成 
 	usart3_init(36, BAUD_id[baud_id]);	//重新初始化串口3  
 	return SkyTra_Cfg_Ack_Check();//这里不会反回0,因为UBLOX发回来的应答在串口重新初始化的时候已经被丢弃了.
@@ -82,7 +82,7 @@ byte GPS_S1216::SkyTra_Cfg_Prt(uint32_t baud_id, byte* buf, int& len)
 //配置SkyTra_GPS模块的时钟脉冲宽度
 //width:脉冲宽度1~100000(us)
 //返回值:0,发送成功;其他,发送失败.
-byte GPS_S1216::SkyTra_Cfg_Tp(uint32_t width, byte* buf, int& len)
+uint8_t GPS_S1216::SkyTra_Cfg_Tp(uint32_t width, uint8_t* buf, int& len)
 {
 	uint32_t temp = width;
 	SkyTra_pps_width *cfg_tp = (SkyTra_pps_width *)buf;
@@ -95,13 +95,13 @@ byte GPS_S1216::SkyTra_Cfg_Tp(uint32_t width, byte* buf, int& len)
 	cfg_tp->Attributes = 0X01;  //保存到SRAM&FLASH	
 	cfg_tp->CS = cfg_tp->id^cfg_tp->Sub_ID ^ (cfg_tp->width >> 24) ^ (cfg_tp->width >> 16) & 0XFF ^ (cfg_tp->width >> 8) & 0XFF ^ cfg_tp->width & 0XFF ^ cfg_tp->Attributes;    	//用户延时为0ns
 	cfg_tp->end = 0X0A0D;       //发送结束符(小端模式)
-	SendBuffer((byte*)cfg_tp, sizeof(SkyTra_pps_width));//发送数据给NEO-6M  
+	SendBuffer((uint8_t*)cfg_tp, sizeof(SkyTra_pps_width));//发送数据给NEO-6M  
 	return SkyTra_Cfg_Ack_Check();
 }
 //配置SkyTraF8-BD的更新速率	    
 //Frep:（取值范围:1,2,4,5,8,10,20,25,40,50）测量时间间隔，单位为Hz，最大不能大于50Hz
 //返回值:0,发送成功;其他,发送失败.
-byte GPS_S1216::SkyTra_Cfg_Rate(byte Frep, byte* buf, int& len)
+uint8_t GPS_S1216::SkyTra_Cfg_Rate(uint8_t Frep, uint8_t* buf, int& len)
 {
 	SkyTra_PosRate *cfg_rate = (SkyTra_PosRate *)buf;
 	cfg_rate->sos = 0XA1A0;	    //cfg header(小端模式)
@@ -111,7 +111,7 @@ byte GPS_S1216::SkyTra_Cfg_Rate(byte Frep, byte* buf, int& len)
 	cfg_rate->Attributes = 0X01;	   	//保存到SRAM&FLASH	.
 	cfg_rate->CS = cfg_rate->id^cfg_rate->rate^cfg_rate->Attributes;//脉冲间隔,us
 	cfg_rate->end = 0X0A0D;       //发送结束符(小端模式)
-	SendBuffer((byte*)cfg_rate, sizeof(SkyTra_PosRate));//发送数据给NEO-6M 
+	SendBuffer((uint8_t*)cfg_rate, sizeof(SkyTra_PosRate));//发送数据给NEO-6M 
 	return SkyTra_Cfg_Ack_Check();
 }
 ///////////////////////////////////////////UBLOX 配置代码/////////////////////////////////////
@@ -120,10 +120,10 @@ byte GPS_S1216::SkyTra_Cfg_Rate(byte Frep, byte* buf, int& len)
 ////       1,接收超时错误
 ////       2,没有找到同步字符
 ////       3,接收到NACK应答
-byte GPS_S1216::SkyTra_Cfg_Ack_Check()
+uint8_t GPS_S1216::SkyTra_Cfg_Ack_Check()
 {
 	uint16_t len = 0, i;
-	byte rval = 0;
+	uint8_t rval = 0;
 	while ((USART3_RX_STA & 0X8000) == 0 && len < 100)//等待接收到应答   
 	{
 		len++;

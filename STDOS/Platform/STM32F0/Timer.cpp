@@ -358,7 +358,7 @@ void Timer::ClockCmd(int idx, bool state)
             break;
     }
 }
-const void *Timer::GetTimer(byte idx)
+const void *Timer::GetTimer(uint8_t idx)
 {
     return nullptr;
 }
@@ -371,10 +371,10 @@ void Timer::OnHandler(uint16_t num, void *param)
 }
 /////////////////////////////////以下为添加////////////////////
 static TIM_TypeDef *const g_Timers[] = TIMS;
-const byte Timer::TimerCount = ArrayLength(g_Timers);
+const uint8_t Timer::TimerCount = ArrayLength(g_Timers);
 extern Timer **Timers; // 已经实例化的定时器对象
 // 创建指定索引的定时器，如果已有则直接返回，默认0xFF表示随机分配
-Timer *Timer::Create(byte index)
+Timer *Timer::Create(uint8_t index)
 {
     // 特殊处理随机分配
     if (index == 0xFF)
@@ -389,7 +389,7 @@ Timer *Timer::Create(byte index)
         }
 
         // 找到第一个可用的位置，没有被使用，并且该位置定时器存在
-        byte i = 0;
+        uint8_t i = 0;
         for (; i < TimerCount && (Timers[i] || !g_Timers[i]); i++)
             ;
 

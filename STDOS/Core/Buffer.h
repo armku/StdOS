@@ -39,8 +39,8 @@ public:
 	Buffer& operator = (Buffer&& rval);
 
 	// 拿出指针供外部使用
-	inline byte* GetBuffer()				{ return (byte*)_Arr; }
-	inline const byte* GetBuffer() const	{ return (byte*)_Arr; }
+	inline uint8_t* GetBuffer()				{ return (uint8_t*)_Arr; }
+	inline const uint8_t* GetBuffer() const	{ return (uint8_t*)_Arr; }
 	inline int Length() const				{ return _Length; }
 
 	// 设置数组长度。只能缩小不能扩大，子类可以扩展以实现自动扩容
@@ -48,12 +48,12 @@ public:
 	//virtual void SetBuffer(void* ptr, int len);
 
 	// 设置指定位置的值，长度不足时自动扩容
-	bool SetAt(int index, byte value);
+	bool SetAt(int index, uint8_t value);
 
     // 重载索引运算符[]，返回指定元素的第一个字节
-    byte operator[](int i) const;
+    uint8_t operator[](int i) const;
 	// 支持 buf[i] = 0x36 的语法
-    byte& operator[](int i);
+    uint8_t& operator[](int i);
 
 	// 原始拷贝、清零，不检查边界
 	static void Copy(void* dest, const void* src, int len);
@@ -69,8 +69,8 @@ public:
 	int Copy(const Buffer& src, int destIndex = 0);
 
 	// 用指定字节设置初始化一个区域
-	int Set(byte item, int index, int len);
-	void Clear(byte item = 0);
+	int Set(uint8_t item, int index, int len);
+	void Clear(uint8_t item = 0);
 
 	// 截取一个子缓冲区，默认-1长度表示剩余全部
 	//### 这里逻辑可以考虑修改为，当len大于内部长度时，直接用内部长度而不报错，方便应用层免去比较长度的啰嗦

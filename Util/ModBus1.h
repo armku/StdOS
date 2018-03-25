@@ -34,11 +34,11 @@ class ModbusEntity1
 {
 	public:
 		/// <summary>主机地址。用于485编码</summary>
-        byte Host;
+        uint8_t Host;
 		/// <summary>功能码</summary>
         MBFunction Function;
 		/// <summary>数据</summary>
-        byte* Data;
+        uint8_t* Data;
 		uint16_t address;//地址
 		uint16_t reglength;//长度
 		/// <summary>校验数据</summary>
@@ -48,23 +48,23 @@ class ModbusEntity1
         /// <param name="offset">偏移</param>
         /// <param name="count">数量</param>
         /// <returns></returns>
-        ModbusEntity1 Parse(byte *data, int offset = 0, int count = -1);
+        ModbusEntity1 Parse(uint8_t *data, int offset = 0, int count = -1);
 		/// <summary>转为字节数组</summary>
         /// <returns></returns>
-        byte* ToArray();
+        uint8_t* ToArray();
 };
 
 class ModbusSlave1
 {
 	public:
-		byte id;//本机ID
+		uint8_t id;//本机ID
 		void Process(Buffer &bs, void *para);//处理数据
 		bool IsFrameOK(Buffer& bs);//完整的一帧数据
 		void DealFrame(Buffer&bs,void *param);//处理数据帧
 		ModbusEntity1 Entity;
 	protected:
 		virtual ModbusEntity1 Process(ModbusEntity1 entity);
-		uint16_t GetCRC(byte *byteData, int len);
+		uint16_t GetCRC(uint8_t *byteData, int len);
 };
 extern uint16_t RegInputu161[];//输入寄存器
 extern uint16_t RegHoilding161[];//保持寄存器

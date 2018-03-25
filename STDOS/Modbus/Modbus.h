@@ -38,12 +38,12 @@ class Modbus
 private:
 
 public:
-	byte	Address;	// 地址
-	byte	Code;		// 功能码
-	byte	Error;		// 是否异常
+	uint8_t	Address;	// 地址
+	uint8_t	Code;		// 功能码
+	uint8_t	Error;		// 是否异常
 
-	byte	Length;		// 数据长度
-	byte	Data[32];	// 数据
+	uint8_t	Length;		// 数据长度
+	uint8_t	Data[32];	// 数据
 
 	uint16_t	Crc;		// 校验码
 	uint16_t	Crc2;		// 动态计算得到的校验码

@@ -26,7 +26,7 @@ class Port
 public:	
     Pin		_Pin;		// 引脚   4
 	bool	Opened;		// 是否已经打开 8 5
-	byte    Index;		// 引脚自身次序编号，用于区分多引脚次序
+	uint8_t    Index;		// 引脚自身次序编号，用于区分多引脚次序
 	void*	State;		// 用户状态数据
 
 	Port();
@@ -55,13 +55,13 @@ protected:
 class OutputPort : public Port
 {
 public:
-    byte Invert		= 2;		// 是否倒置输入输出。默认2表示自动检测  12
+    uint8_t Invert		= 2;		// 是否倒置输入输出。默认2表示自动检测  12
     bool OpenDrain	= false;	// 是否开漏输出 13
-    byte Speed		= 50;		// 速度 14
+    uint8_t Speed		= 50;		// 速度 14
 
     OutputPort();
     OutputPort(Pin pin);
-    OutputPort(Pin pin, byte invert, bool openDrain = false, byte speed = 50);
+    OutputPort(Pin pin, uint8_t invert, bool openDrain = false, uint8_t speed = 50);
 
 	OutputPort& Init(Pin pin, bool invert);
 
@@ -97,7 +97,7 @@ class AlternatePort : public OutputPort
 public:
 	AlternatePort();
     AlternatePort(Pin pin);
-    AlternatePort(Pin pin, byte invert, bool openDrain = false, byte speed = 50);
+    AlternatePort(Pin pin, uint8_t invert, bool openDrain = false, uint8_t speed = 50);
 
 protected:
     //virtual void OnOpen();
@@ -130,7 +130,7 @@ public:
 
     uint16_t	ShakeTime	= 0;	// 设置 抖动时间。毫秒
 	uint16_t	PressTime	= 0;	// 获取 长按时间。毫秒
-    byte	Invert		= 2;	// 是否倒置输入输出。默认2表示自动检测 16
+    uint8_t	Invert		= 2;	// 是否倒置输入输出。默认2表示自动检测 16
     bool	Floating	= true;	// 是否浮空输入
     PuPd	Pull		= UP;	// 上拉下拉电阻
 	Trigger	Mode		= Both;	// 触发模式，上升沿下降沿
@@ -162,7 +162,7 @@ private:
 private:
 	void OpenPin(void* param);
 	bool OnRegister();
-	byte	_Value;	// 当前值
+	uint8_t	_Value;	// 当前值
 };
 
 /******************************** AnalogInPort ********************************/

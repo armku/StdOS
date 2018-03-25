@@ -26,11 +26,11 @@
 			#else
 				ADS1246(Spi *spi,InputPort &pinrd, Pin pinreset,ADSPEEDTYPE spd);
 			#endif
-            byte ReadReg(byte RegAddr);
-            void WriteReg(byte RegAddr, byte da);
+            uint8_t ReadReg(uint8_t RegAddr);
+            void WriteReg(uint8_t RegAddr, uint8_t da);
             int Read(void); //返回-1,表示转换未完成
             void Init(void);
-            byte Check(void); //AD检查，正常返回0
+            uint8_t Check(void); //AD检查，正常返回0
             bool GetFlag(void); //读取AD转换是否正常
 			void Reset(void);//复位
 			void SetSpeed(ADSPEEDTYPE spd);//设置AD转换速度
@@ -38,7 +38,7 @@
 			bool Online();//在线
         private:
             int flagOK; //ad转换正常
-            int decodead(byte *da);
+            int decodead(uint8_t *da);
 			int readCnt;//读取次数
 			int readCntCheck;//上次检查的读取周期
 			bool online;//在线

@@ -43,8 +43,8 @@
     #define RX_PW_P5    0x16  // 'RX payload width, pipe5' register address
     #define FIFO_STATUS 0x17  // 'FIFO Status Register' register address
 
-byte RX_BUF[RX_PLOAD_WIDTH]; //接收数据缓存
-byte TX_BUF[TX_PLOAD_WIDTH]; //发射数据缓存
+uint8_t RX_BUF[RX_PLOAD_WIDTH]; //接收数据缓存
+uint8_t TX_BUF[TX_PLOAD_WIDTH]; //发射数据缓存
 
 void Delay(__IO u32 nCount)
 {
@@ -115,9 +115,9 @@ void NRF24L01::Init(Spi* spi, Pin ce, Pin irq, Pin power)
  *		@arg dat:将要向寄存器写入的数据
  * @retval  NRF的status寄存器的状态
  */
-byte NRF24L01::WriteReg(byte reg, byte dat)
+uint8_t NRF24L01::WriteReg(uint8_t reg, uint8_t dat)
 {
-    byte status;
+    uint8_t status;
     this->_CE = 0;
     /*置低CSN，使能SPI传输*/
 	this->_CSN = 0;
@@ -141,9 +141,9 @@ byte NRF24L01::WriteReg(byte reg, byte dat)
  *		@arg reg:NRF的命令+寄存器地址
  * @retval  寄存器中的数据
  */
-byte NRF24L01::ReadReg(byte reg)
+uint8_t NRF24L01::ReadReg(uint8_t reg)
 {
-    byte reg_val;
+    uint8_t reg_val;
 
     this->_CE = 0;
     /*置低CSN，使能SPI传输*/
@@ -169,9 +169,9 @@ byte NRF24L01::ReadReg(byte reg)
  * 	@arg bytes: pBuf的数据长度
  * @retval  NRF的status寄存器的状态
  */
-byte NRF24L01::ReadBuf(byte reg, byte *pBuf, byte bytes)
+uint8_t NRF24L01::ReadBuf(uint8_t reg, uint8_t *pBuf, uint8_t bytes)
 {
-    byte status, byte_cnt;
+    uint8_t status, byte_cnt;
 
     this->_CE = 0;
     /*置低CSN，使能SPI传输*/
@@ -199,9 +199,9 @@ byte NRF24L01::ReadBuf(byte reg, byte *pBuf, byte bytes)
  * 	@arg bytes: pBuf的数据长度
  * @retval  NRF的status寄存器的状态
  */
-byte NRF24L01::WriteBuf(byte reg, byte *pBuf, byte bytes)
+uint8_t NRF24L01::WriteBuf(uint8_t reg, uint8_t *pBuf, uint8_t bytes)
 {
-    byte status, byte_cnt;
+    uint8_t status, byte_cnt;
 	this->_CE = 0;
     /*置低CSN，使能SPI传输*/
 	this->_CSN = 0;
@@ -294,12 +294,12 @@ void NRF24L01::TX_Mode()
  */
 bool NRF24L01::Check()
 {
-    byte buf[5] = 
+    uint8_t buf[5] = 
     {
         0xC2, 0xC2, 0xC2, 0xC2, 0xC2
     };
-    byte buf1[5];
-    byte i;
+    uint8_t buf1[5];
+    uint8_t i;
 
     /*写入5个字节的地址.  */
     this->WriteBuf(NRF_WRITE_REG + TX_ADDR, buf, 5);
@@ -328,9 +328,9 @@ bool NRF24L01::Check()
  *		@arg txBuf：存储了将要发送的数据的数组，外部定义	
  * @retval  发送结果，成功返回TXDS,失败返回MAXRT或ERROR
  */
-byte NRF24L01::Tx_Dat(byte *txbuf)
+uint8_t NRF24L01::Tx_Dat(uint8_t *txbuf)
 {
-    byte state;
+    uint8_t state;
 
     /*ce为低，进入待机模式1*/    
 	this->_CE = 0;
@@ -373,9 +373,9 @@ byte NRF24L01::Tx_Dat(byte *txbuf)
  * @retval 
  *		@arg 接收结果
  */
-byte NRF24L01::Rx_Dat(byte *rxbuf)
+uint8_t NRF24L01::Rx_Dat(uint8_t *rxbuf)
 {
-    byte state;
+    uint8_t state;
    //进入接收状态
 	this->_CE = 1;
     /*等待接收中断*/

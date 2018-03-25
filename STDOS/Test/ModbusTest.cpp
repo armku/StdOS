@@ -4,8 +4,8 @@
 
 #ifdef _MODBUS_TEST_H
 
-	byte ModbusTestbuf[]={0x01, 0x03, 0x00, 0x00, 0x00, 0x01, 0x84, 0x0A};
-	byte ModbusTestBufout[10];
+	uint8_t ModbusTestbuf[]={0x01, 0x03, 0x00, 0x00, 0x00, 0x01, 0x84, 0x0A};
+	uint8_t ModbusTestBufout[10];
 	Stream streammodbustest(ModbusTestbuf,ArrayLength(ModbusTestbuf));
 	Stream streammodbustestout(ModbusTestBufout,ArrayLength(ModbusTestBufout));
 	Modbus Modbusent;

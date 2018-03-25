@@ -62,7 +62,7 @@ bool Buffer::SetLength(int len)
 }
 
 // 设置指定位置的值，长度不足时自动扩容
-bool Buffer::SetAt(int index, byte value)
+bool Buffer::SetAt(int index, uint8_t value)
 {
 	//if ( this->_Length > index || (*(int (__fastcall **)(_DWORD, _DWORD))(*(_DWORD *)this + 12))(this, index + 1) )
     if (this->_Length > index || this->_Arr)
@@ -77,23 +77,23 @@ bool Buffer::SetAt(int index, byte value)
 }
 
 // 重载索引运算符[]，返回指定元素的第一个字节
-byte &Buffer::operator[](int i)
+uint8_t &Buffer::operator[](int i)
 {
 	if ( i < 0 || this->_Length <= i )
 	{
 		//assert_failed2((const char *)dword_4B0, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x54u);//debug_printf("Error: [] length error");
 	}
-    return ((byte*)(this->_Arr))[i];
+    return ((uint8_t*)(this->_Arr))[i];
 }
 
 //自我索引运算符[] 返回指定元素的第一个字节
-byte Buffer::operator[](int i)const
+uint8_t Buffer::operator[](int i)const
 {
 	if(i<0||this->_Length<=i)
 	{
 		//assert_failed2((const char *)dword_4B0, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x54u);
 	}
-    return ((byte*)this->_Arr)[i];
+    return ((uint8_t*)this->_Arr)[i];
 }
 
 // 原始拷贝、清零，不检查边界
@@ -107,7 +107,7 @@ void Buffer::Zero(void *dest, int len)
 	//memclr(dest,len);
     for (int i = 0; i < len; i++)
     {
-        ((byte*)dest)[i] = 0;
+        ((uint8_t*)dest)[i] = 0;
     }
 }
 
@@ -179,7 +179,7 @@ int Buffer::CopyTo(int destIndex, void *dest, int len)const
     }
     for (int i = 0; i < len; i++)
     {
-        ((byte*)dest)[destIndex + i] = ((byte*)(this->_Arr))[i];
+        ((uint8_t*)dest)[destIndex + i] = ((uint8_t*)(this->_Arr))[i];
     }
     return len;
 }
@@ -199,7 +199,7 @@ int Buffer::Copy(int destIndex, const Buffer &src, int srcIndex, int len)
     }
     for (int i = 0; i < len; i++)
     {
-        ((byte*)this->_Arr)[destIndex + i] = ((byte*)(src._Arr))[srcIndex + i];
+        ((uint8_t*)this->_Arr)[destIndex + i] = ((uint8_t*)(src._Arr))[srcIndex + i];
     }
     return len;
 }
@@ -210,7 +210,7 @@ int Buffer::Copy(const Buffer &src, int destIndex)
 	return this->Copy(destIndex,src._Arr,src.Length());
 }
 
-int Buffer::Set(byte item, int index, int len)
+int Buffer::Set(uint8_t item, int index, int len)
 {
     int ret;
     
@@ -236,7 +236,7 @@ int Buffer::Set(byte item, int index, int len)
     return ret;
 }
 
-void Buffer::Clear(byte item)
+void Buffer::Clear(uint8_t item)
 {
 	this->Set(item,0,this->_Length);	
 }
@@ -261,20 +261,20 @@ Buffer Buffer::Sub(int index, int len)
     {
         //assert_failed2("index + len <= _Length", "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0xF6u);
     }
-    return Buffer(((byte*)this->_Arr) + index, len);
+    return Buffer(((uint8_t*)this->_Arr) + index, len);
 }
 
 const Buffer Buffer::Sub(int index, int len)const
 {
 	if (len < 0)
     { 
-        return Buffer(((byte*)this->_Arr) + index, this->Length() - index);
+        return Buffer(((uint8_t*)this->_Arr) + index, this->Length() - index);
     }
     if (index + len > this->_Length)
     {
         len = this->_Length - index;
     }
-    return Buffer(((byte*)this->_Arr) + index, len);
+    return Buffer(((uint8_t*)this->_Arr) + index, len);
 }
 
 // 显示十六进制数据，指定分隔字符和换行长度
@@ -432,11 +432,11 @@ int Buffer::CompareTo(const void *ptr, int len)const
     int ret = 0;
     for (int i = 0; i < this->_Length; i++)
     {
-        if (this->GetBuffer()[i] > ((byte*)ptr)[i])
+        if (this->GetBuffer()[i] > ((uint8_t*)ptr)[i])
         {
             return 1;
         }
-        if (this->GetBuffer()[i] < ((byte*)ptr)[i])
+        if (this->GetBuffer()[i] < ((uint8_t*)ptr)[i])
         {
             return  - 1;
         }
@@ -464,7 +464,7 @@ bool operator == (const Buffer &bs1, const void *ptr)
 {
     for (int i = 0; i < bs1.Length(); i++)
     {
-        if (bs1[i] != ((byte*)ptr)[i])
+        if (bs1[i] != ((uint8_t*)ptr)[i])
         {
             return false;
         }
@@ -492,7 +492,7 @@ bool operator != (const Buffer &bs1, const void *ptr)
 {
     for (int i = 0; i < bs1.Length(); i++)
     {
-        if (bs1[i] != ((byte*)ptr)[i])
+        if (bs1[i] != ((uint8_t*)ptr)[i])
         {
             return true;
         }

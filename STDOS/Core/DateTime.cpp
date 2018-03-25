@@ -138,7 +138,7 @@ int64_t DateTime::TotalMs()const
     return 1000 * this->TotalSeconds() + this->Ms;
 }
 
-byte DateTime::DayOfWeek()const
+uint8_t DateTime::DayOfWeek()const
 {
     int v1; 
 

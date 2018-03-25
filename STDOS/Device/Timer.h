@@ -8,7 +8,7 @@
 class Timer
 {
 protected:
-	byte	_index;		// 第几个定时器，从0开始
+	uint8_t	_index;		// 第几个定时器，从0开始
 	Delegate<Timer&>	OnTick;	// 带this参数
 
 public:
@@ -39,16 +39,16 @@ private:
 protected:
 
 public:
-	static const byte	TimerCount;	// 定时器个数
+	static const uint8_t	TimerCount;	// 定时器个数
 
-	static Timer* Create(byte index = 0xFF);	// 创建指定索引的定时器，如果已有则直接返回，默认0xFF表示随机分配
+	static Timer* Create(uint8_t index = 0xFF);	// 创建指定索引的定时器，如果已有则直接返回，默认0xFF表示随机分配
 
 private:
 	void OnInit();
 	void OnOpen();
 	void OnClose();
 
-	static const void* GetTimer(byte idx);
+	static const void* GetTimer(uint8_t idx);
 };
 
 #endif

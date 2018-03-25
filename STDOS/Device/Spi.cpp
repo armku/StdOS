@@ -156,7 +156,7 @@ void SpiSoft::SetNss(Pin nss)
 /*---------------------------------------------------------
 忙状态判断，最长等待时间，200 X 10 ms=2S
 ---------------------------------------------------------*/
-byte SpiSoft::WaitBusy()
+uint8_t SpiSoft::WaitBusy()
 {
     uint16_t i;
     this->Start();
@@ -173,10 +173,10 @@ byte SpiSoft::WaitBusy()
 }
 
 //SPI写字节
-byte SpiSoft::Write(byte data)
+uint8_t SpiSoft::Write(uint8_t data)
 {
-    byte i;
-    byte ret = 0;
+    uint8_t i;
+    uint8_t ret = 0;
     if (this->CPOL == CPOL_Low)
     {
         //时钟极性，空闲时为低

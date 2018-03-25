@@ -1,7 +1,7 @@
 #include "Port.h"
 #include "Platform\stm32.h"
 
-GPIO_TypeDef *IndexToGroup(byte index);
+GPIO_TypeDef *IndexToGroup(uint8_t index);
 
 bool Port::Open()
 {
@@ -89,14 +89,14 @@ void InputPort::OpenPin(void* param)
             EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
         };
     #endif 
-GPIO_TypeDef *IndexToGroup(byte index)
+GPIO_TypeDef *IndexToGroup(uint8_t index)
 {
     return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
 }
 
-byte GroupToIndex(GPIO_TypeDef *group)
+uint8_t GroupToIndex(GPIO_TypeDef *group)
 {
-    return (byte)(((int)group - GPIOA_BASE) >> 10);
+    return (uint8_t)(((int)group - GPIOA_BASE) >> 10);
 }
 
 void OutputPort::Write(Pin pin, bool value)

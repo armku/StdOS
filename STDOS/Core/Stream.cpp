@@ -22,7 +22,7 @@ void Stream::Init(void *buf, int len)
         //assert_failed2("buf,%s",__FILE__);
     }
 
-    this->_Buffer = (byte*)buf;
+    this->_Buffer = (uint8_t*)buf;
     this->_Capacity = len;
     this->_Position = 0;
 	this->Length=len;
@@ -128,13 +128,13 @@ bool Stream::Seek(int offset)
 }
 
 // 数据流指针。注意：扩容后指针会改变！
-byte *Stream::GetBuffer()const
+uint8_t *Stream::GetBuffer()const
 {
     return this->_Buffer;
 }
 
 // 数据流当前位置指针。注意：扩容后指针会改变！
-byte *Stream::Current()const
+uint8_t *Stream::Current()const
 {
     return this->_Buffer + this->_Position;
 }
@@ -239,7 +239,7 @@ int Stream::ReadByte()
 		return -1;
 	else
 	{
-		byte v3=*this->Current();
+		uint8_t v3=*this->Current();
 		if(this->Seek(1))
 			return v3;
 		else
@@ -294,9 +294,9 @@ uint64_t Stream::ReadUInt64()
 		return 0;
 }
 
-bool Stream::Write(byte value)
+bool Stream::Write(uint8_t value)
 {
-	byte buf[1];
+	uint8_t buf[1];
 	buf[0]=value;
 	const Buffer v3(buf,1);
 	return this->Write(v3);
@@ -339,7 +339,7 @@ bool Stream::Write(uint64_t value)
 }
 
 // 读取指定长度的数据并返回首字节指针，移动数据流位置
-byte *Stream::ReadBytes(int count)
+uint8_t *Stream::ReadBytes(int count)
 {
 	int v3;
 	if(count<0)

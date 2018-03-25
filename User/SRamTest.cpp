@@ -14,13 +14,13 @@
  *	返 回 值: 0 表示测试通过； 大于0表示错误单元的个数。
  *********************************************************************************************************
  */
-byte bsp_TestExtSRAM()
+uint8_t bsp_TestExtSRAM()
 {
     uint32_t i;
     uint32_t *pSRAM;
-    byte *pBytes;
+    uint8_t *pBytes;
     uint32_t err;
-    const byte ByteBuf[4] = 
+    const uint8_t ByteBuf[4] = 
     {
         0x55, 0xA5, 0x5A, 0xAA
     };
@@ -73,7 +73,7 @@ byte bsp_TestExtSRAM()
     }
 
     /* 测试按字节方式访问, 目的是验证 FSMC_NBL0 、 FSMC_NBL1 口线 */
-    pBytes = (byte*)EXT_SRAM_ADDR;
+    pBytes = (uint8_t*)EXT_SRAM_ADDR;
     for (i = 0; i < sizeof(ByteBuf); i++)
     {
         *pBytes++ = ByteBuf[i];
@@ -81,7 +81,7 @@ byte bsp_TestExtSRAM()
 
     /* 比较SRAM的数据 */
     err = 0;
-    pBytes = (byte*)EXT_SRAM_ADDR;
+    pBytes = (uint8_t*)EXT_SRAM_ADDR;
     for (i = 0; i < sizeof(ByteBuf); i++)
     {
         if (*pBytes++ != ByteBuf[i])
@@ -99,7 +99,7 @@ FSMC fsmc;
 void SRamTest()
 {
 	fsmc.InitExtSRAM();
-	byte ret=bsp_TestExtSRAM();
+	uint8_t ret=bsp_TestExtSRAM();
 	debug_printf("内存测试错误数：%d \r\n",ret);
 	
 }

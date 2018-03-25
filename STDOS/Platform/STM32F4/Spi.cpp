@@ -3,7 +3,7 @@
 #include "Platform\stm32.h"
 
 // »ù´¡¶ÁÐ´
-byte Spi::Write(byte data)
+uint8_t Spi::Write(uint8_t data)
 {
 	int retry;
     switch (this->_index)
@@ -63,7 +63,7 @@ void Spi::OnInit()
     {
         case Spi1:
             this->SetPin(PB3, PB4, PB5);//this->SetPin(PB3, PB4, PB5, PB14);//this->SetPin(PA5, PA6, PA7, PA4);/Ô­ÉúSPI1
-                //				byte afs[] = 
+                //				uint8_t afs[] = 
                 //        {
                 //            GPIO_AF_SPI1, GPIO_AF_SPI2, GPIO_AF_SPI3, GPIO_AF_SPI4, GPIO_AF_SPI5, GPIO_AF_SPI6
                 //        };

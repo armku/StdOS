@@ -128,21 +128,21 @@ void Array::SetItemAt(int i, const void* item)
 }
 
 // 重载索引运算符[]，返回指定元素的第一个字节
-byte Array::operator[](int i) const
+uint8_t Array::operator[](int i) const
 {
 	//  if ( (!this->_Arr) || i < 0 || this->_Capacity <= i )
-//    assert_failed2((const char *)"byte& Array::operator[](int i)", __FILE__,__LINE__);
+//    assert_failed2((const char *)"uint8_t& Array::operator[](int i)", __FILE__,__LINE__);
   if ( this->_Size > 1 )
     i *= this->_Size;
   return this->_Arr[i];
 }
-byte& Array::operator[](int i)
+uint8_t& Array::operator[](int i)
 {
 //  if ( (!this->_Arr) || i < 0 || this->_Capacity <= i )
-//    assert_failed2((const char *)"byte& Array::operator[](int i)", __FILE__,__LINE__);
+//    assert_failed2((const char *)"uint8_t& Array::operator[](int i)", __FILE__,__LINE__);
   if ( this->_Size > 1 )
     i *= this->_Size;
-  return ((byte*)(this->_Arr))[i];
+  return ((uint8_t*)(this->_Arr))[i];
 }
 
 bool operator==(const Array& bs1, const Array& bs2)

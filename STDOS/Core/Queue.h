@@ -14,7 +14,7 @@
 #if _USEARRAY
 		Array _s;	// 数据流
 #else
-		byte * pBuf; 	/* 缓冲区 */
+		uint8_t * pBuf; 	/* 缓冲区 */
 		int _capacity; 	/* 缓冲区大小 */
 #endif
 	public:
@@ -25,8 +25,8 @@
 
 		int Write(const Buffer& bs);	// 批量写入
 		int Read(Buffer& bs);		// 批量读取 
-		void Enqueue(byte dat);
-		byte Dequeue();
+		void Enqueue(uint8_t dat);
+		uint8_t Dequeue();
 #if _USEARRAY		
 		int Capacity() const { return _s.Capacity(); }	// 队列容量		
 		void SetCapacity(int len);		   	

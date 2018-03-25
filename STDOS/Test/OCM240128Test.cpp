@@ -10,8 +10,8 @@ void OCM240128Test()
 	ocm.SetDataPin(PE8,PE9,PE10,PE11,PE12,PE13,PE14,PE15);
 	ocm.Init();		 //“∫æß≥ı ºªØ
 	ocm.Clr();		 //	«Â∆¡
-	ocm.DispStrAsc8x16(0,0,(byte*)"1234567890ABCDEFabcd",1,1);
-	ocm.DispStrAsc8x16(0,16,(byte*)"1234567890ABCDEFabcd",1,0);		
+	ocm.DispStrAsc8x16(0,0,(uint8_t*)"1234567890ABCDEFabcd",1,1);
+	ocm.DispStrAsc8x16(0,16,(uint8_t*)"1234567890ABCDEFabcd",1,0);		
 
 	ocm.DispAscNum16x16(0,32,0);	
 	ocm.DispAscNum16x16(2,32,1);
@@ -25,10 +25,10 @@ void OCM240128Test()
 	ocm.DispAscNum16x16(18,32,9);
 	ocm.DispAscNum16x16(20,32,10);
 
-	ocm.DisplayHz16x16(0,48,(byte*)"∞°",0);
-	ocm.DisplayHz16x16(2,48,(byte*)"∞¢",1);
-	ocm.DispStrHz16x16(0,64,(byte*)"∞°∞¢∞£",3,1);
-	ocm.DispStrHz16x16(1,80,(byte*)"∞°∞¢∞£",3,0);
+	ocm.DisplayHz16x16(0,48,(uint8_t*)"∞°",0);
+	ocm.DisplayHz16x16(2,48,(uint8_t*)"∞¢",1);
+	ocm.DispStrHz16x16(0,64,(uint8_t*)"∞°∞¢∞£",3,1);
+	ocm.DispStrHz16x16(1,80,(uint8_t*)"∞°∞¢∞£",3,0);
 	
 	ocm.Draw_hline(1, 112,10);
 	ocm.Draw_vline(26,16,30);

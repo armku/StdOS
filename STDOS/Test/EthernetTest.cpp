@@ -11,7 +11,7 @@
 #ifdef _ETHERNET_TEST_H
 TinyIP* tip;
 
-bool OnPing(IcmpSocket* socket, ICMP_HEADER* icmp, byte* buf, uint32_t len)
+bool OnPing(IcmpSocket* socket, ICMP_HEADER* icmp, uint8_t* buf, uint32_t len)
 {
     debug_printf("Ping::From ");
     //TinyIP::ShowIP(socket->Tip->RemoteIP);
@@ -21,7 +21,7 @@ bool OnPing(IcmpSocket* socket, ICMP_HEADER* icmp, byte* buf, uint32_t len)
     return true;
 }
 
-bool OnUdpReceived(UdpSocket* socket, UDP_HEADER* udp, byte* buf, uint32_t len)
+bool OnUdpReceived(UdpSocket* socket, UDP_HEADER* udp, uint8_t* buf, uint32_t len)
 {
 	if(	socket->Local.Port == 137 || 
 		socket->Local.Port == 1900 || 
@@ -38,7 +38,7 @@ bool OnUdpReceived(UdpSocket* socket, UDP_HEADER* udp, byte* buf, uint32_t len)
     return socket->Local.Port == 888;
 }
 
-bool OnTcpAccepted(TcpSocket* socket, TCP_HEADER* tcp, byte* buf, uint32_t len)
+bool OnTcpAccepted(TcpSocket* socket, TCP_HEADER* tcp, uint8_t* buf, uint32_t len)
 {
 	if(tcp->Flags & TCP_FLAGS_ACK)
 		debug_printf("Tcp::Accepted2 On %d From ", socket->Local.Port);
@@ -51,7 +51,7 @@ bool OnTcpAccepted(TcpSocket* socket, TCP_HEADER* tcp, byte* buf, uint32_t len)
     return true;
 }
 
-bool OnTcpDisconnected(TcpSocket* socket, TCP_HEADER* tcp, byte* buf, uint32_t len)
+bool OnTcpDisconnected(TcpSocket* socket, TCP_HEADER* tcp, uint8_t* buf, uint32_t len)
 {
     debug_printf("Tcp::Disconnected From ");
     //TinyIP::ShowIP(socket->RemoteIP);
@@ -61,7 +61,7 @@ bool OnTcpDisconnected(TcpSocket* socket, TCP_HEADER* tcp, byte* buf, uint32_t l
     return true;
 }
 
-bool OnTcpReceived(TcpSocket* socket, TCP_HEADER* tcp, byte* buf, uint32_t len)
+bool OnTcpReceived(TcpSocket* socket, TCP_HEADER* tcp, uint8_t* buf, uint32_t len)
 {
     debug_printf("Tcp::Received From ");
     //TinyIP::ShowIP(socket->RemoteIP);
@@ -71,7 +71,7 @@ bool OnTcpReceived(TcpSocket* socket, TCP_HEADER* tcp, byte* buf, uint32_t len)
     return true;
 }
 
-bool HttpReceived(TcpSocket* socket, TCP_HEADER* tcp, byte* buf, uint32_t len)
+bool HttpReceived(TcpSocket* socket, TCP_HEADER* tcp, uint8_t* buf, uint32_t len)
 {
     debug_printf("HttpClient::Received From ");
     //TinyIP::ShowIP(socket->RemoteIP);
@@ -90,12 +90,12 @@ void HttpSend(void* param)
     //tcp.OnReceived = HttpReceived;
 
 	// 连接
-	//byte ip[] = {192, 168, 0, 84};
+	//uint8_t ip[] = {192, 168, 0, 84};
 	//tcp.Connect(*(uint32_t*)ip, 80);
 	debug_printf("\r\n");
 
 	// 发送数据
-	//byte str[] = "GET / HTTP/1.1\r\nHost: 192.168.0.84\r\n\r\n\r\n";
+	//uint8_t str[] = "GET / HTTP/1.1\r\nHost: 192.168.0.84\r\n\r\n\r\n";
 	//tcp.Send(str, ArrayLength(str));
 
 	// 等待接收
@@ -112,11 +112,11 @@ void UdpSend(void* param)
 	//udp.Port = 777;
 
 	// 连接
-	//byte ip[] = {192, 168, 0, 84};
+	//uint8_t ip[] = {192, 168, 0, 84};
 	//udp.RemoteIP = *(uint32_t*)ip;
 
 	// 发送数据
-	//byte str[] = "GET / HTTP/1.1\r\nHost: 192.168.0.84\r\n\r\n";
+	//uint8_t str[] = "GET / HTTP/1.1\r\nHost: 192.168.0.84\r\n\r\n";
 	//udp.Send(str, ArrayLength(str));
 }
 
@@ -135,7 +135,7 @@ void UdpSend(void* param)
         else
             debug_printf("Ping Fail\r\n");
     }
-	byte ip[] = {192, 168, 0, 84};
+	uint8_t ip[] = {192, 168, 0, 84};
 	icmp->Ping(*(uint32_t*)ip);
 
 	debug_printf("\r\n Http收发测试 ");

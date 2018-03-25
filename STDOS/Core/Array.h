@@ -48,8 +48,8 @@ public:
 	virtual void SetItemAt(int i, const void* item);
 
     // 重载索引运算符[]，返回指定元素的第一个字节
-    byte operator[](int i) const;
-    byte& operator[](int i);
+    uint8_t operator[](int i) const;
+    uint8_t& operator[](int i);
 
 	friend bool operator==(const Array& bs1, const Array& bs2);
 	friend bool operator!=(const Array& bs1, const Array& bs2);
@@ -61,7 +61,7 @@ public:
 protected:
 	bool	_needFree;	// 是否需要释放 string(4)
 	bool	_canWrite;	// 是否可写 string(8)
-	byte	_Size;		// 单个元素大小。字节 string(13)
+	uint8_t	_Size;		// 单个元素大小。字节 string(13)
 	int		_Capacity;	// 最大个数。非字节数 string(16)
 
 	void Init();

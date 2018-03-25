@@ -2,12 +2,6 @@
 #define __Type_H__
 #include <stdint.h>
 /* 类型定义 */
-//typedef char			sbyte;
-typedef unsigned char	byte;
-//typedef unsigned short	ushort;
-//typedef unsigned int	uint;
-//typedef unsigned long long	UInt64;
-//typedef long long		Int64;
 typedef const char*		cstring;
 
 #define UInt64_Max 0xFFFFFFFFFFFFFFFFull

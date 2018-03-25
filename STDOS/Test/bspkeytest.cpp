@@ -46,7 +46,7 @@
     OutputPort key11(PA0);
     OutputPort key22(PC13);
     //功能说明: 判断按键是否按下,返回值1 表示按下，0表示未按下
-    byte IsKeyDown1()
+    uint8_t IsKeyDown1()
     {
         if (key11 != 0 && key22 != 0)
             return 1;
@@ -54,7 +54,7 @@
             return 0;
     }
 
-    byte IsKeyDown2()
+    uint8_t IsKeyDown2()
     {
         if (key11 == 0 && key22 == 0)
             return 1;
@@ -62,7 +62,7 @@
             return 0;
     }
 
-    byte IsKeyDown9()
+    uint8_t IsKeyDown9()
     {
         if (key11 != 0 && key22 == 0)
             return 1;

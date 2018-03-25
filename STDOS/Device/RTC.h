@@ -10,7 +10,7 @@ public:
 	bool LowPower;	// 是否使用低功耗休眠。默认true
 	bool External;	// 是否使用外部时钟。默认false
 	bool Opened;
-	byte Reversed;
+	uint8_t Reversed;
 
 	HardRTC();
 
@@ -19,8 +19,8 @@ public:
 	void SaveTime();
 	int Sleep(int ms);
 
-	uint32_t ReadBackup(byte addr);
-	void WriteBackup(byte addr, uint32_t value);
+	uint32_t ReadBackup(uint8_t addr);
+	void WriteBackup(uint8_t addr, uint32_t value);
 	
 	static HardRTC* Instance();
 	static void Start(bool lowpower = true, bool external = false);

@@ -90,11 +90,11 @@ void CLcd::Init()
 形    参：指令 data1
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::writeCMD(byte data1)
+void CLcd::writeCMD(uint8_t data1)
 {
     this->pPincs = 0;
     this->pPinRS = 0;
-    for (byte i = 0; i < 8; i++)
+    for (uint8_t i = 0; i < 8; i++)
     {
         this->pPinsclk = 0;
         //	Sys.Delay(10);
@@ -119,11 +119,11 @@ void CLcd::writeCMD(byte data1)
 形    参：数据 data1
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::writeData(byte data1)
+void CLcd::writeData(uint8_t data1)
 {
     this->pPincs = 0;
     this->pPinRS = 1;
-    for (byte i = 0; i < 8; i++)
+    for (uint8_t i = 0; i < 8; i++)
     {
         this->pPinsclk = 0;
         if (data1 &0x80)
@@ -147,13 +147,13 @@ void CLcd::writeData(byte data1)
 形    参2：数据
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Test(byte data1, byte data2)
+void CLcd::Test(uint8_t data1, uint8_t data2)
 {
-    for (byte j = 0; j < 8; j++)
+    for (uint8_t j = 0; j < 8; j++)
     {
         this->pPincs = 0;
         this->SetAddress(j + 1, 0);
-        for (byte i = 0; i < 128; i++)
+        for (uint8_t i = 0; i < 128; i++)
         {
             this->writeData(data1);
             this->writeData(data2);
@@ -168,7 +168,7 @@ void CLcd::Test(byte data1, byte data2)
 形    参2：列
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::SetAddress(byte page, byte column) //写入地址 页 列
+void CLcd::SetAddress(uint8_t page, uint8_t column) //写入地址 页 列
 {
     column = column + 3;
     page = page - 1;
@@ -199,7 +199,7 @@ void CLcd::Point(uint16_t x, uint16_t y, uint16_t color)
 }
 
 //画图形
-void CLcd::DisplayImage(byte *pbuf, uint16_t color, uint32_t showtype)
+void CLcd::DisplayImage(uint8_t *pbuf, uint16_t color, uint32_t showtype)
 {
     switch (showtype)
     {
@@ -207,7 +207,7 @@ void CLcd::DisplayImage(byte *pbuf, uint16_t color, uint32_t showtype)
             //纵向取模下位高
             for (int i = 0; i < 128 *64 / 8; i++)
             {
-                ((byte*)(this->Interface_Table))[i] = color ? pbuf[i]: pbuf[i] ^ 0XFF;
+                ((uint8_t*)(this->Interface_Table))[i] = color ? pbuf[i]: pbuf[i] ^ 0XFF;
             }
             break;
         case 1:
@@ -509,12 +509,12 @@ void CLcd::Circle(uint16_t x0, uint16_t y0, uint16_t R)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display4x8(uint16_t x, uint16_t y, byte *dp)
+void CLcd::Display4x8(uint16_t x, uint16_t y, uint8_t *dp)
 {
-    for (byte i = 0; i < 4; i++)
+    for (uint8_t i = 0; i < 4; i++)
     {
-        byte bitMap = 0x01;
-        for (byte mi = 0; mi < 8; mi++)
+        uint8_t bitMap = 0x01;
+        for (uint8_t mi = 0; mi < 8; mi++)
         {
             this->Point(x + i, y + mi, bitMap &dp[i] ? 1 : 0);
             bitMap <<= 1;
@@ -532,12 +532,12 @@ void CLcd::Display4x8(uint16_t x, uint16_t y, byte *dp)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display5x8(uint16_t x, uint16_t y, byte *dp)
+void CLcd::Display5x8(uint16_t x, uint16_t y, uint8_t *dp)
 {
-    for (byte i = 0; i < 5; i++)
+    for (uint8_t i = 0; i < 5; i++)
     {
-        byte bitMap = 0x01;
-        for (byte mi = 0; mi < 8; mi++)
+        uint8_t bitMap = 0x01;
+        for (uint8_t mi = 0; mi < 8; mi++)
         {
             this->Point(x + i, y + mi, bitMap &dp[i] ? 1 : 0);
             bitMap <<= 1;
@@ -555,14 +555,14 @@ void CLcd::Display5x8(uint16_t x, uint16_t y, byte *dp)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display6x12(uint16_t x, uint16_t y, byte *dp)
+void CLcd::Display6x12(uint16_t x, uint16_t y, uint8_t *dp)
 {
-    for (byte j = 0; j < 2; j++)
+    for (uint8_t j = 0; j < 2; j++)
     {
-        for (byte i = 0; i < 6; i++)
+        for (uint8_t i = 0; i < 6; i++)
         {
-            byte bitMap = 0x01;
-            for (byte mi = 0; mi < 6; mi++)
+            uint8_t bitMap = 0x01;
+            for (uint8_t mi = 0; mi < 6; mi++)
             {
                 this->Point(x + i, y + mi + 6 * j, bitMap &dp[i + 6 * j] ? 1 : 0);
                 bitMap <<= 1;
@@ -579,14 +579,14 @@ void CLcd::Display6x12(uint16_t x, uint16_t y, byte *dp)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display6x16(uint16_t x, uint16_t y, byte *dp)
+void CLcd::Display6x16(uint16_t x, uint16_t y, uint8_t *dp)
 {
-    for (byte j = 0; j < 2; j++)
+    for (uint8_t j = 0; j < 2; j++)
     {
-        for (byte i = 0; i < 8; i++)
+        for (uint8_t i = 0; i < 8; i++)
         {
-            byte bitMap = 0x01;
-            for (byte mi = 0; mi < 8; mi++)
+            uint8_t bitMap = 0x01;
+            for (uint8_t mi = 0; mi < 8; mi++)
             {
                 this->Point(x + i, y + mi + 8 * j, bitMap &dp[i + 8 * j] ? 1 : 0);
                 bitMap <<= 1;
@@ -603,14 +603,14 @@ void CLcd::Display6x16(uint16_t x, uint16_t y, byte *dp)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display8x16(uint16_t x, uint16_t y, byte *dp)
+void CLcd::Display8x16(uint16_t x, uint16_t y, uint8_t *dp)
 {
-    for (byte j = 0; j < 2; j++)
+    for (uint8_t j = 0; j < 2; j++)
     {
-        for (byte i = 0; i < 8; i++)
+        for (uint8_t i = 0; i < 8; i++)
         {
-            byte bitMap = 0x01;
-            for (byte mi = 0; mi < 8; mi++)
+            uint8_t bitMap = 0x01;
+            for (uint8_t mi = 0; mi < 8; mi++)
             {
                 this->Point(x + i, y + mi + 8 * j, bitMap &dp[i + 8 * j] ? 1 : 0);
                 bitMap <<= 1;
@@ -628,14 +628,14 @@ void CLcd::Display8x16(uint16_t x, uint16_t y, byte *dp)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display12x12(uint16_t x, uint16_t y, byte *dp)
+void CLcd::Display12x12(uint16_t x, uint16_t y, uint8_t *dp)
 {
-	for (byte j = 0; j < 2; j++)
+	for (uint8_t j = 0; j < 2; j++)
     {
-        for (byte i = 0; i < 16; i++)
+        for (uint8_t i = 0; i < 16; i++)
         {
-            byte bitMap = 1;
-            for (byte mi = 0; mi < 8; mi++)
+            uint8_t bitMap = 1;
+            for (uint8_t mi = 0; mi < 8; mi++)
             {
                 this->Point(x + i, y + mi + 8 * j, 0);
                 bitMap <<= 1;
@@ -643,19 +643,19 @@ void CLcd::Display12x12(uint16_t x, uint16_t y, byte *dp)
         }
     }
 	
-    for (byte i = 0; i < 12; i++)
+    for (uint8_t i = 0; i < 12; i++)
     {
-        byte bitMap = 0x01;
-        for (byte mi = 0; mi < 8; mi++)
+        uint8_t bitMap = 0x01;
+        for (uint8_t mi = 0; mi < 8; mi++)
         {
             this->Point(x + i, y + mi+2, bitMap &dp[i] ? 1 : 0);
             bitMap <<= 1;
         }
     }
-    for (byte i = 0; i < 12; i++)
+    for (uint8_t i = 0; i < 12; i++)
     {
-        byte bitMap = 0x01;
-        for (byte mi = 0; mi < 4; mi++)
+        uint8_t bitMap = 0x01;
+        for (uint8_t mi = 0; mi < 4; mi++)
         {
             this->Point(x + i, y + mi + 8+2, bitMap &dp[i + 12] ? 1 : 0);
             bitMap <<= 1;
@@ -672,14 +672,14 @@ void CLcd::Display12x12(uint16_t x, uint16_t y, byte *dp)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display16x16(uint16_t x, uint16_t y, byte *dp)
+void CLcd::Display16x16(uint16_t x, uint16_t y, uint8_t *dp)
 {
-    for (byte j = 0; j < 2; j++)
+    for (uint8_t j = 0; j < 2; j++)
     {
-        for (byte i = 0; i < 16; i++)
+        for (uint8_t i = 0; i < 16; i++)
         {
-            byte bitMap = 1;
-            for (byte mi = 0; mi < 8; mi++)
+            uint8_t bitMap = 1;
+            for (uint8_t mi = 0; mi < 8; mi++)
             {
                 this->Point(x + i, y + mi + 8 * j, bitMap &dp[i + 16 * j] ? 1 : 0);
                 bitMap <<= 1;
@@ -697,14 +697,14 @@ void CLcd::Display16x16(uint16_t x, uint16_t y, byte *dp)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display16x32(uint16_t x, uint16_t y, byte *dp)
+void CLcd::Display16x32(uint16_t x, uint16_t y, uint8_t *dp)
 {
-    for (byte j = 0; j < 2; j++)
+    for (uint8_t j = 0; j < 2; j++)
     {
-        for (byte i = 0; i < 31; i++)
+        for (uint8_t i = 0; i < 31; i++)
         {
-            byte bitMap = 0x01;
-            for (byte mi = 0; mi < 8; mi++)
+            uint8_t bitMap = 0x01;
+            for (uint8_t mi = 0; mi < 8; mi++)
             {
                 this->Point(x + i, y + mi + 8 * j, bitMap &dp[i + 32 * j] ? 1 : 0);
                 bitMap <<= 1;
@@ -721,14 +721,14 @@ void CLcd::Display16x32(uint16_t x, uint16_t y, byte *dp)
 形    参3: *dp 显示内容
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display32x32(uint16_t x, uint16_t y, byte *dp)
+void CLcd::Display32x32(uint16_t x, uint16_t y, uint8_t *dp)
 {
-    for (byte j = 0; j < 4; j++)
+    for (uint8_t j = 0; j < 4; j++)
     {
-        for (byte i = 0; i < 31; i++)
+        for (uint8_t i = 0; i < 31; i++)
         {
-            byte bitMap = 0x01;
-            for (byte mi = 0; mi < 8; mi++)
+            uint8_t bitMap = 0x01;
+            for (uint8_t mi = 0; mi < 8; mi++)
             {
                 this->Point(x + i, y + mi + 8 * j, bitMap &dp[i + 32 * j] ? 1 : 0);
                 bitMap <<= 1;
@@ -797,7 +797,7 @@ void CLcd::ShadowReset()
 }
 
 //阴影启用，默认启用通道0
-void CLcd::ShadowOn(uint16_t x, uint16_t y, uint16_t width, uint16_t height, byte id)
+void CLcd::ShadowOn(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t id)
 {
     if (id >= 3)
     {

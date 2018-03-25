@@ -2,7 +2,7 @@
 //#include "_Core.h"
 #include "Platform\stm32.h"
 
-GPIO_TypeDef *IndexToGroup(byte index);
+GPIO_TypeDef *IndexToGroup(uint8_t index);
 
 void Port_OnOpen(Pin pin)
 {
@@ -106,14 +106,14 @@ void InputPort::OpenPin(void *param){}
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
 
-GPIO_TypeDef *IndexToGroup(byte index)
+GPIO_TypeDef *IndexToGroup(uint8_t index)
 {
     return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
 }
 
-byte GroupToIndex(GPIO_TypeDef *group)
+uint8_t GroupToIndex(GPIO_TypeDef *group)
 {
-    return (byte)(((int)group - GPIOA_BASE) >> 10);
+    return (uint8_t)(((int)group - GPIOA_BASE) >> 10);
 }
 
 void OutputPort::Write(Pin pin, bool value)

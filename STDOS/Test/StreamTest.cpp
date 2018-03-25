@@ -3,9 +3,9 @@
 //#define _STREAM_TEST_H
 
 #ifdef _STREAM_TEST_H
-byte buftest[]={0,1,2,3,4,5,6,7,8,9};
+uint8_t buftest[]={0,1,2,3,4,5,6,7,8,9};
 Stream streambuf(buftest,ArrayLength(buftest));
-byte bufbyte=0x0d;
+uint8_t bufbyte=0x0d;
 uint16_t bufshort=0x1234;
 uint32_t bufuint = 0x12345678;
 uint64_t bufuint64 = 0x12345678ABCDEF;

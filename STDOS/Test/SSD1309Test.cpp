@@ -13,7 +13,7 @@
     void ssd1309routin(void *param)
     {
         static int cnt;
-        static byte t;
+        static uint8_t t;
         if (++t > 100)
         {
             t = 0;

@@ -149,7 +149,7 @@ void TestCrc()
 
 	// 测试Crc16，数据和crc部分一起计算crc16，结果为0
     debug_printf("\r\n");
-    byte data16[] = { 0x01, 0x08, 0x00, 0x00};
+    uint8_t data16[] = { 0x01, 0x08, 0x00, 0x00};
     uint16_t crc16 = Crc::Hash16(Buffer(data16, 4));
     debug_printf("Crc::Hash16(#%08x) = 0x%04x\r\n", _REV(*(uint32_t*)data16), crc16);
     uint16_t crc17 = Crc::Hash16(Buffer(&crc16, 2), crc16);

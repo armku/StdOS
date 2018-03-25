@@ -42,7 +42,7 @@ void SerialPort::Set(COM index, int baudRate)
     else
         this->ByteTime = 1;
 }
-void SerialPort::Set(byte dataBits, byte parity, byte stopBits)
+void SerialPort::Set(uint8_t dataBits, uint8_t parity, uint8_t stopBits)
 {
 	this->_dataBits=dataBits;
 	this->_parity=parity;

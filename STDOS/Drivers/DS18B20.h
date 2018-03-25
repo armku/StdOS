@@ -4,16 +4,16 @@
 	class DS18B20
     {
         public:
-            byte Init();	
+            uint8_t Init();	
 			void SetPin(Pin pin);
             float GetTemp();
 			void ReadId();
 			bool Presence();
 		private:
 			void Start();
-			void WriteByte(byte dat);
-			byte ReadByte();
-			byte ReadBit();			
+			void WriteByte(uint8_t dat);
+			uint8_t ReadByte();
+			uint8_t ReadBit();			
 			void Rest();
 			void SkipRom();
 		private:

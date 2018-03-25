@@ -53,8 +53,8 @@ void TestNRF24L01()
     debug_printf("TestNRF24L01 Start......\r\n");
 
     // 修改数据，加上系统ID
-    //byte* p = tx_buf + 5;
-    //Sys.ToHex(p, (byte*)Sys.ID, 6);
+    //uint8_t* p = tx_buf + 5;
+    //Sys.ToHex(p, (uint8_t*)Sys.ID, 6);
 	//String str(tx_buf);
 	//str.SetLength(5);
 	//str.Append(ByteArray(Sys.ID, 6));

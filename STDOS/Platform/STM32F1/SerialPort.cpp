@@ -37,7 +37,7 @@ void OnUsartReceive(uint16_t num, void *param)
 {
     SerialPort *sp = (SerialPort*)param;
     USART_TypeDef *const g_Uart_Ports[] = UARTS;
-	volatile byte ch;
+	volatile uint8_t ch;
 
     //if (sp && sp->HasHandler())
     if (sp)
@@ -99,8 +99,8 @@ void SerialPort::Register(TransportHandler handler, void *param)
 {
     ITransport::Register(handler, param);
 
-    const byte irqs[] = UART_IRQs;
-    byte irq = irqs[this->Index];
+    const uint8_t irqs[] = UART_IRQs;
+    uint8_t irq = irqs[this->Index];
     if (handler)
     {
         Interrupt.SetPriority(irq, 0);
@@ -318,13 +318,13 @@ uint32_t SerialPort::OnRead(Buffer &bs)
     // 轮询接收寄存器，收到数据则放入缓冲区
     if (USART_GetFlagStatus(g_Uart_Ports[this->Index], USART_FLAG_RXNE) != RESET)
     {
-        this->Rx.Enqueue((byte)USART_ReceiveData(g_Uart_Ports[this->Index]));
+        this->Rx.Enqueue((uint8_t)USART_ReceiveData(g_Uart_Ports[this->Index]));
     }
     return bs.Length();
 }
 
 // 发送单一字节数据
-int SerialPort::SendData(byte data, int times)
+int SerialPort::SendData(uint8_t data, int times)
 {
     if (this->_baudRate < 9600)
     {

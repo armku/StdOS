@@ -50,8 +50,8 @@ void TestNum10()
 	TS("TestNum10");
 
 	debug_printf("10进制构造函数:.....\r\n");
-	String str1((byte)123, 10);
-	assert(str1 == "123", "String(byte value, int radix = 10)");
+	String str1((uint8_t)123, 10);
+	assert(str1 == "123", "String(uint8_t value, int radix = 10)");
 
 	String str2((short)4567, 10);
 	assert(str2 == "4567", "String(short value, int radix = 10)");
@@ -87,9 +87,9 @@ void TestNum16()
 	TS("TestNum16");
 
 	debug_printf("16进制构造函数:.....\r\n");
-	String str1((byte)0xA3, 16);
-	assert(str1 == "a3", "String(byte value, int radix = 16)");
-	assert(String((byte)0xA3, -16) == "A3", "String(byte value, int radix = 16)");
+	String str1((uint8_t)0xA3, 16);
+	assert(str1 == "a3", "String(uint8_t value, int radix = 16)");
+	assert(String((uint8_t)0xA3, -16) == "A3", "String(uint8_t value, int radix = 16)");
 
 	String str2((short)0x4567, 16);
 	assert(str2 == "4567", "String(short value, int radix = 16)");
@@ -173,7 +173,7 @@ static void TestConcat16()
 	String str = "十六进制连接测试 ";
 
 	// 连接单个字节的十六进制
-	str.Concat((byte)0x20, 16);
+	str.Concat((uint8_t)0x20, 16);
 
 	// 连接整数的十六进制，前面补零
 	str += " @ ";
@@ -228,8 +228,8 @@ static void TestSet()
 	int len = str.Length();
 	auto bs = str.GetBytes();
 	assert(bs.Length() == str.Length(), "ByteArray GetBytes() const");
-	assert(bs[len - 1] == (byte)'C', "ByteArray GetBytes() const");
-	//assert(bs.GetBuffer() == (byte*)str.GetBuffer(), "ByteArray GetBytes() const");
+	assert(bs[len - 1] == (uint8_t)'C', "ByteArray GetBytes() const");
+	//assert(bs.GetBuffer() == (uint8_t*)str.GetBuffer(), "ByteArray GetBytes() const");
 
 	// 十六进制字符串转为二进制数组
 	str = "36-1f-36-35-34-3F-31-31-32-30-32-34";

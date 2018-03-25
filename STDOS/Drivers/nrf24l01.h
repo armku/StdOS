@@ -15,13 +15,13 @@
 	class NRF24L01 
 	{
 		public:
-			byte Channel;		// 通讯频道。物理频率号，在2400MHZ基础上加
-			byte Local[5];		// 本地地址
-			byte Remote[5];		// 远程地址
+			uint8_t Channel;		// 通讯频道。物理频率号，在2400MHZ基础上加
+			uint8_t Local[5];		// 本地地址
+			uint8_t Remote[5];		// 远程地址
 			bool DynPayload;	// 动态负载
 			bool AutoAnswer;	// 自动应答，默认启用
 			uint16_t Speed;		// 射频数据率，单位kbps，默认250kbps，可选1000kbps/2000kbps，速度越低传输越远
-			byte RadioPower;	// 发射功率。共8档，最高0x07代表7dBm最大功率
+			uint8_t RadioPower;	// 发射功率。共8档，最高0x07代表7dBm最大功率
 			bool Master;		// 是否主节点。
 
 			uint16_t	Error;		// 错误次数，超过最大错误次数则自动重置
@@ -44,8 +44,8 @@
 			typedef int (*FuncBufInt)(const Buffer&);
 			FuncBufInt	FixData;// 修正数据的委托
 
-			byte Status;
-			byte FifoStatus;
+			uint8_t Status;
+			uint8_t FifoStatus;
 			void ShowStatus();
 
 			//IDataPort*	Led;	// 数据灯
@@ -74,10 +74,10 @@
 			InputPort	Irq;
 			OutputPort	_Power;	// 设置控制2401电源的引脚  直接进行对2401的通断电操作，以免死机对setPower无效
 
-			byte WriteBuf(byte reg, const Buffer& bs);
-			byte ReadBuf(byte reg, Buffer& bs);
-			byte ReadReg(byte reg);
-			byte WriteReg(byte reg, byte dat);
+			uint8_t WriteBuf(uint8_t reg, const Buffer& bs);
+			uint8_t ReadBuf(uint8_t reg, Buffer& bs);
+			uint8_t ReadReg(uint8_t reg);
+			uint8_t WriteReg(uint8_t reg, uint8_t dat);
 
 			void AddError();
 
@@ -100,13 +100,13 @@
 		public:
 			void TX_Mode();
 			void RX_Mode();
-			byte Rx_Dat(byte *rxbuf);
-			byte Tx_Dat(byte *txbuf);
+			uint8_t Rx_Dat(uint8_t *rxbuf);
+			uint8_t Tx_Dat(uint8_t *txbuf);
 			OutputPort _CSN;
 		private:
 					
-			byte ReadBuf(byte reg, byte *pBuf, byte bytes);
-			byte WriteBuf(byte reg, byte *pBuf, byte bytes);
+			uint8_t ReadBuf(uint8_t reg, uint8_t *pBuf, uint8_t bytes);
+			uint8_t WriteBuf(uint8_t reg, uint8_t *pBuf, uint8_t bytes);
 	};
 
 #endif

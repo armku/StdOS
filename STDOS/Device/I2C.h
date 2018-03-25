@@ -20,8 +20,8 @@ public:
 	virtual void Start();
 	virtual void Stop();
 
-	virtual void WriteByte(byte dat);
-	virtual byte ReadByte();
+	virtual void WriteByte(uint8_t dat);
+	virtual uint8_t ReadByte();
 	virtual void Ack(bool ack = true);
 	virtual bool WaitAck(int retry=0);
 

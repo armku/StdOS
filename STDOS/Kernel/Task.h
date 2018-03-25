@@ -28,8 +28,8 @@ public:
 
 	bool	Enable;		// 是否启用 52
 	bool	Event;		// 是否只执行一次后暂停的事件型任务 53
-	byte	Deepth;		// 当前深度 54
-	byte	MaxDeepth;	// 最大深度。默认1层，不允许重入 55
+	uint8_t	Deepth;		// 当前深度 54
+	uint8_t	MaxDeepth;	// 最大深度。默认1层，不允许重入 55
 
 	Task();
 	Task(const Task& task)	= delete;
@@ -68,8 +68,8 @@ public:
 	Task*	Current;	// 正在执行的任务
 	bool	Running;	// 是否正在运行
 	bool	Sleeping;	// 如果当前处于Sleep状态，马上停止并退出
-	byte	Deepth;		// 当前深度
-	byte	MaxDeepth;	// 最大深度。默认5层
+	uint8_t	Deepth;		// 当前深度
+	uint8_t	MaxDeepth;	// 最大深度。默认5层
 
 	int		Times;		// 执行次数 14
 	int		Cost;		// 平均执行时间us

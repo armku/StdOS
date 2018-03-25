@@ -9,12 +9,12 @@ public:
 	~PCF8563();
 	void SetDateTime(DateTime & dt);
 	void GetDateTime(DateTime& dt);
-	byte readaddr(byte add);
+	uint8_t readaddr(uint8_t add);
 public:
 	SoftI2C IIC; // I2C通信口
 	
 private:	
-	byte Address; // 设备地址
+	uint8_t Address; // 设备地址
 
 };
 

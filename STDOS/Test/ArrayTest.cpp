@@ -4,8 +4,8 @@
 #ifdef _ARRAY_TEST_H
 static void TestAssign()
 {
-	byte buf[] = {6,7,8,9};
-	byte bts[] = {10,11,12,13,14,15,16,17,18,19,20};
+	uint8_t buf[] = {6,7,8,9};
+	uint8_t bts[] = {10,11,12,13,14,15,16,17,18,19,20};
 
 	// Array = void*
 	auto err	= "Array& operator = (const void* p)";
@@ -30,8 +30,8 @@ static void TestAssign()
 
 static void TestAssign2()
 {
-	byte buf[] = {6,7,8,9};
-	byte bts[] = {10,11,12,13,14,15,16,17,18,19,20};
+	uint8_t buf[] = {6,7,8,9};
+	uint8_t bts[] = {10,11,12,13,14,15,16,17,18,19,20};
 
 	// Array = Buffer
 	auto err	= "Array& operator = (const Buffer& rhs)";
@@ -57,8 +57,8 @@ static void TestAssign2()
 
 static void TestCopy()
 {
-	byte buf[] = {6,7,8,9};
-	byte bts[] = {10,11,12,13,14,15,16,17,18,19,20};
+	uint8_t buf[] = {6,7,8,9};
+	uint8_t bts[] = {10,11,12,13,14,15,16,17,18,19,20};
 
 	// Array::Copy(0, Buffer)
 	auto err	= "int Copy(int destIndex, const Buffer& src, int srcIndex, int len)";
@@ -92,15 +92,15 @@ void Array::Test()
 	debug_printf("TestArray......\r\n");
 
 	//不同长度的原始数据
-	byte buf1[] = {1,2,3,4,5};
-	//byte buf2[] = {6,7,8,9};
-	byte buf3[] = {10,11,12,13,14,15,16,17,18,19,20};
+	uint8_t buf1[] = {1,2,3,4,5};
+	//uint8_t buf2[] = {6,7,8,9};
+	uint8_t buf3[] = {10,11,12,13,14,15,16,17,18,19,20};
 
 	Array arr1(buf1, sizeof(buf1));
 	arr1.Show(true);
 
-	assert(arr1.GetBuffer() == (byte*)buf1 && arr1.Length()== sizeof(buf1),"Array(void* data, int len)");
-	assert(arr1[0] == 1, " byte& operator[](int i)");
+	assert(arr1.GetBuffer() == (uint8_t*)buf1 && arr1.Length()== sizeof(buf1),"Array(void* data, int len)");
+	assert(arr1[0] == 1, " uint8_t& operator[](int i)");
 
 	arr1.Clear();
 	assert(arr1[1] == 0, "virtual void Clear()");

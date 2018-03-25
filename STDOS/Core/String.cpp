@@ -115,7 +115,7 @@ String::String(char c): Array(buftmp, 0)
 	this->_Length=1;
 	
 }
-String::String(byte value, int radix): Array(buftmp, 0)
+String::String(uint8_t value, int radix): Array(buftmp, 0)
 {
 	this->init();
 	this->Concat(value,radix);
@@ -280,7 +280,7 @@ bool String::Concat(char c)
 		return false;
 }
 
-bool String::Concat(byte c, int radix)
+bool String::Concat(uint8_t c, int radix)
 {
 	char buf[20];
 	for(int i=0;i<20;i++)
@@ -511,7 +511,7 @@ char &String::operator[](int index)
 		return aa;
 }
 
-void String::GetBytes(byte *buf, int bufsize, int index)const
+void String::GetBytes(uint8_t *buf, int bufsize, int index)const
 {
 	if(bufsize && buf)
 	{

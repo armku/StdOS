@@ -28,16 +28,16 @@ union
     uint16_t daushort[2];
     struct
     {
-        byte da3;
-        byte da2;
-        byte da1;
-        byte da0;
+        uint8_t da3;
+        uint8_t da2;
+        uint8_t da1;
+        uint8_t da0;
     } char_bit;
 }
 
 bitconvert; //数据转换用   
 //设置浮点数
-void SetBufFloat(byte buf[], uint16_t pos, float da, byte type)
+void SetBufFloat(uint8_t buf[], uint16_t pos, float da, uint8_t type)
 {
     bitconvert.dafloat = da;
     switch (type)
@@ -59,7 +59,7 @@ void SetBufFloat(byte buf[], uint16_t pos, float da, byte type)
     }
 }
 
-void SetBufUshort(byte buf[], uint16_t pos, uint16_t da,byte type)
+void SetBufUshort(uint8_t buf[], uint16_t pos, uint16_t da,uint8_t type)
 {
     bitconvert.daushort[0] = da;
 	switch(type)
@@ -78,7 +78,7 @@ void SetBufUshort(byte buf[], uint16_t pos, uint16_t da,byte type)
 }
 
 //设置浮点数 0:小端 1：大端
-float GetBufFloat(byte buf[], uint16_t pos,byte type)
+float GetBufFloat(uint8_t buf[], uint16_t pos,uint8_t type)
 {
 	switch(type)
 	{
@@ -101,7 +101,7 @@ float GetBufFloat(byte buf[], uint16_t pos,byte type)
 }
 
 //设置浮点数
-uint16_t GetBufUshort(byte buf[], uint16_t pos,byte type)
+uint16_t GetBufUshort(uint8_t buf[], uint16_t pos,uint8_t type)
 {
 	switch(type)
 	{

@@ -15,7 +15,7 @@
 			lcddr.Test(0x00,0x00);
 			Sys.Sleep(500);
 		}
-		lcddr.DisplayStr(0,0,(byte *)"ST7565Rtest");
+		lcddr.DisplayStr(0,0,(uint8_t *)"ST7565Rtest");
 		lcddr.Flush();
 	}
 #endif

@@ -53,7 +53,7 @@ void IRTest()
 	*HIRPOWER = false;
 
 	/*auto ir	= new IR(IRFREQ(), PE10, PE15);
-	byte Recbuff[512];
+	uint8_t Recbuff[512];
 	for(int i =0;i<sizeof(Recbuff);i++)Recbuff[i]=0x00;
 	int length=0;
 	length = ir->Receive(Recbuff);

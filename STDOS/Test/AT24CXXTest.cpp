@@ -27,8 +27,8 @@ void AT24C02Test()
 	debug_printf("\r\n");
 
 	uint16_t i;
-	byte write_buf[EE_SIZE];
-	byte read_buf[EE_SIZE];
+	uint8_t write_buf[EE_SIZE];
+	uint8_t read_buf[EE_SIZE];
 
 	/*-----------------------------------------------------------------------------------*/
 	if (at2402.CheckOk() == 0)

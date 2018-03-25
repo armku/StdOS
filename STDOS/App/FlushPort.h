@@ -25,10 +25,10 @@ public:
 
 	void Start(int ms = 1000);
 	// mode 0xff  为不改变Port状态  0为Write false  1为Write true
-	void Stop(byte mode = 0xff);
+	void Stop(uint8_t mode = 0xff);
 	void Flush();
 
-	virtual int Write(byte* data);
+	virtual int Write(uint8_t* data);
 };
 
 #endif

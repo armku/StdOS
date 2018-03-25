@@ -20,7 +20,7 @@
             CPOLTYPE CPOL; //时钟极性
             CPHATYPE CPHA; //时钟相位
         private:
-            byte _index;
+            uint8_t _index;
             void *_SPI;
             Pin Pins[4]; // NSS/CLK/MISO/MOSI
             OutputPort _nss;
@@ -50,7 +50,7 @@
             void Close();
 
             // 基础读写
-            byte Write(byte data);
+            uint8_t Write(uint8_t data);
             uint16_t Write16(uint16_t data);
 
             // 批量读写。以字节数组长度为准
@@ -95,7 +95,7 @@
             SpiSoft(CPOLTYPE cpol = CPOL_Low, CPHATYPE cpha = CPHA_1Edge, uint32_t speedHz = 9000000); //使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度   
             void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
             void SetNss(Pin nss = P0);
-            byte Write(byte data);
+            uint8_t Write(uint8_t data);
             void Open();
             void Close();
             void Start(); // 拉低NSS，开始传输
@@ -107,7 +107,7 @@
             InputPort _miso;
             uint32_t delayus; //延时时间
         private:
-            byte WaitBusy();
+            uint8_t WaitBusy();
 
     };
 #endif

@@ -2,7 +2,7 @@
 
 //#define _AT45DB_TEST_H
 #ifdef _AT45DB_TEST_H
-const byte Tx_Buffer[] = "STM32F10x SPI Firmware Library Example: communication with an AT45DB SPI FLASH";
+const uint8_t Tx_Buffer[] = "STM32F10x SPI Firmware Library Example: communication with an AT45DB SPI FLASH";
 Spi* _spi;
 
 void TestAT45DB()
@@ -20,7 +20,7 @@ void TestAT45DB()
     else
         debug_printf("擦除0x%08x失败\r\n", addr);
 
-    byte Rx_Buffer[80];
+    uint8_t Rx_Buffer[80];
     
     for(int i=0; i<size; i++)
     {

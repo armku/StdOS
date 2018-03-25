@@ -4,11 +4,11 @@
     class CheckSum
     {
         public:
-            static byte CheckSum8(byte *buf, uint32_t len);
-			static uint16_t CheckSum16(byte *buf, uint32_t len);
-			static uint32_t CheckSum32(byte *buf, uint32_t len);
-			static byte IntelHexCheckSum(byte *buf, uint32_t len);
-			static uint16_t NetCheckSum(byte *buf, uint32_t len);
-			static byte BCCVerify(byte *buf, uint32_t len);
+            static uint8_t CheckSum8(uint8_t *buf, uint32_t len);
+			static uint16_t CheckSum16(uint8_t *buf, uint32_t len);
+			static uint32_t CheckSum32(uint8_t *buf, uint32_t len);
+			static uint8_t IntelHexCheckSum(uint8_t *buf, uint32_t len);
+			static uint16_t NetCheckSum(uint8_t *buf, uint32_t len);
+			static uint8_t BCCVerify(uint8_t *buf, uint32_t len);
     }; //Ð£ÑéºÍ
 #endif

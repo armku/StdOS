@@ -28,13 +28,13 @@ public:
     // Ð´Èë
     virtual bool Write(uint32_t address, const Buffer& bs) const;
 	// Çå¿Õ
-    virtual bool Memset(uint32_t address, byte data, int len) const;
+    virtual bool Memset(uint32_t address, uint8_t data, int len) const;
     // ²Á³ý
     virtual bool Erase(uint32_t address, int len) const;
 
 protected:
 	// Ð´Èë¿é
-	virtual bool WriteBlock(uint32_t address, const byte* buf, int len, bool inc) const = 0;
+	virtual bool WriteBlock(uint32_t address, const uint8_t* buf, int len, bool inc) const = 0;
     // ²Á³ý¿é
     virtual bool EraseBlock(uint32_t address) const = 0;
     // Ö¸¶¨¿éÊÇ·ñ±»²Á³ý
