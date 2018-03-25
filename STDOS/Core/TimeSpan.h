@@ -1,11 +1,11 @@
-﻿#ifndef __TimeSpan_H__
+#ifndef __TimeSpan_H__
 #define __TimeSpan_H__
 
 // 时间间隔
 class TimeSpan
 {
 public:
-	TimeSpan(Int64 ms = 0);
+	TimeSpan(int64_t ms = 0);
 	TimeSpan(int hours, int minutes, int seconds);
 	TimeSpan(int days, int hours, int minutes, int seconds);
 
@@ -18,7 +18,7 @@ public:
 	int TotalHours() const;
 	int TotalMinutes() const;
 	int TotalSeconds() const;
-	Int64 TotalMs() const;
+	int64_t TotalMs() const;
 
 	int CompareTo(const TimeSpan& value) const;
     friend bool operator==	(const TimeSpan& left, const TimeSpan& right);

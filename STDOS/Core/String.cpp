@@ -5,7 +5,7 @@
 
 static char buftmp[10];
 
-int ltoa(Int64 value,char *buf,int radix)
+int ltoa(int64_t value,char *buf,int radix)
 {
 	if(buf)
 	{
@@ -140,7 +140,7 @@ String::String(uint value, int radix): Array(buftmp, 0)
 	this->init();
 	this->Concat(value,radix);
 }
-String::String(Int64 value, int radix): Array(buftmp, 0)
+String::String(int64_t value, int radix): Array(buftmp, 0)
 {
 	this->init();
 	this->Concat(value,radix);
@@ -390,7 +390,7 @@ bool String::Concat(uint num, int radix)
 		return false;
 }
 
-bool String::Concat(Int64 num, int radix)
+bool String::Concat(int64_t num, int radix)
 {
     char buf[20];
 	for(int i=0;i<20;i++)

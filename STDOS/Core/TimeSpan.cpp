@@ -1,7 +1,7 @@
 #include "SString.h"
 #include "TimeSpan.h"
 
-TimeSpan::TimeSpan(Int64 ms)
+TimeSpan::TimeSpan(int64_t ms)
 {
 
 }
@@ -50,7 +50,7 @@ int TimeSpan::TotalSeconds() const
 {
 	return 0;
 }
-Int64 TimeSpan::TotalMs() const
+int64_t TimeSpan::TotalMs() const
 {
 	return 0;
 }

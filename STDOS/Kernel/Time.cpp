@@ -13,7 +13,7 @@ void TTime::Sleep(int nms, bool *running)const
 {
 	if( nms > 0 )
 	{
-		Int64 endcurrent = Time.Current() + nms;
+		int64_t endcurrent = Time.Current() + nms;
 		
 		if(nms)
 		{

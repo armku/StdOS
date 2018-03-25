@@ -75,7 +75,7 @@ public:
 	//bool Write(sbyte value)	{ return Write((byte)value); }
 	bool Write(short value)	{ return Write((ushort)value); }
 	bool Write(int value)	{ return Write((uint)value); }
-	bool Write(Int64 value)	{ return Write((UInt64)value); }
+	bool Write(int64_t value)	{ return Write((UInt64)value); }
 
 	// 取回指定结构体指针，并移动游标位置
 	template<typename T>
