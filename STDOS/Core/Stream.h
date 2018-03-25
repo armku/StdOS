@@ -72,7 +72,7 @@ public:
 	bool Write(uint16_t value);
 	bool Write(uint32_t value);
 	bool Write(uint64_t value);
-	//bool Write(sbyte value)	{ return Write((byte)value); }
+	//bool Write(int8_t value)	{ return Write((byte)value); }
 	bool Write(short value)	{ return Write((uint16_t)value); }
 	bool Write(int value)	{ return Write((uint32_t)value); }
 	bool Write(int64_t value)	{ return Write((uint64_t)value); }

@@ -2,7 +2,7 @@
 #define __Type_H__
 #include <stdint.h>
 /* 类型定义 */
-typedef char			sbyte;
+//typedef char			sbyte;
 typedef unsigned char	byte;
 //typedef unsigned short	ushort;
 //typedef unsigned int	uint;
