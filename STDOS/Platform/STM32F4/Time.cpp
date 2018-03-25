@@ -55,7 +55,7 @@ uint32_t TTime::CurrentTicks()const
 // µ±Ç°ºÁÃëÊý
 uint64_t TTime::Current()const
 {
-    __IO ushort ms = 0;
+    __IO uint16_t ms = 0;
     switch (this->Index)
     {
 		case 2:

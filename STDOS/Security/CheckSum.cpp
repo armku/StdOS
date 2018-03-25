@@ -27,10 +27,10 @@ len 校验数据的长
  *输   出:校验和
  *功   能:校验和-16
  *******************************************************/
-ushort CheckSum::CheckSum16(byte *buf, uint32_t len)
+uint16_t CheckSum::CheckSum16(byte *buf, uint32_t len)
 {
     uint32_t i = 0;
-    ushort Sum = 0;
+    uint16_t Sum = 0;
 
     for (i = 0; i < len; i++)
     {
@@ -84,7 +84,7 @@ len 校验数据的长
  *输   出:校验和
  *功   能:校验和-TCP/IP
  *******************************************************/
-ushort CheckSum::NetCheckSum(byte *buf, uint32_t len)
+uint16_t CheckSum::NetCheckSum(byte *buf, uint32_t len)
 {
     uint32_t Sum = 0;
 
@@ -96,7 +96,7 @@ ushort CheckSum::NetCheckSum(byte *buf, uint32_t len)
     Sum = (Sum >> 16) + (Sum &0xffff);
     Sum += (Sum >> 16);
 
-    return (ushort)(~Sum);
+    return (uint16_t)(~Sum);
 }
 
 /******************************************************

@@ -15,7 +15,7 @@ public:
 	void*	_Timer;
 	bool	Opened;	// 可能在中断里关闭自己
 
-	ushort	Prescaler;	// 预分频。实际值，此时无需减一。
+	uint16_t	Prescaler;	// 预分频。实际值，此时无需减一。
 	uint32_t	Period;		// 周期。实际值，此时无需减一。
 
 	Timer(TIMER index);
@@ -34,7 +34,7 @@ public:
 	static void ClockCmd(int idx, bool state);
 
 private:
-	static void OnHandler(ushort num, void* param);
+	static void OnHandler(uint16_t num, void* param);
 
 protected:
 

@@ -9,7 +9,7 @@ class AlternatePort;
 class Pwm : public Timer
 {
 public:
-	ushort	Pulse[4];	// 每个通道的占空比
+	uint16_t	Pulse[4];	// 每个通道的占空比
 	bool	Polarity	= true;	// 极性。默认true高电平
 	bool	IdleState	= true;	// 空闲状态。
     //uint32_t	Remap;		// 重映射。0不映射，其它为实际映射数字
@@ -25,7 +25,7 @@ public:
 
 	void Flush();	// 刷新输出
 
-	void SetPulse(int idx, ushort pulse);
+	void SetPulse(int idx, uint16_t pulse);
 	// 设置占空比，0~255
 	void SetDuty(int idx, byte duty);
 	byte GetDuty(int idx);
@@ -36,7 +36,7 @@ class PwmData : public Pwm
 {
 public:
 	// 连续调整占空比
-	ushort* Pulses;		// 宽度数组
+	uint16_t* Pulses;		// 宽度数组
 	byte	PulseCount;	// 宽度个数
 	byte	Channel;	// 需要连续调整的通道。仅支持连续调整1个通道。默认0表示第一个通道
 	byte	PulseIndex;	// 索引。使用数组中哪一个位置的数据

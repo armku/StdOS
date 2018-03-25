@@ -128,8 +128,8 @@ public:
     // 读取委托
     typedef void (*IOReadHandler)(InputPort* port, bool down, void* param);
 
-    ushort	ShakeTime	= 0;	// 设置 抖动时间。毫秒
-	ushort	PressTime	= 0;	// 获取 长按时间。毫秒
+    uint16_t	ShakeTime	= 0;	// 设置 抖动时间。毫秒
+	uint16_t	PressTime	= 0;	// 获取 长按时间。毫秒
     byte	Invert		= 2;	// 是否倒置输入输出。默认2表示自动检测 16
     bool	Floating	= true;	// 是否浮空输入
     PuPd	Pull		= UP;	// 上拉下拉电阻

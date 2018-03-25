@@ -6,8 +6,8 @@
 //SkyTra S1216F8 配置输出信息结构体
 __packed typedef struct
 {
-	ushort sos;            //启动序列，固定为0XA0A1
-	ushort PL;             //有效数据长度0X0009； 
+	uint16_t sos;            //启动序列，固定为0XA0A1
+	uint16_t PL;             //有效数据长度0X0009； 
 	byte id;             //ID，固定为0X08
 	byte GGA;            //1~255（s）,0:disable
 	byte GSA;            //1~255（s）,0:disable
@@ -18,29 +18,29 @@ __packed typedef struct
 	byte ZDA;            //1~255（s）,0:disable
 	byte Attributes;     //配置数据保存位置 ,0保存到SRAM，1保存到SRAM&FLASH，2临时保存
 	byte CS;             //校验值
-	ushort end;            //结束符:0X0D0A  
+	uint16_t end;            //结束符:0X0D0A  
 }SkyTra_outmsg;
 //////////////////////////////////////////////////////////////////////////////////////////////////// 	
 //SkyTra S1216F8 ACK结构体
 __packed typedef struct
 {
-	ushort sos;            //启动序列，固定为0XA0A1
-	ushort PL;             //有效数据长度0X0002； 
+	uint16_t sos;            //启动序列，固定为0XA0A1
+	uint16_t PL;             //有效数据长度0X0002； 
 	byte id;             //ID，固定为0X83
 	byte ACK_ID;         //ACK ID may further consist of message ID and message sub-ID which will become 3 bytes of ACK message
 	byte CS;             //校验值
-	ushort end;            //结束符 
+	uint16_t end;            //结束符 
 }SkyTra_ACK;
 //////////////////////////////////////////////////////////////////////////////////////////////////// 	
 //SkyTra S1216F8 NACK结构体
 __packed typedef struct
 {
-	ushort sos;            //启动序列，固定为0XA0A1
-	ushort PL;             //有效数据长度0X0002； 
+	uint16_t sos;            //启动序列，固定为0XA0A1
+	uint16_t PL;             //有效数据长度0X0002； 
 	byte id;             //ID，固定为0X84
 	byte NACK_ID;         //ACK ID may further consist of message ID and message sub-ID which will become 3 bytes of ACK message
 	byte CS;             //校验值
-	ushort end;            //结束符 
+	uint16_t end;            //结束符 
 }SkyTra_NACK;
 GPS_S1216::GPS_S1216()
 {

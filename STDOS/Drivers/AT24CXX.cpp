@@ -44,7 +44,7 @@ void AT24CXX::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
  *	∑µ ªÿ ÷µ: 1 ±Ì æ ß∞‹£¨0±Ì æ≥…π¶
  *********************************************************************************************************
  */
-int AT24CXX::Read(uint32_t addr, void *pBuffer, int size, ushort bufpos)
+int AT24CXX::Read(uint32_t addr, void *pBuffer, int size, uint16_t bufpos)
 {
 	Buffer bs((byte*)pBuffer + bufpos, size);
 	this->Read(addr, bs);
@@ -60,14 +60,14 @@ int AT24CXX::Read(uint32_t addr, void *pBuffer, int size, ushort bufpos)
  *	∑µ ªÿ ÷µ: 0 ±Ì æ ß∞‹£¨1±Ì æ≥…π¶
  *********************************************************************************************************
  */
-int AT24CXX::Write(uint32_t addr, void *pBuffer, int size, ushort bufpos)
+int AT24CXX::Write(uint32_t addr, void *pBuffer, int size, uint16_t bufpos)
 {
 	Buffer bs((byte*)pBuffer + bufpos, size);
 	this->Write(addr, bs);
 	return size;
 }
 
-byte AT24CXX::Read(ushort address)
+byte AT24CXX::Read(uint16_t address)
 {
 	byte ret = 0;
 	
@@ -129,7 +129,7 @@ cmd_Readbytefail:  /* √¸¡Ó÷¥–– ß∞‹∫Û£¨«–º«∑¢ÀÕÕ£÷π–≈∫≈£¨±‹√‚”∞œÏI2C◊‹œﬂ…œ∆‰À˚…Ë±
 	return ret;
 }
 
-bool AT24CXX::Write(ushort address, byte da)
+bool AT24CXX::Write(uint16_t address, byte da)
 {
 	uint32_t m;
 
@@ -197,12 +197,12 @@ cmd_Writebytefail:  /* √¸¡Ó÷¥–– ß∞‹∫Û£¨«–º«∑¢ÀÕÕ£÷π–≈∫≈£¨±‹√‚”∞œÏI2C◊‹œﬂ…œ∆‰À˚…Ë
 	return true;
 }
 //∂¡–¥ºØ÷–≤Ÿ◊˜1–¥ 0∂¡
-int AT24CXX::bufwr(ushort addr, Buffer &bs, byte wr)
+int AT24CXX::bufwr(uint16_t addr, Buffer &bs, byte wr)
 {
 	uint32_t curAddr;
 	uint32_t pageStart; //“≥ƒ⁄∆ ºµÿ÷∑
 	uint32_t bytesLeave; //ªπ £∂‡…Ÿ◊÷Ω⁄∂¡»°
-	ushort bufaddr;
+	uint16_t bufaddr;
 
 	pageStart = addr % this->pageSize;
 	bytesLeave = bs.Length();
@@ -287,16 +287,16 @@ int AT24CXX::bufwr(ushort addr, Buffer &bs, byte wr)
 	}
 	return bs.Length();
 }
-int AT24CXX::bufwr(ushort addr, byte *buf, uint32_t size, ushort bufpos, byte wr) //∂¡–¥ºØ÷–≤Ÿ◊˜1–¥ 0∂¡
+int AT24CXX::bufwr(uint16_t addr, byte *buf, uint32_t size, uint16_t bufpos, byte wr) //∂¡–¥ºØ÷–≤Ÿ◊˜1–¥ 0∂¡
 {
 	Buffer bs(buf + bufpos, size);
 	return this->bufwr(addr, bs, wr);
 }
 
-int AT24CXX::writePage(ushort addr, Buffer &bs) //“≥ƒ⁄–¥
+int AT24CXX::writePage(uint16_t addr, Buffer &bs) //“≥ƒ⁄–¥
 {
 	uint32_t m;
-	ushort usAddr;
+	uint16_t usAddr;
 	byte buftmp[256];
 
 	//∑«∑®≥§∂»£¨÷±Ω”∑µªÿ
@@ -388,13 +388,13 @@ cmd_Writefail:  /* √¸¡Ó÷¥–– ß∞‹∫Û£¨«–º«∑¢ÀÕÕ£÷π–≈∫≈£¨±‹√‚”∞œÏI2C◊‹œﬂ…œ∆‰À˚…Ë±∏ *
 	this->IIC.Stop();
 	return 1;
 }
-int AT24CXX::writePage(byte *buf, ushort bufpos, ushort addr, uint32_t size) //“≥ƒ⁄–¥
+int AT24CXX::writePage(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t size) //“≥ƒ⁄–¥
 {
 	Buffer bs(buf + bufpos, size);
 	return this->writePage(addr, bs);
 }
 //“≥ƒ⁄∂¡
-int AT24CXX::readPage(ushort addr, Buffer &bs)
+int AT24CXX::readPage(uint16_t addr, Buffer &bs)
 {
 	//debug_printf("read a page\r\n");
 	/* µ⁄1≤Ω£∫∑¢∆I2C◊‹œﬂ∆Ù∂Ø–≈∫≈ */
@@ -464,15 +464,15 @@ cmd_Readfail:  /* √¸¡Ó÷¥–– ß∞‹∫Û£¨«–º«∑¢ÀÕÕ£÷π–≈∫≈£¨±‹√‚”∞œÏI2C◊‹œﬂ…œ∆‰À˚…Ë±∏ */
 	this->IIC.Stop();
 	return 1;
 }
-int AT24CXX::readPage(byte *buf, ushort bufpos, ushort addr, uint32_t size) //“≥ƒ⁄∂¡
+int AT24CXX::readPage(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t size) //“≥ƒ⁄∂¡
 {
 	Buffer bs(buf + bufpos, size);
 	return this->readPage(addr, bs);
 }
 
-ushort AT24CXX::jsPageSize(uint32_t type) //º∆À„¥Ê¥¢“≥¥Û–°
+uint16_t AT24CXX::jsPageSize(uint32_t type) //º∆À„¥Ê¥¢“≥¥Û–°
 {
-	ushort ret = 8;
+	uint16_t ret = 8;
 	switch (type)
 	{
 	case AT24C02:

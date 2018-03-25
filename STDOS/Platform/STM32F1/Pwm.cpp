@@ -270,7 +270,7 @@ void PwmData::OnInterrupt() {
 }
 void PwmData::Config() {}
 ////////////////////////////////////////以下为添加
-void Pwm::SetPulse(int idx, ushort pulse)
+void Pwm::SetPulse(int idx, uint16_t pulse)
 {
 	if (idx > 3)
 	{

@@ -33,7 +33,7 @@ int SerialPort_Closeing(int result)
 }
 
 // 真正的串口中断函数
-void OnUsartReceive(ushort num, void *param)
+void OnUsartReceive(uint16_t num, void *param)
 {
     SerialPort *sp = (SerialPort*)param;
     USART_TypeDef *const g_Uart_Ports[] = UARTS;
@@ -358,22 +358,22 @@ int SerialPort::SendData(byte data, int times)
         switch (this->Index)
         {
             case COM1:
-                USART_SendData(g_Uart_Ports[0], (ushort)data);
+                USART_SendData(g_Uart_Ports[0], (uint16_t)data);
                 break;
             case COM2:
-                USART_SendData(g_Uart_Ports[1], (ushort)data);
+                USART_SendData(g_Uart_Ports[1], (uint16_t)data);
                 break;
             case COM3:
-                USART_SendData(g_Uart_Ports[2], (ushort)data);
+                USART_SendData(g_Uart_Ports[2], (uint16_t)data);
                 break;
             case COM4:
-                USART_SendData(g_Uart_Ports[3], (ushort)data);
+                USART_SendData(g_Uart_Ports[3], (uint16_t)data);
                 break;
             case COM5:
-                USART_SendData(g_Uart_Ports[4], (ushort)data);
+                USART_SendData(g_Uart_Ports[4], (uint16_t)data);
                 break;
             default:
-                //USART_SendData(g_Uart_Ports[0], (ushort)data);
+                //USART_SendData(g_Uart_Ports[0], (uint16_t)data);
                 break;
         }
     }

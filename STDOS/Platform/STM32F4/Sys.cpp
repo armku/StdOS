@@ -29,7 +29,7 @@ void TSys::OnInit()
     this->RevID = MCUID >> 16;
     this->DevID = MCUID &0x0FFF;
 
-    this->FlashSize = *(__IO ushort*)(0X1FFF7a22); // ÈÝÁ¿
+    this->FlashSize = *(__IO uint16_t*)(0X1FFF7a22); // ÈÝÁ¿
     switch (this->DevID)
     {
         case 0X0413:

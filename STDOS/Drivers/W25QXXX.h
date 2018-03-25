@@ -32,8 +32,8 @@
         public:
             uint32_t ID; // 芯片ID
             uint32_t DeviceID; // 设备ID
-            ushort PageSize; // 页大小
-            ushort Retry; // 等待重试次数
+            uint16_t PageSize; // 页大小
+            uint16_t Retry; // 等待重试次数
 			#if W25QXXXUSESPISOFT
 				W25Q64(SpiSoft *spi);
 			#else
@@ -74,10 +74,10 @@
             bool WritePage(uint32_t addr, byte *buf, uint32_t count);
             // 写入数据
             bool Write(uint32_t addr, byte *buf, uint32_t count);
-            void W25QXX_Write_NoCheck(byte *pBuffer, uint32_t WriteAddr, ushort NumByteToWrite);
+            void W25QXX_Write_NoCheck(byte *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
             void W25QXX_Write_SR(byte sr);
             void W25QXX_Init(void);
-            ushort W25QXX_TYPE;
+            uint16_t W25QXX_TYPE;
             byte W25QXX_BUFFER[4096];
     };
     /*

@@ -20,11 +20,11 @@
 			byte Remote[5];		// 远程地址
 			bool DynPayload;	// 动态负载
 			bool AutoAnswer;	// 自动应答，默认启用
-			ushort Speed;		// 射频数据率，单位kbps，默认250kbps，可选1000kbps/2000kbps，速度越低传输越远
+			uint16_t Speed;		// 射频数据率，单位kbps，默认250kbps，可选1000kbps/2000kbps，速度越低传输越远
 			byte RadioPower;	// 发射功率。共8档，最高0x07代表7dBm最大功率
 			bool Master;		// 是否主节点。
 
-			ushort	Error;		// 错误次数，超过最大错误次数则自动重置
+			uint16_t	Error;		// 错误次数，超过最大错误次数则自动重置
 
 			NRF24L01();
 			virtual ~NRF24L01();

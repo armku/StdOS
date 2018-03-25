@@ -394,7 +394,7 @@ void PwmSolo::OnOpen2()
 }
 
 //ÉèÖÃÊä³öÖµ
-void PwmSolo::SetOut(ushort pwmValue)
+void PwmSolo::SetOut(uint16_t pwmValue)
 {
     this->_duty = pwmValue;
     switch (this->_Pin)

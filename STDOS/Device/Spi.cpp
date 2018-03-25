@@ -158,7 +158,7 @@ void SpiSoft::SetNss(Pin nss)
 ---------------------------------------------------------*/
 byte SpiSoft::WaitBusy()
 {
-    ushort i;
+    uint16_t i;
     this->Start();
     i = 0;
     while (this->_miso.Read() > 0)

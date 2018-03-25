@@ -55,14 +55,14 @@ public:
 
 	cstring	Name;		// 系统名称 3
 	cstring	Company;	// 系统厂商 4
-	ushort	Code;		// 产品代码 5
-	ushort	Ver;		// 系统版本 6
+	uint16_t	Code;		// 产品代码 5
+	uint16_t	Ver;		// 系统版本 6
     byte	ID[12];		// 芯片ID。
-    ushort	DevID;		// MCU编码。低字设备版本，高字子版本
-    ushort	RevID;		// MCU编码。低字设备版本，高字子版本
+    uint16_t	DevID;		// MCU编码。低字设备版本，高字子版本
+    uint16_t	RevID;		// MCU编码。低字设备版本，高字子版本
     uint32_t	CPUID;		// CPUID 
-    ushort	FlashSize;	// 芯片Flash容量。 16
-    ushort	RAMSize;	// 芯片RAM容量 17
+    uint16_t	FlashSize;	// 芯片Flash容量。 16
+    uint16_t	RAMSize;	// 芯片RAM容量 17
 
 	const SystemConfig*	Config;	// 系统设置 18
 
@@ -118,7 +118,7 @@ public:
 	uint32_t	HardVer;	// 硬件版本
 
 	// 应用软件
-	ushort	Code;		// 产品种类
+	uint16_t	Code;		// 产品种类
 	uint32_t	AppVer;		// 产品版本
 	char	Company[16];// 公司
 	char	Product[16];// 产品批次
@@ -129,14 +129,14 @@ public:
 
 	uint32_t	Expire;		// 有效期。1970以来的秒数。
 	
-	ushort	Checksum;	// 校验
+	uint16_t	Checksum;	// 校验
 };
 
 void EnterCritical();
 void ExitCritical();
 
 uint32_t _REV(uint32_t value);
-ushort _REV16(ushort value);
+uint16_t _REV16(uint16_t value);
 
 // 智能IRQ，初始化时备份，销毁时还原
 // SmartIRQ相当霸道，它直接关闭所有中断，再也没有别的任务可以跟当前任务争夺MCU

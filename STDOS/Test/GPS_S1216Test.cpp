@@ -49,9 +49,9 @@ void GPSTest()
 //发送一批数据给SkyTraF8-BD，这里通过串口3发送
 //dbuf：数据缓存首地址
 //len：要发送的字节数
-void SendBuffer(byte* dbuf, ushort len)
+void SendBuffer(byte* dbuf, uint16_t len)
 {
-	ushort j;
+	uint16_t j;
 	for (j = 0; j < len; j++)//循环发送数据
 	{
 		while ((USART3->SR & 0X40) == 0);//循环发送,直到发送完毕   
@@ -122,7 +122,7 @@ byte GPS_S1216::SkyTra_Cfg_Rate(byte Frep, byte* buf, int& len)
 ////       3,接收到NACK应答
 byte GPS_S1216::SkyTra_Cfg_Ack_Check()
 {
-	ushort len = 0, i;
+	uint16_t len = 0, i;
 	byte rval = 0;
 	while ((USART3_RX_STA & 0X8000) == 0 && len < 100)//等待接收到应答   
 	{

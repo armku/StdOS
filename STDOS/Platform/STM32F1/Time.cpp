@@ -58,7 +58,7 @@ uint32_t TTime::CurrentTicks()const
 // 当前毫秒数 计数值2000
 uint64_t TTime::Current()const
 {
-    __IO ushort ms = 0;
+    __IO uint16_t ms = 0;
     switch (this->Index)
     {
         case 2:

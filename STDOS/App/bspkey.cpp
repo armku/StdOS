@@ -105,7 +105,7 @@ byte Key::GetKeyState(KEY_ID_E _ucKeyID)
  *	返 回 值: 无
  *********************************************************************************************************
  */
-void Key::SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed)
+void Key::SetKeyParam(byte _ucKeyID, uint16_t _LongTime, byte _RepeatSpeed)
 {
     s_tBtn[_ucKeyID].LongTime = _LongTime; /* 长按时间 0 表示不检测长按键事件 */
     s_tBtn[_ucKeyID].RepeatSpeed = _RepeatSpeed; /* 按键连发的速度，0表示不支持连发 */

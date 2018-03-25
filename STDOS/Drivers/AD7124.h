@@ -14,7 +14,7 @@
             #else 
                 AD7124(Spi *spi);
             #endif 
-			ushort CHCONFIG[16];//通道配置
+			uint16_t CHCONFIG[16];//通道配置
 
             void Init_8();		//8通道初始化
 			void Init_4();		//4通道初始化
@@ -30,7 +30,7 @@
 			void WriteReg(byte reg, byte bytes, uint32_t data);
 			void SetReadChannel(byte ch=0,byte chMax=7);//设置需要读取的通道，默认通道0
         private:
-			ushort Write16(ushort sendData);
+			uint16_t Write16(uint16_t sendData);
             uint32_t Write24(uint32_t sendData);
             uint32_t Write32(uint32_t sendData);
             uint32_t ReadRegNoCS(byte reg, byte bytes);

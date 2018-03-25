@@ -5,10 +5,10 @@
     {
         public:
             static byte CheckSum8(byte *buf, uint32_t len);
-			static ushort CheckSum16(byte *buf, uint32_t len);
+			static uint16_t CheckSum16(byte *buf, uint32_t len);
 			static uint32_t CheckSum32(byte *buf, uint32_t len);
 			static byte IntelHexCheckSum(byte *buf, uint32_t len);
-			static ushort NetCheckSum(byte *buf, uint32_t len);
+			static uint16_t NetCheckSum(byte *buf, uint32_t len);
 			static byte BCCVerify(byte *buf, uint32_t len);
     }; //Ð£ÑéºÍ
 #endif

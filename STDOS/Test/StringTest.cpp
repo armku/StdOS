@@ -177,7 +177,7 @@ static void TestConcat16()
 
 	// 连接整数的十六进制，前面补零
 	str += " @ ";
-	str.Concat((ushort)0xE3F, 16);
+	str.Concat((uint16_t)0xE3F, 16);
 
 	// 连接整数的十六进制（大写字母），前面补零
 	str += " # ";

@@ -26,7 +26,7 @@ void AT24C02Test()
 
 	debug_printf("\r\n");
 
-	ushort i;
+	uint16_t i;
 	byte write_buf[EE_SIZE];
 	byte read_buf[EE_SIZE];
 

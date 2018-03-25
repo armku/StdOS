@@ -23,7 +23,7 @@ public:
 	explicit String(char c);
 	explicit String(byte value, int radix = 10);
 	explicit String(short value, int radix = 10);
-	explicit String(ushort value, int radix = 10);
+	explicit String(uint16_t value, int radix = 10);
 	explicit String(int value, int radix = 10);
 	explicit String(uint32_t value, int radix = 10);
 	explicit String(int64_t value, int radix = 10);
@@ -60,7 +60,7 @@ public:
 	bool Concat(char c);
 	bool Concat(byte c, int radix = 10);
 	bool Concat(short num, int radix = 10);
-	bool Concat(ushort num, int radix = 10);
+	bool Concat(uint16_t num, int radix = 10);
 	bool Concat(int num, int radix = 10);
 	bool Concat(uint32_t num, int radix = 10);
 	bool Concat(int64_t num, int radix = 10);

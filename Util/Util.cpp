@@ -25,7 +25,7 @@ void bubbleSort(float *buf, uint32_t len)
 union
 {
     float dafloat;
-    ushort daushort[2];
+    uint16_t daushort[2];
     struct
     {
         byte da3;
@@ -37,7 +37,7 @@ union
 
 bitconvert; //数据转换用   
 //设置浮点数
-void SetBufFloat(byte buf[], ushort pos, float da, byte type)
+void SetBufFloat(byte buf[], uint16_t pos, float da, byte type)
 {
     bitconvert.dafloat = da;
     switch (type)
@@ -59,7 +59,7 @@ void SetBufFloat(byte buf[], ushort pos, float da, byte type)
     }
 }
 
-void SetBufUshort(byte buf[], ushort pos, ushort da,byte type)
+void SetBufUshort(byte buf[], uint16_t pos, uint16_t da,byte type)
 {
     bitconvert.daushort[0] = da;
 	switch(type)
@@ -78,7 +78,7 @@ void SetBufUshort(byte buf[], ushort pos, ushort da,byte type)
 }
 
 //设置浮点数 0:小端 1：大端
-float GetBufFloat(byte buf[], ushort pos,byte type)
+float GetBufFloat(byte buf[], uint16_t pos,byte type)
 {
 	switch(type)
 	{
@@ -101,7 +101,7 @@ float GetBufFloat(byte buf[], ushort pos,byte type)
 }
 
 //设置浮点数
-ushort GetBufUshort(byte buf[], ushort pos,byte type)
+uint16_t GetBufUshort(byte buf[], uint16_t pos,byte type)
 {
 	switch(type)
 	{

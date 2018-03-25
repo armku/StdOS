@@ -19,8 +19,8 @@ private:
 	uint32_t ReadID();
 public:
     uint32_t ID;            // 芯片ID
-    ushort PageSize;    // 页大小
-    ushort Retry;       // 等待重试次数
+    uint16_t PageSize;    // 页大小
+    uint16_t Retry;       // 等待重试次数
 
     AT45DB(Spi* spi);
     ~AT45DB();

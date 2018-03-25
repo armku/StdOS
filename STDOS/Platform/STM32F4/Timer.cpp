@@ -413,7 +413,7 @@ const void *Timer::GetTimer(byte idx)
     return nullptr;
 }
 
-void Timer::OnHandler(ushort num, void *param)
+void Timer::OnHandler(uint16_t num, void *param)
 {
     Timer *timer = (Timer*)param;
     if (timer)

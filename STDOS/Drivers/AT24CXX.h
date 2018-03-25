@@ -24,13 +24,13 @@ public:
 	SoftI2C IIC; // I2C通信口
 	byte Address; // 设备地址
 
-	bool Write(ushort addr, byte data);
-	byte Read(ushort addr);
+	bool Write(uint16_t addr, byte data);
+	byte Read(uint16_t addr);
 
 	virtual bool Write(uint32_t addr, Buffer &bs);
 	virtual bool Read(uint32_t addr, Buffer &bs);
-	int Read(uint32_t addr, void *pBuffer, int size, ushort bufpos = 0);
-	int Write(uint32_t addr, void *pBuffer, int size, ushort bufpos = 0);
+	int Read(uint32_t addr, void *pBuffer, int size, uint16_t bufpos = 0);
+	int Write(uint32_t addr, void *pBuffer, int size, uint16_t bufpos = 0);
 public:
 	AT24CXX(EW24XXType devtype, byte devaddr = 0xA0, uint32_t wnms = 5); //写延时时间
 	void SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect = P0);
@@ -39,13 +39,13 @@ public:
 	OutputPort pinWP; //保护引脚
 private:
 	byte checkDevice();
-	ushort jsPageSize(uint32_t type); //计算存储页大小
-	int writePage(byte *buf, ushort bufpos, ushort addr, uint32_t size); //页内写
-	int writePage(ushort addr, Buffer &bs); //页内写
-	int readPage(byte *buf, ushort bufpos, ushort addr, uint32_t size); //页内读
-	int readPage(ushort addr, Buffer &bs); //页内读
-	int bufwr(ushort addr, byte *buf, uint32_t size, ushort bufpos, byte wr); //读写集中操作1写 0读
-	int bufwr(ushort addr, Buffer &bs, byte wr); //读写集中操作1写 0读
+	uint16_t jsPageSize(uint32_t type); //计算存储页大小
+	int writePage(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t size); //页内写
+	int writePage(uint16_t addr, Buffer &bs); //页内写
+	int readPage(byte *buf, uint16_t bufpos, uint16_t addr, uint32_t size); //页内读
+	int readPage(uint16_t addr, Buffer &bs); //页内读
+	int bufwr(uint16_t addr, byte *buf, uint32_t size, uint16_t bufpos, byte wr); //读写集中操作1写 0读
+	int bufwr(uint16_t addr, Buffer &bs, byte wr); //读写集中操作1写 0读
 
 	EW24XXType deviceType; //器件类型
 	uint32_t pageSize; //存储页大小

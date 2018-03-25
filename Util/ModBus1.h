@@ -39,10 +39,10 @@ class ModbusEntity1
         MBFunction Function;
 		/// <summary>数据</summary>
         byte* Data;
-		ushort address;//地址
-		ushort reglength;//长度
+		uint16_t address;//地址
+		uint16_t reglength;//长度
 		/// <summary>校验数据</summary>
-        ushort Crc;
+        uint16_t Crc;
 		/// <summary>分析字节数组</summary>
         /// <param name="data"></param>
         /// <param name="offset">偏移</param>
@@ -64,8 +64,8 @@ class ModbusSlave1
 		ModbusEntity1 Entity;
 	protected:
 		virtual ModbusEntity1 Process(ModbusEntity1 entity);
-		ushort GetCRC(byte *byteData, int len);
+		uint16_t GetCRC(byte *byteData, int len);
 };
-extern ushort RegInputu161[];//输入寄存器
-extern ushort RegHoilding161[];//保持寄存器
+extern uint16_t RegInputu161[];//输入寄存器
+extern uint16_t RegHoilding161[];//保持寄存器
 #endif

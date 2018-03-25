@@ -20,8 +20,8 @@ public:
 	bool Opening;	// 是否正在打开
     bool Opened;    // 是否打开
 
-	ushort	MinSize;	// 数据包最小大小
-	ushort	MaxSize;	// 数据包最大大小
+	uint16_t	MinSize;	// 数据包最小大小
+	uint16_t	MaxSize;	// 数据包最大大小
 
 	// 初始化
 	ITransport();

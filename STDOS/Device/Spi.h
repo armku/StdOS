@@ -51,7 +51,7 @@
 
             // 基础读写
             byte Write(byte data);
-            ushort Write16(ushort data);
+            uint16_t Write16(uint16_t data);
 
             // 批量读写。以字节数组长度为准
             void Write(const Buffer &bs);

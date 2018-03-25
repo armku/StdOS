@@ -35,9 +35,9 @@ void CAD7689::SetPin(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
     this->ppincnv.Set(pincnv);
 }
 
-ushort CAD7689::AD_Read(void)
+uint16_t CAD7689::AD_Read(void)
 {
-    ushort dat = 0;
+    uint16_t dat = 0;
     uint32_t i;
     this->ppincnv=0;
     Sys.Delay(40);
@@ -54,9 +54,9 @@ ushort CAD7689::AD_Read(void)
     return dat;
 }
 
-ushort CAD7689::AD_Write(ushort sdat)
+uint16_t CAD7689::AD_Write(uint16_t sdat)
 {
-    ushort dat = 0;
+    uint16_t dat = 0;
     uint32_t i;
     this->ppincnv=0;
     Sys.Delay(50);
@@ -103,10 +103,10 @@ void CAD7689::Init(void)
  *******************************************************************************/
 void CAD7689::Routin(void)
 {
-    ushort ch;
-    ushort reg;
+    uint16_t ch;
+    uint16_t reg;
     byte chNext = 0;
-    ushort adcur = 0;
+    uint16_t adcur = 0;
 
     ch = this->chCurrent;
 
@@ -123,7 +123,7 @@ void CAD7689::Routin(void)
 }
 
 //获取通道电压值
-float CAD7689::getVolt(ushort ch)
+float CAD7689::getVolt(uint16_t ch)
 {
     if (ch >= MAXCH)
     {

@@ -314,7 +314,7 @@ bool W25Q64::Read(uint32_t ReadAddr, byte *pBuffer, uint32_t NumByteToRead)
      * 返回  ：-PASSED pBuffer1 等于   pBuffer2
      *         -FAILED pBuffer1 不同于 pBuffer2
      */
-    TestStatus Buffercmp(byte *pBuffer1, byte *pBuffer2, ushort BufferLength)
+    TestStatus Buffercmp(byte *pBuffer1, byte *pBuffer2, uint16_t BufferLength)
     {
         while (BufferLength--)
         {
@@ -404,7 +404,7 @@ bool W25Q64::Read(uint32_t ReadAddr, byte *pBuffer, uint32_t NumByteToRead)
 //0XEF17,表示芯片型号为W25Q128 	  
 uint32_t W25Q128::ReadID()
 {
-    ushort Temp = 0;
+    uint16_t Temp = 0;
     //使能器件   
     this->_spi->Start();
     this->_spi->Write(W25X_ManufactDeviceID); //发送读取ID命令	    
@@ -461,7 +461,7 @@ bool W25Q128::EraseSector(uint32_t sectorAddr)
 
 bool W25Q128::WritePage(uint32_t addr, byte *buf, uint32_t count)
 {
-    ushort i;
+    uint16_t i;
     this->WriteEnable(); //SET WEL 
     //使能器件   
     this->_spi->Start();
@@ -490,9 +490,9 @@ bool W25Q128::WritePage(uint32_t addr, byte *buf, uint32_t count)
 bool W25Q128::Write(uint32_t WriteAddr, byte *pBuffer, uint32_t NumByteToWrite)
 {
     uint32_t secpos;
-    ushort secoff;
-    ushort secremain;
-    ushort i;
+    uint16_t secoff;
+    uint16_t secremain;
+    uint16_t i;
     byte *W25QXX_BUF;
     W25QXX_BUF = W25QXX_BUFFER;
     secpos = WriteAddr / 4096; //扇区地址  
@@ -585,9 +585,9 @@ void W25Q128::W25QXX_Write_SR(byte sr)
 //WriteAddr:开始写入的地址(24bit)
 //NumByteToWrite:要写入的字节数(最大65535)
 //CHECK OK
-void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint32_t WriteAddr, ushort NumByteToWrite)
+void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite)
 {
-    ushort pageremain;
+    uint16_t pageremain;
     pageremain = 256-WriteAddr % 256; //单页剩余的字节数		 	    
     if (NumByteToWrite <= pageremain)
         pageremain = NumByteToWrite;

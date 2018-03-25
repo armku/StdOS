@@ -186,7 +186,7 @@ void CLcd::SetAddress(byte page, byte column) //写入地址 页 列
 形    参3: reverse 反显
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Point(ushort x, ushort y, ushort color)
+void CLcd::Point(uint16_t x, uint16_t y, uint16_t color)
 {
     if (((color) && (!this->inShadow(x, y))) || ((!color) && (this->inShadow(x, y))))
     {
@@ -199,7 +199,7 @@ void CLcd::Point(ushort x, ushort y, ushort color)
 }
 
 //画图形
-void CLcd::DisplayImage(byte *pbuf, ushort color, uint32_t showtype)
+void CLcd::DisplayImage(byte *pbuf, uint16_t color, uint32_t showtype)
 {
     switch (showtype)
     {
@@ -236,13 +236,13 @@ void CLcd::DisplayImage(byte *pbuf, ushort color, uint32_t showtype)
 }
 
 //读取颜色
-ushort CLcd::readPoint(ushort x, ushort y)
+uint16_t CLcd::readPoint(uint16_t x, uint16_t y)
 {
     return (this->Interface_Table[y / 8][x] &(1 << (y % 8)));
 }
 
 //求绝对值
-//static ushort abs(int16_t x)
+//static uint16_t abs(int16_t x)
 //{
 //    if (x < 0)
 //    {
@@ -251,16 +251,16 @@ ushort CLcd::readPoint(ushort x, ushort y)
 //    return x;
 //}
 //画线
-void CLcd::Line(ushort x0, ushort y0, ushort x1, ushort y1)
+void CLcd::Line(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1)
 {
     #if 0
         //Bresenham算法画直线
-        ushort X = 0, Y = 0;
+        uint16_t X = 0, Y = 0;
         int16_t dx = 0, dy = 0;
 
         int16_t sub = 0;
         int16_t num = 0;
-        ushort temp = 0;
+        uint16_t temp = 0;
         if ((x0 == x1) && (y0 == y1))
         {
             return ;
@@ -333,10 +333,10 @@ void CLcd::Line(ushort x0, ushort y0, ushort x1, ushort y1)
         }
     #else 
         //x0,y0起点坐标；x1,y1终点坐标；
-        ushort x, y;
-        ushort d_x, d_y;
+        uint16_t x, y;
+        uint16_t d_x, d_y;
         int16_t err = 0;
-        ushort temp = 0;
+        uint16_t temp = 0;
 
         if (y1 < y0)
         {
@@ -448,7 +448,7 @@ void CLcd::Line(ushort x0, ushort y0, ushort x1, ushort y1)
 }
 
 //矩形
-void CLcd::Rect(ushort x, ushort y, ushort width, ushort height)
+void CLcd::Rect(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
 {
     this->Line(x, y, x + width, y);
     this->Line(x, y + height, x + width, y + height);
@@ -458,11 +458,11 @@ void CLcd::Rect(ushort x, ushort y, ushort width, ushort height)
 }
 
 //实心矩形
-void CLcd::RectSolid(ushort x0, ushort y0, ushort width, ushort height)
+void CLcd::RectSolid(uint16_t x0, uint16_t y0, uint16_t width, uint16_t height)
 {
-    for (ushort x = x0; x < x0 + width; x++)
+    for (uint16_t x = x0; x < x0 + width; x++)
     {
-        for (ushort y = y0; y < y0 + height; y++)
+        for (uint16_t y = y0; y < y0 + height; y++)
         {
             this->Point(x, y);
         }
@@ -470,9 +470,9 @@ void CLcd::RectSolid(ushort x0, ushort y0, ushort width, ushort height)
 }
 
 //Bresenham算法画直线和圆
-void CLcd::Circle(ushort x0, ushort y0, ushort R)
+void CLcd::Circle(uint16_t x0, uint16_t y0, uint16_t R)
 {
-    ushort a = 0, b = 0;
+    uint16_t a = 0, b = 0;
     int16_t di = 0;
     b = R;
     di = 1-R;
@@ -509,7 +509,7 @@ void CLcd::Circle(ushort x0, ushort y0, ushort R)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display4x8(ushort x, ushort y, byte *dp)
+void CLcd::Display4x8(uint16_t x, uint16_t y, byte *dp)
 {
     for (byte i = 0; i < 4; i++)
     {
@@ -532,7 +532,7 @@ void CLcd::Display4x8(ushort x, ushort y, byte *dp)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display5x8(ushort x, ushort y, byte *dp)
+void CLcd::Display5x8(uint16_t x, uint16_t y, byte *dp)
 {
     for (byte i = 0; i < 5; i++)
     {
@@ -555,7 +555,7 @@ void CLcd::Display5x8(ushort x, ushort y, byte *dp)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display6x12(ushort x, ushort y, byte *dp)
+void CLcd::Display6x12(uint16_t x, uint16_t y, byte *dp)
 {
     for (byte j = 0; j < 2; j++)
     {
@@ -579,7 +579,7 @@ void CLcd::Display6x12(ushort x, ushort y, byte *dp)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display6x16(ushort x, ushort y, byte *dp)
+void CLcd::Display6x16(uint16_t x, uint16_t y, byte *dp)
 {
     for (byte j = 0; j < 2; j++)
     {
@@ -603,7 +603,7 @@ void CLcd::Display6x16(ushort x, ushort y, byte *dp)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display8x16(ushort x, ushort y, byte *dp)
+void CLcd::Display8x16(uint16_t x, uint16_t y, byte *dp)
 {
     for (byte j = 0; j < 2; j++)
     {
@@ -628,7 +628,7 @@ void CLcd::Display8x16(ushort x, ushort y, byte *dp)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display12x12(ushort x, ushort y, byte *dp)
+void CLcd::Display12x12(uint16_t x, uint16_t y, byte *dp)
 {
 	for (byte j = 0; j < 2; j++)
     {
@@ -672,7 +672,7 @@ void CLcd::Display12x12(ushort x, ushort y, byte *dp)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display16x16(ushort x, ushort y, byte *dp)
+void CLcd::Display16x16(uint16_t x, uint16_t y, byte *dp)
 {
     for (byte j = 0; j < 2; j++)
     {
@@ -697,7 +697,7 @@ void CLcd::Display16x16(ushort x, ushort y, byte *dp)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display16x32(ushort x, ushort y, byte *dp)
+void CLcd::Display16x32(uint16_t x, uint16_t y, byte *dp)
 {
     for (byte j = 0; j < 2; j++)
     {
@@ -721,7 +721,7 @@ void CLcd::Display16x32(ushort x, ushort y, byte *dp)
 形    参3: *dp 显示内容
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd::Display32x32(ushort x, ushort y, byte *dp)
+void CLcd::Display32x32(uint16_t x, uint16_t y, byte *dp)
 {
     for (byte j = 0; j < 4; j++)
     {
@@ -737,12 +737,12 @@ void CLcd::Display32x32(ushort x, ushort y, byte *dp)
     }
 }
 
-void CLcd::Cls(ushort x, ushort y, ushort width, ushort height)
+void CLcd::Cls(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
 {
     this->ShadowReset();
-    for (ushort i = x; i < x + width; i++)
+    for (uint16_t i = x; i < x + width; i++)
     {
-        for (ushort j = y; j < y + height; j++)
+        for (uint16_t j = y; j < y + height; j++)
         {
             this->Point(i, j, 0);
         }
@@ -757,10 +757,10 @@ void CLcd::Cls(ushort x, ushort y, ushort width, ushort height)
  ********************************************************************************************************/
 void CLcd::Flush()
 {
-    for (ushort j = 0; j < 8; j++)
+    for (uint16_t j = 0; j < 8; j++)
     {
         this->SetAddress(j + 1, 1);
-        for (ushort i = 0; i < 128; i++)
+        for (uint16_t i = 0; i < 128; i++)
         {
             this->writeData(this->Interface_Table[j][i]);
         }
@@ -768,7 +768,7 @@ void CLcd::Flush()
 }
 
 //是否在阴影区域
-bool CLcd::inShadow(ushort x, ushort y)
+bool CLcd::inShadow(uint16_t x, uint16_t y)
 {
     bool ret = false;
 
@@ -797,7 +797,7 @@ void CLcd::ShadowReset()
 }
 
 //阴影启用，默认启用通道0
-void CLcd::ShadowOn(ushort x, ushort y, ushort width, ushort height, byte id)
+void CLcd::ShadowOn(uint16_t x, uint16_t y, uint16_t width, uint16_t height, byte id)
 {
     if (id >= 3)
     {

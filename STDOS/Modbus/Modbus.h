@@ -45,8 +45,8 @@ public:
 	byte	Length;		// 数据长度
 	byte	Data[32];	// 数据
 
-	ushort	Crc;		// 校验码
-	ushort	Crc2;		// 动态计算得到的校验码
+	uint16_t	Crc;		// 校验码
+	uint16_t	Crc2;		// 动态计算得到的校验码
 
 	Modbus();
 

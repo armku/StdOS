@@ -309,7 +309,7 @@ String Buffer::ToHex(char sep, int newLine)const
 	return this->ToHex(ss,sep,newLine);
 }
 
-ushort Buffer::ToUInt16()const
+uint16_t Buffer::ToUInt16()const
 {
     return 0;
 }
@@ -324,9 +324,9 @@ uint64_t Buffer::ToUInt64()const
     return 0;
 }
 
-void Buffer::Write(ushort value, int index)
+void Buffer::Write(uint16_t value, int index)
 {
-	((ushort*)this->_Arr)[index]=value;
+	((uint16_t*)this->_Arr)[index]=value;
 }
 void Buffer::Write(short value, int index)
 {

@@ -41,7 +41,7 @@ class TimeWheel
 {
 public:
 	uint64_t	Expire;		// 到期时间，毫秒
-	ushort	Sleep;		// 睡眠时间，默认0毫秒
+	uint16_t	Sleep;		// 睡眠时间，默认0毫秒
 
 	TimeWheel(uint32_t ms);
 

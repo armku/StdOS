@@ -4,8 +4,8 @@
 #include "Util.h"
 
 byte reginbuf[200]; //输入寄存器
-ushort RegInputu16[40];//输入寄存器
-ushort RegHoilding16[(22*16+8*12+4+16+5)*2];
+uint16_t RegInputu16[40];//输入寄存器
+uint16_t RegHoilding16[(22*16+8*12+4+16+5)*2];
 
 void ModbusSlave1::Process(Buffer &bs, void *param)
 {
@@ -37,7 +37,7 @@ void ModbusSlave1::Process(Buffer &bs, void *param)
 void ModbusSlave1::DealFrame(Buffer &bs, void *param)
 {
     debug_printf("address:%d length:%d\r\n", this->Entity.address, this->Entity.reglength);
-    ushort crc;
+    uint16_t crc;
     switch (this->Entity.Function)
     {
         case ReadInputRegisters:
@@ -68,12 +68,12 @@ void ModbusSlave1::DealFrame(Buffer &bs, void *param)
 /// </summary>
 /// <param name="byteData">输入参数：CRC值</param>
 /// <returns>返回值：byte[]，2位，0：地位，1：高位</returns>
-ushort ModbusSlave1::GetCRC(byte *byteData, int len)
+uint16_t ModbusSlave1::GetCRC(byte *byteData, int len)
 {
-    ushort wCrc = 0xFFFF;
+    uint16_t wCrc = 0xFFFF;
     for (int i = 0; i < len; i++)
     {
-        wCrc ^= (ushort)(byteData[i]);
+        wCrc ^= (uint16_t)(byteData[i]);
         for (int j = 0; j < 8; j++)
         {
             if ((wCrc &0x0001) == 1)
@@ -96,8 +96,8 @@ ushort ModbusSlave1::GetCRC(byte *byteData, int len)
 //11 04 00 08 00 02 F2 99
 bool ModbusSlave1::IsFrameOK(Buffer &bs)
 {
-    ushort crc = 0;
-    ushort crcrcv = 0;
+    uint16_t crc = 0;
+    uint16_t crcrcv = 0;
     if (bs.Length() < 6)
     {
         return false;

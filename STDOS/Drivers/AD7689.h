@@ -16,7 +16,7 @@
 			void SetPin(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv);
             void Routin(void); //读取AD值,并切换通道
             void Init(void); //
-            float getVolt(ushort ch); //获取通道电压值    
+            float getVolt(uint16_t ch); //获取通道电压值    
 		private:
             OutputPort ppinsck;
             OutputPort ppinsdi;
@@ -24,12 +24,12 @@
             OutputPort ppincnv;
 
             float volt[MAXCH]; //电压值
-            ushort ADBuf[MAXCH]; //原始AD值
+            uint16_t ADBuf[MAXCH]; //原始AD值
             byte chCurrent; //当前通道
             byte chDelayCnt; //通道延时时间，用于数据稳定        
 		private:
-            ushort AD_Read(void);
-            ushort AD_Write(ushort sdat);
+            uint16_t AD_Read(void);
+            uint16_t AD_Write(uint16_t sdat);
 			byte getNextCH(); //获取下次转换通道		
     };
 #endif

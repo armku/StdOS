@@ -32,8 +32,8 @@
             byte(*IsKeyDownFunc)(); /* 按键按下的判断函数,1表示按下 */
 
             byte Count; /* 滤波器计数器 */
-            ushort LongCount; /* 长按计数器 */
-            ushort LongTime; /* 按键按下持续时间, 0表示不检测长按 */
+            uint16_t LongCount; /* 长按计数器 */
+            uint16_t LongTime; /* 按键按下持续时间, 0表示不检测长按 */
             byte State; /* 按键当前状态（按下还是弹起） */
             byte RepeatSpeed; /* 连续按键周期 */
             byte RepeatCount; /* 连续按键计数器 */
@@ -63,7 +63,7 @@
             void KeyScan();
             void PutKey(byte _KeyCode);
             byte GetKeyState(KEY_ID_E _ucKeyID);
-            void SetKeyParam(byte _ucKeyID, ushort _LongTime, byte _RepeatSpeed);
+            void SetKeyParam(byte _ucKeyID, uint16_t _LongTime, byte _RepeatSpeed);
             byte GetKeyCode();
 
             void SetKeyDetectFunc(byte(*func)(), byte pos = 0);

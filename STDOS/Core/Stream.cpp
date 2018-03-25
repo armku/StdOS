@@ -1,13 +1,13 @@
 #include "ByteArray.h"
 #include "Stream.h"
 
-ushort _REV16(ushort a1)
+uint16_t _REV16(uint16_t a1)
 {
-  return (ushort)(a1 << 8) | (a1 >> 8);
+  return (uint16_t)(a1 << 8) | (a1 >> 8);
 }
 uint32_t _REV(uint32_t a1)
 {
-  ushort v1;
+  uint16_t v1;
   uint32_t v2;
 
   v1 = a1;
@@ -246,9 +246,9 @@ int Stream::ReadByte()
 			return 0;
 	}
 }
-ushort Stream::ReadUInt16()
+uint16_t Stream::ReadUInt16()
 {	
-	ushort buf[1];
+	uint16_t buf[1];
 	Buffer v3(buf,2);
 	if(this->Read(v3))	
 	{
@@ -302,9 +302,9 @@ bool Stream::Write(byte value)
 	return this->Write(v3);
 }
 
-bool Stream::Write(ushort value)
+bool Stream::Write(uint16_t value)
 {
-    ushort buf[1];
+    uint16_t buf[1];
 	buf[0]=value;
 	const Buffer v3(buf,2);
 	if(!this->Little)
