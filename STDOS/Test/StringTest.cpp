@@ -65,8 +65,8 @@ void TestNum10()
 	String str5((int64_t)-7744, 10);
 	assert(str5 == "-7744", "String(int64_t value, int radix = 10)");
 
-	String str6((UInt64)331144, 10);
-	assert(str6 == "331144", "String(UInt64 value, int radix = 10)");
+	String str6((uint64_t)331144, 10);
+	assert(str6 == "331144", "String(uint64_t value, int radix = 10)");
 
 	// 浮点数格式化
 	String str7((float)123.0);
@@ -103,8 +103,8 @@ void TestNum16()
 	String str5((int64_t)0x331144997AC45566, 16);
 	assert(str5 == "331144997ac45566", "String(int64_t value, int radix = 16)");
 
-	String str6((UInt64)0x331144997AC45566, -16);
-	assert(str6 == "331144997AC45566", "String(UInt64 value, int radix = 16)");
+	String str6((uint64_t)0x331144997AC45566, -16);
+	assert(str6 == "331144997AC45566", "String(uint64_t value, int radix = 16)");
 }
 
 static void TestAssign()

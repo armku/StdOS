@@ -6,7 +6,7 @@ typedef char			sbyte;
 typedef unsigned char	byte;
 typedef unsigned short	ushort;
 typedef unsigned int	uint;
-typedef unsigned long long	UInt64;
+//typedef unsigned long long	UInt64;
 //typedef long long		Int64;
 typedef const char*		cstring;
 

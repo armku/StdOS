@@ -10,7 +10,7 @@ class TTime
 {
 public:
     uint	Seconds;		// 全局秒数，系统启动后总秒数。累加
-	UInt64	Milliseconds;	// 全局毫秒数，系统启动后总毫秒（1000ms整部分）。累加 1
+	uint64_t	Milliseconds;	// 全局毫秒数，系统启动后总毫秒（1000ms整部分）。累加 1
     uint	BaseSeconds;	// 基准秒数。系统启动时相对于1970年的秒数，时间调节，加上Seconds得到当前时间Now()
     //byte	Ticks;			// 每微秒的时钟滴答数
 	byte	Index;			// 定时器
@@ -23,7 +23,7 @@ public:
 	void Init();
 
     uint CurrentTicks() const;	// 当前滴答时钟
-	UInt64 Current() const; 		// 当前毫秒数
+	uint64_t Current() const; 		// 当前毫秒数
 
 	void Sleep(int ms, bool* running = nullptr) const;
     void Delay(int us) const;	// 微秒级延迟	
@@ -40,7 +40,7 @@ extern TTime Time; //extern const TTime Time
 class TimeWheel
 {
 public:
-	UInt64	Expire;		// 到期时间，毫秒
+	uint64_t	Expire;		// 到期时间，毫秒
 	ushort	Sleep;		// 睡眠时间，默认0毫秒
 
 	TimeWheel(uint ms);
@@ -55,7 +55,7 @@ public:
 class TimeCost
 {
 public:
-	UInt64	Start;		// 开始时间，毫秒
+	uint64_t	Start;		// 开始时间，毫秒
 	uint	StartTicks;	// 开始滴答
 
 	TimeCost();

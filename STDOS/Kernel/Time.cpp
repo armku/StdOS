@@ -37,7 +37,7 @@ void TTime::Sleep(int nms, bool *running)const
 void TTime::Delay(int nus)const
 {
 	int sumus;
-	UInt64 summs;
+	uint64_t summs;
 	uint startTicks;
 	uint stopTicks;
 	static uint ticksPerMs=0;

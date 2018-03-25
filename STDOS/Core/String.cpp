@@ -12,7 +12,7 @@ int ltoa(int64_t value,char *buf,int radix)
 		if(radix<= 36 && radix > 1)
 		{
 			bool v6 = radix == 10 && value < 0;
-			UInt64 v7;
+			uint64_t v7;
 			if(v6)
 			{
 				v7 = -value;
@@ -24,8 +24,8 @@ int ltoa(int64_t value,char *buf,int radix)
 			}
 			while(v7)
 			{
-				UInt64 v8 = v7%radix;
-				v7/=(UInt64)radix;
+				uint64_t v8 = v7%radix;
+				v7/=(uint64_t)radix;
 				if(v8 >= 10)
 					*buf++=v8+'W';
 				else
@@ -145,7 +145,7 @@ String::String(int64_t value, int radix): Array(buftmp, 0)
 	this->init();
 	this->Concat(value,radix);
 }
-String::String(UInt64 value, int radix): Array(buftmp, 0)
+String::String(uint64_t value, int radix): Array(buftmp, 0)
 {
 	this->init();
 	this->Concat(value,radix);
@@ -412,7 +412,7 @@ bool String::Concat(int64_t num, int radix)
 		return false;
 }
 
-bool String::Concat(UInt64 num, int radix)
+bool String::Concat(uint64_t num, int radix)
 {
     char buf[20];
 	for(int i=0;i<20;i++)

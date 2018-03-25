@@ -274,9 +274,9 @@ uint Stream::ReadUInt32()
 		return 0;
 }
 
-UInt64 Stream::ReadUInt64()
+uint64_t Stream::ReadUInt64()
 {
-    UInt64 buf[1];
+    uint64_t buf[1];
 	Buffer v3(buf,8);
 	if(this->Read(v3))	
 	{
@@ -322,9 +322,9 @@ bool Stream::Write(uint value)
 	return this->Write(v3);
 }
 
-bool Stream::Write(UInt64 value)
+bool Stream::Write(uint64_t value)
 {
-	UInt64 buf[1];
+	uint64_t buf[1];
 	buf[0]=value;
 	const Buffer v3(buf,8);
 	if(!this->Little)

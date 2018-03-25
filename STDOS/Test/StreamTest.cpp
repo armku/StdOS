@@ -8,7 +8,7 @@ Stream streambuf(buftest,ArrayLength(buftest));
 byte bufbyte=0x0d;
 ushort bufshort=0x1234;
 uint bufuint = 0x12345678;
-UInt64 bufuint64 = 0x12345678ABCDEF;
+uint64_t bufuint64 = 0x12345678ABCDEF;
 void streamtest()
 {
 	//streambuf.Little=false;

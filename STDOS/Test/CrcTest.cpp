@@ -85,7 +85,7 @@ void TestCrc()
 	// 结果相同，但都不是0
 
 	// 连续测试。构建8字节，前面是data，后面是前面的crc
-	UInt64 data2 = temp;
+	uint64_t data2 = temp;
 	data2	<<= 32;
 	data2	+= data;
 	ByteArray bs2(&data2, 8);

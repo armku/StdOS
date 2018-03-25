@@ -11,8 +11,8 @@
             static ushort CRC16RTU(byte *pszBuf, uint unLength);
             static ushort CRC16CCITT(byte *pszBuf, uint unLength);
             static ushort CRC16Default(byte *pszBuf, uint unLength);
-            static UInt64 CRC32Default(byte *pszBuf, UInt64 ulLength);
-            static UInt64 Reflect(UInt64 ref, char ch);
+            static uint64_t CRC32Default(byte *pszBuf, uint64_t ulLength);
+            static uint64_t Reflect(uint64_t ref, char ch);
     }; //循环冗余校验
 
 #endif

@@ -1,4 +1,4 @@
-﻿#ifndef __Environment_H__
+#ifndef __Environment_H__
 #define __Environment_H__
 
 // 环境变量
@@ -8,10 +8,10 @@ public:
 	TEnvironment();
 	
 	// 获取系统启动后经过的毫秒数
-	UInt64 TickCount() const;
+	uint64_t TickCount() const;
 
 	// 获取系统启动后经过的毫秒数
-	UInt64 Ms() const;
+	uint64_t Ms() const;
 
 	// 获取当前计算机上的处理器数
 	int ProcessorCount() const;

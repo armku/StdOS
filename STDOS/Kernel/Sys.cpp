@@ -72,7 +72,7 @@ void TSys::ShowInfo()const
 }
 
 // 系统启动后的毫秒数
-UInt64 TSys::Ms()const
+uint64_t TSys::Ms()const
 {
 	return Time.Current();
 }

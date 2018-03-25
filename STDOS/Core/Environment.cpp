@@ -8,13 +8,13 @@ TEnvironment::TEnvironment()
 
 	
 // 获取系统启动后经过的毫秒数
-UInt64 TEnvironment::TickCount() const
+uint64_t TEnvironment::TickCount() const
 {
 	return 0;
 }
 
 // 获取系统启动后经过的毫秒数
-UInt64 TEnvironment::Ms() const
+uint64_t TEnvironment::Ms() const
 {
 	return 0;
 }

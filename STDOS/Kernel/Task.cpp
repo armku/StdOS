@@ -13,7 +13,7 @@ Task::~Task()
 }
 
 // 执行任务。返回是否正常执行。
-bool Task::Execute(UInt64 now)
+bool Task::Execute(uint64_t now)
 {
     if (this->Deepth < this->MaxDeepth)
     {
@@ -165,7 +165,7 @@ Task &Task::Current()
     return  *Task::Scheduler()->Current;
 }
 
-bool Task::CheckTime(UInt64 end, bool isSleep)
+bool Task::CheckTime(uint64_t end, bool isSleep)
 {
     bool ret;
 
@@ -358,10 +358,10 @@ void TaskScheduler::Stop()
 // 执行一次循环。指定最大可用时间
 void TaskScheduler::Execute(uint msMax, bool &cancel)
 {
-    UInt64 mscur = Sys.Ms();
+    uint64_t mscur = Sys.Ms();
     TimeCost tmcost;
 
-    UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
+    uint64_t min = UInt64_Max; // 最小时间，这个时间就会有任务到来
 
     int mscurMax = mscur + msMax;
     for (int i = 0; i < this->Count; i++)
@@ -467,7 +467,7 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
 //显示时间
 void ShowTime(void *param)
 {
-    UInt64 curms = Time.Milliseconds;
+    uint64_t curms = Time.Milliseconds;
     debug_printf("Time: %02lld:%02lld:%02lld.%03lld\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000);
 }
 
@@ -475,14 +475,14 @@ void ShowTime(void *param)
 void TaskScheduler::ShowStatus()
 {
 
-    static UInt64 runCounts = 0;
+    static uint64_t runCounts = 0;
     float RunTimes = 0;
     float RunTimesAvg = 0;
     Task *tsk;
     byte buf[1];
 
     runCounts++;
-    UInt64 curms = Sys.Ms();
+    uint64_t curms = Sys.Ms();
     //debug_printf("\r\n\r\n %lld \r\n\r\n",curms);
     //统计运行时间
     RunTimes = 0;

@@ -84,12 +84,12 @@ public:
 
 	ushort	ToUInt16() const;
 	uint	ToUInt32() const;
-	UInt64	ToUInt64() const;
+	uint64_t	ToUInt64() const;
 	void Write(ushort value, int index = 0);
 	void Write(short value, int index = 0);
 	void Write(uint value, int index = 0);
 	void Write(int value, int index = 0);
-	void Write(UInt64 value, int index = 0);
+	void Write(uint64_t value, int index = 0);
 
 	// 输出对象的字符串表示方式
 	virtual String& ToStr(String& str) const;

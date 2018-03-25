@@ -319,7 +319,7 @@ uint Buffer::ToUInt32()const
     return 0;
 }
 
-UInt64 Buffer::ToUInt64()const
+uint64_t Buffer::ToUInt64()const
 {
     return 0;
 }
@@ -341,9 +341,9 @@ void Buffer::Write(int value, int index)
 	//(*(int (__cdecl **)(Buffer *, int, int *))(*(_DWORD *)this + 16))(this, index, &pvalue);
 	((int*)this->_Arr)[index]=value;
 }
-void Buffer::Write(UInt64 value, int index)
+void Buffer::Write(uint64_t value, int index)
 {
-	((UInt64*)this->_Arr)[index]=value;
+	((uint64_t*)this->_Arr)[index]=value;
 }
 
 // 输出对象的字符串表示方式

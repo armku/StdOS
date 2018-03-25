@@ -14,8 +14,8 @@ static void PulseHandler(PulsePort& port)
 {	
 #if defined(DEBUG)
 	// down true　无遮挡　　　down false 有遮挡
-	//static UInt64 HideStr;
-	//static UInt64 UnHideStr;
+	//static uint64_t HideStr;
+	//static uint64_t UnHideStr;
 	// debug_printf("Press P%c%d down=%d", _PIN_NAME(port->_Port->_Pin),down);	
 #endif
 }

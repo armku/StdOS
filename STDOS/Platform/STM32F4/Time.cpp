@@ -53,7 +53,7 @@ uint TTime::CurrentTicks()const
 }
 
 // µ±Ç°ºÁÃëÊý
-UInt64 TTime::Current()const
+uint64_t TTime::Current()const
 {
     __IO ushort ms = 0;
     switch (this->Index)
