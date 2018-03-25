@@ -39,9 +39,9 @@ __packed typedef struct
 	nmea_slmsg slmsg[12];		//最多12颗GPS卫星
 	beidou_nmea_slmsg beidou_slmsg[12];		//暂且算最多12颗北斗卫星
 	nmea_utc_time utc;			//UTC时间
-	uint latitude;				//纬度 分扩大100000倍,实际要除以100000
+	uint32_t latitude;				//纬度 分扩大100000倍,实际要除以100000
 	byte nshemi;					//北纬/南纬,N:北纬;S:南纬				  
-	uint longitude;			    //经度 分扩大100000倍,实际要除以100000
+	uint32_t longitude;			    //经度 分扩大100000倍,实际要除以100000
 	byte ewhemi;					//东经/西经,E:东经;W:西经
 	byte gpssta;					//GPS状态:0,未定位;1,非差分定位;2,差分定位;6,正在估算.				  
 	byte posslnum;				//用于定位的GPS卫星数,0~12.
@@ -88,7 +88,7 @@ __packed typedef struct
 	ushort PL;             //有效数据长度0X0007； 
 	byte id;             //ID，固定为0X65
 	byte Sub_ID;         //0X01
-	uint width;        //1~100000(us)
+	uint32_t width;        //1~100000(us)
 	byte Attributes;     //配置数据保存位置 ,0保存到SRAM，1保存到SRAM&FLASH，2临时保存
 	byte CS;             //校验值
 	ushort end;            //结束符:0X0D0A 
@@ -103,7 +103,7 @@ public:
 	nmea_msg gpsx;	//GPS信息
 private:
 	byte NMEA_Comma_Pos(byte *buf, byte cx);
-	uint NMEA_Pow(byte m, byte n);
+	uint32_t NMEA_Pow(byte m, byte n);
 	int NMEA_Str2num(byte *buf, byte*dx);
 	byte SkyTra_Cfg_Ack_Check();
 	void NMEA_GPGSV_Analysis(byte *buf);
@@ -113,8 +113,8 @@ private:
 	void NMEA_GNRMC_Analysis(byte *buf);
 	void NMEA_GNVTG_Analysis(byte *buf);
 public:
-	byte SkyTra_Cfg_Prt(uint baud_id, byte* buf, int& len);
-	byte SkyTra_Cfg_Tp(uint width, byte* buf, int& len);
+	byte SkyTra_Cfg_Prt(uint32_t baud_id, byte* buf, int& len);
+	byte SkyTra_Cfg_Tp(uint32_t width, byte* buf, int& len);
 	byte SkyTra_Cfg_Rate(byte Frep, byte* buf, int& len);
 };
 

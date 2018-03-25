@@ -61,10 +61,10 @@
 //			virtual void OnClose();
 
 //			virtual bool OnWrite(const Buffer& bs);
-//			virtual uint OnRead(Buffer& bs);
+//			virtual uint32_t OnRead(Buffer& bs);
 
 //			// 引发数据到达事件
-//			//virtual uint OnReceive(Buffer& bs, void* param);
+//			//virtual uint32_t OnReceive(Buffer& bs, void* param);
 //			virtual bool OnWriteEx(const Buffer& bs, const void* opt);
 			
 			bool SendTo(const Buffer& bs, const Buffer& addr);
@@ -83,8 +83,8 @@
 
 			// 接收任务。
 			static void ReceiveTask(void* param);
-			uint _tidOpen;
-			uint _tidRecv;
+			uint32_t _tidOpen;
+			uint32_t _tidRecv;
 			void OnIRQ(InputPort& port, bool down);
 			void OnIRQ();
 

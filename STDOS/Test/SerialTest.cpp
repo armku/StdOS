@@ -2,7 +2,7 @@
 
 //#define _SERIAL_TEST_H
 #ifdef	_SERIAL_TEST_H
-static uint OnUsartRead(ITransport* transport, Buffer& bs, void* param, void* param2)
+static uint32_t OnUsartRead(ITransport* transport, Buffer& bs, void* param, void* param2)
 {
 	auto sp	= (SerialPort*)param;
 	debug_printf("%s 收到：", sp->Name);

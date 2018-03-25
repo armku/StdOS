@@ -24,9 +24,9 @@ ushort AD7124::Write16(ushort sendData)
 }
 
 
-uint AD7124::Write24(uint sendData)
+uint32_t AD7124::Write24(uint32_t sendData)
 {
-    uint ret = 0;
+    uint32_t ret = 0;
     ret = this->pspi->Write(sendData >> 16);
     ret <<= 8;
     ret += this->pspi->Write(sendData >> 8);
@@ -36,9 +36,9 @@ uint AD7124::Write24(uint sendData)
 
 }
 
-uint AD7124::Write32(uint sendData)
+uint32_t AD7124::Write32(uint32_t sendData)
 {
-    uint ret = 0;
+    uint32_t ret = 0;
     ret = this->pspi->Write(sendData >> 24);
     ret <<= 8;
     ret += this->pspi->Write(sendData >> 16);
@@ -49,9 +49,9 @@ uint AD7124::Write32(uint sendData)
     return ret;
 }
 
-uint AD7124::ReadReg(byte reg, byte bytes)
+uint32_t AD7124::ReadReg(byte reg, byte bytes)
 {
-    uint retVal;
+    uint32_t retVal;
     this->pspi->Start();
     this->pspi->Write(AD7124_RD | reg);
     if (bytes == 1)
@@ -70,20 +70,20 @@ uint AD7124::ReadReg(byte reg, byte bytes)
     return retVal;
 }
 //读取AD值
-uint AD7124::ReadRlt()
+uint32_t AD7124::ReadRlt()
 {
 	this->pspi->Stop();
 	Sys.Delay(5);
-	uint ret= this->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
+	uint32_t ret= this->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
 	Sys.Delay(5);
 	this->pspi->Stop();
 	this->pspi->Start();
 	return ret;
 }
 //读取AD值
-uint AD7124::ReadRlt(byte& status)
+uint32_t AD7124::ReadRlt(byte& status)
 {
-	uint adin=this->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES+1);
+	uint32_t adin=this->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES+1);
 	status=adin&0xff;
 	adin>>=8;
 	return adin;
@@ -96,9 +96,9 @@ uint AD7124::ReadRlt(byte& status)
  * @retval		: 读取的内容
  * @notes		: 
  *****************************************************************************/
-uint AD7124::ReadRegNoCS(byte reg, byte bytes)
+uint32_t AD7124::ReadRegNoCS(byte reg, byte bytes)
 {
-    uint retVal;
+    uint32_t retVal;
     this->pspi->Write(AD7124_RD | reg);
     if (bytes == 1)
     {
@@ -124,7 +124,7 @@ uint AD7124::ReadRegNoCS(byte reg, byte bytes)
  * @retval		: 无
  * @notes		: 
  *****************************************************************************/
-void AD7124::WriteReg(byte reg, byte bytes, uint data)
+void AD7124::WriteReg(byte reg, byte bytes, uint32_t data)
 {
     this->pspi->Start();
     this->pspi->Write(AD7124_WR | reg);

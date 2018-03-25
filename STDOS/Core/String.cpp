@@ -43,7 +43,7 @@ int itoa(int value,char *buf,int radix)
 	return ltoa(value,buf,radix);
 }
 
-String utohex(uint ch,int a2,char *buf,bool uppercase)
+String utohex(uint32_t ch,int a2,char *buf,bool uppercase)
 {
 	if(buf)
 	{
@@ -135,7 +135,7 @@ String::String(int value, int radix): Array(buftmp, 0)
 	this->init();
 	this->Concat(value,radix);
 }
-String::String(uint value, int radix): Array(buftmp, 0)
+String::String(uint32_t value, int radix): Array(buftmp, 0)
 {
 	this->init();
 	this->Concat(value,radix);
@@ -368,7 +368,7 @@ bool String::Concat(int num, int radix)
 		return false;
 }
 
-bool String::Concat(uint num, int radix)
+bool String::Concat(uint32_t num, int radix)
 {
     char buf[20];
 	for(int i=0;i<20;i++)

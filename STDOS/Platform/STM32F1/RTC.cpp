@@ -19,12 +19,12 @@ bool RTC_WaitForLastTask2(unsigned int a1)
 {
 	return false;
 }
-uint HardRTC::ReadBackup(byte addr)
+uint32_t HardRTC::ReadBackup(byte addr)
 {
     return 0;
 }
 
-void HardRTC::WriteBackup(byte addr, uint value)
+void HardRTC::WriteBackup(byte addr, uint32_t value)
 {
     addr = addr;
     value = value;
@@ -87,7 +87,7 @@ int HardRTC::Sleep(int ms)
 }
 void HardRTC::LoadTime()
 {
-    uint totalSeconds = 0;
+    uint32_t totalSeconds = 0;
         totalSeconds = RTC_GetCounter();
         Time.Seconds = totalSeconds;
         if (totalSeconds > Time.BaseSeconds)
@@ -101,7 +101,7 @@ void HardRTC::LoadTime()
 }
 void HardRTC::SaveTime()
 {
-    uint seconds = Time.Seconds + Time.BaseSeconds;
+    uint32_t seconds = Time.Seconds + Time.BaseSeconds;
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE); //使能PWR和BKP外设时钟  
         PWR_BackupAccessCmd(ENABLE); //使能RTC和后备寄存器访问 
         RTC_SetCounter(seconds); //设置RTC计数器的值
@@ -109,7 +109,7 @@ void HardRTC::SaveTime()
         RTC_WaitForLastTask(); //等待最近一次对RTC寄存器的写操作完成
 }
 //设置时间
-void HardRTC::SetTime(uint seconds)
+void HardRTC::SetTime(uint32_t seconds)
 {	
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);	//使能PWR和BKP外设时钟  
 	PWR_BackupAccessCmd(ENABLE);	//使能RTC和后备寄存器访问 

@@ -65,16 +65,16 @@ public:
 
 	int		ReadByte();
 	ushort	ReadUInt16();
-	uint	ReadUInt32();
+	uint32_t	ReadUInt32();
 	uint64_t	ReadUInt64();
 
 	bool Write(byte value);
 	bool Write(ushort value);
-	bool Write(uint value);
+	bool Write(uint32_t value);
 	bool Write(uint64_t value);
 	//bool Write(sbyte value)	{ return Write((byte)value); }
 	bool Write(short value)	{ return Write((ushort)value); }
-	bool Write(int value)	{ return Write((uint)value); }
+	bool Write(int value)	{ return Write((uint32_t)value); }
 	bool Write(int64_t value)	{ return Write((uint64_t)value); }
 
 	// 取回指定结构体指针，并移动游标位置

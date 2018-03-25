@@ -268,7 +268,7 @@ void PwmSolo::SetOut(ushort pwmValue)
 			break;
 	}	
 }
-PwmSolo::PwmSolo(uint frq, uint duty, bool invert)
+PwmSolo::PwmSolo(uint32_t frq, uint32_t duty, bool invert)
 {
 	this->_freq = frq;
 	this->_duty = duty;

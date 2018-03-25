@@ -45,7 +45,7 @@ bool ITransport::Write(const Buffer &bs, const void *opt)
 }
 
 // 接收数据
-uint ITransport::Read(Buffer &bs)
+uint32_t ITransport::Read(Buffer &bs)
 {
     return this->OnRead(bs);
 }
@@ -66,13 +66,13 @@ bool ITransport::OnWriteEx(const Buffer &bs, const void *opt)
     return false;
 }
 
-uint ITransport::OnRead(Buffer &bs)
+uint32_t ITransport::OnRead(Buffer &bs)
 {
     return bs.Length();
 }
 
 // 引发数据到达事件
-uint ITransport::OnReceive(Buffer &bs, void *param)
+uint32_t ITransport::OnReceive(Buffer &bs, void *param)
 {
     if (this->_handler)
     {
@@ -103,11 +103,11 @@ bool PackPort::OnWrite(const Buffer& bs)
 {
 	return false;
 }
-uint PackPort::OnRead(Buffer& bs)
+uint32_t PackPort::OnRead(Buffer& bs)
 {
 	return 0;
 }
-uint PackPort::OnPortReceive(ITransport* sender, Buffer& bs, void* param, void* param2)
+uint32_t PackPort::OnPortReceive(ITransport* sender, Buffer& bs, void* param, void* param2)
 {
 	return 0;
 }

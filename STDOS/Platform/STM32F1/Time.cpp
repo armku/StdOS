@@ -50,7 +50,7 @@ void TTime::Init()
 }
 
 // µ±«∞µŒ¥ ±÷”
-uint TTime::CurrentTicks()const
+uint32_t TTime::CurrentTicks()const
 {
     return SysTick->LOAD - SysTick->VAL;
 }
@@ -102,7 +102,7 @@ void TTime::DelayUs(int nus) const
 
     //…Ë÷√’ª∂•µÿ÷∑
     //addr:’ª∂•µÿ÷∑
-    __asm void MSR_MSP(uint addr)
+    __asm void MSR_MSP(uint32_t addr)
     {
         MSR MSP, r0  //set Main Stack value
         BX r14

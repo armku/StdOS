@@ -27,7 +27,7 @@ void TTime::Init()
     //初始化延迟函数
     //SYSTICK的时钟固定为HCLK时钟的1/8
     //SYSCLK:系统时钟
-//        uint SYSCLK = 168;
+//        uint32_t SYSCLK = 168;
 	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);  
 	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
 	SysTick_Config(9000); //配置SysTick tick is 9ms	9000
@@ -47,7 +47,7 @@ void TTime::Init()
 	}
 }
 // 当前滴答时钟
-uint TTime::CurrentTicks()const
+uint32_t TTime::CurrentTicks()const
 {
 	return SysTick->LOAD - SysTick->VAL;
 }
@@ -99,7 +99,7 @@ void TTime::DelayUs(int nus) const
 
     //设置栈顶地址
     //addr:栈顶地址
-    __asm void MSR_MSP(uint addr)
+    __asm void MSR_MSP(uint32_t addr)
     {
         MSR MSP, r0  //set Main Stack value
         BX r14

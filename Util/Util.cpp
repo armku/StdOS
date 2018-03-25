@@ -2,9 +2,9 @@
 #include "Util.h"
 
 //ÅÅÐò
-void bubbleSort(float *buf, uint len)
+void bubbleSort(float *buf, uint32_t len)
 {
-    uint i, j, pos;
+    uint32_t i, j, pos;
     float tmp;
     for (i = len; i > 0; i--)
     {

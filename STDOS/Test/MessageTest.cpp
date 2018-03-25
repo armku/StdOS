@@ -19,7 +19,7 @@ bool OpenLed(Message& msg, void* param)
 	{
 		OutputPort& led = leds[i];
 		// 下面这行干嘛用？
-		if(*(uint*)&led != *(uint*)&leds[0]) break;
+		if(*(uint32_t*)&led != *(uint32_t*)&leds[0]) break;
 
 		switch(msg.Data[i])
 		{

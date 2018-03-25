@@ -17,9 +17,9 @@ static void TestCtor()
 	assert(dt2.Hour == 0 && dt2.Minute == 0 && dt2.Second == 0 && dt2.Ms == 0, "DateTime(ushort year, byte month, byte day)");
 
     DateTime dt3(1463443233);
-	assert(dt3.Year == 2016 && dt3.Month == 5 && dt3.Day == 17, "DateTime(uint seconds)");
-	assert(dt3.DayOfWeek() == 2, "DateTime(uint seconds)");
-	assert(dt3.Hour == 0 && dt3.Minute == 0 && dt3.Second == 33 && dt3.Ms == 00, "DateTime(uint seconds)");
+	assert(dt3.Year == 2016 && dt3.Month == 5 && dt3.Day == 17, "DateTime(uint32_t seconds)");
+	assert(dt3.DayOfWeek() == 2, "DateTime(uint32_t seconds)");
+	assert(dt3.Hour == 0 && dt3.Minute == 0 && dt3.Second == 33 && dt3.Ms == 00, "DateTime(uint32_t seconds)");
 }
 
 static void TestParseMs()
@@ -28,9 +28,9 @@ static void TestParseMs()
 
     DateTime dt3;
 	dt3	= 1463443233;
-	assert(dt3.Year == 2016 && dt3.Month == 5 && dt3.Day == 17, "DateTime(uint seconds)");
-	assert(dt3.DayOfWeek() == 2, "DateTime(uint seconds)");
-	assert(dt3.Hour == 0 && dt3.Minute == 0 && dt3.Second == 33 && dt3.Ms == 00, "DateTime(uint seconds)");
+	assert(dt3.Year == 2016 && dt3.Month == 5 && dt3.Day == 17, "DateTime(uint32_t seconds)");
+	assert(dt3.DayOfWeek() == 2, "DateTime(uint32_t seconds)");
+	assert(dt3.Hour == 0 && dt3.Minute == 0 && dt3.Second == 33 && dt3.Ms == 00, "DateTime(uint32_t seconds)");
 }
 
 static void TestTotal()

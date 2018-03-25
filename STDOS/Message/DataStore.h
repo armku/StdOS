@@ -1,4 +1,4 @@
-﻿#ifndef __DataStore_H__
+#ifndef __DataStore_H__
 #define __DataStore_H__
 
 class IDataPort;
@@ -9,26 +9,26 @@ class DataStore
 public:
 	ByteArray	Data;	// 数据
 	bool		Strict;	// 是否严格限制存储区，读写不许越界。默认true
-	uint		VirAddrBase = 0;	// 虚拟地址起始位置， 可以吧Store定义到任意位置
+	uint32_t		VirAddrBase = 0;	// 虚拟地址起始位置， 可以吧Store定义到任意位置
 
 	// 初始化
 	DataStore();
 
 	// 写入数据 offset 为虚拟地址
-	int Write(uint offset, const Buffer& bs);
-	int Write(uint offset, byte data) { return Write(offset, Buffer(&data, 1)); }
+	int Write(uint32_t offset, const Buffer& bs);
+	int Write(uint32_t offset, byte data) { return Write(offset, Buffer(&data, 1)); }
 	// 读取数据 offset 为虚拟地址
-	int Read(uint offset, Buffer& bs);
+	int Read(uint32_t offset, Buffer& bs);
 
-	typedef bool (*Handler)(uint offset, uint size, bool write);
+	typedef bool (*Handler)(uint32_t offset, uint32_t size, bool write);
 	// 注册某一块区域的读写钩子函数
-	void Register(uint offset, uint size, Handler hook);
-	void Register(uint offset, IDataPort& port);
+	void Register(uint32_t offset, uint32_t size, Handler hook);
+	void Register(uint32_t offset, IDataPort& port);
 
 private:
 	IList	Areas;
 
-	bool OnHook(uint offset, uint size, bool write);
+	bool OnHook(uint32_t offset, uint32_t size, bool write);
 };
 
 /****************************** 数据操作接口 ************************************/
@@ -68,7 +68,7 @@ public:
 
 protected:
 	byte	Next;	// 开关延迟后的下一个状态
-	uint	_tid;
+	uint32_t	_tid;
 	void StartAsync(int ms);
 	static void AsyncTask(void* param);
 

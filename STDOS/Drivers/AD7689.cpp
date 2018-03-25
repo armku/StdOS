@@ -38,7 +38,7 @@ void CAD7689::SetPin(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
 ushort CAD7689::AD_Read(void)
 {
     ushort dat = 0;
-    uint i;
+    uint32_t i;
     this->ppincnv=0;
     Sys.Delay(40);
     for (i = 0; i < 16; i++)
@@ -57,7 +57,7 @@ ushort CAD7689::AD_Read(void)
 ushort CAD7689::AD_Write(ushort sdat)
 {
     ushort dat = 0;
-    uint i;
+    uint32_t i;
     this->ppincnv=0;
     Sys.Delay(50);
     for (i = 0; i < 16; i++)

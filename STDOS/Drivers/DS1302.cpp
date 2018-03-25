@@ -48,7 +48,7 @@ void DS1302::Init()
 }
 
 //…Ë÷√ ±º‰
-void DS1302::SetTime(uint seconds)
+void DS1302::SetTime(uint32_t seconds)
 {
 
 }

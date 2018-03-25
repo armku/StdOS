@@ -11,7 +11,7 @@ class Task
 public:
 	TaskScheduler* Host;
 
-	uint	ID;			// 编号 4
+	uint32_t	ID;			// 编号 4
 	cstring	Name;		// 名称
 
 	Action	Callback;	// 回调 4
@@ -85,23 +85,23 @@ public:
 	// 使用外部缓冲区初始化任务列表，避免频繁的堆分配
 	void Set(Task* tasks, int count);
 	// 查找任务 返回使用此函数的首个任务的ID
-	uint FindID(Action func);
+	uint32_t FindID(Action func);
 	// 查找任务 返回使用此函数的首个任务
 	Task* FindTask(Action func);
 	// 创建任务，返回任务编号。dueTime首次调度时间ms，-1表示事件型任务，period调度间隔ms，-1表示仅处理一次
-	uint Add(Action func, void* param, int dueTime = 0, int period = 0, cstring name = nullptr);
+	uint32_t Add(Action func, void* param, int dueTime = 0, int period = 0, cstring name = nullptr);
 	template<typename T>
-	uint Add(void(T::*func)(), T* target, int dueTime = 0, int period = 0, cstring name = nullptr)
+	uint32_t Add(void(T::*func)(), T* target, int dueTime = 0, int period = 0, cstring name = nullptr)
 	{
 		return Add(*(Action*)&func, target, dueTime, period, name);
 	}
-	void Remove(uint taskid);
+	void Remove(uint32_t taskid);
 
 	void Start();
 	void Stop();
 	// 执行一次循环。指定最大可用时间
-	void Execute(uint msMax, bool& cancel);
-	uint ExecuteForWait(uint msMax, bool& cancel);
+	void Execute(uint32_t msMax, bool& cancel);
+	uint32_t ExecuteForWait(uint32_t msMax, bool& cancel);
 
 	// 跳过最近一次睡眠，马上开始下一轮循环
 	void SkipSleep();

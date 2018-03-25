@@ -16,7 +16,7 @@ void WatchDog::FeedDogTask(void* param)
     dog->Feed();
 }
 // 打开看门狗。最长喂狗时间26208ms，默认2000ms
-void WatchDog::Start(uint msTimeOut,uint msFeed)
+void WatchDog::Start(uint32_t msTimeOut,uint32_t msFeed)
 {
 	cur=new WatchDog();
 	cur->Config(msTimeOut);

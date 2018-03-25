@@ -23,7 +23,7 @@ Spi::Spi()
 }
 
 // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
-Spi::Spi(SPI spi,CPOLTYPE cpol,CPHATYPE cpha, uint speedHz)
+Spi::Spi(SPI spi,CPOLTYPE cpol,CPHATYPE cpha, uint32_t speedHz)
 {
 	this->CPOL=cpol;
 	this->CPHA=cpha;
@@ -38,7 +38,7 @@ Spi::~Spi()
     this->Close();
 }
 
-void Spi::Init(SPI spi, uint speedHz)
+void Spi::Init(SPI spi, uint32_t speedHz)
 {
 	this->_index = spi;
     this->Speed = speedHz;
@@ -121,7 +121,7 @@ void Spi::Stop()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////SpiSoft////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-SpiSoft::SpiSoft(CPOLTYPE cpol,CPHATYPE cpha,uint speedHz)
+SpiSoft::SpiSoft(CPOLTYPE cpol,CPHATYPE cpha,uint32_t speedHz)
 {
     this->_nss.Invert = false;
     this->_clk.Invert = false;

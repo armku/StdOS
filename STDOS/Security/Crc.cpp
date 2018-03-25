@@ -61,7 +61,7 @@ const byte CRC8TAB[256]={
  *输   出:校验值
  *功   能:循环冗余校验-8
  *******************************************************/
-byte Crc::CRC8(byte *buf, uint len)
+byte Crc::CRC8(byte *buf, uint32_t len)
 {
     byte crc = 0;
 
@@ -83,9 +83,9 @@ unLength 校验数据的长
  *功   能:循环冗余校验-16
 （美国标准-0x8005）
  *******************************************************/
-ushort Crc::CRC16Default(byte *pszBuf, uint unLength)
+ushort Crc::CRC16Default(byte *pszBuf, uint32_t unLength)
 {
-    uint i, j;
+    uint32_t i, j;
     ushort CrcReg = 0xFFFF;
     ushort CurVal;
 
@@ -114,10 +114,10 @@ unLength 校验数据的长
  *功   能:循环冗余校验-16
 （CCITT标准-0x1021）
  *******************************************************/
-ushort Crc::CRC16CCITT(byte *pszBuf, uint unLength)
+ushort Crc::CRC16CCITT(byte *pszBuf, uint32_t unLength)
 {
 
-    uint i, j;
+    uint32_t i, j;
     ushort CrcReg = 0xFFFF;
     ushort CurVal;
 
@@ -146,10 +146,10 @@ unLength 校验数据的长
  *功   能:循环冗余校验-16
 （RTU标准-0xA001）
  *******************************************************/
-ushort Crc::CRC16RTU(byte *pszBuf, uint unLength)
+ushort Crc::CRC16RTU(byte *pszBuf, uint32_t unLength)
 {
     ushort CRC = 0XFFFF;
-    uint CRC_count;
+    uint32_t CRC_count;
 
     for (CRC_count = 0; CRC_count < unLength; CRC_count++)
     {

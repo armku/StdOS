@@ -27,7 +27,7 @@ void WatchDog::Feed()
     IWDG_ReloadCounter();
 }
 // 配置看门狗喂狗重置时间，超过该时间将重启MCU
-bool WatchDog::Config(uint ms)
+bool WatchDog::Config(uint32_t ms)
 {
     if (ms == 0)
     {

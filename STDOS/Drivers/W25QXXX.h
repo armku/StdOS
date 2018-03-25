@@ -26,12 +26,12 @@
             bool WaitForEnd();
 
             // 读取编号
-            uint ReadID();
+            uint32_t ReadID();
             void WriteEnable(void); //写允许
             void WriteDisable(void); //写保护
         public:
-            uint ID; // 芯片ID
-            uint DeviceID; // 设备ID
+            uint32_t ID; // 芯片ID
+            uint32_t DeviceID; // 设备ID
             ushort PageSize; // 页大小
             ushort Retry; // 等待重试次数
 			#if W25QXXXUSESPISOFT
@@ -40,18 +40,18 @@
 				W25Q64(Spi *spi);
 			#endif
             // 擦除扇区
-            bool EraseSector(uint sector);
+            bool EraseSector(uint32_t sector);
             // 擦除页
-            bool ErasePage(uint pageAddr);
+            bool ErasePage(uint32_t pageAddr);
 
             // 写入一页
-            bool WritePage(uint addr, byte *buf, uint count);
+            bool WritePage(uint32_t addr, byte *buf, uint32_t count);
             // 写入数据
-            bool Write(uint addr, byte *buf, uint count);
+            bool Write(uint32_t addr, byte *buf, uint32_t count);
             // 读取数据
-            bool Read(uint addr, byte *buf, uint count);
+            bool Read(uint32_t addr, byte *buf, uint32_t count);
 
-            uint ReadDeviceID(void); //Reads FLASH identification.
+            uint32_t ReadDeviceID(void); //Reads FLASH identification.
             //Erases the entire FLASH.
             void EraseChip(void); ////擦除整个芯片 等待时间超长...
             void WakeUp(void); //唤醒
@@ -62,19 +62,19 @@
     {
         public:
             // 读取编号
-            uint ReadID();
+            uint32_t ReadID();
 			#if W25QXXXUSESPISOFT
 				W25Q128(SpiSoft *spi);
 			#else
 				W25Q128(Spi *spi);
 			#endif
             // 擦除扇区 扇区地址
-            bool EraseSector(uint sectorAddr);
+            bool EraseSector(uint32_t sectorAddr);
             // 写入一页
-            bool WritePage(uint addr, byte *buf, uint count);
+            bool WritePage(uint32_t addr, byte *buf, uint32_t count);
             // 写入数据
-            bool Write(uint addr, byte *buf, uint count);
-            void W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite);
+            bool Write(uint32_t addr, byte *buf, uint32_t count);
+            void W25QXX_Write_NoCheck(byte *pBuffer, uint32_t WriteAddr, ushort NumByteToWrite);
             void W25QXX_Write_SR(byte sr);
             void W25QXX_Init(void);
             ushort W25QXX_TYPE;

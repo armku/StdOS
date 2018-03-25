@@ -205,7 +205,7 @@ typedef struct TIntState
 	void *Param; // 事件参数，一般用来作为事件挂载者的对象，然后借助静态方法调用成员方法	
 	bool OldValue;
 
-	uint ShakeTime; // 抖动时间	
+	uint32_t ShakeTime; // 抖动时间	
 	int Used; // 被使用次数。对于前5行中断来说，这个只会是1，对于后面的中断线来说，可能多个
 } IntState;
 

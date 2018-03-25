@@ -39,10 +39,10 @@
 
             Spi();
             // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
-            Spi(SPI spi, CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge, uint speedHz = 9000000);
+            Spi(SPI spi, CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge, uint32_t speedHz = 9000000);
             ~Spi();
 
-            void Init(SPI spi, uint speedHz = 9000000);
+            void Init(SPI spi, uint32_t speedHz = 9000000);
 
             void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
             void SetNss(Pin nss = P0);
@@ -61,7 +61,7 @@
             void Stop(); // 拉高NSS，停止传输
 
         private:
-            static int GetPre(int index, uint &speedHz);
+            static int GetPre(int index, uint32_t &speedHz);
             void OnInit();
             void OnOpen();
             void OnClose();
@@ -92,7 +92,7 @@
             CPOLTYPE CPOL; //时钟极性
             CPHATYPE CPHA; //时钟相位
         public:
-            SpiSoft(CPOLTYPE cpol = CPOL_Low, CPHATYPE cpha = CPHA_1Edge, uint speedHz = 9000000); //使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度   
+            SpiSoft(CPOLTYPE cpol = CPOL_Low, CPHATYPE cpha = CPHA_1Edge, uint32_t speedHz = 9000000); //使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度   
             void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
             void SetNss(Pin nss = P0);
             byte Write(byte data);
@@ -105,7 +105,7 @@
             OutputPort _clk;
             OutputPort _mosi;
             InputPort _miso;
-            uint delayus; //延时时间
+            uint32_t delayus; //延时时间
         private:
             byte WaitBusy();
 

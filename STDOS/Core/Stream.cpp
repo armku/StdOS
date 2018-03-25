@@ -5,10 +5,10 @@ ushort _REV16(ushort a1)
 {
   return (ushort)(a1 << 8) | (a1 >> 8);
 }
-uint _REV(uint a1)
+uint32_t _REV(uint32_t a1)
 {
   ushort v1;
-  uint v2;
+  uint32_t v2;
 
   v1 = a1;
   v2 = _REV16(a1 >> 16);
@@ -260,9 +260,9 @@ ushort Stream::ReadUInt16()
 		return 0;
 }
 
-uint Stream::ReadUInt32()
+uint32_t Stream::ReadUInt32()
 {
-    uint buf[1];
+    uint32_t buf[1];
 	Buffer v3(buf,4);
 	if(this->Read(v3))	
 	{
@@ -282,8 +282,8 @@ uint64_t Stream::ReadUInt64()
 	{
 		if(!this->Little)
 		{
-			uint hi=_REV(buf[0]);
-			uint lo=_REV(buf[0]>>32);
+			uint32_t hi=_REV(buf[0]);
+			uint32_t lo=_REV(buf[0]>>32);
 			buf[0]=hi;
 			buf[0]<<=32;
 			buf[0]|=lo;
@@ -312,9 +312,9 @@ bool Stream::Write(ushort value)
 	return this->Write(v3);
 }
 
-bool Stream::Write(uint value)
+bool Stream::Write(uint32_t value)
 {
-    uint buf[1];
+    uint32_t buf[1];
 	buf[0]=value;
 	const Buffer v3(buf,4);
 	if(!this->Little)
@@ -329,8 +329,8 @@ bool Stream::Write(uint64_t value)
 	const Buffer v3(buf,8);
 	if(!this->Little)
 	{
-		uint hi=_REV(buf[0]>>32);
-		uint lo=_REV(buf[0]);
+		uint32_t hi=_REV(buf[0]>>32);
+		uint32_t lo=_REV(buf[0]);
 		buf[0]=lo;
 		buf[0]<<=32;
 		buf[0]|=hi;

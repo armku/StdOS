@@ -7,7 +7,7 @@
 GPS_S1216 gps1216;
 #define USART3_MAX_RECV_LEN		600					//最大接收缓存字节数
 byte USART1_TX_BUF[USART3_MAX_RECV_LEN]; 					//串口1,发送缓存区
-uint OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
+uint32_t OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
 //	bs.Show(true);
 	gps1216.Analysis((byte*)bs.GetBuffer());//分析字符串
@@ -59,11 +59,11 @@ void SendBuffer(byte* dbuf, ushort len)
 	}
 }
 
-const uint BAUD_id[9] = { 4800,9600,19200,38400,57600,115200,230400,460800,921600 };//模块支持波特率数组
+const uint32_t BAUD_id[9] = { 4800,9600,19200,38400,57600,115200,230400,460800,921600 };//模块支持波特率数组
 																					//配置SkyTra_GPS/北斗模块波特率
 																					//baud_id:0~8，对应波特率,4800/9600/19200/38400/57600/115200/230400/460800/921600	  
 																					//返回值:0,执行成功;其他,执行失败(这里不会返回0了)
-byte GPS_S1216::SkyTra_Cfg_Prt(uint baud_id, byte* buf, int& len)
+byte GPS_S1216::SkyTra_Cfg_Prt(uint32_t baud_id, byte* buf, int& len)
 {
 	SkyTra_baudrate *cfg_prt = (SkyTra_baudrate *)buf;
 	cfg_prt->sos = 0XA1A0;		//引导序列(小端模式)
@@ -82,9 +82,9 @@ byte GPS_S1216::SkyTra_Cfg_Prt(uint baud_id, byte* buf, int& len)
 //配置SkyTra_GPS模块的时钟脉冲宽度
 //width:脉冲宽度1~100000(us)
 //返回值:0,发送成功;其他,发送失败.
-byte GPS_S1216::SkyTra_Cfg_Tp(uint width, byte* buf, int& len)
+byte GPS_S1216::SkyTra_Cfg_Tp(uint32_t width, byte* buf, int& len)
 {
-	uint temp = width;
+	uint32_t temp = width;
 	SkyTra_pps_width *cfg_tp = (SkyTra_pps_width *)buf;
 	temp = (width >> 24) | ((width >> 8) & 0X0000FF00) | ((width << 8) & 0X00FF0000) | ((width << 24) & 0XFF000000);//小端模式
 	cfg_tp->sos = 0XA1A0;		    //cfg header(小端模式)

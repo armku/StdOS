@@ -95,7 +95,7 @@ void AlternatePort::OpenPin(void *param)
     i++;
 }
 
-void Port::RemapConfig(uint param, bool sta){
+void Port::RemapConfig(uint32_t param, bool sta){
 
 }
 void InputPort::OpenPin(void *param){}

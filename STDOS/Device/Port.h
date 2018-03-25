@@ -38,7 +38,7 @@ public:
 	void Close();
 	void Clear();
 
-	static void RemapConfig(uint param, bool sta);
+	static void RemapConfig(uint32_t param, bool sta);
 
     virtual bool Read() const;
 
@@ -156,7 +156,7 @@ protected:
 private:
 	bool	_IRQ	= false;
 
-	uint	_task	= 0;	// 输入任务
+	uint32_t	_task	= 0;	// 输入任务
 	int		_Start	= 0;	// 开始按下时间
 	int		_Last	= 0;	// 最后一次触发时间
 private:

@@ -4,7 +4,7 @@
 
 //#define _GPS_ATGM332D_TEST_H
 #ifdef _GPS_ATGM332D_TEST_H
-uint OnUsart2Read(ITransport *transport, Buffer &bs, void *para, void *para2)
+uint32_t OnUsart2Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
 		bs.Show(true);
 	//gps1216.Analysis((byte*)bs.GetBuffer());//·ÖÎö×Ö·û´®

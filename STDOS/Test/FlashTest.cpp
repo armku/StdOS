@@ -13,7 +13,7 @@ void TestFlash()
 
     Flash flash;
 	// 凑一个横跨两页的地址
-    uint addr = 0x0800C000 + flash.Block - size + 7;
+    uint32_t addr = 0x0800C000 + flash.Block - size + 7;
 	debug_printf("Address: %p 凑一个横跨两页的地址\r\n", addr);
 
     debug_printf("FlashSize: %d(%p) Bytes  Block: %d Bytes\r\n", flash.Size, flash.Size, flash.Block);

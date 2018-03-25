@@ -3,7 +3,7 @@
 #include "Timer.h"
 #include "Platform\stm32.h"
 
-#define NVIC_OFFSET					 ((uint)0x1000)
+#define NVIC_OFFSET					 ((uint32_t)0x1000)
 #define ISRADDR (NVIC_VectTab_RAM+NVIC_OFFSET)
 #define ISRLENGTH   100	//中断数量
 
@@ -210,8 +210,8 @@ void *onIsr[ISRLENGTH]; //中断
 
 extern "C"
 {
-    uint VectorTable[ISRLENGTH] __attribute__((at(ISRADDR)));
-    uint *vsrom = (uint*)NVIC_VectTab_FLASH;
+    uint32_t VectorTable[ISRLENGTH] __attribute__((at(ISRADDR)));
+    uint32_t *vsrom = (uint32_t*)NVIC_VectTab_FLASH;
 }
 
 void FaultHandler(){}
@@ -227,90 +227,90 @@ void TInterrupt::OnInit()const
     //中断向量表重映射
     NVIC_SetVectorTable(NVIC_VectTab_RAM, NVIC_OFFSET);
 
-    VectorTable[15] = (uint) &(CInterrupt::SysTick_Handler);
+    VectorTable[15] = (uint32_t) &(CInterrupt::SysTick_Handler);
 
-    //VectorTable[16] = (uint) &(CInterrupt::     WWDG_IRQHandler                   ); // Window WatchDog                                        
-    //VectorTable[17] = (uint) &(CInterrupt::PVD_IRQHandler); // PVD through EXTI Line detection                        
-    //VectorTable[19] = (uint) &(CInterrupt::TAMP_STAMP_IRQHandler); // Tamper and TimeStamps through the EXTI line            
-    //VectorTable[19] = (uint) &(CInterrupt::RTC_WKUP_IRQHandler); // RTC Wakeup through the EXTI line                       
-    //VectorTable[20] = (uint) &(CInterrupt::FLASH_IRQHandler); // FLASH                                           
-    //VectorTable[21] = (uint) &(CInterrupt::RCC_IRQHandler); // RCC                                             
-    VectorTable[22] = (uint) &(CInterrupt::EXTI0_IRQHandler); // EXTI Line0                                             
-    VectorTable[23] = (uint) &(CInterrupt::EXTI1_IRQHandler); // EXTI Line1                                             
-    VectorTable[24] = (uint) &(CInterrupt::EXTI2_IRQHandler); // EXTI Line2                                             
-    VectorTable[25] = (uint) &(CInterrupt::EXTI3_IRQHandler); // EXTI Line3                                             
-    VectorTable[26] = (uint) &(CInterrupt::EXTI4_IRQHandler); // EXTI Line4                                             
-    //VectorTable[27] = (uint) &(CInterrupt::DMA1_Stream0_IRQHandler); // DMA1 Stream 0                                   
-    //        VectorTable[28] = (uint) &(CInterrupt::DMA1_Stream1_IRQHandler); // DMA1 Stream 1                                   
-    //        VectorTable[29] = (uint) &(CInterrupt::DMA1_Stream2_IRQHandler); // DMA1 Stream 2                                   
-    //        VectorTable[30] = (uint) &(CInterrupt::DMA1_Stream3_IRQHandler); // DMA1 Stream 3                                   
-    //        VectorTable[31] = (uint) &(CInterrupt::DMA1_Stream4_IRQHandler); // DMA1 Stream 4                                   
-    //        VectorTable[32] = (uint) &(CInterrupt::DMA1_Stream5_IRQHandler); // DMA1 Stream 5                                   
-    //        VectorTable[33] = (uint) &(CInterrupt::DMA1_Stream6_IRQHandler); // DMA1 Stream 6                                   
-    //        VectorTable[34] = (uint) &(CInterrupt::ADC_IRQHandler); // ADC1, ADC2 and ADC3s                            
-    //        VectorTable[35] = (uint) &(CInterrupt::CAN1_TX_IRQHandler); // CAN1 TX                                                
-    //        VectorTable[36] = (uint) &(CInterrupt::CAN1_RX0_IRQHandler); // CAN1 RX0                                               
-    //        VectorTable[37] = (uint) &(CInterrupt::CAN1_RX1_IRQHandler); // CAN1 RX1                                               
-    //        VectorTable[38] = (uint) &(CInterrupt::CAN1_SCE_IRQHandler); // CAN1 SCE                                               
-    VectorTable[39] = (uint) &(CInterrupt::EXTI9_5_IRQHandler); // External Line[9:5]s                                    
-    //        VectorTable[40] = (uint) &(CInterrupt::TIM1_BRK_TIM9_IRQHandler); // TIM1 Break and TIM9                   
-    //        VectorTable[41] = (uint) &(CInterrupt::TIM1_UP_TIM10_IRQHandler); // TIM1 Update and TIM10                 
-    //        VectorTable[42] = (uint) &(CInterrupt::TIM1_TRG_COM_TIM11_IRQHandler); // TIM1 Trigger and Commutation and TIM11
-    //        VectorTable[43] = (uint) &(CInterrupt::TIM1_CC_IRQHandler); // TIM1 Capture Compare                                   
-    VectorTable[44] = (uint) &(CInterrupt::TIM2_IRQHandler); // TIM2                                            
-    VectorTable[45] = (uint) &(CInterrupt::TIM3_IRQHandler); // TIM3                                            
-    VectorTable[46] = (uint) &(CInterrupt::TIM4_IRQHandler); // TIM4                                            
-    //        VectorTable[47] = (uint) &(CInterrupt::I2C1_EV_IRQHandler); // I2C1 Event                                             
-    //        VectorTable[48] = (uint) &(CInterrupt::I2C1_ER_IRQHandler); // I2C1 Error                                             
-    //        VectorTable[49] = (uint) &(CInterrupt::I2C2_EV_IRQHandler); // I2C2 Event                                             
-    //        VectorTable[50] = (uint) &(CInterrupt::I2C2_ER_IRQHandler); // I2C2 Error                                               
-    //        VectorTable[51] = (uint) &(CInterrupt::SPI1_IRQHandler); // SPI1                                            
-    //        VectorTable[52] = (uint) &(CInterrupt::SPI2_IRQHandler); // SPI2                                            
-    VectorTable[53] = (uint) &(CInterrupt::USART1_IRQHandler); // USART1                                          
-    VectorTable[54] = (uint) &(CInterrupt::USART2_IRQHandler); // USART2                                          
-    VectorTable[55] = (uint) &(CInterrupt::USART3_IRQHandler); // USART3                                          
-    VectorTable[56] = (uint) &(CInterrupt::EXTI15_10_IRQHandler); // External Line[15:10]s                                  
-    //        VectorTable[57] = (uint) &(CInterrupt::RTC_Alarm_IRQHandler); // RTC Alarm (A and B) through EXTI Line                  
-    //        VectorTable[58] = (uint) &(CInterrupt::OTG_FS_WKUP_IRQHandler); // USB OTG FS Wakeup through EXTI line                        
-    //        VectorTable[59] = (uint) &(CInterrupt::TIM8_BRK_TIM12_IRQHandler); // TIM8 Break and TIM12                  
-    //        VectorTable[60] = (uint) &(CInterrupt::TIM8_UP_TIM13_IRQHandler); // TIM8 Update and TIM13                 
-    //        VectorTable[61] = (uint) &(CInterrupt::TIM8_TRG_COM_TIM14_IRQHandler); // TIM8 Trigger and Commutation and TIM14
-    //        VectorTable[62] = (uint) &(CInterrupt::TIM8_CC_IRQHandler); // TIM8 Capture Compare                                   
-    //        VectorTable[63] = (uint) &(CInterrupt::DMA1_Stream7_IRQHandler); // DMA1 Stream7                                           
-    //        VectorTable[64] = (uint) &(CInterrupt::FSMC_IRQHandler); // FSMC                                            
-    //        VectorTable[65] = (uint) &(CInterrupt::SDIO_IRQHandler); // SDIO                                            
-    //        VectorTable[66] = (uint) &(CInterrupt::TIM5_IRQHandler); // TIM5                                            
-    //        VectorTable[67] = (uint) &(CInterrupt::SPI3_IRQHandler); // SPI3                                            
-    VectorTable[68] = (uint) &(CInterrupt::UART4_IRQHandler); // UART4                                           
-    VectorTable[69] = (uint) &(CInterrupt::UART5_IRQHandler); // UART5                                           
-    VectorTable[70] = (uint) &(CInterrupt::TIM6_DAC_IRQHandler); // TIM6 and DAC1&2 underrun errors                   
-    VectorTable[71] = (uint) &(CInterrupt::TIM7_IRQHandler); // TIM7                   
-    //        VectorTable[72] = (uint) &(CInterrupt::DMA2_Stream0_IRQHandler); // DMA2 Stream 0                                   
-    //        VectorTable[73] = (uint) &(CInterrupt::DMA2_Stream1_IRQHandler); // DMA2 Stream 1                                   
-    //        VectorTable[74] = (uint) &(CInterrupt::DMA2_Stream2_IRQHandler); // DMA2 Stream 2                                   
-    //        VectorTable[75] = (uint) &(CInterrupt::DMA2_Stream3_IRQHandler); // DMA2 Stream 3                                   
-    //        VectorTable[76] = (uint) &(CInterrupt::DMA2_Stream4_IRQHandler); // DMA2 Stream 4                                   
-    //        VectorTable[77] = (uint) &(CInterrupt::ETH_IRQHandler); // Ethernet                                        
-    //        VectorTable[78] = (uint) &(CInterrupt::ETH_WKUP_IRQHandler); // Ethernet Wakeup through EXTI line                      
-    //        VectorTable[79] = (uint) &(CInterrupt::CAN2_TX_IRQHandler); // CAN2 TX                                                
-    //        VectorTable[80] = (uint) &(CInterrupt::CAN2_RX0_IRQHandler); // CAN2 RX0                                               
-    //        VectorTable[81] = (uint) &(CInterrupt::CAN2_RX1_IRQHandler); // CAN2 RX1                                               
-    //        VectorTable[82] = (uint) &(CInterrupt::CAN2_SCE_IRQHandler); // CAN2 SCE                                               
-    //        VectorTable[83] = (uint) &(CInterrupt::OTG_FS_IRQHandler); // USB OTG FS                                      
-    //        VectorTable[84] = (uint) &(CInterrupt::DMA2_Stream5_IRQHandler); // DMA2 Stream 5                                   
-    //        VectorTable[85] = (uint) &(CInterrupt::DMA2_Stream6_IRQHandler); // DMA2 Stream 6                                   
-    //        VectorTable[86] = (uint) &(CInterrupt::DMA2_Stream7_IRQHandler); // DMA2 Stream 7                                   
-    VectorTable[87] = (uint) &(CInterrupt::USART6_IRQHandler); // USART6                                           
-    //        VectorTable[88] = (uint) &(CInterrupt::I2C3_EV_IRQHandler); // I2C3 event                                             
-    //        VectorTable[89] = (uint) &(CInterrupt::I2C3_ER_IRQHandler); // I2C3 error                                             
-    //        VectorTable[90] = (uint) &(CInterrupt::OTG_HS_EP1_OUT_IRQHandler); // USB OTG HS End Point 1 Out                      
-    //        VectorTable[91] = (uint) &(CInterrupt::OTG_HS_EP1_IN_IRQHandler); // USB OTG HS End Point 1 In                       
-    //        VectorTable[92] = (uint) &(CInterrupt::OTG_HS_WKUP_IRQHandler); // USB OTG HS Wakeup through EXTI                         
-    //        VectorTable[93] = (uint) &(CInterrupt::OTG_HS_IRQHandler); // USB OTG HS                                      
-    //        VectorTable[94] = (uint) &(CInterrupt::DCMI_IRQHandler); // DCMI                                            
-    //        VectorTable[95] = (uint) &(CInterrupt::CRYP_IRQHandler); // CRYP crypto                                     
-    //        VectorTable[96] = (uint) &(CInterrupt::HASH_RNG_IRQHandler); // Hash and Rng
-    //        VectorTable[97] = (uint) &(CInterrupt::FPU_IRQHandler); // FPU
+    //VectorTable[16] = (uint32_t) &(CInterrupt::     WWDG_IRQHandler                   ); // Window WatchDog                                        
+    //VectorTable[17] = (uint32_t) &(CInterrupt::PVD_IRQHandler); // PVD through EXTI Line detection                        
+    //VectorTable[19] = (uint32_t) &(CInterrupt::TAMP_STAMP_IRQHandler); // Tamper and TimeStamps through the EXTI line            
+    //VectorTable[19] = (uint32_t) &(CInterrupt::RTC_WKUP_IRQHandler); // RTC Wakeup through the EXTI line                       
+    //VectorTable[20] = (uint32_t) &(CInterrupt::FLASH_IRQHandler); // FLASH                                           
+    //VectorTable[21] = (uint32_t) &(CInterrupt::RCC_IRQHandler); // RCC                                             
+    VectorTable[22] = (uint32_t) &(CInterrupt::EXTI0_IRQHandler); // EXTI Line0                                             
+    VectorTable[23] = (uint32_t) &(CInterrupt::EXTI1_IRQHandler); // EXTI Line1                                             
+    VectorTable[24] = (uint32_t) &(CInterrupt::EXTI2_IRQHandler); // EXTI Line2                                             
+    VectorTable[25] = (uint32_t) &(CInterrupt::EXTI3_IRQHandler); // EXTI Line3                                             
+    VectorTable[26] = (uint32_t) &(CInterrupt::EXTI4_IRQHandler); // EXTI Line4                                             
+    //VectorTable[27] = (uint32_t) &(CInterrupt::DMA1_Stream0_IRQHandler); // DMA1 Stream 0                                   
+    //        VectorTable[28] = (uint32_t) &(CInterrupt::DMA1_Stream1_IRQHandler); // DMA1 Stream 1                                   
+    //        VectorTable[29] = (uint32_t) &(CInterrupt::DMA1_Stream2_IRQHandler); // DMA1 Stream 2                                   
+    //        VectorTable[30] = (uint32_t) &(CInterrupt::DMA1_Stream3_IRQHandler); // DMA1 Stream 3                                   
+    //        VectorTable[31] = (uint32_t) &(CInterrupt::DMA1_Stream4_IRQHandler); // DMA1 Stream 4                                   
+    //        VectorTable[32] = (uint32_t) &(CInterrupt::DMA1_Stream5_IRQHandler); // DMA1 Stream 5                                   
+    //        VectorTable[33] = (uint32_t) &(CInterrupt::DMA1_Stream6_IRQHandler); // DMA1 Stream 6                                   
+    //        VectorTable[34] = (uint32_t) &(CInterrupt::ADC_IRQHandler); // ADC1, ADC2 and ADC3s                            
+    //        VectorTable[35] = (uint32_t) &(CInterrupt::CAN1_TX_IRQHandler); // CAN1 TX                                                
+    //        VectorTable[36] = (uint32_t) &(CInterrupt::CAN1_RX0_IRQHandler); // CAN1 RX0                                               
+    //        VectorTable[37] = (uint32_t) &(CInterrupt::CAN1_RX1_IRQHandler); // CAN1 RX1                                               
+    //        VectorTable[38] = (uint32_t) &(CInterrupt::CAN1_SCE_IRQHandler); // CAN1 SCE                                               
+    VectorTable[39] = (uint32_t) &(CInterrupt::EXTI9_5_IRQHandler); // External Line[9:5]s                                    
+    //        VectorTable[40] = (uint32_t) &(CInterrupt::TIM1_BRK_TIM9_IRQHandler); // TIM1 Break and TIM9                   
+    //        VectorTable[41] = (uint32_t) &(CInterrupt::TIM1_UP_TIM10_IRQHandler); // TIM1 Update and TIM10                 
+    //        VectorTable[42] = (uint32_t) &(CInterrupt::TIM1_TRG_COM_TIM11_IRQHandler); // TIM1 Trigger and Commutation and TIM11
+    //        VectorTable[43] = (uint32_t) &(CInterrupt::TIM1_CC_IRQHandler); // TIM1 Capture Compare                                   
+    VectorTable[44] = (uint32_t) &(CInterrupt::TIM2_IRQHandler); // TIM2                                            
+    VectorTable[45] = (uint32_t) &(CInterrupt::TIM3_IRQHandler); // TIM3                                            
+    VectorTable[46] = (uint32_t) &(CInterrupt::TIM4_IRQHandler); // TIM4                                            
+    //        VectorTable[47] = (uint32_t) &(CInterrupt::I2C1_EV_IRQHandler); // I2C1 Event                                             
+    //        VectorTable[48] = (uint32_t) &(CInterrupt::I2C1_ER_IRQHandler); // I2C1 Error                                             
+    //        VectorTable[49] = (uint32_t) &(CInterrupt::I2C2_EV_IRQHandler); // I2C2 Event                                             
+    //        VectorTable[50] = (uint32_t) &(CInterrupt::I2C2_ER_IRQHandler); // I2C2 Error                                               
+    //        VectorTable[51] = (uint32_t) &(CInterrupt::SPI1_IRQHandler); // SPI1                                            
+    //        VectorTable[52] = (uint32_t) &(CInterrupt::SPI2_IRQHandler); // SPI2                                            
+    VectorTable[53] = (uint32_t) &(CInterrupt::USART1_IRQHandler); // USART1                                          
+    VectorTable[54] = (uint32_t) &(CInterrupt::USART2_IRQHandler); // USART2                                          
+    VectorTable[55] = (uint32_t) &(CInterrupt::USART3_IRQHandler); // USART3                                          
+    VectorTable[56] = (uint32_t) &(CInterrupt::EXTI15_10_IRQHandler); // External Line[15:10]s                                  
+    //        VectorTable[57] = (uint32_t) &(CInterrupt::RTC_Alarm_IRQHandler); // RTC Alarm (A and B) through EXTI Line                  
+    //        VectorTable[58] = (uint32_t) &(CInterrupt::OTG_FS_WKUP_IRQHandler); // USB OTG FS Wakeup through EXTI line                        
+    //        VectorTable[59] = (uint32_t) &(CInterrupt::TIM8_BRK_TIM12_IRQHandler); // TIM8 Break and TIM12                  
+    //        VectorTable[60] = (uint32_t) &(CInterrupt::TIM8_UP_TIM13_IRQHandler); // TIM8 Update and TIM13                 
+    //        VectorTable[61] = (uint32_t) &(CInterrupt::TIM8_TRG_COM_TIM14_IRQHandler); // TIM8 Trigger and Commutation and TIM14
+    //        VectorTable[62] = (uint32_t) &(CInterrupt::TIM8_CC_IRQHandler); // TIM8 Capture Compare                                   
+    //        VectorTable[63] = (uint32_t) &(CInterrupt::DMA1_Stream7_IRQHandler); // DMA1 Stream7                                           
+    //        VectorTable[64] = (uint32_t) &(CInterrupt::FSMC_IRQHandler); // FSMC                                            
+    //        VectorTable[65] = (uint32_t) &(CInterrupt::SDIO_IRQHandler); // SDIO                                            
+    //        VectorTable[66] = (uint32_t) &(CInterrupt::TIM5_IRQHandler); // TIM5                                            
+    //        VectorTable[67] = (uint32_t) &(CInterrupt::SPI3_IRQHandler); // SPI3                                            
+    VectorTable[68] = (uint32_t) &(CInterrupt::UART4_IRQHandler); // UART4                                           
+    VectorTable[69] = (uint32_t) &(CInterrupt::UART5_IRQHandler); // UART5                                           
+    VectorTable[70] = (uint32_t) &(CInterrupt::TIM6_DAC_IRQHandler); // TIM6 and DAC1&2 underrun errors                   
+    VectorTable[71] = (uint32_t) &(CInterrupt::TIM7_IRQHandler); // TIM7                   
+    //        VectorTable[72] = (uint32_t) &(CInterrupt::DMA2_Stream0_IRQHandler); // DMA2 Stream 0                                   
+    //        VectorTable[73] = (uint32_t) &(CInterrupt::DMA2_Stream1_IRQHandler); // DMA2 Stream 1                                   
+    //        VectorTable[74] = (uint32_t) &(CInterrupt::DMA2_Stream2_IRQHandler); // DMA2 Stream 2                                   
+    //        VectorTable[75] = (uint32_t) &(CInterrupt::DMA2_Stream3_IRQHandler); // DMA2 Stream 3                                   
+    //        VectorTable[76] = (uint32_t) &(CInterrupt::DMA2_Stream4_IRQHandler); // DMA2 Stream 4                                   
+    //        VectorTable[77] = (uint32_t) &(CInterrupt::ETH_IRQHandler); // Ethernet                                        
+    //        VectorTable[78] = (uint32_t) &(CInterrupt::ETH_WKUP_IRQHandler); // Ethernet Wakeup through EXTI line                      
+    //        VectorTable[79] = (uint32_t) &(CInterrupt::CAN2_TX_IRQHandler); // CAN2 TX                                                
+    //        VectorTable[80] = (uint32_t) &(CInterrupt::CAN2_RX0_IRQHandler); // CAN2 RX0                                               
+    //        VectorTable[81] = (uint32_t) &(CInterrupt::CAN2_RX1_IRQHandler); // CAN2 RX1                                               
+    //        VectorTable[82] = (uint32_t) &(CInterrupt::CAN2_SCE_IRQHandler); // CAN2 SCE                                               
+    //        VectorTable[83] = (uint32_t) &(CInterrupt::OTG_FS_IRQHandler); // USB OTG FS                                      
+    //        VectorTable[84] = (uint32_t) &(CInterrupt::DMA2_Stream5_IRQHandler); // DMA2 Stream 5                                   
+    //        VectorTable[85] = (uint32_t) &(CInterrupt::DMA2_Stream6_IRQHandler); // DMA2 Stream 6                                   
+    //        VectorTable[86] = (uint32_t) &(CInterrupt::DMA2_Stream7_IRQHandler); // DMA2 Stream 7                                   
+    VectorTable[87] = (uint32_t) &(CInterrupt::USART6_IRQHandler); // USART6                                           
+    //        VectorTable[88] = (uint32_t) &(CInterrupt::I2C3_EV_IRQHandler); // I2C3 event                                             
+    //        VectorTable[89] = (uint32_t) &(CInterrupt::I2C3_ER_IRQHandler); // I2C3 error                                             
+    //        VectorTable[90] = (uint32_t) &(CInterrupt::OTG_HS_EP1_OUT_IRQHandler); // USB OTG HS End Point 1 Out                      
+    //        VectorTable[91] = (uint32_t) &(CInterrupt::OTG_HS_EP1_IN_IRQHandler); // USB OTG HS End Point 1 In                       
+    //        VectorTable[92] = (uint32_t) &(CInterrupt::OTG_HS_WKUP_IRQHandler); // USB OTG HS Wakeup through EXTI                         
+    //        VectorTable[93] = (uint32_t) &(CInterrupt::OTG_HS_IRQHandler); // USB OTG HS                                      
+    //        VectorTable[94] = (uint32_t) &(CInterrupt::DCMI_IRQHandler); // DCMI                                            
+    //        VectorTable[95] = (uint32_t) &(CInterrupt::CRYP_IRQHandler); // CRYP crypto                                     
+    //        VectorTable[96] = (uint32_t) &(CInterrupt::HASH_RNG_IRQHandler); // Hash and Rng
+    //        VectorTable[97] = (uint32_t) &(CInterrupt::FPU_IRQHandler); // FPU
 
 }
 
@@ -326,7 +326,7 @@ void TInterrupt::GlobalDisable()
     __ASM volatile("cpsid i");
 }
 
-void TInterrupt::SetPriority(short irq, uint priority)const
+void TInterrupt::SetPriority(short irq, uint32_t priority)const
 {
     NVIC_InitTypeDef nvic;
 

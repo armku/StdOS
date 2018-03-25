@@ -11,7 +11,7 @@ class RX8025T
         byte Address; // …Ë±∏µÿ÷∑
 	public:
 		RX8025T();
-		RX8025T(Pin pinsck, Pin pinsda, byte devaddr = 0xA0, uint wnus = 0);
+		RX8025T(Pin pinsck, Pin pinsda, byte devaddr = 0xA0, uint32_t wnus = 0);
 		void Init();
 		byte CheckDevice(void);//
 		byte Output1s_Start(void);

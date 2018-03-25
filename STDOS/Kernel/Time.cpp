@@ -38,9 +38,9 @@ void TTime::Delay(int nus)const
 {
 	int sumus;
 	uint64_t summs;
-	uint startTicks;
-	uint stopTicks;
-	static uint ticksPerMs=0;
+	uint32_t startTicks;
+	uint32_t stopTicks;
+	static uint32_t ticksPerMs=0;
 	sumus=nus;
 	if(nus < 800)
 	{
@@ -80,13 +80,13 @@ void TTime::Delay(int nus)const
 }
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
-TimeWheel::TimeWheel(uint ms)
+TimeWheel::TimeWheel(uint32_t ms)
 {
 	this->Sleep=0;
 	this->Reset(ms);
 }
 
-void TimeWheel::Reset(uint ms)
+void TimeWheel::Reset(uint32_t ms)
 {
 	this->Expire=Time.Current()+ms;
 }
@@ -159,9 +159,9 @@ void timTickrefesh(void *param)
 }
 int gTicks = 0; //每个us需要的systick时钟数 	
 
-uint TTime::TicksToUs(uint ticks)const
+uint32_t TTime::TicksToUs(uint32_t ticks)const
 {
-	uint result;
+	uint32_t result;
 
 	if (ticks)
 		result = ticks / gTicks;
@@ -171,9 +171,9 @@ uint TTime::TicksToUs(uint ticks)const
 
 }
 
-uint TTime::UsToTicks(uint us)const
+uint32_t TTime::UsToTicks(uint32_t us)const
 {
-	uint result;
+	uint32_t result;
 
 	if (us)
 		result = us * gTicks;

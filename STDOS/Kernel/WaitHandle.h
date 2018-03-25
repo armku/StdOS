@@ -5,7 +5,7 @@
 class WaitHandle
 {
 public:
-	uint	TaskID;	// 句柄所在任务
+	uint32_t	TaskID;	// 句柄所在任务
 	void*	State;	// 用户数据 4
 	bool	Result;	// 结果 8
 

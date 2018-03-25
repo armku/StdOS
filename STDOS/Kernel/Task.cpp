@@ -171,7 +171,7 @@ bool Task::CheckTime(uint64_t end, bool isSleep)
 
     if (this->Deepth < this->MaxDeepth)
     {
-        uint mscur = Sys.Ms();
+        uint32_t mscur = Sys.Ms();
 		if(!this->Enable)
 		{
 			ret=false;
@@ -244,7 +244,7 @@ void Task::Init()
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 void ShowTime(void *param); //显示时间
-uint mgid = 0; // 总编号
+uint32_t mgid = 0; // 总编号
 
 TaskScheduler::TaskScheduler(cstring name)
 {
@@ -260,7 +260,7 @@ TaskScheduler::TaskScheduler(cstring name)
 }
 
 // 创建任务，返回任务编号。dueTime首次调度时间ms，-1表示事件型任务，period调度间隔ms，-1表示仅处理一次
-uint TaskScheduler::Add(Action func, void *param, int dueTime, int period, cstring name)
+uint32_t TaskScheduler::Add(Action func, void *param, int dueTime, int period, cstring name)
 {
     Task *task = new Task();
     task->ID = mgid++;
@@ -301,7 +301,7 @@ uint TaskScheduler::Add(Action func, void *param, int dueTime, int period, cstri
     return task->ID;
 }
 
-void TaskScheduler::Remove(uint taskid)
+void TaskScheduler::Remove(uint32_t taskid)
 {
     for (int i = 0; i < this->Count; i++)
     {
@@ -356,7 +356,7 @@ void TaskScheduler::Stop()
 }
 
 // 执行一次循环。指定最大可用时间
-void TaskScheduler::Execute(uint msMax, bool &cancel)
+void TaskScheduler::Execute(uint32_t msMax, bool &cancel)
 {
     uint64_t mscur = Sys.Ms();
     TimeCost tmcost;
@@ -432,9 +432,9 @@ Task *TaskScheduler::FindTask(Action func)
 void TaskScheduler::SkipSleep(){}
 // 使用外部缓冲区初始化任务列表，避免频繁的堆分配
 void TaskScheduler::Set(Task *tasks, int count){}
-uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
+uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
 {
-    uint ret = 0;
+    uint32_t ret = 0;
     if (this->Deepth < MaxDeepth)
     {
         ++this->Deepth;
@@ -520,7 +520,7 @@ void TaskScheduler::ShowStatus()
 }
 
 // 查找任务 返回使用此函数的首个任务的ID
-uint TaskScheduler::FindID(Action func)
+uint32_t TaskScheduler::FindID(Action func)
 {
     return 0;
 }

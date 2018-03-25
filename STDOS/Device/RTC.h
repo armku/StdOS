@@ -19,13 +19,13 @@ public:
 	void SaveTime();
 	int Sleep(int ms);
 
-	uint ReadBackup(byte addr);
-	void WriteBackup(byte addr, uint value);
+	uint32_t ReadBackup(byte addr);
+	void WriteBackup(byte addr, uint32_t value);
 	
 	static HardRTC* Instance();
 	static void Start(bool lowpower = true, bool external = false);
 public:
-	void SetTime(uint seconds);//设置时间
+	void SetTime(uint32_t seconds);//设置时间
 	void SetTime(DateTime & dt);//设置时间-北京时间格式
 	DateTime& GetTime(DateTime & dt);//读取时间	
 };

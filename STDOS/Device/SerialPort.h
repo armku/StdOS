@@ -59,13 +59,13 @@ protected:
 	virtual bool OnOpen();
 
 	virtual bool OnWrite(const Buffer& bs);
-	virtual uint OnRead(Buffer& bs);
+	virtual uint32_t OnRead(Buffer& bs);
 
 private:
 	void Set485(bool flag);
 
 	void*	_task;
-	uint	_taskidRx;
+	uint32_t	_taskidRx;
 	void ReceiveTask();
 
 	void OnWrite2();//调用发送中断

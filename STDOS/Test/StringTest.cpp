@@ -59,8 +59,8 @@ void TestNum10()
 	String str3((int)-88996677, 10);
 	assert(str3 == "-88996677", "String(int value, int radix = 10)");
 
-	String str4((uint)0xFFFFFFFF, 10);
-	assert(str4 == "4294967295", "String(uint value, int radix = 10)");
+	String str4((uint32_t)0xFFFFFFFF, 10);
+	assert(str4 == "4294967295", "String(uint32_t value, int radix = 10)");
 
 	String str5((int64_t)-7744, 10);
 	assert(str5 == "-7744", "String(int64_t value, int radix = 10)");
@@ -97,8 +97,8 @@ void TestNum16()
 	String str3((int)-0x7799, 16);
 	assert(str3 == "ffff8867", "String(int value, int radix = 16)");
 
-	String str4((uint)0xFFFFFFFF, 16);
-	assert(str4 == "ffffffff", "String(uint value, int radix = 16)");
+	String str4((uint32_t)0xFFFFFFFF, 16);
+	assert(str4 == "ffffffff", "String(uint32_t value, int radix = 16)");
 
 	String str5((int64_t)0x331144997AC45566, 16);
 	assert(str5 == "331144997ac45566", "String(int64_t value, int radix = 16)");

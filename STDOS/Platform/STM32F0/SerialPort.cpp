@@ -290,7 +290,7 @@ bool SerialPort::OnOpen()
     return true;
 }
 //数据读取事件
-uint SerialPort::OnRead(Buffer &bs)
+uint32_t SerialPort::OnRead(Buffer &bs)
 {
     USART_TypeDef *const g_Uart_Ports[] = UARTS;
     this->OnRxHandler();

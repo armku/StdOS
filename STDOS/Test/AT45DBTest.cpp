@@ -14,7 +14,7 @@ void TestAT45DB()
     int size = ArrayLength(Tx_Buffer);
     debug_printf("DataSize=%d\r\n", size);
 
-    uint addr = 0x00000;
+    uint32_t addr = 0x00000;
     if(sf.ErasePage(addr))
         debug_printf("擦除0x%08x成功\r\n", addr);
     else

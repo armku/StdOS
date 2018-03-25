@@ -1,7 +1,7 @@
 #include "Type.h"
 #include "SString.h"
 
-void assert_failed(byte *file, uint line, char *errstr)
+void assert_failed(byte *file, uint32_t line, char *errstr)
 {
     StdPrintf("%s(%d):    %s\n", file, line, errstr);
 }

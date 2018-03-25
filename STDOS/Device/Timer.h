@@ -16,17 +16,17 @@ public:
 	bool	Opened;	// 可能在中断里关闭自己
 
 	ushort	Prescaler;	// 预分频。实际值，此时无需减一。
-	uint	Period;		// 周期。实际值，此时无需减一。
+	uint32_t	Period;		// 周期。实际值，此时无需减一。
 
 	Timer(TIMER index);
 
 	virtual void Open();	// 开始定时器
 	virtual void Close();	// 停止定时器
 	virtual void Config();
-	void SetFrequency(uint frequency);	// 设置频率，自动计算预分频
+	void SetFrequency(uint32_t frequency);	// 设置频率，自动计算预分频
 
-	uint GetCounter();
-	void SetCounter(uint cnt);		// 设置计数器值
+	uint32_t GetCounter();
+	void SetCounter(uint32_t cnt);		// 设置计数器值
 
 	void Register(const Delegate<Timer&>& dlg);
 	virtual void OnInterrupt();

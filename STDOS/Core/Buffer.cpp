@@ -314,7 +314,7 @@ ushort Buffer::ToUInt16()const
     return 0;
 }
 
-uint Buffer::ToUInt32()const
+uint32_t Buffer::ToUInt32()const
 {
     return 0;
 }
@@ -332,9 +332,9 @@ void Buffer::Write(short value, int index)
 {
 	((short*)this->_Arr)[index]=value;
 }
-void Buffer::Write(uint value, int index)
+void Buffer::Write(uint32_t value, int index)
 {
-	((uint*)this->_Arr)[index]=value;
+	((uint32_t*)this->_Arr)[index]=value;
 }
 void Buffer::Write(int value, int index)
 {

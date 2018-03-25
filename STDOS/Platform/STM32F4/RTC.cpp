@@ -18,12 +18,12 @@ bool RTC_WaitForLastTask2(unsigned int a1)
 {
 	return false;
 }
-uint HardRTC::ReadBackup(byte addr)
+uint32_t HardRTC::ReadBackup(byte addr)
 {
     return 0;
 }
 
-void HardRTC::WriteBackup(byte addr, uint value)
+void HardRTC::WriteBackup(byte addr, uint32_t value)
 {
     addr = addr;
     value = value;
@@ -72,14 +72,14 @@ int HardRTC::Sleep(int ms)
 }
 void HardRTC::LoadTime()
 {
-//    uint totalSeconds = 0;     
+//    uint32_t totalSeconds = 0;     
 }
 void HardRTC::SaveTime()
 {
-//    uint seconds = Time.Seconds + Time.BaseSeconds;    
+//    uint32_t seconds = Time.Seconds + Time.BaseSeconds;    
 }
 //…Ë÷√ ±º‰
-void HardRTC::SetTime(uint seconds)
+void HardRTC::SetTime(uint32_t seconds)
 {
 
 }

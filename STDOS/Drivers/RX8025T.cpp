@@ -23,7 +23,7 @@
 #define CTL_REG_ADDR	0x0F
 
 RX8025T::RX8025T(){}
-RX8025T::RX8025T(Pin pinsck, Pin pinsda, byte devaddr, uint wnus)
+RX8025T::RX8025T(Pin pinsck, Pin pinsda, byte devaddr, uint32_t wnus)
 {
     this->IIC.SetPin(pinsck, pinsda);
 }

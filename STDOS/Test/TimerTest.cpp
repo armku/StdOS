@@ -11,7 +11,7 @@ void TimerTask(OutputPort& led, Timer& timer)
     led = !led;
 }
 
-uint frequency = 0;
+uint32_t frequency = 0;
 int step = 1;
 
 void TimerTask2(Timer& timer)

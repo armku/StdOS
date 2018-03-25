@@ -3008,7 +3008,7 @@ const char FONT_CONTROL_SE[][10] =
     "OFF", "ON", 
 };
 //²¨ÌØÂÊ
-const uint FONT_BAUD_RATE[] = 
+const uint32_t FONT_BAUD_RATE[] = 
 {
     1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 
 };

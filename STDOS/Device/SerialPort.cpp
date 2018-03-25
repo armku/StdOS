@@ -68,7 +68,7 @@ void SerialPort::SetBaudRate(int baudRate)
 SerialPort *printf_sp;
 bool isInFPutc;//正在串口输出
 static char com1rx[1024],com1tx[1024];
-uint OnUsart1Read123(ITransport *transport, Buffer &bs, void *para, void *para2)
+uint32_t OnUsart1Read123(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
 	//临时借调用
 	return 0;

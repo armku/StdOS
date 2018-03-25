@@ -11,7 +11,7 @@ public:
 	~DS1302(); 	
 	void SetPin(Pin pinsck,Pin pinio,Pin pinrst);
 	void Init();
-	void SetTime(uint seconds);//设置时间
+	void SetTime(uint32_t seconds);//设置时间
 	void SetTime(DateTime & dt);//设置时间-北京时间格式
 	DateTime& GetTime(DateTime & dt);//读取时间	
 private:

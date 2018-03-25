@@ -9,9 +9,9 @@
 class TTime
 {
 public:
-    uint	Seconds;		// 全局秒数，系统启动后总秒数。累加
+    uint32_t	Seconds;		// 全局秒数，系统启动后总秒数。累加
 	uint64_t	Milliseconds;	// 全局毫秒数，系统启动后总毫秒（1000ms整部分）。累加 1
-    uint	BaseSeconds;	// 基准秒数。系统启动时相对于1970年的秒数，时间调节，加上Seconds得到当前时间Now()
+    uint32_t	BaseSeconds;	// 基准秒数。系统启动时相对于1970年的秒数，时间调节，加上Seconds得到当前时间Now()
     //byte	Ticks;			// 每微秒的时钟滴答数
 	byte	Index;			// 定时器
 #if ! (defined(STM32F0) || defined(GD32F150))
@@ -22,14 +22,14 @@ public:
 
 	void Init();
 
-    uint CurrentTicks() const;	// 当前滴答时钟
+    uint32_t CurrentTicks() const;	// 当前滴答时钟
 	uint64_t Current() const; 		// 当前毫秒数
 
 	void Sleep(int ms, bool* running = nullptr) const;
     void Delay(int us) const;	// 微秒级延迟	
 
-	uint TicksToUs(uint ticks) const;
-	uint UsToTicks(uint us) const;
+	uint32_t TicksToUs(uint32_t ticks) const;
+	uint32_t UsToTicks(uint32_t us) const;
 	private:
 		void DelayUs(int nus) const; //us延时，100us以下精确
 };
@@ -43,9 +43,9 @@ public:
 	uint64_t	Expire;		// 到期时间，毫秒
 	ushort	Sleep;		// 睡眠时间，默认0毫秒
 
-	TimeWheel(uint ms);
+	TimeWheel(uint32_t ms);
 
-	void Reset(uint ms);
+	void Reset(uint32_t ms);
 
 	// 是否已过期
 	bool Expired();
@@ -56,7 +56,7 @@ class TimeCost
 {
 public:
 	uint64_t	Start;		// 开始时间，毫秒
-	uint	StartTicks;	// 开始滴答
+	uint32_t	StartTicks;	// 开始滴答
 
 	TimeCost();
 

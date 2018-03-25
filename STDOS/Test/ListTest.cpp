@@ -31,7 +31,7 @@ static void TestEntity(IList& list)
 	list.RemoveAt(list.Count());	// 无效
 	list.RemoveAt(list.Count() - 2);
 	assert(list.Count() == 4, "Count()");
-	assert(list[3] == buf3, "void RemoveAt(uint index)");
+	assert(list[3] == buf3, "void RemoveAt(uint32_t index)");
 
 	// 删除具体项。后面前移
 	list.Remove(buf2);

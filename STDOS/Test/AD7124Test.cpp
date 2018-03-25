@@ -12,7 +12,7 @@
  *****************************************************************************/
 float AD7124::GetTemp1()
 {
-    uint data;
+    uint32_t data;
     float res;
     float temp;
     data = ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
@@ -34,7 +34,7 @@ float AD7124::GetTemp1()
  *****************************************************************************/
 float AD7124::GetTemp1Res()
 {
-    uint data;
+    uint32_t data;
 //    float res;
     float temp;
     data = ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
@@ -48,7 +48,7 @@ float AD7124::GetTemp1Res()
 
 float AD7124::Temp1Test()
 {
-    uint data;
+    uint32_t data;
     float pt100_res;
     float wire_res;
     float temp;

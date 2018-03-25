@@ -50,8 +50,8 @@ class TSys
 public:
     byte	MessagePort;// 消息口，默认0表示USART1
 
-    uint	Clock;  	// 系统时钟
-    uint	CystalClock;// 晶振时钟
+    uint32_t	Clock;  	// 系统时钟
+    uint32_t	CystalClock;// 晶振时钟
 
 	cstring	Name;		// 系统名称 3
 	cstring	Company;	// 系统厂商 4
@@ -60,7 +60,7 @@ public:
     byte	ID[12];		// 芯片ID。
     ushort	DevID;		// MCU编码。低字设备版本，高字子版本
     ushort	RevID;		// MCU编码。低字设备版本，高字子版本
-    uint	CPUID;		// CPUID 
+    uint32_t	CPUID;		// CPUID 
     ushort	FlashSize;	// 芯片Flash容量。 16
     ushort	RAMSize;	// 芯片RAM容量 17
 
@@ -72,7 +72,7 @@ public:
 	void ShowInfo() const;
 	
 	uint64_t	Ms() const;		// 系统启动后的毫秒数
-	uint	Seconds() const;	// 系统绝对当前时间，秒
+	uint32_t	Seconds() const;	// 系统绝对当前时间，秒
 
     void Sleep(int ms) const; // 毫秒级延迟
     void Delay(int us) const; // 微秒级延迟
@@ -88,17 +88,17 @@ private:
 
 public:
 	// 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
-	uint AddTask(Action func, void* param, int dueTime = 0, int period = 0, cstring name = nullptr) const;
+	uint32_t AddTask(Action func, void* param, int dueTime = 0, int period = 0, cstring name = nullptr) const;
 	template<typename T>
-	uint AddTask(void(T::*func)(), T* target, int dueTime = 0, int period = 0, cstring name = nullptr)
+	uint32_t AddTask(void(T::*func)(), T* target, int dueTime = 0, int period = 0, cstring name = nullptr)
 	{
 		return AddTask(*(Action*)&func, target, dueTime, period, name);
 	}
-	void RemoveTask(uint& taskid) const;
+	void RemoveTask(uint32_t& taskid) const;
 	// 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
-	bool SetTask(uint taskid, bool enable, int msNextTime = -1) const;
+	bool SetTask(uint32_t taskid, bool enable, int msNextTime = -1) const;
 	// 改变任务周期
-	bool SetTaskPeriod(uint taskid, int period) const;
+	bool SetTaskPeriod(uint32_t taskid, int period) const;
 
 	bool Started;
 	void Start();	// 开始系统大循环
@@ -111,15 +111,15 @@ class SystemConfig
 {
 public:
 	// 操作系统
-	uint	Ver;		// 系统版本。Version格式
+	uint32_t	Ver;		// 系统版本。Version格式
 	char	Name[16];	// 系统名称
 
 	// 硬件
-	uint	HardVer;	// 硬件版本
+	uint32_t	HardVer;	// 硬件版本
 
 	// 应用软件
 	ushort	Code;		// 产品种类
-	uint	AppVer;		// 产品版本
+	uint32_t	AppVer;		// 产品版本
 	char	Company[16];// 公司
 	char	Product[16];// 产品批次
 
@@ -127,7 +127,7 @@ public:
 	char	Server[32];	// 服务器。重置后先尝试厂商前端，再尝试原服务器
 	char	Token[32];	// 访问服务器的令牌
 
-	uint	Expire;		// 有效期。1970以来的秒数。
+	uint32_t	Expire;		// 有效期。1970以来的秒数。
 	
 	ushort	Checksum;	// 校验
 };
@@ -135,7 +135,7 @@ public:
 void EnterCritical();
 void ExitCritical();
 
-uint _REV(uint value);
+uint32_t _REV(uint32_t value);
 ushort _REV16(ushort value);
 
 // 智能IRQ，初始化时备份，销毁时还原
@@ -147,7 +147,7 @@ public:
 	~SmartIRQ();
 
 private:
-	uint _state;
+	uint32_t _state;
 };
 
 // 编译信息兼容性处理

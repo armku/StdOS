@@ -13,7 +13,7 @@ void OnSend(void* param)
 {
 	// 最后4个字节修改为秒数
 	// 大概4.86%的误差
-    //uint s = _REV(Sys.Ms() >> 10);
+    //uint32_t s = _REV(Sys.Ms() >> 10);
 	String str("It's ");
 	//str.SetLength(str.Length() - 8);
 	//str.Append(s, 16, 8);
@@ -33,14 +33,14 @@ void OnSend(void* param)
 void OnReceive(void* param)
 {
     ByteArray bs;
-	uint len = nrf->Read(bs);
+	uint32_t len = nrf->Read(bs);
     if(len)
     {
 		bs.Show(true);
     }
 }
 
-uint OnReceive(ITransport* transport, Buffer& bs, void* param, void* param2)
+uint32_t OnReceive(ITransport* transport, Buffer& bs, void* param, void* param2)
 {
 	bs.Show(true);
 

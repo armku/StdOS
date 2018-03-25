@@ -7,9 +7,9 @@ len 校验数据的长
  *输   出:校验和
  *功   能:校验和-8
  *******************************************************/
- byte CheckSum::CheckSum8(byte *buf, uint len)
+ byte CheckSum::CheckSum8(byte *buf, uint32_t len)
 {
-    uint i = 0;
+    uint32_t i = 0;
     byte Sum = 0;
 
     for (i = 0; i < len; i++)
@@ -27,9 +27,9 @@ len 校验数据的长
  *输   出:校验和
  *功   能:校验和-16
  *******************************************************/
-ushort CheckSum::CheckSum16(byte *buf, uint len)
+ushort CheckSum::CheckSum16(byte *buf, uint32_t len)
 {
-    uint i = 0;
+    uint32_t i = 0;
     ushort Sum = 0;
 
     for (i = 0; i < len; i++)
@@ -47,10 +47,10 @@ len 校验数据的长
  *输   出:校验和
  *功   能:校验和-32
  *******************************************************/
-uint CheckSum::CheckSum32(byte *buf, uint len)
+uint32_t CheckSum::CheckSum32(byte *buf, uint32_t len)
 {
-    uint i = 0;
-    uint Sum = 0;
+    uint32_t i = 0;
+    uint32_t Sum = 0;
 
     for (i = 0; i < len; i++)
     {
@@ -67,7 +67,7 @@ len 校验数据的长
  *输   出:校验和
  *功   能:校验和-Intel Hex
  *******************************************************/
-byte CheckSum::IntelHexCheckSum(byte *buf, uint len)
+byte CheckSum::IntelHexCheckSum(byte *buf, uint32_t len)
 {
     byte Sum;
 
@@ -84,9 +84,9 @@ len 校验数据的长
  *输   出:校验和
  *功   能:校验和-TCP/IP
  *******************************************************/
-ushort CheckSum::NetCheckSum(byte *buf, uint len)
+ushort CheckSum::NetCheckSum(byte *buf, uint32_t len)
 {
-    uint Sum = 0;
+    uint32_t Sum = 0;
 
     while (len--)
     {
@@ -106,11 +106,11 @@ len 校验数据的长
  *输   出:校验值
  *功   能:异或校验
  *******************************************************/
-byte CheckSum::BCCVerify(byte *buf, uint len)
+byte CheckSum::BCCVerify(byte *buf, uint32_t len)
 {
     byte s = 0;
 
-    for (uint i = 0; i < len; i++)
+    for (uint32_t i = 0; i < len; i++)
     {
         s = s ^ (*(buf + i));
     }

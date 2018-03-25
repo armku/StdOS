@@ -31,33 +31,33 @@ TIM1 TIM8
 //#include "_Core.h"
 #include "Platform\stm32.h"
 
-uint Timer::GetCounter()
+uint32_t Timer::GetCounter()
 {
     return this->Period;
 }
-void Timer::SetCounter(uint cnt) // 设置计数器值
+void Timer::SetCounter(uint32_t cnt) // 设置计数器值
 {
     this->Period = cnt;
 }
 
 // 设置频率，自动计算预分频
-void Timer::SetFrequency(uint frequency)
+void Timer::SetFrequency(uint32_t frequency)
 {
     // 获取当前频率
     RCC_ClocksTypeDef clock;
     RCC_GetClocksFreq(&clock);
 
-        uint clk = clock.PCLK1_Frequency;
-        if ((uint)this->_index &0x00010000)
+        uint32_t clk = clock.PCLK1_Frequency;
+        if ((uint32_t)this->_index &0x00010000)
             clk = clock.PCLK2_Frequency;
         clk <<= 1;
     
     assert_param(frequency > 0 && frequency <= clk);
 
-    uint s = 1;
-    uint p = s / frequency;
+    uint32_t s = 1;
+    uint32_t p = s / frequency;
 
-    uint pre = clk / s; // prescaler
+    uint32_t pre = clk / s; // prescaler
 
     //while (pre >= 0x10000 || p == 0) { // prescaler 太大
     // 周期刚好为1也不行，配置的时候需要先减去1，就变成了0
@@ -291,12 +291,12 @@ void Timer::OnOpen()
         RCC_ClocksTypeDef clock;
         RCC_GetClocksFreq(&clock);
 
-            uint clk = clock.PCLK1_Frequency;
-            if ((uint)this->_index &0x00010000)
+            uint32_t clk = clock.PCLK1_Frequency;
+            if ((uint32_t)this->_index &0x00010000)
                 clk = clock.PCLK2_Frequency;
             clk <<= 1;
         
-        uint fre = clk / (Prescaler + 1) / Period;
+        uint32_t fre = clk / (Prescaler + 1) / Period;
         debug_printf("Timer%d::Start Prescaler=%d Period=%d Frequency=%d\r\n", _index + 1, Prescaler + 1, Period, fre);
     #endif 
 }

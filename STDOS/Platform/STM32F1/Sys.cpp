@@ -12,9 +12,9 @@
 
 extern "C"
 {
-    extern uint __heap_base;
-    extern uint __heap_limit;
-    extern uint __initial_sp;
+    extern uint32_t __heap_base;
+    extern uint32_t __heap_limit;
+    extern uint32_t __initial_sp;
 }
 static String *CPUName;
 void TSys::OnInit()
@@ -25,7 +25,7 @@ void TSys::OnInit()
     Buffer::Copy(this->ID, (void*)0x1FFFF7E8, ArrayLength(this->ID));
 
     this->CPUID = SCB->CPUID;
-    uint MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
+    uint32_t MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
     this->RevID = MCUID >> 16;
     this->DevID = MCUID &0x0FFF;
 
@@ -61,14 +61,14 @@ void TSys::OnInit()
 
 void TSys::OnShowInfo()const
 {
-    uint Rx = 0;
-    uint Px = 0;
+    uint32_t Rx = 0;
+    uint32_t Px = 0;
 
-    uint HeapSize = 0;
-    uint StackSize = 0;
+    uint32_t HeapSize = 0;
+    uint32_t StackSize = 0;
 
-    HeapSize = ((uint) &__heap_limit - (uint) &__heap_base);
-    StackSize = ((uint) &__initial_sp - (uint) &__heap_limit);
+    HeapSize = ((uint32_t) &__heap_limit - (uint32_t) &__heap_base);
+    StackSize = ((uint32_t) &__initial_sp - (uint32_t) &__heap_limit);
 
     switch (this->CPUID &SCB_CPUID_VARIANT_Msk)
     {
@@ -114,8 +114,8 @@ void TSys::OnShowInfo()const
     debug_printf(" Cortex-M%d:", 3);
     debug_printf(" R%dp%d", Rx, Px);
     debug_printf("\r\n");
-    debug_printf("Heap :(%p, %p) = 0x%x (%dk)\r\n", (uint) &__heap_base, (uint) &__heap_limit, HeapSize, HeapSize / 1024);
-    debug_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", (uint) &__heap_limit, (uint) &__initial_sp, StackSize, StackSize / 1024);
+    debug_printf("Heap :(%p, %p) = 0x%x (%dk)\r\n", (uint32_t) &__heap_base, (uint32_t) &__heap_limit, HeapSize, HeapSize / 1024);
+    debug_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", (uint32_t) &__heap_limit, (uint32_t) &__initial_sp, StackSize, StackSize / 1024);
 	
     debug_printf("ChipType:0x42455633 3\r\n");
 }

@@ -47,10 +47,10 @@ len 校验数据的长
  *输   出:校验和
  *功   能:校验和-32
  *******************************************************/
-uint CheckSum::CheckSum32(byte *buf, ushort len)
+uint32_t CheckSum::CheckSum32(byte *buf, ushort len)
 {
     ushort i = 0;
-    uint Sum = 0;
+    uint32_t Sum = 0;
 
     for (i = 0; i < len; i++)
     {

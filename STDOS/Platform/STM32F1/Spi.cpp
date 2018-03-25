@@ -35,11 +35,11 @@ byte Spi::Write(byte data)
     }
 }
 
-int Spi::GetPre(int index, uint &speedHz)
+int Spi::GetPre(int index, uint32_t &speedHz)
 {
     // 自动计算稍低于速度speedHz的分频
     ushort pre = SPI_BaudRatePrescaler_2;
-    uint clock = Sys.Clock >> 1;
+    uint32_t clock = Sys.Clock >> 1;
     while (pre <= SPI_BaudRatePrescaler_256)
     {
         if (clock <= speedHz)

@@ -8,8 +8,8 @@
 
 #ifdef DEBUG
 
-    void *operator new(uint size);
-    void *operator new[](uint size);
+    void *operator new(uint32_t size);
+    void *operator new[](uint32_t size);
     void operator delete (void *p);
     void operator delete [](void *p);
 
@@ -18,10 +18,10 @@
 #ifdef DEBUG
 extern "C"
 {
-    extern uint __heap_base;
-    extern uint __heap_limit;
+    extern uint32_t __heap_base;
+    extern uint32_t __heap_limit;
 }
-    void *operator new(uint size)
+    void *operator new(uint32_t size)
     {
         //debug_printf(" new size: %d ", size);
         void *p = malloc(size);
@@ -31,15 +31,15 @@ extern "C"
         {
             //debug_printf("0x%08x ", p);
             // 如果堆只剩下64字节，则报告失败，要求用户扩大堆空间以免不测
-            uint end = (uint) &__heap_limit;
-            if ((uint)p + size + 0x40 >= end)
+            uint32_t end = (uint32_t) &__heap_limit;
+            if ((uint32_t)p + size + 0x40 >= end)
                 debug_printf(" + %d near HeapEnd=0x%08x", size, end);
         }
         //    assert_param(p);
         return p;
     }
 
-    void *operator new[](uint size)
+    void *operator new[](uint32_t size)
     {
         //debug_printf(" new size[]: %d ", size);
         void *p = malloc(size);
@@ -49,8 +49,8 @@ extern "C"
         {
             //debug_printf("0x%08x ", p);
             // 如果堆只剩下64字节，则报告失败，要求用户扩大堆空间以免不测
-            uint end = (uint) &__heap_limit;
-            if ((uint)p + size + 0x40 >= end)
+            uint32_t end = (uint32_t) &__heap_limit;
+            if ((uint32_t)p + size + 0x40 >= end)
                 debug_printf(" + %d near HeapEnd=0x%08x", size, end);
         }
         //    assert_param(p);

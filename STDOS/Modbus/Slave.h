@@ -1,4 +1,4 @@
-﻿#ifndef __Slave_H__
+#ifndef __Slave_H__
 #define __Slave_H__
 
 #include "Kernel\Sys.h"
@@ -16,7 +16,7 @@ public:
 	~Slave();
 
 private:
-	static void OnReceive(ITransport* transport, byte* buf, uint len, void* param);
+	static void OnReceive(ITransport* transport, byte* buf, uint32_t len, void* param);
 
 	// 分发处理消息。返回值决定是否响应
 	bool Dispatch(Modbus& entity);

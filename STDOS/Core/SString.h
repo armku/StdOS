@@ -25,7 +25,7 @@ public:
 	explicit String(short value, int radix = 10);
 	explicit String(ushort value, int radix = 10);
 	explicit String(int value, int radix = 10);
-	explicit String(uint value, int radix = 10);
+	explicit String(uint32_t value, int radix = 10);
 	explicit String(int64_t value, int radix = 10);
 	explicit String(uint64_t value, int radix = 10);
 	explicit String(float value, int decimalPlaces = 4);
@@ -62,7 +62,7 @@ public:
 	bool Concat(short num, int radix = 10);
 	bool Concat(ushort num, int radix = 10);
 	bool Concat(int num, int radix = 10);
-	bool Concat(uint num, int radix = 10);
+	bool Concat(uint32_t num, int radix = 10);
 	bool Concat(int64_t num, int radix = 10);
 	bool Concat(uint64_t num, int radix = 10);
 	bool Concat(float num, int decimalPlaces = 4);

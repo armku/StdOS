@@ -11,7 +11,7 @@
         Spi spi1(Spi2, CPOL_High, CPHA_1Edge);
     #endif 
     ADS1246 ads1246_1(&spi1, exti_1, PE1, ADC_SPS_80);
-    uint adsCnt1 = 0;
+    uint32_t adsCnt1 = 0;
     void adRead_1()
     {
         SetEXIT(5, false,InputPort::Both);

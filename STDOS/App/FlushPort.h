@@ -11,7 +11,7 @@
 class FlushPort : public IDataPort
 {
 private:
-	uint	_tid; //4
+	uint32_t	_tid; //4
 
 public:
 	OutputPort*	Port; //8

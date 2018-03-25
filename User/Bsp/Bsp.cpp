@@ -74,7 +74,7 @@ void LedTask(void *param)
 	//led2 = keyup;
 }
 #endif // STM32F0
-uint OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
+uint32_t OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
 {
 	bs.Show(true);
 	//transport->Write(bs);

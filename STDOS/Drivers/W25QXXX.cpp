@@ -23,9 +23,9 @@
 #define WIP_Flag                  	0x01  /* Write In Progress (WIP) flag */
 
 // 读取编号
-uint W25Q64::ReadID()
+uint32_t W25Q64::ReadID()
 {
-    uint Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
+    uint32_t Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
 
     this->_spi->Start();
     this->_spi->Write(W25X_JedecDeviceID);
@@ -47,9 +47,9 @@ uint W25Q64::ReadID()
     this->PageSize = 256;
 }
 
-uint W25Q64::ReadDeviceID(void)
+uint32_t W25Q64::ReadDeviceID(void)
 {
-    uint Temp = 0;
+    uint32_t Temp = 0;
 
     this->_spi->Start();
 
@@ -67,7 +67,7 @@ uint W25Q64::ReadDeviceID(void)
 }
 
 // 擦除扇区
-bool W25Q64::EraseSector(uint SectorAddr)
+bool W25Q64::EraseSector(uint32_t SectorAddr)
 {
     this->WriteEnable();
     this->WaitForEnd();
@@ -82,7 +82,7 @@ bool W25Q64::EraseSector(uint SectorAddr)
 }
 
 // 擦除页
-bool W25Q64::ErasePage(uint pageAddr)
+bool W25Q64::ErasePage(uint32_t pageAddr)
 {
     return this->EraseSector(pageAddr);
 }
@@ -137,7 +137,7 @@ void W25Q64::EraseChip(void)
     this->WaitForEnd();
 }
 
-bool W25Q64::WritePage(uint addr, byte *pBuffer, uint NumByteToWrite)
+bool W25Q64::WritePage(uint32_t addr, byte *pBuffer, uint32_t NumByteToWrite)
 {
     WriteEnable();
     this->_spi->Start();
@@ -165,7 +165,7 @@ bool W25Q64::WritePage(uint addr, byte *pBuffer, uint NumByteToWrite)
 }
 
 // 写入数据
-bool W25Q64::Write(uint addr, byte *pBuffer, uint NumByteToWrite)
+bool W25Q64::Write(uint32_t addr, byte *pBuffer, uint32_t NumByteToWrite)
 {
     byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
@@ -261,7 +261,7 @@ void W25Q64::WakeUp(void)
 }
 
 // 读取数据
-bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
+bool W25Q64::Read(uint32_t ReadAddr, byte *pBuffer, uint32_t NumByteToRead)
 {
     this->_spi->Start();
     this->_spi->Write(W25X_ReadData);
@@ -402,7 +402,7 @@ bool W25Q64::Read(uint ReadAddr, byte *pBuffer, uint NumByteToRead)
 //0XEF15,表示芯片型号为W25Q32  
 //0XEF16,表示芯片型号为W25Q64 
 //0XEF17,表示芯片型号为W25Q128 	  
-uint W25Q128::ReadID()
+uint32_t W25Q128::ReadID()
 {
     ushort Temp = 0;
     //使能器件   
@@ -432,7 +432,7 @@ uint W25Q128::ReadID()
 //擦除一个扇区
 //Dst_Addr:扇区地址 根据实际容量设置
 //擦除一个山区的最少时间:150ms
-bool W25Q128::EraseSector(uint sectorAddr)
+bool W25Q128::EraseSector(uint32_t sectorAddr)
 {
     //监视falsh擦除情况,测试用   
     StdPrintf("fe:%x\r\n", sectorAddr);
@@ -459,7 +459,7 @@ bool W25Q128::EraseSector(uint sectorAddr)
 //WriteAddr:开始写入的地址(24bit)
 //NumByteToWrite:要写入的字节数(最大256),该数不应该超过该页的剩余字节数!!!	 
 
-bool W25Q128::WritePage(uint addr, byte *buf, uint count)
+bool W25Q128::WritePage(uint32_t addr, byte *buf, uint32_t count)
 {
     ushort i;
     this->WriteEnable(); //SET WEL 
@@ -487,9 +487,9 @@ bool W25Q128::WritePage(uint addr, byte *buf, uint count)
 //WriteAddr:开始写入的地址(24bit)						
 //NumByteToWrite:要写入的字节数(最大65535)
 // 写入数据
-bool W25Q128::Write(uint WriteAddr, byte *pBuffer, uint NumByteToWrite)
+bool W25Q128::Write(uint32_t WriteAddr, byte *pBuffer, uint32_t NumByteToWrite)
 {
-    uint secpos;
+    uint32_t secpos;
     ushort secoff;
     ushort secremain;
     ushort i;
@@ -585,7 +585,7 @@ void W25Q128::W25QXX_Write_SR(byte sr)
 //WriteAddr:开始写入的地址(24bit)
 //NumByteToWrite:要写入的字节数(最大65535)
 //CHECK OK
-void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint WriteAddr, ushort NumByteToWrite)
+void W25Q128::W25QXX_Write_NoCheck(byte *pBuffer, uint32_t WriteAddr, ushort NumByteToWrite)
 {
     ushort pageremain;
     pageremain = 256-WriteAddr % 256; //单页剩余的字节数		 	    

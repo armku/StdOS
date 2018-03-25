@@ -40,7 +40,7 @@
             spi128.SetNss(PA8);
         #endif 
         byte datatemp[sizeof(TEXT_Buffer)];
-        uint FLASH_SIZE;
+        uint32_t FLASH_SIZE;
         w25q128.W25QXX_Init(); //W25QXX≥ı ºªØ
         debug_printf("\r\nSPI TEST\r\n");
         while (w25q128.ReadID() != W25QXXX128)

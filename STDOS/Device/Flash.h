@@ -8,11 +8,11 @@ class Flash : public BlockStorage
 {
 public:
 	// Ð´¿é
-	virtual bool WriteBlock(uint address, const byte* buf, int len, bool inc) const;
+	virtual bool WriteBlock(uint32_t address, const byte* buf, int len, bool inc) const;
     // ²Á³ý¿é £¨¶ÎµØÖ·£©
-    virtual bool EraseBlock(uint address) const;
+    virtual bool EraseBlock(uint32_t address) const;
     // Ö¸¶¨¿éÊÇ·ñ±»²Á³ý
-    //virtual bool IsErased(uint address, int len) const;
+    //virtual bool IsErased(uint32_t address, int len) const;
 
 public:
 	Flash();

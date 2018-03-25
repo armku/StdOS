@@ -15,7 +15,7 @@ public:
     bool Activate(short irq, InterruptCallback isr, void* param = nullptr);
 
     // 设置优先级
-    void SetPriority(short irq, uint priority = 1) const;
+    void SetPriority(short irq, uint32_t priority = 1) const;
 
     static void GlobalEnable();	// 打开全局中断
     static void GlobalDisable();	// 关闭全局中断

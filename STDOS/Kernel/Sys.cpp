@@ -78,7 +78,7 @@ uint64_t TSys::Ms()const
 }
 
 // 系统绝对当前时间，秒
-uint TSys::Seconds()const
+uint32_t TSys::Seconds()const
 {
 	return Time.Seconds;
 }
@@ -139,12 +139,12 @@ void TSys::Reboot(int msDelay)const
 }
 
 // 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
-uint TSys::AddTask(Action func, void *param, int dueTime, int period, cstring name)const
+uint32_t TSys::AddTask(Action func, void *param, int dueTime, int period, cstring name)const
 {
 	return Task::Scheduler()->Add(func, param, dueTime, period, name);
 }
 
-void TSys::RemoveTask(uint &taskid)const
+void TSys::RemoveTask(uint32_t &taskid)const
 {
 	if (taskid)
 	{
@@ -153,7 +153,7 @@ void TSys::RemoveTask(uint &taskid)const
 }
 
 // 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
-bool TSys::SetTask(uint taskid, bool enable, int msNextTime)const
+bool TSys::SetTask(uint32_t taskid, bool enable, int msNextTime)const
 {
 	bool ret;
 
@@ -178,7 +178,7 @@ bool TSys::SetTask(uint taskid, bool enable, int msNextTime)const
 }
 
 // 改变任务周期
-bool TSys::SetTaskPeriod(uint taskid, int period)const
+bool TSys::SetTaskPeriod(uint32_t taskid, int period)const
 {
 	bool ret;
 	Task *tsk;

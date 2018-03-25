@@ -199,7 +199,7 @@ void CLcd::Point(ushort x, ushort y, ushort color)
 }
 
 //»­Í¼ÐÎ
-void CLcd::DisplayImage(byte *pbuf, ushort color, uint showtype)
+void CLcd::DisplayImage(byte *pbuf, ushort color, uint32_t showtype)
 {
     switch (showtype)
     {

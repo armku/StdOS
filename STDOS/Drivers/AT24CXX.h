@@ -27,29 +27,29 @@ public:
 	bool Write(ushort addr, byte data);
 	byte Read(ushort addr);
 
-	virtual bool Write(uint addr, Buffer &bs);
-	virtual bool Read(uint addr, Buffer &bs);
-	int Read(uint addr, void *pBuffer, int size, ushort bufpos = 0);
-	int Write(uint addr, void *pBuffer, int size, ushort bufpos = 0);
+	virtual bool Write(uint32_t addr, Buffer &bs);
+	virtual bool Read(uint32_t addr, Buffer &bs);
+	int Read(uint32_t addr, void *pBuffer, int size, ushort bufpos = 0);
+	int Write(uint32_t addr, void *pBuffer, int size, ushort bufpos = 0);
 public:
-	AT24CXX(EW24XXType devtype, byte devaddr = 0xA0, uint wnms = 5); //写延时时间
+	AT24CXX(EW24XXType devtype, byte devaddr = 0xA0, uint32_t wnms = 5); //写延时时间
 	void SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect = P0);
 	byte CheckOk();
 
 	OutputPort pinWP; //保护引脚
 private:
 	byte checkDevice();
-	ushort jsPageSize(uint type); //计算存储页大小
-	int writePage(byte *buf, ushort bufpos, ushort addr, uint size); //页内写
+	ushort jsPageSize(uint32_t type); //计算存储页大小
+	int writePage(byte *buf, ushort bufpos, ushort addr, uint32_t size); //页内写
 	int writePage(ushort addr, Buffer &bs); //页内写
-	int readPage(byte *buf, ushort bufpos, ushort addr, uint size); //页内读
+	int readPage(byte *buf, ushort bufpos, ushort addr, uint32_t size); //页内读
 	int readPage(ushort addr, Buffer &bs); //页内读
-	int bufwr(ushort addr, byte *buf, uint size, ushort bufpos, byte wr); //读写集中操作1写 0读
+	int bufwr(ushort addr, byte *buf, uint32_t size, ushort bufpos, byte wr); //读写集中操作1写 0读
 	int bufwr(ushort addr, Buffer &bs, byte wr); //读写集中操作1写 0读
 
 	EW24XXType deviceType; //器件类型
-	uint pageSize; //存储页大小
-	uint writedelaynms; //写延时	  
+	uint32_t pageSize; //存储页大小
+	uint32_t writedelaynms; //写延时	  
 };
 
 #endif

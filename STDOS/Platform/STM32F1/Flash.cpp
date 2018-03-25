@@ -12,12 +12,12 @@ void OnInit()
 {
 }
 // 擦除块 （段地址）
-bool Flash::EraseBlock(uint address) const
+bool Flash::EraseBlock(uint32_t address) const
 {
 	return false;
 }
 // 写块
-bool Flash::WriteBlock(uint address, const byte* buf, int len, bool inc) const
+bool Flash::WriteBlock(uint32_t address, const byte* buf, int len, bool inc) const
 {
 	return false;
 }
@@ -26,22 +26,22 @@ class STMFLASH
 {
     public:       
 		STMFLASH();
-		void SetFlashSize(uint flashsize);
-		int Read(uint addr,void* pBuf,int len);//读取
-		int Write(uint addr,void* pBuf,int len,bool saveold=true);//写入
+		void SetFlashSize(uint32_t flashsize);
+		int Read(uint32_t addr,void* pBuf,int len);//读取
+		int Write(uint32_t addr,void* pBuf,int len,bool saveold=true);//写入
 	#ifdef DEBUG
 		static void Test();
 	#endif	
 	private:
-		uint sectorSize;//扇区大小
-		uint flashSize;//Flash容量大小，单位K
-		ushort readHalfWord(uint faddr); //读出半字  
-        void writeNoCheck(uint addr, ushort *pBuffer, ushort len);	
-		void write(uint addr, ushort *pBuffer, ushort len); //从指定地址开始写入指定长度的数据
-		int writeSector(uint addr);//写入整个扇区
-        void read(uint addr, ushort *pBuffer, ushort len); //从指定地址开始读出指定长度的数据
-		bool addrValid(uint addr);//地址正确，在上下限范围内
-		bool addrSectorFirst(uint addr);//地址是否是扇区起始地址
+		uint32_t sectorSize;//扇区大小
+		uint32_t flashSize;//Flash容量大小，单位K
+		ushort readHalfWord(uint32_t faddr); //读出半字  
+        void writeNoCheck(uint32_t addr, ushort *pBuffer, ushort len);	
+		void write(uint32_t addr, ushort *pBuffer, ushort len); //从指定地址开始写入指定长度的数据
+		int writeSector(uint32_t addr);//写入整个扇区
+        void read(uint32_t addr, ushort *pBuffer, ushort len); //从指定地址开始读出指定长度的数据
+		bool addrValid(uint32_t addr);//地址正确，在上下限范围内
+		bool addrSectorFirst(uint32_t addr);//地址是否是扇区起始地址
 };
 
 #define STM32_FLASH_BASE 0x08000000 	//STM32 FLASH的起始地址
@@ -58,7 +58,7 @@ STMFLASH::STMFLASH()
     this->sectorSize = 1024;
 }
 
-void STMFLASH::SetFlashSize(uint flashsize)
+void STMFLASH::SetFlashSize(uint32_t flashsize)
 {
     this->flashSize = flashsize;
     if (this->flashSize > 256)
@@ -74,7 +74,7 @@ void STMFLASH::SetFlashSize(uint flashsize)
 }
 
 //读取
-int STMFLASH::Read(uint addr, void *pBuf, int len)
+int STMFLASH::Read(uint32_t addr, void *pBuf, int len)
 {
     if (len <= 0)
     {
@@ -114,7 +114,7 @@ int STMFLASH::Read(uint addr, void *pBuf, int len)
 }
 
 //写入
-int STMFLASH::Write(uint addr, void *pBuf, int len, bool protecold)
+int STMFLASH::Write(uint32_t addr, void *pBuf, int len, bool protecold)
 {
     if (len <= 0)
     {
@@ -136,11 +136,11 @@ int STMFLASH::Write(uint addr, void *pBuf, int len, bool protecold)
     1        2         3	
      */
     //第一区
-    uint addr1;
-    uint len1;
-    uint sec1; //第一区
-    uint sec1pos; //地址在第一区位置
-    uint writeSize; //写入大小
+    uint32_t addr1;
+    uint32_t len1;
+    uint32_t sec1; //第一区
+    uint32_t sec1pos; //地址在第一区位置
+    uint32_t writeSize; //写入大小
 
     addr1 = addr;
     len1 = len;
@@ -158,7 +158,7 @@ int STMFLASH::Write(uint addr, void *pBuf, int len, bool protecold)
         }
         if (protecold)
         {
-            uint addrt = sec1 * this->sectorSize + STM32_FLASH_BASE;
+            uint32_t addrt = sec1 * this->sectorSize + STM32_FLASH_BASE;
             for (int i = 0; i < this->sectorSize / 2; i++)
             {
                 Buff.buf16[i] = this->readHalfWord(addrt + i * 2);
@@ -207,7 +207,7 @@ int STMFLASH::Write(uint addr, void *pBuf, int len, bool protecold)
 //读取指定地址的半字(16位数据)
 //faddr:读地址(此地址必须为2的倍数!!)
 //返回值:对应数据.
-ushort STMFLASH::readHalfWord(uint faddr)
+ushort STMFLASH::readHalfWord(uint32_t faddr)
 {
     return *(volatile ushort*)faddr;
 }
@@ -216,7 +216,7 @@ ushort STMFLASH::readHalfWord(uint faddr)
 //addr:起始地址
 //pBuffer:数据指针
 //len:半字(16位)数   
-void STMFLASH::writeNoCheck(uint addr, ushort *pBuffer, ushort len)
+void STMFLASH::writeNoCheck(uint32_t addr, ushort *pBuffer, ushort len)
 {
     ushort i;
     for (i = 0; i < len; i++)
@@ -227,7 +227,7 @@ void STMFLASH::writeNoCheck(uint addr, ushort *pBuffer, ushort len)
 }
 
 //地址正确，在上下限范围内
-bool STMFLASH::addrValid(uint addr)
+bool STMFLASH::addrValid(uint32_t addr)
 {
     if (addr < STM32_FLASH_BASE)
     {
@@ -243,13 +243,13 @@ bool STMFLASH::addrValid(uint addr)
 }
 
 //地址是否是扇区起始地址
-bool STMFLASH::addrSectorFirst(uint addr)
+bool STMFLASH::addrSectorFirst(uint32_t addr)
 {
     if (!this->addrValid(addr))
     {
         return false;
     }
-    uint size = addr - STM32_FLASH_BASE;
+    uint32_t size = addr - STM32_FLASH_BASE;
     if (size % this->sectorSize)
     {
         return false;
@@ -258,7 +258,7 @@ bool STMFLASH::addrSectorFirst(uint addr)
 }
 
 //写入整个扇区,需要保证参数正确，如果不正确，直接返回
-int STMFLASH::writeSector(uint addr)
+int STMFLASH::writeSector(uint32_t addr)
 {
     if (!this->addrSectorFirst(addr))
     {
@@ -276,13 +276,13 @@ int STMFLASH::writeSector(uint addr)
 //addr:起始地址(此地址必须为2的倍数!!)
 //pBuffer:数据指针
 //len:半字(16位)数(就是要写入的16位数据的个数.)
-void STMFLASH::write(uint addr, ushort *pBuffer, ushort len)
+void STMFLASH::write(uint32_t addr, ushort *pBuffer, ushort len)
 {
-    uint secpos; //扇区地址
+    uint32_t secpos; //扇区地址
     ushort secoff; //扇区内偏移地址(16位字计算)
     ushort secremain; //扇区内剩余地址(16位字计算)	   
     ushort i;
-    uint offaddr; //去掉0X08000000后的地址
+    uint32_t offaddr; //去掉0X08000000后的地址
     if (addr < STM32_FLASH_BASE || (addr >= (STM32_FLASH_BASE + 1024 * this->flashSize)))
         return ;
     //非法地址
@@ -344,7 +344,7 @@ void STMFLASH::write(uint addr, ushort *pBuffer, ushort len)
 //addr:起始地址
 //pBuffer:数据指针
 //len:半字(16位)数
-void STMFLASH::read(uint addr, ushort *pBuffer, ushort len)
+void STMFLASH::read(uint32_t addr, ushort *pBuffer, ushort len)
 {
     ushort i;
     for (i = 0; i < len; i++)

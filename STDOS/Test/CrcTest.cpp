@@ -3,7 +3,7 @@
 
 //#define _CRC_TEST_H
 #ifdef _CRC_TEST_H
-static const uint DataBuffer[] =
+static const uint32_t DataBuffer[] =
 {
     0x00001021, 0x20423063, 0x408450a5, 0x60c670e7, 0x9129a14a, 0xb16bc18c,
     0xd1ade1ce, 0xf1ef1231, 0x32732252, 0x52b54294, 0x72f762d6, 0x93398318,
@@ -40,7 +40,7 @@ void Init()
 }
 
 // 硬件实现的Crc
-uint HardCrc(const Buffer& bs, uint crc)
+uint32_t HardCrc(const Buffer& bs, uint32_t crc)
 {
 	if (!inited) Init();
 
@@ -48,8 +48,8 @@ uint HardCrc(const Buffer& bs, uint crc)
     // STM32的初值是0xFFFFFFFF，而软Crc初值是0
 	CRC->DR		= _REV(crc ^ 0xFFFFFFFF);
     //CRC->DR = 0xFFFFFFFF;
-    uint* ptr	= (uint*)bs.GetBuffer();
-	uint len	= bs.Length();
+    uint32_t* ptr	= (uint32_t*)bs.GetBuffer();
+	uint32_t len	= bs.Length();
     len >>= 2;
     while(len-- > 0)
     {
@@ -64,18 +64,18 @@ void TestCrc()
     debug_printf("TestCrc Start......\r\n");
     debug_printf("\r\n");
 
-    uint size	= ArrayLength(DataBuffer);
+    uint32_t size	= ArrayLength(DataBuffer);
 
 	// Sys.Crc是软校验，HardCrc是硬件实现，要求硬件实现的结果跟软件实现一致
-	uint data	= 0x12345678;
+	uint32_t data	= 0x12345678;
 	ByteArray bs(&data, 4);
-	uint crc	= Crc::Hash(bs, 0);
-	uint crc2	= Crc::Hash(bs, 4);
+	uint32_t crc	= Crc::Hash(bs, 0);
+	uint32_t crc2	= Crc::Hash(bs, 4);
 	bs.Show();
 	debug_printf("\r\n\tSoftCrc:%p  HardCrc:%p \r\n", crc, crc2);
 	// 无初值时，两者一样
 
-	uint temp	= crc;
+	uint32_t temp	= crc;
 	// 试试二次计算Crc
 	crc		= Crc::Hash(Buffer(&crc, 4), 0);
 	crc2	= Crc::Hash(Buffer(&crc2, 4));
@@ -151,9 +151,9 @@ void TestCrc()
     debug_printf("\r\n");
     byte data16[] = { 0x01, 0x08, 0x00, 0x00};
     ushort crc16 = Crc::Hash16(Buffer(data16, 4));
-    debug_printf("Crc::Hash16(#%08x) = 0x%04x\r\n", _REV(*(uint*)data16), crc16);
+    debug_printf("Crc::Hash16(#%08x) = 0x%04x\r\n", _REV(*(uint32_t*)data16), crc16);
     ushort crc17 = Crc::Hash16(Buffer(&crc16, 2), crc16);
-    debug_printf("Crc::Hash16(#%08x, 0x%04x) = 0x%04x\r\n", _REV(*(uint*)data16), crc16, crc17);
+    debug_printf("Crc::Hash16(#%08x, 0x%04x) = 0x%04x\r\n", _REV(*(uint32_t*)data16), crc16, crc17);
 
     debug_printf("\r\n");
     debug_printf("TestCrc Finish!\r\n");
