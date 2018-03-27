@@ -37,6 +37,7 @@ int ltoa(int64_t value,char *buf,int radix)
 	}
 	else
 		return false;
+	return true;
 }
 int itoa(int value,char *buf,int radix)
 {

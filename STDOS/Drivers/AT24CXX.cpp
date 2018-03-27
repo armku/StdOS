@@ -301,7 +301,7 @@ int AT24CXX::writePage(uint16_t addr, Buffer &bs) //页内写
 
 	//非法长度，直接返回
 	if (bs.Length() > 256)
-		return;
+		return 0;
 	Buffer bstmp(buftmp,bs.Length());
 	this->readPage(addr,bstmp);
 	bool flagchgs = false;
@@ -315,7 +315,7 @@ int AT24CXX::writePage(uint16_t addr, Buffer &bs) //页内写
 	}
 	//存储值与之前相等，不需要更新
 	if (!flagchgs)
-		return;
+		return 0;
 
 	//debug_printf("页写\r\n"); //return;
 	usAddr = addr;
