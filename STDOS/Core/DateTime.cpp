@@ -318,12 +318,6 @@ void DateTime::Show(bool newLine)const
 {
     StdPrintf("%04d-%02d-%02d %02d:%02d:%02d", this->Year, this->Month, this->Day, this->Hour, this->Minute, this->Second);
 }
-//当前时间
-DateTime DateTime::Now()
-{    
-    //return DateTime(TotalSeconds()+Time.Seconds);
-	//return DateTime(0+Time.Seconds);
-}
 
 void DateTime::Init()
 {

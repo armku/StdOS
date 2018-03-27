@@ -78,14 +78,6 @@ public:
 	F长全部 yyyy-MM-dd HH:mm:ss
 	*/
 	//cstring GetString(uint8_t kind = 'F', char* str = nullptr);
-
-	// 当前时间
-	static DateTime Now();
-
-#if DEBUG
-	static void Test();
-#endif
-
 private:
 	void Init();
 	Buffer ToArray();

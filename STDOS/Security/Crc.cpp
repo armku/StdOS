@@ -195,7 +195,9 @@ uint64_t Crc::CRC32Default(uint8_t *pszBuf, uint64_t ulLength)
     {
         m_Table[i] = Reflect(i, 8) << 24;
         for (int j = 0; j < 8; j++)
-            m_Table[i] = (m_Table[i] << 1) ^ (m_Table[i] &(1 << 31) ? ulPolynomial : 0);
+				{
+            m_Table[i] = (m_Table[i] << 1) ^ (m_Table[i] &(uint64_t)(1 << 31) ? ulPolynomial : 0);
+				}
         m_Table[i] = Reflect(m_Table[i], 32);
     }
 
