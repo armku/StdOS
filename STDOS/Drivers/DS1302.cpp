@@ -87,13 +87,11 @@ DateTime& DS1302::GetTime(DateTime & dt)
 
 void DS1302::set1302()
 {
-	uint8_t   i;
 	this->prst = 1;
 	Sys.Delay(10);
 }
 void DS1302::reset1302()
 {
-	uint8_t   i;
 	this->prst = 0;
 	Sys.Delay(10);
 }
