@@ -363,7 +363,7 @@ void TaskScheduler::Execute(uint32_t msMax, bool &cancel)
 
     uint64_t min = UInt64_Max; // 最小时间，这个时间就会有任务到来
 
-    int mscurMax = mscur + msMax;
+    uint64_t mscurMax = mscur + msMax;
     for (int i = 0; i < this->Count; i++)
     {
         if (cancel)
@@ -371,7 +371,7 @@ void TaskScheduler::Execute(uint32_t msMax, bool &cancel)
         Task *taskcur = this->_Tasks[i];
         if (taskcur && taskcur->Callback && taskcur->Enable && taskcur->NextTime <= mscur)
         {            
-			if(taskcur->CheckTime(mscurMax,msMax != -1))
+			if(taskcur->CheckTime(mscurMax,msMax != -1))//代码异常，符号不对
 			{
 				if(taskcur->Execute(mscur))
 				{
