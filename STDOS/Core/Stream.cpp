@@ -212,6 +212,7 @@ bool Stream::Write(const Buffer &bs)
 	{
 		return true;
 	}
+	return true;
 }
 
 // 从数据流读取变长数据到字节数组。以压缩整数开头表示长度

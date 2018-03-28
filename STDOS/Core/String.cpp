@@ -301,6 +301,7 @@ bool String::Concat(uint8_t c, int radix)
 	}
 	else
 		return false;
+	return true;
 }
 
 bool String::Concat(short num, int radix)
@@ -323,6 +324,7 @@ bool String::Concat(short num, int radix)
 	}
 	else
 		return false;
+	return true;
 }
 
 bool String::Concat(uint16_t num, int radix)
@@ -345,6 +347,7 @@ bool String::Concat(uint16_t num, int radix)
 	}
 	else
 		return false;
+	return true;
 }
 
 bool String::Concat(int num, int radix)
@@ -367,6 +370,7 @@ bool String::Concat(int num, int radix)
 	}
 	else
 		return false;
+	return true;
 }
 
 bool String::Concat(uint32_t num, int radix)
@@ -389,6 +393,7 @@ bool String::Concat(uint32_t num, int radix)
 	}
 	else
 		return false;
+	return true;
 }
 
 bool String::Concat(int64_t num, int radix)
@@ -411,6 +416,7 @@ bool String::Concat(int64_t num, int radix)
 	}
 	else
 		return false;
+	return true;
 }
 
 bool String::Concat(uint64_t num, int radix)
@@ -433,6 +439,7 @@ bool String::Concat(uint64_t num, int radix)
 	}
 	else
 		return false;
+	return true;
 }
 
 bool String::Concat(float num, int decimalPlaces)
