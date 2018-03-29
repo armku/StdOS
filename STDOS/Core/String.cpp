@@ -509,10 +509,9 @@ char String::operator[](int index)const
 	else
 		return 0;
 }
-
+static char aa;
 char &String::operator[](int index)
 {
-	char aa;
 	if(this->_Length> index && this->_Arr)
 		return this->_Arr[index];
 	else
@@ -537,16 +536,16 @@ void String::GetBytes(uint8_t *buf, int bufsize, int index)const
 	}
 }
 
-ByteArray String::GetBytes()const
-{
+//ByteArray String::GetBytes()const
+//{
 //	ByteArray ret(0);
 //	ret.SetLength(this->_Length);
 //	this->GetBytes(ret._Arr,this->_Length,0);
 //	return ret;
-}
+//}
 
-ByteArray String::ToHex()const
-{
+//ByteArray String::ToHex()const
+//{
 //	ByteArray ret;
 //	
 //	ret.SetLength(this->_Length/2);
@@ -556,7 +555,7 @@ ByteArray String::ToHex()const
 //	}
 //	
 //	return ret;
-}
+//}
 
 int String::ToInt()const
 {

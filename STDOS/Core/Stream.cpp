@@ -221,14 +221,14 @@ int Stream::ReadArray(Buffer &bs)
     return 0;
 }
 
-ByteArray Stream::ReadArray(int count){}
+//ByteArray Stream::ReadArray(int count){}
 // 把字节数组作为变长数据写入到数据流。以压缩整数开头表示长度
 bool Stream::WriteArray(const Buffer &bs)
 {
     return false;
 }
 
-ByteArray Stream::ReadArray(){}
+//ByteArray Stream::ReadArray(){}
 //String Stream::ReadString()
 //{
 //	return nullptr;

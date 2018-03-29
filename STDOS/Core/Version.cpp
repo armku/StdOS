@@ -1,6 +1,7 @@
 #include "DateTime.h"
 #include "SString.h"
 #include "Version.h"
+#include <stdio.h>
 
 // IDA OK
 Version::Version()
@@ -183,9 +184,9 @@ Version &Version::SetCompile(int buildday)
 
 String Version::ToString()const
 {
-//    char *buf = new char[100];
-//    snprintf(buf, 100, "%d.%d.%d", this->Major, this->Minor, this->Build);
-//    String *ret = new String(buf);
+    char *buf = new char[20];
+    snprintf(buf, 100, "%d.%d.%d", this->Major, this->Minor, this->Build);
+    String *ret = new String(buf);
 
-//    return  *ret;
+    return  *ret;
 }

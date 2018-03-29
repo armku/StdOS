@@ -100,8 +100,8 @@ public:
 	char operator [] (int index) const;
 	char& operator [] (int index);
 	void GetBytes(uint8_t* buf, int bufsize, int index=0) const;
-	ByteArray GetBytes() const;
-	ByteArray ToHex() const;
+//	ByteArray GetBytes() const;
+//	ByteArray ToHex() const;
 	void ToArray(char* buf, int bufsize, int index=0) const { GetBytes((uint8_t*)buf, bufsize, index); }
 
 	int ToInt() const;
