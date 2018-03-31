@@ -244,13 +244,11 @@ void Task::Init()
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 void ShowTime(void *param); //显示时间
-static uint32_t mgid = 0; // 总编号
 
 TaskScheduler::TaskScheduler(cstring name)
 {
     this->Name = name;
 
-    mgid = 1;
 	this->Deepth = 0;
 	this->MaxDeepth = 8;
 
@@ -263,7 +261,7 @@ TaskScheduler::TaskScheduler(cstring name)
 uint32_t TaskScheduler::Add(Action func, void *param, int dueTime, int period, cstring name)
 {
     auto task = new Task();
-    task->ID = mgid++;
+    task->ID =this->Count;
     task->Callback = func;
     task->Param = param;
     task->Period = period;

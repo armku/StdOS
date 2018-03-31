@@ -212,7 +212,6 @@ int AT24CXX::bufwr(uint16_t addr, Buffer &bs, uint8_t wr)
 	{
 		this->pinWP = 0;
 	}
-	/*debug_printf("read count %d\r\n",size);*/
 	if (pageStart)
 	{
 		//读取不是页起始地址的内容
@@ -265,14 +264,12 @@ int AT24CXX::bufwr(uint16_t addr, Buffer &bs, uint8_t wr)
 		}
 		else
 		{
-			debug_printf("read size %d\r\n", bytesLeave);
 			if (wr)
 			{
 				this->writePage(bs.GetBuffer(), bufaddr, curAddr, bytesLeave);
 			}
 			else
 			{
-				debug_printf("read size1 %d\r\n", bytesLeave);
 				this->readPage(bs.GetBuffer(), bufaddr, curAddr, bytesLeave);
 			}
 
@@ -317,7 +314,6 @@ int AT24CXX::writePage(uint16_t addr, Buffer &bs) //页内写
 	if (!flagchgs)
 		return 0;
 
-	//debug_printf("页写\r\n"); //return;
 	usAddr = addr;
 	/*　第０步：发停止信号，启动内部写操作　*/
 	this->IIC.Stop();
@@ -396,7 +392,6 @@ int AT24CXX::writePage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t si
 //页内读
 int AT24CXX::readPage(uint16_t addr, Buffer &bs)
 {
-	//debug_printf("read a page\r\n");
 	/* 第1步：发起I2C总线启动信号 */
 	this->IIC.Start();
 
