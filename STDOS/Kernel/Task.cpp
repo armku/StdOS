@@ -371,7 +371,7 @@ void TaskScheduler::Execute(uint32_t msMax, bool &cancel)
         Task *taskcur = this->_Tasks[i];
         if (taskcur && taskcur->Callback && taskcur->Enable && taskcur->NextTime <= mscur)
         {            
-			if(taskcur->CheckTime(mscurMax,msMax != -1))//代码异常，符号不对
+			if(taskcur->CheckTime(mscurMax, false))//代码异常，符号不对
 			{
 				if(taskcur->Execute(mscur))
 				{
