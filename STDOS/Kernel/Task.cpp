@@ -244,7 +244,7 @@ void Task::Init()
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 void ShowTime(void *param); //显示时间
-uint32_t mgid = 0; // 总编号
+static uint32_t mgid = 0; // 总编号
 
 TaskScheduler::TaskScheduler(cstring name)
 {
@@ -262,7 +262,7 @@ TaskScheduler::TaskScheduler(cstring name)
 // 创建任务，返回任务编号。dueTime首次调度时间ms，-1表示事件型任务，period调度间隔ms，-1表示仅处理一次
 uint32_t TaskScheduler::Add(Action func, void *param, int dueTime, int period, cstring name)
 {
-    auto *task = new Task();
+    auto task = new Task();
     task->ID = mgid++;
     task->Callback = func;
     task->Param = param;
@@ -275,7 +275,6 @@ uint32_t TaskScheduler::Add(Action func, void *param, int dueTime, int period, c
     }
 
     this->Count++;
-    //_Tasks.Add(task);
     this->_Tasks.Add(task);
     #if DEBUG
         debug_printf("Task::Add%d %-11s", task->ID, task->Name);
@@ -305,7 +304,7 @@ void TaskScheduler::Remove(uint32_t taskid)
 {
     for (int i = 0; i < this->Count; i++)
     {
-        auto *task = this->_Tasks[i];
+        auto task = this->_Tasks[i];
         if (task->ID == taskid)
         {
             this->_Tasks.RemoveAt(i);
@@ -343,7 +342,7 @@ void TaskScheduler::Start()
     Running = true;
     while (Running)
     {
-        bool bb = false;
+        auto bb = false;
         Execute(0xFFFFFFFF, bb);
     }
     debug_printf("%s停止调度，共有%d个任务！\r\n", Name, Count);
@@ -368,7 +367,7 @@ void TaskScheduler::Execute(uint32_t msMax, bool &cancel)
     {
         if (cancel)
             return ;
-        auto *taskcur = this->_Tasks[i];
+        auto taskcur = this->_Tasks[i];
         if (taskcur && taskcur->Callback && taskcur->Enable && taskcur->NextTime <= mscur)
         {            
 			if(taskcur->CheckTime(mscurMax, false))
@@ -412,7 +411,7 @@ Task *TaskScheduler::operator[](int taskid)
 {
     for (int i = 0; i < this->Count; i++)
     {
-        auto *task = this->_Tasks[i];
+        auto task = this->_Tasks[i];
         if (task && task->ID == taskid)
         {
             return task;
@@ -436,24 +435,28 @@ uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
     uint32_t ret = 0;
     if (this->Deepth < MaxDeepth)
     {
-        ++this->Deepth;
+        this->Deepth++;
 				
-		Task* tskcur=this->Current;
-        int msBegin = Sys.Ms();
-        int msEndMax = msBegin + msMax;
-        int msRemain = msMax;
+		auto tskcur=this->Current;
+        auto msBegin = Sys.Ms();
+        auto msEndMax = msBegin + msMax;
+        auto msRemain = msMax;
         TimeCost tmcost;
         while (msRemain > 0 && !cancel)
         {
-            this->Execute(msRemain, cancel);
-            msRemain = msEndMax - Sys.Ms();
+			this->Execute(msRemain, cancel);
+			auto msc = Sys.Ms();
+			if (msEndMax > msc)			
+				msRemain = msEndMax - msc;			
+			else
+				msRemain = 0;
         }
 		auto sleepus = tmcost.Elapsed();
         this->TotalSleep += sleepus/1000;
-        int msUsed = Sys.Ms() - msBegin;
+        auto msUsed = Sys.Ms() - msBegin;
 		tskcur->SleepTime+=sleepus;
 		        
-        --this->Deepth;
+        this->Deepth--;
         ret = msUsed;
     }
     else
@@ -508,7 +511,7 @@ void TaskScheduler::ShowStatus()
     //debug_printf("\r\n\r\n %lld--%lld \r\n\r\n",Sys.Ms(),Sys.Ms()-curms);
     for (int i = 0; i < this->Count; i++)
     {
-        Task *task = this->_Tasks[i];
+        auto task = this->_Tasks[i];
         if (task)
         {
             task->ShowStatus();

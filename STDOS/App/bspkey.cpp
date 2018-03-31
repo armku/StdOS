@@ -142,8 +142,17 @@ void Key::InitKeyVar()
 
     /* 如果需要单独更改某个按键的参数，可以在此单独重新赋值 */
     /* 比如，我们希望按键1按下超过1秒后，自动重发相同键值 */
-    s_tBtn[KID_K3].LongTime = 100;
-    s_tBtn[KID_K3].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */
+    s_tBtn[KID_KOK].LongTime = 100;
+    s_tBtn[KID_KOK].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */
+	
+	s_tBtn[KID_KLEFT].LongTime = 100;
+    s_tBtn[KID_KLEFT].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */
+	
+	s_tBtn[KID_KDOWN].LongTime = 100;
+    s_tBtn[KID_KDOWN].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */
+	
+	s_tBtn[KID_KUP].LongTime = 100;
+    s_tBtn[KID_KUP].RepeatSpeed = 5; /* 每隔50ms自动发送键值 */
 }
 
 /*
@@ -162,7 +171,7 @@ void Key::DetectKey(uint8_t i)
 	#ifdef DEBUG
     if (s_tBtn[i].IsKeyDownFunc == 0)
     {
-        StdPrintf("Fault : DetectButton(), s_tBtn[i].IsKeyDownFunc undefine");
+        debug_printf("Fault : DetectButton(), s_tBtn[i].IsKeyDownFunc undefine");
     }
 	#endif
 
@@ -196,6 +205,7 @@ void Key::DetectKey(uint8_t i)
                     {
                         /* 键值放入按键FIFO */
                         PutKey((uint8_t)(3 *i + 3));
+						this->flagLongkey = 1;
                     }
                 }
                 else
@@ -230,7 +240,11 @@ void Key::DetectKey(uint8_t i)
                 pBtn->State = 0;
 
                 /* 发送按钮弹起的消息 */
-                PutKey((uint8_t)(3 *i + 2));
+				if (!this->flagLongkey)
+				{
+					PutKey((uint8_t)(3 * i + 2));
+				}
+				this->flagLongkey = 0;
             }
         }
 

@@ -1,30 +1,66 @@
 #ifndef _BSP_KEY_H
     #define _BSP_KEY_H
     #include "Sys.h"
-    #define KEY_COUNT    3	   					/* 按键个数 */
+    #define KEY_COUNT    4	   					/* 按键个数, 2个独立建 + 1个组合键 */
+	/*
+	KEY_NONE,
+  KEY_OK,
+  KEY_LEFT,
+  KEY_UP,
+  KEY_DOWN,
+  KEY_OK_C,
+  KEY_LEFT_C,
+  KEY_UP_C,
+  KEY_DOWN_C,  
+  KEY_OK_LEFT, 
+	*/
 
     /* 按键ID, 主要用于bsp_KeyState()函数的入口参数 */
     typedef enum
     {
-        KID_K1 = 0, KID_K2, KID_K3
-    } KEY_ID_E;		
-	typedef enum
-	{
-		KEY_NONE = 0,  /* 0 表示按键事件 */
-
-		KEYDOWN_1,  /* 1键按下 */
-		KEYUP_1,  /* 1键弹起 */
-		KEYLONG_1,  /* 1键长按 */
-
-		KEYDOWN_2,  /* 2键按下 */
-		KEYUP_2,  /* 2键弹起 */
-		KEYLONG_2,  /* 2键长按 */
-
-		/* 组合键 */
-		KEYDOWN_9,  /* 9键按下 */
-		KEYUP_9,  /* 9键弹起 */
-		KEYLONG_9,  /* 9键长按 */
-	} KEY_ENUM;
+        KID_KOK = 0, KID_KLEFT, KID_KDOWN,KID_KUP
+    } KEY_ID_E;
+    typedef enum
+    {
+		KEY_NONE = 0,
+		
+        KEYDOWN_OK,		// 按下
+		KEYUP_OK,		// 弹起
+		KEYLONG_OK,		// 长按
+		
+		KEYDOWN_LEFT,  
+		KEYUP_LEFT,
+		KEYLONG_LEFT,		
+		
+		KEYDOWN_DOWN,  
+		KEYUP_DOWN,
+		KEYLONG_DOWN,
+		
+        KEYDOWN_UP,  
+		KEYUP_UP,
+		KEYLONG_UP,
+		
+		KEYDOWN_OK_LEFT,
+		KEYUP_OK_LEFT,
+		KEYLONG_OK_LEFT,
+		
+		KEYDOWN_OK_UP,
+		KEYUP_OK_UP,
+		KEYLONG_OK_UP,
+		
+	
+        KEYDOWN_CFG,// = KEY_LEFT | KEY_MENU,  // 进入参数配置界面
+		KEYUP_CFG,
+		KEYLONG_CFG,		
+		
+        KEYDOWN_CAL,// = KEY_UP | KEY_MENU,  // 校验界面        
+		KEYUP_CAL,
+		KEYLONG_CAL,
+		
+		KEYDOWN_DEMOCAL,// = KEY_UP | KEY_MENU,  // 校验界面        
+		KEYUP_DEMOCAL,
+		KEYLONG_DEMOCAL,		
+    } KEY_ENUM;
     class KEY_T /*每个按键对应1个全局的结构体变量。
      */
     {
@@ -36,7 +72,7 @@
             uint16_t LongTime; /* 按键按下持续时间, 0表示不检测长按 */
             uint8_t State; /* 按键当前状态（按下还是弹起） */
             uint8_t RepeatSpeed; /* 连续按键周期 */
-            uint8_t RepeatCount; /* 连续按键计数器 */
+            uint8_t RepeatCount; /* 连续按键计数器 */			
         public:
             //void CheckKey();			
     };
@@ -74,5 +110,6 @@
         private:
             KEY_FIFO s_tKey;
             KEY_T s_tBtn[KEY_COUNT];
+			uint8_t flagLongkey;//长按标记，长按下时不发送弹起指令
     };
 #endif
