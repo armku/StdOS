@@ -86,8 +86,7 @@ uint32_t TSys::Seconds()const
 // 毫秒级延迟
 void TSys::Sleep(int ms)const
 {	
-	//if (!this->Started)//临时措施，ExecuteForWait不正常
-	if (true)
+	if (!this->Started)
 	{
 		//用于系统没启动时延时使用
 		for (int i = 0; i < ms; i++)

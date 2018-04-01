@@ -365,12 +365,12 @@ void TaskScheduler::Execute(uint32_t msMax, bool &cancel)
     {
         if (cancel)
             return ;
-        auto taskcur = this->_Tasks[i];
-        if (taskcur && taskcur->Callback && taskcur->Enable && taskcur->NextTime <= mscur)
+		this->Current = this->_Tasks[i];
+        if (this->Current && this->Current->Callback && this->Current->Enable && this->Current->NextTime <= mscur)
         {            
-			if(taskcur->CheckTime(mscurMax, false))
+			if(this->Current->CheckTime(mscurMax, false))
 			{
-				if(taskcur->Execute(mscur))
+				if(this->Current->Execute(mscur))
 				{
 					this->Times++;
 				}
@@ -379,16 +379,16 @@ void TaskScheduler::Execute(uint32_t msMax, bool &cancel)
 				auto msend = Sys.Ms();
 			}
 			// 不能通过累加的方式计算下一次时间，因为可能系统时间被调整
-			taskcur->NextTime = mscur + taskcur->Period;
-			if (taskcur->NextTime < min)
+			this->Current->NextTime = mscur + this->Current->Period;
+			if (this->Current->NextTime < min)
 			{
-				min = taskcur->NextTime;
+				min = this->Current->NextTime;
 			}
 			auto cancel = false;
-			this->Current = taskcur;
-			if (taskcur->CheckTime(Sys.Ms(), cancel))
+			this->Current = this->Current;
+			if (this->Current->CheckTime(Sys.Ms(), cancel))
 			{
-				taskcur->Execute(Sys.Ms());
+				this->Current->Execute(Sys.Ms());
 			}
 			this->Current = NULL;			
         }
@@ -434,7 +434,7 @@ uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
     if (this->Deepth < MaxDeepth)
     {
         this->Deepth++;
-				
+		debug_printf("ExecuteForWait:ID:%d,Name:%s,need time:%dms\n",this->Current->ID,this->Current->Name,msMax);
 		auto tskcur=this->Current;
         auto msBegin = Sys.Ms();
         auto msEndMax = msBegin + msMax;
@@ -461,6 +461,7 @@ uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
     {
         ret = false;
     }
+	debug_printf("实际执行时间:%dms\n", ret);
     return ret;
 }
 
