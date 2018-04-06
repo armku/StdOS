@@ -505,7 +505,6 @@ void TaskScheduler::ShowStatus()
     {
         debug_printf("平均 %3.0fus ", RunTimesAvg / this->Count);
     }
-    debug_printf("当前 1970-01-01 23 00:00");
     debug_printf("启动 %02lld:%02lld:%02lld.%03lld 堆 %u/%u\r\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000, &(buf[0]) - 0X20000000, 1024);
     //debug_printf("\r\n\r\n %lld--%lld \r\n\r\n",Sys.Ms(),Sys.Ms()-curms);
     for (int i = 0; i < this->Count; i++)

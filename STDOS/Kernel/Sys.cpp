@@ -64,10 +64,7 @@ void TSys::ShowInfo()const
 	StdPrintf("ChipID:");
 	ByteArray baid(this->ID, 12);
 	baid.Show(); StdPrintf("\r\n");
-	StdPrintf("Time : ");
-	DateTime dt(Time.Seconds + Time.BaseSeconds);
-	dt.Show(true);
-
+	
 	StdPrintf("Support: http://www.armku.com\r\n");
 }
 
