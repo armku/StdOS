@@ -20,7 +20,7 @@
 		{
 			t = 0;
 		}
-		ssd1309.Clear(0XFF); return;
+		
 		switch (++cnt)
 		{
 		case 1:
@@ -63,10 +63,6 @@
 		ssd1309.SetPinSpi(PH15, PH2, PC13, PI11, PI8);
 #endif
 		ssd1309.Init(); //初始化OLED 
-		ssd1309.ShowString(0, 0, "中景园电子科技", 2);
-		ssd1309.ShowString(0, 3, "1.54' OLED TEST");
-		ssd1309.ShowString(0, 6, "ASCII:");
-		ssd1309.ShowString(63, 6, "CODE:");
 
 		Sys.AddTask(ssd1309routin, 0, 100, 1000, "ssd1309routin");
 	}
