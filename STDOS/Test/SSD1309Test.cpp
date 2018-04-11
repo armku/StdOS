@@ -2,9 +2,11 @@
 #include "Drivers\SSD1106.h"
 #include "Bsp\font.h"
 
-//#define _SSD1309_TEST_H
+#define _SSD1309_TEST_H
 
 #ifdef _SSD1309_TEST_H
+	extern unsigned char BMP1[];
+    extern unsigned char BMP2[];
 	#if 0
 	SSD1309 ssd1309;
 	#else
@@ -56,7 +58,7 @@
     void ssd1309Test()
     {
 		#ifdef STM32F1
-		ssd1309.SetPinSpi(PD6,PD7,PD5,PD4,PD3);
+		ssd1309.SetPinSpi(PA4,PA5,PB12,PA6,PD2);
 		#elif defined STM32F4
 		ssd1309.SetPinSpi(PH15,PH2,PC13,PI11,PI8);
 		#endif
