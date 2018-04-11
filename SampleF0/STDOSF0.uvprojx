@@ -668,11 +668,6 @@
           <GroupName>Device</GroupName>
           <Files>
             <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Port.cpp</FilePath>
@@ -756,6 +751,11 @@
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\I2C.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1633,11 +1633,6 @@
           <GroupName>Device</GroupName>
           <Files>
             <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Port.cpp</FilePath>
@@ -1721,6 +1716,11 @@
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\I2C.cpp</FilePath>
             </File>
           </Files>
         </Group>

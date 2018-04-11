@@ -85,8 +85,8 @@ void ssd1309Test();
 void BspInit()
 {
 	BspPlatformInit();
-	Esp8266Test();
-	ssd1309Test();
+//	Esp8266Test();
+//	ssd1309Test();
 	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");

@@ -405,11 +405,6 @@
               <FilePath>..\User\Bsp\font.c</FilePath>
             </File>
             <File>
-              <FileName>ssd1309bmp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\ssd1309bmp.c</FilePath>
-            </File>
-            <File>
               <FileName>ssd1309font.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
@@ -726,11 +721,6 @@
           <GroupName>Device</GroupName>
           <Files>
             <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Port.cpp</FilePath>
@@ -829,6 +819,11 @@
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\I2C.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1503,11 +1498,6 @@
               <FilePath>..\User\Bsp\font.c</FilePath>
             </File>
             <File>
-              <FileName>ssd1309bmp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\ssd1309bmp.c</FilePath>
-            </File>
-            <File>
               <FileName>ssd1309font.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
@@ -1824,11 +1814,6 @@
           <GroupName>Device</GroupName>
           <Files>
             <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\I2C.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Port.cpp</FilePath>
@@ -1927,6 +1912,11 @@
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\I2C.cpp</FilePath>
             </File>
           </Files>
         </Group>
