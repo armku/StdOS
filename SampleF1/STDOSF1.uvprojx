@@ -778,11 +778,6 @@
               <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
             </File>
             <File>
-              <FileName>nrf24l01.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\nrf24l01.cpp</FilePath>
-            </File>
-            <File>
               <FileName>OCM240128.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\OCM240128.cpp</FilePath>
@@ -1811,11 +1806,6 @@
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>nrf24l01.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\nrf24l01.cpp</FilePath>
             </File>
             <File>
               <FileName>OCM240128.cpp</FileName>
