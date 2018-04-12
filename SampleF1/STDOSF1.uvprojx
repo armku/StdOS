@@ -653,11 +653,6 @@
               <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
             </File>
             <File>
-              <FileName>Environment.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Environment.cpp</FilePath>
-            </File>
-            <File>
               <FileName>TimeSpan.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
@@ -1671,11 +1666,6 @@
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Environment.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Environment.cpp</FilePath>
             </File>
             <File>
               <FileName>TimeSpan.cpp</FileName>
