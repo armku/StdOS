@@ -181,12 +181,3 @@ Version &Version::SetCompile(int buildday)
     this->Build = buildday;
     return  *this;
 }
-
-String Version::ToString()const
-{
-    char *buf = new char[20];
-    snprintf(buf, 100, "%d.%d.%d", this->Major, this->Minor, this->Build);
-    String *ret = new String(buf);
-
-    return  *ret;
-}

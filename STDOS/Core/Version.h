@@ -34,8 +34,6 @@ public:
 	Version& SetCompile(int year, int month, int day);
 	// ÉèÖÃ±àÒëÈÕÆÚ 170325
 	Version& SetCompile(int buildday);
-
-	String ToString() const;
 };
 
 /*
