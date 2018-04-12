@@ -60,8 +60,7 @@ public:
 	// 把字节数组作为变长数据写入到数据流。以压缩整数开头表示长度
 	bool WriteArray(const Buffer& bs);
 
-	//ByteArray ReadArray();
-	String ReadString();
+	//ByteArray ReadArray
 
 	int		ReadByte();
 	uint16_t	ReadUInt16();
