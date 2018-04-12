@@ -228,12 +228,6 @@ bool Stream::WriteArray(const Buffer &bs)
     return false;
 }
 
-//ByteArray Stream::ReadArray(){}
-//String Stream::ReadString()
-//{
-//	return nullptr;
-//}
-
 int Stream::ReadByte()
 {
 	if(this->_Position+1>=this->Length)
@@ -370,15 +364,6 @@ bool MemoryStream::CheckRemain(int count)
 {
     return false;
 }
-
-// 分配指定大小的数据流
-//MemoryStream::MemoryStream(int len )
-//{
-//}
-// 使用缓冲区初始化数据流，支持自动扩容
-//MemoryStream::MemoryStream(void* buf, int len)
-//{
-//}
 
 // 销毁数据流
 MemoryStream::~MemoryStream(){}
