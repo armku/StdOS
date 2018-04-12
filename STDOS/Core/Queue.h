@@ -1,7 +1,6 @@
 #ifndef _Queue_H_
     #define _Queue_H_
-
-    #include "Array.h"
+	#include "Buffer.h"
     // 队列
     // 内有一个缓冲区，游标位置，数据长度。实际有效数据仅占用缓冲区中间部分，头尾都可能有剩余
     class Queue
