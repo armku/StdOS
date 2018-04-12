@@ -776,17 +776,6 @@ bool String::EndsWith(cstring str)const
 		return false;
 }
 
-StringSplit String::Split(const String &sep)const
-{
-	return StringSplit(*this,sep._Arr);
-}
-
-
-StringSplit String::Split(cstring sep)const
-{
-	return StringSplit(*this,sep);
-}
-
 String String::Substring(int start, int len)const
 {
 //	char * ret;
@@ -1008,13 +997,3 @@ int String::Search(cstring str, int len, int startIndex, bool rev)const
 	else
 		return -1;
 }
-
-StringSplit::StringSplit(const String &str, cstring sep): _Str(str){
-
-}
-
-const String StringSplit::Next()
-{
-	return NULL;
-}
-
