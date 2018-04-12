@@ -603,24 +603,9 @@
           <GroupName>Core</GroupName>
           <Files>
             <File>
-              <FileName>Array.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Array.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ByteArray.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>String.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\String.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
@@ -651,11 +636,6 @@
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Environment.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Environment.cpp</FilePath>
             </File>
             <File>
               <FileName>TimeSpan.cpp</FileName>
@@ -893,79 +873,14 @@
           <GroupName>Test</GroupName>
           <Files>
             <File>
-              <FileName>ArrayTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ArrayTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BufferTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\BufferTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DateTimeTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\DateTimeTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\SerialTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FlashTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\FlashTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT24CXXTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AT24CXXTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>ListTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ListTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PortTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PortTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StringTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\StringTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimerTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\TimerTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDogTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>bspkeytest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\bspkeytest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSoloTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DS18B20Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PwmTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1568,24 +1483,9 @@
           <GroupName>Core</GroupName>
           <Files>
             <File>
-              <FileName>Array.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Array.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ByteArray.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>String.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\String.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
@@ -1616,11 +1516,6 @@
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Environment.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Environment.cpp</FilePath>
             </File>
             <File>
               <FileName>TimeSpan.cpp</FileName>
@@ -1858,79 +1753,14 @@
           <GroupName>Test</GroupName>
           <Files>
             <File>
-              <FileName>ArrayTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ArrayTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BufferTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\BufferTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DateTimeTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\DateTimeTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\SerialTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FlashTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\FlashTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT24CXXTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AT24CXXTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>ListTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ListTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PortTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PortTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StringTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\StringTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimerTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\TimerTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDogTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>bspkeytest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\bspkeytest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSoloTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DS18B20Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PwmTest.cpp</FilePath>
             </File>
           </Files>
         </Group>

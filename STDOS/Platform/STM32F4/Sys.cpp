@@ -4,7 +4,6 @@
 #include "TTime.h"
 #include "Task.h"
 #include <string.h>
-#include "Array.h"
 #include "TInterrupt.h"
 #include "SerialPort.h"
 #include "Platform\stm32.h"
@@ -16,7 +15,7 @@ extern "C"
     extern uint32_t __initial_sp;
 }
 
-static String *CPUName;
+static char *CPUName;
 void TSys::OnInit()
 {
     this->Clock = 168000000;
@@ -33,11 +32,11 @@ void TSys::OnInit()
     switch (this->DevID)
     {
         case 0X0413:
-            CPUName = new String("STM32F407ZG");
+            CPUName = "STM32F407ZG";
             this->RAMSize = 192;
             break;
         default:
-            CPUName = new String("δ֪");
+            CPUName = "δ֪";
             this->RAMSize = 0;
             break;
     }
@@ -93,7 +92,7 @@ void TSys::OnShowInfo()const
     debug_printf("STDOS::");
     debug_printf("STM32");
     debug_printf("F103");
-    debug_printf("%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName->GetBuffer(), this->Clock, this->FlashSize, this->RAMSize);
+    debug_printf("%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName, this->Clock, this->FlashSize, this->RAMSize);
     debug_printf("DevID:0x%04X RevID:0x%04X \r\n", this->DevID, this->RevID);
     debug_printf("CPUID:%p", this->CPUID);
     debug_printf(" ARMv7-M");
