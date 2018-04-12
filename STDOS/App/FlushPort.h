@@ -3,12 +3,11 @@
 
 #include "Kernel\Sys.h"
 #include "Device\Port.h"
-#include "Message\DataStore.h"
 
 // 闪烁端口
 // 默认慢闪，Start后快闪一定时间，-1时间表示一直快闪，Stop停止
 // 支持数据操作指令，参数为快闪毫秒数
-class FlushPort : public IDataPort
+class FlushPort 
 {
 private:
 	uint32_t	_tid; //4

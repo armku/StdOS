@@ -5,7 +5,6 @@
 	#include "Device\Spi.h"
 	#include "Net\ITransport.h"
 	//#include "Device\Power.h"
-	//#include "Message\DataStore.h"
 	//#include "APP\FlushPort.h"
 
     #define MAX_RT      0x10 //达到最大重发次数中断标志位
