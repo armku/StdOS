@@ -1,4 +1,3 @@
-#include "ByteArray.h"
 #include "Stream.h"
 
 uint16_t _REV16(uint16_t a1)
@@ -221,7 +220,6 @@ int Stream::ReadArray(Buffer &bs)
     return 0;
 }
 
-//ByteArray Stream::ReadArray(int count){}
 // 把字节数组作为变长数据写入到数据流。以压缩整数开头表示长度
 bool Stream::WriteArray(const Buffer &bs)
 {
