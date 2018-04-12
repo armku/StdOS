@@ -10,7 +10,6 @@ typedef const char*		cstring;
 // 因为格式化输出时，可以用%c输出char，用%s输出char*
 
 class String;
-class Type;
 
 // 根对象
 class Object
@@ -26,27 +25,8 @@ public:
 	//const Type GetType() const;
 };
 
-// 类型
-//class Type
-//{
-//private:
-//	const void* _info;
-
-//	friend class Object;
-
-//	Type();
-
-//public:
-//	int		Size;	// 大小
-//	//String	Name;	// 名称
-
-//	const String Name() const;	// 名称
-//};
-
 // 数组长度
 #define ArrayLength(arr) (int)(sizeof(arr)/sizeof(arr[0]))
-// 数组清零，固定长度
-//#define ArrayZero(arr) memset(arr, 0, sizeof(arr))
 
 int StdPrintf(const char *format, ...); //代替 printf
 
