@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 #include <stddef.h>
-
 #include "Core\Type.h"
 #include "Core\Buffer.h"
 #include "Core\Array.h"
