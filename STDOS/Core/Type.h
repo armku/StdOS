@@ -16,7 +16,7 @@ class Object
 {
 public:
 	// 输出对象的字符串表示方式
-	virtual String& ToStr(String& str) const;
+//	virtual String& ToStr(String& str) const;
 	// 输出对象的字符串表示方式。支持RVO优化
 	virtual String ToString() const;
 	// 显示对象。默认显示ToString

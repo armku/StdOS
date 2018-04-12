@@ -6,10 +6,10 @@ void assert_failed(uint8_t *file, uint32_t line, char *errstr)
     StdPrintf("%s(%d):    %s\n", file, line, errstr);
 }
 
-String &Object::ToStr(String &str)const
-{
-    return str;
-}
+//String &Object::ToStr(String &str)const
+//{
+//    return str;
+//}
 
 String Object::ToString()const
 {
@@ -18,11 +18,11 @@ String Object::ToString()const
 
 void Object::Show(bool newLine)const
 {
-	char bufch[512];
-	String strtmp(bufch,ArrayLength(bufch));
-	strtmp.SetLength(0);
-	this->ToStr(strtmp);	
-	strtmp.Show(newLine);
+//	char bufch[512];
+//	String strtmp(bufch,ArrayLength(bufch));
+//	strtmp.SetLength(0);
+//	this->ToStr(strtmp);	
+//	strtmp.Show(newLine);
 }
 
 //////////////////////////////////////////////////////////////////
