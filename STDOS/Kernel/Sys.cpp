@@ -62,8 +62,9 @@ void TSys::ShowInfo()const
 
 	this->OnShowInfo();
 	StdPrintf("ChipID:");
-	ByteArray baid(this->ID, 12);
-	baid.Show(); StdPrintf("\r\n");
+	Buffer buff((void*)this->ID,12);
+	buff.ShowHex();
+	StdPrintf("\r\n");	
 	
 	StdPrintf("Support: http://www.armku.com\r\n");
 }
