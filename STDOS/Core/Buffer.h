@@ -77,11 +77,6 @@ public:
 	Buffer Sub(int index, int len);
 	const Buffer Sub(int index, int len) const;
 
-	// 显示十六进制数据，指定分隔字符和换行长度
-	String& ToHex(String& str, char sep = 0, int newLine = 0) const;
-	// 显示十六进制数据，指定分隔字符和换行长度
-	String ToHex(char sep = 0, int newLine = 0) const;
-
 	uint16_t	ToUInt16() const;
 	uint32_t	ToUInt32() const;
 	uint64_t	ToUInt64() const;
@@ -90,11 +85,6 @@ public:
 	void Write(uint32_t value, int index = 0);
 	void Write(int value, int index = 0);
 	void Write(uint64_t value, int index = 0);
-
-	// 输出对象的字符串表示方式
-	virtual String& ToStr(String& str) const;
-	// 包装为字符串对象
-	String AsString() const;
 
     explicit operator bool() const { return _Length > 0; }
     bool operator !() const { return _Length == 0; }
@@ -110,21 +100,10 @@ protected:
 	int		_Length;	// 长度 string(8)
 
 	void move(Buffer& rval);
-public:	
-	virtual String ToString() const;
 public:
 	virtual void Show(bool newLine = false) const;
 	virtual void ShowHex(bool newLine = false,char sep='-') const;
 };
 
-// 带引用计数的缓冲区
-class BufferRef : public Buffer
-{
-public:
-	int	Ref	= 1;	// 引用计数
-
-	// 打包一个指针和长度指定的数据区
-	void Set(void* ptr, int len);
-};
 
 #endif
