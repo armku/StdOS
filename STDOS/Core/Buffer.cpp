@@ -277,38 +277,6 @@ const Buffer Buffer::Sub(int index, int len)const
     return Buffer(((uint8_t*)this->_Arr) + index, len);
 }
 
-// 显示十六进制数据，指定分隔字符和换行长度
-//String &Buffer::ToHex(String &str, char sep, int newLine)const
-//{
-//    auto buftmp = this->GetBuffer();
-//    int icnt = 0;
-//    while (this->Length() > icnt)
-//    {
-//        if (icnt)
-//        {
-//            if (newLine <= 0 || icnt != newLine *(icnt / newLine))
-//            {
-//                if (sep)
-//                    str.Concat(sep);
-//            }
-//            else
-//            {
-//                str.Concat((const char*) &"\r\n");
-//            }
-//        }
-//        str.Concat(*buftmp,  - 16);
-//        ++icnt;
-//        ++buftmp;
-//    }
-//    return str;
-//}
-// 显示十六进制数据，指定分隔字符和换行长度
-//String Buffer::ToHex(char sep, int newLine)const
-//{
-//	String ss;
-//	return this->ToHex(ss,sep,newLine);
-//}
-
 uint16_t Buffer::ToUInt16()const
 {
     return 0;
@@ -346,21 +314,6 @@ void Buffer::Write(uint64_t value, int index)
 	((uint64_t*)this->_Arr)[index]=value;
 }
 
-// 输出对象的字符串表示方式
-//String &Buffer::ToStr(String &str)const
-//{
-//	#if 0
-//    return Buffer::ToHex(str, 45, 32);
-//	#else
-//	str[0]='A';
-//	str[1]='B';
-//	str[2]='C';
-//	str[3]='D';
-//	str[4]='D';
-//	str[5]='D';
-//	return str;
-//	#endif
-//}
 static void ShowChar(char c)
 {
 	if(c>=10)
@@ -400,12 +353,6 @@ void Buffer::ShowHex(bool newLine,char sep) const
 		StdPrintf("\r\n");
 	}
 }
-
-// 包装为字符串对象
-//String Buffer::AsString()const
-//{
-//	return String(this->_Arr,this->_Length);
-//}
 
 int Buffer::CompareTo(const Buffer &bs)const
 {

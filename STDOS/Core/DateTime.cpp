@@ -311,9 +311,6 @@ bool operator<=	(const DateTime& left, const DateTime& right)
 	return left.CompareTo(right)<=0;
 }
 
-//String DateTime::ToString() const
-//{
-//}
 void DateTime::Show(bool newLine)const
 {
     StdPrintf("%04d-%02d-%02d %02d:%02d:%02d", this->Year, this->Month, this->Day, this->Hour, this->Minute, this->Second);
