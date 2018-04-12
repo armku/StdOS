@@ -101,8 +101,6 @@ public:
 
 	virtual int Write(uint8_t* data);
 	virtual int Read(uint8_t* data);
-
-	String ToString() const;
 };
 
 #endif

@@ -49,8 +49,6 @@ public:
 	void SetBaudRate(int baudRate = 0);
 
 	virtual void Register(TransportHandler handler, void* param = nullptr);
-	
-	virtual String& ToStr(String& str) const { return str + Name; }
 
 	void OnRxHandler();
 
