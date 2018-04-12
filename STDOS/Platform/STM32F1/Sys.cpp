@@ -4,7 +4,6 @@
 #include "TTime.h"
 #include "Task.h"
 #include <string.h>
-#include "Array.h"
 #include "TInterrupt.h"
 #include "SerialPort.h"
 //#include "_Core.h"
