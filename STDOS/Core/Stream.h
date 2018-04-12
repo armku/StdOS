@@ -1,7 +1,6 @@
 #ifndef _Stream_H_
 #define _Stream_H_
-#include "ByteArray.h"
-
+#include "Buffer.h"
 // 数据流
 // 数据流内有一个缓冲区，游标位置，数据长度。实际有效数据仅占用缓冲区中间部分，头尾都可能有剩余
 class Stream
@@ -56,11 +55,8 @@ public:
 
 	// 从数据流读取变长数据到字节数组。以压缩整数开头表示长度
 	int ReadArray(Buffer& bs);
-	//ByteArray ReadArray(int count);
 	// 把字节数组作为变长数据写入到数据流。以压缩整数开头表示长度
 	bool WriteArray(const Buffer& bs);
-
-	//ByteArray ReadArray
 
 	int		ReadByte();
 	uint16_t	ReadUInt16();
