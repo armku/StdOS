@@ -973,49 +973,14 @@
           <GroupName>Test</GroupName>
           <Files>
             <File>
-              <FileName>BufferTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\BufferTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DateTimeTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\DateTimeTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\SerialTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT24CXXTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AT24CXXTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>ListTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ListTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDogTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PortTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PortTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD1246Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AD1246Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AT45DBTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\AT45DBTest.cpp</FilePath>
             </File>
             <File>
               <FileName>lcd_drTest.cpp</FileName>
@@ -1033,11 +998,6 @@
               <FilePath>..\STDOS\Test\ST7565RTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>TimerTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\TimerTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>W25QXXXTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\W25QXXXTest.cpp</FilePath>
@@ -1046,16 +1006,6 @@
               <FileName>ADS1232Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ADS1232Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ModbusTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StreamTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\StreamTest.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7124Test.cpp</FileName>
@@ -1073,46 +1023,6 @@
               <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>bspkeytest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\bspkeytest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSoloTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitHandleTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\WaitHandleTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BlinkPortTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\BlinkPortTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FlushPortTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\FlushPortTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADCTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ADCTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InvokeTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\InvokeTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PulsePortTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PulsePortTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>OCM240128Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\OCM240128Test.cpp</FilePath>
@@ -1123,24 +1033,9 @@
               <FilePath>..\STDOS\Test\PCF8563Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>GPS_S1216Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\GPS_S1216Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GPS_ATGM332DTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\GPS_ATGM332DTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DS1302Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\DS1302Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PwmTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2113,49 +2008,14 @@
           <GroupName>Test</GroupName>
           <Files>
             <File>
-              <FileName>BufferTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\BufferTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DateTimeTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\DateTimeTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\SerialTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT24CXXTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AT24CXXTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>ListTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ListTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDogTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PortTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PortTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD1246Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AD1246Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AT45DBTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\AT45DBTest.cpp</FilePath>
             </File>
             <File>
               <FileName>lcd_drTest.cpp</FileName>
@@ -2173,11 +2033,6 @@
               <FilePath>..\STDOS\Test\ST7565RTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>TimerTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\TimerTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>W25QXXXTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\W25QXXXTest.cpp</FilePath>
@@ -2186,16 +2041,6 @@
               <FileName>ADS1232Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ADS1232Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ModbusTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StreamTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\StreamTest.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7124Test.cpp</FileName>
@@ -2213,46 +2058,6 @@
               <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>bspkeytest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\bspkeytest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSoloTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitHandleTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\WaitHandleTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BlinkPortTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\BlinkPortTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FlushPortTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\FlushPortTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADCTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ADCTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InvokeTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\InvokeTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PulsePortTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PulsePortTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>OCM240128Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\OCM240128Test.cpp</FilePath>
@@ -2263,24 +2068,9 @@
               <FilePath>..\STDOS\Test\PCF8563Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>GPS_S1216Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\GPS_S1216Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GPS_ATGM332DTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\GPS_ATGM332DTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DS1302Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\DS1302Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PwmTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
