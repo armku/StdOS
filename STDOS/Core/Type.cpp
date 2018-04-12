@@ -27,21 +27,21 @@ void Object::Show(bool newLine)const
 
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
-const Type Object::GetType()const
-{
-    Type ret;
-    ret._info = "Object";
-    ret.Size = 7;
-    return ret;
-}
+//const Type Object::GetType()const
+//{
+//    Type ret;
+//    ret._info = "Object";
+//    ret.Size = 7;
+//    return ret;
+//}
 
-Type::Type()
-{
+//Type::Type()
+//{
 
-}
-// Ãû³Æ
-const String Type::Name()const
-{
-    String ret((cstring)(this->_info), this->Size);
-    return ret;
-}
+//}
+//// Ãû³Æ
+//const String Type::Name()const
+//{
+//    String ret((cstring)(this->_info), this->Size);
+//    return ret;
+//}

@@ -23,25 +23,25 @@ public:
 	// 显示对象。默认显示ToString
 	virtual void Show(bool newLine = false) const;
 
-	const Type GetType() const;
+	//const Type GetType() const;
 };
 
 // 类型
-class Type
-{
-private:
-	const void* _info;
+//class Type
+//{
+//private:
+//	const void* _info;
 
-	friend class Object;
+//	friend class Object;
 
-	Type();
+//	Type();
 
-public:
-	int		Size;	// 大小
-	//String	Name;	// 名称
+//public:
+//	int		Size;	// 大小
+//	//String	Name;	// 名称
 
-	const String Name() const;	// 名称
-};
+//	const String Name() const;	// 名称
+//};
 
 // 数组长度
 #define ArrayLength(arr) (int)(sizeof(arr)/sizeof(arr[0]))
