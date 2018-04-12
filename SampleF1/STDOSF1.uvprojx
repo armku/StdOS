@@ -988,11 +988,6 @@
               <FilePath>..\STDOS\Test\SerialTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>ArrayTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ArrayTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT24CXXTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AT24CXXTest.cpp</FilePath>
@@ -1006,11 +1001,6 @@
               <FileName>WatchDogTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FlashTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\FlashTest.cpp</FilePath>
             </File>
             <File>
               <FileName>PortTest.cpp</FileName>
@@ -1098,11 +1088,6 @@
               <FilePath>..\STDOS\Test\WaitHandleTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>nrf24l01Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\nrf24l01Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>BlinkPortTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\BlinkPortTest.cpp</FilePath>
@@ -1118,39 +1103,9 @@
               <FilePath>..\STDOS\Test\ADCTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>CrcTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\CrcTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DictionaryTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\DictionaryTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EthernetTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\EthernetTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>InvokeTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\InvokeTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IRTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\IRTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>JsonTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\JsonTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MessageTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\MessageTest.cpp</FilePath>
             </File>
             <File>
               <FileName>PulsePortTest.cpp</FileName>
@@ -1186,11 +1141,6 @@
               <FileName>PwmTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PwmTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Esp8266Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\Esp8266Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2178,11 +2128,6 @@
               <FilePath>..\STDOS\Test\SerialTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>ArrayTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ArrayTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT24CXXTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\AT24CXXTest.cpp</FilePath>
@@ -2196,11 +2141,6 @@
               <FileName>WatchDogTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FlashTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\FlashTest.cpp</FilePath>
             </File>
             <File>
               <FileName>PortTest.cpp</FileName>
@@ -2288,11 +2228,6 @@
               <FilePath>..\STDOS\Test\WaitHandleTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>nrf24l01Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\nrf24l01Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>BlinkPortTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\BlinkPortTest.cpp</FilePath>
@@ -2308,39 +2243,9 @@
               <FilePath>..\STDOS\Test\ADCTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>CrcTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\CrcTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DictionaryTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\DictionaryTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EthernetTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\EthernetTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>InvokeTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\InvokeTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IRTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\IRTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>JsonTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\JsonTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MessageTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\MessageTest.cpp</FilePath>
             </File>
             <File>
               <FileName>PulsePortTest.cpp</FileName>
@@ -2376,11 +2281,6 @@
               <FileName>PwmTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PwmTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Esp8266Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\Esp8266Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
