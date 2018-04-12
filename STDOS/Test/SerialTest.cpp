@@ -43,9 +43,7 @@ static void TestSerialTask(void* param)
 	}
 
 	// 串口输出
-	String str = "万家灯火，无声物联！\r\n";
 	debug_printf("向所有串口输出：");
-	str.Show();
 	for(int k=0; k<5; k++)
 	{
 		debug_printf("第 %d 次输出\r\n", k+1);

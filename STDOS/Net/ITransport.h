@@ -69,8 +69,6 @@ public:
 
 	virtual void Set(ITransport* port);
 
-	//virtual const String ToString() const { return String("PackPort"); }
-
 protected:
 	virtual bool OnOpen();
     virtual void OnClose();

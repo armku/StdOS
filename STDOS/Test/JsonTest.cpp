@@ -46,11 +46,9 @@ static void TestRead()
 	debug_printf("score=");	score.Show(true);
 	assert(score.Type() == JsonType::Float, "Type()");
 	float v = score.AsFloat();
-	String s(v);
 	s.Show(true);
 	double v2 = score.AsDouble();
 	//double v2	= 3.1415;
-	String s2(v2);
 	s2.Show(true);
 	assert(score.AsDouble() == 3.14159, "AsFloat()");
 
@@ -77,7 +75,6 @@ static void TestRead()
 	debug_printf("value=");	value.Show(true);
 	assert(value.Type() == JsonType::Float, "Type()");
 	float v3 = value.AsFloat();
-	String s3(v3);
 	s3.Show(true);
 	//assert(value.AsFloat() == 67.89, "AsFloat()");
 	// 必须加上f结尾，说明这是单精度浮点数，否则不想等

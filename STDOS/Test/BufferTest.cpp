@@ -139,9 +139,7 @@ void Buffer::Test()
 	uint8_t bts[]	= { 0xAB, 0x34, 0xfe };
 	Buffer bs4(bts, 3);
 	auto str	= bs4.ToHex('#', 2);
-	assert(str == "AB#34\r\nFE", "String ToHex(char sep = 0, int newLine = 0)");
 	auto str2	= bs4.ToString();
-	assert(str2 == "AB-34-FE", "String ToString()");
 
 	Buffer bs5(cs, sizeof(cs));
 	debug_printf("Buffer(T (&arr)[N]) => %s\r\n", cs);

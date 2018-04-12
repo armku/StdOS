@@ -12,7 +12,7 @@ uint32_t OnUsart3Read(ITransport *transport, Buffer &bs, void *para, void *para2
 }
 void sp3Routin(void * param)
 {
-	auto sp=(SerialPort*)param;
+	
 }
 
 SerialPort sp3(COM3);

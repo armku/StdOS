@@ -31,9 +31,6 @@ void TestNRF24L01()
     // 修改数据，加上系统ID
     //uint8_t* p = tx_buf + 5;
     //Sys.ToHex(p, (uint8_t*)Sys.ID, 6);
-	//String str(tx_buf);
-	//str.SetLength(5);
-	//str.Append(ByteArray(Sys.ID, 6));
 
     //nrf->Timeout = 1000;
     nrf->Channel = 0;
