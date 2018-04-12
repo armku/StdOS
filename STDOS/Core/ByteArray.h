@@ -31,11 +31,6 @@ public:
 
     //friend bool operator==(const ByteArray& bs1, const ByteArray& bs2);
     //friend bool operator!=(const ByteArray& bs1, const ByteArray& bs2);
-
-#if DEBUG
-	static void Test();
-#endif
-
 protected:
 	uint8_t	Arr[0x40];	// ÄÚ²¿»º³åÇø
 
