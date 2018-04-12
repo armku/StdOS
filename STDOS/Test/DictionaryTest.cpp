@@ -61,7 +61,6 @@ void IDictionary::Test()
 
 	// 测试比较器
 	cstring str	= "123456";
-	IDictionary dic2(String::Compare);
 	dic2.Add("test", (void*)str);
 
 	char cs[5];

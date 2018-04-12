@@ -33,7 +33,6 @@ bool OnUdpReceived(UdpSocket* socket, UDP_HEADER* udp, uint8_t* buf, uint32_t le
     //TinyIP::ShowIP(socket->RemoteIP);
 	socket->Remote.Show();
     debug_printf(" with Payload=%d\r\n", len);
-    String((char*)buf, len).Show(true);
 
     return socket->Local.Port == 888;
 }
@@ -77,7 +76,6 @@ bool HttpReceived(TcpSocket* socket, TCP_HEADER* tcp, uint8_t* buf, uint32_t len
     //TinyIP::ShowIP(socket->RemoteIP);
 	socket->Remote.Show();
     debug_printf(" with Payload=%d\r\n", len);
-    String((char*)buf, len).Show(true);
 
     return false;
 }
