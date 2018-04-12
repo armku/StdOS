@@ -628,11 +628,6 @@
               <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
             </File>
             <File>
-              <FileName>Array.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Array.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
@@ -1651,11 +1646,6 @@
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Array.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Array.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
