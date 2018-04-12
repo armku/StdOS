@@ -43,19 +43,6 @@ void Port::Clear()
 {
 	this->_Pin=P0;
 }
-String Port::ToString()const
-{
-    String ret;
-    if (this->_Pin == P0)
-        ret += "P0";
-    else
-    {
-        ret += (this->_Pin >> 4)+'A';
-        ret += ret.Concat(this->_Pin &0x0F, 10);
-    }
-
-    return ret;
-}
 
 OutputPort::OutputPort()
 {

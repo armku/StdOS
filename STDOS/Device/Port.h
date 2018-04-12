@@ -42,8 +42,6 @@ public:
 
     virtual bool Read() const;
 
-	String ToString() const;
-
 protected:
     // ÅäÖÃ¹ı³Ì
     virtual void OnOpen(void* param);
