@@ -1,6 +1,6 @@
 #ifndef __TimeSpan_H__
 #define __TimeSpan_H__
-
+#include <stdint.h>
 // 时间间隔
 class TimeSpan
 {

@@ -1,4 +1,3 @@
-#include "SString.h"
 #include "Environment.h"
 
 TEnvironment::TEnvironment()

@@ -1,5 +1,4 @@
 #include "DateTime.h"
-#include "SString.h"
 #include "Version.h"
 #include <stdio.h>
 

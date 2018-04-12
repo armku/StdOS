@@ -638,11 +638,6 @@
               <FilePath>..\STDOS\Core\Array.cpp</FilePath>
             </File>
             <File>
-              <FileName>String.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\String.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
@@ -1046,11 +1041,6 @@
               <FileName>ST7565RTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ST7565RTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StringTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\StringTest.cpp</FilePath>
             </File>
             <File>
               <FileName>TimerTest.cpp</FileName>
@@ -1838,11 +1828,6 @@
               <FilePath>..\STDOS\Core\Array.cpp</FilePath>
             </File>
             <File>
-              <FileName>String.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\String.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
@@ -2246,11 +2231,6 @@
               <FileName>ST7565RTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ST7565RTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StringTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\StringTest.cpp</FilePath>
             </File>
             <File>
               <FileName>TimerTest.cpp</FileName>

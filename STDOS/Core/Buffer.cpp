@@ -1,9 +1,5 @@
 #include <string.h>
-#include "SString.h"
 #include "Buffer.h"
-
-//static char bufferName[]="Buffer"; 
-
 
 // 打包一个指针和长度指定的数据区
 Buffer::Buffer(void *ptr, int len)

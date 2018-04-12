@@ -1,6 +1,6 @@
 #ifndef __Environment_H__
 #define __Environment_H__
-
+#include <stdint.h>
 // 环境变量
 class TEnvironment
 {

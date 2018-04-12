@@ -1,4 +1,3 @@
-#include "SString.h"
 #include "TimeSpan.h"
 
 TimeSpan::TimeSpan(int64_t ms)
