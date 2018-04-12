@@ -2,7 +2,6 @@
 #include "Version.h"
 #include <stdio.h>
 
-// IDA OK
 Version::Version()
 {
     this->Major = 0;
@@ -16,7 +15,7 @@ Version::Version(int value)
     this->Minor = (value >> 16) &0xff;
     this->Build = (value) &0xffff;
 }
-//IDA OK
+
 Version::Version(int major, int minor, int build)
 {
     this->Major = major;
@@ -27,7 +26,7 @@ Version::Version(int major, int minor, int build)
 		this->SetCompile(build);
 	}
 }
-//IDA OK
+
 Version::Version(const Version &ver)
 {
     this->Major = ver.Major;
