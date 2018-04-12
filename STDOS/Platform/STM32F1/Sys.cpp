@@ -16,7 +16,7 @@ extern "C"
     extern uint32_t __heap_limit;
     extern uint32_t __initial_sp;
 }
-static String *CPUName;
+static char *CPUName;
 void TSys::OnInit()
 {
     this->Clock = 72000000;
@@ -33,27 +33,27 @@ void TSys::OnInit()
     switch (this->DevID)
     {
         case 0X0307:
-            CPUName = new String("STM32F103RD");
+            CPUName = "STM32F103RD";
             this->RAMSize = 64;
             break;
         case 0x0410:
-            CPUName = new String("STM32F103C8");
+            CPUName = "STM32F103C8";
             this->RAMSize = 20;
             break;
         case 0X0414:
-            CPUName = new String("STM32F103ZE");
+            CPUName = "STM32F103ZE";
             this->RAMSize = 64;
             break;
         case 0X0418:
-            CPUName = new String("STM32F105VC");
+            CPUName = "STM32F105VC";
             this->RAMSize = 64;
             break;
         case 0X0430:
-            CPUName = new String("STM32F103VG");
+            CPUName = "STM32F103VG";
             this->RAMSize = 768;
             break;
         default:
-            CPUName = new String("δ֪");
+            CPUName = "δ֪";
             this->RAMSize = 0;
             break;
     }
@@ -107,7 +107,7 @@ void TSys::OnShowInfo()const
     debug_printf("STDOS::");
     debug_printf("STM32");
     debug_printf("F103");
-    debug_printf("%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName->GetBuffer(), this->Clock, this->FlashSize, this->RAMSize);
+    debug_printf("%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName, this->Clock, this->FlashSize, this->RAMSize);
     debug_printf("DevID:0x%04X RevID:0x%04X \r\n", this->DevID, this->RevID);
     debug_printf("CPUID:%p", this->CPUID);
     debug_printf(" ARMv7-M");
