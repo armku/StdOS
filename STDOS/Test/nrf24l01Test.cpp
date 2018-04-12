@@ -3,41 +3,17 @@
 //#define _NRF24L01_TEST_H
 #ifdef _NRF24L01_TEST_H
 
-extern NRF24L01* Create2401();
-
-//const char tx_buf[] = "It's 0123456789AB Time:";
-
 NRF24L01* nrf;
 
 void OnSend(void* param)
 {
-	// 最后4个字节修改为秒数
-	// 大概4.86%的误差
-    //uint32_t s = _REV(Sys.Ms() >> 10);
-	String str("It's ");
-	//str.SetLength(str.Length() - 8);
-	//str.Append(s, 16, 8);
-	str += Buffer(Sys.ID, 12);
-	str += " Time:";
-	str += Sys.Seconds();
-
-    //nrf->SetMode(false);
-    if(!nrf->Write(str.GetBytes()))
-    {
-        debug_printf ("Test Send Error 0x%02x\r\n", nrf->Status);
-        nrf->ShowStatus();
-    }
-    //nrf->SetMode(true);
+	
 }
 
 void OnReceive(void* param)
 {
     ByteArray bs;
-	uint32_t len = nrf->Read(bs);
-    if(len)
-    {
-		bs.Show(true);
-    }
+	bs.Show(true);
 }
 
 uint32_t OnReceive(ITransport* transport, Buffer& bs, void* param, void* param2)
@@ -59,7 +35,6 @@ void TestNRF24L01()
 	//str.SetLength(5);
 	//str.Append(ByteArray(Sys.ID, 6));
 
-    nrf = Create2401();
     //nrf->Timeout = 1000;
     nrf->Channel = 0;
     nrf->AutoAnswer = false;
