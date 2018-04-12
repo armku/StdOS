@@ -6,7 +6,6 @@
 #include "Core\Type.h"
 #include "Core\Buffer.h"
 #include "Core\Array.h"
-#include "Core\ByteArray.h"
 #include "Core\Stream.h"
 #include "Core\DateTime.h"
 #include "Core\Version.h"
