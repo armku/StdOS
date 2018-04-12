@@ -84,10 +84,6 @@ bool operator<=	(const TimeSpan& left, const TimeSpan& right)
 	return false;
 }
 
-String TimeSpan::ToString() const
-{
-	return "";
-}
 void TimeSpan::Show(bool newLine) const
 {
 

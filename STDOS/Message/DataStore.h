@@ -89,8 +89,6 @@ public:
 protected:
 	virtual int OnWrite(uint8_t data);
 	virtual uint8_t OnRead();
-
-	String ToString() const;
 };
 
 // 数据输入口
