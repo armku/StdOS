@@ -628,11 +628,6 @@
               <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
             </File>
             <File>
-              <FileName>ByteArray.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Array.cpp</FilePath>
@@ -1656,11 +1651,6 @@
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ByteArray.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\ByteArray.cpp</FilePath>
             </File>
             <File>
               <FileName>Array.cpp</FileName>
