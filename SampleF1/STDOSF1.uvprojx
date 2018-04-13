@@ -790,16 +790,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>ModBus</GroupName>
-          <Files>
-            <File>
-              <FileName>Modbus.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Modbus\Modbus.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
@@ -1796,16 +1786,6 @@
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\I2C.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>ModBus</GroupName>
-          <Files>
-            <File>
-              <FileName>Modbus.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Modbus\Modbus.cpp</FilePath>
             </File>
           </Files>
         </Group>
