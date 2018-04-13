@@ -56,27 +56,4 @@ protected:
 	virtual uint32_t OnReceive(Buffer& bs, void* param);
 };
 
-// 数据口包装
-class PackPort : public ITransport
-{
-private:
-
-public:
-	ITransport*	Port;	// 传输口
-
-	PackPort();
-	virtual ~PackPort();
-
-	virtual void Set(ITransport* port);
-
-protected:
-	virtual bool OnOpen();
-    virtual void OnClose();
-
-    virtual bool OnWrite(const Buffer& bs);
-	virtual uint32_t OnRead(Buffer& bs);
-
-	static uint32_t OnPortReceive(ITransport* sender, Buffer& bs, void* param, void* param2);
-};
-
 #endif
