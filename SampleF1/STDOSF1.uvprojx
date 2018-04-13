@@ -848,11 +848,6 @@
               <FilePath>..\STDOS\Platform\STM32F1\Port.cpp</FilePath>
             </File>
             <File>
-              <FileName>Pwm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\Pwm.cpp</FilePath>
-            </File>
-            <File>
               <FileName>RTC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\RTC.cpp</FilePath>
@@ -1836,11 +1831,6 @@
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pwm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\Pwm.cpp</FilePath>
             </File>
             <File>
               <FileName>RTC.cpp</FileName>
