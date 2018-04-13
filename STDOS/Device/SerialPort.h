@@ -35,10 +35,7 @@ public:
 
 	SerialPort();
 	SerialPort(COM index, int baudRate = 0);
-
-	// 析构时自动关闭
-	virtual ~SerialPort();
-
+	
 	void Set(COM index, int baudRate = 0);
 	void Set(uint8_t dataBits, uint8_t parity, uint8_t stopBits);
 

@@ -40,15 +40,10 @@ protected:
 
 public:
 	static const uint8_t	TimerCount;	// 定时器个数
-
-	static Timer* Create(uint8_t index = 0xFF);	// 创建指定索引的定时器，如果已有则直接返回，默认0xFF表示随机分配
-
 private:
 	void OnInit();
 	void OnOpen();
 	void OnClose();
-
-	static const void* GetTimer(uint8_t idx);
 };
 
 #endif

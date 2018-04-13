@@ -12,15 +12,6 @@ SerialPort::SerialPort(COM index, int baudRate)
     this->Set(index,baudRate);    
 }
 
-// 析构时自动关闭
-SerialPort::~SerialPort()
-{
-    if (RS485)
-    {
-        delete RS485;
-    }
-    RS485 = NULL;
-}
 void SerialPort::Set(COM index, int baudRate)
 {
     this->Index = index;
