@@ -6,7 +6,6 @@
 #include "Core\Type.h"
 #include "Core\Buffer.h"
 #include "Core\DateTime.h"
-#include "Core\Version.h"
 #include "Core\List.h"
 #include "Core\Delegate.h"
 
