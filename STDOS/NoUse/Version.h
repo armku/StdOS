@@ -1,0 +1,43 @@
+#ifndef __Version_H__
+#define __Version_H__
+
+// 版本
+class Version
+{
+public:
+	uint8_t	Major;	// 主版本
+	uint8_t	Minor;	// 次版本
+	short	Build;	// 编译时间。2000年以来天数
+
+	Version();
+	Version(int value);
+	Version(int major, int minor, int build);
+	Version(const Version& ver);
+	Version(Version&& ver);
+
+    Version& operator=(const Version& ver);
+
+	int ToValue() const;
+	operator int() const { return ToValue(); }
+
+	int CompareTo(const Version& value) const;
+    friend bool operator==	(const Version& left, const Version& right);
+    friend bool operator!=	(const Version& left, const Version& right);
+    friend bool operator>	(const Version& left, const Version& right);
+    friend bool operator<	(const Version& left, const Version& right);
+    friend bool operator>=	(const Version& left, const Version& right);
+    friend bool operator<=	(const Version& left, const Version& right);
+
+	// 根据版本号反推编译时间。
+	DateTime Compile() const;
+	// 设置编译日期
+	Version& SetCompile(int year, int month, int day);
+	// 设置编译日期 170325
+	Version& SetCompile(int buildday);
+};
+
+/*
+主次版本一般最大只有几十，绝大多数时候是个位数，不需要太大。
+*/
+
+#endif
