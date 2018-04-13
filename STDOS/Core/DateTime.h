@@ -49,12 +49,7 @@ public:
 	DateTime AddMinutes(int value) const;
 	DateTime AddSeconds(int value) const;
 	DateTime AddMilliseconds(int64_t value) const;
-	//DateTime Add(const TimeSpan& value) const;
-
-	//DateTime operator+(const TimeSpan& value);
-	//DateTime operator-(const TimeSpan& value);
-    //friend TimeSpan operator-(const DateTime& left, const DateTime& right);
-
+	
 	// 时间比较
 	int CompareTo(const DateTime& value) const;
     friend bool operator==	(const DateTime& left, const DateTime& right);
