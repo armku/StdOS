@@ -44,7 +44,7 @@ void OnUsartReceive(uint16_t num, void *param)
         if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_RXNE) != RESET)
         {
             ch = USART_ReceiveData(g_Uart_Ports[sp->Index]);
-			sp->Rx.Enqueue(ch);
+			sp->Rxx.Enqueue(ch);
         }
 		if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_IDLE) == SET)
         //数据帧接收完毕
@@ -55,7 +55,7 @@ void OnUsartReceive(uint16_t num, void *param)
 		/* 处理发送缓冲区空中断 */
 		if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_TXE) != RESET)
 		{
-			if (sp->Tx.Empty())
+			if (sp->Txx.Empty())
 			{
 				/* 发送缓冲区的数据已取完时， 禁止发送缓冲区空中断 （注意：此时最后1个数据还未真正发送完毕）*/
 				USART_ITConfig(g_Uart_Ports[sp->Index], USART_IT_TXE, DISABLE);
@@ -65,14 +65,14 @@ void OnUsartReceive(uint16_t num, void *param)
 			else
 			{
 				/* 从发送FIFO取1个字节写入串口发送数据寄存器 */
-				USART_SendData(g_Uart_Ports[sp->Index], sp->Tx.Dequeue());
+				USART_SendData(g_Uart_Ports[sp->Index], sp->Txx.Dequeue());
 			}
 
 		}
 		/* 数据bit位全部发送完毕的中断 */
 		else if (USART_GetITStatus(g_Uart_Ports[sp->Index], USART_IT_TC) != RESET)
 		{
-			if (sp->Tx.Empty())
+			if (sp->Txx.Empty())
 			{
 				/* 如果发送FIFO的数据全部发送完毕，禁止数据发送完毕中断 */
 				USART_ITConfig(g_Uart_Ports[sp->Index], USART_IT_TC, DISABLE);
@@ -82,7 +82,7 @@ void OnUsartReceive(uint16_t num, void *param)
 				//            {
 				//                _pUart->SendOver();
 				//            }
-				sp->Tx.Clear();			
+				sp->Txx.Clear();			
 				if(sp->RS485)
 				{
 					*sp->RS485=0;
@@ -92,7 +92,7 @@ void OnUsartReceive(uint16_t num, void *param)
 			{
 				/* 正常情况下，不会进入此分支 */
 				/* 如果发送FIFO的数据还未完毕，则从发送FIFO取1个数据写入发送数据寄存器 */
-				USART_SendData(g_Uart_Ports[sp->Index], sp->Tx.Dequeue());
+				USART_SendData(g_Uart_Ports[sp->Index], sp->Txx.Dequeue());
 			}
 		}
     }
@@ -300,7 +300,7 @@ uint32_t SerialPort::OnRead(Buffer &bs)
     // 轮询接收寄存器，收到数据则放入缓冲区
     if (USART_GetFlagStatus(g_Uart_Ports[this->Index], USART_FLAG_RXNE) != RESET)
     {
-        this->Rx.Enqueue((uint8_t)USART_ReceiveData(g_Uart_Ports[this->Index]));
+        this->Rxx.Enqueue((uint8_t)USART_ReceiveData(g_Uart_Ports[this->Index]));
     }
     return bs.Length();
 }

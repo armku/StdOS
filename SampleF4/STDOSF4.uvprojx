@@ -676,24 +676,9 @@
               <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
             </File>
             <File>
-              <FileName>Stream.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Type.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Version.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Version.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimeSpan.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -869,11 +854,6 @@
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pwm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Pwm.cpp</FilePath>
             </File>
             <File>
               <FileName>RTC.cpp</FileName>
@@ -1679,24 +1659,9 @@
               <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
             </File>
             <File>
-              <FileName>Stream.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Type.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Core\Type.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Version.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Version.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimeSpan.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\TimeSpan.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1872,11 +1837,6 @@
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pwm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Pwm.cpp</FilePath>
             </File>
             <File>
               <FileName>RTC.cpp</FileName>

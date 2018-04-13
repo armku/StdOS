@@ -408,10 +408,6 @@ void Timer::ClockCmd(int idx, bool state)
             break;
     }
 }
-const void *Timer::GetTimer(uint8_t idx)
-{
-    return nullptr;
-}
 
 void Timer::OnHandler(uint16_t num, void *param)
 {
@@ -420,46 +416,6 @@ void Timer::OnHandler(uint16_t num, void *param)
         timer->OnInterrupt();
 }
 /////////////////////////////////以下为添加////////////////////
-static TIM_TypeDef *const g_Timers[] = TIMS;
-const uint8_t Timer::TimerCount = ArrayLength(g_Timers);
-extern Timer **Timers; // 已经实例化的定时器对象
-// 创建指定索引的定时器，如果已有则直接返回，默认0xFF表示随机分配
-Timer *Timer::Create(uint8_t index)
-{
-    // 特殊处理随机分配
-    if (index == 0xFF)
-    {
-        // 初始化静态数组
-        if (!Timers)
-        {
-            Timers = new Timer *[TimerCount];
-            #if 0
-                ArrayZero2(Timers, TimerCount);
-            #endif 
-        }
-
-        // 找到第一个可用的位置，没有被使用，并且该位置定时器存在
-        uint8_t i = 0;
-        for (; i < TimerCount && (Timers[i] || !g_Timers[i]); i++)
-            ;
-
-        if (i >= TimerCount)
-        {
-            debug_printf("Timer::Create 失败！没有空闲定时器可用！\r\n");
-            return NULL;
-        }
-
-        index = i;
-    }
-
-    assert_param(index < TimerCount);
-
-    if (Timers[index])
-        return Timers[index];
-    else
-        return new Timer((TIMER)index);
-}
-
 void Timer::Register(const Delegate < Timer & >  &dlg)
 {
     this->OnTick = dlg;
