@@ -124,17 +124,3 @@ void TSys::Reset()const
 {
     NVIC_SystemReset();
 }
-/////////////////////////////////////////////////////////////////////////////
-SmartIRQ::SmartIRQ(bool enable)
-{
-    _state = __get_PRIMASK();
-    if (enable)
-        __enable_irq();
-    else
-        __disable_irq();
-}
-
-SmartIRQ::~SmartIRQ()
-{
-    __set_PRIMASK(_state);
-}

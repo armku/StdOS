@@ -127,23 +127,8 @@ public:
 	uint16_t	Checksum;	// 校验
 };
 
-void EnterCritical();
-void ExitCritical();
-
 uint32_t _REV(uint32_t value);
 uint16_t _REV16(uint16_t value);
-
-// 智能IRQ，初始化时备份，销毁时还原
-// SmartIRQ相当霸道，它直接关闭所有中断，再也没有别的任务可以跟当前任务争夺MCU
-class SmartIRQ
-{
-public:
-	SmartIRQ(bool enable = false);
-	~SmartIRQ();
-
-private:
-	uint32_t _state;
-};
 
 // 编译信息兼容性处理
 #ifndef __BUILD_DATE__

@@ -1,10 +1,5 @@
 #include "Queue.h"
-void EnterCritical()
-{
-}
-void ExitCritical()
-{
-}
+
 Queue::Queue()
 {
 	this->pBuf = 0;
