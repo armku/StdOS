@@ -41,7 +41,7 @@ DateTime::DateTime(const DateTime &value)
 }
 DateTime::DateTime(DateTime&& value)
 {
-  //?
+  
 }
 
 DateTime &DateTime::operator = (int seconds)
@@ -54,9 +54,6 @@ DateTime &DateTime::operator = (const DateTime &value)
 {
 	if ( *this != value )
   {
-//     this->ToArray((DateTime *)&v4);
-//    this->ToArray((DateTime *)&v5);
-//    Buffer::operator=(&v5, &v4);
   }
     return  *this;
 }
@@ -326,10 +323,3 @@ void DateTime::Init()
     this->Second = 0;
     this->Ms = 0;
 }
-//Buffer DateTime::ToArray()
-//{
-//}
-//const Buffer DateTime::ToArray() const
-//{
-//	return Buffer(this, *this, 10);
-//}
