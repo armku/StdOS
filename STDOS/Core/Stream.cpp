@@ -18,7 +18,7 @@ void Stream::Init(void *buf, int len)
 {
     if (!buf)
     {
-        //assert_failed2("buf,%s",__FILE__);
+       
     }
 
     this->_Buffer = (uint8_t*)buf;
@@ -40,11 +40,10 @@ bool Stream::CheckRemain(int count)
     {
         if (this->_Buffer)
         {
-            //debug_printf("(%d - %d) = %d  %d \r\n",this);
+            
         }
         else
         {
-            //assert_failed2((const char *)dword_2AC, __FILE__, 0x3Fu);
             return false;
         }
         return false;
@@ -102,7 +101,6 @@ bool Stream::SetPosition(int p)
     }
     else
     {
-        //debug_printf((const char *)sub_2F4);
         return false;
     }
 }

@@ -207,26 +207,6 @@ DateTime DateTime::AddMilliseconds(int64_t value) const
 	ret.ParseMs(ret.TotalMs()+value);
 	return ret;
 }
-//DateTime DateTime::Add(const TimeSpan& value) const
-//{
-//  //?  
-//  return *this;
-//}
-//DateTime DateTime::operator+(const TimeSpan& value)
-//{
-//	//?  
-//  return *this;
-//}
-//DateTime DateTime::operator-(const TimeSpan& value)
-//{
-//	//?  
-//  return *this;
-//}
-//TimeSpan DateTime::operator-(const DateTime& left, const DateTime& right)
-//{
-//	//?  
-//  return *this;
-//}
 int DateTime::CompareTo(const DateTime& value) const
 {
 	int ret=0;

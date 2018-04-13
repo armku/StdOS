@@ -50,11 +50,10 @@ uint8_t Queue::Dequeue()
 	if (this->_size)
 	{
 		this->_size--;
-		//return 0;
 	}
 	else
 	{
-		//return  - 1;
+		
 	}
 	return ret;
 }

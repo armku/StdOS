@@ -18,11 +18,7 @@ Buffer::Buffer(Buffer && rval)
 Buffer &Buffer::operator = (const Buffer &rhs)
 {
     int len = rhs.Length();
-    //if (!(*(int(__fastcall **)(Buffer *, int))(*(_DWORD*)pthis + 12))(this, len))
-    {
-        //assert_failed2((const char*)dword_44C, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x29u); 
-            //debug_printf("Error: Buffer copy: Buffer length mismath src: %d ,dst: %d \n", rhs._Length, this->_Length);
-    }
+    
     this->Copy(rhs, 0);
     return  *this;
 }
@@ -60,8 +56,7 @@ bool Buffer::SetLength(int len)
 // 设置指定位置的值，长度不足时自动扩容
 bool Buffer::SetAt(int index, uint8_t value)
 {
-	//if ( this->_Length > index || (*(int (__fastcall **)(_DWORD, _DWORD))(*(_DWORD *)this + 12))(this, index + 1) )
-    if (this->_Length > index || this->_Arr)
+	if (this->_Length > index || this->_Arr)
     {
         this->_Arr[index] = value;
         return true;
@@ -77,7 +72,6 @@ uint8_t &Buffer::operator[](int i)
 {
 	if ( i < 0 || this->_Length <= i )
 	{
-		//assert_failed2((const char *)dword_4B0, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x54u);//debug_printf("Error: [] length error");
 	}
     return ((uint8_t*)(this->_Arr))[i];
 }
@@ -87,7 +81,7 @@ uint8_t Buffer::operator[](int i)const
 {
 	if(i<0||this->_Length<=i)
 	{
-		//assert_failed2((const char *)dword_4B0, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x54u);
+		
 	}
     return ((uint8_t*)this->_Arr)[i];
 }
@@ -100,8 +94,7 @@ void Buffer::Copy(void *dest, const void *source, int len)
 
 void Buffer::Zero(void *dest, int len)
 {
-	//memclr(dest,len);
-    for (int i = 0; i < len; i++)
+	for (int i = 0; i < len; i++)
     {
         ((uint8_t*)dest)[i] = 0;
     }
@@ -118,11 +111,8 @@ int Buffer::Copy(int destIndex, const void *src, int len)
     int copylen = this->_Length - destIndex;
     if (len >= 0)
     {
-        // if ( len > copylen && !(*(int (__fastcall **)(Buffer *, int))(*(_DWORD *)this + 12))(this, destIndex + len) )
         if (len > copylen)
         {
-            //debug_printf("Buffer::Copy (0x%p, %d) <= (%d, 0x%p, %d) \r\n", *(_QWORD *)((char *)pthis + 4), pdestIndex);
-            //assert_failed2((const char *)dword_24C, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x95u);
             len = copylen;
         }
     }
@@ -130,13 +120,6 @@ int Buffer::Copy(int destIndex, const void *src, int len)
     {
         if (copylen <= 0)
         {
-            //      debug_printf(
-            //        "Buffer::Copy (0x%p, %d) <= (%d, 0x%p, %d) \r\n",
-            //        *(_QWORD *)((char *)this + 4),
-            //        destIndex,
-            //        src,
-            //        len);
-            //      assert_failed2((const char *)dword_220, "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0x87u);
             return 0;
         }
         len = this->_Length - destIndex;
@@ -243,7 +226,7 @@ Buffer Buffer::Sub(int index, int len)
 {
     if (index < 0)
     {
-        //assert_failed2("index >= 0", "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0xF0u);
+        
     }
     if (len < 0)
     {
@@ -251,11 +234,11 @@ Buffer Buffer::Sub(int index, int len)
     }
     if (index + len > this->_Length)
     {
-        //debug_printf("Buffer::Sub (%d, %d) > %d \r\n", index, len, this->_Length);
+        
     }
     if (index + len > this->_Length)
     {
-        //assert_failed2("index + len <= _Length", "E:\\Smart\\SmartOS\\Core\\Buffer.cpp", 0xF6u);
+        
     }
     return Buffer(((uint8_t*)this->_Arr) + index, len);
 }
@@ -302,7 +285,6 @@ void Buffer::Write(uint32_t value, int index)
 }
 void Buffer::Write(int value, int index)
 {
-	//(*(int (__cdecl **)(Buffer *, int, int *))(*(_DWORD *)this + 16))(this, index, &pvalue);
 	((int*)this->_Arr)[index]=value;
 }
 void Buffer::Write(uint64_t value, int index)

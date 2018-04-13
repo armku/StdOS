@@ -103,5 +103,4 @@ public:
 	virtual void ShowHex(bool newLine = false,char sep='-') const;
 };
 
-
 #endif

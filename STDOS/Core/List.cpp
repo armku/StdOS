@@ -158,8 +158,7 @@ bool IList::CheckCapacity(int count)
 					 operator delete[](this->_Arr);
 			}
 			this->_Arr=(void**)parrnew;
-			this->_Capacity=i;
-			
+			this->_Capacity=i;			
 			
 			return true;
 		}
