@@ -5,12 +5,8 @@ ITransport::ITransport()
 {
 	this->Opening=false;
 	this->Opened=false;
-	this->MinSize=1;
-	this->MaxSize=100;
 	this->_handler=nullptr;
 }
-// 析构函数确保关闭
-ITransport::~ITransport(){}
 // 打开传输口
 bool ITransport::Open()
 {

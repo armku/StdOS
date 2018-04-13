@@ -14,19 +14,13 @@ class ITransport
 {
 private:
 	TransportHandler _handler;
-	void* _param;
 
 public:
 	bool Opening;	// 是否正在打开
     bool Opened;    // 是否打开
 
-	uint16_t	MinSize;	// 数据包最小大小
-	uint16_t	MaxSize;	// 数据包最大大小
-
 	// 初始化
 	ITransport();
-	// 析构函数确保关闭
-	virtual ~ITransport();
 
 	// 打开传输口
 	bool Open();
@@ -48,10 +42,7 @@ protected:
 	virtual bool OnWrite(const Buffer& bs) = 0;
 	virtual bool OnWriteEx(const Buffer& bs, const void* opt);
 	virtual uint32_t OnRead(Buffer& bs) = 0;
-
-	// 是否有回调函数
-	bool HasHandler() { return _handler != nullptr; }
-
+	
 	// 引发数据到达事件
 	virtual uint32_t OnReceive(Buffer& bs, void* param);
 };
