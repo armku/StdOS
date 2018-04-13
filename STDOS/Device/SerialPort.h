@@ -30,8 +30,8 @@ public:
 	void*	State;
 
 	// ÊÕ·¢»º³åÇø
-	Queue	Tx;
-	Queue	Rx;
+	Queue	Txx;
+	Queue	Rxx;
 
 	SerialPort();
 	SerialPort(COM index, int baudRate = 0);

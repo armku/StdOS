@@ -53,9 +53,9 @@ void SerialPort::Set(uint8_t dataBits, uint8_t parity, uint8_t stopBits)
 bool SerialPort::Flush(int times)
 {
   this->Set485(true);
-  while ( (!this->Tx.Empty()) && times > 0 )
+  while ( (!this->Txx.Empty()) && times > 0 )
   {
-    times = this->SendData(this->Tx.Dequeue(), times);
+    times = this->SendData(this->Txx.Dequeue(), times);
   }
   this->Set485(false);
   return times > 0;
@@ -90,8 +90,8 @@ SerialPort *SerialPort::GetMessagePort()
 		isInFPutc = true;
 		
 		printf_sp=new SerialPort((COM)Sys.MessagePort);
-		printf_sp->Tx.SetBuf(com1tx,ArrayLength(com1tx));
-		printf_sp->Rx.SetBuf(com1rx,ArrayLength(com1rx));
+		printf_sp->Txx.SetBuf(com1tx,ArrayLength(com1tx));
+		printf_sp->Rxx.SetBuf(com1rx,ArrayLength(com1rx));
 		printf_sp->Register(OnUsart1Read123);
 		printf_sp->Open();
 		
@@ -109,7 +109,7 @@ bool SerialPort::OnWrite(const Buffer& bs)
 	if(bs.Length())
 	{	
 		TInterrupt::GlobalDisable();
-		this->Tx.Write(bs);
+		this->Txx.Write(bs);
 		TInterrupt::GlobalEnable();
 		this->Set485(true);
 		this->OnWrite2();
@@ -136,7 +136,7 @@ void SerialPort::ReceiveTask()
 {
 	char buf[512];
 	Buffer bs(buf,ArrayLength(buf));
-	this->Rx.Read(bs);
+	this->Rxx.Read(bs);
 	this->OnReceive(bs,this); 
 	((Task*)(this->_task))->Set(false,0);
 }
