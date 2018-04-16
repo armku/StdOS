@@ -2,78 +2,34 @@
 此文件需要优化掉
  */
 #include "TTime.h"
-#include "Device\Timer.h"
 //#include "_Core.h"
 #include "Platform\stm32.h"
+#include "BspPlatform\BspPlatform.h"
 
-extern Timer *timerTick;
-extern Delegate < Timer & > abc;
 extern int gTicks; //
-void timTickrefesh(void *param);
 void TTime::Init()
 {
     // 初始化为输出
     this->Index = 5;
 
     gTicks = (Sys.Clock >> 3) / 0xF4240u;
-
-    timerTick = new Timer((TIMER)this->Index);
-    abc.Bind(timTickrefesh);
-    timerTick->Register(abc);
-    timerTick->Open();
-    //timerTick->SetFrequency(1000);
-    //        timer2->Config();
-   
+    
     SysTick_Config(9000); //配置SysTick tick is 9ms	9000
 	SysTick->CTRL  = SysTick_CTRL_ENABLE_Msk;                    /* Enable SysTick IRQ and SysTick Timer */
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
     GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); //关闭jtag，保留swd	
-    NVIC_SetPriority(SysTick_IRQn, 0);
-    switch (this->Index)
-    {
-        case 2:
-            NVIC_SetPriority(TIM3_IRQn, 0);
-            break;
-        case 5:
-			#ifndef STM32F10X_MD
-            NVIC_SetPriority(TIM6_IRQn, 0);
-			#endif
-            break;
-        case 6:
-			#ifndef STM32F10X_MD
-            NVIC_SetPriority(TIM7_IRQn, 0);
-			#endif
-            break;
-        default:
-            break;
-    }
 }
 
 // 当前滴答时钟
 uint32_t TTime::CurrentTicks()const
 {
-    return SysTick->LOAD - SysTick->VAL;
+    return CurrentTicks1();
 }
 
 // 当前毫秒数 计数值2000
 uint64_t TTime::Current()const
-{
-    __IO uint16_t ms = 0;
-    switch (this->Index)
-    {
-        case 2:
-            ms = (TIM3->CNT) >> 1;
-            break;
-        case 5:
-            ms = (TIM6->CNT) >> 1;
-            break;
-        case 6:
-            ms = (TIM7->CNT) >> 1;
-            break;
-        default:
-            break;
-    }
-    return this->Milliseconds + ms;
+{    
+    return this->Milliseconds + CurrentTick();
 }
 
 //us延时，100us以下精确

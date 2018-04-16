@@ -7,8 +7,6 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "TTime.h"
 #include "Task.h"
 #include <string.h>
-#include "TInterrupt.h"
-#include "SerialPort.h"
 #include "Sys.h"
 #include "stdarg.h"
 
@@ -29,12 +27,10 @@ TSys::TSys()
 	this->CystalClock = 8;
 	this->Clock = 168;
 #endif 
-	this->MessagePort = COM1;
-
+	
 	this->Config = &g_Config;
 	this->OnInit();
 
-	this->MessagePort = COM1;
 	this->Name = "stdos";
 	this->Company = "armku";
 	this->Code = 0x0201;
@@ -43,7 +39,6 @@ TSys::TSys()
 	this->RevID = 0x00;
 	this->CPUID = 0x00;
 
-	Interrupt.Init();
 	this->FlashSize = 0x01;
 	this->RAMSize = 0x01;
 	this->Started = false;
@@ -217,7 +212,7 @@ void TSys::Start()
 	Task::Scheduler()->Start();
 }
 #include <stdio.h>
-/////////////////////////////////////////////////////////////////////////////
+#include "BspPlatform\BspPlatform.h"
 /////////////////////////////////////////////////////////////////////////////
 int StdPrintf(const char *format, ...)
 {
@@ -230,7 +225,9 @@ int StdPrintf(const char *format, ...)
 	va_end(args);
 
 	Buffer bs(sprint_buf, n);
-	SerialPort::GetMessagePort()->Write(bs);
+	Txx1.Write(bs);
+	com3send();
+	
 
 	return n;
 }

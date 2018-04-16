@@ -152,23 +152,6 @@ InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
 	}
 }
 
-InputPort::InputPort(){
-
-}
-void InputPort_OpenEXTI(Pin pin,InputPort::Trigger trigger);
-bool InputPort::UsePress()
-{
-	if(this->_Pin==P0)
-	{
-		//assert_failed2((const char *)"%s,%d", __FILE__, 0x12);
-		return false;
-	}
-	InputPort_OpenEXTI(this->_Pin,this->Mode);
-	this->HardEvent=this->OnRegister();	
-	
-    return true;
-}
-
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
 bool InputPort::Read()const
 {
@@ -181,64 +164,6 @@ InputPort& InputPort::Init(Pin pin, bool invert)
 	return *this;
 }
 
-/* 中断状态结构体 */
-/* 一共16条中断线，意味着同一条线每一组只能有一个引脚使用中断 */
-typedef struct TIntState
-{
-	Pin Pin;
-	InputPort inputport;
-	//InputPort::IOReadHandler Handler; // 委托事件
-	Delegate2<InputPort&, bool>	Press;	// 按下事件
-	void *Param; // 事件参数，一般用来作为事件挂载者的对象，然后借助静态方法调用成员方法	
-	bool OldValue;
-
-	uint32_t ShakeTime; // 抖动时间	
-	int Used; // 被使用次数。对于前5行中断来说，这个只会是1，对于后面的中断线来说，可能多个
-} IntState;
-
-
-// 16条中断线
-static IntState InterruptState[16];
-static bool hasInitState = false;
-
-void GPIO_ISR(int num) // 0 <= num <= 15
-{
-
-	if (!hasInitState)
-	{
-		//        return ;
-	}
-	IntState *state3 = InterruptState + num;
-	if (!state3)
-	{
-		return;
-	}
-
-	bool value;
-	// 如果未指定委托，则不处理
-	if (!state3->Press)
-	{
-		return;
-	}
-
-	if (state3->Press)
-	{
-		// 新值value为true，说明是上升，第二个参数是down，所以取非
-		state3->Press((state3->inputport), value);
-	}
-}
-
-bool InputPort::OnRegister()
-{
-	if (this->Press)
-	{
-		IntState *state = new IntState();
-		state->Press = this->Press;
-		state->inputport._Pin = this->_Pin;
-		InterruptState[this->_Pin & 0x0f] = *state;
-	}
-	return true;
-}
 bool OutputPort::Read()const
 {
 	return this->Invert ? !Port::Read() : Port::Read();

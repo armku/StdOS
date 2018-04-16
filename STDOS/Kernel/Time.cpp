@@ -1,5 +1,4 @@
 #include "TTime.h"
-#include "Device\Timer.h"
 
 TTime Time; //系统时间，不建议用户直接使用
 
@@ -150,12 +149,10 @@ void TimeCost::Show(cstring format)const
     debug_printf(format, us);
 }
 
-Timer *timerTick;
-Delegate < Timer & > abc;
-void timTickrefesh(void *param)
+void TimeUpdate()
 {
 	Time.Milliseconds += 1000;
-	Time.Seconds++;
+	Time.Seconds++;	
 }
 int gTicks = 0; //每个us需要的systick时钟数 	
 

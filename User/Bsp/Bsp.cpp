@@ -1,6 +1,6 @@
-#include "SerialPort.h"
 #include "BspPlatform\BspPlatform.h"
 #include "Bsp.h"
+#include "Device\Port.h"
 
 #ifdef STM32F0
 OutputPort led1(PC6, true);
@@ -74,12 +74,12 @@ void LedTask(void *param)
 	//led2 = keyup;
 }
 #endif // STM32F0
-uint32_t OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
-{
-	bs.Show(true);
-	//transport->Write(bs);
-	return 0;
-}
+//uint32_t OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
+//{
+//	bs.Show(true);
+//	//transport->Write(bs);
+//	return 0;
+//}
 void Esp8266Test();
 void ssd1309Test();
 void BspInit()
@@ -87,7 +87,7 @@ void BspInit()
 	BspPlatformInit();
 //	Esp8266Test();
 //	ssd1309Test();
-	SerialPort::GetMessagePort()->Register(OnUsart1Read);
+//	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 }

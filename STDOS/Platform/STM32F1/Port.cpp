@@ -1,5 +1,4 @@
 #include "Port.h"
-//#include "_Core.h"
 #include "Platform\stm32.h"
 
 GPIO_TypeDef *IndexToGroup(uint8_t index);
@@ -83,10 +82,6 @@ void OutputPort::OpenPin(void *param)
         gpio->GPIO_Mode = GPIO_Mode_Out_PP;
     }
 }
-
-void AnalogInPort::OpenPin(void *param){
-
-}
 void AlternatePort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
@@ -98,13 +93,10 @@ void AlternatePort::OpenPin(void *param)
 void Port::RemapConfig(uint32_t param, bool sta){
 
 }
-void InputPort::OpenPin(void *param){}
-////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////以下为添加///////////////////////////////////////
 // 获取组和针脚
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (uint16_t)0xF0) << 6)))
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
-
 
 GPIO_TypeDef *IndexToGroup(uint8_t index)
 {
@@ -128,13 +120,6 @@ void OutputPort::Write(Pin pin, bool value)
     }
 }
 
-void AnalogInPort::OnOpen(void *param)
-{
-    Port::OnOpen(param);
-    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    gpio->GPIO_Mode = GPIO_Mode_AIN; //
-}
-
 void InputPort::OnOpen(void *param)
 {
     Port::OnOpen(param);
@@ -146,46 +131,6 @@ void InputPort::OnOpen(void *param)
     else if (Pull == DOWN)
         gpio->GPIO_Mode = GPIO_Mode_IPD;
     // 这里很不确定，需要根据实际进行调整     
-}
-
-//中断线打开、关闭
-void SetEXIT(int pinIndex, bool enable, InputPort::Trigger trigger = InputPort::Both)
-{
-    /* 配置EXTI中断线 */
-    EXTI_InitTypeDef ext;
-    EXTI_StructInit(&ext);
-    ext.EXTI_Line = EXTI_Line0 << (pinIndex &0X0F);
-    ext.EXTI_Mode = EXTI_Mode_Interrupt;
-    switch (trigger)
-    {
-        case InputPort::Rising: ext.EXTI_Trigger = EXTI_Trigger_Rising; // 上升沿触发
-        break;
-        case InputPort::Falling: ext.EXTI_Trigger = EXTI_Trigger_Falling; // 下降沿触发
-        break;
-        case InputPort::Both: default:
-            ext.EXTI_Trigger = EXTI_Trigger_Rising_Falling; // 上升沿下降沿触发
-            break;
-    }
-    ext.EXTI_LineCmd = enable ? ENABLE : DISABLE;
-    EXTI_Init(&ext);
-}
-
-static const int PORT_IRQns[] = 
-{
-    EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
-    EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
-    EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
-};
-#include "TInterrupt.h"
-void InputPort_OpenEXTI(Pin pin, InputPort::Trigger trigger = InputPort::Both)
-{
-    //RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA |RCC_APB2Periph_GPIOC| RCC_APB2Periph_AFIO,ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-    GPIO_EXTILineConfig(GPIO_PortSourceGPIOA + pin >> 4, pin &0x0f);
-
-    SetEXIT(pin, true, trigger);
-    Interrupt.SetPriority(PORT_IRQns[pin &0x0f], 1u);
-    //Interrupt.Activate(PORT_IRQns[v3],(void (__cdecl *)(unsigned __int16, void *))EXTI_IRQHandler,v1);
 }
 
 void OutputPort::Write(bool value)const

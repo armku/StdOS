@@ -41,8 +41,6 @@ class SystemConfig;
 class TSys
 {
 public:
-    uint8_t	MessagePort;// 消息口，默认0表示USART1
-
     uint32_t	Clock;  	// 系统时钟
     uint32_t	CystalClock;// 晶振时钟
 

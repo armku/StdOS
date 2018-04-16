@@ -1,11 +1,11 @@
-#include "SerialPort.h"
+#include "Sys.h"
 #include "Bsp\Bsp.h"
+#include "BspPlatform\BspPlatform.h"
 
 int main(void)
 {
 	Sys.Init();
 #if DEBUG
-	Sys.MessagePort = COM1;
 	Sys.ShowInfo();
 #endif 	
 	BspInit();

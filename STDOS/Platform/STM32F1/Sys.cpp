@@ -4,9 +4,6 @@
 #include "TTime.h"
 #include "Task.h"
 #include <string.h>
-#include "TInterrupt.h"
-#include "SerialPort.h"
-//#include "_Core.h"
 #include "Platform\stm32.h"
 
 extern "C"
@@ -20,7 +17,6 @@ void TSys::OnInit()
 {
     this->Clock = 72000000;
     this->CystalClock = HSE_VALUE;
-    this->MessagePort = COM1;
     Buffer::Copy(this->ID, (void*)0x1FFFF7E8, ArrayLength(this->ID));
 
     this->CPUID = SCB->CPUID;
@@ -124,3 +120,15 @@ void TSys::Reset()const
 {
     NVIC_SystemReset();
 }
+// 打开全局中断
+void GlobalEnable()
+{
+    __ASM volatile("cpsie i");
+}
+
+// 关闭全局中断
+void GlobalDisable()
+{
+    __ASM volatile("cpsid i");
+}
+
