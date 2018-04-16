@@ -40,7 +40,7 @@ void SerialPrintInit()
 	USART_InitTypeDef USART_InitStructure;
 
 	/* config USART3 clock */
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 
 	/* USART3 mode config */
 	USART_InitStructure.USART_BaudRate = 256000;
@@ -50,7 +50,7 @@ void SerialPrintInit()
 	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 
-	USART_Init(USART3, &USART_InitStructure);
+	USART_Init(USART1, &USART_InitStructure);
 
 	/*	配置中断优先级 */
 	NVIC_InitTypeDef NVIC_InitStructure;
@@ -58,23 +58,23 @@ void SerialPrintInit()
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 
 	/* Enable the USARTy Interrupt */
-	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 	/* 使能串口2接收中断 */
-	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE); // 串口接收中断配置
-	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
+	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // 串口接收中断配置
+	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 
 
-	USART_Cmd(USART3, ENABLE);
-	USART_ClearFlag(USART3, USART_FLAG_TC);
+	USART_Cmd(USART1, ENABLE);
+	USART_ClearFlag(USART1, USART_FLAG_TC);
 
 	Txx1.SetBuf(com11tx, ArrayLength(com11tx));
 	Rxx1.SetBuf(com11rx, ArrayLength(com11rx));
 
-	SerialPort_GetPins(&Pins[0], &Pins[1], COM3);
+	SerialPort_GetPins(&Pins[0], &Pins[1], COM1);
 	Ports[0] = new AlternatePort();
 	Ports[1] = new InputPort();
 	Ports[0]->Set(Pins[0]);
@@ -211,7 +211,7 @@ void Printf(char *Data, ...)
 #endif
 void com3send()
 {
-	USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
+	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 }
 
 void TimeTickInit()//系统用定时器初始化
@@ -388,15 +388,7 @@ extern "C"
 
 	void USART1_IRQHandler(void)
 	{
-
-	}
-	void USART2_IRQHandler(void)
-	{
-
-	}
-	void USART3_IRQHandler(void)
-	{
-		volatile uint8_t ch;
+volatile uint8_t ch;
 		if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
 		{
 			ch = USART_ReceiveData(USART3);
@@ -447,6 +439,14 @@ extern "C"
 				USART_SendData(USART3, Txx1.Dequeue());
 			}
 		}
+	}
+	void USART2_IRQHandler(void)
+	{
+
+	}
+	void USART3_IRQHandler(void)
+	{
+		
 	}
 	void UART4_IRQHandler(void)
 	{
