@@ -591,19 +591,19 @@
 
   <Group>
     <GroupName>BspPlatform</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>4</GroupNumber>
       <FileNumber>5</FileNumber>
-      <FileType>1</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\BspPlatform\BspPlatform.c</PathWithFileName>
-      <FilenameWithoutPath>BspPlatform.c</FilenameWithoutPath>
+      <PathWithFileName>..\User\BspPlatform\BspPlatform.cpp</PathWithFileName>
+      <FilenameWithoutPath>BspPlatform.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

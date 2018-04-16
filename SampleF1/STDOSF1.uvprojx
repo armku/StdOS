@@ -413,9 +413,9 @@
           <GroupName>BspPlatform</GroupName>
           <Files>
             <File>
-              <FileName>BspPlatform.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\BspPlatform\BspPlatform.c</FilePath>
+              <FileName>BspPlatform.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1398,9 +1398,9 @@
           <GroupName>BspPlatform</GroupName>
           <Files>
             <File>
-              <FileName>BspPlatform.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\BspPlatform\BspPlatform.c</FilePath>
+              <FileName>BspPlatform.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
             </File>
           </Files>
         </Group>
