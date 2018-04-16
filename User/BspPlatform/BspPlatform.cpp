@@ -306,17 +306,6 @@ void InputPort_OpenEXTI(Pin pin, Trigger trigger = Both)
 	NVIC_Init(&nvic);
 	NVIC_SetPriority((IRQn_Type)PORT_IRQns[pin & 0x0f], 1);
 }
-
-void Channel1_8Init11()
-{
-	InputPort_OpenEXTI(PD5, Falling);
-}
-void Channel9_16Init()
-{
-	InputPort_OpenEXTI(PB2, Falling);
-}
-
-
 /// TIMx,x[6,7]中断优先级配置
 void TIMx_NVIC_Configuration(void)
 {

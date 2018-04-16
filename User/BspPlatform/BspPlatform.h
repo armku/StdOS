@@ -16,8 +16,6 @@ extern "C" {
 	void SetEXIT(int pinIndex, bool enable, Trigger trigger);
 
 	void BspPlatformInit();
-	void Channel1_8Init11();
-	void Channel9_16Init();
 	void TimeTickInit();//系统用定时器初始化
 	
 	int CurrentTick();
