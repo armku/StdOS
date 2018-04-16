@@ -377,7 +377,7 @@ extern "C"
 
 	void USART1_IRQHandler(void)
 	{
-volatile uint8_t ch;
+		volatile uint8_t ch;
 		if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
 		{
 			ch = USART_ReceiveData(USART1);
@@ -439,15 +439,9 @@ volatile uint8_t ch;
 	}
 	void UART4_IRQHandler(void)
 	{
-#ifndef STM32F10X_MD
-
-#endif
 	}
 	void UART5_IRQHandler(void)
 	{
-#ifndef STM32F10X_MD
-
-#endif
 	}
 
 	void TIM2_IRQHandler(void)
@@ -478,9 +472,6 @@ volatile uint8_t ch;
 	{
 		if (TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET)
 		{
-#ifndef STM32F10X_MD
-
-#endif
 			TIM_ClearITPendingBit(TIM5, TIM_FLAG_Update);
 		}
 	}
@@ -489,9 +480,6 @@ volatile uint8_t ch;
 	{
 		if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
 		{
-#ifndef STM32F10X_MD
-
-#endif
 			TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
 			TimeUpdate();
 		}
@@ -501,9 +489,6 @@ volatile uint8_t ch;
 	{
 		if (TIM_GetITStatus(TIM7, TIM_IT_Update) != RESET)
 		{
-#ifndef STM32F10X_MD
-
-#endif
 			TIM_ClearITPendingBit(TIM7, TIM_FLAG_Update);
 		}
 	}
