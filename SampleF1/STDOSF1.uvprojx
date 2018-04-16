@@ -447,11 +447,6 @@
               <FileType>8</FileType>
               <FilePath>..\Util\Util.cpp</FilePath>
             </File>
-            <File>
-              <FileName>ModBus1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Util\ModBus1.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -653,24 +648,9 @@
               <FilePath>..\STDOS\Device\Port.cpp</FilePath>
             </File>
             <File>
-              <FileName>RTC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\RTC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\SerialPort.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDog.cpp</FileName>
@@ -788,11 +768,6 @@
               <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
-              <FileName>TInterrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\TInterrupt.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
@@ -833,39 +808,14 @@
               <FilePath>..\STDOS\Platform\STM32F1\startup_stm32f10x_hd.s</FilePath>
             </File>
             <File>
-              <FileName>Flash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\Flash.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\Interrupt.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\Port.cpp</FilePath>
             </File>
             <File>
-              <FileName>RTC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\RTC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\SerialPort.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\Timer.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDog.cpp</FileName>
@@ -886,16 +836,6 @@
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\Time.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Storage</GroupName>
-          <Files>
-            <File>
-              <FileName>Storage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1432,11 +1372,6 @@
               <FileType>8</FileType>
               <FilePath>..\Util\Util.cpp</FilePath>
             </File>
-            <File>
-              <FileName>ModBus1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Util\ModBus1.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1638,24 +1573,9 @@
               <FilePath>..\STDOS\Device\Port.cpp</FilePath>
             </File>
             <File>
-              <FileName>RTC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\RTC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\SerialPort.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDog.cpp</FileName>
@@ -1773,11 +1693,6 @@
               <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
-              <FileName>TInterrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\TInterrupt.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
@@ -1818,39 +1733,14 @@
               <FilePath>..\STDOS\Platform\STM32F1\startup_stm32f10x_hd.s</FilePath>
             </File>
             <File>
-              <FileName>Flash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\Flash.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\Interrupt.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\Port.cpp</FilePath>
             </File>
             <File>
-              <FileName>RTC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\RTC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\SerialPort.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\Timer.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDog.cpp</FileName>
@@ -1871,16 +1761,6 @@
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\Time.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Storage</GroupName>
-          <Files>
-            <File>
-              <FileName>Storage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
         </Group>
