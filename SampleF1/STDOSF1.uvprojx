@@ -785,16 +785,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Net</GroupName>
-          <Files>
-            <File>
-              <FileName>ITransport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Platform</GroupName>
           <Files>
             <File>
@@ -1701,16 +1691,6 @@
               <FileName>WaitHandle.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Net</GroupName>
-          <Files>
-            <File>
-              <FileName>ITransport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
             </File>
           </Files>
         </Group>
