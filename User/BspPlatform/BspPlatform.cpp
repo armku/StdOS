@@ -39,10 +39,10 @@ void SerialPrintInit()
 {
 	USART_InitTypeDef USART_InitStructure;
 
-	/* config USART3 clock */
+	/* config USART1 clock */
 	RCC_APB1PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 
-	/* USART3 mode config */
+	/* USART1 mode config */
 	USART_InitStructure.USART_BaudRate = 256000;
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
 	USART_InitStructure.USART_StopBits = USART_StopBits_1;
@@ -389,41 +389,41 @@ extern "C"
 	void USART1_IRQHandler(void)
 	{
 volatile uint8_t ch;
-		if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+		if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
 		{
-			ch = USART_ReceiveData(USART3);
+			ch = USART_ReceiveData(USART1);
 			Rxx1.Enqueue(ch);
 		}
-		if (USART_GetITStatus(USART3, USART_IT_IDLE) == SET)
+		if (USART_GetITStatus(USART1, USART_IT_IDLE) == SET)
 			//数据帧接收完毕
 		{
-			ch = USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)    
+			ch = USART_ReceiveData(USART1); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)    
 			//sp->OnRxHandler();			
 		}
 		/* 处理发送缓冲区空中断 */
-		if (USART_GetITStatus(USART3, USART_IT_TXE) != RESET)
+		if (USART_GetITStatus(USART1, USART_IT_TXE) != RESET)
 		{
 			if (Txx1.Empty())
 			{
 				/* 发送缓冲区的数据已取完时， 禁止发送缓冲区空中断 （注意：此时最后1个数据还未真正发送完毕）*/
-				USART_ITConfig(USART3, USART_IT_TXE, DISABLE);
+				USART_ITConfig(USART1, USART_IT_TXE, DISABLE);
 				/* 使能数据发送完毕中断 */
-				USART_ITConfig(USART3, USART_IT_TC, ENABLE);
+				USART_ITConfig(USART1, USART_IT_TC, ENABLE);
 			}
 			else
 			{
 				/* 从发送FIFO取1个字节写入串口发送数据寄存器 */
-				USART_SendData(USART3, Txx1.Dequeue());
+				USART_SendData(USART1, Txx1.Dequeue());
 			}
 
 		}
 		/* 数据bit位全部发送完毕的中断 */
-		else if (USART_GetITStatus(USART3, USART_IT_TC) != RESET)
+		else if (USART_GetITStatus(USART1, USART_IT_TC) != RESET)
 		{
 			if (Txx1.Empty())
 			{
 				/* 如果发送FIFO的数据全部发送完毕，禁止数据发送完毕中断 */
-				USART_ITConfig(USART3, USART_IT_TC, DISABLE);
+				USART_ITConfig(USART1, USART_IT_TC, DISABLE);
 
 				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
 				Txx1.Clear();
@@ -436,7 +436,7 @@ volatile uint8_t ch;
 			{
 				/* 正常情况下，不会进入此分支 */
 				/* 如果发送FIFO的数据还未完毕，则从发送FIFO取1个数据写入发送数据寄存器 */
-				USART_SendData(USART3, Txx1.Dequeue());
+				USART_SendData(USART1, Txx1.Dequeue());
 			}
 		}
 	}
