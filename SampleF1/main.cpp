@@ -5,6 +5,7 @@
 int main(void)
 {
 	Sys.Init();
+	SerialPrintInit();
 #if DEBUG
 	Sys.ShowInfo();
 #endif 	
