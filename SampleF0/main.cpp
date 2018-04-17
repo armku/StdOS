@@ -1,21 +1,15 @@
-#include "SerialPort.h"
+#include "Sys.h"
 #include "Bsp\Bsp.h"
+#include "BspPlatform\BspPlatform.h"
 
-#define namee "StdOS"
-
-const uint8_t vers[] = "yyyy-MM-dd HH:mm:ss";
-
-int main()
+int main(void)
 {
-	Sys.Name = (char*)namee;
 	Sys.Init();
+	SerialPrintInit();
 #if DEBUG
-	Sys.MessagePort = COM1;
 	Sys.ShowInfo();
-	int aa = vers[0];
-	aa++;
-#endif 
+#endif 	
 	BspInit();
-			
+		
 	Sys.Start();
 }

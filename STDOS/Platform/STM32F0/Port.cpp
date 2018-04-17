@@ -43,10 +43,7 @@ void OutputPort::OpenPin(void *param)
 			gpio->GPIO_PuPd = GPIO_PuPd_UP;/*设置引脚模式为上拉*/
         }    
 }
-void AnalogInPort::OpenPin(void* param)
-{
-	
-}
+
 void AlternatePort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
@@ -67,9 +64,6 @@ void AlternatePort::OpenPin(void *param)
 void Port::RemapConfig(uint32_t param, bool sta)
 {
 	
-}
-void InputPort::OpenPin(void* param)
-{
 }
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////以下为添加///////////////////////////////////////
@@ -104,12 +98,7 @@ void OutputPort::Write(Pin pin, bool value)
         GPIO_ResetBits(_GROUP(pin), _PORT(pin));
     }
 }
-void AnalogInPort::OnOpen(void *param)
-{
-    Port::OnOpen(param);
-    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    	gpio->GPIO_Mode = GPIO_Mode_AN;
-}
+
 void InputPort::OnOpen(void *param)
 {
     Port::OnOpen(param);
@@ -164,7 +153,6 @@ void SetEXIT(int pinIndex, bool enable,InputPort::Trigger trigger=InputPort::Bot
     EXTI_Init(&ext);
 }
 
-#include "TInterrupt.h"
 void InputPort_OpenEXTI(Pin pin,InputPort::Trigger trigger=InputPort::Both)
 {
 	//RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA |RCC_APB2Periph_GPIOC| RCC_APB2Periph_AFIO,ENABLE);

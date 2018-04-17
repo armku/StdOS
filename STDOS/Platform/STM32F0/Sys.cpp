@@ -4,8 +4,6 @@
 #include "TTime.h"
 #include "Task.h"
 #include <string.h>
-#include "TInterrupt.h"
-#include "SerialPort.h"
 #include "Platform\stm32.h"
 
 extern "C"
@@ -20,7 +18,6 @@ void TSys::OnInit()
 {
     this->Clock = 72000000;
     this->CystalClock = HSE_VALUE;
-    this->MessagePort = COM1;
     Buffer::Copy(this->ID, (void*)0x1FFFF7AC, ArrayLength(this->ID));
 
     this->CPUID = SCB->CPUID;
