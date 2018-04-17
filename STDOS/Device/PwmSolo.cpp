@@ -2,6 +2,9 @@
 //#include "_Core.h"
 #include "Platform\stm32.h"
 
+#if defined STM32F0
+
+#elif defined STM32F1
 void PwmSolo::OnOpen2()
 {
     TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
@@ -528,9 +531,6 @@ void PwmSolo::SetOutPercent(float per)
 	this->_duty = this->_freq *per / 100;
 	this->SetOut(this->_duty);
 }
-#if defined STM32F0
-
-#elif defined STM32F1
 
 #elif defined STM32F4
 

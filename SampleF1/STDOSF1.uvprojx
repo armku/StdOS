@@ -659,6 +659,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -793,11 +798,6 @@
               <FileName>startup_stm32f10x_hd.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\startup_stm32f10x_hd.s</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSolo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\PwmSolo.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1546,6 +1546,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1680,11 +1685,6 @@
               <FileName>startup_stm32f10x_hd.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\startup_stm32f10x_hd.s</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSolo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\PwmSolo.cpp</FilePath>
             </File>
           </Files>
         </Group>
