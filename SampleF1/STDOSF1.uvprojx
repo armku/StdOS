@@ -10,7 +10,7 @@
       <TargetName>Debug</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -818,11 +818,6 @@
               <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\PwmSolo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Time.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1730,11 +1725,6 @@
               <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F1\PwmSolo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Time.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F1\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
