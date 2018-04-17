@@ -386,11 +386,6 @@
               <FileType>8</FileType>
               <FilePath>.\main.cpp</FilePath>
             </File>
-            <File>
-              <FileName>SRamTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\SRamTest.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -702,6 +697,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -806,31 +806,6 @@
               <FileName>startup_stm32f40_41xxx.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\SYSTEM\STM32F4\startup\startup_stm32f40_41xxx.s</FilePath>
-            </File>
-            <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sys.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSolo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\PwmSolo.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1291,11 +1266,6 @@
               <FileType>8</FileType>
               <FilePath>.\main.cpp</FilePath>
             </File>
-            <File>
-              <FileName>SRamTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\SRamTest.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1607,6 +1577,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1711,31 +1686,6 @@
               <FileName>startup_stm32f40_41xxx.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\SYSTEM\STM32F4\startup\startup_stm32f40_41xxx.s</FilePath>
-            </File>
-            <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sys.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSolo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\PwmSolo.cpp</FilePath>
             </File>
           </Files>
         </Group>
