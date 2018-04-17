@@ -832,11 +832,6 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\PwmSolo.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Time.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Time.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1741,11 +1736,6 @@
               <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\PwmSolo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Time.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
