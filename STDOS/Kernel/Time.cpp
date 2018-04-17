@@ -185,12 +185,6 @@ extern int gTicks; //
 void TTime::Init()
 {
 #if defined STM32F0
-/*
-此文件需要优化掉
-*/
-#include "TTime.h"
-#include "Platform\stm32.h"
-
 extern int gTicks; //
 void timTickrefesh(void *param);
 void TTime::Init()
@@ -298,12 +292,6 @@ void TTime::DelayUs(int nus) const
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
     GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); //关闭jtag，保留swd	
 #elif defined STM32F4
-/*
-此文件需要优化掉
-*/
-#include "TTime.h"
-#include "Platform\stm32.h"
-
 extern Timer *timerTick;
 extern Delegate < Timer & > abc;
 extern int gTicks; //

@@ -3,9 +3,6 @@
 #include "Platform\stm32.h"
 
 #if defined STM32F0
-#include "PwmSolo.h"
-#include "Platform\stm32.h"
-
 void PwmSolo::OnOpen2()
 {	
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;//定义一个TIM_InitTypeDef类型的结构体
@@ -820,9 +817,6 @@ void PwmSolo::SetOutPercent(float per)
 }
 
 #elif defined STM32F4
-#include "PwmSolo.h"
-#include "Platform\stm32.h"
-
 void PwmSolo::OnOpen2()
 {
     TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;

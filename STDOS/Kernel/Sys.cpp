@@ -2,13 +2,13 @@
 系统能自动识别常见芯片类型、主频、Flash大小、Ram大小
 Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 毫秒级睡眠期间，系统将会安排执行其他耗时较短的任务。如果没有可用任务，系统将会进入低功耗模式，以节省能耗
-
  */
 #include "TTime.h"
 #include "Task.h"
 #include <string.h>
 #include "Sys.h"
 #include "stdarg.h"
+#include "Platform\stm32.h"
 
 SystemConfig g_Config;//系统配置
 
@@ -232,14 +232,6 @@ int StdPrintf(const char *format, ...)
 	return n;
 }
 #if defined STM32F0
-/*
-此文件需要优化掉
- */
-#include "TTime.h"
-#include "Task.h"
-#include <string.h>
-#include "Platform\stm32.h"
-
 extern "C"
 {
     extern uint32_t __heap_base;
@@ -347,14 +339,6 @@ void TSys::Reset()const
 }
 
 #elif defined STM32F1
-/*
-此文件需要优化掉
- */
-#include "TTime.h"
-#include "Task.h"
-#include <string.h>
-#include "Platform\stm32.h"
-
 extern "C"
 {
     extern uint32_t __heap_base;
@@ -482,16 +466,6 @@ void GlobalDisable()
 }
 
 #elif defined STM32F4
-/*
-此文件需要优化掉
- */
-#include "TTime.h"
-#include "Task.h"
-#include <string.h>
-#include "TInterrupt.h"
-#include "SerialPort.h"
-#include "Platform\stm32.h"
-
 extern "C"
 {
     extern uint32_t __heap_base;

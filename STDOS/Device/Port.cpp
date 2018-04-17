@@ -1,4 +1,5 @@
 #include "Port.h"
+#include "Platform\stm32.h"
 
 Port::Port()
 {
@@ -169,9 +170,6 @@ bool OutputPort::Read()const
 	return this->Invert ? !Port::Read() : Port::Read();
 }
 #if defined STM32F0
-#include "Port.h"
-#include "Platform\stm32.h"
-
 GPIO_TypeDef *IndexToGroup(uint8_t index);
 
 bool Port::Open()
@@ -373,9 +371,6 @@ bool Port::Read()const
 }
 
 #elif defined STM32F1
-#include "Port.h"
-#include "Platform\stm32.h"
-
 GPIO_TypeDef *IndexToGroup(uint8_t index);
 
 void Port_OnOpen(Pin pin)
@@ -550,9 +545,6 @@ bool Port::Read()const
 
 
 #elif defined STM32F4
-#include "Port.h"
-#include "Platform\stm32.h"
-
 GPIO_TypeDef *IndexToGroup(uint8_t index);
 
 bool Port::Open()

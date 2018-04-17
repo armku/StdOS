@@ -1,4 +1,6 @@
 #include "WatchDog.h"
+//#include "_Core.h"
+#include "Platform\stm32.h"
 
 WatchDog::WatchDog()
 { 
@@ -23,9 +25,6 @@ void WatchDog::Start(uint32_t msTimeOut,uint32_t msFeed)
 	Sys.AddTask(FeedDogTask,&WatchDog::Current(),10,msFeed,"FeedDog");
 }
 #if defined STM32F0
-#include "WatchDog.h"
-#include "Platform\stm32.h"
-
 int SetWatchDog( unsigned int a2)
 {
 //  int v3; // r0@1
@@ -143,10 +142,6 @@ void WatchDog::ConfigMax()
 }
 
 #elif defined STM32F1
-#include "WatchDog.h"
-//#include "_Core.h"
-#include "Platform\stm32.h"
-
 int SetWatchDog( unsigned int a2)
 {
 //  int v3; // r0@1
@@ -271,9 +266,6 @@ void WatchDog::ConfigMax()
 #endif
 
 #elif defined STM32F4
-#include "WatchDog.h"
-#include "Platform\stm32.h"
-
 int SetWatchDog( unsigned int a2)
 {
 //  int v3; // r0@1

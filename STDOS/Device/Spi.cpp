@@ -1,5 +1,7 @@
 #include "Sys.h"
 #include "Spi.h"
+//#include "_Core.h"
+#include "Platform\stm32.h"
 
 void Spi::Init()
 {
@@ -341,10 +343,6 @@ void SpiSoft::Stop()
     }
 }
 #if defined STM32F0
-#include "Sys.h"
-#include "Spi.h"
-#include "Platform\stm32.h"
-
 // »ù´¡¶ÁÐ´
 uint8_t Spi::Write(uint8_t data)
 {
@@ -572,11 +570,6 @@ uint16_t Spi::Write16(uint16_t data)
 }
 
 #elif defined STM32F1
-#include "Sys.h"
-#include "Spi.h"
-//#include "_Core.h"
-#include "Platform\stm32.h"
-
 // »ù´¡¶ÁÐ´
 uint8_t Spi::Write(uint8_t data)
 {
@@ -798,10 +791,6 @@ uint16_t Spi::Write16(uint16_t data)
 #endif
 
 #elif defined STM32F4
-#include "Sys.h"
-#include "Spi.h"
-#include "Platform\stm32.h"
-
 // »ù´¡¶ÁÐ´
 uint8_t Spi::Write(uint8_t data)
 {
