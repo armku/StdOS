@@ -1,4 +1,3 @@
-#include "SerialPort.h"
 #include "Bsp\Bsp.h"
 
 int main(void)

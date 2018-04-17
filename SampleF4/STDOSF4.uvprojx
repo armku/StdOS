@@ -10,7 +10,8 @@
       <TargetName>Debug</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F407IG</Device>
@@ -323,6 +324,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>1</uSurpInc>
             <uC99>0</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -691,24 +693,9 @@
               <FilePath>..\STDOS\Device\Port.cpp</FilePath>
             </File>
             <File>
-              <FileName>RTC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\RTC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\SerialPort.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDog.cpp</FileName>
@@ -806,29 +793,9 @@
               <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
-              <FileName>TInterrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\TInterrupt.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Time.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Runtime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Runtime.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Net</GroupName>
-          <Files>
-            <File>
-              <FileName>ITransport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -899,16 +866,6 @@
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\Time.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Storage</GroupName>
-          <Files>
-            <File>
-              <FileName>Storage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -994,6 +951,7 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
@@ -1306,6 +1264,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -1674,24 +1633,9 @@
               <FilePath>..\STDOS\Device\Port.cpp</FilePath>
             </File>
             <File>
-              <FileName>RTC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\RTC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\SerialPort.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Timer.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDog.cpp</FileName>
@@ -1789,29 +1733,9 @@
               <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
-              <FileName>TInterrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\TInterrupt.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\Time.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Runtime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Runtime.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Net</GroupName>
-          <Files>
-            <File>
-              <FileName>ITransport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Net\ITransport.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1882,16 +1806,6 @@
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\Time.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Storage</GroupName>
-          <Files>
-            <File>
-              <FileName>Storage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
         </Group>
