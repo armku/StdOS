@@ -808,29 +808,9 @@
               <FilePath>..\SYSTEM\STM32F4\startup\startup_stm32f40_41xxx.s</FilePath>
             </File>
             <File>
-              <FileName>Flash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Flash.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Interrupt.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RTC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\RTC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\SerialPort.cpp</FilePath>
             </File>
             <File>
               <FileName>Spi.cpp</FileName>
@@ -838,19 +818,9 @@
               <FilePath>..\STDOS\Platform\STM32F4\Spi.cpp</FilePath>
             </File>
             <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Timer.cpp</FilePath>
-            </File>
-            <File>
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FSMC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\FSMC.cpp</FilePath>
             </File>
             <File>
               <FileName>Sys.cpp</FileName>
@@ -1748,29 +1718,9 @@
               <FilePath>..\SYSTEM\STM32F4\startup\startup_stm32f40_41xxx.s</FilePath>
             </File>
             <File>
-              <FileName>Flash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Flash.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Interrupt.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RTC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\RTC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\SerialPort.cpp</FilePath>
             </File>
             <File>
               <FileName>Spi.cpp</FileName>
@@ -1778,19 +1728,9 @@
               <FilePath>..\STDOS\Platform\STM32F4\Spi.cpp</FilePath>
             </File>
             <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\Timer.cpp</FilePath>
-            </File>
-            <File>
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Platform\STM32F4\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FSMC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Platform\STM32F4\FSMC.cpp</FilePath>
             </File>
             <File>
               <FileName>Sys.cpp</FileName>

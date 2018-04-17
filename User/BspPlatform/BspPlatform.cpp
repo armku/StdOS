@@ -9,14 +9,6 @@ static char com11rx[1024], com11tx[1024];
 Queue	Txx1;
 Queue	Rxx1;
 
-#ifdef STM32F0
-
-
-extern "C"
-{
-	
-}
-#elif defined STM32F1
 void SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
 {
 	*rxPin = *txPin = P0;
@@ -34,6 +26,16 @@ void SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
 }
 Port*		Ports[2];	// Tx/Rx
 Pin			Pins[2];	// Tx/Rx
+
+#ifdef STM32F0
+
+
+extern "C"
+{
+	
+}
+#elif defined STM32F1
+
 //调试串口初始化
 void SerialPrintInit()
 {
