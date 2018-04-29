@@ -349,6 +349,35 @@ void SpiSoft::Stop()
 // 基础读写
 uint8_t Spi::Write(uint8_t data)
 {
+	#if defined STM32F0
+	int retry;
+	switch (this->_index)
+	{
+	case Spi1:
+	case Spi2:
+	case Spi3:
+		retry = Retry;
+		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
+		{
+			if (--retry <= 0)
+				return ++Error;
+			// 超时处理
+		}
+		SPI_SendData8((SPI_TypeDef*)(this->_SPI), data);
+		//是否发送成功
+		retry = Retry;
+		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
+		{
+			if (--retry <= 0)
+				return ++Error;
+			// 超时处理
+		}
+
+		return SPI_ReceiveData8((SPI_TypeDef*)(this->_SPI)); //返回通过SPIx最近接收的数据            
+	default:
+		return  0;
+	}
+	#elif defined STM32F1
 	int retry;
     switch (this->_index)
     {
@@ -376,6 +405,36 @@ uint8_t Spi::Write(uint8_t data)
         default:
             return  0;
     }
+	#elif defined STM32F4
+	int retry;
+    switch (this->_index)
+    {
+        case Spi1:
+        case Spi2:
+        case Spi3:
+            retry = Retry;
+            while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
+            {
+                if (--retry <= 0)
+                    return ++Error;
+                // 超时处理
+            }
+            SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
+            
+            //是否发送成功
+            retry = Retry;
+            while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
+            {
+                if (--retry <= 0)
+                    return ++Error;
+                // 超时处理
+            }
+
+            return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));             
+        default:
+            return  0;
+    }
+	#endif
 }
 
 int Spi::GetPre(int index, uint32_t &speedHz)
@@ -591,33 +650,7 @@ uint16_t Spi::Write16(uint16_t data)
 // 基础读写
 uint8_t Spi::Write(uint8_t data)
 {
-	int retry;
-	switch (this->_index)
-	{
-	case Spi1:
-	case Spi2:
-	case Spi3:
-		retry = Retry;
-		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
-		{
-			if (--retry <= 0)
-				return ++Error;
-			// 超时处理
-		}
-		SPI_SendData8((SPI_TypeDef*)(this->_SPI), data);
-		//是否发送成功
-		retry = Retry;
-		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
-		{
-			if (--retry <= 0)
-				return ++Error;
-			// 超时处理
-		}
-
-		return SPI_ReceiveData8((SPI_TypeDef*)(this->_SPI)); //返回通过SPIx最近接收的数据            
-	default:
-		return  0;
-	}
+	
 }
 
 int Spi::GetPre(int index, uint32_t &speedHz)
@@ -820,34 +853,7 @@ uint16_t Spi::Write16(uint16_t data)
 // 基础读写
 uint8_t Spi::Write(uint8_t data)
 {
-	int retry;
-    switch (this->_index)
-    {
-        case Spi1:
-        case Spi2:
-        case Spi3:
-            retry = Retry;
-            while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
-            {
-                if (--retry <= 0)
-                    return ++Error;
-                // 超时处理
-            }
-            SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
-            
-            //是否发送成功
-            retry = Retry;
-            while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
-            {
-                if (--retry <= 0)
-                    return ++Error;
-                // 超时处理
-            }
-
-            return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));             
-        default:
-            return  0;
-    }
+	
 }
 
 int Spi::GetPre(int index, uint32_t &speedHz)
