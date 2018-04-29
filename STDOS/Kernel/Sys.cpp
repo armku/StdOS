@@ -231,15 +231,49 @@ int StdPrintf(const char *format, ...)
 
 	return n;
 }
-#if defined STM32F0
 extern "C"
 {
     extern uint32_t __heap_base;
     extern uint32_t __heap_limit;
     extern uint32_t __initial_sp;
 }
-
 static char *CPUName;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#if defined STM32F0
+
 void TSys::OnInit()
 {
     this->Clock = 72000000;
@@ -339,13 +373,7 @@ void TSys::Reset()const
 }
 
 #elif defined STM32F1
-extern "C"
-{
-    extern uint32_t __heap_base;
-    extern uint32_t __heap_limit;
-    extern uint32_t __initial_sp;
-}
-static char *CPUName;
+
 void TSys::OnInit()
 {
     this->Clock = 72000000;
@@ -466,14 +494,7 @@ void GlobalDisable()
 }
 
 #elif defined STM32F4
-extern "C"
-{
-    extern uint32_t __heap_base;
-    extern uint32_t __heap_limit;
-    extern uint32_t __initial_sp;
-}
 
-static char *CPUName;
 void TSys::OnInit()
 {
     this->Clock = 168000000;
@@ -567,5 +588,4 @@ void TSys::Reset()const
 {
     NVIC_SystemReset();
 }
-
 #endif
