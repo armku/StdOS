@@ -329,16 +329,3 @@ void TTime::DelayUs(int nus) const
     #ifdef __cplusplus
     }
 #endif
-#if defined STM32F0
-extern int gTicks; //
-void timTickrefesh(void *param);
-
-#elif defined STM32F1
-	
-#elif defined STM32F4
-extern Timer *timerTick;
-extern Delegate < Timer & > abc;
-extern int gTicks; //
-void timTickrefesh(void *param);
-
-#endif
