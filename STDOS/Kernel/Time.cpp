@@ -226,29 +226,6 @@ uint32_t TTime::CurrentTicks()const
 {
 	return SysTick->LOAD - SysTick->VAL;
 }
-
-// 当前毫秒数
-uint64_t TTime::Current()const
-{
-    __IO uint16_t ms = 0;
-    switch (this->Index)
-    {
-		case 2:
-			ms=(TIM3->CNT) >> 1;
-			break;
-        case 5:
-            ms = (TIM6->CNT) >> 1;
-            break;
-        case 6:
-            ms = (TIM7->CNT) >> 1;
-            break;
-        default:
-            break;
-    }
-    return this->Milliseconds + ms;
-}
-
-
 #elif defined STM32F1
 	this->Index = 5;
     gTicks = (Sys.Clock >> 3) / 0xF4240u;
@@ -303,28 +280,6 @@ uint32_t TTime::CurrentTicks()const
 {
 	return SysTick->LOAD - SysTick->VAL;
 }
-
-// 当前毫秒数
-uint64_t TTime::Current()const
-{
-    __IO uint16_t ms = 0;
-    switch (this->Index)
-    {
-		case 2:
-			ms=(TIM3->CNT) >> 1;
-			break;
-        case 5:
-            ms = (TIM6->CNT) >> 1;
-            break;
-        case 6:
-            ms = (TIM7->CNT) >> 1;
-            break;
-        default:
-            break;
-    }
-    return this->Milliseconds + ms;
-}
-
 #endif
 }
 
