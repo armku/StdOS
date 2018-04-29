@@ -795,9 +795,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Platform</GroupName>
-        </Group>
-        <Group>
           <GroupName>Security</GroupName>
           <Files>
             <File>
@@ -1676,9 +1673,6 @@
               <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>Platform</GroupName>
         </Group>
         <Group>
           <GroupName>Security</GroupName>
