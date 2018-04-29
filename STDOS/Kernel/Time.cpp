@@ -248,17 +248,7 @@ uint64_t TTime::Current()const
     return this->Milliseconds + ms;
 }
 
-//us延时，100us以下精确
-void TTime::DelayUs(int nus) const
-{
-	/*
-	F072 48MHz	750us->774us
-	*/
-	for(int i=0;i<nus;i++)
-	{
-		for(int j=0;j<7;j++);		
-	}
-}
+
 #elif defined STM32F1
 	this->Index = 5;
     gTicks = (Sys.Clock >> 3) / 0xF4240u;
@@ -335,17 +325,6 @@ uint64_t TTime::Current()const
     return this->Milliseconds + ms;
 }
 
-//us延时，100us以下精确
-void TTime::DelayUs(int nus) const
-{
-	/*
-	F407 168MHz 750us->759us
-	*/
-	for(int i=0;i<nus;i++)
-	{
-		for(int j=0;j<40;j++);
-	}
-}
 #endif
 }
 
@@ -365,7 +344,13 @@ uint64_t TTime::Current()const
 void TTime::DelayUs(int nus) const
 {
 	#if defined STM32F0
-	
+	/*
+	F072 48MHz	750us->774us
+	*/
+	for(int i=0;i<nus;i++)
+	{
+		for(int j=0;j<7;j++);		
+	}
 	#elif defined STM32F1
 	/*
 	F103 72MHz  750us->753us
@@ -375,7 +360,13 @@ void TTime::DelayUs(int nus) const
 		for(int j=0;j<10;j++);		
 	}
 	#elif defined STM32F4
-	
+	/*
+	F407 168MHz 750us->759us
+	*/
+	for(int i=0;i<nus;i++)
+	{
+		for(int j=0;j<40;j++);
+	}
 	#endif
 }
 
