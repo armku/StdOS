@@ -221,11 +221,6 @@ void TTime::Init()
 			break;
 	}
 }
-// 当前滴答时钟
-uint32_t TTime::CurrentTicks()const
-{
-	return SysTick->LOAD - SysTick->VAL;
-}
 #elif defined STM32F1
 	this->Index = 5;
     gTicks = (Sys.Clock >> 3) / 0xF4240u;
@@ -274,11 +269,6 @@ void TTime::Init()
 		default:
 			break;
 	}
-}
-// 当前滴答时钟
-uint32_t TTime::CurrentTicks()const
-{
-	return SysTick->LOAD - SysTick->VAL;
 }
 #endif
 }
