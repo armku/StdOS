@@ -478,7 +478,6 @@ void TSys::OnInit()
 {
     this->Clock = 168000000;
     this->CystalClock = HSE_VALUE;
-    this->MessagePort = COM1;
     Buffer::Copy(this->ID, (void*)0x1fff7a10, ArrayLength(this->ID));
 
     this->CPUID = SCB->CPUID;
