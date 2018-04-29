@@ -239,44 +239,10 @@ extern "C"
 }
 static char *CPUName;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#if defined STM32F0
-
 void TSys::OnInit()
 {
-    this->Clock = 72000000;
+	#if defined STM32F0
+	this->Clock = 72000000;
     this->CystalClock = HSE_VALUE;
     Buffer::Copy(this->ID, (void*)0x1FFFF7AC, ArrayLength(this->ID));
 
@@ -301,11 +267,73 @@ void TSys::OnInit()
             this->RAMSize = 0;
             break;
     }
+	#elif defined STM32F1
+    this->Clock = 72000000;
+    this->CystalClock = HSE_VALUE;
+    Buffer::Copy(this->ID, (void*)0x1FFFF7E8, ArrayLength(this->ID));
+
+    this->CPUID = SCB->CPUID;
+    uint32_t MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
+    this->RevID = MCUID >> 16;
+    this->DevID = MCUID &0x0FFF;
+
+    this->FlashSize = *(__IO uint16_t*)(0x1FFFF7E0); // 容量
+    switch (this->DevID)
+    {
+        case 0X0307:
+            CPUName = "STM32F103RD";
+            this->RAMSize = 64;
+            break;
+        case 0x0410:
+            CPUName = "STM32F103C8";
+            this->RAMSize = 20;
+            break;
+        case 0X0414:
+            CPUName = "STM32F103ZE";
+            this->RAMSize = 64;
+            break;
+        case 0X0418:
+            CPUName = "STM32F105VC";
+            this->RAMSize = 64;
+            break;
+        case 0X0430:
+            CPUName = "STM32F103VG";
+            this->RAMSize = 768;
+            break;
+        default:
+            CPUName = "未知";
+            this->RAMSize = 0;
+            break;
+    }
+	#elif defined STM32F4
+	this->Clock = 168000000;
+    this->CystalClock = HSE_VALUE;
+    Buffer::Copy(this->ID, (void*)0x1fff7a10, ArrayLength(this->ID));
+
+    this->CPUID = SCB->CPUID;
+    uint32_t MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
+    this->RevID = MCUID >> 16;
+    this->DevID = MCUID &0x0FFF;
+
+    this->FlashSize = *(__IO uint16_t*)(0X1FFF7a22); // 容量
+    switch (this->DevID)
+    {
+        case 0X0413:
+            CPUName = "STM32F407ZG";
+            this->RAMSize = 192;
+            break;
+        default:
+            CPUName = "未知";
+            this->RAMSize = 0;
+            break;
+    }
+	#endif
 }
 
 void TSys::OnShowInfo()const
 {
-    uint32_t Rx = 0;
+	#if defined STM32F0
+	uint32_t Rx = 0;
     uint32_t Px = 0;
 
     uint32_t HeapSize = 0;
@@ -364,59 +392,7 @@ void TSys::OnShowInfo()const
     debug_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", (uint32_t) &__heap_limit, (uint32_t) &__initial_sp, StackSize, StackSize / 1024);
 
     debug_printf("ChipType:0x42455633 3\r\n");
-}
-
-// 重启系统
-void TSys::Reset()const
-{
-    NVIC_SystemReset();
-}
-
-#elif defined STM32F1
-
-void TSys::OnInit()
-{
-    this->Clock = 72000000;
-    this->CystalClock = HSE_VALUE;
-    Buffer::Copy(this->ID, (void*)0x1FFFF7E8, ArrayLength(this->ID));
-
-    this->CPUID = SCB->CPUID;
-    uint32_t MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
-    this->RevID = MCUID >> 16;
-    this->DevID = MCUID &0x0FFF;
-
-    this->FlashSize = *(__IO uint16_t*)(0x1FFFF7E0); // 容量
-    switch (this->DevID)
-    {
-        case 0X0307:
-            CPUName = "STM32F103RD";
-            this->RAMSize = 64;
-            break;
-        case 0x0410:
-            CPUName = "STM32F103C8";
-            this->RAMSize = 20;
-            break;
-        case 0X0414:
-            CPUName = "STM32F103ZE";
-            this->RAMSize = 64;
-            break;
-        case 0X0418:
-            CPUName = "STM32F105VC";
-            this->RAMSize = 64;
-            break;
-        case 0X0430:
-            CPUName = "STM32F103VG";
-            this->RAMSize = 768;
-            break;
-        default:
-            CPUName = "未知";
-            this->RAMSize = 0;
-            break;
-    }
-}
-
-void TSys::OnShowInfo()const
-{
+	#elif defined STM32F1
     uint32_t Rx = 0;
     uint32_t Px = 0;
 
@@ -474,55 +450,8 @@ void TSys::OnShowInfo()const
     debug_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", (uint32_t) &__heap_limit, (uint32_t) &__initial_sp, StackSize, StackSize / 1024);
 	
     debug_printf("ChipType:0x42455633 3\r\n");
-}
-
-// 重启系统
-void TSys::Reset()const
-{
-    NVIC_SystemReset();
-}
-// 打开全局中断
-void GlobalEnable()
-{
-    __ASM volatile("cpsie i");
-}
-
-// 关闭全局中断
-void GlobalDisable()
-{
-    __ASM volatile("cpsid i");
-}
-
-#elif defined STM32F4
-
-void TSys::OnInit()
-{
-    this->Clock = 168000000;
-    this->CystalClock = HSE_VALUE;
-    Buffer::Copy(this->ID, (void*)0x1fff7a10, ArrayLength(this->ID));
-
-    this->CPUID = SCB->CPUID;
-    uint32_t MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
-    this->RevID = MCUID >> 16;
-    this->DevID = MCUID &0x0FFF;
-
-    this->FlashSize = *(__IO uint16_t*)(0X1FFF7a22); // 容量
-    switch (this->DevID)
-    {
-        case 0X0413:
-            CPUName = "STM32F407ZG";
-            this->RAMSize = 192;
-            break;
-        default:
-            CPUName = "未知";
-            this->RAMSize = 0;
-            break;
-    }
-}
-
-void TSys::OnShowInfo()const
-{
-    uint32_t Rx = 0;
+	#elif defined STM32F4
+	    uint32_t Rx = 0;
     uint32_t Px = 0;
 
     uint32_t HeapSize = 0;
@@ -581,6 +510,7 @@ void TSys::OnShowInfo()const
     debug_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", (uint32_t) &__heap_limit, (uint32_t) &__initial_sp, StackSize, StackSize / 1024);
 
     debug_printf("ChipType:0x42455633 3\r\n");
+	#endif
 }
 
 // 重启系统
@@ -588,4 +518,14 @@ void TSys::Reset()const
 {
     NVIC_SystemReset();
 }
-#endif
+// 打开全局中断
+void GlobalEnable()
+{
+    __ASM volatile("cpsie i");
+}
+
+// 关闭全局中断
+void GlobalDisable()
+{
+    __ASM volatile("cpsid i");
+}
