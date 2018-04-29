@@ -364,6 +364,9 @@ uint64_t TTime::Current()const
 //us延时，100us以下精确
 void TTime::DelayUs(int nus) const
 {
+	#if defined STM32F0
+	
+	#elif defined STM32F1
 	/*
 	F103 72MHz  750us->753us
 	*/
@@ -371,6 +374,9 @@ void TTime::DelayUs(int nus) const
 	{
 		for(int j=0;j<10;j++);		
 	}
+	#elif defined STM32F4
+	
+	#endif
 }
 
 
