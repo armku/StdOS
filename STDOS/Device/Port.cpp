@@ -383,24 +383,36 @@ void Port::RemapConfig(uint32_t param, bool sta){
 GPIO_TypeDef *IndexToGroup(uint8_t index)
 {
     #if defined STM32F0
+	return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
 	#elif defined STM32F1
     return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
 	#elif defined STM32F4
+	return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
 	#endif
 }
 
 uint8_t GroupToIndex(GPIO_TypeDef *group)
 {
     #if defined STM32F0
+	return (uint8_t)(((int)group - GPIOA_BASE) >> 10);
 	#elif defined STM32F1
     return (uint8_t)(((int)group - GPIOA_BASE) >> 10);
 	#elif defined STM32F4
+	return (uint8_t)(((int)group - GPIOA_BASE) >> 10);
 	#endif
 }
 
 void OutputPort::Write(Pin pin, bool value)
 {
     #if defined STM32F0
+	 if (value)
+    {
+        GPIO_SetBits(_GROUP(pin), _PORT(pin));
+    }
+    else
+    {
+        GPIO_ResetBits(_GROUP(pin), _PORT(pin));
+    }
 	#elif defined STM32F1
     if (value)
     {
@@ -411,6 +423,14 @@ void OutputPort::Write(Pin pin, bool value)
         GPIO_ResetBits(_GROUP(pin), _PORT(pin));
     }
 	#elif defined STM32F4
+	if (value)
+    {
+        GPIO_SetBits(_GROUP(pin), _PORT(pin));
+    }
+    else
+    {
+        GPIO_ResetBits(_GROUP(pin), _PORT(pin));
+    }
 	#endif
 }
 
@@ -624,7 +644,6 @@ bool Port::Read()const
 
 
 #if defined STM32F0
-GPIO_TypeDef *IndexToGroup(uint8_t index);
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////以下为添加///////////////////////////////////////
 // 获取组和针脚
@@ -637,27 +656,6 @@ static const int PORT_IRQns[] =
 	EXTI2_3_IRQn, EXTI2_3_IRQn,  // 基础
 	EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn  // EXTI15_10
 };
-GPIO_TypeDef *IndexToGroup(uint8_t index)
-{
-    return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
-}
-
-uint8_t GroupToIndex(GPIO_TypeDef *group)
-{
-    return (uint8_t)(((int)group - GPIOA_BASE) >> 10);
-}
-
-void OutputPort::Write(Pin pin, bool value)
-{
-    if (value)
-    {
-        GPIO_SetBits(_GROUP(pin), _PORT(pin));
-    }
-    else
-    {
-        GPIO_ResetBits(_GROUP(pin), _PORT(pin));
-    }
-}
 //中断线打开、关闭
 void SetEXIT(int pinIndex, bool enable,InputPort::Trigger trigger=InputPort::Both)
 {
@@ -695,7 +693,6 @@ void InputPort_OpenEXTI(Pin pin,InputPort::Trigger trigger=InputPort::Both)
 }
 #elif defined STM32F1
 #elif defined STM32F4
-GPIO_TypeDef *IndexToGroup(uint8_t index);
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////以下为添加///////////////////////////////////////
 // 获取组和针脚
@@ -710,27 +707,6 @@ GPIO_TypeDef *IndexToGroup(uint8_t index);
             EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
         };
     #endif 
-GPIO_TypeDef *IndexToGroup(uint8_t index)
-{
-    return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
-}
-
-uint8_t GroupToIndex(GPIO_TypeDef *group)
-{
-    return (uint8_t)(((int)group - GPIOA_BASE) >> 10);
-}
-
-void OutputPort::Write(Pin pin, bool value)
-{
-    if (value)
-    {
-        GPIO_SetBits(_GROUP(pin), _PORT(pin));
-    }
-    else
-    {
-        GPIO_ResetBits(_GROUP(pin), _PORT(pin));
-    }
-}
 void AnalogInPort::OnOpen(void *param)
 {
     Port::OnOpen(param);
