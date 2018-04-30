@@ -169,10 +169,6 @@ bool OutputPort::Read()const
 {
 	return this->Invert ? !Port::Read() : Port::Read();
 }
-
-
-
-
 GPIO_TypeDef *IndexToGroup(uint8_t index);
 
 void Port_OnOpen(Pin pin)
