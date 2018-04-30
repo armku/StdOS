@@ -204,6 +204,28 @@ void OpenPeriphClock(Pin pin)
 
 bool Port::Open()
 {
+	#if defined STM32F0
+	if (this->Opened == false)
+    {
+        if (_Pin != P0)
+        {
+            // 打开时钟
+            int gi = _Pin >> 4;
+                RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA << gi, ENABLE);
+            
+            GPIO_InitTypeDef gpio;
+            // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
+            GPIO_StructInit(&gpio);
+            gpio.GPIO_Pin = 1 << (this->_Pin &0x0F);
+            this->OnOpen(&gpio);
+
+            GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
+        }
+
+        this->Opened = true;
+    }
+    return true;
+	#elif defined STM32F1
     if (this->Opened == false)
     {
         if (_Pin != P0)
@@ -239,10 +261,51 @@ bool Port::Open()
         this->Opened = true;
     }
     return true;
+	#elif defined STM32F4
+	if (this->_Pin == P0)
+    {
+        return false;
+    }
+    else if (this->Opened)
+    {
+        return true;
+    }
+    else
+    {
+        // 打开时钟
+        int gi = _Pin >> 4;
+        RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
+
+        GPIO_InitTypeDef gpio;
+        // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
+        GPIO_StructInit(&gpio);
+        gpio.GPIO_Pin = 1 << (this->_Pin &0x0F);
+        this->OnOpen(&gpio);
+
+        GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
+        this->Opened = true;
+        return true;
+    }
+	#endif
 }
 
 void OutputPort::OpenPin(void *param)
 {
+	#if defined STM32F0
+	 GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+
+    	gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式	
+        if (this->OpenDrain)
+        {
+            gpio->GPIO_OType = GPIO_OType_OD;
+			gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;/*设置引脚模式为无上拉*/
+        }
+        else
+        {
+            gpio->GPIO_OType = GPIO_OType_PP;//通用推挽输出			
+			gpio->GPIO_PuPd = GPIO_PuPd_UP;/*设置引脚模式为上拉*/
+        }    
+	#elif defined STM32F1
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
 
     if (this->OpenDrain)
@@ -253,13 +316,32 @@ void OutputPort::OpenPin(void *param)
     {
         gpio->GPIO_Mode = GPIO_Mode_Out_PP;
     }
+	#elif defined STM32F4
+	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+
+        gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式	
+        if (this->OpenDrain)
+        {
+            gpio->GPIO_OType = GPIO_OType_OD; //推挽输出
+            gpio->GPIO_PuPd = GPIO_PuPd_NOPULL; //            
+        }
+        else
+        {
+            gpio->GPIO_OType = GPIO_OType_PP; //推挽输出
+            gpio->GPIO_PuPd = GPIO_PuPd_UP; //上拉
+        } 
+	#endif
 }
 void AlternatePort::OpenPin(void *param)
 {
+	#if defined STM32F0
+	#elif defined STM32F1
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
     int i = 0;
     i++;
+	#elif defined STM32F4
+	#endif
 }
 
 void Port::RemapConfig(uint32_t param, bool sta){
@@ -382,47 +464,6 @@ bool Port::Read()const
 #if defined STM32F0
 GPIO_TypeDef *IndexToGroup(uint8_t index);
 
-bool Port::Open()
-{
-    if (this->Opened == false)
-    {
-        if (_Pin != P0)
-        {
-            // 打开时钟
-            int gi = _Pin >> 4;
-                RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA << gi, ENABLE);
-            
-            GPIO_InitTypeDef gpio;
-            // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
-            GPIO_StructInit(&gpio);
-            gpio.GPIO_Pin = 1 << (this->_Pin &0x0F);
-            this->OnOpen(&gpio);
-
-            GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
-        }
-
-        this->Opened = true;
-    }
-    return true;
-}
-
-void OutputPort::OpenPin(void *param)
-{
-    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-
-    	gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式	
-        if (this->OpenDrain)
-        {
-            gpio->GPIO_OType = GPIO_OType_OD;
-			gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;/*设置引脚模式为无上拉*/
-        }
-        else
-        {
-            gpio->GPIO_OType = GPIO_OType_PP;//通用推挽输出			
-			gpio->GPIO_PuPd = GPIO_PuPd_UP;/*设置引脚模式为上拉*/
-        }    
-}
-
 void AlternatePort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
@@ -439,10 +480,6 @@ void AlternatePort::OpenPin(void *param)
 		}
     int i = 0;
     i++;
-}
-void Port::RemapConfig(uint32_t param, bool sta)
-{
-	
 }
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////以下为添加///////////////////////////////////////
@@ -581,60 +618,8 @@ bool Port::Read()const
 }
 
 #elif defined STM32F1
-
-
-
 #elif defined STM32F4
 GPIO_TypeDef *IndexToGroup(uint8_t index);
-
-bool Port::Open()
-{
-    if (this->_Pin == P0)
-    {
-        return false;
-    }
-    else if (this->Opened)
-    {
-        return true;
-    }
-    else
-    {
-        // 打开时钟
-        int gi = _Pin >> 4;
-        RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
-
-        GPIO_InitTypeDef gpio;
-        // 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
-        GPIO_StructInit(&gpio);
-        gpio.GPIO_Pin = 1 << (this->_Pin &0x0F);
-        this->OnOpen(&gpio);
-
-        GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
-        this->Opened = true;
-        return true;
-    }
-}
-
-void OutputPort::OpenPin(void *param)
-{
-    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-
-        gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式	
-        if (this->OpenDrain)
-        {
-            gpio->GPIO_OType = GPIO_OType_OD; //推挽输出
-            gpio->GPIO_PuPd = GPIO_PuPd_NOPULL; //            
-        }
-        else
-        {
-            gpio->GPIO_OType = GPIO_OType_PP; //推挽输出
-            gpio->GPIO_PuPd = GPIO_PuPd_UP; //上拉
-        } 
-}
-void AnalogInPort::OpenPin(void* param)
-{
-	
-}
 void AlternatePort::OpenPin(void *param)
 {
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
@@ -651,13 +636,6 @@ void AlternatePort::OpenPin(void *param)
 		}
     int i = 0;
     i++;
-}
-void Port::RemapConfig(uint32_t param, bool sta)
-{
-	
-}
-void InputPort::OpenPin(void* param)
-{
 }
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////以下为添加///////////////////////////////////////
