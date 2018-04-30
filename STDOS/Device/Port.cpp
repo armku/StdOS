@@ -646,10 +646,6 @@ bool Port::Read()const
 #if defined STM32F0
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////以下为添加///////////////////////////////////////
-// 获取组和针脚
-#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (uint16_t)0xF0) << 6)))
-#define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
-
 static const int PORT_IRQns[] = 
 {
 	EXTI0_1_IRQn, EXTI0_1_IRQn,  // 基础
@@ -696,9 +692,6 @@ void InputPort_OpenEXTI(Pin pin,InputPort::Trigger trigger=InputPort::Both)
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////以下为添加///////////////////////////////////////
 // 获取组和针脚
-#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (uint16_t)0xF0) << 6)))
-#define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
-
     #if 0
         static const int PORT_IRQns[] = 
         {
@@ -707,13 +700,6 @@ void InputPort_OpenEXTI(Pin pin,InputPort::Trigger trigger=InputPort::Both)
             EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
         };
     #endif 
-void AnalogInPort::OnOpen(void *param)
-{
-    Port::OnOpen(param);
-    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    gpio->GPIO_Mode = GPIO_Mode_AN;
-    //gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
-}
 void GPIO_ISR(int num);
 //中断线打开、关闭
 void SetEXIT(int pinIndex, bool enable,InputPort::Trigger trigger=InputPort::Both)
