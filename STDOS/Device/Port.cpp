@@ -389,6 +389,31 @@ void OutputPort::Write(Pin pin, bool value)
 void InputPort::OnOpen(void *param)
 {
     #if defined STM32F0
+	 Port::OnOpen(param);
+    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+    	gpio->GPIO_Mode = GPIO_Mode_IN;
+        if (this->Floating)
+        {
+            gpio->GPIO_OType = GPIO_OType_OD;
+        }
+        else
+        {
+            gpio->GPIO_OType = GPIO_OType_PP;
+        }
+        switch (this->Pull)
+        {
+            case NOPULL:
+                gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
+                break;
+            case UP:
+                gpio->GPIO_PuPd = GPIO_PuPd_UP;
+                break;
+            case DOWN:
+                gpio->GPIO_PuPd = GPIO_PuPd_DOWN;
+                break;
+            default:
+                break;
+        }
 	#elif defined STM32F1
     Port::OnOpen(param);
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
@@ -400,12 +425,61 @@ void InputPort::OnOpen(void *param)
         gpio->GPIO_Mode = GPIO_Mode_IPD;
     // 这里很不确定，需要根据实际进行调整     
 	#elif defined STM32F4
+	Port::OnOpen(param);
+    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+    gpio->GPIO_Mode = GPIO_Mode_IN;
+    if (this->Floating)
+    {
+        gpio->GPIO_OType = GPIO_OType_OD;
+    }
+    else
+    {
+        gpio->GPIO_OType = GPIO_OType_PP;
+    }
+    switch (this->Pull)
+    {
+        case NOPULL:
+            gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
+            break;
+        case UP:
+            gpio->GPIO_PuPd = GPIO_PuPd_UP;
+            break;
+        case DOWN:
+            gpio->GPIO_PuPd = GPIO_PuPd_DOWN;
+            break;
+        default:
+            break;
+    }
 	#endif
 }
 
 void OutputPort::Write(bool value)const
 {
 	#if defined STM32F0
+	if(this->_Pin == P0)
+		return;
+    if (this->Invert)
+    {
+        if (value)
+        {
+            GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+        }
+        else
+        {
+            GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+        }
+    }
+    else
+    {
+        if (value)
+        {
+            GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+        }
+        else
+        {
+            GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+        }
+    }
 	#elif defined STM32F1
     if(this->_Pin == P0)
 		return;
@@ -432,6 +506,30 @@ void OutputPort::Write(bool value)const
         }
     }
 	#elif defined STM32F4
+	if(this->_Pin == P0)
+		return;
+    if (this->Invert)
+    {
+        if (value)
+        {
+            GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+        }
+        else
+        {
+            GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+        }
+    }
+    else
+    {
+        if (value)
+        {
+            GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+        }
+        else
+        {
+            GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+        }
+    }
 	#endif
 }
 
@@ -550,36 +648,6 @@ void OutputPort::Write(Pin pin, bool value)
         GPIO_ResetBits(_GROUP(pin), _PORT(pin));
     }
 }
-
-void InputPort::OnOpen(void *param)
-{
-    Port::OnOpen(param);
-    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    	gpio->GPIO_Mode = GPIO_Mode_IN;
-        if (this->Floating)
-        {
-            gpio->GPIO_OType = GPIO_OType_OD;
-        }
-        else
-        {
-            gpio->GPIO_OType = GPIO_OType_PP;
-        }
-        switch (this->Pull)
-        {
-            case NOPULL:
-                gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
-                break;
-            case UP:
-                gpio->GPIO_PuPd = GPIO_PuPd_UP;
-                break;
-            case DOWN:
-                gpio->GPIO_PuPd = GPIO_PuPd_DOWN;
-                break;
-            default:
-                break;
-        }
-}
-
 //中断线打开、关闭
 void SetEXIT(int pinIndex, bool enable,InputPort::Trigger trigger=InputPort::Both)
 {
@@ -614,33 +682,6 @@ void InputPort_OpenEXTI(Pin pin,InputPort::Trigger trigger=InputPort::Both)
 	SetEXIT(pin, true,trigger);
 	Interrupt.SetPriority(PORT_IRQns[pin&0x0f], 1u);
 	//Interrupt.Activate(PORT_IRQns[v3],(void (__cdecl *)(unsigned __int16, void *))EXTI_IRQHandler,v1);
-}
-void OutputPort::Write(bool value)const
-{
-    if(this->_Pin == P0)
-		return;
-    if (this->Invert)
-    {
-        if (value)
-        {
-            GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-        }
-        else
-        {
-            GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-        }
-    }
-    else
-    {
-        if (value)
-        {
-            GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-        }
-        else
-        {
-            GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-        }
-    }
 }
 #elif defined STM32F1
 #elif defined STM32F4
@@ -704,34 +745,6 @@ void AnalogInPort::OnOpen(void *param)
     gpio->GPIO_Mode = GPIO_Mode_AN;
     //gpio->GPIO_OType = !Floating ? GPIO_OType_OD : GPIO_OType_PP;
 }
-void InputPort::OnOpen(void *param)
-{
-    Port::OnOpen(param);
-    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    gpio->GPIO_Mode = GPIO_Mode_IN;
-    if (this->Floating)
-    {
-        gpio->GPIO_OType = GPIO_OType_OD;
-    }
-    else
-    {
-        gpio->GPIO_OType = GPIO_OType_PP;
-    }
-    switch (this->Pull)
-    {
-        case NOPULL:
-            gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
-            break;
-        case UP:
-            gpio->GPIO_PuPd = GPIO_PuPd_UP;
-            break;
-        case DOWN:
-            gpio->GPIO_PuPd = GPIO_PuPd_DOWN;
-            break;
-        default:
-            break;
-    }
-}
 void GPIO_ISR(int num);
 //中断线打开、关闭
 void SetEXIT(int pinIndex, bool enable,InputPort::Trigger trigger=InputPort::Both)
@@ -774,32 +787,5 @@ void InputPort_OpenEXTI(Pin pin,InputPort::Trigger trigger=InputPort::Both)
 	SetEXIT(pin, true,trigger);
 	Interrupt.SetPriority(PORT_IRQns[pin&0x0f], 1u);
 	//Interrupt.Activate(PORT_IRQns[v3],(void (__cdecl *)(unsigned __int16, void *))EXTI_IRQHandler,v1);
-}
-void OutputPort::Write(bool value)const
-{
-    if(this->_Pin == P0)
-		return;
-    if (this->Invert)
-    {
-        if (value)
-        {
-            GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-        }
-        else
-        {
-            GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-        }
-    }
-    else
-    {
-        if (value)
-        {
-            GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-        }
-        else
-        {
-            GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-        }
-    }
 }
 #endif
