@@ -189,14 +189,6 @@ void TTime::Init()
 	this->Index = 6;
 
 	gTicks = (Sys.Clock >> 3) / 0xF4240u;
-
-	timerTick = new Timer((TIMER)this->Index);
-	abc.Bind(timTickrefesh);
-	timerTick->Register(abc);
-	timerTick->Open();
-	//timerTick->SetFrequency(1000);
-	//        timer2->Config();
-
 	//初始化延迟函数
 	//SYSTICK的时钟固定为HCLK时钟的1/8
 	//SYSCLK:系统时钟
@@ -224,21 +216,10 @@ void TTime::Init()
 	SysTick->CTRL = SysTick_CTRL_ENABLE_Msk;                    /* Enable SysTick IRQ and SysTick Timer */
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
 	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); //关闭jtag，保留swd	
-#elif defined STM32F4
-	void TTime::Init()
-	{
+#elif defined STM32F4	
 		// 初始化为输出
 		this->Index = 2;
-
-		gTicks = (Sys.Clock >> 3) / 0xF4240u;
-
-		timerTick = new Timer((TIMER)this->Index);
-		abc.Bind(timTickrefesh);
-		timerTick->Register(abc);
-		timerTick->Open();
-		//timerTick->SetFrequency(1000);
-		//        timer2->Config();
-
+		gTicks = (Sys.Clock >> 3) / 0xF4240u;		
 		//初始化延迟函数
 		//SYSTICK的时钟固定为HCLK时钟的1/8
 		//SYSCLK:系统时钟

@@ -176,6 +176,9 @@ void Port_OnOpen(Pin pin)
 	int pinindex;
 	int portname;
 
+	#if defined STM32F0
+	#elif defined STM32F1
+
 	if (pin == PA15 || pin == PB3 || pin == PB4)
 	{
 		if (pin == P0)
@@ -191,11 +194,17 @@ void Port_OnOpen(Pin pin)
 		RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << (pin >> 4), ENABLE);
 		GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
 	}
+	#elif defined STM32F4
+	#endif
 }
 
 void OpenPeriphClock(Pin pin)
 {
+	#if defined STM32F0
+	#elif defined STM32F1
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << (pin >> 4), ENABLE);
+	#elif defined STM32F4
+	#endif
 }
 
 bool Port::Open()
