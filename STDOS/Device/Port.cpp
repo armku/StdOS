@@ -438,20 +438,28 @@ void OutputPort::Write(bool value)const
 void Port::OnOpen(void *param)
 {
     #if defined STM32F0
+	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+	gpio->GPIO_Speed = GPIO_Speed_50MHz;
 	#elif defined STM32F1
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     gpio->GPIO_Speed = GPIO_Speed_50MHz;
 	#elif defined STM32F4
+	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+    gpio->GPIO_Speed = GPIO_Speed_100MHz;
 	#endif
 }
 
 bool Port::Read()const
 {
 	#if defined STM32F0
+	GPIO_TypeDef *group = _GROUP(this->_Pin);
+    return (group->IDR >> (this->_Pin &0xF)) &1;
 	#elif defined STM32F1
     GPIO_TypeDef *group = _GROUP(this->_Pin);
     return (group->IDR >> (this->_Pin &0xF)) &1;
 	#elif defined STM32F4
+	GPIO_TypeDef *group = _GROUP(this->_Pin);
+    return (group->IDR >> (this->_Pin &0xF)) &1;
 	#endif
 }
 
@@ -634,17 +642,6 @@ void OutputPort::Write(bool value)const
         }
     }
 }
-void Port::OnOpen(void *param)
-{
-    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-	gpio->GPIO_Speed = GPIO_Speed_50MHz;
-}
-bool Port::Read()const
-{
-    GPIO_TypeDef *group = _GROUP(this->_Pin);
-    return (group->IDR >> (this->_Pin &0xF)) &1;
-}
-
 #elif defined STM32F1
 #elif defined STM32F4
 GPIO_TypeDef *IndexToGroup(uint8_t index);
@@ -805,15 +802,4 @@ void OutputPort::Write(bool value)const
         }
     }
 }
-void Port::OnOpen(void *param)
-{
-    GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-    gpio->GPIO_Speed = GPIO_Speed_100MHz;
-}
-bool Port::Read()const
-{
-    GPIO_TypeDef *group = _GROUP(this->_Pin);
-    return (group->IDR >> (this->_Pin &0xF)) &1;
-}
-
 #endif
