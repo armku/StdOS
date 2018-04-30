@@ -354,16 +354,26 @@ void Port::RemapConfig(uint32_t param, bool sta){
 
 GPIO_TypeDef *IndexToGroup(uint8_t index)
 {
+    #if defined STM32F0
+	#elif defined STM32F1
     return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
+	#elif defined STM32F4
+	#endif
 }
 
 uint8_t GroupToIndex(GPIO_TypeDef *group)
 {
+    #if defined STM32F0
+	#elif defined STM32F1
     return (uint8_t)(((int)group - GPIOA_BASE) >> 10);
+	#elif defined STM32F4
+	#endif
 }
 
 void OutputPort::Write(Pin pin, bool value)
 {
+    #if defined STM32F0
+	#elif defined STM32F1
     if (value)
     {
         GPIO_SetBits(_GROUP(pin), _PORT(pin));
@@ -372,10 +382,14 @@ void OutputPort::Write(Pin pin, bool value)
     {
         GPIO_ResetBits(_GROUP(pin), _PORT(pin));
     }
+	#elif defined STM32F4
+	#endif
 }
 
 void InputPort::OnOpen(void *param)
 {
+    #if defined STM32F0
+	#elif defined STM32F1
     Port::OnOpen(param);
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     if (Floating)
@@ -385,11 +399,15 @@ void InputPort::OnOpen(void *param)
     else if (Pull == DOWN)
         gpio->GPIO_Mode = GPIO_Mode_IPD;
     // 这里很不确定，需要根据实际进行调整     
+	#elif defined STM32F4
+	#endif
 }
 
 void OutputPort::Write(bool value)const
 {
-	if(this->_Pin == P0)
+	#if defined STM32F0
+	#elif defined STM32F1
+    if(this->_Pin == P0)
 		return;
     if (this->Invert)
     {
@@ -413,18 +431,28 @@ void OutputPort::Write(bool value)const
             GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
         }
     }
+	#elif defined STM32F4
+	#endif
 }
 
 void Port::OnOpen(void *param)
 {
+    #if defined STM32F0
+	#elif defined STM32F1
     GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
     gpio->GPIO_Speed = GPIO_Speed_50MHz;
+	#elif defined STM32F4
+	#endif
 }
 
 bool Port::Read()const
 {
+	#if defined STM32F0
+	#elif defined STM32F1
     GPIO_TypeDef *group = _GROUP(this->_Pin);
     return (group->IDR >> (this->_Pin &0xF)) &1;
+	#elif defined STM32F4
+	#endif
 }
 
 
