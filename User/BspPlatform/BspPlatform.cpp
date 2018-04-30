@@ -36,7 +36,7 @@ Pin			Pins[2];	// Tx/Rx
 
 extern "C"
 {
-	
+
 }
 #elif defined STM32F1
 
@@ -270,28 +270,28 @@ uint32_t CurrentTicks1()
 //中断线打开、关闭
 void SetEXIT(int pinIndex, bool enable, Trigger trigger = Both)
 {
-	#if defined STM32F0
+#if defined STM32F0
 	/* 配置EXTI中断线 */
-    EXTI_InitTypeDef ext;
-    EXTI_StructInit(&ext);
-    ext.EXTI_Line = EXTI_Line0 << (pinIndex&0X0F);
-    ext.EXTI_Mode = EXTI_Mode_Interrupt;
-	switch(trigger)
+	EXTI_InitTypeDef ext;
+	EXTI_StructInit(&ext);
+	ext.EXTI_Line = EXTI_Line0 << (pinIndex & 0X0F);
+	ext.EXTI_Mode = EXTI_Mode_Interrupt;
+	switch (trigger)
 	{
-		case InputPort::Rising:
-			ext.EXTI_Trigger = EXTI_Trigger_Rising; // 上升沿触发
-			break;
-		case InputPort::Falling:
-			ext.EXTI_Trigger = EXTI_Trigger_Falling; // 下降沿触发
-			break;
-		case InputPort::Both:
-		default:
-			ext.EXTI_Trigger = EXTI_Trigger_Rising_Falling; // 上升沿下降沿触发
-			break;
-	}    
-    ext.EXTI_LineCmd = enable ? ENABLE : DISABLE;
-    EXTI_Init(&ext);
-	#elif defined STM32F1
+	case InputPort::Rising:
+		ext.EXTI_Trigger = EXTI_Trigger_Rising; // 上升沿触发
+		break;
+	case InputPort::Falling:
+		ext.EXTI_Trigger = EXTI_Trigger_Falling; // 下降沿触发
+		break;
+	case InputPort::Both:
+	default:
+		ext.EXTI_Trigger = EXTI_Trigger_Rising_Falling; // 上升沿下降沿触发
+		break;
+	}
+	ext.EXTI_LineCmd = enable ? ENABLE : DISABLE;
+	EXTI_Init(&ext);
+#elif defined STM32F1
 	/* 配置EXTI中断线 */
 	EXTI_InitTypeDef ext;
 	EXTI_StructInit(&ext);
@@ -310,35 +310,35 @@ void SetEXIT(int pinIndex, bool enable, Trigger trigger = Both)
 	}
 	ext.EXTI_LineCmd = enable ? ENABLE : DISABLE;
 	EXTI_Init(&ext);
-	#elif defined STM32F4
+#elif defined STM32F4
 	/* 配置EXTI中断线 */
-    EXTI_InitTypeDef ext;
-    EXTI_StructInit(&ext);
-    ext.EXTI_Line = EXTI_Line0 << (pinIndex&0X0F);
-    ext.EXTI_Mode = EXTI_Mode_Interrupt;
-	switch(trigger)
+	EXTI_InitTypeDef ext;
+	EXTI_StructInit(&ext);
+	ext.EXTI_Line = EXTI_Line0 << (pinIndex & 0X0F);
+	ext.EXTI_Mode = EXTI_Mode_Interrupt;
+	switch (trigger)
 	{
-		case InputPort::Rising:
-			ext.EXTI_Trigger = EXTI_Trigger_Rising; // 上升沿触发
-			break;
-		case InputPort::Falling:
-			ext.EXTI_Trigger = EXTI_Trigger_Falling; // 下降沿触发
-			break;
-		case InputPort::Both:
-		default:
-			ext.EXTI_Trigger = EXTI_Trigger_Rising_Falling; // 上升沿下降沿触发
-			break;
-	}    
-    ext.EXTI_LineCmd = enable ? ENABLE : DISABLE;
-    EXTI_Init(&ext);
-	#endif
+	case InputPort::Rising:
+		ext.EXTI_Trigger = EXTI_Trigger_Rising; // 上升沿触发
+		break;
+	case InputPort::Falling:
+		ext.EXTI_Trigger = EXTI_Trigger_Falling; // 下降沿触发
+		break;
+	case InputPort::Both:
+	default:
+		ext.EXTI_Trigger = EXTI_Trigger_Rising_Falling; // 上升沿下降沿触发
+		break;
+	}
+	ext.EXTI_LineCmd = enable ? ENABLE : DISABLE;
+	EXTI_Init(&ext);
+#endif
 }
 static const int PORT_IRQns[] =
 {
 	#if defined STM32F0
 	EXTI0_1_IRQn, EXTI0_1_IRQn,  // 基础
 	EXTI2_3_IRQn, EXTI2_3_IRQn,  // 基础
-	EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, 
+	EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn,
 	EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn  // EXTI15_10
 	#elif defined STM32F1
 	EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
@@ -352,15 +352,15 @@ static const int PORT_IRQns[] =
 };
 void InputPort_OpenEXTI(Pin pin, Trigger trigger = Both)
 {
-	#if defined STM32F0
+#if defined STM32F0
 	//RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA |RCC_APB2Periph_GPIOC| RCC_APB2Periph_AFIO,ENABLE);
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
-	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA+pin>>4, pin&0x0f);
-	
-	SetEXIT(pin, true,trigger);
-	Interrupt.SetPriority(PORT_IRQns[pin&0x0f], 1u);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA + pin >> 4, pin & 0x0f);
+
+	SetEXIT(pin, true, trigger);
+	Interrupt.SetPriority(PORT_IRQns[pin & 0x0f], 1u);
 	//Interrupt.Activate(PORT_IRQns[v3],(void (__cdecl *)(unsigned __int16, void *))EXTI_IRQHandler,v1);
-	#elif defined STM32F1
+#elif defined STM32F1
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
 	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA + pin >> 4, pin & 0x0f);
 	SetEXIT(pin, true, trigger);
@@ -375,15 +375,15 @@ void InputPort_OpenEXTI(Pin pin, Trigger trigger = Both)
 
 	NVIC_Init(&nvic);
 	NVIC_SetPriority((IRQn_Type)PORT_IRQns[pin & 0x0f], 1);
-	#elif defined STM32F4
+#elif defined STM32F4
 	//RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA |RCC_APB2Periph_GPIOC| RCC_APB2Periph_AFIO,ENABLE);
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
-	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA+pin>>4, pin&0x0f);
-	
-	SetEXIT(pin, true,trigger);
-	Interrupt.SetPriority(PORT_IRQns[pin&0x0f], 1u);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA + pin >> 4, pin & 0x0f);
+
+	SetEXIT(pin, true, trigger);
+	Interrupt.SetPriority(PORT_IRQns[pin & 0x0f], 1u);
 	//Interrupt.Activate(PORT_IRQns[v3],(void (__cdecl *)(unsigned __int16, void *))EXTI_IRQHandler,v1);
-	#endif
+#endif
 }
 /// TIMx,x[6,7]中断优先级配置
 void TIMx_NVIC_Configuration(void)
@@ -514,7 +514,7 @@ extern "C"
 	}
 	void USART3_IRQHandler(void)
 	{
-		
+
 	}
 	void UART4_IRQHandler(void)
 	{
@@ -665,6 +665,6 @@ extern "C"
 
 extern "C"
 {
-	
+
 }
 #endif
