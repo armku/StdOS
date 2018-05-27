@@ -844,7 +844,35 @@ void DeviceConfigHelper::Timer2Config(int interval)
 #if defined STM32F0
 
 #elif defined STM32F1
+	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
+	// 开启TIMx_CLK,x,即内部时钟CK_INT=72M
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+
+	// 自动重装载寄存器周的值(计数值)
+	TIM_TimeBaseStructure.TIM_Period = 1000;
+
+	// 累计 TIM_Period个频率后产生一个更新或者中断
+	// 时钟预分频数为71，则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=1M
+	TIM_TimeBaseStructure.TIM_Prescaler = 71;
+
+	// 初始化定时器TIMx, x
+	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+
+	// 清除计数器中断标志位
+	TIM_ClearFlag(TIM2, TIM_FLAG_Update);
+
+	// 开启计数器中断
+	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+
+	// 使能计数器
+	TIM_Cmd(TIM2, ENABLE);
+
+	// 暂时关闭TIMx,x的时钟，等待使用
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE);
+
+	/* 基本定时器 TIMx,x 重新开时钟，开始计时 */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 #elif defined STM32F4
 
 #endif
@@ -855,7 +883,35 @@ void DeviceConfigHelper::Timer3Config(int interval)
 #if defined STM32F0
 
 #elif defined STM32F1
+	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
+	// 开启TIMx_CLK,x,即内部时钟CK_INT=72M
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+
+	// 自动重装载寄存器周的值(计数值)
+	TIM_TimeBaseStructure.TIM_Period = 1000;
+
+	// 累计 TIM_Period个频率后产生一个更新或者中断
+	// 时钟预分频数为71，则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=1M
+	TIM_TimeBaseStructure.TIM_Prescaler = 71;
+
+	// 初始化定时器TIMx, x
+	TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
+
+	// 清除计数器中断标志位
+	TIM_ClearFlag(TIM3, TIM_FLAG_Update);
+
+	// 开启计数器中断
+	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
+
+	// 使能计数器
+	TIM_Cmd(TIM3, ENABLE);
+
+	// 暂时关闭TIMx,x的时钟，等待使用
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, DISABLE);
+
+	/* 基本定时器 TIMx,x 重新开时钟，开始计时 */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 #elif defined STM32F4
 
 #endif
@@ -866,7 +922,35 @@ void DeviceConfigHelper::Timer4Config(int interval)
 #if defined STM32F0
 
 #elif defined STM32F1
+	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
+	// 开启TIMx_CLK,x,即内部时钟CK_INT=72M
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
+
+	// 自动重装载寄存器周的值(计数值)
+	TIM_TimeBaseStructure.TIM_Period = 1000;
+
+	// 累计 TIM_Period个频率后产生一个更新或者中断
+	// 时钟预分频数为71，则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=1M
+	TIM_TimeBaseStructure.TIM_Prescaler = 71;
+
+	// 初始化定时器TIMx, x
+	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
+
+	// 清除计数器中断标志位
+	TIM_ClearFlag(TIM4, TIM_FLAG_Update);
+
+	// 开启计数器中断
+	TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE);
+
+	// 使能计数器
+	TIM_Cmd(TIM4, ENABLE);
+
+	// 暂时关闭TIMx,x的时钟，等待使用
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, DISABLE);
+
+	/* 基本定时器 TIMx,x 重新开时钟，开始计时 */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
 #elif defined STM32F4
 
 #endif
@@ -877,7 +961,35 @@ void DeviceConfigHelper::Timer5Config(int interval)
 #if defined STM32F0
 
 #elif defined STM32F1
+	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
+	// 开启TIMx_CLK,x,即内部时钟CK_INT=72M
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
+
+	// 自动重装载寄存器周的值(计数值)
+	TIM_TimeBaseStructure.TIM_Period = 1000;
+
+	// 累计 TIM_Period个频率后产生一个更新或者中断
+	// 时钟预分频数为71，则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=1M
+	TIM_TimeBaseStructure.TIM_Prescaler = 71;
+
+	// 初始化定时器TIMx, x
+	TIM_TimeBaseInit(TIM5, &TIM_TimeBaseStructure);
+
+	// 清除计数器中断标志位
+	TIM_ClearFlag(TIM5, TIM_FLAG_Update);
+
+	// 开启计数器中断
+	TIM_ITConfig(TIM5, TIM_IT_Update, ENABLE);
+
+	// 使能计数器
+	TIM_Cmd(TIM5, ENABLE);
+
+	// 暂时关闭TIMx,x的时钟，等待使用
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, DISABLE);
+
+	/* 基本定时器 TIMx,x 重新开时钟，开始计时 */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
 #elif defined STM32F4
 
 #endif
@@ -888,7 +1000,35 @@ void DeviceConfigHelper::Timer6Config(int interval)
 #if defined STM32F0
 
 #elif defined STM32F1
+	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
+	// 开启TIMx_CLK,x,即内部时钟CK_INT=72M
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
+
+	// 自动重装载寄存器周的值(计数值)
+	TIM_TimeBaseStructure.TIM_Period = 1000;
+
+	// 累计 TIM_Period个频率后产生一个更新或者中断
+	// 时钟预分频数为71，则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=1M
+	TIM_TimeBaseStructure.TIM_Prescaler = 71;
+
+	// 初始化定时器TIMx, x
+	TIM_TimeBaseInit(TIM6, &TIM_TimeBaseStructure);
+
+	// 清除计数器中断标志位
+	TIM_ClearFlag(TIM6, TIM_FLAG_Update);
+
+	// 开启计数器中断
+	TIM_ITConfig(TIM6, TIM_IT_Update, ENABLE);
+
+	// 使能计数器
+	TIM_Cmd(TIM6, ENABLE);
+
+	// 暂时关闭TIMx,x的时钟，等待使用
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, DISABLE);
+
+	/* 基本定时器 TIMx,x 重新开时钟，开始计时 */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
 #elif defined STM32F4
 
 #endif
@@ -901,7 +1041,7 @@ void DeviceConfigHelper::Timer7Config(int interval)
 #elif defined STM32F1
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
-	// 开启TIMx_CLK,x[6,7],即内部时钟CK_INT=72M
+	// 开启TIMx_CLK,x,即内部时钟CK_INT=72M
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
 
 	// 自动重装载寄存器周的值(计数值)
@@ -911,7 +1051,7 @@ void DeviceConfigHelper::Timer7Config(int interval)
 	// 时钟预分频数为71，则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=1M
 	TIM_TimeBaseStructure.TIM_Prescaler = 71;
 
-	// 初始化定时器TIMx, x[6,7]
+	// 初始化定时器TIMx, x
 	TIM_TimeBaseInit(TIM7, &TIM_TimeBaseStructure);
 
 	// 清除计数器中断标志位
@@ -923,10 +1063,10 @@ void DeviceConfigHelper::Timer7Config(int interval)
 	// 使能计数器
 	TIM_Cmd(TIM7, ENABLE);
 
-	// 暂时关闭TIMx,x[6,7]的时钟，等待使用
+	// 暂时关闭TIMx,x的时钟，等待使用
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, DISABLE);
 
-	/* 基本定时器 TIMx,x[6,7] 重新开时钟，开始计时 */
+	/* 基本定时器 TIMx,x 重新开时钟，开始计时 */
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
 #elif defined STM32F4
 
