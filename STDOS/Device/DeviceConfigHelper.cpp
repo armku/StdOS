@@ -1013,7 +1013,7 @@ void DeviceConfigHelper::Timer1ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 #if defined STM32F0
 
 #elif defined STM32F1
-
+	
 #elif defined STM32F4
 
 #endif
@@ -1023,7 +1023,20 @@ void DeviceConfigHelper::Timer2ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 #if defined STM32F0
 
 #elif defined STM32F1
+	NVIC_InitTypeDef NVIC_InitStructure;
+	// 设置中断组为0
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 
+	// 设置中断来源
+	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
+
+	// 设置主优先级为 0
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = NVIC_IRQChannelPreemptionPriority;
+
+	// 设置抢占优先级为3
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = NVIC_IRQChannelSubPriorit;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
 #elif defined STM32F4
 
 #endif
@@ -1033,7 +1046,20 @@ void DeviceConfigHelper::Timer3ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 #if defined STM32F0
 
 #elif defined STM32F1
+	NVIC_InitTypeDef NVIC_InitStructure;
+	// 设置中断组为0
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 
+	// 设置中断来源
+	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
+
+	// 设置主优先级为 0
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = NVIC_IRQChannelPreemptionPriority;
+
+	// 设置抢占优先级为3
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = NVIC_IRQChannelSubPriorit;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
 #elif defined STM32F4
 
 #endif
@@ -1043,7 +1069,20 @@ void DeviceConfigHelper::Timer4ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 #if defined STM32F0
 
 #elif defined STM32F1
+	NVIC_InitTypeDef NVIC_InitStructure;
+	// 设置中断组为0
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 
+	// 设置中断来源
+	NVIC_InitStructure.NVIC_IRQChannel = TIM4_IRQn;
+
+	// 设置主优先级为 0
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = NVIC_IRQChannelPreemptionPriority;
+
+	// 设置抢占优先级为3
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = NVIC_IRQChannelSubPriorit;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
 #elif defined STM32F4
 
 #endif
@@ -1053,7 +1092,22 @@ void DeviceConfigHelper::Timer5ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 #if defined STM32F0
 
 #elif defined STM32F1
+#ifdef STM32F10X_HD
+	NVIC_InitTypeDef NVIC_InitStructure;
+	// 设置中断组为0
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 
+	// 设置中断来源
+	NVIC_InitStructure.NVIC_IRQChannel = TIM5_IRQn;
+
+	// 设置主优先级为 0
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = NVIC_IRQChannelPreemptionPriority;
+
+	// 设置抢占优先级为3
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = NVIC_IRQChannelSubPriorit;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+#endif
 #elif defined STM32F4
 
 #endif
@@ -1063,7 +1117,22 @@ void DeviceConfigHelper::Timer6ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 #if defined STM32F0
 
 #elif defined STM32F1
+#ifdef STM32F10X_HD
+	NVIC_InitTypeDef NVIC_InitStructure;
+	// 设置中断组为0
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 
+	// 设置中断来源
+	NVIC_InitStructure.NVIC_IRQChannel = TIM6_IRQn;
+
+	// 设置主优先级为 0
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = NVIC_IRQChannelPreemptionPriority;
+
+	// 设置抢占优先级为3
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = NVIC_IRQChannelSubPriorit;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+#endif
 #elif defined STM32F4
 
 #endif
@@ -1082,10 +1151,10 @@ void DeviceConfigHelper::Timer7ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 	NVIC_InitStructure.NVIC_IRQChannel = TIM7_IRQn;
 
 	// 设置主优先级为 0
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = NVIC_IRQChannelPreemptionPriority;
 
 	// 设置抢占优先级为3
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = NVIC_IRQChannelSubPriorit;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 #endif
