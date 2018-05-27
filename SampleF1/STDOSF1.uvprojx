@@ -667,6 +667,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
             </File>
+            <File>
+              <FileName>DeviceConfigHelper.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\DeviceConfigHelper.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1546,6 +1551,11 @@
               <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DeviceConfigHelper.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\DeviceConfigHelper.cpp</FilePath>
             </File>
           </Files>
         </Group>
