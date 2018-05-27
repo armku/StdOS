@@ -40,8 +40,26 @@ public:
 
 	//定时器
 	static void TimeTickInit();//系统用定时器初始化
-	static void TIMx_NVIC_Configuration(void);
-	static void TIMx_Configuration(void);
+	static void TimerConfig(TIMER tim,int interval,int NVIC_PriorityGroup=0,int NVIC_IRQChannelPreemptionPriority = 0,int NVIC_IRQChannelSubPriorit=3);//定时器配置
+	static void Timer0Config(int interval);//定时器配置
+	static void Timer1Config(int interval);//定时器配置
+	static void Timer2Config(int interval);//定时器配置
+	static void Timer3Config(int interval);//定时器配置
+	static void Timer4Config(int interval);//定时器配置
+	static void Timer5Config(int interval);//定时器配置
+	static void Timer6Config(int interval);//定时器配置
+	static void Timer7Config(int interval);//定时器配置
+	static void Timer8Config(int interval);//定时器配置
+	static void TimerConfigNvic(TIMER tim, int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);
+	static void Timer0ConfigNvic(int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);
+	static void Timer1ConfigNvic(int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);
+	static void Timer2ConfigNvic(int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);
+	static void Timer3ConfigNvic(int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);
+	static void Timer4ConfigNvic(int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);
+	static void Timer5ConfigNvic(int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);
+	static void Timer6ConfigNvic(int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);
+	static void Timer7ConfigNvic(int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);
+	static void Timer8ConfigNvic(int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);
 	//系统
 	static int CurrentTick();
 	static uint32_t CurrentTicks1();
