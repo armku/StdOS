@@ -226,7 +226,6 @@ int StdPrintf(const char *format, ...)
 	va_end(args);
 
 	Buffer bs(sprint_buf, n);	
-	/*DeviceConfigHelper::comSend(COM1, bs);*/
 	DeviceConfigHelper::com1send(bs);
 	
 	return n;
