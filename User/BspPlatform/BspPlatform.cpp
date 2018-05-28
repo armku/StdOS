@@ -8,6 +8,7 @@
 #include "Core\Queue.h"
 #include "Port.h"
 #include "Platform\stm32.h"
+#include "Device\DeviceConfigHelper.h"
 
 static char com11rx[1024], com11tx[1024];
 Queue	Txx1;
@@ -92,53 +93,6 @@ void SerialPrintInit()
 void com3send()
 {
 	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
-}
-
-void TimeTickInit()//系统用定时器初始化
-{
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
-	/* 自动重装载寄存器周期的值(计数值) */
-	TIM_TimeBaseStructure.TIM_Period = 2000 - 1;
-	/* 累计 TIM_Period个频率后产生一个更新或者中断 */
-	/* 时钟预分频数为72 */
-	TIM_TimeBaseStructure.TIM_Prescaler = 36000 - 1;
-
-	/* 对外部时钟进行采样的时钟分频,这里没有用到 */
-	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-	TIM_DeInit(TIM2);
-	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
-	TIM_ClearFlag(TIM2, TIM_FLAG_Update);
-	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
-	TIM_ClearFlag(TIM2, TIM_FLAG_Update); // 清除标志位  必须要有！！ 否则 开启中断立马中断给你看
-	TIM_Cmd(TIM2, ENABLE);
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE); /*先关闭等待使用*/
-	NVIC_InitTypeDef nvic;
-
-	nvic.NVIC_IRQChannelCmd = ENABLE;
-	nvic.NVIC_IRQChannel = TIM2_IRQn;
-
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-	nvic.NVIC_IRQChannelPreemptionPriority = 1;
-	nvic.NVIC_IRQChannelSubPriority = 1;
-
-	NVIC_Init(&nvic);
-	NVIC_SetPriority(TIM2_IRQn, 3);
-
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-
-	NVIC_SetPriority(SysTick_IRQn, 0);
-	NVIC_SetPriority(TIM2_IRQn, 0);
-}
-int CurrentTick()
-{
-	return (TIM2->CNT) >> 1;
-}
-uint32_t CurrentTicks1()
-{
-	return SysTick->LOAD - SysTick->VAL;
 }
 
 //中断线打开、关闭
@@ -318,7 +272,7 @@ void BspPlatformInit()
 	/* 基本定时器 TIMx,x[6,7] 重新开时钟，开始计时 */
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
-	TimeTickInit();//系统用定时器初始化
+	DeviceConfigHelper::TimeTickInit();
 }
 void TimeUpdate();
 extern "C"

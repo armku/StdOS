@@ -1,4 +1,5 @@
 #include "TTime.h"
+#include "Device\DeviceConfigHelper.h"
 
 TTime Time; //系统时间，不建议用户直接使用
 
@@ -247,13 +248,13 @@ void TTime::Init()
 	// 当前滴答时钟
 	uint32_t TTime::CurrentTicks()const
 	{
-		return CurrentTicks1();
+		return DeviceConfigHelper::CurrentTicks1();
 	}
 
 	// 当前毫秒数 计数值2000
 	uint64_t TTime::Current()const
 	{
-		return this->Milliseconds + CurrentTick();
+		return this->Milliseconds + DeviceConfigHelper::CurrentTick();
 	}
 
 	//us延时，100us以下精确
