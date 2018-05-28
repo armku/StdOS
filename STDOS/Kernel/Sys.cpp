@@ -225,9 +225,11 @@ int StdPrintf(const char *format, ...)
 	n = vsprintf(sprint_buf, format, args);
 	va_end(args);
 
-	Buffer bs(sprint_buf, n);	
-	DeviceConfigHelper::com1send(bs);
-	
+	Buffer bs(sprint_buf, n);
+	Txx1.Write(bs);
+	DeviceConfigHelper::com1send();
+
+
 	return n;
 }
 extern "C"
