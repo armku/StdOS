@@ -10,10 +10,6 @@
 #include "Platform\stm32.h"
 #include "Device\DeviceConfigHelper.h"
 
-static char com11rx[1024], com11tx[1024];
-Queue	Txx1;
-Queue	Rxx1;
-
 void SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
 {
 	*rxPin = *txPin = P0;
@@ -44,55 +40,7 @@ extern "C"
 //调试串口初始化
 void SerialPrintInit()
 {
-	USART_InitTypeDef USART_InitStructure;
-
-	/* config USART1 clock */
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
-
-	/* USART1 mode config */
-	USART_InitStructure.USART_BaudRate = 256000;
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;
-	USART_InitStructure.USART_Parity = USART_Parity_No;
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-
-	USART_Init(USART1, &USART_InitStructure);
-
-	/*	配置中断优先级 */
-	NVIC_InitTypeDef NVIC_InitStructure;
-	/* Configure the NVIC Preemption Priority Bits */
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-
-	/* Enable the USARTy Interrupt */
-	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-	/* 使能串口2接收中断 */
-	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // 串口接收中断配置
-	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
-
-
-	USART_Cmd(USART1, ENABLE);
-	USART_ClearFlag(USART1, USART_FLAG_TC);
-
-	Txx1.SetBuf(com11tx, ArrayLength(com11tx));
-	Rxx1.SetBuf(com11rx, ArrayLength(com11rx));
-
-	SerialPort_GetPins(&Pins[0], &Pins[1], COM1);
-	Ports[0] = new AlternatePort();
-	Ports[1] = new InputPort();
-	Ports[0]->Set(Pins[0]);
-	Ports[1]->Set(Pins[1]);
-	Ports[0]->Open();
-	Ports[1]->Open();
-}
-
-void com3send()
-{
-	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+	DeviceConfigHelper::ConfigCom(COM1, 256000);
 }
 
 //中断线打开、关闭
@@ -284,6 +232,7 @@ extern "C"
 
 	void USART1_IRQHandler(void)
 	{
+#if USECOM1
 		volatile uint8_t ch;
 		if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
 		{
@@ -293,8 +242,7 @@ extern "C"
 		if (USART_GetITStatus(USART1, USART_IT_IDLE) == SET)
 			//数据帧接收完毕
 		{
-			ch = USART_ReceiveData(USART1); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)    
-			//sp->OnRxHandler();			
+			ch = USART_ReceiveData(USART1); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
 		}
 		/* 处理发送缓冲区空中断 */
 		if (USART_GetITStatus(USART1, USART_IT_TXE) != RESET)
@@ -323,10 +271,10 @@ extern "C"
 
 				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
 				Txx1.Clear();
-				//				if(sp->RS485)
-				//				{
-				//					*sp->RS485=0;
-				//				}
+				if (DeviceConfigHelper::pCOM1Rx485)
+				{
+					*DeviceConfigHelper::pCOM1Rx485 = 0;
+				}
 			}
 			else
 			{
@@ -335,20 +283,228 @@ extern "C"
 				USART_SendData(USART1, Txx1.Dequeue());
 			}
 		}
+#endif
 	}
 	void USART2_IRQHandler(void)
 	{
+#if USECOM2
+		volatile uint8_t ch;
+		if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
+		{
+			ch = USART_ReceiveData(USART2);
+			Rxx2.Enqueue(ch);
+		}
+		if (USART_GetITStatus(USART2, USART_IT_IDLE) == SET)
+			//数据帧接收完毕
+		{
+			ch = USART_ReceiveData(USART2); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)    
+			com2test();
+		}
+		/* 处理发送缓冲区空中断 */
+		if (USART_GetITStatus(USART2, USART_IT_TXE) != RESET)
+		{
+			if (Txx2.Empty())
+			{
+				/* 发送缓冲区的数据已取完时， 禁止发送缓冲区空中断 （注意：此时最后1个数据还未真正发送完毕）*/
+				USART_ITConfig(USART2, USART_IT_TXE, DISABLE);
+				/* 使能数据发送完毕中断 */
+				USART_ITConfig(USART2, USART_IT_TC, ENABLE);
+			}
+			else
+			{
+				/* 从发送FIFO取1个字节写入串口发送数据寄存器 */
+				USART_SendData(USART2, Txx2.Dequeue());
+			}
 
+		}
+		/* 数据bit位全部发送完毕的中断 */
+		else if (USART_GetITStatus(USART2, USART_IT_TC) != RESET)
+		{
+			if (Txx2.Empty())
+			{
+				/* 如果发送FIFO的数据全部发送完毕，禁止数据发送完毕中断 */
+				USART_ITConfig(USART2, USART_IT_TC, DISABLE);
+
+				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
+				Txx2.Clear();
+				if (DeviceConfigHelper::pCOM2Rx485)
+				{
+					*DeviceConfigHelper::pCOM2Rx485 = 0;
+				}
+			}
+			else
+			{
+				/* 正常情况下，不会进入此分支 */
+				/* 如果发送FIFO的数据还未完毕，则从发送FIFO取1个数据写入发送数据寄存器 */
+				USART_SendData(USART2, Txx2.Dequeue());
+			}
+		}
+#endif
 	}
 	void USART3_IRQHandler(void)
 	{
+#if USECOM3
+		volatile uint8_t ch;
+		if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+		{
+			ch = USART_ReceiveData(USART3);
+			Rxx3.Enqueue(ch);
+		}
+		if (USART_GetITStatus(USART3, USART_IT_IDLE) == SET)
+			//数据帧接收完毕
+		{
+			ch = USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR) 
+		}
+		/* 处理发送缓冲区空中断 */
+		if (USART_GetITStatus(USART3, USART_IT_TXE) != RESET)
+		{
+			if (Txx3.Empty())
+			{
+				/* 发送缓冲区的数据已取完时， 禁止发送缓冲区空中断 （注意：此时最后1个数据还未真正发送完毕）*/
+				USART_ITConfig(USART3, USART_IT_TXE, DISABLE);
+				/* 使能数据发送完毕中断 */
+				USART_ITConfig(USART3, USART_IT_TC, ENABLE);
+			}
+			else
+			{
+				/* 从发送FIFO取1个字节写入串口发送数据寄存器 */
+				USART_SendData(USART3, Txx3.Dequeue());
+			}
 
+		}
+		/* 数据bit位全部发送完毕的中断 */
+		else if (USART_GetITStatus(USART3, USART_IT_TC) != RESET)
+		{
+			if (Txx3.Empty())
+			{
+				/* 如果发送FIFO的数据全部发送完毕，禁止数据发送完毕中断 */
+				USART_ITConfig(USART3, USART_IT_TC, DISABLE);
+
+				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
+				Txx3.Clear();
+				if (DeviceConfigHelper::pCOM3Rx485)
+				{
+					*DeviceConfigHelper::pCOM3Rx485 = 0;
+				}
+			}
+			else
+			{
+				/* 正常情况下，不会进入此分支 */
+				/* 如果发送FIFO的数据还未完毕，则从发送FIFO取1个数据写入发送数据寄存器 */
+				USART_SendData(USART3, Txx3.Dequeue());
+			}
+		}
+#endif
 	}
 	void UART4_IRQHandler(void)
 	{
+#if USECOM4
+		volatile uint8_t ch;
+		if (USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
+		{
+			ch = USART_ReceiveData(UART4);
+			Rxx3.Enqueue(ch);
+		}
+		if (USART_GetITStatus(UART4, USART_IT_IDLE) == SET)
+			//数据帧接收完毕
+		{
+			ch = USART_ReceiveData(UART4); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR) 
+		}
+		/* 处理发送缓冲区空中断 */
+		if (USART_GetITStatus(UART4, USART_IT_TXE) != RESET)
+		{
+			if (Txx4.Empty())
+			{
+				/* 发送缓冲区的数据已取完时， 禁止发送缓冲区空中断 （注意：此时最后1个数据还未真正发送完毕）*/
+				USART_ITConfig(UART4, USART_IT_TXE, DISABLE);
+				/* 使能数据发送完毕中断 */
+				USART_ITConfig(UART4, USART_IT_TC, ENABLE);
+			}
+			else
+			{
+				/* 从发送FIFO取1个字节写入串口发送数据寄存器 */
+				USART_SendData(UART4, Txx4.Dequeue());
+			}
+
+		}
+		/* 数据bit位全部发送完毕的中断 */
+		else if (USART_GetITStatus(UART4, USART_IT_TC) != RESET)
+		{
+			if (Txx4.Empty())
+			{
+				/* 如果发送FIFO的数据全部发送完毕，禁止数据发送完毕中断 */
+				USART_ITConfig(UART4, USART_IT_TC, DISABLE);
+
+				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
+				Txx4.Clear();
+				if (DeviceConfigHelper::pCOM4Rx485)
+				{
+					*DeviceConfigHelper::pCOM4Rx485 = 0;
+				}
+			}
+			else
+			{
+				/* 正常情况下，不会进入此分支 */
+				/* 如果发送FIFO的数据还未完毕，则从发送FIFO取1个数据写入发送数据寄存器 */
+				USART_SendData(UART4, Txx4.Dequeue());
+			}
+		}
+#endif
 	}
 	void UART5_IRQHandler(void)
 	{
+#if USECOM5
+		volatile uint8_t ch;
+		if (USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
+		{
+			ch = USART_ReceiveData(UART5);
+			Rxx5.Enqueue(ch);
+		}
+		if (USART_GetITStatus(UART5, USART_IT_IDLE) == SET)
+			//数据帧接收完毕
+		{
+			ch = USART_ReceiveData(UART5); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)  
+		}
+		/* 处理发送缓冲区空中断 */
+		if (USART_GetITStatus(UART5, USART_IT_TXE) != RESET)
+		{
+			if (Txx5.Empty())
+			{
+				/* 发送缓冲区的数据已取完时， 禁止发送缓冲区空中断 （注意：此时最后1个数据还未真正发送完毕）*/
+				USART_ITConfig(UART5, USART_IT_TXE, DISABLE);
+				/* 使能数据发送完毕中断 */
+				USART_ITConfig(UART5, USART_IT_TC, ENABLE);
+			}
+			else
+			{
+				/* 从发送FIFO取1个字节写入串口发送数据寄存器 */
+				USART_SendData(UART5, Txx3.Dequeue());
+			}
+
+		}
+		/* 数据bit位全部发送完毕的中断 */
+		else if (USART_GetITStatus(UART5, USART_IT_TC) != RESET)
+		{
+			if (Txx5.Empty())
+			{
+				/* 如果发送FIFO的数据全部发送完毕，禁止数据发送完毕中断 */
+				USART_ITConfig(UART5, USART_IT_TC, DISABLE);
+
+				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
+				Txx5.Clear();
+				if (DeviceConfigHelper::pCOM5Rx485)
+				{
+					*DeviceConfigHelper::pCOM5Rx485 = 0;
+				}
+			}
+			else
+			{
+				/* 正常情况下，不会进入此分支 */
+				/* 如果发送FIFO的数据还未完毕，则从发送FIFO取1个数据写入发送数据寄存器 */
+				USART_SendData(UART5, Txx5.Dequeue());
+			}
+		}
+#endif
 	}
 
 	void TIM2_IRQHandler(void)

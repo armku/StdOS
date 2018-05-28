@@ -1,5 +1,4 @@
 #include "DeviceConfigHelper.h"
-#include "Core\Queue.h"
 #include "Port.h"
 #include "Platform\stm32.h"
 

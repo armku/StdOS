@@ -9,6 +9,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "Sys.h"
 #include "stdarg.h"
 #include "Platform\stm32.h"
+#include "Device\DeviceConfigHelper.h"
 
 SystemConfig g_Config;//系统配置
 
@@ -224,11 +225,10 @@ int StdPrintf(const char *format, ...)
 	n = vsprintf(sprint_buf, format, args);
 	va_end(args);
 
-	Buffer bs(sprint_buf, n);
-	Txx1.Write(bs);
-	com3send();
-
-
+	Buffer bs(sprint_buf, n);	
+	/*DeviceConfigHelper::comSend(COM1, bs);*/
+	DeviceConfigHelper::com1send(bs);
+	
 	return n;
 }
 extern "C"

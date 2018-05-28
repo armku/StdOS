@@ -10,11 +10,6 @@ extern "C" {
 	void BspPlatformInit();
 		
 	void SerialPrintInit();//调试串口初始化
-	void com3send();
-	
-	extern Queue	Txx1;
-	extern Queue	Rxx1;
-
 #ifdef __cplusplus
 }
 #endif

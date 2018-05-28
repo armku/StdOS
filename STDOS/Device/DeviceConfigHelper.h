@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include "Platform\Pin.h"
 #include "Port.h"
+#include "Core\Queue.h"
 
 typedef enum
 {
@@ -88,5 +89,30 @@ private:
 #define USECOM3 1
 #define USECOM4 0
 #define USECOM5 0
+
+#ifdef USECOM1
+extern Queue	Txx1;
+extern Queue	Rxx1;
+#endif // USECOM1
+
+#ifdef USECOM2
+extern Queue	Txx2;
+extern Queue	Rxx2;
+#endif // USECOM2
+
+#ifdef USECOM3
+extern Queue	Txx3;
+extern Queue	Rxx3;
+#endif // USECOM3
+
+#ifdef USECOM4
+extern Queue	Txx4;
+extern Queue	Rxx4;
+#endif // USECOM4
+
+#ifdef USECOM5
+extern Queue	Txx5;
+extern Queue	Rxx5;
+#endif // USECOM5
 
 #endif // !_SERIALPORTCONFIG_H
