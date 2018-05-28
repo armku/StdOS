@@ -298,7 +298,7 @@ extern "C"
 			//数据帧接收完毕
 		{
 			ch = USART_ReceiveData(USART2); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)    
-			com2test();
+			//com2test();
 		}
 		/* 处理发送缓冲区空中断 */
 		if (USART_GetITStatus(USART2, USART_IT_TXE) != RESET)
