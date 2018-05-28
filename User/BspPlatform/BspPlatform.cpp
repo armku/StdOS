@@ -10,24 +10,6 @@
 #include "Platform\stm32.h"
 #include "Device\DeviceConfigHelper.h"
 
-void SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false)
-{
-	*rxPin = *txPin = P0;
-
-	const Pin g_Uart_Pins[] = UART_PINS;
-	const Pin g_Uart_Pins_Map[] = UART_PINS_FULLREMAP;
-	const Pin *p = g_Uart_Pins;
-	if (Remap)
-	{
-		p = g_Uart_Pins_Map;
-	}
-	int n = index << 2;
-	*txPin = p[n];
-	*rxPin = p[n + 1];
-}
-Port*		Ports[2];	// Tx/Rx
-Pin			Pins[2];	// Tx/Rx
-
 #ifdef STM32F0
 
 
@@ -155,66 +137,10 @@ void InputPort_OpenEXTI(Pin pin, Trigger trigger = Both)
 	//Interrupt.Activate(PORT_IRQns[v3],(void (__cdecl *)(unsigned __int16, void *))EXTI_IRQHandler,v1);
 #endif
 }
-/// TIMx,x[6,7]中断优先级配置
-void TIMx_NVIC_Configuration(void)
-{
-	NVIC_InitTypeDef NVIC_InitStructure;
-	// 设置中断组为0
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 
-	// 设置中断来源
-	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
-
-	// 设置主优先级为 0
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-
-	// 设置抢占优先级为3
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-}
-
-void TIMx_Configuration(void)
-{
-	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
-
-	// 开启TIMx_CLK,x[6,7],即内部时钟CK_INT=72M
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-
-	// 自动重装载寄存器周的值(计数值)
-	TIM_TimeBaseStructure.TIM_Period = 1000;
-
-	// 累计 TIM_Period个频率后产生一个更新或者中断
-	// 时钟预分频数为71，则驱动计数器的时钟CK_CNT = CK_INT / (71+1)=1M
-	TIM_TimeBaseStructure.TIM_Prescaler = 71;
-
-	// 初始化定时器TIMx, x[6,7]
-	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
-
-	// 清除计数器中断标志位
-	TIM_ClearFlag(TIM2, TIM_FLAG_Update);
-
-	// 开启计数器中断
-	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
-
-	// 使能计数器
-	TIM_Cmd(TIM2, ENABLE);
-
-	// 暂时关闭TIMx,x[6,7]的时钟，等待使用
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, DISABLE);
-}
 void BspPlatformInit()
-{
-	/* 基本定时器 TIMx,x[6,7] 定时配置 */
-	TIMx_Configuration();
-
-	/* 配置基本定时器 TIMx,x[6,7]的中断优先级 */
-	TIMx_NVIC_Configuration();
-
-	/* 基本定时器 TIMx,x[6,7] 重新开时钟，开始计时 */
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-
-	DeviceConfigHelper::TimeTickInit();
+{	
+	DeviceConfigHelper::TimeTickInit();//系统用定时器初始化
 }
 void TimeUpdate();
 extern "C"
