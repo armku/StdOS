@@ -83,8 +83,10 @@ private:
 	//¶¨Ê±Æ÷
 
 };
-
-#define USECOM1 0
+#ifdef __cplusplus
+extern "C" {
+#endif
+#define USECOM1 1
 #define USECOM2 1
 #define USECOM3 1
 #define USECOM4 0
@@ -114,5 +116,9 @@ extern Queue	Rxx4;
 extern Queue	Txx5;
 extern Queue	Rxx5;
 #endif // USECOM5
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // !_SERIALPORTCONFIG_H
