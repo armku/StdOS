@@ -8,8 +8,6 @@ init some hardware
 extern "C" {
 #endif
 	void BspPlatformInit();
-		
-	void SerialPrintInit();//调试串口初始化
 #ifdef __cplusplus
 }
 #endif

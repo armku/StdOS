@@ -37,12 +37,6 @@ extern "C"
 }
 #elif defined STM32F1
 
-//调试串口初始化
-void SerialPrintInit()
-{
-	DeviceConfigHelper::ConfigCom(COM1, 256000);
-}
-
 //中断线打开、关闭
 void SetEXIT(int pinIndex, bool enable, Trigger trigger = Both)
 {
