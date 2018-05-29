@@ -226,8 +226,8 @@ int StdPrintf(const char *format, ...)
 	va_end(args);
 
 	Buffer bs(sprint_buf, n);
-	Txx1.Write(bs);
-	DeviceConfigHelper::com1send();
+	Txx3.Write(bs);
+	DeviceConfigHelper::com3send();
 
 
 	return n;

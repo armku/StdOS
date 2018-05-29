@@ -7,6 +7,7 @@ int main(void)
 {
 	Sys.Init();
 	DeviceConfigHelper::ConfigCom(COM1, 256000);
+	DeviceConfigHelper::ConfigCom(COM3, 256000);
 #if DEBUG
 	Sys.ShowInfo();
 #endif 	
