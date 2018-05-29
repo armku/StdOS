@@ -365,7 +365,7 @@ void DeviceConfigHelper::configCOM1(int baudRate)
 	USART_InitTypeDef USART_InitStructure;
 
 	/* config USART1 clock */
-	RCC_APB1PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 
 	/* USART1 mode config */
 	USART_InitStructure.USART_BaudRate = baudRate;
