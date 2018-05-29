@@ -7,7 +7,6 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "Task.h"
 #include <string.h>
 #include "Sys.h"
-#include "stdarg.h"
 #include "Platform\stm32.h"
 #include "Device\DeviceConfigHelper.h"
 
@@ -212,22 +211,7 @@ void TSys::Start()
 	this->Started = true;
 	Task::Scheduler()->Start();
 }
-#include <stdio.h>
-#include "BspPlatform\BspPlatform.h"
-/////////////////////////////////////////////////////////////////////////////
-int StdPrintf(const char *format, ...)
-{
-	static char sprint_buf[1024];
-	va_list args;
 
-	int n;
-	va_start(args, format);
-	n = vsprintf(sprint_buf, format, args);
-	va_end(args);
-
-	DeviceConfigHelper::comSend(COM1, Buffer(sprint_buf, n));
-	return n;
-}
 extern "C"
 {
 	extern uint32_t __heap_base;

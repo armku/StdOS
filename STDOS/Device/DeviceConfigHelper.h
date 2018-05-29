@@ -116,7 +116,7 @@ private:
 #ifdef __cplusplus
 extern "C" {
 #endif
-#define USECOM1 0
+#define USECOM1 1
 #define USECOM2 1
 #define USECOM3 1
 #define USECOM4 0
