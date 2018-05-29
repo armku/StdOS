@@ -83,8 +83,7 @@ void LedTask(void *param)
 void Esp8266Test();
 void ssd1309Test();
 void BspInit()
-{
-	BspPlatformInit();
+{	
 //	Esp8266Test();
 //	ssd1309Test();
 //	SerialPort::GetMessagePort()->Register(OnUsart1Read);

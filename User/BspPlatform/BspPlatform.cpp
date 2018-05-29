@@ -13,6 +13,8 @@
 void TimeUpdate();
 void BspPlatformInit()
 {	
+	DeviceConfigHelper::ConfigCom(COM1, 256000);
+	DeviceConfigHelper::ConfigCom(COM3, 256000);
 	DeviceConfigHelper::TimeTickInit();//系统用定时器初始化
 	DeviceConfigHelper::PTim2Update = TimeUpdate;
 }
