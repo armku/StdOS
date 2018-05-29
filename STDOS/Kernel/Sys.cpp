@@ -225,11 +225,8 @@ int StdPrintf(const char *format, ...)
 	n = vsprintf(sprint_buf, format, args);
 	va_end(args);
 
-	Buffer bs(sprint_buf, n);
-	Txx3.Write(bs);
-	DeviceConfigHelper::com3send();
-
-
+	Buffer bs(sprint_buf, n);	
+	DeviceConfigHelper::comSend(COM3, bs);
 	return n;
 }
 extern "C"
