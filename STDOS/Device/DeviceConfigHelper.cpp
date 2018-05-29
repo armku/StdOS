@@ -137,6 +137,9 @@ OutputPort *DeviceConfigHelper::pCOM2Rx485 = 0;
 OutputPort *DeviceConfigHelper::pCOM3Rx485 = 0;
 OutputPort *DeviceConfigHelper::pCOM4Rx485 = 0;
 OutputPort *DeviceConfigHelper::pCOM5Rx485 = 0;
+
+void_func_point *PRcvCOM1 = 0;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
