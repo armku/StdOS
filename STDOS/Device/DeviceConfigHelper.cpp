@@ -619,7 +619,7 @@ void DeviceConfigHelper::Com1ChgBaudRate(int baudRate)
 
 #elif defined STM32F1
 	USART_InitTypeDef USART_InitStructure;
-
+		
 	/* USART mode config */
 	USART_InitStructure.USART_BaudRate = baudRate;
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
@@ -794,7 +794,7 @@ void DeviceConfigHelper::TimeTickInit()//系统用定时器初始化
 }
 
 //定时器配置
-void DeviceConfigHelper::TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
+void DeviceConfigHelper::TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup,int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 	switch (tim)
 	{
@@ -1115,7 +1115,7 @@ void DeviceConfigHelper::Timer8Config(int interval)
 
 #endif
 }
-void DeviceConfigHelper::TimerConfigNvic(TIMER tim, int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
+void DeviceConfigHelper::TimerConfigNvic(TIMER tim, int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority , int NVIC_IRQChannelSubPriorit )
 {
 	switch (tim)
 	{
@@ -1185,7 +1185,7 @@ void DeviceConfigHelper::Timer1ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 #if defined STM32F0
 
 #elif defined STM32F1
-
+	
 #elif defined STM32F4
 
 #endif
