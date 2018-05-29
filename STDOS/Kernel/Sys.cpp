@@ -212,6 +212,8 @@ void TSys::Start()
 	Task::Scheduler()->Start();
 }
 
+#include "BspPlatform\BspPlatform.h"
+/////////////////////////////////////////////////////////////////////////////
 extern "C"
 {
 	extern uint32_t __heap_base;
