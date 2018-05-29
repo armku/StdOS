@@ -3,30 +3,29 @@
 #include "Platform\stm32.h"
 
 //中断
+
+Func DeviceConfigHelper::PExit0 = 0;
+Func DeviceConfigHelper::PExit1 = 0;
+Func DeviceConfigHelper::PExit2 = 0;
+Func DeviceConfigHelper::PExit3 = 0;
+Func DeviceConfigHelper::PExit4 = 0;
+Func DeviceConfigHelper::PExit5 = 0;
+Func DeviceConfigHelper::PExit6 = 0;
+Func DeviceConfigHelper::PExit7 = 0;
+Func DeviceConfigHelper::PExit8 = 0;
+Func DeviceConfigHelper::PExit9 = 0;
+Func DeviceConfigHelper::PExit10 = 0;
+Func DeviceConfigHelper::PExit11 = 0;
+Func DeviceConfigHelper::PExit12 = 0;
+Func DeviceConfigHelper::PExit13 = 0;
+Func DeviceConfigHelper::PExit14 = 0;
+Func DeviceConfigHelper::PExit15 = 0;
+
 //中断线打开、关闭
 void DeviceConfigHelper::SetEXIT(int pinIndex, bool enable, Trigger trigger)
 {
 #if defined STM32F0
-	/* 配置EXTI中断线 */
-	EXTI_InitTypeDef ext;
-	EXTI_StructInit(&ext);
-	ext.EXTI_Line = EXTI_Line0 << (pinIndex & 0X0F);
-	ext.EXTI_Mode = EXTI_Mode_Interrupt;
-	switch (trigger)
-	{
-	case InputPort::Rising:
-		ext.EXTI_Trigger = EXTI_Trigger_Rising; // 上升沿触发
-		break;
-	case InputPort::Falling:
-		ext.EXTI_Trigger = EXTI_Trigger_Falling; // 下降沿触发
-		break;
-	case InputPort::Both:
-	default:
-		ext.EXTI_Trigger = EXTI_Trigger_Rising_Falling; // 上升沿下降沿触发
-		break;
-	}
-	ext.EXTI_LineCmd = enable ? ENABLE : DISABLE;
-	EXTI_Init(&ext);
+
 #elif defined STM32F1
 	/* 配置EXTI中断线 */
 	EXTI_InitTypeDef ext;
@@ -47,26 +46,7 @@ void DeviceConfigHelper::SetEXIT(int pinIndex, bool enable, Trigger trigger)
 	ext.EXTI_LineCmd = enable ? ENABLE : DISABLE;
 	EXTI_Init(&ext);
 #elif defined STM32F4
-	/* 配置EXTI中断线 */
-	EXTI_InitTypeDef ext;
-	EXTI_StructInit(&ext);
-	ext.EXTI_Line = EXTI_Line0 << (pinIndex & 0X0F);
-	ext.EXTI_Mode = EXTI_Mode_Interrupt;
-	switch (trigger)
-	{
-	case InputPort::Rising:
-		ext.EXTI_Trigger = EXTI_Trigger_Rising; // 上升沿触发
-		break;
-	case InputPort::Falling:
-		ext.EXTI_Trigger = EXTI_Trigger_Falling; // 下降沿触发
-		break;
-	case InputPort::Both:
-	default:
-		ext.EXTI_Trigger = EXTI_Trigger_Rising_Falling; // 上升沿下降沿触发
-		break;
-	}
-	ext.EXTI_LineCmd = enable ? ENABLE : DISABLE;
-	EXTI_Init(&ext);
+
 #endif
 }
 #if defined STM32F0
@@ -75,20 +55,9 @@ void DeviceConfigHelper::SetEXIT(int pinIndex, bool enable, Trigger trigger)
 
 static const int PORT_IRQns[] =
 {
-#if defined STM32F0
-	EXTI0_1_IRQn, EXTI0_1_IRQn,  // 基础
-	EXTI2_3_IRQn, EXTI2_3_IRQn,  // 基础
-	EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn,
-	EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn, EXTI4_15_IRQn  // EXTI15_10
-#elif defined STM32F1
 	EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
 	EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
 	EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
-#elif defined STM32F4
-	EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
-	EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
-	EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
-#endif
 };
 #elif defined STM32F4
 
@@ -98,14 +67,9 @@ static const int PORT_IRQns[] =
 void DeviceConfigHelper::InputPort_OpenEXTI(Pin pin, Trigger trigger)
 {
 #if defined STM32F0
-	//RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA |RCC_APB2Periph_GPIOC| RCC_APB2Periph_AFIO,ENABLE);
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
-	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA + pin >> 4, pin & 0x0f);
 
-	SetEXIT(pin, true, trigger);
-	Interrupt.SetPriority(PORT_IRQns[pin & 0x0f], 1u);
-	//Interrupt.Activate(PORT_IRQns[v3],(void (__cdecl *)(unsigned __int16, void *))EXTI_IRQHandler,v1);
 #elif defined STM32F1
+
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
 	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA + pin >> 4, pin & 0x0f);
 	SetEXIT(pin, true, trigger);
@@ -121,13 +85,7 @@ void DeviceConfigHelper::InputPort_OpenEXTI(Pin pin, Trigger trigger)
 	NVIC_Init(&nvic);
 	NVIC_SetPriority((IRQn_Type)PORT_IRQns[pin & 0x0f], 1);
 #elif defined STM32F4
-	//RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA |RCC_APB2Periph_GPIOC| RCC_APB2Periph_AFIO,ENABLE);
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
-	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA + pin >> 4, pin & 0x0f);
 
-	SetEXIT(pin, true, trigger);
-	Interrupt.SetPriority(PORT_IRQns[pin & 0x0f], 1u);
-	//Interrupt.Activate(PORT_IRQns[v3],(void (__cdecl *)(unsigned __int16, void *))EXTI_IRQHandler,v1);
 #endif
 }
 
@@ -143,7 +101,6 @@ Func DeviceConfigHelper::PRcvCOM2 = 0;
 Func DeviceConfigHelper::PRcvCOM3 = 0;
 Func DeviceConfigHelper::PRcvCOM4 = 0;
 Func DeviceConfigHelper::PRcvCOM5 = 0;
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -372,7 +329,7 @@ void DeviceConfigHelper::configCOM1(int baudRate)
 	USART_InitTypeDef USART_InitStructure;
 
 	/* config USART1 clock */
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 
 	/* USART1 mode config */
 	USART_InitStructure.USART_BaudRate = baudRate;
@@ -390,7 +347,7 @@ void DeviceConfigHelper::configCOM1(int baudRate)
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 
 	/* Enable the USARTy Interrupt */
-	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
@@ -662,7 +619,7 @@ void DeviceConfigHelper::Com1ChgBaudRate(int baudRate)
 
 #elif defined STM32F1
 	USART_InitTypeDef USART_InitStructure;
-		
+
 	/* USART mode config */
 	USART_InitStructure.USART_BaudRate = baudRate;
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
@@ -781,6 +738,15 @@ void DeviceConfigHelper::SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, b
 	*rxPin = p[n + 1];
 }
 //定时器
+Func DeviceConfigHelper::PTim2Update = 0;
+Func DeviceConfigHelper::PTim3Update = 0;
+Func DeviceConfigHelper::PTim4Update = 0;
+Func DeviceConfigHelper::PTim5Update = 0;
+Func DeviceConfigHelper::PTim6Update = 0;
+Func DeviceConfigHelper::PTim7Update = 0;
+Func DeviceConfigHelper::PTim8Update = 0;
+
+
 void DeviceConfigHelper::TimeTickInit()//系统用定时器初始化
 {
 #if defined STM32F0
@@ -828,7 +794,7 @@ void DeviceConfigHelper::TimeTickInit()//系统用定时器初始化
 }
 
 //定时器配置
-void DeviceConfigHelper::TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup,int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
+void DeviceConfigHelper::TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 	switch (tim)
 	{
@@ -1149,7 +1115,7 @@ void DeviceConfigHelper::Timer8Config(int interval)
 
 #endif
 }
-void DeviceConfigHelper::TimerConfigNvic(TIMER tim, int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority , int NVIC_IRQChannelSubPriorit )
+void DeviceConfigHelper::TimerConfigNvic(TIMER tim, int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 	switch (tim)
 	{
@@ -1219,7 +1185,7 @@ void DeviceConfigHelper::Timer1ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 #if defined STM32F0
 
 #elif defined STM32F1
-	
+
 #elif defined STM32F4
 
 #endif
@@ -1380,26 +1346,6 @@ void DeviceConfigHelper::Timer8ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 }
 
 //系统
-int DeviceConfigHelper::CurrentTick()
-{
-#if defined STM32F0
-
-#elif defined STM32F1
-	return (TIM2->CNT) >> 1;
-#elif defined STM32F4
-
-#endif
-}
-uint32_t DeviceConfigHelper::CurrentTicks1()
-{
-#if defined STM32F0
-
-#elif defined STM32F1
-	return SysTick->LOAD - SysTick->VAL;
-#elif defined STM32F4
-
-#endif
-}
 
 //其他
 #if 0

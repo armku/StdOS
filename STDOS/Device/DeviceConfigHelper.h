@@ -19,6 +19,23 @@ public:
 	static void SetEXIT(int pinIndex, bool enable, Trigger trigger = Both);
 	static void InputPort_OpenEXTI(Pin pin, Trigger trigger = Both);
 
+	static Func PExit0;
+	static Func PExit1;
+	static Func PExit2;
+	static Func PExit3;
+	static Func PExit4;
+	static Func PExit5;
+	static Func PExit6;
+	static Func PExit7;
+	static Func PExit8;
+	static Func PExit9;
+	static Func PExit10;
+	static Func PExit11;
+	static Func PExit12;
+	static Func PExit13;
+	static Func PExit14;
+	static Func PExit15;
+
 	//串口
 	static void ConfigCom(COM com, int baudRate);
 	static void ComChgBaudRate(COM com, int baudRate);//改变波特率
@@ -38,7 +55,7 @@ public:
 	static OutputPort *pCOM3Rx485;
 	static OutputPort *pCOM4Rx485;
 	static OutputPort *pCOM5Rx485;
-	
+
 	static Func PRcvCOM1;
 	static Func PRcvCOM2;
 	static Func PRcvCOM3;
@@ -46,7 +63,7 @@ public:
 	static Func PRcvCOM5;
 	//定时器
 	static void TimeTickInit();//系统用定时器初始化
-	static void TimerConfig(TIMER tim,int interval,int NVIC_PriorityGroup=0,int NVIC_IRQChannelPreemptionPriority = 0,int NVIC_IRQChannelSubPriorit=3);//定时器配置
+	static void TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);//定时器配置
 	static void Timer0Config(int interval);//定时器配置
 	static void Timer1Config(int interval);//定时器配置
 	static void Timer2Config(int interval);//定时器配置
@@ -66,6 +83,14 @@ public:
 	static void Timer6ConfigNvic(int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);
 	static void Timer7ConfigNvic(int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);
 	static void Timer8ConfigNvic(int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);
+
+	static Func PTim2Update;
+	static Func PTim3Update;
+	static Func PTim4Update;
+	static Func PTim5Update;
+	static Func PTim6Update;
+	static Func PTim7Update;
+	static Func PTim8Update;
 	//系统
 	static int CurrentTick();
 	static uint32_t CurrentTicks1();
@@ -91,35 +116,35 @@ private:
 #ifdef __cplusplus
 extern "C" {
 #endif
-#define USECOM1 1
+#define USECOM1 0
 #define USECOM2 1
 #define USECOM3 1
 #define USECOM4 0
 #define USECOM5 0
 
 #ifdef USECOM1
-extern Queue	Txx1;
-extern Queue	Rxx1;
+	extern Queue	Txx1;
+	extern Queue	Rxx1;
 #endif // USECOM1
 
 #ifdef USECOM2
-extern Queue	Txx2;
-extern Queue	Rxx2;
+	extern Queue	Txx2;
+	extern Queue	Rxx2;
 #endif // USECOM2
 
 #ifdef USECOM3
-extern Queue	Txx3;
-extern Queue	Rxx3;
+	extern Queue	Txx3;
+	extern Queue	Rxx3;
 #endif // USECOM3
 
 #ifdef USECOM4
-extern Queue	Txx4;
-extern Queue	Rxx4;
+	extern Queue	Txx4;
+	extern Queue	Rxx4;
 #endif // USECOM4
 
 #ifdef USECOM5
-extern Queue	Txx5;
-extern Queue	Rxx5;
+	extern Queue	Txx5;
+	extern Queue	Rxx5;
 #endif // USECOM5
 
 #ifdef __cplusplus
