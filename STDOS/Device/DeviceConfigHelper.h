@@ -32,7 +32,7 @@ public:
 	static void com3send(Buffer& bs);
 	static void com4send(Buffer& bs);
 	static void com5send(Buffer& bs);
-	static void comSend(COM com, Buffer& bs);//发送数据
+	static void comSend(COM com, Buffer bs);//发送数据
 	static OutputPort *pCOM1Rx485;
 	static OutputPort *pCOM2Rx485;
 	static OutputPort *pCOM3Rx485;

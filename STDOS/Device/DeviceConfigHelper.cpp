@@ -240,7 +240,7 @@ void DeviceConfigHelper::ComChgBaudRate(COM com, int baudRate)
 	}
 }
 //·¢ËÍÊý¾Ý
-void DeviceConfigHelper::comSend(COM com, Buffer& bs)
+void DeviceConfigHelper::comSend(COM com, Buffer bs)
 {
 	switch (com)
 	{

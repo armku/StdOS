@@ -225,8 +225,7 @@ int StdPrintf(const char *format, ...)
 	n = vsprintf(sprint_buf, format, args);
 	va_end(args);
 
-	Buffer bs(sprint_buf, n);	
-	DeviceConfigHelper::comSend(COM1, bs);
+	DeviceConfigHelper::comSend(COM1, Buffer(sprint_buf, n));
 	return n;
 }
 extern "C"
