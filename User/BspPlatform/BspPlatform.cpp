@@ -41,7 +41,7 @@ extern "C"
 			ch = USART_ReceiveData(USART1); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
 			if (DeviceConfigHelper::PRcvCOM1)
 			{
-				(*(DeviceConfigHelper::PRcvCOM1))();
+				(*DeviceConfigHelper::PRcvCOM1)();
 			}
 		}
 		/* 处理发送缓冲区空中断 */
