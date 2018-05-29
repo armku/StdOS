@@ -12,8 +12,6 @@ typedef enum
 	Both = 0x03	// 上升下降沿
 }Trigger;
 
-typedef void(*void_func_point) (void);
-
 class DeviceConfigHelper
 {
 public:
@@ -41,7 +39,7 @@ public:
 	static OutputPort *pCOM4Rx485;
 	static OutputPort *pCOM5Rx485;
 	
-	static void_func_point *PRcvCOM1;
+	static Func PRcvCOM1;
 	//定时器
 	static void TimeTickInit();//系统用定时器初始化
 	static void TimerConfig(TIMER tim,int interval,int NVIC_PriorityGroup=0,int NVIC_IRQChannelPreemptionPriority = 0,int NVIC_IRQChannelSubPriorit=3);//定时器配置
