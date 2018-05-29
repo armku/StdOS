@@ -40,6 +40,10 @@ public:
 	static OutputPort *pCOM5Rx485;
 	
 	static Func PRcvCOM1;
+	static Func PRcvCOM2;
+	static Func PRcvCOM3;
+	static Func PRcvCOM4;
+	static Func PRcvCOM5;
 	//定时器
 	static void TimeTickInit();//系统用定时器初始化
 	static void TimerConfig(TIMER tim,int interval,int NVIC_PriorityGroup=0,int NVIC_IRQChannelPreemptionPriority = 0,int NVIC_IRQChannelSubPriorit=3);//定时器配置

@@ -35,9 +35,9 @@ extern "C"
 			ch = USART_ReceiveData(USART1);
 			Rxx1.Enqueue(ch);
 		}
-		if (USART_GetITStatus(USART1, USART_IT_IDLE) == SET)
-			//数据帧接收完毕
+		if (USART_GetITStatus(USART1, USART_IT_IDLE) == SET)			
 		{
+			//数据帧接收完毕
 			ch = USART_ReceiveData(USART1); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
 			if (DeviceConfigHelper::PRcvCOM1)
 			{
@@ -94,11 +94,14 @@ extern "C"
 			ch = USART_ReceiveData(USART2);
 			Rxx2.Enqueue(ch);
 		}
-		if (USART_GetITStatus(USART2, USART_IT_IDLE) == SET)
-			//数据帧接收完毕
+		if (USART_GetITStatus(USART2, USART_IT_IDLE) == SET)			
 		{
+			//数据帧接收完毕
 			ch = USART_ReceiveData(USART2); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)    
-			//com2test();
+			if (DeviceConfigHelper::PRcvCOM2)
+			{
+				(*DeviceConfigHelper::PRcvCOM2)();
+			}
 		}
 		/* 处理发送缓冲区空中断 */
 		if (USART_GetITStatus(USART2, USART_IT_TXE) != RESET)
@@ -150,10 +153,14 @@ extern "C"
 			ch = USART_ReceiveData(USART3);
 			Rxx3.Enqueue(ch);
 		}
-		if (USART_GetITStatus(USART3, USART_IT_IDLE) == SET)
-			//数据帧接收完毕
+		if (USART_GetITStatus(USART3, USART_IT_IDLE) == SET)			
 		{
+			//数据帧接收完毕
 			ch = USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR) 
+			if (DeviceConfigHelper::PRcvCOM3)
+			{
+				(*DeviceConfigHelper::PRcvCOM3)();
+			}
 		}
 		/* 处理发送缓冲区空中断 */
 		if (USART_GetITStatus(USART3, USART_IT_TXE) != RESET)
@@ -205,10 +212,14 @@ extern "C"
 			ch = USART_ReceiveData(UART4);
 			Rxx3.Enqueue(ch);
 		}
-		if (USART_GetITStatus(UART4, USART_IT_IDLE) == SET)
-			//数据帧接收完毕
+		if (USART_GetITStatus(UART4, USART_IT_IDLE) == SET)			
 		{
+			//数据帧接收完毕
 			ch = USART_ReceiveData(UART4); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR) 
+			if (DeviceConfigHelper::PRcvCOM4)
+			{
+				(*DeviceConfigHelper::PRcvCOM4)();
+			}
 		}
 		/* 处理发送缓冲区空中断 */
 		if (USART_GetITStatus(UART4, USART_IT_TXE) != RESET)
@@ -260,10 +271,14 @@ extern "C"
 			ch = USART_ReceiveData(UART5);
 			Rxx5.Enqueue(ch);
 		}
-		if (USART_GetITStatus(UART5, USART_IT_IDLE) == SET)
-			//数据帧接收完毕
+		if (USART_GetITStatus(UART5, USART_IT_IDLE) == SET)			
 		{
+			//数据帧接收完毕
 			ch = USART_ReceiveData(UART5); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)  
+			if (DeviceConfigHelper::PRcvCOM5)
+			{
+				(*DeviceConfigHelper::PRcvCOM5)();
+			}
 		}
 		/* 处理发送缓冲区空中断 */
 		if (USART_GetITStatus(UART5, USART_IT_TXE) != RESET)
