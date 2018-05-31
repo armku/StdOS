@@ -892,6 +892,21 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\DS1302Test.cpp</FilePath>
             </File>
+            <File>
+              <FileName>LedTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\LedTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDogTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort485Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\SerialPort485Test.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1781,6 +1796,21 @@
               <FileName>DS1302Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\DS1302Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>LedTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\LedTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDogTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort485Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\SerialPort485Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
