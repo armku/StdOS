@@ -74,19 +74,9 @@ void LedTask(void *param)
 	//led2 = keyup;
 }
 #endif // STM32F0
-//uint32_t OnUsart1Read(ITransport *transport, Buffer &bs, void *para, void *para2)
-//{
-//	bs.Show(true);
-//	//transport->Write(bs);
-//	return 0;
-//}
-void Esp8266Test();
-void ssd1309Test();
+
 void BspInit()
 {	
-//	Esp8266Test();
-//	ssd1309Test();
-//	SerialPort::GetMessagePort()->Register(OnUsart1Read);
 
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 }
