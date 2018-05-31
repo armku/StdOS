@@ -328,6 +328,9 @@ extern "C"
 	}
 	void TIM4_IRQHandler(void)
 	{
+#if defined STM32F0
+		//F0没有TIM4
+#else
 		if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
 		{
 			TIM_ClearITPendingBit(TIM4, TIM_FLAG_Update);
@@ -336,9 +339,13 @@ extern "C"
 				(*DeviceConfigHelper::PTim4Update)();
 			}
 		}
+#endif
 	}
 	void TIM5_IRQHandler(void)
 	{
+#if defined STM32F0
+		//F0没有TIM5
+#else
 		if (TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET)
 		{
 			TIM_ClearITPendingBit(TIM5, TIM_FLAG_Update);
@@ -347,6 +354,7 @@ extern "C"
 				(*DeviceConfigHelper::PTim5Update)();
 			}
 		}
+#endif
 	}
 
 	void TIM6_IRQHandler(void)

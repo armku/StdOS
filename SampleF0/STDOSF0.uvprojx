@@ -659,6 +659,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\DeviceConfigHelper.cpp</FilePath>
             </File>
+            <File>
+              <FileName>DevicesHelper.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\DevicesHelper.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1420,6 +1425,11 @@
               <FileName>DeviceConfigHelper.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Device\DeviceConfigHelper.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DevicesHelper.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Device\DevicesHelper.cpp</FilePath>
             </File>
           </Files>
         </Group>
