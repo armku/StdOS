@@ -12,18 +12,17 @@ void PwmTestRoutin123(void *param)
 		i = 0;
 	pwm.SetOutPercent(i);
 }
-void TIMx_PWM_Init(void);
+
 void PwmSoloTestInit()
 {
 	pwm.SetOutPercent(0);
 	pwm.Open();
-	TIMx_PWM_Init();
+	pwm.SetPin(PA6);
 	Sys.AddTask(PwmTestRoutin123,0,0,100,"pwmtest");
 }
 
 #include "stm32f10x.h"
-/************************** TIM 函数声明********************************/
-void               TIMx_PWM_Init(void);
+
 
 static void TIMx_GPIO_Config(void)
 {
@@ -123,9 +122,304 @@ static void TIMx_Mode_Config(void)
 	TIM_Cmd(TIM3, ENABLE);                   //使能定时器3	
 }
 
-void TIMx_PWM_Init(void)
+void PwmSolo::SetPin(Pin pin)
 {
-	TIMx_GPIO_Config();
-	TIMx_Mode_Config();
+	switch (pin)
+	{
+	case P0:
+		break;
+	case PA0:
+		break;
+	case PA1:
+		break;
+	case PA2:
+		break;
+	case PA3:
+		break;
+	case PA4:
+		break;
+	case PA5:
+		break;
+	case PA6:
+		TIMx_GPIO_Config();
+		TIMx_Mode_Config();
+		break;
+	case PA7:
+		break;
+	case PA8:
+		break;
+	case PA9:
+		break;
+	case PA10:
+		break;
+	case PA11:
+		break;
+	case PA12:
+		break;
+	case PA13:
+		break;
+	case PA14:
+		break;
+	case PA15:
+		break;
+	case PB0:
+		break;
+	case PB1:
+		break;
+	case PB2:
+		break;
+	case PB3:
+		break;
+	case PB4:
+		break;
+	case PB5:
+		break;
+	case PB6:
+		break;
+	case PB7:
+		break;
+	case PB8:
+		break;
+	case PB9:
+		break;
+	case PB10:
+		break;
+	case PB11:
+		break;
+	case PB12:
+		break;
+	case PB13:
+		break;
+	case PB14:
+		break;
+	case PB15:
+		break;
+	case PC0:
+		break;
+	case PC1:
+		break;
+	case PC2:
+		break;
+	case PC3:
+		break;
+	case PC4:
+		break;
+	case PC5:
+		break;
+	case PC6:
+		break;
+	case PC7:
+		break;
+	case PC8:
+		break;
+	case PC9:
+		break;
+	case PC10:
+		break;
+	case PC11:
+		break;
+	case PC12:
+		break;
+	case PC13:
+		break;
+	case PC14:
+		break;
+	case PC15:
+		break;
+	case PD0:
+		break;
+	case PD1:
+		break;
+	case PD2:
+		break;
+	case PD3:
+		break;
+	case PD4:
+		break;
+	case PD5:
+		break;
+	case PD6:
+		break;
+	case PD7:
+		break;
+	case PD8:
+		break;
+	case PD9:
+		break;
+	case PD10:
+		break;
+	case PD11:
+		break;
+	case PD12:
+		break;
+	case PD13:
+		break;
+	case PD14:
+		break;
+	case PD15:
+		break;
+	case PE0:
+		break;
+	case PE1:
+		break;
+	case PE2:
+		break;
+	case PE3:
+		break;
+	case PE4:
+		break;
+	case PE5:
+		break;
+	case PE6:
+		break;
+	case PE7:
+		break;
+	case PE8:
+		break;
+	case PE9:
+		break;
+	case PE10:
+		break;
+	case PE11:
+		break;
+	case PE12:
+		break;
+	case PE13:
+		break;
+	case PE14:
+		break;
+	case PE15:
+		break;
+	case PF0:
+		break;
+	case PF1:
+		break;
+	case PF2:
+		break;
+	case PF3:
+		break;
+	case PF4:
+		break;
+	case PF5:
+		break;
+	case PF6:
+		break;
+	case PF7:
+		break;
+	case PF8:
+		break;
+	case PF9:
+		break;
+	case PF10:
+		break;
+	case PF11:
+		break;
+	case PF12:
+		break;
+	case PF13:
+		break;
+	case PF14:
+		break;
+	case PF15:
+		break;
+	case PG0:
+		break;
+	case PG1:
+		break;
+	case PG2:
+		break;
+	case PG3:
+		break;
+	case PG4:
+		break;
+	case PG5:
+		break;
+	case PG6:
+		break;
+	case PG7:
+		break;
+	case PG8:
+		break;
+	case PG9:
+		break;
+	case PG10:
+		break;
+	case PG11:
+		break;
+	case PG12:
+		break;
+	case PG13:
+		break;
+	case PG14:
+		break;
+	case PG15:
+		break;
+	case PH0:
+		break;
+	case PH1:
+		break;
+	case PH2:
+		break;
+	case PH3:
+		break;
+	case PH4:
+		break;
+	case PH5:
+		break;
+	case PH6:
+		break;
+	case PH7:
+		break;
+	case PH8:
+		break;
+	case PH9:
+		break;
+	case PH10:
+		break;
+	case PH11:
+		break;
+	case PH12:
+		break;
+	case PH13:
+		break;
+	case PH14:
+		break;
+	case PH15:
+		break;
+	case PI0:
+		break;
+	case PI1:
+		break;
+	case PI2:
+		break;
+	case PI3:
+		break;
+	case PI4:
+		break;
+	case PI5:
+		break;
+	case PI6:
+		break;
+	case PI7:
+		break;
+	case PI8:
+		break;
+	case PI9:
+		break;
+	case PI10:
+		break;
+	case PI11:
+		break;
+	case PI12:
+		break;
+	case PI13:
+		break;
+	case PI14:
+		break;
+	case PI15:
+		break;
+	default:
+		break;
+	}
 }
 #endif // _PWMSOLO_TEST_CPP
