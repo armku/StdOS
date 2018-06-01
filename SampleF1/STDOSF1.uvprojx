@@ -919,6 +919,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
             </File>
+            <File>
+              <FileName>NPATest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\NPATest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1835,6 +1840,11 @@
               <FileName>PwmSoloTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NPATest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\NPATest.cpp</FilePath>
             </File>
           </Files>
         </Group>
