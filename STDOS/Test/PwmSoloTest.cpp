@@ -11,7 +11,8 @@ void PwmTestRoutin123(void *param)
 	if (i++ > 1000)
 		i = 0;
 	//pwm.SetOutPercent(50);
-	pwm.SetOUt1t(i);
+	//pwm.SetOUt1t(i);
+	pwm.SetOut(i);
 }
 
 void PwmSoloTestInit()
@@ -24,17 +25,6 @@ void PwmSoloTestInit()
 
 #include "stm32f10x.h"
 
-void PwmSolo::SetOUt1t(int out)
-{
-	TIM_OCInitTypeDef  TIM_OCInitStructure;
-
-	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;	    //配置为PWM模式1
-	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-	TIM_OCInitStructure.TIM_Pulse = out;	   //设置跳变值，当计数器计数到这个值时，电平发生跳变
-	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;  //当定时器计数值小于CCR1_Val时为高电平
-	TIM_OC1Init(TIM3, &TIM_OCInitStructure);	 //使能通道1
-	TIM_OC1PreloadConfig(TIM3, TIM_OCPreload_Enable);
-}
 static void TIMx_GPIO_Config(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -92,6 +82,7 @@ static void TIMx_Mode_Config(void)
 
 void PwmSolo::SetPin(Pin pin)
 {
+	this->_Pin = pin;
 	switch (pin)
 	{
 	case P0:

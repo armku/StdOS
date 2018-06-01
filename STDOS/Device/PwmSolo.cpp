@@ -755,7 +755,7 @@ void PwmSolo::OnOpen2()
 }
 
 //ÉèÖÃÊä³öÖµ
-void PwmSolo::SetOut(uint16_t pwmValue)
+void PwmSolo::SetOut(int pwmValue)
 {
 #if defined STM32F0
 	this->_duty = pwmValue;
