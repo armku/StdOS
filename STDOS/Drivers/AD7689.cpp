@@ -15,6 +15,12 @@ CAD7689::CAD7689()
     this->ppinsdi.Invert=false;
     this->ppinsdo.Invert=false;
     this->ppincnv.Invert=false;  
+
+	this->ppinsck.OpenDrain = false;
+	this->ppinsdi.OpenDrain = false;
+	//this->ppinsdo.OpenDrain = false;
+	this->ppincnv.OpenDrain = false;
+
 	
 	for (uint8_t i = 0; i < MAXCH; i++)
     {
@@ -23,16 +29,18 @@ CAD7689::CAD7689()
     this->chCurrent = 0;
     this->chDelayCnt = 0;
 }
-CAD7689::CAD7689(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv):CAD7689()
-{
-	this->SetPin(pinsck,pinsdi,pinsdo,pincnv);
-}
+
 void CAD7689::SetPin(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
 {
 	this->ppinsck.Set(pinsck);
     this->ppinsdi.Set(pinsdi);
     this->ppinsdo.Set(pinsdo);
     this->ppincnv.Set(pincnv);
+	
+	this->ppinsck.Open();
+    this->ppinsdi.Open();
+    this->ppinsdo.Open();
+    this->ppincnv.Open();
 }
 
 uint16_t CAD7689::AD_Read(void)
@@ -89,7 +97,12 @@ void CAD7689::Init(void)
     this->ppincnv=0;
     Sys.Delay(100);
     this->ppincnv=1;
-    Sys.Delay(10000);
+    Sys.Delay(100);
+	Sys.Delay(100);
+	Sys.Delay(100);
+	Sys.Delay(100);
+	Sys.Delay(100);
+	Sys.Delay(100);
 
 }
 

@@ -12,7 +12,6 @@
             uint8_t FlagEnable[MAXCH]; //是否允许通道转换 0：禁止，1：允许 备用
         public:
             CAD7689();
-			CAD7689(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv);
 			void SetPin(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv);
             void Routin(void); //读取AD值,并切换通道
             void Init(void); //
