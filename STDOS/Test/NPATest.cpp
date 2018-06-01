@@ -3,7 +3,7 @@
 //#define _NPA_TEST_CPP
 #ifdef _NPA_TEST_CPP
 
-CNPA npa(PB5, PB6);
+CNPA npa;
 
 void NPATestRoutin(void* param)
 {
@@ -15,7 +15,7 @@ void NPATestRoutin(void* param)
 
 void NPATestInit()
 {
-
+	npa.SetPin(PB5, PB6);
 	Sys.AddTask(NPATestRoutin, 0, 0, 100, "npatest");
 }
 #endif // !_NPA_TEST_CPP
