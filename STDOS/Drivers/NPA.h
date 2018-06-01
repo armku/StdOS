@@ -7,7 +7,6 @@
     {
         public:
 			CNPA(uint8_t devAddr = 0X51);
-            CNPA(Pin pinsck, Pin pinsda, uint8_t devAddr = 0X51);
 			void SetPin(Pin pinsck, Pin pinsda);
             int Read();
 			float ReadP();//读取大气压值

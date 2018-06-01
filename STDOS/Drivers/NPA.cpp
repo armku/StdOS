@@ -4,10 +4,7 @@ CNPA::CNPA(uint8_t devAddr)
 {
 	this->DEVER_ADDR = devAddr;
 }
-CNPA::CNPA(Pin pinsck, Pin pinsda, uint8_t devAddr):CNPA(devAddr)
-{
-    this->SetPin(pinsck,pinsda);
-}
+
 void CNPA::SetPin(Pin pinsck, Pin pinsda)
 {
 	this->pi2c.SetPin(pinsck, pinsda);
