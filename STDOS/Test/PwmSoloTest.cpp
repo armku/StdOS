@@ -24,11 +24,7 @@ void PwmSoloTestInit()
 #include "stm32f10x.h"
 /************************** TIM 函数声明********************************/
 void               TIMx_PWM_Init(void);
-/**
-* @brief  配置TIM3复用输出PWM时用到的I/O
-* @param  无
-* @retval 无
-*/
+
 static void TIMx_GPIO_Config(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -127,12 +123,6 @@ static void TIMx_Mode_Config(void)
 	TIM_Cmd(TIM3, ENABLE);                   //使能定时器3	
 }
 
-/**
-* @brief  TIM3 输出PWM信号初始化，只要调用这个函数
-*         TIM3的四个通道就会有PWM信号输出
-* @param  无
-* @retval 无
-*/
 void TIMx_PWM_Init(void)
 {
 	TIMx_GPIO_Config();
