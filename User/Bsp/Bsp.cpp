@@ -74,9 +74,9 @@ void LedTask(void *param)
 	//led2 = keyup;
 }
 #endif // STM32F0
-
+void PwmSoloTestInit();
 void BspInit()
 {	
-
+	PwmSoloTestInit();
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 }
