@@ -114,6 +114,7 @@ extern "C"
 				Txx2.Clear();
 				if (DeviceConfigHelper::pCOM2Rx485)
 				{
+					Sys.Delay(200);
 					*DeviceConfigHelper::pCOM2Rx485 = 0;
 				}
 			}
