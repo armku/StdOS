@@ -61,6 +61,17 @@ public:
 	static Func PRcvCOM3;
 	static Func PRcvCOM4;
 	static Func PRcvCOM5;
+	static int COM1SENDINTFLAG;//串口1中断发送
+	static int COM2SENDINTFLAG;//串口2中断发送
+	static int COM3SENDINTFLAG;//串口3中断发送
+	static int COM4SENDINTFLAG;//串口4中断发送
+	static int COM5SENDINTFLAG;//串口5中断发送
+
+	static int COM1RCVINTFLAG;//串口1中断接收
+	static int COM2RCVINTFLAG;//串口2中断接收
+	static int COM3RCVINTFLAG;//串口3中断接收
+	static int COM4RCVINTFLAG;//串口4中断接收
+	static int COM5RCVINTFLAG;//串口5中断接收
 	//定时器
 	static void TimeTickInit();//系统用定时器初始化
 	static void TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);//定时器配置

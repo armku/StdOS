@@ -101,6 +101,19 @@ Func DeviceConfigHelper::PRcvCOM2 = 0;
 Func DeviceConfigHelper::PRcvCOM3 = 0;
 Func DeviceConfigHelper::PRcvCOM4 = 0;
 Func DeviceConfigHelper::PRcvCOM5 = 0;
+
+int DeviceConfigHelper::COM1SENDINTFLAG = 1;//串口1中断发送
+int DeviceConfigHelper::COM2SENDINTFLAG = 1;//串口2中断发送
+int DeviceConfigHelper::COM3SENDINTFLAG = 1;//串口3中断发送
+int DeviceConfigHelper::COM4SENDINTFLAG = 1;//串口4中断发送
+int DeviceConfigHelper::COM5SENDINTFLAG = 1;//串口5中断发送
+
+int DeviceConfigHelper::COM1RCVINTFLAG = 1;//串口1中断接收
+int DeviceConfigHelper::COM2RCVINTFLAG = 1;//串口2中断接收
+int DeviceConfigHelper::COM3RCVINTFLAG = 1;//串口3中断接收
+int DeviceConfigHelper::COM4RCVINTFLAG = 1;//串口4中断接收
+int DeviceConfigHelper::COM5RCVINTFLAG = 1;//串口5中断接收
+
 #ifdef __cplusplus
 extern "C" {
 #endif
