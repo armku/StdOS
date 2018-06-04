@@ -13,12 +13,12 @@
 void TimeUpdate();
 void BspPlatformInit()
 {	
-	DeviceConfigHelper::ConfigCom(COM1, 256000);
-	DeviceConfigHelper::ConfigCom(COM3, 256000);
-	DeviceConfigHelper::TimeTickInit();//系统用定时器初始化
-	DeviceConfigHelper::PTim2Update = TimeUpdate;
+	DeviceConfigCenter::ConfigCom(COM1, 256000);
+	DeviceConfigCenter::ConfigCom(COM3, 256000);
+	DeviceConfigCenter::TimeTickInit();//系统用定时器初始化
+	DeviceConfigCenter::PTim2Update = TimeUpdate;
 }
-int DeviceConfigHelper::CurrentTick()
+int DeviceConfigCenter::CurrentTick()
 {
 #if defined STM32F0
 
@@ -28,7 +28,7 @@ int DeviceConfigHelper::CurrentTick()
 
 #endif
 }
-uint32_t DeviceConfigHelper::CurrentTicks1()
+uint32_t DeviceConfigCenter::CurrentTicks1()
 {
 #if defined STM32F0
 
@@ -51,7 +51,7 @@ int StdPrintf(const char *format, ...)
 	n = vsprintf(sprint_buf, format, args);
 	va_end(args);
 
-	DeviceConfigHelper::comSend(COM1, Buffer(sprint_buf, n));
+	DeviceConfigCenter::comSend(COM1, Buffer(sprint_buf, n));
 	return n;
 }
 

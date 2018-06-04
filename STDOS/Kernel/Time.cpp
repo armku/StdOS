@@ -248,13 +248,13 @@ void TTime::Init()
 	// 当前滴答时钟
 	uint32_t TTime::CurrentTicks()const
 	{
-		return DeviceConfigHelper::CurrentTicks1();
+		return DeviceConfigCenter::CurrentTicks1();
 	}
 
 	// 当前毫秒数 计数值2000
 	uint64_t TTime::Current()const
 	{
-		return this->Milliseconds + DeviceConfigHelper::CurrentTick();
+		return this->Milliseconds + DeviceConfigCenter::CurrentTick();
 	}
 
 	//us延时，100us以下精确

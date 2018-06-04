@@ -12,7 +12,7 @@ typedef enum
 	Both = 0x03	// ÉÏÉıÏÂ½µÑØ
 }Trigger;
 
-class DeviceConfigHelper
+class DeviceConfigCenter
 {
 public:
 	//ÖĞ¶Ï

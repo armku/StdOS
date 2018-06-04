@@ -4,25 +4,25 @@
 
 //中断
 
-Func DeviceConfigHelper::PExit0 = 0;
-Func DeviceConfigHelper::PExit1 = 0;
-Func DeviceConfigHelper::PExit2 = 0;
-Func DeviceConfigHelper::PExit3 = 0;
-Func DeviceConfigHelper::PExit4 = 0;
-Func DeviceConfigHelper::PExit5 = 0;
-Func DeviceConfigHelper::PExit6 = 0;
-Func DeviceConfigHelper::PExit7 = 0;
-Func DeviceConfigHelper::PExit8 = 0;
-Func DeviceConfigHelper::PExit9 = 0;
-Func DeviceConfigHelper::PExit10 = 0;
-Func DeviceConfigHelper::PExit11 = 0;
-Func DeviceConfigHelper::PExit12 = 0;
-Func DeviceConfigHelper::PExit13 = 0;
-Func DeviceConfigHelper::PExit14 = 0;
-Func DeviceConfigHelper::PExit15 = 0;
+Func DeviceConfigCenter::PExit0 = 0;
+Func DeviceConfigCenter::PExit1 = 0;
+Func DeviceConfigCenter::PExit2 = 0;
+Func DeviceConfigCenter::PExit3 = 0;
+Func DeviceConfigCenter::PExit4 = 0;
+Func DeviceConfigCenter::PExit5 = 0;
+Func DeviceConfigCenter::PExit6 = 0;
+Func DeviceConfigCenter::PExit7 = 0;
+Func DeviceConfigCenter::PExit8 = 0;
+Func DeviceConfigCenter::PExit9 = 0;
+Func DeviceConfigCenter::PExit10 = 0;
+Func DeviceConfigCenter::PExit11 = 0;
+Func DeviceConfigCenter::PExit12 = 0;
+Func DeviceConfigCenter::PExit13 = 0;
+Func DeviceConfigCenter::PExit14 = 0;
+Func DeviceConfigCenter::PExit15 = 0;
 
 //中断线打开、关闭
-void DeviceConfigHelper::SetEXIT(int pinIndex, bool enable, Trigger trigger)
+void DeviceConfigCenter::SetEXIT(int pinIndex, bool enable, Trigger trigger)
 {
 #if defined STM32F0
 
@@ -64,7 +64,7 @@ static const int PORT_IRQns[] =
 #endif
 
 
-void DeviceConfigHelper::InputPort_OpenEXTI(Pin pin, Trigger trigger)
+void DeviceConfigCenter::InputPort_OpenEXTI(Pin pin, Trigger trigger)
 {
 #if defined STM32F0
 
@@ -90,29 +90,29 @@ void DeviceConfigHelper::InputPort_OpenEXTI(Pin pin, Trigger trigger)
 }
 
 //串口
-OutputPort *DeviceConfigHelper::pCOM1Rx485 = 0;
-OutputPort *DeviceConfigHelper::pCOM2Rx485 = 0;
-OutputPort *DeviceConfigHelper::pCOM3Rx485 = 0;
-OutputPort *DeviceConfigHelper::pCOM4Rx485 = 0;
-OutputPort *DeviceConfigHelper::pCOM5Rx485 = 0;
+OutputPort *DeviceConfigCenter::pCOM1Rx485 = 0;
+OutputPort *DeviceConfigCenter::pCOM2Rx485 = 0;
+OutputPort *DeviceConfigCenter::pCOM3Rx485 = 0;
+OutputPort *DeviceConfigCenter::pCOM4Rx485 = 0;
+OutputPort *DeviceConfigCenter::pCOM5Rx485 = 0;
 
-Func DeviceConfigHelper::PRcvCOM1 = 0;
-Func DeviceConfigHelper::PRcvCOM2 = 0;
-Func DeviceConfigHelper::PRcvCOM3 = 0;
-Func DeviceConfigHelper::PRcvCOM4 = 0;
-Func DeviceConfigHelper::PRcvCOM5 = 0;
+Func DeviceConfigCenter::PRcvCOM1 = 0;
+Func DeviceConfigCenter::PRcvCOM2 = 0;
+Func DeviceConfigCenter::PRcvCOM3 = 0;
+Func DeviceConfigCenter::PRcvCOM4 = 0;
+Func DeviceConfigCenter::PRcvCOM5 = 0;
 
-int DeviceConfigHelper::COM1SENDINTFLAG = 1;//串口1中断发送
-int DeviceConfigHelper::COM2SENDINTFLAG = 1;//串口2中断发送
-int DeviceConfigHelper::COM3SENDINTFLAG = 1;//串口3中断发送
-int DeviceConfigHelper::COM4SENDINTFLAG = 1;//串口4中断发送
-int DeviceConfigHelper::COM5SENDINTFLAG = 1;//串口5中断发送
+int DeviceConfigCenter::COM1SENDINTFLAG = 1;//串口1中断发送
+int DeviceConfigCenter::COM2SENDINTFLAG = 1;//串口2中断发送
+int DeviceConfigCenter::COM3SENDINTFLAG = 1;//串口3中断发送
+int DeviceConfigCenter::COM4SENDINTFLAG = 1;//串口4中断发送
+int DeviceConfigCenter::COM5SENDINTFLAG = 1;//串口5中断发送
 
-int DeviceConfigHelper::COM1RCVINTFLAG = 1;//串口1中断接收
-int DeviceConfigHelper::COM2RCVINTFLAG = 1;//串口2中断接收
-int DeviceConfigHelper::COM3RCVINTFLAG = 1;//串口3中断接收
-int DeviceConfigHelper::COM4RCVINTFLAG = 1;//串口4中断接收
-int DeviceConfigHelper::COM5RCVINTFLAG = 1;//串口5中断接收
+int DeviceConfigCenter::COM1RCVINTFLAG = 1;//串口1中断接收
+int DeviceConfigCenter::COM2RCVINTFLAG = 1;//串口2中断接收
+int DeviceConfigCenter::COM3RCVINTFLAG = 1;//串口3中断接收
+int DeviceConfigCenter::COM4RCVINTFLAG = 1;//串口4中断接收
+int DeviceConfigCenter::COM5RCVINTFLAG = 1;//串口5中断接收
 
 #ifdef __cplusplus
 extern "C" {
@@ -146,7 +146,7 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
-void DeviceConfigHelper::ConfigCom(COM com, int baudRate)
+void DeviceConfigCenter::ConfigCom(COM com, int baudRate)
 {
 	switch (com)
 	{
@@ -178,7 +178,7 @@ void DeviceConfigHelper::ConfigCom(COM com, int baudRate)
 	}
 }
 //改变波特率
-void DeviceConfigHelper::ComChgBaudRate(COM com, int baudRate)
+void DeviceConfigCenter::ComChgBaudRate(COM com, int baudRate)
 {
 	switch (com)
 	{
@@ -210,7 +210,7 @@ void DeviceConfigHelper::ComChgBaudRate(COM com, int baudRate)
 	}
 }
 //发送数据
-void DeviceConfigHelper::comSend(COM com, Buffer bs)
+void DeviceConfigCenter::comSend(COM com, Buffer bs)
 {
 	switch (com)
 	{
@@ -241,42 +241,42 @@ void DeviceConfigHelper::comSend(COM com, Buffer bs)
 		break;
 	}
 }
-void DeviceConfigHelper::com1send(Buffer& bs)
+void DeviceConfigCenter::com1send(Buffer& bs)
 {
 #if USECOM1
 	Txx1.Write(bs);
 	com1send();
 #endif
 }
-void DeviceConfigHelper::com2send(Buffer& bs)
+void DeviceConfigCenter::com2send(Buffer& bs)
 {
 #if USECOM2
 	Txx2.Write(bs);
 	com2send();
 #endif
 }
-void DeviceConfigHelper::com3send(Buffer& bs)
+void DeviceConfigCenter::com3send(Buffer& bs)
 {
 #if USECOM3
 	Txx3.Write(bs);
 	com3send();
 #endif
 }
-void DeviceConfigHelper::com4send(Buffer& bs)
+void DeviceConfigCenter::com4send(Buffer& bs)
 {
 #if USECOM4
 	Txx4.Write(bs);
 	com4send();
 #endif
 }
-void DeviceConfigHelper::com5send(Buffer& bs)
+void DeviceConfigCenter::com5send(Buffer& bs)
 {
 #if USECOM5
 	Txx5.Write(bs);
 	com5send();
 #endif
 }
-void DeviceConfigHelper::com1send()
+void DeviceConfigCenter::com1send()
 {
 #if defined STM32F0
 
@@ -286,7 +286,7 @@ void DeviceConfigHelper::com1send()
 
 #endif
 }
-void DeviceConfigHelper::com2send()
+void DeviceConfigCenter::com2send()
 {
 #if defined STM32F0
 
@@ -298,7 +298,7 @@ void DeviceConfigHelper::com2send()
 
 #endif
 }
-void DeviceConfigHelper::com3send()
+void DeviceConfigCenter::com3send()
 {
 #if defined STM32F0
 
@@ -308,7 +308,7 @@ void DeviceConfigHelper::com3send()
 
 #endif
 }
-void DeviceConfigHelper::com4send()
+void DeviceConfigCenter::com4send()
 {
 #if defined STM32F0
 
@@ -318,7 +318,7 @@ void DeviceConfigHelper::com4send()
 
 #endif
 }
-void DeviceConfigHelper::com5send()
+void DeviceConfigCenter::com5send()
 {
 #if defined STM32F0
 
@@ -329,7 +329,7 @@ void DeviceConfigHelper::com5send()
 #endif
 }
 
-void DeviceConfigHelper::configCOM1(int baudRate)
+void DeviceConfigCenter::configCOM1(int baudRate)
 {
 #if USECOM1
 #if defined STM32F0
@@ -388,7 +388,7 @@ void DeviceConfigHelper::configCOM1(int baudRate)
 #endif
 #endif
 }
-void DeviceConfigHelper::configCOM2(int baudRate)
+void DeviceConfigCenter::configCOM2(int baudRate)
 {
 #if USECOM2
 #if defined STM32F0
@@ -448,7 +448,7 @@ void DeviceConfigHelper::configCOM2(int baudRate)
 #endif
 }
 
-void DeviceConfigHelper::configCOM3(int baudRate)
+void DeviceConfigCenter::configCOM3(int baudRate)
 {
 #if USECOM3
 #if defined STM32F0
@@ -507,7 +507,7 @@ void DeviceConfigHelper::configCOM3(int baudRate)
 #endif
 #endif
 }
-void DeviceConfigHelper::configCOM4(int baudRate)
+void DeviceConfigCenter::configCOM4(int baudRate)
 {
 #if USECOM4
 #if defined STM32F0
@@ -566,7 +566,7 @@ void DeviceConfigHelper::configCOM4(int baudRate)
 #endif
 #endif
 }
-void DeviceConfigHelper::configCOM5(int baudRate)
+void DeviceConfigCenter::configCOM5(int baudRate)
 {
 #if USECOM5
 #if defined STM32F0
@@ -625,7 +625,7 @@ void DeviceConfigHelper::configCOM5(int baudRate)
 #endif
 #endif
 }
-void DeviceConfigHelper::Com1ChgBaudRate(int baudRate)
+void DeviceConfigCenter::Com1ChgBaudRate(int baudRate)
 {
 #if USECOM1
 #if defined STM32F0
@@ -647,7 +647,7 @@ void DeviceConfigHelper::Com1ChgBaudRate(int baudRate)
 #endif
 #endif
 }
-void DeviceConfigHelper::Com2ChgBaudRate(int baudRate)
+void DeviceConfigCenter::Com2ChgBaudRate(int baudRate)
 {
 #if USECOM2
 #if defined STM32F0
@@ -669,7 +669,7 @@ void DeviceConfigHelper::Com2ChgBaudRate(int baudRate)
 #endif
 #endif
 }
-void DeviceConfigHelper::Com3ChgBaudRate(int baudRate)
+void DeviceConfigCenter::Com3ChgBaudRate(int baudRate)
 {
 #if USECOM3
 #if defined STM32F0
@@ -691,7 +691,7 @@ void DeviceConfigHelper::Com3ChgBaudRate(int baudRate)
 #endif
 #endif
 }
-void DeviceConfigHelper::Com4ChgBaudRate(int baudRate)
+void DeviceConfigCenter::Com4ChgBaudRate(int baudRate)
 {
 #if USECOM4
 #if defined STM32F0
@@ -713,7 +713,7 @@ void DeviceConfigHelper::Com4ChgBaudRate(int baudRate)
 #endif
 #endif
 }
-void DeviceConfigHelper::Com5ChgBaudRate(int baudRate)
+void DeviceConfigCenter::Com5ChgBaudRate(int baudRate)
 {
 #if USECOM5
 #if defined STM32F0
@@ -735,7 +735,7 @@ void DeviceConfigHelper::Com5ChgBaudRate(int baudRate)
 #endif
 #endif
 }
-void DeviceConfigHelper::SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap)
+void DeviceConfigCenter::SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap)
 {
 	*rxPin = *txPin = P0;
 
@@ -751,16 +751,16 @@ void DeviceConfigHelper::SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, b
 	*rxPin = p[n + 1];
 }
 //定时器
-Func DeviceConfigHelper::PTim2Update = 0;
-Func DeviceConfigHelper::PTim3Update = 0;
-Func DeviceConfigHelper::PTim4Update = 0;
-Func DeviceConfigHelper::PTim5Update = 0;
-Func DeviceConfigHelper::PTim6Update = 0;
-Func DeviceConfigHelper::PTim7Update = 0;
-Func DeviceConfigHelper::PTim8Update = 0;
+Func DeviceConfigCenter::PTim2Update = 0;
+Func DeviceConfigCenter::PTim3Update = 0;
+Func DeviceConfigCenter::PTim4Update = 0;
+Func DeviceConfigCenter::PTim5Update = 0;
+Func DeviceConfigCenter::PTim6Update = 0;
+Func DeviceConfigCenter::PTim7Update = 0;
+Func DeviceConfigCenter::PTim8Update = 0;
 
 
-void DeviceConfigHelper::TimeTickInit()//系统用定时器初始化
+void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 {
 #if defined STM32F0
 
@@ -807,7 +807,7 @@ void DeviceConfigHelper::TimeTickInit()//系统用定时器初始化
 }
 
 //定时器配置
-void DeviceConfigHelper::TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup,int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
+void DeviceConfigCenter::TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup,int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 	switch (tim)
 	{
@@ -862,7 +862,7 @@ void DeviceConfigHelper::TimerConfig(TIMER tim, int interval, int NVIC_PriorityG
 	}
 }
 //定时器配置
-void DeviceConfigHelper::Timer0Config(int interval)
+void DeviceConfigCenter::Timer0Config(int interval)
 {
 #if defined STM32F0
 
@@ -873,7 +873,7 @@ void DeviceConfigHelper::Timer0Config(int interval)
 #endif
 }
 //定时器配置
-void DeviceConfigHelper::Timer1Config(int interval)
+void DeviceConfigCenter::Timer1Config(int interval)
 {
 #if defined STM32F0
 
@@ -884,7 +884,7 @@ void DeviceConfigHelper::Timer1Config(int interval)
 #endif
 }
 //定时器配置
-void DeviceConfigHelper::Timer2Config(int interval)
+void DeviceConfigCenter::Timer2Config(int interval)
 {
 #if defined STM32F0
 
@@ -923,7 +923,7 @@ void DeviceConfigHelper::Timer2Config(int interval)
 #endif
 }
 //定时器配置
-void DeviceConfigHelper::Timer3Config(int interval)
+void DeviceConfigCenter::Timer3Config(int interval)
 {
 #if defined STM32F0
 
@@ -962,7 +962,7 @@ void DeviceConfigHelper::Timer3Config(int interval)
 #endif
 }
 //定时器配置
-void DeviceConfigHelper::Timer4Config(int interval)
+void DeviceConfigCenter::Timer4Config(int interval)
 {
 #if defined STM32F0
 
@@ -1001,7 +1001,7 @@ void DeviceConfigHelper::Timer4Config(int interval)
 #endif
 }
 //定时器配置
-void DeviceConfigHelper::Timer5Config(int interval)
+void DeviceConfigCenter::Timer5Config(int interval)
 {
 #if defined STM32F0
 
@@ -1040,7 +1040,7 @@ void DeviceConfigHelper::Timer5Config(int interval)
 #endif
 }
 //定时器配置
-void DeviceConfigHelper::Timer6Config(int interval)
+void DeviceConfigCenter::Timer6Config(int interval)
 {
 #if defined STM32F0
 
@@ -1079,7 +1079,7 @@ void DeviceConfigHelper::Timer6Config(int interval)
 #endif
 }
 //定时器配置
-void DeviceConfigHelper::Timer7Config(int interval)
+void DeviceConfigCenter::Timer7Config(int interval)
 {
 #if defined STM32F0
 
@@ -1118,7 +1118,7 @@ void DeviceConfigHelper::Timer7Config(int interval)
 #endif
 }
 //定时器配置
-void DeviceConfigHelper::Timer8Config(int interval)
+void DeviceConfigCenter::Timer8Config(int interval)
 {
 #if defined STM32F0
 
@@ -1128,7 +1128,7 @@ void DeviceConfigHelper::Timer8Config(int interval)
 
 #endif
 }
-void DeviceConfigHelper::TimerConfigNvic(TIMER tim, int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority , int NVIC_IRQChannelSubPriorit )
+void DeviceConfigCenter::TimerConfigNvic(TIMER tim, int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority , int NVIC_IRQChannelSubPriorit )
 {
 	switch (tim)
 	{
@@ -1183,7 +1183,7 @@ void DeviceConfigHelper::TimerConfigNvic(TIMER tim, int NVIC_PriorityGroup, int 
 		break;
 	}
 }
-void DeviceConfigHelper::Timer0ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
+void DeviceConfigCenter::Timer0ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 #if defined STM32F0
 
@@ -1193,7 +1193,7 @@ void DeviceConfigHelper::Timer0ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 
 #endif
 }
-void DeviceConfigHelper::Timer1ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
+void DeviceConfigCenter::Timer1ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 #if defined STM32F0
 
@@ -1203,7 +1203,7 @@ void DeviceConfigHelper::Timer1ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 
 #endif
 }
-void DeviceConfigHelper::Timer2ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
+void DeviceConfigCenter::Timer2ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 #if defined STM32F0
 
@@ -1226,7 +1226,7 @@ void DeviceConfigHelper::Timer2ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 
 #endif
 }
-void DeviceConfigHelper::Timer3ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
+void DeviceConfigCenter::Timer3ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 #if defined STM32F0
 
@@ -1249,7 +1249,7 @@ void DeviceConfigHelper::Timer3ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 
 #endif
 }
-void DeviceConfigHelper::Timer4ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
+void DeviceConfigCenter::Timer4ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 #if defined STM32F0
 
@@ -1272,7 +1272,7 @@ void DeviceConfigHelper::Timer4ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 
 #endif
 }
-void DeviceConfigHelper::Timer5ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
+void DeviceConfigCenter::Timer5ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 #if defined STM32F0
 
@@ -1297,7 +1297,7 @@ void DeviceConfigHelper::Timer5ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 
 #endif
 }
-void DeviceConfigHelper::Timer6ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
+void DeviceConfigCenter::Timer6ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 #if defined STM32F0
 
@@ -1322,7 +1322,7 @@ void DeviceConfigHelper::Timer6ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 
 #endif
 }
-void DeviceConfigHelper::Timer7ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
+void DeviceConfigCenter::Timer7ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 #if defined STM32F0
 
@@ -1347,7 +1347,7 @@ void DeviceConfigHelper::Timer7ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 
 #endif
 }
-void DeviceConfigHelper::Timer8ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
+void DeviceConfigCenter::Timer8ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 #if defined STM32F0
 

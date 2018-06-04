@@ -21,9 +21,9 @@ extern "C"
 		{
 			//数据帧接收完毕
 			ch = USART_ReceiveData(USART1); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
-			if (DeviceConfigHelper::PRcvCOM1)
+			if (DeviceConfigCenter::PRcvCOM1)
 			{
-				(*DeviceConfigHelper::PRcvCOM1)();
+				(*DeviceConfigCenter::PRcvCOM1)();
 			}
 		}
 		/* 处理发送缓冲区空中断 */
@@ -53,9 +53,9 @@ extern "C"
 
 				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
 				Txx1.Clear();
-				if (DeviceConfigHelper::pCOM1Rx485)
+				if (DeviceConfigCenter::pCOM1Rx485)
 				{
-					*DeviceConfigHelper::pCOM1Rx485 = 0;
+					*DeviceConfigCenter::pCOM1Rx485 = 0;
 				}
 			}
 			else
@@ -80,9 +80,9 @@ extern "C"
 		{
 			//数据帧接收完毕
 			ch = USART_ReceiveData(USART2); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)    
-			if (DeviceConfigHelper::PRcvCOM2)
+			if (DeviceConfigCenter::PRcvCOM2)
 			{
-				(*DeviceConfigHelper::PRcvCOM2)();
+				(*DeviceConfigCenter::PRcvCOM2)();
 			}
 		}
 		/* 处理发送缓冲区空中断 */
@@ -112,10 +112,10 @@ extern "C"
 
 				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
 				Txx2.Clear();
-				if (DeviceConfigHelper::pCOM2Rx485)
+				if (DeviceConfigCenter::pCOM2Rx485)
 				{
 					Sys.Delay(200);
-					*DeviceConfigHelper::pCOM2Rx485 = 0;
+					*DeviceConfigCenter::pCOM2Rx485 = 0;
 				}
 			}
 			else
@@ -140,9 +140,9 @@ extern "C"
 		{
 			//数据帧接收完毕
 			ch = USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR) 
-			if (DeviceConfigHelper::PRcvCOM3)
+			if (DeviceConfigCenter::PRcvCOM3)
 			{
-				(*DeviceConfigHelper::PRcvCOM3)();
+				(*DeviceConfigCenter::PRcvCOM3)();
 			}
 		}
 		/* 处理发送缓冲区空中断 */
@@ -172,9 +172,9 @@ extern "C"
 
 				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
 				Txx3.Clear();
-				if (DeviceConfigHelper::pCOM3Rx485)
+				if (DeviceConfigCenter::pCOM3Rx485)
 				{
-					*DeviceConfigHelper::pCOM3Rx485 = 0;
+					*DeviceConfigCenter::pCOM3Rx485 = 0;
 				}
 			}
 			else
@@ -310,9 +310,9 @@ extern "C"
 		if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
 		{
 			TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
-			if (DeviceConfigHelper::PTim2Update)
+			if (DeviceConfigCenter::PTim2Update)
 			{
-				(*DeviceConfigHelper::PTim2Update)();
+				(*DeviceConfigCenter::PTim2Update)();
 			}
 		}
 	}
@@ -321,9 +321,9 @@ extern "C"
 		if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
 		{
 			TIM_ClearITPendingBit(TIM3, TIM_FLAG_Update);
-			if (DeviceConfigHelper::PTim3Update)
+			if (DeviceConfigCenter::PTim3Update)
 			{
-				(*DeviceConfigHelper::PTim3Update)();
+				(*DeviceConfigCenter::PTim3Update)();
 			}
 		}
 	}
@@ -335,9 +335,9 @@ extern "C"
 		if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
 		{
 			TIM_ClearITPendingBit(TIM4, TIM_FLAG_Update);
-			if (DeviceConfigHelper::PTim4Update)
+			if (DeviceConfigCenter::PTim4Update)
 			{
-				(*DeviceConfigHelper::PTim4Update)();
+				(*DeviceConfigCenter::PTim4Update)();
 			}
 		}
 #endif
@@ -350,9 +350,9 @@ extern "C"
 		if (TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET)
 		{
 			TIM_ClearITPendingBit(TIM5, TIM_FLAG_Update);
-			if (DeviceConfigHelper::PTim5Update)
+			if (DeviceConfigCenter::PTim5Update)
 			{
-				(*DeviceConfigHelper::PTim5Update)();
+				(*DeviceConfigCenter::PTim5Update)();
 			}
 		}
 #endif
@@ -363,9 +363,9 @@ extern "C"
 		if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
 		{
 			TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
-			if (DeviceConfigHelper::PTim6Update)
+			if (DeviceConfigCenter::PTim6Update)
 			{
-				(*DeviceConfigHelper::PTim6Update)();
+				(*DeviceConfigCenter::PTim6Update)();
 			}
 		}
 	}
@@ -375,9 +375,9 @@ extern "C"
 		if (TIM_GetITStatus(TIM7, TIM_IT_Update) != RESET)
 		{
 			TIM_ClearITPendingBit(TIM7, TIM_FLAG_Update);
-			if (DeviceConfigHelper::PTim7Update)
+			if (DeviceConfigCenter::PTim7Update)
 			{
-				(*DeviceConfigHelper::PTim7Update)();
+				(*DeviceConfigCenter::PTim7Update)();
 			}
 		}
 	}
@@ -386,9 +386,9 @@ extern "C"
 		if (EXTI_GetITStatus(EXTI_Line0) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line0);
-			if (DeviceConfigHelper::PExit0)
+			if (DeviceConfigCenter::PExit0)
 			{
-				(*DeviceConfigHelper::PExit0)();
+				(*DeviceConfigCenter::PExit0)();
 			}
 		}
 	}
@@ -397,9 +397,9 @@ extern "C"
 		if (EXTI_GetITStatus(EXTI_Line1) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line1);
-			if (DeviceConfigHelper::PExit1)
+			if (DeviceConfigCenter::PExit1)
 			{
-				(*DeviceConfigHelper::PExit1)();
+				(*DeviceConfigCenter::PExit1)();
 			}
 		}
 	}
@@ -409,9 +409,9 @@ extern "C"
 		if (EXTI_GetITStatus(EXTI_Line2) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line2);
-			if (DeviceConfigHelper::PExit2)
+			if (DeviceConfigCenter::PExit2)
 			{
-				(*DeviceConfigHelper::PExit2)();
+				(*DeviceConfigCenter::PExit2)();
 			}
 		}
 	}
@@ -420,9 +420,9 @@ extern "C"
 		if (EXTI_GetITStatus(EXTI_Line3) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line3);
-			if (DeviceConfigHelper::PExit3)
+			if (DeviceConfigCenter::PExit3)
 			{
-				(*DeviceConfigHelper::PExit3)();
+				(*DeviceConfigCenter::PExit3)();
 			}
 		}
 	}
@@ -431,9 +431,9 @@ extern "C"
 		if (EXTI_GetITStatus(EXTI_Line4) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line4);
-			if (DeviceConfigHelper::PExit4)
+			if (DeviceConfigCenter::PExit4)
 			{
-				(*DeviceConfigHelper::PExit4)();
+				(*DeviceConfigCenter::PExit4)();
 			}
 		}
 	}
@@ -443,41 +443,41 @@ extern "C"
 		if (EXTI_GetITStatus(EXTI_Line5) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line5);
-			if (DeviceConfigHelper::PExit5)
+			if (DeviceConfigCenter::PExit5)
 			{
-				(*DeviceConfigHelper::PExit5)();
+				(*DeviceConfigCenter::PExit5)();
 			}
 		}
 		if (EXTI_GetITStatus(EXTI_Line6) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line6);
-			if (DeviceConfigHelper::PExit6)
+			if (DeviceConfigCenter::PExit6)
 			{
-				(*DeviceConfigHelper::PExit6)();
+				(*DeviceConfigCenter::PExit6)();
 			}
 		}
 		if (EXTI_GetITStatus(EXTI_Line7) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line7);
-			if (DeviceConfigHelper::PExit7)
+			if (DeviceConfigCenter::PExit7)
 			{
-				(*DeviceConfigHelper::PExit7)();
+				(*DeviceConfigCenter::PExit7)();
 			}
 		}
 		if (EXTI_GetITStatus(EXTI_Line8) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line8);
-			if (DeviceConfigHelper::PExit8)
+			if (DeviceConfigCenter::PExit8)
 			{
-				(*DeviceConfigHelper::PExit8)();
+				(*DeviceConfigCenter::PExit8)();
 			}
 		}
 		if (EXTI_GetITStatus(EXTI_Line9) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line9);
-			if (DeviceConfigHelper::PExit9)
+			if (DeviceConfigCenter::PExit9)
 			{
-				(*DeviceConfigHelper::PExit9)();
+				(*DeviceConfigCenter::PExit9)();
 			}
 		}
 	}
@@ -486,49 +486,49 @@ extern "C"
 		if (EXTI_GetITStatus(EXTI_Line10) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line10);
-			if (DeviceConfigHelper::PExit10)
+			if (DeviceConfigCenter::PExit10)
 			{
-				(*DeviceConfigHelper::PExit10)();
+				(*DeviceConfigCenter::PExit10)();
 			}
 		}
 		if (EXTI_GetITStatus(EXTI_Line11) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line11);
-			if (DeviceConfigHelper::PExit11)
+			if (DeviceConfigCenter::PExit11)
 			{
-				(*DeviceConfigHelper::PExit11)();
+				(*DeviceConfigCenter::PExit11)();
 			}
 		}
 		if (EXTI_GetITStatus(EXTI_Line12) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line12);
-			if (DeviceConfigHelper::PExit12)
+			if (DeviceConfigCenter::PExit12)
 			{
-				(*DeviceConfigHelper::PExit12)();
+				(*DeviceConfigCenter::PExit12)();
 			}
 		}
 		if (EXTI_GetITStatus(EXTI_Line13) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line13);
-			if (DeviceConfigHelper::PExit13)
+			if (DeviceConfigCenter::PExit13)
 			{
-				(*DeviceConfigHelper::PExit13)();
+				(*DeviceConfigCenter::PExit13)();
 			}
 		}
 		if (EXTI_GetITStatus(EXTI_Line14) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line14);
-			if (DeviceConfigHelper::PExit14)
+			if (DeviceConfigCenter::PExit14)
 			{
-				(*DeviceConfigHelper::PExit14)();
+				(*DeviceConfigCenter::PExit14)();
 			}
 		}
 		if (EXTI_GetITStatus(EXTI_Line15) != RESET)
 		{
 			EXTI_ClearITPendingBit(EXTI_Line15);
-			if (DeviceConfigHelper::PExit15)
+			if (DeviceConfigCenter::PExit15)
 			{
-				(*DeviceConfigHelper::PExit15)();
+				(*DeviceConfigCenter::PExit15)();
 			}
 		}
 	}
