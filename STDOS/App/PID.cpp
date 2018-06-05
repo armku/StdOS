@@ -2,6 +2,104 @@
 #include "stdio.h"
 #include "math.h"
 
+//增加当前值
+void  PID::addPV(float pv)
+{
+	for (int i = 0; i < this->CountT; i++)
+	{
+		this->ET[i] = this->ET[i + 1];
+	}
+	this->PV = pv;
+	this->ET[CountT] = this->SV - this->PV;
+	this->vT = this->ET[CountT] - this->ET[CountT - 1];
+	this->aT = this->ET[CountT] - 2 * this->ET[CountT - 1] + this->ET[CountT - 2];
+	this->Sum = this->sum();
+}
+//位置式PID
+float PID::PIDPosition()
+{
+	float Output = KP * ET[CountT] + KI * Sum + KD * vT;
+	return Output;
+}
+//位置式PID增量方式
+float PID::PIDPositionInc()
+{
+	float DeltaOutput = KP * vT + KI * ET[CountT] + KD * aT;
+	float PID = DeltaOutput;
+	if (PID > 0)
+	{
+		if((pwmpointer + PID) <= pwmmax)
+			pwmpointer = pwmpointer + PID;
+	}
+	else
+	{
+		if(pwmpointer + PID >= 0)
+			pwmpointer = pwmpointer + PID;
+	}
+	if( pwmpointer<0)
+		 pwmpointer  = 0;
+	if (pwmpointer>pwmmax)
+		 pwmpointer  = pwmmax;
+
+	CurPow[CountT] = pwmpointer * MaxP / pwmmax;   //Curent Power
+	return DeltaOutput;
+}
+//增量式PID
+float PID::PIDInc()
+{
+	float DeltaOutput = KP * ET[CountT] + KI * sum() + KD * vT;
+	return DeltaOutput;
+
+}
+//线性预测负反馈
+float PID::PIDPreF_v()
+{
+	float DeltaOutput =  FdK * (ET[CountT] + vT * PreK);
+	return DeltaOutput;
+}
+//非线性预测负反馈
+float PID::PIDPreF_av()
+{
+	float DeltaOutput = 0;// FdK * (ET[CountT] + PreK * (vT + PreKv * (aT + PreKa * (a1T + PreKa1 * (a2T + PreKa2 * a2T_adj)))));
+	return DeltaOutput;
+}
+//分段线性预测
+float PID::PIDPreF_adv()
+{
+	float DeltaOutput = 0;// FdK * (ET[CountT] + vT * PreK(T));
+	return DeltaOutput;
+}
+
+//统计误差总和
+float PID::sum()
+{
+	float ret = 0;
+	for (int i = 0; i < this->CountT + 1; i++)
+	{
+		ret += this->ET[i];
+	}
+	return ret;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void PIDbasePosition::Init()
 {
 	printf("PID_init begin \n");
