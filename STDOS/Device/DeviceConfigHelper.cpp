@@ -108,11 +108,17 @@ int DeviceConfigCenter::COM3SENDINTFLAG = 1;//串口3中断发送
 int DeviceConfigCenter::COM4SENDINTFLAG = 1;//串口4中断发送
 int DeviceConfigCenter::COM5SENDINTFLAG = 1;//串口5中断发送
 
-int DeviceConfigCenter::COM1RCVINTFLAG = 1;//串口1中断接收
-int DeviceConfigCenter::COM2RCVINTFLAG = 1;//串口2中断接收
-int DeviceConfigCenter::COM3RCVINTFLAG = 1;//串口3中断接收
-int DeviceConfigCenter::COM4RCVINTFLAG = 1;//串口4中断接收
-int DeviceConfigCenter::COM5RCVINTFLAG = 1;//串口5中断接收
+int DeviceConfigCenter::COM1RCVIDLEINTFLAG = 1;//串口1中断接收
+int DeviceConfigCenter::COM2RCVIDLEINTFLAG = 1;//串口2中断接收
+int DeviceConfigCenter::COM3RCVIDLEINTFLAG = 1;//串口3中断接收
+int DeviceConfigCenter::COM4RCVIDLEINTFLAG = 1;//串口4中断接收
+int DeviceConfigCenter::COM5RCVIDLEINTFLAG = 1;//串口5中断接收
+
+int DeviceConfigCenter::RcvLastTimeCOM1 = 0;//串口1最后接收数据时间
+int DeviceConfigCenter::RcvLastTimeCOM2 = 0;//串口1最后接收数据时间
+int DeviceConfigCenter::RcvLastTimeCOM3 = 0;//串口1最后接收数据时间
+int DeviceConfigCenter::RcvLastTimeCOM4 = 0;//串口1最后接收数据时间
+int DeviceConfigCenter::RcvLastTimeCOM5 = 0;//串口1最后接收数据时间
 
 #ifdef __cplusplus
 extern "C" {
@@ -244,36 +250,141 @@ void DeviceConfigCenter::comSend(COM com, Buffer bs)
 void DeviceConfigCenter::com1send(Buffer& bs)
 {
 #if USECOM1
+#if COM1SENDINTFLAG
+	//中断发送
 	Txx1.Write(bs);
 	com1send();
+#else
+	if (pCOM1Rx485)
+	{
+		*pCOM1Rx485 = 1;
+	}
+	for (int i = 0; i < bs.Length(); i++)
+	{
+		/* 发送一个字节数据到USART */
+		USART_SendData(USART1, bs[i]);
+
+		/* 等待发送完毕 */
+		while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
+	}
+	if (pCOM1Rx485)
+	{
+		Sys.Delay(100);
+		*pCOM1Rx485 = 0;
+	}
+#endif
 #endif
 }
 void DeviceConfigCenter::com2send(Buffer& bs)
 {
 #if USECOM2
+#if COM2SENDINTFLAG
+	//中断发送
 	Txx2.Write(bs);
 	com2send();
+#else
+	if (pCOM2Rx485)
+	{
+		*pCOM2Rx485 = 1;
+	}
+	for (int i = 0; i < bs.Length(); i++)
+	{
+		/* 发送一个字节数据到USART */
+		USART_SendData(USART2, bs[i]);
+
+		/* 等待发送完毕 */
+		while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET);
+	}
+	if (pCOM2Rx485)
+	{
+		Sys.Delay(100);
+		*pCOM2Rx485 = 0;
+	}
+#endif
 #endif
 }
 void DeviceConfigCenter::com3send(Buffer& bs)
 {
 #if USECOM3
+#if COM3SENDINTFLAG
+	//中断发送
 	Txx3.Write(bs);
 	com3send();
+#else
+	if (pCOM3Rx485)
+	{
+		*pCOM3Rx485 = 1;
+	}
+	for (int i = 0; i < bs.Length(); i++)
+	{
+		/* 发送一个字节数据到USART */
+		USART_SendData(USART3, bs[i]);
+
+		/* 等待发送完毕 */
+		while (USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET);
+	}
+	if (pCOM3Rx485)
+	{
+		Sys.Delay(100);
+		*pCOM3Rx485 = 0;
+	}
+#endif
 #endif
 }
 void DeviceConfigCenter::com4send(Buffer& bs)
 {
 #if USECOM4
+#if COM4SENDINTFLAG
+	//中断发送
 	Txx4.Write(bs);
 	com4send();
+#else
+	if (pCOM4Rx485)
+	{
+		*pCOM4Rx485 = 1;
+	}
+	for (int i = 0; i < bs.Length(); i++)
+	{
+		/* 发送一个字节数据到USART */
+		USART_SendData(UART4, bs[i]);
+
+		/* 等待发送完毕 */
+		while (USART_GetFlagStatus(UART4, USART_FLAG_TXE) == RESET);
+	}
+	if (pCOM4Rx485)
+	{
+		Sys.Delay(100);
+		*pCOM4Rx485 = 0;
+	}
+#endif
 #endif
 }
 void DeviceConfigCenter::com5send(Buffer& bs)
 {
 #if USECOM5
+#if COM5SENDINTFLAG
+	//中断发送
 	Txx5.Write(bs);
 	com5send();
+#else
+	if (pCOM5Rx485)
+	{
+		*pCOM5Rx485 = 1;
+	}
+	for (int i = 0; i < bs.Length(); i++)
+	{
+		/* 发送一个字节数据到USART */
+		USART_SendData(UART5, bs[i]);
+
+		/* 等待发送完毕 */
+		while (USART_GetFlagStatus(UART5, USART_FLAG_TXE) == RESET);
+	}
+	if (pCOM5Rx485)
+	{
+		Sys.Delay(100);
+		*pCOM5Rx485 = 0;
+	}
+#endif
 #endif
 }
 void DeviceConfigCenter::com1send()
@@ -365,9 +476,12 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
+		
 	/* 使能串口1接收中断 */
 	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // 串口接收中断配置
+#if COM1RCVIDLEINTFLAG
 	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
+#endif
 
 
 	USART_Cmd(USART1, ENABLE);
@@ -386,6 +500,10 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 #elif defined STM32F4
 
 #endif
+#if  COM1RCVIDLEINTFLAG
+#else
+	Sys.AddTask(Com1RcvRoutin, 0, 100, 1000, "RcvCom1");
+#endif //  COM1RCVIDLEINTFLAG
 #endif
 }
 void DeviceConfigCenter::configCOM2(int baudRate)
@@ -426,7 +544,9 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 	NVIC_Init(&NVIC_InitStructure);
 	/* 使能串口2接收中断 */
 	USART_ITConfig(USART2, USART_IT_RXNE, ENABLE); // 串口接收中断配置
+#if COM2RCVIDLEINTFLAG
 	USART_ITConfig(USART2, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
+#endif
 
 
 	USART_Cmd(USART2, ENABLE);
@@ -445,6 +565,10 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 #elif defined STM32F4
 
 #endif
+#if  COM2RCVIDLEINTFLAG
+#else
+	Sys.AddTask(Com2RcvRoutin, 0, 100, 1000, "RcvCom2");
+#endif //  COM2RCVIDLEINTFLAG
 #endif
 }
 
@@ -486,7 +610,9 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	NVIC_Init(&NVIC_InitStructure);
 	/* 使能串口3接收中断 */
 	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE); // 串口接收中断配置
+#if COM3RCVIDLEINTFLAG
 	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
+#endif
 
 
 	USART_Cmd(USART3, ENABLE);
@@ -505,6 +631,10 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 #elif defined STM32F4
 
 #endif
+#if  COM3RCVIDLEINTFLAG
+#else
+	Sys.AddTask(Com3RcvRoutin, 0, 100, 1000, "RcvCom3");
+#endif //  COM3RCVIDLEINTFLAG
 #endif
 }
 void DeviceConfigCenter::configCOM4(int baudRate)
@@ -545,7 +675,9 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 	NVIC_Init(&NVIC_InitStructure);
 	/* 使能串口4接收中断 */
 	USART_ITConfig(UART4, USART_IT_RXNE, ENABLE); // 串口接收中断配置
+#if COM4RCVIDLEINTFLAG
 	USART_ITConfig(UART4, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
+#endif
 
 
 	USART_Cmd(UART4, ENABLE);
@@ -564,6 +696,10 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 #elif defined STM32F4
 
 #endif
+#if  COM4RCVIDLEINTFLAG
+#else
+	Sys.AddTask(Com4RcvRoutin, 0, 100, 1000, "RcvCom4");
+#endif //  COM4RCVIDLEINTFLAG
 #endif
 }
 void DeviceConfigCenter::configCOM5(int baudRate)
@@ -604,7 +740,9 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 	NVIC_Init(&NVIC_InitStructure);
 	/* 使能串口5接收中断 */
 	USART_ITConfig(UART5, USART_IT_RXNE, ENABLE); // 串口接收中断配置
+#if COM5RCVIDLEINTFLAG
 	USART_ITConfig(UART5, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
+#endif
 
 
 	USART_Cmd(UART5, ENABLE);
@@ -623,6 +761,10 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 #elif defined STM32F4
 
 #endif
+#if  COM5RCVIDLEINTFLAG
+#else
+	Sys.AddTask(Com5RcvRoutin, 0, 100, 1000, "RcvCom5");
+#endif //  COM5RCVIDLEINTFLAG
 #endif
 }
 void DeviceConfigCenter::Com1ChgBaudRate(int baudRate)
@@ -749,6 +891,76 @@ void DeviceConfigCenter::SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, b
 	int n = index << 2;
 	*txPin = p[n];
 	*rxPin = p[n + 1];
+}
+//串口1接收判断
+void DeviceConfigCenter::Com1RcvRoutin(void *param)
+{
+#if USECOM1
+	int ms = Sys.Ms();
+	if ((ms - RcvLastTimeCOM1 > 1) && (Rxx1.Length() > 0))
+	{
+		if (DeviceConfigCenter::PRcvCOM1)
+		{
+			(*DeviceConfigCenter::PRcvCOM1)();
+		}
+	}
+#endif
+}
+//串口2接收判断
+void DeviceConfigCenter::Com2RcvRoutin(void *param)
+{
+#if USECOM2
+	int ms = Sys.Ms();
+	if ((ms - RcvLastTimeCOM2 > 1) && (Rxx2.Length() > 0))
+	{
+		if (DeviceConfigCenter::PRcvCOM2)
+		{
+			(*DeviceConfigCenter::PRcvCOM2)();
+		}
+	}
+#endif
+}
+//串口3接收判断
+void DeviceConfigCenter::Com3RcvRoutin(void *param)
+{
+#if USECOM3
+	int ms = Sys.Ms();
+	if ((ms - RcvLastTimeCOM3 > 1) && (Rxx3.Length() > 0))
+	{
+		if (DeviceConfigCenter::PRcvCOM3)
+		{
+			(*DeviceConfigCenter::PRcvCOM3)();
+		}
+	}
+#endif
+}
+//串口4接收判断
+void DeviceConfigCenter::Com4RcvRoutin(void *param)
+{
+#if USECOM4
+	int ms = Sys.Ms();
+	if ((ms - RcvLastTimeCOM4 > 1) && (Rxx4.Length() > 0))
+	{
+		if (DeviceConfigCenter::PRcvCOM4)
+		{
+			(*DeviceConfigCenter::PRcvCOM4)();
+		}
+	}
+#endif
+}
+//串口5接收判断
+void DeviceConfigCenter::Com5RcvRoutin(void *param)
+{
+#if USECOM5
+	int ms = Sys.Ms();
+	if ((ms - RcvLastTimeCOM5 > 1) && (Rxx5.Length() > 0))
+	{
+		if (DeviceConfigCenter::PRcvCOM5)
+		{
+			(*DeviceConfigCenter::PRcvCOM5)();
+		}
+	}
+#endif
 }
 //定时器
 Func DeviceConfigCenter::PTim2Update = 0;

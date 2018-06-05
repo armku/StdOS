@@ -16,6 +16,7 @@ extern "C"
 		{
 			ch = USART_ReceiveData(USART1);
 			Rxx1.Enqueue(ch);
+			DeviceConfigCenter::RcvLastTimeCOM1 = Sys.Ms();
 		}
 		if (USART_GetITStatus(USART1, USART_IT_IDLE) == SET)
 		{
@@ -75,6 +76,7 @@ extern "C"
 		{
 			ch = USART_ReceiveData(USART2);
 			Rxx2.Enqueue(ch);
+			DeviceConfigCenter::RcvLastTimeCOM2 = Sys.Ms();
 		}
 		if (USART_GetITStatus(USART2, USART_IT_IDLE) == SET)
 		{
@@ -135,6 +137,7 @@ extern "C"
 		{
 			ch = USART_ReceiveData(USART3);
 			Rxx3.Enqueue(ch);
+			DeviceConfigCenter::RcvLastTimeCOM3 = Sys.Ms();
 		}
 		if (USART_GetITStatus(USART3, USART_IT_IDLE) == SET)
 		{
@@ -193,7 +196,8 @@ extern "C"
 		if (USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
 		{
 			ch = USART_ReceiveData(UART4);
-			Rxx3.Enqueue(ch);
+			Rxx4.Enqueue(ch);
+			DeviceConfigCenter::RcvLastTimeCOM4 = Sys.Ms();
 		}
 		if (USART_GetITStatus(UART4, USART_IT_IDLE) == SET)
 		{
@@ -253,6 +257,7 @@ extern "C"
 		{
 			ch = USART_ReceiveData(UART5);
 			Rxx5.Enqueue(ch);
+			DeviceConfigCenter::RcvLastTimeCOM5 = Sys.Ms();
 		}
 		if (USART_GetITStatus(UART5, USART_IT_IDLE) == SET)
 		{

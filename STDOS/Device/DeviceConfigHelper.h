@@ -36,7 +36,7 @@ public:
 	static Func PExit14;
 	static Func PExit15;
 
-	//串口
+	//串口	
 	static void ConfigCom(COM com, int baudRate);
 	static void ComChgBaudRate(COM com, int baudRate);//改变波特率
 	static void com1send();
@@ -67,11 +67,17 @@ public:
 	static int COM4SENDINTFLAG;//串口4中断发送
 	static int COM5SENDINTFLAG;//串口5中断发送
 
-	static int COM1RCVINTFLAG;//串口1中断接收
-	static int COM2RCVINTFLAG;//串口2中断接收
-	static int COM3RCVINTFLAG;//串口3中断接收
-	static int COM4RCVINTFLAG;//串口4中断接收
-	static int COM5RCVINTFLAG;//串口5中断接收
+	static int COM1RCVIDLEINTFLAG;//串口1空闲中断接收
+	static int COM2RCVIDLEINTFLAG;//串口2空闲中断接收
+	static int COM3RCVIDLEINTFLAG;//串口3空闲中断接收
+	static int COM4RCVIDLEINTFLAG;//串口4空闲中断接收
+	static int COM5RCVIDLEINTFLAG;//串口5空闲中断接收
+
+	static int RcvLastTimeCOM1;//串口1最后接收数据时间
+	static int RcvLastTimeCOM2;//串口2最后接收数据时间
+	static int RcvLastTimeCOM3;//串口3最后接收数据时间
+	static int RcvLastTimeCOM4;//串口4最后接收数据时间
+	static int RcvLastTimeCOM5;//串口5最后接收数据时间
 	//定时器
 	static void TimeTickInit();//系统用定时器初始化
 	static void TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);//定时器配置
@@ -121,6 +127,12 @@ private:
 	static void Com4ChgBaudRate(int baudRate);
 	static void Com5ChgBaudRate(int baudRate);
 	static void SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false);
+
+	static void Com1RcvRoutin(void *param);//串口1接收判断
+	static void Com2RcvRoutin(void *param);//串口1接收判断
+	static void Com3RcvRoutin(void *param);//串口1接收判断
+	static void Com4RcvRoutin(void *param);//串口1接收判断
+	static void Com5RcvRoutin(void *param);//串口1接收判断
 	//定时器
 
 };
