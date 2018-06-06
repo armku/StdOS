@@ -17,6 +17,12 @@
 #define COM4SENDINTFLAG	1//串口4中断发送
 #define COM5SENDINTFLAG	1//串口5中断发送
 
+#define COM1RCVIDLEINTFLAG	1//串口1空闲中断接收
+#define COM2RCVIDLEINTFLAG	1//串口2空闲中断接收
+#define COM3RCVIDLEINTFLAG	1//串口3空闲中断接收
+#define COM4RCVIDLEINTFLAG	1//串口4空闲中断接收
+#define COM5RCVIDLEINTFLAG	1//串口5空闲中断接收
+
 typedef enum
 {
 	Rising = 0x01,	// 上升沿
@@ -74,12 +80,6 @@ public:
 	static Func PRcvCOM4;
 	static Func PRcvCOM5;
 	
-	static int COM1RCVIDLEINTFLAG;//串口1空闲中断接收
-	static int COM2RCVIDLEINTFLAG;//串口2空闲中断接收
-	static int COM3RCVIDLEINTFLAG;//串口3空闲中断接收
-	static int COM4RCVIDLEINTFLAG;//串口4空闲中断接收
-	static int COM5RCVIDLEINTFLAG;//串口5空闲中断接收
-
 	static int RcvLastTimeCOM1;//串口1最后接收数据时间
 	static int RcvLastTimeCOM2;//串口2最后接收数据时间
 	static int RcvLastTimeCOM3;//串口3最后接收数据时间

@@ -102,12 +102,6 @@ Func DeviceConfigCenter::PRcvCOM3 = 0;
 Func DeviceConfigCenter::PRcvCOM4 = 0;
 Func DeviceConfigCenter::PRcvCOM5 = 0;
 
-int DeviceConfigCenter::COM1RCVIDLEINTFLAG = 1;//串口1中断接收
-int DeviceConfigCenter::COM2RCVIDLEINTFLAG = 1;//串口2中断接收
-int DeviceConfigCenter::COM3RCVIDLEINTFLAG = 1;//串口3中断接收
-int DeviceConfigCenter::COM4RCVIDLEINTFLAG = 1;//串口4中断接收
-int DeviceConfigCenter::COM5RCVIDLEINTFLAG = 1;//串口5中断接收
-
 int DeviceConfigCenter::RcvLastTimeCOM1 = 0;//串口1最后接收数据时间
 int DeviceConfigCenter::RcvLastTimeCOM2 = 0;//串口1最后接收数据时间
 int DeviceConfigCenter::RcvLastTimeCOM3 = 0;//串口1最后接收数据时间
