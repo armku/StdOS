@@ -490,7 +490,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 #endif
 #if  COM1RCVIDLEINTFLAG
 #else
-	Sys.AddTask(Com1RcvRoutin, 0, 100, 1000, "RcvCom1");
+	Sys.AddTask(Com1RcvRoutin, 0, 100, 1, "RcvCom1");
 #endif //  COM1RCVIDLEINTFLAG
 #endif
 }
@@ -555,7 +555,7 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 #endif
 #if  COM2RCVIDLEINTFLAG
 #else
-	Sys.AddTask(Com2RcvRoutin, 0, 100, 1000, "RcvCom2");
+	Sys.AddTask(Com2RcvRoutin, 0, 100, 1, "RcvCom2");
 #endif //  COM2RCVIDLEINTFLAG
 #endif
 }
@@ -621,7 +621,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 #endif
 #if  COM3RCVIDLEINTFLAG
 #else
-	Sys.AddTask(Com3RcvRoutin, 0, 100, 1000, "RcvCom3");
+	Sys.AddTask(Com3RcvRoutin, 0, 100, 1, "RcvCom3");
 #endif //  COM3RCVIDLEINTFLAG
 #endif
 }
@@ -686,7 +686,7 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 #endif
 #if  COM4RCVIDLEINTFLAG
 #else
-	Sys.AddTask(Com4RcvRoutin, 0, 100, 1000, "RcvCom4");
+	Sys.AddTask(Com4RcvRoutin, 0, 100, 1, "RcvCom4");
 #endif //  COM4RCVIDLEINTFLAG
 #endif
 }
@@ -751,7 +751,7 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 #endif
 #if  COM5RCVIDLEINTFLAG
 #else
-	Sys.AddTask(Com5RcvRoutin, 0, 100, 1000, "RcvCom5");
+	Sys.AddTask(Com5RcvRoutin, 0, 100, 1, "RcvCom5");
 #endif //  COM5RCVIDLEINTFLAG
 #endif
 }
