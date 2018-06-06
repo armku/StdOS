@@ -25,7 +25,7 @@ int DeviceConfigCenter::CurrentTick()
 #elif defined STM32F1
 	return (TIM2->CNT) >> 1;
 #elif defined STM32F4
-
+	return (TIM2->CNT) >> 1;
 #endif
 }
 uint32_t DeviceConfigCenter::CurrentTicks1()
@@ -35,7 +35,7 @@ uint32_t DeviceConfigCenter::CurrentTicks1()
 #elif defined STM32F1
 	return SysTick->LOAD - SysTick->VAL;
 #elif defined STM32F4
-
+	return SysTick->LOAD - SysTick->VAL;
 #endif
 }
 #include <stdio.h>
