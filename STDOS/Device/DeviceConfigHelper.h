@@ -5,6 +5,18 @@
 #include "Port.h"
 #include "Core\Queue.h"
 
+#define USECOM1 1
+#define USECOM2 1
+#define USECOM3 1
+#define USECOM4 0
+#define USECOM5 0
+
+#define COM1SENDINTFLAG	1//串口1中断发送
+#define COM2SENDINTFLAG	1//串口2中断发送
+#define COM3SENDINTFLAG	1//串口3中断发送
+#define COM4SENDINTFLAG	1//串口4中断发送
+#define COM5SENDINTFLAG	1//串口5中断发送
+
 typedef enum
 {
 	Rising = 0x01,	// 上升沿
@@ -61,12 +73,7 @@ public:
 	static Func PRcvCOM3;
 	static Func PRcvCOM4;
 	static Func PRcvCOM5;
-	static int COM1SENDINTFLAG;//串口1中断发送
-	static int COM2SENDINTFLAG;//串口2中断发送
-	static int COM3SENDINTFLAG;//串口3中断发送
-	static int COM4SENDINTFLAG;//串口4中断发送
-	static int COM5SENDINTFLAG;//串口5中断发送
-
+	
 	static int COM1RCVIDLEINTFLAG;//串口1空闲中断接收
 	static int COM2RCVIDLEINTFLAG;//串口2空闲中断接收
 	static int COM3RCVIDLEINTFLAG;//串口3空闲中断接收
@@ -139,11 +146,6 @@ private:
 #ifdef __cplusplus
 extern "C" {
 #endif
-#define USECOM1 1
-#define USECOM2 1
-#define USECOM3 1
-#define USECOM4 0
-#define USECOM5 0
 
 #ifdef USECOM1
 	extern Queue	Txx1;
