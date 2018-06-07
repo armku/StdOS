@@ -430,13 +430,12 @@ void DeviceConfigCenter::com5send()
 
 void DeviceConfigCenter::configCOM1(int baudRate)
 {
+	Port*		Ports[2];	// Tx/Rx
+	Pin			Pins[2];	// Tx/Rx
 #if USECOM1
 #if defined STM32F0
 
-#elif defined STM32F1
-
-	Port*		Ports[2];	// Tx/Rx
-	Pin			Pins[2];	// Tx/Rx
+#elif defined STM32F1	
 
 	USART_InitTypeDef USART_InitStructure;
 
@@ -528,7 +527,13 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
 	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器、
 
-
+	SerialPort_GetPins(&Pins[0], &Pins[1], COM1);
+	Ports[0] = new AlternatePort();
+	Ports[1] = new InputPort();
+	Ports[0]->Set(Pins[0]);
+	Ports[1]->Set(Pins[1]);
+	Ports[0]->Open();
+	Ports[1]->Open();
 #endif
 #if  COM1RCVIDLEINTFLAG
 #else
