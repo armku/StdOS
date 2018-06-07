@@ -534,14 +534,14 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 }
 void DeviceConfigCenter::configCOM2(int baudRate)
 {
+	Port*		Ports[2];	// Tx/Rx
+	Pin			Pins[2];	// Tx/Rx
+
 #if USECOM2
 #if defined STM32F0
 
 #elif defined STM32F1
-
-	Port*		Ports[2];	// Tx/Rx
-	Pin			Pins[2];	// Tx/Rx
-
+	
 	USART_InitTypeDef USART_InitStructure;
 
 	/* config USART2 clock */
@@ -573,10 +573,13 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 #if COM2RCVIDLEINTFLAG
 	USART_ITConfig(USART2, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
-
-
+	
 	USART_Cmd(USART2, ENABLE);
 	USART_ClearFlag(USART2, USART_FLAG_TC);
+		
+#elif defined STM32F4
+
+#endif
 
 	Txx2.SetBuf(com2tx, ArrayLength(com2tx));
 	Rxx2.SetBuf(com2rx, ArrayLength(com2rx));
@@ -588,9 +591,6 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 	Ports[1]->Set(Pins[1]);
 	Ports[0]->Open();
 	Ports[1]->Open();
-#elif defined STM32F4
-
-#endif
 #if  COM2RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com2RcvRoutin, 0, 100, 1, "RcvCom2");
@@ -600,14 +600,14 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 
 void DeviceConfigCenter::configCOM3(int baudRate)
 {
+	Port*		Ports[2];	// Tx/Rx
+	Pin			Pins[2];	// Tx/Rx
+
 #if USECOM3
 #if defined STM32F0
 
 #elif defined STM32F1
-
-	Port*		Ports[2];	// Tx/Rx
-	Pin			Pins[2];	// Tx/Rx
-
+	
 	USART_InitTypeDef USART_InitStructure;
 
 	/* config USART3 clock */
@@ -643,6 +643,10 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 
 	USART_Cmd(USART3, ENABLE);
 	USART_ClearFlag(USART3, USART_FLAG_TC);
+		
+#elif defined STM32F4
+
+#endif
 
 	Txx3.SetBuf(com3tx, ArrayLength(com3tx));
 	Rxx3.SetBuf(com3rx, ArrayLength(com3rx));
@@ -654,9 +658,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	Ports[1]->Set(Pins[1]);
 	Ports[0]->Open();
 	Ports[1]->Open();
-#elif defined STM32F4
 
-#endif
 #if  COM3RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com3RcvRoutin, 0, 100, 1, "RcvCom3");
@@ -665,14 +667,14 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 }
 void DeviceConfigCenter::configCOM4(int baudRate)
 {
+	Port*		Ports[2];	// Tx/Rx
+	Pin			Pins[2];	// Tx/Rx
+
 #if USECOM4
 #if defined STM32F0
 
 #elif defined STM32F1
-
-	Port*		Ports[2];	// Tx/Rx
-	Pin			Pins[2];	// Tx/Rx
-
+	
 	USART_InitTypeDef USART_InitStructure;
 
 	/* config USART4 clock */
@@ -705,9 +707,12 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 	USART_ITConfig(UART4, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
 
-
 	USART_Cmd(UART4, ENABLE);
 	USART_ClearFlag(UART4, USART_FLAG_TC);
+		
+#elif defined STM32F4
+
+#endif
 
 	Txx4.SetBuf(com4tx, ArrayLength(com4tx));
 	Rxx4.SetBuf(com4rx, ArrayLength(com4rx));
@@ -719,9 +724,7 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 	Ports[1]->Set(Pins[1]);
 	Ports[0]->Open();
 	Ports[1]->Open();
-#elif defined STM32F4
 
-#endif
 #if  COM4RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com4RcvRoutin, 0, 100, 1, "RcvCom4");
@@ -730,14 +733,14 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 }
 void DeviceConfigCenter::configCOM5(int baudRate)
 {
+	Port*		Ports[2];	// Tx/Rx
+	Pin			Pins[2];	// Tx/Rx
+
 #if USECOM5
 #if defined STM32F0
 
 #elif defined STM32F1
-
-	Port*		Ports[2];	// Tx/Rx
-	Pin			Pins[2];	// Tx/Rx
-
+	
 	USART_InitTypeDef USART_InitStructure;
 
 	/* config USART5 clock */
@@ -769,10 +772,13 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 #if COM5RCVIDLEINTFLAG
 	USART_ITConfig(UART5, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
-
-
+	
 	USART_Cmd(UART5, ENABLE);
 	USART_ClearFlag(UART5, USART_FLAG_TC);
+		
+#elif defined STM32F4
+
+#endif
 
 	Txx5.SetBuf(com5tx, ArrayLength(com5tx));
 	Rxx5.SetBuf(com5rx, ArrayLength(com5rx));
@@ -784,9 +790,7 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 	Ports[1]->Set(Pins[1]);
 	Ports[0]->Open();
 	Ports[1]->Open();
-#elif defined STM32F4
 
-#endif
 #if  COM5RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com5RcvRoutin, 0, 100, 1, "RcvCom5");
