@@ -11,7 +11,7 @@
 #define USECOM4 0
 #define USECOM5 0
 
-#define COM1SENDINTFLAG	1//串口1中断发送
+#define COM1SENDINTFLAG	0//串口1中断发送
 #define COM2SENDINTFLAG	1//串口2中断发送
 #define COM3SENDINTFLAG	1//串口3中断发送
 #define COM4SENDINTFLAG	1//串口4中断发送
