@@ -17,7 +17,7 @@
 #define COM4SENDINTFLAG	1//串口4中断发送
 #define COM5SENDINTFLAG	1//串口5中断发送
 
-#define COM1RCVIDLEINTFLAG	1//串口1空闲中断接收
+#define COM1RCVIDLEINTFLAG	0//串口1空闲中断接收
 #define COM2RCVIDLEINTFLAG	1//串口2空闲中断接收
 #define COM3RCVIDLEINTFLAG	1//串口3空闲中断接收
 #define COM4RCVIDLEINTFLAG	1//串口4空闲中断接收

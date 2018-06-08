@@ -427,7 +427,7 @@ void DeviceConfigCenter::com5send()
 
 #endif
 }
-#define EN_USART1_RX 1
+
 void DeviceConfigCenter::configCOM1(int baudRate)
 {
 	Port*		Ports[2];	// Tx/Rx
@@ -507,7 +507,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 
 								//USART_ClearFlag(USART1, USART_FLAG_TC);
 
-#if EN_USART1_RX	
+
 	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);//开启相关中断
 
 												  //Usart1 NVIC 配置
@@ -516,7 +516,8 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//子优先级3
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
 	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器、
-
+#if COM1RCVIDLEINTFLAG
+	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
 		
 #endif

@@ -76,9 +76,16 @@ void LedTask(void *param)
 }
 #endif // STM32F0
 
+uint8_t chbuf[1000];
+
 void com1rcv()
 {
+	Buffer bs1(chbuf, ArrayLength(chbuf));
+
+	Rxx1.Read(bs1);
+
 	debug_printf("COM1RCV:\n");
+	bs1.ShowHex(true);
 }
 
 void BspInit()
