@@ -203,9 +203,9 @@ extern "C"
 		{
 			//数据帧接收完毕
 			ch = USART_ReceiveData(UART4); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR) 
-			if (DeviceConfigHelper::PRcvCOM4)
+			if (DeviceConfigCenter::PRcvCOM4)
 			{
-				(*DeviceConfigHelper::PRcvCOM4)();
+				(*DeviceConfigCenter::PRcvCOM4)();
 			}
 		}
 		/* 处理发送缓冲区空中断 */
@@ -235,9 +235,9 @@ extern "C"
 
 				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
 				Txx4.Clear();
-				if (DeviceConfigHelper::pCOM4Rx485)
+				if (DeviceConfigCenter::pCOM4Rx485)
 				{
-					*DeviceConfigHelper::pCOM4Rx485 = 0;
+					*DeviceConfigCenter::pCOM4Rx485 = 0;
 				}
 			}
 			else
@@ -263,9 +263,9 @@ extern "C"
 		{
 			//数据帧接收完毕
 			ch = USART_ReceiveData(UART5); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)  
-			if (DeviceConfigHelper::PRcvCOM5)
+			if (DeviceConfigCenter::PRcvCOM5)
 			{
-				(*DeviceConfigHelper::PRcvCOM5)();
+				(*DeviceConfigCenter::PRcvCOM5)();
 			}
 		}
 		/* 处理发送缓冲区空中断 */
@@ -295,9 +295,9 @@ extern "C"
 
 				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
 				Txx5.Clear();
-				if (DeviceConfigHelper::pCOM5Rx485)
+				if (DeviceConfigCenter::pCOM5Rx485)
 				{
-					*DeviceConfigHelper::pCOM5Rx485 = 0;
+					*DeviceConfigCenter::pCOM5Rx485 = 0;
 				}
 			}
 			else

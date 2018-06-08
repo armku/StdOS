@@ -969,7 +969,16 @@ void DeviceConfigCenter::Com1ChgBaudRate(int baudRate)
 
 	USART_Init(USART1, &USART_InitStructure);
 #elif defined STM32F4
+	USART_InitTypeDef USART_InitStructure;
 
+	//USART 初始化设置
+	USART_InitStructure.USART_BaudRate = baudRate;//波特率设置
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
+	USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验位
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
+	USART_Init(USART1, &USART_InitStructure); //初始化串口
 #endif
 #endif
 }
@@ -991,7 +1000,16 @@ void DeviceConfigCenter::Com2ChgBaudRate(int baudRate)
 
 	USART_Init(USART2, &USART_InitStructure);
 #elif defined STM32F4
+	USART_InitTypeDef USART_InitStructure;
 
+	//USART 初始化设置
+	USART_InitStructure.USART_BaudRate = baudRate;//波特率设置
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
+	USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验位
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
+	USART_Init(USART2, &USART_InitStructure); //初始化串口
 #endif
 #endif
 }
@@ -1013,7 +1031,16 @@ void DeviceConfigCenter::Com3ChgBaudRate(int baudRate)
 
 	USART_Init(USART3, &USART_InitStructure);
 #elif defined STM32F4
+	USART_InitTypeDef USART_InitStructure;
 
+	//USART 初始化设置
+	USART_InitStructure.USART_BaudRate = baudRate;//波特率设置
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
+	USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验位
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
+	USART_Init(USART3, &USART_InitStructure); //初始化串口
 #endif
 #endif
 }
@@ -1035,7 +1062,16 @@ void DeviceConfigCenter::Com4ChgBaudRate(int baudRate)
 
 	USART_Init(UART4, &USART_InitStructure);
 #elif defined STM32F4
+	USART_InitTypeDef USART_InitStructure;
 
+	//USART 初始化设置
+	USART_InitStructure.USART_BaudRate = baudRate;//波特率设置
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
+	USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验位
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
+	USART_Init(UART4, &USART_InitStructure); //初始化串口
 #endif
 #endif
 }
@@ -1057,7 +1093,16 @@ void DeviceConfigCenter::Com5ChgBaudRate(int baudRate)
 
 	USART_Init(UART5, &USART_InitStructure);
 #elif defined STM32F4
+	USART_InitTypeDef USART_InitStructure;
 
+	//USART 初始化设置
+	USART_InitStructure.USART_BaudRate = baudRate;//波特率设置
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
+	USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验位
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
+	USART_Init(UART5, &USART_InitStructure); //初始化串口
 #endif
 #endif
 }
