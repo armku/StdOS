@@ -1007,7 +1007,7 @@ void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 #if defined STM32F0
 
 #elif defined STM32F1
-
+#if 1
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
 	/* 自动重装载寄存器周期的值(计数值) */
 	TIM_TimeBaseStructure.TIM_Period = 2000 - 1;
@@ -1040,9 +1040,12 @@ void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 	NVIC_SetPriority(TIM2_IRQn, 3);
 
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-
-	NVIC_SetPriority(SysTick_IRQn, 0);
+		
 	NVIC_SetPriority(TIM2_IRQn, 0);
+#else
+	Timer2Config(1000);
+#endif
+	NVIC_SetPriority(SysTick_IRQn, 0);
 #elif defined STM32F4
 	Timer2Config(10000);
 #endif
