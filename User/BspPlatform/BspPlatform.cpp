@@ -10,27 +10,15 @@
 #include "Platform\stm32.h"
 #include "Device\DeviceConfigHelper.h"
 
-void TimeUpdate(); void TIM2_Int_Init(u16 arr, u16 psc);
+void TimeUpdate();
 void BspPlatformInit()
 {	
 	DeviceConfigCenter::ConfigCom(COM1, 256000);
 	DeviceConfigCenter::ConfigCom(COM3, 256000);
 	DeviceConfigCenter::TimeTickInit();//系统用定时器初始化
 	DeviceConfigCenter::PTim2Update = TimeUpdate;
-	TIM2_Int_Init(5000 - 1, 8400 - 1);
 }
-//F4
-//通用定时器3中断初始化
-//arr：自动重装值。
-//psc：时钟预分频数
-//定时器溢出时间计算方法:Tout=((arr+1)*(psc+1))/Ft us.
-//Ft=定时器工作频率,单位:Mhz
-//这里使用的是定时器3!
-void TIM2_Int_Init(u16 arr, u16 psc)
-{
-	
 
-}
 int DeviceConfigCenter::CurrentTick()
 {
 #if defined STM32F0
