@@ -1048,7 +1048,7 @@ void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 	//psc：时钟预分频数
 	//定时器溢出时间计算方法 : Tout = ((arr + 1)*(psc + 1)) / Ft us.
 	//Ft=定时器工作频率,单位:Mhz
-	u16 arr = 5000 - 1;
+	u16 arr = 10000 - 1;
 	u16 psc = 8400 - 1;
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
