@@ -68,7 +68,7 @@ void LedTask(void *param)
 {
 	OutputPort *leds = (OutputPort*)param;
 	*leds = !* leds;
-	led2 = !led2;
+	//led2 = !led2;
 	//    led3 = !led3;
 	//    led4 = !led4;
 	//led2 = keyup;
