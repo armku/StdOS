@@ -511,8 +511,8 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
 
-	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART1); //GPIOA9复用为USART1
-	GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART1); //GPIOA10复用为USART1
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART1); //GPIO复用为USART
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART1); //GPIO复用为USART
 
 	SerialPort_GetPins(&Pins[0], &Pins[1], COM1);
 	Ports[0] = new AlternatePort();
@@ -585,7 +585,46 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 	Ports[0]->Open();
 	Ports[1]->Open();
 #elif defined STM32F4
+	USART_InitTypeDef USART_InitStructure;
+	NVIC_InitTypeDef NVIC_InitStructure;
 
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE); //使能GPIOA时钟
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);//使能USART1时钟
+														  //串口1对应引脚复用映射
+														  //USART1 初始化设置
+	USART_InitStructure.USART_BaudRate = baudRate;//波特率设置
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
+	USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验位
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
+	USART_Init(USART2, &USART_InitStructure); //初始化串口1
+
+	USART_Cmd(USART2, ENABLE);  //使能串口1 
+
+	//USART_ClearFlag(USART2, USART_FLAG_TC);
+
+	USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);//开启相关中断
+												  //Usart NVIC 配置
+	NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;//串口中断通道
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3;//抢占优先级3
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//子优先级3
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
+	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器、
+#if COM1RCVIDLEINTFLAG
+	USART_ITConfig(USART2, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
+#endif
+
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_USART2); //GPIO复用为USART
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_USART2); //GPIO复用为USART
+
+	SerialPort_GetPins(&Pins[0], &Pins[1], COM1);
+	Ports[0] = new AlternatePort();
+	Ports[1] = new AlternatePort();
+	Ports[0]->Set(Pins[0]);
+	Ports[1]->Set(Pins[1]);
+	Ports[0]->Open();
+	Ports[1]->Open();
 #endif
 
 	Txx2.SetBuf(com2tx, ArrayLength(com2tx));
@@ -651,7 +690,46 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	Ports[0]->Open();
 	Ports[1]->Open();
 #elif defined STM32F4
+	USART_InitTypeDef USART_InitStructure;
+	NVIC_InitTypeDef NVIC_InitStructure;
 
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE); //使能GPIO时钟
+	RCC_APB2PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);//使能USART时钟
+														  //串口1对应引脚复用映射
+														  //USART1 初始化设置
+	USART_InitStructure.USART_BaudRate = baudRate;//波特率设置
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
+	USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验位
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
+	USART_Init(USART3, &USART_InitStructure); //初始化串口1
+
+	USART_Cmd(USART3, ENABLE);  //使能串口 
+
+	//USART_ClearFlag(USART1, USART_FLAG_TC);
+
+	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);//开启相关中断
+												  //Usart1 NVIC 配置
+	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;//串口1中断通道
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3;//抢占优先级3
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//子优先级3
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
+	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器、
+#if COM1RCVIDLEINTFLAG
+	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
+#endif
+
+	GPIO_PinAFConfig(GPIOB, GPIO_PinSource10, GPIO_AF_USART3); //GPIO复用为USART
+	GPIO_PinAFConfig(GPIOB, GPIO_PinSource11, GPIO_AF_USART3); //GPIO复用为USART
+
+	SerialPort_GetPins(&Pins[0], &Pins[1], COM1);
+	Ports[0] = new AlternatePort();
+	Ports[1] = new AlternatePort();
+	Ports[0]->Set(Pins[0]);
+	Ports[1]->Set(Pins[1]);
+	Ports[0]->Open();
+	Ports[1]->Open();
 #endif
 
 	Txx3.SetBuf(com3tx, ArrayLength(com3tx));
@@ -719,7 +797,45 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 	Ports[1]->Open();
 
 #elif defined STM32F4
+	USART_InitTypeDef USART_InitStructure;
+	NVIC_InitTypeDef NVIC_InitStructure;
 
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE); //使能GPIOA时钟
+	RCC_APB2PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);//使能USART时钟
+														  //USART 初始化设置
+	USART_InitStructure.USART_BaudRate = baudRate;//波特率设置
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
+	USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验位
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
+	USART_Init(UART4, &USART_InitStructure); //初始化串口
+
+	USART_Cmd(UART4, ENABLE);  //使能串口4 
+
+	//USART_ClearFlag(USART4, USART_FLAG_TC);
+
+	USART_ITConfig(UART4, USART_IT_RXNE, ENABLE);//开启相关中断
+												  //Usart4 NVIC 配置
+	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;//串口1中断通道
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3;//抢占优先级3
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//子优先级3
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
+	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器、
+#if COM1RCVIDLEINTFLAG
+	USART_ITConfig(UART4, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
+#endif
+
+	GPIO_PinAFConfig(GPIOC, GPIO_PinSource10, GPIO_AF_UART4); //GPIO复用为USART
+	GPIO_PinAFConfig(GPIOC, GPIO_PinSource11, GPIO_AF_UART4); //GPIO复用为USART
+
+	SerialPort_GetPins(&Pins[0], &Pins[1], COM1);
+	Ports[0] = new AlternatePort();
+	Ports[1] = new AlternatePort();
+	Ports[0]->Set(Pins[0]);
+	Ports[1]->Set(Pins[1]);
+	Ports[0]->Open();
+	Ports[1]->Open();
 #endif
 
 	Txx4.SetBuf(com4tx, ArrayLength(com4tx));
@@ -785,7 +901,45 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 	Ports[1]->Open();
 
 #elif defined STM32F4
+	USART_InitTypeDef USART_InitStructure;
+	NVIC_InitTypeDef NVIC_InitStructure;
 
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC| RCC_AHB1Periph_GPIOD, ENABLE); //使能GPIO时钟
+	RCC_APB2PeriphClockCmd(RCC_APB1Periph_UART5, ENABLE);//使能USART时钟
+														  //USART5 初始化设置
+	USART_InitStructure.USART_BaudRate = baudRate;//波特率设置
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
+	USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验位
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
+	USART_Init(UART5, &USART_InitStructure); //初始化串口
+
+	USART_Cmd(UART5, ENABLE);  //使能串口 
+
+	//USART_ClearFlag(USART5, USART_FLAG_TC);
+
+	USART_ITConfig(UART5, USART_IT_RXNE, ENABLE);//开启相关中断
+												  //Usart1 NVIC 配置
+	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;//串口1中断通道
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3;//抢占优先级3
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//子优先级3
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
+	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器、
+#if COM1RCVIDLEINTFLAG
+	USART_ITConfig(UART5, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
+#endif
+
+	GPIO_PinAFConfig(GPIOC, GPIO_PinSource12, GPIO_AF_UART5); //GPIO复用为USART
+	GPIO_PinAFConfig(GPIOD, GPIO_PinSource2, GPIO_AF_UART5); //GPIO复用为USART
+
+	SerialPort_GetPins(&Pins[0], &Pins[1], COM1);
+	Ports[0] = new AlternatePort();
+	Ports[1] = new AlternatePort();
+	Ports[0]->Set(Pins[0]);
+	Ports[1]->Set(Pins[1]);
+	Ports[0]->Open();
+	Ports[1]->Open();
 #endif
 
 	Txx5.SetBuf(com5tx, ArrayLength(com5tx));

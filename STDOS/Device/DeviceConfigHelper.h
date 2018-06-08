@@ -8,8 +8,8 @@
 #define USECOM1 1
 #define USECOM2 1
 #define USECOM3 1
-#define USECOM4 0
-#define USECOM5 0
+#define USECOM4 1
+#define USECOM5 1
 
 #define COM1SENDINTFLAG	0//串口1中断发送
 #define COM2SENDINTFLAG	1//串口2中断发送
