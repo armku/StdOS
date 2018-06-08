@@ -525,6 +525,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	Txx1.SetBuf(com1tx, ArrayLength(com1tx));
 	Rxx1.SetBuf(com1rx, ArrayLength(com1rx));
 
+#if 0
 	SerialPort_GetPins(&Pins[0], &Pins[1], COM1);
 	Ports[0] = new AlternatePort();
 	Ports[1] = new InputPort();
@@ -532,7 +533,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	Ports[1]->Set(Pins[1]);
 	Ports[0]->Open();
 	Ports[1]->Open();
-
+#endif
 #if  COM1RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com1RcvRoutin, 0, 100, 1, "RcvCom1");
