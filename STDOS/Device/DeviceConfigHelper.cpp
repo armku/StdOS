@@ -579,13 +579,6 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 	USART_Cmd(USART2, ENABLE);
 	USART_ClearFlag(USART2, USART_FLAG_TC);
 
-#elif defined STM32F4
-
-#endif
-
-	Txx2.SetBuf(com2tx, ArrayLength(com2tx));
-	Rxx2.SetBuf(com2rx, ArrayLength(com2rx));
-
 	SerialPort_GetPins(&Pins[0], &Pins[1], COM2);
 	Ports[0] = new AlternatePort();
 	Ports[1] = new InputPort();
@@ -593,6 +586,13 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 	Ports[1]->Set(Pins[1]);
 	Ports[0]->Open();
 	Ports[1]->Open();
+#elif defined STM32F4
+
+#endif
+
+	Txx2.SetBuf(com2tx, ArrayLength(com2tx));
+	Rxx2.SetBuf(com2rx, ArrayLength(com2rx));
+		
 #if  COM2RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com2RcvRoutin, 0, 100, 1, "RcvCom2");
@@ -641,17 +641,9 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 #if COM3RCVIDLEINTFLAG
 	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
-
-
+	
 	USART_Cmd(USART3, ENABLE);
 	USART_ClearFlag(USART3, USART_FLAG_TC);
-
-#elif defined STM32F4
-
-#endif
-
-	Txx3.SetBuf(com3tx, ArrayLength(com3tx));
-	Rxx3.SetBuf(com3rx, ArrayLength(com3rx));
 
 	SerialPort_GetPins(&Pins[0], &Pins[1], COM3);
 	Ports[0] = new AlternatePort();
@@ -660,6 +652,14 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	Ports[1]->Set(Pins[1]);
 	Ports[0]->Open();
 	Ports[1]->Open();
+#elif defined STM32F4
+
+#endif
+
+	Txx3.SetBuf(com3tx, ArrayLength(com3tx));
+	Rxx3.SetBuf(com3rx, ArrayLength(com3rx));
+
+	
 
 #if  COM3RCVIDLEINTFLAG
 #else
@@ -712,13 +712,6 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 	USART_Cmd(UART4, ENABLE);
 	USART_ClearFlag(UART4, USART_FLAG_TC);
 
-#elif defined STM32F4
-
-#endif
-
-	Txx4.SetBuf(com4tx, ArrayLength(com4tx));
-	Rxx4.SetBuf(com4rx, ArrayLength(com4rx));
-
 	SerialPort_GetPins(&Pins[0], &Pins[1], COM4);
 	Ports[0] = new AlternatePort();
 	Ports[1] = new InputPort();
@@ -727,6 +720,13 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 	Ports[0]->Open();
 	Ports[1]->Open();
 
+#elif defined STM32F4
+
+#endif
+
+	Txx4.SetBuf(com4tx, ArrayLength(com4tx));
+	Rxx4.SetBuf(com4rx, ArrayLength(com4rx));
+		
 #if  COM4RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com4RcvRoutin, 0, 100, 1, "RcvCom4");
@@ -778,13 +778,6 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 	USART_Cmd(UART5, ENABLE);
 	USART_ClearFlag(UART5, USART_FLAG_TC);
 
-#elif defined STM32F4
-
-#endif
-
-	Txx5.SetBuf(com5tx, ArrayLength(com5tx));
-	Rxx5.SetBuf(com5rx, ArrayLength(com5rx));
-
 	SerialPort_GetPins(&Pins[0], &Pins[1], COM5);
 	Ports[0] = new AlternatePort();
 	Ports[1] = new InputPort();
@@ -793,6 +786,13 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 	Ports[0]->Open();
 	Ports[1]->Open();
 
+#elif defined STM32F4
+
+#endif
+
+	Txx5.SetBuf(com5tx, ArrayLength(com5tx));
+	Rxx5.SetBuf(com5rx, ArrayLength(com5rx));
+		
 #if  COM5RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com5RcvRoutin, 0, 100, 1, "RcvCom5");
