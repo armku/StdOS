@@ -21,7 +21,7 @@ void BspPlatformInit()
 int DeviceConfigCenter::CurrentTick()
 {
 #if defined STM32F0
-
+	return (TIM2->CNT) >> 1;
 #elif defined STM32F1
 	return (TIM2->CNT) >> 1;
 #elif defined STM32F4
@@ -31,7 +31,7 @@ int DeviceConfigCenter::CurrentTick()
 uint32_t DeviceConfigCenter::CurrentTicks1()
 {
 #if defined STM32F0
-
+	return SysTick->LOAD - SysTick->VAL;
 #elif defined STM32F1
 	return SysTick->LOAD - SysTick->VAL;
 #elif defined STM32F4
