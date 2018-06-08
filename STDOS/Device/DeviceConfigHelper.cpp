@@ -481,8 +481,6 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	Ports[0]->Open();
 	Ports[1]->Open();
 #elif defined STM32F4
-							//GPIO∂Àø⁄…Ë÷√
-	GPIO_InitTypeDef GPIO_InitStructure;
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
 
