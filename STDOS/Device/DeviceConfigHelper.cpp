@@ -469,7 +469,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 #if COM1RCVIDLEINTFLAG
 	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
-	
+
 	USART_Cmd(USART1, ENABLE);
 	USART_ClearFlag(USART1, USART_FLAG_TC);
 
@@ -488,19 +488,8 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE); //使能GPIOA时钟
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);//使能USART1时钟
-
-														  //串口1对应引脚复用映射
-	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART1); //GPIOA9复用为USART1
-	GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART1); //GPIOA10复用为USART1
-	
-	SerialPort_GetPins(&Pins[0], &Pins[1], COM1);
-	Ports[0] = new AlternatePort();
-	Ports[1] = new AlternatePort();
-	Ports[0]->Set(Pins[0]);
-	Ports[1]->Set(Pins[1]);
-	Ports[0]->Open();
-	Ports[1]->Open();
-										   //USART1 初始化设置
+															  //串口1对应引脚复用映射
+	//USART1 初始化设置
 	USART_InitStructure.USART_BaudRate = baudRate;//波特率设置
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
 	USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
@@ -523,7 +512,17 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 #if COM1RCVIDLEINTFLAG
 	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
-		
+
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART1); //GPIOA9复用为USART1
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART1); //GPIOA10复用为USART1
+
+	SerialPort_GetPins(&Pins[0], &Pins[1], COM1);
+	Ports[0] = new AlternatePort();
+	Ports[1] = new AlternatePort();
+	Ports[0]->Set(Pins[0]);
+	Ports[1]->Set(Pins[1]);
+	Ports[0]->Open();
+	Ports[1]->Open();
 #endif
 
 	Txx1.SetBuf(com1tx, ArrayLength(com1tx));
@@ -544,7 +543,7 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 #if defined STM32F0
 
 #elif defined STM32F1
-	
+
 	USART_InitTypeDef USART_InitStructure;
 
 	/* config USART2 clock */
@@ -576,10 +575,10 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 #if COM2RCVIDLEINTFLAG
 	USART_ITConfig(USART2, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
-	
+
 	USART_Cmd(USART2, ENABLE);
 	USART_ClearFlag(USART2, USART_FLAG_TC);
-		
+
 #elif defined STM32F4
 
 #endif
@@ -610,7 +609,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 #if defined STM32F0
 
 #elif defined STM32F1
-	
+
 	USART_InitTypeDef USART_InitStructure;
 
 	/* config USART3 clock */
@@ -646,7 +645,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 
 	USART_Cmd(USART3, ENABLE);
 	USART_ClearFlag(USART3, USART_FLAG_TC);
-		
+
 #elif defined STM32F4
 
 #endif
@@ -677,7 +676,7 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 #if defined STM32F0
 
 #elif defined STM32F1
-	
+
 	USART_InitTypeDef USART_InitStructure;
 
 	/* config USART4 clock */
@@ -712,7 +711,7 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 
 	USART_Cmd(UART4, ENABLE);
 	USART_ClearFlag(UART4, USART_FLAG_TC);
-		
+
 #elif defined STM32F4
 
 #endif
@@ -743,7 +742,7 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 #if defined STM32F0
 
 #elif defined STM32F1
-	
+
 	USART_InitTypeDef USART_InitStructure;
 
 	/* config USART5 clock */
@@ -775,10 +774,10 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 #if COM5RCVIDLEINTFLAG
 	USART_ITConfig(UART5, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
-	
+
 	USART_Cmd(UART5, ENABLE);
 	USART_ClearFlag(UART5, USART_FLAG_TC);
-		
+
 #elif defined STM32F4
 
 #endif
@@ -807,7 +806,7 @@ void DeviceConfigCenter::Com1ChgBaudRate(int baudRate)
 
 #elif defined STM32F1
 	USART_InitTypeDef USART_InitStructure;
-		
+
 	/* USART mode config */
 	USART_InitStructure.USART_BaudRate = baudRate;
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
@@ -1043,7 +1042,7 @@ void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 	NVIC_SetPriority(TIM2_IRQn, 3);
 
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-		
+
 	NVIC_SetPriority(TIM2_IRQn, 0);
 #else
 	Timer2Config(1000);
@@ -1055,7 +1054,7 @@ void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 }
 
 //定时器配置
-void DeviceConfigCenter::TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup,int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
+void DeviceConfigCenter::TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 	switch (tim)
 	{
@@ -1551,7 +1550,7 @@ void DeviceConfigCenter::Timer8Config(int interval)
 	NVIC_Init(&NVIC_InitStructure);
 #endif
 }
-void DeviceConfigCenter::TimerConfigNvic(TIMER tim, int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority , int NVIC_IRQChannelSubPriorit )
+void DeviceConfigCenter::TimerConfigNvic(TIMER tim, int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 	switch (tim)
 	{
@@ -1621,7 +1620,7 @@ void DeviceConfigCenter::Timer1ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 #if defined STM32F0
 
 #elif defined STM32F1
-	
+
 #elif defined STM32F4
 
 #endif
