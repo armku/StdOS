@@ -485,12 +485,12 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART1); //GPIOA9复用为USART1
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART1); //GPIOA10复用为USART1
 																   //USART1端口配置
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_10; //GPIOA9与GPIOA10
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;//复用功能
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;	//速度50MHz
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //推挽复用输出
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; //上拉
-	GPIO_Init(GPIOA, &GPIO_InitStructure); //初始化PA9，PA10
+	//GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_10; //GPIOA9与GPIOA10
+	//GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;//复用功能
+	//GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;	//速度50MHz
+	//GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //推挽复用输出
+	//GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; //上拉
+	//GPIO_Init(GPIOA, &GPIO_InitStructure); //初始化PA9，PA10
 
 										   //USART1 初始化设置
 	USART_InitStructure.USART_BaudRate = baudRate;//波特率设置
