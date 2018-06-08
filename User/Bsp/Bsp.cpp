@@ -1,6 +1,7 @@
 #include "BspPlatform\BspPlatform.h"
 #include "Bsp.h"
 #include "Device\Port.h"
+#include "Device\DeviceConfigHelper.h"
 
 #ifdef STM32F0
 OutputPort led1(PC6, true);
@@ -75,9 +76,15 @@ void LedTask(void *param)
 }
 #endif // STM32F0
 
+void com1rcv()
+{
+	debug_printf("COM1RCV:\n");
+}
+
 void BspInit()
 {	
 	led1 = 1;
 	led2 = 1;
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
+	DeviceConfigCenter::PRcvCOM1 = com1rcv;
 }
