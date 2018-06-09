@@ -193,6 +193,62 @@ extern "C"
 	{
 #if USECOM4
 		volatile uint8_t ch;
+#ifdef STM32F0
+		if (USART_GetITStatus(USART4, USART_IT_RXNE) != RESET)
+		{
+			ch = USART_ReceiveData(USART4);
+			Rxx4.Enqueue(ch);
+			DeviceConfigCenter::RcvLastTimeCOM4 = Sys.Ms();
+		}
+		if (USART_GetITStatus(USART4, USART_IT_IDLE) == SET)
+		{
+			//数据帧接收完毕
+			ch = USART_ReceiveData(USART4); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR) 
+			if (DeviceConfigCenter::PRcvCOM4)
+			{
+				(*DeviceConfigCenter::PRcvCOM4)();
+			}
+		}
+		/* 处理发送缓冲区空中断 */
+		if (USART_GetITStatus(USART4, USART_IT_TXE) != RESET)
+		{
+			if (Txx4.Empty())
+			{
+				/* 发送缓冲区的数据已取完时， 禁止发送缓冲区空中断 （注意：此时最后1个数据还未真正发送完毕）*/
+				USART_ITConfig(USART4, USART_IT_TXE, DISABLE);
+				/* 使能数据发送完毕中断 */
+				USART_ITConfig(USART4, USART_IT_TC, ENABLE);
+			}
+			else
+			{
+				/* 从发送FIFO取1个字节写入串口发送数据寄存器 */
+				USART_SendData(USART4, Txx4.Dequeue());
+			}
+
+		}
+		/* 数据bit位全部发送完毕的中断 */
+		else if (USART_GetITStatus(USART4, USART_IT_TC) != RESET)
+		{
+			if (Txx4.Empty())
+			{
+				/* 如果发送FIFO的数据全部发送完毕，禁止数据发送完毕中断 */
+				USART_ITConfig(USART4, USART_IT_TC, DISABLE);
+
+				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
+				Txx4.Clear();
+				if (DeviceConfigCenter::pCOM4Rx485)
+				{
+					*DeviceConfigCenter::pCOM4Rx485 = 0;
+				}
+			}
+			else
+			{
+				/* 正常情况下，不会进入此分支 */
+				/* 如果发送FIFO的数据还未完毕，则从发送FIFO取1个数据写入发送数据寄存器 */
+				USART_SendData(USART4, Txx4.Dequeue());
+			}
+		}
+#elif defined STM32F1 | defined STM32F4
 		if (USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
 		{
 			ch = USART_ReceiveData(UART4);
@@ -247,12 +303,69 @@ extern "C"
 				USART_SendData(UART4, Txx4.Dequeue());
 			}
 		}
+#endif 
 #endif
 	}
 	void UART5_IRQHandler(void)
 	{
 #if USECOM5
 		volatile uint8_t ch;
+#ifdef STM32F0
+		if (USART_GetITStatus(USART5, USART_IT_RXNE) != RESET)
+		{
+			ch = USART_ReceiveData(USART5);
+			Rxx5.Enqueue(ch);
+			DeviceConfigCenter::RcvLastTimeCOM5 = Sys.Ms();
+		}
+		if (USART_GetITStatus(USART5, USART_IT_IDLE) == SET)
+		{
+			//数据帧接收完毕
+			ch = USART_ReceiveData(USART5); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)  
+			if (DeviceConfigCenter::PRcvCOM5)
+			{
+				(*DeviceConfigCenter::PRcvCOM5)();
+			}
+		}
+		/* 处理发送缓冲区空中断 */
+		if (USART_GetITStatus(USART5, USART_IT_TXE) != RESET)
+		{
+			if (Txx5.Empty())
+			{
+				/* 发送缓冲区的数据已取完时， 禁止发送缓冲区空中断 （注意：此时最后1个数据还未真正发送完毕）*/
+				USART_ITConfig(USART5, USART_IT_TXE, DISABLE);
+				/* 使能数据发送完毕中断 */
+				USART_ITConfig(USART5, USART_IT_TC, ENABLE);
+			}
+			else
+			{
+				/* 从发送FIFO取1个字节写入串口发送数据寄存器 */
+				USART_SendData(USART5, Txx3.Dequeue());
+			}
+
+		}
+		/* 数据bit位全部发送完毕的中断 */
+		else if (USART_GetITStatus(USART5, USART_IT_TC) != RESET)
+		{
+			if (Txx5.Empty())
+			{
+				/* 如果发送FIFO的数据全部发送完毕，禁止数据发送完毕中断 */
+				USART_ITConfig(USART5, USART_IT_TC, DISABLE);
+
+				/* 回调函数, 一般用来处理RS485通信，将RS485芯片设置为接收模式，避免抢占总线 */
+				Txx5.Clear();
+				if (DeviceConfigCenter::pCOM5Rx485)
+				{
+					*DeviceConfigCenter::pCOM5Rx485 = 0;
+				}
+			}
+			else
+			{
+				/* 正常情况下，不会进入此分支 */
+				/* 如果发送FIFO的数据还未完毕，则从发送FIFO取1个数据写入发送数据寄存器 */
+				USART_SendData(USART5, Txx5.Dequeue());
+			}
+		}
+#elif defined STM32F1 | defined STM32F4
 		if (USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
 		{
 			ch = USART_ReceiveData(UART5);
@@ -307,8 +420,9 @@ extern "C"
 				USART_SendData(UART5, Txx5.Dequeue());
 			}
 		}
+#endif 		
 #endif
-	}
+		}
 
 	void TIM2_IRQHandler(void)
 	{
@@ -537,4 +651,4 @@ extern "C"
 			}
 		}
 	}
-}
+	}
