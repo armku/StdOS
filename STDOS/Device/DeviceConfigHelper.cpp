@@ -429,10 +429,10 @@ void DeviceConfigCenter::com5send()
 }
 
 void DeviceConfigCenter::configCOM1(int baudRate)
-{
+{	
+#if USECOM1
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
-#if USECOM1
 #if defined STM32F0
 
 #elif defined STM32F1	
@@ -534,10 +534,9 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 }
 void DeviceConfigCenter::configCOM2(int baudRate)
 {
+#if USECOM2
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
-
-#if USECOM2
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -639,10 +638,9 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 
 void DeviceConfigCenter::configCOM3(int baudRate)
 {
+#if USECOM3
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
-
-#if USECOM3
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -711,7 +709,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 
 	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);//开启相关中断
 												  //Usart1 NVIC 配置
-	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;//串口1中断通道
+	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;//串口1中断通道
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3;//抢占优先级3
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//子优先级3
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
@@ -745,13 +743,12 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 }
 void DeviceConfigCenter::configCOM4(int baudRate)
 {
+#if USECOM4
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
-
-#if USECOM4
 #if defined STM32F0
 
-#elif defined STM32F1
+#elif defined STM32F1 && defined STM32F10X_HD
 
 	USART_InitTypeDef USART_InitStructure;
 
@@ -795,7 +792,6 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 	Ports[1]->Set(Pins[1]);
 	Ports[0]->Open();
 	Ports[1]->Open();
-
 #elif defined STM32F4
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
@@ -849,13 +845,12 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 }
 void DeviceConfigCenter::configCOM5(int baudRate)
 {
+#if USECOM5
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
-
-#if USECOM5
 #if defined STM32F0
 
-#elif defined STM32F1
+#elif defined STM32F1 && defined STM32F10X_HD
 
 	USART_InitTypeDef USART_InitStructure;
 
