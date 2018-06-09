@@ -782,6 +782,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\I2C.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ESP8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\ESP8266.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -926,6 +931,11 @@
               <FileName>NPATest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\NPATest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ESP8266Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1707,6 +1717,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\I2C.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ESP8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\ESP8266.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1851,6 +1866,11 @@
               <FileName>NPATest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\NPATest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ESP8266Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
