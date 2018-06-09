@@ -132,25 +132,7 @@ private:
 
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#if 0
 class PIDbasePosition//Œª÷√–ÕPID
 {
 public:
@@ -242,5 +224,5 @@ protected:
 
 private:
 };
-
+#endif
 #endif // _PID_H

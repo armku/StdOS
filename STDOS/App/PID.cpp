@@ -81,25 +81,7 @@ float PID::sum()
 	return ret;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#if 0
 void PIDbasePosition::Init()
 {
 	printf("PID_init begin \n");
@@ -292,3 +274,4 @@ float PIDKangBaohejifen::PID_realize(float speed)
 	this->ActualSpeed = this->voltage*1.0;
 	return this->ActualSpeed;
 }
+#endif
