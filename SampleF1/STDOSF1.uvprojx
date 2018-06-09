@@ -787,6 +787,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\ESP8266.cpp</FilePath>
             </File>
+            <File>
+              <FileName>NRF24L01.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\NRF24L01.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -936,6 +941,11 @@
               <FileName>ESP8266Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NRF24L01Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\NRF24L01Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1722,6 +1732,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\ESP8266.cpp</FilePath>
             </File>
+            <File>
+              <FileName>NRF24L01.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Drivers\NRF24L01.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1871,6 +1886,11 @@
               <FileName>ESP8266Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NRF24L01Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\NRF24L01Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
