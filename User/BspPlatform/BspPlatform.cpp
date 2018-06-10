@@ -5,14 +5,6 @@
 #include "Platform\stm32.h"
 #include "Device\DeviceConfigHelper.h"
 
-void TIM2_Configuration(void);
-
-int main123(void)
-{
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);//使能TIM2时钟
-	TIM2_Configuration();  //调用TIM3初始化函数声明
-}
-
 void TIM2_Configuration(void)
 {
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;//定义一个TIM_InitTypeDef类型的结构体
@@ -35,7 +27,9 @@ void BspPlatformInit()
 	DeviceConfigCenter::ConfigCom(COM3, 256000);
 	DeviceConfigCenter::TimeTickInit();//系统用定时器初始化
 	DeviceConfigCenter::PTim2Update = TimeUpdate;
-	main123();
+	
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);//使能TIM2时钟
+	TIM2_Configuration();  //调用TIM3初始化函数声明
 }
 
 int DeviceConfigCenter::CurrentTick()
