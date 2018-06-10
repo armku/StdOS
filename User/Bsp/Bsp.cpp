@@ -27,10 +27,10 @@ void LedTask(void *param)
 		flag = 1;
 	}
 
-	leds[0] = flag & 0x01;
-	leds[1] = flag & 0x02;
-	leds[2] = flag & 0x04;
-	leds[3] = flag & 0x08;
+	led1 = !led1;
+	led2 = !led2;
+	led3 = !led3;
+	led4 = !led4;
 
 	//    led2 = key0;
 #endif // STM32F0
