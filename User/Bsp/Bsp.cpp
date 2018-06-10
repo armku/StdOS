@@ -31,8 +31,6 @@ void LedTask(void *param)
 	led2 = !led2;
 	led3 = !led3;
 	led4 = !led4;
-
-	//    led2 = key0;
 #endif // STM32F0
 }
 #elif defined STM32F1
