@@ -1210,6 +1210,13 @@ void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);//使能溢出中断
 
 	TIM_Cmd(TIM2, ENABLE);//定时器使能
+
+	NVIC_InitTypeDef   NVIC_InitStructure;
+
+	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPriority = 2;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
 #elif defined STM32F1
 #if 1
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;

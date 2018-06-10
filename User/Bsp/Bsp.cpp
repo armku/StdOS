@@ -18,7 +18,7 @@ void LedTask(void *param)
 {
 #ifdef STM32F0
 	static uint8_t flag = 1;
-	OutputPort *leds = (OutputPort*)param;
+	auto leds = (OutputPort*)param;
 
 	flag <<= 1;
 	flag &= 0x0f;
