@@ -11,7 +11,6 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F407IG</Device>
@@ -324,7 +323,6 @@
             <uThumb>0</uThumb>
             <uSurpInc>1</uSurpInc>
             <uC99>0</uC99>
-            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -409,9 +407,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>BspDriver</GroupName>
-        </Group>
-        <Group>
           <GroupName>BspPlatform</GroupName>
           <Files>
             <File>
@@ -435,9 +430,6 @@
               <FilePath>..\SYSTEM\STM32F4\CMSIS\system_stm32f4xx.c</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>Util</GroupName>
         </Group>
         <Group>
           <GroupName>FWLIB</GroupName>
@@ -896,7 +888,6 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
@@ -1209,7 +1200,6 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
-            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -1294,9 +1284,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>BspDriver</GroupName>
-        </Group>
-        <Group>
           <GroupName>BspPlatform</GroupName>
           <Files>
             <File>
@@ -1320,9 +1307,6 @@
               <FilePath>..\SYSTEM\STM32F4\CMSIS\system_stm32f4xx.c</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>Util</GroupName>
         </Group>
         <Group>
           <GroupName>FWLIB</GroupName>

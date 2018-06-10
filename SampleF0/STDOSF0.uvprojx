@@ -402,9 +402,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>BspDriver</GroupName>
-        </Group>
-        <Group>
           <GroupName>BspPlatform</GroupName>
           <Files>
             <File>
@@ -1165,9 +1162,6 @@
               <FilePath>..\User\Bsp\font.c</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>BspDriver</GroupName>
         </Group>
         <Group>
           <GroupName>BspPlatform</GroupName>
