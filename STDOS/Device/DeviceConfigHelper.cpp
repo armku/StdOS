@@ -1216,7 +1216,7 @@ void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 	NVIC_InitTypeDef   NVIC_InitStructure;
 
 	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPriority = 2;
+	NVIC_InitStructure.NVIC_IRQChannelPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 #elif defined STM32F1
