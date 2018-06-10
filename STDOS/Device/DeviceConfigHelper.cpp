@@ -1199,7 +1199,17 @@ Func DeviceConfigCenter::PTim8Update = 0;
 void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 {
 #if defined STM32F0
+	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;//定义一个TIM_InitTypeDef类型的结构体
+	TIM_ClearITPendingBit(TIM2, TIM_IT_Update);//清中断标志，以备下次中断到来使用
 
+	TIM_TimeBaseStructure.TIM_Period = 2000;//1秒钟机2000个脉冲
+	TIM_TimeBaseStructure.TIM_Prescaler = 35999; //36000分频
+	TIM_TimeBaseStructure.TIM_ClockDivision = 0; //TIM_CKD_DIV1
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;//向上计数
+	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);//初始化定时器
+	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);//使能溢出中断
+
+	TIM_Cmd(TIM2, ENABLE);//定时器使能
 #elif defined STM32F1
 #if 1
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
