@@ -5,23 +5,15 @@
 #include "Platform\stm32.h"
 #include "Device\DeviceConfigHelper.h"
 
-
-void BSP_Configuration(void);//硬件初始化函数声明
 void NVIC_Configuration(void);//中断优先级初始化函数声明
 void TIM2_Configuration(void);
 
 int main123(void)
 {
-	BSP_Configuration();   //调用硬件初始化函数声明
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);//使能TIM2时钟
 	NVIC_Configuration();  //调用中断优先级初始化函数声明
 	TIM2_Configuration();  //调用TIM3初始化函数声明
 }
-
-void BSP_Configuration(void) //硬件初始化函数
-{
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);//使能TIM2时钟
-}
-
 
 void TIM2_Configuration(void)
 {
