@@ -5,13 +5,11 @@
 #include "Platform\stm32.h"
 #include "Device\DeviceConfigHelper.h"
 
-void NVIC_Configuration(void);//中断优先级初始化函数声明
 void TIM2_Configuration(void);
 
 int main123(void)
 {
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);//使能TIM2时钟
-	NVIC_Configuration();  //调用中断优先级初始化函数声明
 	TIM2_Configuration();  //调用TIM3初始化函数声明
 }
 
@@ -29,17 +27,6 @@ void TIM2_Configuration(void)
 
 	TIM_Cmd(TIM2, ENABLE);//定时器使能
 }
-
-static void NVIC_Configuration(void)//中断优先级初始化函
-{
-	NVIC_InitTypeDef   NVIC_InitStructure;
-
-	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPriority = 2;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-}
-
 
 void TimeUpdate();
 void BspPlatformInit()
