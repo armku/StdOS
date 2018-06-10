@@ -1202,7 +1202,7 @@ void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;//定义一个TIM_InitTypeDef类型的结构体
 	TIM_ClearITPendingBit(TIM2, TIM_IT_Update);//清中断标志，以备下次中断到来使用
 
-	TIM_TimeBaseStructure.TIM_Period = 2000;//1秒钟机2000个脉冲
+	TIM_TimeBaseStructure.TIM_Period = 1000;//1秒钟机2000个脉冲
 	TIM_TimeBaseStructure.TIM_Prescaler = 35999; //36000分频
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0; //TIM_CKD_DIV1
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;//向上计数
