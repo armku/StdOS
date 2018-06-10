@@ -187,7 +187,7 @@ void TTime::Init()
 {
 #if defined STM32F0	
 	// 初始化为输出
-	this->Index = 6;
+	this->Index = 2;
 
 	gTicks = (Sys.Clock >> 3) / 0xF4240u;
 	//初始化延迟函数
@@ -199,7 +199,7 @@ void TTime::Init()
 	switch (this->Index)
 	{
 	case 2:
-		NVIC_SetPriority(TIM3_IRQn, 0);
+		NVIC_SetPriority(TIM2_IRQn, 0);
 		break;
 	case 5:
 		break;
