@@ -50,4 +50,3 @@ int StdPrintf(const char *format, ...)
 	DeviceConfigCenter::comSend(COM1, Buffer(sprint_buf, n));
 	return n;
 }
-
