@@ -426,6 +426,13 @@ extern "C"
 
 	void TIM2_IRQHandler(void)
 	{
+#ifdef STM32F0
+		TIM_ClearITPendingBit(TIM2, TIM_IT_Update);//先清空中断标志位，以备下次使用。
+		if (DeviceConfigCenter::PTim2Update)
+		{
+			(*DeviceConfigCenter::PTim2Update)();
+		}
+#elif defined STM32F1 | defined STM32F4
 		if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
 		{
 			TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
@@ -434,6 +441,7 @@ extern "C"
 				(*DeviceConfigCenter::PTim2Update)();
 			}
 		}
+#endif
 	}
 	void TIM3_IRQHandler(void)
 	{
