@@ -422,8 +422,7 @@ extern "C"
 		}
 #endif 		
 #endif
-		}
-		int test22222222 = 0;
+		}		
 	void TIM2_IRQHandler(void)
 	{
 #ifdef STM32F0
@@ -431,8 +430,7 @@ extern "C"
 		if (DeviceConfigCenter::PTim2Update)
 		{
 			(*DeviceConfigCenter::PTim2Update)();
-		}
-		test22222222++;
+		}		
 #elif defined STM32F1 | defined STM32F4
 		if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
 		{
