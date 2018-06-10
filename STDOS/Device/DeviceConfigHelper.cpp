@@ -1199,6 +1199,8 @@ Func DeviceConfigCenter::PTim8Update = 0;
 void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 {
 #if defined STM32F0
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);//使能TIM2时钟
+	
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;//定义一个TIM_InitTypeDef类型的结构体
 	TIM_ClearITPendingBit(TIM2, TIM_IT_Update);//清中断标志，以备下次中断到来使用
 
@@ -1210,7 +1212,7 @@ void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);//使能溢出中断
 
 	TIM_Cmd(TIM2, ENABLE);//定时器使能
-
+	
 	NVIC_InitTypeDef   NVIC_InitStructure;
 
 	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
