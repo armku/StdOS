@@ -1,9 +1,4 @@
 #include "BspPlatform.h"
-#if defined STM32F0
-#elif defined STM32F1
-#include "stm32f10x.h"
-#elif defined STM32F4
-#endif
 #include "Sys.h"
 #include "Core\Queue.h"
 #include "Port.h"
