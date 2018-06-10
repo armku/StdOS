@@ -82,7 +82,7 @@ void com1rcv()
 }
 
 void BspInit()
-{	
+{
 	led1 = 1;
 	led2 = 1;
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
