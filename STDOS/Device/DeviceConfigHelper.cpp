@@ -1847,7 +1847,12 @@ void DeviceConfigCenter::Timer1ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 void DeviceConfigCenter::Timer2ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
 #if defined STM32F0
+	NVIC_InitTypeDef   NVIC_InitStructure;
 
+	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPriority = 2;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
 #elif defined STM32F1
 	NVIC_InitTypeDef NVIC_InitStructure;
 	// 设置中断组为0
