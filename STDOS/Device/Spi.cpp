@@ -344,10 +344,6 @@ void SpiSoft::Stop()
 		this->_nss = 1;
 	}
 }
-
-
-
-
 // »ù´¡¶ÁÐ´
 uint8_t Spi::Write(uint8_t data)
 {
