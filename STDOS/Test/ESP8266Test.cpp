@@ -57,7 +57,7 @@ void Esp8266TestInit()
 		icnt %= 10;
 		esp.SendString(ENABLE, cStr, 0x14, Esp8266::SingleID0); //发送数据	
 		printf("发送数据: %s\r\n", cStr);
-		Delay_ms(500);
+		Sys.Sleep(500);
 		if (esp.FlagTcpClosed)
 			//检测是否失去连接
 		{
@@ -83,8 +83,4 @@ void Esp8266TestInit()
 	}
 }
 
-void Delay_ms(int ms)
-{
-	Sys.Sleep(500);
-}
 #endif

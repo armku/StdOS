@@ -175,7 +175,7 @@ bool Esp8266::Cmd(char *cmd, char *reply1, char *reply2, int waittime)
 		//不需要接收数据
 		return true;
 
-	Delay_ms(waittime); //延时
+	Sys.Sleep(waittime); //延时
 
 	strEsp8266_Fram_Record.RxBuf[strEsp8266_Fram_Record.Length] = '\0';
 
@@ -486,9 +486,9 @@ bool Esp8266::UnvarnishSend()
 */
 void Esp8266::ExitUnvarnishSend()
 {
-	Delay_ms(1000);
+	Sys.Sleep(999);
 	this->USART_printf("+++");
-	Delay_ms(500);
+	Sys.Sleep(500);
 }
 
 /*

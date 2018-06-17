@@ -65,6 +65,5 @@ public:
 	volatile bool FlagTcpClosed;//是否断开连接
 	};
 
-void Delay_ms(int ms);
 extern Fram_T strEsp8266_Fram_Record;
 #endif
