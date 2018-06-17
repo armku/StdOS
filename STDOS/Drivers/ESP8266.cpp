@@ -114,6 +114,7 @@ void Esp8266::Test()
 		this->Rst();
 		++count;
 	}
+	this->pCH = 1;
 }
 
 /*
