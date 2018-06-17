@@ -80,6 +80,7 @@ void com1rcv()
 	debug_printf("COM1RCV:\n");
 	bs1.ShowHex(true);
 }
+void Esp8266TestInit();
 
 void BspInit()
 {
@@ -87,4 +88,6 @@ void BspInit()
 	led2 = 1;
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	DeviceConfigCenter::PRcvCOM1 = com1rcv;
+	
+	Esp8266TestInit();
 }
