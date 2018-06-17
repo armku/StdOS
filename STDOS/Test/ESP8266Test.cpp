@@ -29,16 +29,16 @@ void Esp8266TestInit()
 	static int icnt = 0;
 	esp.SetPin(PG14,PG13);
 	esp.Init(); //初始化WiFi模块使用的接口和外设
-	printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
-	return;
+	debug_printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
+	
 	uint8_t ucStatus;
 	char cStr[100] =
 	{
 		0
 	};
 	
-	printf("\r\n正在配置 ESP8266 ......\r\n");
-	macESP8266_CH_ENABLE();
+	debug_printf("\r\n正在配置 ESP8266 ......\r\n");
+	macESP8266_CH_ENABLE(); return;
 	esp.Test();
 	esp.NetModeChoose(Esp8266::STA);
 	while (!esp.JoinAP(ApSsid, ApPwd))
@@ -48,7 +48,7 @@ void Esp8266TestInit()
 		;
 	while (!esp.UnvarnishSend())
 		;
-	printf("\r\n配置 ESP8266 完毕\r\n");
+	debug_printf("\r\n配置 ESP8266 完毕\r\n");
 	while (1)
 	{
 		sprintf(cStr, "%d hello world!\r\n", ++icnt);
@@ -68,12 +68,12 @@ void Esp8266TestInit()
 			if (ucStatus == 4)
 				//确认失去连接后重连
 			{
-				printf("\r\n正在重连热点和服务器 ......\r\n");
+				debug_printf("\r\n正在重连热点和服务器 ......\r\n");
 				while (!esp.JoinAP(ApSsid, ApPwd))
 					;
 				while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
 					;
-				printf("\r\n重连热点和服务器成功\r\n");
+				debug_printf("\r\n重连热点和服务器成功\r\n");
 			}
 			while (!esp.UnvarnishSend())
 				;

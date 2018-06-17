@@ -24,7 +24,7 @@ void com3rcv()
 
 
 	debug_printf("COM1RCV:\n");
-	bs1.ShowHex(true);
+	bs1.Show(true);
 
 	for (int i = 0; i < bs1.Length(); i++)
 	{
@@ -41,7 +41,7 @@ void com3rcv()
 */
 void Esp8266::Init()
 {
-	this->GPIOConfig();
+	//this->GPIOConfig();
 	//this->USARTConfig();
 	macESP8266_RST_HIGH_LEVEL();
 	macESP8266_CH_DISABLE();
