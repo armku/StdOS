@@ -621,7 +621,6 @@ void Esp8266::USART_printf(char *Data, ...)
 	int d;
 	char buf[16];
 
-	USART_TypeDef *USARTx = USART3;
 	va_list ap;
 	va_start(ap, Data);
 
@@ -635,13 +634,13 @@ void Esp8266::USART_printf(char *Data, ...)
 			{
 			case 'r':
 				//»Ø³µ·û
-				USART_SendData(USARTx, 0x0d);
+				USART_SendData(USART3, 0x0d);
 				Data++;
 				break;
 
 			case 'n':
 				//»»ÐÐ·û
-				USART_SendData(USARTx, 0x0a);
+				USART_SendData(USART3, 0x0a);
 				Data++;
 				break;
 
@@ -661,8 +660,8 @@ void Esp8266::USART_printf(char *Data, ...)
 				s = va_arg(ap, const char*);
 				for (; *s; s++)
 				{
-					USART_SendData(USARTx, *s);
-					while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
+					USART_SendData(USART3, *s);
+					while (USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET)
 						;
 				}
 				Data++;
@@ -673,8 +672,8 @@ void Esp8266::USART_printf(char *Data, ...)
 				itoa(d, buf, 10);
 				for (s = buf; *s; s++)
 				{
-					USART_SendData(USARTx, *s);
-					while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
+					USART_SendData(USART3, *s);
+					while (USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET)
 						;
 				}
 				Data++;
@@ -685,9 +684,9 @@ void Esp8266::USART_printf(char *Data, ...)
 			}
 		}
 		else
-			USART_SendData(USARTx, *Data++);
+			USART_SendData(USART3, *Data++);
 
-		while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET)
+		while (USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET)
 			;
 	}
 }
