@@ -30,13 +30,13 @@ void Esp8266TestInit()
 	esp.SetPin(PG14,PG13);
 	esp.Init(); //初始化WiFi模块使用的接口和外设
 	printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
-
+	return;
 	uint8_t ucStatus;
 	char cStr[100] =
 	{
 		0
 	};
-	return;
+	
 	printf("\r\n正在配置 ESP8266 ......\r\n");
 	macESP8266_CH_ENABLE();
 	esp.Test();
