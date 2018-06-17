@@ -4,12 +4,17 @@
 #define _ESP8266_TEST_CPP
 
 #ifdef _ESP8266_TEST_CPP
-ESP8266 esp;
+Esp8266 esp;
 
 void Esp8266TestInit()
 {
 	
 
 	esp.Init();
+}
+
+void Delay_ms(int ms)
+{
+	Sys.Sleep(500);
 }
 #endif
