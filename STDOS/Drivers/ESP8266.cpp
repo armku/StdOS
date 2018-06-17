@@ -40,99 +40,13 @@ void com3rcv()
 * @retval 无
 */
 void Esp8266::Init()
-{
-	//this->GPIOConfig();
-	//this->USARTConfig();
+{	
 	macESP8266_RST_HIGH_LEVEL();
 	macESP8266_CH_DISABLE();
 	DeviceConfigCenter::PRcvCOM3 = com3rcv;
 	DeviceConfigCenter::ConfigCom(COM3, 115200);
 
 	this->FlagTcpClosed = 0;//是否断开连接
-}
-
-/**
-* @brief  初始化ESP8266用到的GPIO引脚
-* @param  无
-* @retval 无
-*/
-void Esp8266::GPIOConfig()
-{
-	/*定义一个GPIO_InitTypeDef类型的结构体*/
-	GPIO_InitTypeDef GPIO_InitStructure;
-	/* 配置 CH_PD 引脚*/
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOG, ENABLE);
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOG, &GPIO_InitStructure);
-	/* 配置 RST 引脚*/
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOG, ENABLE);
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14;
-	GPIO_Init(GPIOG, &GPIO_InitStructure);
-}
-
-/**
-* @brief  初始化ESP8266用到的 USART
-* @param  无
-* @retval 无
-*/
-void Esp8266::USARTConfig()
-{
-	GPIO_InitTypeDef GPIO_InitStructure;
-	USART_InitTypeDef USART_InitStructure;
-
-
-	/* config USART clock */
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-
-	/* USART GPIO config */
-	/* Configure USART Tx as alternate function push-pull */
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-
-	/* Configure USART Rx as input floating */
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-
-	/* USART1 mode config */
-	USART_InitStructure.USART_BaudRate = 115200;
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;
-	USART_InitStructure.USART_Parity = USART_Parity_No;
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-	USART_Init(USART3, &USART_InitStructure);
-
-
-	/* 中断配置 */
-	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE); //使能串口接收中断 
-	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 	
-
-	this->USARTNVICConfiguration();
-	USART_Cmd(USART3, ENABLE);
-}
-
-/**
-* @brief  配置 ESP8266 USART 的 NVIC 中断
-* @param  无
-* @retval 无
-*/
-void Esp8266::USARTNVICConfiguration()
-{
-	NVIC_InitTypeDef NVIC_InitStructure;
-	/* Configure the NVIC Preemption Priority Bits */
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-	/* Enable the USART2 Interrupt */
-	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
 }
 
 /*
@@ -191,22 +105,6 @@ bool Esp8266::Cmd(char *cmd, char *reply1, char *reply2, int waittime)
 		return ((bool)strstr(strEsp8266_Fram_Record.RxBuf, reply2));
 }
 
-/*
-* 函数名：ESP8266_AT_Test
-* 描述  ：对WF-ESP8266模块进行AT测试启动
-* 输入  ：无
-* 返回  : 无
-* 调用  ：被外部调用
-*/
-//void ESP8266_AT_Test ( void )
-//{
-//	macESP8266_RST_HIGH_LEVEL();
-//	
-//	Delay_ms ( 1000 ); 
-//	
-//	while ( ! this->Cmd ( "AT", "OK", NULL, 500 ) ) ESP8266_Rst ();  	
-
-//}
 void Esp8266::Test()
 {
 	char count = 0;
