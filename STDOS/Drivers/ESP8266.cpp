@@ -6,10 +6,6 @@
 #include "Sys.h"
 #include "Device\DeviceConfigHelper.h"
 
-#define macESP8266_CH_DISABLE()                GPIO_ResetBits ( GPIOG, GPIO_Pin_13 )
-#define macESP8266_RST_HIGH_LEVEL()            GPIO_SetBits ( GPIOG, GPIO_Pin_14 )
-#define macESP8266_RST_LOW_LEVEL()             GPIO_ResetBits ( GPIOG, GPIO_Pin_14 )
-
 Fram_T strEsp8266_Fram_Record =
 {
 	0
@@ -23,7 +19,7 @@ void com3rcv()
 	Rxx3.Read(bs1);
 
 
-	debug_printf("COM1RCV:\n");
+	debug_printf("COM1RCV:");
 	bs1.Show(true);
 
 	for (int i = 0; i < bs1.Length(); i++)
@@ -41,8 +37,8 @@ void com3rcv()
 */
 void Esp8266::Init()
 {	
-	macESP8266_RST_HIGH_LEVEL();
-	macESP8266_CH_DISABLE();
+	this->pRst = 1;
+	this->pCH = 0;
 	DeviceConfigCenter::PRcvCOM3 = com3rcv;
 	DeviceConfigCenter::ConfigCom(COM3, 115200);
 
@@ -109,7 +105,7 @@ void Esp8266::Test()
 {
 	char count = 0;
 
-	macESP8266_RST_HIGH_LEVEL();
+	this->pRst = 1;
 	Sys.Sleep(999);
 	while (count < 10)
 	{
