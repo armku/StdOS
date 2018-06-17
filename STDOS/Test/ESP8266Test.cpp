@@ -40,7 +40,7 @@ void Esp8266TestInit()
 	debug_printf("\r\n’˝‘⁄≈‰÷√ ESP8266 ......\r\n");
 	macESP8266_CH_ENABLE(); 
 	esp.Test();
-	return;
+	
 	esp.NetModeChoose(Esp8266::STA);
 	while (!esp.JoinAP(ApSsid, ApPwd))
 		;

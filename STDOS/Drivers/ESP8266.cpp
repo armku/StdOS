@@ -179,7 +179,7 @@ bool Esp8266::Cmd(char *cmd, char *reply1, char *reply2, int waittime)
 
 	strEsp8266_Fram_Record.RxBuf[strEsp8266_Fram_Record.Length] = '\0';
 
-	printf("%s", strEsp8266_Fram_Record.RxBuf);
+	debug_printf("%s", strEsp8266_Fram_Record.RxBuf);
 
 	if ((reply1 != 0) && (reply2 != 0))
 		return ((bool)strstr(strEsp8266_Fram_Record.RxBuf, reply1) || (bool)strstr(strEsp8266_Fram_Record.RxBuf, reply2));
