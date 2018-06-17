@@ -212,7 +212,7 @@ void Esp8266::Test()
 	char count = 0;
 
 	macESP8266_RST_HIGH_LEVEL();
-	Delay_ms(1000);
+	Sys.Sleep(999);
 	while (count < 10)
 	{
 		if (this->Cmd("AT", "OK", NULL, 500))
