@@ -32,9 +32,9 @@ void espRoutin(void*param)
 	esp.SendString(ENABLE, cStr, 0x14, Esp8266::SingleID0); //发送数据	
 	printf("发送数据: %s\r\n", cStr);
 	Sys.Sleep(500);
-	if (esp.FlagTcpClosed)
-		//检测是否失去连接
+	if (esp.FlagTcpClosed)		
 	{
+		//检测是否失去连接
 		esp.ExitUnvarnishSend(); //退出透传模式			
 		do
 			ucStatus = esp.GetLinkStatus();
