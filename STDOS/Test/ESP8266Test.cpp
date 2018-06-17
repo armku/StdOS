@@ -36,6 +36,18 @@ void espRoutin(void*param)
 		esp.step++;
 		break;
 	case 3:
+		debug_printf("\r\n正在配置 ESP8266 ......\r\n");
+		esp.Test();
+
+		esp.NetModeChoose(Esp8266::STA);
+		while (!esp.JoinAP(ApSsid, ApPwd))
+			;
+		esp.EnableMultipleId(DISABLE);
+		while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
+			;
+		while (!esp.UnvarnishSend())
+			;
+		debug_printf("\r\n配置 ESP8266 完毕\r\n");
 		esp.step++;
 		break;
 	case 4:
@@ -70,7 +82,7 @@ void espRoutin(void*param)
 	default:
 		esp.step = 0;
 		break;
-	}	
+	}
 }
 
 /**
@@ -84,20 +96,6 @@ void Esp8266TestInit()
 	esp.Init(); //初始化WiFi模块使用的接口和外设
 	
 	debug_printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
-	
-	
-	debug_printf("\r\n正在配置 ESP8266 ......\r\n");
-	esp.Test();
-	
-	esp.NetModeChoose(Esp8266::STA);
-	while (!esp.JoinAP(ApSsid, ApPwd))
-		;
-	esp.EnableMultipleId(DISABLE);
-	while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
-		;
-	while (!esp.UnvarnishSend())
-		;
-	debug_printf("\r\n配置 ESP8266 完毕\r\n");
 	Sys.AddTask(espRoutin,0,0,1000,"espRoutin");	
 }
 
