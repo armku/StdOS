@@ -5,7 +5,7 @@ class ESP8266
 {
 public:
 	ESP8266();
-	~ESP8266();
+	void Init();
 
 private:
 

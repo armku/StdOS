@@ -6,9 +6,6 @@ ESP8266::ESP8266()
 {
 }
 
-ESP8266::~ESP8266()
-{
-}
 uint8_t chbuf3[1000];
 void com3rcv()
 {
@@ -18,4 +15,9 @@ void com3rcv()
 
 	debug_printf("COM1RCV:\n");
 	bs1.ShowHex(true);
+}
+void ESP8266::Init()
+{
+	DeviceConfigCenter::PRcvCOM3 = com3rcv;
+	DeviceConfigCenter::ConfigCom(COM3, 115200);
 }
