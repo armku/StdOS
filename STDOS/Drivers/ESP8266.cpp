@@ -3,6 +3,8 @@
 #include <string.h>  
 #include <stdbool.h>
 #include "stm32f10x.h" 
+#include "Sys.h"
+#include "Device\DeviceConfigHelper.h"
 
 #define macESP8266_CH_DISABLE()                GPIO_ResetBits ( GPIOG, GPIO_Pin_13 )
 #define macESP8266_RST_HIGH_LEVEL()            GPIO_SetBits ( GPIOG, GPIO_Pin_14 )
@@ -12,7 +14,26 @@ Fram_T strEsp8266_Fram_Record =
 {
 	0
 };
+uint8_t chbuf3[1000];
+extern Esp8266 esp;
+void com3rcv()
+{
+	Buffer bs1(chbuf3, ArrayLength(chbuf3));
 
+	Rxx3.Read(bs1);
+
+
+	debug_printf("COM1RCV:\n");
+	bs1.ShowHex(true);
+
+	for (int i = 0; i < bs1.Length(); i++)
+	{
+		strEsp8266_Fram_Record.RxBuf[i] = bs1[i];
+	}
+	strEsp8266_Fram_Record.Length = bs1.Length();
+	strEsp8266_Fram_Record.FlagFinish = 1;
+	esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record.RxBuf, "CLOSED\r\n") ? 1 : 0;
+}
 /**
 * @brief  ESP8266初始化函数
 * @param  无
@@ -24,6 +45,8 @@ void Esp8266::Init()
 	this->USARTConfig();
 	macESP8266_RST_HIGH_LEVEL();
 	macESP8266_CH_DISABLE();
+	DeviceConfigCenter::PRcvCOM3 = com3rcv;
+	DeviceConfigCenter::ConfigCom(COM3, 115200);
 
 	this->FlagTcpClosed = 0;//是否断开连接
 }
@@ -678,17 +701,6 @@ void Esp8266::USART_printf(char *Data, ...)
 
 ESP8266::ESP8266()
 {
-}
-
-uint8_t chbuf3[1000];
-void com3rcv()
-{
-	Buffer bs1(chbuf3, ArrayLength(chbuf3));
-
-	Rxx3.Read(bs1);
-
-	debug_printf("COM1RCV:\n");
-	bs1.ShowHex(true);
 }
 void ESP8266::Init()
 {
