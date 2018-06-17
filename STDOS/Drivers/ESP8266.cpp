@@ -43,6 +43,8 @@ void Esp8266::Init()
 	DeviceConfigCenter::ConfigCom(COM3, 115200);
 
 	this->FlagTcpClosed = 0;//是否断开连接
+
+	this->step = 0;
 }
 
 /*

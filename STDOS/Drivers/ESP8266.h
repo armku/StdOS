@@ -51,6 +51,7 @@ public:
 	bool SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, ENUMIDNOTypeDef ucId);
 	char *ReceiveString(bool enumEnUnvarnishTx);
 	void SetPin(Pin prst, Pin pch);
+	int step;//≤Ω÷Ë
 private:	
 	char *itoa(int value, char *string, int radix);
 	void USART_printf(char *Data, ...);
