@@ -39,7 +39,6 @@ void Esp8266TestInit()
 	
 	debug_printf("\r\nÕıÔÚÅäÖÃ ESP8266 ......\r\n");
 	macESP8266_CH_ENABLE(); 
-	return;
 	esp.Test();
 	return;
 	esp.NetModeChoose(Esp8266::STA);
