@@ -50,6 +50,7 @@ public:
 	void ExitUnvarnishSend();
 	bool SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, ENUMIDNOTypeDef ucId);
 	char *ReceiveString(bool enumEnUnvarnishTx);
+	void SetPin(Pin prst, Pin pch);
 private:
 	void GPIOConfig();
 	void USARTConfig();
@@ -58,27 +59,12 @@ private:
 	char *itoa(int value, char *string, int radix);
 	void USART_printf(char *Data, ...);
 private:
+	OutputPort pRst;
+	OutputPort pCH;
 public:
 	volatile bool FlagTcpClosed;//是否断开连接
 	};
 
 void Delay_ms(int ms);
 extern Fram_T strEsp8266_Fram_Record;
-
-#if 0
-class ESP8266
-{
-public:
-	ESP8266();
-	void Init();
-	void SetPin(Pin prst, Pin pch);
-	void Rst();
-
-private:
-	OutputPort pRst;
-	OutputPort pCH;
-};
 #endif
-
-
-#endif // !_ESP8266_H

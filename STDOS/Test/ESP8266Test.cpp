@@ -27,6 +27,7 @@ Esp8266 esp;
 void Esp8266TestInit()
 {
 	static int icnt = 0;
+	esp.SetPin(PG14,PG13);
 	esp.Init(); //初始化WiFi模块使用的接口和外设
 	printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
 
@@ -35,6 +36,7 @@ void Esp8266TestInit()
 	{
 		0
 	};
+	return;
 	printf("\r\n正在配置 ESP8266 ......\r\n");
 	macESP8266_CH_ENABLE();
 	esp.Test();

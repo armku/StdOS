@@ -42,7 +42,7 @@ void com3rcv()
 void Esp8266::Init()
 {
 	this->GPIOConfig();
-	this->USARTConfig();
+	//this->USARTConfig();
 	macESP8266_RST_HIGH_LEVEL();
 	macESP8266_CH_DISABLE();
 	DeviceConfigCenter::PRcvCOM3 = com3rcv;
@@ -148,9 +148,9 @@ void Esp8266::Rst()
 	this->Cmd("AT+RST", "OK", "ready", 2500);
 
 #else 
-	macESP8266_RST_LOW_LEVEL();
-	Delay_ms(500);
-	macESP8266_RST_HIGH_LEVEL();
+	this->pRst = 0;
+	Sys.Sleep(500);
+	this->pRst = 1;
 #endif 
 
 }
@@ -690,23 +690,7 @@ void Esp8266::USART_printf(char *Data, ...)
 			;
 	}
 }
-
-
-
-#if 0
-#include "ESP8266.h"
-#include "Sys.h"
-#include "Device\DeviceConfigHelper.h"
-
-ESP8266::ESP8266()
-{
-}
-void ESP8266::Init()
-{
-	DeviceConfigCenter::PRcvCOM3 = com3rcv;
-	DeviceConfigCenter::ConfigCom(COM3, 115200);
-}
-void ESP8266::SetPin(Pin prst, Pin pch)
+void Esp8266::SetPin(Pin prst, Pin pch)
 {
 	this->pRst.Set(prst);
 	this->pRst.Invert = false;
@@ -722,15 +706,3 @@ void ESP8266::SetPin(Pin prst, Pin pch)
 	this->pRst = 1;
 	this->pCH = 0;
 }
-void ESP8266::Rst()
-{
-#if 0
-	this->Cmd("AT+RST", "OK", "ready", 2500);
-
-#else 
-	this->pRst = 0;
-	Sys.Sleep(500);
-	this->pRst = 1;
-#endif 
-}
-#endif
