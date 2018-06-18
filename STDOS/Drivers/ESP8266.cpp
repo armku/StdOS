@@ -114,6 +114,7 @@ void Esp8266::Test()
 
 	this->pRst = 1;
 	this->USART_printf("AT");
+	//DeviceConfigCenter::comSend(COM3, *this->bsAT);
 	//Sys.Sleep(999);
 	/*while (count < 10)
 	{*/
