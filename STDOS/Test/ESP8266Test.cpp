@@ -27,7 +27,9 @@ void espRoutin(void*param)
 	switch (esp.step)
 	{
 	case 0:
-		esp.step++;
+		//debug_printf("\r\n正在配置 ESP8266 ......\r\n");
+		esp.Test();
+		//esp.step++;
 		break;
 	case 1:
 		esp.step++;
@@ -36,8 +38,7 @@ void espRoutin(void*param)
 		esp.step++;
 		break;
 	case 3:
-		debug_printf("\r\n正在配置 ESP8266 ......\r\n");
-		esp.Test();
+		
 
 		esp.NetModeChoose(Esp8266::STA);
 		while (!esp.JoinAP(ApSsid, ApPwd))

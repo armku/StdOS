@@ -50,13 +50,15 @@ extern Esp8266 esp;
 //接收数据
 void Esp8266::Rcv(Buffer& bs)
 {
-	for (int i = 0; i < bs.Length(); i++)
+	bs.Show(true);
+	bs.ShowHex(true);
+	/*for (int i = 0; i < bs.Length(); i++)
 	{
 		strEsp8266_Fram_Record.RxBuf[i] = bs[i];
 	}
 	strEsp8266_Fram_Record.Length = bs.Length();
 	strEsp8266_Fram_Record.FlagFinish = 1;
-	esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record.RxBuf, "CLOSED\r\n") ? 1 : 0;
+	esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record.RxBuf, "CLOSED\r\n") ? 1 : 0;*/
 }
 /*
 * 函数名：this->Cmd
@@ -99,14 +101,15 @@ void Esp8266::Test()
 	char count = 0;
 
 	this->pRst = 1;
-	Sys.Sleep(999);
-	while (count < 10)
-	{
-		if (this->Cmd("AT", "OK", NULL, 500))
-			return;
+	this->USART_printf("AT");
+	//Sys.Sleep(999);
+	/*while (count < 10)
+	{*/
+	/*this->Cmd("AT", "OK", NULL, 50);*/
+		/*	return;
 		this->Rst();
-		++count;
-	}
+		++count;*/
+	/*}*/
 	this->pCH = 1;
 }
 
