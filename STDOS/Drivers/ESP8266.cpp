@@ -10,19 +10,7 @@ Fram_T strEsp8266_Fram_Record =
 {
 	0
 };
-uint8_t chbuf3[1000];
-extern Esp8266 esp;
-void com3rcv()
-{
-	Buffer bs1(chbuf3, ArrayLength(chbuf3));
 
-	Rxx3.Read(bs1);
-
-
-	debug_printf("COM1RCV:");
-	bs1.Show(true);
-	esp.Rcv(bs1);
-}
 /**
 * @brief  ESP8266初始化函数
 * @param  无
@@ -31,10 +19,7 @@ void com3rcv()
 void Esp8266::Init()
 {	
 	this->pRst = 1;
-	this->pCH = 0;
-	DeviceConfigCenter::PRcvCOM3 = com3rcv;
-	DeviceConfigCenter::ConfigCom(COM3, 115200);
-
+	this->pCH = 0;	
 	this->FlagTcpClosed = 0;//是否断开连接
 
 	this->step = 0;
@@ -59,6 +44,7 @@ void Esp8266::Rst()
 #endif 
 
 }
+extern Esp8266 esp;
 //接收数据
 void Esp8266::Rcv(Buffer& bs)
 {

@@ -84,7 +84,19 @@ void espRoutin(void*param)
 		break;
 	}
 }
+uint8_t chbuf3[1000];
 
+void com3rcv()
+{
+	Buffer bs1(chbuf3, ArrayLength(chbuf3));
+
+	Rxx3.Read(bs1);
+
+
+	debug_printf("COM1RCV:");
+	bs1.Show(true);
+	esp.Rcv(bs1);
+}
 /**
 * @brief  ESP8266 （Sta Tcp Client）透传
 * @param  无
@@ -94,6 +106,8 @@ void Esp8266TestInit()
 {	
 	esp.SetPin(PG14,PG13);
 	esp.Init(); //初始化WiFi模块使用的接口和外设
+	DeviceConfigCenter::PRcvCOM3 = com3rcv;
+	DeviceConfigCenter::ConfigCom(COM3, 115200);
 	
 	debug_printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
 	Sys.AddTask(espRoutin,0,0,1000,"espRoutin");	
