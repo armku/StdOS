@@ -52,6 +52,18 @@ void Esp8266::Rcv(Buffer& bs)
 {
 	bs.Show(true);
 	bs.ShowHex(true);
+	(*this->bsRcv1)[0] = 'A';
+	(*this->bsRcv1)[1] = 'T';
+	this->bsRcv1->SetLength(2);
+	if (bs == (*this->bsRcv1))
+	{
+		debug_printf("AT test ok\n");
+	}
+	else
+	{
+		debug_printf("AT test ERROR\n");
+	}
+
 	/*for (int i = 0; i < bs.Length(); i++)
 	{
 		strEsp8266_Fram_Record.RxBuf[i] = bs[i];
