@@ -32,17 +32,19 @@ void espRoutin(void*param)
 		//esp.step++;
 		break;
 	case 1:
+		esp.NetModeChoose(Esp8266::STA);
 		esp.step++;
 		break;
 	case 2:
-		esp.step++;
+		/*while (!esp.JoinAP(ApSsid, ApPwd))
+			;*/
+		//esp.step++;
 		break;
 	case 3:
 		
 
-		esp.NetModeChoose(Esp8266::STA);
-		while (!esp.JoinAP(ApSsid, ApPwd))
-			;
+		
+		
 		esp.EnableMultipleId(DISABLE);
 		while (!esp.LinkServer(Esp8266::enumTCP, TcpServer_IP, TcpServer_Port, Esp8266::SingleID0))
 			;
