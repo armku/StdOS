@@ -21,14 +21,7 @@ void com3rcv()
 
 	debug_printf("COM1RCV:");
 	bs1.Show(true);
-
-	for (int i = 0; i < bs1.Length(); i++)
-	{
-		strEsp8266_Fram_Record.RxBuf[i] = bs1[i];
-	}
-	strEsp8266_Fram_Record.Length = bs1.Length();
-	strEsp8266_Fram_Record.FlagFinish = 1;
-	esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record.RxBuf, "CLOSED\r\n") ? 1 : 0;
+	esp.Rcv(bs1);
 }
 /**
 * @brief  ESP8266初始化函数
@@ -66,7 +59,17 @@ void Esp8266::Rst()
 #endif 
 
 }
-
+//接收数据
+void Esp8266::Rcv(Buffer& bs)
+{
+	for (int i = 0; i < bs.Length(); i++)
+	{
+		strEsp8266_Fram_Record.RxBuf[i] = bs[i];
+	}
+	strEsp8266_Fram_Record.Length = bs.Length();
+	strEsp8266_Fram_Record.FlagFinish = 1;
+	esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record.RxBuf, "CLOSED\r\n") ? 1 : 0;
+}
 /*
 * 函数名：this->Cmd
 * 描述  ：对WF-ESP8266模块发送AT指令

@@ -36,6 +36,7 @@ public:
 	void Init();
 	void Rst();
 	bool Cmd(char *cmd, char *reply1, char *reply2, int waittime);
+	void Rcv(Buffer& bs);//接收数据
 	void Test();
 	bool NetModeChoose(ENUMNetModeTypeDef enumMode);
 	bool JoinAP(char *pSSID, char *pPassWord);
