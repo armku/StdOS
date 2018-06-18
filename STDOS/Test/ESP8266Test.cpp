@@ -93,9 +93,6 @@ void com3rcv()
 
 	Rxx3.Read(bs1);
 
-
-	debug_printf("COM1RCV:");
-	bs1.Show(true);
 	esp.Rcv(bs1);
 }
 /**
