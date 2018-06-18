@@ -10,7 +10,7 @@ Fram_T strEsp8266_Fram_Record =
 {
 	0
 };
-
+char bufAT[] = "AT";
 /**
 * @brief  ESP8266初始化函数
 * @param  无
@@ -23,7 +23,7 @@ void Esp8266::Init()
 	this->FlagTcpClosed = 0;//是否断开连接
 	this->bsRcv1 = new Buffer(this->bufRcv1, ArrayLength(this->bufRcv1));
 	this->bsRcv2 = new Buffer(this->bufRcv2, ArrayLength(this->bufRcv2));
-
+	this->bsAT = new Buffer(bufAT, ArrayLength(bufAT)-1);
 	this->step = 0;
 }
 
@@ -55,7 +55,7 @@ void Esp8266::Rcv(Buffer& bs)
 	(*this->bsRcv1)[0] = 'A';
 	(*this->bsRcv1)[1] = 'T';
 	this->bsRcv1->SetLength(2);
-	if (bs == (*this->bsRcv1))
+	if (bs == (*this->bsAT))
 	{
 		debug_printf("AT test ok\n");
 	}

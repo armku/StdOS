@@ -56,6 +56,7 @@ public:
 
 	Buffer* bsRcv1;//期待的相应数据1
 	Buffer* bsRcv2;//期待的相应数据2
+	Buffer* bsAT;//AT指令
 private:	
 	char *itoa(int value, char *string, int radix);
 	void USART_printf(char *Data, ...);
