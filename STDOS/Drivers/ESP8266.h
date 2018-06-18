@@ -53,9 +53,15 @@ public:
 	char *ReceiveString(bool enumEnUnvarnishTx);
 	void SetPin(Pin prst, Pin pch);
 	int step;//步骤
+
+	Buffer* bsRcv1;//期待的相应数据1
+	Buffer* bsRcv2;//期待的相应数据2
 private:	
 	char *itoa(int value, char *string, int radix);
 	void USART_printf(char *Data, ...);
+	char bufRcv1[100];//期待的响应1
+	char bufRcv2[100];//期待的相应2
+	int flagRcvCnt;//期待的相应数据长度
 private:
 	OutputPort pRst;
 	OutputPort pCH;

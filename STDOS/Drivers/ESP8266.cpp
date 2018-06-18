@@ -21,6 +21,8 @@ void Esp8266::Init()
 	this->pRst = 1;
 	this->pCH = 0;	
 	this->FlagTcpClosed = 0;//是否断开连接
+	this->bsRcv1 = new Buffer(this->bufRcv1, ArrayLength(this->bufRcv1));
+	this->bsRcv2 = new Buffer(this->bufRcv2, ArrayLength(this->bufRcv2));
 
 	this->step = 0;
 }
