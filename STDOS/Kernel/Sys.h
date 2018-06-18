@@ -17,7 +17,7 @@
 
 extern "C"
 {
-#if defined(DEBUG)
+#ifdef DEBUG
 	#define debug_printf StdPrintf	
 #else
 	#define debug_printf(format, ...)
