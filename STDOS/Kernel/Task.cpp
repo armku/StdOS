@@ -39,7 +39,7 @@ bool Task::Execute(uint64_t now)
         this->CostMs = this->Cost / 1000;
 
         if (costMsCurrent > 500000)
-            debug_printf("Task::Execute 任务:%s %d [%d] 执行时间过长 %dus 睡眠 %dus\r\n", this->Name, this->ID, this->Times, costMsCurrent, this->SleepTime);
+            debug_printf("Task::Execute 任务:%s %d [%d] 执行时间过长 %dus 睡眠 %dus\n", this->Name, this->ID, this->Times, costMsCurrent, this->SleepTime);
         #if 0 //临时取消任务删除功能
             if (!this->Event && this->Period < 0)
                 Task::Scheduler()->Remove(this->ID);

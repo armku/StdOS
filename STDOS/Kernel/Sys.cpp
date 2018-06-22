@@ -369,7 +369,7 @@ void TSys::OnShowInfo()const
 	debug_printf(" ARMv7-M");
 	debug_printf(" Cortex-M%d:", 3);
 	debug_printf(" R%dp%d", Rx, Px);
-	debug_printf("\r\n");
+	debug_printf("\n");
 	debug_printf("Heap :(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize / 1024);
 	debug_printf("Stack:(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize / 1024);
 
@@ -427,7 +427,7 @@ void TSys::OnShowInfo()const
 	debug_printf(" ARMv7-M");
 	debug_printf(" Cortex-M%d:", 3);
 	debug_printf(" R%dp%d", Rx, Px);
-	debug_printf("\r\n");
+	debug_printf("\n");
 	debug_printf("Heap :(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize / 1024);
 	debug_printf("Stack:(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize / 1024);
 
@@ -487,7 +487,7 @@ void TSys::OnShowInfo()const
 	debug_printf(" ARMv7-M");
 	debug_printf(" Cortex-M%d:", 3);
 	debug_printf(" R%dp%d", Rx, Px);
-	debug_printf("\r\n");
+	debug_printf("\n");
 	debug_printf("Heap :(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize / 1024);
 	debug_printf("Stack:(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize / 1024);
 
