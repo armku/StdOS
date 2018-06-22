@@ -52,16 +52,15 @@ void TSys::Init()
 
 void TSys::ShowInfo()const
 {
-	StdPrintf("%s::%s Code:%04X %s \r\n", "stdos", "std", 12, "222");
-	StdPrintf("Build:%s %s\r\n", "armku", "yyyy-MM-dd HH:mm:ss");
+	StdPrintf("%s::%s Code:%04X %s \n", "stdos", "std", 12, "222");
+	StdPrintf("Build:%s %s\n", "armku", "yyyy-MM-dd HH:mm:ss");
 
 	this->OnShowInfo();
 	StdPrintf("ChipID:");
 	Buffer buff((void*)this->ID, 12);
-	buff.ShowHex();
-	StdPrintf("\r\n");
+	buff.ShowHex(true);
 
-	StdPrintf("Support: http://www.armku.com\r\n");
+	StdPrintf("Support: http://www.armku.com\n");
 }
 
 // 系统启动后的毫秒数
@@ -91,7 +90,7 @@ void TSys::Sleep(int ms)const
 	}
 
 	if (ms > 1000)
-		debug_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！", ms);
+		debug_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！\n", ms);
 	if (ms)
 	{
 		bool cancel = false;
@@ -108,7 +107,7 @@ void TSys::Sleep(int ms)const
 void TSys::Delay(int us)const
 {
 	if (us > 1000000)
-		debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！", us);
+		debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！\n", us);
 	if (us && us >= 1000)
 	{
 		bool cancle = false;
@@ -364,17 +363,17 @@ void TSys::OnShowInfo()const
 	debug_printf("STDOS::");
 	debug_printf("STM32");
 	debug_printf("F103");
-	debug_printf("%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName, this->Clock, this->FlashSize, this->RAMSize);
-	debug_printf("DevID:0x%04X RevID:0x%04X \r\n", this->DevID, this->RevID);
+	debug_printf("%s %dMHz Flash:%dk RAM:%dk\n", CPUName, this->Clock, this->FlashSize, this->RAMSize);
+	debug_printf("DevID:0x%04X RevID:0x%04X \n", this->DevID, this->RevID);
 	debug_printf("CPUID:%p", this->CPUID);
 	debug_printf(" ARMv7-M");
 	debug_printf(" Cortex-M%d:", 3);
 	debug_printf(" R%dp%d", Rx, Px);
 	debug_printf("\r\n");
-	debug_printf("Heap :(%p, %p) = 0x%x (%dk)\r\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize / 1024);
-	debug_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize / 1024);
+	debug_printf("Heap :(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize / 1024);
+	debug_printf("Stack:(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize / 1024);
 
-	debug_printf("ChipType:0x42455633 3\r\n");
+	debug_printf("ChipType:0x42455633 3\n");
 #elif defined STM32F1
 	uint32_t Rx = 0;
 	uint32_t Px = 0;
@@ -422,17 +421,17 @@ void TSys::OnShowInfo()const
 	debug_printf("STDOS::");
 	debug_printf("STM32");
 	debug_printf("F103");
-	debug_printf("%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName, this->Clock, this->FlashSize, this->RAMSize);
-	debug_printf("DevID:0x%04X RevID:0x%04X \r\n", this->DevID, this->RevID);
+	debug_printf("%s %dMHz Flash:%dk RAM:%dk\n", CPUName, this->Clock, this->FlashSize, this->RAMSize);
+	debug_printf("DevID:0x%04X RevID:0x%04X \n", this->DevID, this->RevID);
 	debug_printf("CPUID:%p", this->CPUID);
 	debug_printf(" ARMv7-M");
 	debug_printf(" Cortex-M%d:", 3);
 	debug_printf(" R%dp%d", Rx, Px);
 	debug_printf("\r\n");
-	debug_printf("Heap :(%p, %p) = 0x%x (%dk)\r\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize / 1024);
-	debug_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize / 1024);
+	debug_printf("Heap :(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize / 1024);
+	debug_printf("Stack:(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize / 1024);
 
-	debug_printf("ChipType:0x42455633 3\r\n");
+	debug_printf("ChipType:0x42455633 3\n");
 #elif defined STM32F4
 	uint32_t Rx = 0;
 	uint32_t Px = 0;
@@ -482,17 +481,17 @@ void TSys::OnShowInfo()const
 	debug_printf("STDOS::");
 	debug_printf("STM32");
 	debug_printf("F103");
-	debug_printf("%s %dMHz Flash:%dk RAM:%dk\r\n", CPUName, this->Clock, this->FlashSize, this->RAMSize);
-	debug_printf("DevID:0x%04X RevID:0x%04X \r\n", this->DevID, this->RevID);
+	debug_printf("%s %dMHz Flash:%dk RAM:%dk\n", CPUName, this->Clock, this->FlashSize, this->RAMSize);
+	debug_printf("DevID:0x%04X RevID:0x%04X \n", this->DevID, this->RevID);
 	debug_printf("CPUID:%p", this->CPUID);
 	debug_printf(" ARMv7-M");
 	debug_printf(" Cortex-M%d:", 3);
 	debug_printf(" R%dp%d", Rx, Px);
 	debug_printf("\r\n");
-	debug_printf("Heap :(%p, %p) = 0x%x (%dk)\r\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize / 1024);
-	debug_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize / 1024);
+	debug_printf("Heap :(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize / 1024);
+	debug_printf("Stack:(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize / 1024);
 
-	debug_printf("ChipType:0x42455633 3\r\n");
+	debug_printf("ChipType:0x42455633 3\n");
 #endif
 }
 

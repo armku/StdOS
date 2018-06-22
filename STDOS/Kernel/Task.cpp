@@ -141,7 +141,7 @@ void Task::ShowStatus()
     {
         debug_printf(" 周期 %3ldms", this->Period);
     }
-    debug_printf(" %s\r\n", this->Enable ? " " : "禁用");
+    debug_printf(" %s\n", this->Enable ? " " : "禁用");
 }
 
 TaskScheduler *_Scheduler;
@@ -288,11 +288,11 @@ uint32_t TaskScheduler::Add(Action func, void *param, int dueTime, int period, c
         // 输出长整型%ld，无符号长整型%llu
         if (period >= 1000)
         {
-            debug_printf(" Period=  %3lds\r\n", period / 1000);
+            debug_printf(" Period=  %3lds\n", period / 1000);
         }
         else
         {
-            debug_printf(" Period= %3ldms\r\n", period);
+            debug_printf(" Period= %3ldms\n", period);
         }
     #endif 
     return task->ID;
@@ -306,7 +306,7 @@ void TaskScheduler::Remove(uint32_t taskid)
         if (task->ID == taskid)
         {
             this->_Tasks.RemoveAt(i);
-            debug_printf("%s::删除任务%d 0x%08x\r\n", Name, task->ID, (unsigned int)task->Callback);
+            debug_printf("%s::删除任务%d 0x%08x\n", Name, task->ID, (unsigned int)task->Callback);
             // 首先清零ID，避免delete的时候再次删除
             task->ID = 0;
             delete task;
@@ -335,7 +335,7 @@ void TaskScheduler::Start()
         //Sys.AddTask(ShowTime, this, 2 *1000, 20 *1000, "时间显示");
     #endif 
 
-    debug_printf("%s::准备就绪 开始循环处理%d个任务！\r\n\r\n", Name, Count);
+    debug_printf("%s::准备就绪 开始循环处理%d个任务！\n\n", Name, Count);
 
     Running = true;
     while (Running)
@@ -343,7 +343,7 @@ void TaskScheduler::Start()
         auto bb = false;
         Execute(0xFFFFFFFF, bb);
     }
-    debug_printf("%s停止调度，共有%d个任务！\r\n", Name, Count);
+    debug_printf("%s停止调度，共有%d个任务！\n", Name, Count);
 }
 
 void TaskScheduler::Stop()
@@ -505,7 +505,7 @@ void TaskScheduler::ShowStatus()
     {
         debug_printf("平均 %3.0fus ", RunTimesAvg / this->Count);
     }
-    debug_printf("启动 %02lld:%02lld:%02lld.%03lld 堆 %u/%u\r\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000, &(buf[0]) - 0X20000000, 1024);
+    debug_printf("启动 %02lld:%02lld:%02lld.%03lld 堆 %u/%u\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000, &(buf[0]) - 0X20000000, 1024);
     //debug_printf("\r\n\r\n %lld--%lld \r\n\r\n",Sys.Ms(),Sys.Ms()-curms);
     for (int i = 0; i < this->Count; i++)
     {
