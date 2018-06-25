@@ -1,5 +1,6 @@
-#ifndef _IPIPELINE_H
-#define _IPIPELINE_H
+#ifndef _HANDLER_H
+#define _HANDLER_H
+
 #include "Sys.h"
 
 class IHandler
