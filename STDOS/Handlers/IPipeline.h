@@ -8,7 +8,7 @@ public:
 	/// <summary>头部处理器</summary>
 	IHandler * Head;
 
-		/// <summary>尾部处理器</summary>
+	/// <summary>尾部处理器</summary>
 	IHandler *Tail;
 
 	/// <summary>添加处理器到开头</summary>
@@ -38,7 +38,7 @@ public:
 	/// <returns></returns>
 	void Remove(IHandler* handler);
 
-	
+
 	void Read(Buffer &bs);
 
 	/// <summary>
