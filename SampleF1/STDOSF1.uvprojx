@@ -946,6 +946,21 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>Handlers</GroupName>
+          <Files>
+            <File>
+              <FileName>IHandler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Handlers\IHandler.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPipeline.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Handlers\IPipeline.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -1885,6 +1900,21 @@
               <FileName>NRF24L01Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\NRF24L01Test.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Handlers</GroupName>
+          <Files>
+            <File>
+              <FileName>IHandler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Handlers\IHandler.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPipeline.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Handlers\IPipeline.cpp</FilePath>
             </File>
           </Files>
         </Group>
