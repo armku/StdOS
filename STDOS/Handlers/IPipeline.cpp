@@ -79,7 +79,9 @@ void IPipeline::Remove(IHandler* handler)
 
 void IPipeline::Read(Buffer &bs)
 {
-	/*auto rs = Head->Read(bs);
+	if (Head == NULL)
+		return;
+	/*auto rr= Head->Read(bs);
 	if (rs != NULL)
 	{
 		auto next = Head->Next;
@@ -98,6 +100,8 @@ void IPipeline::Read(Buffer &bs)
 /// <param name="buf"></param>
 void IPipeline::Write(Buffer& bs)
 {
+	if (Tail == NULL)
+		return;
 	/*auto rs = Tail->Write(bs);
 	if (rs != NULL)
 	{
