@@ -81,17 +81,21 @@ void IPipeline::Read(Buffer &bs)
 {
 	if (Head == NULL)
 		return;
-	/*auto rr= Head->Read(bs);
-	if (rs != NULL)
+	Head->Read(bs);
+	if (bs.Length() != 0)
 	{
 		auto next = Head->Next;
 		while (next != NULL)
 		{
-			if (rs != NULL)
-				rs = next->Read(rs);
-			next = next->Next;
+			if (bs.Length() != 0)
+			{
+				next->Read(bs);
+				next = next->Next;
+			}
+			else
+				break;			
 		}
-	}*/
+	}
 }
 
 /// <summary>
@@ -102,16 +106,20 @@ void IPipeline::Write(Buffer& bs)
 {
 	if (Tail == NULL)
 		return;
-	/*auto rs = Tail->Write(bs);
-	if (rs != NULL)
+	Tail->Write(bs);
+	if (bs.Length() != 0)
 	{
 		auto next = Tail ->Prev;
 		while (next != NULL)
 		{
-			if (rs != NULL)
-				rs = next->Write(rs);
-			next = next->Next;
+			if (bs.Length() != 0)
+			{
+				next->Write(bs);
+				next = next->Prev;
+			}
+			else
+				break;
 		}
-	}*/
+	}
 }
 
