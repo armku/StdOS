@@ -40,8 +40,9 @@ void PipelineTest()
 	pipeline.AddLast(&handler2);
 	for (int i = 0; i < bspipeline.Length(); i++)
 		bspipeline[i] = i + 1;
-
+	debug_printf("\nPipeline ²âÊÔ¿ªÊ¼\n");
 	pipeline.Read(bspipeline);
+	debug_printf("Pipeline ²âÊÔ½áÊø\n\n");
 }
 
 Buffer& Handler1Test0::Read(Buffer& bs)
