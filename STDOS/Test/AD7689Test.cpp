@@ -1,7 +1,7 @@
 #include "Drivers\AD7689.h"
 
-//#define _AD7689_TEST_H
-#ifdef _AD7689_TEST_H
+//#define _AD7689_TEST_CPP
+#ifdef _AD7689_TEST_CPP
 
 CAD7689 ad7689;
 

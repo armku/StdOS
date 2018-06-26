@@ -1,9 +1,9 @@
 #include "Drivers\DS18B20.h"
 #include "Sys.h"
 
-//#define _DS18B20_TEST_H
+//#define _DS18B20_TEST_CPP
 
-#ifdef _DS18B20_TEST_H
+#ifdef _DS18B20_TEST_CPP
 	DS18B20 ds18;
 
 	void ds18b20routin(void *param)

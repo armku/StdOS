@@ -1,7 +1,7 @@
 #include "Drivers\DS1302.h"
 
-//#define _DS1302_TEST_
-#ifdef _DS1302_TEST_
+//#define _DS1302_TEST_CPP
+#ifdef _DS1302_TEST_CPP
 DateTime now; //当前时间
 DS1302 ds1302;
 //更新时间

@@ -2,9 +2,9 @@
 #include "Drivers\SSD1106.h"
 #include "Bsp\font.h"
 
-#define _SSD1309_TEST_H
+#define _SSD1309_TEST_CPP
 
-#ifdef _SSD1309_TEST_H
+#ifdef _SSD1309_TEST_CPP
 	extern unsigned char BMP1[];
     extern unsigned char BMP2[];
 	#if 0

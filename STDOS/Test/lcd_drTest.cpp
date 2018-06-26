@@ -1,8 +1,8 @@
 #include "App\lcd_dr.h"
 
-//#define _LCD_DT_TEST_H
+//#define _LCD_DT_TEST_CPP
 
-#ifdef _LCD_DT_TEST_H
+#ifdef _LCD_DT_TEST_CPP
 	CLcd_DR lcddr(PD3, PD6, PD7, PB3, PB4);
 	void CLcd_DRtest()
 	{

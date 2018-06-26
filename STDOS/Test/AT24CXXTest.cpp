@@ -1,7 +1,7 @@
 #include "..\Drivers\AT24CXX.h"
 
-//#define _AT24CXX_TEST_H
-#ifdef _AT24CXX_TEST_H
+//#define _AT24CXX_TEST_CPP
+#ifdef _AT24CXX_TEST_CPP
 #define EE_SIZE				256			  /* 24xx02×ÜÈÝÁ¿ */    
 AT24CXX at2402(AT24C02);
 void AT24C02Test()
