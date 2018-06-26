@@ -29,4 +29,39 @@ private:
 
 };
 
+class HandlerShow:public IHandler
+{
+public:
+	/// <summary>
+	/// 读取数据处理
+	/// </summary>
+	/// <param name="buf"></param>
+	/// <returns></returns>
+	virtual Buffer & Read(Buffer &bs);
+	/// <summary>
+	/// 写入数据处理
+	/// </summary>
+	/// <param name="buf"></param>
+	/// <returns></returns>
+	virtual Buffer & Write(Buffer& bs);
+
+};
+class HandlerShowHex :public IHandler
+{
+public:
+	/// <summary>
+	/// 读取数据处理
+	/// </summary>
+	/// <param name="buf"></param>
+	/// <returns></returns>
+	virtual Buffer & Read(Buffer &bs);
+	/// <summary>
+	/// 写入数据处理
+	/// </summary>
+	/// <param name="buf"></param>
+	/// <returns></returns>
+	virtual Buffer & Write(Buffer& bs);
+
+};
+
 #endif // !_IPIPELINE_H

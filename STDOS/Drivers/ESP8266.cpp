@@ -618,3 +618,10 @@ void Esp8266::SetPin(Pin prst, Pin pch)
 	this->pRst = 1;
 	this->pCH = 0;
 }
+
+
+Buffer & IHandlerESP8266::Read(Buffer& bs)
+{
+	return bs;
+}
+

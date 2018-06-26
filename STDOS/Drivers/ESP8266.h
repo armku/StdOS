@@ -1,6 +1,7 @@
 #ifndef _ESP8266_H
 #include "Sys.h"
 #include "Port.h"
+#include "Handlers\IHandler.h"
 
 #define RX_BUF_MAX_LEN     1024 
 
@@ -69,6 +70,12 @@ private:
 public:
 	volatile bool FlagTcpClosed;//是否断开连接
 	};
+
+class IHandlerESP8266 :public IHandler
+{
+public:
+	virtual Buffer & Read(Buffer& bs);
+};
 
 extern Fram_T strEsp8266_Fram_Record;
 #endif

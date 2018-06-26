@@ -4,6 +4,8 @@
 #include <string.h>  
 #include <stdbool.h>
 #include "stm32f10x.h" 
+#include "Handlers\IHandler.h"
+#include "Handlers\IPipeline.h"
 
 #define _ESP8266_TEST_CPP
 
@@ -87,6 +89,11 @@ void espRoutin(void*param)
 		break;
 	}
 }
+
+IPipeline pipeline;
+HandlerShow handlershow;
+HandlerShowHex handlershowhex;
+IHandlerESP8266 handleresp8266;
 uint8_t chbuf3[1000];
 
 void com3rcv()
@@ -95,6 +102,7 @@ void com3rcv()
 
 	Rxx3.Read(bs1);
 
+	pipeline.Read(bs1);
 	esp.Rcv(bs1);
 }
 /**
@@ -111,6 +119,12 @@ void Esp8266TestInit()
 	
 	debug_printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
 	Sys.AddTask(espRoutin,0,0,1000,"espRoutin");	
+		
+	pipeline.AddLast(&handlershowhex);
+	pipeline.AddLast(&handlershow);
+	pipeline.AddLast(&handleresp8266);
 }
+
+
 
 #endif
