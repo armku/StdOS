@@ -17,13 +17,13 @@ public:
 	/// </summary>
 	/// <param name="buf"></param>
 	/// <returns></returns>
-	virtual Buffer& Read(Buffer &bs);
+	virtual Buffer & Read(Buffer &bs);
 	/// <summary>
 	/// 写入数据处理
 	/// </summary>
 	/// <param name="buf"></param>
 	/// <returns></returns>
-	virtual Buffer& Write(Buffer& bs);
+	virtual Buffer & Write(Buffer& bs);
 
 private:
 

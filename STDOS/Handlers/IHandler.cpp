@@ -5,7 +5,7 @@
 /// </summary>
 /// <param name="buf"></param>
 /// <returns></returns>
-Buffer& Read(Buffer &bs)
+Buffer & IHandler::Read(Buffer &bs)
 {
 	return bs;
 }
@@ -14,7 +14,7 @@ Buffer& Read(Buffer &bs)
 /// </summary>
 /// <param name="buf"></param>
 /// <returns></returns>
-Buffer& Write(Buffer& bs)
+Buffer &  IHandler::Write(Buffer& bs)
 {
 	return bs;
 }
