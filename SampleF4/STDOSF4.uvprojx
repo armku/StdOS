@@ -11,6 +11,7 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F407IG</Device>
@@ -323,6 +324,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>1</uSurpInc>
             <uC99>0</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -807,6 +809,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Handlers</GroupName>
+          <Files>
+            <File>
+              <FileName>IHandler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Handlers\IHandler.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPipeline.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Handlers\IPipeline.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Security</GroupName>
           <Files>
             <File>
@@ -879,6 +896,66 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
             </File>
+            <File>
+              <FileName>AD7689Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\AD7689Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS1302Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\DS1302Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ESP8266Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>LedTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\LedTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NPATest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\NPATest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NRF24L01Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\NRF24L01Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OCM240128Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\OCM240128Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PCF8563Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PCF8563Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PipelineTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PipelineTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSoloTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort485Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\SerialPort485Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDogTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -888,6 +965,7 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
@@ -1200,6 +1278,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -1684,6 +1763,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Handlers</GroupName>
+          <Files>
+            <File>
+              <FileName>IHandler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Handlers\IHandler.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPipeline.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Handlers\IPipeline.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Security</GroupName>
           <Files>
             <File>
@@ -1755,6 +1849,66 @@
               <FileName>DS18B20Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7689Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\AD7689Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS1302Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\DS1302Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ESP8266Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>LedTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\LedTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NPATest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\NPATest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NRF24L01Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\NRF24L01Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OCM240128Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\OCM240128Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PCF8563Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PCF8563Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PipelineTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PipelineTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSoloTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialPort485Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\SerialPort485Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDogTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -819,6 +819,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Handlers</GroupName>
+          <Files>
+            <File>
+              <FileName>IHandler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Handlers\IHandler.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPipeline.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Handlers\IPipeline.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Security</GroupName>
           <Files>
             <File>
@@ -950,21 +965,6 @@
               <FileName>PipelineTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PipelineTest.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Handlers</GroupName>
-          <Files>
-            <File>
-              <FileName>IHandler.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Handlers\IHandler.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IPipeline.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Handlers\IPipeline.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1783,6 +1783,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Handlers</GroupName>
+          <Files>
+            <File>
+              <FileName>IHandler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Handlers\IHandler.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPipeline.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Handlers\IPipeline.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Security</GroupName>
           <Files>
             <File>
@@ -1914,21 +1929,6 @@
               <FileName>PipelineTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\PipelineTest.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Handlers</GroupName>
-          <Files>
-            <File>
-              <FileName>IHandler.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Handlers\IHandler.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IPipeline.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Handlers\IPipeline.cpp</FilePath>
             </File>
           </Files>
         </Group>
