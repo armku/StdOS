@@ -6,11 +6,18 @@
 #include "Sys.h"
 #include "Device\DeviceConfigHelper.h"
 
+static char bufAT[] = {'A','T'};
+static char bufOK[] = { 'O','K' };
+static char bufERR[] = {'E','R','R'};
+
+static Buffer bsAT(bufAT, ArrayLength(bufAT));
+static Buffer bsOK(bufOK, ArrayLength(bufOK));
+static Buffer bsERR(bufERR, ArrayLength(bufERR));
+
 Fram_T strEsp8266_Fram_Record =
 {
 	0
 };
-char bufAT[] = "AT";
 /**
 * @brief  ESP8266初始化函数
 * @param  无
@@ -23,7 +30,6 @@ void Esp8266::Init()
 	this->FlagTcpClosed = 0;//是否断开连接
 	this->bsRcv1 = new Buffer(this->bufRcv1, ArrayLength(this->bufRcv1));
 	this->bsRcv2 = new Buffer(this->bufRcv2, ArrayLength(this->bufRcv2));
-	this->bsAT = new Buffer(bufAT, ArrayLength(bufAT)-1);
 	this->step = 0;
 }
 
@@ -58,7 +64,7 @@ Buffer & Esp8266::Read(Buffer &bs)
 	switch (this->step)
 	{
 	case 0:
-		if (bs == (*this->bsAT))
+		if (bs == bsAT)
 		{
 			debug_printf("AT test ok\n");
 		}
