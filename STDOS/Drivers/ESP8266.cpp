@@ -55,9 +55,6 @@ extern Esp8266 esp;
 /// <returns></returns>
 Buffer & Esp8266::Read(Buffer &bs)
 {
-	bs.Show(true);
-	bs.ShowHex(true);
-	
 	switch (this->step)
 	{
 	case 0:
