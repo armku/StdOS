@@ -12,7 +12,7 @@ typedef struct
 	int FlagFinish;
 }Fram_T;
 
-class Esp8266
+class Esp8266:public IHandler
 {
 public:
 	typedef enum
@@ -34,10 +34,15 @@ public:
 	{
 		OPEN = 0, WEP = 1, WPA_PSK = 2, WPA2_PSK = 3, WPA_WPA2_PSK = 4,
 	} ENUMAPPsdModeTypeDef;
+	/// <summary>
+	/// 读取数据处理
+	/// </summary>
+	/// <param name="buf"></param>
+	/// <returns></returns>
+	virtual Buffer & Read(Buffer &bs);
 	void Init();
 	void Rst();
 	bool Cmd(char *cmd, char *reply1, char *reply2, int waittime);
-	void Rcv(Buffer& bs);//接收数据
 	void Test();
 	bool NetModeChoose(ENUMNetModeTypeDef enumMode);
 	bool JoinAP(char *pSSID, char *pPassWord);
@@ -70,12 +75,6 @@ private:
 public:
 	volatile bool FlagTcpClosed;//是否断开连接
 	};
-
-class IHandlerESP8266 :public IHandler
-{
-public:
-	virtual Buffer & Read(Buffer& bs);
-};
 
 extern Fram_T strEsp8266_Fram_Record;
 #endif

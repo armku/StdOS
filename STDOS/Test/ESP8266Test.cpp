@@ -93,7 +93,6 @@ void espRoutin(void*param)
 IPipeline pipeline;
 HandlerShow handlershow;
 HandlerShowHex handlershowhex;
-IHandlerESP8266 handleresp8266;
 uint8_t chbuf3[1000];
 
 void com3rcv()
@@ -103,7 +102,6 @@ void com3rcv()
 	Rxx3.Read(bs1);
 
 	pipeline.Read(bs1);
-	esp.Rcv(bs1);
 }
 /**
 * @brief  ESP8266 £¨Sta Tcp Client£©Í¸´«
@@ -122,7 +120,7 @@ void Esp8266TestInit()
 		
 	pipeline.AddLast(&handlershowhex);
 	pipeline.AddLast(&handlershow);
-	pipeline.AddLast(&handleresp8266);
+	pipeline.AddLast(&esp);
 }
 
 

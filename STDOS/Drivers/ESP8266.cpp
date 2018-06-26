@@ -47,8 +47,13 @@ void Esp8266::Rst()
 
 }
 extern Esp8266 esp;
-//接收数据
-void Esp8266::Rcv(Buffer& bs)
+
+/// <summary>
+/// 读取数据处理
+/// </summary>
+/// <param name="buf"></param>
+/// <returns></returns>
+Buffer & Esp8266::Read(Buffer &bs)
 {
 	bs.Show(true);
 	bs.ShowHex(true);
@@ -79,6 +84,9 @@ void Esp8266::Rcv(Buffer& bs)
 	strEsp8266_Fram_Record.Length = bs.Length();
 	strEsp8266_Fram_Record.FlagFinish = 1;
 	esp.FlagTcpClosed = strstr(strEsp8266_Fram_Record.RxBuf, "CLOSED\r\n") ? 1 : 0;*/
+
+	bs.SetLength(0);
+	return bs;
 }
 /*
 * 函数名：this->Cmd
@@ -618,10 +626,3 @@ void Esp8266::SetPin(Pin prst, Pin pch)
 	this->pRst = 1;
 	this->pCH = 0;
 }
-
-
-Buffer & IHandlerESP8266::Read(Buffer& bs)
-{
-	return bs;
-}
-
