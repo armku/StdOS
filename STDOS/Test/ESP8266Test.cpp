@@ -103,7 +103,6 @@ void com3rcv()
 }
 void espRoutin(void*param)
 {
-	debug_printf("bs1len:%d\n",bs1.Length());
 	if(bs1.Length()!=0)
 		pipeline.Read(bs1);
 }
@@ -118,6 +117,7 @@ void Esp8266TestInit()
 	esp.Init(); //初始化WiFi模块使用的接口和外设
 	DeviceConfigCenter::PRcvCOM3 = com3rcv;
 	DeviceConfigCenter::ConfigCom(COM3, 115200);
+	bs1.SetLength(0);
 	
 	debug_printf("\r\n野火 WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息
 	Sys.AddTask(espRoutin,0,0,1000,"espRoutin");	

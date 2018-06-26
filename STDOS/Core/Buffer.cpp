@@ -6,6 +6,7 @@ Buffer::Buffer(void *ptr, int len)
 {
     this->_Arr = (char*)ptr;
     this->_Length = len;
+	this->_LengthOrigin = len;
 }
 
 // 对象mov操作，指针和长度归我，清空对方
@@ -49,7 +50,13 @@ bool Buffer::SetLength(int len)
     }
     else
     {
-        return false;
+		if (this->_LengthOrigin >= len)
+		{
+			this->_Length = len;
+			return true;
+		}
+		else
+			return false;
     }
 }
 

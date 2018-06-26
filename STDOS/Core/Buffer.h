@@ -96,6 +96,7 @@ public:
 protected:
     char*	_Arr;		// 数据指针 string(4) string(2)
 	int		_Length;	// 长度 string(8)
+	int		_LengthOrigin;//原始长度，可以设置长度不超过原始长度
 
 	void move(Buffer& rval);
 public:
