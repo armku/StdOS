@@ -24,7 +24,7 @@ char cStr[100] =
 	0
 };
 static int icnt = 0;
-void espRoutin(void*param)
+void espRoutin1(void*param)
 {
 	switch (esp.step)
 	{
@@ -94,14 +94,18 @@ IPipeline pipeline;
 HandlerShow handlershow;
 HandlerShowHex handlershowhex;
 uint8_t chbuf3[1000];
+Buffer bs1(chbuf3, ArrayLength(chbuf3));
 
 void com3rcv()
 {
-	Buffer bs1(chbuf3, ArrayLength(chbuf3));
-
-	Rxx3.Read(bs1);
-
-	pipeline.Read(bs1);
+	bs1.SetLength(ArrayLength(chbuf3));
+	Rxx3.Read(bs1);	
+}
+void espRoutin(void*param)
+{
+	debug_printf("bs1len:%d\n",bs1.Length());
+	if(bs1.Length()!=0)
+		pipeline.Read(bs1);
 }
 /**
 * @brief  ESP8266 £¨Sta Tcp Client£©Í¸´«
