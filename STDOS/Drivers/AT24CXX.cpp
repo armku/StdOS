@@ -11,7 +11,7 @@ bool AT24CXX::WriteBase(uint32_t addr, Buffer &bs)
 	uint32_t bytesLeave; //还剩多少字节读取
 	uint16_t bufaddr;
 
-	pageStart = addr % this->pageSize;
+	pageStart = addr % this->Block;
 	bytesLeave = bs.Length();
 	curAddr = addr;
 	bufaddr = 0;
@@ -20,7 +20,7 @@ bool AT24CXX::WriteBase(uint32_t addr, Buffer &bs)
 	if (pageStart)
 	{
 		//读取不是页起始地址的内容		
-		if ((pageStart + bytesLeave) < this->pageSize)
+		if ((pageStart + bytesLeave) < this->Block)
 		{
 			//一次能读完
 			Buffer bsFirst(bs.GetBuffer(), bytesLeave);
@@ -30,24 +30,24 @@ bool AT24CXX::WriteBase(uint32_t addr, Buffer &bs)
 		else
 		{
 			//一次读取不完成
-			Buffer bsFirst(bs.GetBuffer(), this->pageSize - pageStart);
+			Buffer bsFirst(bs.GetBuffer(), this->Block - pageStart);
 			this->PageWriteLowlevel(curAddr, bsFirst);
-			bytesLeave -= (this->pageSize - pageStart);
-			curAddr += (this->pageSize - pageStart);
-			bufaddr += (this->pageSize - pageStart);
+			bytesLeave -= (this->Block - pageStart);
+			curAddr += (this->Block - pageStart);
+			bufaddr += (this->Block - pageStart);
 		}
 	}
 
 	while (bytesLeave > 0)
 	{
-		if (bytesLeave > this->pageSize)
+		if (bytesLeave > this->Block)
 		{
 			//读取整页
-			Buffer bsLeave(bs.GetBuffer() + bufaddr, this->pageSize);
+			Buffer bsLeave(bs.GetBuffer() + bufaddr, this->Block);
 			this->PageWriteLowlevel(curAddr, bsLeave);
-			bytesLeave -= this->pageSize;
-			curAddr += this->pageSize;
-			bufaddr += this->pageSize;
+			bytesLeave -= this->Block;
+			curAddr += this->Block;
+			bufaddr += this->Block;
 		}
 		else
 		{
@@ -73,7 +73,7 @@ bool AT24CXX::ReadBase(uint32_t addr, Buffer &bs)
 	uint32_t bytesLeave; //还剩多少字节读取
 	uint16_t bufaddr;
 
-	pageStart = addr % this->pageSize;
+	pageStart = addr % this->Block;
 	bytesLeave = bs.Length();
 	curAddr = addr;
 	bufaddr = 0;
@@ -81,7 +81,7 @@ bool AT24CXX::ReadBase(uint32_t addr, Buffer &bs)
 	if (pageStart)
 	{
 		//读取不是页起始地址的内容		
-		if ((pageStart + bytesLeave) < this->pageSize)
+		if ((pageStart + bytesLeave) < this->Block)
 		{
 			//一次能读完
 			Buffer bsFirst(bs.GetBuffer(), bytesLeave);
@@ -91,24 +91,24 @@ bool AT24CXX::ReadBase(uint32_t addr, Buffer &bs)
 		else
 		{
 			//一次读取不完成
-			Buffer bsFirst(bs.GetBuffer(), this->pageSize - pageStart);
+			Buffer bsFirst(bs.GetBuffer(), this->Block - pageStart);
 			this->PageReadLowlevel(curAddr,bsFirst);
-			bytesLeave -= (this->pageSize - pageStart);
-			curAddr += (this->pageSize - pageStart);
-			bufaddr += (this->pageSize - pageStart);
+			bytesLeave -= (this->Block - pageStart);
+			curAddr += (this->Block - pageStart);
+			bufaddr += (this->Block - pageStart);
 		}
 	}
 
 	while (bytesLeave > 0)
 	{
-		if (bytesLeave > this->pageSize)
+		if (bytesLeave > this->Block)
 		{
 			//读取整页
-			Buffer bsLeave(bs.GetBuffer() + bufaddr, this->pageSize);
+			Buffer bsLeave(bs.GetBuffer() + bufaddr, this->Block);
 			this->PageReadLowlevel(curAddr,bsLeave);
-			bytesLeave -= this->pageSize;
-			curAddr += this->pageSize;
-			bufaddr += this->pageSize;
+			bytesLeave -= this->Block;
+			curAddr += this->Block;
+			bufaddr += this->Block;
 		}
 		else
 		{
@@ -129,7 +129,7 @@ AT24CXX::AT24CXX(EW24XXType devtype, uint8_t devaddr, uint32_t wnms)
 {
 	this->deviceType = devtype;
 	this->Address = devaddr;
-	this->pageSize = this->jsPageSize(devtype);
+	this->Block = this->jsPageSize(devtype);
 	this->writedelaynms = wnms;
 }
 void AT24CXX::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
@@ -314,7 +314,7 @@ int AT24CXX::bufwr(uint16_t addr, Buffer &bs, uint8_t wr)
 	uint32_t bytesLeave; //还剩多少字节读取
 	uint16_t bufaddr;
 
-	pageStart = addr % this->pageSize;
+	pageStart = addr % this->Block;
 	bytesLeave = bs.Length();
 	curAddr = addr;
 	bufaddr = 0;
@@ -326,7 +326,7 @@ int AT24CXX::bufwr(uint16_t addr, Buffer &bs, uint8_t wr)
 	{
 		//读取不是页起始地址的内容
 		//一次能读完
-		if ((pageStart + bytesLeave) < this->pageSize)
+		if ((pageStart + bytesLeave) < this->Block)
 		{
 			if (wr)
 			{
@@ -344,33 +344,33 @@ int AT24CXX::bufwr(uint16_t addr, Buffer &bs, uint8_t wr)
 		{
 			if (wr)
 			{
-				this->writePage(bs.GetBuffer(), bufaddr, curAddr, this->pageSize - pageStart);
+				this->writePage(bs.GetBuffer(), bufaddr, curAddr, this->Block - pageStart);
 			}
 			else
 			{
-				this->readPage(bs.GetBuffer(), bufaddr, curAddr, this->pageSize - pageStart);
+				this->readPage(bs.GetBuffer(), bufaddr, curAddr, this->Block - pageStart);
 			}
-			bytesLeave -= (this->pageSize - pageStart);
-			curAddr += (this->pageSize - pageStart);
-			bufaddr += (this->pageSize - pageStart);
+			bytesLeave -= (this->Block - pageStart);
+			curAddr += (this->Block - pageStart);
+			bufaddr += (this->Block - pageStart);
 		}
 	}
 
 	while (bytesLeave > 0)
 	{
-		if (bytesLeave > this->pageSize)
+		if (bytesLeave > this->Block)
 		{
 			if (wr)
 			{
-				this->writePage(bs.GetBuffer(), bufaddr, curAddr, this->pageSize);
+				this->writePage(bs.GetBuffer(), bufaddr, curAddr, this->Block);
 			}
 			else
 			{
-				this->readPage(bs.GetBuffer(), bufaddr, curAddr, this->pageSize);
+				this->readPage(bs.GetBuffer(), bufaddr, curAddr, this->Block);
 			}
-			bytesLeave -= this->pageSize;
-			curAddr += this->pageSize;
-			bufaddr += this->pageSize;
+			bytesLeave -= this->Block;
+			curAddr += this->Block;
+			bufaddr += this->Block;
 		}
 		else
 		{
@@ -497,7 +497,7 @@ cmd_Writefail:  /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 *
 //页内读，最多一页
 int AT24CXX::PageReadLowlevel(uint16_t addr, Buffer& bs)
 {
-	if (bs.Length() > this->pageSize)
+	if (bs.Length() > this->Block)
 		return 1;
 
 	/* 第1步：发起I2C总线启动信号 */
@@ -570,7 +570,7 @@ cmd_Readfail:  /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
 //页内写，最多一页
 int AT24CXX::PageWriteLowlevel(uint16_t addr, Buffer& bs)
 {
-	if (bs.Length() > this->pageSize)
+	if (bs.Length() > this->Block)
 		return 1;
 
 	return 0;

@@ -50,7 +50,7 @@ private:
 	int PageWriteLowlevel(uint16_t addr, Buffer& bs);//页内写，最多一页
 	
 	EW24XXType deviceType; //器件类型
-	uint32_t pageSize; //存储页大小
+	uint32_t Block; //存储页大小
 	uint32_t writedelaynms; //写延时	  
 };
 
