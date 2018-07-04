@@ -28,13 +28,15 @@ bool AT24CXX::ReadBase(uint32_t addr, Buffer &bs)
 		if ((pageStart + bytesLeave) < this->pageSize)
 		{
 			//一次能读完
-			this->readPage(bs.GetBuffer(), bufaddr, curAddr, bytesLeave);
+			Buffer bsFirst(bs.GetBuffer(), bytesLeave);
+			this->PageReadLowlevel(curAddr,bsFirst);
 			return 0;
 		}		
 		else
 		{
-			//一次读取不玩
-			this->readPage(bs.GetBuffer(), bufaddr, curAddr, this->pageSize - pageStart);
+			//一次读取不完成
+			Buffer bsFirst(bs.GetBuffer(), this->pageSize - pageStart);
+			this->PageReadLowlevel(curAddr,bsFirst);
 			bytesLeave -= (this->pageSize - pageStart);
 			curAddr += (this->pageSize - pageStart);
 			bufaddr += (this->pageSize - pageStart);
@@ -46,7 +48,8 @@ bool AT24CXX::ReadBase(uint32_t addr, Buffer &bs)
 		if (bytesLeave > this->pageSize)
 		{
 			//读取整页
-			this->readPage(bs.GetBuffer(), bufaddr, curAddr, this->pageSize);
+			Buffer bsLeave(bs.GetBuffer() + bufaddr, this->pageSize);
+			this->PageReadLowlevel(curAddr,bsLeave);
 			bytesLeave -= this->pageSize;
 			curAddr += this->pageSize;
 			bufaddr += this->pageSize;
@@ -54,7 +57,8 @@ bool AT24CXX::ReadBase(uint32_t addr, Buffer &bs)
 		else
 		{
 			//读取剩余页
-			this->readPage(bs.GetBuffer(), bufaddr, curAddr, bytesLeave);
+			Buffer bsLeave(bs.GetBuffer() + bufaddr, bytesLeave);
+			this->PageReadLowlevel(curAddr, bsLeave);
 			return 0;
 		}
 	}
