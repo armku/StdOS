@@ -11,8 +11,58 @@ bool AT24CXX::WriteBase(uint32_t addr, Buffer &bs)
 
 bool AT24CXX::ReadBase(uint32_t addr, Buffer &bs)
 {
+#if 1
+	uint32_t curAddr;
+	uint32_t pageStart; //页内起始地址
+	uint32_t bytesLeave; //还剩多少字节读取
+	uint16_t bufaddr;
+
+	pageStart = addr % this->pageSize;
+	bytesLeave = bs.Length();
+	curAddr = addr;
+	bufaddr = 0;
+	
+	if (pageStart)
+	{
+		//读取不是页起始地址的内容		
+		if ((pageStart + bytesLeave) < this->pageSize)
+		{
+			//一次能读完
+			this->readPage(bs.GetBuffer(), bufaddr, curAddr, bytesLeave);
+			return 0;
+		}		
+		else
+		{
+			//一次读取不玩
+			this->readPage(bs.GetBuffer(), bufaddr, curAddr, this->pageSize - pageStart);
+			bytesLeave -= (this->pageSize - pageStart);
+			curAddr += (this->pageSize - pageStart);
+			bufaddr += (this->pageSize - pageStart);
+		}
+	}
+
+	while (bytesLeave > 0)
+	{
+		if (bytesLeave > this->pageSize)
+		{
+			//读取整页
+			this->readPage(bs.GetBuffer(), bufaddr, curAddr, this->pageSize);
+			bytesLeave -= this->pageSize;
+			curAddr += this->pageSize;
+			bufaddr += this->pageSize;
+		}
+		else
+		{
+			//读取剩余页
+			this->readPage(bs.GetBuffer(), bufaddr, curAddr, bytesLeave);
+			return 0;
+		}
+	}
+	return bs.Length();
+#else
 	this->bufwr(addr, bs, 0);
 	return true;
+#endif
 }
 //写延时时间
 AT24CXX::AT24CXX(EW24XXType devtype, uint8_t devaddr, uint32_t wnms)
