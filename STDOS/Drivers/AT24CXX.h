@@ -43,10 +43,12 @@ private:
 	int writePage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t size); //页内写
 	int writePage(uint16_t addr, Buffer &bs); //页内写
 	int readPage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t size); //页内读
-	int readPage(uint16_t addr, Buffer &bs); //页内读
 	int bufwr(uint16_t addr, uint8_t *buf, uint32_t size, uint16_t bufpos, uint8_t wr); //读写集中操作1写 0读
 	int bufwr(uint16_t addr, Buffer &bs, uint8_t wr); //读写集中操作1写 0读
-
+private:
+	int PageReadLowlevel(uint16_t addr, Buffer& bs);//页内读，最多一页
+	int PageWriteLowlevel(uint16_t addr, Buffer& bs);//页内写，最多一页
+	
 	EW24XXType deviceType; //器件类型
 	uint32_t pageSize; //存储页大小
 	uint32_t writedelaynms; //写延时	  

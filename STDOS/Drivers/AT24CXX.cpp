@@ -300,7 +300,7 @@ int AT24CXX::writePage(uint16_t addr, Buffer &bs) //页内写
 	if (bs.Length() > 256)
 		return 0;
 	Buffer bstmp(buftmp,bs.Length());
-	this->readPage(addr,bstmp);
+	this->PageReadLowlevel(addr,bstmp);
 	bool flagchgs = false;
 	for (int i = 0; i < bs.Length(); i++)
 	{
@@ -384,14 +384,12 @@ cmd_Writefail:  /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 *
 	this->IIC.Stop();
 	return 1;
 }
-int AT24CXX::writePage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t size) //页内写
+//页内读，最多一页
+int AT24CXX::PageReadLowlevel(uint16_t addr, Buffer& bs)
 {
-	Buffer bs(buf + bufpos, size);
-	return this->writePage(addr, bs);
-}
-//页内读
-int AT24CXX::readPage(uint16_t addr, Buffer &bs)
-{
+	if (bs.Length() > this->pageSize)
+		return 1;
+
 	/* 第1步：发起I2C总线启动信号 */
 	this->IIC.Start();
 
@@ -440,7 +438,7 @@ int AT24CXX::readPage(uint16_t addr, Buffer &bs)
 	{
 		bs[i] = this->IIC.ReadByte(); /* 读1个字节 */
 
-												/* 每读完1个字节后，需要发送Ack， 最后一个字节不需要Ack，发Nack */
+									  /* 每读完1个字节后，需要发送Ack， 最后一个字节不需要Ack，发Nack */
 		if (i != bs.Length() - 1)
 		{
 			this->IIC.Ack(true); /* 中间字节读完后，CPU产生ACK信号(驱动SDA = 0) */
@@ -459,10 +457,23 @@ cmd_Readfail:  /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
 	this->IIC.Stop();
 	return 1;
 }
+//页内写，最多一页
+int AT24CXX::PageWriteLowlevel(uint16_t addr, Buffer& bs)
+{
+	if (bs.Length() > this->pageSize)
+		return 1;
+
+	return 0;
+}
+int AT24CXX::writePage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t size) //页内写
+{
+	Buffer bs(buf + bufpos, size);
+	return this->writePage(addr, bs);
+}
 int AT24CXX::readPage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t size) //页内读
 {
 	Buffer bs(buf + bufpos, size);
-	return this->readPage(addr, bs);
+	return this->PageReadLowlevel(addr, bs);
 }
 
 uint16_t AT24CXX::jsPageSize(uint32_t type) //计算存储页大小
