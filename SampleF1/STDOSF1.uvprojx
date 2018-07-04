@@ -819,6 +819,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Storage</GroupName>
+          <Files>
+            <File>
+              <FileName>Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Storage\Storage.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Handlers</GroupName>
           <Files>
             <File>
@@ -1779,6 +1789,16 @@
               <FileName>WaitHandle.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Kernel\WaitHandle.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Storage</GroupName>
+          <Files>
+            <File>
+              <FileName>Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
         </Group>
