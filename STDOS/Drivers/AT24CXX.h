@@ -27,8 +27,8 @@ public:
 	bool Write(uint16_t addr, uint8_t data);
 	uint8_t Read(uint16_t addr);
 
-	virtual bool Write(uint32_t addr, Buffer &bs);
-	virtual bool Read(uint32_t addr, Buffer &bs);
+	virtual bool WriteBase(uint32_t addr, Buffer &bs);
+	virtual bool ReadBase(uint32_t addr, Buffer &bs);
 	int Read(uint32_t addr, void *pBuffer, int size, uint16_t bufpos = 0);
 	int Write(uint32_t addr, void *pBuffer, int size, uint16_t bufpos = 0);
 public:

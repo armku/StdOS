@@ -3,13 +3,13 @@
 #define macI2C_WR	0		/* Ð´¿ØÖÆbit */
 #define macI2C_RD	1		/* ¶Á¿ØÖÆbit */
 
-bool AT24CXX::Write(uint32_t addr, Buffer &bs)
+bool AT24CXX::WriteBase(uint32_t addr, Buffer &bs)
 {
 	this->bufwr(addr, bs, 1);
 	return true;
 }
 
-bool AT24CXX::Read(uint32_t addr, Buffer &bs)
+bool AT24CXX::ReadBase(uint32_t addr, Buffer &bs)
 {
 	this->bufwr(addr, bs, 0);
 	return true;
@@ -47,7 +47,7 @@ void AT24CXX::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
 int AT24CXX::Read(uint32_t addr, void *pBuffer, int size, uint16_t bufpos)
 {
 	Buffer bs((uint8_t*)pBuffer + bufpos, size);
-	this->Read(addr, bs);
+	this->ReadBase(addr, bs);
 	return size;
 }
 /*
@@ -63,7 +63,7 @@ int AT24CXX::Read(uint32_t addr, void *pBuffer, int size, uint16_t bufpos)
 int AT24CXX::Write(uint32_t addr, void *pBuffer, int size, uint16_t bufpos)
 {
 	Buffer bs((uint8_t*)pBuffer + bufpos, size);
-	this->Write(addr, bs);
+	this->WriteBase(addr, bs);
 	return size;
 }
 
