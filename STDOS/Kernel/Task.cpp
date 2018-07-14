@@ -461,7 +461,7 @@ uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
     {
         ret = false;
     }
-	debug_printf("实际执行时间:%dms\n", ret);
+	debug_printf("Task:%d实际执行时间:%dms\n", this->Current->ID, ret);
     return ret;
 }
 

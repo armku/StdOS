@@ -1,7 +1,7 @@
 #ifndef _BSP_KEY_H
     #define _BSP_KEY_H
     #include "Sys.h"
-    #define KEY_COUNT    4	   					/* 按键个数, 2个独立建 + 1个组合键 */
+    #define KEY_COUNT    5	   					/* 按键个数, 4个独立建 + 1个组合键 */
 	/*
 	KEY_NONE,
   KEY_OK,
@@ -39,27 +39,11 @@
         KEYDOWN_UP,  
 		KEYUP_UP,
 		KEYLONG_UP,
-		
-		KEYDOWN_OK_LEFT,
-		KEYUP_OK_LEFT,
-		KEYLONG_OK_LEFT,
-		
-		KEYDOWN_OK_UP,
-		KEYUP_OK_UP,
-		KEYLONG_OK_UP,
-		
-	
+						
         KEYDOWN_CFG,// = KEY_LEFT | KEY_MENU,  // 进入参数配置界面
 		KEYUP_CFG,
 		KEYLONG_CFG,		
-		
-        KEYDOWN_CAL,// = KEY_UP | KEY_MENU,  // 校验界面        
-		KEYUP_CAL,
-		KEYLONG_CAL,
-		
-		KEYDOWN_DEMOCAL,// = KEY_UP | KEY_MENU,  // 校验界面        
-		KEYUP_DEMOCAL,
-		KEYLONG_DEMOCAL,		
+		        	
     } KEY_ENUM;
     class KEY_T /*每个按键对应1个全局的结构体变量。
      */

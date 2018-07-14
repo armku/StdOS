@@ -27,8 +27,9 @@ public:
 	bool Write(uint16_t addr, uint8_t data);
 	uint8_t Read(uint16_t addr);
 
-	virtual bool WriteBase(uint32_t addr, Buffer &bs);
-	virtual bool ReadBase(uint32_t addr, Buffer &bs);
+	virtual bool Write(uint32_t addr,const Buffer &bs);
+	virtual bool Read(uint32_t addr, Buffer &bs);
+
 	int Read(uint32_t addr, void *pBuffer, int size, uint16_t bufpos = 0);
 	int Write(uint32_t addr, void *pBuffer, int size, uint16_t bufpos = 0);
 public:
@@ -40,14 +41,9 @@ public:
 private:
 	uint8_t checkDevice();
 	uint16_t jsPageSize(uint32_t type); //计算存储页大小
-	int writePage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t size); //页内写
-	int writePage(uint16_t addr, Buffer &bs); //页内写
-	int readPage(uint8_t *buf, uint16_t bufpos, uint16_t addr, uint32_t size); //页内读
-	int bufwr(uint16_t addr, uint8_t *buf, uint32_t size, uint16_t bufpos, uint8_t wr); //读写集中操作1写 0读
-	int bufwr(uint16_t addr, Buffer &bs, uint8_t wr); //读写集中操作1写 0读
 private:
-	int PageReadLowlevel(uint16_t addr, Buffer& bs);//页内读，最多一页
-	int PageWriteLowlevel(uint16_t addr, Buffer& bs);//页内写，最多一页
+	int PageRead(uint16_t addr, Buffer& bs);//页内读，最多一页
+	int PageWrite(uint16_t addr, Buffer& bs);//页内写，最多一页
 	
 	EW24XXType deviceType; //器件类型
 	uint32_t Block; //存储页大小
