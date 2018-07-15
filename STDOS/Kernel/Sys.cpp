@@ -88,15 +88,13 @@ void TSys::Sleep(int ms)const
 		}
 		return;
 	}
-
 	if (ms > 1000)
 		debug_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！\n", ms);
 	if (ms)
 	{
 		bool cancel = false;
-		auto tskcur = Task::Scheduler()->Current;
-		int executems = Task::Scheduler()->ExecuteForWait(ms, cancel);
-		Task::Scheduler()->Current = tskcur;
+		
+		int executems = Task::Scheduler()->ExecuteForWait(ms, cancel);		
 		if (executems >= ms)
 			return;
 		ms -= executems;

@@ -431,6 +431,7 @@ void TaskScheduler::Set(Task *tasks, int count){}
 uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
 {
     uint32_t ret = 0;
+	auto tskcur = Task::Scheduler()->Current;
     if (this->Deepth < MaxDeepth)
     {
         this->Deepth++;
@@ -462,6 +463,7 @@ uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
     {
         ret = false;
     }
+	Task::Scheduler()->Current = tskcur;
 	debug_printf("Task:%d实际执行时间:%dms\n", this->Current->ID, ret);
     return ret;
 }
