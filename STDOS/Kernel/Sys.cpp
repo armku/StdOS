@@ -94,7 +94,9 @@ void TSys::Sleep(int ms)const
 	if (ms)
 	{
 		bool cancel = false;
+		auto tskcur = Task::Scheduler()->Current;
 		int executems = Task::Scheduler()->ExecuteForWait(ms, cancel);
+		Task::Scheduler()->Current = tskcur;
 		if (executems >= ms)
 			return;
 		ms -= executems;
