@@ -111,7 +111,7 @@ void TSys::Delay(int us)const
 	if (us && us >= 1000)
 	{
 		bool cancle = false;
-		int executeus = Task::Scheduler()->ExecuteForWait(us, cancle) * 1000;
+		int executeus = Task::Scheduler()->ExecuteForWait(us / 1000, cancle) * 1000;
 		if (executeus >= us)
 			return;
 		us -= executeus;
