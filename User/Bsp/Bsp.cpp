@@ -85,7 +85,11 @@ void Esp8266TestInit();
 extern TaskScheduler *_Scheduler;
 void TaskTest(void * param)
 {
-	debug_printf("TaskTest ID:%d\n", _Scheduler->Current->ID);
+	debug_printf("00TaskTest ID:%d\n", _Scheduler->Current->ID);
+	Sys.Sleep(20);
+	debug_printf("01TaskTest ID:%d\n", _Scheduler->Current->ID);
+	Sys.Sleep(30);
+	debug_printf("02TaskTest ID:%d\n", _Scheduler->Current->ID);
 }
 void Demo(void* param)
 {
