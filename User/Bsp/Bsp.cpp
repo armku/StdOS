@@ -81,6 +81,16 @@ void com1rcv()
 	bs1.ShowHex(true);
 }
 void Esp8266TestInit();
+#include "Task.h"
+extern TaskScheduler *_Scheduler;
+void TaskTest(void * param)
+{
+	debug_printf("TaskTest ID:%d\n", _Scheduler->Current->ID);
+}
+void Demo(void* param)
+{
+	debug_printf("Demo ID:%d\n", _Scheduler->Current->ID);
+}
 
 void BspInit()
 {
@@ -88,6 +98,9 @@ void BspInit()
 	led2 = 1;
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	DeviceConfigCenter::PRcvCOM1 = com1rcv;
+
+	Sys.AddTask(TaskTest, 0, 1000, 1000, "TaskTest");
+	Sys.AddTask(Demo, 0, 1100, 5000, "Demo");
 	
-	Esp8266TestInit();
+	//Esp8266TestInit();
 }
