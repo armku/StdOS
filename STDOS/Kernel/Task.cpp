@@ -436,6 +436,7 @@ uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
         this->Deepth++;
 		debug_printf("ExecuteForWait:ID:%d,Name:%s,need time:%dms\n",this->Current->ID,this->Current->Name,msMax);
 		auto tskcur=this->Current;
+		tskcur->Deepth++;
         auto msBegin = Sys.Ms();
         auto msEndMax = msBegin + msMax;
         auto msRemain = msMax;
@@ -453,7 +454,7 @@ uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
         this->TotalSleep += sleepus/1000;
         auto msUsed = Sys.Ms() - msBegin;
 		tskcur->SleepTime+=sleepus;
-		        
+		tskcur->Deepth--;
         this->Deepth--;
         ret = msUsed;
     }
