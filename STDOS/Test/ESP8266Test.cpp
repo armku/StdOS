@@ -126,7 +126,4 @@ void Esp8266TestInit()
 	pipeline.AddLast(&handlershow);
 	pipeline.AddLast(&esp);
 }
-
-
-
 #endif

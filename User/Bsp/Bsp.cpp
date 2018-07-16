@@ -89,5 +89,5 @@ void BspInit()
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	DeviceConfigCenter::PRcvCOM1 = com1rcv;
 			
-	//Esp8266TestInit();
+	Esp8266TestInit();
 }
