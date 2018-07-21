@@ -37,9 +37,9 @@ uint32_t DeviceConfigCenter::CurrentTicks1()
 #include <stdio.h>
 #include "stdarg.h"
 /////////////////////////////////////////////////////////////////////////////
+static char sprint_buf[1024];
 int StdPrintf(const char *format, ...)
-{
-	static char sprint_buf[1024];
+{	
 	va_list args;
 
 	int n;
