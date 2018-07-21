@@ -70,6 +70,10 @@ public:
 	
 	// 延迟异步重启
 	void Reboot(int msDelay = 0) const;
+	// 打开全局中断
+	void GlobalEnable();
+	// 关闭全局中断
+	void GlobalDisable();
 		
 private:
 	// 重启系统

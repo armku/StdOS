@@ -501,13 +501,13 @@ void TSys::Reset()const
 	NVIC_SystemReset();
 }
 // 打开全局中断
-void GlobalEnable()
+void TSys::GlobalEnable()
 {
 	__ASM volatile("cpsie i");
 }
 
 // 关闭全局中断
-void GlobalDisable()
+void TSys::GlobalDisable()
 {
 	__ASM volatile("cpsid i");
 }
