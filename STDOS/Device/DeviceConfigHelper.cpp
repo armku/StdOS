@@ -240,7 +240,9 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 #if USECOM1
 #if COM1SENDINTFLAG
 	//中断发送
+	Sys.GlobalDisable();
 	Txx1.Write(bs);
+	Sys.GlobalEnable();
 	com1send();
 #else
 	if (pCOM1Rx485)
@@ -268,7 +270,9 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 #if USECOM2
 #if COM2SENDINTFLAG
 	//中断发送
+	Sys.GlobalDisable();
 	Txx2.Write(bs);
+	Sys.GlobalEnable();
 	com2send();
 #else
 	if (pCOM2Rx485)
@@ -296,7 +300,9 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 #if USECOM3
 #if COM3SENDINTFLAG
 	//中断发送
+	Sys.GlobalDisable();
 	Txx3.Write(bs);
+	Sys.GlobalEnable();
 	com3send();
 #else
 	if (pCOM3Rx485)
@@ -324,7 +330,9 @@ void DeviceConfigCenter::com4send(Buffer& bs)
 #if USECOM4
 #if COM4SENDINTFLAG
 	//中断发送
+	Sys.GlobalDisable();
 	Txx4.Write(bs);
+	Sys.GlobalEnable();
 	com4send();
 #else
 	if (pCOM4Rx485)
@@ -352,7 +360,9 @@ void DeviceConfigCenter::com5send(Buffer& bs)
 #if USECOM5
 #if COM5SENDINTFLAG
 	//中断发送
+	Sys.GlobalDisable();
 	Txx5.Write(bs);
+	Sys.GlobalEnable();
 	com5send();
 #else
 	if (pCOM5Rx485)
