@@ -318,7 +318,7 @@ void Buffer::Show(bool newLine)const
 	}	
 	if(newLine)
 	{
-		StdPrintf("\r\n");
+		StdPrintf("\n");
 	}
 }
 void Buffer::ShowHex(bool newLine,char sep) const
@@ -335,7 +335,7 @@ void Buffer::ShowHex(bool newLine,char sep) const
 	
 	if(newLine)
 	{
-		StdPrintf("\r\n");
+		StdPrintf("\n");
 	}
 }
 
