@@ -435,7 +435,7 @@ uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
     if (this->Deepth < MaxDeepth)
     {
         this->Deepth++;
-		debug_printf("ExecuteForWait:ID:%d,Name:%s,need time:%dms\n",this->Current->ID,this->Current->Name,msMax);
+		//debug_printf("ExecuteForWait:ID:%d,Name:%s,need time:%dms\n",this->Current->ID,this->Current->Name,msMax);
 		auto tskcur=this->Current;
 		tskcur->Deepth++;
         auto msBegin = Sys.Ms();
@@ -464,7 +464,7 @@ uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
         ret = false;
     }
 	Task::Scheduler()->Current = tskcur;
-	debug_printf("Task:%d实际执行时间:%dms\n", this->Current->ID, ret);
+	//debug_printf("Task:%d实际执行时间:%dms\n", this->Current->ID, ret);
     return ret;
 }
 
