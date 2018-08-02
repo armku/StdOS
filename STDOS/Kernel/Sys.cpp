@@ -29,8 +29,7 @@ TSys::TSys()
 #endif 
 
 	this->Config = &g_Config;
-	this->OnInit();
-
+	
 	this->Name = "stdos";
 	this->Company = "armku";
 	this->Code = 0x0201;
@@ -41,6 +40,7 @@ TSys::TSys()
 
 	this->FlashSize = 0x01;
 	this->RAMSize = 0x01;
+	this->OnInit();
 	this->Started = false;
 }
 
