@@ -52,8 +52,7 @@ void TSys::Init()
 
 void TSys::ShowInfo()const
 {
-	StdPrintf("%s::%s Code:%04X %s \n", "stdos", "std", 12, "222");
-	StdPrintf("Build:%s %s\n", "armku", "yyyy-MM-dd HH:mm:ss");
+	StdPrintf("Build Date %s\n","yyyy-MM-dd HH:mm:ss");
 
 	this->OnShowInfo();
 	StdPrintf("ChipID:");
@@ -418,7 +417,7 @@ void TSys::OnShowInfo()const
 		break;
 	}
 
-	debug_printf("STDOS::STM32F103");
+	debug_printf("STDOS::");
 	debug_printf("%s %dMHz Flash:%dk RAM:%dk\n", CPUName, this->Clock/1000000, this->FlashSize, this->RAMSize);
 	debug_printf("DevID:0x%04X RevID:0x%04X \n", this->DevID, this->RevID);
 	debug_printf("CPUID:%p", this->CPUID);
