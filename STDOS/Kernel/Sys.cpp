@@ -423,7 +423,7 @@ void TSys::OnShowInfo()const
 	debug_printf(" R%dp%d\n", Rx, Px);
 	debug_printf("Heap :(%p, %p) = 0X%x (%dk)\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize /1024);
 	debug_printf("Stack:(%p, %p) = 0X%x (%dk)\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize /1024);
-	debug_printf("RAM Without Heap&Stack:%XK\n", (this->RAMSize - HeapSize/1024 - StackSize/1024));
+	debug_printf("RAM Without Heap&Stack:%dK\n", (this->RAMSize - HeapSize/1024 - StackSize/1024));
 
 	debug_printf("ChipType:0x42455633 3\n");
 #elif defined STM32F4
