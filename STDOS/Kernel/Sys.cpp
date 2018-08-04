@@ -52,8 +52,6 @@ void TSys::Init()
 
 void TSys::ShowInfo()const
 {
-	StdPrintf("Build Date %s\n","yyyy-MM-dd HH:mm:ss");
-
 	this->OnShowInfo();
 	StdPrintf("ChipID:");
 	Buffer buff((void*)this->ID, 12);
@@ -244,7 +242,7 @@ void TSys::OnInit()
 		this->RAMSize = 64;
 		break;
 	default:
-		CPUName = "δ֪";
+		CPUName = "Unknown";
 		this->RAMSize = 0;
 		break;
 	}
@@ -282,7 +280,7 @@ void TSys::OnInit()
 		this->RAMSize = 768;
 		break;
 	default:
-		CPUName = "δ֪";
+		CPUName = "Unknown";
 		this->RAMSize = 0;
 		break;
 	}
@@ -304,7 +302,7 @@ void TSys::OnInit()
 		this->RAMSize = 192;
 		break;
 	default:
-		CPUName = "δ֪";
+		CPUName = "Unknown";
 		this->RAMSize = 0;
 		break;
 	}
@@ -423,8 +421,9 @@ void TSys::OnShowInfo()const
 	debug_printf("CPUID:%p", this->CPUID);
 	debug_printf(" ARMv7-M Cortex-M3:");
 	debug_printf(" R%dp%d\n", Rx, Px);
-	debug_printf("Heap :(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize / 1024);
-	debug_printf("Stack:(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize / 1024);
+	debug_printf("Heap :(%p, %p) = 0X%x (%dk)\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize /1024);
+	debug_printf("Stack:(%p, %p) = 0X%x (%dk)\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize /1024);
+	debug_printf("RAM Without Heap&Stack:%XK\n", (this->RAMSize - HeapSize/1024 - StackSize/1024));
 
 	debug_printf("ChipType:0x42455633 3\n");
 #elif defined STM32F4
