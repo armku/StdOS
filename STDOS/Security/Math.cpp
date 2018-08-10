@@ -48,17 +48,36 @@ float Math::Min(float buf[], int len,int pos)
 //≈≈–Ú£¨…˝–Ú
 void Math::SortUp(float buf[],int len,int pos)
 {
-	int maxpos=pos;
-	for(int i=pos;i<pos+len;i++)
+	int minpos=pos;
+	for (int i = pos; i < pos + len; i++)
 	{
-		if(buf[maxpos]<buf[i])
-			maxpos=i;
+		minpos = i;
+		for (int j = i + 1; j < pos + len; j++)
+		{
+			if (buf[minpos] > buf[j])
+				minpos = j;
+		}
+		float tmp = buf[minpos];
+		buf[minpos] = buf[i];
+		buf[i] = tmp;
 	}
 }
 //≈≈–Ú Ωµ–Ú
 void Math::SortDown(float buf[],int len,int pos)
 {
-	
+	int maxpos = pos;
+	for (int i = pos; i < pos + len; i++)
+	{
+		maxpos = i;
+		for (int j = i + 1; j < pos + len; j++)
+		{
+			if (buf[maxpos] < buf[j])
+				maxpos = j;
+		}
+		float tmp = buf[maxpos];
+		buf[maxpos] = buf[i];
+		buf[i] = tmp;
+	}
 }
 
 
