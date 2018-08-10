@@ -766,6 +766,21 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
             </File>
+            <File>
+              <FileName>CheckSum.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\CheckSum.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Math.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\Math.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Parity.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\Parity.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1644,6 +1659,21 @@
               <FileName>Crc.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CheckSum.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\CheckSum.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Math.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\Math.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Parity.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\Parity.cpp</FilePath>
             </File>
           </Files>
         </Group>
