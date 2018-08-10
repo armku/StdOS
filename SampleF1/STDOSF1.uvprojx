@@ -861,6 +861,11 @@
               <FileType>8</FileType>
               <FilePath>..\STDOS\Security\Parity.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Math.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\Math.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1839,6 +1844,11 @@
               <FileName>Parity.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Security\Parity.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Math.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\STDOS\Security\Math.cpp</FilePath>
             </File>
           </Files>
         </Group>
