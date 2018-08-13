@@ -18,6 +18,24 @@ float Math::Avg(float buf[], int len,int pos)
 	else
 		return 0;
 }
+//计算和
+float Math::Sum(int buf[], int len, int pos)
+{
+	int64_t ret = 0;
+	for (int i = pos; i < len; i++)
+	{
+		ret += buf[len];
+	}
+	return ret;
+}
+//计算平均值
+float Math::Avg(int buf[], int len, int pos)
+{
+	if (len > 0)
+		return Math::Sum(buf, len) / len;
+	else
+		return 0;
+}
 //最大值
 float Math::Max(float buf[], int len,int pos)
 {
