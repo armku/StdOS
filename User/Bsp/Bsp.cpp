@@ -81,6 +81,7 @@ void com1rcv()
 	bs1.ShowHex(true);
 }
 void Esp8266TestInit();
+void W5500Test();
 
 void BspInit()
 {
@@ -89,5 +90,5 @@ void BspInit()
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	DeviceConfigCenter::PRcvCOM1 = com1rcv;
 			
-	Esp8266TestInit();
+	W5500Test();
 }
