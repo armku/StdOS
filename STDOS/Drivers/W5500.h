@@ -12,7 +12,7 @@ public:
 
 	uint32_t	TaskID;
 
-	//IDataPort*	Led;	// Ö¸Ê¾µÆ
+	W5500();
 private:
 
 };
