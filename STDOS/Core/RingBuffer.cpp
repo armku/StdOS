@@ -12,7 +12,7 @@ int RingBuffer::Put(char data)
 {
 	if (this->fillcnt >= this->length)
 	{
-		return;
+		return false;
 	}
 	else {}
 	this->buf[this->head] = data;
@@ -25,6 +25,7 @@ int RingBuffer::Put(char *c, int len)
 {
 	for (int i = 0; i < len; i++)
 		this->Put(c[i]);
+	return len;
 }
 int RingBuffer::Get(char *c, int len)
 {
@@ -45,4 +46,8 @@ int RingBuffer::Get(char *c, int len)
 		this->tail %= this->length;
 	}
 	return true;
+}
+bool RingBuffer::Empty()
+{
+	return this->fillcnt == 0;
 }

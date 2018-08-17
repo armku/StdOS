@@ -10,6 +10,7 @@ public:
 	int Put(char data);
 	int Put(char *c, int len);
 	int Get(char *c, int len);
+	bool Empty();
 
 	uint8_t * buf;
 	int length;
