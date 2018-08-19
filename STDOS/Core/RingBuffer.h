@@ -2,7 +2,7 @@
 #define _RING_BUFFER_H
 
 #include "Type.h"
-
+//暂时未用
 class RingBuffer
 {
 public:

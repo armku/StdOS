@@ -1,5 +1,5 @@
 #include "RingBuffer.h"
-
+//暂时未用
 void RingBuffer::Init(void* buffer, int bufsize)
 {
 	this->buf = (uint8_t*)buffer;
