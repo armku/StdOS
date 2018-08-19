@@ -15,6 +15,7 @@
 		Queue();
 		void Clear();
 		int Length() const { return _size; }		// 队列大小
+		int RemainLength() const { return _capacity - _size; }//剩余队列大小
 		bool Empty() const { return _size == 0; }	// 队列空
 
 		int Write(const Buffer& bs);	// 批量写入

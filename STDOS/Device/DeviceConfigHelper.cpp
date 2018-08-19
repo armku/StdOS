@@ -112,27 +112,27 @@ int DeviceConfigCenter::RcvLastTimeCOM5 = 0;//串口1最后接收数据时间
 extern "C" {
 #endif
 #if USECOM1
-	static char com1rx[512], com1tx[1024];
+	static char com1rx[256], com1tx[256];
 	Queue	Txx1;
 	Queue	Rxx1;
 #endif
 #if USECOM2
-	static char com2rx[512], com2tx[1024];
+	static char com2rx[256], com2tx[256];
 	Queue	Txx2;
 	Queue	Rxx2;
 #endif
 #if USECOM3
-	static char com3rx[512], com3tx[1024];
+	static char com3rx[256], com3tx[256];
 	Queue	Txx3;
 	Queue	Rxx3;
 #endif
 #if USECOM4
-	static char com4rx[512], com4tx[1024];
+	static char com4rx[256], com4tx[256];
 	Queue	Txx4;
 	Queue	Rxx4;
 #endif
 #if USECOM5
-	static char com5rx[512], com5tx[1024];
+	static char com5rx[256], com5tx[256];
 	Queue	Txx5;
 	Queue	Rxx5;
 #endif
@@ -239,6 +239,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 {
 #if USECOM1
 #if COM1SENDINTFLAG
+	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
 	Txx1.Write(bs);
@@ -269,6 +270,7 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 {
 #if USECOM2
 #if COM2SENDINTFLAG
+	while (bs.Length() > Txx2.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
 	Txx2.Write(bs);
@@ -299,6 +301,7 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 {
 #if USECOM3
 #if COM3SENDINTFLAG
+	while (bs.Length() > Txx3.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
 	Txx3.Write(bs);
@@ -329,6 +332,7 @@ void DeviceConfigCenter::com4send(Buffer& bs)
 {
 #if USECOM4
 #if COM4SENDINTFLAG
+	while (bs.Length() > Txx4.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
 	Txx4.Write(bs);
@@ -359,6 +363,7 @@ void DeviceConfigCenter::com5send(Buffer& bs)
 {
 #if USECOM5
 #if COM5SENDINTFLAG
+	while (bs.Length() > Txx5.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
 	Txx5.Write(bs);
