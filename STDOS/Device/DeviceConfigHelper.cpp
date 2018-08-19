@@ -112,27 +112,27 @@ int DeviceConfigCenter::RcvLastTimeCOM5 = 0;//串口1最后接收数据时间
 extern "C" {
 #endif
 #if USECOM1
-	static char com1rx[1024], com1tx[1024];
+	static char com1rx[512], com1tx[1024];
 	Queue	Txx1;
 	Queue	Rxx1;
 #endif
 #if USECOM2
-	static char com2rx[1024], com2tx[1024];
+	static char com2rx[512], com2tx[1024];
 	Queue	Txx2;
 	Queue	Rxx2;
 #endif
 #if USECOM3
-	static char com3rx[1024], com3tx[1024];
+	static char com3rx[512], com3tx[1024];
 	Queue	Txx3;
 	Queue	Rxx3;
 #endif
 #if USECOM4
-	static char com4rx[1024], com4tx[1024];
+	static char com4rx[512], com4tx[1024];
 	Queue	Txx4;
 	Queue	Rxx4;
 #endif
 #if USECOM5
-	static char com5rx[1024], com5tx[1024];
+	static char com5rx[512], com5tx[1024];
 	Queue	Txx5;
 	Queue	Rxx5;
 #endif
