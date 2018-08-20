@@ -5,7 +5,7 @@
 
 void W5500Routin(void * param)
 {
-	debug_printf("hello \n");
+	//debug_printf("hello \n");
 }
 
 void W5500Test()

@@ -29,7 +29,7 @@ TSys::TSys()
 #endif 
 
 	this->Config = &g_Config;
-	
+
 	this->Name = "stdos";
 	this->Company = "armku";
 	this->Code = 0x0201;
@@ -90,8 +90,8 @@ void TSys::Sleep(int ms)const
 	if (ms)
 	{
 		bool cancel = false;
-		
-		int executems = Task::Scheduler()->ExecuteForWait(ms, cancel);		
+
+		int executems = Task::Scheduler()->ExecuteForWait(ms, cancel);
 		if (executems >= ms)
 			return;
 		ms -= executems;
@@ -416,14 +416,14 @@ void TSys::OnShowInfo()const
 	}
 
 	debug_printf("STDOS::");
-	debug_printf("%s %dMHz Flash:%dk RAM:%dk\n", CPUName, this->Clock/1000000, this->FlashSize, this->RAMSize);
+	debug_printf("%s %dMHz Flash:%dk RAM:%dk\n", CPUName, this->Clock / 1000000, this->FlashSize, this->RAMSize);
 	debug_printf("DevID:0x%04X RevID:0x%04X \n", this->DevID, this->RevID);
 	debug_printf("CPUID:%p", this->CPUID);
 	debug_printf(" ARMv7-M Cortex-M3:");
 	debug_printf(" R%dp%d\n", Rx, Px);
-	debug_printf("Heap :(%p, %p) = 0X%x (%dk)\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize /1024);
-	debug_printf("Stack:(%p, %p) = 0X%x (%dk)\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize /1024);
-	debug_printf("RAM Without Heap&Stack:%dK\n", (this->RAMSize - HeapSize/1024 - StackSize/1024));
+	debug_printf("Heap :(%p, %p) = 0X%x (%dk)\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize / 1024);
+	debug_printf("Stack:(%p, %p) = 0X%x (%dk)\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize / 1024);
+	debug_printf("RAM Without Heap&Stack:%dK\n", (this->RAMSize - HeapSize / 1024 - StackSize / 1024));
 
 	debug_printf("ChipType:0x42455633 3\n");
 #elif defined STM32F4
@@ -505,3 +505,41 @@ void TSys::GlobalDisable()
 {
 	__ASM volatile("cpsid i");
 }
+#if 0
+/*定义STM32 MCU的类型*/
+typedef enum {
+	STM32F0,
+	STM32F1,
+	STM32F2,
+	STM32F3,
+	STM32F4,
+	STM32F7,
+	STM32L0,
+	STM32L1,
+	STM32L4,
+	STM32H7,
+}MCUTypedef;
+
+
+uint32_t idAddr[] = { 0x1FFFF7AC,  /*STM32F0唯一ID起始地址*/
+0x1FFFF7E8,  /*STM32F1唯一ID起始地址*/
+0x1FFF7A10,  /*STM32F2唯一ID起始地址*/
+0x1FFFF7AC,  /*STM32F3唯一ID起始地址*/
+0x1FFF7A10,  /*STM32F4唯一ID起始地址*/
+0x1FF0F420,  /*STM32F7唯一ID起始地址*/
+0x1FF80050,  /*STM32L0唯一ID起始地址*/
+0x1FF80050,  /*STM32L1唯一ID起始地址*/
+0x1FFF7590,  /*STM32L4唯一ID起始地址*/
+0x1FF0F420 }; /*STM32H7唯一ID起始地址*/
+
+			  /*获取MCU的唯一ID*/
+void GetSTM32MCUID(uint32_t *id, MCUTypedef type)
+{
+	if (id != NULL)
+	{
+		id[0] = *(uint32_t*)(idAddr[type]);
+		id[1] = *(uint32_t*)(idAddr[type] + 4);
+		id[2] = *(uint32_t*)(idAddr[type] + 8);
+	}
+}
+#endif
