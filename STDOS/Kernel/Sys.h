@@ -127,7 +127,7 @@ public:
 	uint16_t	Checksum;	// 校验
 };
 
-#define STDOS_VERSION "0.0.2018.0820" //版本号
+#define STDOS_VERSION "0.1.2018.0820" //版本号
 
 #endif //_Sys_H_
 
