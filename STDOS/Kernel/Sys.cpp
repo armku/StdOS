@@ -428,8 +428,8 @@ void TSys::OnShowInfo()const
 		break;
 	}
 #endif
-	debug_printf("STDOS::");
-	debug_printf("%s %dMHz Flash:%dk RAM:%dk\n", CPUName, this->Clock, this->FlashSize, this->RAMSize);
+	debug_printf("STDOS VER:%s\n", STDOS_VERSION);
+	debug_printf("CPU:%s %dMHz Flash:%dk RAM:%dk\n", CPUName, this->Clock, this->FlashSize, this->RAMSize);
 	debug_printf("DevID:0x%04X RevID:0x%04X \n", this->DevID, this->RevID);
 	debug_printf("CPUID:%p", this->CPUID);
 	debug_printf(" ARMv7-M");

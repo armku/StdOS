@@ -127,26 +127,7 @@ public:
 	uint16_t	Checksum;	// 校验
 };
 
-uint32_t _REV(uint32_t value);
-uint16_t _REV16(uint16_t value);
-
-// 编译信息兼容性处理
-#ifndef __BUILD_DATE__
-#define __BUILD_DATE__ 6289		// 2017-03-21
-#endif
-#ifndef __BUILD_TIME__
-#define __BUILD_TIME__ 1490054400	// 2017-03-21 00:00:00
-#endif
-#ifndef __BUILD_SDATE__
-#define __BUILD_SDATE__ "170321"
-#endif
-#ifndef __BUILD_STIME__
-#define __BUILD_STIME__ "2017-03-21 00:00:00"
-#endif
-#ifndef __BUILD_USER__
-#define __BUILD_USER__ "Computer_User"
-#endif
-
+#define STDOS_VERSION "0.0.2018.0820" //版本号
 
 #endif //_Sys_H_
 
