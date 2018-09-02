@@ -99,17 +99,6 @@ void BspInit()
 extern uint8_t SendBuff[SENDBUFF_SIZE];
 void dmacom1test()
 {
-	debug_printf("\r\n usart1 DMA TX 测试 \r\n");
-	{
-		uint16_t i;
-
-		/*填充将要发送的数据*/
-		for (i = 0; i<SENDBUFF_SIZE; i++)
-		{
-			SendBuff[i] = 'A';
-		}
-	}
-
 	/* USART1 向 DMA发出TX请求 */
 	USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
 }
