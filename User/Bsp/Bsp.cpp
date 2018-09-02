@@ -82,7 +82,6 @@ void com1rcv()
 }
 void Esp8266TestInit();
 void W5500Test();
-void dmacom1test();
 void BspInit()
 {
 	led1 = 1;
@@ -91,15 +90,4 @@ void BspInit()
 	DeviceConfigCenter::PRcvCOM1 = com1rcv;
 			
 	//W5500Test();
-	dmacom1test();
 }
-#include "stm32f10x.h"
-
-#define            SENDBUFF_SIZE                             5000
-extern uint8_t SendBuff[SENDBUFF_SIZE];
-void dmacom1test()
-{
-	/* USART1 向 DMA发出TX请求 */
-	USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
-}
-

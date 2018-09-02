@@ -247,7 +247,8 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 	{
 		SendBuff[i] = bs[i];
 	}
-
+	/* USART1 向 DMA发出TX请求 */
+	USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
 #elif COM1SENDINTFLAG
 	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
