@@ -249,10 +249,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 	}
 	//DMA发送
 	DMA_InitTypeDef DMA_InitStructure;
-
-	/*开启DMA时钟*/
-	//RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
-
+		
 	/*设置DMA源：串口数据寄存器地址*/
 	//		DMA_InitStructure.DMA_PeripheralBaseAddr = USART1_DR_Base;	  
 	DMA_InitStructure.DMA_PeripheralBaseAddr = (u32)(&(USART1->DR));
@@ -291,15 +288,8 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 	/*配置DMA1的4通道*/
 	DMA_Init(DMA1_Channel4, &DMA_InitStructure);
 
-	/*使能DMA*/
-	//DMA_Cmd(DMA1_Channel4, ENABLE);
 	//DMA_ITConfig(DMA1_Channel4,DMA_IT_TC,ENABLE);  //配置DMA发送完成后产生中断
-
-
-
-
-
-
+	
 	/* USART1 向 DMA发出TX请求 */
 	USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
 #elif COM1SENDINTFLAG
