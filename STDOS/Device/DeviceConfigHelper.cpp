@@ -238,7 +238,9 @@ void DeviceConfigCenter::comSend(COM com, Buffer bs)
 void DeviceConfigCenter::com1send(Buffer& bs)
 {
 #if USECOM1
-#if COM1SENDINTFLAG
+#if COM1TXDMAFLAG
+
+#elif COM1SENDINTFLAG
 	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
