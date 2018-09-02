@@ -115,10 +115,6 @@ extern "C" {
 	static char com1rx[256], com1tx[256];
 	Queue	Txx1;
 	Queue	Rxx1;
-#if COM1TXDMAFLAG
-#define            SENDBUFF_SIZE                             5000
-	uint8_t SendBuff[5000];
-#endif
 #endif
 #if USECOM2
 	static char com2rx[256], com2tx[256];
@@ -245,7 +241,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 #if COM1TXDMAFLAG
 	for (int i = 0; i < bs.Length(); i++)
 	{
-		SendBuff[i] = bs[i];
+		com1tx[i] = bs[i];
 	}
 	//DMA发送
 	DMA_InitTypeDef DMA_InitStructure;
@@ -255,7 +251,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 	DMA_InitStructure.DMA_PeripheralBaseAddr = (u32)(&(USART1->DR));
 
 	/*内存地址(要传输的变量的指针)*/
-	DMA_InitStructure.DMA_MemoryBaseAddr = (u32)SendBuff;
+	DMA_InitStructure.DMA_MemoryBaseAddr = (u32)com1tx;
 
 	/*方向：从内存到外设*/
 	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
