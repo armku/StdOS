@@ -117,7 +117,7 @@ extern "C" {
 	Queue	Rxx1;
 #if COM1TXDMAFLAG
 #define            SENDBUFF_SIZE                             5000
-	uint8_t SendBuff[SENDBUFF_SIZE];
+	uint8_t SendBuff[5000];
 #endif
 #endif
 #if USECOM2
@@ -285,8 +285,13 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 	/*禁止内存到内存的传输	*/
 	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
 
+	/*关闭DMA，否则参数配置无效*/
+	DMA_Cmd(DMA1_Channel4, DISABLE);
 	/*配置DMA1的4通道*/
 	DMA_Init(DMA1_Channel4, &DMA_InitStructure);
+
+	/*使能DMA*/
+	DMA_Cmd(DMA1_Channel4, ENABLE);
 
 	//DMA_ITConfig(DMA1_Channel4,DMA_IT_TC,ENABLE);  //配置DMA发送完成后产生中断
 	
@@ -451,7 +456,7 @@ void DeviceConfigCenter::com1send()
 #elif defined STM32F1
 #if COM1TXDMAFLAG
 	/* USART1 向 DMA发出TX请求 */
-	USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
+	//USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
 #elif COM1SENDINTFLAG
 	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 #endif
@@ -559,7 +564,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
 
 	/*传输大小DMA_BufferSize=SENDBUFF_SIZE*/
-	DMA_InitStructure.DMA_BufferSize = SENDBUFF_SIZE;
+	DMA_InitStructure.DMA_BufferSize = 20;
 
 	/*外设地址不增*/
 	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
