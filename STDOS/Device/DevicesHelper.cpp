@@ -7,7 +7,11 @@ extern "C"
 	{
 
 	}
-
+	void DMA1_Channel4_IRQHandler(void)
+	{
+		//串口1DMA发送完毕中断
+		COM1TXDMACANFLAG = 1;
+	}
 	void USART1_IRQHandler(void)
 	{
 #if USECOM1
