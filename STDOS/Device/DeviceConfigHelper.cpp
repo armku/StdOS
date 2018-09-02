@@ -115,6 +115,10 @@ extern "C" {
 	static char com1rx[256], com1tx[256];
 	Queue	Txx1;
 	Queue	Rxx1;
+#if COM1TXDMAFLAG
+#define            SENDBUFF_SIZE                             5000
+	uint8_t SendBuff[SENDBUFF_SIZE];
+#endif
 #endif
 #if USECOM2
 	static char com2rx[256], com2tx[256];
@@ -239,6 +243,10 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 {
 #if USECOM1
 #if COM1TXDMAFLAG
+	for (int i = 0; i < bs.Length(); i++)
+	{
+		SendBuff[i] = bs[i];
+	}
 
 #elif COM1SENDINTFLAG
 	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
@@ -397,7 +405,12 @@ void DeviceConfigCenter::com1send()
 #if defined STM32F0
 
 #elif defined STM32F1
+#if COM1TXDMAFLAG
+	/* USART1 向 DMA发出TX请求 */
+	USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
+#elif COM1SENDINTFLAG
 	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+#endif
 #elif defined STM32F4
 
 #endif
@@ -444,10 +457,7 @@ void DeviceConfigCenter::com5send()
 
 #endif
 }
-#if COM1TXDMAFLAG
-#define            SENDBUFF_SIZE                             5000
-uint8_t SendBuff[SENDBUFF_SIZE];
-#endif
+
 void DeviceConfigCenter::configCOM1(int baudRate)
 {	
 #if USECOM1
