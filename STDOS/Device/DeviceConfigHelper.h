@@ -25,6 +25,30 @@
 #define COM4RCVIDLEINTFLAG	1//串口4空闲中断接收
 #define COM5RCVIDLEINTFLAG	1//串口5空闲中断接收
 
+#define COM1TXLEN 256
+
+class ComSendBuf 
+{
+public:
+	ComSendBuf();
+	int NextBuf(int curbuf);//下一个使用的缓冲区
+
+	int len;
+	int bufRead;//0-2
+	int bufWrite;//0-2
+	int buf0len;
+	int buf1len;
+	int buf2len;
+	int buf0lenmax;
+	int buf1lenmax;
+	int buf2lenmax;
+	uint8_t buf0[COM1TXLEN];
+	uint8_t buf1[COM1TXLEN];
+	uint8_t buf2[COM1TXLEN];
+};//串口发送缓冲区
+
+extern ComSendBuf Com1SendBuf;//串口1发送缓冲区
+
 typedef enum
 {
 	Rising = 0x01,	// 上升沿

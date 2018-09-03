@@ -2227,4 +2227,22 @@ void Printf(char *Data, ...)
 	//Write(bs);
 }
 #endif
+ComSendBuf::ComSendBuf()
+{
+	this->bufWrite = 0;
+	this->bufRead = 0;
+	this->buf0len = 0;
+	this->buf1len = 0;
+	this->buf2len = 0;
+	this->buf0lenmax = ArrayLength(this->buf0);
+	this->buf1lenmax = ArrayLength(this->buf1);
+	this->buf2lenmax = ArrayLength(this->buf2);
+}
+//下一个使用的缓冲区
+int ComSendBuf::NextBuf(int curbuf)
+{
+	curbuf++;
+	curbuf %= 3;
+	return curbuf;
+}
 
