@@ -40,7 +40,7 @@ public:
 	ComSendBuf();
 	int NextBuf(int curbuf);//下一个使用的缓冲区
 
-	int len;
+	int CanSend;//可以发送数据
 	int bufRead;//0-2
 	int bufWrite;//0-2
 	BufTx buf[3];

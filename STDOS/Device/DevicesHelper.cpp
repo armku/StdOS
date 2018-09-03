@@ -10,7 +10,8 @@ extern "C"
 	void DMA1_Channel4_IRQHandler(void)
 	{
 		//串口1DMA发送完毕中断
-		COM1TXDMACANFLAG = 1;
+		Com1SendBuf.CanSend = 1;
+		Com1SendBuf.buf[Com1SendBuf.bufRead].bufLen = 0;
 	}
 	void USART1_IRQHandler(void)
 	{

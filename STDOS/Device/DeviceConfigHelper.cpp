@@ -245,59 +245,67 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 	{
 		for (int i = 0; i < bs.Length(); i++)
 		{
-			Com1SendBuf.buf[0].buf[i] = bs[i];
+			Com1SendBuf.buf[Com1SendBuf.bufWrite].buf[i] = bs[i];
 		}
-		Com1SendBuf.buf[0].bufLen = bs.Length();
-		//DMA发送
-		DMA_InitTypeDef DMA_InitStructure;
+		Com1SendBuf.buf[Com1SendBuf.bufWrite].bufLen += bs.Length();
+		if (Com1SendBuf.CanSend)
+		{
+			Com1SendBuf.bufRead = Com1SendBuf.bufRead;
+			//DMA发送
+			DMA_InitTypeDef DMA_InitStructure;
 
-		/*设置DMA源：串口数据寄存器地址*/
-		//		DMA_InitStructure.DMA_PeripheralBaseAddr = USART1_DR_Base;	  
-		DMA_InitStructure.DMA_PeripheralBaseAddr = (u32)(&(USART1->DR));
+			/*设置DMA源：串口数据寄存器地址*/
+			//		DMA_InitStructure.DMA_PeripheralBaseAddr = USART1_DR_Base;	  
+			DMA_InitStructure.DMA_PeripheralBaseAddr = (u32)(&(USART1->DR));
 
-		/*内存地址(要传输的变量的指针)*/
-		DMA_InitStructure.DMA_MemoryBaseAddr = (u32)Com1SendBuf.buf[0].buf;
+			/*内存地址(要传输的变量的指针)*/
+			DMA_InitStructure.DMA_MemoryBaseAddr = (u32)Com1SendBuf.buf[Com1SendBuf.bufRead].buf;
 
-		/*方向：从内存到外设*/
-		DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
+			/*方向：从内存到外设*/
+			DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
 
-		/*传输大小DMA_BufferSize=SENDBUFF_SIZE*/
-		DMA_InitStructure.DMA_BufferSize = bs.Length();
+			/*传输大小DMA_BufferSize=SENDBUFF_SIZE*/
+			DMA_InitStructure.DMA_BufferSize = bs.Length();
 
-		/*外设地址不增*/
-		DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+			/*外设地址不增*/
+			DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 
-		/*内存地址自增*/
-		DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+			/*内存地址自增*/
+			DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
 
-		/*外设数据单位*/
-		DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+			/*外设数据单位*/
+			DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
 
-		/*内存数据单位 8bit*/
-		DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+			/*内存数据单位 8bit*/
+			DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
 
-		/*DMA模式：不断循环*/
-		DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
-		//DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
+			/*DMA模式：不断循环*/
+			DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+			//DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
 
-		/*优先级：中*/
-		DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
+			/*优先级：中*/
+			DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
 
-		/*禁止内存到内存的传输	*/
-		DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+			/*禁止内存到内存的传输	*/
+			DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
 
-		/*关闭DMA，否则参数配置无效*/
-		DMA_Cmd(DMA1_Channel4, DISABLE);
-		/*配置DMA1的4通道*/
-		DMA_Init(DMA1_Channel4, &DMA_InitStructure);
+			/*关闭DMA，否则参数配置无效*/
+			DMA_Cmd(DMA1_Channel4, DISABLE);
+			/*配置DMA1的4通道*/
+			DMA_Init(DMA1_Channel4, &DMA_InitStructure);
 
-		/*使能DMA*/
-		DMA_Cmd(DMA1_Channel4, ENABLE);
+			/*使能DMA*/
+			DMA_Cmd(DMA1_Channel4, ENABLE);
 
-		//DMA_ITConfig(DMA1_Channel4,DMA_IT_TC,ENABLE);  //配置DMA发送完成后产生中断
+			//DMA_ITConfig(DMA1_Channel4,DMA_IT_TC,ENABLE);  //配置DMA发送完成后产生中断
 
-		/* USART1 向 DMA发出TX请求 */
-		USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
+			/* USART1 向 DMA发出TX请求 */
+			USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
+
+			
+			Com1SendBuf.bufWrite = Com1SendBuf.NextBuf(Com1SendBuf.bufRead);
+			Com1SendBuf.CanSend = false;
+		}
 
 		COM1TXDMACANFLAG = 0;
 	}
@@ -2233,6 +2241,8 @@ ComSendBuf::ComSendBuf()
 {
 	this->bufWrite = 0;
 	this->bufRead = 0;
+
+	this->CanSend = true;
 
 	for (int i = 0; i < ArrayLength(this->buf); i++)
 	{
