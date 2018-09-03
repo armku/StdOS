@@ -245,9 +245,9 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 	{
 		for (int i = 0; i < bs.Length(); i++)
 		{
-			com1tx[i] = bs[i];
 			Com1SendBuf.buf0[i] = bs[i];
 		}
+		Com1SendBuf.buf0len = bs.Length();
 		//DMA发送
 		DMA_InitTypeDef DMA_InitStructure;
 
@@ -256,7 +256,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 		DMA_InitStructure.DMA_PeripheralBaseAddr = (u32)(&(USART1->DR));
 
 		/*内存地址(要传输的变量的指针)*/
-		DMA_InitStructure.DMA_MemoryBaseAddr = (u32)com1tx;
+		DMA_InitStructure.DMA_MemoryBaseAddr = (u32)Com1SendBuf.buf0;
 
 		/*方向：从内存到外设*/
 		DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
