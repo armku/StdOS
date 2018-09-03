@@ -27,6 +27,13 @@
 
 #define COM1TXLEN 256
 
+typedef struct
+{
+	uint8_t buf[COM1TXLEN];
+	int bufLenMax;
+	int bufLen;
+}BufTx;//串口缓冲区
+
 class ComSendBuf 
 {
 public:
@@ -36,15 +43,7 @@ public:
 	int len;
 	int bufRead;//0-2
 	int bufWrite;//0-2
-	int buf0len;
-	int buf1len;
-	int buf2len;
-	int buf0lenmax;
-	int buf1lenmax;
-	int buf2lenmax;
-	uint8_t buf0[COM1TXLEN];
-	uint8_t buf1[COM1TXLEN];
-	uint8_t buf2[COM1TXLEN];
+	BufTx buf[3];
 };//串口发送缓冲区
 
 extern ComSendBuf Com1SendBuf;//串口1发送缓冲区

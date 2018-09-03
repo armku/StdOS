@@ -245,9 +245,9 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 	{
 		for (int i = 0; i < bs.Length(); i++)
 		{
-			Com1SendBuf.buf0[i] = bs[i];
+			Com1SendBuf.buf[0].buf[i] = bs[i];
 		}
-		Com1SendBuf.buf0len = bs.Length();
+		Com1SendBuf.buf[0].bufLen = bs.Length();
 		//DMA发送
 		DMA_InitTypeDef DMA_InitStructure;
 
@@ -256,7 +256,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 		DMA_InitStructure.DMA_PeripheralBaseAddr = (u32)(&(USART1->DR));
 
 		/*内存地址(要传输的变量的指针)*/
-		DMA_InitStructure.DMA_MemoryBaseAddr = (u32)Com1SendBuf.buf0;
+		DMA_InitStructure.DMA_MemoryBaseAddr = (u32)Com1SendBuf.buf[0].buf;
 
 		/*方向：从内存到外设*/
 		DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
@@ -2233,12 +2233,12 @@ ComSendBuf::ComSendBuf()
 {
 	this->bufWrite = 0;
 	this->bufRead = 0;
-	this->buf0len = 0;
-	this->buf1len = 0;
-	this->buf2len = 0;
-	this->buf0lenmax = ArrayLength(this->buf0);
-	this->buf1lenmax = ArrayLength(this->buf1);
-	this->buf2lenmax = ArrayLength(this->buf2);
+
+	for (int i = 0; i < ArrayLength(this->buf); i++)
+	{
+		this->buf[i].bufLenMax = ArrayLength(this->buf[i].buf);
+		this->buf[i].bufLen = 0;
+	}
 }
 //下一个使用的缓冲区
 int ComSendBuf::NextBuf(int curbuf)
