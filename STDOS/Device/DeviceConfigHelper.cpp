@@ -2,6 +2,7 @@
 #include "Port.h"
 #include "Platform\stm32.h"
 
+ComSendBuf Com1SendBuf;//串口1发送缓冲区
 //中断
 
 Func DeviceConfigCenter::PExit0 = 0;
@@ -245,6 +246,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 		for (int i = 0; i < bs.Length(); i++)
 		{
 			com1tx[i] = bs[i];
+			Com1SendBuf.buf0[i] = bs[i];
 		}
 		//DMA发送
 		DMA_InitTypeDef DMA_InitStructure;
