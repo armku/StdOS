@@ -2,7 +2,6 @@
 #include "Port.h"
 #include "Platform\stm32.h"
 
-ComSendBuf Com1SendBuf;//串口1发送缓冲区
 //中断
 
 Func DeviceConfigCenter::PExit0 = 0;
@@ -240,14 +239,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 {
 #if USECOM1
 #if COM1TXDMAFLAG	
-	for (int i = 0; i < bs.Length(); i++)
-	{
-		Com1SendBuf.buf[Com1SendBuf.bufWrite].buf[i] = bs[i];
-	}
-	Com1SendBuf.buf[Com1SendBuf.bufWrite].bufLen += bs.Length();
-	if (Com1SendBuf.CanSend)
-	{
-		Com1SendBuf.bufRead = Com1SendBuf.bufRead;
+	Txx1.Write(bs);
 		//DMA发送
 		DMA_InitTypeDef DMA_InitStructure;
 
@@ -256,7 +248,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 		DMA_InitStructure.DMA_PeripheralBaseAddr = (u32)(&(USART1->DR));
 
 		/*内存地址(要传输的变量的指针)*/
-		DMA_InitStructure.DMA_MemoryBaseAddr = (u32)Com1SendBuf.buf[Com1SendBuf.bufRead].buf;
+		DMA_InitStructure.DMA_MemoryBaseAddr = (u32)com1tx;
 
 		/*方向：从内存到外设*/
 		DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
@@ -298,11 +290,6 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 
 		/* USART1 向 DMA发出TX请求 */
 		USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
-
-
-		Com1SendBuf.bufWrite = Com1SendBuf.NextBuf(Com1SendBuf.bufRead);
-		Com1SendBuf.CanSend = false;
-	}
 #elif COM1SENDINTFLAG
 	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
@@ -2230,24 +2217,3 @@ void Printf(char *Data, ...)
 	//Write(bs);
 }
 #endif
-ComSendBuf::ComSendBuf()
-{
-	this->bufWrite = 0;
-	this->bufRead = 0;
-
-	this->CanSend = true;
-
-	for (int i = 0; i < ArrayLength(this->buf); i++)
-	{
-		this->buf[i].bufLenMax = ArrayLength(this->buf[i].buf);
-		this->buf[i].bufLen = 0;
-	}
-}
-//下一个使用的缓冲区
-int ComSendBuf::NextBuf(int curbuf)
-{
-	curbuf++;
-	curbuf %= 3;
-	return curbuf;
-}
-
