@@ -116,7 +116,6 @@ extern "C" {
 	static char com1rx[256], com1tx[256];
 	Queue	Txx1;
 	Queue	Rxx1;
-	uint32_t COM1TXDMACANFLAG;//串口1DMA可以发送标记
 #endif
 #if USECOM2
 	static char com2rx[256], com2tx[256];
@@ -240,74 +239,69 @@ void DeviceConfigCenter::comSend(COM com, Buffer bs)
 void DeviceConfigCenter::com1send(Buffer& bs)
 {
 #if USECOM1
-#if COM1TXDMAFLAG
-	if (COM1TXDMACANFLAG)
+#if COM1TXDMAFLAG	
+	for (int i = 0; i < bs.Length(); i++)
 	{
-		for (int i = 0; i < bs.Length(); i++)
-		{
-			Com1SendBuf.buf[Com1SendBuf.bufWrite].buf[i] = bs[i];
-		}
-		Com1SendBuf.buf[Com1SendBuf.bufWrite].bufLen += bs.Length();
-		if (Com1SendBuf.CanSend)
-		{
-			Com1SendBuf.bufRead = Com1SendBuf.bufRead;
-			//DMA发送
-			DMA_InitTypeDef DMA_InitStructure;
+		Com1SendBuf.buf[Com1SendBuf.bufWrite].buf[i] = bs[i];
+	}
+	Com1SendBuf.buf[Com1SendBuf.bufWrite].bufLen += bs.Length();
+	if (Com1SendBuf.CanSend)
+	{
+		Com1SendBuf.bufRead = Com1SendBuf.bufRead;
+		//DMA发送
+		DMA_InitTypeDef DMA_InitStructure;
 
-			/*设置DMA源：串口数据寄存器地址*/
-			//		DMA_InitStructure.DMA_PeripheralBaseAddr = USART1_DR_Base;	  
-			DMA_InitStructure.DMA_PeripheralBaseAddr = (u32)(&(USART1->DR));
+		/*设置DMA源：串口数据寄存器地址*/
+		//		DMA_InitStructure.DMA_PeripheralBaseAddr = USART1_DR_Base;	  
+		DMA_InitStructure.DMA_PeripheralBaseAddr = (u32)(&(USART1->DR));
 
-			/*内存地址(要传输的变量的指针)*/
-			DMA_InitStructure.DMA_MemoryBaseAddr = (u32)Com1SendBuf.buf[Com1SendBuf.bufRead].buf;
+		/*内存地址(要传输的变量的指针)*/
+		DMA_InitStructure.DMA_MemoryBaseAddr = (u32)Com1SendBuf.buf[Com1SendBuf.bufRead].buf;
 
-			/*方向：从内存到外设*/
-			DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
+		/*方向：从内存到外设*/
+		DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
 
-			/*传输大小DMA_BufferSize=SENDBUFF_SIZE*/
-			DMA_InitStructure.DMA_BufferSize = bs.Length();
+		/*传输大小DMA_BufferSize=SENDBUFF_SIZE*/
+		DMA_InitStructure.DMA_BufferSize = bs.Length();
 
-			/*外设地址不增*/
-			DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+		/*外设地址不增*/
+		DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 
-			/*内存地址自增*/
-			DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+		/*内存地址自增*/
+		DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
 
-			/*外设数据单位*/
-			DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+		/*外设数据单位*/
+		DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
 
-			/*内存数据单位 8bit*/
-			DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+		/*内存数据单位 8bit*/
+		DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
 
-			/*DMA模式：不断循环*/
-			DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
-			//DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
+		/*DMA模式：不断循环*/
+		DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+		//DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
 
-			/*优先级：中*/
-			DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
+		/*优先级：中*/
+		DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
 
-			/*禁止内存到内存的传输	*/
-			DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+		/*禁止内存到内存的传输	*/
+		DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
 
-			/*关闭DMA，否则参数配置无效*/
-			DMA_Cmd(DMA1_Channel4, DISABLE);
-			/*配置DMA1的4通道*/
-			DMA_Init(DMA1_Channel4, &DMA_InitStructure);
+		/*关闭DMA，否则参数配置无效*/
+		DMA_Cmd(DMA1_Channel4, DISABLE);
+		/*配置DMA1的4通道*/
+		DMA_Init(DMA1_Channel4, &DMA_InitStructure);
 
-			/*使能DMA*/
-			DMA_Cmd(DMA1_Channel4, ENABLE);
+		/*使能DMA*/
+		DMA_Cmd(DMA1_Channel4, ENABLE);
 
-			//DMA_ITConfig(DMA1_Channel4,DMA_IT_TC,ENABLE);  //配置DMA发送完成后产生中断
+		//DMA_ITConfig(DMA1_Channel4,DMA_IT_TC,ENABLE);  //配置DMA发送完成后产生中断
 
-			/* USART1 向 DMA发出TX请求 */
-			USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
+		/* USART1 向 DMA发出TX请求 */
+		USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
 
-			
-			Com1SendBuf.bufWrite = Com1SendBuf.NextBuf(Com1SendBuf.bufRead);
-			Com1SendBuf.CanSend = false;
-		}
 
-		COM1TXDMACANFLAG = 0;
+		Com1SendBuf.bufWrite = Com1SendBuf.NextBuf(Com1SendBuf.bufRead);
+		Com1SendBuf.CanSend = false;
 	}
 #elif COM1SENDINTFLAG
 	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
@@ -560,7 +554,6 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 
 #if COM1TXDMAFLAG
 	//DMA发送
-	COM1TXDMACANFLAG = 1;
 	/*开启DMA时钟*/
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 

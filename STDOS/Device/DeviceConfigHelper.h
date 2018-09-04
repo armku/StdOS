@@ -175,7 +175,6 @@ extern "C" {
 #ifdef USECOM1
 	extern Queue	Txx1;
 	extern Queue	Rxx1;
-	extern uint32_t COM1TXDMACANFLAG;//串口1DMA可以发送标记
 #endif // USECOM1
 
 #ifdef USECOM2
