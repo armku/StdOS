@@ -265,7 +265,6 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 	Txx1.Write(bs);
 
 	USART1_SendDMA((uint8_t*)com1tx,bs.Length());
-	USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
 #elif COM1SENDINTFLAG
 	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
@@ -521,6 +520,8 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 
 	DMA_ITConfig(DMA1_Channel4,DMA_IT_TC,ENABLE);  //配置DMA发送完成后产生中断
+
+	USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
 
 	NVIC_InitTypeDef NVIC_InitStruct;
 
