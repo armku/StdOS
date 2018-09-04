@@ -240,6 +240,8 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 #if USECOM1
 #if COM1TXDMAFLAG	
 	Txx1.Write(bs);
+	if (DMA_GetFlagStatus(DMA1_FLAG_TC4) == FlagStatus::RESET)
+	{
 		//DMA发送
 		DMA_InitTypeDef DMA_InitStructure;
 
@@ -290,6 +292,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 
 		/* USART1 向 DMA发出TX请求 */
 		USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
+	}
 #elif COM1SENDINTFLAG
 	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
