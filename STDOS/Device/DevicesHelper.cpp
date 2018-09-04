@@ -9,7 +9,33 @@ extern "C"
 	}
 	void DMA1_Channel4_IRQHandler(void)
 	{
-		//串口1DMA发送完毕中断
+		if (DMA_GetITStatus(DMA1_IT_TC4))
+		{
+			//TODO:Add code here
+			DMA_ClearITPendingBit(DMA1_IT_TC4);
+		}
+	}
+	int using_buf0;
+	int recv_flag;
+	uint8_t RxBuf0[100];
+	uint8_t RxBuf1[100];
+	void DMA1_Channel5_IRQHandler()
+	{
+		if (DMA_GetITStatus(DMA1_IT_TC5))
+		{
+			if (using_buf0 == 0)
+			{
+				DMA1_Channel5->CMAR = (u32)RxBuf0;
+				using_buf0 = 1;
+			}
+			else
+			{
+				DMA1_Channel5->CMAR = (u32)RxBuf1;
+				using_buf0 = 0;
+			}
+			recv_flag = 1;
+			DMA_ClearITPendingBit(DMA1_IT_TC5);
+		}
 	}
 	void USART1_IRQHandler(void)
 	{
