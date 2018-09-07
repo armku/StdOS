@@ -257,6 +257,50 @@ void USART1_SendDMA(uint8_t* buf, int len)
 
 	DMA_Cmd(DMA1_Channel4, ENABLE);
 }
+void USART2_SendDMA(uint8_t* buf, int len)
+{
+	DMA_InitTypeDef DMA_InitStruct;
+	DMA_ITConfig(DMA1_Channel7, DMA_IT_TC, ENABLE);
+
+	DMA_Cmd(DMA1_Channel7, DISABLE);
+
+	DMA_InitStruct.DMA_PeripheralBaseAddr = (u32)(&USART1->DR);
+	DMA_InitStruct.DMA_MemoryBaseAddr = (u32)buf;
+	DMA_InitStruct.DMA_DIR = DMA_DIR_PeripheralDST;
+	DMA_InitStruct.DMA_BufferSize = len;
+	DMA_InitStruct.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+	DMA_InitStruct.DMA_MemoryInc = DMA_MemoryInc_Enable;
+	DMA_InitStruct.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+	DMA_InitStruct.DMA_MemoryDataSize = DMA_PeripheralDataSize_Byte;
+	DMA_InitStruct.DMA_Mode = DMA_Mode_Normal;
+	DMA_InitStruct.DMA_Priority = DMA_Priority_VeryHigh;
+	DMA_InitStruct.DMA_M2M = DMA_M2M_Disable;
+	DMA_Init(DMA1_Channel7, &DMA_InitStruct);
+
+	DMA_Cmd(DMA1_Channel7, ENABLE);
+}
+void USART3_SendDMA(uint8_t* buf, int len)
+{
+	DMA_InitTypeDef DMA_InitStruct;
+	DMA_ITConfig(DMA1_Channel2, DMA_IT_TC, ENABLE);
+
+	DMA_Cmd(DMA1_Channel2, DISABLE);
+
+	DMA_InitStruct.DMA_PeripheralBaseAddr = (u32)(&USART1->DR);
+	DMA_InitStruct.DMA_MemoryBaseAddr = (u32)buf;
+	DMA_InitStruct.DMA_DIR = DMA_DIR_PeripheralDST;
+	DMA_InitStruct.DMA_BufferSize = len;
+	DMA_InitStruct.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+	DMA_InitStruct.DMA_MemoryInc = DMA_MemoryInc_Enable;
+	DMA_InitStruct.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+	DMA_InitStruct.DMA_MemoryDataSize = DMA_PeripheralDataSize_Byte;
+	DMA_InitStruct.DMA_Mode = DMA_Mode_Normal;
+	DMA_InitStruct.DMA_Priority = DMA_Priority_VeryHigh;
+	DMA_InitStruct.DMA_M2M = DMA_M2M_Disable;
+	DMA_Init(DMA1_Channel2, &DMA_InitStruct);
+
+	DMA_Cmd(DMA1_Channel2, ENABLE);
+}
 void DeviceConfigCenter::com1send(Buffer& bs)
 {
 #if USECOM1
