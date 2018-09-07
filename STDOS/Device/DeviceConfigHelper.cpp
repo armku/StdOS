@@ -696,6 +696,34 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
+
+#if COM2TXDMAFLAG
+	//DMA发送
+	/*开启DMA时钟*/
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+
+	DMA_ITConfig(DMA1_Channel7, DMA_IT_TC, ENABLE);  //配置DMA发送完成后产生中断
+
+	USART_DMACmd(USART2, USART_DMAReq_Tx, ENABLE);
+
+	NVIC_InitTypeDef NVIC_InitStruct;
+
+	DMA_ITConfig(DMA1_Channel7, DMA_IT_TC, ENABLE);
+	NVIC_InitStruct.NVIC_IRQChannel = DMA1_Channel5_IRQn;
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStruct);
+
+	//ENABLE DMA TX ISR
+	DMA_ITConfig(DMA1_Channel7, DMA_IT_TC, ENABLE);
+	NVIC_InitStruct.NVIC_IRQChannel = DMA1_Channel4_IRQn;
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 2;
+	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStruct);
+#endif // COM1TXDMAFLAG
+
 	/* 使能串口2接收中断 */
 	USART_ITConfig(USART2, USART_IT_RXNE, ENABLE); // 串口接收中断配置
 #if COM2RCVIDLEINTFLAG
@@ -802,6 +830,34 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	NVIC_Init(&NVIC_InitStructure);
 	/* 使能串口3接收中断 */
 	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE); // 串口接收中断配置
+
+#if COM3TXDMAFLAG
+												   //DMA发送
+												   /*开启DMA时钟*/
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+
+	DMA_ITConfig(DMA1_Channel2, DMA_IT_TC, ENABLE);  //配置DMA发送完成后产生中断
+
+	USART_DMACmd(USART3, USART_DMAReq_Tx, ENABLE);
+
+	NVIC_InitTypeDef NVIC_InitStruct;
+
+	DMA_ITConfig(DMA1_Channel2, DMA_IT_TC, ENABLE);
+	NVIC_InitStruct.NVIC_IRQChannel = DMA1_Channel5_IRQn;
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStruct);
+
+	//ENABLE DMA TX ISR
+	DMA_ITConfig(DMA1_Channel2, DMA_IT_TC, ENABLE);
+	NVIC_InitStruct.NVIC_IRQChannel = DMA1_Channel4_IRQn;
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 2;
+	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStruct);
+#endif // COM1TXDMAFLAG
+
 #if COM3RCVIDLEINTFLAG
 	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
