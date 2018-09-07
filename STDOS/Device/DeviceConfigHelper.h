@@ -18,6 +18,8 @@
 #define COM5SENDINTFLAG	1//串口5中断发送
 
 #define COM1TXDMAFLAG 1 //串口1DMA发送
+#define COM2TXDMAFLAG 1 //串口2DMA发送
+#define COM3TXDMAFLAG 1 //串口3DMA发送
 
 #define COM1RCVIDLEINTFLAG	1//串口1空闲中断接收
 #define COM2RCVIDLEINTFLAG	1//串口2空闲中断接收

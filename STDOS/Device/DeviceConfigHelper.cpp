@@ -340,7 +340,12 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 void DeviceConfigCenter::com2send(Buffer& bs)
 {
 #if USECOM2
-#if COM2SENDINTFLAG
+#if COM1TXDMAFLAG			
+	Txx2.Clear();
+	Txx2.Write(bs);
+
+	USART2_SendDMA((uint8_t*)com2tx, bs.Length());
+#elif COM1SENDINTFLAG
 	while (bs.Length() > Txx2.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
@@ -371,7 +376,12 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 void DeviceConfigCenter::com3send(Buffer& bs)
 {
 #if USECOM3
-#if COM3SENDINTFLAG
+#if COM3TXDMAFLAG			
+	Txx3.Clear();
+	Txx3.Write(bs);
+
+	USART3_SendDMA((uint8_t*)com3tx, bs.Length());
+#elif COM1SENDINTFLAG
 	while (bs.Length() > Txx3.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
