@@ -87,19 +87,7 @@ public:
 	static Func PRcvCOM3;
 	static Func PRcvCOM4;
 	static Func PRcvCOM5;
-
-	static int RX1BUFLEN;//串口1接收缓冲区长度
-	static int RX2BUFLEN;//串口2接收缓冲区长度
-	static int RX3BUFLEN;//串口3接收缓冲区长度
-	static int RX4BUFLEN;//串口4接收缓冲区长度
-	static int RX5BUFLEN;//串口5接收缓冲区长度
-
-	static int TX1BUFLEN;//串口1发送缓冲区长度
-	static int TX2BUFLEN;//串口2发送缓冲区长度
-	static int TX3BUFLEN;//串口3发送缓冲区长度
-	static int TX4BUFLEN;//串口4发送缓冲区长度
-	static int TX5BUFLEN;//串口5发送缓冲区长度
-	
+			
 	static int RcvLastTimeCOM1;//串口1最后接收数据时间
 	static int RcvLastTimeCOM2;//串口2最后接收数据时间
 	static int RcvLastTimeCOM3;//串口3最后接收数据时间
@@ -161,12 +149,24 @@ private:
 	static void Com4RcvRoutin(void *param);//串口1接收判断
 	static void Com5RcvRoutin(void *param);//串口1接收判断
 	//定时器
-
 };
 #ifdef __cplusplus
 extern "C" {
 #endif
+	extern int OS_BUFLEN_TX1;	//串口1发送缓冲区长度
+	extern int OS_BUFLEN_RX1;	//串口1接收缓冲区长度
 
+	extern int OS_BUFLEN_TX2;	//串口2发送缓冲区长度
+	extern int OS_BUFLEN_RX2;	//串口2接收缓冲区长度
+
+	extern int OS_BUFLEN_TX3;	//串口3发送缓冲区长度
+	extern int OS_BUFLEN_RX3;	//串口3接收缓冲区长度
+
+	extern int OS_BUFLEN_TX4;	//串口4发送缓冲区长度
+	extern int OS_BUFLEN_RX4;	//串口4接收缓冲区长度
+
+	extern int OS_BUFLEN_TX5;	//串口5发送缓冲区长度
+	extern int OS_BUFLEN_RX5;	//串口5接收缓冲区长度
 #ifdef USECOM1
 	extern Queue	Txx1;
 	extern Queue	Rxx1;

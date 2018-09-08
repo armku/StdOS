@@ -111,6 +111,20 @@ int DeviceConfigCenter::RcvLastTimeCOM5 = 0;//串口1最后接收数据时间
 #ifdef __cplusplus
 extern "C" {
 #endif
+	int OS_BUFLEN_TX1;	//串口1发送缓冲区长度
+	int OS_BUFLEN_RX1;	//串口1接收缓冲区长度
+
+	int OS_BUFLEN_TX2;	//串口2发送缓冲区长度
+	int OS_BUFLEN_RX2;	//串口2接收缓冲区长度
+
+	int OS_BUFLEN_TX3;	//串口3发送缓冲区长度
+	int OS_BUFLEN_RX3;	//串口3接收缓冲区长度
+
+	int OS_BUFLEN_TX4;	//串口4发送缓冲区长度
+	int OS_BUFLEN_RX4;	//串口4接收缓冲区长度
+
+	int OS_BUFLEN_TX5;	//串口5发送缓冲区长度
+	int OS_BUFLEN_RX5;	//串口5接收缓冲区长度
 #if USECOM1
 	static char com1rx[256], com1tx[256];
 	Queue	Txx1;
@@ -534,6 +548,9 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 #if USECOM1
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
+
+	OS_BUFLEN_RX1 = ArrayLength(com1rx);
+	OS_BUFLEN_TX1 = ArrayLength(com1tx);
 #if defined STM32F0
 
 #elif defined STM32F1	
