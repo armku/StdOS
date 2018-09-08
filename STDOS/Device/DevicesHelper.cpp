@@ -48,10 +48,10 @@ extern "C"
 	{
 #if USECOM1
 
-#if COM1RXDMAFLAG
-		int Usart1_Rec_Cnt;		
+#if COM1RXDMAFLAG			
 		if (USART_GetITStatus(USART1, USART_IT_IDLE) != RESET)  //接收中断(接收到的数据必须是0x0d 0x0a结尾)
 		{
+			int Usart1_Rec_Cnt;
 			USART_ReceiveData(USART1);//读取数据 注意：这句必须要，否则不能够清除中断标志位。我也不知道为啥！
 			Usart1_Rec_Cnt = 256 - DMA_GetCurrDataCounter(DMA1_Channel5);	//算出接本帧数据长度
 
