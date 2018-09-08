@@ -48,12 +48,15 @@ extern "C"
 	{
 #if USECOM1
 		volatile uint8_t ch;
+#if COM1RXDMAFLAG
+#else
 		if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
 		{
 			ch = USART_ReceiveData(USART1);
 			Rxx1.Enqueue(ch);
 			DeviceConfigCenter::RcvLastTimeCOM1 = Sys.Ms();
 		}
+#endif
 		if (USART_GetITStatus(USART1, USART_IT_IDLE) == SET)
 		{
 			USART_ReceiveData(USART1);//读取数据 注意：这句必须要，否则不能够清除中断标志位。我也不知道为啥！
