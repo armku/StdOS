@@ -566,7 +566,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	NVIC_Init(&NVIC_InitStructure);
 
 	/* 使能串口1接收中断 */
-	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // 串口接收中断配置
+	//USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // 串口接收中断配置
 
 #if COM1TXDMAFLAG
 	//DMA发送
