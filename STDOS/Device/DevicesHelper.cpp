@@ -47,6 +47,25 @@ extern "C"
 	void USART1_IRQHandler(void)
 	{
 #if USECOM1
+
+#if COM1RXDMAFLAG
+		int Usart1_Rec_Cnt;
+		int DMA_Rec_Len;
+		if (USART_GetITStatus(USART1, USART_IT_IDLE) != RESET)  //接收中断(接收到的数据必须是0x0d 0x0a结尾)
+		{
+			USART_ReceiveData(USART1);//读取数据 注意：这句必须要，否则不能够清除中断标志位。我也不知道为啥！
+			Usart1_Rec_Cnt = DMA_Rec_Len - DMA_GetCurrDataCounter(DMA1_Channel5);	//算出接本帧数据长度
+
+																					//***********帧数据处理函数************//
+			debug_printf("The lenght:%d\r\n", Usart1_Rec_Cnt);
+			debug_printf("The data:\r\n");
+			//Usart1_Send(DMA_Rece_Buf, Usart1_Rec_Cnt);
+			debug_printf("\r\nOver! \r\n");
+			//*************************************//
+			USART_ClearITPendingBit(USART1, USART_IT_IDLE);         //清除中断标志
+			MYDMA_Enable(DMA1_Channel5);                   //恢复DMA指针，等待下一次的接收
+		}
+#else
 		volatile uint8_t ch;
 		if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
 		{
@@ -101,23 +120,6 @@ extern "C"
 				/* 如果发送FIFO的数据还未完毕，则从发送FIFO取1个数据写入发送数据寄存器 */
 				USART_SendData(USART1, Txx1.Dequeue());
 			}
-		}
-#if COM1RXDMAFLAG
-		int Usart1_Rec_Cnt;
-		int DMA_Rec_Len;
-		if (USART_GetITStatus(USART1, USART_IT_IDLE) != RESET)  //接收中断(接收到的数据必须是0x0d 0x0a结尾)
-		{
-			USART_ReceiveData(USART1);//读取数据 注意：这句必须要，否则不能够清除中断标志位。我也不知道为啥！
-			Usart1_Rec_Cnt = DMA_Rec_Len - DMA_GetCurrDataCounter(DMA1_Channel5);	//算出接本帧数据长度
-
-																					//***********帧数据处理函数************//
-			debug_printf("The lenght:%d\r\n", Usart1_Rec_Cnt);
-			debug_printf("The data:\r\n");
-			//Usart1_Send(DMA_Rece_Buf, Usart1_Rec_Cnt);
-			debug_printf("\r\nOver! \r\n");
-			//*************************************//
-			USART_ClearITPendingBit(USART1, USART_IT_IDLE);         //清除中断标志
-			MYDMA_Enable(DMA1_Channel5);                   //恢复DMA指针，等待下一次的接收
 		}
 #endif
 #endif
