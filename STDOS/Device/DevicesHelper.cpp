@@ -56,7 +56,7 @@ extern "C"
 			USART_ReceiveData(USART1);//读取数据 注意：这句必须要，否则不能够清除中断标志位。我也不知道为啥！
 			Usart1_Rec_Cnt = DMA_Rec_Len - DMA_GetCurrDataCounter(DMA1_Channel5);	//算出接本帧数据长度
 
-																					//***********帧数据处理函数************//
+			//***********帧数据处理函数************//
 			debug_printf("The lenght:%d\r\n", Usart1_Rec_Cnt);
 			debug_printf("The data:\r\n");
 			//Usart1_Send(DMA_Rece_Buf, Usart1_Rec_Cnt);
