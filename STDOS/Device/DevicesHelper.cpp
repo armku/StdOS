@@ -56,30 +56,23 @@ extern "C"
 		}
 		if (USART_GetITStatus(USART1, USART_IT_IDLE) == SET)
 		{
-#if COM1RXDMAFLAG			
-			if (USART_GetITStatus(USART1, USART_IT_IDLE) != RESET)  //接收中断(接收到的数据必须是0x0d 0x0a结尾)
-			{
-				int Usart1_Rec_Cnt;
-				USART_ReceiveData(USART1);//读取数据 注意：这句必须要，否则不能够清除中断标志位。我也不知道为啥！
-				Usart1_Rec_Cnt = 256 - DMA_GetCurrDataCounter(DMA1_Channel5);	//算出接本帧数据长度
-
-																				//***********帧数据处理函数************//
-				debug_printf("The lenght:%d\r\n", Usart1_Rec_Cnt);
-				debug_printf("The data:\r\n");
-				//Usart1_Send(DMA_Rece_Buf, Usart1_Rec_Cnt);
-				debug_printf("\r\nOver! \r\n");
-				//*************************************//
-				USART_ClearITPendingBit(USART1, USART_IT_IDLE);         //清除中断标志
-				MYDMA_Enable(DMA1_Channel5);                   //恢复DMA指针，等待下一次的接收
-			}
-#else
-			//数据帧接收完毕
-			ch = USART_ReceiveData(USART1); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)
+			USART_ReceiveData(USART1);//读取数据 注意：这句必须要，否则不能够清除中断标志位。我也不知道为啥！
+#if COM1RXDMAFLAG
+			int Usart1_Rec_Cnt;			
+			Usart1_Rec_Cnt = 256 - DMA_GetCurrDataCounter(DMA1_Channel5);	//算出接本帧数据长度
+			//***********帧数据处理函数************//
+			debug_printf("The lenght:%d\r\n", Usart1_Rec_Cnt);
+			debug_printf("The data:\r\n");
+			//Usart1_Send(DMA_Rece_Buf, Usart1_Rec_Cnt);
+			debug_printf("\r\nOver! \r\n");
+			//*************************************//
+			USART_ClearITPendingBit(USART1, USART_IT_IDLE);         //清除中断标志
+			MYDMA_Enable(DMA1_Channel5);                   //恢复DMA指针，等待下一次的接收						
+#endif
 			if (DeviceConfigCenter::PRcvCOM1)
 			{
 				(*DeviceConfigCenter::PRcvCOM1)();
-			}
-#endif
+		}
 		}
 		/* 处理发送缓冲区空中断 */
 		if (USART_GetITStatus(USART1, USART_IT_TXE) != RESET)
@@ -476,7 +469,7 @@ extern "C"
 		}
 #endif 		
 #endif
-		}		
+	}
 	void TIM2_IRQHandler(void)
 	{
 #ifdef STM32F0
@@ -484,7 +477,7 @@ extern "C"
 		if (DeviceConfigCenter::PTim2Update)
 		{
 			(*DeviceConfigCenter::PTim2Update)();
-		}		
+		}
 #elif defined STM32F1 | defined STM32F4
 		if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
 		{
@@ -712,4 +705,4 @@ extern "C"
 			}
 		}
 	}
-	}
+}
