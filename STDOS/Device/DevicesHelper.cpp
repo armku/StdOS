@@ -116,6 +116,8 @@ extern "C"
 	void USART2_IRQHandler(void)
 	{
 #if USECOM2
+#if COM2RXDMAFLAG
+#else
 		volatile uint8_t ch;
 		if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
 		{
@@ -123,10 +125,11 @@ extern "C"
 			Rxx2.Enqueue(ch);
 			DeviceConfigCenter::RcvLastTimeCOM2 = Sys.Ms();
 		}
+#endif
 		if (USART_GetITStatus(USART2, USART_IT_IDLE) == SET)
 		{
 			//数据帧接收完毕
-			ch = USART_ReceiveData(USART2); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)    
+			USART_ReceiveData(USART2); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)    
 			if (DeviceConfigCenter::PRcvCOM2)
 			{
 				(*DeviceConfigCenter::PRcvCOM2)();
@@ -177,6 +180,8 @@ extern "C"
 	void USART3_IRQHandler(void)
 	{
 #if USECOM3
+#if COM3RXDMAFLAG
+#else
 		volatile uint8_t ch;
 		if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
 		{
@@ -184,10 +189,11 @@ extern "C"
 			Rxx3.Enqueue(ch);
 			DeviceConfigCenter::RcvLastTimeCOM3 = Sys.Ms();
 		}
+#endif
 		if (USART_GetITStatus(USART3, USART_IT_IDLE) == SET)
 		{
 			//数据帧接收完毕
-			ch = USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR) 
+			USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR) 
 			if (DeviceConfigCenter::PRcvCOM3)
 			{
 				(*DeviceConfigCenter::PRcvCOM3)();
@@ -294,12 +300,15 @@ extern "C"
 			}
 		}
 #elif defined STM32F1 | defined STM32F4
+#if COM4RXDMAFLAG
+#else
 		if (USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
 		{
 			ch = USART_ReceiveData(UART4);
 			Rxx4.Enqueue(ch);
 			DeviceConfigCenter::RcvLastTimeCOM4 = Sys.Ms();
 		}
+#endif
 		if (USART_GetITStatus(UART4, USART_IT_IDLE) == SET)
 		{
 			//数据帧接收完毕
@@ -411,12 +420,15 @@ extern "C"
 			}
 		}
 #elif defined STM32F1 | defined STM32F4
+#if COM5RXDMAFLAG
+#else
 		if (USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
 		{
 			ch = USART_ReceiveData(UART5);
 			Rxx5.Enqueue(ch);
 			DeviceConfigCenter::RcvLastTimeCOM5 = Sys.Ms();
 		}
+#endif
 		if (USART_GetITStatus(UART5, USART_IT_IDLE) == SET)
 		{
 			//数据帧接收完毕
