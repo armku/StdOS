@@ -64,7 +64,6 @@ extern "C"
 			int Usart1_Rec_Cnt;			
 			Usart1_Rec_Cnt = 256 - DMA_GetCurrDataCounter(DMA1_Channel5);	//算出接本帧数据长度			
 			Rxx1.SetLength(Usart1_Rec_Cnt);
-			//*************************************//
 			USART_ClearITPendingBit(USART1, USART_IT_IDLE);         //清除中断标志
 			MYDMA_Enable(DMA1_Channel5);                   //恢复DMA指针，等待下一次的接收						
 #endif
