@@ -312,14 +312,22 @@ void USART3_SendDMA(uint8_t* buf, int len)
 
 	DMA_Cmd(DMA1_Channel2, ENABLE);
 }
+uint8_t com1bufff[300];
 void DeviceConfigCenter::com1send(Buffer& bs)
 {
 #if USECOM1
 #if COM1TXDMAFLAG			
-	Txx1.Clear();
 	Txx1.Write(bs);
 	if (DMA_GetFlagStatus(DMA1_FLAG_TC4) == FlagStatus::RESET)
-		USART1_SendDMA((uint8_t*)com1tx, bs.Length());
+	{
+		int len = Txx1.Length();
+		for (int i = 0; i < len; i++)
+		{
+			com1bufff[i] = Txx1.Dequeue();
+		}
+		Txx1.Clear();
+		USART1_SendDMA((uint8_t*)com1bufff, len);
+	}
 #elif COM1SENDINTFLAG
 	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
@@ -351,7 +359,19 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 void DeviceConfigCenter::com2send(Buffer& bs)
 {
 #if USECOM2
-#if COM1TXDMAFLAG			
+#if COM2TXDMAFLAG			
+	Txx2.Write(bs);
+	if (DMA_GetFlagStatus(DMA1_FLAG_TC7) == FlagStatus::RESET)
+	{
+		int len = Txx2.Length();
+		for (int i = 0; i < len; i++)
+		{
+			//com1bufff[i] = Txx2.Dequeue();
+		}
+		Txx2.Clear();
+		//USART2_SendDMA((uint8_t*)com1bufff, len);
+	}
+#elif  COM1TXDMAFLAG			
 	Txx2.Clear();
 	Txx2.Write(bs);
 
@@ -388,6 +408,18 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 {
 #if USECOM3
 #if COM3TXDMAFLAG			
+	Txx3.Write(bs);
+	if (DMA_GetFlagStatus(DMA1_FLAG_TC2) == FlagStatus::RESET)
+	{
+		int len = Txx3.Length();
+		for (int i = 0; i < len; i++)
+		{
+			//com1bufff[i] = Txx3.Dequeue();
+		}
+		Txx3.Clear();
+		//USART3_SendDMA((uint8_t*)com1bufff, len);
+	}
+#elif  COM3TXDMAFLAG			
 	Txx3.Clear();
 	Txx3.Write(bs);
 
