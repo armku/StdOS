@@ -318,8 +318,8 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 #if COM1TXDMAFLAG			
 	Txx1.Clear();
 	Txx1.Write(bs);
-
-	USART1_SendDMA((uint8_t*)com1tx,bs.Length());
+	if (DMA_GetFlagStatus(DMA1_FLAG_TC4) == FlagStatus::RESET)
+		USART1_SendDMA((uint8_t*)com1tx, bs.Length());
 #elif COM1SENDINTFLAG
 	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
