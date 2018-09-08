@@ -76,6 +76,7 @@ void com1rcv()
 	Buffer bs1(chbuf, ArrayLength(chbuf));
 
 	Rxx1.Read(bs1);
+	Rxx1.Clear();
 
 	debug_printf("COM1RCV:\n");
 	bs1.ShowHex(true);
