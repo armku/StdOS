@@ -61,8 +61,9 @@ extern "C"
 		{
 			USART_ReceiveData(USART1);//读取数据 注意：这句必须要，否则不能够清除中断标志位。我也不知道为啥！
 #if COM1RXDMAFLAG
-			OS_BUFLEN_RX1 = 256 - DMA_GetCurrDataCounter(DMA1_Channel5);	//算出接本帧数据长度			
-			Rxx1.SetLength(OS_BUFLEN_RX1);
+			int curlen = 0;
+			curlen = DeviceConfigCenter::BUFLEN_RX1 - DMA_GetCurrDataCounter(DMA1_Channel5);	//算出接本帧数据长度			
+			Rxx1.SetLength(curlen);
 			USART_ClearITPendingBit(USART1, USART_IT_IDLE);         //清除中断标志
 			MYDMA_Enable(DMA1_Channel5);                   //恢复DMA指针，等待下一次的接收						
 #endif

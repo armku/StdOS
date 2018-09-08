@@ -93,6 +93,17 @@ public:
 	static int RcvLastTimeCOM3;//串口3最后接收数据时间
 	static int RcvLastTimeCOM4;//串口4最后接收数据时间
 	static int RcvLastTimeCOM5;//串口5最后接收数据时间
+
+	static int BUFLEN_TX1;	//串口1发送缓冲区长度
+	static int BUFLEN_RX1;	//串口1接收缓冲区长度
+	static int BUFLEN_TX2;	//串口2发送缓冲区长度
+	static int BUFLEN_RX2;	//串口2接收缓冲区长度
+	static int BUFLEN_TX3;	//串口3发送缓冲区长度
+	static int BUFLEN_RX3;	//串口3接收缓冲区长度
+	static int BUFLEN_TX4;	//串口4发送缓冲区长度
+	static int BUFLEN_RX4;	//串口4接收缓冲区长度
+	static int BUFLEN_TX5;	//串口5发送缓冲区长度
+	static int BUFLEN_RX5;	//串口5接收缓冲区长度
 	//定时器
 	static void TimeTickInit();//系统用定时器初始化
 	static void TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);//定时器配置
@@ -152,21 +163,7 @@ private:
 };
 #ifdef __cplusplus
 extern "C" {
-#endif
-	extern int OS_BUFLEN_TX1;	//串口1发送缓冲区长度
-	extern int OS_BUFLEN_RX1;	//串口1接收缓冲区长度
-
-	extern int OS_BUFLEN_TX2;	//串口2发送缓冲区长度
-	extern int OS_BUFLEN_RX2;	//串口2接收缓冲区长度
-
-	extern int OS_BUFLEN_TX3;	//串口3发送缓冲区长度
-	extern int OS_BUFLEN_RX3;	//串口3接收缓冲区长度
-
-	extern int OS_BUFLEN_TX4;	//串口4发送缓冲区长度
-	extern int OS_BUFLEN_RX4;	//串口4接收缓冲区长度
-
-	extern int OS_BUFLEN_TX5;	//串口5发送缓冲区长度
-	extern int OS_BUFLEN_RX5;	//串口5接收缓冲区长度
+#endif	
 #ifdef USECOM1
 	extern Queue	Txx1;
 	extern Queue	Rxx1;
