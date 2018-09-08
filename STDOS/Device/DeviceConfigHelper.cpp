@@ -702,6 +702,8 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 #if USECOM2
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
+	DeviceConfigCenter::BUFLEN_RX2 = ArrayLength(com2rx);
+	DeviceConfigCenter::BUFLEN_TX2 = ArrayLength(com2tx);
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -834,6 +836,8 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 #if USECOM3
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
+	DeviceConfigCenter::BUFLEN_RX3 = ArrayLength(com3rx);
+	DeviceConfigCenter::BUFLEN_TX3 = ArrayLength(com3tx);
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -967,6 +971,8 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 #if USECOM4
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
+	DeviceConfigCenter::BUFLEN_RX4 = ArrayLength(com4rx);
+	DeviceConfigCenter::BUFLEN_TX4 = ArrayLength(com4tx);
 #if defined STM32F0
 
 #elif defined STM32F1 && defined STM32F10X_HD
@@ -1069,6 +1075,8 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 #if USECOM5
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
+	DeviceConfigCenter::BUFLEN_RX5 = ArrayLength(com5rx);
+	DeviceConfigCenter::BUFLEN_TX5 = ArrayLength(com5tx);
 #if defined STM32F0
 
 #elif defined STM32F1 && defined STM32F10X_HD
