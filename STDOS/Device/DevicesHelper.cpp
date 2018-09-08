@@ -60,11 +60,11 @@ extern "C"
 		if (USART_GetITStatus(USART1, USART_IT_IDLE) == SET)
 		{
 			USART_ReceiveData(USART1);//读取数据 注意：这句必须要，否则不能够清除中断标志位。我也不知道为啥！
+			USART_ClearITPendingBit(USART1, USART_IT_IDLE);         //清除中断标志
 #if COM1RXDMAFLAG
 			int curlen = 0;
 			curlen = DeviceConfigCenter::BUFLEN_RX1 - DMA_GetCurrDataCounter(DMA1_Channel5);	//算出接本帧数据长度			
-			Rxx1.SetLength(curlen);
-			USART_ClearITPendingBit(USART1, USART_IT_IDLE);         //清除中断标志
+			Rxx1.SetLength(curlen);			
 			MYDMA_Enable(DMA1_Channel5);                   //恢复DMA指针，等待下一次的接收						
 #endif
 			if (DeviceConfigCenter::PRcvCOM1)
@@ -129,7 +129,14 @@ extern "C"
 		if (USART_GetITStatus(USART2, USART_IT_IDLE) == SET)
 		{
 			//数据帧接收完毕
-			USART_ReceiveData(USART2); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)    
+			USART_ReceiveData(USART2); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)   
+			USART_ClearITPendingBit(USART2, USART_IT_IDLE);         //清除中断标志
+#if COM1RXDMAFLAG
+			int curlen = 0;
+			curlen = DeviceConfigCenter::BUFLEN_RX2 - DMA_GetCurrDataCounter(DMA1_Channel6);	//算出接本帧数据长度			
+			Rxx2.SetLength(curlen);			
+			MYDMA_Enable(DMA1_Channel6);                   //恢复DMA指针，等待下一次的接收						
+#endif
 			if (DeviceConfigCenter::PRcvCOM2)
 			{
 				(*DeviceConfigCenter::PRcvCOM2)();
@@ -194,6 +201,13 @@ extern "C"
 		{
 			//数据帧接收完毕
 			USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR) 
+			USART_ClearITPendingBit(USART3, USART_IT_IDLE);         //清除中断标志
+#if COM1RXDMAFLAG
+			int curlen = 0;
+			curlen = DeviceConfigCenter::BUFLEN_RX3 - DMA_GetCurrDataCounter(DMA1_Channel3);	//算出接本帧数据长度			
+			Rxx1.SetLength(curlen);
+			MYDMA_Enable(DMA1_Channel3);                   //恢复DMA指针，等待下一次的接收						
+#endif
 			if (DeviceConfigCenter::PRcvCOM3)
 			{
 				(*DeviceConfigCenter::PRcvCOM3)();
@@ -312,7 +326,8 @@ extern "C"
 		if (USART_GetITStatus(UART4, USART_IT_IDLE) == SET)
 		{
 			//数据帧接收完毕
-			ch = USART_ReceiveData(UART4); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR) 
+			USART_ReceiveData(UART4); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR) 
+			USART_ClearITPendingBit(UART4, USART_IT_IDLE);         //清除中断标志
 			if (DeviceConfigCenter::PRcvCOM4)
 			{
 				(*DeviceConfigCenter::PRcvCOM4)();
@@ -432,7 +447,8 @@ extern "C"
 		if (USART_GetITStatus(UART5, USART_IT_IDLE) == SET)
 		{
 			//数据帧接收完毕
-			ch = USART_ReceiveData(UART5); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)  
+			USART_ReceiveData(UART5); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)  
+			USART_ClearITPendingBit(UART5, USART_IT_IDLE);         //清除中断标志
 			if (DeviceConfigCenter::PRcvCOM5)
 			{
 				(*DeviceConfigCenter::PRcvCOM5)();

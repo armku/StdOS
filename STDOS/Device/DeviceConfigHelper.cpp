@@ -110,6 +110,14 @@ int DeviceConfigCenter::RcvLastTimeCOM5 = 0;//串口1最后接收数据时间
 
 int DeviceConfigCenter::BUFLEN_TX1 = 0;	//串口1发送缓冲区长度
 int DeviceConfigCenter::BUFLEN_RX1 = 0;	//串口1接收缓冲区长度
+int DeviceConfigCenter::BUFLEN_TX2 = 0;	//串口2发送缓冲区长度
+int DeviceConfigCenter::BUFLEN_RX2 = 0;	//串口2接收缓冲区长度
+int DeviceConfigCenter::BUFLEN_TX3 = 0;	//串口3发送缓冲区长度
+int DeviceConfigCenter::BUFLEN_RX3 = 0;	//串口3接收缓冲区长度
+int DeviceConfigCenter::BUFLEN_TX4 = 0;	//串口4发送缓冲区长度
+int DeviceConfigCenter::BUFLEN_RX4 = 0;	//串口4接收缓冲区长度
+int DeviceConfigCenter::BUFLEN_TX5 = 0;	//串口5发送缓冲区长度
+int DeviceConfigCenter::BUFLEN_RX5 = 0;	//串口5接收缓冲区长度
 
 #ifdef __cplusplus
 extern "C" {
