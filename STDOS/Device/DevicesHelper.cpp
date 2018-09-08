@@ -46,10 +46,10 @@ extern "C"
 	}
 	void USART1_IRQHandler(void)
 	{
-#if USECOM1
-		volatile uint8_t ch;
+#if USECOM1		
 #if COM1RXDMAFLAG
 #else
+		volatile uint8_t ch;
 		if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
 		{
 			ch = USART_ReceiveData(USART1);
