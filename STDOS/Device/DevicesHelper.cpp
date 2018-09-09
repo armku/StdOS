@@ -15,15 +15,15 @@ extern "C"
 			DMA_ClearITPendingBit(DMA1_IT_TC4);
 		}
 	}
-	int using_buf0;
+	/*int using_buf0;
 	int recv_flag;
 	uint8_t RxBuf0[100];
-	uint8_t RxBuf1[100];
+	uint8_t RxBuf1[100];*/
 	void DMA1_Channel5_IRQHandler()
 	{
 		if (DMA_GetITStatus(DMA1_IT_TC5))
 		{
-			if (using_buf0 == 0)
+			/*if (using_buf0 == 0)
 			{
 				DMA1_Channel5->CMAR = (u32)RxBuf0;
 				using_buf0 = 1;
@@ -33,7 +33,7 @@ extern "C"
 				DMA1_Channel5->CMAR = (u32)RxBuf1;
 				using_buf0 = 0;
 			}
-			recv_flag = 1;
+			recv_flag = 1;*/
 			DMA_ClearITPendingBit(DMA1_IT_TC5);
 		}
 	}
