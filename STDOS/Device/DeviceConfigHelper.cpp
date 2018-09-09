@@ -2341,6 +2341,8 @@ void OS_ComSendChk(void *param)
 	if (USART_GetFlagStatus(USART1, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx1.Length();
+		if (len == 0)
+			return;
 		for (int i = 0; i < len; i++)
 		{
 			com1bufff[i] = Txx1.Dequeue();
@@ -2354,6 +2356,8 @@ void OS_ComSendChk(void *param)
 	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx2.Length();
+		if (len == 0)
+			return;
 		for (int i = 0; i < len; i++)
 		{
 			com2bufff[i] = Txx2.Dequeue();
@@ -2367,6 +2371,8 @@ void OS_ComSendChk(void *param)
 	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx3.Length();
+		if (len == 0)
+			return;
 		for (int i = 0; i < len; i++)
 		{
 			com3bufff[i] = Txx3.Dequeue();
@@ -2380,6 +2386,8 @@ void OS_ComSendChk(void *param)
 	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx4.Length();
+		if (len == 0)
+			return;
 		for (int i = 0; i < len; i++)
 		{
 			com4bufff[i] = Txx4.Dequeue();
@@ -2393,6 +2401,8 @@ void OS_ComSendChk(void *param)
 	if (USART_GetFlagStatus(UART5, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx5.Length();
+		if (len == 0)
+			return;
 		for (int i = 0; i < len; i++)
 		{
 			com5bufff[i] = Txx5.Dequeue();
