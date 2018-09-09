@@ -15,7 +15,7 @@ void BspPlatformInit()
 	DeviceConfigCenter::TimeTickInit();//系统用定时器初始化
 	DeviceConfigCenter::PTim2Update = TimeUpdate;
 
-	Sys.AddTask(OS_ComSendChk, 0, 10, 1, "ComSendChk");
+	Sys.AddTask(OS_ComSendChk, 0, 5, 1, "ComSendChk");
 }
 
 int DeviceConfigCenter::CurrentTick()
