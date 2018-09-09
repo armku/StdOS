@@ -10,19 +10,19 @@ extern "C"
 	void DMA1_Channel2_IRQHandler(void)
 	{
 		//USART3_TX
-		if (DMA_GetITStatus(DMA1_IT_TC4))
+		if (DMA_GetITStatus(DMA1_IT_TC2))
 		{
 			//TODO:Add code here
-			DMA_ClearITPendingBit(DMA1_IT_TC4);
+			DMA_ClearITPendingBit(DMA1_IT_TC2);
 		}
 	}
 	void DMA1_Channel3_IRQHandler(void)
 	{
 		//USART3_RX
-		if (DMA_GetITStatus(DMA1_IT_TC4))
+		if (DMA_GetITStatus(DMA1_IT_TC3))
 		{
 			//TODO:Add code here
-			DMA_ClearITPendingBit(DMA1_IT_TC4);
+			DMA_ClearITPendingBit(DMA1_IT_TC3);
 		}
 	}
 	void DMA1_Channel4_IRQHandler(void)
@@ -45,19 +45,19 @@ extern "C"
 	void DMA1_Channel6_IRQHandler(void)
 	{
 		//USART2_RX
-		if (DMA_GetITStatus(DMA1_IT_TC4))
+		if (DMA_GetITStatus(DMA1_IT_TC6))
 		{
 			//TODO:Add code here
-			DMA_ClearITPendingBit(DMA1_IT_TC4);
+			DMA_ClearITPendingBit(DMA1_IT_TC6);
 		}
 	}
 	void DMA1_Channel7_IRQHandler(void)
 	{
 		//USART2_TX
-		if (DMA_GetITStatus(DMA1_IT_TC4))
+		if (DMA_GetITStatus(DMA1_IT_TC7))
 		{
 			//TODO:Add code here
-			DMA_ClearITPendingBit(DMA1_IT_TC4);
+			DMA_ClearITPendingBit(DMA1_IT_TC7);
 		}
 	}
 	//ÖØÐÂ»Ö¸´DMAÖ¸Õë
