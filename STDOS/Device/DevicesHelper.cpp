@@ -7,8 +7,27 @@ extern "C"
 	{
 
 	}
+	void DMA1_Channel2_IRQHandler(void)
+	{
+		//USART3_TX
+		if (DMA_GetITStatus(DMA1_IT_TC4))
+		{
+			//TODO:Add code here
+			DMA_ClearITPendingBit(DMA1_IT_TC4);
+		}
+	}
+	void DMA1_Channel3_IRQHandler(void)
+	{
+		//USART3_RX
+		if (DMA_GetITStatus(DMA1_IT_TC4))
+		{
+			//TODO:Add code here
+			DMA_ClearITPendingBit(DMA1_IT_TC4);
+		}
+	}
 	void DMA1_Channel4_IRQHandler(void)
 	{
+		//USART1_TX
 		if (DMA_GetITStatus(DMA1_IT_TC4))
 		{
 			//TODO:Add code here
@@ -17,9 +36,28 @@ extern "C"
 	}	
 	void DMA1_Channel5_IRQHandler()
 	{
+		//USART1_RX
 		if (DMA_GetITStatus(DMA1_IT_TC5))
 		{			
 			DMA_ClearITPendingBit(DMA1_IT_TC5);
+		}
+	}
+	void DMA1_Channel6_IRQHandler(void)
+	{
+		//USART2_RX
+		if (DMA_GetITStatus(DMA1_IT_TC4))
+		{
+			//TODO:Add code here
+			DMA_ClearITPendingBit(DMA1_IT_TC4);
+		}
+	}
+	void DMA1_Channel7_IRQHandler(void)
+	{
+		//USART2_TX
+		if (DMA_GetITStatus(DMA1_IT_TC4))
+		{
+			//TODO:Add code here
+			DMA_ClearITPendingBit(DMA1_IT_TC4);
 		}
 	}
 	//ÖØÐÂ»Ö¸´DMAÖ¸Õë
