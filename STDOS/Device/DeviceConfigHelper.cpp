@@ -273,6 +273,7 @@ void USART1_SendDMA(uint8_t* buf, int len)
 	DMA_Init(DMA1_Channel4, &DMA_InitStruct);
 
 	DMA_Cmd(DMA1_Channel4, ENABLE);
+	DeviceConfigCenter::FLAG_TX1EN = 0;	//串口1不可以发送
 }
 void USART2_SendDMA(uint8_t* buf, int len)
 {
@@ -295,6 +296,7 @@ void USART2_SendDMA(uint8_t* buf, int len)
 	DMA_Init(DMA1_Channel7, &DMA_InitStruct);
 
 	DMA_Cmd(DMA1_Channel7, ENABLE);
+	DeviceConfigCenter::FLAG_TX2EN = 0;	//串口2不可以发送
 }
 void USART3_SendDMA(uint8_t* buf, int len)
 {
@@ -317,6 +319,7 @@ void USART3_SendDMA(uint8_t* buf, int len)
 	DMA_Init(DMA1_Channel2, &DMA_InitStruct);
 
 	DMA_Cmd(DMA1_Channel2, ENABLE);
+	DeviceConfigCenter::FLAG_TX3EN = 0;	//串口3不可以发送
 }
 uint8_t com1bufff[300];
 void DeviceConfigCenter::com1send(Buffer& bs)
