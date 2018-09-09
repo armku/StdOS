@@ -19,11 +19,11 @@ extern "C"
 	void DMA1_Channel3_IRQHandler(void)
 	{
 		//USART3_RX
-		if (DMA_GetITStatus(DMA1_IT_TC3))
-		{
-			//TODO:Add code here
-			DMA_ClearITPendingBit(DMA1_IT_TC3);
-		}
+		//if (DMA_GetITStatus(DMA1_IT_TC3))
+		//{
+		//	//TODO:Add code here
+		//	DMA_ClearITPendingBit(DMA1_IT_TC3);
+		//}
 	}
 	void DMA1_Channel4_IRQHandler(void)
 	{
@@ -37,19 +37,19 @@ extern "C"
 	void DMA1_Channel5_IRQHandler()
 	{
 		//USART1_RX
-		if (DMA_GetITStatus(DMA1_IT_TC5))
+		/*if (DMA_GetITStatus(DMA1_IT_TC5))
 		{			
 			DMA_ClearITPendingBit(DMA1_IT_TC5);
-		}
+		}*/
 	}
 	void DMA1_Channel6_IRQHandler(void)
 	{
 		//USART2_RX
-		if (DMA_GetITStatus(DMA1_IT_TC6))
-		{
-			//TODO:Add code here
-			DMA_ClearITPendingBit(DMA1_IT_TC6);
-		}
+		//if (DMA_GetITStatus(DMA1_IT_TC6))
+		//{
+		//	//TODO:Add code here
+		//	DMA_ClearITPendingBit(DMA1_IT_TC6);
+		//}
 	}
 	void DMA1_Channel7_IRQHandler(void)
 	{
