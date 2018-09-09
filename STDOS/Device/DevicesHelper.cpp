@@ -54,6 +54,11 @@ extern "C"
 	void DMA1_Channel7_IRQHandler(void)
 	{
 		//USART2_TX
+		if (DMA_GetITStatus(DMA1_IT_HT7))
+		{
+			//∞Î÷–∂œ
+			DMA_ClearITPendingBit(DMA1_IT_HT7);
+		}
 		if (DMA_GetITStatus(DMA1_IT_TC7))
 		{
 			//TODO:Add code here
