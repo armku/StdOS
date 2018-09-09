@@ -313,10 +313,6 @@ void USART3_SendDMA(uint8_t* buf, int len)
 	DMA_Cmd(DMA1_Channel2, ENABLE);
 }
 uint8_t com1bufff[300];
-//extern int using_buf0;
-//extern int recv_flag;
-//extern uint8_t RxBuf0[];
-//extern uint8_t RxBuf1[];
 void DeviceConfigCenter::com1send(Buffer& bs)
 {
 #if USECOM1
@@ -327,11 +323,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 		int len = Txx1.Length();
 		for (int i = 0; i < len; i++)
 		{
-			com1bufff[i] = Txx1.Dequeue();
-			/*if (using_buf0)
-				RxBuf0[i] = com1bufff[i];
-			else
-				RxBuf1[i] = com1bufff[i];*/
+			com1bufff[i] = Txx1.Dequeue();			
 		}
 		Txx1.Clear();
 		USART1_SendDMA((uint8_t*)com1bufff, len);
