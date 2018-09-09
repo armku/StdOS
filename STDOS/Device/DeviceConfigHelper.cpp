@@ -321,7 +321,21 @@ void USART3_SendDMA(uint8_t* buf, int len)
 	DMA_Cmd(DMA1_Channel2, ENABLE);
 	DeviceConfigCenter::FLAG_TX3EN = 0;	//串口3不可以发送
 }
+#if USECOM1
 uint8_t com1bufff[300];
+#endif
+#if USECOM2
+uint8_t com2bufff[300];
+#endif
+#if USECOM3
+uint8_t com3bufff[300];
+#endif
+#if USECOM4
+uint8_t com4bufff[300];
+#endif
+#if USECOM5
+uint8_t com5bufff[300];
+#endif
 void DeviceConfigCenter::com1send(Buffer& bs)
 {
 #if USECOM1
@@ -2333,6 +2347,58 @@ void OS_ComSendChk(void *param)
 		}
 		Txx1.Clear();
 		USART1_SendDMA((uint8_t*)com1bufff, len);
+	}
+#endif
+
+#if USECOM2
+	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
+	{
+		int len = Txx2.Length();
+		for (int i = 0; i < len; i++)
+		{
+			com2bufff[i] = Txx2.Dequeue();
+		}
+		Txx2.Clear();
+		USART2_SendDMA((uint8_t*)com2bufff, len);
+	}
+#endif
+
+#if USECOM2
+	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
+	{
+		int len = Txx3.Length();
+		for (int i = 0; i < len; i++)
+		{
+			com3bufff[i] = Txx3.Dequeue();
+		}
+		Txx3.Clear();
+		USART3_SendDMA((uint8_t*)com3bufff, len);
+	}
+#endif
+
+#if USECOM2
+	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
+	{
+		int len = Txx4.Length();
+		for (int i = 0; i < len; i++)
+		{
+			com4bufff[i] = Txx4.Dequeue();
+		}
+		Txx4.Clear();
+		//UART4_SendDMA((uint8_t*)com4bufff, len);
+	}
+#endif
+
+#if USECOM5
+	if (USART_GetFlagStatus(UART5, USART_FLAG_TXE) != RESET)
+	{
+		int len = Txx5.Length();
+		for (int i = 0; i < len; i++)
+		{
+			com5bufff[i] = Txx5.Dequeue();
+		}
+		Txx5.Clear();
+		//UART5_SendDMA((uint8_t*)com5bufff, len);
 	}
 #endif
 }
