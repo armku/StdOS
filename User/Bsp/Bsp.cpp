@@ -78,7 +78,7 @@ void com1rcv()
 	Rxx1.Read(bs1);
 	Rxx1.Clear();
 
-	//debug_printf("COM1RCV:\n");
+	debug_printf("COM1RCV:\n");
 	bs1.ShowHex(true);
 }
 void Esp8266TestInit();
