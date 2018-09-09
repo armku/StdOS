@@ -19,6 +19,7 @@ extern "C"
 		{
 			//TODO:Add code here
 			DMA_ClearITPendingBit(DMA1_IT_TC2);
+			DeviceConfigCenter::FLAG_TX3EN = 1;	//串口3可以发送
 		}
 	}
 	void DMA1_Channel3_IRQHandler(void)
@@ -42,6 +43,7 @@ extern "C"
 		{
 			//TODO:Add code here
 			DMA_ClearITPendingBit(DMA1_IT_TC4);
+			DeviceConfigCenter::FLAG_TX1EN = 1;	//串口1可以发送
 		}
 	}	
 	void DMA1_Channel5_IRQHandler()
@@ -72,7 +74,8 @@ extern "C"
 		if (DMA_GetITStatus(DMA1_IT_TC7))
 		{
 			//TODO:Add code here
-			DMA_ClearITPendingBit(DMA1_IT_TC7);			
+			DMA_ClearITPendingBit(DMA1_IT_TC7);		
+			DeviceConfigCenter::FLAG_TX2EN = 1;	//串口2可以发送
 		}
 	}
 	//重新恢复DMA指针

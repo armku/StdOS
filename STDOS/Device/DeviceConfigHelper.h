@@ -108,6 +108,12 @@ public:
 	static int BUFLEN_RX4;	//串口4接收缓冲区长度
 	static int BUFLEN_TX5;	//串口5发送缓冲区长度
 	static int BUFLEN_RX5;	//串口5接收缓冲区长度
+
+	static int FLAG_TX1EN;	//串口1可以发送
+	static int FLAG_TX2EN;	//串口2可以发送
+	static int FLAG_TX3EN;	//串口3可以发送
+	static int FLAG_TX4EN;	//串口4可以发送
+	static int FLAG_TX5EN;	//串口5可以发送
 	//定时器
 	static void TimeTickInit();//系统用定时器初始化
 	static void TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);//定时器配置

@@ -119,6 +119,12 @@ int DeviceConfigCenter::BUFLEN_RX4 = 0;	//串口4接收缓冲区长度
 int DeviceConfigCenter::BUFLEN_TX5 = 0;	//串口5发送缓冲区长度
 int DeviceConfigCenter::BUFLEN_RX5 = 0;	//串口5接收缓冲区长度
 
+int DeviceConfigCenter::FLAG_TX1EN = 1;	//串口1可以发送
+int DeviceConfigCenter::FLAG_TX2EN = 1;	//串口2可以发送
+int DeviceConfigCenter::FLAG_TX3EN = 1;	//串口3可以发送
+int DeviceConfigCenter::FLAG_TX4EN = 1;	//串口4可以发送
+int DeviceConfigCenter::FLAG_TX5EN = 1;	//串口5可以发送
+
 #ifdef __cplusplus
 extern "C" {
 #endif	
