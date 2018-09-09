@@ -327,6 +327,56 @@ void USART3_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX3EN = 0;	//串口3不可以发送
 }
 #endif
+#if COM4TXDMAFLAG	
+void USART4_SendDMA(uint8_t* buf, int len)
+{
+	DMA_InitTypeDef DMA_InitStruct;
+	//DMA_ITConfig(DMA1_Channel2, DMA_IT_TC, ENABLE);
+
+	//DMA_Cmd(DMA1_Channel2, DISABLE);
+
+	//DMA_InitStruct.DMA_PeripheralBaseAddr = (u32)(&USART1->DR);
+	//DMA_InitStruct.DMA_MemoryBaseAddr = (u32)buf;
+	//DMA_InitStruct.DMA_DIR = DMA_DIR_PeripheralDST;
+	//DMA_InitStruct.DMA_BufferSize = len;
+	//DMA_InitStruct.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+	//DMA_InitStruct.DMA_MemoryInc = DMA_MemoryInc_Enable;
+	//DMA_InitStruct.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+	//DMA_InitStruct.DMA_MemoryDataSize = DMA_PeripheralDataSize_Byte;
+	//DMA_InitStruct.DMA_Mode = DMA_Mode_Normal;
+	//DMA_InitStruct.DMA_Priority = DMA_Priority_VeryHigh;
+	//DMA_InitStruct.DMA_M2M = DMA_M2M_Disable;
+	//DMA_Init(DMA1_Channel2, &DMA_InitStruct);
+
+	//DMA_Cmd(DMA1_Channel2, ENABLE);
+	DeviceConfigCenter::FLAG_TX4EN = 0;	//串口4不可以发送
+}
+#endif
+#if COM5TXDMAFLAG	
+void USART5_SendDMA(uint8_t* buf, int len)
+{
+	DMA_InitTypeDef DMA_InitStruct;
+	/*DMA_ITConfig(DMA1_Channel2, DMA_IT_TC, ENABLE);
+
+	DMA_Cmd(DMA1_Channel2, DISABLE);
+
+	DMA_InitStruct.DMA_PeripheralBaseAddr = (u32)(&USART1->DR);
+	DMA_InitStruct.DMA_MemoryBaseAddr = (u32)buf;
+	DMA_InitStruct.DMA_DIR = DMA_DIR_PeripheralDST;
+	DMA_InitStruct.DMA_BufferSize = len;
+	DMA_InitStruct.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+	DMA_InitStruct.DMA_MemoryInc = DMA_MemoryInc_Enable;
+	DMA_InitStruct.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+	DMA_InitStruct.DMA_MemoryDataSize = DMA_PeripheralDataSize_Byte;
+	DMA_InitStruct.DMA_Mode = DMA_Mode_Normal;
+	DMA_InitStruct.DMA_Priority = DMA_Priority_VeryHigh;
+	DMA_InitStruct.DMA_M2M = DMA_M2M_Disable;
+	DMA_Init(DMA1_Channel2, &DMA_InitStruct);
+
+	DMA_Cmd(DMA1_Channel2, ENABLE);*/
+	DeviceConfigCenter::FLAG_TX5EN = 0;	//串口5不可以发送
+}
+#endif
 #if USECOM1
 uint8_t com1bufff[300];
 #endif
