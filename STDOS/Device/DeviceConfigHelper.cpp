@@ -376,22 +376,13 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 #if USECOM2
 #if COM2TXDMAFLAG			
 	Txx2.Write(bs);
-	if (DMA_GetFlagStatus(DMA1_FLAG_TC7) == FlagStatus::RESET)
-	{
-		int len = Txx2.Length();
-		for (int i = 0; i < len; i++)
-		{
-			//com1bufff[i] = Txx2.Dequeue();
-		}
-		Txx2.Clear();
-		//USART2_SendDMA((uint8_t*)com1bufff, len);
-	}
-#elif  COM1TXDMAFLAG			
+	OS_ComSendChk(&Txx2);
+#elif  COM2TXDMAFLAG			
 	Txx2.Clear();
 	Txx2.Write(bs);
 
 	USART2_SendDMA((uint8_t*)com2tx, bs.Length());
-#elif COM1SENDINTFLAG
+#elif COM2SENDINTFLAG
 	while (bs.Length() > Txx2.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
@@ -424,22 +415,8 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 #if USECOM3
 #if COM3TXDMAFLAG			
 	Txx3.Write(bs);
-	if (DMA_GetFlagStatus(DMA1_FLAG_TC2) == FlagStatus::RESET)
-	{
-		int len = Txx3.Length();
-		for (int i = 0; i < len; i++)
-		{
-			//com1bufff[i] = Txx3.Dequeue();
-		}
-		Txx3.Clear();
-		//USART3_SendDMA((uint8_t*)com1bufff, len);
-	}
-#elif  COM3TXDMAFLAG			
-	Txx3.Clear();
-	Txx3.Write(bs);
-
-	USART3_SendDMA((uint8_t*)com3tx, bs.Length());
-#elif COM1SENDINTFLAG
+	OS_ComSendChk(&Txx3);
+#elif COM3SENDINTFLAG
 	while (bs.Length() > Txx3.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
@@ -470,7 +447,10 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 void DeviceConfigCenter::com4send(Buffer& bs)
 {
 #if USECOM4
-#if COM4SENDINTFLAG
+#if COM4TXDMAFLAG			
+	Txx4.Write(bs);
+	OS_ComSendChk(&Txx4);
+#elif COM4SENDINTFLAG
 	while (bs.Length() > Txx4.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
@@ -501,7 +481,10 @@ void DeviceConfigCenter::com4send(Buffer& bs)
 void DeviceConfigCenter::com5send(Buffer& bs)
 {
 #if USECOM5
-#if COM5SENDINTFLAG
+#if COM5TXDMAFLAG			
+	Txx5.Write(bs);
+	OS_ComSendChk(&Txx5);
+#elif COM5SENDINTFLAG
 	while (bs.Length() > Txx5.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
