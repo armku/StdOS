@@ -318,12 +318,13 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 #if USECOM1
 #if COM1TXDMAFLAG			
 	Txx1.Write(bs);
-	if (DMA_GetFlagStatus(DMA1_FLAG_TC4) == FlagStatus::RESET)
+	//if (DMA_GetFlagStatus(DMA1_FLAG_TC4) == FlagStatus::RESET)
+	if (USART_GetFlagStatus(USART1, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx1.Length();
 		for (int i = 0; i < len; i++)
 		{
-			com1bufff[i] = Txx1.Dequeue();			
+			com1bufff[i] = Txx1.Dequeue();
 		}
 		Txx1.Clear();
 		USART1_SendDMA((uint8_t*)com1bufff, len);
