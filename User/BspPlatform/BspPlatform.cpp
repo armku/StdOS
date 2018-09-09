@@ -6,12 +6,16 @@
 #include "Device\DeviceConfigHelper.h"
 
 void TimeUpdate();
+
+void OS_ComSendChk(void *param);
 void BspPlatformInit()
 {	
 	DeviceConfigCenter::ConfigCom(COM1, 115200);
 	DeviceConfigCenter::ConfigCom(COM3, 115200);
 	DeviceConfigCenter::TimeTickInit();//系统用定时器初始化
 	DeviceConfigCenter::PTim2Update = TimeUpdate;
+
+	Sys.AddTask(OS_ComSendChk, 0, 1000, 1, "ComSendChk");
 }
 
 int DeviceConfigCenter::CurrentTick()

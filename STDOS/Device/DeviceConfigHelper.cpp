@@ -2320,7 +2320,22 @@ void DeviceConfigCenter::Timer8ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 }
 
 //系统
-
+void OS_ComSendChk(void *param)
+{
+	//检查串口是否可以发送
+#if USECOM1
+	if (USART_GetFlagStatus(USART1, USART_FLAG_TXE) != RESET)
+	{
+		int len = Txx1.Length();
+		for (int i = 0; i < len; i++)
+		{
+			com1bufff[i] = Txx1.Dequeue();
+		}
+		Txx1.Clear();
+		USART1_SendDMA((uint8_t*)com1bufff, len);
+	}
+#endif
+}
 //其他
 #if 0
 static char *itoa(int value, char *string, int radix)
