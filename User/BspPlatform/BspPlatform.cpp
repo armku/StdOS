@@ -8,8 +8,8 @@
 void TimeUpdate();
 void BspPlatformInit()
 {	
-	DeviceConfigCenter::ConfigCom(COM1, 256000);
-	DeviceConfigCenter::ConfigCom(COM3, 256000);
+	DeviceConfigCenter::ConfigCom(COM1, 115200);
+	DeviceConfigCenter::ConfigCom(COM3, 115200);
 	DeviceConfigCenter::TimeTickInit();//系统用定时器初始化
 	DeviceConfigCenter::PTim2Update = TimeUpdate;
 }
