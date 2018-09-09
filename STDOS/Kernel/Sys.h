@@ -126,11 +126,12 @@ public:
 	uint16_t	Checksum;	// 校验
 };
 
-#define STDOS_VERSION "0.1.2018.0820" //版本号
+#define STDOS_VERSION "0.2.2018.0820" //版本号
 
 #endif //_Sys_H_
 
 /*
 
 v0.1.2018.0820  使用C++11实现，实现F1 F4 F1的GPIO和串口、IIC、SPI、中断管理
+v0.2.2018.		串口发送、接收采用DMA方式实现。
 */
