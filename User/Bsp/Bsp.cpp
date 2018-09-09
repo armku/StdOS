@@ -83,11 +83,7 @@ void com1rcv()
 }
 void Esp8266TestInit();
 void W5500Test();
-void dmatest(void*param)
-{
-	static int i;
-	debug_printf("hehe%d\n",i++);
-}
+
 void BspInit()
 {
 	led1 = 1;
@@ -95,7 +91,5 @@ void BspInit()
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	DeviceConfigCenter::PRcvCOM1 = com1rcv;
 
-	//Sys.AddTask(dmatest, 0, 0, 1000, "dmatest");
-			
 	//W5500Test();
 }
