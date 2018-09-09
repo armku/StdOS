@@ -10,6 +10,11 @@ extern "C"
 	void DMA1_Channel2_IRQHandler(void)
 	{
 		//USART3_TX
+		if (DMA_GetITStatus(DMA1_IT_HT2))
+		{
+			//∞Î÷–∂œ
+			DMA_ClearITPendingBit(DMA1_IT_HT2);
+		}
 		if (DMA_GetITStatus(DMA1_IT_TC2))
 		{
 			//TODO:Add code here
@@ -28,6 +33,11 @@ extern "C"
 	void DMA1_Channel4_IRQHandler(void)
 	{
 		//USART1_TX
+		if (DMA_GetITStatus(DMA1_IT_HT4))
+		{
+			//∞Î÷–∂œ
+			DMA_ClearITPendingBit(DMA1_IT_HT4);
+		}
 		if (DMA_GetITStatus(DMA1_IT_TC4))
 		{
 			//TODO:Add code here
