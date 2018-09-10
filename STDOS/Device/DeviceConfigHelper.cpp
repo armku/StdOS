@@ -2367,7 +2367,7 @@ void DeviceConfigCenter::Timer8ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 void OS_ComSendChk(void *param)
 {
 	//检查串口是否可以发送
-#if USECOM1
+#if USECOM1 && 	COM1TXDMAFLAG
 	if (USART_GetFlagStatus(USART1, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx1.Length();
@@ -2377,12 +2377,12 @@ void OS_ComSendChk(void *param)
 		{
 			com1bufff[i] = Txx1.Dequeue();
 		}
-		Txx1.Clear();
+		Txx1.Clear();		
 		USART1_SendDMA((uint8_t*)com1bufff, len);
 	}
 #endif
 
-#if USECOM2
+#if USECOM2 && COM2TXDMAFLAG
 	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx2.Length();
@@ -2397,7 +2397,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if USECOM2
+#if USECOM3 && COM3TXDMAFLAG
 	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx3.Length();
@@ -2412,7 +2412,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if USECOM2
+#if USECOM4 && COM4TXDMAFLAG
 	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx4.Length();
@@ -2427,7 +2427,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if USECOM5
+#if USECOM5 && COM5TXDMAFLAG
 	if (USART_GetFlagStatus(UART5, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx5.Length();
