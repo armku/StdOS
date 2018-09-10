@@ -45,12 +45,12 @@ extern "C"
 			DMA_ClearITPendingBit(DMA1_IT_TC4);
 			DeviceConfigCenter::FLAG_TX1EN = 1;	//串口1可以发送
 		}
-	}	
+	}
 	void DMA1_Channel5_IRQHandler()
 	{
 		//USART1_RX
 		/*if (DMA_GetITStatus(DMA1_IT_TC5))
-		{			
+		{
 			DMA_ClearITPendingBit(DMA1_IT_TC5);
 		}*/
 	}
@@ -74,7 +74,7 @@ extern "C"
 		if (DMA_GetITStatus(DMA1_IT_TC7))
 		{
 			//TODO:Add code here
-			DMA_ClearITPendingBit(DMA1_IT_TC7);		
+			DMA_ClearITPendingBit(DMA1_IT_TC7);
 			DeviceConfigCenter::FLAG_TX2EN = 1;	//串口2可以发送
 		}
 	}
@@ -105,13 +105,13 @@ extern "C"
 #if COM1RXDMAFLAG
 			int curlen = 0;
 			curlen = DeviceConfigCenter::BUFLEN_RX1 - DMA_GetCurrDataCounter(DMA1_Channel5);	//算出接本帧数据长度			
-			Rxx1.SetLength(curlen);			
+			Rxx1.SetLength(curlen);
 			MYDMA_Enable(DMA1_Channel5);                   //恢复DMA指针，等待下一次的接收						
 #endif
 			if (DeviceConfigCenter::PRcvCOM1)
 			{
 				(*DeviceConfigCenter::PRcvCOM1)();
-		}
+			}
 		}
 		/* 处理发送缓冲区空中断 */
 		if (USART_GetITStatus(USART1, USART_IT_TXE) != RESET)
@@ -175,7 +175,7 @@ extern "C"
 #if COM1RXDMAFLAG
 			int curlen = 0;
 			curlen = DeviceConfigCenter::BUFLEN_RX2 - DMA_GetCurrDataCounter(DMA1_Channel6);	//算出接本帧数据长度			
-			Rxx2.SetLength(curlen);			
+			Rxx2.SetLength(curlen);
 			MYDMA_Enable(DMA1_Channel6);                   //恢复DMA指针，等待下一次的接收						
 #endif
 			if (DeviceConfigCenter::PRcvCOM2)

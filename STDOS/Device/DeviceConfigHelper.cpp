@@ -433,11 +433,6 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 #if COM2TXDMAFLAG			
 	Txx2.Write(bs);
 	OS_ComSendChk(&Txx2);
-#elif  COM2TXDMAFLAG			
-	Txx2.Clear();
-	Txx2.Write(bs);
-
-	USART2_SendDMA((uint8_t*)com2tx, bs.Length());
 #elif COM2SENDINTFLAG
 	while (bs.Length() > Txx2.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
@@ -627,7 +622,7 @@ void DeviceConfigCenter::com5send()
 }
 
 void DeviceConfigCenter::configCOM1(int baudRate)
-{	
+{
 #if USECOM1
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
@@ -666,14 +661,14 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	NVIC_Init(&NVIC_InitStructure);
 
 	/* 使能串口1接收中断 */
-	//USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // 串口接收中断配置
+	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // 串口接收中断配置
 
 #if COM1TXDMAFLAG
 	//DMA发送
 	/*开启DMA时钟*/
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 
-	DMA_ITConfig(DMA1_Channel4,DMA_IT_TC,ENABLE);  //配置DMA发送完成后产生中断
+	DMA_ITConfig(DMA1_Channel4, DMA_IT_TC, ENABLE);  //配置DMA发送完成后产生中断
 
 	USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
 
@@ -849,7 +844,7 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 #endif // COM1TXDMAFLAG
 
 	/* 使能串口2接收中断 */
-	//USART_ITConfig(USART2, USART_IT_RXNE, ENABLE); // 串口接收中断配置
+	USART_ITConfig(USART2, USART_IT_RXNE, ENABLE); // 串口接收中断配置
 #if COM2RXDMAFLAG
 	USART_ITConfig(USART2, USART_IT_IDLE, ENABLE);//开启空闲中断
 	USART_DMACmd(USART2, USART_DMAReq_Rx, ENABLE);   //使能串口1 DMA接收
@@ -931,7 +926,7 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 
 	Txx2.SetBuf(com2tx, ArrayLength(com2tx));
 	Rxx2.SetBuf(com2rx, ArrayLength(com2rx));
-		
+
 #if  COM2RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com2RcvRoutin, 0, 100, 1, "RcvCom2");
@@ -975,10 +970,10 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);	
+	NVIC_Init(&NVIC_InitStructure);
 #if COM3TXDMAFLAG
-												   //DMA发送
-												   /*开启DMA时钟*/
+	//DMA发送
+	/*开启DMA时钟*/
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 
 	DMA_ITConfig(DMA1_Channel2, DMA_IT_TC, ENABLE);  //配置DMA发送完成后产生中断
@@ -1003,7 +998,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	NVIC_Init(&NVIC_InitStruct);
 #endif // COM1TXDMAFLAG
 	/* 使能串口3接收中断 */
-	//USART_ITConfig(USART3, USART_IT_RXNE, ENABLE); // 串口接收中断配置
+	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE); // 串口接收中断配置
 #if COM3RXDMAFLAG
 	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE);//开启空闲中断
 	USART_DMACmd(USART3, USART_DMAReq_Rx, ENABLE);   //使能串口1 DMA接收
@@ -1029,7 +1024,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 #if COM3RCVIDLEINTFLAG
 	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
-	
+
 	USART_Cmd(USART3, ENABLE);
 	USART_ClearFlag(USART3, USART_FLAG_TC);
 
@@ -1086,7 +1081,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	Txx3.SetBuf(com3tx, ArrayLength(com3tx));
 	Rxx3.SetBuf(com3rx, ArrayLength(com3rx));
 
-	
+
 
 #if  COM3RCVIDLEINTFLAG
 #else
@@ -1191,7 +1186,7 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 
 	Txx4.SetBuf(com4tx, ArrayLength(com4tx));
 	Rxx4.SetBuf(com4rx, ArrayLength(com4rx));
-		
+
 #if  COM4RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com4RcvRoutin, 0, 100, 1, "RcvCom4");
@@ -1256,7 +1251,7 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
 
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC| RCC_AHB1Periph_GPIOD, ENABLE); //使能GPIO时钟
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC | RCC_AHB1Periph_GPIOD, ENABLE); //使能GPIO时钟
 	RCC_APB2PeriphClockCmd(RCC_APB1Periph_UART5, ENABLE);//使能USART时钟
 														  //USART5 初始化设置
 	USART_InitStructure.USART_BaudRate = baudRate;//波特率设置
@@ -1296,7 +1291,7 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 
 	Txx5.SetBuf(com5tx, ArrayLength(com5tx));
 	Rxx5.SetBuf(com5rx, ArrayLength(com5rx));
-		
+
 #if  COM5RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com5RcvRoutin, 0, 100, 1, "RcvCom5");
@@ -1557,7 +1552,7 @@ void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 {
 #if defined STM32F0
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);//使能TIM2时钟
-	
+
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;//定义一个TIM_InitTypeDef类型的结构体
 	TIM_ClearITPendingBit(TIM2, TIM_IT_Update);//清中断标志，以备下次中断到来使用
 
@@ -1569,7 +1564,7 @@ void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);//使能溢出中断
 
 	TIM_Cmd(TIM2, ENABLE);//定时器使能
-	
+
 	NVIC_InitTypeDef   NVIC_InitStructure;
 
 	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
@@ -2377,7 +2372,7 @@ void OS_ComSendChk(void *param)
 		{
 			com1bufff[i] = Txx1.Dequeue();
 		}
-		Txx1.Clear();		
+		Txx1.Clear();
 		USART1_SendDMA((uint8_t*)com1bufff, len);
 	}
 #endif
