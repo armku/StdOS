@@ -17,17 +17,17 @@
 #define COM4SENDINTFLAG	1//串口4中断发送
 #define COM5SENDINTFLAG	1//串口5中断发送
 
-#define COM1TXDMAFLAG 1 //串口1DMA发送
-#define COM2TXDMAFLAG 1 //串口2DMA发送
-#define COM3TXDMAFLAG 1 //串口3DMA发送
-#define COM4TXDMAFLAG 1 //串口4DMA发送
-#define COM5TXDMAFLAG 1 //串口5DMA发送
+#define COM1TXDMAFLAG 0 //串口1DMA发送
+#define COM2TXDMAFLAG 0 //串口2DMA发送
+#define COM3TXDMAFLAG 0 //串口3DMA发送
+#define COM4TXDMAFLAG 0 //串口4DMA发送
+#define COM5TXDMAFLAG 0 //串口5DMA发送
 
-#define COM1RXDMAFLAG 1 //串口1DMA接收
-#define COM2RXDMAFLAG 1 //串口2DMA接收
-#define COM3RXDMAFLAG 1 //串口3DMA接收
-#define COM4RXDMAFLAG 1 //串口4DMA接收
-#define COM5RXDMAFLAG 1 //串口5DMA接收
+#define COM1RXDMAFLAG 0 //串口1DMA接收
+#define COM2RXDMAFLAG 0 //串口2DMA接收
+#define COM3RXDMAFLAG 0 //串口3DMA接收
+#define COM4RXDMAFLAG 0 //串口4DMA接收
+#define COM5RXDMAFLAG 0 //串口5DMA接收
 
 #define COM1RCVIDLEINTFLAG	1//串口1空闲中断接收
 #define COM2RCVIDLEINTFLAG	1//串口2空闲中断接收
