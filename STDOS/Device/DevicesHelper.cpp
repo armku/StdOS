@@ -246,7 +246,7 @@ extern "C"
 #if COM1RXDMAFLAG
 			int curlen = 0;
 			curlen = DeviceConfigCenter::BUFLEN_RX3 - DMA_GetCurrDataCounter(DMA1_Channel3);	//算出接本帧数据长度			
-			Rxx1.SetLength(curlen);
+			Rxx3.SetLength(curlen);
 			MYDMA_Enable(DMA1_Channel3);                   //恢复DMA指针，等待下一次的接收						
 #endif
 			if (DeviceConfigCenter::PRcvCOM3)
