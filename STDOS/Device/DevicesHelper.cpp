@@ -172,7 +172,7 @@ extern "C"
 			//数据帧接收完毕
 			USART_ReceiveData(USART2); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)   
 			USART_ClearITPendingBit(USART2, USART_IT_IDLE);         //清除中断标志
-#if COM1RXDMAFLAG
+#if COM2RXDMAFLAG
 			int curlen = 0;
 			curlen = DeviceConfigCenter::BUFLEN_RX2 - DMA_GetCurrDataCounter(DMA1_Channel6);	//算出接本帧数据长度			
 			Rxx2.SetLength(curlen);
@@ -243,7 +243,7 @@ extern "C"
 			//数据帧接收完毕
 			USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR) 
 			USART_ClearITPendingBit(USART3, USART_IT_IDLE);         //清除中断标志
-#if COM1RXDMAFLAG
+#if COM3RXDMAFLAG
 			int curlen = 0;
 			curlen = DeviceConfigCenter::BUFLEN_RX3 - DMA_GetCurrDataCounter(DMA1_Channel3);	//算出接本帧数据长度			
 			Rxx3.SetLength(curlen);
