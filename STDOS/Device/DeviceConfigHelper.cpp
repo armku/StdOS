@@ -434,6 +434,10 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 	Txx2.Write(bs);
 	OS_ComSendChk(&Txx2);
 #elif COM2SENDINTFLAG
+	if (pCOM2Rx485)
+	{
+		*pCOM2Rx485 = 1;
+	}
 	while (bs.Length() > Txx2.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
