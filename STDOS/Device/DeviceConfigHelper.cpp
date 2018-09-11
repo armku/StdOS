@@ -21,6 +21,52 @@ Func DeviceConfigCenter::PExit13 = 0;
 Func DeviceConfigCenter::PExit14 = 0;
 Func DeviceConfigCenter::PExit15 = 0;
 
+//串口
+OutputPort *DeviceConfigCenter::pCOM1Rx485 = 0;
+OutputPort *DeviceConfigCenter::pCOM2Rx485 = 0;
+OutputPort *DeviceConfigCenter::pCOM3Rx485 = 0;
+OutputPort *DeviceConfigCenter::pCOM4Rx485 = 0;
+OutputPort *DeviceConfigCenter::pCOM5Rx485 = 0;
+
+Func DeviceConfigCenter::PRcvCOM1 = 0;
+Func DeviceConfigCenter::PRcvCOM2 = 0;
+Func DeviceConfigCenter::PRcvCOM3 = 0;
+Func DeviceConfigCenter::PRcvCOM4 = 0;
+Func DeviceConfigCenter::PRcvCOM5 = 0;
+
+int DeviceConfigCenter::RcvLastTimeCOM1 = 0;//串口1最后接收数据时间
+int DeviceConfigCenter::RcvLastTimeCOM2 = 0;//串口1最后接收数据时间
+int DeviceConfigCenter::RcvLastTimeCOM3 = 0;//串口1最后接收数据时间
+int DeviceConfigCenter::RcvLastTimeCOM4 = 0;//串口1最后接收数据时间
+int DeviceConfigCenter::RcvLastTimeCOM5 = 0;//串口1最后接收数据时间
+
+int DeviceConfigCenter::BUFLEN_TX1 = 0;	//串口1发送缓冲区长度
+int DeviceConfigCenter::BUFLEN_RX1 = 0;	//串口1接收缓冲区长度
+int DeviceConfigCenter::BUFLEN_TX2 = 0;	//串口2发送缓冲区长度
+int DeviceConfigCenter::BUFLEN_RX2 = 0;	//串口2接收缓冲区长度
+int DeviceConfigCenter::BUFLEN_TX3 = 0;	//串口3发送缓冲区长度
+int DeviceConfigCenter::BUFLEN_RX3 = 0;	//串口3接收缓冲区长度
+int DeviceConfigCenter::BUFLEN_TX4 = 0;	//串口4发送缓冲区长度
+int DeviceConfigCenter::BUFLEN_RX4 = 0;	//串口4接收缓冲区长度
+int DeviceConfigCenter::BUFLEN_TX5 = 0;	//串口5发送缓冲区长度
+int DeviceConfigCenter::BUFLEN_RX5 = 0;	//串口5接收缓冲区长度
+
+int DeviceConfigCenter::FLAG_TX1EN = 1;	//串口1可以发送
+int DeviceConfigCenter::FLAG_TX2EN = 1;	//串口2可以发送
+int DeviceConfigCenter::FLAG_TX3EN = 1;	//串口3可以发送
+int DeviceConfigCenter::FLAG_TX4EN = 1;	//串口4可以发送
+int DeviceConfigCenter::FLAG_TX5EN = 1;	//串口5可以发送
+
+//定时器
+Func DeviceConfigCenter::PTim2Update = 0;
+Func DeviceConfigCenter::PTim3Update = 0;
+Func DeviceConfigCenter::PTim4Update = 0;
+Func DeviceConfigCenter::PTim5Update = 0;
+Func DeviceConfigCenter::PTim6Update = 0;
+Func DeviceConfigCenter::PTim7Update = 0;
+Func DeviceConfigCenter::PTim8Update = 0;
+
+
 //中断线打开、关闭
 void DeviceConfigCenter::SetEXIT(int pinIndex, bool enable, Trigger trigger)
 {
@@ -88,42 +134,6 @@ void DeviceConfigCenter::InputPort_OpenEXTI(Pin pin, Trigger trigger)
 
 #endif
 }
-
-//串口
-OutputPort *DeviceConfigCenter::pCOM1Rx485 = 0;
-OutputPort *DeviceConfigCenter::pCOM2Rx485 = 0;
-OutputPort *DeviceConfigCenter::pCOM3Rx485 = 0;
-OutputPort *DeviceConfigCenter::pCOM4Rx485 = 0;
-OutputPort *DeviceConfigCenter::pCOM5Rx485 = 0;
-
-Func DeviceConfigCenter::PRcvCOM1 = 0;
-Func DeviceConfigCenter::PRcvCOM2 = 0;
-Func DeviceConfigCenter::PRcvCOM3 = 0;
-Func DeviceConfigCenter::PRcvCOM4 = 0;
-Func DeviceConfigCenter::PRcvCOM5 = 0;
-
-int DeviceConfigCenter::RcvLastTimeCOM1 = 0;//串口1最后接收数据时间
-int DeviceConfigCenter::RcvLastTimeCOM2 = 0;//串口1最后接收数据时间
-int DeviceConfigCenter::RcvLastTimeCOM3 = 0;//串口1最后接收数据时间
-int DeviceConfigCenter::RcvLastTimeCOM4 = 0;//串口1最后接收数据时间
-int DeviceConfigCenter::RcvLastTimeCOM5 = 0;//串口1最后接收数据时间
-
-int DeviceConfigCenter::BUFLEN_TX1 = 0;	//串口1发送缓冲区长度
-int DeviceConfigCenter::BUFLEN_RX1 = 0;	//串口1接收缓冲区长度
-int DeviceConfigCenter::BUFLEN_TX2 = 0;	//串口2发送缓冲区长度
-int DeviceConfigCenter::BUFLEN_RX2 = 0;	//串口2接收缓冲区长度
-int DeviceConfigCenter::BUFLEN_TX3 = 0;	//串口3发送缓冲区长度
-int DeviceConfigCenter::BUFLEN_RX3 = 0;	//串口3接收缓冲区长度
-int DeviceConfigCenter::BUFLEN_TX4 = 0;	//串口4发送缓冲区长度
-int DeviceConfigCenter::BUFLEN_RX4 = 0;	//串口4接收缓冲区长度
-int DeviceConfigCenter::BUFLEN_TX5 = 0;	//串口5发送缓冲区长度
-int DeviceConfigCenter::BUFLEN_RX5 = 0;	//串口5接收缓冲区长度
-
-int DeviceConfigCenter::FLAG_TX1EN = 1;	//串口1可以发送
-int DeviceConfigCenter::FLAG_TX2EN = 1;	//串口2可以发送
-int DeviceConfigCenter::FLAG_TX3EN = 1;	//串口3可以发送
-int DeviceConfigCenter::FLAG_TX4EN = 1;	//串口4可以发送
-int DeviceConfigCenter::FLAG_TX5EN = 1;	//串口5可以发送
 
 #ifdef __cplusplus
 extern "C" {
@@ -252,7 +262,7 @@ void DeviceConfigCenter::comSend(COM com, Buffer bs)
 		break;
 	}
 }
-#if COM1TXDMAFLAG	
+#if USECOM1 && COM1TXDMAFLAG	
 void USART1_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -277,7 +287,7 @@ void USART1_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX1EN = 0;	//串口1不可以发送
 }
 #endif
-#if COM2TXDMAFLAG	
+#if USECOM2 && COM2TXDMAFLAG	
 void USART2_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -302,7 +312,7 @@ void USART2_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX2EN = 0;	//串口2不可以发送
 }
 #endif
-#if COM3TXDMAFLAG	
+#if USECOM3 && COM3TXDMAFLAG	
 void USART3_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -327,7 +337,7 @@ void USART3_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX3EN = 0;	//串口3不可以发送
 }
 #endif
-#if COM4TXDMAFLAG	
+#if USECOM4 && COM4TXDMAFLAG	
 void USART4_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -352,7 +362,7 @@ void USART4_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX4EN = 0;	//串口4不可以发送
 }
 #endif
-#if COM5TXDMAFLAG	
+#if USECOM5 && COM5TXDMAFLAG	
 void USART5_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -569,6 +579,7 @@ void DeviceConfigCenter::com5send(Buffer& bs)
 }
 void DeviceConfigCenter::com1send()
 {
+#if USECOM1
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -581,9 +592,11 @@ void DeviceConfigCenter::com1send()
 #elif defined STM32F4
 
 #endif
+#endif
 }
 void DeviceConfigCenter::com2send()
 {
+#if USECOM2
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -593,9 +606,11 @@ void DeviceConfigCenter::com2send()
 #elif defined STM32F4
 
 #endif
+#endif
 }
 void DeviceConfigCenter::com3send()
 {
+#if USECOM3
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -603,9 +618,11 @@ void DeviceConfigCenter::com3send()
 #elif defined STM32F4
 
 #endif
+#endif
 }
 void DeviceConfigCenter::com4send()
 {
+#if USECOM4
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -613,15 +630,18 @@ void DeviceConfigCenter::com4send()
 #elif defined STM32F4
 
 #endif
+#endif
 }
 void DeviceConfigCenter::com5send()
 {
+#if USECOM5
 #if defined STM32F0
 
 #elif defined STM32F1
 	USART_ITConfig(UART5, USART_IT_TXE, ENABLE);
 #elif defined STM32F4
 
+#endif
 #endif
 }
 
@@ -1542,15 +1562,6 @@ void DeviceConfigCenter::Com5RcvRoutin(void *param)
 	}
 #endif
 }
-//定时器
-Func DeviceConfigCenter::PTim2Update = 0;
-Func DeviceConfigCenter::PTim3Update = 0;
-Func DeviceConfigCenter::PTim4Update = 0;
-Func DeviceConfigCenter::PTim5Update = 0;
-Func DeviceConfigCenter::PTim6Update = 0;
-Func DeviceConfigCenter::PTim7Update = 0;
-Func DeviceConfigCenter::PTim8Update = 0;
-
 
 void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 {

@@ -174,27 +174,27 @@ private:
 #ifdef __cplusplus
 extern "C" {
 #endif	
-#ifdef USECOM1
+#if USECOM1
 	extern Queue	Txx1;
 	extern Queue	Rxx1;
 #endif // USECOM1
 
-#ifdef USECOM2
+#if USECOM2
 	extern Queue	Txx2;
 	extern Queue	Rxx2;
 #endif // USECOM2
 
-#ifdef USECOM3
+#if USECOM3
 	extern Queue	Txx3;
 	extern Queue	Rxx3;
 #endif // USECOM3
 
-#ifdef USECOM4
+#if USECOM4
 	extern Queue	Txx4;
 	extern Queue	Rxx4;
 #endif // USECOM4
 
-#ifdef USECOM5
+#if USECOM5
 	extern Queue	Txx5;
 	extern Queue	Rxx5;
 #endif // USECOM5

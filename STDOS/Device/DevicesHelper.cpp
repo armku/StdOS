@@ -9,6 +9,7 @@ extern "C"
 	}
 	void DMA1_Channel2_IRQHandler(void)
 	{
+#if USECOM3 && COM3TXDMAFLAG
 		//USART3_TX
 		if (DMA_GetITStatus(DMA1_IT_HT2))
 		{
@@ -21,18 +22,22 @@ extern "C"
 			DMA_ClearITPendingBit(DMA1_IT_TC2);
 			DeviceConfigCenter::FLAG_TX3EN = 1;	//串口3可以发送
 		}
+#endif
 	}
 	void DMA1_Channel3_IRQHandler(void)
 	{
+#if USECOM3 && COM3RXDMAFLAG
 		//USART3_RX
-		//if (DMA_GetITStatus(DMA1_IT_TC3))
-		//{
-		//	//TODO:Add code here
-		//	DMA_ClearITPendingBit(DMA1_IT_TC3);
-		//}
+		if (DMA_GetITStatus(DMA1_IT_TC3))
+		{
+			//TODO:Add code here
+			DMA_ClearITPendingBit(DMA1_IT_TC3);
+		}
+#endif
 	}
 	void DMA1_Channel4_IRQHandler(void)
 	{
+#if USECOM1 &&COM1TXDMAFLAG
 		//USART1_TX
 		if (DMA_GetITStatus(DMA1_IT_HT4))
 		{
@@ -45,26 +50,32 @@ extern "C"
 			DMA_ClearITPendingBit(DMA1_IT_TC4);
 			DeviceConfigCenter::FLAG_TX1EN = 1;	//串口1可以发送
 		}
+#endif
 	}
 	void DMA1_Channel5_IRQHandler()
 	{
+#if USECOM1 && COM1RXDMAFLAG
 		//USART1_RX
-		/*if (DMA_GetITStatus(DMA1_IT_TC5))
+		if (DMA_GetITStatus(DMA1_IT_TC5))
 		{
 			DMA_ClearITPendingBit(DMA1_IT_TC5);
-		}*/
+		}
+#endif
 	}
 	void DMA1_Channel6_IRQHandler(void)
 	{
-		//USART2_RX
-		//if (DMA_GetITStatus(DMA1_IT_TC6))
-		//{
-		//	//TODO:Add code here
-		//	DMA_ClearITPendingBit(DMA1_IT_TC6);
-		//}
+#if USECOM2 && COM2RXDMAFLAG
+		USART2_RX
+		if (DMA_GetITStatus(DMA1_IT_TC6))
+		{
+			//TODO:Add code here
+			DMA_ClearITPendingBit(DMA1_IT_TC6);
+		}
+#endif
 	}
 	void DMA1_Channel7_IRQHandler(void)
 	{
+#if USECOM2 && COM2TXDMAFLAG
 		//USART2_TX
 		if (DMA_GetITStatus(DMA1_IT_HT7))
 		{
@@ -77,6 +88,7 @@ extern "C"
 			DMA_ClearITPendingBit(DMA1_IT_TC7);
 			DeviceConfigCenter::FLAG_TX2EN = 1;	//串口2可以发送
 		}
+#endif
 	}
 	//重新恢复DMA指针
 	void MYDMA_Enable(DMA_Channel_TypeDef*DMA_CHx)
