@@ -11,6 +11,8 @@
 #define USECOM4 1
 #define USECOM5 1
 
+#define DMATESTCOM1 0 //com1DMA测试
+
 #define COM1SENDINTFLAG	1//串口1中断发送
 #define COM2SENDINTFLAG	1//串口2中断发送
 #define COM3SENDINTFLAG	1//串口3中断发送
