@@ -65,7 +65,7 @@ extern "C"
 	void DMA1_Channel6_IRQHandler(void)
 	{
 #if USECOM2 && COM2RXDMAFLAG
-		USART2_RX
+//		USART2_RX
 		if (DMA_GetITStatus(DMA1_IT_TC6))
 		{
 			//TODO:Add code here
