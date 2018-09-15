@@ -1488,63 +1488,6 @@ void DeviceConfigCenter::SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, b
 	*txPin = p[n];
 	*rxPin = p[n + 1];
 }
-//串口1接收判断
-void DeviceConfigCenter::Com1RcvRoutin(void *param)
-{
-#if defined USECOM1
-	int ms = Sys.Ms();
-	if ((ms - RcvLastTimeCOM1 > 1) && (Rxx1.Length() > 0))
-	{
-		if (DeviceConfigCenter::PRcvCOM1)
-		{
-			(*DeviceConfigCenter::PRcvCOM1)();
-		}
-	}
-#endif
-}
-//串口2接收判断
-void DeviceConfigCenter::Com2RcvRoutin(void *param)
-{
-#if defined USECOM2
-	int ms = Sys.Ms();
-	if ((ms - RcvLastTimeCOM2 > 1) && (Rxx2.Length() > 0))
-	{
-		if (DeviceConfigCenter::PRcvCOM2)
-		{
-			(*DeviceConfigCenter::PRcvCOM2)();
-		}
-	}
-#endif
-}
-
-//串口4接收判断
-void DeviceConfigCenter::Com4RcvRoutin(void *param)
-{
-#if defined USECOM4
-	int ms = Sys.Ms();
-	if ((ms - RcvLastTimeCOM4 > 1) && (Rxx4.Length() > 0))
-	{
-		if (DeviceConfigCenter::PRcvCOM4)
-		{
-			(*DeviceConfigCenter::PRcvCOM4)();
-		}
-	}
-#endif
-}
-//串口5接收判断
-void DeviceConfigCenter::Com5RcvRoutin(void *param)
-{
-#if defined USECOM5
-	int ms = Sys.Ms();
-	if ((ms - RcvLastTimeCOM5 > 1) && (Rxx5.Length() > 0))
-	{
-		if (DeviceConfigCenter::PRcvCOM5)
-		{
-			(*DeviceConfigCenter::PRcvCOM5)();
-		}
-	}
-#endif
-}
 
 void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 {
@@ -2438,13 +2381,49 @@ void OS_ComSendChk(void *param)
 //串口接收判断
 void OS_ComRcvChk(void *param)
 {
-#if defined USECOM3
 	int ms = Sys.Ms();
+#if defined USECOM1	
+	if ((ms - DeviceConfigCenter::RcvLastTimeCOM1 > 1) && (Rxx1.Length() > 0))
+	{
+		if (DeviceConfigCenter::PRcvCOM1)
+		{
+			(*DeviceConfigCenter::PRcvCOM1)();
+		}
+	}
+#endif
+#if defined USECOM2
+	if ((ms - DeviceConfigCenter::RcvLastTimeCOM2 > 1) && (Rxx2.Length() > 0))
+	{
+		if (DeviceConfigCenter::PRcvCOM2)
+		{
+			(*DeviceConfigCenter::PRcvCOM2)();
+		}
+	}
+#endif
+#if defined USECOM3
 	if ((ms - DeviceConfigCenter::RcvLastTimeCOM3 > 1) && (Rxx3.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM3)
 		{
 			(*DeviceConfigCenter::PRcvCOM3)();
+		}
+	}
+#endif
+#if defined USECOM4
+	if ((ms - DeviceConfigCenter::RcvLastTimeCOM4 > 1) && (Rxx4.Length() > 0))
+	{
+		if (DeviceConfigCenter::PRcvCOM4)
+		{
+			(*DeviceConfigCenter::PRcvCOM4)();
+		}
+	}
+#endif
+#if defined USECOM5
+	if ((ms - DeviceConfigCenter::RcvLastTimeCOM5 > 1) && (Rxx5.Length() > 0))
+	{
+		if (DeviceConfigCenter::PRcvCOM5)
+		{
+			(*DeviceConfigCenter::PRcvCOM5)();
 		}
 	}
 #endif

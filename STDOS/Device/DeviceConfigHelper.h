@@ -198,11 +198,6 @@ private:
 	static void Com5ChgBaudRate(int baudRate);
 	static void SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false);
 
-	static void Com1RcvRoutin(void *param);//串口1接收判断
-	static void Com2RcvRoutin(void *param);//串口1接收判断
-	//static void Com3RcvRoutin(void *param);//串口1接收判断
-	static void Com4RcvRoutin(void *param);//串口1接收判断
-	static void Com5RcvRoutin(void *param);//串口1接收判断
 	//定时器
 };
 #ifdef __cplusplus
