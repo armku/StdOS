@@ -12,41 +12,41 @@
 #define USECOM5
 
 #if defined USECOM1
-#define COM1SENDINTFLAG	1//串口1中断发送
-#define COM1TXDMAFLAG 0 //串口1DMA发送
-#define COM1RXDMAFLAG 0 //串口1DMA接收
-#define COM1RCVIDLEINTFLAG	1//串口1空闲中断接收
+#define COM1SENDINTFLAG	//串口1中断发送
+#define COM1TXDMAFLAG  //串口1DMA发送
+#define COM1RXDMAFLAG  //串口1DMA接收
+#define COM1RCVIDLEINTFLAG	//串口1空闲中断接收
 #endif
 
 #if defined USECOM2
-#define COM2SENDINTFLAG	1//串口2中断发送
-#define COM2TXDMAFLAG 0 //串口2DMA发送
-#define COM2RXDMAFLAG 0 //串口2DMA接收
-#define COM2RCVIDLEINTFLAG	1//串口2空闲中断接收
+#define COM2SENDINTFLAG	//串口2中断发送
+#define COM2TXDMAFLAG  //串口2DMA发送
+#define COM2RXDMAFLAG  //串口2DMA接收
+#define COM2RCVIDLEINTFLAG	//串口2空闲中断接收
 #endif
 
 #if defined USECOM3
-#define COM3SENDINTFLAG	1//串口3中断发送
-#define COM3TXDMAFLAG 0 //串口3DMA发送
-#define COM3RXDMAFLAG 0 //串口3DMA接收
-#define COM3RCVIDLEINTFLAG	1//串口3空闲中断接收
+#define COM3SENDINTFLAG	//串口3中断发送
+#define COM3TXDMAFLAG  //串口3DMA发送
+#define COM3RXDMAFLAG  //串口3DMA接收
+#define COM3RCVIDLEINTFLAG	//串口3空闲中断接收
 #endif
 
 #if defined USECOM4
-#define COM4SENDINTFLAG	1//串口4中断发送
-#define COM4TXDMAFLAG 0 //串口4DMA发送
-#define COM4RXDMAFLAG 0 //串口4DMA接收
-#define COM4RCVIDLEINTFLAG	1//串口4空闲中断接收
+#define COM4SENDINTFLAG	//串口4中断发送
+#define COM4TXDMAFLAG  //串口4DMA发送
+#define COM4RXDMAFLAG  //串口4DMA接收
+#define COM4RCVIDLEINTFLAG	//串口4空闲中断接收
 #endif
 
 #if defined USECOM5
-#define COM5SENDINTFLAG	1//串口5中断发送
-#define COM5TXDMAFLAG 0 //串口5DMA发送
-#define COM5RXDMAFLAG 0 //串口5DMA接收
-#define COM5RCVIDLEINTFLAG	1//串口5空闲中断接收
+#define COM5SENDINTFLAG	//串口5中断发送
+#define COM5TXDMAFLAG  //串口5DMA发送
+#define COM5RXDMAFLAG  //串口5DMA接收
+#define COM5RCVIDLEINTFLAG	//串口5空闲中断接收
 #endif
 
-#define DMATESTCOM1 0 //com1DMA测试
+#define DMATESTCOM1  //com1DMA测试
 
 typedef enum
 {

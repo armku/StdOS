@@ -9,7 +9,7 @@ extern "C"
 	}
 	void DMA1_Channel2_IRQHandler(void)
 	{
-#if (defined USECOM3) && COM3TXDMAFLAG
+#if (defined USECOM3) && (defined COM3TXDMAFLAG)
 		//USART3_TX
 		if (DMA_GetITStatus(DMA1_IT_HT2))
 		{
@@ -26,7 +26,7 @@ extern "C"
 	}
 	void DMA1_Channel3_IRQHandler(void)
 	{
-#if (defined USECOM3) && COM3RXDMAFLAG
+#if (defined USECOM3) && (defined COM3RXDMAFLAG)
 		//USART3_RX
 		if (DMA_GetITStatus(DMA1_IT_TC3))
 		{
@@ -37,7 +37,7 @@ extern "C"
 	}
 	void DMA1_Channel4_IRQHandler(void)
 	{
-#if (defined USECOM1) &&COM1TXDMAFLAG
+#if (defined USECOM1) && (defined COM1TXDMAFLAG)
 		//USART1_TX
 		if (DMA_GetITStatus(DMA1_IT_HT4))
 		{
@@ -54,7 +54,7 @@ extern "C"
 	}
 	void DMA1_Channel5_IRQHandler()
 	{
-#if (defined USECOM1) && COM1RXDMAFLAG
+#if (defined USECOM1) && (defined COM1RXDMAFLAG)
 		//USART1_RX
 		if (DMA_GetITStatus(DMA1_IT_TC5))
 		{
@@ -64,7 +64,7 @@ extern "C"
 	}
 	void DMA1_Channel6_IRQHandler(void)
 	{
-#if (defined USECOM2) && COM2RXDMAFLAG
+#if (defined USECOM2) && (defined COM2RXDMAFLAG)
 //		USART2_RX
 		if (DMA_GetITStatus(DMA1_IT_TC6))
 		{
@@ -75,7 +75,7 @@ extern "C"
 	}
 	void DMA1_Channel7_IRQHandler(void)
 	{
-#if (defined USECOM2) && COM2TXDMAFLAG
+#if (defined USECOM2) && (defined COM2TXDMAFLAG)
 		//USART2_TX
 		if (DMA_GetITStatus(DMA1_IT_HT7))
 		{

@@ -262,7 +262,7 @@ void DeviceConfigCenter::comSend(COM com, Buffer bs)
 		break;
 	}
 }
-#if (defined USECOM1) && COM1TXDMAFLAG	
+#if (defined USECOM1) && (defined COM1TXDMAFLAG)
 void USART1_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -287,7 +287,7 @@ void USART1_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX1EN = 0;	//串口1不可以发送
 }
 #endif
-#if (defined USECOM2) && COM2TXDMAFLAG	
+#if (defined USECOM2) && (defined COM2TXDMAFLAG	)
 void USART2_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -312,7 +312,7 @@ void USART2_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX2EN = 0;	//串口2不可以发送
 }
 #endif
-#if (defined USECOM3) && COM3TXDMAFLAG	
+#if (defined USECOM3) && (defined COM3TXDMAFLAG	)
 void USART3_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -337,7 +337,7 @@ void USART3_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX3EN = 0;	//串口3不可以发送
 }
 #endif
-#if (defined USECOM4) && COM4TXDMAFLAG	
+#if (defined USECOM4) && (definedn COM4TXDMAFLAG)
 void USART4_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -362,7 +362,7 @@ void USART4_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX4EN = 0;	//串口4不可以发送
 }
 #endif
-#if (defined USECOM5) && COM5TXDMAFLAG	
+#if (defined USECOM5) && (defined COM5TXDMAFLAG	)
 void USART5_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -1207,7 +1207,7 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 	Txx4.SetBuf(com4tx, ArrayLength(com4tx));
 	Rxx4.SetBuf(com4rx, ArrayLength(com4rx));
 
-#if  COM4RCVIDLEINTFLAG
+#if  defined COM4RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com4RcvRoutin, 0, 100, 1, "RcvCom4");
 #endif //  COM4RCVIDLEINTFLAG
@@ -2373,7 +2373,7 @@ void DeviceConfigCenter::Timer8ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 void OS_ComSendChk(void *param)
 {
 	//检查串口是否可以发送
-#if (defined USECOM1) && 	COM1TXDMAFLAG
+#if (defined USECOM1) && 	(defined COM1TXDMAFLAG)
 	if (USART_GetFlagStatus(USART1, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx1.Length();
@@ -2388,7 +2388,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if (defined USECOM2) && COM2TXDMAFLAG
+#if (defined USECOM2) && (defined COM2TXDMAFLAG)
 	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx2.Length();
@@ -2403,7 +2403,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if (defined USECOM3) && COM3TXDMAFLAG
+#if (defined USECOM3) && (defined COM3TXDMAFLAG)
 	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx3.Length();
@@ -2418,7 +2418,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if (defined USECOM4) && COM4TXDMAFLAG
+#if (defined USECOM4) && (defined COM4TXDMAFLAG)
 	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx4.Length();
@@ -2433,7 +2433,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if defined USECOM5 && COM5TXDMAFLAG
+#if defined USECOM5 && (defined COM5TXDMAFLAG)
 	if (USART_GetFlagStatus(UART5, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx5.Length();
@@ -2576,7 +2576,7 @@ void Printf(char *Data, ...)
 	//Write(bs);
 }
 #endif
-#if DMATESTCOM1
+#if defined DMATESTCOM1
 #include <stdio.h>
 //串口数据初始化
 void usart_data_init()
