@@ -2436,7 +2436,7 @@ void OS_ComSendChk(void *param)
 #endif
 }
 //´®¿Ú½ÓÊÕÅÐ¶Ï
-void Com3RcvRoutin(void *param)
+void OS_ComRcvChk(void *param)
 {
 #if defined USECOM3
 	int ms = Sys.Ms();
