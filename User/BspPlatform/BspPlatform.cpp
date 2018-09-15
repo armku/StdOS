@@ -8,6 +8,8 @@
 void TimeUpdate();
 
 void OS_ComSendChk(void *param);
+//´®¿Ú½ÓÊÕÅÐ¶Ï
+void Com3RcvRoutin(void *param);
 void BspPlatformInit()
 {	
 	DeviceConfigCenter::ConfigCom(COM1, 256000);
@@ -16,6 +18,7 @@ void BspPlatformInit()
 	DeviceConfigCenter::PTim2Update = TimeUpdate;
 
 	Sys.AddTask(OS_ComSendChk, 0, 5, 1, "ComSendChk");
+	Sys.AddTask(Com3RcvRoutin, 0, 100, 1, "RcvCom3");
 }
 
 int DeviceConfigCenter::CurrentTick()

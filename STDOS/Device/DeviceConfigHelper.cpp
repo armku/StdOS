@@ -1105,7 +1105,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	Rxx3.SetBuf(com3rx, ArrayLength(com3rx));
 #if defined COM3RCVIDLEINTFLAG
 #else
-	Sys.AddTask(Com3RcvRoutin, 0, 100, 1, "RcvCom3");
+	
 #endif //  COM3RCVIDLEINTFLAG
 #endif
 }
@@ -1516,20 +1516,7 @@ void DeviceConfigCenter::Com2RcvRoutin(void *param)
 	}
 #endif
 }
-//串口3接收判断
-void DeviceConfigCenter::Com3RcvRoutin(void *param)
-{
-#if defined USECOM3
-	int ms = Sys.Ms();
-	if ((ms - RcvLastTimeCOM3 > 1) && (Rxx3.Length() > 0))
-	{
-		if (DeviceConfigCenter::PRcvCOM3)
-		{
-			(*DeviceConfigCenter::PRcvCOM3)();
-		}
-	}
-#endif
-}
+
 //串口4接收判断
 void DeviceConfigCenter::Com4RcvRoutin(void *param)
 {
@@ -2445,6 +2432,20 @@ void OS_ComSendChk(void *param)
 		}
 		Txx5.Clear();
 		//UART5_SendDMA((uint8_t*)com5bufff, len);
+	}
+#endif
+}
+//串口接收判断
+void Com3RcvRoutin(void *param)
+{
+#if defined USECOM3
+	int ms = Sys.Ms();
+	if ((ms - DeviceConfigCenter::RcvLastTimeCOM3 > 1) && (Rxx3.Length() > 0))
+	{
+		if (DeviceConfigCenter::PRcvCOM3)
+		{
+			(*DeviceConfigCenter::PRcvCOM3)();
+		}
 	}
 #endif
 }

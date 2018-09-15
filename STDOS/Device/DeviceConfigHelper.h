@@ -200,7 +200,7 @@ private:
 
 	static void Com1RcvRoutin(void *param);//串口1接收判断
 	static void Com2RcvRoutin(void *param);//串口1接收判断
-	static void Com3RcvRoutin(void *param);//串口1接收判断
+	//static void Com3RcvRoutin(void *param);//串口1接收判断
 	static void Com4RcvRoutin(void *param);//串口1接收判断
 	static void Com5RcvRoutin(void *param);//串口1接收判断
 	//定时器
