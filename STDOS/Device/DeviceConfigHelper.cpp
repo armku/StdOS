@@ -777,7 +777,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//子优先级3
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
 	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器、
-#if COM1RCVIDLEINTFLAG
+#if defined COM1RCVIDLEINTFLAG
 	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
 
@@ -932,7 +932,7 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//子优先级3
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
 	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器、
-#if COM1RCVIDLEINTFLAG
+#if defined COM1RCVIDLEINTFLAG
 	USART_ITConfig(USART2, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
 
@@ -1086,7 +1086,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//子优先级3
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
 	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器、
-#if COM1RCVIDLEINTFLAG
+#if defined COM1RCVIDLEINTFLAG
 	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
 
