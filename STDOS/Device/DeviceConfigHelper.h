@@ -11,6 +11,25 @@
 #define USECOM4
 #define USECOM5
 
+#if defined USECOM1
+
+#endif
+
+#if defined USECOM2
+
+#endif
+
+#if defined USECOM3
+
+#endif
+
+#if defined USECOM4
+
+#endif
+
+#if defined USECOM5
+
+#endif
 
 #define DMATESTCOM1 0 //com1DMA≤‚ ‘
 
