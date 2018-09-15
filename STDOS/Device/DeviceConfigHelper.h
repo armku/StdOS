@@ -5,11 +5,11 @@
 #include "Port.h"
 #include "Core\Queue.h"
 
-#define USECOM1 1
-#define USECOM2 1
-#define USECOM3 1
-#define USECOM4 1
-#define USECOM5 1
+#define USECOM1
+#define USECOM2
+#define USECOM3
+#define USECOM4
+#define USECOM5
 
 
 #define DMATESTCOM1 0 //com1DMA≤‚ ‘
