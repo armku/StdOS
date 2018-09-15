@@ -138,27 +138,27 @@ void DeviceConfigCenter::InputPort_OpenEXTI(Pin pin, Trigger trigger)
 #ifdef __cplusplus
 extern "C" {
 #endif	
-#if USECOM1
+#if defined USECOM1
 	static char com1rx[256], com1tx[256];
 	Queue	Txx1;
 	Queue	Rxx1;
 #endif
-#if USECOM2
+#if defined USECOM2
 	static char com2rx[256], com2tx[256];
 	Queue	Txx2;
 	Queue	Rxx2;
 #endif
-#if USECOM3
+#if defined USECOM3
 	static char com3rx[256], com3tx[256];
 	Queue	Txx3;
 	Queue	Rxx3;
 #endif
-#if USECOM4
+#if defined USECOM4
 	static char com4rx[256], com4tx[256];
 	Queue	Txx4;
 	Queue	Rxx4;
 #endif
-#if USECOM5
+#if defined USECOM5
 	static char com5rx[256], com5tx[256];
 	Queue	Txx5;
 	Queue	Rxx5;
@@ -262,7 +262,7 @@ void DeviceConfigCenter::comSend(COM com, Buffer bs)
 		break;
 	}
 }
-#if USECOM1 && COM1TXDMAFLAG	
+#if (defined USECOM1) && COM1TXDMAFLAG	
 void USART1_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -287,7 +287,7 @@ void USART1_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX1EN = 0;	//串口1不可以发送
 }
 #endif
-#if USECOM2 && COM2TXDMAFLAG	
+#if (defined USECOM2) && COM2TXDMAFLAG	
 void USART2_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -312,7 +312,7 @@ void USART2_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX2EN = 0;	//串口2不可以发送
 }
 #endif
-#if USECOM3 && COM3TXDMAFLAG	
+#if (defined USECOM3) && COM3TXDMAFLAG	
 void USART3_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -337,7 +337,7 @@ void USART3_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX3EN = 0;	//串口3不可以发送
 }
 #endif
-#if USECOM4 && COM4TXDMAFLAG	
+#if (defined USECOM4) && COM4TXDMAFLAG	
 void USART4_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -362,7 +362,7 @@ void USART4_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX4EN = 0;	//串口4不可以发送
 }
 #endif
-#if USECOM5 && COM5TXDMAFLAG	
+#if (defined USECOM5) && COM5TXDMAFLAG	
 void USART5_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -387,25 +387,25 @@ void USART5_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX5EN = 0;	//串口5不可以发送
 }
 #endif
-#if USECOM1
+#if defined USECOM1
 uint8_t com1bufff[300];
 #endif
-#if USECOM2
+#if defined USECOM2
 uint8_t com2bufff[300];
 #endif
-#if USECOM3
+#if defined USECOM3
 uint8_t com3bufff[300];
 #endif
-#if USECOM4
+#if defined USECOM4
 uint8_t com4bufff[300];
 #endif
-#if USECOM5
+#if defined USECOM5
 uint8_t com5bufff[300];
 #endif
 void OS_ComSendChk(void *param);
 void DeviceConfigCenter::com1send(Buffer& bs)
 {
-#if USECOM1
+#if defined USECOM1
 #if COM1TXDMAFLAG			
 	Txx1.Write(bs);
 	OS_ComSendChk(&Txx1);
@@ -439,7 +439,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 }
 void DeviceConfigCenter::com2send(Buffer& bs)
 {
-#if USECOM2
+#if defined USECOM2
 #if COM2TXDMAFLAG			
 	Txx2.Write(bs);
 	OS_ComSendChk(&Txx2);
@@ -477,7 +477,7 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 }
 void DeviceConfigCenter::com3send(Buffer& bs)
 {
-#if USECOM3
+#if defined USECOM3
 #if COM3TXDMAFLAG			
 	Txx3.Write(bs);
 	OS_ComSendChk(&Txx3);
@@ -511,7 +511,7 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 }
 void DeviceConfigCenter::com4send(Buffer& bs)
 {
-#if USECOM4
+#if defined USECOM4
 #if COM4TXDMAFLAG			
 	Txx4.Write(bs);
 	OS_ComSendChk(&Txx4);
@@ -545,7 +545,7 @@ void DeviceConfigCenter::com4send(Buffer& bs)
 }
 void DeviceConfigCenter::com5send(Buffer& bs)
 {
-#if USECOM5
+#if defined USECOM5
 #if COM5TXDMAFLAG			
 	Txx5.Write(bs);
 	OS_ComSendChk(&Txx5);
@@ -579,7 +579,7 @@ void DeviceConfigCenter::com5send(Buffer& bs)
 }
 void DeviceConfigCenter::com1send()
 {
-#if USECOM1
+#if defined USECOM1
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -596,7 +596,7 @@ void DeviceConfigCenter::com1send()
 }
 void DeviceConfigCenter::com2send()
 {
-#if USECOM2
+#if defined USECOM2
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -610,7 +610,7 @@ void DeviceConfigCenter::com2send()
 }
 void DeviceConfigCenter::com3send()
 {
-#if USECOM3
+#if defined USECOM3
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -622,7 +622,7 @@ void DeviceConfigCenter::com3send()
 }
 void DeviceConfigCenter::com4send()
 {
-#if USECOM4
+#if defined USECOM4
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -634,7 +634,7 @@ void DeviceConfigCenter::com4send()
 }
 void DeviceConfigCenter::com5send()
 {
-#if USECOM5
+#if defined USECOM5
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -647,7 +647,7 @@ void DeviceConfigCenter::com5send()
 
 void DeviceConfigCenter::configCOM1(int baudRate)
 {
-#if USECOM1
+#if defined USECOM1
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
 
@@ -804,7 +804,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 }
 void DeviceConfigCenter::configCOM2(int baudRate)
 {
-#if USECOM2
+#if defined USECOM2
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
 	DeviceConfigCenter::BUFLEN_RX2 = ArrayLength(com2rx);
@@ -960,7 +960,7 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 
 void DeviceConfigCenter::configCOM3(int baudRate)
 {
-#if USECOM3
+#if defined USECOM3
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
 	DeviceConfigCenter::BUFLEN_RX3 = ArrayLength(com3rx);
@@ -1115,7 +1115,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 }
 void DeviceConfigCenter::configCOM4(int baudRate)
 {
-#if USECOM4
+#if defined USECOM4
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
 	DeviceConfigCenter::BUFLEN_RX4 = ArrayLength(com4rx);
@@ -1219,7 +1219,7 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 }
 void DeviceConfigCenter::configCOM5(int baudRate)
 {
-#if USECOM5
+#if defined USECOM5
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
 	DeviceConfigCenter::BUFLEN_RX5 = ArrayLength(com5rx);
@@ -1324,7 +1324,7 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 }
 void DeviceConfigCenter::Com1ChgBaudRate(int baudRate)
 {
-#if USECOM1
+#if defined USECOM1
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -1355,7 +1355,7 @@ void DeviceConfigCenter::Com1ChgBaudRate(int baudRate)
 }
 void DeviceConfigCenter::Com2ChgBaudRate(int baudRate)
 {
-#if USECOM2
+#if defined USECOM2
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -1386,7 +1386,7 @@ void DeviceConfigCenter::Com2ChgBaudRate(int baudRate)
 }
 void DeviceConfigCenter::Com3ChgBaudRate(int baudRate)
 {
-#if USECOM3
+#if defined USECOM3
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -1417,7 +1417,7 @@ void DeviceConfigCenter::Com3ChgBaudRate(int baudRate)
 }
 void DeviceConfigCenter::Com4ChgBaudRate(int baudRate)
 {
-#if USECOM4
+#if defined USECOM4
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -1448,7 +1448,7 @@ void DeviceConfigCenter::Com4ChgBaudRate(int baudRate)
 }
 void DeviceConfigCenter::Com5ChgBaudRate(int baudRate)
 {
-#if USECOM5
+#if defined USECOM5
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -1495,7 +1495,7 @@ void DeviceConfigCenter::SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, b
 //串口1接收判断
 void DeviceConfigCenter::Com1RcvRoutin(void *param)
 {
-#if USECOM1
+#if defined USECOM1
 	int ms = Sys.Ms();
 	if ((ms - RcvLastTimeCOM1 > 1) && (Rxx1.Length() > 0))
 	{
@@ -1509,7 +1509,7 @@ void DeviceConfigCenter::Com1RcvRoutin(void *param)
 //串口2接收判断
 void DeviceConfigCenter::Com2RcvRoutin(void *param)
 {
-#if USECOM2
+#if defined USECOM2
 	int ms = Sys.Ms();
 	if ((ms - RcvLastTimeCOM2 > 1) && (Rxx2.Length() > 0))
 	{
@@ -1523,7 +1523,7 @@ void DeviceConfigCenter::Com2RcvRoutin(void *param)
 //串口3接收判断
 void DeviceConfigCenter::Com3RcvRoutin(void *param)
 {
-#if USECOM3
+#if defined USECOM3
 	int ms = Sys.Ms();
 	if ((ms - RcvLastTimeCOM3 > 1) && (Rxx3.Length() > 0))
 	{
@@ -1537,7 +1537,7 @@ void DeviceConfigCenter::Com3RcvRoutin(void *param)
 //串口4接收判断
 void DeviceConfigCenter::Com4RcvRoutin(void *param)
 {
-#if USECOM4
+#if defined USECOM4
 	int ms = Sys.Ms();
 	if ((ms - RcvLastTimeCOM4 > 1) && (Rxx4.Length() > 0))
 	{
@@ -1551,7 +1551,7 @@ void DeviceConfigCenter::Com4RcvRoutin(void *param)
 //串口5接收判断
 void DeviceConfigCenter::Com5RcvRoutin(void *param)
 {
-#if USECOM5
+#if defined USECOM5
 	int ms = Sys.Ms();
 	if ((ms - RcvLastTimeCOM5 > 1) && (Rxx5.Length() > 0))
 	{
@@ -2377,7 +2377,7 @@ void DeviceConfigCenter::Timer8ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 void OS_ComSendChk(void *param)
 {
 	//检查串口是否可以发送
-#if USECOM1 && 	COM1TXDMAFLAG
+#if (defined USECOM1) && 	COM1TXDMAFLAG
 	if (USART_GetFlagStatus(USART1, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx1.Length();
@@ -2392,7 +2392,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if USECOM2 && COM2TXDMAFLAG
+#if (defined USECOM2) && COM2TXDMAFLAG
 	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx2.Length();
@@ -2407,7 +2407,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if USECOM3 && COM3TXDMAFLAG
+#if (defined USECOM3) && COM3TXDMAFLAG
 	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx3.Length();
@@ -2422,7 +2422,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if USECOM4 && COM4TXDMAFLAG
+#if (defined USECOM4) && COM4TXDMAFLAG
 	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx4.Length();
@@ -2437,7 +2437,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if USECOM5 && COM5TXDMAFLAG
+#if defined USECOM5 && COM5TXDMAFLAG
 	if (USART_GetFlagStatus(UART5, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx5.Length();

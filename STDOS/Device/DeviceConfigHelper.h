@@ -11,6 +11,7 @@
 #define USECOM4 1
 #define USECOM5 1
 
+
 #define DMATESTCOM1 0 //com1DMA²âÊÔ
 
 #define COM1SENDINTFLAG	1//´®¿Ú1ÖÐ¶Ï·¢ËÍ
@@ -176,27 +177,27 @@ private:
 #ifdef __cplusplus
 extern "C" {
 #endif	
-#if USECOM1
+#if defined USECOM1
 	extern Queue	Txx1;
 	extern Queue	Rxx1;
 #endif // USECOM1
 
-#if USECOM2
+#if defined USECOM2
 	extern Queue	Txx2;
 	extern Queue	Rxx2;
 #endif // USECOM2
 
-#if USECOM3
+#if defined USECOM3
 	extern Queue	Txx3;
 	extern Queue	Rxx3;
 #endif // USECOM3
 
-#if USECOM4
+#if defined USECOM4
 	extern Queue	Txx4;
 	extern Queue	Rxx4;
 #endif // USECOM4
 
-#if USECOM5
+#if defined USECOM5
 	extern Queue	Txx5;
 	extern Queue	Rxx5;
 #endif // USECOM5
