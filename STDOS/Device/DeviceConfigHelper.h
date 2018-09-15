@@ -46,8 +46,6 @@
 #define COM5RCVIDLEINTFLAG	//串口5空闲中断接收
 #endif
 
-#define DMATESTCOM1  //com1DMA测试
-
 typedef enum
 {
 	Rising = 0x01,	// 上升沿
