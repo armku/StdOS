@@ -100,7 +100,7 @@ extern "C"
 	void USART1_IRQHandler(void)
 	{
 #if defined USECOM1		
-#if COM1RXDMAFLAG
+#if defined COM1RXDMAFLAG
 #else
 		volatile uint8_t ch;
 		if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
@@ -114,7 +114,7 @@ extern "C"
 		{
 			USART_ReceiveData(USART1);//读取数据 注意：这句必须要，否则不能够清除中断标志位。我也不知道为啥！
 			USART_ClearITPendingBit(USART1, USART_IT_IDLE);         //清除中断标志
-#if COM1RXDMAFLAG
+#if defined COM1RXDMAFLAG
 			int curlen = 0;
 			curlen = DeviceConfigCenter::BUFLEN_RX1 - DMA_GetCurrDataCounter(DMA1_Channel5);	//算出接本帧数据长度			
 			Rxx1.SetLength(curlen);
@@ -169,7 +169,7 @@ extern "C"
 	void USART2_IRQHandler(void)
 	{
 #if defined USECOM2
-#if COM2RXDMAFLAG
+#if defined COM2RXDMAFLAG
 #else
 		volatile uint8_t ch;
 		if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
@@ -184,7 +184,7 @@ extern "C"
 			//数据帧接收完毕
 			USART_ReceiveData(USART2); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR)   
 			USART_ClearITPendingBit(USART2, USART_IT_IDLE);         //清除中断标志
-#if COM2RXDMAFLAG
+#if defined COM2RXDMAFLAG
 			int curlen = 0;
 			curlen = DeviceConfigCenter::BUFLEN_RX2 - DMA_GetCurrDataCounter(DMA1_Channel6);	//算出接本帧数据长度			
 			Rxx2.SetLength(curlen);
@@ -240,7 +240,7 @@ extern "C"
 	void USART3_IRQHandler(void)
 	{
 #if defined USECOM3
-#if COM3RXDMAFLAG
+#if defined COM3RXDMAFLAG
 #else
 		volatile uint8_t ch;
 		if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
@@ -255,7 +255,7 @@ extern "C"
 			//数据帧接收完毕
 			USART_ReceiveData(USART3); //由软件序列清除中断标志位(先读USART_SR，然后读USART_DR) 
 			USART_ClearITPendingBit(USART3, USART_IT_IDLE);         //清除中断标志
-#if COM3RXDMAFLAG
+#if defined COM3RXDMAFLAG
 			int curlen = 0;
 			curlen = DeviceConfigCenter::BUFLEN_RX3 - DMA_GetCurrDataCounter(DMA1_Channel3);	//算出接本帧数据长度			
 			Rxx3.SetLength(curlen);
@@ -367,7 +367,7 @@ extern "C"
 			}
 		}
 #elif defined STM32F1 | defined STM32F4
-#if COM4RXDMAFLAG
+#if defined COM4RXDMAFLAG
 #else
 		if (USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
 		{
@@ -488,7 +488,7 @@ extern "C"
 			}
 		}
 #elif defined STM32F1 | defined STM32F4
-#if COM5RXDMAFLAG
+#if defined COM5RXDMAFLAG
 #else
 		if (USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
 		{

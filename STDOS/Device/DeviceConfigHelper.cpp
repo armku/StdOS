@@ -406,10 +406,10 @@ void OS_ComSendChk(void *param);
 void DeviceConfigCenter::com1send(Buffer& bs)
 {
 #if defined USECOM1
-#if COM1TXDMAFLAG			
+#if defined COM1TXDMAFLAG			
 	Txx1.Write(bs);
 	OS_ComSendChk(&Txx1);
-#elif COM1SENDINTFLAG
+#elif defined COM1SENDINTFLAG
 	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
@@ -440,10 +440,10 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 void DeviceConfigCenter::com2send(Buffer& bs)
 {
 #if defined USECOM2
-#if COM2TXDMAFLAG			
+#if defined COM2TXDMAFLAG			
 	Txx2.Write(bs);
 	OS_ComSendChk(&Txx2);
-#elif COM2SENDINTFLAG
+#elif defined COM2SENDINTFLAG
 	if (pCOM2Rx485)
 	{
 		*pCOM2Rx485 = 1;
@@ -478,10 +478,10 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 void DeviceConfigCenter::com3send(Buffer& bs)
 {
 #if defined USECOM3
-#if COM3TXDMAFLAG			
+#if defined COM3TXDMAFLAG			
 	Txx3.Write(bs);
 	OS_ComSendChk(&Txx3);
-#elif COM3SENDINTFLAG
+#elif defined COM3SENDINTFLAG
 	while (bs.Length() > Txx3.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
@@ -512,10 +512,10 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 void DeviceConfigCenter::com4send(Buffer& bs)
 {
 #if defined USECOM4
-#if COM4TXDMAFLAG			
+#if defined COM4TXDMAFLAG			
 	Txx4.Write(bs);
 	OS_ComSendChk(&Txx4);
-#elif COM4SENDINTFLAG
+#elif defined COM4SENDINTFLAG
 	while (bs.Length() > Txx4.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
@@ -546,10 +546,10 @@ void DeviceConfigCenter::com4send(Buffer& bs)
 void DeviceConfigCenter::com5send(Buffer& bs)
 {
 #if defined USECOM5
-#if COM5TXDMAFLAG			
+#if defined COM5TXDMAFLAG			
 	Txx5.Write(bs);
 	OS_ComSendChk(&Txx5);
-#elif COM5SENDINTFLAG
+#elif defined COM5SENDINTFLAG
 	while (bs.Length() > Txx5.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
@@ -583,10 +583,10 @@ void DeviceConfigCenter::com1send()
 #if defined STM32F0
 
 #elif defined STM32F1
-#if COM1TXDMAFLAG
+#if defined COM1TXDMAFLAG
 	/* USART1 向 DMA发出TX请求 */
 	//USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
-#elif COM1SENDINTFLAG
+#elif defined COM1SENDINTFLAG
 	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 #endif
 #elif defined STM32F4
@@ -687,7 +687,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	/* 使能串口1接收中断 */
 	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // 串口接收中断配置
 
-#if COM1TXDMAFLAG
+#if defined COM1TXDMAFLAG
 	//DMA发送
 	/*开启DMA时钟*/
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
@@ -713,7 +713,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStruct);
 #endif // COM1TXDMAFLAG
-#if COM1RXDMAFLAG
+#if defined COM1RXDMAFLAG
 	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE);//开启空闲中断
 	USART_DMACmd(USART1, USART_DMAReq_Rx, ENABLE);   //使能串口1 DMA接收
 
@@ -736,7 +736,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	DMA_Cmd(DMA1_Channel5, ENABLE);  //正式驱动DMA传输
 #endif
 
-#if COM1RCVIDLEINTFLAG
+#if defined COM1RCVIDLEINTFLAG
 	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
 
@@ -796,7 +796,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	Txx1.SetBuf(com1tx, ArrayLength(com1tx));
 	Rxx1.SetBuf(com1rx, ArrayLength(com1rx));
 
-#if  COM1RCVIDLEINTFLAG
+#if  defined COM1RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com1RcvRoutin, 0, 100, 1, "RcvCom1");
 #endif //  COM1RCVIDLEINTFLAG
@@ -840,7 +840,7 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 
-#if COM2TXDMAFLAG
+#if defined COM2TXDMAFLAG
 	//DMA发送
 	/*开启DMA时钟*/
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
@@ -869,7 +869,7 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 
 	/* 使能串口2接收中断 */
 	USART_ITConfig(USART2, USART_IT_RXNE, ENABLE); // 串口接收中断配置
-#if COM2RXDMAFLAG
+#if defined COM2RXDMAFLAG
 	USART_ITConfig(USART2, USART_IT_IDLE, ENABLE);//开启空闲中断
 	USART_DMACmd(USART2, USART_DMAReq_Rx, ENABLE);   //使能串口1 DMA接收
 
@@ -891,7 +891,7 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 
 	DMA_Cmd(DMA1_Channel6, ENABLE);  //正式驱动DMA传输
 #endif
-#if COM2RCVIDLEINTFLAG
+#if defined COM2RCVIDLEINTFLAG
 	USART_ITConfig(USART2, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
 
@@ -951,7 +951,7 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 	Txx2.SetBuf(com2tx, ArrayLength(com2tx));
 	Rxx2.SetBuf(com2rx, ArrayLength(com2rx));
 
-#if  COM2RCVIDLEINTFLAG
+#if defined COM2RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com2RcvRoutin, 0, 100, 1, "RcvCom2");
 #endif //  COM2RCVIDLEINTFLAG
@@ -995,7 +995,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
-#if COM3TXDMAFLAG
+#if defined COM3TXDMAFLAG
 	//DMA发送
 	/*开启DMA时钟*/
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
@@ -1023,7 +1023,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 #endif // COM1TXDMAFLAG
 	/* 使能串口3接收中断 */
 	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE); // 串口接收中断配置
-#if COM3RXDMAFLAG
+#if defined COM3RXDMAFLAG
 	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE);//开启空闲中断
 	USART_DMACmd(USART3, USART_DMAReq_Rx, ENABLE);   //使能串口1 DMA接收
 
@@ -1045,7 +1045,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 
 	DMA_Cmd(DMA1_Channel3, ENABLE);  //正式驱动DMA传输
 #endif
-#if COM3RCVIDLEINTFLAG
+#if defined COM3RCVIDLEINTFLAG
 	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
 
@@ -1101,13 +1101,9 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	Ports[0]->Open();
 	Ports[1]->Open();
 #endif
-
 	Txx3.SetBuf(com3tx, ArrayLength(com3tx));
 	Rxx3.SetBuf(com3rx, ArrayLength(com3rx));
-
-
-
-#if  COM3RCVIDLEINTFLAG
+#if defined COM3RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com3RcvRoutin, 0, 100, 1, "RcvCom3");
 #endif //  COM3RCVIDLEINTFLAG
@@ -1316,7 +1312,7 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 	Txx5.SetBuf(com5tx, ArrayLength(com5tx));
 	Rxx5.SetBuf(com5rx, ArrayLength(com5rx));
 
-#if  COM5RCVIDLEINTFLAG
+#if  defined COM5RCVIDLEINTFLAG
 #else
 	Sys.AddTask(Com5RcvRoutin, 0, 100, 1, "RcvCom5");
 #endif //  COM5RCVIDLEINTFLAG
