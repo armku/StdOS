@@ -100,6 +100,7 @@ extern "C"
 	void USART1_IRQHandler(void)
 	{
 #if defined USECOM1		
+//接收
 #if defined COM1RXDMAFLAG
 #else
 		volatile uint8_t ch;
@@ -125,6 +126,7 @@ extern "C"
 				(*DeviceConfigCenter::PRcvCOM1)();
 			}
 		}
+//发送
 		/* 处理发送缓冲区空中断 */
 		if (USART_GetITStatus(USART1, USART_IT_TXE) != RESET)
 		{
