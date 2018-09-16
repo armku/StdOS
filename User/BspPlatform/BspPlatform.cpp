@@ -7,18 +7,13 @@
 
 void TimeUpdate();
 
-void OS_ComSendChk(void *param);
-//串口接收判断
-void OS_ComRcvChk(void *param);
+
 void BspPlatformInit()
 {	
 	DeviceConfigCenter::ConfigCom(COM1, 256000);
 	DeviceConfigCenter::ConfigCom(COM3, 256000);
 	DeviceConfigCenter::TimeTickInit();//系统用定时器初始化
 	DeviceConfigCenter::PTim2Update = TimeUpdate;
-
-	Sys.AddTask(OS_ComSendChk, 0, 5, 1, "ComSendChk");
-	Sys.AddTask(OS_ComRcvChk, 0, 100, 1, "ComRcvChk");
 }
 
 int DeviceConfigCenter::CurrentTick()
