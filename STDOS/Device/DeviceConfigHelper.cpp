@@ -456,7 +456,7 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 	Sys.GlobalDisable();
 	Txx2.Write(bs);
 	Sys.GlobalEnable();
-	com2send();
+	USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
 #else
 	if (pCOM2Rx485)
 	{
@@ -490,7 +490,7 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 	Sys.GlobalDisable();
 	Txx3.Write(bs);
 	Sys.GlobalEnable();
-	com3send();
+	USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
 #else
 	if (pCOM3Rx485)
 	{
@@ -524,7 +524,7 @@ void DeviceConfigCenter::com4send(Buffer& bs)
 	Sys.GlobalDisable();
 	Txx4.Write(bs);
 	Sys.GlobalEnable();
-	com4send();
+	USART_ITConfig(UART4, USART_IT_TXE, ENABLE);
 #else
 	if (pCOM4Rx485)
 	{
@@ -558,7 +558,7 @@ void DeviceConfigCenter::com5send(Buffer& bs)
 	Sys.GlobalDisable();
 	Txx5.Write(bs);
 	Sys.GlobalEnable();
-	com5send();
+	USART_ITConfig(UART5, USART_IT_TXE, ENABLE);
 #else
 	if (pCOM5Rx485)
 	{
@@ -577,57 +577,6 @@ void DeviceConfigCenter::com5send(Buffer& bs)
 		Sys.Delay(100);
 		*pCOM5Rx485 = 0;
 	}
-#endif
-#endif
-}
-
-void DeviceConfigCenter::com2send()
-{
-#if defined USECOM2
-#if defined STM32F0
-
-#elif defined STM32F1
-	USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
-	if (pCOM2Rx485)
-		*pCOM2Rx485 = 1;
-#elif defined STM32F4
-
-#endif
-#endif
-}
-void DeviceConfigCenter::com3send()
-{
-#if defined USECOM3
-#if defined STM32F0
-
-#elif defined STM32F1
-	USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
-#elif defined STM32F4
-
-#endif
-#endif
-}
-void DeviceConfigCenter::com4send()
-{
-#if defined USECOM4
-#if defined STM32F0
-
-#elif defined STM32F1
-	USART_ITConfig(UART4, USART_IT_TXE, ENABLE);
-#elif defined STM32F4
-
-#endif
-#endif
-}
-void DeviceConfigCenter::com5send()
-{
-#if defined USECOM5
-#if defined STM32F0
-
-#elif defined STM32F1
-	USART_ITConfig(UART5, USART_IT_TXE, ENABLE);
-#elif defined STM32F4
-
 #endif
 #endif
 }
