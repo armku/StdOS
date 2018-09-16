@@ -128,6 +128,7 @@ extern "C"
 		/* 处理发送缓冲区空中断 */
 		if (USART_GetITStatus(USART1, USART_IT_TXE) != RESET)
 		{
+#if defined COM1SENDINTFLAG
 			if (Txx1.Empty())
 			{
 				/* 发送缓冲区的数据已取完时， 禁止发送缓冲区空中断 （注意：此时最后1个数据还未真正发送完毕）*/
@@ -140,11 +141,12 @@ extern "C"
 				/* 从发送FIFO取1个字节写入串口发送数据寄存器 */
 				USART_SendData(USART1, Txx1.Dequeue());
 			}
-
+#endif
 		}
 		/* 数据bit位全部发送完毕的中断 */
 		else if (USART_GetITStatus(USART1, USART_IT_TC) != RESET)
 		{
+#if defined COM1SENDINTFLAG
 			if (Txx1.Empty())
 			{
 				/* 如果发送FIFO的数据全部发送完毕，禁止数据发送完毕中断 */
@@ -163,6 +165,7 @@ extern "C"
 				/* 如果发送FIFO的数据还未完毕，则从发送FIFO取1个数据写入发送数据寄存器 */
 				USART_SendData(USART1, Txx1.Dequeue());
 			}
+#endif
 		}
 #endif
 	}
