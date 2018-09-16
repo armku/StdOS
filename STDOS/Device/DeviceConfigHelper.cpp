@@ -413,9 +413,6 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 
 #if defined COM1TXDMAFLAG			
 	Txx1.Write(bs);
-	OS_ComSendChk(&Txx1);
-	/* USART1 向 DMA发出TX请求 */
-	//USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
 #elif defined COM1SENDINTFLAG
 	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
@@ -450,9 +447,6 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 
 #if defined COM2TXDMAFLAG			
 	Txx2.Write(bs);
-	OS_ComSendChk(&Txx2);
-	/* 向 DMA发出TX请求 */
-	//USART_DMACmd(USART2, USART_DMAReq_Tx, ENABLE);
 #elif defined COM2SENDINTFLAG
 	while (bs.Length() > Txx2.RemainLength());//等待发送缓冲区可容纳足够内容
 											  //中断发送
@@ -487,9 +481,6 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 
 #if defined COM3TXDMAFLAG			
 	Txx3.Write(bs);
-	OS_ComSendChk(&Txx3);
-	/* 向 DMA发出TX请求 */
-	//USART_DMACmd(USART3, USART_DMAReq_Tx, ENABLE);
 #elif defined COM3SENDINTFLAG
 	while (bs.Length() > Txx3.RemainLength());//等待发送缓冲区可容纳足够内容
 											  //中断发送
@@ -524,9 +515,6 @@ void DeviceConfigCenter::com4send(Buffer& bs)
 
 #if defined COM4TXDMAFLAG			
 	Txx4.Write(bs);
-	OS_ComSendChk(&Txx4);
-	/* 向 DMA发出TX请求 */
-	//USART_DMACmd(UART4, USART_DMAReq_Tx, ENABLE);
 #elif defined COM4SENDINTFLAG
 	while (bs.Length() > Txx4.RemainLength());//等待发送缓冲区可容纳足够内容
 											  //中断发送
@@ -561,9 +549,6 @@ void DeviceConfigCenter::com5send(Buffer& bs)
 
 #if defined COM5TXDMAFLAG			
 	Txx5.Write(bs);
-	OS_ComSendChk(&Txx5);
-	/* 向 DMA发出TX请求 */
-	//USART_DMACmd(USART5, USART_DMAReq_Tx, ENABLE);
 #elif defined COM5SENDINTFLAG
 	while (bs.Length() > Txx5.RemainLength());//等待发送缓冲区可容纳足够内容
 											  //中断发送
