@@ -103,7 +103,6 @@ public:
 	//串口	
 	static void ConfigCom(COM com, int baudRate);
 	static void ComChgBaudRate(COM com, int baudRate);//改变波特率
-	static void com1send();
 	static void com2send();
 	static void com3send();
 	static void com4send();

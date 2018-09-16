@@ -406,21 +406,24 @@ void OS_ComSendChk(void *param);
 void DeviceConfigCenter::com1send(Buffer& bs)
 {
 #if defined USECOM1
+	if (pCOM1Rx485)
+	{
+		*pCOM1Rx485 = 1;
+	}
+
 #if defined COM1TXDMAFLAG			
 	Txx1.Write(bs);
 	OS_ComSendChk(&Txx1);
+	/* USART1 向 DMA发出TX请求 */
+	//USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
 #elif defined COM1SENDINTFLAG
 	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
 	Txx1.Write(bs);
 	Sys.GlobalEnable();
-	com1send();
-#else
-	if (pCOM1Rx485)
-	{
-		*pCOM1Rx485 = 1;
-	}
+	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+#else	
 	for (int i = 0; i < bs.Length(); i++)
 	{
 		/* 发送一个字节数据到USART */
@@ -577,23 +580,7 @@ void DeviceConfigCenter::com5send(Buffer& bs)
 #endif
 #endif
 }
-void DeviceConfigCenter::com1send()
-{
-#if defined USECOM1
-#if defined STM32F0
 
-#elif defined STM32F1
-#if defined COM1TXDMAFLAG
-	/* USART1 向 DMA发出TX请求 */
-	//USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
-#elif defined COM1SENDINTFLAG
-	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
-#endif
-#elif defined STM32F4
-
-#endif
-#endif
-}
 void DeviceConfigCenter::com2send()
 {
 #if defined USECOM2
