@@ -443,139 +443,147 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 void DeviceConfigCenter::com2send(Buffer& bs)
 {
 #if defined USECOM2
-#if defined COM2TXDMAFLAG			
-	Txx2.Write(bs);
-	OS_ComSendChk(&Txx2);
-#elif defined COM2SENDINTFLAG
 	if (pCOM2Rx485)
 	{
 		*pCOM2Rx485 = 1;
-	}
-	while (bs.Length() > Txx2.RemainLength());//等待发送缓冲区可容纳足够内容
-	//中断发送
+}
+
+#if defined COM1TXDMAFLAG			
+	Txx1.Write(bs);
+	OS_ComSendChk(&Txx1);
+	/* USART1 向 DMA发出TX请求 */
+	//USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
+#elif defined COM1SENDINTFLAG
+	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
+											  //中断发送
 	Sys.GlobalDisable();
-	Txx2.Write(bs);
+	Txx1.Write(bs);
 	Sys.GlobalEnable();
-	USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
-#else
-	if (pCOM2Rx485)
-	{
-		*pCOM2Rx485 = 1;
-	}
+	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+#else	
 	for (int i = 0; i < bs.Length(); i++)
 	{
 		/* 发送一个字节数据到USART */
-		USART_SendData(USART2, bs[i]);
+		USART_SendData(USART1, bs[i]);
 
 		/* 等待发送完毕 */
-		while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET);
+		while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
 	}
-	if (pCOM2Rx485)
+	if (pCOM1Rx485)
 	{
 		Sys.Delay(100);
-		*pCOM2Rx485 = 0;
+		*pCOM1Rx485 = 0;
 	}
 #endif
 #endif
 }
 void DeviceConfigCenter::com3send(Buffer& bs)
 {
-#if defined USECOM3
-#if defined COM3TXDMAFLAG			
-	Txx3.Write(bs);
-	OS_ComSendChk(&Txx3);
-#elif defined COM3SENDINTFLAG
-	while (bs.Length() > Txx3.RemainLength());//等待发送缓冲区可容纳足够内容
-	//中断发送
-	Sys.GlobalDisable();
-	Txx3.Write(bs);
-	Sys.GlobalEnable();
-	USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
-#else
-	if (pCOM3Rx485)
+#if defined USECOM1
+	if (pCOM1Rx485)
 	{
-		*pCOM3Rx485 = 1;
-	}
+		*pCOM1Rx485 = 1;
+}
+
+#if defined COM1TXDMAFLAG			
+	Txx1.Write(bs);
+	OS_ComSendChk(&Txx1);
+	/* USART1 向 DMA发出TX请求 */
+	//USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
+#elif defined COM1SENDINTFLAG
+	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
+											  //中断发送
+	Sys.GlobalDisable();
+	Txx1.Write(bs);
+	Sys.GlobalEnable();
+	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+#else	
 	for (int i = 0; i < bs.Length(); i++)
 	{
 		/* 发送一个字节数据到USART */
-		USART_SendData(USART3, bs[i]);
+		USART_SendData(USART1, bs[i]);
 
 		/* 等待发送完毕 */
-		while (USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET);
+		while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
 	}
-	if (pCOM3Rx485)
+	if (pCOM1Rx485)
 	{
 		Sys.Delay(100);
-		*pCOM3Rx485 = 0;
+		*pCOM1Rx485 = 0;
 	}
 #endif
 #endif
 }
 void DeviceConfigCenter::com4send(Buffer& bs)
 {
-#if defined USECOM4
-#if defined COM4TXDMAFLAG			
-	Txx4.Write(bs);
-	OS_ComSendChk(&Txx4);
-#elif defined COM4SENDINTFLAG
-	while (bs.Length() > Txx4.RemainLength());//等待发送缓冲区可容纳足够内容
-	//中断发送
-	Sys.GlobalDisable();
-	Txx4.Write(bs);
-	Sys.GlobalEnable();
-	USART_ITConfig(UART4, USART_IT_TXE, ENABLE);
-#else
-	if (pCOM4Rx485)
+#if defined USECOM1
+	if (pCOM1Rx485)
 	{
-		*pCOM4Rx485 = 1;
+		*pCOM1Rx485 = 1;
 	}
+
+#if defined COM1TXDMAFLAG			
+	Txx1.Write(bs);
+	OS_ComSendChk(&Txx1);
+	/* USART1 向 DMA发出TX请求 */
+	//USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
+#elif defined COM1SENDINTFLAG
+	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
+											  //中断发送
+	Sys.GlobalDisable();
+	Txx1.Write(bs);
+	Sys.GlobalEnable();
+	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+#else	
 	for (int i = 0; i < bs.Length(); i++)
 	{
 		/* 发送一个字节数据到USART */
-		USART_SendData(UART4, bs[i]);
+		USART_SendData(USART1, bs[i]);
 
 		/* 等待发送完毕 */
-		while (USART_GetFlagStatus(UART4, USART_FLAG_TXE) == RESET);
+		while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
 	}
-	if (pCOM4Rx485)
+	if (pCOM1Rx485)
 	{
 		Sys.Delay(100);
-		*pCOM4Rx485 = 0;
+		*pCOM1Rx485 = 0;
 	}
 #endif
 #endif
 }
 void DeviceConfigCenter::com5send(Buffer& bs)
 {
-#if defined USECOM5
-#if defined COM5TXDMAFLAG			
-	Txx5.Write(bs);
-	OS_ComSendChk(&Txx5);
-#elif defined COM5SENDINTFLAG
-	while (bs.Length() > Txx5.RemainLength());//等待发送缓冲区可容纳足够内容
-	//中断发送
-	Sys.GlobalDisable();
-	Txx5.Write(bs);
-	Sys.GlobalEnable();
-	USART_ITConfig(UART5, USART_IT_TXE, ENABLE);
-#else
-	if (pCOM5Rx485)
+#if defined USECOM1
+	if (pCOM1Rx485)
 	{
-		*pCOM5Rx485 = 1;
-	}
+		*pCOM1Rx485 = 1;
+}
+
+#if defined COM1TXDMAFLAG			
+	Txx1.Write(bs);
+	OS_ComSendChk(&Txx1);
+	/* USART1 向 DMA发出TX请求 */
+	//USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
+#elif defined COM1SENDINTFLAG
+	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
+											  //中断发送
+	Sys.GlobalDisable();
+	Txx1.Write(bs);
+	Sys.GlobalEnable();
+	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+#else	
 	for (int i = 0; i < bs.Length(); i++)
 	{
 		/* 发送一个字节数据到USART */
-		USART_SendData(UART5, bs[i]);
+		USART_SendData(USART1, bs[i]);
 
 		/* 等待发送完毕 */
-		while (USART_GetFlagStatus(UART5, USART_FLAG_TXE) == RESET);
+		while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
 	}
-	if (pCOM5Rx485)
+	if (pCOM1Rx485)
 	{
 		Sys.Delay(100);
-		*pCOM5Rx485 = 0;
+		*pCOM1Rx485 = 0;
 	}
 #endif
 #endif
