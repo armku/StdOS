@@ -738,6 +738,13 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 	DeviceConfigCenter::BUFLEN_TX2 = ArrayLength(com2tx);
 	Txx2.SetBuf(com2tx, ArrayLength(com2tx));
 	Rxx2.SetBuf(com2rx, ArrayLength(com2rx));
+	SerialPort_GetPins(&Pins[0], &Pins[1], COM2);
+	Ports[0] = new AlternatePort();
+	Ports[1] = new InputPort();
+	Ports[0]->Set(Pins[0]);
+	Ports[1]->Set(Pins[1]);
+	Ports[0]->Open();
+	Ports[1]->Open();
 #if defined STM32F0
 #elif defined STM32F1
 
@@ -822,17 +829,8 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 #if defined COM2RCVIDLEINTFLAG
 	USART_ITConfig(USART2, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
-
 	USART_Cmd(USART2, ENABLE);
-	USART_ClearFlag(USART2, USART_FLAG_TC);
-
-	SerialPort_GetPins(&Pins[0], &Pins[1], COM2);
-	Ports[0] = new AlternatePort();
-	Ports[1] = new InputPort();
-	Ports[0]->Set(Pins[0]);
-	Ports[1]->Set(Pins[1]);
-	Ports[0]->Open();
-	Ports[1]->Open();
+	USART_ClearFlag(USART2, USART_FLAG_TC);	
 #elif defined STM32F4
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
@@ -887,6 +885,13 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	DeviceConfigCenter::BUFLEN_TX3 = ArrayLength(com3tx);
 	Txx3.SetBuf(com3tx, ArrayLength(com3tx));
 	Rxx3.SetBuf(com3rx, ArrayLength(com3rx));
+	SerialPort_GetPins(&Pins[0], &Pins[1], COM3);
+	Ports[0] = new AlternatePort();
+	Ports[1] = new InputPort();
+	Ports[0]->Set(Pins[0]);
+	Ports[1]->Set(Pins[1]);
+	Ports[0]->Open();
+	Ports[1]->Open();
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -970,17 +975,8 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 #if defined COM3RCVIDLEINTFLAG
 	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
-
 	USART_Cmd(USART3, ENABLE);
-	USART_ClearFlag(USART3, USART_FLAG_TC);
-
-	SerialPort_GetPins(&Pins[0], &Pins[1], COM3);
-	Ports[0] = new AlternatePort();
-	Ports[1] = new InputPort();
-	Ports[0]->Set(Pins[0]);
-	Ports[1]->Set(Pins[1]);
-	Ports[0]->Open();
-	Ports[1]->Open();
+	USART_ClearFlag(USART3, USART_FLAG_TC);	
 #elif defined STM32F4
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
