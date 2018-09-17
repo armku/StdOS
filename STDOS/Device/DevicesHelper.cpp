@@ -32,6 +32,9 @@ extern "C"
 		{
 			//TODO:Add code here
 			DMA_ClearITPendingBit(DMA1_IT_TC3);
+#if (!defined COM3RCVIDLEINTFLAG)
+			DeviceConfigCenter::RcvLastTimeCOM3 = Sys.Ms();
+#endif
 		}
 #endif
 	}
@@ -73,6 +76,9 @@ extern "C"
 		{
 			//TODO:Add code here
 			DMA_ClearITPendingBit(DMA1_IT_TC6);
+#if (!defined COM2RCVIDLEINTFLAG)
+			DeviceConfigCenter::RcvLastTimeCOM2 = Sys.Ms();
+#endif
 		}
 #endif
 	}
