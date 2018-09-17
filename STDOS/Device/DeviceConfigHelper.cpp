@@ -588,8 +588,9 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 
 	DeviceConfigCenter::BUFLEN_RX1 = ArrayLength(com1rx);
 	DeviceConfigCenter::BUFLEN_TX1 = ArrayLength(com1tx);
+	Txx1.SetBuf(com1tx, ArrayLength(com1tx));
+	Rxx1.SetBuf(com1rx, ArrayLength(com1rx));
 #if defined STM32F0
-
 #elif defined STM32F1	
 
 	USART_InitTypeDef USART_InitStructure;
@@ -726,10 +727,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	Ports[1]->Set(Pins[1]);
 	Ports[0]->Open();
 	Ports[1]->Open();
-#endif
-
-	Txx1.SetBuf(com1tx, ArrayLength(com1tx));
-	Rxx1.SetBuf(com1rx, ArrayLength(com1rx));
+#endif	
 #endif
 }
 void DeviceConfigCenter::configCOM2(int baudRate)
@@ -739,8 +737,9 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 	Pin			Pins[2];	// Tx/Rx
 	DeviceConfigCenter::BUFLEN_RX2 = ArrayLength(com2rx);
 	DeviceConfigCenter::BUFLEN_TX2 = ArrayLength(com2tx);
+	Txx2.SetBuf(com2tx, ArrayLength(com2tx));
+	Rxx2.SetBuf(com2rx, ArrayLength(com2rx));
 #if defined STM32F0
-
 #elif defined STM32F1
 
 	USART_InitTypeDef USART_InitStructure;
@@ -876,10 +875,7 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 	Ports[1]->Set(Pins[1]);
 	Ports[0]->Open();
 	Ports[1]->Open();
-#endif
-
-	Txx2.SetBuf(com2tx, ArrayLength(com2tx));
-	Rxx2.SetBuf(com2rx, ArrayLength(com2rx));
+#endif	
 #endif
 }
 
@@ -890,6 +886,8 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	Pin			Pins[2];	// Tx/Rx
 	DeviceConfigCenter::BUFLEN_RX3 = ArrayLength(com3rx);
 	DeviceConfigCenter::BUFLEN_TX3 = ArrayLength(com3tx);
+	Txx3.SetBuf(com3tx, ArrayLength(com3tx));
+	Rxx3.SetBuf(com3rx, ArrayLength(com3rx));
 #if defined STM32F0
 
 #elif defined STM32F1
@@ -1026,8 +1024,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	Ports[0]->Open();
 	Ports[1]->Open();
 #endif
-	Txx3.SetBuf(com3tx, ArrayLength(com3tx));
-	Rxx3.SetBuf(com3rx, ArrayLength(com3rx));
+	
 #if defined COM3RCVIDLEINTFLAG
 #else
 	
