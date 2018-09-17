@@ -34,7 +34,7 @@
 #endif
 
 #if defined USECOM3
-//#define COM3TXDMAFLAG  //串口3DMA发送
+#define COM3TXDMAFLAG  //串口3DMA发送 异常
 #if (!defined COM3TXDMAFLAG)
 #define COM3SENDINTFLAG	//串口3中断发送
 #endif
