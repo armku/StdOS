@@ -50,7 +50,6 @@
 #define COM4SENDINTFLAG	//串口4中断发送
 #endif
 
-
 //#define COM4RXDMAFLAG  //串口4DMA接收
 #define COM4RCVIDLEINTFLAG	//串口4空闲中断接收
 #endif
