@@ -590,6 +590,13 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	DeviceConfigCenter::BUFLEN_TX1 = ArrayLength(com1tx);
 	Txx1.SetBuf(com1tx, ArrayLength(com1tx));
 	Rxx1.SetBuf(com1rx, ArrayLength(com1rx));
+	SerialPort_GetPins(&Pins[0], &Pins[1], COM1);
+	Ports[0] = new AlternatePort();
+	Ports[1] = new InputPort();
+	Ports[0]->Set(Pins[0]);
+	Ports[1]->Set(Pins[1]);
+	Ports[0]->Open();
+	Ports[1]->Open();
 #if defined STM32F0
 #elif defined STM32F1	
 
@@ -677,15 +684,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 #endif
 
 	USART_Cmd(USART1, ENABLE);
-	USART_ClearFlag(USART1, USART_FLAG_TC);
-
-	SerialPort_GetPins(&Pins[0], &Pins[1], COM1);
-	Ports[0] = new AlternatePort();
-	Ports[1] = new InputPort();
-	Ports[0]->Set(Pins[0]);
-	Ports[1]->Set(Pins[1]);
-	Ports[0]->Open();
-	Ports[1]->Open();
+	USART_ClearFlag(USART1, USART_FLAG_TC);	
 #elif defined STM32F4
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
