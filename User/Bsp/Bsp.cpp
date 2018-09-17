@@ -81,6 +81,16 @@ void com1rcv()
 	debug_printf("COM1RCV:\n");
 	bs1.ShowHex(true);
 }
+void comtestrcv()
+{
+	Buffer bs1(chbuf, ArrayLength(chbuf));
+
+	Rxx3.Read(bs1);
+	Rxx3.Clear();
+
+	debug_printf("COM3RCV:\n");
+	bs1.ShowHex(true);
+}
 void Esp8266TestInit();
 void W5500Test();
 
@@ -90,6 +100,8 @@ void BspInit()
 	led2 = 1;
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	DeviceConfigCenter::PRcvCOM1 = com1rcv;
+	DeviceConfigCenter::PRcvCOM3 = comtestrcv;
+	DeviceConfigCenter::ConfigCom(COM3, 256000);
 
 	//W5500Test();
 }
