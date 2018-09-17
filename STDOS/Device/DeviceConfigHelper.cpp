@@ -2246,7 +2246,7 @@ void OS_ComSendChk(void *param)
 #endif
 
 #if (defined USECOM3) && (defined COM3TXDMAFLAG)
-	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
+	if (USART_GetFlagStatus(USART3, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx3.Length();
 		if (len == 0)
