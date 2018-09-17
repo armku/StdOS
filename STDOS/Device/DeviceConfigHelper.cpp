@@ -351,7 +351,7 @@ void USART4_SendDMA(uint8_t* buf, int len)
 
 	//DMA_Cmd(DMA1_Channel2, DISABLE);
 
-	//DMA_InitStruct.DMA_PeripheralBaseAddr = (u32)(&USART1->DR);
+	//DMA_InitStruct.DMA_PeripheralBaseAddr = (u32)(&UART4->DR);
 	//DMA_InitStruct.DMA_MemoryBaseAddr = (u32)buf;
 	//DMA_InitStruct.DMA_DIR = DMA_DIR_PeripheralDST;
 	//DMA_InitStruct.DMA_BufferSize = len;
@@ -376,7 +376,7 @@ void USART5_SendDMA(uint8_t* buf, int len)
 
 	DMA_Cmd(DMA1_Channel2, DISABLE);
 
-	DMA_InitStruct.DMA_PeripheralBaseAddr = (u32)(&USART1->DR);
+	DMA_InitStruct.DMA_PeripheralBaseAddr = (u32)(&UART5->DR);
 	DMA_InitStruct.DMA_MemoryBaseAddr = (u32)buf;
 	DMA_InitStruct.DMA_DIR = DMA_DIR_PeripheralDST;
 	DMA_InitStruct.DMA_BufferSize = len;
