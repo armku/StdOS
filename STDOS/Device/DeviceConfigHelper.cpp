@@ -35,10 +35,16 @@ Func DeviceConfigCenter::PRcvCOM4 = 0;
 Func DeviceConfigCenter::PRcvCOM5 = 0;
 
 int DeviceConfigCenter::RcvLastTimeCOM1 = 0;//串口1最后接收数据时间
-int DeviceConfigCenter::RcvLastTimeCOM2 = 0;//串口1最后接收数据时间
-int DeviceConfigCenter::RcvLastTimeCOM3 = 0;//串口1最后接收数据时间
-int DeviceConfigCenter::RcvLastTimeCOM4 = 0;//串口1最后接收数据时间
-int DeviceConfigCenter::RcvLastTimeCOM5 = 0;//串口1最后接收数据时间
+int DeviceConfigCenter::RcvLastTimeCOM2 = 0;//串口2最后接收数据时间
+int DeviceConfigCenter::RcvLastTimeCOM3 = 0;//串口3最后接收数据时间
+int DeviceConfigCenter::RcvLastTimeCOM4 = 0;//串口4最后接收数据时间
+int DeviceConfigCenter::RcvLastTimeCOM5 = 0;//串口5最后接收数据时间
+
+int DeviceConfigCenter::RcvCom1PackInterval = 1;//串口1接收数据帧时间间隔
+int DeviceConfigCenter::RcvCom2PackInterval = 1;//串口2接收数据帧时间间隔
+int DeviceConfigCenter::RcvCom3PackInterval = 1;//串口3接收数据帧时间间隔
+int DeviceConfigCenter::RcvCom4PackInterval = 1;//串口4接收数据帧时间间隔
+int DeviceConfigCenter::RcvCom5PackInterval = 1;//串口5接收数据帧时间间隔
 
 int DeviceConfigCenter::BUFLEN_TX1 = 0;	//串口1发送缓冲区长度
 int DeviceConfigCenter::BUFLEN_RX1 = 0;	//串口1接收缓冲区长度

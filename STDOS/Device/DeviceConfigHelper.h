@@ -21,7 +21,7 @@
 #endif
 
 #define COM1RXDMAFLAG  //串口1DMA接收
-#define COM1RCVIDLEINTFLAG	//串口1空闲中断接收
+//#define COM1RCVIDLEINTFLAG	//串口1空闲中断接收
 #endif
 
 #if defined USECOM2
@@ -126,6 +126,12 @@ public:
 	static int RcvLastTimeCOM3;//串口3最后接收数据时间
 	static int RcvLastTimeCOM4;//串口4最后接收数据时间
 	static int RcvLastTimeCOM5;//串口5最后接收数据时间
+
+	static int RcvCom1PackInterval;//串口1接收数据帧时间间隔
+	static int RcvCom2PackInterval;//串口2接收数据帧时间间隔
+	static int RcvCom3PackInterval;//串口3接收数据帧时间间隔
+	static int RcvCom4PackInterval;//串口4接收数据帧时间间隔
+	static int RcvCom5PackInterval;//串口5接收数据帧时间间隔
 
 	static int BUFLEN_TX1;	//串口1发送缓冲区长度
 	static int BUFLEN_RX1;	//串口1接收缓冲区长度
