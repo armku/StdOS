@@ -343,7 +343,7 @@ void USART3_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX3EN = 0;	//串口3不可以发送
 }
 #endif
-#if (defined USECOM4) && (definedn COM4TXDMAFLAG)
+#if (defined USECOM4) && (defined COM4TXDMAFLAG)
 void USART4_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
