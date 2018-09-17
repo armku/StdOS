@@ -301,7 +301,7 @@ void USART2_SendDMA(uint8_t* buf, int len)
 
 	DMA_Cmd(DMA1_Channel7, DISABLE);
 
-	DMA_InitStruct.DMA_PeripheralBaseAddr = (u32)(&USART1->DR);
+	DMA_InitStruct.DMA_PeripheralBaseAddr = (u32)(&USART2->DR);
 	DMA_InitStruct.DMA_MemoryBaseAddr = (u32)buf;
 	DMA_InitStruct.DMA_DIR = DMA_DIR_PeripheralDST;
 	DMA_InitStruct.DMA_BufferSize = len;

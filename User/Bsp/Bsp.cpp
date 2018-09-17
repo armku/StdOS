@@ -95,7 +95,7 @@ const char *hello = "hello world";
 void routsendtest(void * param)
 {
 	Buffer bs((char*)hello,ArrayLength(hello));
-	DeviceConfigCenter::com3send(bs);
+	DeviceConfigCenter::com2send(bs);
 }
 void Esp8266TestInit();
 void W5500Test();
@@ -106,8 +106,8 @@ void BspInit()
 	led2 = 1;
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 	DeviceConfigCenter::PRcvCOM1 = com1rcv;
-	DeviceConfigCenter::PRcvCOM3 = comtestrcv;
-	DeviceConfigCenter::ConfigCom(COM3, 256000);
+	DeviceConfigCenter::PRcvCOM2 = comtestrcv;
+	DeviceConfigCenter::ConfigCom(COM2, 256000);
 
 	Sys.AddTask(routsendtest, 0, 0, 1000, "routsendtest");
 
