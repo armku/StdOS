@@ -59,6 +59,9 @@ extern "C"
 		if (DMA_GetITStatus(DMA1_IT_TC5))
 		{
 			DMA_ClearITPendingBit(DMA1_IT_TC5);
+#if (!defined COM1RCVIDLEINTFLAG)
+			DeviceConfigCenter::RcvLastTimeCOM1 = Sys.Ms();
+#endif
 		}
 #endif
 	}
@@ -122,10 +125,12 @@ extern "C"
 			Rxx1.SetLength(curlen);
 			MYDMA_Enable(DMA1_Channel5);                   //恢复DMA指针，等待下一次的接收						
 #endif
+#if defined COM1RCVIDLEINTFLAG
 			if (DeviceConfigCenter::PRcvCOM1)
 			{
 				(*DeviceConfigCenter::PRcvCOM1)();
 			}
+#endif
 		}
 //发送
 		/* 处理发送缓冲区空中断 */
@@ -196,10 +201,12 @@ extern "C"
 			Rxx2.SetLength(curlen);
 			MYDMA_Enable(DMA1_Channel6);                   //恢复DMA指针，等待下一次的接收						
 #endif
+#if defined COM2RCVIDLEINTFLAG
 			if (DeviceConfigCenter::PRcvCOM2)
 			{
 				(*DeviceConfigCenter::PRcvCOM2)();
 			}
+#endif
 		}
 		//发送
 		/* 处理发送缓冲区空中断 */
@@ -270,10 +277,12 @@ extern "C"
 			Rxx3.SetLength(curlen);
 			MYDMA_Enable(DMA1_Channel3);                   //恢复DMA指针，等待下一次的接收						
 #endif
+#if defined COM3RCVIDLEINTFLAG
 			if (DeviceConfigCenter::PRcvCOM3)
 			{
 				(*DeviceConfigCenter::PRcvCOM3)();
 			}
+#endif
 		}
 		//发送
 		/* 处理发送缓冲区空中断 */
@@ -344,10 +353,12 @@ extern "C"
 			Rxx4.SetLength(curlen);
 			MYDMA_Enable(DMA2_Channel5);                   //恢复DMA指针，等待下一次的接收						
 #endif
+#if defined COM4RCVIDLEINTFLAG
 			if (DeviceConfigCenter::PRcvCOM4)
 			{
 				(*DeviceConfigCenter::PRcvCOM4)();
 			}
+#endif
 		}
 		//发送
 		/* 处理发送缓冲区空中断 */
@@ -418,10 +429,12 @@ extern "C"
 			Rxx5.SetLength(curlen);
 			MYDMA_Enable(DMA2_Channel5);                   //恢复DMA指针，等待下一次的接收						
 #endif
+#if defined COM5RCVIDLEINTFLAG
 			if (DeviceConfigCenter::PRcvCOM5)
 			{
 				(*DeviceConfigCenter::PRcvCOM5)();
 			}
+#endif
 		}
 		//发送
 		/* 处理发送缓冲区空中断 */
