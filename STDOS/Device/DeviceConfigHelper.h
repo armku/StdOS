@@ -29,7 +29,7 @@
 #define COM2SENDINTFLAG	//串口2中断发送
 #endif
 
-//#define COM2RXDMAFLAG  //串口2DMA接收 异常
+#define COM2RXDMAFLAG  //串口2DMA接收
 #define COM2RCVIDLEINTFLAG	//串口2空闲中断接收
 #endif
 

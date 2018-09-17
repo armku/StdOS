@@ -806,12 +806,12 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 	USART_ITConfig(USART2, USART_IT_RXNE, ENABLE); // 串口接收中断配置
 #if defined COM2RXDMAFLAG
 	USART_ITConfig(USART2, USART_IT_IDLE, ENABLE);//开启空闲中断
-	USART_DMACmd(USART2, USART_DMAReq_Rx, ENABLE);   //使能串口1 DMA接收
+	USART_DMACmd(USART2, USART_DMAReq_Rx, ENABLE);   //使能串口 DMA接收
 
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);	//使能DMA传输
 	DMA_InitTypeDef DMA_InitStructureRcv;
 	DMA_DeInit(DMA1_Channel6);   //将DMA的通道5寄存器重设为缺省值  串口1对应的是DMA通道5
-	DMA_InitStructureRcv.DMA_PeripheralBaseAddr = (u32)&USART1->DR;  //DMA外设ADC基地址
+	DMA_InitStructureRcv.DMA_PeripheralBaseAddr = (u32)&USART2->DR;  //DMA外设ADC基地址
 	DMA_InitStructureRcv.DMA_MemoryBaseAddr = (u32)com2rx;  //DMA内存基地址
 	DMA_InitStructureRcv.DMA_DIR = DMA_DIR_PeripheralSRC;  //数据传输方向，从外设读取发送到内存
 	DMA_InitStructureRcv.DMA_BufferSize = DeviceConfigCenter::BUFLEN_RX2;  //DMA通道的DMA缓存的大小
