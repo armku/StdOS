@@ -1024,11 +1024,6 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	Ports[0]->Open();
 	Ports[1]->Open();
 #endif
-	
-#if defined COM3RCVIDLEINTFLAG
-#else
-	
-#endif //  COM3RCVIDLEINTFLAG
 #endif
 }
 void DeviceConfigCenter::configCOM4(int baudRate)
