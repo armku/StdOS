@@ -24,12 +24,12 @@
 #endif
 
 #if defined USECOM2
-//#define COM2TXDMAFLAG  //串口2DMA发送
+//#define COM2TXDMAFLAG  //串口2DMA发送 异常
 #if (!defined COM2TXDMAFLAG)
 #define COM2SENDINTFLAG	//串口2中断发送
 #endif
 
-//#define COM2RXDMAFLAG  //串口2DMA接收
+//#define COM2RXDMAFLAG  //串口2DMA接收 异常
 #define COM2RCVIDLEINTFLAG	//串口2空闲中断接收
 #endif
 
@@ -40,7 +40,7 @@
 #endif
 
 
-#define COM3RXDMAFLAG  //串口3DMA接收
+//#define COM3RXDMAFLAG  //串口3DMA接收 异常
 //#define COM3RCVIDLEINTFLAG	//串口3空闲中断接收
 #endif
 
