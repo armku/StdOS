@@ -15,8 +15,7 @@
 
 #define COM1TXDMAFLAG  //串口1DMA发送
 
-#if defined COM1TXDMAFLAG
-#else
+#if (!defined COM1TXDMAFLAG)
 #define COM1SENDINTFLAG	//串口1中断发送
 #endif
 
@@ -26,8 +25,7 @@
 
 #if defined USECOM2
 //#define COM2TXDMAFLAG  //串口2DMA发送
-#if defined COM2TXDMAFLAG
-#else
+#if (!defined COM2TXDMAFLAG)
 #define COM2SENDINTFLAG	//串口2中断发送
 #endif
 
@@ -37,8 +35,7 @@
 
 #if defined USECOM3
 //#define COM3TXDMAFLAG  //串口3DMA发送
-#if defined COM3TXDMAFLAG
-#else
+#if (!defined COM3TXDMAFLAG)
 #define COM3SENDINTFLAG	//串口3中断发送
 #endif
 
@@ -49,8 +46,7 @@
 
 #if defined USECOM4
 #define COM4TXDMAFLAG  //串口4DMA发送
-#if defined COM4TXDMAFLAG
-#else
+#if (!defined COM4TXDMAFLAG)
 #define COM4SENDINTFLAG	//串口4中断发送
 #endif
 
@@ -61,8 +57,7 @@
 
 #if defined USECOM5
 //#define COM5TXDMAFLAG  //串口5DMA发送
-#if defined COM5TXDMAFLAG
-#else
+#if (!defined COM5TXDMAFLAG)
 #define COM5SENDINTFLAG	//串口5中断发送
 #endif
 //#define COM5RXDMAFLAG  //串口5DMA接收
