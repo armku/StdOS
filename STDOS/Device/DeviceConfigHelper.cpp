@@ -880,11 +880,6 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 
 	Txx2.SetBuf(com2tx, ArrayLength(com2tx));
 	Rxx2.SetBuf(com2rx, ArrayLength(com2rx));
-
-#if defined COM2RCVIDLEINTFLAG
-#else
-	Sys.AddTask(Com2RcvRoutin, 0, 100, 1, "RcvCom2");
-#endif //  COM2RCVIDLEINTFLAG
 #endif
 }
 
