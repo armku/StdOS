@@ -13,7 +13,7 @@
 
 #if defined USECOM1
 
-#define COM1TXDMAFLAG  //串口1DMA发送
+//#define COM1TXDMAFLAG  //串口1DMA发送
 
 #if (!defined COM1TXDMAFLAG)
 #define COM1SENDINTFLAG	//串口1中断发送
