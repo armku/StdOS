@@ -187,8 +187,7 @@ extern "C"
 	{
 #if defined USECOM2		
 		//接收
-#if defined COM2RXDMAFLAG
-#else
+#if (!defined COM2RXDMAFLAG)
 		volatile uint8_t ch;
 		if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
 		{
@@ -263,8 +262,7 @@ extern "C"
 	{
 #if defined USECOM3		
 		//接收
-#if defined COM3RXDMAFLAG
-#else
+#if (!defined COM3RXDMAFLAG)
 		volatile uint8_t ch;
 		if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
 		{
@@ -339,8 +337,7 @@ extern "C"
 	{
 #if defined USECOM4		
 		//接收
-#if defined COM4RXDMAFLAG
-#else
+#if (!defined COM4RXDMAFLAG)
 		volatile uint8_t ch;
 		if (USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
 		{
@@ -415,8 +412,7 @@ extern "C"
 	{
 #if defined USECOM5		
 		//接收
-#if defined COM5RXDMAFLAG
-#else
+#if (!defined COM5RXDMAFLAG)
 		volatile uint8_t ch;
 		if (USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
 		{
