@@ -8,8 +8,8 @@
 #define USECOM1
 #define USECOM2
 #define USECOM3
-#define USECOM4
-#define USECOM5
+//#define USECOM4
+//#define USECOM5
 
 #if defined USECOM1
 
