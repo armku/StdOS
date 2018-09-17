@@ -380,13 +380,6 @@
       <Groups>
         <Group>
           <GroupName>USER</GroupName>
-          <Files>
-            <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\main.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Bsp</GroupName>
@@ -1274,13 +1267,6 @@
       <Groups>
         <Group>
           <GroupName>USER</GroupName>
-          <Files>
-            <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\main.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Bsp</GroupName>
