@@ -724,11 +724,6 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 
 	Txx1.SetBuf(com1tx, ArrayLength(com1tx));
 	Rxx1.SetBuf(com1rx, ArrayLength(com1rx));
-
-#if  defined COM1RCVIDLEINTFLAG
-#else
-	Sys.AddTask(Com1RcvRoutin, 0, 100, 1, "RcvCom1");
-#endif //  COM1RCVIDLEINTFLAG
 #endif
 }
 void DeviceConfigCenter::configCOM2(int baudRate)
@@ -1015,7 +1010,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//子优先级3
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
 	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器、
-#if defined COM1RCVIDLEINTFLAG
+#if defined COM3RCVIDLEINTFLAG
 	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
 
