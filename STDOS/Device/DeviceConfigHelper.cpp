@@ -2313,7 +2313,7 @@ void OS_ComRcvChk(void *param)
 {
 	int ms = Sys.Ms();
 #if defined USECOM1	&& (! defined COM1RCVIDLEINTFLAG)
-	if ((ms - DeviceConfigCenter::RcvLastTimeCOM1 > 1) && (Rxx1.Length() > 0))
+	if ((ms - DeviceConfigCenter::RcvLastTimeCOM1 > DeviceConfigCenter::RcvCom1PackInterval) && (Rxx1.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM1)
 		{
@@ -2322,7 +2322,7 @@ void OS_ComRcvChk(void *param)
 	}
 #endif
 #if defined USECOM2	&& (! defined COM2RCVIDLEINTFLAG)
-	if ((ms - DeviceConfigCenter::RcvLastTimeCOM2 > 1) && (Rxx2.Length() > 0))
+	if ((ms - DeviceConfigCenter::RcvLastTimeCOM2 > DeviceConfigCenter::RcvCom2PackInterval) && (Rxx2.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM2)
 		{
@@ -2331,7 +2331,7 @@ void OS_ComRcvChk(void *param)
 	}
 #endif
 #if defined USECOM3	&& (! defined COM3RCVIDLEINTFLAG)
-	if ((ms - DeviceConfigCenter::RcvLastTimeCOM3 > 1) && (Rxx3.Length() > 0))
+	if ((ms - DeviceConfigCenter::RcvLastTimeCOM3 > DeviceConfigCenter::RcvCom3PackInterval) && (Rxx3.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM3)
 		{
@@ -2340,7 +2340,7 @@ void OS_ComRcvChk(void *param)
 	}
 #endif
 #if defined USECOM4	&& (! defined COM4RCVIDLEINTFLAG)
-	if ((ms - DeviceConfigCenter::RcvLastTimeCOM4 > 1) && (Rxx4.Length() > 0))
+	if ((ms - DeviceConfigCenter::RcvLastTimeCOM4 > DeviceConfigCenter::RcvCom4PackInterval) && (Rxx4.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM4)
 		{
@@ -2349,7 +2349,7 @@ void OS_ComRcvChk(void *param)
 	}
 #endif
 #if defined USECOM5	&& (! defined COM5RCVIDLEINTFLAG)
-	if ((ms - DeviceConfigCenter::RcvLastTimeCOM5 > 1) && (Rxx5.Length() > 0))
+	if ((ms - DeviceConfigCenter::RcvLastTimeCOM5 > DeviceConfigCenter::RcvCom5PackInterval) && (Rxx5.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM5)
 		{
