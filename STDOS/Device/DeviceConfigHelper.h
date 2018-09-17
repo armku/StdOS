@@ -20,7 +20,7 @@
 #define COM1SENDINTFLAG	//串口1中断发送
 #endif
 
-#define COM1RXDMAFLAG  //串口1DMA接收
+//#define COM1RXDMAFLAG  //串口1DMA接收
 //#define COM1RCVIDLEINTFLAG	//串口1空闲中断接收
 #endif
 

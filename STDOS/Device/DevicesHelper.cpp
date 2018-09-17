@@ -101,14 +101,15 @@ extern "C"
 	{
 #if defined USECOM1		
 //Ω” ’
-#if defined COM1RXDMAFLAG
-#else
+#if (!defined COM1RXDMAFLAG)
 		volatile uint8_t ch;
 		if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
 		{
 			ch = USART_ReceiveData(USART1);
 			Rxx1.Enqueue(ch);
+#if (!defined COM1RCVIDLEINTFLAG)
 			DeviceConfigCenter::RcvLastTimeCOM1 = Sys.Ms();
+#endif
 		}
 #endif
 		if (USART_GetITStatus(USART1, USART_IT_IDLE) == SET)
