@@ -925,7 +925,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 #if defined COM3TXDMAFLAG
 	//DMA发送
 	/*开启DMA时钟*/
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA2, ENABLE);
 
 	DMA_ITConfig(DMA1_Channel2, DMA_IT_TC, ENABLE);  //配置DMA发送完成后产生中断
 
