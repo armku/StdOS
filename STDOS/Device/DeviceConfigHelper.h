@@ -40,7 +40,7 @@
 #endif
 
 
-//#define COM3RXDMAFLAG  //串口3DMA接收 异常
+#define COM3RXDMAFLAG  //串口3DMA接收 异常
 //#define COM3RCVIDLEINTFLAG	//串口3空闲中断接收
 #endif
 

@@ -956,8 +956,8 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);	//使能DMA传输
 	DMA_InitTypeDef DMA_InitStructureRcv;
-	DMA_DeInit(DMA1_Channel3);   //将DMA的通道5寄存器重设为缺省值  串口1对应的是DMA通道5
-	DMA_InitStructureRcv.DMA_PeripheralBaseAddr = (u32)&USART1->DR;  //DMA外设ADC基地址
+	DMA_DeInit(DMA1_Channel3);   //将DMA的通道5寄存器重设为缺省值  串口对应的是DMA通道
+	DMA_InitStructureRcv.DMA_PeripheralBaseAddr = (u32)&USART3->DR;  //DMA外设ADC基地址
 	DMA_InitStructureRcv.DMA_MemoryBaseAddr = (u32)com3rx;  //DMA内存基地址
 	DMA_InitStructureRcv.DMA_DIR = DMA_DIR_PeripheralSRC;  //数据传输方向，从外设读取发送到内存
 	DMA_InitStructureRcv.DMA_BufferSize = DeviceConfigCenter::BUFLEN_RX3;  //DMA通道的DMA缓存的大小
