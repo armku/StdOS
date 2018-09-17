@@ -85,8 +85,8 @@ void comtestrcv()
 {
 	Buffer bs1(chbuf, ArrayLength(chbuf));
 
-	Rxx3.Read(bs1);
-	Rxx3.Clear();
+	Rxx2.Read(bs1);
+	Rxx2.Clear();
 
 	debug_printf("COM2RCV:\n");
 	bs1.ShowHex(true);
