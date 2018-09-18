@@ -426,7 +426,7 @@ uint8_t com5bufff[300];
 void OS_ComSendChk(void *param);
 void DeviceConfigCenter::com1send(Buffer& bs)
 {
-#if defined USECOM1
+#if defined USECOM1TXD
 	if (pCOM1Rx485)
 	{
 		*pCOM1Rx485 = 1;
@@ -460,7 +460,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 }
 void DeviceConfigCenter::com2send(Buffer& bs)
 {
-#if defined USECOM2
+#if defined USECOM2TXD
 	if (pCOM2Rx485)
 	{
 		*pCOM2Rx485 = 1;
@@ -494,7 +494,7 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 }
 void DeviceConfigCenter::com3send(Buffer& bs)
 {
-#if defined USECOM3
+#if defined USECOM3TXD
 	if (pCOM3Rx485)
 	{
 		*pCOM3Rx485 = 1;
@@ -528,7 +528,7 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 }
 void DeviceConfigCenter::com4send(Buffer& bs)
 {
-#if defined USECOM4
+#if defined USECOM4TXD
 	if (pCOM4Rx485)
 	{
 		*pCOM4Rx485 = 1;
@@ -562,11 +562,11 @@ void DeviceConfigCenter::com4send(Buffer& bs)
 }
 void DeviceConfigCenter::com5send(Buffer& bs)
 {
-#if defined USECOM5
+#if defined USECOM5TXD
 	if (pCOM5Rx485)
 	{
 		*pCOM5Rx485 = 1;
-}
+	}
 
 #if defined COM5TXDMAFLAG			
 	Txx5.Write(bs);
@@ -2290,7 +2290,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if defined USECOM5 && (defined COM5TXDMAFLAG)
+#if defined COM5TXDMAFLAG
 	if (USART_GetFlagStatus(UART5, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx5.Length();
@@ -2345,7 +2345,7 @@ void OS_ComRcvChk(void *param)
 		}
 	}
 #endif
-#if defined USECOM5	&& (! defined COM5RCVIDLEINTFLAG)
+#if (! defined COM5RCVIDLEINTFLAG)
 	if ((ms - DeviceConfigCenter::RcvLastTimeCOM5 > DeviceConfigCenter::RcvCom5PackInterval) && (Rxx5.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM5)
