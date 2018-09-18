@@ -144,29 +144,44 @@ void DeviceConfigCenter::InputPort_OpenEXTI(Pin pin, Trigger trigger)
 #ifdef __cplusplus
 extern "C" {
 #endif	
-#if defined USECOM1
-	static char com1rx[256], com1tx[256];
+#if defined USECOM1TXD
+	static char com1tx[256];
 	Queue	Txx1;
+#endif
+#if defined USECOM1RXD
+	static char com1rx[256];
 	Queue	Rxx1;
 #endif
-#if defined USECOM2
-	static char com2rx[256], com2tx[256];
+#if defined USECOM2TXD
+	static char com2tx[256];
 	Queue	Txx2;
+#endif
+#if defined USECOM2RXD
+	static char com2rx[256];
 	Queue	Rxx2;
 #endif
-#if defined USECOM3
-	static char com3rx[256], com3tx[256];
+#if defined USECOM3TXD
+	static char com3tx[256];
 	Queue	Txx3;
+#endif
+#if defined USECOM3RXD
+	static char com3rx[256];
 	Queue	Rxx3;
 #endif
-#if defined USECOM4
-	static char com4rx[256], com4tx[256];
+#if defined USECOM4TXD
+	static char com4tx[256];
 	Queue	Txx4;
+#endif
+#if defined USECOM4RXD
+	static char com4rx[256];
 	Queue	Rxx4;
 #endif
-#if defined USECOM5
-	static char com5rx[256], com5tx[256];
+#if defined USECOM5TXD
+	static char com5tx[256];
 	Queue	Txx5;
+#endif
+#if defined USECOM5RXD
+	static char com5rx[256];
 	Queue	Rxx5;
 #endif
 
