@@ -283,7 +283,7 @@ void DeviceConfigCenter::comSend(COM com, Buffer bs)
 		break;
 	}
 }
-#if (defined USECOM1) && (defined COM1TXDMAFLAG)
+#if defined COM1TXDMAFLAG
 void USART1_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -308,7 +308,7 @@ void USART1_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX1EN = 0;	//串口1不可以发送
 }
 #endif
-#if (defined USECOM2) && (defined COM2TXDMAFLAG	)
+#if defined COM2TXDMAFLAG
 void USART2_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -333,7 +333,7 @@ void USART2_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX2EN = 0;	//串口2不可以发送
 }
 #endif
-#if (defined USECOM3) && (defined COM3TXDMAFLAG	)
+#if defined COM3TXDMAFLAG
 void USART3_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -358,7 +358,7 @@ void USART3_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX3EN = 0;	//串口3不可以发送
 }
 #endif
-#if (defined USECOM4) && (defined COM4TXDMAFLAG)
+#if defined COM4TXDMAFLAG
 void USART4_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
@@ -383,7 +383,7 @@ void USART4_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX4EN = 0;	//串口4不可以发送
 }
 #endif
-#if (defined USECOM5) && (defined COM5TXDMAFLAG	)
+#if defined COM5TXDMAFLAG
 void USART5_SendDMA(uint8_t* buf, int len)
 {
 	DMA_InitTypeDef DMA_InitStruct;
