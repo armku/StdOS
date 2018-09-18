@@ -8,8 +8,8 @@
 #define USECOM1
 #define USECOM2
 #define USECOM3
-#define USECOM4
-#define USECOM5
+//#define USECOM4
+//#define USECOM5
 
 #if defined USECOM1
 #define USECOM1RXD	//串口可以接收
@@ -37,63 +37,63 @@
 #endif
 
 #if defined USECOM1TXD
-#define COM1TXDMAFLAG  //串口1DMA发送
+//#define COM1TXDMAFLAG  //串口1DMA发送
 #if (!defined COM1TXDMAFLAG)
-#define COM1SENDINTFLAG	//串口1中断发送
+//#define COM1SENDINTFLAG	//串口1中断发送
 #endif
 #endif
 
 #if defined USECOM1RXD
-#define COM1RXDMAFLAG  //串口1DMA接收
-#define COM1RCVIDLEINTFLAG	//串口1空闲中断接收
+//#define COM1RXDMAFLAG  //串口1DMA接收
+//#define COM1RCVIDLEINTFLAG	//串口1空闲中断接收
 #endif
 
 #if defined USECOM2TXD
-#define COM2TXDMAFLAG  //串口2DMA发送
+//#define COM2TXDMAFLAG  //串口2DMA发送
 #if (!defined COM2TXDMAFLAG)
-#define COM2SENDINTFLAG	//串口2中断发送
+//#define COM2SENDINTFLAG	//串口2中断发送
 #endif
 #endif
 
 #if defined USECOM2RXD
-#define COM2RXDMAFLAG  //串口2DMA接收
-#define COM2RCVIDLEINTFLAG	//串口2空闲中断接收
+//#define COM2RXDMAFLAG  //串口2DMA接收
+//#define COM2RCVIDLEINTFLAG	//串口2空闲中断接收
 #endif
 
 #if defined USECOM3TXD
-#define COM3TXDMAFLAG  //串口3DMA发送
+//#define COM3TXDMAFLAG  //串口3DMA发送
 #if (!defined COM3TXDMAFLAG)
-#define COM3SENDINTFLAG	//串口3中断发送
+//#define COM3SENDINTFLAG	//串口3中断发送
 #endif
 #endif
 
 #if defined USECOM3RXD
-#define COM3RXDMAFLAG  //串口3DMA接收 异常
+//#define COM3RXDMAFLAG  //串口3DMA接收 异常
 //#define COM3RCVIDLEINTFLAG	//串口3空闲中断接收
 #endif
 
 
 #if defined USECOM4TXD
-#define COM4TXDMAFLAG  //串口4DMA发送
+//#define COM4TXDMAFLAG  //串口4DMA发送
 #if (!defined COM4TXDMAFLAG)
-#define COM4SENDINTFLAG	//串口4中断发送
+//#define COM4SENDINTFLAG	//串口4中断发送
 #endif
 #endif
 
 #if defined USECOM4RXD
 //#define COM4RXDMAFLAG  //串口4DMA接收
-#define COM4RCVIDLEINTFLAG	//串口4空闲中断接收
+//#define COM4RCVIDLEINTFLAG	//串口4空闲中断接收
 #endif
 
 #if defined USECOM5TXD
 //#define COM5TXDMAFLAG  //串口5DMA发送
 #if (!defined COM5TXDMAFLAG)
-#define COM5SENDINTFLAG	//串口5中断发送
+//#define COM5SENDINTFLAG	//串口5中断发送
 #endif
 #endif
 #if defined USECOM5RXD
 //#define COM5RXDMAFLAG  //串口5DMA接收
-#define COM5RCVIDLEINTFLAG	//串口5空闲中断接收
+//#define COM5RCVIDLEINTFLAG	//串口5空闲中断接收
 #endif
 
 typedef enum
@@ -147,7 +147,7 @@ public:
 	static Func PRcvCOM3;
 	static Func PRcvCOM4;
 	static Func PRcvCOM5;
-			
+
 	static int RcvLastTimeCOM1;//串口1最后接收数据时间
 	static int RcvLastTimeCOM2;//串口2最后接收数据时间
 	static int RcvLastTimeCOM3;//串口3最后接收数据时间

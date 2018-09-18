@@ -464,7 +464,7 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 	if (pCOM2Rx485)
 	{
 		*pCOM2Rx485 = 1;
-}
+	}
 
 #if defined COM2TXDMAFLAG			
 	Txx2.Write(bs);
@@ -498,7 +498,7 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 	if (pCOM3Rx485)
 	{
 		*pCOM3Rx485 = 1;
-}
+	}
 
 #if defined COM3TXDMAFLAG			
 	Txx3.Write(bs);
@@ -699,7 +699,7 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 #endif
 
 	USART_Cmd(USART1, ENABLE);
-	USART_ClearFlag(USART1, USART_FLAG_TC);	
+	USART_ClearFlag(USART1, USART_FLAG_TC);
 #elif defined STM32F4
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
@@ -845,7 +845,7 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 	USART_ITConfig(USART2, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
 	USART_Cmd(USART2, ENABLE);
-	USART_ClearFlag(USART2, USART_FLAG_TC);	
+	USART_ClearFlag(USART2, USART_FLAG_TC);
 #elif defined STM32F4
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
@@ -991,7 +991,7 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 	USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //使能串口总线空闲中断 
 #endif
 	USART_Cmd(USART3, ENABLE);
-	USART_ClearFlag(USART3, USART_FLAG_TC);	
+	USART_ClearFlag(USART3, USART_FLAG_TC);
 #elif defined STM32F4
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
@@ -2309,7 +2309,7 @@ void OS_ComSendChk(void *param)
 void OS_ComRcvChk(void *param)
 {
 	int ms = Sys.Ms();
-#if (! defined COM1RCVIDLEINTFLAG)
+#if (defined USECOM1RXD)&&(! defined COM1RCVIDLEINTFLAG)
 	if ((ms - DeviceConfigCenter::RcvLastTimeCOM1 > DeviceConfigCenter::RcvCom1PackInterval) && (Rxx1.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM1)
@@ -2318,7 +2318,7 @@ void OS_ComRcvChk(void *param)
 		}
 	}
 #endif
-#if (! defined COM2RCVIDLEINTFLAG)
+#if (defined USECOM2RXD)&&(! defined COM2RCVIDLEINTFLAG)
 	if ((ms - DeviceConfigCenter::RcvLastTimeCOM2 > DeviceConfigCenter::RcvCom2PackInterval) && (Rxx2.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM2)
@@ -2327,7 +2327,7 @@ void OS_ComRcvChk(void *param)
 		}
 	}
 #endif
-#if (! defined COM3RCVIDLEINTFLAG)
+#if (defined USECOM3RXD)&&(! defined COM3RCVIDLEINTFLAG)
 	if ((ms - DeviceConfigCenter::RcvLastTimeCOM3 > DeviceConfigCenter::RcvCom3PackInterval) && (Rxx3.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM3)
@@ -2336,7 +2336,7 @@ void OS_ComRcvChk(void *param)
 		}
 	}
 #endif
-#if (! defined COM4RCVIDLEINTFLAG)
+#if (defined USECOM4RXD)&&(! defined COM4RCVIDLEINTFLAG)
 	if ((ms - DeviceConfigCenter::RcvLastTimeCOM4 > DeviceConfigCenter::RcvCom4PackInterval) && (Rxx4.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM4)
@@ -2345,7 +2345,7 @@ void OS_ComRcvChk(void *param)
 		}
 	}
 #endif
-#if (! defined COM5RCVIDLEINTFLAG)
+#if (defined USECOM5RXD)&&(! defined COM5RCVIDLEINTFLAG)
 	if ((ms - DeviceConfigCenter::RcvLastTimeCOM5 > DeviceConfigCenter::RcvCom5PackInterval) && (Rxx5.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM5)

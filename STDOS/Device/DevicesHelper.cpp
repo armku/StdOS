@@ -71,7 +71,7 @@ extern "C"
 	void DMA1_Channel6_IRQHandler(void)
 	{
 #if defined COM2RXDMAFLAG
-//		USART2_RX
+		//		USART2_RX
 		if (DMA_GetITStatus(DMA1_IT_TC6))
 		{
 			//TODO:Add code here
@@ -109,7 +109,7 @@ extern "C"
 	void USART1_IRQHandler(void)
 	{
 #if defined USECOM1		
-//接收
+		//接收
 #if (!defined COM1RXDMAFLAG)
 		volatile uint8_t ch;
 		if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
@@ -138,8 +138,8 @@ extern "C"
 			}
 #endif
 		}
-//发送
-		/* 处理发送缓冲区空中断 */
+		//发送
+				/* 处理发送缓冲区空中断 */
 		if (USART_GetITStatus(USART1, USART_IT_TXE) != RESET)
 		{
 #if defined COM1SENDINTFLAG
@@ -269,7 +269,7 @@ extern "C"
 			ch = USART_ReceiveData(USART3);
 			Rxx3.Enqueue(ch);
 			DeviceConfigCenter::RcvLastTimeCOM3 = Sys.Ms();
-	}
+		}
 #endif
 		if (USART_GetITStatus(USART3, USART_IT_IDLE) == SET)
 		{
@@ -396,7 +396,7 @@ extern "C"
 				if (DeviceConfigCenter::pCOM4Rx485)
 				{
 					*DeviceConfigCenter::pCOM4Rx485 = 0;
-	}
+				}
 			}
 			else
 			{
@@ -471,7 +471,7 @@ extern "C"
 				if (DeviceConfigCenter::pCOM5Rx485)
 				{
 					*DeviceConfigCenter::pCOM5Rx485 = 0;
-	}
+				}
 			}
 			else
 			{
