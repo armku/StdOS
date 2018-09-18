@@ -12,88 +12,88 @@
 //#define USECOM5
 
 #if defined USECOM1
-#define USECOM1RXD	//串口可以接收
-#define USECOM1TXD	//串口可以发送
+#define USECOM1RXD	//可以接收
+#define USECOM1TXD	//可以发送
 #endif
 
 #if defined USECOM2
-#define USECOM2RXD	//串口可以接收
-#define USECOM2TXD	//串口可以发送
+#define USECOM2RXD	//可以接收
+#define USECOM2TXD	//可以发送
 #endif
 
 #if defined USECOM3
-#define USECOM3RXD	//串口可以接收
-#define USECOM3TXD	//串口可以发送
+#define USECOM3RXD	//可以接收
+#define USECOM3TXD	//可以发送
 #endif
 
 #if defined USECOM4
-#define USECOM4RXD	//串口可以接收
-#define USECOM4TXD	//串口可以发送
+#define USECOM4RXD	//可以接收
+#define USECOM4TXD	//可以发送
 #endif
 
 #if defined USECOM5
-#define USECOM5RXD	//串口可以接收
-#define USECOM5TXD	//串口可以发送
+#define USECOM5RXD	//可以接收
+#define USECOM5TXD	//可以发送
 #endif
 
 #if defined USECOM1TXD
-//#define COM1TXDMAFLAG  //串口1DMA发送
+//#define COM1TXDMAFLAG  //DMA发送
 #if (!defined COM1TXDMAFLAG)
-//#define COM1SENDINTFLAG	//串口1中断发送
+//#define COM1SENDINTFLAG	//中断发送
 #endif
 #endif
 
 #if defined USECOM1RXD
-//#define COM1RXDMAFLAG  //串口1DMA接收
-//#define COM1RCVIDLEINTFLAG	//串口1空闲中断接收
+//#define COM1RXDMAFLAG  //DMA接收
+//#define COM1RCVIDLEINTFLAG	//空闲中断接收
 #endif
 
 #if defined USECOM2TXD
-//#define COM2TXDMAFLAG  //串口2DMA发送
+//#define COM2TXDMAFLAG  //DMA发送
 #if (!defined COM2TXDMAFLAG)
-//#define COM2SENDINTFLAG	//串口2中断发送
+//#define COM2SENDINTFLAG	//中断发送
 #endif
 #endif
 
 #if defined USECOM2RXD
-//#define COM2RXDMAFLAG  //串口2DMA接收
-//#define COM2RCVIDLEINTFLAG	//串口2空闲中断接收
+//#define COM2RXDMAFLAG  //DMA接收
+//#define COM2RCVIDLEINTFLAG	//空闲中断接收
 #endif
 
 #if defined USECOM3TXD
-//#define COM3TXDMAFLAG  //串口3DMA发送
+//#define COM3TXDMAFLAG  //DMA发送
 #if (!defined COM3TXDMAFLAG)
-//#define COM3SENDINTFLAG	//串口3中断发送
+//#define COM3SENDINTFLAG	//中断发送
 #endif
 #endif
 
 #if defined USECOM3RXD
-//#define COM3RXDMAFLAG  //串口3DMA接收 异常
-//#define COM3RCVIDLEINTFLAG	//串口3空闲中断接收
+//#define COM3RXDMAFLAG  //DMA接收 异常
+//#define COM3RCVIDLEINTFLAG	//空闲中断接收
 #endif
 
 
 #if defined USECOM4TXD
-//#define COM4TXDMAFLAG  //串口4DMA发送
+//#define COM4TXDMAFLAG  //DMA发送
 #if (!defined COM4TXDMAFLAG)
-//#define COM4SENDINTFLAG	//串口4中断发送
+//#define COM4SENDINTFLAG	//中断发送
 #endif
 #endif
 
 #if defined USECOM4RXD
-//#define COM4RXDMAFLAG  //串口4DMA接收
-//#define COM4RCVIDLEINTFLAG	//串口4空闲中断接收
+//#define COM4RXDMAFLAG  //DMA接收
+//#define COM4RCVIDLEINTFLAG	//空闲中断接收
 #endif
 
 #if defined USECOM5TXD
-//#define COM5TXDMAFLAG  //串口5DMA发送
+//#define COM5TXDMAFLAG  //DMA发送
 #if (!defined COM5TXDMAFLAG)
-//#define COM5SENDINTFLAG	//串口5中断发送
+//#define COM5SENDINTFLAG	//中断发送
 #endif
 #endif
 #if defined USECOM5RXD
-//#define COM5RXDMAFLAG  //串口5DMA接收
-//#define COM5RCVIDLEINTFLAG	//串口5空闲中断接收
+//#define COM5RXDMAFLAG  //DMA接收
+//#define COM5RCVIDLEINTFLAG	//空闲中断接收
 #endif
 
 typedef enum
@@ -148,34 +148,34 @@ public:
 	static Func PRcvCOM4;
 	static Func PRcvCOM5;
 
-	static int RcvLastTimeCOM1;//串口1最后接收数据时间
-	static int RcvLastTimeCOM2;//串口2最后接收数据时间
-	static int RcvLastTimeCOM3;//串口3最后接收数据时间
-	static int RcvLastTimeCOM4;//串口4最后接收数据时间
-	static int RcvLastTimeCOM5;//串口5最后接收数据时间
+	static int RcvLastTimeCOM1;//最后接收数据时间
+	static int RcvLastTimeCOM2;//最后接收数据时间
+	static int RcvLastTimeCOM3;//最后接收数据时间
+	static int RcvLastTimeCOM4;//最后接收数据时间
+	static int RcvLastTimeCOM5;//最后接收数据时间
 
-	static int RcvCom1PackInterval;//串口1接收数据帧时间间隔
-	static int RcvCom2PackInterval;//串口2接收数据帧时间间隔
-	static int RcvCom3PackInterval;//串口3接收数据帧时间间隔
-	static int RcvCom4PackInterval;//串口4接收数据帧时间间隔
-	static int RcvCom5PackInterval;//串口5接收数据帧时间间隔
+	static int RcvCom1PackInterval;//接收数据帧时间间隔
+	static int RcvCom2PackInterval;//接收数据帧时间间隔
+	static int RcvCom3PackInterval;//接收数据帧时间间隔
+	static int RcvCom4PackInterval;//接收数据帧时间间隔
+	static int RcvCom5PackInterval;//接收数据帧时间间隔
 
-	static int BUFLEN_TX1;	//串口1发送缓冲区长度
-	static int BUFLEN_RX1;	//串口1接收缓冲区长度
-	static int BUFLEN_TX2;	//串口2发送缓冲区长度
-	static int BUFLEN_RX2;	//串口2接收缓冲区长度
-	static int BUFLEN_TX3;	//串口3发送缓冲区长度
-	static int BUFLEN_RX3;	//串口3接收缓冲区长度
-	static int BUFLEN_TX4;	//串口4发送缓冲区长度
-	static int BUFLEN_RX4;	//串口4接收缓冲区长度
-	static int BUFLEN_TX5;	//串口5发送缓冲区长度
-	static int BUFLEN_RX5;	//串口5接收缓冲区长度
+	static int BUFLEN_TX1;	//发送缓冲区长度
+	static int BUFLEN_RX1;	//接收缓冲区长度
+	static int BUFLEN_TX2;	//发送缓冲区长度
+	static int BUFLEN_RX2;	//接收缓冲区长度
+	static int BUFLEN_TX3;	//发送缓冲区长度
+	static int BUFLEN_RX3;	//接收缓冲区长度
+	static int BUFLEN_TX4;	//发送缓冲区长度
+	static int BUFLEN_RX4;	//接收缓冲区长度
+	static int BUFLEN_TX5;	//发送缓冲区长度
+	static int BUFLEN_RX5;	//接收缓冲区长度
 
-	static int FLAG_TX1EN;	//串口1可以发送
-	static int FLAG_TX2EN;	//串口2可以发送
-	static int FLAG_TX3EN;	//串口3可以发送
-	static int FLAG_TX4EN;	//串口4可以发送
-	static int FLAG_TX5EN;	//串口5可以发送
+	static int FLAG_TX1EN;	//可以发送
+	static int FLAG_TX2EN;	//可以发送
+	static int FLAG_TX3EN;	//可以发送
+	static int FLAG_TX4EN;	//可以发送
+	static int FLAG_TX5EN;	//可以发送
 	//定时器
 	static void TimeTickInit();//系统用定时器初始化
 	static void TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);//定时器配置
@@ -243,7 +243,7 @@ extern "C" {
 #endif
 #if defined USECOM2RXD
 	extern Queue	Rxx2;
-#endif // USECOM2
+#endif
 
 #if defined USECOM3TXD
 	extern Queue	Txx3;
