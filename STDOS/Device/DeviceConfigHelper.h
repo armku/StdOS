@@ -8,8 +8,8 @@
 #define USECOM1
 #define USECOM2
 #define USECOM3
-//#define USECOM4
-//#define USECOM5
+#define USECOM4
+#define USECOM5
 
 #if defined USECOM1
 #define USECOM1RXD	//串口可以接收
@@ -37,7 +37,7 @@
 #endif
 
 #if defined USECOM1TXD
-//#define COM1TXDMAFLAG  //串口1DMA发送
+#define COM1TXDMAFLAG  //串口1DMA发送
 #if (!defined COM1TXDMAFLAG)
 #define COM1SENDINTFLAG	//串口1中断发送
 #endif
@@ -45,7 +45,7 @@
 
 #if defined USECOM1RXD
 #define COM1RXDMAFLAG  //串口1DMA接收
-//#define COM1RCVIDLEINTFLAG	//串口1空闲中断接收
+#define COM1RCVIDLEINTFLAG	//串口1空闲中断接收
 #endif
 
 #if defined USECOM2TXD

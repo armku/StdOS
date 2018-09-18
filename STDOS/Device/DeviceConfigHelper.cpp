@@ -408,19 +408,19 @@ void USART5_SendDMA(uint8_t* buf, int len)
 	DeviceConfigCenter::FLAG_TX5EN = 0;	//串口5不可以发送
 }
 #endif
-#if defined USECOM1
+#if defined COM1TXDMAFLAG
 uint8_t com1bufff[300];
 #endif
-#if defined USECOM2
+#if defined COM2TXDMAFLAG
 uint8_t com2bufff[300];
 #endif
-#if defined USECOM3
+#if defined COM3TXDMAFLAG
 uint8_t com3bufff[300];
 #endif
-#if defined USECOM4
+#if defined COM4TXDMAFLAG
 uint8_t com4bufff[300];
 #endif
-#if defined USECOM5
+#if defined COM5TXDMAFLAG
 uint8_t com5bufff[300];
 #endif
 void OS_ComSendChk(void *param);
