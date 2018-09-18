@@ -601,10 +601,14 @@ void DeviceConfigCenter::configCOM1(int baudRate)
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
 
+#if defined USECOM1RXD
 	DeviceConfigCenter::BUFLEN_RX1 = ArrayLength(com1rx);
+	Rxx1.SetBuf(com1rx, ArrayLength(com1rx));
+#endif
+#if defined USECOM1TXD
 	DeviceConfigCenter::BUFLEN_TX1 = ArrayLength(com1tx);
 	Txx1.SetBuf(com1tx, ArrayLength(com1tx));
-	Rxx1.SetBuf(com1rx, ArrayLength(com1rx));
+#endif
 	SerialPort_GetPins(&Pins[0], &Pins[1], COM1);
 	Ports[0] = new AlternatePort();
 	Ports[1] = new InputPort();
@@ -749,10 +753,14 @@ void DeviceConfigCenter::configCOM2(int baudRate)
 #if defined USECOM2
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
+#if defined USECOM2RXD
 	DeviceConfigCenter::BUFLEN_RX2 = ArrayLength(com2rx);
+	Rxx2.SetBuf(com2rx, ArrayLength(com2rx));
+#endif
+#if defined USECOM2TXD
 	DeviceConfigCenter::BUFLEN_TX2 = ArrayLength(com2tx);
 	Txx2.SetBuf(com2tx, ArrayLength(com2tx));
-	Rxx2.SetBuf(com2rx, ArrayLength(com2rx));
+#endif
 	SerialPort_GetPins(&Pins[0], &Pins[1], COM2);
 	Ports[0] = new AlternatePort();
 	Ports[1] = new InputPort();
@@ -896,10 +904,14 @@ void DeviceConfigCenter::configCOM3(int baudRate)
 #if defined USECOM3
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
+#if defined USECOM3RXD
 	DeviceConfigCenter::BUFLEN_RX3 = ArrayLength(com3rx);
+	Rxx3.SetBuf(com3rx, ArrayLength(com3rx));
+#endif
+#if defined USECOM3TXD
 	DeviceConfigCenter::BUFLEN_TX3 = ArrayLength(com3tx);
 	Txx3.SetBuf(com3tx, ArrayLength(com3tx));
-	Rxx3.SetBuf(com3rx, ArrayLength(com3rx));
+#endif
 	SerialPort_GetPins(&Pins[0], &Pins[1], COM3);
 	Ports[0] = new AlternatePort();
 	Ports[1] = new InputPort();
@@ -1041,8 +1053,14 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 #if defined USECOM4
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
+#if defined USECOM4RXD
 	DeviceConfigCenter::BUFLEN_RX4 = ArrayLength(com4rx);
+	Rxx4.SetBuf(com4rx, ArrayLength(com4rx));
+#endif
+#if defined USECOM4TXD
 	DeviceConfigCenter::BUFLEN_TX4 = ArrayLength(com4tx);
+	Txx4.SetBuf(com4tx, ArrayLength(com4tx));
+#endif
 #if defined STM32F0
 
 #elif defined STM32F1 && defined STM32F10X_HD
@@ -1131,13 +1149,6 @@ void DeviceConfigCenter::configCOM4(int baudRate)
 	Ports[1]->Open();
 #endif
 
-	Txx4.SetBuf(com4tx, ArrayLength(com4tx));
-	Rxx4.SetBuf(com4rx, ArrayLength(com4rx));
-
-#if  defined COM4RCVIDLEINTFLAG
-#else
-	Sys.AddTask(Com4RcvRoutin, 0, 100, 1, "RcvCom4");
-#endif //  COM4RCVIDLEINTFLAG
 #endif
 }
 void DeviceConfigCenter::configCOM5(int baudRate)
@@ -1145,8 +1156,14 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 #if defined USECOM5
 	Port*		Ports[2];	// Tx/Rx
 	Pin			Pins[2];	// Tx/Rx
+#if defined USECOM5RXD
 	DeviceConfigCenter::BUFLEN_RX5 = ArrayLength(com5rx);
+	Rxx5.SetBuf(com5rx, ArrayLength(com5rx));
+#endif
+#if defined USECOM5TXD
 	DeviceConfigCenter::BUFLEN_TX5 = ArrayLength(com5tx);
+	Txx5.SetBuf(com5tx, ArrayLength(com5tx));
+#endif
 #if defined STM32F0
 
 #elif defined STM32F1 && defined STM32F10X_HD
@@ -1235,14 +1252,6 @@ void DeviceConfigCenter::configCOM5(int baudRate)
 	Ports[0]->Open();
 	Ports[1]->Open();
 #endif
-
-	Txx5.SetBuf(com5tx, ArrayLength(com5tx));
-	Rxx5.SetBuf(com5rx, ArrayLength(com5rx));
-
-#if  defined COM5RCVIDLEINTFLAG
-#else
-	Sys.AddTask(Com5RcvRoutin, 0, 100, 1, "RcvCom5");
-#endif //  COM5RCVIDLEINTFLAG
 #endif
 }
 void DeviceConfigCenter::Com1ChgBaudRate(int baudRate)
