@@ -2230,7 +2230,7 @@ void DeviceConfigCenter::Timer8ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 void OS_ComSendChk(void *param)
 {
 	//检查串口是否可以发送
-#if (defined USECOM1) && 	(defined COM1TXDMAFLAG)
+#if defined COM1TXDMAFLAG
 	if (USART_GetFlagStatus(USART1, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx1.Length();
@@ -2245,7 +2245,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if (defined USECOM2) && (defined COM2TXDMAFLAG)
+#if defined COM2TXDMAFLAG
 	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx2.Length();
@@ -2260,7 +2260,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if (defined USECOM3) && (defined COM3TXDMAFLAG)
+#if defined COM3TXDMAFLAG
 	if (USART_GetFlagStatus(USART3, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx3.Length();
@@ -2275,7 +2275,7 @@ void OS_ComSendChk(void *param)
 	}
 #endif
 
-#if (defined USECOM4) && (defined COM4TXDMAFLAG)
+#if defined COM4TXDMAFLAG
 	if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
 	{
 		int len = Txx4.Length();
@@ -2309,7 +2309,7 @@ void OS_ComSendChk(void *param)
 void OS_ComRcvChk(void *param)
 {
 	int ms = Sys.Ms();
-#if defined USECOM1	&& (! defined COM1RCVIDLEINTFLAG)
+#if (! defined COM1RCVIDLEINTFLAG)
 	if ((ms - DeviceConfigCenter::RcvLastTimeCOM1 > DeviceConfigCenter::RcvCom1PackInterval) && (Rxx1.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM1)
@@ -2318,7 +2318,7 @@ void OS_ComRcvChk(void *param)
 		}
 	}
 #endif
-#if defined USECOM2	&& (! defined COM2RCVIDLEINTFLAG)
+#if (! defined COM2RCVIDLEINTFLAG)
 	if ((ms - DeviceConfigCenter::RcvLastTimeCOM2 > DeviceConfigCenter::RcvCom2PackInterval) && (Rxx2.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM2)
@@ -2327,7 +2327,7 @@ void OS_ComRcvChk(void *param)
 		}
 	}
 #endif
-#if defined USECOM3	&& (! defined COM3RCVIDLEINTFLAG)
+#if (! defined COM3RCVIDLEINTFLAG)
 	if ((ms - DeviceConfigCenter::RcvLastTimeCOM3 > DeviceConfigCenter::RcvCom3PackInterval) && (Rxx3.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM3)
@@ -2336,7 +2336,7 @@ void OS_ComRcvChk(void *param)
 		}
 	}
 #endif
-#if defined USECOM4	&& (! defined COM4RCVIDLEINTFLAG)
+#if (! defined COM4RCVIDLEINTFLAG)
 	if ((ms - DeviceConfigCenter::RcvLastTimeCOM4 > DeviceConfigCenter::RcvCom4PackInterval) && (Rxx4.Length() > 0))
 	{
 		if (DeviceConfigCenter::PRcvCOM4)
