@@ -110,7 +110,7 @@ extern "C"
 	{
 #if defined USECOM1		
 		//接收
-#if (!defined COM1RXDMAFLAG)
+#if (defined USECOM1RXD)&&(!defined COM1RXDMAFLAG)
 		volatile uint8_t ch;
 		if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
 		{
@@ -187,7 +187,7 @@ extern "C"
 	{
 #if defined USECOM2		
 		//接收
-#if (!defined COM2RXDMAFLAG)
+#if (defined USECOM2RXD)&&(!defined COM2RXDMAFLAG)
 		volatile uint8_t ch;
 		if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
 		{
@@ -262,7 +262,7 @@ extern "C"
 	{
 #if defined USECOM3		
 		//接收
-#if (!defined COM3RXDMAFLAG)
+#if (defined USECOM3RXD)&&(!defined COM3RXDMAFLAG)
 		volatile uint8_t ch;
 		if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
 		{
@@ -337,7 +337,7 @@ extern "C"
 	{
 #if defined USECOM4		
 		//接收
-#if (!defined COM4RXDMAFLAG)
+#if (defined USECOM4RXD)&&(!defined COM4RXDMAFLAG)
 		volatile uint8_t ch;
 		if (USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
 		{
@@ -412,7 +412,7 @@ extern "C"
 	{
 #if defined USECOM5		
 		//接收
-#if (!defined COM5RXDMAFLAG)
+#if (defined USECOM5RXD)&&(!defined COM5RXDMAFLAG)
 		volatile uint8_t ch;
 		if (USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
 		{
