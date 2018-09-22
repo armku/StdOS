@@ -20,6 +20,7 @@
 		bool Empty() const { return _size == 0; }	// 队列空
 
 		int Write(const Buffer& bs);	// 批量写入
+		int Write(void* buf, int len);//写入数据 返回写入数量(字节数)
 		int Read(Buffer& bs);		// 批量读取 
 		void Enqueue(uint8_t dat);
 		uint8_t Dequeue();

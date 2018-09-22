@@ -56,11 +56,16 @@ uint8_t Queue::Dequeue()
 // 批量写入
 int Queue::Write(const Buffer &bs)
 {
-	for (int i = 0; i < bs.Length(); i++)
-	{
-		this->Enqueue(bs[i]);
-	}
-	return bs.Length();
+	return this->Write((char*)bs.GetBuffer(), bs.Length());
+}
+//写入数据 返回写入数量(字节数)
+int Queue::Write(void* buf, int len)
+{
+	if (len >= this->RemainLength())
+		len = this->RemainLength();
+	for (int i = 0; i < len; i++)
+		this->Enqueue(((char*)buf)[i]);
+	return len;
 }
 
 // 批量读取
