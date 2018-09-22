@@ -1,7 +1,6 @@
 #ifndef _Sys_H_
 #define _Sys_H_
 
-#include <stdint.h>
 #include <stddef.h>
 #include "Core\Type.h"
 #include "Core\Buffer.h"
@@ -25,8 +24,6 @@ extern "C"
 }
 
 #ifdef DEBUG
-
-void assert_failed2(cstring msg, cstring file, unsigned int line);
 #define assert(expr, msg) ((expr) ? (void)0 : assert_failed2(msg, (const char*)__FILE__, __LINE__))
 
 #else
