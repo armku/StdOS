@@ -1,7 +1,7 @@
 #include <string.h>
 #include "List.h"
 
-char off_328[8];
+static char off_328[4*30];
 
 IList::IList()
 {
