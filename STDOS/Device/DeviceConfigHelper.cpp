@@ -438,7 +438,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
-	Txx1.Write(bs);
+	Txx1.Write(bs.GetBuffer(),bs.Length());
 	Sys.GlobalEnable();
 	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 #else	
@@ -472,7 +472,7 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 	while (bs.Length() > Txx2.RemainLength());//等待发送缓冲区可容纳足够内容
 											  //中断发送
 	Sys.GlobalDisable();
-	Txx2.Write(bs);
+	Txx2.Write(bs.GetBuffer(),bs.Length());
 	Sys.GlobalEnable();
 	USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
 #else	
@@ -501,7 +501,7 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 	}
 
 #if defined COM3TXDMAFLAG			
-	Txx3.Write(bs);
+	Txx3.Write(bs.GetBuffer(),bs.Length());
 #elif defined COM3SENDINTFLAG
 	while (bs.Length() > Txx3.RemainLength());//等待发送缓冲区可容纳足够内容
 											  //中断发送
@@ -540,7 +540,7 @@ void DeviceConfigCenter::com4send(Buffer& bs)
 	while (bs.Length() > Txx4.RemainLength());//等待发送缓冲区可容纳足够内容
 											  //中断发送
 	Sys.GlobalDisable();
-	Txx4.Write(bs);
+	Txx4.Write(bs.GetBuffer(),bs.Length());
 	Sys.GlobalEnable();
 	USART_ITConfig(UART4, USART_IT_TXE, ENABLE);
 #else	
@@ -569,7 +569,7 @@ void DeviceConfigCenter::com5send(Buffer& bs)
 	}
 
 #if defined COM5TXDMAFLAG			
-	Txx5.Write(bs);
+	Txx5.Write(bs.GetBuffer(),bs.Length());
 #elif defined COM5SENDINTFLAG
 	while (bs.Length() > Txx5.RemainLength());//等待发送缓冲区可容纳足够内容
 											  //中断发送
