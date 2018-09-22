@@ -263,19 +263,40 @@ const Buffer Buffer::Sub(int index, int len)const
     return Buffer(((uint8_t*)this->_Arr) + index, len);
 }
 
-uint16_t Buffer::ToUInt16()const
+uint16_t Buffer::ToUInt16(int index )const
 {
-    return 0;
+	if (index > (this->Length() - 2))
+		return 0;
+	auto l = this->_Arr[index];
+	auto h = this->_Arr[index + 1];
+	uint16_t ret = h;
+	ret <<= 8;
+	ret |= l;
+	return ret;
 }
 
-uint32_t Buffer::ToUInt32()const
+uint32_t Buffer::ToUInt32(int index )const
 {
-    return 0;
+	if (index > (this->Length() - 4))
+		return 0;
+	auto l = this->ToUInt16(index - 4);
+	auto h = this->ToUInt16(index);
+	uint32_t ret = h;
+	ret <<= 16;
+	ret |= l;
+	return ret;
 }
 
-uint64_t Buffer::ToUInt64()const
+uint64_t Buffer::ToUInt64(int index )const
 {
-    return 0;
+	if (index > (this->Length() - 16))
+		return 0;
+	auto l = this->ToUInt16(index - 8);
+	auto h = this->ToUInt16(index);
+	uint64_t ret = h;
+	ret <<= 32;
+	ret |= l;
+	return ret;
 }
 
 void Buffer::Write(uint16_t value, int index)

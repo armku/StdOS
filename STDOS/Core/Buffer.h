@@ -75,9 +75,9 @@ public:
 	Buffer Sub(int index, int len);
 	const Buffer Sub(int index, int len) const;
 
-	uint16_t	ToUInt16() const;
-	uint32_t	ToUInt32() const;
-	uint64_t	ToUInt64() const;
+	uint16_t	ToUInt16(int index = 0) const;
+	uint32_t	ToUInt32(int index = 0) const;
+	uint64_t	ToUInt64(int index = 0) const;
 	void Write(uint16_t value, int index = 0);
 	void Write(short value, int index = 0);
 	void Write(uint32_t value, int index = 0);
