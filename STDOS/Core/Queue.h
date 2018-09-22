@@ -19,9 +19,7 @@
 		int RemainLength() const { return _capacity - _size; }//剩余队列大小
 		bool Empty() const { return _size == 0; }	// 队列空
 
-		int Write(const Buffer& bs);	// 批量写入
 		int Write(void* buf, int len);//写入数据 返回写入数量(字节数)
-		int Read(Buffer& bs);		// 批量读取 
 		int Read(void* buf,int len);// 读取数据，返回读取数量(字节数) 
 		void Enqueue(uint8_t dat);
 		uint8_t Dequeue();

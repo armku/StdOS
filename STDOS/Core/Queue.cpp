@@ -53,11 +53,6 @@ uint8_t Queue::Dequeue()
 	return ret;
 }
 
-// 批量写入
-int Queue::Write(const Buffer &bs)
-{
-	return this->Write((char*)bs.GetBuffer(), bs.Length());
-}
 //写入数据 返回写入数量(字节数)
 int Queue::Write(void* buf, int len)
 {
@@ -68,13 +63,6 @@ int Queue::Write(void* buf, int len)
 	return len;
 }
 
-// 批量读取
-int Queue::Read(Buffer &bs)
-{
-	int len = this->Read(bs.GetBuffer(), bs.Length());
-	bs.SetLength(len);
-	return len;
-}
 // 读取数据，返回读取数量(字节数) 
 int Queue::Read(void* buf, int len)
 {

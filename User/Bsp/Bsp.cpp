@@ -75,7 +75,8 @@ void com1rcv()
 {
 	Buffer bs1(chbuf, ArrayLength(chbuf));
 
-	Rxx1.Read(bs1);
+	int len= Rxx1.Read(bs1.GetBuffer(),bs1.Length());
+	bs1.SetLength(len);
 	Rxx1.Clear();
 
 	debug_printf("COM1RCV:\n");
@@ -85,7 +86,8 @@ void comtestrcv()
 {
 	Buffer bs1(chbuf, ArrayLength(chbuf));
 
-	Rxx3.Read(bs1);
+	int len= Rxx3.Read(bs1.GetBuffer(),bs1.Length());
+	bs1.SetLength(len);
 	Rxx3.Clear();
 
 	debug_printf("COM3RCV:\n");
