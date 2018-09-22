@@ -1,7 +1,7 @@
 #ifndef __DateTime_H__
 #define __DateTime_H__
 
-#include "Buffer.h"
+#include "Type.h"
 
 // 时间日期
 class DateTime
@@ -73,8 +73,8 @@ public:
 	//cstring GetString(uint8_t kind = 'F', char* str = nullptr);
 private:
 	void Init();
-	Buffer ToArray();
-	const Buffer ToArray() const;
+	//Buffer ToArray();
+	//const Buffer ToArray() const;
 };
 
 #endif
