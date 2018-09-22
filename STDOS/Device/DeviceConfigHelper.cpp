@@ -506,7 +506,7 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 	while (bs.Length() > Txx3.RemainLength());//等待发送缓冲区可容纳足够内容
 											  //中断发送
 	Sys.GlobalDisable();
-	Txx3.Write(bs);
+	Txx3.Write(bs.GetBuffer(),bs.Length());
 	Sys.GlobalEnable();
 	USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
 #else	
