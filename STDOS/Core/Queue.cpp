@@ -71,15 +71,20 @@ int Queue::Write(void* buf, int len)
 // 批量读取
 int Queue::Read(Buffer &bs)
 {
-	int len = this->Length();
-	for (int i = 0; i < len; i++)
-	{
-		bs[i] = this->Dequeue();
-	}
+	int len = this->Read(bs.GetBuffer(), bs.Length());
 	bs.SetLength(len);
 	return len;
 }
+// 读取数据，返回读取数量(字节数) 
+int Queue::Read(void* buf, int len)
+{
+	if (len > this->RemainLength())
+		len = this->RemainLength();
+	for (int i = 0; i < len; i++)
+		((char*)buf)[i] = this->Dequeue();
 
+	return len;
+}
 void Queue::SetBuf(void *buf, int len)
 {
 	if (len >= 0)
