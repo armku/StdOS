@@ -1,5 +1,6 @@
-#include "Buffer.h"
+#include <string.h>
 #include "List.h"
+//#include "Buffer.h"
 
 char off_328[8];
 
@@ -149,8 +150,12 @@ bool IList::CheckCapacity(int count)
 		{
 			if(this->_Count>0 &&this->_Arr)
 			{
+#if 0
 				Buffer *buf=new Buffer(parrnew,4*i);
 				buf->Copy(0,this->_Arr,4*this->_Count);
+#else
+				memcpy(parrnew,this->_Arr,4*this->_Count);
+#endif
 			}
 			if(this->_Arr)
 			{

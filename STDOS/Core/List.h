@@ -1,5 +1,6 @@
 #ifndef _List_H_
 #define _List_H_
+#include "Type.h"
 
 typedef int (*IComparer)(const void* v1, const void* v2);
 
