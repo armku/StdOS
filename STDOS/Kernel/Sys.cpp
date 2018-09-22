@@ -461,6 +461,10 @@ void TSys::GlobalDisable()
 {
 	__ASM volatile("cpsid i");
 }
+void assert_failed(uint8_t *file, uint32_t line, char *errstr)
+{
+	StdPrintf("%s(%d):    %s\n", file, line, errstr);
+}
 #if 0
 /*定义STM32 MCU的类型*/
 typedef enum {

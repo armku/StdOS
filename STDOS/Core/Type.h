@@ -14,7 +14,7 @@ class Object
 public:
 	
 };
-
+void assert_failed(uint8_t *file, uint32_t line, char *errstr);
 // 数组长度
 #define ArrayLength(arr) (int)(sizeof(arr)/sizeof(arr[0]))
 
