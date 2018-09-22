@@ -84,10 +84,6 @@ int IList::Remove(const void *item)
     return idx;
 }
 
-void IList::Clear()
-{   
-}
-
 // 查找指定项。不存在时返回-1
 int IList::FindIndex(const void *item)const
 {

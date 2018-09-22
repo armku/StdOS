@@ -31,23 +31,14 @@ public:
 
 	// 删除指定元素
 	int Remove(const void* item);
-
-	void Clear();
-
+	
 	// 查找指定项。不存在时返回-1
 	int FindIndex(const void* item) const;
-
-	// 释放所有指针指向的内存
-	IList& DeleteAll();
-
+	
     // 重载索引运算符[]，返回指定元素的第一个
     void* operator[](int i) const;
     void*& operator[](int i);
-
-#if DEBUG
-	static void Test();
-#endif
-
+	
 private:
 	void**	_Arr;			//	8
 	int		_Count;//12
