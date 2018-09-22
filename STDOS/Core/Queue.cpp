@@ -66,8 +66,8 @@ int Queue::Write(void* buf, int len)
 // 读取数据，返回读取数量(字节数) 
 int Queue::Read(void* buf, int len)
 {
-	if (len > this->RemainLength())
-		len = this->RemainLength();
+	if (len > this->Length())
+		len = this->Length();
 	for (int i = 0; i < len; i++)
 		((char*)buf)[i] = this->Dequeue();
 
