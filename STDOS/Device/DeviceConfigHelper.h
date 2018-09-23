@@ -22,7 +22,7 @@
 #endif
 
 #if defined USECOM3
-//#define USECOM3RXD	//可以接收
+#define USECOM3RXD	//可以接收
 #define USECOM3TXD	//可以发送
 #endif
 

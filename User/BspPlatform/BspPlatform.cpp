@@ -38,7 +38,7 @@ uint32_t DeviceConfigCenter::CurrentTicks1()
 #include <stdio.h>
 #include "stdarg.h"
 /////////////////////////////////////////////////////////////////////////////
-static char sprint_buf[1024];
+static char sprint_buf[64];
 int StdPrintf(const char *format, ...)
 {	
 	va_list args;
@@ -48,6 +48,6 @@ int StdPrintf(const char *format, ...)
 	n = vsprintf(sprint_buf, format, args);
 	va_end(args);
 
-	DeviceConfigCenter::comSend(COM1, Buffer(sprint_buf, n));
+	DeviceConfigCenter::comSend(COM1, sprint_buf, n);
 	return n;
 }

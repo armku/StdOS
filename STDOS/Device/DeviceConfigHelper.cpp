@@ -442,10 +442,10 @@ void DeviceConfigCenter::com1send(void* buf, int len)
 	Sys.GlobalEnable();
 	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 #else	
-	for (int i = 0; i < bs.Length(); i++)
+	for (int i = 0; i < len; i++)
 	{
 		/* 发送一个字节数据到USART */
-		USART_SendData(USART1, bs[i]);
+		USART_SendData(USART1, ((uint8_t*)buf)[i]);
 
 		/* 等待发送完毕 */
 		while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);

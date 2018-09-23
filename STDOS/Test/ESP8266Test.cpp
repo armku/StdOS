@@ -98,9 +98,7 @@ Buffer bs1(chbuf3, ArrayLength(chbuf3));
 
 void com3rcv()
 {
-	bs1.SetLength(ArrayLength(chbuf3));
-	int len= Rxx3.Read(bs1.GetBuffer(),bs1.Length());
-	bs1.SetLength(len);
+	int len= Rxx3.Read(chbuf3,ArrayLength(chbuf3));
 }
 void espRoutin(void*param)
 {

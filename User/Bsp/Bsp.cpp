@@ -2,6 +2,7 @@
 #include "Bsp.h"
 #include "Device\Port.h"
 #include "Device\DeviceConfigHelper.h"
+#include "Buffer.h"
 
 #ifdef STM32F0
 OutputPort led1(PC6, true);
@@ -69,35 +70,27 @@ void LedTask(void *param)
 #endif 
 }
 
-uint8_t chbuf[1000];
+uint8_t chbuf[256];
 
 void com1rcv()
 {
-	Buffer bs1(chbuf, ArrayLength(chbuf));
-
-	int len= Rxx1.Read(bs1.GetBuffer(),bs1.Length());
-	bs1.SetLength(len);
+	int len= Rxx1.Read(chbuf, ArrayLength(chbuf));
 	Rxx1.Clear();
 
 	debug_printf("COM1RCV:\n");
-	bs1.ShowHex(true);
+	Buffer(chbuf,len).ShowHex(true);
 }
 void comtestrcv()
 {
-	Buffer bs1(chbuf, ArrayLength(chbuf));
-
-	int len= Rxx3.Read(bs1.GetBuffer(),bs1.Length());
-	bs1.SetLength(len);
-	Rxx3.Clear();
-
+	int len= Rxx3.Read(chbuf, ArrayLength(chbuf));
+	
 	debug_printf("COM3RCV:\n");
-	bs1.ShowHex(true);
+	Buffer(chbuf,len).ShowHex(true);
 }
 const char *hello = "hello world";
 void routsendtest(void * param)
 {
-	Buffer bs((char*)hello,ArrayLength(hello));
-	DeviceConfigCenter::com3send(bs);
+	DeviceConfigCenter::com3send((void*)hello,ArrayLength(hello));
 }
 void Esp8266TestInit();
 void W5500Test();
