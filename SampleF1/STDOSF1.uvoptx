@@ -1140,7 +1140,7 @@
   </Group>
 
   <Group>
-    <GroupName>Device</GroupName>
+    <GroupName>OnChip</GroupName>
     <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
@@ -1220,7 +1220,7 @@
   </Group>
 
   <Group>
-    <GroupName>Drivers</GroupName>
+    <GroupName>OffChip</GroupName>
     <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
@@ -1645,7 +1645,7 @@
 
   <Group>
     <GroupName>Test</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

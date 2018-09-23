@@ -645,7 +645,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Device</GroupName>
+          <GroupName>OnChip</GroupName>
           <Files>
             <File>
               <FileName>Port.cpp</FileName>
@@ -680,7 +680,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers</GroupName>
+          <GroupName>OffChip</GroupName>
           <Files>
             <File>
               <FileName>ADS1232.cpp</FileName>
@@ -1625,7 +1625,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Device</GroupName>
+          <GroupName>OnChip</GroupName>
           <Files>
             <File>
               <FileName>Port.cpp</FileName>
@@ -1660,7 +1660,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers</GroupName>
+          <GroupName>OffChip</GroupName>
           <Files>
             <File>
               <FileName>ADS1232.cpp</FileName>
