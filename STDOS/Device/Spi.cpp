@@ -93,10 +93,10 @@ void Spi::Close()
 }
 
 // 批量读写。以字节数组长度为准
-void Spi::Write(const Buffer &bs) {
+void Spi::Write(void * buf, int len) {
 
 }
-void Spi::Read(Buffer &bs) {
+void Spi::Read(void * buf, int len) {
 
 }
 

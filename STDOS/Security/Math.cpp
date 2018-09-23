@@ -165,7 +165,7 @@ const unsigned char crc8_tab[256] = {
 	233,183, 85, 11,136,214, 52,106, 43,117,151,201, 74, 20,246,168,
 	116, 42,200,150, 21, 75,169,247,182,232, 10, 84,215,137,107, 53
 };
-uint16_t Math::Crc16(uint8_t * buf, uint16_t len)
+uint16_t Math::Crc16(void * buf, uint16_t len)
 {
 	uint8_t           ucCRCHi = 0xFF;
 	uint8_t           ucCRCLo = 0xFF;
@@ -173,17 +173,17 @@ uint16_t Math::Crc16(uint8_t * buf, uint16_t len)
 
 	while (len--)
 	{
-		iIndex = ucCRCLo ^ *(buf++);
+		iIndex = ucCRCLo ^ *(((uint8_t *)buf)++);
 		ucCRCLo = (uint8_t)(ucCRCHi ^ aucCRCHi[iIndex]);
 		ucCRCHi = aucCRCLo[iIndex];
 	}
 	return (uint16_t)(ucCRCHi << 8 | ucCRCLo);
 }
 
-uint8_t  Math::Crc8(uint8_t *buf, uint16_t len)
+uint8_t  Math::Crc8(void *buf, uint16_t len)
 {
 	unsigned char i, crc8 = 0;
 	for (i = 0; i<len; i++)
-		crc8 = crc8_tab[crc8^buf[i]];
+		crc8 = crc8_tab[crc8^((uint8_t *)buf)[i]];
 	return crc8;
 }

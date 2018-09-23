@@ -8,6 +8,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "Sys.h"
 #include "Platform\stm32.h"
 #include "Device\DeviceConfigHelper.h"
+#include "Core\Buffer.h"
 
 SystemConfig g_Config;//系统配置
 
@@ -53,8 +54,7 @@ void TSys::ShowInfo()const
 {
 	this->OnShowInfo();
 	StdPrintf("ChipID:");
-	Buffer buff((void*)this->ID, 12);
-	buff.ShowHex(true);
+	Buffer((void*)this->ID, 12).ShowHex(true);
 
 	StdPrintf("Support: http://www.armku.com\n");
 }
@@ -222,7 +222,7 @@ void TSys::OnInit()
 #if defined STM32F0
 	this->Clock = 72000000;
 	this->CystalClock = HSE_VALUE;
-	Buffer::Copy(this->ID, (void*)0x1FFFF7AC, ArrayLength(this->ID));
+	memcpy(this->ID, (void*)0x1FFFF7AC, ArrayLength(this->ID));
 
 	this->CPUID = SCB->CPUID;
 	uint32_t MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
@@ -248,7 +248,7 @@ void TSys::OnInit()
 #elif defined STM32F1
 	this->Clock = 72000000;
 	this->CystalClock = HSE_VALUE;
-	Buffer::Copy(this->ID, (void*)0x1FFFF7E8, ArrayLength(this->ID));
+	memcpy(this->ID, (void*)0x1FFFF7E8, ArrayLength(this->ID));
 
 	this->CPUID = SCB->CPUID;
 	uint32_t MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
@@ -286,7 +286,7 @@ void TSys::OnInit()
 #elif defined STM32F4
 	this->Clock = 168000000;
 	this->CystalClock = HSE_VALUE;
-	Buffer::Copy(this->ID, (void*)0x1fff7a10, ArrayLength(this->ID));
+	memcpy(this->ID, (void*)0x1fff7a10, ArrayLength(this->ID));
 
 	this->CPUID = SCB->CPUID;
 	uint32_t MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本

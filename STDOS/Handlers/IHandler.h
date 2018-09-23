@@ -2,6 +2,7 @@
 #define _HANDLER_H
 
 #include "Sys.h"
+#include "Core\Buffer.h"
 
 class IHandler
 {

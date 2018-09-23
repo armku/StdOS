@@ -252,24 +252,24 @@ void DeviceConfigCenter::ComChgBaudRate(COM com, int baudRate)
 	}
 }
 //发送数据
-void DeviceConfigCenter::comSend(COM com, Buffer bs)
+void DeviceConfigCenter::comSend(COM com, void* buf, int len)
 {
 	switch (com)
 	{
 	case COM1:
-		com1send(bs);
+		com1send(buf, len);
 		break;
 	case COM2:
-		com2send(bs);
+		com2send(buf, len);
 		break;
 	case COM3:
-		com3send(bs);
+		com3send(buf, len);
 		break;
 	case COM4:
-		com4send(bs);
+		com4send(buf, len);
 		break;
 	case COM5:
-		com5send(bs);
+		com5send(buf, len);
 		break;
 	case COM6:
 		break;
@@ -424,7 +424,7 @@ uint8_t com4bufff[300];
 uint8_t com5bufff[300];
 #endif
 void OS_ComSendChk(void *param);
-void DeviceConfigCenter::com1send(Buffer& bs)
+void DeviceConfigCenter::com1send(void* buf, int len)
 {
 #if defined USECOM1TXD
 	if (pCOM1Rx485)
@@ -435,10 +435,10 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 #if defined COM1TXDMAFLAG			
 	Txx1.Write(bs);
 #elif defined COM1SENDINTFLAG
-	while (bs.Length() > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
+	while (len > Txx1.RemainLength());//等待发送缓冲区可容纳足够内容
 	//中断发送
 	Sys.GlobalDisable();
-	Txx1.Write(bs.GetBuffer(),bs.Length());
+	Txx1.Write(buf,len);
 	Sys.GlobalEnable();
 	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 #else	
@@ -458,7 +458,7 @@ void DeviceConfigCenter::com1send(Buffer& bs)
 #endif
 #endif
 }
-void DeviceConfigCenter::com2send(Buffer& bs)
+void DeviceConfigCenter::com2send(void* buf, int len)
 {
 #if defined USECOM2TXD
 	if (pCOM2Rx485)
@@ -469,10 +469,10 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 #if defined COM2TXDMAFLAG			
 	Txx2.Write(bs);
 #elif defined COM2SENDINTFLAG
-	while (bs.Length() > Txx2.RemainLength());//等待发送缓冲区可容纳足够内容
+	while (len > Txx2.RemainLength());//等待发送缓冲区可容纳足够内容
 											  //中断发送
 	Sys.GlobalDisable();
-	Txx2.Write(bs.GetBuffer(),bs.Length());
+	Txx2.Write(buf,len);
 	Sys.GlobalEnable();
 	USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
 #else	
@@ -492,7 +492,7 @@ void DeviceConfigCenter::com2send(Buffer& bs)
 #endif
 #endif
 }
-void DeviceConfigCenter::com3send(Buffer& bs)
+void DeviceConfigCenter::com3send(void* buf, int len)
 {
 #if defined USECOM3TXD
 	if (pCOM3Rx485)
@@ -510,10 +510,10 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 	Sys.GlobalEnable();
 	USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
 #else	
-	for (int i = 0; i < bs.Length(); i++)
+	for (int i = 0; i < len; i++)
 	{
 		/* 发送一个字节数据到USART */
-		USART_SendData(USART3, bs[i]);
+		USART_SendData(USART3, ((char*)buf)[i]);
 
 		/* 等待发送完毕 */
 		while (USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET);
@@ -526,7 +526,7 @@ void DeviceConfigCenter::com3send(Buffer& bs)
 #endif
 #endif
 }
-void DeviceConfigCenter::com4send(Buffer& bs)
+void DeviceConfigCenter::com4send(void* buf, int len)
 {
 #if defined USECOM4TXD
 	if (pCOM4Rx485)
@@ -537,10 +537,10 @@ void DeviceConfigCenter::com4send(Buffer& bs)
 #if defined COM4TXDMAFLAG			
 	Txx4.Write(bs);
 #elif defined COM4SENDINTFLAG
-	while (bs.Length() > Txx4.RemainLength());//等待发送缓冲区可容纳足够内容
+	while (len > Txx4.RemainLength());//等待发送缓冲区可容纳足够内容
 											  //中断发送
 	Sys.GlobalDisable();
-	Txx4.Write(bs.GetBuffer(),bs.Length());
+	Txx4.Write(buf,len);
 	Sys.GlobalEnable();
 	USART_ITConfig(UART4, USART_IT_TXE, ENABLE);
 #else	
@@ -560,7 +560,7 @@ void DeviceConfigCenter::com4send(Buffer& bs)
 #endif
 #endif
 }
-void DeviceConfigCenter::com5send(Buffer& bs)
+void DeviceConfigCenter::com5send(void* buf, int len)
 {
 #if defined USECOM5TXD
 	if (pCOM5Rx485)
@@ -571,17 +571,17 @@ void DeviceConfigCenter::com5send(Buffer& bs)
 #if defined COM5TXDMAFLAG			
 	Txx5.Write(bs.GetBuffer(),bs.Length());
 #elif defined COM5SENDINTFLAG
-	while (bs.Length() > Txx5.RemainLength());//等待发送缓冲区可容纳足够内容
+	while (len > Txx5.RemainLength());//等待发送缓冲区可容纳足够内容
 											  //中断发送
 	Sys.GlobalDisable();
-	Txx5.Write(bs);
+	Txx5.Write(buf,len);
 	Sys.GlobalEnable();
 	USART_ITConfig(UART5, USART_IT_TXE, ENABLE);
 #else	
 	for (int i = 0; i < bs.Length(); i++)
 	{
 		/* 发送一个字节数据到USART */
-		USART_SendData(UART5, bs[i]);
+		USART_SendData(UART5, （char* buf)[i]);
 
 		/* 等待发送完毕 */
 		while (USART_GetFlagStatus(UART5, USART_FLAG_TXE) == RESET);

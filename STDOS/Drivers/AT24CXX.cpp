@@ -3,7 +3,7 @@
 #define macI2C_WR	0		/* 写控制bit */
 #define macI2C_RD	1		/* 读控制bit */
 
-bool AT24CXX::Write(uint32_t addr,const Buffer &bs)
+bool AT24CXX::Write(uint32_t addr, void * buf, int len, int bufpos)
 {
 	uint32_t curAddr;
 	uint32_t pageStart; //页内起始地址
@@ -11,7 +11,7 @@ bool AT24CXX::Write(uint32_t addr,const Buffer &bs)
 	uint16_t bufaddr;
 
 	pageStart = addr % this->Block;
-	bytesLeave = bs.Length();
+	bytesLeave = len;
 	curAddr = addr;
 	bufaddr = 0;
 	
@@ -22,15 +22,13 @@ bool AT24CXX::Write(uint32_t addr,const Buffer &bs)
 		if ((pageStart + bytesLeave) < this->Block)
 		{
 			//一次能读完
-			Buffer bsFirst((uint8_t*)bs.GetBuffer(), bytesLeave);
-			this->PageWrite(curAddr, bsFirst);
+			this->PageWrite(curAddr, buf, bytesLeave);
 			return 0;
 		}
 		else
 		{
 			//一次读取不完成
-			Buffer bsFirst((uint8_t*)bs.GetBuffer(), this->Block - pageStart);
-			this->PageWrite(curAddr, bsFirst);
+			this->PageWrite(curAddr, buf, this->Block - pageStart);
 			bytesLeave -= (this->Block - pageStart);
 			curAddr += (this->Block - pageStart);
 			bufaddr += (this->Block - pageStart);
@@ -42,8 +40,7 @@ bool AT24CXX::Write(uint32_t addr,const Buffer &bs)
 		if (bytesLeave > this->Block)
 		{
 			//读取整页
-			Buffer bsLeave((uint8_t*)bs.GetBuffer() + bufaddr, this->Block);
-			this->PageWrite(curAddr, bsLeave);
+			this->PageWrite(curAddr, ((uint8_t*)buf) + bufaddr, this->Block);
 			bytesLeave -= this->Block;
 			curAddr += this->Block;
 			bufaddr += this->Block;
@@ -51,16 +48,15 @@ bool AT24CXX::Write(uint32_t addr,const Buffer &bs)
 		else
 		{
 			//读取剩余页
-			Buffer bsLeave((uint8_t*)bs.GetBuffer() + bufaddr, bytesLeave);
-			this->PageWrite(curAddr, bsLeave);
+			this->PageWrite(curAddr, ((uint8_t*)buf) + bufaddr, bytesLeave);
 			return 0;
 		}
 	}
 	this->pinWP = 1;
-	return bs.Length();
+	return len;
 }
 
-bool AT24CXX::Read(uint32_t addr, Buffer &bs)
+bool AT24CXX::Read(uint32_t addr, void * buf, int len, int bufpos)
 {
 	uint32_t curAddr;
 	uint32_t pageStart; //页内起始地址
@@ -68,7 +64,7 @@ bool AT24CXX::Read(uint32_t addr, Buffer &bs)
 	uint16_t bufaddr;
 
 	pageStart = addr % this->Block;
-	bytesLeave = bs.Length();
+	bytesLeave = len;
 	curAddr = addr;
 	bufaddr = 0;
 	
@@ -78,15 +74,13 @@ bool AT24CXX::Read(uint32_t addr, Buffer &bs)
 		if ((pageStart + bytesLeave) < this->Block)
 		{
 			//一次能读完
-			Buffer bsFirst(bs.GetBuffer(), bytesLeave);
-			this->PageRead(curAddr,bsFirst);
+			this->PageRead(curAddr, buf, bytesLeave);
 			return 0;
 		}		
 		else
 		{
 			//一次读取不完成
-			Buffer bsFirst(bs.GetBuffer(), this->Block - pageStart);
-			this->PageRead(curAddr,bsFirst);
+			this->PageRead(curAddr, buf, this->Block - pageStart);
 			bytesLeave -= (this->Block - pageStart);
 			curAddr += (this->Block - pageStart);
 			bufaddr += (this->Block - pageStart);
@@ -98,8 +92,7 @@ bool AT24CXX::Read(uint32_t addr, Buffer &bs)
 		if (bytesLeave > this->Block)
 		{
 			//读取整页
-			Buffer bsLeave(bs.GetBuffer() + bufaddr, this->Block);
-			this->PageRead(curAddr,bsLeave);
+			this->PageRead(curAddr, ((uint8_t*)buf) + bufaddr, this->Block);
 			bytesLeave -= this->Block;
 			curAddr += this->Block;
 			bufaddr += this->Block;
@@ -107,12 +100,11 @@ bool AT24CXX::Read(uint32_t addr, Buffer &bs)
 		else
 		{
 			//读取剩余页
-			Buffer bsLeave(bs.GetBuffer() + bufaddr, bytesLeave);
-			this->PageRead(curAddr, bsLeave);
+			this->PageRead(curAddr, ((uint8_t*)buf) + bufaddr, bytesLeave);
 			return 0;
 		}
 	}
-	return bs.Length();
+	return len;
 }
 //写延时时间
 AT24CXX::AT24CXX(EW24XXType devtype, uint8_t devaddr, uint32_t wnms)
@@ -133,38 +125,6 @@ void AT24CXX::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
 		this->pinWP.Open();
 		this->pinWP = 1;
 	}
-}
-/*
- *********************************************************************************************************
- *	函 数 名: Read
- *	功能说明: 从串行EEPROM指定地址处开始读取若干数据
- *	形    参：addr : 起始地址
- *			 size : 数据长度，单位为字节
- *			 pBuffer : 存放读到的数据的缓冲区指针
- *	返 回 值: 1 表示失败，0表示成功
- *********************************************************************************************************
- */
-int AT24CXX::Read(uint32_t addr, void *pBuffer, int size, uint16_t bufpos)
-{
-	Buffer bs((uint8_t*)pBuffer + bufpos, size);
-	this->Read(addr, bs);
-	return size;
-}
-/*
- *********************************************************************************************************
- *	函 数 名: Write
- *	功能说明: 向串行EEPROM指定地址写入若干数据，采用页写操作提高写入效率
- *	形    参：addr : 起始地址
- *			 size : 数据长度，单位为字节
- *			 pBuffer : 存放读到的数据的缓冲区指针
- *	返 回 值: 0 表示失败，1表示成功
- *********************************************************************************************************
- */
-int AT24CXX::Write(uint32_t addr, void *pBuffer, int size, uint16_t bufpos)
-{
-	Buffer bs((uint8_t*)pBuffer + bufpos, size);
-	this->Write(addr, bs);
-	return size;
 }
 
 uint8_t AT24CXX::Read(uint16_t address)
@@ -298,9 +258,9 @@ cmd_Writebytefail:  /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设
 }
 
 //页内读，最多一页
-int AT24CXX::PageRead(uint16_t addr, Buffer& bs)
+int AT24CXX::PageRead(uint16_t addr, void * buf, int len)
 {
-	if (bs.Length() > this->Block)
+	if (len > this->Block)
 		return 1;
 
 	/* 第1步：发起I2C总线启动信号 */
@@ -347,12 +307,12 @@ int AT24CXX::PageRead(uint16_t addr, Buffer& bs)
 	}
 
 	/* 第9步：循环读取数据 */
-	for (int i = 0; i < bs.Length(); i++)
+	for (int i = 0; i < len; i++)
 	{
-		bs[i] = this->IIC.ReadByte(); /* 读1个字节 */
+		((uint8_t*)buf)[i] = this->IIC.ReadByte(); /* 读1个字节 */
 
 									  /* 每读完1个字节后，需要发送Ack， 最后一个字节不需要Ack，发Nack */
-		if (i != bs.Length() - 1)
+		if (i != len - 1)
 		{
 			this->IIC.Ack(true); /* 中间字节读完后，CPU产生ACK信号(驱动SDA = 0) */
 		}
@@ -371,23 +331,22 @@ cmd_Readfail:  /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
 	return 1;
 }
 //页内写，最多一页
-int AT24CXX::PageWrite(uint16_t addr, Buffer& bs)
+int AT24CXX::PageWrite(uint16_t addr, void * buf, int len)
 {
-	if (bs.Length() > this->Block)
+	if (len > this->Block)
 		return 1;
 	uint32_t m;
 	uint16_t usAddr;
 	uint8_t buftmp[256];
 
 	//非法长度，直接返回
-	if (bs.Length() > 256)
+	if (len > 256)
 		return 0;
-	Buffer bstmp(buftmp, bs.Length());
-	this->PageRead(addr, bstmp);
+	this->PageRead(addr, buftmp, len);
 	bool flagchgs = false;
-	for (int i = 0; i < bs.Length(); i++)
+	for (int i = 0; i < len; i++)
 	{
-		if (bs[i] != bstmp[i])
+		if (((uint8_t*)buf)[i] != buftmp[i])
 		{
 			flagchgs = true;
 			break;
@@ -442,11 +401,11 @@ int AT24CXX::PageWrite(uint16_t addr, Buffer& bs)
 		goto cmd_Writefail; /* EEPROM器件无应答 */
 	}
 
-	for (int i = 0; i < bs.Length(); i++)
+	for (int i = 0; i < len; i++)
 	{
 
 		/* 第6步：开始写入数据 */
-		this->IIC.WriteByte(bs[i]);
+		this->IIC.WriteByte(((uint8_t*)buf)[i]);
 
 		/* 第7步：发送ACK */
 		if (this->IIC.WaitAck() != 0)

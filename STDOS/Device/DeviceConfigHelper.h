@@ -22,7 +22,7 @@
 #endif
 
 #if defined USECOM3
-#define USECOM3RXD	//可以接收
+//#define USECOM3RXD	//可以接收
 #define USECOM3TXD	//可以发送
 #endif
 
@@ -51,13 +51,13 @@
 #if defined USECOM2TXD
 //#define COM2TXDMAFLAG  //DMA发送
 #if (!defined COM2TXDMAFLAG)
-//#define COM2SENDINTFLAG	//中断发送
+#define COM2SENDINTFLAG	//中断发送
 #endif
 #endif
 
 #if defined USECOM2RXD
 //#define COM2RXDMAFLAG  //DMA接收
-//#define COM2RCVIDLEINTFLAG	//空闲中断接收
+#define COM2RCVIDLEINTFLAG	//空闲中断接收
 #endif
 
 #if defined USECOM3TXD
@@ -130,12 +130,12 @@ public:
 	//串口	
 	static void ConfigCom(COM com, int baudRate);
 	static void ComChgBaudRate(COM com, int baudRate);//改变波特率
-	static void com1send(Buffer& bs);
-	static void com2send(Buffer& bs);
-	static void com3send(Buffer& bs);
-	static void com4send(Buffer& bs);
-	static void com5send(Buffer& bs);
-	static void comSend(COM com, Buffer bs);//发送数据
+	static void com1send(void* buf, int len);
+	static void com2send(void* buf, int len);
+	static void com3send(void* buf, int len);
+	static void com4send(void* buf, int len);
+	static void com5send(void* buf, int len);
+	static void comSend(COM com, void* buf, int len);//发送数据
 	static OutputPort *pCOM1Rx485;
 	static OutputPort *pCOM2Rx485;
 	static OutputPort *pCOM3Rx485;

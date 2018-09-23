@@ -8,9 +8,9 @@ class Storage
 {
 public:
     // 读取
-    virtual bool Read(uint32_t address, Buffer& bs) const = 0;
+    virtual bool Read(uint32_t address, void * buf, int len) const = 0;
     // 写入
-    virtual bool Write(uint32_t address, const Buffer& bs) const = 0;
+    virtual bool Write(uint32_t address, void * buf, int len) const = 0;
 };
 
 // 块存储接口
@@ -24,9 +24,9 @@ public:
 	bool XIP;		// 是否映射片上执行
 
     // 读取
-    virtual bool Read(uint32_t address, Buffer& bs) const;
+    virtual bool Read(uint32_t address, void * buf, int len) const;
     // 写入
-    virtual bool Write(uint32_t address, const Buffer& bs) const;
+    virtual bool Write(uint32_t address, void * buf, int len) const;
 	// 清空
     virtual bool Memset(uint32_t address, uint8_t data, int len) const;
     // 擦除
@@ -46,9 +46,9 @@ class CharStorage : public Storage
 {
 public:
     // 读取
-    virtual bool Read(uint32_t address, Buffer& bs) const;
+    virtual bool Read(uint32_t address, void * buf,int len) const;
     // 写入
-    virtual bool Write(uint32_t address, const Buffer& bs) const;
+    virtual bool Write(uint32_t address, void * buf, int len) const;
 };
 
 #endif

@@ -54,8 +54,8 @@
             uint16_t Write16(uint16_t data);
 
             // 批量读写。以字节数组长度为准
-            void Write(const Buffer &bs);
-            void Read(Buffer &bs);
+            void Write(void * buf, int len);
+            void Read(void * buf, int len);
 
             void Start(); // 拉低NSS，开始传输
             void Stop(); // 拉高NSS，停止传输
