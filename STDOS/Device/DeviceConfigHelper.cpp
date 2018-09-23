@@ -1,4 +1,4 @@
-#include "DeviceConfigHelper.h"
+#include "Configuration.h"
 #include "Port.h"
 #include "Platform\stm32.h"
 

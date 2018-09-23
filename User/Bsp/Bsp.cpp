@@ -1,7 +1,7 @@
 #include "BspPlatform\BspPlatform.h"
 #include "Bsp.h"
 #include "Device\Port.h"
-#include "Device\DeviceConfigHelper.h"
+#include "Device\Configuration.h"
 #include "Buffer.h"
 
 #ifdef STM32F0

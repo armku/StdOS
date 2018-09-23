@@ -7,7 +7,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include <string.h>
 #include "Sys.h"
 #include "Platform\stm32.h"
-#include "Device\DeviceConfigHelper.h"
+#include "Device\Configuration.h"
 #include "Core\Buffer.h"
 
 SystemConfig g_Config;//系统配置
