@@ -778,11 +778,6 @@
               <FilePath>..\STDOS\Drivers\I2C.cpp</FilePath>
             </File>
             <File>
-              <FileName>ESP8266.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\ESP8266.cpp</FilePath>
-            </File>
-            <File>
               <FileName>NRF24L01.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\NRF24L01.cpp</FilePath>
@@ -966,11 +961,6 @@
               <FileName>NPATest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\NPATest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ESP8266Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
             </File>
             <File>
               <FileName>NRF24L01Test.cpp</FileName>
@@ -1768,11 +1758,6 @@
               <FilePath>..\STDOS\Drivers\I2C.cpp</FilePath>
             </File>
             <File>
-              <FileName>ESP8266.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\ESP8266.cpp</FilePath>
-            </File>
-            <File>
               <FileName>NRF24L01.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Drivers\NRF24L01.cpp</FilePath>
@@ -1956,11 +1941,6 @@
               <FileName>NPATest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\STDOS\Test\NPATest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ESP8266Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
             </File>
             <File>
               <FileName>NRF24L01Test.cpp</FileName>
