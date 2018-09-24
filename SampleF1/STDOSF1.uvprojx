@@ -680,7 +680,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>OffChip</GroupName>
+          <GroupName>Drivers</GroupName>
           <Files>
             <File>
               <FileName>AD7124.cpp</FileName>
@@ -1660,7 +1660,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>OffChip</GroupName>
+          <GroupName>Drivers</GroupName>
           <Files>
             <File>
               <FileName>AD7124.cpp</FileName>
