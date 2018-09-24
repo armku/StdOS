@@ -10,8 +10,7 @@
       <TargetName>Debug</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
+      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F072VB</Device>
@@ -324,7 +323,6 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>0</uC99>
-            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -337,7 +335,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>STM32F0,DEBUG,STM32F072, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\STDOS;..\STDOS\Core;..\STDOS\Device;..\STDOS\Kernel;..\SYSTEM\STM32F0\CMSIS;..\SYSTEM\STM32F0\FWLib\inc;..\Util;..\User</IncludePath>
+              <IncludePath>..\Libraries;..\Libraries\Core;..\Libraries\OnChip;..\Libraries\Kernel;..\SYSTEM\STM32F0\CMSIS;..\SYSTEM\STM32F0\FWLib\inc;..\Util;..\User</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -380,6 +378,13 @@
       <Groups>
         <Group>
           <GroupName>USER</GroupName>
+          <Files>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\font.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Bsp</GroupName>
@@ -388,11 +393,6 @@
               <FileName>Bsp.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -572,22 +572,32 @@
             <File>
               <FileName>BlinkPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\App\BlinkPort.cpp</FilePath>
+              <FilePath>..\Libraries\App\BlinkPort.cpp</FilePath>
             </File>
             <File>
               <FileName>bspkey.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\App\bspkey.cpp</FilePath>
+              <FilePath>..\Libraries\App\bspkey.cpp</FilePath>
             </File>
             <File>
               <FileName>FlushPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\App\FlushPort.cpp</FilePath>
+              <FilePath>..\Libraries\App\FlushPort.cpp</FilePath>
             </File>
             <File>
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\App\lcd_dr.cpp</FilePath>
+              <FilePath>..\Libraries\App\lcd_dr.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>LCDOCM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\App\LCDOCM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PID.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\App\PID.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -597,62 +607,62 @@
             <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
+              <FilePath>..\Libraries\Core\Buffer.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
+              <FilePath>..\Libraries\Core\DateTime.cpp</FilePath>
             </File>
             <File>
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Type.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Type.cpp</FilePath>
+              <FilePath>..\Libraries\Core\List.cpp</FilePath>
             </File>
             <File>
               <FileName>Queue.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
+              <FilePath>..\Libraries\Core\Queue.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RingBuffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Core\RingBuffer.cpp</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Device</GroupName>
+          <GroupName>OnChip</GroupName>
           <Files>
-            <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSolo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
-            </File>
             <File>
               <FileName>DeviceConfigHelper.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\DeviceConfigHelper.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\DeviceConfigHelper.cpp</FilePath>
             </File>
             <File>
               <FileName>DevicesHelper.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\DevicesHelper.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\DevicesHelper.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\PwmSolo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\Spi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\WatchDog.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -660,59 +670,109 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>ADS1246.cpp</FileName>
+              <FileName>AD7124.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\ADS1246.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NPA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\NPA.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\AD7124.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\AD7689.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\AD7689.cpp</FilePath>
             </File>
             <File>
-              <FileName>ST7565R.cpp</FileName>
+              <FileName>ADS1232.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\ST7565R.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\ADS1232.cpp</FilePath>
             </File>
             <File>
-              <FileName>W25QXXX.cpp</FileName>
+              <FileName>ADS1246.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\ADS1246.cpp</FilePath>
             </File>
             <File>
               <FileName>AT24CXX.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\AT24CXX.cpp</FilePath>
             </File>
             <File>
               <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RX8025T.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\RX8025T.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7124.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\AD7124.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\AT45DB.cpp</FilePath>
             </File>
             <File>
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\DS18B20.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS1302.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\DS1302.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS_ATGM332D.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\GPS_ATGM332D.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS_S1216.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\GPS_S1216.cpp</FilePath>
             </File>
             <File>
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\I2C.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NPA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\NPA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NRF24L01.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\NRF24L01.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OCM240128.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\OCM240128.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PCF8563.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\PCF8563.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RX8025T.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\RX8025T.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1106.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\SSD1106.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1309.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\SSD1309.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7565R.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\ST7565R.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\W25QXXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W5500.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\W5500.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -720,19 +780,24 @@
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
-              <FileName>Task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
+              <FilePath>..\Libraries\Kernel\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Task.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Kernel\Task.cpp</FilePath>
             </File>
             <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Time.cpp</FilePath>
+              <FilePath>..\Libraries\Kernel\Time.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaitHandle.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Kernel\WaitHandle.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -742,12 +807,12 @@
             <File>
               <FileName>IHandler.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Handlers\IHandler.cpp</FilePath>
+              <FilePath>..\Libraries\Handlers\IHandler.cpp</FilePath>
             </File>
             <File>
               <FileName>IPipeline.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Handlers\IPipeline.cpp</FilePath>
+              <FilePath>..\Libraries\Handlers\IPipeline.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -755,24 +820,24 @@
           <GroupName>Security</GroupName>
           <Files>
             <File>
-              <FileName>Crc.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
-            </File>
-            <File>
               <FileName>CheckSum.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\CheckSum.cpp</FilePath>
+              <FilePath>..\Libraries\Security\CheckSum.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Crc.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Security\Crc.cpp</FilePath>
             </File>
             <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\Math.cpp</FilePath>
+              <FilePath>..\Libraries\Security\Math.cpp</FilePath>
             </File>
             <File>
               <FileName>Parity.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\Parity.cpp</FilePath>
+              <FilePath>..\Libraries\Security\Parity.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -780,114 +845,119 @@
           <GroupName>Test</GroupName>
           <Files>
             <File>
-              <FileName>AT24CXXTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\AT24CXXTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DS18B20Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD1246Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\AD1246Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\AD1246Test.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7124Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\AD7124Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\AD7124Test.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7689Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\AD7689Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\AD7689Test.cpp</FilePath>
             </File>
             <File>
               <FileName>ADS1232Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ADS1232Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\ADS1232Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT24CXXTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\AT24CXXTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS18B20Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\DS18B20Test.cpp</FilePath>
             </File>
             <File>
               <FileName>DS1302Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\DS1302Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ESP8266Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\DS1302Test.cpp</FilePath>
             </File>
             <File>
               <FileName>lcd_drTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\lcd_drTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\lcd_drTest.cpp</FilePath>
             </File>
             <File>
               <FileName>LedTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\LedTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\LedTest.cpp</FilePath>
             </File>
             <File>
               <FileName>NPATest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\NPATest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\NPATest.cpp</FilePath>
             </File>
             <File>
               <FileName>NRF24L01Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\NRF24L01Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\NRF24L01Test.cpp</FilePath>
             </File>
             <File>
               <FileName>OCM240128Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\OCM240128Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\OCM240128Test.cpp</FilePath>
             </File>
             <File>
               <FileName>PCF8563Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PCF8563Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\PCF8563Test.cpp</FilePath>
             </File>
             <File>
               <FileName>PipelineTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PipelineTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\PipelineTest.cpp</FilePath>
             </File>
             <File>
               <FileName>PwmSoloTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\PwmSoloTest.cpp</FilePath>
             </File>
             <File>
               <FileName>RX8025TTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\RX8025TTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\RX8025TTest.cpp</FilePath>
             </File>
             <File>
               <FileName>SerialPort485Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\SerialPort485Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\SerialPort485Test.cpp</FilePath>
             </File>
             <File>
               <FileName>SSD1309Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\SSD1309Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\SSD1309Test.cpp</FilePath>
             </File>
             <File>
               <FileName>ST7565RTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ST7565RTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\ST7565RTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TaskTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\TaskTest.cpp</FilePath>
             </File>
             <File>
               <FileName>W25QXXXTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\W25QXXXTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\W25QXXXTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W5500Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\W5500Test.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDogTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\WatchDogTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -898,7 +968,6 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
@@ -1074,7 +1143,7 @@
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>0</useUlib>
+            <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
@@ -1211,7 +1280,6 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
-            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -1221,10 +1289,10 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>--cpp11</MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,STM32F1</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\Util\inc;..\SYSTEM\CMSIS;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc;..\User\fonts</IncludePath>
+              <IncludePath>..\Libraries;..\Libraries\Core;..\Libraries\OnChip;..\Libraries\Kernel;..\SYSTEM\STM32F0\CMSIS;..\SYSTEM\STM32F0\FWLib\inc;..\Util;..\User</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1267,6 +1335,13 @@
       <Groups>
         <Group>
           <GroupName>USER</GroupName>
+          <Files>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\font.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Bsp</GroupName>
@@ -1275,11 +1350,6 @@
               <FileName>Bsp.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1459,22 +1529,32 @@
             <File>
               <FileName>BlinkPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\App\BlinkPort.cpp</FilePath>
+              <FilePath>..\Libraries\App\BlinkPort.cpp</FilePath>
             </File>
             <File>
               <FileName>bspkey.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\App\bspkey.cpp</FilePath>
+              <FilePath>..\Libraries\App\bspkey.cpp</FilePath>
             </File>
             <File>
               <FileName>FlushPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\App\FlushPort.cpp</FilePath>
+              <FilePath>..\Libraries\App\FlushPort.cpp</FilePath>
             </File>
             <File>
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\App\lcd_dr.cpp</FilePath>
+              <FilePath>..\Libraries\App\lcd_dr.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>LCDOCM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\App\LCDOCM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PID.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\App\PID.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1484,62 +1564,62 @@
             <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Buffer.cpp</FilePath>
+              <FilePath>..\Libraries\Core\Buffer.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\DateTime.cpp</FilePath>
+              <FilePath>..\Libraries\Core\DateTime.cpp</FilePath>
             </File>
             <File>
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Type.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Type.cpp</FilePath>
+              <FilePath>..\Libraries\Core\List.cpp</FilePath>
             </File>
             <File>
               <FileName>Queue.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Core\Queue.cpp</FilePath>
+              <FilePath>..\Libraries\Core\Queue.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RingBuffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Core\RingBuffer.cpp</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Device</GroupName>
+          <GroupName>OnChip</GroupName>
           <Files>
-            <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSolo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\PwmSolo.cpp</FilePath>
-            </File>
             <File>
               <FileName>DeviceConfigHelper.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\DeviceConfigHelper.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\DeviceConfigHelper.cpp</FilePath>
             </File>
             <File>
               <FileName>DevicesHelper.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Device\DevicesHelper.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\DevicesHelper.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\PwmSolo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\Spi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\WatchDog.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1547,59 +1627,109 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>ADS1246.cpp</FileName>
+              <FileName>AD7124.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\ADS1246.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NPA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\NPA.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\AD7124.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\AD7689.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\AD7689.cpp</FilePath>
             </File>
             <File>
-              <FileName>ST7565R.cpp</FileName>
+              <FileName>ADS1232.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\ST7565R.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\ADS1232.cpp</FilePath>
             </File>
             <File>
-              <FileName>W25QXXX.cpp</FileName>
+              <FileName>ADS1246.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\W25QXXX.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\ADS1246.cpp</FilePath>
             </File>
             <File>
               <FileName>AT24CXX.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\AT24CXX.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\AT24CXX.cpp</FilePath>
             </File>
             <File>
               <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\AT45DB.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RX8025T.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\RX8025T.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7124.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\AD7124.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\AT45DB.cpp</FilePath>
             </File>
             <File>
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\DS18B20.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\DS18B20.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS1302.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\DS1302.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS_ATGM332D.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\GPS_ATGM332D.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS_S1216.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\GPS_S1216.cpp</FilePath>
             </File>
             <File>
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Drivers\I2C.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NPA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\NPA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NRF24L01.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\NRF24L01.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OCM240128.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\OCM240128.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PCF8563.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\PCF8563.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RX8025T.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\RX8025T.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1106.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\SSD1106.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1309.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\SSD1309.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7565R.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\ST7565R.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\W25QXXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W5500.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\W5500.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1607,19 +1737,24 @@
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
-              <FileName>Task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Task.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Sys.cpp</FilePath>
+              <FilePath>..\Libraries\Kernel\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Task.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Kernel\Task.cpp</FilePath>
             </File>
             <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Kernel\Time.cpp</FilePath>
+              <FilePath>..\Libraries\Kernel\Time.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaitHandle.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Kernel\WaitHandle.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1629,12 +1764,12 @@
             <File>
               <FileName>IHandler.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Handlers\IHandler.cpp</FilePath>
+              <FilePath>..\Libraries\Handlers\IHandler.cpp</FilePath>
             </File>
             <File>
               <FileName>IPipeline.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Handlers\IPipeline.cpp</FilePath>
+              <FilePath>..\Libraries\Handlers\IPipeline.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1642,24 +1777,24 @@
           <GroupName>Security</GroupName>
           <Files>
             <File>
-              <FileName>Crc.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\Crc.cpp</FilePath>
-            </File>
-            <File>
               <FileName>CheckSum.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\CheckSum.cpp</FilePath>
+              <FilePath>..\Libraries\Security\CheckSum.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Crc.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Security\Crc.cpp</FilePath>
             </File>
             <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\Math.cpp</FilePath>
+              <FilePath>..\Libraries\Security\Math.cpp</FilePath>
             </File>
             <File>
               <FileName>Parity.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Security\Parity.cpp</FilePath>
+              <FilePath>..\Libraries\Security\Parity.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1667,114 +1802,119 @@
           <GroupName>Test</GroupName>
           <Files>
             <File>
-              <FileName>AT24CXXTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\AT24CXXTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DS18B20Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\DS18B20Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD1246Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\AD1246Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\AD1246Test.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7124Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\AD7124Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\AD7124Test.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7689Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\AD7689Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\AD7689Test.cpp</FilePath>
             </File>
             <File>
               <FileName>ADS1232Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ADS1232Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\ADS1232Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT24CXXTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\AT24CXXTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS18B20Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\DS18B20Test.cpp</FilePath>
             </File>
             <File>
               <FileName>DS1302Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\DS1302Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ESP8266Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ESP8266Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\DS1302Test.cpp</FilePath>
             </File>
             <File>
               <FileName>lcd_drTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\lcd_drTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\lcd_drTest.cpp</FilePath>
             </File>
             <File>
               <FileName>LedTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\LedTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\LedTest.cpp</FilePath>
             </File>
             <File>
               <FileName>NPATest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\NPATest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\NPATest.cpp</FilePath>
             </File>
             <File>
               <FileName>NRF24L01Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\NRF24L01Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\NRF24L01Test.cpp</FilePath>
             </File>
             <File>
               <FileName>OCM240128Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\OCM240128Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\OCM240128Test.cpp</FilePath>
             </File>
             <File>
               <FileName>PCF8563Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PCF8563Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\PCF8563Test.cpp</FilePath>
             </File>
             <File>
               <FileName>PipelineTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PipelineTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\PipelineTest.cpp</FilePath>
             </File>
             <File>
               <FileName>PwmSoloTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\PwmSoloTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\PwmSoloTest.cpp</FilePath>
             </File>
             <File>
               <FileName>RX8025TTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\RX8025TTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\RX8025TTest.cpp</FilePath>
             </File>
             <File>
               <FileName>SerialPort485Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\SerialPort485Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\SerialPort485Test.cpp</FilePath>
             </File>
             <File>
               <FileName>SSD1309Test.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\SSD1309Test.cpp</FilePath>
+              <FilePath>..\Libraries\Test\SSD1309Test.cpp</FilePath>
             </File>
             <File>
               <FileName>ST7565RTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\ST7565RTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\ST7565RTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TaskTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\TaskTest.cpp</FilePath>
             </File>
             <File>
               <FileName>W25QXXXTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\W25QXXXTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\W25QXXXTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W5500Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\W5500Test.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDogTest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\STDOS\Test\WatchDogTest.cpp</FilePath>
+              <FilePath>..\Libraries\Test\WatchDogTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
