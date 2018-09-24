@@ -1312,10 +1312,10 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>--cpp11</MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,STM32F1</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\FWLib\inc;..\SYSTEM\Basic\inc;..\SYSTEM\CORE\inc;..\SYSTEM\OS\inc;..\SYSTEM\USMART\inc;..\SYSTEM\Util\inc;..\SYSTEM\CMSIS;..\SYSTEM\Devices\inc;..\UserDriver\inc;..\User\inc;..\SYSTEM\NET\inc;..\SYSTEM\Peripheral\inc</IncludePath>
+              <IncludePath>..\Libraries;..\Libraries\Core;..\Libraries\Device;..\Libraries\Kernel;..\SYSTEM\STM32F1\CMSIS;..\SYSTEM\STM32F1\FWLib\inc;..\Util;..\User</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
