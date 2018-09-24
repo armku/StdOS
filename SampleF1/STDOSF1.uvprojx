@@ -677,6 +677,16 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\OnChip\WatchDog.cpp</FilePath>
             </File>
+            <File>
+              <FileName>USART.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\USART.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\Timer.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1656,6 +1666,16 @@
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\OnChip\WatchDog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>USART.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\USART.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\Timer.cpp</FilePath>
             </File>
           </Files>
         </Group>
