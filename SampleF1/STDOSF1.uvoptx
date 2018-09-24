@@ -321,7 +321,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\STDOS\Device\Port.cpp</Filename>
+          <Filename>D:\job\git\MCU\STM32\cpp\STDOS\STDOS\Device\Port.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -337,7 +337,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\STDOS\Device\Port.cpp</Filename>
+          <Filename>D:\job\git\MCU\STM32\cpp\STDOS\STDOS\Device\Port.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -353,7 +353,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\STDOS\Device\Port.cpp</Filename>
+          <Filename>D:\job\git\MCU\STM32\cpp\STDOS\STDOS\Device\Port.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -369,7 +369,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\STDOS\Device\Port.cpp</Filename>
+          <Filename>D:\job\git\MCU\STM32\cpp\STDOS\STDOS\Device\Port.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -385,7 +385,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\STDOS\Device\Port.cpp</Filename>
+          <Filename>D:\job\git\MCU\STM32\cpp\STDOS\STDOS\Device\Port.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -401,7 +401,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\STDOS\Device\Port.cpp</Filename>
+          <Filename>D:\job\git\MCU\STM32\cpp\STDOS\STDOS\Device\Port.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -417,7 +417,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\STDOS\Device\Port.cpp</Filename>
+          <Filename>D:\job\git\MCU\STM32\cpp\STDOS\STDOS\Device\Port.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -581,7 +581,7 @@
 
   <Group>
     <GroupName>BspPlatform</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -616,7 +616,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\main.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\main.cpp</PathWithFileName>
       <FilenameWithoutPath>main.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1004,7 +1004,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\App\BlinkPort.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\App\BlinkPort.cpp</PathWithFileName>
       <FilenameWithoutPath>BlinkPort.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1016,8 +1016,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\App\FlushPort.cpp</PathWithFileName>
-      <FilenameWithoutPath>FlushPort.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\App\bspkey.cpp</PathWithFileName>
+      <FilenameWithoutPath>bspkey.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1028,8 +1028,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\App\bspkey.cpp</PathWithFileName>
-      <FilenameWithoutPath>bspkey.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\App\FlushPort.cpp</PathWithFileName>
+      <FilenameWithoutPath>FlushPort.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1040,7 +1040,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\App\lcd_dr.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\App\lcd_dr.cpp</PathWithFileName>
       <FilenameWithoutPath>lcd_dr.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1052,7 +1052,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\App\LCDOCM.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\App\LCDOCM.cpp</PathWithFileName>
       <FilenameWithoutPath>LCDOCM.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1064,7 +1064,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\App\PID.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\App\PID.cpp</PathWithFileName>
       <FilenameWithoutPath>PID.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1084,7 +1084,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Core\Buffer.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\Core\Buffer.cpp</PathWithFileName>
       <FilenameWithoutPath>Buffer.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1096,7 +1096,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Core\DateTime.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\Core\DateTime.cpp</PathWithFileName>
       <FilenameWithoutPath>DateTime.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1108,7 +1108,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Core\List.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\Core\List.cpp</PathWithFileName>
       <FilenameWithoutPath>List.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1120,7 +1120,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Core\Queue.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\Core\Queue.cpp</PathWithFileName>
       <FilenameWithoutPath>Queue.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1132,7 +1132,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Core\RingBuffer.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\Core\RingBuffer.cpp</PathWithFileName>
       <FilenameWithoutPath>RingBuffer.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1152,8 +1152,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Device\Port.cpp</PathWithFileName>
-      <FilenameWithoutPath>Port.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Device\DeviceConfigHelper.cpp</PathWithFileName>
+      <FilenameWithoutPath>DeviceConfigHelper.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1164,8 +1164,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Device\Spi.cpp</PathWithFileName>
-      <FilenameWithoutPath>Spi.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Device\DevicesHelper.cpp</PathWithFileName>
+      <FilenameWithoutPath>DevicesHelper.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1176,8 +1176,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Device\WatchDog.cpp</PathWithFileName>
-      <FilenameWithoutPath>WatchDog.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Device\Port.cpp</PathWithFileName>
+      <FilenameWithoutPath>Port.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1188,7 +1188,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Device\PwmSolo.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\Device\PwmSolo.cpp</PathWithFileName>
       <FilenameWithoutPath>PwmSolo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1200,8 +1200,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Device\DeviceConfigHelper.cpp</PathWithFileName>
-      <FilenameWithoutPath>DeviceConfigHelper.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Device\Spi.cpp</PathWithFileName>
+      <FilenameWithoutPath>Spi.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1212,8 +1212,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Device\DevicesHelper.cpp</PathWithFileName>
-      <FilenameWithoutPath>DevicesHelper.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Device\WatchDog.cpp</PathWithFileName>
+      <FilenameWithoutPath>WatchDog.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1232,8 +1232,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\ADS1232.cpp</PathWithFileName>
-      <FilenameWithoutPath>ADS1232.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\AD7124.cpp</PathWithFileName>
+      <FilenameWithoutPath>AD7124.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1244,8 +1244,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\ADS1246.cpp</PathWithFileName>
-      <FilenameWithoutPath>ADS1246.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\AD7689.cpp</PathWithFileName>
+      <FilenameWithoutPath>AD7689.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1256,8 +1256,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\AD7124.cpp</PathWithFileName>
-      <FilenameWithoutPath>AD7124.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\ADS1232.cpp</PathWithFileName>
+      <FilenameWithoutPath>ADS1232.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1268,8 +1268,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\AD7689.cpp</PathWithFileName>
-      <FilenameWithoutPath>AD7689.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\ADS1246.cpp</PathWithFileName>
+      <FilenameWithoutPath>ADS1246.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1280,8 +1280,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\NPA.cpp</PathWithFileName>
-      <FilenameWithoutPath>NPA.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\AT24CXX.cpp</PathWithFileName>
+      <FilenameWithoutPath>AT24CXX.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1292,8 +1292,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\ST7565R.cpp</PathWithFileName>
-      <FilenameWithoutPath>ST7565R.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\AT45DB.cpp</PathWithFileName>
+      <FilenameWithoutPath>AT45DB.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1304,8 +1304,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\W25QXXX.cpp</PathWithFileName>
-      <FilenameWithoutPath>W25QXXX.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\DS18B20.cpp</PathWithFileName>
+      <FilenameWithoutPath>DS18B20.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1316,8 +1316,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\AT24CXX.cpp</PathWithFileName>
-      <FilenameWithoutPath>AT24CXX.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\DS1302.cpp</PathWithFileName>
+      <FilenameWithoutPath>DS1302.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1328,8 +1328,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\AT45DB.cpp</PathWithFileName>
-      <FilenameWithoutPath>AT45DB.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\GPS_ATGM332D.cpp</PathWithFileName>
+      <FilenameWithoutPath>GPS_ATGM332D.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1340,8 +1340,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\RX8025T.cpp</PathWithFileName>
-      <FilenameWithoutPath>RX8025T.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\GPS_S1216.cpp</PathWithFileName>
+      <FilenameWithoutPath>GPS_S1216.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1352,8 +1352,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\SSD1309.cpp</PathWithFileName>
-      <FilenameWithoutPath>SSD1309.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\I2C.cpp</PathWithFileName>
+      <FilenameWithoutPath>I2C.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1364,8 +1364,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\SSD1106.cpp</PathWithFileName>
-      <FilenameWithoutPath>SSD1106.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\NPA.cpp</PathWithFileName>
+      <FilenameWithoutPath>NPA.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1376,8 +1376,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\DS18B20.cpp</PathWithFileName>
-      <FilenameWithoutPath>DS18B20.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\NRF24L01.cpp</PathWithFileName>
+      <FilenameWithoutPath>NRF24L01.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1388,7 +1388,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\OCM240128.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\Drivers\OCM240128.cpp</PathWithFileName>
       <FilenameWithoutPath>OCM240128.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1400,7 +1400,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\PCF8563.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\Drivers\PCF8563.cpp</PathWithFileName>
       <FilenameWithoutPath>PCF8563.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1412,8 +1412,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\GPS_S1216.cpp</PathWithFileName>
-      <FilenameWithoutPath>GPS_S1216.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\RX8025T.cpp</PathWithFileName>
+      <FilenameWithoutPath>RX8025T.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1424,8 +1424,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\GPS_ATGM332D.cpp</PathWithFileName>
-      <FilenameWithoutPath>GPS_ATGM332D.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\SSD1106.cpp</PathWithFileName>
+      <FilenameWithoutPath>SSD1106.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1436,8 +1436,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\DS1302.cpp</PathWithFileName>
-      <FilenameWithoutPath>DS1302.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\SSD1309.cpp</PathWithFileName>
+      <FilenameWithoutPath>SSD1309.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1448,8 +1448,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\I2C.cpp</PathWithFileName>
-      <FilenameWithoutPath>I2C.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\ST7565R.cpp</PathWithFileName>
+      <FilenameWithoutPath>ST7565R.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1460,8 +1460,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\NRF24L01.cpp</PathWithFileName>
-      <FilenameWithoutPath>NRF24L01.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Drivers\W25QXXX.cpp</PathWithFileName>
+      <FilenameWithoutPath>W25QXXX.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1472,7 +1472,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Drivers\W5500.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\Drivers\W5500.cpp</PathWithFileName>
       <FilenameWithoutPath>W5500.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1492,8 +1492,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Kernel\Task.cpp</PathWithFileName>
-      <FilenameWithoutPath>Task.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Kernel\Sys.cpp</PathWithFileName>
+      <FilenameWithoutPath>Sys.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1504,8 +1504,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Kernel\Sys.cpp</PathWithFileName>
-      <FilenameWithoutPath>Sys.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Kernel\Task.cpp</PathWithFileName>
+      <FilenameWithoutPath>Task.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1516,7 +1516,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Kernel\Time.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\Kernel\Time.cpp</PathWithFileName>
       <FilenameWithoutPath>Time.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1528,7 +1528,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Kernel\WaitHandle.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\Kernel\WaitHandle.cpp</PathWithFileName>
       <FilenameWithoutPath>WaitHandle.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1548,7 +1548,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Storage\Storage.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\Storage\Storage.cpp</PathWithFileName>
       <FilenameWithoutPath>Storage.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1568,7 +1568,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Handlers\IHandler.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\Handlers\IHandler.cpp</PathWithFileName>
       <FilenameWithoutPath>IHandler.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1580,7 +1580,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Handlers\IPipeline.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\Handlers\IPipeline.cpp</PathWithFileName>
       <FilenameWithoutPath>IPipeline.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1600,8 +1600,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Security\Crc.cpp</PathWithFileName>
-      <FilenameWithoutPath>Crc.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Security\CheckSum.cpp</PathWithFileName>
+      <FilenameWithoutPath>CheckSum.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1612,8 +1612,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Security\CheckSum.cpp</PathWithFileName>
-      <FilenameWithoutPath>CheckSum.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Security\Crc.cpp</PathWithFileName>
+      <FilenameWithoutPath>Crc.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1624,8 +1624,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Security\Parity.cpp</PathWithFileName>
-      <FilenameWithoutPath>Parity.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Security\Math.cpp</PathWithFileName>
+      <FilenameWithoutPath>Math.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1636,8 +1636,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Security\Math.cpp</PathWithFileName>
-      <FilenameWithoutPath>Math.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Security\Parity.cpp</PathWithFileName>
+      <FilenameWithoutPath>Parity.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1656,8 +1656,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\AT24CXXTest.cpp</PathWithFileName>
-      <FilenameWithoutPath>AT24CXXTest.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\AD1246Test.cpp</PathWithFileName>
+      <FilenameWithoutPath>AD1246Test.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1668,8 +1668,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\AD1246Test.cpp</PathWithFileName>
-      <FilenameWithoutPath>AD1246Test.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\AD7124Test.cpp</PathWithFileName>
+      <FilenameWithoutPath>AD7124Test.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1680,8 +1680,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\lcd_drTest.cpp</PathWithFileName>
-      <FilenameWithoutPath>lcd_drTest.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\AD7689Test.cpp</PathWithFileName>
+      <FilenameWithoutPath>AD7689Test.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1692,8 +1692,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\RX8025TTest.cpp</PathWithFileName>
-      <FilenameWithoutPath>RX8025TTest.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\ADS1232Test.cpp</PathWithFileName>
+      <FilenameWithoutPath>ADS1232Test.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1704,8 +1704,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\ST7565RTest.cpp</PathWithFileName>
-      <FilenameWithoutPath>ST7565RTest.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\AT24CXXTest.cpp</PathWithFileName>
+      <FilenameWithoutPath>AT24CXXTest.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1716,8 +1716,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\W25QXXXTest.cpp</PathWithFileName>
-      <FilenameWithoutPath>W25QXXXTest.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\DS18B20Test.cpp</PathWithFileName>
+      <FilenameWithoutPath>DS18B20Test.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1728,8 +1728,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\ADS1232Test.cpp</PathWithFileName>
-      <FilenameWithoutPath>ADS1232Test.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\DS1302Test.cpp</PathWithFileName>
+      <FilenameWithoutPath>DS1302Test.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1740,8 +1740,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\AD7124Test.cpp</PathWithFileName>
-      <FilenameWithoutPath>AD7124Test.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\lcd_drTest.cpp</PathWithFileName>
+      <FilenameWithoutPath>lcd_drTest.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1752,8 +1752,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\SSD1309Test.cpp</PathWithFileName>
-      <FilenameWithoutPath>SSD1309Test.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\LedTest.cpp</PathWithFileName>
+      <FilenameWithoutPath>LedTest.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1764,8 +1764,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\DS18B20Test.cpp</PathWithFileName>
-      <FilenameWithoutPath>DS18B20Test.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\NPATest.cpp</PathWithFileName>
+      <FilenameWithoutPath>NPATest.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1776,8 +1776,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\OCM240128Test.cpp</PathWithFileName>
-      <FilenameWithoutPath>OCM240128Test.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\NRF24L01Test.cpp</PathWithFileName>
+      <FilenameWithoutPath>NRF24L01Test.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1788,8 +1788,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\PCF8563Test.cpp</PathWithFileName>
-      <FilenameWithoutPath>PCF8563Test.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\OCM240128Test.cpp</PathWithFileName>
+      <FilenameWithoutPath>OCM240128Test.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1800,8 +1800,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\DS1302Test.cpp</PathWithFileName>
-      <FilenameWithoutPath>DS1302Test.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\PCF8563Test.cpp</PathWithFileName>
+      <FilenameWithoutPath>PCF8563Test.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1812,8 +1812,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\LedTest.cpp</PathWithFileName>
-      <FilenameWithoutPath>LedTest.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\PipelineTest.cpp</PathWithFileName>
+      <FilenameWithoutPath>PipelineTest.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1824,8 +1824,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\WatchDogTest.cpp</PathWithFileName>
-      <FilenameWithoutPath>WatchDogTest.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\PwmSoloTest.cpp</PathWithFileName>
+      <FilenameWithoutPath>PwmSoloTest.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1836,8 +1836,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\SerialPort485Test.cpp</PathWithFileName>
-      <FilenameWithoutPath>SerialPort485Test.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\RX8025TTest.cpp</PathWithFileName>
+      <FilenameWithoutPath>RX8025TTest.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1848,8 +1848,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\AD7689Test.cpp</PathWithFileName>
-      <FilenameWithoutPath>AD7689Test.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\SerialPort485Test.cpp</PathWithFileName>
+      <FilenameWithoutPath>SerialPort485Test.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1860,8 +1860,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\PwmSoloTest.cpp</PathWithFileName>
-      <FilenameWithoutPath>PwmSoloTest.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\SSD1309Test.cpp</PathWithFileName>
+      <FilenameWithoutPath>SSD1309Test.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1872,8 +1872,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\NPATest.cpp</PathWithFileName>
-      <FilenameWithoutPath>NPATest.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\ST7565RTest.cpp</PathWithFileName>
+      <FilenameWithoutPath>ST7565RTest.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1884,8 +1884,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\NRF24L01Test.cpp</PathWithFileName>
-      <FilenameWithoutPath>NRF24L01Test.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\TaskTest.cpp</PathWithFileName>
+      <FilenameWithoutPath>TaskTest.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1896,8 +1896,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\PipelineTest.cpp</PathWithFileName>
-      <FilenameWithoutPath>PipelineTest.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\W25QXXXTest.cpp</PathWithFileName>
+      <FilenameWithoutPath>W25QXXXTest.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1908,8 +1908,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\TaskTest.cpp</PathWithFileName>
-      <FilenameWithoutPath>TaskTest.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\W5500Test.cpp</PathWithFileName>
+      <FilenameWithoutPath>W5500Test.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1920,8 +1920,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STDOS\Test\W5500Test.cpp</PathWithFileName>
-      <FilenameWithoutPath>W5500Test.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\Test\WatchDogTest.cpp</PathWithFileName>
+      <FilenameWithoutPath>WatchDogTest.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
