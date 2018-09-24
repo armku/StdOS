@@ -11,12 +11,12 @@
 struct DataFrame
 {
 public:
-	const u8 header;
-	u8 fnCode;
-	u8 dataLength;
-	u8 data[MAX_FRAME_DATA_LENGTH];
+	const uint8_t header;
+	uint8_t fnCode;
+	uint8_t dataLength;
+	uint8_t data[MAX_FRAME_DATA_LENGTH];
 	bool isUpdated;
-	u8 checkSum;
+	uint8_t checkSum;
 
 public:
 	DataFrame() :header(FRAME_HEADER)                //constructor
@@ -26,8 +26,8 @@ public:
 
 	bool VerifyCheckCode()
 	{
-		u8 code = header + fnCode + dataLength;
-		for (u8 i = 0; i<dataLength; i++)
+		uint8_t code = header + fnCode + dataLength;
+		for (uint8_t i = 0; i<dataLength; i++)
 			code += data[i];
 		if (code == checkSum)
 			return true;
@@ -37,7 +37,7 @@ public:
 	void CreateCheckCode()
 	{
 		checkSum = header + fnCode + dataLength;
-		for (u8 i = 0; i<dataLength; i++)
+		for (uint8_t i = 0; i<dataLength; i++)
 			checkSum += data[i];
 	}
 	DataFrame& operator=(const DataFrame &df)
@@ -47,7 +47,7 @@ public:
 		dataLength = df.dataLength;
 		isUpdated = df.isUpdated;
 		checkSum = df.checkSum;
-		for (u8 i = 0; i<dataLength; i++)
+		for (uint8_t i = 0; i<dataLength; i++)
 			data[i] = df.data[i];
 		return *this;
 	}
@@ -82,7 +82,7 @@ public:
 //#define           FC_GET_IMU_ANG      0x12    //function code 17: PC to MCU, get imu angle
 #define 	MAX_FN_CODE 	0x0C
 
-const u8 DATA_LENGTH[MAX_FN_CODE + 1][2] =
+const uint8_t DATA_LENGTH[MAX_FN_CODE + 1][2] =
 {
 	3,	0,
 	36,	0,
