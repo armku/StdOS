@@ -1,7 +1,7 @@
 #ifndef __SPI_H__
     #define __SPI_H__
 
-    #include "Device\Port.h"
+    #include "OnChip\Port.h"
 
     typedef enum
     {

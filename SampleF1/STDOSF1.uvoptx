@@ -1159,7 +1159,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Libraries\Device\DeviceConfigHelper.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\OnChip\DeviceConfigHelper.cpp</PathWithFileName>
       <FilenameWithoutPath>DeviceConfigHelper.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1171,7 +1171,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Libraries\Device\DevicesHelper.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\OnChip\DevicesHelper.cpp</PathWithFileName>
       <FilenameWithoutPath>DevicesHelper.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1183,7 +1183,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Libraries\Device\Port.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\OnChip\Port.cpp</PathWithFileName>
       <FilenameWithoutPath>Port.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1195,7 +1195,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Libraries\Device\PwmSolo.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\OnChip\PwmSolo.cpp</PathWithFileName>
       <FilenameWithoutPath>PwmSolo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1207,7 +1207,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Libraries\Device\Spi.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\OnChip\Spi.cpp</PathWithFileName>
       <FilenameWithoutPath>Spi.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1219,7 +1219,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Libraries\Device\WatchDog.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\OnChip\WatchDog.cpp</PathWithFileName>
       <FilenameWithoutPath>WatchDog.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

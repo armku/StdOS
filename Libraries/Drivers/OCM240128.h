@@ -1,6 +1,6 @@
 #ifndef _OCM240128_H
 #define _OCM240128_H
-#include "Device\Port.h"
+#include "OnChip\Port.h"
 class OCM240128
 {
 public:

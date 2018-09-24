@@ -3,7 +3,7 @@
 #include "Core\Queue.h"
 #include "Port.h"
 #include "Platform\stm32.h"
-#include "Device\Configuration.h"
+#include "OnChip\Configuration.h"
 
 void TimeUpdate();
 

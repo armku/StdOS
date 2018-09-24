@@ -1,6 +1,6 @@
 #include "Sys.h"
 #include "Bsp\Bsp.h"
-#include "Device\Configuration.h"
+#include "OnChip\Configuration.h"
 #include "BspPlatform\BspPlatform.h"
 
 void OS_ComSendChk(void *param);

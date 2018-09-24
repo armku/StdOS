@@ -650,32 +650,32 @@
             <File>
               <FileName>DeviceConfigHelper.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Device\DeviceConfigHelper.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\DeviceConfigHelper.cpp</FilePath>
             </File>
             <File>
               <FileName>DevicesHelper.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Device\DevicesHelper.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\DevicesHelper.cpp</FilePath>
             </File>
             <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Device\Port.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\Port.cpp</FilePath>
             </File>
             <File>
               <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Device\PwmSolo.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\PwmSolo.cpp</FilePath>
             </File>
             <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Device\Spi.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\Spi.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Device\WatchDog.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\WatchDog.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1315,7 +1315,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,STM32F1</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Libraries;..\Libraries\Core;..\Libraries\Device;..\Libraries\Kernel;..\SYSTEM\STM32F1\CMSIS;..\SYSTEM\STM32F1\FWLib\inc;..\Util;..\User</IncludePath>
+              <IncludePath>..\Libraries;..\Libraries\Core;..\Libraries\OnChip;..\Libraries\Kernel;..\SYSTEM\STM32F1\CMSIS;..\SYSTEM\STM32F1\FWLib\inc;..\Util;..\User</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1630,32 +1630,32 @@
             <File>
               <FileName>DeviceConfigHelper.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Device\DeviceConfigHelper.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\DeviceConfigHelper.cpp</FilePath>
             </File>
             <File>
               <FileName>DevicesHelper.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Device\DevicesHelper.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\DevicesHelper.cpp</FilePath>
             </File>
             <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Device\Port.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\Port.cpp</FilePath>
             </File>
             <File>
               <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Device\PwmSolo.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\PwmSolo.cpp</FilePath>
             </File>
             <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Device\Spi.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\Spi.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Device\WatchDog.cpp</FilePath>
+              <FilePath>..\Libraries\OnChip\WatchDog.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,5 +1,5 @@
 #include "TTime.h"
-#include "Device\Configuration.h"
+#include "OnChip\Configuration.h"
 
 TTime Time; //系统时间，不建议用户直接使用
 

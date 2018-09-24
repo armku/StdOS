@@ -1,7 +1,7 @@
 #ifndef _DS1302_H
 #define _DS1302_H
 
-#include "Device\Port.h"
+#include "OnChip\Port.h"
 #include "DateTime.h"
 
 class DS1302

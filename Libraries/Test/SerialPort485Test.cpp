@@ -1,4 +1,4 @@
-#include "Device\Configuration.h"
+#include "OnChip\Configuration.h"
 #include "Sys.h"
 
 //#define _SERIALPORT485TEST_CPP

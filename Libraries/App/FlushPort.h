@@ -2,7 +2,7 @@
 #define __FlushPort_H__
 
 #include "Kernel\Sys.h"
-#include "Device\Port.h"
+#include "OnChip\Port.h"
 
 // 闪烁端口
 // 默认慢闪，Start后快闪一定时间，-1时间表示一直快闪，Stop停止

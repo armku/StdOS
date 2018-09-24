@@ -2,7 +2,7 @@
     #define _W25QXXX_H
 
     #include "Kernel\Sys.h"
-    #include "Device\Spi.h"
+    #include "OnChip\Spi.h"
 
 	#define W25QXXXUSESPISOFT	1
     //W25X系列/Q系列芯片列表	   

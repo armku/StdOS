@@ -1,6 +1,6 @@
 #ifndef _ADS1232_H
 #define _ADS1232_H
-    #include "Device\Port.h"
+    #include "OnChip\Port.h"
 
     class ADS1232
     {

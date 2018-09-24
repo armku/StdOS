@@ -1,4 +1,4 @@
-#include "Device\PwmSolo.h"
+#include "OnChip\PwmSolo.h"
 
 #define _PWMSOLO_TEST_CPP
 #ifdef _PWMSOLO_TEST_CPP
