@@ -6,7 +6,7 @@ float Math::Sum(float buf[], int len,int pos)
 	float ret = 0;
 	for (int i = pos; i < len;i++)
 	{
-		ret += buf[len];
+		ret += buf[i];
 	}
 	return ret;
 }
@@ -24,7 +24,7 @@ float Math::Sum(int buf[], int len, int pos)
 	int64_t ret = 0;
 	for (int i = pos; i < len; i++)
 	{
-		ret += buf[len];
+		ret += buf[i];
 	}
 	return ret;
 }
