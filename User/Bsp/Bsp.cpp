@@ -88,13 +88,14 @@ void comtestrcv()
 //	Buffer(chbuf,len).ShowHex(true);
 }
 #include "OnChip/USART.h"
+#include "BspPlatform/Interrupt.h"
 
 USART usart111(USART1, 256000);
 const char *hello = "hello world\n";
 void routsendtest(void * param)
 {
 	//DeviceConfigCenter::com1send((void*)hello,ArrayLength(hello));
-	//usart111.SendBytes((uint8_t*)hello, ArrayLength(hello));
+	pCOM1->SendBytes((uint8_t*)hello, ArrayLength(hello));
 }
 void Esp8266TestInit();
 void W5500Test();
@@ -109,7 +110,7 @@ void BspInit()
 	DeviceConfigCenter::ConfigCom(COM3, 256000);
 
 	usart111.Initialize();
-
+	
 	Sys.AddTask(routsendtest, 0, 0, 1000, "routsendtest");
 
 	//W5500Test();
