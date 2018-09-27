@@ -87,10 +87,14 @@ void comtestrcv()
 	debug_printf("COM3RCV:\n");
 	Buffer(chbuf,len).ShowHex(true);
 }
-const char *hello = "hello world";
+#include "OnChip/USART.h"
+
+USART usart111(USART1, 256000);
+const char *hello = "hello world\n";
 void routsendtest(void * param)
 {
-	DeviceConfigCenter::com3send((void*)hello,ArrayLength(hello));
+	//DeviceConfigCenter::com1send((void*)hello,ArrayLength(hello));
+	usart111.SendBytes((uint8_t*)hello, ArrayLength(hello));
 }
 void Esp8266TestInit();
 void W5500Test();
@@ -103,6 +107,8 @@ void BspInit()
 	DeviceConfigCenter::PRcvCOM1 = com1rcv;
 	DeviceConfigCenter::PRcvCOM3 = comtestrcv;
 	DeviceConfigCenter::ConfigCom(COM3, 256000);
+
+	usart111.Initialize();
 
 	Sys.AddTask(routsendtest, 0, 0, 1000, "routsendtest");
 
