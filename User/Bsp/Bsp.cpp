@@ -99,9 +99,9 @@ void routsendtest(void * param)
 	//DeviceConfigCenter::com1send((void*)hello,ArrayLength(hello));
 	(*pCOM1) << icnt++ << hello;
 	(*pCOM1) <<"Rxd:"<< pCOM1->RxSize();
-	int len = 5;
-	if (pCOM1->RxSize() >= len)
+	if (pCOM1->RxSize() > 0)
 	{
+		int len = pCOM1->RxSize();
 		pCOM1->GetBytes(buf, len);
 		//pCOM1->ClearRxBuf();
 		pCOM1->SendBytes(buf, len);
