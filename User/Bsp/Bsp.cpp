@@ -96,7 +96,8 @@ void routsendtest(void * param)
 {
 	static int icnt = 0;
 	//DeviceConfigCenter::com1send((void*)hello,ArrayLength(hello));
-	(*pCOM1) << icnt++<<hello;
+	(*pCOM1) << icnt++ << hello;
+	(*pCOM1) <<"Rxd:"<< pCOM1->RxSize();
 }
 void Esp8266TestInit();
 void W5500Test();
