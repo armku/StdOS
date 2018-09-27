@@ -4,6 +4,8 @@
 #include "Port.h"
 #include "Platform\stm32.h"
 #include "OnChip\Configuration.h"
+#include "USART.h"
+#include "BspPlatform/Interrupt.h"
 
 void TimeUpdate();
 
@@ -13,6 +15,7 @@ void BspPlatformInit()
 	DeviceConfigCenter::ConfigCom(COM1, 256000);
 	DeviceConfigCenter::TimeTickInit();//系统用定时器初始化
 	DeviceConfigCenter::PTim2Update = TimeUpdate;
+	pCOM1->Initialize();
 }
 
 int DeviceConfigCenter::CurrentTick()

@@ -110,9 +110,7 @@ void BspInit()
 	DeviceConfigCenter::PRcvCOM1 = com1rcv;
 	DeviceConfigCenter::PRcvCOM3 = comtestrcv;
 	DeviceConfigCenter::ConfigCom(COM3, 256000);
-
-	usart111.Initialize();
-	
+		
 	Sys.AddTask(routsendtest, 0, 0, 1000, "routsendtest");
 
 	//W5500Test();
