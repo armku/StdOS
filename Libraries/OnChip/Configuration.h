@@ -8,7 +8,7 @@
 
 //~~~~~~~~~~~~~~~USART Congfigure~~~~~~~~~~~//
 #define USE_USART              //---USART-without-DMA--//
-//#define USE_USART1             //---USART1-without-DMA-//
+#define USE_USART1             //---USART1-without-DMA-//
 //#define USE_USART2            //---USART2-without-DMA-//
 //#define USE_USART3            //---USART3-without-DMA-//
 
