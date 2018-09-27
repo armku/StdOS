@@ -74,18 +74,18 @@ uint8_t chbuf[256];
 
 void com1rcv()
 {
-	int len= Rxx1.Read(chbuf, ArrayLength(chbuf));
-	Rxx1.Clear();
+//	int len= Rxx1.Read(chbuf, ArrayLength(chbuf));
+//	Rxx1.Clear();
 
-	debug_printf("COM1RCV:\n");
-	Buffer(chbuf,len).ShowHex(true);
+//	debug_printf("COM1RCV:\n");
+//	Buffer(chbuf,len).ShowHex(true);
 }
 void comtestrcv()
 {
-	int len= Rxx3.Read(chbuf, ArrayLength(chbuf));
-	
-	debug_printf("COM3RCV:\n");
-	Buffer(chbuf,len).ShowHex(true);
+//	int len= Rxx3.Read(chbuf, ArrayLength(chbuf));
+//	
+//	debug_printf("COM3RCV:\n");
+//	Buffer(chbuf,len).ShowHex(true);
 }
 #include "OnChip/USART.h"
 
