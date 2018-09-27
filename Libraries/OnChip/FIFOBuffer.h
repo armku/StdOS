@@ -1,4 +1,5 @@
 #ifndef _FIFOBUFF_H
+#define _FIFOBUFF_H
 
 #include "DataFrame.h"
 

@@ -1,4 +1,5 @@
 #ifndef _DATAFRAME_H
+#define _DATAFRAME_H
 
 #include "../Core/Type.h"
 
