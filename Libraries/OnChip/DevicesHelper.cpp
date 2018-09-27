@@ -7,7 +7,7 @@ extern "C"
 	{
 
 	}
-	void DMA1_Channel2_IRQHandler(void)
+	void DMA11_Channel2_IRQHandler(void)
 	{
 #if defined COM3TXDMAFLAG
 		//USART3_TX
@@ -24,7 +24,7 @@ extern "C"
 		}
 #endif
 	}
-	void DMA1_Channel3_IRQHandler(void)
+	void DMA11_Channel3_IRQHandler(void)
 	{
 #if defined COM3RXDMAFLAG
 		//USART3_RX
@@ -38,7 +38,7 @@ extern "C"
 		}
 #endif
 	}
-	void DMA1_Channel4_IRQHandler(void)
+	void DMA11_Channel4_IRQHandler(void)
 	{
 #if defined COM1TXDMAFLAG
 		//USART1_TX
@@ -55,7 +55,7 @@ extern "C"
 		}
 #endif
 	}
-	void DMA1_Channel5_IRQHandler()
+	void DMA11_Channel5_IRQHandler()
 	{
 #if defined COM1RXDMAFLAG
 		//USART1_RX
@@ -68,7 +68,7 @@ extern "C"
 		}
 #endif
 	}
-	void DMA1_Channel6_IRQHandler(void)
+	void DMA11_Channel6_IRQHandler(void)
 	{
 #if defined COM2RXDMAFLAG
 		//		USART2_RX
@@ -82,7 +82,7 @@ extern "C"
 		}
 #endif
 	}
-	void DMA1_Channel7_IRQHandler(void)
+	void DMA11_Channel7_IRQHandler(void)
 	{
 #if defined COM2TXDMAFLAG
 		//USART2_TX
@@ -183,7 +183,7 @@ extern "C"
 		}
 #endif
 	}
-	void USART2_IRQHandler(void)
+	void USART21_IRQHandler(void)
 	{
 #if defined USECOM2		
 		//接收
@@ -258,7 +258,7 @@ extern "C"
 		}
 #endif
 	}
-	void USART3_IRQHandler(void)
+	void USART31_IRQHandler(void)
 	{
 #if defined USECOM3		
 		//接收
@@ -333,7 +333,7 @@ extern "C"
 		}
 #endif
 	}
-	void UART4_IRQHandler(void)
+	void UART41_IRQHandler(void)
 	{
 #if defined USECOM4		
 		//接收
@@ -408,7 +408,7 @@ extern "C"
 		}
 #endif
 	}
-	void UART5_IRQHandler(void)
+	void UART51_IRQHandler(void)
 	{
 #if defined USECOM5		
 		//接收
@@ -483,7 +483,7 @@ extern "C"
 		}
 #endif
 	}
-	void TIM2_IRQHandler(void)
+	void TIM21_IRQHandler(void)
 	{
 #ifdef STM32F0
 		TIM_ClearITPendingBit(TIM2, TIM_IT_Update);//先清空中断标志位，以备下次使用。
@@ -502,7 +502,8 @@ extern "C"
 		}
 #endif
 	}
-	void TIM3_IRQHandler(void)
+	
+	void TIM31_IRQHandler(void)
 	{
 		if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
 		{
@@ -513,7 +514,7 @@ extern "C"
 			}
 		}
 	}
-	void TIM4_IRQHandler(void)
+	void TIM41_IRQHandler(void)
 	{
 #if defined STM32F0
 		//F0没有TIM4
@@ -528,7 +529,7 @@ extern "C"
 		}
 #endif
 	}
-	void TIM5_IRQHandler(void)
+	void TIM51_IRQHandler(void)
 	{
 #if defined STM32F0
 		//F0没有TIM5
@@ -544,7 +545,7 @@ extern "C"
 #endif
 	}
 
-	void TIM6_IRQHandler(void)
+	void TIM61_IRQHandler(void)
 	{
 		if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
 		{
@@ -556,7 +557,7 @@ extern "C"
 		}
 	}
 
-	void TIM7_IRQHandler(void)
+	void TIM71_IRQHandler(void)
 	{
 		if (TIM_GetITStatus(TIM7, TIM_IT_Update) != RESET)
 		{
@@ -567,7 +568,7 @@ extern "C"
 			}
 		}
 	}
-	void EXTI0_IRQHandler(void)
+	void EXTI01_IRQHandler(void)
 	{
 		if (EXTI_GetITStatus(EXTI_Line0) != RESET)
 		{
@@ -578,7 +579,7 @@ extern "C"
 			}
 		}
 	}
-	void EXTI1_IRQHandler(void)
+	void EXTI11_IRQHandler(void)
 	{
 		if (EXTI_GetITStatus(EXTI_Line1) != RESET)
 		{
@@ -590,7 +591,7 @@ extern "C"
 		}
 	}
 
-	void EXTI2_IRQHandler(void)
+	void EXTI21_IRQHandler(void)
 	{
 		if (EXTI_GetITStatus(EXTI_Line2) != RESET)
 		{
@@ -601,7 +602,7 @@ extern "C"
 			}
 		}
 	}
-	void EXTI3_IRQHandler(void)
+	void EXTI31_IRQHandler(void)
 	{
 		if (EXTI_GetITStatus(EXTI_Line3) != RESET)
 		{
@@ -612,7 +613,7 @@ extern "C"
 			}
 		}
 	}
-	void EXTI4_IRQHandler(void)
+	void EXTI41_IRQHandler(void)
 	{
 		if (EXTI_GetITStatus(EXTI_Line4) != RESET)
 		{
@@ -624,7 +625,7 @@ extern "C"
 		}
 	}
 
-	void EXTI9_5_IRQHandler(void)
+	void EXTI9_51_IRQHandler(void)
 	{
 		if (EXTI_GetITStatus(EXTI_Line5) != RESET)
 		{
@@ -667,7 +668,7 @@ extern "C"
 			}
 		}
 	}
-	void EXTI15_10_IRQHandler(void)
+	void EXTI15_101_IRQHandler(void)
 	{
 		if (EXTI_GetITStatus(EXTI_Line10) != RESET)
 		{
