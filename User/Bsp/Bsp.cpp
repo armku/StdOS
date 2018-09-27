@@ -94,10 +94,18 @@ USART usart111(USART1, 256000);
 const char *hello = "hello world\n";
 void routsendtest(void * param)
 {
+	uint8_t buf[200];
 	static int icnt = 0;
 	//DeviceConfigCenter::com1send((void*)hello,ArrayLength(hello));
 	(*pCOM1) << icnt++ << hello;
 	(*pCOM1) <<"Rxd:"<< pCOM1->RxSize();
+	int len = 5;
+	if (pCOM1->RxSize() >= len)
+	{
+		pCOM1->GetBytes(buf, len);
+		//pCOM1->ClearRxBuf();
+		pCOM1->SendBytes(buf, len);
+	}
 }
 void Esp8266TestInit();
 void W5500Test();
