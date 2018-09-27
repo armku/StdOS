@@ -94,7 +94,7 @@ const char *hello = "hello world\n";
 void routsendtest(void * param)
 {
 	//DeviceConfigCenter::com1send((void*)hello,ArrayLength(hello));
-	usart111.SendBytes((uint8_t*)hello, ArrayLength(hello));
+	//usart111.SendBytes((uint8_t*)hello, ArrayLength(hello));
 }
 void Esp8266TestInit();
 void W5500Test();
