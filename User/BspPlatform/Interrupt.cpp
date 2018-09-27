@@ -11,7 +11,7 @@ USART *pCOM1 = 0;
 extern "C"
 {
 	//~~~~~~~~~~~~~~~~~~~~~ USART IQR  ~~~~~~~~~~~~~~~~~//
-	void USART11_IRQHandler(void)    //----USART1 IRQ----//
+	void USART1_IRQHandler(void)    //----USART1 IRQ----//
 	{
 #ifdef USE_GPS
 		if (pGPS1) {

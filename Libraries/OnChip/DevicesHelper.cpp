@@ -106,7 +106,7 @@ extern "C"
 		DMA_SetCurrDataCounter(DMA_CHx, 256);//DMA通道的DMA缓存的大小
 		DMA_Cmd(DMA_CHx, ENABLE);  //使能USART1 TX DMA1 所指示的通道 
 	}
-	void USART1_IRQHandler(void)
+	void USART11_IRQHandler(void)
 	{
 #if defined USECOM1		
 		//接收
