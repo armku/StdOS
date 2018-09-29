@@ -697,6 +697,11 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\OnChip\InputCapture_EXIT.cpp</FilePath>
             </File>
+            <File>
+              <FileName>InputCapture_TIM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\InputCapture_TIM.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1696,6 +1701,11 @@
               <FileName>InputCapture_EXIT.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\OnChip\InputCapture_EXIT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputCapture_TIM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\InputCapture_TIM.cpp</FilePath>
             </File>
           </Files>
         </Group>
