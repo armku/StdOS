@@ -1,6 +1,6 @@
 #include "InputCapture_EXIT.h"
-#include "Interrupt.h"
-#include "TaskManager.h"
+#include "BspPlatform\Interrupt.h"
+//#include "TaskManager.h"
 
 InputCapture_EXIT::InputCapture_EXIT(GPIO_TypeDef *exitPort, u8 exitPin, u8 itGroup,u8 prePriority,u8 subPriority)
 {
@@ -151,6 +151,7 @@ InputCapture_EXIT::InputCapture_EXIT(GPIO_TypeDef *exitPort, u8 exitPin, u8 itGr
 
 void InputCapture_EXIT::IRQ()
 {
+	#if 0
 	if(GPIO_ReadInputDataBit(mExitPort,mExitPin))	//rising edge interrupt
 		mRiseTime = tskmgr.Time();                   //rising edge time
 	else											                    //falling edge interrupt
@@ -158,6 +159,7 @@ void InputCapture_EXIT::IRQ()
 		mFallTime = tskmgr.Time();
 		mInterval = (mFallTime - mRiseTime)*1000;//falling edge time
 	}
+	#endif
 }
 
 double InputCapture_EXIT::Value()
