@@ -1,5 +1,5 @@
 #include "InputCapture_TIM.h"
-#include "Interrupt.h"
+#include "BspPlatform\Interrupt.h"
 
 //constructor, initialize: rcc, gpio, timer, NVIC
 InputCapture_TIM::InputCapture_TIM(TIM_TypeDef *TIMx, u16 minHz, bool enCh1, bool enCh2, bool enCh3, bool enCh4, u8 intGroup,u8 prePriority,u8 subPriority)
