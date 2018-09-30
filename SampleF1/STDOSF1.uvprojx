@@ -1024,6 +1024,21 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\WatchDogTest.cpp</FilePath>
             </File>
+            <File>
+              <FileName>EXITTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\EXITTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimerTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\TimerTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>USARTTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\USARTTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2045,6 +2060,21 @@
               <FileName>WatchDogTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\WatchDogTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EXITTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\EXITTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimerTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\TimerTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>USARTTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\USARTTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
