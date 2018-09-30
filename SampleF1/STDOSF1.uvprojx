@@ -10,7 +10,8 @@
       <TargetName>Debug</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
@@ -323,6 +324,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>0</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -702,6 +704,21 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\OnChip\InputCapture_TIM.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPIO.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\GPIO.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PWM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\PWM.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1016,6 +1033,7 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
@@ -1328,6 +1346,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -1706,6 +1725,21 @@
               <FileName>InputCapture_TIM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\OnChip\InputCapture_TIM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPIO.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\GPIO.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PWM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\OnChip\PWM.cpp</FilePath>
             </File>
           </Files>
         </Group>
