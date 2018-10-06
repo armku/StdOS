@@ -864,8 +864,6 @@ extern "C"
 #endif
 }
 ///以下为需要优化内容，旧版本
-#include "Configuration.h"
-#include "Port.h"
 #include "Platform\stm32.h"
 //中断
 
