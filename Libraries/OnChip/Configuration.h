@@ -260,14 +260,12 @@ public:
 	static Func PExit15;
 
 	//串口	
-	/*static void ConfigCom(COM com, int baudRate);*/
 	static void ComChgBaudRate(COM com, int baudRate);//改变波特率
 	static void com1send(void* buf, int len);
 	static void com2send(void* buf, int len);
 	static void com3send(void* buf, int len);
 	static void com4send(void* buf, int len);
 	static void com5send(void* buf, int len);
-	//static void comSend(COM com, void* buf, int len);//发送数据
 	static OutputPort *pCOM1Rx485;
 	static OutputPort *pCOM2Rx485;
 	static OutputPort *pCOM3Rx485;
