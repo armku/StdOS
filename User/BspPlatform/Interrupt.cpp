@@ -1145,37 +1145,37 @@ void DeviceConfigCenter::ComChgBaudRate(COM com, int baudRate)
 	}
 }
 //·¢ËÍÊý¾Ý
-void DeviceConfigCenter::comSend(COM com, void* buf, int len)
-{
-	switch (com)
-	{
-	case COM1:
-		com1send(buf, len);
-		break;
-	case COM2:
-		com2send(buf, len);
-		break;
-	case COM3:
-		com3send(buf, len);
-		break;
-	case COM4:
-		com4send(buf, len);
-		break;
-	case COM5:
-		com5send(buf, len);
-		break;
-	case COM6:
-		break;
-	case COM7:
-		break;
-	case COM8:
-		break;
-	case COM_NONE:
-		break;
-	default:
-		break;
-	}
-}
+//void DeviceConfigCenter::comSend(COM com, void* buf, int len)
+//{
+//	switch (com)
+//	{
+//	case COM1:
+//		com1send(buf, len);
+//		break;
+//	case COM2:
+//		com2send(buf, len);
+//		break;
+//	case COM3:
+//		com3send(buf, len);
+//		break;
+//	case COM4:
+//		com4send(buf, len);
+//		break;
+//	case COM5:
+//		com5send(buf, len);
+//		break;
+//	case COM6:
+//		break;
+//	case COM7:
+//		break;
+//	case COM8:
+//		break;
+//	case COM_NONE:
+//		break;
+//	default:
+//		break;
+//	}
+//}
 #if defined COM1TXDMAFLAG
 void USART1_SendDMA(uint8_t* buf, int len)
 {

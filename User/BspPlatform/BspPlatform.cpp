@@ -50,7 +50,7 @@ int StdPrintf(const char *format, ...)
 	n = vsprintf(sprint_buf, format, args);
 	va_end(args);
 
-	DeviceConfigCenter::comSend(COM1, sprint_buf, n);
+	//DeviceConfigCenter::comSend(COM1, sprint_buf, n);
 	pCOM1->SendBytes((uint8_t*)sprint_buf, n);
 	return n;
 }
