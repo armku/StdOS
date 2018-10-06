@@ -278,9 +278,10 @@ extern "C"
 #endif
 
 
-	void TIM21_IRQHandler(void);
 	void TIM2_IRQHandler(void)      //----TIM2 IRQ------// 
 	{
+//		if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
+//		{
 #ifdef USE_TIMER2
 		TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
 		Timer2_IRQ();
@@ -289,10 +290,28 @@ extern "C"
 #ifdef USE_CAPTURE_TIM2
 		pICP2->IRQ();
 #endif
-		TIM21_IRQHandler();
+		#ifdef STM32F0
+		TIM_ClearITPendingBit(TIM2, TIM_IT_Update);//先清空中断标志位，以备下次使用。
+		if (DeviceConfigCenter::PTim2Update)
+		{
+			(*DeviceConfigCenter::PTim2Update)();
+		}
+#elif defined STM32F1 | defined STM32F4
+		if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
+		{
+			TIM_ClearITPendingBit(TIM2, TIM_FLAG_Update);
+			if (DeviceConfigCenter::PTim2Update)
+			{
+				(*DeviceConfigCenter::PTim2Update)();
+			}
+		}
+#endif
+		//}
 	}
 	void TIM3_IRQHandler(void)      //----TIM3 IRQ------// 
 	{
+//		if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
+//		{
 #ifdef USE_TIMER3
 		TIM_ClearITPendingBit(TIM3, TIM_FLAG_Update);
 		Timer3_IRQ();
@@ -301,9 +320,16 @@ extern "C"
 #ifdef USE_CAPTURE_TIM3
 		pICP3->IRQ();
 #endif
+		if (DeviceConfigCenter::PTim3Update)
+			{
+				(*DeviceConfigCenter::PTim3Update)();
+			}
+		//}
 	}
 	void TIM4_IRQHandler(void)      //----TIM4 IRQ------// 
 	{
+//		if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
+//		{
 #ifdef USE_TIMER4
 		TIM_ClearITPendingBit(TIM4, TIM_FLAG_Update);
 		Timer4_IRQ();
@@ -312,6 +338,49 @@ extern "C"
 #ifdef USE_CAPTURE_TIM4
 		pICP4->IRQ();
 #endif
+		if (DeviceConfigCenter::PTim4Update)
+			{
+				(*DeviceConfigCenter::PTim4Update)();
+			}
+//		}
+	}
+		void TIM5_IRQHandler(void)
+	{
+#if defined STM32F0
+		//F0没有TIM5
+#else
+		if (TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET)
+		{
+			TIM_ClearITPendingBit(TIM5, TIM_FLAG_Update);
+			if (DeviceConfigCenter::PTim5Update)
+			{
+				(*DeviceConfigCenter::PTim5Update)();
+			}
+		}
+#endif
+	}
+		void TIM6_IRQHandler(void)
+	{
+		if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
+		{
+			TIM_ClearITPendingBit(TIM6, TIM_FLAG_Update);
+			if (DeviceConfigCenter::PTim6Update)
+			{
+				(*DeviceConfigCenter::PTim6Update)();
+			}
+		}
+	}
+
+	void TIM7_IRQHandler(void)
+	{
+		if (TIM_GetITStatus(TIM7, TIM_IT_Update) != RESET)
+		{
+			TIM_ClearITPendingBit(TIM7, TIM_FLAG_Update);
+			if (DeviceConfigCenter::PTim7Update)
+			{
+				(*DeviceConfigCenter::PTim7Update)();
+			}
+		}
 	}
 
 	//~~~~~~~~~~~~~~~~~~~~~~EXTI IQR  ~~~~~~~~~~~~~~~~~~//
