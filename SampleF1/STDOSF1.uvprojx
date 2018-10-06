@@ -653,11 +653,6 @@
           <GroupName>OnChip</GroupName>
           <Files>
             <File>
-              <FileName>DeviceConfigHelper.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\DeviceConfigHelper.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\OnChip\Port.cpp</FilePath>
@@ -1682,11 +1677,6 @@
         <Group>
           <GroupName>OnChip</GroupName>
           <Files>
-            <File>
-              <FileName>DeviceConfigHelper.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\DeviceConfigHelper.cpp</FilePath>
-            </File>
             <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
