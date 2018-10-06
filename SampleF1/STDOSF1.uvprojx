@@ -1032,6 +1032,11 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\USARTTest.cpp</FilePath>
             </File>
+            <File>
+              <FileName>DemoLinkTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\DemoLinkTest.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2061,6 +2066,11 @@
               <FileName>USARTTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\USARTTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DemoLinkTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\DemoLinkTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
