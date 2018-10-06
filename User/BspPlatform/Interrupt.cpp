@@ -317,6 +317,8 @@ extern "C"
 	//~~~~~~~~~~~~~~~~~~~~~~EXTI IQR  ~~~~~~~~~~~~~~~~~~//
 	void EXTI0_IRQHandler(void) 	  //----EXTI0 IRQ-----//
 	{
+		//if (EXTI_GetITStatus(EXTI_Line0) != RESET)
+		//{
 		EXTI_ClearITPendingBit(EXTI_Line0);
 #ifdef USE_EXTI0
 		EXTI0_IRQ();
@@ -329,9 +331,16 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT0
 		pICPExt0->IRQ();
 #endif
+		if (DeviceConfigCenter::PExit0)
+			{
+				(*DeviceConfigCenter::PExit0)();
+			}
+		//}
 	}
 	void EXTI1_IRQHandler(void) 	  //----EXTI1 IRQ-----//
 	{
+//		if (EXTI_GetITStatus(EXTI_Line1) != RESET)
+//		{
 		EXTI_ClearITPendingBit(EXTI_Line1);
 #ifdef USE_EXTI1
 		EXTI1_IRQ();
@@ -344,9 +353,16 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT1
 		pICPExt1->IRQ();
 #endif
+		if (DeviceConfigCenter::PExit1)
+			{
+				(*DeviceConfigCenter::PExit1)();
+			}
+		//}
 	}
 	void EXTI2_IRQHandler(void) 	  //----EXTI2 IRQ-----//
 	{
+//		if (EXTI_GetITStatus(EXTI_Line2) != RESET)
+//		{
 		EXTI_ClearITPendingBit(EXTI_Line2);
 #ifdef USE_EXTI2
 		EXTI2_IRQ();
@@ -359,9 +375,16 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT2
 		pICPExt2->IRQ();
 #endif
+		if (DeviceConfigCenter::PExit2)
+			{
+				(*DeviceConfigCenter::PExit2)();
+			}
+		//}
 	}
 	void EXTI3_IRQHandler(void) 	  //----EXTI3 IRQ-----//
 	{
+//		if (EXTI_GetITStatus(EXTI_Line3) != RESET)
+//		{
 		EXTI_ClearITPendingBit(EXTI_Line3);
 #ifdef USE_EXTI3
 		EXTI3_IRQ();
@@ -374,9 +397,16 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT3
 		pICPExt3->IRQ();
 #endif
+		if (DeviceConfigCenter::PExit3)
+			{
+				(*DeviceConfigCenter::PExit3)();
+			}
+		//}
 	}
 	void EXTI4_IRQHandler(void) 	  //----EXTI4 IRQ-----//
 	{
+//		if (EXTI_GetITStatus(EXTI_Line4) != RESET)
+//		{
 		EXTI_ClearITPendingBit(EXTI_Line4);
 #ifdef USE_EXTI4
 		EXTI4_IRQ();
@@ -389,6 +419,11 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT4
 		pICPExt4->IRQ();
 #endif
+		if (DeviceConfigCenter::PExit4)
+			{
+				(*DeviceConfigCenter::PExit4)();
+			}
+		//}
 	}
 
 	void EXTI9_5_IRQHandler(void) 	//---EXTI9_5 IRQ----//
@@ -407,6 +442,10 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT5
 			pICPExt5->IRQ();
 #endif
+			if (DeviceConfigCenter::PExit5)
+			{
+				(*DeviceConfigCenter::PExit5)();
+			}
 		}
 		if (EXTI_GetITStatus(EXTI_Line6))       //--EXTI6--//
 		{
@@ -421,8 +460,11 @@ extern "C"
 
 #ifdef USE_CAPTURE_EXIT6
 			pICPExt6->IRQ();
-
 #endif
+			if (DeviceConfigCenter::PExit6)
+			{
+				(*DeviceConfigCenter::PExit6)();
+			}
 		}
 		if (EXTI_GetITStatus(EXTI_Line7))       //--EXTI7--//
 		{
@@ -438,6 +480,10 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT7
 			pICPExt7->IRQ();
 #endif
+			if (DeviceConfigCenter::PExit7)
+			{
+				(*DeviceConfigCenter::PExit7)();
+			}
 		}
 		if (EXTI_GetITStatus(EXTI_Line8))       //--EXTI8--//
 		{
@@ -453,6 +499,10 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT8
 			pICPExt8->IRQ();
 #endif
+			if (DeviceConfigCenter::PExit8)
+			{
+				(*DeviceConfigCenter::PExit8)();
+			}
 		}
 		if (EXTI_GetITStatus(EXTI_Line9))       //--EXTI9--//
 		{
@@ -468,6 +518,10 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT9
 			pICPExt9->IRQ();
 #endif
+			if (DeviceConfigCenter::PExit9)
+			{
+				(*DeviceConfigCenter::PExit9)();
+			}
 		}
 
 	}
@@ -487,6 +541,10 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT10
 			pICPExt10->IRQ();
 #endif
+			if (DeviceConfigCenter::PExit10)
+			{
+				(*DeviceConfigCenter::PExit10)();
+			}
 		}
 
 		if (EXTI_GetITStatus(EXTI_Line11))     //--EXTI11--//
@@ -503,6 +561,10 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT11
 			pICPExt11->IRQ();
 #endif
+			if (DeviceConfigCenter::PExit11)
+			{
+				(*DeviceConfigCenter::PExit11)();
+			}
 		}
 
 		if (EXTI_GetITStatus(EXTI_Line12))     //--EXTI12--//
@@ -519,6 +581,10 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT12
 			pICPExt12->IRQ();
 #endif
+			if (DeviceConfigCenter::PExit12)
+			{
+				(*DeviceConfigCenter::PExit12)();
+			}
 		}
 
 		if (EXTI_GetITStatus(EXTI_Line13))     //--EXTI13--//
@@ -535,6 +601,10 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT13
 			pICPExt13->IRQ();
 #endif
+			if (DeviceConfigCenter::PExit13)
+			{
+				(*DeviceConfigCenter::PExit13)();
+			}
 		}
 
 		if (EXTI_GetITStatus(EXTI_Line14))     //--EXTI14--//
@@ -551,6 +621,10 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT14
 			pICPExt14->IRQ();
 #endif
+			if (DeviceConfigCenter::PExit14)
+			{
+				(*DeviceConfigCenter::PExit14)();
+			}
 		}
 
 		if (EXTI_GetITStatus(EXTI_Line15))     //--EXTI15--//
@@ -567,6 +641,10 @@ extern "C"
 #ifdef USE_CAPTURE_EXIT15
 			pICPExt15->IRQ();
 #endif
+			if (DeviceConfigCenter::PExit15)
+			{
+				(*DeviceConfigCenter::PExit15)();
+			}
 		}
 	}
 
