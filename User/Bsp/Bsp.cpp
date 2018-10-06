@@ -90,7 +90,7 @@ void comtestrcv()
 #include "OnChip/USART.h"
 #include "BspPlatform/Interrupt.h"
 
-USART usart111(USART1, 256000);
+USART usart111(USART1, 115200);
 void routsendtest(void * param)
 {
 	uint8_t buf[200];
@@ -114,7 +114,7 @@ void BspInit()
 	led2 = 1;
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 		
-	Sys.AddTask(routsendtest, 0, 0, 1000, "routsendtest");
+	//Sys.AddTask(routsendtest, 0, 0, 1000, "routsendtest");
 	//PwmSoloTestInit();	
 	DemoLinkTestInit();
 }
