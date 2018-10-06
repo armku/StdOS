@@ -25,7 +25,6 @@ void DemoLinkRoutin(void * param)
 		demolink.txFrame.data[1] = 0x42;
 		demolink.txFrame.data[2] = 0x43;
 		demolink.txFrame.fnCode = 0x00;
-		demolink.txFrame.dataLength = 0;
 		demolink.txFrame.isUpdated = true;
 
 		demolink.Send();
@@ -38,7 +37,7 @@ void DemoLinkRoutinS(void * param)
 	demolink.txFrame.data[1] = 0x42;
 	demolink.txFrame.data[2] = 0x43;
 	demolink.txFrame.fnCode = 0x00;
-	demolink.txFrame.dataLength = 0;
+	//demolink.txFrame.dataLength = 0;
 	demolink.txFrame.isUpdated = true;
 	
 	demolink.Send();
