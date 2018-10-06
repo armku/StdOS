@@ -12,6 +12,8 @@ DemoLink demolink(usart222);
 |header - fn- datalen- databuf- chksum|
 |AA    -  00 -03 -     XX- XX- XX- XX|
 |AA  00 00 AA
+电脑发送：AA 00 00 AA
+下位机响应 AA 00 03 41 42 43 73
 */
 
 void DemoLinkRoutin(void * param)
