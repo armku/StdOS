@@ -169,7 +169,6 @@ public:
 	static Func PExit15;
 
 	//串口	
-	static void ComChgBaudRate(COM com, int baudRate);//改变波特率
 			
 	//定时器
 	static void TimeTickInit();//系统用定时器初始化
@@ -209,11 +208,6 @@ private:
 	//中断
 
 	//串口	
-	static void Com1ChgBaudRate(int baudRate);
-	static void Com2ChgBaudRate(int baudRate);
-	static void Com3ChgBaudRate(int baudRate);
-	static void Com4ChgBaudRate(int baudRate);
-	static void Com5ChgBaudRate(int baudRate);
 	static void SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap = false);
 
 	//定时器

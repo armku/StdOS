@@ -2,7 +2,7 @@
 #include "BspPlatform\Interrupt.h"
 #include "Configuration.h"
 
-#define _USARTTEST_CPP
+//#define _USARTTEST_CPP
 #ifdef _USARTTEST_CPP
 
 //需要打开 Configuration.h 行号12 USE_USART2
@@ -34,7 +34,7 @@ OutputPort r485(PC0, false);
 void USARTTestInit()
 {
 	r485 = 0;//接收	
-	DeviceConfigCenter::ComChgBaudRate(COM2, 115200);
+	pCOM2->SetBaudRate(115200);
 
 	Sys.AddTask(USARTTask12, 0, 0, 500, "USARTTask12");
 }
