@@ -113,8 +113,6 @@ void BspInit()
 	led1 = 1;
 	led2 = 1;
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
-	DeviceConfigCenter::PRcvCOM1 = com1rcv;
-	DeviceConfigCenter::PRcvCOM3 = comtestrcv;
 		
 	Sys.AddTask(routsendtest, 0, 0, 1000, "routsendtest");
 	PwmSoloTestInit();

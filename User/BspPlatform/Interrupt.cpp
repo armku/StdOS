@@ -915,46 +915,46 @@ Func DeviceConfigCenter::PExit14 = 0;
 Func DeviceConfigCenter::PExit15 = 0;
 
 //串口
-OutputPort *DeviceConfigCenter::pCOM1Rx485 = 0;
-OutputPort *DeviceConfigCenter::pCOM2Rx485 = 0;
-OutputPort *DeviceConfigCenter::pCOM3Rx485 = 0;
-OutputPort *DeviceConfigCenter::pCOM4Rx485 = 0;
-OutputPort *DeviceConfigCenter::pCOM5Rx485 = 0;
-
-Func DeviceConfigCenter::PRcvCOM1 = 0;
-Func DeviceConfigCenter::PRcvCOM2 = 0;
-Func DeviceConfigCenter::PRcvCOM3 = 0;
-Func DeviceConfigCenter::PRcvCOM4 = 0;
-Func DeviceConfigCenter::PRcvCOM5 = 0;
-
-int DeviceConfigCenter::RcvLastTimeCOM1 = 0;//串口1最后接收数据时间
-int DeviceConfigCenter::RcvLastTimeCOM2 = 0;//串口2最后接收数据时间
-int DeviceConfigCenter::RcvLastTimeCOM3 = 0;//串口3最后接收数据时间
-int DeviceConfigCenter::RcvLastTimeCOM4 = 0;//串口4最后接收数据时间
-int DeviceConfigCenter::RcvLastTimeCOM5 = 0;//串口5最后接收数据时间
-
-int DeviceConfigCenter::RcvCom1PackInterval = 1;//串口1接收数据帧时间间隔
-int DeviceConfigCenter::RcvCom2PackInterval = 1;//串口2接收数据帧时间间隔
-int DeviceConfigCenter::RcvCom3PackInterval = 1;//串口3接收数据帧时间间隔
-int DeviceConfigCenter::RcvCom4PackInterval = 1;//串口4接收数据帧时间间隔
-int DeviceConfigCenter::RcvCom5PackInterval = 1;//串口5接收数据帧时间间隔
-
-int DeviceConfigCenter::BUFLEN_TX1 = 0;	//串口1发送缓冲区长度
-int DeviceConfigCenter::BUFLEN_RX1 = 0;	//串口1接收缓冲区长度
-int DeviceConfigCenter::BUFLEN_TX2 = 0;	//串口2发送缓冲区长度
-int DeviceConfigCenter::BUFLEN_RX2 = 0;	//串口2接收缓冲区长度
-int DeviceConfigCenter::BUFLEN_TX3 = 0;	//串口3发送缓冲区长度
-int DeviceConfigCenter::BUFLEN_RX3 = 0;	//串口3接收缓冲区长度
-int DeviceConfigCenter::BUFLEN_TX4 = 0;	//串口4发送缓冲区长度
-int DeviceConfigCenter::BUFLEN_RX4 = 0;	//串口4接收缓冲区长度
-int DeviceConfigCenter::BUFLEN_TX5 = 0;	//串口5发送缓冲区长度
-int DeviceConfigCenter::BUFLEN_RX5 = 0;	//串口5接收缓冲区长度
-
-int DeviceConfigCenter::FLAG_TX1EN = 1;	//串口1可以发送
-int DeviceConfigCenter::FLAG_TX2EN = 1;	//串口2可以发送
-int DeviceConfigCenter::FLAG_TX3EN = 1;	//串口3可以发送
-int DeviceConfigCenter::FLAG_TX4EN = 1;	//串口4可以发送
-int DeviceConfigCenter::FLAG_TX5EN = 1;	//串口5可以发送
+//OutputPort *DeviceConfigCenter::pCOM1Rx485 = 0;
+//OutputPort *DeviceConfigCenter::pCOM2Rx485 = 0;
+//OutputPort *DeviceConfigCenter::pCOM3Rx485 = 0;
+//OutputPort *DeviceConfigCenter::pCOM4Rx485 = 0;
+//OutputPort *DeviceConfigCenter::pCOM5Rx485 = 0;
+//
+//Func DeviceConfigCenter::PRcvCOM1 = 0;
+//Func DeviceConfigCenter::PRcvCOM2 = 0;
+//Func DeviceConfigCenter::PRcvCOM3 = 0;
+//Func DeviceConfigCenter::PRcvCOM4 = 0;
+//Func DeviceConfigCenter::PRcvCOM5 = 0;
+//
+//int DeviceConfigCenter::RcvLastTimeCOM1 = 0;//串口1最后接收数据时间
+//int DeviceConfigCenter::RcvLastTimeCOM2 = 0;//串口2最后接收数据时间
+//int DeviceConfigCenter::RcvLastTimeCOM3 = 0;//串口3最后接收数据时间
+//int DeviceConfigCenter::RcvLastTimeCOM4 = 0;//串口4最后接收数据时间
+//int DeviceConfigCenter::RcvLastTimeCOM5 = 0;//串口5最后接收数据时间
+//
+//int DeviceConfigCenter::RcvCom1PackInterval = 1;//串口1接收数据帧时间间隔
+//int DeviceConfigCenter::RcvCom2PackInterval = 1;//串口2接收数据帧时间间隔
+//int DeviceConfigCenter::RcvCom3PackInterval = 1;//串口3接收数据帧时间间隔
+//int DeviceConfigCenter::RcvCom4PackInterval = 1;//串口4接收数据帧时间间隔
+//int DeviceConfigCenter::RcvCom5PackInterval = 1;//串口5接收数据帧时间间隔
+//
+//int DeviceConfigCenter::BUFLEN_TX1 = 0;	//串口1发送缓冲区长度
+//int DeviceConfigCenter::BUFLEN_RX1 = 0;	//串口1接收缓冲区长度
+//int DeviceConfigCenter::BUFLEN_TX2 = 0;	//串口2发送缓冲区长度
+//int DeviceConfigCenter::BUFLEN_RX2 = 0;	//串口2接收缓冲区长度
+//int DeviceConfigCenter::BUFLEN_TX3 = 0;	//串口3发送缓冲区长度
+//int DeviceConfigCenter::BUFLEN_RX3 = 0;	//串口3接收缓冲区长度
+//int DeviceConfigCenter::BUFLEN_TX4 = 0;	//串口4发送缓冲区长度
+//int DeviceConfigCenter::BUFLEN_RX4 = 0;	//串口4接收缓冲区长度
+//int DeviceConfigCenter::BUFLEN_TX5 = 0;	//串口5发送缓冲区长度
+//int DeviceConfigCenter::BUFLEN_RX5 = 0;	//串口5接收缓冲区长度
+//
+//int DeviceConfigCenter::FLAG_TX1EN = 1;	//串口1可以发送
+//int DeviceConfigCenter::FLAG_TX2EN = 1;	//串口2可以发送
+//int DeviceConfigCenter::FLAG_TX3EN = 1;	//串口3可以发送
+//int DeviceConfigCenter::FLAG_TX4EN = 1;	//串口4可以发送
+//int DeviceConfigCenter::FLAG_TX5EN = 1;	//串口5可以发送
 
 //定时器
 Func DeviceConfigCenter::PTim2Update = 0;

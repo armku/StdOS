@@ -170,51 +170,7 @@ public:
 
 	//串口	
 	static void ComChgBaudRate(COM com, int baudRate);//改变波特率
-	static void com1send(void* buf, int len);
-	static void com2send(void* buf, int len);
-	static void com3send(void* buf, int len);
-	static void com4send(void* buf, int len);
-	static void com5send(void* buf, int len);
-	static OutputPort *pCOM1Rx485;
-	static OutputPort *pCOM2Rx485;
-	static OutputPort *pCOM3Rx485;
-	static OutputPort *pCOM4Rx485;
-	static OutputPort *pCOM5Rx485;
-
-	static Func PRcvCOM1;
-	static Func PRcvCOM2;
-	static Func PRcvCOM3;
-	static Func PRcvCOM4;
-	static Func PRcvCOM5;
-
-	static int RcvLastTimeCOM1;//最后接收数据时间
-	static int RcvLastTimeCOM2;//最后接收数据时间
-	static int RcvLastTimeCOM3;//最后接收数据时间
-	static int RcvLastTimeCOM4;//最后接收数据时间
-	static int RcvLastTimeCOM5;//最后接收数据时间
-
-	static int RcvCom1PackInterval;//接收数据帧时间间隔
-	static int RcvCom2PackInterval;//接收数据帧时间间隔
-	static int RcvCom3PackInterval;//接收数据帧时间间隔
-	static int RcvCom4PackInterval;//接收数据帧时间间隔
-	static int RcvCom5PackInterval;//接收数据帧时间间隔
-
-	static int BUFLEN_TX1;	//发送缓冲区长度
-	static int BUFLEN_RX1;	//接收缓冲区长度
-	static int BUFLEN_TX2;	//发送缓冲区长度
-	static int BUFLEN_RX2;	//接收缓冲区长度
-	static int BUFLEN_TX3;	//发送缓冲区长度
-	static int BUFLEN_RX3;	//接收缓冲区长度
-	static int BUFLEN_TX4;	//发送缓冲区长度
-	static int BUFLEN_RX4;	//接收缓冲区长度
-	static int BUFLEN_TX5;	//发送缓冲区长度
-	static int BUFLEN_RX5;	//接收缓冲区长度
-
-	static int FLAG_TX1EN;	//可以发送
-	static int FLAG_TX2EN;	//可以发送
-	static int FLAG_TX3EN;	//可以发送
-	static int FLAG_TX4EN;	//可以发送
-	static int FLAG_TX5EN;	//可以发送
+			
 	//定时器
 	static void TimeTickInit();//系统用定时器初始化
 	static void TimerConfig(TIMER tim, int interval, int NVIC_PriorityGroup = 0, int NVIC_IRQChannelPreemptionPriority = 0, int NVIC_IRQChannelSubPriorit = 3);//定时器配置
@@ -252,12 +208,7 @@ public:
 private:
 	//中断
 
-	//串口
-	static void configCOM1(int baudRate);
-	static void configCOM2(int baudRate);
-	static void configCOM3(int baudRate);
-	static void configCOM4(int baudRate);
-	static void configCOM5(int baudRate);
+	//串口	
 	static void Com1ChgBaudRate(int baudRate);
 	static void Com2ChgBaudRate(int baudRate);
 	static void Com3ChgBaudRate(int baudRate);
