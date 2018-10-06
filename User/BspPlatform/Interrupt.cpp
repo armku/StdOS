@@ -26,6 +26,20 @@ USART *pCOM3 = 0;
 USART *pCOM3 = 0;
 #endif
 
+#ifdef USE_UART4
+USART *pCOM4 = 0;
+#endif
+#ifdef USE_UART4_DMA
+USART *pCOM4 = 0;
+#endif
+
+#ifdef USE_UART5
+USART *pCOM5 = 0;
+#endif
+#ifdef USE_UART5_DMA
+USART *pCOM5 = 0;
+#endif
+
 #ifdef USE_I2C1
 I2C *pI2C1;
 #endif
@@ -111,6 +125,18 @@ Timer *pTIM3;
 
 #ifdef USE_TIMER4
 Timer *pTIM4;
+#endif
+
+#ifdef USE_TIMER5
+Timer *pTIM5;
+#endif
+
+#ifdef USE_TIMER6
+Timer *pTIM6;
+#endif
+
+#ifdef USE_TIMER7
+Timer *pTIM7;
 #endif
 
 #ifdef USE_ULTRASONIC_EXTI0
