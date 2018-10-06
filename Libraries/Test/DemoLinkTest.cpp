@@ -3,7 +3,7 @@
 #include "USART.h"
 #include "Interrupt.h"
 
-#define _DEMOLINKTEST_H
+//#define _DEMOLINKTEST_H
 #ifdef _DEMOLINKTEST_H
 
 USART usart222(USART2, 115200);

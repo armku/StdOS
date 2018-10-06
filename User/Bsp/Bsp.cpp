@@ -116,5 +116,5 @@ void BspInit()
 		
 	//Sys.AddTask(routsendtest, 0, 0, 1000, "routsendtest");
 	//PwmSoloTestInit();	
-	DemoLinkTestInit();
+	//DemoLinkTestInit();
 }
