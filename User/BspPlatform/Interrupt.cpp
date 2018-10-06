@@ -240,6 +240,36 @@ extern "C"
 		pCOM3->IRQ();
 #endif
 	}
+	void UART4_IRQHandler(void)    //----UART4 IRQ----//
+	{
+#ifdef USE_GPS
+		if (pGPS4) {
+			pGPS4->GPS_IRQHandler();
+			return;
+	}
+#endif
+#ifdef USE_UART4
+		pCOM4->IRQ();
+#endif
+#ifdef USE_UART4_DMA
+		pCOM4->IRQ();
+#endif
+}
+	void UART5_IRQHandler(void)    //----UART5 IRQ----//
+	{
+#ifdef USE_GPS
+		if (pGPS5) {
+			pGPS5->GPS_IRQHandler();
+			return;
+	}
+#endif
+#ifdef USE_UART5
+		pCOM5->IRQ();
+#endif
+#ifdef USE_UART5_DMA
+		pCOM5->IRQ();
+#endif
+}
 	//~~~~~~~~~~~~~~~~~~~~~  IIC IQR  ~~~~~~~~~~~~~~~~~~//
 	void I2C1_EV_IRQHandler(void)   //----I2C1 EVENT----//
 	{

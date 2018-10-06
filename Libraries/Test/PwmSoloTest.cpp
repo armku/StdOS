@@ -15,7 +15,7 @@ void PwmTestRoutin123(void *param)
 
 void PwmSoloTestInit()
 {
-	pwm.Set(PA6);
+	pwm.Set(PC6);
 	pwm.SetOutPercent(0);
 	pwm.Open();
 	

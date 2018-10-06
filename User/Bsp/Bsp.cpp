@@ -106,6 +106,7 @@ void routsendtest(void * param)
 		pCOM1->SendBytes(buf, len);
 	}
 }
+void PwmSoloTestInit();
 
 void BspInit()
 {
@@ -117,4 +118,6 @@ void BspInit()
 	DeviceConfigCenter::ConfigCom(COM3, 256000);
 		
 	Sys.AddTask(routsendtest, 0, 0, 1000, "routsendtest");
+	PwmSoloTestInit();
+
 }
