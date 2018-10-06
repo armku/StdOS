@@ -190,6 +190,10 @@ Ultrasonic	*pUltExt15;
 
 extern "C"
 {
+	void SysTick_Handler(void)
+	{
+
+	}
 	//~~~~~~~~~~~~~~~~~~~~~ USART IQR  ~~~~~~~~~~~~~~~~~//
 	void USART1_IRQHandler(void)    //----USART1 IRQ----//
 	{
