@@ -1,7 +1,7 @@
 #include "App\DemoLink.h"
 #include "Sys.h"
 #include "USART.h"
-#include "Interrupt.h"
+#include "BspPlatform\Interrupt.h"
 
 //#define _DEMOLINKTEST_H
 #ifdef _DEMOLINKTEST_H
