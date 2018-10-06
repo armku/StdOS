@@ -11,11 +11,15 @@
 #define USE_USART1             //---USART1-without-DMA-//
 //#define USE_USART2            //---USART2-without-DMA-//
 //#define USE_USART3            //---USART3-without-DMA-//
+//#define USE_UART4            //---UART4-without-DMA-//
+//#define USE_UART5            //---UART5-without-DMA-//
 
 //#define USE_USART_DMA          //---USART-use-DMA--//
 //#define USE_USART1_DMA         //---USART1-use-DMA--//
 //#define USE_USART2_DMA         //---USART2-use-DMA--//
 //#define USE_USART3_DMA         //---USART3-use-DMA--//
+//#define USE_UART4_DMA         //---UART4-use-DMA--//
+//#define USE_UART5_DMA         //---UART5-use-DMA--//
 
 //~~~~~~~~~~~~~~~~I2C Congfigure~~~~~~~~~~~~//
 //#define USE_I2C                //----IIC----//
@@ -28,6 +32,9 @@
 //#define USE_TIMER2             //---Timer2--//
 //#define USE_TIMER3            //---Timer3--//
 //#define USE_TIMER4            //---Timer4--//
+//#define USE_TIMER5            //---Timer5--//
+//#define USE_TIMER6            //---Timer6--//
+//#define USE_TIMER7            //---Timer7--//
 
 //~~~~~~~~~~~~~~Capture Congfigure~~~~~~~~~~//
 //#define USE_CAPTURE_TIM         //--Capture- With Timer-//
@@ -123,6 +130,7 @@
 
 
 
+//old
 
 #include <stdint.h>
 #include "Platform\Pin.h"
