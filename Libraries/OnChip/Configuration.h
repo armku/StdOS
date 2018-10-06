@@ -260,7 +260,7 @@ public:
 	static Func PExit15;
 
 	//串口	
-	static void ConfigCom(COM com, int baudRate);
+	/*static void ConfigCom(COM com, int baudRate);*/
 	static void ComChgBaudRate(COM com, int baudRate);//改变波特率
 	static void com1send(void* buf, int len);
 	static void com2send(void* buf, int len);
