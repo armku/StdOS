@@ -48,7 +48,18 @@ int StdPrintf(const char *format, ...)
 	va_start(args, format);
 	n = vsprintf(sprint_buf, format, args);
 	va_end(args);
-
+	
+#if 0
 	pCOM1->SendBytes((uint8_t*)sprint_buf, n);
+#else
+	for (int i = 0; i <n; i++)
+	{
+		/* 发送一个字节数据到USART */
+		USART_SendData(USART1, sprint_buf[i]);
+
+		/* 等待发送完毕 */
+		while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
+	}
+#endif
 	return n;
 }
