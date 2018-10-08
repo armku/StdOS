@@ -115,8 +115,8 @@ void PwmSolo::OnOpen2()
 	/* PWM信号电平跳变值 */
 	//u16 CCR1_Val = 500;       
 	/* Time base configuration */
-	TIM_TimeBaseStructure.TIM_Period = this->_freq; //999;       //当定时器从0计数到999，即为1000次，为一个定时周期
-	TIM_TimeBaseStructure.TIM_Prescaler = 0; //设置预分频：不预分频，即为72MHz
+	TIM_TimeBaseStructure.TIM_Period = (this->_freq==100?10000:this->_freq); //999;       //当定时器从0计数到999，即为1000次，为一个定时周期
+	TIM_TimeBaseStructure.TIM_Prescaler = (this->_freq == 100 ? 72 : 0); //设置预分频：不预分频，即为72MHz,0:7.2k 72:10Hz
 	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1; //设置时钟分频系数：不分频(这里用不到)
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; //向上计数模式
 
@@ -1207,6 +1207,6 @@ void PwmSolo::Open()
 //设置输出比例，0-100
 void PwmSolo::SetOutPercent(float per)
 {
-	this->_duty = this->_freq *per / 100;
+	this->_duty = (this->_freq == 100 ? 10000 : this->_freq) *per / 100;
 	this->SetOut(this->_duty);
 }
