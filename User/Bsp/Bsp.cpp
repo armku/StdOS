@@ -107,6 +107,7 @@ void routsendtest(void * param)
 }
 void PwmSoloTestInit();
 void DemoLinkTestInit();
+void ModbusSlaveLinkTestInit();
 
 void BspInit()
 {
@@ -117,4 +118,5 @@ void BspInit()
 	//Sys.AddTask(routsendtest, 0, 0, 1000, "routsendtest");
 	//PwmSoloTestInit();	
 	//DemoLinkTestInit();
+	ModbusSlaveLinkTestInit();
 }

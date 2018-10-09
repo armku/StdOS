@@ -1,0 +1,4 @@
+#ifndef _DATAFRAMEMODBUS_H
+#define _DATAFRAMEMODBUS_H
+
+#endif // !_DATAFRAMEMODBUS_H
