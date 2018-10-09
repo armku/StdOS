@@ -26,11 +26,11 @@ public:
 
 	bool VerifyCheckCode()
 	{
-		auto crcnew = Crc::CRC16RTU(data, dataLength);
-		uint8_t code = fnCode + dataLength;
-		for (uint8_t i = 0; i < dataLength; i++)
-			code += data[i];
-		if (code == checkSum)
+		auto crcnew = Crc::CRC16RTU(data, dataLength-2);
+		uint16_t crc = data[dataLength-2];
+		crc <<= 8;
+		crc |= data[dataLength - 2];
+		if (crcnew == crc)
 			return true;
 		else
 			return false;
