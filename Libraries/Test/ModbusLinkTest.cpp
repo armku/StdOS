@@ -14,7 +14,7 @@ void ModbusSlaveLinkRoutin(void* param)
 {
 	static int i = 0;
 	debug_printf("hello:%d\n", i++);
-	modbusSlave.CheckFrame();
+	modbusSlave.CheckFrame()?debug_printf("frame ok\n"): debug_printf("frame error\n");
 }
 
 void ModbusSlaveLinkTestInit()

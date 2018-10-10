@@ -28,7 +28,7 @@ bool ModbusSlaveLink::CheckFrame()
 		return rxFrame.VerifyCheckCode();
 	}
 	//return com.CheckFrame(rxFrame);
-	return true;
+	return false;
 }
 
 bool ModbusSlaveLink::Send()
