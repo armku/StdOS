@@ -17,6 +17,21 @@ bool ModbusSlaveLink::CheckFrame()
 
 	if (rxFrame.dataLength >= 8)
 	{	
+		this->rxFrame.fnCode = this->rxFrame.data[1];
+		int needlen = 8;
+		switch (this->rxFrame.fnCode)
+		{
+		case 0x0F://多个写 0 区输出继电器(指令代码: 0X0F) 
+		case 0x10://多个写 4 区输出寄存器(指令代码: 0X10) 
+			needlen = rxFrame.data[6] + needlen;
+			break;
+		default:
+			break;
+		}
+		//需要的长度不够，直接返回
+		if (needlen > this->rxFrame.dataLength)
+			return false;
+
 		auto crc11 = Crc::CRC16RTU(rxFrame.data, rxFrame.dataLength - 2);
 		debug_printf("crc cal:%04X\n", crc11);
 
