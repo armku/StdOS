@@ -17,7 +17,16 @@ bool ModbusSlaveLink::CheckFrame()
 
 	if (rxFrame.dataLength >= 8)
 	{	
+		this->rxFrame.devid = this->rxFrame.data[0];
 		this->rxFrame.fnCode = this->rxFrame.data[1];
+		this->rxFrame.regAddr = this->rxFrame.data[2];
+		this->rxFrame.regAddr <<= 8;
+		this->rxFrame.regAddr |= this->rxFrame.data[3];
+		this->rxFrame.regLength = this->rxFrame.data[4];
+		this->rxFrame.regLength <<= 8;
+		this->rxFrame.regLength |= this->rxFrame.data[5];
+
+		debug_printf("devid:%d fnCode:%d regAddr:%d reglen:%d\n",this->rxFrame.devid,this->rxFrame.fnCode,this->rxFrame.regAddr,this->rxFrame.regLength);
 		int needlen = 8;
 		switch (this->rxFrame.fnCode)
 		{
@@ -44,6 +53,10 @@ bool ModbusSlaveLink::CheckFrame()
 	}
 	//return com.CheckFrame(rxFrame);
 	return false;
+}
+bool DataFrameModbus::CheckFrame()
+{
+
 }
 
 bool ModbusSlaveLink::Send()

@@ -17,6 +17,7 @@ public:
 	uint8_t data[MAX_FRAME_DATA_LENGTH];
 	bool isUpdated;
 	uint16_t checkSum;
+	int frameLength;//当前数据帧长度
 
 public:
 	DataFrameModbus()                 //constructor
@@ -35,6 +36,18 @@ public:
 		else
 			return false;
 	}
+	bool RemoveOneFrame()
+	{
+		if (frameLength<0 || frameLength>dataLength)
+			return false;
+		for (int i = 0; i < dataLength - frameLength; i++)
+		{
+			this->data[i] = this->data[i + frameLength];
+		}
+		dataLength -= frameLength;
+		return true;
+	}
+	bool CheckFrame();
 	void CreateCheckCode()
 	{
 		checkSum = fnCode + dataLength;
