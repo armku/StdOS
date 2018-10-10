@@ -18,7 +18,10 @@ void ModbusSlaveLinkRoutin(void* param)
 	{
 		switch (modbusSlave.rxFrame.fnCode)
 		{
+		case 1:
+		case 2:
 		case 3:
+		case 4:
 			modbusSlave.txFrame.devid = modbusSlave.rxFrame.devid;
 			modbusSlave.txFrame.fnCode = modbusSlave.rxFrame.fnCode;
 			modbusSlave.txFrame.regAddr = modbusSlave.rxFrame.regAddr;
