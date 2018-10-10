@@ -23,8 +23,8 @@ void ModbusSlaveLinkRoutin(void* param)
 			modbusSlave.txFrame.fnCode = modbusSlave.rxFrame.fnCode;
 			modbusSlave.txFrame.regAddr = modbusSlave.rxFrame.regAddr;
 			modbusSlave.txFrame.regLength = modbusSlave.rxFrame.regLength;
-			modbusSlave.txFrame.SetReg(0, 10);
-			modbusSlave.txFrame.SetReg(1, 20);
+			for (int i = 0; i < 10; i++)
+				modbusSlave.txFrame.SetReg(i, i);
 			modbusSlave.txFrame.SetRegLen(10);
 			modbusSlave.txFrame.isUpdated = true;
 			modbusSlave.Send();

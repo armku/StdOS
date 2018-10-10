@@ -36,13 +36,13 @@ public:
 	//设置传输寄存器值，地址从0开始编码
 	void SetReg(uint8_t regaddr, uint16_t val)
 	{
-		this->data[3 + regaddr] = val & 0xff;
-		this->data[3 + regaddr + 1] = val >> 8;
+		this->data[3 + regaddr * 2] = val >> 8;
+		this->data[3 + regaddr * 2 + 1] = val & 0xff;
 	}
 	void SetRegLen(uint8_t len)
 	{
-		this->data[2] = len;
-		this->frameLength = 5 + len;
+		this->data[2] = len * 2;
+		this->frameLength = 5 + len * 2;
 		this->dataLength = this->frameLength;
 	}
 	bool RemoveOneFrame()
