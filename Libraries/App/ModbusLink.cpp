@@ -46,5 +46,6 @@ bool ModbusSlaveLink::Send()
 
 	com.SendBytes(txFrame.data, txFrame.frameLength);
 	txFrame.isUpdated = false;
+	rxFrame.RemoveOneFrame();//移除处理完的接收数据帧
 	return true;
 }
