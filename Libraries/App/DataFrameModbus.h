@@ -104,8 +104,8 @@ public:
 	}
 	void CreateCheckCode()
 	{
-		checkSum = fnCode + dataLength;
-		for (uint8_t i = 0; i < dataLength; i++)
+		checkSum = fnCode + frameLength;
+		for (uint8_t i = 0; i < frameLength; i++)
 			checkSum += data[i];
 	}
 	DataFrameModbus& operator=(const DataFrameModbus &df)
