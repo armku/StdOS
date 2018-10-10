@@ -27,7 +27,7 @@ public:
 
 	bool VerifyCheckCode()
 	{
-		auto crcnew = Crc::CRC16RTU(data, dataLength-2);
+		auto crcnew = Crc::CRC16RTU(data, frameLength-2);
 		if (crcnew == this->checkSum)
 			return true;
 		else
