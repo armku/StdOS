@@ -7,7 +7,6 @@
 #ifdef _MODBUSLINKEST_CPP
 
 USART usart222(USART2, 115200);
-uint8_t buf485[20];
 ModbusSlaveLink modbusSlave(usart222);
 
 void ModbusSlaveLinkRoutin(void* param)
