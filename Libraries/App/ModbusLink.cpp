@@ -15,7 +15,12 @@ bool ModbusSlaveLink::CheckFrame()
 		rxFrame.dataLength += rxlen;		
 	}
 	rxFrame.CheckFrame();
-	debug_printf("devid:%d fnCode:%d regAddr:%d reglen:%d\n", rxFrame.devid, rxFrame.fnCode, rxFrame.regAddr, rxFrame.regLength);
+	debug_printf("devid:%d fnCode:%d regAddr:%d reglen:%d framelen:%d buflen:%d\n", rxFrame.devid, 
+		rxFrame.fnCode, 
+		rxFrame.regAddr, 
+		rxFrame.regLength,
+		rxFrame.frameLength,
+		rxFrame.dataLength);
 	if (rxFrame.frameLength > 3)
 	{
 		auto crc11 = Crc::CRC16RTU(rxFrame.data, rxFrame.frameLength - 2);
