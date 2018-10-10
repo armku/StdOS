@@ -13,7 +13,7 @@ ModbusSlaveLink modbusSlave(usart222);
 void ModbusSlaveLinkRoutin(void* param)
 {
 	static int i = 0;
-	debug_printf("hello:%d\n", i++);
+	
 	if (modbusSlave.CheckFrame())
 	{
 		switch (modbusSlave.rxFrame.fnCode)
@@ -33,17 +33,18 @@ void ModbusSlaveLinkRoutin(void* param)
 		default:
 			break;
 		}
+		debug_printf("hello:%d\n", i++);
 		debug_printf("frame ok\n");
 	}
 	else
 	{
-		debug_printf("frame error\n");
+		//debug_printf("frame error\n");
 	}
 }
 
 void ModbusSlaveLinkTestInit()
 {
-	Sys.AddTask(ModbusSlaveLinkRoutin,0,0,1000,"ModbusSlaveLinkRoutin");
+	Sys.AddTask(ModbusSlaveLinkRoutin,0,0,1,"ModbusSlaveLinkRoutin");
 }
 
 #endif

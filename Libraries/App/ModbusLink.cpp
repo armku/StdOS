@@ -14,7 +14,8 @@ bool ModbusSlaveLink::CheckFrame()
 	{
 		rxFrame.dataLength += rxlen;		
 	}
-	rxFrame.CheckFrame();
+	if (!rxFrame.CheckFrame())
+		return false;
 	debug_printf("devid:%d fnCode:%d regAddr:%d reglen:%d framelen:%d buflen:%d\n", rxFrame.devid, 
 		rxFrame.fnCode, 
 		rxFrame.regAddr, 
@@ -39,16 +40,23 @@ bool ModbusSlaveLink::Send()
 		return false;
 	//if (!com.SendByte(txFrame.header))  //send frame header
 	//	return false;
-	if (txFrame.fnCode > MAX_FN_CODE || !com.SendByte(txFrame.fnCode))  //send function code
-		return false;
-	txFrame.dataLength = DATA_LENGTH[txFrame.fnCode][DIRECTION_SEND];
-	if (!com.SendByte(txFrame.dataLength))  //send data length
-		return false;
-	if (!com.SendBytes(txFrame.data, txFrame.dataLength)) //send data;
-		return false;
-	txFrame.CreateCheckCode();
-	if (!com.SendByte(txFrame.checkSum))    //send check code
-		return false;
+	//if (txFrame.fnCode > MAX_FN_CODE || !com.SendByte(txFrame.fnCode))  //send function code
+	//	return false;
+	//txFrame.dataLength = DATA_LENGTH[txFrame.fnCode][DIRECTION_SEND];
+	//if (!com.SendByte(txFrame.dataLength))  //send data length
+	//	return false;
+	//if (!com.SendBytes(txFrame.data, txFrame.dataLength)) //send data;
+	//	return false;
+	//txFrame.CreateCheckCode();
+	//if (!com.SendByte(txFrame.checkSum))    //send check code
+	//	return false;
+	txFrame.data[0] = txFrame.devid;
+	txFrame.data[1] = txFrame.fnCode;
+	auto crc = Crc::CRC16RTU(txFrame.data, txFrame.frameLength - 2);
+	txFrame.data[txFrame.frameLength - 2] = crc & 0xff;
+	txFrame.data[txFrame.frameLength - 1] = crc >> 8;
+
+	com.SendBytes(txFrame.data, txFrame.frameLength);
 	txFrame.isUpdated = false;
 	return true;
 }
