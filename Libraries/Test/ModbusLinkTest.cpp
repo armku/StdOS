@@ -2,7 +2,7 @@
 #include "Sys.h"
 #include "BspPlatform/Interrupt.h"
 #include "Port.h"
-
+#include "Task.h"
 
 #define _MODBUSLINKEST_CPP
 #ifdef _MODBUSLINKEST_CPP
@@ -10,15 +10,16 @@
 USART usart222(USART2, 115200);
 ModbusSlaveLink modbusSlave(usart222);
 OutputPort p485dr(PC2);
+uint32_t taskrcvid = 1000;
 void ModbusSlaveLinkRoutin(void* param)
 {
 	static int i = 0;
-	
+
 	/*if (modbusSlave.com.RxSize() > 0)
 	{
-		uint8_t ch = 0;
-		modbusSlave.com.GetByte(ch);
-		debug_printf("rcv:%02x\n",ch );
+	uint8_t ch = 0;
+	modbusSlave.com.GetByte(ch);
+	debug_printf("rcv:%02x\n",ch );
 	}
 	return;*/
 	if (modbusSlave.CheckFrame())
@@ -39,8 +40,11 @@ void ModbusSlaveLinkRoutin(void* param)
 			modbusSlave.txFrame.isUpdated = true;
 			p485dr = 0;//发送模式
 			modbusSlave.Send();
-			p485dr = 1;//接收模式
-			modbusSlave.rxFrame.RemoveOneFrame();
+			debug_printf("task rcvid:%d\n", taskrcvid);
+			if (Task::Get(taskrcvid) != NULL)
+			{
+				Task::Get(taskrcvid)->Set(true, 10);
+			}
 			break;
 		default:
 			break;
@@ -54,11 +58,21 @@ void ModbusSlaveLinkRoutin(void* param)
 	}
 }
 
+
+void ModbusSlaveLinkRoutinRcv(void * param)
+{
+	p485dr = 1;//接收模式
+	debug_printf("into rcv mode\n");
+	Task::Current().Set(false);
+	taskrcvid = Task::Current().ID;
+	debug_printf("cur task id:%d\n", taskrcvid);
+}
 void ModbusSlaveLinkTestInit()
 {
 	p485dr.Open();
 	p485dr = 1;//接收模式
-	Sys.AddTask(ModbusSlaveLinkRoutin,0,0,1,"ModbusSlaveLinkRoutin");
+	Sys.AddTask(ModbusSlaveLinkRoutin, 0, 0, 1, "ModbusSlaveLinkRoutin");
+	Sys.AddTask(ModbusSlaveLinkRoutinRcv, 0, 0, 1, "ModbusSlaveLinkRoutinRcv");
 }
 
 #endif
