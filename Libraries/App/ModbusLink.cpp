@@ -1,4 +1,5 @@
 #include "ModbusLink.h"
+#include "Buffer.h"
 
 ModbusSlaveLink::ModbusSlaveLink(USART &uart) :com(uart)
 {
@@ -7,14 +8,24 @@ ModbusSlaveLink::ModbusSlaveLink(USART &uart) :com(uart)
 
 bool ModbusSlaveLink::CheckFrame()
 {
-	uint8_t buf485[20];
-	if (com.RxSize() > 0)
+	int rxlen = com.RxSize();
+
+	if (com.GetBytes(&rxFrame.data[rxFrame.dataLength], rxlen))
 	{
-		int len = com.RxSize();
-		com.GetBytes(buf485, len);
-		//pCOM2->ClearRxBuf();
-		com.SendBytes(buf485, len);
+		rxFrame.dataLength += rxlen;		
+	}
+
+	if (rxFrame.dataLength >= 8)
+	{	
+		auto crc11 = Crc::CRC16RTU(rxFrame.data, rxFrame.dataLength - 2);
+		debug_printf("crc cal:%04X\n", crc11);
+
+		//com.SendBytes(buf485, len);
 		debug_printf("rcb one frame\n");
+		Buffer bf(rxFrame.data, txFrame.dataLength);
+		bf.ShowHex(true);
+		debug_printf("datalen:%d crc:%04X \n",rxFrame.dataLength,rxFrame.checkSum);
+		return rxFrame.VerifyCheckCode();
 	}
 	//return com.CheckFrame(rxFrame);
 	return true;

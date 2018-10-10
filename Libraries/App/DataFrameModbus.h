@@ -4,7 +4,7 @@
 #ifndef _DATAFRAMEMODBUS_H
 #define _DATAFRAMEMODBUS_H
 
-#define MAX_FRAME_DATA_LENGTH 50
+#define MAX_FRAME_DATA_LENGTH 200
 
 struct DataFrameModbus
 {
@@ -27,10 +27,10 @@ public:
 	bool VerifyCheckCode()
 	{
 		auto crcnew = Crc::CRC16RTU(data, dataLength-2);
-		uint16_t crc = data[dataLength-2];
-		crc <<= 8;
-		crc |= data[dataLength - 1];
-		if (crcnew == crc)
+		this->checkSum = data[dataLength-1];
+		this->checkSum <<= 8;
+		this->checkSum |= data[dataLength - 2];
+		if (crcnew == this->checkSum)
 			return true;
 		else
 			return false;
