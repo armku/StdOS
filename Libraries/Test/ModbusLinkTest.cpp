@@ -14,7 +14,22 @@ void ModbusSlaveLinkRoutin(void* param)
 {
 	static int i = 0;
 	debug_printf("hello:%d\n", i++);
-	modbusSlave.CheckFrame()?debug_printf("frame ok\n"): debug_printf("frame error\n");
+	if (modbusSlave.CheckFrame())
+	{
+		switch (modbusSlave.rxFrame.fnCode)
+		{
+		case 3:
+			modbusSlave.rxFrame.RemoveOneFrame();
+			break;
+		default:
+			break;
+		}
+		debug_printf("frame ok\n");
+	}
+	else
+	{
+		debug_printf("frame error\n");
+	}
 }
 
 void ModbusSlaveLinkTestInit()

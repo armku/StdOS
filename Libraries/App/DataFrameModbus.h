@@ -42,6 +42,7 @@ public:
 			this->data[i] = this->data[i + frameLength];
 		}
 		dataLength -= frameLength;
+		this->frameLength = 0;
 		return true;
 	}
 	bool CheckFrame()
