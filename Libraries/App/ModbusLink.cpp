@@ -16,10 +16,11 @@ bool ModbusSlaveLink::CheckFrame()
 	}
 	rxFrame.CheckFrame();
 	debug_printf("devid:%d fnCode:%d regAddr:%d reglen:%d\n", rxFrame.devid, rxFrame.fnCode, rxFrame.regAddr, rxFrame.regLength);
-	/*auto crc11 = Crc::CRC16RTU(rxFrame.data, rxFrame.dataLength - 2);
-	debug_printf("crc cal:%04X\n", crc11);*/
-	debug_printf("rcb one frame\n");
-	debug_printf("datalen:%d crc:%04X \n", rxFrame.dataLength, rxFrame.checkSum);
+	if (rxFrame.frameLength > 3)
+	{
+		auto crc11 = Crc::CRC16RTU(rxFrame.data, rxFrame.frameLength - 2);
+		debug_printf("crc cal:%04X rcv:%04X\n", crc11, rxFrame.checkSum);
+	}
 	Buffer bf(rxFrame.data, rxFrame.dataLength);
 	bf.ShowHex(true);
 	//com.SendBytes(buf485, len);
