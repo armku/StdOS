@@ -30,19 +30,20 @@ bool DataFrameModbus::CheckFrame()
 		this->regLength <<= 8;
 		this->regLength |= this->data[5];
 
+
 		debug_printf("devid:%d fnCode:%d regAddr:%d reglen:%d\n", this->devid, this->fnCode, this->regAddr, this->regLength);
-		int needlen = 8;
+		this->frameLength = 8;
 		switch (this->fnCode)
 		{
 		case 0x0F://多个写 0 区输出继电器(指令代码: 0X0F) 
 		case 0x10://多个写 4 区输出寄存器(指令代码: 0X10) 
-			needlen = data[6] + needlen;
+			frameLength = data[6] + frameLength;
 			break;
 		default:
 			break;
 		}
 		//需要的长度不够，直接返回
-		if (needlen > this->dataLength)
+		if (frameLength > this->dataLength)
 			return false;
 
 		auto crc11 = Crc::CRC16RTU(data, dataLength - 2);
