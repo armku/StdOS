@@ -1,6 +1,7 @@
 #include "App/ModbusLink.h"
 #include "Sys.h"
 #include "BspPlatform/Interrupt.h"
+#include "Port.h"
 
 
 #define _MODBUSLINKEST_CPP
@@ -8,11 +9,18 @@
 
 USART usart222(USART2, 115200);
 ModbusSlaveLink modbusSlave(usart222);
-
+OutputPort p485dr(PC2);
 void ModbusSlaveLinkRoutin(void* param)
 {
 	static int i = 0;
 	
+	if (modbusSlave.com.RxSize() > 0)
+	{
+		uint8_t ch = 0;
+		modbusSlave.com.GetByte(ch);
+		debug_printf("rcv:%02x\n",ch );
+	}
+	return;
 	if (modbusSlave.CheckFrame())
 	{
 		switch (modbusSlave.rxFrame.fnCode)
@@ -46,6 +54,8 @@ void ModbusSlaveLinkRoutin(void* param)
 
 void ModbusSlaveLinkTestInit()
 {
+	p485dr.Open();
+	p485dr = 1;//接收模式
 	Sys.AddTask(ModbusSlaveLinkRoutin,0,0,1,"ModbusSlaveLinkRoutin");
 }
 
