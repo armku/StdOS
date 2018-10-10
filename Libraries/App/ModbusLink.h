@@ -9,8 +9,8 @@
 class ModbusSlaveLink
 {
 public:
-	DataFrame txFrame;
-	DataFrame rxFrame;
+	DataFrameModbus txFrame;
+	DataFrameModbus rxFrame;
 	USART &com;
 public:
 	ModbusSlaveLink(USART &uart);
