@@ -7,7 +7,15 @@ ModbusSlaveLink::ModbusSlaveLink(USART &uart) :com(uart)
 
 bool ModbusSlaveLink::CheckFrame()
 {
-
+	uint8_t buf485[20];
+	if (com.RxSize() > 0)
+	{
+		int len = com.RxSize();
+		com.GetBytes(buf485, len);
+		//pCOM2->ClearRxBuf();
+		com.SendBytes(buf485, len);
+		debug_printf("rcb one frame\n");
+	}
 	//return com.CheckFrame(rxFrame);
 	return true;
 }
