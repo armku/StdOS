@@ -19,6 +19,15 @@ void ModbusSlaveLinkRoutin(void* param)
 		switch (modbusSlave.rxFrame.fnCode)
 		{
 		case 3:
+			modbusSlave.txFrame.devid = modbusSlave.rxFrame.devid;
+			modbusSlave.txFrame.fnCode = modbusSlave.rxFrame.fnCode;
+			modbusSlave.txFrame.regAddr = modbusSlave.rxFrame.regAddr;
+			modbusSlave.txFrame.regLength = modbusSlave.rxFrame.regLength;
+			modbusSlave.txFrame.SetReg(0, 10);
+			modbusSlave.txFrame.SetReg(1, 20);
+			modbusSlave.txFrame.SetRegLen(10);
+			modbusSlave.txFrame.isUpdated = true;
+			modbusSlave.Send();
 			modbusSlave.rxFrame.RemoveOneFrame();
 			break;
 		default:

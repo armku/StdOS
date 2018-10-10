@@ -33,6 +33,18 @@ public:
 		else
 			return false;
 	}
+	//设置传输寄存器值，地址从0开始编码
+	void SetReg(uint8_t regaddr, uint16_t val)
+	{
+		this->data[3 + regaddr] = val & 0xff;
+		this->data[3 + regaddr + 1] = val >> 8;
+	}
+	void SetRegLen(uint8_t len)
+	{
+		this->data[2] = len;
+		this->frameLength = 5 + len;
+		this->dataLength = this->frameLength;
+	}
 	bool RemoveOneFrame()
 	{
 		if (frameLength<0 || frameLength>dataLength)
