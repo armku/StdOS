@@ -14,6 +14,15 @@ bool ModbusSlaveLink::CheckFrame()
 	{
 		rxFrame.dataLength += rxlen;		
 	}
+	rxFrame.CheckFrame();
+	debug_printf("devid:%d fnCode:%d regAddr:%d reglen:%d\n", rxFrame.devid, rxFrame.fnCode, rxFrame.regAddr, rxFrame.regLength);
+	/*auto crc11 = Crc::CRC16RTU(rxFrame.data, rxFrame.dataLength - 2);
+	debug_printf("crc cal:%04X\n", crc11);*/
+	debug_printf("rcb one frame\n");
+	debug_printf("datalen:%d crc:%04X \n", rxFrame.dataLength, rxFrame.checkSum);
+	Buffer bf(rxFrame.data, rxFrame.dataLength);
+	bf.ShowHex(true);
+	//com.SendBytes(buf485, len);
 
 	return rxFrame.CheckFrame();
 }
@@ -30,7 +39,6 @@ bool DataFrameModbus::CheckFrame()
 		this->regLength <<= 8;
 		this->regLength |= this->data[5];
 				
-		debug_printf("devid:%d fnCode:%d regAddr:%d reglen:%d\n", this->devid, this->fnCode, this->regAddr, this->regLength);
 		this->frameLength = 8;
 		switch (this->fnCode)
 		{
@@ -63,15 +71,7 @@ bool DataFrameModbus::CheckFrame()
 		this->checkSum = this->data[this->frameLength-1];
 		this->checkSum <<= 8;
 		this->checkSum |= this->data[this->frameLength - 2];
-
-		auto crc11 = Crc::CRC16RTU(data, dataLength - 2);
-		debug_printf("crc cal:%04X\n", crc11);
-
-		//com.SendBytes(buf485, len);
-		debug_printf("rcb one frame\n");
-		Buffer bf(data, dataLength);
-		bf.ShowHex(true);
-		debug_printf("datalen:%d crc:%04X \n", dataLength, checkSum);
+				
 		if (this->VerifyCheckCode())
 		{
 			return true;
