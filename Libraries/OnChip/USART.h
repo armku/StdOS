@@ -81,6 +81,18 @@ public:
 	USART& operator<<(int val);
 	USART& operator<<(double val);
 	USART& operator<<(const char* pStr);
+	static int SendTimeMs(int baudrate, int buflen)
+	{
+		if (baudrate < 100)
+			return 1;
+		return buflen * 8 * 1000 / baudrate + 1;
+	}
+	int SendTimeMs(int buflen)
+	{
+		if (this->mBaudrate < 100)
+			return 1;
+		return buflen * 8 * 1000 / this->mBaudrate + 1;
+	}
 
 #ifdef USE_USART_DMA
 private:

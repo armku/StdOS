@@ -6,7 +6,7 @@
 
 #define _MODBUSLINKEST_CPP
 #ifdef _MODBUSLINKEST_CPP
-
+//²âÊÔ 01 03 00 00 00 0A C5 CD
 USART usart222(USART2, 115200);
 ModbusSlaveLink modbusSlave(usart222);
 OutputPort p485dr(PC2);
@@ -14,14 +14,7 @@ uint32_t taskrcvid = 1000;
 void ModbusSlaveLinkRoutin(void* param)
 {
 	static int i = 0;
-
-	/*if (modbusSlave.com.RxSize() > 0)
-	{
-	uint8_t ch = 0;
-	modbusSlave.com.GetByte(ch);
-	debug_printf("rcv:%02x\n",ch );
-	}
-	return;*/
+		
 	if (modbusSlave.CheckFrame())
 	{
 		switch (modbusSlave.rxFrame.fnCode)
@@ -38,12 +31,13 @@ void ModbusSlaveLinkRoutin(void* param)
 				modbusSlave.txFrame.SetReg(i, i);
 			modbusSlave.txFrame.SetRegLen(10);
 			modbusSlave.txFrame.isUpdated = true;
+			int needsendms = modbusSlave.com.SendTimeMs(modbusSlave.txFrame.frameLength);
 			p485dr = 0;//·¢ËÍÄ£Ê½
 			modbusSlave.Send();
-			debug_printf("task rcvid:%d\n", taskrcvid);
+			debug_printf("task rcvid:%d send need:%dms\n", taskrcvid, needsendms);
 			if (Task::Get(taskrcvid) != NULL)
 			{
-				Task::Get(taskrcvid)->Set(true, 10);
+				Task::Get(taskrcvid)->Set(true, needsendms);
 			}
 			break;
 		default:
