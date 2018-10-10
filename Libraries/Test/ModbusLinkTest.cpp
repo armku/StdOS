@@ -14,13 +14,13 @@ void ModbusSlaveLinkRoutin(void* param)
 {
 	static int i = 0;
 	
-	if (modbusSlave.com.RxSize() > 0)
+	/*if (modbusSlave.com.RxSize() > 0)
 	{
 		uint8_t ch = 0;
 		modbusSlave.com.GetByte(ch);
 		debug_printf("rcv:%02x\n",ch );
 	}
-	return;
+	return;*/
 	if (modbusSlave.CheckFrame())
 	{
 		switch (modbusSlave.rxFrame.fnCode)
@@ -37,7 +37,9 @@ void ModbusSlaveLinkRoutin(void* param)
 				modbusSlave.txFrame.SetReg(i, i);
 			modbusSlave.txFrame.SetRegLen(10);
 			modbusSlave.txFrame.isUpdated = true;
+			p485dr = 0;//发送模式
 			modbusSlave.Send();
+			p485dr = 1;//接收模式
 			modbusSlave.rxFrame.RemoveOneFrame();
 			break;
 		default:
