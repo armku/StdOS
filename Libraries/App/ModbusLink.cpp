@@ -26,64 +26,6 @@ bool ModbusSlaveLink::CheckFrame()
 
 	return rxFrame.CheckFrame();
 }
-bool DataFrameModbus::CheckFrame()
-{
-	if (dataLength >= 8)
-	{
-		this->devid = this->data[0];
-		this->fnCode = this->data[1];
-		this->regAddr = this->data[2];
-		this->regAddr <<= 8;
-		this->regAddr |= this->data[3];
-		this->regLength = this->data[4];
-		this->regLength <<= 8;
-		this->regLength |= this->data[5];
-				
-		this->frameLength = 8;
-		switch (this->fnCode)
-		{
-		case 0X02:
-		case 0X01:
-		case 0X05:
-		case 0X04:
-		case 0X03:
-		case 0X06:
-			frameLength = 8;
-			break;
-		case 0x0F://多个写 0 区输出继电器(指令代码: 0X0F) 
-		case 0x10://多个写 4 区输出寄存器(指令代码: 0X10) 
-			frameLength = data[6] + frameLength;
-			break;
-		default:
-			frameLength = 0;
-			break;
-		}
-		if (frameLength == 0)
-		{
-			//非法指令，直接清空缓冲区
-			frameLength = this->dataLength;
-			this->RemoveOneFrame();
-			return false;
-		}
-		//需要的长度不够，直接返回
-		if (frameLength > this->dataLength)
-			return false;
-		this->checkSum = this->data[this->frameLength-1];
-		this->checkSum <<= 8;
-		this->checkSum |= this->data[this->frameLength - 2];
-				
-		if (this->VerifyCheckCode())
-		{
-			return true;
-		}
-		else
-		{
-			this->RemoveOneFrame();
-			return false;
-		}
-	}
-	return false;
-}
 
 bool ModbusSlaveLink::Send()
 {
