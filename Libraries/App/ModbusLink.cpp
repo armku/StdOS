@@ -58,7 +58,7 @@ bool DataFrameModbus::CheckFrame()
 		Buffer bf(data, dataLength);
 		bf.ShowHex(true);
 		debug_printf("datalen:%d crc:%04X \n", dataLength, checkSum);
-		if (this->CheckFrame())
+		if (this->VerifyCheckCode())
 		{
 			return true;
 		}
