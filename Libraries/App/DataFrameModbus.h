@@ -28,9 +28,6 @@ public:
 	bool VerifyCheckCode()
 	{
 		auto crcnew = Crc::CRC16RTU(data, dataLength-2);
-		this->checkSum = data[dataLength-1];
-		this->checkSum <<= 8;
-		this->checkSum |= data[dataLength - 2];
 		if (crcnew == this->checkSum)
 			return true;
 		else

@@ -29,6 +29,7 @@ bool DataFrameModbus::CheckFrame()
 		this->regLength = this->data[4];
 		this->regLength <<= 8;
 		this->regLength |= this->data[5];
+		
 
 
 		debug_printf("devid:%d fnCode:%d regAddr:%d reglen:%d\n", this->devid, this->fnCode, this->regAddr, this->regLength);
@@ -45,6 +46,9 @@ bool DataFrameModbus::CheckFrame()
 		//需要的长度不够，直接返回
 		if (frameLength > this->dataLength)
 			return false;
+		this->checkSum = this->data[this->frameLength-1];
+		this->checkSum <<= 8;
+		this->checkSum |= this->data[this->frameLength - 2];
 
 		auto crc11 = Crc::CRC16RTU(data, dataLength - 2);
 		debug_printf("crc cal:%04X\n", crc11);
@@ -54,9 +58,16 @@ bool DataFrameModbus::CheckFrame()
 		Buffer bf(data, dataLength);
 		bf.ShowHex(true);
 		debug_printf("datalen:%d crc:%04X \n", dataLength, checkSum);
-		return VerifyCheckCode();
+		if (this->CheckFrame())
+		{
+			return true;
+		}
+		else
+		{
+			this->RemoveOneFrame();
+			return false;
+		}
 	}
-	//return com.CheckFrame(rxFrame);
 	return false;
 }
 
