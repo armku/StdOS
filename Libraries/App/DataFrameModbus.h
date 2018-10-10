@@ -29,7 +29,7 @@ public:
 		auto crcnew = Crc::CRC16RTU(data, dataLength-2);
 		uint16_t crc = data[dataLength-2];
 		crc <<= 8;
-		crc |= data[dataLength - 2];
+		crc |= data[dataLength - 1];
 		if (crcnew == crc)
 			return true;
 		else
