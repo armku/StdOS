@@ -4,7 +4,7 @@
 #ifndef _DATAFRAMEMODBUS_H
 #define _DATAFRAMEMODBUS_H
 
-#define MAX_FRAME_DATA_LENGTH 200
+#define MAX_FRAMEMODBUS_DATA_LENGTH 200
 
 struct DataFrameModbus
 {
@@ -14,7 +14,7 @@ public:
 	uint8_t dataLength;
 	uint16_t regAddr;
 	uint16_t regLength;
-	uint8_t data[MAX_FRAME_DATA_LENGTH];
+	uint8_t data[MAX_FRAMEMODBUS_DATA_LENGTH];
 	bool isUpdated;
 	uint16_t checkSum;
 	int frameLength;//当前数据帧长度
