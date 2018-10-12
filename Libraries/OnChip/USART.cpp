@@ -153,6 +153,7 @@ void USART::InitUSART()
 	USART_Cmd(mUSARTx, ENABLE);
 
 	USART_ITConfig(mUSARTx, USART_IT_RXNE, ENABLE);
+	USART_ITConfig(mUSARTx, USART_IT_TC, ENABLE);
 
 #ifndef USE_USART_DMA	
 	USART_ITConfig(mUSARTx, USART_IT_TC, DISABLE);
@@ -378,7 +379,14 @@ void USART::IRQ()
 			mRxOverflow++;
 		}
 	}
-
+	if (USART_GetITStatus(mUSARTx, USART_IT_TC) != RESET) 
+	{
+		//USART_ClearITPendingBit(mUSARTx, USART_IT_TC);    //Clear
+		if (RS485 && mTxBuf.Size() == 0)
+		{
+			*RS485 = 1;//进入接收模式
+		}
+	}
 #ifndef USE_USART_DMA 
 	uint8_t data = 0;
 	if (USART_GetITStatus(mUSARTx, USART_IT_TXE) != RESET || USART_GetITStatus(mUSARTx, USART_IT_TC) != RESET)   //TxE and TC

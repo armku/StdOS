@@ -4,7 +4,7 @@
 #include "stm32f10x.h"
 #include "FIFOBuffer.h"
 #include "Configuration.h"
-
+#include "Port.h"
 
 /**
 *@addtogroup USART_CONFIGURATION
@@ -87,7 +87,7 @@ public:
 			return 1;
 		return buflen * 8 * 1000 / this->mBaudrate + 1;
 	}
-
+	OutputPort* RS485;
 #ifdef USE_USART_DMA
 private:
 	uint8_t                   mDMAIRQn;
