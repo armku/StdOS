@@ -445,11 +445,6 @@
           <GroupName>Util</GroupName>
           <Files>
             <File>
-              <FileName>CheckSum.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Util\CheckSum.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Util\Util.cpp</FilePath>
@@ -1491,11 +1486,6 @@
         <Group>
           <GroupName>Util</GroupName>
           <Files>
-            <File>
-              <FileName>CheckSum.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Util\CheckSum.cpp</FilePath>
-            </File>
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
