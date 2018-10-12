@@ -10,7 +10,6 @@
 USART usart222(USART2, 115200);
 ModbusSlaveLink modbusSlave(usart222);
 OutputPort p485dr(PC2);
-uint32_t taskrcvid = 1000;
 void ModbusSlaveLinkRoutin(void* param)
 {
 	static int i = 0;
@@ -31,14 +30,7 @@ void ModbusSlaveLinkRoutin(void* param)
 				modbusSlave.txFrame.SetReg(i, i);
 			modbusSlave.txFrame.SetRegLen(10);
 			modbusSlave.txFrame.isUpdated = true;
-			int needsendms = modbusSlave.com.SendTimeMs(modbusSlave.txFrame.frameLength);
-			p485dr = 0;//发送模式
 			modbusSlave.Send();
-			debug_printf("task rcvid:%d send need:%dms\n", taskrcvid, needsendms);
-			if (Task::Get(taskrcvid) != NULL)
-			{
-				Task::Get(taskrcvid)->Set(true, needsendms);
-			}
 			break;
 		default:
 			break;
@@ -52,21 +44,12 @@ void ModbusSlaveLinkRoutin(void* param)
 	}
 }
 
-
-void ModbusSlaveLinkRoutinRcv(void * param)
-{
-	p485dr = 1;//接收模式
-	debug_printf("into rcv mode\n");
-	Task::Current().Set(false);
-	taskrcvid = Task::Current().ID;
-	debug_printf("cur task id:%d\n", taskrcvid);
-}
 void ModbusSlaveLinkTestInit()
 {
 	p485dr.Open();
 	p485dr = 1;//接收模式
+	modbusSlave.com.RS485 = &p485dr;
 	Sys.AddTask(ModbusSlaveLinkRoutin, 0, 0, 1, "ModbusSlaveLinkRoutin");
-	Sys.AddTask(ModbusSlaveLinkRoutinRcv, 0, 0, 1, "ModbusSlaveLinkRoutinRcv");
 }
 
 #endif
