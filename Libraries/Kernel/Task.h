@@ -11,25 +11,25 @@ class Task
 public:
 	TaskScheduler* Host;
 
-	uint32_t	ID;			// 编号 4
+	uint32_t	ID;			// 编号
 	cstring	Name;		// 名称
 
-	Action	Callback;	// 回调 4
+	Action	Callback;	// 回调
 	void*	Param;		// 参数
 
-	int		Period;		// 周期ms 5
-	uint64_t	NextTime;	// 下一次执行时间ms 3
+	int		Period;		// 周期ms
+	uint64_t	NextTime;	// 下一次执行时间ms
 
-	int		Times;		// 执行次数 8
-	int		SleepTime;	// 当前睡眠时间us 9
-	int		Cost;		// 平均执行时间us 10
-	int		CostMs;		// 平均执行时间ms 11
-	int		MaxCost;	// 最大执行时间us 12
+	int		Times;		// 执行次数
+	int		SleepTime;	// 当前睡眠时间us
+	int		Cost;		// 平均执行时间us
+	int		CostMs;		// 平均执行时间ms
+	int		MaxCost;	// 最大执行时间us
 
-	bool	Enable;		// 是否启用 52
-	bool	Event;		// 是否只执行一次后暂停的事件型任务 53
-	uint8_t	Deepth;		// 当前深度 54
-	uint8_t	MaxDeepth;	// 最大深度。默认1层，不允许重入 55
+	bool	Enable;		// 是否启用
+	bool	Event;		// 是否只执行一次后暂停的事件型任务
+	uint8_t	Deepth;		// 当前深度
+	uint8_t	MaxDeepth;	// 最大深度。默认1层，不允许重入
 
 	Task();
 	Task(const Task& task)	= delete;
@@ -63,7 +63,7 @@ private:
 	friend class Task;
 
 public:
-	cstring	Name;	// 系统名称 4
+	cstring	Name;	// 系统名称
 	int		Count;		// 任务个数
 	Task*	Current;	// 正在执行的任务
 	bool	Running;	// 是否正在运行
@@ -71,9 +71,9 @@ public:
 	uint8_t	Deepth;		// 当前深度
 	uint8_t	MaxDeepth;	// 最大深度。默认5层
 
-	int		Times;		// 执行次数 14
+	int		Times;		// 执行次数
 	int		Cost;		// 平均执行时间us
-	uint64_t	TotalSleep;	// 所有任务的总睡眠时间ms 12
+	uint64_t	TotalSleep;	// 所有任务的总睡眠时间ms
 	uint64_t	LastTrace;	// 最后统计跟踪时间ms
 
 	typedef void (*SAction)(int ms);

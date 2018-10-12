@@ -40,11 +40,11 @@ public:
     void*& operator[](int i);
 	
 private:
-	void**	_Arr;			//	8
-	int		_Count;//12
-	int		_Capacity;//16      
+	void**	_Arr;			
+	int		_Count;
+	int		_Capacity;
 
-	void*	Arr[0x04];//20
+	void*	Arr[0x04];
 
 	void Init();
 	bool CheckCapacity(int count);
