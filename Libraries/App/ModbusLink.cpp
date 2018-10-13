@@ -43,8 +43,6 @@ bool ModbusSlaveLink::Send()
 	auto crc = Crc::CRC16RTU(txFrame.data, txFrame.frameLength - 2);
 	txFrame.data[txFrame.frameLength - 2] = crc & 0xff;
 	txFrame.data[txFrame.frameLength - 1] = crc >> 8;
-	if (com.RS485)
-		*com.RS485 = 0;//发送模式
 	com.SendBytes(txFrame.data, txFrame.frameLength);
 	txFrame.isUpdated = false;
 	rxFrame.RemoveOneFrame();//移除处理完的接收数据帧

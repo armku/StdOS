@@ -163,6 +163,9 @@ void USART::InitUSART()
 
 bool USART::SendBytes(uint8_t txData[], uint16_t size)
 {
+	if (RS485)
+		*RS485 = 0;//发送模式
+
 	if (mTxBuf.ResSize() < size)      //compare the unused bytes and sending bytes
 	{
 		mTxOverflow += size;         //flash Tx overflow bytes
@@ -254,6 +257,9 @@ void USART::SetBaudRate(uint32_t baudRate)
 
 bool USART::SendByte(uint8_t data)
 {
+	if (RS485)
+		*RS485 = 0;//发送模式
+
 	if (mTxBuf.Put(data))
 		return true;
 	mTxOverflow++;
