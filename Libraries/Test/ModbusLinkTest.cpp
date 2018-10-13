@@ -9,7 +9,7 @@
 //测试 01 03 00 00 00 0A C5 CD
 USART usart222(USART2, 115200);
 ModbusSlaveLink modbusSlave(usart222);
-OutputPort p485dr(PC2);
+OutputPort p485dr;
 void ModbusSlaveLinkRoutin(void* param)
 {
 	static int i = 0;
@@ -46,6 +46,9 @@ void ModbusSlaveLinkRoutin(void* param)
 
 void ModbusSlaveLinkTestInit()
 {
+	p485dr.Set(PC2);
+	p485dr.Invert=false;
+	p485dr.OpenDrain=false;
 	p485dr.Open();
 	p485dr = 1;//接收模式
 	modbusSlave.com.RS485 = &p485dr;
