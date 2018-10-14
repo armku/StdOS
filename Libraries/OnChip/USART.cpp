@@ -16,6 +16,8 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 	mPrecision = 3;
 	mTxOverflow = 0;
 	mRxOverflow = 0;
+	RxCnt = 0;
+	TxCnt = 0;
 
 	if (mUSARTx == USART1)
 	{
@@ -198,6 +200,7 @@ bool USART::SendBytes(uint8_t txData[], uint16_t size)
 	mTxBuf.Get(data);                              //get one byte data from tx buffer
 	USART_SendData(mUSARTx, data);                  //send one byte data
 #endif	
+	TxCnt += size;
 	return true;
 }
 
@@ -263,15 +266,29 @@ bool USART::SendByte(uint8_t data)
 	if (mTxBuf.Put(data))
 		return true;
 	mTxOverflow++;
+	TxCnt++;
 	return false;
 }
 bool USART::GetBytes(uint8_t data[], uint16_t num)
 {
-	return mRxBuf.Gets(data, num);
+	bool ret = false;
+	ret = mRxBuf.Gets(data, num);
+	if (ret && num)
+	{
+		LastRcvTime = Sys.Ms();
+		RxCnt += num;
+	}
+	return ret;
 }
 bool USART::GetByte(uint8_t &data)
 {
-	return mRxBuf.Get(data);
+	bool ret = mRxBuf.Get(data);
+	if (ret)
+	{
+		LastRcvTime = Sys.Ms();
+		RxCnt++;
+	}
+	return ret;
 }
 
 
