@@ -4,7 +4,7 @@
 #ifndef _DATAFRAMEMODBUS_H
 #define _DATAFRAMEMODBUS_H
 
-#define MAX_FRAMEMODBUS_DATA_LENGTH 200
+#define MAX_FRAMEMODBUS_DATA_LENGTH 400
 
 struct DataFrameModbus
 {
@@ -18,11 +18,13 @@ public:
 	bool isUpdated;
 	uint16_t checkSum;
 	int frameLength;//当前数据帧长度
+	int Cnt;//数据帧数量
 
 public:
 	DataFrameModbus()                 //constructor
 	{
 		isUpdated = false;
+		Cnt = 0;
 	}
 
 	bool VerifyCheckCode()
