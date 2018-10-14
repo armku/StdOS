@@ -20,7 +20,7 @@ private:
 public:
 	uint8_t id; //本机ID
 	void DealFrame(); //处理数据帧
-	void(*DUpdateReg)(uint16_t regaddr); //更新参数
+	void(*DUpdateReg)(uint16_t regaddr,uint16_t reglen); //更新参数
 };
 
 extern uint16_t RegInputu16[]; //输入寄存器
