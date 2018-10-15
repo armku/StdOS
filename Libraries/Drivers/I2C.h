@@ -22,6 +22,7 @@ public:
 
 	virtual void WriteByte(uint8_t dat);
 	virtual uint8_t ReadByte();
+	virtual uint8_t ReadByte(bool ack);
 	virtual void Ack(bool ack = true);
 	virtual bool WaitAck(int retry=0);
 
