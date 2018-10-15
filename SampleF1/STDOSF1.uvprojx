@@ -824,6 +824,11 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\W5500.cpp</FilePath>
             </File>
+            <File>
+              <FileName>MCP3421.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\MCP3421.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1043,6 +1048,11 @@
               <FileName>ModbusLinkTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\ModbusLinkTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MCP3421Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\MCP3421Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1866,6 +1876,11 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\W5500.cpp</FilePath>
             </File>
+            <File>
+              <FileName>MCP3421.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\MCP3421.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2085,6 +2100,11 @@
               <FileName>ModbusLinkTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\ModbusLinkTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MCP3421Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Test\MCP3421Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
