@@ -37,7 +37,7 @@ union
 
 bitconvert; //数据转换用   
 //设置浮点数
-void SetBufFloat(uint8_t buf[], uint16_t pos, float da, uint8_t type)
+void SetBufFloat(uint8_t buf[], float da, uint16_t pos, uint8_t type)
 {
     bitconvert.dafloat = da;
     switch (type)
