@@ -73,8 +73,6 @@ public:
 	//cstring GetString(uint8_t kind = 'F', char* str = nullptr);
 private:
 	void Init();
-	//Buffer ToArray();
-	//const Buffer ToArray() const;
 };
 
 #endif
