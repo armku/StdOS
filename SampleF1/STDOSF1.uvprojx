@@ -445,7 +445,7 @@
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Util\Util.cpp</FilePath>
+              <FilePath>..\Libraries\Util\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1465,7 +1465,7 @@
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Util\Util.cpp</FilePath>
+              <FilePath>..\Libraries\Util\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
