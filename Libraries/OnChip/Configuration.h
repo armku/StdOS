@@ -135,7 +135,6 @@
 #include <stdint.h>
 #include "Platform\Pin.h"
 #include "Port.h"
-#include "Core\Queue.h"
 
 typedef enum
 {

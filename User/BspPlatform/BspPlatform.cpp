@@ -1,6 +1,5 @@
 #include "BspPlatform.h"
 #include "Sys.h"
-#include "Core\Queue.h"
 #include "Port.h"
 #include "Platform\stm32.h"
 #include "OnChip\Configuration.h"
