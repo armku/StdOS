@@ -104,8 +104,7 @@ int RX8025T::RegRead(uint8_t sadd, uint8_t len)
     }
 	for(int i=0;i<len;i++)
 	{
-		this->buf[sadd+i] = this->IIC.ReadByte();	
-		this->IIC.Ack(i!=len-1?true:false);
+		this->buf[sadd+i] = this->IIC.ReadByte(i!=len-1?true:false);
 	}
     
     this->IIC.Stop();

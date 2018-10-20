@@ -21,10 +21,8 @@ int CNPA::Read()
     {
         return  - 1;
     }
-    buf1 = this->pi2c.ReadByte();
-	this->pi2c.Ack();
-    buf2 = this->pi2c.ReadByte();
-	this->pi2c.Ack(false);
+    buf1 = this->pi2c.ReadByte(true);
+    buf2 = this->pi2c.ReadByte(false);
     this->pi2c.Stop();
     buf = (buf1 << 8) | buf2;
     return buf;

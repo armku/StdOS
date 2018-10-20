@@ -56,13 +56,10 @@ uint8_t PCF8563::readaddr(uint8_t add)
 
 	/* 第9步：循环读取数据 */
 
-	ret = this->IIC.ReadByte(); /* 读1个字节 */
+	ret = this->IIC.ReadByte(false); /* 读1个字节 */
+	/* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
 
-
-	this->IIC.Ack(false); /* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
-
-
-						  /* 发送I2C总线停止信号 */
+	/* 发送I2C总线停止信号 */
 	this->IIC.Stop();
 	return ret; /* 执行成功 */
 
