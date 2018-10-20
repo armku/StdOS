@@ -5,8 +5,6 @@ Port::Port()
 {
 	this->_Pin = P0;
 	this->Opened = false;
-	this->Index = 0;
-	this->State = NULL;
 }
 
 /*

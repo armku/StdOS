@@ -14,8 +14,6 @@ Port::Open
 Port::Close
 	#Port::OnClose
 */
-
-
 /******************************** Port ********************************/
 
 // 端口基类
@@ -26,8 +24,6 @@ class Port
 public:	
     Pin		_Pin;		// 引脚  
 	bool	Opened;		// 是否已经打开
-	uint8_t    Index;		// 引脚自身次序编号，用于区分多引脚次序
-	void*	State;		// 用户状态数据
 
 	Port();
 
