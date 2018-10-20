@@ -174,10 +174,9 @@ uint8_t AT24CXX::Read(uint16_t address)
 		goto cmd_Readbytefail; /* EEPROM器件无应答 */
 	}
 	/* 第9步：循环读取数据 */
-	ret = this->IIC.ReadByte(); /* 读1个字节 */
-	
-	this->IIC.Ack(false); /* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
-	
+	ret = this->IIC.ReadByte(false); /* 读1个字节 */	
+	/* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
+
 	/* 发送I2C总线停止信号 */
 	this->IIC.Stop();
 	return ret; /* 执行成功 */
@@ -309,17 +308,8 @@ int AT24CXX::PageRead(uint16_t addr, void * buf, int len)
 	/* 第9步：循环读取数据 */
 	for (int i = 0; i < len; i++)
 	{
-		((uint8_t*)buf)[i] = this->IIC.ReadByte(); /* 读1个字节 */
-
-									  /* 每读完1个字节后，需要发送Ack， 最后一个字节不需要Ack，发Nack */
-		if (i != len - 1)
-		{
-			this->IIC.Ack(true); /* 中间字节读完后，CPU产生ACK信号(驱动SDA = 0) */
-		}
-		else
-		{
-			this->IIC.Ack(false); /* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
-		}
+		((uint8_t*)buf)[i] = this->IIC.ReadByte((i != len - 1) ? true : false); /* 读1个字节 */
+		/* 每读完1个字节后，需要发送Ack， 最后一个字节不需要Ack，发Nack */		
 	}
 	/* 发送I2C总线停止信号 */
 	this->IIC.Stop();
