@@ -44,9 +44,7 @@ IList &IList::operator = (IList && list)
 void IList::Add(void *item)
 {
 	this->CheckCapacity(this->_Count+1);
-	int pos=this->_Count;
-	this->_Count++;
-	this->_Arr[pos]=item;
+	this->_Arr[this->_Count++]=item;
 }
 
 // 添加多个元素
