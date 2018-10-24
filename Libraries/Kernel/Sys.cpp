@@ -47,6 +47,7 @@ TSys::TSys()
 // 初始化系统
 void TSys::Init()
 {
+	Sys.GlobalDisable();
 	Time.Init();
 }
 
@@ -204,6 +205,7 @@ void TSys::Start()
 {
 	//this->=debug_printf;
 	this->Started = true;
+	Sys.GlobalEnable();	
 	Task::Scheduler()->Start();
 }
 
@@ -450,16 +452,36 @@ void TSys::Reset()const
 {
 	NVIC_SystemReset();
 }
+extern "C"
+{
+	//关闭所有中断
+	void INTX_DISABLE(void)
+	{
+		__ASM volatile("cpsid i");
+	}
+	//开启所有中断
+	void INTX_ENABLE(void)
+	{
+		__ASM volatile("cpsie i");
+	}
+	//设置栈顶地址
+	//addr:栈顶地址
+	__asm void MSR_MSP(u32 addr)
+	{
+		MSR MSP, r0 			//set Main Stack value
+			BX r14
+	}
+}
 // 打开全局中断
 void TSys::GlobalEnable()
 {
-	__ASM volatile("cpsie i");
+	INTX_ENABLE();
 }
 
 // 关闭全局中断
 void TSys::GlobalDisable()
 {
-	__ASM volatile("cpsid i");
+	INTX_DISABLE();
 }
 void assert_failed(uint8_t *file, uint32_t line, char *errstr)
 {

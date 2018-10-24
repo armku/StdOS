@@ -285,29 +285,4 @@ void TTime::Init()
 			for (int j = 0; j < 40; j++);
 		}
 #endif
-	}
-
-
-#ifdef __cplusplus
-	extern "C"
-	{
-#endif 
-
-		//以下为汇编函数
-		//THUMB指令不支持汇编内联
-		//采用如下方法实现执行汇编指令WFI  
-		void WFI_SET(void)
-		{
-			__ASM volatile("wfi");
-		}
-
-		//设置栈顶地址
-		//addr:栈顶地址
-		__asm void MSR_MSP(uint32_t addr)
-		{
-			MSR MSP, r0  //set Main Stack value
-				BX r14
-		}
-#ifdef __cplusplus
-	}
-#endif
+	}   
