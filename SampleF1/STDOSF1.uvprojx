@@ -993,11 +993,6 @@
               <FilePath>..\Libraries\Drivers\GPS_ATGM332D\GPS_ATGM332D.cpp</FilePath>
             </File>
             <File>
-              <FileName>GPS_S1216.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\GPS_S1216\GPS_S1216.cpp</FilePath>
-            </File>
-            <File>
               <FileName>MCP3421Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\MCP3421\MCP3421Test.cpp</FilePath>
@@ -1026,11 +1021,6 @@
               <FileName>RX8025TTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\RX8025T\RX8025TTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SSD1106.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\SSD1106\SSD1106.cpp</FilePath>
             </File>
             <File>
               <FileName>SSD1309Test.cpp</FileName>
@@ -2043,11 +2033,6 @@
               <FilePath>..\Libraries\Drivers\GPS_ATGM332D\GPS_ATGM332D.cpp</FilePath>
             </File>
             <File>
-              <FileName>GPS_S1216.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\GPS_S1216\GPS_S1216.cpp</FilePath>
-            </File>
-            <File>
               <FileName>MCP3421Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\MCP3421\MCP3421Test.cpp</FilePath>
@@ -2076,11 +2061,6 @@
               <FileName>RX8025TTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\RX8025T\RX8025TTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SSD1106.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\SSD1106\SSD1106.cpp</FilePath>
             </File>
             <File>
               <FileName>SSD1309Test.cpp</FileName>
