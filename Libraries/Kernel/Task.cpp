@@ -233,14 +233,6 @@ void Task::Init()
     this->MaxDeepth = 1;
 }
 
-//bool Task::operator == (Task &tsk)
-//{
-//    if (tsk.ID == this->ID)
-//    {
-//        return true;
-//    }
-//    return false;
-//}
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 void ShowTime(void *param); //显示时间
@@ -518,11 +510,4 @@ void TaskScheduler::ShowStatus()
             task->ShowStatus();
         }
     }
-    //debug_printf("\r\n\r\n %lld--%lld \r\n\r\n",Sys.Ms(),Sys.Ms()-curms);
-}
-
-// 查找任务 返回使用此函数的首个任务的ID
-uint32_t TaskScheduler::FindID(Action func)
-{
-    return 0;
 }
