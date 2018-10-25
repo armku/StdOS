@@ -11,13 +11,7 @@ public:
     IComparer	Comparer;	// 比较器
 
 	IList();
-    IList(const IList& list);
-    IList(IList&& list);
-	virtual ~IList();
-
-	IList& operator=(const IList& list);
-	IList& operator=(IList&& list);
-
+   	
 	inline int Count()	const { return _Count; }
 
 	// 添加单个元素
@@ -40,7 +34,7 @@ public:
     void*& operator[](int i);
 	
 private:
-	void**	_Arr;			
+	void**	_Arr;
 	int		_Count;
 	int		_Capacity;
 
@@ -48,7 +42,6 @@ private:
 
 	void Init();
 	bool CheckCapacity(int count);
-	void move(IList& list);
 };
 
 template<typename T>

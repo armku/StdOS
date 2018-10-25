@@ -8,38 +8,7 @@ IList::IList()
 	this->_Arr=(void**)&off_328;
 	this->Init();
 }
-IList::IList(const IList &list)
-{
-	this->_Arr=(void**)&off_328;
-	this->Init();
-	*this=list;
-}
-IList::IList(IList && list)
-{
-	this->_Arr=(void**)&off_328;
-	this->Init();
-	this->move(list);
-}
-IList::~IList()
-{
-	delete((void *)this->_Arr);
-}
-IList &IList::operator = (const IList &list)
-{
-	if(this!=&list)
-	{
-		
-	}
-	return *this;
-}
-IList &IList::operator = (IList && list)
-{
-	if(this!=&list)
-	{
-		this->move(list);
-	}
-	return *this;
-}
+
 // 添加单个元素
 void IList::Add(void *item)
 {
@@ -165,9 +134,4 @@ bool IList::CheckCapacity(int count)
 			return false;
 		}
 	}
-}
-
-void IList::move(IList &list)
-{
-    return ;
 }
