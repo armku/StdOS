@@ -827,6 +827,16 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\DriversCom\SHARP_PM2_5.cpp</FilePath>
             </File>
+            <File>
+              <FileName>esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\esp8266.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Socket_esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\Socket_esp8266.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1856,6 +1866,16 @@
               <FileName>SHARP_PM2_5.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\DriversCom\SHARP_PM2_5.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\esp8266.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Socket_esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\Socket_esp8266.cpp</FilePath>
             </File>
           </Files>
         </Group>
