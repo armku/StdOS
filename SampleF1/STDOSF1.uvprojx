@@ -698,11 +698,6 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>AD7124.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AD7124.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\AD7689.cpp</FilePath>
@@ -807,6 +802,11 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\MCP3421.cpp</FilePath>
             </File>
+            <File>
+              <FileName>AD7124.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\AD7124\AD7124.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -906,11 +906,6 @@
               <FileName>AD1246Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\AD1246Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7124Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\AD7124Test.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7689Test.cpp</FileName>
@@ -1041,6 +1036,11 @@
               <FileName>MCP3421Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\MCP3421Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7124Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\AD7124\AD7124Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1738,11 +1738,6 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>AD7124.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AD7124.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\AD7689.cpp</FilePath>
@@ -1847,6 +1842,11 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\MCP3421.cpp</FilePath>
             </File>
+            <File>
+              <FileName>AD7124.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\AD7124\AD7124.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1946,11 +1946,6 @@
               <FileName>AD1246Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\AD1246Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7124Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\AD7124Test.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7689Test.cpp</FileName>
@@ -2081,6 +2076,11 @@
               <FileName>MCP3421Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\MCP3421Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7124Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\AD7124\AD7124Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
