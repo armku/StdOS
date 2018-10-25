@@ -822,6 +822,11 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\DriversCom\ModbusLink.cpp</FilePath>
             </File>
+            <File>
+              <FileName>SHARP_PM2_5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\SHARP_PM2_5.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1846,6 +1851,11 @@
               <FileName>ModbusLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\DriversCom\ModbusLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SHARP_PM2_5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\SHARP_PM2_5.cpp</FilePath>
             </File>
           </Files>
         </Group>
