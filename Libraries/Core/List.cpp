@@ -10,7 +10,6 @@ IList::IList()
 // 添加单个元素
 void IList::Add(void *item)
 {
-	this->CheckCapacity(this->_Count+1);
 	this->_Arr[this->_Count++]=item;
 }
 
@@ -19,7 +18,6 @@ void IList::Add(void **items, int count)
 {
    if ( items && count )
    {
-	   this->CheckCapacity(this->_Count+count);
 	   while(true)
 	   {
 		   if(count==0)
@@ -78,46 +76,6 @@ void *IList::operator[](int i)const
 
 void IList::Init()
 {
-	this->_Arr=this->Arr;	
-    this->_Count=0;
+	this->_Count=0;
 	this->_Capacity=4;
-}
-
-bool IList::CheckCapacity(int count)
-{
-	int i;
-	if(this->_Arr&&this->_Capacity>=count)
-	{
-		return true;
-	}
-	else
-	{
-		for(i=16;i<count;i*=2);
-		void* parrnew=operator new[](4 * i);
-		if(parrnew)
-		{
-			if(this->_Count>0 &&this->_Arr)
-			{
-#if 0
-				Buffer *buf=new Buffer(parrnew,4*i);
-				buf->Copy(0,this->_Arr,4*this->_Count);
-#else
-				memcpy(parrnew,this->_Arr,4*this->_Count);
-#endif
-			}
-			if(this->_Arr)
-			{
-				if(this->_Arr!=this->Arr)
-					 operator delete[](this->_Arr);
-			}
-			this->_Arr=(void**)parrnew;
-			this->_Capacity=i;			
-			
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
 }
