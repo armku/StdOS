@@ -77,18 +77,6 @@ void *IList::operator[](int i)const
 		return nullptr;
 	}
 }
-void * &IList::operator[](int i)
-{
-	if(i>=0&&this->_Count>i)
-	{
-		return this->_Arr[i];
-	}
-	else
-	{
-		//此处代码需要整理
-		return this->_Arr[0];;
-	}
-}
 
 void IList::Init()
 {

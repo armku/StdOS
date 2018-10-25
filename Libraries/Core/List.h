@@ -31,7 +31,6 @@ public:
 	
     // 重载索引运算符[]，返回指定元素的第一个
     void* operator[](int i) const;
-    void*& operator[](int i);
 	
 private:
 	void**	_Arr;
@@ -62,7 +61,6 @@ public:
 
     // 重载索引运算符[]，返回指定元素的第一个
     T operator[](int i) const	{ return (T)IList::operator[](i); }
-    T& operator[](int i)		{ return (T&)IList::operator[](i); }
 };
 
 #endif
