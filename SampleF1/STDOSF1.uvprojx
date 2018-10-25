@@ -810,27 +810,27 @@
             <File>
               <FileName>DemoLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\DemoLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\ModbusLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SHARP_PM2_5.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\SHARP_PM2_5.cpp</FilePath>
+              <FilePath>..\Libraries\DriversCom\DemoLink\DemoLink.cpp</FilePath>
             </File>
             <File>
               <FileName>esp8266.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\esp8266.cpp</FilePath>
+              <FilePath>..\Libraries\DriversCom\esp8266\esp8266.cpp</FilePath>
             </File>
             <File>
               <FileName>Socket_esp8266.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\Socket_esp8266.cpp</FilePath>
+              <FilePath>..\Libraries\DriversCom\esp8266\Socket_esp8266.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SHARP_PM2_5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1700,27 +1700,27 @@
             <File>
               <FileName>DemoLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\DemoLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\ModbusLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SHARP_PM2_5.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\SHARP_PM2_5.cpp</FilePath>
+              <FilePath>..\Libraries\DriversCom\DemoLink\DemoLink.cpp</FilePath>
             </File>
             <File>
               <FileName>esp8266.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\esp8266.cpp</FilePath>
+              <FilePath>..\Libraries\DriversCom\esp8266\esp8266.cpp</FilePath>
             </File>
             <File>
               <FileName>Socket_esp8266.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\Socket_esp8266.cpp</FilePath>
+              <FilePath>..\Libraries\DriversCom\esp8266\Socket_esp8266.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SHARP_PM2_5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
             </File>
           </Files>
         </Group>

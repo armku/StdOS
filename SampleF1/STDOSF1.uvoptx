@@ -1535,7 +1535,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Libraries\DriversCom\DemoLink.cpp</PathWithFileName>
+      <PathWithFileName>..\Libraries\DriversCom\DemoLink\DemoLink.cpp</PathWithFileName>
       <FilenameWithoutPath>DemoLink.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1547,8 +1547,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Libraries\DriversCom\ModbusLink.cpp</PathWithFileName>
-      <FilenameWithoutPath>ModbusLink.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\DriversCom\esp8266\esp8266.cpp</PathWithFileName>
+      <FilenameWithoutPath>esp8266.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1559,8 +1559,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Libraries\DriversCom\SHARP_PM2_5.cpp</PathWithFileName>
-      <FilenameWithoutPath>SHARP_PM2_5.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\DriversCom\esp8266\Socket_esp8266.cpp</PathWithFileName>
+      <FilenameWithoutPath>Socket_esp8266.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1571,8 +1571,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Libraries\DriversCom\esp8266.cpp</PathWithFileName>
-      <FilenameWithoutPath>esp8266.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\DriversCom\ModbusLink\ModbusLink.cpp</PathWithFileName>
+      <FilenameWithoutPath>ModbusLink.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1583,8 +1583,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Libraries\DriversCom\Socket_esp8266.cpp</PathWithFileName>
-      <FilenameWithoutPath>Socket_esp8266.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Libraries\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</PathWithFileName>
+      <FilenameWithoutPath>SHARP_PM2_5.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
