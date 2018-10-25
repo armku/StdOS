@@ -410,12 +410,6 @@ Task *TaskScheduler::operator[](int taskid)
     return NULL;
 }
 
-// 查找任务 返回使用此函数的首个任务
-Task *TaskScheduler::FindTask(Action func)
-{
-    return NULL;
-}
-
 // 跳过最近一次睡眠，马上开始下一轮循环
 void TaskScheduler::SkipSleep(){}
 // 使用外部缓冲区初始化任务列表，避免频繁的堆分配
@@ -427,7 +421,6 @@ uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
     if (this->Deepth < MaxDeepth)
     {
         this->Deepth++;
-		//debug_printf("ExecuteForWait:ID:%d,Name:%s,need time:%dms\n",this->Current->ID,this->Current->Name,msMax);
 		auto tskcur=this->Current;
 		tskcur->Deepth++;
         auto msBegin = Sys.Ms();
@@ -456,7 +449,6 @@ uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
         ret = false;
     }
 	Task::Scheduler()->Current = tskcur;
-	//debug_printf("Task:%d实际执行时间:%dms\n", this->Current->ID, ret);
     return ret;
 }
 
@@ -478,7 +470,6 @@ void TaskScheduler::ShowStatus()
 
     runCounts++;
     auto curms = Sys.Ms();
-    //debug_printf("\r\n\r\n %lld \r\n\r\n",curms);
     //统计运行时间
     RunTimes = 0;
     RunTimesAvg = 0;
@@ -501,7 +492,6 @@ void TaskScheduler::ShowStatus()
         debug_printf("平均 %3.0fus ", RunTimesAvg / this->Count);
     }
     debug_printf("启动 %02lld:%02lld:%02lld.%03lld 堆 %u/%u\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000, &(buf[0]) - 0X20000000, 1024);
-    //debug_printf("\r\n\r\n %lld--%lld \r\n\r\n",Sys.Ms(),Sys.Ms()-curms);
     for (int i = 0; i < this->Count; i++)
     {
         auto task = this->_Tasks[i];
