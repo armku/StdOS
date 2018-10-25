@@ -76,5 +76,5 @@ void *IList::operator[](int i)const
 void IList::Init()
 {
 	this->_Count=0;
-	this->_Capacity=4;
+	this->_Capacity = ArrayLength(this->_tmpbuf);
 }
