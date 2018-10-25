@@ -1,5 +1,5 @@
 #include "Sys.h"
-#include "Drivers/MCP3421.h"
+#include "MCP3421.h"
 
 #define _MCP3421TEST_CPP
 #ifdef _MCP3421TEST_CPP

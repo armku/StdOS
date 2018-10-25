@@ -1,5 +1,5 @@
-#include "Drivers\SSD1309.h"
-#include "Drivers\SSD1106.h"
+#include "SSD1309.h"
+#include "../SSD1106/SSD1106.h"
 #include "Bsp\font.h"
 
 #define _SSD1309_TEST_CPP

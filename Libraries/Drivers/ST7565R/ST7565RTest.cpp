@@ -1,4 +1,4 @@
-#include "Drivers\ST7565R.h"
+#include "ST7565R.h"
 
 //#define _ST7565R_TEST_CPP
 

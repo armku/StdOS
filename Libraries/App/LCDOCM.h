@@ -1,6 +1,6 @@
 #ifndef _LCDOCM_H
 #define _LCDOCM_H
-#include "Drivers\OCM240128.h"
+#include "Drivers\OCM240128\OCM240128.h"
 class LCDOCM :public OCM240128
 {
 public:

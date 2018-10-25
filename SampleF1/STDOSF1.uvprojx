@@ -698,114 +698,109 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>AD7689.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AD7689.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1232.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ADS1232.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1246.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ADS1246.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AT24CXX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AT24CXX.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AT45DB.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AT45DB.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DS18B20.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\DS18B20.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DS1302.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\DS1302.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GPS_ATGM332D.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\GPS_ATGM332D.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GPS_S1216.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\GPS_S1216.cpp</FilePath>
-            </File>
-            <File>
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\I2C.cpp</FilePath>
             </File>
             <File>
-              <FileName>NPA.cpp</FileName>
+              <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\NPA.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\AD7689\AD7689.cpp</FilePath>
             </File>
             <File>
-              <FileName>NRF24L01.cpp</FileName>
+              <FileName>ADS1232.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\NRF24L01.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\ADS1232\ADS1232.cpp</FilePath>
             </File>
             <File>
-              <FileName>OCM240128.cpp</FileName>
+              <FileName>ADS1246.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\OCM240128.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\ADS1246\ADS1246.cpp</FilePath>
             </File>
             <File>
-              <FileName>PCF8563.cpp</FileName>
+              <FileName>AT24CXX.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\PCF8563.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\AT24CXX\AT24CXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>RX8025T.cpp</FileName>
+              <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\RX8025T.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\AT45DB\AT45DB.cpp</FilePath>
             </File>
             <File>
-              <FileName>SSD1106.cpp</FileName>
+              <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\SSD1106.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\DS18B20\DS18B20.cpp</FilePath>
             </File>
             <File>
-              <FileName>SSD1309.cpp</FileName>
+              <FileName>DS1302.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\SSD1309.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\DS1302\DS1302.cpp</FilePath>
             </File>
             <File>
-              <FileName>ST7565R.cpp</FileName>
+              <FileName>GPS_ATGM332D.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ST7565R.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\GPS_ATGM332D\GPS_ATGM332D.cpp</FilePath>
             </File>
             <File>
-              <FileName>W25QXXX.cpp</FileName>
+              <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\W25QXXX.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W5500.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\W5500.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\GPS_S1216\GPS_S1216.cpp</FilePath>
             </File>
             <File>
               <FileName>MCP3421.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\MCP3421.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\MCP3421\MCP3421.cpp</FilePath>
             </File>
             <File>
-              <FileName>AD7124.cpp</FileName>
+              <FileName>NPA.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AD7124\AD7124.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\NPA\NPA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NRF24L01.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\NRF24L01\NRF24L01.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OCM240128.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\OCM240128\OCM240128.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RX8025T.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\RX8025T\RX8025T.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1106.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\SSD1106\SSD1106.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1309.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\SSD1309\SSD1309.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7565R.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\ST7565R\ST7565R.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\W25QXXX\W25QXXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W5500.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\W5500\W5500.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PCF8563.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\PCF8563\PCF8563.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -903,36 +898,6 @@
           <GroupName>Test</GroupName>
           <Files>
             <File>
-              <FileName>AD1246Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\AD1246Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7689Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\AD7689Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1232Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\ADS1232Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AT24CXXTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\AT24CXXTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DS18B20Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\DS18B20Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DS1302Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\DS1302Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>lcd_drTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\lcd_drTest.cpp</FilePath>
@@ -943,34 +908,9 @@
               <FilePath>..\Libraries\Test\LedTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>NPATest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\NPATest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NRF24L01Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\NRF24L01Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>OCM240128Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\OCM240128Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PCF8563Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\PCF8563Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PwmSoloTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\PwmSoloTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RX8025TTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\RX8025TTest.cpp</FilePath>
             </File>
             <File>
               <FileName>SerialPort485Test.cpp</FileName>
@@ -978,29 +918,9 @@
               <FilePath>..\Libraries\Test\SerialPort485Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>SSD1309Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\SSD1309Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ST7565RTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\ST7565RTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>TaskTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\TaskTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W25QXXXTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\W25QXXXTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W5500Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\W5500Test.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDogTest.cpp</FileName>
@@ -1033,14 +953,104 @@
               <FilePath>..\Libraries\Test\ModbusLinkTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>MCP3421Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\MCP3421Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD7124Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\AD7124\AD7124Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7689Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\AD7689\AD7689Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ADS1232Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\ADS1232\ADS1232Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD1246Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\ADS1246\AD1246Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT24CXXTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\AT24CXX\AT24CXXTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS18B20Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\DS18B20\DS18B20Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS1302Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\DS1302\DS1302Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS_ATGM332D.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\GPS_ATGM332D\GPS_ATGM332D.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS_S1216.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\GPS_S1216\GPS_S1216.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MCP3421Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\MCP3421\MCP3421Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NPATest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\NPA\NPATest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NRF24L01Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\NRF24L01\NRF24L01Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OCM240128Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\OCM240128\OCM240128Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PCF8563Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\PCF8563\PCF8563Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RX8025TTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\RX8025T\RX8025TTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1106.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\SSD1106\SSD1106.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1309Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\SSD1309\SSD1309Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7565RTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\ST7565R\ST7565RTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXXTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\W25QXXX\W25QXXXTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W5500Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\W5500\W5500Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1738,114 +1748,109 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>AD7689.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AD7689.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1232.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ADS1232.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1246.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ADS1246.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AT24CXX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AT24CXX.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AT45DB.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AT45DB.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DS18B20.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\DS18B20.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DS1302.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\DS1302.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GPS_ATGM332D.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\GPS_ATGM332D.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GPS_S1216.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\GPS_S1216.cpp</FilePath>
-            </File>
-            <File>
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\I2C.cpp</FilePath>
             </File>
             <File>
-              <FileName>NPA.cpp</FileName>
+              <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\NPA.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\AD7689\AD7689.cpp</FilePath>
             </File>
             <File>
-              <FileName>NRF24L01.cpp</FileName>
+              <FileName>ADS1232.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\NRF24L01.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\ADS1232\ADS1232.cpp</FilePath>
             </File>
             <File>
-              <FileName>OCM240128.cpp</FileName>
+              <FileName>ADS1246.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\OCM240128.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\ADS1246\ADS1246.cpp</FilePath>
             </File>
             <File>
-              <FileName>PCF8563.cpp</FileName>
+              <FileName>AT24CXX.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\PCF8563.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\AT24CXX\AT24CXX.cpp</FilePath>
             </File>
             <File>
-              <FileName>RX8025T.cpp</FileName>
+              <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\RX8025T.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\AT45DB\AT45DB.cpp</FilePath>
             </File>
             <File>
-              <FileName>SSD1106.cpp</FileName>
+              <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\SSD1106.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\DS18B20\DS18B20.cpp</FilePath>
             </File>
             <File>
-              <FileName>SSD1309.cpp</FileName>
+              <FileName>DS1302.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\SSD1309.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\DS1302\DS1302.cpp</FilePath>
             </File>
             <File>
-              <FileName>ST7565R.cpp</FileName>
+              <FileName>GPS_ATGM332D.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ST7565R.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\GPS_ATGM332D\GPS_ATGM332D.cpp</FilePath>
             </File>
             <File>
-              <FileName>W25QXXX.cpp</FileName>
+              <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\W25QXXX.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W5500.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\W5500.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\GPS_S1216\GPS_S1216.cpp</FilePath>
             </File>
             <File>
               <FileName>MCP3421.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\MCP3421.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\MCP3421\MCP3421.cpp</FilePath>
             </File>
             <File>
-              <FileName>AD7124.cpp</FileName>
+              <FileName>NPA.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AD7124\AD7124.cpp</FilePath>
+              <FilePath>..\Libraries\Drivers\NPA\NPA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NRF24L01.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\NRF24L01\NRF24L01.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OCM240128.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\OCM240128\OCM240128.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RX8025T.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\RX8025T\RX8025T.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1106.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\SSD1106\SSD1106.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1309.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\SSD1309\SSD1309.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7565R.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\ST7565R\ST7565R.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\W25QXXX\W25QXXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W5500.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\W5500\W5500.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PCF8563.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\PCF8563\PCF8563.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1943,36 +1948,6 @@
           <GroupName>Test</GroupName>
           <Files>
             <File>
-              <FileName>AD1246Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\AD1246Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7689Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\AD7689Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1232Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\ADS1232Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AT24CXXTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\AT24CXXTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DS18B20Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\DS18B20Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DS1302Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\DS1302Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>lcd_drTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\lcd_drTest.cpp</FilePath>
@@ -1983,34 +1958,9 @@
               <FilePath>..\Libraries\Test\LedTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>NPATest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\NPATest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NRF24L01Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\NRF24L01Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>OCM240128Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\OCM240128Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PCF8563Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\PCF8563Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PwmSoloTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\PwmSoloTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RX8025TTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\RX8025TTest.cpp</FilePath>
             </File>
             <File>
               <FileName>SerialPort485Test.cpp</FileName>
@@ -2018,29 +1968,9 @@
               <FilePath>..\Libraries\Test\SerialPort485Test.cpp</FilePath>
             </File>
             <File>
-              <FileName>SSD1309Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\SSD1309Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ST7565RTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\ST7565RTest.cpp</FilePath>
-            </File>
-            <File>
               <FileName>TaskTest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Test\TaskTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W25QXXXTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\W25QXXXTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W5500Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\W5500Test.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDogTest.cpp</FileName>
@@ -2073,14 +2003,104 @@
               <FilePath>..\Libraries\Test\ModbusLinkTest.cpp</FilePath>
             </File>
             <File>
-              <FileName>MCP3421Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\MCP3421Test.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD7124Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\AD7124\AD7124Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7689Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\AD7689\AD7689Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ADS1232Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\ADS1232\ADS1232Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD1246Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\ADS1246\AD1246Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT24CXXTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\AT24CXX\AT24CXXTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS18B20Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\DS18B20\DS18B20Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS1302Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\DS1302\DS1302Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS_ATGM332D.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\GPS_ATGM332D\GPS_ATGM332D.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPS_S1216.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\GPS_S1216\GPS_S1216.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MCP3421Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\MCP3421\MCP3421Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NPATest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\NPA\NPATest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NRF24L01Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\NRF24L01\NRF24L01Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OCM240128Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\OCM240128\OCM240128Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PCF8563Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\PCF8563\PCF8563Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RX8025TTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\RX8025T\RX8025TTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1106.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\SSD1106\SSD1106.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1309Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\SSD1309\SSD1309Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7565RTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\ST7565R\ST7565RTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXXTest.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\W25QXXX\W25QXXXTest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W5500Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\Drivers\W5500\W5500Test.cpp</FilePath>
             </File>
           </Files>
         </Group>

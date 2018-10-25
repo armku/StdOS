@@ -1,7 +1,7 @@
 #ifndef _NPA_H
 #define _NPA_H
 
-    #include "I2C.h"
+    #include "../I2C.h"
 
     class CNPA
     {

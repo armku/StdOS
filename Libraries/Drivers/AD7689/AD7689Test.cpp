@@ -1,4 +1,4 @@
-#include "Drivers\AD7689.h"
+#include "AD7689.h"
 
 //#define _AD7689_TEST_CPP
 #ifdef _AD7689_TEST_CPP

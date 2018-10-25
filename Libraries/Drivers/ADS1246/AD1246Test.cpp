@@ -1,4 +1,4 @@
-#include "Drivers\ADS1246.h"
+#include "ADS1246.h"
 
 //#define _ADS1246_TEST_CPP
 

@@ -2,7 +2,7 @@
 #define _RX8025T_H
 
 #include "Kernel\Sys.h"
-#include "I2C.h"
+#include "../I2C.h"
 
 class RX8025T
 {
