@@ -38,7 +38,8 @@ private:
 	int		_Capacity;
 
 	void*	Arr[0x04];
-
+	char tmpbuf[4 * 30];
+private:
 	void Init();
 	bool CheckCapacity(int count);
 };

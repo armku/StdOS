@@ -1,11 +1,9 @@
 #include <string.h>
 #include "List.h"
 
-static char off_328[4*30];
-
 IList::IList()
 {
-	this->_Arr=(void**)&off_328;
+	this->_Arr=(void**)&tmpbuf;
 	this->Init();
 }
 
