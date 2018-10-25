@@ -1,5 +1,5 @@
-#ifndef _GPS_H
-#define _GPS_H
+#ifndef _GPS_S1216_H
+#define _GPS_S1216_H
 
 #include "Buffer.h"
 //GPS NMEA-0183协议重要参数结构体定义 
