@@ -1,6 +1,8 @@
 #include "Task.h"
 #include "TTime.h"
 
+TaskScheduler *_Scheduler;
+
 Task::Task()
 {
     this->Init();
@@ -144,7 +146,6 @@ void Task::ShowStatus()
     debug_printf(" %s\n", this->Enable ? " " : "禁用");
 }
 
-TaskScheduler *_Scheduler;
 // 全局任务调度器
 TaskScheduler *Task::Scheduler()
 {
@@ -235,8 +236,6 @@ void Task::Init()
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
-void ShowTime(void *param); //显示时间
-
 TaskScheduler::TaskScheduler(cstring name)
 {
     this->Name = name;
@@ -450,13 +449,6 @@ uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
     }
 	Task::Scheduler()->Current = tskcur;
     return ret;
-}
-
-//显示时间
-void ShowTime(void *param)
-{
-    auto curms = Time.Milliseconds;
-    debug_printf("Time: %02lld:%02lld:%02lld.%03lld\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000);
 }
 
 // 显示状态
