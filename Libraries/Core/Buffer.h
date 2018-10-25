@@ -10,8 +10,8 @@ public:
 	Buffer(void* ptr, int len);
 	
 protected:
-    char*	_Arr;		// 数据指针 string(4) string(2)
-	int		_Length;	// 长度 string(8)
+    char*	_Arr;		// 数据指针
+	int		_Length;	// 长度
 
 public:
 	virtual void Show(bool newLine = false) const;
