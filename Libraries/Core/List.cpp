@@ -1,5 +1,6 @@
-#include <string.h>
+//#include <string.h>
 #include "List.h"
+#include "Sys.h"
 
 IList::IList()
 {
@@ -9,7 +10,14 @@ IList::IList()
 // 添加单个元素
 void IList::Add(void *item)
 {
-	this->_tmpbuf[this->_Count++]=(uint32_t)item;
+	if (this->_Count < this->_Capacity)
+	{
+		this->_tmpbuf[this->_Count++] = (uint32_t)item;
+	}
+	else
+	{
+		debug_printf("列表容量不够 %d，请增加\n",this->_Capacity);
+	}
 }
 
 // 添加多个元素
