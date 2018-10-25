@@ -33,7 +33,6 @@ public:
     void* operator[](int i) const;
 	
 private:
-	void**	_Arr;
 	int		_Count;
 	int		_Capacity;
 

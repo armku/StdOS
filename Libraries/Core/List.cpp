@@ -3,14 +3,13 @@
 
 IList::IList()
 {
-	this->_Arr=(void**)&_tmpbuf;
 	this->Init();
 }
 
 // 添加单个元素
 void IList::Add(void *item)
 {
-	this->_Arr[this->_Count++]=item;
+	this->_tmpbuf[this->_Count++]=(uint32_t)item;
 }
 
 // 添加多个元素
@@ -25,7 +24,7 @@ void IList::Add(void **items, int count)
 		   count--;
 		   int pos=this->_Count;
 		   this->_Count++;
-		   this->_Arr[pos]=items;
+		   this->_tmpbuf[pos]=(uint32_t)items;
 		   items++;
 	   }
    }
@@ -51,9 +50,9 @@ int IList::FindIndex(const void *item)const
 {
     for (int i = 0; this->_Count > i; ++i)
     {
-        if ((const void*)(this->_Arr[i]) == item)
+        if ((const void*)(this->_tmpbuf[i]) == item)
             return i;
-        if (this->Comparer(this->_Arr[i], item))
+        if (this->Comparer((void*)this->_tmpbuf[i], item))
         {
             return i;
         }
@@ -66,7 +65,7 @@ void *IList::operator[](int i)const
 {
 	if(i>=0&&this->_Count>i)
 	{
-		return this->_Arr[i];
+		return (void *)(this->_tmpbuf[i]);
 	}
 	else
 	{
