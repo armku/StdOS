@@ -1,7 +1,7 @@
-#include "App\DemoLink.h"
+#include "DriversCom/DemoLink.h"
 #include "Sys.h"
 #include "USART.h"
-#include "BspPlatform\Interrupt.h"
+#include "BspPlatform/Interrupt.h"
 
 //#define _DEMOLINKTEST_H
 #ifdef _DEMOLINKTEST_H

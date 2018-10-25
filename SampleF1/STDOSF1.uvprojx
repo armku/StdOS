@@ -612,16 +612,6 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\App\PID.cpp</FilePath>
             </File>
-            <File>
-              <FileName>DemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\App\DemoLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\App\ModbusLink.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -816,6 +806,21 @@
               <FileName>MCP3421.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\MCP3421.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>DriversCom</GroupName>
+          <Files>
+            <File>
+              <FileName>DemoLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\DemoLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\ModbusLink.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1632,16 +1637,6 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\App\PID.cpp</FilePath>
             </File>
-            <File>
-              <FileName>DemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\App\DemoLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\App\ModbusLink.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1836,6 +1831,21 @@
               <FileName>MCP3421.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Drivers\MCP3421.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>DriversCom</GroupName>
+          <Files>
+            <File>
+              <FileName>DemoLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\DemoLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\ModbusLink.cpp</FilePath>
             </File>
           </Files>
         </Group>
