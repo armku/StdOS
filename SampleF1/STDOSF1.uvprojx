@@ -894,66 +894,6 @@
             </File>
           </Files>
         </Group>
-        <Group>
-          <GroupName>Test</GroupName>
-          <Files>
-            <File>
-              <FileName>lcd_drTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\lcd_drTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>LedTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\LedTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSoloTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\PwmSoloTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort485Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\SerialPort485Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TaskTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\TaskTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDogTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\WatchDogTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EXITTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\EXITTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimerTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\TimerTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>USARTTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\USARTTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DemoLinkTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\DemoLinkTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLinkTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\ModbusLinkTest.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
       </Groups>
     </Target>
     <Target>
@@ -1841,66 +1781,6 @@
               <FileName>Parity.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Security\Parity.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Test</GroupName>
-          <Files>
-            <File>
-              <FileName>lcd_drTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\lcd_drTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>LedTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\LedTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSoloTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\PwmSoloTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SerialPort485Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\SerialPort485Test.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TaskTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\TaskTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDogTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\WatchDogTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EXITTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\EXITTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimerTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\TimerTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>USARTTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\USARTTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DemoLinkTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\DemoLinkTest.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLinkTest.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Test\ModbusLinkTest.cpp</FilePath>
             </File>
           </Files>
         </Group>
