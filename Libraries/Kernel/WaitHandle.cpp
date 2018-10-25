@@ -15,8 +15,7 @@ bool WaitHandle::WaitOne(int ms)
     Task::Scheduler()->ExecuteForWait(ms, Result);
     return this->Result;
 }
-	
-//void Reset();
+
 // 设置结果
 void WaitHandle::Set()
 {
