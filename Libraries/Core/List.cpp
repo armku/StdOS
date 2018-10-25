@@ -1,4 +1,3 @@
-//#include <string.h>
 #include "List.h"
 #include "Sys.h"
 
