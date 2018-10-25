@@ -17,9 +17,6 @@ public:
 	// 添加单个元素
     void Add(void* item);
 
-	// 添加多个元素
-    void Add(void** items, int count);
-
 	// 删除指定位置元素
 	void RemoveAt(int index);
 

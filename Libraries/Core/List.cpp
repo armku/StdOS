@@ -20,24 +20,6 @@ void IList::Add(void *item)
 	}
 }
 
-// 添加多个元素
-void IList::Add(void **items, int count)
-{
-   if ( items && count )
-   {
-	   while(true)
-	   {
-		   if(count==0)
-			   break;
-		   count--;
-		   int pos=this->_Count;
-		   this->_Count++;
-		   this->_tmpbuf[pos]=(uint32_t)items;
-		   items++;
-	   }
-   }
-}
-
 // 删除指定位置元素
 void IList::RemoveAt(int index)
 {
