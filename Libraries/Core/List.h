@@ -37,7 +37,7 @@ private:
 	int		_Count;
 	int		_Capacity;
 
-	uint32_t tmpbuf[30];
+	uint32_t _tmpbuf[30];
 private:
 	void Init();
 };

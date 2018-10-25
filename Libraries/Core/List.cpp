@@ -3,7 +3,7 @@
 
 IList::IList()
 {
-	this->_Arr=(void**)&tmpbuf;
+	this->_Arr=(void**)&_tmpbuf;
 	this->Init();
 }
 
