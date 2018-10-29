@@ -31,7 +31,7 @@ extern "C"
 
 #endif
 
-class SystemConfig;
+//class SystemConfig;
 
 // 系统类
 class TSys
@@ -40,10 +40,10 @@ public:
     uint32_t	Clock;  	// 系统时钟
     uint32_t	CystalClock;// 晶振时钟
 
-	cstring	Name;		// 系统名称
-	cstring	Company;	// 系统厂商
-	uint16_t	Code;		// 产品代码
-	uint16_t	Ver;		// 系统版本
+	//cstring	Name;		// 系统名称
+	//cstring	Company;	// 系统厂商
+	//uint16_t	Code;		// 产品代码
+	//uint16_t	Ver;		// 系统版本
     uint8_t	ID[12];		// 芯片ID。
     uint16_t	DevID;		// MCU编码。低字设备版本，高字子版本
     uint16_t	RevID;		// MCU编码。低字设备版本，高字子版本
@@ -97,30 +97,30 @@ public:
 extern TSys Sys;		// 创建一个全局的Sys对象  会在main函数之前执行构造函数（！！！！！）
 
 // 系统设置
-class SystemConfig
-{
-public:
-	// 操作系统
-	uint32_t	Ver;		// 系统版本。Version格式
-	char	Name[16];	// 系统名称
-
-	// 硬件
-	uint32_t	HardVer;	// 硬件版本
-
-	// 应用软件
-	uint16_t	Code;		// 产品种类
-	uint32_t	AppVer;		// 产品版本
-	char	Company[16];// 公司
-	char	Product[16];// 产品批次
-
-	char	DevID[16];	// 设备编码
-	char	Server[32];	// 服务器。重置后先尝试厂商前端，再尝试原服务器
-	char	Token[32];	// 访问服务器的令牌
-
-	uint32_t	Expire;		// 有效期。1970以来的秒数。
-	
-	uint16_t	Checksum;	// 校验
-};
+//class SystemConfig
+//{
+//public:
+//	// 操作系统
+//	uint32_t	Ver;		// 系统版本。Version格式
+//	char	Name[16];	// 系统名称
+//
+//	// 硬件
+//	uint32_t	HardVer;	// 硬件版本
+//
+//	// 应用软件
+//	uint16_t	Code;		// 产品种类
+//	uint32_t	AppVer;		// 产品版本
+//	char	Company[16];// 公司
+//	char	Product[16];// 产品批次
+//
+//	char	DevID[16];	// 设备编码
+//	char	Server[32];	// 服务器。重置后先尝试厂商前端，再尝试原服务器
+//	char	Token[32];	// 访问服务器的令牌
+//
+//	uint32_t	Expire;		// 有效期。1970以来的秒数。
+//	
+//	uint16_t	Checksum;	// 校验
+//};
 
 #define STDOS_VERSION "0.4.2018.1024" //版本号
 

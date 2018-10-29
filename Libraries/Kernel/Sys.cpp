@@ -30,10 +30,10 @@ TSys::TSys()
 
 	//this->Config = &g_Config;
 
-	this->Name = "stdos";
-	this->Company = "armku";
-	this->Code = 0x0201;
-	this->Ver = 0x00;
+	/*this->Name = "stdos";*/
+	/*this->Company = "armku";*/
+	/*this->Code = 0x0201;*/
+	/*this->Ver = 0x00;*/
 	this->DevID = 0x00;
 	this->RevID = 0x00;
 	this->CPUID = 0x00;
@@ -429,7 +429,7 @@ void TSys::OnShowInfo()const
 		break;
 	}
 #endif
-	debug_printf("STDOS VER:%s\n", STDOS_VERSION);
+	debug_printf("VER:%s\n", STDOS_VERSION);
 	debug_printf("CPU:%s %dMHz Flash:%dk RAM:%dk\n", CPUName, this->Clock/1000/1000, this->FlashSize, this->RAMSize);
 	debug_printf("DevID:0x%04X RevID:0x%04X \n", this->DevID, this->RevID);
 	debug_printf("CPUID:%p", this->CPUID);
