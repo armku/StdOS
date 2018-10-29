@@ -56,8 +56,7 @@ void TSys::ShowInfo()const
 	this->OnShowInfo();
 	StdPrintf("ChipID:");
 	Buffer((void*)this->ID, 12).ShowHex(true);
-
-	StdPrintf("Support: http://www.armku.com\n");
+	/*StdPrintf("Support: http://www.armku.com\n");*/
 }
 
 // 系统启动后的毫秒数
