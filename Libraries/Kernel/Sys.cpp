@@ -21,7 +21,7 @@ TSys::TSys()
 	this->CystalClock = 8;
 	this->Clock = 48;
 #elif defined STM32F1
-	this->CystalClock = 8;
+	/*this->CystalClock = 8;*/
 	this->Clock = 72;
 #elif defined STM32F4
 	this->CystalClock = 8;
@@ -34,12 +34,12 @@ TSys::TSys()
 	/*this->Company = "armku";*/
 	/*this->Code = 0x0201;*/
 	/*this->Ver = 0x00;*/
-	this->DevID = 0x00;
+	/*this->DevID = 0x00;
 	this->RevID = 0x00;
-	this->CPUID = 0x00;
+	this->CPUID = 0x00;*/
 
 	this->FlashSize = 0x01;
-	this->RAMSize = 0x01;
+	/*this->RAMSize = 0x01;*/
 	this->OnInit();
 	this->Started = false;
 }
@@ -217,7 +217,7 @@ extern "C"
 	extern uint32_t __heap_limit;
 	extern uint32_t __initial_sp;
 }
-static char *CPUName;
+//static char *CPUName;
 
 void TSys::OnInit()
 {
@@ -249,16 +249,16 @@ void TSys::OnInit()
 	}
 #elif defined STM32F1
 	this->Clock = 72000000;
-	this->CystalClock = HSE_VALUE;
+	/*this->CystalClock = HSE_VALUE;*/
 	memcpy(this->ID, (void*)0x1FFFF7E8, ArrayLength(this->ID));
 
-	this->CPUID = SCB->CPUID;
+	/*this->CPUID = SCB->CPUID;*/
 	uint32_t MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
-	this->RevID = MCUID >> 16;
-	this->DevID = MCUID & 0x0FFF;
+	/*this->RevID = MCUID >> 16;
+	this->DevID = MCUID & 0x0FFF;*/
 
 	this->FlashSize = *(__IO uint16_t*)(0x1FFFF7E0); // 容量
-	switch (this->DevID)
+	/*switch (this->DevID)
 	{
 	case 0X0307:
 		CPUName = "STM32F103RD";
@@ -284,7 +284,7 @@ void TSys::OnInit()
 		CPUName = "Unknown";
 		this->RAMSize = 0;
 		break;
-	}
+	}*/
 #elif defined STM32F4
 	this->Clock = 168000000;
 	this->CystalClock = HSE_VALUE;
@@ -358,7 +358,7 @@ void TSys::OnShowInfo()const
 	HeapSize = ((uint32_t)&__heap_limit - (uint32_t)&__heap_base);
 	StackSize = ((uint32_t)&__initial_sp - (uint32_t)&__heap_limit);
 
-	switch (this->CPUID &SCB_CPUID_VARIANT_Msk)
+	/*switch (this->CPUID &SCB_CPUID_VARIANT_Msk)
 	{
 	case 0:
 		if ((this->CPUID &SCB_CPUID_REVISION_Msk) == 1)
@@ -390,7 +390,7 @@ void TSys::OnShowInfo()const
 		Px = 9;
 		Rx = 9;
 		break;
-	}
+	}*/
 #elif defined STM32F4
 	HeapSize = ((uint32_t)&__heap_limit - (uint32_t)&__heap_base);
 	StackSize = ((uint32_t)&__initial_sp - (uint32_t)&__heap_limit);
@@ -430,19 +430,20 @@ void TSys::OnShowInfo()const
 	}
 #endif
 	debug_printf("VER:%s\n", STDOS_VERSION);
-	debug_printf("CPU:%s %dMHz Flash:%dk RAM:%dk\n", CPUName, this->Clock/1000/1000, this->FlashSize, this->RAMSize);
-	debug_printf("DevID:0x%04X RevID:0x%04X \n", this->DevID, this->RevID);
-	debug_printf("CPUID:%p", this->CPUID);
-	debug_printf(" ARMv7-M");
+	//debug_printf("CPU:%s %dMHz Flash:%dk RAM:%dk\n", CPUName, this->Clock/1000/1000, this->FlashSize, this->RAMSize);
+	debug_printf("%dMHz Flash:%dk\n", this->Clock / 1000 / 1000, this->FlashSize);
+	//debug_printf("DevID:0x%04X RevID:0x%04X \n", this->DevID, this->RevID);
+	//debug_printf("CPUID:%p", this->CPUID);
+	/*debug_printf(" ARMv7-M");*/
 #if defined STM32F0
 	debug_printf(" Cortex-M%d:", 0);
 #elif defined STM32F1
-	debug_printf(" Cortex-M%d:", 3);
+	/*debug_printf(" Cortex-M%d:", 3);*/
 #elif defined STM32F4
 	debug_printf(" Cortex-M%d:", 4);
 #endif
-	debug_printf(" R%dp%d", Rx, Px);
-	debug_printf("\n");
+	/*debug_printf(" R%dp%d", Rx, Px);*/
+	/*debug_printf("\n");*/
 	debug_printf("Heap :(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize / 1024);
 	debug_printf("Stack:(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize / 1024);
 }

@@ -38,18 +38,18 @@ class TSys
 {
 public:
     uint32_t	Clock;  	// 系统时钟
-    uint32_t	CystalClock;// 晶振时钟
+    //uint32_t	CystalClock;// 晶振时钟
 
 	//cstring	Name;		// 系统名称
 	//cstring	Company;	// 系统厂商
 	//uint16_t	Code;		// 产品代码
 	//uint16_t	Ver;		// 系统版本
     uint8_t	ID[12];		// 芯片ID。
-    uint16_t	DevID;		// MCU编码。低字设备版本，高字子版本
-    uint16_t	RevID;		// MCU编码。低字设备版本，高字子版本
-    uint32_t	CPUID;		// CPUID 
+    //uint16_t	DevID;		// MCU编码。低字设备版本，高字子版本
+    //uint16_t	RevID;		// MCU编码。低字设备版本，高字子版本
+    //uint32_t	CPUID;		// CPUID 
     uint16_t	FlashSize;	// 芯片Flash容量。
-    uint16_t	RAMSize;	// 芯片RAM容量
+    //uint16_t	RAMSize;	// 芯片RAM容量
 
 	//const SystemConfig*	Config;	// 系统设置
 
