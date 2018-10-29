@@ -51,7 +51,7 @@ public:
     uint16_t	FlashSize;	// 芯片Flash容量。
     uint16_t	RAMSize;	// 芯片RAM容量
 
-	const SystemConfig*	Config;	// 系统设置
+	//const SystemConfig*	Config;	// 系统设置
 
     TSys();				// 构造函数
 

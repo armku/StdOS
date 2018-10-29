@@ -10,7 +10,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "OnChip\Configuration.h"
 #include "Core\Buffer.h"
 
-SystemConfig g_Config;//系统配置
+//SystemConfig g_Config;//系统配置
 
 TSys Sys; //系统参数
 
@@ -28,7 +28,7 @@ TSys::TSys()
 	this->Clock = 168;
 #endif 
 
-	this->Config = &g_Config;
+	//this->Config = &g_Config;
 
 	this->Name = "stdos";
 	this->Company = "armku";
