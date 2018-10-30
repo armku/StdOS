@@ -73,18 +73,10 @@ void LedTask(void *param)
 #include "BspPlatform/Interrupt.h"
 
 USART usart111(USART1, 115200);
-USART usart333(USART3, 115200, 3, 7, 1, false, USART_Parity_No, USART_WordLength_8b, USART_StopBits_1, 1);
-
-void Com3TestRoutin(void* param)
-{
-	static int i = 0;
-	usart333 << i++<<"\n";
-}
 
 void BspInit()
 {
 	led1 = 1;
 	led2 = 1;
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
-	Sys.AddTask(Com3TestRoutin, 0, 0, 2000, "Com3TestRoutin");
 }
