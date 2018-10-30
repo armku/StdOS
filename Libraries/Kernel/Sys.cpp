@@ -21,25 +21,14 @@ TSys::TSys()
 	this->CystalClock = 8;
 	this->Clock = 48;
 #elif defined STM32F1
-	/*this->CystalClock = 8;*/
 	this->Clock = 72;
 #elif defined STM32F4
 	this->CystalClock = 8;
 	this->Clock = 168;
 #endif 
-
 	//this->Config = &g_Config;
 
-	/*this->Name = "stdos";*/
-	/*this->Company = "armku";*/
-	/*this->Code = 0x0201;*/
-	/*this->Ver = 0x00;*/
-	/*this->DevID = 0x00;
-	this->RevID = 0x00;
-	this->CPUID = 0x00;*/
-
 	this->FlashSize = 0x01;
-	/*this->RAMSize = 0x01;*/
 	this->OnInit();
 	this->Started = false;
 }
@@ -56,7 +45,6 @@ void TSys::ShowInfo()const
 	this->OnShowInfo();
 	StdPrintf("ChipID:");
 	Buffer((void*)this->ID, 12).ShowHex(true);
-	/*StdPrintf("Support: http://www.armku.com\n");*/
 }
 
 // 系统启动后的毫秒数
@@ -202,7 +190,6 @@ bool TSys::SetTaskPeriod(uint32_t taskid, int period)const
 // 开始系统大循环
 void TSys::Start()
 {
-	//this->=debug_printf;
 	this->Started = true;
 	Sys.GlobalEnable();	
 	Task::Scheduler()->Start();
@@ -216,7 +203,6 @@ extern "C"
 	extern uint32_t __heap_limit;
 	extern uint32_t __initial_sp;
 }
-//static char *CPUName;
 
 void TSys::OnInit()
 {
@@ -224,227 +210,30 @@ void TSys::OnInit()
 	this->Clock = 72000000;
 	this->CystalClock = HSE_VALUE;
 	memcpy(this->ID, (void*)0x1FFFF7AC, ArrayLength(this->ID));
-
-	this->CPUID = SCB->CPUID;
-	uint32_t MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
-	this->RevID = MCUID >> 16;
-	this->DevID = MCUID & 0x0FFF;
-
-	this->FlashSize = *(__IO uint16_t*)(0x1FFFF7CC); // 容量
-	switch (this->DevID)
-	{
-	case 0X0440:
-		CPUName = "STM32F030C8";
-		this->RAMSize = 8;
-		break;
-	case 0X0448:
-		CPUName = "STM32F072VB";
-		this->RAMSize = 64;
-		break;
-	default:
-		CPUName = "Unknown";
-		this->RAMSize = 0;
-		break;
-	}
+		
+	this->FlashSize = *(__IO uint16_t*)(0x1FFFF7CC); // 容量	
 #elif defined STM32F1
 	this->Clock = 72000000;
-	/*this->CystalClock = HSE_VALUE;*/
+	this->CystalClock = HSE_VALUE;
 	memcpy(this->ID, (void*)0x1FFFF7E8, ArrayLength(this->ID));
 
-	/*this->CPUID = SCB->CPUID;*/
 	uint32_t MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
-	/*this->RevID = MCUID >> 16;
-	this->DevID = MCUID & 0x0FFF;*/
-
+	
 	this->FlashSize = *(__IO uint16_t*)(0x1FFFF7E0); // 容量
-	/*switch (this->DevID)
-	{
-	case 0X0307:
-		CPUName = "STM32F103RD";
-		this->RAMSize = 64;
-		break;
-	case 0x0410:
-		CPUName = "STM32F103C8";
-		this->RAMSize = 20;
-		break;
-	case 0X0414:
-		CPUName = "STM32F103ZE";
-		this->RAMSize = 64;
-		break;
-	case 0X0418:
-		CPUName = "STM32F105VC";
-		this->RAMSize = 64;
-		break;
-	case 0X0430:
-		CPUName = "STM32F103VG";
-		this->RAMSize = 768;
-		break;
-	default:
-		CPUName = "Unknown";
-		this->RAMSize = 0;
-		break;
-	}*/
 #elif defined STM32F4
 	this->Clock = 168000000;
 	this->CystalClock = HSE_VALUE;
 	memcpy(this->ID, (void*)0x1fff7a10, ArrayLength(this->ID));
-
-	this->CPUID = SCB->CPUID;
-	uint32_t MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
-	this->RevID = MCUID >> 16;
-	this->DevID = MCUID & 0x0FFF;
-
-	this->FlashSize = *(__IO uint16_t*)(0X1FFF7a22); // 容量
-	switch (this->DevID)
-	{
-	case 0X0413:
-		CPUName = "STM32F407ZG";
-		this->RAMSize = 192;
-		break;
-	default:
-		CPUName = "Unknown";
-		this->RAMSize = 0;
-		break;
-	}
+	
+	this->FlashSize = *(__IO uint16_t*)(0X1FFF7a22); // 容量	
 #endif
 }
 
 void TSys::OnShowInfo()const
-{
-	uint32_t Rx = 0;
-	uint32_t Px = 0;
-
-	uint32_t HeapSize = 0;
-	uint32_t StackSize = 0;
-#if defined STM32F0
-	HeapSize = ((uint32_t)&__heap_limit - (uint32_t)&__heap_base);
-	StackSize = ((uint32_t)&__initial_sp - (uint32_t)&__heap_limit);
-
-	switch (this->CPUID &SCB_CPUID_VARIANT_Msk)
-	{
-	case 0:
-		if ((this->CPUID &SCB_CPUID_REVISION_Msk) == 1)
-		{
-			Rx = 1;
-			Px = 0;
-		}
-		else
-		{
-			Rx = 0;
-			Px = 0;
-		}
-		break;
-	case 0X00100000:
-		Rx = 1;
-		if ((this->CPUID &SCB_CPUID_REVISION_Msk) == 1)
-		{
-			Px = 1;
-		}
-		break;
-	case 0X00200000:
-		Rx = 2;
-		if ((this->CPUID &SCB_CPUID_REVISION_Msk) == 0)
-		{
-			Px = 0;
-		}
-		break;
-	default:
-		Px = 9;
-		Rx = 9;
-		break;
-	}
-#elif defined STM32F1
-	HeapSize = ((uint32_t)&__heap_limit - (uint32_t)&__heap_base);
-	StackSize = ((uint32_t)&__initial_sp - (uint32_t)&__heap_limit);
-
-	/*switch (this->CPUID &SCB_CPUID_VARIANT_Msk)
-	{
-	case 0:
-		if ((this->CPUID &SCB_CPUID_REVISION_Msk) == 1)
-		{
-			Rx = 1;
-			Px = 0;
-		}
-		else
-		{
-			Rx = 0;
-			Px = 0;
-		}
-		break;
-	case 0X00100000:
-		Rx = 1;
-		if ((this->CPUID &SCB_CPUID_REVISION_Msk) == 1)
-		{
-			Px = 1;
-		}
-		break;
-	case 0X00200000:
-		Rx = 2;
-		if ((this->CPUID &SCB_CPUID_REVISION_Msk) == 0)
-		{
-			Px = 0;
-		}
-		break;
-	default:
-		Px = 9;
-		Rx = 9;
-		break;
-	}*/
-#elif defined STM32F4
-	HeapSize = ((uint32_t)&__heap_limit - (uint32_t)&__heap_base);
-	StackSize = ((uint32_t)&__initial_sp - (uint32_t)&__heap_limit);
-
-	switch (this->CPUID &SCB_CPUID_VARIANT_Msk)
-	{
-	case 0:
-		if ((this->CPUID &SCB_CPUID_REVISION_Msk) == 1)
-		{
-			Rx = 1;
-			Px = 0;
-		}
-		else
-		{
-			Rx = 0;
-			Px = 0;
-		}
-		break;
-	case 0X00100000:
-		Rx = 1;
-		if ((this->CPUID &SCB_CPUID_REVISION_Msk) == 1)
-		{
-			Px = 1;
-		}
-		break;
-	case 0X00200000:
-		Rx = 2;
-		if ((this->CPUID &SCB_CPUID_REVISION_Msk) == 0)
-		{
-			Px = 0;
-		}
-		break;
-	default:
-		Px = 9;
-		Rx = 9;
-		break;
-	}
-#endif
+{	
 	debug_printf("VER:%s\n", STDOS_VERSION);
 	//debug_printf("CPU:%s %dMHz Flash:%dk RAM:%dk\n", CPUName, this->Clock/1000/1000, this->FlashSize, this->RAMSize);
 	debug_printf("%dMHz Flash:%dk\n", this->Clock / 1000 / 1000, this->FlashSize);
-	//debug_printf("DevID:0x%04X RevID:0x%04X \n", this->DevID, this->RevID);
-	//debug_printf("CPUID:%p", this->CPUID);
-	/*debug_printf(" ARMv7-M");*/
-#if defined STM32F0
-	debug_printf(" Cortex-M%d:", 0);
-#elif defined STM32F1
-	/*debug_printf(" Cortex-M%d:", 3);*/
-#elif defined STM32F4
-	debug_printf(" Cortex-M%d:", 4);
-#endif
-	/*debug_printf(" R%dp%d", Rx, Px);*/
-	/*debug_printf("\n");*/
-	debug_printf("Heap :(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_base, (uint32_t)&__heap_limit, HeapSize, HeapSize / 1024);
-	debug_printf("Stack:(%p, %p) = 0x%x (%dk)\n", (uint32_t)&__heap_limit, (uint32_t)&__initial_sp, StackSize, StackSize / 1024);
 }
 
 // 重启系统
