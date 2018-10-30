@@ -73,7 +73,7 @@ void LedTask(void *param)
 #include "BspPlatform/Interrupt.h"
 
 USART usart111(USART1, 115200);
-USART usart333(USART3, 115200);
+USART usart333(USART3, 115200, 3, 7, 1, false, USART_Parity_No, USART_WordLength_8b, USART_StopBits_1, 1);
 
 void Com3TestRoutin(void* param)
 {
