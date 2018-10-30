@@ -89,9 +89,41 @@ void BspInit()
 USART com3(USART3, 115200, true);
 Socket_esp8266 mWifi(com3);
 
+typedef struct SetData {
+	char USEWIFIORGPRS;
+	char IPADDR[20];
+	char IPPORT[10];
+	char WIFISSID[30];
+	char WIFIKEY[30];
+	char PEOPLENUM;
+	char TRAINNUM;
+	char TAGNUM;
+	//u16
+} SetDataStruct;
+
+SetDataStruct mSetData;
+u8 count = 0;
+
 void mWifiRoutin(void * param)
 {
-
+	if (!mWifi.GetConnectStatus())
+	{
+		/*mMonitor.SetGPRSDataLogo(false);*/
+		while (!mWifi.Kick());//检查连接
+		mWifi.SetEcho(false);//关闭回响
+		mWifi.SetMode(esp8266::esp8266_MODE_STATION, esp8266::esp8266_PATTERN_NULL);//设置station+ap模式
+		mWifi.SetMUX(false);//单链接模式
+		mWifi.QuitAP();
+		while (!mWifi.JoinAP(mSetData.WIFISSID, mSetData.WIFIKEY, esp8266::esp8266_PATTERN_NULL) && (count++ < 4));//加入AP
+		count = 0;
+		mWifi.Close();
+		while (!mWifi.Connect(mSetData.IPADDR, atoi(mSetData.IPPORT), Socket_Type_Stream, Socket_Protocol_IPV4) && (count++ < 4));
+		count = 0;
+	}
+	else 
+	{
+		/*mMonitor.SetGPRSDataLogo(true);*/
+	}
 }
 void mWifiinit()
 {
