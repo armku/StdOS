@@ -36,6 +36,8 @@ class TSys
 public:
     uint32_t	Clock;  	// 系统时钟
     uint32_t	CystalClock;// 晶振时钟
+	uint32_t	HeapSize;	// 堆大小
+	uint32_t	StackSize;	// 栈大小
 
 	uint8_t	ID[12];		// 芯片ID。
     uint16_t	FlashSize;	// 芯片Flash容量。
@@ -112,7 +114,7 @@ extern TSys Sys;		// 创建一个全局的Sys对象  会在main函数之前执行构造函数（！！！
 //	uint16_t	Checksum;	// 校验
 //};
 
-#define STDOS_VERSION "0.4.2018.1024" //版本号
+#define STDOS_VERSION "0.5.2018.1030" //版本号
 
 #endif //_Sys_H_
 
@@ -122,4 +124,5 @@ v0.1.2018.0820  使用C++11实现，实现F1 F4 F1的GPIO和串口、IIC、SPI、中断管理
 v0.2.2018.		串口发送、接收采用DMA方式实现。
 v0.3.2018       更换串口实现方式
 v0.4.2018.1024  启动过程优化，启动时关闭全局中断，启动完成开启，防止启动异常
+v0.5.2018.1030  系统统计信息精简，去除不必要内容
 */

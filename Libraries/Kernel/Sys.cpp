@@ -227,13 +227,15 @@ void TSys::OnInit()
 	
 	this->FlashSize = *(__IO uint16_t*)(0X1FFF7a22); // 容量	
 #endif
+	HeapSize = ((uint32_t)&__heap_limit - (uint32_t)&__heap_base);
+	StackSize = ((uint32_t)&__initial_sp - (uint32_t)&__heap_limit);
 }
 
 void TSys::OnShowInfo()const
 {	
 	debug_printf("VER:%s\n", STDOS_VERSION);
-	//debug_printf("CPU:%s %dMHz Flash:%dk RAM:%dk\n", CPUName, this->Clock/1000/1000, this->FlashSize, this->RAMSize);
-	debug_printf("%dMHz Flash:%dk\n", this->Clock / 1000 / 1000, this->FlashSize);
+	debug_printf("CystalClock:%dMHz SysClock:%dMHz Flash:%dk\n", this->CystalClock / 1000 / 1000, this->Clock / 1000 / 1000, this->FlashSize);
+	debug_printf("HeapSize:0X%08X(%dk) StackSize:0X%08X(%dk)\n", this->HeapSize, this->HeapSize / 1024, this->StackSize, this->StackSize / 1024);
 }
 
 // 重启系统
