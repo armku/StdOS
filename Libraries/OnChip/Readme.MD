@@ -33,8 +33,8 @@ OutputPort r485(PC0, false);
 
 void USARTTestInit()
 {
-	r485 = 0;//接收	
-	pCOM2->SetBaudRate(115200);
+​	r485 = 0;//接收	
+​	pCOM2->SetBaudRate(115200);
 
 	Sys.AddTask(USARTTask12, 0, 0, 500, "USARTTask12");
 }
@@ -66,18 +66,18 @@ PwmSolo pwm(10000, 2700);
 
 void PwmTestRoutin123(void *param)
 {
-	static int i = 0;
-	if (i++ > 100)
-		i = 0;
-	pwm.SetOutPercent(i);
+​	static int i = 0;
+​	if (i++ > 100)
+​		i = 0;
+​	pwm.SetOutPercent(i);
 }
 
 void PwmSoloTestInit()
 {
-	pwm.Set(PC6);
-	pwm.SetOutPercent(0);
-	pwm.Open();
-	
+​	pwm.Set(PC6);
+​	pwm.SetOutPercent(0);
+​	pwm.Open();
+​	
 	Sys.AddTask(PwmTestRoutin123,0,0,10,"pwmtest");
 }
 #endif // _PWMSOLO_TEST_CPP
@@ -91,13 +91,13 @@ OutputPort led12(PC6, true);
 
 void LedTask12(void *param)
 {
-	auto leds = (OutputPort*)param;
-	*leds = !* leds;
+​	auto leds = (OutputPort*)param;
+​	*leds = !* leds;
 }
 
 void LedTestInit()
 {
-	Sys.AddTask(LedTask12, &led12, 0, 500, "LedTask");
+​	Sys.AddTask(LedTask12, &led12, 0, 500, "LedTask");
 }
 #endif
 
@@ -111,26 +111,33 @@ uint8_t buf485[20];
 
 void SerialPort485Task12(void *param)
 {
-	DeviceConfigHelper::comSend(COM1, Buffer(buf485, ArrayLength(buf485)));
+​	DeviceConfigHelper::comSend(COM1, Buffer(buf485, ArrayLength(buf485)));
 }
 uint8_t bufrcv485[100];
 void R485Rcv()
 {
-	Buffer bsrcv(bufrcv485, ArrayLength(bufrcv485));
-	Rxx1.Read(bsrcv);
-	DeviceConfigHelper::com1send(bsrcv);
+​	Buffer bsrcv(bufrcv485, ArrayLength(bufrcv485));
+​	Rxx1.Read(bsrcv);
+​	DeviceConfigHelper::com1send(bsrcv);
 }
 
 OutputPort r485(PC0,false);
 
 void SerialPort485TestInit()
 {
-	r485 = 0;//接收
-	DeviceConfigHelper::pCOM1Rx485 = &r485;
-	DeviceConfigHelper::PRcvCOM1 = R485Rcv;
-	DeviceConfigHelper::ConfigCom(COM1, 115200);
-	DeviceConfigHelper::ComChgBaudRate(COM1, 115200);
+​	r485 = 0;//接收
+​	DeviceConfigHelper::pCOM1Rx485 = &r485;
+​	DeviceConfigHelper::PRcvCOM1 = R485Rcv;
+​	DeviceConfigHelper::ConfigCom(COM1, 115200);
+​	DeviceConfigHelper::ComChgBaudRate(COM1, 115200);
 
 	Sys.AddTask(SerialPort485Task12, 0, 0, 500, "R485Task");
 }
+
 #endif
+
+
+
+//USART usart333(USART3, 115200, 3, 7, 1, false, USART_Parity_No, USART_WordLength_8b, USART_StopBits_1, 1); //PB10 PB11
+//USART usart333(USART3, 115200, 3, 7, 1, true, USART_Parity_No, USART_WordLength_8b, USART_StopBits_1, 1); //PC10,PC11
+USART usart333(USART3, 115200, 3, 7, 1, true, USART_Parity_No, USART_WordLength_8b, USART_StopBits_1, 3); //PD8,PD9
