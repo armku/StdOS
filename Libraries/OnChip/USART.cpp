@@ -2,7 +2,7 @@
 #include "BspPlatform/Interrupt.h"
 #include "Configuration.h"
 
-USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint16_t parity, uint16_t wordLen, uint16_t stopBits)
+USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint16_t parity, uint16_t wordLen, uint16_t stopBits, uint32_t remapvalue)
 {
 	mUSARTx = USARTx;   //USARTx
 	mBaudrate = baud;     //baudrate of usart
@@ -13,6 +13,7 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 	mParity = parity;   //parity of usart
 	mWordLen = wordLen;  //world length of usart
 	mStopBits = stopBits; //stop bits of usart
+	mRemapvalue = remapvalue;
 	mPrecision = 3;
 	mTxOverflow = 0;
 	mRxOverflow = 0;
@@ -64,10 +65,10 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 	{
 		mIRQn = USART3_IRQn;                                           //USART IRQn
 		mUSARTRcc = RCC_APB1Periph_USART3;	                                //USARTx Clock
-		mPort = (mRemap ? GPIOC : GPIOB);   //GPIO Port
-		mTxPin = (mRemap ? GPIO_Pin_10 : GPIO_Pin_10);   //Tx Pin
-		mRxPin = (mRemap ? GPIO_Pin_11 : GPIO_Pin_11);   //Rx Pin
-		mGPIORcc = (mRemap ? RCC_APB2Periph_GPIOC : RCC_APB2Periph_GPIOB);   //GPIO Clock
+		mPort = (mRemap ? GPIOC : (mRemapvalue == 0x01 ? GPIOB : GPIOD));   //GPIO Port
+		mTxPin = (mRemap ? GPIO_Pin_10 : (mRemapvalue == 0X01 ? GPIO_Pin_10 : GPIO_Pin_8));   //Tx Pin
+		mRxPin = (mRemap ? GPIO_Pin_11 : (mRemapvalue == 0X01 ? GPIO_Pin_11 : GPIO_Pin_9));   //Rx Pin
+		mGPIORcc = (mRemap ? RCC_APB2Periph_GPIOC : (mRemapvalue == 0X01 ? RCC_APB2Periph_GPIOB : RCC_APB2Periph_GPIOD));  //GPIO Clock
 #ifdef USE_USART3_DMA
 		mDMATxCh = DMA1_Channel2;       //DMA Tx Channel
 		mDMAIRQn = DMA1_Channel2_IRQn;  //DMA IRQn
@@ -103,7 +104,7 @@ void USART::InitGPIO()
 	{
 		if (mUSARTx == USART1) GPIO_PinRemapConfig(GPIO_Remap_USART1, ENABLE);
 		if (mUSARTx == USART2) GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
-		if (mUSARTx == USART3) GPIO_PinRemapConfig(GPIO_PartialRemap_USART3, ENABLE);
+		if (mUSARTx == USART3) GPIO_PinRemapConfig(mRemapvalue == 0X01 ? GPIO_PartialRemap_USART3 : GPIO_FullRemap_USART3, ENABLE);
 	}
 	GPIO_InitTypeDef GPIO_InitStructure;//
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
