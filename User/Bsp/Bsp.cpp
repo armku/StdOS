@@ -74,9 +74,26 @@ void LedTask(void *param)
 
 USART usart111(USART1, 115200);
 
+
+void mWifiinit();
 void BspInit()
 {
 	led1 = 1;
 	led2 = 1;
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
+
+	mWifiinit();
+}
+
+#include "DriversCom/esp8266/Socket_esp8266.h"
+USART com3(USART3, 115200, true);
+Socket_esp8266 mWifi(com3);
+
+void mWifiRoutin(void * param)
+{
+
+}
+void mWifiinit()
+{
+	Sys.AddTask(mWifiRoutin, 0, 0, 1000, "mWifiRoutin");
 }
