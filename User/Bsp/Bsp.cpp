@@ -125,7 +125,12 @@ void mWifiRoutin(void * param)
 		/*mMonitor.SetGPRSDataLogo(true);*/
 	}
 }
+#include <string.h>
+char* ssid = "NETGEAR77";
+char* key = "18353217097";
 void mWifiinit()
-{
+{	
+	strcpy(mSetData.WIFISSID, ssid);
+	strcpy(mSetData.WIFIKEY, key);
 	Sys.AddTask(mWifiRoutin, 0, 0, 1000, "mWifiRoutin");
 }
