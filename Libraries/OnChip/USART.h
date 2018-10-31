@@ -52,7 +52,7 @@ private:
 	void InitUSART();
 	void InitNVIC();
 public:
-	USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint16_t parity = USART_Parity_No, uint16_t wordLen = USART_WordLength_8b, uint16_t stopBits = USART_StopBits_1, uint32_t remapvalue = 1);
+	USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint32_t remapvalue = 1, uint16_t parity = USART_Parity_No, uint16_t wordLen = USART_WordLength_8b, uint16_t stopBits = USART_StopBits_1);
 	void Initialize();
 	uint64_t LastRcvTime;
 	int RxCnt;

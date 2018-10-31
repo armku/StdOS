@@ -2,7 +2,7 @@
 #include "BspPlatform/Interrupt.h"
 #include "Configuration.h"
 
-USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint16_t parity, uint16_t wordLen, uint16_t stopBits, uint32_t remapvalue)
+USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint32_t remapvalue, uint16_t parity, uint16_t wordLen, uint16_t stopBits)
 {
 	mUSARTx = USARTx;   //USARTx
 	mBaudrate = baud;     //baudrate of usart
