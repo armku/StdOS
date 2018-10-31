@@ -110,7 +110,7 @@ int ADS1232::Read()
 {
     int temp = 0;
     uint8_t i = 0;
-    
+	
     this->sclk = 0;
     for (temp = 0; temp < 1000; temp++)
     {
@@ -125,6 +125,7 @@ int ADS1232::Read()
         temp = 0;
         //this->sclk=0;
         //this->sclk=1;
+		Sys.GlobalDisable();
         for (i = 0; i < 24; i++)
         {
             this->sclk = 1;
@@ -138,6 +139,7 @@ int ADS1232::Read()
             }
             // this->sclk=1;
         }
+		Sys.GlobalEnable();
         //            this->sclk=1; // The 25th SCLK to force DOUT high
         //            this->sclk=0;
 //        this->sclk = 1;
