@@ -35,6 +35,22 @@ public:
 };
 
 extern TTime Time; //extern const TTime Time
+
+// 时间轮。用于超时处理
+class TimeWheel
+{
+public:
+	uint64_t	Expire;		// 到期时间，毫秒
+	uint16_t	Sleep;		// 睡眠时间，默认0毫秒
+
+	TimeWheel(uint32_t ms);
+
+	void Reset(uint32_t ms);
+
+	// 是否已过期
+	bool Expired();
+};
+
 // 时间开支。借助滴答进行精确计算
 class TimeCost
 {
