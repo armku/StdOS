@@ -23,7 +23,7 @@ bool AT24CXX::Write(uint32_t addr, void * buf, int len, int bufpos)
 		{
 			//一次能读完
 			this->PageWrite(curAddr, buf, bytesLeave);
-			return 0;
+			return true;
 		}
 		else
 		{
@@ -49,11 +49,11 @@ bool AT24CXX::Write(uint32_t addr, void * buf, int len, int bufpos)
 		{
 			//读取剩余页
 			this->PageWrite(curAddr, ((uint8_t*)buf) + bufaddr, bytesLeave);
-			return 0;
+			return true;
 		}
 	}
 	this->pinWP = 1;
-	return len;
+	return false;
 }
 
 bool AT24CXX::Read(uint32_t addr, void * buf, int len, int bufpos)
@@ -75,7 +75,7 @@ bool AT24CXX::Read(uint32_t addr, void * buf, int len, int bufpos)
 		{
 			//一次能读完
 			this->PageRead(curAddr, buf, bytesLeave);
-			return 0;
+			return true;
 		}		
 		else
 		{
@@ -101,10 +101,10 @@ bool AT24CXX::Read(uint32_t addr, void * buf, int len, int bufpos)
 		{
 			//读取剩余页
 			this->PageRead(curAddr, ((uint8_t*)buf) + bufaddr, bytesLeave);
-			return 0;
+			return true;
 		}
 	}
-	return len;
+	return false;
 }
 //写延时时间
 AT24CXX::AT24CXX(EW24XXType devtype, uint8_t devaddr, uint32_t wnms)
