@@ -8,7 +8,8 @@ class Buffer
 public:
 	// 打包一个指针和长度指定的数据区
 	Buffer(void* ptr, int len);
-	
+	int Length() { return this->_Length; }
+	uint8_t operator[](int i) { return i < this->_Length ? this->_Arr[i] : 0;}
 protected:
     char*	_Arr;		// 数据指针
 	int		_Length;	// 长度
