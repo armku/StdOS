@@ -852,11 +852,6 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\Kernel\Time.cpp</FilePath>
             </File>
-            <File>
-              <FileName>WaitHandle.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Kernel\WaitHandle.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1741,11 +1736,6 @@
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Kernel\Time.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaitHandle.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Kernel\WaitHandle.cpp</FilePath>
             </File>
           </Files>
         </Group>
