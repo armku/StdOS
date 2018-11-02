@@ -291,6 +291,7 @@ bool operator<=	(const DateTime& left, const DateTime& right)
 void DateTime::Show(bool newLine)const
 {
     StdPrintf("%04d-%02d-%02d %02d:%02d:%02d", this->Year, this->Month, this->Day, this->Hour, this->Minute, this->Second);
+	StdPrintf(newLine ? "\n" : "");
 }
 
 void DateTime::Init()
