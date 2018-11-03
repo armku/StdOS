@@ -103,13 +103,29 @@ void ADS1232::Init()
     this->pwdn = 1; //¿ªÆô1232
     Sys.Delay(20);
     this->readCnt = 0;
+	this->CalCnt = 0;
 }
 
 
-int ADS1232::Read()
+int ADS1232::Read(bool cal)
 {
-    int temp = 0;
+	static uint64_t msold = 0;
+	static uint64_t msnew = 0;
+	int temp = 0;
     uint8_t i = 0;
+
+	msnew = Sys.Ms();
+	this->Status = 0;
+	if (msnew - msold > 5000)
+	{
+		cal = true;
+		msold = msnew;
+	}
+	if (readCnt < 3)
+	{
+		cal = true;
+	}
+	
 	
     this->sclk = 0;
     for (temp = 0; temp < 1000; temp++)
@@ -119,6 +135,7 @@ int ADS1232::Read()
             break;
         }
     }
+	this->Status = temp;
     Sys.Delay(20);
     if (temp < 1000)
     {
@@ -139,6 +156,15 @@ int ADS1232::Read()
             }
             // this->sclk=1;
         }
+		if (cal)
+		{
+			this->Status |= 1 << 8;
+			this->sclk = 1;
+			this->sclk = 0;
+			this->sclk = 1;
+			this->sclk = 0;
+			this->CalCnt++;
+		}
 		Sys.GlobalEnable();
         //            this->sclk=1; // The 25th SCLK to force DOUT high
         //            this->sclk=0;

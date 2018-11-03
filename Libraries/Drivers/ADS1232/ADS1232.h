@@ -14,6 +14,9 @@
             {
                     GAIN1, GAIN2, GAIN64, GAIN128
             };
+			uint32_t Status;//状态
+			int CalCnt;//校准次数
+			int readCnt; //读取数量
         public:
             void Init();
             void SetPin(Pin pdout, Pin psclk, Pin ppwdn);
@@ -21,7 +24,7 @@
             void SetPinGain(Pin gain0, Pin gain1);
             void SetSpeed(Speed speed = SPEED10);
             void SetGain(Gain gain = GAIN1);
-            int Read();
+            int Read(bool cal=false);
         private:
             InputPort dout;
             OutputPort sclk;
@@ -29,8 +32,7 @@
             OutputPort pSpeed;
             OutputPort pGain0;
             OutputPort pGain1;
-        private:
-            int readCnt; //读取数量
+        private:            
             int oldval;
     };
 
