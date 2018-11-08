@@ -147,6 +147,10 @@ void mWifiinit()
 	pinrst.Open();
 	pinrst = 0;
 
+	Sys.Delay(500);
+	pinch = 1;
+	pinrst = 1;
+
 	strcpy(mSetData.WIFISSID, ssid);
 	strcpy(mSetData.WIFIKEY, key);
 	Sys.AddTask(mWifiRoutin, 0, 0, 1000, "mWifiRoutin");
