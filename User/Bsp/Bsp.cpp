@@ -137,8 +137,6 @@ void mWifiRoutin(void * param)
 			}
 			break;
 		case 2:
-			sprintf(mSetData.IPADDR, "www.braintics.net");
-			sprintf(mSetData.IPPORT, "8888");
 			if (mWifi.Connect(mSetData.IPADDR, atoi(mSetData.IPPORT), Socket_Type_Stream, Socket_Protocol_IPV4) && (count++ < 4))
 			{
 				step++;
@@ -172,6 +170,8 @@ void mWifiRoutin(void * param)
 #include <string.h>
 char* ssid = "NETGEAR77";
 char* key = "18353217097";
+char * server = "www.braintics.net";
+char *port = "8888";
 void mWifiinit()
 {	
 	pinch.Set(PG13);
@@ -192,5 +192,8 @@ void mWifiinit()
 
 	strcpy(mSetData.WIFISSID, ssid);
 	strcpy(mSetData.WIFIKEY, key);
+	strcpy(mSetData.IPADDR, server);
+	strcpy(mSetData.IPPORT, port);
+
 	Sys.AddTask(mWifiRoutin, 0, 0, 1000, "mWifiRoutin");
 }
