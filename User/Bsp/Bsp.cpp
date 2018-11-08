@@ -87,7 +87,7 @@ void BspInit()
 
 #include "DriversCom/esp8266/Socket_esp8266.h"
 USART com3(USART3, 115200);
-esp8266 esp1(com3);
+Socket_esp8266 esp1(com3);
 
 typedef struct SetData {
 	char USEWIFIORGPRS;
