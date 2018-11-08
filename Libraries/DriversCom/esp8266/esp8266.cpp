@@ -255,7 +255,7 @@ bool esp8266::ReceiveAndWait(const char* targetString, unsigned char timeOut)
 	ClearBuffer();
 	double tartTime = Sys.Ms();//TaskManager::Time();
 	//while ((TaskManager::Time() - tartTime) < timeOut)
-	while ((Sys.Ms() - tartTime) < timeOut)
+	while ((Sys.Ms() - tartTime) < timeOut*1000)
 	{
 		while (mUsart.RxSize() > 0)
 		{
