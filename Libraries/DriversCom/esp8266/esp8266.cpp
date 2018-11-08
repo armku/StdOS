@@ -284,7 +284,7 @@ bool esp8266::ReceiveAndWait(char const* targetString, const char* targetString2
 	ClearBuffer();
 	double tartTime = Sys.Ms();//TaskManager::Time();
 	//while ((TaskManager::Time() - tartTime) < timeOut)
-	while ((Sys.Ms() - tartTime) < timeOut)
+	while ((Sys.Ms() - tartTime) < timeOut*1000)
 	{
 		while (mUsart.RxSize() > 0)
 		{
@@ -314,7 +314,7 @@ bool esp8266::ReceiveAndWait(char const* targetString, const char* targetString2
 	ClearBuffer();
 	double tartTime = Sys.Ms();//TaskManager::Time();
 	//while ((TaskManager::Time() - tartTime) < timeOut)
-	while ((Sys.Ms() - tartTime) < timeOut)
+	while ((Sys.Ms() - tartTime) < timeOut*1000)
 	{
 		while (mUsart.RxSize() > 0)
 		{
