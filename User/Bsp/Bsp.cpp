@@ -86,8 +86,8 @@ void BspInit()
 }
 
 #include "DriversCom/esp8266/Socket_esp8266.h"
-USART com3(USART3, 115200, true);
-Socket_esp8266 mWifi(com3);
+USART com3(USART3, 115200);
+esp8266 esp1(com3);
 
 typedef struct SetData {
 	char USEWIFIORGPRS;
@@ -106,24 +106,26 @@ u8 count = 0;
 
 void mWifiRoutin(void * param)
 {
-	if (!mWifi.GetConnectStatus())
-	{
-		/*mMonitor.SetGPRSDataLogo(false);*/
-		while (!mWifi.Kick());//检查连接
-		mWifi.SetEcho(false);//关闭回响
-		mWifi.SetMode(esp8266::esp8266_MODE_STATION, esp8266::esp8266_PATTERN_NULL);//设置station+ap模式
-		mWifi.SetMUX(false);//单链接模式
-		mWifi.QuitAP();
-		while (!mWifi.JoinAP(mSetData.WIFISSID, mSetData.WIFIKEY, esp8266::esp8266_PATTERN_NULL) && (count++ < 4));//加入AP
-		count = 0;
-		mWifi.Close();
-		while (!mWifi.Connect(mSetData.IPADDR, atoi(mSetData.IPPORT), Socket_Type_Stream, Socket_Protocol_IPV4) && (count++ < 4));
-		count = 0;
-	}
-	else 
-	{
-		/*mMonitor.SetGPRSDataLogo(true);*/
-	}
+	int ret= esp1.Kick();
+	debug_printf("检查连接：%d\n", ret);
+	//if (!mWifi.GetConnectStatus())
+	//{
+	//	/*mMonitor.SetGPRSDataLogo(false);*/
+	//	while (!mWifi.Kick());//检查连接
+	//	mWifi.SetEcho(false);//关闭回响
+	//	mWifi.SetMode(esp8266::esp8266_MODE_STATION, esp8266::esp8266_PATTERN_NULL);//设置station+ap模式
+	//	mWifi.SetMUX(false);//单链接模式
+	//	mWifi.QuitAP();
+	//	while (!mWifi.JoinAP(mSetData.WIFISSID, mSetData.WIFIKEY, esp8266::esp8266_PATTERN_NULL) && (count++ < 4));//加入AP
+	//	count = 0;
+	//	mWifi.Close();
+	//	while (!mWifi.Connect(mSetData.IPADDR, atoi(mSetData.IPPORT), Socket_Type_Stream, Socket_Protocol_IPV4) && (count++ < 4));
+	//	count = 0;
+	//}
+	//else 
+	//{
+	//	/*mMonitor.SetGPRSDataLogo(true);*/
+	//}
 }
 #include <string.h>
 char* ssid = "NETGEAR77";
