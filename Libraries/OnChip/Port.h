@@ -66,9 +66,6 @@ class AlternatePort : public OutputPort
 {
 public:
 	AlternatePort();
-    AlternatePort(Pin pin);
-    AlternatePort(Pin pin, uint8_t invert, bool openDrain = false, uint8_t speed = 50);
-
 protected:
     virtual void OpenPin(void* param);
 };
@@ -91,8 +88,6 @@ public:
     PuPd	Pull		= UP;	// 上拉下拉电阻
 	
 	InputPort(){}
-    InputPort(Pin pin, bool floating = true, PuPd pull = UP);
-
 	// 读取状态
     virtual bool Read() const;
     operator bool() const { return Read(); }

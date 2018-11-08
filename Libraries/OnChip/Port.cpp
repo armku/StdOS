@@ -79,36 +79,6 @@ void OutputPort::OnOpen(void *param)
 AlternatePort::AlternatePort() : OutputPort(P0, 0, false, 50)
 {}
 
-AlternatePort::AlternatePort(Pin pin) : OutputPort(P0, 0, false, 50)
-{
-	if (pin != P0)
-	{
-		this->Set(pin);
-		this->Open();
-	}
-}
-
-AlternatePort::AlternatePort(Pin pin, uint8_t invert, bool openDrain, uint8_t speed) :OutputPort(P0, invert, openDrain, speed)
-{
-	if (pin != P0)
-	{
-		this->Set(pin);
-		this->Open();
-	}
-}
-
-InputPort::InputPort(Pin pin, bool floating, PuPd pupd)
-{
-	this->Opened = false;
-	this->Floating = floating;
-	this->Pull = pupd;
-	if (pin != P0)
-	{
-		Set(pin);
-		this->Open();
-	}
-}
-
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
 bool InputPort::Read()const
 {
