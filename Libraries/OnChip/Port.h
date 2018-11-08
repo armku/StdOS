@@ -20,7 +20,6 @@ public:
 
 	bool Open();
 	void Close();
-	void Clear();
 
 	static void RemapConfig(uint32_t param, bool sta);
 
@@ -44,16 +43,8 @@ public:
     OutputPort();
     OutputPort(Pin pin);
     OutputPort(Pin pin, uint8_t invert, bool openDrain = false, uint8_t speed = 50);
-
-	OutputPort& Init(Pin pin, bool invert);
-
+	
     void Write(bool value) const;
-	// 拉高一段时间后拉低
-	void Up(int ms) const;
-	void Down(int ms) const;
-	// 闪烁多次
-	void Blink(int times, int ms) const;
-
 	// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
     virtual bool Read() const;
 	bool ReadInput() const;
@@ -95,18 +86,13 @@ public:
         UP		= 0x01,	// 上拉电阻
         DOWN	= 0x02,	// 下拉电阻
     }PuPd;
-
-    // 读取委托
-    typedef void (*IOReadHandler)(InputPort* port, bool down, void* param);
-
+	    
     uint8_t	Invert		= 2;	// 是否倒置输入输出。默认2表示自动检测
     bool	Floating	= true;	// 是否浮空输入
     PuPd	Pull		= UP;	// 上拉下拉电阻
 	
 	InputPort(){}
     InputPort(Pin pin, bool floating = true, PuPd pull = UP);
-
-	InputPort& Init(Pin pin, bool invert);
 
 	// 读取状态
     virtual bool Read() const;

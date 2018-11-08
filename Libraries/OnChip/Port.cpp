@@ -1,6 +1,6 @@
 #include "Port.h"
 #include "Platform\stm32.h"
-#include "Sys.h"
+
 Port::Port()
 {
 	this->_Pin = P0;
@@ -38,11 +38,6 @@ void Port::Close()
 	}
 }
 
-void Port::Clear()
-{
-	this->_Pin = P0;
-}
-
 OutputPort::OutputPort()
 {
 	this->Invert = 2;
@@ -75,41 +70,6 @@ bool OutputPort::ReadInput()const
 		return false;
 	else
 		return this->Invert ? !Port::Read() : Port::Read();
-}
-
-void OutputPort::Up(int ms)const
-{
-	if (!this->Empty())
-	{
-		this->Write(true);
-		Sys.Sleep(ms);
-		this->Write(false);
-	}
-}
-
-void OutputPort::Down(int ms)const
-{
-	if (!this->Empty())
-	{
-		this->Write(false);
-		Sys.Sleep(ms);
-		this->Write(true);
-	}
-}
-
-void OutputPort::Blink(int times, int ms)const
-{
-	if (!this->Empty())
-	{
-		bool flag = true;
-		for (int i = 0; i < times; i++)
-		{
-			this->Write(flag);
-			flag = !flag;
-			Sys.Sleep(ms);
-		}
-		Write(false);
-	}
 }
 
 void OutputPort::OnOpen(void *param)
@@ -156,12 +116,6 @@ bool InputPort::Read()const
 {
 	return this->Invert ? !Port::Read() : Port::Read();
 }
-InputPort& InputPort::Init(Pin pin, bool invert)
-{
-	this->Set(pin);
-	this->Invert = invert;
-	return *this;
-}
 
 bool OutputPort::Read()const
 {
@@ -188,7 +142,7 @@ void Port_OnOpen(Pin pin)
 			portname = 95;
 		else
 			portname = (pin >> 4) + 'A';
-		debug_printf("Close JTAG Pin P%c%d \r\n", portname, pinindex);
+		//debug_printf("Close JTAG Pin P%c%d \r\n", portname, pinindex);
 		RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << (pin >> 4), ENABLE);
 		GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
 	}
@@ -243,8 +197,7 @@ bool Port::Open()
 			case PB3:
 			case PB4:
 			{
-				debug_printf("Close JTAG for P%c%d\r\n", _PIN_NAME(_Pin));
-
+				//debug_printf("Close JTAG for P%c%d\r\n", _PIN_NAME(_Pin));
 				// PA15是jtag接口中的一员 想要使用 必须开启remap
 				RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
 				GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
