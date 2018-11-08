@@ -4,8 +4,6 @@
 #include "Core\Type.h"
 #include "Platform\Pin.h"
 
-/******************************** Port ********************************/
-
 // 端口基类
 class Port
 {
@@ -21,9 +19,7 @@ public:
 	bool Open();
 	void Close();
 
-	static void RemapConfig(uint32_t param, bool sta);
-
-    virtual bool Read() const;
+	virtual bool Read() const;
 
 protected:
     // 配置过程

@@ -296,9 +296,6 @@ void AlternatePort::OpenPin(void *param)
 #endif
 }
 
-void Port::RemapConfig(uint32_t param, bool sta) {
-
-}
 ///////////////////////////////以下为添加///////////////////////////////////////
 // 获取组和针脚
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (uint16_t)0xF0) << 6)))
