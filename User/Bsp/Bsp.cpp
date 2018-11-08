@@ -139,7 +139,7 @@ void mWifiinit()
 	pinch.Invert = false;
 	pinch.OpenDrain = false;
 	pinch.Open();
-	pinch = 1;
+	pinch = 0;
 
 	pinrst.Set(PG14);
 	pinrst.Invert = false;
