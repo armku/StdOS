@@ -87,7 +87,7 @@ void BspInit()
 
 #include "DriversCom/esp8266/Socket_esp8266.h"
 USART com3(USART3, 115200);
-Socket_esp8266 esp1(com3);
+Socket_esp8266 mWifi(com3);
 
 typedef struct SetData {
 	char USEWIFIORGPRS;
@@ -109,10 +109,10 @@ OutputPort pinrst;
 
 void mWifiRoutin(void * param)
 {
-	int ret= esp1.Kick();
+	int ret= mWifi.Kick();
 	debug_printf("检查连接：%d\n", ret);
-	//if (!mWifi.GetConnectStatus())
-	//{
+	if (!mWifi.GetConnectStatus())
+	{
 	//	/*mMonitor.SetGPRSDataLogo(false);*/
 	//	while (!mWifi.Kick());//检查连接
 	//	mWifi.SetEcho(false);//关闭回响
@@ -124,11 +124,11 @@ void mWifiRoutin(void * param)
 	//	mWifi.Close();
 	//	while (!mWifi.Connect(mSetData.IPADDR, atoi(mSetData.IPPORT), Socket_Type_Stream, Socket_Protocol_IPV4) && (count++ < 4));
 	//	count = 0;
-	//}
-	//else 
-	//{
+	}
+	else 
+	{
 	//	/*mMonitor.SetGPRSDataLogo(true);*/
-	//}
+	}
 }
 #include <string.h>
 char* ssid = "NETGEAR77";
