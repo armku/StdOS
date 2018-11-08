@@ -41,7 +41,6 @@ public:
     uint8_t Speed		= 50;		// ËÙ¶È
 
     OutputPort();
-    OutputPort(Pin pin);
     OutputPort(Pin pin, uint8_t invert, bool openDrain = false, uint8_t speed = 50);
 	
     void Write(bool value) const;

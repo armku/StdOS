@@ -44,8 +44,6 @@ OutputPort::OutputPort()
 	this->OpenDrain = 0;
 	this->Speed = 50;
 }
-OutputPort::OutputPort(Pin pin) :OutputPort(pin, 2, false, 50)
-{}
 
 OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain, uint8_t speed)
 {
