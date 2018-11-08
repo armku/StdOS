@@ -104,6 +104,9 @@ typedef struct SetData {
 SetDataStruct mSetData;
 u8 count = 0;
 
+OutputPort pinch;
+OutputPort pinrst;
+
 void mWifiRoutin(void * param)
 {
 	int ret= esp1.Kick();
@@ -132,6 +135,18 @@ char* ssid = "NETGEAR77";
 char* key = "18353217097";
 void mWifiinit()
 {	
+	pinch.Set(PG13);
+	pinch.Invert = false;
+	pinch.OpenDrain = false;
+	pinch.Open();
+	pinch = 1;
+
+	pinrst.Set(PG14);
+	pinrst.Invert = false;
+	pinrst.OpenDrain = false;
+	pinrst.Open();
+	pinrst = 0;
+
 	strcpy(mSetData.WIFISSID, ssid);
 	strcpy(mSetData.WIFIKEY, key);
 	Sys.AddTask(mWifiRoutin, 0, 0, 1000, "mWifiRoutin");
