@@ -1,19 +1,9 @@
 #ifndef _Port_H_
 #define _Port_H_
 
-#include "Kernel\Sys.h"
+#include "Core\Type.h"
+#include "Platform\Pin.h"
 
-/******** 端口打开关闭流程 ********/
-/*
-Port::Open
-	#Port::Opening
-		OutputPort::OnOpen
-			#Port::OnOpen
-		#OutputPort::OpenPin
-
-Port::Close
-	#Port::OnClose
-*/
 /******************************** Port ********************************/
 
 // 端口基类

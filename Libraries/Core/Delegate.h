@@ -1,6 +1,8 @@
 #ifndef _Delegate_H_
 #define _Delegate_H_
 
+#include "Core\Type.h"
+
 // 没有参数和返回值的委托
 typedef void (*Func)(void);
 // 一个参数没有返回值的委托，一般param参数用作目标对象，调用者用静态函数包装成员函数

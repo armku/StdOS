@@ -1,6 +1,7 @@
 #ifndef _SERIALPORTCONFIG_H
 #define _SERIALPORTCONFIG_H
 
+#include "Core\Delegate.h"
 //#define USE_GPS
 //#ifdef USE_GPS
 //#include "GPS.h"
