@@ -3,6 +3,8 @@
 #include "OnChip\Port.h"
 #include "OnChip\Configuration.h"
 #include "Buffer.h"
+#include <stdio.h>  
+#include <string.h>  
 
 #ifdef STM32F0
 OutputPort led1(PC6, true);
@@ -109,12 +111,49 @@ OutputPort pinrst;
 
 void mWifiRoutin(void * param)
 {
-	int ret= mWifi.Kick();
-	debug_printf("检查连接：%d\n", ret);
+	static char buf[20];
+	static int cnt = 0;
+	static int step = 0;
+	//int ret= mWifi.Kick();
+	//debug_printf("检查连接：%d\n", ret);
 	if (!mWifi.GetConnectStatus())
 	{
+		switch (step)
+		{
+		case 0:
+			if (mWifi.Kick())//检查连接
+			{
+				step++;
+			}
+			break;			
+		case 1:
+			mWifi.SetEcho(false);//关闭回响
+			mWifi.SetMode(esp8266::esp8266_MODE_STATION, esp8266::esp8266_PATTERN_NULL);//设置station+ap模式
+			mWifi.SetMUX(false);//单链接模式
+			mWifi.QuitAP();
+			if(mWifi.JoinAP(mSetData.WIFISSID, mSetData.WIFIKEY, esp8266::esp8266_PATTERN_NULL) && (count++ < 4));//加入AP
+			{
+				step++;
+			}
+			break;
+		case 2:
+			sprintf(mSetData.IPADDR, "www.braintics.net");
+			sprintf(mSetData.IPPORT, "8888");
+			if (mWifi.Connect(mSetData.IPADDR, atoi(mSetData.IPPORT), Socket_Type_Stream, Socket_Protocol_IPV4) && (count++ < 4))
+			{
+				step++;
+			}
+			break;
+		case 3:
+			sprintf(buf, "%d hello world!\n", ++cnt);
+			mWifi.Write(buf, strlen(buf));
+			break;
+		default:
+			step = 0;
+			break;
+		}
 	//	/*mMonitor.SetGPRSDataLogo(false);*/
-	//	while (!mWifi.Kick());//检查连接
+		//while (!mWifi.Kick());//检查连接
 	//	mWifi.SetEcho(false);//关闭回响
 	//	mWifi.SetMode(esp8266::esp8266_MODE_STATION, esp8266::esp8266_PATTERN_NULL);//设置station+ap模式
 	//	mWifi.SetMUX(false);//单链接模式
