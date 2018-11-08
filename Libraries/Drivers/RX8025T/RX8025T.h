@@ -3,6 +3,7 @@
 
 #include "Kernel\Sys.h"
 #include "../I2C.h"
+#include "Core\DateTime.h"
 
 class RX8025T
 {

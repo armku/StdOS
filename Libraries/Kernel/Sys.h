@@ -1,14 +1,9 @@
 #ifndef _Sys_H_
 #define _Sys_H_
 
-#include <stddef.h>
 #include "Core\Type.h"
-#include "Core\DateTime.h"
 #include "Core\List.h"
 #include "Core\Delegate.h"
-
-/* Òý½Å¶¨Òå */
-#include "Platform\Pin.h"
 
 extern "C"
 {
