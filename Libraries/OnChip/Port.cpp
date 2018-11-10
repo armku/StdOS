@@ -134,6 +134,8 @@ void Port_OnOpen(Pin pin)
 	}
 	#elif defined STM32F4
 	#endif
+	pinindex = pinindex;
+	portname = portname;
 }
 
 void OpenPeriphClock(Pin pin)

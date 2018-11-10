@@ -25,9 +25,6 @@ protected:
     // 配置过程
     virtual void OnOpen(void* param);
 };
-
-/******************************** OutputPort ********************************/
-
 // 输出口
 class OutputPort : public Port
 {
@@ -54,9 +51,6 @@ protected:
     virtual void OnOpen(void* param);
 	virtual void OpenPin(void* param);
 };
-
-/******************************** AlternatePort ********************************/
-
 // 复用输出口
 class AlternatePort : public OutputPort
 {
@@ -65,9 +59,6 @@ public:
 protected:
     virtual void OpenPin(void* param);
 };
-
-/******************************** InputPort ********************************/
-
 // 输入口
 class InputPort : public Port
 {
