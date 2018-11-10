@@ -27,7 +27,5 @@ public:
 	void SetDuty(float ch1,float ch2, float ch3, float ch4=0);
 	void SetDuty(u8 chNum,float ch2);
 };
- 
 
- 
 #endif
