@@ -1,6 +1,5 @@
 #include "Sys.h"
 #include "Spi.h"
-//#include "_Core.h"
 #include "Platform\stm32.h"
 
 void Spi::Init()
