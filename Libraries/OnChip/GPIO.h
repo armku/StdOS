@@ -20,7 +20,6 @@
 #include <misc.h>
 #include <stdbool.h>
 
-
 /**
   *	@brief  The class of GPIO.
   *	@param  mPin[16]: The array of GPIO_Pin_x.
@@ -70,6 +69,4 @@ public:
 	void ChangeMode(GPIOMode_TypeDef mode);
 };
 
-
 #endif
-

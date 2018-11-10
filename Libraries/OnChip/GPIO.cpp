@@ -1,13 +1,8 @@
-
 //include the header file containing the class declaration. 
 #include "GPIO.h"
-
-
 //Initialize the static member constants
 const  uint16_t  GPIO::mPin[16] = { GPIO_Pin_0, GPIO_Pin_1, GPIO_Pin_2, GPIO_Pin_3, GPIO_Pin_4, GPIO_Pin_5, GPIO_Pin_6, GPIO_Pin_7,
 GPIO_Pin_8, GPIO_Pin_9, GPIO_Pin_10, GPIO_Pin_11, GPIO_Pin_12, GPIO_Pin_13, GPIO_Pin_14, GPIO_Pin_15 };
-
-
 //The Constructor of the Class
 GPIO::GPIO(GPIO_TypeDef *port, uint16_t pin, GPIOMode_TypeDef mode, GPIOSpeed_TypeDef speed) :mMode(mode), mSpeed(speed), mPort(port), mSelectPin(pin)
 {
@@ -95,4 +90,3 @@ void GPIO::ChangeMode(GPIOMode_TypeDef mode)
 	GPIO_InitStructure.GPIO_Mode = mode;
 	GPIO_Init(mPort, &GPIO_InitStructure);
 }
-
