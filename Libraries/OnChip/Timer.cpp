@@ -83,9 +83,6 @@ void Timer::Stop()
 {
 	TIM_Cmd(mTempTimer,DISABLE);//关闭定时器
 }
-
-
-
 /*
 算法思路：
 	COEFFICIENT表示1分屏时最大的时间
@@ -140,4 +137,3 @@ void Timer::ClearCNT(void)
 {
    mTempTimer->CNT &=0;
 }
-

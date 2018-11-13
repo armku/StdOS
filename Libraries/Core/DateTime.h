@@ -21,8 +21,7 @@ public:
 	DateTime(const DateTime& value);
 	DateTime(DateTime&& value);
 
-	// ÖØÔØµÈºÅÔËËã·û
-    DateTime& operator=(int seconds);
+	DateTime& operator=(int seconds);
     DateTime& operator=(const DateTime& value);
 
 	DateTime& Parse(int seconds);

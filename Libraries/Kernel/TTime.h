@@ -34,7 +34,7 @@ public:
 		void DelayUs(int nus) const; //us延时，100us以下精确
 };
 
-extern TTime Time; //extern const TTime Time
+extern TTime Time;
 // 时间开支。借助滴答进行精确计算
 class TimeCost
 {
@@ -58,7 +58,6 @@ public:
 根据黄总@405803243的指点，修改为双定时器架构。
 系统时钟采用基本定时器，任意分频，很方便凑出每个计数表示1毫秒，彻底根除Current除法问题。
 另外，滴答定时器用于微秒级高精度延迟，应用于硬件驱动开发等场合。
-
 */
 
 #endif

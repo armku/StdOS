@@ -79,7 +79,7 @@ public:
 
 extern TSys Sys;		// 创建一个全局的Sys对象  会在main函数之前执行构造函数（！！！！！）
 
-#define STDOS_VERSION "0.5.2018.1030" //版本号
+#define STDOS_VERSION "0.6.2018.1113" //版本号
 
 #endif //_Sys_H_
 

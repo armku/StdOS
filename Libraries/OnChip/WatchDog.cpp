@@ -1,5 +1,4 @@
 #include "WatchDog.h"
-//#include "_Core.h"
 #include "Platform\stm32.h"
 
 WatchDog::WatchDog()

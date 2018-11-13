@@ -82,10 +82,10 @@ const int CummulativeDaysForMonth[] =
 
 DateTime &DateTime::ParseDays(int days)
 {
-    int v2; // r2@3
-    signed int daysRemain; // r1@5
-    int v4; // r6@9
-    bool v5; // r6@17
+    int v2; 
+    signed int daysRemain;
+    int v4;
+    bool v5;
 
     this->Year = days / 365;
     if (this->Year < 136)

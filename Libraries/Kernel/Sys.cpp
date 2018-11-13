@@ -10,8 +10,6 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "OnChip\Configuration.h"
 #include "Core\Buffer.h"
 
-//SystemConfig g_Config;//系统配置
-
 TSys Sys; //系统参数
 
 // 构造函数
@@ -25,15 +23,12 @@ TSys::TSys()
 #elif defined STM32F4
 	this->CystalClock = 8;
 	this->Clock = 168;
-#endif 
-	//this->Config = &g_Config;
-
+#endif 	
 	this->FlashSize = 0x01;
 	this->OnInit();
 	this->Started = false;
 }
 
-// 初始化系统
 void TSys::Init()
 {
 	Sys.GlobalDisable();
@@ -292,7 +287,6 @@ typedef enum {
 	STM32L4,
 	STM32H7,
 }MCUTypedef;
-
 
 uint32_t idAddr[] = { 0x1FFFF7AC,  /*STM32F0唯一ID起始地址*/
 0x1FFFF7E8,  /*STM32F1唯一ID起始地址*/

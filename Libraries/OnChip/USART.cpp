@@ -293,7 +293,6 @@ bool USART::GetByte(uint8_t &data)
 	return ret;
 }
 
-
 uint16_t USART::RxSize()
 {
 	return mRxBuf.Size();
@@ -431,7 +430,6 @@ void USART::IRQ()
 #endif
 }
 
-
 #ifdef USE_USART_DMA
 void USART::InitDMA()
 {
@@ -488,8 +486,4 @@ void USART::DMAIRQ()
 			isBusySend = false;               //½«Ã¦±êÖ¾
 	}
 }
-
 #endif
-
-
-

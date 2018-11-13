@@ -220,22 +220,20 @@ void Task::Init()
     this->Callback = nullptr; // 回调
     this->Param = nullptr; // 参数
 
-    this->Period = 0; // 周期ms 5
-    this->NextTime = 0; // 下一次执行时间ms 3
+    this->Period = 0; // 周期ms
+    this->NextTime = 0; // 下一次执行时间ms
 
-    this->Times = 0; // 执行次数 8
-    this->SleepTime = 0; // 当前睡眠时间us 9
-    this->Cost = 0; // 平均执行时间us 10
-    this->CostMs = 0; // 平均执行时间ms 11
-    this->MaxCost = 0; // 最大执行时间us 12
+    this->Times = 0; // 执行次数
+    this->SleepTime = 0; // 当前睡眠时间us
+    this->Cost = 0; // 平均执行时间us
+    this->CostMs = 0; // 平均执行时间ms
+    this->MaxCost = 0; // 最大执行时间us
 
     this->Enable = true;
     this->Event = false;
     this->Deepth = 0;
     this->MaxDeepth = 1;
 }
-
-////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 TaskScheduler::TaskScheduler(cstring name)
 {

@@ -1,7 +1,6 @@
 #include <string.h>
 #include "Buffer.h"
 
-// 打包一个指针和长度指定的数据区
 Buffer::Buffer(void *ptr, int len)
 {
     this->_Arr = (char*)ptr;
