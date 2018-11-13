@@ -1,7 +1,7 @@
 #ifndef __WatchDog_H__
 #define __WatchDog_H__
 
-#include "Kernel\Sys.h"
+#include "Core\Type.h"
 
 // 看门狗
 class WatchDog
@@ -10,8 +10,6 @@ private:
 	WatchDog();
 
 public:
-	//WatchDog(uint32_t ms = 3000);
-	
 	uint32_t Timeout; // 当前超时时间
 
 	bool Config(uint32_t ms);	// 配置看门狗喂狗重置时间，超过该时间将重启MCU
@@ -21,7 +19,7 @@ public:
 	static WatchDog& Current();
 	static void FeedDogTask(void* param);
 	// 打开看门狗。最长喂狗时间26208ms，默认2000ms
-	static void Start(uint32_t msTimeout = 2000, uint32_t msFeed = 500);
+	static void Start(uint32_t msTimeout = 2000, uint32_t msFeed = 100);
 };
 
 #endif

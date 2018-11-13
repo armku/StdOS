@@ -1,5 +1,24 @@
 #include "WatchDog.h"
-#include "Platform\stm32.h"
+#include "Kernel\Sys.h"
+
+#if defined(STM32F4)
+#include "stm32f4xx.h"
+#include "Platform\STM32F4\Pin_STM32F4.h"
+#elif defined(STM32F2)
+#include "stm32f2xx.h"
+#elif defined(STM32F1)
+#include "stm32f10x.h"
+#include "Platform/STM32F1/Pin_STM32F1.h"
+#elif defined(STM32F3)
+#include "stm32f3xx.h"
+#elif defined(STM32F0)
+#include "stm32f0xx.h"
+#include "Platform/STM32F0/Pin_STM32F0.h"
+#elif defined(GD32F150)
+#include "stm32f0xx.h"
+#else
+#error "请在Keil项目配置C/C++页定义芯片平台，如STM32F0/STM32F1/STM32F2/STM32F3/STM32F4/GD32F150"
+#endif
 
 WatchDog::WatchDog()
 {
@@ -24,17 +43,6 @@ void WatchDog::Start(uint32_t msTimeOut, uint32_t msFeed)
 	Sys.AddTask(FeedDogTask, &WatchDog::Current(), 10, msFeed, "FeedDog");
 }
 
-int SetWatchDog(unsigned int a2)
-{
-	//  int v3; // r0@1
-	//  int v4; // r0@1
-
-	//  IWDG_SetPrescaler();
-	//  v3 = IWDG_SetReload(a2);
-	//  v4 = IWDG_ReloadCounter(v3);
-	//  return IWDG_Enable(v4);
-	return 0;
-}
 int OpenWatchDog(void)
 {
 	//  RCC_LSICmd(1);
