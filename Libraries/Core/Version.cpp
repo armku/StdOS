@@ -30,10 +30,14 @@ static void parse(char* str, int* major, int* minor, int* year, int* monday)
 	{
 		if (str[i] == '.')
 		{
-			dotpos[add++] = i;
-			if (add > 3)
-				break;
+			dotpos[add++] = i;			
 		}
+		if (str[i] == 0)
+		{
+			dotpos[add++] = i;
+		}
+		if (add > 3)
+			break;
 	}
 	//major
 	memset(buf, ArrayLength(buf), 0);
