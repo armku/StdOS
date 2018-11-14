@@ -7,6 +7,8 @@
 #include <string.h>  
 #include "Sys.h"
 
+char *AppVersion = "1.0.2018.1114"; //°æ±¾ºÅ
+
 #ifdef STM32F0
 OutputPort led1(PC6, true);
 OutputPort led2(PC7, true);

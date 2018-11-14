@@ -24,6 +24,8 @@ TSys::TSys()
 	this->CystalClock = 8;
 	this->Clock = 168;
 #endif 	
+	this->OsVer = STDOS_VERSION;
+	this->AppVer = AppVersion;
 	this->FlashSize = 0x01;
 	this->OnInit();
 	this->Started = false;
@@ -228,7 +230,8 @@ void TSys::OnInit()
 
 void TSys::OnShowInfo()const
 {	
-	debug_printf("VER:%s\n", STDOS_VERSION);
+	debug_printf("StdOSVer:%s\n", this->OsVer);
+	debug_printf("  AppVer:%s\n", this->AppVer);
 	debug_printf("CystalClock:%dMHz SysClock:%dMHz Flash:%dk\n", this->CystalClock / 1000 / 1000, this->Clock / 1000 / 1000, this->FlashSize);
 	debug_printf("HeapSize:0X%08X(%dk) StackSize:0X%08X(%dk)\n", this->HeapSize, this->HeapSize / 1024, this->StackSize, this->StackSize / 1024);
 }
