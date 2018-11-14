@@ -19,6 +19,7 @@ public:
 	
     Version& operator=(const Version& ver);
 	void Show(bool newLine = true) const;
+	int Show(char* buf, int pos = 0);//œ‘ æ
 	
 	int CompareTo(const Version& value) const;
     friend bool operator==	(const Version& left, const Version& right);
