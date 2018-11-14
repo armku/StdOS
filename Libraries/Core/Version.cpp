@@ -1,5 +1,4 @@
 #include "Version.h"
-#include <stdio.h>
 #include <string.h>
 # include <stdlib.h>
 
@@ -18,6 +17,12 @@ Version::Version(const Version &ver)
 	this->Year = ver.Year;
 	this->MonthDay = ver.MonthDay;
 }
+template <typename T1>
+void memset1(T1 *buf, int len, char val)
+{
+	for (int i = 0; i < len; i++)
+		buf[i] = val;
+}
 
 static void parse(char* str, int* major, int* minor, int* year, int* monday)
 {
@@ -25,7 +30,7 @@ static void parse(char* str, int* major, int* minor, int* year, int* monday)
 	char buf[10];
 	int dotpos[5];
 	int add = 0;
-	memset(dotpos, ArrayLength(dotpos), 0);
+	memset1(dotpos, ArrayLength(dotpos), 0);
 	for (int i = 0; i < len; i++)
 	{
 		if (str[i] == '.')
@@ -42,7 +47,7 @@ static void parse(char* str, int* major, int* minor, int* year, int* monday)
 	if (dotpos[3] == 0)
 		dotpos[3] = len;
 	//major
-	memset(buf, ArrayLength(buf), 0);
+	memset1(buf, ArrayLength(buf), 0);
 	for (int i = 0; i < dotpos[0]; i++)
 	{
 		buf[i] = str[i];
@@ -50,7 +55,7 @@ static void parse(char* str, int* major, int* minor, int* year, int* monday)
 	}
 	*major = atoi(buf);
 	//minor
-	memset(buf, ArrayLength(buf), 0);
+	memset1(buf, ArrayLength(buf), 0);
 	for (int i = dotpos[0]+1; i < dotpos[1]; i++)
 	{
 		buf[i-(dotpos[0] + 1)] = str[i];
@@ -58,7 +63,7 @@ static void parse(char* str, int* major, int* minor, int* year, int* monday)
 	}
 	*minor = atoi(buf);
 	//year
-	memset(buf, ArrayLength(buf), 0);
+	memset1(buf, ArrayLength(buf), 0);
 	for (int i = dotpos[1] + 1; i < dotpos[2]; i++)
 	{
 		buf[i - (dotpos[1] + 1)] = str[i];
@@ -66,7 +71,7 @@ static void parse(char* str, int* major, int* minor, int* year, int* monday)
 	}
 	*year = atoi(buf);
 	//monday
-	memset(buf, ArrayLength(buf), 0);
+	memset1(buf, ArrayLength(buf), 0);
 	for (int i = dotpos[2] + 1; i < dotpos[3]; i++)
 	{
 		buf[i - (dotpos[2] + 1)] = str[i];
