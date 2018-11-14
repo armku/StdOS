@@ -4,6 +4,7 @@
 #include "Core\Type.h"
 #include "Core\List.h"
 #include "Core\Delegate.h"
+#include "Version.h"
 
 extern "C"
 {
@@ -35,8 +36,8 @@ public:
 	uint8_t	ID[12];		// 芯片ID。
     uint16_t	FlashSize;	// 芯片Flash容量。
     //uint16_t	RAMSize;	// 芯片RAM容量
-	char* OsVer;//系统版本
-	char* AppVer;//软件版本
+	Version OsVer;//系统版本
+	Version AppVer;//软件版本
 
 	TSys();
 
@@ -82,7 +83,7 @@ public:
 extern TSys Sys;		// 创建一个全局的Sys对象  会在main函数之前执行构造函数（！！！！！）
 
 #define STDOS_VERSION "0.7.2018.1114" //系统版本号
-extern char* AppVersion;//需要在此定义软件版本号
+extern char* AppVersion;//需要定义软件版本号实现 如：char *AppVersion = "0.1.2018.1114";
 
 #endif //_Sys_H_
 
