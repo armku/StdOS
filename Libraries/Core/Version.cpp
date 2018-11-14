@@ -91,10 +91,11 @@ void Version::Show(bool newLine) const
 	StdPrintf("%d.%d.%d.%d", this->Major, this->Minor, this->Year, this->MonthDay);
 	newLine ? StdPrintf("\n") : StdPrintf("");
 }
-#include "stdarg.h"
+#include <stdio.h>
+//#include <stdarg.h>
 int Version::Show(char* buf, int pos)
 {
-	vsprintf(buf+pos,"%d.%d.%d.%d", this->Major, this->Minor, this->Year, this->MonthDay);
+	sprintf(buf+pos,"%d.%d.%d.%d", this->Major, this->Minor, this->Year, this->MonthDay);
 	char * buf1 = buf + pos;
 	int len = strlen(buf1);
 	return len;
