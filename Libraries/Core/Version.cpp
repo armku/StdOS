@@ -39,6 +39,8 @@ static void parse(char* str, int* major, int* minor, int* year, int* monday)
 		if (add > 3)
 			break;
 	}
+	if (dotpos[3] == 0)
+		dotpos[3] = len;
 	//major
 	memset(buf, ArrayLength(buf), 0);
 	for (int i = 0; i < dotpos[0]; i++)
