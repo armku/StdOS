@@ -1,5 +1,7 @@
 #include "Version.h"
 #include <stdio.h>
+#include <string.h>
+# include <stdlib.h>
 
 Version::Version(int major, int minor, int year, int monday)
 {
@@ -16,11 +18,61 @@ Version::Version(const Version &ver)
 	this->Year = ver.Year;
 	this->MonthDay = ver.MonthDay;
 }
+
+static void parse(char* str, int* major, int* minor, int* year, int* monday)
+{
+	auto len = strlen(str);
+	char buf[10];
+	int dotpos[5];
+	int add = 0;
+	memset(dotpos, ArrayLength(dotpos), 0);
+	for (int i = 0; i < len; i++)
+	{
+		if (str[i] == '.')
+		{
+			dotpos[add++] = i;
+			if (add > 3)
+				break;
+		}
+	}
+	//major
+	memset(buf, ArrayLength(buf), 0);
+	for (int i = 0; i < dotpos[0]; i++)
+	{
+		buf[i] = str[i];
+		buf[i + 1] = 0;
+	}
+	*major = atoi(buf);
+	//minor
+	memset(buf, ArrayLength(buf), 0);
+	for (int i = dotpos[0]+1; i < dotpos[1]; i++)
+	{
+		buf[i-(dotpos[0] + 1)] = str[i];
+		buf[i -(dotpos[0] + 1)+ 1] = 0;
+	}
+	*minor = atoi(buf);
+	//year
+	memset(buf, ArrayLength(buf), 0);
+	for (int i = dotpos[1] + 1; i < dotpos[2]; i++)
+	{
+		buf[i - (dotpos[1] + 1)] = str[i];
+		buf[i - (dotpos[1] + 1) + 1] = 0;
+	}
+	*year = atoi(buf);
+	//monday
+	memset(buf, ArrayLength(buf), 0);
+	for (int i = dotpos[2] + 1; i < dotpos[3]; i++)
+	{
+		buf[i - (dotpos[2] + 1)] = str[i];
+		buf[i - (dotpos[2] + 1) + 1] = 0;
+	}
+	*monday = atoi(buf);
+}
 //ÊÊÅä°æ±¾£¬¸ñÊ½1.0.2018.1114
 int Version::Parse(char* str)
 {
-
-	return -1;
+	parse(str, &this->Major, &this->Minor, &this->Year, &this->MonthDay);
+	return 0;
 }
 
 void Version::Show(bool newLine) const
