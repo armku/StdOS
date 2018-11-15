@@ -1,5 +1,6 @@
 #include "ADS1232.h"
 #include "Sys.h"
+
 void ADS1232::SetPin(Pin pdout, Pin psclk, Pin ppwdn)
 {
     this->dout.Set(pdout);
@@ -112,7 +113,8 @@ int ADS1232::Read(bool cal)
 	static uint64_t msold = 0;
 	static uint64_t msnew = 0;
 	int temp = 0;
-    uint8_t i = 0;
+	uint32_t valOrigin = 0;
+	int32_t ret = 0;
 
 	msnew = Sys.Ms();
 	this->Status = 0;
@@ -126,36 +128,29 @@ int ADS1232::Read(bool cal)
 		cal = true;
 	}
 	
-	
-    this->sclk = 0;
-    for (temp = 0; temp < 1000; temp++)
-    {
-        if (!this->dout)
-        {
-            break;
-        }
-    }
+	for (temp = 0; temp < 1000; temp++)
+	{
+		if (!this->dout)
+		{
+			break;
+		}
+	}
 	this->Status = temp;
-    Sys.Delay(20);
-    if (temp < 1000)
-    {
-        temp = 0;
-        //this->sclk=0;
-        //this->sclk=1;
+	//Sys.Delay(20);
+	if (temp < 1000)
+	{
+		valOrigin = 0;
 		Sys.GlobalDisable();
-        for (i = 0; i < 24; i++)
-        {
-            this->sclk = 1;
-
-            this->sclk = 0;
-
-            temp <<= 1;
-            if (1 == this->dout)
-            {
-                temp |= 0x01;
-            }
-            // this->sclk=1;
-        }
+		for (int i = 0; i < 24; i++)
+		{
+			valOrigin <<= 1;
+			this->sclk = 1;
+			if (this->dout)
+			{
+				valOrigin |= 0x01;
+			}
+			this->sclk = 0;
+		}
 		if (cal)
 		{
 			this->Status |= 1 << 8;
@@ -165,23 +160,23 @@ int ADS1232::Read(bool cal)
 			this->sclk = 0;
 			this->CalCnt++;
 		}
+		else
+		{
+			this->sclk = 1;
+			this->sclk = 0;
+		}
 		Sys.GlobalEnable();
-        //            this->sclk=1; // The 25th SCLK to force DOUT high
-        //            this->sclk=0;
-//        this->sclk = 1;
-
-//        this->sclk = 0;
-        if (temp &0x800000)
-        {
-            temp ^= 0Xffffff;
-            temp =  - (temp + 1);
-        }
-        else
-        {
-            temp &= 0X7fffff;
-        }
-        this->oldval = temp;
-    }
-    this->readCnt++;
-    return this->oldval;
+		if (valOrigin & 0x800000)
+		{
+			ret = -((0XFFFFFF ^ valOrigin) + 1);
+			this->Status |= 1 << 11;
+		}
+		else
+		{
+			ret = 0X7FFFFF & valOrigin;
+		}
+		this->oldval = ret;
+	}
+	this->readCnt++;
+	return this->oldval;
 }
