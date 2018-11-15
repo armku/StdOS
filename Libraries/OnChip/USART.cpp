@@ -168,7 +168,7 @@ void USART::InitUSART()
 bool USART::SendBytes(uint8_t txData[], uint16_t size)
 {
 	if (RS485)
-		*RS485 = 0;//发送模式
+		*RS485 = 1;//发送模式
 
 	if (mTxBuf.ResSize() < size)      //compare the unused bytes and sending bytes
 	{
@@ -263,7 +263,7 @@ void USART::SetBaudRate(uint32_t baudRate)
 bool USART::SendByte(uint8_t data)
 {
 	if (RS485)
-		*RS485 = 0;//发送模式
+		*RS485 = 1;//发送模式
 
 	if (mTxBuf.Put(data))
 		return true;
@@ -408,7 +408,7 @@ void USART::IRQ()
 		//USART_ClearITPendingBit(mUSARTx, USART_IT_TC);    //Clear
 		if (RS485 && mTxBuf.Size() == 0)
 		{
-			*RS485 = 1;//进入接收模式
+			*RS485 = 0;//进入接收模式
 		}
 	}
 #ifndef USE_USART_DMA 
