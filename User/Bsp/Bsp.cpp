@@ -87,7 +87,7 @@ void BspInit()
 	led2 = 1;
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
-	mWifiinit();
+	//mWifiinit();
 }
 
 #include "DriversCom/esp8266/Socket_esp8266.h"
