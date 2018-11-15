@@ -1,6 +1,7 @@
 #include "Version.h"
 #include <string.h>
-# include <stdlib.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 Version::Version(int major, int minor, int year, int monday)
 {
@@ -92,13 +93,12 @@ void Version::Show(bool newLine) const
 	newLine ? StdPrintf("\n") : StdPrintf("");
 }
 #include <stdio.h>
-//#include <stdarg.h>
+#include "stdarg.h"
 int Version::Show(char* buf, int pos)
 {
-	sprintf(buf+pos,"%d.%d.%d.%d", this->Major, this->Minor, this->Year, this->MonthDay);
-	char * buf1 = buf + pos;
-	int len = strlen(buf1);
-	return len;
+	int ret = 0;
+	ret = sprintf(buf+pos, "%d.%d.%d.%d", this->Major, this->Minor, this->Year, this->MonthDay);
+	return ret;
 }
 Version &Version::operator = (const Version &ver)
 {
