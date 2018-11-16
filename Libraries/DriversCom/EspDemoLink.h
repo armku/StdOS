@@ -18,6 +18,7 @@ public:
 	EspDemoLink(USART &uart);
 	bool CheckFrame();
 	bool Send();
+	void cmd(char *cmd);
 
 	void SetPin(Pin pch,Pin prst);
 private:

@@ -100,6 +100,13 @@ bool EspDemoLink::Send()
 	txFrame.isUpdated = false;
 	return true;
 }
+void EspDemoLink::cmd(char *cmd)
+{
+	static char buf[100];
+	static int len = 0;
+	len = sprintf(buf, "%s\r\n", cmd);
+	this->com.SendBytes(buf, len);
+}
 void EspDemoLink::SetPin(Pin pch, Pin prst)
 {
 
