@@ -47,6 +47,9 @@ public:
 	{
 		if (dataLength >= 2)
 		{
+			this->frameLength = this->dataLength;
+
+			return true;
 			auto end = this->SearchATEnd(dataLength);
 			if (end >= 0)
 			{
