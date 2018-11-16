@@ -3,13 +3,14 @@
 
 #include "stm32f10x.h"
 #include "FIFOBuffer.h"
+#include "DataFrameEspDemoLink.h"
 #include "USART.h"
 
 class EspDemoLink
 {
 public:
-	DataFrame txFrame;
-	DataFrame rxFrame;
+	DataFrameEspDemoLink txFrame;
+	DataFrameEspDemoLink rxFrame;
 	USART &com;
 	OutputPort pinch;
 	OutputPort pinrst;

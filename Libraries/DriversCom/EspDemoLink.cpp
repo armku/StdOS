@@ -58,16 +58,35 @@ EspDemoLink::EspDemoLink(USART &uart) :com(uart)
 
 bool EspDemoLink::CheckFrame()
 {
+	bool ret = false;
+	int rxlen = com.RxSize();
 
-	return com.CheckFrame(rxFrame);
+	if (com.GetBytes(&rxFrame.data[rxFrame.dataLength], rxlen))
+	{
+		rxFrame.dataLength += rxlen;
+	}
+//	if (!rxFrame.CheckFrame())
+//		return false;
+//	if (rxFrame.frameLength > 3)
+//	{
+//		auto crc11 = Crc::CRC16RTU(rxFrame.data, rxFrame.frameLength - 2);
+//	}
+//#if defined DEBUG
+//	/*Buffer(rxFrame.data, rxFrame.dataLength).ShowHex(true,' ');*/
+//#endif
+//	ret = rxFrame.CheckFrame();
+//	if (ret)
+//		rxFrame.Cnt++;
+	return ret;
+	//return com.CheckFrame(rxFrame);
 }
 
 bool EspDemoLink::Send()
 {
 	if (!txFrame.isUpdated) //no new frame data, no need to send
 		return false;
-	if (!com.SendByte(txFrame.header))  //send frame header
-		return false;
+	//if (!com.SendByte(txFrame.header))  //send frame header
+	//	return false;
 	if (txFrame.fnCode > MAX_FN_CODE || !com.SendByte(txFrame.fnCode))  //send function code
 		return false;
 	txFrame.dataLength = DATA_LENGTH[txFrame.fnCode][DIRECTION_SEND];
