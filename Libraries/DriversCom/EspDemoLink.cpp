@@ -27,18 +27,7 @@ bool EspDemoLink::CheckFrame()
 	}
 	if (!rxFrame.CheckFrame())
 		return false;
-//	if (rxFrame.frameLength > 3)
-//	{
-//		auto crc11 = Crc::CRC16RTU(rxFrame.data, rxFrame.frameLength - 2);
-//	}
-//#if defined DEBUG
-//	/*Buffer(rxFrame.data, rxFrame.dataLength).ShowHex(true,' ');*/
-//#endif
-//	ret = rxFrame.CheckFrame();
-//	if (ret)
-//		rxFrame.Cnt++;
 	return ret;
-	//return com.CheckFrame(rxFrame);
 }
 
 bool EspDemoLink::Send()

@@ -49,19 +49,12 @@ public:
 		{
 			auto end = this->SearchATEnd(dataLength);
 			if (end >= 0)
-				this->frameLength = end + 1;
-			else
-				return false;			
-			
-			/*if (this->VerifyCheckCode())
 			{
+				this->frameLength = end + 1;
 				return true;
 			}
 			else
-			{
-				this->RemoveOneFrame();
 				return false;
-			}*/
 		}
 		return false;
 	}
