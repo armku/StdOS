@@ -45,7 +45,24 @@ public:
 	}
 	bool CheckFrame()
 	{
-		if (dataLength >= 2)
+		static uint64_t oldTime = 0;
+		uint64_t curTime;
+		curTime = Sys.Ms();
+		if (curTime - oldTime < 100)
+			return false;
+		oldTime = curTime;
+
+		this->frameLength = this->dataLength;
+
+		if (this->frameLength == 0)
+		{
+			oldTime = curTime;
+			return false;
+		}
+		else
+			return true;
+
+		/*if (dataLength >= 2)
 		{
 			this->frameLength = this->dataLength;
 
@@ -59,7 +76,7 @@ public:
 			else
 				return false;
 		}
-		return false;
+		return false;*/
 	}
 };
 
