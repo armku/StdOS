@@ -30,7 +30,7 @@ public:
 			this->data[i] = this->data[i + frameLength];
 		}
 		dataLength -= frameLength;
-		this->frameLength = 0;
+		this->dataLength = 0;//²âÊÔ´úÂë
 		return true;
 	}
 	//²éÕÒATÖ¸Áî

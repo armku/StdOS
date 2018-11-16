@@ -18,9 +18,11 @@ void EspDemoLinkRoutin(void* param)
 {
 	if (espdemo.CheckFrame())
 	{
-		debug_printf("rcv one frame\n");
+		espdemo.rxFrame.RemoveOneFrame();
+		debug_printf("rcv one frame:%d-%d\n",espdemo.rxFrame.frameLength,espdemo.rxFrame.dataLength);
+		Buffer(espdemo.rxFrame.data, espdemo.rxFrame.frameLength).ShowHex(true);
 	}
-	debug_printf("com rx:%d-tx:%d frame:%d-%d\n", espdemo.com.RxCnt, espdemo.com.TxCnt, espdemo.rxFrame.Cnt, espdemo.txFrame.Cnt);
+	//debug_printf("com rx:%d-tx:%d frame:%d-%d\n", espdemo.com.RxCnt, espdemo.com.TxCnt, espdemo.rxFrame.Cnt, espdemo.txFrame.Cnt);
 }
 void EspDemoLinkSendRoutin(void* param)
 {
@@ -34,7 +36,7 @@ void EspDemoLinkTestInit()
 	espdemo.Init();
 
 	Sys.AddTask(EspDemoLinkRoutin, 0, 1000, 1000, "EspDemoLinkRoutin");
-	Sys.AddTask(EspDemoLinkSendRoutin, 0, 1000, 1000, "EspDemoLinkSendRoutin");
+	Sys.AddTask(EspDemoLinkSendRoutin, 0, 1000, 3000, "EspDemoLinkSendRoutin");
 }
 
 

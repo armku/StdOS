@@ -27,7 +27,8 @@ bool EspDemoLink::CheckFrame()
 	}
 	if (!rxFrame.CheckFrame())
 		return false;
-	return ret;
+	else 
+		return true;
 }
 
 bool EspDemoLink::Send()
