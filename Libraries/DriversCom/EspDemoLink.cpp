@@ -11,9 +11,18 @@
 #include <string.h>  
 #include "Sys.h"
 
+USART usart333(USART3, 115200);
+EspDemoLink espdemo(usart333);
+
+void EspDemoLinkRoutin(void* param)
+{
+
+}
+
 void EspDemoLinkTestInit()
 {
 
+	Sys.AddTask(EspDemoLinkRoutin, 0, 1000, 1, "EspDemoLinkRoutin");
 }
 
 
@@ -58,7 +67,7 @@ bool EspDemoLink::Send()
 
 
 
-
+#if 0
 #include "DriversCom/esp8266/Socket_esp8266.h"
 USART com3(USART3, 115200);
 Socket_esp8266 mWifi(com3);
@@ -170,4 +179,4 @@ void mWifiinit()
 
 	Sys.AddTask(mWifiRoutin, 0, 0, 1000, "mWifiRoutin");
 }
-
+#endif
