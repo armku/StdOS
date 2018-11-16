@@ -28,7 +28,7 @@ void EspDemoLinkRoutin(void* param)
 void EspDemoLinkSendRoutin(void* param)
 {
 	static int i = 0;
-	if (i++ == 10)
+	if (i++ == 3)
 	{
 		espdemo.EchoOn(false);
 	}
