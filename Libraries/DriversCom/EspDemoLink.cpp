@@ -57,6 +57,10 @@ void EspDemoLink::cmd(char *cmd)
 	len = sprintf(buf, "%s\r\n", cmd);
 	this->com.SendBytes(buf, len);
 }
+void EspDemoLink::EchoOn(bool on)
+{
+	this->com << "ATE" << (on ? 1 : 0) << "\r\n";
+}
 void EspDemoLink::SetPin(Pin pch, Pin prst)
 {
 	this->pinch.Set(PG13);

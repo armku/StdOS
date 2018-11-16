@@ -23,6 +23,8 @@ public:
 	void Init();
 
 	void SetPin(Pin pch,Pin prst);
+
+	void EchoOn(bool on = false);
 private:
 
 };

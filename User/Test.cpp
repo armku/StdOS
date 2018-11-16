@@ -27,7 +27,16 @@ void EspDemoLinkRoutin(void* param)
 }
 void EspDemoLinkSendRoutin(void* param)
 {
-	espdemo.cmd("AT");
+	static int i = 0;
+	if (i++ == 10)
+	{
+		espdemo.EchoOn(false);
+	}
+	else
+	{
+		espdemo.cmd("AT");
+	}
+	i %= 20;
 
 }
 
