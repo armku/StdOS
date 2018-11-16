@@ -20,7 +20,7 @@ void EspDemoLinkRoutin(void* param)
 	{
 		debug_printf("rcv one frame\n");
 	}
-	debug_printf("rcv:%d-%d\n", espdemo.rxFrame.Cnt, espdemo.com.RxCnt);
+	debug_printf("com rx:%d-tx:%d frame:%d-%d\n", espdemo.com.RxCnt, espdemo.com.TxCnt, espdemo.rxFrame.Cnt, espdemo.txFrame.Cnt);
 }
 void EspDemoLinkSendRoutin(void* param)
 {
