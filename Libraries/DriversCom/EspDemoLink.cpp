@@ -16,13 +16,21 @@ EspDemoLink espdemo(usart333);
 
 void EspDemoLinkRoutin(void* param)
 {
-
+	if (espdemo.CheckFrame())
+	{
+		debug_printf("rcv one frame\n");
+	}
+}
+void EspDemoLinkSendRoutin(void* param)
+{
+	usart333 << "AT";
 }
 
 void EspDemoLinkTestInit()
 {
 
 	Sys.AddTask(EspDemoLinkRoutin, 0, 1000, 1, "EspDemoLinkRoutin");
+	Sys.AddTask(EspDemoLinkSendRoutin, 0, 1000, 1000, "EspDemoLinkSendRoutin");
 }
 
 
