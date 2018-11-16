@@ -11,6 +11,8 @@ public:
 	DataFrame txFrame;
 	DataFrame rxFrame;
 	USART &com;
+	OutputPort pinch;
+	OutputPort pinrst;
 public:
 	EspDemoLink(USART &uart);
 	bool CheckFrame();

@@ -23,11 +23,26 @@ void EspDemoLinkRoutin(void* param)
 }
 void EspDemoLinkSendRoutin(void* param)
 {
-	usart333 << "AT";
+	usart333 << "AT\n";
 }
 
 void EspDemoLinkTestInit()
 {
+	espdemo.pinch.Set(PG13);
+	espdemo.pinch.Invert = false;
+	espdemo.pinch.OpenDrain = false;
+	espdemo.pinch.Open();
+	espdemo.pinch = 0;
+
+	espdemo.pinrst.Set(PG14);
+	espdemo.pinrst.Invert = false;
+	espdemo.pinrst.OpenDrain = false;
+	espdemo.pinrst.Open();
+	espdemo.pinrst = 0;
+
+	Sys.Delay(500);
+	espdemo.pinch = 1;
+	espdemo.pinrst = 1;
 
 	Sys.AddTask(EspDemoLinkRoutin, 0, 1000, 1, "EspDemoLinkRoutin");
 	Sys.AddTask(EspDemoLinkSendRoutin, 0, 1000, 1000, "EspDemoLinkSendRoutin");
