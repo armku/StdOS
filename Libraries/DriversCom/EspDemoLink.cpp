@@ -40,6 +40,8 @@ void EspDemoLinkTestInit()
 	espdemo.pinrst.Open();
 	espdemo.pinrst = 0;
 
+	espdemo.SetPin(PG13,PG14);
+
 	Sys.Delay(500);
 	espdemo.pinch = 1;
 	espdemo.pinrst = 1;
@@ -79,7 +81,10 @@ bool EspDemoLink::Send()
 	txFrame.isUpdated = false;
 	return true;
 }
+void EspDemoLink::SetPin(Pin pch, Pin prst)
+{
 
+}
 
 
 
