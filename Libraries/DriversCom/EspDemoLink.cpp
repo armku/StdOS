@@ -28,18 +28,6 @@ void EspDemoLinkSendRoutin(void* param)
 
 void EspDemoLinkTestInit()
 {
-	espdemo.pinch.Set(PG13);
-	espdemo.pinch.Invert = false;
-	espdemo.pinch.OpenDrain = false;
-	espdemo.pinch.Open();
-	espdemo.pinch = 0;
-
-	espdemo.pinrst.Set(PG14);
-	espdemo.pinrst.Invert = false;
-	espdemo.pinrst.OpenDrain = false;
-	espdemo.pinrst.Open();
-	espdemo.pinrst = 0;
-
 	espdemo.SetPin(PG13,PG14);
 
 	Sys.Delay(500);
@@ -109,7 +97,17 @@ void EspDemoLink::cmd(char *cmd)
 }
 void EspDemoLink::SetPin(Pin pch, Pin prst)
 {
+	this->pinch.Set(PG13);
+	this->pinch.Invert = false;
+	this->pinch.OpenDrain = false;
+	this->pinch.Open();
+	this->pinch = 0;
 
+	this->pinrst.Set(PG14);
+	this->pinrst.Invert = false;
+	this->pinrst.OpenDrain = false;
+	this->pinrst.Open();
+	this->pinrst = 0;
 }
 
 
