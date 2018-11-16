@@ -19,11 +19,13 @@ void EspDemoLinkRoutin(void* param)
 	if (espdemo.CheckFrame())
 	{
 		debug_printf("rcv one frame\n");
+
 	}
 }
 void EspDemoLinkSendRoutin(void* param)
 {
 	espdemo.cmd("AT");
+	debug_printf("rcv:%d-%d\n",espdemo.rxFrame.Cnt,espdemo.com.RxCnt);
 }
 
 void EspDemoLinkTestInit()
