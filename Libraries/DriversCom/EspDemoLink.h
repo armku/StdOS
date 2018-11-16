@@ -20,6 +20,7 @@ public:
 	bool Send();
 	void cmd(char *cmd);
 	void cmd(const char *cmd) { this->cmd((char*)cmd); }
+	void Init();
 
 	void SetPin(Pin pch,Pin prst);
 private:

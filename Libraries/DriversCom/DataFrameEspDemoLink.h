@@ -61,7 +61,7 @@ public:
 	}
 	bool CheckFrame()
 	{
-		if (dataLength >= 8)
+		if (dataLength >= 2)
 		{
 			this->devid = this->data[0];
 			this->fnCode = this->data[1];

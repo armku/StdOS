@@ -29,10 +29,7 @@ void EspDemoLinkSendRoutin(void* param)
 void EspDemoLinkTestInit()
 {
 	espdemo.SetPin(PG13,PG14);
-
-	Sys.Delay(500);
-	espdemo.pinch = 1;
-	espdemo.pinrst = 1;
+	espdemo.Init();
 
 	Sys.AddTask(EspDemoLinkRoutin, 0, 1000, 1, "EspDemoLinkRoutin");
 	Sys.AddTask(EspDemoLinkSendRoutin, 0, 1000, 1000, "EspDemoLinkSendRoutin");
@@ -53,8 +50,8 @@ bool EspDemoLink::CheckFrame()
 	{
 		rxFrame.dataLength += rxlen;
 	}
-//	if (!rxFrame.CheckFrame())
-//		return false;
+	if (!rxFrame.CheckFrame())
+		return false;
 //	if (rxFrame.frameLength > 3)
 //	{
 //		auto crc11 = Crc::CRC16RTU(rxFrame.data, rxFrame.frameLength - 2);
@@ -109,7 +106,12 @@ void EspDemoLink::SetPin(Pin pch, Pin prst)
 	this->pinrst.Open();
 	this->pinrst = 0;
 }
-
+void EspDemoLink::Init()
+{
+	Sys.Delay(500);
+	this->pinch = 1;
+	this->pinrst = 1;
+}
 
 
 
