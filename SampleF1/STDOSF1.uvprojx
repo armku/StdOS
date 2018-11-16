@@ -397,6 +397,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
             </File>
+            <File>
+              <FileName>Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Test.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1286,6 +1291,11 @@
               <FileName>ssd1309font.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
+            </File>
+            <File>
+              <FileName>Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
