@@ -23,7 +23,7 @@ void EspDemoLinkRoutin(void* param)
 }
 void EspDemoLinkSendRoutin(void* param)
 {
-	usart333 << "AT\n";
+	usart333 << "AT\r\n";
 }
 
 void EspDemoLinkTestInit()
