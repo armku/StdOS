@@ -12,35 +12,19 @@ ModbusSlaveLink modbusSlave(usart222);
 OutputPort p485dr;
 void ModbusSlaveLinkRoutin(void* param)
 {
-	static int i = 0;
-		
 	if (modbusSlave.CheckFrame())
 	{
-		switch (modbusSlave.rxFrame.fnCode)
-		{
-		case 1:
-		case 2:
-		case 3:
-		case 4:
-			modbusSlave.txFrame.devid = modbusSlave.rxFrame.devid;
-			modbusSlave.txFrame.fnCode = modbusSlave.rxFrame.fnCode;
-			modbusSlave.txFrame.regAddr = modbusSlave.rxFrame.regAddr;
-			modbusSlave.txFrame.regLength = modbusSlave.rxFrame.regLength;
-			for (int i = 0; i < 10; i++)
-				modbusSlave.txFrame.SetReg(i, i);
-			modbusSlave.txFrame.SetRegLen(10);
-			modbusSlave.txFrame.isUpdated = true;
-			modbusSlave.Send();
-			break;
-		default:
-			break;
-		}
-		debug_printf("hello:%d\n", i++);
-		debug_printf("frame ok\n");
+		modbusSlave.DealFrame();
+		modbusSlave.rxFrame.RemoveOneFrame();
+		//debug_printf("rx:%d-%d tx:%d-%d\n", modbusSlave.rxFrame.Cnt, modbusSlave.com.RxCnt, modbusSlave.txFrame.Cnt, modbusSlave.com.TxCnt);
 	}
 	else
 	{
-		//debug_printf("frame error\n");
+		if (modbusSlave.rxFrame.dataLength > 0 && (Sys.Ms() - modbusSlave.com.LastRcvTime) > 1000)
+		{
+			debug_printf("清除接收缓冲区坏数据 length:%d\n", modbusSlave.rxFrame.dataLength); 
+			modbusSlave.rxFrame.dataLength = 0;			
+		}
 	}
 }
 
@@ -50,7 +34,7 @@ void ModbusSlaveLinkTestInit()
 	p485dr.Invert=false;
 	p485dr.OpenDrain=false;
 	p485dr.Open();
-	p485dr = 1;//接收模式
+	p485dr = 0;//接收模式
 	modbusSlave.com.RS485 = &p485dr;
 	Sys.AddTask(ModbusSlaveLinkRoutin, 0, 0, 1, "ModbusSlaveLinkRoutin");
 }
