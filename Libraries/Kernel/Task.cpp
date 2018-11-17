@@ -310,7 +310,7 @@ void TaskScheduler::Start()
     #ifdef DEBUG
         if (!this->Running)
         {
-            //this->Add(&TaskScheduler::ShowStatus,this,1000*30,1000*30,"ShowStatus");
+            this->Add(&TaskScheduler::ShowStatus,this,1000*30,1000*30,"ShowStatus");
         }
     #endif 
 
