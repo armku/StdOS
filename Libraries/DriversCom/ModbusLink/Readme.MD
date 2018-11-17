@@ -20,7 +20,7 @@ void ModbusSlaveLinkRoutin(void* param)
 	}
 	else
 	{
-		if (modbusSlave.rxFrame.dataLength > 0 && (Sys.Ms() - modbusSlave.com.LastRcvTime) > 1000)
+		if (modbusSlave.rxFrame.dataLength > 0 && (Sys.Ms() - modbusSlave.com.LastRcvTime) > 10)
 		{
 			debug_printf("清除接收缓冲区坏数据 length:%d\n", modbusSlave.rxFrame.dataLength); 
 			modbusSlave.rxFrame.dataLength = 0;			
