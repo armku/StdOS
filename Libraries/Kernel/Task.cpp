@@ -130,7 +130,7 @@ void Task::ShowStatus()
     }
     else if (this->MaxCost >= 1000)
     {
-        debug_printf(" 最大 %3dms", this->MaxCost / 1000);
+        debug_printf(" 最大 %3.2fms", this->MaxCost / 1000.0);
     }
     else
     {
@@ -310,7 +310,7 @@ void TaskScheduler::Start()
     #ifdef DEBUG
         if (!this->Running)
         {
-            this->Add(&TaskScheduler::ShowStatus,this,1000*30,1000*30,"ShowStatus");
+            //this->Add(&TaskScheduler::ShowStatus,this,1000*30,1000*30,"ShowStatus");
         }
     #endif 
 
@@ -320,7 +320,7 @@ void TaskScheduler::Start()
     }
 
     #ifdef DEBUG
-        //Sys.AddTask(&TaskScheduler::ShowStatus, this, 30 *1000, 30 *1000, "任务状态");
+        Sys.AddTask(&TaskScheduler::ShowStatus, this, 30 *1000, 30 *1000, "任务状态");
     #else 
         //Sys.AddTask(ShowTime, this, 2 *1000, 20 *1000, "时间显示");
     #endif 
