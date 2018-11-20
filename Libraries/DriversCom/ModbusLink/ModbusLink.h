@@ -48,17 +48,16 @@ public:
 	uint8_t id; //本机ID
 	void DealFrame(); //处理数据帧
 	void(*DUpdateReg)(uint16_t regaddr,uint16_t reglen); //更新参数
+	//更新设备参数从pc
+	void (*pupdatedevparafrompc)();
+	//更新通道参数 通道号 0-15
+	void(*pcommupdatereghoildchannel)(uint8_t ch);
+	//更新通道参数
+	void(*pupdatechannelparafrompc)();
+	void(*pupdatewarparafrompc)(uint16_t ch);
 };
 
 extern uint16_t RegInputu16[]; //输入寄存器
 extern uint16_t RegHoilding16[]; //保持寄存器
 
-//需要在外部定义的接口函数
-//更新设备参数从pc
-void updatedevparafrompc();
-//更新通道参数 通道号 0-15
-void commupdatereghoildchannel(uint8_t ch);
-//更新通道参数
-void updatechannelparafrompc();
-void updatewarparafrompc(uint16_t ch);
 #endif // !_MODBUSLINK_H

@@ -108,22 +108,26 @@ void ModbusSlaveLink::DealFrame()
 		{
 		case 2:
 			//统一报警通道号
-			updatewarparafrompc(this->rxFrame.regLength - 1);
+			if (this->pupdatewarparafrompc != 0)
+				this->pupdatewarparafrompc(this->rxFrame.regLength - 1);
 			break;
 		case 23:
 			//加载通道参数
-			commupdatereghoildchannel(this->rxFrame.regLength);
+			if(this->pcommupdatereghoildchannel)
+				this->pcommupdatereghoildchannel(this->rxFrame.regLength);
 			break;
 		default:
 			if (this->rxFrame.regAddr < 24)
 			{
 				//更新设备参数
-				updatedevparafrompc();
+				if (pupdatedevparafrompc != 0)
+					this->pupdatedevparafrompc();
 			}
 			else if (this->rxFrame.regAddr > 23)
 			{
 				//更新通道参数
-				updatechannelparafrompc();
+				if (this->pupdatechannelparafrompc != 0)
+					this->pupdatechannelparafrompc();
 			}
 			else {}
 			break;
@@ -158,7 +162,8 @@ void ModbusSlaveLink::DealFrame()
 				tt = this->rxFrame.data[7];
 				tt <<= 8;
 				tt += this->rxFrame.data[8];
-				updatewarparafrompc(tt - 1);
+				if (this->pupdatewarparafrompc)
+					this->pupdatewarparafrompc(tt - 1);
 			}
 			else if ((this->rxFrame.regAddr == 23) && (this->rxFrame.regLength == 1))
 			{
@@ -166,17 +171,20 @@ void ModbusSlaveLink::DealFrame()
 				tt = this->rxFrame.data[7];
 				tt <<= 8;
 				tt += this->rxFrame.data[8];
-				commupdatereghoildchannel(tt);
+				if (this->pcommupdatereghoildchannel)
+					this->pcommupdatereghoildchannel(tt);
 			}
 			else if (this->rxFrame.regAddr < 24)
 			{
 				//更新设备参数
-				updatedevparafrompc();
+				if(this->pupdatedevparafrompc!=0)
+					this->pupdatedevparafrompc();
 			}
 			else if (this->rxFrame.regAddr > 23)
 			{
 				//更新通道参数
-				updatechannelparafrompc();
+				if (this->pupdatechannelparafrompc != 0)
+					this->pupdatechannelparafrompc();
 			}
 			else if (this->DUpdateReg)
 			{
