@@ -118,7 +118,7 @@ void Task::ShowStatus()
 
     if (Cost >= 1000)
     {
-        debug_printf("%3ums", this->Cost / 1000);
+        debug_printf("%3.2fms", this->Cost / 1000.0);
     }
     else
     {
