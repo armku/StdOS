@@ -19,7 +19,7 @@ public:
 	static WatchDog& Current();
 	static void FeedDogTask(void* param);
 	// 打开看门狗。最长喂狗时间26208ms，默认20ms
-	static void Start(uint32_t msTimeout = 2000, uint32_t msFeed = 20);
+	static void Start(uint32_t msTimeout = 5000, uint32_t msFeed = 20);
 };
 
 #endif
