@@ -48,13 +48,6 @@ bool ModbusSlaveLink::Send()
 uint16_t RegInputu16[144]; //输入寄存器
 uint16_t RegHoilding16[60];
 
-//更新设备参数从pc
-void updatedevparafrompc();
-//更新通道参数 通道号 0-15
-void commupdatereghoildchannel(uint8_t ch);
-//更新通道参数
-void updatechannelparafrompc();
-void updatewarparafrompc(uint16_t ch);
 //处理数据帧
 void ModbusSlaveLink::DealFrame()
 {
