@@ -48,15 +48,15 @@ uint16_t CAD7689::AD_Read(void)
     uint16_t dat = 0;
     uint32_t i;
     this->ppincnv=0;
-    Sys.Delay(40);
+    Sys.Delay(1);
     for (i = 0; i < 16; i++)
     {
         this->ppinsck=1;
-        Sys.Delay(40);
+        Sys.Delay(1);
         dat <<= 1;
         dat += this->ppinsdo.Read();
         this->ppinsck=0;
-        Sys.Delay(40);
+        Sys.Delay(1);
     }
     this->ppincnv=1;
     return dat;
@@ -67,21 +67,21 @@ uint16_t CAD7689::AD_Write(uint16_t sdat)
     uint16_t dat = 0;
     uint32_t i;
     this->ppincnv=0;
-    Sys.Delay(50);
+    Sys.Delay(1);
     for (i = 0; i < 16; i++)
     {
         ((sdat &0x8000) > 0) ? this->ppinsdi=1: this->ppinsdi=0;
         dat <<= 1;
         dat += this->ppinsdo.Read();
-        Sys.Delay(50);
+        Sys.Delay(1);
         this->ppinsck=0;
-        Sys.Delay(50);
+        Sys.Delay(1);
         sdat <<= 1;
         this->ppinsck=1;
     }
-    Sys.Delay(50);
+    Sys.Delay(1);
     this->ppinsdi=0;
-    Sys.Delay(50);
+    Sys.Delay(1);
     this->ppincnv=1;
     return dat;
 }
@@ -97,12 +97,7 @@ void CAD7689::Init(void)
     this->ppincnv=0;
     Sys.Delay(100);
     this->ppincnv=1;
-    Sys.Delay(100);
-	Sys.Delay(100);
-	Sys.Delay(100);
-	Sys.Delay(100);
-	Sys.Delay(100);
-	Sys.Delay(100);
+    Sys.Delay(600);
 
 }
 
