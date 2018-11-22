@@ -384,7 +384,7 @@ USART& USART::operator<<(const char* pStr)
 bool USART::CheckFrame(DataFrame &df)
 {
 
-	return mRxBuf.CheckFrame(df);;
+	return mRxBuf.CheckFrame(df);
 }
 
 
