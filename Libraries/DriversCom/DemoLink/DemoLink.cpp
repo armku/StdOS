@@ -7,8 +7,11 @@ DemoLink::DemoLink(USART &uart) :com(uart)
 
 bool DemoLink::CheckFrame()
 {
-
-	return com.CheckFrame(rxFrame);
+	return this->CheckFrame(rxFrame);	
+}
+bool DemoLink::CheckFrame(DataFrame &df)
+{
+	return com.CheckFrame(df);
 }
 
 bool DemoLink::Send()

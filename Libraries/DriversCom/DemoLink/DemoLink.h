@@ -16,6 +16,7 @@ public:
 	bool CheckFrame();
 	bool Send();
 private:
+	bool CheckFrame(DataFrame &df);
 
 };
 

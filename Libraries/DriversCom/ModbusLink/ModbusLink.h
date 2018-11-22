@@ -42,7 +42,7 @@ public:
 	ModbusSlaveLink(USART &uart);
 	bool CheckFrame();
 	bool Send();
-	void DealExtChannel();//处理扩展通道数据，测试数据通道
+	//void DealExtChannel();//处理扩展通道数据，测试数据通道
 private:
 public:
 	uint8_t id; //本机ID
