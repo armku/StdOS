@@ -78,6 +78,8 @@ public:
 	virtual void ClearRxBuf();
 	virtual void ClearTxBuf();
 
+	bool CheckFrame(DataFrame &df);
+
 	void IRQ();
 
 	USART& operator<<(int val);

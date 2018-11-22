@@ -381,6 +381,13 @@ USART& USART::operator<<(const char* pStr)
 	return *this;
 }
 
+bool USART::CheckFrame(DataFrame &df)
+{
+
+	return mRxBuf.CheckFrame(df);;
+}
+
+
 void USART::IRQ()
 {
 	if (USART_GetFlagStatus(mUSARTx, USART_FLAG_ORE) != RESET)
