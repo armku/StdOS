@@ -97,7 +97,7 @@ void ModbusSlaveLink::DealFrame()
 		else
 		{
 			//À©Õ¹²âÊÔÖ¸Áî
-			this->DealExtChannel();
+			//this->DealExtChannel();
 		}
 		break;
 	case WriteSingleRegister:
