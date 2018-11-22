@@ -18,6 +18,7 @@ public:
 private:
 	bool CheckFrame(DataFrame &df);
 
+
 };
 
 #endif // !_DEMOLINK_H

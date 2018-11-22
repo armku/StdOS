@@ -7,6 +7,7 @@ template<typename T, uint16_t MAX_SIZE>
 class FIFOBuffer
 {
 private:
+public:
 	T _buf[MAX_SIZE]; //fifo buffer data
 	uint16_t _max_size;     //max buffer size
 	uint16_t _size;         //current buffer nodes
