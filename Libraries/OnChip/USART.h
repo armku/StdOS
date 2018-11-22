@@ -39,9 +39,10 @@ private:
 	uint8_t             mPrePri;   //preemption priority
 	uint8_t             mSubPri;   //sub priority
 	uint8_t             mPriGroup; //priority group
+public:
 	FIFOBuffer<uint8_t, USART_TX_BUFFER_SIZE>  mTxBuf;  //USART Tx Buffer
 	FIFOBuffer<uint8_t, USART_RX_BUFFER_SIZE>  mRxBuf;  //USART Rx Buffer
-
+private:
 	uint8_t mPrecision;   //when show precision after dot "."  when use "<<" to show float value
 
 	uint16_t mTxOverflow; //Tx overflow byte count
@@ -77,8 +78,6 @@ public:
 
 	virtual void ClearRxBuf();
 	virtual void ClearTxBuf();
-
-	bool CheckFrame(DataFrame &df);
 
 	void IRQ();
 

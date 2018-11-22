@@ -11,7 +11,7 @@ bool DemoLink::CheckFrame()
 }
 bool DemoLink::CheckFrame(DataFrame &df)
 {
-	return com.CheckFrame(df);
+	return com.mRxBuf.CheckFrame(df);
 }
 
 bool DemoLink::Send()
