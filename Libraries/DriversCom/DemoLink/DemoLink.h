@@ -17,7 +17,9 @@ public:
 	bool Send();
 private:
 	bool CheckFrame(DataFrame &df);
-
+private:
+	bool Get(uint8_t & da);
+	bool Gets(uint8_t * pData, uint16_t num);
 
 };
 

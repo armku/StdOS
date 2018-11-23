@@ -74,6 +74,14 @@ bool DemoLink::CheckFrame(DataFrame &df)
 	return true;
 #endif
 }
+bool DemoLink::Get(uint8_t & da)
+{
+	return true;
+}
+bool DemoLink::Gets(uint8_t * pData, uint16_t num)
+{
+	return true;
+}
 
 bool DemoLink::Send()
 {
