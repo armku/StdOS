@@ -14,9 +14,16 @@ bool DemoLink::CheckFrame(DataFrame &df)
 #if 0
 	return com.mRxBuf.CheckFrame(df);
 #else
-	mRxBuf.Puts(com.mRxBuf._buf,com.RxCnt);
-	com.mRxBuf.Clear();
-
+	int rxlen = com.RxSize();
+	uint8_t ch;
+	while (com.RxSize())
+	{
+		if (com.GetByte(ch))
+		{
+			mRxBuf.Put(ch);
+		}
+	}
+	
 	//at least 4 bytes: header  fnCode  length  checkSum
 	while (mRxBuf._size > 0 && (mRxBuf._buf[mRxBuf._out_idx] != df.header)) //find frame header
 	{
