@@ -23,10 +23,7 @@ public:
 	void Clear(); //clear buffer
 	uint16_t MaxSize(); //the max byte size of buffer
 	uint16_t ResSize(); //the unused bytes of buffer
-
-	bool CheckFrame(DataFrame &df);
 };
-
 
 template<typename T, uint16_t MAX_SIZE>
 FIFOBuffer<T, MAX_SIZE>::FIFOBuffer()
@@ -132,69 +129,6 @@ void FIFOBuffer<T, MAX_SIZE>::Clear()
 	_size = 0;         //current buffer nodes
 	_out_idx = 0;      //output index of buffer
 	_in_idx = 0;       //input index of buffer
-}
-
-template<typename T, uint16_t MAX_SIZE>
-bool FIFOBuffer<T, MAX_SIZE>::CheckFrame(DataFrame &df)
-{
-	//at least 4 bytes: header  fnCode  length  checkSum
-	while (_size > 0 && (_buf[_out_idx] != df.header)) //find frame header
-	{
-		if (++_out_idx >= _max_size)		_out_idx = 0;
-		_size--;
-	}
-	if (_size < 4)                    //not enuogh data, or not find frame header
-		return false;
-
-
-	uint16_t idx = _out_idx + 1;
-	if (idx >= _max_size) idx -= _max_size;   //function code index
-
-	uint8_t fnCode = _buf[idx];                 //get function code
-
-	if (fnCode > MAX_FN_CODE)                 //validate function code
-	{
-		Get(fnCode);     //out idx move forward one byte, 
-		return false;    //function code error
-	}
-	idx = _out_idx + 2;
-	if (idx >= _max_size) idx -= _max_size;   //data length index
-	uint8_t dataLength = _buf[idx];             //get data length number
-	if (dataLength != DATA_LENGTH[fnCode][DIRECTION_RECV]) //validate data length
-	{
-		Get(fnCode);    //out idx move forward one byte,  
-		return false;   //data length error
-	}
-
-	if (_size < dataLength + 4)                 //not enuogh data
-		return false;
-
-	uint8_t checkSum = 0;
-	for (uint8_t i = 0; i < dataLength + 3; i++)         //get checksum code
-	{
-		idx = _out_idx + i;
-
-		if (idx >= _max_size)
-			idx -= _max_size;
-
-		checkSum += _buf[idx];
-	}
-	if (++idx >= _max_size)
-		idx -= _max_size;
-	if (checkSum != _buf[idx])     //和校验失败
-	{
-		Get(fnCode);
-		return false;
-	}
-	//和校验成功，填充数据帧
-
-	Get(fnCode);                 //frame header
-	Get(df.fnCode);              //function code
-	Get(df.dataLength);          //data length
-	Gets(df.data, dataLength);    //data
-	Get(df.checkSum);            //check sum
-	df.isUpdated = true;
-	return true;
 }
 
 #endif // !_FIFOBUFF_H
