@@ -1,8 +1,6 @@
 #ifndef _FIFOBUFF_H
 #define _FIFOBUFF_H
 
-#include "DataFrame.h"
-
 template<typename T, uint16_t MAX_SIZE>
 class FIFOBuffer
 {

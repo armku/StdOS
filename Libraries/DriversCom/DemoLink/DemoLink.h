@@ -3,6 +3,7 @@
 
 #include "stm32f10x.h"
 #include "FIFOBuffer.h"
+#include "DataFrame.h"
 #include "USART.h"
 
 class DemoLink
