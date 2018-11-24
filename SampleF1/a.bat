@@ -1,2 +1,2 @@
-Python a.py Objects/DEBUG.axf
+Python a.py a.txt
 Pause

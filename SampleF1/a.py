@@ -4,7 +4,7 @@ import time
 import re
 import sys
 
-#print(sys.argv)
+print(sys.argv)
 print(sys.argv[1])
 strnow=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 print (strnow)
