@@ -23,7 +23,7 @@ bool DemoLink::CheckFrame(DataFrame &df)
 			mRxBuf.Put(ch);
 		}
 	}
-	
+#if 0
 	//at least 4 bytes: header  fnCode  length  checkSum
 	while (mRxBuf._size > 0 && (mRxBuf._buf[mRxBuf._out_idx] != df.header)) //find frame header
 	{
@@ -81,6 +81,7 @@ bool DemoLink::CheckFrame(DataFrame &df)
 	Get(df.dataLength);          //data length
 	Gets(df.data, dataLength);    //data
 	Get(df.checkSum);            //check sum
+#endif
 	df.isUpdated = true;
 	return true;
 #endif
