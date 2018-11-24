@@ -11,6 +11,7 @@ class DemoLink
 public:
 	DataFrame txFrame;
 	DataFrame rxFrame;
+	FIFOBuffer<uint8_t, USART_RX_BUFFER_SIZE>  mRxBuf;  //USART Rx Buffer
 	USART &com;
 public:
 	DemoLink(USART &uart);
