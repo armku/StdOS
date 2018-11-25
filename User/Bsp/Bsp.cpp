@@ -1,6 +1,7 @@
 #include "OnChip\Port.h"
 #include "OnChip/USART.h"
 #include "Sys.h"
+#include "Buffer.h"
 
 char *AppVersion = "0.1.2018.1115"; //°æ±¾ºÅ
 
@@ -72,6 +73,17 @@ void LedTask(void *param)
 
 USART usart111(USART1, 115200);
 
+int Com1test()
+{
+	uint8_t buf[20];
+	int len = 0;
+	len = usart111.RxSize();
+	if (usart111.GetBytes(buf, len))
+	{
+		Buffer(buf, len).Show(true);
+	}
+}
+
 void EspDemoLinkTestInit();
 void BspInit()
 {
@@ -79,5 +91,6 @@ void BspInit()
 	led2 = 1;
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
-	EspDemoLinkTestInit();
+	//EspDemoLinkTestInit();
+	usart111.OnReceive = Com1test;
 }
