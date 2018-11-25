@@ -2,7 +2,8 @@
 
 DemoLink::DemoLink(USART &uart) :com(uart)
 {
-
+	com.ClearRxBuf();
+	com.ClearTxBuf();
 }
 
 bool DemoLink::CheckFrame()

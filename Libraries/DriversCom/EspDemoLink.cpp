@@ -13,7 +13,8 @@
 
 EspDemoLink::EspDemoLink(USART &uart) :com(uart)
 {
-
+	com.ClearRxBuf();
+	com.ClearTxBuf();
 }
 
 bool EspDemoLink::CheckFrame()
