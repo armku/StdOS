@@ -14,6 +14,7 @@
 USART usart333(USART3, 115200);
 EspDemoLink espdemo(usart333);
 
+int (*OnReceive)(char *buf, int len);
 void EspDemoLinkRoutin(void* param)
 {
 	if (espdemo.CheckFrame())

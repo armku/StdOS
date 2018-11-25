@@ -28,8 +28,7 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 		mPort = (mRemap ? GPIOB : GPIOA);   //GPIO Port
 		mTxPin = (mRemap ? GPIO_Pin_6 : GPIO_Pin_9);   //Tx Pin
 		mRxPin = (mRemap ? GPIO_Pin_7 : GPIO_Pin_10);   //Rx Pin
-		mGPIORcc = (mRemap ? RCC_APB2Periph_GPIOB : RCC_APB2Periph_GPIOA);   //GPIO Clock
-
+		mGPIORcc = (mRemap ? RCC_APB2Periph_GPIOB : RCC_APB2Periph_GPIOA);   //GPIO Clock		
 #ifdef USE_USART1_DMA
 		mDMATxCh = DMA1_Channel4;       //DMA Tx Channel
 		mDMAIRQn = DMA1_Channel4_IRQn;  //DMA IRQn
@@ -40,8 +39,8 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 
 #ifdef USE_USART1
 		pCOM1 = this;
+		USART_ITConfig(USART1, USART_IT_IDLE, ENABLE); //开启串口总线空闲中断
 #endif
-
 	}
 	else if (mUSARTx == USART2)
 	{
@@ -60,6 +59,7 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 #endif
 #ifdef USE_USART2
 		pCOM2 = this;
+		USART_ITConfig(USART2, USART_IT_IDLE, ENABLE); //开启串口总线空闲中断
 #endif
 	}
 	else if (mUSARTx == USART3)
@@ -79,6 +79,7 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 #endif
 #ifdef USE_USART3
 		pCOM3 = this;
+		USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //开启串口总线空闲中断
 #endif
 	}
 
@@ -386,6 +387,16 @@ void USART::IRQ()
 	if (USART_GetFlagStatus(mUSARTx, USART_FLAG_ORE) != RESET)
 	{
 		USART_ReceiveData(mUSARTx);
+	}
+	else if (USART_GetITStatus(mUSARTx, USART_IT_IDLE) == SET)//传输完一条完整的数据就会进入这个
+	{
+		char ch = 0;
+		ch = mUSARTx->SR; //先读SR，然后读DR才能清除
+		ch = mUSARTx->DR;
+		if (OnReceive != 0)
+		{
+			this->OnReceive();
+		}
 	}
 	if (USART_GetITStatus(mUSARTx, USART_IT_RXNE) != RESET)  //RxNE
 	{
