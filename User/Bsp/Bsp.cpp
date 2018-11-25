@@ -82,6 +82,10 @@ void Com1test()
 	{
 		Buffer(buf, len).Show(true);
 	}
+	else
+	{
+		debug_printf("com1 idle error\n");
+	}
 }
 
 void EspDemoLinkTestInit();
