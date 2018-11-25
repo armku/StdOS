@@ -40,12 +40,12 @@ bool EspDemoLink::ReceiveAndWait(const char* targetString, unsigned char timeOut
 	u8 temp;
 	mReceiveBufferIndex = 0;
 	ClearBuffer();
-	double tartTime = TaskManager::Time();
-	while ((TaskManager::Time() - tartTime) < timeOut)
+	double tartTime = Sys.Ms();
+	while ((Sys.Ms() - tartTime) < timeOut)
 	{
 		while (com.RxSize() > 0)
 		{
-			mUsart.GetBytes(&temp, 1);//从串口接收缓冲区接收数据
+			com.GetBytes(&temp, 1);//从串口接收缓冲区接收数据
 			if (temp == '\0')
 				continue;
 			mReceiveBuffer[mReceiveBufferIndex++] = temp;//放入esp的缓冲区
