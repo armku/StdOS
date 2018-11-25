@@ -16,7 +16,52 @@ EspDemoLink::EspDemoLink(USART &uart) :com(uart)
 	com.ClearRxBuf();
 	com.ClearTxBuf();
 }
+bool EspDemoLink::Kick(void)
+{
+	com.ClearRxBuf();
+	com.ClearTxBuf();
+	com << "AT\r\n";
+	return RecvFind("OK");
+}
+bool EspDemoLink::RecvFind(char const *target, unsigned char timeout)
+{
+	if (!ReceiveAndWait((char*)target, timeout))
+		return false;
+	return true;
+}
+void EspDemoLink::ClearBuffer()
+{
+	unsigned int i = 0;
+	for (; i < ESP8266_RECEIVE_BUFFER_SIZE; ++i)
+		mReceiveBuffer[i] = 0;
+}
+bool EspDemoLink::ReceiveAndWait(const char* targetString, unsigned char timeOut)
+{
+	u8 temp;
+	mReceiveBufferIndex = 0;
+	ClearBuffer();
+	double tartTime = TaskManager::Time();
+	while ((TaskManager::Time() - tartTime) < timeOut)
+	{
+		while (com.RxSize() > 0)
+		{
+			mUsart.GetBytes(&temp, 1);//从串口接收缓冲区接收数据
+			if (temp == '\0')
+				continue;
+			mReceiveBuffer[mReceiveBufferIndex++] = temp;//放入esp的缓冲区
 
+		}
+
+		if (strstr(mReceiveBuffer, targetString))
+			return true;
+
+	}
+	if (mReceiveBufferIndex > 0)//接收到了数据，加上结束标志
+	{
+		mReceiveBuffer[mReceiveBufferIndex] = '\0';
+	}
+	return false;
+}
 bool EspDemoLink::CheckFrame()
 {
 	bool ret = false;
