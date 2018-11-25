@@ -45,8 +45,8 @@ void EspDemoLinkTestInit()
 	espdemo.SetPin(PG13, PG14);
 	espdemo.Init();
 
-	Sys.AddTask(EspDemoLinkRoutin, 0, 1000, 1000, "EspLink");
-	Sys.AddTask(EspDemoLinkSendRoutin, 0, 1000, 3000, "EspLinkSend");
+	Sys.AddTask(EspDemoLinkRoutin, 0, 1000, 500, "EspLink");
+	Sys.AddTask(EspDemoLinkSendRoutin, 0, 1000, 1000, "EspLinkSend");
 }
 
 
