@@ -19,7 +19,7 @@ void EspDemoLinkRoutin(void* param)
 	if (espdemo.CheckFrame())
 	{
 		//debug_printf("rcv one frame:%d-%d\nRcv:",espdemo.rxFrame.frameLength,espdemo.rxFrame.dataLength);
-		Buffer(espdemo.rxFrame.data, espdemo.rxFrame.frameLength).Show(true);
+		Buffer(espdemo.rxFrame.data, espdemo.rxFrame.frameLength).Show();
 		//Buffer(espdemo.rxFrame.data, espdemo.rxFrame.frameLength).ShowHex(true);
 		espdemo.rxFrame.RemoveOneFrame();
 	}
