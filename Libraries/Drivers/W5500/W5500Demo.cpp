@@ -1,4 +1,5 @@
 #include "W5500.h"
+#include "Sys.h"
 
 #define _W5500_TEST_CPP
 #ifdef _W5500_TEST_CPP
