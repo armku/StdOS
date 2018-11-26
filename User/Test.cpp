@@ -17,14 +17,18 @@ EspDemoLink espdemo(usart333);
 int (*OnReceive)(char *buf, int len);
 void EspDemoLinkRoutin(void* param)
 {
-	if (espdemo.CheckFrame())
+	if (espdemo.com.FlagIdleOK)
 	{
-		//debug_printf("rcv one frame:%d-%d\nRcv:",espdemo.rxFrame.frameLength,espdemo.rxFrame.dataLength);
-		Buffer(espdemo.rxFrame.data, espdemo.rxFrame.frameLength).Show();
-		//Buffer(espdemo.rxFrame.data, espdemo.rxFrame.frameLength).ShowHex(true);
-		espdemo.rxFrame.RemoveOneFrame();
+		espdemo.com.FlagIdleOK = false;
+		if (espdemo.CheckFrame())
+		{
+			//debug_printf("rcv one frame:%d-%d\nRcv:",espdemo.rxFrame.frameLength,espdemo.rxFrame.dataLength);
+			Buffer(espdemo.rxFrame.data, espdemo.rxFrame.frameLength).Show();
+			//Buffer(espdemo.rxFrame.data, espdemo.rxFrame.frameLength).ShowHex(true);
+			espdemo.rxFrame.RemoveOneFrame();
+		}
+		//debug_printf("com rx:%d-tx:%d frame:%d-%d\n", espdemo.com.RxCnt, espdemo.com.TxCnt, espdemo.rxFrame.Cnt, espdemo.txFrame.Cnt);
 	}
-	//debug_printf("com rx:%d-tx:%d frame:%d-%d\n", espdemo.com.RxCnt, espdemo.com.TxCnt, espdemo.rxFrame.Cnt, espdemo.txFrame.Cnt);
 }
 void EspDemoLinkSendRoutin(void* param)
 {
@@ -46,7 +50,7 @@ void EspDemoLinkTestInit()
 	espdemo.SetPin(PG13, PG14);
 	espdemo.Init();
 
-	Sys.AddTask(EspDemoLinkRoutin, 0, 1000, 10, "EspLink");
+	Sys.AddTask(EspDemoLinkRoutin, 0, 1000, 1, "EspLink");
 	Sys.AddTask(EspDemoLinkSendRoutin, 0, 1000, 1000, "EspLinkSend");
 }
 

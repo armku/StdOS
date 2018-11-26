@@ -95,6 +95,6 @@ void BspInit()
 	led2 = 1;
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
-	//EspDemoLinkTestInit();
+	EspDemoLinkTestInit();
 	usart111.OnReceive = Com1test;
 }
