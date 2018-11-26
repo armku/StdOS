@@ -391,10 +391,12 @@ void USART::IRQ()
 		char ch = 0;
 		ch = mUSARTx->SR; //先读SR，然后读DR才能清除
 		ch = mUSARTx->DR;
-		if (OnReceive != 0)
+		
+		if (this->OnReceive != 0)
 		{
 			this->OnReceive();
 		}
+		this->FlagIdleOK = true;
 	}
 	if (USART_GetITStatus(mUSARTx, USART_IT_RXNE) != RESET)  //RxNE
 	{
