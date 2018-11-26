@@ -388,7 +388,7 @@ void USART::IRQ()
 	{
 		USART_ReceiveData(mUSARTx);
 	}
-	if (USART_GetITStatus(mUSARTx, USART_IT_IDLE) == SET)//传输完一条完整的数据就会进入这个
+	if (USART_GetITStatus(mUSARTx, USART_IT_IDLE) != RESET)//传输完一条完整的数据就会进入这个
 	{
 		char ch = 0;
 		ch = mUSARTx->SR; //先读SR，然后读DR才能清除
