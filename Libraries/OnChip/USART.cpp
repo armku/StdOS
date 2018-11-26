@@ -38,8 +38,7 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 #endif
 
 #ifdef USE_USART1
-		pCOM1 = this;
-		USART_ITConfig(USART1, USART_IT_IDLE, ENABLE); //开启串口总线空闲中断
+		pCOM1 = this;		
 #endif
 	}
 	else if (mUSARTx == USART2)
@@ -59,7 +58,6 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 #endif
 #ifdef USE_USART2
 		pCOM2 = this;
-		USART_ITConfig(USART2, USART_IT_IDLE, ENABLE); //开启串口总线空闲中断
 #endif
 	}
 	else if (mUSARTx == USART3)
@@ -79,7 +77,6 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 #endif
 #ifdef USE_USART3
 		pCOM3 = this;
-		USART_ITConfig(USART3, USART_IT_IDLE, ENABLE); //开启串口总线空闲中断
 #endif
 	}
 
@@ -158,6 +155,7 @@ void USART::InitUSART()
 	USART_Cmd(mUSARTx, ENABLE);
 
 	USART_ITConfig(mUSARTx, USART_IT_RXNE, ENABLE);
+	USART_ITConfig(mUSARTx, USART_IT_IDLE, ENABLE); //开启串口总线空闲中断
 	USART_ITConfig(mUSARTx, USART_IT_TC, ENABLE);
 
 #ifndef USE_USART_DMA	
