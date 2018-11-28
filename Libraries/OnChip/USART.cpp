@@ -394,7 +394,7 @@ void USART::IRQ()
 		
 		if (this->OnReceive != 0)
 		{
-			this->OnReceive();
+			this->OnReceive(0);
 		}
 		this->FlagIdleOK = true;
 	}

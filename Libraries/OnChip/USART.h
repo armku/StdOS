@@ -79,7 +79,7 @@ public:
 	virtual void ClearTxBuf();
 
 	void IRQ();
-	void(*OnReceive)();
+	void(*OnReceive)(void* param);
 
 	USART& operator<<(int val);
 	USART& operator<<(double val);

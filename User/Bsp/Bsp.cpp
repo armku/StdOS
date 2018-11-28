@@ -73,7 +73,7 @@ void LedTask(void *param)
 
 USART usart111(USART1, 115200);
 
-void Com1test()
+void Com1test(void *param)
 {
 	uint8_t buf[20];
 	int len = 0;
