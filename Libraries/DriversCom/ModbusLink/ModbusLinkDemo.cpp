@@ -38,5 +38,4 @@ void ModbusSlaveLinkTestInit()
 	modbusSlave.com.RS485 = &p485dr;
 	Sys.AddTask(ModbusSlaveLinkRoutin, 0, 0, 1, "ModbusSlaveLinkRoutin");
 }
-
 #endif
