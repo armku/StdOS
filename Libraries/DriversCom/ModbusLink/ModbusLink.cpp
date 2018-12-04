@@ -51,13 +51,16 @@ uint16_t RegHoilding16[60];
 //处理数据帧
 void ModbusSlaveLink::DealFrame()
 {
-	if (this->rxFrame.devid != this->id)
+	if ((this->rxFrame.devid != this->id) && (this->rxFrame.devid != 0))
 		return;
 
 	switch (this->rxFrame.fnCode)
 	{
 	case ReadInputRegisters:
 		//读取输入寄存器
+		//处理广播地址
+		if (this->rxFrame.devid == 0)
+			break;
 		this->txFrame.devid = this->id;
 		this->txFrame.fnCode = ReadInputRegisters;
 		this->txFrame.regLength = this->rxFrame.regLength;
@@ -76,6 +79,9 @@ void ModbusSlaveLink::DealFrame()
 		break;
 	case ReadHoldingRegisters:
 		//读取保持寄存器
+		//处理广播地址
+		if (this->rxFrame.devid == 0)
+			break;
 		if (this->rxFrame.regAddr < 100)
 		{
 			this->txFrame.devid = this->id;
@@ -136,6 +142,9 @@ void ModbusSlaveLink::DealFrame()
 		{
 			this->DUpdateReg(this->rxFrame.regAddr, 0);
 		}
+		//处理广播地址
+		if (this->rxFrame.devid == 0)
+			break;
 		this->txFrame.devid = this->id;
 		this->txFrame.fnCode = WriteSingleRegister;
 		this->txFrame.regLength = this->rxFrame.regLength;
@@ -193,7 +202,9 @@ void ModbusSlaveLink::DealFrame()
 			else {}
 		}
 		else {}
-		
+		//处理广播地址
+		if (this->rxFrame.devid == 0)
+			break;
 		this->txFrame.devid = this->id;
 		this->txFrame.fnCode = WriteMultipleRegisters;
 		this->txFrame.regLength = this->rxFrame.regLength;
