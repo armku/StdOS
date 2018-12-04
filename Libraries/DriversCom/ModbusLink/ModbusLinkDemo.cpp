@@ -40,6 +40,8 @@ void ModbusSlaveLinkTestInit()
 	p485dr = 0;//接收模式
 	modbusSlave.com.RS485 = &p485dr;
 	modbusSlave.id = 1;
+	modbusSlave.SetRegInput(0, 144, RegInputu16, 0);
+
 	Sys.AddTask(ModbusSlaveLinkRoutin, 0, 0, 1, "ModbusSlaveLinkRoutin");
 }
 #endif
