@@ -41,7 +41,7 @@ void ModbusSlaveLinkTestInit()
 	modbusSlave.com.RS485 = &p485dr;
 	modbusSlave.id = 1;
 	modbusSlave.SetRegInput(0, ArrayLength(RegInputu16), RegInputu16, 0);
-	modbusSlave.SetRegHoid(0, ArrayLength(RegHoilding16), 0);
+	modbusSlave.SetRegHoid(0, ArrayLength(RegHoilding16), RegHoilding16, 0);
 
 	RegInputu16[0] = 12;
 	RegInputu16[1] = 13;
