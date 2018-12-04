@@ -217,33 +217,3 @@ void ModbusSlaveLink::DealFrame()
 		break;
 	}
 }
-#if 0
-//例程，需要放在app中
-//处理扩展通道数据，测试数据通道
-void ModbusSlaveLink::DealExtChannel()
-{
-	if (this->rxFrame.regLength == 21)
-	{
-		//读取通道参数
-		int ch = this->rxFrame.regAddr / 1000 % 10 * 10 + this->rxFrame.regAddr / 100 % 10;
-		ch -= 10;
-		if (ch < 16 && ch >= 0)
-		{
-			//debug_printf("读取保持寄存器 地址;%d 长度 %d ch:%d\n", this->rxFrame.regAddr, this->rxFrame.regLength,ch);
-			//通道在正常范围内
-			this->txFrame.devid = this->id;
-			this->txFrame.fnCode = ReadHoldingRegisters;
-			this->txFrame.regLength = this->rxFrame.regLength;
-			this->txFrame.data[2] = this->rxFrame.regLength * 2;
-
-			this->txFrame.SetReg(0, 1);
-			this->txFrame.SetReg(1, 2);
-			this->txFrame.SetReg(20, 21);
-			
-			this->txFrame.frameLength = this->rxFrame.regLength * 2 + 5;
-			this->txFrame.isUpdated = true;
-			this->Send();
-		}
-	}
-}
-#endif

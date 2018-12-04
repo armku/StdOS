@@ -32,6 +32,20 @@ typedef enum MBFunction
 	ReportIdentity = 17,
 } MBFunction;
 
+typedef struct
+{
+	int addr0;//起始地址
+	int lenth;//寄存器长度
+	uint16_t *Reg;//寄存器指针
+}ModbusReg_T;//寄存器结构体
+
+typedef struct
+{
+	int addr0;//起始地址
+	int length;//寄存器长度
+	uint16_t *Reg;//寄存器指针
+}ModbusCoil_T;//寄存器线圈结构体
+
 class ModbusSlaveLink
 {
 public:
@@ -42,7 +56,6 @@ public:
 	ModbusSlaveLink(USART &uart);
 	bool CheckFrame();
 	bool Send();
-	//void DealExtChannel();//处理扩展通道数据，测试数据通道
 private:
 public:
 	uint8_t id; //本机ID
