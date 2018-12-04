@@ -217,6 +217,16 @@ void ModbusSlaveLink::SetRegInput(int addr0, int reglen, uint16_t* reg, int regg
 	this->RegInputs[reggroup].Lenth = reglen;
 	this->RegInputs[reggroup].Reg = reg;
 }
+//设置保持寄存器
+void ModbusSlaveLink::SetRegHoid(int addr0, int reglen, uint16_t* reg, int reggroup)
+{
+	//非法寄存器组
+	if (reggroup >= ModbusSlaveLink::RegHoildingLen)
+		return;
+	this->RegHoildings[reggroup].Addr0 = addr0;
+	this->RegHoildings[reggroup].Lenth = reglen;
+	this->RegHoildings[reggroup].Reg = reg;
+}
 //处理读取输入寄存器 0 正确 1 非法地址 2非法长度
 int ModbusSlaveLink::dealRegInputRead(uint16_t addr, uint16_t len)
 {
@@ -249,6 +259,19 @@ int ModbusSlaveLink::searchRegInGroup(uint16_t addr, uint16_t len)
 		if ((addr >= this->RegInputs[i].Addr0) && //起始地址对
 			((addr + len) < (this->RegInputs[i].Addr0 + this->RegInputs[i].Lenth)) && //长度对
 			(this->RegInputs[i].Reg!=0)) //寄存器指针不为空
+			return i;
+	}
+
+	return -1;
+}
+//查找保持寄存器组，没有查找到返回负值
+int ModbusSlaveLink::searchRegHoildGroup(uint16_t addr, uint16_t len)
+{
+	for (int i = 0; i < this->RegHoildingLen; i++)
+	{
+		if ((addr >= this->RegHoildings[i].Addr0) && //起始地址对
+			((addr + len) < (this->RegHoildings[i].Addr0 + this->RegHoildings[i].Lenth)) && //长度对
+			(this->RegHoildings[i].Reg != 0)) //寄存器指针不为空
 			return i;
 	}
 
