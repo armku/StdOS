@@ -42,6 +42,9 @@ void ModbusSlaveLinkTestInit()
 	modbusSlave.id = 1;
 	modbusSlave.SetRegInput(0, 144, RegInputu16, 0);
 
+	RegInputu16[0] = 12;
+	RegInputu16[1] = 13;
+
 	Sys.AddTask(ModbusSlaveLinkRoutin, 0, 0, 1, "ModbusSlaveLinkRoutin");
 }
 #endif
