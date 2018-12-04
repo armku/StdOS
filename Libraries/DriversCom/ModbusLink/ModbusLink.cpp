@@ -73,19 +73,7 @@ void ModbusSlaveLink::DealFrame()
 		if (this->rxFrame.devid == 0)
 			break;
 		if (this->rxFrame.regAddr < 100)
-		{
-			this->txFrame.devid = this->id;
-			this->txFrame.fnCode = ReadHoldingRegisters;
-			this->txFrame.regLength = this->rxFrame.regLength;
-			this->txFrame.data[2] = this->rxFrame.regLength * 2;
-			if (this->rxFrame.regLength >= 60)
-			{
-				this->rxFrame.regLength = 60;
-			}
-			for (int i = 0; i < this->rxFrame.regLength; i++)
-			{
-				this->txFrame.SetReg(i, RegHoilding16[this->rxFrame.regAddr + i]);
-			}
+		{			
 			if (this->dealRegHoildRead(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
 			{
 				this->txFrame.frameLength = this->rxFrame.regLength * 2 + 5;
@@ -264,7 +252,18 @@ int ModbusSlaveLink::dealRegHoildRead(uint16_t addr, uint16_t len)
 		return 2;
 	if (ret < 0)
 		return 3;
-
+	this->txFrame.devid = this->id;
+	this->txFrame.fnCode = ReadHoldingRegisters;
+	this->txFrame.regLength = this->rxFrame.regLength;
+	this->txFrame.data[2] = this->rxFrame.regLength * 2;
+	if (this->rxFrame.regLength >= 60)
+	{
+		this->rxFrame.regLength = 60;
+	}
+	for (int i = 0; i < this->rxFrame.regLength; i++)
+	{
+		this->txFrame.SetReg(i, RegHoilding16[this->rxFrame.regAddr + i]);
+	}
 	return 0;
 }
 //查找寄存器组，没有查找到返回负值
