@@ -16,7 +16,8 @@ void ModbusSlaveLinkRoutin(void* param)
 	{
 		modbusSlave.DealFrame();
 		modbusSlave.rxFrame.RemoveOneFrame();
-		//debug_printf("rx:%d-%d tx:%d-%d\n", modbusSlave.rxFrame.Cnt, modbusSlave.com.RxCnt, modbusSlave.txFrame.Cnt, modbusSlave.com.TxCnt);
+		debug_printf("rx:%d-%d tx:%d-%d\n", modbusSlave.rxFrame.Cnt, modbusSlave.com.RxCnt, modbusSlave.txFrame.Cnt, modbusSlave.com.TxCnt);
+		debug_printf("rxid:%d-id:%d\n",modbusSlave.id,modbusSlave.rxFrame.devid);
 	}
 	else
 	{
@@ -36,6 +37,7 @@ void ModbusSlaveLinkTestInit()
 	p485dr.Open();
 	p485dr = 0;//接收模式
 	modbusSlave.com.RS485 = &p485dr;
+	modbusSlave.id = 1;
 	Sys.AddTask(ModbusSlaveLinkRoutin, 0, 0, 1, "ModbusSlaveLinkRoutin");
 }
 #endif
