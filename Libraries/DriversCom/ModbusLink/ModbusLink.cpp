@@ -2,7 +2,7 @@
 
 ModbusSlaveLink::ModbusSlaveLink(USART &uart) :com(uart)
 {
-	this->DUpdateReg = 0;
+	this->OnUpdateRegHoid = 0;
 }
 
 bool ModbusSlaveLink::CheckFrame()
@@ -84,37 +84,10 @@ void ModbusSlaveLink::DealFrame()
 		debug_printf("WriteSingleRegister address %d value %d\n", this->rxFrame.regAddr, this->rxFrame.regLength);
 		//预置单寄存器
 		RegHoilding16[this->rxFrame.regAddr] = this->rxFrame.regLength;
-		switch (this->rxFrame.regAddr)
+		
+		if (this->OnUpdateRegHoid)
 		{
-		case 2:
-			//统一报警通道号
-			if (this->pupdatewarparafrompc != 0)
-				this->pupdatewarparafrompc(this->rxFrame.regLength - 1);
-			break;
-		case 23:
-			//加载通道参数
-			if(this->pcommupdatereghoildchannel)
-				this->pcommupdatereghoildchannel(this->rxFrame.regLength);
-			break;
-		default:
-			if (this->rxFrame.regAddr < 24)
-			{
-				//更新设备参数
-				if (pupdatedevparafrompc != 0)
-					this->pupdatedevparafrompc();
-			}
-			else if (this->rxFrame.regAddr > 23)
-			{
-				//更新通道参数
-				if (this->pupdatechannelparafrompc != 0)
-					this->pupdatechannelparafrompc();
-			}
-			else {}
-			break;
-		}
-		if (this->DUpdateReg)
-		{
-			this->DUpdateReg(this->rxFrame.regAddr, 0);
+			this->OnUpdateRegHoid(this->rxFrame.regAddr, 1);
 		}
 		//处理广播地址
 		if (this->rxFrame.devid == 0)
@@ -231,41 +204,10 @@ int ModbusSlaveLink::dealRegHoildWrite(uint16_t addr, uint16_t len)
 		tt += this->rxFrame.data[i * 2 + 8];
 		this->RegHoildings[ret].Reg[this->rxFrame.regAddr + i - this->RegHoildings[ret].Addr0] = tt;
 	}
-	if ((this->rxFrame.regAddr == 2) && (this->rxFrame.regLength == 1))
+	if (this->OnUpdateRegHoid)
 	{
-		//统一报警通道号
-		tt = this->rxFrame.data[7];
-		tt <<= 8;
-		tt += this->rxFrame.data[8];
-		if (this->pupdatewarparafrompc)
-			this->pupdatewarparafrompc(tt - 1);
+		this->OnUpdateRegHoid(addr, len);
 	}
-	else if ((this->rxFrame.regAddr == 23) && (this->rxFrame.regLength == 1))
-	{
-		//加载通道参数
-		tt = this->rxFrame.data[7];
-		tt <<= 8;
-		tt += this->rxFrame.data[8];
-		if (this->pcommupdatereghoildchannel)
-			this->pcommupdatereghoildchannel(tt);
-	}
-	else if (this->rxFrame.regAddr < 24)
-	{
-		//更新设备参数
-		if (this->pupdatedevparafrompc != 0)
-			this->pupdatedevparafrompc();
-	}
-	else if (this->rxFrame.regAddr > 23)
-	{
-		//更新通道参数
-		if (this->pupdatechannelparafrompc != 0)
-			this->pupdatechannelparafrompc();
-	}
-	else if (this->DUpdateReg)
-	{
-		this->DUpdateReg(0xffff, 0);
-	}
-	else {}
 
 	return 0;
 }

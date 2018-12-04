@@ -64,14 +64,7 @@ private:
 public:
 	uint8_t id; //本机ID
 	void DealFrame(); //处理数据帧
-	void(*DUpdateReg)(uint16_t regaddr,uint16_t reglen); //更新参数
-	//更新设备参数从pc
-	void (*pupdatedevparafrompc)();
-	//更新通道参数 通道号 0-15
-	void(*pcommupdatereghoildchannel)(uint8_t ch);
-	//更新通道参数
-	void(*pupdatechannelparafrompc)();
-	void(*pupdatewarparafrompc)(uint16_t ch);
+	void(*OnUpdateRegHoid)(uint16_t regaddr,uint16_t reglen); //更新参数
 };
 
 extern uint16_t RegHoilding16[]; //保持寄存器
