@@ -82,7 +82,7 @@ public:
 
 extern TSys Sys;		// 创建一个全局的Sys对象  会在main函数之前执行构造函数（！！！！！）
 
-#define STDOS_VERSION "0.8.2018.1128" //系统版本号
+#define STDOS_VERSION "0.8.2018.1129" //系统版本号
 extern char* AppVersion;//需要定义软件版本号实现 如：char *AppVersion = "0.1.2018.1114";
 
 #endif //_Sys_H_
