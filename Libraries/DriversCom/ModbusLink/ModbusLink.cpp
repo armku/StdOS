@@ -45,7 +45,6 @@ bool ModbusSlaveLink::Send()
 	return true;
 }
 
-extern uint16_t RegInputu16[144]; //输入寄存器
 extern uint16_t RegHoilding16[60];
 
 //处理数据帧
@@ -61,7 +60,7 @@ void ModbusSlaveLink::DealFrame()
 		//处理广播地址
 		if (this->rxFrame.devid == 0)
 			break;		
-		if (this->DealRegInputRead(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
+		if (this->dealRegInputRead(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
 		{
 			this->txFrame.frameLength = this->rxFrame.regLength * 2 + 5;
 			this->txFrame.isUpdated = true;
@@ -219,21 +218,39 @@ void ModbusSlaveLink::SetRegInput(int addr0, int reglen, uint16_t* reg, int regg
 	this->RegInputs[reggroup].Reg = reg;
 }
 //处理读取输入寄存器 0 正确 1 非法地址 2非法长度
-int ModbusSlaveLink::DealRegInputRead(uint16_t addr, uint16_t len)
+int ModbusSlaveLink::dealRegInputRead(uint16_t addr, uint16_t len)
 {
+	int ret = this->searchRegInGroup(addr,len);
+	if (ret == -1)
+		return 1;
+	if (ret == -2)
+		return 2;
+	if (ret < 0)
+		return 3;
+
 	this->txFrame.devid = this->id;
 	this->txFrame.fnCode = ReadInputRegisters;
 	this->txFrame.regLength = this->rxFrame.regLength;
 	this->txFrame.data[2] = this->rxFrame.regLength * 2;
 
-	if (this->rxFrame.regLength >= 70)
-	{
-		this->rxFrame.regLength = 70;
-	}
+	
 	for (int i = 0; i < this->rxFrame.regLength; i++)
 	{
-		this->txFrame.SetReg(i, RegInputu16[this->rxFrame.regAddr + i]);
+		this->txFrame.SetReg(i,this->RegInputs[ret].Reg[this->rxFrame.regAddr + i- this->RegInputs[ret].Addr0]);
 	}
 
 	return 0;
+}
+//查找寄存器组，没有查找到返回负值
+int ModbusSlaveLink::searchRegInGroup(uint16_t addr, uint16_t len)
+{
+	for (int i = 0; i < this->RegInputLen; i++)
+	{
+		if ((addr >= this->RegInputs[i].Addr0) && //起始地址对
+			((addr + len) < (this->RegInputs[i].Addr0 + this->RegInputs[i].Lenth)) && //长度对
+			(this->RegInputs[i].Reg!=0)) //寄存器指针不为空
+			return i;
+	}
+
+	return -1;
 }

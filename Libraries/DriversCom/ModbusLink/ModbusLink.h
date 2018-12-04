@@ -55,7 +55,8 @@ public:
 	bool Send();
 	void SetRegInput(int addr0, int reglen, uint16_t* reg, int reggroup = 0);//设置输入寄存器	
 private:
-	int DealRegInputRead(uint16_t addr,uint16_t len);//处理读取输入寄存器 0 正确 1 非法地址 2非法长度
+	int dealRegInputRead(uint16_t addr,uint16_t len);//处理读取输入寄存器 0 正确 1 非法地址 2非法长度
+	int searchRegInGroup(uint16_t addr, uint16_t len);//查找寄存器组，没有查找到返回负值
 public:
 	uint8_t id; //本机ID
 	void DealFrame(); //处理数据帧
@@ -69,7 +70,6 @@ public:
 	void(*pupdatewarparafrompc)(uint16_t ch);
 };
 
-extern uint16_t RegInputu16[]; //输入寄存器
 extern uint16_t RegHoilding16[]; //保持寄存器
 
 #endif // !_MODBUSLINK_H
