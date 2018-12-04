@@ -10,6 +10,9 @@
 USART usart222(USART2, 115200);
 ModbusSlaveLink modbusSlave(usart222);
 OutputPort p485dr;
+uint16_t RegInputu16[144]; //输入寄存器
+uint16_t RegHoilding16[60];
+
 void ModbusSlaveLinkRoutin(void* param)
 {
 	if (modbusSlave.CheckFrame())

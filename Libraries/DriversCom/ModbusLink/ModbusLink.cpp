@@ -45,8 +45,8 @@ bool ModbusSlaveLink::Send()
 	return true;
 }
 
-uint16_t RegInputu16[144]; //输入寄存器
-uint16_t RegHoilding16[60];
+extern uint16_t RegInputu16[144]; //输入寄存器
+extern uint16_t RegHoilding16[60];
 
 //处理数据帧
 void ModbusSlaveLink::DealFrame()
