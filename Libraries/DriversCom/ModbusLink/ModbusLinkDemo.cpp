@@ -19,8 +19,8 @@ void ModbusSlaveLinkRoutin(void* param)
 	{
 		modbusSlave.DealFrame();
 		modbusSlave.rxFrame.RemoveOneFrame();
-		debug_printf("rx:%d-%d tx:%d-%d\n", modbusSlave.rxFrame.Cnt, modbusSlave.com.RxCnt, modbusSlave.txFrame.Cnt, modbusSlave.com.TxCnt);
-		debug_printf("rxid:%d-id:%d\n", modbusSlave.id, modbusSlave.rxFrame.devid);
+		/*debug_printf("rx:%d-%d tx:%d-%d\n", modbusSlave.rxFrame.Cnt, modbusSlave.com.RxCnt, modbusSlave.txFrame.Cnt, modbusSlave.com.TxCnt);
+		debug_printf("rxid:%d-id:%d\n", modbusSlave.id, modbusSlave.rxFrame.devid);*/
 	}
 	else if ((modbusSlave.com.RxSize() > 0 || (modbusSlave.rxFrame.dataLength > 0)) && (Sys.Ms() - modbusSlave.com.LastRcvTime) > 5)
 	{

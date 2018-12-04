@@ -45,8 +45,6 @@ bool ModbusSlaveLink::Send()
 	return true;
 }
 
-extern uint16_t RegHoilding16[60];
-
 //处理数据帧
 void ModbusSlaveLink::DealFrame()
 {
@@ -195,6 +193,7 @@ int ModbusSlaveLink::dealRegHoildWrite(uint16_t addr, uint16_t len)
 		return 3;
 
 	uint16_t tt;
+	debug_printf("\nWriteMultipleRegisters reg:%d len:%d\n", addr, len);
 
 	for (int i = 0; i < this->rxFrame.regLength; i++)
 	{
@@ -202,7 +201,8 @@ int ModbusSlaveLink::dealRegHoildWrite(uint16_t addr, uint16_t len)
 		tt <<= 8;
 		tt += this->rxFrame.data[i * 2 + 8];
 		this->RegHoildings[ret].Reg[this->rxFrame.regAddr + i - this->RegHoildings[ret].Addr0] = tt;
-	}
+		this->RegHoildings[ret].Reg[3] = 16;
+	}this->RegHoildings[ret].Reg[3] = 16;
 	if (this->OnUpdateRegHoid)
 	{
 		this->OnUpdateRegHoid(addr, len);

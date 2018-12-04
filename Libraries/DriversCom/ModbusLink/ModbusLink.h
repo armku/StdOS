@@ -68,6 +68,4 @@ public:
 	void(*OnUpdateRegHoid)(uint16_t regaddr,uint16_t reglen); //更新参数
 };
 
-extern uint16_t RegHoilding16[]; //保持寄存器
-
 #endif // !_MODBUSLINK_H
