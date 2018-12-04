@@ -34,13 +34,14 @@ void ModbusSlaveLinkRoutin(void* param)
 void ModbusSlaveLinkTestInit()
 {
 	p485dr.Set(PC2);
-	p485dr.Invert=false;
-	p485dr.OpenDrain=false;
+	p485dr.Invert = false;
+	p485dr.OpenDrain = false;
 	p485dr.Open();
 	p485dr = 0;//接收模式
 	modbusSlave.com.RS485 = &p485dr;
 	modbusSlave.id = 1;
-	modbusSlave.SetRegInput(0, 144, RegInputu16, 0);
+	modbusSlave.SetRegInput(0, ArrayLength(RegInputu16), RegInputu16, 0);
+	modbusSlave.SetRegHoid(0, ArrayLength(RegHoilding16), 0);
 
 	RegInputu16[0] = 12;
 	RegInputu16[1] = 13;
