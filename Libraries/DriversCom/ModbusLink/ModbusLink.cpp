@@ -72,19 +72,12 @@ void ModbusSlaveLink::DealFrame()
 		//处理广播地址
 		if (this->rxFrame.devid == 0)
 			break;
-		if (this->rxFrame.regAddr < 100)
-		{			
-			if (this->dealRegHoildRead(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
-			{
-				this->txFrame.frameLength = this->rxFrame.regLength * 2 + 5;
-				this->txFrame.isUpdated = true;
-				this->Send();
-			}
-		}
-		else
+					
+		if (this->dealRegHoildRead(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
 		{
-			//扩展测试指令
-			//this->DealExtChannel();
+			this->txFrame.frameLength = this->rxFrame.regLength * 2 + 5;
+			this->txFrame.isUpdated = true;
+			this->Send();
 		}
 		break;
 	case WriteSingleRegister:
@@ -256,13 +249,13 @@ int ModbusSlaveLink::dealRegHoildRead(uint16_t addr, uint16_t len)
 	this->txFrame.fnCode = ReadHoldingRegisters;
 	this->txFrame.regLength = this->rxFrame.regLength;
 	this->txFrame.data[2] = this->rxFrame.regLength * 2;
-	if (this->rxFrame.regLength >= 60)
+	/*if (this->rxFrame.regLength >= 60)
 	{
 		this->rxFrame.regLength = 60;
-	}
+	}*/
 	for (int i = 0; i < this->rxFrame.regLength; i++)
 	{
-		this->txFrame.SetReg(i, RegHoilding16[this->rxFrame.regAddr + i]);
+		this->txFrame.SetReg(i, this->RegHoildings[ret].Reg[this->rxFrame.regAddr + i - this->RegHoildings[ret].Addr0]);
 	}
 	return 0;
 }
