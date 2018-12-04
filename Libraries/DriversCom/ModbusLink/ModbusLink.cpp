@@ -83,22 +83,21 @@ void ModbusSlaveLink::DealFrame()
 	case WriteSingleRegister:
 		debug_printf("WriteSingleRegister address %d value %d\n", this->rxFrame.regAddr, this->rxFrame.regLength);
 		//预置单寄存器
-		RegHoilding16[this->rxFrame.regAddr] = this->rxFrame.regLength;
 		
-		if (this->OnUpdateRegHoid)
+		//this->rxFrame.regLength即为需要设置的值
+		if (this->dealRegHoildWriteOne(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
 		{
-			this->OnUpdateRegHoid(this->rxFrame.regAddr, 1);
+			//处理广播地址
+			if (this->rxFrame.devid == 0)
+				break;
+			this->txFrame.devid = this->id;
+			this->txFrame.fnCode = WriteSingleRegister;
+			this->txFrame.regLength = this->rxFrame.regLength;
+			this->txFrame.data[2] = this->rxFrame.regLength * 2;
+			this->txFrame.frameLength = 8;
+			this->txFrame.isUpdated = true;
+			this->Send();
 		}
-		//处理广播地址
-		if (this->rxFrame.devid == 0)
-			break;
-		this->txFrame.devid = this->id;
-		this->txFrame.fnCode = WriteSingleRegister;
-		this->txFrame.regLength = this->rxFrame.regLength;
-		this->txFrame.data[2] = this->rxFrame.regLength * 2;
-		this->txFrame.frameLength = 8;
-		this->txFrame.isUpdated = true;
-		this->Send();
 		break;
 	case WriteMultipleRegisters:
 		//设置多个寄存器		
@@ -207,6 +206,24 @@ int ModbusSlaveLink::dealRegHoildWrite(uint16_t addr, uint16_t len)
 	if (this->OnUpdateRegHoid)
 	{
 		this->OnUpdateRegHoid(addr, len);
+	}
+
+	return 0;
+}
+//处理写入单个保持寄存器 0 正确 1 非法地址 2非法长度
+int ModbusSlaveLink::dealRegHoildWriteOne(uint16_t addr, uint16_t val)
+{
+	int ret = this->searchRegHoildGroup(addr, 1);
+	if (ret == -1)
+		return 1;
+	if (ret == -2)
+		return 2;
+	if (ret < 0)
+		return 3;
+	this->RegHoildings[ret].Reg[addr] = val;
+	if (this->OnUpdateRegHoid)
+	{
+		this->OnUpdateRegHoid(addr, 1);
 	}
 
 	return 0;
