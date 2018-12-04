@@ -15,8 +15,9 @@ uint16_t RegHoilding16[60];
 
 void ModbusSlaveLinkRoutin(void* param)
 {
-	if (modbusSlave.CheckFrame())
+	if (modbusSlave.com.FlagIdleOK && modbusSlave.CheckFrame())
 	{
+		modbusSlave.com.FlagIdleOK = false;
 		modbusSlave.DealFrame();
 		modbusSlave.rxFrame.RemoveOneFrame();
 		/*debug_printf("rx:%d-%d tx:%d-%d\n", modbusSlave.rxFrame.Cnt, modbusSlave.com.RxCnt, modbusSlave.txFrame.Cnt, modbusSlave.com.TxCnt);
@@ -24,9 +25,10 @@ void ModbusSlaveLinkRoutin(void* param)
 	}
 	else if ((modbusSlave.com.RxSize() > 0 || (modbusSlave.rxFrame.dataLength > 0)) && (Sys.Ms() - modbusSlave.com.LastRcvTime) > 5)
 	{
-		debug_printf("清除接收缓冲区坏数据 length:%d\n", modbusSlave.rxFrame.dataLength);
+		debug_printf("Clear RcvBuffer length:%d\n", modbusSlave.rxFrame.dataLength);
 		modbusSlave.rxFrame.dataLength = 0;
 		modbusSlave.com.ClearRxBuf();
+		modbusSlave.com.FlagIdleOK = false;
 	}
 	else {}
 }

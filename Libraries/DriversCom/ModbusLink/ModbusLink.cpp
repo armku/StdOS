@@ -4,7 +4,7 @@ ModbusSlaveLink::ModbusSlaveLink(USART &uart) :com(uart)
 {
 	this->OnUpdateRegHoid = 0;
 }
-
+#include "Buffer.h"
 bool ModbusSlaveLink::CheckFrame()
 {
 	bool ret = false;
@@ -14,6 +14,7 @@ bool ModbusSlaveLink::CheckFrame()
 	{
 		rxFrame.dataLength += rxlen;
 	}
+	Buffer(rxFrame.data, rxlen).ShowHex(true);
 	if (!rxFrame.CheckFrame())
 		return false;	
 	if (rxFrame.frameLength > 3)
@@ -99,6 +100,7 @@ void ModbusSlaveLink::DealFrame()
 		break;
 	case WriteMultipleRegisters:
 		//设置多个寄存器		
+		debug_printf("WriteMultipleRegisters\n");
 		if (this->dealRegHoildWrite(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
 		{
 			//处理广播地址
@@ -184,7 +186,7 @@ int ModbusSlaveLink::dealRegHoildRead(uint16_t addr, uint16_t len)
 //处理写入保持寄存器 0 正确 1 非法地址 2非法长度
 int ModbusSlaveLink::dealRegHoildWrite(uint16_t addr, uint16_t len)
 {
-	int ret = this->searchRegHoildGroup(addr, len);
+	/*int ret = this->searchRegHoildGroup(addr, len);
 	if (ret == -1)
 		return 1;
 	if (ret == -2)
@@ -202,11 +204,12 @@ int ModbusSlaveLink::dealRegHoildWrite(uint16_t addr, uint16_t len)
 		tt += this->rxFrame.data[i * 2 + 8];
 		this->RegHoildings[ret].Reg[this->rxFrame.regAddr + i - this->RegHoildings[ret].Addr0] = tt;
 		this->RegHoildings[ret].Reg[3] = 16;
-	}this->RegHoildings[ret].Reg[3] = 16;
-	if (this->OnUpdateRegHoid)
+	}*/
+	this->RegHoildings[0].Reg[3] = 16;
+	/*if (this->OnUpdateRegHoid)
 	{
 		this->OnUpdateRegHoid(addr, len);
-	}
+	}*/
 
 	return 0;
 }
