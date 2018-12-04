@@ -52,6 +52,10 @@ public:
 	DataFrameModbus txFrame;
 	DataFrameModbus rxFrame;
 	USART &com;
+	const int static RegInputLen = 3;//输入寄存器组大小
+	const int static RegHoilding = 3;//保持寄存器组大小
+	ModbusReg_T RegInputs[RegInputLen];//输入寄存器组
+	ModbusReg_T RegHoildings[RegInputLen];//保持寄存器组
 public:
 	ModbusSlaveLink(USART &uart);
 	bool CheckFrame();
