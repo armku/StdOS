@@ -65,6 +65,7 @@ void ModbusSlaveLink::DealFrame()
 		this->txFrame.fnCode = ReadInputRegisters;
 		this->txFrame.regLength = this->rxFrame.regLength;
 		this->txFrame.data[2] = this->rxFrame.regLength * 2;
+		
 		if (this->rxFrame.regLength >= 70)
 		{
 			this->rxFrame.regLength = 70;
@@ -73,9 +74,12 @@ void ModbusSlaveLink::DealFrame()
 		{
 			this->txFrame.SetReg(i, RegInputu16[this->rxFrame.regAddr + i]);
 		}		
-		this->txFrame.frameLength = this->rxFrame.regLength * 2 + 5;
-		this->txFrame.isUpdated = true;
-		this->Send();
+		if (this->DealRegInputRead(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
+		{
+			this->txFrame.frameLength = this->rxFrame.regLength * 2 + 5;
+			this->txFrame.isUpdated = true;
+			this->Send();
+		}
 		break;
 	case ReadHoldingRegisters:
 		//读取保持寄存器
@@ -216,4 +220,20 @@ void ModbusSlaveLink::DealFrame()
 	default:
 		break;
 	}
+}
+//设置输入寄存器
+void ModbusSlaveLink::SetRegInput(int addr0, int reglen, uint16_t* reg, int reggroup)
+{
+	//非法寄存器组
+	if (reggroup >= ModbusSlaveLink::RegInputLen)
+		return;
+	this->RegInputs[reggroup].Addr0 = addr0;
+	this->RegInputs[reggroup].Lenth = reglen;
+	this->RegInputs[reggroup].Reg = reg;
+}
+//处理读取输入寄存器 0 正确 1 非法地址 2非法长度
+int ModbusSlaveLink::DealRegInputRead(uint16_t addr, uint16_t len)
+{
+
+	return 0;
 }

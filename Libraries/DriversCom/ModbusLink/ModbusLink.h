@@ -34,17 +34,10 @@ typedef enum MBFunction
 
 typedef struct
 {
-	int addr0;//起始地址
-	int lenth;//寄存器长度
+	int Addr0;//起始地址
+	int Lenth;//寄存器长度
 	uint16_t *Reg;//寄存器指针
 }ModbusReg_T;//寄存器结构体
-
-typedef struct
-{
-	int addr0;//起始地址
-	int length;//寄存器长度
-	uint16_t *Reg;//寄存器指针
-}ModbusCoil_T;//寄存器线圈结构体
 
 class ModbusSlaveLink
 {
@@ -60,7 +53,9 @@ public:
 	ModbusSlaveLink(USART &uart);
 	bool CheckFrame();
 	bool Send();
+	void SetRegInput(int addr0, int reglen, uint16_t* reg, int reggroup = 0);//设置输入寄存器	
 private:
+	int DealRegInputRead(uint16_t addr,uint16_t len);//处理读取输入寄存器 0 正确 1 非法地址 2非法长度
 public:
 	uint8_t id; //本机ID
 	void DealFrame(); //处理数据帧
