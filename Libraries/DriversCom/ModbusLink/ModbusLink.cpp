@@ -128,64 +128,20 @@ void ModbusSlaveLink::DealFrame()
 		this->Send();
 		break;
 	case WriteMultipleRegisters:
-		//设置多个寄存器
-		uint16_t tt;
-		if ((this->rxFrame.regAddr + this->rxFrame.regLength) < 58)
+		//设置多个寄存器		
+		if (this->dealRegHoildWrite(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
 		{
-			for (int i = 0; i < this->rxFrame.regLength; i++)
-			{
-				tt = this->rxFrame.data[i * 2 + 7];
-				tt <<= 8;
-				tt += this->rxFrame.data[i * 2 + 8];
-				RegHoilding16[this->rxFrame.regAddr + i] = tt;
-			}
-			if ((this->rxFrame.regAddr == 2) && (this->rxFrame.regLength == 1))
-			{
-				//统一报警通道号
-				tt = this->rxFrame.data[7];
-				tt <<= 8;
-				tt += this->rxFrame.data[8];
-				if (this->pupdatewarparafrompc)
-					this->pupdatewarparafrompc(tt - 1);
-			}
-			else if ((this->rxFrame.regAddr == 23) && (this->rxFrame.regLength == 1))
-			{
-				//加载通道参数
-				tt = this->rxFrame.data[7];
-				tt <<= 8;
-				tt += this->rxFrame.data[8];
-				if (this->pcommupdatereghoildchannel)
-					this->pcommupdatereghoildchannel(tt);
-			}
-			else if (this->rxFrame.regAddr < 24)
-			{
-				//更新设备参数
-				if(this->pupdatedevparafrompc!=0)
-					this->pupdatedevparafrompc();
-			}
-			else if (this->rxFrame.regAddr > 23)
-			{
-				//更新通道参数
-				if (this->pupdatechannelparafrompc != 0)
-					this->pupdatechannelparafrompc();
-			}
-			else if (this->DUpdateReg)
-			{
-				this->DUpdateReg(0xffff, 0);
-			}
-			else {}
+			//处理广播地址
+			if (this->rxFrame.devid == 0)
+				break;
+			this->txFrame.devid = this->id;
+			this->txFrame.fnCode = WriteMultipleRegisters;
+			this->txFrame.regLength = this->rxFrame.regLength;
+			this->txFrame.data[2] = this->rxFrame.regLength * 2;
+			this->txFrame.frameLength = 8;
+			this->txFrame.isUpdated = true;
+			this->Send();
 		}
-		else {}
-		//处理广播地址
-		if (this->rxFrame.devid == 0)
-			break;
-		this->txFrame.devid = this->id;
-		this->txFrame.fnCode = WriteMultipleRegisters;
-		this->txFrame.regLength = this->rxFrame.regLength;
-		this->txFrame.data[2] = this->rxFrame.regLength * 2; 
-		this->txFrame.frameLength = 8;
-		this->txFrame.isUpdated = true;
-		this->Send();
 		break;
 	default:
 		break;
@@ -249,14 +205,68 @@ int ModbusSlaveLink::dealRegHoildRead(uint16_t addr, uint16_t len)
 	this->txFrame.fnCode = ReadHoldingRegisters;
 	this->txFrame.regLength = this->rxFrame.regLength;
 	this->txFrame.data[2] = this->rxFrame.regLength * 2;
-	/*if (this->rxFrame.regLength >= 60)
-	{
-		this->rxFrame.regLength = 60;
-	}*/
 	for (int i = 0; i < this->rxFrame.regLength; i++)
 	{
 		this->txFrame.SetReg(i, this->RegHoildings[ret].Reg[this->rxFrame.regAddr + i - this->RegHoildings[ret].Addr0]);
 	}
+	return 0;
+}
+//处理写入保持寄存器 0 正确 1 非法地址 2非法长度
+int ModbusSlaveLink::dealRegHoildWrite(uint16_t addr, uint16_t len)
+{
+	int ret = this->searchRegHoildGroup(addr, len);
+	if (ret == -1)
+		return 1;
+	if (ret == -2)
+		return 2;
+	if (ret < 0)
+		return 3;
+
+	uint16_t tt;
+
+	for (int i = 0; i < this->rxFrame.regLength; i++)
+	{
+		tt = this->rxFrame.data[i * 2 + 7];
+		tt <<= 8;
+		tt += this->rxFrame.data[i * 2 + 8];
+		this->RegHoildings[ret].Reg[this->rxFrame.regAddr + i - this->RegHoildings[ret].Addr0] = tt;
+	}
+	if ((this->rxFrame.regAddr == 2) && (this->rxFrame.regLength == 1))
+	{
+		//统一报警通道号
+		tt = this->rxFrame.data[7];
+		tt <<= 8;
+		tt += this->rxFrame.data[8];
+		if (this->pupdatewarparafrompc)
+			this->pupdatewarparafrompc(tt - 1);
+	}
+	else if ((this->rxFrame.regAddr == 23) && (this->rxFrame.regLength == 1))
+	{
+		//加载通道参数
+		tt = this->rxFrame.data[7];
+		tt <<= 8;
+		tt += this->rxFrame.data[8];
+		if (this->pcommupdatereghoildchannel)
+			this->pcommupdatereghoildchannel(tt);
+	}
+	else if (this->rxFrame.regAddr < 24)
+	{
+		//更新设备参数
+		if (this->pupdatedevparafrompc != 0)
+			this->pupdatedevparafrompc();
+	}
+	else if (this->rxFrame.regAddr > 23)
+	{
+		//更新通道参数
+		if (this->pupdatechannelparafrompc != 0)
+			this->pupdatechannelparafrompc();
+	}
+	else if (this->DUpdateReg)
+	{
+		this->DUpdateReg(0xffff, 0);
+	}
+	else {}
+
 	return 0;
 }
 //查找寄存器组，没有查找到返回负值
