@@ -57,6 +57,7 @@ public:
 	void SetRegHoid(int addr0, int reglen, uint16_t* reg, int reggroup = 0);//设置保持寄存器	
 private:
 	int dealRegInputRead(uint16_t addr,uint16_t len);//处理读取输入寄存器 0 正确 1 非法地址 2非法长度
+	int dealRegHoildRead(uint16_t addr, uint16_t len);//处理读取保持寄存器 0 正确 1 非法地址 2非法长度
 	int searchRegInGroup(uint16_t addr, uint16_t len);//查找输入寄存器组，没有查找到返回负值
 	int searchRegHoildGroup(uint16_t addr, uint16_t len);//查找保持寄存器组，没有查找到返回负值
 public:

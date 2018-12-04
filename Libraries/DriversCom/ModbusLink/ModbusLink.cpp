@@ -86,9 +86,12 @@ void ModbusSlaveLink::DealFrame()
 			{
 				this->txFrame.SetReg(i, RegHoilding16[this->rxFrame.regAddr + i]);
 			}
-			this->txFrame.frameLength = this->rxFrame.regLength * 2 + 5;
-			this->txFrame.isUpdated = true;
-			this->Send();
+			if (this->dealRegHoildRead(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
+			{
+				this->txFrame.frameLength = this->rxFrame.regLength * 2 + 5;
+				this->txFrame.isUpdated = true;
+				this->Send();
+			}
 		}
 		else
 		{
@@ -248,6 +251,19 @@ int ModbusSlaveLink::dealRegInputRead(uint16_t addr, uint16_t len)
 	{
 		this->txFrame.SetReg(i,this->RegInputs[ret].Reg[this->rxFrame.regAddr + i- this->RegInputs[ret].Addr0]);
 	}
+
+	return 0;
+}
+//处理读取保持寄存器 0 正确 1 非法地址 2非法长度
+int ModbusSlaveLink::dealRegHoildRead(uint16_t addr, uint16_t len)
+{
+	int ret = this->searchRegHoildGroup(addr, len);
+	if (ret == -1)
+		return 1;
+	if (ret == -2)
+		return 2;
+	if (ret < 0)
+		return 3;
 
 	return 0;
 }
