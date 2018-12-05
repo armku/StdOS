@@ -94,7 +94,6 @@ void ModbusSlaveLink::DealFrame()
 		debug_printf("WriteMultipleRegisters\n");
 		if (this->dealRegHoildWrite(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
 		{
-			debug_printf("寄存器在正常范围内\n");
 			//处理广播地址
 			if (this->rxFrame.devid == 0)
 				break;
