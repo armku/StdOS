@@ -15,7 +15,7 @@ uint16_t RegHoilding16[60];
 
 void ModbusSlaveLinkRoutin(void* param)
 {
-	if (modbusSlave.com.FlagIdleOK && modbusSlave.CheckFrame())
+	if (modbusSlave.com.FlagIdleOK && (modbusSlave.com.RxSize() > 0)&& modbusSlave.CheckFrame())
 	{
 		modbusSlave.com.FlagIdleOK = false;
 		modbusSlave.DealFrame();
