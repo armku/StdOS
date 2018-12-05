@@ -56,7 +56,7 @@ public:
 	uint64_t LastRcvTime;
 	int RxCnt;
 	int TxCnt;
-	bool FlagIdleOK;//发生空闲中断
+	bool FlagIdleOK;//发生空闲中断 不建议使用，容易误判
 	//////////////////////////
 	///@bief 设置波特率
 	///@param baudRate 波特率大小
