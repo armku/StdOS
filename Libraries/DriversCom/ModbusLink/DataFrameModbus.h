@@ -30,7 +30,6 @@ public:
 	bool VerifyCheckCode()
 	{
 		auto crcnew = Crc::CRC16RTU(data, frameLength-2);
-		debug_printf("%x %x\n",crcnew, checkSum);
 		if (crcnew == this->checkSum)
 			return true;
 		else
@@ -87,7 +86,6 @@ public:
 			case 0x0F://多个写 0 区输出继电器(指令代码: 0X0F) 
 			case 0x10://多个写 4 区输出寄存器(指令代码: 0X10) 
 				frameLength = data[6] + frameLength + 1;
-				debug_printf("%d %d\n", frameLength, data[6]);
 				break;
 			default:
 				frameLength = 0;
@@ -100,7 +98,6 @@ public:
 				this->RemoveOneFrame();
 				return false;
 			}
-			debug_printf("frameLength %d %d\n", frameLength, dataLength);
 			//需要的长度不够，直接返回
 			if (frameLength > this->dataLength)
 				return false;
@@ -109,13 +106,11 @@ public:
 			this->checkSum |= this->data[this->frameLength - 2];
 
 			if (this->VerifyCheckCode())
-			{
-				debug_printf("true\n");
+			{				
 				return true;
 			}
 			else
 			{
-				debug_printf("false\n");
 				this->RemoveOneFrame();
 				return false;
 			}

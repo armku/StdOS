@@ -10,25 +10,15 @@ bool ModbusSlaveLink::CheckFrame()
 	bool ret = false;
 	int rxlen = com.RxSize();
 
-	debug_printf("Rx-CheckFrame\n");
 	if (com.GetBytes(&rxFrame.data[rxFrame.dataLength], rxlen))
 	{
 		rxFrame.dataLength += rxlen;
 	}
-	Buffer(rxFrame.data, rxlen).ShowHex(true);
+	Buffer(rxFrame.data, rxFrame.dataLength).ShowHex(true);
 	if (!rxFrame.CheckFrame())
-		return false;	
-	if (rxFrame.frameLength > 3)
-	{
-		auto crc11 = Crc::CRC16RTU(rxFrame.data, rxFrame.frameLength - 2);
-	}
-#if defined DEBUG
-	/*Buffer(rxFrame.data, rxFrame.dataLength).ShowHex(true,' ');*/
-#endif
-	ret= rxFrame.CheckFrame();
-	if (ret)
-		rxFrame.Cnt++;
-	return ret;
+		return false;
+	else
+		return true;
 }
 
 bool ModbusSlaveLink::Send()
