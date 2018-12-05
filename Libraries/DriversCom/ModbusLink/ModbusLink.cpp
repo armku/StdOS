@@ -10,6 +10,7 @@ bool ModbusSlaveLink::CheckFrame()
 	bool ret = false;
 	int rxlen = com.RxSize();
 
+	debug_printf("Rx-CheckFrame\n");
 	if (com.GetBytes(&rxFrame.data[rxFrame.dataLength], rxlen))
 	{
 		rxFrame.dataLength += rxlen;
