@@ -64,7 +64,6 @@ bool EspDemoLink::ReceiveAndWait(const char* targetString, unsigned char timeOut
 }
 bool EspDemoLink::CheckFrame()
 {
-	bool ret = false;
 	int rxlen = com.RxSize();
 
 	if (com.GetBytes(&rxFrame.data[rxFrame.dataLength], rxlen))
