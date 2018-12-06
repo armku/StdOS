@@ -46,7 +46,7 @@ public:
 	DataFrameModbus rxFrame;
 	USART &com;
 	const int static RegInputLen = 3;//输入寄存器组大小
-	const int static RegHoildingLen = 3;//保持寄存器组大小
+	const int static RegHoildingLen = 17;//保持寄存器组大小
 	ModbusReg_T RegInputs[RegInputLen];//输入寄存器组
 	ModbusReg_T RegHoildings[RegHoildingLen];//保持寄存器组
 public:
