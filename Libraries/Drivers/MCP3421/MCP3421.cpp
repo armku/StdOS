@@ -26,7 +26,7 @@ void MCP3421::MCP3421_WriteOne(uint8_t  dt)
 int32_t MCP3421::MCP3421_ReadOne(void)
 {
 	int32_t volatil = 0;
-	uint8_t Step, Temp;
+//	uint8_t Step, Temp;
 	this->IIC.Start();
 	this->IIC.WriteByte(0XD1);
 	this->IIC.WaitAck();

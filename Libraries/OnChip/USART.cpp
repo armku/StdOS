@@ -392,6 +392,7 @@ void USART::IRQ()
 		char ch = 0;
 		ch = mUSARTx->SR; //先读SR，然后读DR才能清除
 		ch = mUSARTx->DR;
+		ch=ch;
 		
 		if (this->OnReceive != 0)
 		{
