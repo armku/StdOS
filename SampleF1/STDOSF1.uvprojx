@@ -842,6 +842,11 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\DriversCom\EspDemoLink.cpp</FilePath>
             </File>
+            <File>
+              <FileName>StdLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\StdLink\StdLink.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1031,6 +1036,11 @@
               <FileName>EspDemoLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\DriversCom\EspDemoLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StdLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\StdLink\StdLinkDemo.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1872,6 +1882,11 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\DriversCom\EspDemoLink.cpp</FilePath>
             </File>
+            <File>
+              <FileName>StdLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\StdLink\StdLink.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2061,6 +2076,11 @@
               <FileName>EspDemoLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\DriversCom\EspDemoLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StdLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\DriversCom\StdLink\StdLinkDemo.cpp</FilePath>
             </File>
           </Files>
         </Group>
