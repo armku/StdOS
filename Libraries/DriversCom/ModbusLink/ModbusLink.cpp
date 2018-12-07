@@ -227,7 +227,7 @@ int ModbusSlaveLink::searchRegInGroup(uint16_t addr, uint16_t len)
 	for (int i = 0; i < this->RegInputLen; i++)
 	{
 		if ((addr >= this->RegInputs[i].Addr0) && //起始地址对
-			((addr + len) < (this->RegInputs[i].Addr0 + this->RegInputs[i].Lenth)) && //长度对
+			((addr + len) <= (this->RegInputs[i].Addr0 + this->RegInputs[i].Lenth)) && //长度对
 			(this->RegInputs[i].Reg!=0)) //寄存器指针不为空
 			return i;
 	}
@@ -240,7 +240,7 @@ int ModbusSlaveLink::searchRegHoildGroup(uint16_t addr, uint16_t len)
 	for (int i = 0; i < this->RegHoildingLen; i++)
 	{
 		if ((addr >= this->RegHoildings[i].Addr0) && //起始地址对
-			((addr + len) < (this->RegHoildings[i].Addr0 + this->RegHoildings[i].Lenth)) && //长度对
+			((addr + len) <= (this->RegHoildings[i].Addr0 + this->RegHoildings[i].Lenth)) && //长度对
 			(this->RegHoildings[i].Reg != 0)) //寄存器指针不为空
 			return i;
 	}
