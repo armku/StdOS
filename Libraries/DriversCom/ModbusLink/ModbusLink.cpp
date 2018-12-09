@@ -13,6 +13,9 @@ bool ModbusSlaveLink::CheckFrame()
 	{
 		rxFrame.dataLength += rxlen;
 	}
+	//判断数据帧最小长度要求
+	if (rxFrame.dataLength < 8)
+		return false;
 #ifdef  DEBUG
 	Buffer(rxFrame.data, rxFrame.dataLength).ShowHex(true);
 #endif //  DEBUG	
