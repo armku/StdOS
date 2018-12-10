@@ -9,14 +9,16 @@
 struct DataFrameModbus
 {
 public:
-	uint8_t devid;
-	uint8_t fnCode;
-	uint8_t dataLength;
+	uint8_t Address;	// 地址
+	uint8_t Code;		// 功能码
+	uint8_t Error;		// 是否异常
+	uint8_t Length;		// 数据长度
 	uint16_t regAddr;
 	uint16_t regLength;
 	uint8_t data[MAX_FRAMEMODBUS_DATA_LENGTH];
 	bool isUpdated;
-	uint16_t checkSum;
+	uint16_t Crc;		// 校验码
+	uint16_t Crc2;		// 动态计算得到的校验码
 	int frameLength;//当前数据帧长度
 	int Cnt;//数据帧数量
 
@@ -30,7 +32,7 @@ public:
 	bool VerifyCheckCode()
 	{
 		auto crcnew = Crc::CRC16RTU(data, frameLength-2);
-		if (crcnew == this->checkSum)
+		if (crcnew == this->Crc)
 			return true;
 		else
 			return false;
@@ -45,26 +47,26 @@ public:
 	{
 		this->data[2] = len * 2;
 		this->frameLength = 5 + len * 2;
-		this->dataLength = this->frameLength;
+		this->Length = this->frameLength;
 	}
 	bool RemoveOneFrame()
 	{
-		if (frameLength<0 || frameLength>dataLength)
+		if (frameLength<0 || frameLength>Length)
 			return false;
-		for (int i = 0; i < dataLength - frameLength; i++)
+		for (int i = 0; i < Length - frameLength; i++)
 		{
 			this->data[i] = this->data[i + frameLength];
 		}
-		dataLength -= frameLength;
+		Length -= frameLength;
 		this->frameLength = 0;
 		return true;
 	}
 	bool CheckFrame()
 	{
-		if (dataLength >= 8)
+		if (Length >= 8)
 		{
-			this->devid = this->data[0];
-			this->fnCode = this->data[1];
+			this->Address = this->data[0];
+			this->Code = this->data[1];
 			this->regAddr = this->data[2];
 			this->regAddr <<= 8;
 			this->regAddr |= this->data[3];
@@ -73,7 +75,7 @@ public:
 			this->regLength |= this->data[5];
 
 			this->frameLength = 8;
-			switch (this->fnCode)
+			switch (this->Code)
 			{
 			case 0X02:
 			case 0X01:
@@ -94,16 +96,16 @@ public:
 			if (frameLength == 0)
 			{
 				//非法指令，直接清空缓冲区
-				frameLength = this->dataLength;
+				frameLength = this->Length;
 				this->RemoveOneFrame();
 				return false;
 			}
 			//需要的长度不够，直接返回
-			if (frameLength > this->dataLength)
+			if (frameLength > this->Length)
 				return false;
-			this->checkSum = this->data[this->frameLength - 1];
-			this->checkSum <<= 8;
-			this->checkSum |= this->data[this->frameLength - 2];
+			this->Crc = this->data[this->frameLength - 1];
+			this->Crc <<= 8;
+			this->Crc |= this->data[this->frameLength - 2];
 
 			if (this->VerifyCheckCode())
 			{				
@@ -119,17 +121,17 @@ public:
 	}
 	void CreateCheckCode()
 	{
-		checkSum = fnCode + frameLength;
+		Crc = Code + frameLength;
 		for (uint8_t i = 0; i < frameLength; i++)
-			checkSum += data[i];
+			Crc += data[i];
 	}
 	DataFrameModbus& operator=(const DataFrameModbus &df)
 	{
-		fnCode = df.fnCode;
-		dataLength = df.dataLength;
+		Code = df.Code;
+		Length = df.Length;
 		isUpdated = df.isUpdated;
-		checkSum = df.checkSum;
-		for (uint8_t i = 0; i < dataLength; i++)
+		Crc = df.Crc;
+		for (uint8_t i = 0; i < Length; i++)
 			data[i] = df.data[i];
 		return *this;
 	}

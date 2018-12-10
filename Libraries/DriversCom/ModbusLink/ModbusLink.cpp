@@ -9,15 +9,15 @@ bool ModbusSlaveLink::CheckFrame()
 {
 	int rxlen = com.RxSize();
 
-	if (com.GetBytes(&rxFrame.data[rxFrame.dataLength], rxlen))
+	if (com.GetBytes(&rxFrame.data[rxFrame.Length], rxlen))
 	{
-		rxFrame.dataLength += rxlen;
+		rxFrame.Length += rxlen;
 	}
 	//判断数据帧最小长度要求
-	if (rxFrame.dataLength < 8)
+	if (rxFrame.Length < 8)
 		return false;
 #ifdef  DEBUG
-	Buffer(rxFrame.data, rxFrame.dataLength).ShowHex(true);
+	Buffer(rxFrame.data, rxFrame.Length).ShowHex(true);
 #endif //  DEBUG	
 	if (!rxFrame.CheckFrame())
 		return false;
@@ -29,8 +29,8 @@ bool ModbusSlaveLink::Send()
 {
 	if (!txFrame.isUpdated) //no new frame data, no need to send
 		return false;	
-	txFrame.data[0] = txFrame.devid;
-	txFrame.data[1] = txFrame.fnCode;
+	txFrame.data[0] = txFrame.Address;
+	txFrame.data[1] = txFrame.Code;
 	auto crc = Crc::CRC16RTU(txFrame.data, txFrame.frameLength - 2);
 	txFrame.data[txFrame.frameLength - 2] = crc & 0xff;
 	txFrame.data[txFrame.frameLength - 1] = crc >> 8;
@@ -44,15 +44,16 @@ bool ModbusSlaveLink::Send()
 //处理数据帧
 void ModbusSlaveLink::DealFrame()
 {
-	if ((this->rxFrame.devid != this->id) && (this->rxFrame.devid != 0))
+	if ((this->rxFrame.Address != this->id) && (this->rxFrame.Address != 0))
 		return;
 
-	switch (this->rxFrame.fnCode)
+	switch (this->rxFrame.Code)
 	{
-	case ReadInputRegisters:
+	case 4:
+		//强置单线圈。强置一个逻辑线圈的通断状态
 		//读取输入寄存器
 		//处理广播地址
-		if (this->rxFrame.devid == 0)
+		if (this->rxFrame.Address == 0)
 			break;		
 		if (this->dealRegInputRead(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
 		{
@@ -61,10 +62,11 @@ void ModbusSlaveLink::DealFrame()
 			this->Send();
 		}
 		break;
-	case ReadHoldingRegisters:
+	case 3:
+		//读取输入寄存器。在一个或多个输入寄存器中取得当前的二进制值
 		//读取保持寄存器
 		//处理广播地址
-		if (this->rxFrame.devid == 0)
+		if (this->rxFrame.Address == 0)
 			break;
 					
 		if (this->dealRegHoildRead(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
@@ -74,7 +76,8 @@ void ModbusSlaveLink::DealFrame()
 			this->Send();
 		}
 		break;
-	case WriteSingleRegister:
+	case 6:
+		//读取异常状态。取得8个内部线圈的通断状态，这8个线圈的地址由控制器决定
 		debug_printf("WriteSingleRegister address %d value %d\n", this->rxFrame.regAddr, this->rxFrame.regLength);
 		//预置单寄存器
 		
@@ -82,10 +85,10 @@ void ModbusSlaveLink::DealFrame()
 		if (this->dealRegHoildWriteOne(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
 		{
 			//处理广播地址
-			if (this->rxFrame.devid == 0)
+			if (this->rxFrame.Address == 0)
 				break;
-			this->txFrame.devid = this->id;
-			this->txFrame.fnCode = WriteSingleRegister;
+			this->txFrame.Address = this->id;
+			this->txFrame.Code = 6;
 			this->txFrame.regLength = this->rxFrame.regLength;
 			this->txFrame.data[2] = this->rxFrame.regLength * 2;
 			this->txFrame.frameLength = 8;
@@ -93,16 +96,17 @@ void ModbusSlaveLink::DealFrame()
 			this->Send();
 		}
 		break;
-	case WriteMultipleRegisters:
+	case 16:
+		//报告从机标识。可使主机判断编址从机的类型及该从机运行指示灯的状态
 		//设置多个寄存器		
 		debug_printf("WriteMultipleRegisters\n");
 		if (this->dealRegHoildWrite(this->rxFrame.regAddr, this->rxFrame.regLength) == 0)
 		{
 			//处理广播地址
-			if (this->rxFrame.devid == 0)
+			if (this->rxFrame.Address == 0)
 				break;
-			this->txFrame.devid = this->id;
-			this->txFrame.fnCode = WriteMultipleRegisters;
+			this->txFrame.Address = this->id;
+			this->txFrame.Code = 16;
 			this->txFrame.regLength = this->rxFrame.regLength;
 			this->txFrame.data[2] = this->rxFrame.regLength * 2;
 			this->txFrame.frameLength = 8;
@@ -145,8 +149,8 @@ int ModbusSlaveLink::dealRegInputRead(uint16_t addr, uint16_t len)
 	if (ret < 0)
 		return 3;
 
-	this->txFrame.devid = this->id;
-	this->txFrame.fnCode = ReadInputRegisters;
+	this->txFrame.Address = this->id;
+	this->txFrame.Code = 4;
 	this->txFrame.regLength = this->rxFrame.regLength;
 	this->txFrame.data[2] = this->rxFrame.regLength * 2;
 
@@ -168,8 +172,8 @@ int ModbusSlaveLink::dealRegHoildRead(uint16_t addr, uint16_t len)
 		return 2;
 	if (ret < 0)
 		return 3;
-	this->txFrame.devid = this->id;
-	this->txFrame.fnCode = ReadHoldingRegisters;
+	this->txFrame.Address = this->id;
+	this->txFrame.Code = 3;
 	this->txFrame.regLength = this->rxFrame.regLength;
 	this->txFrame.data[2] = this->rxFrame.regLength * 2;
 	for (int i = 0; i < this->rxFrame.regLength; i++)
