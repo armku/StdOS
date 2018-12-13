@@ -31,8 +31,8 @@ public:
 
 	bool VerifyCheckCode()
 	{
-		auto crcnew = Crc::CRC16RTU(data, frameLength-2);
-		if (crcnew == this->Crc)
+		this->Crc2 = Crc::CRC16RTU(data, frameLength-2);
+		if (this->Crc2 == this->Crc)
 			return true;
 		else
 			return false;
