@@ -90,7 +90,11 @@ void ModbusSlaveLink::DealFrame()
 			this->txFrame.Address = this->id;
 			this->txFrame.Code = 6;
 			this->txFrame.regLength = this->rxFrame.regLength;
-			this->txFrame.data[2] = this->rxFrame.regLength * 2;
+			this->txFrame.data[2] = this->rxFrame.data[2];
+			this->txFrame.data[3] = this->rxFrame.data[3];
+			this->txFrame.data[4] = this->rxFrame.data[4];
+			this->txFrame.data[5] = this->rxFrame.data[5];
+
 			this->txFrame.frameLength = 8;
 			this->txFrame.isUpdated = true;
 			this->Send();
@@ -108,7 +112,10 @@ void ModbusSlaveLink::DealFrame()
 			this->txFrame.Address = this->id;
 			this->txFrame.Code = 16;
 			this->txFrame.regLength = this->rxFrame.regLength;
-			this->txFrame.data[2] = this->rxFrame.regLength * 2;
+			this->txFrame.data[2] = this->rxFrame.data[2];
+			this->txFrame.data[3] = this->rxFrame.data[3];
+			this->txFrame.data[4] = this->rxFrame.data[4];
+			this->txFrame.data[5] = this->rxFrame.data[5];
 			this->txFrame.frameLength = 8;
 			this->txFrame.isUpdated = true;
 			this->Send();
