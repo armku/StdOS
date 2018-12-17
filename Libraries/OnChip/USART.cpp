@@ -3,6 +3,8 @@
 #include "Configuration.h"
 #include "Sys.h"
 
+UsartKernel_T UsartKernel[5];//串口数据处理
+
 USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint32_t remapvalue, uint16_t parity, uint16_t wordLen, uint16_t stopBits)
 {
 	mUSARTx = USARTx;   //USARTx

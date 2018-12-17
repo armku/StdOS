@@ -128,6 +128,32 @@ void TimeUpdate()
 {
 	Time.Milliseconds += 1000;
 	Time.Seconds++;
+	for (int i = 0; i < 5; i++)
+	{
+		UsartKernel[i].TimeCnt++;
+		if (UsartKernel[i].UsartReadCnt != 0)
+		{
+			if (UsartKernel[i].UsartIdleCnt == UsartKernel[i].UsartReadCnt)
+			{
+				//数据个数一段时间没了变化
+				UsartKernel[i].UsartReadCntCopy = UsartKernel[i].UsartReadCnt;
+				UsartKernel[i].UsartReadCnt = 0;//清除数据个数
+				UsartKernel[i].UsartIdleCnt = 0;//清零
+				UsartKernel[i].UsartFlag = 1;
+			}
+			else
+			{
+				UsartKernel[i].UsartIdleCnt = UsartKernel[i].UsartReadCnt;
+			}
+		}
+	}
+	/*
+	处理数据
+	if(UsartKernel[i].UsartFlag)
+	{
+	UsartKernel[i].UsartFlag=0;
+	}
+	*/
 }
 int gTicks = 0; //每个us需要的systick时钟数 	
 
