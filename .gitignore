@@ -5,3 +5,7 @@
 /SampleF0/Listings
 /SampleF4/Objects
 /SampleF4/Listings
+/SampleF1/*.log
+/SampleF1/JLinkSettings.ini
+/SampleF1/*.Ace
+/SampleF4/*.Ace
