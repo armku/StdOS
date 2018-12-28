@@ -847,6 +847,11 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
             </File>
+            <File>
+              <FileName>MqttLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\MqttLink\MqttLink.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -916,6 +921,11 @@
               <FileName>ModbusLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MqttLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\MqttLink\MqttLinkDemo.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1762,6 +1772,11 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
             </File>
+            <File>
+              <FileName>MqttLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\MqttLink\MqttLink.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1831,6 +1846,11 @@
               <FileName>ModbusLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MqttLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\MqttLink\MqttLinkDemo.cpp</FilePath>
             </File>
           </Files>
         </Group>
