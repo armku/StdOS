@@ -648,11 +648,6 @@
           <GroupName>OnChip</GroupName>
           <Files>
             <File>
-              <FileName>Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Demo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>GPIO.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\GPIO.cpp</FilePath>
@@ -916,6 +911,11 @@
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\AD7124\AD7124Demo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLinkDemo.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1563,11 +1563,6 @@
           <GroupName>OnChip</GroupName>
           <Files>
             <File>
-              <FileName>Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Demo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>GPIO.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\GPIO.cpp</FilePath>
@@ -1831,6 +1826,11 @@
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\AD7124\AD7124Demo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLinkDemo.cpp</FilePath>
             </File>
           </Files>
         </Group>
