@@ -413,19 +413,19 @@
               <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
             </File>
             <File>
-              <FileName>startup_stm32f10x_md.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\SYSTEM\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
             </File>
             <File>
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\main.cpp</FilePath>
+              <FilePath>..\StdOS\main.cpp</FilePath>
             </File>
             <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
+              <FileName>startup_stm32f10x_md.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -435,12 +435,12 @@
             <File>
               <FileName>core_cm3.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\CMSIS\core_cm3.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\CMSIS\core_cm3.c</FilePath>
             </File>
             <File>
               <FileName>system_stm32f10x.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\CMSIS\system_stm32f10x.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\CMSIS\system_stm32f10x.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -450,7 +450,7 @@
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Util\Util.cpp</FilePath>
+              <FilePath>..\StdOS\Util\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -460,117 +460,117 @@
             <File>
               <FileName>misc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\misc.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\misc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_adc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_adc.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_adc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_bkp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_bkp.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_bkp.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_can.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_can.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_can.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_cec.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_cec.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_cec.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_crc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_crc.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_crc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_dac.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_dac.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_dac.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_dbgmcu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_dbgmcu.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_dbgmcu.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_dma.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_dma.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_dma.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_exti.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_exti.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_exti.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_flash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_flash.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_flash.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_fsmc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_fsmc.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_fsmc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_gpio.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_gpio.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_i2c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_i2c.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_i2c.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_iwdg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_iwdg.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_iwdg.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_pwr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_pwr.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_pwr.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_rcc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_rcc.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_rcc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_rtc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_rtc.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_rtc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_sdio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_sdio.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_sdio.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_spi.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_spi.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_tim.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_tim.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_tim.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_usart.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_usart.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_wwdg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_wwdg.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_wwdg.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -590,32 +590,32 @@
             <File>
               <FileName>BlinkPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\App\BlinkPort.cpp</FilePath>
+              <FilePath>..\StdOS\App\BlinkPort.cpp</FilePath>
             </File>
             <File>
               <FileName>bspkey.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\App\bspkey.cpp</FilePath>
+              <FilePath>..\StdOS\App\bspkey.cpp</FilePath>
             </File>
             <File>
               <FileName>FlushPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\App\FlushPort.cpp</FilePath>
+              <FilePath>..\StdOS\App\FlushPort.cpp</FilePath>
             </File>
             <File>
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\App\lcd_dr.cpp</FilePath>
+              <FilePath>..\StdOS\App\lcd_dr.cpp</FilePath>
             </File>
             <File>
               <FileName>LCDOCM.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\App\LCDOCM.cpp</FilePath>
+              <FilePath>..\StdOS\App\LCDOCM.cpp</FilePath>
             </File>
             <File>
               <FileName>PID.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\App\PID.cpp</FilePath>
+              <FilePath>..\StdOS\App\PID.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -625,22 +625,22 @@
             <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Core\Buffer.cpp</FilePath>
+              <FilePath>..\StdOS\Core\Buffer.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Core\DateTime.cpp</FilePath>
+              <FilePath>..\StdOS\Core\DateTime.cpp</FilePath>
             </File>
             <File>
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Core\List.cpp</FilePath>
+              <FilePath>..\StdOS\Core\List.cpp</FilePath>
             </File>
             <File>
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Core\Version.cpp</FilePath>
+              <FilePath>..\StdOS\Core\Version.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -648,54 +648,59 @@
           <GroupName>OnChip</GroupName>
           <Files>
             <File>
-              <FileName>Port.cpp</FileName>
+              <FileName>Demo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSolo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\PwmSolo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>USART.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\USART.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InputCapture_EXIT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\InputCapture_EXIT.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InputCapture_TIM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\InputCapture_TIM.cpp</FilePath>
+              <FilePath>..\StdOS\OnChip\Demo.cpp</FilePath>
             </File>
             <File>
               <FileName>GPIO.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\GPIO.cpp</FilePath>
+              <FilePath>..\StdOS\OnChip\GPIO.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputCapture_EXIT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\InputCapture_EXIT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputCapture_TIM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\InputCapture_TIM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\Port.cpp</FilePath>
             </File>
             <File>
               <FileName>PWM.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\PWM.cpp</FilePath>
+              <FilePath>..\StdOS\OnChip\PWM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\PwmSolo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\Spi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>USART.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\USART.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -703,109 +708,114 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>I2C.cpp</FileName>
+              <FileName>AD7124.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\I2C.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\AD7124\AD7124.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AD7689\AD7689.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\AD7689\AD7689.cpp</FilePath>
             </File>
             <File>
               <FileName>ADS1232.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ADS1232\ADS1232.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\ADS1232\ADS1232.cpp</FilePath>
             </File>
             <File>
               <FileName>ADS1246.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ADS1246\ADS1246.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\ADS1246\ADS1246.cpp</FilePath>
             </File>
             <File>
               <FileName>AT24CXX.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AT24CXX\AT24CXX.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\AT24CXX\AT24CXX.cpp</FilePath>
             </File>
             <File>
               <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AT45DB\AT45DB.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\AT45DB\AT45DB.cpp</FilePath>
             </File>
             <File>
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\DS18B20\DS18B20.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\DS18B20\DS18B20.cpp</FilePath>
             </File>
             <File>
               <FileName>DS1302.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\DS1302\DS1302.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\DS1302\DS1302.cpp</FilePath>
             </File>
             <File>
               <FileName>GPS_ATGM332D.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\GPS_ATGM332D\GPS_ATGM332D.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\GPS_ATGM332D\GPS_ATGM332D.cpp</FilePath>
             </File>
             <File>
               <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\GPS_S1216\GPS_S1216.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\GPS_S1216\GPS_S1216.cpp</FilePath>
             </File>
             <File>
               <FileName>MCP3421.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\MCP3421\MCP3421.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\MCP3421\MCP3421.cpp</FilePath>
             </File>
             <File>
               <FileName>NPA.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\NPA\NPA.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\NPA\NPA.cpp</FilePath>
             </File>
             <File>
               <FileName>NRF24L01.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\NRF24L01\NRF24L01.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\NRF24L01\NRF24L01.cpp</FilePath>
             </File>
             <File>
               <FileName>OCM240128.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\OCM240128\OCM240128.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RX8025T.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\RX8025T\RX8025T.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SSD1106.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\SSD1106\SSD1106.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SSD1309.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\SSD1309\SSD1309.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ST7565R.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ST7565R\ST7565R.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W25QXXX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\W25QXXX\W25QXXX.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W5500.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\W5500\W5500.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\OCM240128\OCM240128.cpp</FilePath>
             </File>
             <File>
               <FileName>PCF8563.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\PCF8563\PCF8563.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\PCF8563\PCF8563.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RX8025T.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\RX8025T\RX8025T.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1106.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SSD1106\SSD1106.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1309.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SSD1309\SSD1309.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7565R.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\ST7565R\ST7565R.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\W25QXXX\W25QXXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W5500.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\W5500\W5500.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\I2C.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -815,37 +825,32 @@
             <File>
               <FileName>DemoLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\DemoLink\DemoLink.cpp</FilePath>
+              <FilePath>..\StdOS\DriversCom\DemoLink\DemoLink.cpp</FilePath>
             </File>
             <File>
               <FileName>esp8266.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\esp8266\esp8266.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Socket_esp8266.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\esp8266\Socket_esp8266.cpp</FilePath>
+              <FilePath>..\StdOS\DriversCom\esp8266\esp8266.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
+              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
             </File>
             <File>
               <FileName>SHARP_PM2_5.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EspDemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\EspDemoLink.cpp</FilePath>
+              <FilePath>..\StdOS\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
             </File>
             <File>
               <FileName>StdLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\StdLink\StdLink.cpp</FilePath>
+              <FilePath>..\StdOS\DriversCom\StdLink\StdLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspDemoLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -855,17 +860,17 @@
             <File>
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Kernel\Sys.cpp</FilePath>
+              <FilePath>..\StdOS\Kernel\Sys.cpp</FilePath>
             </File>
             <File>
               <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Kernel\Task.cpp</FilePath>
+              <FilePath>..\StdOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Kernel\Time.cpp</FilePath>
+              <FilePath>..\StdOS\Kernel\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -875,7 +880,7 @@
             <File>
               <FileName>Storage.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Storage\Storage.cpp</FilePath>
+              <FilePath>..\StdOS\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -885,22 +890,22 @@
             <File>
               <FileName>CheckSum.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Security\CheckSum.cpp</FilePath>
+              <FilePath>..\StdOS\Security\CheckSum.cpp</FilePath>
             </File>
             <File>
               <FileName>Crc.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Security\Crc.cpp</FilePath>
+              <FilePath>..\StdOS\Security\Crc.cpp</FilePath>
             </File>
             <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Security\Math.cpp</FilePath>
+              <FilePath>..\StdOS\Security\Math.cpp</FilePath>
             </File>
             <File>
               <FileName>Parity.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Security\Parity.cpp</FilePath>
+              <FilePath>..\StdOS\Security\Parity.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -910,137 +915,7 @@
             <File>
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AD7124\AD7124Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7689Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AD7689\AD7689Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1232Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ADS1232\ADS1232Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1246Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ADS1246\ADS1246Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AT24CXXDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AT24CXX\AT24CXXDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AT45DBDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AT45DB\AT45DBDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DS18B20Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\DS18B20\DS18B20Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DS1302Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\DS1302\DS1302Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GPS_ATGM332DDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\GPS_ATGM332D\GPS_ATGM332DDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GPS_S1216Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\GPS_S1216\GPS_S1216Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MCP3421Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\MCP3421\MCP3421Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NPADemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\NPA\NPADemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NRF24L01Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\NRF24L01\NRF24L01Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>OCM240128Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\OCM240128\OCM240128Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PCF8563Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\PCF8563\PCF8563Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RX8025TDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\RX8025T\RX8025TDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SSD1106Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\SSD1106\SSD1106Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SSD1309Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\SSD1309\SSD1309Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ST7565RDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ST7565R\ST7565RDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W25QXXXDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\W25QXXX\W25QXXXDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W5500Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\W5500\W5500Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DemoLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\DemoLink\DemoLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>esp8266Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\esp8266\esp8266Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\ModbusLink\ModbusLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SHARP_PM2_5Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\SHARP_PM2_5\SHARP_PM2_5Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EspDemoLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\EspDemoLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StdLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\StdLink\StdLinkDemo.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\AD7124\AD7124Demo.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1453,19 +1328,19 @@
               <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
             </File>
             <File>
-              <FileName>startup_stm32f10x_md.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\SYSTEM\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
             </File>
             <File>
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\main.cpp</FilePath>
+              <FilePath>..\StdOS\main.cpp</FilePath>
             </File>
             <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
+              <FileName>startup_stm32f10x_md.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -1475,12 +1350,12 @@
             <File>
               <FileName>core_cm3.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\CMSIS\core_cm3.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\CMSIS\core_cm3.c</FilePath>
             </File>
             <File>
               <FileName>system_stm32f10x.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\CMSIS\system_stm32f10x.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\CMSIS\system_stm32f10x.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1490,7 +1365,7 @@
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Util\Util.cpp</FilePath>
+              <FilePath>..\StdOS\Util\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1500,117 +1375,117 @@
             <File>
               <FileName>misc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\misc.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\misc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_adc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_adc.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_adc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_bkp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_bkp.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_bkp.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_can.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_can.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_can.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_cec.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_cec.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_cec.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_crc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_crc.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_crc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_dac.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_dac.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_dac.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_dbgmcu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_dbgmcu.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_dbgmcu.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_dma.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_dma.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_dma.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_exti.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_exti.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_exti.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_flash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_flash.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_flash.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_fsmc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_fsmc.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_fsmc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_gpio.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_gpio.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_i2c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_i2c.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_i2c.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_iwdg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_iwdg.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_iwdg.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_pwr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_pwr.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_pwr.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_rcc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_rcc.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_rcc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_rtc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_rtc.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_rtc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_sdio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_sdio.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_sdio.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_spi.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_spi.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_tim.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_tim.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_tim.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_usart.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_usart.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_wwdg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\STM32F1\FWLib\src\stm32f10x_wwdg.c</FilePath>
+              <FilePath>..\Libraries\STM32F1\FWLib\src\stm32f10x_wwdg.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1630,32 +1505,32 @@
             <File>
               <FileName>BlinkPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\App\BlinkPort.cpp</FilePath>
+              <FilePath>..\StdOS\App\BlinkPort.cpp</FilePath>
             </File>
             <File>
               <FileName>bspkey.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\App\bspkey.cpp</FilePath>
+              <FilePath>..\StdOS\App\bspkey.cpp</FilePath>
             </File>
             <File>
               <FileName>FlushPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\App\FlushPort.cpp</FilePath>
+              <FilePath>..\StdOS\App\FlushPort.cpp</FilePath>
             </File>
             <File>
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\App\lcd_dr.cpp</FilePath>
+              <FilePath>..\StdOS\App\lcd_dr.cpp</FilePath>
             </File>
             <File>
               <FileName>LCDOCM.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\App\LCDOCM.cpp</FilePath>
+              <FilePath>..\StdOS\App\LCDOCM.cpp</FilePath>
             </File>
             <File>
               <FileName>PID.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\App\PID.cpp</FilePath>
+              <FilePath>..\StdOS\App\PID.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1665,22 +1540,22 @@
             <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Core\Buffer.cpp</FilePath>
+              <FilePath>..\StdOS\Core\Buffer.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Core\DateTime.cpp</FilePath>
+              <FilePath>..\StdOS\Core\DateTime.cpp</FilePath>
             </File>
             <File>
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Core\List.cpp</FilePath>
+              <FilePath>..\StdOS\Core\List.cpp</FilePath>
             </File>
             <File>
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Core\Version.cpp</FilePath>
+              <FilePath>..\StdOS\Core\Version.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1688,54 +1563,59 @@
           <GroupName>OnChip</GroupName>
           <Files>
             <File>
-              <FileName>Port.cpp</FileName>
+              <FileName>Demo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSolo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\PwmSolo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>USART.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\USART.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InputCapture_EXIT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\InputCapture_EXIT.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InputCapture_TIM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\InputCapture_TIM.cpp</FilePath>
+              <FilePath>..\StdOS\OnChip\Demo.cpp</FilePath>
             </File>
             <File>
               <FileName>GPIO.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\GPIO.cpp</FilePath>
+              <FilePath>..\StdOS\OnChip\GPIO.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputCapture_EXIT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\InputCapture_EXIT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputCapture_TIM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\InputCapture_TIM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\Port.cpp</FilePath>
             </File>
             <File>
               <FileName>PWM.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\OnChip\PWM.cpp</FilePath>
+              <FilePath>..\StdOS\OnChip\PWM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\PwmSolo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\Spi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>USART.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\USART.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1743,109 +1623,114 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>I2C.cpp</FileName>
+              <FileName>AD7124.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\I2C.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\AD7124\AD7124.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AD7689\AD7689.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\AD7689\AD7689.cpp</FilePath>
             </File>
             <File>
               <FileName>ADS1232.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ADS1232\ADS1232.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\ADS1232\ADS1232.cpp</FilePath>
             </File>
             <File>
               <FileName>ADS1246.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ADS1246\ADS1246.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\ADS1246\ADS1246.cpp</FilePath>
             </File>
             <File>
               <FileName>AT24CXX.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AT24CXX\AT24CXX.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\AT24CXX\AT24CXX.cpp</FilePath>
             </File>
             <File>
               <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AT45DB\AT45DB.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\AT45DB\AT45DB.cpp</FilePath>
             </File>
             <File>
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\DS18B20\DS18B20.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\DS18B20\DS18B20.cpp</FilePath>
             </File>
             <File>
               <FileName>DS1302.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\DS1302\DS1302.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\DS1302\DS1302.cpp</FilePath>
             </File>
             <File>
               <FileName>GPS_ATGM332D.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\GPS_ATGM332D\GPS_ATGM332D.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\GPS_ATGM332D\GPS_ATGM332D.cpp</FilePath>
             </File>
             <File>
               <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\GPS_S1216\GPS_S1216.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\GPS_S1216\GPS_S1216.cpp</FilePath>
             </File>
             <File>
               <FileName>MCP3421.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\MCP3421\MCP3421.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\MCP3421\MCP3421.cpp</FilePath>
             </File>
             <File>
               <FileName>NPA.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\NPA\NPA.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\NPA\NPA.cpp</FilePath>
             </File>
             <File>
               <FileName>NRF24L01.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\NRF24L01\NRF24L01.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\NRF24L01\NRF24L01.cpp</FilePath>
             </File>
             <File>
               <FileName>OCM240128.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\OCM240128\OCM240128.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RX8025T.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\RX8025T\RX8025T.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SSD1106.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\SSD1106\SSD1106.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SSD1309.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\SSD1309\SSD1309.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ST7565R.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ST7565R\ST7565R.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W25QXXX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\W25QXXX\W25QXXX.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W5500.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\W5500\W5500.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\OCM240128\OCM240128.cpp</FilePath>
             </File>
             <File>
               <FileName>PCF8563.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\PCF8563\PCF8563.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\PCF8563\PCF8563.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RX8025T.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\RX8025T\RX8025T.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1106.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SSD1106\SSD1106.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1309.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SSD1309\SSD1309.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7565R.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\ST7565R\ST7565R.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\W25QXXX\W25QXXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W5500.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\W5500\W5500.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\I2C.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1855,37 +1740,32 @@
             <File>
               <FileName>DemoLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\DemoLink\DemoLink.cpp</FilePath>
+              <FilePath>..\StdOS\DriversCom\DemoLink\DemoLink.cpp</FilePath>
             </File>
             <File>
               <FileName>esp8266.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\esp8266\esp8266.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Socket_esp8266.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\esp8266\Socket_esp8266.cpp</FilePath>
+              <FilePath>..\StdOS\DriversCom\esp8266\esp8266.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
+              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
             </File>
             <File>
               <FileName>SHARP_PM2_5.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EspDemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\EspDemoLink.cpp</FilePath>
+              <FilePath>..\StdOS\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
             </File>
             <File>
               <FileName>StdLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\StdLink\StdLink.cpp</FilePath>
+              <FilePath>..\StdOS\DriversCom\StdLink\StdLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspDemoLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1895,17 +1775,17 @@
             <File>
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Kernel\Sys.cpp</FilePath>
+              <FilePath>..\StdOS\Kernel\Sys.cpp</FilePath>
             </File>
             <File>
               <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Kernel\Task.cpp</FilePath>
+              <FilePath>..\StdOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Kernel\Time.cpp</FilePath>
+              <FilePath>..\StdOS\Kernel\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1915,7 +1795,7 @@
             <File>
               <FileName>Storage.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Storage\Storage.cpp</FilePath>
+              <FilePath>..\StdOS\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1925,22 +1805,22 @@
             <File>
               <FileName>CheckSum.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Security\CheckSum.cpp</FilePath>
+              <FilePath>..\StdOS\Security\CheckSum.cpp</FilePath>
             </File>
             <File>
               <FileName>Crc.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Security\Crc.cpp</FilePath>
+              <FilePath>..\StdOS\Security\Crc.cpp</FilePath>
             </File>
             <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Security\Math.cpp</FilePath>
+              <FilePath>..\StdOS\Security\Math.cpp</FilePath>
             </File>
             <File>
               <FileName>Parity.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Security\Parity.cpp</FilePath>
+              <FilePath>..\StdOS\Security\Parity.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1950,137 +1830,7 @@
             <File>
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AD7124\AD7124Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7689Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AD7689\AD7689Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1232Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ADS1232\ADS1232Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1246Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ADS1246\ADS1246Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AT24CXXDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AT24CXX\AT24CXXDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AT45DBDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\AT45DB\AT45DBDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DS18B20Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\DS18B20\DS18B20Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DS1302Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\DS1302\DS1302Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GPS_ATGM332DDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\GPS_ATGM332D\GPS_ATGM332DDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GPS_S1216Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\GPS_S1216\GPS_S1216Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MCP3421Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\MCP3421\MCP3421Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NPADemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\NPA\NPADemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NRF24L01Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\NRF24L01\NRF24L01Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>OCM240128Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\OCM240128\OCM240128Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PCF8563Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\PCF8563\PCF8563Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RX8025TDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\RX8025T\RX8025TDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SSD1106Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\SSD1106\SSD1106Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SSD1309Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\SSD1309\SSD1309Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ST7565RDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\ST7565R\ST7565RDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W25QXXXDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\W25QXXX\W25QXXXDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W5500Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\Drivers\W5500\W5500Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DemoLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\DemoLink\DemoLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>esp8266Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\esp8266\esp8266Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\ModbusLink\ModbusLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SHARP_PM2_5Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\SHARP_PM2_5\SHARP_PM2_5Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EspDemoLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\EspDemoLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StdLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\DriversCom\StdLink\StdLinkDemo.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\AD7124\AD7124Demo.cpp</FilePath>
             </File>
           </Files>
         </Group>
