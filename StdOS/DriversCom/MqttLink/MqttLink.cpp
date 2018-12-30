@@ -1,6 +1,7 @@
 #include <string.h>
 #include "MqttLink.h"
 #include "Sys.h"
+#include "Buffer.h"
 
 MqttLink::MqttLink(USART &uart) :com(uart)
 {
@@ -81,7 +82,9 @@ bool MqttLink::Connect()
 
 	if ((com.RxSize() > 0) && CheckFrame())
 	{
-		debug_printf("rcv ok\n");
+		debug_printf("rcv ok rxlen:%d\n",rxFrame.dataLength);
+		Buffer bs(rxFrame.data, rxFrame.dataLength);
+		bs.ShowHex();
 		this->com.ClearRxBuf();
 		
 		return true;
