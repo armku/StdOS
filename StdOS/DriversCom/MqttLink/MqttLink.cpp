@@ -119,5 +119,6 @@ bool MqttLink::Send()
 bool MqttLink::Connect()
 {
 	char* send = "123456789";
-	this->com.SendBytes(send, strlen(send));
+	this->ClientID = send;
+	this->com.SendBytes(ClientID, strlen(ClientID));
 }
