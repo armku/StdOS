@@ -11,7 +11,6 @@ class MqttLink
 public:
 	DataFrame txFrame;
 	DataFrame rxFrame;
-	FIFOBuffer<uint8_t, USART_RX_BUFFER_SIZE>  mRxBuf;  //USART Rx Buffer
 	USART &com;
 	char * Server;//服务器
 	int Port;//远程端口号

@@ -11,19 +11,16 @@ MqttLink::MqttLink(USART &uart) :com(uart)
 
 bool MqttLink::CheckFrame()
 {
+	int rxlen = com.RxSize();
+
+	if (com.GetBytes(&rxFrame.data[rxFrame.dataLength], rxlen))
+	{
+		rxFrame.dataLength += rxlen;
+	}
 	return this->CheckFrame(rxFrame);
 }
 bool MqttLink::CheckFrame(DataFrame &df)
-{
-	int rxlen = com.RxSize();
-	uint8_t ch;
-	while (com.RxSize())
-	{
-		if (com.GetByte(ch))
-		{
-			mRxBuf.Put(ch);
-		}
-	}
+{		
 	df.isUpdated = true;
 	return true;
 }
@@ -79,10 +76,14 @@ bool MqttLink::Connect()
 	this->com.SendBytes(this->txFrame.data, 14 + strlen(ClientID));
 	Sys.Sleep(500);
 	
+	if (com.RxSize() > 0)
+	{
+		debug_printf("rxlen:%d\n",com.RxSize());		
+	}
 
 	if ((com.RxSize() > 0) && CheckFrame())
 	{
-		debug_printf("rcv ok rxlen:%d\n",rxFrame.dataLength);
+		debug_printf("rcv ok rxlen:%d-%d\n", com.RxSize(),rxFrame.dataLength);
 		Buffer bs(rxFrame.data, rxFrame.dataLength);
 		bs.ShowHex();
 		this->com.ClearRxBuf();
