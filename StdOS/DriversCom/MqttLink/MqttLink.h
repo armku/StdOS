@@ -17,6 +17,7 @@ public:
 	int Port;//远程端口号
 	char * ClientID;//连接id
 	int8_t FixHead;//报文头	
+	int step = 0;//运行步骤
 public:
 	MqttLink(USART &uart);
 	bool CheckFrame();

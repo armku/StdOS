@@ -77,11 +77,13 @@ bool MqttLink::Connect()
 
 	this->com.SendBytes(this->txFrame.data, 14 + strlen(ClientID));
 	Sys.Sleep(500);
-	if (this->com.FlagIdleOK && this->CheckFrame())
+	
+
+	if ((com.RxSize() > 0) && CheckFrame())
 	{
 		debug_printf("rcv ok\n");
 		this->com.ClearRxBuf();
-		this->rxFrame.
+		
 		return true;
 	}
 	else
