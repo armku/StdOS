@@ -55,5 +55,24 @@ bool MqttLink::Send()
 }
 bool MqttLink::Connect()
 {	
-	this->com.SendBytes(ClientID, strlen(ClientID));
+	this->txFrame.data[0] = this->FixHead;
+	this->txFrame.data[1] = 0x15;
+	this->txFrame.data[2] = 0x00;
+	this->txFrame.data[3] = 0x04;
+	this->txFrame.data[4] = 0x4D;
+	this->txFrame.data[5] = 0x51;
+	this->txFrame.data[6] = 0x54;
+	this->txFrame.data[7] = 0x54;
+	this->txFrame.data[8] = 0x04;
+	this->txFrame.data[9] = 0x02;
+	this->txFrame.data[10] = 0x00;
+	this->txFrame.data[11] = 0x3C;
+	this->txFrame.data[12] = 0x00;
+	this->txFrame.data[13] = strlen(ClientID);
+	for (int i = 0; i < strlen(ClientID); i++)
+	{
+		this->txFrame.data[14+i] = this->ClientID[i];
+	}
+	
+	this->com.SendBytes(this->txFrame.data, 14+strlen(ClientID));
 }

@@ -35,6 +35,7 @@ void MqttLinkRoutin(void* param)
 
 void MqttLinkTestInit()
 {
+	modbusSlave.FixHead = 0X10;
 	modbusSlave.ClientID = id;
 	Sys.AddTask(MqttLinkRoutin, 0, 0, 1000, "ModbusSlaveLinkRoutin");
 }
