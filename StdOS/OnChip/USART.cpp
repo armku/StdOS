@@ -317,7 +317,7 @@ uint16_t USART::RxOverflowSize()
 void USART::ClearRxBuf()
 {
 	mRxBuf.Clear();
-	FlagIdleOK = false;
+	FlagIdleOK = false;	
 }
 
 void USART::ClearTxBuf()

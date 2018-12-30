@@ -68,6 +68,7 @@ bool MqttLink::Connect()
 		Buffer bs(rxFrame.data, rxFrame.dataLength);
 		bs.ShowHex();
 		this->com.ClearRxBuf();
+		this->rxFrame.dataLength = 0;
 		
 		return true;
 	}
