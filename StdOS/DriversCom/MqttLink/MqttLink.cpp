@@ -59,10 +59,10 @@ bool MqttLink::Connect()
 	this->txFrame.data[1] = 0x15;
 	this->txFrame.data[2] = 0x00;
 	this->txFrame.data[3] = 0x04;
-	this->txFrame.data[4] = 0x4D;
-	this->txFrame.data[5] = 0x51;
-	this->txFrame.data[6] = 0x54;
-	this->txFrame.data[7] = 0x54;
+	this->txFrame.data[4] = 'M';
+	this->txFrame.data[5] = 'Q';
+	this->txFrame.data[6] = 'T';
+	this->txFrame.data[7] = 'T';
 	this->txFrame.data[8] = 0x04;
 	this->txFrame.data[9] = 0x02;
 	this->txFrame.data[10] = 0x00;
