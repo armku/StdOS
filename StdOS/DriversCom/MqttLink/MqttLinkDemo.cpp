@@ -10,6 +10,7 @@
 //≤‚ ‘ 01 03 00 00 00 0A C5 CD
 USART usart333(USART3, 115200);
 MqttLink modbusSlave(usart333);
+char* id = "123456789";
 //uint16_t RegInputu16[144]; // ‰»Îºƒ¥Ê∆˜
 //uint16_t RegHoilding16[60];
 
@@ -34,7 +35,7 @@ void MqttLinkRoutin(void* param)
 
 void MqttLinkTestInit()
 {
-	
+	modbusSlave.ClientID = id;
 	Sys.AddTask(MqttLinkRoutin, 0, 0, 1000, "ModbusSlaveLinkRoutin");
 }
 #endif
