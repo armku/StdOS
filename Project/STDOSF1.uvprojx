@@ -818,6 +818,11 @@
           <GroupName>DriversCom</GroupName>
           <Files>
             <File>
+              <FileName>EspDemoLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
+            </File>
+            <File>
               <FileName>DemoLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\DemoLink\DemoLink.cpp</FilePath>
@@ -907,11 +912,6 @@
         <Group>
           <GroupName>Demo</GroupName>
           <Files>
-            <File>
-              <FileName>EspDemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
-            </File>
             <File>
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
@@ -1743,6 +1743,11 @@
           <GroupName>DriversCom</GroupName>
           <Files>
             <File>
+              <FileName>EspDemoLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
+            </File>
+            <File>
               <FileName>DemoLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\DemoLink\DemoLink.cpp</FilePath>
@@ -1832,11 +1837,6 @@
         <Group>
           <GroupName>Demo</GroupName>
           <Files>
-            <File>
-              <FileName>EspDemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
-            </File>
             <File>
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
