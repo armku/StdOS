@@ -118,6 +118,6 @@ bool MqttLink::Send()
 }
 bool MqttLink::Connect()
 {
-	char* send = "Hello mqtt\n";
+	char* send = "123456789";
 	this->com.SendBytes(send, strlen(send));
 }
