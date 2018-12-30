@@ -29,21 +29,7 @@ bool MqttLink::Gets(uint8_t * pData, uint16_t num)
 
 bool MqttLink::Send()
 {
-	if (!txFrame.isUpdated) //no new frame data, no need to send
-		return false;
-	if (!com.SendByte(txFrame.header))  //send frame header
-		return false;
-	if (txFrame.fnCode > MAX_FN_CODE || !com.SendByte(txFrame.fnCode))  //send function code
-		return false;
-	txFrame.dataLength = DATA_LENGTH[txFrame.fnCode][DIRECTION_SEND];
-	if (!com.SendByte(txFrame.dataLength))  //send data length
-		return false;
-	if (!com.SendBytes(txFrame.data, txFrame.dataLength)) //send data;
-		return false;
-	txFrame.CreateCheckCode();
-	if (!com.SendByte(txFrame.checkSum))    //send check code
-		return false;
-	txFrame.isUpdated = false;
+	this->com.SendBytes(this->txFrame.data, this->txFrame.dataLength);
 	return true;
 }
 bool MqttLink::Connect()
@@ -66,8 +52,9 @@ bool MqttLink::Connect()
 	{
 		this->txFrame.data[14 + i] = this->ClientID[i];
 	}
+	this->txFrame.dataLength = 14 + strlen(ClientID);
 
-	this->com.SendBytes(this->txFrame.data, 14 + strlen(ClientID));
+	this->Send();
 	Sys.Sleep(500);
 	
 	if (com.RxSize() > 0)
