@@ -8,8 +8,8 @@
 #ifdef _MQTTLINKEST_CPP
 
 //≤‚ ‘ 01 03 00 00 00 0A C5 CD
-//USART usart222(USART2, 115200);
-//MqttLink modbusSlave(usart222);
+USART usart222(USART2, 115200);
+MqttLink modbusSlave(usart222);
 //uint16_t RegInputu16[144]; // ‰»Îºƒ¥Ê∆˜
 //uint16_t RegHoilding16[60];
 

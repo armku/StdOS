@@ -30,8 +30,7 @@ void Com1test(void *param)
 	}
 }
 
-void EspDemoLinkTestInit();
-void ModbusSlaveLinkTestInit();
+void MqttLinkTestInit();
 void BspInit()
 {
 	led1.Set(PB0);
@@ -42,9 +41,8 @@ void BspInit()
 	
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
-	/*EspDemoLinkTestInit();*/
-	ModbusSlaveLinkTestInit();
 	usart111.OnReceive = Com1test;
+	MqttLinkTestInit();
 }
 
 /*

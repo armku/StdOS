@@ -843,11 +843,6 @@
               <FilePath>..\StdOS\DriversCom\StdLink\StdLink.cpp</FilePath>
             </File>
             <File>
-              <FileName>EspDemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
-            </File>
-            <File>
               <FileName>MqttLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\MqttLink\MqttLink.cpp</FilePath>
@@ -912,6 +907,11 @@
         <Group>
           <GroupName>Demo</GroupName>
           <Files>
+            <File>
+              <FileName>EspDemoLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
+            </File>
             <File>
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
@@ -1768,11 +1768,6 @@
               <FilePath>..\StdOS\DriversCom\StdLink\StdLink.cpp</FilePath>
             </File>
             <File>
-              <FileName>EspDemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
-            </File>
-            <File>
               <FileName>MqttLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\MqttLink\MqttLink.cpp</FilePath>
@@ -1837,6 +1832,11 @@
         <Group>
           <GroupName>Demo</GroupName>
           <Files>
+            <File>
+              <FileName>EspDemoLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
+            </File>
             <File>
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
