@@ -8,8 +8,8 @@
 #ifdef _MQTTLINKEST_CPP
 
 //≤‚ ‘ 01 03 00 00 00 0A C5 CD
-USART usart222(USART2, 115200);
-MqttLink modbusSlave(usart222);
+USART usart333(USART3, 115200);
+MqttLink modbusSlave(usart333);
 //uint16_t RegInputu16[144]; // ‰»Îºƒ¥Ê∆˜
 //uint16_t RegHoilding16[60];
 
@@ -27,11 +27,14 @@ void MqttLinkRoutin(void* param)
 	//	modbusSlave.com.ClearRxBuf();
 	//}
 	//else {}
+	/*char* send = "Hello mqtt\n";
+	usart333.SendBytes(send,ArrayLength(send));*/
+	modbusSlave.Connect();
 }
 
 void MqttLinkTestInit()
 {
 	
-	Sys.AddTask(MqttLinkRoutin, 0, 0, 1, "ModbusSlaveLinkRoutin");
+	Sys.AddTask(MqttLinkRoutin, 0, 0, 1000, "ModbusSlaveLinkRoutin");
 }
 #endif

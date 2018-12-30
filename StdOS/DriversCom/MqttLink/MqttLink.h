@@ -13,10 +13,14 @@ public:
 	DataFrame rxFrame;
 	FIFOBuffer<uint8_t, USART_RX_BUFFER_SIZE>  mRxBuf;  //USART Rx Buffer
 	USART &com;
+	char * Server;//服务器
+	int Port;//远程端口号
+	char * ClientID;//连接id
 public:
 	MqttLink(USART &uart);
 	bool CheckFrame();
 	bool Send();
+	bool Connect();
 private:
 	bool CheckFrame(DataFrame &df);
 private:

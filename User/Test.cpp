@@ -1,59 +1,59 @@
-#include "DriversCom/EspDemoLink.h"
-#include "Sys.h"
-#include <string.h>  
-#include "OnChip/USART.h"
-#include "BspPlatform/Interrupt.h"
-#include "BspPlatform\BspPlatform.h"
-#include "OnChip\Port.h"
-#include "OnChip\Configuration.h"
-#include "Buffer.h"
-#include <stdio.h>  
-#include <string.h>  
-#include "Sys.h"
-
-USART usart333(USART3, 115200);
-EspDemoLink espdemo(usart333);
-
-int (*OnReceive)(char *buf, int len);
-void EspDemoLinkRoutin(void* param)
-{
-	if (espdemo.com.FlagIdleOK)
-	{
-		espdemo.com.FlagIdleOK = false;
-		if (espdemo.CheckFrame())
-		{
-			//debug_printf("rcv one frame:%d-%d\nRcv:",espdemo.rxFrame.frameLength,espdemo.rxFrame.dataLength);
-			Buffer(espdemo.rxFrame.data, espdemo.rxFrame.frameLength).Show();
-			//Buffer(espdemo.rxFrame.data, espdemo.rxFrame.frameLength).ShowHex(true);
-			espdemo.rxFrame.RemoveOneFrame();
-		}
-		//debug_printf("com rx:%d-tx:%d frame:%d-%d\n", espdemo.com.RxCnt, espdemo.com.TxCnt, espdemo.rxFrame.Cnt, espdemo.txFrame.Cnt);
-	}
-}
-void EspDemoLinkSendRoutin(void* param)
-{
-	static int i = 0;
-	if (i++ == 3)
-	{
-		espdemo.EchoOn(false);
-	}
-	else
-	{
-		espdemo.cmd("AT");
-	}
-	i %= 20;
-
-}
-
-void EspDemoLinkTestInit()
-{
-	espdemo.SetPin(PG13, PG14);
-	espdemo.Init();
-
-	Sys.AddTask(EspDemoLinkRoutin, 0, 1000, 1, "EspLink");
-	Sys.AddTask(EspDemoLinkSendRoutin, 0, 1000, 1000, "EspLinkSend");
-}
-
+//#include "DriversCom/EspDemoLink.h"
+//#include "Sys.h"
+//#include <string.h>  
+//#include "OnChip/USART.h"
+//#include "BspPlatform/Interrupt.h"
+//#include "BspPlatform\BspPlatform.h"
+//#include "OnChip\Port.h"
+//#include "OnChip\Configuration.h"
+//#include "Buffer.h"
+//#include <stdio.h>  
+//#include <string.h>  
+//#include "Sys.h"
+//
+//USART usart333(USART3, 115200);
+//EspDemoLink espdemo(usart333);
+//
+//int (*OnReceive)(char *buf, int len);
+//void EspDemoLinkRoutin(void* param)
+//{
+//	if (espdemo.com.FlagIdleOK)
+//	{
+//		espdemo.com.FlagIdleOK = false;
+//		if (espdemo.CheckFrame())
+//		{
+//			//debug_printf("rcv one frame:%d-%d\nRcv:",espdemo.rxFrame.frameLength,espdemo.rxFrame.dataLength);
+//			Buffer(espdemo.rxFrame.data, espdemo.rxFrame.frameLength).Show();
+//			//Buffer(espdemo.rxFrame.data, espdemo.rxFrame.frameLength).ShowHex(true);
+//			espdemo.rxFrame.RemoveOneFrame();
+//		}
+//		//debug_printf("com rx:%d-tx:%d frame:%d-%d\n", espdemo.com.RxCnt, espdemo.com.TxCnt, espdemo.rxFrame.Cnt, espdemo.txFrame.Cnt);
+//	}
+//}
+//void EspDemoLinkSendRoutin(void* param)
+//{
+//	static int i = 0;
+//	if (i++ == 3)
+//	{
+//		espdemo.EchoOn(false);
+//	}
+//	else
+//	{
+//		espdemo.cmd("AT");
+//	}
+//	i %= 20;
+//
+//}
+//
+//void EspDemoLinkTestInit()
+//{
+//	espdemo.SetPin(PG13, PG14);
+//	espdemo.Init();
+//
+//	Sys.AddTask(EspDemoLinkRoutin, 0, 1000, 1, "EspLink");
+//	Sys.AddTask(EspDemoLinkSendRoutin, 0, 1000, 1000, "EspLinkSend");
+//}
+//
 
 
 

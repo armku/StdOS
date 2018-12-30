@@ -1,3 +1,4 @@
+#include <string.h>
 #include "MqttLink.h"
 
 MqttLink::MqttLink(USART &uart) :com(uart)
@@ -115,5 +116,8 @@ bool MqttLink::Send()
 	txFrame.isUpdated = false;
 	return true;
 }
-
-
+bool MqttLink::Connect()
+{
+	char* send = "Hello mqtt\n";
+	this->com.SendBytes(send, strlen(send));
+}
