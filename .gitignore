@@ -16,3 +16,4 @@
 *.Ace
 *.log
 /Doc/commproxy.exe
+/Project/JLinkSettings.ini
