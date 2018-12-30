@@ -1,5 +1,6 @@
 #include <string.h>
 #include "MqttLink.h"
+#include "Sys.h"
 
 MqttLink::MqttLink(USART &uart) :com(uart)
 {
@@ -54,7 +55,7 @@ bool MqttLink::Send()
 	return true;
 }
 bool MqttLink::Connect()
-{	
+{
 	this->txFrame.data[0] = this->FixHead;
 	this->txFrame.data[1] = 0x15;
 	this->txFrame.data[2] = 0x00;
@@ -71,8 +72,21 @@ bool MqttLink::Connect()
 	this->txFrame.data[13] = strlen(ClientID);
 	for (int i = 0; i < strlen(ClientID); i++)
 	{
-		this->txFrame.data[14+i] = this->ClientID[i];
+		this->txFrame.data[14 + i] = this->ClientID[i];
 	}
-	
-	this->com.SendBytes(this->txFrame.data, 14+strlen(ClientID));
+
+	this->com.SendBytes(this->txFrame.data, 14 + strlen(ClientID));
+	Sys.Sleep(500);
+	if (this->com.FlagIdleOK && this->CheckFrame())
+	{
+		debug_printf("rcv ok\n");
+		this->com.ClearRxBuf();
+		this->rxFrame.
+		return true;
+	}
+	else
+	{
+		debug_printf("rcv error\n");
+		return false;
+	}
 }
