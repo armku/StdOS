@@ -17,12 +17,6 @@ bool MqttLink::CheckFrame()
 	{
 		rxFrame.dataLength += rxlen;
 	}
-	return this->CheckFrame(rxFrame);
-}
-bool MqttLink::CheckFrame(DataFrame &df)
-{		
-	df.isUpdated = true;
-	return true;
 }
 bool MqttLink::Get(uint8_t & da)
 {
