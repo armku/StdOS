@@ -5,7 +5,11 @@ ModbusMasterLink::ModbusMasterLink(USART &uart) :ModbusBase(uart)
 {
 	
 }
-
+//检查数据帧是否合法
+bool ModbusMasterLink::CheckFrame()
+{
+	return true;
+}
 bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 {
 	this->txFrame.Address = id;
@@ -17,7 +21,7 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 	this->txFrame.data[3] = this->txFrame.regAddr & 0xff;
 	this->txFrame.data[4] = this->txFrame.regLength >> 8;
 	this->txFrame.data[5] = this->txFrame.regLength & 0xff;
-	this->txFrame.Crc2 = Crc::CRC8(this->txFrame.data,6);
+	this->txFrame.Crc2 = Crc::CRC16RTU(this->txFrame.data,6);
 	this->txFrame.data[6] = this->txFrame.Crc2 & 0xff;
 	this->txFrame.data[7] = this->txFrame.Crc2 >> 8;
 	
@@ -29,13 +33,13 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 		debug_printf("rxlen:%d\n", com.RxSize());
 	}
 
-	/*if ((com.RxSize() > 0) && CheckFrame())
+	if ((com.RxSize() > 0) && CheckFrame())
 	{
-		debug_printf("rcv ok rxlen:%d-%d\n", com.RxSize(), rxFrame.dataLength);
-		Buffer bs(rxFrame.data, rxFrame.dataLength);
+		debug_printf("rcv ok rxlen:%d-%d\n", com.RxSize(), rxFrame.regLength);
+		Buffer bs(rxFrame.data, rxFrame.regLength);
 		bs.ShowHex();
 		this->com.ClearRxBuf();
-		this->rxFrame.dataLength = 0;
+		this->rxFrame.regLength = 0;
 
 		return true;
 	}
@@ -43,5 +47,5 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 	{
 		debug_printf("rcv error\n");
 		return false;
-	}*/
+	}
 }

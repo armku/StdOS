@@ -49,7 +49,7 @@ public:
 	DataFrameModbus rxFrame;
 	USART &com;
 public:
-	ModbusBase(USART &uart);
+	ModbusBase(USART &uart);	
 private:
 
 };
@@ -84,6 +84,7 @@ class ModbusMasterLink :public ModbusBase
 public:
 	ModbusMasterLink(USART &uart);
 	bool GetValueRegInput(uint8_t id,uint16_t addr,uint16_t len);
+	bool CheckFrame();//检查数据帧是否合法
 private:
 
 };
