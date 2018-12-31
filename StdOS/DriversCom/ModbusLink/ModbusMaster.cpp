@@ -1,4 +1,5 @@
 #include "ModbusLink.h"
+#include "Buffer.h"
 
 ModbusMasterLink::ModbusMasterLink(USART &uart) :ModbusBase(uart)
 {
@@ -22,5 +23,25 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 	
 	this->com.SendBytes(this->txFrame.data, 8);
 	
-	Sys.Sleep(100);
+	Sys.Sleep(200);
+	if (com.RxSize() > 0)
+	{
+		debug_printf("rxlen:%d\n", com.RxSize());
+	}
+
+	/*if ((com.RxSize() > 0) && CheckFrame())
+	{
+		debug_printf("rcv ok rxlen:%d-%d\n", com.RxSize(), rxFrame.dataLength);
+		Buffer bs(rxFrame.data, rxFrame.dataLength);
+		bs.ShowHex();
+		this->com.ClearRxBuf();
+		this->rxFrame.dataLength = 0;
+
+		return true;
+	}
+	else
+	{
+		debug_printf("rcv error\n");
+		return false;
+	}*/
 }

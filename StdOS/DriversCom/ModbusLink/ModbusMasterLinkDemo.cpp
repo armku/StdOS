@@ -8,7 +8,7 @@
 #define _MODBUSMASTERLINKEST_CPP
 
 //USART usart222(USART2, 9600);
-USART usart222(USART3, 115200);
+USART usart222(USART3, 9600);
 OutputPort u485dr;
 ModbusMasterLink modMaster(usart222);
 
