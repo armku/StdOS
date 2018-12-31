@@ -82,7 +82,7 @@ public:
 class ModbusMasterLink
 {
 public:
-
+	
 private:
 
 };
