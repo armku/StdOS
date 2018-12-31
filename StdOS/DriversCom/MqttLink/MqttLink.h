@@ -32,5 +32,4 @@ private:
 
 };
 
-
 #endif // !_MQTT_H
