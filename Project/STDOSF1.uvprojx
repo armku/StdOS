@@ -852,6 +852,16 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\MqttLink\MqttLink.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ModbusMaster.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusMaster.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusSlave.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusSlave.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1776,6 +1786,16 @@
               <FileName>MqttLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\MqttLink\MqttLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusMaster.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusMaster.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusSlave.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusSlave.cpp</FilePath>
             </File>
           </Files>
         </Group>
