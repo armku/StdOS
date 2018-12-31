@@ -1,4 +1,5 @@
 #include "ModbusLink.h"
+#include "Buffer.h"
 
 ModbusBase::ModbusBase(USART &uart) : com(uart)
 {
@@ -23,5 +24,24 @@ void ModbusBase::SetRegHoid(int addr0, int reglen, uint16_t* reg, int reggroup)
 	this->RegHoildings[reggroup].Addr0 = addr0;
 	this->RegHoildings[reggroup].Lenth = reglen;
 	this->RegHoildings[reggroup].Reg = reg;
+}
+bool ModbusBase::CheckFrame()
+{
+	int rxlen = com.RxSize();
+
+	if (com.GetBytes(&rxFrame.data[rxFrame.Length], rxlen))
+	{
+		rxFrame.Length += rxlen;
+	}
+	//判断数据帧最小长度要求
+	if (rxFrame.Length < 8)
+		return false;
+#ifdef  DEBUG
+	Buffer(rxFrame.data, rxFrame.Length).ShowHex(true);
+#endif //  DEBUG	
+	if (!rxFrame.CheckFrame())
+		return false;
+	else
+		return true;
 }
 

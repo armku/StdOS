@@ -4,26 +4,6 @@ ModbusSlaveLink::ModbusSlaveLink(USART &uart) :ModbusBase(uart)
 {
 	this->OnUpdateRegHoid = 0;
 }
-#include "Buffer.h"
-bool ModbusSlaveLink::CheckFrame()
-{
-	int rxlen = com.RxSize();
-
-	if (com.GetBytes(&rxFrame.data[rxFrame.Length], rxlen))
-	{
-		rxFrame.Length += rxlen;
-	}
-	//判断数据帧最小长度要求
-	if (rxFrame.Length < 8)
-		return false;
-#ifdef  DEBUG
-	Buffer(rxFrame.data, rxFrame.Length).ShowHex(true);
-#endif //  DEBUG	
-	if (!rxFrame.CheckFrame())
-		return false;
-	else
-		return true;
-}
 
 bool ModbusSlaveLink::Send()
 {

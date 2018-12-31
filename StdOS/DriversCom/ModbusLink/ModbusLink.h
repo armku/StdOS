@@ -55,6 +55,8 @@ public:
 	ModbusReg_T RegInputs[RegInputLen];//输入寄存器组
 	ModbusReg_T RegHoildings[RegHoildingLen];//保持寄存器组
 
+	bool CheckFrame();
+
 	void SetRegInput(int addr0, int reglen, uint16_t* reg, int reggroup = 0);//设置输入寄存器	
 	void SetRegHoid(int addr0, int reglen, uint16_t* reg, int reggroup = 0);//设置保持寄存器	
 private:
@@ -66,8 +68,7 @@ class ModbusSlaveLink:public ModbusBase
 public:
 	
 public:
-	ModbusSlaveLink(USART &uart);
-	bool CheckFrame();
+	ModbusSlaveLink(USART &uart);	
 	bool Send();	
 private:
 	int dealRegInputRead(uint16_t addr,uint16_t len);//处理读取输入寄存器 0 正确 1 非法地址 2非法长度
@@ -86,7 +87,6 @@ class ModbusMasterLink :public ModbusBase
 public:
 	ModbusMasterLink(USART &uart);
 	bool GetValueRegInput(uint8_t id,uint16_t addr,uint16_t len);
-	bool CheckFrame();//检查数据帧是否合法
 private:
 
 };
