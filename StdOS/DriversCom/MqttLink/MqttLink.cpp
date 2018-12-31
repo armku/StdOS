@@ -83,11 +83,11 @@ bool MqttLink::Puslish(uint8_t *buf, int len)
 	bufsend[1] = 0X0C;
 	bufsend[2] = 0X00;
 	bufsend[3] = 0X05;
-	bufsend[4] = 0X47;
-	bufsend[5] = 0X2F;
-	bufsend[6] = 0X64;
-	bufsend[7] = 0X64;
-	bufsend[8] = 0X64;
+	bufsend[4] = this->Topic[0];
+	bufsend[5] = this->Topic[1];
+	bufsend[6] = this->Topic[2];
+	bufsend[7] = this->Topic[3];
+	bufsend[8] = this->Topic[4];
 	bufsend[9] = this->MessageID >> 8;
 	bufsend[10] = this->MessageID & 0xff;
 
