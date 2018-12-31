@@ -16,7 +16,7 @@ uint16_t RegHoilding16[60];
 
 void ModbusMasterDemoRoutin(void* param)
 {
-	modMaster.GetValueRegInput(1,1,4);
+	modMaster.GetValueRegInput(1,0,4);
 }
 
 

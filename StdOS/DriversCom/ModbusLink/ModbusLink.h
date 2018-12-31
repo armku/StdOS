@@ -86,7 +86,7 @@ class ModbusMasterLink :public ModbusBase
 {
 public:
 	ModbusMasterLink(USART &uart);
-	bool GetValueRegInput(uint8_t id,uint16_t addr,uint16_t len);
+	bool GetValueRegInput(uint8_t id,uint16_t addr,uint16_t len);//地址从0开始
 private:
 
 };
