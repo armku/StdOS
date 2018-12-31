@@ -17,12 +17,14 @@ public:
 	char * ClientID;//连接id
 	int8_t FixHead;//报文头	
 	int step = 0;//运行步骤
+	uint16_t MessageID;//信号ID
 public:
 	MqttLink(USART &uart);
 	bool CheckFrame();
 	bool Send();
 	bool Connect();
 	bool Send(uint8_t *buf,int len);//发送数据
+	bool Puslish_Release();//发布
 private:
 private:
 	bool Get(uint8_t & da);

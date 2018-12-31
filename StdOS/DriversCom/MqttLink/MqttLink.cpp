@@ -81,12 +81,52 @@ bool MqttLink::Connect()
 //发送数据
 bool MqttLink::Send(uint8_t *buf, int len)
 {
+	uint8_t bufsend[11];
+	bufsend[0] = 0X34;
+	bufsend[1] = 0X0C;
+	bufsend[2] = 0X00;
+	bufsend[3] = 0X05;
+	bufsend[4] = 0X47;
+	bufsend[5] = 0X2F;
+	bufsend[6] = 0X64;
+	bufsend[7] = 0X64;
+	bufsend[8] = 0X64;
+	bufsend[9] = this->MessageID >> 8;
+	bufsend[10] = this->MessageID & 0xff;
+
+
+	for (int i = 0; i < 11; i++)
+	{
+		this->txFrame.data[i] = bufsend[i];
+	}
 	for (int i = 0; i < len; i++)
+	{
+		this->txFrame.data[12 + i] = buf[i];
+	}
+	this->txFrame.dataLength = 12+ len;
+
+	this->Send();
+
+	Sys.Sleep(500);
+	this->Puslish_Release();
+	return true;
+}
+//发布
+bool MqttLink::Puslish_Release()
+{
+	uint8_t buf[4];
+	buf[0] = 0X62;
+	buf[1] = 0X02;
+	buf[2] = this->MessageID >> 8;
+	buf[3] = this->MessageID & 0XFF;
+
+	this->MessageID++;
+
+	for (int i = 0; i < ArrayLength(buf); i++)
 	{
 		this->txFrame.data[i] = buf[i];
 	}
-	this->txFrame.dataLength = len;
+	this->txFrame.dataLength = ArrayLength(buf);
 
 	this->Send();
-	return true;
 }

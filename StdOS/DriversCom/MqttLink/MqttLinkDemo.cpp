@@ -13,7 +13,10 @@ char* id = "123456789";
 
 void MqttLinkRoutin(void* param)
 {	
-	uint8_t bufsend[10];
+	uint8_t bufsend[3];
+	bufsend[0] = 0X61;
+	bufsend[1] = 0X62;
+	bufsend[2] = 0X63;
 	switch (modbusSlave.step)
 	{
 	case 0:
