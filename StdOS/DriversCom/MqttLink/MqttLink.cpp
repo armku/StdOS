@@ -18,14 +18,6 @@ bool MqttLink::CheckFrame()
 		rxFrame.dataLength += rxlen;
 	}
 }
-bool MqttLink::Get(uint8_t & da)
-{
-	return true;
-}
-bool MqttLink::Gets(uint8_t * pData, uint16_t num)
-{
-	return true;
-}
 
 bool MqttLink::Send()
 {
@@ -57,19 +49,24 @@ bool MqttLink::Connect()
 	this->Send();
 	Sys.Sleep(200);
 	
+	this->Receive();
+}
+//接收数据
+bool MqttLink::Receive()
+{
 	if (com.RxSize() > 0)
 	{
-		debug_printf("rxlen:%d\n",com.RxSize());		
+		debug_printf("rxlen:%d\n", com.RxSize());
 	}
 
 	if ((com.RxSize() > 0) && CheckFrame())
 	{
-		debug_printf("rcv ok rxlen:%d-%d\n", com.RxSize(),rxFrame.dataLength);
+		debug_printf("rcv ok rxlen:%d-%d\n", com.RxSize(), rxFrame.dataLength);
 		Buffer bs(rxFrame.data, rxFrame.dataLength);
 		bs.ShowHex();
 		this->com.ClearRxBuf();
 		this->rxFrame.dataLength = 0;
-		
+
 		return true;
 	}
 	else

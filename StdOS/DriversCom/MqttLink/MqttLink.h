@@ -27,8 +27,7 @@ public:
 	bool Puslish_Release();//发布
 private:
 private:
-	bool Get(uint8_t & da);
-	bool Gets(uint8_t * pData, uint16_t num);
+	bool Receive();//接收数据
 
 };
 
