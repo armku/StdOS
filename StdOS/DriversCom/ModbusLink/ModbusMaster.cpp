@@ -8,7 +8,22 @@ ModbusMasterLink::ModbusMasterLink(USART &uart) :ModbusBase(uart)
 //检查数据帧是否合法
 bool ModbusMasterLink::CheckFrame()
 {
-	return true;
+	int rxlen = com.RxSize();
+
+	if (com.GetBytes(&rxFrame.data[rxFrame.Length], rxlen))
+	{
+		rxFrame.Length += rxlen;
+	}
+	//判断数据帧最小长度要求
+	if (rxFrame.Length < 8)
+		return false;
+#ifdef  DEBUG
+	Buffer(rxFrame.data, rxFrame.Length).ShowHex(true);
+#endif //  DEBUG	
+	if (!rxFrame.CheckFrame())
+		return false;
+	else
+		return true;
 }
 bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 {
@@ -52,6 +67,8 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 	}
 	else
 	{
+		this->com.ClearRxBuf();
+		this->rxFrame.regLength = 0;
 		debug_printf("rcv error\n");
 		return false;
 	}
