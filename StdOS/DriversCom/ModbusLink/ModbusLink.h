@@ -83,7 +83,7 @@ class ModbusMasterLink :public ModbusBase
 {
 public:
 	ModbusMasterLink(USART &uart);
-	bool GetValue(uint8_t id,uint16_t addr,uint16_t len);
+	bool GetValueRegInput(uint8_t id,uint16_t addr,uint16_t len);
 private:
 
 };

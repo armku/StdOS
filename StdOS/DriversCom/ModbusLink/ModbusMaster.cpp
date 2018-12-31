@@ -5,7 +5,7 @@ ModbusMasterLink::ModbusMasterLink(USART &uart) :ModbusBase(uart)
 	
 }
 
-bool ModbusMasterLink::GetValue(uint8_t id, uint16_t addr, uint16_t len)
+bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 {
 	uint8_t buf[10];
 	for (int i = 0; i < ArrayLength(buf); i++)

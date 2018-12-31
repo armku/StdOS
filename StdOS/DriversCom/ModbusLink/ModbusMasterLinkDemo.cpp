@@ -14,7 +14,7 @@ ModbusMasterLink modMaster(usart222);
 
 void ModbusMasterDemoRoutin(void* param)
 {
-	modMaster.GetValue(0,0,0);
+	modMaster.GetValueRegInput(0,0,0);
 }
 
 
