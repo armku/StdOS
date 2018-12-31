@@ -10,6 +10,7 @@
 USART usart333(USART3, 115200);
 MqttLink modbusSlave(usart333);
 char* id = "123456789";
+char* topic = "G/ddd";
 
 void MqttLinkRoutin(void* param)
 {	
@@ -37,6 +38,7 @@ void MqttLinkTestInit()
 {
 	modbusSlave.FixHead = 0X10;
 	modbusSlave.ClientID = id;
+	modbusSlave.Topic = topic;
 	Sys.AddTask(MqttLinkRoutin, 0, 0, 1000, "ModbusSlaveLinkRoutin");
 }
 #endif
