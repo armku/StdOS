@@ -12,11 +12,12 @@ OutputPort u485dr;
 ModbusMasterLink modMaster(usart222);
 void ModbusMasterLinkTestInit()
 {
-	u485dr.Set(PA1);
+	u485dr.Set(PC2);
 	u485dr.OpenDrain = false;
 	u485dr.Invert = false;
 	u485dr.Open();
-	u485dr = 1;
+	u485dr = 0;//进入接收模式
+	usart222.RS485 = &u485dr;
 }
 
 #endif // !_MODBUSMASTERLINKEST_CPP
