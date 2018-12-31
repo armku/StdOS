@@ -39,6 +39,7 @@ bool ModbusBase::CheckFrame()
 #ifdef  DEBUG
 	Buffer(rxFrame.data, rxFrame.Length).ShowHex(true);
 #endif //  DEBUG	
+	rxFrame.frameLength = rxFrame.Length;
 	if (!rxFrame.CheckFrame())
 		return false;
 	else

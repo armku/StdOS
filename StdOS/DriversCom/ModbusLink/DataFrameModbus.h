@@ -74,25 +74,25 @@ public:
 			this->regLength <<= 8;
 			this->regLength |= this->data[5];
 
-			this->frameLength = 8;
-			switch (this->Code)
-			{
-			case 0X02:
-			case 0X01:
-			case 0X05:
-			case 0X04:
-			case 0X03:
-			case 0X06:
-				frameLength = 8;
-				break;
-			case 0x0F://多个写 0 区输出继电器(指令代码: 0X0F) 
-			case 0x10://多个写 4 区输出寄存器(指令代码: 0X10) 
-				frameLength = data[6] + frameLength + 1;
-				break;
-			default:
-				frameLength = 0;
-				break;
-			}
+			//this->frameLength = 8;
+			//switch (this->Code)
+			//{
+			//case 0X02:
+			//case 0X01:
+			//case 0X05:
+			//case 0X04:
+			//case 0X03:
+			//case 0X06:
+			//	frameLength = 8;
+			//	break;
+			//case 0x0F://多个写 0 区输出继电器(指令代码: 0X0F) 
+			//case 0x10://多个写 4 区输出寄存器(指令代码: 0X10) 
+			//	frameLength = data[6] + frameLength + 1;
+			//	break;
+			//default:
+			//	frameLength = 0;
+			//	break;
+			//}
 			if (frameLength == 0)
 			{
 				//非法指令，直接清空缓冲区

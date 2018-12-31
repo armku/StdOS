@@ -36,11 +36,12 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 		this->rxFrame.regLength = 0;
 		for (int i = 0; i < len; i++)
 		{
-			this->RegInputs[0].Reg[addr + i] = this->rxFrame.data[4 + i * 2];
+			this->RegInputs[0].Reg[addr + i] = this->rxFrame.data[3 + i * 2];
 			this->RegInputs[0].Reg[addr + i] <<= 8;
-			this->RegInputs[0].Reg[addr + i] += this->rxFrame.data[3 + i * 2];
+			this->RegInputs[0].Reg[addr + i] += this->rxFrame.data[4 + i * 2];
 		}
-		debug_printf("rcv OK\n");
+		debug_printf("rcv OK %d %d %d\n", this->RegInputs[0].Reg[0], this->RegInputs[0].Reg[1], this->RegInputs[0].Reg[2]);
+
 		return true;
 	}
 	else
