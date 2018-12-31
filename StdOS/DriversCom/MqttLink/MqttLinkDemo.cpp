@@ -8,7 +8,7 @@
 #ifdef _MQTTLINKEST_CPP
 
 USART usart333(USART3, 115200);
-MqttLink modbusSlave(usart333);
+MqttLink mqttSlave(usart333);
 char* id = "123456789";
 char* topic = "G/ddd";
 
@@ -18,16 +18,16 @@ void MqttLinkRoutin(void* param)
 	bufsend[0] = 0X61;
 	bufsend[1] = 0X62;
 	bufsend[2] = 0X63;
-	switch (modbusSlave.step)
+	switch (mqttSlave.step)
 	{
 	case 0:
-		if (modbusSlave.Connect())
+		if (mqttSlave.Connect())
 		{
-			modbusSlave.step++;
+			mqttSlave.step++;
 		}
 		break;
 	case 1:
-		modbusSlave.Puslish(bufsend,ArrayLength(bufsend));
+		mqttSlave.Puslish(bufsend,ArrayLength(bufsend));
 		break;
 	default:
 		break;
@@ -36,9 +36,9 @@ void MqttLinkRoutin(void* param)
 
 void MqttLinkTestInit()
 {
-	modbusSlave.FixHead = 0X10;
-	modbusSlave.ClientID = id;
-	modbusSlave.Topic = topic;
+	mqttSlave.FixHead = 0X10;
+	mqttSlave.ClientID = id;
+	mqttSlave.Topic = topic;
 	Sys.AddTask(MqttLinkRoutin, 0, 0, 1000, "ModbusSlaveLinkRoutin");
 }
 #endif
