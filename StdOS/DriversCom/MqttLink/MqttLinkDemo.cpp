@@ -11,7 +11,7 @@
 USART usart333(USART3, 115200);
 MqttLink mqttSlave(usart333);
 char* id = "123456789ddd";
-char clientids[20];//
+char clientids[24];//
 char* topic = "G/ddd";
 
 void MqttLinkRoutin(void* param)
@@ -48,8 +48,10 @@ void MqttLinkTestInit()
 	
 	for (int i = 0; i < 12; i++)
 	{
-		sprintf(&clientids[i * 2], "%02X", Sys.ID[i]);
+		//sprintf(&clientids[i * 2], "%02X", Sys.ID[i+1]);
+		clientids[i] = Sys.ID[i];
 	}
+	
 	mqttSlave.ClientID = clientids;
 	
 	mqttSlave.Topic = topic;
