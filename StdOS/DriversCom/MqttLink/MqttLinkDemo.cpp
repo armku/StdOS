@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "MqttLink.h"
 #include "Sys.h"
 #include "BspPlatform/Interrupt.h"
@@ -10,6 +11,7 @@
 USART usart333(USART3, 115200);
 MqttLink mqttSlave(usart333);
 char* id = "123456789ddd";
+char clientids[20];//
 char* topic = "G/ddd";
 
 void MqttLinkRoutin(void* param)
@@ -39,6 +41,17 @@ void MqttLinkTestInit()
 {
 	mqttSlave.FixHead = 0X10;
 	mqttSlave.ClientID = id;
+	for (int i = 0; i < ArrayLength(clientids); i++)
+	{
+		clientids[i] = 0;
+	}
+	
+	for (int i = 0; i < 12; i++)
+	{
+		sprintf(&clientids[i * 2], "%02X", Sys.ID[i]);
+	}
+	mqttSlave.ClientID = clientids;
+	
 	mqttSlave.Topic = topic;
 	Sys.AddTask(MqttLinkRoutin, 0, 0, 1000, "ModbusSlaveLinkRoutin");
 }
