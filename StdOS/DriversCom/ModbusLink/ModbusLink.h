@@ -49,24 +49,26 @@ public:
 	DataFrameModbus rxFrame;
 	USART &com;
 public:
+	const int static RegInputLen = 3;//输入寄存器组大小
+	const int static RegHoildingLen = 17;//保持寄存器组大小	
 	ModbusBase(USART &uart);	
-private:
+	ModbusReg_T RegInputs[RegInputLen];//输入寄存器组
+	ModbusReg_T RegHoildings[RegHoildingLen];//保持寄存器组
 
+	void SetRegInput(int addr0, int reglen, uint16_t* reg, int reggroup = 0);//设置输入寄存器	
+	void SetRegHoid(int addr0, int reglen, uint16_t* reg, int reggroup = 0);//设置保持寄存器	
+private:
+	
 };
 
 class ModbusSlaveLink:public ModbusBase
 {
 public:
-	const int static RegInputLen = 3;//输入寄存器组大小
-	const int static RegHoildingLen = 17;//保持寄存器组大小
-	ModbusReg_T RegInputs[RegInputLen];//输入寄存器组
-	ModbusReg_T RegHoildings[RegHoildingLen];//保持寄存器组
+	
 public:
 	ModbusSlaveLink(USART &uart);
 	bool CheckFrame();
-	bool Send();
-	void SetRegInput(int addr0, int reglen, uint16_t* reg, int reggroup = 0);//设置输入寄存器	
-	void SetRegHoid(int addr0, int reglen, uint16_t* reg, int reggroup = 0);//设置保持寄存器	
+	bool Send();	
 private:
 	int dealRegInputRead(uint16_t addr,uint16_t len);//处理读取输入寄存器 0 正确 1 非法地址 2非法长度
 	int dealRegHoildRead(uint16_t addr, uint16_t len);//处理读取保持寄存器 0 正确 1 非法地址 2非法长度

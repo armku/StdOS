@@ -125,26 +125,7 @@ void ModbusSlaveLink::DealFrame()
 		break;
 	}
 }
-//设置输入寄存器
-void ModbusSlaveLink::SetRegInput(int addr0, int reglen, uint16_t* reg, int reggroup)
-{
-	//非法寄存器组
-	if (reggroup >= ModbusSlaveLink::RegInputLen)
-		return;
-	this->RegInputs[reggroup].Addr0 = addr0;
-	this->RegInputs[reggroup].Lenth = reglen;
-	this->RegInputs[reggroup].Reg = reg;
-}
-//设置保持寄存器
-void ModbusSlaveLink::SetRegHoid(int addr0, int reglen, uint16_t* reg, int reggroup)
-{
-	//非法寄存器组
-	if (reggroup >= ModbusSlaveLink::RegHoildingLen)
-		return;
-	this->RegHoildings[reggroup].Addr0 = addr0;
-	this->RegHoildings[reggroup].Lenth = reglen;
-	this->RegHoildings[reggroup].Reg = reg;
-}
+
 //处理读取输入寄存器 0 正确 1 非法地址 2非法长度
 int ModbusSlaveLink::dealRegInputRead(uint16_t addr, uint16_t len)
 {
