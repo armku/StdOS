@@ -42,12 +42,21 @@ typedef struct
 	uint16_t *Reg;//寄存器指针
 }ModbusReg_T;//寄存器结构体
 
-class ModbusSlaveLink
+class ModbusBase
 {
 public:
 	DataFrameModbus txFrame;
 	DataFrameModbus rxFrame;
 	USART &com;
+public:
+	ModbusBase(USART &uart);
+private:
+
+};
+
+class ModbusSlaveLink:public ModbusBase
+{
+public:
 	const int static RegInputLen = 3;//输入寄存器组大小
 	const int static RegHoildingLen = 17;//保持寄存器组大小
 	ModbusReg_T RegInputs[RegInputLen];//输入寄存器组
@@ -69,6 +78,13 @@ public:
 	uint8_t id; //本机ID
 	void DealFrame(); //处理数据帧
 	void(*OnUpdateRegHoid)(uint16_t regaddr,uint16_t reglen); //更新参数
+};
+class ModbusMasterLink
+{
+public:
+
+private:
+
 };
 
 #endif // !_MODBUSLINK_H
