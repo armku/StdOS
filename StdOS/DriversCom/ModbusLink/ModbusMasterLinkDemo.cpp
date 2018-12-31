@@ -8,6 +8,7 @@
 #define _MODBUSMASTERLINKEST_CPP
 
 USART usart222(USART2, 9600);
+ModbusMasterLink modMaster(usart222);
 void ModbusMasterLinkTestInit()
 {
 

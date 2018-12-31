@@ -79,10 +79,10 @@ public:
 	void DealFrame(); //处理数据帧
 	void(*OnUpdateRegHoid)(uint16_t regaddr,uint16_t reglen); //更新参数
 };
-class ModbusMasterLink
+class ModbusMasterLink :public ModbusBase
 {
 public:
-	
+	ModbusMasterLink(USART &uart);
 private:
 
 };
