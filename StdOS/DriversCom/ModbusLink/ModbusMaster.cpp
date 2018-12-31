@@ -32,8 +32,6 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 
 	if ((com.RxSize() > 0) && CheckFrame())
 	{
-		this->com.ClearRxBuf();
-		this->rxFrame.regLength = 0;
 		for (int i = 0; i < len; i++)
 		{
 			this->RegInputs[0].Reg[addr + i] = this->rxFrame.data[3 + i * 2];
@@ -41,6 +39,9 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 			this->RegInputs[0].Reg[addr + i] += this->rxFrame.data[4 + i * 2];
 		}
 		debug_printf("rcv OK %d %d %d\n", this->RegInputs[0].Reg[0], this->RegInputs[0].Reg[1], this->RegInputs[0].Reg[2]);
+		this->com.ClearRxBuf();
+		this->rxFrame.regLength = 0;
+		this->rxFrame.Length = 0;
 
 		return true;
 	}
@@ -48,6 +49,7 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 	{
 		this->com.ClearRxBuf();
 		this->rxFrame.regLength = 0;
+		this->rxFrame.Length = 0;
 		debug_printf("rcv error\n");
 		return false;
 	}
