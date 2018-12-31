@@ -30,12 +30,6 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 		return;
 	}
 
-	if (com.RxSize() > 0)
-	{
-		debug_printf("rxlen:%d\n", com.RxSize());
-	}
-
-	
 	if ((com.RxSize() > 0) && CheckFrame())
 	{
 		debug_printf("rcv ok rxlen:%d-%d\n", com.RxSize(), rxFrame.regLength);
