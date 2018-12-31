@@ -14,10 +14,11 @@ char* topic = "G/ddd";
 
 void MqttLinkRoutin(void* param)
 {	
-	uint8_t bufsend[3];
+	uint8_t bufsend[4];
 	bufsend[0] = 0X61;
 	bufsend[1] = 0X62;
 	bufsend[2] = 0X63;
+	bufsend[3] = 0X64;
 	switch (mqttSlave.step)
 	{
 	case 0:
