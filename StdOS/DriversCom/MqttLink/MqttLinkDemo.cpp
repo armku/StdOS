@@ -13,8 +13,21 @@ char* id = "123456789";
 
 void MqttLinkRoutin(void* param)
 {	
-	modbusSlave.Connect();
-	
+	uint8_t bufsend[10];
+	switch (modbusSlave.step)
+	{
+	case 0:
+		if (modbusSlave.Connect())
+		{
+			modbusSlave.step++;
+		}
+		break;
+	case 1:
+		modbusSlave.Send(bufsend,ArrayLength(bufsend));
+		break;
+	default:
+		break;
+	}	
 }
 
 void MqttLinkTestInit()

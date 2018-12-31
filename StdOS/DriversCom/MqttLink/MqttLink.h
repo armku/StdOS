@@ -22,6 +22,7 @@ public:
 	bool CheckFrame();
 	bool Send();
 	bool Connect();
+	bool Send(uint8_t *buf,int len);//·¢ËÍÊı¾İ
 private:
 private:
 	bool Get(uint8_t & da);

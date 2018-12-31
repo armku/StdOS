@@ -78,3 +78,15 @@ bool MqttLink::Connect()
 		return false;
 	}
 }
+//·¢ËÍÊı¾İ
+bool MqttLink::Send(uint8_t *buf, int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		this->txFrame.data[i] = buf[i];
+	}
+	this->txFrame.dataLength = len;
+
+	this->Send();
+	return true;
+}
