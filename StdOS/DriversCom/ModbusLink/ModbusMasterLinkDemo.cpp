@@ -7,13 +7,14 @@
 #ifndef _MODBUSMASTERLINKEST_CPP
 #define _MODBUSMASTERLINKEST_CPP
 
-USART usart222(USART2, 9600);
+//USART usart222(USART2, 9600);
+USART usart222(USART3, 115200);
 OutputPort u485dr;
 ModbusMasterLink modMaster(usart222);
 
 void ModbusMasterDemoRoutin(void* param)
 {
-	modMaster.GetValue();
+	modMaster.GetValue(0,0,0);
 }
 
 

@@ -5,7 +5,7 @@
 #include "Port.h"
 #include "Task.h"
 
-#define _MQTTLINKEST_CPP
+//#define _MQTTLINKEST_CPP
 #ifdef _MQTTLINKEST_CPP
 
 USART usart333(USART3, 115200);

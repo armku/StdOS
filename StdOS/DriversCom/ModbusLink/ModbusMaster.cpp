@@ -11,6 +11,7 @@ bool ModbusMasterLink::GetValue(uint8_t id, uint16_t addr, uint16_t len)
 	this->txFrame.Address = id;
 	this->txFrame.regAddr = addr;
 	this->txFrame.Length = len;
+	this->com.SendByte(0X61);
 	
 
 	Sys.Sleep(100);
