@@ -81,7 +81,7 @@ bool MqttLink::Puslish(uint8_t *buf, int len)
 	int topticlen = strlen(this->Topic); 
 
 	this->txFrame.data[0] = 0X34;
-	this->txFrame.data[1] = 0X0C;
+	this->txFrame.data[1] = len + topticlen + 4;
 	this->txFrame.data[2] = 0X00;
 	this->txFrame.data[3] = topticlen;
 	for (int i = 0; i < topticlen; i++)
