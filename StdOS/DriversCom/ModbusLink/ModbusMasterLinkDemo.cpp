@@ -7,7 +7,7 @@
 #ifndef _MODBUSMASTERLINKEST_CPP
 #define _MODBUSMASTERLINKEST_CPP
 
-
+USART usart222(USART2, 9600);
 void ModbusMasterLinkTestInit()
 {
 
