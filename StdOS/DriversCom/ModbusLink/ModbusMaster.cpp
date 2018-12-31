@@ -32,11 +32,14 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 
 	if ((com.RxSize() > 0) && CheckFrame())
 	{
-		debug_printf("rcv ok rxlen:%d-%d\n", com.RxSize(), rxFrame.regLength);
-		Buffer bs(rxFrame.data, rxFrame.regLength);
-		bs.ShowHex();
 		this->com.ClearRxBuf();
 		this->rxFrame.regLength = 0;
+		for (int i = 0; i < len; i++)
+		{
+			this->RegInputs[0].Reg[addr + i] = this->rxFrame.data[4+i*2];
+			this->RegInputs[0].Reg[addr + i] <<= 8;
+			this->RegInputs[0].Reg[addr + i] += this->rxFrame.data[3 + i * 2];
+		}
 
 		return true;
 	}
