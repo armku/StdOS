@@ -78,29 +78,26 @@ bool MqttLink::Receive()
 //·¢ËÍÊý¾Ý
 bool MqttLink::Puslish(uint8_t *buf, int len)
 {
-	uint8_t bufsend[11];
-	bufsend[0] = 0X34;
-	bufsend[1] = 0X0C;
-	bufsend[2] = 0X00;
-	bufsend[3] = 0X05;
-	bufsend[4] = this->Topic[0];
-	bufsend[5] = this->Topic[1];
-	bufsend[6] = this->Topic[2];
-	bufsend[7] = this->Topic[3];
-	bufsend[8] = this->Topic[4];
-	bufsend[9] = this->MessageID >> 8;
-	bufsend[10] = this->MessageID & 0xff;
+	int topticlen = strlen(this->Topic); 
 
-
-	for (int i = 0; i < 11; i++)
+	this->txFrame.data[0] = 0X34;
+	this->txFrame.data[1] = 0X0C;
+	this->txFrame.data[2] = 0X00;
+	this->txFrame.data[3] = topticlen;
+	for (int i = 0; i < topticlen; i++)
 	{
-		this->txFrame.data[i] = bufsend[i];
+		this->txFrame.data[4 + i] = this->Topic[i];
 	}
+	
+	this->txFrame.data[4 + topticlen + 0] = this->MessageID >> 8;
+	this->txFrame.data[4 + topticlen + 1] = this->MessageID & 0xff;
+
+
 	for (int i = 0; i < len; i++)
 	{
-		this->txFrame.data[12 + i] = buf[i];
+		this->txFrame.data[6 + topticlen + i] = buf[i];
 	}
-	this->txFrame.dataLength = 12+ len;
+	this->txFrame.dataLength = 4 + topticlen + len;
 
 	this->Send();
 	Sys.Sleep(200);
