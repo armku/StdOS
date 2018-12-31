@@ -27,7 +27,7 @@ void ModbusMasterLinkTestInit()
 	u485dr = 0;//进入接收模式
 	usart222.RS485 = &u485dr;
 
-	Sys.AddTask(ModbusMasterLinkTestInit, 0, 0, 1000, "ModbusMaster");
+	Sys.AddTask(ModbusMasterDemoRoutin, 0, 0, 1000, "ModbusMaster");
 }
 
 #endif // !_MODBUSMASTERLINKEST_CPP

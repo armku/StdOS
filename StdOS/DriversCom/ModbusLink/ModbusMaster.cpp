@@ -8,10 +8,14 @@ ModbusMasterLink::ModbusMasterLink(USART &uart) :ModbusBase(uart)
 bool ModbusMasterLink::GetValue(uint8_t id, uint16_t addr, uint16_t len)
 {
 	uint8_t buf[10];
+	for (int i = 0; i < ArrayLength(buf); i++)
+	{
+		buf[i] = 'A' + i;
+	}
 	this->txFrame.Address = id;
 	this->txFrame.regAddr = addr;
 	this->txFrame.Length = len;
-	this->com.SendByte(0X61);
+	this->com.SendBytes(buf, ArrayLength(buf));
 	
 
 	Sys.Sleep(100);
