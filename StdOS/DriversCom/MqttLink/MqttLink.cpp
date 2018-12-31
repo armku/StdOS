@@ -97,7 +97,7 @@ bool MqttLink::Puslish(uint8_t *buf, int len)
 	{
 		this->txFrame.data[6 + topticlen + i] = buf[i];
 	}
-	this->txFrame.dataLength = 4 + topticlen + len;
+	this->txFrame.dataLength = 6 + topticlen + len;
 
 	this->Send();
 	Sys.Sleep(200);
