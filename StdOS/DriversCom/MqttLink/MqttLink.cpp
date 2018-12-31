@@ -55,7 +55,7 @@ bool MqttLink::Connect()
 	this->txFrame.dataLength = 14 + strlen(ClientID);
 
 	this->Send();
-	Sys.Sleep(500);
+	Sys.Sleep(200);
 	
 	if (com.RxSize() > 0)
 	{
@@ -107,7 +107,7 @@ bool MqttLink::Send(uint8_t *buf, int len)
 
 	this->Send();
 
-	Sys.Sleep(500);
+	Sys.Sleep(200);
 	this->Puslish_Release();
 	return true;
 }
