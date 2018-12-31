@@ -23,7 +23,7 @@ public:
 	bool CheckFrame();
 	bool Send();
 	bool Connect();
-	bool Send(uint8_t *buf,int len);//发送数据
+	bool Puslish(uint8_t *buf,int len);//发送数据
 	bool Puslish_Release();//发布
 private:
 private:

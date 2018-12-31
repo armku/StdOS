@@ -26,7 +26,7 @@ void MqttLinkRoutin(void* param)
 		}
 		break;
 	case 1:
-		modbusSlave.Send(bufsend,ArrayLength(bufsend));
+		modbusSlave.Puslish(bufsend,ArrayLength(bufsend));
 		break;
 	default:
 		break;

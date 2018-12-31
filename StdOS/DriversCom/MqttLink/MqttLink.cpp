@@ -76,7 +76,7 @@ bool MqttLink::Receive()
 	}
 }
 //·¢ËÍÊı¾İ
-bool MqttLink::Send(uint8_t *buf, int len)
+bool MqttLink::Puslish(uint8_t *buf, int len)
 {
 	uint8_t bufsend[11];
 	bufsend[0] = 0X34;
