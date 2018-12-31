@@ -14,7 +14,7 @@ public:
 	USART &com;
 	char * Server;//服务器
 	int Port;//远程端口号
-	char * ClientID;//连接id
+	char * ClientID;//客户端id，不能大于23字节
 	char* Topic;//主题
 	int8_t FixHead;//报文头	
 	int step = 0;//运行步骤
