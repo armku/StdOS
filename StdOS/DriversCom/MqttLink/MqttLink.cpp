@@ -27,7 +27,7 @@ bool MqttLink::Send()
 bool MqttLink::Connect()
 {
 	this->txFrame.data[0] = this->FixHead;
-	this->txFrame.data[1] = 0x15;
+	this->txFrame.data[1] = 12 + strlen(ClientID);
 	this->txFrame.data[2] = 0x00;
 	this->txFrame.data[3] = 0x04;
 	this->txFrame.data[4] = 'M';
