@@ -83,6 +83,7 @@ class ModbusMasterLink :public ModbusBase
 {
 public:
 	ModbusMasterLink(USART &uart);
+	bool GetValue();
 private:
 
 };

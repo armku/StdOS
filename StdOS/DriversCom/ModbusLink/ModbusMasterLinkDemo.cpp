@@ -10,6 +10,13 @@
 USART usart222(USART2, 9600);
 OutputPort u485dr;
 ModbusMasterLink modMaster(usart222);
+
+void ModbusMasterDemoRoutin(void* param)
+{
+	modMaster.GetValue();
+}
+
+
 void ModbusMasterLinkTestInit()
 {
 	u485dr.Set(PC2);
@@ -18,6 +25,8 @@ void ModbusMasterLinkTestInit()
 	u485dr.Open();
 	u485dr = 0;//进入接收模式
 	usart222.RS485 = &u485dr;
+
+	Sys.AddTask(ModbusMasterLinkTestInit, 0, 0, 1000, "ModbusMaster");
 }
 
 #endif // !_MODBUSMASTERLINKEST_CPP
