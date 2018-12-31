@@ -928,11 +928,6 @@
               <FilePath>..\StdOS\Drivers\AD7124\AD7124Demo.cpp</FilePath>
             </File>
             <File>
-              <FileName>ModbusLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLinkDemo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>MqttLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\MqttLink\MqttLinkDemo.cpp</FilePath>
@@ -1871,11 +1866,6 @@
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\AD7124\AD7124Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLinkDemo.cpp</FilePath>
             </File>
             <File>
               <FileName>MqttLinkDemo.cpp</FileName>
