@@ -23,6 +23,32 @@ bool EspDemoLink::Kick11(void)
 	com << "AT\r\n";
 
 	Sys.Sleep(200);
+
+	this->Receive11();
+}
+bool EspDemoLink::Receive11()
+{
+	if (com.RxSize() > 0)
+	{
+		debug_printf("rxlen:%d\n", com.RxSize());
+	}
+
+	if ((com.RxSize() > 0) && CheckFrame())
+	{
+		debug_printf("rcv ok rxlen:%d-%d\n", com.RxSize(), rxFrame.dataLength);
+		Buffer bs(rxFrame.data, rxFrame.dataLength);
+		//bs.ShowHex();
+		bs.Show();
+		this->com.ClearRxBuf();
+		this->rxFrame.dataLength = 0;
+
+		return true;
+	}
+	else
+	{
+		debug_printf("rcv error\n");
+		return false;
+	}
 }
 bool EspDemoLink::Kick(void)
 {

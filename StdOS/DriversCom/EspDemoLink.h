@@ -19,8 +19,8 @@ public:
 	OutputPort pinrst;
 public:
 	EspDemoLink(USART &uart);
-	bool Kick11(void);
-
+	bool Kick11();
+	bool Receive11();
 
 
 
