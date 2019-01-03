@@ -30,12 +30,12 @@ bool EspDemoLink::Receive11()
 {
 	if (com.RxSize() > 0)
 	{
-		debug_printf("rxlen:%d\n", com.RxSize());
+		//debug_printf("rxlen:%d\n", com.RxSize());
 	}
 
 	if ((com.RxSize() > 0) && CheckFrame())
 	{
-		debug_printf("rcv ok rxlen:%d-%d\n", com.RxSize(), rxFrame.dataLength);
+		//debug_printf("rcv ok rxlen:%d-%d\n", com.RxSize(), rxFrame.dataLength);
 		Buffer bs(rxFrame.data, rxFrame.dataLength);
 		//bs.ShowHex();
 		bs.Show();
