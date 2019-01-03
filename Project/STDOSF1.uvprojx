@@ -942,6 +942,11 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusMasterLinkDemo.cpp</FilePath>
             </File>
+            <File>
+              <FileName>EspDemoLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\EspDemoLinkDemo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1881,6 +1886,11 @@
               <FileName>ModbusMasterLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusMasterLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspDemoLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\EspDemoLinkDemo.cpp</FilePath>
             </File>
           </Files>
         </Group>
