@@ -42,9 +42,9 @@ void BspInit()
 	
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
-	usart111.OnReceive = Com1test;
-	//MqttLinkTestInit();
-	ModbusMasterLinkTestInit();
+	//usart111.OnReceive = Com1test;
+	MqttLinkTestInit();
+	//ModbusMasterLinkTestInit();
 }
 
 /*

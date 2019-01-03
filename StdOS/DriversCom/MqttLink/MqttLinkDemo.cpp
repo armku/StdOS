@@ -5,12 +5,12 @@
 #include "Port.h"
 #include "Task.h"
 
-//#define _MQTTLINKEST_CPP
+#define _MQTTLINKEST_CPP
 #ifdef _MQTTLINKEST_CPP
 
 USART usart333(USART3, 115200);
 MqttLink mqttSlave(usart333);
-char* id = "123456789ddd";
+char* id = "123456789";
 char clientids[24];//
 char* topic = "G/ddd";
 
