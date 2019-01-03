@@ -10,7 +10,7 @@
 #ifdef _ESPDEMOLINKTEST_CPP
 
 USART usart333(USART3, 115200);
-EspDemoLink mqttSlave(usart333);
+EspDemoLink esp(usart333);
 
 void EspDemoLinkRoutin(void* param)
 {
@@ -19,6 +19,8 @@ void EspDemoLinkRoutin(void* param)
 
 void EspDemoLinkTestInit()
 {
+	esp.SetPin(PG13, PG14);
+
 
 	Sys.AddTask(EspDemoLinkRoutin, 0, 0, 1000, "EspLinkRoutin");
 }
