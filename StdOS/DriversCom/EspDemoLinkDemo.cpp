@@ -20,7 +20,7 @@ void EspDemoLinkRoutin(void* param)
 void EspDemoLinkTestInit()
 {
 	esp.SetPin(PG13, PG14);
-
+	esp.Init();
 
 	Sys.AddTask(EspDemoLinkRoutin, 0, 0, 1000, "EspLinkRoutin");
 }
