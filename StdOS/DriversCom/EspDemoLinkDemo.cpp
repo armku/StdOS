@@ -14,7 +14,15 @@ EspDemoLink esp(usart333);
 
 void EspDemoLinkRoutin(void* param)
 {
-
+	static int step = 0;
+	switch (step)
+	{
+	case 0:
+		esp.Kick();
+		break;
+	default:
+		break;
+	}
 }
 
 void EspDemoLinkTestInit()
