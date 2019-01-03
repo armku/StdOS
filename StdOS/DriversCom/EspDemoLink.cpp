@@ -42,6 +42,7 @@ bool EspDemoLink::ReceiveAndWait(const char* targetString, unsigned char timeOut
 	ClearBuffer();
 	double tartTime = Sys.Ms();
 	while ((Sys.Ms() - tartTime) < timeOut)
+	//Sys.Sleep(100);
 	{
 		while (com.RxSize() > 0)
 		{
