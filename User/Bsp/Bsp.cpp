@@ -32,6 +32,7 @@ void Com1test(void *param)
 
 void MqttLinkTestInit();
 void ModbusMasterLinkTestInit();
+void EspDemoLinkTestInit();
 void BspInit()
 {
 	led1.Set(PB0);
@@ -45,6 +46,7 @@ void BspInit()
 	//usart111.OnReceive = Com1test;
 	//MqttLinkTestInit();
 	//ModbusMasterLinkTestInit();
+	EspDemoLinkTestInit();
 }
 
 /*
