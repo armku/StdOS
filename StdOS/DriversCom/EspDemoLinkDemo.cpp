@@ -18,7 +18,7 @@ void EspDemoLinkRoutin(void* param)
 	switch (step)
 	{
 	case 0:
-		esp.Kick();
+		esp.Kick11();
 		break;
 	default:
 		break;

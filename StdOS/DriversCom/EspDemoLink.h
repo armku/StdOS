@@ -19,6 +19,18 @@ public:
 	OutputPort pinrst;
 public:
 	EspDemoLink(USART &uart);
+	bool Kick11(void);
+
+
+
+
+
+
+
+
+
+
+
 	bool CheckFrame();
 	bool Send();
 	bool Kick(void);
