@@ -21,6 +21,8 @@ bool EspDemoLink::Kick11(void)
 	com.ClearRxBuf();
 	com.ClearTxBuf();
 	com << "AT\r\n";
+
+	Sys.Sleep(200);
 }
 bool EspDemoLink::Kick(void)
 {
