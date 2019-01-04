@@ -47,7 +47,7 @@ public:
 	bool LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, ENUMIDNOTypeDef id);
 	bool UnvarnishSend();
 	bool SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, ENUMIDNOTypeDef ucId);
-	   
+	void EchoOn(bool on = false);
 
 
 
@@ -64,7 +64,7 @@ public:
 
 	void SetPin(Pin pch,Pin prst);
 
-	void EchoOn(bool on = false);
+	
 private:
 	unsigned int mReceiveBufferIndex;
 	void ClearBuffer();

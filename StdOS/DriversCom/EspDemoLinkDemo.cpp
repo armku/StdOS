@@ -35,30 +35,39 @@ void EspDemoLinkRoutin(void* param)
 		debug_printf("esp.Kick11\n");
 		break;
 	case 1:
+		esp.EchoOn();
+		debug_printf("esp.EchoOn();\n");
+		break;
+	case 2:
+		if (esp.Kick11())
+			step++;
+		debug_printf("esp.Kick11\n");
+		break;
+	case 3:
 		if (esp.NetModeChoose(EspDemoLink::STA))
 			step++;
 		debug_printf("esp.NetModeChoose(EspDemoLink::STA)\n");
 		break;
-	case 2:
+	case 4:
 		if (esp.JoinAP(ApSsid, ApPwd))
 			step++;
 		debug_printf("esp.JoinAP(ApSsid, ApPwd)\n");
 		break;
-	case 3:
+	case 5:
 		if(esp.EnableMultipleId(DISABLE))
 		step++;
 		debug_printf("esp.EnableMultipleId(DISABLE)\n");
 		break;
-	case 4:
+	case 6:
 		if(esp.LinkServer(EspDemoLink::enumTCP, TcpServer_IP, TcpServer_Port, EspDemoLink::SingleID0))
 		step++;
 		debug_printf("esp.EnableMultipleId(DISABLE)\n");
 		break;
-	case 5:
+	case 7:
 		if (esp.UnvarnishSend())
 			step++;
 		break;
-	case 6:
+	case 8:
 		sprintf(cStr, "%d hello world!\n", ++icnt);
 		esp.SendString(ENABLE, cStr, 0, EspDemoLink::SingleID0); //发送数据	
 		debug_printf("发送数据: %s", cStr);
