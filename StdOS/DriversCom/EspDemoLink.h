@@ -38,7 +38,7 @@ public:
 	OutputPort pinrst;
 public:
 	EspDemoLink(USART &uart);
-	bool Kick11();
+	bool Kick();
 	bool Receive11(char const *target="OK");
 	bool NetModeChoose(ENUMNetModeTypeDef enumMode);
 	bool JoinAP(char *pSSID, char *pPassWord);

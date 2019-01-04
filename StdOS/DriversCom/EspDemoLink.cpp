@@ -17,7 +17,7 @@ EspDemoLink::EspDemoLink(USART &uart) :com(uart)
 	com.ClearRxBuf();
 	com.ClearTxBuf();
 }
-bool EspDemoLink::Kick11(void)
+bool EspDemoLink::Kick(void)
 {
 	com.ClearRxBuf();
 	com.ClearTxBuf();
