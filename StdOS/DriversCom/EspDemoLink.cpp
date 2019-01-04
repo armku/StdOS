@@ -42,8 +42,12 @@ bool EspDemoLink::Receive11(char const *target)
 		bs.Show();
 		this->com.ClearRxBuf();
 		this->rxFrame.dataLength = 0;
-
-		return true;
+		if (strstr((char*)this->rxFrame.data, target))
+			return true;
+		else if (strstr((char*)this->rxFrame.data, "AT"))
+			return true;
+		else
+			return false;
 	}
 	else
 	{
@@ -175,13 +179,13 @@ bool EspDemoLink::LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, EN
  */
 bool EspDemoLink::UnvarnishSend()
 {
-	com << "AT+CIPMODE=1";
+	com << "AT+CIPMODE=1"<<"\r\n";
 	Sys.Sleep(200);
 
 	if (!this->Receive11())
 		return false;
 
-	com << "AT+CIPSEND";
+	com << "AT+CIPSEND"<<"\r\n";
 	Sys.Sleep(200);
 
 	return this->Receive11();
@@ -222,7 +226,7 @@ bool EspDemoLink::SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength
 			sprintf(cStr, "AT+CIPSEND=%d", ulStrLength + 2);
 
 
-		com << pStr;
+		com << pStr<<"\r\n";
 		Sys.Sleep(200);
 
 		return this->Receive11();
