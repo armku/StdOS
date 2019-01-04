@@ -69,12 +69,15 @@ bool EspDemoLink::NetModeChoose(ENUMNetModeTypeDef enumMode)
 	case STA:
 		//return this->Cmd("AT+CWMODE=1", "OK", "no change", 2500);
 		com << "AT+CWMODE=1\r\n";
+		break;
 	case AP:
 		//return this->Cmd("AT+CWMODE=2", "OK", "no change", 2500);
 		com << "AT+CWMODE=2\r\n";
+		break;
 	case STA_AP:
 		//return this->Cmd("AT+CWMODE=3", "OK", "no change", 2500);
 		com << "AT+CWMODE=3\r\n";
+		break;
 	default:
 		return false;
 	}
