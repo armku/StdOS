@@ -8,9 +8,6 @@
 #include "OnChip\Configuration.h"
 #include "Buffer.h"
 #include <stdio.h>  
-#include <string.h>  
-#include "Sys.h"
-#include <stdio.h>
 
 EspDemoLink::EspDemoLink(USART &uart) :com(uart)
 {
