@@ -20,7 +20,6 @@ public:
 		enumTCP, enumUDP,
 	} ENUMNetProTypeDef;
 
-
 	typedef enum
 	{
 		MultipleID0 = 0, MultipleID1 = 1, MultipleID2 = 2, MultipleID3 = 3, MultipleID4 = 4, SingleID0 = 5,
@@ -53,6 +52,5 @@ public:
 	void SetPin(Pin pch,Pin prst);	
 private:
 };
-
 
 #endif // !_ESPDEMOLINK_H
