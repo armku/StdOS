@@ -101,9 +101,7 @@ bool EspDemoLink::JoinAP(char *pSSID, char *pPassWord)
 	*pCOM1 << cCmd<<"\r\n";
 	Sys.Sleep(200);
 
-	return this->Receive11();
-	
-	//return this->Cmd(cCmd, "OK", NULL, 5000);
+	return this->Receive11("OK");
 }
 /*
  * 函数名：ESP8266_Enable_MultipleId
@@ -120,8 +118,7 @@ bool EspDemoLink::EnableMultipleId(bool enumEnUnvarnishTx)
 	com << cStr<<"\r\n";
 	Sys.Sleep(200);
 
-	this->Receive11();
-	//return this->Cmd(cStr, "OK", 0, 500);
+	this->Receive11("OK");
 }
 /*
  * 函数名：ESP8266_Link_Server
@@ -160,8 +157,7 @@ bool EspDemoLink::LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, EN
 	com << cCmd << "\r\n";
 	Sys.Sleep(200);
 
-	this->Receive11();
-	//return this->Cmd(cCmd, "OK", "ALREAY CONNECT", 4000);
+	this->Receive11("OK", "ALREAY CONNECT");
 }
 /*
  * 函数名：UnvarnishSend
@@ -176,17 +172,13 @@ bool EspDemoLink::UnvarnishSend()
 	com << "AT+CIPMODE=1"<<"\r\n";
 	Sys.Sleep(200);
 
-	if (!this->Receive11())
+	if (!this->Receive11("OK"))
 		return false;
 
 	com << "AT+CIPSEND"<<"\r\n";
 	Sys.Sleep(200);
 
-	return this->Receive11();
-
-	/*if (!this->Cmd("AT+CIPMODE=1", "OK", 0, 500))
-		return false;
-	return this->Cmd("AT+CIPSEND", "OK", ">", 500);*/
+	return this->Receive11("OK", ">");
 }
 /*
  * 函数名：SendString
@@ -223,15 +215,14 @@ bool EspDemoLink::SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength
 		com << pStr<<"\r\n";
 		Sys.Sleep(200);
 
-		return this->Receive11();
-		/*this->Cmd(cStr, "> ", 0, 1000);
-		bRet = this->Cmd(pStr, "SEND OK", 0, 1000);*/
+		return this->Receive11("SEND OK", "> ");
 	}
 	return bRet;
 }
 void EspDemoLink::EchoOn(bool on)
 {
 	this->com << "ATE" << (on ? 1 : 0) << "\r\n";
+	this->Receive11("OK", ">");
 }
 
 bool EspDemoLink::CheckFrame()
