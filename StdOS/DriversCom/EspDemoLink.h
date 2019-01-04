@@ -43,12 +43,11 @@ public:
 	bool Receive11(char const *target="OK");
 	bool NetModeChoose(ENUMNetModeTypeDef enumMode);
 	bool JoinAP(char *pSSID, char *pPassWord);
-
-
-
-
-
-
+	bool EnableMultipleId(bool enumEnUnvarnishTx);
+	bool LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, ENUMIDNOTypeDef id);
+	bool UnvarnishSend();
+	bool SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, ENUMIDNOTypeDef ucId);
+	   
 
 
 
