@@ -68,7 +68,7 @@ void EspDemoLinkRoutin(void* param)
 	case 7:
 		if (esp.UnvarnishSend())
 			step++;
-		debug_printf("%02d ·¢ËÍÊı¾İ: %s", step, cStr);
+		debug_printf("%02d esp.UnvarnishSend", step);
 		break;
 	case 8:
 		sprintf(cStr, "%d hello world!\n", ++icnt);
