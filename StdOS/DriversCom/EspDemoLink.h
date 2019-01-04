@@ -12,6 +12,26 @@
 class EspDemoLink
 {
 public:
+	typedef enum
+	{
+		STA, AP, STA_AP
+	} ENUMNetModeTypeDef;
+	typedef enum
+	{
+		enumTCP, enumUDP,
+	} ENUMNetProTypeDef;
+
+
+	typedef enum
+	{
+		MultipleID0 = 0, MultipleID1 = 1, MultipleID2 = 2, MultipleID3 = 3, MultipleID4 = 4, SingleID0 = 5,
+	} ENUMIDNOTypeDef;
+
+	typedef enum
+	{
+		OPEN = 0, WEP = 1, WPA_PSK = 2, WPA2_PSK = 3, WPA_WPA2_PSK = 4,
+	} ENUMAPPsdModeTypeDef;
+public:
 	DataFrameEspDemoLink txFrame;
 	DataFrameEspDemoLink rxFrame;
 	USART &com;
@@ -21,6 +41,9 @@ public:
 	EspDemoLink(USART &uart);
 	bool Kick11();
 	bool Receive11(char const *target="OK");
+	bool NetModeChoose(ENUMNetModeTypeDef enumMode);
+
+
 
 
 

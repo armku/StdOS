@@ -50,6 +50,66 @@ bool EspDemoLink::Receive11(char const *target)
 		return false;
 	}
 }
+/*
+ * 函数名：ESP8266_Net_Mode_Choose
+ * 描述  ：选择WF-ESP8266模块的工作模式
+ * 输入  ：enumMode，工作模式
+ * 返回  : 1，选择成功
+ *         0，选择失败
+ * 调用  ：被外部调用
+ */
+bool EspDemoLink::NetModeChoose(ENUMNetModeTypeDef enumMode)
+{
+	com.ClearRxBuf();
+	com.ClearTxBuf();
+	
+	switch (enumMode)
+	{
+	case STA:
+		//return this->Cmd("AT+CWMODE=1", "OK", "no change", 2500);
+		com << "AT+CWMODE=1\r\n";
+	case AP:
+		//return this->Cmd("AT+CWMODE=2", "OK", "no change", 2500);
+		com << "AT+CWMODE=2\r\n";
+	case STA_AP:
+		//return this->Cmd("AT+CWMODE=3", "OK", "no change", 2500);
+		com << "AT+CWMODE=3\r\n";
+	default:
+		return false;
+	}
+	Sys.Sleep(200);
+
+	this->Receive11();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 bool EspDemoLink::Kick(void)
 {
 	com.ClearRxBuf();
