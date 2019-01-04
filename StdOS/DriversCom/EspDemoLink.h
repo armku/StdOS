@@ -55,9 +55,6 @@ public:
 
 	bool CheckFrame();
 	bool Send();
-	bool Kick(void);
-	bool RecvFind(char const *target, unsigned char timeout = ESP8266_DEFAULT_TIMEOUT);
-	bool ReceiveAndWait(char const* targetString, unsigned char timeOut = ESP8266_DEFAULT_TIMEOUT);
 	void cmd(char *cmd);
 	void cmd(const char *cmd) { this->cmd((char*)cmd); }
 	void Init();
@@ -67,7 +64,6 @@ public:
 	
 private:
 	unsigned int mReceiveBufferIndex;
-	void ClearBuffer();
 	char mReceiveBuffer[ESP8266_RECEIVE_BUFFER_SIZE];
 };
 
