@@ -20,7 +20,7 @@ public:
 public:
 	EspDemoLink(USART &uart);
 	bool Kick11();
-	bool Receive11();
+	bool Receive11(char const *target="OK");
 
 
 
