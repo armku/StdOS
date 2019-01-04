@@ -11,6 +11,7 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
@@ -323,6 +324,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>0</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -377,51 +379,8 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>USER</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Bsp</GroupName>
+          <GroupName>STARTUP</GroupName>
           <Files>
-            <File>
-              <FileName>Bsp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\font.c</FilePath>
-            </File>
-            <File>
-              <FileName>ssd1309font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
-            </File>
-            <File>
-              <FileName>Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Test.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>BspPlatform</GroupName>
-          <Files>
-            <File>
-              <FileName>BspPlatform.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\main.cpp</FilePath>
-            </File>
             <File>
               <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
@@ -441,16 +400,6 @@
               <FileName>system_stm32f10x.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Libraries\STM32F1\CMSIS\system_stm32f10x.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Util</GroupName>
-          <Files>
-            <File>
-              <FileName>Util.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Util\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -575,12 +524,70 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>USER</GroupName>
+        </Group>
+        <Group>
           <GroupName>DOC</GroupName>
           <Files>
             <File>
               <FileName>Readme.MD</FileName>
               <FileType>5</FileType>
               <FilePath>..\Doc\Readme.MD</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>Bsp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
+            </File>
+            <File>
+              <FileName>Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Test.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BspPlatform</GroupName>
+          <Files>
+            <File>
+              <FileName>BspPlatform.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\main.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Util</GroupName>
+          <Files>
+            <File>
+              <FileName>Util.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Util\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -956,6 +963,7 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
@@ -1268,6 +1276,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -1322,51 +1331,8 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>USER</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Bsp</GroupName>
+          <GroupName>STARTUP</GroupName>
           <Files>
-            <File>
-              <FileName>Bsp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\font.c</FilePath>
-            </File>
-            <File>
-              <FileName>ssd1309font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
-            </File>
-            <File>
-              <FileName>Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Test.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>BspPlatform</GroupName>
-          <Files>
-            <File>
-              <FileName>BspPlatform.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\main.cpp</FilePath>
-            </File>
             <File>
               <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
@@ -1386,16 +1352,6 @@
               <FileName>system_stm32f10x.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Libraries\STM32F1\CMSIS\system_stm32f10x.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Util</GroupName>
-          <Files>
-            <File>
-              <FileName>Util.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Util\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1520,12 +1476,70 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>USER</GroupName>
+        </Group>
+        <Group>
           <GroupName>DOC</GroupName>
           <Files>
             <File>
               <FileName>Readme.MD</FileName>
               <FileType>5</FileType>
               <FilePath>..\Doc\Readme.MD</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>Bsp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
+            </File>
+            <File>
+              <FileName>Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Test.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BspPlatform</GroupName>
+          <Files>
+            <File>
+              <FileName>BspPlatform.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\main.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Util</GroupName>
+          <Files>
+            <File>
+              <FileName>Util.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Util\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
