@@ -24,7 +24,7 @@ bool EspDemoLink::Kick(void)
 
 	this->Receive11();
 }
-bool EspDemoLink::Receive11(char const *target)
+bool EspDemoLink::Receive11(char const *target, char const *target1)
 {
 	if (com.RxSize() > 0)
 	{

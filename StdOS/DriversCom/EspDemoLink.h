@@ -39,7 +39,7 @@ public:
 public:
 	EspDemoLink(USART &uart);
 	bool Kick();
-	bool Receive11(char const *target="OK");
+	bool Receive11(char const *target="OK", char const *target1 = "OK");
 	bool NetModeChoose(ENUMNetModeTypeDef enumMode);
 	bool JoinAP(char *pSSID, char *pPassWord);
 	bool EnableMultipleId(bool enumEnUnvarnishTx);
