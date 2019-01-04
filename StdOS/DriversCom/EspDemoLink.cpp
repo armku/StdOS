@@ -240,27 +240,6 @@ void EspDemoLink::EchoOn(bool on)
 	this->com << "ATE" << (on ? 1 : 0) << "\r\n";
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 bool EspDemoLink::CheckFrame()
 {
 	int rxlen = com.RxSize();
