@@ -36,11 +36,13 @@ void EspDemoLinkRoutin(void* param)
 		break;
 	case 1:
 		esp.EchoOn();
+		step++;
 		debug_printf("%02d esp.EchoOn();\n", step);
 		break;
 	case 2:
-		if (esp.Kick11())
-			step++;
+		/*if (esp.Kick11())
+			step++;*/
+		esp.Kick11();
 		debug_printf("%02d esp.Kick11\n", step);
 		break;
 	case 3:
