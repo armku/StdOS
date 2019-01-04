@@ -10,6 +10,7 @@
 #include <stdio.h>  
 #include <string.h>  
 #include "Sys.h"
+#include <stdio.h>
 
 EspDemoLink::EspDemoLink(USART &uart) :com(uart)
 {
@@ -77,9 +78,30 @@ bool EspDemoLink::NetModeChoose(ENUMNetModeTypeDef enumMode)
 	default:
 		return false;
 	}
+
 	Sys.Sleep(200);
 
 	this->Receive11();
+}
+/*
+ * 函数名：ESP8266_JoinAP
+ * 描述  ：WF-ESP8266模块连接外部WiFi
+ * 输入  ：pSSID，WiFi名称字符串
+ *       ：pPassWord，WiFi密码字符串
+ * 返回  : 1，连接成功
+ *         0，连接失败
+ * 调用  ：被外部调用
+ */
+bool EspDemoLink::JoinAP(char *pSSID, char *pPassWord)
+{
+	char cCmd[120];
+	sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", pSSID, pPassWord);
+	
+	Sys.Sleep(200);
+
+	this->Receive11();
+	
+	//return this->Cmd(cCmd, "OK", NULL, 5000);
 }
 
 
