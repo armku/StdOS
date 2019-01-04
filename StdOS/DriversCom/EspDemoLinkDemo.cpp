@@ -40,9 +40,9 @@ void EspDemoLinkRoutin(void* param)
 		debug_printf("%02d esp.EchoOn();\n", step);
 		break;
 	case 2:
-		/*if (esp.Kick11())
-			step++;*/
-		esp.Kick11();
+		if (esp.Kick11())
+			step++;
+		//esp.Kick11();
 		debug_printf("%02d esp.Kick11\n", step);
 		break;
 	case 3:
