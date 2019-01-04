@@ -6,8 +6,6 @@
 #include "DataFrameEspDemoLink.h"
 #include "USART.h"
 
-#define ESP8266_DEFAULT_TIMEOUT  1  //µ¥Î»£ºs
-
 class EspDemoLink
 {
 public:
