@@ -22,6 +22,8 @@ void EspDemoLinkRoutin(void* param)
 			step++;
 		break;
 	case 1:
+		if (esp.NetModeChoose(EspDemoLink::STA))
+			step++;
 		break;
 	default:
 		break;
