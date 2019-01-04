@@ -41,9 +41,9 @@ bool EspDemoLink::Receive11(char const *target, char const *target1)
 		this->rxFrame.dataLength = 0;
 		if (strstr((char*)this->rxFrame.data, target))
 			return true;
-		else if (strstr((char*)this->rxFrame.data, "AT"))
+		if (strstr((char*)this->rxFrame.data, target1))
 			return true;
-		else
+		
 			return false;
 	}
 	else
