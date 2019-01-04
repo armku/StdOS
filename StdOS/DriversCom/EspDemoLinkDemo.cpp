@@ -63,7 +63,7 @@ void EspDemoLinkRoutin(void* param)
 	case 6:
 		if(esp.LinkServer(EspDemoLink::enumTCP, TcpServer_IP, TcpServer_Port, EspDemoLink::SingleID0))
 		step++;
-		debug_printf("%02d esp.EnableMultipleId(DISABLE)\n", step);
+		debug_printf("%02d esp.LinkServer\n", step);
 		break;
 	case 7:
 		if (esp.UnvarnishSend())
