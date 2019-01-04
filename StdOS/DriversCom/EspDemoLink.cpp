@@ -85,7 +85,7 @@ bool EspDemoLink::NetModeChoose(ENUMNetModeTypeDef enumMode)
 
 	Sys.Sleep(200);
 
-	this->Receive11();
+	this->Receive11("OK", "no change");
 }
 /*
  * º¯ÊıÃû£ºESP8266_JoinAP
