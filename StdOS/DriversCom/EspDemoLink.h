@@ -47,21 +47,11 @@ public:
 	bool UnvarnishSend();
 	bool SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, ENUMIDNOTypeDef ucId);
 	void EchoOn(bool on = false);
-
-
-
-
-
 	bool CheckFrame();
-	void cmd(char *cmd);
-	void cmd(const char *cmd) { this->cmd((char*)cmd); }
 	void Init();
 
-	void SetPin(Pin pch,Pin prst);
-
-	
+	void SetPin(Pin pch,Pin prst);	
 private:
-	unsigned int mReceiveBufferIndex;
 };
 
 
