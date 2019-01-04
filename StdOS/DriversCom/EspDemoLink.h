@@ -7,7 +7,6 @@
 #include "USART.h"
 
 #define ESP8266_DEFAULT_TIMEOUT  1  //µ¥Î»£ºs
-#define ESP8266_RECEIVE_BUFFER_SIZE  50
 
 class EspDemoLink
 {
@@ -64,7 +63,6 @@ public:
 	
 private:
 	unsigned int mReceiveBufferIndex;
-	char mReceiveBuffer[ESP8266_RECEIVE_BUFFER_SIZE];
 };
 
 
