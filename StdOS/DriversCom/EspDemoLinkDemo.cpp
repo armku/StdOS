@@ -32,45 +32,46 @@ void EspDemoLinkRoutin(void* param)
 	case 0:
 		if (esp.Kick11())
 			step++;
-		debug_printf("esp.Kick11\n");
+		debug_printf("%02d esp.Kick11\n", step);
 		break;
 	case 1:
 		esp.EchoOn();
-		debug_printf("esp.EchoOn();\n");
+		debug_printf("%02d esp.EchoOn();\n", step);
 		break;
 	case 2:
 		if (esp.Kick11())
 			step++;
-		debug_printf("esp.Kick11\n");
+		debug_printf("%02d esp.Kick11\n", step);
 		break;
 	case 3:
 		if (esp.NetModeChoose(EspDemoLink::STA))
 			step++;
-		debug_printf("esp.NetModeChoose(EspDemoLink::STA)\n");
+		debug_printf("%02d esp.NetModeChoose(EspDemoLink::STA)\n", step);
 		break;
 	case 4:
 		if (esp.JoinAP(ApSsid, ApPwd))
 			step++;
-		debug_printf("esp.JoinAP(ApSsid, ApPwd)\n");
+		debug_printf("%02d esp.JoinAP(ApSsid, ApPwd)\n", step);
 		break;
 	case 5:
 		if(esp.EnableMultipleId(DISABLE))
 		step++;
-		debug_printf("esp.EnableMultipleId(DISABLE)\n");
+		debug_printf("%02d esp.EnableMultipleId(DISABLE)\n", step);
 		break;
 	case 6:
 		if(esp.LinkServer(EspDemoLink::enumTCP, TcpServer_IP, TcpServer_Port, EspDemoLink::SingleID0))
 		step++;
-		debug_printf("esp.EnableMultipleId(DISABLE)\n");
+		debug_printf("%02d esp.EnableMultipleId(DISABLE)\n", step);
 		break;
 	case 7:
 		if (esp.UnvarnishSend())
 			step++;
+		debug_printf("%02d 发送数据: %s", step, cStr);
 		break;
 	case 8:
 		sprintf(cStr, "%d hello world!\n", ++icnt);
 		esp.SendString(ENABLE, cStr, 0, EspDemoLink::SingleID0); //发送数据	
-		debug_printf("发送数据: %s", cStr);
+		debug_printf("%02d 发送数据: %s", step, cStr);
 		break;
 	default:
 		break;
