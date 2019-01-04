@@ -163,7 +163,7 @@ bool EspDemoLink::LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, EN
 	else
 		sprintf(cCmd, "AT+CIPSTART=%s", cStr);
 
-	com << cCmd;
+	com << cCmd << "\r\n";
 	Sys.Sleep(200);
 
 	this->Receive11();
