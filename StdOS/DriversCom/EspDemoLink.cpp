@@ -99,8 +99,6 @@ bool EspDemoLink::JoinAP(char *pSSID, char *pPassWord)
 {
 	char cCmd[120];
 	sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", pSSID, pPassWord);
-	//com.SendBytes(cCmd,strlen(cCmd));
-	//pCOM1->SendBytes(cCmd, strlen(cCmd));
 	com << cCmd<<"\r\n";
 	*pCOM1 << cCmd<<"\r\n";
 	Sys.Sleep(200);
@@ -121,7 +119,7 @@ bool EspDemoLink::EnableMultipleId(bool enumEnUnvarnishTx)
 {
 	char cStr[20];
 	sprintf(cStr, "AT+CIPMUX=%d", (enumEnUnvarnishTx ? 1 : 0));
-	com << cStr;
+	com << cStr<<"\r\n";
 	Sys.Sleep(200);
 
 	this->Receive11();
