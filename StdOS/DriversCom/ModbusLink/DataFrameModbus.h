@@ -1,12 +1,11 @@
 #include "Type.h"
 #include "Security/Crc.h"
+#include "../DataFrame.h"
 
 #ifndef _DATAFRAMEMODBUS_H
 #define _DATAFRAMEMODBUS_H
 
-#define MAX_FRAMEMODBUS_DATA_LENGTH 100
-
-struct DataFrameModbus
+struct DataFrameModbus:public DataFrame
 {
 public:
 	uint8_t Address;	// 地址
@@ -15,7 +14,6 @@ public:
 	uint8_t Length;		// 数据长度
 	uint16_t regAddr;
 	uint16_t regLength;
-	uint8_t data[MAX_FRAMEMODBUS_DATA_LENGTH];
 	bool isUpdated;
 	uint16_t Crc;		// 校验码
 	uint16_t Crc2;		// 动态计算得到的校验码
