@@ -24,34 +24,6 @@ public:
 	{
 		isUpdated = false;
 	}
-
-	bool VerifyCheckCode()
-	{
-		uint8_t code = header + fnCode + dataLength;
-		for (uint8_t i = 0; i<dataLength; i++)
-			code += data[i];
-		if (code == checkSum)
-			return true;
-		else
-			return false;
-	}
-	void CreateCheckCode()
-	{
-		checkSum = header + fnCode + dataLength;
-		for (uint8_t i = 0; i<dataLength; i++)
-			checkSum += data[i];
-	}
-	DataFrame& operator=(const DataFrame &df)
-	{
-		//header = df.header;
-		fnCode = df.fnCode;
-		dataLength = df.dataLength;
-		isUpdated = df.isUpdated;
-		checkSum = df.checkSum;
-		for (uint8_t i = 0; i<dataLength; i++)
-			data[i] = df.data[i];
-		return *this;
-	}
 };
 
 #endif // !_DATAFRAME_H
