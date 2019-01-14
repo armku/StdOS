@@ -978,11 +978,6 @@
               <FilePath>..\StdOS\Drivers\DS18B20\DS18B20Demo.cpp</FilePath>
             </File>
             <File>
-              <FileName>EspDemoLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\esp8266\EspDemoLinkDemo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DS1302Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\DS1302\DS1302Demo.cpp</FilePath>
@@ -1066,6 +1061,11 @@
               <FileName>StdLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\StdLink\StdLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Esp8266LinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\esp8266\Esp8266LinkDemo.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2043,11 +2043,6 @@
               <FilePath>..\StdOS\Drivers\DS18B20\DS18B20Demo.cpp</FilePath>
             </File>
             <File>
-              <FileName>EspDemoLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\esp8266\EspDemoLinkDemo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DS1302Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\DS1302\DS1302Demo.cpp</FilePath>
@@ -2131,6 +2126,11 @@
               <FileName>StdLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\StdLink\StdLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Esp8266LinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\esp8266\Esp8266LinkDemo.cpp</FilePath>
             </File>
           </Files>
         </Group>
