@@ -823,11 +823,6 @@
           <GroupName>DriversCom</GroupName>
           <Files>
             <File>
-              <FileName>DemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\DemoLink\DemoLink.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ModbusLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
@@ -1036,11 +1031,6 @@
               <FileName>W5500Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\W5500\W5500Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DemoLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\DemoLink\DemoLinkDemo.cpp</FilePath>
             </File>
             <File>
               <FileName>SHARP_PM2_5Demo.cpp</FileName>
@@ -1873,11 +1863,6 @@
           <GroupName>DriversCom</GroupName>
           <Files>
             <File>
-              <FileName>DemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\DemoLink\DemoLink.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ModbusLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
@@ -2086,11 +2071,6 @@
               <FileName>W5500Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\W5500\W5500Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DemoLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\DemoLink\DemoLinkDemo.cpp</FilePath>
             </File>
             <File>
               <FileName>SHARP_PM2_5Demo.cpp</FileName>
