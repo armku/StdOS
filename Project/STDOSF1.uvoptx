@@ -2120,18 +2120,6 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\DriversCom\esp8266\esp8266Demo.cpp</PathWithFileName>
-      <FilenameWithoutPath>esp8266Demo.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>17</GroupNumber>
-      <FileNumber>122</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>..\StdOS\DriversCom\SHARP_PM2_5\SHARP_PM2_5Demo.cpp</PathWithFileName>
       <FilenameWithoutPath>SHARP_PM2_5Demo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -2139,7 +2127,7 @@
     </File>
     <File>
       <GroupNumber>17</GroupNumber>
-      <FileNumber>123</FileNumber>
+      <FileNumber>122</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>

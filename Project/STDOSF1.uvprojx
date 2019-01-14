@@ -1058,11 +1058,6 @@
               <FilePath>..\StdOS\DriversCom\DemoLink\DemoLinkDemo.cpp</FilePath>
             </File>
             <File>
-              <FileName>esp8266Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\esp8266\esp8266Demo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>SHARP_PM2_5Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\SHARP_PM2_5\SHARP_PM2_5Demo.cpp</FilePath>
@@ -2126,11 +2121,6 @@
               <FileName>DemoLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\DemoLink\DemoLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>esp8266Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\esp8266\esp8266Demo.cpp</FilePath>
             </File>
             <File>
               <FileName>SHARP_PM2_5Demo.cpp</FileName>
