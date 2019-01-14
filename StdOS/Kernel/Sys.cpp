@@ -256,6 +256,23 @@ extern "C"
 		MSR MSP, r0 			//set Main Stack value
 			BX r14
 	}
+	// 毫秒级延迟 用于系统没启动时延时使用
+	void sleep(int ms)
+	{
+		for (int i = 0; i < ms; i++)
+		{
+			delay(500);
+			delay(500);
+		}
+	}
+	// 微秒级延迟
+	void delay(int us)
+	{
+		if (us)
+		{
+			Time.Delay(us);
+		}
+	}
 }
 // 打开全局中断
 void TSys::GlobalEnable()
@@ -309,20 +326,3 @@ void GetSTM32MCUID(uint32_t *id, MCUTypedef type)
 	}
 }
 #endif
-// 毫秒级延迟 用于系统没启动时延时使用
-void sleep(int ms)
-{
-	for (int i = 0; i < ms; i++)
-	{
-		delay(500);
-		delay(500);
-	}
-}
-// 微秒级延迟
-void delay(int us)
-{	
-	if (us)
-	{
-		Time.Delay(us);
-	}
-}
