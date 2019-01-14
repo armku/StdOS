@@ -4,18 +4,18 @@
 #include "../Core/Type.h"
 
 #define MAX_FRAME_DATA_LENGTH 50
-#define FRAME_HEADER 0xAA
+//#define FRAME_HEADER 0xAA
 
 struct DataFrame
 {
 public:
-	const uint8_t header;
+	//const uint8_t header;
 	uint8_t dataLength; //当前数据长度
 	uint8_t data[MAX_FRAME_DATA_LENGTH];//当前数据
 	bool isUpdated;
 
 public:
-	DataFrame() :header(FRAME_HEADER)                //constructor
+	DataFrame()// :header(FRAME_HEADER)
 	{
 		isUpdated = false;
 	}
