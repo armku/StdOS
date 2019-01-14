@@ -63,7 +63,7 @@ OutputPort::OutputPort()
 	this->Speed = 50;
 }
 
-OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain, uint8_t speed)
+OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain)
 {
 	this->Opened = false;
 
@@ -71,7 +71,6 @@ OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain, uint8_t speed)
 	this->OpenDrain = false;
 	this->Speed = 50;
 	this->OpenDrain = openDrain;
-	this->Speed = speed;
 	this->Invert = invert;
 	if (pin != P0)
 	{
@@ -94,7 +93,7 @@ void OutputPort::OnOpen(void *param)
 	this->OpenPin(param);
 }
 
-AlternatePort::AlternatePort() : OutputPort(P0, 0, false, 50)
+AlternatePort::AlternatePort() : OutputPort(P0, 0, false)
 {}
 
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
