@@ -84,7 +84,8 @@ extern TSys Sys;		// 创建一个全局的Sys对象  会在main函数之前执行构造函数（！！！
 
 #define STDOS_VERSION "0.8.2018.1228" //系统版本号
 extern char* AppVersion;//需要定义软件版本号实现 如：char *AppVersion = "0.1.2018.1114";
-
+void sleep(int ms); // 毫秒级延迟
+void delay(int us); // 微秒级延迟
 #endif //_Sys_H_
 
 /*
