@@ -838,11 +838,6 @@
               <FilePath>..\StdOS\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
             </File>
             <File>
-              <FileName>StdLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\StdLink\StdLink.cpp</FilePath>
-            </File>
-            <File>
               <FileName>MqttLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\MqttLink\MqttLink.cpp</FilePath>
@@ -1051,11 +1046,6 @@
               <FileName>SHARP_PM2_5Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\SHARP_PM2_5\SHARP_PM2_5Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StdLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\StdLink\StdLinkDemo.cpp</FilePath>
             </File>
             <File>
               <FileName>Esp8266LinkDemo.cpp</FileName>
@@ -1898,11 +1888,6 @@
               <FilePath>..\StdOS\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
             </File>
             <File>
-              <FileName>StdLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\StdLink\StdLink.cpp</FilePath>
-            </File>
-            <File>
               <FileName>MqttLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\MqttLink\MqttLink.cpp</FilePath>
@@ -2111,11 +2096,6 @@
               <FileName>SHARP_PM2_5Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\SHARP_PM2_5\SHARP_PM2_5Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StdLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\StdLink\StdLinkDemo.cpp</FilePath>
             </File>
             <File>
               <FileName>Esp8266LinkDemo.cpp</FileName>
