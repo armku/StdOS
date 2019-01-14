@@ -31,7 +31,6 @@ class OutputPort : public Port
 public:
     uint8_t Invert		= 2;		// 是否倒置输入输出。默认2表示自动检测
     bool OpenDrain	= false;	// 是否开漏输出
-    uint8_t Speed		= 50;		// 速度 
 
     OutputPort();
     OutputPort(Pin pin, uint8_t invert, bool openDrain = false);

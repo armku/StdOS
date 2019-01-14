@@ -60,7 +60,6 @@ OutputPort::OutputPort()
 {
 	this->Invert = 2;
 	this->OpenDrain = 0;
-	this->Speed = 50;
 }
 
 OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain)
@@ -69,7 +68,6 @@ OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain)
 
 	this->Invert = 2;
 	this->OpenDrain = false;
-	this->Speed = 50;
 	this->OpenDrain = openDrain;
 	this->Invert = invert;
 	if (pin != P0)
