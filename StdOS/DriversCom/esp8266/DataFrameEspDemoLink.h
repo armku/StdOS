@@ -8,8 +8,6 @@
 struct DataFrameEspDemoLink:public DataFrame
 {
 public:
-	uint8_t dataLength;
-	bool isUpdated;
 	int frameLength;//当前数据帧长度
 	int Cnt;//数据帧数量
 
