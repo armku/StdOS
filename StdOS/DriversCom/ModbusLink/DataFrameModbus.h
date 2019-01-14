@@ -11,7 +11,6 @@ public:
 	uint8_t Address;	// 地址
 	uint8_t Code;		// 功能码
 	uint8_t Error;		// 是否异常
-	uint8_t Length;		// 数据长度
 	uint16_t regAddr;
 	uint16_t regLength;
 	bool isUpdated;
@@ -45,23 +44,23 @@ public:
 	{
 		this->data[2] = len * 2;
 		this->frameLength = 5 + len * 2;
-		this->Length = this->frameLength;
+		this->dataLength = this->frameLength;
 	}
 	bool RemoveOneFrame()
 	{
-		if (frameLength<0 || frameLength>Length)
+		if (frameLength<0 || frameLength>this->dataLength)
 			return false;
-		for (int i = 0; i < Length - frameLength; i++)
+		for (int i = 0; i < this->dataLength - frameLength; i++)
 		{
 			this->data[i] = this->data[i + frameLength];
 		}
-		Length -= frameLength;
+		this->dataLength -= frameLength;
 		this->frameLength = 0;
 		return true;
 	}
 	bool CheckFrame()
 	{
-		if (Length >= 8)
+		if (this->dataLength >= 8)
 		{
 			this->Address = this->data[0];
 			this->Code = this->data[1];
@@ -94,12 +93,12 @@ public:
 			if (frameLength == 0)
 			{
 				//非法指令，直接清空缓冲区
-				frameLength = this->Length;
+				frameLength = this->dataLength;
 				this->RemoveOneFrame();
 				return false;
 			}
 			//需要的长度不够，直接返回
-			if (frameLength > this->Length)
+			if (frameLength > this->dataLength)
 				return false;
 			this->Crc = this->data[this->frameLength - 1];
 			this->Crc <<= 8;
@@ -122,16 +121,6 @@ public:
 		Crc = Code + frameLength;
 		for (uint8_t i = 0; i < frameLength; i++)
 			Crc += data[i];
-	}
-	DataFrameModbus& operator=(const DataFrameModbus &df)
-	{
-		Code = df.Code;
-		Length = df.Length;
-		isUpdated = df.isUpdated;
-		Crc = df.Crc;
-		for (uint8_t i = 0; i < Length; i++)
-			data[i] = df.data[i];
-		return *this;
 	}
 };
 

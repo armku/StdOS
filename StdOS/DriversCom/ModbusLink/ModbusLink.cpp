@@ -29,17 +29,17 @@ bool ModbusBase::CheckFrame()
 {
 	int rxlen = com.RxSize();
 
-	if (com.GetBytes(&rxFrame.data[rxFrame.Length], rxlen))
+	if (com.GetBytes(&rxFrame.data[rxFrame.dataLength], rxlen))
 	{
-		rxFrame.Length += rxlen;
+		rxFrame.dataLength += rxlen;
 	}
 	//判断数据帧最小长度要求
-	if (rxFrame.Length < 8)
+	if (rxFrame.dataLength < 8)
 		return false;
 #ifdef  DEBUG
-	Buffer(rxFrame.data, rxFrame.Length).ShowHex(true);
+	Buffer(rxFrame.data, rxFrame.dataLength).ShowHex(true);
 #endif //  DEBUG	
-	rxFrame.frameLength = rxFrame.Length;
+	rxFrame.frameLength = rxFrame.dataLength;
 	if (!rxFrame.CheckFrame())
 		return false;
 	else

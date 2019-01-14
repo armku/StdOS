@@ -41,7 +41,7 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 		debug_printf("rcv OK %d %d %d\n", this->RegInputs[0].Reg[0], this->RegInputs[0].Reg[1], this->RegInputs[0].Reg[2]);
 		this->com.ClearRxBuf();
 		this->rxFrame.regLength = 0;
-		this->rxFrame.Length = 0;
+		this->rxFrame.dataLength = 0;
 
 		return true;
 	}
@@ -49,7 +49,7 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 	{
 		this->com.ClearRxBuf();
 		this->rxFrame.regLength = 0;
-		this->rxFrame.Length = 0;
+		this->rxFrame.dataLength = 0;
 		debug_printf("rcv error\n");
 		return false;
 	}
