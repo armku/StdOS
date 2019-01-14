@@ -6,9 +6,6 @@
 #define MAX_FRAME_DATA_LENGTH 50
 #define FRAME_HEADER 0xAA
 
-//frame struct:
-// | header | fnCode |  dataLength | data1 | ...... | datan | checkSum | 
-
 struct DataFrame
 {
 public:
