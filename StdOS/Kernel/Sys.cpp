@@ -59,7 +59,25 @@ uint32_t TSys::Seconds()const
 // 毫秒级延迟
 void TSys::Sleep(int ms)const
 {
-	sleep(ms);
+	if (!Sys.Started)
+	{
+		//用于系统没启动时延时使用
+		sleep(ms);
+		return;
+	}
+	if (ms > 1000)
+		debug_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！\n", ms);
+	if (ms)
+	{
+		bool cancel = false;
+
+		int executems = Task::Scheduler()->ExecuteForWait(ms, cancel);
+		if (executems >= ms)
+			return;
+		ms -= executems;
+	}
+	if (ms)
+		Time.Sleep(ms, nullptr);
 }
 
 // 微秒级延迟
@@ -291,32 +309,14 @@ void GetSTM32MCUID(uint32_t *id, MCUTypedef type)
 	}
 }
 #endif
-// 毫秒级延迟
+// 毫秒级延迟 用于系统没启动时延时使用
 void sleep(int ms)
 {
-	if (!Sys.Started)
+	for (int i = 0; i < ms; i++)
 	{
-		//用于系统没启动时延时使用
-		for (int i = 0; i < ms; i++)
-		{
-			delay(500);
-			delay(500);
-		}
-		return;
+		delay(500);
+		delay(500);
 	}
-	if (ms > 1000)
-		debug_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！\n", ms);
-	if (ms)
-	{
-		bool cancel = false;
-
-		int executems = Task::Scheduler()->ExecuteForWait(ms, cancel);
-		if (executems >= ms)
-			return;
-		ms -= executems;
-}
-	if (ms)
-		Time.Sleep(ms, nullptr);
 }
 // 微秒级延迟
 void delay(int us)
