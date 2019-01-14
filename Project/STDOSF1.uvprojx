@@ -828,11 +828,6 @@
               <FilePath>..\StdOS\DriversCom\DemoLink\DemoLink.cpp</FilePath>
             </File>
             <File>
-              <FileName>esp8266.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\esp8266\esp8266.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ModbusLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
@@ -1891,11 +1886,6 @@
               <FileName>DemoLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\DemoLink\DemoLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>esp8266.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\esp8266\esp8266.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusLink.cpp</FileName>
