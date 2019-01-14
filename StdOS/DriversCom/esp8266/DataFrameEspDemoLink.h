@@ -1,16 +1,14 @@
 #include "Type.h"
 #include "Security/Crc.h"
+#include "../DataFrame.h"
 
 #ifndef _DATAFRAMEEspDemoLink_H
 #define _DATAFRAMEEspDemoLink_H
 
-#define MAX_FRAMEMODBUS_DATA_LENGTH 400
-
-struct DataFrameEspDemoLink
+struct DataFrameEspDemoLink:public DataFrame
 {
 public:
 	uint8_t dataLength;
-	uint8_t data[MAX_FRAMEMODBUS_DATA_LENGTH];
 	bool isUpdated;
 	int frameLength;//当前数据帧长度
 	int Cnt;//数据帧数量
