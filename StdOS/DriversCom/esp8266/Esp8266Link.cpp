@@ -22,7 +22,7 @@ bool EspDemoLink::Kick(void)
 
 	Sys.Sleep(200);
 
-	this->Receive11();
+	return this->Receive11();
 }
 bool EspDemoLink::Receive11(char const *target, char const *target1)
 {
@@ -82,7 +82,7 @@ bool EspDemoLink::NetModeChoose(ENUMNetModeTypeDef enumMode)
 
 	Sys.Sleep(200);
 
-	this->Receive11("OK", "no change");
+	return this->Receive11("OK", "no change");
 }
 /*
  * 函数名：ESP8266_JoinAP
@@ -119,6 +119,7 @@ bool EspDemoLink::EnableMultipleId(bool enumEnUnvarnishTx)
 	Sys.Sleep(200);
 
 	this->Receive11("OK");
+	return 1;
 }
 /*
  * 函数名：ESP8266_Link_Server
@@ -157,7 +158,7 @@ bool EspDemoLink::LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, EN
 	com << cCmd << "\r\n";
 	Sys.Sleep(200);
 
-	this->Receive11("OK", "ALREAY CONNECT");
+	return this->Receive11("OK", "ALREAY CONNECT");
 }
 /*
  * 函数名：UnvarnishSend
@@ -194,15 +195,13 @@ bool EspDemoLink::UnvarnishSend()
 bool EspDemoLink::SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength, ENUMIDNOTypeDef ucId)
 {
 	char cStr[20];
-	bool bRet = false;
 	if (enumEnUnvarnishTx)
 	{
 		//this->USART_printf("%s", pStr);
 		com << pStr;
 		Sys.Sleep(200);
 
-		return this->Receive11();
-		bRet = true;
+		return this->Receive11();		
 	}
 	else
 	{
@@ -217,7 +216,6 @@ bool EspDemoLink::SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength
 
 		return this->Receive11("SEND OK", "> ");
 	}
-	return bRet;
 }
 void EspDemoLink::EchoOn(bool on)
 {
