@@ -3,7 +3,7 @@
 
 #include "../Core/Type.h"
 
-#define MAX_FRAME_DATA_LENGTH 50
+#define MAX_FRAME_DATA_LENGTH 100
 //#define FRAME_HEADER 0xAA
 
 struct DataFrame
