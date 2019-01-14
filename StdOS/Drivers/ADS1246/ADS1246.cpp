@@ -178,12 +178,12 @@ void ADS1246::Init(void)
 	this->pspi->Open();
     this->pspi->Stop();
     this->ppinreset=0;
-    Sys.Sleep(40);
+    sleep(40);
     this->ppinreset=1;
-    Sys.Sleep(20);
+    sleep(20);
     this->pspi->Start();
     this->WriteReg(ADC_REG_ID, 0x08); //DOUT兼容DRDY引脚   0X4A 00 08
-    Sys.Sleep(40);
+    sleep(40);
     this->WriteReg(ADC_REG_SYS0, this->speed | ADC_GAIN_1); //调整采样速度
     this->pspi->Stop();
 
