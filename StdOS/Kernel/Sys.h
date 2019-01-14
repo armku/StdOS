@@ -6,8 +6,9 @@
 #include "Core\Delegate.h"
 #include "Version.h"
 
-extern "C"
-{
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifdef DEBUG
 	#define debug_printf StdPrintf	
 #else
@@ -15,7 +16,9 @@ extern "C"
 #endif
 	void sleep(int ms); // 毫秒级延迟 用于系统没启动时延时使用
 	void delay(int us); // 微秒级延迟
+#ifdef __cplusplus
 }
+#endif
 
 #ifdef DEBUG
 #define assert(expr, msg) ((expr) ? (void)0 : assert_failed2(msg, (const char*)__FILE__, __LINE__))
