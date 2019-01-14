@@ -96,13 +96,12 @@ void ADS1232::SetGain(Gain gain)
 void ADS1232::Init()
 {   
     this->pwdn = 0; //复位1232，操作前先复位
-    Sys.Delay(20);
+	delay(20);
     this->sclk = 0;
-    Sys.Delay(20);
-    Sys.Delay(20);
+	delay(40);
     //    this->dout = 1; //初始化引脚
     this->pwdn = 1; //开启1232
-    Sys.Delay(20);
+	delay(20);
     this->readCnt = 0;
 	this->CalCnt = 0;
 }
@@ -136,7 +135,7 @@ int ADS1232::Read(bool cal)
 		}
 	}
 	this->Status = temp;
-	//Sys.Delay(20);
+	//delay(20);
 	if (temp < 1000)
 	{
 		valOrigin = 0;

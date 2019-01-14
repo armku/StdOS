@@ -195,9 +195,9 @@ uint8_t SpiSoft::Write(uint8_t data)
 				{
 					this->_mosi = 0;
 				}
-				Sys.Delay(this->delayus);
+				delay(this->delayus);
 				this->_clk = 1;
-				Sys.Delay(this->delayus);
+				delay(this->delayus);
 				this->_clk = 0;
 				ret <<= 1;
 				if (this->_miso.Read())
@@ -213,7 +213,7 @@ uint8_t SpiSoft::Write(uint8_t data)
 			for (i = 0; i < 8; i++)
 			{
 				this->_clk = 1;
-				Sys.Delay(this->delayus);
+				delay(this->delayus);
 				if (data &(1 << (8 - i - 1)))
 				{
 					this->_mosi = 1;
@@ -222,7 +222,7 @@ uint8_t SpiSoft::Write(uint8_t data)
 				{
 					this->_mosi = 0;
 				}
-				Sys.Delay(this->delayus);
+				delay(this->delayus);
 				this->_clk = 0;
 				ret <<= 1;
 				if (this->_miso.Read())
@@ -248,9 +248,9 @@ uint8_t SpiSoft::Write(uint8_t data)
 				{
 					this->_mosi = 0;
 				}
-				Sys.Delay(this->delayus);
+				delay(this->delayus);
 				this->_clk = 0;
-				Sys.Delay(this->delayus);
+				delay(this->delayus);
 				this->_clk = 1;
 				ret <<= 1;
 				if (this->_miso.Read())
@@ -266,7 +266,7 @@ uint8_t SpiSoft::Write(uint8_t data)
 			for (i = 0; i < 8; i++)
 			{
 				this->_clk = 0;
-				Sys.Delay(this->delayus);
+				delay(this->delayus);
 				if (data &(1 << (8 - i - 1)))
 				{
 					this->_mosi = 1;
@@ -275,9 +275,9 @@ uint8_t SpiSoft::Write(uint8_t data)
 				{
 					this->_mosi = 0;
 				}
-				Sys.Delay(this->delayus);
+				delay(this->delayus);
 				this->_clk = 1;
-				Sys.Delay(this->delayus);
+				delay(this->delayus);
 				ret <<= 1;
 				if (this->_miso.Read())
 				{
@@ -318,7 +318,7 @@ void SpiSoft::Close()
 	{
 		this->_clk = 0;
 		this->_mosi = 1;
-		Sys.Delay(this->delayus);
+		delay(this->delayus);
 		this->_clk = 1;
 		this->_mosi = 0;
 	}
