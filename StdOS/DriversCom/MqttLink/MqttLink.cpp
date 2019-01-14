@@ -17,6 +17,7 @@ bool MqttLink::CheckFrame()
 	{
 		rxFrame.dataLength += rxlen;
 	}
+	return true;
 }
 
 bool MqttLink::Send()
@@ -50,6 +51,7 @@ bool MqttLink::Connect()
 	Sys.Sleep(200);
 	
 	this->Receive();
+	return true;
 }
 //接收数据
 bool MqttLink::Receive()
@@ -127,4 +129,5 @@ bool MqttLink::Puslish_Release()
 	this->Send();
 	Sys.Sleep(200);
 	this->Receive();
+	return true;
 }
