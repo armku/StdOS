@@ -863,9 +863,9 @@
               <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusSlave.cpp</FilePath>
             </File>
             <File>
-              <FileName>EspDemoLink.cpp</FileName>
+              <FileName>Esp8266Link.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\esp8266\EspDemoLink.cpp</FilePath>
+              <FilePath>..\StdOS\DriversCom\esp8266\Esp8266Link.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1928,9 +1928,9 @@
               <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusSlave.cpp</FilePath>
             </File>
             <File>
-              <FileName>EspDemoLink.cpp</FileName>
+              <FileName>Esp8266Link.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\esp8266\EspDemoLink.cpp</FilePath>
+              <FilePath>..\StdOS\DriversCom\esp8266\Esp8266Link.cpp</FilePath>
             </File>
           </Files>
         </Group>
