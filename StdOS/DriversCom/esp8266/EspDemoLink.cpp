@@ -263,7 +263,7 @@ void EspDemoLink::Init()
 
 
 
-#include "esp8266/esp8266.h"
+#include "esp8266.h"
 
 
 esp8266::esp8266(USART &usart, uint32_t baudRate)

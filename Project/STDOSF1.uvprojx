@@ -823,11 +823,6 @@
           <GroupName>DriversCom</GroupName>
           <Files>
             <File>
-              <FileName>EspDemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DemoLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\DemoLink\DemoLink.cpp</FilePath>
@@ -866,6 +861,11 @@
               <FileName>ModbusSlave.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusSlave.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspDemoLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\esp8266\EspDemoLink.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -948,11 +948,6 @@
               <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusMasterLinkDemo.cpp</FilePath>
             </File>
             <File>
-              <FileName>EspDemoLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\EspDemoLinkDemo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD7689Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\AD7689\AD7689Demo.cpp</FilePath>
@@ -981,6 +976,11 @@
               <FileName>DS18B20Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\DS18B20\DS18B20Demo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspDemoLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\esp8266\EspDemoLinkDemo.cpp</FilePath>
             </File>
             <File>
               <FileName>DS1302Demo.cpp</FileName>
@@ -1893,11 +1893,6 @@
           <GroupName>DriversCom</GroupName>
           <Files>
             <File>
-              <FileName>EspDemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DemoLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\DemoLink\DemoLink.cpp</FilePath>
@@ -1936,6 +1931,11 @@
               <FileName>ModbusSlave.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusSlave.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspDemoLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\esp8266\EspDemoLink.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2018,11 +2018,6 @@
               <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusMasterLinkDemo.cpp</FilePath>
             </File>
             <File>
-              <FileName>EspDemoLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\EspDemoLinkDemo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD7689Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\AD7689\AD7689Demo.cpp</FilePath>
@@ -2051,6 +2046,11 @@
               <FileName>DS18B20Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\DS18B20\DS18B20Demo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspDemoLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\DriversCom\esp8266\EspDemoLinkDemo.cpp</FilePath>
             </File>
             <File>
               <FileName>DS1302Demo.cpp</FileName>
