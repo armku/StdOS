@@ -65,7 +65,20 @@ void TSys::Sleep(int ms)const
 // 微秒级延迟
 void TSys::Delay(int us)const
 {
-	delay(us);	
+	if (us > 1000000)
+		debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！\n", us);
+	if (us && us >= 1000)
+	{
+		bool cancle = false;
+		int executeus = Task::Scheduler()->ExecuteForWait(us / 1000, cancle) * 1000;
+		if (executeus >= us)
+			return;
+		us -= executeus;
+	}
+	if (us)
+	{
+		delay(us);
+	}
 }
 
 // 延迟异步重启
@@ -307,17 +320,7 @@ void sleep(int ms)
 }
 // 微秒级延迟
 void delay(int us)
-{
-	if (us > 1000000)
-		debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！\n", us);
-	if (us && us >= 1000)
-	{
-		bool cancle = false;
-		int executeus = Task::Scheduler()->ExecuteForWait(us / 1000, cancle) * 1000;
-		if (executeus >= us)
-			return;
-		us -= executeus;
-	}
+{	
 	if (us)
 	{
 		Time.Delay(us);
