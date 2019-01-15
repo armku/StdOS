@@ -299,9 +299,9 @@ void SSD1309::DrawBMP(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1, uint8_t BM
 void SSD1309::Init()
 {
     this->_res = 1;
-    sleep(100);
+    delay_ms(100);
     this->_res = 0;
-    sleep(100);
+    delay_ms(100);
     this->_res = 1;
 	this->_wrcmd(0xFD); //--turn off oled panel
     this->_wrcmd(0x12); //--turn off oled panel	

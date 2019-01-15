@@ -62,7 +62,7 @@ void TSys::Sleep(int ms)const
 	if (!Sys.Started)
 	{
 		//用于系统没启动时延时使用
-		sleep(ms);
+		delay_ms(ms);
 		return;
 	}
 	if (ms > 1000)
@@ -257,7 +257,7 @@ extern "C"
 			BX r14
 	}
 	// 毫秒级延迟 用于系统没启动时延时使用
-	void sleep(int ms)
+	void delay_ms(int ms)
 	{
 		for (int i = 0; i < ms; i++)
 		{
