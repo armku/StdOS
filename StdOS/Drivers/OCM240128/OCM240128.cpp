@@ -226,13 +226,13 @@ void OCM240128::busycheck(uint8_t autowr)
 	//	{
 	//		while((this->pinsta0==0)||(this->pinsta1==0))
 	//		{
-	//			delay(10);
+	//			delay_us(10);
 	//		};
 	//	}
 	//	this->pinrd = 1;
 	//	LCD_DataPort_Out();
 #else
-	delay(10);
+	delay_us(10);
 #endif
 }
 /************************************************************************************************

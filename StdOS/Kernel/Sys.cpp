@@ -95,7 +95,7 @@ void TSys::Delay(int us)const
 	}
 	if (us)
 	{
-		delay(us);
+		delay_us(us);
 	}
 }
 
@@ -261,12 +261,12 @@ extern "C"
 	{
 		for (int i = 0; i < ms; i++)
 		{
-			delay(500);
-			delay(500);
+			delay_us(500);
+			delay_us(500);
 		}
 	}
 	// Î¢Ãë¼¶ÑÓ³Ù
-	void delay(int us)
+	void delay_us(int us)
 	{
 		if (us)
 		{

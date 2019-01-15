@@ -177,7 +177,7 @@ void mWifiinit()
 	pinrst.Open();
 	pinrst = 0;
 
-	delay(500);
+	delay_us(500);
 	pinch = 1;
 	pinrst = 1;
 
