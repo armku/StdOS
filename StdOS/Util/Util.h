@@ -9,4 +9,5 @@
     uint16_t GetBufUshort(uint8_t buf[], uint16_t pos,uint8_t type=0);
     void SetBufUshort(uint8_t buf[], uint16_t pos, uint16_t da,uint8_t type=0); //从电阻获得温度
     float GetTFromPT100(float om);
+	float GetValueDot(float value, int dot);//根据小数点获取值
 #endif

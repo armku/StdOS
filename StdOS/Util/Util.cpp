@@ -1,6 +1,14 @@
 #include <math.h>
 #include "Util.h"
 
+static float DOTMASK[] = { 1,10,100,1000 };
+//根据小数点获取值
+float  GetValueDot(float value, int dot)
+{
+	if (dot > 3)
+		return 0;
+	return value * 1.0 / DOTMASK[dot];
+}
 //排序
 void bubbleSort(float *buf, uint32_t len)
 {
