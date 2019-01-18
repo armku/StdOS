@@ -25,14 +25,13 @@ void MCP3421::MCP3421_WriteOne(uint8_t  dt)
 //3421读数据   --需查看芯片时序图和芯片指令
 int32_t MCP3421::MCP3421_ReadOne(void)
 {
-	int32_t volatil = 0;
-//	uint8_t Step, Temp;
+	volatil = 0;
 	this->IIC.Start();
 	this->IIC.WriteByte(0XD1);
 	this->IIC.WaitAck();
-	auto adh = this->IIC.ReadByte(true);
-	auto adm = this->IIC.ReadByte(true);
-	auto adl = this->IIC.ReadByte(false);
+	adh = this->IIC.ReadByte(true);
+	adm = this->IIC.ReadByte(true);
+	adl = this->IIC.ReadByte(false);
 	volatil = adh;
 	volatil <<= 8;
 	volatil += adm;
@@ -42,12 +41,13 @@ int32_t MCP3421::MCP3421_ReadOne(void)
 	
 	this->IIC.WaitAck();
 	this->IIC.Stop();
-	volatil |= 0X3FFFF;
 	if (volatil & 0x20000)//最高位为符号为   当采集负数时需特殊处理
 	{
 		volatil |= 0XFFFE0000;
 	}
-	return volatil;
+	this->adOrigin = volatil;
+	this->Value = this->adOrigin;
+	return this->adOrigin;
 }
 int32_t MCP3421::GetADValue(_Gain3421 gain)
 {
@@ -59,5 +59,6 @@ int32_t MCP3421::GetADValue(_Gain3421 gain)
 float MCP3421::GetVolt()
 {
 	auto val = this->GetADValue(GAIN1);
-	return val * 2.048 / 0X20000;
+	this->ValueVolt= val * 2.048 / 0X20000;
+	return this->ValueVolt;
 }

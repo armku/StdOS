@@ -22,9 +22,15 @@ public:
 	float GetVolt();
 private:
 	SoftI2C IIC; // I2C通信口
-	//uint8_t Address; // 设备地址
 	void MCP3421_WriteOne(uint8_t  dt);
 	int32_t MCP3421_ReadOne(void);
+	int32_t adOrigin;//ad原始值
+	float Value;//测量值
+	float ValueVolt;//电压值
+	uint8_t adh;//原始字节
+	uint8_t adm;//原始字节
+	uint8_t adl;//原始字节
+	uint32_t volatil;//字节汇总
 };
 
 #endif // !_MCP3421_H
