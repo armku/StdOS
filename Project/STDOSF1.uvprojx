@@ -1039,6 +1039,21 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>std_mcu</GroupName>
+          <Files>
+            <File>
+              <FileName>std_gpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\port\std_gpio.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>std_port_gpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\port\std_port_gpio.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -2071,6 +2086,21 @@
               <FileName>Esp8266LinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\esp8266\Esp8266LinkDemo.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>std_mcu</GroupName>
+          <Files>
+            <File>
+              <FileName>std_gpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\port\std_gpio.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>std_port_gpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\port\std_port_gpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
