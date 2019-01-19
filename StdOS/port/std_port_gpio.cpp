@@ -8,7 +8,7 @@ void mcuGpio::SetPin(Pin pin)
 	this->id = pin;
 	
 	this->_port = (GPIO_TypeDef*)(GPIOA_BASE << (pin >> 4));
-	this->_pin = 1 << (pin % 10);// GPIO_Pin_0;
+	this->_pin = 1 << (pin % 16);// GPIO_Pin_0;
 }
 /**
   *@brief    ¹¹Ôìº¯Êý
