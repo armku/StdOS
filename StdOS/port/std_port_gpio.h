@@ -9,6 +9,7 @@ class mcuGpio : public Gpio
 public:
 	mcuGpio() {}
 	mcuGpio(GPIO_TypeDef *port, uint16_t pin);
+	virtual void SetPin(Pin pin);//…Ë÷√π‹Ω≈
 	virtual void mode(PIN_MODE mode);
 	virtual void mode(PIN_MODE mode, uint8_t af_configration);
 	virtual void set();

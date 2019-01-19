@@ -1,5 +1,18 @@
 #include "std_port_gpio.h"
 
+//设置管脚
+void mcuGpio::SetPin(Pin pin)
+{
+	this->id = pin;
+	switch (pin / 16)
+	{
+	case 0:
+		this->_port = GPIOB;
+		this->_pin = GPIO_Pin_0;
+
+		break;
+	}
+}
 /**
   *@brief    构造函数
   *@param    port port; pin pin
