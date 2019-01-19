@@ -3,15 +3,16 @@
 //设置管脚
 void mcuGpio::SetPin(Pin pin)
 {
+	//this->_port = GPIOA;
+	//this->_pin = GPIO_Pin_0;
 	this->id = pin;
 	switch (pin / 16)
 	{
 	case 0:
-		this->_port = GPIOB;
-		this->_pin = GPIO_Pin_0;
-
+		this->_port = GPIOA;
 		break;
 	}
+	this->_pin = 1 << (pin % 10);// GPIO_Pin_0;
 }
 /**
   *@brief    构造函数
