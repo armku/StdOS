@@ -10,8 +10,7 @@ class Port:public mcuGpio
 {
 public:	
     Port();
-    //Port& Set(Pin pin);	// 设置引脚
-	bool Open();
+    bool Open();
 	virtual bool Read() const;
 protected:
     // 配置过程
