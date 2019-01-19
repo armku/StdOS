@@ -1,5 +1,12 @@
 #include "std_gpio.h"
 
+Gpio::Gpio()
+{ 
+	this->_Pin = P0; 
+	this->Opened = false; 
+}
+
+
 bool Gpio::Empty()const
 {
 	return _Pin == P0;

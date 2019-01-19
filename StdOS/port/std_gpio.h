@@ -34,7 +34,7 @@ typedef enum
 class Gpio
 {
 public:
-	Gpio() { this->_Pin = P0; };
+	Gpio();
 	virtual void SetPin(Pin pin)=0;//…Ë÷√π‹Ω≈
 	virtual void mode(PIN_MODE mode) = 0;
 	virtual void mode(PIN_MODE mode, uint8_t af_configration) = 0;
