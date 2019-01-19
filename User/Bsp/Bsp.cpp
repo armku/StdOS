@@ -2,15 +2,16 @@
 #include "OnChip/USART.h"
 #include "Sys.h"
 #include "Buffer.h"
+#include  "port/std_port_gpio.h"
 
 char *AppVersion = "0.1.2018.1115"; //°æ±¾ºÅ
 
 OutputPort led1;
+mcuGpio gipopb0(GPIOB, GPIO_Pin_0);
 
 void LedTask(void *param)
 {
-	auto leds = (OutputPort*)param;
-	*leds = !* leds;
+	gipopb0 = !gipopb0;
 }
 
 USART usart111(USART1, 115200);
