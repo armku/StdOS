@@ -6,7 +6,7 @@
 
 char *AppVersion = "0.1.2018.1115"; //°æ±¾ºÅ
 
-mcuGpio led1(GPIOB, GPIO_Pin_0);
+mcuGpio led1;// (GPIOB, GPIO_Pin_0);
 
 void LedTask(void *param)
 {
