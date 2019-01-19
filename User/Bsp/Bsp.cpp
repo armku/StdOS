@@ -6,7 +6,6 @@
 
 char *AppVersion = "0.1.2018.1115"; //°æ±¾ºÅ
 
-OutputPort led1;
 mcuGpio gipopb0(GPIOB, GPIO_Pin_0);
 
 void LedTask(void *param)
@@ -38,7 +37,7 @@ void BspInit()
 {
 	gipopb0.mode(PIN_MODE::OUTPUT_PP);
 	
-	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
+	Sys.AddTask(LedTask, &gipopb0, 0, 500, "LedTask");
 
 	//usart111.OnReceive = Com1test;
 	//MqttLinkTestInit();
