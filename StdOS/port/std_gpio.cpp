@@ -15,3 +15,18 @@ void Gpio::Close()
 		}
 	}
 }
+
+/*
+单一引脚初始化
+ */
+Gpio &Gpio::Set(Pin pin)
+{
+	if (this->_Pin != pin)
+	{
+		if (this->_Pin != P0)
+			this->Close();
+		this->_Pin = pin;
+
+	}
+	return  *this;
+}

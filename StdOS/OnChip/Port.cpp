@@ -25,20 +25,20 @@ Port::Port()
 	this->Opened = false;
 }
 
-/*
-单一引脚初始化
- */
-Port &Port::Set(Pin pin)
-{
-	if (this->_Pin != pin)
-	{
-		if (this->_Pin != P0)
-			this->Close();
-		this->_Pin = pin;
-
-	}
-	return  *this;
-}
+///*
+//单一引脚初始化
+// */
+//Port &Port::Set(Pin pin)
+//{
+//	if (this->_Pin != pin)
+//	{
+//		if (this->_Pin != P0)
+//			this->Close();
+//		this->_Pin = pin;
+//
+//	}
+//	return  *this;
+//}
 
 OutputPort::OutputPort()
 {
