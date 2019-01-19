@@ -46,8 +46,10 @@ public:
 	virtual uint8_t read(void) = 0;
 	virtual void toggle() = 0;
 
+public:
 	//Pin id;
 	Pin _Pin;
+	bool	Opened;		// 是否已经打开
 };
 
 #endif // !_STD_GPIO_H
