@@ -3,9 +3,10 @@
 
 #include "Core\Type.h"
 #include "Platform\Pin.h"
+#include "port/std_port_gpio.h"
 
 // 端口基类
-class Port
+class Port:public mcuGpio
 {
 public:	
     Pin		_Pin;		// 引脚  
