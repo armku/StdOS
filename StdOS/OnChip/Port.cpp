@@ -40,22 +40,6 @@ Port &Port::Set(Pin pin)
 	return  *this;
 }
 
-//bool Port::Empty()const
-//{
-//	return _Pin == P0;
-//}
-
-//void Port::Close()
-//{
-//	if (this->Opened)
-//	{
-//		if (this->_Pin != P0)
-//		{
-//			this->Opened = false;
-//		}
-//	}
-//}
-
 OutputPort::OutputPort()
 {
 	this->Invert = 2;

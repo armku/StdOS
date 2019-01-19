@@ -9,19 +9,10 @@
 class Port:public mcuGpio
 {
 public:	
-    //Pin		_Pin;		// 引脚  
-	//bool	Opened;		// 是否已经打开
-
-	Port();
-
+    Port();
     Port& Set(Pin pin);	// 设置引脚
-	//bool Empty() const;
-
 	bool Open();
-	/*void Close();*/
-
 	virtual bool Read() const;
-
 protected:
     // 配置过程
     virtual void OnOpen(void* param);
