@@ -5,9 +5,45 @@ void mcuGpio::SetPin(Pin pin)
 {
 	//this->_port = GPIOA;
 	//this->_pin = GPIO_Pin_0;
-	this->id = pin;
 	
-	this->_port = (GPIO_TypeDef*)(GPIOA_BASE << (pin >> 4));
+	this->id = pin;
+	switch (pin>>4)
+	{
+	case PA0:
+		this->_port =GPIOA;
+		break;
+	case PB0:
+		this->_port = GPIOB;
+		break;
+	case PC0:
+		this->_port = GPIOC;
+		break;
+	case PD0:
+		this->_port = GPIOD;
+		break;
+	case PE0:
+		this->_port = GPIOE;
+		break;
+	case PF0:
+		this->_port = GPIOF;
+		break;
+	case PG0:
+		this->_port = GPIOG;
+		break;
+	case PH0:
+#ifdef STM32F10X_HD
+		this->_port = GPIOH;
+#endif // STM32F10X_HD
+		break;
+	case PI0:
+#ifdef STM32F10X_HD
+		this->_port = GPIOI;
+#endif // STM32F10X_HD
+		break;
+	default:
+		break;
+	}
+
 	this->_pin = 1 << (pin % 16);// GPIO_Pin_0;
 }
 /**

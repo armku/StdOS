@@ -35,7 +35,7 @@ void ModbusMasterLinkTestInit();
 void EspDemoLinkTestInit();
 void BspInit()
 {
-	//led1.SetPin(PB0);
+	led1.SetPin(PB0);
 	led1.mode(PIN_MODE::OUTPUT_PP);
 	
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
