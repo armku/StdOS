@@ -9,7 +9,7 @@
 class Port:public mcuGpio
 {
 public:	
-    Pin		_Pin;		// 引脚  
+    //Pin		_Pin;		// 引脚  
 	bool	Opened;		// 是否已经打开
 
 	Port();
