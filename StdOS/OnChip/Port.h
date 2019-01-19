@@ -9,7 +9,6 @@
 class Port:public mcuGpio
 {
 public:	
-    Port();
     bool Open();
 	virtual bool Read() const;
 protected:

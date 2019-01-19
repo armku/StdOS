@@ -19,12 +19,6 @@
 #error "请在Keil项目配置C/C++页定义芯片平台，如STM32F0/STM32F1/STM32F2/STM32F3/STM32F4/GD32F150"
 #endif
 
-Port::Port()
-{
-	this->_Pin = P0;
-	this->Opened = false;
-}
-
 OutputPort::OutputPort()
 {
 	this->Invert = 2;
