@@ -46,7 +46,8 @@ public:
 	virtual uint8_t read(void) = 0;
 	virtual void toggle() = 0;
 
-	Pin id;
+	//Pin id;
+	Pin _Pin;
 };
 
 #endif // !_STD_GPIO_H

@@ -6,7 +6,7 @@ void mcuGpio::SetPin(Pin pin)
 	//this->_port = GPIOA;
 	//this->_pin = GPIO_Pin_0;
 	
-	this->id = pin;
+	this->_Pin = pin;
 	switch (pin>>4)
 	{
 	case PA0>>4:
@@ -66,7 +66,7 @@ mcuGpio::mcuGpio(GPIO_TypeDef *port, uint16_t pin)
 			break;
 		}
 	}
-	this->id = (Pin)(temp1 * 16 + temp2);
+	this->_Pin = (Pin)(temp1 * 16 + temp2);
 }
 /**
   *@brief    GPIOÄ£Ê½ÉèÖÃ
