@@ -6,11 +6,11 @@
 
 char *AppVersion = "0.1.2018.1115"; //°æ±¾ºÅ
 
-mcuGpio gipopb0(GPIOB, GPIO_Pin_0);
+mcuGpio led1(GPIOB, GPIO_Pin_0);
 
 void LedTask(void *param)
 {
-	gipopb0 = !gipopb0;
+	led1 = !led1;
 }
 
 USART usart111(USART1, 115200);
@@ -35,9 +35,9 @@ void ModbusMasterLinkTestInit();
 void EspDemoLinkTestInit();
 void BspInit()
 {
-	gipopb0.mode(PIN_MODE::OUTPUT_PP);
+	led1.mode(PIN_MODE::OUTPUT_PP);
 	
-	Sys.AddTask(LedTask, &gipopb0, 0, 500, "LedTask");
+	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
 	//usart111.OnReceive = Com1test;
 	//MqttLinkTestInit();
