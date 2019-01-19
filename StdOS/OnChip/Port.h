@@ -15,10 +15,10 @@ public:
 	Port();
 
     Port& Set(Pin pin);	// …Ë÷√“˝Ω≈
-	bool Empty() const;
+	//bool Empty() const;
 
 	bool Open();
-	void Close();
+	/*void Close();*/
 
 	virtual bool Read() const;
 

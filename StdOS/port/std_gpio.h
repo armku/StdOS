@@ -47,6 +47,9 @@ public:
 	virtual void toggle() = 0;
 
 public:
+	bool Empty() const;
+	void Close();
+public:
 	//Pin id;
 	Pin _Pin;
 	bool	Opened;		// 是否已经打开
