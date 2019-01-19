@@ -6,12 +6,8 @@ void mcuGpio::SetPin(Pin pin)
 	//this->_port = GPIOA;
 	//this->_pin = GPIO_Pin_0;
 	this->id = pin;
-	switch (pin / 16)
-	{
-	case 0:
-		this->_port = GPIOA;
-		break;
-	}
+	
+	this->_port = RCC_APB2Periph_GPIOA << (pin >> 4);
 	this->_pin = 1 << (pin % 10);// GPIO_Pin_0;
 }
 /**
