@@ -22,7 +22,7 @@
     {
         public:
 			#if ADS1246SPISOFT
-				ADS1246(SpiSoft *spi,InputPort &pinrd, Pin pinreset,ADSPEEDTYPE spd);
+				ADS1246(SpiSoft *spi,mcuGpio &pinrd, Pin pinreset,ADSPEEDTYPE spd);
 			#else
 				ADS1246(Spi *spi,InputPort &pinrd, Pin pinreset,ADSPEEDTYPE spd);
 			#endif

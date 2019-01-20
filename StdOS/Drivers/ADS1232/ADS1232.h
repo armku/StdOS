@@ -26,7 +26,7 @@
             void SetGain(Gain gain = GAIN1);
             int Read(bool cal=false);
         private:
-            InputPort dout;
+			mcuGpio dout;
             OutputPort sclk;
             OutputPort pwdn;
             OutputPort pSpeed;

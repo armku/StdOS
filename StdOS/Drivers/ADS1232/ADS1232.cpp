@@ -15,9 +15,9 @@ void ADS1232::SetPin(Pin pdout, Pin psclk, Pin ppwdn)
     this->sclk.OpenDrain = false;
     this->pwdn.OpenDrain = false;
 
-    this->dout.Open();
-    this->sclk.Open();
-    this->pwdn.Open();
+    this->dout.mode(PIN_MODE::INPUT);
+    this->sclk.mode(PIN_MODE::OUTPUT_OD);
+    this->pwdn.mode(PIN_MODE::OUTPUT_OD);
 
     //this->dout = 1;
     this->sclk = 0;

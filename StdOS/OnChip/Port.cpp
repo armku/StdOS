@@ -103,20 +103,6 @@ void OutputPort::Write(Pin pin, bool value)
 		GPIO_ResetBits(_GROUP(pin), _PORT(pin));
 	}
 }
-
-void InputPort::OnOpen(void *param)
-{
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-	gpio->GPIO_Speed = GPIO_Speed_50MHz;
-	if (Floating)
-		gpio->GPIO_Mode = GPIO_Mode_IN_FLOATING;
-	else if (Pull == UP)
-		gpio->GPIO_Mode = GPIO_Mode_IPU;
-	else if (Pull == DOWN)
-		gpio->GPIO_Mode = GPIO_Mode_IPD;
-	// 这里很不确定，需要根据实际进行调整   
-}
-
 void OutputPort::Write(bool value)
 {
 	if (this->_Pin == P0)

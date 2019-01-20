@@ -33,24 +33,4 @@ protected:
 	virtual void OpenPin(void* param);
 };
 
-// 输入口
-class InputPort : public Port
-{
-public:
-    typedef enum
-    {
-        NOPULL	= 0x00,
-        UP		= 0x01,	// 上拉电阻
-        DOWN	= 0x02,	// 下拉电阻
-    }PuPd;
-	    
-    bool	Floating	= true;	// 是否浮空输入
-    PuPd	Pull		= UP;	// 上拉下拉电阻
-	
-	InputPort(){}
-
-protected:
-    virtual void OnOpen(void* param);
-};
-
 #endif //_Port_H_
