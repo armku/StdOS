@@ -87,6 +87,7 @@ bool Port::Open()
 			// 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
 			GPIO_StructInit(&gpio);
 			gpio.GPIO_Pin = 1 << (this->_Pin & 0x0F);
+			gpio.GPIO_Speed = GPIO_Speed_50MHz;
 			this->OnOpen(&gpio);
 
 			GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
