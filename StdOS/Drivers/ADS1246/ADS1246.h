@@ -49,7 +49,7 @@
 			#else
 				Spi *pspi; //SPI接口
 			#endif
-            InputPort *ppinrd; //数据准备好接口
+            mcuGpio *ppinrd; //数据准备好接口
             mcuGpio ppinreset; //复位接口		
     };
 #endif
