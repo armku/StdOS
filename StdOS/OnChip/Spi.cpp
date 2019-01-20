@@ -4,15 +4,10 @@
 
 void Spi::Init()
 {
-	this->_clk.Invert = false;
-	this->_miso.Invert = false;
-	this->_mosi.Invert = false;
-	this->_nss.Invert = false;
-
-	this->_clk.OpenDrain = false;
-	this->_miso.OpenDrain = false;
-	this->_mosi.OpenDrain = false;
-	this->_nss.OpenDrain = false;
+	this->_clk.mode(PIN_MODE::AF_PP_PD);
+	this->_miso.mode(PIN_MODE::AF_PP_PD);
+	this->_mosi.mode(PIN_MODE::AF_PP_PD);
+	this->_nss.mode(PIN_MODE::AF_PP_PD);
 
 	this->Retry = 200; //默认重试次数为200
 }
@@ -871,11 +866,11 @@ void Spi::OnClose()
 	}
 	SPI_I2S_DeInit((SPI_TypeDef*)(this->_SPI));
 	debug_printf("    CLK : ");
-	this->_clk.Set(P0);
+	this->_clk.SetPin(P0);
 	debug_printf("    MISO: ");
-	this->_miso.Set(P0);
+	this->_miso.SetPin(P0);
 	debug_printf("    MOSI: ");
-	this->_mosi.Set(P0);
+	this->_mosi.SetPin(P0);
 	debug_printf("    NSS : ");
 	this->_nss.Set(P0);
 
