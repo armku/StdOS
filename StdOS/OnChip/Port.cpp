@@ -45,18 +45,6 @@ void OutputPort::OnOpen(void *param)
 	this->OpenPin(param);
 }
 
-// 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
-bool InputPort::Read()
-{
-	return this->Invert ? !mcuGpio::read() : mcuGpio::read();
-}
-
-bool OutputPort::Read()
-{
-	return this->Invert ? !mcuGpio::read() : mcuGpio::read();
-}
-
-
 bool Port::Open()
 {
 	if (this->Opened == false)

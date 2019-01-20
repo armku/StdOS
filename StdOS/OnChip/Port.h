@@ -22,8 +22,7 @@ public:
 	
     void Write(bool value) ;
 	// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
-    virtual bool Read() ;
-	uint8_t ReadInput();
+    uint8_t ReadInput();
 
     static void Write(Pin pin, bool value);
 
@@ -51,8 +50,6 @@ public:
     PuPd	Pull		= UP;	// 上拉下拉电阻
 	
 	InputPort(){}
-	// 读取状态
-    virtual bool Read() ;
 
 protected:
     virtual void OnOpen(void* param);

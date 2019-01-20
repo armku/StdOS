@@ -22,6 +22,9 @@ public:
 	operator int();
 	int operator =(mcuGpio &);
 	mcuGpio operator = (int value);
+	// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
+	virtual bool Read();
+	uint8_t ReadInput();
 
 public:
 	GPIO_TypeDef *_port; /**< 引脚的端口 */

@@ -232,6 +232,12 @@ mcuGpio mcuGpio::operator= (int value)
 	return *this;
 }
 
+// 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
+bool mcuGpio::Read()
+{
+	return this->Invert ? !read() : read();
+}
+
 
 //
 void OpenPeriphClock(Pin pin)
