@@ -79,17 +79,11 @@ void Port_OnOpen(Pin pin)
 
 void OpenPeriphClock(Pin pin)
 {
-	#if defined STM32F0
-	#elif defined STM32F1
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << (pin >> 4), ENABLE);
-	#elif defined STM32F4
-	#endif
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << (pin >> 4), ENABLE);	
 }
 
 bool Port::Open()
 {
-#if defined STM32F0
-#elif defined STM32F1
 	if (this->Opened == false)
 	{
 		if (_Pin != P0)
@@ -124,14 +118,10 @@ bool Port::Open()
 		this->Opened = true;
 	}
 	return true;
-#elif defined STM32F4	
-#endif
 }
 
 void OutputPort::OpenPin(void *param)
 {
-#if defined STM32F0	
-#elif defined STM32F1
 	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
 
 	if (this->OpenDrain)
@@ -142,19 +132,13 @@ void OutputPort::OpenPin(void *param)
 	{
 		gpio->GPIO_Mode = GPIO_Mode_Out_PP;
 	}
-#elif defined STM32F4	
-#endif
 }
 void AlternatePort::OpenPin(void *param)
 {
-#if defined STM32F0	
-#elif defined STM32F1
 	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
 	gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
 	int i = 0;
 	i++;
-#elif defined STM32F4	
-#endif
 }
 
 ///////////////////////////////以下为添加///////////////////////////////////////
@@ -164,27 +148,16 @@ void AlternatePort::OpenPin(void *param)
 
 GPIO_TypeDef *IndexToGroup(uint8_t index)
 {
-#if defined STM32F0
-	
-#elif defined STM32F1
 	return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
-#elif defined STM32F4
-#endif
 }
 
 uint8_t GroupToIndex(GPIO_TypeDef *group)
 {
-#if defined STM32F0
-#elif defined STM32F1
 	return (uint8_t)(((int)group - GPIOA_BASE) >> 10);
-#elif defined STM32F4
-#endif
 }
 
 void OutputPort::Write(Pin pin, bool value)
 {
-#if defined STM32F0	
-#elif defined STM32F1
 	if (value)
 	{
 		GPIO_SetBits(_GROUP(pin), _PORT(pin));
@@ -193,14 +166,10 @@ void OutputPort::Write(Pin pin, bool value)
 	{
 		GPIO_ResetBits(_GROUP(pin), _PORT(pin));
 	}
-#elif defined STM32F4	
-#endif
 }
 
 void InputPort::OnOpen(void *param)
 {
-#if defined STM32F0	
-#elif defined STM32F1
 	Port::OnOpen(param);
 	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
 	if (Floating)
@@ -209,15 +178,11 @@ void InputPort::OnOpen(void *param)
 		gpio->GPIO_Mode = GPIO_Mode_IPU;
 	else if (Pull == DOWN)
 		gpio->GPIO_Mode = GPIO_Mode_IPD;
-	// 这里很不确定，需要根据实际进行调整     
-#elif defined STM32F4	
-#endif
+	// 这里很不确定，需要根据实际进行调整   
 }
 
 void OutputPort::Write(bool value)const
 {
-#if defined STM32F0	
-#elif defined STM32F1
 	if (this->_Pin == P0)
 		return;
 	if (this->Invert)
@@ -242,26 +207,16 @@ void OutputPort::Write(bool value)const
 			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
 		}
 	}
-#elif defined STM32F4	
-#endif
 }
 
 void Port::OnOpen(void *param)
 {
-#if defined STM32F0	
-#elif defined STM32F1
 	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
 	gpio->GPIO_Speed = GPIO_Speed_50MHz;
-#elif defined STM32F4	
-#endif
 }
 
 bool Port::Read()const
 {
-#if defined STM32F0	
-#elif defined STM32F1
 	GPIO_TypeDef *group = _GROUP(this->_Pin);
 	return (group->IDR >> (this->_Pin & 0xF)) & 1;
-#elif defined STM32F4
-#endif
 }
