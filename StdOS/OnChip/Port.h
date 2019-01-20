@@ -10,7 +10,6 @@ class Port:public mcuGpio
 {
 public:	
     bool Open();
-	/*virtual bool Read() const;*/
 };
 // Êä³ö¿Ú
 class OutputPort : public Port
