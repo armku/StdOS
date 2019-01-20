@@ -40,7 +40,8 @@ bool OutputPort::ReadInput()const
 
 void OutputPort::OnOpen(void *param)
 {
-	Port::OnOpen(param);
+	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+	gpio->GPIO_Speed = GPIO_Speed_50MHz;
 	this->OpenPin(param);
 }
 
@@ -88,7 +89,6 @@ bool Port::Open()
 			GPIO_StructInit(&gpio);
 			gpio.GPIO_Pin = 1 << (this->_Pin & 0x0F);
 			gpio.GPIO_Speed = GPIO_Speed_50MHz;
-			this->OnOpen(&gpio);
 
 			GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
 		}
@@ -137,8 +137,8 @@ void OutputPort::Write(Pin pin, bool value)
 
 void InputPort::OnOpen(void *param)
 {
-	Port::OnOpen(param);
 	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+	gpio->GPIO_Speed = GPIO_Speed_50MHz;
 	if (Floating)
 		gpio->GPIO_Mode = GPIO_Mode_IN_FLOATING;
 	else if (Pull == UP)
