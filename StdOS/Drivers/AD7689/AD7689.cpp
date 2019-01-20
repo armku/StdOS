@@ -15,13 +15,7 @@ CAD7689::CAD7689()
     this->ppinsdi.Invert=false;
     this->ppinsdo.Invert=false;
     this->ppincnv.Invert=false;  
-
-	this->ppinsck.OpenDrain = false;
-	this->ppinsdi.OpenDrain = false;
-	//this->ppinsdo.OpenDrain = false;
-	this->ppincnv.OpenDrain = false;
-
-	
+			
 	for (uint8_t i = 0; i < MAXCH; i++)
     {
         this->FlagEnable[i] = 1;

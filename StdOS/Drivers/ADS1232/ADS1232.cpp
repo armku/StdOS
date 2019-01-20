@@ -10,11 +10,7 @@ void ADS1232::SetPin(Pin pdout, Pin psclk, Pin ppwdn)
     this->dout.Invert = false;
     this->sclk.Invert = false;
     this->pwdn.Invert = false;
-
-    //	this->dout.OpenDrain=false;
-    this->sclk.OpenDrain = false;
-    this->pwdn.OpenDrain = false;
-
+	
     this->dout.mode(PIN_MODE::INPUT);
     this->sclk.mode(PIN_MODE::OUTPUT_OD);
     this->pwdn.mode(PIN_MODE::OUTPUT_OD);
@@ -28,8 +24,7 @@ void ADS1232::SetPinSpeed(Pin pin)
 {
     this->pSpeed.Set(pin);
     this->pSpeed.Invert = false;
-    this->pSpeed.OpenDrain = false;
-    this->pSpeed.Open();
+    this->pSpeed.mode(PIN_MODE::OUTPUT_OD_PU);
 }
 
 void ADS1232::SetPinGain(Pin gain0, Pin gain1)
@@ -39,12 +34,9 @@ void ADS1232::SetPinGain(Pin gain0, Pin gain1)
 
     this->pGain0.Invert = false;
     this->pGain1.Invert = false;
-
-    this->pGain0.OpenDrain = false;
-    this->pGain1.OpenDrain = false;
-
-    this->pGain0.Open();
-    this->pGain1.Open();
+	    
+    this->pGain0.mode(PIN_MODE::OUTPUT_OD_PU);
+    this->pGain1.mode(PIN_MODE::OUTPUT_OD_PU);
 }
 
 void ADS1232::SetSpeed(Speed speed)

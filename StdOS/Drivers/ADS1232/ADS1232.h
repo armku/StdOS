@@ -27,11 +27,11 @@
             int Read(bool cal=false);
         private:
 			mcuGpio dout;
-            OutputPort sclk;
-            OutputPort pwdn;
-            OutputPort pSpeed;
-            OutputPort pGain0;
-            OutputPort pGain1;
+			mcuGpio sclk;
+			mcuGpio pwdn;
+			mcuGpio pSpeed;
+			mcuGpio pGain0;
+			mcuGpio pGain1;
         private:            
             int oldval;
     };
