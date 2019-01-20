@@ -60,7 +60,7 @@ public:
 	InputPort(){}
 	// ¶ÁÈ¡×´Ì¬
     virtual bool Read() ;
-    operator bool()  { return Read(); }
+    /*operator bool()  { return Read(); }*/
 
 protected:
     virtual void OnOpen(void* param);
