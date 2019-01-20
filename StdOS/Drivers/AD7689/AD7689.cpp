@@ -32,15 +32,15 @@ CAD7689::CAD7689()
 
 void CAD7689::SetPin(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
 {
-	this->ppinsck.Set(pinsck);
-    this->ppinsdi.Set(pinsdi);
-    this->ppinsdo.Set(pinsdo);
-    this->ppincnv.Set(pincnv);
+	this->ppinsck.SetPin(pinsck);
+    this->ppinsdi.SetPin(pinsdi);
+    this->ppinsdo.SetPin(pinsdo);
+    this->ppincnv.SetPin(pincnv);
 	
-	this->ppinsck.Open();
-    this->ppinsdi.Open();
-    this->ppinsdo.Open();
-    this->ppincnv.Open();
+	this->ppinsck.mode(PIN_MODE::OUTPUT_OD);
+    this->ppinsdi.mode(PIN_MODE::OUTPUT_OD);
+    this->ppinsdo.mode(PIN_MODE::INPUT);
+    this->ppincnv.mode(PIN_MODE::OUTPUT_OD);
 }
 
 uint16_t CAD7689::AD_Read(void)
