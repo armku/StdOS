@@ -34,7 +34,7 @@ public:
 	void SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect = P0);
 	uint8_t CheckOk();
 
-	OutputPort pinWP; //保护引脚
+	mcuGpio pinWP; //保护引脚
 private:
 	uint8_t checkDevice();
 	uint16_t jsPageSize(uint32_t type); //计算存储页大小
