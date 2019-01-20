@@ -15,7 +15,6 @@ public:
 class OutputPort : public Port
 {
 public:
-    uint8_t Invert		= 2;		// 是否倒置输入输出。默认2表示自动检测
     bool OpenDrain	= false;	// 是否开漏输出
 
     OutputPort();
@@ -55,7 +54,6 @@ public:
         DOWN	= 0x02,	// 下拉电阻
     }PuPd;
 	    
-    uint8_t	Invert		= 2;	// 是否倒置输入输出。默认2表示自动检测
     bool	Floating	= true;	// 是否浮空输入
     PuPd	Pull		= UP;	// 上拉下拉电阻
 	

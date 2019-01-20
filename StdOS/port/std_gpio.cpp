@@ -4,6 +4,7 @@ Gpio::Gpio()
 { 
 	this->_Pin = P0; 
 	this->Opened = false; 
+	this->Invert = 0;
 }
 
 
