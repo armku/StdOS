@@ -26,7 +26,6 @@ public:
 
 protected:
     virtual void OnOpen(void* param);
-	virtual void OpenPin(void* param);
 };
 
 #endif //_Port_H_

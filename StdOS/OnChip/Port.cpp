@@ -34,7 +34,6 @@ void OutputPort::OnOpen(void *param)
 {
 	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
 	gpio->GPIO_Speed = GPIO_Speed_50MHz;
-	this->OpenPin(param);
 }
 
 bool Port::Open()
@@ -75,16 +74,3 @@ bool Port::Open()
 	return true;
 }
 
-void OutputPort::OpenPin(void *param)
-{
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-
-	if (this->OpenDrain)
-	{
-		gpio->GPIO_Mode = GPIO_Mode_Out_OD;
-	}
-	else
-	{
-		gpio->GPIO_Mode = GPIO_Mode_Out_PP;
-	}
-}
