@@ -21,16 +21,16 @@ public:
     OutputPort();
     OutputPort(Pin pin, uint8_t invert, bool openDrain = false);
 	
-    void Write(bool value) const;
+    void Write(bool value) ;
 	// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
-    virtual bool Read() const;
-	bool ReadInput() const;
+    virtual bool Read() ;
+	uint8_t ReadInput();
 
     static void Write(Pin pin, bool value);
 
     OutputPort& operator=(bool value) { Write(value); return *this; }
     OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }
-    operator bool() const { return Read(); }
+    operator bool()  { return Read(); }
 
 protected:
     virtual void OnOpen(void* param);
@@ -61,8 +61,8 @@ public:
 	
 	InputPort(){}
 	// 读取状态
-    virtual bool Read() const;
-    operator bool() const { return Read(); }
+    virtual bool Read() ;
+    operator bool()  { return Read(); }
 
 protected:
     virtual void OnOpen(void* param);

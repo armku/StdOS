@@ -30,12 +30,12 @@ OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain)
 	}
 }
 
-bool OutputPort::ReadInput()const
+uint8_t OutputPort::ReadInput()
 {
 	if (this->Empty())
 		return false;
 	else
-		return this->Invert ? !Port::Read() : Port::Read();
+		return this->Invert ? !mcuGpio::read() : mcuGpio::read();
 }
 
 void OutputPort::OnOpen(void *param)
@@ -49,14 +49,14 @@ AlternatePort::AlternatePort() : OutputPort(P0, 0, false)
 {}
 
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
-bool InputPort::Read()const
+bool InputPort::Read()
 {
-	return this->Invert ? !Port::Read() : Port::Read();
+	return this->Invert ? !mcuGpio::read() : mcuGpio::read();
 }
 
-bool OutputPort::Read()const
+bool OutputPort::Read()
 {
-	return this->Invert ? !Port::Read() : Port::Read();
+	return this->Invert ? !mcuGpio::read() : mcuGpio::read();
 }
 
 
@@ -148,7 +148,7 @@ void InputPort::OnOpen(void *param)
 	// 这里很不确定，需要根据实际进行调整   
 }
 
-void OutputPort::Write(bool value)const
+void OutputPort::Write(bool value)
 {
 	if (this->_Pin == P0)
 		return;
