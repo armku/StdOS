@@ -237,6 +237,47 @@ bool mcuGpio::Read()
 {
 	return this->Invert ? !read() : read();
 }
+// 获取组和针脚
+#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (uint16_t)0xF0) << 6)))
+#define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
+void mcuGpio::Write(Pin pin, bool value)
+{
+	if (value)
+	{
+		GPIO_SetBits(_GROUP(pin), _PORT(pin));
+	}
+	else
+	{
+		GPIO_ResetBits(_GROUP(pin), _PORT(pin));
+	}
+}
+void mcuGpio::Write(bool value)
+{
+	if (this->_Pin == P0)
+		return;
+	if (this->Invert)
+	{
+		if (value)
+		{
+			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+		}
+		else
+		{
+			GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+		}
+	}
+	else
+	{
+		if (value)
+		{
+			GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+		}
+		else
+		{
+			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+		}
+	}
+}
 
 
 //
@@ -244,9 +285,7 @@ void OpenPeriphClock(Pin pin)
 {
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << (pin >> 4), ENABLE);
 }
-// 获取组和针脚
-#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (uint16_t)0xF0) << 6)))
-#define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
+
 
 GPIO_TypeDef *IndexToGroup(uint8_t index)
 {

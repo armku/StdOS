@@ -11,7 +11,7 @@ private:
 	uint32_t	_tid; //0
 
 public:
-	OutputPort*	Ports[0x10]; //
+	mcuGpio*	Ports[0x10]; //
 	int		Count; //17
 
 	bool	First;		// 开始状态 18 72
@@ -25,7 +25,7 @@ public:
 	BlinkPort();
 	~BlinkPort();
 
-	void Add(OutputPort* port);
+	void Add(mcuGpio* port);
 	void Start();
 	void Stop();
 	void Blink();

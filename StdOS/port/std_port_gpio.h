@@ -25,7 +25,9 @@ public:
 	// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
 	virtual bool Read();
 	//virtual uint8_t ReadInput()=0;
+	void Write(bool value);
 
+	static void Write(Pin pin, bool value);
 public:
 	GPIO_TypeDef *_port; /**< 引脚的端口 */
 	uint16_t      _pin; /**< 引脚的序号 */

@@ -20,7 +20,7 @@ BlinkPort::~BlinkPort()
 	Sys.RemoveTask(this->_tid);
 }
 
-void BlinkPort::Add(OutputPort* port)
+void BlinkPort::Add(mcuGpio* port)
 {
 	this->Ports[this->Count++] = port;
 }
@@ -32,7 +32,7 @@ void BlinkPort::Start()
 		this->Index = 0;
 		for(int i=0;i<this->Count;i++)
 		{
-			this->Ports[i]->Open();
+			this->Ports[i]->mode(PIN_MODE::OUTPUT_OD_PU);
 		}
 		if(this->_tid ==0)
 			this->_tid = Sys.AddTask((void (BlinkPort::*)())&BlinkPort::Blink,(BlinkPort *)this,-1,-1,"иак╦╤к©з");
