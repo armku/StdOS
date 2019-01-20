@@ -176,8 +176,8 @@ void OutputPort::Write(bool value)const
 	}
 }
 
-bool Port::Read()const
-{
-	GPIO_TypeDef *group = _GROUP(this->_Pin);
-	return (group->IDR >> (this->_Pin & 0xF)) & 1;
-}
+//bool Port::Read()const
+//{
+//	GPIO_TypeDef *group = _GROUP(this->_Pin);
+//	return (group->IDR >> (this->_Pin & 0xF)) & 1;	
+//}
