@@ -50,6 +50,6 @@
 				Spi *pspi; //SPI接口
 			#endif
             InputPort *ppinrd; //数据准备好接口
-            OutputPort ppinreset; //复位接口		
+            mcuGpio ppinreset; //复位接口		
     };
 #endif
