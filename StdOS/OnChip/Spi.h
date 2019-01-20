@@ -104,7 +104,7 @@
             OutputPort _nss;
             OutputPort _clk;
             OutputPort _mosi;
-            InputPort _miso;
+            mcuGpio _miso;
             uint32_t delayus; //—” ± ±º‰
         private:
             uint8_t WaitBusy();

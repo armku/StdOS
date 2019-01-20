@@ -302,7 +302,7 @@ void SpiSoft::Open()
 	}
 	this->Stop();
 	this->_clk.Open();
-	this->_miso.Open();
+	this->_miso.mode(PIN_MODE::INPUT);
 	this->_mosi.Open();
 	this->_nss.Open();
 }
