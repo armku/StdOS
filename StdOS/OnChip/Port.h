@@ -21,8 +21,6 @@ public:
     OutputPort(Pin pin, uint8_t invert, bool openDrain = false);
 	
     void Write(bool value) ;
-	// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
-    uint8_t ReadInput();
 
     static void Write(Pin pin, bool value);
 

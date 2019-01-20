@@ -30,14 +30,6 @@ OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain)
 	}
 }
 
-uint8_t OutputPort::ReadInput()
-{
-	if (this->Empty())
-		return false;
-	else
-		return this->Invert ? !mcuGpio::read() : mcuGpio::read();
-}
-
 void OutputPort::OnOpen(void *param)
 {
 	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;

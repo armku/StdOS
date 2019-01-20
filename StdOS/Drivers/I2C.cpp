@@ -84,7 +84,7 @@ uint8_t SoftI2C::ReadByte()
         value <<= 1;
         this->SCL = 1;
         delay_us(1);
-        if (this->SDA.ReadInput())
+        if (this->SDA.Read())
         {
             value++;
         }
@@ -134,7 +134,7 @@ bool SoftI2C::WaitAck(int retry)
     this->SCL = 1; /* CPU驱动SCL = 1, 此时器件会返回ACK应答 */
     delay_us(1);
 
-    if (this->SDA.ReadInput())
+    if (this->SDA.Read())
     /* CPU读取SDA口线状态 */
     {
         re = 1;
