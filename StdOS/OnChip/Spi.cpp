@@ -7,7 +7,7 @@ void Spi::Init()
 	this->_clk.mode(PIN_MODE::AF_PP_PD);
 	this->_miso.mode(PIN_MODE::AF_PP_PD);
 	this->_mosi.mode(PIN_MODE::AF_PP_PD);
-	this->_nss.mode(PIN_MODE::AF_PP_PD);
+	this->_nss.mode(PIN_MODE::OUTPUT_OD_PU);
 
 	this->Retry = 200; //默认重试次数为200
 }

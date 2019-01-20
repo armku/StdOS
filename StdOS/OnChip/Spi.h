@@ -25,9 +25,9 @@
             Pin Pins[4]; // NSS/CLK/MISO/MOSI
             OutputPort _nss;
 
-            AlternatePort _clk;
-            AlternatePort _miso;
-            AlternatePort _mosi;
+			mcuGpio _clk;
+			mcuGpio _miso;
+			mcuGpio _mosi;
 
             void Init();
 
