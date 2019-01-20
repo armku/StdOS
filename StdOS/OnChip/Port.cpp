@@ -3,6 +3,12 @@
 #include "stm32f10x.h"
 #include "Platform/STM32F1/Pin_STM32F1.h"
 
+#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (uint16_t)0xF0) << 6)))
+#define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
+GPIO_TypeDef *IndexToGroup(uint8_t index);
+uint8_t GroupToIndex(GPIO_TypeDef *group);
+void Port_OnOpen(Pin pin);
+
 OutputPort::OutputPort()
 {
 	this->Invert = 2;
@@ -51,36 +57,7 @@ bool OutputPort::Read()const
 {
 	return this->Invert ? !Port::Read() : Port::Read();
 }
-GPIO_TypeDef *IndexToGroup(uint8_t index);
 
-void Port_OnOpen(Pin pin)
-{
-	int pinindex;
-	int portname;
-		
-	if (pin == PA15 || pin == PB3 || pin == PB4)
-	{
-		if (pin == P0)
-			pinindex = 48;
-		else
-			pinindex = pin & 0xF;
-
-		if (pin == P0)
-			portname = 95;
-		else
-			portname = (pin >> 4) + 'A';
-		//debug_printf("Close JTAG Pin P%c%d \r\n", portname, pinindex);
-		RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << (pin >> 4), ENABLE);
-		GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
-	}
-	pinindex = pinindex;
-	portname = portname;
-}
-
-void OpenPeriphClock(Pin pin)
-{
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << (pin >> 4), ENABLE);	
-}
 
 bool Port::Open()
 {
@@ -142,19 +119,8 @@ void AlternatePort::OpenPin(void *param)
 }
 
 ///////////////////////////////以下为添加///////////////////////////////////////
-// 获取组和针脚
-#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (uint16_t)0xF0) << 6)))
-#define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
-
-GPIO_TypeDef *IndexToGroup(uint8_t index)
-{
-	return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
-}
-
-uint8_t GroupToIndex(GPIO_TypeDef *group)
-{
-	return (uint8_t)(((int)group - GPIOA_BASE) >> 10);
-}
+GPIO_TypeDef *IndexToGroup(uint8_t index);
+uint8_t GroupToIndex(GPIO_TypeDef *group);
 
 void OutputPort::Write(Pin pin, bool value)
 {
