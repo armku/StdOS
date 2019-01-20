@@ -28,18 +28,10 @@ void DS1302::SetPin(Pin pinsck, Pin pinio, Pin pinrst)
 	this->psck.Set(pinsck);
 	this->pio.Set(pinio);
 	this->prst.Set(pinrst);
-
-	this->psck.Invert = false;
-	this->pio.Invert = false;
-	this->prst.Invert = false;
-
-	this->psck.OpenDrain = true;
-	this->pio.OpenDrain = true;
-	this->prst.OpenDrain = true;
-
-	this->psck.Open();
-	this->pio.Open();
-	this->prst.Open();
+	
+	this->psck.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->pio.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->prst.mode(PIN_MODE::OUTPUT_OD_PU);
 }
 void DS1302::Init()
 {

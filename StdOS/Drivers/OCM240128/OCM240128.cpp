@@ -2,43 +2,7 @@
 #include "Sys.h"
 OCM240128::OCM240128()
 {
-	this->pince.Invert = 0;
-	this->pinwr.Invert = 0;
-	this->pinrd.Invert = 0;
-	this->pinfs.Invert = 0;
-	this->pinled.Invert = 0;
-	this->pinsta0.Invert = 0;
-	this->pinsta1.Invert = 0;
-	this->pinsta3.Invert = 0;
-	this->pincd.Invert = 0;
-
-	this->data0.Invert = 0;
-	this->data1.Invert = 0;
-	this->data2.Invert = 0;
-	this->data3.Invert = 0;
-	this->data4.Invert = 0;
-	this->data5.Invert = 0;
-	this->data6.Invert = 0;
-	this->data7.Invert = 0;
-
-	this->pince.OpenDrain = false;
-	this->pinwr.OpenDrain = false;
-	this->pinrd.OpenDrain = false;
-	this->pinfs.OpenDrain = false;
-	this->pinled.OpenDrain = false;
-	this->pinsta0.OpenDrain = false;
-	this->pinsta1.OpenDrain = false;
-	this->pinsta3.OpenDrain = false;
-	this->pincd.OpenDrain = false;
-
-	this->data0.OpenDrain = false;
-	this->data1.OpenDrain = false;
-	this->data2.OpenDrain = false;
-	this->data3.OpenDrain = false;
-	this->data4.OpenDrain = false;
-	this->data5.OpenDrain = false;
-	this->data6.OpenDrain = false;
-	this->data7.OpenDrain = false;
+	
 }
 
 void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led, Pin sta0, Pin sta1, Pin sta3, Pin cd)
@@ -53,15 +17,15 @@ void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led, Pin sta0, Pin st
 	this->pinsta3.Set(sta3);
 	this->pincd.Set(cd);
 
-	this->pince.Open();
-	this->pinwr.Open();
-	this->pinrd.Open();
-	this->pinfs.Open();
-	this->pinled.Open();
-	this->pinsta0.Open();
-	this->pinsta1.Open();
-	this->pinsta3.Open();
-	this->pincd.Open();
+	this->pince.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->pinwr.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->pinrd.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->pinfs.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->pinled.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->pinsta0.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->pinsta1.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->pinsta3.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->pincd.mode(PIN_MODE::OUTPUT_OD_PU);
 }
 void OCM240128::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d6, Pin d7)
 {
@@ -74,14 +38,14 @@ void OCM240128::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d
 	this->data6.Set(d6);
 	this->data7.Set(d7);
 
-	this->data0.Open();
-	this->data1.Open();
-	this->data2.Open();
-	this->data3.Open();
-	this->data4.Open();
-	this->data5.Open();
-	this->data6.Open();
-	this->data7.Open();
+	this->data0.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->data1.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->data2.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->data3.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->data4.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->data5.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->data6.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->data7.mode(PIN_MODE::OUTPUT_OD_PU);
 }
 void OCM240128::writedata(uint8_t da)
 {

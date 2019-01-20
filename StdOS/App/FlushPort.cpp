@@ -19,7 +19,7 @@ void FlushPort::Start(int ms)
 {
 	if(this->Port)
 	{
-		if(this->Port->Open())
+		this->Port->mode(PIN_MODE::OUTPUT_OD_PU);
 		{
 			if(this->_tid ==0)
 			{

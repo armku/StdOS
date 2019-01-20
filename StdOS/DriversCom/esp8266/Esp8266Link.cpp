@@ -240,15 +240,12 @@ bool EspDemoLink::CheckFrame()
 void EspDemoLink::SetPin(Pin pch, Pin prst)
 {
 	this->pinch.Set(PG13);
-	this->pinch.Invert = false;
-	this->pinch.OpenDrain = false;
-	this->pinch.Open();
+	this->pinch.mode(PIN_MODE::OUTPUT_OD_PU);
 	this->pinch = 0;
 
 	this->pinrst.Set(PG14);
 	this->pinrst.Invert = false;
-	this->pinrst.OpenDrain = false;
-	this->pinrst.Open();
+	this->pinrst.mode(PIN_MODE::OUTPUT_OD_PU);
 	this->pinrst = 0;
 }
 void EspDemoLink::Init()

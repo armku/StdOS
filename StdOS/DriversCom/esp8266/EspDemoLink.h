@@ -31,8 +31,8 @@ public:
 	DataFrameEspDemoLink txFrame;
 	DataFrameEspDemoLink rxFrame;
 	USART &com;
-	OutputPort pinch;
-	OutputPort pinrst;
+	mcuGpio pinch;
+	mcuGpio pinrst;
 public:
 	EspDemoLink(USART &uart);
 	bool Kick();
