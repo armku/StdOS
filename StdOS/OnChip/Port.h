@@ -35,14 +35,7 @@ protected:
     virtual void OnOpen(void* param);
 	virtual void OpenPin(void* param);
 };
-// 复用输出口
-class AlternatePort : public OutputPort
-{
-public:
-	AlternatePort();
-protected:
-    virtual void OpenPin(void* param);
-};
+
 // 输入口
 class InputPort : public Port
 {

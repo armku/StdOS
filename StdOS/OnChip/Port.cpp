@@ -45,9 +45,6 @@ void OutputPort::OnOpen(void *param)
 	this->OpenPin(param);
 }
 
-AlternatePort::AlternatePort() : OutputPort(P0, 0, false)
-{}
-
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
 bool InputPort::Read()
 {
@@ -111,14 +108,6 @@ void OutputPort::OpenPin(void *param)
 		gpio->GPIO_Mode = GPIO_Mode_Out_PP;
 	}
 }
-void AlternatePort::OpenPin(void *param)
-{
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-	gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
-	int i = 0;
-	i++;
-}
-
 ///////////////////////////////以下为添加///////////////////////////////////////
 GPIO_TypeDef *IndexToGroup(uint8_t index);
 uint8_t GroupToIndex(GPIO_TypeDef *group);
