@@ -19,11 +19,7 @@ public:
 
     OutputPort();
     OutputPort(Pin pin, uint8_t invert, bool openDrain = false);
-	
-    void Write(bool value) ;
-
-    static void Write(Pin pin, bool value);
-
+	    
     OutputPort& operator=(bool value) { Write(value); return *this; }
     OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }
     operator bool()  { return Read(); }
