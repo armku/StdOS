@@ -11,9 +11,6 @@ class Port:public mcuGpio
 public:	
     bool Open();
 	virtual bool Read() const;
-protected:
-    // 配置过程
-    virtual void OnOpen(void* param);
 };
 // 输出口
 class OutputPort : public Port

@@ -176,12 +176,6 @@ void OutputPort::Write(bool value)const
 	}
 }
 
-void Port::OnOpen(void *param)
-{
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-	gpio->GPIO_Speed = GPIO_Speed_50MHz;
-}
-
 bool Port::Read()const
 {
 	GPIO_TypeDef *group = _GROUP(this->_Pin);
