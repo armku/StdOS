@@ -10,14 +10,14 @@ public:
 	mcuGpio();
 	mcuGpio(GPIO_TypeDef *port, uint16_t pin);
 	virtual void SetPin(Pin pin);//设置管脚
-	virtual void mode(PIN_MODE mode);
-	virtual void mode(PIN_MODE mode, uint8_t af_configration);
-	virtual void set();
-	virtual void reset();
-	virtual void write(uint8_t val);
-	virtual void toggle();
-	virtual void read(uint8_t *val);
-	virtual uint8_t read(void);
+	virtual void mode(PIN_MODE mode);//设置管脚模式
+	virtual void mode(PIN_MODE mode, uint8_t af_configration);//设置管脚模式及复用
+	virtual void set();//置位
+	virtual void reset();//复位
+	virtual void write(uint8_t val);//写值
+	virtual void toggle();//端口翻转
+	virtual void read(uint8_t *val);//读取端口
+	virtual uint8_t read(void);//读
 
 	operator int();
 	int operator =(mcuGpio &);
