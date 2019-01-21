@@ -12,7 +12,7 @@ public:
     
 };
 // Êä³ö¿Ú
-class OutputPort : public Port
+class OutputPort : public mcuGpio
 {
 public:
     
