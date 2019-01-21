@@ -49,9 +49,6 @@ public:
 
 	virtual mcuGpio& operator=(bool value) { Write(value); return *this; }
 	virtual mcuGpio& operator=(mcuGpio& port) { Write(port.Read()); return *this; }
-
-protected:
-	/*virtual void OnOpen(void* param);*/
 };
 
 #endif // !_STD_PORT_GPIO_H
