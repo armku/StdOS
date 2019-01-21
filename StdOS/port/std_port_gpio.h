@@ -43,7 +43,7 @@ public:
 	OutputPort();
 	OutputPort(Pin pin, uint8_t invert, bool openDrain = false);
 
-	OutputPort& operator=(bool value) { Write(value); return *this; }
+	mcuGpio& operator=(bool value) { Write(value); return *this; }
 	OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }
 
 protected:
