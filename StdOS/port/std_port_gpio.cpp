@@ -373,20 +373,20 @@ void mcuGpio::OnOpen(void* param)
 		gpio->GPIO_Mode = GPIO_Mode_Out_PP;
 	}
 }
-void OutputPort::OnOpen(void *param)
-{
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-	gpio->GPIO_Speed = GPIO_Speed_50MHz;
-
-	if (this->OpenDrain)
-	{
-		gpio->GPIO_Mode = GPIO_Mode_Out_OD;
-	}
-	else
-	{
-		gpio->GPIO_Mode = GPIO_Mode_Out_PP;
-	}
-}
+//void OutputPort::OnOpen(void *param)
+//{
+//	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
+//	gpio->GPIO_Speed = GPIO_Speed_50MHz;
+//
+//	if (this->OpenDrain)
+//	{
+//		gpio->GPIO_Mode = GPIO_Mode_Out_OD;
+//	}
+//	else
+//	{
+//		gpio->GPIO_Mode = GPIO_Mode_Out_PP;
+//	}
+//}
 
 
 ////////////////////////////////////////////////////////////////////////
