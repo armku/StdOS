@@ -593,34 +593,49 @@
           <GroupName>App</GroupName>
           <Files>
             <File>
+              <FileName>key_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\app\key_driver.c</FilePath>
+            </File>
+            <File>
               <FileName>BlinkPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\BlinkPort.cpp</FilePath>
+              <FilePath>..\component\app\BlinkPort.cpp</FilePath>
             </File>
             <File>
               <FileName>bspkey.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\bspkey.cpp</FilePath>
+              <FilePath>..\component\app\bspkey.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\app\Demo.cpp</FilePath>
             </File>
             <File>
               <FileName>FlushPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\FlushPort.cpp</FilePath>
+              <FilePath>..\component\app\FlushPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>keydemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\app\keydemo.cpp</FilePath>
             </File>
             <File>
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\lcd_dr.cpp</FilePath>
+              <FilePath>..\component\app\lcd_dr.cpp</FilePath>
             </File>
             <File>
               <FileName>LCDOCM.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\LCDOCM.cpp</FilePath>
+              <FilePath>..\component\app\LCDOCM.cpp</FilePath>
             </File>
             <File>
               <FileName>PID.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\PID.cpp</FilePath>
+              <FilePath>..\component\app\PID.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1643,34 +1658,49 @@
           <GroupName>App</GroupName>
           <Files>
             <File>
+              <FileName>key_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\app\key_driver.c</FilePath>
+            </File>
+            <File>
               <FileName>BlinkPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\BlinkPort.cpp</FilePath>
+              <FilePath>..\component\app\BlinkPort.cpp</FilePath>
             </File>
             <File>
               <FileName>bspkey.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\bspkey.cpp</FilePath>
+              <FilePath>..\component\app\bspkey.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\app\Demo.cpp</FilePath>
             </File>
             <File>
               <FileName>FlushPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\FlushPort.cpp</FilePath>
+              <FilePath>..\component\app\FlushPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>keydemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\app\keydemo.cpp</FilePath>
             </File>
             <File>
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\lcd_dr.cpp</FilePath>
+              <FilePath>..\component\app\lcd_dr.cpp</FilePath>
             </File>
             <File>
               <FileName>LCDOCM.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\LCDOCM.cpp</FilePath>
+              <FilePath>..\component\app\LCDOCM.cpp</FilePath>
             </File>
             <File>
               <FileName>PID.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\PID.cpp</FilePath>
+              <FilePath>..\component\app\PID.cpp</FilePath>
             </File>
           </Files>
         </Group>
