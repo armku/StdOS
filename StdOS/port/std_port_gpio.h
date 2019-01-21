@@ -32,6 +32,7 @@ public:
 public:
 	GPIO_TypeDef *_port; /**< 引脚的端口 */
 	uint16_t      _pin; /**< 引脚的序号 */
+	bool OpenDrain = false;	// 是否开漏输出
 };
 
 

@@ -15,15 +15,13 @@ public:
 class OutputPort : public Port
 {
 public:
-    bool OpenDrain	= false;	// ÊÇ·ñ¿ªÂ©Êä³ö
-
+    
     OutputPort();
     OutputPort(Pin pin, uint8_t invert, bool openDrain = false);
 	    
     OutputPort& operator=(bool value) { Write(value); return *this; }
     OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }
     
-
 protected:
     virtual void OnOpen(void* param);
 };
