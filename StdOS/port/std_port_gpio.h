@@ -31,7 +31,6 @@ public:
 	operator bool() { return Read(); }
 	bool Open();
 	mcuGpio(Pin pin, uint8_t invert, bool openDrain = false);
-	/*virtual void OnOpen(void* param);*/
 	virtual mcuGpio& operator=(bool value) { Write(value); return *this; }
 	//virtual mcuGpio& operator=(mcuGpio& port) { Write(port.Read()); return *this; }
 public:
