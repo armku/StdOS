@@ -1408,18 +1408,6 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\DS1302\DS1302.cpp</PathWithFileName>
-      <FilenameWithoutPath>DS1302.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>13</GroupNumber>
-      <FileNumber>64</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>..\StdOS\Drivers\GPS_ATGM332D\GPS_ATGM332D.cpp</PathWithFileName>
       <FilenameWithoutPath>GPS_ATGM332D.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -1427,7 +1415,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>65</FileNumber>
+      <FileNumber>64</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1439,7 +1427,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>66</FileNumber>
+      <FileNumber>65</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1451,7 +1439,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>67</FileNumber>
+      <FileNumber>66</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1463,7 +1451,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>68</FileNumber>
+      <FileNumber>67</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1475,7 +1463,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>69</FileNumber>
+      <FileNumber>68</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1487,7 +1475,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>70</FileNumber>
+      <FileNumber>69</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1499,7 +1487,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>71</FileNumber>
+      <FileNumber>70</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1511,7 +1499,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>72</FileNumber>
+      <FileNumber>71</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1523,7 +1511,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>73</FileNumber>
+      <FileNumber>72</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1535,7 +1523,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>74</FileNumber>
+      <FileNumber>73</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1547,7 +1535,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>75</FileNumber>
+      <FileNumber>74</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1559,7 +1547,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>76</FileNumber>
+      <FileNumber>75</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1571,13 +1559,25 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>77</FileNumber>
+      <FileNumber>76</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\StdOS\Drivers\I2C.cpp</PathWithFileName>
       <FilenameWithoutPath>I2C.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>13</GroupNumber>
+      <FileNumber>77</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\component\drivers\DS1302\DS1302.cpp</PathWithFileName>
+      <FilenameWithoutPath>DS1302.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1916,18 +1916,6 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\DS1302\DS1302Demo.cpp</PathWithFileName>
-      <FilenameWithoutPath>DS1302Demo.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>18</GroupNumber>
-      <FileNumber>103</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>..\StdOS\Drivers\GPS_ATGM332D\GPS_ATGM332DDemo.cpp</PathWithFileName>
       <FilenameWithoutPath>GPS_ATGM332DDemo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -1935,7 +1923,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>104</FileNumber>
+      <FileNumber>103</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1947,7 +1935,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>105</FileNumber>
+      <FileNumber>104</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1959,7 +1947,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>106</FileNumber>
+      <FileNumber>105</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1971,7 +1959,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>107</FileNumber>
+      <FileNumber>106</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1983,7 +1971,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>108</FileNumber>
+      <FileNumber>107</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1995,7 +1983,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>109</FileNumber>
+      <FileNumber>108</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2007,7 +1995,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>110</FileNumber>
+      <FileNumber>109</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2019,7 +2007,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>111</FileNumber>
+      <FileNumber>110</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2031,7 +2019,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>112</FileNumber>
+      <FileNumber>111</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2043,7 +2031,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>113</FileNumber>
+      <FileNumber>112</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2055,7 +2043,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>114</FileNumber>
+      <FileNumber>113</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2067,7 +2055,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>115</FileNumber>
+      <FileNumber>114</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2079,7 +2067,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>116</FileNumber>
+      <FileNumber>115</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2091,7 +2079,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>117</FileNumber>
+      <FileNumber>116</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2101,10 +2089,22 @@
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
+    <File>
+      <GroupNumber>18</GroupNumber>
+      <FileNumber>117</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\component\drivers\DS1302\DS1302Demo.cpp</PathWithFileName>
+      <FilenameWithoutPath>DS1302Demo.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
   </Group>
 
   <Group>
-    <GroupName>std_mcu</GroupName>
+    <GroupName>Porting</GroupName>
     <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
@@ -2116,7 +2116,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\port\mcuGpio.cpp</PathWithFileName>
+      <PathWithFileName>..\porting\STM32F1\mcuGpio.cpp</PathWithFileName>
       <FilenameWithoutPath>mcuGpio.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

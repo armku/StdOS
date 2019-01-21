@@ -748,11 +748,6 @@
               <FilePath>..\StdOS\Drivers\DS18B20\DS18B20.cpp</FilePath>
             </File>
             <File>
-              <FileName>DS1302.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\DS1302\DS1302.cpp</FilePath>
-            </File>
-            <File>
               <FileName>GPS_ATGM332D.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\GPS_ATGM332D\GPS_ATGM332D.cpp</FilePath>
@@ -821,6 +816,11 @@
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS1302.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\drivers\DS1302\DS1302.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -968,11 +968,6 @@
               <FilePath>..\StdOS\Drivers\DS18B20\DS18B20Demo.cpp</FilePath>
             </File>
             <File>
-              <FileName>DS1302Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\DS1302\DS1302Demo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>GPS_ATGM332DDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\GPS_ATGM332D\GPS_ATGM332DDemo.cpp</FilePath>
@@ -1047,15 +1042,20 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\esp8266\Esp8266LinkDemo.cpp</FilePath>
             </File>
+            <File>
+              <FileName>DS1302Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\drivers\DS1302\DS1302Demo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>std_mcu</GroupName>
+          <GroupName>Porting</GroupName>
           <Files>
             <File>
               <FileName>mcuGpio.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\port\mcuGpio.cpp</FilePath>
+              <FilePath>..\porting\STM32F1\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1803,11 +1803,6 @@
               <FilePath>..\StdOS\Drivers\DS18B20\DS18B20.cpp</FilePath>
             </File>
             <File>
-              <FileName>DS1302.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\DS1302\DS1302.cpp</FilePath>
-            </File>
-            <File>
               <FileName>GPS_ATGM332D.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\GPS_ATGM332D\GPS_ATGM332D.cpp</FilePath>
@@ -1876,6 +1871,11 @@
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DS1302.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\drivers\DS1302\DS1302.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2023,11 +2023,6 @@
               <FilePath>..\StdOS\Drivers\DS18B20\DS18B20Demo.cpp</FilePath>
             </File>
             <File>
-              <FileName>DS1302Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\DS1302\DS1302Demo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>GPS_ATGM332DDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\GPS_ATGM332D\GPS_ATGM332DDemo.cpp</FilePath>
@@ -2102,15 +2097,20 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\esp8266\Esp8266LinkDemo.cpp</FilePath>
             </File>
+            <File>
+              <FileName>DS1302Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\drivers\DS1302\DS1302Demo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>std_mcu</GroupName>
+          <GroupName>Porting</GroupName>
           <Files>
             <File>
               <FileName>mcuGpio.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\port\mcuGpio.cpp</FilePath>
+              <FilePath>..\porting\STM32F1\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
