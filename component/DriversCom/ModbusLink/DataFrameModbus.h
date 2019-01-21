@@ -1,5 +1,5 @@
 #include "Type.h"
-#include "Security/Crc.h"
+#include "../component/Security/Crc.h"
 #include "../DataFrame.h"
 
 #ifndef _DATAFRAMEMODBUS_H
