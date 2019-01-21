@@ -1,4 +1,4 @@
-#include "App\lcd_dr.h"
+#include "lcd_dr.h"
 
 //#define _LCD_DT_TEST_CPP
 

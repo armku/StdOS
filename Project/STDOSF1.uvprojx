@@ -608,29 +608,9 @@
               <FilePath>..\component\app\bspkey.cpp</FilePath>
             </File>
             <File>
-              <FileName>Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\Demo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>FlushPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\app\FlushPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>keydemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\keydemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>lcd_dr.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\lcd_dr.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>LCDOCM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\LCDOCM.cpp</FilePath>
             </File>
             <File>
               <FileName>PID.cpp</FileName>
@@ -1673,29 +1653,9 @@
               <FilePath>..\component\app\bspkey.cpp</FilePath>
             </File>
             <File>
-              <FileName>Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\Demo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>FlushPort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\app\FlushPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>keydemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\keydemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>lcd_dr.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\lcd_dr.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>LCDOCM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\LCDOCM.cpp</FilePath>
             </File>
             <File>
               <FileName>PID.cpp</FileName>

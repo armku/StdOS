@@ -25,16 +25,15 @@ KEY_HandleTypeDef hkey[3] = {{KEY_ID_1, KEY_FULL_STATE(KEY_RELEASED, KEY_RELEASE
 //用户根据硬件情况自行实现指定按键的IO电平读取，该函数将覆盖模块中的同名函数
 uint8_t KEY_Read_Port(uint8_t KeyId)
 {
-        
-        switch(KeyId)
-        {
-                case KEY_ID_1:
-                        return (HAL_GPIO_ReadPin(USEKEY_GPIO_Port, USEKEY_Pin));
-                        break;
-                default:
-                        return 0;
-                        break;
-        }
+	switch(KeyId)
+	{
+	case KEY_ID_1:
+		return (HAL_GPIO_ReadPin(USEKEY_GPIO_Port, USEKEY_Pin));
+		break;
+	default:
+		return 0;
+		break;
+	}
 }
 
 //main函数
