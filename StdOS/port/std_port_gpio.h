@@ -36,5 +36,19 @@ public:
 	bool OpenDrain = false;	// 是否开漏输出
 };
 
+// 输出口
+class OutputPort : public mcuGpio
+{
+public:
+
+	OutputPort();
+	OutputPort(Pin pin, uint8_t invert, bool openDrain = false);
+
+	OutputPort& operator=(bool value) { Write(value); return *this; }
+	OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }
+
+protected:
+	virtual void OnOpen(void* param);
+};
 
 #endif // !_STD_PORT_GPIO_H
