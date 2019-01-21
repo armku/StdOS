@@ -331,7 +331,20 @@ OutputPort::OutputPort()
 {
 	//this->OpenDrain = 0;
 }
+mcuGpio::mcuGpio(Pin pin, uint8_t invert, bool openDrain)
+{
+	this->Opened = false;
 
+	this->Invert = 2;
+	this->OpenDrain = false;
+	this->OpenDrain = openDrain;
+	this->Invert = invert;
+	if (pin != P0)
+	{
+		this->Set(pin);
+		this->Open();
+	}
+}
 OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain)
 {
 	this->Opened = false;
