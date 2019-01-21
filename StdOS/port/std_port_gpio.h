@@ -39,16 +39,4 @@ public:
 	uint16_t      _pin; /**< 引脚的序号 */	
 };
 
-// 输出口
-//class OutputPort : public mcuGpio
-//{
-//public:
-//
-//	OutputPort();
-//	OutputPort(Pin pin, uint8_t invert, bool openDrain = false);
-//
-//	virtual mcuGpio& operator=(bool value) { Write(value); return *this; }
-//	virtual mcuGpio& operator=(mcuGpio& port) { Write(port.Read()); return *this; }
-//};
-
 #endif // !_STD_PORT_GPIO_H
