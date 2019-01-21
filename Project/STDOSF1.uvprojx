@@ -1043,14 +1043,14 @@
           <GroupName>std_mcu</GroupName>
           <Files>
             <File>
-              <FileName>std_gpio.cpp</FileName>
+              <FileName>Gpio.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\port\std_gpio.cpp</FilePath>
+              <FilePath>..\StdOS\port\Gpio.cpp</FilePath>
             </File>
             <File>
-              <FileName>std_port_gpio.cpp</FileName>
+              <FileName>mcuGpio.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\port\std_port_gpio.cpp</FilePath>
+              <FilePath>..\StdOS\port\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2093,14 +2093,14 @@
           <GroupName>std_mcu</GroupName>
           <Files>
             <File>
-              <FileName>std_gpio.cpp</FileName>
+              <FileName>Gpio.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\port\std_gpio.cpp</FilePath>
+              <FilePath>..\StdOS\port\Gpio.cpp</FilePath>
             </File>
             <File>
-              <FileName>std_port_gpio.cpp</FileName>
+              <FileName>mcuGpio.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\port\std_port_gpio.cpp</FilePath>
+              <FilePath>..\StdOS\port\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
