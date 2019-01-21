@@ -17,7 +17,7 @@
 			void Rest();
 			void SkipRom();
 		private:
-			OutputPort _dio;
+			mcuGpio _dio;
 		public:
 			char id[8];//…Ë±∏ID
 
