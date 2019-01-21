@@ -1,5 +1,5 @@
 #include "ModbusLink.h"
-#include "Buffer.h"
+#include "../component/lib/Buffer.h"
 
 ModbusBase::ModbusBase(USART &uart) : com(uart)
 {

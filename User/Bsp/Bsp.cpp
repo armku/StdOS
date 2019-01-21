@@ -1,7 +1,7 @@
 #include "OnChip\Port.h"
 #include "OnChip/USART.h"
 #include "Sys.h"
-#include "Buffer.h"
+#include "../component/lib/Buffer.h"
 #include "../porting/STM32F1/mcuGpio.h"
 
 char *AppVersion = "0.1.2018.1115"; //°æ±¾ºÅ

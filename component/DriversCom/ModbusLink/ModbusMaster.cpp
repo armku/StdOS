@@ -1,5 +1,5 @@
 #include "ModbusLink.h"
-#include "Buffer.h"
+#include "../component/lib/Buffer.h"
 
 ModbusMasterLink::ModbusMasterLink(USART &uart) :ModbusBase(uart)
 {

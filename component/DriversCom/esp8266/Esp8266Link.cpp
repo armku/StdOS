@@ -6,7 +6,7 @@
 #include "BspPlatform\BspPlatform.h"
 #include "OnChip\Port.h"
 #include "OnChip\Configuration.h"
-#include "Buffer.h"
+#include "../component/lib/Buffer.h"
 #include <stdio.h>  
 
 EspDemoLink::EspDemoLink(USART &uart) :com(uart)

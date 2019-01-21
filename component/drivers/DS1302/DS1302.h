@@ -2,7 +2,7 @@
 #define _DS1302_H
 
 #include "OnChip\Port.h"
-#include "DateTime.h"
+#include "../component/lib/DateTime.h"
 
 class DS1302
 {

@@ -1,7 +1,7 @@
 #include <string.h>
 #include "MqttLink.h"
 #include "Sys.h"
-#include "Buffer.h"
+#include "../component/lib/Buffer.h"
 
 MqttLink::MqttLink(USART &uart) :com(uart)
 {

@@ -623,24 +623,9 @@
           <GroupName>Core</GroupName>
           <Files>
             <File>
-              <FileName>Buffer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Buffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DateTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\DateTime.cpp</FilePath>
-            </File>
-            <File>
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Version.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Version.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -918,26 +903,6 @@
           <GroupName>Demo</GroupName>
           <Files>
             <File>
-              <FileName>MqttLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\MqttLink\MqttLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusSlaveLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusSlaveLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusMasterLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusMasterLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Esp8266LinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\esp8266\Esp8266LinkDemo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\drivers\AD7124\AD7124Demo.cpp</FilePath>
@@ -1042,6 +1007,26 @@
               <FileType>8</FileType>
               <FilePath>..\component\drivers\W5500\W5500Demo.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Esp8266LinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\DriversCom\esp8266\Esp8266LinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusMasterLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\DriversCom\ModbusLink\ModbusMasterLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MqttLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\DriversCom\MqttLink\MqttLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SHARP_PM2_5Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\DriversCom\SHARP_PM2_5\SHARP_PM2_5Demo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1051,6 +1036,26 @@
               <FileName>mcuGpio.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\porting\STM32F1\mcuGpio.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>lib</GroupName>
+          <Files>
+            <File>
+              <FileName>Buffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\lib\Buffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DateTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\lib\DateTime.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Version.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\lib\Version.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1673,24 +1678,9 @@
           <GroupName>Core</GroupName>
           <Files>
             <File>
-              <FileName>Buffer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Buffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DateTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\DateTime.cpp</FilePath>
-            </File>
-            <File>
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Version.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Version.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1968,26 +1958,6 @@
           <GroupName>Demo</GroupName>
           <Files>
             <File>
-              <FileName>MqttLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\MqttLink\MqttLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusSlaveLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusSlaveLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusMasterLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusMasterLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Esp8266LinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\esp8266\Esp8266LinkDemo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\drivers\AD7124\AD7124Demo.cpp</FilePath>
@@ -2092,6 +2062,26 @@
               <FileType>8</FileType>
               <FilePath>..\component\drivers\W5500\W5500Demo.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Esp8266LinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\DriversCom\esp8266\Esp8266LinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusMasterLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\DriversCom\ModbusLink\ModbusMasterLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MqttLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\DriversCom\MqttLink\MqttLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SHARP_PM2_5Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\DriversCom\SHARP_PM2_5\SHARP_PM2_5Demo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2101,6 +2091,26 @@
               <FileName>mcuGpio.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\porting\STM32F1\mcuGpio.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>lib</GroupName>
+          <Files>
+            <File>
+              <FileName>Buffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\lib\Buffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DateTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\lib\DateTime.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Version.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\lib\Version.cpp</FilePath>
             </File>
           </Files>
         </Group>

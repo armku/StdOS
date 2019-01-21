@@ -4,7 +4,7 @@
 #include "Core\Type.h"
 #include "Core\List.h"
 #include "Core\Delegate.h"
-#include "Version.h"
+#include "../component/lib/Version.h"
 
 #ifdef __cplusplus
 extern "C" {
