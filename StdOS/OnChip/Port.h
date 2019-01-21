@@ -9,7 +9,7 @@
 class Port:public mcuGpio
 {
 public:	
-    bool Open();
+    
 };
 // Êä³ö¿Ú
 class OutputPort : public Port
