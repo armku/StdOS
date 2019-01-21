@@ -650,6 +650,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Port</GroupName>
+          <Files>
+            <File>
+              <FileName>Gpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\Port\Gpio.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>OnChip</GroupName>
           <Files>
             <File>
@@ -1042,11 +1052,6 @@
         <Group>
           <GroupName>std_mcu</GroupName>
           <Files>
-            <File>
-              <FileName>Gpio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\port\Gpio.cpp</FilePath>
-            </File>
             <File>
               <FileName>mcuGpio.cpp</FileName>
               <FileType>8</FileType>
@@ -1700,6 +1705,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Port</GroupName>
+          <Files>
+            <File>
+              <FileName>Gpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\Port\Gpio.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>OnChip</GroupName>
           <Files>
             <File>
@@ -2092,11 +2107,6 @@
         <Group>
           <GroupName>std_mcu</GroupName>
           <Files>
-            <File>
-              <FileName>Gpio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\port\Gpio.cpp</FilePath>
-            </File>
             <File>
               <FileName>mcuGpio.cpp</FileName>
               <FileType>8</FileType>
