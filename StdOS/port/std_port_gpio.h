@@ -31,6 +31,8 @@ public:
 	operator bool() { return Read(); }
 	bool Open();
 	mcuGpio(Pin pin, uint8_t invert, bool openDrain = false);
+	/*virtual mcuGpio& operator=(bool value) { Write(value); return *this; }
+	virtual mcuGpio& operator=(mcuGpio& port) { Write(port.Read()); return *this; }*/
 public:
 	GPIO_TypeDef *_port; /**< 引脚的端口 */
 	uint16_t      _pin; /**< 引脚的序号 */	
