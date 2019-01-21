@@ -216,21 +216,21 @@ void mcuGpio::toggle()
 }
 
 // 相当与read()
-int mcuGpio::operator =(mcuGpio &)
-{
-	return ((_port->IDR & _pin) == _pin) ? (1) : (0);
-}
+//int mcuGpio::operator =(mcuGpio &)
+//{
+//	return ((_port->IDR & _pin) == _pin) ? (1) : (0);
+//}
 // 相当与read()
 mcuGpio::operator int()
 {
 	return ((_port->IDR & _pin) == _pin) ? (1) : (0);
 }
 // 相当与write()
-mcuGpio mcuGpio::operator= (int value)
-{
-	(value == 0) ? (_port->BRR = _pin) : (_port->BSRR = _pin);
-	return *this;
-}
+//mcuGpio mcuGpio::operator= (int value)
+//{
+//	(value == 0) ? (_port->BRR = _pin) : (_port->BSRR = _pin);
+//	return *this;
+//}
 
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
 bool mcuGpio::Read()

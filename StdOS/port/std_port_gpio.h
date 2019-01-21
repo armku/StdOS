@@ -20,8 +20,8 @@ public:
 	virtual uint8_t read(void);
 
 	operator int();
-	int operator =(mcuGpio &);
-	mcuGpio operator = (int value);
+	/*int operator =(mcuGpio &);
+	mcuGpio operator = (int value);*/
 	// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
 	virtual bool Read();
 	//virtual uint8_t ReadInput()=0;
@@ -32,8 +32,8 @@ public:
 	bool Open();
 	mcuGpio(Pin pin, uint8_t invert, bool openDrain = false);
 	virtual void OnOpen(void* param);
-	/*virtual mcuGpio& operator=(bool value) { Write(value); return *this; }
-	virtual mcuGpio& operator=(mcuGpio& port) { Write(port.Read()); return *this; }*/
+	virtual mcuGpio& operator=(bool value) { Write(value); return *this; }
+	virtual mcuGpio& operator=(mcuGpio& port) { Write(port.Read()); return *this; }
 public:
 	GPIO_TypeDef *_port; /**< 引脚的端口 */
 	uint16_t      _pin; /**< 引脚的序号 */	
