@@ -29,8 +29,8 @@ private:
 private:
 	int _delay;			// 根据速度匹配的延时
 
-	mcuGpio	SCL;	// 时钟。开漏输出
-	mcuGpio	SDA;	// 数据。开漏输出，直接具备读写功能
+	OutputPort	SCL;	// 时钟。开漏输出
+	OutputPort	SDA;	// 数据。开漏输出，直接具备读写功能
 };
 
 /*

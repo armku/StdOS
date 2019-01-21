@@ -23,7 +23,7 @@
             uint8_t _index;
             void *_SPI;
             Pin Pins[4]; // NSS/CLK/MISO/MOSI
-			mcuGpio _nss;
+            OutputPort _nss;
 
 			mcuGpio _clk;
 			mcuGpio _miso;
@@ -101,9 +101,9 @@
             void Start(); // 拉低NSS，开始传输
             void Stop(); // 拉高NSS，停止传输
         private:
-			mcuGpio _nss;
-			mcuGpio _clk;
-			mcuGpio _mosi;
+            OutputPort _nss;
+            OutputPort _clk;
+            OutputPort _mosi;
             mcuGpio _miso;
             uint32_t delayus; //延时时间
         private:

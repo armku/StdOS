@@ -4,8 +4,12 @@
 void DS18B20::SetPin(Pin pin)
 {
 	this->_dio.Set(pin);
-		
-	this->_dio.mode(PIN_MODE::OUTPUT_OD_PU);
+	
+	this->_dio.OpenDrain=true;
+	
+	this->_dio.Invert=0;
+	
+	this->_dio.Open();
 	this->_dio = 1;
 }
 

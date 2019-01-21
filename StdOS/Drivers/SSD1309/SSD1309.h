@@ -27,13 +27,13 @@
 			void WRByte(uint8_t dat, uint8_t cmd);
 		protected:
             //SPI
-			mcuGpio _cs;
-			mcuGpio _res;
-			mcuGpio _dc;
-			mcuGpio _sclk;
-			mcuGpio _sdin;
+			OutputPort _cs;
+            OutputPort _res;
+            OutputPort _dc;
+            OutputPort _sclk;
+            OutputPort _sdin;
 			//8080
-			mcuGpio _wr;
-			mcuGpio _rd;
+			OutputPort _wr;
+            OutputPort _rd;            
     };
 #endif

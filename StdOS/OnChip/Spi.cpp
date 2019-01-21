@@ -301,10 +301,10 @@ void SpiSoft::Open()
 		this->_clk = 0;
 	}
 	this->Stop();
-	this->_clk.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->_clk.Open();
 	this->_miso.mode(PIN_MODE::INPUT);
-	this->_mosi.mode(PIN_MODE::OUTPUT_OD_PU);
-	this->_nss.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->_mosi.Open();
+	this->_nss.Open();
 }
 void SpiSoft::Close()
 {

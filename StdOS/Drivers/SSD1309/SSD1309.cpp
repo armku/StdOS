@@ -21,12 +21,24 @@ void SSD1309::SetPinSpi(Pin sclk,Pin sdin,Pin dc,Pin res,Pin cs)
     this->_dc.Set(dc);
     this->_sclk.Set(sclk);
     this->_sdin.Set(sdin);
-	    
-	this->_cs.mode(PIN_MODE::OUTPUT_OD_PU);
-    this->_res.mode(PIN_MODE::OUTPUT_OD_PU);
-    this->_dc.mode(PIN_MODE::OUTPUT_OD_PU);
-    this->_sclk.mode(PIN_MODE::OUTPUT_OD_PU);
-    this->_sdin.mode(PIN_MODE::OUTPUT_OD_PU);
+
+    this->_cs.OpenDrain = false;
+    this->_res.OpenDrain = false;
+    this->_dc.OpenDrain = false;
+    this->_sclk.OpenDrain = false;
+    this->_sdin.OpenDrain = false;
+
+    this->_cs.Invert = 0;
+    this->_res.Invert = 0;
+    this->_dc.Invert = 0;
+    this->_sclk.Invert = 0;
+    this->_sdin.Invert = 0;
+
+    this->_cs.Open();
+    this->_res.Open();
+    this->_dc.Open();
+    this->_sclk.Open();
+    this->_sdin.Open();
 }
 
 //OLED╣дот╢Ф

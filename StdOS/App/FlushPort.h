@@ -13,7 +13,7 @@ private:
 	uint32_t	_tid; 
 
 public:
-	mcuGpio*	Port;
+	OutputPort*	Port; 
 
 	int		Fast;	// 快闪间隔，默认50毫秒
 	int		Slow;	// 慢闪间隔，默认1000毫秒

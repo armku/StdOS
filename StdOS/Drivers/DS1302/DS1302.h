@@ -15,9 +15,9 @@ public:
 	void SetTime(DateTime & dt);//设置时间-北京时间格式
 	DateTime& GetTime(DateTime & dt);//读取时间	
 private:
-	mcuGpio psck;
-	mcuGpio pio;
-	mcuGpio prst;
+	OutputPort psck;
+	OutputPort pio;
+	OutputPort prst;
 
 	void dsReadPage(uint8_t Addr, uint8_t *da, uint8_t len);
 	void dsWritePage(uint8_t Addr, uint8_t *da, uint8_t len);

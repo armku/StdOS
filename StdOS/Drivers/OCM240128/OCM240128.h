@@ -22,24 +22,24 @@ private:
 	void wcmd2(uint8_t dat1, uint8_t dat2, uint8_t cmd);
 	void writedata(uint8_t da);
 private:
-	mcuGpio pinwr;
-	mcuGpio pinrd;
-	mcuGpio pince;
-	mcuGpio pinfs;
-	mcuGpio pinled;
-	mcuGpio pinsta0;
-	mcuGpio pinsta1;
-	mcuGpio pinsta3;
-	mcuGpio pincd;
+	OutputPort pinwr;
+	OutputPort pinrd;
+	OutputPort pince;
+	OutputPort pinfs;
+	OutputPort pinled;
+	OutputPort pinsta0;
+	OutputPort pinsta1;
+	OutputPort pinsta3;
+	OutputPort pincd;
 
-	mcuGpio data0;
-	mcuGpio data1;
-	mcuGpio data2;
-	mcuGpio data3;
-	mcuGpio data4;
-	mcuGpio data5;
-	mcuGpio data6;
-	mcuGpio data7;
+	OutputPort data0;
+	OutputPort data1;
+	OutputPort data2;
+	OutputPort data3;
+	OutputPort data4;
+	OutputPort data5;
+	OutputPort data6;
+	OutputPort data7;
 };
 
 #endif
