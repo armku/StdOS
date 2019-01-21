@@ -49,7 +49,7 @@ hal hardware abstraction layer 硬件有关
 
 void LedTask(void* param)
 {
-    auto leds	= (OutputPort*)param;
+    auto leds	= (mcuGpio*)param;
     *leds = !*leds;
 }
 
@@ -68,7 +68,7 @@ int main(void)
     Sys.ShowInfo();
 
     // 初始化为输出
-	OutputPort leds[] = {PD0, PD1};
+	mcuGpio leds[] = {PD0, PD1};
 	for(int i=0; i<ArrayLength(leds); i++)
 		leds[i].Invert = true;
 
@@ -92,7 +92,7 @@ int main(void)
 	DateTime::Test();
 	IList::Test();
 	IDictionary::Test();*/
-	/*OutputPort power(PE2);
+	/*mcuGpio power(PE2);
 	power = true;
 	SerialPort::Test();*/
 
