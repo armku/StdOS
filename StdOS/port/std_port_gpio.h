@@ -40,15 +40,15 @@ public:
 };
 
 // Êä³ö¿Ú
-class OutputPort : public mcuGpio
-{
-public:
-
-	OutputPort();
-	OutputPort(Pin pin, uint8_t invert, bool openDrain = false);
-
-	virtual mcuGpio& operator=(bool value) { Write(value); return *this; }
-	virtual mcuGpio& operator=(mcuGpio& port) { Write(port.Read()); return *this; }
-};
+//class OutputPort : public mcuGpio
+//{
+//public:
+//
+//	OutputPort();
+//	OutputPort(Pin pin, uint8_t invert, bool openDrain = false);
+//
+//	virtual mcuGpio& operator=(bool value) { Write(value); return *this; }
+//	virtual mcuGpio& operator=(mcuGpio& port) { Write(port.Read()); return *this; }
+//};
 
 #endif // !_STD_PORT_GPIO_H
