@@ -216,10 +216,10 @@ void mcuGpio::toggle()
 }
 
 // 相当与read()
-//int mcuGpio::operator =(mcuGpio &)
-//{
-//	return ((_port->IDR & _pin) == _pin) ? (1) : (0);
-//}
+int mcuGpio::operator =(mcuGpio &)
+{
+	return ((_port->IDR & _pin) == _pin) ? (1) : (0);
+}
 // 相当与read()
 mcuGpio::operator int()
 {
