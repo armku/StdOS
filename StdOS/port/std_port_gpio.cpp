@@ -323,6 +323,10 @@ GPIO_TypeDef *IndexToGroup(uint8_t index);
 uint8_t GroupToIndex(GPIO_TypeDef *group);
 void Port_OnOpen(Pin pin);
 
+mcuGpio::mcuGpio()
+{
+	this->OpenDrain = 0;
+}
 OutputPort::OutputPort()
 {
 	this->OpenDrain = 0;
