@@ -44,7 +44,7 @@ public:
 	OutputPort(Pin pin, uint8_t invert, bool openDrain = false);
 
 	mcuGpio& operator=(bool value) { Write(value); return *this; }
-	OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }
+	mcuGpio& operator=(mcuGpio& port) { Write(port.Read()); return *this; }
 
 protected:
 	virtual void OnOpen(void* param);
