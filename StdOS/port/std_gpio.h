@@ -55,6 +55,7 @@ public:
 	Pin _Pin;
 	bool	Opened;		// 是否已经打开
 	uint8_t	Invert = 0;	// 是否倒置输入输出
+	bool OpenDrain = false;	// 是否开漏输出
 };
 
 #endif // !_STD_GPIO_H
