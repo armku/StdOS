@@ -325,7 +325,6 @@ void Port_OnOpen(Pin pin);
 
 OutputPort::OutputPort()
 {
-	this->Invert = 2;
 	this->OpenDrain = 0;
 }
 
