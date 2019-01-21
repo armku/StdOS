@@ -585,7 +585,7 @@
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Util\Util.cpp</FilePath>
+              <FilePath>..\component\Util\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -823,34 +823,39 @@
           <GroupName>DriversCom</GroupName>
           <Files>
             <File>
+              <FileName>Esp8266Link.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\DriversCom\esp8266\Esp8266Link.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Socket_esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\DriversCom\esp8266\Socket_esp8266.cpp</FilePath>
+            </File>
+            <File>
               <FileName>ModbusLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SHARP_PM2_5.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MqttLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\MqttLink\MqttLink.cpp</FilePath>
+              <FilePath>..\component\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusMaster.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusMaster.cpp</FilePath>
+              <FilePath>..\component\DriversCom\ModbusLink\ModbusMaster.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusSlave.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusSlave.cpp</FilePath>
+              <FilePath>..\component\DriversCom\ModbusLink\ModbusSlave.cpp</FilePath>
             </File>
             <File>
-              <FileName>Esp8266Link.cpp</FileName>
+              <FileName>MqttLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\esp8266\Esp8266Link.cpp</FilePath>
+              <FilePath>..\component\DriversCom\MqttLink\MqttLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SHARP_PM2_5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -880,7 +885,7 @@
             <File>
               <FileName>Storage.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Storage\Storage.cpp</FilePath>
+              <FilePath>..\component\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -890,22 +895,22 @@
             <File>
               <FileName>CheckSum.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\CheckSum.cpp</FilePath>
+              <FilePath>..\component\Security\CheckSum.cpp</FilePath>
             </File>
             <File>
               <FileName>Crc.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\Crc.cpp</FilePath>
+              <FilePath>..\component\Security\Crc.cpp</FilePath>
             </File>
             <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\Math.cpp</FilePath>
+              <FilePath>..\component\Security\Math.cpp</FilePath>
             </File>
             <File>
               <FileName>Parity.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\Parity.cpp</FilePath>
+              <FilePath>..\component\Security\Parity.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1630,7 +1635,7 @@
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Util\Util.cpp</FilePath>
+              <FilePath>..\component\Util\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1868,34 +1873,39 @@
           <GroupName>DriversCom</GroupName>
           <Files>
             <File>
+              <FileName>Esp8266Link.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\DriversCom\esp8266\Esp8266Link.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Socket_esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\DriversCom\esp8266\Socket_esp8266.cpp</FilePath>
+            </File>
+            <File>
               <FileName>ModbusLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SHARP_PM2_5.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MqttLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\MqttLink\MqttLink.cpp</FilePath>
+              <FilePath>..\component\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusMaster.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusMaster.cpp</FilePath>
+              <FilePath>..\component\DriversCom\ModbusLink\ModbusMaster.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusSlave.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusSlave.cpp</FilePath>
+              <FilePath>..\component\DriversCom\ModbusLink\ModbusSlave.cpp</FilePath>
             </File>
             <File>
-              <FileName>Esp8266Link.cpp</FileName>
+              <FileName>MqttLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\esp8266\Esp8266Link.cpp</FilePath>
+              <FilePath>..\component\DriversCom\MqttLink\MqttLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SHARP_PM2_5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1925,7 +1935,7 @@
             <File>
               <FileName>Storage.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Storage\Storage.cpp</FilePath>
+              <FilePath>..\component\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1935,22 +1945,22 @@
             <File>
               <FileName>CheckSum.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\CheckSum.cpp</FilePath>
+              <FilePath>..\component\Security\CheckSum.cpp</FilePath>
             </File>
             <File>
               <FileName>Crc.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\Crc.cpp</FilePath>
+              <FilePath>..\component\Security\Crc.cpp</FilePath>
             </File>
             <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\Math.cpp</FilePath>
+              <FilePath>..\component\Security\Math.cpp</FilePath>
             </File>
             <File>
               <FileName>Parity.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\Parity.cpp</FilePath>
+              <FilePath>..\component\Security\Parity.cpp</FilePath>
             </File>
           </Files>
         </Group>
