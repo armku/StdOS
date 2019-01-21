@@ -22,7 +22,7 @@ public:
 	    
     OutputPort& operator=(bool value) { Write(value); return *this; }
     OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }
-    operator bool()  { return Read(); }
+    
 
 protected:
     virtual void OnOpen(void* param);

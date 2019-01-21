@@ -28,6 +28,7 @@ public:
 	void Write(bool value);
 
 	static void Write(Pin pin, bool value);
+	operator bool() { return Read(); }
 public:
 	GPIO_TypeDef *_port; /**< 引脚的端口 */
 	uint16_t      _pin; /**< 引脚的序号 */
