@@ -560,26 +560,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>BspPlatform</GroupName>
-          <Files>
-            <File>
-              <FileName>BspPlatform.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\main.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Util</GroupName>
           <Files>
             <File>
@@ -632,6 +612,21 @@
         <Group>
           <GroupName>Porting</GroupName>
           <Files>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\main.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BspPlatform.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
+            </File>
             <File>
               <FileName>mcuGpio.cpp</FileName>
               <FileType>8</FileType>
@@ -1610,26 +1605,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>BspPlatform</GroupName>
-          <Files>
-            <File>
-              <FileName>BspPlatform.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\main.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Util</GroupName>
           <Files>
             <File>
@@ -1682,6 +1657,21 @@
         <Group>
           <GroupName>Porting</GroupName>
           <Files>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\main.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BspPlatform.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
+            </File>
             <File>
               <FileName>mcuGpio.cpp</FileName>
               <FileType>8</FileType>
