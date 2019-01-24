@@ -835,31 +835,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Kernel</GroupName>
-          <Files>
-            <File>
-              <FileName>List.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sys.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Task.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Time.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Time.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Storage</GroupName>
           <Files>
             <File>
@@ -1041,6 +1016,31 @@
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\lib\Version.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>STDOS</GroupName>
+          <Files>
+            <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\List.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Kernel\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Task.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Kernel\Task.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Kernel\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1875,31 +1875,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Kernel</GroupName>
-          <Files>
-            <File>
-              <FileName>List.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sys.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Task.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Time.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Time.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Storage</GroupName>
           <Files>
             <File>
@@ -2081,6 +2056,31 @@
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\lib\Version.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>STDOS</GroupName>
+          <Files>
+            <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\List.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Kernel\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Task.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Kernel\Task.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Kernel\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
