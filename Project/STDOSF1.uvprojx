@@ -377,16 +377,6 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>STARTUP</GroupName>
-          <Files>
-            <File>
-              <FileName>startup_stm32f10x_md.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
@@ -552,11 +542,6 @@
               <FileType>1</FileType>
               <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
             </File>
-            <File>
-              <FileName>Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Test.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -612,6 +597,11 @@
         <Group>
           <GroupName>Porting</GroupName>
           <Files>
+            <File>
+              <FileName>startup_stm32f10x_md.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
+            </File>
             <File>
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
@@ -1417,16 +1407,6 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>STARTUP</GroupName>
-          <Files>
-            <File>
-              <FileName>startup_stm32f10x_md.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
@@ -1592,11 +1572,6 @@
               <FileType>1</FileType>
               <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
             </File>
-            <File>
-              <FileName>Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Test.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1652,6 +1627,11 @@
         <Group>
           <GroupName>Porting</GroupName>
           <Files>
+            <File>
+              <FileName>startup_stm32f10x_md.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
+            </File>
             <File>
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
