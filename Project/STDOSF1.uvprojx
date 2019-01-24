@@ -452,7 +452,7 @@
             <File>
               <FileName>mcuGpio.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\porting\STM32F1\mcuGpio.cpp</FilePath>
+              <FilePath>..\Bsp\STM32F1\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1464,7 +1464,7 @@
             <File>
               <FileName>mcuGpio.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\porting\STM32F1\mcuGpio.cpp</FilePath>
+              <FilePath>..\Bsp\STM32F1\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
