@@ -395,11 +395,6 @@
               <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
             </File>
             <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\main.cpp</FilePath>
-            </File>
-            <File>
               <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
@@ -464,6 +459,11 @@
         <Group>
           <GroupName>Port</GroupName>
           <Files>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\main.cpp</FilePath>
+            </File>
             <File>
               <FileName>Gpio.cpp</FileName>
               <FileType>8</FileType>
@@ -1407,11 +1407,6 @@
               <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
             </File>
             <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\main.cpp</FilePath>
-            </File>
-            <File>
               <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
@@ -1476,6 +1471,11 @@
         <Group>
           <GroupName>Port</GroupName>
           <Files>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\main.cpp</FilePath>
+            </File>
             <File>
               <FileName>Gpio.cpp</FileName>
               <FileType>8</FileType>
