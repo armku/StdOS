@@ -512,17 +512,47 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Porting</GroupName>
+          <GroupName>USER</GroupName>
           <Files>
+            <File>
+              <FileName>Bsp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>DOC</GroupName>
+          <Files>
+            <File>
+              <FileName>Readme.MD</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Doc\Readme.MD</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\main.cpp</FilePath>
+            </File>
             <File>
               <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
             </File>
             <File>
-              <FileName>main.cpp</FileName>
+              <FileName>USART.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\main.cpp</FilePath>
+              <FilePath>..\StdOS\OnChip\USART.cpp</FilePath>
             </File>
             <File>
               <FileName>Port.cpp</FileName>
@@ -545,19 +575,9 @@
               <FilePath>..\StdOS\OnChip\Spi.cpp</FilePath>
             </File>
             <File>
-              <FileName>USART.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\USART.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\PwmSolo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer.cpp</FileName>
@@ -587,39 +607,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>USER</GroupName>
-        </Group>
-        <Group>
-          <GroupName>DOC</GroupName>
-          <Files>
-            <File>
-              <FileName>Readme.MD</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Doc\Readme.MD</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Bsp</GroupName>
-          <Files>
-            <File>
-              <FileName>Bsp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\font.c</FilePath>
-            </File>
-            <File>
-              <FileName>ssd1309font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Port</GroupName>
           <Files>
             <File>
@@ -632,6 +619,16 @@
         <Group>
           <GroupName>Drivers</GroupName>
           <Files>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
+            </File>
             <File>
               <FileName>Storage.cpp</FileName>
               <FileType>8</FileType>
@@ -1527,17 +1524,47 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Porting</GroupName>
+          <GroupName>USER</GroupName>
           <Files>
+            <File>
+              <FileName>Bsp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>DOC</GroupName>
+          <Files>
+            <File>
+              <FileName>Readme.MD</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Doc\Readme.MD</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\main.cpp</FilePath>
+            </File>
             <File>
               <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
             </File>
             <File>
-              <FileName>main.cpp</FileName>
+              <FileName>USART.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\main.cpp</FilePath>
+              <FilePath>..\StdOS\OnChip\USART.cpp</FilePath>
             </File>
             <File>
               <FileName>Port.cpp</FileName>
@@ -1560,19 +1587,9 @@
               <FilePath>..\StdOS\OnChip\Spi.cpp</FilePath>
             </File>
             <File>
-              <FileName>USART.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\USART.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\PwmSolo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer.cpp</FileName>
@@ -1602,39 +1619,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>USER</GroupName>
-        </Group>
-        <Group>
-          <GroupName>DOC</GroupName>
-          <Files>
-            <File>
-              <FileName>Readme.MD</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Doc\Readme.MD</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Bsp</GroupName>
-          <Files>
-            <File>
-              <FileName>Bsp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\font.c</FilePath>
-            </File>
-            <File>
-              <FileName>ssd1309font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Port</GroupName>
           <Files>
             <File>
@@ -1647,6 +1631,16 @@
         <Group>
           <GroupName>Drivers</GroupName>
           <Files>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
+            </File>
             <File>
               <FileName>Storage.cpp</FileName>
               <FileType>8</FileType>
