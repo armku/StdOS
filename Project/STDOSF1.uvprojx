@@ -620,22 +620,22 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Core</GroupName>
-          <Files>
-            <File>
-              <FileName>List.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\List.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Port</GroupName>
           <Files>
             <File>
               <FileName>Gpio.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Core\Port\Gpio.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Porting</GroupName>
+          <Files>
+            <File>
+              <FileName>mcuGpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\porting\STM32F1\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -848,6 +848,11 @@
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\List.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Kernel\Sys.cpp</FilePath>
@@ -1026,16 +1031,6 @@
               <FileName>SHARP_PM2_5Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\DriversCom\SHARP_PM2_5\SHARP_PM2_5Demo.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Porting</GroupName>
-          <Files>
-            <File>
-              <FileName>mcuGpio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\porting\STM32F1\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1675,22 +1670,22 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Core</GroupName>
-          <Files>
-            <File>
-              <FileName>List.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\List.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Port</GroupName>
           <Files>
             <File>
               <FileName>Gpio.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Core\Port\Gpio.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Porting</GroupName>
+          <Files>
+            <File>
+              <FileName>mcuGpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\porting\STM32F1\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1903,6 +1898,11 @@
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\List.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Kernel\Sys.cpp</FilePath>
@@ -2081,16 +2081,6 @@
               <FileName>SHARP_PM2_5Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\DriversCom\SHARP_PM2_5\SHARP_PM2_5Demo.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Porting</GroupName>
-          <Files>
-            <File>
-              <FileName>mcuGpio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\porting\STM32F1\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
