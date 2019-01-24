@@ -512,89 +512,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>USER</GroupName>
-        </Group>
-        <Group>
-          <GroupName>DOC</GroupName>
-          <Files>
-            <File>
-              <FileName>Readme.MD</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Doc\Readme.MD</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Bsp</GroupName>
-          <Files>
-            <File>
-              <FileName>Bsp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\font.c</FilePath>
-            </File>
-            <File>
-              <FileName>ssd1309font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Util</GroupName>
-          <Files>
-            <File>
-              <FileName>Util.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\Util\Util.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>App</GroupName>
-          <Files>
-            <File>
-              <FileName>key_driver.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\component\app\key_driver.c</FilePath>
-            </File>
-            <File>
-              <FileName>BlinkPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\BlinkPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>bspkey.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\bspkey.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FlushPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\FlushPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PID.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\PID.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Port</GroupName>
-          <Files>
-            <File>
-              <FileName>Gpio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Port\Gpio.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Porting</GroupName>
           <Files>
             <File>
@@ -670,8 +587,56 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>USER</GroupName>
+        </Group>
+        <Group>
+          <GroupName>DOC</GroupName>
+          <Files>
+            <File>
+              <FileName>Readme.MD</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Doc\Readme.MD</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>Bsp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Port</GroupName>
+          <Files>
+            <File>
+              <FileName>Gpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\Port\Gpio.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Drivers</GroupName>
           <Files>
+            <File>
+              <FileName>Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\Storage\Storage.cpp</FilePath>
+            </File>
             <File>
               <FileName>AD7124.cpp</FileName>
               <FileType>8</FileType>
@@ -825,16 +790,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Storage</GroupName>
-          <Files>
-            <File>
-              <FileName>Storage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\Storage\Storage.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Security</GroupName>
           <Files>
             <File>
@@ -856,6 +811,81 @@
               <FileName>Parity.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\Security\Parity.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>lib</GroupName>
+          <Files>
+            <File>
+              <FileName>key_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\app\key_driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>PID.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\app\PID.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bspkey.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\app\bspkey.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Util.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\Util\Util.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BlinkPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\app\BlinkPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FlushPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\app\FlushPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Buffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\lib\Buffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DateTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\lib\DateTime.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Version.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\lib\Version.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>STDOS</GroupName>
+          <Files>
+            <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\List.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Kernel\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Task.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Kernel\Task.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Kernel\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -986,51 +1016,6 @@
               <FileName>SHARP_PM2_5Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\DriversCom\SHARP_PM2_5\SHARP_PM2_5Demo.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>lib</GroupName>
-          <Files>
-            <File>
-              <FileName>Buffer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\lib\Buffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DateTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\lib\DateTime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Version.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\lib\Version.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>STDOS</GroupName>
-          <Files>
-            <File>
-              <FileName>List.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sys.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Task.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Time.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1542,89 +1527,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>USER</GroupName>
-        </Group>
-        <Group>
-          <GroupName>DOC</GroupName>
-          <Files>
-            <File>
-              <FileName>Readme.MD</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Doc\Readme.MD</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Bsp</GroupName>
-          <Files>
-            <File>
-              <FileName>Bsp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\font.c</FilePath>
-            </File>
-            <File>
-              <FileName>ssd1309font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Util</GroupName>
-          <Files>
-            <File>
-              <FileName>Util.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\Util\Util.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>App</GroupName>
-          <Files>
-            <File>
-              <FileName>key_driver.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\component\app\key_driver.c</FilePath>
-            </File>
-            <File>
-              <FileName>BlinkPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\BlinkPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>bspkey.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\bspkey.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FlushPort.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\FlushPort.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PID.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\app\PID.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Port</GroupName>
-          <Files>
-            <File>
-              <FileName>Gpio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Port\Gpio.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Porting</GroupName>
           <Files>
             <File>
@@ -1700,8 +1602,56 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>USER</GroupName>
+        </Group>
+        <Group>
+          <GroupName>DOC</GroupName>
+          <Files>
+            <File>
+              <FileName>Readme.MD</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Doc\Readme.MD</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>Bsp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Port</GroupName>
+          <Files>
+            <File>
+              <FileName>Gpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\Port\Gpio.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Drivers</GroupName>
           <Files>
+            <File>
+              <FileName>Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\Storage\Storage.cpp</FilePath>
+            </File>
             <File>
               <FileName>AD7124.cpp</FileName>
               <FileType>8</FileType>
@@ -1855,16 +1805,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Storage</GroupName>
-          <Files>
-            <File>
-              <FileName>Storage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\Storage\Storage.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Security</GroupName>
           <Files>
             <File>
@@ -1886,6 +1826,81 @@
               <FileName>Parity.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\Security\Parity.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>lib</GroupName>
+          <Files>
+            <File>
+              <FileName>key_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\app\key_driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>PID.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\app\PID.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bspkey.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\app\bspkey.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Util.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\Util\Util.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BlinkPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\app\BlinkPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FlushPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\app\FlushPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Buffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\lib\Buffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DateTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\lib\DateTime.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Version.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\component\lib\Version.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>STDOS</GroupName>
+          <Files>
+            <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\List.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Kernel\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Task.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Kernel\Task.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Kernel\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2016,51 +2031,6 @@
               <FileName>SHARP_PM2_5Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\DriversCom\SHARP_PM2_5\SHARP_PM2_5Demo.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>lib</GroupName>
-          <Files>
-            <File>
-              <FileName>Buffer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\lib\Buffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DateTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\lib\DateTime.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Version.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\component\lib\Version.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>STDOS</GroupName>
-          <Files>
-            <File>
-              <FileName>List.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\List.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sys.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Sys.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Task.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Time.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
