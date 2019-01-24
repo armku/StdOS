@@ -462,6 +462,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Port</GroupName>
+          <Files>
+            <File>
+              <FileName>Gpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\Port\Gpio.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
@@ -603,16 +613,6 @@
               <FileName>Readme.MD</FileName>
               <FileType>5</FileType>
               <FilePath>..\Doc\Readme.MD</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Port</GroupName>
-          <Files>
-            <File>
-              <FileName>Gpio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Port\Gpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1474,6 +1474,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Port</GroupName>
+          <Files>
+            <File>
+              <FileName>Gpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\Port\Gpio.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
@@ -1615,16 +1625,6 @@
               <FileName>Readme.MD</FileName>
               <FileType>5</FileType>
               <FilePath>..\Doc\Readme.MD</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Port</GroupName>
-          <Files>
-            <File>
-              <FileName>Gpio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Port\Gpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
