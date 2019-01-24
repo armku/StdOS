@@ -377,6 +377,91 @@
       </TargetOption>
       <Groups>
         <Group>
+          <GroupName>USER</GroupName>
+          <Files>
+            <File>
+              <FileName>Bsp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\main.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>startup_stm32f10x_md.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
+            </File>
+            <File>
+              <FileName>USART.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\USART.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BspPlatform.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputCapture_TIM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\InputCapture_TIM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\Spi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\PwmSolo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PWM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\PWM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputCapture_EXIT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\InputCapture_EXIT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>mcuGpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\porting\STM32F1\mcuGpio.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
@@ -512,97 +597,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>USER</GroupName>
-          <Files>
-            <File>
-              <FileName>Bsp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>DOC</GroupName>
           <Files>
             <File>
               <FileName>Readme.MD</FileName>
               <FileType>5</FileType>
               <FilePath>..\Doc\Readme.MD</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Bsp</GroupName>
-          <Files>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\main.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>startup_stm32f10x_md.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
-            </File>
-            <File>
-              <FileName>USART.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\USART.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BspPlatform.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InputCapture_TIM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\InputCapture_TIM.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSolo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\PwmSolo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PWM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\PWM.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InputCapture_EXIT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\InputCapture_EXIT.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>mcuGpio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\porting\STM32F1\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1389,6 +1389,91 @@
       </TargetOption>
       <Groups>
         <Group>
+          <GroupName>USER</GroupName>
+          <Files>
+            <File>
+              <FileName>Bsp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\main.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>startup_stm32f10x_md.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
+            </File>
+            <File>
+              <FileName>USART.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\USART.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BspPlatform.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputCapture_TIM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\InputCapture_TIM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\Spi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\PwmSolo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PWM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\PWM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputCapture_EXIT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\InputCapture_EXIT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>mcuGpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\porting\STM32F1\mcuGpio.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
@@ -1524,97 +1609,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>USER</GroupName>
-          <Files>
-            <File>
-              <FileName>Bsp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>DOC</GroupName>
           <Files>
             <File>
               <FileName>Readme.MD</FileName>
               <FileType>5</FileType>
               <FilePath>..\Doc\Readme.MD</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Bsp</GroupName>
-          <Files>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\main.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>startup_stm32f10x_md.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
-            </File>
-            <File>
-              <FileName>USART.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\USART.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BspPlatform.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\BspPlatform\BspPlatform.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InputCapture_TIM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\InputCapture_TIM.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PwmSolo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\PwmSolo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PWM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\PWM.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InputCapture_EXIT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\InputCapture_EXIT.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>mcuGpio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\porting\STM32F1\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
