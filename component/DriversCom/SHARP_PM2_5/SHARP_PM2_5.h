@@ -10,7 +10,7 @@
 #define _SHARP_PM2_5_H_
 
 #include "stm32f10x.h"
-#include "USART.h"
+#include "../Bsp/Porting.h"
 
 class Sharp_PM_2_5
 {

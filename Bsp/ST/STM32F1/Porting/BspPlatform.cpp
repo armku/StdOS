@@ -2,9 +2,9 @@
 #include "Sys.h"
 #include "Port.h"
 #include "Platform\stm32.h"
-#include "OnChip\Configuration.h"
+#include "Configuration.h"
 #include "USART.h"
-#include "BspPlatform/Interrupt.h"
+#include "Interrupt.h"
 
 void TimeUpdate();
 

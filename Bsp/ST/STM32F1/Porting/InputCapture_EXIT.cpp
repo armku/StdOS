@@ -1,5 +1,5 @@
 #include "InputCapture_EXIT.h"
-#include "BspPlatform\Interrupt.h"
+#include "Interrupt.h"
 //#include "TaskManager.h"
 
 InputCapture_EXIT::InputCapture_EXIT(GPIO_TypeDef *exitPort, u8 exitPin, u8 itGroup,u8 prePriority,u8 subPriority)

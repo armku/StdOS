@@ -1,7 +1,6 @@
 #include "Sys.h"
 #include "Bsp\Bsp.h"
-#include "OnChip\Configuration.h"
-#include "BspPlatform\BspPlatform.h"
+#include "../Bsp/Porting.h"
 
 int main(void)
 {

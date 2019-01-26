@@ -1,5 +1,5 @@
 #include "USART.h"
-#include "BspPlatform/Interrupt.h"
+#include "Interrupt.h"
 #include "Configuration.h"
 #include "Sys.h"
 

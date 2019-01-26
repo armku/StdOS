@@ -1,5 +1,5 @@
 #include "USART.h"
-#include "BspPlatform\Interrupt.h"
+#include "Interrupt.h"
 #include "Configuration.h"
 
 //#define _USARTTEST_CPP
@@ -57,9 +57,9 @@ void WatchDogTestInit()
 }
 #endif
 
-#include "OnChip\PwmSolo.h"
+#include "PwmSolo.h"
 
-#define _PWMSOLO_TEST_CPP
+//#define _PWMSOLO_TEST_CPP
 #ifdef _PWMSOLO_TEST_CPP
 
 PwmSolo pwm(10000, 2700);
@@ -101,7 +101,7 @@ void LedTestInit()
 }
 #endif
 
-#include "OnChip\Configuration.h"
+#include "Configuration.h"
 #include "Sys.h"
 
 //#define _SERIALPORT485TEST_CPP

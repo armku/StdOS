@@ -1,7 +1,7 @@
 #ifndef _W5500_H
 #define _W5500_H
 
-#include "Spi.h"
+#include "../Bsp/Porting.h"
 
 class W5500
 {

@@ -2,7 +2,7 @@
 #define __BlinkPort_H__
 
 #include "Kernel\Sys.h"
-#include "OnChip\Port.h"
+#include "../Bsp/Porting.h"
 
 // 闪烁端口
 class BlinkPort

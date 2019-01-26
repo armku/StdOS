@@ -2,6 +2,7 @@
 #define _AT24CXX_H_
 
 #include "../I2C.h"
+
 typedef enum
 {
 	AT24C01 = 127,  //

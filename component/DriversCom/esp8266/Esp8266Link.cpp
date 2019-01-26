@@ -4,7 +4,7 @@
 #include "OnChip/USART.h"
 #include "BspPlatform/Interrupt.h"
 #include "BspPlatform\BspPlatform.h"
-#include "OnChip\Port.h"
+#include "../Bsp/Porting.h"
 #include "OnChip\Configuration.h"
 #include "../component/lib/Buffer.h"
 #include <stdio.h>  

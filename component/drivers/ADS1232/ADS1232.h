@@ -1,6 +1,6 @@
 #ifndef _ADS1232_H
 #define _ADS1232_H
-    #include "OnChip\Port.h"
+#include "../Bsp/Porting.h"
 
     class ADS1232
     {
