@@ -1,7 +1,7 @@
 #ifndef __KEY_DRIVER_H__
 #define __KEY_DRIVER_H__
 
-#include "Type.h"
+#include <stdint.h>
 //包含必要类型定义头文件，如下面用到的uint8_t等类型声明
 //#include "stm32l1xx_hal.h"
 

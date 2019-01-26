@@ -1,5 +1,5 @@
 #include "ST7565R.h"
-#include "Sys.h"
+#include "../../../StdOS/Kernel/Sys.h"
 
 //#define _ST7565R_TEST_CPP
 

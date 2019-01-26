@@ -1,5 +1,5 @@
 #include "BlinkPort.h"
-#include "Sys.h"
+#include "../../StdOS/Kernel/Sys.h"
 
 BlinkPort::BlinkPort()
 {

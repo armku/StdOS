@@ -1,5 +1,5 @@
 #include "TTime.h"
-#include "../Bsp/Porting.h"
+#include "../../Bsp/Porting.h"
 
 TTime Time; //系统时间，不建议用户直接使用
 TTime::TTime()
@@ -179,8 +179,8 @@ uint32_t TTime::UsToTicks(uint32_t us)const
 		result = 0;
 	return result;
 }
-#include "../Bsp/ST/stm32.h"
-#include "../Bsp/Porting.h"
+#include "../../Bsp/ST/stm32.h"
+#include "../../Bsp/Porting.h"
 
 extern int gTicks; //
 void TTime::Init()

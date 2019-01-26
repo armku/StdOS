@@ -894,7 +894,7 @@ extern "C"
 #endif
 }
 ///以下为需要优化内容，旧版本
-#include "../Bsp/ST/stm32.h"
+#include "../../../stm32.h"
 //中断
 
 Func DeviceConfigCenter::PExit0 = 0;

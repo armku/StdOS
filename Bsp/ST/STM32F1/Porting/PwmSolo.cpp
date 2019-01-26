@@ -1,5 +1,5 @@
 #include "PwmSolo.h"
-#include "../Bsp/ST/stm32.h"
+#include "../../stm32.h"
 
 void PwmSolo::OnOpen2()
 {

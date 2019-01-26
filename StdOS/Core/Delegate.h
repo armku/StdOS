@@ -1,7 +1,7 @@
 #ifndef _Delegate_H_
 #define _Delegate_H_
 
-#include "Core\Type.h"
+#include "../Core/Type.h"
 
 // 没有参数和返回值的委托
 typedef void (*Func)(void);

@@ -1,9 +1,9 @@
 #ifndef _RX8025T_H
 #define _RX8025T_H
 
-#include "Kernel\Sys.h"
+#include "../../../StdOS/Kernel/Sys.h"
 #include "../I2C.h"
-#include "../component/lib/DateTime.h"
+#include "../../../component/lib/DateTime.h"
 
 class RX8025T
 {

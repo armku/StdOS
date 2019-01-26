@@ -1,6 +1,6 @@
 #include "WatchDog.h"
-#include "Kernel\Sys.h"
-#include "../Bsp/ST/stm32.h"
+#include "../../../../StdOS/Kernel/Sys.h"
+#include "../../stm32.h"
 
 WatchDog::WatchDog()
 {

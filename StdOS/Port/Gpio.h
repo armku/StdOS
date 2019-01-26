@@ -1,8 +1,8 @@
 #ifndef _STD_GPIO_H
 #define _STD_GPIO_H
 
-#include "Type.h"
-#include "../Bsp/Pin.h"
+#include "../Core/Type.h"
+#include "../../Bsp/Pin.h"
 
 typedef enum
 {

@@ -1,6 +1,7 @@
 #ifndef _MATH_H
 #define _MATH_H
-#include "Type.h"
+
+#include <stdint.h>
 
 #define MAX(a,b) (a)>(b)?(a):(b)
 #define MIN(a,b) (a)<(b)?(a):(b)

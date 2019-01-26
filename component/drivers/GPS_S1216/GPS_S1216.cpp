@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "GPS_S1216.h"
-#include "Sys.h"
+#include "../../../StdOS/Kernel/Sys.h"
 //////////////////////////////////////////////////////////////////////////////////////////////////// 	
 //SkyTra S1216F8 配置输出信息结构体
 __packed typedef struct

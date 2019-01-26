@@ -1,4 +1,4 @@
-#include "Sys.h"
+#include "../../../StdOS/Kernel/Sys.h"
 #include "MCP3421.h"
 
 #define _MCP3421TEST_CPP

@@ -1,8 +1,8 @@
 #ifndef __FlushPort_H__
 #define __FlushPort_H__
 
-#include "Kernel\Sys.h"
-#include "../Bsp/Porting.h"
+#include "../../StdOS/Kernel/Sys.h"
+#include "../../Bsp/Porting.h"
 
 // 闪烁端口
 // 默认慢闪，Start后快闪一定时间，-1时间表示一直快闪，Stop停止

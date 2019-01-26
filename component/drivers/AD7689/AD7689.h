@@ -1,7 +1,7 @@
 #ifndef _AD7689_H
 #define _AD7689_H
 
-#include "../Bsp/Porting.h"
+#include "../../../Bsp/Porting.h"
 
     #define MAXCH	8
     #define CHDELAY	2	//通道切换延时时间，用于数据稳定

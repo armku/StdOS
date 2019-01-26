@@ -1,5 +1,5 @@
-#include "Sys.h"
-#include "Bsp.h"
+#include "../StdOS/Kernel/Sys.h"
+#include "../User/Bsp.h"
 #include "../Bsp/Porting.h"
 
 int main(void)

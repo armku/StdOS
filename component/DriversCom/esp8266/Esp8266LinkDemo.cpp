@@ -1,9 +1,9 @@
 #include "EspDemoLink.h"
 #include <stdio.h>
 #include <string.h>  
-#include "Sys.h"
-#include "../Bsp/Porting.h"
-#include "Task.h"
+#include "../../../StdOS/Kernel/Sys.h"
+#include "../../../Bsp/Porting.h"
+#include "../../../StdOS/Kernel/Task.h"
 
 
 #define _ESPDEMOLINKTEST_CPP

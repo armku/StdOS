@@ -6,9 +6,9 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "Task.h"
 #include <string.h>
 #include "Sys.h"
-#include "../Bsp/ST/stm32.h"
-#include "../Bsp/Porting.h"
-#include "../component/lib/Buffer.h"
+#include "../../Bsp/ST/stm32.h"
+#include "../../Bsp/Porting.h"
+#include "../../component/lib/Buffer.h"
 
 TSys Sys; //系统参数
 
@@ -188,7 +188,7 @@ void TSys::Start()
 	Task::Scheduler()->Start();
 }
 
-#include "../Bsp/Porting.h"
+#include "../../Bsp/Porting.h"
 /////////////////////////////////////////////////////////////////////////////
 extern "C"
 {

@@ -92,7 +92,7 @@ MaxP： 最大加热功率   pwmmax:  PWM 最大值
 #ifndef _PID_H
 #define _PID_H
 
-#include "Sys.h"
+#include <stdint.h>
 
 class PID
 {

@@ -1,7 +1,7 @@
 #ifndef __Version_H__
 #define __Version_H__
 
-#include "Type.h"
+#include "../../StdOS/Core/Type.h"
 
 // °æ±¾
 class Version

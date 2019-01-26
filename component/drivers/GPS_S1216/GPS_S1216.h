@@ -1,7 +1,7 @@
 #ifndef _GPS_S1216_H
 #define _GPS_S1216_H
 
-#include "../component/lib/Buffer.h"
+#include "../../../component/lib/Buffer.h"
 //GPS NMEA-0183协议重要参数结构体定义 
 //卫星信息
 __packed typedef struct

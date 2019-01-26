@@ -1,7 +1,7 @@
 #ifndef __WatchDog_H__
 #define __WatchDog_H__
 
-#include "Core\Type.h"
+#include "../../../../StdOS/Core/Type.h"
 
 // ø¥√≈π∑
 class WatchDog

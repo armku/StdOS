@@ -1,6 +1,6 @@
-#include "Sys.h"
+#include "../../../../StdOS/Kernel/Sys.h"
 #include "Spi.h"
-#include "../Bsp/ST/stm32.h"
+#include "../../stm32.h"
 
 void Spi::Init()
 {

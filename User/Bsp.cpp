@@ -1,5 +1,5 @@
 #include "../Bsp/Porting.h"
-#include "Sys.h"
+#include "../StdOS/Kernel/Sys.h"
 #include "../component/lib/Buffer.h"
 
 char *AppVersion = "0.1.2018.1115"; //°æ±¾ºÅ

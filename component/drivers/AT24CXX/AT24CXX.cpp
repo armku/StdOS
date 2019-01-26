@@ -1,5 +1,5 @@
 #include "AT24CXX.h"
-#include "Sys.h"
+#include "../../../StdOS/Kernel/Sys.h"
 
 #define macI2C_WR	0		/* Ð´¿ØÖÆbit */
 #define macI2C_RD	1		/* ¶Á¿ØÖÆbit */

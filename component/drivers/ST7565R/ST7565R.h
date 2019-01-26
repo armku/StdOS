@@ -5,8 +5,8 @@
 左上角坐标为（0，0），右下角坐标为(127,63)
  */
 
-#include "Type.h"
-#include "../Bsp/Porting.h"
+#include "../../../StdOS/Core/Type.h"
+#include "../../../Bsp/Porting.h"
 
 class CLcd
 {

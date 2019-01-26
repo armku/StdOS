@@ -1,7 +1,7 @@
 #ifndef _I2C_H_
 #define _I2C_H_
 
-#include "../Bsp/Porting.h"
+#include "../../Bsp/Porting.h"
 
 //SCL		开漏复用输出
 //SDA		开漏复用输出

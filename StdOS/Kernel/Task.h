@@ -1,7 +1,7 @@
 #ifndef __Task_H__
 #define __Task_H__
 
-#include "Kernel\Sys.h"
+#include "Sys.h"
 
 class TaskScheduler;
 
