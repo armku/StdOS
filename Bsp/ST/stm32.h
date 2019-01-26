@@ -56,17 +56,17 @@
 
 #if defined(STM32F4)
 	#include "stm32f4xx.h"
-	#include "STM32F4\Pin_STM32F4.h"
+	#include "STM32F1/Porting/Pin_STM32F4.h"
 #elif defined(STM32F2)
 	#include "stm32f2xx.h"
 #elif defined(STM32F1)
 	#include "stm32f10x.h"
-	#include "STM32F1/Pin_STM32F1.h"
+	#include "STM32F1/Porting/Pin_STM32F1.h"
 #elif defined(STM32F3)
 	#include "stm32f3xx.h"
 #elif defined(STM32F0)
 	#include "stm32f0xx.h"
-	#include "STM32F0/Pin_STM32F0.h"
+	#include "STM32F1/Porting/Pin_STM32F0.h"
 #elif defined(GD32F150)
 	#include "stm32f0xx.h"
 #else

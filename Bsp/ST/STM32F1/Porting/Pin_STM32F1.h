@@ -1,7 +1,7 @@
 ﻿#ifndef _PIN_STM32F1_H_
 #define _PIN_STM32F1_H_ 1
 
-#include "../Pin.h"
+#include "../Bsp/Pin.h"
 
 #ifdef STM32F10X_HD
 	/* 通用同步/异步收发器(USART)针脚 ------------------------------------------------------------------*/

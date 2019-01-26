@@ -2,7 +2,7 @@
 #define _STD_GPIO_H
 
 #include "Type.h"
-#include "Platform/Pin.h"
+#include "../Bsp/Pin.h"
 
 typedef enum
 {

@@ -134,7 +134,7 @@
 //old
 
 #include <stdint.h>
-#include "Platform\Pin.h"
+#include "../Bsp/Pin.h"
 #include "Port.h"
 
 typedef enum

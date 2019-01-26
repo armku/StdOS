@@ -179,7 +179,7 @@ uint32_t TTime::UsToTicks(uint32_t us)const
 		result = 0;
 	return result;
 }
-#include "Platform\stm32.h"
+#include "../Bsp/ST/stm32.h"
 #include "../Bsp/Porting.h"
 
 extern int gTicks; //

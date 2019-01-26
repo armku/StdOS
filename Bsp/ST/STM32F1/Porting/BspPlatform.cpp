@@ -1,7 +1,7 @@
 #include "BspPlatform.h"
 #include "Sys.h"
 #include "Port.h"
-#include "Platform\stm32.h"
+#include "../Bsp/ST/stm32.h"
 #include "Configuration.h"
 #include "USART.h"
 #include "Interrupt.h"
