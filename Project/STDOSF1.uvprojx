@@ -445,14 +445,14 @@
               <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
             </File>
             <File>
-              <FileName>mcuGpio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Bsp\STM32F1\mcuGpio.cpp</FilePath>
-            </File>
-            <File>
               <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\Bsp\ST\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
+            </File>
+            <File>
+              <FileName>mcuGpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Bsp\ST\STM32F1\Porting\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1457,14 +1457,14 @@
               <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
             </File>
             <File>
-              <FileName>mcuGpio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Bsp\STM32F1\mcuGpio.cpp</FilePath>
-            </File>
-            <File>
               <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\Bsp\ST\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
+            </File>
+            <File>
+              <FileName>mcuGpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Bsp\ST\STM32F1\Porting\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>

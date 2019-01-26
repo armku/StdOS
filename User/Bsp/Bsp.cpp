@@ -2,7 +2,6 @@
 #include "OnChip/USART.h"
 #include "Sys.h"
 #include "../component/lib/Buffer.h"
-#include "../Bsp/STM32F1/mcuGpio.h"
 
 char *AppVersion = "0.1.2018.1115"; //°æ±¾ºÅ
 
