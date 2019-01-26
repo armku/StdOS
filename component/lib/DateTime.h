@@ -1,7 +1,7 @@
 #ifndef __DateTime_H__
 #define __DateTime_H__
 
-#include "../../StdOS/Core/Type.h"
+#include <stdint.h>
 
 // 时间日期
 class DateTime

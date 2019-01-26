@@ -2,6 +2,7 @@
 #define _CHECKSUM_H
 
 #include <stdint.h>
+
 class CheckSum
 {
 public:

@@ -1,6 +1,6 @@
 #ifndef _PWMSOLO_H
 #define _PWMSOLO_H
-#include "../../../../StdOS/Core/Type.h"
+#include <stdint.h>
 #include "Port.h"
 
 class PwmSolo : public mcuGpio

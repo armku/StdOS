@@ -1,7 +1,7 @@
 #ifndef _DATAFRAME_H
 #define _DATAFRAME_H
 
-#include "../../StdOS/Core/Type.h"
+#include <stdint.h>
 
 #define MAX_FRAME_DATA_LENGTH 100
 //#define FRAME_HEADER 0xAA

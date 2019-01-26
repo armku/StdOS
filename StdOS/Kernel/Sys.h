@@ -1,7 +1,8 @@
 #ifndef _Sys_H_
 #define _Sys_H_
 
-#include "../Core/Type.h"
+#include <stdint.h>
+#include "../../component/Type.h"
 #include "../Core/List.h"
 #include "../Core/Delegate.h"
 #include "../../component/lib/Version.h"

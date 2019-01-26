@@ -2,7 +2,6 @@
 #define _Buffer_H_
 
 #include <stdint.h>
-//#include "../../StdOS/Core/Type.h"
 
 class Buffer 
 {

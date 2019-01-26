@@ -1,4 +1,4 @@
-#include "../../../StdOS/Core/Type.h"
+#include <stdint.h>
 #include "../../../component/Security/Crc.h"
 #include "../DataFrame.h"
 

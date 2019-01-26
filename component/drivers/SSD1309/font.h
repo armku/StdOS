@@ -1,7 +1,7 @@
 #ifndef _FONT_H
 #define _FONT_H
 
-#include "../../../StdOS/Core/Type.h"
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C"
