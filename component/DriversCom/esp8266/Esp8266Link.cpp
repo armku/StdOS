@@ -98,7 +98,7 @@ bool EspDemoLink::JoinAP(char *pSSID, char *pPassWord)
 	char cCmd[120];
 	sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", pSSID, pPassWord);
 	com << cCmd<<"\r\n";
-	*pCOM1 << cCmd<<"\r\n";
+//	*pCOM1 << cCmd<<"\r\n";
 	Sys.Sleep(200);
 
 	return this->Receive11("OK");
