@@ -1,5 +1,5 @@
 #include "Sys.h"
-#include "Bsp\Bsp.h"
+#include "Bsp.h"
 #include "../Bsp/Porting.h"
 
 int main(void)

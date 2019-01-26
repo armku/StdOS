@@ -382,7 +382,7 @@
             <File>
               <FileName>Bsp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
+              <FilePath>..\User\Bsp.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -408,11 +408,6 @@
               <FileName>Interrupt.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Bsp\ST\STM32F1\Porting\Interrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Bsp\ST\STM32F1\Porting\Demo.cpp</FilePath>
             </File>
             <File>
               <FileName>InputCapture_EXIT.cpp</FileName>
@@ -625,16 +620,6 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\font.c</FilePath>
-            </File>
-            <File>
-              <FileName>ssd1309font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
-            </File>
-            <File>
               <FileName>Storage.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\Storage\Storage.cpp</FilePath>
@@ -748,6 +733,16 @@
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\drivers\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\ssd1309font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1399,7 +1394,7 @@
             <File>
               <FileName>Bsp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
+              <FilePath>..\User\Bsp.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1425,11 +1420,6 @@
               <FileName>Interrupt.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Bsp\ST\STM32F1\Porting\Interrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Bsp\ST\STM32F1\Porting\Demo.cpp</FilePath>
             </File>
             <File>
               <FileName>InputCapture_EXIT.cpp</FileName>
@@ -1642,16 +1632,6 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\font.c</FilePath>
-            </File>
-            <File>
-              <FileName>ssd1309font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
-            </File>
-            <File>
               <FileName>Storage.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\Storage\Storage.cpp</FilePath>
@@ -1765,6 +1745,16 @@
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\drivers\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\ssd1309font.c</FilePath>
             </File>
           </Files>
         </Group>
