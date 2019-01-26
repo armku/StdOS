@@ -13,7 +13,7 @@ public:
 	TaskScheduler* Host;
 
 	uint32_t	ID;			// 编号
-	cstring	Name;		// 名称
+	const char*	Name;		// 名称
 
 	Action	Callback;	// 回调
 	void*	Param;		// 参数
@@ -64,7 +64,7 @@ private:
 	friend class Task;
 
 public:
-	cstring	Name;	// 系统名称
+	const char*	Name;	// 系统名称
 	int		Count;		// 任务个数
 	Task*	Current;	// 正在执行的任务
 	bool	Running;	// 是否正在运行
@@ -81,14 +81,14 @@ public:
 	SAction	EnterSleep;	// 通知外部，需要睡眠若干毫秒
 	Func	ExitSleep;	// 通知外部，要求退出睡眠，恢复调度
 
-	TaskScheduler(cstring name = nullptr);
+	TaskScheduler(const char* name = nullptr);
 
 	// 使用外部缓冲区初始化任务列表，避免频繁的堆分配
 	void Set(Task* tasks, int count);
 	// 创建任务，返回任务编号。dueTime首次调度时间ms，-1表示事件型任务，period调度间隔ms，-1表示仅处理一次
-	uint32_t Add(Action func, void* param, int dueTime = 0, int period = 0, cstring name = nullptr);
+	uint32_t Add(Action func, void* param, int dueTime = 0, int period = 0, const char* name = nullptr);
 	template<typename T>
-	uint32_t Add(void(T::*func)(), T* target, int dueTime = 0, int period = 0, cstring name = nullptr)
+	uint32_t Add(void(T::*func)(), T* target, int dueTime = 0, int period = 0, const char* name = nullptr)
 	{
 		return Add(*(Action*)&func, target, dueTime, period, name);
 	}

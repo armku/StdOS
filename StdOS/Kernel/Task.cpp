@@ -235,7 +235,7 @@ void Task::Init()
     this->MaxDeepth = 1;
 }
 ////////////////////////////////////////////////////////////////////////
-TaskScheduler::TaskScheduler(cstring name)
+TaskScheduler::TaskScheduler(const char* name)
 {
     this->Name = name;
 
@@ -248,7 +248,7 @@ TaskScheduler::TaskScheduler(cstring name)
 }
 
 // 创建任务，返回任务编号。dueTime首次调度时间ms，-1表示事件型任务，period调度间隔ms，-1表示仅处理一次
-uint32_t TaskScheduler::Add(Action func, void *param, int dueTime, int period, cstring name)
+uint32_t TaskScheduler::Add(Action func, void *param, int dueTime, int period, const char* name)
 {
     auto task = new Task();
     task->ID =this->Count;

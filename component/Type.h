@@ -2,8 +2,6 @@
 #define __Type_H__
 #include <stdint.h>
 
-typedef const char*		cstring;
-
 #define UInt64_Max 0xFFFFFFFFFFFFFFFFull
 
 // 逐步使用char替代byte，在返回类型中使用char*替代void*

@@ -71,9 +71,9 @@ private:
 
 public:
 	// 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
-	uint32_t AddTask(Action func, void* param, int dueTime = 0, int period = 0, cstring name = nullptr) const;
+	uint32_t AddTask(Action func, void* param, int dueTime = 0, int period = 0, const char* name = nullptr) const;
 	template<typename T>
-	uint32_t AddTask(void(T::*func)(), T* target, int dueTime = 0, int period = 0, cstring name = nullptr)
+	uint32_t AddTask(void(T::*func)(), T* target, int dueTime = 0, int period = 0, const char* name = nullptr)
 	{
 		return AddTask(*(Action*)&func, target, dueTime, period, name);
 	}

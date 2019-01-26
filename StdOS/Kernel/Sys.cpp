@@ -108,7 +108,7 @@ void TSys::Reboot(int msDelay)const
 }
 
 // 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
-uint32_t TSys::AddTask(Action func, void *param, int dueTime, int period, cstring name)const
+uint32_t TSys::AddTask(Action func, void *param, int dueTime, int period, const char* name)const
 {
 	return Task::Scheduler()->Add(func, param, dueTime, period, name);
 }

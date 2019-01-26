@@ -46,7 +46,7 @@ public:
 
 	void Reset();
 	int Elapsed() const;	// 逝去的时间，微秒
-	void Show(cstring format = nullptr) const;
+	void Show(const char* format = nullptr) const;
 };
 
 /*

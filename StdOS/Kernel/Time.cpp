@@ -116,7 +116,7 @@ int TimeCost::Elapsed()const
 	return ret;
 }
 
-void TimeCost::Show(cstring format)const
+void TimeCost::Show(const char* format)const
 {
 	if (!format)
 		format = "÷¥–– %d Œ¢√Ó\n";
