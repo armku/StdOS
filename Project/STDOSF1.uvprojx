@@ -467,7 +467,7 @@
             <File>
               <FileName>Gpio.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Port\Gpio.cpp</FilePath>
+              <FilePath>..\StdOS\Port\Gpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1479,7 +1479,7 @@
             <File>
               <FileName>Gpio.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Port\Gpio.cpp</FilePath>
+              <FilePath>..\StdOS\Port\Gpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
