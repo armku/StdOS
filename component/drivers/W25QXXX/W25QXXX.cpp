@@ -435,7 +435,7 @@ uint32_t W25Q128::ReadID()
 bool W25Q128::EraseSector(uint32_t sectorAddr)
 {
     //监视falsh擦除情况,测试用   
-    StdPrintf("fe:%x\r\n", sectorAddr);
+	debug_printf("fe:%x\r\n", sectorAddr);
     sectorAddr *= 4096;
     this->WriteEnable(); //SET WEL 	 
     this->WaitForEnd();
