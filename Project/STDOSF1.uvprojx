@@ -735,14 +735,14 @@
               <FilePath>..\component\drivers\I2C.cpp</FilePath>
             </File>
             <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\font.c</FilePath>
-            </File>
-            <File>
               <FileName>ssd1309font.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\ssd1309font.c</FilePath>
+              <FilePath>..\component\drivers\SSD1309\ssd1309font.c</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1747,14 +1747,14 @@
               <FilePath>..\component\drivers\I2C.cpp</FilePath>
             </File>
             <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\font.c</FilePath>
-            </File>
-            <File>
               <FileName>ssd1309font.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\ssd1309font.c</FilePath>
+              <FilePath>..\component\drivers\SSD1309\ssd1309font.c</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\font.c</FilePath>
             </File>
           </Files>
         </Group>

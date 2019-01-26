@@ -1396,8 +1396,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\font.c</PathWithFileName>
-      <FilenameWithoutPath>font.c</FilenameWithoutPath>
+      <PathWithFileName>..\component\drivers\SSD1309\ssd1309font.c</PathWithFileName>
+      <FilenameWithoutPath>ssd1309font.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1408,8 +1408,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\ssd1309font.c</PathWithFileName>
-      <FilenameWithoutPath>ssd1309font.c</FilenameWithoutPath>
+      <PathWithFileName>..\component\drivers\SSD1309\font.c</PathWithFileName>
+      <FilenameWithoutPath>font.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

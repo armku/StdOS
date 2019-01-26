@@ -1,6 +1,6 @@
 #include "SSD1309.h"
 #include "../SSD1106/SSD1106.h"
-#include "../../../User/font.h"
+#include "font.h"
 
 #define _SSD1309_TEST_CPP
 
