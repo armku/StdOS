@@ -2,9 +2,8 @@
 #define _ESPDEMOLINK_H
 
 #include "stm32f10x.h"
-#include "FIFOBuffer.h"
+#include "../Bsp/Porting.h"
 #include "DataFrameEspDemoLink.h"
-#include "USART.h"
 
 class EspDemoLink
 {

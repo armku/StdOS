@@ -2,9 +2,9 @@
 #define _MQTT_H
 
 #include "stm32f10x.h"
-#include "FIFOBuffer.h"
+#include "../Bsp/Porting.h"
 #include "../DataFrame.h"
-#include "USART.h"
+
 
 class MqttLink
 {

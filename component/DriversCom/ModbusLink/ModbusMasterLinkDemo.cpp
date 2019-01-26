@@ -1,7 +1,6 @@
 #include "ModbusLink.h"
 #include "Sys.h"
-#include "BspPlatform/Interrupt.h"
-#include "Port.h"
+#include "../Bsp/Porting.h"
 #include "Task.h"
 
 //#define _MODBUSMASTERLINKEST_CPP

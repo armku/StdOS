@@ -1,5 +1,5 @@
 #include "TTime.h"
-#include "OnChip\Configuration.h"
+#include "../Bsp/Porting.h"
 
 TTime Time; //系统时间，不建议用户直接使用
 TTime::TTime()
@@ -180,7 +180,7 @@ uint32_t TTime::UsToTicks(uint32_t us)const
 	return result;
 }
 #include "Platform\stm32.h"
-#include "BspPlatform\BspPlatform.h"
+#include "../Bsp/Porting.h"
 
 extern int gTicks; //
 void TTime::Init()
