@@ -1,7 +1,7 @@
 #ifndef __Type_H__
 #define __Type_H__
 #include <stdint.h>
-/* 类型定义 */
+
 typedef const char*		cstring;
 
 #define UInt64_Max 0xFFFFFFFFFFFFFFFFull
@@ -10,7 +10,5 @@ typedef const char*		cstring;
 // 因为格式化输出时，可以用%c输出char，用%s输出char*
 // 数组长度
 #define ArrayLength(arr) (int)(sizeof(arr)/sizeof(arr[0]))
-
-int StdPrintf(const char *format, ...); //代替 printf
 
 #endif

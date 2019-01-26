@@ -1,7 +1,9 @@
-#include "Version.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "stdarg.h"
+#include "Version.h"
+#include "../../StdOS/Kernel/Sys.h"
 
 Version::Version(int major, int minor, int year, int monday)
 {
@@ -92,8 +94,7 @@ void Version::Show(bool newLine) const
 	StdPrintf("%d.%d.%d.%d", this->Major, this->Minor, this->Year, this->MonthDay);
 	newLine ? StdPrintf("\n") : StdPrintf("");
 }
-#include <stdio.h>
-#include "stdarg.h"
+
 int Version::Show(char* buf, int pos)
 {
 	int ret = 0;

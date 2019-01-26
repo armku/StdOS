@@ -1,7 +1,8 @@
 #ifndef _Buffer_H_
 #define _Buffer_H_
 
-#include "../../StdOS/Core/Type.h"
+#include <stdint.h>
+//#include "../../StdOS/Core/Type.h"
 
 class Buffer 
 {

@@ -1,4 +1,5 @@
 #include "DateTime.h"
+#include "../../StdOS/Kernel/Sys.h"
 
 DateTime::DateTime()
 {
