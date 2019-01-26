@@ -2,6 +2,7 @@
 #include "Task.h"
 #include "TTime.h"
 
+#define UInt64_Max 0xFFFFFFFFFFFFFFFFull
 TaskScheduler *_Scheduler;
 
 Task::Task()
