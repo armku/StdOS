@@ -2,6 +2,31 @@
 #include "Util.h"
 
 static float DOTMASK[] = { 1,10,100,1000 };
+static float boxcartmp[100];//滤波辅助变量
+//矩形波过滤器,目前限定100个数据量
+void BoxCar(int* buf, int len)
+{
+	int start = 0;
+	int end = 0;
+
+	if (len < 2)
+		return;
+	for (int i = 0; i < len; i++)
+	{
+		start = i - 1;
+		end = i + 1;
+		if (start < 0)
+			start = 0;
+		if (end > (len - 1))
+			end = len - 1;
+
+		boxcartmp[i] = (buf[start] + buf[i] + buf[i] + buf[end]) / 4;
+	}
+	for (int i = 0; i < len; i++)
+	{
+		buf[i] = boxcartmp[i];
+	}
+}
 //根据小数点获取值
 float  GetValueDot(float value, int dot)
 {
