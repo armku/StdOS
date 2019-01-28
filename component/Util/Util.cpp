@@ -3,6 +3,9 @@
 
 static float DOTMASK[] = { 1,10,100,1000 };
 static float boxcartmp[100];//滤波辅助变量
+#ifdef __cplusplus
+extern "C" {
+#endif
 //矩形波过滤器,目前限定100个数据量
 void BoxCar(int* buf, int len)
 {
@@ -176,7 +179,11 @@ float GetTFromPT100(float om)
 
 	return ret;
 }
+#ifdef __cplusplus
+}
+#endif
 template <typename T1, typename T2> T1 sum(T1 x, T2 y)
 {
 	return x + y;
 }
+
