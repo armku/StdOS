@@ -28,7 +28,7 @@ public:
 
 	bool VerifyCheckCode()
 	{
-		this->Crc2 = Crc::CRC16RTU(data, frameLength-2);
+		this->Crc2 = CRC16RTU(data, frameLength-2);
 		if (this->Crc2 == this->Crc)
 			return true;
 		else

@@ -1,5 +1,6 @@
 #include "ModbusLink.h"
 #include "../../../component/lib/Buffer.h"
+#include "../../../StdOS/Kernel/Sys.h"
 
 ModbusMasterLink::ModbusMasterLink(USART &uart) :ModbusBase(uart)
 {
@@ -17,7 +18,7 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 	this->txFrame.data[3] = this->txFrame.regAddr & 0xff;
 	this->txFrame.data[4] = this->txFrame.regLength >> 8;
 	this->txFrame.data[5] = this->txFrame.regLength & 0xff;
-	this->txFrame.Crc2 = Crc::CRC16RTU(this->txFrame.data,6);
+	this->txFrame.Crc2 = CRC16RTU(this->txFrame.data,6);
 	this->txFrame.data[6] = this->txFrame.Crc2 & 0xff;
 	this->txFrame.data[7] = this->txFrame.Crc2 >> 8;
 	
