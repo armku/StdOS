@@ -130,6 +130,17 @@ float GetBufFloat(uint8_t buf[], uint16_t pos, uint8_t type)
 		bitconvert.char_bit.da1 = buf[pos + 0];
 		bitconvert.char_bit.da0 = buf[pos + 1];
 		break;
+	case 2:
+		bitconvert.char_bit.da3 = buf[pos + 1];
+		bitconvert.char_bit.da2 = buf[pos + 0];
+		bitconvert.char_bit.da1 = buf[pos + 3];
+		bitconvert.char_bit.da0 = buf[pos + 2];
+		break;
+	case 3:
+		bitconvert.char_bit.da3 = buf[pos + 3];
+		bitconvert.char_bit.da2 = buf[pos + 2];
+		bitconvert.char_bit.da1 = buf[pos + 1];
+		bitconvert.char_bit.da0 = buf[pos + 0];
 	default:
 		break;
 	}
