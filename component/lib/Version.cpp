@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Version.h"
+#include "../Type.h"
 #include "../../StdOS/Kernel/Sys.h"
 
 Version::Version(int major, int minor, int year, int monday)
