@@ -68,4 +68,3 @@ void BlinkPort::Blink()
 		Sys.SetTask(this->_tid,1,IntervalNext);
 	}
 }
-
