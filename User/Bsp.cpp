@@ -31,7 +31,7 @@ void Com1test(void *param)
 void MqttLinkTestInit();
 void ModbusMasterLinkTestInit();
 void EspDemoLinkTestInit();
-void BspInit()
+void setup()
 {
 	led1.SetPin(PB0);
 	led1.mode(PIN_MODE::OUTPUT_PP);

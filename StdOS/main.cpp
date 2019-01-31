@@ -9,7 +9,7 @@ int main(void)
 #if DEBUG	
 	Sys.ShowInfo();
 #endif 		
-	BspInit();
+	setup();
 
 	Sys.Start();
 }
