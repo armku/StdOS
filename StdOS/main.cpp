@@ -2,6 +2,12 @@
 #include "../User/Bsp.h"
 #include "../Bsp/Porting.h"
 
+void loop();
+void arduinoloop(void* param)
+{
+	loop();
+}
+
 int main(void)
 {
 	Sys.Init();
@@ -12,4 +18,5 @@ int main(void)
 	setup();
 
 	Sys.Start();
+	Sys.AddTask(arduinoloop, 0, 13, 1, "loop");
 }

@@ -31,6 +31,7 @@ void Com1test(void *param)
 void MqttLinkTestInit();
 void ModbusMasterLinkTestInit();
 void EspDemoLinkTestInit();
+
 void setup()
 {
 	led1.SetPin(PB0);
@@ -43,7 +44,11 @@ void setup()
 	//ModbusMasterLinkTestInit();
 	EspDemoLinkTestInit();
 }
+//¼æÈÝarduino½Ó¿Ú
+void loop()
+{
 
+}
 /*
 			LED1	LED2	LED3	LED4
 STM32F0		PC6		PC7		PC8		PC9
