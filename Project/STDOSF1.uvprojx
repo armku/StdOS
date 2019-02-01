@@ -1016,6 +1016,16 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>Arduino</GroupName>
+          <Files>
+            <File>
+              <FileName>CoreIO.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\CoreIO.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -2025,6 +2035,16 @@
               <FileName>SHARP_PM2_5Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\DriversCom\SHARP_PM2_5\SHARP_PM2_5Demo.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Arduino</GroupName>
+          <Files>
+            <File>
+              <FileName>CoreIO.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\CoreIO.cpp</FilePath>
             </File>
           </Files>
         </Group>
