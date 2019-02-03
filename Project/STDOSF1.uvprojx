@@ -770,11 +770,6 @@
               <FilePath>..\component\drivers\SSD1309\src\hz32.c</FilePath>
             </File>
             <File>
-              <FileName>ra8875_asc_width.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\component\drivers\SSD1309\src\ra8875_asc_width.c</FilePath>
-            </File>
-            <File>
               <FileName>ssd1309font.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\component\drivers\SSD1309\src\ssd1309font.c</FilePath>
@@ -1830,11 +1825,6 @@
               <FileName>hz32.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\component\drivers\SSD1309\src\hz32.c</FilePath>
-            </File>
-            <File>
-              <FileName>ra8875_asc_width.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\component\drivers\SSD1309\src\ra8875_asc_width.c</FilePath>
             </File>
             <File>
               <FileName>ssd1309font.c</FileName>
