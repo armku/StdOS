@@ -735,14 +735,14 @@
               <FilePath>..\component\drivers\W5500\src\W5500.cpp</FilePath>
             </File>
             <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\component\drivers\SSD1309\src\font.c</FilePath>
-            </File>
-            <File>
               <FileName>ssd1309font.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\component\drivers\SSD1309\src\ssd1309font.c</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\ST7565R\src\font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1762,14 +1762,14 @@
               <FilePath>..\component\drivers\W5500\src\W5500.cpp</FilePath>
             </File>
             <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\component\drivers\SSD1309\src\font.c</FilePath>
-            </File>
-            <File>
               <FileName>ssd1309font.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\component\drivers\SSD1309\src\ssd1309font.c</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\ST7565R\src\font.c</FilePath>
             </File>
           </Files>
         </Group>
