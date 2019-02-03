@@ -1,6 +1,6 @@
 #ifndef _ADS1232_H
 #define _ADS1232_H
-#include "../../../Bsp/Porting.h"
+#include "../../../../Bsp/Porting.h"
 
 class ADS1232
 {

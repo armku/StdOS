@@ -1,5 +1,5 @@
 #include "ADS1232.h"
-#include "../../../StdOS/Kernel/Sys.h"
+#include "../../../../StdOS/Kernel/Sys.h"
 
 void ADS1232::SetPin(Pin pdout, Pin psclk, Pin ppwdn)
 {

@@ -734,6 +734,51 @@
               <FileType>8</FileType>
               <FilePath>..\component\drivers\W5500\src\W5500.cpp</FilePath>
             </File>
+            <File>
+              <FileName>asc12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\asc12.c</FilePath>
+            </File>
+            <File>
+              <FileName>asc16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\asc16.c</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\hz12.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\hz16.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz24.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\hz24.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\hz32.c</FilePath>
+            </File>
+            <File>
+              <FileName>ra8875_asc_width.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\ra8875_asc_width.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\ssd1309font.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1750,6 +1795,51 @@
               <FileName>W5500.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\component\drivers\W5500\src\W5500.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>asc12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\asc12.c</FilePath>
+            </File>
+            <File>
+              <FileName>asc16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\asc16.c</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\hz12.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\hz16.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz24.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\hz24.c</FilePath>
+            </File>
+            <File>
+              <FileName>hz32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\hz32.c</FilePath>
+            </File>
+            <File>
+              <FileName>ra8875_asc_width.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\ra8875_asc_width.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\component\drivers\SSD1309\src\ssd1309font.c</FilePath>
             </File>
           </Files>
         </Group>

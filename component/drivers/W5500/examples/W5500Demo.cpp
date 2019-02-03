@@ -1,5 +1,5 @@
-#include "W5500.h"
-#include "../../../StdOS/Kernel/Sys.h"
+#include "../src/W5500.h"
+#include "../../../../StdOS/Kernel/Sys.h"
 
 #define _W5500_TEST_CPP
 #ifdef _W5500_TEST_CPP

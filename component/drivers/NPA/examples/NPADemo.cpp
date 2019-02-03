@@ -1,4 +1,4 @@
-#include "NPA.h"
+#include "../src/NPA.h"
 
 //#define _NPA_TEST_CPP
 #ifdef _NPA_TEST_CPP

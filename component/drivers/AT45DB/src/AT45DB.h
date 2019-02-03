@@ -1,8 +1,8 @@
 #ifndef __AT45DB_H__
 #define __AT45DB_H__
 
-#include "../../../StdOS/Kernel/Sys.h"
-#include "../../../Bsp/Porting.h"
+#include "../../../../StdOS/Kernel/Sys.h"
+#include "../../../../Bsp/Porting.h"
 
 // AT45DB´æ´¢Flash
 class AT45DB

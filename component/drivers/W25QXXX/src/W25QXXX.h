@@ -1,8 +1,8 @@
 #ifndef _W25QXXX_H
 #define _W25QXXX_H
 
-#include "../../../StdOS/Kernel/Sys.h"
-#include "../../../Bsp/Porting.h"
+#include "../../../../StdOS/Kernel/Sys.h"
+#include "../../../../Bsp/Porting.h"
 
 #define W25QXXXUSESPISOFT	1
 //W25X系列/Q系列芯片列表	   

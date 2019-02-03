@@ -1,13 +1,15 @@
-#include "EspDemoLink.h"
-#include "../../../StdOS/Kernel/Sys.h"
+#include <stdio.h>  
 #include <string.h>  
+
+#include "EspDemoLink.h"
+#include "../../../../StdOS/Kernel/Sys.h"
 //#include "OnChip/USART.h"
 //#include "BspPlatform/Interrupt.h"
 //#include "BspPlatform\BspPlatform.h"
-#include "../../../Bsp/Porting.h"
+#include "../../../../Bsp/Porting.h"
 //#include "OnChip\Configuration.h"
-#include "../../../component/lib/Buffer.h"
-#include <stdio.h>  
+#include "../../../../component/lib/Buffer.h"
+
 
 EspDemoLink::EspDemoLink(USART &uart) :com(uart)
 {

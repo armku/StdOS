@@ -1,8 +1,9 @@
-#include "ModbusLink.h"
-#include "Sys.h"
-#include "BspPlatform/Interrupt.h"
-#include "Port.h"
-#include "Task.h"
+#include "../src/ModbusLink.h"
+#include "../../../../StdOS/Kernel/Sys.h"
+#include "../../../../Bsp/ST/STM32F1/Porting/Interrupt.h"
+#include "../../../../Bsp/Porting.h"
+#include "../../../../StdOS/Kernel/Task.h"
+#include "../../../../Bsp/ST/STM32F1/Porting/Port.h"
 
 //#define _MODBUSSLAVELINKEST_CPP
 #ifdef _MODBUSSLAVELINKEST_CPP

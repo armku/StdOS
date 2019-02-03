@@ -1,8 +1,8 @@
 #ifndef _DS1302_H
 #define _DS1302_H
 
-#include "../../../Bsp/Porting.h"
-#include "../../../component/lib/DateTime.h"
+#include "../../../../Bsp/Porting.h"
+#include "../../../../component/lib/DateTime.h"
 
 class DS1302
 {

@@ -1,6 +1,6 @@
 #include "ModbusLink.h"
-#include "../../../component/lib/Buffer.h"
-#include "../../../StdOS/Kernel/Sys.h"
+#include "../../../../component/lib/Buffer.h"
+#include "../../../../StdOS/Kernel/Sys.h"
 
 ModbusMasterLink::ModbusMasterLink(USART &uart) :ModbusBase(uart)
 {

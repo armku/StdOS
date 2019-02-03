@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "PCF8563.h"
-#include "../../../StdOS/Kernel/Sys.h"
+#include "../src/PCF8563.h"
+#include "../../../../StdOS/Kernel/Sys.h"
 
 //#define _PCF8563_TEST_CPP
 #ifdef _PCF8563_TEST_CPP

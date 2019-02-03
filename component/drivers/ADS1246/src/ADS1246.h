@@ -1,6 +1,6 @@
 #ifndef _ADS1246_H
 #define _ADS1246_H
-#include "../../../Bsp/Porting.h"
+#include "../../../../Bsp/Porting.h"
 	
 	#define ADS1246SPISOFT   1
 

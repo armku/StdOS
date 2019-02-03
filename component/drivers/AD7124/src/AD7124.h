@@ -2,7 +2,7 @@
 #define __AD7124_H
 
 
-#include "../../../Bsp/Porting.h"
+#include "../../../../Bsp/Porting.h"
 
 #define AD7124SPISOFT 1	
 #define AD7124_BUFSIZE 6

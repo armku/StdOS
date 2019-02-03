@@ -1,4 +1,4 @@
-#include "ADS1232.h"
+#include "../src/ADS1232.h"
 
 //#define _ADS1232_TEST_CPP
 #ifdef _ADS1232_TEST_CPP

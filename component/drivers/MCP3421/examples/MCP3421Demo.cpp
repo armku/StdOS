@@ -1,5 +1,5 @@
-#include "../../../StdOS/Kernel/Sys.h"
-#include "MCP3421.h"
+#include "../../../../StdOS/Kernel/Sys.h"
+#include "../src/MCP3421.h"
 
 #define _MCP3421TEST_CPP
 #ifdef _MCP3421TEST_CPP

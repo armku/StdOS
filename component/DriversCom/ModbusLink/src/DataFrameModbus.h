@@ -1,6 +1,7 @@
 #include <stdint.h>
-#include "../../../component/Security/Crc.h"
-#include "../DataFrame.h"
+
+#include "../../DataFrame.h"
+#include "../../../../component/Security/Crc.h"
 
 #ifndef _DATAFRAMEMODBUS_H
 #define _DATAFRAMEMODBUS_H

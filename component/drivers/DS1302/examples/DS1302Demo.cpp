@@ -1,4 +1,4 @@
-#include "DS1302.h"
+#include "../src/DS1302.h"
 
 //#define _DS1302_TEST_CPP
 #ifdef _DS1302_TEST_CPP
