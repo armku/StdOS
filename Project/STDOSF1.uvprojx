@@ -1029,6 +1029,11 @@
               <FileType>8</FileType>
               <FilePath>..\Arduino\CoreIO.cpp</FilePath>
             </File>
+            <File>
+              <FileName>new.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\new.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2055,6 +2060,11 @@
               <FileName>CoreIO.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Arduino\CoreIO.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>new.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\new.cpp</FilePath>
             </File>
           </Files>
         </Group>
