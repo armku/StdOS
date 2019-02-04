@@ -1034,6 +1034,11 @@
               <FileType>8</FileType>
               <FilePath>..\Arduino\new.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Print.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\Print.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2065,6 +2070,11 @@
               <FileName>new.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Arduino\new.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Print.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\Print.cpp</FilePath>
             </File>
           </Files>
         </Group>
