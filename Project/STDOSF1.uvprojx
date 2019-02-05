@@ -1039,6 +1039,11 @@
               <FileType>8</FileType>
               <FilePath>..\Arduino\Print.cpp</FilePath>
             </File>
+            <File>
+              <FileName>wiring.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arduino\wiring.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2075,6 +2080,11 @@
               <FileName>Print.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Arduino\Print.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>wiring.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arduino\wiring.c</FilePath>
             </File>
           </Files>
         </Group>
