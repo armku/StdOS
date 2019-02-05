@@ -54,7 +54,7 @@ public:
 	uint64_t	Ms() const;		// 系统启动后的毫秒数
 	uint32_t	Seconds() const;	// 系统绝对当前时间，秒
 
-    void Sleep(int ms) const; // 毫秒级延迟
+    void Sleep(uint32_t dwMs) const; // 毫秒级延迟
     void delayMicroseconds(uint32_t usec) const; // 微秒级延迟
 	
 	// 延迟异步重启
