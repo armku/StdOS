@@ -19,23 +19,28 @@
 
 #include "Arduino.h"
 
+#define __IO volatile
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 extern __IO uint32_t TimingMillis;
 
-uint32_t millis( void )
+#if 0
+	uint32_t millis( void )
 {
 // todo: ensure no interrupts
 	//return GetTickCount() ;
   return TimingMillis;
 }
+#endif
 
 // Interrupt-compatible version of micros
 // Theory: repeatedly take readings of SysTick counter, millis counter and SysTick interrupt pending flag.
 // When it appears that millis counter and pending is stable and SysTick hasn't rolled over, use these 
 // values to calculate micros. If there is a pending SysTick, add one to the millis counter in the calculation.
+#if 0
 uint32_t micros( void )
 {
     uint32_t ticks, ticks2;
@@ -59,6 +64,7 @@ uint32_t micros( void )
     // this is an optimization to turn a runtime division into two compile-time divisions and 
     // a runtime multiplication and shift, saving a few cycles
 }
+#endif
 
 // original function:
 // uint32_t micros( void )
@@ -75,14 +81,14 @@ uint32_t micros( void )
 //     return count * 1000 + (SysTick->LOAD + 1 - ticks) / (SystemCoreClock/1000000) ;
 // }
 
-
+#if 0
 void delay( uint32_t ms )
 {
     uint32_t end = millis() + ms;
     while (millis() < end)
     	yield();
 }
-
+#endif
 #if defined ( __ICCARM__ ) /* IAR Ewarm 5.41+ */
 extern signed int putchar( signed int c ) ;
 /**
