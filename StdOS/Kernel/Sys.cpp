@@ -81,7 +81,7 @@ void TSys::Sleep(int ms)const
 }
 
 // 微秒级延迟
-void TSys::Delay(int us)const
+void TSys::Delay(uint32_t us)const
 {
 	if (us > 1000000)
 		debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！\n", us);
