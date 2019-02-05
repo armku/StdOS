@@ -1044,6 +1044,11 @@
               <FileType>1</FileType>
               <FilePath>..\Arduino\wiring.c</FilePath>
             </File>
+            <File>
+              <FileName>wiring_digital.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arduino\wiring_digital.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2085,6 +2090,11 @@
               <FileName>wiring.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Arduino\wiring.c</FilePath>
+            </File>
+            <File>
+              <FileName>wiring_digital.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arduino\wiring_digital.c</FilePath>
             </File>
           </Files>
         </Group>
