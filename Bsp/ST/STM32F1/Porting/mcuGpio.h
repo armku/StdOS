@@ -8,7 +8,7 @@ class mcuGpio : public Gpio
 {
 public:
 	mcuGpio();
-	mcuGpio(GPIO_TypeDef *port, uint16_t pin);
+	/*mcuGpio(GPIO_TypeDef *port, uint16_t pin);*/
 	virtual void SetPin(Pin pin);//设置管脚
 	virtual void mode(PIN_MODE mode);//设置管脚模式
 	virtual void toggle();//端口翻转
