@@ -1,7 +1,7 @@
 #ifndef _PWMSOLO_H
 #define _PWMSOLO_H
 #include <stdint.h>
-#include "../StdOS/Port/Port.h"
+#include "Port.h"
 
 class PwmSolo : public mcuGpio
 {

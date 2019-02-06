@@ -4,7 +4,7 @@
 #include "stm32f10x.h"
 #include "FIFOBuffer.h"
 #include "Configuration.h"
-#include "../StdOS/Port/Port.h"
+#include "Port.h"
 
 /**
 *@addtogroup USART_CONFIGURATION

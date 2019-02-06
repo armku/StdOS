@@ -21,7 +21,7 @@
 #include "wiring_digital.h"
 #include "stm32f10x.h"
 #include "Pin.h"
-#include "../StdOS/Port/mcuGpio.h"
+#include "mcuGpio.h"
 
 #ifdef __cplusplus
  extern "C" {

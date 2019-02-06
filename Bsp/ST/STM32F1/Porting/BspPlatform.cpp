@@ -1,6 +1,6 @@
 #include "BspPlatform.h"
 #include "../../../../StdOS/Kernel/Sys.h"
-#include "../StdOS/Port/Port.h"
+#include "Port.h"
 #include "../../stm32.h"
 #include "Configuration.h"
 #include "USART.h"

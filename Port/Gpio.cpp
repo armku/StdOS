@@ -1,5 +1,5 @@
 #include "Gpio.h"
-#include "../../wiring/wiring_digital.h"
+#include "wiring_digital.h"
 
 Gpio::Gpio()
 { 

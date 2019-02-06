@@ -134,8 +134,8 @@
 //old
 
 #include <stdint.h>
-#include "../wiring/Pin.h"
-#include "../StdOS/Port/Port.h"
+#include "Pin.h"
+#include "Port.h"
 
 typedef enum
 {

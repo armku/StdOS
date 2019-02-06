@@ -740,7 +740,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Port\Gpio.cpp</PathWithFileName>
+      <PathWithFileName>..\Port\Gpio.cpp</PathWithFileName>
       <FilenameWithoutPath>Gpio.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -752,7 +752,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Port\mcuGpio.cpp</PathWithFileName>
+      <PathWithFileName>..\Port\mcuGpio.cpp</PathWithFileName>
       <FilenameWithoutPath>mcuGpio.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -764,7 +764,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Port\Port.cpp</PathWithFileName>
+      <PathWithFileName>..\Port\Port.cpp</PathWithFileName>
       <FilenameWithoutPath>Port.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
