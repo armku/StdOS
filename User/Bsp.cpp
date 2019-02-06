@@ -8,12 +8,6 @@ mcuGpio led1;// (GPIOB, GPIO_Pin_0);
 
 void LedTask(void *param)
 {
-	static int i = 0;
-	i = !i;
-	/*if (i)
-		led1.set();
-	else
-		led1.reset();*/
 	led1 = !led1;
 }
 
