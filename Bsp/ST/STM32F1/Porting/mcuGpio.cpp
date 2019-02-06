@@ -152,38 +152,6 @@ void mcuGpio::mode(PIN_MODE mode, uint8_t af_configration)
 {
 	mcuGpio::mode(mode);
 }
-/**
- *@brief    GPIO输出高电平
- *@param    NONE
- *@retval   NONE
-*/
-void mcuGpio::set()
-{
-	_port->BSRR = _pin;
-}
-
-/**
- *@brief    GPIO输出低电平
- *@param    NONE
- *@retval   NONE
-*/
-void mcuGpio::reset()
-{
-	_port->BRR = _pin;
-}
-
-
-/**
- *@brief    GPIO输出设置
- *@param    val：1：输出高电平；0：输出低电平
- *@retval   NONE
-*/
-void mcuGpio::write(uint8_t val)
-{
-	// val==0,执行_port->BRR = _pin，否则，_port->BSRR = _pin
-	(val == 0) ? (_port->BRR = _pin) : (_port->BSRR = _pin);
-}
-
 
 /**
  *@brief    GPIO输出高电平

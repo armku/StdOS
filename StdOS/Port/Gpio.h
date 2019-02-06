@@ -38,10 +38,6 @@ public:
 	virtual void SetPin(Pin pin)=0;//…Ë÷√π‹Ω≈
 	virtual void mode(PIN_MODE mode) = 0;
 	virtual void mode(PIN_MODE mode, uint8_t af_configration) = 0;
-	virtual void set() = 0;
-	virtual void reset() = 0;
-
-	virtual void write(uint8_t val) = 0;
 	virtual void read(uint8_t *val) = 0;
 	virtual uint8_t read(void) = 0;
 	virtual void toggle() = 0;
