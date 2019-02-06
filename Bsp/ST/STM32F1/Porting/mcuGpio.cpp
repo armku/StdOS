@@ -244,42 +244,12 @@ bool mcuGpio::Read()
 void mcuGpio::Write(Pin pin, bool value)
 {
 	digitalWrite(pin, value);
-	
-	if (value)
-	{
-		GPIO_SetBits(_GROUP(pin), _PORT(pin));
-	}
-	else
-	{
-		GPIO_ResetBits(_GROUP(pin), _PORT(pin));
-	}
 }
 void mcuGpio::Write(bool value)
 {
 	if (this->_Pin == P0)
 		return;
-	if (this->Invert)
-	{
-		if (value)
-		{
-			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-		}
-		else
-		{
-			GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-		}
-	}
-	else
-	{
-		if (value)
-		{
-			GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-		}
-		else
-		{
-			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-		}
-	}
+	this->Write(this->_Pin, this->Invert ? !value : value);
 }
 GPIO_TypeDef *IndexToGroup(uint8_t index);
 bool mcuGpio::Open()
