@@ -8,42 +8,42 @@ void mcuGpio::SetPin(Pin pin)
 	//this->_pin = GPIO_Pin_0;
 	
 	this->_Pin = pin;
-	switch (pin>>4)
-	{
-	case PA0>>4:
-		this->_port =GPIOA;
-		break;
-	case PB0>>4:
-		this->_port = GPIOB;
-		break;
-	case PC0>>4:
-		this->_port = GPIOC;
-		break;
-	case PD0>>4:
-		this->_port = GPIOD;
-		break;
-	case PE0>>4:
-		this->_port = GPIOE;
-		break;
-	case PF0>>4:
-		this->_port = GPIOF;
-		break;
-	case PG0>>4:
-		this->_port = GPIOG;
-		break;
-	case PH0>>4:
-#ifdef STM32F10X_HD
-		this->_port = GPIOH;
-#endif // STM32F10X_HD
-		break;
-	case PI0>>4:
-#ifdef STM32F10X_HD
-		this->_port = GPIOI;
-#endif // STM32F10X_HD
-		break;
-	default:
-		break;
-	}
+//	switch (pin>>4)
+//	{
+//	case PA0>>4:
+//		this->_port =GPIOA;
+//		break;
+//	case PB0>>4:
+//		this->_port = GPIOB;
+//		break;
+//	case PC0>>4:
+//		this->_port = GPIOC;
+//		break;
+//	case PD0>>4:
+//		this->_port = GPIOD;
+//		break;
+//	case PE0>>4:
+//		this->_port = GPIOE;
+//		break;
+//	case PF0>>4:
+//		this->_port = GPIOF;
+//		break;
+//	case PG0>>4:
+//		this->_port = GPIOG;
+//		break;
+//	case PH0>>4:
+//#ifdef STM32F10X_HD
+//		this->_port = GPIOH;
+//#endif // STM32F10X_HD
+//		break;
+//	case PI0>>4:
+//#ifdef STM32F10X_HD
+//		this->_port = GPIOI;
+//#endif // STM32F10X_HD
+//		break;
+//	default:
+//		break;
+//	}
 
 	this->_pin = 1 << (pin % 16);// GPIO_Pin_0;
 }
