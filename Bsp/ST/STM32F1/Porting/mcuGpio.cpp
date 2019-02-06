@@ -86,7 +86,7 @@ void mcuGpio::mode(PIN_MODE mode)
 */
 void mcuGpio::read(uint8_t *val)
 {
-	*val = _port->IDR & _pin;
+	*val = this->read();
 }
 
 
