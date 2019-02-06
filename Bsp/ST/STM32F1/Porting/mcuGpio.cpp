@@ -226,21 +226,13 @@ mcuGpio::operator int()
 {
 	return ((_port->IDR & _pin) == _pin) ? (1) : (0);
 }
-// 相当与write()
-//mcuGpio mcuGpio::operator= (int value)
-//{
-//	(value == 0) ? (_port->BRR = _pin) : (_port->BSRR = _pin);
-//	return *this;
-//}
 
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
 bool mcuGpio::Read()
 {
 	return this->Invert ? !read() : read();
 }
-// 获取组和针脚
-#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (uint16_t)0xF0) << 6)))
-#define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
+
 void mcuGpio::Write(Pin pin, bool value)
 {
 	digitalWrite(pin, value);
