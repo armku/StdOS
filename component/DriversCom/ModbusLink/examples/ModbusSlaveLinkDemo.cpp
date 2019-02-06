@@ -3,7 +3,7 @@
 #include "../../../../Bsp/ST/STM32F1/Porting/Interrupt.h"
 #include "../../../../Bsp/Porting.h"
 #include "../../../../StdOS/Kernel/Task.h"
-#include "../../../../Bsp/ST/STM32F1/Porting/Port.h"
+#include "../StdOS/Port/Port.h"
 
 //#define _MODBUSSLAVELINKEST_CPP
 #ifdef _MODBUSSLAVELINKEST_CPP

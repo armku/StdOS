@@ -415,11 +415,6 @@
               <FilePath>..\Bsp\ST\STM32F1\Porting\InputCapture_TIM.cpp</FilePath>
             </File>
             <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Bsp\ST\STM32F1\Porting\Port.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PWM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Bsp\ST\STM32F1\Porting\PWM.cpp</FilePath>
@@ -468,6 +463,11 @@
               <FileName>mcuGpio.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Port\mcuGpio.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Port\Port.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1467,11 +1467,6 @@
               <FilePath>..\Bsp\ST\STM32F1\Porting\InputCapture_TIM.cpp</FilePath>
             </File>
             <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Bsp\ST\STM32F1\Porting\Port.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PWM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Bsp\ST\STM32F1\Porting\PWM.cpp</FilePath>
@@ -1520,6 +1515,11 @@
               <FileName>mcuGpio.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Port\mcuGpio.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Port\Port.cpp</FilePath>
             </File>
           </Files>
         </Group>
