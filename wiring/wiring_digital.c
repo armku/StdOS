@@ -131,11 +131,11 @@ extern void pinMode( uint32_t ulPin, uint32_t ulMode )
 extern void digitalWrite( uint32_t ulPin, uint32_t ulVal )
 {
 //#define FAST
-
-	ulPin = 0X10;
+		
 #ifdef FAST
 	GPIO_TypeDef *_port; /**< Òý½ÅµÄ¶Ë¿Ú */
 	_port = _GROUP(ulPin);
+	_port = GPIOB;
 #endif // FAST
 
 	if (ulVal)
@@ -150,7 +150,7 @@ extern void digitalWrite( uint32_t ulPin, uint32_t ulVal )
 	else
 	{
 #ifdef  FAST
-		_port->BSRR = _PIN(ulPin);
+		_port->BRR = _PIN(ulPin);
 #else
 		GPIO_ResetBits(_GROUP(ulPin), _PORT(ulPin));
 #endif //  FAST
