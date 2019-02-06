@@ -20,7 +20,7 @@
 //#include "Arduino.h"
 #include "wiring_digital.h"
 #include "stm32f10x.h"
-#include "../Bsp/Pin.h"
+#include "Pin.h"
 #include "../Porting/mcuGpio.h"
 
 #ifdef __cplusplus
