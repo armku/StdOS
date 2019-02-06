@@ -1034,6 +1034,11 @@
               <FileType>8</FileType>
               <FilePath>..\Arduino\Print.cpp</FilePath>
             </File>
+            <File>
+              <FileName>WString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\WString.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2080,6 +2085,11 @@
               <FileName>Print.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Arduino\Print.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\WString.cpp</FilePath>
             </File>
           </Files>
         </Group>
