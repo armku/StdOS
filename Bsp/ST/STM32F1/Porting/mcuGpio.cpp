@@ -137,46 +137,46 @@ void mcuGpio::Write(bool value)
 		return;
 	this->Write(this->_Pin, this->Invert ? !value : value);
 }
-GPIO_TypeDef *IndexToGroup(uint8_t index);
+//GPIO_TypeDef *IndexToGroup(uint8_t index);
 bool mcuGpio::Open()
 {
-	if (this->Opened == false)
-	{
-		if (_Pin != P0)
-		{
-			// 打开时钟
-			int gi = _Pin >> 4;
-			RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << gi, ENABLE);
-			// PA15/PB3/PB4 需要关闭JTAG
-			switch (_Pin)
-			{
-			case PA15:
-			case PB3:
-			case PB4:
-			{
-				//debug_printf("Close JTAG for P%c%d\r\n", _PIN_NAME(_Pin));
-				// PA15是jtag接口中的一员 想要使用 必须开启remap
-				RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-				GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
-				break;
-			}
-			}
+	//if (this->Opened == false)
+	//{
+	//	if (_Pin != P0)
+	//	{
+	//		// 打开时钟
+	//		int gi = _Pin >> 4;
+	//		RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << gi, ENABLE);
+	//		// PA15/PB3/PB4 需要关闭JTAG
+	//		switch (_Pin)
+	//		{
+	//		case PA15:
+	//		case PB3:
+	//		case PB4:
+	//		{
+	//			//debug_printf("Close JTAG for P%c%d\r\n", _PIN_NAME(_Pin));
+	//			// PA15是jtag接口中的一员 想要使用 必须开启remap
+	//			RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+	//			GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
+	//			break;
+	//		}
+	//		}
 
-			GPIO_InitTypeDef gpio;
-			// 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
-			GPIO_StructInit(&gpio);
-			gpio.GPIO_Pin = 1 << (this->_Pin & 0x0F);
-			gpio.GPIO_Speed = GPIO_Speed_50MHz;
+	//		GPIO_InitTypeDef gpio;
+	//		// 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
+	//		GPIO_StructInit(&gpio);
+	//		gpio.GPIO_Pin = 1 << (this->_Pin & 0x0F);
+	//		gpio.GPIO_Speed = GPIO_Speed_50MHz;
 
-			GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
-		}
+	//		GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
+	//	}
 
-		this->Opened = true;
-	}
+	//	this->Opened = true;
+	//}
 	return true;
 }
 ////////////////////////////////////////////////////////////////////
-uint8_t GroupToIndex(GPIO_TypeDef *group);
+//uint8_t GroupToIndex(GPIO_TypeDef *group);
 
 mcuGpio::mcuGpio()
 {
@@ -197,18 +197,3 @@ mcuGpio::mcuGpio(Pin pin, uint8_t invert, bool openDrain)
 		this->Open();
 	}
 }
-
-////////////////////////////////////////////////////////////////////////
-
-GPIO_TypeDef *IndexToGroup(uint8_t index)
-{
-	return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
-}
-
-uint8_t GroupToIndex(GPIO_TypeDef *group)
-{
-	return (uint8_t)(((int)group - GPIOA_BASE) >> 10);
-}
-
-
-
