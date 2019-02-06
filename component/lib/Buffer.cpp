@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Buffer.h"
-#include "../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 
 Buffer::Buffer(void *ptr, int len)
 {

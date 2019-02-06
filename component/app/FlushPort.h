@@ -1,7 +1,7 @@
 #ifndef __FlushPort_H__
 #define __FlushPort_H__
 
-#include "../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 #include "../../Bsp/Porting.h"
 
 // 闪烁端口

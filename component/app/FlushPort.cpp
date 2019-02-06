@@ -1,5 +1,5 @@
 #include "FlushPort.h"
-#include "../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 
 
 FlushPort::FlushPort()

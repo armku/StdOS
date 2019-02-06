@@ -1,5 +1,5 @@
 #include "List.h"
-#include "../Kernel/Sys.h"
+#include "Sys.h"
 
 IList::IList()
 {

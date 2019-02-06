@@ -1,5 +1,5 @@
 #include "ModbusLink.h"
-#include "../../../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 
 ModbusSlaveLink::ModbusSlaveLink(USART &uart) :ModbusBase(uart)
 {

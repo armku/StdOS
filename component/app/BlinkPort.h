@@ -1,7 +1,7 @@
 #ifndef __BlinkPort_H__
 #define __BlinkPort_H__
 
-#include "../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 #include "../../Bsp/Porting.h"
 
 // 闪烁端口

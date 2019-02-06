@@ -1,4 +1,4 @@
-#include "../../../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 #include "Spi.h"
 #include "../../stm32.h"
 

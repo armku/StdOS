@@ -1,5 +1,5 @@
 #include "OCM240128.h"
-#include "../../../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 OCM240128::OCM240128()
 {
 	this->pince.Invert = 0;

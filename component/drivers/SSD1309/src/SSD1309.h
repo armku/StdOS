@@ -1,6 +1,6 @@
 #ifndef _SSD1309_H
 #define _SSD1309_H
-#include "../../../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 #include "../../../../Bsp/Porting.h"
 
 class SSD1309

@@ -577,7 +577,7 @@
 
   <Group>
     <GroupName>Bsp</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -717,7 +717,7 @@
 
   <Group>
     <GroupName>Port</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1681,7 +1681,7 @@
 
   <Group>
     <GroupName>STDOS</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1692,7 +1692,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Core\List.cpp</PathWithFileName>
+      <PathWithFileName>..\StdOS\List.cpp</PathWithFileName>
       <FilenameWithoutPath>List.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1704,7 +1704,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Kernel\Sys.cpp</PathWithFileName>
+      <PathWithFileName>..\StdOS\Sys.cpp</PathWithFileName>
       <FilenameWithoutPath>Sys.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1716,7 +1716,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Kernel\Task.cpp</PathWithFileName>
+      <PathWithFileName>..\StdOS\Task.cpp</PathWithFileName>
       <FilenameWithoutPath>Task.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1728,7 +1728,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Kernel\Time.cpp</PathWithFileName>
+      <PathWithFileName>..\StdOS\Time.cpp</PathWithFileName>
       <FilenameWithoutPath>Time.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -2057,7 +2057,7 @@
 
   <Group>
     <GroupName>Arduino</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2101,7 +2101,7 @@
 
   <Group>
     <GroupName>wiring</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

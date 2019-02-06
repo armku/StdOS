@@ -1,7 +1,7 @@
 #include "USART.h"
 #include "Interrupt.h"
 #include "Configuration.h"
-#include "../../../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 
 UsartKernel_T UsartKernel[5];//串口数据处理
 

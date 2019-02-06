@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#include "../../../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 #include "../../I2C.h"
 #include "../../../../component/lib/DateTime.h"
 

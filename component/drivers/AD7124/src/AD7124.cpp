@@ -1,6 +1,6 @@
 #include "AD7124.h"
 #include "AD7124def.h"
-#include "../../../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 
 #if AD7124SPISOFT
     AD7124::AD7124(SpiSoft *spi)

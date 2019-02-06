@@ -1,5 +1,5 @@
 #include "DS18B20.h"
-#include "../../../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 
 void DS18B20::SetPin(Pin pin)
 {

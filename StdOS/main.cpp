@@ -1,4 +1,4 @@
-#include "../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 #include "../User/Bsp.h"
 #include "../Bsp/Porting.h"
 

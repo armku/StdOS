@@ -1,5 +1,5 @@
 #include "Socket_esp8266.h"
-#include "../../../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 
 Socket_esp8266::Socket_esp8266(USART& usart)
 	:esp8266(usart), mUsart(usart), mIsConnected(false)

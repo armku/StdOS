@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "../src/MqttLink.h"
-#include "../../../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 #include "../../../../Bsp/Porting.h"
-#include "../../../../StdOS/Kernel/Task.h"
+#include "Task.h"
 
 //#define _MQTTLINKEST_CPP
 #ifdef _MQTTLINKEST_CPP

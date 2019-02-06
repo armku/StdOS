@@ -2,10 +2,10 @@
 #define _Sys_H_
 
 #include <stdint.h>
-#include "../../component/Type.h"
-#include "../Core/List.h"
-#include "../Core/Delegate.h"
-#include "../../component/lib/Version.h"
+#include "../component/Type.h"
+#include "List.h"
+#include "Delegate.h"
+#include "../component/lib/Version.h"
 
 int StdPrintf(const char *format, ...); //´úÌæ printf
 #ifdef __cplusplus

@@ -1,5 +1,5 @@
 #include "../src/DS18B20.h"
-#include "../../../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 
 //#define _DS18B20_TEST_CPP
 

@@ -1,7 +1,7 @@
 #ifndef _BSP_KEY_H
 #define _BSP_KEY_H
 
-#include "../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 #define KEY_COUNT    5	   					/* 按键个数, 4个独立建 + 1个组合键 */
 /*
 KEY_NONE,

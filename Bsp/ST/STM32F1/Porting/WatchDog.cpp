@@ -1,5 +1,5 @@
 #include "WatchDog.h"
-#include "../../../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 #include "../../stm32.h"
 
 WatchDog::WatchDog()

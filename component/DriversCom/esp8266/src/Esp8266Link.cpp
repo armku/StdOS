@@ -2,7 +2,7 @@
 #include <string.h>  
 
 #include "EspDemoLink.h"
-#include "../../../../StdOS/Kernel/Sys.h"
+#include "Sys.h"
 //#include "OnChip/USART.h"
 //#include "BspPlatform/Interrupt.h"
 //#include "BspPlatform\BspPlatform.h"
