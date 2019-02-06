@@ -335,7 +335,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>STM32F1,DEBUG,STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Bsp\ST\STM32F1\CMSIS;..\Bsp\ST\STM32F1\FWLib\inc</IncludePath>
+              <IncludePath>..\Bsp\ST\STM32F1\CMSIS;..\Bsp\ST\STM32F1\FWLib\inc;..\wiring;..\Arduino</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1039,15 +1039,20 @@
               <FileType>8</FileType>
               <FilePath>..\Arduino\Print.cpp</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>wiring</GroupName>
+          <Files>
             <File>
               <FileName>wiring.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Arduino\wiring.c</FilePath>
+              <FilePath>..\wiring\wiring.c</FilePath>
             </File>
             <File>
               <FileName>wiring_digital.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Arduino\wiring_digital.c</FilePath>
+              <FilePath>..\wiring\wiring_digital.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2086,15 +2091,20 @@
               <FileType>8</FileType>
               <FilePath>..\Arduino\Print.cpp</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>wiring</GroupName>
+          <Files>
             <File>
               <FileName>wiring.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Arduino\wiring.c</FilePath>
+              <FilePath>..\wiring\wiring.c</FilePath>
             </File>
             <File>
               <FileName>wiring_digital.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Arduino\wiring_digital.c</FilePath>
+              <FilePath>..\wiring\wiring_digital.c</FilePath>
             </File>
           </Files>
         </Group>

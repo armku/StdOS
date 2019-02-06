@@ -1,5 +1,5 @@
 #include "Gpio.h"
-#include "../../Arduino/wiring_digital.h"
+#include "../../wiring/wiring_digital.h"
 
 Gpio::Gpio()
 { 
