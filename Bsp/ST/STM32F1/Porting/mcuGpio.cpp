@@ -47,28 +47,7 @@ void mcuGpio::SetPin(Pin pin)
 
 	this->_pin = 1 << (pin % 16);// GPIO_Pin_0;
 }
-/**
-  *@brief    构造函数
-  *@param    port port; pin pin
-  *@retval   None
-  */
-//mcuGpio::mcuGpio(GPIO_TypeDef *port, uint16_t pin)
-//{
-//	uint8_t temp1, temp2;
-//	_port = port;
-//	_pin = pin;
-//	temp1 = (((uint32_t)port - APB2PERIPH_BASE) >> 10) - 2;
-//
-//	for (int i = 0; i <= 15; i++)
-//	{
-//		if (((_pin >> i) & 0xfffe) == 0)
-//		{
-//			temp2 = i;
-//			break;
-//		}
-//	}
-//	this->_Pin = (Pin)(temp1 * 16 + temp2);
-//}
+
 /**
   *@brief    GPIO模式设置
   *@param    mode:PIN_MODE枚举变量类型
