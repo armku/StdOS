@@ -17,11 +17,20 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "Arduino.h"
+//#include "Arduino.h"
+#include "wiring_digital.h"
+#include "stm32f10x.h"
 
 #ifdef __cplusplus
  extern "C" {
 #endif
+#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (uint16_t)0xF0) << 6)))
+#define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
+
+	 // 获取组和针脚
+#define _PORT(PIN) (1 << ((PIN) & (uint16_t)0x0F))
+#define _PIN(PIN) (PIN & 0x000F)
+#define _PIN_NAME(pin) (pin==P0 ? '_' : ('A' + (pin >> 4))), (pin==P0 ? '0' : (pin & 0x0F))
 
 extern void pinMode( uint32_t ulPin, uint32_t ulMode )
 {
@@ -125,6 +134,14 @@ extern void pinMode( uint32_t ulPin, uint32_t ulMode )
 
 extern void digitalWrite( uint32_t ulPin, uint32_t ulVal )
 {
+	if (ulVal)
+	{
+		GPIO_SetBits(_GROUP(ulPin), _PORT(ulPin));
+	}
+	else
+	{
+		GPIO_ResetBits(_GROUP(ulPin), _PORT(ulPin));
+	}
 //  /* Handle */
 //	if ( ulPin > PINS_COUNT )
 //  {
