@@ -1,7 +1,7 @@
 #ifndef _STD_PORT_GPIO_H
 #define _STD_PORT_GPIO_H
 
-#include "../../../../StdOS/Port/Gpio.h"
+#include "Gpio.h"
 
 class mcuGpio : public Gpio
 {
