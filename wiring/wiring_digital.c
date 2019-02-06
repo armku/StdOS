@@ -29,6 +29,30 @@
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (uint16_t)0xF0) << 6)))
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 
+	 void Port_OnOpen(Pin pin)
+	 {
+		 int pinindex;
+		 int portname;
+
+		 if (pin == PA15 || pin == PB3 || pin == PB4)
+		 {
+			 if (pin == P0)
+				 pinindex = 48;
+			 else
+				 pinindex = pin & 0xF;
+
+			 if (pin == P0)
+				 portname = 95;
+			 else
+				 portname = (pin >> 4) + 'A';
+			 //debug_printf("Close JTAG Pin P%c%d \r\n", portname, pinindex);
+			 RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << (pin >> 4), ENABLE);
+			 GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
+		 }
+		 pinindex = pinindex;
+		 portname = portname;
+	 }
+
 extern void pinMode( uint32_t ulPin, uint32_t ulMode )
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
