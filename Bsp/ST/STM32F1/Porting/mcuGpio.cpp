@@ -107,7 +107,6 @@ uint8_t mcuGpio::read(void)
 */
 void mcuGpio::toggle()
 {
-	//_port->ODR ^= _pin;
 	digitalToggle(this->_Pin);
 }
 

@@ -254,6 +254,9 @@ extern void digitalToggle(uint32_t ulPin)
 }
 extern int digitalRead( uint32_t ulPin )
 {
+	GPIO_TypeDef *_port = _GROUP(ulPin);
+	int pin = 1 << ((ulPin % 16));// GPIO_Pin_0;
+	return ((_port->IDR & pin) == pin) ? (1) : (0);
 //	if ( ulPin > PINS_COUNT )
 //    {
 //        return LOW ;
