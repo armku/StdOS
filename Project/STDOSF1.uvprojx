@@ -1039,11 +1039,6 @@
               <FileType>8</FileType>
               <FilePath>..\Arduino\Stream.cpp</FilePath>
             </File>
-            <File>
-              <FileName>WInterrupts.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Arduino\WInterrupts.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -2095,11 +2090,6 @@
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Arduino\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WInterrupts.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Arduino\WInterrupts.c</FilePath>
             </File>
           </Files>
         </Group>
