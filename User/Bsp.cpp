@@ -8,7 +8,8 @@ mcuGpio led1;// (GPIOB, GPIO_Pin_0);
 
 void LedTask(void *param)
 {
-	led1 = !led1;
+	//led1 = !led1;
+	led1.toggle();
 }
 
 USART usart111(USART1, 115200);
