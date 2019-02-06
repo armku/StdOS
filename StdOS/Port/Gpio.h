@@ -46,7 +46,6 @@ public:
 	bool Empty() const;
 	Gpio& Set(Pin pin);	// 设置引脚
 public:
-	//Pin id;
 	Pin _Pin;
 	bool	Opened;		// 是否已经打开
 	uint8_t	Invert = 0;	// 是否倒置输入输出

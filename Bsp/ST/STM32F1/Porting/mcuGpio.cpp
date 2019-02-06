@@ -76,6 +76,8 @@ mcuGpio::mcuGpio(GPIO_TypeDef *port, uint16_t pin)
   */
 void mcuGpio::mode(PIN_MODE mode)
 {
+	pinMode(this->_Pin, mode);
+
 	GPIO_InitTypeDef GPIO_InitStructure;
 
 	//todo
