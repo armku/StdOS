@@ -98,7 +98,6 @@ void mcuGpio::read(uint8_t *val)
 uint8_t mcuGpio::read(void)
 {
 	return digitalRead(this->_Pin);
-	//return ((_port->IDR & _pin) == _pin) ? (1) : (0);
 }
 
 /**
@@ -119,7 +118,7 @@ int mcuGpio::operator =(mcuGpio &)
 // 相当与read()
 mcuGpio::operator int()
 {
-	return ((_port->IDR & _pin) == _pin) ? (1) : (0);
+	return this->read();
 }
 
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
