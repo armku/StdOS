@@ -246,7 +246,12 @@ extern void digitalWrite( uint32_t ulPin, uint32_t ulVal )
 //#endif
 //  }
 }
-
+extern void digitalToggle(uint32_t ulPin)
+{
+	GPIO_TypeDef *_port = _GROUP(ulPin);
+	int pin = 1 << ((ulPin % 16));// GPIO_Pin_0;
+	_port->ODR ^= pin;
+}
 extern int digitalRead( uint32_t ulPin )
 {
 //	if ( ulPin > PINS_COUNT )

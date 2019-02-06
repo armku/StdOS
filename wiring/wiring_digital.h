@@ -61,6 +61,8 @@ extern void pinMode( uint32_t dwPin, uint32_t dwMode ) ;
  * \param dwVal HIGH or LOW
  */
 extern void digitalWrite( uint32_t dwPin, uint32_t dwVal ) ;
+//¶Ë¿Ú·´×ª
+extern void digitalToggle(uint32_t ulPin);
 
 /**
  * \brief Reads the value from a specified digital pin, either HIGH or LOW.

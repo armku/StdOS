@@ -39,7 +39,7 @@ public:
 	virtual void mode(PIN_MODE mode) = 0;
 	virtual void read(uint8_t *val) = 0;
 	virtual uint8_t read(void) = 0;
-	virtual void toggle() = 0;
+	/*virtual void toggle() = 0;*/
 
 public:
 	bool Empty() const;
