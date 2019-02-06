@@ -11,7 +11,6 @@ public:
 	mcuGpio(GPIO_TypeDef *port, uint16_t pin);
 	virtual void SetPin(Pin pin);//设置管脚
 	virtual void mode(PIN_MODE mode);//设置管脚模式
-	virtual void mode(PIN_MODE mode, uint8_t af_configration);//设置管脚模式及复用
 	virtual void toggle();//端口翻转
 	virtual void read(uint8_t *val);//读取端口
 	virtual uint8_t read(void);//读

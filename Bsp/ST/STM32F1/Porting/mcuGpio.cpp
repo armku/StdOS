@@ -78,15 +78,6 @@ void mcuGpio::mode(PIN_MODE mode)
 {
 	pinMode(this->_Pin, mode);
 }
-/**
-  *@brief    GPIO模式设置,f1无需af_configration参数
-  *@param    mode: PIN_MODE枚举变量类型，af_configration 第二功能
-  *@retval   None
-  */
-void mcuGpio::mode(PIN_MODE mode, uint8_t af_configration)
-{
-	mcuGpio::mode(mode);
-}
 
 /**
  *@brief    GPIO输出高电平
