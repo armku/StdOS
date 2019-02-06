@@ -44,7 +44,6 @@ public:
 
 public:
 	bool Empty() const;
-	void Close();
 	Gpio& Set(Pin pin);	// ÉèÖÃÒı½Å
 public:
 	//Pin id;
