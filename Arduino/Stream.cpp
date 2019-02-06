@@ -31,11 +31,11 @@
 int Stream::timedRead()
 {
   int c;
-  _startMillis = millis();
-  do {
-    c = read();
-    if (c >= 0) return c;
-  } while(millis() - _startMillis < _timeout);
+//  _startMillis = millis();
+//  do {
+//    c = read();
+//    if (c >= 0) return c;
+//  } while(millis() - _startMillis < _timeout);
   return -1;     // -1 indicates timeout
 }
 
@@ -43,11 +43,11 @@ int Stream::timedRead()
 int Stream::timedPeek()
 {
   int c;
-  _startMillis = millis();
-  do {
-    c = peek();
-    if (c >= 0) return c;
-  } while(millis() - _startMillis < _timeout);
+//  _startMillis = millis();
+//  do {
+//    c = peek();
+//    if (c >= 0) return c;
+//  } while(millis() - _startMillis < _timeout);
   return -1;     // -1 indicates timeout
 }
 
