@@ -93,9 +93,9 @@ void Timer::Stop()
 */	
 void Timer::Conversion(u16 s,u16 ms,u16 us) //将时分秒转化为预分频和初值
 {
-	u32 time;
+	uint32_t time;
 	u16 tempPsc;//用于暂存计算值
-	u32 tempArr=0xfffff;
+	uint32_t tempArr=0xfffff;
 	
 	
 	time=s*1000000+ms*1000+us; //计算总时间 单位us

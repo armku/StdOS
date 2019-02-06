@@ -251,7 +251,7 @@ extern "C"
 	}
 	//…Ë÷√’ª∂•µÿ÷∑
 	//addr:’ª∂•µÿ÷∑
-	__asm void MSR_MSP(u32 addr)
+	__asm void MSR_MSP(uint32_t addr)
 	{
 		MSR MSP, r0 			//set Main Stack value
 			BX r14

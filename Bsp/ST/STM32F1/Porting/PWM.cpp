@@ -76,8 +76,8 @@ void PWM::Initialize(TIM_TypeDef *timx,bool enCh1,bool enCh2,bool enCh3, bool en
 	
 	//TIMx
 	
-	u32 res = 72000000%_frqence;	
-	u32 multi = 72000000/_frqence;
+	uint32_t res = 72000000%_frqence;	
+	uint32_t multi = 72000000/_frqence;
 	if(res>_frqence/2) multi++;
 	_prescaler = 1;
 	_period = multi;

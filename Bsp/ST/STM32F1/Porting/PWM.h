@@ -6,8 +6,8 @@
 class PWM
 {
 private:
-	u32 _timx_rcc;				//timer rcc
-	u32 _gpio_rcc;        //gpio rcc
+	uint32_t _timx_rcc;				//timer rcc
+	uint32_t _gpio_rcc;        //gpio rcc
 	TIM_TypeDef *_timx;   //timer 
 	GPIO_TypeDef *_port;  //gpio
 	u16 _pin1;            //ch1 gpio pin
@@ -19,7 +19,7 @@ private:
 	bool _enCh3;          //ch3 enable falg
 	bool _enCh4;          //ch4 enable falg
 	u16 _frqence;         //freqence 
-	u32 _period;          //period
+	uint32_t _period;          //period
 	u16 _prescaler;       //prescaler
 public:
 	PWM(TIM_TypeDef *timx,bool enCh1,bool enCh2,bool enCh3, bool enCh4, u16 frq);

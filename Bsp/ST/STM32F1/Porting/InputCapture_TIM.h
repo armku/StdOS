@@ -39,10 +39,10 @@ private:
 
 	GPIO_TypeDef *_port, *_port2; //gpio port
 	u8 _IRQn;       //IRQ channel
-	u32 _timer_rcc; //clock of timer
-	u32 _gpio_rcc;  //clock of gpio
-	u32 _prescaler; //prescaler of timer
-	u32 _period;    //period of timer
+	uint32_t _timer_rcc; //clock of timer
+	uint32_t _gpio_rcc;  //clock of gpio
+	uint32_t _prescaler; //prescaler of timer
+	uint32_t _period;    //period of timer
 public:				 
 	InputCapture_TIM(TIM_TypeDef *TIMx, u16 minHz, bool enCh1=false, bool enCh2=false, bool enCh3=false, bool enCh4=false, u8 intGroup=2,u8 prePriority=2,u8 subPriority=2);	
 	void Start();	    //start timer

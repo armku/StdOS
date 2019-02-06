@@ -27,7 +27,7 @@ InputCapture_EXIT::InputCapture_EXIT(GPIO_TypeDef *exitPort, u8 exitPin, u8 itGr
 	GPIO_EXTILineConfig(portSource,exitPin);
 	
   //Step 2: NVIC Initialize
-	u32 priorityGroup[5] = {NVIC_PriorityGroup_0,NVIC_PriorityGroup_1,NVIC_PriorityGroup_2,NVIC_PriorityGroup_3,NVIC_PriorityGroup_4};
+	uint32_t priorityGroup[5] = {NVIC_PriorityGroup_0,NVIC_PriorityGroup_1,NVIC_PriorityGroup_2,NVIC_PriorityGroup_3,NVIC_PriorityGroup_4};
 	u8 EXTIx_IRQn;			//?????	
 	switch (exitPin)
 	{
@@ -138,8 +138,8 @@ InputCapture_EXIT::InputCapture_EXIT(GPIO_TypeDef *exitPort, u8 exitPin, u8 itGr
 	
 	//Stpe 3: EXTI Initialize
 	EXTI_InitTypeDef EXTI_InitStructure;
-	EXTI_ClearITPendingBit(u32(mExitPin));							        //clear exti interrupt flag bit
-	EXTI_InitStructure.EXTI_Line = u32(mExitPin);					 	      //select exti line
+	EXTI_ClearITPendingBit(uint32_t(mExitPin));							        //clear exti interrupt flag bit
+	EXTI_InitStructure.EXTI_Line = uint32_t(mExitPin);					 	      //select exti line
 	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;           //interrupt
 	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;//trigger: both rising and falling edge
 	EXTI_InitStructure.EXTI_LineCmd = ENABLE;	
