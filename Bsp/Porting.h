@@ -4,7 +4,7 @@
 #ifdef STM32F0
 
 #elif defined STM32F1
-#include "../Bsp/ST/STM32F1/Porting/mcuGpio.h"
+#include "../StdOS/Port/mcuGpio.h"
 #include "../Bsp/ST/STM32F1/Porting/USART.h"
 #include "../Bsp/ST/STM32F1/Porting/BspPlatform.h"
 #include "../Bsp/ST/STM32F1/Porting/Spi.h"

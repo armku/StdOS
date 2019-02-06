@@ -395,11 +395,6 @@
               <FilePath>..\Bsp\ST\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
             </File>
             <File>
-              <FileName>mcuGpio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Bsp\ST\STM32F1\Porting\mcuGpio.cpp</FilePath>
-            </File>
-            <File>
               <FileName>BspPlatform.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Bsp\ST\STM32F1\Porting\BspPlatform.cpp</FilePath>
@@ -468,6 +463,11 @@
               <FileName>Gpio.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Port\Gpio.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>mcuGpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Port\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1447,11 +1447,6 @@
               <FilePath>..\Bsp\ST\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
             </File>
             <File>
-              <FileName>mcuGpio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Bsp\ST\STM32F1\Porting\mcuGpio.cpp</FilePath>
-            </File>
-            <File>
               <FileName>BspPlatform.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Bsp\ST\STM32F1\Porting\BspPlatform.cpp</FilePath>
@@ -1520,6 +1515,11 @@
               <FileName>Gpio.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Port\Gpio.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>mcuGpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Port\mcuGpio.cpp</FilePath>
             </File>
           </Files>
         </Group>
