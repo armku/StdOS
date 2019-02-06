@@ -176,7 +176,6 @@ bool mcuGpio::Open()
 	return true;
 }
 ////////////////////////////////////////////////////////////////////
-//GPIO_TypeDef *IndexToGroup(uint8_t index);
 uint8_t GroupToIndex(GPIO_TypeDef *group);
 void Port_OnOpen(Pin pin);
 
