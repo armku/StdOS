@@ -201,13 +201,6 @@ mcuGpio::mcuGpio(Pin pin, uint8_t invert, bool openDrain)
 
 ////////////////////////////////////////////////////////////////////////
 
-//
-void OpenPeriphClock(Pin pin)
-{
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << (pin >> 4), ENABLE);
-}
-
-
 GPIO_TypeDef *IndexToGroup(uint8_t index)
 {
 	return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
