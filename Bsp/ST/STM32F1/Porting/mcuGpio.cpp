@@ -97,7 +97,8 @@ void mcuGpio::read(uint8_t *val)
 */
 uint8_t mcuGpio::read(void)
 {
-	return ((_port->IDR & _pin) == _pin) ? (1) : (0);
+	return digitalRead(this->_Pin);
+	//return ((_port->IDR & _pin) == _pin) ? (1) : (0);
 }
 
 /**
