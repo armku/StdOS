@@ -20,17 +20,13 @@
 //#include "Arduino.h"
 #include "wiring_digital.h"
 #include "stm32f10x.h"
+#include "../Bsp/Pin.h"
 
 #ifdef __cplusplus
  extern "C" {
 #endif
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (uint16_t)0xF0) << 6)))
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
-
-	 // 获取组和针脚
-#define _PORT(PIN) (1 << ((PIN) & (uint16_t)0x0F))
-#define _PIN(PIN) (PIN & 0x000F)
-#define _PIN_NAME(pin) (pin==P0 ? '_' : ('A' + (pin >> 4))), (pin==P0 ? '0' : (pin & 0x0F))
 
 extern void pinMode( uint32_t ulPin, uint32_t ulMode )
 {
@@ -136,14 +132,15 @@ extern void digitalWrite( uint32_t ulPin, uint32_t ulVal )
 {
 //#define FAST
 
+	ulPin = 0X10;
 #ifdef FAST
 	GPIO_TypeDef *_port; /**< 引脚的端口 */
+	_port = _GROUP(ulPin);
 #endif // FAST
 
 	if (ulVal)
 	{
 #ifdef FAST
-		_port = _GROUP(ulPin);
 		_port->BSRR = _PIN(ulPin);
 #else
 		GPIO_SetBits(_GROUP(ulPin), _PORT(ulPin));
@@ -153,7 +150,6 @@ extern void digitalWrite( uint32_t ulPin, uint32_t ulVal )
 	else
 	{
 #ifdef  FAST
-		_port = _GROUP(ulPin);
 		_port->BSRR = _PIN(ulPin);
 #else
 		GPIO_ResetBits(_GROUP(ulPin), _PORT(ulPin));
