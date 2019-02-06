@@ -1020,11 +1020,6 @@
           <GroupName>Arduino</GroupName>
           <Files>
             <File>
-              <FileName>CoreIO.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Arduino\CoreIO.cpp</FilePath>
-            </File>
-            <File>
               <FileName>new.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Arduino\new.cpp</FilePath>
@@ -2076,11 +2071,6 @@
         <Group>
           <GroupName>Arduino</GroupName>
           <Files>
-            <File>
-              <FileName>CoreIO.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Arduino\CoreIO.cpp</FilePath>
-            </File>
             <File>
               <FileName>new.cpp</FileName>
               <FileType>8</FileType>
