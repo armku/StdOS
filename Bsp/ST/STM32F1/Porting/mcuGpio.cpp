@@ -1,4 +1,5 @@
 #include "mcuGpio.h"
+#include "wiring_digital.h"
 
 //…Ë÷√π‹Ω≈
 void mcuGpio::SetPin(Pin pin)
@@ -242,6 +243,8 @@ bool mcuGpio::Read()
 #define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
 void mcuGpio::Write(Pin pin, bool value)
 {
+	digitalWrite(pin, value);
+	
 	if (value)
 	{
 		GPIO_SetBits(_GROUP(pin), _PORT(pin));

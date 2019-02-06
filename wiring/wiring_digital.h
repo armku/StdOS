@@ -25,6 +25,12 @@
 #ifdef __cplusplus
  extern "C" {
 #endif
+#ifndef HIGH
+#define HIGH 1
+#endif
+#ifndef  LOW
+#define LOW 0 
+#endif // ! LOW
 
 /**
  * \brief Configures the specified pin to behave either as an input or an output. See the description of digital pins for details.
