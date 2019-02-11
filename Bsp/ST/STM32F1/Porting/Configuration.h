@@ -101,13 +101,6 @@
 //#define USE_ULTRASONIC_EXTI15  //-Ultr-EXTI15-//
 
 
-#ifdef USE_USART
-#include "USART.h"
-#endif
-#ifdef USE_USART_DMA
-#include "USART.h"
-#endif
-
 #ifdef USE_I2C
 #include "I2C.h"
 #endif

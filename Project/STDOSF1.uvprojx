@@ -435,11 +435,6 @@
               <FilePath>..\Bsp\ST\STM32F1\Porting\Timer.cpp</FilePath>
             </File>
             <File>
-              <FileName>USART.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Bsp\ST\STM32F1\Porting\USART.cpp</FilePath>
-            </File>
-            <File>
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Bsp\ST\STM32F1\Porting\WatchDog.cpp</FilePath>
@@ -1525,11 +1520,6 @@
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Bsp\ST\STM32F1\Porting\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>USART.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Bsp\ST\STM32F1\Porting\USART.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDog.cpp</FileName>

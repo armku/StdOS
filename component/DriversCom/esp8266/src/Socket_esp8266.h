@@ -70,7 +70,7 @@ public:
 	//******************
 	void SetIP(char *WIFISSID, char *WIFIKEY, char *ipadder, char *ipport);
 	void CheckStatus(void);
-	u8 GetCSQ(void);
+	uint8_t GetCSQ(void);
 	//****************** 
 };
 

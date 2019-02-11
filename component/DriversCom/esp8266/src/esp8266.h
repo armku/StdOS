@@ -55,7 +55,7 @@ public:
 	bool SetEcho(bool echo);
 	bool Restore(void);
 	bool SetUart(uint32_t baudrate, esp8266_pattern pattern);
-	u8 GetCCSQ(char* WiFiSSID);				//获取wifi信号
+	uint8_t GetCCSQ(char* WiFiSSID);				//获取wifi信号
 
 	bool SetMode(esp8266_MODE, esp8266_pattern = esp8266_PATTERN_DEF);//设置为station+ap模式
 	bool SetMUX(bool isEnableMUX);

@@ -3,7 +3,6 @@
 #include "Port.h"
 #include "../../stm32.h"
 #include "Configuration.h"
-#include "USART.h"
 #include "Interrupt.h"
 
 void TimeUpdate();
