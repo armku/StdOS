@@ -1064,6 +1064,16 @@
               <FileType>8</FileType>
               <FilePath>..\Arduino\HardwareSerial3.cpp</FilePath>
             </File>
+            <File>
+              <FileName>IPAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\IPAddress.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>itoa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arduino\itoa.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2140,6 +2150,16 @@
               <FileName>HardwareSerial3.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Arduino\HardwareSerial3.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\IPAddress.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>itoa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arduino\itoa.c</FilePath>
             </File>
           </Files>
         </Group>
