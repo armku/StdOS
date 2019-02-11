@@ -1044,6 +1044,26 @@
               <FileType>8</FileType>
               <FilePath>..\Arduino\HardwareSerial.cpp</FilePath>
             </File>
+            <File>
+              <FileName>HardwareSerial0.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\HardwareSerial0.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HardwareSerial1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\HardwareSerial1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HardwareSerial2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\HardwareSerial2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HardwareSerial3.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\HardwareSerial3.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2100,6 +2120,26 @@
               <FileName>HardwareSerial.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Arduino\HardwareSerial.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HardwareSerial0.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\HardwareSerial0.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HardwareSerial1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\HardwareSerial1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HardwareSerial2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\HardwareSerial2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HardwareSerial3.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\HardwareSerial3.cpp</FilePath>
             </File>
           </Files>
         </Group>
