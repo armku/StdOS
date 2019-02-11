@@ -42,7 +42,9 @@ void setup()
 
 	int avi = Serial.available();
 	debug_printf("\r\nserial avi:%d\r\n",avi);
-	
+	Serial.print("abc");
+	Serial.println("abcd");
+
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
 	//usart111.OnReceive = Com1test;
