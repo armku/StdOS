@@ -1074,6 +1074,11 @@
               <FileType>1</FileType>
               <FilePath>..\Arduino\itoa.c</FilePath>
             </File>
+            <File>
+              <FileName>sdio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\sdio.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2160,6 +2165,11 @@
               <FileName>itoa.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Arduino\itoa.c</FilePath>
+            </File>
+            <File>
+              <FileName>sdio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\sdio.cpp</FilePath>
             </File>
           </Files>
         </Group>
