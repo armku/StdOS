@@ -93,12 +93,12 @@ typedef uint8_t rx_buffer_index_t;
 class HardwareSerial : public Stream
 {
   protected:
-    volatile uint8_t * const _ubrrh;
+    /*volatile uint8_t * const _ubrrh;
     volatile uint8_t * const _ubrrl;
     volatile uint8_t * const _ucsra;
     volatile uint8_t * const _ucsrb;
     volatile uint8_t * const _ucsrc;
-    volatile uint8_t * const _udr;
+    volatile uint8_t * const _udr;*/
     // Has any byte been written to the UART since begin()
     bool _written;
 
@@ -115,9 +115,9 @@ class HardwareSerial : public Stream
 
   public:
     inline HardwareSerial(
-      volatile uint8_t *ubrrh, volatile uint8_t *ubrrl,
+      /*volatile uint8_t *ubrrh, volatile uint8_t *ubrrl,
       volatile uint8_t *ucsra, volatile uint8_t *ucsrb,
-      volatile uint8_t *ucsrc, volatile uint8_t *udr);
+      volatile uint8_t *ucsrc, volatile uint8_t *udr*/);
     void begin(unsigned long baud) { begin(baud, SERIAL_8N1); }
     void begin(unsigned long, uint8_t);
     void end();

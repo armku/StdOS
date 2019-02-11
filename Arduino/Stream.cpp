@@ -30,7 +30,7 @@
 // protected method to read stream with timeout
 int Stream::timedRead()
 {
-  int c;
+//  int c;
 //  _startMillis = millis();
 //  do {
 //    c = read();
@@ -42,7 +42,7 @@ int Stream::timedRead()
 // protected method to peek stream with timeout
 int Stream::timedPeek()
 {
-  int c;
+//  int c;
 //  _startMillis = millis();
 //  do {
 //    c = peek();

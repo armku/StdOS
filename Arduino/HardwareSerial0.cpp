@@ -34,7 +34,7 @@
 // file prevents the linker from pulling in any unused instances in the
 // first place.
 
-//#if defined(HAVE_HWSERIAL0)
+#if defined(HAVE_HWSERIAL0)
 
 //#if defined(USART_RX_vect)
 //  ISR(USART_RX_vect)
@@ -49,7 +49,7 @@
 //    Serial._rx_complete_irq();
 //  }
 
-#if defined(UART0_UDRE_vect)
+//#if defined(UART0_UDRE_vect)
 //ISR(UART0_UDRE_vect)
 //#elif defined(UART_UDRE_vect)
 //ISR(UART_UDRE_vect)
@@ -64,16 +64,16 @@
 //  Serial._tx_udr_empty_irq();
 //}
 
-#if defined(UBRRH) && defined(UBRRL)
-  HardwareSerial Serial(&UBRRH, &UBRRL, &UCSRA, &UCSRB, &UCSRC, &UDR);
-#else
-  HardwareSerial Serial(&UBRR0H, &UBRR0L, &UCSR0A, &UCSR0B, &UCSR0C, &UDR0);
-#endif
+//#if defined(UBRRH) && defined(UBRRL)
+//  HardwareSerial Serial(&UBRRH, &UBRRL, &UCSRA, &UCSRB, &UCSRC, &UDR);
+//#else
+  HardwareSerial Serial(/*&UBRR0H, &UBRR0L, &UCSR0A, &UCSR0B, &UCSR0C, &UDR0*/);
+//#endif
 
 // Function that can be weakly referenced by serialEventRun to prevent
 // pulling in this file if it's not otherwise used.
-bool Serial0_available() {
-  return Serial.available();
-}
+//bool Serial0_available() {
+//  return Serial.available();
+//}
 
 #endif // HAVE_HWSERIAL0

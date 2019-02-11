@@ -1,6 +1,7 @@
 #include "../Bsp/Porting.h"
 #include "Sys.h"
 #include "../component/lib/Buffer.h"
+#include "../Arduino/HardwareSerial.h"
 
 char *AppVersion = "0.1.2018.1115"; //°æ±¾ºÅ
 

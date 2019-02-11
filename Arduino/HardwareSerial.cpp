@@ -93,7 +93,7 @@ void HardwareSerial::_tx_udr_empty_irq(void)
   unsigned char c = _tx_buffer[_tx_buffer_tail];
   _tx_buffer_tail = (_tx_buffer_tail + 1) % SERIAL_TX_BUFFER_SIZE;
 
-  *_udr = c;
+//  *_udr = c;
 
   // clear the TXC bit -- "can be cleared by writing a one to its bit
   // location". This makes sure flush() won't return until the bytes

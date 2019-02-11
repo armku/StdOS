@@ -84,15 +84,15 @@
 
 // Constructors ////////////////////////////////////////////////////////////////
 
-HardwareSerial::HardwareSerial(
-  volatile uint8_t *ubrrh, volatile uint8_t *ubrrl,
+HardwareSerial::HardwareSerial()
+  /*volatile uint8_t *ubrrh, volatile uint8_t *ubrrl,
   volatile uint8_t *ucsra, volatile uint8_t *ucsrb,
-  volatile uint8_t *ucsrc, volatile uint8_t *udr) :
-    _ubrrh(ubrrh), _ubrrl(ubrrl),
+  volatile uint8_t *ucsrc, volatile uint8_t *udr*/ //) :
+    /*_ubrrh(ubrrh), _ubrrl(ubrrl),
     _ucsra(ucsra), _ucsrb(ucsrb), _ucsrc(ucsrc),
-    _udr(udr),
-    _rx_buffer_head(0), _rx_buffer_tail(0),
-    _tx_buffer_head(0), _tx_buffer_tail(0)
+    _udr(udr),*/
+//    _rx_buffer_head(0), _rx_buffer_tail(0),
+//    _tx_buffer_head(0), _tx_buffer_tail(0)
 {
 }
 
