@@ -4,7 +4,7 @@
 #include "Sys.h"
 #include "../../../../Bsp/Porting.h"
 #include "Task.h"
-
+#include "HardwareSerial.h"
 
 #define _ESPDEMOLINKTEST_CPP
 #ifdef _ESPDEMOLINKTEST_CPP

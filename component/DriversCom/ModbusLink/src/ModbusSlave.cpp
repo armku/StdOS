@@ -1,5 +1,6 @@
 #include "ModbusLink.h"
 #include "Sys.h"
+#include "HardwareSerial.h"
 
 ModbusSlaveLink::ModbusSlaveLink(USART &uart) :ModbusBase(uart)
 {

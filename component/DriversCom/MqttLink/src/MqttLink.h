@@ -5,6 +5,7 @@
 #include "../../../../Bsp/Porting.h"
 #include "../../DataFrame.h"
 
+class USART;
 
 class MqttLink
 {

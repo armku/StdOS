@@ -1,5 +1,6 @@
 #include "TTime.h"
 #include "../Bsp/Porting.h"
+#include "HardwareSerial.h"
 
 TTime Time; //系统时间，不建议用户直接使用
 TTime::TTime()

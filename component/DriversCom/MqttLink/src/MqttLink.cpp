@@ -2,6 +2,7 @@
 #include "MqttLink.h"
 #include "Sys.h"
 #include "../../../../component/lib/Buffer.h"
+#include "HardwareSerial.h"
 
 MqttLink::MqttLink(USART &uart) :com(uart)
 {

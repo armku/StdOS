@@ -1,5 +1,6 @@
 #include "ModbusLink.h"
 #include "../../../../component/lib/Buffer.h"
+#include "HardwareSerial.h"
 
 ModbusBase::ModbusBase(USART &uart) : com(uart)
 {

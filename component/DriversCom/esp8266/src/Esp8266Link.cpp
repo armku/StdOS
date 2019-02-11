@@ -3,6 +3,8 @@
 
 #include "EspDemoLink.h"
 #include "Sys.h"
+#include "HardwareSerial.h"
+
 //#include "OnChip/USART.h"
 //#include "BspPlatform/Interrupt.h"
 //#include "BspPlatform\BspPlatform.h"

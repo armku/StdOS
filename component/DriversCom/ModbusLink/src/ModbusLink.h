@@ -5,6 +5,8 @@
 #ifndef _MODBUSLINK_H
 #define _MODBUSLINK_H
 
+class USART;
+
 class ModbusErrors
 {
 public:

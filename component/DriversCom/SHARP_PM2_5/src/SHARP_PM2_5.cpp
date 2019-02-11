@@ -1,4 +1,5 @@
 #include "SHARP_PM2_5.h"
+#include "HardwareSerial.h"
 
 Sharp_PM_2_5::Sharp_PM_2_5(USART &com) :mCom(com)
 {}

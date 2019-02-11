@@ -5,6 +5,8 @@
 #include "../../../../Bsp/Porting.h"
 #include "DataFrameEspDemoLink.h"
 
+class USART;
+
 class EspDemoLink
 {
 public:

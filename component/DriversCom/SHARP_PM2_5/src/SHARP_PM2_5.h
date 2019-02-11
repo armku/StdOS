@@ -12,6 +12,8 @@
 #include "stm32f10x.h"
 #include "../../../../Bsp/Porting.h"
 
+class USART;
+
 class Sharp_PM_2_5
 {
 private:

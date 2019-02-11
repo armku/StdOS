@@ -1,4 +1,5 @@
 #include "Interrupt.h"
+#include "HardwareSerial.h"
 
 #ifdef USE_GPS
 GPS *pGPS1 = 0;

@@ -3,6 +3,8 @@
 
 #include "Configuration.h"
 
+class USART;
+
 #ifdef USE_GPS
 extern GPS *pGPS1;
 extern GPS *pGPS2;
