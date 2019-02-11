@@ -116,37 +116,7 @@ void HardwareSerial::_tx_udr_empty_irq(void)
 
 void HardwareSerial::begin(unsigned long baud, byte config)
 {
-  // Try u2x mode first
-//  uint16_t baud_setting = (F_CPU / 4 / baud - 1) / 2;
-//  *_ucsra = 1 << U2X0;
-
-//  // hardcoded exception for 57600 for compatibility with the bootloader
-//  // shipped with the Duemilanove and previous boards and the firmware
-//  // on the 8U2 on the Uno and Mega 2560. Also, The baud_setting cannot
-//  // be > 4095, so switch back to non-u2x mode if the baud rate is too
-//  // low.
-//  if (((F_CPU == 16000000UL) && (baud == 57600)) || (baud_setting >4095))
-//  {
-//    *_ucsra = 0;
-//    baud_setting = (F_CPU / 8 / baud - 1) / 2;
-//  }
-
-//  // assign the baud_setting, a.k.a. ubrr (USART Baud Rate Register)
-//  *_ubrrh = baud_setting >> 8;
-//  *_ubrrl = baud_setting;
-
-//  _written = false;
-
-//  //set the data bits, parity, and stop bits
-//#if defined(__AVR_ATmega8__)
-//  config |= 0x80; // select UCSRC register (shared with UBRRH)
-//#endif
-//  *_ucsrc = config;
-//  
-//  sbi(*_ucsrb, RXEN0);
-//  sbi(*_ucsrb, TXEN0);
-//  sbi(*_ucsrb, RXCIE0);
-//  cbi(*_ucsrb, UDRIE0);
+ 
 }
 
 void HardwareSerial::end()

@@ -139,10 +139,17 @@ class HardwareSerial : public Stream
     void _tx_udr_empty_irq(void);
 };
 
-#if defined(UBRRH) || defined(UBRR0H)
-  extern HardwareSerial Serial;
-  #define HAVE_HWSERIAL0
-#endif
+class HardwareSerial0 : public HardwareSerial
+{
+public:
+	HardwareSerial0();
+	void begin(unsigned long baud) { begin(baud, SERIAL_8N1); }
+	void begin(unsigned long, uint8_t);
+	virtual size_t write(uint8_t);
+};
+
+extern HardwareSerial0 Serial; 
+
 #if defined(UBRR1H)
   extern HardwareSerial Serial1;
   #define HAVE_HWSERIAL1
@@ -157,6 +164,5 @@ class HardwareSerial : public Stream
 #endif
 
 extern void serialEventRun(void) __attribute__((weak));
-extern HardwareSerial Serial;
 
 #endif
