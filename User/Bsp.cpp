@@ -38,6 +38,7 @@ void setup()
 {
 	led1.SetPin(PB0);
 	led1.mode(PIN_MODE::OUTPUT_PP);
+	Serial.begin(115200);
 	
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
