@@ -52,9 +52,9 @@ extern "C"{
 
 //      LOW 0
 //      HIGH 1
-#define CHANGE 2
-#define FALLING 3
-#define RISING 4
+//#define CHANGE 2
+//#define FALLING 3
+//#define RISING 4
 
 #define DEFAULT 1
 #define EXTERNAL 0
@@ -80,8 +80,8 @@ extern "C"{
 #define sq(x) ((x)*(x))
 
 //interrupts functions are in WInterrupts.c file
-#define interrupts() __enable_irq()
-#define noInterrupts() __disable_irq()
+//#define interrupts() __enable_irq()
+//#define noInterrupts() __disable_irq()
 
 #define lowByte(w) ((uint8_t) ((w) & 0xff))
 #define highByte(w) ((uint8_t) ((w) >> 8))
