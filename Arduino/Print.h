@@ -26,6 +26,14 @@
 #include "WString.h"
 #include "Printable.h"
 
+#if 0
+enum {
+    BIN  = 2,
+    OCT  = 8,
+    DEC  = 10,
+    HEX  = 16
+};
+#else
 #define DEC 10
 #define HEX 16
 #define OCT 8
@@ -33,7 +41,7 @@
 #undef BIN
 #endif
 #define BIN 2
-
+#endif
 class Print
 {
   private:

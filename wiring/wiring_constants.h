@@ -19,6 +19,8 @@
 #ifndef _WIRING_CONSTANTS_
 #define _WIRING_CONSTANTS_
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C"{
 #endif // __cplusplus
@@ -46,10 +48,7 @@ extern "C"{
 #define SERIAL  0x0
 #define DISPLAY 0x1
 
-enum BitOrder {
-	LSBFIRST = 0,
-	MSBFIRST = 1
-};
+//enum BitOrder{	LSBFIRST = 0,	MSBFIRST = 1};
 
 //      LOW 0
 //      HIGH 1
@@ -97,7 +96,7 @@ typedef unsigned int word;
 #define bit(b) (1UL << (b))
 
 // TODO: to be checked
-typedef uint8_t boolean ;
+//typedef uint8_t boolean ;
 typedef uint8_t byte ;
 
 

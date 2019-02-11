@@ -1039,6 +1039,11 @@
               <FileType>8</FileType>
               <FilePath>..\Arduino\Stream.cpp</FilePath>
             </File>
+            <File>
+              <FileName>HardwareSerial.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\HardwareSerial.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2090,6 +2095,11 @@
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Arduino\Stream.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HardwareSerial.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Arduino\HardwareSerial.cpp</FilePath>
             </File>
           </Files>
         </Group>

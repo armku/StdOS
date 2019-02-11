@@ -26,7 +26,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <inttypes.h>
-#include <util/atomic.h>
+//#include <util/atomic.h>
 #include "Arduino.h"
 
 #include "HardwareSerial.h"
