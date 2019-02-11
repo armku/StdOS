@@ -39,13 +39,16 @@ void setup()
 	led1.SetPin(PB0);
 	led1.mode(PIN_MODE::OUTPUT_PP);
 	Serial.begin(115200);
+
+	int avi = Serial.available();
+	debug_printf("\r\nserial avi:%d\r\n",avi);
 	
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
 	//usart111.OnReceive = Com1test;
 	//MqttLinkTestInit();
 	//ModbusMasterLinkTestInit();
-	EspDemoLinkTestInit();
+	//EspDemoLinkTestInit();
 }
 //¼æÈÝarduino½Ó¿Ú
 void loop()
