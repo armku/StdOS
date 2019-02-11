@@ -157,6 +157,9 @@ extern HardwareSerial0 Serial;
 extern void serialEventRun(void) __attribute__((weak));
 
 ///////////////////////////////////////////////////////////////////////////////////
-
+#include "stm32f10x.h"
+#include "../Bsp/ST/STM32F1/Porting/FIFOBuffer.h"
+#include "../Bsp/ST/STM32F1/Porting/Configuration.h"
+#include "Port.h"
 
 #endif
