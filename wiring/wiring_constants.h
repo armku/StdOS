@@ -28,13 +28,13 @@ extern "C"{
 #define HIGH 0x1
 #define LOW  0x0
 
-#define INPUT 0x0
-#define OUTPUT 0x1
-#define INPUT_PULLUP 0x2
-#define INPUT_PULLDOWN 0x3
-#define AF_OUTPUT_PUSHPULL 0x4
-#define AF_OUTPUT_DRAIN 0x5
-#define AN_INPUT 0x6
+//#define INPUT 0x0
+//#define OUTPUT 0x1
+//#define INPUT_PULLUP 0x2
+//#define INPUT_PULLDOWN 0x3
+//#define AF_OUTPUT_PUSHPULL 0x4
+//#define AF_OUTPUT_DRAIN 0x5
+//#define AN_INPUT 0x6
 
 #define true 0x1
 #define false 0x0

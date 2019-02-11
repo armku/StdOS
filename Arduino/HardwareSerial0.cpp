@@ -3,10 +3,10 @@
 #include "HardwareSerial_private.h"
 #include "stm32f10x.h"
 
-//#include "../Bsp/ST/STM32F1/Porting/USART.h"
-//#include "../Bsp/ST/STM32F1/Porting/Interrupt.h"
-//#include "../Bsp/ST/STM32F1/Porting/Configuration.h"
-//#include "Sys.h"
+#include "../Bsp/ST/STM32F1/Porting/USART.h"
+#include "../Bsp/ST/STM32F1/Porting/Interrupt.h"
+#include "../Bsp/ST/STM32F1/Porting/Configuration.h"
+#include "Sys.h"
 
 #if defined(HAVE_HWSERIAL0)
 
