@@ -266,6 +266,15 @@ extern "C"
 			delayMicroseconds(500);
 		}
 	}	
+	//—” ±ms
+	void delay(unsigned long ms)
+	{
+		for (int i = 0; i < ms; i++)
+		{
+			delayMicroseconds(500);
+			delayMicroseconds(500);
+		}
+	}
 	// Œ¢√Îº∂—”≥Ÿ
 	void delayMicroseconds(unsigned int us)
 	{
