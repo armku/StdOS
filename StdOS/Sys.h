@@ -23,7 +23,7 @@ extern "C" {
 #endif
 
 // 系统类
-class TSys
+class Sys_T
 {
 public:
     uint32_t	Clock;  	// 系统时钟
@@ -37,7 +37,7 @@ public:
 	Version OsVer;//系统版本
 	Version AppVer;//软件版本
 
-	TSys();
+	Sys_T();
 
 	void Init();     	// 初始化系统
 	void ShowInfo() const;
@@ -78,7 +78,7 @@ public:
 	void Start();	// 开始系统大循环
 };
 
-extern TSys Sys;		// 创建一个全局的Sys对象  会在main函数之前执行构造函数（！！！！！）
+extern Sys_T Sys;		// 创建一个全局的Sys对象  会在main函数之前执行构造函数（！！！！！）
 
 #define STDOS_VERSION "0.8.2019.0114" //系统版本号
 extern char* AppVersion;//需要定义软件版本号实现 如：char *AppVersion = "0.1.2018.1114";

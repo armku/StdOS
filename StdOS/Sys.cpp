@@ -10,10 +10,10 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "../Bsp/Porting.h"
 #include "../component/lib/Buffer.h"
 
-TSys Sys; //系统参数
+Sys_T Sys; //系统参数
 
 // 构造函数
-TSys::TSys()
+Sys_T::Sys_T()
 {
 #ifdef STM32F0
 	this->CystalClock = 8;
@@ -31,13 +31,13 @@ TSys::TSys()
 	this->Started = false;
 }
 
-void TSys::Init()
+void Sys_T::Init()
 {
 	Sys.GlobalDisable();
 	Time.Init();
 }
 
-void TSys::ShowInfo()const
+void Sys_T::ShowInfo()const
 {
 	this->OnShowInfo();
 	printf("ChipID:");
@@ -45,19 +45,19 @@ void TSys::ShowInfo()const
 }
 
 // 系统启动后的毫秒数
-uint64_t TSys::Ms()const
+uint64_t Sys_T::Ms()const
 {
 	return Time.Current();
 }
 
 // 系统绝对当前时间，秒
-uint32_t TSys::Seconds()const
+uint32_t Sys_T::Seconds()const
 {
 	return Time.Seconds;
 }
 
 // 毫秒级延迟
-void TSys::Sleep(uint32_t dwMs)const
+void Sys_T::Sleep(uint32_t dwMs)const
 {
 	if (!Sys.Started)
 	{
@@ -81,7 +81,7 @@ void TSys::Sleep(uint32_t dwMs)const
 }
 
 // 微秒级延迟
-void TSys::delayMicroseconds(uint32_t usec)const
+void Sys_T::delayMicroseconds(uint32_t usec)const
 {
 	if (usec > 1000000)
 		debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！\n", usec);
@@ -100,20 +100,20 @@ void TSys::delayMicroseconds(uint32_t usec)const
 }
 
 // 延迟异步重启
-void TSys::Reboot(int msDelay)const
+void Sys_T::Reboot(int msDelay)const
 {
 	if (msDelay <= 0)
 		this->Reset();
-	Sys.AddTask((void (TSys::*)())&TSys::Reset, (TSys *)this, msDelay, -1, "Reset");
+	Sys.AddTask((void (Sys_T::*)())&Sys_T::Reset, (Sys_T *)this, msDelay, -1, "Reset");
 }
 
 // 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
-uint32_t TSys::AddTask(Action func, void *param, int dueTime, int period, const char* name)const
+uint32_t Sys_T::AddTask(Action func, void *param, int dueTime, int period, const char* name)const
 {
 	return Task::Scheduler()->Add(func, param, dueTime, period, name);
 }
 
-void TSys::RemoveTask(uint32_t &taskid)const
+void Sys_T::RemoveTask(uint32_t &taskid)const
 {
 	if (taskid)
 	{
@@ -122,7 +122,7 @@ void TSys::RemoveTask(uint32_t &taskid)const
 }
 
 // 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
-bool TSys::SetTask(uint32_t taskid, bool enable, int msNextTime)const
+bool Sys_T::SetTask(uint32_t taskid, bool enable, int msNextTime)const
 {
 	bool ret;
 
@@ -147,7 +147,7 @@ bool TSys::SetTask(uint32_t taskid, bool enable, int msNextTime)const
 }
 
 // 改变任务周期
-bool TSys::SetTaskPeriod(uint32_t taskid, int period)const
+bool Sys_T::SetTaskPeriod(uint32_t taskid, int period)const
 {
 	bool ret;
 	Task *tsk;
@@ -181,7 +181,7 @@ bool TSys::SetTaskPeriod(uint32_t taskid, int period)const
 }
 
 // 开始系统大循环
-void TSys::Start()
+void Sys_T::Start()
 {
 	this->Started = true;
 	Sys.GlobalEnable();	
@@ -197,7 +197,7 @@ extern "C"
 	extern uint32_t __initial_sp;
 }
 
-void TSys::OnInit()
+void Sys_T::OnInit()
 {
 #if defined STM32F0
 	this->Clock = 72000000;
@@ -224,7 +224,7 @@ void TSys::OnInit()
 	StackSize = ((uint32_t)&__initial_sp - (uint32_t)&__heap_limit);
 }
 
-void TSys::OnShowInfo()const
+void Sys_T::OnShowInfo()const
 {	
 	debug_printf("StdOSVer:");this->OsVer.Show();
 	debug_printf("  AppVer:");this->AppVer.Show();
@@ -233,7 +233,7 @@ void TSys::OnShowInfo()const
 }
 
 // 重启系统
-void TSys::Reset()const
+void Sys_T::Reset()const
 {
 	NVIC_SystemReset();
 }
@@ -275,13 +275,13 @@ extern "C"
 	}
 }
 // 打开全局中断
-void TSys::GlobalEnable()
+void Sys_T::GlobalEnable()
 {
 	INTX_ENABLE();
 }
 
 // 关闭全局中断
-void TSys::GlobalDisable()
+void Sys_T::GlobalDisable()
 {
 	INTX_DISABLE();
 }
