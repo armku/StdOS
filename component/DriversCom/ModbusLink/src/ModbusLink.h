@@ -5,7 +5,7 @@
 #ifndef _MODBUSLINK_H
 #define _MODBUSLINK_H
 
-class USART;
+class HardwareSerial0_T;
 
 class ModbusErrors
 {
@@ -48,11 +48,11 @@ class ModbusBase
 public:
 	DataFrameModbus txFrame;
 	DataFrameModbus rxFrame;
-	USART &com;
+	HardwareSerial0_T &com;
 public:
 	const int static RegInputLen = 3;//输入寄存器组大小
 	const int static RegHoildingLen = 17;//保持寄存器组大小	
-	ModbusBase(USART &uart);	
+	ModbusBase(HardwareSerial0_T &uart);	
 	ModbusReg_T RegInputs[RegInputLen];//输入寄存器组
 	ModbusReg_T RegHoildings[RegHoildingLen];//保持寄存器组
 
@@ -69,7 +69,7 @@ class ModbusSlaveLink:public ModbusBase
 public:
 	
 public:
-	ModbusSlaveLink(USART &uart);	
+	ModbusSlaveLink(HardwareSerial0_T &uart);	
 	bool Send();	
 private:
 	int dealRegInputRead(uint16_t addr,uint16_t len);//处理读取输入寄存器 0 正确 1 非法地址 2非法长度
@@ -86,7 +86,7 @@ public:
 class ModbusMasterLink :public ModbusBase
 {
 public:
-	ModbusMasterLink(USART &uart);
+	ModbusMasterLink(HardwareSerial0_T &uart);
 	bool GetValueRegInput(uint8_t id,uint16_t addr,uint16_t len);//地址从0开始
 private:
 

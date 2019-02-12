@@ -7,38 +7,38 @@ GPS *pGPS2 = 0;
 GPS *pGPS3 = 0;
 #endif
 #ifdef USE_USART1
-USART *pCOM1 = 0;
+HardwareSerial0_T *pCOM1 = 0;
 #endif
 #ifdef USE_USART1_DMA
-USART *pCOM1 = 0;
+HardwareSerial0_T *pCOM1 = 0;
 #endif
 
 #ifdef USE_USART2
-USART *pCOM2 = 0;
+HardwareSerial0_T *pCOM2 = 0;
 #endif
 #ifdef USE_USART2_DMA
-USART *pCOM2 = 0;
+HardwareSerial0_T *pCOM2 = 0;
 #endif
 
 #ifdef USE_USART3
-USART *pCOM3 = 0;
+HardwareSerial0_T *pCOM3 = 0;
 #endif
 #ifdef USE_USART3_DMA
-USART *pCOM3 = 0;
+HardwareSerial0_T *pCOM3 = 0;
 #endif
 
 #ifdef USE_UART4
-USART *pCOM4 = 0;
+HardwareSerial0_T *pCOM4 = 0;
 #endif
 #ifdef USE_UART4_DMA
-USART *pCOM4 = 0;
+HardwareSerial0_T *pCOM4 = 0;
 #endif
 
 #ifdef USE_UART5
-USART *pCOM5 = 0;
+HardwareSerial0_T *pCOM5 = 0;
 #endif
 #ifdef USE_UART5_DMA
-USART *pCOM5 = 0;
+HardwareSerial0_T *pCOM5 = 0;
 #endif
 
 #ifdef USE_I2C1

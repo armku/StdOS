@@ -2,7 +2,7 @@
 #include "Sys.h"
 #include "HardwareSerial.h"
 
-ModbusSlaveLink::ModbusSlaveLink(USART &uart) :ModbusBase(uart)
+ModbusSlaveLink::ModbusSlaveLink(HardwareSerial0_T &uart) :ModbusBase(uart)
 {
 	this->OnUpdateRegHoid = 0;
 }

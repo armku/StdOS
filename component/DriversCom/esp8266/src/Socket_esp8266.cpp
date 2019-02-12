@@ -2,7 +2,7 @@
 #include "Sys.h"
 #include "HardwareSerial.h"
 
-Socket_esp8266::Socket_esp8266(USART& usart)
+Socket_esp8266::Socket_esp8266(HardwareSerial0_T& usart)
 	:esp8266(usart), mUsart(usart), mIsConnected(false)
 {
 	mTimeOut = 2;

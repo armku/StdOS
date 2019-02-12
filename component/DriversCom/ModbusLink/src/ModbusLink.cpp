@@ -2,7 +2,7 @@
 #include "../../../../component/lib/Buffer.h"
 #include "HardwareSerial.h"
 
-ModbusBase::ModbusBase(USART &uart) : com(uart)
+ModbusBase::ModbusBase(HardwareSerial0_T &uart) : com(uart)
 {
 
 }

@@ -40,7 +40,7 @@ typedef enum WIFIInitStep
 class Socket_esp8266 :public esp8266, public Socket
 {
 private:
-	USART& mUsart;
+	HardwareSerial0_T& mUsart;
 	char WIFISSID[30];
 	char WIFIKEY[30];
 	char IPAddress[20];
@@ -52,7 +52,7 @@ private:
 public:
 	WIFIStatus mWifiStatus;
 	WIFIInitStep mWIFIInitStep;
-	Socket_esp8266(USART& usart);
+	Socket_esp8266(HardwareSerial0_T& usart);
 	unsigned short CSQvalue;
 	virtual bool Init(void);
 	virtual bool Connect(char* ipAddr, short port, Socket_Type socketType, Socket_Protocol socketProtocol = Socket_Protocol_IPV4);

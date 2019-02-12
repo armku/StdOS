@@ -3,7 +3,7 @@
 
 #include "Configuration.h"
 
-class USART;
+class HardwareSerial0_T;
 
 #ifdef USE_GPS
 extern GPS *pGPS1;
@@ -11,24 +11,24 @@ extern GPS *pGPS2;
 extern GPS *pGPS3;
 #endif
 #ifdef USE_USART1
-extern USART *pCOM1;
+extern HardwareSerial0_T *pCOM1;
 #endif
 #ifdef USE_USART1_DMA
-extern USART *pCOM1;
+extern HardwareSerial0_T *pCOM1;
 #endif
 
 #ifdef USE_USART2
-extern USART *pCOM2;
+extern HardwareSerial0_T *pCOM2;
 #endif
 #ifdef USE_USART2_DMA
-extern USART *pCOM2;
+extern HardwareSerial0_T *pCOM2;
 #endif
 
 #ifdef USE_USART3
-extern USART *pCOM3;
+extern HardwareSerial0_T *pCOM3;
 #endif
 #ifdef USE_USART3_DMA
-extern USART *pCOM3;
+extern HardwareSerial0_T *pCOM3;
 #endif
 
 #ifdef USE_I2C1

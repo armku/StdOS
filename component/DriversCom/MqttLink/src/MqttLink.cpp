@@ -4,7 +4,7 @@
 #include "../../../../component/lib/Buffer.h"
 #include "HardwareSerial.h"
 
-MqttLink::MqttLink(USART &uart) :com(uart)
+MqttLink::MqttLink(HardwareSerial0_T &uart) :com(uart)
 {
 	com.ClearRxBuf();
 	com.ClearTxBuf();

@@ -6,8 +6,8 @@
 //#define _MODBUSMASTERLINKEST_CPP
 #ifdef _MODBUSMASTERLINKEST_CPP
 
-//USART usart222(USART2, 9600);
-USART usart222(USART3, 9600);
+//HardwareSerial0_T usart222(USART2, 9600);
+HardwareSerial0_T usart222(USART3, 9600);
 OutputPort u485dr;
 ModbusMasterLink modMaster(usart222);
 uint16_t RegInputu16[144]; //ÊäÈë¼Ä´æÆ÷

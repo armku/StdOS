@@ -3,7 +3,7 @@
 #include "Sys.h"
 #include "HardwareSerial.h"
 
-ModbusMasterLink::ModbusMasterLink(USART &uart) :ModbusBase(uart)
+ModbusMasterLink::ModbusMasterLink(HardwareSerial0_T &uart) :ModbusBase(uart)
 {
 	
 }

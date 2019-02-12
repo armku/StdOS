@@ -12,17 +12,17 @@
 #include "stm32f10x.h"
 #include "../../../../Bsp/Porting.h"
 
-class USART;
+class HardwareSerial0_T;
 
 class Sharp_PM_2_5
 {
 private:
-	USART &mCom;
+	HardwareSerial0_T &mCom;
 	float UD;//·Û³¾Å¨¶È µ¥Î» ug/m^3
 	bool Check(u8 *Data, int Lenth, u8 CheckSum);
 
 public:
-	Sharp_PM_2_5(USART &com);
+	Sharp_PM_2_5(HardwareSerial0_T &com);
 	bool Update();
 	float GetConcentration();
 };

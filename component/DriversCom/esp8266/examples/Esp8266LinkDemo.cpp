@@ -15,7 +15,7 @@
 #define TcpServer_Port               "8888"               //要连接的服务器的端口
 
 
-USART usart333(USART3, 115200);
+HardwareSerial0_T usart333(USART3, 115200);
 EspDemoLink esp(usart333);
 
 void EspDemoLinkRoutin(void* param)

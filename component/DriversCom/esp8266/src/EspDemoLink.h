@@ -5,7 +5,7 @@
 #include "../../../../Bsp/Porting.h"
 #include "DataFrameEspDemoLink.h"
 
-class USART;
+class HardwareSerial0_T;
 
 class EspDemoLink
 {
@@ -31,11 +31,11 @@ public:
 public:
 	DataFrameEspDemoLink txFrame;
 	DataFrameEspDemoLink rxFrame;
-	USART &com;
+	HardwareSerial0_T &com;
 	mcuGpio pinch;
 	mcuGpio pinrst;
 public:
-	EspDemoLink(USART &uart);
+	EspDemoLink(HardwareSerial0_T &uart);
 	bool Kick();
 	bool Receive11(char const *target="OK", char const *target1 = "OK");
 	bool NetModeChoose(ENUMNetModeTypeDef enumMode);

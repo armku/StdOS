@@ -129,8 +129,8 @@ class HardwareSerial_T : public Stream
     inline void _rx_complete_irq(void);
     void _tx_udr_empty_irq(void);
 };
-class USART;
-extern USART Serial;
+class HardwareSerial0_T;
+extern HardwareSerial0_T Serial;
 
 #if defined(UBRR1H)
   extern HardwareSerial_T Serial1;
@@ -171,10 +171,10 @@ extern UsartKernel_T UsartKernel[];//串口数据处理
 
 /*******************************************************************************************************/
 
-class USART : public HardwareSerial_T
+class HardwareSerial0_T : public HardwareSerial_T
 {
 public:
-	USART();
+	HardwareSerial0_T();
 	void begin(unsigned long baud) { begin(baud, SERIAL_8N1); }
 	void begin(unsigned long, uint8_t);
 	virtual size_t write(uint8_t);
@@ -209,7 +209,7 @@ private:
 	void InitUSART();
 	void InitNVIC();
 public:
-	USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint32_t remapvalue = 1, uint16_t parity = USART_Parity_No, uint16_t wordLen = USART_WordLength_8b, uint16_t stopBits = USART_StopBits_1);
+	HardwareSerial0_T(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint32_t remapvalue = 1, uint16_t parity = USART_Parity_No, uint16_t wordLen = USART_WordLength_8b, uint16_t stopBits = USART_StopBits_1);
 	void Initialize();
 	uint64_t LastRcvTime;
 	int RxCnt;
@@ -239,9 +239,9 @@ public:
 	void IRQ();
 	void(*OnReceive)(void* param);
 
-	USART& operator<<(int val);
-	USART& operator<<(double val);
-	USART& operator<<(const char* pStr);
+	HardwareSerial0_T& operator<<(int val);
+	HardwareSerial0_T& operator<<(double val);
+	HardwareSerial0_T& operator<<(const char* pStr);
 	int SendTimeMs(int buflen)
 	{
 		if (this->mBaudrate < 100)

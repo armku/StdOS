@@ -9,18 +9,18 @@
 
 #if defined(HAVE_HWSERIAL0)
 
-USART Serial;
+HardwareSerial0_T Serial;
 
-USART::USART()
+HardwareSerial0_T::HardwareSerial0_T()
 {
 
 }
-void USART::begin(unsigned long baud, byte config)
+void HardwareSerial0_T::begin(unsigned long baud, byte config)
 {
 
 }
 #include "Sys.h"
-size_t USART::write(uint8_t ch)
+size_t HardwareSerial0_T::write(uint8_t ch)
 {
 	/* 发送一个字节数据到USART */
 	USART_SendData(USART1, ch);
@@ -34,7 +34,7 @@ size_t USART::write(uint8_t ch)
 //////////////////////////////////////////////////////////////////////////////////
 UsartKernel_T UsartKernel[5];//串口数据处理
 
-USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint32_t remapvalue, uint16_t parity, uint16_t wordLen, uint16_t stopBits)
+HardwareSerial0_T::HardwareSerial0_T(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint32_t remapvalue, uint16_t parity, uint16_t wordLen, uint16_t stopBits)
 {
 	mUSARTx = USARTx;   //USARTx
 	mBaudrate = baud;     //baudrate of usart
@@ -115,7 +115,7 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 
 }
 
-void USART::Initialize()
+void HardwareSerial0_T::Initialize()
 {
 	InitGPIO();
 	InitNVIC();
@@ -125,7 +125,7 @@ void USART::Initialize()
 #endif
 }
 
-void USART::InitGPIO()
+void HardwareSerial0_T::InitGPIO()
 {
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO | mGPIORcc, ENABLE);
 	if (mUSARTx == USART1)  RCC_APB2PeriphClockCmd(mUSARTRcc, ENABLE);
@@ -146,7 +146,7 @@ void USART::InitGPIO()
 	GPIO_Init(mPort, &GPIO_InitStructure);
 }
 
-void USART::InitNVIC()
+void HardwareSerial0_T::InitNVIC()
 {
 	switch (mPriGroup)
 	{
@@ -171,7 +171,7 @@ void USART::InitNVIC()
 #endif
 }
 
-void USART::InitUSART()
+void HardwareSerial0_T::InitUSART()
 {
 	USART_InitTypeDef USART_InitStructure;                       //
 	USART_InitStructure.USART_BaudRate = mBaudrate;
@@ -195,7 +195,7 @@ void USART::InitUSART()
 	USART_ClearFlag(mUSARTx, USART_FLAG_TC);      //clear TC flag to make sure the first byte can be send correctly
 }
 
-bool USART::SendBytes(uint8_t txData[], uint16_t size)
+bool HardwareSerial0_T::SendBytes(uint8_t txData[], uint16_t size)
 {
 	if (RS485)
 		*RS485 = 1;//发送模式
@@ -237,7 +237,7 @@ bool USART::SendBytes(uint8_t txData[], uint16_t size)
 }
 
 
-void USART::SetBaudRate(uint32_t baudRate)
+void HardwareSerial0_T::SetBaudRate(uint32_t baudRate)
 {
 	//	assert_param(IS_USART_BAUDRATE(baudRate));
 	uint32_t tmpreg = 0x00, apbclock = 0x00;
@@ -290,7 +290,7 @@ void USART::SetBaudRate(uint32_t baudRate)
 	mUSARTx->BRR = (uint16_t)tmpreg;
 }
 
-bool USART::SendByte(uint8_t data)
+bool HardwareSerial0_T::SendByte(uint8_t data)
 {
 	if (RS485)
 		*RS485 = 1;//发送模式
@@ -301,7 +301,7 @@ bool USART::SendByte(uint8_t data)
 	TxCnt++;
 	return false;
 }
-bool USART::GetBytes(uint8_t data[], uint16_t num)
+bool HardwareSerial0_T::GetBytes(uint8_t data[], uint16_t num)
 {
 	bool ret = false;
 	ret = mRxBuf.Gets(data, num);
@@ -312,7 +312,7 @@ bool USART::GetBytes(uint8_t data[], uint16_t num)
 	}
 	return ret;
 }
-bool USART::GetByte(uint8_t &data)
+bool HardwareSerial0_T::GetByte(uint8_t &data)
 {
 	bool ret = mRxBuf.Get(data);
 	if (ret)
@@ -323,38 +323,38 @@ bool USART::GetByte(uint8_t &data)
 	return ret;
 }
 
-uint16_t USART::RxSize()
+uint16_t HardwareSerial0_T::RxSize()
 {
 	return mRxBuf.Size();
 }
 
-uint16_t USART::TxSize()
+uint16_t HardwareSerial0_T::TxSize()
 {
 	return mTxBuf.Size();
 }
 
-uint16_t USART::TxOverflowSize()
+uint16_t HardwareSerial0_T::TxOverflowSize()
 {
 	return mTxOverflow;
 }
 
-uint16_t USART::RxOverflowSize()
+uint16_t HardwareSerial0_T::RxOverflowSize()
 {
 	return mRxOverflow;
 }
 
-void USART::ClearRxBuf()
+void HardwareSerial0_T::ClearRxBuf()
 {
 	mRxBuf.Clear();
 	FlagIdleOK = false;
 }
 
-void USART::ClearTxBuf()
+void HardwareSerial0_T::ClearTxBuf()
 {
 	mTxBuf.Clear();
 }
 
-USART& USART::operator<<(int val)
+HardwareSerial0_T& HardwareSerial0_T::operator<<(int val)
 {
 	uint8_t sign = 0, len = 0, data[10];
 	if (val < 0)
@@ -373,7 +373,7 @@ USART& USART::operator<<(int val)
 	SendBytes(data + 10 - len, len);
 	return *this;
 }
-USART& USART::operator<<(double val)
+HardwareSerial0_T& HardwareSerial0_T::operator<<(double val)
 {
 	uint8_t sign = 0, len = 0, data[20];
 	if (val < 0)
@@ -401,7 +401,7 @@ USART& USART::operator<<(double val)
 	SendBytes(data + 20 - len, len);
 	return *this;
 }
-USART& USART::operator<<(const char* pStr)
+HardwareSerial0_T& HardwareSerial0_T::operator<<(const char* pStr)
 {
 	unsigned int length = 0;
 	for (int i = 0; pStr[i] != '\0'; ++i)
@@ -412,7 +412,7 @@ USART& USART::operator<<(const char* pStr)
 	return *this;
 }
 
-void USART::IRQ()
+void HardwareSerial0_T::IRQ()
 {
 	if (USART_GetFlagStatus(mUSARTx, USART_FLAG_ORE) != RESET)
 	{
@@ -468,7 +468,7 @@ void USART::IRQ()
 }
 
 #ifdef USE_USART_DMA
-void USART::InitDMA()
+void HardwareSerial0_T::InitDMA()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);                   //enable DMA clock
 
@@ -497,7 +497,7 @@ void USART::InitDMA()
 }
 
 
-void USART::DMAIRQ()
+void HardwareSerial0_T::DMAIRQ()
 {
 	if (DMA_GetFlagStatus(mDMATCFlag) == SET) //DMA Tx Complete
 	{

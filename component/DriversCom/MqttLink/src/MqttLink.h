@@ -5,14 +5,14 @@
 #include "../../../../Bsp/Porting.h"
 #include "../../DataFrame.h"
 
-class USART;
+class HardwareSerial0_T;
 
 class MqttLink
 {
 public:
 	DataFrame txFrame;
 	DataFrame rxFrame;
-	USART &com;
+	HardwareSerial0_T &com;
 	char * Server;//服务器
 	int Port;//远程端口号
 	char * ClientID;//客户端id，不能大于23字节
@@ -21,7 +21,7 @@ public:
 	int step = 0;//运行步骤
 	uint16_t MessageID;//信号ID
 public:
-	MqttLink(USART &uart);
+	MqttLink(HardwareSerial0_T &uart);
 	bool CheckFrame();
 	bool Send();
 	bool Connect();

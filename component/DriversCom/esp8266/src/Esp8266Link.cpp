@@ -13,7 +13,7 @@
 #include "../../../../component/lib/Buffer.h"
 
 
-EspDemoLink::EspDemoLink(USART &uart) :com(uart)
+EspDemoLink::EspDemoLink(HardwareSerial0_T &uart) :com(uart)
 {
 	com.ClearRxBuf();
 	com.ClearTxBuf();
@@ -268,7 +268,7 @@ void EspDemoLink::Init()
 #include "esp8266.h"
 
 
-esp8266::esp8266(USART &usart, uint32_t baudRate)
+esp8266::esp8266(HardwareSerial0_T &usart, uint32_t baudRate)
 	:mUsart(usart)
 {
 	mUsart.ClearRxBuf();

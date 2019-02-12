@@ -25,7 +25,7 @@
 
 /**************************************************************/
 
-class USART;
+class HardwareSerial0_T;
 
 class esp8266
 {
@@ -45,7 +45,7 @@ public:
 	 *              if the value is not the same as usart's baud rate, it will change usart's baud rate to the same as thid parameter's value
 	 * @warning parameter baud depends on the AT firmware. 9600 is an common value.
 	 */
-	esp8266(USART &usart, uint32_t baudRate = 0);
+	esp8266(HardwareSerial0_T &usart, uint32_t baudRate = 0);
 
 	void ClearBuffer();
 
@@ -70,7 +70,7 @@ public:
 
 private:
 
-	USART &mUsart;
+	HardwareSerial0_T &mUsart;
 
 	bool ReceiveAndWait(char const* targetString, unsigned char timeOut = ESP8266_DEFAULT_TIMEOUT);
 	bool ReceiveAndWait(char const* targetString, char const* targetString2, unsigned char timeOut = ESP8266_DEFAULT_TIMEOUT);
