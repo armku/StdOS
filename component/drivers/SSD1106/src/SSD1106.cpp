@@ -2,14 +2,15 @@
 ssd1106代码兼容1309，可以直接驱动ssd1309;1309代码不兼容1106
 */
 #include "SSD1106.h"
+#include "arduino.h"
 
 //初始化SSD1306					    
 void SSD1106::Init()
 {
     this->_res = 1;
-    delay_ms(100);
+    delay(100);
     this->_res = 0;
-    delay_ms(100);
+    delay(100);
     this->_res = 1;
 	
 	this->_wrcmd(0xAE);//--turn off oled panel

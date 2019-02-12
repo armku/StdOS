@@ -63,7 +63,7 @@ void Sys_T::Sleep(uint32_t dwMs)const
 	if (!sys.Started)
 	{
 		//用于系统没启动时延时使用
-		delay_ms(dwMs);
+		delay(dwMs);
 		return;
 	}
 	if (dwMs > 1000)
@@ -258,14 +258,14 @@ extern "C"
 			BX r14
 	}
 	// 毫秒级延迟 用于系统没启动时延时使用
-	void delay_ms(int ms)
+	/*void delay(int ms)
 	{
 		for (int i = 0; i < ms; i++)
 		{
 			delayMicroseconds(500);
 			delayMicroseconds(500);
 		}
-	}	
+	}	*/
 	//延时ms
 	void delay(unsigned long ms)
 	{

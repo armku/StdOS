@@ -16,7 +16,7 @@ extern "C" {
 #else
 	#define debug_printf(format, ...)
 #endif
-	void delay_ms(int ms); // 毫秒级延迟 用于系统没启动时延时使用	
+	//void delay(int ms); // 毫秒级延迟 用于系统没启动时延时使用	
 #ifdef __cplusplus
 }
 #endif

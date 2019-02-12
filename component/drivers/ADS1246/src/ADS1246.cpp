@@ -1,5 +1,6 @@
 #include "ADS1246.h"
 #include "Sys.h"
+#include "arduino.h"
 
 //下降沿芯片接收数据，上升沿芯片输出数据
 //ADS1246寄存器列表
@@ -178,12 +179,12 @@ void ADS1246::Init(void)
 	this->pspi->Open();
     this->pspi->Stop();
     this->ppinreset=0;
-    delay_ms(40);
+    delay(40);
     this->ppinreset=1;
-    delay_ms(20);
+    delay(20);
     this->pspi->Start();
     this->WriteReg(ADC_REG_ID, 0x08); //DOUT兼容DRDY引脚   0X4A 00 08
-    delay_ms(40);
+    delay(40);
     this->WriteReg(ADC_REG_SYS0, this->speed | ADC_GAIN_1); //调整采样速度
     this->pspi->Stop();
 
