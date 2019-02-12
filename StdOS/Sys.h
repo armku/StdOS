@@ -22,15 +22,6 @@ extern "C" {
 }
 #endif
 
-#ifdef DEBUG
-#define assert(expr, msg) ((expr) ? (void)0 : assert_failed2(msg, (const char*)__FILE__, __LINE__))
-
-#else
-
-#define assert(expr, msg) ((void)0)
-
-#endif
-
 // œµÕ≥¿‡
 class TSys
 {
