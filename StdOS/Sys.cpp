@@ -40,7 +40,7 @@ void TSys::Init()
 void TSys::ShowInfo()const
 {
 	this->OnShowInfo();
-	StdPrintf("ChipID:");
+	printf("ChipID:");
 	Buffer((void*)this->ID, 12).ShowHex(true);
 }
 

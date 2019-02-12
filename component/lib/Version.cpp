@@ -91,8 +91,8 @@ int Version::Parse(char* str)
 
 void Version::Show(bool newLine) const
 {
-	StdPrintf("%d.%d.%d.%d", this->Major, this->Minor, this->Year, this->MonthDay);
-	newLine ? StdPrintf("\n") : StdPrintf("");
+	printf("%d.%d.%d.%d", this->Major, this->Minor, this->Year, this->MonthDay);
+	newLine ? printf("\n") : printf("");
 }
 
 int Version::Show(char* buf, int pos)
