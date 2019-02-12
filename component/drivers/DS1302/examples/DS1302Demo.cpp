@@ -29,6 +29,6 @@ void DS1302Test()
 		now.Second = 0;
 		ds1302.SetTime(now);
 	}
-	Sys.AddTask(rtcUpdate, &now, 100, 100, "时间更新");
+	sys.AddTask(rtcUpdate, &now, 100, 100, "时间更新");
 }
 #endif // _DS1302_TEST_

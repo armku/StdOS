@@ -20,6 +20,6 @@ void PCF8563Test()
 	pcf.IIC.SetPin(PB5,PB6);
 	pcf.IIC.Open();
 	
-	Sys.AddTask(pcfroutin, 0, 2000, 2000, "pcfrou");
+	sys.AddTask(pcfroutin, 0, 2000, 2000, "pcfrou");
 }
 #endif // _PCF8563TEST

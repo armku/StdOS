@@ -107,7 +107,7 @@ int ADS1232::Read(bool cal)
 	uint32_t valOrigin = 0;
 	int32_t ret = 0;
 
-	msnew = Sys.Ms();
+	msnew = sys.Ms();
 	this->Status = 0;
 	if (msnew - msold > 5000)
 	{
@@ -131,7 +131,7 @@ int ADS1232::Read(bool cal)
 	if (temp < 1000)
 	{
 		valOrigin = 0;
-		Sys.GlobalDisable();
+		sys.GlobalDisable();
 		for (int i = 0; i < 24; i++)
 		{
 			valOrigin <<= 1;
@@ -156,7 +156,7 @@ int ADS1232::Read(bool cal)
 			this->sclk = 1;
 			this->sclk = 0;
 		}
-		Sys.GlobalEnable();
+		sys.GlobalEnable();
 		if (valOrigin & 0x800000)
 		{
 			ret = -((0XFFFFFF ^ valOrigin) + 1);

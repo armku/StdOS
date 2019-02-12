@@ -44,7 +44,7 @@ public:
 	{
 		static uint64_t oldTime = 0;
 		uint64_t curTime;
-		curTime = Sys.Ms();
+		curTime = sys.Ms();
 		if (curTime - oldTime < 10)
 			return false;
 		oldTime = curTime;

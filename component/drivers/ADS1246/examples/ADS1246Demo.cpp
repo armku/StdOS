@@ -55,6 +55,6 @@
         spi1.SetNss(PE0);
         ads1246_1.Init();
 //        exti_1.Register(adRead_1test);
-        Sys.AddTask(adResetChk, 0, 20000, 1000, "adSpeedchk");
+        sys.AddTask(adResetChk, 0, 20000, 1000, "adSpeedchk");
     }
 #endif

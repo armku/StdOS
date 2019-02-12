@@ -23,7 +23,7 @@
         now.Minute = 26;
         now.Second = 2;
         //rx8025.SaveTime(now);
-        Sys.AddTask(Rx8025Refresh, &rx8025, 100, 1000, "TimeUp");
+        sys.AddTask(Rx8025Refresh, &rx8025, 100, 1000, "TimeUp");
     }
 
 #endif 

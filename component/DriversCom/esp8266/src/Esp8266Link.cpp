@@ -24,7 +24,7 @@ bool EspDemoLink::Kick(void)
 	com.ClearTxBuf();
 	com << "AT\r\n";
 
-	Sys.Sleep(200);
+	sys.Sleep(200);
 
 	return this->Receive11();
 }
@@ -84,7 +84,7 @@ bool EspDemoLink::NetModeChoose(ENUMNetModeTypeDef enumMode)
 		return false;
 	}
 
-	Sys.Sleep(200);
+	sys.Sleep(200);
 
 	return this->Receive11("OK", "no change");
 }
@@ -103,7 +103,7 @@ bool EspDemoLink::JoinAP(char *pSSID, char *pPassWord)
 	sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", pSSID, pPassWord);
 	com << cCmd<<"\r\n";
 //	*pCOM1 << cCmd<<"\r\n";
-	Sys.Sleep(200);
+	sys.Sleep(200);
 
 	return this->Receive11("OK");
 }
@@ -120,7 +120,7 @@ bool EspDemoLink::EnableMultipleId(bool enumEnUnvarnishTx)
 	char cStr[20];
 	sprintf(cStr, "AT+CIPMUX=%d", (enumEnUnvarnishTx ? 1 : 0));
 	com << cStr<<"\r\n";
-	Sys.Sleep(200);
+	sys.Sleep(200);
 
 	this->Receive11("OK");
 	return 1;
@@ -160,7 +160,7 @@ bool EspDemoLink::LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, EN
 		sprintf(cCmd, "AT+CIPSTART=%s", cStr);
 
 	com << cCmd << "\r\n";
-	Sys.Sleep(200);
+	sys.Sleep(200);
 
 	return this->Receive11("OK", "ALREAY CONNECT");
 }
@@ -175,13 +175,13 @@ bool EspDemoLink::LinkServer(ENUMNetProTypeDef enumE, char *ip, char *ComNum, EN
 bool EspDemoLink::UnvarnishSend()
 {
 	com << "AT+CIPMODE=1"<<"\r\n";
-	Sys.Sleep(200);
+	sys.Sleep(200);
 
 	if (!this->Receive11("OK"))
 		return false;
 
 	com << "AT+CIPSEND"<<"\r\n";
-	Sys.Sleep(200);
+	sys.Sleep(200);
 
 	return this->Receive11("OK", ">");
 }
@@ -203,7 +203,7 @@ bool EspDemoLink::SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength
 	{
 		//this->USART_printf("%s", pStr);
 		com << pStr;
-		Sys.Sleep(200);
+		sys.Sleep(200);
 
 		return this->Receive11();		
 	}
@@ -216,7 +216,7 @@ bool EspDemoLink::SendString(bool enumEnUnvarnishTx, char *pStr, int ulStrLength
 
 
 		com << pStr<<"\r\n";
-		Sys.Sleep(200);
+		sys.Sleep(200);
 
 		return this->Receive11("SEND OK", "> ");
 	}
@@ -296,7 +296,7 @@ bool esp8266::Restart(void)
 u8 esp8266::GetCCSQ(char* WiFiSSID)
 {
 	mUsart << "AT+CWLAP=\"" << WiFiSSID << "\"\r\n";
-	float starttime = Sys.Ms();// TaskManager::Time();
+	float starttime = sys.Ms();// TaskManager::Time();
 	unsigned char temp[13];
 	unsigned short bufferSize = 0;
 	static unsigned short CSQvalue = 70;
@@ -304,7 +304,7 @@ u8 esp8266::GetCCSQ(char* WiFiSSID)
 	unsigned short count = 0;
 	bool flag = false;
 	//while ((TaskManager::Time() - starttime) < ESP8266_DEFAULT_TIMEOUT)
-	while ((Sys.Ms() - starttime) < ESP8266_DEFAULT_TIMEOUT)
+	while ((sys.Ms() - starttime) < ESP8266_DEFAULT_TIMEOUT)
 	{
 		bufferSize = mUsart.RxSize();
 		if (bufferSize > (strlen(WiFiSSID) + 20))//AT+CWLAP="InfiniteYuan" +CWLAP:(3,"InfiniteYuan",-50,"14:2d:27:fc:d7:5f",11)
@@ -520,9 +520,9 @@ bool esp8266::ReceiveAndWait(const char* targetString, unsigned char timeOut)
 	u8 temp;
 	mReceiveBufferIndex = 0;
 	ClearBuffer();
-	double tartTime = Sys.Ms();//TaskManager::Time();
+	double tartTime = sys.Ms();//TaskManager::Time();
 	//while ((TaskManager::Time() - tartTime) < timeOut)
-	while ((Sys.Ms() - tartTime) < timeOut * 1000)
+	while ((sys.Ms() - tartTime) < timeOut * 1000)
 	{
 		while (mUsart.RxSize() > 0)
 		{
@@ -549,9 +549,9 @@ bool esp8266::ReceiveAndWait(char const* targetString, const char* targetString2
 	u8 temp;
 	mReceiveBufferIndex = 0;
 	ClearBuffer();
-	double tartTime = Sys.Ms();//TaskManager::Time();
+	double tartTime = sys.Ms();//TaskManager::Time();
 	//while ((TaskManager::Time() - tartTime) < timeOut)
-	while ((Sys.Ms() - tartTime) < timeOut * 1000)
+	while ((sys.Ms() - tartTime) < timeOut * 1000)
 	{
 		while (mUsart.RxSize() > 0)
 		{
@@ -579,9 +579,9 @@ bool esp8266::ReceiveAndWait(char const* targetString, const char* targetString2
 	u8 temp;
 	mReceiveBufferIndex = 0;
 	ClearBuffer();
-	double tartTime = Sys.Ms();//TaskManager::Time();
+	double tartTime = sys.Ms();//TaskManager::Time();
 	//while ((TaskManager::Time() - tartTime) < timeOut)
-	while ((Sys.Ms() - tartTime) < timeOut * 1000)
+	while ((sys.Ms() - tartTime) < timeOut * 1000)
 	{
 		while (mUsart.RxSize() > 0)
 		{

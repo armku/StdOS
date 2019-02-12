@@ -22,7 +22,7 @@ void WatchDog::Start(uint32_t msTimeOut, uint32_t msFeed)
 {
 	cur = new WatchDog();
 	cur->Config(msTimeOut);
-	Sys.AddTask(FeedDogTask, &WatchDog::Current(), 10, msFeed, "FeedDog");
+	sys.AddTask(FeedDogTask, &WatchDog::Current(), 10, msFeed, "FeedDog");
 	cur->Feed();
 }
 

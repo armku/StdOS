@@ -12,9 +12,9 @@
 		for(int i=0;i<10;i++)
 		{
 			lcddr1.Test(0x55,0xAA);
-			Sys.Sleep(500);
+			sys.Sleep(500);
 			lcddr1.Test(0x00,0x00);
-			Sys.Sleep(500);
+			sys.Sleep(500);
 		}
 		lcddr1.Test(0x55,0xAA);
 	}

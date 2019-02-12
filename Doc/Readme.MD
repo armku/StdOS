@@ -71,11 +71,11 @@ void OnPress(InputPort& port, bool down)
 int main(void)
 {
     // 初始化系统
-    //Sys.Clock = 72000000;
-    //Sys.MessagePort = COM1;
-    Sys.Init();
-    //Sys.InitClock();
-    Sys.ShowInfo();
+    //sys.Clock = 72000000;
+    //sys.MessagePort = COM1;
+    sys.Init();
+    //sys.InitClock();
+    sys.ShowInfo();
 
     // 初始化为输出
     mcuGpio leds[] = {PD0, PD1};
@@ -94,7 +94,7 @@ int main(void)
     	btns[i].Open();
     }
     
-    Sys.AddTask(LedTask, &leds[0], 500, 500, "Led闪烁");
+    sys.AddTask(LedTask, &leds[0], 500, 500, "Led闪烁");
     
     /*Buffer::Test();
     Array::Test();
@@ -106,7 +106,7 @@ int main(void)
     power = true;
     SerialPort::Test();*/
     
-    Sys.Start();
+    sys.Start();
 }
 STM32F103R8t6 64脚 PA-PC
 端口配置：

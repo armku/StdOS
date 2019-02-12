@@ -54,7 +54,7 @@ float AD7124::Temp1Test()
     float temp;
 
     //	WriteReg(AD7124_ADC_CTRL_REG, AD7124_ADC_CTRL_REG_BYTES, 0X0004);
-    Sys.Sleep(50);
+    sys.Sleep(50);
     data = ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
 
     debug_printf("data:0x%08x\n", data);
@@ -64,7 +64,7 @@ float AD7124::Temp1Test()
     //	debug_printf("T:%0.4f\n",temp);
 
     //	WriteReg(AD7124_ADC_CTRL_REG, AD7124_ADC_CTRL_REG_BYTES, 0X0004);
-    Sys.Sleep(50);
+    sys.Sleep(50);
     data = ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
 
     debug_printf("data:0x%08x\n", data);
@@ -102,7 +102,7 @@ void ad71248Test()
     spi1.SetNss(PE2);
     ad.AD7124_Init();
 
-    Sys.AddTask(ad7124test, &ad, 1000, 2000, "7124-8test");
+    sys.AddTask(ad7124test, &ad, 1000, 2000, "7124-8test");
 }
 #endif
 #endif

@@ -30,7 +30,7 @@
         key1232dout.UsePress();
         key1232dout.Open();
 
-        Sys.AddTask(Show1232cnt, 0, 1000, 1000, "Show1232cnt");
+        sys.AddTask(Show1232cnt, 0, 1000, 1000, "Show1232cnt");
     }
 #endif 
 

@@ -11,6 +11,6 @@ void W5500Routin(void * param)
 
 void W5500Test()
 {
-	Sys.AddTask(W5500Routin, 0, 0, 1000, "W5500Routin");
+	sys.AddTask(W5500Routin, 0, 0, 1000, "W5500Routin");
 }
 #endif

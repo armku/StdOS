@@ -54,7 +54,7 @@ bool Socket_esp8266::Write(char* data, unsigned int num)
 
 unsigned int Socket_esp8266::Read(char* data)
 {
-	float starttime = Sys.Ms();//TaskManager::Time();
+	float starttime = sys.Ms();//TaskManager::Time();
 	if (!mIsConnected)
 		return 0;
 	unsigned char temp[13];
@@ -64,7 +64,7 @@ unsigned int Socket_esp8266::Read(char* data)
 	bool flag = false;
 	//读出数据长度
 	//while (TaskManager::Time() - starttime < mTimeOut) 
-		while (Sys.Ms() - starttime < mTimeOut)
+		while (sys.Ms() - starttime < mTimeOut)
 		{
 		bufferSize = mUsart.RxSize();
 		if (bufferSize > 6)//数据帧格式：+IPD,长度:数据
@@ -105,7 +105,7 @@ unsigned int Socket_esp8266::Read(char* data)
 	count = 0;
 	//读取数据
 	//while (TaskManager::Time() - starttime < mTimeOut) 
-	while (Sys.Ms() - starttime < mTimeOut)
+	while (sys.Ms() - starttime < mTimeOut)
 	{
 		if (mUsart.RxSize() > 0)
 		{
@@ -120,12 +120,12 @@ unsigned int Socket_esp8266::Read(char* data)
 
 unsigned int Socket_esp8266::Read(char* data, unsigned int num)
 {
-	float starttime = Sys.Ms();//TaskManager::Time();
+	float starttime = sys.Ms();//TaskManager::Time();
 	if (!mIsConnected)
 		return 0;
 	unsigned int count = 0;
 	//while (TaskManager::Time() - starttime < mTimeOut&&count < num) 
-	while (Sys.Ms() - starttime < mTimeOut&&count < num)
+	while (sys.Ms() - starttime < mTimeOut&&count < num)
 	{
 		if (mUsart.RxSize() > 0)
 		{
@@ -186,7 +186,7 @@ void Socket_esp8266::CheckStatus()
 	u8 temp;
 	static double curTime = 0, TxoldTime = 0, RxoldTime = 0, oldTimeout = 0;
 	static bool GetCSQTrue = false;
-	curTime = Sys.Ms();//tskmgr.Time();
+	curTime = sys.Ms();//tskmgr.Time();
 	if ((curTime - oldTimeout > 5) && ((mWifiStatus == WIFI_FREE) && (mWIFIInitStep != WIFIInit_FINISH)))
 		mWifiStatus = WIFI_FREE;
 	if (((curTime - TxoldTime) > 2) || ((mWIFIInitStep != WIFIInit_FINISH) && (mWifiStatus == WIFI_FREE)))
@@ -203,7 +203,7 @@ void Socket_esp8266::CheckStatus()
 			{
 			case WIFIInit_START:
 				ClearBuffer();
-				oldTimeout = Sys.Ms();// tskmgr.Time();			//初始化计时
+				oldTimeout = sys.Ms();// tskmgr.Time();			//初始化计时
 				mIsConnected = false;
 				mWIFIInitStep = WIFIInit_KICK;
 				mWifiStatus = WIFI_CON;
@@ -308,7 +308,7 @@ void Socket_esp8266::CheckStatus()
 			break;
 		}
 	}
-	curTime = Sys.Ms();//tskmgr.Time();
+	curTime = sys.Ms();//tskmgr.Time();
 	if ((curTime - RxoldTime) > 0.001)
 	{
 		RxoldTime = curTime;

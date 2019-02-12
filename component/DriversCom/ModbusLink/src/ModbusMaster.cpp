@@ -25,7 +25,7 @@ bool ModbusMasterLink::GetValueRegInput(uint8_t id, uint16_t addr, uint16_t len)
 	
 	this->com.SendBytes(this->txFrame.data, 8);
 	
-	Sys.Sleep(300);
+	sys.Sleep(300);
 
 	if (com.RxSize() == 0)
 	{

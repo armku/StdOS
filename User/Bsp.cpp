@@ -46,7 +46,7 @@ void setup()
 	Serial.println("abcd");
 	printf("c++ out\r\n");
 	
-	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
+	sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
 	//usart111.OnReceive = Com1test;
 	//MqttLinkTestInit();

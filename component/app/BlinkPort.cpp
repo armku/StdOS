@@ -17,7 +17,7 @@ BlinkPort::BlinkPort()
 }
 BlinkPort::~BlinkPort()
 {
-	Sys.RemoveTask(this->_tid);
+	sys.RemoveTask(this->_tid);
 }
 
 void BlinkPort::Add(mcuGpio* port)
@@ -35,13 +35,13 @@ void BlinkPort::Start()
 			this->Ports[i]->mode(PIN_MODE::OUTPUT_OD_PU);
 		}
 		if(this->_tid ==0)
-			this->_tid = Sys.AddTask((void (BlinkPort::*)())&BlinkPort::Blink,(BlinkPort *)this,-1,-1,"иак╦╤к©з");
-		Sys.SetTask(this->_tid,1,-1);
+			this->_tid = sys.AddTask((void (BlinkPort::*)())&BlinkPort::Blink,(BlinkPort *)this,-1,-1,"иак╦╤к©з");
+		sys.SetTask(this->_tid,1,-1);
 	}
 }
 void BlinkPort::Stop()
 {
-	Sys.SetTask(this->_tid,0,-1);
+	sys.SetTask(this->_tid,0,-1);
 	for(int i=0;;++i)
 	{
 		if(this->Count <= i)
@@ -65,6 +65,6 @@ void BlinkPort::Blink()
 	if(this->Index < this->Times)
 	{
 		this->Current=this->Current == 0;
-		Sys.SetTask(this->_tid,1,IntervalNext);
+		sys.SetTask(this->_tid,1,IntervalNext);
 	}
 }

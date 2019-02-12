@@ -190,7 +190,7 @@ void TTime::Init()
 	// 初始化为输出
 	this->Index = 2;
 
-	gTicks = (Sys.Clock >> 3) / 0xF4240u;
+	gTicks = (sys.Clock >> 3) / 0xF4240u;
 	//初始化延迟函数
 	//SYSTICK的时钟固定为HCLK时钟的1/8
 	//SYSCLK:系统时钟
@@ -212,7 +212,7 @@ void TTime::Init()
 	}
 #elif defined STM32F1
 	this->Index = 5;
-	gTicks = (Sys.Clock >> 3) / 0xF4240u;
+	gTicks = (sys.Clock >> 3) / 0xF4240u;
 
 	SysTick_Config(9000); //配置SysTick tick is 9ms	9000
 	SysTick->CTRL = SysTick_CTRL_ENABLE_Msk;                    /* Enable SysTick IRQ and SysTick Timer */
@@ -221,7 +221,7 @@ void TTime::Init()
 #elif defined STM32F4	
 		// 初始化为输出
 		this->Index = 2;
-		gTicks = (Sys.Clock >> 3) / 0xF4240u;		
+		gTicks = (sys.Clock >> 3) / 0xF4240u;		
 		//初始化延迟函数
 		//SYSTICK的时钟固定为HCLK时钟的1/8
 		//SYSCLK:系统时钟

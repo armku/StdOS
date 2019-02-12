@@ -12,7 +12,7 @@ FlushPort::FlushPort()
 }
 FlushPort::~FlushPort()
 {
-	Sys.RemoveTask(this->_tid);
+	sys.RemoveTask(this->_tid);
 }
 
 void FlushPort::Start(int ms)
@@ -26,7 +26,7 @@ void FlushPort::Start(int ms)
 				int taskperiod	= this->Slow;
 				if(this->Slow <= 0)
 					taskperiod = this->Fast;
-				this->_tid	= Sys.AddTask((void (FlushPort::*)())&FlushPort::Flush,(FlushPort *)this,taskperiod,taskperiod,"иак╦╤к©з");
+				this->_tid	= sys.AddTask((void (FlushPort::*)())&FlushPort::Flush,(FlushPort *)this,taskperiod,taskperiod,"иак╦╤к©з");
 			}
 			if(ms <=0)
 			{
@@ -38,8 +38,8 @@ void FlushPort::Start(int ms)
 				if(this->Count < 2)
 					this->Count = 2;
 			}
-			Sys.SetTaskPeriod(this->_tid,this->Fast);
-			Sys.SetTask(this->_tid,this->Count>0,0);
+			sys.SetTaskPeriod(this->_tid,this->Fast);
+			sys.SetTask(this->_tid,this->Count>0,0);
 		}
 	}
 }
@@ -47,9 +47,9 @@ void FlushPort::Start(int ms)
 void FlushPort::Stop(uint8_t mode)
 {
 	if(this->Slow)
-		Sys.SetTaskPeriod(this->_tid,this->Slow);
+		sys.SetTaskPeriod(this->_tid,this->Slow);
 	else
-		Sys.SetTask(this->_tid,0,0);
+		sys.SetTask(this->_tid,0,0);
 	if(mode !=0XFF)
 		this->Port->Write(mode > 0);
 	
@@ -61,9 +61,9 @@ void FlushPort::Flush()
 	{
 		this->Count--;
 		if(this->Fast)
-			Sys.SetTaskPeriod(this->_tid,this->Fast);
+			sys.SetTaskPeriod(this->_tid,this->Fast);
 		else
-			Sys.SetTask(this->_tid,0,0);
+			sys.SetTask(this->_tid,0,0);
 		
 	}
 }

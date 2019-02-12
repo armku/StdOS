@@ -307,7 +307,7 @@ bool USART::GetBytes(uint8_t data[], uint16_t num)
 	ret = mRxBuf.Gets(data, num);
 	if (ret && num)
 	{
-		LastRcvTime = Sys.Ms();
+		LastRcvTime = sys.Ms();
 		RxCnt += num;
 	}
 	return ret;
@@ -317,7 +317,7 @@ bool USART::GetByte(uint8_t &data)
 	bool ret = mRxBuf.Get(data);
 	if (ret)
 	{
-		LastRcvTime = Sys.Ms();
+		LastRcvTime = sys.Ms();
 		RxCnt++;
 	}
 	return ret;

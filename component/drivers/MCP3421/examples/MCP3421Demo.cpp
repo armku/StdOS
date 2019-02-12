@@ -23,6 +23,6 @@ void Mcp3421TestRoutin(void* param)
 void Mcp3421TestInit()
 {
 	mcp3421ad.SetPin(PB6, PB7);
-	Sys.AddTask(Mcp3421TestRoutin, 0, 5, 10000, "Mcp3421TestRoutin");
+	sys.AddTask(Mcp3421TestRoutin, 0, 5, 10000, "Mcp3421TestRoutin");
 }
 #endif

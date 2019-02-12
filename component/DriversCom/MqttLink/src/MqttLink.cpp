@@ -49,7 +49,7 @@ bool MqttLink::Connect()
 	this->txFrame.dataLength = 14 + strlen(ClientID);
 
 	this->Send();
-	Sys.Sleep(200);
+	sys.Sleep(200);
 	
 	this->Receive();
 	return true;
@@ -103,7 +103,7 @@ bool MqttLink::Puslish(uint8_t *buf, int len)
 	this->txFrame.dataLength = 6 + topticlen + len;
 
 	this->Send();
-	Sys.Sleep(200);
+	sys.Sleep(200);
 	this->Receive();
 
 
@@ -128,7 +128,7 @@ bool MqttLink::Puslish_Release()
 	this->txFrame.dataLength = ArrayLength(buf);
 
 	this->Send();
-	Sys.Sleep(200);
+	sys.Sleep(200);
 	this->Receive();
 	return true;
 }

@@ -1,5 +1,5 @@
 /*
-Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
+sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 毫秒级睡眠期间，系统将会安排执行其他耗时较短的任务。
  */
 #include "TTime.h"
@@ -10,7 +10,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "../Bsp/Porting.h"
 #include "../component/lib/Buffer.h"
 
-Sys_T Sys; //系统参数
+Sys_T sys; //系统参数
 
 // 构造函数
 Sys_T::Sys_T()
@@ -33,7 +33,7 @@ Sys_T::Sys_T()
 
 void Sys_T::Init()
 {
-	Sys.GlobalDisable();
+	sys.GlobalDisable();
 	Time.Init();
 }
 
@@ -59,14 +59,14 @@ uint32_t Sys_T::Seconds()const
 // 毫秒级延迟
 void Sys_T::Sleep(uint32_t dwMs)const
 {
-	if (!Sys.Started)
+	if (!sys.Started)
 	{
 		//用于系统没启动时延时使用
 		delay_ms(dwMs);
 		return;
 	}
 	if (dwMs > 1000)
-		debug_printf("Sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！\n", dwMs);
+		debug_printf("sys::Sleep 设计错误，睡眠%dms太长，超过1000ms建议使用多线程Thread！\n", dwMs);
 	if (dwMs)
 	{
 		bool cancel = false;
@@ -84,7 +84,7 @@ void Sys_T::Sleep(uint32_t dwMs)const
 void Sys_T::delayMicroseconds(uint32_t usec)const
 {
 	if (usec > 1000000)
-		debug_printf("Sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！\n", usec);
+		debug_printf("sys::Sleep 设计错误，睡眠%dus太长，超过1000ms建议使用多线程Thread！\n", usec);
 	if (usec && usec >= 1000)
 	{
 		bool cancle = false;
@@ -104,7 +104,7 @@ void Sys_T::Reboot(int msDelay)const
 {
 	if (msDelay <= 0)
 		this->Reset();
-	Sys.AddTask((void (Sys_T::*)())&Sys_T::Reset, (Sys_T *)this, msDelay, -1, "Reset");
+	sys.AddTask((void (Sys_T::*)())&Sys_T::Reset, (Sys_T *)this, msDelay, -1, "Reset");
 }
 
 // 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
@@ -160,7 +160,7 @@ bool Sys_T::SetTaskPeriod(uint32_t taskid, int period)const
 			if (period)
 			{
 				tsk->Period = period;
-				tsk->NextTime = Sys.Ms() + period;
+				tsk->NextTime = sys.Ms() + period;
 			}
 			else
 			{
@@ -184,7 +184,7 @@ bool Sys_T::SetTaskPeriod(uint32_t taskid, int period)const
 void Sys_T::Start()
 {
 	this->Started = true;
-	Sys.GlobalEnable();	
+	sys.GlobalEnable();	
 	Task::Scheduler()->Start();
 }
 

@@ -64,7 +64,7 @@
 #endif
 		ssd1309.Init(); //初始化OLED 
 
-		Sys.AddTask(ssd1309routin, 0, 100, 1000, "ssd1309routin");
+		sys.AddTask(ssd1309routin, 0, 100, 1000, "ssd1309routin");
 	}
 	unsigned char BMP1[] =
 	{

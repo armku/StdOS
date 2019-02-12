@@ -24,8 +24,8 @@ void Ad7689testInit(void*param)
 	ad7689.SetPin(PB13, PB15, PB14, PB12);
 	ad7689.Init();
 
-	Sys.AddTask(Test123, NULL, 0, 1000, "测试");
-	Sys.AddTask(adRouton123,0,0,10,"adRead");
+	sys.AddTask(Test123, NULL, 0, 1000, "测试");
+	sys.AddTask(adRouton123,0,0,10,"adRead");
 }
 
 #endif //_AD7689_TEST_H

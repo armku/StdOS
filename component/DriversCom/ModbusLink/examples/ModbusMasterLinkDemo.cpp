@@ -32,7 +32,7 @@ void ModbusMasterLinkTestInit()
 	modMaster.SetRegHoid(0, ArrayLength(RegHoilding16), RegHoilding16, 0);
 
 
-	Sys.AddTask(ModbusMasterDemoRoutin, 0, 0, 1000, "ModbusMaster");
+	sys.AddTask(ModbusMasterDemoRoutin, 0, 0, 1000, "ModbusMaster");
 }
 
 #endif // !_MODBUSMASTERLINKEST_CPP

@@ -159,7 +159,7 @@ uint8_t SpiSoft::WaitBusy()
 	i = 0;
 	while (this->_miso.Read() > 0)
 	{
-		Sys.Sleep(10);
+		sys.Sleep(10);
 		i++;
 		if (i > 200)
 			return 1;
@@ -434,7 +434,7 @@ int Spi::GetPre(int index, uint32_t &speedHz)
 #if defined STM32F0
 	// 自动计算稍低于速度speedHz的分频
 	uint16_t pre = SPI_BaudRatePrescaler_2;
-	uint32_t clock = Sys.Clock >> 1;
+	uint32_t clock = sys.Clock >> 1;
 	while (pre <= SPI_BaudRatePrescaler_256)
 	{
 		if (clock <= speedHz)
@@ -444,7 +444,7 @@ int Spi::GetPre(int index, uint32_t &speedHz)
 	}
 	if (pre > SPI_BaudRatePrescaler_256)
 	{
-		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, Sys.Clock);
+		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, sys.Clock);
 		return  -1;
 	}
 
@@ -453,7 +453,7 @@ int Spi::GetPre(int index, uint32_t &speedHz)
 #elif defined STM32F1
 	// 自动计算稍低于速度speedHz的分频
 	uint16_t pre = SPI_BaudRatePrescaler_2;
-	uint32_t clock = Sys.Clock >> 1;
+	uint32_t clock = sys.Clock >> 1;
 	while (pre <= SPI_BaudRatePrescaler_256)
 	{
 		if (clock <= speedHz)
@@ -463,7 +463,7 @@ int Spi::GetPre(int index, uint32_t &speedHz)
 	}
 	if (pre > SPI_BaudRatePrescaler_256)
 	{
-		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, Sys.Clock);
+		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, sys.Clock);
 		return  -1;
 	}
 
@@ -472,7 +472,7 @@ int Spi::GetPre(int index, uint32_t &speedHz)
 #elif defined STM32F4
 	// 自动计算稍低于速度speedHz的分频
 	uint16_t pre = SPI_BaudRatePrescaler_2;
-	uint32_t clock = Sys.Clock >> 1;
+	uint32_t clock = sys.Clock >> 1;
 	while (pre <= SPI_BaudRatePrescaler_256)
 	{
 		if (clock <= speedHz)
@@ -482,7 +482,7 @@ int Spi::GetPre(int index, uint32_t &speedHz)
 	}
 	if (pre > SPI_BaudRatePrescaler_256)
 	{
-		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, Sys.Clock);
+		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, sys.Clock);
 		return  -1;
 	}
 

@@ -47,13 +47,13 @@ void MqttLinkTestInit()
 	
 	for (int i = 0; i < 12; i++)
 	{
-		//sprintf(&clientids[i * 2], "%02X", Sys.ID[i+1]);
-		clientids[i] = Sys.ID[i];
+		//sprintf(&clientids[i * 2], "%02X", sys.ID[i+1]);
+		clientids[i] = sys.ID[i];
 	}
 	
 	mqttSlave.ClientID = clientids;
 	
 	mqttSlave.Topic = topic;
-	Sys.AddTask(MqttLinkRoutin, 0, 0, 1000, "ModbusSlaveLinkRoutin");
+	sys.AddTask(MqttLinkRoutin, 0, 0, 1000, "ModbusSlaveLinkRoutin");
 }
 #endif

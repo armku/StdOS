@@ -38,6 +38,6 @@
 	  for (int uc = 0; uc < 8; uc ++ )             // 打印 DS18B20 的序列号
 		debug_printf ( "%.2X", ds18.id[ uc ] );
 	  debug_printf("\r\n");
-	  Sys.AddTask(ds18b20routin, 0, 100, 1000, "ds18b20routin");
+	  sys.AddTask(ds18b20routin, 0, 100, 1000, "ds18b20routin");
 	}
 #endif

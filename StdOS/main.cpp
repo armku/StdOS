@@ -10,13 +10,13 @@ void arduinoloop(void* param)
 
 int main(void)
 {
-	Sys.Init();
+	sys.Init();
 	BspPlatformInit();
 #if DEBUG	
-	Sys.ShowInfo();
+	sys.ShowInfo();
 #endif 		
 	setup();
 
-	Sys.Start();
-	Sys.AddTask(arduinoloop, 0, 13, 1, "loop");
+	sys.Start();
+	sys.AddTask(arduinoloop, 0, 13, 1, "loop");
 }
