@@ -141,7 +141,7 @@ int atexit(void (*func)()) __attribute__((weak));
 
 unsigned long millis(void);
 unsigned long micros(void);
-void delay(unsigned long);
+void delay(unsigned long);//—” ±ms
 void delayMicroseconds(unsigned int us);
 unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout);
 unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout);
