@@ -101,7 +101,7 @@ void sdio_power_on(void)
     SDIO->POWER = SDIO_POWER_PWRCTRL_ON;
 // After a data write, data cannot be written to this register for three SDIOCLK clock periods
 // plus two PCLK2 clock periods.
-	delay_us(DELAY_LONG);
+	delayMicroseconds(DELAY_LONG);
 }
 
 void sdio_power_off(void)
@@ -109,7 +109,7 @@ void sdio_power_off(void)
     SDIO->POWER = SDIO_POWER_PWRCTRL_OFF;
 // After a data write, data cannot be written to this register for three SDIOCLK clock periods
 // plus two PCLK2 clock periods.
-	delay_us(DELAY_LONG);
+	delayMicroseconds(DELAY_LONG);
 }
 
 void sdio_set_clock(uint32_t clk)
@@ -134,7 +134,7 @@ void sdio_set_clock(uint32_t clk)
 	sdio_disable();
 	//Serial.println(div,DEC);
 	SDIO->CLKCR = (SDIO->CLKCR & (~(SDIO_CLKCR_CLKDIV|SDIO_CLKCR_BYPASS))) | SDIO_CLKCR_PWRSAV | SDIO_CLKCR_HWFC_EN | SDIO_CLKCR_CLKEN  | (div & SDIO_CLKCR_CLKDIV);
-	delay_us(dly);
+	delayMicroseconds(dly);
 }
 
 void sdio_set_dbus_width(uint16_t bus_w)
@@ -143,25 +143,25 @@ void sdio_set_dbus_width(uint16_t bus_w)
     gpio_set_mode(PIN_MAP[BOARD_SDIO_D1].gpio_device, PIN_MAP[BOARD_SDIO_D1].gpio_bit, GPIO_AF_OUTPUT_PP);
     gpio_set_mode(PIN_MAP[BOARD_SDIO_D2].gpio_device, PIN_MAP[BOARD_SDIO_D2].gpio_bit, GPIO_AF_OUTPUT_PP);
     gpio_set_mode(PIN_MAP[BOARD_SDIO_D3].gpio_device, PIN_MAP[BOARD_SDIO_D3].gpio_bit, GPIO_AF_OUTPUT_PP);
-	delay_us(dly);
+	delayMicroseconds(dly);
 }
 
 void sdio_set_dblock_size(uint8_t dbsize)
 {
 	SDIO->DCTRL = (SDIO->DCTRL&(~SDIO_DCTRL_DBLOCKSIZE)) | ((dbsize&0xF)<<4);
-	delay_us(dly);
+	delayMicroseconds(dly);
 }
 
 void sdio_enable(void)
 {
 	SDIO->CLKCR |= SDIO_CLKCR_CLKEN;
-	delay_us(dly);
+	delayMicroseconds(dly);
 }
 
 void sdio_disable(void)
 {
 	SDIO->CLKCR ^= SDIO_CLKCR_CLKEN;
-	delay_us(dly);
+	delayMicroseconds(dly);
 }
 
 /**
@@ -175,7 +175,7 @@ void sdio_begin(void)
   sdio_gpios_init();
 	// Set initial SCK rate.
 	sdio_set_clock(400000);
-	delay_us(200); // generate 80 pulses at 400kHz
+	delayMicroseconds(200); // generate 80 pulses at 400kHz
 }
 
 /**
