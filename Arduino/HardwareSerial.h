@@ -129,17 +129,8 @@ class HardwareSerial : public Stream
     inline void _rx_complete_irq(void);
     void _tx_udr_empty_irq(void);
 };
-
-class HardwareSerial0 : public HardwareSerial
-{
-public:
-	HardwareSerial0();
-	void begin(unsigned long baud) { begin(baud, SERIAL_8N1); }
-	void begin(unsigned long, uint8_t);
-	virtual size_t write(uint8_t);
-};
-
-extern HardwareSerial0 Serial; 
+class USART;
+extern USART Serial;
 
 #if defined(UBRR1H)
   extern HardwareSerial Serial1;

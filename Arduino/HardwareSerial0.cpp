@@ -9,26 +9,8 @@
 
 #if defined(HAVE_HWSERIAL0)
 
-HardwareSerial0 Serial;
+USART Serial;
 
-HardwareSerial0::HardwareSerial0()
-{
-
-}
-void HardwareSerial0::begin(unsigned long baud, byte config)
-{
-	
-}
-#include "Sys.h"
-size_t HardwareSerial0::write(uint8_t ch)
-{
-	/* 发送一个字节数据到USART */
-	USART_SendData(USART1, ch);
-
-	/* 等待发送完毕 */
-	while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
-	return 1;
-}
 USART::USART()
 {
 
