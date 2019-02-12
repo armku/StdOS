@@ -8,7 +8,6 @@
 #include "Delegate.h"
 #include "../component/lib/Version.h"
 
-int StdPrintf(const char *format, ...); //´úÌæ printf
 #ifdef __cplusplus
 extern "C" {
 #endif
