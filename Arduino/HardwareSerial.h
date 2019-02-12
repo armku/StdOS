@@ -182,6 +182,11 @@ extern UsartKernel_T UsartKernel[];//串口数据处理
 
 class USART : public HardwareSerial
 {
+public:
+	USART();
+	void begin(unsigned long baud) { begin(baud, SERIAL_8N1); }
+	void begin(unsigned long, uint8_t);
+	virtual size_t write(uint8_t);
 private:
 	bool isBusySend;
 

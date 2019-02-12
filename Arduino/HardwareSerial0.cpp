@@ -29,6 +29,24 @@ size_t HardwareSerial0::write(uint8_t ch)
 	while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
 	return 1;
 }
+USART::USART()
+{
+
+}
+void USART::begin(unsigned long baud, byte config)
+{
+
+}
+#include "Sys.h"
+size_t USART::write(uint8_t ch)
+{
+	/* 发送一个字节数据到USART */
+	USART_SendData(USART1, ch);
+
+	/* 等待发送完毕 */
+	while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
+	return 1;
+}
 #endif // HAVE_HWSERIAL0
 
 //////////////////////////////////////////////////////////////////////////////////
