@@ -180,7 +180,7 @@ extern UsartKernel_T UsartKernel[];//串口数据处理
 
 /*******************************************************************************************************/
 
-class USART
+class USART : public HardwareSerial
 {
 private:
 	bool isBusySend;
