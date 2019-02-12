@@ -34,6 +34,7 @@ uint32_t DeviceConfigCenter::CurrentTicks1()
 	return SysTick->LOAD - SysTick->VAL;
 #endif
 }
+#if 0
 #include <stdio.h>
 #include "stdarg.h"
 /////////////////////////////////////////////////////////////////////////////
@@ -62,6 +63,7 @@ int StdPrintf(const char *format, ...)
 #endif
 	return n;
 }
+#endif
 #ifdef __cplusplus
 extern "C" {
 #endif
