@@ -44,6 +44,7 @@ void setup()
 	debug_printf("\r\nserial avi:%d\r\n",avi);
 	Serial.print("abc");
 	Serial.println("abcd");
+	printf("c++ out\r\n");
 	
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
 
