@@ -2,6 +2,7 @@
 #define _Sys_H_
 
 #include <stdint.h>
+#include <stdio.h>
 #include "../component/Type.h"
 #include "List.h"
 #include "Delegate.h"
@@ -12,7 +13,7 @@ int StdPrintf(const char *format, ...); //´úÌæ printf
 extern "C" {
 #endif
 #ifdef DEBUG
-	#define debug_printf StdPrintf	
+	#define debug_printf printf	
 #else
 	#define debug_printf(format, ...)
 #endif
