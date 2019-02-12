@@ -1,5 +1,5 @@
 /*
-  HardwareSerial.h - Hardware serial library for Wiring
+  HardwareSerial_T.h - Hardware serial library for Wiring
   Copyright (c) 2006 Nicholas Zambetti.  All right reserved.
 
   This library is free software; you can redistribute it and/or
@@ -90,7 +90,7 @@ typedef uint8_t rx_buffer_index_t;
 #define SERIAL_7O2 0x3C
 #define SERIAL_8O2 0x3E
 
-class HardwareSerial : public Stream
+class HardwareSerial_T : public Stream
 {
   protected:    
     // Has any byte been written to the UART since begin()
@@ -108,7 +108,7 @@ class HardwareSerial : public Stream
     unsigned char _tx_buffer[SERIAL_TX_BUFFER_SIZE];
 
   public:
-    inline HardwareSerial();
+    inline HardwareSerial_T();
     void begin(unsigned long baud) { begin(baud, SERIAL_8N1); }
     void begin(unsigned long, uint8_t);
     void end();
@@ -133,15 +133,15 @@ class USART;
 extern USART Serial;
 
 #if defined(UBRR1H)
-  extern HardwareSerial Serial1;
+  extern HardwareSerial_T Serial1;
   #define HAVE_HWSERIAL1
 #endif
 #if defined(UBRR2H)
-  extern HardwareSerial Serial2;
+  extern HardwareSerial_T Serial2;
   #define HAVE_HWSERIAL2
 #endif
 #if defined(UBRR3H)
-  extern HardwareSerial Serial3;
+  extern HardwareSerial_T Serial3;
   #define HAVE_HWSERIAL3
 #endif
 
@@ -171,7 +171,7 @@ extern UsartKernel_T UsartKernel[];//串口数据处理
 
 /*******************************************************************************************************/
 
-class USART : public HardwareSerial
+class USART : public HardwareSerial_T
 {
 public:
 	USART();

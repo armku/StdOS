@@ -5,13 +5,13 @@
 
 // Constructors ////////////////////////////////////////////////////////////////
 
-HardwareSerial::HardwareSerial() 
+HardwareSerial_T::HardwareSerial_T() 
 {
 }
 
 // Actual interrupt handlers //////////////////////////////////////////////////////////////
 
-void HardwareSerial::_rx_complete_irq(void)
+void HardwareSerial_T::_rx_complete_irq(void)
 {
   
 }

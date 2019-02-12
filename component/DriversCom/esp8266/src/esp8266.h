@@ -40,7 +40,7 @@ public:
 	/**
 	 * Constuctor.
 	 *
-	 * @param uart - an reference of HardwareSerial object.
+	 * @param uart - an reference of HardwareSerial_T object.
 	 * @param baudRate - the baud rate to communicate with ESP8266 when first power on (default:the same as usart's baud rate).
 	 *              if the value is not the same as usart's baud rate, it will change usart's baud rate to the same as thid parameter's value
 	 * @warning parameter baud depends on the AT firmware. 9600 is an common value.
