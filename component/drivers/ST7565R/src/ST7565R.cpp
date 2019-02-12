@@ -5,6 +5,7 @@ http://www.amobbs.com/forum.php?mod=viewthread&tid=5296612&extra=&ordertype=1
  */
 #include "ST7565R.h"
 #include "Sys.h"
+#include "arduino.h"
 
 CLcd::CLcd()
 {
@@ -47,18 +48,18 @@ void CLcd::Init()
 {
     this->pPincs = 0;
     this->pPinres = 0; /*低电平复位*/
-    delay_us(500);
+    delayMicroseconds(500);
     this->pPinres = 1; /*复位完毕*/
-    delay_us(500);
+    delayMicroseconds(500);
     #if 0    
         this->writeCMD(0xe2); /*软复位*/
-        delay_us(500);
+        delayMicroseconds(500);
         this->writeCMD(0x2c); /*升压步聚1*/
-        delay_us(500);
+        delayMicroseconds(500);
         this->writeCMD(0x2e); /*升压步聚2*/
-        delay_us(500);
+        delayMicroseconds(500);
         this->writeCMD(0x2f); /*升压步聚3*/
-        delay_us(500);
+        delayMicroseconds(500);
         this->writeCMD(0x24); //0x24粗调对比度，可设置范围0x20～0x27
         this->writeCMD(0x81); /*微调对比度*/
         this->writeCMD(0x1a); //微调对比度的值，可设置范围0x00～0x3f
@@ -69,7 +70,7 @@ void CLcd::Init()
         this->writeCMD(0xaf); //开显示
     #else 
         this->writeCMD(0xe2); //用软件方式复位ST7565R 
-        delay_us(20);
+        delayMicroseconds(20);
         this->writeCMD(0xa2); //LCD偏压设置 （该寄存器的值请不要改动）
         this->writeCMD(0xa1); //横向刷屏方向设置  0xa0:从左向右  0xa1：从右向左
         this->writeCMD(0xc0); //纵向刷屏方向设置  0xc0:从下向上  0xc8:从上向下
@@ -98,7 +99,7 @@ void CLcd::writeCMD(uint8_t data1)
     for (uint8_t i = 0; i < 8; i++)
     {
         this->pPinsclk = 0;
-        //	delay_us(10);
+        //	delayMicroseconds(10);
         if (data1 &0x80)
         {
             this->pPinsid = 1;
@@ -108,7 +109,7 @@ void CLcd::writeCMD(uint8_t data1)
             this->pPinsid = 0;
         }
         this->pPinsclk = 1;
-        //	delay_us(10);
+        //	delayMicroseconds(10);
         data1 = data1 <<= 1;
     }
     this->pPincs = 1;

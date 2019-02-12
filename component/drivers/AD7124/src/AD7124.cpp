@@ -1,6 +1,7 @@
 #include "AD7124.h"
 #include "AD7124def.h"
 #include "Sys.h"
+#include "Arduino.h"
 
 #if AD7124SPISOFT
     AD7124::AD7124(SpiSoft *spi)
@@ -74,9 +75,9 @@ uint32_t AD7124::ReadReg(uint8_t reg, uint8_t bytes)
 uint32_t AD7124::ReadRlt()
 {
 	this->pspi->Stop();
-	delay_us(5);
+	delayMicroseconds(5);
 	uint32_t ret= this->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
-	delay_us(5);
+	delayMicroseconds(5);
 	this->pspi->Stop();
 	this->pspi->Start();
 	return ret;

@@ -1,5 +1,6 @@
 #include "I2C.h"
 #include "Sys.h"
+#include "Arduino.h"
 // 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
 SoftI2C::SoftI2C(uint32_t speedHz)
 {
@@ -26,13 +27,13 @@ void SoftI2C::Start()
 {
     /* 当SCL高电平时，SDA出现一个下跳沿表示I2C总线启动信号 */
     this->SDA = 1;
-	delay_us(1);
+	delayMicroseconds(1);
     this->SCL = 1;
-	delay_us(1);
+	delayMicroseconds(1);
     this->SDA = 0;
-    delay_us(1);
+	delayMicroseconds(1);
     this->SCL = 0;
-    delay_us(1);
+	delayMicroseconds(1);
 }
 
 void SoftI2C::Stop()
@@ -40,7 +41,7 @@ void SoftI2C::Stop()
     /* 当SCL高电平时，SDA出现一个上跳沿表示I2C总线停止信号 */
     this->SDA = 0;
     this->SCL = 1;
-    delay_us(1);
+	delayMicroseconds(1);
     this->SDA = 1;
 }
 
@@ -59,16 +60,16 @@ void SoftI2C::WriteByte(uint8_t dat)
         {
             this->SDA = 0;
         }
-        delay_us(1);
+		delayMicroseconds(1);
         this->SCL = 1;
-        delay_us(1);
+		delayMicroseconds(1);
         this->SCL = 0;
         if (i == 7)
         {
             this->SDA = 1; // 释放总线
         }
         dat <<= 1; /* 左移一个bit */
-        delay_us(1);
+        delayMicroseconds(1);
     }
 }
 
@@ -83,13 +84,13 @@ uint8_t SoftI2C::ReadByte()
     {
         value <<= 1;
         this->SCL = 1;
-        delay_us(1);
+		delayMicroseconds(1);
         if (this->SDA.Read())
         {
             value++;
         }
         this->SCL = 0;
-        delay_us(1);
+        delayMicroseconds(1);
     }
     return value;
 }
@@ -104,22 +105,22 @@ void SoftI2C::Ack(bool ack)
     if (ack)
     {
         this->SDA = 0; /* CPU驱动SDA = 0 */
-        delay_us(1);
+		delayMicroseconds(1);
         this->SCL = 1; /* CPU产生1个时钟 */
-        delay_us(1);
+		delayMicroseconds(1);
         this->SCL = 0;
-        delay_us(1);
+        delayMicroseconds(1);
         this->SDA = 1;
         /*CPU释放SDA总线 */
     }
     else
     {
         this->SDA = 1; /* CPU驱动SDA = 1 */
-        delay_us(1);
+		delayMicroseconds(1);
         this->SCL = 1; /* CPU产生1个时钟 */
-        delay_us(1);
+        delayMicroseconds(1);
         this->SCL = 0;
-        delay_us(1);
+        delayMicroseconds(1);
     }
 }
 //等待应答信号到来
@@ -130,9 +131,9 @@ bool SoftI2C::WaitAck(int retry)
     uint8_t re;
 
     this->SDA = 1; /* CPU释放SDA总线 */
-    delay_us(1);
+	delayMicroseconds(1);
     this->SCL = 1; /* CPU驱动SCL = 1, 此时器件会返回ACK应答 */
-    delay_us(1);
+	delayMicroseconds(1);
 
     if (this->SDA.Read())
     /* CPU读取SDA口线状态 */
@@ -144,6 +145,6 @@ bool SoftI2C::WaitAck(int retry)
         re = 0;
     }
     this->SCL = 0;
-    delay_us(1);
+	delayMicroseconds(1);
     return re;
 }

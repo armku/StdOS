@@ -1,5 +1,7 @@
 #include "OCM240128.h"
 #include "Sys.h"
+#include "arduino.h"
+
 OCM240128::OCM240128()
 {
 	this->pince.Invert = 0;
@@ -226,13 +228,13 @@ void OCM240128::busycheck(uint8_t autowr)
 	//	{
 	//		while((this->pinsta0==0)||(this->pinsta1==0))
 	//		{
-	//			delay_us(10);
+	//			delayMicroseconds(10);
 	//		};
 	//	}
 	//	this->pinrd = 1;
 	//	LCD_DataPort_Out();
 #else
-	delay_us(10);
+	delayMicroseconds(10);
 #endif
 }
 /************************************************************************************************

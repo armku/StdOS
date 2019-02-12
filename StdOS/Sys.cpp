@@ -9,6 +9,7 @@ sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "../Bsp/ST/stm32.h"
 #include "../Bsp/Porting.h"
 #include "../component/lib/Buffer.h"
+#include "arduino.h"
 
 Sys_T sys; //系统参数
 
@@ -95,7 +96,7 @@ void Sys_T::delayMicroseconds(uint32_t usec)const
 	}
 	if (usec)
 	{
-		delay_us(usec);
+		delayMicroseconds(usec);
 	}
 }
 
@@ -261,12 +262,12 @@ extern "C"
 	{
 		for (int i = 0; i < ms; i++)
 		{
-			delay_us(500);
-			delay_us(500);
+			delayMicroseconds(500);
+			delayMicroseconds(500);
 		}
-	}
+	}	
 	// 微秒级延迟
-	void delay_us(int us)
+	void delayMicroseconds(unsigned int us)
 	{
 		if (us)
 		{

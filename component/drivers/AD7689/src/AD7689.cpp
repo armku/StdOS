@@ -1,5 +1,6 @@
 #include "AD7689.h"
 #include "Sys.h"
+#include "Arduino.h"
 //配置信息
 #define CFG		1	//配置更新	0：保持当前配置设置，1：覆盖寄存器的内容
 #define INCC	7	//输入通道配置 7：单极性，INx以GND为参考
@@ -42,15 +43,15 @@ uint16_t CAD7689::AD_Read(void)
     uint16_t dat = 0;
     uint32_t i;
     this->ppincnv=0;
-	delay_us(1);
+	delayMicroseconds(1);
     for (i = 0; i < 16; i++)
     {
         this->ppinsck=1;
-		delay_us(1);
+		delayMicroseconds(1);
         dat <<= 1;
         dat += this->ppinsdo.Read();
         this->ppinsck=0;
-		delay_us(1);
+		delayMicroseconds(1);
     }
     this->ppincnv=1;
     return dat;
@@ -61,21 +62,21 @@ uint16_t CAD7689::AD_Write(uint16_t sdat)
     uint16_t dat = 0;
     uint32_t i;
     this->ppincnv=0;
-    delay_us(1);
+    delayMicroseconds(1);
     for (i = 0; i < 16; i++)
     {
         ((sdat &0x8000) > 0) ? this->ppinsdi=1: this->ppinsdi=0;
         dat <<= 1;
         dat += this->ppinsdo.Read();
-		delay_us(1);
+		delayMicroseconds(1);
         this->ppinsck=0;
-		delay_us(1);
+		delayMicroseconds(1);
         sdat <<= 1;
         this->ppinsck=1;
     }
-	delay_us(1);
+	delayMicroseconds(1);
     this->ppinsdi=0;
-	delay_us(1);
+	delayMicroseconds(1);
     this->ppincnv=1;
     return dat;
 }
@@ -89,9 +90,9 @@ void CAD7689::Init(void)
 
     //初始化配置
     this->ppincnv=0;
-	delay_us(100);
+	delayMicroseconds(100);
     this->ppincnv=1;
-	delay_us(600);
+	delayMicroseconds(600);
 
 }
 

@@ -1,5 +1,6 @@
 #include <stdio.h>  
 #include <string.h>  
+#include "arduino.h"
 
 #include "EspDemoLink.h"
 #include "Sys.h"
@@ -257,7 +258,7 @@ void EspDemoLink::SetPin(Pin pch, Pin prst)
 }
 void EspDemoLink::Init()
 {
-	delay_us(500);
+	delayMicroseconds(500);
 	this->pinch = 1;
 	this->pinrst = 1;
 }

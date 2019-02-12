@@ -1,5 +1,6 @@
 #include "DS1302.h"
 #include "Sys.h"
+#include "arduino.h"
 /*********************************************************************/
 /* 实时时钟模块 时钟芯片型号：DS1302 */
 /*********************************************************************/
@@ -89,12 +90,12 @@ DateTime& DS1302::GetTime(DateTime & dt)
 void DS1302::set1302()
 {
 	this->prst = 1;
-	delay_us(10);
+	delayMicroseconds(10);
 }
 void DS1302::reset1302()
 {
 	this->prst = 0;
-	delay_us(10);
+	delayMicroseconds(10);
 }
 /********************************************************************
 *
@@ -119,11 +120,11 @@ void DS1302::Bytein(uint8_t ucDa)
 		{
 			this->pio = 0; /*相当于汇编中的 RRC */
 		}
-		delay_us(1);
+		delayMicroseconds(1);
 		this->psck = 1;
-		delay_us(1);
+		delayMicroseconds(1);
 		this->psck = 0;
-		delay_us(1);
+		delayMicroseconds(1);
 		ucDa = ucDa >> 1;
 	}
 }
@@ -149,11 +150,11 @@ uint8_t DS1302::Byteout()
 		{
 			ucDa |= 0X80;
 		}
-		delay_us(1);
+		delayMicroseconds(1);
 		this->psck = 1;
-		delay_us(1);
+		delayMicroseconds(1);
 		this->psck = 0;
-		delay_us(1);
+		delayMicroseconds(1);
 	}
 	return (ucDa);
 }
