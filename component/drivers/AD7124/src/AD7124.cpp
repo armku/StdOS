@@ -1,6 +1,5 @@
 #include "AD7124.h"
 #include "AD7124def.h"
-#include "Sys.h"
 #include "Arduino.h"
 
 #if AD7124SPISOFT

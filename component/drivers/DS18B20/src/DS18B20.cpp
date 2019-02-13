@@ -1,5 +1,4 @@
 #include "DS18B20.h"
-#include "Sys.h"
 #include "arduino.h"
 
 void DS18B20::SetPin(Pin pin)

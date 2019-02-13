@@ -1,5 +1,4 @@
 #include "ADS1246.h"
-#include "Sys.h"
 #include "arduino.h"
 
 //下降沿芯片接收数据，上升沿芯片输出数据

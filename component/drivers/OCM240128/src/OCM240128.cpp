@@ -1,5 +1,4 @@
 #include "OCM240128.h"
-#include "Sys.h"
 #include "arduino.h"
 
 OCM240128::OCM240128()
