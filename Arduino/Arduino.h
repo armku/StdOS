@@ -92,55 +92,18 @@ typedef unsigned int word;
 typedef bool boolean;
 typedef uint8_t byte;
 
-void init(void);
-void initVariant(void);
-
-int atexit(void (*func)()) __attribute__((weak));
-
-//void pinMode(uint8_t, uint8_t);
-//void digitalWrite(uint8_t, uint8_t);
-//int digitalRead(uint8_t);
-//int analogRead(uint8_t);
-//void analogReference(uint8_t mode);
-//void analogWrite(uint8_t, int);
-
 unsigned long millis(void);
 unsigned long micros(void);
 void delay(unsigned long);//—” ±ms
 void delayMicroseconds(unsigned int us);
-unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout);
-unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout);
-
-void shiftOut(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val);
-uint8_t shiftIn(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder);
-
 //void attachInterrupt(uint8_t, void (*)(void), int mode);
 //void detachInterrupt(uint8_t);
 
 void setup(void);
 void loop(void);
 
-// Get the bit location within the hardware port of the given virtual pin.
-// This comes from the pins_*.c file for the active board configuration.
-
 #define analogInPinToBit(P) (P)
 
-// On the ATmega1280, the addresses of some of the port registers are
-// greater than 255, so we can't store them in uint8_t's.
-//extern const uint16_t PROGMEM port_to_mode_PGM[];
-//extern const uint16_t PROGMEM port_to_input_PGM[];
-//extern const uint16_t PROGMEM port_to_output_PGM[];
-
-//extern const uint8_t PROGMEM digital_pin_to_port_PGM[];
-//// extern const uint8_t PROGMEM digital_pin_to_bit_PGM[];
-//extern const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[];
-//extern const uint8_t PROGMEM digital_pin_to_timer_PGM[];
-
-// Get the bit location within the hardware port of the given virtual pin.
-// This comes from the pins_*.c file for the active board configuration.
-// 
-// These perform slightly better as macros compared to inline functions
-//
 #define digitalPinToPort(P) ( pgm_read_byte( digital_pin_to_port_PGM + (P) ) )
 #define digitalPinToBitMask(P) ( pgm_read_byte( digital_pin_to_bit_mask_PGM + (P) ) )
 #define digitalPinToTimer(P) ( pgm_read_byte( digital_pin_to_timer_PGM + (P) ) )
@@ -153,20 +116,6 @@ void loop(void);
 #define NOT_A_PORT 0
 
 #define NOT_AN_INTERRUPT -1
-
-#ifdef ARDUINO_MAIN
-#define PA 1
-#define PB 2
-#define PC 3
-#define PD 4
-#define PE 5
-#define PF 6
-#define PG 7
-#define PH 8
-#define PJ 10
-#define PK 11
-#define PL 12
-#endif
 
 #define NOT_ON_TIMER 0
 #define TIMER0A 1
@@ -202,22 +151,7 @@ void loop(void);
 #error "Targets with both UART0 and CDC serial not supported"
 #endif
 
-uint16_t makeWord(uint16_t w);
-uint16_t makeWord(byte h, byte l);
-
 #define word(...) makeWord(__VA_ARGS__)
-
-unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout = 1000000L);
-unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout = 1000000L);
-
-void tone(uint8_t _pin, unsigned int frequency, unsigned long duration = 0);
-void noTone(uint8_t _pin);
-
-// WMath prototypes
-long random(long);
-long random(long, long);
-void randomSeed(unsigned long);
-long map(long, long, long, long, long);
 
 #endif
 
