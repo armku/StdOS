@@ -8,6 +8,8 @@ void arduinoloop(void* param)
 	loop();
 }
 
+void BspPlatformInit();
+
 int main(void)
 {
 	sys.Init();

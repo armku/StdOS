@@ -7,7 +7,7 @@ init some hardware
 #ifdef __cplusplus
 extern "C" {
 #endif
-	void BspPlatformInit();
+	//void BspPlatformInit();
 #ifdef __cplusplus
 }
 #endif
