@@ -201,7 +201,7 @@ void loop(void);
 #ifdef __cplusplus
 #include "WCharacter.h"
 #include "WString.h"
-#include "HardwareSerial.h"
+//#include "HardwareSerial.h"
 #include "USBAPI.h"
 #if defined(HAVE_HWSERIAL0) && defined(HAVE_CDCSERIAL)
 #error "Targets with both UART0 and CDC serial not supported"
