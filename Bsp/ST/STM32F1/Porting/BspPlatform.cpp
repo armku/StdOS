@@ -1,4 +1,3 @@
-#include "BspPlatform.h"
 #include "Sys.h"
 #include "Port.h"
 #include "../../stm32.h"

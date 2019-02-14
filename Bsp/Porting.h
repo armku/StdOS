@@ -5,7 +5,6 @@
 
 #elif defined STM32F1
 #include "mcuGpio.h"
-#include "../Bsp/ST/STM32F1/Porting/BspPlatform.h"
 #include "../Bsp/ST/STM32F1/Porting/Spi.h"
 
 #include "../Bsp/ST/STM32F1/Porting/FIFOBuffer.h"
