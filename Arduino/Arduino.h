@@ -26,11 +26,6 @@
 #include <string.h>
 #include <math.h>
 
-#if 0
-#include <avr/pgmspace.h>
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#endif
 #include "binary.h"
 
 #ifdef __cplusplus
