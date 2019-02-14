@@ -118,7 +118,6 @@ void loop(void);
 #include "WCharacter.h"
 #include "WString.h"
 //#include "HardwareSerial.h"
-//#include "USBAPI.h"
 
 #endif
 
