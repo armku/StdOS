@@ -84,7 +84,7 @@ AD7124 ad(&spi1);
 
 void ad7124test(void *param)
 {
-	auto ad7 = (AD7124*)param;
+	AD7124* ad7 = (AD7124*)param;
 	
     ad7->AD7124_Read_ID();
     ad7->AD7124_Read_Status();
