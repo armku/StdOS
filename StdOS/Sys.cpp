@@ -129,7 +129,7 @@ bool Sys_T::SetTask(uint32_t taskid, bool enable, int msNextTime)const
 
 	if (taskid)
 	{
-		auto tsk = Task::Get(taskid);
+		Task* tsk = Task::Get(taskid);
 		if (tsk)
 		{
 			tsk->Set(enable, msNextTime);

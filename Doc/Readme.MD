@@ -59,7 +59,7 @@ hal hardware abstraction layer 硬件有关
 
 void LedTask(void* param)
 {
-    auto leds	= (mcuGpio*)param;
+    mcuGpio* leds	= (mcuGpio*)param;
     *leds = !*leds;
 }
 

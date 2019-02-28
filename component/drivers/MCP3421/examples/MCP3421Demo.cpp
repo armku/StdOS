@@ -10,12 +10,12 @@ void Mcp3421TestRoutin(void* param)
 	static int icnt = 0;
 	if (icnt++ % 2)
 	{
-		auto volt = mcp3421ad.GetVolt();
+		float volt = mcp3421ad.GetVolt();
 		debug_printf("%08d read Volt:%5.5f\n", icnt, volt);
 	}
 	else
 	{
-		auto val = mcp3421ad.GetADValue();
+		float val = mcp3421ad.GetADValue();
 		debug_printf("%08d read Volt:%X %d\n", icnt, val, val);
 	}
 }

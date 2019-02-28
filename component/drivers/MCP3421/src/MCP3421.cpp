@@ -58,7 +58,7 @@ int32_t MCP3421::GetADValue(_Gain3421 gain)
 }
 float MCP3421::GetVolt()
 {
-	auto val = this->GetADValue(GAIN1);
+	int32_t val = this->GetADValue(GAIN1);
 	this->ValueVolt= val * 2.048 / 0X20000;
 	return this->ValueVolt;
 }

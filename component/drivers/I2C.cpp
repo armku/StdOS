@@ -95,7 +95,7 @@ uint8_t SoftI2C::ReadByte()
 }
 uint8_t SoftI2C::ReadByte(bool ack)
 {
-	auto ret = this->ReadByte();
+	uint8_t ret = this->ReadByte();
 	this->Ack(ack);
 	return ret;
 }

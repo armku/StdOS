@@ -33,8 +33,8 @@ bool Task::Execute(uint64_t now)
         this->Callback(this->Param);
 
         this->Times++;
-		auto cms=costms.Elapsed();
-        auto costMsCurrent = costms.Elapsed() - this->SleepTime;
+		int cms=costms.Elapsed();
+        int costMsCurrent = costms.Elapsed() - this->SleepTime;
 		if(costMsCurrent<0)
 			costMsCurrent=30;//异常设置为3us		
         if (this->MaxCost < costMsCurrent)
@@ -174,7 +174,7 @@ bool Task::CheckTime(uint64_t end, bool isSleep)
 
     if (this->Deepth < this->MaxDeepth)
     {
-        auto mscur = sys.Ms();
+        uint64_t mscur = sys.Ms();
 		if(!this->Enable)
 		{
 			ret=false;
@@ -251,7 +251,7 @@ TaskScheduler::TaskScheduler(const char* name)
 // 创建任务，返回任务编号。dueTime首次调度时间ms，-1表示事件型任务，period调度间隔ms，-1表示仅处理一次
 uint32_t TaskScheduler::Add(Action func, void *param, int dueTime, int period, const char* name)
 {
-    auto task = new Task();
+	Task* task = new Task();
     task->ID =this->Count;
     task->Callback = func;
     task->Param = param;
@@ -293,7 +293,7 @@ void TaskScheduler::Remove(uint32_t taskid)
 {
     for (int i = 0; i < this->Count; i++)
     {
-        auto task = this->_Tasks[i];
+        Task* task = this->_Tasks[i];
         if (task->ID == taskid)
         {
             this->_Tasks.RemoveAt(i);
@@ -331,7 +331,7 @@ void TaskScheduler::Start()
     Running = true;
     while (Running)
     {
-        auto bb = false;
+        bool bb = false;
         Execute(0xFFFFFFFF, bb);
     }
     debug_printf("%s停止调度，共有%d个任务！\n", Name, Count);
@@ -346,12 +346,12 @@ void TaskScheduler::Stop()
 // 执行一次循环。指定最大可用时间
 void TaskScheduler::Execute(uint32_t msMax, bool &cancel)
 {
-    auto mscur = sys.Ms();
+    uint64_t mscur = sys.Ms();
     TimeCost tmcost;
 
-    auto min = UInt64_Max; // 最小时间，这个时间就会有任务到来
+    uint64_t min = UInt64_Max; // 最小时间，这个时间就会有任务到来
 
-    auto mscurMax = mscur + msMax;
+    uint64_t mscurMax = mscur + msMax;
     for (int i = 0; i < this->Count; i++)
     {
         if (cancel)
@@ -367,7 +367,7 @@ void TaskScheduler::Execute(uint32_t msMax, bool &cancel)
 				}
 				if(!msMax)
 					return;
-				auto msend = sys.Ms();
+				uint64_t msend = sys.Ms();
 			}
 			// 不能通过累加的方式计算下一次时间，因为可能系统时间被调整
 			this->Current->NextTime = mscur + this->Current->Period;
@@ -375,7 +375,7 @@ void TaskScheduler::Execute(uint32_t msMax, bool &cancel)
 			{
 				min = this->Current->NextTime;
 			}
-			auto cancel = false;
+			bool cancel = false;
 			this->Current = this->Current;
 			if (this->Current->CheckTime(sys.Ms(), cancel))
 			{
@@ -400,7 +400,7 @@ Task *TaskScheduler::operator[](int taskid)
 {
     for (int i = 0; i < this->Count; i++)
     {
-        auto task = this->_Tasks[i];
+        Task* task = this->_Tasks[i];
         if (task && task->ID == taskid)
         {
             return task;
@@ -416,28 +416,28 @@ void TaskScheduler::Set(Task *tasks, int count){}
 uint32_t TaskScheduler::ExecuteForWait(uint32_t msMax, bool &cancel)
 {
     uint32_t ret = 0;
-	auto tskcur = Task::Scheduler()->Current;
+	Task* tskcur = Task::Scheduler()->Current;
     if (this->Deepth < MaxDeepth)
     {
         this->Deepth++;
-		auto tskcur=this->Current;
+		Task* tskcur=this->Current;
 		tskcur->Deepth++;
-        auto msBegin = sys.Ms();
-        auto msEndMax = msBegin + msMax;
-        auto msRemain = msMax;
+		uint64_t msBegin = sys.Ms();
+		uint64_t msEndMax = msBegin + msMax;
+		uint64_t msRemain = msMax;
         TimeCost tmcost;
         while (msRemain > 0 && !cancel)
         {
 			this->Execute(msRemain, cancel);
-			auto msc = sys.Ms();
+			uint64_t msc = sys.Ms();
 			if (msEndMax > msc)			
 				msRemain = msEndMax - msc;			
 			else
 				msRemain = 0;
         }
-		auto sleepus = tmcost.Elapsed();
+		int sleepus = tmcost.Elapsed();
         this->TotalSleep += sleepus/1000;
-        auto msUsed = sys.Ms() - msBegin;
+		uint64_t msUsed = sys.Ms() - msBegin;
 		tskcur->SleepTime+=sleepus;
 		tskcur->Deepth--;
         this->Deepth--;
@@ -461,7 +461,7 @@ void TaskScheduler::ShowStatus()
     uint8_t buf[1];
 
     runCounts++;
-    auto curms = sys.Ms();
+	uint64_t curms = sys.Ms();
     //统计运行时间
     RunTimes = 0;
     RunTimesAvg = 0;
@@ -486,7 +486,7 @@ void TaskScheduler::ShowStatus()
     debug_printf("启动 %02lld:%02lld:%02lld.%03lld 堆 %u/%u\n", curms / 3600000, curms / 60000 % 60, curms / 1000 % 60, curms % 1000, &(buf[0]) - 0X20000000, 1024);
     for (int i = 0; i < this->Count; i++)
     {
-        auto task = this->_Tasks[i];
+        Task* task = this->_Tasks[i];
         if (task)
         {
             task->ShowStatus();

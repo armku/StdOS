@@ -42,7 +42,7 @@ float Math::Max(float buf[], int len,int pos)
 	if (len <= 0)
 		return buf[pos];
 
-	auto max = buf[pos];
+	float max = buf[pos];
 	for (int i = pos; i < len; i++)
 	{
 		max = MAX(max, buf[pos+i]);
@@ -56,7 +56,7 @@ float Math::Min(float buf[], int len,int pos)
 	if (len <= 0)
 		return buf[pos];
 
-	auto min = buf[pos];
+	float min = buf[pos];
 	for (int i = pos; i < len; i++)
 	{
 		min = MIN(min, buf[pos+i]);
