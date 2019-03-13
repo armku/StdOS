@@ -273,4 +273,3 @@ double InputCapture_TIM::operator[](u8 chNum)
 	else
 		return 0;
 }
-

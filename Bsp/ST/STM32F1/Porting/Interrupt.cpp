@@ -930,9 +930,6 @@ Func DeviceConfigCenter::PTim8Update = 0;
 //中断线打开、关闭
 void DeviceConfigCenter::SetEXIT(int pinIndex, bool enable, Trigger trigger)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
 	/* 配置EXTI中断线 */
 	EXTI_InitTypeDef ext;
 	EXTI_StructInit(&ext);
@@ -951,31 +948,17 @@ void DeviceConfigCenter::SetEXIT(int pinIndex, bool enable, Trigger trigger)
 	}
 	ext.EXTI_LineCmd = enable ? ENABLE : DISABLE;
 	EXTI_Init(&ext);
-#elif defined STM32F4
-
-#endif
 }
-#if defined STM32F0
-
-#elif defined STM32F1
-
 static const int PORT_IRQns[] =
 {
 	EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn,  // 5个基础的
 	EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,  // EXTI9_5
 	EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn  // EXTI15_10
 };
-#elif defined STM32F4
-
-#endif
 
 
 void DeviceConfigCenter::InputPort_OpenEXTI(Pin pin, Trigger trigger)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
-
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
 	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA + pin >> 4, pin & 0x0f);
 	SetEXIT(pin, true, trigger);
@@ -990,9 +973,6 @@ void DeviceConfigCenter::InputPort_OpenEXTI(Pin pin, Trigger trigger)
 
 	NVIC_Init(&nvic);
 	NVIC_SetPriority((IRQn_Type)PORT_IRQns[pin & 0x0f], 1);
-#elif defined STM32F4
-
-#endif
 }
 
 void DeviceConfigCenter::SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, bool Remap)
@@ -1013,28 +993,6 @@ void DeviceConfigCenter::SerialPort_GetPins(Pin *txPin, Pin *rxPin, COM index, b
 
 void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 {
-#if defined STM32F0
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);//使能TIM2时钟
-
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;//定义一个TIM_InitTypeDef类型的结构体
-	TIM_ClearITPendingBit(TIM2, TIM_IT_Update);//清中断标志，以备下次中断到来使用
-
-	TIM_TimeBaseStructure.TIM_Period = 1000;//1秒钟机2000个脉冲
-	TIM_TimeBaseStructure.TIM_Prescaler = 35999; //36000分频
-	TIM_TimeBaseStructure.TIM_ClockDivision = 0; //TIM_CKD_DIV1
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;//向上计数
-	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);//初始化定时器
-	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);//使能溢出中断
-
-	TIM_Cmd(TIM2, ENABLE);//定时器使能
-
-	NVIC_InitTypeDef   NVIC_InitStructure;
-
-	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-#elif defined STM32F1
 #if 1
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
 	/* 自动重装载寄存器周期的值(计数值) */
@@ -1074,9 +1032,6 @@ void DeviceConfigCenter::TimeTickInit()//系统用定时器初始化
 	Timer2Config(1000);
 #endif
 	NVIC_SetPriority(SysTick_IRQn, 0);
-#elif defined STM32F4
-	Timer2Config(10000);
-#endif
 }
 
 //定时器配置
@@ -1137,41 +1092,14 @@ void DeviceConfigCenter::TimerConfig(TIMER tim, int interval, int NVIC_PriorityG
 //定时器配置
 void DeviceConfigCenter::Timer0Config(int interval)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
-
-#elif defined STM32F4
-
-#endif
 }
 //定时器配置
 void DeviceConfigCenter::Timer1Config(int interval)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
-
-#elif defined STM32F4
-
-#endif
 }
 //定时器配置
 void DeviceConfigCenter::Timer2Config(int interval)
 {
-#if defined STM32F0
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;//定义一个TIM_InitTypeDef类型的结构体
-	TIM_ClearITPendingBit(TIM2, TIM_IT_Update);//清中断标志，以备下次中断到来使用
-
-	TIM_TimeBaseStructure.TIM_Period = interval;//1秒钟机2000个脉冲
-	TIM_TimeBaseStructure.TIM_Prescaler = 35999; //36000分频
-	TIM_TimeBaseStructure.TIM_ClockDivision = 0; //TIM_CKD_DIV1
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;//向上计数
-	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);//初始化定时器
-	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);//使能溢出中断
-
-	TIM_Cmd(TIM2, ENABLE);//定时器使能
-#elif defined STM32F1
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
 	// 开启TIMx_CLK,x,即内部时钟CK_INT=72M
@@ -1201,41 +1129,10 @@ void DeviceConfigCenter::Timer2Config(int interval)
 
 	/* 基本定时器 TIMx,x 重新开时钟，开始计时 */
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-#elif defined STM32F4
-	//arr：自动重装值。
-	//psc：时钟预分频数
-	//定时器溢出时间计算方法 : Tout = ((arr + 1)*(psc + 1)) / Ft us.
-	//Ft=定时器工作频率,单位:Mhz
-	u16 arr = interval - 1;
-	u16 psc = 8400 - 1;
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;
-
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);  ///使能TIM时钟
-
-	TIM_TimeBaseInitStructure.TIM_Period = arr; 	//自动重装载值
-	TIM_TimeBaseInitStructure.TIM_Prescaler = psc;  //定时器分频
-	TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up; //向上计数模式
-	TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStructure);//初始化TIM
-
-	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE); //允许定时器更新中断
-	TIM_Cmd(TIM2, ENABLE); //使能定时器
-
-	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn; //定时器中断
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x01; //抢占优先级1
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x03; //子优先级3
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-#endif
 }
 //定时器配置
 void DeviceConfigCenter::Timer3Config(int interval)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
 	// 开启TIMx_CLK,x,即内部时钟CK_INT=72M
@@ -1265,41 +1162,10 @@ void DeviceConfigCenter::Timer3Config(int interval)
 
 	/* 基本定时器 TIMx,x 重新开时钟，开始计时 */
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-#elif defined STM32F4
-	//arr：自动重装值。
-	//psc：时钟预分频数
-	//定时器溢出时间计算方法 : Tout = ((arr + 1)*(psc + 1)) / Ft us.
-	//Ft=定时器工作频率,单位:Mhz
-	u16 arr = interval - 1;
-	u16 psc = 8400 - 1;
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;
-
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);  ///使能TIM时钟
-
-	TIM_TimeBaseInitStructure.TIM_Period = arr; 	//自动重装载值
-	TIM_TimeBaseInitStructure.TIM_Prescaler = psc;  //定时器分频
-	TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up; //向上计数模式
-	TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-	TIM_TimeBaseInit(TIM3, &TIM_TimeBaseInitStructure);//初始化TIM
-
-	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE); //允许定时器更新中断
-	TIM_Cmd(TIM3, ENABLE); //使能定时器
-
-	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn; //定时器中断
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x01; //抢占优先级1
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x03; //子优先级3
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-#endif
 }
 //定时器配置
 void DeviceConfigCenter::Timer4Config(int interval)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
 	// 开启TIMx_CLK,x,即内部时钟CK_INT=72M
@@ -1329,41 +1195,10 @@ void DeviceConfigCenter::Timer4Config(int interval)
 
 	/* 基本定时器 TIMx,x 重新开时钟，开始计时 */
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-#elif defined STM32F4
-	//arr：自动重装值。
-	//psc：时钟预分频数
-	//定时器溢出时间计算方法 : Tout = ((arr + 1)*(psc + 1)) / Ft us.
-	//Ft=定时器工作频率,单位:Mhz
-	u16 arr = interval - 1;
-	u16 psc = 8400 - 1;
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;
-
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);  ///使能TIM时钟
-
-	TIM_TimeBaseInitStructure.TIM_Period = arr; 	//自动重装载值
-	TIM_TimeBaseInitStructure.TIM_Prescaler = psc;  //定时器分频
-	TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up; //向上计数模式
-	TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseInitStructure);//初始化TIM
-
-	TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE); //允许定时器更新中断
-	TIM_Cmd(TIM4, ENABLE); //使能定时器
-
-	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn; //定时器中断
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x01; //抢占优先级1
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x03; //子优先级3
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-#endif
 }
 //定时器配置
 void DeviceConfigCenter::Timer5Config(int interval)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
 	// 开启TIMx_CLK,x,即内部时钟CK_INT=72M
@@ -1393,41 +1228,10 @@ void DeviceConfigCenter::Timer5Config(int interval)
 
 	/* 基本定时器 TIMx,x 重新开时钟，开始计时 */
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
-#elif defined STM32F4
-	//arr：自动重装值。
-	//psc：时钟预分频数
-	//定时器溢出时间计算方法 : Tout = ((arr + 1)*(psc + 1)) / Ft us.
-	//Ft=定时器工作频率,单位:Mhz
-	u16 arr = interval - 1;
-	u16 psc = 8400 - 1;
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;
-
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);  ///使能TIM时钟
-
-	TIM_TimeBaseInitStructure.TIM_Period = arr; 	//自动重装载值
-	TIM_TimeBaseInitStructure.TIM_Prescaler = psc;  //定时器分频
-	TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up; //向上计数模式
-	TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-	TIM_TimeBaseInit(TIM5, &TIM_TimeBaseInitStructure);//初始化TIM
-
-	TIM_ITConfig(TIM5, TIM_IT_Update, ENABLE); //允许定时器更新中断
-	TIM_Cmd(TIM5, ENABLE); //使能定时器
-
-	NVIC_InitStructure.NVIC_IRQChannel = TIM5_IRQn; //定时器中断
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x01; //抢占优先级1
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x03; //子优先级3
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-#endif
 }
 //定时器配置
 void DeviceConfigCenter::Timer6Config(int interval)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
 	// 开启TIMx_CLK,x,即内部时钟CK_INT=72M
@@ -1457,41 +1261,10 @@ void DeviceConfigCenter::Timer6Config(int interval)
 
 	/* 基本定时器 TIMx,x 重新开时钟，开始计时 */
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
-#elif defined STM32F4
-	//arr：自动重装值。
-	//psc：时钟预分频数
-	//定时器溢出时间计算方法 : Tout = ((arr + 1)*(psc + 1)) / Ft us.
-	//Ft=定时器工作频率,单位:Mhz
-	u16 arr = interval - 1;
-	u16 psc = 8400 - 1;
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;
-
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);  ///使能TIM时钟
-
-	TIM_TimeBaseInitStructure.TIM_Period = arr; 	//自动重装载值
-	TIM_TimeBaseInitStructure.TIM_Prescaler = psc;  //定时器分频
-	TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up; //向上计数模式
-	TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-	TIM_TimeBaseInit(TIM6, &TIM_TimeBaseInitStructure);//初始化TIM
-
-	TIM_ITConfig(TIM6, TIM_IT_Update, ENABLE); //允许定时器更新中断
-	TIM_Cmd(TIM6, ENABLE); //使能定时器
-
-	//NVIC_InitStructure.NVIC_IRQChannel = TIM6_IRQn; //定时器中断
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x01; //抢占优先级1
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x03; //子优先级3
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-#endif
 }
 //定时器配置
 void DeviceConfigCenter::Timer7Config(int interval)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
 	// 开启TIMx_CLK,x,即内部时钟CK_INT=72M
@@ -1521,70 +1294,10 @@ void DeviceConfigCenter::Timer7Config(int interval)
 
 	/* 基本定时器 TIMx,x 重新开时钟，开始计时 */
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
-#elif defined STM32F4
-	//arr：自动重装值。
-	//psc：时钟预分频数
-	//定时器溢出时间计算方法 : Tout = ((arr + 1)*(psc + 1)) / Ft us.
-	//Ft=定时器工作频率,单位:Mhz
-	u16 arr = interval - 1;
-	u16 psc = 8400 - 1;
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;
-
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);  ///使能TIM时钟
-
-	TIM_TimeBaseInitStructure.TIM_Period = arr; 	//自动重装载值
-	TIM_TimeBaseInitStructure.TIM_Prescaler = psc;  //定时器分频
-	TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up; //向上计数模式
-	TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-	TIM_TimeBaseInit(TIM7, &TIM_TimeBaseInitStructure);//初始化TIM
-
-	TIM_ITConfig(TIM7, TIM_IT_Update, ENABLE); //允许定时器更新中断
-	TIM_Cmd(TIM7, ENABLE); //使能定时器
-
-	NVIC_InitStructure.NVIC_IRQChannel = TIM7_IRQn; //定时器中断
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x01; //抢占优先级1
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x03; //子优先级3
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-#endif
 }
 //定时器配置
 void DeviceConfigCenter::Timer8Config(int interval)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
-
-#elif defined STM32F4
-	//arr：自动重装值。
-	//psc：时钟预分频数
-	//定时器溢出时间计算方法 : Tout = ((arr + 1)*(psc + 1)) / Ft us.
-	//Ft=定时器工作频率,单位:Mhz
-	u16 arr = interval - 1;
-	u16 psc = 8400 - 1;
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;
-
-	//RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM8, ENABLE);  ///使能TIM时钟
-
-	TIM_TimeBaseInitStructure.TIM_Period = arr; 	//自动重装载值
-	TIM_TimeBaseInitStructure.TIM_Prescaler = psc;  //定时器分频
-	TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up; //向上计数模式
-	TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-	TIM_TimeBaseInit(TIM8, &TIM_TimeBaseInitStructure);//初始化TIM
-
-	TIM_ITConfig(TIM8, TIM_IT_Update, ENABLE); //允许定时器更新中断
-	TIM_Cmd(TIM8, ENABLE); //使能定时器
-
-	//NVIC_InitStructure.NVIC_IRQChannel = TIM8_IRQn; //定时器中断
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x01; //抢占优先级1
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x03; //子优先级3
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-#endif
 }
 void DeviceConfigCenter::TimerConfigNvic(TIMER tim, int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
@@ -1643,34 +1356,12 @@ void DeviceConfigCenter::TimerConfigNvic(TIMER tim, int NVIC_PriorityGroup, int 
 }
 void DeviceConfigCenter::Timer0ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
-
-#elif defined STM32F4
-
-#endif
 }
 void DeviceConfigCenter::Timer1ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
-
-#elif defined STM32F4
-
-#endif
 }
 void DeviceConfigCenter::Timer2ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
-#if defined STM32F0
-	NVIC_InitTypeDef   NVIC_InitStructure;
-
-	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPriority = 2;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-#elif defined STM32F1
 	NVIC_InitTypeDef NVIC_InitStructure;
 	// 设置中断组为0
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
@@ -1685,15 +1376,9 @@ void DeviceConfigCenter::Timer2ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = NVIC_IRQChannelSubPriorit;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
-#elif defined STM32F4
-
-#endif
 }
 void DeviceConfigCenter::Timer3ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
 	NVIC_InitTypeDef NVIC_InitStructure;
 	// 设置中断组为0
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
@@ -1708,15 +1393,9 @@ void DeviceConfigCenter::Timer3ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = NVIC_IRQChannelSubPriorit;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
-#elif defined STM32F4
-
-#endif
 }
 void DeviceConfigCenter::Timer4ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
 	NVIC_InitTypeDef NVIC_InitStructure;
 	// 设置中断组为0
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
@@ -1731,15 +1410,9 @@ void DeviceConfigCenter::Timer4ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = NVIC_IRQChannelSubPriorit;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
-#elif defined STM32F4
-
-#endif
 }
 void DeviceConfigCenter::Timer5ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
 #ifdef STM32F10X_HD
 	NVIC_InitTypeDef NVIC_InitStructure;
 	// 设置中断组为0
@@ -1756,15 +1429,9 @@ void DeviceConfigCenter::Timer5ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 #endif
-#elif defined STM32F4
-
-#endif
 }
 void DeviceConfigCenter::Timer6ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
 #ifdef STM32F10X_HD
 	NVIC_InitTypeDef NVIC_InitStructure;
 	// 设置中断组为0
@@ -1781,15 +1448,9 @@ void DeviceConfigCenter::Timer6ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 #endif
-#elif defined STM32F4
-
-#endif
 }
 void DeviceConfigCenter::Timer7ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
 #ifdef STM32F10X_HD
 	NVIC_InitTypeDef NVIC_InitStructure;
 	// 设置中断组为0
@@ -1806,17 +1467,7 @@ void DeviceConfigCenter::Timer7ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQCh
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 #endif
-#elif defined STM32F4
-
-#endif
 }
 void DeviceConfigCenter::Timer8ConfigNvic(int NVIC_PriorityGroup, int NVIC_IRQChannelPreemptionPriority, int NVIC_IRQChannelSubPriorit)
 {
-#if defined STM32F0
-
-#elif defined STM32F1
-
-#elif defined STM32F4
-
-#endif
 }
