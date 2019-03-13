@@ -10,3 +10,7 @@
 /SampleF1/*.Ace
 /SampleF4/*.Ace
 /Project/JLinkLog.txt
+/Project/VC2017
+/Project/Objects
+/Project/Listings
+/Project/*.log
