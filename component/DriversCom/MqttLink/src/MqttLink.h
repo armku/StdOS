@@ -18,7 +18,7 @@ public:
 	char * ClientID;//客户端id，不能大于23字节
 	char* Topic;//主题
 	int8_t FixHead;//报文头	
-	int step = 0;//运行步骤
+	int step;//运行步骤
 	uint16_t MessageID;//信号ID
 public:
 	MqttLink(HardwareSerial0_T &uart);

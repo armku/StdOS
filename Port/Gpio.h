@@ -1,5 +1,5 @@
-#ifndef _STD_GPIO_H
-#define _STD_GPIO_H
+#ifndef _STD_GPIO_H1
+#define _STD_GPIO_H1
 
 #include <stdint.h>
 #include "Pin.h"
@@ -31,6 +31,8 @@ typedef enum
 	AF_PP_PD,
 } PIN_MODE;
 
+
+
 class Gpio
 {
 public:
@@ -47,8 +49,8 @@ public:
 public:
 	Pin _Pin;
 	bool	Opened;		// 是否已经打开
-	uint8_t	Invert = 0;	// 是否倒置输入输出
-	bool OpenDrain = false;	// 是否开漏输出
+	uint8_t	Invert;	// 是否倒置输入输出
+	bool OpenDrain;	// 是否开漏输出
 };
 
 #endif // !_STD_GPIO_H

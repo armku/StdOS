@@ -37,7 +37,7 @@ void EspDemoLinkTestInit();
 void setup()
 {
 	led1.SetPin(PB0);
-	led1.mode(PIN_MODE::OUTPUT_PP);
+	led1.mode(OUTPUT_PP);
 	Serial.begin(115200);
 
 	int avi = Serial.available();

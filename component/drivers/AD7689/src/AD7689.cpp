@@ -31,10 +31,10 @@ void CAD7689::SetPin(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
     this->ppinsdo.SetPin(pinsdo);
     this->ppincnv.SetPin(pincnv);
 	
-	this->ppinsck.mode(PIN_MODE::OUTPUT_OD);
-    this->ppinsdi.mode(PIN_MODE::OUTPUT_OD);
-    this->ppinsdo.mode(PIN_MODE::INPUT);
-    this->ppincnv.mode(PIN_MODE::OUTPUT_OD);
+	this->ppinsck.mode(OUTPUT_OD);
+    this->ppinsdi.mode(OUTPUT_OD);
+    this->ppinsdo.mode(INPUT);
+    this->ppincnv.mode(OUTPUT_OD);
 }
 
 uint16_t CAD7689::AD_Read(void)

@@ -216,10 +216,10 @@ bool Task::CheckTime(uint64_t end, bool isSleep)
 void Task::Init()
 {
     this->ID = 0; // 编号
-    this->Name = nullptr; // 名称
+    this->Name = NULL; // 名称
 
-    this->Callback = nullptr; // 回调
-    this->Param = nullptr; // 参数
+    this->Callback = NULL; // 回调
+    this->Param = NULL; // 参数
 
     this->Period = 0; // 周期ms
     this->NextTime = 0; // 下一次执行时间ms

@@ -41,7 +41,7 @@ private:
 template<typename T>
 class List : public IList
 {
-	static_assert(sizeof(T) <= 4, "List only support pointer or int");
+//	static_assert(sizeof(T) <= 4, "List only support pointer or int");
 public:	
 	// 添加单个元素
     void Add(T item) { IList::Add((void*)item); }

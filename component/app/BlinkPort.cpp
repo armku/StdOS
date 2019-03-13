@@ -32,7 +32,7 @@ void BlinkPort::Start()
 		this->Index = 0;
 		for(int i=0;i<this->Count;i++)
 		{
-			this->Ports[i]->mode(PIN_MODE::OUTPUT_OD_PU);
+			this->Ports[i]->mode(OUTPUT_OD_PU);
 		}
 		if(this->_tid ==0)
 			this->_tid = sys.AddTask((void (BlinkPort::*)())&BlinkPort::Blink,(BlinkPort *)this,-1,-1,"иак╦╤к©з");

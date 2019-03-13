@@ -53,8 +53,8 @@ private:
 	float GetTemp1Res();
 	float Temp1Test();
 	uint32_t ad7124Buf[AD7124_BUFSIZE];
-	uint8_t ad7124BufCnt = 0;
-	uint8_t ad7124Int = 0;
+	uint8_t ad7124BufCnt;
+	uint8_t ad7124Int;
 
 };
 #endif

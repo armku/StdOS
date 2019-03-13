@@ -78,7 +78,7 @@ void Sys_T::Sleep(uint32_t dwMs)const
 		dwMs -= executems;
 	}
 	if (dwMs)
-		Time.Sleep(dwMs, nullptr);
+		Time.Sleep(dwMs, NULL);
 }
 
 // Œ¢√Îº∂—”≥Ÿ

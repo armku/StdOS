@@ -5,10 +5,10 @@
 
 void Spi::Init()
 {
-	this->_clk.mode(PIN_MODE::AF_PP_PD);
-	this->_miso.mode(PIN_MODE::AF_PP_PD);
-	this->_mosi.mode(PIN_MODE::AF_PP_PD);
-	this->_nss.mode(PIN_MODE::OUTPUT_OD_PU);
+	this->_clk.mode(AF_PP_PD);
+	this->_miso.mode(AF_PP_PD);
+	this->_mosi.mode(AF_PP_PD);
+	this->_nss.mode(OUTPUT_OD_PU);
 
 	this->Retry = 200; //默认重试次数为200
 }
@@ -303,7 +303,7 @@ void SpiSoft::Open()
 	}
 	this->Stop();
 	this->_clk.Open();
-	this->_miso.mode(PIN_MODE::INPUT);
+	this->_miso.mode(INPUT);
 	this->_mosi.Open();
 	this->_nss.Open();
 }

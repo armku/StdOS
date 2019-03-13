@@ -332,7 +332,7 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls>--cpp11</MiscControls>
+              <MiscControls></MiscControls>
               <Define>STM32F1,DEBUG,STM32F10X_MD, USE_STDPERIPH_DRIVER,HAVE_HWSERIAL0</Define>
               <Undefine></Undefine>
               <IncludePath>..\Bsp\ST\STM32F1\CMSIS;..\Bsp\ST\STM32F1\FWLib\inc;..\wiring;..\Arduino;..\Port;..\StdOS</IncludePath>
