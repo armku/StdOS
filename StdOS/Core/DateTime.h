@@ -19,7 +19,7 @@ public:
 	DateTime(int year, int month, int day);
 	DateTime(int seconds);
 	DateTime(const DateTime& value);
-	DateTime(DateTime&& value);
+//	DateTime(DateTime&& value);
 
 	DateTime& operator=(int seconds);
     DateTime& operator=(const DateTime& value);
@@ -69,7 +69,7 @@ public:
 	f短全部 M/d/yy HH:mm
 	F长全部 yyyy-MM-dd HH:mm:ss
 	*/
-	//cstring GetString(uint8_t kind = 'F', char* str = nullptr);
+	//cstring GetString(uint8_t kind = 'F', char* str = NULL);
 private:
 	void Init();
 };

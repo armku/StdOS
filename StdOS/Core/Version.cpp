@@ -27,7 +27,7 @@ void memset1(T1 *buf, int len, char val)
 
 static void parse(char* str, int* major, int* minor, int* year, int* monday)
 {
-	auto len = strlen(str);
+	int len = strlen(str);
 	char buf[10];
 	int dotpos[5];
 	int add = 0;
@@ -102,7 +102,7 @@ int Version::Show(char* buf, int pos)
 }
 Version &Version::operator = (const Version &ver)
 {
-	auto v = new Version(ver.Major, ver.Minor, ver.Year, ver.MonthDay);
+	Version* v = new Version(ver.Major, ver.Minor, ver.Year, ver.MonthDay);
 	v->Major = ver.Major;
 	v->Minor = ver.Minor;
 	v->Year = ver.Year;

@@ -25,7 +25,7 @@ public:
     uint32_t CurrentTicks() const;	// 当前滴答时钟
 	uint64_t Current() const; 		// 当前毫秒数
 
-	void Sleep(int ms, bool* running = nullptr) const;
+	void Sleep(int ms, bool* running = NULL) const;
     void Delay(int us) const;	// 微秒级延迟	
 
 	uint32_t TicksToUs(uint32_t ticks) const;
@@ -46,7 +46,7 @@ public:
 
 	void Reset();
 	int Elapsed() const;	// 逝去的时间，微秒
-	void Show(cstring format = nullptr) const;
+	void Show(cstring format = NULL) const;
 };
 
 /*

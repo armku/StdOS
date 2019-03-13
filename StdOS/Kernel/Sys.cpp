@@ -81,7 +81,7 @@ void TSys::Sleep(int ms)const
 		ms -= executems;
 	}
 	if (ms)
-		Time.Sleep(ms, nullptr);
+		Time.Sleep(ms, NULL);
 }
 
 // Î¢Ãë¼¶ÑÓ³Ù
@@ -132,7 +132,7 @@ bool TSys::SetTask(uint32_t taskid, bool enable, int msNextTime)const
 
 	if (taskid)
 	{
-		auto tsk = Task::Get(taskid);
+		Task* tsk = Task::Get(taskid);
 		if (tsk)
 		{
 			tsk->Set(enable, msNextTime);

@@ -9,7 +9,7 @@ OutputPort led1;
 
 void LedTask(void *param)
 {
-	auto leds = (OutputPort*)param;
+	OutputPort* leds = (OutputPort*)param;
 	*leds = !* leds;
 }
 

@@ -29,9 +29,9 @@ protected:
 class OutputPort : public Port
 {
 public:
-    uint8_t Invert		= 2;		// 是否倒置输入输出。默认2表示自动检测
-    bool OpenDrain	= false;	// 是否开漏输出
-    uint8_t Speed		= 50;		// 速度
+    uint8_t Invert;		// 是否倒置输入输出。默认2表示自动检测
+    bool OpenDrain;	// 是否开漏输出
+    uint8_t Speed;		// 速度
 
     OutputPort();
     OutputPort(Pin pin, uint8_t invert, bool openDrain = false, uint8_t speed = 50);
@@ -70,9 +70,9 @@ public:
         DOWN	= 0x02,	// 下拉电阻
     }PuPd;
 	    
-    uint8_t	Invert		= 2;	// 是否倒置输入输出。默认2表示自动检测
-    bool	Floating	= true;	// 是否浮空输入
-    PuPd	Pull		= UP;	// 上拉下拉电阻
+    uint8_t	Invert;	// 是否倒置输入输出。默认2表示自动检测
+    bool	Floating;	// 是否浮空输入
+    PuPd	Pull;	// 上拉下拉电阻
 	
 	InputPort(){}
 	// 读取状态

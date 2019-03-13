@@ -4,16 +4,18 @@
 /* 类型定义 */
 typedef const char*		cstring;
 
+#define NULL 0
+
 #define UInt64_Max 0xFFFFFFFFFFFFFFFFull
 
 // 逐步使用char替代byte，在返回类型中使用char*替代void*
 // 因为格式化输出时，可以用%c输出char，用%s输出char*
 // 根对象
-class Object
-{
-public:
-	
-};
+//class Object
+//{
+//public:
+//	
+//};
 void assert_failed(uint8_t *file, uint32_t line, char *errstr);
 // 数组长度
 #define ArrayLength(arr) (int)(sizeof(arr)/sizeof(arr[0]))

@@ -39,10 +39,10 @@ DateTime::DateTime(const DateTime &value)
 {
 	*this=value;
 }
-DateTime::DateTime(DateTime&& value)
-{
-  
-}
+//DateTime::DateTime(DateTime&& value)
+//{
+//  
+//}
 
 DateTime &DateTime::operator = (int seconds)
 {

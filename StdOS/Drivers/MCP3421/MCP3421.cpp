@@ -30,9 +30,9 @@ int32_t MCP3421::MCP3421_ReadOne(void)
 	this->IIC.Start();
 	this->IIC.WriteByte(0XD1);
 	this->IIC.WaitAck();
-	auto adh = this->IIC.ReadByte(true);
-	auto adm = this->IIC.ReadByte(true);
-	auto adl = this->IIC.ReadByte(false);
+	uint8_t adh = this->IIC.ReadByte(true);
+	uint8_t adm = this->IIC.ReadByte(true);
+	uint8_t adl = this->IIC.ReadByte(false);
 	volatil = adh;
 	volatil <<= 8;
 	volatil += adm;
@@ -58,6 +58,6 @@ int32_t MCP3421::GetADValue(_Gain3421 gain)
 }
 float MCP3421::GetVolt()
 {
-	auto val = this->GetADValue(GAIN1);
+	int32_t val = this->GetADValue(GAIN1);
 	return val * 2.048 / 0X20000;
 }
