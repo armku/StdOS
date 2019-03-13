@@ -1,11 +1,59 @@
 #include <math.h>
 #include "Util.h"
+#include <String.h>
 
 static float DOTMASK[] = { 1,10,100,1000 };
 static float boxcartmp[100];//滤波辅助变量
 #ifdef __cplusplus
 extern "C" {
 #endif
+	#define NULL 0
+	char Value2Hex(char val)
+	{
+		char ret=val&0x0f;
+		if(ret<0x0A)
+			return ret+'0';
+		else
+			return ret-10+'A';
+	}
+	int Str2Hex(char *str,char *hex)
+{
+        int high = 0;
+        int low = 0;
+        int temp = 0;
+
+        if (NULL==str || NULL==hex){
+                //printf("the str or hex is wrong\n");
+                return -1;
+        }
+
+        if (0==strlen(str)){
+                //printf("the input str is wrong\n");
+                return -2;
+        }
+
+        while(*str)
+        {
+                temp = (int)(*str);
+                high = temp>>4;
+                low = temp & 15;
+                *hex = Value2Hex(high);
+                hex++;
+                *hex = Value2Hex(low);
+                hex++;
+                str++;
+        }
+        *hex = '\0';
+        return 0;
+}
+void ClearRAM(uint8_t* ram,uint32_t n)
+{
+  uint32_t i;
+  for (i = 0;i < n;i++)
+  {
+    ram[i] = 0x00;
+  }
+}
 	//矩形波过滤器,目前限定100个数据量
 	void BoxCar(int* buf, int len)
 	{
