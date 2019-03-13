@@ -1,24 +1,16 @@
 #include "Sys.h"
-#include "../User/Bsp.h"
-#include "../Bsp/Porting.h"
-
-void loop();
-void arduinoloop(void* param)
-{
-	loop();
-}
-
-void BspPlatformInit();
+#include "Bsp\Bsp.h"
+#include "OnChip\Configuration.h"
+#include "BspPlatform\BspPlatform.h"
 
 int main(void)
 {
-	sys.Init();
+	Sys.Init();
 	BspPlatformInit();
 #if DEBUG	
-	sys.ShowInfo();
+	Sys.ShowInfo();
 #endif 		
-	setup();
+	BspInit();
 
-	sys.Start();
-	sys.AddTask(arduinoloop, 0, 13, 1, "loop");
+	Sys.Start();
 }
