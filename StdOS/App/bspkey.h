@@ -63,13 +63,14 @@
     class KEY_FIFO
     {
         public:
-            void Init();
+			KEY_FIFO(){_bufSize=10;}
+			void Init();
             void Clear();
             void Push(uint8_t da);
             uint8_t Pop();
             uint8_t Pop2();
         private:
-            const int _bufSize = 10;
+            int _bufSize;// = 10;
             uint8_t Buf[10]; /* 键值缓冲区 */
             uint8_t Read; /* 缓冲区读指针1 */
             uint8_t Write; /* 缓冲区写指针 */

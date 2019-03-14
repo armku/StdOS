@@ -97,10 +97,11 @@ MaxP： 最大加热功率   pwmmax:  PWM 最大值
 class PID
 {
 public:
+	PID(){CountT=20;}
 	float SV;//设定值
 	float PV;//当前值
 
-	const int CountT = 20;
+	int CountT;// = 20;
 	float ET[21];//温度误差(在PID 模式下等于设置温度减去当前温度,在预测式负反馈模式下则相反）
 	float CurPow[21];
 	float vT;//升温速率
