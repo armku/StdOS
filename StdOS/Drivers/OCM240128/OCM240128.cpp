@@ -2,65 +2,38 @@
 #include "Sys.h"
 OCM240128::OCM240128()
 {
-	this->pince.Invert = 0;
-	this->pinwr.Invert = 0;
-	this->pinrd.Invert = 0;
-	this->pinfs.Invert = 0;
-	this->pinled.Invert = 0;
-	this->pinsta0.Invert = 0;
-	this->pinsta1.Invert = 0;
-	this->pinsta3.Invert = 0;
-	this->pincd.Invert = 0;
+	
 
-	this->data0.Invert = 0;
-	this->data1.Invert = 0;
-	this->data2.Invert = 0;
-	this->data3.Invert = 0;
-	this->data4.Invert = 0;
-	this->data5.Invert = 0;
-	this->data6.Invert = 0;
-	this->data7.Invert = 0;
-
-	this->pince.OpenDrain = false;
-	this->pinwr.OpenDrain = false;
-	this->pinrd.OpenDrain = false;
-	this->pinfs.OpenDrain = false;
-	this->pinled.OpenDrain = false;
-	this->pinsta0.OpenDrain = false;
-	this->pinsta1.OpenDrain = false;
-	this->pinsta3.OpenDrain = false;
-	this->pincd.OpenDrain = false;
-
-	this->data0.OpenDrain = false;
-	this->data1.OpenDrain = false;
-	this->data2.OpenDrain = false;
-	this->data3.OpenDrain = false;
-	this->data4.OpenDrain = false;
-	this->data5.OpenDrain = false;
-	this->data6.OpenDrain = false;
-	this->data7.OpenDrain = false;
 }
 
-void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led, Pin sta0, Pin sta1, Pin sta3, Pin cd)
+void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led,Pin cd)
 {
 	this->pince.Set(ce);
 	this->pinwr.Set(wr);
 	this->pinrd.Set(rd);
-	this->pinfs.Set(fs);
+	/*this->pinfs.Set(fs);*/
 	this->pinled.Set(led);
-	this->pinsta0.Set(sta0);
-	this->pinsta1.Set(sta1);
-	this->pinsta3.Set(sta3);
 	this->pincd.Set(cd);
+
+	this->pince.Invert = 0;
+	this->pinwr.Invert = 0;
+	this->pinrd.Invert = 0;
+	/*this->pinfs.Invert = 0;*/
+	this->pinled.Invert = 0;
+	this->pincd.Invert = 0;
+
+	this->pince.OpenDrain = false;
+	this->pinwr.OpenDrain = false;
+	this->pinrd.OpenDrain = false;
+	/*this->pinfs.OpenDrain = false;*/
+	this->pinled.OpenDrain = false;
+	this->pincd.OpenDrain = false;
 
 	this->pince.Open();
 	this->pinwr.Open();
 	this->pinrd.Open();
-	this->pinfs.Open();
+	/*this->pinfs.Open();*/
 	this->pinled.Open();
-	this->pinsta0.Open();
-	this->pinsta1.Open();
-	this->pinsta3.Open();
 	this->pincd.Open();
 }
 void OCM240128::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d6, Pin d7)
@@ -73,6 +46,24 @@ void OCM240128::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d
 	this->data5.Set(d5);
 	this->data6.Set(d6);
 	this->data7.Set(d7);
+
+	this->data0.Invert = 0;
+	this->data1.Invert = 0;
+	this->data2.Invert = 0;
+	this->data3.Invert = 0;
+	this->data4.Invert = 0;
+	this->data5.Invert = 0;
+	this->data6.Invert = 0;
+	this->data7.Invert = 0;
+
+	this->data0.OpenDrain = false;
+	this->data1.OpenDrain = false;
+	this->data2.OpenDrain = false;
+	this->data3.OpenDrain = false;
+	this->data4.OpenDrain = false;
+	this->data5.OpenDrain = false;
+	this->data6.OpenDrain = false;
+	this->data7.OpenDrain = false;
 
 	this->data0.Open();
 	this->data1.Open();
@@ -102,7 +93,7 @@ void OCM240128::writedata(uint8_t da)
 ************************************************************************************************/
 void OCM240128::Init()
 {
-	this->pinfs = 0;
+	//this->pinfs = 0;
 	this->pince = 0;
 	this->pinwr = 1;
 	this->pinrd = 1;
@@ -183,6 +174,23 @@ void OCM240128::Draw_hline(uint8_t x, uint8_t y, uint16_t count)
 	{
 		this->wcmd(0xff, 0xc0);
 	}
+}
+void OCM240128::Test()
+{
+	this->data0 = 0;
+	this->data1 = 0;
+	this->data2 = 0;
+	this->data3 = 0;
+	this->data4 = 0;
+	this->data5 = 0;
+	this->data6 = 0;
+	this->data7 = 0;
+	
+	this->pincd = 0;
+	this->pinrd = 0;
+	this->pince = 0;
+	this->pinwr = 0;
+
 }
 
 //»­ÊúÏß

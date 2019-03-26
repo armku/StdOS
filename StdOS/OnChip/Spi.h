@@ -22,7 +22,7 @@
         private:
             uint8_t _index;
             void *_SPI;
-            Pin Pins[4]; // NSS/CLK/MISO/MOSI
+            //Pin Pins[4]; // NSS/CLK/MISO/MOSI
             OutputPort _nss;
 
             AlternatePort _clk;

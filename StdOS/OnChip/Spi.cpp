@@ -4,16 +4,6 @@
 
 void Spi::Init()
 {
-	this->_clk.Invert = false;
-	this->_miso.Invert = false;
-	this->_mosi.Invert = false;
-	this->_nss.Invert = false;
-
-	this->_clk.OpenDrain = false;
-	this->_miso.OpenDrain = false;
-	this->_mosi.OpenDrain = false;
-	this->_nss.OpenDrain = false;
-
 	this->Retry = 200; //默认重试次数为200
 }
 
@@ -65,18 +55,43 @@ void Spi::Init(SPI spi, uint32_t speedHz)
 
 void Spi::SetPin(Pin clk, Pin miso, Pin mosi)
 {
-	this->Pins[1] = clk;
+	/*this->Pins[1] = clk;
 	this->Pins[2] = miso;
 	this->Pins[3] = mosi;
 
 	this->_clk.Set(this->Pins[1]);
 	this->_miso.Set(this->Pins[2]);
-	this->_mosi.Set(this->Pins[3]);
+	this->_mosi.Set(this->Pins[3]);*/
+
+	this->_clk.Invert = false;
+	this->_miso.Invert = false;
+	this->_mosi.Invert = false;
+
+	this->_clk.OpenDrain = false;
+	this->_miso.OpenDrain = false;
+	this->_mosi.OpenDrain = false;
+
+	this->_clk.Set(clk);
+	this->_miso.Set(miso);
+	this->_mosi.Set(mosi);
+
+	this->_clk.Open();
+	this->_miso.Open();
+	this->_mosi.Open();
 }
 void Spi::SetNss(Pin nss)
 {
-	this->Pins[0] = nss;
-	this->_nss.Set(this->Pins[0]);
+	/*this->Pins[0] = nss;
+	this->_nss.Set(this->Pins[0]);*/
+
+	this->_nss.Invert = false;
+
+	this->_nss.OpenDrain = false;
+
+	this->_nss.Set(nss);
+
+	this->_nss.Open();
+
 	this->Open();
 }
 
@@ -123,16 +138,12 @@ void Spi::Stop()
 ////////////////////////////SpiSoft////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 SpiSoft::SpiSoft(CPOLTYPE cpol, CPHATYPE cpha, uint32_t speedHz)
-{
-	this->_nss.Invert = false;
-	this->_clk.Invert = false;
-	this->_mosi.Invert = false;
-	this->_miso.Invert = false;
+{	
 	//this->delayus=speedHz;
 #ifdef STM32F0
 	this->delayus = 0;
 #elif defined STM32F1
-	this->delayus = 0;
+	this->delayus = 10;
 #elif defined STM32F4
 	this->delayus = 0;
 #endif
@@ -142,16 +153,30 @@ SpiSoft::SpiSoft(CPOLTYPE cpol, CPHATYPE cpha, uint32_t speedHz)
 
 void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi)
 {
+	this->_clk.Invert = false;
+	this->_mosi.Invert = false;
+	this->_miso.Invert = false;
+
+	this->_clk.OpenDrain = false;
+	this->_mosi.OpenDrain = false;
+	//this->_miso.OpenDrain = false;
+
 	this->_clk.Set(clk);
 	this->_mosi.Set(mosi);
 	this->_miso.Set(miso);
 
-	this->Open();
+	this->_clk.Open();
+	this->_mosi.Open();
+	this->_miso.Open();
 }
 void SpiSoft::SetNss(Pin nss)
 {
+	this->_nss.Invert = false;
+
+	this->_nss.OpenDrain = false;
+
 	this->_nss.Set(nss);
-	this->Open();
+	this->_nss.Open();
 }
 
 /*---------------------------------------------------------
@@ -306,10 +331,10 @@ void SpiSoft::Open()
 		this->_clk = 0;
 	}
 	this->Stop();
-	this->_clk.Open();
+	/*this->_clk.Open();
 	this->_miso.Open();
 	this->_mosi.Open();
-	this->_nss.Open();
+	this->_nss.Open();*/
 }
 void SpiSoft::Close()
 {
@@ -879,10 +904,10 @@ void Spi::OnClose()
 	debug_printf("    NSS : ");
 	this->_nss.Set(P0);
 
-	this->Pins[0] = P0;
-	this->Pins[1] = P0;
-	this->Pins[2] = P0;
-	this->Pins[3] = P0;
+//	this->Pins[0] = P0;
+//	this->Pins[1] = P0;
+//	this->Pins[2] = P0;
+//	this->Pins[3] = P0;
 #elif defined STM32F4
 	this->Stop();
 	switch (this->_index)
