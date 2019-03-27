@@ -28,7 +28,7 @@ public:
 	uint8_t Speed;		// 速度
 	//end OutputPort
 	//OutputPort
-
+	/*operator bool() const { return Read(); }*/
 
 	//end OutputPort
 	virtual void OpenPinAlternatePort(void* param);
@@ -61,14 +61,14 @@ public:
 	
     void Write(bool value) const;
 	// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
-    virtual bool Read() const;
+    /*virtual bool Read() const;*/
 	bool ReadInput() const;
 
     static void Write(Pin pin, bool value);
 
     OutputPort& operator=(bool value) { Write(value); return *this; }
     OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }
-    operator bool() const { return Read(); }
+    /*operator bool() const { return Read(); }*/
 };
 
 #endif //_Port_H_
