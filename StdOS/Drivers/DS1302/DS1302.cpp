@@ -29,10 +29,6 @@ void DS1302::SetPin(Pin pinsck, Pin pinio, Pin pinrst)
 	this->pio.Set(pinio);
 	this->prst.Set(pinrst);
 
-	this->psck.Invert = false;
-	this->pio.Invert = false;
-	this->prst.Invert = false;
-
 	this->psck.OpenDrain = true;
 	this->pio.OpenDrain = true;
 	this->prst.OpenDrain = true;

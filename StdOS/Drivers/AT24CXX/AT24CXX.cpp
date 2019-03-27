@@ -122,7 +122,6 @@ void AT24CXX::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
 	{
 		this->pinWP.Set(pinwriteprotect);
 		this->pinWP.OpenDrain = false;
-		this->pinWP.Invert = false;
 		this->pinWP.Open();
 		this->pinWP = 1;
 	}

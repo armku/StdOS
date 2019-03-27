@@ -69,9 +69,6 @@ int main(void)
 
     // 初始化为输出
 	OutputPort leds[] = {PD0, PD1};
-	for(int i=0; i<ArrayLength(leds); i++)
-		leds[i].Invert = true;
-
     // 初始化为中断输入
     Pin ips[] = { PE9, PE8, PE4, PE5, PE6, PE7};
     InputPort btns[6];

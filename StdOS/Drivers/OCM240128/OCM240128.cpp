@@ -14,14 +14,7 @@ void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led,Pin cd)
 	/*this->pinfs.Set(fs);*/
 	this->pinled.Set(led);
 	this->pincd.Set(cd);
-
-	this->pince.Invert = 0;
-	this->pinwr.Invert = 0;
-	this->pinrd.Invert = 0;
-	/*this->pinfs.Invert = 0;*/
-	this->pinled.Invert = 0;
-	this->pincd.Invert = 0;
-
+		
 	this->pince.OpenDrain = false;
 	this->pinwr.OpenDrain = false;
 	this->pinrd.OpenDrain = false;
@@ -46,15 +39,6 @@ void OCM240128::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d
 	this->data5.Set(d5);
 	this->data6.Set(d6);
 	this->data7.Set(d7);
-
-	this->data0.Invert = 0;
-	this->data1.Invert = 0;
-	this->data2.Invert = 0;
-	this->data3.Invert = 0;
-	this->data4.Invert = 0;
-	this->data5.Invert = 0;
-	this->data6.Invert = 0;
-	this->data7.Invert = 0;
 
 	this->data0.OpenDrain = false;
 	this->data1.OpenDrain = false;

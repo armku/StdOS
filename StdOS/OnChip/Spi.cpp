@@ -63,10 +63,6 @@ void Spi::SetPin(Pin clk, Pin miso, Pin mosi)
 	this->_miso.Set(this->Pins[2]);
 	this->_mosi.Set(this->Pins[3]);*/
 
-	this->_clk.Invert = false;
-	this->_miso.Invert = false;
-	this->_mosi.Invert = false;
-
 	this->_clk.OpenDrain = false;
 	this->_miso.OpenDrain = false;
 	this->_mosi.OpenDrain = false;
@@ -83,8 +79,6 @@ void Spi::SetNss(Pin nss)
 {
 	/*this->Pins[0] = nss;
 	this->_nss.Set(this->Pins[0]);*/
-
-	this->_nss.Invert = false;
 
 	this->_nss.OpenDrain = false;
 
@@ -153,10 +147,6 @@ SpiSoft::SpiSoft(CPOLTYPE cpol, CPHATYPE cpha, uint32_t speedHz)
 
 void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi)
 {
-	this->_clk.Invert = false;
-	this->_mosi.Invert = false;
-	this->_miso.Invert = false;
-
 	this->_clk.OpenDrain = false;
 	this->_mosi.OpenDrain = false;
 	//this->_miso.OpenDrain = false;
@@ -171,8 +161,6 @@ void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi)
 }
 void SpiSoft::SetNss(Pin nss)
 {
-	this->_nss.Invert = false;
-
 	this->_nss.OpenDrain = false;
 
 	this->_nss.Set(nss);

@@ -28,12 +28,6 @@ void SSD1309::SetPinSpi(Pin sclk,Pin sdin,Pin dc,Pin res,Pin cs)
     this->_sclk.OpenDrain = false;
     this->_sdin.OpenDrain = false;
 
-    this->_cs.Invert = 0;
-    this->_res.Invert = 0;
-    this->_dc.Invert = 0;
-    this->_sclk.Invert = 0;
-    this->_sdin.Invert = 0;
-
     this->_cs.Open();
     this->_res.Open();
     this->_dc.Open();

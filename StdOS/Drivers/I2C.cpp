@@ -6,8 +6,6 @@ SoftI2C::SoftI2C(uint32_t speedHz)
 	this->_delay=4;
 	this->SCL.OpenDrain = false;
     this->SDA.OpenDrain = true;//此处设置错误将导致IIC异常
-	this->SCL.Invert = false;
-	this->SDA.Invert = false;
 }
 
 void SoftI2C::SetPin(Pin scl, Pin sda)

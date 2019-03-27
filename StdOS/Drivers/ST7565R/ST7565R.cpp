@@ -24,13 +24,7 @@ void CLcd::SetPin(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs)
     this->pPinsid.OpenDrain=false;
     this->pPinres.OpenDrain=false;
     this->pPincs.OpenDrain=false; 
-	
-	this->pPinRS.Invert=0;
-    this->pPinsclk.Invert=0;
-    this->pPinsid.Invert=0;
-    this->pPinres.Invert=0;
-    this->pPincs.Invert=0;    
-	
+		
 	this->pPinRS.Open();
     this->pPinsclk.Open();
     this->pPinsid.Open();

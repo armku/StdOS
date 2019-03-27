@@ -32,7 +32,6 @@ void ModbusSlaveLinkRoutin(void* param)
 void ModbusSlaveLinkTestInit()
 {
 	p485dr.Set(PC2);
-	p485dr.Invert = false;
 	p485dr.OpenDrain = false;
 	p485dr.Open();
 	p485dr = 0;//接收模式

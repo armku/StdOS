@@ -55,7 +55,6 @@ OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain, uint8_t speed)
 	this->Speed = 50;
 	this->OpenDrain = openDrain;
 	this->Speed = speed;
-	this->Invert = invert;
 	if (pin != P0)
 	{
 		this->Set(pin);

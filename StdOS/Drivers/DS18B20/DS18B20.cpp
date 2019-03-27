@@ -7,8 +7,6 @@ void DS18B20::SetPin(Pin pin)
 	
 	this->_dio.OpenDrain=true;
 	
-	this->_dio.Invert=0;
-	
 	this->_dio.Open();
 	this->_dio = 1;
 }

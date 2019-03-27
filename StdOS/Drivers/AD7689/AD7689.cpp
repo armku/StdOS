@@ -11,11 +11,6 @@
 //0-本次读取的数据缓存保存位置(n-2); 2-AD7689通道选择
 CAD7689::CAD7689()
 {
-	this->ppinsck.Invert=false;
-    this->ppinsdi.Invert=false;
-    this->ppinsdo.Invert=false;
-    this->ppincnv.Invert=false;  
-
 	this->ppinsck.OpenDrain = false;
 	this->ppinsdi.OpenDrain = false;
 	//this->ppinsdo.OpenDrain = false;
