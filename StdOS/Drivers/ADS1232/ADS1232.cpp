@@ -36,9 +36,7 @@ void ADS1232::SetPinGain(Pin gain0, Pin gain1)
 }
 
 void ADS1232::SetSpeed(Speed speed)
-{
-    if (this->pSpeed._Pin != P0)
-    {
+{    
         switch (speed)
         {
             case SPEED10:
@@ -49,14 +47,11 @@ void ADS1232::SetSpeed(Speed speed)
                 break;
             default:
                 break;
-        }
-    }
+        }    
 }
 
 void ADS1232::SetGain(Gain gain)
-{
-    if ((this->pGain0._Pin != P0) && (this->pGain1._Pin != P0))
-    {
+{    
         switch (gain)
         {
             case GAIN1:
@@ -78,7 +73,6 @@ void ADS1232::SetGain(Gain gain)
             default:
                 break;
         }
-    }
 }
 
 void ADS1232::Init()

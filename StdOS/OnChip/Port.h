@@ -16,11 +16,10 @@ typedef enum
 	GPIO_AF_PP = 0x18//复用功能推挽输出
 }GPIOMode_T;
 
-// 端口基类
+// 端口类
 class Port
 {
-public:	
-    Pin		_Pin;		// 引脚  	
+public:
 	Port();
 	Port& SetPin(Pin pin);	// 设置引脚
 	void SetPinMode(GPIOMode_T mode);//设置管脚模式
@@ -38,6 +37,8 @@ public:
 
 	virtual bool Read() const;
 	operator bool() const { return Read(); }
+protected:
+	Pin		_Pin;		// 引脚  	
 private:
 	bool	Opened;		// 是否已经打开
 };
