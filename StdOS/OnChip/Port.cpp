@@ -97,16 +97,7 @@ bool Port::Open()
 			// 打开时钟
 			int gi = _Pin >> 4;
 			RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA << gi, ENABLE);
-
-			GPIO_InitTypeDef gpio;
-			// 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
-			GPIO_StructInit(&gpio);
-			gpio.GPIO_Pin = 1 << (this->_Pin & 0x0F);
-			this->OnOpen(&gpio);
-
-			GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
 		}
-
 		this->Opened = true;
 	}
 	return true;
@@ -132,14 +123,6 @@ bool Port::Open()
 				break;
 			}
 			}
-
-			GPIO_InitTypeDef gpio;
-			// 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
-			GPIO_StructInit(&gpio);
-			gpio.GPIO_Pin = 1 << (this->_Pin & 0x0F);
-			//this->OnOpen(&gpio);
-
-			GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
 		}
 
 		this->Opened = true;
@@ -159,16 +142,6 @@ bool Port::Open()
 		// 打开时钟
 		int gi = _Pin >> 4;
 		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
-
-		GPIO_InitTypeDef gpio;
-		// 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
-		GPIO_StructInit(&gpio);
-		gpio.GPIO_Pin = 1 << (this->_Pin & 0x0F);
-		this->OnOpen(&gpio);
-
-		GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
-		this->Opened = true;
-		return true;
 	}
 #endif
 }
