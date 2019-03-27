@@ -17,14 +17,14 @@ TimeCost::TimeCost()
 
 void TimeCost::Reset()
 {
-	this->Start = Time.Current();
+	this->Start = millis();
 	this->StartTicks = Time.CurrentTicks();
 }
 // 逝去的时间，微秒
 int TimeCost::Elapsed()const
 {
 	int ticks = Time.CurrentTicks() - this->StartTicks;
-	int times = Time.Current() - this->Start;
+	int times = millis() - this->Start;
 	int ret = 0;
 
 	if (ticks <= 0)
@@ -183,7 +183,7 @@ void TTime::Init()
 	}
 
 	// 当前毫秒数 计数值2000
-	uint64_t TTime::Current()const
+	uint64_t TTime::Current112233()const
 	{
 		return this->Milliseconds + DeviceConfigCenter::CurrentTick();
 	}
@@ -224,11 +224,11 @@ void TTime::Init()
 	//系统启动后的毫秒数
 	uint64_t millis()
 	{
-		return Time.Current();
+		return Time.Current112233();
 	}
 	//开机到现在的微妙数
 	uint64_t micros()
 	{
-		return Time.Current() *1000;
+		return Time.Current112233() *1000;
 	}
 
