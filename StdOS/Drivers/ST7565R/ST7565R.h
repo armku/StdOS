@@ -52,10 +52,10 @@
             uint16_t readPoint(uint16_t x, uint16_t y); //读取颜色
             uint8_t Interface_Table[8][128]; //显示缓冲区		        
         private:
-            OutputPort pPinRS;
-            OutputPort pPinsclk;
-            OutputPort pPinsid;
-            OutputPort pPinres;
-            OutputPort pPincs;
+            Port pPinRS;
+            Port pPinsclk;
+            Port pPinsid;
+            Port pPinres;
+            Port pPincs;
     };
 #endif

@@ -5,11 +5,11 @@
 
 char *AppVersion = "0.1.2018.1115"; //°æ±¾ºÅ
 
-OutputPort led1;
+Port led1;
 
 void LedTask(void *param)
 {
-	OutputPort* leds = (OutputPort*)param;
+	Port* leds = (Port*)param;
 	*leds = !* leds;
 }
 

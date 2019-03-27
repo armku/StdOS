@@ -21,15 +21,17 @@ public:
 	bool	Floating;	// 是否浮空输入
 	PuPd	Pull;	// 上拉下拉电阻
 	// END InputPort
-	//OutputPort
+	//Port
 	bool OpenDrain;	// 是否开漏输出
-	//end OutputPort
-	//OutputPort
+	//end Port
+	//Port
 	/*operator bool() const { return Read(); }*/
 	bool ReadInput() const;// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
 	static void Write(Pin pin, bool value);
-
-	//end OutputPort
+	void Write(bool value) const;
+	Port& operator=(bool value) { Write(value); return *this; }
+	Port& operator=(Port& port) { Write(port.Read()); return *this; }
+	//end Port
 	virtual void OpenPinAlternatePort(void* param);
 
 	Port();
@@ -50,12 +52,10 @@ protected:
 	virtual void OpenPinOutputPort(void* param);
 };
 // 输出口
-class OutputPort : public Port
-{
-public:  
-    void Write(bool value) const;
-    OutputPort& operator=(bool value) { Write(value); return *this; }
-    OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }
-};
+//class Port : public Port
+//{
+//public:  
+//    
+//};
 
 #endif //_Port_H_

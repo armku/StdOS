@@ -17,7 +17,7 @@
 			void Rest();
 			void SkipRom();
 		private:
-			OutputPort _dio;
+			Port _dio;
 		public:
 			char id[8];//…Ë±∏ID
 

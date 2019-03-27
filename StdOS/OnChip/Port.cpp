@@ -390,7 +390,7 @@ void Port::OnOpenInputPort(void *param)
 #endif
 }
 
-void OutputPort::Write(bool value)const
+void Port::Write(bool value)const
 {
 #if defined STM32F0
 	if (this->_Pin == P0)

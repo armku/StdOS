@@ -27,11 +27,11 @@
             int Read(bool cal=false);
         private:
             Port dout;
-            OutputPort sclk;
-            OutputPort pwdn;
-            OutputPort pSpeed;
-            OutputPort pGain0;
-            OutputPort pGain1;
+            Port sclk;
+            Port pwdn;
+            Port pSpeed;
+            Port pGain0;
+            Port pGain1;
         private:            
             int oldval;
     };

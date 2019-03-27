@@ -17,10 +17,10 @@
             void Init(void); //
             float getVolt(uint16_t ch); //获取通道电压值    
 		private:
-            OutputPort ppinsck;
-            OutputPort ppinsdi;
+            Port ppinsck;
+            Port ppinsdi;
             Port ppinsdo;
-            OutputPort ppincnv;
+            Port ppincnv;
 
             float volt[MAXCH]; //电压值
             uint16_t ADBuf[MAXCH]; //原始AD值

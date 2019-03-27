@@ -20,7 +20,7 @@ BlinkPort::~BlinkPort()
 	Sys.RemoveTask(this->_tid);
 }
 
-void BlinkPort::Add(OutputPort* port)
+void BlinkPort::Add(Port* port)
 {
 	this->Ports[this->Count++] = port;
 }

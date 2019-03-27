@@ -27,13 +27,13 @@
 			void WRByte(uint8_t dat, uint8_t cmd);
 		protected:
             //SPI
-			OutputPort _cs;
-            OutputPort _res;
-            OutputPort _dc;
-            OutputPort _sclk;
-            OutputPort _sdin;
+			Port _cs;
+            Port _res;
+            Port _dc;
+            Port _sclk;
+            Port _sdin;
 			//8080
-			OutputPort _wr;
-            OutputPort _rd;            
+			Port _wr;
+            Port _rd;            
     };
 #endif

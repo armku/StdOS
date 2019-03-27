@@ -23,11 +23,11 @@
             uint8_t _index;
             void *_SPI;
             //Pin Pins[4]; // NSS/CLK/MISO/MOSI
-            OutputPort _nss;
+            Port _nss;
 
-            OutputPort _clk;
-            OutputPort _miso;
-            OutputPort _mosi;
+            Port _clk;
+            Port _miso;
+            Port _mosi;
 
             void Init();
 
@@ -82,9 +82,9 @@
             void Start(); // 拉低NSS，开始传输
             void Stop(); // 拉高NSS，停止传输
         private:
-            OutputPort _nss;
-            OutputPort _clk;
-            OutputPort _mosi;
+            Port _nss;
+            Port _clk;
+            Port _mosi;
             Port _miso;
             uint32_t delayus; //延时时间
         private:

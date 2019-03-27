@@ -25,21 +25,21 @@ private:
 	void wcmd2(uint8_t dat1, uint8_t dat2, uint8_t cmd);
 	void writedata(uint8_t da);
 private:
-	OutputPort pinwr;
-	OutputPort pinrd;
-	OutputPort pince;
-	/*OutputPort pinfs;*/
-	OutputPort pinled;
-	OutputPort pincd;
+	Port pinwr;
+	Port pinrd;
+	Port pince;
+	/*Port pinfs;*/
+	Port pinled;
+	Port pincd;
 
-	OutputPort data0;
-	OutputPort data1;
-	OutputPort data2;
-	OutputPort data3;
-	OutputPort data4;
-	OutputPort data5;
-	OutputPort data6;
-	OutputPort data7;
+	Port data0;
+	Port data1;
+	Port data2;
+	Port data3;
+	Port data4;
+	Port data5;
+	Port data6;
+	Port data7;
 };
 
 #endif

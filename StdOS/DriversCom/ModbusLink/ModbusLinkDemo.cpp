@@ -9,7 +9,7 @@
 //测试 01 03 00 00 00 0A C5 CD
 USART usart222(USART2, 115200);
 ModbusSlaveLink modbusSlave(usart222);
-OutputPort p485dr;
+Port p485dr;
 uint16_t RegInputu16[144]; //输入寄存器
 uint16_t RegHoilding16[60];
 

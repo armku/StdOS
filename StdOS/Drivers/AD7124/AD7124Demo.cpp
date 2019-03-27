@@ -98,10 +98,10 @@ void ad7124test(void *param)
     /*double fdata = (2.5 *data) / (16777215 *128 * 0.001);
     debug_printf("R:%0.4f\r\n", fdata);*/
 }
-//OutputPort cs;
-//OutputPort sck;
-//OutputPort din;
-//OutputPort dout;
+//Port cs;
+//Port sck;
+//Port din;
+//Port dout;
 void ad71248Test()
 {
 	spi1.SetPin(PC1, PC2, PC3);
