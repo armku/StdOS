@@ -76,11 +76,11 @@ public:
 	
 	InputPort(){}
 	// ¶ÁÈ¡×´Ì¬
-    virtual bool Read() const;
+    virtual bool ReadInputPort() const;
     operator bool() const { return Read(); }
 
 protected:
-    virtual void OnOpen(void* param);
+    virtual void OnOpenInputPort(void* param);
 };
 
 #endif //_Port_H_
