@@ -19,11 +19,11 @@ void CLcd::SetPin(Pin pinrs, Pin pinsclk, Pin pinsid, Pin pinres, Pin pincs)
     this->pPinres.SetPin(pinres);
     this->pPincs.SetPin(pincs);
 	
-	this->pPinRS.SetPinMode(GPIO_Out_PP);
-    this->pPinsclk.SetPinMode(GPIO_Out_PP);
-    this->pPinsid.SetPinMode(GPIO_Out_PP);
-    this->pPinres.SetPinMode(GPIO_Out_PP);
-    this->pPincs.SetPinMode(GPIO_Out_PP);
+	this->pPinRS.pinMode(GPIO_Out_PP);
+    this->pPinsclk.pinMode(GPIO_Out_PP);
+    this->pPinsid.pinMode(GPIO_Out_PP);
+    this->pPinres.pinMode(GPIO_Out_PP);
+    this->pPincs.pinMode(GPIO_Out_PP);
 		
 	this->pPinRS.Open();
     this->pPinsclk.Open();

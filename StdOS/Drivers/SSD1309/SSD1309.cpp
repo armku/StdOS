@@ -22,11 +22,11 @@ void SSD1309::SetPinSpi(Pin sclk,Pin sdin,Pin dc,Pin res,Pin cs)
     this->_sclk.SetPin(sclk);
     this->_sdin.SetPin(sdin);
 
-    this->_cs.SetPinMode(GPIO_Out_PP);
-    this->_res.SetPinMode(GPIO_Out_PP);
-    this->_dc.SetPinMode(GPIO_Out_PP);
-    this->_sclk.SetPinMode(GPIO_Out_PP);
-    this->_sdin.SetPinMode(GPIO_Out_PP);
+    this->_cs.pinMode(GPIO_Out_PP);
+    this->_res.pinMode(GPIO_Out_PP);
+    this->_dc.pinMode(GPIO_Out_PP);
+    this->_sclk.pinMode(GPIO_Out_PP);
+    this->_sdin.pinMode(GPIO_Out_PP);
 
     this->_cs.Open();
     this->_res.Open();

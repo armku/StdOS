@@ -7,9 +7,9 @@ void ADS1232::SetPin(Pin pdout, Pin psclk, Pin ppwdn)
     this->sclk.SetPin(psclk);
     this->pwdn.SetPin(ppwdn);
 
-    this->dout.SetPinMode(GPIO_Out_PP);
-	this->sclk.SetPinMode(GPIO_Out_PP);
-    this->pwdn.SetPinMode(GPIO_Out_PP);
+    this->dout.pinMode(GPIO_Out_PP);
+	this->sclk.pinMode(GPIO_Out_PP);
+    this->pwdn.pinMode(GPIO_Out_PP);
 	
     this->dout.Open();
     this->sclk.Open();

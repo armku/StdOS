@@ -11,8 +11,8 @@ void SoftI2C::SetPin(Pin scl, Pin sda)
 	this->SCL.SetPin(scl);
     this->SDA.SetPin(sda);
 
-	this->SCL.SetPinMode(GPIO_Out_PP);
-	this->SDA.SetPinMode(GPIO_Out_OD);//此处设置错误将导致IIC异常
+	this->SCL.pinMode(GPIO_Out_PP);
+	this->SDA.pinMode(GPIO_Out_OD);//此处设置错误将导致IIC异常
 	
 	this->SDA = 1;
 	this->SCL = 1;

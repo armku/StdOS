@@ -258,7 +258,7 @@ bool Port::Read()const
 #endif
 }
 //设置管脚模式
-void Port::SetPinMode(GPIOMode_T mode)
+void Port::pinMode(GPIOMode_T mode)
 {
 	if (_Pin != P0)
 	{

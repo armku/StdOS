@@ -29,9 +29,9 @@ void DS1302::SetPin(Pin pinsck, Pin pinio, Pin pinrst)
 	this->pio.SetPin(pinio);
 	this->prst.SetPin(pinrst);
 
-	this->psck.SetPinMode(GPIO_Out_PP);
-	this->pio.SetPinMode(GPIO_Out_PP);
-	this->prst.SetPinMode(GPIO_Out_PP);
+	this->psck.pinMode(GPIO_Out_PP);
+	this->pio.pinMode(GPIO_Out_PP);
+	this->prst.pinMode(GPIO_Out_PP);
 
 	this->psck.Open();
 	this->pio.Open();
