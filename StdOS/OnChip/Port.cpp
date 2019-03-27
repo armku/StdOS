@@ -7,7 +7,6 @@ Port::Port()
 	this->_Pin = P0;
 	this->Opened = false;
 }
-
 /*
 单一引脚初始化
  */
