@@ -277,4 +277,3 @@ void Port::SetPinMode(GPIOMode_T mode)
 		GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
 	}
 }
-
