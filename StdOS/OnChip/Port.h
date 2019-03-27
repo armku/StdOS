@@ -53,7 +53,6 @@ protected:
 class OutputPort : public Port
 {
 public:  
-    OutputPort();	
     void Write(bool value) const;
     OutputPort& operator=(bool value) { Write(value); return *this; }
     OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }

@@ -39,11 +39,6 @@ void Port::Close()
 	}
 }
 
-OutputPort::OutputPort()
-{
-	this->OpenDrain = 0;
-}
-
 bool Port::ReadInput()const
 {
 	if (this->Empty())
