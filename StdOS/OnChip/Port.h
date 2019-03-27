@@ -83,7 +83,7 @@ public:
     //bool	Floating;	// 是否浮空输入
     //PuPd	Pull;	// 上拉下拉电阻
 	
-	InputPort(){}
+	/*InputPort(){}*/
 	// 读取状态
     //virtual bool ReadInputPort() const;
     //operator bool() const { return Read(); }
