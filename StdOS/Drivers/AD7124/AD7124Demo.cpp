@@ -112,22 +112,18 @@ void ad71248Test()
 	spi1.Open();
     ad.Init_8();
 
-	/*cs.Invert = false;
-	cs.OpenDrain = false;
+	/*cs.OpenDrain = false;
 	cs.Set(PC0);
 	cs.Open();*/
 
-	//sck.Invert = false;
 	//sck.OpenDrain = false;
 	//sck.Set(PC1);
 	//sck.Open();
 
-	//din.Invert = false;
 	//din.OpenDrain = false;
 	//din.Set(PC2);
 	//din.Open();
 
-	//dout.Invert = false;
 	//dout.OpenDrain = false;
 	//dout.Set(PC3);
 	//dout.Open();

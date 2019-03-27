@@ -166,13 +166,11 @@ char *port = "8888";
 void mWifiinit()
 {
 	pinch.Set(PG13);
-	pinch.Invert = false;
 	pinch.OpenDrain = false;
 	pinch.Open();
 	pinch = 0;
 
 	pinrst.Set(PG14);
-	pinrst.Invert = false;
 	pinrst.OpenDrain = false;
 	pinrst.Open();
 	pinrst = 0;

@@ -41,7 +41,6 @@ void Port::Close()
 
 OutputPort::OutputPort()
 {
-	this->Invert = 2;
 	this->OpenDrain = 0;
 	this->Speed = 50;
 }
@@ -50,7 +49,6 @@ OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain, uint8_t speed)
 {
 	this->Opened = false;
 
-	this->Invert = 2;
 	this->OpenDrain = false;
 	this->Speed = 50;
 	this->OpenDrain = openDrain;
@@ -67,7 +65,7 @@ bool Port::ReadInput()const
 	if (this->Empty())
 		return false;
 	else
-		return this->Invert ? !Port::Read() : Port::Read();
+		return Port::Read();
 }
 
 void Port::OnOpenOutputPort(void *param)
@@ -78,15 +76,6 @@ void Port::OnOpenOutputPort(void *param)
 
 
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
-//bool InputPort::ReadInputPort()const
-//{
-//	return this->Invert ? !Port::Read() : Port::Read();
-//}
-
-//bool OutputPort::Read()const
-//{
-//	return this->Invert ? !Port::Read() : Port::Read();
-//}
 GPIO_TypeDef *IndexToGroup(uint8_t index);
 
 void Port_OnOpen(Pin pin)
@@ -426,19 +415,7 @@ void OutputPort::Write(bool value)const
 {
 #if defined STM32F0
 	if (this->_Pin == P0)
-		return;
-	if (this->Invert)
-	{
-		if (value)
-		{
-			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-		}
-		else
-		{
-			GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-		}
-	}
-	else
+		return;	
 	{
 		if (value)
 		{
@@ -451,20 +428,8 @@ void OutputPort::Write(bool value)const
 	}
 #elif defined STM32F1
 	if (this->_Pin == P0)
-		return;
-	if (this->Invert)
-	{
-		if (value)
-		{
-			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-		}
-		else
-		{
-			GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-		}
-	}
-	else
-	{
+		return;	
+	
 		if (value)
 		{
 			GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
@@ -472,24 +437,10 @@ void OutputPort::Write(bool value)const
 		else
 		{
 			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-		}
-	}
+		}	
 #elif defined STM32F4
 	if (this->_Pin == P0)
-		return;
-	if (this->Invert)
-	{
-		if (value)
-		{
-			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-		}
-		else
-		{
-			GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-		}
-	}
-	else
-	{
+		return;		
 		if (value)
 		{
 			GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
@@ -497,8 +448,7 @@ void OutputPort::Write(bool value)const
 		else
 		{
 			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
-		}
-	}
+		}	
 #endif
 }
 
