@@ -42,17 +42,13 @@ void Port::Close()
 OutputPort::OutputPort()
 {
 	this->OpenDrain = 0;
-	this->Speed = 50;
 }
 
-OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain, uint8_t speed)
+OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain)
 {
 	this->Opened = false;
-
 	this->OpenDrain = false;
-	this->Speed = 50;
 	this->OpenDrain = openDrain;
-	this->Speed = speed;
 	if (pin != P0)
 	{
 		this->Set(pin);

@@ -23,7 +23,6 @@ public:
 	// END InputPort
 	//OutputPort
 	bool OpenDrain;	// 是否开漏输出
-	uint8_t Speed;		// 速度
 	//end OutputPort
 	//OutputPort
 	/*operator bool() const { return Read(); }*/
@@ -55,7 +54,7 @@ class OutputPort : public Port
 {
 public:  
     OutputPort();
-    OutputPort(Pin pin, uint8_t invert, bool openDrain = false, uint8_t speed = 50);
+    OutputPort(Pin pin, uint8_t invert, bool openDrain = false);
 	
     void Write(bool value) const;
     OutputPort& operator=(bool value) { Write(value); return *this; }
