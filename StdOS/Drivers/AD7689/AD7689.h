@@ -19,7 +19,7 @@
 		private:
             OutputPort ppinsck;
             OutputPort ppinsdi;
-            InputPort ppinsdo;
+            Port ppinsdo;
             OutputPort ppincnv;
 
             float volt[MAXCH]; //µÁ—π÷µ

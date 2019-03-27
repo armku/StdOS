@@ -22,7 +22,7 @@
     {
         public:
 			#if ADS1246SPISOFT
-				ADS1246(SpiSoft *spi,InputPort &pinrd, Pin pinreset,ADSPEEDTYPE spd);
+				ADS1246(SpiSoft *spi,Port &pinrd, Pin pinreset,ADSPEEDTYPE spd);
 			#else
 				ADS1246(Spi *spi,InputPort &pinrd, Pin pinreset,ADSPEEDTYPE spd);
 			#endif
@@ -49,7 +49,7 @@
 			#else
 				Spi *pspi; //SPI接口
 			#endif
-            InputPort *ppinrd; //数据准备好接口
+            Port *ppinrd; //数据准备好接口
             OutputPort ppinreset; //复位接口		
     };
 #endif

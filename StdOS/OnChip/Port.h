@@ -74,22 +74,22 @@ protected:
     virtual void OpenPin(void* param);
 };
 // 输入口
-class InputPort : public Port
-{
-public:
-    
-	    
-    //uint8_t	Invert;	// 是否倒置输入输出。默认2表示自动检测
-    //bool	Floating;	// 是否浮空输入
-    //PuPd	Pull;	// 上拉下拉电阻
-	
-	/*InputPort(){}*/
-	// 读取状态
-    //virtual bool ReadInputPort() const;
-    //operator bool() const { return Read(); }
-
-//protected:
-//    virtual void OnOpenInputPort(void* param);
-};
+//class InputPort : public Port
+//{
+//public:
+//    
+//	    
+//    //uint8_t	Invert;	// 是否倒置输入输出。默认2表示自动检测
+//    //bool	Floating;	// 是否浮空输入
+//    //PuPd	Pull;	// 上拉下拉电阻
+//	
+//	/*InputPort(){}*/
+//	// 读取状态
+//    //virtual bool ReadInputPort() const;
+//    //operator bool() const { return Read(); }
+//
+////protected:
+////    virtual void OnOpenInputPort(void* param);
+//};
 
 #endif //_Port_H_

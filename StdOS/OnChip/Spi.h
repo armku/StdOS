@@ -85,7 +85,7 @@
             OutputPort _nss;
             OutputPort _clk;
             OutputPort _mosi;
-            InputPort _miso;
+            Port _miso;
             uint32_t delayus; //—” ± ±º‰
         private:
             uint8_t WaitBusy();

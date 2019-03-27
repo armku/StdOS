@@ -57,7 +57,7 @@
 #define ADC_CMD_SELFOCAL    0x62            //系统自校准  
 #define ADC_CMD_RESTRICTED  0xF1            //  
 #if ADS1246SPISOFT
-ADS1246::ADS1246(SpiSoft *spi,InputPort& pinrd, Pin pinreset,ADSPEEDTYPE spd)
+ADS1246::ADS1246(SpiSoft *spi,Port& pinrd, Pin pinreset,ADSPEEDTYPE spd)
 #else
 ADS1246::ADS1246(Spi *spi,InputPort& pinrd, Pin pinreset,ADSPEEDTYPE spd)
 #endif
