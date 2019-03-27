@@ -30,10 +30,6 @@ void BlinkPort::Start()
 	{
 		this->Current = this->First;
 		this->Index = 0;
-		for(int i=0;i<this->Count;i++)
-		{
-			this->Ports[i]->Open();
-		}
 		if(this->_tid ==0)
 			this->_tid = Sys.AddTask((void (BlinkPort::*)())&BlinkPort::Blink,(BlinkPort *)this,-1,-1,"иак╦╤к©з");
 		Sys.SetTask(this->_tid,1,-1);

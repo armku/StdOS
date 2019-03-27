@@ -39,8 +39,6 @@ void BspInit()
 {
 	led1.SetPin(PB0);
 	led1.pinMode(GPIO_Out_PP);
-	
-	led1.Open();
 
 	led1 = 1;
 	

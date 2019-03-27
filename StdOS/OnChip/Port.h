@@ -32,7 +32,6 @@ public:
 	
 	bool Empty() const;
 
-	bool Open();
 	void Close();
 
 	virtual bool Read() const;

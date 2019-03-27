@@ -10,12 +10,8 @@ void ADS1232::SetPin(Pin pdout, Pin psclk, Pin ppwdn)
     this->dout.pinMode(GPIO_Out_PP);
 	this->sclk.pinMode(GPIO_Out_PP);
     this->pwdn.pinMode(GPIO_Out_PP);
-	
-    this->dout.Open();
-    this->sclk.Open();
-    this->pwdn.Open();
 
-    //this->dout = 1;
+    this->dout = 1;
     this->sclk = 0;
     this->pwdn = 1;
 }
@@ -23,16 +19,12 @@ void ADS1232::SetPin(Pin pdout, Pin psclk, Pin ppwdn)
 void ADS1232::SetPinSpeed(Pin pin)
 {
     this->pSpeed.SetPin(pin);
-    this->pSpeed.Open();
 }
 
 void ADS1232::SetPinGain(Pin gain0, Pin gain1)
 {
     this->pGain0.SetPin(gain0);
     this->pGain1.SetPin(gain1);
-	    
-    this->pGain0.Open();
-    this->pGain1.Open();
 }
 
 void ADS1232::SetSpeed(Speed speed)

@@ -110,12 +110,10 @@ void EspDemoLink::SetPin(Pin pch, Pin prst)
 {
 	this->pinch.SetPin(PG13);
 	this->pinch.pinMode(GPIO_Out_PP);
-	this->pinch.Open();
 	this->pinch = 0;
 
 	this->pinrst.SetPin(PG14);
 	this->pinrst.pinMode(GPIO_Out_PP);
-	this->pinrst.Open();
 	this->pinrst = 0;
 }
 void EspDemoLink::Init()

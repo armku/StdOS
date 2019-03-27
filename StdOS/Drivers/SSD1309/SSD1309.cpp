@@ -27,12 +27,6 @@ void SSD1309::SetPinSpi(Pin sclk,Pin sdin,Pin dc,Pin res,Pin cs)
     this->_dc.pinMode(GPIO_Out_PP);
     this->_sclk.pinMode(GPIO_Out_PP);
     this->_sdin.pinMode(GPIO_Out_PP);
-
-    this->_cs.Open();
-    this->_res.Open();
-    this->_dc.Open();
-    this->_sclk.Open();
-    this->_sdin.Open();
 }
 
 //OLED╣дот╢Ф

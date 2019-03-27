@@ -62,10 +62,6 @@ void Spi::SetPin(Pin clk, Pin miso, Pin mosi)
 	this->_clk.pinMode(GPIO_Out_PP);
 	this->_miso.pinMode(GPIO_Out_PP);
 	this->_mosi.pinMode(GPIO_Out_PP);
-	
-	this->_clk.Open();
-	this->_miso.Open();
-	this->_mosi.Open();
 }
 void Spi::SetNss(Pin nss)
 {
@@ -75,8 +71,6 @@ void Spi::SetNss(Pin nss)
 	this->_nss.pinMode(GPIO_Out_PP);
 
 	this->_nss.SetPin(nss);
-
-	this->_nss.Open();
 
 	this->Open();
 }
@@ -146,17 +140,12 @@ void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi)
 	this->_clk.SetPin(clk);
 	this->_mosi.SetPin(mosi);
 	this->_miso.SetPin(miso);
-
-	this->_clk.Open();
-	this->_mosi.Open();
-	this->_miso.Open();
 }
 void SpiSoft::SetNss(Pin nss)
 {
 	this->_nss.pinMode(GPIO_Out_PP);
 
 	this->_nss.SetPin(nss);
-	this->_nss.Open();
 }
 
 /*---------------------------------------------------------

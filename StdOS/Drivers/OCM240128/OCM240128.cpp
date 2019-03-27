@@ -21,13 +21,6 @@ void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led,Pin cd)
 	/*this->pinfs.pinMode(GPIO_Out_PP);*/
 	this->pinled.pinMode(GPIO_Out_PP);
 	this->pincd.pinMode(GPIO_Out_PP);
-
-	this->pince.Open();
-	this->pinwr.Open();
-	this->pinrd.Open();
-	/*this->pinfs.Open();*/
-	this->pinled.Open();
-	this->pincd.Open();
 }
 void OCM240128::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d6, Pin d7)
 {
@@ -48,15 +41,6 @@ void OCM240128::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d
 	this->data5.pinMode(GPIO_Out_PP);
 	this->data6.pinMode(GPIO_Out_PP);
 	this->data7.pinMode(GPIO_Out_PP);
-
-	this->data0.Open();
-	this->data1.Open();
-	this->data2.Open();
-	this->data3.Open();
-	this->data4.Open();
-	this->data5.Open();
-	this->data6.Open();
-	this->data7.Open();
 }
 void OCM240128::writedata(uint8_t da)
 {

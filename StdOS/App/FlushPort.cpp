@@ -18,9 +18,7 @@ FlushPort::~FlushPort()
 void FlushPort::Start(int ms)
 {
 	if(this->Port)
-	{
-		if(this->Port->Open())
-		{
+	{		
 			if(this->_tid ==0)
 			{
 				int taskperiod	= this->Slow;
@@ -39,8 +37,7 @@ void FlushPort::Start(int ms)
 					this->Count = 2;
 			}
 			Sys.SetTaskPeriod(this->_tid,this->Fast);
-			Sys.SetTask(this->_tid,this->Count>0,0);
-		}
+			Sys.SetTask(this->_tid,this->Count>0,0);		
 	}
 }
 // mode 0xff  为不改变Port状态  0为Write false  1为Write true

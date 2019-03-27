@@ -16,9 +16,6 @@ void SoftI2C::SetPin(Pin scl, Pin sda)
 	
 	this->SDA = 1;
 	this->SCL = 1;
-
-	this->SCL.Open();
-	this->SDA.Open();
 }
 
 void SoftI2C::Start()

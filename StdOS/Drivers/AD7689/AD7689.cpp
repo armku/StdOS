@@ -25,11 +25,6 @@ void CAD7689::SetPin(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
     this->ppinsdi.SetPin(pinsdi);
     this->ppinsdo.SetPin(pinsdo);
     this->ppincnv.SetPin(pincnv);
-	
-	this->ppinsck.Open();
-    this->ppinsdi.Open();
-    this->ppinsdo.Open();
-    this->ppincnv.Open();
 }
 
 uint16_t CAD7689::AD_Read(void)
