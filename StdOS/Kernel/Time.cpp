@@ -221,4 +221,14 @@ void TTime::Init()
 		}
 #endif
 	}
+	//开机到现在的毫秒数
+	uint64_t millis()
+	{
+		return Sys.Ms();
+	}
+	//开机到现在的微妙数
+	uint64_t micros()
+	{
+		return Sys.Ms()*1000;
+	}
 

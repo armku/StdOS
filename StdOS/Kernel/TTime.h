@@ -31,6 +31,8 @@ public:
 
 void delayMicroseconds(uint32_t us);//us延时，100us以下精确
 void delay(uint64_t ms);//延时毫秒
+uint64_t millis();//开机到现在的毫秒数
+uint64_t micros();//开机到现在的微妙数
 
 extern TTime Time;
 // 时间开支。借助滴答进行精确计算
