@@ -30,6 +30,7 @@ public:
 };
 
 void delayMicroseconds(uint32_t us);//us延时，100us以下精确
+void delay(uint64_t ms);//延时毫秒
 
 extern TTime Time;
 // 时间开支。借助滴答进行精确计算

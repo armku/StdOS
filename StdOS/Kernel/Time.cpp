@@ -187,6 +187,11 @@ void TTime::Init()
 	{
 		return this->Milliseconds + DeviceConfigCenter::CurrentTick();
 	}
+	//延时毫秒
+	void delay(uint64_t ms)
+	{
+		Sys.Sleep(ms);
+	}
 	//us延时，100us以下精确
 	void delayMicroseconds(uint32_t us)
 	{
