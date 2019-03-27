@@ -27,7 +27,10 @@ public:
 	bool OpenDrain;	// 是否开漏输出
 	uint8_t Speed;		// 速度
 	//end OutputPort
+	//OutputPort
 
+
+	//end OutputPort
 	virtual void OpenPinAlternatePort(void* param);
 
 	Port();
@@ -40,7 +43,7 @@ public:
 
 	virtual bool Read() const;
 	operator bool() const { return Read(); }
-
+	
 protected:
     // 配置过程
     virtual void OnOpen(void* param);
