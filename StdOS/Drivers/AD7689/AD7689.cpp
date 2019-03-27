@@ -21,10 +21,10 @@ CAD7689::CAD7689()
 
 void CAD7689::SetPin(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
 {
-	this->ppinsck.Set(pinsck);
-    this->ppinsdi.Set(pinsdi);
-    this->ppinsdo.Set(pinsdo);
-    this->ppincnv.Set(pincnv);
+	this->ppinsck.SetPin(pinsck);
+    this->ppinsdi.SetPin(pinsdi);
+    this->ppinsdo.SetPin(pinsdo);
+    this->ppincnv.SetPin(pincnv);
 	
 	this->ppinsck.Open();
     this->ppinsdi.Open();

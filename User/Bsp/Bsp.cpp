@@ -37,7 +37,7 @@ void EspDemoLinkTestInit();
 void ModbusSlaveLinkTestInit();
 void BspInit()
 {
-	led1.Set(PB0);
+	led1.SetPin(PB0);
 	led1.SetPinMode(GPIO_Out_PP);
 	
 	led1.Open();

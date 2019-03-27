@@ -55,9 +55,9 @@ void Spi::Init(SPI spi, uint32_t speedHz)
 
 void Spi::SetPin(Pin clk, Pin miso, Pin mosi)
 {
-	this->_clk.Set(clk);
-	this->_miso.Set(miso);
-	this->_mosi.Set(mosi);
+	this->_clk.SetPin(clk);
+	this->_miso.SetPin(miso);
+	this->_mosi.SetPin(mosi);
 	
 	this->_clk.SetPinMode(GPIO_Out_PP);
 	this->_miso.SetPinMode(GPIO_Out_PP);
@@ -74,7 +74,7 @@ void Spi::SetNss(Pin nss)
 
 	this->_nss.SetPinMode(GPIO_Out_PP);
 
-	this->_nss.Set(nss);
+	this->_nss.SetPin(nss);
 
 	this->_nss.Open();
 
@@ -143,9 +143,9 @@ void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi)
 	this->_mosi.SetPinMode(GPIO_Out_PP);//此处设置错误将导致异常
 	//this->_miso.OpenDrain = false;
 
-	this->_clk.Set(clk);
-	this->_mosi.Set(mosi);
-	this->_miso.Set(miso);
+	this->_clk.SetPin(clk);
+	this->_mosi.SetPin(mosi);
+	this->_miso.SetPin(miso);
 
 	this->_clk.Open();
 	this->_mosi.Open();
@@ -155,7 +155,7 @@ void SpiSoft::SetNss(Pin nss)
 {
 	this->_nss.SetPinMode(GPIO_Out_PP);
 
-	this->_nss.Set(nss);
+	this->_nss.SetPin(nss);
 	this->_nss.Open();
 }
 
@@ -876,13 +876,13 @@ void Spi::OnClose()
 	}
 	SPI_I2S_DeInit((SPI_TypeDef*)(this->_SPI));
 	debug_printf("    CLK : ");
-	this->_clk.Set(P0);
+	this->_clk.SetPin(P0);
 	debug_printf("    MISO: ");
-	this->_miso.Set(P0);
+	this->_miso.SetPin(P0);
 	debug_printf("    MOSI: ");
-	this->_mosi.Set(P0);
+	this->_mosi.SetPin(P0);
 	debug_printf("    NSS : ");
-	this->_nss.Set(P0);
+	this->_nss.SetPin(P0);
 
 //	this->Pins[0] = P0;
 //	this->Pins[1] = P0;

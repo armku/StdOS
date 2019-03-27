@@ -62,7 +62,7 @@ ADS1246::ADS1246(SpiSoft *spi,Port& pinrd, Pin pinreset,ADSPEEDTYPE spd)
 ADS1246::ADS1246(Spi *spi,InputPort& pinrd, Pin pinreset,ADSPEEDTYPE spd)
 #endif
 {
-	this->ppinreset.Set(pinreset);
+	this->ppinreset.SetPin(pinreset);
 	
 	this->pspi=spi;
 	this->ppinrd=&pinrd;

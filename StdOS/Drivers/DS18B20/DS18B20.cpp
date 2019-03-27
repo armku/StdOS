@@ -3,7 +3,7 @@
 
 void DS18B20::SetPin(Pin pin)
 {
-	this->_dio.Set(pin);
+	this->_dio.SetPin(pin);
 	
 	this->_dio.SetPinMode(GPIO_Out_PP);
 	

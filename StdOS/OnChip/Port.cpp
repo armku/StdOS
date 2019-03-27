@@ -11,7 +11,7 @@ Port::Port()
 /*
 单一引脚初始化
  */
-Port &Port::Set(Pin pin)
+Port &Port::SetPin(Pin pin)
 {
 	if (this->_Pin != pin)
 	{

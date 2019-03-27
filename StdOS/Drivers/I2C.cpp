@@ -8,8 +8,8 @@ SoftI2C::SoftI2C(uint32_t speedHz)
 
 void SoftI2C::SetPin(Pin scl, Pin sda)
 {
-	this->SCL.Set(scl);
-    this->SDA.Set(sda);
+	this->SCL.SetPin(scl);
+    this->SDA.SetPin(sda);
 
 	this->SCL.SetPinMode(GPIO_Out_PP);
 	this->SDA.SetPinMode(GPIO_Out_OD);//此处设置错误将导致IIC异常

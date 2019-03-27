@@ -8,12 +8,12 @@ OCM240128::OCM240128()
 
 void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led,Pin cd)
 {
-	this->pince.Set(ce);
-	this->pinwr.Set(wr);
-	this->pinrd.Set(rd);
-	/*this->pinfs.Set(fs);*/
-	this->pinled.Set(led);
-	this->pincd.Set(cd);
+	this->pince.SetPin(ce);
+	this->pinwr.SetPin(wr);
+	this->pinrd.SetPin(rd);
+	/*this->pinfs.SetPin(fs);*/
+	this->pinled.SetPin(led);
+	this->pincd.SetPin(cd);
 		
 	this->pince.SetPinMode(GPIO_Out_PP);
 	this->pinwr.SetPinMode(GPIO_Out_PP);
@@ -31,14 +31,14 @@ void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led,Pin cd)
 }
 void OCM240128::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d6, Pin d7)
 {
-	this->data0.Set(d0);
-	this->data1.Set(d1);
-	this->data2.Set(d2);
-	this->data3.Set(d3);
-	this->data4.Set(d4);
-	this->data5.Set(d5);
-	this->data6.Set(d6);
-	this->data7.Set(d7);
+	this->data0.SetPin(d0);
+	this->data1.SetPin(d1);
+	this->data2.SetPin(d2);
+	this->data3.SetPin(d3);
+	this->data4.SetPin(d4);
+	this->data5.SetPin(d5);
+	this->data6.SetPin(d6);
+	this->data7.SetPin(d7);
 
 	this->data0.SetPinMode(GPIO_Out_PP);
 	this->data1.SetPinMode(GPIO_Out_PP);

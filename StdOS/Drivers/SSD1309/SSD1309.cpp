@@ -16,11 +16,11 @@
 
 void SSD1309::SetPinSpi(Pin sclk,Pin sdin,Pin dc,Pin res,Pin cs)
 {
-	this->_cs.Set(cs);
-    this->_res.Set(res);
-    this->_dc.Set(dc);
-    this->_sclk.Set(sclk);
-    this->_sdin.Set(sdin);
+	this->_cs.SetPin(cs);
+    this->_res.SetPin(res);
+    this->_dc.SetPin(dc);
+    this->_sclk.SetPin(sclk);
+    this->_sdin.SetPin(sdin);
 
     this->_cs.SetPinMode(GPIO_Out_PP);
     this->_res.SetPinMode(GPIO_Out_PP);
