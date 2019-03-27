@@ -9,11 +9,11 @@ Port led1;
 
 void LedTask(void *param)
 {
-	static bool flagonoff = false;
-	flagonoff = !flagonoff;
+	//static bool flagonoff = false;
+	//flagonoff = !flagonoff;
 	Port* leds = (Port*)param;
 	*leds = !* leds;
-	*leds = flagonoff;
+	//*leds = flagonoff;
 }
 
 USART usart111(USART1, 115200);
