@@ -69,11 +69,5 @@ protected:
     virtual void OnOpen(void* param);
 	virtual void OpenPin(void* param);
 };
-// ¸´ÓÃÊä³ö¿Ú
-//class AlternatePort : public OutputPort
-//{
-//protected:
-//    /*virtual void OpenPinAlternatePort(void* param);*/
-//};
 
 #endif //_Port_H_
