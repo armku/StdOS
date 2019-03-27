@@ -224,11 +224,11 @@ void TTime::Init()
 	//系统启动后的毫秒数
 	uint64_t millis()
 	{
-		return Time.Current112233();
+		return Time.Milliseconds + DeviceConfigCenter::CurrentTick();
 	}
 	//开机到现在的微妙数
 	uint64_t micros()
 	{
-		return Time.Current112233() *1000;
+		return millis() *1000;
 	}
 
