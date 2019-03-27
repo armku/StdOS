@@ -43,7 +43,7 @@ void TTime::Delay(int nus)const
 	sumus = nus;
 	if (nus < 800)
 	{
-		this->DelayUs(nus);
+		delayMicroseconds(nus);
 	}
 	else if (nus > 0)
 	{
@@ -256,15 +256,14 @@ void TTime::Init()
 	{
 		return this->Milliseconds + DeviceConfigCenter::CurrentTick();
 	}
-
 	//us延时，100us以下精确
-	void TTime::DelayUs(int nus) const
+	void delayMicroseconds(uint32_t us)
 	{
 #if defined STM32F0
 		/*
 		F072 48MHz	750us->774us
 		*/
-		for (int i = 0; i < nus; i++)
+		for (int i = 0; i < us; i++)
 		{
 			for (int j = 0; j < 7; j++);
 		}
@@ -272,7 +271,7 @@ void TTime::Init()
 		/*
 		F103 72MHz  750us->753us
 		*/
-		for (int i = 0; i < nus; i++)
+		for (int i = 0; i < us; i++)
 		{
 			for (int j = 0; j < 10; j++);
 		}
@@ -280,9 +279,10 @@ void TTime::Init()
 		/*
 		F407 168MHz 750us->759us
 		*/
-		for (int i = 0; i < nus; i++)
+		for (int i = 0; i < us; i++)
 		{
 			for (int j = 0; j < 40; j++);
 		}
 #endif
-	}   
+	}
+
