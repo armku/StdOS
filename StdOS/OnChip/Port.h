@@ -68,10 +68,8 @@ protected:
 // ¸´ÓÃÊä³ö¿Ú
 class AlternatePort : public OutputPort
 {
-public:
-	AlternatePort();
 protected:
-    virtual void OpenPin(void* param);
+    virtual void OpenPinAlternatePort(void* param);
 };
 
 #endif //_Port_H_

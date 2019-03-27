@@ -78,8 +78,6 @@ void OutputPort::OnOpen(void *param)
 	this->OpenPin(param);
 }
 
-AlternatePort::AlternatePort() : OutputPort(P0, 0, false, 50)
-{}
 
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
 //bool InputPort::ReadInputPort()const
@@ -260,7 +258,7 @@ void OutputPort::OpenPin(void *param)
 	}
 #endif
 }
-void AlternatePort::OpenPin(void *param)
+void AlternatePort::OpenPinAlternatePort(void *param)
 {
 #if defined STM32F0
 	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
