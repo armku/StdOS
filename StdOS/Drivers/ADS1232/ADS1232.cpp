@@ -7,7 +7,7 @@ void ADS1232::SetPin(Pin pdout, Pin psclk, Pin ppwdn)
     this->sclk.SetPin(psclk);
     this->pwdn.SetPin(ppwdn);
 
-    //	this->dout.OpenDrain=false;
+    this->dout.SetPinMode(GPIO_Out_PP);
 	this->sclk.SetPinMode(GPIO_Out_PP);
     this->pwdn.SetPinMode(GPIO_Out_PP);
 	
@@ -36,43 +36,43 @@ void ADS1232::SetPinGain(Pin gain0, Pin gain1)
 }
 
 void ADS1232::SetSpeed(Speed speed)
-{    
-        switch (speed)
-        {
-            case SPEED10:
-                this->pSpeed = 0;
-                break;
-            case SPEED80:
-                this->pSpeed = 1;
-                break;
-            default:
-                break;
-        }    
+{
+	switch (speed)
+	{
+	case SPEED10:
+		this->pSpeed = 0;
+		break;
+	case SPEED80:
+		this->pSpeed = 1;
+		break;
+	default:
+		break;
+	}
 }
 
 void ADS1232::SetGain(Gain gain)
-{    
-        switch (gain)
-        {
-            case GAIN1:
-                this->pGain0 = 0;
-                this->pGain1 = 0;
-                break;
-            case GAIN2:
-                this->pGain0 = 1;
-                this->pGain1 = 0;
-                break;
-            case GAIN64:
-                this->pGain0 = 0;
-                this->pGain1 = 1;
-                break;
-            case GAIN128:
-                this->pGain0 = 1;
-                this->pGain1 = 1;
-                break;
-            default:
-                break;
-        }
+{
+	switch (gain)
+	{
+	case GAIN1:
+		this->pGain0 = 0;
+		this->pGain1 = 0;
+		break;
+	case GAIN2:
+		this->pGain0 = 1;
+		this->pGain1 = 0;
+		break;
+	case GAIN64:
+		this->pGain0 = 0;
+		this->pGain1 = 1;
+		break;
+	case GAIN128:
+		this->pGain0 = 1;
+		this->pGain1 = 1;
+		break;
+	default:
+		break;
+	}
 }
 
 void ADS1232::Init()
