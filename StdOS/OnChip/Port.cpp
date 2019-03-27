@@ -82,10 +82,10 @@ AlternatePort::AlternatePort() : OutputPort(P0, 0, false, 50)
 {}
 
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
-bool InputPort::ReadInputPort()const
-{
-	return this->Invert ? !Port::Read() : Port::Read();
-}
+//bool InputPort::ReadInputPort()const
+//{
+//	return this->Invert ? !Port::Read() : Port::Read();
+//}
 
 bool OutputPort::Read()const
 {
@@ -359,7 +359,7 @@ void OutputPort::Write(Pin pin, bool value)
 #endif
 }
 
-void InputPort::OnOpenInputPort(void *param)
+void Port::OnOpenInputPort(void *param)
 {
 #if defined STM32F0
 	Port::OnOpen(param);
