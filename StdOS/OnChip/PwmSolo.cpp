@@ -1218,7 +1218,7 @@ PwmSolo::PwmSolo(uint32_t frq, uint32_t duty, bool invert)
 }
 void PwmSolo::Open()
 {
-	AlternatePort::Open();
+	OutputPort::Open();
 	this->OnOpen2();
 }
 //ÉèÖÃÊä³ö±ÈÀý£¬0-100

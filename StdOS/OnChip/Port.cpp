@@ -258,7 +258,7 @@ void OutputPort::OpenPin(void *param)
 	}
 #endif
 }
-void AlternatePort::OpenPinAlternatePort(void *param)
+void Port::OpenPinAlternatePort(void *param)
 {
 #if defined STM32F0
 	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;

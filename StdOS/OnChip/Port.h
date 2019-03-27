@@ -22,6 +22,13 @@ public:
 	bool	Floating;	// 是否浮空输入
 	PuPd	Pull;	// 上拉下拉电阻
 	// END InputPort
+	//OutputPort
+//	uint8_t Invert;		// 是否倒置输入输出。默认2表示自动检测
+	bool OpenDrain;	// 是否开漏输出
+	uint8_t Speed;		// 速度
+	//end OutputPort
+
+	virtual void OpenPinAlternatePort(void* param);
 
 	Port();
 
@@ -42,10 +49,7 @@ protected:
 // 输出口
 class OutputPort : public Port
 {
-public:
-    uint8_t Invert;		// 是否倒置输入输出。默认2表示自动检测
-    bool OpenDrain;	// 是否开漏输出
-    uint8_t Speed;		// 速度
+public:  
 
     OutputPort();
     OutputPort(Pin pin, uint8_t invert, bool openDrain = false, uint8_t speed = 50);
@@ -66,10 +70,10 @@ protected:
 	virtual void OpenPin(void* param);
 };
 // 复用输出口
-class AlternatePort : public OutputPort
-{
-protected:
-    virtual void OpenPinAlternatePort(void* param);
-};
+//class AlternatePort : public OutputPort
+//{
+//protected:
+//    /*virtual void OpenPinAlternatePort(void* param);*/
+//};
 
 #endif //_Port_H_

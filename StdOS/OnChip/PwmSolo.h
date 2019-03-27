@@ -3,7 +3,7 @@
     #include "Type.h"
     #include "Port.h"
 
-    class PwmSolo: public AlternatePort
+    class PwmSolo: public OutputPort
     {
         public:
             PwmSolo(uint32_t frq = 10000, uint32_t duty = 50,bool invert=false);
