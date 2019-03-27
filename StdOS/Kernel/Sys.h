@@ -45,7 +45,6 @@ public:
 	void Init();     	// 初始化系统
 	void ShowInfo() const;
 	
-	uint64_t	Ms() const;		// 系统启动后的毫秒数
 	uint32_t	Seconds() const;	// 系统绝对当前时间，秒
 
     void Sleep(int ms) const; // 毫秒级延迟

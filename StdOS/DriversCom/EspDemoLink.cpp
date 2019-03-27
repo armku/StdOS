@@ -40,8 +40,8 @@ bool EspDemoLink::ReceiveAndWait(const char* targetString, unsigned char timeOut
 	u8 temp;
 	mReceiveBufferIndex = 0;
 	ClearBuffer();
-	double tartTime = Sys.Ms();
-	while ((Sys.Ms() - tartTime) < timeOut)
+	double tartTime = millis();
+	while ((millis() - tartTime) < timeOut)
 	{
 		while (com.RxSize() > 0)
 		{

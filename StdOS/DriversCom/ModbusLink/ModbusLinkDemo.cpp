@@ -20,7 +20,7 @@ void ModbusSlaveLinkRoutin(void* param)
 		modbusSlave.DealFrame();
 		modbusSlave.rxFrame.RemoveOneFrame();
 	}
-	else if ((modbusSlave.com.RxSize() > 0 || (modbusSlave.rxFrame.Length > 0)) && (Sys.Ms() - modbusSlave.com.LastRcvTime) > 5)
+	else if ((modbusSlave.com.RxSize() > 0 || (modbusSlave.rxFrame.Length > 0)) && (millis() - modbusSlave.com.LastRcvTime) > 5)
 	{
 		debug_printf("Clear RcvBuffer rxFrame:%d  com.RxSize:%d\n", modbusSlave.rxFrame.Length,modbusSlave.com.RxSize());
 		modbusSlave.rxFrame.Length = 0;

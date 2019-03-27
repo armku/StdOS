@@ -44,12 +44,6 @@ void TSys::ShowInfo()const
 	Buffer((void*)this->ID, 12).ShowHex(true);
 }
 
-// 系统启动后的毫秒数
-uint64_t TSys::Ms()const
-{
-	return Time.Current();
-}
-
 // 系统绝对当前时间，秒
 uint32_t TSys::Seconds()const
 {
@@ -145,7 +139,7 @@ bool TSys::SetTaskPeriod(uint32_t taskid, int period)const
 			if (period)
 			{
 				tsk->Period = period;
-				tsk->NextTime = Sys.Ms() + period;
+				tsk->NextTime = millis() + period;
 			}
 			else
 			{

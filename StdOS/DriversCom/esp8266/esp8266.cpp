@@ -29,7 +29,7 @@ bool esp8266::Restart(void)
 u8 esp8266::GetCCSQ(char* WiFiSSID)
 {
 	mUsart << "AT+CWLAP=\"" << WiFiSSID << "\"\r\n";
-	float starttime = Sys.Ms();// TaskManager::Time();
+	float starttime = millis();// TaskManager::Time();
 	unsigned char temp[13];
 	unsigned short bufferSize = 0;
 	static unsigned short CSQvalue = 70;
@@ -37,7 +37,7 @@ u8 esp8266::GetCCSQ(char* WiFiSSID)
 	unsigned short count = 0;
 	bool flag = false;
 	//while ((TaskManager::Time() - starttime) < ESP8266_DEFAULT_TIMEOUT)
-	while ((Sys.Ms() - starttime) < ESP8266_DEFAULT_TIMEOUT)
+	while ((millis() - starttime) < ESP8266_DEFAULT_TIMEOUT)
 	{
 		bufferSize = mUsart.RxSize();
 		if (bufferSize > (strlen(WiFiSSID) + 20))//AT+CWLAP="InfiniteYuan" +CWLAP:(3,"InfiniteYuan",-50,"14:2d:27:fc:d7:5f",11)
@@ -253,9 +253,9 @@ bool esp8266::ReceiveAndWait(const char* targetString, unsigned char timeOut)
 	u8 temp;
 	mReceiveBufferIndex = 0;
 	ClearBuffer();
-	double tartTime = Sys.Ms();//TaskManager::Time();
+	double tartTime = millis();//TaskManager::Time();
 	//while ((TaskManager::Time() - tartTime) < timeOut)
-	while ((Sys.Ms() - tartTime) < timeOut*1000)
+	while ((millis() - tartTime) < timeOut*1000)
 	{
 		while (mUsart.RxSize() > 0)
 		{
@@ -282,9 +282,9 @@ bool esp8266::ReceiveAndWait(char const* targetString, const char* targetString2
 	u8 temp;
 	mReceiveBufferIndex = 0;
 	ClearBuffer();
-	double tartTime = Sys.Ms();//TaskManager::Time();
+	double tartTime = millis();//TaskManager::Time();
 	//while ((TaskManager::Time() - tartTime) < timeOut)
-	while ((Sys.Ms() - tartTime) < timeOut*1000)
+	while ((millis() - tartTime) < timeOut*1000)
 	{
 		while (mUsart.RxSize() > 0)
 		{
@@ -312,9 +312,9 @@ bool esp8266::ReceiveAndWait(char const* targetString, const char* targetString2
 	u8 temp;
 	mReceiveBufferIndex = 0;
 	ClearBuffer();
-	double tartTime = Sys.Ms();//TaskManager::Time();
+	double tartTime = millis();//TaskManager::Time();
 	//while ((TaskManager::Time() - tartTime) < timeOut)
-	while ((Sys.Ms() - tartTime) < timeOut*1000)
+	while ((millis() - tartTime) < timeOut*1000)
 	{
 		while (mUsart.RxSize() > 0)
 		{

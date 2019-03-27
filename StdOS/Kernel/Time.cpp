@@ -221,7 +221,7 @@ void TTime::Init()
 		}
 #endif
 	}
-	//开机到现在的毫秒数
+	//系统启动后的毫秒数
 	uint64_t millis()
 	{
 		return Time.Current();
