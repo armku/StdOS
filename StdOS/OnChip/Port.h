@@ -18,7 +18,6 @@ public:
 		UP = 0x01,	// 上拉电阻
 		DOWN = 0x02,	// 下拉电阻
 	}PuPd;
-	uint8_t	Invert;	// 是否倒置输入输出。默认2表示自动检测
 	bool	Floating;	// 是否浮空输入
 	PuPd	Pull;	// 上拉下拉电阻
 	// END InputPort
