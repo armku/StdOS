@@ -49,7 +49,7 @@ bool Port::ReadInput()const
 
 void Port::OnOpenOutputPort(void *param)
 {
-	Port::OnOpen(param);
+	//Port::OnOpen(param);
 	this->OpenPinOutputPort(param);
 }
 
@@ -145,7 +145,7 @@ bool Port::Open()
 			// 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
 			GPIO_StructInit(&gpio);
 			gpio.GPIO_Pin = 1 << (this->_Pin & 0x0F);
-			this->OnOpen(&gpio);
+			//this->OnOpen(&gpio);
 
 			GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
 		}
@@ -352,7 +352,7 @@ void Port::OnOpenInputPort(void *param)
 		break;
 	}
 #elif defined STM32F1
-	Port::OnOpen(param);
+	//Port::OnOpen(param);
 	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
 	if (Floating)
 		gpio->GPIO_Mode = GPIO_Mode_IN_FLOATING;
@@ -431,20 +431,6 @@ void Port::Write(bool value)const
 #endif
 }
 
-void Port::OnOpen(void *param)
-{
-#if defined STM32F0
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-	gpio->GPIO_Speed = GPIO_Speed_50MHz;
-#elif defined STM32F1
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-	gpio->GPIO_Speed = GPIO_Speed_50MHz;
-#elif defined STM32F4
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-	gpio->GPIO_Speed = GPIO_Speed_100MHz;
-#endif
-}
-
 bool Port::Read()const
 {
 #if defined STM32F0
@@ -467,16 +453,14 @@ void Port::SetPinMode(GPIOMode_T mode)
 		// 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
 		GPIO_StructInit(&gpio);
 		gpio.GPIO_Pin = 1 << (this->_Pin & 0x0F);
-		this->OnOpen(&gpio);
 #if defined STM32F0
 		gpio.GPIO_Speed = GPIO_Speed_50MHz;
 #elif defined STM32F1
 		gpio.GPIO_Speed = GPIO_Speed_50MHz;
+		gpio.GPIO_Mode =(GPIOMode_TypeDef) mode;
 #elif defined STM32F4
 		gpio.GPIO_Speed = GPIO_Speed_100MHz;
 #endif
-
-
 		GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
 	}
 }
