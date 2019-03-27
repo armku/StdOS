@@ -88,61 +88,7 @@ void OpenPeriphClock(Pin pin)
 
 bool Port::Open()
 {
-#if defined STM32F0
-	if (this->Opened == false)
-	{
-		if (_Pin != P0)
-		{
-			// 打开时钟
-			int gi = _Pin >> 4;
-			RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA << gi, ENABLE);
-		}
-		this->Opened = true;
-	}
-	return true;
-#elif defined STM32F1
-	if (this->Opened == false)
-	{
-		if (_Pin != P0)
-		{
-			// 打开时钟
-			int gi = _Pin >> 4;
-			RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << gi, ENABLE);
-			// PA15/PB3/PB4 需要关闭JTAG
-			switch (_Pin)
-			{
-			case PA15:
-			case PB3:
-			case PB4:
-			{
-				//debug_printf("Close JTAG for P%c%d\r\n", _PIN_NAME(_Pin));
-				// PA15是jtag接口中的一员 想要使用 必须开启remap
-				RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-				GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
-				break;
-			}
-			}
-		}
 
-		this->Opened = true;
-	}
-	return true;
-#elif defined STM32F4
-	if (this->_Pin == P0)
-	{
-		return false;
-	}
-	else if (this->Opened)
-	{
-		return true;
-	}
-	else
-	{
-		// 打开时钟
-		int gi = _Pin >> 4;
-		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
-	}
-#endif
 }
 ///////////////////////////////以下为添加///////////////////////////////////////
 // 获取组和针脚
@@ -276,4 +222,60 @@ void Port::pinMode(GPIOMode_T mode)
 #endif
 		GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
 	}
+	//open
+#if defined STM32F0
+	if (this->Opened == false)
+	{
+		if (_Pin != P0)
+		{
+			// 打开时钟
+			int gi = _Pin >> 4;
+			RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA << gi, ENABLE);
+		}
+		this->Opened = true;
+	}
+	return ;
+#elif defined STM32F1
+	if (this->Opened == false)
+	{
+		if (_Pin != P0)
+		{
+			// 打开时钟
+			int gi = _Pin >> 4;
+			RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << gi, ENABLE);
+			// PA15/PB3/PB4 需要关闭JTAG
+			switch (_Pin)
+			{
+			case PA15:
+			case PB3:
+			case PB4:
+			{
+				//debug_printf("Close JTAG for P%c%d\r\n", _PIN_NAME(_Pin));
+				// PA15是jtag接口中的一员 想要使用 必须开启remap
+				RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+				GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
+				break;
+			}
+			}
+		}
+
+		this->Opened = true;
+	}
+	return ;
+#elif defined STM32F4
+	if (this->_Pin == P0)
+	{
+		return false;
+	}
+	else if (this->Opened)
+	{
+		return true;
+	}
+	else
+	{
+		// 打开时钟
+		int gi = _Pin >> 4;
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
+	}
+#endif
 }
