@@ -60,8 +60,7 @@ public:
 	operator bool() const { return Read(); }	
 protected:
     // ≈‰÷√π˝≥Ã
-    virtual void OnOpenInputPort(void* param);
-	virtual void OnOpenOutputPort(void* param);
+    virtual void OnOpenOutputPort(void* param);
 	virtual void OpenPinOutputPort(void* param);
 };
 
