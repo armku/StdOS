@@ -26,12 +26,12 @@ public:
 	void SetPinMode(GPIOMode_T mode);//设置管脚模式
 
 	//InputPort
-	typedef enum
-	{
-		NOPULL = 0x00,
-		UP = 0x01,	// 上拉电阻
-		DOWN = 0x02,	// 下拉电阻
-	}PuPd;
+	//typedef enum
+	//{
+	//	NOPULL = 0x00,
+	//	UP = 0x01,	// 上拉电阻
+	//	DOWN = 0x02,	// 下拉电阻
+	//}PuPd;
 	//bool	Floating;	// 是否浮空输入
 	//PuPd	Pull;	// 上拉下拉电阻
 	/*operator bool() const { return Read(); }*/
