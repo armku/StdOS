@@ -30,7 +30,6 @@ public:
 	void Write(bool value) const;
 	Port& operator=(bool value) { Write(value); return *this; }
 	Port& operator=(Port& port) { Write(port.Read()); return *this; }
-	//end Port
 	Port();
 
     Port& Set(Pin pin);	// …Ë÷√“˝Ω≈
