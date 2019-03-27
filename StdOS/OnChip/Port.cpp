@@ -458,3 +458,26 @@ bool Port::Read()const
 	return (group->IDR >> (this->_Pin & 0xF)) & 1;
 #endif
 }
+//设置管脚模式
+void Port::SetPinMode(GPIOMode_T mode)
+{
+	if (_Pin != P0)
+	{
+		GPIO_InitTypeDef gpio;
+		// 特别要慎重，有些结构体成员可能因为没有初始化而酿成大错
+		GPIO_StructInit(&gpio);
+		gpio.GPIO_Pin = 1 << (this->_Pin & 0x0F);
+		this->OnOpen(&gpio);
+#if defined STM32F0
+		gpio.GPIO_Speed = GPIO_Speed_50MHz;
+#elif defined STM32F1
+		gpio.GPIO_Speed = GPIO_Speed_50MHz;
+#elif defined STM32F4
+		gpio.GPIO_Speed = GPIO_Speed_100MHz;
+#endif
+
+
+		GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
+	}
+}
+
