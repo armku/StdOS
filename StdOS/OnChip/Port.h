@@ -20,9 +20,7 @@ typedef enum
 class Port
 {
 public:	
-    Pin		_Pin;		// 引脚  
-	bool	Opened;		// 是否已经打开
-
+    Pin		_Pin;		// 引脚  	
 	Port();
 	Port& SetPin(Pin pin);	// 设置引脚
 	void SetPinMode(GPIOMode_T mode);//设置管脚模式
@@ -40,6 +38,8 @@ public:
 
 	virtual bool Read() const;
 	operator bool() const { return Read(); }
+private:
+	bool	Opened;		// 是否已经打开
 };
 
 #endif //_Port_H_
