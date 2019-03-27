@@ -64,7 +64,7 @@ OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain, uint8_t speed)
 	}
 }
 
-bool OutputPort::ReadInput()const
+bool Port::ReadInput()const
 {
 	if (this->Empty())
 		return false;
