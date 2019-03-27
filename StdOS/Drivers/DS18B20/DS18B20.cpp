@@ -18,7 +18,7 @@ void DS18B20::Rest()
 {
     this->_dio=0;
     /* 主机至少产生480us的低电平复位信号 */
-    Sys.Delay(480);
+    delayMicroseconds(480);
     /* 主机在产生复位信号后，需将总线拉高 */
 	this->_dio=1;
 }
@@ -39,7 +39,7 @@ bool DS18B20::Presence()
     while (this->_dio && pulse_time < 100)
     {
         pulse_time++;
-        Sys.Delay(1);
+        delayMicroseconds(1);
     }
     /* 经过100us后，存在脉冲都还没有到来*/
     if (pulse_time >= 100)
@@ -51,7 +51,7 @@ bool DS18B20::Presence()
     while (!this->_dio && pulse_time < 240)
     {
         pulse_time++;
-        Sys.Delay(1);
+        delayMicroseconds(1);
     }
     if (pulse_time >= 240)
         return false;
@@ -69,10 +69,10 @@ uint8_t DS18B20::ReadBit()
     /* 读0和读1的时间至少要大于60us */
     /* 读时间的起始：必须由主机产生 >1us <15us 的低电平信号 */
     this->_dio=0;
-	Sys.Delay(10);
+	delayMicroseconds(10);
 
     /* 设置成输入，释放总线，由外部上拉电阻将总线拉高 */
-    //Sys.Delay(2);
+    //delayMicroseconds(2);
 	this->_dio=1;
 
     if (this->_dio)
@@ -80,7 +80,7 @@ uint8_t DS18B20::ReadBit()
     else
         dat = 0;
     /* 这个延时参数请参考时序图 */
-    Sys.Delay(45);
+    delayMicroseconds(45);
 
     return dat;
 }
@@ -117,20 +117,20 @@ void DS18B20::WriteByte(uint8_t dat)
         {
             this->_dio=0;
             /* 1us < 这个延时 < 15us */
-            Sys.Delay(8);
+            delayMicroseconds(8);
 
             this->_dio=1;
-            Sys.Delay(58);
+            delayMicroseconds(58);
         }
         else
         {
             this->_dio=0;
             /* 60us < Tx 0 < 120us */
-            Sys.Delay(70);
+            delayMicroseconds(70);
 
             this->_dio=1;
             /* 1us < Trec(恢复时间) < 无穷大*/
-            Sys.Delay(2);
+            delayMicroseconds(2);
         }
     }
 }

@@ -120,7 +120,7 @@ void EspDemoLink::SetPin(Pin pch, Pin prst)
 }
 void EspDemoLink::Init()
 {
-	Sys.Delay(500);
+	delayMicroseconds(500);
 	this->pinch = 1;
 	this->pinrst = 1;
 }

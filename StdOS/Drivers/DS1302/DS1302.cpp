@@ -85,12 +85,12 @@ DateTime& DS1302::GetTime(DateTime & dt)
 void DS1302::set1302()
 {
 	this->prst = 1;
-	Sys.Delay(10);
+	delayMicroseconds(10);
 }
 void DS1302::reset1302()
 {
 	this->prst = 0;
-	Sys.Delay(10);
+	delayMicroseconds(10);
 }
 /********************************************************************
 *
@@ -115,11 +115,11 @@ void DS1302::Bytein(uint8_t ucDa)
 		{
 			this->pio = 0; /*相当于汇编中的 RRC */
 		}
-		Sys.Delay(1);
+		delayMicroseconds(1);
 		this->psck = 1;
-		Sys.Delay(1);
+		delayMicroseconds(1);
 		this->psck = 0;
-		Sys.Delay(1);
+		delayMicroseconds(1);
 		ucDa = ucDa >> 1;
 	}
 }
@@ -145,11 +145,11 @@ uint8_t DS1302::Byteout()
 		{
 			ucDa |= 0X80;
 		}
-		Sys.Delay(1);
+		delayMicroseconds(1);
 		this->psck = 1;
-		Sys.Delay(1);
+		delayMicroseconds(1);
 		this->psck = 0;
-		Sys.Delay(1);
+		delayMicroseconds(1);
 	}
 	return (ucDa);
 }
