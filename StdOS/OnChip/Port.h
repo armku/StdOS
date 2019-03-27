@@ -66,8 +66,8 @@ public:
     operator bool() const { return Read(); }
 
 protected:
-    virtual void OnOpen(void* param);
-	virtual void OpenPin(void* param);
+    virtual void OnOpenOutputPort(void* param);
+	virtual void OpenPinOutputPort(void* param);
 };
 
 #endif //_Port_H_

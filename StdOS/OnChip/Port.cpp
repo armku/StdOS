@@ -72,10 +72,10 @@ bool OutputPort::ReadInput()const
 		return this->Invert ? !Port::Read() : Port::Read();
 }
 
-void OutputPort::OnOpen(void *param)
+void OutputPort::OnOpenOutputPort(void *param)
 {
 	Port::OnOpen(param);
-	this->OpenPin(param);
+	this->OpenPinOutputPort(param);
 }
 
 
@@ -215,7 +215,7 @@ bool Port::Open()
 #endif
 }
 
-void OutputPort::OpenPin(void *param)
+void OutputPort::OpenPinOutputPort(void *param)
 {
 #if defined STM32F0
 	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
