@@ -25,15 +25,6 @@ public:
 
 	void SetPinMode(GPIOMode_T mode);//设置管脚模式
 
-	//InputPort
-	//typedef enum
-	//{
-	//	NOPULL = 0x00,
-	//	UP = 0x01,	// 上拉电阻
-	//	DOWN = 0x02,	// 下拉电阻
-	//}PuPd;
-	//bool	Floating;	// 是否浮空输入
-	//PuPd	Pull;	// 上拉下拉电阻
 	/*operator bool() const { return Read(); }*/
 	bool ReadInput() const;// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
 	static void Write(Pin pin, bool value);
