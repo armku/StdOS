@@ -34,10 +34,6 @@ public:
 	}PuPd;
 	bool	Floating;	// 是否浮空输入
 	PuPd	Pull;	// 上拉下拉电阻
-	// END InputPort
-	//Port
-	//end Port
-	//Port
 	/*operator bool() const { return Read(); }*/
 	bool ReadInput() const;// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
 	static void Write(Pin pin, bool value);
