@@ -7,31 +7,6 @@ TTime::TTime()
 	this->BaseSeconds = 0;
 	this->Seconds = 0;
 }
-//ÑÓÊ±nms
-void TTime::Sleep(int nms, bool *running)const
-{
-	if (nms > 0)
-	{
-		int64_t endcurrent = Time.Current() + nms;
-
-		if (nms)
-		{
-			if (!running || *running != 0)
-			{
-				while (1)
-				{
-					if (((endcurrent + Time.Current()) >= endcurrent))
-						break;
-					if (running)
-					{
-						if (!*running)
-							break;
-					}
-				}
-			}
-		}
-	}
-}
 
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////

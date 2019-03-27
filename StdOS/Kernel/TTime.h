@@ -25,8 +25,6 @@ public:
     uint32_t CurrentTicks() const;	// 当前滴答时钟
 	uint64_t Current() const; 		// 当前毫秒数
 
-	void Sleep(int ms, bool* running = NULL) const;
-
 	uint32_t TicksToUs(uint32_t ticks) const;
 	uint32_t UsToTicks(uint32_t us) const;
 };

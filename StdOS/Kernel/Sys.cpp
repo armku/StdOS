@@ -80,8 +80,8 @@ void TSys::Sleep(int ms)const
 			return;
 		ms -= executems;
 	}
-	if (ms)
-		Time.Sleep(ms, NULL);
+//	if (ms)
+//		Time.Sleep(ms, NULL);
 }
 
 // —”≥Ÿ“Ï≤Ω÷ÿ∆Ù

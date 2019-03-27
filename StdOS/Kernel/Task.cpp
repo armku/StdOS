@@ -391,7 +391,7 @@ void TaskScheduler::Execute(uint32_t msMax, bool &cancel)
     if (min != UInt64_Max && min > mscur)
     {
         min -= mscur;
-        Time.Sleep(min);
+        //Time.Sleep(min);
     }
 }
 
