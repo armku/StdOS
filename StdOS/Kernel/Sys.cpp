@@ -99,7 +99,7 @@ void TSys::Delay(int us)const
 	}
 	if (us)
 	{
-		Time.Delay(us);
+		delayMicroseconds(us);
 	}
 }
 

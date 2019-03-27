@@ -32,51 +32,7 @@ void TTime::Sleep(int nms, bool *running)const
 		}
 	}
 }
-// Œ¢√Îº∂—”≥Ÿ
-void TTime::Delay(int nus)const
-{
-	int sumus;
-	uint64_t summs;
-	uint32_t startTicks;
-	uint32_t stopTicks;
-	static uint32_t ticksPerMs = 0;
-	sumus = nus;
-	if (nus < 800)
-	{
-		delayMicroseconds(nus);
-	}
-	else if (nus > 0)
-	{
-		if (nus > 100)
-			sumus = nus - 1;
-		summs = this->Current();
-		if (sumus >= 1000)
-		{
-			summs += sumus / 1000;
-			sumus %= 1000;
-		}
-		startTicks = this->CurrentTicks();
-		stopTicks = startTicks + this->UsToTicks(sumus);
-		if (ticksPerMs < 10)
-			ticksPerMs = this->UsToTicks(1000);
-		if (stopTicks >= ticksPerMs)
-		{
-			++summs;
-			stopTicks -= ticksPerMs;
-		}
-		while (true)
-		{
-			if (this->Current() > summs)
-				break;
-			if (this->Current() == summs)
-			{
-				if (this->CurrentTicks() >= stopTicks)
-					break;
-			}
-		}
-	}
-	else {}
-}
+
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 TimeCost::TimeCost()

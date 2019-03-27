@@ -26,7 +26,6 @@ public:
 	uint64_t Current() const; 		// 当前毫秒数
 
 	void Sleep(int ms, bool* running = NULL) const;
-    void Delay(int us) const;	// 微秒级延迟	
 
 	uint32_t TicksToUs(uint32_t ticks) const;
 	uint32_t UsToTicks(uint32_t us) const;
