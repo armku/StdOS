@@ -44,11 +44,10 @@ OutputPort::OutputPort()
 	this->OpenDrain = 0;
 }
 
-OutputPort::OutputPort(Pin pin, uint8_t invert, bool openDrain)
+OutputPort::OutputPort(Pin pin, uint8_t invert)
 {
 	this->Opened = false;
 	this->OpenDrain = false;
-	this->OpenDrain = openDrain;
 	if (pin != P0)
 	{
 		this->Set(pin);

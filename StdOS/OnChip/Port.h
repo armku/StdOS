@@ -54,7 +54,7 @@ class OutputPort : public Port
 {
 public:  
     OutputPort();
-    OutputPort(Pin pin, uint8_t invert, bool openDrain = false);
+    OutputPort(Pin pin, uint8_t invert);
 	
     void Write(bool value) const;
     OutputPort& operator=(bool value) { Write(value); return *this; }
