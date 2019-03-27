@@ -23,17 +23,13 @@ public:
 	PuPd	Pull;	// 上拉下拉电阻
 	// END InputPort
 	//OutputPort
-//	uint8_t Invert;		// 是否倒置输入输出。默认2表示自动检测
 	bool OpenDrain;	// 是否开漏输出
 	uint8_t Speed;		// 速度
 	//end OutputPort
 	//OutputPort
 	/*operator bool() const { return Read(); }*/
-	bool ReadInput() const;
+	bool ReadInput() const;// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
 	static void Write(Pin pin, bool value);
-
-
-
 
 	//end OutputPort
 	virtual void OpenPinAlternatePort(void* param);
@@ -47,8 +43,7 @@ public:
 	void Close();
 
 	virtual bool Read() const;
-	operator bool() const { return Read(); }
-	
+	operator bool() const { return Read(); }	
 protected:
     // 配置过程
     virtual void OnOpen(void* param);
@@ -60,20 +55,12 @@ protected:
 class OutputPort : public Port
 {
 public:  
-
     OutputPort();
     OutputPort(Pin pin, uint8_t invert, bool openDrain = false, uint8_t speed = 50);
 	
     void Write(bool value) const;
-	// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
-    /*virtual bool Read() const;*/
-	
-
-    
-
     OutputPort& operator=(bool value) { Write(value); return *this; }
     OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }
-    /*operator bool() const { return Read(); }*/
 };
 
 #endif //_Port_H_
