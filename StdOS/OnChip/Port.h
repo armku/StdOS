@@ -45,6 +45,8 @@ protected:
     // 配置过程
     virtual void OnOpen(void* param);
 	virtual void OnOpenInputPort(void* param);
+	virtual void OnOpenOutputPort(void* param);
+	virtual void OpenPinOutputPort(void* param);
 };
 // 输出口
 class OutputPort : public Port
@@ -64,10 +66,6 @@ public:
     OutputPort& operator=(bool value) { Write(value); return *this; }
     OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }
     operator bool() const { return Read(); }
-
-protected:
-    virtual void OnOpenOutputPort(void* param);
-	virtual void OpenPinOutputPort(void* param);
 };
 
 #endif //_Port_H_
