@@ -47,7 +47,7 @@ public:
 	
 	uint32_t	Seconds() const;	// 系统绝对当前时间，秒
 
-    void Sleep(int ms) const; // 毫秒级延迟
+    void Sleep112233(int ms) const; // 毫秒级延迟
 	
 	// 延迟异步重启
 	void Reboot(int msDelay = 0) const;

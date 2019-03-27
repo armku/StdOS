@@ -158,7 +158,7 @@ uint8_t SpiSoft::WaitBusy()
 	i = 0;
 	while (this->_miso.Read() > 0)
 	{
-		Sys.Sleep(10);
+		delay(10);
 		i++;
 		if (i > 200)
 			return 1;

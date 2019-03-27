@@ -51,7 +51,7 @@ uint32_t TSys::Seconds()const
 }
 
 // ºÁÃë¼¶ÑÓ³Ù
-void TSys::Sleep(int ms)const
+void TSys::Sleep112233(int ms)const
 {
 	if (!this->Started)
 	{

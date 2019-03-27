@@ -190,7 +190,7 @@ void TTime::Init()
 	//延时毫秒
 	void delay(uint64_t ms)
 	{
-		Sys.Sleep(ms);
+		Sys.Sleep112233(ms);
 	}
 	//us延时，100us以下精确
 	void delayMicroseconds(uint32_t us)
