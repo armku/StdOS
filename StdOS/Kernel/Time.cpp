@@ -182,11 +182,6 @@ void TTime::Init()
 		return DeviceConfigCenter::CurrentTicks1();
 	}
 
-	// 当前毫秒数 计数值2000
-	uint64_t TTime::Current112233()const
-	{
-		return this->Milliseconds + DeviceConfigCenter::CurrentTick();
-	}
 	//延时毫秒
 	void delay(uint64_t ms)
 	{
