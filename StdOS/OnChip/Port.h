@@ -51,11 +51,5 @@ protected:
 	virtual void OnOpenOutputPort(void* param);
 	virtual void OpenPinOutputPort(void* param);
 };
-// Êä³ö¿Ú
-//class Port : public Port
-//{
-//public:  
-//    
-//};
 
 #endif //_Port_H_
