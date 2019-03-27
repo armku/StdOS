@@ -44,17 +44,6 @@ OutputPort::OutputPort()
 	this->OpenDrain = 0;
 }
 
-OutputPort::OutputPort(Pin pin)
-{
-	this->Opened = false;
-	this->OpenDrain = false;
-	if (pin != P0)
-	{
-		this->Set(pin);
-		this->Open();
-	}
-}
-
 bool Port::ReadInput()const
 {
 	if (this->Empty())
