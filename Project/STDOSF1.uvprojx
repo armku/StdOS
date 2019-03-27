@@ -648,11 +648,6 @@
           <GroupName>OnChip</GroupName>
           <Files>
             <File>
-              <FileName>GPIO.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\GPIO.cpp</FilePath>
-            </File>
-            <File>
               <FileName>InputCapture_EXIT.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\InputCapture_EXIT.cpp</FilePath>
@@ -1562,11 +1557,6 @@
         <Group>
           <GroupName>OnChip</GroupName>
           <Files>
-            <File>
-              <FileName>GPIO.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\GPIO.cpp</FilePath>
-            </File>
             <File>
               <FileName>InputCapture_EXIT.cpp</FileName>
               <FileType>8</FileType>
