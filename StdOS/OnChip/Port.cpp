@@ -46,14 +46,6 @@ bool Port::ReadInput()const
 	else
 		return Port::Read();
 }
-
-void Port::OnOpenOutputPort(void *param)
-{
-	//Port::OnOpen(param);
-	this->OpenPinOutputPort(param);
-}
-
-
 // 读取本组所有引脚，任意脚为true则返回true，主要为单一引脚服务
 GPIO_TypeDef *IndexToGroup(uint8_t index);
 
@@ -180,90 +172,6 @@ bool Port::Open()
 	}
 #endif
 }
-
-void Port::OpenPinOutputPort(void *param)
-{
-#if defined STM32F0
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-
-	gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式	
-	if (this->OpenDrain)
-	{
-		gpio->GPIO_OType = GPIO_OType_OD;
-		gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;/*设置引脚模式为无上拉*/
-	}
-	else
-	{
-		gpio->GPIO_OType = GPIO_OType_PP;//通用推挽输出			
-		gpio->GPIO_PuPd = GPIO_PuPd_UP;/*设置引脚模式为上拉*/
-	}
-#elif defined STM32F1
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-
-	if (this->OpenDrain)
-	{
-		gpio->GPIO_Mode = GPIO_Mode_Out_OD;
-	}
-	else
-	{
-		gpio->GPIO_Mode = GPIO_Mode_Out_PP;
-	}
-#elif defined STM32F4
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-
-	gpio->GPIO_Mode = GPIO_Mode_OUT; //普通输出模式	
-	if (this->OpenDrain)
-	{
-		gpio->GPIO_OType = GPIO_OType_OD; //推挽输出
-		gpio->GPIO_PuPd = GPIO_PuPd_NOPULL; //            
-	}
-	else
-	{
-		gpio->GPIO_OType = GPIO_OType_PP; //推挽输出
-		gpio->GPIO_PuPd = GPIO_PuPd_UP; //上拉
-	}
-#endif
-}
-void Port::OpenPinAlternatePort(void *param)
-{
-#if defined STM32F0
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-	gpio->GPIO_Mode = GPIO_Mode_AF;
-	gpio->GPIO_Speed = GPIO_Speed_50MHz;
-	gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
-	if (!this->OpenDrain)
-	{
-		gpio->GPIO_PuPd = GPIO_PuPd_UP;
-	}
-	else
-	{
-		gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
-	}
-	int i = 0;
-	i++;
-#elif defined STM32F1
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-	gpio->GPIO_Mode = this->OpenDrain ? GPIO_Mode_AF_OD : GPIO_Mode_AF_PP;
-	int i = 0;
-	i++;
-#elif defined STM32F4
-	GPIO_InitTypeDef *gpio = (GPIO_InitTypeDef*)param;
-	gpio->GPIO_Mode = GPIO_Mode_AF;
-	gpio->GPIO_Speed = GPIO_Speed_50MHz;
-	gpio->GPIO_OType = OpenDrain ? GPIO_OType_OD : GPIO_OType_PP;
-	if (!this->OpenDrain)
-	{
-		gpio->GPIO_PuPd = GPIO_PuPd_UP;
-	}
-	else
-	{
-		gpio->GPIO_PuPd = GPIO_PuPd_NOPULL;
-	}
-	int i = 0;
-	i++;
-#endif
-}
-
 ///////////////////////////////以下为添加///////////////////////////////////////
 // 获取组和针脚
 #define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (uint16_t)0xF0) << 6)))

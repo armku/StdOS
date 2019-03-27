@@ -46,8 +46,6 @@ public:
 	Port& operator=(bool value) { Write(value); return *this; }
 	Port& operator=(Port& port) { Write(port.Read()); return *this; }
 	//end Port
-	virtual void OpenPinAlternatePort(void* param);
-
 	Port();
 
     Port& Set(Pin pin);	// 设置引脚
@@ -57,11 +55,7 @@ public:
 	void Close();
 
 	virtual bool Read() const;
-	operator bool() const { return Read(); }	
-protected:
-    // 配置过程
-    virtual void OnOpenOutputPort(void* param);
-	virtual void OpenPinOutputPort(void* param);
+	operator bool() const { return Read(); }
 };
 
 #endif //_Port_H_
