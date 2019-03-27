@@ -30,6 +30,11 @@ public:
 	//OutputPort
 	/*operator bool() const { return Read(); }*/
 	bool ReadInput() const;
+	static void Write(Pin pin, bool value);
+
+
+
+
 	//end OutputPort
 	virtual void OpenPinAlternatePort(void* param);
 
@@ -64,7 +69,7 @@ public:
     /*virtual bool Read() const;*/
 	
 
-    static void Write(Pin pin, bool value);
+    
 
     OutputPort& operator=(bool value) { Write(value); return *this; }
     OutputPort& operator=(OutputPort& port) { Write(port.Read()); return *this; }

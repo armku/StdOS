@@ -324,7 +324,7 @@ uint8_t GroupToIndex(GPIO_TypeDef *group)
 #endif
 }
 
-void OutputPort::Write(Pin pin, bool value)
+void Port::Write(Pin pin, bool value)
 {
 #if defined STM32F0
 	if (value)
