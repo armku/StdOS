@@ -32,7 +32,7 @@ void ModbusSlaveLinkRoutin(void* param)
 void ModbusSlaveLinkTestInit()
 {
 	p485dr.Set(PC2);
-	p485dr.OpenDrain = false;
+	p485dr.SetPinMode(GPIO_Out_PP);
 	p485dr.Open();
 	p485dr = 0;//接收模式
 	modbusSlave.com.RS485 = &p485dr;

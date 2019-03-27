@@ -36,7 +36,6 @@ public:
 	PuPd	Pull;	// 上拉下拉电阻
 	// END InputPort
 	//Port
-	bool OpenDrain;	// 是否开漏输出
 	//end Port
 	//Port
 	/*operator bool() const { return Read(); }*/

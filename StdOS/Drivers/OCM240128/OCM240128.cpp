@@ -15,12 +15,12 @@ void OCM240128::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led,Pin cd)
 	this->pinled.Set(led);
 	this->pincd.Set(cd);
 		
-	this->pince.OpenDrain = false;
-	this->pinwr.OpenDrain = false;
-	this->pinrd.OpenDrain = false;
-	/*this->pinfs.OpenDrain = false;*/
-	this->pinled.OpenDrain = false;
-	this->pincd.OpenDrain = false;
+	this->pince.SetPinMode(GPIO_Out_PP);
+	this->pinwr.SetPinMode(GPIO_Out_PP);
+	this->pinrd.SetPinMode(GPIO_Out_PP);
+	/*this->pinfs.SetPinMode(GPIO_Out_PP);*/
+	this->pinled.SetPinMode(GPIO_Out_PP);
+	this->pincd.SetPinMode(GPIO_Out_PP);
 
 	this->pince.Open();
 	this->pinwr.Open();
@@ -40,14 +40,14 @@ void OCM240128::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d
 	this->data6.Set(d6);
 	this->data7.Set(d7);
 
-	this->data0.OpenDrain = false;
-	this->data1.OpenDrain = false;
-	this->data2.OpenDrain = false;
-	this->data3.OpenDrain = false;
-	this->data4.OpenDrain = false;
-	this->data5.OpenDrain = false;
-	this->data6.OpenDrain = false;
-	this->data7.OpenDrain = false;
+	this->data0.SetPinMode(GPIO_Out_PP);
+	this->data1.SetPinMode(GPIO_Out_PP);
+	this->data2.SetPinMode(GPIO_Out_PP);
+	this->data3.SetPinMode(GPIO_Out_PP);
+	this->data4.SetPinMode(GPIO_Out_PP);
+	this->data5.SetPinMode(GPIO_Out_PP);
+	this->data6.SetPinMode(GPIO_Out_PP);
+	this->data7.SetPinMode(GPIO_Out_PP);
 
 	this->data0.Open();
 	this->data1.Open();

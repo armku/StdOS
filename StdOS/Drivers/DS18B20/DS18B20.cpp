@@ -5,7 +5,7 @@ void DS18B20::SetPin(Pin pin)
 {
 	this->_dio.Set(pin);
 	
-	this->_dio.OpenDrain=true;
+	this->_dio.SetPinMode(GPIO_Out_PP);
 	
 	this->_dio.Open();
 	this->_dio = 1;

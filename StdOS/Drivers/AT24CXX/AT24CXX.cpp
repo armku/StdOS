@@ -121,7 +121,7 @@ void AT24CXX::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
 	if (pinwriteprotect != P0)
 	{
 		this->pinWP.Set(pinwriteprotect);
-		this->pinWP.OpenDrain = false;
+		this->pinWP.SetPinMode(GPIO_Out_PP);
 		this->pinWP.Open();
 		this->pinWP = 1;
 	}

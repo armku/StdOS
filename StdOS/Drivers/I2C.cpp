@@ -3,15 +3,16 @@
 // 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
 SoftI2C::SoftI2C(uint32_t speedHz)
 {
-	this->_delay=4;
-	this->SCL.OpenDrain = false;
-    this->SDA.OpenDrain = true;//此处设置错误将导致IIC异常
+	this->_delay=4;	
 }
 
 void SoftI2C::SetPin(Pin scl, Pin sda)
 {
 	this->SCL.Set(scl);
     this->SDA.Set(sda);
+
+	this->SCL.SetPinMode(GPIO_Out_PP);
+	this->SDA.SetPinMode(GPIO_Out_OD);//此处设置错误将导致IIC异常
 	
 	this->SDA = 1;
 	this->SCL = 1;

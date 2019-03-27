@@ -55,22 +55,14 @@ void Spi::Init(SPI spi, uint32_t speedHz)
 
 void Spi::SetPin(Pin clk, Pin miso, Pin mosi)
 {
-	/*this->Pins[1] = clk;
-	this->Pins[2] = miso;
-	this->Pins[3] = mosi;
-
-	this->_clk.Set(this->Pins[1]);
-	this->_miso.Set(this->Pins[2]);
-	this->_mosi.Set(this->Pins[3]);*/
-
-	this->_clk.OpenDrain = false;
-	this->_miso.OpenDrain = false;
-	this->_mosi.OpenDrain = false;
-
 	this->_clk.Set(clk);
 	this->_miso.Set(miso);
 	this->_mosi.Set(mosi);
-
+	
+	this->_clk.SetPinMode(GPIO_Out_PP);
+	this->_miso.SetPinMode(GPIO_Out_PP);
+	this->_mosi.SetPinMode(GPIO_Out_PP);
+	
 	this->_clk.Open();
 	this->_miso.Open();
 	this->_mosi.Open();
@@ -80,7 +72,7 @@ void Spi::SetNss(Pin nss)
 	/*this->Pins[0] = nss;
 	this->_nss.Set(this->Pins[0]);*/
 
-	this->_nss.OpenDrain = false;
+	this->_nss.SetPinMode(GPIO_Out_PP);
 
 	this->_nss.Set(nss);
 
@@ -147,8 +139,8 @@ SpiSoft::SpiSoft(CPOLTYPE cpol, CPHATYPE cpha, uint32_t speedHz)
 
 void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi)
 {
-	this->_clk.OpenDrain = false;
-	this->_mosi.OpenDrain = false;
+	this->_clk.SetPinMode(GPIO_Out_PP);
+	this->_mosi.SetPinMode(GPIO_Out_PP);//此处设置错误将导致异常
 	//this->_miso.OpenDrain = false;
 
 	this->_clk.Set(clk);
@@ -161,7 +153,7 @@ void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi)
 }
 void SpiSoft::SetNss(Pin nss)
 {
-	this->_nss.OpenDrain = false;
+	this->_nss.SetPinMode(GPIO_Out_PP);
 
 	this->_nss.Set(nss);
 	this->_nss.Open();

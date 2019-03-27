@@ -10,13 +10,7 @@
 
 //0-本次读取的数据缓存保存位置(n-2); 2-AD7689通道选择
 CAD7689::CAD7689()
-{
-	this->ppinsck.OpenDrain = false;
-	this->ppinsdi.OpenDrain = false;
-	//this->ppinsdo.OpenDrain = false;
-	this->ppincnv.OpenDrain = false;
-
-	
+{	
 	for (uint8_t i = 0; i < MAXCH; i++)
     {
         this->FlagEnable[i] = 1;
