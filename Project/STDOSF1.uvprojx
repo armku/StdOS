@@ -648,24 +648,9 @@
           <GroupName>OnChip</GroupName>
           <Files>
             <File>
-              <FileName>InputCapture_EXIT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\InputCapture_EXIT.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InputCapture_TIM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\InputCapture_TIM.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PWM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\PWM.cpp</FilePath>
             </File>
             <File>
               <FileName>PwmSolo.cpp</FileName>
@@ -1558,24 +1543,9 @@
           <GroupName>OnChip</GroupName>
           <Files>
             <File>
-              <FileName>InputCapture_EXIT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\InputCapture_EXIT.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InputCapture_TIM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\InputCapture_TIM.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PWM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\PWM.cpp</FilePath>
             </File>
             <File>
               <FileName>PwmSolo.cpp</FileName>
