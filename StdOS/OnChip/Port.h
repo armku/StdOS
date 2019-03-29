@@ -21,7 +21,7 @@ class Port
 {
 public:
 	Port();
-	Port& SetPin(Pin pin);	// 设置引脚
+	virtual Port& SetPin(Pin pin);	// 设置引脚
 	void pinMode(GPIOMode_T mode);//设置管脚模式
 
 	bool ReadInput() const;// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别

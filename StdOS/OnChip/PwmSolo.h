@@ -7,6 +7,7 @@
     {
         public:
             PwmSolo(uint32_t frq = 10000, uint32_t duty = 50,bool invert=false);
+			virtual Port& SetPin(Pin pin);	// 设置引脚
 			void Open();
             void SetOut(int pwmValue); //设置输出值
             void SetOutPercent(float per); //设置输出比例，0-100		
