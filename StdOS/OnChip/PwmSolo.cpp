@@ -22,6 +22,7 @@ Port& PwmSolo::SetPin(Pin pin)
 {
 	Port::SetPin(pin);
 	this->pinMode(GPIO_AF_PP);
+	return *this;
 }
 
 void PwmSolo::OnOpen2()
