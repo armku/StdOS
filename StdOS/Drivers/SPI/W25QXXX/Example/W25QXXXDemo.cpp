@@ -4,25 +4,14 @@
 
 #ifdef _W25QXX_TEST_CPP
 
-#define      macSPI_CS_CLK                               RCC_APB2Periph_GPIOA    
-#define      macSPI_CS_PORT                              GPIOA
 #define      macSPI_CS_PIN                               GPIO_Pin_4
-
-#define      macSPI_SCK_CLK                              RCC_APB2Periph_GPIOA   
-#define      macSPI_SCK_PORT                             GPIOA   
 #define      macSPI_SCK_PIN                              GPIO_Pin_5
-
-#define      macSPI_MISO_CLK                             RCC_APB2Periph_GPIOA    
-#define      macSPI_MISO_PORT                            GPIOA 
 #define      macSPI_MISO_PIN                             GPIO_Pin_6
-
-#define      macSPI_MOSI_CLK                             RCC_APB2Periph_GPIOA    
-#define      macSPI_MOSI_PORT                            GPIOA 
 #define      macSPI_MOSI_PIN                             GPIO_Pin_7
 
 /************************** SPI Flash 函数宏定义********************************/
-#define      macSPI_FLASH_CS_ENABLE()                       GPIO_ResetBits( macSPI_CS_PORT, macSPI_CS_PIN )
-#define      macSPI_FLASH_CS_DISABLE()                      GPIO_SetBits( macSPI_CS_PORT, macSPI_CS_PIN )
+#define      macSPI_FLASH_CS_ENABLE()                       GPIO_ResetBits( GPIOA, macSPI_CS_PIN )
+#define      macSPI_FLASH_CS_DISABLE()                      GPIO_SetBits( GPIOA, macSPI_CS_PIN )
 
 #include "stm32f10x.h"
 
@@ -117,27 +106,27 @@ void SPI_FLASH_Init(void)
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
 
 	/*!< Configure SPI_FLASH_SPI_CS_PIN pin: SPI_FLASH Card CS pin */
-	RCC_APB2PeriphClockCmd(macSPI_CS_CLK, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 	GPIO_InitStructure.GPIO_Pin = macSPI_CS_PIN;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_Init(macSPI_CS_PORT, &GPIO_InitStructure);
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
 
 	/*!< Configure SPI_FLASH_SPI pins: SCK */
-	RCC_APB2PeriphClockCmd(macSPI_SCK_CLK, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 	GPIO_InitStructure.GPIO_Pin = macSPI_SCK_PIN;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-	GPIO_Init(macSPI_SCK_PORT, &GPIO_InitStructure);
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
 
 	/*!< Configure SPI_FLASH_SPI pins: MISO */
-	RCC_APB2PeriphClockCmd(macSPI_MISO_CLK, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 	GPIO_InitStructure.GPIO_Pin = macSPI_MISO_PIN;
-	GPIO_Init(macSPI_MISO_PORT, &GPIO_InitStructure);
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
 
 	/*!< Configure SPI_FLASH_SPI pins: MOSI */
-	RCC_APB2PeriphClockCmd(macSPI_MOSI_CLK, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 	GPIO_InitStructure.GPIO_Pin = macSPI_MOSI_PIN;
-	GPIO_Init(macSPI_MOSI_PORT, &GPIO_InitStructure);
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
 
 	/* Deselect the FLASH: Chip Select high */
 	macSPI_FLASH_CS_DISABLE();
