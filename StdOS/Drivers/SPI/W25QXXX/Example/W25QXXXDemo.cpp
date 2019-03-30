@@ -39,8 +39,6 @@
 
 #include "stm32f10x.h"
 
-#define printf debug_printf
-
 void SPI_FLASH_Init(void);
 void SPI_FLASH_SectorErase(uint32_t SectorAddr);
 void SPI_FLASH_BulkErase(void);
@@ -77,7 +75,7 @@ typedef enum { FAILED = 0, PASSED = !FAILED } TestStatus;
 
 
 /* 发送缓冲区初始化 */
-uint8_t Tx_Buffer[] = " 感谢您选用野火stm32开发板\r\n";
+uint8_t Tx_Buffer[] = "thinks to use test board\r\n";
 uint8_t Rx_Buffer[BufferSize];
 
 uint32_t DeviceID = 0;
@@ -687,7 +685,7 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
 }
     void w25qxxxtest()
     {       
-		printf("\r\n 这是一个8Mbyte串行flash(W25Q64)实验 \r\n");
+		debug_printf("\r\n 8Mbyte flash(W25Q64)Test\r\n");
 
 		/* 8M串行flash W25Q64初始化 */
 		SPI_FLASH_Init();
@@ -700,12 +698,12 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
 		/* Get SPI Flash ID */
 		FlashID = SPI_FLASH_ReadID();
 
-		printf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", FlashID, DeviceID);
+		debug_printf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", FlashID, DeviceID);
 
 		/* Check the SPI Flash ID */
 		if (FlashID == sFLASH_ID)  /* #define  sFLASH_ID  0XEF4017 */
 		{
-			printf("\r\n 检测到华邦串行flash W25Q64 !\r\n");
+			debug_printf("\r\n winbond flash W25Q64 !\r\n");
 
 			/* Erase SPI FLASH Sector to write on */
 			SPI_FLASH_SectorErase(FLASH_SectorToErase);
@@ -713,27 +711,27 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
 			/* 将发送缓冲区的数据写到flash中 */
 			SPI_FLASH_BufferWrite(Tx_Buffer, FLASH_WriteAddress, BufferSize);
 			SPI_FLASH_BufferWrite(Tx_Buffer, 252, BufferSize);
-			printf("\r\n 写入的数据为：%s \r\t", Tx_Buffer);
+			debug_printf("\r\n Write Data is：%s \r\t", Tx_Buffer);
 
 			/* 将刚刚写入的数据读出来放到接收缓冲区中 */
 			SPI_FLASH_BufferRead(Rx_Buffer, FLASH_ReadAddress, BufferSize);
-			printf("\r\n 读出的数据为：%s \r\n", Rx_Buffer);
+			debug_printf("\r\n Read data is：%s \r\n", Rx_Buffer);
 
 			/* 检查写入的数据与读出的数据是否相等 */
 			TransferStatus1 = Buffercmp(Tx_Buffer, Rx_Buffer, BufferSize);
 
 			if (PASSED == TransferStatus1)
 			{
-				printf("\r\n 8M串行flash(W25Q64)测试成功!\n\r");
+				debug_printf("\r\n 8M flash(W25Q64)Test Success!\n\r");
 			}
 			else
 			{
-				printf("\r\n 8M串行flash(W25Q64)测试失败!\n\r");
+				debug_printf("\r\n 8M flash(W25Q64)test fail!\n\r");
 			}
 		}// if (FlashID == sFLASH_ID)
 		else
 		{
-			printf("\r\n 获取不到 W25Q64 ID!\n\r");
+			debug_printf("\r\n can not get W25Q64 ID!\n\r");
 		}
 
 		SPI_Flash_PowerDown();
