@@ -10,8 +10,8 @@
 #define      macSPI_MOSI_PIN                             GPIO_Pin_7
 
 /************************** SPI Flash 函数宏定义********************************/
-#define      macSPI_FLASH_CS_ENABLE()                       GPIO_ResetBits( GPIOA, macSPI_CS_PIN )
-#define      macSPI_FLASH_CS_DISABLE()                      GPIO_SetBits( GPIOA, macSPI_CS_PIN )
+#define      macSPI_FLASH_CS_ENABLE()                       GPIO_ResetBits( GPIOA, GPIO_Pin_4 )
+#define      macSPI_FLASH_CS_DISABLE()                      GPIO_SetBits( GPIOA, GPIO_Pin_4 )
 
 #include "stm32f10x.h"
 
