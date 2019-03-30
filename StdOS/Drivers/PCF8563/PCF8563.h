@@ -1,6 +1,6 @@
 #ifndef _PCF8563_H
 #define _PCF8563_H
-#include "../I2C.h"
+#include "../OnChip/I2C.h"
 #include "DateTime.h"
 class PCF8563
 {

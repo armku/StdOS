@@ -677,6 +677,11 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
             </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\I2C.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -786,11 +791,6 @@
               <FileName>W5500.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\W5500\W5500.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\I2C.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1572,6 +1572,11 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
             </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\I2C.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1681,11 +1686,6 @@
               <FileName>W5500.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\W5500\W5500.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\I2C.cpp</FilePath>
             </File>
           </Files>
         </Group>
