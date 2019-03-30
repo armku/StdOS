@@ -7,28 +7,6 @@
 #define      macSPI_FLASH_CS_ENABLE()                       GPIO_ResetBits( GPIOA, GPIO_Pin_4 )
 #define      macSPI_FLASH_CS_DISABLE()                      GPIO_SetBits( GPIOA, GPIO_Pin_4 )
 
-class SPI25QXX
-{
-public:
-	void SPI_FLASH_Init(void);
-	void SPI_FLASH_SectorErase(uint32_t SectorAddr);
-	void SPI_FLASH_BulkErase(void);
-	void SPI_FLASH_PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
-	void SPI_FLASH_BufferWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
-	void SPI_FLASH_BufferRead(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead);
-	uint32_t SPI_FLASH_ReadID(void);
-	uint32_t SPI_FLASH_ReadDeviceID(void);
-	void SPI_FLASH_StartReadSequence(uint32_t ReadAddr);
-	void SPI_Flash_PowerDown(void);
-	void SPI_Flash_WAKEUP(void);
-
-	uint8_t SPI_FLASH_ReadByte(void);
-	uint8_t SPI_FLASH_SendByte(uint8_t byte);
-	uint16_t SPI_FLASH_SendHalfWord(uint16_t HalfWord);
-	void SPI_FLASH_WriteEnable(void);
-	void SPI_FLASH_WaitForWriteEnd(void);
-};
-
 SPI25QXX s25xx;
 
 #include "stm32f10x.h"
