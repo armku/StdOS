@@ -1,5 +1,5 @@
-#include "AD7124.h"
-#include "AD7124def.h"
+#include "../AD7124.h"
+#include "../AD7124def.h"
 #include "Sys.h"
 
 #define _AD7124_TEST_CPP
