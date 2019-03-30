@@ -718,11 +718,6 @@
               <FilePath>..\StdOS\Drivers\GPS_S1216\GPS_S1216.cpp</FilePath>
             </File>
             <File>
-              <FileName>MCP3421.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\MCP3421\MCP3421.cpp</FilePath>
-            </File>
-            <File>
               <FileName>NRF24L01.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\NRF24L01\NRF24L01.cpp</FilePath>
@@ -786,6 +781,11 @@
               <FileName>W25QXXX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\SPI\W25QXXX\W25QXXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MCP3421.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\I2C\MCP3421\MCP3421.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1613,11 +1613,6 @@
               <FilePath>..\StdOS\Drivers\GPS_S1216\GPS_S1216.cpp</FilePath>
             </File>
             <File>
-              <FileName>MCP3421.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\MCP3421\MCP3421.cpp</FilePath>
-            </File>
-            <File>
               <FileName>NRF24L01.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\NRF24L01\NRF24L01.cpp</FilePath>
@@ -1681,6 +1676,11 @@
               <FileName>W25QXXX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\SPI\W25QXXX\W25QXXX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MCP3421.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\I2C\MCP3421\MCP3421.cpp</FilePath>
             </File>
           </Files>
         </Group>
