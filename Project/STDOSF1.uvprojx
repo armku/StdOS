@@ -738,11 +738,6 @@
               <FilePath>..\StdOS\Drivers\ST7565R\ST7565R.cpp</FilePath>
             </File>
             <File>
-              <FileName>W5500.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\W5500\W5500.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT24CXX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\I2C\AT24CXX\AT24CXX.cpp</FilePath>
@@ -1631,11 +1626,6 @@
               <FileName>ST7565R.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\ST7565R\ST7565R.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W5500.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\W5500\W5500.cpp</FilePath>
             </File>
             <File>
               <FileName>AT24CXX.cpp</FileName>
