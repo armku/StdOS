@@ -35,6 +35,7 @@ void Com1test(void *param)
 
 void EspDemoLinkTestInit();
 void ModbusSlaveLinkTestInit();
+void w25q128test();
 void BspInit()
 {
 	led1.SetPin(PB0);
@@ -47,6 +48,7 @@ void BspInit()
 	/*EspDemoLinkTestInit();*/
 	ModbusSlaveLinkTestInit();
 	usart111.OnReceive = Com1test;
+	w25q128test();
 }
 
 /*
