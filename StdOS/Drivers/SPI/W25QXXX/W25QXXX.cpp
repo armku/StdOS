@@ -11,9 +11,9 @@
 /* 发送缓冲区初始化 */
 uint8_t Tx_Buffer[] = "0123456789";
 
-/* 获取缓冲区的长度 */
-#define TxBufferSize1   (countof(TxBuffer1) - 1)
-#define RxBufferSize1   (countof(TxBuffer1) - 1)
+///* 获取缓冲区的长度 */
+//#define TxBufferSize1   (countof(TxBuffer1) - 1)
+//#define RxBufferSize1   (countof(TxBuffer1) - 1)
 #define countof(a)      (sizeof(a) / sizeof(*(a)))
 int  BufferSize = 10;
 
