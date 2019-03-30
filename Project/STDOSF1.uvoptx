@@ -1153,7 +1153,7 @@
 
   <Group>
     <GroupName>OnChip</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1716,7 +1716,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\AD7124\AD7124Demo.cpp</PathWithFileName>
+      <PathWithFileName>..\StdOS\Drivers\AD7124\Example\AD7124Demo.cpp</PathWithFileName>
       <FilenameWithoutPath>AD7124Demo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1728,7 +1728,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\DriversCom\ModbusLink\ModbusLinkDemo.cpp</PathWithFileName>
+      <PathWithFileName>..\StdOS\DriversCom\ModbusLink\Example\ModbusLinkDemo.cpp</PathWithFileName>
       <FilenameWithoutPath>ModbusLinkDemo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
