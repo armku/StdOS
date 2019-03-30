@@ -589,7 +589,11 @@ void SPI25QXX::SPI_Flash_WAKEUP(void)
 	/* Deselect the FLASH: Chip Select high */
 	macSPI_FLASH_CS_DISABLE();                   //µÈ´ýTRES1
 }
+void SPI25QXX::Test()
+{
+	debug_printf("\r\n 8Mbyte flash(W25Q64)Test\r\n");
 
+}
 
 
 

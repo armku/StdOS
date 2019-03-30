@@ -81,6 +81,7 @@
 		void SPI_FLASH_WriteEnable(void);
 		void SPI_FLASH_WaitForWriteEnd(void);
 
+		void Test();
 	public:
 		uint32_t DeviceID;
 		uint32_t FlashID;

@@ -40,8 +40,7 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
 
     void w25qxxxtest()
     {       
-		debug_printf("\r\n 8Mbyte flash(W25Q64)Test\r\n");
-
+		s25xx.Test();
 		/* 8M串行flash W25Q64初始化 */
 		s25xx.SPI_FLASH_Init();
 
