@@ -663,11 +663,6 @@
               <FilePath>..\StdOS\OnChip\Spi.cpp</FilePath>
             </File>
             <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Timer.cpp</FilePath>
-            </File>
-            <File>
               <FileName>USART.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\USART.cpp</FilePath>
@@ -1556,11 +1551,6 @@
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Timer.cpp</FilePath>
             </File>
             <File>
               <FileName>USART.cpp</FileName>
