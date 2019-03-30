@@ -57,6 +57,9 @@
             void WakeUp(void); //唤醒
             void PowerDown(void); //进入掉电模式	
     };  
+
+
+	typedef enum { FAILED = 0, PASSED = !FAILED } TestStatus;
 	class SPI25QXX
 	{
 	public:
@@ -78,4 +81,11 @@
 		void SPI_FLASH_WriteEnable(void);
 		void SPI_FLASH_WaitForWriteEnd(void);
 	};
+#define  FLASH_WriteAddress     0x00000
+#define  FLASH_ReadAddress      FLASH_WriteAddress
+#define  FLASH_SectorToErase    FLASH_WriteAddress
+	//#define  sFLASH_ID              0xEF3015     //W25X16
+	//#define  sFLASH_ID              0xEF4015	 //W25Q16
+#define  sFLASH_ID              0XEF4017    //W25Q64
+	
 #endif
