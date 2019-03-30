@@ -1,13 +1,8 @@
 #include "W25QXXX.h"
-
-
 #include "stm32f10x.h"
 
 #define      macSPI_FLASH_CS_ENABLE()                       GPIO_ResetBits( GPIOA, GPIO_Pin_4 )
 #define      macSPI_FLASH_CS_DISABLE()                      GPIO_SetBits( GPIOA, GPIO_Pin_4 )
-
-
-
 /* 发送缓冲区初始化 */
 uint8_t Tx_Buffer[] = "0123456789";
 
@@ -19,11 +14,6 @@ uint8_t Rx_Buffer[11];
 uint32_t DeviceID = 0;
 uint32_t FlashID = 0;
 TestStatus TransferStatus1 = FAILED;
-
-
-
-
-
 /* Private typedef -----------------------------------------------------------*/
 //#define SPI_FLASH_PageSize      4096
 #define SPI_FLASH_PageSize      256
