@@ -1,6 +1,6 @@
-#include "W25QXXX.h"
+#include "../W25QXXX.h"
 
-//#define _W25QXX_TEST_CPP
+#define _W25QXX_TEST_CPP
 
 #ifdef _W25QXX_TEST_CPP
     //正点原子 探索者开发板
@@ -11,7 +11,7 @@
     #endif 
     W25Q128 w25q128(&spi128);
     #ifndef STM32F0
-        OutputPort nsspp;
+        Port nsspp;
     #endif 
 
     //要写入到W25Q16的字符串数组
@@ -23,9 +23,8 @@
     void w25q128test()
     {
         #ifndef STM32F0
-            nsspp.Invert = false;
-            nsspp.OpenDrain = false;
-            nsspp.Set(PG7);
+            nsspp.SetPin(PG7);
+			nsspp.pinMode(GPIO_Out_PP);
             nsspp = 1; //PG7输出1,防止NRF干扰SPI FLASH的通信 
         #endif 
 

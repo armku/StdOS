@@ -1693,7 +1693,7 @@
 
   <Group>
     <GroupName>Demo</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1718,6 +1718,18 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\StdOS\DriversCom\ModbusLink\Example\ModbusLinkDemo.cpp</PathWithFileName>
       <FilenameWithoutPath>ModbusLinkDemo.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>16</GroupNumber>
+      <FileNumber>89</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\StdOS\Drivers\W25QXXX\Example\W25QXXXDemo.cpp</PathWithFileName>
+      <FilenameWithoutPath>W25QXXXDemo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

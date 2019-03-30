@@ -892,6 +892,11 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
             </File>
+            <File>
+              <FileName>W25QXXXDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1781,6 +1786,11 @@
               <FileName>ModbusLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXXDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
             </File>
           </Files>
         </Group>
