@@ -713,11 +713,6 @@
               <FilePath>..\StdOS\Drivers\GPS_S1216\GPS_S1216.cpp</FilePath>
             </File>
             <File>
-              <FileName>NRF24L01.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\NRF24L01\NRF24L01.cpp</FilePath>
-            </File>
-            <File>
               <FileName>OCM240128.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\OCM240128\OCM240128.cpp</FilePath>
@@ -1601,11 +1596,6 @@
               <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\GPS_S1216\GPS_S1216.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NRF24L01.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\NRF24L01\NRF24L01.cpp</FilePath>
             </File>
             <File>
               <FileName>OCM240128.cpp</FileName>
