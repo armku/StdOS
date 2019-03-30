@@ -7,7 +7,7 @@
 
 
 /************************** SPI Flash 连接引脚定义********************************/
-#define      macSPIx                                     SPI1
+//#define      macSPIx                                     SPI1
 #define      macSPI_APBxClock_FUN                        RCC_APB2PeriphClockCmd
 #define      macSPI_CLK                                  RCC_APB2Periph_SPI1
 
@@ -167,10 +167,10 @@ void SPI_FLASH_Init(void)
 	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
 	SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
 	SPI_InitStructure.SPI_CRCPolynomial = 7;
-	SPI_Init(macSPIx, &SPI_InitStructure);
+	SPI_Init(SPI1, &SPI_InitStructure);
 
 	/* Enable SPI1  */
-	SPI_Cmd(macSPIx, ENABLE);
+	SPI_Cmd(SPI1, ENABLE);
 
 }
 /*******************************************************************************
@@ -548,16 +548,16 @@ u8 SPI_FLASH_ReadByte(void)
 u8 SPI_FLASH_SendByte(u8 byte)
 {
 	/* Loop while DR register in not emplty */
-	while (SPI_I2S_GetFlagStatus(macSPIx, SPI_I2S_FLAG_TXE) == RESET);
+	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
 
 	/* Send byte through the SPI1 peripheral */
-	SPI_I2S_SendData(macSPIx, byte);
+	SPI_I2S_SendData(SPI1, byte);
 
 	/* Wait to receive a byte */
-	while (SPI_I2S_GetFlagStatus(macSPIx, SPI_I2S_FLAG_RXNE) == RESET);
+	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET);
 
 	/* Return the byte read from the SPI bus */
-	return SPI_I2S_ReceiveData(macSPIx);
+	return SPI_I2S_ReceiveData(SPI1);
 }
 
 /*******************************************************************************
@@ -571,16 +571,16 @@ u8 SPI_FLASH_SendByte(u8 byte)
 u16 SPI_FLASH_SendHalfWord(u16 HalfWord)
 {
 	/* Loop while DR register in not emplty */
-	while (SPI_I2S_GetFlagStatus(macSPIx, SPI_I2S_FLAG_TXE) == RESET);
+	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
 
 	/* Send Half Word through the SPI1 peripheral */
-	SPI_I2S_SendData(macSPIx, HalfWord);
+	SPI_I2S_SendData(SPI1, HalfWord);
 
 	/* Wait to receive a Half Word */
-	while (SPI_I2S_GetFlagStatus(macSPIx, SPI_I2S_FLAG_RXNE) == RESET);
+	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET);
 
 	/* Return the Half Word read from the SPI bus */
-	return SPI_I2S_ReceiveData(macSPIx);
+	return SPI_I2S_ReceiveData(SPI1);
 }
 
 /*******************************************************************************
