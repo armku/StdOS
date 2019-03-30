@@ -4,13 +4,6 @@
 
 #ifdef _W25QXX_TEST_CPP
 
-
-
-/************************** SPI Flash 连接引脚定义********************************/
-//#define      macSPIx                                     SPI1
-#define      macSPI_APBxClock_FUN                        RCC_APB2PeriphClockCmd
-#define      macSPI_CLK                                  RCC_APB2Periph_SPI1
-
 #define      macSPI_CS_APBxClock_FUN                     RCC_APB2PeriphClockCmd
 #define      macSPI_CS_CLK                               RCC_APB2Periph_GPIOA    
 #define      macSPI_CS_PORT                              GPIOA
@@ -30,8 +23,6 @@
 #define      macSPI_MOSI_CLK                             RCC_APB2Periph_GPIOA    
 #define      macSPI_MOSI_PORT                            GPIOA 
 #define      macSPI_MOSI_PIN                             GPIO_Pin_7
-
-
 
 /************************** SPI Flash 函数宏定义********************************/
 #define      macSPI_FLASH_CS_ENABLE()                       GPIO_ResetBits( macSPI_CS_PORT, macSPI_CS_PIN )
@@ -127,7 +118,7 @@ void SPI_FLASH_Init(void)
 		 SPI_FLASH_SPI_MISO_GPIO, SPI_FLASH_SPI_DETECT_GPIO
 		 and SPI_FLASH_SPI_SCK_GPIO Periph clock enable */
 		 /*!< SPI_FLASH_SPI Periph clock enable */
-	macSPI_APBxClock_FUN(macSPI_CLK, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
 
 	/*!< Configure SPI_FLASH_SPI_CS_PIN pin: SPI_FLASH Card CS pin */
 	macSPI_CS_APBxClock_FUN(macSPI_CS_CLK, ENABLE);
