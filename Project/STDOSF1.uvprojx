@@ -683,11 +683,6 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>AD7124.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\AD7124\AD7124.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\AD7689\AD7689.cpp</FilePath>
@@ -696,11 +691,6 @@
               <FileName>ADS1232.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\ADS1232\ADS1232.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1246.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\ADS1246\ADS1246.cpp</FilePath>
             </File>
             <File>
               <FileName>AT45DB.cpp</FileName>
@@ -758,11 +748,6 @@
               <FilePath>..\StdOS\Drivers\ST7565R\ST7565R.cpp</FilePath>
             </File>
             <File>
-              <FileName>W25QXXX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\W25QXXX\W25QXXX.cpp</FilePath>
-            </File>
-            <File>
               <FileName>W5500.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\W5500\W5500.cpp</FilePath>
@@ -786,6 +771,21 @@
               <FileName>RX8025T.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\I2C\RX8025T\RX8025T.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7124.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\AD7124\AD7124.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ADS1246.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\ADS1246\ADS1246.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\W25QXXX\W25QXXX.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -883,19 +883,19 @@
           <GroupName>Demo</GroupName>
           <Files>
             <File>
-              <FileName>AD7124Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\AD7124\Example\AD7124Demo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ModbusLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
             </File>
             <File>
+              <FileName>AD7124Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</FilePath>
+            </File>
+            <File>
               <FileName>W25QXXXDemo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\SPI\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1578,11 +1578,6 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>AD7124.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\AD7124\AD7124.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\AD7689\AD7689.cpp</FilePath>
@@ -1591,11 +1586,6 @@
               <FileName>ADS1232.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\ADS1232\ADS1232.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1246.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\ADS1246\ADS1246.cpp</FilePath>
             </File>
             <File>
               <FileName>AT45DB.cpp</FileName>
@@ -1653,11 +1643,6 @@
               <FilePath>..\StdOS\Drivers\ST7565R\ST7565R.cpp</FilePath>
             </File>
             <File>
-              <FileName>W25QXXX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\W25QXXX\W25QXXX.cpp</FilePath>
-            </File>
-            <File>
               <FileName>W5500.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\W5500\W5500.cpp</FilePath>
@@ -1681,6 +1666,21 @@
               <FileName>RX8025T.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\I2C\RX8025T\RX8025T.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7124.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\AD7124\AD7124.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ADS1246.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\ADS1246\ADS1246.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\W25QXXX\W25QXXX.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1778,19 +1778,19 @@
           <GroupName>Demo</GroupName>
           <Files>
             <File>
-              <FileName>AD7124Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\AD7124\Example\AD7124Demo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ModbusLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\DriversCom\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
             </File>
             <File>
+              <FileName>AD7124Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</FilePath>
+            </File>
+            <File>
               <FileName>W25QXXXDemo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\SPI\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
             </File>
           </Files>
         </Group>
