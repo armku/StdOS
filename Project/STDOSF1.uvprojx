@@ -693,11 +693,6 @@
               <FilePath>..\StdOS\Drivers\ADS1232\ADS1232.cpp</FilePath>
             </File>
             <File>
-              <FileName>AT45DB.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\AT45DB\AT45DB.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\DS18B20\DS18B20.cpp</FilePath>
@@ -786,6 +781,11 @@
               <FileName>MCP3421.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\I2C\MCP3421\MCP3421.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT45DB.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\AT45DB\AT45DB.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1588,11 +1588,6 @@
               <FilePath>..\StdOS\Drivers\ADS1232\ADS1232.cpp</FilePath>
             </File>
             <File>
-              <FileName>AT45DB.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\AT45DB\AT45DB.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\DS18B20\DS18B20.cpp</FilePath>
@@ -1681,6 +1676,11 @@
               <FileName>MCP3421.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\I2C\MCP3421\MCP3421.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT45DB.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\AT45DB\AT45DB.cpp</FilePath>
             </File>
           </Files>
         </Group>
