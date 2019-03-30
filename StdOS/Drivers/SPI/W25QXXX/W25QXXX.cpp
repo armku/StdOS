@@ -590,13 +590,6 @@ void SPI25QXX::SPI_Flash_WAKEUP(void)
 	macSPI_FLASH_CS_DISABLE();                   //等待TRES1
 }
 
-extern int  BufferSize;
-
-/* 发送缓冲区初始化 */
-extern uint8_t Tx_Buffer[];
-extern		uint8_t Rx_Buffer[];
-
-extern TestStatus TransferStatus1;
 /*
  * 函数名：Buffercmp
  * 描述  ：比较两个缓冲区中的数据是否相等
