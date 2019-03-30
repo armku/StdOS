@@ -12,8 +12,6 @@ extern int  BufferSize;
 extern uint8_t Tx_Buffer[] ;
 extern		uint8_t Rx_Buffer[];
 
-extern uint32_t DeviceID ;
-extern uint32_t FlashID ;
 extern TestStatus TransferStatus1 ;
 /*
  * 函数名：Buffercmp
@@ -48,17 +46,17 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
 		s25xx.SPI_FLASH_Init();
 
 		/* Get SPI Flash Device ID */
-		DeviceID = s25xx.SPI_FLASH_ReadDeviceID();
+		s25xx.DeviceID = s25xx.SPI_FLASH_ReadDeviceID();
 
 		 delay(200);
 
 		/* Get SPI Flash ID */
-		FlashID = s25xx.SPI_FLASH_ReadID();
+		 s25xx.FlashID = s25xx.SPI_FLASH_ReadID();
 
-		debug_printf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", FlashID, DeviceID);
+		debug_printf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", s25xx.FlashID, s25xx.DeviceID);
 
 		/* Check the SPI Flash ID */
-		if (FlashID == sFLASH_ID)  /* #define  sFLASH_ID  0XEF4017 */
+		if (s25xx.FlashID == sFLASH_ID)  /* #define  sFLASH_ID  0XEF4017 */
 		{
 			debug_printf("\r\n winbond flash W25Q64 !\r\n");
 

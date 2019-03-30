@@ -11,8 +11,6 @@ int  BufferSize = 10;
 
 uint8_t Rx_Buffer[11];
 
-uint32_t DeviceID = 0;
-uint32_t FlashID = 0;
 TestStatus TransferStatus1 = FAILED;
 /* Private typedef -----------------------------------------------------------*/
 //#define SPI_FLASH_PageSize      4096

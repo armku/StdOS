@@ -80,6 +80,10 @@
 		uint16_t SPI_FLASH_SendHalfWord(uint16_t HalfWord);
 		void SPI_FLASH_WriteEnable(void);
 		void SPI_FLASH_WaitForWriteEnd(void);
+
+	public:
+		uint32_t DeviceID;
+		uint32_t FlashID;
 	};
 #define  FLASH_WriteAddress     0x00000
 #define  FLASH_ReadAddress      FLASH_WriteAddress
