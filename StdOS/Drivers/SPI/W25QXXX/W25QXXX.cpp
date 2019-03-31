@@ -1,5 +1,4 @@
 #include "W25QXXX.h"
-#include "stm32f10x.h"
 
 //读取芯片ID
 //返回值如下:				   
@@ -454,7 +453,7 @@ void SPI25QXX::WaitForWriteEnd(void)
 		/* Send a dummy byte to generate the clock needed by the FLASH
 		and put the value of the status register in FLASH_Status variable */
 		FLASH_Status = this->_spi->Read();
-	} while ((FLASH_Status & WIP_Flag) == SET); /* Write in progress */
+	} while ((FLASH_Status & WIP_Flag) != 0); /* Write in progress */
 
 	/* Deselect the FLASH: Chip Select high */
 	this->_spi->Stop();
