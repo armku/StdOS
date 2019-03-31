@@ -39,6 +39,11 @@ TestStatus TransferStatus1 = FAILED;
 
 #define Dummy_Byte                0xFF
 
+SPI25QXX::SPI25QXX(SpiSoft *spi)
+{
+	this->_spi = spi;
+}
+
 /*******************************************************************************
 * Function Name  : SPI_FLASH_Init
 * Description    : Initializes the peripherals used by the SPI FLASH driver.
