@@ -555,6 +555,17 @@ uint8_t Spi::Write(uint8_t data)
 	switch (this->_index)
 	{
 	case Spi1:
+		///* Loop while DR register in not emplty */
+		//while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
+
+		///* Send byte through the SPI1 peripheral */
+		//SPI_I2S_SendData(SPI1, byte);
+
+		///* Wait to receive a byte */
+		//while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET);
+
+		///* Return the byte read from the SPI bus */
+		//return SPI_I2S_ReceiveData(SPI1);
 	case Spi2:
 	case Spi3:
 		retry = Retry;
