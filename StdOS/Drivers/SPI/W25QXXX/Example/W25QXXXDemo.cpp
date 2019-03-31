@@ -3,8 +3,7 @@
 #define _W25QXX_TEST_CPP
 
 #ifdef _W25QXX_TEST_CPP
-/************************** SPI Flash 函数宏定义********************************/
-#include "stm32f10x.h"
+
 Spi spi;
 
 SPI25QXX s25xx(&spi);
