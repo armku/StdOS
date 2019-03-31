@@ -66,13 +66,13 @@ void SPI25QXX::SectorErase(uint32_t SectorAddr)
 	this->_spi->Start();
 	this->_spi->Start();
 	/* Send Sector Erase instruction */
-	SendByte(W25X_SectorErase);
+	this->_spi->Write(W25X_SectorErase);
 	/* Send SectorAddr high nibble address byte */
-	SendByte((SectorAddr & 0xFF0000) >> 16);
+	this->_spi->Write((SectorAddr & 0xFF0000) >> 16);
 	/* Send SectorAddr medium nibble address byte */
-	SendByte((SectorAddr & 0xFF00) >> 8);
+	this->_spi->Write((SectorAddr & 0xFF00) >> 8);
 	/* Send SectorAddr low nibble address byte */
-	SendByte(SectorAddr & 0xFF);
+	this->_spi->Write(SectorAddr & 0xFF);
 	/* Deselect the FLASH: Chip Select high */
 	this->_spi->Stop();
 	/* Wait the end of Flash writing */
@@ -95,7 +95,7 @@ void SPI25QXX::BulkErase(void)
 	/* Select the FLASH: Chip Select low */
 	this->_spi->Start();
 	/* Send Bulk Erase instruction  */
-	SendByte(W25X_ChipErase);
+	this->_spi->Write(W25X_ChipErase);
 	/* Deselect the FLASH: Chip Select high */
 	this->_spi->Stop();
 
@@ -124,13 +124,13 @@ void SPI25QXX::PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteT
 	/* Select the FLASH: Chip Select low */
 	this->_spi->Start();
 	/* Send "Write to Memory " instruction */
-	SendByte(W25X_PageProgram);
+	this->_spi->Write(W25X_PageProgram);
 	/* Send WriteAddr high nibble address byte to write to */
-	SendByte((WriteAddr & 0xFF0000) >> 16);
+	this->_spi->Write((WriteAddr & 0xFF0000) >> 16);
 	/* Send WriteAddr medium nibble address byte to write to */
-	SendByte((WriteAddr & 0xFF00) >> 8);
+	this->_spi->Write((WriteAddr & 0xFF00) >> 8);
 	/* Send WriteAddr low nibble address byte to write to */
-	SendByte(WriteAddr & 0xFF);
+	this->_spi->Write(WriteAddr & 0xFF);
 
 	if (NumByteToWrite > SPI_FLASH_PerWritePageSize)
 	{
@@ -142,7 +142,7 @@ void SPI25QXX::PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteT
 	while (NumByteToWrite--)
 	{
 		/* Send the current byte */
-		SendByte(*pBuffer);
+		this->_spi->Write(*pBuffer);
 		/* Point on the next byte to be written */
 		pBuffer++;
 	}
@@ -289,19 +289,19 @@ void SPI25QXX::BufferRead(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteT
 	this->_spi->Start();
 
 	/* Send "Read from Memory " instruction */
-	SendByte(W25X_ReadData);
+	this->_spi->Write(W25X_ReadData);
 
 	/* Send ReadAddr high nibble address byte to read from */
-	SendByte((ReadAddr & 0xFF0000) >> 16);
+	this->_spi->Write((ReadAddr & 0xFF0000) >> 16);
 	/* Send ReadAddr medium nibble address byte to read from */
-	SendByte((ReadAddr & 0xFF00) >> 8);
+	this->_spi->Write((ReadAddr & 0xFF00) >> 8);
 	/* Send ReadAddr low nibble address byte to read from */
-	SendByte(ReadAddr & 0xFF);
+	this->_spi->Write(ReadAddr & 0xFF);
 
 	while (NumByteToRead--) /* while there is data to be read */
 	{
 		/* Read a byte from the FLASH */
-		*pBuffer = SendByte(Dummy_Byte);
+		*pBuffer = this->_spi->Write(Dummy_Byte);
 		/* Point to the next location where the byte read will be saved */
 		pBuffer++;
 	}
@@ -325,16 +325,16 @@ uint32_t SPI25QXX::ReadID(void)
 	this->_spi->Start();
 
 	/* Send "RDID " instruction */
-	SendByte(W25X_JedecDeviceID);
+	this->_spi->Write(W25X_JedecDeviceID);
 
 	/* Read a byte from the FLASH */
-	Temp0 = SendByte(Dummy_Byte);
+	Temp0 = this->_spi->Write(Dummy_Byte);
 
 	/* Read a byte from the FLASH */
-	Temp1 = SendByte(Dummy_Byte);
+	Temp1 = this->_spi->Write(Dummy_Byte);
 
 	/* Read a byte from the FLASH */
-	Temp2 = SendByte(Dummy_Byte);
+	Temp2 = this->_spi->Write(Dummy_Byte);
 
 	/* Deselect the FLASH: Chip Select high */
 	this->_spi->Stop();
@@ -358,13 +358,13 @@ uint32_t SPI25QXX::ReadDeviceID(void)
 	this->_spi->Start();
 
 	/* Send "RDID " instruction */
-	SendByte(W25X_DeviceID);
-	SendByte(Dummy_Byte);
-	SendByte(Dummy_Byte);
-	SendByte(Dummy_Byte);
+	this->_spi->Write(W25X_DeviceID);
+	this->_spi->Write(Dummy_Byte);
+	this->_spi->Write(Dummy_Byte);
+	this->_spi->Write(Dummy_Byte);
 
 	/* Read a byte from the FLASH */
-	Temp = SendByte(Dummy_Byte);
+	Temp = this->_spi->Write(Dummy_Byte);
 
 	/* Deselect the FLASH: Chip Select high */
 	this->_spi->Stop();
@@ -389,15 +389,15 @@ void SPI25QXX::StartReadSequence(uint32_t ReadAddr)
 	this->_spi->Start();
 
 	/* Send "Read from Memory " instruction */
-	SendByte(W25X_ReadData);
+	this->_spi->Write(W25X_ReadData);
 
 	/* Send the 24-bit address of the address to read from -----------------------*/
 	/* Send ReadAddr high nibble address byte */
-	SendByte((ReadAddr & 0xFF0000) >> 16);
+	this->_spi->Write((ReadAddr & 0xFF0000) >> 16);
 	/* Send ReadAddr medium nibble address byte */
-	SendByte((ReadAddr & 0xFF00) >> 8);
+	this->_spi->Write((ReadAddr & 0xFF00) >> 8);
 	/* Send ReadAddr low nibble address byte */
-	SendByte(ReadAddr & 0xFF);
+	this->_spi->Write(ReadAddr & 0xFF);
 }
 
 /*******************************************************************************
@@ -411,7 +411,7 @@ void SPI25QXX::StartReadSequence(uint32_t ReadAddr)
 *******************************************************************************/
 uint8_t SPI25QXX::ReadByte(void)
 {
-	return (SendByte(Dummy_Byte));
+	return (this->_spi->Write(Dummy_Byte));
 }
 
 /*******************************************************************************
@@ -422,10 +422,10 @@ uint8_t SPI25QXX::ReadByte(void)
 * Output         : None
 * Return         : The value of the received byte.
 *******************************************************************************/
-uint8_t SPI25QXX::SendByte(uint8_t byte)
-{
-	return this->_spi->Write(byte);	
-}
+//uint8_t SPI25QXX::SendByte(uint8_t byte)
+//{
+//	return this->_spi->Write(byte);	
+//}
 
 /*******************************************************************************
 * Function Name  : SPI_FLASH_SendHalfWord
@@ -463,7 +463,7 @@ void SPI25QXX::WriteEnable(void)
 	this->_spi->Start();
 
 	/* Send "Write Enable" instruction */
-	SendByte(W25X_WriteEnable);
+	this->_spi->Write(W25X_WriteEnable);
 
 	/* Deselect the FLASH: Chip Select high */
 	this->_spi->Stop();
@@ -486,14 +486,14 @@ void SPI25QXX::WaitForWriteEnd(void)
 	this->_spi->Start();
 
 	/* Send "Read Status Register" instruction */
-	SendByte(W25X_ReadStatusReg);
+	this->_spi->Write(W25X_ReadStatusReg);
 
 	/* Loop as long as the memory is busy with a write cycle */
 	do
 	{
 		/* Send a dummy byte to generate the clock needed by the FLASH
 		and put the value of the status register in FLASH_Status variable */
-		FLASH_Status = SendByte(Dummy_Byte);
+		FLASH_Status = this->_spi->Write(Dummy_Byte);
 	} while ((FLASH_Status & WIP_Flag) == SET); /* Write in progress */
 
 	/* Deselect the FLASH: Chip Select high */
@@ -508,7 +508,7 @@ void SPI25QXX::PowerDown(void)
 	this->_spi->Start();
 
 	/* Send "Power Down" instruction */
-	SendByte(W25X_PowerDown);
+	this->_spi->Write(W25X_PowerDown);
 
 	/* Deselect the FLASH: Chip Select high */
 	this->_spi->Stop();
@@ -521,7 +521,7 @@ void SPI25QXX::WAKEUP(void)
 	this->_spi->Start();
 
 	/* Send "Power Down" instruction */
-	SendByte(W25X_ReleasePowerDown);
+	this->_spi->Write(W25X_ReleasePowerDown);
 
 	/* Deselect the FLASH: Chip Select high */
 	this->_spi->Stop();                  //µÈ´ýTRES1
