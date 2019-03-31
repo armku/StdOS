@@ -415,19 +415,6 @@ uint8_t SPI25QXX::ReadByte(void)
 }
 
 /*******************************************************************************
-* Function Name  : SPI_FLASH_SendByte
-* Description    : Sends a byte through the SPI interface and return the byte
-*                  received from the SPI bus.
-* Input          : byte : byte to send.
-* Output         : None
-* Return         : The value of the received byte.
-*******************************************************************************/
-//uint8_t SPI25QXX::SendByte(uint8_t byte)
-//{
-//	return this->_spi->Write(byte);	
-//}
-
-/*******************************************************************************
 * Function Name  : SPI_FLASH_SendHalfWord
 * Description    : Sends a Half Word through the SPI interface and return the
 *                  Half Word received from the SPI bus.
