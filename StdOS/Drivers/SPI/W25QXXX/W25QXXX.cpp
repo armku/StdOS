@@ -49,18 +49,9 @@ SPI25QXX::SPI25QXX()
 void SPI25QXX::SetSpi(Spi *spi)
 {
 	this->_spi = spi;
-}
-/*******************************************************************************
-* Function Name  : SPI_FLASH_Init
-* Description    : Initializes the peripherals used by the SPI FLASH driver.
-* Input          : None
-* Output         : None
-* Return         : None
-*******************************************************************************/
-void SPI25QXX::Init(void)
-{	
 	this->_spi->Stop();
 }
+
 /*******************************************************************************
 * Function Name  : SPI_FLASH_SectorErase
 * Description    : Erases the specified FLASH sector.

@@ -16,7 +16,6 @@ void w25qxxxtest()
 	spi.Init(Spi1);
 
 	s25xx.SetSpi(&spi);
-	s25xx.Init();
 	s25xx.Test();
 }
 #endif

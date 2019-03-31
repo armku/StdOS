@@ -16,7 +16,6 @@
 	public:
 		SPI25QXX();
 		void SetSpi(Spi *spi);
-		void Init(void);
 		void SectorErase(uint32_t SectorAddr);
 		void BulkErase(void);
 		void PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
