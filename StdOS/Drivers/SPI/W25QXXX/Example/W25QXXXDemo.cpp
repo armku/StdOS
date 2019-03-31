@@ -12,6 +12,8 @@ SPI25QXX s25xx(&spi);
     {       
 		/*spi.SetPin(PA5,PA6,PA7);
 		spi.SetNss(PA4);*/
+		spi.CPOL = CPOL_High;
+		spi.CPHA = CPHA_2Edge;
 		spi.Init(Spi1);
 		
 		s25xx.Init();

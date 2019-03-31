@@ -641,7 +641,7 @@ void Spi::OnInit()
 	}
 	else {}
 	SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;// NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制    
-	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_8;
+	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
 	SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB; // 高位在前。指定数据传输从MSB位还是LSB位开始:数据传输从MSB位开始
 	SPI_InitStructure.SPI_CRCPolynomial = 7; // CRC值计算的多项式
 	switch (this->_index)
@@ -661,7 +661,11 @@ void Spi::OnInit()
 	switch (this->_index)
 	{
 	case Spi1:
+		SPI_Init(SPI1, &SPI_InitStructure);
+		break;
 	case Spi2:
+		SPI_Init(SPI2, &SPI_InitStructure);
+		break;
 	case Spi3:
 		SPI_Init((SPI_TypeDef*)(this->_SPI), &SPI_InitStructure);
 		break;

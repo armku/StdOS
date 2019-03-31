@@ -54,16 +54,16 @@ void SPI25QXX::Init(void)
 	/* SPI1 configuration */
 	// W25X16: data input on the DIO pin is sampled on the rising edge of the CLK. 
 	// Data on the DO and DIO pins are clocked out on the falling edge of CLK.
-	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
-	SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
-	SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
-	SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
-	SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
-	SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
-	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
-	SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
-	SPI_InitStructure.SPI_CRCPolynomial = 7;
-	SPI_Init(SPI1, &SPI_InitStructure);
+	//SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+	//SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
+	//SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
+	//SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
+	//SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
+	//SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+	//SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
+	//SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
+	//SPI_InitStructure.SPI_CRCPolynomial = 7;
+	//SPI_Init(SPI1, &SPI_InitStructure);
 
 	/* Enable SPI1  */
 	SPI_Cmd(SPI1, ENABLE);
