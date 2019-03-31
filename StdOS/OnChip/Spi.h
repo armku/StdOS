@@ -13,8 +13,12 @@
         CPHA_1Edge = 0,  //时钟相位 在串行同步时钟的第一个跳变沿（上升或下降）数据被采样
         CPHA_2Edge = 1,  //时钟相位 在串行同步时钟的第二个跳变沿（上升或下降）数据被采样
     } CPHATYPE;
+	class SpiBase
+	{
+
+	};
     // Spi类
-    class Spi
+    class Spi:public SpiBase
     {
         public:
             CPOLTYPE CPOL; //时钟极性
