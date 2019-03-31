@@ -618,7 +618,7 @@ void Spi::OnInit()
 	default:
 		break;
 	}
-	//this->Stop();
+	this->Stop();
 	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; //双线全双工
 	SPI_InitStructure.SPI_Mode = SPI_Mode_Master; // 主模式
 	SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b; // 数据大小8位 SPI发送接收8位帧结构

@@ -10,8 +10,8 @@ Spi spi;
 SPI25QXX s25xx(&spi);
     void w25qxxxtest()
     {       
-		spi.SetPin(PA5,PA6,PA7);
-		spi.SetNss(PA4);
+		/*spi.SetPin(PA5,PA6,PA7);
+		spi.SetNss(PA4);*/
 		spi.Init(Spi1);
 		
 		s25xx.Init();
