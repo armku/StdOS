@@ -64,23 +64,23 @@
 	{
 	public:
 		SPI25QXX(Spi *spi);
-		void SPI_FLASH_Init(void);
-		void SPI_FLASH_SectorErase(uint32_t SectorAddr);
-		void SPI_FLASH_BulkErase(void);
-		void SPI_FLASH_PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
-		void SPI_FLASH_BufferWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
-		void SPI_FLASH_BufferRead(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead);
-		uint32_t SPI_FLASH_ReadID(void);
-		uint32_t SPI_FLASH_ReadDeviceID(void);
-		void SPI_FLASH_StartReadSequence(uint32_t ReadAddr);
-		void SPI_Flash_PowerDown(void);
-		void SPI_Flash_WAKEUP(void);
+		void Init(void);
+		void SectorErase(uint32_t SectorAddr);
+		void BulkErase(void);
+		void PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
+		void BufferWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
+		void BufferRead(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead);
+		uint32_t ReadID(void);
+		uint32_t ReadDeviceID(void);
+		void StartReadSequence(uint32_t ReadAddr);
+		void PowerDown(void);
+		void WAKEUP(void);
 
-		uint8_t SPI_FLASH_ReadByte(void);
-		uint8_t SPI_FLASH_SendByte(uint8_t byte);
-		uint16_t SPI_FLASH_SendHalfWord(uint16_t HalfWord);
-		void SPI_FLASH_WriteEnable(void);
-		void SPI_FLASH_WaitForWriteEnd(void);
+		uint8_t ReadByte(void);
+		uint8_t SendByte(uint8_t byte);
+		uint16_t SendHalfWord(uint16_t HalfWord);
+		void WriteEnable(void);
+		void WaitForWriteEnd(void);
 
 		void Test();
 	public:
