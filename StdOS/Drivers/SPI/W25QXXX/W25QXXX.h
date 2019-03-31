@@ -15,7 +15,7 @@
 	{
 	public:
 		SPI25QXX();
-		void SetSpi(Spi *spi);
+		void SetSpi(SpiBase *spi);
 		void SectorErase(uint32_t SectorAddr);
 		void BulkErase(void);
 		void PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
@@ -34,7 +34,7 @@
 	public:
 		uint32_t DeviceID;
 		uint32_t FlashID;
-		Spi *_spi; // 内部Spi对象
+		SpiBase *_spi; // 内部Spi对象
 	};
 #define  FLASH_WriteAddress     0x00000
 #define  FLASH_ReadAddress      FLASH_WriteAddress

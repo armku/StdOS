@@ -15,6 +15,7 @@
     } CPHATYPE;
 	class SpiBase
 	{
+	public:
 		virtual void Init(SPI spi, CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge, uint32_t speedHz = 9000000)=0;
 
 		virtual void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0)=0;
