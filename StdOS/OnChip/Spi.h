@@ -23,7 +23,7 @@
 
 		// 基础读写
 		virtual uint8_t Write(uint8_t data)=0;
-		virtual uint8_t Read() { return this->Write(0XFF); }
+		uint8_t Read() { return this->Write(0XFF); }
 		virtual uint16_t Write16(uint16_t data)=0;
 
 		virtual void Start()=0; // 拉低NSS，开始传输
@@ -59,7 +59,6 @@
 
             // 基础读写
 			virtual uint8_t Write(uint8_t data);
-			virtual uint8_t Read() { return this->Write(0XFF); }
 			virtual uint16_t Write16(uint16_t data);
 
 			virtual void Start(); // 拉低NSS，开始传输
