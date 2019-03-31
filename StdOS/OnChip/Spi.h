@@ -63,7 +63,6 @@
         private:
             static int GetPre(int index, uint32_t &speedHz);
             void OnOpen();
-            void OnClose();
     };
 	    
     class SpiSoft
