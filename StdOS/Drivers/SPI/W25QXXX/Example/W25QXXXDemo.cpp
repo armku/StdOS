@@ -10,6 +10,9 @@ Spi spi;
 SPI25QXX s25xx(&spi);
     void w25qxxxtest()
     {       
+		spi.SetPin(PA5,PA6,PA7);
+		spi.SetNss(PA4);
+
 		GPIO_InitTypeDef GPIO_InitStructure;
 		/*!< Configure SPI_FLASH_SPI_CS_PIN pin: SPI_FLASH Card CS pin */
 		RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
@@ -33,9 +36,6 @@ SPI25QXX s25xx(&spi);
 		RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
 		GPIO_Init(GPIOA, &GPIO_InitStructure);
-
-		spi.SetPin(PA5,PA6,PA7);
-		spi.SetNss(PA4);
 		s25xx.Test();
 		
     }
