@@ -50,218 +50,6 @@ void Spi::Init(SPI spi, uint32_t speedHz)
 
 	Speed = speedHz;
 
-	this->OnInit();
-}
-
-void Spi::SetPin(Pin clk, Pin miso, Pin mosi)
-{
-	this->_clk.SetPin(clk);
-	this->_miso.SetPin(miso);
-	this->_mosi.SetPin(mosi);
-	
-	this->_clk.pinMode(GPIO_AF_PP);
-	this->_miso.pinMode(GPIO_AF_PP);
-	this->_mosi.pinMode(GPIO_AF_PP);
-}
-void Spi::SetNss(Pin nss)
-{
-	this->_nss.SetPin(nss);
-	this->_nss.pinMode(GPIO_Out_PP);
-	this->Open();
-}
-
-void Spi::Open()
-{
-	this->Stop();
-	this->OnOpen();
-}
-
-void Spi::Close()
-{
-	this->OnClose();
-}
-
-// 批量读写。以字节数组长度为准
-void Spi::Write(void * buf, int len) {
-
-}
-void Spi::Read(void * buf, int len) {
-
-}
-
-// 拉低NSS，开始传输
-void Spi::Start()
-{
-	if (!this->_nss.Empty())
-	{
-		this->_nss = 0;
-	}
-	// 开始新一轮事务操作，错误次数清零
-	this->Error = 0;
-}
-
-// 拉高NSS，停止传输
-void Spi::Stop()
-{
-	if (!this->_nss.Empty())
-	{
-		this->_nss = 1;
-	}
-}
-// 基础读写
-uint8_t Spi::Write(uint8_t data)
-{
-#if defined STM32F0
-	int retry;
-	switch (this->_index)
-	{
-	case Spi1:
-	case Spi2:
-	case Spi3:
-		retry = Retry;
-		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
-		{
-			if (--retry <= 0)
-				return ++Error;
-			// 超时处理
-		}
-		SPI_SendData8((SPI_TypeDef*)(this->_SPI), data);
-		//是否发送成功
-		retry = Retry;
-		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
-		{
-			if (--retry <= 0)
-				return ++Error;
-			// 超时处理
-		}
-
-		return SPI_ReceiveData8((SPI_TypeDef*)(this->_SPI)); //返回通过SPIx最近接收的数据            
-	default:
-		return  0;
-	}
-#elif defined STM32F1
-	int retry;
-	switch (this->_index)
-	{
-	case Spi1:
-	case Spi2:
-	case Spi3:
-		retry = Retry;
-		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
-		{
-			if (--retry <= 0)
-				return ++Error;
-			// 超时处理
-		}
-		SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
-		//是否发送成功
-		retry = Retry;
-		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
-		{
-			if (--retry <= 0)
-				return ++Error;
-			// 超时处理
-		}
-
-		return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
-	default:
-		return  0;
-	}
-#elif defined STM32F4
-	int retry;
-	switch (this->_index)
-	{
-	case Spi1:
-	case Spi2:
-	case Spi3:
-		retry = Retry;
-		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
-		{
-			if (--retry <= 0)
-				return ++Error;
-			// 超时处理
-		}
-		SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
-
-		//是否发送成功
-		retry = Retry;
-		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
-		{
-			if (--retry <= 0)
-				return ++Error;
-			// 超时处理
-		}
-
-		return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
-	default:
-		return  0;
-	}
-#endif
-}
-
-int Spi::GetPre(int index, uint32_t &speedHz)
-{
-#if defined STM32F0
-	// 自动计算稍低于速度speedHz的分频
-	uint16_t pre = SPI_BaudRatePrescaler_2;
-	uint32_t clock = Sys.Clock >> 1;
-	while (pre <= SPI_BaudRatePrescaler_256)
-	{
-		if (clock <= speedHz)
-			break;
-		clock >>= 1;
-		pre += (SPI_BaudRatePrescaler_4 - SPI_BaudRatePrescaler_2);
-	}
-	if (pre > SPI_BaudRatePrescaler_256)
-	{
-		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, Sys.Clock);
-		return  -1;
-	}
-
-	speedHz = clock;
-	return pre;
-#elif defined STM32F1
-	// 自动计算稍低于速度speedHz的分频
-	uint16_t pre = SPI_BaudRatePrescaler_2;
-	uint32_t clock = Sys.Clock >> 1;
-	while (pre <= SPI_BaudRatePrescaler_256)
-	{
-		if (clock <= speedHz)
-			break;
-		clock >>= 1;
-		pre += (SPI_BaudRatePrescaler_4 - SPI_BaudRatePrescaler_2);
-	}
-	if (pre > SPI_BaudRatePrescaler_256)
-	{
-		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, Sys.Clock);
-		return  -1;
-	}
-
-	speedHz = clock;
-	return pre;
-#elif defined STM32F4
-	// 自动计算稍低于速度speedHz的分频
-	uint16_t pre = SPI_BaudRatePrescaler_2;
-	uint32_t clock = Sys.Clock >> 1;
-	while (pre <= SPI_BaudRatePrescaler_256)
-	{
-		if (clock <= speedHz)
-			break;
-		clock >>= 1;
-		pre += (SPI_BaudRatePrescaler_4 - SPI_BaudRatePrescaler_2);
-	}
-	if (pre > SPI_BaudRatePrescaler_256)
-	{
-		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, Sys.Clock);
-		return  -1;
-	}
-
-	speedHz = clock;
-	return pre;
-#endif
-}
-void Spi::OnInit()
-{
 #if defined STM32F0
 	//以上为历史内容
 	switch (this->_index)
@@ -558,6 +346,214 @@ void Spi::OnInit()
 	default:
 		break;
 	}
+#endif
+}
+
+void Spi::SetPin(Pin clk, Pin miso, Pin mosi)
+{
+	this->_clk.SetPin(clk);
+	this->_miso.SetPin(miso);
+	this->_mosi.SetPin(mosi);
+	
+	this->_clk.pinMode(GPIO_AF_PP);
+	this->_miso.pinMode(GPIO_AF_PP);
+	this->_mosi.pinMode(GPIO_AF_PP);
+}
+void Spi::SetNss(Pin nss)
+{
+	this->_nss.SetPin(nss);
+	this->_nss.pinMode(GPIO_Out_PP);
+	this->Open();
+}
+
+void Spi::Open()
+{
+	this->Stop();
+	this->OnOpen();
+}
+
+void Spi::Close()
+{
+	this->OnClose();
+}
+
+// 批量读写。以字节数组长度为准
+void Spi::Write(void * buf, int len) {
+
+}
+void Spi::Read(void * buf, int len) {
+
+}
+
+// 拉低NSS，开始传输
+void Spi::Start()
+{
+	if (!this->_nss.Empty())
+	{
+		this->_nss = 0;
+	}
+	// 开始新一轮事务操作，错误次数清零
+	this->Error = 0;
+}
+
+// 拉高NSS，停止传输
+void Spi::Stop()
+{
+	if (!this->_nss.Empty())
+	{
+		this->_nss = 1;
+	}
+}
+// 基础读写
+uint8_t Spi::Write(uint8_t data)
+{
+#if defined STM32F0
+	int retry;
+	switch (this->_index)
+	{
+	case Spi1:
+	case Spi2:
+	case Spi3:
+		retry = Retry;
+		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
+		{
+			if (--retry <= 0)
+				return ++Error;
+			// 超时处理
+		}
+		SPI_SendData8((SPI_TypeDef*)(this->_SPI), data);
+		//是否发送成功
+		retry = Retry;
+		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
+		{
+			if (--retry <= 0)
+				return ++Error;
+			// 超时处理
+		}
+
+		return SPI_ReceiveData8((SPI_TypeDef*)(this->_SPI)); //返回通过SPIx最近接收的数据            
+	default:
+		return  0;
+	}
+#elif defined STM32F1
+	int retry;
+	switch (this->_index)
+	{
+	case Spi1:
+	case Spi2:
+	case Spi3:
+		retry = Retry;
+		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
+		{
+			if (--retry <= 0)
+				return ++Error;
+			// 超时处理
+		}
+		SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
+		//是否发送成功
+		retry = Retry;
+		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
+		{
+			if (--retry <= 0)
+				return ++Error;
+			// 超时处理
+		}
+
+		return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
+	default:
+		return  0;
+	}
+#elif defined STM32F4
+	int retry;
+	switch (this->_index)
+	{
+	case Spi1:
+	case Spi2:
+	case Spi3:
+		retry = Retry;
+		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_TXE) == RESET)
+		{
+			if (--retry <= 0)
+				return ++Error;
+			// 超时处理
+		}
+		SPI_I2S_SendData((SPI_TypeDef*)(this->_SPI), data);
+
+		//是否发送成功
+		retry = Retry;
+		while (SPI_I2S_GetFlagStatus((SPI_TypeDef*)(this->_SPI), SPI_I2S_FLAG_RXNE) == RESET)
+		{
+			if (--retry <= 0)
+				return ++Error;
+			// 超时处理
+		}
+
+		return SPI_I2S_ReceiveData((SPI_TypeDef*)(this->_SPI));
+	default:
+		return  0;
+	}
+#endif
+}
+
+int Spi::GetPre(int index, uint32_t &speedHz)
+{
+#if defined STM32F0
+	// 自动计算稍低于速度speedHz的分频
+	uint16_t pre = SPI_BaudRatePrescaler_2;
+	uint32_t clock = Sys.Clock >> 1;
+	while (pre <= SPI_BaudRatePrescaler_256)
+	{
+		if (clock <= speedHz)
+			break;
+		clock >>= 1;
+		pre += (SPI_BaudRatePrescaler_4 - SPI_BaudRatePrescaler_2);
+	}
+	if (pre > SPI_BaudRatePrescaler_256)
+	{
+		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, Sys.Clock);
+		return  -1;
+	}
+
+	speedHz = clock;
+	return pre;
+#elif defined STM32F1
+	// 自动计算稍低于速度speedHz的分频
+	uint16_t pre = SPI_BaudRatePrescaler_2;
+	uint32_t clock = Sys.Clock >> 1;
+	while (pre <= SPI_BaudRatePrescaler_256)
+	{
+		if (clock <= speedHz)
+			break;
+		clock >>= 1;
+		pre += (SPI_BaudRatePrescaler_4 - SPI_BaudRatePrescaler_2);
+	}
+	if (pre > SPI_BaudRatePrescaler_256)
+	{
+		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, Sys.Clock);
+		return  -1;
+	}
+
+	speedHz = clock;
+	return pre;
+#elif defined STM32F4
+	// 自动计算稍低于速度speedHz的分频
+	uint16_t pre = SPI_BaudRatePrescaler_2;
+	uint32_t clock = Sys.Clock >> 1;
+	while (pre <= SPI_BaudRatePrescaler_256)
+	{
+		if (clock <= speedHz)
+			break;
+		clock >>= 1;
+		pre += (SPI_BaudRatePrescaler_4 - SPI_BaudRatePrescaler_2);
+	}
+	if (pre > SPI_BaudRatePrescaler_256)
+	{
+		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, Sys.Clock);
+		return  -1;
+	}
+
+	speedHz = clock;
+	return pre;
 #endif
 }
 

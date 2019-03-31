@@ -62,7 +62,6 @@
 
         private:
             static int GetPre(int index, uint32_t &speedHz);
-            void OnInit();
             void OnOpen();
             void OnClose();
     };
