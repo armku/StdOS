@@ -15,6 +15,7 @@ SPI25QXX s25xx(&spi);
 		spi.CPOL = CPOL_High;
 		spi.CPHA = CPHA_2Edge;
 		spi.Init(Spi1);
+		spi.Open();
 		
 		s25xx.Init();
 		s25xx.Test();		

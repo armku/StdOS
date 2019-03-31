@@ -802,7 +802,11 @@ void Spi::OnOpen()
 	switch (this->_index)
 	{
 	case Spi1:
+		SPI_Cmd(SPI1, ENABLE);
+		break;
 	case Spi2:
+		SPI_Cmd(SPI2, ENABLE);
+		break;
 	case Spi3:
 		SPI_Cmd((SPI_TypeDef*)(this->_SPI), ENABLE);
 		break;
