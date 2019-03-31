@@ -42,7 +42,7 @@
             Spi(SPI spi, CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge, uint32_t speedHz = 9000000);
             ~Spi();
 
-            void Init(SPI spi, uint32_t speedHz = 9000000);
+            void Init(SPI spi, CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge, uint32_t speedHz = 9000000);
 
             void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
             void SetNss(Pin nss = P0);

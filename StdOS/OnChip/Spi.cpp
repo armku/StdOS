@@ -2,25 +2,11 @@
 #include "Spi.h"
 #include "Platform\stm32.h"
 
-void Spi::Init()
-{
-	this->Retry = 200; //默认重试次数为200
-}
-
 Spi::Spi()
 {
-	this->Init();
 	this->_index = 0xff;
 }
 
-// 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
-Spi::Spi(SPI spi, CPOLTYPE cpol, CPHATYPE cpha, uint32_t speedHz)
-{
-	this->CPOL = cpol;
-	this->CPHA = cpha;
-	this->Init();
-	this->Init(spi, speedHz);
-}
 
 Spi::~Spi()
 {
@@ -29,8 +15,9 @@ Spi::~Spi()
 	this->Close();
 }
 
-void Spi::Init(SPI spi, uint32_t speedHz)
+void Spi::Init(SPI spi, CPOLTYPE cpol, CPHATYPE cpha, uint32_t speedHz)
 {
+	this->Retry = 200; //默认重试次数为200
 	this->_index = spi;
 	this->Speed = speedHz;
 #if DEBUG
