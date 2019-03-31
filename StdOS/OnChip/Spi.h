@@ -46,7 +46,6 @@
 
             void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
             void SetNss(Pin nss = P0);
-            void Open();
             void Close();
 
             // »ù´¡¶ÁÐ´

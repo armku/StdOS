@@ -402,12 +402,6 @@ void Spi::SetNss(Pin nss)
 {
 	this->_nss.SetPin(nss);
 	this->_nss.pinMode(GPIO_Out_PP);
-	this->Open();
-}
-
-void Spi::Open()
-{
-	
 }
 
 void Spi::Close()
