@@ -91,6 +91,5 @@
             uint32_t delayus; //—” ± ±º‰
         private:
             uint8_t WaitBusy();
-
     };
 #endif
