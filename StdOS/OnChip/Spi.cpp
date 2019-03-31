@@ -7,12 +7,6 @@ Spi::Spi()
 	this->_index = 0xff;
 }
 
-
-Spi::~Spi()
-{
-	debug_printf("Spi:Spi%d\r\n", _index + 1);
-}
-
 void Spi::Init(SPI spi, CPOLTYPE cpol, CPHATYPE cpha, uint32_t speedHz)
 {
 	this->Retry = 200; //默认重试次数为200

@@ -35,7 +35,6 @@
 
             Spi();
             // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
-            ~Spi();
 
             void Init(SPI spi, CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge, uint32_t speedHz = 9000000);
 
