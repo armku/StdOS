@@ -59,9 +59,9 @@ void Spi::SetPin(Pin clk, Pin miso, Pin mosi)
 	this->_miso.SetPin(miso);
 	this->_mosi.SetPin(mosi);
 	
-	this->_clk.pinMode(GPIO_Out_PP);
-	this->_miso.pinMode(GPIO_Out_PP);
-	this->_mosi.pinMode(GPIO_Out_PP);
+	this->_clk.pinMode(GPIO_AF_PP);
+	this->_miso.pinMode(GPIO_AF_PP);
+	this->_mosi.pinMode(GPIO_AF_PP);
 }
 void Spi::SetNss(Pin nss)
 {
