@@ -9,8 +9,14 @@
 class I2CBase
 {
 public:
-	virtual void Start() = 0;
-	virtual void Stop() = 0;
+	virtual void SetPin(Pin scl, Pin sda)=0;
+
+	virtual void Start()=0;
+	virtual void Stop()=0;
+
+	virtual void WriteByte(uint8_t dat)=0;
+	virtual uint8_t ReadByte(bool ack)=0;
+	virtual bool WaitAck(int retry = 0)=0;
 };
 
 // Èí¼þÄ£ÄâI2C
