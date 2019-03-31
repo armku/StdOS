@@ -39,7 +39,7 @@ TestStatus TransferStatus1 = FAILED;
 
 #define Dummy_Byte                0xFF
 
-SPI25QXX::SPI25QXX(SpiSoft *spi)
+SPI25QXX::SPI25QXX(Spi *spi)
 {
 	this->_spi = spi;
 }

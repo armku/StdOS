@@ -63,7 +63,7 @@
 	class SPI25QXX
 	{
 	public:
-		SPI25QXX(SpiSoft *spi);
+		SPI25QXX(Spi *spi);
 		void SPI_FLASH_Init(void);
 		void SPI_FLASH_SectorErase(uint32_t SectorAddr);
 		void SPI_FLASH_BulkErase(void);
@@ -86,7 +86,7 @@
 	public:
 		uint32_t DeviceID;
 		uint32_t FlashID;
-		SpiSoft *_spi; // 内部Spi对象
+		Spi *_spi; // 内部Spi对象
 	};
 #define  FLASH_WriteAddress     0x00000
 #define  FLASH_ReadAddress      FLASH_WriteAddress

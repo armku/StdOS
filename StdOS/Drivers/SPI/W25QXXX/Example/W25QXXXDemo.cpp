@@ -5,7 +5,7 @@
 #ifdef _W25QXX_TEST_CPP
 /************************** SPI Flash 函数宏定义********************************/
 
-SpiSoft spi;
+Spi spi;
 
 SPI25QXX s25xx(&spi);
     void w25qxxxtest()
