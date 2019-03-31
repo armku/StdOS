@@ -48,9 +48,6 @@ SPI25QXX::SPI25QXX(Spi *spi)
 void SPI25QXX::Init(void)
 {	
 	this->_spi->Stop();
-	/* Enable SPI1  */
-	SPI_Cmd(SPI1, ENABLE);
-
 }
 /*******************************************************************************
 * Function Name  : SPI_FLASH_SectorErase
