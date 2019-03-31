@@ -399,21 +399,6 @@ void SPI25QXX::StartReadSequence(uint32_t ReadAddr)
 	/* Send ReadAddr low nibble address byte */
 	this->_spi->Write(ReadAddr & 0xFF);
 }
-
-///*******************************************************************************
-//* Function Name  : SPI_FLASH_ReadByte
-//* Description    : Reads a byte from the SPI Flash.
-//*                  This function must be used only if the Start_Read_Sequence
-//*                  function has been previously called.
-//* Input          : None
-//* Output         : None
-//* Return         : Byte Read from the SPI Flash.
-//*******************************************************************************/
-//uint8_t SPI25QXX::ReadByte(void)
-//{
-//	return (this->_spi->Write(Dummy_Byte));
-//}
-
 /*******************************************************************************
 * Function Name  : SPI_FLASH_SendHalfWord
 * Description    : Sends a Half Word through the SPI interface and return the
