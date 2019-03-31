@@ -15,7 +15,18 @@
     } CPHATYPE;
 	class SpiBase
 	{
+		virtual void Init(SPI spi, CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge, uint32_t speedHz = 9000000)=0;
 
+		virtual void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0)=0;
+		virtual void SetNss(Pin nss = P0)=0;
+
+		// 基础读写
+		virtual uint8_t Write(uint8_t data)=0;
+		virtual uint8_t Read() { return this->Write(0XFF); }
+		virtual uint16_t Write16(uint16_t data)=0;
+
+		virtual void Start()=0; // 拉低NSS，开始传输
+		virtual void Stop()=0; // 拉高NSS，停止传输
 	};
     // Spi类
     class Spi:public SpiBase
@@ -40,18 +51,18 @@
             Spi();
             // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
 
-            void Init(SPI spi, CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge, uint32_t speedHz = 9000000);
+			virtual void Init(SPI spi, CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge, uint32_t speedHz = 9000000);
 
-            void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
-            void SetNss(Pin nss = P0);
+			virtual void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
+			virtual void SetNss(Pin nss = P0);
 
             // 基础读写
-            uint8_t Write(uint8_t data);
-			uint8_t Read() { return this->Write(0XFF); }
-            uint16_t Write16(uint16_t data);
+			virtual uint8_t Write(uint8_t data);
+			virtual uint8_t Read() { return this->Write(0XFF); }
+			virtual uint16_t Write16(uint16_t data);
 
-            void Start(); // 拉低NSS，开始传输
-            void Stop(); // 拉高NSS，停止传输
+			virtual void Start(); // 拉低NSS，开始传输
+			virtual void Stop(); // 拉高NSS，停止传输
 
         private:
             static int GetPre(int index, uint32_t &speedHz);

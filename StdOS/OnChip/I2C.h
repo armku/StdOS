@@ -9,7 +9,8 @@
 class I2CBase
 {
 public:
-
+	virtual void Start() = 0;
+	virtual void Stop() = 0;
 };
 
 // Èí¼şÄ£ÄâI2C
