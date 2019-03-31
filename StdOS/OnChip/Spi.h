@@ -24,7 +24,7 @@
 		// 基础读写
 		virtual uint8_t Write(uint8_t data)=0;
 		uint8_t Read() { return this->Write(0XFF); }
-		virtual uint16_t Write16(uint16_t data)=0;
+		//virtual uint16_t Write16(uint16_t data)=0;
 
 		virtual void Start()=0; // 拉低NSS，开始传输
 		virtual void Stop()=0; // 拉高NSS，停止传输
@@ -68,20 +68,22 @@
             static int GetPre(int index, uint32_t &speedHz);
     };
 	    
-    class SpiSoft
+    class SpiSoft :public SpiBase
     {
         public:
             CPOLTYPE CPOL; //时钟极性
             CPHATYPE CPHA; //时钟相位
         public:
-            SpiSoft(CPOLTYPE cpol = CPOL_Low, CPHATYPE cpha = CPHA_1Edge, uint32_t speedHz = 9000000); //使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度   
-            void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
-            void SetNss(Pin nss = P0);
-            uint8_t Write(uint8_t data);
+            SpiSoft(); //使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度   
+			virtual void Init(SPI spi, CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge, uint32_t speedHz = 9000000);
+			virtual void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
+			virtual void SetNss(Pin nss = P0);
+			virtual uint8_t Write(uint8_t data);
+			//virtual uint16_t Write16(uint16_t data);
             void Open();
             void Close();
-            void Start(); // 拉低NSS，开始传输
-            void Stop(); // 拉高NSS，停止传输
+			virtual void Start(); // 拉低NSS，开始传输
+			virtual void Stop(); // 拉高NSS，停止传输
         private:
             Port _nss;
             Port _clk;

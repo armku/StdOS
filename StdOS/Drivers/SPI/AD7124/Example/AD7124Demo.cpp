@@ -80,7 +80,7 @@ float AD7124::Temp1Test()
 }
 
 #if 1
-SpiSoft spi1(CPOL_High, CPHA_1Edge);
+SpiSoft spi1;
 AD7124 ad(&spi1);
 
 void ad7124test(void *param)
@@ -110,6 +110,7 @@ void ad71248Test()
 	spi1.CPOL = CPOL_High;
 	spi1.CPOL = CPOL_Low;
 	spi1.Open();
+	spi1.Init(Spi1);
     ad.Init_8();
 
 	/*cs.OpenDrain = false;
