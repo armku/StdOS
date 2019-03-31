@@ -53,17 +53,7 @@ SPI25QXX::SPI25QXX(Spi *spi)
 *******************************************************************************/
 void SPI25QXX::Init(void)
 {
-	SPI_InitTypeDef  SPI_InitStructure;
 	GPIO_InitTypeDef GPIO_InitStructure;
-
-
-	/* Enable SPI1 and GPIO clocks */
-	/*!< SPI_FLASH_SPI_CS_GPIO, SPI_FLASH_SPI_MOSI_GPIO,
-		 SPI_FLASH_SPI_MISO_GPIO, SPI_FLASH_SPI_DETECT_GPIO
-		 and SPI_FLASH_SPI_SCK_GPIO Periph clock enable */
-		 /*!< SPI_FLASH_SPI Periph clock enable */
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
-
 	/*!< Configure SPI_FLASH_SPI_CS_PIN pin: SPI_FLASH Card CS pin */
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
@@ -87,6 +77,17 @@ void SPI25QXX::Init(void)
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 
+	SPI_InitTypeDef  SPI_InitStructure;
+	
+
+
+	/* Enable SPI1 and GPIO clocks */
+	/*!< SPI_FLASH_SPI_CS_GPIO, SPI_FLASH_SPI_MOSI_GPIO,
+		 SPI_FLASH_SPI_MISO_GPIO, SPI_FLASH_SPI_DETECT_GPIO
+		 and SPI_FLASH_SPI_SCK_GPIO Periph clock enable */
+		 /*!< SPI_FLASH_SPI Periph clock enable */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
+		
 	/* Deselect the FLASH: Chip Select high */
 	macSPI_FLASH_CS_DISABLE();
 
