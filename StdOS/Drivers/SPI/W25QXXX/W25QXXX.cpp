@@ -1,6 +1,37 @@
 #include "W25QXXX.h"
 #include "stm32f10x.h"
 
+//读取芯片ID
+//返回值如下:				   
+//0XEF13,表示芯片型号为W25Q80  
+//0XEF14,表示芯片型号为W25Q16    
+//0XEF15,表示芯片型号为W25Q32  
+//0XEF16,表示芯片型号为W25Q64 
+//0XEF17,表示芯片型号为W25Q128 	 
+
+/* Private define ------------------------------------------------------------*/
+////////////////////////////////////////////////////////////////////////////////// 
+//指令表
+#define W25X_WriteEnable			0x06 
+#define W25X_WriteDisable		    0x04 
+#define W25X_ReadStatusReg		    0x05 
+#define W25X_WriteStatusReg		    0x01 
+#define W25X_ReadData			    0x03 
+#define W25X_FastReadData		    0x0B 
+#define W25X_FastReadDual		    0x3B 
+#define W25X_PageProgram		    0x02 
+#define W25X_BlockErase			    0xD8 
+#define W25X_SectorErase		    0x20 
+#define W25X_ChipErase			    0xC7 
+#define W25X_PowerDown			    0xB9 
+#define W25X_ReleasePowerDown	    0xAB 
+#define W25X_DeviceID			    0xAB 
+#define W25X_ManufactDeviceID   	0x90 
+#define W25X_JedecDeviceID		    0x9F 
+
+#define WIP_Flag                  	0x01  /* Write In Progress (WIP) flag */
+
+
 /* 发送缓冲区初始化 */
 uint8_t Tx_Buffer[] = "0123456789";
 #define countof(a)      (sizeof(a) / sizeof(*(a)))
@@ -11,27 +42,6 @@ TestStatus TransferStatus1 = FAILED;
 //#define SPI_FLASH_PageSize      4096
 #define SPI_FLASH_PageSize      256
 #define SPI_FLASH_PerWritePageSize      256
-
-/* Private define ------------------------------------------------------------*/
-#define W25X_WriteEnable		      0x06 
-#define W25X_WriteDisable		      0x04 
-#define W25X_ReadStatusReg		    0x05 
-#define W25X_WriteStatusReg		    0x01 
-#define W25X_ReadData			        0x03 
-#define W25X_FastReadData		      0x0B 
-#define W25X_FastReadDual		      0x3B 
-#define W25X_PageProgram		      0x02 
-#define W25X_BlockErase			      0xD8 
-#define W25X_SectorErase		      0x20 
-#define W25X_ChipErase			      0xC7 
-#define W25X_PowerDown			      0xB9 
-#define W25X_ReleasePowerDown	    0xAB 
-#define W25X_DeviceID			        0xAB 
-#define W25X_ManufactDeviceID   	0x90 
-#define W25X_JedecDeviceID		    0x9F 
-
-#define WIP_Flag                  0x01  /* Write In Progress (WIP) flag */
-#define Dummy_Byte                0xFF
 
 SPI25QXX::SPI25QXX(Spi *spi)
 {
@@ -301,7 +311,7 @@ void SPI25QXX::BufferRead(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteT
 	while (NumByteToRead--) /* while there is data to be read */
 	{
 		/* Read a byte from the FLASH */
-		*pBuffer = this->_spi->Write(Dummy_Byte);
+		*pBuffer = this->_spi->Read();
 		/* Point to the next location where the byte read will be saved */
 		pBuffer++;
 	}
@@ -328,13 +338,13 @@ uint32_t SPI25QXX::ReadID(void)
 	this->_spi->Write(W25X_JedecDeviceID);
 
 	/* Read a byte from the FLASH */
-	Temp0 = this->_spi->Write(Dummy_Byte);
+	Temp0 = this->_spi->Read();
 
 	/* Read a byte from the FLASH */
-	Temp1 = this->_spi->Write(Dummy_Byte);
+	Temp1 = this->_spi->Read();
 
 	/* Read a byte from the FLASH */
-	Temp2 = this->_spi->Write(Dummy_Byte);
+	Temp2 = this->_spi->Read();
 
 	/* Deselect the FLASH: Chip Select high */
 	this->_spi->Stop();
@@ -359,12 +369,12 @@ uint32_t SPI25QXX::ReadDeviceID(void)
 
 	/* Send "RDID " instruction */
 	this->_spi->Write(W25X_DeviceID);
-	this->_spi->Write(Dummy_Byte);
-	this->_spi->Write(Dummy_Byte);
-	this->_spi->Write(Dummy_Byte);
+	this->_spi->Read();
+	this->_spi->Read();
+	this->_spi->Read();
 
 	/* Read a byte from the FLASH */
-	Temp = this->_spi->Write(Dummy_Byte);
+	Temp = this->_spi->Read();
 
 	/* Deselect the FLASH: Chip Select high */
 	this->_spi->Stop();
@@ -443,7 +453,7 @@ void SPI25QXX::WaitForWriteEnd(void)
 	{
 		/* Send a dummy byte to generate the clock needed by the FLASH
 		and put the value of the status register in FLASH_Status variable */
-		FLASH_Status = this->_spi->Write(Dummy_Byte);
+		FLASH_Status = this->_spi->Read();
 	} while ((FLASH_Status & WIP_Flag) == SET); /* Write in progress */
 
 	/* Deselect the FLASH: Chip Select high */
@@ -577,32 +587,3 @@ void SPI25QXX::Test()
 
 
 
-//读取芯片ID
-//返回值如下:				   
-//0XEF13,表示芯片型号为W25Q80  
-//0XEF14,表示芯片型号为W25Q16    
-//0XEF15,表示芯片型号为W25Q32  
-//0XEF16,表示芯片型号为W25Q64 
-//0XEF17,表示芯片型号为W25Q128 	 
-
-/* Private define ------------------------------------------------------------*/
-////////////////////////////////////////////////////////////////////////////////// 
-//指令表
-#define W25X_WriteEnable			0x06 
-#define W25X_WriteDisable		    0x04 
-#define W25X_ReadStatusReg		    0x05 
-#define W25X_WriteStatusReg		    0x01 
-#define W25X_ReadData			    0x03 
-#define W25X_FastReadData		    0x0B 
-#define W25X_FastReadDual		    0x3B 
-#define W25X_PageProgram		    0x02 
-#define W25X_BlockErase			    0xD8 
-#define W25X_SectorErase		    0x20 
-#define W25X_ChipErase			    0xC7 
-#define W25X_PowerDown			    0xB9 
-#define W25X_ReleasePowerDown	    0xAB 
-#define W25X_DeviceID			    0xAB 
-#define W25X_ManufactDeviceID   	0x90 
-#define W25X_JedecDeviceID		    0x9F 
-
-#define WIP_Flag                  	0x01  /* Write In Progress (WIP) flag */
