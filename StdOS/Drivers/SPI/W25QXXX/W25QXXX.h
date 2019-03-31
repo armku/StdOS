@@ -76,7 +76,6 @@
 		void PowerDown(void);
 		void WAKEUP(void);
 
-		/*uint16_t SendHalfWord(uint16_t HalfWord);*/
 		void WriteEnable(void);
 		void WaitForWriteEnd(void);
 

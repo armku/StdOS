@@ -399,28 +399,6 @@ void SPI25QXX::StartReadSequence(uint32_t ReadAddr)
 	/* Send ReadAddr low nibble address byte */
 	this->_spi->Write(ReadAddr & 0xFF);
 }
-/*******************************************************************************
-* Function Name  : SPI_FLASH_SendHalfWord
-* Description    : Sends a Half Word through the SPI interface and return the
-*                  Half Word received from the SPI bus.
-* Input          : Half Word : Half Word to send.
-* Output         : None
-* Return         : The value of the received Half Word.
-*******************************************************************************/
-//u16 SPI25QXX::SendHalfWord(uint16_t HalfWord)
-//{
-//	/* Loop while DR register in not emplty */
-//	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
-//
-//	/* Send Half Word through the SPI1 peripheral */
-//	SPI_I2S_SendData(SPI1, HalfWord);
-//
-//	/* Wait to receive a Half Word */
-//	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET);
-//
-//	/* Return the Half Word read from the SPI bus */
-//	return SPI_I2S_ReceiveData(SPI1);
-//}
 
 /*******************************************************************************
 * Function Name  : SPI_FLASH_WriteEnable
