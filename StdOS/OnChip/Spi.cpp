@@ -65,13 +65,8 @@ void Spi::SetPin(Pin clk, Pin miso, Pin mosi)
 }
 void Spi::SetNss(Pin nss)
 {
-	/*this->Pins[0] = nss;
-	this->_nss.Set(this->Pins[0]);*/
-
-	this->_nss.pinMode(GPIO_Out_PP);
-
 	this->_nss.SetPin(nss);
-
+	this->_nss.pinMode(GPIO_Out_PP);
 	this->Open();
 }
 
