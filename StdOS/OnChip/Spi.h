@@ -51,6 +51,7 @@
 
             // 基础读写
             uint8_t Write(uint8_t data);
+			uint8_t Read() { return this->Write(0XFF); }
             uint16_t Write16(uint16_t data);
 
             // 批量读写。以字节数组长度为准

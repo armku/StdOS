@@ -76,7 +76,7 @@
 		void PowerDown(void);
 		void WAKEUP(void);
 
-		uint8_t ReadByte(void);
+		/*uint8_t ReadByte(void);*/
 		/*uint8_t SendByte(uint8_t byte);*/
 		uint16_t SendHalfWord(uint16_t HalfWord);
 		void WriteEnable(void);
