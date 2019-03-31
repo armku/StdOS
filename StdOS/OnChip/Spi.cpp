@@ -588,7 +588,8 @@ void Spi::OnInit()
 	switch (this->_index)
 	{
 	case Spi1:
-		this->SetPin(PA5, PA6, PA7);//this->SetPin(PA5, PA6, PA7, PA4);                
+		this->SetPin(PA5, PA6, PA7);//this->SetPin(PA5, PA6, PA7, PA4);   
+		this->SetNss(PA4);
 		this->_SPI = SPI1;
 		break;
 	case Spi2:

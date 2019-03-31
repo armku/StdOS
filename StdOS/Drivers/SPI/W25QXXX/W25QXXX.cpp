@@ -60,7 +60,7 @@ void SPI25QXX::Init(void)
 		 SPI_FLASH_SPI_MISO_GPIO, SPI_FLASH_SPI_DETECT_GPIO
 		 and SPI_FLASH_SPI_SCK_GPIO Periph clock enable */
 		 /*!< SPI_FLASH_SPI Periph clock enable */
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
+	/*RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);*/
 		
 	/* Deselect the FLASH: Chip Select high */
 	macSPI_FLASH_CS_DISABLE();
@@ -598,8 +598,7 @@ void SPI25QXX::Test()
 {
 	debug_printf("\r\n 8Mbyte flash(W25Q64)Test\r\n");
 	/* 8M´®ÐÐflash W25Q64³õÊ¼»¯ */
-	Init();
-
+	
 	/* Get SPI Flash Device ID */
 	DeviceID = ReadDeviceID();
 
