@@ -42,11 +42,14 @@ TestStatus TransferStatus1 = FAILED;
 #define SPI_FLASH_PageSize      256
 #define SPI_FLASH_PerWritePageSize      256
 
-SPI25QXX::SPI25QXX(Spi *spi)
+SPI25QXX::SPI25QXX()
+{
+	
+}
+void SPI25QXX::SetSpi(Spi *spi)
 {
 	this->_spi = spi;
 }
-
 /*******************************************************************************
 * Function Name  : SPI_FLASH_Init
 * Description    : Initializes the peripherals used by the SPI FLASH driver.

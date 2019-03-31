@@ -14,7 +14,8 @@
 	class SPI25QXX
 	{
 	public:
-		SPI25QXX(Spi *spi);
+		SPI25QXX();
+		void SetSpi(Spi *spi);
 		void Init(void);
 		void SectorErase(uint32_t SectorAddr);
 		void BulkErase(void);
