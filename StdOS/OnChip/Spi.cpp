@@ -369,7 +369,44 @@ void Spi::SetNss(Pin nss)
 void Spi::Open()
 {
 	this->Stop();
-	this->OnOpen();
+#if defined STM32F0
+	switch (this->_index)
+	{
+	case Spi1:
+	case Spi2:
+	case Spi3:
+		SPI_Cmd((SPI_TypeDef*)(this->_SPI), ENABLE);
+		break;
+	default:
+		break;
+	}
+#elif defined STM32F1
+	switch (this->_index)
+	{
+	case Spi1:
+		SPI_Cmd(SPI1, ENABLE);
+		break;
+	case Spi2:
+		SPI_Cmd(SPI2, ENABLE);
+		break;
+	case Spi3:
+		SPI_Cmd((SPI_TypeDef*)(this->_SPI), ENABLE);
+		break;
+	default:
+		break;
+	}
+#elif defined STM32F4
+	switch (this->_index)
+	{
+	case Spi1:
+	case Spi2:
+	case Spi3:
+		SPI_Cmd((SPI_TypeDef*)(this->_SPI), ENABLE);
+		break;
+	default:
+		break;
+	}
+#endif
 }
 
 void Spi::Close()
@@ -632,48 +669,6 @@ int Spi::GetPre(int index, uint32_t &speedHz)
 
 	speedHz = clock;
 	return pre;
-#endif
-}
-
-void Spi::OnOpen()
-{
-#if defined STM32F0
-	switch (this->_index)
-	{
-	case Spi1:
-	case Spi2:
-	case Spi3:
-		SPI_Cmd((SPI_TypeDef*)(this->_SPI), ENABLE);
-		break;
-	default:
-		break;
-	}
-#elif defined STM32F1
-	switch (this->_index)
-	{
-	case Spi1:
-		SPI_Cmd(SPI1, ENABLE);
-		break;
-	case Spi2:
-		SPI_Cmd(SPI2, ENABLE);
-		break;
-	case Spi3:
-		SPI_Cmd((SPI_TypeDef*)(this->_SPI), ENABLE);
-		break;
-	default:
-		break;
-	}
-#elif defined STM32F4
-	switch (this->_index)
-	{
-	case Spi1:
-	case Spi2:
-	case Spi3:
-		SPI_Cmd((SPI_TypeDef*)(this->_SPI), ENABLE);
-		break;
-	default:
-		break;
-	}
 #endif
 }
 
