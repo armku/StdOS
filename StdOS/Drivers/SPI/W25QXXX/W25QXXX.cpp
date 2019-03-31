@@ -633,12 +633,12 @@ void SPI25QXX::Test()
 	/* Get SPI Flash ID */
 	FlashID = ReadID();
 
-	debug_printf("\r\n FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", FlashID, DeviceID);
+	debug_printf("FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", FlashID, DeviceID);
 
 	/* Check the SPI Flash ID */
 	if (FlashID == sFLASH_ID)  /* #define  sFLASH_ID  0XEF4017 */
 	{
-		debug_printf("\r\n winbond flash W25Q64 !\r\n");
+		debug_printf("winbond flash W25Q64!\r\n");
 
 		/* Erase SPI FLASH Sector to write on */
 		SectorErase(FLASH_SectorToErase);
@@ -646,31 +646,29 @@ void SPI25QXX::Test()
 		/* 将发送缓冲区的数据写到flash中 */
 		BufferWrite(Tx_Buffer, FLASH_WriteAddress, BufferSize);
 		BufferWrite(Tx_Buffer, 252, BufferSize);
-		debug_printf("\r\n Write Data is：%s \r\t", Tx_Buffer);
+		debug_printf("Write Data is：%s\r\t", Tx_Buffer);
 
 		/* 将刚刚写入的数据读出来放到接收缓冲区中 */
 		BufferRead(Rx_Buffer, FLASH_ReadAddress, BufferSize);
-		debug_printf("\r\n Read data is：%s \r\n", Rx_Buffer);
+		debug_printf("Read data is：%s\r\n", Rx_Buffer);
 
 		/* 检查写入的数据与读出的数据是否相等 */
 		TransferStatus1 = Buffercmp(Tx_Buffer, Rx_Buffer, BufferSize);
 
 		if (PASSED == TransferStatus1)
 		{
-			debug_printf("\r\n 8M flash(W25Q64)Test Success!\n\r");
+			debug_printf("8M flash(W25Q64)Test Success!\n\r");
 		}
 		else
 		{
-			debug_printf("\r\n 8M flash(W25Q64)test fail!\n\r");
+			debug_printf("8M flash(W25Q64)test fail!\n\r");
 		}
 	}// if (FlashID == sFLASH_ID)
 	else
 	{
-		debug_printf("\r\n can not get W25Q64 ID!\n\r");
+		debug_printf("can not get W25Q64 ID!\n\r");
 	}
-
 	PowerDown();
-	debug_printf("\r\n\r\n");
 }
 
 
