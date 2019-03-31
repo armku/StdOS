@@ -1,12 +1,12 @@
 #include "I2C.h"
 #include "Sys.h"
 // 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
-SoftI2C::SoftI2C(uint32_t speedHz)
+I2CSoft::I2CSoft(uint32_t speedHz)
 {
 	this->_delay=4;	
 }
 
-void SoftI2C::SetPin(Pin scl, Pin sda)
+void I2CSoft::SetPin(Pin scl, Pin sda)
 {
 	this->SCL.SetPin(scl);
     this->SDA.SetPin(sda);
@@ -18,7 +18,7 @@ void SoftI2C::SetPin(Pin scl, Pin sda)
 	this->SCL = 1;
 }
 
-void SoftI2C::Start()
+void I2CSoft::Start()
 {
     /* 当SCL高电平时，SDA出现一个下跳沿表示I2C总线启动信号 */
     this->SDA = 1;
@@ -31,7 +31,7 @@ void SoftI2C::Start()
     delayMicroseconds(1);
 }
 
-void SoftI2C::Stop()
+void I2CSoft::Stop()
 {
     /* 当SCL高电平时，SDA出现一个上跳沿表示I2C总线停止信号 */
     this->SDA = 0;
@@ -40,7 +40,7 @@ void SoftI2C::Stop()
     this->SDA = 1;
 }
 
-void SoftI2C::WriteByte(uint8_t dat)
+void I2CSoft::WriteByte(uint8_t dat)
 {
     uint8_t i;
 
@@ -68,7 +68,7 @@ void SoftI2C::WriteByte(uint8_t dat)
     }
 }
 
-uint8_t SoftI2C::ReadByte()
+uint8_t I2CSoft::ReadByte()
 {
     uint8_t i;
     uint8_t value;
@@ -89,13 +89,13 @@ uint8_t SoftI2C::ReadByte()
     }
     return value;
 }
-uint8_t SoftI2C::ReadByte(bool ack)
+uint8_t I2CSoft::ReadByte(bool ack)
 {
 	uint8_t ret = this->ReadByte();
 	this->Ack(ack);
 	return ret;
 }
-void SoftI2C::Ack(bool ack)
+void I2CSoft::Ack(bool ack)
 {
     if (ack)
     {
@@ -121,7 +121,7 @@ void SoftI2C::Ack(bool ack)
 //等待应答信号到来
 //返回值：1，接收应答失败
 //        0，接收应答成功
-bool SoftI2C::WaitAck(int retry)
+bool I2CSoft::WaitAck(int retry)
 {
     uint8_t re;
 

@@ -21,7 +21,7 @@ typedef enum
 class AT24CXX
 {
 public:
-	SoftI2C IIC; // I2C通信口
+	I2CSoft IIC; // I2C通信口
 	uint8_t Address; // 设备地址
 
 	bool Write(uint16_t addr, uint8_t data);

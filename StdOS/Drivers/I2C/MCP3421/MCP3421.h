@@ -21,7 +21,7 @@ public:
 	int32_t GetADValue(_Gain3421 gain= GAIN1);
 	float GetVolt();
 private:
-	SoftI2C IIC; // I2C通信口
+	I2CSoft IIC; // I2C通信口
 	//uint8_t Address; // 设备地址
 	void MCP3421_WriteOne(uint8_t  dt);
 	int32_t MCP3421_ReadOne(void);

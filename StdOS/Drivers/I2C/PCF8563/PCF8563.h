@@ -11,7 +11,7 @@ public:
 	void GetDateTime(DateTime& dt);
 	uint8_t readaddr(uint8_t add);
 public:
-	SoftI2C IIC; // I2C通信口
+	I2CSoft IIC; // I2C通信口
 	
 private:	
 	uint8_t Address; // 设备地址

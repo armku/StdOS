@@ -8,7 +8,7 @@
 class RX8025T
 {
 	public:
-		SoftI2C IIC; // I2C通信口
+		I2CSoft IIC; // I2C通信口
         uint8_t Address; // 设备地址
 	public:
 		RX8025T();
