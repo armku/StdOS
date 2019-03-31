@@ -6,8 +6,14 @@
 //SCL		开漏复用输出
 //SDA		开漏复用输出
 
+class I2CBase
+{
+public:
+
+};
+
 // 软件模拟I2C
-class I2CSoft
+class I2CSoft:public I2CBase
 {
 public:
 	bool HasSecAddress;	// 设备是否有子地址
