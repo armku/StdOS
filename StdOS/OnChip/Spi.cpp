@@ -11,8 +11,6 @@ Spi::Spi()
 Spi::~Spi()
 {
 	debug_printf("Spi:Spi%d\r\n", _index + 1);
-
-	this->Close();
 }
 
 void Spi::Init(SPI spi, CPOLTYPE cpol, CPHATYPE cpha, uint32_t speedHz)
@@ -389,97 +387,6 @@ void Spi::SetNss(Pin nss)
 {
 	this->_nss.SetPin(nss);
 	this->_nss.pinMode(GPIO_Out_PP);
-}
-
-void Spi::Close()
-{
-#if defined STM32F0
-	this->Stop();
-	switch (this->_index)
-	{
-	case Spi1:
-	case Spi2:
-	case Spi3:
-		SPI_Cmd((SPI_TypeDef*)(this->_SPI), DISABLE);
-		break;
-	default:
-		break;
-	}
-	SPI_I2S_DeInit((SPI_TypeDef*)(this->_SPI));
-	debug_printf("    CLK : ");
-	this->_clk.Set(P0);
-	debug_printf("    MISO: ");
-	this->_miso.Set(P0);
-	debug_printf("    MOSI: ");
-	this->_mosi.Set(P0);
-	debug_printf("    NSS : ");
-	this->_nss.Set(P0);
-
-	this->Pins[0] = P0;
-	this->Pins[1] = P0;
-	this->Pins[2] = P0;
-	this->Pins[3] = P0;
-#elif defined STM32F1
-	this->Stop();
-	switch (this->_index)
-	{
-	case Spi1:
-	case Spi2:
-	case Spi3:
-		SPI_Cmd((SPI_TypeDef*)(this->_SPI), DISABLE);
-		break;
-	default:
-		break;
-	}
-	SPI_I2S_DeInit((SPI_TypeDef*)(this->_SPI));
-	debug_printf("    CLK : ");
-	this->_clk.SetPin(P0);
-	debug_printf("    MISO: ");
-	this->_miso.SetPin(P0);
-	debug_printf("    MOSI: ");
-	this->_mosi.SetPin(P0);
-	debug_printf("    NSS : ");
-	this->_nss.SetPin(P0);
-
-	//	this->Pins[0] = P0;
-	//	this->Pins[1] = P0;
-	//	this->Pins[2] = P0;
-	//	this->Pins[3] = P0;
-#elif defined STM32F4
-	this->Stop();
-	switch (this->_index)
-	{
-	case Spi1:
-	case Spi2:
-	case Spi3:
-		SPI_Cmd((SPI_TypeDef*)(this->_SPI), DISABLE);
-		break;
-	default:
-		break;
-	}
-	SPI_I2S_DeInit((SPI_TypeDef*)(this->_SPI));
-	debug_printf("    CLK : ");
-	this->_clk.Set(P0);
-	debug_printf("    MISO: ");
-	this->_miso.Set(P0);
-	debug_printf("    MOSI: ");
-	this->_mosi.Set(P0);
-	debug_printf("    NSS : ");
-	this->_nss.Set(P0);
-
-	this->Pins[0] = P0;
-	this->Pins[1] = P0;
-	this->Pins[2] = P0;
-	this->Pins[3] = P0;
-#endif
-}
-
-// 批量读写。以字节数组长度为准
-void Spi::Write(void * buf, int len) {
-
-}
-void Spi::Read(void * buf, int len) {
-
 }
 
 // 拉低NSS，开始传输

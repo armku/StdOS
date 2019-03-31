@@ -22,15 +22,11 @@
         private:
             uint8_t _index;
             void *_SPI;
-            //Pin Pins[4]; // NSS/CLK/MISO/MOSI
             Port _nss;
 
             Port _clk;
             Port _miso;
-            Port _mosi;
-
-            void Init();
-
+            Port _mosi;			
         public:
             int Speed; // 速度
             int Retry; // 等待重试次数，默认200
@@ -45,16 +41,11 @@
 
             void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
             void SetNss(Pin nss = P0);
-            void Close();
 
             // 基础读写
             uint8_t Write(uint8_t data);
 			uint8_t Read() { return this->Write(0XFF); }
             uint16_t Write16(uint16_t data);
-
-            // 批量读写。以字节数组长度为准
-            void Write(void * buf, int len);
-            void Read(void * buf, int len);
 
             void Start(); // 拉低NSS，开始传输
             void Stop(); // 拉高NSS，停止传输
