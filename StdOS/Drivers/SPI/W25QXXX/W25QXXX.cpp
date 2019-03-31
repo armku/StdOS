@@ -1,16 +1,11 @@
 #include "W25QXXX.h"
 #include "stm32f10x.h"
 
-//#define      macSPI_FLASH_CS_ENABLE()                       GPIO_ResetBits( GPIOA, GPIO_Pin_4 )
-//#define      macSPI_FLASH_CS_DISABLE()                      GPIO_SetBits( GPIOA, GPIO_Pin_4 )
 /* 发送缓冲区初始化 */
 uint8_t Tx_Buffer[] = "0123456789";
-
 #define countof(a)      (sizeof(a) / sizeof(*(a)))
 int  BufferSize = 10;
-
 uint8_t Rx_Buffer[11];
-
 TestStatus TransferStatus1 = FAILED;
 /* Private typedef -----------------------------------------------------------*/
 //#define SPI_FLASH_PageSize      4096
@@ -36,7 +31,6 @@ TestStatus TransferStatus1 = FAILED;
 #define W25X_JedecDeviceID		    0x9F 
 
 #define WIP_Flag                  0x01  /* Write In Progress (WIP) flag */
-
 #define Dummy_Byte                0xFF
 
 SPI25QXX::SPI25QXX(Spi *spi)
@@ -55,15 +49,6 @@ void SPI25QXX::Init(void)
 {	
 	SPI_InitTypeDef  SPI_InitStructure;
 
-	/* Enable SPI1 and GPIO clocks */
-	/*!< SPI_FLASH_SPI_CS_GPIO, SPI_FLASH_SPI_MOSI_GPIO,
-		 SPI_FLASH_SPI_MISO_GPIO, SPI_FLASH_SPI_DETECT_GPIO
-		 and SPI_FLASH_SPI_SCK_GPIO Periph clock enable */
-		 /*!< SPI_FLASH_SPI Periph clock enable */
-	/*RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);*/
-		
-	/* Deselect the FLASH: Chip Select high */
-	/*macSPI_FLASH_CS_DISABLE();*/
 	this->_spi->Stop();
 
 	/* SPI1 configuration */
