@@ -11,9 +11,7 @@ void w25qxxxtest()
 {
 	/*spi.SetPin(PA5,PA6,PA7);
 	spi.SetNss(PA4);*/
-	spi.CPOL = CPOL_High;
-	spi.CPHA = CPHA_2Edge;
-	spi.Init(Spi1);
+	spi.Init(Spi1, CPOL_High, CPHA_2Edge);
 
 	s25xx.SetSpi(&spi);
 	s25xx.Test();
