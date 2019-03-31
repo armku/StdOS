@@ -2,7 +2,7 @@
 #include "stm32f10x.h"
 
 #define      macSPI_FLASH_CS_ENABLE()                       GPIO_ResetBits( GPIOA, GPIO_Pin_4 )
-#define      macSPI_FLASH_CS_DISABLE()                      GPIO_SetBits( GPIOA, GPIO_Pin_4 )
+//#define      macSPI_FLASH_CS_DISABLE()                      GPIO_SetBits( GPIOA, GPIO_Pin_4 )
 /* 发送缓冲区初始化 */
 uint8_t Tx_Buffer[] = "0123456789";
 
@@ -63,7 +63,8 @@ void SPI25QXX::Init(void)
 	/*RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);*/
 		
 	/* Deselect the FLASH: Chip Select high */
-	macSPI_FLASH_CS_DISABLE();
+	/*macSPI_FLASH_CS_DISABLE();*/
+	this->_spi->Stop();
 
 	/* SPI1 configuration */
 	// W25X16: data input on the DIO pin is sampled on the rising edge of the CLK. 
@@ -107,7 +108,7 @@ void SPI25QXX::SectorErase(uint32_t SectorAddr)
 	/* Send SectorAddr low nibble address byte */
 	SendByte(SectorAddr & 0xFF);
 	/* Deselect the FLASH: Chip Select high */
-	macSPI_FLASH_CS_DISABLE();
+	this->_spi->Stop();
 	/* Wait the end of Flash writing */
 	WaitForWriteEnd();
 }
@@ -130,7 +131,7 @@ void SPI25QXX::BulkErase(void)
 	/* Send Bulk Erase instruction  */
 	SendByte(W25X_ChipErase);
 	/* Deselect the FLASH: Chip Select high */
-	macSPI_FLASH_CS_DISABLE();
+	this->_spi->Stop();
 
 	/* Wait the end of Flash writing */
 	WaitForWriteEnd();
@@ -181,7 +182,7 @@ void SPI25QXX::PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteT
 	}
 
 	/* Deselect the FLASH: Chip Select high */
-	macSPI_FLASH_CS_DISABLE();
+	this->_spi->Stop();
 
 	/* Wait the end of Flash writing */
 	WaitForWriteEnd();
@@ -340,7 +341,7 @@ void SPI25QXX::BufferRead(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteT
 	}
 
 	/* Deselect the FLASH: Chip Select high */
-	macSPI_FLASH_CS_DISABLE();
+	this->_spi->Stop();
 }
 
 /*******************************************************************************
@@ -370,7 +371,7 @@ uint32_t SPI25QXX::ReadID(void)
 	Temp2 = SendByte(Dummy_Byte);
 
 	/* Deselect the FLASH: Chip Select high */
-	macSPI_FLASH_CS_DISABLE();
+	this->_spi->Stop();
 
 	Temp = (Temp0 << 16) | (Temp1 << 8) | Temp2;
 
@@ -400,7 +401,7 @@ uint32_t SPI25QXX::ReadDeviceID(void)
 	Temp = SendByte(Dummy_Byte);
 
 	/* Deselect the FLASH: Chip Select high */
-	macSPI_FLASH_CS_DISABLE();
+	this->_spi->Stop();
 
 	return Temp;
 }
@@ -509,7 +510,7 @@ void SPI25QXX::WriteEnable(void)
 	SendByte(W25X_WriteEnable);
 
 	/* Deselect the FLASH: Chip Select high */
-	macSPI_FLASH_CS_DISABLE();
+	this->_spi->Stop();
 }
 
 /*******************************************************************************
@@ -540,7 +541,7 @@ void SPI25QXX::WaitForWriteEnd(void)
 	} while ((FLASH_Status & WIP_Flag) == SET); /* Write in progress */
 
 	/* Deselect the FLASH: Chip Select high */
-	macSPI_FLASH_CS_DISABLE();
+	this->_spi->Stop();
 }
 
 
@@ -554,7 +555,7 @@ void SPI25QXX::PowerDown(void)
 	SendByte(W25X_PowerDown);
 
 	/* Deselect the FLASH: Chip Select high */
-	macSPI_FLASH_CS_DISABLE();
+	this->_spi->Stop();
 }
 
 //唤醒
@@ -567,7 +568,7 @@ void SPI25QXX::WAKEUP(void)
 	SendByte(W25X_ReleasePowerDown);
 
 	/* Deselect the FLASH: Chip Select high */
-	macSPI_FLASH_CS_DISABLE();                   //等待TRES1
+	this->_spi->Stop();                  //等待TRES1
 }
 
 /*
