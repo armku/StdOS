@@ -2,15 +2,15 @@
 #include "Spi.h"
 #include "Platform\stm32.h"
 
-Spi::Spi()
+Spi::Spi(SPI spi)
 {
 	this->_index = 0xff;
+	this->_index = spi;
 }
 
-void Spi::Init(SPI spi, CPOLTYPE cpol, CPHATYPE cpha, uint32_t speedHz)
+void Spi::Init(CPOLTYPE cpol, CPHATYPE cpha, uint32_t speedHz)
 {
 	this->Retry = 200; //默认重试次数为200
-	this->_index = spi;
 	this->Speed = speedHz;
 #if DEBUG
 	int k = speedHz / 1000;
@@ -22,7 +22,7 @@ void Spi::Init(SPI spi, CPOLTYPE cpol, CPHATYPE cpha, uint32_t speedHz)
 		debug_printf("Spi%d::Init %d.%dMHz\r\n", _index + 1, m, k);
 #endif 
 	// 自动计算稍低于速度speedHz的分频
-	int pre = GetPre(spi, speedHz);
+	int pre = GetPre(this->_index, speedHz);
 	if (pre == -1)
 		return;
 	debug_printf("pre %x \r\n", pre);
@@ -662,7 +662,7 @@ SpiSoft::SpiSoft()
 {	
 
 }
-void SpiSoft::Init(SPI spi, CPOLTYPE cpol  , CPHATYPE cpha  , uint32_t speedHz  )
+void SpiSoft::Init(CPOLTYPE cpol  , CPHATYPE cpha  , uint32_t speedHz  )
 {
 	//this->delayus=speedHz;
 #ifdef STM32F0

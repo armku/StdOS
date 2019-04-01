@@ -110,7 +110,7 @@ void ad71248Test()
 	spi1.CPOL = CPOL_High;
 	spi1.CPOL = CPOL_Low;
 	spi1.Open();
-	spi1.Init(Spi1);
+	spi1.Init();
     ad.Init_8();
 
 	/*cs.OpenDrain = false;
