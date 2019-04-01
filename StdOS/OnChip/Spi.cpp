@@ -8,21 +8,12 @@ Spi::Spi(SPI spi)
 	this->_index = spi;
 }
 
-void Spi::Init(CPOLTYPE cpol, CPHATYPE cpha, uint32_t speedHz)
+void Spi::Init(CPOLTYPE cpol, CPHATYPE cpha)
 {
 	this->Retry = 200; //默认重试次数为200
-	this->Speed = speedHz;
 #if DEBUG
-	int k = speedHz / 1000;
-	int m = k / 1000;
-	k -= m * 1000;
-	if (k == 0)
-		debug_printf("Spi%d::Init %dMHz\r\n", _index + 1, m);
-	else
-		debug_printf("Spi%d::Init %d.%dMHz\r\n", _index + 1, m, k);
-#endif 
-	// 自动计算稍低于速度speedHz的分频	
-	Speed = speedHz;
+	debug_printf("Spi%d::Init\r\n", _index + 1);
+#endif
 
 #if defined STM32F0
 	//以上为历史内容
@@ -595,7 +586,7 @@ SpiSoft::SpiSoft()
 {	
 
 }
-void SpiSoft::Init(CPOLTYPE cpol  , CPHATYPE cpha  , uint32_t speedHz  )
+void SpiSoft::Init(CPOLTYPE cpol  , CPHATYPE cpha)
 {
 	//this->delayus=speedHz;
 #ifdef STM32F0

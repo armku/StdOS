@@ -16,7 +16,7 @@
 	class SpiBase
 	{
 	public:
-		virtual void Init(CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge, uint32_t speedHz = 9000000)=0;
+		virtual void Init(CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge)=0;
 
 		virtual void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0)=0;
 		virtual void SetNss(Pin nss = P0)=0;
@@ -44,7 +44,6 @@
             Port _miso;
             Port _mosi;			
         public:
-            int Speed; // 速度
             int Retry; // 等待重试次数，默认200
             int Error; // 错误次数
             bool Opened;
@@ -52,7 +51,7 @@
             Spi(SPI spi);
             // 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
 
-			virtual void Init(CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge, uint32_t speedHz = 9000000);
+			virtual void Init(CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge);
 
 			virtual void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
 			virtual void SetNss(Pin nss = P0);
@@ -72,7 +71,7 @@
             CPHATYPE CPHA; //时钟相位
         public:
             SpiSoft(); //使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度   
-			virtual void Init(CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge, uint32_t speedHz = 9000000);
+			virtual void Init(CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge);
 			virtual void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
 			virtual void SetNss(Pin nss = P0);
 			virtual uint8_t Write(uint8_t data);
