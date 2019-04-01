@@ -63,9 +63,6 @@
 
 			virtual void Start(); // 拉低NSS，开始传输
 			virtual void Stop(); // 拉高NSS，停止传输
-
-        private:
-            static int GetPre(int index, uint32_t &speedHz);
     };
 	    
     class SpiSoft :public SpiBase

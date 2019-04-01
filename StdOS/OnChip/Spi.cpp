@@ -21,12 +21,7 @@ void Spi::Init(CPOLTYPE cpol, CPHATYPE cpha, uint32_t speedHz)
 	else
 		debug_printf("Spi%d::Init %d.%dMHz\r\n", _index + 1, m, k);
 #endif 
-	// 自动计算稍低于速度speedHz的分频
-	int pre = GetPre(this->_index, speedHz);
-	if (pre == -1)
-		return;
-	debug_printf("pre %x \r\n", pre);
-
+	// 自动计算稍低于速度speedHz的分频	
 	Speed = speedHz;
 
 #if defined STM32F0
@@ -501,68 +496,6 @@ uint8_t Spi::Write(uint8_t data)
 	default:
 		return  0;
 	}
-#endif
-}
-
-int Spi::GetPre(int index, uint32_t &speedHz)
-{
-#if defined STM32F0
-	// 自动计算稍低于速度speedHz的分频
-	uint16_t pre = SPI_BaudRatePrescaler_2;
-	uint32_t clock = Sys.Clock >> 1;
-	while (pre <= SPI_BaudRatePrescaler_256)
-	{
-		if (clock <= speedHz)
-			break;
-		clock >>= 1;
-		pre += (SPI_BaudRatePrescaler_4 - SPI_BaudRatePrescaler_2);
-	}
-	if (pre > SPI_BaudRatePrescaler_256)
-	{
-		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, Sys.Clock);
-		return  -1;
-	}
-
-	speedHz = clock;
-	return pre;
-#elif defined STM32F1
-	// 自动计算稍低于速度speedHz的分频
-	uint16_t pre = SPI_BaudRatePrescaler_2;
-	uint32_t clock = Sys.Clock >> 1;
-	while (pre <= SPI_BaudRatePrescaler_256)
-	{
-		if (clock <= speedHz)
-			break;
-		clock >>= 1;
-		pre += (SPI_BaudRatePrescaler_4 - SPI_BaudRatePrescaler_2);
-	}
-	if (pre > SPI_BaudRatePrescaler_256)
-	{
-		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, Sys.Clock);
-		return  -1;
-	}
-
-	speedHz = clock;
-	return pre;
-#elif defined STM32F4
-	// 自动计算稍低于速度speedHz的分频
-	uint16_t pre = SPI_BaudRatePrescaler_2;
-	uint32_t clock = Sys.Clock >> 1;
-	while (pre <= SPI_BaudRatePrescaler_256)
-	{
-		if (clock <= speedHz)
-			break;
-		clock >>= 1;
-		pre += (SPI_BaudRatePrescaler_4 - SPI_BaudRatePrescaler_2);
-	}
-	if (pre > SPI_BaudRatePrescaler_256)
-	{
-		debug_printf("Spi%d::Init Error! speedHz=%d mush be dived with %dMHz\r\n", index, speedHz, Sys.Clock);
-		return  -1;
-	}
-
-	speedHz = clock;
-	return pre;
 #endif
 }
 
