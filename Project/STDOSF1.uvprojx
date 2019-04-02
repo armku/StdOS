@@ -775,37 +775,37 @@
             <File>
               <FileName>DemoLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\DemoLink\DemoLink.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\COM\DemoLink\DemoLink.cpp</FilePath>
             </File>
             <File>
               <FileName>esp8266.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\esp8266\esp8266.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SHARP_PM2_5.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StdLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\StdLink\StdLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EspDemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\COM\esp8266\esp8266.cpp</FilePath>
             </File>
             <File>
               <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\GPS_S1216\GPS_S1216.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SHARP_PM2_5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StdLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\StdLink\StdLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspDemoLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\EspDemoLink.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -868,11 +868,6 @@
           <GroupName>Demo</GroupName>
           <Files>
             <File>
-              <FileName>ModbusLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</FilePath>
@@ -886,6 +881,11 @@
               <FileName>AD7689Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1660,37 +1660,37 @@
             <File>
               <FileName>DemoLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\DemoLink\DemoLink.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\COM\DemoLink\DemoLink.cpp</FilePath>
             </File>
             <File>
               <FileName>esp8266.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\esp8266\esp8266.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\ModbusLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SHARP_PM2_5.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StdLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\StdLink\StdLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EspDemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\EspDemoLink.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\COM\esp8266\esp8266.cpp</FilePath>
             </File>
             <File>
               <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\GPS_S1216\GPS_S1216.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SHARP_PM2_5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StdLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\StdLink\StdLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EspDemoLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\EspDemoLink.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1753,11 +1753,6 @@
           <GroupName>Demo</GroupName>
           <Files>
             <File>
-              <FileName>ModbusLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\DriversCom\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</FilePath>
@@ -1771,6 +1766,11 @@
               <FileName>AD7689Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -1445,7 +1445,7 @@
 
   <Group>
     <GroupName>DriversCom</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1456,7 +1456,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\DriversCom\DemoLink\DemoLink.cpp</PathWithFileName>
+      <PathWithFileName>..\StdOS\Drivers\COM\DemoLink\DemoLink.cpp</PathWithFileName>
       <FilenameWithoutPath>DemoLink.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1468,7 +1468,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\DriversCom\esp8266\esp8266.cpp</PathWithFileName>
+      <PathWithFileName>..\StdOS\Drivers\COM\esp8266\esp8266.cpp</PathWithFileName>
       <FilenameWithoutPath>esp8266.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1480,8 +1480,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\DriversCom\ModbusLink\ModbusLink.cpp</PathWithFileName>
-      <FilenameWithoutPath>ModbusLink.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\StdOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</PathWithFileName>
+      <FilenameWithoutPath>GPS_S1216.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1492,8 +1492,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\DriversCom\SHARP_PM2_5\SHARP_PM2_5.cpp</PathWithFileName>
-      <FilenameWithoutPath>SHARP_PM2_5.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\StdOS\Drivers\COM\ModbusLink\ModbusLink.cpp</PathWithFileName>
+      <FilenameWithoutPath>ModbusLink.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1504,8 +1504,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\DriversCom\StdLink\StdLink.cpp</PathWithFileName>
-      <FilenameWithoutPath>StdLink.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\StdOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</PathWithFileName>
+      <FilenameWithoutPath>SHARP_PM2_5.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1516,8 +1516,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\DriversCom\EspDemoLink.cpp</PathWithFileName>
-      <FilenameWithoutPath>EspDemoLink.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\StdOS\Drivers\COM\StdLink\StdLink.cpp</PathWithFileName>
+      <FilenameWithoutPath>StdLink.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1528,8 +1528,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\DriversCom\GPS_S1216\GPS_S1216.cpp</PathWithFileName>
-      <FilenameWithoutPath>GPS_S1216.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\StdOS\Drivers\COM\EspDemoLink.cpp</PathWithFileName>
+      <FilenameWithoutPath>EspDemoLink.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1668,18 +1668,6 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\DriversCom\ModbusLink\Example\ModbusLinkDemo.cpp</PathWithFileName>
-      <FilenameWithoutPath>ModbusLinkDemo.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>16</GroupNumber>
-      <FileNumber>85</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>..\StdOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</PathWithFileName>
       <FilenameWithoutPath>AD7124Demo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -1687,7 +1675,7 @@
     </File>
     <File>
       <GroupNumber>16</GroupNumber>
-      <FileNumber>86</FileNumber>
+      <FileNumber>85</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1699,13 +1687,25 @@
     </File>
     <File>
       <GroupNumber>16</GroupNumber>
-      <FileNumber>87</FileNumber>
+      <FileNumber>86</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\StdOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</PathWithFileName>
       <FilenameWithoutPath>AD7689Demo.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>16</GroupNumber>
+      <FileNumber>87</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\StdOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</PathWithFileName>
+      <FilenameWithoutPath>ModbusLinkDemo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
