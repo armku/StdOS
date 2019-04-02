@@ -708,16 +708,6 @@
               <FilePath>..\StdOS\Drivers\OCM240128\OCM240128.cpp</FilePath>
             </File>
             <File>
-              <FileName>SSD1106.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SSD1106\SSD1106.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SSD1309.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SSD1309\SSD1309.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ST7565R.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\ST7565R\ST7565R.cpp</FilePath>
@@ -771,6 +761,16 @@
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\SPI\AD7689\AD7689.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1106.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\SSD1106\SSD1106.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1309.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\SSD1309\SSD1309.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1593,16 +1593,6 @@
               <FilePath>..\StdOS\Drivers\OCM240128\OCM240128.cpp</FilePath>
             </File>
             <File>
-              <FileName>SSD1106.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SSD1106\SSD1106.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SSD1309.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SSD1309\SSD1309.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ST7565R.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\ST7565R\ST7565R.cpp</FilePath>
@@ -1656,6 +1646,16 @@
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\SPI\AD7689\AD7689.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1106.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\SSD1106\SSD1106.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SSD1309.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\SSD1309\SSD1309.cpp</FilePath>
             </File>
           </Files>
         </Group>
