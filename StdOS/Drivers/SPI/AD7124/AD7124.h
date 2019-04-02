@@ -8,10 +8,10 @@
     class AD7124
     {
         public:
-            AD7124(SpiBase *spi);
             uint16_t CHCONFIG[16];//通道配置
 
-            void Init_8();		//8通道初始化
+			void SetSpi(SpiBase *spi); 
+			void Init_8();		//8通道初始化
 			void Init_4();		//4通道初始化
             uint8_t ReadID();		//读取ID
             uint8_t ReadStatus();	//读取状态

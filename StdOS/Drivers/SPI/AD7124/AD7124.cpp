@@ -3,10 +3,11 @@
 
 #include "Sys.h"
 
-AD7124::AD7124(SpiBase *spi)
+void AD7124::SetSpi(SpiBase *spi)
 {
-    this->pspi = spi;
+	this->pspi = spi;
 }
+
 
 uint16_t AD7124::Write16(uint16_t sendData)
 {

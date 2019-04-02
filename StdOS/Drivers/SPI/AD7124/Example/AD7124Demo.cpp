@@ -81,7 +81,7 @@ float AD7124::Temp1Test()
 
 #if 1
 SpiSoft spi1;
-AD7124 ad(&spi1);
+AD7124 ad;
 
 void ad7124test(void *param)
 {
@@ -108,6 +108,8 @@ void ad71248Test()
 	spi1.SetNss(PA4);
 	
 	spi1.Init(CPOL_High,CPHA_2Edge);
+
+	ad.SetSpi(&spi1);
     ad.Init_8();
 	ad.ReadID();
 	
