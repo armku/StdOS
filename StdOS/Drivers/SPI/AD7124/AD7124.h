@@ -3,8 +3,7 @@
 
     #include "spi.h"
 
-    #define AD7124SPISOFT 1	
-	#define AD7124_BUFSIZE 6
+    #define AD7124_BUFSIZE 6
 
     class AD7124
     {
