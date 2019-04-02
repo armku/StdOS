@@ -588,7 +588,6 @@ SpiSoft::SpiSoft()
 }
 void SpiSoft::Init(CPOLTYPE cpol  , CPHATYPE cpha)
 {
-	//this->delayus=speedHz;
 #ifdef STM32F0
 	this->delayus = 0;
 #elif defined STM32F1
@@ -604,7 +603,7 @@ void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi)
 {
 	this->_clk.pinMode(GPIO_Out_PP);
 	this->_mosi.pinMode(GPIO_Out_PP);//此处设置错误将导致异常
-	this->_miso.pinMode(GPIO_Out_OD);
+	this->_miso.pinMode(GPIO_IPU);
 
 	this->_clk.SetPin(clk);
 	this->_mosi.SetPin(mosi);
