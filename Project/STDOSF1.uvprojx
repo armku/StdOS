@@ -683,11 +683,6 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>AD7689.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\AD7689\AD7689.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ADS1232.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\ADS1232\ADS1232.cpp</FilePath>
@@ -771,6 +766,11 @@
               <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\SPI\AT45DB\AT45DB.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7689.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\AD7689\AD7689.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1563,11 +1563,6 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>AD7689.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\AD7689\AD7689.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ADS1232.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\ADS1232\ADS1232.cpp</FilePath>
@@ -1651,6 +1646,11 @@
               <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\SPI\AT45DB\AT45DB.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7689.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\AD7689\AD7689.cpp</FilePath>
             </File>
           </Files>
         </Group>
