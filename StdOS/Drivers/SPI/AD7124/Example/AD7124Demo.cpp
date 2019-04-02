@@ -101,11 +101,15 @@ void ad7124test(void *param)
 
 void ad71248Test()
 {
-	spi1.SetPin(PC1, PC2, PC3);
-    spi1.SetNss(PC0);
+	/*spi1.SetPin(PC1, PC2, PC3);
+    spi1.SetNss(PC0);*/
+
+	spi1.SetPin(PA5, PA6, PA7);
+	spi1.SetNss(PA4);
 	
 	spi1.Init(CPOL_High,CPHA_2Edge);
     ad.Init_8();
+	ad.ReadID();
 	
     Sys.AddTask(ad7124test, &ad, 1000, 1000, "7124-8test");
 }

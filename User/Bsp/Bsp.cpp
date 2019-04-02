@@ -6,7 +6,7 @@
 char *AppVersion = "0.1.2018.1115"; //°æ±¾ºÅ
 
 Port led1;
-
+void ad71248Test();
 void LedTask(void *param)
 {
 	//static bool flagonoff = false;
@@ -48,7 +48,8 @@ void BspInit()
 	/*EspDemoLinkTestInit();*/
 	ModbusSlaveLinkTestInit();
 	usart111.OnReceive = Com1test;
-	w25qxxxtest();
+	//w25qxxxtest();
+	ad71248Test();
 }
 
 /*
