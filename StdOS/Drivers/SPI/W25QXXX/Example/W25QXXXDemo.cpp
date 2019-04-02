@@ -4,7 +4,7 @@
 
 #ifdef _W25QXX_TEST_CPP
 
-//#define SPISOFT
+#define SPISOFT
 
 #ifdef SPISOFT
 SpiSoft spi;
