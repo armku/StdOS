@@ -103,11 +103,8 @@ void ad71248Test()
 {
 	spi1.SetPin(PC1, PC2, PC3);
     spi1.SetNss(PC0);
-	spi1.CPHA = CPHA_1Edge;
-	spi1.CPOL = CPOL_High;
-	spi1.CPOL = CPOL_Low;
-	spi1.Open();
-	spi1.Init();
+	
+	spi1.Init(CPOL_High,CPHA_2Edge);
     ad.Init_8();
 	
     Sys.AddTask(ad7124test, &ad, 1000, 1000, "7124-8test");
