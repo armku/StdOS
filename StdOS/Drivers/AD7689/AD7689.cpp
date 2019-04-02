@@ -19,6 +19,12 @@ CAD7689::CAD7689()
     this->chDelayCnt = 0;
 }
 
+void CAD7689::SetSpi(SpiBase *spi)
+{
+	this->pspi = spi;
+}
+
+
 void CAD7689::SetPin(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
 {
 	this->ppinsck.SetPin(pinsck);

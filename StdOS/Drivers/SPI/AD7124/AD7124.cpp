@@ -8,7 +8,6 @@ void AD7124::SetSpi(SpiBase *spi)
 	this->pspi = spi;
 }
 
-
 uint16_t AD7124::Write16(uint16_t sendData)
 {
     uint16_t ret = 0;
