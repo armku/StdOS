@@ -3,17 +3,10 @@
 
 #include "Sys.h"
 
-#if AD7124SPISOFT
-    AD7124::AD7124(SpiSoft *spi)
-    {
-        this->pspi = spi;
-    }
-#else 
-    AD7124::AD7124(Spi *spi)
-    {
-        this->pspi = spi;
-    }
-#endif 
+AD7124::AD7124(SpiBase *spi)
+{
+    this->pspi = spi;
+}
 
 uint16_t AD7124::Write16(uint16_t sendData)
 {
@@ -22,9 +15,7 @@ uint16_t AD7124::Write16(uint16_t sendData)
     ret <<= 8;
     ret += this->pspi->Write(sendData &0xff);
     return ret;
-
 }
-
 
 uint32_t AD7124::Write24(uint32_t sendData)
 {
@@ -35,7 +26,6 @@ uint32_t AD7124::Write24(uint32_t sendData)
     ret <<= 8;
     ret += this->pspi->Write(sendData &0xff);
     return ret;
-
 }
 
 uint32_t AD7124::Write32(uint32_t sendData)
@@ -301,7 +291,6 @@ uint8_t AD7124::ReadStatus()
 	this->pspi->Start();
     return retVal;
 }
-
 /*******************************************************************************
  * @function	: Reset
  * @brief		: ¸´Î»ADÐ¾Æ¬

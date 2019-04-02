@@ -98,10 +98,7 @@ void ad7124test(void *param)
     /*double fdata = (2.5 *data) / (16777215 *128 * 0.001);
     debug_printf("R:%0.4f\r\n", fdata);*/
 }
-//Port cs;
-//Port sck;
-//Port din;
-//Port dout;
+
 void ad71248Test()
 {
 	spi1.SetPin(PC1, PC2, PC3);
@@ -112,28 +109,6 @@ void ad71248Test()
 	spi1.Open();
 	spi1.Init();
     ad.Init_8();
-
-	/*cs.OpenDrain = false;
-	cs.Set(PC0);
-	cs.Open();*/
-
-	//sck.OpenDrain = false;
-	//sck.Set(PC1);
-	//sck.Open();
-
-	//din.OpenDrain = false;
-	//din.Set(PC2);
-	//din.Open();
-
-	//dout.OpenDrain = false;
-	//dout.Set(PC3);
-	//dout.Open();
-
-
-	//cs = 0;
-	//sck = 0;
-	//din = 0;
-	//dout = 0;
 	
     Sys.AddTask(ad7124test, &ad, 1000, 1000, "7124-8test");
 }

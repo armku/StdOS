@@ -9,12 +9,8 @@
     class AD7124
     {
         public:
-            #if AD7124SPISOFT
-                AD7124(SpiSoft *spi);
-            #else 
-                AD7124(Spi *spi);
-            #endif 
-			uint16_t CHCONFIG[16];//通道配置
+            AD7124(SpiBase *spi);
+            uint16_t CHCONFIG[16];//通道配置
 
             void Init_8();		//8通道初始化
 			void Init_4();		//4通道初始化
@@ -41,11 +37,7 @@
             int readCnt; //读取次数
             int readCntCheck; //上次检查的读取周期
 
-            #if AD7124SPISOFT
-                SpiSoft *pspi; //SPI接口
-            #else 
-                Spi *pspi; //SPI接口
-            #endif 
+            SpiBase *pspi; //SPI接口            
 		private:		
 		//测试
 			float GetTemp1();
@@ -54,6 +46,5 @@
             uint32_t ad7124Buf[AD7124_BUFSIZE];
             uint8_t ad7124BufCnt;
             uint8_t ad7124Int;
-
     };    
 #endif
