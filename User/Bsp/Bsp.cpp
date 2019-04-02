@@ -49,7 +49,7 @@ void BspInit()
 	ModbusSlaveLinkTestInit();
 	usart111.OnReceive = Com1test;
 	//w25qxxxtest();
-	ad71248Test();
+	//ad71248Test();
 }
 
 /*
