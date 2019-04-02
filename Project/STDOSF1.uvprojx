@@ -882,6 +882,11 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\SPI\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
             </File>
+            <File>
+              <FileName>AD7689Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1761,6 +1766,11 @@
               <FileName>W25QXXXDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\SPI\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7689Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</FilePath>
             </File>
           </Files>
         </Group>
