@@ -677,6 +677,11 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\I2C.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Print.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\Print.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1561,6 +1566,11 @@
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Print.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\OnChip\Print.cpp</FilePath>
             </File>
           </Files>
         </Group>
