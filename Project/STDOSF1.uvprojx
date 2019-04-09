@@ -947,6 +947,11 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\ArduinoAPI\WString.cpp</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ArduinoCore</GroupName>
+          <Files>
             <File>
               <FileName>adc.c</FileName>
               <FileType>1</FileType>
@@ -1927,6 +1932,11 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\ArduinoAPI\WString.cpp</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ArduinoCore</GroupName>
+          <Files>
             <File>
               <FileName>adc.c</FileName>
               <FileType>1</FileType>
