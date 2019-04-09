@@ -677,11 +677,6 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\I2C.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Print.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Print.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -891,6 +886,16 @@
               <FileName>ModbusLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ArduinoAPI</GroupName>
+          <Files>
+            <File>
+              <FileName>Print.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\Print.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1567,11 +1572,6 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\OnChip\I2C.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Print.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Print.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1781,6 +1781,16 @@
               <FileName>ModbusLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ArduinoAPI</GroupName>
+          <Files>
+            <File>
+              <FileName>Print.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\Print.cpp</FilePath>
             </File>
           </Files>
         </Group>
