@@ -893,9 +893,94 @@
           <GroupName>ArduinoAPI</GroupName>
           <Files>
             <File>
+              <FileName>Arduino.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\Arduino.c</FilePath>
+            </File>
+            <File>
+              <FileName>dtostrf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\dtostrf.c</FilePath>
+            </File>
+            <File>
+              <FileName>HardwareSerial.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\HardwareSerial.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>itoa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\itoa.c</FilePath>
+            </File>
+            <File>
               <FileName>Print.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\ArduinoAPI\Print.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Stream.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\Stream.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tone.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\Tone.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Wire.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\Wire.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WireBase.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\WireBase.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WMath.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\WMath.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\WString.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>main1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\main1.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1788,9 +1873,94 @@
           <GroupName>ArduinoAPI</GroupName>
           <Files>
             <File>
+              <FileName>Arduino.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\Arduino.c</FilePath>
+            </File>
+            <File>
+              <FileName>dtostrf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\dtostrf.c</FilePath>
+            </File>
+            <File>
+              <FileName>HardwareSerial.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\HardwareSerial.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>itoa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\itoa.c</FilePath>
+            </File>
+            <File>
               <FileName>Print.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\ArduinoAPI\Print.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Stream.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\Stream.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tone.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\Tone.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Wire.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\Wire.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WireBase.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\WireBase.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WMath.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\WMath.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\WString.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>main1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\ArduinoAPI\main1.cpp</FilePath>
             </File>
           </Files>
         </Group>
