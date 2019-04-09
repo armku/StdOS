@@ -24,71 +24,33 @@ void CAD7689::SetSpi(SpiBase *spi)
 	this->pspi = spi;
 }
 
-
-void CAD7689::SetPin(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv)
-{
-	this->ppinsck.SetPin(pinsck);
-    this->ppinsdi.SetPin(pinsdi);
-    this->ppinsdo.SetPin(pinsdo);
-    this->ppincnv.SetPin(pincnv);
-}
-
 uint16_t CAD7689::AD_Read(void)
 {
     uint16_t dat = 0;
-    uint32_t i;
-    this->ppincnv=0;
+	this->pspi->Start();
     delayMicroseconds(1);
-    for (i = 0; i < 16; i++)
-    {
-        this->ppinsck=1;
-        delayMicroseconds(1);
-        dat <<= 1;
-        dat += this->ppinsdo.Read();
-        this->ppinsck=0;
-        delayMicroseconds(1);
-    }
-    this->ppincnv=1;
+	dat = this->pspi->Write16(0XFFFF);
+	this->pspi->Stop();
     return dat;
 }
 
 uint16_t CAD7689::AD_Write(uint16_t sdat)
 {
     uint16_t dat = 0;
-    uint32_t i;
-    this->ppincnv=0;
+	this->pspi->Start();
     delayMicroseconds(1);
-    for (i = 0; i < 16; i++)
-    {
-        ((sdat &0x8000) > 0) ? this->ppinsdi=1: this->ppinsdi=0;
-        dat <<= 1;
-        dat += this->ppinsdo.Read();
-        delayMicroseconds(1);
-        this->ppinsck=0;
-        delayMicroseconds(1);
-        sdat <<= 1;
-        this->ppinsck=1;
-    }
-    delayMicroseconds(1);
-    this->ppinsdi=0;
-    delayMicroseconds(1);
-    this->ppincnv=1;
+	dat=this->pspi->Write16(sdat);
+	this->pspi->Stop();
     return dat;
 }
 
 void CAD7689::Init(void)
 {    
-    //this->ppinsdo->SetModeINPUT_IPU();
-    
-    this->ppinsck=0;
-    this->ppinsdi=0;
-
     //³õÊ¼»¯ÅäÖÃ
-    this->ppincnv=0;
+	this->pspi->Start();
     delayMicroseconds(100);
-    this->ppincnv=1;
+	this->pspi->Stop();
     delayMicroseconds(600);
-
 }
 
 /*******************************************************************************

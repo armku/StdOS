@@ -650,6 +650,8 @@ uint8_t SpiSoft::Write(uint8_t data)
 			//测试通过
 			for (i = 0; i < 8; i++)
 			{
+				this->_clk = 0;
+				delayMicroseconds(this->delayus);
 				if (data &(1 << (8 - i - 1)))
 				{
 					this->_mosi = 1;
@@ -659,20 +661,23 @@ uint8_t SpiSoft::Write(uint8_t data)
 					this->_mosi = 0;
 				}
 				delayMicroseconds(this->delayus);
-				this->_clk = 1;
-				delayMicroseconds(this->delayus);
-				this->_clk = 0;
-				ret <<= 1;
+				ret <<= 1;				
 				if (this->_miso.Read())
 				{
 					ret |= 1;
 				}
-			}
+				this->_clk = 1;
+				delayMicroseconds(this->delayus);
+			}			
+			this->_clk = 0;
+			delayMicroseconds(this->delayus);
 		}
 		else if (this->CPHA == CPHA_2Edge)
 		{
 			//时钟相位 在串行同步时钟的第二个跳变沿（上升或下降）数据被采样
 			//需要检查
+			this->_clk = 0;
+			delayMicroseconds(this->delayus);
 			for (i = 0; i < 8; i++)
 			{
 				this->_clk = 1;
@@ -686,13 +691,14 @@ uint8_t SpiSoft::Write(uint8_t data)
 					this->_mosi = 0;
 				}
 				delayMicroseconds(this->delayus);
-				this->_clk = 0;
 				ret <<= 1;
 				if (this->_miso.Read())
 				{
 					ret |= 1;
 				}
-			}
+				this->_clk = 0;
+				delayMicroseconds(this->delayus);
+			}			
 		}
 	}
 	else if (this->CPOL == CPOL_High)
@@ -703,6 +709,8 @@ uint8_t SpiSoft::Write(uint8_t data)
 			//时钟相位 在串行同步时钟的第一个跳变沿（上升或下降）数据被采样
 			for (i = 0; i < 8; i++)
 			{
+				this->_clk = 1;
+				delayMicroseconds(this->delayus);
 				if (data &(1 << (8 - i - 1)))
 				{
 					this->_mosi = 1;
@@ -711,16 +719,18 @@ uint8_t SpiSoft::Write(uint8_t data)
 				{
 					this->_mosi = 0;
 				}
-				delayMicroseconds(this->delayus);
-				this->_clk = 0;
-				delayMicroseconds(this->delayus);
-				this->_clk = 1;
+				delayMicroseconds(this->delayus);							
 				ret <<= 1;
+				delayMicroseconds(this->delayus);
 				if (this->_miso.Read())
 				{
 					ret |= 1;
 				}
+				this->_clk = 0;
+				delayMicroseconds(this->delayus);
 			}
+			this->_clk = 1;
+			delayMicroseconds(this->delayus);
 		}
 		else if (this->CPHA == CPHA_2Edge)
 		{
@@ -738,14 +748,14 @@ uint8_t SpiSoft::Write(uint8_t data)
 				{
 					this->_mosi = 0;
 				}
-				delayMicroseconds(this->delayus);
-				this->_clk = 1;
-				delayMicroseconds(this->delayus);
+				delayMicroseconds(this->delayus);				
 				ret <<= 1;
 				if (this->_miso.Read())
 				{
 					ret |= 1;
 				}
+				this->_clk = 1;
+				delayMicroseconds(this->delayus);
 			}
 		}
 		else
@@ -756,6 +766,16 @@ uint8_t SpiSoft::Write(uint8_t data)
 	{
 	}
 	return ret;
+}
+uint16_t SpiSoft::Write16(uint16_t data)
+{
+	uint16_t dat = 0;
+
+	dat = this->Write((data >> 8) & 0xff);
+	dat <<= 8;
+	dat |= this->Write(data & 0xff);
+
+	return dat;
 }
 
 void SpiSoft::Open()

@@ -14,15 +14,10 @@ public:
 public:
 	CAD7689();
 	void SetSpi(SpiBase *spi);
-	void SetPin(Pin pinsck, Pin pinsdi, Pin pinsdo, Pin pincnv);
 	void Routin(void); //读取AD值,并切换通道
 	void Init(void); //
 	float getVolt(uint16_t ch); //获取通道电压值    
 private:
-	Port ppinsck;
-	Port ppinsdi;
-	Port ppinsdo;
-	Port ppincnv;
 	SpiBase *pspi; //SPI接口  
 
 	float volt[MAXCH]; //电压值
