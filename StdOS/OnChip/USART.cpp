@@ -5,9 +5,8 @@
 
 UsartKernel_T UsartKernel[5];//串口数据处理
 
-USART::USART(COM index, USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint32_t remapvalue)
+USART::USART(COM index, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint32_t remapvalue)
 {
-	mUSARTx = USARTx;   //USARTx
 	mBaudrate = baud;     //baudrate of usart
 	mPriGroup = priGroup; //priority group
 	mPrePri = prePri;   //preemption priority

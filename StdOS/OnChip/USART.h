@@ -33,7 +33,7 @@ extern UsartKernel_T UsartKernel[];//串口数据处理
 class USART
 {
 public:
-	USART(COM index, USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint32_t remapvalue = 1);
+	USART(COM index, uint32_t baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint32_t remapvalue = 1);
 	void Initialize();
 	uint64_t LastRcvTime;
 	int RxCnt;

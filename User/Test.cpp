@@ -11,7 +11,7 @@
 #include <string.h>  
 #include "Sys.h"
 
-USART usart333(COM3,USART3, 115200);
+USART usart333(COM3,115200);
 EspDemoLink espdemo(usart333);
 
 int (*OnReceive)(char *buf, int len);
