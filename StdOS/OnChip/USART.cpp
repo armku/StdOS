@@ -27,6 +27,16 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 	{
 		mIRQn = USART1_IRQn;                                           //USART IRQn
 		mUSARTRcc = RCC_APB2Periph_USART1;	                                //USARTx Clock
+		if (mRemap)
+		{
+			this->mPortTx.SetPin(PB6);
+			this->mPortRx.SetPin(PA7);
+		}
+		else
+		{
+			this->mPortTx.SetPin(PA9);
+			this->mPortRx.SetPin(PA10);
+		}
 		mPort = (mRemap ? GPIOB : GPIOA);   //GPIO Port
 		mTxPin = (mRemap ? GPIO_Pin_6 : GPIO_Pin_9);   //Tx Pin
 		mRxPin = (mRemap ? GPIO_Pin_7 : GPIO_Pin_10);   //Rx Pin
@@ -115,6 +125,8 @@ void USART::InitGPIO()
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; //in floating
 	GPIO_InitStructure.GPIO_Pin = mRxPin;                //Rx
 	GPIO_Init(mPort, &GPIO_InitStructure);
+	this->mPortTx.pinMode(GPIO_AF_PP);
+	this->mPortRx.pinMode(GPIO_IN_FLOATING);
 }
 
 void USART::InitNVIC()

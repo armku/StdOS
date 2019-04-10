@@ -42,6 +42,8 @@ private:
 	uint16_t            mStopBits; //stop bits of usart
 	uint16_t            mTxPin;    //Tx gpio pin
 	uint16_t            mRxPin;    //Rx gpio pin
+	Port				mPortTx;	//tx
+	Port				mPortRx;	//rx
 	uint8_t             mIRQn;     //USART IRQn
 	GPIO_TypeDef*  mPort;     //GPIO port
 	USART_TypeDef* mUSARTx;   //USARTx
