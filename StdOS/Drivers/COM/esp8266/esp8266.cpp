@@ -26,14 +26,14 @@ bool esp8266::Restart(void)
 	return RecvFind("OK");
 }
 
-u8 esp8266::GetCCSQ(char* WiFiSSID)
+uint8_t esp8266::GetCCSQ(char* WiFiSSID)
 {
 	mUsart << "AT+CWLAP=\"" << WiFiSSID << "\"\r\n";
 	float starttime = millis();// TaskManager::Time();
 	unsigned char temp[13];
 	unsigned short bufferSize = 0;
 	static unsigned short CSQvalue = 70;
-	u8 tempValue = 0;
+	uint8_t tempValue = 0;
 	unsigned short count = 0;
 	bool flag = false;
 	//while ((TaskManager::Time() - starttime) < ESP8266_DEFAULT_TIMEOUT)
@@ -250,7 +250,7 @@ char esp8266::GetStatus(char* muxID, char* type, char* ipAddr, short remotePort,
 
 bool esp8266::ReceiveAndWait(const char* targetString, unsigned char timeOut)
 {
-	u8 temp;
+	uint8_t temp;
 	mReceiveBufferIndex = 0;
 	ClearBuffer();
 	double tartTime = millis();//TaskManager::Time();
@@ -279,7 +279,7 @@ bool esp8266::ReceiveAndWait(const char* targetString, unsigned char timeOut)
 
 bool esp8266::ReceiveAndWait(char const* targetString, const char* targetString2, unsigned char timeOut)
 {
-	u8 temp;
+	uint8_t temp;
 	mReceiveBufferIndex = 0;
 	ClearBuffer();
 	double tartTime = millis();//TaskManager::Time();
@@ -309,7 +309,7 @@ bool esp8266::ReceiveAndWait(char const* targetString, const char* targetString2
 
 bool esp8266::ReceiveAndWait(char const* targetString, const char* targetString2, const char* targetString3, unsigned char timeOut)
 {
-	u8 temp;
+	uint8_t temp;
 	mReceiveBufferIndex = 0;
 	ClearBuffer();
 	double tartTime = millis();//TaskManager::Time();

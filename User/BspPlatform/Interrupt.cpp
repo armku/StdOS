@@ -1,3 +1,4 @@
+#include "stm32f10x.h"
 #include "Interrupt.h"
 
 #ifdef USE_GPS

@@ -1,3 +1,4 @@
+#include "stm32f10x.h"
 #include "USART.h"
 #include "BspPlatform/Interrupt.h"
 #include "Configuration.h"
