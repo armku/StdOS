@@ -13,9 +13,6 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 	mPrePri = prePri;   //preemption priority
 	mSubPri = subPri;   //sub priority
 	mRemap = remap;    //gpio remap flag
-	mParity = USART_Parity_No;   //parity of usart
-	mWordLen = USART_WordLength_8b;  //world length of usart
-	mStopBits = USART_StopBits_1; //stop bits of usart
 	mRemapvalue = remapvalue;
 	mPrecision = 3;
 	mTxOverflow = 0;
@@ -156,9 +153,9 @@ void USART::InitUSART()
 {
 	USART_InitTypeDef USART_InitStructure;                       //
 	USART_InitStructure.USART_BaudRate = mBaudrate;
-	USART_InitStructure.USART_WordLength = mWordLen;
-	USART_InitStructure.USART_StopBits = mStopBits;
-	USART_InitStructure.USART_Parity = mParity;
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;
+	USART_InitStructure.USART_Parity = USART_Parity_No;
 	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 

@@ -37,9 +37,6 @@ private:
 
 	uint32_t            mBaudrate; //baudrate of usart
 	uint32_t			mRemapvalue;// remap value	
-	uint16_t            mParity;   //parity of usart
-	uint16_t            mWordLen;  //world length of usart
-	uint16_t            mStopBits; //stop bits of usart
 	Port				mPortTx;	//tx
 	Port				mPortRx;	//rx
 	uint8_t             mIRQn;     //USART IRQn
