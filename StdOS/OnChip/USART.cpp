@@ -134,7 +134,27 @@ void USART::Initialize()
 	}
 	this->mPortTx.pinMode(GPIO_AF_PP);
 	this->mPortRx.pinMode(GPIO_IN_FLOATING);
-	InitNVIC();
+	switch (mPriGroup)
+	{
+	case 0:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);	break;
+	case 1:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);	break;
+	case 2:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);	break;
+	case 3:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3);	break;
+	case 4:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);	break;
+	default:NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3);	break;
+	}
+	NVIC_InitTypeDef NVIC_InitStructure;
+	NVIC_InitStructure.NVIC_IRQChannel = mIRQn;   //USART IRQn
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = mPrePri; //preemption priority
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = mSubPri; //sub priority
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;  //enable interrup
+	NVIC_Init(&NVIC_InitStructure);                                 //initialize irq
+#ifdef USE_USART_DMA
+	NVIC_InitStructure.NVIC_IRQChannel = mDMAIRQn;//DMA IRQ
+	NVIC_Init(&NVIC_InitStructure);
+	//	mDMATxCh->CCR |= DMA_IT_TC;  //Enable DMA TX Channel TCIT 
+	//	mDMATxCh->CCR |= DMA_IT_TE;  //Enable DMA TX Channel TEIT
+#endif
 	
 	USART_InitTypeDef USART_InitStructure;                       //
 	USART_InitStructure.USART_BaudRate = mBaudrate;
@@ -159,31 +179,6 @@ void USART::Initialize()
 
 #ifdef USE_USART_DMA
 	InitDMA();
-#endif
-}
-
-void USART::InitNVIC()
-{
-	switch (mPriGroup)
-	{
-	case 0:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);	break;
-	case 1:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);	break;
-	case 2:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);	break;
-	case 3:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3);	break;
-	case 4:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);	break;
-	default:NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3);	break;
-	}
-	NVIC_InitTypeDef NVIC_InitStructure;
-	NVIC_InitStructure.NVIC_IRQChannel = mIRQn;   //USART IRQn
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = mPrePri; //preemption priority
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = mSubPri; //sub priority
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;  //enable interrup
-	NVIC_Init(&NVIC_InitStructure);                                 //initialize irq
-#ifdef USE_USART_DMA
-	NVIC_InitStructure.NVIC_IRQChannel = mDMAIRQn;//DMA IRQ
-	NVIC_Init(&NVIC_InitStructure);
-	//	mDMATxCh->CCR |= DMA_IT_TC;  //Enable DMA TX Channel TCIT 
-	//	mDMATxCh->CCR |= DMA_IT_TE;  //Enable DMA TX Channel TEIT
 #endif
 }
 
