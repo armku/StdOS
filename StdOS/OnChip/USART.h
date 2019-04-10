@@ -105,8 +105,7 @@ private:
 	uint16_t mTxOverflow; //Tx overflow byte count
 	uint16_t mRxOverflow; //Rx overflow byte count
 
-private:
-	void InitGPIO();
+private:	
 	void InitUSART();
 	void InitNVIC();
 };

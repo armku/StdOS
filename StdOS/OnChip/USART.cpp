@@ -106,22 +106,12 @@ USART::USART(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_
 
 void USART::Initialize()
 {
-	InitGPIO();
-	InitNVIC();
-	InitUSART();
-#ifdef USE_USART_DMA
-	InitDMA();
-#endif
-}
-
-void USART::InitGPIO()
-{
 	USART_TypeDef* mUSARTx;   //USARTx
 
 	if (this->index == COM1)
 	{
 		mUSARTx = USART1;
-	}
+}
 	else if (this->index == COM2)
 	{
 		mUSARTx = USART2;
@@ -144,6 +134,11 @@ void USART::InitGPIO()
 	}
 	this->mPortTx.pinMode(GPIO_AF_PP);
 	this->mPortRx.pinMode(GPIO_IN_FLOATING);
+	InitNVIC();
+	InitUSART();
+#ifdef USE_USART_DMA
+	InitDMA();
+#endif
 }
 
 void USART::InitNVIC()
