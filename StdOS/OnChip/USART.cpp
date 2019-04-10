@@ -135,7 +135,28 @@ void USART::Initialize()
 	this->mPortTx.pinMode(GPIO_AF_PP);
 	this->mPortRx.pinMode(GPIO_IN_FLOATING);
 	InitNVIC();
-	InitUSART();
+	
+	USART_InitTypeDef USART_InitStructure;                       //
+	USART_InitStructure.USART_BaudRate = mBaudrate;
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;
+	USART_InitStructure.USART_Parity = USART_Parity_No;
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+
+	USART_Init(mUSARTx, &USART_InitStructure);
+
+	USART_Cmd(mUSARTx, ENABLE);
+
+	USART_ITConfig(mUSARTx, USART_IT_RXNE, ENABLE);
+	USART_ITConfig(mUSARTx, USART_IT_IDLE, ENABLE); //开启串口总线空闲中断
+	USART_ITConfig(mUSARTx, USART_IT_TC, ENABLE);
+
+#ifndef USE_USART_DMA	
+	USART_ITConfig(mUSARTx, USART_IT_TC, DISABLE);
+#endif	
+	USART_ClearFlag(mUSARTx, USART_FLAG_TC);      //clear TC flag to make sure the first byte can be send correctly
+
 #ifdef USE_USART_DMA
 	InitDMA();
 #endif
@@ -164,48 +185,6 @@ void USART::InitNVIC()
 	//	mDMATxCh->CCR |= DMA_IT_TC;  //Enable DMA TX Channel TCIT 
 	//	mDMATxCh->CCR |= DMA_IT_TE;  //Enable DMA TX Channel TEIT
 #endif
-}
-
-void USART::InitUSART()
-{
-	USART_TypeDef* mUSARTx;   //USARTx
-
-	if (this->index == COM1)
-	{
-		mUSARTx = USART1;
-	}
-	else if (this->index == COM2)
-	{
-		mUSARTx = USART2;
-	}
-	else if (this->index == COM3)
-	{
-		mUSARTx = USART3;
-	}
-	else
-	{
-	}
-
-	USART_InitTypeDef USART_InitStructure;                       //
-	USART_InitStructure.USART_BaudRate = mBaudrate;
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;
-	USART_InitStructure.USART_Parity = USART_Parity_No;
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-
-	USART_Init(mUSARTx, &USART_InitStructure);
-
-	USART_Cmd(mUSARTx, ENABLE);
-
-	USART_ITConfig(mUSARTx, USART_IT_RXNE, ENABLE);
-	USART_ITConfig(mUSARTx, USART_IT_IDLE, ENABLE); //开启串口总线空闲中断
-	USART_ITConfig(mUSARTx, USART_IT_TC, ENABLE);
-
-#ifndef USE_USART_DMA	
-	USART_ITConfig(mUSARTx, USART_IT_TC, DISABLE);
-#endif	
-	USART_ClearFlag(mUSARTx, USART_FLAG_TC);      //clear TC flag to make sure the first byte can be send correctly
 }
 
 bool USART::SendBytes(uint8_t txData[], uint16_t size)

@@ -106,7 +106,6 @@ private:
 	uint16_t mRxOverflow; //Rx overflow byte count
 
 private:	
-	void InitUSART();
 	void InitNVIC();
 };
 
