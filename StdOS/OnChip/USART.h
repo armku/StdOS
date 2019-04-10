@@ -92,7 +92,6 @@ private:
 	Port				mPortTx;	//tx
 	Port				mPortRx;	//rx
 	uint8_t             mIRQn;     //USART IRQn
-	//USART_TypeDef* mUSARTx;   //USARTx
 	COM index;				//com index
 	uint32_t            mUSARTRcc; //USART Clock
 	bool           mRemap;    //gpio remap flag
