@@ -57,6 +57,16 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 	{
 		mIRQn = USART2_IRQn;                                           //USART IRQn
 		mUSARTRcc = RCC_APB1Periph_USART2;	                                //USARTx Clock
+		if (mRemap)
+		{
+			this->mPortTx.SetPin(PD5);
+			this->mPortRx.SetPin(PD6);
+		}
+		else
+		{
+			this->mPortTx.SetPin(PA2);
+			this->mPortRx.SetPin(PA3);
+	}
 		mPort = (mRemap ? GPIOD : GPIOA);   //GPIO Port
 		mTxPin = (mRemap ? GPIO_Pin_5 : GPIO_Pin_2);   //Tx Pin
 		mRxPin = (mRemap ? GPIO_Pin_6 : GPIO_Pin_3);    //Rx Pin
@@ -76,6 +86,25 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 	{
 		mIRQn = USART3_IRQn;                                           //USART IRQn
 		mUSARTRcc = RCC_APB1Periph_USART3;	                                //USARTx Clock
+		if (mRemap)
+		{
+			this->mPortTx.SetPin(PC10);
+			this->mPortRx.SetPin(PC11);
+		}
+		else
+		{
+			if (mRemapvalue == 0x01)
+			{
+				this->mPortTx.SetPin(PB10);
+				this->mPortRx.SetPin(PB11);
+			}
+			else
+			{
+				this->mPortTx.SetPin(PD8);
+				this->mPortRx.SetPin(PD9);
+			}
+			
+		}
 		mPort = (mRemap ? GPIOC : (mRemapvalue == 0x01 ? GPIOB : GPIOD));   //GPIO Port
 		mTxPin = (mRemap ? GPIO_Pin_10 : (mRemapvalue == 0X01 ? GPIO_Pin_10 : GPIO_Pin_8));   //Tx Pin
 		mRxPin = (mRemap ? GPIO_Pin_11 : (mRemapvalue == 0X01 ? GPIO_Pin_11 : GPIO_Pin_9));   //Rx Pin
