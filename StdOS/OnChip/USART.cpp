@@ -5,7 +5,7 @@
 
 UsartKernel_T UsartKernel[5];//串口数据处理
 
-USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint32_t remapvalue, uint16_t parity, uint16_t wordLen, uint16_t stopBits)
+USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint32_t remapvalue)
 {
 	mUSARTx = USARTx;   //USARTx
 	mBaudrate = baud;     //baudrate of usart
@@ -13,9 +13,9 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 	mPrePri = prePri;   //preemption priority
 	mSubPri = subPri;   //sub priority
 	mRemap = remap;    //gpio remap flag
-	mParity = parity;   //parity of usart
-	mWordLen = wordLen;  //world length of usart
-	mStopBits = stopBits; //stop bits of usart
+	mParity = USART_Parity_No;   //parity of usart
+	mWordLen = USART_WordLength_8b;  //world length of usart
+	mStopBits = USART_StopBits_1; //stop bits of usart
 	mRemapvalue = remapvalue;
 	mPrecision = 3;
 	mTxOverflow = 0;
