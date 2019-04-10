@@ -22,7 +22,7 @@ USART::USART(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_
 
 	if (index==COM1)
 	{
-		mUSARTx = USART1;
+		//mUSARTx = USART1;
 		mIRQn = USART1_IRQn;                                           //USART IRQn
 		mUSARTRcc = RCC_APB2Periph_USART1;	                                //USARTx Clock
 		if (mRemap)
@@ -49,7 +49,7 @@ USART::USART(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_
 	}
 	else if (index==COM2)
 	{
-		mUSARTx = USART2;
+		//mUSARTx = USART2;
 		mIRQn = USART2_IRQn;                                           //USART IRQn
 		mUSARTRcc = RCC_APB1Periph_USART2;                             //USARTx Clock		
 #ifdef USE_USART2_DMA
@@ -65,7 +65,7 @@ USART::USART(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_
 	}
 	else if (index==COM3)
 	{
-		mUSARTx = USART3;
+		//mUSARTx = USART3;
 		mIRQn = USART3_IRQn;                                           //USART IRQn
 		mUSARTRcc = RCC_APB1Periph_USART3;	                                //USARTx Clock
 		if (mRemap)
@@ -115,6 +115,24 @@ void USART::Initialize()
 
 void USART::InitGPIO()
 {
+	USART_TypeDef* mUSARTx;   //USARTx
+
+	if (this->index == COM1)
+	{
+		mUSARTx = USART1;
+	}
+	else if (this->index == COM2)
+	{
+		mUSARTx = USART2;
+	}
+	else if (this->index == COM3)
+	{
+		mUSARTx = USART3;
+	}
+	else
+	{
+	}
+
 	if (mUSARTx == USART1)  RCC_APB2PeriphClockCmd(mUSARTRcc, ENABLE);
 	else    	           RCC_APB1PeriphClockCmd(mUSARTRcc, ENABLE);
 	if (mRemap)
@@ -154,6 +172,24 @@ void USART::InitNVIC()
 
 void USART::InitUSART()
 {
+	USART_TypeDef* mUSARTx;   //USARTx
+
+	if (this->index == COM1)
+	{
+		mUSARTx = USART1;
+	}
+	else if (this->index == COM2)
+	{
+		mUSARTx = USART2;
+	}
+	else if (this->index == COM3)
+	{
+		mUSARTx = USART3;
+	}
+	else
+	{
+	}
+
 	USART_InitTypeDef USART_InitStructure;                       //
 	USART_InitStructure.USART_BaudRate = mBaudrate;
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
@@ -180,6 +216,24 @@ bool USART::SendBytes(uint8_t txData[], uint16_t size)
 {
 	if (RS485)
 		*RS485 = 1;//·¢ËÍÄ£Ê½
+
+	USART_TypeDef* mUSARTx;   //USARTx
+
+	if (this->index == COM1)
+	{
+		mUSARTx = USART1;
+	}
+	else if (this->index == COM2)
+	{
+		mUSARTx = USART2;
+	}
+	else if (this->index == COM3)
+	{
+		mUSARTx = USART3;
+	}
+	else
+	{
+	}
 
 	if (mTxBuf.ResSize() < size)      //compare the unused bytes and sending bytes
 	{
@@ -220,6 +274,24 @@ bool USART::SendBytes(uint8_t txData[], uint16_t size)
 
 void USART::SetBaudRate(uint32_t baudRate)
 {
+	USART_TypeDef* mUSARTx;   //USARTx
+
+	if (this->index == COM1)
+	{
+		mUSARTx = USART1;
+	}
+	else if (this->index == COM2)
+	{
+		mUSARTx = USART2;
+	}
+	else if (this->index == COM3)
+	{
+		mUSARTx = USART3;
+	}
+	else
+	{
+	}
+
 	//	assert_param(IS_USART_BAUDRATE(baudRate));
 	uint32_t tmpreg = 0x00, apbclock = 0x00;
 	uint32_t integerdivider = 0x00;
@@ -395,6 +467,24 @@ USART& USART::operator<<(const char* pStr)
 
 void USART::IRQ()
 {
+	USART_TypeDef* mUSARTx;   //USARTx
+
+	if (this->index == COM1)
+	{
+		mUSARTx = USART1;
+	}
+	else if (this->index == COM2)
+	{
+		mUSARTx = USART2;
+	}
+	else if (this->index == COM3)
+	{
+		mUSARTx = USART3;
+	}
+	else
+	{
+	}
+
 	if (USART_GetFlagStatus(mUSARTx, USART_FLAG_ORE) != RESET)
 	{
 		USART_ReceiveData(mUSARTx);
