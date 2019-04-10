@@ -16,7 +16,7 @@ void LedTask(void *param)
 	//*leds = flagonoff;
 }
 
-USART usart111(USART1, 115200);
+USART usart111(COM1,USART1, 115200);
 
 void Com1test(void *param)
 {

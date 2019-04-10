@@ -11,7 +11,7 @@
 #include <string.h>  
 #include "Sys.h"
 
-USART usart333(USART3, 115200);
+USART usart333(COM3,USART3, 115200);
 EspDemoLink espdemo(usart333);
 
 int (*OnReceive)(char *buf, int len);
@@ -78,7 +78,7 @@ void EspDemoLinkTestInit()
 
 #if 0
 #include "DriversCom/esp8266/Socket_esp8266.h"
-USART com3(USART3, 115200);
+USART com3(COM3,USART3, 115200);
 Socket_esp8266 mWifi(com3);
 
 typedef struct SetData {
