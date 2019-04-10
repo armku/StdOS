@@ -20,8 +20,9 @@ USART::USART(COM index, USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, 
 	RxCnt = 0;
 	TxCnt = 0;
 
-	if (mUSARTx == USART1)
+	if (index==COM1)
 	{
+		mUSARTx = USART1;
 		mIRQn = USART1_IRQn;                                           //USART IRQn
 		mUSARTRcc = RCC_APB2Periph_USART1;	                                //USARTx Clock
 		if (mRemap)
@@ -46,8 +47,9 @@ USART::USART(COM index, USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, 
 		pCOM1 = this;		
 #endif
 	}
-	else if (mUSARTx == USART2)
+	else if (index==COM2)
 	{
+		mUSARTx = USART2;
 		mIRQn = USART2_IRQn;                                           //USART IRQn
 		mUSARTRcc = RCC_APB1Periph_USART2;                             //USARTx Clock		
 #ifdef USE_USART2_DMA
@@ -61,8 +63,9 @@ USART::USART(COM index, USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, 
 		pCOM2 = this;
 #endif
 	}
-	else if (mUSARTx == USART3)
+	else if (index==COM3)
 	{
+		mUSARTx = USART3;
 		mIRQn = USART3_IRQn;                                           //USART IRQn
 		mUSARTRcc = RCC_APB1Periph_USART3;	                                //USARTx Clock
 		if (mRemap)
