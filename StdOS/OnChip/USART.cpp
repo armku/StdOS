@@ -36,11 +36,7 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 		{
 			this->mPortTx.SetPin(PA9);
 			this->mPortRx.SetPin(PA10);
-		}
-		mPort = (mRemap ? GPIOB : GPIOA);   //GPIO Port
-		mTxPin = (mRemap ? GPIO_Pin_6 : GPIO_Pin_9);   //Tx Pin
-		mRxPin = (mRemap ? GPIO_Pin_7 : GPIO_Pin_10);   //Rx Pin
-		mGPIORcc = (mRemap ? RCC_APB2Periph_GPIOB : RCC_APB2Periph_GPIOA);   //GPIO Clock		
+		}		
 #ifdef USE_USART1_DMA
 		mDMATxCh = DMA1_Channel4;       //DMA Tx Channel
 		mDMAIRQn = DMA1_Channel4_IRQn;  //DMA IRQn
@@ -56,21 +52,7 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 	else if (mUSARTx == USART2)
 	{
 		mIRQn = USART2_IRQn;                                           //USART IRQn
-		mUSARTRcc = RCC_APB1Periph_USART2;	                                //USARTx Clock
-		if (mRemap)
-		{
-			this->mPortTx.SetPin(PD5);
-			this->mPortRx.SetPin(PD6);
-		}
-		else
-		{
-			this->mPortTx.SetPin(PA2);
-			this->mPortRx.SetPin(PA3);
-	}
-		mPort = (mRemap ? GPIOD : GPIOA);   //GPIO Port
-		mTxPin = (mRemap ? GPIO_Pin_5 : GPIO_Pin_2);   //Tx Pin
-		mRxPin = (mRemap ? GPIO_Pin_6 : GPIO_Pin_3);    //Rx Pin
-		mGPIORcc = (mRemap ? RCC_APB2Periph_GPIOD : RCC_APB2Periph_GPIOA);   //GPIO Clock
+		mUSARTRcc = RCC_APB1Periph_USART2;                             //USARTx Clock		
 #ifdef USE_USART2_DMA
 		mDMATxCh = DMA1_Channel7;       //DMA Tx Channel
 		mDMAIRQn = DMA1_Channel7_IRQn;  //DMA IRQn
@@ -104,11 +86,7 @@ USART::USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup, uint8_t pre
 				this->mPortRx.SetPin(PD9);
 			}
 			
-		}
-		mPort = (mRemap ? GPIOC : (mRemapvalue == 0x01 ? GPIOB : GPIOD));   //GPIO Port
-		mTxPin = (mRemap ? GPIO_Pin_10 : (mRemapvalue == 0X01 ? GPIO_Pin_10 : GPIO_Pin_8));   //Tx Pin
-		mRxPin = (mRemap ? GPIO_Pin_11 : (mRemapvalue == 0X01 ? GPIO_Pin_11 : GPIO_Pin_9));   //Rx Pin
-		mGPIORcc = (mRemap ? RCC_APB2Periph_GPIOC : (mRemapvalue == 0X01 ? RCC_APB2Periph_GPIOB : RCC_APB2Periph_GPIOD));  //GPIO Clock
+		}		
 #ifdef USE_USART3_DMA
 		mDMATxCh = DMA1_Channel2;       //DMA Tx Channel
 		mDMAIRQn = DMA1_Channel2_IRQn;  //DMA IRQn
@@ -137,7 +115,6 @@ void USART::Initialize()
 
 void USART::InitGPIO()
 {
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO | mGPIORcc, ENABLE);
 	if (mUSARTx == USART1)  RCC_APB2PeriphClockCmd(mUSARTRcc, ENABLE);
 	else    	           RCC_APB1PeriphClockCmd(mUSARTRcc, ENABLE);
 	if (mRemap)
@@ -146,14 +123,6 @@ void USART::InitGPIO()
 		if (mUSARTx == USART2) GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
 		if (mUSARTx == USART3) GPIO_PinRemapConfig(mRemapvalue == 0X01 ? GPIO_PartialRemap_USART3 : GPIO_FullRemap_USART3, ENABLE);
 	}
-	GPIO_InitTypeDef GPIO_InitStructure;//
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;       //
-	GPIO_InitStructure.GPIO_Pin = mTxPin;                //Tx
-	GPIO_Init(mPort, &GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; //in floating
-	GPIO_InitStructure.GPIO_Pin = mRxPin;                //Rx
-	GPIO_Init(mPort, &GPIO_InitStructure);
 	this->mPortTx.pinMode(GPIO_AF_PP);
 	this->mPortRx.pinMode(GPIO_IN_FLOATING);
 }

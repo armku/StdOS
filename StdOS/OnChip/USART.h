@@ -40,14 +40,10 @@ private:
 	uint16_t            mParity;   //parity of usart
 	uint16_t            mWordLen;  //world length of usart
 	uint16_t            mStopBits; //stop bits of usart
-	uint16_t            mTxPin;    //Tx gpio pin
-	uint16_t            mRxPin;    //Rx gpio pin
 	Port				mPortTx;	//tx
 	Port				mPortRx;	//rx
 	uint8_t             mIRQn;     //USART IRQn
-	GPIO_TypeDef*  mPort;     //GPIO port
 	USART_TypeDef* mUSARTx;   //USARTx
-	uint32_t            mGPIORcc;  //GPIO Clock
 	uint32_t            mUSARTRcc; //USART Clock
 	bool           mRemap;    //gpio remap flag
 	uint8_t             mPrePri;   //preemption priority
