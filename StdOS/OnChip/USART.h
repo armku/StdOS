@@ -32,31 +32,6 @@ extern UsartKernel_T UsartKernel[];//串口数据处理
 
 class USART
 {
-private:
-	bool isBusySend;
-
-	uint32_t            mBaudrate; //baudrate of usart
-	uint32_t			mRemapvalue;// remap value	
-	Port				mPortTx;	//tx
-	Port				mPortRx;	//rx
-	uint8_t             mIRQn;     //USART IRQn
-	USART_TypeDef* mUSARTx;   //USARTx
-	uint32_t            mUSARTRcc; //USART Clock
-	bool           mRemap;    //gpio remap flag
-	uint8_t             mPrePri;   //preemption priority
-	uint8_t             mSubPri;   //sub priority
-	uint8_t             mPriGroup; //priority group
-	FIFOBuffer<uint8_t, USART_TX_BUFFER_SIZE>  mTxBuf;  //USART Tx Buffer
-	FIFOBuffer<uint8_t, USART_RX_BUFFER_SIZE>  mRxBuf;  //USART Rx Buffer
-	uint8_t mPrecision;   //when show precision after dot "."  when use "<<" to show float value
-
-	uint16_t mTxOverflow; //Tx overflow byte count
-	uint16_t mRxOverflow; //Rx overflow byte count
-
-private:
-	void InitGPIO();
-	void InitUSART();
-	void InitNVIC();
 public:
 	USART(USART_TypeDef* USARTx, uint32_t baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint32_t remapvalue = 1);
 	void Initialize();
@@ -109,6 +84,31 @@ private:
 public:
 	void DMAIRQ();
 #endif
+private:
+	bool isBusySend;
+
+	uint32_t            mBaudrate; //baudrate of usart
+	uint32_t			mRemapvalue;// remap value	
+	Port				mPortTx;	//tx
+	Port				mPortRx;	//rx
+	uint8_t             mIRQn;     //USART IRQn
+	USART_TypeDef* mUSARTx;   //USARTx
+	uint32_t            mUSARTRcc; //USART Clock
+	bool           mRemap;    //gpio remap flag
+	uint8_t             mPrePri;   //preemption priority
+	uint8_t             mSubPri;   //sub priority
+	uint8_t             mPriGroup; //priority group
+	FIFOBuffer<uint8_t, USART_TX_BUFFER_SIZE>  mTxBuf;  //USART Tx Buffer
+	FIFOBuffer<uint8_t, USART_RX_BUFFER_SIZE>  mRxBuf;  //USART Rx Buffer
+	uint8_t mPrecision;   //when show precision after dot "."  when use "<<" to show float value
+
+	uint16_t mTxOverflow; //Tx overflow byte count
+	uint16_t mRxOverflow; //Rx overflow byte count
+
+private:
+	void InitGPIO();
+	void InitUSART();
+	void InitNVIC();
 };
 
 /**
