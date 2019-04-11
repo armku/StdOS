@@ -21,21 +21,20 @@ USART::USART(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_
 	RxCnt = 0;
 	TxCnt = 0;
 
-	if (index==COM1)
+	if (index == COM1)
 	{
-		//mUSARTx = USART1;
 		mIRQn = USART1_IRQn;                                           //USART IRQn
 		mUSARTRcc = RCC_APB2Periph_USART1;	                                //USARTx Clock
 		if (mRemap)
 		{
 			this->mPortTx.SetPin(PB6);
-			this->mPortRx.SetPin(PA7);
+			this->mPortRx.SetPin(PB7);
 		}
 		else
 		{
 			this->mPortTx.SetPin(PA9);
 			this->mPortRx.SetPin(PA10);
-		}		
+		}
 #ifdef USE_USART1_DMA
 		mDMATxCh = DMA1_Channel4;       //DMA Tx Channel
 		mDMAIRQn = DMA1_Channel4_IRQn;  //DMA IRQn
@@ -45,14 +44,23 @@ USART::USART(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_
 #endif
 
 #ifdef USE_USART1
-		pCOM1 = this;		
+		pCOM1 = this;
 #endif
 	}
-	else if (index==COM2)
+	else if (index == COM2)
 	{
-		//mUSARTx = USART2;
 		mIRQn = USART2_IRQn;                                           //USART IRQn
-		mUSARTRcc = RCC_APB1Periph_USART2;                             //USARTx Clock		
+		mUSARTRcc = RCC_APB1Periph_USART2;                             //USARTx Clock	
+		if (mRemap)
+		{
+			this->mPortTx.SetPin(PD5);
+			this->mPortRx.SetPin(PD6);
+		}
+		else
+		{
+			this->mPortTx.SetPin(PA2);
+			this->mPortRx.SetPin(PA3);
+		}
 #ifdef USE_USART2_DMA
 		mDMATxCh = DMA1_Channel7;       //DMA Tx Channel
 		mDMAIRQn = DMA1_Channel7_IRQn;  //DMA IRQn
@@ -64,9 +72,8 @@ USART::USART(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_
 		pCOM2 = this;
 #endif
 	}
-	else if (index==COM3)
+	else if (index == COM3)
 	{
-		//mUSARTx = USART3;
 		mIRQn = USART3_IRQn;                                           //USART IRQn
 		mUSARTRcc = RCC_APB1Periph_USART3;	                                //USARTx Clock
 		if (mRemap)
@@ -86,8 +93,8 @@ USART::USART(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_
 				this->mPortTx.SetPin(PD8);
 				this->mPortRx.SetPin(PD9);
 			}
-			
-		}		
+
+		}
 #ifdef USE_USART3_DMA
 		mDMATxCh = DMA1_Channel2;       //DMA Tx Channel
 		mDMAIRQn = DMA1_Channel2_IRQn;  //DMA IRQn
@@ -111,7 +118,7 @@ void USART::Initialize()
 	if (this->index == COM1)
 	{
 		mUSARTx = USART1;
-}
+	}
 	else if (this->index == COM2)
 	{
 		mUSARTx = USART2;
@@ -124,8 +131,14 @@ void USART::Initialize()
 	{
 	}
 
-	if (mUSARTx == USART1)  RCC_APB2PeriphClockCmd(mUSARTRcc, ENABLE);
-	else    	           RCC_APB1PeriphClockCmd(mUSARTRcc, ENABLE);
+	if (this->index == COM1)
+	{
+		RCC_APB2PeriphClockCmd(mUSARTRcc, ENABLE);
+	}
+	else
+	{
+		RCC_APB1PeriphClockCmd(mUSARTRcc, ENABLE);
+	}
 	if (mRemap)
 	{
 		if (mUSARTx == USART1) GPIO_PinRemapConfig(GPIO_Remap_USART1, ENABLE);
@@ -155,7 +168,7 @@ void USART::Initialize()
 	//	mDMATxCh->CCR |= DMA_IT_TC;  //Enable DMA TX Channel TCIT 
 	//	mDMATxCh->CCR |= DMA_IT_TE;  //Enable DMA TX Channel TEIT
 #endif
-	
+
 	USART_InitTypeDef USART_InitStructure;                       //
 	USART_InitStructure.USART_BaudRate = mBaudrate;
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
@@ -464,8 +477,8 @@ void USART::IRQ()
 		char ch = 0;
 		ch = mUSARTx->SR; //先读SR，然后读DR才能清除
 		ch = mUSARTx->DR;
-		ch=ch;
-		
+		ch = ch;
+
 		if (this->OnReceive != 0)
 		{
 			this->OnReceive(0);
@@ -477,11 +490,11 @@ void USART::IRQ()
 		USART_ClearITPendingBit(mUSARTx, USART_IT_RXNE);    //Clear RxNE
 		if (!mRxBuf.Put(USART_ReceiveData(mUSARTx)))            //receive byte
 		{
-			USART1->DR = mUSARTx->DR;
+			mUSARTx->DR = mUSARTx->DR;
 			mRxOverflow++;
 		}
 	}
-	if (USART_GetITStatus(mUSARTx, USART_IT_TC) != RESET) 
+	if (USART_GetITStatus(mUSARTx, USART_IT_TC) != RESET)
 	{
 		//USART_ClearITPendingBit(mUSARTx, USART_IT_TC);    //Clear
 		if (RS485 && mTxBuf.Size() == 0)
