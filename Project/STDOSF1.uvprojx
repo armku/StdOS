@@ -830,16 +830,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Storage</GroupName>
-          <Files>
-            <File>
-              <FileName>Storage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Storage\Storage.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Security</GroupName>
           <Files>
             <File>
@@ -1811,16 +1801,6 @@
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Kernel\Time.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Storage</GroupName>
-          <Files>
-            <File>
-              <FileName>Storage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
         </Group>
