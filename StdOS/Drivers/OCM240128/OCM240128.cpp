@@ -269,6 +269,15 @@ void OCM240128::wcmd2(uint8_t dat1, uint8_t dat2, uint8_t cmd)
 
 #if 1
 
+class ocmtest
+{
+public:
+
+public:
+
+
+};
+
 #define width      30       //显示区宽度
 #define addr_w     0x0000   //文本显示区首地址
 #define addr_t     0x01e0   //图形显示区首地址
