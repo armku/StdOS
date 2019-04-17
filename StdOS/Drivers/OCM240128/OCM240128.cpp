@@ -273,8 +273,8 @@ void OCM240128::wcmd2(uint8_t dat1, uint8_t dat2, uint8_t cmd)
 #define addr_w     0x0000   //文本显示区首地址
 #define addr_t     0x01e0   //图形显示区首地址
 #define data_ora   P0       //MCU P0<------> LCM
-#define uchar      unsigned char
-#define uint       unsigned int
+//#define uchar      unsigned char
+//#define uint       unsigned int
 
 sbit wr = P3 ^ 6;  //Data Write into T6963C,L有效
 sbit rd = P3 ^ 7;  //Data Read from T6963C,L有效
@@ -288,10 +288,10 @@ sbit bf1 = P1 ^ 1;
 sbit bf3 = P1 ^ 3;
 
 void wr_comm(uchar comm);
-void wr_data(uchar dat);
-void chk_busy(uchar autowr);
+void wr_data(uint8_t dat);
+void chk_busy(uint8_t autowr);
 
-uchar code tab11[] = {
+uint8_t code tab11[] = {
 0x00,0x00,0x00,0x00,0x00,0x27,0x4f,0x4c,0x44,0x45,0x4e,0x00,0x30,0x41,0x4c,
 0x4d,0x00,0x33,0x43,0x49,0x45,0x4e,0x43,0x45,0x00,0x00,0x00,0x00,0x00,0x00,
 0x00,0x00,0x00,0x00,0x00,0x34,0x45,0x43,0x48,0x4e,0x4f,0x4c,0x4f,0x47,0x59,
@@ -311,7 +311,7 @@ uchar code tab11[] = {
 0x26,0x21,0x38,0x1a,0x00,0x12,0x12,0x18,0x15,0x11,0x11,0x10,0x00,0x00,0x28,
 0x4f,0x54,0x4c,0x49,0x4e,0x45,0x1a,0x00,0x12,0x12,0x19,0x12,0x10,0x11,0x14 };
 
-uchar code tab12[] = {
+uint8_t code tab12[] = {
 	/*--  宋体12;  此字体下对应的点阵为：宽x高=16x16   --*/
 	/*--  文字:  肇  --*/
 	0x10,0x40,0x08,0x40,0x3E,0xFE,0x23,0x48,0x3E,0x30,0x40,0xC8,0x41,0x06,0x9F,0xF0,
@@ -374,7 +374,7 @@ uchar code tab12[] = {
 	0x1F,0xF0,0x10,0x10,0x10,0x10,0x10,0x10,0x1F,0xF0,0x00,0x00,0xFF,0xFE,0x08,0x00,
 	0x08,0x00,0x1F,0xF0,0x08,0x10,0x00,0x10,0x00,0x10,0x01,0x10,0x00,0xA0,0x00,0x40 };
 
-uchar code tab3[] = {
+uint8_t code tab3[] = {
 	/*--  宋体18;  此字体下对应的点阵为：宽x高=24x24   --*/
 	/*--  文字:  本  --*/
 	0x00,0x00,0x00,0x00,0x10,0x00,0x00,0x18,0x00,0x00,0x18,0x00,0x00,0x18,0x00,0x00,
@@ -617,7 +617,7 @@ uchar code tab3[] = {
 	0x0F,0x00,0x00,0x11,0x00,0x00,0x11,0x00,0x00,0x11,0x00,0x00,0x0F,0x00,0x00,0x00,
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 };
 
-uchar code tab5[] = {
+uint8_t code tab5[] = {
 	/*--  调入了一幅图像：F:\梁\画图\cock128128.bmp  --*/
 	/*--  宽度x高度=128x128  --*/
 	0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
@@ -752,39 +752,39 @@ uchar code tab5[] = {
 
 
 /*---------------延时子程序----------------*/
-void delay(uint us)
+void delay(uint32_t us)
 {
 	while (us--);
 }
-void delay1(uint ms)
+void delay1(uint32_t ms)
 {
-	uint i, j;
+	uint32_t i, j;
 	for (i = 0; i < ms; i++)
 		for (j = 0; j < 1000; j++)
 			;
 }
 /*------------写命令或数据到LCD--------------*/
-void wr_od(uchar dat, uchar comm)       //写一个数据和一个命令
+void wr_od(uint8_t dat, uint8_t comm)       //写一个数据和一个命令
 {
 	wr_data(dat);
 	wr_comm(comm);
 }
-void wr_td(uchar datl, uchar dath, uchar comm)  //写两个数据和一个命令
+void wr_td(uint8_t datl, uint8_t dath, uint8_t comm)  //写两个数据和一个命令
 {
 	wr_data(datl);
 	wr_data(dath);
 	wr_comm(comm);
 }
-void wr_xd(uint dat, uchar comm)       //写一个16进制数据和一个命令
+void wr_xd(uint32_t dat, uint8_t comm)       //写一个16进制数据和一个命令
 {
-	uchar datl, dath;
+	uint8_t datl, dath;
 	datl = dat;
 	dath = dat >> 8;
 	wr_data(datl);
 	wr_data(dath);
 	wr_comm(comm);
 }
-void wr_auto(uchar dat)               //自动写数据
+void wr_auto(uint8_t dat)               //自动写数据
 {
 	chk_busy(1);
 	cd = 0;
@@ -794,7 +794,7 @@ void wr_auto(uchar dat)               //自动写数据
 	wr = 1;
 }
 
-void wr_comm(uchar comm)       //写命令
+void wr_comm(uint8_t comm)       //写命令
 {
 	chk_busy(0);
 	cd = 1;
@@ -803,7 +803,7 @@ void wr_comm(uchar comm)       //写命令
 	wr = 0;
 	wr = 1;
 }
-void wr_data(uchar dat)       //写数据
+void wr_data(uint8_t dat)       //写数据
 {
 	chk_busy(0);
 	cd = 0;
@@ -812,7 +812,7 @@ void wr_data(uchar dat)       //写数据
 	wr = 0;
 	wr = 1;
 }
-void chk_busy(uchar autowr)    //测状态
+void chk_busy(uint8_t autowr)    //测状态
 {
 	data_ora = 0xff;
 	cd = 1;
@@ -851,7 +851,7 @@ void init_lcd(void)
 /*--------------清RAM------------------*/
 void clrram(void)
 {
-	uchar i, j;
+	uint8_t i, j;
 	wr_xd(addr_w, 0x24);
 	wr_comm(0xb0);
 	for (j = 0; j < 144; j++)
@@ -862,9 +862,9 @@ void clrram(void)
 	wr_comm(0xb2);
 }
 /*--------------显示点阵------------------*/
-void disp_dz(uchar data1, uchar data2)
+void disp_dz(uint8_t data1, uint8_t data2)
 {
-	uchar i, j;
+	uint8_t i, j;
 	wr_xd(addr_t, 0x24);
 	wr_comm(0xb0);
 	for (j = 0; j < 32; j++)
@@ -877,9 +877,9 @@ void disp_dz(uchar data1, uchar data2)
 	wr_comm(0xb2);
 }
 /*--------------在addr处显示8xl*yl的图形--------------*/
-void disp_img(uint addr, uchar xl, uchar yl, uchar code * img)
+void disp_img(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t code * img)
 {
-	uchar i, j;
+	uint8_t i, j;
 	for (j = 0; j < yl; j++)
 	{
 		for (i = 0; i < xl; i++)
@@ -890,9 +890,9 @@ void disp_img(uint addr, uchar xl, uchar yl, uchar code * img)
 	}
 }
 /*----------在addr处显示row_yl行(每行row_xl个)8xl*yl的文字----------*/
-void disp_chn(uint addr, uchar xl, uchar yl, uchar row_xl, uchar row_yl, uchar code * chn)
+void disp_chn(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t row_xl, uint8_t row_yl, uint8_t code * chn)
 {
-	uchar i, j, k, m;
+	uint8_t i, j, k, m;
 	for (m = 0; m < row_yl; m++)
 	{
 		for (k = 0; k < row_xl; k++)
@@ -909,9 +909,9 @@ void disp_chn(uint addr, uchar xl, uchar yl, uchar row_xl, uchar row_yl, uchar c
 	}
 }
 /*--------------显示字符------------------*/
-void disp_eng(uchar code * eng)
+void disp_eng(uint8_t code * eng)
 {
-	uchar i, j;
+	uint8_t i, j;
 	wr_xd(addr_w, 0x24);
 	wr_comm(0xb0);
 	for (j = 0; j < 9; j++)
