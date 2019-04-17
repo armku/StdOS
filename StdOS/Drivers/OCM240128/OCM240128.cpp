@@ -267,7 +267,7 @@ void OCM240128::wcmd2(uint8_t dat1, uint8_t dat2, uint8_t cmd)
 	this->wcmd(cmd);
 }
 
-#if 0
+#if 1
 
 #define width      30       //显示区宽度
 #define addr_w     0x0000   //文本显示区首地址
@@ -922,7 +922,7 @@ void disp_eng(uchar code * eng)
 	wr_comm(0xb2);
 }
 /*------------------主程序--------------------*/
-void main()
+void lcdtest()
 {
 	SP = 0x5f;
 	init_lcd();
@@ -947,9 +947,4 @@ void main()
 	}
 }
 
-
-
-
 #endif
-
-
