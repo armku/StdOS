@@ -272,26 +272,28 @@ void OCM240128::wcmd2(uint8_t dat1, uint8_t dat2, uint8_t cmd)
 #define width      30       //显示区宽度
 #define addr_w     0x0000   //文本显示区首地址
 #define addr_t     0x01e0   //图形显示区首地址
-#define data_ora   P0       //MCU P0<------> LCM
+//#define data_ora   P0       //MCU P0<------> LCM
 //#define uchar      unsigned char
 //#define uint       unsigned int
 
-sbit wr = P3 ^ 6;  //Data Write into T6963C,L有效
-sbit rd = P3 ^ 7;  //Data Read from T6963C,L有效
-sbit ce = P2 ^ 2;  //使能信号，L有效
-sbit cd = P2 ^ 3;  //当wr=L,cd=H:写命令,cd=L:写数据;当rd=L,cd=H:读状态,cd=L:读数据
-sbit rst = P2 ^ 4;  //Lcm reset,低有效
-sbit fs = P3 ^ 5;  //字体选择,H:6*8点阵;L:8*8点阵
+Port wr;  //Data Write into T6963C,L有效
+Port rd;  //Data Read from T6963C,L有效
+Port ce;  //使能信号，L有效
+Port cd;  //当wr=L,cd=H:写命令,cd=L:写数据;当rd=L,cd=H:读状态,cd=L:读数据
+Port rst;  //Lcm reset,低有效
+Port fs ;  //字体选择,H:6*8点阵;L:8*8点阵
 
-sbit bf0 = P1 ^ 0;
-sbit bf1 = P1 ^ 1;
-sbit bf3 = P1 ^ 3;
+Port bf0;
+Port bf1;
+Port bf3;
 
-void wr_comm(uchar comm);
+uint8_t data_ora;
+
+void wr_comm(uint8_t comm);
 void wr_data(uint8_t dat);
 void chk_busy(uint8_t autowr);
 
-uint8_t code tab11[] = {
+uint8_t const tab11[] = {
 0x00,0x00,0x00,0x00,0x00,0x27,0x4f,0x4c,0x44,0x45,0x4e,0x00,0x30,0x41,0x4c,
 0x4d,0x00,0x33,0x43,0x49,0x45,0x4e,0x43,0x45,0x00,0x00,0x00,0x00,0x00,0x00,
 0x00,0x00,0x00,0x00,0x00,0x34,0x45,0x43,0x48,0x4e,0x4f,0x4c,0x4f,0x47,0x59,
@@ -311,7 +313,7 @@ uint8_t code tab11[] = {
 0x26,0x21,0x38,0x1a,0x00,0x12,0x12,0x18,0x15,0x11,0x11,0x10,0x00,0x00,0x28,
 0x4f,0x54,0x4c,0x49,0x4e,0x45,0x1a,0x00,0x12,0x12,0x19,0x12,0x10,0x11,0x14 };
 
-uint8_t code tab12[] = {
+uint8_t const tab12[] = {
 	/*--  宋体12;  此字体下对应的点阵为：宽x高=16x16   --*/
 	/*--  文字:  肇  --*/
 	0x10,0x40,0x08,0x40,0x3E,0xFE,0x23,0x48,0x3E,0x30,0x40,0xC8,0x41,0x06,0x9F,0xF0,
@@ -374,7 +376,7 @@ uint8_t code tab12[] = {
 	0x1F,0xF0,0x10,0x10,0x10,0x10,0x10,0x10,0x1F,0xF0,0x00,0x00,0xFF,0xFE,0x08,0x00,
 	0x08,0x00,0x1F,0xF0,0x08,0x10,0x00,0x10,0x00,0x10,0x01,0x10,0x00,0xA0,0x00,0x40 };
 
-uint8_t code tab3[] = {
+uint8_t const tab3[] = {
 	/*--  宋体18;  此字体下对应的点阵为：宽x高=24x24   --*/
 	/*--  文字:  本  --*/
 	0x00,0x00,0x00,0x00,0x10,0x00,0x00,0x18,0x00,0x00,0x18,0x00,0x00,0x18,0x00,0x00,
@@ -617,7 +619,7 @@ uint8_t code tab3[] = {
 	0x0F,0x00,0x00,0x11,0x00,0x00,0x11,0x00,0x00,0x11,0x00,0x00,0x0F,0x00,0x00,0x00,
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 };
 
-uint8_t code tab5[] = {
+uint8_t const tab5[] = {
 	/*--  调入了一幅图像：F:\梁\画图\cock128128.bmp  --*/
 	/*--  宽度x高度=128x128  --*/
 	0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
@@ -877,7 +879,7 @@ void disp_dz(uint8_t data1, uint8_t data2)
 	wr_comm(0xb2);
 }
 /*--------------在addr处显示8xl*yl的图形--------------*/
-void disp_img(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t code * img)
+void disp_img(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t const * img)
 {
 	uint8_t i, j;
 	for (j = 0; j < yl; j++)
@@ -890,7 +892,7 @@ void disp_img(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t code * img)
 	}
 }
 /*----------在addr处显示row_yl行(每行row_xl个)8xl*yl的文字----------*/
-void disp_chn(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t row_xl, uint8_t row_yl, uint8_t code * chn)
+void disp_chn(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t row_xl, uint8_t row_yl, uint8_t const * chn)
 {
 	uint8_t i, j, k, m;
 	for (m = 0; m < row_yl; m++)
@@ -909,7 +911,7 @@ void disp_chn(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t row_xl, uint8_t row
 	}
 }
 /*--------------显示字符------------------*/
-void disp_eng(uint8_t code * eng)
+void disp_eng(uint8_t const * eng)
 {
 	uint8_t i, j;
 	wr_xd(addr_w, 0x24);
@@ -924,7 +926,7 @@ void disp_eng(uint8_t code * eng)
 /*------------------主程序--------------------*/
 void lcdtest()
 {
-	SP = 0x5f;
+	//SP = 0x5f;
 	init_lcd();
 	while (1)
 	{
