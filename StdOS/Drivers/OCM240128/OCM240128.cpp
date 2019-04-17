@@ -272,35 +272,44 @@ void OCM240128::wcmd2(uint8_t dat1, uint8_t dat2, uint8_t cmd)
 class ocmtest
 {
 public:
-
+//	void wr_comm(uint8_t comm);
+//	void wr_data(uint8_t dat);
+//	void chk_busy(uint8_t autowr);
+	void delay(uint32_t us);
+	void lcdtest();
+	void disp_eng(uint8_t const* eng);
+	void disp_chn(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t row_xl, uint8_t row_yl, uint8_t const* chn);
+	void disp_img(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t const* img);
+	void disp_dz(uint8_t data1, uint8_t data2);
+	void clrram(void);
+	void init_lcd(void);
+	void chk_busy(uint8_t autowr);    //测状态
+	void wr_data(uint8_t dat);       //写数据
+	void wr_comm(uint8_t comm);       //写命令
+	void wr_auto(uint8_t dat);               //自动写数据
+	void wr_xd(uint32_t dat, uint8_t comm);       //写一个16进制数据和一个命令
+	void wr_td(uint8_t datl, uint8_t dath, uint8_t comm);  //写两个数据和一个命令
+	void wr_od(uint8_t dat, uint8_t comm);       //写一个数据和一个命令
+	void delay1(uint32_t ms);
 public:
+	Port wr;  //Data Write into T6963C,L有效
+	Port rd;  //Data Read from T6963C,L有效
+	Port ce;  //使能信号，L有效
+	Port cd;  //当wr=L,cd=H:写命令,cd=L:写数据;当rd=L,cd=H:读状态,cd=L:读数据
+	Port rst;  //Lcm reset,低有效
+	Port fs;  //字体选择,H:6*8点阵;L:8*8点阵
 
+	Port bf0;
+	Port bf1;
+	Port bf3;
 
+	uint8_t data_ora;
 };
 
 #define width      30       //显示区宽度
 #define addr_w     0x0000   //文本显示区首地址
 #define addr_t     0x01e0   //图形显示区首地址
 //#define data_ora   P0       //MCU P0<------> LCM
-//#define uchar      unsigned char
-//#define uint       unsigned int
-
-Port wr;  //Data Write into T6963C,L有效
-Port rd;  //Data Read from T6963C,L有效
-Port ce;  //使能信号，L有效
-Port cd;  //当wr=L,cd=H:写命令,cd=L:写数据;当rd=L,cd=H:读状态,cd=L:读数据
-Port rst;  //Lcm reset,低有效
-Port fs ;  //字体选择,H:6*8点阵;L:8*8点阵
-
-Port bf0;
-Port bf1;
-Port bf3;
-
-uint8_t data_ora;
-
-void wr_comm(uint8_t comm);
-void wr_data(uint8_t dat);
-void chk_busy(uint8_t autowr);
 
 uint8_t const tab11[] = {
 0x00,0x00,0x00,0x00,0x00,0x27,0x4f,0x4c,0x44,0x45,0x4e,0x00,0x30,0x41,0x4c,
@@ -763,11 +772,11 @@ uint8_t const tab5[] = {
 
 
 /*---------------延时子程序----------------*/
-void delay(uint32_t us)
+void ocmtest::delay(uint32_t us)
 {
 	while (us--);
 }
-void delay1(uint32_t ms)
+void ocmtest::delay1(uint32_t ms)
 {
 	uint32_t i, j;
 	for (i = 0; i < ms; i++)
@@ -775,18 +784,18 @@ void delay1(uint32_t ms)
 			;
 }
 /*------------写命令或数据到LCD--------------*/
-void wr_od(uint8_t dat, uint8_t comm)       //写一个数据和一个命令
+void ocmtest::wr_od(uint8_t dat, uint8_t comm)       //写一个数据和一个命令
 {
 	wr_data(dat);
 	wr_comm(comm);
 }
-void wr_td(uint8_t datl, uint8_t dath, uint8_t comm)  //写两个数据和一个命令
+void ocmtest::wr_td(uint8_t datl, uint8_t dath, uint8_t comm)  //写两个数据和一个命令
 {
 	wr_data(datl);
 	wr_data(dath);
 	wr_comm(comm);
 }
-void wr_xd(uint32_t dat, uint8_t comm)       //写一个16进制数据和一个命令
+void ocmtest::wr_xd(uint32_t dat, uint8_t comm)       //写一个16进制数据和一个命令
 {
 	uint8_t datl, dath;
 	datl = dat;
@@ -795,7 +804,7 @@ void wr_xd(uint32_t dat, uint8_t comm)       //写一个16进制数据和一个命令
 	wr_data(dath);
 	wr_comm(comm);
 }
-void wr_auto(uint8_t dat)               //自动写数据
+void ocmtest::wr_auto(uint8_t dat)               //自动写数据
 {
 	chk_busy(1);
 	cd = 0;
@@ -805,7 +814,7 @@ void wr_auto(uint8_t dat)               //自动写数据
 	wr = 1;
 }
 
-void wr_comm(uint8_t comm)       //写命令
+void ocmtest::wr_comm(uint8_t comm)       //写命令
 {
 	chk_busy(0);
 	cd = 1;
@@ -814,7 +823,7 @@ void wr_comm(uint8_t comm)       //写命令
 	wr = 0;
 	wr = 1;
 }
-void wr_data(uint8_t dat)       //写数据
+void ocmtest::wr_data(uint8_t dat)       //写数据
 {
 	chk_busy(0);
 	cd = 0;
@@ -823,7 +832,7 @@ void wr_data(uint8_t dat)       //写数据
 	wr = 0;
 	wr = 1;
 }
-void chk_busy(uint8_t autowr)    //测状态
+void ocmtest::chk_busy(uint8_t autowr)    //测状态
 {
 	data_ora = 0xff;
 	cd = 1;
@@ -842,7 +851,7 @@ void chk_busy(uint8_t autowr)    //测状态
 	rd = 1;
 }
 /*------------------初始化-----------------*/
-void init_lcd(void)
+void ocmtest::init_lcd(void)
 {
 	rst = 0;
 	;
@@ -860,7 +869,7 @@ void init_lcd(void)
 	wr_comm(0x9c);                        //启用文本显示,启用图形显示
 }
 /*--------------清RAM------------------*/
-void clrram(void)
+void ocmtest::clrram(void)
 {
 	uint8_t i, j;
 	wr_xd(addr_w, 0x24);
@@ -873,7 +882,7 @@ void clrram(void)
 	wr_comm(0xb2);
 }
 /*--------------显示点阵------------------*/
-void disp_dz(uint8_t data1, uint8_t data2)
+void ocmtest::disp_dz(uint8_t data1, uint8_t data2)
 {
 	uint8_t i, j;
 	wr_xd(addr_t, 0x24);
@@ -888,7 +897,7 @@ void disp_dz(uint8_t data1, uint8_t data2)
 	wr_comm(0xb2);
 }
 /*--------------在addr处显示8xl*yl的图形--------------*/
-void disp_img(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t const * img)
+void ocmtest::disp_img(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t const * img)
 {
 	uint8_t i, j;
 	for (j = 0; j < yl; j++)
@@ -901,7 +910,7 @@ void disp_img(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t const * img)
 	}
 }
 /*----------在addr处显示row_yl行(每行row_xl个)8xl*yl的文字----------*/
-void disp_chn(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t row_xl, uint8_t row_yl, uint8_t const * chn)
+void ocmtest::disp_chn(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t row_xl, uint8_t row_yl, uint8_t const * chn)
 {
 	uint8_t i, j, k, m;
 	for (m = 0; m < row_yl; m++)
@@ -920,7 +929,7 @@ void disp_chn(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t row_xl, uint8_t row
 	}
 }
 /*--------------显示字符------------------*/
-void disp_eng(uint8_t const * eng)
+void ocmtest::disp_eng(uint8_t const * eng)
 {
 	uint8_t i, j;
 	wr_xd(addr_w, 0x24);
@@ -933,7 +942,7 @@ void disp_eng(uint8_t const * eng)
 	wr_comm(0xb2);
 }
 /*------------------主程序--------------------*/
-void lcdtest()
+void ocmtest::lcdtest()
 {
 	//SP = 0x5f;
 	init_lcd();
