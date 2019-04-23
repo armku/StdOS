@@ -39,7 +39,17 @@ void ocmtest::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d6,
 	this->data6.pinMode(GPIO_Out_PP);
 	this->data7.pinMode(GPIO_Out_PP);
 }
-
+void ocmtest::writedata(uint8_t da)
+{
+	this->data0 = da & (1 << 0);
+	this->data1 = da & (1 << 1);
+	this->data2 = da & (1 << 2);
+	this->data3 = da & (1 << 3);
+	this->data4 = da & (1 << 4);
+	this->data5 = da & (1 << 5);
+	this->data6 = da & (1 << 6);
+	this->data7 = da & (1 << 7);
+}
 #define width      30       //显示区宽度
 #define addr_w     0x0000   //文本显示区首地址
 #define addr_t     0x01e0   //图形显示区首地址
