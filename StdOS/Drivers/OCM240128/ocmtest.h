@@ -4,6 +4,7 @@
 class ocmtest
 {
 public:
+	void SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d6, Pin d7);
 	//	void wr_comm(uint8_t comm);
 	//	void wr_data(uint8_t dat);
 	//	void chk_busy(uint8_t autowr);
@@ -36,6 +37,14 @@ public:
 	Port bf3;
 
 	uint8_t data_ora;
+	Port data0;
+	Port data1;
+	Port data2;
+	Port data3;
+	Port data4;
+	Port data5;
+	Port data6;
+	Port data7;
 };
 
 #endif // !_OCMTEST_H

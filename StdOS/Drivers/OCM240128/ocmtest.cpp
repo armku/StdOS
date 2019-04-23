@@ -2,6 +2,27 @@
 #include "Sys.h"
 #include "ocmtest.h"
 
+void ocmtest::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d6, Pin d7)
+{
+	this->data0.SetPin(d0);
+	this->data1.SetPin(d1);
+	this->data2.SetPin(d2);
+	this->data3.SetPin(d3);
+	this->data4.SetPin(d4);
+	this->data5.SetPin(d5);
+	this->data6.SetPin(d6);
+	this->data7.SetPin(d7);
+
+	this->data0.pinMode(GPIO_Out_PP);
+	this->data1.pinMode(GPIO_Out_PP);
+	this->data2.pinMode(GPIO_Out_PP);
+	this->data3.pinMode(GPIO_Out_PP);
+	this->data4.pinMode(GPIO_Out_PP);
+	this->data5.pinMode(GPIO_Out_PP);
+	this->data6.pinMode(GPIO_Out_PP);
+	this->data7.pinMode(GPIO_Out_PP);
+}
+
 #define width      30       //显示区宽度
 #define addr_w     0x0000   //文本显示区首地址
 #define addr_t     0x01e0   //图形显示区首地址
