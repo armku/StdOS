@@ -1448,8 +1448,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\OCM240128\OCM240128TestFont.cpp</PathWithFileName>
-      <FilenameWithoutPath>OCM240128TestFont.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\StdOS\Drivers\OCM240128\ocmtest.cpp</PathWithFileName>
+      <FilenameWithoutPath>ocmtest.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

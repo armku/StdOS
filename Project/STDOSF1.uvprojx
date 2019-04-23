@@ -768,9 +768,9 @@
               <FilePath>..\StdOS\Drivers\SPI\SSD1309\SSD1309.cpp</FilePath>
             </File>
             <File>
-              <FileName>OCM240128TestFont.cpp</FileName>
+              <FileName>ocmtest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\OCM240128\OCM240128TestFont.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\OCM240128\ocmtest.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1748,9 +1748,9 @@
               <FilePath>..\StdOS\Drivers\SPI\SSD1309\SSD1309.cpp</FilePath>
             </File>
             <File>
-              <FileName>OCM240128TestFont.cpp</FileName>
+              <FileName>ocmtest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\OCM240128\OCM240128TestFont.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\OCM240128\ocmtest.cpp</FilePath>
             </File>
           </Files>
         </Group>
