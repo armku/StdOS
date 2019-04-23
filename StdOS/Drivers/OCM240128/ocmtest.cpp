@@ -2,9 +2,6 @@
 #include "Sys.h"
 #include "ocmtest.h"
 
-
-#if 1
-
 class ocmtest
 {
 public:
@@ -702,7 +699,3 @@ void ocmtest::lcdtest()
 		delay1(800);
 	}
 }
-
-#endif
-
-
