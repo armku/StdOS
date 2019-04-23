@@ -4,6 +4,7 @@
 class ocmtest
 {
 public:
+	void SetPin(Pin ce = P0, Pin wr = P0, Pin rd = P0, Pin fs = P0, Pin led = P0, Pin cd = P0);
 	void SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d6, Pin d7);
 	//	void wr_comm(uint8_t comm);
 	//	void wr_data(uint8_t dat);

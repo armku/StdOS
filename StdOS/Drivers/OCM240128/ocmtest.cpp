@@ -2,6 +2,23 @@
 #include "Sys.h"
 #include "ocmtest.h"
 
+void ocmtest::SetPin(Pin ce, Pin wr, Pin rd, Pin fs, Pin led, Pin cd)
+{
+	this->ce.SetPin(ce);
+	this->wr.SetPin(wr);
+	this->rd.SetPin(rd);
+	/*this->pinfs.SetPin(fs);*/
+	//this->pinled.SetPin(led);
+	this->cd.SetPin(cd);
+
+	this->ce.pinMode(GPIO_Out_PP);
+	this->wr.pinMode(GPIO_Out_PP);
+	this->rd.pinMode(GPIO_Out_PP);
+	/*this->pinfs.pinMode(GPIO_Out_PP);*/
+	//this->pinled.pinMode(GPIO_Out_PP);
+	this->cd.pinMode(GPIO_Out_PP);
+}
+
 void ocmtest::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d6, Pin d7)
 {
 	this->data0.SetPin(d0);
