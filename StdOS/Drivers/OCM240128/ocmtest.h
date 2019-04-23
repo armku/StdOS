@@ -38,7 +38,7 @@ public:
 	Port bf1;
 	Port bf3;
 
-	uint8_t data_ora;
+	//uint8_t data_ora;
 	Port data0;
 	Port data1;
 	Port data2;

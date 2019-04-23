@@ -553,7 +553,8 @@ void ocmtest::wr_auto(uint8_t dat)               //自动写数据
 	chk_busy(1);
 	cd = 0;
 	rd = 1;
-	data_ora = dat;
+	this->writedata(dat);
+	//data_ora = dat;
 	wr = 0;
 	wr = 1;
 }
@@ -563,7 +564,8 @@ void ocmtest::wr_comm(uint8_t comm)       //写命令
 	chk_busy(0);
 	cd = 1;
 	rd = 1;
-	data_ora = comm;
+	this->writedata(comm);
+	//data_ora = comm;
 	wr = 0;
 	wr = 1;
 }
@@ -572,13 +574,15 @@ void ocmtest::wr_data(uint8_t dat)       //写数据
 	chk_busy(0);
 	cd = 0;
 	rd = 1;
-	data_ora = dat;
+	this->writedata(dat);
+	//data_ora = dat;
 	wr = 0;
 	wr = 1;
 }
 void ocmtest::chk_busy(uint8_t autowr)    //测状态
 {
-	data_ora = 0xff;
+	this->writedata(0xff);
+	//data_ora = 0xff;
 	cd = 1;
 	wr = 1;
 	rd = 0;
