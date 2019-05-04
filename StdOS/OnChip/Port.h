@@ -25,7 +25,6 @@ public:
 	void pinMode(GPIOMode_T mode);//设置管脚模式
 
 	bool ReadInput() const;// Read/ReadInput 的区别在于，前者读输出后者读输入，在开漏输出的时候有很大区别
-	//static void Write(Pin pin, bool value);
 	void Write(bool value) const;
 	Port& operator=(bool value) { Write(value); return *this; }
 	Port& operator=(Port& port) { Write(port.Read()); return *this; }
