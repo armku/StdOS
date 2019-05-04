@@ -202,7 +202,7 @@ bool Port::Read()const
 #elif defined STM32F1
 	GPIO_TypeDef *group = _GROUP(this->_Pin);
 	bool ret= (group->IDR >> (this->_Pin & 0xF)) & 1;
-	return this->Invert ? !ret : ret;
+	return this->Invert ? (!ret) : ret;
 #elif defined STM32F4
 	GPIO_TypeDef *group = _GROUP(this->_Pin);
 	return (group->IDR >> (this->_Pin & 0xF)) & 1;
