@@ -109,7 +109,7 @@ bool Port::ReadInput()const
 	else
 		return Port::Read();
 }
-
+#if 0
 void Port::Write(Pin pin, bool value)
 {
 	if (pin == P0)
@@ -143,7 +143,7 @@ void Port::Write(Pin pin, bool value)
 	}
 #endif
 }
-
+#endif
 void Port::Write(bool value)const
 {
 	if (this->Empty())
