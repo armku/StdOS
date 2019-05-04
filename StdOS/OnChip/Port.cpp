@@ -158,13 +158,27 @@ void Port::Write(bool value)const
 		GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
 	}
 #elif defined STM32F1
-	if (value)
+	if (this->Invert == false)
 	{
-		GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+		if (value)
+		{
+			GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+		}
+		else
+		{
+			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+		}
 	}
 	else
 	{
-		GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+		if (value)
+		{
+			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));			
+		}
+		else
+		{
+			GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+		}
 	}
 #elif defined STM32F4
 	if (value)
@@ -187,7 +201,8 @@ bool Port::Read()const
 	return (group->IDR >> (this->_Pin & 0xF)) & 1;
 #elif defined STM32F1
 	GPIO_TypeDef *group = _GROUP(this->_Pin);
-	return (group->IDR >> (this->_Pin & 0xF)) & 1;
+	bool ret= (group->IDR >> (this->_Pin & 0xF)) & 1;
+	return this->Invert ? !ret : ret;
 #elif defined STM32F4
 	GPIO_TypeDef *group = _GROUP(this->_Pin);
 	return (group->IDR >> (this->_Pin & 0xF)) & 1;
