@@ -36,6 +36,8 @@ public:
 
 	virtual bool Read() const;
 	operator bool() const { return Read(); }
+public:
+	int Invert;//是否反向
 protected:
 	Pin		_Pin;		// 引脚  	
 private:
