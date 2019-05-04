@@ -21,6 +21,7 @@ Port::Port()
 {
 	this->_Pin = P0;
 	this->Opened = false;
+	this->Invert=false;
 }
 
 Port &Port::SetPin(Pin pin)
