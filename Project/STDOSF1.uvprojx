@@ -812,6 +812,11 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\EspDemoLink.cpp</FilePath>
             </File>
+            <File>
+              <FileName>WM6201PU.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\WM6201\WM6201PU.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1791,6 +1796,11 @@
               <FileName>EspDemoLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\EspDemoLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WM6201PU.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\WM6201\WM6201PU.cpp</FilePath>
             </File>
           </Files>
         </Group>
