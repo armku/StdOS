@@ -5,6 +5,7 @@
 #include "OnChip\Configuration.h"
 #include "USART.h"
 #include "BspPlatform/Interrupt.h"
+#include "../HAL/STM32F1/ARCH_UART.h"
 
 void TimeUpdate();
 
@@ -51,6 +52,10 @@ int StdPrintf(const char *format, ...)
 #if 0
 	pCOM1->SendBytes((uint8_t*)sprint_buf, n);
 #else
+#if 1
+	UART1_send_data((uint8_t*)sprint_buf,n);
+#else
+
 	for (int i = 0; i <n; i++)
 	{
 		/* 发送一个字节数据到USART */
@@ -59,6 +64,7 @@ int StdPrintf(const char *format, ...)
 		/* 等待发送完毕 */
 		while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
 	}
+#endif
 #endif
 	return n;
 }
