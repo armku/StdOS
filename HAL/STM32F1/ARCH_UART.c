@@ -171,4 +171,49 @@ void UART5_En_IRQ(void)
 	USART_ITConfig(UART5, USART_IT_RXNE, ENABLE);
 }
 
+//通过串口（通讯串口）发送数据
+void UART1_send_data(uint8_t *data, uint32_t len)
+{
+	while(len--)
+	{
+		UART_1_send_byte(*data++);
+	}
+}
+
+//通过串口（通讯串口）发送数据
+void UART2_send_data(uint8_t *data, uint32_t len)
+{
+	while(len--)
+	{
+		UART_2_send_byte(*data++);
+	}
+}
+
+//通过串口（通讯串口）发送数据
+void UART3_send_data(uint8_t *data, uint32_t len)
+{
+	while(len--)
+	{
+		UART_3_send_byte(*data++);
+	}
+}
+
+//通过串口（通讯串口）发送数据
+void UART4_send_data(uint8_t *data, uint32_t len)
+{
+	while(len--)
+	{
+		UART_4_send_byte(*data++);
+	}
+}
+
+//通过串口（通讯串口）发送数据
+void UART5_send_data(uint8_t *data, uint32_t len)
+{
+	while(len--)
+	{
+		UART_5_send_byte(*data++);
+	}
+}
+
 ///////////////////////////////////////////////////////////

@@ -36,6 +36,21 @@ typedef struct
 	void UART_3_send_byte(uint8_t c);
 	void UART_4_send_byte(uint8_t c);
 	void UART_5_send_byte(uint8_t c);
+	
+	//通过串口（通讯串口）发送数据
+	void UART1_send_data(uint8_t *data, uint32_t len);
+
+//通过串口（通讯串口）发送数据
+	void UART2_send_data(uint8_t *data, uint32_t len);
+
+//通过串口（通讯串口）发送数据
+	void UART3_send_data(uint8_t *data, uint32_t len);
+
+//通过串口（通讯串口）发送数据
+	void UART4_send_data(uint8_t *data, uint32_t len);
+
+//通过串口（通讯串口）发送数据
+	void UART5_send_data(uint8_t *data, uint32_t len);
 
 #ifdef __cplusplus
 }
