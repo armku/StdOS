@@ -1552,8 +1552,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\COM\WM6201\WM6201PU.cpp</PathWithFileName>
-      <FilenameWithoutPath>WM6201PU.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\StdOS\Drivers\COM\WM6201\WM6201.cpp</PathWithFileName>
+      <FilenameWithoutPath>WM6201.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
