@@ -49,9 +49,6 @@ int StdPrintf(const char *format, ...)
 	n = vsprintf(sprint_buf, format, args);
 	va_end(args);
 	
-#if 0
-	pCOM1->SendBytes((uint8_t*)sprint_buf, n);
-#else
 #if 1
 	UART1_send_data((uint8_t*)sprint_buf,n);
 #else
@@ -64,7 +61,6 @@ int StdPrintf(const char *format, ...)
 		/* µÈ´ý·¢ËÍÍê±Ï */
 		while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
 	}
-#endif
 #endif
 	return n;
 }
