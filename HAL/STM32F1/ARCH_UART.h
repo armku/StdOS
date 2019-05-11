@@ -52,6 +52,12 @@ typedef struct
 //通过串口（通讯串口）发送数据
 	void UART5_send_data(uint8_t *data, uint32_t len);
 
+	extern pFun_UART UART_1_rcv_IRQ;
+	extern pFun_UART UART_2_rcv_IRQ  ;
+	extern pFun_UART UART_3_rcv_IRQ  ;
+	extern pFun_UART UART_4_rcv_IRQ  ;
+	extern pFun_UART UART_5_rcv_IRQ  ;
+
 #ifdef __cplusplus
 }
 #endif

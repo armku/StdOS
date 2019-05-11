@@ -33,6 +33,49 @@ void Com1test(void *param)
 	}
 }
 
+//串口测试开始
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "../HAL/STM32F1/ARCH_UART.h"
+static uint8_t   loop_buf[64] = { 0 };                             //定义环形缓冲区
+static volatile uint32_t loop_wp = 0;                                    //定义环形缓冲区写指针
+static volatile uint32_t loop_rp = 0;
+//向环形缓冲区【写】一字节数据
+static void write_loop_buf(uint8_t dat)
+{
+	uint32_t next_wp;
+
+	next_wp = (loop_wp + 1) & 63;
+
+	if (next_wp == loop_rp)
+	{
+		return;
+	}
+	loop_buf[loop_wp] = dat;
+	loop_wp = next_wp;
+}
+
+#ifdef __cplusplus
+}
+#endif
+
+void Com1ReadTest(void* param)
+{
+	UART_1_rcv_IRQ = write_loop_buf;
+}
+
+void com1test()
+{
+	Sys.AddTask(Com1ReadTest, 0, 0, 10, "Com1ReadTest");
+	usart111.OnReceive = Com1test;
+}
+
+
+
+//串口测试结束
+
 void EspDemoLinkTestInit();
 void ModbusSlaveLinkTestInit();
 void w25qxxxtest();
@@ -44,10 +87,12 @@ void BspInit()
 	led1 = 1;
 	
 	Sys.AddTask(LedTask, &led1, 0, 500, "LedTask");
+	
+	com1test();
 
 	/*EspDemoLinkTestInit();*/
 	ModbusSlaveLinkTestInit();
-	usart111.OnReceive = Com1test;
+	
 	//w25qxxxtest();
 	//ad71248Test();
 }
