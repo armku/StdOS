@@ -380,6 +380,9 @@
           <GroupName>USER</GroupName>
         </Group>
         <Group>
+          <GroupName>HAL</GroupName>
+        </Group>
+        <Group>
           <GroupName>Bsp</GroupName>
           <Files>
             <File>
@@ -1363,6 +1366,9 @@
       <Groups>
         <Group>
           <GroupName>USER</GroupName>
+        </Group>
+        <Group>
+          <GroupName>HAL</GroupName>
         </Group>
         <Group>
           <GroupName>Bsp</GroupName>
