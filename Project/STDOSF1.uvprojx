@@ -381,6 +381,13 @@
         </Group>
         <Group>
           <GroupName>HAL</GroupName>
+          <Files>
+            <File>
+              <FileName>ARCH_UART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HAL\STM32F1\ARCH_UART.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Bsp</GroupName>
@@ -1369,6 +1376,13 @@
         </Group>
         <Group>
           <GroupName>HAL</GroupName>
+          <Files>
+            <File>
+              <FileName>ARCH_UART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HAL\STM32F1\ARCH_UART.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Bsp</GroupName>
