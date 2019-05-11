@@ -11,6 +11,7 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
@@ -386,6 +387,11 @@
               <FileName>ARCH_UART.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HAL\STM32F1\ARCH_UART.c</FilePath>
+            </File>
+            <File>
+              <FileName>Reset.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HAL\STM32F1\Reset.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1006,6 +1012,7 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
@@ -1381,6 +1388,11 @@
               <FileName>ARCH_UART.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HAL\STM32F1\ARCH_UART.c</FilePath>
+            </File>
+            <File>
+              <FileName>Reset.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HAL\STM32F1\Reset.c</FilePath>
             </File>
           </Files>
         </Group>
