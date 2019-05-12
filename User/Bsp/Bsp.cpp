@@ -63,13 +63,14 @@ static void write_loop_buf(uint8_t dat)
 
 void Com1ReadTest(void* param)
 {
-	UART_1_rcv_IRQ = write_loop_buf;
+	
 }
 
 void com1test()
 {
 	Sys.AddTask(Com1ReadTest, 0, 0, 10, "Com1ReadTest");
-	usart111.OnReceive = Com1test;
+	UART_1_rcv_IRQ = write_loop_buf;
+	//usart111.OnReceive = Com1test;
 }
 
 
