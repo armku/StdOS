@@ -18,14 +18,14 @@ int RingBuffer::Put(char data)
 {
 	if (this->length >= this->BufLen)
 	{
-		return false;
+		return 0;
 	}
 	else {}
 	this->buf[this->head] = data;
 	this->head++;
 	this->length++;
-	this->head %= this->length;
-	return true;
+	this->head %= this->BufLen;
+	return 1;
 }
 int RingBuffer::Put(char *c, int len)
 {
