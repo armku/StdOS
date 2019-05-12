@@ -506,12 +506,12 @@ void USART::IRQ()
 	uint8_t data = 0;
 	if (USART_GetITStatus(mUSARTx, USART_IT_TXE) != RESET || USART_GetITStatus(mUSARTx, USART_IT_TC) != RESET)   //TxE and TC
 	{
-		if (mTxBuf.Size() > 0)                                //still left some bytes of data
-		{
-			mTxBuf.Get(data);                                //get one byte data from buffer
-			mUSARTx->DR = (data & (uint16_t)0x01FF);              //send one byte data
-		}
-		else                                               //all data send complete
+		//if (mTxBuf.Size() > 0)                                //still left some bytes of data
+		//{
+		//	mTxBuf.Get(data);                                //get one byte data from buffer
+		//	mUSARTx->DR = (data & (uint16_t)0x01FF);              //send one byte data
+		//}
+		//else                                               //all data send complete
 		{
 			USART_ITConfig(mUSARTx, USART_IT_TXE, DISABLE);  //disable TxE
 			USART_ITConfig(mUSARTx, USART_IT_TC, DISABLE);   //disable TC

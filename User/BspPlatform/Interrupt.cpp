@@ -196,7 +196,7 @@ extern "C"
 
 	}
 	//~~~~~~~~~~~~~~~~~~~~~ USART IQR  ~~~~~~~~~~~~~~~~~//
-#if 1
+#if 0
 	void USART1_IRQHandler(void)    //----USART1 IRQ----//
 	{
 //#ifdef USE_GPS
