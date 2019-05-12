@@ -48,7 +48,7 @@ RingBuffer ringRcv(loop_buf,ArrayLength(loop_buf));
 static void write_loop_buf(uint8_t dat)
 {
 	uint32_t next_wp;
-
+#if 0
 	next_wp = (loop_wp + 1) & 63;
 
 	if (next_wp == loop_rp)
@@ -57,6 +57,7 @@ static void write_loop_buf(uint8_t dat)
 	}
 	loop_buf[loop_wp] = dat;
 	loop_wp = next_wp;
+#endif	
 
 	UART_1_send_byte(dat);
 }
