@@ -41,40 +41,13 @@ extern "C" {
 
 #include "../HAL/STM32F1/ARCH_UART.h"
 uint8_t   loop_buf[64] = { 0 };                             //定义环形缓冲区
-static volatile uint32_t loop_wp = 0;                                    //定义环形缓冲区写指针
-static volatile uint32_t loop_rp = 0;
 RingBuffer ringRcv(loop_buf,ArrayLength(loop_buf));
 //向环形缓冲区【写】一字节数据
 static void write_loop_buf(uint8_t dat)
 {
-	uint32_t next_wp;
-#if 0
-	next_wp = (loop_wp + 1) & 63;
-
-	if (next_wp == loop_rp)
-	{
-		return;
-	}
-	loop_buf[loop_wp] = dat;
-	loop_wp = next_wp;
-#endif	
 	ringRcv.Put(dat);
-
-	//UART_1_send_byte(dat);
 }
-//从环形缓冲区【读】一字节数据
-static uint8_t read_loop_buf(uint8_t* dat)
-{
-	if (loop_rp == loop_wp)
-	{
-		return(0);
-	}
 
-	*dat = loop_buf[loop_rp];
-	loop_rp = (loop_rp + 1) & 2047;
-
-	return(1);
-}
 #ifdef __cplusplus
 }
 #endif
