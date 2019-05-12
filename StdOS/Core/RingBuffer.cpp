@@ -9,21 +9,21 @@ RingBuffer::RingBuffer(void* buffer, int bufsize)
 void RingBuffer::Init(void* buffer, int bufsize)
 {
 	this->buf = (uint8_t*)buffer;
-	this->length = bufsize;
+	this->BufLen = bufsize;
 	this->head = 0;
 	this->tail = 0;
-	this->fillcnt = 0;
+	this->length= 0;
 }
 int RingBuffer::Put(char data)
 {
-	if (this->fillcnt >= this->length)
+	if (this->length >= this->BufLen)
 	{
 		return false;
 	}
 	else {}
 	this->buf[this->head] = data;
 	this->head++;
-	this->fillcnt++;
+	this->length++;
 	this->head %= this->length;
 	return true;
 }
@@ -35,7 +35,7 @@ int RingBuffer::Put(char *c, int len)
 }
 int RingBuffer::Get(char *c, int len)
 {
-	if (this->fillcnt <= 0)
+	if (this->length <= 0)
 	{
 		return false;
 	}
@@ -46,7 +46,7 @@ int RingBuffer::Get(char *c, int len)
 	}
 	for (int i = 0; i < len; i++)
 	{
-		this->fillcnt--;
+		this->length--;
 		*c = this->buf[this->tail++];
 		c++;
 		this->tail %= this->length;
@@ -55,5 +55,5 @@ int RingBuffer::Get(char *c, int len)
 }
 bool RingBuffer::Empty()
 {
-	return this->fillcnt == 0;
+	return this->length == 0;
 }

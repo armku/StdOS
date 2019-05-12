@@ -14,10 +14,10 @@ public:
 	bool Empty();
 
 	uint8_t * buf;
-	int length;
-	int head;
-	int tail;
-	int fillcnt;
+	int length;//数据长度
+	int head;//头
+	int tail;//尾
+	int BufLen;//缓冲区最大长度
 
 private:
 
