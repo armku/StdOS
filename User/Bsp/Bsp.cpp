@@ -69,6 +69,7 @@ void Com1ReadTest(void* param)
 		}
 		if (++tmcnt >= 5)
 		{
+			tmcnt = 0;
 			//50ms没有新数据认为完整一帧数据到来
 			readlen = ringRcv.Get(buf, ArrayLength(buf));
 			UART1_send_data((uint8_t*)buf, readlen);
