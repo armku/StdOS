@@ -89,6 +89,7 @@ void Com1ReadTest(void* param)
 	{
 		if (lenold != ringRcv.length)
 		{
+			//数据一直更新
 			lenold = ringRcv.length;
 			tmcnt=0;
 			return;
