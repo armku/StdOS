@@ -102,7 +102,7 @@ void BspInit()
 	com1test();
 
 	/*EspDemoLinkTestInit();*/
-	ModbusSlaveLinkTestInit();
+	/*ModbusSlaveLinkTestInit();*/
 	
 	//w25qxxxtest();
 	//ad71248Test();
