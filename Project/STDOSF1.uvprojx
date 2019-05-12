@@ -658,6 +658,11 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\Core\Version.cpp</FilePath>
             </File>
+            <File>
+              <FileName>RingBuffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\RingBuffer.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1658,6 +1663,11 @@
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Core\Version.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RingBuffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\RingBuffer.cpp</FilePath>
             </File>
           </Files>
         </Group>
