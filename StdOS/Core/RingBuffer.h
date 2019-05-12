@@ -6,6 +6,7 @@
 class RingBuffer
 {
 public:
+	RingBuffer(void* buffer, int bufsize);
 	void Init(void* buffer, int bufsize);
 	int Put(char data);
 	int Put(char *c, int len);

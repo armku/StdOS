@@ -40,9 +40,10 @@ extern "C" {
 #endif
 
 #include "../HAL/STM32F1/ARCH_UART.h"
-static uint8_t   loop_buf[64] = { 0 };                             //定义环形缓冲区
+uint8_t   loop_buf[64] = { 0 };                             //定义环形缓冲区
 static volatile uint32_t loop_wp = 0;                                    //定义环形缓冲区写指针
 static volatile uint32_t loop_rp = 0;
+RingBuffer ringRcv(loop_buf,ArrayLength(loop_buf));
 //向环形缓冲区【写】一字节数据
 static void write_loop_buf(uint8_t dat)
 {
