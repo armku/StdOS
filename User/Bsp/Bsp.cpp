@@ -60,7 +60,7 @@ static void write_loop_buf(uint8_t dat)
 #endif	
 	ringRcv.Put(dat);
 
-	UART_1_send_byte(dat);
+	//UART_1_send_byte(dat);
 }
 //从环形缓冲区【读】一字节数据
 static uint8_t read_loop_buf(uint8_t* dat)
@@ -81,7 +81,10 @@ static uint8_t read_loop_buf(uint8_t* dat)
 
 void Com1ReadTest(void* param)
 {
-	
+	int readlen;
+	char buf[100];
+	readlen = ringRcv.Get(buf,ArrayLength(buf));
+	UART1_send_data((uint8_t*)buf,readlen);
 }
 
 void com1test()
