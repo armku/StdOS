@@ -58,6 +58,7 @@ static void write_loop_buf(uint8_t dat)
 	loop_buf[loop_wp] = dat;
 	loop_wp = next_wp;
 #endif	
+	ringRcv.Put(dat);
 
 	UART_1_send_byte(dat);
 }
