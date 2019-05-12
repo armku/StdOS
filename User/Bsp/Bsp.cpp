@@ -54,9 +54,9 @@ static void write_loop_buf(uint8_t dat)
 
 void Com1ReadTest(void* param)
 {
-	static int tmcnt = 0;
-	static int lenold = 0;
-	int readlen;
+	static int tmcnt = 0;//时间定时器
+	static int lenold = 0;//历史接收缓冲区长度
+	int readlen;//读取的缓冲区长度
 	char buf[100];
 	if (ringRcv.length != 0)
 	{
