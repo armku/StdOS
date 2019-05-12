@@ -200,9 +200,9 @@ extern "C"
 	void USART1_IRQHandler(void)    //----USART1 IRQ----//
 	{
 #ifdef USE_GPS
-		if (pGPS1) {
+		if (pGPS1) 
+		{
 			pGPS1->GPS_IRQHandler();
-			return;
 		}
 #endif
 #ifdef USE_USART1
