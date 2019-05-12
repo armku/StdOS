@@ -62,7 +62,8 @@ void USART1_IRQHandler(void)
 		}
 	}
 }
-//#if 0
+#endif
+#if 0
 void USART2_IRQHandler(void)
 {
 	uint8_t c;
