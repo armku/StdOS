@@ -58,7 +58,7 @@ void USART1_IRQHandler(void)
 		c = USART_ReceiveData(USART1);
 		if(UART_1_rcv_IRQ)
 		{
-			UART_1_rcv_IRQ(c);
+			//UART_1_rcv_IRQ(c);
 		}
 	}
 }
