@@ -51,7 +51,7 @@ int RingBuffer::Get(char *c, int len)
 		c++;
 		this->tail %= this->length;
 	}
-	return true;
+	return len;
 }
 bool RingBuffer::Empty()
 {
