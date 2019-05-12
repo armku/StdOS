@@ -49,7 +49,7 @@ int RingBuffer::Get(char *c, int len)
 		this->length--;
 		*c = this->buf[this->tail++];
 		c++;
-		this->tail %= this->length;
+		this->tail %= this->BufLen;
 	}
 	return len;
 }
