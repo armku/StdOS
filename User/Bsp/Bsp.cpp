@@ -2,6 +2,7 @@
 #include "OnChip/USART.h"
 #include "Sys.h"
 #include "Buffer.h"
+#include "Core/RingBuffer.h"
 
 char *AppVersion = "0.1.2018.1115"; //°æ±¾ºÅ
 
