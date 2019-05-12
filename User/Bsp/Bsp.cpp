@@ -58,7 +58,19 @@ static void write_loop_buf(uint8_t dat)
 
 	UART_1_send_byte(dat);
 }
+//从环形缓冲区【读】一字节数据
+static uint8_t read_loop_buf(uint8_t* dat)
+{
+	if (loop_rp == loop_wp)
+	{
+		return(0);
+	}
 
+	*dat = loop_buf[loop_rp];
+	loop_rp = (loop_rp + 1) & 2047;
+
+	return(1);
+}
 #ifdef __cplusplus
 }
 #endif
