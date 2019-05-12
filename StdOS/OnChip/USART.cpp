@@ -470,14 +470,14 @@ void USART::IRQ()
 
 	if (USART_GetFlagStatus(mUSARTx, USART_FLAG_ORE) != RESET)
 	{
-		USART_ReceiveData(mUSARTx);
+		//USART_ReceiveData(mUSARTx);
 	}
 	if (USART_GetITStatus(mUSARTx, USART_IT_IDLE) != RESET)//传输完一条完整的数据就会进入这个
 	{
-		char ch = 0;
-		ch = mUSARTx->SR; //先读SR，然后读DR才能清除
-		ch = mUSARTx->DR;
-		ch = ch;
+		//char ch = 0;
+		//ch = mUSARTx->SR; //先读SR，然后读DR才能清除
+		//ch = mUSARTx->DR;
+		//ch = ch;
 
 		/*if (this->OnReceive != 0)
 		{
@@ -488,19 +488,19 @@ void USART::IRQ()
 	if (USART_GetITStatus(mUSARTx, USART_IT_RXNE) != RESET)  //RxNE
 	{
 		USART_ClearITPendingBit(mUSARTx, USART_IT_RXNE);    //Clear RxNE
-		if (!mRxBuf.Put(USART_ReceiveData(mUSARTx)))            //receive byte
-		{
-			mUSARTx->DR = mUSARTx->DR;
-			mRxOverflow++;
-		}
+		//if (!mRxBuf.Put(USART_ReceiveData(mUSARTx)))            //receive byte
+		//{
+		//	mUSARTx->DR = mUSARTx->DR;
+		//	mRxOverflow++;
+		//}
 	}
 	if (USART_GetITStatus(mUSARTx, USART_IT_TC) != RESET)
 	{
 		//USART_ClearITPendingBit(mUSARTx, USART_IT_TC);    //Clear
-		if (RS485 && mTxBuf.Size() == 0)
-		{
-			*RS485 = 0;//进入接收模式
-		}
+		//if (RS485 && mTxBuf.Size() == 0)
+		//{
+		//	*RS485 = 0;//进入接收模式
+		//}
 	}
 #ifndef USE_USART_DMA 
 	uint8_t data = 0;

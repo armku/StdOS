@@ -76,6 +76,22 @@ void USART1_IRQHandler(void)
 		//	*RS485 = 0;//进入接收模式
 		//}
 	}
+	if (USART_GetITStatus(USART1, USART_IT_TXE) != RESET || USART_GetITStatus(USART1, USART_IT_TC) != RESET)   //TxE and TC
+	{
+#if 0
+		if (mTxBuf.Size() > 0)                                //still left some bytes of data
+		{
+			mTxBuf.Get(data);                                //get one byte data from buffer
+			USART1->DR = (data & (uint16_t)0x01FF);              //send one byte data
+		}
+		else                                               //all data send complete
+		{
+			USART_ITConfig(USART1, USART_IT_TXE, DISABLE);  //disable TxE
+			USART_ITConfig(USART1, USART_IT_TC, DISABLE);   //disable TC
+			//isBusySend = false;                              //set free state
+		}
+#endif
+	}
 }
 #endif
 #if 0
