@@ -208,9 +208,6 @@ extern "C"
 #ifdef USE_USART1
 		pCOM1->IRQ();
 #endif
-#ifdef USE_USART1_DMA
-		pCOM1->IRQ();
-#endif
 	}
 #endif
 	void USART2_IRQHandler(void)    //----USART2 IRQ----//
