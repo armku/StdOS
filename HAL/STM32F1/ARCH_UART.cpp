@@ -61,6 +61,21 @@ void USART1_IRQHandler(void)
 			//UART_1_rcv_IRQ(c);
 		}
 	}
+	if (USART_GetITStatus(USART1, USART_IT_IDLE) != RESET)//传输完一条完整的数据就会进入这个
+	{
+		char ch = 0;
+		ch = USART1->SR; //先读SR，然后读DR才能清除
+		ch = USART1->DR;
+		ch = ch;
+	}
+	if (USART_GetITStatus(USART1, USART_IT_TC) != RESET)
+	{
+		//
+		//if (RS485 && mTxBuf.Size() == 0)
+		//{
+		//	*RS485 = 0;//进入接收模式
+		//}
+	}
 }
 #endif
 #if 0

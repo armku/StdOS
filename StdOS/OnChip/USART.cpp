@@ -479,10 +479,10 @@ void USART::IRQ()
 		ch = mUSARTx->DR;
 		ch = ch;
 
-		if (this->OnReceive != 0)
+		/*if (this->OnReceive != 0)
 		{
 			this->OnReceive(0);
-		}
+		}*/
 		this->FlagIdleOK = true;
 	}
 	if (USART_GetITStatus(mUSARTx, USART_IT_RXNE) != RESET)  //RxNE
