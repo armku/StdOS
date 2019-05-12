@@ -81,10 +81,25 @@ static uint8_t read_loop_buf(uint8_t* dat)
 
 void Com1ReadTest(void* param)
 {
+	static int tmcnt = 0;
+	static int lenold = 0;
 	int readlen;
 	char buf[100];
-	readlen = ringRcv.Get(buf,ArrayLength(buf));
-	UART1_send_data((uint8_t*)buf,readlen);
+	if (ringRcv.length != 0)
+	{
+		if (lenold != ringRcv.length)
+		{
+			lenold = ringRcv.length;
+			tmcnt=0;
+			return;
+		}
+		if (++tmcnt >= 5)
+		{
+			//50ms没有新数据认为完整一帧数据到来
+			readlen = ringRcv.Get(buf, ArrayLength(buf));
+			UART1_send_data((uint8_t*)buf, readlen);
+		}		
+	}
 }
 
 void com1test()
