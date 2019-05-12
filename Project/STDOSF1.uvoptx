@@ -572,20 +572,20 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\HAL\STM32F1\ARCH_UART.c</PathWithFileName>
-      <FilenameWithoutPath>ARCH_UART.c</FilenameWithoutPath>
+      <PathWithFileName>..\HAL\STM32F1\Reset.c</PathWithFileName>
+      <FilenameWithoutPath>Reset.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>2</GroupNumber>
       <FileNumber>2</FileNumber>
-      <FileType>1</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\HAL\STM32F1\Reset.c</PathWithFileName>
-      <FilenameWithoutPath>Reset.c</FilenameWithoutPath>
+      <PathWithFileName>..\HAL\STM32F1\ARCH_UART.cpp</PathWithFileName>
+      <FilenameWithoutPath>ARCH_UART.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

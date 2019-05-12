@@ -384,14 +384,14 @@
           <GroupName>HAL</GroupName>
           <Files>
             <File>
-              <FileName>ARCH_UART.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HAL\STM32F1\ARCH_UART.c</FilePath>
-            </File>
-            <File>
               <FileName>Reset.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HAL\STM32F1\Reset.c</FilePath>
+            </File>
+            <File>
+              <FileName>ARCH_UART.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\HAL\STM32F1\ARCH_UART.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1385,14 +1385,14 @@
           <GroupName>HAL</GroupName>
           <Files>
             <File>
-              <FileName>ARCH_UART.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HAL\STM32F1\ARCH_UART.c</FilePath>
-            </File>
-            <File>
               <FileName>Reset.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HAL\STM32F1\Reset.c</FilePath>
+            </File>
+            <File>
+              <FileName>ARCH_UART.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\HAL\STM32F1\ARCH_UART.cpp</FilePath>
             </File>
           </Files>
         </Group>

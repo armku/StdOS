@@ -1,6 +1,10 @@
 #include "ARCH_UART.h"
 #include "stm32f10x.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 pFun_UART UART_1_rcv_IRQ = NULL;
 pFun_UART UART_2_rcv_IRQ = NULL;
 pFun_UART UART_3_rcv_IRQ = NULL;
@@ -216,4 +220,7 @@ void UART5_send_data(uint8_t *data, uint32_t len)
 	}
 }
 
+#ifdef __cplusplus
+}
+#endif
 ///////////////////////////////////////////////////////////
