@@ -630,65 +630,6 @@ void USARTHAL::Initialize()
 #endif
 }
 
-bool USARTHAL::SendBytes(uint8_t txData[], uint16_t size)
-{
-	if (RS485)
-		* RS485 = 1;//·¢ËÍÄ£Ê½
-
-	USART_TypeDef* mUSARTx;   //USARTx
-
-	if (this->index == COM1)
-	{
-		mUSARTx = USART1;
-	}
-	else if (this->index == COM2)
-	{
-		mUSARTx = USART2;
-	}
-	else if (this->index == COM3)
-	{
-		mUSARTx = USART3;
-	}
-	else
-	{
-	}
-
-	if (mTxBuf.ResSize() < size)      //compare the unused bytes and sending bytes
-	{
-		return false;
-	}
-	mTxBuf.Puts(txData, size);                        //add data to Tx buffer, if overflow, return false
-	if (isBusySend)                return true;       //USARTx is busy send data, return
-	if (mTxBuf.Size() <= 0)        return true;       //have no data to send, return
-	isBusySend = true;                               //set busy state, going to send data
-#ifdef USE_USART_DMA
-	if (mTxBuf.Size() <= USART_DMA_TX_BUFFER_SIZE)  //rest data bytes less than DMA buffer size
-	{
-		mDMATxCh->CNDTR = (uint32_t)mTxBuf.Size();        //send all data to DMA buffer
-		mTxBuf.Gets(mDMATxBuf, mTxBuf.Size());
-	}
-	else                                           //rest data bytes more than DMA buffer size
-	{
-		mDMATxCh->CNDTR = USART_DMA_TX_BUFFER_SIZE;  //send max DMA buffer size data to DMA buffer
-		mTxBuf.Gets(mDMATxBuf, USART_DMA_TX_BUFFER_SIZE);
-	}
-	DMA_Cmd(mDMATxCh, ENABLE); 	                   //enable DMA to send data
-#else	
-	USART_ClearITPendingBit(mUSARTx, USART_IT_TC); //Clear TC, otherwise the first byte may not able to send out
-	USART_ClearITPendingBit(mUSARTx, USART_IT_TXE); //Clear TC, otherwise the first byte may not able to send out
-	USART_ITConfig(mUSARTx, USART_IT_TC, ENABLE);  //Enable TC, going to send data
-												   //USART_ITConfig(mUSARTx, USART_IT_TXE, ENABLE);  //Enable TC, going to send data
-	USART_GetFlagStatus(mUSARTx, USART_FLAG_TC);   //read SR to clear flag, otherwise the first byte may not able to send out
-												   //USART_GetFlagStatus(mUSARTx, USART_FLAG_TXE);   //read SR to clear flag, otherwise the first byte may not able to send out
-	static uint8_t data = 0;
-	mTxBuf.Get(data);                              //get one byte data from tx buffer
-	USART_SendData(mUSARTx, data);                  //send one byte data
-#endif	
-	TxCnt += size;
-	return true;
-}
-
-
 void USARTHAL::SetBaudRate(uint32_t baudRate)
 {
 	USART_TypeDef* mUSARTx;   //USARTx

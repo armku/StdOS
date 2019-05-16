@@ -91,8 +91,6 @@ public:
 	//////////////////////////
 	void SetBaudRate(uint32_t baudRate);
 
-	virtual bool SendBytes(uint8_t txData[], uint16_t size);
-
 	virtual uint16_t RxSize();
 	int SendTimeMs(int buflen)
 	{
