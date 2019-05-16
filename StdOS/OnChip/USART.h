@@ -54,7 +54,6 @@ public:
 	virtual uint16_t RxSize();
 
 	virtual void ClearRxBuf();
-	virtual void ClearTxBuf();
 
 	USART& operator<<(int val);
 	USART& operator<<(double val);

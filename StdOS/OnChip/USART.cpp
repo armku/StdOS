@@ -366,11 +366,6 @@ void USART::ClearRxBuf()
 	FlagIdleOK = false;
 }
 
-void USART::ClearTxBuf()
-{
-	mTxBuf.Clear();
-}
-
 USART& USART::operator<<(int val)
 {
 	uint8_t sign = 0, len = 0, data[10];
