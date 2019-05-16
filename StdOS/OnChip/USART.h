@@ -54,9 +54,6 @@ public:
 	virtual uint16_t TxSize();
 	virtual uint16_t RxSize();
 
-	virtual uint16_t TxOverflowSize();
-	virtual uint16_t RxOverflowSize();
-
 	virtual void ClearRxBuf();
 	virtual void ClearTxBuf();
 
