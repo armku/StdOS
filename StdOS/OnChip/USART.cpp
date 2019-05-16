@@ -344,16 +344,6 @@ bool USART::GetBytes(uint8_t data[], uint16_t num)
 	}
 	return ret;
 }
-bool USART::GetByte(uint8_t &data)
-{
-	bool ret = mRxBuf.Get(data);
-	if (ret)
-	{
-		LastRcvTime = millis();
-		RxCnt++;
-	}
-	return ret;
-}
 
 uint16_t USART::RxSize()
 {

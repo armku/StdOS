@@ -49,7 +49,6 @@ public:
 	bool SendBytes(char txData[], uint16_t size) { return this->SendBytes((uint8_t*)txData, size); }
 	virtual bool SendByte(uint8_t data);
 	virtual bool GetBytes(uint8_t data[], uint16_t num);
-	virtual bool GetByte(uint8_t &data);
 
 	virtual uint16_t RxSize();
 	USART& operator<<(int val);
