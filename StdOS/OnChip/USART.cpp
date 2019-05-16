@@ -699,11 +699,6 @@ void USARTHAL::SetBaudRate(uint32_t baudRate)
 	mUSARTx->BRR = (uint16_t)tmpreg;
 }
 
-uint16_t USARTHAL::RxSize()
-{
-	return mRxBuf.Size();
-}
-
 #ifdef USE_USART_DMA
 void USARTHAL::InitDMA()
 {

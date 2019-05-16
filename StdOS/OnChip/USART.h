@@ -88,8 +88,6 @@ public:
 	///@param baudRate 波特率大小
 	//////////////////////////
 	void SetBaudRate(uint32_t baudRate);
-
-	virtual uint16_t RxSize();
 	Port* RS485;
 #ifdef USE_USART_DMA
 private:
