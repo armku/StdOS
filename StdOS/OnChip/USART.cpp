@@ -765,64 +765,6 @@ uint16_t USARTHAL::RxSize()
 	return mRxBuf.Size();
 }
 
-USARTHAL& USARTHAL::operator<<(int val)
-{
-	uint8_t sign = 0, len = 0, data[10];
-	if (val < 0)
-	{
-		sign = 1;
-		val = -val;
-	}
-	do
-	{
-		len++;
-		data[10 - len] = val % 10 + '0';
-		val = val / 10;
-	} while (val);
-	if (sign == 1)
-		data[10 - (++len)] = '-';
-	SendBytes(data + 10 - len, len);
-	return *this;
-}
-USARTHAL& USARTHAL::operator<<(double val)
-{
-	uint8_t sign = 0, len = 0, data[20];
-	if (val < 0)
-	{
-		sign = 1;
-		val = -val;
-	}
-	uint8_t prec = mPrecision;
-	while (prec--)
-		val *= 10;
-	uint32_t t = val;
-	do
-	{
-		if (++len == mPrecision + 1) data[20 - len] = '.';
-		else
-		{
-			data[20 - len] = t % 10 + '0';
-			t = t / 10;
-		}
-	} while (t || len < mPrecision + 2);
-	//if(len==3) data[20-(++len)] = '.';
-	//if(len==4) data[20-(++len)] = '0';
-	if (sign == 1)
-		data[20 - (++len)] = '-';
-	SendBytes(data + 20 - len, len);
-	return *this;
-}
-USARTHAL& USARTHAL::operator<<(const char* pStr)
-{
-	unsigned int length = 0;
-	for (int i = 0; pStr[i] != '\0'; ++i)
-	{
-		++length;
-	}
-	SendBytes((uint8_t*)pStr, length);
-	return *this;
-}
-
 #ifdef USE_USART_DMA
 void USARTHAL::InitDMA()
 {

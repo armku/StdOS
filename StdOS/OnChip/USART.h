@@ -94,9 +94,6 @@ public:
 	virtual bool SendBytes(uint8_t txData[], uint16_t size);
 
 	virtual uint16_t RxSize();
-	USARTHAL& operator<<(int val);
-	USARTHAL& operator<<(double val);
-	USARTHAL& operator<<(const char* pStr);
 	int SendTimeMs(int buflen)
 	{
 		if (this->mBaudrate < 100)
