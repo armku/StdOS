@@ -24,18 +24,9 @@
 class USART
 {
 public:
-	//USART(COM index, uint32_t baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint32_t remapvalue = 1);
-	/*void Initialize();*/
 	int RxCnt;
 	int TxCnt;
-	//////////////////////////
-	///@bief 设置波特率
-	///@param baudRate 波特率大小
-	//////////////////////////
-	/*void SetBaudRate(uint32_t baudRate);*/
-
 	virtual bool SendBytes(uint8_t txData[], uint16_t size);
-
 	virtual uint16_t RxSize();
 	USART& operator<<(int val);
 	USART& operator<<(double val);
@@ -47,17 +38,6 @@ public:
 		return buflen * 8 * 1000 / this->mBaudrate + 1;
 	}
 	Port* RS485;
-//#ifdef USE_USART_DMA
-//private:
-//	uint8_t                   mDMAIRQn;
-//	DMA_Channel_TypeDef* mDMATxCh;
-//	uint32_t                  mDMATCFlag;
-//	uint32_t                  mDMAGLFlag;
-//	uint8_t                   mDMATxBuf[USART_DMA_TX_BUFFER_SIZE];
-//	void InitDMA();
-//public:
-//	void DMAIRQ();
-//#endif
 private:
 	bool isBusySend;
 
