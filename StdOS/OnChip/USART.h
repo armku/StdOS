@@ -77,6 +77,62 @@ private:
 	uint8_t mPrecision;   //when show precision after dot "."  when use "<<" to show float value
 };
 
+
+class USARTHAL
+{
+public:
+	USARTHAL(COM index, uint32_t baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint32_t remapvalue = 1);
+	void Initialize();
+	int RxCnt;
+	int TxCnt;
+	//////////////////////////
+	///@bief 设置波特率
+	///@param baudRate 波特率大小
+	//////////////////////////
+	void SetBaudRate(uint32_t baudRate);
+
+	virtual bool SendBytes(uint8_t txData[], uint16_t size);
+
+	virtual uint16_t RxSize();
+	USART& operator<<(int val);
+	USART& operator<<(double val);
+	USART& operator<<(const char* pStr);
+	int SendTimeMs(int buflen)
+	{
+		if (this->mBaudrate < 100)
+			return 1;
+		return buflen * 8 * 1000 / this->mBaudrate + 1;
+	}
+	Port* RS485;
+#ifdef USE_USART_DMA
+private:
+	uint8_t                   mDMAIRQn;
+	DMA_Channel_TypeDef* mDMATxCh;
+	uint32_t                  mDMATCFlag;
+	uint32_t                  mDMAGLFlag;
+	uint8_t                   mDMATxBuf[USART_DMA_TX_BUFFER_SIZE];
+	void InitDMA();
+public:
+	void DMAIRQ();
+#endif
+private:
+	bool isBusySend;
+
+	uint32_t            mBaudrate; //baudrate of usart
+	uint32_t			mRemapvalue;// remap value	
+	Port				mPortTx;	//tx
+	Port				mPortRx;	//rx
+	uint8_t             mIRQn;     //USART IRQn
+	COM index;				//com index
+	uint32_t            mUSARTRcc; //USART Clock
+	bool           mRemap;    //gpio remap flag
+	uint8_t             mPrePri;   //preemption priority
+	uint8_t             mSubPri;   //sub priority
+	uint8_t             mPriGroup; //priority group
+	FIFOBuffer<uint8_t, USART_TX_BUFFER_SIZE>  mTxBuf;  //USART Tx Buffer
+	FIFOBuffer<uint8_t, USART_RX_BUFFER_SIZE>  mRxBuf;  //USART Rx Buffer
+	uint8_t mPrecision;   //when show precision after dot "."  when use "<<" to show float value
+};
 /**
 ===========================================================================
 |			remap value				|
