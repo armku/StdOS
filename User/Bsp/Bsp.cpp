@@ -19,21 +19,6 @@ void LedTask(void *param)
 
 USART usart111(COM1,115200);
 
-void Com1test(void *param)
-{
-	uint8_t buf[20];
-	int len = 0;
-	len = usart111.RxSize();
-	if (usart111.GetBytes(buf, len))
-	{
-		Buffer(buf, len).Show(true);
-	}
-	else
-	{
-		debug_printf("com1 idle error\n");
-	}
-}
-
 //´®¿Ú²âÊÔ¿ªÊ¼
 #ifdef __cplusplus
 extern "C" {
