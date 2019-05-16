@@ -4,182 +4,182 @@
 #include "Configuration.h"
 #include "Sys.h"
 
-USART::USART(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint32_t remapvalue)
-{
-	this->index = index1;
-	mBaudrate = baud;     //baudrate of usart
-	mPriGroup = priGroup; //priority group
-	mPrePri = prePri;   //preemption priority
-	mSubPri = subPri;   //sub priority
-	mRemap = remap;    //gpio remap flag
-	mRemapvalue = remapvalue;
-	mPrecision = 3;
-	RxCnt = 0;
-	TxCnt = 0;
-
-	if (index == COM1)
-	{
-		mIRQn = USART1_IRQn;                                           //USART IRQn
-		mUSARTRcc = RCC_APB2Periph_USART1;	                                //USARTx Clock
-		if (mRemap)
-		{
-			this->mPortTx.SetPin(PB6);
-			this->mPortRx.SetPin(PB7);
-		}
-		else
-		{
-			this->mPortTx.SetPin(PA9);
-			this->mPortRx.SetPin(PA10);
-		}
-#ifdef USE_USART1_DMA
-		mDMATxCh = DMA1_Channel4;       //DMA Tx Channel
-		mDMAIRQn = DMA1_Channel4_IRQn;  //DMA IRQn
-		mDMATCFlag = DMA1_FLAG_TC4;       //DMA TC Mask
-		mDMAGLFlag = DMA1_IT_GL4;         //DMA IT GL mask
-		pCOM1 = this;
-#endif
-	}
-	else if (index == COM2)
-	{
-		mIRQn = USART2_IRQn;                                           //USART IRQn
-		mUSARTRcc = RCC_APB1Periph_USART2;                             //USARTx Clock	
-		if (mRemap)
-		{
-			this->mPortTx.SetPin(PD5);
-			this->mPortRx.SetPin(PD6);
-		}
-		else
-		{
-			this->mPortTx.SetPin(PA2);
-			this->mPortRx.SetPin(PA3);
-		}
-#ifdef USE_USART2_DMA
-		mDMATxCh = DMA1_Channel7;       //DMA Tx Channel
-		mDMAIRQn = DMA1_Channel7_IRQn;  //DMA IRQn
-		mDMATCFlag = DMA1_FLAG_TC7;       //DMA TC Mask
-		mDMAGLFlag = DMA1_IT_GL7;         //DMA IT GL mask
-		pCOM2 = this;
-#endif
-	}
-	else if (index == COM3)
-	{
-		mIRQn = USART3_IRQn;                                           //USART IRQn
-		mUSARTRcc = RCC_APB1Periph_USART3;	                                //USARTx Clock
-		if (mRemap)
-		{
-			this->mPortTx.SetPin(PC10);
-			this->mPortRx.SetPin(PC11);
-		}
-		else
-		{
-			if (mRemapvalue == 0x01)
-			{
-				this->mPortTx.SetPin(PB10);
-				this->mPortRx.SetPin(PB11);
-			}
-			else
-			{
-				this->mPortTx.SetPin(PD8);
-				this->mPortRx.SetPin(PD9);
-			}
-
-		}
-#ifdef USE_USART3_DMA
-		mDMATxCh = DMA1_Channel2;       //DMA Tx Channel
-		mDMAIRQn = DMA1_Channel2_IRQn;  //DMA IRQn
-		mDMATCFlag = DMA1_FLAG_TC2;       //DMA TC Mask
-		mDMAGLFlag = DMA1_IT_GL2;         //DMA IT GL mask
-		pCOM3 = this;
-#endif
-	}
-
-	Initialize();
-
-}
-
-void USART::Initialize()
-{
-	USART_TypeDef* mUSARTx;   //USARTx
-
-	if (this->index == COM1)
-	{
-		mUSARTx = USART1;
-	}
-	else if (this->index == COM2)
-	{
-		mUSARTx = USART2;
-	}
-	else if (this->index == COM3)
-	{
-		mUSARTx = USART3;
-	}
-	else
-	{
-	}
-
-	if (this->index == COM1)
-	{
-		RCC_APB2PeriphClockCmd(mUSARTRcc, ENABLE);
-	}
-	else
-	{
-		RCC_APB1PeriphClockCmd(mUSARTRcc, ENABLE);
-	}
-	if (mRemap)
-	{
-		if (mUSARTx == USART1) GPIO_PinRemapConfig(GPIO_Remap_USART1, ENABLE);
-		if (mUSARTx == USART2) GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
-		if (mUSARTx == USART3) GPIO_PinRemapConfig(mRemapvalue == 0X01 ? GPIO_PartialRemap_USART3 : GPIO_FullRemap_USART3, ENABLE);
-	}
-	this->mPortTx.pinMode(GPIO_AF_PP);
-	this->mPortRx.pinMode(GPIO_IN_FLOATING);
-	switch (mPriGroup)
-	{
-	case 0:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);	break;
-	case 1:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);	break;
-	case 2:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);	break;
-	case 3:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3);	break;
-	case 4:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);	break;
-	default:NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3);	break;
-	}
-	NVIC_InitTypeDef NVIC_InitStructure;
-	NVIC_InitStructure.NVIC_IRQChannel = mIRQn;   //USART IRQn
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = mPrePri; //preemption priority
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = mSubPri; //sub priority
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;  //enable interrup
-	NVIC_Init(&NVIC_InitStructure);                                 //initialize irq
-#ifdef USE_USART_DMA
-	NVIC_InitStructure.NVIC_IRQChannel = mDMAIRQn;//DMA IRQ
-	NVIC_Init(&NVIC_InitStructure);
-	//	mDMATxCh->CCR |= DMA_IT_TC;  //Enable DMA TX Channel TCIT 
-	//	mDMATxCh->CCR |= DMA_IT_TE;  //Enable DMA TX Channel TEIT
-#endif
-
-	USART_InitTypeDef USART_InitStructure;                       //
-	USART_InitStructure.USART_BaudRate = mBaudrate;
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;
-	USART_InitStructure.USART_Parity = USART_Parity_No;
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-
-	USART_Init(mUSARTx, &USART_InitStructure);
-
-	USART_Cmd(mUSARTx, ENABLE);
-
-	USART_ITConfig(mUSARTx, USART_IT_RXNE, ENABLE);
-	USART_ITConfig(mUSARTx, USART_IT_IDLE, ENABLE); //开启串口总线空闲中断
-	USART_ITConfig(mUSARTx, USART_IT_TC, ENABLE);
-
-#ifndef USE_USART_DMA	
-	USART_ITConfig(mUSARTx, USART_IT_TC, DISABLE);
-#endif	
-	USART_ClearFlag(mUSARTx, USART_FLAG_TC);      //clear TC flag to make sure the first byte can be send correctly
-
-#ifdef USE_USART_DMA
-	InitDMA();
-#endif
-}
+//USART::USART(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint32_t remapvalue)
+//{
+//	this->index = index1;
+//	mBaudrate = baud;     //baudrate of usart
+//	mPriGroup = priGroup; //priority group
+//	mPrePri = prePri;   //preemption priority
+//	mSubPri = subPri;   //sub priority
+//	mRemap = remap;    //gpio remap flag
+//	mRemapvalue = remapvalue;
+//	mPrecision = 3;
+//	RxCnt = 0;
+//	TxCnt = 0;
+//
+//	if (index == COM1)
+//	{
+//		mIRQn = USART1_IRQn;                                           //USART IRQn
+//		mUSARTRcc = RCC_APB2Periph_USART1;	                                //USARTx Clock
+//		if (mRemap)
+//		{
+//			this->mPortTx.SetPin(PB6);
+//			this->mPortRx.SetPin(PB7);
+//		}
+//		else
+//		{
+//			this->mPortTx.SetPin(PA9);
+//			this->mPortRx.SetPin(PA10);
+//		}
+//#ifdef USE_USART1_DMA
+//		mDMATxCh = DMA1_Channel4;       //DMA Tx Channel
+//		mDMAIRQn = DMA1_Channel4_IRQn;  //DMA IRQn
+//		mDMATCFlag = DMA1_FLAG_TC4;       //DMA TC Mask
+//		mDMAGLFlag = DMA1_IT_GL4;         //DMA IT GL mask
+//		pCOM1 = this;
+//#endif
+//	}
+//	else if (index == COM2)
+//	{
+//		mIRQn = USART2_IRQn;                                           //USART IRQn
+//		mUSARTRcc = RCC_APB1Periph_USART2;                             //USARTx Clock	
+//		if (mRemap)
+//		{
+//			this->mPortTx.SetPin(PD5);
+//			this->mPortRx.SetPin(PD6);
+//		}
+//		else
+//		{
+//			this->mPortTx.SetPin(PA2);
+//			this->mPortRx.SetPin(PA3);
+//		}
+//#ifdef USE_USART2_DMA
+//		mDMATxCh = DMA1_Channel7;       //DMA Tx Channel
+//		mDMAIRQn = DMA1_Channel7_IRQn;  //DMA IRQn
+//		mDMATCFlag = DMA1_FLAG_TC7;       //DMA TC Mask
+//		mDMAGLFlag = DMA1_IT_GL7;         //DMA IT GL mask
+//		pCOM2 = this;
+//#endif
+//	}
+//	else if (index == COM3)
+//	{
+//		mIRQn = USART3_IRQn;                                           //USART IRQn
+//		mUSARTRcc = RCC_APB1Periph_USART3;	                                //USARTx Clock
+//		if (mRemap)
+//		{
+//			this->mPortTx.SetPin(PC10);
+//			this->mPortRx.SetPin(PC11);
+//		}
+//		else
+//		{
+//			if (mRemapvalue == 0x01)
+//			{
+//				this->mPortTx.SetPin(PB10);
+//				this->mPortRx.SetPin(PB11);
+//			}
+//			else
+//			{
+//				this->mPortTx.SetPin(PD8);
+//				this->mPortRx.SetPin(PD9);
+//			}
+//
+//		}
+//#ifdef USE_USART3_DMA
+//		mDMATxCh = DMA1_Channel2;       //DMA Tx Channel
+//		mDMAIRQn = DMA1_Channel2_IRQn;  //DMA IRQn
+//		mDMATCFlag = DMA1_FLAG_TC2;       //DMA TC Mask
+//		mDMAGLFlag = DMA1_IT_GL2;         //DMA IT GL mask
+//		pCOM3 = this;
+//#endif
+//	}
+//
+//	Initialize();
+//
+//}
+//
+//void USART::Initialize()
+//{
+//	USART_TypeDef* mUSARTx;   //USARTx
+//
+//	if (this->index == COM1)
+//	{
+//		mUSARTx = USART1;
+//	}
+//	else if (this->index == COM2)
+//	{
+//		mUSARTx = USART2;
+//	}
+//	else if (this->index == COM3)
+//	{
+//		mUSARTx = USART3;
+//	}
+//	else
+//	{
+//	}
+//
+//	if (this->index == COM1)
+//	{
+//		RCC_APB2PeriphClockCmd(mUSARTRcc, ENABLE);
+//	}
+//	else
+//	{
+//		RCC_APB1PeriphClockCmd(mUSARTRcc, ENABLE);
+//	}
+//	if (mRemap)
+//	{
+//		if (mUSARTx == USART1) GPIO_PinRemapConfig(GPIO_Remap_USART1, ENABLE);
+//		if (mUSARTx == USART2) GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
+//		if (mUSARTx == USART3) GPIO_PinRemapConfig(mRemapvalue == 0X01 ? GPIO_PartialRemap_USART3 : GPIO_FullRemap_USART3, ENABLE);
+//	}
+//	this->mPortTx.pinMode(GPIO_AF_PP);
+//	this->mPortRx.pinMode(GPIO_IN_FLOATING);
+//	switch (mPriGroup)
+//	{
+//	case 0:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);	break;
+//	case 1:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);	break;
+//	case 2:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);	break;
+//	case 3:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3);	break;
+//	case 4:	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);	break;
+//	default:NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3);	break;
+//	}
+//	NVIC_InitTypeDef NVIC_InitStructure;
+//	NVIC_InitStructure.NVIC_IRQChannel = mIRQn;   //USART IRQn
+//	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = mPrePri; //preemption priority
+//	NVIC_InitStructure.NVIC_IRQChannelSubPriority = mSubPri; //sub priority
+//	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;  //enable interrup
+//	NVIC_Init(&NVIC_InitStructure);                                 //initialize irq
+//#ifdef USE_USART_DMA
+//	NVIC_InitStructure.NVIC_IRQChannel = mDMAIRQn;//DMA IRQ
+//	NVIC_Init(&NVIC_InitStructure);
+//	//	mDMATxCh->CCR |= DMA_IT_TC;  //Enable DMA TX Channel TCIT 
+//	//	mDMATxCh->CCR |= DMA_IT_TE;  //Enable DMA TX Channel TEIT
+//#endif
+//
+//	USART_InitTypeDef USART_InitStructure;                       //
+//	USART_InitStructure.USART_BaudRate = mBaudrate;
+//	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+//	USART_InitStructure.USART_StopBits = USART_StopBits_1;
+//	USART_InitStructure.USART_Parity = USART_Parity_No;
+//	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+//	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+//
+//	USART_Init(mUSARTx, &USART_InitStructure);
+//
+//	USART_Cmd(mUSARTx, ENABLE);
+//
+//	USART_ITConfig(mUSARTx, USART_IT_RXNE, ENABLE);
+//	USART_ITConfig(mUSARTx, USART_IT_IDLE, ENABLE); //开启串口总线空闲中断
+//	USART_ITConfig(mUSARTx, USART_IT_TC, ENABLE);
+//
+//#ifndef USE_USART_DMA	
+//	USART_ITConfig(mUSARTx, USART_IT_TC, DISABLE);
+//#endif	
+//	USART_ClearFlag(mUSARTx, USART_FLAG_TC);      //clear TC flag to make sure the first byte can be send correctly
+//
+//#ifdef USE_USART_DMA
+//	InitDMA();
+//#endif
+//}
 
 bool USART::SendBytes(uint8_t txData[], uint16_t size)
 {

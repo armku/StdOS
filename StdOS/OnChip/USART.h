@@ -24,8 +24,8 @@
 class USART
 {
 public:
-	USART(COM index, uint32_t baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint32_t remapvalue = 1);
-	void Initialize();
+	//USART(COM index, uint32_t baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint32_t remapvalue = 1);
+	/*void Initialize();*/
 	int RxCnt;
 	int TxCnt;
 	//////////////////////////
