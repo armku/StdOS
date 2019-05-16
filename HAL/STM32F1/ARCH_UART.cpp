@@ -78,7 +78,6 @@ void USART1_IRQHandler(void)
 	}
 	if (USART_GetITStatus(USART1, USART_IT_TXE) != RESET || USART_GetITStatus(USART1, USART_IT_TC) != RESET)   //TxE and TC
 	{
-#if 1
 		//if (mTxBuf.Size() > 0)                                //still left some bytes of data
 		//{
 		//	mTxBuf.Get(data);                                //get one byte data from buffer
@@ -90,7 +89,6 @@ void USART1_IRQHandler(void)
 			USART_ITConfig(USART1, USART_IT_TC, DISABLE);   //disable TC
 			//isBusySend = false;                              //set free state
 		}
-#endif
 	}
 }
 #endif
