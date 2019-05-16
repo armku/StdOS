@@ -34,7 +34,7 @@ bool ModbusSlaveLink::Send()
 	txFrame.Crc2 = Crc::CRC16RTU(txFrame.data, txFrame.frameLength - 2);
 	txFrame.data[txFrame.frameLength - 2] = txFrame.Crc2 & 0xff;
 	txFrame.data[txFrame.frameLength - 1] = txFrame.Crc2 >> 8;
-	com.SendBytes(txFrame.data, txFrame.frameLength);
+	/*com.SendBytes(txFrame.data, txFrame.frameLength);*/
 	txFrame.isUpdated = false;
 	rxFrame.RemoveOneFrame();//移除处理完的接收数据帧
 	txFrame.Cnt++;

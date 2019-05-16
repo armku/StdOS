@@ -35,7 +35,6 @@ public:
 	void SetBaudRate(uint32_t baudRate);
 
 	virtual bool SendBytes(uint8_t txData[], uint16_t size);
-	bool SendBytes(char txData[], uint16_t size) { return this->SendBytes((uint8_t*)txData, size); }
 
 	virtual uint16_t RxSize();
 	USART& operator<<(int val);
