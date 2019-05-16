@@ -4,8 +4,6 @@
 #include "Configuration.h"
 #include "Sys.h"
 
-UsartKernel_T UsartKernel[5];//串口数据处理
-
 USART::USART(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint32_t remapvalue)
 {
 	this->index = index1;

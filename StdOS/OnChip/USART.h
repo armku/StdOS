@@ -21,7 +21,6 @@ typedef struct
 	int UsartReadCntCopy;
 }UsartKernel_T;
 
-extern UsartKernel_T UsartKernel[];//串口数据处理
 /******************************************************************************************************/
 /****configuration，使用前请自行配置****/
 #define USART_TX_BUFFER_SIZE     200              //USART BUFFER FIFO SIZE
