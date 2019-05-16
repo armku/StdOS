@@ -60,8 +60,6 @@ public:
 	virtual void ClearRxBuf();
 	virtual void ClearTxBuf();
 
-	void(*OnReceive)(void* param);
-
 	USART& operator<<(int val);
 	USART& operator<<(double val);
 	USART& operator<<(const char* pStr);
