@@ -799,11 +799,6 @@
           <GroupName>DriversCom</GroupName>
           <Files>
             <File>
-              <FileName>DemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\DemoLink\DemoLink.cpp</FilePath>
-            </File>
-            <File>
               <FileName>esp8266.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\esp8266\esp8266.cpp</FilePath>
@@ -1799,11 +1794,6 @@
         <Group>
           <GroupName>DriversCom</GroupName>
           <Files>
-            <File>
-              <FileName>DemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\DemoLink\DemoLink.cpp</FilePath>
-            </File>
             <File>
               <FileName>esp8266.cpp</FileName>
               <FileType>8</FileType>
