@@ -11,15 +11,7 @@
 *@{
 */
 
-//串口数据处理
-typedef struct 
-{
-	int TimeCnt;//接收到数据的时间
-	int UsartReadCnt;//接收到的数据长度
-	int UsartIdleCnt;//串口空闲时间
-	int UsartFlag;//接收到一帧数据
-	int UsartReadCntCopy;
-}UsartKernel_T;
+
 
 /******************************************************************************************************/
 /****configuration，使用前请自行配置****/
