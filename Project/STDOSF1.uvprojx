@@ -824,11 +824,6 @@
               <FilePath>..\StdOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
             </File>
             <File>
-              <FileName>StdLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\StdLink\StdLink.cpp</FilePath>
-            </File>
-            <File>
               <FileName>EspDemoLink.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\EspDemoLink.cpp</FilePath>
@@ -1828,11 +1823,6 @@
               <FileName>SHARP_PM2_5.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StdLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\StdLink\StdLink.cpp</FilePath>
             </File>
             <File>
               <FileName>EspDemoLink.cpp</FileName>
