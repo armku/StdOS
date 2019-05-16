@@ -1,18 +1,6 @@
 #include "stm32f10x.h"
 #include "Interrupt.h"
 
-#ifdef USE_GPS
-GPS *pGPS1 = 0;
-GPS *pGPS2 = 0;
-GPS *pGPS3 = 0;
-#endif
-#ifdef USE_USART1
-USART *pCOM1 = 0;
-#endif
-#ifdef USE_USART1_DMA
-USART *pCOM1 = 0;
-#endif
-
 #ifdef USE_I2C1
 I2C *pI2C1;
 #endif

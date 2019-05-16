@@ -3,18 +3,6 @@
 
 #include "Configuration.h"
 
-#ifdef USE_GPS
-extern GPS *pGPS1;
-extern GPS *pGPS2;
-extern GPS *pGPS3;
-#endif
-#ifdef USE_USART1
-extern USART *pCOM1;
-#endif
-#ifdef USE_USART1_DMA
-extern USART *pCOM1;
-#endif
-
 #ifdef USE_I2C1
 extern I2C *pI2C1;
 #endif
