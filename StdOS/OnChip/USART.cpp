@@ -331,16 +331,6 @@ bool USART::SendByte(uint8_t data)
 	TxCnt++;
 	return false;
 }
-bool USART::GetBytes(uint8_t data[], uint16_t num)
-{
-	bool ret = false;
-	ret = mRxBuf.Gets(data, num);
-	if (ret && num)
-	{
-		RxCnt += num;
-	}
-	return ret;
-}
 
 uint16_t USART::RxSize()
 {

@@ -12,11 +12,11 @@ bool Sharp_PM_2_5::Update()
 	int num = mCom.RxSize();
 	if (num > 7)
 	{
-		mCom.GetBytes(&ch, 1);
+		/*mCom.GetBytes(&ch, 1);*/
 		if (ch != 0xaa)
 			return false;
-		else
-			mCom.GetBytes(data, 5);
+		/*else
+			mCom.GetBytes(data, 5);*/
 		if (Check(data, 4, data[4]))//ะฃั้
 		{
 			temp = (float)(data[0] * 256 + data[1]) / 1024 * 5;

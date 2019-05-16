@@ -9,10 +9,10 @@ bool ModbusSlaveLink::CheckFrame()
 {
 	int rxlen = com.RxSize();
 
-	if (com.GetBytes(&rxFrame.data[rxFrame.Length], rxlen))
+	/*if (com.GetBytes(&rxFrame.data[rxFrame.Length], rxlen))
 	{
 		rxFrame.Length += rxlen;
-	}
+	}*/
 	//判断数据帧最小长度要求
 	if (rxFrame.Length < 8)
 		return false;
