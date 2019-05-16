@@ -196,20 +196,6 @@ extern "C"
 
 	}
 	//~~~~~~~~~~~~~~~~~~~~~ USART IQR  ~~~~~~~~~~~~~~~~~//
-#if 0
-	void USART1_IRQHandler(void)    //----USART1 IRQ----//
-	{
-//#ifdef USE_GPS
-//		if (pGPS1) 
-//		{
-//			pGPS1->GPS_IRQHandler();
-//		}
-//#endif
-#ifdef USE_USART1
-		pCOM1->IRQ();
-#endif
-	}
-#endif
 	void USART2_IRQHandler(void)    //----USART2 IRQ----//
 	{
 #ifdef USE_GPS
