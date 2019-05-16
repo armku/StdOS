@@ -94,9 +94,6 @@ private:
 	FIFOBuffer<uint8_t, USART_TX_BUFFER_SIZE>  mTxBuf;  //USART Tx Buffer
 	FIFOBuffer<uint8_t, USART_RX_BUFFER_SIZE>  mRxBuf;  //USART Rx Buffer
 	uint8_t mPrecision;   //when show precision after dot "."  when use "<<" to show float value
-
-	uint16_t mTxOverflow; //Tx overflow byte count
-	uint16_t mRxOverflow; //Rx overflow byte count
 };
 
 /**

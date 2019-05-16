@@ -16,8 +16,6 @@ USART::USART(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_
 	mRemap = remap;    //gpio remap flag
 	mRemapvalue = remapvalue;
 	mPrecision = 3;
-	mTxOverflow = 0;
-	mRxOverflow = 0;
 	RxCnt = 0;
 	TxCnt = 0;
 
@@ -220,7 +218,6 @@ bool USART::SendBytes(uint8_t txData[], uint16_t size)
 
 	if (mTxBuf.ResSize() < size)      //compare the unused bytes and sending bytes
 	{
-		mTxOverflow += size;         //flash Tx overflow bytes
 		return false;
 	}
 	mTxBuf.Puts(txData, size);                        //add data to Tx buffer, if overflow, return false
@@ -333,7 +330,6 @@ bool USART::SendByte(uint8_t data)
 
 	if (mTxBuf.Put(data))
 		return true;
-	mTxOverflow++;
 	TxCnt++;
 	return false;
 }
