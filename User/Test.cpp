@@ -10,4 +10,4 @@
 #include <string.h>  
 #include "Sys.h"
 
-USART usart333(COM3,115200);
+//USART usart333(COM3,115200);
