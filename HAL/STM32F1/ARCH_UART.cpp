@@ -47,8 +47,6 @@ void UART_5_send_byte(uint8_t c)
 }
 
 ///////////////////////////////////////////////////////////
-#if 1
-
 void USART1_IRQHandler(void)
 {
 	uint8_t c;
@@ -91,7 +89,7 @@ void USART1_IRQHandler(void)
 		}
 	}
 }
-#endif
+
 #if 0
 void USART2_IRQHandler(void)
 {
