@@ -60,7 +60,6 @@ public:
 	virtual void ClearRxBuf();
 	virtual void ClearTxBuf();
 
-	void IRQ();
 	void(*OnReceive)(void* param);
 
 	USART& operator<<(int val);
