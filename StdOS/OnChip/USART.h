@@ -83,8 +83,6 @@ class USARTHAL
 public:
 	USARTHAL(COM index, uint32_t baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint32_t remapvalue = 1);
 	void Initialize();
-	int RxCnt;
-	int TxCnt;
 	//////////////////////////
 	///@bief 设置波特率
 	///@param baudRate 波特率大小

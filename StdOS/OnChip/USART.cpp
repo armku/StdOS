@@ -453,8 +453,6 @@ USARTHAL::USARTHAL(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, 
 	mRemap = remap;    //gpio remap flag
 	mRemapvalue = remapvalue;
 	mPrecision = 3;
-	RxCnt = 0;
-	TxCnt = 0;
 
 	if (index == COM1)
 	{
