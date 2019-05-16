@@ -114,8 +114,6 @@ private:
 	uint8_t             mPrePri;   //preemption priority
 	uint8_t             mSubPri;   //sub priority
 	uint8_t             mPriGroup; //priority group
-	FIFOBuffer<uint8_t, USART_TX_BUFFER_SIZE>  mTxBuf;  //USART Tx Buffer
-	FIFOBuffer<uint8_t, USART_RX_BUFFER_SIZE>  mRxBuf;  //USART Rx Buffer
 	uint8_t mPrecision;   //when show precision after dot "."  when use "<<" to show float value
 };
 /**
