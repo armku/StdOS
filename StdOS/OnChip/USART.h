@@ -51,7 +51,6 @@ public:
 	virtual bool GetBytes(uint8_t data[], uint16_t num);
 	virtual bool GetByte(uint8_t &data);
 
-	virtual uint16_t TxSize();
 	virtual uint16_t RxSize();
 
 	virtual void ClearRxBuf();

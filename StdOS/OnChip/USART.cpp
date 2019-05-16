@@ -364,11 +364,6 @@ uint16_t USART::RxSize()
 	return mRxBuf.Size();
 }
 
-uint16_t USART::TxSize()
-{
-	return mTxBuf.Size();
-}
-
 void USART::ClearRxBuf()
 {
 	mRxBuf.Clear();
