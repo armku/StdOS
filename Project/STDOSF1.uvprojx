@@ -799,11 +799,6 @@
           <GroupName>DriversCom</GroupName>
           <Files>
             <File>
-              <FileName>esp8266.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\esp8266\esp8266.cpp</FilePath>
-            </File>
-            <File>
               <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</FilePath>
@@ -817,11 +812,6 @@
               <FileName>SHARP_PM2_5.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EspDemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\EspDemoLink.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1790,11 +1780,6 @@
           <GroupName>DriversCom</GroupName>
           <Files>
             <File>
-              <FileName>esp8266.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\esp8266\esp8266.cpp</FilePath>
-            </File>
-            <File>
               <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</FilePath>
@@ -1808,11 +1793,6 @@
               <FileName>SHARP_PM2_5.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EspDemoLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\EspDemoLink.cpp</FilePath>
             </File>
           </Files>
         </Group>
