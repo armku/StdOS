@@ -240,76 +240,76 @@ bool USART::SendBytes(uint8_t txData[], uint16_t size)
 }
 
 
-void USART::SetBaudRate(uint32_t baudRate)
-{
-	USART_TypeDef* mUSARTx;   //USARTx
-
-	if (this->index == COM1)
-	{
-		mUSARTx = USART1;
-	}
-	else if (this->index == COM2)
-	{
-		mUSARTx = USART2;
-	}
-	else if (this->index == COM3)
-	{
-		mUSARTx = USART3;
-	}
-	else
-	{
-	}
-
-	//	assert_param(IS_USART_BAUDRATE(baudRate));
-	uint32_t tmpreg = 0x00, apbclock = 0x00;
-	uint32_t integerdivider = 0x00;
-	uint32_t fractionaldivider = 0x00;
-	uint32_t usartxbase = 0;
-	RCC_ClocksTypeDef RCC_ClocksStatus;
-
-	usartxbase = (uint32_t)mUSARTx;
-
-	/*---------------------------- USART BRR Configuration -----------------------*/
-	/* Configure the USART Baud Rate -------------------------------------------*/
-	RCC_GetClocksFreq(&RCC_ClocksStatus);
-	if (usartxbase == USART1_BASE)
-	{
-		apbclock = RCC_ClocksStatus.PCLK2_Frequency;
-	}
-	else
-	{
-		apbclock = RCC_ClocksStatus.PCLK1_Frequency;
-	}
-
-	/* Determine the integer part */
-	if ((mUSARTx->CR1 & ((uint16_t)0x8000)) != 0)//CR1_OVER8_Set=((uint16_t)0x8000)
-	{
-		/* Integer part computing in case Oversampling mode is 8 Samples */
-		integerdivider = ((25 * apbclock) / (2 * (baudRate)));
-	}
-	else /* if ((USARTx->CR1 & CR1_OVER8_Set) == 0) */
-	{
-		/* Integer part computing in case Oversampling mode is 16 Samples */
-		integerdivider = ((25 * apbclock) / (4 * (baudRate)));
-	}
-	tmpreg = (integerdivider / 100) << 4;
-
-	/* Determine the fractional part */
-	fractionaldivider = integerdivider - (100 * (tmpreg >> 4));
-
-	/* Implement the fractional part in the register */
-	if ((mUSARTx->CR1 & ((uint16_t)0x8000)) != 0)
-	{
-		tmpreg |= ((((fractionaldivider * 8) + 50) / 100)) & ((uint8_t)0x07);
-	}
-	else /* if ((USARTx->CR1 & CR1_OVER8_Set) == 0) */
-	{
-		tmpreg |= ((((fractionaldivider * 16) + 50) / 100)) & ((uint8_t)0x0F);
-	}
-
-	/* Write to USART BRR */
-	mUSARTx->BRR = (uint16_t)tmpreg;
-}
+//void USART::SetBaudRate(uint32_t baudRate)
+//{
+//	USART_TypeDef* mUSARTx;   //USARTx
+//
+//	if (this->index == COM1)
+//	{
+//		mUSARTx = USART1;
+//	}
+//	else if (this->index == COM2)
+//	{
+//		mUSARTx = USART2;
+//	}
+//	else if (this->index == COM3)
+//	{
+//		mUSARTx = USART3;
+//	}
+//	else
+//	{
+//	}
+//
+//	//	assert_param(IS_USART_BAUDRATE(baudRate));
+//	uint32_t tmpreg = 0x00, apbclock = 0x00;
+//	uint32_t integerdivider = 0x00;
+//	uint32_t fractionaldivider = 0x00;
+//	uint32_t usartxbase = 0;
+//	RCC_ClocksTypeDef RCC_ClocksStatus;
+//
+//	usartxbase = (uint32_t)mUSARTx;
+//
+//	/*---------------------------- USART BRR Configuration -----------------------*/
+//	/* Configure the USART Baud Rate -------------------------------------------*/
+//	RCC_GetClocksFreq(&RCC_ClocksStatus);
+//	if (usartxbase == USART1_BASE)
+//	{
+//		apbclock = RCC_ClocksStatus.PCLK2_Frequency;
+//	}
+//	else
+//	{
+//		apbclock = RCC_ClocksStatus.PCLK1_Frequency;
+//	}
+//
+//	/* Determine the integer part */
+//	if ((mUSARTx->CR1 & ((uint16_t)0x8000)) != 0)//CR1_OVER8_Set=((uint16_t)0x8000)
+//	{
+//		/* Integer part computing in case Oversampling mode is 8 Samples */
+//		integerdivider = ((25 * apbclock) / (2 * (baudRate)));
+//	}
+//	else /* if ((USARTx->CR1 & CR1_OVER8_Set) == 0) */
+//	{
+//		/* Integer part computing in case Oversampling mode is 16 Samples */
+//		integerdivider = ((25 * apbclock) / (4 * (baudRate)));
+//	}
+//	tmpreg = (integerdivider / 100) << 4;
+//
+//	/* Determine the fractional part */
+//	fractionaldivider = integerdivider - (100 * (tmpreg >> 4));
+//
+//	/* Implement the fractional part in the register */
+//	if ((mUSARTx->CR1 & ((uint16_t)0x8000)) != 0)
+//	{
+//		tmpreg |= ((((fractionaldivider * 8) + 50) / 100)) & ((uint8_t)0x07);
+//	}
+//	else /* if ((USARTx->CR1 & CR1_OVER8_Set) == 0) */
+//	{
+//		tmpreg |= ((((fractionaldivider * 16) + 50) / 100)) & ((uint8_t)0x0F);
+//	}
+//
+//	/* Write to USART BRR */
+//	mUSARTx->BRR = (uint16_t)tmpreg;
+//}
 
 uint16_t USART::RxSize()
 {
@@ -374,63 +374,63 @@ USART& USART::operator<<(const char* pStr)
 	return *this;
 }
 
-#ifdef USE_USART_DMA
-void USART::InitDMA()
-{
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);                   //enable DMA clock
-
-	DMA_DeInit(mDMATxCh);
-
-	DMA_InitTypeDef DMA_InitStructure;
-	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&mUSARTx->DR;	       //DMA Tx data target address
-	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)mDMATxBuf;           //DMA data source address
-	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;	   //DMA data direction: from memory to peripheral
-	DMA_InitStructure.DMA_BufferSize = 0;                        //data size to send with DMA
-	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;//peripheral address not increase
-	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;	   //memory address increase
-	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;//peripheral data unit: Byte
-	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;	 //memory data unit: Byte
-	DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;         //DMA mode: normal (not loop)
-	DMA_InitStructure.DMA_Priority = DMA_Priority_Low;         //DMA priority: low
-	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;          //disable memory to memory
-
-	DMA_Init(mDMATxCh, &DMA_InitStructure);                              //config DMA	   
-
-	DMA_ITConfig(mDMATxCh, DMA_IT_TC, ENABLE);
-	DMA_ITConfig(mDMATxCh, DMA_IT_TE, ENABLE);
-
-	USART_DMACmd(mUSARTx, USART_DMAReq_Tx, ENABLE);                      //enable DMA Tx of USART
-	DMA_Cmd(mDMATxCh, DISABLE);		                                       //disable DMA			
-}
-
-
-void USART::DMAIRQ()
-{
-	if (DMA_GetFlagStatus(mDMATCFlag) == SET) //DMA Tx Complete
-	{
-		DMA_ClearITPendingBit(mDMAGLFlag);   //Clear DMA global interrupt flag
-		DMA_ClearFlag(mDMATCFlag);           //Clear DMA Tx complete flag
-		DMA_Cmd(mDMATxCh, DISABLE);           //close dma
-
-		if (mTxBuf.Size() > 0)
-		{
-			if (mTxBuf.Size() <= USART_DMA_TX_BUFFER_SIZE)  //the rest data bytes less than DMA buffer size
-			{
-				mDMATxCh->CNDTR = mTxBuf.Size();             //send all rest data to DMA buffer 
-				mTxBuf.Gets(mDMATxBuf, mTxBuf.Size());
-			}
-			else                                           //the rest data bytes more than DMA buffer size
-			{
-				mDMATxCh->CNDTR = USART_DMA_TX_BUFFER_SIZE;  //send max DMA buffer size data to DMA buffer
-				mTxBuf.Gets(mDMATxBuf, USART_DMA_TX_BUFFER_SIZE);
-			}
-			DMA_Cmd(mDMATxCh, ENABLE); 	                   //enable DMA
-		}
-		else
-			isBusySend = false;               //将忙标志
-	}
-}
-#endif
+//#ifdef USE_USART_DMA
+//void USART::InitDMA()
+//{
+//	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);                   //enable DMA clock
+//
+//	DMA_DeInit(mDMATxCh);
+//
+//	DMA_InitTypeDef DMA_InitStructure;
+//	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&mUSARTx->DR;	       //DMA Tx data target address
+//	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)mDMATxBuf;           //DMA data source address
+//	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;	   //DMA data direction: from memory to peripheral
+//	DMA_InitStructure.DMA_BufferSize = 0;                        //data size to send with DMA
+//	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;//peripheral address not increase
+//	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;	   //memory address increase
+//	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;//peripheral data unit: Byte
+//	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;	 //memory data unit: Byte
+//	DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;         //DMA mode: normal (not loop)
+//	DMA_InitStructure.DMA_Priority = DMA_Priority_Low;         //DMA priority: low
+//	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;          //disable memory to memory
+//
+//	DMA_Init(mDMATxCh, &DMA_InitStructure);                              //config DMA	   
+//
+//	DMA_ITConfig(mDMATxCh, DMA_IT_TC, ENABLE);
+//	DMA_ITConfig(mDMATxCh, DMA_IT_TE, ENABLE);
+//
+//	USART_DMACmd(mUSARTx, USART_DMAReq_Tx, ENABLE);                      //enable DMA Tx of USART
+//	DMA_Cmd(mDMATxCh, DISABLE);		                                       //disable DMA			
+//}
+//
+//
+//void USART::DMAIRQ()
+//{
+//	if (DMA_GetFlagStatus(mDMATCFlag) == SET) //DMA Tx Complete
+//	{
+//		DMA_ClearITPendingBit(mDMAGLFlag);   //Clear DMA global interrupt flag
+//		DMA_ClearFlag(mDMATCFlag);           //Clear DMA Tx complete flag
+//		DMA_Cmd(mDMATxCh, DISABLE);           //close dma
+//
+//		if (mTxBuf.Size() > 0)
+//		{
+//			if (mTxBuf.Size() <= USART_DMA_TX_BUFFER_SIZE)  //the rest data bytes less than DMA buffer size
+//			{
+//				mDMATxCh->CNDTR = mTxBuf.Size();             //send all rest data to DMA buffer 
+//				mTxBuf.Gets(mDMATxBuf, mTxBuf.Size());
+//			}
+//			else                                           //the rest data bytes more than DMA buffer size
+//			{
+//				mDMATxCh->CNDTR = USART_DMA_TX_BUFFER_SIZE;  //send max DMA buffer size data to DMA buffer
+//				mTxBuf.Gets(mDMATxBuf, USART_DMA_TX_BUFFER_SIZE);
+//			}
+//			DMA_Cmd(mDMATxCh, ENABLE); 	                   //enable DMA
+//		}
+//		else
+//			isBusySend = false;               //将忙标志
+//	}
+//}
+//#endif
 ///////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////hal
 USARTHAL::USARTHAL(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint32_t remapvalue)
