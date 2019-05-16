@@ -20,13 +20,6 @@ USART *pCOM2 = 0;
 USART *pCOM2 = 0;
 #endif
 
-#ifdef USE_USART3
-USART *pCOM3 = 0;
-#endif
-#ifdef USE_USART3_DMA
-USART *pCOM3 = 0;
-#endif
-
 #ifdef USE_I2C1
 I2C *pI2C1;
 #endif

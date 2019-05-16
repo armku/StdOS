@@ -22,12 +22,6 @@ extern USART *pCOM2;
 extern USART *pCOM2;
 #endif
 
-#ifdef USE_USART3
-extern USART *pCOM3;
-#endif
-#ifdef USE_USART3_DMA
-extern USART *pCOM3;
-#endif
 
 #ifdef USE_I2C1
 extern I2C *pI2C1;
