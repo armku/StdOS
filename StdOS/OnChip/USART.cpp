@@ -337,7 +337,6 @@ bool USART::GetBytes(uint8_t data[], uint16_t num)
 	ret = mRxBuf.Gets(data, num);
 	if (ret && num)
 	{
-		LastRcvTime = millis();
 		RxCnt += num;
 	}
 	return ret;

@@ -26,10 +26,8 @@ class USART
 public:
 	USART(COM index, uint32_t baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint32_t remapvalue = 1);
 	void Initialize();
-	uint64_t LastRcvTime;
 	int RxCnt;
 	int TxCnt;
-	bool FlagIdleOK;//发生空闲中断 不建议使用，容易误判
 	//////////////////////////
 	///@bief 设置波特率
 	///@param baudRate 波特率大小
