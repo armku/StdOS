@@ -64,9 +64,6 @@ USART::USART(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_
 		mDMAGLFlag = DMA1_IT_GL7;         //DMA IT GL mask
 		pCOM2 = this;
 #endif
-#ifdef USE_USART2
-		pCOM2 = this;
-#endif
 	}
 	else if (index == COM3)
 	{
