@@ -196,66 +196,66 @@ extern "C"
 
 	}
 	//~~~~~~~~~~~~~~~~~~~~~ USART IQR  ~~~~~~~~~~~~~~~~~//
-	void USART2_IRQHandler(void)    //----USART2 IRQ----//
-	{
-#ifdef USE_GPS
-		if (pGPS2) {
-			pGPS2->GPS_IRQHandler();
-			return;
-		}
-#endif
-#ifdef USE_USART2
-		pCOM2->IRQ();
-#endif
-#ifdef USE_USART2_DMA
-		pCOM2->IRQ();
-#endif
-	}
-	void USART3_IRQHandler(void)    //----USART3 IRQ----//
-	{
-#ifdef USE_GPS
-		if (pGPS3) {
-			pGPS3->GPS_IRQHandler();
-			return;
-		}
-#endif
-#ifdef USE_USART3
-		pCOM3->IRQ();
-#endif
-#ifdef USE_USART3_DMA
-		pCOM3->IRQ();
-#endif
-	}
-	void UART4_IRQHandler(void)    //----UART4 IRQ----//
-	{
-#ifdef USE_GPS
-		if (pGPS4) {
-			pGPS4->GPS_IRQHandler();
-			return;
-	}
-#endif
-#ifdef USE_UART4
-		pCOM4->IRQ();
-#endif
-#ifdef USE_UART4_DMA
-		pCOM4->IRQ();
-#endif
-}
-	void UART5_IRQHandler(void)    //----UART5 IRQ----//
-	{
-#ifdef USE_GPS
-		if (pGPS5) {
-			pGPS5->GPS_IRQHandler();
-			return;
-	}
-#endif
-#ifdef USE_UART5
-		pCOM5->IRQ();
-#endif
-#ifdef USE_UART5_DMA
-		pCOM5->IRQ();
-#endif
-}
+//	void USART2_IRQHandler(void)    //----USART2 IRQ----//
+//	{
+//#ifdef USE_GPS
+//		if (pGPS2) {
+//			pGPS2->GPS_IRQHandler();
+//			return;
+//		}
+//#endif
+//#ifdef USE_USART2
+//		pCOM2->IRQ();
+//#endif
+//#ifdef USE_USART2_DMA
+//		pCOM2->IRQ();
+//#endif
+//	}
+//	void USART3_IRQHandler(void)    //----USART3 IRQ----//
+//	{
+//#ifdef USE_GPS
+//		if (pGPS3) {
+//			pGPS3->GPS_IRQHandler();
+//			return;
+//		}
+//#endif
+//#ifdef USE_USART3
+//		pCOM3->IRQ();
+//#endif
+//#ifdef USE_USART3_DMA
+//		pCOM3->IRQ();
+//#endif
+//	}
+//	void UART4_IRQHandler(void)    //----UART4 IRQ----//
+//	{
+//#ifdef USE_GPS
+//		if (pGPS4) {
+//			pGPS4->GPS_IRQHandler();
+//			return;
+//	}
+//#endif
+//#ifdef USE_UART4
+//		pCOM4->IRQ();
+//#endif
+//#ifdef USE_UART4_DMA
+//		pCOM4->IRQ();
+//#endif
+//}
+//	void UART5_IRQHandler(void)    //----UART5 IRQ----//
+//	{
+//#ifdef USE_GPS
+//		if (pGPS5) {
+//			pGPS5->GPS_IRQHandler();
+//			return;
+//	}
+//#endif
+//#ifdef USE_UART5
+//		pCOM5->IRQ();
+//#endif
+//#ifdef USE_UART5_DMA
+//		pCOM5->IRQ();
+//#endif
+//}
 	//~~~~~~~~~~~~~~~~~~~~~  IIC IQR  ~~~~~~~~~~~~~~~~~~//
 	void I2C1_EV_IRQHandler(void)   //----I2C1 EVENT----//
 	{

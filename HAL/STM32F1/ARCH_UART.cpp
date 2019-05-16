@@ -90,17 +90,45 @@ void USART1_IRQHandler(void)
 	}
 }
 
-#if 0
 void USART2_IRQHandler(void)
 {
 	uint8_t c;
 
-	if(USART_GetITStatus(USART2, USART_IT_RXNE) == SET)
+	if (USART_GetITStatus(USART2, USART_IT_RXNE) == SET)
 	{
 		c = USART_ReceiveData(USART2);
-		if(UART_2_rcv_IRQ)
+		if (UART_2_rcv_IRQ)
 		{
 			UART_2_rcv_IRQ(c);
+		}
+	}
+	if (USART_GetITStatus(USART2, USART_IT_IDLE) != RESET)//传输完一条完整的数据就会进入这个
+	{
+		char ch = 0;
+		ch = USART2->SR; //先读SR，然后读DR才能清除
+		ch = USART2->DR;
+		ch = ch;
+	}
+	if (USART_GetITStatus(USART2, USART_IT_TC) != RESET)
+	{
+		//
+		//if (RS485 && mTxBuf.Size() == 0)
+		//{
+		//	*RS485 = 0;//进入接收模式
+		//}
+	}
+	if (USART_GetITStatus(USART2, USART_IT_TXE) != RESET || USART_GetITStatus(USART2, USART_IT_TC) != RESET)   //TxE and TC
+	{
+		//if (mTxBuf.Size() > 0)                                //still left some bytes of data
+		//{
+		//	mTxBuf.Get(data);                                //get one byte data from buffer
+		//	USART2->DR = (data & (uint16_t)0x01FF);              //send one byte data
+		//}
+		//else                                               //all data send complete
+		{
+			USART_ITConfig(USART2, USART_IT_TXE, DISABLE);  //disable TxE
+			USART_ITConfig(USART2, USART_IT_TC, DISABLE);   //disable TC
+			//isBusySend = false;                              //set free state
 		}
 	}
 }
@@ -109,12 +137,41 @@ void USART3_IRQHandler(void)
 {
 	uint8_t c;
 
-	if(USART_GetITStatus(USART3, USART_IT_RXNE) == SET)
+	if (USART_GetITStatus(USART3, USART_IT_RXNE) == SET)
 	{
 		c = USART_ReceiveData(USART3);
-		if(UART_3_rcv_IRQ)
+		if (UART_3_rcv_IRQ)
 		{
 			UART_3_rcv_IRQ(c);
+		}
+	}
+	if (USART_GetITStatus(USART3, USART_IT_IDLE) != RESET)//传输完一条完整的数据就会进入这个
+	{
+		char ch = 0;
+		ch = USART3->SR; //先读SR，然后读DR才能清除
+		ch = USART3->DR;
+		ch = ch;
+	}
+	if (USART_GetITStatus(USART3, USART_IT_TC) != RESET)
+	{
+		//
+		//if (RS485 && mTxBuf.Size() == 0)
+		//{
+		//	*RS485 = 0;//进入接收模式
+		//}
+	}
+	if (USART_GetITStatus(USART3, USART_IT_TXE) != RESET || USART_GetITStatus(USART3, USART_IT_TC) != RESET)   //TxE and TC
+	{
+		//if (mTxBuf.Size() > 0)                                //still left some bytes of data
+		//{
+		//	mTxBuf.Get(data);                                //get one byte data from buffer
+		//	USART3->DR = (data & (uint16_t)0x01FF);              //send one byte data
+		//}
+		//else                                               //all data send complete
+		{
+			USART_ITConfig(USART3, USART_IT_TXE, DISABLE);  //disable TxE
+			USART_ITConfig(USART3, USART_IT_TC, DISABLE);   //disable TC
+			//isBusySend = false;                              //set free state
 		}
 	}
 }
@@ -123,13 +180,41 @@ void UART4_IRQHandler(void)
 {
 	uint8_t c;
 
-	if(USART_GetITStatus(UART4, USART_IT_RXNE) == SET)
+	if (USART_GetITStatus(UART4, USART_IT_RXNE) == SET)
 	{
-		USART_ClearITPendingBit(UART4, USART_IT_RXNE);
 		c = USART_ReceiveData(UART4);
-		if(UART_4_rcv_IRQ)
+		if (UART_4_rcv_IRQ)
 		{
 			UART_4_rcv_IRQ(c);
+		}
+	}
+	if (USART_GetITStatus(UART4, USART_IT_IDLE) != RESET)//传输完一条完整的数据就会进入这个
+	{
+		char ch = 0;
+		ch = UART4->SR; //先读SR，然后读DR才能清除
+		ch = UART4->DR;
+		ch = ch;
+	}
+	if (USART_GetITStatus(UART4, USART_IT_TC) != RESET)
+	{
+		//
+		//if (RS485 && mTxBuf.Size() == 0)
+		//{
+		//	*RS485 = 0;//进入接收模式
+		//}
+	}
+	if (USART_GetITStatus(UART4, USART_IT_TXE) != RESET || USART_GetITStatus(UART4, USART_IT_TC) != RESET)   //TxE and TC
+	{
+		//if (mTxBuf.Size() > 0)                                //still left some bytes of data
+		//{
+		//	mTxBuf.Get(data);                                //get one byte data from buffer
+		//	USART4->DR = (data & (uint16_t)0x01FF);              //send one byte data
+		//}
+		//else                                               //all data send complete
+		{
+			USART_ITConfig(UART4, USART_IT_TXE, DISABLE);  //disable TxE
+			USART_ITConfig(UART4, USART_IT_TC, DISABLE);   //disable TC
+			//isBusySend = false;                              //set free state
 		}
 	}
 }
@@ -138,17 +223,45 @@ void UART5_IRQHandler(void)
 {
 	uint8_t c;
 
-	if(USART_GetITStatus(UART5, USART_IT_RXNE) == SET)
+	if (USART_GetITStatus(UART5, USART_IT_RXNE) == SET)
 	{
-		USART_ClearITPendingBit(UART5, USART_IT_RXNE);
 		c = USART_ReceiveData(UART5);
-		if(UART_5_rcv_IRQ)
+		if (UART_5_rcv_IRQ)
 		{
 			UART_5_rcv_IRQ(c);
 		}
 	}
+	if (USART_GetITStatus(UART5, USART_IT_IDLE) != RESET)//传输完一条完整的数据就会进入这个
+	{
+		char ch = 0;
+		ch = UART5->SR; //先读SR，然后读DR才能清除
+		ch = UART5->DR;
+		ch = ch;
+	}
+	if (USART_GetITStatus(UART5, USART_IT_TC) != RESET)
+	{
+		//
+		//if (RS485 && mTxBuf.Size() == 0)
+		//{
+		//	*RS485 = 0;//进入接收模式
+		//}
+	}
+	if (USART_GetITStatus(UART5, USART_IT_TXE) != RESET || USART_GetITStatus(UART5, USART_IT_TC) != RESET)   //TxE and TC
+	{
+		//if (mTxBuf.Size() > 0)                                //still left some bytes of data
+		//{
+		//	mTxBuf.Get(data);                                //get one byte data from buffer
+		//	USART5->DR = (data & (uint16_t)0x01FF);              //send one byte data
+		//}
+		//else                                               //all data send complete
+		{
+			USART_ITConfig(UART5, USART_IT_TXE, DISABLE);  //disable TxE
+			USART_ITConfig(UART5, USART_IT_TC, DISABLE);   //disable TC
+			//isBusySend = false;                              //set free state
+		}
+	}
 }
-#endif
+
 ///////////////////////////////////////////////////////////
 
 void UART1_Dis_IRQ(void)
