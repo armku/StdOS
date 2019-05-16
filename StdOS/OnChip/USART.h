@@ -92,12 +92,6 @@ public:
 	void SetBaudRate(uint32_t baudRate);
 
 	virtual uint16_t RxSize();
-	int SendTimeMs(int buflen)
-	{
-		if (this->mBaudrate < 100)
-			return 1;
-		return buflen * 8 * 1000 / this->mBaudrate + 1;
-	}
 	Port* RS485;
 #ifdef USE_USART_DMA
 private:
