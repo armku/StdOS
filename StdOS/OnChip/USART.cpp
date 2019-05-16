@@ -360,12 +360,6 @@ uint16_t USART::RxSize()
 	return mRxBuf.Size();
 }
 
-void USART::ClearRxBuf()
-{
-	mRxBuf.Clear();
-	FlagIdleOK = false;
-}
-
 USART& USART::operator<<(int val)
 {
 	uint8_t sign = 0, len = 0, data[10];

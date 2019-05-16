@@ -21,7 +21,7 @@ bool Sharp_PM_2_5::Update()
 		{
 			temp = (float)(data[0] * 256 + data[1]) / 1024 * 5;
 			UD = temp * COEFFICIENT_A;
-			mCom.ClearRxBuf();
+			//mCom.ClearRxBuf();
 			return true;
 		}
 		else

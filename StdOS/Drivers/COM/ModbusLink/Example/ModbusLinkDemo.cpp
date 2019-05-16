@@ -24,7 +24,7 @@ void ModbusSlaveLinkRoutin(void* param)
 	{
 		debug_printf("Clear RcvBuffer rxFrame:%d  com.RxSize:%d\n", modbusSlave.rxFrame.Length,modbusSlave.com.RxSize());
 		modbusSlave.rxFrame.Length = 0;
-		modbusSlave.com.ClearRxBuf();
+		//modbusSlave.com.ClearRxBuf();
 	}
 	else {}
 }

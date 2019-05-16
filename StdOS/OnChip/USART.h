@@ -52,9 +52,6 @@ public:
 	virtual bool GetByte(uint8_t &data);
 
 	virtual uint16_t RxSize();
-
-	virtual void ClearRxBuf();
-
 	USART& operator<<(int val);
 	USART& operator<<(double val);
 	USART& operator<<(const char* pStr);
