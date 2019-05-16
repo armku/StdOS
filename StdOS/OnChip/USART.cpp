@@ -321,17 +321,6 @@ void USART::SetBaudRate(uint32_t baudRate)
 	mUSARTx->BRR = (uint16_t)tmpreg;
 }
 
-bool USART::SendByte(uint8_t data)
-{
-	if (RS485)
-		*RS485 = 1;//·¢ËÍÄ£Ê½
-
-	if (mTxBuf.Put(data))
-		return true;
-	TxCnt++;
-	return false;
-}
-
 uint16_t USART::RxSize()
 {
 	return mRxBuf.Size();
