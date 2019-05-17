@@ -13,7 +13,7 @@ public:
 	void SetPinRST(Pin p);
 
 	void Init();
-
+	int step;//¥¶¿Ì≤Ω÷Ë
 private:
 	Port CH_PD;//
 	Port RST;//

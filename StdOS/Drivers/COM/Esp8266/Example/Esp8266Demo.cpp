@@ -9,6 +9,7 @@
 #ifdef _ESP8266EST_CPP
 
 USARTHAL usart222(COM3,115200);
+Esp8266 esp;
 
 #include "../HAL/STM32F1/ARCH_UART.h"
 uint8_t   loop_bufcom3[64] = { 0 };                             //定义环形缓冲区
@@ -35,16 +36,36 @@ void checkComRoutin(void* param)
 	if (++FlagIdleCnt > 10)
 	{
 		FlagInFrame = 1;
+		switch (esp.step)
+		{
+		case 0:
+			break;
+		default:
+			break;
+		}
+		FlagInFrame = 0;
+		FlagIdleCnt = 0;
 	}
 }
 
 void Esp8266Routin(void* param)
 {
-	
+	switch (esp.step)
+	{
+	case 0:
+		break;
+	default:
+		break;
+	}
 }
 
 void Esp8266TestInit()
 {
+	esp.SetPinCH_PD(PG13);
+	esp.SetPinRST(PG14);
+	esp.Init();
+
+
 	FlagInFrame = false;
 	Sys.AddTask(checkComRoutin, 0, 0, 10, "EspCOmCHK");
 	Sys.AddTask(Esp8266Routin, 0, 0, 100, "EspRoutin");
