@@ -55,6 +55,18 @@ void checkComRoutin(void* param)
 	}
 }
 
+void SendData(char * bufin,int len)
+{
+	char buf[5];
+	buf[0] = bufin[0];
+	buf[1] = bufin[1];
+	buf[2] = 0x0d;
+	buf[3] = 0x0a;
+	buf[4] = 0;
+
+	UART3_send_data((uint8_t*)buf, 5);
+}
+
 void Esp8266Routin(void* param)
 {
 	char cStr[100] = { 0 };
@@ -68,7 +80,7 @@ void Esp8266Routin(void* param)
 		break;
 	case 1:
 		esp.step = 0;
-		UART3_send_data((uint8_t*)"AT",2);
+		SendData((char*)"AT",2);
 		break;
 	default:
 		break;
