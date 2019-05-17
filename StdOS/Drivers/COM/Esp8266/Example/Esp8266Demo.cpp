@@ -36,6 +36,9 @@ void checkComRoutin(void* param)
 		RxCntOld = RxCnt;
 		return;
 	}
+	if (RxCnt == 0)
+		return;
+
 	if (++FlagIdleCnt > 10)
 	{
 		FlagInFrame = 1;
