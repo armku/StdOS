@@ -22,6 +22,7 @@
 class USART
 {
 public:
+	USART();
 	virtual bool SendBytes(uint8_t txData[], uint16_t size);
 	virtual uint16_t RxSize();
 	USART& operator<<(int val);
@@ -80,7 +81,6 @@ private:
 	uint8_t             mPrePri;   //preemption priority
 	uint8_t             mSubPri;   //sub priority
 	uint8_t             mPriGroup; //priority group
-	uint8_t mPrecision;   //when show precision after dot "."  when use "<<" to show float value
 };
 /**
 ===========================================================================

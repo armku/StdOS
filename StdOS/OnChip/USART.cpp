@@ -4,6 +4,11 @@
 #include "Configuration.h"
 #include "Sys.h"
 
+USART::USART()
+{
+	mPrecision = 3;
+}
+
 bool USART::SendBytes(uint8_t txData[], uint16_t size)
 {
 	if (RS485)
@@ -118,7 +123,6 @@ USARTHAL::USARTHAL(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, 
 	mSubPri = subPri;   //sub priority
 	mRemap = remap;    //gpio remap flag
 	mRemapvalue = remapvalue;
-	mPrecision = 3;
 
 	if (index == COM1)
 	{
