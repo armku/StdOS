@@ -40,10 +40,6 @@ private:
 	bool isBusySend;
 
 	uint32_t            mBaudrate; //baudrate of usart
-	uint32_t			mRemapvalue;// remap value	
-	Port				mPortTx;	//tx
-	Port				mPortRx;	//rx
-	uint8_t             mIRQn;     //USART IRQn
 	COM index;				//com index
 	FIFOBuffer<uint8_t, USART_TX_BUFFER_SIZE>  mTxBuf;  //USART Tx Buffer
 	FIFOBuffer<uint8_t, USART_RX_BUFFER_SIZE>  mRxBuf;  //USART Rx Buffer
