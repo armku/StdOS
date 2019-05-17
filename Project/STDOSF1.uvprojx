@@ -813,6 +813,11 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\Esp8266\Esp8266.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1793,6 +1798,11 @@
               <FileName>SHARP_PM2_5.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\Esp8266\Esp8266.cpp</FilePath>
             </File>
           </Files>
         </Group>
