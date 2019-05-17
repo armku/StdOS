@@ -60,8 +60,8 @@ void SendData(char * bufin,int len)
 	char buf[5];
 	buf[0] = bufin[0];
 	buf[1] = bufin[1];
-	buf[2] = 0x0d;
-	buf[3] = 0x0a;
+	buf[2] = 0x0a;
+	buf[3] = 0x0d;
 	buf[4] = 0;
 
 	UART3_send_data((uint8_t*)buf, 5);
