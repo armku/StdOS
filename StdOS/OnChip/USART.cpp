@@ -42,7 +42,6 @@ bool USART::SendBytes(uint8_t txData[], uint16_t size)
 	mTxBuf.Get(data);                              //get one byte data from tx buffer
 	USART_SendData(mUSARTx, data);                  //send one byte data
 #endif	
-	TxCnt += size;
 	return true;
 }
 

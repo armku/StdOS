@@ -22,8 +22,6 @@
 class USART
 {
 public:
-	int RxCnt;
-	int TxCnt;
 	virtual bool SendBytes(uint8_t txData[], uint16_t size);
 	virtual uint16_t RxSize();
 	USART& operator<<(int val);
