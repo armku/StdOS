@@ -25,12 +25,12 @@ extern "C" {
 #endif
 
 #include "../HAL/STM32F1/ARCH_UART.h"
-uint8_t   loop_buf[64] = { 0 };                             //定义环形缓冲区
-RingBuffer ringRcv(loop_buf,ArrayLength(loop_buf));
+uint8_t   loop_bufcom1[64] = { 0 };                             //定义环形缓冲区
+RingBuffer ringRcvcom1(loop_bufcom1,ArrayLength(loop_bufcom1));
 //向环形缓冲区【写】一字节数据
 static void write_loop_buf(uint8_t dat)
 {
-	ringRcv.Put(dat);
+	ringRcvcom1.Put(dat);
 }
 
 #ifdef __cplusplus
@@ -43,12 +43,12 @@ void Com1ReadTest(void* param)
 	static int lenold = 0;//历史接收缓冲区长度
 	int readlen;//读取的缓冲区长度
 	char buf[100];
-	if (ringRcv.length != 0)
+	if (ringRcvcom1.length != 0)
 	{
-		if (lenold != ringRcv.length)
+		if (lenold != ringRcvcom1.length)
 		{
 			//数据一直更新
-			lenold = ringRcv.length;
+			lenold = ringRcvcom1.length;
 			tmcnt=0;
 			return;
 		}
@@ -56,7 +56,7 @@ void Com1ReadTest(void* param)
 		{
 			tmcnt = 0;
 			//50ms没有新数据认为完整一帧数据到来
-			readlen = ringRcv.Get(buf, ArrayLength(buf));
+			readlen = ringRcvcom1.Get(buf, ArrayLength(buf));
 			UART1_send_data((uint8_t*)buf, readlen);
 		}		
 	}
