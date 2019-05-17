@@ -17,10 +17,8 @@ bool USART::SendBytes(uint8_t txData[], uint16_t size)
 	{
 		return false;
 	}
-	mTxBuf.Puts(txData, size);                        //add data to Tx buffer, if overflow, return false
-	if (isBusySend)                return true;       //USARTx is busy send data, return
-	if (mTxBuf.Size() <= 0)        return true;       //have no data to send, return
-	isBusySend = true;                               //set busy state, going to send data
+	mTxBuf.Puts(txData, size);                        //add data to Tx buffer, if overflow, return false	
+	if (mTxBuf.Size() <= 0)        return true;       //have no data to send, return	
 #ifdef USE_USART_DMA
 	if (mTxBuf.Size() <= USART_DMA_TX_BUFFER_SIZE)  //rest data bytes less than DMA buffer size
 	{
