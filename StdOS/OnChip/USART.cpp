@@ -10,10 +10,7 @@ USART::USART()
 }
 
 bool USART::SendBytes(uint8_t txData[], uint16_t size)
-{
-	if (RS485)
-		*RS485 = 1;//·¢ËÍÄ£Ê½
-
+{	
 	USART_TypeDef* mUSARTx;   //USARTx
 		
 	if (mTxBuf.ResSize() < size)      //compare the unused bytes and sending bytes

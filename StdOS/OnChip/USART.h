@@ -27,7 +27,6 @@ public:
 	USART& operator<<(int val);
 	USART& operator<<(double val);
 	USART& operator<<(const char* pStr);
-	Port* RS485;
 private:
 	bool isBusySend;
 
