@@ -27,6 +27,9 @@ void checkComRoutin(void* param)
 	static int RxCntOld = 0;
 	static int FlagIdleCnt = 0;//空闲时间
 
+	int readlen;//读取的缓冲区长度
+	char buf[100];
+
 	RxCnt = ringRcvcom3.length;
 	if (RxCnt != RxCntOld)
 	{
@@ -36,6 +39,10 @@ void checkComRoutin(void* param)
 	if (++FlagIdleCnt > 10)
 	{
 		FlagInFrame = 1;
+
+		readlen = ringRcvcom3.Get(buf, ArrayLength(buf));
+		UART1_send_data((uint8_t*)buf, readlen);
+
 		switch (esp.step)
 		{
 		case 0:
