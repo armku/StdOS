@@ -10,23 +10,7 @@ bool USART::SendBytes(uint8_t txData[], uint16_t size)
 		*RS485 = 1;//·¢ËÍÄ£Ê½
 
 	USART_TypeDef* mUSARTx;   //USARTx
-
-	if (this->index == COM1)
-	{
-		mUSARTx = USART1;
-	}
-	else if (this->index == COM2)
-	{
-		mUSARTx = USART2;
-	}
-	else if (this->index == COM3)
-	{
-		mUSARTx = USART3;
-	}
-	else
-	{
-	}
-
+		
 	if (mTxBuf.ResSize() < size)      //compare the unused bytes and sending bytes
 	{
 		return false;
