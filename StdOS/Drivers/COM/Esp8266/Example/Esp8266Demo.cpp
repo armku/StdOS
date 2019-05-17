@@ -9,6 +9,11 @@
 
 USARTHAL usart222(COM3,115200);
 
+void checkComRoutin(void* param)
+{
+
+}
+
 void Esp8266Routin(void* param)
 {
 
@@ -16,7 +21,7 @@ void Esp8266Routin(void* param)
 
 void Esp8266TestInit()
 {
-	
-	Sys.AddTask(Esp8266Routin, 0, 0, 1, "Esp8266Routin");
+	Sys.AddTask(checkComRoutin, 0, 0, 10, "EspCOmCHK");
+	Sys.AddTask(Esp8266Routin, 0, 0, 100, "EspRoutin");
 }
 #endif
