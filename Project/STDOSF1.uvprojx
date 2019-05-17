@@ -418,6 +418,11 @@
               <FileType>8</FileType>
               <FilePath>..\User\Test.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Esp8266Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1403,6 +1408,11 @@
               <FileName>Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Esp8266Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
             </File>
           </Files>
         </Group>

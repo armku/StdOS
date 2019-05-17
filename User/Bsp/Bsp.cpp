@@ -73,7 +73,7 @@ void com1test()
 
 //´®¿Ú²âÊÔ½áÊø
 
-void EspDemoLinkTestInit();
+void Esp8266TestInit();
 void ModbusSlaveLinkTestInit();
 void w25qxxxtest();
 void BspInit()
@@ -87,7 +87,7 @@ void BspInit()
 	
 	com1test();
 
-	/*EspDemoLinkTestInit();*/
+	Esp8266TestInit();
 	/*ModbusSlaveLinkTestInit();*/
 	
 	//w25qxxxtest();
