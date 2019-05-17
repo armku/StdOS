@@ -8,7 +8,7 @@
 #define _ESP8266EST_CPP
 #ifdef _ESP8266EST_CPP
 
-USARTHAL usart222(COM3,115200);
+USARTHAL usart333(COM3,115200);
 Esp8266 esp;
 
 #include "../HAL/STM32F1/ARCH_UART.h"
@@ -61,6 +61,7 @@ void Esp8266Routin(void* param)
 		break;
 	case 1:
 		esp.step = 0;
+		UART3_send_data((uint8_t*)"AT",2);
 		break;
 	default:
 		break;
