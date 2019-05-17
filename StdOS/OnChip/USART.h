@@ -6,11 +6,6 @@
 #include "Configuration.h"
 #include "Port.h"
 
-/**
-*@addtogroup USART_CONFIGURATION
-*@{
-*/
-
 /******************************************************************************************************/
 /****configuration，使用前请自行配置****/
 #define USART_TX_BUFFER_SIZE     200              //USART BUFFER FIFO SIZE
