@@ -88,10 +88,6 @@ void BspInit()
 	com1test();
 
 	Esp8266TestInit();
-	/*ModbusSlaveLinkTestInit();*/
-	
-	//w25qxxxtest();
-	//ad71248Test();
 }
 
 /*
