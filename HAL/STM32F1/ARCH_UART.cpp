@@ -1,6 +1,12 @@
 #include "ARCH_UART.h"
 #include "stm32f10x.h"
 
+Port* COM1RS485 = NULL;
+Port* COM2RS485 = NULL;
+Port* COM3RS485 = NULL;
+Port* COM4RS485 = NULL;
+Port* COM5RS485 = NULL;
+
 #ifdef __cplusplus
 extern "C" {
 #endif

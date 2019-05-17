@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include "type.h"
+#include "Port.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -67,6 +68,12 @@ typedef struct
 	extern pFun_UART UART_3_rcv_IRQ  ;
 	extern pFun_UART UART_4_rcv_IRQ  ;
 	extern pFun_UART UART_5_rcv_IRQ  ;
+
+	extern Port* COM1RS485;
+	extern Port* COM2RS485;
+	extern Port* COM3RS485;
+	extern Port* COM4RS485;
+	extern Port* COM5RS485;
 
 #ifdef __cplusplus
 }
