@@ -14,7 +14,7 @@ public:
 
 	void Init();
 	int step;//¥¶¿Ì≤Ω÷Ë
-private:
+//private:
 	Port CH_PD;//
 	Port RST;//
 };

@@ -50,9 +50,17 @@ void checkComRoutin(void* param)
 
 void Esp8266Routin(void* param)
 {
+	char cStr[100] = { 0 };
 	switch (esp.step)
 	{
 	case 0:
+		//debug_printf("\r\n 正在配置 ESP8266 ......\r\n");
+		esp.CH_PD = 1;
+		esp.RST = 1;
+		esp.step++;
+		break;
+	case 1:
+		esp.step = 0;
 		break;
 	default:
 		break;
@@ -65,9 +73,10 @@ void Esp8266TestInit()
 	esp.SetPinRST(PG14);
 	esp.Init();
 
+	debug_printf("\r\n WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息)
 
 	FlagInFrame = false;
 	Sys.AddTask(checkComRoutin, 0, 0, 10, "EspCOmCHK");
-	Sys.AddTask(Esp8266Routin, 0, 0, 100, "EspRoutin");
+	Sys.AddTask(Esp8266Routin, 0, 0, 500, "EspRoutin");
 }
 #endif
