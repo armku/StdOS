@@ -97,6 +97,7 @@ void Esp8266TestInit()
 	esp.SetPinRST(PG14);
 	esp.Init();
 	UART_3_rcv_IRQ = write_loop_buf;
+	esp.send_byte = UART_3_send_byte;         //串口发送一字节数据
 
 	debug_printf("\r\n WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息)
 

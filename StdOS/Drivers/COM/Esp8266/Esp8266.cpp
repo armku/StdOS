@@ -8,6 +8,10 @@ Esp8266::Esp8266()
 Esp8266::~Esp8266()
 {
 }
+void Esp8266::Cmd(char* cmd, int len)
+{
+
+}
 
 void Esp8266::SetPinCH_PD(Pin p)
 {
