@@ -42,6 +42,7 @@ void checkComRoutin(void* param)
 
 		readlen = ringRcvcom3.Get(buf, ArrayLength(buf));
 		UART1_send_data((uint8_t*)buf, readlen);
+		debug_printf("RxCnt:%d\r\n",readlen);
 
 		switch (esp.step)
 		{
