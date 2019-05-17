@@ -30,7 +30,6 @@ public:
 private:
 	bool isBusySend;
 
-	uint32_t            mBaudrate; //baudrate of usart
 	FIFOBuffer<uint8_t, USART_TX_BUFFER_SIZE>  mTxBuf;  //USART Tx Buffer
 	FIFOBuffer<uint8_t, USART_RX_BUFFER_SIZE>  mRxBuf;  //USART Rx Buffer
 	uint8_t mPrecision;   //when show precision after dot "."  when use "<<" to show float value
