@@ -9,7 +9,7 @@ bool Sharp_PM_2_5::Update()
 	u8 data[5];
 	float temp;
 	u8 ch;
-	int num = mCom.RxSize();
+	int num = 0;// mCom.RxSize();
 	if (num > 7)
 	{
 		/*mCom.GetBytes(&ch, 1);*/

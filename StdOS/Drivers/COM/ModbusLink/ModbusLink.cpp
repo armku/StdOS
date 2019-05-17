@@ -7,7 +7,7 @@ ModbusSlaveLink::ModbusSlaveLink(USART &uart) :com(uart)
 #include "Buffer.h"
 bool ModbusSlaveLink::CheckFrame()
 {
-	int rxlen = com.RxSize();
+	int rxlen = 0;// com.RxSize();
 
 	/*if (com.GetBytes(&rxFrame.data[rxFrame.Length], rxlen))
 	{

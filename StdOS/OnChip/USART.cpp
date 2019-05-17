@@ -50,11 +50,6 @@ bool USART::SendBytes(uint8_t txData[], uint16_t size)
 	return true;
 }
 
-uint16_t USART::RxSize()
-{
-	return mRxBuf.Size();
-}
-
 USART& USART::operator<<(int val)
 {
 	uint8_t sign = 0, len = 0, data[10];
