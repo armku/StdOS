@@ -27,12 +27,6 @@ public:
 	USART& operator<<(int val);
 	USART& operator<<(double val);
 	USART& operator<<(const char* pStr);
-	int SendTimeMs(int buflen)
-	{
-		if (this->mBaudrate < 100)
-			return 1;
-		return buflen * 8 * 1000 / this->mBaudrate + 1;
-	}
 	Port* RS485;
 private:
 	bool isBusySend;
@@ -54,6 +48,12 @@ public:
 	///@param baudRate 波特率大小
 	//////////////////////////
 	void SetBaudRate(uint32_t baudRate);
+	int SendTimeMs(int buflen)
+	{
+		if (this->mBaudrate < 100)
+			return 1;
+		return buflen * 8 * 1000 / this->mBaudrate + 1;
+	}
 	Port* RS485;
 #ifdef USE_USART_DMA
 private:
