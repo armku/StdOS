@@ -86,21 +86,27 @@ void Esp8266Routin(void* param)
 		break;
 	case 1:
 		esp.AT();
+		debug_printf("\r\nsend step:%d\r\n", esp.step);
 		break;
 	case 2:
 		esp.ESP8266_Net_Mode_Choose(STA);
+		debug_printf("\r\nsend step:%d\r\n", esp.step);
 		break;
 	case 3:
 		esp.ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd);
+		debug_printf("\r\nsend step:%d\r\n", esp.step);
 		break;
 	case 4:
 		esp.ESP8266_Enable_MultipleId(DISABLE);
+		debug_printf("\r\nsend step:%d\r\n", esp.step);
 		break;
 	case 5:
 		esp.ESP8266_Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0);
+		debug_printf("\r\nsend step:%d\r\n", esp.step);
 		break;
 	case 6:
 		esp.ESP8266_UnvarnishSend();
+		debug_printf("\r\nsend step:%d\r\n", esp.step);
 		//配置完成
 		break;
 	case 7:
