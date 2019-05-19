@@ -15,14 +15,14 @@ void Esp8266::Cmd(char* cmd, int len)
 }
 bool Esp8266::ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waittime)
 {
-
+	this->Cmd(cmd);
 }
 void Esp8266::Cmd(char* cmd)
 {
 	int len = strlen(cmd);
 	if (len <= 0)
 		return;
-
+		
 	char buf[20];
 	for (int i = 0; i < len; i++)
 		buf[i] = cmd[i];
@@ -32,14 +32,7 @@ void Esp8266::Cmd(char* cmd)
 }
 void Esp8266::AT()
 {
-	char buf[5];
-	buf[0] = 'A';// bufin[0];
-	buf[1] = 'T';// bufin[1];
-	buf[2] = 0x0d;
-	buf[3] = 0x0a;
-	buf[4] = 0;
-
-	this->send_buf((uint8_t*)buf, 4);
+	this->ESP8266_Cmd("AT","AT",NULL,500);
 }
 
 void Esp8266::SetPinCH_PD(Pin p)
