@@ -122,6 +122,14 @@ bool Esp8266::ESP8266_UnvarnishSend(void)
 	return
 		ESP8266_Cmd("AT+CIPSEND", "OK", ">", 500);
 }
+void  Esp8266::ESP8266_ExitUnvarnishSend(void)
+{
+	/*Delay_ms(1000);
+
+	macESP8266_Usart("+++");
+
+	Delay_ms(500);*/
+}
 
 
 bool Esp8266::IsReply1(char* buf)
