@@ -12,6 +12,10 @@ void Esp8266::Cmd(char* cmd, int len)
 {
 
 }
+bool Esp8266::ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waittime)
+{
+
+}
 void Esp8266::AT()
 {
 	char buf[5];

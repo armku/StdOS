@@ -17,6 +17,7 @@ public:
 
 	void Init();
 	void AT();
+	bool ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waittime);
 	int step;//¥¶¿Ì≤Ω÷Ë
 //private:
 	Port CH_PD;//
