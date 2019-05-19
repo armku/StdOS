@@ -71,8 +71,9 @@ void Esp8266Routin(void* param)
 		esp.step++;
 		break;
 	case 1:
-		//esp.step = 0;
 		esp.AT();
+		break;
+	case 2:
 		break;
 	default:
 		break;
