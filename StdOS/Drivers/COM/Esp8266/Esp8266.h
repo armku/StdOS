@@ -16,6 +16,7 @@ public:
 	void Cmd(char* cmd, int len);
 
 	void Init();
+	void AT();
 	int step;//¥¶¿Ì≤Ω÷Ë
 //private:
 	Port CH_PD;//

@@ -12,6 +12,17 @@ void Esp8266::Cmd(char* cmd, int len)
 {
 
 }
+void Esp8266::AT()
+{
+	char buf[5];
+	buf[0] = 'A';// bufin[0];
+	buf[1] = 'T';// bufin[1];
+	buf[2] = 0x0d;
+	buf[3] = 0x0a;
+	buf[4] = 0;
+
+	this->send_buf((uint8_t*)buf, 4);
+}
 
 void Esp8266::SetPinCH_PD(Pin p)
 {
