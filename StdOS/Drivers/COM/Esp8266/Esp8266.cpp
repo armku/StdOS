@@ -41,6 +41,8 @@ void Esp8266::Cmd(char* cmd)
 bool Esp8266::DealBufIn(char* buf, int len)
 {
 	debug_printf("Rcv:%s",buf);
+	debug_printf("reply1:%d \r\n",this->IsReply1(buf));
+	debug_printf("reply2:%d \r\n", this->IsReply2(buf));
 	if (strstr(buf, this->Reply1))
 		return true;
 	if (strstr(buf, this->Reply2))
@@ -55,7 +57,7 @@ void Esp8266::AT()
 bool Esp8266::IsReply1(char* buf)
 {
 	if (this->Reply1 == NULL)
-		return true;
+		return false;
 	if(strstr(buf,this->Reply1))
 		return true;
 	else
@@ -64,7 +66,7 @@ bool Esp8266::IsReply1(char* buf)
 bool Esp8266::IsReply2(char* buf)
 {
 	if (this->Reply2 == NULL)
-		return true;
+		return false;
 		if (strstr(buf, this->Reply2))
 			return true;
 		else
