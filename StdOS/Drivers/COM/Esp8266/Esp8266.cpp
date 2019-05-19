@@ -80,6 +80,41 @@ bool Esp8266::ESP8266_JoinAP(char* pSSID, char* pPassWord)
 
 	return ESP8266_Cmd(cCmd, "OK", NULL, 5000);
 }
+bool Esp8266::ESP8266_Enable_MultipleId(FunctionalState enumEnUnvarnishTx)
+{
+	char cStr[20];
+
+	sprintf(cStr, "AT+CIPMUX=%d", (enumEnUnvarnishTx ? 1 : 0));
+
+	return ESP8266_Cmd(cStr, "OK", 0, 500);
+}
+bool Esp8266::ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char* ip, char* ComNum, ENUM_ID_NO_TypeDef id)
+{
+	char cStr[100] = { 0 }, cCmd[120];
+
+	switch (enumE)
+	{
+	case enumTCP:
+		sprintf(cStr, "\"%s\",\"%s\",%s", "TCP", ip, ComNum);
+		break;
+
+	case enumUDP:
+		sprintf(cStr, "\"%s\",\"%s\",%s", "UDP", ip, ComNum);
+		break;
+
+	default:
+		break;
+	}
+
+	if (id < 5)
+		sprintf(cCmd, "AT+CIPSTART=%d,%s", id, cStr);
+
+	else
+		sprintf(cCmd, "AT+CIPSTART=%s", cStr);
+
+	return ESP8266_Cmd(cCmd, "OK", "ALREAY CONNECT", 4000);
+}
+
 bool Esp8266::IsReply1(char* buf)
 {
 	if (this->Reply1 == NULL)

@@ -36,6 +36,8 @@ typedef enum {
 	WPA_WPA2_PSK = 4,
 } ENUM_AP_PsdMode_TypeDef;
 
+typedef enum { DISABLE = 0, ENABLE = !DISABLE } FunctionalState;
+
 class Esp8266
 {
 public:
@@ -51,6 +53,9 @@ public:
 	void AT();
 	bool ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode);
 	bool ESP8266_JoinAP(char* pSSID, char* pPassWord);
+	bool ESP8266_Enable_MultipleId(FunctionalState enumEnUnvarnishTx);
+	bool ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char* ip, char* ComNum, ENUM_ID_NO_TypeDef id);
+
 	bool ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waittime);
 	void Cmd(char* cmd);
 	bool DealBufIn(char* buf, int len);//处理接收到的数据

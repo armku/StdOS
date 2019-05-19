@@ -93,6 +93,12 @@ void Esp8266Routin(void* param)
 	case 3:
 		esp.ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd);
 		break;
+	case 4:
+		esp.ESP8266_Enable_MultipleId(DISABLE);
+		break;
+	case 5:
+		esp.ESP8266_Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0);
+		break;
 	default:
 		break;
 	}
