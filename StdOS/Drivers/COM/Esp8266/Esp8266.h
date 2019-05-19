@@ -4,6 +4,38 @@
 #include "Port.h"
 #include "../HAL/STM32F1/ARCH_UART.h"
 
+/******************************* ESP8266 数据类型定义 ***************************/
+typedef enum {
+	STA,
+	AP,
+	STA_AP
+} ENUM_Net_ModeTypeDef;
+
+
+typedef enum {
+	enumTCP,
+	enumUDP,
+} ENUM_NetPro_TypeDef;
+
+
+typedef enum {
+	Multiple_ID_0 = 0,
+	Multiple_ID_1 = 1,
+	Multiple_ID_2 = 2,
+	Multiple_ID_3 = 3,
+	Multiple_ID_4 = 4,
+	Single_ID_0 = 5,
+} ENUM_ID_NO_TypeDef;
+
+
+typedef enum {
+	OPEN = 0,
+	WEP = 1,
+	WPA_PSK = 2,
+	WPA2_PSK = 3,
+	WPA_WPA2_PSK = 4,
+} ENUM_AP_PsdMode_TypeDef;
+
 class Esp8266
 {
 public:
@@ -17,6 +49,7 @@ public:
 
 	void Init();
 	void AT();
+	bool ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode);
 	bool ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waittime);
 	void Cmd(char* cmd);
 	bool DealBufIn(char* buf, int len);//处理接收到的数据

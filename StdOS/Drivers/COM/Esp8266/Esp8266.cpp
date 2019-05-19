@@ -54,6 +54,23 @@ void Esp8266::AT()
 {
 	this->ESP8266_Cmd("AT","AT",NULL,500);
 }
+bool Esp8266::ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode)
+{
+	switch (enumMode)
+	{
+	case STA:
+		return ESP8266_Cmd("AT+CWMODE=1", "OK", "no change", 2500);
+
+	case AP:
+		return ESP8266_Cmd("AT+CWMODE=2", "OK", "no change", 2500);
+
+	case STA_AP:
+		return ESP8266_Cmd("AT+CWMODE=3", "OK", "no change", 2500);
+
+	default:
+		return false;
+	}
+}
 bool Esp8266::IsReply1(char* buf)
 {
 	if (this->Reply1 == NULL)

@@ -74,6 +74,7 @@ void Esp8266Routin(void* param)
 		esp.AT();
 		break;
 	case 2:
+		esp.ESP8266_Net_Mode_Choose(STA);
 		break;
 	default:
 		break;
