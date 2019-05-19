@@ -114,6 +114,15 @@ bool Esp8266::ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char* ip, char* Com
 
 	return ESP8266_Cmd(cCmd, "OK", "ALREAY CONNECT", 4000);
 }
+bool Esp8266::ESP8266_UnvarnishSend(void)
+{
+	if (!ESP8266_Cmd("AT+CIPMODE=1", "OK", 0, 500))
+		return false;
+
+	return
+		ESP8266_Cmd("AT+CIPSEND", "OK", ">", 500);
+}
+
 
 bool Esp8266::IsReply1(char* buf)
 {

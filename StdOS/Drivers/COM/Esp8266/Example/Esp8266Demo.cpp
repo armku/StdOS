@@ -99,6 +99,12 @@ void Esp8266Routin(void* param)
 	case 5:
 		esp.ESP8266_Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0);
 		break;
+	case 6:
+		esp.ESP8266_UnvarnishSend();
+		//配置完成
+		break;
+	case 7:
+		break;
 	default:
 		break;
 	}
