@@ -43,10 +43,10 @@ bool Esp8266::DealBufIn(char* buf, int len)
 	debug_printf("Rcv:%s",buf);
 	debug_printf("reply1:%d \r\n",this->IsReply1(buf));
 	debug_printf("reply2:%d \r\n", this->IsReply2(buf));
-	if (strstr(buf, this->Reply1))
-		return true;
-	if (strstr(buf, this->Reply2))
-		return true;
+	if (this->IsReply1(buf))
+		this->step++;
+	if (this->IsReply2(buf))
+		this->step++;
 
 	return false;
 }
