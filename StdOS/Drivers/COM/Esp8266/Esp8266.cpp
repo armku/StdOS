@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdio.h>
 #include "Esp8266.h"
 #include "Sys.h"
 
@@ -70,6 +71,14 @@ bool Esp8266::ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode)
 	default:
 		return false;
 	}
+}
+bool Esp8266::ESP8266_JoinAP(char* pSSID, char* pPassWord)
+{
+	char cCmd[120];
+
+	sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", pSSID, pPassWord);
+
+	return ESP8266_Cmd(cCmd, "OK", NULL, 5000);
 }
 bool Esp8266::IsReply1(char* buf)
 {

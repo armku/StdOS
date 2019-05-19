@@ -50,6 +50,7 @@ public:
 	void Init();
 	void AT();
 	bool ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode);
+	bool ESP8266_JoinAP(char* pSSID, char* pPassWord);
 	bool ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waittime);
 	void Cmd(char* cmd);
 	bool DealBufIn(char* buf, int len);//处理接收到的数据
