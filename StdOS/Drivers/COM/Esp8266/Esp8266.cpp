@@ -18,6 +18,10 @@ bool Esp8266::ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waitti
 	this->Reply1 = reply1;
 	this->Reply2 = reply2;
 	this->Cmd(cmd);
+	this->WaitTime = 0;
+	if ((reply1 == 0) && (reply2 == 0))                      //不需要接收数据
+		return true;
+	this->WaitTime = waittime;
 }
 void Esp8266::Cmd(char* cmd)
 {

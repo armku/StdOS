@@ -23,6 +23,7 @@ public:
 
 	char* Reply1;//期待回复1
 	char* Reply2;//期待回复2
+	uint32_t WaitTime;//等待通信响应时间-ms
 //private:
 	Port CH_PD;//
 	Port RST;//
