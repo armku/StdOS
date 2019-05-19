@@ -19,6 +19,9 @@ public:
 	void AT();
 	bool ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waittime);
 	void Cmd(char* cmd);
+	bool DealBufIn(char* buf, int len);//处理接收到的数据
+	bool IsReply1(char* buf);
+	bool IsReply2(char* buf);
 	int step;//处理步骤
 
 	char* Reply1;//期待回复1

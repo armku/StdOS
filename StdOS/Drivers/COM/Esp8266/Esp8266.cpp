@@ -1,5 +1,6 @@
 #include <string.h>
 #include "Esp8266.h"
+#include "Sys.h"
 
 Esp8266::Esp8266()
 {
@@ -36,9 +37,38 @@ void Esp8266::Cmd(char* cmd)
 	buf[len + 1] = 0X0A;
 	this->send_buf((uint8_t*)buf, len+2);
 }
+//处理接收到的数据
+bool Esp8266::DealBufIn(char* buf, int len)
+{
+	debug_printf("Rcv:%s",buf);
+	if (strstr(buf, this->Reply1))
+		return true;
+	if (strstr(buf, this->Reply2))
+		return true;
+
+	return false;
+}
 void Esp8266::AT()
 {
 	this->ESP8266_Cmd("AT","AT",NULL,500);
+}
+bool Esp8266::IsReply1(char* buf)
+{
+	if (this->Reply1 == NULL)
+		return true;
+	if(strstr(buf,this->Reply1))
+		return true;
+	else
+		return false;
+}
+bool Esp8266::IsReply2(char* buf)
+{
+	if (this->Reply2 == NULL)
+		return true;
+		if (strstr(buf, this->Reply2))
+			return true;
+		else
+			return false;
 }
 
 void Esp8266::SetPinCH_PD(Pin p)
