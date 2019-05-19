@@ -1,3 +1,4 @@
+#include <string.h>
 #include "Esp8266.h"
 
 Esp8266::Esp8266()
@@ -15,6 +16,19 @@ void Esp8266::Cmd(char* cmd, int len)
 bool Esp8266::ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waittime)
 {
 
+}
+void Esp8266::Cmd(char* cmd)
+{
+	int len = strlen(cmd);
+	if (len <= 0)
+		return;
+
+	char buf[20];
+	for (int i = 0; i < len; i++)
+		buf[i] = cmd[i];
+	buf[len] = 0X0D;
+	buf[len + 1] = 0X0A;
+	this->send_buf((uint8_t*)buf, len+2);
 }
 void Esp8266::AT()
 {
