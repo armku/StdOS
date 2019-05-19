@@ -20,7 +20,8 @@ public:
 //private:
 	Port CH_PD;//
 	Port RST;//
-	pFun_UART send_byte;         //串口发送一字节数据
+	pFun_UART send_byte;        // 串口发送一字节数据
+	pFun_UART_buf send_buf;		// 发送缓冲区
 };
 
 

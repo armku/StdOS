@@ -28,6 +28,7 @@ typedef struct
 	}UsartKernel_T;
 	
 	typedef void (*pFun_UART)(uint8_t c); 
+	typedef void (*pFun_UART_buf)(uint8_t *buf, uint32_t len);
 	
 	
 	void UART1_Dis_IRQ(void);
