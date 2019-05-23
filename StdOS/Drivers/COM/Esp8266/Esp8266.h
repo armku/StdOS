@@ -57,12 +57,14 @@ public:
 	bool ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char* ip, char* ComNum, ENUM_ID_NO_TypeDef id);
 	bool ESP8266_UnvarnishSend(void);
 	void ESP8266_ExitUnvarnishSend(void);
+	void ESP8266_SendStr(char* str);//发送字符串
 
 	bool ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waittime);
 	void Cmd(char* cmd);
 	bool DealBufIn(char* buf, int len);//处理接收到的数据
 	bool IsReply1(char* buf);
 	bool IsReply2(char* buf);
+	bool IsReply(char* buf);
 	int step;//处理步骤
 
 	char* Reply1;//期待回复1

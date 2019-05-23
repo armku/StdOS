@@ -110,6 +110,7 @@ void Esp8266Routin(void* param)
 		//配置完成
 		break;
 	case 7:
+		esp.ESP8266_SendStr("Hello workd!");
 		break;
 	default:
 		break;

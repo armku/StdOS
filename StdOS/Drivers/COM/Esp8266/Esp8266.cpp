@@ -44,8 +44,11 @@ bool Esp8266::DealBufIn(char* buf, int len)
 	debug_printf("Rcv:%s step:%d reply1: %d reply2:%d\r\n",buf,this->step, this->IsReply1(buf), this->IsReply2(buf));
 	if (this->IsReply1(buf))
 		this->step++;
+	return true;
 	if (this->IsReply2(buf))
 		this->step++;
+	return true;
+	//if(this->isre)
 
 	return false;
 }
@@ -59,13 +62,10 @@ bool Esp8266::ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode)
 	{
 	case STA:
 		return ESP8266_Cmd("AT+CWMODE=1", "OK", "no change", 2500);
-
 	case AP:
 		return ESP8266_Cmd("AT+CWMODE=2", "OK", "no change", 2500);
-
 	case STA_AP:
 		return ESP8266_Cmd("AT+CWMODE=3", "OK", "no change", 2500);
-
 	default:
 		return false;
 	}
@@ -121,6 +121,11 @@ bool Esp8266::ESP8266_UnvarnishSend(void)
 	return
 		ESP8266_Cmd("AT+CIPSEND", "OK", ">", 500);
 }
+//·¢ËÍ×Ö·û´®
+void Esp8266::ESP8266_SendStr(char* str)
+{
+	this->Cmd(str);
+}
 void  Esp8266::ESP8266_ExitUnvarnishSend(void)
 {
 	/*Delay_ms(1000);
@@ -149,7 +154,13 @@ bool Esp8266::IsReply2(char* buf)
 		else
 			return false;
 }
-
+bool Esp8266::IsReply(char* buf)
+{
+	if (strstr(buf, this->Reply2))
+		return true;
+	else
+		return false;
+}
 void Esp8266::SetPinCH_PD(Pin p)
 {
 	this->CH_PD.SetPin(p);
