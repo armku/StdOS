@@ -153,6 +153,35 @@ bool Esp8266::IsReply(char* buf,char* reply)
 	else
 		return false;
 }
+bool Esp8266::ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char* pStr, uint32_t ulStrLength, ENUM_ID_NO_TypeDef ucId)
+{
+	char cStr[120];
+	bool bRet = false;
+
+
+	if (enumEnUnvarnishTx)
+	{
+		this->Cmd(pStr);
+
+		bRet = true;
+
+	}
+
+	else
+	{
+		if (ucId < 5)
+			sprintf(cStr, "AT+CIPSEND=%d,%d", ucId, ulStrLength + 2);
+
+		else
+			sprintf(cStr, "AT+CIPSEND=%d", ulStrLength + 2);
+
+		ESP8266_Cmd(cStr, "> ", 0, 1000);
+
+		bRet = this->ESP8266_Cmd(pStr, "SEND OK", 0, 1000);
+	}
+
+	return bRet;
+}
 void Esp8266::SetPinCH_PD(Pin p)
 {
 	this->CH_PD.SetPin(p);
