@@ -41,9 +41,7 @@ void Esp8266::Cmd(char* cmd)
 //处理接收到的数据
 bool Esp8266::DealBufIn(char* buf, int len)
 {
-	debug_printf("Rcv:%s step:%d",buf,this->step);
-	debug_printf("reply1:%d \r\n",this->IsReply1(buf));
-	debug_printf("reply2:%d \r\n", this->IsReply2(buf));
+	debug_printf("Rcv:%s step:%d reply1: %d reply2:%d\r\n",buf,this->step, this->IsReply1(buf), this->IsReply2(buf));
 	if (this->IsReply1(buf))
 		this->step++;
 	if (this->IsReply2(buf))
