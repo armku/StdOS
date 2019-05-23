@@ -138,19 +138,17 @@ void  Esp8266::ESP8266_ExitUnvarnishSend(void)
 
 bool Esp8266::IsReply1(char* buf)
 {
-	if (this->Reply1 == NULL)
-		return false;
-	return this->IsReply(this->Reply1);
+	return this->IsReply(buf,this->Reply1);
 }
 bool Esp8266::IsReply2(char* buf)
 {
-	if (this->Reply2 == NULL)
-		return false;
-	return this->IsReply(this->Reply2);
+	return this->IsReply(buf,this->Reply2);
 }
-bool Esp8266::IsReply(char* buf)
+bool Esp8266::IsReply(char* buf,char* reply)
 {
-	if (strstr(buf, this->Reply2))
+	if (reply == NULL)
+		return false;
+	if (strstr(buf, reply))
 		return true;
 	else
 		return false;
