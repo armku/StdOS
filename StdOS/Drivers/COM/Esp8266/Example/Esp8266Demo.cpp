@@ -94,7 +94,7 @@ void Esp8266Routin(void* param)
 		break;
 	case 3:
 		esp.ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd);
-		debug_printf("JoinA send step:%d\r\n", esp.step);
+		debug_printf("JoinAP send step:%d\r\n", esp.step);
 		break;
 	case 4:
 		esp.ESP8266_Enable_MultipleId(DISABLE);
