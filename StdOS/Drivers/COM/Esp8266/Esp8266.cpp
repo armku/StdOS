@@ -140,19 +140,13 @@ bool Esp8266::IsReply1(char* buf)
 {
 	if (this->Reply1 == NULL)
 		return false;
-	if(strstr(buf,this->Reply1))
-		return true;
-	else
-		return false;
+	return this->IsReply(this->Reply1);
 }
 bool Esp8266::IsReply2(char* buf)
 {
 	if (this->Reply2 == NULL)
 		return false;
-		if (strstr(buf, this->Reply2))
-			return true;
-		else
-			return false;
+	return this->IsReply(this->Reply2);
 }
 bool Esp8266::IsReply(char* buf)
 {
