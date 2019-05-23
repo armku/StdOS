@@ -75,7 +75,7 @@ void checkComRoutin(void* param)
 
 void Esp8266Routin(void* param)
 {
-	char cStr[100] = { 0 };
+	/*char cStr[100] = { 0 };*/
 	switch (esp.step)
 	{
 	case 0:
