@@ -124,6 +124,7 @@ bool Esp8266::ESP8266_UnvarnishSend(void)
 //·¢ËÍ×Ö·û´®
 void Esp8266::ESP8266_SendStr(char* str)
 {
+	this->ESP8266_SendString(DISABLE, str, 0, Single_ID_0);
 	this->Cmd(str);
 }
 void  Esp8266::ESP8266_ExitUnvarnishSend(void)
