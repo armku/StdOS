@@ -31,7 +31,7 @@ void Esp8266::Cmd(char* cmd)
 	if (len <= 0)
 		return;
 		
-	char buf[20];
+	char buf[120];
 	for (int i = 0; i < len; i++)
 		buf[i] = cmd[i];
 	buf[len] = 0X0D;
