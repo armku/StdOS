@@ -85,7 +85,7 @@ bool Esp8266::ESP8266_Enable_MultipleId(FunctionalState enumEnUnvarnishTx)
 
 	sprintf(cStr, "AT+CIPMUX=%d", (enumEnUnvarnishTx ? 1 : 0));
 
-	return ESP8266_Cmd(cStr, "OK", 0, 500);
+	return ESP8266_Cmd(cStr, "OK", NULL, 500);
 }
 bool Esp8266::ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char* ip, char* ComNum, ENUM_ID_NO_TypeDef id)
 {
