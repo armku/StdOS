@@ -90,7 +90,7 @@ void Esp8266Routin(void* param)
 		break;
 	case 2:
 		esp.ESP8266_Net_Mode_Choose(STA);
-		debug_printf("Choose(STA) nsend step:%d\r\n", esp.step);
+		debug_printf("Choose(STA) send step:%d\r\n", esp.step);
 		break;
 	case 3:
 		esp.ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd);
