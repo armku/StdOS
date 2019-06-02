@@ -26,7 +26,7 @@ void Esp8266::Connect()
 		break;
 	case 1:
 		this->AT();
-		debug_printf("AT send step:%d\r\n", this->FlagConnectStep);
+		//debug_printf("AT send step:%d\r\n", this->FlagConnectStep);
 		break;
 	default:
 		break;
@@ -48,7 +48,7 @@ bool Esp8266::ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waitti
 	delayMicroseconds(waittime);
 
 	
-	UART1_send_data((uint8_t*)this->bufRcv, this->readlen);
+	//UART1_send_data((uint8_t*)this->bufRcv, this->readlen);
 	this->DealBufIn(this->bufRcv, this->readlen);
 
 }
@@ -68,7 +68,7 @@ void Esp8266::Cmd(char* cmd)
 //处理接收到的数据
 bool Esp8266::DealBufIn(char* buf, int len)
 {
-	debug_printf("Rcv:%s step:%d reply1: %d reply2:%d\r\n",buf,this->step, this->IsReply1(buf), this->IsReply2(buf));
+	//debug_printf("Rcv:%s step:%d reply1: %d reply2:%d\r\n",buf,this->step, this->IsReply1(buf), this->IsReply2(buf));
 	if (this->IsReply1(buf))
 		this->step++;
 	return true;
