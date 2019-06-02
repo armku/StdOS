@@ -52,6 +52,7 @@ public:
 	void Cmd(char* cmd, int len);
 
 	void Init();
+	void Reset();//¸´Î»
 	bool AT();
 	bool ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode);
 	bool ESP8266_JoinAP(char* pSSID, char* pPassWord);

@@ -12,6 +12,12 @@ Esp8266::Esp8266()
 Esp8266::~Esp8266()
 {
 }
+//复位
+void Esp8266::Reset()
+{
+	this->FlagConnected = false;
+	this->FlagConnectStep = 0;
+}
 //连接服务器
 void Esp8266::Connect()
 {
