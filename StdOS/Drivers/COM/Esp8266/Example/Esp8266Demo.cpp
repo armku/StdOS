@@ -58,10 +58,13 @@ void checkComRoutin(void* param)
 		FlagInFrame = 1;
 
 		esp.readlen = ringRcvcom3.Get(esp.bufRcv, ArrayLength(esp.bufRcv));
-		
+		if (esp.FlagConnected)
+		{
+			UART1_send_data((uint8_t*)"Rcv: ", 5);
+		}
 		UART1_send_data((uint8_t*)esp.bufRcv, esp.readlen);//接收到的数据显示
 		//esp.DealBufIn((char*)buf,0);
-				
+						
 		FlagInFrame = 0;
 		FlagIdleCnt = 0;
 	}
