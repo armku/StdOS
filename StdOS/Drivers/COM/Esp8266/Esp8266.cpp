@@ -60,11 +60,10 @@ void Esp8266::Connect()
 		break;
 	case 6:
 		if (this->ESP8266_UnvarnishSend())
+		{
 			this->FlagConnectStep++;
-		break;
-	case 7:
-		if (this->ESP8266_SendStr("Hello workd!"))
-			;
+			this->FlagConnected = true;
+		}
 		break;
 	default:
 		break;

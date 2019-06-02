@@ -79,6 +79,10 @@ void Esp8266Routin(void* param)
 	{
 		esp.Connect();
 	}
+	else
+	{
+		esp.ESP8266_SendStr("Hello workd!");
+	}
 }
 
 void Esp8266TestInit()
