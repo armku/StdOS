@@ -8,11 +8,7 @@ Esp8266::Esp8266()
 	this->step = 0;
 	this->FlagRcvAuto = 0;
 	this->FlagConnected = 0;
-	this->FlagConnectStep = 0;
-	this->Server = macUser_ESP8266_TcpServer_IP;
-	this->ServerPort = macUser_ESP8266_TcpServer_Port;
-	this->WIFIName = macUser_ESP8266_ApSsid;
-	this->WIFIPassword = macUser_ESP8266_ApPwd;
+	this->FlagConnectStep = 0;	
 }
 
 Esp8266::~Esp8266()

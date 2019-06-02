@@ -93,6 +93,10 @@ void Esp8266TestInit()
 	UART_3_rcv_IRQ = write_loop_buf;
 	esp.send_byte = UART_3_send_byte;         //串口发送一字节数据
 	esp.send_buf = UART3_send_data;
+	esp.Server = macUser_ESP8266_TcpServer_IP;
+	esp.ServerPort = macUser_ESP8266_TcpServer_Port;
+	esp.WIFIName = macUser_ESP8266_ApSsid;
+	esp.WIFIPassword = macUser_ESP8266_ApPwd;
 
 	debug_printf("\r\n WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息)
 
