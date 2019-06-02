@@ -29,6 +29,7 @@ bool Esp8266::ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waitti
 
 	
 	UART1_send_data((uint8_t*)this->bufRcv, this->readlen);
+	this->DealBufIn(this->bufRcv, this->readlen);
 
 }
 void Esp8266::Cmd(char* cmd)
