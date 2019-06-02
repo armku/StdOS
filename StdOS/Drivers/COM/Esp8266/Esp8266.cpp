@@ -47,7 +47,24 @@ void Esp8266::Connect()
 			this->FlagConnectStep++;
 		break;
 	case 3:
-		this->ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd);
+		if (this->ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd))
+			this->FlagConnectStep++;
+		break;
+	case 4:
+		if (this->ESP8266_Enable_MultipleId(DISABLE))
+			this->FlagConnectStep++;
+		break;
+	case 5:
+		if (this->ESP8266_Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0))
+			this->FlagConnectStep++;
+		break;
+	case 6:
+		if (this->ESP8266_UnvarnishSend())
+			this->FlagConnectStep++;
+		break;
+	case 7:
+		if (this->ESP8266_SendStr("Hello workd!"))
+			;
 		break;
 	default:
 		break;
@@ -167,10 +184,11 @@ bool Esp8266::ESP8266_UnvarnishSend(void)
 		ESP8266_Cmd("AT+CIPSEND", "OK", ">", 500);
 }
 //·¢ËÍ×Ö·û´®
-void Esp8266::ESP8266_SendStr(char* str)
+bool Esp8266::ESP8266_SendStr(char* str)
 {
 	this->ESP8266_SendString(DISABLE, str, 0, Single_ID_0);
 	this->Cmd(str);
+	return true;
 }
 void  Esp8266::ESP8266_ExitUnvarnishSend(void)
 {

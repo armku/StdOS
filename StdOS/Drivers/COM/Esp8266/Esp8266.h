@@ -59,7 +59,7 @@ public:
 	bool ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char* ip, char* ComNum, ENUM_ID_NO_TypeDef id);
 	bool ESP8266_UnvarnishSend(void);
 	void ESP8266_ExitUnvarnishSend(void);
-	void ESP8266_SendStr(char* str);//·¢ËÍ×Ö·û´®
+	bool ESP8266_SendStr(char* str);//·¢ËÍ×Ö·û´®
 	bool ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char* pStr, uint32_t ulStrLength, ENUM_ID_NO_TypeDef ucId);
 
 	bool ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waittime);
