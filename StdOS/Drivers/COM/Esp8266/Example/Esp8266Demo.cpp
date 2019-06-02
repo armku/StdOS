@@ -63,7 +63,6 @@ void checkComRoutin(void* param)
 			UART1_send_data((uint8_t*)"Rcv: ", 5);
 		}
 		UART1_send_data((uint8_t*)esp.bufRcv, esp.readlen);//接收到的数据显示
-		//esp.DealBufIn((char*)buf,0);
 						
 		FlagInFrame = 0;
 		FlagIdleCnt = 0;
