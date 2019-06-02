@@ -49,6 +49,13 @@ void Esp8266::Connect()
 		if (this->ESP8266_UnvarnishSend())
 		{
 			this->FlagConnectStep++;
+			//this->FlagConnected = true;
+		}
+		break;
+	case 7:
+		if (ESP8266_Cmd("AT+CIPSEND", "OK", ">", 500))
+		{
+			this->FlagConnectStep++;
 			this->FlagConnected = true;
 		}
 		break;
@@ -163,11 +170,13 @@ bool Esp8266::ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char* ip, char* Com
 }
 bool Esp8266::ESP8266_UnvarnishSend(void)
 {
-	if (!ESP8266_Cmd("AT+CIPMODE=1", "OK", 0, 500))
+	if (ESP8266_Cmd("AT+CIPMODE=1", "OK", 0, 500))
+		return true;
+	else
 		return false;
 
-	return
-		ESP8266_Cmd("AT+CIPSEND", "OK", ">", 500);
+	/*return
+		ESP8266_Cmd("AT+CIPSEND", "OK", ">", 500);*/
 }
 //·¢ËÍ×Ö·û´®
 bool Esp8266::ESP8266_SendStr(char* str)
