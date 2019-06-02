@@ -3,19 +3,6 @@
 #include "Esp8266.h"
 #include "Sys.h"
 
-//要连接的热点的名称，即WIFI名称
-#define      macUser_ESP8266_ApSsid           "@PHICOMM_18" 
-
-//要连接的热点的密钥
-#define      macUser_ESP8266_ApPwd            "wildfire" 
-
-//要连接的服务器的 IP，即电脑的IP
-#define      macUser_ESP8266_TcpServer_IP     "test.armku.com" 
-
-//要连接的服务器的端口
-#define      macUser_ESP8266_TcpServer_Port    "8081"         
-
-
 Esp8266::Esp8266()
 {
 	this->step = 0;
