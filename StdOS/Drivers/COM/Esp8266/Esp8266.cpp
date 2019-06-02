@@ -24,6 +24,8 @@ Esp8266::Esp8266()
 	this->FlagConnectStep = 0;
 	this->Server = macUser_ESP8266_TcpServer_IP;
 	this->ServerPort = macUser_ESP8266_TcpServer_Port;
+	this->WIFIName = macUser_ESP8266_ApSsid;
+	this->WIFIPassword = macUser_ESP8266_ApPwd;
 }
 
 Esp8266::~Esp8266()
@@ -49,7 +51,7 @@ void Esp8266::Connect()
 			this->FlagConnectStep++;
 		break;
 	case 3:
-		if (this->ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd))
+		if (this->ESP8266_JoinAP(this->WIFIName,this->WIFIPassword))
 			this->FlagConnectStep++;
 		break;
 	case 4:

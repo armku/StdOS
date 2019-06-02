@@ -85,6 +85,8 @@ public:
 	int FlagConnectStep;		// 连接服务器步骤
 	char* Server;				// 服务器
 	char* ServerPort;			// 服务器端口号
+	char* WIFIName;				// WIFI name
+	char* WIFIPassword;			// WIFI password
 };
 
 
