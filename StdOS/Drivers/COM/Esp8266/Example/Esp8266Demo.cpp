@@ -60,14 +60,7 @@ void checkComRoutin(void* param)
 		esp.readlen = ringRcvcom3.Get(esp.bufRcv, ArrayLength(esp.bufRcv));
 		UART1_send_data((uint8_t*)esp.bufRcv, esp.readlen);
 		//esp.DealBufIn((char*)buf,0);
-
-		switch (esp.step)
-		{
-		case 0:
-			break;
-		default:
-			break;
-		}
+				
 		FlagInFrame = 0;
 		FlagIdleCnt = 0;
 	}
