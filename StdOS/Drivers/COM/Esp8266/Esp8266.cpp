@@ -3,6 +3,19 @@
 #include "Esp8266.h"
 #include "Sys.h"
 
+//要连接的热点的名称，即WIFI名称
+#define      macUser_ESP8266_ApSsid           "@PHICOMM_18" 
+
+//要连接的热点的密钥
+#define      macUser_ESP8266_ApPwd            "wildfire" 
+
+//要连接的服务器的 IP，即电脑的IP
+#define      macUser_ESP8266_TcpServer_IP     "www.armku.com" 
+
+//要连接的服务器的端口
+#define      macUser_ESP8266_TcpServer_Port    "8081"         
+
+
 Esp8266::Esp8266()
 {
 	this->step = 0;
@@ -30,7 +43,11 @@ void Esp8266::Connect()
 		//debug_printf("AT send step:%d\r\n", this->FlagConnectStep);
 		break;
 	case 2:
-		this->ESP8266_Net_Mode_Choose(STA);
+		if (this->ESP8266_Net_Mode_Choose(STA))
+			this->FlagConnectStep++;
+		break;
+	case 3:
+		this->ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd);
 		break;
 	default:
 		break;
