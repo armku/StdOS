@@ -130,6 +130,6 @@ void Esp8266TestInit()
 
 	FlagInFrame = false;
 	Sys.AddTask(checkComRoutin, 0, 0, 10, "EspCOmCHK");
-	Sys.AddTask(Esp8266Routin, 0, 0, 500, "EspRoutin");
+	Sys.AddTask(Esp8266Routin, 0, 0, 1000, "EspRoutin");
 }
 #endif
