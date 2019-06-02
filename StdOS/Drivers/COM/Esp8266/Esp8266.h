@@ -44,6 +44,8 @@ public:
 	Esp8266();
 	~Esp8266();
 
+	void Connect();//连接服务器
+
 	void SetPinCH_PD(Pin p);
 	void SetPinRST(Pin p);
 
@@ -79,6 +81,8 @@ public:
 	pFun_UART_buf send_buf;		// 发送缓冲区
 	char bufRcv[100];			// 接收缓冲区
 	int readlen;//读取的缓冲区长度
+	int FlagConnected;			// 连接服务器成功
+	int FlagConnectStep;		// 连接服务器步骤
 };
 
 

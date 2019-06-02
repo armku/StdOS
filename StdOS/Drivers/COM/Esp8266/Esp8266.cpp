@@ -7,10 +7,30 @@ Esp8266::Esp8266()
 {
 	this->step = 0;
 	this->FlagRcvAuto = 0;
+	this->FlagConnected = 0;
+	this->FlagConnectStep = 0;
 }
 
 Esp8266::~Esp8266()
 {
+}
+//连接服务器
+void Esp8266::Connect()
+{
+	switch (this->FlagConnectStep)
+	{
+	case 0:
+		this->CH_PD = 1;
+		this->RST = 1;
+		this->FlagConnectStep++;
+		break;
+	case 1:
+		this->AT();
+		debug_printf("AT send step:%d\r\n", this->FlagConnectStep);
+		break;
+	default:
+		break;
+	}
 }
 void Esp8266::Cmd(char* cmd, int len)
 {

@@ -75,6 +75,11 @@ void checkComRoutin(void* param)
 //要求1000ms调用一次
 void Esp8266Routin(void* param)
 {
+	if (!esp.FlagConnected)
+	{
+		esp.Connect();
+	}
+	return;
 	/*char cStr[100] = { 0 };*/
 	switch (esp.step)
 	{
