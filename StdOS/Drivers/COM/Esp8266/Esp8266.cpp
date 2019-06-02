@@ -6,6 +6,7 @@
 Esp8266::Esp8266()
 {
 	this->step = 0;
+	this->FlagRcvAuto = 0;
 }
 
 Esp8266::~Esp8266()
