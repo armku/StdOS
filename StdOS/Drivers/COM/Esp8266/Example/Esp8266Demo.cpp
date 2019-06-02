@@ -75,7 +75,7 @@ void checkComRoutin(void* param)
 		FlagIdleCnt = 0;
 	}
 }
-
+//要求1000ms调用一次
 void Esp8266Routin(void* param)
 {
 	/*char cStr[100] = { 0 };*/
