@@ -10,7 +10,7 @@
 #define      macUser_ESP8266_ApPwd            "wildfire" 
 
 //要连接的服务器的 IP，即电脑的IP
-#define      macUser_ESP8266_TcpServer_IP     "www.armku.com" 
+#define      macUser_ESP8266_TcpServer_IP     "test.armku.com" 
 
 //要连接的服务器的端口
 #define      macUser_ESP8266_TcpServer_Port    "8081"         
