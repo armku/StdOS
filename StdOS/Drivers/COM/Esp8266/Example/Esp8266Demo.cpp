@@ -44,6 +44,9 @@ void checkComRoutin(void* param)
 	int readlen;//读取的缓冲区长度
 	char buf[100];
 
+	if (!esp.FlagRcvAuto)
+		return;
+
 	RxCnt = ringRcvcom3.length;
 	if (RxCnt != RxCntOld)
 	{
