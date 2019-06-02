@@ -25,8 +25,12 @@ void Esp8266::Connect()
 		this->FlagConnectStep++;
 		break;
 	case 1:
-		this->AT();
+		if (this->AT())
+			this->FlagConnectStep++;
 		//debug_printf("AT send step:%d\r\n", this->FlagConnectStep);
+		break;
+	case 2:
+		this->ESP8266_Net_Mode_Choose(STA);
 		break;
 	default:
 		break;
@@ -76,20 +80,20 @@ bool Esp8266::DealBufIn(char* buf, int len)
 
 	return false;
 }
-void Esp8266::AT()
+bool Esp8266::AT()
 {
-	this->ESP8266_Cmd("AT","AT",NULL,500);
+	return this->ESP8266_Cmd("AT","AT",NULL,500);
 }
 bool Esp8266::ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode)
 {
 	switch (enumMode)
 	{
 	case STA:
-		return ESP8266_Cmd("AT+CWMODE=1", "OK", "no change", 2500);
+		return ESP8266_Cmd("AT+CWMODE=1", "OK", "no change", 500);
 	case AP:
-		return ESP8266_Cmd("AT+CWMODE=2", "OK", "no change", 2500);
+		return ESP8266_Cmd("AT+CWMODE=2", "OK", "no change", 500);
 	case STA_AP:
-		return ESP8266_Cmd("AT+CWMODE=3", "OK", "no change", 2500);
+		return ESP8266_Cmd("AT+CWMODE=3", "OK", "no change", 500);
 	default:
 		return false;
 	}
