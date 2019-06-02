@@ -68,8 +68,6 @@ public:
 	bool IsReply1(char* buf);
 	bool IsReply2(char* buf);
 	bool IsReply(char* buf, char* reply);
-	//int step;//处理步骤
-	int FlagRcvAuto;//自动接收数据模式
 
 	char* Reply1;//期待回复1
 	char* Reply2;//期待回复2

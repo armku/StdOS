@@ -5,7 +5,6 @@
 
 Esp8266::Esp8266()
 {
-	this->FlagRcvAuto = 0;
 	this->FlagConnected = 0;
 	this->FlagConnectStep = 0;	
 }
