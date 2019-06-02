@@ -79,48 +79,6 @@ void Esp8266Routin(void* param)
 	{
 		esp.Connect();
 	}
-	return;
-	/*char cStr[100] = { 0 };*/
-	switch (esp.step)
-	{
-	case 0:
-		//debug_printf("\r\n 正在配置 ESP8266 ......\r\n");
-		esp.CH_PD = 1;
-		esp.RST = 1;
-		esp.step++;
-		break;
-	case 1:
-		esp.AT();
-		debug_printf("AT send step:%d\r\n", esp.step);
-		break;
-	case 2:
-		esp.ESP8266_Net_Mode_Choose(STA);
-		debug_printf("Choose(STA) send step:%d\r\n", esp.step);
-		break;
-	case 3:
-		esp.ESP8266_JoinAP(macUser_ESP8266_ApSsid, macUser_ESP8266_ApPwd);
-		debug_printf("JoinAP send step:%d\r\n", esp.step);
-		break;
-	case 4:
-		esp.ESP8266_Enable_MultipleId(DISABLE);
-		debug_printf("Enable_MultipleId(DISABLE) send step:%d\r\n", esp.step);
-		break;
-	case 5:
-		esp.ESP8266_Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0);
-		debug_printf("Link_Server send step:%d\r\n", esp.step);
-		break;
-	case 6:
-		esp.ESP8266_UnvarnishSend();
-		debug_printf("UnvarnishSend send step:%d\r\n", esp.step);
-		//配置完成
-		break;
-	case 7:
-		esp.ESP8266_SendStr("Hello workd!");
-		debug_printf("UnvarnishSend send step:%d\r\n", esp.step);
-		break;
-	default:
-		break;
-	}
 }
 
 void Esp8266TestInit()
