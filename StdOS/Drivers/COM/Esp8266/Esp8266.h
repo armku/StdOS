@@ -83,6 +83,8 @@ public:
 	int readlen;//读取的缓冲区长度
 	int FlagConnected;			// 连接服务器成功
 	int FlagConnectStep;		// 连接服务器步骤
+	char* Server;				// 服务器
+	char* ServerPort;			// 服务器端口号
 };
 
 

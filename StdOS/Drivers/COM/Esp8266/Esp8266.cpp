@@ -22,6 +22,8 @@ Esp8266::Esp8266()
 	this->FlagRcvAuto = 0;
 	this->FlagConnected = 0;
 	this->FlagConnectStep = 0;
+	this->Server = macUser_ESP8266_TcpServer_IP;
+	this->ServerPort = macUser_ESP8266_TcpServer_Port;
 }
 
 Esp8266::~Esp8266()
@@ -55,7 +57,7 @@ void Esp8266::Connect()
 			this->FlagConnectStep++;
 		break;
 	case 5:
-		if (this->ESP8266_Link_Server(enumTCP, macUser_ESP8266_TcpServer_IP, macUser_ESP8266_TcpServer_Port, Single_ID_0))
+		if (this->ESP8266_Link_Server(enumTCP, this->Server,this->ServerPort, Single_ID_0))
 			this->FlagConnectStep++;
 		break;
 	case 6:
