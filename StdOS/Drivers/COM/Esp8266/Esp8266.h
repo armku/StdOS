@@ -77,6 +77,8 @@ public:
 	Port RST;//
 	pFun_UART send_byte;        // 串口发送一字节数据
 	pFun_UART_buf send_buf;		// 发送缓冲区
+	char bufRcv[100];			// 接收缓冲区
+	int readlen;//读取的缓冲区长度
 };
 
 
