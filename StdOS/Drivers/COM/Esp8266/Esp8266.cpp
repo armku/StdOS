@@ -206,6 +206,10 @@ bool Esp8266::IsReply2(char* buf)
 {
 	return this->IsReply(buf,this->Reply2);
 }
+bool Esp8266::IsReplyFail(char* buf)
+{
+	return this->IsReply(buf, (char*)"FAIL");
+}
 bool Esp8266::IsReply(char* buf,char* reply)
 {
 	if (reply == NULL)
