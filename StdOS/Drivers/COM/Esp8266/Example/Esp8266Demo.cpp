@@ -11,6 +11,10 @@
 #ifdef _ESP8266EST_CPP
 
 MqttLink mqtt;
+const char *ClientID = "clientid00001";
+const char* id = "1111";
+const char* topic = "ShareDevince/RTV/IMEI";
+const char* subtopic = "ShareDevince/CZT/IMEI";//订阅主题
 
 /********************************** 用户需要设置的参数**********************************/
 //要连接的热点的名称，即WIFI名称
