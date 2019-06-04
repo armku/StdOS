@@ -83,7 +83,7 @@ bool Esp8266::ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waitti
 
 	
 	//UART1_send_data((uint8_t*)this->bufRcv, this->readlen);
-	this->DealBufIn(this->bufRcv, this->readlen);
+	this->DealRespose(this->bufRcv, this->readlen);
 
 }
 void Esp8266::Cmd(char* cmd)
@@ -100,7 +100,7 @@ void Esp8266::Cmd(char* cmd)
 	this->send_buf((uint8_t*)buf, len+2);
 }
 //处理接收到的数据
-bool Esp8266::DealBufIn(char* buf, int len)
+bool Esp8266::DealRespose(char* buf, int len)
 {
 	//debug_printf("Rcv:%s step:%d reply1: %d reply2:%d\r\n",buf,this->step, this->IsReply1(buf), this->IsReply2(buf));
 	if (this->IsReply1(buf))
