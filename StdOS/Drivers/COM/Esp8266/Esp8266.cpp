@@ -216,6 +216,8 @@ bool Esp8266::IsReply2(char* buf)
 bool Esp8266::IsReplyFail(char* buf)
 {
 	return this->IsReply(buf, (char*)"FAIL");
+	return this->IsReply(buf, (char*)"ERROR");
+	return this->IsReply(buf, (char*)"DNS Fail");
 }
 bool Esp8266::IsReply(char* buf,char* reply)
 {
