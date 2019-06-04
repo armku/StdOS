@@ -58,7 +58,7 @@ public:
 	bool ESP8266_JoinAP(char* pSSID, char* pPassWord);
 	bool ESP8266_Enable_MultipleId(FunctionalState enumEnUnvarnishTx);
 	bool ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char* ip, char* ComNum, ENUM_ID_NO_TypeDef id);
-	bool ESP8266_UnvarnishSend(void);
+	bool ESP8266_UnvarnishSend(void);//进入透传模式
 	void ESP8266_ExitUnvarnishSend(void);
 	bool ESP8266_SendStr(char* str);//发送字符串
 	bool ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char* pStr, uint32_t ulStrLength, ENUM_ID_NO_TypeDef ucId);
