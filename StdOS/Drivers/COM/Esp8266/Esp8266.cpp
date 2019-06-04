@@ -107,7 +107,11 @@ bool Esp8266::DealRespose(char* buf, int len)
 		return true;
 	if (this->IsReply2(buf))
 		return true;
-
+	if (this->IsReplyFail(buf))
+	{
+		this->Reset();
+		return true;
+	}
 	return false;
 }
 
