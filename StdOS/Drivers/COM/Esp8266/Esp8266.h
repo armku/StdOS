@@ -70,7 +70,7 @@ public:
 	bool IsReply2(char* buf);	// 
 	bool IsReplyFail(char* buf);	// 
 	bool IsReply(char* buf, char* reply);
-
+	
 	char* Reply1;//期待回复1
 	char* Reply2;//期待回复2
 	uint32_t WaitTime;//等待通信响应时间-ms

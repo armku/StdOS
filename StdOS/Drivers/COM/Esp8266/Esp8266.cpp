@@ -110,10 +110,12 @@ bool Esp8266::DealBufIn(char* buf, int len)
 
 	return false;
 }
+
 bool Esp8266::AT()
 {
 	return this->ESP8266_Cmd("AT","AT",NULL,500);
 }
+
 bool Esp8266::ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode)
 {
 	switch (enumMode)
