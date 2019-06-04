@@ -2,6 +2,12 @@
 #include <stdio.h>
 #include "MqttLink.h"
 
+MqttLink::MqttLink()
+{
+	this->FlagConnected = false;
+	this->FlagConnectStep = 0;
+}
+
 bool MqttLink::CheckFrame()
 {
 	/*int rxlen = com.RxSize();*/

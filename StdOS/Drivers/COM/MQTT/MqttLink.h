@@ -57,6 +57,7 @@ public:
 class MqttLink
 {
 public:
+	MqttLink();
 	DataFrame txFrame;
 	DataFrame rxFrame;
 	char * Server;//服务器
@@ -78,6 +79,8 @@ public:
 	bool Subscribe(char* topc);//订阅主题
 
 	pFun_UART_buf send_buf;		// 发送缓冲区
+	int FlagConnected;			// 连接服务器成功
+	int FlagConnectStep;		// 连接服务器步骤
 private:
 private:
 	bool Receive();//接收数据
