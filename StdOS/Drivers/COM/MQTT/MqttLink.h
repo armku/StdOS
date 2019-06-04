@@ -2,10 +2,63 @@
 #define MQTT_H
 
 #include <stdint.h>
+#include "../HAL/STM32F1/ARCH_UART.h"
+
+#define MAX_FRAME_DATA_LENGTH 200
+#define FRAME_HEADER 0xAA
+
+//frame struct:
+// | header | fnCode |  dataLength | data1 | ...... | datan | checkSum | 
+
+struct DataFrame
+{
+public:
+	const uint8_t header;
+	uint8_t fnCode;
+	uint8_t checkSum;
+	uint8_t data[MAX_FRAME_DATA_LENGTH];//当前数据
+	bool isUpdated;
+	uint8_t dataLength; //当前数据长度
+public:
+	DataFrame() :header(FRAME_HEADER)                //constructor
+	{
+		isUpdated = false;
+	}
+
+	bool VerifyCheckCode()
+	{
+		uint8_t code = header + fnCode + dataLength;
+		for (uint8_t i = 0; i < dataLength; i++)
+			code += data[i];
+		if (code == checkSum)
+			return true;
+		else
+			return false;
+	}
+	void CreateCheckCode()
+	{
+		checkSum = header + fnCode + dataLength;
+		for (uint8_t i = 0; i < dataLength; i++)
+			checkSum += data[i];
+	}
+	DataFrame& operator=(const DataFrame &df)
+	{
+		//header = df.header;
+		fnCode = df.fnCode;
+		dataLength = df.dataLength;
+		isUpdated = df.isUpdated;
+		checkSum = df.checkSum;
+		for (uint8_t i = 0; i < dataLength; i++)
+			data[i] = df.data[i];
+		return *this;
+	}
+};
 
 class MqttLink
 {
 public:
+	DataFrame txFrame;
+	DataFrame rxFrame;
 	char * Server;//服务器
 	int Port;//远程端口号
 	char * ClientID;//客户端id，不能大于23字节
@@ -23,9 +76,13 @@ public:
 	}
 	bool Puslish_Release();//发布
 	bool Subscribe(char* topc);//订阅主题
+
+	pFun_UART_buf send_buf;		// 发送缓冲区
 private:
 private:
 	bool Receive();//接收数据
 };
+
+#define ArrayLength(arr) (int)(sizeof(arr)/sizeof(arr[0]))
 
 #endif // !MQTT_H

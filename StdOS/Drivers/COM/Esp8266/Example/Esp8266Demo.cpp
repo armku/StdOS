@@ -5,8 +5,12 @@
 #include "Task.h"
 #include "Core/RingBuffer.h"
 
+#include "../Drivers/COM/MQTT/MqttLink.h"
+
 #define _ESP8266EST_CPP
 #ifdef _ESP8266EST_CPP
+
+MqttLink mqtt;
 
 /********************************** 用户需要设置的参数**********************************/
 //要连接的热点的名称，即WIFI名称
@@ -93,6 +97,8 @@ void Esp8266TestInit()
 	esp.ServerPort = macUser_ESP8266_TcpServer_Port;
 	esp.WIFIName = macUser_ESP8266_ApSsid;
 	esp.WIFIPassword = macUser_ESP8266_ApPwd;
+
+	mqtt.send_buf = UART3_send_data;
 
 	debug_printf("\r\n WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息)
 
