@@ -69,8 +69,6 @@ void com1test()
 	//usart111.OnReceive = Com1test;
 }
 
-
-
 //´®¿Ú²âÊÔ½áÊø
 
 void Esp8266TestInit();
