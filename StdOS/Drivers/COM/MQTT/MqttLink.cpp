@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "MqttLink.h"
+#include "Sys.h"
 /*
 连接服务器 登录
 客户ID:123456789
@@ -32,8 +33,12 @@ bool MqttLink::Send()
 	this->send_buf(this->txFrame.data, this->txFrame.dataLength);
 	return true;
 }
-bool MqttLink::Connect()
+//连接服务器
+bool MqttLink::CONNECTServer()
 {
+	int connected = 1;
+	char bufneed[] = { 0x20,0x02,0x00,0x00 };
+
 	this->txFrame.data[0] = this->FixHead;
 	this->txFrame.data[1] = 12 + strlen(ClientID);
 	this->txFrame.data[2] = 0x00;
@@ -53,13 +58,41 @@ bool MqttLink::Connect()
 		this->txFrame.data[14 + i] = this->ClientID[i];
 	}
 	this->txFrame.dataLength = 14 + strlen(ClientID);
-	//while (true)
+
+	this->Send();
+	delayMicroseconds(500);
+	if (this->readlen == 4)
 	{
-		this->Send();
-		/*Sys.Sleep(200);*/
-		//vTaskDelay(500);
-		/*this->Receive();*/
+		//20 02 00 00 (4)
+		for (int i = 0; i < 4; i++)
+		{
+			if (this->bufRcv[i] != bufneed[i])
+				connected = 0;
+		}
+		if (connected)
+		{
+			return true;
+		}
 	}
+	return false;
+}
+bool MqttLink::Connect()
+{
+	switch (this->FlagConnectStep)
+	{
+	case 0:
+		if (this->CONNECTServer())
+		{
+			this->FlagConnected = true;
+			this->FlagConnectStep++;
+		}
+		break;
+	case 1:
+		break;
+	default:
+		break;
+	}
+	
 }
 //接收数据
 bool MqttLink::Receive()
