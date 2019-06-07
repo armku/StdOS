@@ -83,6 +83,7 @@ void checkComRoutin(void* param)
 		FlagIdleCnt = 0;
 	}
 }
+char* publish = "abcd";
 //要求1000ms调用一次
 void Esp8266Routin(void* param)
 {
@@ -98,7 +99,9 @@ void Esp8266Routin(void* param)
 		}
 		else
 		{
-
+			mqtt.Puslish(publish,4);
+			delay(20);
+			mqtt.Puslish_Release();
 		}
 		//esp.ESP8266_SendStr("Hello workd!");
 	}
