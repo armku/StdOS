@@ -11,7 +11,7 @@
 #ifdef _ESP8266EST_CPP
 
 MqttLink mqtt;
-const char *ClientID = "clientid00001";
+const char *ClientID = "123456789abc";
 const char* id = "1111";
 const char* topic = "ShareDevince/RTV/IMEI";
 const char* subtopic = "ShareDevince/CZT/IMEI";//订阅主题
