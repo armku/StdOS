@@ -71,6 +71,7 @@ bool MqttLink::CONNECTServer()
 		}
 		if (connected)
 		{
+			debug_printf("Login to Server OK");
 			return true;
 		}
 	}
