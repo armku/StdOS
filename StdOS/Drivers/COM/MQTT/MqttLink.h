@@ -81,6 +81,8 @@ public:
 	pFun_UART_buf send_buf;		// 发送缓冲区
 	int FlagConnected;			// 连接服务器成功
 	int FlagConnectStep;		// 连接服务器步骤
+	char bufRcv[100];			// 接收缓冲区
+	int readlen;//读取的缓冲区长度
 private:
 private:
 	bool Receive();//接收数据

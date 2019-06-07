@@ -68,9 +68,9 @@ void checkComRoutin(void* param)
 		
 		if (esp.FlagConnected)
 		{
-			esp.readlen = ringRcvcom3.Get(esp.bufRcv, ArrayLength(esp.bufRcv));
-			debug_printf("Rcv(%d) Hex:",esp.readlen);
-			UART1_send_data((uint8_t*)esp.bufRcv, esp.readlen);//接收到的数据显示
+			mqtt.readlen = ringRcvcom3.Get(mqtt.bufRcv, ArrayLength(mqtt.bufRcv));
+			debug_printf("Rcv(%d) Hex:",mqtt.readlen);
+			UART1_send_data((uint8_t*)mqtt.bufRcv, mqtt.readlen);//接收到的数据显示
 		}
 		else
 		{
