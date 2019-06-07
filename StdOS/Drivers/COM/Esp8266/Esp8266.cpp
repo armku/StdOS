@@ -177,7 +177,7 @@ bool Esp8266::ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char* ip, char* Com
 	else
 		sprintf(cCmd, "AT+CIPSTART=%s", cStr);
 
-	return ESP8266_Cmd(cCmd, "OK", "ALREAY CONNECT", 400);
+	return ESP8266_Cmd(cCmd, "OK", "ALREADY CONNECTED", 400);
 }
 //进入透传模式
 bool Esp8266::ESP8266_UnvarnishSend(void)
