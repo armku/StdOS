@@ -61,7 +61,7 @@ bool MqttLink::CONNECTServer()
 
 	this->Send();
 	debug_printf("Send Login Command\r\n");
-	delay(200);
+	delay(500);
 	if (this->readlen == 4)
 	{
 		//20 02 00 00 (4)
