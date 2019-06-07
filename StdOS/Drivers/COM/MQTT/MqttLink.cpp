@@ -60,6 +60,7 @@ bool MqttLink::CONNECTServer()
 	this->txFrame.dataLength = 14 + strlen(ClientID);
 
 	this->Send();
+	debug_printf("Send Login Command\r\n");
 	delayMicroseconds(500);
 	if (this->readlen == 4)
 	{
