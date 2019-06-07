@@ -143,7 +143,7 @@ bool Esp8266::ESP8266_JoinAP(char* pSSID, char* pPassWord)
 	sprintf(cCmd, "AT+CWJAP=\"%s\",\"%s\"", pSSID, pPassWord);
 	debug_printf("JoinAP send:%s\r\n",cCmd);
 
-	return ESP8266_Cmd(cCmd, "OK", NULL, 5000);
+	return ESP8266_Cmd(cCmd, "OK", NULL, 500);
 }
 bool Esp8266::ESP8266_Enable_MultipleId(FunctionalState enumEnUnvarnishTx)
 {
@@ -177,7 +177,7 @@ bool Esp8266::ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char* ip, char* Com
 	else
 		sprintf(cCmd, "AT+CIPSTART=%s", cStr);
 
-	return ESP8266_Cmd(cCmd, "OK", "ALREAY CONNECT", 4000);
+	return ESP8266_Cmd(cCmd, "OK", "ALREAY CONNECT", 400);
 }
 //进入透传模式
 bool Esp8266::ESP8266_UnvarnishSend(void)
@@ -265,7 +265,7 @@ bool Esp8266::ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char* pStr, 
 
 		ESP8266_Cmd(cStr, "> ", 0, 1000);
 
-		bRet = this->ESP8266_Cmd(pStr, "SEND OK", 0, 1000);
+		bRet = this->ESP8266_Cmd(pStr, "SEND OK", 0, 100);
 	}
 
 	return bRet;
