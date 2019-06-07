@@ -24,7 +24,7 @@ const char* subtopic = "ShareDevince/CZT/IMEI";//订阅主题
 #define      macUser_ESP8266_ApPwd            "ozbp8027" 
 
 //要连接的服务器的 IP，即电脑的IP
-#define      macUser_ESP8266_TcpServer_IP     "www.emqtt.xyz" 
+#define      macUser_ESP8266_TcpServer_IP     "test.armku.com" 
 
 //要连接的服务器的端口
 #define      macUser_ESP8266_TcpServer_Port    "1883"         
@@ -85,7 +85,8 @@ void Esp8266Routin(void* param)
 	}
 	else
 	{
-		esp.ESP8266_SendStr("Hello workd!");
+		mqtt.Connect();
+		//esp.ESP8266_SendStr("Hello workd!");
 	}
 }
 
@@ -102,6 +103,10 @@ void Esp8266TestInit()
 	esp.WIFIName = macUser_ESP8266_ApSsid;
 	esp.WIFIPassword = macUser_ESP8266_ApPwd;
 
+	mqtt.ClientID = (char*)ClientID;
+	mqtt.FixHead = 0x10;
+	//mqtt.MessageID = (char*)id;
+	
 	mqtt.send_buf = UART3_send_data;
 
 	debug_printf("\r\n WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息)
