@@ -122,6 +122,7 @@ void Esp8266TestInit()
 
 	mqtt.ClientID = (char*)ClientID;
 	mqtt.FixHead = 0x10;
+	mqtt.Topic = (char*)topic;
 	//mqtt.MessageID = (char*)id;
 	
 	mqtt.send_buf = UART3_send_data;

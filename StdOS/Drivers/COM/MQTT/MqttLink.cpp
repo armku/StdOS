@@ -148,8 +148,8 @@ bool MqttLink::Puslish(uint8_t *buf, int len)
 
 	for (int i = 0; i < 100; i++)
 		this->txFrame.data[i] = 0;
-	sprintf((char*)(this->txFrame.data), "%d ·¢ËÍ²âÊÔ\r\n\0", icnttest++);
-	printf("%d ·¢ËÍ²âÊÔ\r\n", icnttest);
+	debug_printf((char*)(this->txFrame.data), "%d ·¢ËÍ²âÊÔ\r\n\0", icnttest++);
+	debug_printf("%d ·¢ËÍ²âÊÔ\r\n", icnttest);
 	this->txFrame.dataLength = strlen((char*)this->txFrame.data);
 	this->Send();
 	///*Sys.Sleep(200);*/
