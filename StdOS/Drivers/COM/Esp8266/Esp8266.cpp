@@ -81,7 +81,7 @@ bool Esp8266::ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waitti
 	if ((reply1 == 0) && (reply2 == 0))                      //不需要接收数据
 		return true;
 	this->WaitTime = waittime;
-	delayMicroseconds(waittime);
+	delay(waittime);
 
 	
 	//UART1_send_data((uint8_t*)this->bufRcv, this->readlen);
