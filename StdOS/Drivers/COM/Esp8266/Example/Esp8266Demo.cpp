@@ -24,7 +24,7 @@ const char* subtopic = "ShareDevince/CZT/IMEI";//订阅主题
 #define      macUser_ESP8266_ApPwd            "ozbp8027" 
 
 //要连接的服务器的 IP，即电脑的IP
-#define      macUser_ESP8266_TcpServer_IP     "test.armku.com"  //"www.emqtt.xyz" "test.armku.com" 
+#define      macUser_ESP8266_TcpServer_IP     "www.emqtt.xyz"  //"www.emqtt.xyz" "test.armku.com" 
 
 //要连接的服务器的端口
 #define      macUser_ESP8266_TcpServer_Port    "1883"         
@@ -65,12 +65,19 @@ void checkComRoutin(void* param)
 	{
 		FlagInFrame = 1;
 
-		esp.readlen = ringRcvcom3.Get(esp.bufRcv, ArrayLength(esp.bufRcv));
+		
 		if (esp.FlagConnected)
 		{
-			UART1_send_data((uint8_t*)"Rcv: ", 5);
+			esp.readlen = ringRcvcom3.Get(esp.bufRcv, ArrayLength(esp.bufRcv));
+			debug_printf("Rcv(%d) Hex:",esp.readlen);
+			UART1_send_data((uint8_t*)esp.bufRcv, esp.readlen);//接收到的数据显示
 		}
-		UART1_send_data((uint8_t*)esp.bufRcv, esp.readlen);//接收到的数据显示
+		else
+		{
+			esp.readlen = ringRcvcom3.Get(esp.bufRcv, ArrayLength(esp.bufRcv));
+			UART1_send_data((uint8_t*)esp.bufRcv, esp.readlen);//接收到的数据显示
+		}
+		
 						
 		FlagInFrame = 0;
 		FlagIdleCnt = 0;
