@@ -176,6 +176,7 @@ bool MqttLink::Puslish_Release()
 	}
 	this->txFrame.dataLength = ArrayLength(buf);
 
+	debug_printf("Push Release\r\n");
 	this->Send();
 	/*Sys.Sleep(200);*/
 	this->Receive();
