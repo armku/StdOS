@@ -58,7 +58,7 @@ bool MqttLink::Connect()
 		this->Send();
 		/*Sys.Sleep(200);*/
 		//vTaskDelay(500);
-		this->Receive();
+		/*this->Receive();*/
 	}
 }
 //接收数据
