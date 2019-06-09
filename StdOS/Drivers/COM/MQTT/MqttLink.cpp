@@ -60,10 +60,11 @@ bool MqttLink::CONNECTServer()
 	this->txFrame.dataLength = 14 + strlen(ClientID);
 
 	this->Send();
-	debug_printf("Send Login Command\r\n");
+	//debug_printf("Send Login Command\r\n");
 	delay(500);
 	if (this->readlen == 4)
 	{
+		debug_printf("Rec Length 4\r\n");
 		//20 02 00 00 (4)
 		for (int i = 0; i < 4; i++)
 		{
@@ -72,9 +73,17 @@ bool MqttLink::CONNECTServer()
 		}
 		if (connected)
 		{
-			debug_printf("Login to Server OK");
+			//debug_printf("Login to Server OK\r\n");
 			return true;
 		}
+		else
+		{
+			//debug_printf("Login to Server ERROR\r\n");
+		}
+	}
+	else
+	{
+		debug_printf("Login to Server rcv length %d ERROR\r\n", this->readlen);
 	}
 	return false;
 }
