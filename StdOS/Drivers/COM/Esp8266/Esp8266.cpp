@@ -53,10 +53,11 @@ void Esp8266::Connect()
 		if (this->ESP8266_UnvarnishSend())
 		{
 			this->FlagConnectStep++;
+			this->FlagConnected = true;
 		}
 		break;
 	case 7:
-		if (ESP8266_Cmd("AT+CIPSEND=1", "OK", ">", 500))
+		if (ESP8266_Cmd("AT+CIPSEND", "OK", ">", 500))
 		{
 			this->FlagConnectStep++;	
 			this->FlagConnected = true;
