@@ -59,10 +59,15 @@ void Esp8266::Connect()
 		if (ESP8266_Cmd("AT+CIPSEND", "OK", ">", 500))
 		{
 			this->FlagConnectStep++;	
-			this->FlagConnected = true;
+			//this->FlagConnected = true;
 		}
 		break;
 	case 8:
+		if (ESP8266_Cmd("AT+CIPSEND", "OK", ">", 500))
+		{
+			this->FlagConnectStep++;
+			this->FlagConnected = true;
+		}
 		break;
 	default:
 		break;
