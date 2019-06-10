@@ -53,7 +53,7 @@ void Esp8266::Connect()
 		if (this->ESP8266_UnvarnishSend())
 		{
 			this->FlagConnectStep++;
-			this->FlagConnected = true;
+			//this->FlagConnected = true;
 		}
 		break;
 	case 7:
