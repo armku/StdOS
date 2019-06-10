@@ -101,8 +101,8 @@ void Esp8266Routin(void* param)
 		else
 		{
 			mqtt.Puslish(publish,4);
-			delay(200);
-			mqtt.Puslish_Release();
+			//delay(200);
+			//mqtt.Puslish_Release();
 		}
 		//esp.ESP8266_SendStr("Hello workd!");
 	}
