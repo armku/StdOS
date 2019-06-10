@@ -159,7 +159,7 @@ bool MqttLink::Puslish(uint8_t *buf, int len)
 		this->txFrame.data[i] = 0;*/
 	debug_printf((char*)(this->txFrame.data), "%d ·¢ËÍ²âÊÔ\r\n\0", icnttest++);
 	debug_printf("%d ·¢ËÍ²âÊÔ\r\n", icnttest);
-	this->txFrame.dataLength = strlen((char*)this->txFrame.data);
+	/*this->txFrame.dataLength = strlen((char*)this->txFrame.data);*/
 	this->Send();
 	///*Sys.Sleep(200);*/
 	//this->Receive();
