@@ -94,7 +94,7 @@ void Esp8266Routin(void* param)
 	}
 	else
 	{
-		/*if (!mqtt.FlagConnected)
+		if (!mqtt.FlagConnected)
 		{
 			mqtt.Connect();
 		}
@@ -103,8 +103,8 @@ void Esp8266Routin(void* param)
 			mqtt.Puslish(publish,4);
 			delay(200);
 			mqtt.Puslish_Release();
-		}*/
-		esp.ESP8266_SendStr("Hello workd!");
+		}
+		//esp.ESP8266_SendStr("Hello workd!");
 	}
 }
 
