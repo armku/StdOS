@@ -29,41 +29,47 @@ void Esp8266::Connect()
 		this->FlagConnectStep++;
 		break;
 	case 1:
+		if (this->SoftReset())
+		{
+			this->FlagConnectStep++;
+		}
+		break;
+	case 2:
 		if (this->AT())
 			this->FlagConnectStep++;
 		//debug_printf("AT send step:%d\r\n", this->FlagConnectStep);
 		break;
-	case 2:
+	case 3:
 		if (this->ESP8266_Net_Mode_Choose(STA))
 			this->FlagConnectStep++;
 		break;
-	case 3:
+	case 4:
 		if (this->ESP8266_JoinAP(this->WIFIName,this->WIFIPassword))
 			this->FlagConnectStep++;
 		break;
-	case 4:
+	case 5:
 		if (this->ESP8266_Enable_MultipleId(DISABLE))
 			this->FlagConnectStep++;
 		break;
-	case 5:
+	case 6:
 		if (this->ESP8266_Link_Server(enumTCP, this->Server,this->ServerPort, Single_ID_0))
 			this->FlagConnectStep++;
 		break;
-	case 6:
+	case 7:
 		if (this->ESP8266_UnvarnishSend())
 		{
 			this->FlagConnectStep++;
 			//this->FlagConnected = true;
 		}
 		break;
-	case 7:
+	case 8:
 		if (ESP8266_Cmd("AT+CIPSEND", "OK", ">", 500))
 		{
 			this->FlagConnectStep++;	
 			this->FlagConnected = true;
 		}
 		break;
-	case 8:		
+	case 9:		
 		break;
 	default:
 		break;
@@ -195,6 +201,11 @@ bool Esp8266::ESP8266_SendStr(char* str)
 {
 	//this->ESP8266_SendString(DISABLE, str, 0, Single_ID_0);
 	this->Cmd(str);
+	return true;
+}
+//Èí¼þ¸´Î»
+bool Esp8266::SoftReset()
+{
 	return true;
 }
 void  Esp8266::ESP8266_ExitUnvarnishSend(void)

@@ -62,6 +62,7 @@ public:
 	void ESP8266_ExitUnvarnishSend(void);
 	bool ESP8266_SendStr(char* str);//·¢ËÍ×Ö·û´®
 	bool ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char* pStr, uint32_t ulStrLength, ENUM_ID_NO_TypeDef ucId);
+	bool SoftReset();//Èí¼þ¸´Î»
 
 	bool ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waittime);
 	void Cmd(char* cmd);

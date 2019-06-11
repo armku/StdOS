@@ -196,5 +196,3 @@ bool MqttLink::Subscribe(char* topc)
 
 	return 1;
 }
-
-
