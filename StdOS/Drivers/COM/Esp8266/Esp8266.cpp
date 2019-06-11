@@ -206,7 +206,7 @@ bool Esp8266::ESP8266_SendStr(char* str)
 //Èí¼þ¸´Î»
 bool Esp8266::SoftReset()
 {
-	return this->ESP8266_Cmd("AT", "AT", NULL, 500);
+	return this->ESP8266_Cmd("AT+RST", "OK", "", 100);
 }
 void  Esp8266::ESP8266_ExitUnvarnishSend(void)
 {
