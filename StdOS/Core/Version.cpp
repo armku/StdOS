@@ -1,23 +1,8 @@
-#include "Version.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "Version.h"
 
-Version::Version(int major, int minor, int year, int monday)
-{
-	this->Major = major;
-	this->Minor = minor;
-	this->Year = year;
-	this->MonthDay = monday;
-}
-
-Version::Version(const Version &ver)
-{
-	this->Major = ver.Major;
-	this->Minor = ver.Minor;
-	this->Year = ver.Year;
-	this->MonthDay = ver.MonthDay;
-}
 template <typename T1>
 void memset1(T1 *buf, int len, char val)
 {
@@ -36,7 +21,7 @@ static void parse(char* str, int* major, int* minor, int* year, int* monday)
 	{
 		if (str[i] == '.')
 		{
-			dotpos[add++] = i;			
+			dotpos[add++] = i;
 		}
 		if (str[i] == 0)
 		{
@@ -57,10 +42,10 @@ static void parse(char* str, int* major, int* minor, int* year, int* monday)
 	*major = atoi(buf);
 	//minor
 	memset1(buf, ArrayLength(buf), 0);
-	for (int i = dotpos[0]+1; i < dotpos[1]; i++)
+	for (int i = dotpos[0] + 1; i < dotpos[1]; i++)
 	{
-		buf[i-(dotpos[0] + 1)] = str[i];
-		buf[i -(dotpos[0] + 1)+ 1] = 0;
+		buf[i - (dotpos[0] + 1)] = str[i];
+		buf[i - (dotpos[0] + 1) + 1] = 0;
 	}
 	*minor = atoi(buf);
 	//year
@@ -80,6 +65,23 @@ static void parse(char* str, int* major, int* minor, int* year, int* monday)
 	}
 	*monday = atoi(buf);
 }
+
+Version::Version(int major, int minor, int year, int monday)
+{
+	this->Major = major;
+	this->Minor = minor;
+	this->Year = year;
+	this->MonthDay = monday;
+}
+
+Version::Version(const Version &ver)
+{
+	this->Major = ver.Major;
+	this->Minor = ver.Minor;
+	this->Year = ver.Year;
+	this->MonthDay = ver.MonthDay;
+}
+
 //  ≈‰∞Ê±æ£¨∏Ò Ω1.0.2018.1114
 int Version::Parse(char* str)
 {
