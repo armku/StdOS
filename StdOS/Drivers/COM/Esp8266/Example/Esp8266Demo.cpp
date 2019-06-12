@@ -4,6 +4,7 @@
 #include "Port.h"
 #include "Task.h"
 #include "Core/RingBuffer.h"
+#include "Buffer.h"
 
 #include "../Drivers/COM/MQTT/MqttLink.h"
 
@@ -72,11 +73,13 @@ void checkComRoutin(void* param)
 			mqtt.readlen = ringRcvcom3.Get(mqtt.bufRcv, ArrayLength(mqtt.bufRcv));
 			debug_printf("Rcv(%d) Hex:",mqtt.readlen);
 			UART1_send_data((uint8_t*)mqtt.bufRcv, mqtt.readlen);//接收到的数据显示
+			Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
 		}
 		else
 		{
 			esp.readlen = ringRcvcom3.Get(esp.bufRcv, ArrayLength(esp.bufRcv));
 			UART1_send_data((uint8_t*)esp.bufRcv, esp.readlen);//接收到的数据显示
+			Buffer(esp.bufRcv, esp.readlen).ShowHex();
 		}
 		
 						
