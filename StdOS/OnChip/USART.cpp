@@ -10,9 +10,9 @@ USART::USART()
 }
 
 bool USART::SendBytes(uint8_t txData[], uint16_t size)
-{	
+{
 	USART_TypeDef* mUSARTx;   //USARTx
-		
+
 	if (mTxBuf.ResSize() < size)      //compare the unused bytes and sending bytes
 	{
 		return false;
