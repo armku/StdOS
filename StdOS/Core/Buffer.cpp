@@ -1,23 +1,25 @@
 #include <string.h>
 #include "Buffer.h"
 
+static void ShowChar(char c)
+{
+	if (c >= 10)
+	{
+		StdPrintf("%c", c - 10 + 'A');
+	}
+	else
+	{
+		StdPrintf("%c", c + '0');
+	}
+}
+
+
 Buffer::Buffer(void *ptr, int len)
 {
     this->_Arr = (char*)ptr;
     this->_Length = len;
 }
 
-static void ShowChar(char c)
-{
-	if(c>=10)
-	{
-		StdPrintf("%c",c-10+'A');
-	}
-	else
-	{
-		StdPrintf("%c",c+'0');
-	}
-}
 void Buffer::Show(bool newLine)const
 {	
 	for(int i=0;i<this->_Length;i++)
