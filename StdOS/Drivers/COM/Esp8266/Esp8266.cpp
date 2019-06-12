@@ -9,9 +9,6 @@ Esp8266::Esp8266()
 	this->FlagConnectStep = 0;	
 }
 
-Esp8266::~Esp8266()
-{
-}
 //¸´Î»
 void Esp8266::Reset()
 {

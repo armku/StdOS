@@ -42,7 +42,6 @@ class Esp8266
 {
 public:
 	Esp8266();
-	~Esp8266();
 
 	void Connect();//连接服务器
 
