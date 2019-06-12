@@ -46,32 +46,36 @@ void Esp8266::Connect()
 			this->FlagConnectStep++;
 		break;
 	case 5:
+		//Ôö¼ÓÑÓÊ±
+		this->FlagConnectStep++;
+		break;
+	case 6:
 		if (this->ESP8266_JoinAP(this->WIFIName,this->WIFIPassword))
 			this->FlagConnectStep++;
 		break;
-	case 6:
+	case 7:
 		if (this->ESP8266_Enable_MultipleId(DISABLE))
 			this->FlagConnectStep++;
 		break;
-	case 7:
+	case 8:
 		if (this->ESP8266_Link_Server(enumTCP, this->Server,this->ServerPort, Single_ID_0))
 			this->FlagConnectStep++;
 		break;
-	case 8:
+	case 9:
 		if (this->ESP8266_UnvarnishSend())
 		{
 			this->FlagConnectStep++;
 			//this->FlagConnected = true;
 		}
 		break;
-	case 9:
+	case 10:
 		if (ESP8266_Cmd("AT+CIPSEND", "OK", ">", 500))
 		{
 			this->FlagConnectStep++;	
 			this->FlagConnected = true;
 		}
 		break;
-	case 10:		
+	case 11:		
 		break;
 	default:
 		break;
