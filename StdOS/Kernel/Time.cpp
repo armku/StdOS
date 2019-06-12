@@ -56,7 +56,7 @@ void TimeCost::Show(cstring format)const
 void TimeUpdate()
 {
 	Time.Milliseconds += 1000;
-	Time.Seconds++;	
+	Time.Seconds++;
 }
 int gTicks = 0; //每个us需要的systick时钟数 	
 
@@ -121,81 +121,80 @@ void TTime::Init()
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
 	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); //关闭jtag，保留swd	
 #elif defined STM32F4	
-		// 初始化为输出
-		this->Index = 2;
-		gTicks = (Sys.Clock >> 3) / 0xF4240u;		
-		//初始化延迟函数
-		//SYSTICK的时钟固定为HCLK时钟的1/8
-		//SYSCLK:系统时钟
-	//        uint32_t SYSCLK = 168;
-		SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
-		SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
-		SysTick_Config(9000); //配置SysTick tick is 9ms	9000
-		NVIC_SetPriority(SysTick_IRQn, 0);
-		switch (this->Index)
-		{
-		case 2:
-			NVIC_SetPriority(TIM3_IRQn, 0);
-			break;
-		case 5:
-			break;
-		case 6:
-			NVIC_SetPriority(TIM7_IRQn, 0);
-			break;
-		default:
-			break;
-		}
+	// 初始化为输出
+	this->Index = 2;
+	gTicks = (Sys.Clock >> 3) / 0xF4240u;
+	//初始化延迟函数
+	//SYSTICK的时钟固定为HCLK时钟的1/8
+	//SYSCLK:系统时钟
+//        uint32_t SYSCLK = 168;
+	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
+	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
+	SysTick_Config(9000); //配置SysTick tick is 9ms	9000
+	NVIC_SetPriority(SysTick_IRQn, 0);
+	switch (this->Index)
+	{
+	case 2:
+		NVIC_SetPriority(TIM3_IRQn, 0);
+		break;
+	case 5:
+		break;
+	case 6:
+		NVIC_SetPriority(TIM7_IRQn, 0);
+		break;
+	default:
+		break;
+	}
 #endif
 }
 
-	// 当前滴答时钟
-	uint32_t TTime::CurrentTicks()const
-	{
-		return DeviceConfigCenter::CurrentTicks1();
-	}
+// 当前滴答时钟
+uint32_t TTime::CurrentTicks()const
+{
+	return DeviceConfigCenter::CurrentTicks1();
+}
 
-	//延时毫秒
-	void delay(uint64_t ms)
-	{
-		Sys.Sleep112233(ms);
-	}
-	//us延时，100us以下精确
-	void delayMicroseconds(uint32_t us)
-	{
+//延时毫秒
+void delay(uint64_t ms)
+{
+	Sys.Sleep112233(ms);
+}
+//us延时，100us以下精确
+void delayMicroseconds(uint32_t us)
+{
 #if defined STM32F0
-		/*
-		F072 48MHz	750us->774us
-		*/
-		for (int i = 0; i < us; i++)
-		{
-			for (int j = 0; j < 7; j++);
-		}
+	/*
+	F072 48MHz	750us->774us
+	*/
+	for (int i = 0; i < us; i++)
+	{
+		for (int j = 0; j < 7; j++);
+	}
 #elif defined STM32F1
-		/*
-		F103 72MHz  750us->753us
-		*/
-		for (int i = 0; i < us; i++)
-		{
-			for (int j = 0; j < 10; j++);
-		}
+	/*
+	F103 72MHz  750us->753us
+	*/
+	for (int i = 0; i < us; i++)
+	{
+		for (int j = 0; j < 10; j++);
+	}
 #elif defined STM32F4
-		/*
-		F407 168MHz 750us->759us
-		*/
-		for (int i = 0; i < us; i++)
-		{
-			for (int j = 0; j < 40; j++);
-		}
+	/*
+	F407 168MHz 750us->759us
+	*/
+	for (int i = 0; i < us; i++)
+	{
+		for (int j = 0; j < 40; j++);
+	}
 #endif
-	}
-	//系统启动后的毫秒数
-	uint64_t millis()
-	{
-		return Time.Milliseconds + DeviceConfigCenter::CurrentTick();
-	}
-	//开机到现在的微妙数
-	uint64_t micros()
-	{
-		return millis() *1000;
-	}
-
+}
+//系统启动后的毫秒数
+uint64_t millis()
+{
+	return Time.Milliseconds + DeviceConfigCenter::CurrentTick();
+}
+//开机到现在的微妙数
+uint64_t micros()
+{
+	return millis() * 1000;
+}
