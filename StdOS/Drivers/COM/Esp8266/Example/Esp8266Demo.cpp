@@ -96,15 +96,15 @@ void Esp8266Routin(void* param)
 	{
 		if (!mqtt.FlagConnected)
 		{
-			mqtt.Connect();
+			/*mqtt.Connect();*/
 		}
 		else
 		{
-			mqtt.Puslish(publish,4);
+			/*mqtt.Puslish(publish,4);
 			delay(200);
-			mqtt.Puslish_Release();
+			mqtt.Puslish_Release();*/
 		}
-		//esp.ESP8266_SendStr("Hello workd!");
+		esp.ESP8266_SendStr("Hello workd!");
 	}
 }
 
@@ -132,6 +132,6 @@ void Esp8266TestInit()
 
 	FlagInFrame = false;
 	Sys.AddTask(checkComRoutin, 0, 0, 10, "EspCOmCHK");
-	Sys.AddTask(Esp8266Routin, 0, 0, 1000, "EspRoutin");
+	Sys.AddTask(Esp8266Routin, 0, 0, 2000, "EspRoutin");
 }
 #endif
