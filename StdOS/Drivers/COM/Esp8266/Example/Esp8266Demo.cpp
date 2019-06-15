@@ -26,8 +26,8 @@ const char* subtopic = "ShareDevince/CZT/IMEI";//订阅主题
 #define      macUser_ESP8266_ApPwd            "ozbp8027" 
 
 //要连接的服务器的 IP，即电脑的IP
-//#define      macUser_ESP8266_TcpServer_IP     "www.emqtt.xyz" 
-#define      macUser_ESP8266_TcpServer_IP     "test.armku.com" 
+#define      macUser_ESP8266_TcpServer_IP     "www.emqtt.xyz" 
+//#define      macUser_ESP8266_TcpServer_IP     "test.armku.com" 
 
 //要连接的服务器的端口
 #define      macUser_ESP8266_TcpServer_Port    "1883"         
@@ -100,15 +100,15 @@ void Esp8266Routin(void* param)
 	{
 		if (!mqtt.FlagConnected)
 		{
-			/*mqtt.Connect();*/
+			mqtt.Connect();
 		}
 		else
 		{
-			/*mqtt.Puslish(publish,4);
+			mqtt.Puslish(publish,4);
 			delay(200);
-			mqtt.Puslish_Release();*/
+			mqtt.Puslish_Release();
 		}
-		esp.ESP8266_SendStr("Hello world!");
+		//esp.ESP8266_SendStr("Hello world!");
 	}
 }
 

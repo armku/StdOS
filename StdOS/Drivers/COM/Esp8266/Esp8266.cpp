@@ -79,7 +79,7 @@ void Esp8266::Connect()
 		{
 			this->FlagConnectStep++;	
 			//this->FlagConnected = true;
-			debug_printf("传送数据\r\n");
+			debug_printf("连接服务器成功，进入数据交换模式\r\n");
 		}
 		break;
 	case 12:	
