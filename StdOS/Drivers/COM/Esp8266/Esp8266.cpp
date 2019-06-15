@@ -68,7 +68,7 @@ void Esp8266::Connect()
 		{
 			this->FlagConnectStep++;
 			//this->FlagConnected = true;
-			debug_printf("进入透传模式\r\n");
+			debug_printf("设置透传模式\r\n");
 		}
 		break;
 	case 10:
@@ -79,7 +79,7 @@ void Esp8266::Connect()
 		{//进入透传模式返回">"
 			this->FlagConnectStep++;	
 			//this->FlagConnected = true;
-			debug_printf("连接服务器成功，进入数据透传模式\r\n");
+			debug_printf("进入透传模式成功\r\n");
 		}
 		break;
 	case 12:	
