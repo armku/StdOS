@@ -19,7 +19,8 @@ const char* subtopic = "ShareDevince/CZT/IMEI";//订阅主题
 
 /********************************** 用户需要设置的参数**********************************/
 //要连接的热点的名称，即WIFI名称
-#define      macUser_ESP8266_ApSsid           "AndroidAP9DBE" 
+//#define      macUser_ESP8266_ApSsid           "AndroidAP9DBE" 
+#define      macUser_ESP8266_ApSsid           "@PHICOMM_18" 
 
 //要连接的热点的密钥
 #define      macUser_ESP8266_ApPwd            "ozbp8027" 
@@ -73,13 +74,13 @@ void checkComRoutin(void* param)
 			mqtt.readlen = ringRcvcom3.Get(mqtt.bufRcv, ArrayLength(mqtt.bufRcv));
 			debug_printf("Rcv(%d) Hex:",mqtt.readlen);
 			UART1_send_data((uint8_t*)mqtt.bufRcv, mqtt.readlen);//接收到的数据显示
-			Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
+			//Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
 		}
 		else
 		{
 			esp.readlen = ringRcvcom3.Get(esp.bufRcv, ArrayLength(esp.bufRcv));
 			UART1_send_data((uint8_t*)esp.bufRcv, esp.readlen);//接收到的数据显示
-			Buffer(esp.bufRcv, esp.readlen).ShowHex();
+			//Buffer(esp.bufRcv, esp.readlen).ShowHex();
 		}
 		
 						

@@ -44,6 +44,7 @@ void Esp8266::Connect()
 	case 4:
 		if (this->ESP8266_Net_Mode_Choose(STA))
 			this->FlagConnectStep++;
+		debug_printf("Station模式\r\n");
 		break;
 	case 5:
 		//增加延时
@@ -56,6 +57,7 @@ void Esp8266::Connect()
 	case 7:
 		if (this->ESP8266_Enable_MultipleId(DISABLE))
 			this->FlagConnectStep++;
+		debug_printf("单链接模式\r\n");
 		break;
 	case 8:
 		if (this->ESP8266_Link_Server(enumTCP, this->Server,this->ServerPort, Single_ID_0))
@@ -66,6 +68,7 @@ void Esp8266::Connect()
 		{
 			this->FlagConnectStep++;
 			//this->FlagConnected = true;
+			debug_printf("进入透传模式\r\n");
 		}
 		break;
 	case 10:
@@ -76,6 +79,7 @@ void Esp8266::Connect()
 		{
 			this->FlagConnectStep++;	
 			//this->FlagConnected = true;
+			debug_printf("传送数据\r\n");
 		}
 		break;
 	case 12:	
