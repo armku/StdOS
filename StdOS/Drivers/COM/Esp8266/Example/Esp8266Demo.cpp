@@ -80,12 +80,12 @@ void checkComRoutin(void* param)
 			if (!mqtt.FlagConnected)
 			{
 				//正在登陆服务器
-				Buffer(esp.bufRcv, esp.readlen).ShowHex();
+				Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
 			}
 			else
 			{
 				//登陆服务器成功
-				Buffer(esp.bufRcv, esp.readlen).ShowHex();
+				Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
 			}
 		}
 		else
