@@ -668,6 +668,21 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\Core\RingBuffer.cpp</FilePath>
             </File>
+            <File>
+              <FileName>WString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\WString.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>dtostrf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\Core\dtostrf.c</FilePath>
+            </File>
+            <File>
+              <FileName>itoa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\Core\itoa.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -909,19 +924,9 @@
               <FilePath>..\StdOS\ArduinoAPI\Arduino.c</FilePath>
             </File>
             <File>
-              <FileName>dtostrf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\dtostrf.c</FilePath>
-            </File>
-            <File>
               <FileName>HardwareSerial.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\ArduinoAPI\HardwareSerial.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>itoa.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\itoa.c</FilePath>
             </File>
             <File>
               <FileName>Print.cpp</FileName>
@@ -952,11 +957,6 @@
               <FileName>WMath.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\ArduinoAPI\WMath.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WString.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\WString.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1664,6 +1664,21 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\Core\RingBuffer.cpp</FilePath>
             </File>
+            <File>
+              <FileName>WString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Core\WString.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>dtostrf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\Core\dtostrf.c</FilePath>
+            </File>
+            <File>
+              <FileName>itoa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\Core\itoa.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1905,19 +1920,9 @@
               <FilePath>..\StdOS\ArduinoAPI\Arduino.c</FilePath>
             </File>
             <File>
-              <FileName>dtostrf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\dtostrf.c</FilePath>
-            </File>
-            <File>
               <FileName>HardwareSerial.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\ArduinoAPI\HardwareSerial.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>itoa.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\itoa.c</FilePath>
             </File>
             <File>
               <FileName>Print.cpp</FileName>
@@ -1948,11 +1953,6 @@
               <FileName>WMath.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\ArduinoAPI\WMath.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WString.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\WString.cpp</FilePath>
             </File>
           </Files>
         </Group>
