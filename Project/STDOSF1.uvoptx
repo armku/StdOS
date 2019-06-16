@@ -1224,8 +1224,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Core\String.cpp</PathWithFileName>
-      <FilenameWithoutPath>String.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\StdOS\Core\Strings.cpp</PathWithFileName>
+      <FilenameWithoutPath>Strings.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

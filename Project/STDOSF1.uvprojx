@@ -669,9 +669,9 @@
               <FilePath>..\StdOS\Core\RingBuffer.cpp</FilePath>
             </File>
             <File>
-              <FileName>String.cpp</FileName>
+              <FileName>Strings.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\String.cpp</FilePath>
+              <FilePath>..\StdOS\Core\Strings.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1670,9 +1670,9 @@
               <FilePath>..\StdOS\Core\RingBuffer.cpp</FilePath>
             </File>
             <File>
-              <FileName>String.cpp</FileName>
+              <FileName>Strings.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\String.cpp</FilePath>
+              <FilePath>..\StdOS\Core\Strings.cpp</FilePath>
             </File>
           </Files>
         </Group>
