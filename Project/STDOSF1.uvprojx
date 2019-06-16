@@ -668,11 +668,6 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\Core\RingBuffer.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Strings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Strings.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1668,11 +1663,6 @@
               <FileName>RingBuffer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Core\RingBuffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Strings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Strings.cpp</FilePath>
             </File>
           </Files>
         </Group>
