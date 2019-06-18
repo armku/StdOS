@@ -38,7 +38,6 @@ bool MqttLink::Send()
 bool MqttLink::CONNECTServer()
 {
 	int connected = 1;
-	char bufneed[] = { 0x20,0x02,0x00,0x00 };
 
 	this->txFrame.data[0] = this->FixHead;
 	this->txFrame.data[1] = 12 + strlen(ClientID);
@@ -63,6 +62,7 @@ bool MqttLink::CONNECTServer()
 	this->Send();
 	//debug_printf("Send Login Command\r\n");
 	delay(500);
+	char bufneed[] = { 0x20,0x02,0x00,0x00 };
 	if (this->readlen == 4)
 	{
 		debug_printf("Rec Length 4\r\n");
