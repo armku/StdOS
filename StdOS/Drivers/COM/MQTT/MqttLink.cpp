@@ -216,6 +216,19 @@ bool MqttLink::Puslish_Release()
 	}
 	return false;
 }
+//发送并发布数据
+bool MqttLink::PuslishAndRelease(char* buf, int len)
+{
+	if (this->Puslish(buf, len))
+	{
+		delay(50);
+		return this->Puslish_Release();
+	}
+	else
+	{
+		return false;
+	}
+}
 //订阅主题
 bool MqttLink::Subscribe(char* topc)
 {
