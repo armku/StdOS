@@ -155,13 +155,12 @@ bool MqttLink::Puslish(uint8_t *buf, int len)
 	this->txFrame.dataLength = 6 + topticlen + len;
 
 	this->Send();
-	delay(200);
+	delay(100);
 	char bufneed[] = { 0x50,0x02,0x00,0x00 };//响应，最后一个字节为数据帧流水号
 	if (this->readlen == 4)
 	{
-		//debug_printf("Rec Length 4\r\n");
+		//debug_printf("Puslish Rec Length 4\r\n");
 		//Buffer(this->bufRcv, this->readlen).ShowHex(true);
-		//20 02 00 00 (4)
 		for (int i = 0; i < 3; i++)
 		{
 			if (this->bufRcv[i] != bufneed[i])
@@ -193,10 +192,27 @@ bool MqttLink::Puslish_Release()
 	}
 	this->txFrame.dataLength = ArrayLength(buf);
 
-	/*debug_printf("Push Release\r\n");*/
 	this->Send();
-	/*Sys.Sleep(200);*/
-	this->Receive();
+	delay(100);
+	char bufneed[] = { 0x50,0x02,0x00,0x00 };//响应，最后一个字节为数据帧流水号
+	if (this->readlen == 4)
+	{
+		debug_printf("Puslish_Release Rec Length 4\r\n");
+		Buffer(this->bufRcv, this->readlen).ShowHex(true);
+		//20 02 00 00 (4)
+		for (int i = 0; i < 3; i++)
+		{
+			if (this->bufRcv[i] != bufneed[i])
+				return false;
+		}
+		return true;
+	}
+	else
+	{
+		debug_printf("Puslish to Server rcv length %d ERROR\r\n", this->readlen);
+		Buffer(this->bufRcv, this->readlen).ShowHex(true);
+	}
+	return false;
 }
 //订阅主题
 bool MqttLink::Subscribe(char* topc)
