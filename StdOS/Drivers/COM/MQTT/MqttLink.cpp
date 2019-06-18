@@ -25,6 +25,7 @@ bool MqttLink::CheckFrame()
 	{
 		rxFrame.dataLength += rxlen;
 	}*/
+	return false;
 }
 
 bool MqttLink::Send()
@@ -65,7 +66,7 @@ bool MqttLink::CONNECTServer()
 	char bufneed[] = { 0x20,0x02,0x00,0x00 };
 	if (this->readlen == 4)
 	{
-		debug_printf("Rec Length 4\r\n");
+		//debug_printf("Rec Length 4\r\n");
 		//20 02 00 00 (4)
 		for (int i = 0; i < 4; i++)
 		{
@@ -104,7 +105,7 @@ bool MqttLink::Connect()
 	default:
 		break;
 	}
-	
+	return false;
 }
 //接收数据
 bool MqttLink::Receive()
@@ -129,6 +130,7 @@ bool MqttLink::Receive()
 		debug_printf("rcv error\n");
 		return false;
 	}*/
+	return false;
 }
 int icnttest = 0;
 //发送数据
