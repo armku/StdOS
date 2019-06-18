@@ -20,10 +20,10 @@ const char* subtopic = "ShareDevince/CZT/IMEI";//订阅主题
 /********************************** 用户需要设置的参数**********************************/
 //要连接的热点的名称，即WIFI名称
 //#define      macUser_ESP8266_ApSsid           "AndroidAP9DBE" 
-#define      macUser_ESP8266_ApSsid           "@PHICOMM_18" 
+#define      macUser_ESP8266_ApSsid           "NETGEAR77" 
 
 //要连接的热点的密钥
-#define      macUser_ESP8266_ApPwd            "ozbp8027" 
+#define      macUser_ESP8266_ApPwd            "18353217097" 
 
 //要连接的服务器的 IP，即电脑的IP
 #define      macUser_ESP8266_TcpServer_IP     "www.emqtt.xyz" 
