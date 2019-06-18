@@ -7,25 +7,12 @@
 连接服务器 登录
 客户ID:123456789
 10 15 00 04 4D 51 54 54 04 02 00 3C 00 09 31 32 33 34 35 36 37 38 39 (23)
-
-
 */
 
 MqttLink::MqttLink()
 {
 	this->FlagConnected = false;
 	this->FlagConnectStep = 0;
-}
-
-bool MqttLink::CheckFrame()
-{
-	/*int rxlen = com.RxSize();*/
-
-	/*if (com.GetBytes(&rxFrame.data[rxFrame.dataLength], rxlen))
-	{
-		rxFrame.dataLength += rxlen;
-	}*/
-	return false;
 }
 
 bool MqttLink::Send()
@@ -107,32 +94,6 @@ bool MqttLink::Connect()
 	}
 	return false;
 }
-//接收数据
-bool MqttLink::Receive()
-{
-	/*if (com.RxSize() > 0)
-	{
-		debug_printf("rxlen:%d\n", com.RxSize());
-	}
-
-	if ((com.RxSize() > 0) && CheckFrame())
-	{
-		debug_printf("rcv ok rxlen:%d-%d\n", com.RxSize(), rxFrame.dataLength);
-		Buffer bs(rxFrame.data, rxFrame.dataLength);
-		bs.ShowHex();
-		this->com.ClearRxBuf();
-		this->rxFrame.dataLength = 0;
-
-		return true;
-	}
-	else
-	{
-		debug_printf("rcv error\n");
-		return false;
-	}*/
-	return false;
-}
-int icnttest = 0;
 //发送数据
 bool MqttLink::Puslish(char *buf, int len)
 {

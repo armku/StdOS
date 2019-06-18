@@ -67,7 +67,6 @@ public:
 	int8_t FixHead;//报文头	
 	int step;//运行步骤
 	uint16_t MessageID;//信号ID
-	bool CheckFrame();
 	bool Send();
 	bool Connect();
 	bool Puslish(char *buf, int len);//发送数据
@@ -91,8 +90,6 @@ public:
 	char bufRcv[100];			// 接收缓冲区
 	int readlen;//读取的缓冲区长度
 private:
-private:
-	bool Receive();//接收数据
 };
 
 #define ArrayLength(arr) (int)(sizeof(arr)/sizeof(arr[0]))
