@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "MqttLink.h"
 #include "Sys.h"
+#include "Buffer.h"
 /*
 连接服务器 登录
 客户ID:123456789
@@ -146,27 +147,34 @@ bool MqttLink::Puslish(uint8_t *buf, int len)
 
 	this->txFrame.data[4 + topticlen + 0] = this->MessageID >> 8;
 	this->txFrame.data[4 + topticlen + 1] = this->MessageID & 0xff;
-
-
+	
 	for (int i = 0; i < len; i++)
 	{
 		this->txFrame.data[6 + topticlen + i] = buf[i];
 	}
 	this->txFrame.dataLength = 6 + topticlen + len;
 
-
-	/*for (int i = 0; i < 100; i++)
-		this->txFrame.data[i] = 0;*/
-	/*debug_printf((char*)(this->txFrame.data), "%d 发送测试\r\n\0", icnttest++);
-	debug_printf("%d 发送测试\r\n", icnttest);*/
-	/*this->txFrame.dataLength = strlen((char*)this->txFrame.data);*/
 	this->Send();
-	///*Sys.Sleep(200);*/
-	//this->Receive();
-
-
-	//this->Puslish_Release();
-	return true;
+	delay(200);
+	char bufneed[] = { 0x50,0x02,0x00,0x00 };//响应，最后一个字节为数据帧流水号
+	if (this->readlen == 4)
+	{
+		//debug_printf("Rec Length 4\r\n");
+		//Buffer(this->bufRcv, this->readlen).ShowHex(true);
+		//20 02 00 00 (4)
+		for (int i = 0; i < 3; i++)
+		{
+			if (this->bufRcv[i] != bufneed[i])
+				return false;
+		}
+		return true;
+	}
+	else
+	{
+		debug_printf("Puslish to Server rcv length %d ERROR\r\n", this->readlen);
+		Buffer(this->bufRcv, this->readlen).ShowHex(true);
+	}
+	return false;
 }
 //发布
 bool MqttLink::Puslish_Release()
