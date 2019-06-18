@@ -14,15 +14,11 @@ struct DataFrame
 {
 public:
 	const uint8_t header;
-	uint8_t fnCode;
-	uint8_t checkSum;
 	uint8_t data[MAX_FRAME_DATA_LENGTH];//当前数据
-	bool isUpdated;
 	uint8_t dataLength; //当前数据长度
 public:
 	DataFrame() :header(FRAME_HEADER)                //constructor
-	{
-		isUpdated = false;
+	{	
 	}
 };
 
