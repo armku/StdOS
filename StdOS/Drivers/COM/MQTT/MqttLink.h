@@ -70,11 +70,11 @@ public:
 	bool CheckFrame();
 	bool Send();
 	bool Connect();
-	bool Puslish(uint8_t *buf, int len);//发送数据
+	bool Puslish(char *buf, int len);//发送数据
 	bool PuslishAndRelease(char* buf, int len);//发送并发布数据
-	bool Puslish(char *buf, int len)
+	bool Puslish(uint8_t*buf, int len)
 	{
-		return Puslish((uint8_t *)buf, len);
+		return Puslish((char *)buf, len);
 	}
 	bool PuslishAndRelease(uint8_t* buf, int len)
 	{

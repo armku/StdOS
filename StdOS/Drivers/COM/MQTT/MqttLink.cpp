@@ -134,7 +134,7 @@ bool MqttLink::Receive()
 }
 int icnttest = 0;
 //·¢ËÍÊý¾Ý
-bool MqttLink::Puslish(uint8_t *buf, int len)
+bool MqttLink::Puslish(char *buf, int len)
 {
 	int topticlen = strlen(this->Topic);
 
