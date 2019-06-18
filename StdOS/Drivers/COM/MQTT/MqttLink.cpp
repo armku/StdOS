@@ -197,8 +197,8 @@ bool MqttLink::Puslish_Release()
 	char bufneed[] = { 0x50,0x02,0x00,0x00 };//响应，最后一个字节为数据帧流水号
 	if (this->readlen == 4)
 	{
-		debug_printf("Puslish_Release Rec Length 4\r\n");
-		Buffer(this->bufRcv, this->readlen).ShowHex(true);
+		/*debug_printf("Puslish_Release Rec Length 4\r\n");
+		Buffer(this->bufRcv, this->readlen).ShowHex(true);*/
 		//20 02 00 00 (4)
 		for (int i = 0; i < 3; i++)
 		{
