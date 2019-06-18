@@ -5,21 +5,13 @@
 #include "../HAL/STM32F1/ARCH_UART.h"
 
 #define MAX_FRAME_DATA_LENGTH 200
-#define FRAME_HEADER 0xAA
-
-//frame struct:
-// | header | fnCode |  dataLength | data1 | ...... | datan | checkSum | 
 
 struct DataFrame
 {
 public:
-	const uint8_t header;
 	uint8_t data[MAX_FRAME_DATA_LENGTH];//当前数据
 	uint8_t dataLength; //当前数据长度
-public:
-	DataFrame() :header(FRAME_HEADER)                //constructor
-	{	
-	}
+public:	
 };
 
 class MqttLink
