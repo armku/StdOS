@@ -73,19 +73,19 @@ void checkComRoutin(void* param)
 		{
 			//ESP8266连接服务器未成功
 			mqtt.readlen = ringRcvcom3.Get(mqtt.bufRcv, ArrayLength(mqtt.bufRcv));
-			debug_printf("Rcv(%d) Hex:",mqtt.readlen);
+			//debug_printf("Rcv(%d) Hex:",mqtt.readlen);
 			//UART1_send_data((uint8_t*)mqtt.bufRcv, mqtt.readlen);//接收到的数据显示
 			//Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
 			//ESP8266连接服务器成功
 			if (!mqtt.FlagConnected)
 			{
 				//正在登陆服务器
-				Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
+				//Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
 			}
 			else
 			{
 				//登陆服务器成功
-				Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
+				//Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
 			}
 		}
 		else

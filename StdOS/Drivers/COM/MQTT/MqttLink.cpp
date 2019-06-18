@@ -73,12 +73,12 @@ bool MqttLink::CONNECTServer()
 		}
 		if (connected)
 		{
-			//debug_printf("Login to Server OK\r\n");
+			debug_printf("Login to Server OK\r\n");
 			return true;
 		}
 		else
 		{
-			//debug_printf("Login to Server ERROR\r\n");
+			debug_printf("Login to Server ERROR\r\n");
 		}
 	}
 	else
@@ -157,8 +157,8 @@ bool MqttLink::Puslish(uint8_t *buf, int len)
 
 	/*for (int i = 0; i < 100; i++)
 		this->txFrame.data[i] = 0;*/
-	debug_printf((char*)(this->txFrame.data), "%d ·¢ËÍ²âÊÔ\r\n\0", icnttest++);
-	debug_printf("%d ·¢ËÍ²âÊÔ\r\n", icnttest);
+	/*debug_printf((char*)(this->txFrame.data), "%d ·¢ËÍ²âÊÔ\r\n\0", icnttest++);
+	debug_printf("%d ·¢ËÍ²âÊÔ\r\n", icnttest);*/
 	/*this->txFrame.dataLength = strlen((char*)this->txFrame.data);*/
 	this->Send();
 	///*Sys.Sleep(200);*/
@@ -185,7 +185,7 @@ bool MqttLink::Puslish_Release()
 	}
 	this->txFrame.dataLength = ArrayLength(buf);
 
-	debug_printf("Push Release\r\n");
+	/*debug_printf("Push Release\r\n");*/
 	this->Send();
 	/*Sys.Sleep(200);*/
 	this->Receive();
