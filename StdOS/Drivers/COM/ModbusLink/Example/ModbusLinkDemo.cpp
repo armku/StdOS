@@ -46,7 +46,7 @@ static void checkComRoutin(void* param)
 
 		//EspFrameDeal();
 		int readlen = ringRcvcom2.Get((char*)loop_bufcom2, ArrayLength(loop_bufcom2));
-		Buffer(loop_bufcom2, readlen).ShowHex();
+		Buffer(loop_bufcom2, readlen).ShowHex(true);
 		if (readlen >= 8)
 		{
 			uint16_t crccal= Crc::CRC16RTU(loop_bufcom2, readlen - 2);
