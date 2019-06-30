@@ -12,22 +12,6 @@
 #define USART_DMA_TX_BUFFER_SIZE 200             //USART DMA BUFFER SIZE
 
 /*******************************************************************************************************/
-
-class USART
-{
-public:
-	USART();
-	virtual bool SendBytes(uint8_t txData[], uint16_t size);
-	USART& operator<<(int val);
-	USART& operator<<(double val);
-	USART& operator<<(const char* pStr);
-private:
-	
-	FIFOBuffer<uint8_t, USART_TX_BUFFER_SIZE>  mTxBuf;  //USART Tx Buffer
-	uint8_t mPrecision;   //when show precision after dot "."  when use "<<" to show float value
-};
-
-
 class USARTHAL
 {
 public:
