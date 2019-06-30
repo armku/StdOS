@@ -3,11 +3,55 @@
 #include "BspPlatform/Interrupt.h"
 #include "Port.h"
 #include "Task.h"
+#include "Core/RingBuffer.h"
 
 #define _MODBUSLINKEST_CPP
 #ifdef _MODBUSLINKEST_CPP
+
+
+
+/******************************************串口参数开始**************************************************/
+USARTHAL usart222(COM2, 115200);
+#include "../HAL/STM32F1/ARCH_UART.h"
+uint8_t   loop_bufcom2[64] = { 0 };                             //定义环形缓冲区
+RingBuffer ringRcvcom2(loop_bufcom2, ArrayLength(loop_bufcom2));
+static bool FlagInFrame;//接收到完整一帧数据
+//向环形缓冲区【写】一字节数据
+static void write_loop_buf(uint8_t dat)
+{
+	ringRcvcom2.Put(dat);
+}
+static void checkComRoutin(void* param)
+{
+	static int RxCnt = 0;
+	static int RxCntOld = 0;
+	static int FlagIdleCnt = 0;//空闲时间
+
+	/*if (!esp.FlagRcvAuto)
+		return;*/
+
+	RxCnt = ringRcvcom2.length;
+	if (RxCnt != RxCntOld)
+	{
+		RxCntOld = RxCnt;
+		return;
+	}
+	if (RxCnt == 0)
+		return;
+
+	if (++FlagIdleCnt > 10)
+	{
+		FlagInFrame = 1;
+
+		//EspFrameDeal();
+
+		FlagInFrame = 0;
+		FlagIdleCnt = 0;
+	}
+}
+/******************************************串口参数结束**************************************************/
 //测试 01 03 00 00 00 0A C5 CD
-USARTHAL usart222(COM2,115200);
+//USARTHAL usart222(COM2,115200);
 ModbusSlaveLink modbusSlave(usart222);
 Port p485dr;
 uint16_t RegInputu16[144]; //输入寄存器

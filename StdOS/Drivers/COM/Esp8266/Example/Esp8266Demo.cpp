@@ -17,7 +17,7 @@ USARTHAL usart333(COM3, 115200);
 #include "../HAL/STM32F1/ARCH_UART.h"
 uint8_t   loop_bufcom3[64] = { 0 };                             //定义环形缓冲区
 RingBuffer ringRcvcom3(loop_bufcom3, ArrayLength(loop_bufcom3));
-bool FlagInFrame;//接收到完整一帧数据
+static bool FlagInFrame;//接收到完整一帧数据
 //向环形缓冲区【写】一字节数据
 static void write_loop_buf(uint8_t dat)
 {
