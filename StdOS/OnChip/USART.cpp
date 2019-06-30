@@ -6,7 +6,7 @@
 
 USART::USART()
 {
-	mPrecision = 3;
+	this->mPrecision = 3;
 }
 
 bool USART::SendBytes(uint8_t txData[], uint16_t size)
