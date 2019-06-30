@@ -28,8 +28,6 @@ void UART_1_send_byte(uint8_t c)
 
 void UART_2_send_byte(uint8_t c)
 {
-	*COM2RS485 = 1;//进入发送模式
-
 	USART_ClearFlag(USART2, USART_FLAG_TC);
 	USART_SendData(USART2, c);
 	while(USART_GetFlagStatus(USART2, USART_FLAG_TC) != SET);
@@ -130,7 +128,7 @@ void USART2_IRQHandler(void)
 		//
 		//if (COM2RS485 && mTxBuf.Size() == 0)
 		{
-			*COM2RS485 = 0;//进入接收模式
+			//*COM2RS485 = 0;//进入接收模式
 		}
 	}
 	if (USART_GetITStatus(USART2, USART_IT_TXE) != RESET || USART_GetITStatus(USART2, USART_IT_TC) != RESET)   //TxE and TC
@@ -344,9 +342,17 @@ void UART1_send_data(uint8_t *data, uint32_t len)
 //通过串口（通讯串口）发送数据
 void UART2_send_data(uint8_t *data, uint32_t len)
 {
+	if (COM2RS485 != NULL)
+	{
+		*COM2RS485 = 1;//进入发送模式
+	}
 	while(len--)
 	{
 		UART_2_send_byte(*data++);
+	}
+	if (COM2RS485 != NULL)
+	{
+		*COM2RS485 = 0;//进入接收模式
 	}
 }
 
