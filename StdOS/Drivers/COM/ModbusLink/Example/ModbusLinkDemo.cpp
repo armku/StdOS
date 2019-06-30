@@ -107,6 +107,7 @@ void ModbusSlaveLinkTestInit()
 	p485dr.pinMode(GPIO_Out_PP);
 	p485dr = 0;//接收模式
 	modbusSlave.com.RS485 = &p485dr;
+	COM2RS485 = &p485dr;
 	modbusSlave.id = 1;
 	modbusSlave.SetRegInput(0, ArrayLength(RegInputu16), RegInputu16, 0);
 	modbusSlave.SetRegHoid(0, ArrayLength(RegHoilding16), RegHoilding16, 0);
