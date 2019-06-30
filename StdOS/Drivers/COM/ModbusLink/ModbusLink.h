@@ -47,13 +47,13 @@ class ModbusSlaveLink
 public:
 	DataFrameModbus txFrame;
 	DataFrameModbus rxFrame;
-	USART &com;
+	USARTHAL&com;
 	const int static RegInputLen = 3;//输入寄存器组大小
 	const int static RegHoildingLen = 17;//保持寄存器组大小
 	ModbusReg_T RegInputs[RegInputLen];//输入寄存器组
 	ModbusReg_T RegHoildings[RegHoildingLen];//保持寄存器组
 public:
-	ModbusSlaveLink(USART &uart);
+	ModbusSlaveLink(USARTHAL&uart);
 	bool CheckFrame();
 	bool Send();
 	void SetRegInput(int addr0, int reglen, uint16_t* reg, int reggroup = 0);//设置输入寄存器	

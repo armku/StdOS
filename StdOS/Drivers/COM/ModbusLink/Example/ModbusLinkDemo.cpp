@@ -4,10 +4,10 @@
 #include "Port.h"
 #include "Task.h"
 
-//#define _MODBUSLINKEST_CPP
+#define _MODBUSLINKEST_CPP
 #ifdef _MODBUSLINKEST_CPP
 //测试 01 03 00 00 00 0A C5 CD
-USART usart222(COM2,115200);
+USARTHAL usart222(COM2,115200);
 ModbusSlaveLink modbusSlave(usart222);
 Port p485dr;
 uint16_t RegInputu16[144]; //输入寄存器
