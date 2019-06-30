@@ -34,10 +34,9 @@ const char* subtopic = "ShareDevince/CZT/IMEI";//订阅主题
 //要连接的服务器的端口
 #define      macUser_ESP8266_TcpServer_Port    "1883"         
 
-
-USARTHAL usart333(COM3,115200);
 Esp8266 esp;
-
+/******************************************串口参数开始**************************************************/
+USARTHAL usart333(COM3, 115200); 
 #include "../HAL/STM32F1/ARCH_UART.h"
 uint8_t   loop_bufcom3[64] = { 0 };                             //定义环形缓冲区
 RingBuffer ringRcvcom3(loop_bufcom3, ArrayLength(loop_bufcom3));
@@ -47,7 +46,6 @@ static void write_loop_buf(uint8_t dat)
 {
 	ringRcvcom3.Put(dat);
 }
-
 static void checkComRoutin(void* param)
 {
 	static int RxCnt = 0;
@@ -101,6 +99,7 @@ static void checkComRoutin(void* param)
 		FlagIdleCnt = 0;
 	}
 }
+/******************************************串口参数结束**************************************************/
 char* publish = "abcd";
 //要求1000ms调用一次
 static void Esp8266Routin(void* param)
