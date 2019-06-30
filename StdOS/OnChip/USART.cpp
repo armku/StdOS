@@ -318,6 +318,7 @@ void USARTHAL::DMAIRQ()
 #endif
 /////////////////////////////////////////////////////////
 //////////////历史文件//////////////////////////////////
+#if 0
 /******************************************************************************************************/
 /****configuration，使用前请自行配置****/
 #define USART_TX_BUFFER_SIZE     200              //USART BUFFER FIFO SIZE
@@ -438,3 +439,4 @@ USARTOldNotUse& USARTOldNotUse::operator<<(const char* pStr)
 	SendBytes((uint8_t*)pStr, length);
 	return *this;
 }
+#endif
