@@ -51,7 +51,7 @@ static void checkComRoutin(void* param)
 /******************************************串口参数结束**************************************************/
 /******************************************MODBUS开始**************************************************/
 //测试 01 03 00 00 00 0A C5 CD
-ModbusSlaveLink modbusSlave(usart222);
+ModbusSlaveLink modbusSlave;
 Port p485dr;
 uint16_t RegInputu16[144]; //输入寄存器
 uint16_t RegHoilding16[60];
@@ -106,7 +106,6 @@ void ModbusSlaveLinkTestInit()
 	p485dr.SetPin(PC2);
 	p485dr.pinMode(GPIO_Out_PP);
 	p485dr = 0;//接收模式
-	modbusSlave.com.RS485 = &p485dr;
 	COM2RS485 = &p485dr;
 	modbusSlave.id = 1;
 	modbusSlave.SetRegInput(0, ArrayLength(RegInputu16), RegInputu16, 0);

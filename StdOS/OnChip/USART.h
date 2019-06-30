@@ -22,7 +22,7 @@ public:
 			return 1;
 		return buflen * 8 * 1000 / this->mBaudrate + 1;
 	}
-	Port* RS485;
+	/*Port* RS485;*/
 #ifdef USE_USART_DMA
 private:
 	uint8_t                   mDMAIRQn;

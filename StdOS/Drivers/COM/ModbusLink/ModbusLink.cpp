@@ -1,6 +1,6 @@
 #include "ModbusLink.h"
 
-ModbusSlaveLink::ModbusSlaveLink(USARTHAL&uart) :com(uart)
+ModbusSlaveLink::ModbusSlaveLink()
 {
 	this->OnUpdateRegHoid = 0;
 }
