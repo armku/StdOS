@@ -9,7 +9,7 @@
 #define _MODBUSLINKEST_CPP
 #ifdef _MODBUSLINKEST_CPP
 
-
+void DealRcv(char* buf, int length);
 
 /******************************************串口参数开始**************************************************/
 USARTHAL usart222(COM2, 115200);
@@ -46,26 +46,7 @@ static void checkComRoutin(void* param)
 
 		//EspFrameDeal();
 		int readlen = ringRcvcom2.Get((char*)loop_bufcom2, ArrayLength(loop_bufcom2));
-		Buffer(loop_bufcom2, readlen).ShowHex(true);
-		if (readlen >= 8)
-		{
-			uint16_t crccal= Crc::CRC16RTU(loop_bufcom2, readlen - 2);
-			uint16_t crcrcv = loop_bufcom2[readlen - 1];
-			crcrcv <<= 8;
-			crcrcv |= loop_bufcom2[readlen - 2];
-			if (crcrcv == crccal)
-			{
-				debug_printf("Rcv Frame OK\r\n");
-			}
-			else
-			{
-				debug_printf("crc Error:%04x\r\n", crccal);
-			}
-		}
-		else
-		{
-			debug_printf("Rcv Length Error:%d\r\n", readlen);
-		}
+		DealRcv((char*)loop_bufcom2, readlen);
 		
 		FlagInFrame = 0;
 		FlagIdleCnt = 0;
@@ -78,6 +59,32 @@ ModbusSlaveLink modbusSlave(usart222);
 Port p485dr;
 uint16_t RegInputu16[144]; //输入寄存器
 uint16_t RegHoilding16[60];
+
+static void DealRcv(char* buf, int length)
+{
+	Buffer(loop_bufcom2, length).ShowHex(true);
+	if (length >= 8)
+	{
+		uint16_t crccal = Crc::CRC16RTU(loop_bufcom2, length - 2);
+		uint16_t crcrcv = loop_bufcom2[length - 1];
+		crcrcv <<= 8;
+		crcrcv |= loop_bufcom2[length - 2];
+		if (crcrcv == crccal)
+		{
+			modbusSlave.rxFrame.CheckFrame((char*)loop_bufcom2, length);
+			debug_printf("Rcv Frame OK\r\n");
+		}
+		else
+		{
+			debug_printf("crc Error:%04x\r\n", crccal);
+		}
+	}
+	else
+	{
+		debug_printf("Rcv Length Error:%d\r\n", length);
+	}
+}
+
 
 static void ModbusSlaveLinkRoutin(void* param)
 {

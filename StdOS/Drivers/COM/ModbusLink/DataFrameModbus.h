@@ -61,6 +61,21 @@ public:
 		this->frameLength = 0;
 		return true;
 	}
+	//处理缓冲区数据
+	bool CheckFrame(char* buf, int length)
+	{
+		if (length >= 8)
+		{
+			for (int i = 0; i < length; i++)
+			{
+				this->data[i] = buf[i];
+			}
+			this->Length = length;
+			this->CheckFrame();
+			return true;
+		}
+		return false;
+	}
 	bool CheckFrame()
 	{
 		if (Length >= 8)
