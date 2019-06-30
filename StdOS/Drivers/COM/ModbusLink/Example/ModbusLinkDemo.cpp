@@ -44,6 +44,7 @@ static void checkComRoutin(void* param)
 		FlagInFrame = 1;
 
 		//EspFrameDeal();
+		int readlen = ringRcvcom2.Get((char*)loop_bufcom2, ArrayLength(loop_bufcom2));
 		debug_printf("Rcv Buffer\r\n");
 
 		FlagInFrame = 0;
@@ -85,6 +86,8 @@ void ModbusSlaveLinkTestInit()
 	modbusSlave.id = 1;
 	modbusSlave.SetRegInput(0, ArrayLength(RegInputu16), RegInputu16, 0);
 	modbusSlave.SetRegHoid(0, ArrayLength(RegHoilding16), RegHoilding16, 0);
+
+	UART_2_rcv_IRQ = write_loop_buf;
 
 	RegInputu16[0] = 12;
 	RegInputu16[1] = 13;
