@@ -12,7 +12,6 @@ void DealRcv(char* buf, int length);
 
 /******************************************串口参数开始**************************************************/
 USARTHAL usart222(COM2, 115200);
-#include "../HAL/STM32F1/ARCH_UART.h"
 static uint8_t   loop_bufcom2[64] = { 0 };                             //定义环形缓冲区
 static RingBuffer ringRcvcom2(loop_bufcom2, ArrayLength(loop_bufcom2));
 static bool FlagInFrame;//接收到完整一帧数据
