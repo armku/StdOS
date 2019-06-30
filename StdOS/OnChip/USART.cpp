@@ -4,14 +4,14 @@
 #include "Configuration.h"
 #include "Sys.h"
 
-class USART
+class USARTOldNotUse
 {
 public:
-	USART();
+	USARTOldNotUse();
 	virtual bool SendBytes(uint8_t txData[], uint16_t size);
-	USART& operator<<(int val);
-	USART& operator<<(double val);
-	USART& operator<<(const char* pStr);
+	USARTOldNotUse& operator<<(int val);
+	USARTOldNotUse& operator<<(double val);
+	USARTOldNotUse& operator<<(const char* pStr);
 private:
 
 	FIFOBuffer<uint8_t, USART_TX_BUFFER_SIZE>  mTxBuf;  //USART Tx Buffer
@@ -19,12 +19,12 @@ private:
 };
 
 
-USART::USART()
+USARTOldNotUse::USARTOldNotUse()
 {
 	this->mPrecision = 3;
 }
 
-bool USART::SendBytes(uint8_t txData[], uint16_t size)
+bool USARTOldNotUse::SendBytes(uint8_t txData[], uint16_t size)
 {
 	USART_TypeDef* mUSARTx;   //USARTx
 
@@ -60,7 +60,7 @@ bool USART::SendBytes(uint8_t txData[], uint16_t size)
 	return true;
 }
 
-USART& USART::operator<<(int val)
+USARTOldNotUse& USARTOldNotUse::operator<<(int val)
 {
 	uint8_t sign = 0, len = 0, data[10];
 	if (val < 0)
@@ -79,7 +79,7 @@ USART& USART::operator<<(int val)
 	SendBytes(data + 10 - len, len);
 	return *this;
 }
-USART& USART::operator<<(double val)
+USARTOldNotUse& USARTOldNotUse::operator<<(double val)
 {
 	uint8_t sign = 0, len = 0, data[20];
 	if (val < 0)
@@ -107,7 +107,7 @@ USART& USART::operator<<(double val)
 	SendBytes(data + 20 - len, len);
 	return *this;
 }
-USART& USART::operator<<(const char* pStr)
+USARTOldNotUse& USARTOldNotUse::operator<<(const char* pStr)
 {
 	unsigned int length = 0;
 	for (int i = 0; pStr[i] != '\0'; ++i)
