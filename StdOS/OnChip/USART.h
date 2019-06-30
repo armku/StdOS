@@ -6,12 +6,6 @@
 #include "Configuration.h"
 #include "Port.h"
 
-/******************************************************************************************************/
-/****configuration，使用前请自行配置****/
-#define USART_TX_BUFFER_SIZE     200              //USART BUFFER FIFO SIZE
-#define USART_DMA_TX_BUFFER_SIZE 200             //USART DMA BUFFER SIZE
-
-/*******************************************************************************************************/
 class USARTHAL
 {
 public:
