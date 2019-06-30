@@ -43,11 +43,11 @@ typedef struct
 	void UART4_En_IRQ(void);
 	void UART5_En_IRQ(void);
 	
-	void UART_1_send_byte(uint8_t c);
-	void UART_2_send_byte(uint8_t c);
-	void UART_3_send_byte(uint8_t c);
-	void UART_4_send_byte(uint8_t c);
-	void UART_5_send_byte(uint8_t c);
+	void UART_1_send_byte(uint8_t c);//不处理485方向口
+	void UART_2_send_byte(uint8_t c);//不处理485方向口
+	void UART_3_send_byte(uint8_t c);//不处理485方向口
+	void UART_4_send_byte(uint8_t c);//不处理485方向口
+	void UART_5_send_byte(uint8_t c);//不处理485方向口
 	
 	//通过串口（通讯串口）发送数据
 	void UART1_send_data(uint8_t *data, uint32_t len);
