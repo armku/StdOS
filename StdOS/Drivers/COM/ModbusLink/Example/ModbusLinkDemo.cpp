@@ -13,7 +13,7 @@ Port p485dr;
 uint16_t RegInputu16[144]; //输入寄存器
 uint16_t RegHoilding16[60];
 
-void ModbusSlaveLinkRoutin(void* param)
+static void ModbusSlaveLinkRoutin(void* param)
 {
 #if 0
 	if ((modbusSlave.com.RxSize() > 0)&& modbusSlave.CheckFrame())
