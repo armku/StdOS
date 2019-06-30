@@ -44,6 +44,7 @@ static void checkComRoutin(void* param)
 		FlagInFrame = 1;
 
 		//EspFrameDeal();
+		debug_printf("Rcv Buffer\r\n");
 
 		FlagInFrame = 0;
 		FlagIdleCnt = 0;
@@ -52,7 +53,6 @@ static void checkComRoutin(void* param)
 /******************************************串口参数结束**************************************************/
 /******************************************MODBUS开始**************************************************/
 //测试 01 03 00 00 00 0A C5 CD
-//USARTHAL usart222(COM2,115200);
 ModbusSlaveLink modbusSlave(usart222);
 Port p485dr;
 uint16_t RegInputu16[144]; //输入寄存器
