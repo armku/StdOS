@@ -6,6 +6,13 @@ TTime::TTime()
 {
 	this->BaseSeconds = 0;
 	this->Seconds = 0;
+
+	this->Index = 0;
+	this->Milliseconds = 0;
+
+#if ! (defined(STM32F0) || defined(GD32F150))
+	this->Div = 0;			// 分频系数。最大分频64k，无法让大于64M主频的芯片分配得到1k时钟
+#endif
 }
 /////////////////////////////////////////////////////////////////////////////////////
 TimeCost::TimeCost()
