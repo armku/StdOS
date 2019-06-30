@@ -11,7 +11,6 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
@@ -418,11 +417,6 @@
               <FileType>8</FileType>
               <FilePath>..\User\Test.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Esp8266Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -913,6 +907,11 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Esp8266Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1007,7 +1006,6 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
@@ -1414,11 +1412,6 @@
               <FileType>8</FileType>
               <FilePath>..\User\Test.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Esp8266Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1908,6 +1901,11 @@
               <FileName>ModbusLinkDemo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Esp8266Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
             </File>
           </Files>
         </Group>
