@@ -1,6 +1,6 @@
 #include "SHARP_PM2_5.h"
 
-Sharp_PM_2_5::Sharp_PM_2_5(USARTHAL&com) :mCom(com)
+Sharp_PM_2_5::Sharp_PM_2_5()
 {}
 
 bool Sharp_PM_2_5::Update()

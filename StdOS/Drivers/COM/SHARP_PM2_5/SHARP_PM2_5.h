@@ -15,12 +15,11 @@
 class Sharp_PM_2_5
 {
 private:
-	USARTHAL &mCom;
 	float UD;//·Û³¾Å¨¶È µ¥Î» ug/m^3
 	bool Check(u8 *Data, int Lenth, u8 CheckSum);
 
 public:
-	Sharp_PM_2_5(USARTHAL&com);
+	Sharp_PM_2_5();
 	bool Update();
 	float GetConcentration();
 };
