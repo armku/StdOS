@@ -71,6 +71,7 @@ static void DealRcv(char* buf, int length)
 		if (crcrcv == crccal)
 		{
 			modbusSlave.rxFrame.CheckFrame((char*)loop_bufcom2, length);
+			modbusSlave.DealFrame();
 			debug_printf("Rcv Frame OK\r\n");
 		}
 		else
