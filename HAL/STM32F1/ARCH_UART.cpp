@@ -333,9 +333,17 @@ void UART5_En_IRQ(void)
 //通过串口（通讯串口）发送数据
 void UART1_send_data(uint8_t *data, uint32_t len)
 {
+	if (COM1RS485 != NULL)
+	{
+		*COM1RS485 = 1;//进入发送模式
+	}
 	while(len--)
 	{
 		UART_1_send_byte(*data++);
+	}
+	if (COM1RS485 != NULL)
+	{
+		*COM1RS485 = 0;//进入接收模式
 	}
 }
 
@@ -359,18 +367,34 @@ void UART2_send_data(uint8_t *data, uint32_t len)
 //通过串口（通讯串口）发送数据
 void UART3_send_data(uint8_t *data, uint32_t len)
 {
+	if (COM3RS485 != NULL)
+	{
+		*COM3RS485 = 1;//进入发送模式
+	}
 	while(len--)
 	{
 		UART_3_send_byte(*data++);
+	}
+	if (COM3RS485 != NULL)
+	{
+		*COM3RS485 = 0;//进入接收模式
 	}
 }
 
 //通过串口（通讯串口）发送数据
 void UART4_send_data(uint8_t *data, uint32_t len)
 {
+	if (COM4RS485 != NULL)
+	{
+		*COM4RS485 = 1;//进入发送模式
+	}
 	while(len--)
 	{
 		UART_4_send_byte(*data++);
+	}
+	if (COM4RS485 != NULL)
+	{
+		*COM4RS485 = 0;//进入接收模式
 	}
 }
 
@@ -380,6 +404,10 @@ void UART5_send_data(uint8_t *data, uint32_t len)
 	while(len--)
 	{
 		UART_5_send_byte(*data++);
+	}
+	if (COM5RS485 != NULL)
+	{
+		*COM5RS485 = 0;//进入接收模式
 	}
 }
 
