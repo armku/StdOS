@@ -11,30 +11,7 @@
 #define _ESP8266EST_CPP
 #ifdef _ESP8266EST_CPP
 
-MqttLink mqtt;
-const char *ClientID = "123456789";
-const char* id = "1111";
-const char* topic = "ShareDevince/RTV/IMEI";
-const char* subtopic = "ShareDevince/CZT/IMEI";//订阅主题
-
-/********************************** 用户需要设置的参数**********************************/
-//要连接的热点的名称，即WIFI名称
-//#define      macUser_ESP8266_ApSsid           "AndroidAP9DBE" 
-//#define      macUser_ESP8266_ApSsid           "NETGEAR77" 
-#define      macUser_ESP8266_ApSsid           "Brain" 
-
-//要连接的热点的密钥
-//#define      macUser_ESP8266_ApPwd            "18353217097" 
-#define      macUser_ESP8266_ApPwd            "4000805676" 
-
-//要连接的服务器的 IP，即电脑的IP
-#define      macUser_ESP8266_TcpServer_IP     "www.emqtt.xyz" 
-//#define      macUser_ESP8266_TcpServer_IP     "test.armku.com" 
-
-//要连接的服务器的端口
-#define      macUser_ESP8266_TcpServer_Port    "1883"         
-
-Esp8266 esp;
+static void EspFrameDeal();
 /******************************************串口参数开始**************************************************/
 USARTHAL usart333(COM3, 115200); 
 #include "../HAL/STM32F1/ARCH_UART.h"
@@ -68,32 +45,7 @@ static void checkComRoutin(void* param)
 	{
 		FlagInFrame = 1;
 
-		
-		if (esp.FlagConnected)
-		{
-			//ESP8266连接服务器未成功
-			mqtt.readlen = ringRcvcom3.Get(mqtt.bufRcv, ArrayLength(mqtt.bufRcv));
-			//debug_printf("Rcv(%d) Hex:",mqtt.readlen);
-			//UART1_send_data((uint8_t*)mqtt.bufRcv, mqtt.readlen);//接收到的数据显示
-			//Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
-			//ESP8266连接服务器成功
-			if (!mqtt.FlagConnected)
-			{
-				//正在登陆服务器
-				//Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
-			}
-			else
-			{
-				//登陆服务器成功
-				//Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
-			}
-		}
-		else
-		{
-			esp.readlen = ringRcvcom3.Get(esp.bufRcv, ArrayLength(esp.bufRcv));
-			UART1_send_data((uint8_t*)esp.bufRcv, esp.readlen);//接收到的数据显示
-		}
-		
+		EspFrameDeal();
 						
 		FlagInFrame = 0;
 		FlagIdleCnt = 0;
@@ -101,7 +53,57 @@ static void checkComRoutin(void* param)
 }
 /******************************************串口参数结束**************************************************/
 /******************************************ESP开始**************************************************/
+MqttLink mqtt;
+const char* ClientID = "123456789";
+const char* id = "1111";
+const char* topic = "ShareDevince/RTV/IMEI";
+const char* subtopic = "ShareDevince/CZT/IMEI";//订阅主题
 
+/********************************** 用户需要设置的参数**********************************/
+//要连接的热点的名称，即WIFI名称
+//#define      macUser_ESP8266_ApSsid           "AndroidAP9DBE" 
+//#define      macUser_ESP8266_ApSsid           "NETGEAR77" 
+#define      macUser_ESP8266_ApSsid           "Brain" 
+
+//要连接的热点的密钥
+//#define      macUser_ESP8266_ApPwd            "18353217097" 
+#define      macUser_ESP8266_ApPwd            "4000805676" 
+
+//要连接的服务器的 IP，即电脑的IP
+#define      macUser_ESP8266_TcpServer_IP     "www.emqtt.xyz" 
+//#define      macUser_ESP8266_TcpServer_IP     "test.armku.com" 
+
+//要连接的服务器的端口
+#define      macUser_ESP8266_TcpServer_Port    "1883"         
+
+Esp8266 esp;
+static void EspFrameDeal()
+{
+	if (esp.FlagConnected)
+	{
+		//ESP8266连接服务器未成功
+		mqtt.readlen = ringRcvcom3.Get(mqtt.bufRcv, ArrayLength(mqtt.bufRcv));
+		//debug_printf("Rcv(%d) Hex:",mqtt.readlen);
+		//UART1_send_data((uint8_t*)mqtt.bufRcv, mqtt.readlen);//接收到的数据显示
+		//Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
+		//ESP8266连接服务器成功
+		if (!mqtt.FlagConnected)
+		{
+			//正在登陆服务器
+			//Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
+		}
+		else
+		{
+			//登陆服务器成功
+			//Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
+		}
+	}
+	else
+	{
+		esp.readlen = ringRcvcom3.Get(esp.bufRcv, ArrayLength(esp.bufRcv));
+		UART1_send_data((uint8_t*)esp.bufRcv, esp.readlen);//接收到的数据显示
+	}
+}
 /******************************************ESP结束**************************************************/
 char* publish = "abcd";
 //要求1000ms调用一次
