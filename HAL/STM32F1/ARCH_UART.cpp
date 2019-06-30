@@ -19,8 +19,6 @@ pFun_UART UART_5_rcv_IRQ = NULL;
 
 void UART_1_send_byte(uint8_t c)
 {
-	*COM1RS485 = 1;//进入发送模式
-
 	USART_ClearFlag(USART1, USART_FLAG_TC);
 	USART_SendData(USART1, c);
 	while(USART_GetFlagStatus(USART1, USART_FLAG_TC) != SET);
@@ -35,8 +33,6 @@ void UART_2_send_byte(uint8_t c)
 
 void UART_3_send_byte(uint8_t c)
 {
-	*COM3RS485 = 1;//进入发送模式
-
 	USART_ClearFlag(USART3, USART_FLAG_TC);
 	USART_SendData(USART3, c);
 	while(USART_GetFlagStatus(USART3, USART_FLAG_TC) != SET);
@@ -44,8 +40,6 @@ void UART_3_send_byte(uint8_t c)
 
 void UART_4_send_byte(uint8_t c)
 {
-	*COM4RS485 = 1;//进入发送模式
-
 	USART_ClearFlag(UART4, USART_FLAG_TC);
 	USART_SendData(UART4, c);
 	while(USART_GetFlagStatus(UART4, USART_FLAG_TC) != SET);
@@ -53,8 +47,6 @@ void UART_4_send_byte(uint8_t c)
 
 void UART_5_send_byte(uint8_t c)
 {
-	*COM5RS485 = 1;//进入发送模式
-
 	USART_ClearFlag(UART5, USART_FLAG_TC);
 	USART_SendData(UART5, c);
 	while(USART_GetFlagStatus(UART5, USART_FLAG_TC) != SET);
@@ -85,7 +77,7 @@ void USART1_IRQHandler(void)
 		//
 		//if (COM1RS485 && mTxBuf.Size() == 0)
 		{
-			*COM1RS485 = 0;//进入接收模式
+			//*COM1RS485 = 0;//进入接收模式
 		}
 	}
 	if (USART_GetITStatus(USART1, USART_IT_TXE) != RESET || USART_GetITStatus(USART1, USART_IT_TC) != RESET)   //TxE and TC
@@ -171,7 +163,7 @@ void USART3_IRQHandler(void)
 		//
 		//if (COM3RS485 && mTxBuf.Size() == 0)
 		{
-			*COM3RS485 = 0;//进入接收模式
+			//*COM3RS485 = 0;//进入接收模式
 		}
 	}
 	if (USART_GetITStatus(USART3, USART_IT_TXE) != RESET || USART_GetITStatus(USART3, USART_IT_TC) != RESET)   //TxE and TC
@@ -214,7 +206,7 @@ void UART4_IRQHandler(void)
 		//
 		//if (COM4RS485 && mTxBuf.Size() == 0)
 		{
-			*COM4RS485 = 0;//进入接收模式
+			//*COM4RS485 = 0;//进入接收模式
 		}
 	}
 	if (USART_GetITStatus(UART4, USART_IT_TXE) != RESET || USART_GetITStatus(UART4, USART_IT_TC) != RESET)   //TxE and TC
@@ -257,7 +249,7 @@ void UART5_IRQHandler(void)
 		//
 		//if (COM5RS485 && mTxBuf.Size() == 0)
 		{
-			*COM5RS485 = 0;//进入接收模式
+			//*COM5RS485 = 0;//进入接收模式
 		}
 	}
 	if (USART_GetITStatus(UART5, USART_IT_TXE) != RESET || USART_GetITStatus(UART5, USART_IT_TC) != RESET)   //TxE and TC
@@ -401,6 +393,10 @@ void UART4_send_data(uint8_t *data, uint32_t len)
 //通过串口（通讯串口）发送数据
 void UART5_send_data(uint8_t *data, uint32_t len)
 {
+	if (COM5RS485 != NULL)
+	{
+		*COM5RS485 = 1;//进入发送模式
+	}
 	while(len--)
 	{
 		UART_5_send_byte(*data++);
