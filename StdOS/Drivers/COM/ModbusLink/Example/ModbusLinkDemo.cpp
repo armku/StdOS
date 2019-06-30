@@ -50,6 +50,7 @@ static void checkComRoutin(void* param)
 	}
 }
 /******************************************串口参数结束**************************************************/
+/******************************************MODBUS开始**************************************************/
 //测试 01 03 00 00 00 0A C5 CD
 //USARTHAL usart222(COM2,115200);
 ModbusSlaveLink modbusSlave(usart222);
@@ -74,7 +75,7 @@ static void ModbusSlaveLinkRoutin(void* param)
 	else {}
 #endif
 }
-
+/******************************************MODBUS结束**************************************************/
 void ModbusSlaveLinkTestInit()
 {
 	p485dr.SetPin(PC2);
