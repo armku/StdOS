@@ -3,6 +3,12 @@
 ModbusSlaveLink::ModbusSlaveLink()
 {
 	this->OnUpdateRegHoid = 0;
+	this->id = 1;
+	this->send_buf = NULL;
+	/*for (int i = 0; i < ArrayLength(this->RegHoildings); i++)
+	{
+		this->RegHoildings[i].Reg = 0;
+	}*/
 }
 #include "Buffer.h"
 bool ModbusSlaveLink::CheckFrame()
