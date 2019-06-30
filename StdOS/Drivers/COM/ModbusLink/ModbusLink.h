@@ -2,6 +2,7 @@
 #include "stm32f10x.h"
 #include "FIFOBuffer.h"
 #include "USART.h"
+#include "../HAL/STM32F1/ARCH_UART.h"
 
 #ifndef _MODBUSLINK_H
 #define _MODBUSLINK_H
@@ -69,6 +70,7 @@ public:
 	uint8_t id; //本机ID
 	void DealFrame(); //处理数据帧
 	void(*OnUpdateRegHoid)(uint16_t regaddr,uint16_t reglen); //更新参数
+	pFun_UART_buf send_buf;		// 发送缓冲区
 };
 
 #endif // !_MODBUSLINK_H

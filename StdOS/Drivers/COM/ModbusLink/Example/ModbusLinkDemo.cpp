@@ -113,6 +113,7 @@ void ModbusSlaveLinkTestInit()
 	modbusSlave.id = 1;
 	modbusSlave.SetRegInput(0, ArrayLength(RegInputu16), RegInputu16, 0);
 	modbusSlave.SetRegHoid(0, ArrayLength(RegHoilding16), RegHoilding16, 0);
+	modbusSlave.send_buf = UART2_send_data;
 
 	UART_2_rcv_IRQ = write_loop_buf;
 
