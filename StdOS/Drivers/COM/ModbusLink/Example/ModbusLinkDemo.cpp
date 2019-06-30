@@ -44,7 +44,6 @@ static void checkComRoutin(void* param)
 	{
 		FlagInFrame = 1;
 
-		//EspFrameDeal();
 		int readlen = ringRcvcom2.Get((char*)loop_bufcom2, ArrayLength(loop_bufcom2));
 		DealRcv((char*)loop_bufcom2, readlen);
 		
