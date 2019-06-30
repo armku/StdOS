@@ -4,121 +4,6 @@
 #include "Configuration.h"
 #include "Sys.h"
 
-class USARTOldNotUse
-{
-public:
-	USARTOldNotUse();
-	virtual bool SendBytes(uint8_t txData[], uint16_t size);
-	USARTOldNotUse& operator<<(int val);
-	USARTOldNotUse& operator<<(double val);
-	USARTOldNotUse& operator<<(const char* pStr);
-private:
-
-	FIFOBuffer<uint8_t, USART_TX_BUFFER_SIZE>  mTxBuf;  //USART Tx Buffer
-	uint8_t mPrecision;   //when show precision after dot "."  when use "<<" to show float value
-};
-
-
-USARTOldNotUse::USARTOldNotUse()
-{
-	this->mPrecision = 3;
-}
-
-bool USARTOldNotUse::SendBytes(uint8_t txData[], uint16_t size)
-{
-	USART_TypeDef* mUSARTx;   //USARTx
-
-	if (mTxBuf.ResSize() < size)      //compare the unused bytes and sending bytes
-	{
-		return false;
-	}
-	mTxBuf.Puts(txData, size);                        //add data to Tx buffer, if overflow, return false	
-	if (mTxBuf.Size() <= 0)        return true;       //have no data to send, return	
-#ifdef USE_USART_DMA
-	if (mTxBuf.Size() <= USART_DMA_TX_BUFFER_SIZE)  //rest data bytes less than DMA buffer size
-	{
-		mDMATxCh->CNDTR = (uint32_t)mTxBuf.Size();        //send all data to DMA buffer
-		mTxBuf.Gets(mDMATxBuf, mTxBuf.Size());
-	}
-	else                                           //rest data bytes more than DMA buffer size
-	{
-		mDMATxCh->CNDTR = USART_DMA_TX_BUFFER_SIZE;  //send max DMA buffer size data to DMA buffer
-		mTxBuf.Gets(mDMATxBuf, USART_DMA_TX_BUFFER_SIZE);
-	}
-	DMA_Cmd(mDMATxCh, ENABLE); 	                   //enable DMA to send data
-#else	
-	USART_ClearITPendingBit(mUSARTx, USART_IT_TC); //Clear TC, otherwise the first byte may not able to send out
-	USART_ClearITPendingBit(mUSARTx, USART_IT_TXE); //Clear TC, otherwise the first byte may not able to send out
-	USART_ITConfig(mUSARTx, USART_IT_TC, ENABLE);  //Enable TC, going to send data
-												   //USART_ITConfig(mUSARTx, USART_IT_TXE, ENABLE);  //Enable TC, going to send data
-	USART_GetFlagStatus(mUSARTx, USART_FLAG_TC);   //read SR to clear flag, otherwise the first byte may not able to send out
-												   //USART_GetFlagStatus(mUSARTx, USART_FLAG_TXE);   //read SR to clear flag, otherwise the first byte may not able to send out
-	static uint8_t data = 0;
-	mTxBuf.Get(data);                              //get one byte data from tx buffer
-	USART_SendData(mUSARTx, data);                  //send one byte data
-#endif	
-	return true;
-}
-
-USARTOldNotUse& USARTOldNotUse::operator<<(int val)
-{
-	uint8_t sign = 0, len = 0, data[10];
-	if (val < 0)
-	{
-		sign = 1;
-		val = -val;
-	}
-	do
-	{
-		len++;
-		data[10 - len] = val % 10 + '0';
-		val = val / 10;
-	} while (val);
-	if (sign == 1)
-		data[10 - (++len)] = '-';
-	SendBytes(data + 10 - len, len);
-	return *this;
-}
-USARTOldNotUse& USARTOldNotUse::operator<<(double val)
-{
-	uint8_t sign = 0, len = 0, data[20];
-	if (val < 0)
-	{
-		sign = 1;
-		val = -val;
-	}
-	uint8_t prec = mPrecision;
-	while (prec--)
-		val *= 10;
-	uint32_t t = val;
-	do
-	{
-		if (++len == mPrecision + 1) data[20 - len] = '.';
-		else
-		{
-			data[20 - len] = t % 10 + '0';
-			t = t / 10;
-		}
-	} while (t || len < mPrecision + 2);
-	//if(len==3) data[20-(++len)] = '.';
-	//if(len==4) data[20-(++len)] = '0';
-	if (sign == 1)
-		data[20 - (++len)] = '-';
-	SendBytes(data + 20 - len, len);
-	return *this;
-}
-USARTOldNotUse& USARTOldNotUse::operator<<(const char* pStr)
-{
-	unsigned int length = 0;
-	for (int i = 0; pStr[i] != '\0'; ++i)
-	{
-		++length;
-	}
-	SendBytes((uint8_t*)pStr, length);
-	return *this;
-}
-///////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////hal
 USARTHAL::USARTHAL(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint32_t remapvalue)
 {
 	this->index = index1;
@@ -431,3 +316,118 @@ void USARTHAL::DMAIRQ()
 	}
 }
 #endif
+/////////////////////////////////////////////////////////
+//////////////历史文件//////////////////////////////////
+class USARTOldNotUse
+{
+public:
+	USARTOldNotUse();
+	virtual bool SendBytes(uint8_t txData[], uint16_t size);
+	USARTOldNotUse& operator<<(int val);
+	USARTOldNotUse& operator<<(double val);
+	USARTOldNotUse& operator<<(const char* pStr);
+private:
+
+	FIFOBuffer<uint8_t, USART_TX_BUFFER_SIZE>  mTxBuf;  //USART Tx Buffer
+	uint8_t mPrecision;   //when show precision after dot "."  when use "<<" to show float value
+};
+
+
+USARTOldNotUse::USARTOldNotUse()
+{
+	this->mPrecision = 3;
+}
+
+bool USARTOldNotUse::SendBytes(uint8_t txData[], uint16_t size)
+{
+	USART_TypeDef* mUSARTx;   //USARTx
+
+	if (mTxBuf.ResSize() < size)      //compare the unused bytes and sending bytes
+	{
+		return false;
+	}
+	mTxBuf.Puts(txData, size);                        //add data to Tx buffer, if overflow, return false	
+	if (mTxBuf.Size() <= 0)        return true;       //have no data to send, return	
+#ifdef USE_USART_DMA
+	if (mTxBuf.Size() <= USART_DMA_TX_BUFFER_SIZE)  //rest data bytes less than DMA buffer size
+	{
+		mDMATxCh->CNDTR = (uint32_t)mTxBuf.Size();        //send all data to DMA buffer
+		mTxBuf.Gets(mDMATxBuf, mTxBuf.Size());
+	}
+	else                                           //rest data bytes more than DMA buffer size
+	{
+		mDMATxCh->CNDTR = USART_DMA_TX_BUFFER_SIZE;  //send max DMA buffer size data to DMA buffer
+		mTxBuf.Gets(mDMATxBuf, USART_DMA_TX_BUFFER_SIZE);
+	}
+	DMA_Cmd(mDMATxCh, ENABLE); 	                   //enable DMA to send data
+#else	
+	USART_ClearITPendingBit(mUSARTx, USART_IT_TC); //Clear TC, otherwise the first byte may not able to send out
+	USART_ClearITPendingBit(mUSARTx, USART_IT_TXE); //Clear TC, otherwise the first byte may not able to send out
+	USART_ITConfig(mUSARTx, USART_IT_TC, ENABLE);  //Enable TC, going to send data
+												   //USART_ITConfig(mUSARTx, USART_IT_TXE, ENABLE);  //Enable TC, going to send data
+	USART_GetFlagStatus(mUSARTx, USART_FLAG_TC);   //read SR to clear flag, otherwise the first byte may not able to send out
+												   //USART_GetFlagStatus(mUSARTx, USART_FLAG_TXE);   //read SR to clear flag, otherwise the first byte may not able to send out
+	static uint8_t data = 0;
+	mTxBuf.Get(data);                              //get one byte data from tx buffer
+	USART_SendData(mUSARTx, data);                  //send one byte data
+#endif	
+	return true;
+}
+
+USARTOldNotUse& USARTOldNotUse::operator<<(int val)
+{
+	uint8_t sign = 0, len = 0, data[10];
+	if (val < 0)
+	{
+		sign = 1;
+		val = -val;
+	}
+	do
+	{
+		len++;
+		data[10 - len] = val % 10 + '0';
+		val = val / 10;
+	} while (val);
+	if (sign == 1)
+		data[10 - (++len)] = '-';
+	SendBytes(data + 10 - len, len);
+	return *this;
+}
+USARTOldNotUse& USARTOldNotUse::operator<<(double val)
+{
+	uint8_t sign = 0, len = 0, data[20];
+	if (val < 0)
+	{
+		sign = 1;
+		val = -val;
+	}
+	uint8_t prec = mPrecision;
+	while (prec--)
+		val *= 10;
+	uint32_t t = val;
+	do
+	{
+		if (++len == mPrecision + 1) data[20 - len] = '.';
+		else
+		{
+			data[20 - len] = t % 10 + '0';
+			t = t / 10;
+		}
+	} while (t || len < mPrecision + 2);
+	//if(len==3) data[20-(++len)] = '.';
+	//if(len==4) data[20-(++len)] = '0';
+	if (sign == 1)
+		data[20 - (++len)] = '-';
+	SendBytes(data + 20 - len, len);
+	return *this;
+}
+USARTOldNotUse& USARTOldNotUse::operator<<(const char* pStr)
+{
+	unsigned int length = 0;
+	for (int i = 0; pStr[i] != '\0'; ++i)
+	{
+		++length;
+	}
+	SendBytes((uint8_t*)pStr, length);
+	return *this;
+}
