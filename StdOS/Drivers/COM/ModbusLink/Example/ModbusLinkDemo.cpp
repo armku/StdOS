@@ -15,18 +15,20 @@ uint16_t RegHoilding16[60];
 
 void ModbusSlaveLinkRoutin(void* param)
 {
-	//if ((modbusSlave.com.RxSize() > 0)&& modbusSlave.CheckFrame())
-	//{
-	//	modbusSlave.DealFrame();
-	//	modbusSlave.rxFrame.RemoveOneFrame();
-	//}
-	//else if ((modbusSlave.com.RxSize() > 0 || (modbusSlave.rxFrame.Length > 0)) && (millis() - modbusSlave.com.LastRcvTime) > 5)
-	//{
-	//	debug_printf("Clear RcvBuffer rxFrame:%d  com.RxSize:%d\n", modbusSlave.rxFrame.Length,modbusSlave.com.RxSize());
-	//	modbusSlave.rxFrame.Length = 0;
-	//	//modbusSlave.com.ClearRxBuf();
-	//}
-	//else {}
+#if 0
+	if ((modbusSlave.com.RxSize() > 0)&& modbusSlave.CheckFrame())
+	{
+		modbusSlave.DealFrame();
+		modbusSlave.rxFrame.RemoveOneFrame();
+	}
+	else if ((modbusSlave.com.RxSize() > 0 || (modbusSlave.rxFrame.Length > 0)) && (millis() - modbusSlave.com.LastRcvTime) > 5)
+	{
+		debug_printf("Clear RcvBuffer rxFrame:%d  com.RxSize:%d\n", modbusSlave.rxFrame.Length,modbusSlave.com.RxSize());
+		modbusSlave.rxFrame.Length = 0;
+		//modbusSlave.com.ClearRxBuf();
+	}
+	else {}
+#endif
 }
 
 void ModbusSlaveLinkTestInit()
