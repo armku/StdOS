@@ -4,6 +4,7 @@
 #include "Port.h"
 #include "Task.h"
 #include "Core/RingBuffer.h"
+#include "Buffer.h"
 
 #define _MODBUSLINKEST_CPP
 #ifdef _MODBUSLINKEST_CPP
@@ -45,8 +46,27 @@ static void checkComRoutin(void* param)
 
 		//EspFrameDeal();
 		int readlen = ringRcvcom2.Get((char*)loop_bufcom2, ArrayLength(loop_bufcom2));
-		debug_printf("Rcv Buffer\r\n");
-
+		Buffer(loop_bufcom2, readlen).ShowHex();
+		if (readlen >= 8)
+		{
+			uint16_t crccal= Crc::CRC16RTU(loop_bufcom2, readlen - 2);
+			uint16_t crcrcv = loop_bufcom2[readlen - 1];
+			crcrcv <<= 8;
+			crcrcv |= loop_bufcom2[readlen - 2];
+			if (crcrcv == crccal)
+			{
+				debug_printf("Rcv Frame OK\r\n");
+			}
+			else
+			{
+				debug_printf("crc Error:%04x\r\n", crccal);
+			}
+		}
+		else
+		{
+			debug_printf("Rcv Length Error:%d\r\n", readlen);
+		}
+		
 		FlagInFrame = 0;
 		FlagIdleCnt = 0;
 	}
