@@ -48,7 +48,7 @@ static void write_loop_buf(uint8_t dat)
 	ringRcvcom3.Put(dat);
 }
 
-void checkComRoutin(void* param)
+static void checkComRoutin(void* param)
 {
 	static int RxCnt = 0;
 	static int RxCntOld = 0;
@@ -103,7 +103,7 @@ void checkComRoutin(void* param)
 }
 char* publish = "abcd";
 //要求1000ms调用一次
-void Esp8266Routin(void* param)
+static void Esp8266Routin(void* param)
 {
 	if (!esp.FlagConnected)
 	{
