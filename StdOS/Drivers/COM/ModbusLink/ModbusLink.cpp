@@ -31,7 +31,6 @@ bool ModbusSlaveLink::Send()
 	txFrame.Crc2 = Crc::CRC16RTU(txFrame.data, txFrame.frameLength - 2);
 	txFrame.data[txFrame.frameLength - 2] = txFrame.Crc2 & 0xff;
 	txFrame.data[txFrame.frameLength - 1] = txFrame.Crc2 >> 8;
-	/*com.SendBytes(txFrame.data, txFrame.frameLength);*/
 	this->send_buf(txFrame.data, txFrame.frameLength);
 	Buffer(txFrame.data, txFrame.frameLength).ShowHex();
 	txFrame.isUpdated = false;
