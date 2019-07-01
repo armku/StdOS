@@ -132,22 +132,6 @@ public:
 		}
 		return false;
 	}
-	void CreateCheckCode()
-	{
-		Crc = Code + frameLength;
-		for (uint8_t i = 0; i < frameLength; i++)
-			Crc += data[i];
-	}
-	DataFrameModbus& operator=(const DataFrameModbus &df)
-	{
-		Code = df.Code;
-		Length = df.Length;
-		isUpdated = df.isUpdated;
-		Crc = df.Crc;
-		for (uint8_t i = 0; i < Length; i++)
-			data[i] = df.data[i];
-		return *this;
-	}
 };
 
 #endif // !_DATAFRAMEMODBUS_H
