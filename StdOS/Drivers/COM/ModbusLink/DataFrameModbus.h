@@ -1,3 +1,4 @@
+#include <string.h>
 #include "Type.h"
 #include "Security/Crc.h"
 
@@ -25,8 +26,20 @@ public:
 public:
 	DataFrameModbus()                 //constructor
 	{
-		isUpdated = false;
-		Cnt = 0;
+		this->Address = 1;
+		this->Code = 0;
+		this->Error = 0;
+		this->Length = 0;
+		this->regAddr = 0;
+		this->regLength = 0;
+		
+		memset(this->data,0, MAX_FRAMEMODBUS_DATA_LENGTH);
+		this->isUpdated = false;
+		this->Crc = 0;
+		this->Crc2 = 0;
+		this->frameLength = 0;
+		this->Cnt = 0;
+
 	}
 	
 	//设置传输寄存器值，地址从0开始编码
@@ -115,10 +128,7 @@ public:
 			this->Crc |= this->data[this->frameLength - 2];
 
 			return true;
-			{
-				this->RemoveOneFrame();
-				return false;
-			}
+			this->RemoveOneFrame();
 		}
 		return false;
 	}
