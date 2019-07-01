@@ -28,15 +28,7 @@ public:
 		isUpdated = false;
 		Cnt = 0;
 	}
-
-	bool VerifyCheckCode()
-	{
-		this->Crc2 = Crc::CRC16RTU(data, frameLength-2);
-		if (this->Crc2 == this->Crc)
-			return true;
-		else
-			return false;
-	}
+	
 	//设置传输寄存器值，地址从0开始编码
 	void SetReg(uint8_t regaddr, uint16_t val)
 	{
@@ -122,11 +114,7 @@ public:
 			this->Crc <<= 8;
 			this->Crc |= this->data[this->frameLength - 2];
 
-			if (this->VerifyCheckCode())
-			{				
-				return true;
-			}
-			else
+			return true;
 			{
 				this->RemoveOneFrame();
 				return false;
