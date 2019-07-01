@@ -28,9 +28,9 @@ bool ModbusSlaveLink::Send()
 		return false;	
 	txFrame.data[0] = txFrame.Address;
 	txFrame.data[1] = txFrame.Code;
-	txFrame.Crc2 = Crc::CRC16RTU(txFrame.data, txFrame.frameLength - 2);
-	txFrame.data[txFrame.frameLength - 2] = txFrame.Crc2 & 0xff;
-	txFrame.data[txFrame.frameLength - 1] = txFrame.Crc2 >> 8;
+	txFrame.Crc = Crc::CRC16RTU(txFrame.data, txFrame.frameLength - 2);
+	txFrame.data[txFrame.frameLength - 2] = txFrame.Crc & 0xff;
+	txFrame.data[txFrame.frameLength - 1] = txFrame.Crc >> 8;
 	this->send_buf(txFrame.data, txFrame.frameLength);
 	Buffer(txFrame.data, txFrame.frameLength).ShowHex();
 	txFrame.isUpdated = false;

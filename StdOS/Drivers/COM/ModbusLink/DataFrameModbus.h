@@ -19,7 +19,6 @@ public:
 	uint8_t data[MAX_FRAMEMODBUS_DATA_LENGTH];
 	bool isUpdated;
 	uint16_t Crc;		// 校验码
-	uint16_t Crc2;		// 动态计算得到的校验码
 	int frameLength;//当前数据帧长度
 	int Cnt;//数据帧数量
 
@@ -36,7 +35,6 @@ public:
 		memset(this->data,0, MAX_FRAMEMODBUS_DATA_LENGTH);
 		this->isUpdated = false;
 		this->Crc = 0;
-		this->Crc2 = 0;
 		this->frameLength = 0;
 		this->Cnt = 0;
 
