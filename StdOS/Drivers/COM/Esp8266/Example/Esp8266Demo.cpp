@@ -17,7 +17,6 @@ USARTHAL usart333(COM3, 115200);
 #include "../HAL/STM32F1/ARCH_UART.h"
 static uint8_t   loop_bufcom3[64] = { 0 };                             //定义环形缓冲区
 static RingBuffer ringRcvcom3(loop_bufcom3, ArrayLength(loop_bufcom3));
-static bool FlagInFrame;//接收到完整一帧数据
 //向环形缓冲区【写】一字节数据
 static void write_loop_buf(uint8_t dat)
 {
@@ -43,11 +42,8 @@ static void checkComRoutin(void* param)
 
 	if (++FlagIdleCnt > 10)
 	{
-		FlagInFrame = 1;
-
 		EspFrameDeal();
 						
-		FlagInFrame = 0;
 		FlagIdleCnt = 0;
 	}
 }
@@ -149,7 +145,6 @@ void Esp8266TestInit()
 
 	debug_printf("\r\n WF-ESP8266 WiFi模块测试例程\r\n"); //打印测试例程提示信息)
 
-	FlagInFrame = false;
 	Sys.AddTask(checkComRoutin, 0, 0, 10, "EspCOmCHK");
 	Sys.AddTask(Esp8266Routin, 0, 0, 1000, "EspRoutin");
 }

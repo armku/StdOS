@@ -13,7 +13,6 @@ void DealRcv(char* buf, int length);
 USARTHAL usart222(COM2, 115200);
 static uint8_t   loop_bufcom2[64] = { 0 };                             //定义环形缓冲区
 static RingBuffer ringRcvcom2(loop_bufcom2, ArrayLength(loop_bufcom2));
-static bool FlagInFrame;//接收到完整一帧数据
 //向环形缓冲区【写】一字节数据
 static void write_loop_buf(uint8_t dat)
 {
@@ -39,12 +38,9 @@ static void checkComRoutin(void* param)
 
 	if (++FlagIdleCnt > 10)
 	{
-		FlagInFrame = 1;
-
 		int readlen = ringRcvcom2.Get((char*)loop_bufcom2, ArrayLength(loop_bufcom2));
 		DealRcv((char*)loop_bufcom2, readlen);
 		
-		FlagInFrame = 0;
 		FlagIdleCnt = 0;
 	}
 }
