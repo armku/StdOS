@@ -34,7 +34,6 @@ bool ModbusSlaveLink::Send()
 	this->send_buf(txFrame.data, txFrame.frameLength);
 	Buffer(txFrame.data, txFrame.frameLength).ShowHex();
 	txFrame.isUpdated = false;
-	rxFrame.RemoveOneFrame();//移除处理完的接收数据帧
 	txFrame.Cnt++;
 	return true;
 }

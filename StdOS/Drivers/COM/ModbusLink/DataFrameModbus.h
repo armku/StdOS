@@ -52,18 +52,7 @@ public:
 		this->frameLength = 5 + len * 2;
 		this->Length = this->frameLength;
 	}
-	bool RemoveOneFrame()
-	{
-		if (frameLength<0 || frameLength>Length)
-			return false;
-		for (int i = 0; i < Length - frameLength; i++)
-		{
-			this->data[i] = this->data[i + frameLength];
-		}
-		Length -= frameLength;
-		this->frameLength = 0;
-		return true;
-	}
+	
 	//处理缓冲区数据
 	bool CheckFrame(char* buf, int length)
 	{
@@ -115,7 +104,6 @@ public:
 			{
 				//非法指令，直接清空缓冲区
 				frameLength = this->Length;
-				this->RemoveOneFrame();
 				return false;
 			}
 			//需要的长度不够，直接返回
@@ -126,7 +114,6 @@ public:
 			this->Crc |= this->data[this->frameLength - 2];
 
 			return true;
-			this->RemoveOneFrame();
 		}
 		return false;
 	}
