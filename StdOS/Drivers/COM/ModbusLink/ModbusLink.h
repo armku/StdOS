@@ -1,6 +1,5 @@
 #include <string.h>
 #include "Security/Crc.h"
-#include "FIFOBuffer.h"
 #include "USART.h"
 #include "../HAL/STM32F1/ARCH_UART.h"
 

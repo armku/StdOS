@@ -2,7 +2,6 @@
 #define _USART_H
 
 #include <stdint.h>
-#include "FIFOBuffer.h"
 #include "Configuration.h"
 #include "Port.h"
 
