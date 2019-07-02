@@ -44,7 +44,7 @@ static void checkComRoutin(void* param)
 /******************************************串口参数结束**************************************************/
 /******************************************MODBUS开始**************************************************/
 //测试 01 03 00 00 00 0A C5 CD
-ModbusSlaveLink modbusSlave;
+ModbusLinkSlave modbusSlave;
 Port p485dr;
 uint16_t RegInputu16[144]; //输入寄存器
 uint16_t RegHoilding16[60];

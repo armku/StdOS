@@ -162,7 +162,7 @@ public:
 	pFun_UART_buf send_buf;		// 发送缓冲区
 };
 
-class ModbusSlaveLink:public ModbusLink
+class ModbusLinkSlave :public ModbusLink
 {
 public:	
 	/*USARTHAL&com;*/
@@ -171,7 +171,7 @@ public:
 	ModbusReg_T RegInputs[RegInputLen];//输入寄存器组
 	ModbusReg_T RegHoildings[RegHoildingLen];//保持寄存器组
 public:
-	ModbusSlaveLink();
+	ModbusLinkSlave();
 	bool CheckFrame();
 	bool Send();
 	void SetRegInput(int addr0, int reglen, uint16_t* reg, int reggroup = 0);//设置输入寄存器	
