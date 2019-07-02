@@ -159,6 +159,7 @@ class ModbusLink
 public:
 	DataFrameModbus txFrame;
 	DataFrameModbus rxFrame;
+	pFun_UART_buf send_buf;		// 发送缓冲区
 };
 
 class ModbusSlaveLink:public ModbusLink
@@ -185,8 +186,7 @@ private:
 public:
 	uint8_t id; //本机ID
 	void DealFrame(); //处理数据帧
-	void(*OnUpdateRegHoid)(uint16_t regaddr,uint16_t reglen); //更新参数
-	pFun_UART_buf send_buf;		// 发送缓冲区
+	void(*OnUpdateRegHoid)(uint16_t regaddr,uint16_t reglen); //更新参数	
 };
 
 #endif // !_MODBUSLINK_H
