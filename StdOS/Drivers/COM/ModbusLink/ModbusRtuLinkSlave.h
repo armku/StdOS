@@ -1,7 +1,7 @@
 #include "ModbusLink.h"
 
-#ifndef _MODBUSLINKSLAVE_H
-#define _MODBUSLINKSLAVE_H
+#ifndef _MODBUSRTULINKSLAVE_H
+#define _MODBUSRTULINKSLAVE_H
 
 class ModbusRtuLinkSlave :public ModbusLink
 {
