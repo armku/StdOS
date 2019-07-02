@@ -75,24 +75,6 @@ static void DealRcv(char* buf, int length)
 	}
 }
 
-
-static void ModbusSlaveLinkRoutin(void* param)
-{
-#if 0
-	if ((modbusSlave.com.RxSize() > 0)&& modbusSlave.CheckFrame())
-	{
-		modbusSlave.DealFrame();
-		modbusSlave.rxFrame.RemoveOneFrame();
-	}
-	else if ((modbusSlave.com.RxSize() > 0 || (modbusSlave.rxFrame.Length > 0)) && (millis() - modbusSlave.com.LastRcvTime) > 5)
-	{
-		debug_printf("Clear RcvBuffer rxFrame:%d  com.RxSize:%d\n", modbusSlave.rxFrame.Length,modbusSlave.com.RxSize());
-		modbusSlave.rxFrame.Length = 0;
-		//modbusSlave.com.ClearRxBuf();
-	}
-	else {}
-#endif
-}
 /******************************************MODBUS结束**************************************************/
 void ModbusSlaveLinkTestInit()
 {
@@ -111,6 +93,5 @@ void ModbusSlaveLinkTestInit()
 	RegInputu16[1] = 13;
 
 	Sys.AddTask(checkComRoutin, 0, 0, 10, "ModbusCHK");
-	Sys.AddTask(ModbusSlaveLinkRoutin, 0, 0, 1, "ModbusSlaveLinkRoutin");
 }
 #endif
