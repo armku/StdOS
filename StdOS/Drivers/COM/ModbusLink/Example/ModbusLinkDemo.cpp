@@ -24,9 +24,6 @@ static void checkComRoutin(void* param)
 	static int RxCntOld = 0;
 	static int FlagIdleCnt = 0;//空闲时间
 
-	/*if (!esp.FlagRcvAuto)
-		return;*/
-
 	RxCnt = ringRcvcom2.length;
 	if (RxCnt != RxCntOld)
 	{
