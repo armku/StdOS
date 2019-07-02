@@ -154,11 +154,16 @@ typedef struct
 	uint16_t *Reg;//寄存器指针
 }ModbusReg_T;//寄存器结构体
 
-class ModbusSlaveLink
+class ModbusLink
 {
 public:
 	DataFrameModbus txFrame;
 	DataFrameModbus rxFrame;
+};
+
+class ModbusSlaveLink:public ModbusLink
+{
+public:	
 	/*USARTHAL&com;*/
 	const int static RegInputLen = 3;//输入寄存器组大小
 	const int static RegHoildingLen = 17;//保持寄存器组大小
