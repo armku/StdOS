@@ -3,7 +3,7 @@
 #ifndef _MODBUSLINKSLAVE_H
 #define _MODBUSLINKSLAVE_H
 
-class ModbusLinkRtuSlave :public ModbusLink
+class ModbusRtuLinkSlave :public ModbusLink
 {
 public:
 	/*USARTHAL&com;*/
@@ -12,7 +12,7 @@ public:
 	ModbusReg_T RegInputs[RegInputLen];//输入寄存器组
 	ModbusReg_T RegHoildings[RegHoildingLen];//保持寄存器组
 public:
-	ModbusLinkRtuSlave();
+	ModbusRtuLinkSlave();
 	bool CheckFrame();
 	bool Send();
 	void SetRegInput(int addr0, int reglen, uint16_t* reg, int reggroup = 0);//设置输入寄存器	

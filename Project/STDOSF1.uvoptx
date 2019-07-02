@@ -1620,8 +1620,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\COM\ModbusLink\ModbusLinkSlave.cpp</PathWithFileName>
-      <FilenameWithoutPath>ModbusLinkSlave.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\StdOS\Drivers\COM\ModbusLink\ModbusRtuLinkMaster.cpp</PathWithFileName>
+      <FilenameWithoutPath>ModbusRtuLinkMaster.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1632,8 +1632,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\COM\ModbusLink\ModbusLinkMaster.cpp</PathWithFileName>
-      <FilenameWithoutPath>ModbusLinkMaster.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\StdOS\Drivers\COM\ModbusLink\ModbusRtuLinkRtuSlave.cpp</PathWithFileName>
+      <FilenameWithoutPath>ModbusRtuLinkRtuSlave.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

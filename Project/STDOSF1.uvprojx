@@ -839,14 +839,14 @@
               <FilePath>..\StdOS\Drivers\COM\MQTT\MqttLink.cpp</FilePath>
             </File>
             <File>
-              <FileName>ModbusLinkSlave.cpp</FileName>
+              <FileName>ModbusRtuLinkMaster.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusLinkSlave.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusRtuLinkMaster.cpp</FilePath>
             </File>
             <File>
-              <FileName>ModbusLinkMaster.cpp</FileName>
+              <FileName>ModbusRtuLinkRtuSlave.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusLinkMaster.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusRtuLinkRtuSlave.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1845,14 +1845,14 @@
               <FilePath>..\StdOS\Drivers\COM\MQTT\MqttLink.cpp</FilePath>
             </File>
             <File>
-              <FileName>ModbusLinkSlave.cpp</FileName>
+              <FileName>ModbusRtuLinkMaster.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusLinkSlave.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusRtuLinkMaster.cpp</FilePath>
             </File>
             <File>
-              <FileName>ModbusLinkMaster.cpp</FileName>
+              <FileName>ModbusRtuLinkRtuSlave.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusLinkMaster.cpp</FilePath>
+              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusRtuLinkRtuSlave.cpp</FilePath>
             </File>
           </Files>
         </Group>
