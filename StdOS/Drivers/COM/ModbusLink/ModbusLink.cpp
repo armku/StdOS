@@ -34,7 +34,6 @@ bool ModbusSlaveLink::Send()
 	this->send_buf(txFrame.data, txFrame.frameLength);
 	Buffer(txFrame.data, txFrame.frameLength).ShowHex();
 	txFrame.isUpdated = false;
-	txFrame.Cnt++;
 	return true;
 }
 
