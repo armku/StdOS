@@ -74,7 +74,7 @@ void com1test()
 void Esp8266TestInit();
 void ModbusSlaveLinkTestInit();
 void w25qxxxtest();
-void BspInit()
+void setup()
 {
 	led1.SetPin(PB0);
 	led1.pinMode(GPIO_Out_PP);

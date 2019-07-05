@@ -1,6 +1,6 @@
 #ifndef _BSP_H
 #define _BSP_H
 
-void BspInit();
+void setup();
 
 #endif // !_BSP_H
