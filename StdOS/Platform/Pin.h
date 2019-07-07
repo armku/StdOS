@@ -1,4 +1,3 @@
-//#include "ArduinoAPI/gpio.h"
 
 #ifndef _PIN_H_
 #define _PIN_H_

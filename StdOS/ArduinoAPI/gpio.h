@@ -1,5 +1,4 @@
 #include "../StdOS/Platform/Pin.h"
-
 #include "mcu_type.h"
 
 #ifndef __GPIO_H
