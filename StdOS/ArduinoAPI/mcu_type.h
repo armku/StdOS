@@ -1,3 +1,6 @@
+#include "stm32f10x.h"
+#include "stm32f10x_conf.h"
+
 #ifndef __MCU_TYPE
 #define __MCU_TYPE
 
@@ -6,9 +9,6 @@ extern "C" {
 #endif
 
 //*************** BASIC ***************//
-#include "stm32f10x.h"
-#include "stm32f10x_conf.h"
-
 typedef enum{
     F_CPU_16MHz,
     F_CPU_24MHz,
