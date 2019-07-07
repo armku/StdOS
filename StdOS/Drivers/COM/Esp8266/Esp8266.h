@@ -36,7 +36,7 @@ typedef enum {
 	WPA_WPA2_PSK = 4,
 } ENUM_AP_PsdMode_TypeDef;
 
-typedef enum { DISABLE = 0, ENABLE = !DISABLE } FunctionalState;
+//typedef enum { DISABLE = 0, ENABLE = !DISABLE } FunctionalState;
 
 class Esp8266
 {
