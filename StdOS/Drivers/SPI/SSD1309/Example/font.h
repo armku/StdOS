@@ -40,14 +40,6 @@ extern "C"
 	/////////////////////////////////////////////////////////////////////////
 	extern typFNT_GB12 const GB_12[];
 
-	extern const char FONT_UNIT[][10]; //单位
-	extern const char FONT_CHANNEL[][10]; //输入通道
-	extern const char FONT_INPUT_TYPE[][10]; //输入类型
-	extern const char FONT_ALARM_TYPE[][10]; //报警类型;
-	extern const char FONT_OUTPUT_TYPE[][10];
-	extern const char FONT_CONTROL_MANNER[][10];
-	extern const char FONT_CONTROL_SE[][10];
-	extern const uint32_t FONT_BAUD_RATE[];
 #ifdef __cplusplus
 }
 #endif
