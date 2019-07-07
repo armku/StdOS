@@ -403,11 +403,6 @@
               <FileType>8</FileType>
               <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Test.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1408,11 +1403,6 @@
               <FileName>Bsp.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Test.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Test.cpp</FilePath>
             </File>
           </Files>
         </Group>
