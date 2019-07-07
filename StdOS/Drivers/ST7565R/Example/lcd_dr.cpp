@@ -3,7 +3,7 @@
 #include <math.h>
 
 #include "lcd_dr.h"
-#include "Bsp\font.h"
+#include "../Drivers/SPI/SSD1309/Example/font.h"
 
 CLcd_DR::CLcd_DR()
 {}

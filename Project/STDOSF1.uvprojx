@@ -404,16 +404,6 @@
               <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
             </File>
             <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\font.c</FilePath>
-            </File>
-            <File>
-              <FileName>ssd1309font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
-            </File>
-            <File>
               <FileName>Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\Test.cpp</FilePath>
@@ -922,6 +912,16 @@
               <FileName>Esp8266Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\SSD1309\Example\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\SSD1309\Example\ssd1309font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1410,16 +1410,6 @@
               <FilePath>..\User\Bsp\Bsp.cpp</FilePath>
             </File>
             <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\font.c</FilePath>
-            </File>
-            <File>
-              <FileName>ssd1309font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Bsp\ssd1309font.c</FilePath>
-            </File>
-            <File>
               <FileName>Test.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\Test.cpp</FilePath>
@@ -1928,6 +1918,16 @@
               <FileName>Esp8266Demo.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\SSD1309\Example\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\StdOS\Drivers\SPI\SSD1309\Example\ssd1309font.c</FilePath>
             </File>
           </Files>
         </Group>
