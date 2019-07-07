@@ -619,11 +619,6 @@
               <FilePath>..\StdOS\App\FlushPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>lcd_dr.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\App\lcd_dr.cpp</FilePath>
-            </File>
-            <File>
               <FileName>LCDOCM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\App\LCDOCM.cpp</FilePath>
@@ -807,6 +802,11 @@
               <FileName>ocmtest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\OCM240128\ocmtest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_dr.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\ST7565R\Example\lcd_dr.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1625,11 +1625,6 @@
               <FilePath>..\StdOS\App\FlushPort.cpp</FilePath>
             </File>
             <File>
-              <FileName>lcd_dr.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\App\lcd_dr.cpp</FilePath>
-            </File>
-            <File>
               <FileName>LCDOCM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\App\LCDOCM.cpp</FilePath>
@@ -1813,6 +1808,11 @@
               <FileName>ocmtest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\OCM240128\ocmtest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_dr.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\ST7565R\Example\lcd_dr.cpp</FilePath>
             </File>
           </Files>
         </Group>
