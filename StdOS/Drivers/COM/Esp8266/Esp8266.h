@@ -1,9 +1,8 @@
-#ifndef _ESP8266_H
-#define _ESP8266_H
-
 #include "Port.h"
 #include "../HAL/STM32F1/ARCH_UART.h"
 
+#ifndef _ESP8266_H
+#define _ESP8266_H
 /******************************* ESP8266 数据类型定义 ***************************/
 typedef enum {
 	STA,
