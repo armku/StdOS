@@ -803,11 +803,6 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\OCM240128\ocmtest.cpp</FilePath>
             </File>
-            <File>
-              <FileName>lcd_dr.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\ST7565R\Example\lcd_dr.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -898,6 +893,11 @@
         <Group>
           <GroupName>Demo</GroupName>
           <Files>
+            <File>
+              <FileName>lcd_dr.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\ST7565R\Example\lcd_dr.cpp</FilePath>
+            </File>
             <File>
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
@@ -1809,11 +1809,6 @@
               <FileType>8</FileType>
               <FilePath>..\StdOS\Drivers\OCM240128\ocmtest.cpp</FilePath>
             </File>
-            <File>
-              <FileName>lcd_dr.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\ST7565R\Example\lcd_dr.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1904,6 +1899,11 @@
         <Group>
           <GroupName>Demo</GroupName>
           <Files>
+            <File>
+              <FileName>lcd_dr.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\StdOS\Drivers\ST7565R\Example\lcd_dr.cpp</FilePath>
+            </File>
             <File>
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
