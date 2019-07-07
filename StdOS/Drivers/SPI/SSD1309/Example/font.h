@@ -7,7 +7,6 @@
 extern "C"
 {
 #endif 
-
 	/////////////////////////////////////////////////////////////////////////
 	// 汉字字模表                                                          //
 	// 汉字库: 宋体16.dot 纵向取模下高位,数据排列:从左到右从上到下         //
@@ -34,14 +33,6 @@ extern "C"
 	extern const uint8_t ascBolt[][16];
 	extern const uint8_t ascii_table_6x12[][12];
 	extern const uint8_t nAsciiDot6X16[][16];
-
-	extern unsigned char const g_Ascii12[];
-	extern unsigned char const g_Ascii16[];
-
-	extern unsigned char const g_RA8875_Ascii16_width[];
-	extern unsigned char const g_RA8875_Ascii24_width[];
-	extern unsigned char const g_RA8875_Ascii32_width[];
-
 
 	/////////////////////////////////////////////////////////////////////////
 	// 汉字字模表                                                          //
