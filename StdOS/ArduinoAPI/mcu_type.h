@@ -1,6 +1,10 @@
 #ifndef __MCU_TYPE
 #define __MCU_TYPE
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 //*************** BASIC ***************//
 #include "stm32f10x.h"
 #include "stm32f10x_conf.h"
@@ -63,5 +67,9 @@ typedef enum
 
 #define SPIx_FastSendData(SPIx,Data)	(SPIx->DR = Data)
 #define SPIx_FastRecvData(SPIx)			(SPIx->DR)
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

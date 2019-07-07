@@ -1,13 +1,13 @@
 #include "../StdOS/Platform/Pin.h"
 
+#include "mcu_type.h"
+
 #ifndef __GPIO_H
 #define __GPIO_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include "mcu_type.h"
 
 #ifndef NULL
 #define NULL 0
