@@ -44,7 +44,7 @@ public:
 	inline int Length() const				{ return _Length; }
 
 	// 设置数组长度。只能缩小不能扩大，子类可以扩展以实现自动扩容
-	//virtual bool SetLength(int len);
+	virtual bool SetLength(int len);
 	//virtual void SetBuffer(void* ptr, int len);
 
 	// 设置指定位置的值，长度不足时自动扩容
@@ -60,11 +60,11 @@ public:
 	static void Zero(void* dest, int len);
 
 	// 拷贝数据，默认-1长度表示当前长度
-	//virtual int Copy(int destIndex, const void* src, int len);
+	virtual int Copy(int destIndex, const void* src, int len);
 	// 把数据复制到目标缓冲区，默认-1长度表示当前长度
-	//virtual int CopyTo(int srcIndex, void* dest, int len) const;
+	virtual int CopyTo(int srcIndex, void* dest, int len) const;
 	// 拷贝数据，默认-1长度表示两者最小长度
-	//virtual int Copy(int destIndex, const Buffer& src, int srcIndex, int len);
+	virtual int Copy(int destIndex, const Buffer& src, int srcIndex, int len);
 	// 从另一个对象拷贝数据和长度，长度不足且扩容失败时报错
 	int Copy(const Buffer& src, int destIndex = 0);
 

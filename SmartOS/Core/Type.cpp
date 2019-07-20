@@ -72,3 +72,9 @@ Type::Type()
 
 //	return String(name);
 //}
+void assert_failed2(cstring msg, cstring file, unsigned int line)
+{
+    debug_printf("%s Line %d, %s\r\n", msg, line, file);
+
+//	TInterrupt::Halt();
+}
