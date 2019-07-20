@@ -7,6 +7,7 @@
 #include "_Core.h"
 
 #include "Buffer.h"
+//#include "SString.h"
 
 static void ShowChar(char c)
 {
