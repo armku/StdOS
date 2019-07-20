@@ -40,7 +40,7 @@ void TSys::Init()
 void TSys::ShowInfo()const
 {
 	this->OnShowInfo();
-	SmartOS_printf("ChipID:");
+	debug_printf("ChipID:");
 	Buffer((void*)this->ID, 12).ShowHex(true);
 }
 
@@ -249,7 +249,7 @@ void TSys::GlobalDisable()
 }
 void assert_failed(uint8_t *file, uint32_t line, char *errstr)
 {
-	SmartOS_printf("%s(%d):    %s\n", file, line, errstr);
+	debug_printf("%s(%d):    %s\n", file, line, errstr);
 }
 #if 0
 /*定义STM32 MCU的类型*/

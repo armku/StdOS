@@ -1,4 +1,5 @@
 #include "DateTime.h"
+#include "Sys.h"
 
 DateTime::DateTime()
 {
@@ -290,8 +291,8 @@ bool operator<=	(const DateTime& left, const DateTime& right)
 
 void DateTime::Show(bool newLine)const
 {
-    SmartOS_printf("%04d-%02d-%02d %02d:%02d:%02d", this->Year, this->Month, this->Day, this->Hour, this->Minute, this->Second);
-	SmartOS_printf(newLine ? "\n" : "");
+    debug_printf("%04d-%02d-%02d %02d:%02d:%02d", this->Year, this->Month, this->Day, this->Hour, this->Minute, this->Second);
+	debug_printf(newLine ? "\n" : "");
 }
 
 void DateTime::Init()

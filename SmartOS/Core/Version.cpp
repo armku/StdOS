@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Version.h"
+#include "Sys.h"
 
 template <typename T1>
 void memset1(T1 *buf, int len, char val)
@@ -91,8 +92,8 @@ int Version::Parse(char* str)
 
 void Version::Show(bool newLine) const
 {
-	SmartOS_printf("%d.%d.%d.%d", this->Major, this->Minor, this->Year, this->MonthDay);
-	newLine ? SmartOS_printf("\n") : SmartOS_printf("");
+	debug_printf("%d.%d.%d.%d", this->Major, this->Minor, this->Year, this->MonthDay);
+	newLine ? debug_printf("\n") : debug_printf("");
 }
 #include <stdio.h>
 #include "stdarg.h"
