@@ -21,7 +21,7 @@
 // 内部指针指向的内存和长度，都由外部传入，内部不会自动分配。
 // 所有的进出拷贝都是针对内部指针和最大长度，不会自动扩容，除非子类继承扩展SetLength。
 // 拷贝的原则是尽力而为，有多少可用空间就拷贝多少长度。
-class Buffer //: public Object
+class Buffer : public Object
 {
 public:
 	// 打包一个指针和长度指定的数据区
