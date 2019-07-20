@@ -4,6 +4,8 @@
 #include <cstring>
 #endif
 
+#include "_Core.h"
+
 #include "Buffer.h"
 
 static void ShowChar(char c)
