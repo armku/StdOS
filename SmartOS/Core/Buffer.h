@@ -23,6 +23,21 @@
 // 拷贝的原则是尽力而为，有多少可用空间就拷贝多少长度。
 class Buffer //: public Object
 {
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 public:
 	// 打包一个指针和长度指定的数据区
 	Buffer(void* ptr, int len);
