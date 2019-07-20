@@ -22,11 +22,11 @@ public:
 	void*	Target;	// 参数
 
 	IDelegate& operator=(const IDelegate& dlg)	{ Bind(dlg.Method, dlg.Target); return *this; }
-//    explicit operator bool() const { return Method != NULL; }
-    bool operator !() const { return Method == NULL; }
+//    explicit operator bool() const { return Method != nullptr; }
+    bool operator !() const { return Method == nullptr; }
 
 protected:
-	void Bind(void* method, void* target = NULL)
+	void Bind(void* method, void* target = nullptr)
 	{
 		Method	= method;
 		Target	= target;
@@ -43,7 +43,7 @@ public:
 
 	using IDelegate::Bind;
 
-	Delegate()	{ Bind(NULL, NULL); }
+	Delegate()	{ Bind(nullptr, nullptr); }
 //	Delegate(const Delegate& dlg)	= delete;
 
 	// 全局函数或类静态函数
@@ -91,7 +91,7 @@ public:
 
 	using IDelegate::Bind;
 
-	Delegate2()	{ Bind(NULL, NULL); }
+	Delegate2()	{ Bind(nullptr, nullptr); }
 //	Delegate2(const Delegate2& dlg)	= delete;
 
 	// 全局函数或类静态函数
@@ -140,7 +140,7 @@ public:
 
 	using IDelegate::Bind;
 
-	Delegate3()	{ Bind(NULL, NULL); }
+	Delegate3()	{ Bind(nullptr, nullptr); }
 	//Delegate3(const Delegate3& dlg)	= delete;
 
 	// 全局函数或类静态函数

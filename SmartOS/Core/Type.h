@@ -64,6 +64,5 @@ public:
 
 //以下需要升级
 #include <stdint.h>
-#define NULL 0
 int SmartOS_printf(const char *format, ...); //代替 printf
 #endif

@@ -58,7 +58,7 @@ void *IList::operator[](int i)const
 	}
 	else
 	{
-		return NULL;
+		return nullptr;
 	}
 }
 
