@@ -385,21 +385,6 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\RingBuffer.cpp</FilePath>
             </File>
-            <File>
-              <FileName>WString.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Core\WString.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>itoa.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\Core\itoa.c</FilePath>
-            </File>
-            <File>
-              <FileName>dtostrf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\Core\dtostrf.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -979,57 +964,10 @@
         </Group>
         <Group>
           <GroupName>ArduinoAPI</GroupName>
-          <Files>
-            <File>
-              <FileName>Arduino.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\Arduino.c</FilePath>
-            </File>
-            <File>
-              <FileName>HardwareSerial.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\HardwareSerial.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Print.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\Print.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Stream.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Tone.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\Tone.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Wire.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\Wire.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WireBase.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\WireBase.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WMath.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\WMath.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>ArduinoCore</GroupName>
           <Files>
-            <File>
-              <FileName>adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\adc.c</FilePath>
-            </File>
             <File>
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
@@ -1046,19 +984,9 @@
               <FilePath>..\SmartOS\ArduinoAPI\gpio.c</FilePath>
             </File>
             <File>
-              <FileName>pwm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\pwm.c</FilePath>
-            </File>
-            <File>
               <FileName>timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SmartOS\ArduinoAPI\timer.c</FilePath>
-            </File>
-            <File>
-              <FileName>main1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\main1.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1443,21 +1371,6 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\RingBuffer.cpp</FilePath>
             </File>
-            <File>
-              <FileName>WString.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Core\WString.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>itoa.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\Core\itoa.c</FilePath>
-            </File>
-            <File>
-              <FileName>dtostrf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\Core\dtostrf.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -2037,57 +1950,10 @@
         </Group>
         <Group>
           <GroupName>ArduinoAPI</GroupName>
-          <Files>
-            <File>
-              <FileName>Arduino.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\Arduino.c</FilePath>
-            </File>
-            <File>
-              <FileName>HardwareSerial.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\HardwareSerial.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Print.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\Print.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Stream.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Tone.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\Tone.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Wire.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\Wire.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WireBase.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\WireBase.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WMath.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\WMath.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>ArduinoCore</GroupName>
           <Files>
-            <File>
-              <FileName>adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\adc.c</FilePath>
-            </File>
             <File>
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
@@ -2104,19 +1970,9 @@
               <FilePath>..\SmartOS\ArduinoAPI\gpio.c</FilePath>
             </File>
             <File>
-              <FileName>pwm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\pwm.c</FilePath>
-            </File>
-            <File>
               <FileName>timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SmartOS\ArduinoAPI\timer.c</FilePath>
-            </File>
-            <File>
-              <FileName>main1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\main1.cpp</FilePath>
             </File>
           </Files>
         </Group>
