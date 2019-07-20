@@ -118,7 +118,6 @@ protected:
 	
 	
 public:
-	virtual void Show(bool newLine = false) const;
 	virtual void ShowHex(bool newLine = false, char sep = 0X20) const;
 };
 

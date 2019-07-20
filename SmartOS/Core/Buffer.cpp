@@ -459,17 +459,6 @@ static void ShowChar(char c)
 	}
 }
 
-void Buffer::Show(bool newLine)const
-{	
-	for(int i=0;i<this->_Length;i++)
-	{
-		//debug_printf("%c",this->_Arr[i]);
-	}	
-	if(newLine)
-	{
-		//debug_printf("\n");
-	}
-}
 void Buffer::ShowHex(bool newLine,char sep) const
 {
 	for(int i=0;i<this->_Length;i++)
