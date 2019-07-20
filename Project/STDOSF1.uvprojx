@@ -336,7 +336,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>STM32F1,DEBUG,STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\StdOS;..\StdOS\Core;..\StdOS\OnChip;..\StdOS\Kernel;..\Libraries\STM32F1\CMSIS;..\Libraries\STM32F1\FWLib\inc;..\Util;..\User;..\StdOS\Security</IncludePath>
+              <IncludePath>..\SmartOS;..\SmartOS\Core;..\SmartOS\OnChip;..\SmartOS\Kernel;..\Libraries\STM32F1\CMSIS;..\Libraries\STM32F1\FWLib\inc;..\Util;..\User;..\SmartOS\Security</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -419,14 +419,14 @@
               <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
             </File>
             <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\main.cpp</FilePath>
-            </File>
-            <File>
               <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
+            </File>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\main.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -451,7 +451,7 @@
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Util\Util.cpp</FilePath>
+              <FilePath>..\SmartOS\Util\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -591,27 +591,27 @@
             <File>
               <FileName>BlinkPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\BlinkPort.cpp</FilePath>
+              <FilePath>..\SmartOS\App\BlinkPort.cpp</FilePath>
             </File>
             <File>
               <FileName>bspkey.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\bspkey.cpp</FilePath>
+              <FilePath>..\SmartOS\App\bspkey.cpp</FilePath>
             </File>
             <File>
               <FileName>FlushPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\FlushPort.cpp</FilePath>
+              <FilePath>..\SmartOS\App\FlushPort.cpp</FilePath>
             </File>
             <File>
               <FileName>LCDOCM.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\LCDOCM.cpp</FilePath>
+              <FilePath>..\SmartOS\App\LCDOCM.cpp</FilePath>
             </File>
             <File>
               <FileName>PID.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\PID.cpp</FilePath>
+              <FilePath>..\SmartOS\App\PID.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -621,42 +621,42 @@
             <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Buffer.cpp</FilePath>
+              <FilePath>..\SmartOS\Core\Buffer.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\DateTime.cpp</FilePath>
+              <FilePath>..\SmartOS\Core\DateTime.cpp</FilePath>
             </File>
             <File>
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\List.cpp</FilePath>
+              <FilePath>..\SmartOS\Core\List.cpp</FilePath>
             </File>
             <File>
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Version.cpp</FilePath>
+              <FilePath>..\SmartOS\Core\Version.cpp</FilePath>
             </File>
             <File>
               <FileName>RingBuffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\RingBuffer.cpp</FilePath>
+              <FilePath>..\SmartOS\Core\RingBuffer.cpp</FilePath>
             </File>
             <File>
               <FileName>WString.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\WString.cpp</FilePath>
+              <FilePath>..\SmartOS\Core\WString.cpp</FilePath>
             </File>
             <File>
               <FileName>dtostrf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\Core\dtostrf.c</FilePath>
+              <FilePath>..\SmartOS\Core\dtostrf.c</FilePath>
             </File>
             <File>
               <FileName>itoa.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\Core\itoa.c</FilePath>
+              <FilePath>..\SmartOS\Core\itoa.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -666,32 +666,32 @@
             <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Port.cpp</FilePath>
+              <FilePath>..\SmartOS\OnChip\Port.cpp</FilePath>
             </File>
             <File>
               <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\PwmSolo.cpp</FilePath>
+              <FilePath>..\SmartOS\OnChip\PwmSolo.cpp</FilePath>
             </File>
             <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Spi.cpp</FilePath>
+              <FilePath>..\SmartOS\OnChip\Spi.cpp</FilePath>
             </File>
             <File>
               <FileName>USART.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\USART.cpp</FilePath>
+              <FilePath>..\SmartOS\OnChip\USART.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
+              <FilePath>..\SmartOS\OnChip\WatchDog.cpp</FilePath>
             </File>
             <File>
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\I2C.cpp</FilePath>
+              <FilePath>..\SmartOS\OnChip\I2C.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -701,92 +701,92 @@
             <File>
               <FileName>ADS1232.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\ADS1232\ADS1232.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\ADS1232\ADS1232.cpp</FilePath>
             </File>
             <File>
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\DS18B20\DS18B20.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\DS18B20\DS18B20.cpp</FilePath>
             </File>
             <File>
               <FileName>DS1302.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\DS1302\DS1302.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\DS1302\DS1302.cpp</FilePath>
             </File>
             <File>
               <FileName>OCM240128.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\OCM240128\OCM240128.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\OCM240128\OCM240128.cpp</FilePath>
             </File>
             <File>
               <FileName>ST7565R.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\ST7565R\ST7565R.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\ST7565R\ST7565R.cpp</FilePath>
             </File>
             <File>
               <FileName>AT24CXX.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\I2C\AT24CXX\AT24CXX.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\I2C\AT24CXX\AT24CXX.cpp</FilePath>
             </File>
             <File>
               <FileName>NPA.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\I2C\NPA\NPA.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\I2C\NPA\NPA.cpp</FilePath>
             </File>
             <File>
               <FileName>PCF8563.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\I2C\PCF8563\PCF8563.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\I2C\PCF8563\PCF8563.cpp</FilePath>
             </File>
             <File>
               <FileName>RX8025T.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\I2C\RX8025T\RX8025T.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\I2C\RX8025T\RX8025T.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7124.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\AD7124\AD7124.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\AD7124\AD7124.cpp</FilePath>
             </File>
             <File>
               <FileName>ADS1246.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\ADS1246\ADS1246.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\ADS1246\ADS1246.cpp</FilePath>
             </File>
             <File>
               <FileName>W25QXXX.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\W25QXXX\W25QXXX.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\W25QXXX\W25QXXX.cpp</FilePath>
             </File>
             <File>
               <FileName>MCP3421.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\I2C\MCP3421\MCP3421.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\I2C\MCP3421\MCP3421.cpp</FilePath>
             </File>
             <File>
               <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\AT45DB\AT45DB.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\AT45DB\AT45DB.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\AD7689\AD7689.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\AD7689\AD7689.cpp</FilePath>
             </File>
             <File>
               <FileName>SSD1106.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\SSD1106\SSD1106.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\SSD1106\SSD1106.cpp</FilePath>
             </File>
             <File>
               <FileName>SSD1309.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\SSD1309\SSD1309.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\SSD1309\SSD1309.cpp</FilePath>
             </File>
             <File>
               <FileName>ocmtest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\OCM240128\ocmtest.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\OCM240128\ocmtest.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -796,37 +796,37 @@
             <File>
               <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusLink.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusLink.cpp</FilePath>
             </File>
             <File>
               <FileName>SHARP_PM2_5.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
             </File>
             <File>
               <FileName>Esp8266.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\Esp8266\Esp8266.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\Esp8266\Esp8266.cpp</FilePath>
             </File>
             <File>
               <FileName>MqttLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\MQTT\MqttLink.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\MQTT\MqttLink.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusRtuLinkMaster.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusRtuLinkMaster.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusRtuLinkMaster.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusRtuLinkRtuSlave.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusRtuLinkRtuSlave.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusRtuLinkRtuSlave.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -836,17 +836,17 @@
             <File>
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Sys.cpp</FilePath>
+              <FilePath>..\SmartOS\Kernel\Sys.cpp</FilePath>
             </File>
             <File>
               <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Task.cpp</FilePath>
+              <FilePath>..\SmartOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Time.cpp</FilePath>
+              <FilePath>..\SmartOS\Kernel\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -856,22 +856,22 @@
             <File>
               <FileName>CheckSum.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\CheckSum.cpp</FilePath>
+              <FilePath>..\SmartOS\Security\CheckSum.cpp</FilePath>
             </File>
             <File>
               <FileName>Crc.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\Crc.cpp</FilePath>
+              <FilePath>..\SmartOS\Security\Crc.cpp</FilePath>
             </File>
             <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\Math.cpp</FilePath>
+              <FilePath>..\SmartOS\Security\Math.cpp</FilePath>
             </File>
             <File>
               <FileName>Parity.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\Parity.cpp</FilePath>
+              <FilePath>..\SmartOS\Security\Parity.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -881,42 +881,42 @@
             <File>
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\ST7565R\Example\lcd_dr.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\ST7565R\Example\lcd_dr.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</FilePath>
             </File>
             <File>
               <FileName>W25QXXXDemo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7689Demo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusLinkDemo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
             </File>
             <File>
               <FileName>Esp8266Demo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
             </File>
             <File>
               <FileName>font.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\SSD1309\Example\font.c</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\SSD1309\Example\font.c</FilePath>
             </File>
             <File>
               <FileName>ssd1309font.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\SSD1309\Example\ssd1309font.c</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\SSD1309\Example\ssd1309font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -926,42 +926,42 @@
             <File>
               <FileName>Arduino.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\Arduino.c</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\Arduino.c</FilePath>
             </File>
             <File>
               <FileName>HardwareSerial.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\HardwareSerial.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\HardwareSerial.cpp</FilePath>
             </File>
             <File>
               <FileName>Print.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\Print.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\Print.cpp</FilePath>
             </File>
             <File>
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\Stream.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\Stream.cpp</FilePath>
             </File>
             <File>
               <FileName>Tone.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\Tone.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\Tone.cpp</FilePath>
             </File>
             <File>
               <FileName>Wire.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\Wire.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\Wire.cpp</FilePath>
             </File>
             <File>
               <FileName>WireBase.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\WireBase.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\WireBase.cpp</FilePath>
             </File>
             <File>
               <FileName>WMath.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\WMath.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\WMath.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -971,37 +971,37 @@
             <File>
               <FileName>adc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\adc.c</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\adc.c</FilePath>
             </File>
             <File>
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\delay.c</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\delay.c</FilePath>
             </File>
             <File>
               <FileName>exti.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\exti.c</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\exti.c</FilePath>
             </File>
             <File>
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\gpio.c</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\gpio.c</FilePath>
             </File>
             <File>
               <FileName>pwm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\pwm.c</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\pwm.c</FilePath>
             </File>
             <File>
               <FileName>timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\timer.c</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\timer.c</FilePath>
             </File>
             <File>
               <FileName>main1.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\main1.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\main1.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1337,7 +1337,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,STM32F1</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Libraries;..\Libraries\Core;..\Libraries\OnChip;..\Libraries\Kernel;..\SYSTEM\STM32F1\CMSIS;..\SYSTEM\STM32F1\FWLib\inc;..\Util;..\User</IncludePath>
+              <IncludePath>..\SmartOS;..\SmartOS\Core;..\SmartOS\OnChip;..\SmartOS\Kernel;..\Libraries\STM32F1\CMSIS;..\Libraries\STM32F1\FWLib\inc;..\Util;..\User;..\SmartOS\Security</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1420,14 +1420,14 @@
               <FilePath>..\User\BspPlatform\Interrupt.cpp</FilePath>
             </File>
             <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\StdOS\main.cpp</FilePath>
-            </File>
-            <File>
               <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</FilePath>
+            </File>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\main.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1452,7 +1452,7 @@
             <File>
               <FileName>Util.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Util\Util.cpp</FilePath>
+              <FilePath>..\SmartOS\Util\Util.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1592,27 +1592,27 @@
             <File>
               <FileName>BlinkPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\BlinkPort.cpp</FilePath>
+              <FilePath>..\SmartOS\App\BlinkPort.cpp</FilePath>
             </File>
             <File>
               <FileName>bspkey.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\bspkey.cpp</FilePath>
+              <FilePath>..\SmartOS\App\bspkey.cpp</FilePath>
             </File>
             <File>
               <FileName>FlushPort.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\FlushPort.cpp</FilePath>
+              <FilePath>..\SmartOS\App\FlushPort.cpp</FilePath>
             </File>
             <File>
               <FileName>LCDOCM.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\LCDOCM.cpp</FilePath>
+              <FilePath>..\SmartOS\App\LCDOCM.cpp</FilePath>
             </File>
             <File>
               <FileName>PID.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\App\PID.cpp</FilePath>
+              <FilePath>..\SmartOS\App\PID.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1622,42 +1622,42 @@
             <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Buffer.cpp</FilePath>
+              <FilePath>..\SmartOS\Core\Buffer.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\DateTime.cpp</FilePath>
+              <FilePath>..\SmartOS\Core\DateTime.cpp</FilePath>
             </File>
             <File>
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\List.cpp</FilePath>
+              <FilePath>..\SmartOS\Core\List.cpp</FilePath>
             </File>
             <File>
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\Version.cpp</FilePath>
+              <FilePath>..\SmartOS\Core\Version.cpp</FilePath>
             </File>
             <File>
               <FileName>RingBuffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\RingBuffer.cpp</FilePath>
+              <FilePath>..\SmartOS\Core\RingBuffer.cpp</FilePath>
             </File>
             <File>
               <FileName>WString.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Core\WString.cpp</FilePath>
+              <FilePath>..\SmartOS\Core\WString.cpp</FilePath>
             </File>
             <File>
               <FileName>dtostrf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\Core\dtostrf.c</FilePath>
+              <FilePath>..\SmartOS\Core\dtostrf.c</FilePath>
             </File>
             <File>
               <FileName>itoa.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\Core\itoa.c</FilePath>
+              <FilePath>..\SmartOS\Core\itoa.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1667,32 +1667,32 @@
             <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Port.cpp</FilePath>
+              <FilePath>..\SmartOS\OnChip\Port.cpp</FilePath>
             </File>
             <File>
               <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\PwmSolo.cpp</FilePath>
+              <FilePath>..\SmartOS\OnChip\PwmSolo.cpp</FilePath>
             </File>
             <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\Spi.cpp</FilePath>
+              <FilePath>..\SmartOS\OnChip\Spi.cpp</FilePath>
             </File>
             <File>
               <FileName>USART.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\USART.cpp</FilePath>
+              <FilePath>..\SmartOS\OnChip\USART.cpp</FilePath>
             </File>
             <File>
               <FileName>WatchDog.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\WatchDog.cpp</FilePath>
+              <FilePath>..\SmartOS\OnChip\WatchDog.cpp</FilePath>
             </File>
             <File>
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\OnChip\I2C.cpp</FilePath>
+              <FilePath>..\SmartOS\OnChip\I2C.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1702,92 +1702,92 @@
             <File>
               <FileName>ADS1232.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\ADS1232\ADS1232.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\ADS1232\ADS1232.cpp</FilePath>
             </File>
             <File>
               <FileName>DS18B20.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\DS18B20\DS18B20.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\DS18B20\DS18B20.cpp</FilePath>
             </File>
             <File>
               <FileName>DS1302.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\DS1302\DS1302.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\DS1302\DS1302.cpp</FilePath>
             </File>
             <File>
               <FileName>OCM240128.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\OCM240128\OCM240128.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\OCM240128\OCM240128.cpp</FilePath>
             </File>
             <File>
               <FileName>ST7565R.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\ST7565R\ST7565R.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\ST7565R\ST7565R.cpp</FilePath>
             </File>
             <File>
               <FileName>AT24CXX.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\I2C\AT24CXX\AT24CXX.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\I2C\AT24CXX\AT24CXX.cpp</FilePath>
             </File>
             <File>
               <FileName>NPA.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\I2C\NPA\NPA.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\I2C\NPA\NPA.cpp</FilePath>
             </File>
             <File>
               <FileName>PCF8563.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\I2C\PCF8563\PCF8563.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\I2C\PCF8563\PCF8563.cpp</FilePath>
             </File>
             <File>
               <FileName>RX8025T.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\I2C\RX8025T\RX8025T.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\I2C\RX8025T\RX8025T.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7124.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\AD7124\AD7124.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\AD7124\AD7124.cpp</FilePath>
             </File>
             <File>
               <FileName>ADS1246.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\ADS1246\ADS1246.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\ADS1246\ADS1246.cpp</FilePath>
             </File>
             <File>
               <FileName>W25QXXX.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\W25QXXX\W25QXXX.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\W25QXXX\W25QXXX.cpp</FilePath>
             </File>
             <File>
               <FileName>MCP3421.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\I2C\MCP3421\MCP3421.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\I2C\MCP3421\MCP3421.cpp</FilePath>
             </File>
             <File>
               <FileName>AT45DB.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\AT45DB\AT45DB.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\AT45DB\AT45DB.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7689.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\AD7689\AD7689.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\AD7689\AD7689.cpp</FilePath>
             </File>
             <File>
               <FileName>SSD1106.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\SSD1106\SSD1106.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\SSD1106\SSD1106.cpp</FilePath>
             </File>
             <File>
               <FileName>SSD1309.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\SSD1309\SSD1309.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\SSD1309\SSD1309.cpp</FilePath>
             </File>
             <File>
               <FileName>ocmtest.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\OCM240128\ocmtest.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\OCM240128\ocmtest.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1797,37 +1797,37 @@
             <File>
               <FileName>GPS_S1216.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusLink.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusLink.cpp</FilePath>
             </File>
             <File>
               <FileName>SHARP_PM2_5.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
             </File>
             <File>
               <FileName>Esp8266.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\Esp8266\Esp8266.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\Esp8266\Esp8266.cpp</FilePath>
             </File>
             <File>
               <FileName>MqttLink.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\MQTT\MqttLink.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\MQTT\MqttLink.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusRtuLinkMaster.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusRtuLinkMaster.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusRtuLinkMaster.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusRtuLinkRtuSlave.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\ModbusLink\ModbusRtuLinkRtuSlave.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusRtuLinkRtuSlave.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1837,17 +1837,17 @@
             <File>
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Sys.cpp</FilePath>
+              <FilePath>..\SmartOS\Kernel\Sys.cpp</FilePath>
             </File>
             <File>
               <FileName>Task.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Task.cpp</FilePath>
+              <FilePath>..\SmartOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Kernel\Time.cpp</FilePath>
+              <FilePath>..\SmartOS\Kernel\Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1857,22 +1857,22 @@
             <File>
               <FileName>CheckSum.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\CheckSum.cpp</FilePath>
+              <FilePath>..\SmartOS\Security\CheckSum.cpp</FilePath>
             </File>
             <File>
               <FileName>Crc.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\Crc.cpp</FilePath>
+              <FilePath>..\SmartOS\Security\Crc.cpp</FilePath>
             </File>
             <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\Math.cpp</FilePath>
+              <FilePath>..\SmartOS\Security\Math.cpp</FilePath>
             </File>
             <File>
               <FileName>Parity.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Security\Parity.cpp</FilePath>
+              <FilePath>..\SmartOS\Security\Parity.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1882,42 +1882,42 @@
             <File>
               <FileName>lcd_dr.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\ST7565R\Example\lcd_dr.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\ST7565R\Example\lcd_dr.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7124Demo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</FilePath>
             </File>
             <File>
               <FileName>W25QXXXDemo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
             </File>
             <File>
               <FileName>AD7689Demo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</FilePath>
             </File>
             <File>
               <FileName>ModbusLinkDemo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
             </File>
             <File>
               <FileName>Esp8266Demo.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
             </File>
             <File>
               <FileName>font.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\SSD1309\Example\font.c</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\SSD1309\Example\font.c</FilePath>
             </File>
             <File>
               <FileName>ssd1309font.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\Drivers\SPI\SSD1309\Example\ssd1309font.c</FilePath>
+              <FilePath>..\SmartOS\Drivers\SPI\SSD1309\Example\ssd1309font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1927,42 +1927,42 @@
             <File>
               <FileName>Arduino.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\Arduino.c</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\Arduino.c</FilePath>
             </File>
             <File>
               <FileName>HardwareSerial.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\HardwareSerial.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\HardwareSerial.cpp</FilePath>
             </File>
             <File>
               <FileName>Print.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\Print.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\Print.cpp</FilePath>
             </File>
             <File>
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\Stream.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\Stream.cpp</FilePath>
             </File>
             <File>
               <FileName>Tone.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\Tone.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\Tone.cpp</FilePath>
             </File>
             <File>
               <FileName>Wire.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\Wire.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\Wire.cpp</FilePath>
             </File>
             <File>
               <FileName>WireBase.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\WireBase.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\WireBase.cpp</FilePath>
             </File>
             <File>
               <FileName>WMath.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\WMath.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\WMath.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1972,37 +1972,37 @@
             <File>
               <FileName>adc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\adc.c</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\adc.c</FilePath>
             </File>
             <File>
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\delay.c</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\delay.c</FilePath>
             </File>
             <File>
               <FileName>exti.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\exti.c</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\exti.c</FilePath>
             </File>
             <File>
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\gpio.c</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\gpio.c</FilePath>
             </File>
             <File>
               <FileName>pwm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\pwm.c</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\pwm.c</FilePath>
             </File>
             <File>
               <FileName>timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\timer.c</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\timer.c</FilePath>
             </File>
             <File>
               <FileName>main1.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\StdOS\ArduinoAPI\main1.cpp</FilePath>
+              <FilePath>..\SmartOS\ArduinoAPI\main1.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -644,24 +644,24 @@
     <File>
       <GroupNumber>4</GroupNumber>
       <FileNumber>6</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\main.cpp</PathWithFileName>
-      <FilenameWithoutPath>main.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>7</FileNumber>
       <FileType>2</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\Libraries\STM32F1\startup\startup_stm32f10x_md.s</PathWithFileName>
       <FilenameWithoutPath>startup_stm32f10x_md.s</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>7</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\SmartOS\main.cpp</PathWithFileName>
+      <FilenameWithoutPath>main.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -712,7 +712,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Util\Util.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Util\Util.cpp</PathWithFileName>
       <FilenameWithoutPath>Util.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1036,7 +1036,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\App\BlinkPort.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\App\BlinkPort.cpp</PathWithFileName>
       <FilenameWithoutPath>BlinkPort.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1048,7 +1048,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\App\bspkey.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\App\bspkey.cpp</PathWithFileName>
       <FilenameWithoutPath>bspkey.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1060,7 +1060,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\App\FlushPort.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\App\FlushPort.cpp</PathWithFileName>
       <FilenameWithoutPath>FlushPort.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1072,7 +1072,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\App\LCDOCM.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\App\LCDOCM.cpp</PathWithFileName>
       <FilenameWithoutPath>LCDOCM.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1084,7 +1084,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\App\PID.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\App\PID.cpp</PathWithFileName>
       <FilenameWithoutPath>PID.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1104,7 +1104,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Core\Buffer.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Core\Buffer.cpp</PathWithFileName>
       <FilenameWithoutPath>Buffer.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1116,7 +1116,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Core\DateTime.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Core\DateTime.cpp</PathWithFileName>
       <FilenameWithoutPath>DateTime.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1128,7 +1128,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Core\List.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Core\List.cpp</PathWithFileName>
       <FilenameWithoutPath>List.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1140,7 +1140,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Core\Version.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Core\Version.cpp</PathWithFileName>
       <FilenameWithoutPath>Version.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1152,7 +1152,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Core\RingBuffer.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Core\RingBuffer.cpp</PathWithFileName>
       <FilenameWithoutPath>RingBuffer.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1164,7 +1164,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Core\WString.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Core\WString.cpp</PathWithFileName>
       <FilenameWithoutPath>WString.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1176,7 +1176,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Core\dtostrf.c</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Core\dtostrf.c</PathWithFileName>
       <FilenameWithoutPath>dtostrf.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1188,7 +1188,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Core\itoa.c</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Core\itoa.c</PathWithFileName>
       <FilenameWithoutPath>itoa.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1208,7 +1208,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\OnChip\Port.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\OnChip\Port.cpp</PathWithFileName>
       <FilenameWithoutPath>Port.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1220,7 +1220,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\OnChip\PwmSolo.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\OnChip\PwmSolo.cpp</PathWithFileName>
       <FilenameWithoutPath>PwmSolo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1232,7 +1232,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\OnChip\Spi.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\OnChip\Spi.cpp</PathWithFileName>
       <FilenameWithoutPath>Spi.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1244,7 +1244,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\OnChip\USART.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\OnChip\USART.cpp</PathWithFileName>
       <FilenameWithoutPath>USART.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1256,7 +1256,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\OnChip\WatchDog.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\OnChip\WatchDog.cpp</PathWithFileName>
       <FilenameWithoutPath>WatchDog.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1268,7 +1268,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\OnChip\I2C.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\OnChip\I2C.cpp</PathWithFileName>
       <FilenameWithoutPath>I2C.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1277,7 +1277,7 @@
 
   <Group>
     <GroupName>Drivers</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1288,7 +1288,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\ADS1232\ADS1232.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\ADS1232\ADS1232.cpp</PathWithFileName>
       <FilenameWithoutPath>ADS1232.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1300,7 +1300,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\DS18B20\DS18B20.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\DS18B20\DS18B20.cpp</PathWithFileName>
       <FilenameWithoutPath>DS18B20.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1312,7 +1312,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\DS1302\DS1302.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\DS1302\DS1302.cpp</PathWithFileName>
       <FilenameWithoutPath>DS1302.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1324,7 +1324,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\OCM240128\OCM240128.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\OCM240128\OCM240128.cpp</PathWithFileName>
       <FilenameWithoutPath>OCM240128.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1336,7 +1336,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\ST7565R\ST7565R.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\ST7565R\ST7565R.cpp</PathWithFileName>
       <FilenameWithoutPath>ST7565R.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1348,7 +1348,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\I2C\AT24CXX\AT24CXX.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\I2C\AT24CXX\AT24CXX.cpp</PathWithFileName>
       <FilenameWithoutPath>AT24CXX.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1360,7 +1360,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\I2C\NPA\NPA.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\I2C\NPA\NPA.cpp</PathWithFileName>
       <FilenameWithoutPath>NPA.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1372,7 +1372,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\I2C\PCF8563\PCF8563.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\I2C\PCF8563\PCF8563.cpp</PathWithFileName>
       <FilenameWithoutPath>PCF8563.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1384,7 +1384,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\I2C\RX8025T\RX8025T.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\I2C\RX8025T\RX8025T.cpp</PathWithFileName>
       <FilenameWithoutPath>RX8025T.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1396,7 +1396,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\SPI\AD7124\AD7124.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\SPI\AD7124\AD7124.cpp</PathWithFileName>
       <FilenameWithoutPath>AD7124.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1408,7 +1408,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\SPI\ADS1246\ADS1246.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\SPI\ADS1246\ADS1246.cpp</PathWithFileName>
       <FilenameWithoutPath>ADS1246.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1420,7 +1420,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\SPI\W25QXXX\W25QXXX.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\SPI\W25QXXX\W25QXXX.cpp</PathWithFileName>
       <FilenameWithoutPath>W25QXXX.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1432,7 +1432,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\I2C\MCP3421\MCP3421.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\I2C\MCP3421\MCP3421.cpp</PathWithFileName>
       <FilenameWithoutPath>MCP3421.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1444,7 +1444,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\SPI\AT45DB\AT45DB.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\SPI\AT45DB\AT45DB.cpp</PathWithFileName>
       <FilenameWithoutPath>AT45DB.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1456,7 +1456,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\SPI\AD7689\AD7689.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\SPI\AD7689\AD7689.cpp</PathWithFileName>
       <FilenameWithoutPath>AD7689.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1468,7 +1468,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\SPI\SSD1106\SSD1106.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\SPI\SSD1106\SSD1106.cpp</PathWithFileName>
       <FilenameWithoutPath>SSD1106.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1480,7 +1480,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\SPI\SSD1309\SSD1309.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\SPI\SSD1309\SSD1309.cpp</PathWithFileName>
       <FilenameWithoutPath>SSD1309.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1492,7 +1492,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\OCM240128\ocmtest.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\OCM240128\ocmtest.cpp</PathWithFileName>
       <FilenameWithoutPath>ocmtest.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1512,7 +1512,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</PathWithFileName>
       <FilenameWithoutPath>GPS_S1216.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1524,7 +1524,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\COM\ModbusLink\ModbusLink.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\COM\ModbusLink\ModbusLink.cpp</PathWithFileName>
       <FilenameWithoutPath>ModbusLink.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1536,7 +1536,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</PathWithFileName>
       <FilenameWithoutPath>SHARP_PM2_5.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1548,7 +1548,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\COM\Esp8266\Esp8266.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\COM\Esp8266\Esp8266.cpp</PathWithFileName>
       <FilenameWithoutPath>Esp8266.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1560,7 +1560,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\COM\MQTT\MqttLink.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\COM\MQTT\MqttLink.cpp</PathWithFileName>
       <FilenameWithoutPath>MqttLink.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1572,7 +1572,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\COM\ModbusLink\ModbusRtuLinkMaster.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\COM\ModbusLink\ModbusRtuLinkMaster.cpp</PathWithFileName>
       <FilenameWithoutPath>ModbusRtuLinkMaster.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1584,7 +1584,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\COM\ModbusLink\ModbusRtuLinkRtuSlave.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\COM\ModbusLink\ModbusRtuLinkRtuSlave.cpp</PathWithFileName>
       <FilenameWithoutPath>ModbusRtuLinkRtuSlave.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1604,7 +1604,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Kernel\Sys.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Kernel\Sys.cpp</PathWithFileName>
       <FilenameWithoutPath>Sys.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1616,7 +1616,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Kernel\Task.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Kernel\Task.cpp</PathWithFileName>
       <FilenameWithoutPath>Task.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1628,7 +1628,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Kernel\Time.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Kernel\Time.cpp</PathWithFileName>
       <FilenameWithoutPath>Time.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1637,7 +1637,7 @@
 
   <Group>
     <GroupName>Security</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1648,7 +1648,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Security\CheckSum.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Security\CheckSum.cpp</PathWithFileName>
       <FilenameWithoutPath>CheckSum.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1660,7 +1660,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Security\Crc.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Security\Crc.cpp</PathWithFileName>
       <FilenameWithoutPath>Crc.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1672,7 +1672,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Security\Math.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Security\Math.cpp</PathWithFileName>
       <FilenameWithoutPath>Math.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1684,7 +1684,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Security\Parity.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Security\Parity.cpp</PathWithFileName>
       <FilenameWithoutPath>Parity.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1693,7 +1693,7 @@
 
   <Group>
     <GroupName>Demo</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1704,7 +1704,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\ST7565R\Example\lcd_dr.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\ST7565R\Example\lcd_dr.cpp</PathWithFileName>
       <FilenameWithoutPath>lcd_dr.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1716,7 +1716,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</PathWithFileName>
       <FilenameWithoutPath>AD7124Demo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1728,7 +1728,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\SPI\W25QXXX\Example\W25QXXXDemo.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\SPI\W25QXXX\Example\W25QXXXDemo.cpp</PathWithFileName>
       <FilenameWithoutPath>W25QXXXDemo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1740,7 +1740,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</PathWithFileName>
       <FilenameWithoutPath>AD7689Demo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1752,7 +1752,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</PathWithFileName>
       <FilenameWithoutPath>ModbusLinkDemo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1764,7 +1764,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</PathWithFileName>
       <FilenameWithoutPath>Esp8266Demo.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1776,7 +1776,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\SPI\SSD1309\Example\font.c</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\SPI\SSD1309\Example\font.c</PathWithFileName>
       <FilenameWithoutPath>font.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1788,7 +1788,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\Drivers\SPI\SSD1309\Example\ssd1309font.c</PathWithFileName>
+      <PathWithFileName>..\SmartOS\Drivers\SPI\SSD1309\Example\ssd1309font.c</PathWithFileName>
       <FilenameWithoutPath>ssd1309font.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1808,7 +1808,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\Arduino.c</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\Arduino.c</PathWithFileName>
       <FilenameWithoutPath>Arduino.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1820,7 +1820,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\HardwareSerial.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\HardwareSerial.cpp</PathWithFileName>
       <FilenameWithoutPath>HardwareSerial.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1832,7 +1832,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\Print.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\Print.cpp</PathWithFileName>
       <FilenameWithoutPath>Print.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1844,7 +1844,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\Stream.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\Stream.cpp</PathWithFileName>
       <FilenameWithoutPath>Stream.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1856,7 +1856,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\Tone.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\Tone.cpp</PathWithFileName>
       <FilenameWithoutPath>Tone.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1868,7 +1868,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\Wire.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\Wire.cpp</PathWithFileName>
       <FilenameWithoutPath>Wire.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1880,7 +1880,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\WireBase.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\WireBase.cpp</PathWithFileName>
       <FilenameWithoutPath>WireBase.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1892,7 +1892,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\WMath.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\WMath.cpp</PathWithFileName>
       <FilenameWithoutPath>WMath.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1912,7 +1912,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\adc.c</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\adc.c</PathWithFileName>
       <FilenameWithoutPath>adc.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1924,7 +1924,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\delay.c</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\delay.c</PathWithFileName>
       <FilenameWithoutPath>delay.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1936,7 +1936,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\exti.c</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\exti.c</PathWithFileName>
       <FilenameWithoutPath>exti.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1948,7 +1948,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\gpio.c</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\gpio.c</PathWithFileName>
       <FilenameWithoutPath>gpio.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1960,7 +1960,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\pwm.c</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\pwm.c</PathWithFileName>
       <FilenameWithoutPath>pwm.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1972,7 +1972,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\timer.c</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\timer.c</PathWithFileName>
       <FilenameWithoutPath>timer.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1984,7 +1984,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\StdOS\ArduinoAPI\main1.cpp</PathWithFileName>
+      <PathWithFileName>..\SmartOS\ArduinoAPI\main1.cpp</PathWithFileName>
       <FilenameWithoutPath>main1.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
