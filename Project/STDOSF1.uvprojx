@@ -379,6 +379,28 @@
       <Groups>
         <Group>
           <GroupName>USER</GroupName>
+          <Files>
+            <File>
+              <FileName>RingBuffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\RingBuffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\WString.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>itoa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SmartOS\Core\itoa.c</FilePath>
+            </File>
+            <File>
+              <FileName>dtostrf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SmartOS\Core\dtostrf.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>HAL</GroupName>
@@ -619,9 +641,24 @@
           <GroupName>Core</GroupName>
           <Files>
             <File>
+              <FileName>Type.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Type.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\Buffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Array.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Array.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ByteArray.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\ByteArray.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
@@ -629,34 +666,54 @@
               <FilePath>..\SmartOS\Core\DateTime.cpp</FilePath>
             </File>
             <File>
+              <FileName>Delegate.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Delegate.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Dictionary.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Dictionary.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Environment.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Environment.cpp</FilePath>
+            </File>
+            <File>
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\List.cpp</FilePath>
             </File>
             <File>
+              <FileName>Queue.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Queue.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Random.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Random.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Stream.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Stream.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>String.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\String.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeSpan.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\TimeSpan.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\Version.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RingBuffer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Core\RingBuffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WString.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Core\WString.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>dtostrf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\Core\dtostrf.c</FilePath>
-            </File>
-            <File>
-              <FileName>itoa.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\Core\itoa.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1380,6 +1437,28 @@
       <Groups>
         <Group>
           <GroupName>USER</GroupName>
+          <Files>
+            <File>
+              <FileName>RingBuffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\RingBuffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WString.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\WString.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>itoa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SmartOS\Core\itoa.c</FilePath>
+            </File>
+            <File>
+              <FileName>dtostrf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SmartOS\Core\dtostrf.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>HAL</GroupName>
@@ -1620,9 +1699,24 @@
           <GroupName>Core</GroupName>
           <Files>
             <File>
+              <FileName>Type.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Type.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\Buffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Array.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Array.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ByteArray.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\ByteArray.cpp</FilePath>
             </File>
             <File>
               <FileName>DateTime.cpp</FileName>
@@ -1630,34 +1724,54 @@
               <FilePath>..\SmartOS\Core\DateTime.cpp</FilePath>
             </File>
             <File>
+              <FileName>Delegate.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Delegate.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Dictionary.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Dictionary.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Environment.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Environment.cpp</FilePath>
+            </File>
+            <File>
               <FileName>List.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\List.cpp</FilePath>
             </File>
             <File>
+              <FileName>Queue.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Queue.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Random.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Random.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Stream.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\Stream.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>String.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\String.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeSpan.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\TimeSpan.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Version.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\Version.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RingBuffer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Core\RingBuffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WString.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Core\WString.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>dtostrf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\Core\dtostrf.c</FilePath>
-            </File>
-            <File>
-              <FileName>itoa.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\Core\itoa.c</FilePath>
             </File>
           </Files>
         </Group>
