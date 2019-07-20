@@ -967,28 +967,6 @@
         </Group>
         <Group>
           <GroupName>ArduinoCore</GroupName>
-          <Files>
-            <File>
-              <FileName>delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>exti.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\exti.c</FilePath>
-            </File>
-            <File>
-              <FileName>gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\timer.c</FilePath>
-            </File>
-          </Files>
         </Group>
       </Groups>
     </Target>
@@ -1953,28 +1931,6 @@
         </Group>
         <Group>
           <GroupName>ArduinoCore</GroupName>
-          <Files>
-            <File>
-              <FileName>delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>exti.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\exti.c</FilePath>
-            </File>
-            <File>
-              <FileName>gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\ArduinoAPI\timer.c</FilePath>
-            </File>
-          </Files>
         </Group>
       </Groups>
     </Target>
