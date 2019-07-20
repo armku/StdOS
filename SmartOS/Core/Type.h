@@ -65,6 +65,5 @@ public:
 //以下需要升级
 #include <stdint.h>
 #define NULL 0
-void assert_failed(uint8_t *file, uint32_t line, char *errstr);
 int SmartOS_printf(const char *format, ...); //代替 printf
 #endif
