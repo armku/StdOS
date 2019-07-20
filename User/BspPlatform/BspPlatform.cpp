@@ -39,6 +39,8 @@ uint32_t DeviceConfigCenter::CurrentTicks1()
 #include <stdio.h>
 #include "stdarg.h"
 /////////////////////////////////////////////////////////////////////////////
+extern "C"
+{
 static char sprint_buf[64];
 WEAK int SmartOS_printf(const char *format, ...)
 {	
@@ -51,4 +53,5 @@ WEAK int SmartOS_printf(const char *format, ...)
 	
 	UART1_send_data((uint8_t*)sprint_buf,n);
 	return n;
+}
 }
