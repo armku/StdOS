@@ -333,10 +333,10 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>--cpp11</MiscControls>
               <Define>STM32F1,DEBUG,STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\StdOS;..\StdOS\Core;..\StdOS\OnChip;..\StdOS\Kernel;..\Libraries\STM32F1\CMSIS;..\Libraries\STM32F1\FWLib\inc;..\Util;..\User</IncludePath>
+              <IncludePath>..\StdOS;..\StdOS\Core;..\StdOS\OnChip;..\StdOS\Kernel;..\Libraries\STM32F1\CMSIS;..\Libraries\STM32F1\FWLib\inc;..\Util;..\User;..\StdOS\Security</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
