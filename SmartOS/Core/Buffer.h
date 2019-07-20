@@ -43,6 +43,8 @@ public:
 	Buffer(void* ptr, int len);
 	int Length() { return this->_Length; }
 	uint8_t operator[](int i) { return i < this->_Length ? this->_Arr[i] : 0;}
+	// 支持 buf[i] = 0x36 的语法
+//    byte& operator[](int i);
 protected:
     char*	_Arr;		// 数据指针
 	int		_Length;	// 长度

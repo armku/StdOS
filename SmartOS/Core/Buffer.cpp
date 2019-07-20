@@ -9,6 +9,15 @@
 #include "Buffer.h"
 //#include "SString.h"
 
+//byte& Buffer::operator[](int i)
+//{
+//	assert(i >= 0 && i < _Length, "下标越界");
+
+//	byte* buf = (byte*)_Arr;
+
+//	return buf[i];
+//}
+
 static void ShowChar(char c)
 {
 	if (c >= 10)
