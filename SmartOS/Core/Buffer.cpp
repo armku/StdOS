@@ -1,4 +1,9 @@
+#if defined(__CC_ARM)
 #include <string.h>
+#else
+#include <cstring>
+#endif
+
 #include "Buffer.h"
 
 static void ShowChar(char c)
