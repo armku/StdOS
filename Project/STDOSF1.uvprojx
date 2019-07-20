@@ -661,6 +661,11 @@
               <FilePath>..\SmartOS\Core\ByteArray.cpp</FilePath>
             </File>
             <File>
+              <FileName>String.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\String.cpp</FilePath>
+            </File>
+            <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\DateTime.cpp</FilePath>
@@ -699,11 +704,6 @@
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>String.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Core\String.cpp</FilePath>
             </File>
             <File>
               <FileName>TimeSpan.cpp</FileName>
@@ -1719,6 +1719,11 @@
               <FilePath>..\SmartOS\Core\ByteArray.cpp</FilePath>
             </File>
             <File>
+              <FileName>String.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\String.cpp</FilePath>
+            </File>
+            <File>
               <FileName>DateTime.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\DateTime.cpp</FilePath>
@@ -1757,11 +1762,6 @@
               <FileName>Stream.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\Stream.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>String.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Core\String.cpp</FilePath>
             </File>
             <File>
               <FileName>TimeSpan.cpp</FileName>
