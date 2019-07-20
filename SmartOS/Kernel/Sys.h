@@ -10,7 +10,7 @@
 extern "C"
 {
 #ifdef DEBUG
-	#define debug_printf StdPrintf	
+	#define debug_printf SmartOS_printf	
 #else
 	#define debug_printf(format, ...)
 #endif

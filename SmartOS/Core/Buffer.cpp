@@ -13,11 +13,11 @@ static void ShowChar(char c)
 {
 	if (c >= 10)
 	{
-		StdPrintf("%c", c - 10 + 'A');
+		//SmartOS_printf("%c", c - 10 + 'A');
 	}
 	else
 	{
-		StdPrintf("%c", c + '0');
+		//SmartOS_printf("%c", c + '0');
 	}
 }
 
@@ -32,11 +32,11 @@ void Buffer::Show(bool newLine)const
 {	
 	for(int i=0;i<this->_Length;i++)
 	{
-		StdPrintf("%c",this->_Arr[i]);
+		//SmartOS_printf("%c",this->_Arr[i]);
 	}	
 	if(newLine)
 	{
-		StdPrintf("\n");
+		//SmartOS_printf("\n");
 	}
 }
 void Buffer::ShowHex(bool newLine,char sep) const
@@ -47,12 +47,12 @@ void Buffer::ShowHex(bool newLine,char sep) const
 		ShowChar(this->_Arr[i]&0x0F);
 		if(i!=this->_Length-1)
 		{
-			StdPrintf("%c",sep);
+			//SmartOS_printf("%c",sep);
 		}
 	}
 	
 	if(newLine)
 	{
-		StdPrintf("\n");
+		//SmartOS_printf("\n");
 	}
 }

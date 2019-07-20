@@ -91,8 +91,8 @@ int Version::Parse(char* str)
 
 void Version::Show(bool newLine) const
 {
-	StdPrintf("%d.%d.%d.%d", this->Major, this->Minor, this->Year, this->MonthDay);
-	newLine ? StdPrintf("\n") : StdPrintf("");
+	SmartOS_printf("%d.%d.%d.%d", this->Major, this->Minor, this->Year, this->MonthDay);
+	newLine ? SmartOS_printf("\n") : SmartOS_printf("");
 }
 #include <stdio.h>
 #include "stdarg.h"

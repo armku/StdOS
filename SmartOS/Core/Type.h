@@ -66,5 +66,5 @@ public:
 #include <stdint.h>
 #define NULL 0
 void assert_failed(uint8_t *file, uint32_t line, char *errstr);
-int StdPrintf(const char *format, ...); //´úÌæ printf
+int SmartOS_printf(const char *format, ...); //´úÌæ printf
 #endif
