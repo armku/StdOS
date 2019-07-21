@@ -115,6 +115,19 @@ void TSys::Reset()const
 
 
 
+
+/******************************** 临界区 ********************************/
+
+INROOT void EnterCritical() { __disable_irq(); }
+INROOT void ExitCritical() { __enable_irq(); }
+
+/******************************** REV ********************************/
+
+INROOT uint	_REV(uint value) { return __REV(value); }
+//INROOT ushort	_REV16(ushort value) { return __REV16(value); }
+
+/******************************** 调试日志 ********************************/
+
 #include "Kernel\Task.h"
 
 // 打印日志
@@ -376,19 +389,6 @@ void TSys::OnStart()
 	//WatchDog::Start();
 #endif
 }
-
-/******************************** 临界区 ********************************/
-
-INROOT void EnterCritical() { __disable_irq(); }
-INROOT void ExitCritical() { __enable_irq(); }
-
-/******************************** REV ********************************/
-
-INROOT uint	_REV(uint value) { return __REV(value); }
-INROOT ushort	_REV16(ushort value) { return __REV16(value); }
-
-/******************************** 调试日志 ********************************/
-
 #include "Device\SerialPort.h"
 
 #endif
