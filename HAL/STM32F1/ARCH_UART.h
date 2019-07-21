@@ -1,7 +1,6 @@
 #ifndef _ARCH_UART_H
 #define _ARCH_UART_H
 
-#include <stdint.h>
 #include "type.h"
 #include "Port.h"
 

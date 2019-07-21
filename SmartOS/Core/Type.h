@@ -63,7 +63,7 @@ public:
 
 
 //以下需要升级
-#include <stdint.h>
+//#include <stdint.h>
 extern "C"
 {
 #ifdef DEBUG
