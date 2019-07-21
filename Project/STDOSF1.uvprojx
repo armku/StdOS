@@ -1046,6 +1046,11 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\CortexM\Thread.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\CortexM\Port.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2089,6 +2094,11 @@
               <FileName>Thread.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\CortexM\Thread.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\CortexM\Port.cpp</FilePath>
             </File>
           </Files>
         </Group>
