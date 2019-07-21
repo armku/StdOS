@@ -42,12 +42,7 @@ public:
 	uint TicksToUs(uint ticks) const;
 	uint UsToTicks(uint us) const;
 };
-
-void delayMicroseconds(uint us);//us延时，100us以下精确
-void delay(UInt64 ms);//延时毫秒
-UInt64 millis();//系统启动后的毫秒数
-UInt64 micros();//开机到现在的微妙数
-
+extern TTime Time;
 // 时间轮。用于超时处理
 class TimeWheel
 {
@@ -62,8 +57,6 @@ public:
 	// 是否已过期
 	bool Expired();
 };
-
-extern TTime Time;
 // 时间开支。借助滴答进行精确计算
 class TimeCost
 {
@@ -77,7 +70,10 @@ public:
 	int Elapsed() const;	// 逝去的时间，微秒
 	void Show(cstring format = nullptr) const;
 };
-
+void delayMicroseconds(uint us);//us延时，100us以下精确
+void delay(UInt64 ms);//延时毫秒
+UInt64 millis();//系统启动后的毫秒数
+UInt64 micros();//开机到现在的微妙数
 /*
 开发历史：
 
