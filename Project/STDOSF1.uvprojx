@@ -1015,6 +1015,13 @@
         </Group>
         <Group>
           <GroupName>CortexM</GroupName>
+          <Files>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\CortexM\Interrupt.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>
@@ -2027,6 +2034,13 @@
         </Group>
         <Group>
           <GroupName>CortexM</GroupName>
+          <Files>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\CortexM\Interrupt.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>

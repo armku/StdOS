@@ -1,4 +1,4 @@
-﻿#include "Kernel\Sys.h"
+#include "Kernel\Sys.h"
 
 #include "Kernel\Interrupt.h"
 //#include "SerialPort.h"
@@ -95,7 +95,7 @@ void FaultHandler() { }
 void UserHandler()
 {
     uint num = GetIPSR();
-	Interrupt.Process(num);
+	//Interrupt.Process(num);
 }
 #endif
 
@@ -103,5 +103,5 @@ void assert_failed(uint8_t* file, unsigned int line)
 {
     debug_printf("Assert Failed! Line %d, %s\r\n", line, file);
 
-	TInterrupt::Halt();
+	//TInterrupt::Halt();
 }
