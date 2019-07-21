@@ -54,10 +54,8 @@ int TimeCost::Elapsed()const
 
 void TimeCost::Show(cstring format)const
 {
-	if (!format)
-		format = "Ö´ÐÐ %d Î¢Ãî\n";
-	int us = this->Elapsed();
-	debug_printf(format, us);
+	if (!format) format = "Ö´ÐÐ %dus\r\n";
+	debug_printf(format, Elapsed());
 }
 
 void TimeUpdate()
