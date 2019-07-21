@@ -516,13 +516,13 @@ uint8_t const tab5[] = {
 
 
 /*---------------ÑÓÊ±×Ó³ÌÐò----------------*/
-void ocmtest::delay(uint32_t us)
+void ocmtest::delay(uint us)
 {
 	while (us--);
 }
-void ocmtest::delay1(uint32_t ms)
+void ocmtest::delay1(uint ms)
 {
-	uint32_t i, j;
+	uint i, j;
 	for (i = 0; i < ms; i++)
 		for (j = 0; j < 1000; j++)
 			;
@@ -539,7 +539,7 @@ void ocmtest::wr_td(uint8_t datl, uint8_t dath, uint8_t comm)  //Ð´Á½¸öÊý¾ÝºÍÒ»¸
 	wr_data(dath);
 	wr_comm(comm);
 }
-void ocmtest::wr_xd(uint32_t dat, uint8_t comm)       //Ð´Ò»¸ö16½øÖÆÊý¾ÝºÍÒ»¸öÃüÁî
+void ocmtest::wr_xd(uint dat, uint8_t comm)       //Ð´Ò»¸ö16½øÖÆÊý¾ÝºÍÒ»¸öÃüÁî
 {
 	uint8_t datl, dath;
 	datl = dat;
@@ -645,7 +645,7 @@ void ocmtest::disp_dz(uint8_t data1, uint8_t data2)
 	wr_comm(0xb2);
 }
 /*--------------ÔÚaddr´¦ÏÔÊ¾8xl*ylµÄÍ¼ÐÎ--------------*/
-void ocmtest::disp_img(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t const * img)
+void ocmtest::disp_img(uint addr, uint8_t xl, uint8_t yl, uint8_t const * img)
 {
 	uint8_t i, j;
 	for (j = 0; j < yl; j++)
@@ -658,7 +658,7 @@ void ocmtest::disp_img(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t const * im
 	}
 }
 /*----------ÔÚaddr´¦ÏÔÊ¾row_ylÐÐ(Ã¿ÐÐrow_xl¸ö)8xl*ylµÄÎÄ×Ö----------*/
-void ocmtest::disp_chn(uint32_t addr, uint8_t xl, uint8_t yl, uint8_t row_xl, uint8_t row_yl, uint8_t const * chn)
+void ocmtest::disp_chn(uint addr, uint8_t xl, uint8_t yl, uint8_t row_xl, uint8_t row_yl, uint8_t const * chn)
 {
 	uint8_t i, j, k, m;
 	for (m = 0; m < row_yl; m++)

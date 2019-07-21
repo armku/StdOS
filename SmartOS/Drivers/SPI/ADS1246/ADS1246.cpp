@@ -114,7 +114,7 @@ FF FF FF -MIN
 int ADS1246::decodead(uint8_t *da)
 {
     int ret = 0;
-    uint32_t ret1 = 0;
+    uint ret1 = 0;
     if (da[0] < 0x80)
     {
         ret1 = da[0];

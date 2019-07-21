@@ -27,24 +27,24 @@ public:
 	bool Write(uint16_t addr, uint8_t data);
 	uint8_t Read(uint16_t addr);
 
-	virtual bool Write(uint32_t addr, void * buf, int len, int bufpos = 0);
-	virtual bool Read(uint32_t addr, void * buf, int len, int bufpos = 0);
+	virtual bool Write(uint addr, void * buf, int len, int bufpos = 0);
+	virtual bool Read(uint addr, void * buf, int len, int bufpos = 0);
 public:
-	AT24CXX(EW24XXType devtype, uint8_t devaddr = 0xA0, uint32_t wnms = 5); //写延时时间
+	AT24CXX(EW24XXType devtype, uint8_t devaddr = 0xA0, uint wnms = 5); //写延时时间
 	void SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect = P0);
 	uint8_t CheckOk();
 
 	Port pinWP; //保护引脚
 private:
 	uint8_t checkDevice();
-	uint16_t jsPageSize(uint32_t type); //计算存储页大小
+	uint16_t jsPageSize(uint type); //计算存储页大小
 private:
 	int PageRead(uint16_t addr, void * buf, int len);//页内读，最多一页
 	int PageWrite(uint16_t addr, void * buf, int len);//页内写，最多一页
 	
 	EW24XXType deviceType; //器件类型
-	uint32_t Block; //存储页大小
-	uint32_t writedelaynms; //写延时	  
+	uint Block; //存储页大小
+	uint writedelaynms; //写延时	  
 };
 
 #endif

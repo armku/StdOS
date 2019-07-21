@@ -59,10 +59,10 @@ public:
 	bool ESP8266_UnvarnishSend(void);//进入透传模式
 	void ESP8266_ExitUnvarnishSend(void);
 	bool ESP8266_SendStr(char* str);//发送字符串
-	bool ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char* pStr, uint32_t ulStrLength, ENUM_ID_NO_TypeDef ucId);
+	bool ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char* pStr, uint ulStrLength, ENUM_ID_NO_TypeDef ucId);
 	bool SoftReset();//软件复位
 
-	bool ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waittime);
+	bool ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint waittime);
 	void Cmd(char* cmd);
 	bool DealRespose(char* buf, int len);//处理接收到的数据
 	bool IsReply1(char* buf);	// 
@@ -72,7 +72,7 @@ public:
 	
 	char* Reply1;//期待回复1
 	char* Reply2;//期待回复2
-	uint32_t WaitTime;//等待通信响应时间-ms
+	uint WaitTime;//等待通信响应时间-ms
 //private:
 	Port CH_PD;//
 	Port RST;//

@@ -14,7 +14,7 @@
             {
                     GAIN1, GAIN2, GAIN64, GAIN128
             };
-			uint32_t Status;//状态
+			uint Status;//状态
 			int CalCnt;//校准次数
 			int readCnt; //读取数量
         public:

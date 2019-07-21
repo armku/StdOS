@@ -67,9 +67,9 @@ void TimeUpdate()
 }
 int gTicks = 0; //每个us需要的systick时钟数 	
 
-uint32_t TTime::TicksToUs(uint32_t ticks)const
+uint TTime::TicksToUs(uint ticks)const
 {
-	uint32_t result;
+	uint result;
 
 	if (ticks)
 		result = ticks / gTicks;
@@ -79,9 +79,9 @@ uint32_t TTime::TicksToUs(uint32_t ticks)const
 
 }
 
-uint32_t TTime::UsToTicks(uint32_t us)const
+uint TTime::UsToTicks(uint us)const
 {
-	uint32_t result;
+	uint result;
 
 	if (us)
 		result = us * gTicks;
@@ -134,7 +134,7 @@ void TTime::Init()
 	//初始化延迟函数
 	//SYSTICK的时钟固定为HCLK时钟的1/8
 	//SYSCLK:系统时钟
-//        uint32_t SYSCLK = 168;
+//        uint SYSCLK = 168;
 	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
 	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //选择外部时钟  HCLK/8
 	SysTick_Config(9000); //配置SysTick tick is 9ms	9000
@@ -156,7 +156,7 @@ void TTime::Init()
 }
 
 // 当前滴答时钟
-uint32_t TTime::CurrentTicks()const
+uint TTime::CurrentTicks()const
 {
 	return DeviceConfigCenter::CurrentTicks1();
 }
@@ -167,7 +167,7 @@ void delay(uint64_t ms)
 	Sys.Sleep112233(ms);
 }
 //us延时，100us以下精确
-void delayMicroseconds(uint32_t us)
+void delayMicroseconds(uint us)
 {
 #if defined STM32F0
 	/*

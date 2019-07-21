@@ -85,7 +85,7 @@
             Port _clk;
             Port _mosi;
             Port _miso;
-            uint32_t delayus; //延时时间
+            uint delayus; //延时时间
         private:
             uint8_t WaitBusy();
     };

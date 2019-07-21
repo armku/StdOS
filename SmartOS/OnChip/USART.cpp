@@ -4,7 +4,7 @@
 #include "Configuration.h"
 #include "Sys.h"
 
-USARTHAL::USARTHAL(COM index1, uint32_t baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint32_t remapvalue)
+USARTHAL::USARTHAL(COM index1, uint baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint remapvalue)
 {
 	this->index = index1;
 	mBaudrate = baud;     //baudrate of usart
@@ -188,7 +188,7 @@ void USARTHAL::Initialize()
 #endif
 }
 
-void USARTHAL::SetBaudRate(uint32_t baudRate)
+void USARTHAL::SetBaudRate(uint baudRate)
 {
 	USART_TypeDef* mUSARTx;   //USARTx
 
@@ -209,13 +209,13 @@ void USARTHAL::SetBaudRate(uint32_t baudRate)
 	}
 
 	//	assert_param(IS_USART_BAUDRATE(baudRate));
-	uint32_t tmpreg = 0x00, apbclock = 0x00;
-	uint32_t integerdivider = 0x00;
-	uint32_t fractionaldivider = 0x00;
-	uint32_t usartxbase = 0;
+	uint tmpreg = 0x00, apbclock = 0x00;
+	uint integerdivider = 0x00;
+	uint fractionaldivider = 0x00;
+	uint usartxbase = 0;
 	RCC_ClocksTypeDef RCC_ClocksStatus;
 
-	usartxbase = (uint32_t)mUSARTx;
+	usartxbase = (uint)mUSARTx;
 
 	/*---------------------------- USART BRR Configuration -----------------------*/
 	/* Configure the USART Baud Rate -------------------------------------------*/
@@ -267,8 +267,8 @@ void USARTHAL::InitDMA()
 	DMA_DeInit(mDMATxCh);
 
 	DMA_InitTypeDef DMA_InitStructure;
-	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)& mUSARTx->DR;	       //DMA Tx data target address
-	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)mDMATxBuf;           //DMA data source address
+	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint)& mUSARTx->DR;	       //DMA Tx data target address
+	DMA_InitStructure.DMA_MemoryBaseAddr = (uint)mDMATxBuf;           //DMA data source address
 	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;	   //DMA data direction: from memory to peripheral
 	DMA_InitStructure.DMA_BufferSize = 0;                        //data size to send with DMA
 	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;//peripheral address not increase
@@ -359,7 +359,7 @@ bool USARTOldNotUse::SendBytes(uint8_t txData[], uint16_t size)
 #ifdef USE_USART_DMA
 	if (mTxBuf.Size() <= USART_DMA_TX_BUFFER_SIZE)  //rest data bytes less than DMA buffer size
 	{
-		mDMATxCh->CNDTR = (uint32_t)mTxBuf.Size();        //send all data to DMA buffer
+		mDMATxCh->CNDTR = (uint)mTxBuf.Size();        //send all data to DMA buffer
 		mTxBuf.Gets(mDMATxBuf, mTxBuf.Size());
 	}
 	else                                           //rest data bytes more than DMA buffer size
@@ -412,7 +412,7 @@ USARTOldNotUse& USARTOldNotUse::operator<<(double val)
 	uint8_t prec = mPrecision;
 	while (prec--)
 		val *= 10;
-	uint32_t t = val;
+	uint t = val;
 	do
 	{
 		if (++len == mPrecision + 1) data[20 - len] = '.';

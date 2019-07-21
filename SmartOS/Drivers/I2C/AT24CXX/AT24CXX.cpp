@@ -4,11 +4,11 @@
 #define macI2C_WR	0		/* Ğ´¿ØÖÆbit */
 #define macI2C_RD	1		/* ¶Á¿ØÖÆbit */
 
-bool AT24CXX::Write(uint32_t addr, void * buf, int len, int bufpos)
+bool AT24CXX::Write(uint addr, void * buf, int len, int bufpos)
 {
-	uint32_t curAddr;
-	uint32_t pageStart; //Ò³ÄÚÆğÊ¼µØÖ·
-	uint32_t bytesLeave; //»¹Ê£¶àÉÙ×Ö½Ú¶ÁÈ¡
+	uint curAddr;
+	uint pageStart; //Ò³ÄÚÆğÊ¼µØÖ·
+	uint bytesLeave; //»¹Ê£¶àÉÙ×Ö½Ú¶ÁÈ¡
 	uint16_t bufaddr;
 
 	pageStart = addr % this->Block;
@@ -57,11 +57,11 @@ bool AT24CXX::Write(uint32_t addr, void * buf, int len, int bufpos)
 	return false;
 }
 
-bool AT24CXX::Read(uint32_t addr, void * buf, int len, int bufpos)
+bool AT24CXX::Read(uint addr, void * buf, int len, int bufpos)
 {
-	uint32_t curAddr;
-	uint32_t pageStart; //Ò³ÄÚÆğÊ¼µØÖ·
-	uint32_t bytesLeave; //»¹Ê£¶àÉÙ×Ö½Ú¶ÁÈ¡
+	uint curAddr;
+	uint pageStart; //Ò³ÄÚÆğÊ¼µØÖ·
+	uint bytesLeave; //»¹Ê£¶àÉÙ×Ö½Ú¶ÁÈ¡
 	uint16_t bufaddr;
 
 	pageStart = addr % this->Block;
@@ -108,7 +108,7 @@ bool AT24CXX::Read(uint32_t addr, void * buf, int len, int bufpos)
 	return false;
 }
 //Ğ´ÑÓÊ±Ê±¼ä
-AT24CXX::AT24CXX(EW24XXType devtype, uint8_t devaddr, uint32_t wnms)
+AT24CXX::AT24CXX(EW24XXType devtype, uint8_t devaddr, uint wnms)
 {
 	this->deviceType = devtype;
 	this->Address = devaddr;
@@ -189,7 +189,7 @@ cmd_Readbytefail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±
 
 bool AT24CXX::Write(uint16_t address, uint8_t da)
 {
-	uint32_t m;
+	uint m;
 
 	/*¡¡µÚ£°²½£º·¢Í£Ö¹ĞÅºÅ£¬Æô¶¯ÄÚ²¿Ğ´²Ù×÷¡¡*/
 	this->IIC.Stop();
@@ -324,7 +324,7 @@ int AT24CXX::PageWrite(uint16_t addr, void * buf, int len)
 {
 	if (len > this->Block)
 		return 1;
-	uint32_t m;
+	uint m;
 	uint16_t usAddr;
 	uint8_t buftmp[256];
 
@@ -416,7 +416,7 @@ cmd_Writefail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ *
 	return 1;
 }
 
-uint16_t AT24CXX::jsPageSize(uint32_t type) //¼ÆËã´æ´¢Ò³´óĞ¡
+uint16_t AT24CXX::jsPageSize(uint type) //¼ÆËã´æ´¢Ò³´óĞ¡
 {
 	uint16_t ret = 8;
 	switch (type)

@@ -13,7 +13,7 @@
  *****************************************************************************/
 float AD7124::GetTemp1()
 {
-    uint32_t data;
+    uint data;
     float res;
     float temp;
     data = ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
@@ -35,7 +35,7 @@ float AD7124::GetTemp1()
  *****************************************************************************/
 float AD7124::GetTemp1Res()
 {
-    uint32_t data;
+    uint data;
 //    float res;
     float temp;
     data = ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
@@ -49,7 +49,7 @@ float AD7124::GetTemp1Res()
 
 float AD7124::Temp1Test()
 {
-    uint32_t data;
+    uint data;
     float pt100_res;
     float wire_res;
     float temp;
@@ -90,8 +90,8 @@ void ad7124test(void *param)
   uint8_t id=  ad7->ReadID();
  // uint8_t status=   ad7->ReadStatus();
 	//   
-	////uint32_t data = ad7->ReadRlt(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
-	//uint32_t data = ad7->ReadRlt();
+	////uint data = ad7->ReadRlt(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
+	//uint data = ad7->ReadRlt();
 
     debug_printf("id:%d\r\n", id);
 	//debug_printf("data:0x%08x id:%d status:%d\r\n", data, id, status);

@@ -65,9 +65,9 @@ uint8_t GPS_S1216::NMEA_Comma_Pos(uint8_t *buf, uint8_t cx)
 }
 //m^n函数
 //返回值:m^n次方.
-uint32_t GPS_S1216::NMEA_Pow(uint8_t m, uint8_t n)
+uint GPS_S1216::NMEA_Pow(uint8_t m, uint8_t n)
 {
-	uint32_t result = 1;
+	uint result = 1;
 	while (n--)
 		result *= m;
 	return result;
@@ -79,7 +79,7 @@ uint32_t GPS_S1216::NMEA_Pow(uint8_t m, uint8_t n)
 int GPS_S1216::NMEA_Str2num(uint8_t *buf, uint8_t*dx)
 {
 	uint8_t *p = buf;
-	uint32_t ires = 0, fres = 0;
+	uint ires = 0, fres = 0;
 	uint8_t ilen = 0, flen = 0, i;
 	uint8_t mask = 0;
 	int res;
@@ -267,7 +267,7 @@ void GPS_S1216::NMEA_GNRMC_Analysis(uint8_t *buf)
 {
 	uint8_t *p1, dx;
 	uint8_t posx;
-	uint32_t temp;
+	uint temp;
 	float rs;
 	p1 = (uint8_t*)strstr((const char *)buf, "$GNRMC");//"$GNRMC",经常有&和GNRMC分开的情况,故只判断GPRMC.
 	posx = NMEA_Comma_Pos(p1, 1);								//得到UTC时间

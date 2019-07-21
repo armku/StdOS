@@ -12,7 +12,7 @@
             void Init();
             void Clear(char ch=0x00);
             void ShowChar(uint8_t x, uint8_t y, uint8_t chr);
-            void ShowNum(uint8_t x, uint8_t y, uint32_t num, uint8_t len, uint8_t size);
+            void ShowNum(uint8_t x, uint8_t y, uint num, uint8_t len, uint8_t size);
             void ShowString(uint8_t x, uint8_t y, char *p,uint8_t interval=0);
             void ShowCHinese(uint8_t x, uint8_t y, char *hz);
 			void DrawBMP(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1, uint8_t BMP[]);
@@ -21,7 +21,7 @@
 			void _wrcmd(uint8_t cmd);//Ğ´ÃüÁî
 			void _wrdata(uint8_t da);//Ğ´Êı¾İ			       
 		private:
-			uint32_t oled_pow(uint8_t m, uint8_t n);		
+			uint oled_pow(uint8_t m, uint8_t n);		
 			uint16_t SearchhzIndex(uint8_t lo, uint8_t hi); //²éÕÒºº×Ö±àÂëÎ»ÖÃ
 			void ShowCHinese11(uint8_t x, uint8_t y, uint8_t no);     
 			void WRByte(uint8_t dat, uint8_t cmd);

@@ -323,7 +323,7 @@ void UART5_En_IRQ(void)
 }
 
 //通过串口（通讯串口）发送数据
-void UART1_send_data(uint8_t *data, uint32_t len)
+void UART1_send_data(uint8_t *data, uint len)
 {
 	if (COM1RS485 != nullptr)
 	{
@@ -340,7 +340,7 @@ void UART1_send_data(uint8_t *data, uint32_t len)
 }
 
 //通过串口（通讯串口）发送数据
-void UART2_send_data(uint8_t *data, uint32_t len)
+void UART2_send_data(uint8_t *data, uint len)
 {
 	if (COM2RS485 != nullptr)
 	{
@@ -357,7 +357,7 @@ void UART2_send_data(uint8_t *data, uint32_t len)
 }
 
 //通过串口（通讯串口）发送数据
-void UART3_send_data(uint8_t *data, uint32_t len)
+void UART3_send_data(uint8_t *data, uint len)
 {
 	if (COM3RS485 != nullptr)
 	{
@@ -374,7 +374,7 @@ void UART3_send_data(uint8_t *data, uint32_t len)
 }
 
 //通过串口（通讯串口）发送数据
-void UART4_send_data(uint8_t *data, uint32_t len)
+void UART4_send_data(uint8_t *data, uint len)
 {
 	if (COM4RS485 != nullptr)
 	{
@@ -391,7 +391,7 @@ void UART4_send_data(uint8_t *data, uint32_t len)
 }
 
 //通过串口（通讯串口）发送数据
-void UART5_send_data(uint8_t *data, uint32_t len)
+void UART5_send_data(uint8_t *data, uint len)
 {
 	if (COM5RS485 != nullptr)
 	{

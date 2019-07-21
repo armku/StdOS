@@ -26,7 +26,7 @@ int DeviceConfigCenter::CurrentTick()
 	return (TIM2->CNT) >> 1;
 #endif
 }
-uint32_t DeviceConfigCenter::CurrentTicks1()
+uint DeviceConfigCenter::CurrentTicks1()
 {
 #if defined STM32F0
 	return SysTick->LOAD - SysTick->VAL;

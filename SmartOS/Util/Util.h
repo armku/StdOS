@@ -15,7 +15,7 @@ extern "C" {
 		LITTLE_ENDIAN_BYTE_SWAT = 2,		// 小端模式-字节交换
 	};
 
-	void bubbleSort(float *buf, uint32_t len); //设置浮点数
+	void bubbleSort(float *buf, uint len); //设置浮点数
 	void SetBufFloat(byte buf[], float da, uint16_t pos = 0, byte type = 0);//设置浮点数 0:小端 1：大端
 	float GetBufFloat(byte buf[], uint16_t pos = 0, byte type = 0);//设置浮点数 0:小端 1：大端
 	uint16_t GetBufUshort(byte buf[], uint16_t pos, byte type = 0);

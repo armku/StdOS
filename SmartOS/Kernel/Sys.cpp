@@ -45,7 +45,7 @@ void TSys::ShowInfo()const
 }
 
 // 系统绝对当前时间，秒
-uint32_t TSys::Seconds()const
+uint TSys::Seconds()const
 {
 	return Time.Seconds;
 }
@@ -87,12 +87,12 @@ void TSys::Reboot(int msDelay)const
 }
 
 // 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
-uint32_t TSys::AddTask(Action func, void *param, int dueTime, int period, cstring name)const
+uint TSys::AddTask(Action func, void *param, int dueTime, int period, cstring name)const
 {
 	return Task::Scheduler()->Add(func, param, dueTime, period, name);
 }
 
-void TSys::RemoveTask(uint32_t &taskid)const
+void TSys::RemoveTask(uint &taskid)const
 {
 	if (taskid)
 	{
@@ -101,7 +101,7 @@ void TSys::RemoveTask(uint32_t &taskid)const
 }
 
 // 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
-bool TSys::SetTask(uint32_t taskid, bool enable, int msNextTime)const
+bool TSys::SetTask(uint taskid, bool enable, int msNextTime)const
 {
 	bool ret;
 
@@ -126,7 +126,7 @@ bool TSys::SetTask(uint32_t taskid, bool enable, int msNextTime)const
 }
 
 // 改变任务周期
-bool TSys::SetTaskPeriod(uint32_t taskid, int period)const
+bool TSys::SetTaskPeriod(uint taskid, int period)const
 {
 	bool ret;
 	Task *tsk;
@@ -171,9 +171,9 @@ void TSys::Start()
 /////////////////////////////////////////////////////////////////////////////
 extern "C"
 {
-	extern uint32_t __heap_base;
-	extern uint32_t __heap_limit;
-	extern uint32_t __initial_sp;
+	extern uint __heap_base;
+	extern uint __heap_limit;
+	extern uint __initial_sp;
 }
 
 void TSys::OnInit()
@@ -189,7 +189,7 @@ void TSys::OnInit()
 	this->CystalClock = HSE_VALUE;
 	memcpy(this->ID, (void*)0x1FFFF7E8, ArrayLength(this->ID));
 
-	uint32_t MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
+	uint MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
 	
 	this->FlashSize = *(__IO uint16_t*)(0x1FFFF7E0); // 容量
 #elif defined STM32F4
@@ -199,8 +199,8 @@ void TSys::OnInit()
 	
 	this->FlashSize = *(__IO uint16_t*)(0X1FFF7a22); // 容量	
 #endif
-	HeapSize = ((uint32_t)&__heap_limit - (uint32_t)&__heap_base);
-	StackSize = ((uint32_t)&__initial_sp - (uint32_t)&__heap_limit);
+	HeapSize = ((uint)&__heap_limit - (uint)&__heap_base);
+	StackSize = ((uint)&__initial_sp - (uint)&__heap_limit);
 }
 
 void TSys::OnShowInfo()const
@@ -247,7 +247,7 @@ void TSys::GlobalDisable()
 {
 	INTX_DISABLE();
 }
-void assert_failed(byte *file, uint32_t line, char *errstr)
+void assert_failed(byte *file, uint line, char *errstr)
 {
 	debug_printf("%s(%d):    %s\n", file, line, errstr);
 }
@@ -266,7 +266,7 @@ typedef enum {
 	STM32H7,
 }MCUTypedef;
 
-uint32_t idAddr[] = { 0x1FFFF7AC,  /*STM32F0唯一ID起始地址*/
+uint idAddr[] = { 0x1FFFF7AC,  /*STM32F0唯一ID起始地址*/
 0x1FFFF7E8,  /*STM32F1唯一ID起始地址*/
 0x1FFF7A10,  /*STM32F2唯一ID起始地址*/
 0x1FFFF7AC,  /*STM32F3唯一ID起始地址*/
@@ -278,13 +278,13 @@ uint32_t idAddr[] = { 0x1FFFF7AC,  /*STM32F0唯一ID起始地址*/
 0x1FF0F420 }; /*STM32H7唯一ID起始地址*/
 
 			  /*获取MCU的唯一ID*/
-void GetSTM32MCUID(uint32_t *id, MCUTypedef type)
+void GetSTM32MCUID(uint *id, MCUTypedef type)
 {
 	if (id != NULL)
 	{
 		id[0] = *(uint32_t*)(idAddr[type]);
-		id[1] = *(uint32_t*)(idAddr[type] + 4);
-		id[2] = *(uint32_t*)(idAddr[type] + 8);
+		id[1] = *(uint*)(idAddr[type] + 4);
+		id[2] = *(uint*)(idAddr[type] + 8);
 	}
 }
 #endif

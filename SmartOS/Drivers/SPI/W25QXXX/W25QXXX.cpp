@@ -59,7 +59,7 @@ void SPI25QXX::SetSpi(SpiBase *spi)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI25QXX::SectorErase(uint32_t SectorAddr)
+void SPI25QXX::SectorErase(uint SectorAddr)
 {
 	/* Send write enable instruction */
 	WriteEnable();
@@ -119,7 +119,7 @@ void SPI25QXX::BulkErase(void)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI25QXX::PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite)
+void SPI25QXX::PageWrite(uint8_t* pBuffer, uint WriteAddr, uint16_t NumByteToWrite)
 {
 	/* Enable the write access to the FLASH */
 	WriteEnable();
@@ -168,7 +168,7 @@ void SPI25QXX::PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteT
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI25QXX::BufferWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite)
+void SPI25QXX::BufferWrite(uint8_t* pBuffer, uint WriteAddr, uint16_t NumByteToWrite)
 {
 	uint8_t NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
@@ -238,10 +238,10 @@ void SPI25QXX::BufferWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByt
 		}
 	}
 }
-//void SPI25QXX::SPI_FLASH_BufferWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite)
+//void SPI25QXX::SPI_FLASH_BufferWrite(uint8_t* pBuffer, uint WriteAddr, uint16_t NumByteToWrite)
 //{
 //  uint8_t NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, i;
-//	uint32_t CurrentAddr;
+//	uint CurrentAddr;
 
 //	
 //	CurrentAddr = WriteAddr;
@@ -286,7 +286,7 @@ void SPI25QXX::BufferWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByt
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI25QXX::BufferRead(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead)
+void SPI25QXX::BufferRead(uint8_t* pBuffer, uint ReadAddr, uint16_t NumByteToRead)
 {
 	/* Select the FLASH: Chip Select low */
 	this->_spi->Start();
@@ -320,9 +320,9 @@ void SPI25QXX::BufferRead(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteT
 * Output         : None
 * Return         : FLASH identification
 *******************************************************************************/
-uint32_t SPI25QXX::ReadID(void)
+uint SPI25QXX::ReadID(void)
 {
-	uint32_t Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
+	uint Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
 
 	/* Select the FLASH: Chip Select low */
 	this->_spi->Start();
@@ -353,9 +353,9 @@ uint32_t SPI25QXX::ReadID(void)
 * Output         : None
 * Return         : FLASH identification
 *******************************************************************************/
-uint32_t SPI25QXX::ReadDeviceID(void)
+uint SPI25QXX::ReadDeviceID(void)
 {
-	uint32_t Temp = 0;
+	uint Temp = 0;
 
 	/* Select the FLASH: Chip Select low */
 	this->_spi->Start();
@@ -386,7 +386,7 @@ uint32_t SPI25QXX::ReadDeviceID(void)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI25QXX::StartReadSequence(uint32_t ReadAddr)
+void SPI25QXX::StartReadSequence(uint ReadAddr)
 {
 	/* Select the FLASH: Chip Select low */
 	this->_spi->Start();

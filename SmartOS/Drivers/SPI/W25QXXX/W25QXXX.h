@@ -16,14 +16,14 @@
 	public:
 		SPI25QXX();
 		void SetSpi(SpiBase *spi);
-		void SectorErase(uint32_t SectorAddr);
+		void SectorErase(uint SectorAddr);
 		void BulkErase(void);
-		void PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
-		void BufferWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
-		void BufferRead(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead);
-		uint32_t ReadID(void);
-		uint32_t ReadDeviceID(void);
-		void StartReadSequence(uint32_t ReadAddr);
+		void PageWrite(uint8_t* pBuffer, uint WriteAddr, uint16_t NumByteToWrite);
+		void BufferWrite(uint8_t* pBuffer, uint WriteAddr, uint16_t NumByteToWrite);
+		void BufferRead(uint8_t* pBuffer, uint ReadAddr, uint16_t NumByteToRead);
+		uint ReadID(void);
+		uint ReadDeviceID(void);
+		void StartReadSequence(uint ReadAddr);
 		void PowerDown(void);
 		void WAKEUP(void);
 
@@ -32,8 +32,8 @@
 
 		void Test();
 	public:
-		uint32_t DeviceID;
-		uint32_t FlashID;
+		uint DeviceID;
+		uint FlashID;
 		SpiBase *_spi; // 内部Spi对象
 	};
 #define  FLASH_WriteAddress     0x00000

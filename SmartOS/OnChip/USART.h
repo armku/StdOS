@@ -8,13 +8,13 @@
 class USARTHAL
 {
 public:
-	USARTHAL(COM index, uint32_t baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint32_t remapvalue = 1);
+	USARTHAL(COM index, uint baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint remapvalue = 1);
 	void Initialize();
 	//////////////////////////
 	///@bief 设置波特率
 	///@param baudRate 波特率大小
 	//////////////////////////
-	void SetBaudRate(uint32_t baudRate);
+	void SetBaudRate(uint baudRate);
 	int SendTimeMs(int buflen)
 	{
 		if (this->mBaudrate < 100)
@@ -26,8 +26,8 @@ public:
 private:
 	uint8_t                   mDMAIRQn;
 	DMA_Channel_TypeDef* mDMATxCh;
-	uint32_t                  mDMATCFlag;
-	uint32_t                  mDMAGLFlag;
+	uint                  mDMATCFlag;
+	uint                  mDMAGLFlag;
 	uint8_t                   mDMATxBuf[USART_DMA_TX_BUFFER_SIZE];
 	void InitDMA();
 public:
@@ -36,13 +36,13 @@ public:
 private:
 	bool isBusySend;
 
-	uint32_t            mBaudrate; //baudrate of usart
-	uint32_t			mRemapvalue;// remap value	
+	uint            mBaudrate; //baudrate of usart
+	uint			mRemapvalue;// remap value	
 	Port				mPortTx;	//tx
 	Port				mPortRx;	//rx
 	uint8_t             mIRQn;     //USART IRQn
 	COM index;				//com index
-	uint32_t            mUSARTRcc; //USART Clock
+	uint            mUSARTRcc; //USART Clock
 	bool           mRemap;    //gpio remap flag
 	uint8_t             mPrePri;   //preemption priority
 	uint8_t             mSubPri;   //sub priority

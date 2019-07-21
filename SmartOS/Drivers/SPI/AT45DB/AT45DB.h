@@ -11,14 +11,14 @@ private:
     Spi* _spi;  // 内部Spi对象
 
     // 设置操作地址
-    void SetAddr(uint32_t addr);
+    void SetAddr(uint addr);
     // 等待操作完成
 	bool WaitForEnd();
 
     // 读取编号
-	uint32_t ReadID();
+	uint ReadID();
 public:
-    uint32_t ID;            // 芯片ID
+    uint ID;            // 芯片ID
     uint16_t PageSize;    // 页大小
     uint16_t Retry;       // 等待重试次数
 
@@ -26,18 +26,18 @@ public:
     ~AT45DB();
 
     // 擦除扇区
-    bool Erase(uint32_t sector);
+    bool Erase(uint sector);
     // 擦除页
-	bool ErasePage(uint32_t pageAddr);
+	bool ErasePage(uint pageAddr);
 
     // 写入一页
-	bool WritePage(uint32_t addr, uint8_t* buf, uint32_t count);
+	bool WritePage(uint addr, uint8_t* buf, uint count);
     // 读取一页
-	bool ReadPage(uint32_t addr, uint8_t* buf, uint32_t count);
+	bool ReadPage(uint addr, uint8_t* buf, uint count);
     // 写入数据
-	bool Write(uint32_t addr, uint8_t* buf, uint32_t count);
+	bool Write(uint addr, uint8_t* buf, uint count);
     // 读取数据
-	bool Read(uint32_t addr, uint8_t* buf, uint32_t count);
+	bool Read(uint addr, uint8_t* buf, uint count);
 };
 
 /*

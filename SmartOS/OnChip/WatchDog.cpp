@@ -36,7 +36,7 @@ void WatchDog::FeedDogTask(void* param)
 	dog->Feed();
 }
 // 打开看门狗。最长喂狗时间26208ms，默认2000ms
-void WatchDog::Start(uint32_t msTimeOut, uint32_t msFeed)
+void WatchDog::Start(uint msTimeOut, uint msFeed)
 {
 	cur = new WatchDog();
 	cur->Config(msTimeOut);
@@ -58,7 +58,7 @@ void WatchDog::Feed()
 	IWDG_ReloadCounter();
 }
 // 配置看门狗喂狗重置时间，超过该时间将重启MCU
-bool WatchDog::Config(uint32_t ms)
+bool WatchDog::Config(uint ms)
 {
 #if defined STM32F0
 	if (ms == 0)

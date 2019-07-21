@@ -6,7 +6,7 @@
     class PwmSolo: public Port
     {
         public:
-            PwmSolo(uint32_t frq = 10000, uint32_t duty = 50,bool invert=false);
+            PwmSolo(uint frq = 10000, uint duty = 50,bool invert=false);
 			virtual Port& SetPin(Pin pin);	// 设置引脚
 			void Open();
             void SetOut(int pwmValue); //设置输出值
@@ -14,8 +14,8 @@
 		protected:
 			void OnOpen2();//初始化
         private:
-            uint32_t _freq; //频率
-            uint32_t _duty; //输出值
+            uint _freq; //频率
+            uint _duty; //输出值
 			bool _invert;
     };
 #endif

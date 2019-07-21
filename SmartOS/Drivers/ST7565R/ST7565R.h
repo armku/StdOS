@@ -18,7 +18,7 @@
             void Cls(uint16_t x0 = 0, uint16_t y0 = 0, uint16_t width = 128, uint16_t height = 64); //清理指定位置
             void Test(uint8_t data1, uint8_t data2);
             void Point(uint16_t x0, uint16_t y0, uint16_t color = 1); //画点,为所有的基础操作
-            void DisplayImage(uint8_t *pbuf, uint16_t color = 1, uint32_t showtype = 1); //画图形
+            void DisplayImage(uint8_t *pbuf, uint16_t color = 1, uint showtype = 1); //画图形
             void Line(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1);
             void Rect(uint16_t x0, uint16_t y0, uint16_t width, uint16_t height); //矩形
             void RectSolid(uint16_t x0, uint16_t y0, uint16_t width, uint16_t height); //实心矩形

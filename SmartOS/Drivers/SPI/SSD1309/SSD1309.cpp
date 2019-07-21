@@ -164,9 +164,9 @@ void SSD1309::ShowChar(uint8_t x, uint8_t y, uint8_t chr)
 }
 
 //m^n函数
-uint32_t SSD1309::oled_pow(uint8_t m, uint8_t n)
+uint SSD1309::oled_pow(uint8_t m, uint8_t n)
 {
-    uint32_t result = 1;
+    uint result = 1;
     while (n--)
         result *= m;
     return result;
@@ -178,7 +178,7 @@ uint32_t SSD1309::oled_pow(uint8_t m, uint8_t n)
 //size:字体大小
 //mode:模式	0,填充模式;1,叠加模式
 //num:数值(0~4294967295);	 		  
-void SSD1309::ShowNum(uint8_t x, uint8_t y, uint32_t num, uint8_t len, uint8_t size)
+void SSD1309::ShowNum(uint8_t x, uint8_t y, uint num, uint8_t len, uint8_t size)
 {
     uint8_t t, temp;
     uint8_t enshow = 0;

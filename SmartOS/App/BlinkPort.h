@@ -8,7 +8,7 @@
 class BlinkPort
 {
 private:
-	uint32_t	_tid; //0
+	uint	_tid; //0
 
 public:
 	Port*	Ports[0x10]; //

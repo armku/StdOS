@@ -9,9 +9,9 @@
 class TTime
 {
 public:
-	volatile	uint32_t	Seconds;		// 全局秒数，系统启动后总秒数。累加
+	volatile	uint	Seconds;		// 全局秒数，系统启动后总秒数。累加
 	volatile	uint64_t	Milliseconds;	// 全局毫秒数，系统启动后总毫秒（1000ms整部分）。
-	volatile	uint32_t	BaseSeconds;	// 基准秒数。系统启动时相对于1970年的秒数，时间调节，加上Seconds得到当前时间Now()
+	volatile	uint	BaseSeconds;	// 基准秒数。系统启动时相对于1970年的秒数，时间调节，加上Seconds得到当前时间Now()
     //uint8_t	Ticks;			// 每微秒的时钟滴答数
 	uint8_t	Index;			// 定时器
 #if ! (defined(STM32F0) || defined(GD32F150))
@@ -22,13 +22,13 @@ public:
 
 	void Init();
 
-    uint32_t CurrentTicks() const;	// 当前滴答时钟
+    uint CurrentTicks() const;	// 当前滴答时钟
 
-	uint32_t TicksToUs(uint32_t ticks) const;
-	uint32_t UsToTicks(uint32_t us) const;
+	uint TicksToUs(uint ticks) const;
+	uint UsToTicks(uint us) const;
 };
 
-void delayMicroseconds(uint32_t us);//us延时，100us以下精确
+void delayMicroseconds(uint us);//us延时，100us以下精确
 void delay(uint64_t ms);//延时毫秒
 uint64_t millis();//系统启动后的毫秒数
 uint64_t micros();//开机到现在的微妙数
@@ -39,7 +39,7 @@ class TimeCost
 {
 public:
 	uint64_t	Start;		// 开始时间，毫秒
-	uint32_t	StartTicks;	// 开始滴答
+	uint	StartTicks;	// 开始滴答
 
 	TimeCost();
 

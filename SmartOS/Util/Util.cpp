@@ -46,9 +46,9 @@ extern "C" {
         *hex = '\0';
         return 0;
 }
-void ClearRAM(byte* ram,uint32_t n)
+void ClearRAM(byte* ram,uint n)
 {
-  uint32_t i;
+  uint i;
   for (i = 0;i < n;i++)
   {
     ram[i] = 0x00;
@@ -86,9 +86,9 @@ void ClearRAM(byte* ram,uint32_t n)
 		return value * 1.0 / DOTMASK[dot];
 	}
 	//ÅÅÐò
-	void bubbleSort(float *buf, uint32_t len)
+	void bubbleSort(float *buf, uint len)
 	{
-		uint32_t i, j, pos;
+		uint i, j, pos;
 		float tmp;
 		for (i = len; i > 0; i--)
 		{
