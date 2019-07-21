@@ -703,6 +703,9 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Device</GroupName>
+        </Group>
+        <Group>
           <GroupName>OnChip</GroupName>
           <Files>
             <File>
@@ -1740,6 +1743,9 @@
               <FilePath>..\SmartOS\Core\Version.cpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Device</GroupName>
         </Group>
         <Group>
           <GroupName>OnChip</GroupName>

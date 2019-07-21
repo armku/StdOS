@@ -1,9 +1,26 @@
 #ifndef _Port_H_
 #define _Port_H_
 
-#include "Core\Type.h"
-#include "Platform\Pin.h"
+#include "Kernel\Sys.h"
 
+/******** 端口打开关闭流程 ********/
+/*
+Port::Open
+	#Port::Opening
+		OutputPort::OnOpen
+			#Port::OnOpen
+		#OutputPort::OpenPin
+
+Port::Close
+	#Port::OnClose
+*/
+
+
+/******************************** Port ********************************/
+
+// 端口基类
+// 用于管理一个端口，通过PinBit标识该组的哪些引脚。
+// 子类初始化时先通过SetPort设置端口，备份引脚状态，然后Config通过gpio结构体配置端口，端口销毁时恢复引脚状态
 typedef enum
 {
 	GPIO_AIN = 0x0,//模拟输入模式
