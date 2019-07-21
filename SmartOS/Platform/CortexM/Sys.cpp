@@ -110,6 +110,47 @@ void TSys::OnShowInfo()const
 
 
 
+void TSys::InitClock()
+{
+#ifndef TINY
+	// 获取当前频率
+	uint clock = 80000;// RCC_GetSysClock();
+	// 如果当前频率不等于配置，则重新配置时钟
+	if (Clock != clock || CystalClock != HSE_VALUE)
+	{
+		//SetSysClock(Clock, CystalClock);
+
+#ifdef STM32F4
+		HSE_VALUE = CystalClock;
+#endif
+		Clock =80000;// RCC_GetSysClock();
+		SystemCoreClock = Clock;
+	}
+#endif
+}
+
+// 堆起始地址，前面是静态分配内存
+uint TSys::HeapBase() const
+{
+	return (uint)&__heap_base;
+}
+
+// 栈顶，后面是初始化不清零区域
+uint TSys::StackTop() const
+{
+	return SRAM_BASE + (RAMSize << 10) - 0x100;
+}
+
+void TSys::SetStackTop(uint addr)
+{
+	//__set_MSP(addr);
+}
+
+// 关键性代码，放到开头
+INROOT bool TSys::CheckMemory() const
+{
+	return true;
+}
 void TSys::Reset() const { NVIC_SystemReset(); }
 
 void TSys::OnStart()
@@ -221,47 +262,6 @@ INROOT void TSys::OnInit()
 #endif
 }
 
-void TSys::InitClock()
-{
-#ifndef TINY
-	// 获取当前频率
-	uint clock = RCC_GetSysClock();
-	// 如果当前频率不等于配置，则重新配置时钟
-	if (Clock != clock || CystalClock != HSE_VALUE)
-	{
-		SetSysClock(Clock, CystalClock);
-
-#ifdef STM32F4
-		HSE_VALUE = CystalClock;
-#endif
-		Clock = RCC_GetSysClock();
-		SystemCoreClock = Clock;
-	}
-#endif
-}
-
-// 堆起始地址，前面是静态分配内存
-uint TSys::HeapBase() const
-{
-	return (uint)&__heap_base;
-}
-
-// 栈顶，后面是初始化不清零区域
-uint TSys::StackTop() const
-{
-	return SRAM_BASE + (RAMSize << 10) - 0x100;
-}
-
-void TSys::SetStackTop(uint addr)
-{
-	__set_MSP(addr);
-}
-
-// 关键性代码，放到开头
-INROOT bool TSys::CheckMemory() const
-{
-	return true;
-}
 
 #if DEBUG
 typedef struct
