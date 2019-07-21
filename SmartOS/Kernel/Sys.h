@@ -51,10 +51,10 @@ extern "C"
 class TSys
 {
 public:
-    uint32_t	Clock;  	// 系统时钟
-    uint32_t	CystalClock;// 晶振时钟
-	uint32_t	HeapSize;	// 堆大小
-	uint32_t	StackSize;	// 栈大小
+    uint	Clock;  	// 系统时钟
+    uint	CystalClock;// 晶振时钟
+	uint	HeapSize;	// 堆大小
+	uint	StackSize;	// 栈大小
 
 	byte	ID[12];		// 芯片ID。
     uint16_t	FlashSize;	// 芯片Flash容量。
@@ -67,7 +67,7 @@ public:
 	void Init();     	// 初始化系统
 	void ShowInfo() const;
 	
-	uint32_t	Seconds() const;	// 系统绝对当前时间，秒
+	uint	Seconds() const;	// 系统绝对当前时间，秒
 
     void Sleep112233(int ms) const; // 毫秒级延迟，仅供系统调用
 	
@@ -85,17 +85,17 @@ private:
 
 public:
 	// 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
-	uint32_t AddTask(Action func, void* param, int dueTime = 0, int period = 0, cstring name = nullptr) const;
+	uint AddTask(Action func, void* param, int dueTime = 0, int period = 0, cstring name = nullptr) const;
 	template<typename T>
-	uint32_t AddTask(void(T::*func)(), T* target, int dueTime = 0, int period = 0, cstring name = nullptr)
+	uint AddTask(void(T::*func)(), T* target, int dueTime = 0, int period = 0, cstring name = nullptr)
 	{
 		return AddTask(*(Action*)&func, target, dueTime, period, name);
 	}
-	void RemoveTask(uint32_t& taskid) const;
+	void RemoveTask(uint& taskid) const;
 	// 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
-	bool SetTask(uint32_t taskid, bool enable, int msNextTime = -1) const;
+	bool SetTask(uint taskid, bool enable, int msNextTime = -1) const;
 	// 改变任务周期
-	bool SetTaskPeriod(uint32_t taskid, int period) const;
+	bool SetTaskPeriod(uint taskid, int period) const;
 
 	bool Started;
 	void Start();	// 开始系统大循环
