@@ -1013,6 +1013,9 @@
         <Group>
           <GroupName>ArduinoCore</GroupName>
         </Group>
+        <Group>
+          <GroupName>CortexM</GroupName>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -2021,6 +2024,9 @@
         </Group>
         <Group>
           <GroupName>ArduinoCore</GroupName>
+        </Group>
+        <Group>
+          <GroupName>CortexM</GroupName>
         </Group>
       </Groups>
     </Target>
