@@ -22,16 +22,6 @@ extern uint __initial_sp;
 static int _Index;	// MCU在型号表中的索引
 #endif
 
-
-
-
-
-
-
-
-
-#if 0
-
 #ifndef TINY
 
 #ifdef STM32F1
@@ -57,6 +47,14 @@ const uint RamSizes[] = { 6, 10, 20,  20,  48,  48, 128, 192,  128,  192,  192 }
 
 #endif
 
+
+
+
+
+
+
+
+#if 0
 // 关键性代码，放到开头
 INROOT _force_inline void InitHeapStack(uint top)
 {
