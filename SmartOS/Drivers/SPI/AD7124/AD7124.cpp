@@ -17,9 +17,9 @@ uint16_t AD7124::Write16(uint16_t sendData)
     return ret;
 }
 
-uint32_t AD7124::Write24(uint32_t sendData)
+uint AD7124::Write24(uint sendData)
 {
-    uint32_t ret = 0;
+    uint ret = 0;
     ret = this->pspi->Write(sendData >> 16);
     ret <<= 8;
     ret += this->pspi->Write(sendData >> 8);
@@ -28,9 +28,9 @@ uint32_t AD7124::Write24(uint32_t sendData)
     return ret;
 }
 
-uint32_t AD7124::Write32(uint32_t sendData)
+uint AD7124::Write32(uint sendData)
 {
-    uint32_t ret = 0;
+    uint ret = 0;
     ret = this->pspi->Write(sendData >> 24);
     ret <<= 8;
     ret += this->pspi->Write(sendData >> 16);
@@ -41,9 +41,9 @@ uint32_t AD7124::Write32(uint32_t sendData)
     return ret;
 }
 
-uint32_t AD7124::ReadReg(uint8_t reg, uint8_t bytes)
+uint AD7124::ReadReg(uint8_t reg, uint8_t bytes)
 {
-    uint32_t retVal;
+    uint retVal;
     this->pspi->Start();
     this->pspi->Write(AD7124_RD | reg);
     if (bytes == 1)
@@ -62,20 +62,20 @@ uint32_t AD7124::ReadReg(uint8_t reg, uint8_t bytes)
     return retVal;
 }
 //读取AD值
-uint32_t AD7124::ReadRlt()
+uint AD7124::ReadRlt()
 {
 	this->pspi->Stop();
 	delayMicroseconds(5);
-	uint32_t ret= this->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
+	uint ret= this->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
 	delayMicroseconds(5);
 	this->pspi->Stop();
 	this->pspi->Start();
 	return ret;
 }
 //读取AD值
-uint32_t AD7124::ReadRlt(uint8_t& status)
+uint AD7124::ReadRlt(uint8_t& status)
 {
-	uint32_t adin=this->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES+1);
+	uint adin=this->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES+1);
 	status=adin&0xff;
 	adin>>=8;
 	return adin;
@@ -88,9 +88,9 @@ uint32_t AD7124::ReadRlt(uint8_t& status)
  * @retval		: 读取的内容
  * @notes		: 
  *****************************************************************************/
-uint32_t AD7124::ReadRegNoCS(uint8_t reg, uint8_t bytes)
+uint AD7124::ReadRegNoCS(uint8_t reg, uint8_t bytes)
 {
-    uint32_t retVal;
+    uint retVal;
     this->pspi->Write(AD7124_RD | reg);
     if (bytes == 1)
     {
@@ -116,7 +116,7 @@ uint32_t AD7124::ReadRegNoCS(uint8_t reg, uint8_t bytes)
  * @retval		: 无
  * @notes		: 
  *****************************************************************************/
-void AD7124::WriteReg(uint8_t reg, uint8_t bytes, uint32_t data)
+void AD7124::WriteReg(uint8_t reg, uint8_t bytes, uint data)
 {
     this->pspi->Start();
     this->pspi->Write(AD7124_WR | reg);
