@@ -77,28 +77,10 @@ void TTime::Init()
 #endif
 }
 
-uint TTime::TicksToUs(uint ticks)const
-{
-	uint result;
 
-	if (ticks)
-		result = ticks / gTicks;
-	else
-		result = 0;
-	return result;
+INROOT uint TTime::TicksToUs(uint ticks) const	{ return !ticks ? 0 : (ticks / gTicks); }
+INROOT uint TTime::UsToTicks(uint us) const	{ return !us ? 0 : (us * gTicks); }
 
-}
-
-uint TTime::UsToTicks(uint us)const
-{
-	uint result;
-
-	if (us)
-		result = us * gTicks;
-	else
-		result = 0;
-	return result;
-}
 
 // 当前滴答时钟
 INROOT uint TTime::CurrentTicks() const
@@ -227,6 +209,5 @@ INROOT UInt64 TTime::Current() const
 	return Milliseconds + cnt;
 }
 
-INROOT uint TTime::TicksToUs(uint ticks) const	{ return !ticks ? 0 : (ticks / gTicks); }
-INROOT uint TTime::UsToTicks(uint us) const	{ return !us ? 0 : (us * gTicks); }
+
 #endif
