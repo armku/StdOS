@@ -1,7 +1,7 @@
-﻿#include "Kernel\Sys.h"
+#include "Kernel\Sys.h"
 #include "Kernel\Interrupt.h"
 #include "Kernel\TTime.h"
-#include "Device\Timer.h"
+//#include "Device\Timer.h"
 
 #include "Platform\stm32.h"
 
@@ -15,6 +15,20 @@
 static TIM_TypeDef* const g_Timers[] = TIMS;
 static uint	gTicks;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+#if 0
 void TTime::Init()
 {
 	// 准备使用外部时钟，Systick时钟=HCLK/8
@@ -42,15 +56,15 @@ void TTime::Init()
 #else
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
 #endif*/
-	Timer::ClockCmd(Index, true);
+//	Timer::ClockCmd(Index, true);
 
     // 获取当前频率
 #if defined(STM32F0) || defined(GD32F150)
 	uint prd	= 1000;
 	uint psc	= Sys.Clock / 1000;
 #else
-	clk = RCC_GetPCLK();
-	if((uint)tim & 0x00010000) clk = RCC_GetPCLK2();
+	clk =8000;// RCC_GetPCLK();
+	if((uint)tim & 0x00010000) clk =8000;// RCC_GetPCLK2();
 	clk <<= 1;
 
 	// 120M时，分频系数必须是120K才能得到1k的时钟，超过了最大值64k
@@ -133,3 +147,4 @@ INROOT UInt64 TTime::Current() const
 
 INROOT uint TTime::TicksToUs(uint ticks) const	{ return !ticks ? 0 : (ticks / gTicks); }
 INROOT uint TTime::UsToTicks(uint us) const	{ return !us ? 0 : (us * gTicks); }
+#endif

@@ -90,7 +90,6 @@ uint TTime::UsToTicks(uint us)const
 #include "Platform\stm32.h"
 #include "BspPlatform\BspPlatform.h"
 
-extern int gTicks; //
 void TTime::Init()
 {
 #if defined STM32F0	
