@@ -21,7 +21,7 @@ float Math::Avg(float buf[], int len,int pos)
 //º∆À„∫Õ
 float Math::Sum(int buf[], int len, int pos)
 {
-	int64_t ret = 0;
+	Int64 ret = 0;
 	for (int i = pos; i < len; i++)
 	{
 		ret += buf[i];

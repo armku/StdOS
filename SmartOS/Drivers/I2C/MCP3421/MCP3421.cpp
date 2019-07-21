@@ -23,9 +23,9 @@ void MCP3421::MCP3421_WriteOne(byte  dt)
 	this->IIC.Stop();
 }
 //3421读数据   --需查看芯片时序图和芯片指令
-int32_t MCP3421::MCP3421_ReadOne(void)
+int MCP3421::MCP3421_ReadOne(void)
 {
-	int32_t volatil = 0;
+	int volatil = 0;
 //	byte Step, Temp;
 	this->IIC.Start();
 	this->IIC.WriteByte(0XD1);
@@ -49,15 +49,15 @@ int32_t MCP3421::MCP3421_ReadOne(void)
 	}
 	return volatil;
 }
-int32_t MCP3421::GetADValue(_Gain3421 gain)
+int MCP3421::GetADValue(_Gain3421 gain)
 {
-	int32_t das;
+	int das;
 	das = MCP3421_ReadOne();
 	MCP3421_WriteOne(0x88 | gain);//调ad增益  需查手册
 	return das;//(pow(2,gain));
 }
 float MCP3421::GetVolt()
 {
-	int32_t val = this->GetADValue(GAIN1);
+	int val = this->GetADValue(GAIN1);
 	return val * 2.048 / 0X20000;
 }
