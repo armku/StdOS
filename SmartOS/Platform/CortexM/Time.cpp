@@ -91,6 +91,33 @@ INROOT uint TTime::CurrentTicks() const
 
 
 
+#if  defined(STM32F0) || defined(GD32F150) || defined(STM32F4)
+    #define SysTick_CTRL_COUNTFLAG SysTick_CTRL_COUNTFLAG_Msk
+#endif
+// 关键性代码，放到开头
+INROOT void TTime::OnHandler(ushort num, void* param)
+{
+	auto timer = (TIM_TypeDef*)param;
+	if(!timer) return;
+
+	// 检查指定的 TIM 中断发生
+	if(TIM_GetITStatus(timer, TIM_IT_Update) == RESET) return;
+
+	// 累加计数
+	auto& time	= (TTime&)Time;
+	time.Seconds += 1;
+	time.Milliseconds += 1000;
+	// 必须清除TIMx的中断待处理位，否则会频繁中断
+	TIM_ClearITPendingBit(timer, TIM_IT_Update);
+	//debug_printf("TTime::OnHandler Seconds=%d Milliseconds=%d\r\n", Time.Seconds, (uint)Time.Milliseconds);
+
+	// 定期保存Ticks到后备RTC寄存器
+	if(time.OnSave) time.OnSave();
+
+	//if(Sys.OnTick) Sys.OnTick();
+}
+
+
 
 // 当前毫秒数
 INROOT UInt64 TTime::Current() const
@@ -178,33 +205,6 @@ void TTime::Init()
 	// 打开计数
 	TIM_Cmd(tim, ENABLE);
 }
-
-#if  defined(STM32F0) || defined(GD32F150) || defined(STM32F4)
-    #define SysTick_CTRL_COUNTFLAG SysTick_CTRL_COUNTFLAG_Msk
-#endif
-// 关键性代码，放到开头
-INROOT void TTime::OnHandler(ushort num, void* param)
-{
-	auto timer = (TIM_TypeDef*)param;
-	if(!timer) return;
-
-	// 检查指定的 TIM 中断发生
-	if(TIM_GetITStatus(timer, TIM_IT_Update) == RESET) return;
-
-	// 累加计数
-	auto& time	= (TTime&)Time;
-	time.Seconds += 1;
-	time.Milliseconds += 1000;
-	// 必须清除TIMx的中断待处理位，否则会频繁中断
-	TIM_ClearITPendingBit(timer, TIM_IT_Update);
-	//debug_printf("TTime::OnHandler Seconds=%d Milliseconds=%d\r\n", Time.Seconds, (uint)Time.Milliseconds);
-
-	// 定期保存Ticks到后备RTC寄存器
-	if(time.OnSave) time.OnSave();
-
-	//if(Sys.OnTick) Sys.OnTick();
-}
-
 
 
 
