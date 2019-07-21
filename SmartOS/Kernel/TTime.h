@@ -33,6 +33,21 @@ void delay(UInt64 ms);//延时毫秒
 UInt64 millis();//系统启动后的毫秒数
 UInt64 micros();//开机到现在的微妙数
 
+// 时间轮。用于超时处理
+class TimeWheel
+{
+public:
+	UInt64	Expire;		// 到期时间，毫秒
+	ushort	Sleep;		// 睡眠时间，默认0毫秒
+
+	TimeWheel(uint ms);
+
+	void Reset(uint ms);
+
+	// 是否已过期
+	bool Expired();
+};
+
 extern TTime Time;
 // 时间开支。借助滴答进行精确计算
 class TimeCost
