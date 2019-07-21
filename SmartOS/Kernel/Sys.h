@@ -173,6 +173,46 @@ public:
 	// 关闭全局中断
 	void GlobalDisable();
 };
+
+extern TSys Sys;		// 创建一个全局的Sys对象  会在main函数之前执行构造函数（！！！！！）
+
+// 系统设置
+class SystemConfig
+{
+public:
+	// 操作系统
+	uint	Ver;		// 系统版本。Version格式
+	char	Name[16];	// 系统名称
+
+	// 硬件
+	uint	HardVer;	// 硬件版本
+
+	// 应用软件
+	ushort	Code;		// 产品种类
+	uint	AppVer;		// 产品版本
+	char	Company[16];// 公司
+	char	Product[16];// 产品批次
+
+	char	DevID[16];	// 设备编码
+	char	Server[32];	// 服务器。重置后先尝试厂商前端，再尝试原服务器
+	char	Token[32];	// 访问服务器的令牌
+
+	uint	Expire;		// 有效期。1970以来的秒数。
+	
+	ushort	Checksum;	// 校验
+};
+
+void EnterCritical();
+void ExitCritical();
+
+//extern uint32_t __REV(uint32_t value);
+//extern uint32_t __REV16(uint16_t value);
+
+uint _REV(uint value);
+ushort _REV16(ushort value);
+
+// 智能IRQ，初始化时备份，销毁时还原
+// SmartIRQ相当霸道，它直接关闭所有中断，再也没有别的任务可以跟当前任务争夺MCU
 class SmartIRQ
 {
 public:
@@ -182,6 +222,8 @@ public:
 private:
 	uint _state;
 };
+
+#if DEBUG
 // 函数栈。
 // 进入函数时压栈函数名，离开时弹出。便于异常时获取主线程调用列表
 class TraceStack
@@ -193,12 +235,61 @@ public:
 	static void Show();
 };
 
-extern TSys Sys;		// 创建一个全局的Sys对象  会在main函数之前执行构造函数（！！！！！）
+#define TS(name) TraceStack __ts(name)
+
+#else
+
+#define TS(name) ((void)0)
+
+#endif
+
+// 编译信息兼容性处理
+#ifndef __BUILD_DATE__
+#define __BUILD_DATE__ 6289		// 2017-03-21
+#endif
+#ifndef __BUILD_TIME__
+#define __BUILD_TIME__ 1490054400	// 2017-03-21 00:00:00
+#endif
+#ifndef __BUILD_SDATE__
+#define __BUILD_SDATE__ "170321"
+#endif
+#ifndef __BUILD_STIME__
+#define __BUILD_STIME__ "2017-03-21 00:00:00"
+#endif
+#ifndef __BUILD_USER__
+#define __BUILD_USER__ "Computer_User"
+#endif
 
 #define STDOS_VERSION "0.8.2019.0408" //系统版本号
 extern char* AppVersion;//需要定义软件版本号实现 如：char *AppVersion = "0.1.2018.1114";
-
 #endif //_Sys_H_
+
+/*
+v4.0.2017.0905	物联协议Link取代令牌协议，网络优先，Json优先
+
+v3.2.2016.0517	核心类独立到目录Core，平台无关，系统无关
+
+v3.1.2015.1108	增加系统配置存储模块，增加电源管理模块
+
+v3.0.2015.0806	增强系统调度器，支持无阻塞多任务调度
+
+v2.8.2014.0927	完成微网通讯架构，封装消息协议，串口及nRF24L01+测试通过
+v2.7.2014.0919	支持抢占式多线程调度
+v2.6.2014.0823	平台文件独立，接管系统初始化控制权
+v2.5.2014.0819	增加堆栈溢出检测模块，重载new/delete实现，仅Debug有效
+v2.4.2014.0811	实现系统多任务调度，一次性编译测试通过，多任务小灯例程4k
+				实现以太网精简协议TinyIP，ARP/ICMP/TCP/UDP，混合网络例程7.5k
+				增加看门狗、定时器模块
+v2.3.2014.0806	使用双栈增加稳定性，增加RTM优化编译，核心函数强制内联，自动堆栈越界检查
+v2.2.2014.0801	增加引脚保护机制，避免不同模块使用相同引脚导致冲突而难以发现错误
+v2.1.2014.0728	增加中断管理模块，全面接管中断向量表，支持动态修改中断函数，支持多中断共用中断函数。F0需配置RAM从0x200000C0开始
+v2.0.2014.0725	使用C++全新实现SmartOS，支持系统时钟、IO、USART、日志、断言、Spi、NRF24L01、SPIFlash、CAN、Enc28j60，GD32超频
+
+v1.3.2014.0624	增加Spi模块和NRF24L01+模块的支持
+v1.2.2014.0604	支持GD32芯片
+v1.1.2014.0513	支持F0/F1的GPIO和串口功能
+v1.0.2014.0506	建立嵌入式系统框架SmartOS，使用纯C语言实现
+*/
 
 /*
 
