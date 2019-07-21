@@ -11,6 +11,7 @@ void TInterrupt::Init() const
 {
 	//OnInit();
 }
+
 bool TInterrupt::Activate(short irq, InterruptCallback isr, void* param)
 {
 	short irq2 = irq + 16; // exception = irq + 16
@@ -18,4 +19,41 @@ bool TInterrupt::Activate(short irq, InterruptCallback isr, void* param)
 	VectorParams[irq2] = param;
 
 	return OnActivate(irq);
+}
+
+bool TInterrupt::Deactivate(short irq)
+{
+	short irq2 = irq + 16; // exception = irq + 16
+	Vectors[irq2] = 0;
+	VectorParams[irq2] = 0;
+
+	return OnDeactivate(irq);
+}
+// 关键性代码，放到开头
+INROOT void TInterrupt::Process(uint num) const
+{
+	//auto& inter	= Interrupt;
+	if (!Vectors[num]) return;
+
+	// 内存检查
+#if DEBUG
+	//Sys.CheckMemory();
+#endif
+
+	// 找到应用层中断委托并调用
+	auto isr = (InterruptCallback)Vectors[num];
+	void* param = (void*)VectorParams[num];
+	isr(num - 16, param);
+}
+
+// 系统挂起
+void TInterrupt::Halt()
+{
+#if DEBUG
+	//TraceStack::Show();
+
+	//auto sp	= SerialPort::GetMessagePort();
+	//if(sp) sp->Flush();
+#endif
+	while (true);
 }
