@@ -1036,6 +1036,11 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\CortexM\Time.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Thread.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\CortexM\Thread.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2069,6 +2074,11 @@
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\CortexM\Time.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Thread.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\CortexM\Thread.cpp</FilePath>
             </File>
           </Files>
         </Group>
