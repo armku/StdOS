@@ -182,12 +182,12 @@ unLength 校验数据的长
  *功   能:循环冗余校验-32
 （美国标准-0x04C11DB7）
  *******************************************************/
-uint64_t Crc::CRC32Default(byte *pszBuf, uint64_t ulLength)
+UInt64 Crc::CRC32Default(byte *pszBuf, UInt64 ulLength)
 {
-	uint64_t Result = 0xFFFFFFFF;
-	uint64_t m_Table[256];
+	UInt64 Result = 0xFFFFFFFF;
+	UInt64 m_Table[256];
 
-	uint64_t ulPolynomial = 0x04C11DB7;
+	UInt64 ulPolynomial = 0x04C11DB7;
 
 
 	for (int i = 0; i <= 0xFF; i++)
@@ -195,7 +195,7 @@ uint64_t Crc::CRC32Default(byte *pszBuf, uint64_t ulLength)
 		m_Table[i] = Reflect(i, 8) << 24;
 		for (int j = 0; j < 8; j++)
 		{
-			m_Table[i] = (m_Table[i] << 1) ^ (m_Table[i] & (uint64_t)(1ul << 31) ? ulPolynomial : 0);
+			m_Table[i] = (m_Table[i] << 1) ^ (m_Table[i] & (UInt64)(1ul << 31) ? ulPolynomial : 0);
 		}
 		m_Table[i] = Reflect(m_Table[i], 32);
 	}
@@ -208,9 +208,9 @@ uint64_t Crc::CRC32Default(byte *pszBuf, uint64_t ulLength)
 	return Result;
 }
 
-uint64_t Crc::Reflect(uint64_t ref, char ch)
+UInt64 Crc::Reflect(UInt64 ref, char ch)
 {
-	uint64_t value = 0;
+	UInt64 value = 0;
 
 
 	for (int i = 1; i < (ch + 1); i++)

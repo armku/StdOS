@@ -162,7 +162,7 @@ uint TTime::CurrentTicks()const
 }
 
 //延时毫秒
-void delay(uint64_t ms)
+void delay(UInt64 ms)
 {
 	Sys.Sleep112233(ms);
 }
@@ -196,12 +196,12 @@ void delayMicroseconds(uint us)
 #endif
 }
 //系统启动后的毫秒数
-uint64_t millis()
+UInt64 millis()
 {
 	return Time.Milliseconds + DeviceConfigCenter::CurrentTick();
 }
 //开机到现在的微妙数
-uint64_t micros()
+UInt64 micros()
 {
 	return millis() * 1000;
 }

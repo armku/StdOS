@@ -18,7 +18,7 @@ public:
 	void*	Param;		// 参数
 
 	int		Period;		// 周期ms
-	uint64_t	NextTime;	// 下一次执行时间ms
+	UInt64	NextTime;	// 下一次执行时间ms
 
 	int		Times;		// 执行次数
 	int		SleepTime;	// 当前睡眠时间us
@@ -36,7 +36,7 @@ public:
 	~Task();
 
 	// 执行任务。返回是否正常执行。
-	bool Execute(uint64_t now);
+	bool Execute(UInt64 now);
 	// 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
 	void Set(bool enable, int msNextTime = -1);
 	// 显示状态
@@ -50,7 +50,7 @@ public:
 private:
 	friend class TaskScheduler;
 
-	bool CheckTime(uint64_t end, bool isSleep);
+	bool CheckTime(UInt64 end, bool isSleep);
 	void Init();
 };
 // 任务调度器
@@ -73,8 +73,8 @@ public:
 
 	int		Times;		// 执行次数
 	int		Cost;		// 平均执行时间us
-	uint64_t	TotalSleep;	// 所有任务的总睡眠时间ms
-	uint64_t	LastTrace;	// 最后统计跟踪时间ms
+	UInt64	TotalSleep;	// 所有任务的总睡眠时间ms
+	UInt64	LastTrace;	// 最后统计跟踪时间ms
 
 	typedef void (*SAction)(int ms);
 	SAction	EnterSleep;	// 通知外部，需要睡眠若干毫秒

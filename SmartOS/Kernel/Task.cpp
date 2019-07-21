@@ -16,7 +16,7 @@ Task::~Task()
 }
 
 // 执行任务。返回是否正常执行。
-bool Task::Execute(uint64_t now)
+bool Task::Execute(UInt64 now)
 {
     if (this->Deepth < this->MaxDeepth)
     {
@@ -167,13 +167,13 @@ Task &Task::Current()
     return  *Task::Scheduler()->Current;
 }
 
-bool Task::CheckTime(uint64_t end, bool isSleep)
+bool Task::CheckTime(UInt64 end, bool isSleep)
 {
     bool ret;
 
     if (this->Deepth < this->MaxDeepth)
     {
-        uint64_t mscur = millis();
+        UInt64 mscur = millis();
 		if(!this->Enable)
 		{
 			ret=false;
@@ -345,12 +345,12 @@ void TaskScheduler::Stop()
 // 执行一次循环。指定最大可用时间
 void TaskScheduler::Execute(uint msMax, bool &cancel)
 {
-    uint64_t mscur = millis();
+    UInt64 mscur = millis();
     TimeCost tmcost;
 
-    uint64_t min = UInt64_Max; // 最小时间，这个时间就会有任务到来
+    UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
 
-    uint64_t mscurMax = mscur + msMax;
+    UInt64 mscurMax = mscur + msMax;
     for (int i = 0; i < this->Count; i++)
     {
         if (cancel)
@@ -366,7 +366,7 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
 				}
 				if(!msMax)
 					return;
-				uint64_t msend = millis();
+				UInt64 msend = millis();
 			}
 			// 不能通过累加的方式计算下一次时间，因为可能系统时间被调整
 			this->Current->NextTime = mscur + this->Current->Period;
@@ -421,14 +421,14 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
         this->Deepth++;
 		Task* tskcur=this->Current;
 		tskcur->Deepth++;
-        uint64_t msBegin = millis();
-        uint64_t msEndMax = msBegin + msMax;
-        uint64_t msRemain = msMax;
+        UInt64 msBegin = millis();
+        UInt64 msEndMax = msBegin + msMax;
+        UInt64 msRemain = msMax;
         TimeCost tmcost;
         while (msRemain > 0 && !cancel)
         {
 			this->Execute(msRemain, cancel);
-			uint64_t msc = millis();
+			UInt64 msc = millis();
 			if (msEndMax > msc)			
 				msRemain = msEndMax - msc;			
 			else
@@ -436,7 +436,7 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
         }
 		int sleepus = tmcost.Elapsed();
         this->TotalSleep += sleepus/1000;
-        uint64_t msUsed = millis() - msBegin;
+        UInt64 msUsed = millis() - msBegin;
 		tskcur->SleepTime+=sleepus;
 		tskcur->Deepth--;
         this->Deepth--;
@@ -453,14 +453,14 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
 // 显示状态
 void TaskScheduler::ShowStatus()
 {
-    static uint64_t runCounts = 0;
+    static UInt64 runCounts = 0;
     float RunTimes = 0;
     float RunTimesAvg = 0;
     Task *tsk;
     byte buf[1];
 
     runCounts++;
-    uint64_t curms = millis();
+    UInt64 curms = millis();
     //统计运行时间
     RunTimes = 0;
     RunTimesAvg = 0;

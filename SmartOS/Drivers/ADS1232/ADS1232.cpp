@@ -84,8 +84,8 @@ void ADS1232::Init()
 
 int ADS1232::Read(bool cal)
 {
-	static uint64_t msold = 0;
-	static uint64_t msnew = 0;
+	static UInt64 msold = 0;
+	static UInt64 msnew = 0;
 	int temp = 0;
 	uint valOrigin = 0;
 	int32_t ret = 0;

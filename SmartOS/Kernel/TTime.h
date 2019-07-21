@@ -10,7 +10,7 @@ class TTime
 {
 public:
 	volatile	uint	Seconds;		// 全局秒数，系统启动后总秒数。累加
-	volatile	uint64_t	Milliseconds;	// 全局毫秒数，系统启动后总毫秒（1000ms整部分）。
+	volatile	UInt64	Milliseconds;	// 全局毫秒数，系统启动后总毫秒（1000ms整部分）。
 	volatile	uint	BaseSeconds;	// 基准秒数。系统启动时相对于1970年的秒数，时间调节，加上Seconds得到当前时间Now()
     //byte	Ticks;			// 每微秒的时钟滴答数
 	byte	Index;			// 定时器
@@ -29,16 +29,16 @@ public:
 };
 
 void delayMicroseconds(uint us);//us延时，100us以下精确
-void delay(uint64_t ms);//延时毫秒
-uint64_t millis();//系统启动后的毫秒数
-uint64_t micros();//开机到现在的微妙数
+void delay(UInt64 ms);//延时毫秒
+UInt64 millis();//系统启动后的毫秒数
+UInt64 micros();//开机到现在的微妙数
 
 extern TTime Time;
 // 时间开支。借助滴答进行精确计算
 class TimeCost
 {
 public:
-	uint64_t	Start;		// 开始时间，毫秒
+	UInt64	Start;		// 开始时间，毫秒
 	uint	StartTicks;	// 开始滴答
 
 	TimeCost();
