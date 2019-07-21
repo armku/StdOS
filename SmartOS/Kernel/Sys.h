@@ -64,50 +64,7 @@ extern struct HandlerRemap StrBoot;
 
 class SystemConfig;
 
-#include "Core\List.h"
-#include "Core\Delegate.h"
-#include "Version.h"
 #include "TTime.h"
-
-
-#include <stdio.h>
-#include <stddef.h>
-
-#include "Core\Type.h"
-#include "Core\Buffer.h"
-#include "Core\Array.h"
-#include "Core\ByteArray.h"
-#include "Core\SString.h"
-#include "Core\Stream.h"
-#include "Core\DateTime.h"
-#include "Core\Version.h"
-#include "Core\List.h"
-#include "Core\Dictionary.h"
-#include "Core\Delegate.h"
-
-/* 引脚定义 */
-#include "Platform\Pin.h"
-
-
-
-extern "C"
-{
-#ifdef DEBUG
-	#define debug_printf SmartOS_printf	
-#else
-	#define debug_printf(format, ...)
-#endif
-}
-
-#ifdef DEBUG
-#define assert(expr, msg) ((expr) ? (void)0 : assert_failed2(msg, (const char*)__FILE__, __LINE__))
-
-#else
-
-#define assert(expr, msg) ((void)0)
-
-#endif
-
 // 系统类
 class TSys
 {
