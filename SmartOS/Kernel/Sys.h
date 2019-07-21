@@ -1,6 +1,7 @@
 #ifndef _Sys_H_
 #define _Sys_H_
 
+#include <stdint.h>
 #include "Core\Type.h"
 #include "Core\List.h"
 #include "Core\Delegate.h"
@@ -99,7 +100,15 @@ public:
 	bool Started;
 	void Start();	// 开始系统大循环
 };
+class SmartIRQ
+{
+public:
+	SmartIRQ(bool enable = false);
+	~SmartIRQ();
 
+private:
+	uint _state;
+};
 extern TSys Sys;		// 创建一个全局的Sys对象  会在main函数之前执行构造函数（！！！！！）
 
 #define STDOS_VERSION "0.8.2019.0408" //系统版本号

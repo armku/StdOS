@@ -876,6 +876,11 @@
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Kernel\Interrupt.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Heap.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Kernel\Heap.cpp</FilePath>
@@ -1879,6 +1884,11 @@
         <Group>
           <GroupName>Kernel</GroupName>
           <Files>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Kernel\Interrupt.cpp</FilePath>
+            </File>
             <File>
               <FileName>Heap.cpp</FileName>
               <FileType>8</FileType>
