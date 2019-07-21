@@ -109,6 +109,17 @@ public:
 private:
 	uint _state;
 };
+// 函数栈。
+// 进入函数时压栈函数名，离开时弹出。便于异常时获取主线程调用列表
+class TraceStack
+{
+public:
+	TraceStack(cstring name);
+	~TraceStack();
+
+	static void Show();
+};
+
 extern TSys Sys;		// 创建一个全局的Sys对象  会在main函数之前执行构造函数（！！！！！）
 
 #define STDOS_VERSION "0.8.2019.0408" //系统版本号
