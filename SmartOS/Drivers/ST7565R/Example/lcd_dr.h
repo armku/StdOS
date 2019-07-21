@@ -1,7 +1,6 @@
 #ifndef _LCD_DR_H
 #define _LCD_DR_H
 
-    #include <stdint.h>
     #include "Drivers\ST7565R\ST7565R.h"
 
     typedef enum
@@ -27,7 +26,7 @@
 
             void DisplayHEX(ushort x, ushort y, byte da, Font font = FONT_8X16);
             void DisplayStr(ushort x, ushort y, char *text, Font font = FONT_8X16); //字符串显示        
-            void DispVal(ushort x, ushort y, float val, int8_t wei = 0, Font font = FONT_5X8); //显示数值 float类型
+            void DispVal(ushort x, ushort y, float val, byte wei = 0, Font font = FONT_5X8); //显示数值 float类型
             void DispValu(ushort x, ushort y, ushort val, int wei =  - 1, byte reversebit = 0, Font font = FONT_8X16); //显示数值 固定位置反显
 
         private:

@@ -296,7 +296,7 @@ void CLcd_DR::DisplayStr(ushort x, ushort y, char *text, Font font)
 }
 
 //显示数值 float类型
-void CLcd_DR::DispVal(ushort x, ushort y, float val, int8_t wei, Font font) 
+void CLcd_DR::DispVal(ushort x, ushort y, float val, byte wei, Font font) 
 {	
 	char dat[20];//字体选择 用于sprintf转换
     switch (wei)

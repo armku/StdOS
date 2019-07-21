@@ -1,7 +1,6 @@
 #ifndef MQTT_H
 #define MQTT_H
 
-//#include <stdint.h>
 #include "../HAL/STM32F1/ARCH_UART.h"
 
 #define MAX_FRAME_DATA_LENGTH 200
