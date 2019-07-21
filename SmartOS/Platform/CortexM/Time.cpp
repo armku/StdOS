@@ -92,7 +92,15 @@ INROOT uint TTime::CurrentTicks() const
 
 
 
-
+// 当前毫秒数
+INROOT UInt64 TTime::Current() const
+{
+	uint cnt = g_Timers[Index]->CNT;
+#if ! (defined(STM32F0) || defined(GD32F150))
+	if(Div) cnt >>= Div;
+#endif
+	return Milliseconds + cnt;
+}
 
 
 
@@ -199,15 +207,7 @@ INROOT void TTime::OnHandler(ushort num, void* param)
 
 
 
-// 当前毫秒数
-INROOT UInt64 TTime::Current() const
-{
-	uint cnt = g_Timers[Index]->CNT;
-#if ! (defined(STM32F0) || defined(GD32F150))
-	if(Div) cnt >>= Div;
-#endif
-	return Milliseconds + cnt;
-}
+
 
 
 #endif
