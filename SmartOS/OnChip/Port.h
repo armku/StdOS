@@ -56,7 +56,7 @@ public:
 
 	Port();
 #ifndef TINY
-	//virtual ~Port();
+	virtual ~Port();
 #endif
 
     Port& Set(Pin pin);	// ÉèÖÃÒı½Å

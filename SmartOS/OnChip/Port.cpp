@@ -15,11 +15,37 @@ static bool Port_Reserve(Pin pin, bool flag);
 #define REGION_Port 1
 
 
+Port::Port()
+{
+	this->_Pin = P0;
+	this->Opened = false;
+	this->Invert=false;
+}
 
 
+#ifndef TINY
+Port::~Port()
+{
+	//Close();
+}
+#endif
 
 
-
+String Port::ToString() const
+{
+	String str;
+	str += 'P';
+	if (_Pin == P0)
+	{
+		str += '0';
+	}
+	else
+	{
+		str += (char)('A' + (_Pin >> 4));
+		str += (byte)(_Pin & 0x0F);
+	}
+	return str;
+}
 
 
 
@@ -54,12 +80,7 @@ GPIO_TypeDef *IndexToGroup(byte index)
 #endif
 }
 
-Port::Port()
-{
-	this->_Pin = P0;
-	this->Opened = false;
-	this->Invert=false;
-}
+
 
 Port &Port::SetPin(Pin pin)
 {
