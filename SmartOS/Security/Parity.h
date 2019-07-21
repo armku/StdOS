@@ -4,8 +4,8 @@
     class Parity
     {
         public:
-            static bool OddParity(uint8_t *buf, uint32_t len);
-            static bool EvenParity(uint8_t *buf, uint32_t len);
+            static bool OddParity(byte *buf, uint32_t len);
+            static bool EvenParity(byte *buf, uint32_t len);
 
     }; // ∆Ê≈º–£—È	
 #endif

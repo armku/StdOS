@@ -6,10 +6,10 @@
  *输   出:校验和
  *功   能:奇校验
  *******************************************************/
-bool Parity::OddParity(uint8_t *buf, uint32_t len)
+bool Parity::OddParity(byte *buf, uint32_t len)
 {
     uint32_t i = 0, j = 0;
-    uint8_t d = 0;
+    byte d = 0;
     bool bParity = false;
 
     bParity = 1;
@@ -39,7 +39,7 @@ bool Parity::OddParity(uint8_t *buf, uint32_t len)
  *输   出:校验和
  *功   能:偶校验
  *******************************************************/
-bool Parity::EvenParity(uint8_t *buf, uint32_t len)
+bool Parity::EvenParity(byte *buf, uint32_t len)
 {
     return (!OddParity(buf, len));
 }

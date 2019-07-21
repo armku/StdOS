@@ -116,10 +116,10 @@ const unsigned char crc8_tab[256] = {
 	116, 42,200,150, 21, 75,169,247,182,232, 10, 84,215,137,107, 53
 };
 
-uint8_t  Math::Crc8(void *buf, uint16_t len)
+byte  Math::Crc8(void *buf, uint16_t len)
 {
 	unsigned char i, crc8 = 0;
 	for (i = 0; i<len; i++)
-		crc8 = crc8_tab[crc8^((uint8_t *)buf)[i]];
+		crc8 = crc8_tab[crc8^((byte *)buf)[i]];
 	return crc8;
 }

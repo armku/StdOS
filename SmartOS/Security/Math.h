@@ -17,7 +17,7 @@ public:
 	static void SortUp(float buf[],int len,int pos=0);//≈≈–Ú£¨…˝–Ú
 	static void SortDown(float buf[],int len,int pos=0);//≈≈–Ú Ωµ–Ú
 	static uint16_t Crc16(void * buf, uint16_t len);
-	static uint8_t  Crc8(void *buf, uint16_t len);
+	static byte  Crc8(void *buf, uint16_t len);
 	
 private:
 
