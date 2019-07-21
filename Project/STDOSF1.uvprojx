@@ -921,6 +921,11 @@
               <FilePath>..\SmartOS\Security\Crc.cpp</FilePath>
             </File>
             <File>
+              <FileName>Crc16.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\Crc16.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Security\Math.cpp</FilePath>
@@ -1918,6 +1923,11 @@
               <FileName>Crc.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Security\Crc.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Crc16.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\Crc16.cpp</FilePath>
             </File>
             <File>
               <FileName>Math.cpp</FileName>

@@ -13,6 +13,8 @@
             static uint16_t CRC16Default(uint8_t *pszBuf, uint32_t unLength);
             static uint64_t CRC32Default(uint8_t *pszBuf, uint64_t ulLength);
             static uint64_t Reflect(uint64_t ref, char ch);
+			static uint Hash(const Buffer& arr, uint crc = 0);
+			static ushort Hash16(const Buffer& arr, ushort crc = 0xFFFF);
     }; //循环冗余校验
 
 #endif
