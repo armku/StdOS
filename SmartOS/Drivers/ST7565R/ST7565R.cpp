@@ -188,7 +188,7 @@ void CLcd::Point(uint16_t x, uint16_t y, uint16_t color)
 }
 
 //»­Í¼ÐÎ
-void CLcd::DisplayImage(uint8_t *pbuf, uint16_t color, uint32_t showtype)
+void CLcd::DisplayImage(uint8_t *pbuf, uint16_t color, uint showtype)
 {
     switch (showtype)
     {

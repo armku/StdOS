@@ -282,7 +282,7 @@ void GetSTM32MCUID(uint *id, MCUTypedef type)
 {
 	if (id != NULL)
 	{
-		id[0] = *(uint32_t*)(idAddr[type]);
+		id[0] = *(uint*)(idAddr[type]);
 		id[1] = *(uint*)(idAddr[type] + 4);
 		id[2] = *(uint*)(idAddr[type] + 8);
 	}

@@ -10,7 +10,7 @@
 class FlushPort 
 {
 private:
-	uint32_t	_tid; 
+	uint	_tid; 
 
 public:
 	Port*	Port; 

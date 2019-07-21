@@ -96,7 +96,7 @@ void Esp8266::Cmd(char* cmd, int len)
 {
 
 }
-bool Esp8266::ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint32_t waittime)
+bool Esp8266::ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint waittime)
 {
 	this->Reply1 = reply1;
 	this->Reply2 = reply2;
@@ -269,7 +269,7 @@ bool Esp8266::IsReply(char* buf,char* reply)
 	else
 		return false;
 }
-bool Esp8266::ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char* pStr, uint32_t ulStrLength, ENUM_ID_NO_TypeDef ucId)
+bool Esp8266::ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char* pStr, uint ulStrLength, ENUM_ID_NO_TypeDef ucId)
 {
 	char cStr[120];
 	bool bRet = false;
