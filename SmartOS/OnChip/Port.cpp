@@ -47,6 +47,33 @@ String Port::ToString() const
 	return str;
 }
 
+// 单一引脚初始化
+Port& Port::Set(Pin pin)
+{
+	// 如果引脚不变，则不做处理
+	if (pin == _Pin) return *this;
+
+#ifndef TINY
+	// 释放已有引脚的保护
+	if (_Pin != P0) Close();
+#endif
+
+	_Pin = pin;
+
+	return *this;
+}
+
+bool Port::Empty() const
+{
+	if (_Pin != P0) return false;
+
+	return true;
+}
+
+void Port::Clear()
+{
+	_Pin = P0;
+}
 
 
 
@@ -143,11 +170,6 @@ void Port::pinMode(GPIOMode_T mode)
 #endif
 
 	this->Opened = true;
-}
-
-bool Port::Empty()const
-{
-	return _Pin == P0;
 }
 
 void Port::Close()
