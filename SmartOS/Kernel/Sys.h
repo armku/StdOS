@@ -93,7 +93,55 @@ public:
 	uint	HotStart;	// 热启动次数
 
 	const SystemConfig*	Config;	// 系统设置
+TSys();				// 构造函数
 
+	void InitClock();	// 初始化系统时钟
+    void Init();     	// 初始化系统
+	void ShowInfo() const;
+	uint HeapBase() const;	// 堆起始地址，前面是静态分配内存
+	uint StackTop() const;	// 栈顶，后面是初始化不清零区域
+	void SetStackTop(uint addr);
+
+	UInt64	Ms() const;		// 系统启动后的毫秒数
+	uint	Seconds() const;	// 系统绝对当前时间，秒
+
+    void Sleep(int ms) const; // 毫秒级延迟
+    void Delay(int us) const; // 微秒级延迟
+	typedef void (*FuncI32)(int param);
+	FuncI32 OnSleep;
+
+	bool CheckMemory() const;
+
+	// 延迟异步重启
+	void Reboot(int msDelay = 0) const;
+
+	// 系统跟踪
+	void InitTrace(void* port) const;
+	void Trace(int times = 1) const;
+
+private:
+	// 重启系统
+    void Reset() const;
+	void OnInit();
+	void OnShowInfo() const;
+	void OnStart();
+
+public:
+	// 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
+	uint AddTask(Action func, void* param, int dueTime = 0, int period = 0, cstring name = nullptr) const;
+	template<typename T>
+	uint AddTask(void(T::*func)(), T* target, int dueTime = 0, int period = 0, cstring name = nullptr)
+	{
+		return AddTask(*(Action*)&func, target, dueTime, period, name);
+	}
+	void RemoveTask(uint& taskid) const;
+	// 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
+	bool SetTask(uint taskid, bool enable, int msNextTime = -1) const;
+	// 改变任务周期
+	bool SetTaskPeriod(uint taskid, int period) const;
+
+	bool Started;
+	void Start();	// 开始系统大循环
 
 
 
@@ -118,45 +166,12 @@ public:
 	uint	HeapSize;	// 堆大小
 	uint	StackSize;	// 栈大小
 	Version OsVer;//系统版本
-	Version AppVer;//软件版本
-
-	TSys();
-
-	void Init();     	// 初始化系统
-	void ShowInfo() const;
-	
-	uint	Seconds() const;	// 系统绝对当前时间，秒
-
-    void Sleep112233(int ms) const; // 毫秒级延迟，仅供系统调用
-	
-	// 延迟异步重启
-	void Reboot(int msDelay = 0) const;
+	Version AppVer;//软件版本	
+    void Sleep112233(int ms) const; // 毫秒级延迟，仅供系统调用	
 	// 打开全局中断
 	void GlobalEnable();
 	// 关闭全局中断
 	void GlobalDisable();
-		
-private:
-	void Reset() const;
-	void OnInit();
-	void OnShowInfo() const;
-
-public:
-	// 创建任务，返回任务编号。dueTime首次调度时间ms，period调度间隔ms，-1表示仅处理一次
-	uint AddTask(Action func, void* param, int dueTime = 0, int period = 0, cstring name = nullptr) const;
-	template<typename T>
-	uint AddTask(void(T::*func)(), T* target, int dueTime = 0, int period = 0, cstring name = nullptr)
-	{
-		return AddTask(*(Action*)&func, target, dueTime, period, name);
-	}
-	void RemoveTask(uint& taskid) const;
-	// 设置任务的开关状态，同时运行指定任务最近一次调度的时间，0表示马上调度
-	bool SetTask(uint taskid, bool enable, int msNextTime = -1) const;
-	// 改变任务周期
-	bool SetTaskPeriod(uint taskid, int period) const;
-
-	bool Started;
-	void Start();	// 开始系统大循环
 };
 class SmartIRQ
 {
