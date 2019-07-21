@@ -1026,6 +1026,11 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\CortexM\Sys.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Runtime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\CortexM\Runtime.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2049,6 +2054,11 @@
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\CortexM\Sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Runtime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\CortexM\Runtime.cpp</FilePath>
             </File>
           </Files>
         </Group>
