@@ -98,17 +98,131 @@ void TSys::OnInit()
 //	HeapSize = ((uint)&__heap_limit - (uint)&__heap_base);
 //	StackSize = ((uint)&__initial_sp - (uint)&__heap_limit);
 }
-
+#if DEBUG
+typedef struct
+{
+	byte Revision : 4;	// The p value in the Rnpn product revision identifier, indicates patch release.0x0: patch 0
+	ushort PartNo : 12;	// Part number of the processor. 0xC20: Cortex-M0
+	byte Constant : 4;	// Constant that defines the architecture of the processor. 0xC: ARMv6-M architecture
+	byte Variant : 4;		// Variant number: The r value in the Rnpn product revision identifier. 0x0: revision 0
+	byte Implementer;	// Implementer code. 0x41 ARM
+}ST_CPUID;
+#endif
 void TSys::OnShowInfo()const
 {	
 	debug_printf("StdOSVer:");this->OsVer.Show();
 	debug_printf("  AppVer:");this->AppVer.Show();
 	debug_printf("CystalClock:%dMHz SysClock:%dMHz Flash:%dk\n", this->CystalClock / 1000 / 1000, this->Clock / 1000 / 1000, this->FlashSize);
 	debug_printf("HeapSize:0X%08X(%dk) StackSize:0X%08X(%dk)\n", this->HeapSize, this->HeapSize / 1024, this->StackSize, this->StackSize / 1024);
+
+
+
+#if DEBUG
+	debug_printf("SmartOS::");
+	bool IsGD = Get_JTAG_ID() == 0x7A3;
+	if (IsGD)
+		debug_printf("GD32");
+	else
+		debug_printf("STM32");
+
+	auto cpu = (ST_CPUID*)&CPUID;
+	if (DevID > 0)
+	{
+		if (DevID == 0)
+		{
+
+		}
+#ifdef STM32F0
+		if (DevID == 0x410)
+		{
+			if (IsGD && RevID == 0x1303)
+			{
+				if (Clock == 48000000)
+					debug_printf("F130");
+				else
+					debug_printf("F150");
+			}
+			else
+				debug_printf("F103");
+		}
+#endif
+#ifdef STM32F1
+		else if (DevID == 0x410 || DevID == 0x412 || DevID == 0x414 || DevID == 0x430)
+			debug_printf("F103");
+		else if (DevID == 0x418)
+			debug_printf("F107");
+		else if (DevID == 0x412)
+			debug_printf("F130");
+#endif
+#ifdef STM32F4
+		else if (DevID == 0x413)
+			debug_printf("F407");
+		else if (DevID == 0x419)
+			debug_printf("F450");
+#endif
+		else if (DevID == 0x440 || DevID == 0x444) // F030x4/F030x6=0x444 F030x8=0x440
+			debug_printf("F030/F051");
+		else
+			debug_printf("F%03x", DevID);
+	}
+	else if (CPUID > 0)
+	{
+		if (Clock == 48000000)
+			debug_printf("F130/F150");
+#ifdef STM32F1
+		else
+			debug_printf("F103");
+#endif
+	}
+
+	// 暂时不知道怎么计算引脚，一般F4/F6/C8CB/RB/VC/VE
+	if (_Index < 2)
+		debug_printf("F");
+	else if (_Index < 4)
+		debug_printf("C");
+	else if (_Index < 6)
+		debug_printf("R");
+	else
+		debug_printf("V");
+	debug_printf("%c", MemNames[_Index]);
+	//debug_printf("\r\n");
+
+	// 系统信息
+	//debug_printf(" %dMHz Flash:%dk RAM:%dk\r\n", Clock/1000000, FlashSize, RAMSize);
+	// 获取当前频率
+//	debug_printf(" %dMHz Flash:%dk RAM:%dk\r\n", RCC_GetSysClock() / 1000000, FlashSize, RAMSize);
+	//debug_printf("\r\n");
+	debug_printf("DevID:0x%04X RevID:0x%04X \r\n", DevID, RevID);
+
+	debug_printf("CPUID:%p", CPUID);
+	if (cpu->Implementer == 0x41) debug_printf(" ARM:");
+	if (cpu->Constant == 0x0C)
+		debug_printf(" ARMv6-M");
+	else if (cpu->Constant == 0x0F)
+		debug_printf(" ARMv7-M");
+	if ((cpu->PartNo & 0x0FF0) == 0x0C20) debug_printf(" Cortex-M%d:", cpu->PartNo & 0x0F);
+	debug_printf(" R%dp%d", cpu->Revision, cpu->Variant);
+	debug_printf("\r\n");
+
+	// 输出堆信息
+	uint start = HeapBase();
+	// F4有64k的CCM内存
+#if defined(STM32F4)
+	if (start < 0x20000000) start = 0x20000000;
+#endif
+	uint end = SRAM_BASE + (RAMSize << 10);
+	uint size = end - start;
+	debug_printf("Heap :(%p, %p) = 0x%x (%dk)\r\n", start, end, size, size >> 10);
+#if defined(STM32F4)
+	if (start < 0x20000000) start = 0x20000000;
+#endif
+	//end = 0x20000000 + (RAMSize << 10);
+	size = end - start;
+	debug_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", start, end, size, size >> 10);
+
+	//if (IsGD) debug_printf("ChipType:%p %s\r\n", *(uint*)0x40022100, (cstring)0x40022100);
+#endif
 }
-
-
-
 
 void TSys::InitClock()
 {
@@ -263,125 +377,7 @@ INROOT void TSys::OnInit()
 }
 
 
-#if DEBUG
-typedef struct
-{
-	byte Revision : 4;	// The p value in the Rnpn product revision identifier, indicates patch release.0x0: patch 0
-	ushort PartNo : 12;	// Part number of the processor. 0xC20: Cortex-M0
-	byte Constant : 4;	// Constant that defines the architecture of the processor. 0xC: ARMv6-M architecture
-	byte Variant : 4;		// Variant number: The r value in the Rnpn product revision identifier. 0x0: revision 0
-	byte Implementer;	// Implementer code. 0x41 ARM
-}ST_CPUID;
-#endif
 
-void TSys::OnShowInfo() const
-{
-#if DEBUG
-	debug_printf("SmartOS::");
-	bool IsGD = Get_JTAG_ID() == 0x7A3;
-	if (IsGD)
-		debug_printf("GD32");
-	else
-		debug_printf("STM32");
-
-	auto cpu = (ST_CPUID*)&CPUID;
-	if (DevID > 0)
-	{
-		if (DevID == 0)
-		{
-
-		}
-#ifdef STM32F0
-		if (DevID == 0x410)
-		{
-			if (IsGD && RevID == 0x1303)
-			{
-				if (Clock == 48000000)
-					debug_printf("F130");
-				else
-					debug_printf("F150");
-			}
-			else
-				debug_printf("F103");
-		}
-#endif
-#ifdef STM32F1
-		else if (DevID == 0x410 || DevID == 0x412 || DevID == 0x414 || DevID == 0x430)
-			debug_printf("F103");
-		else if (DevID == 0x418)
-			debug_printf("F107");
-		else if (DevID == 0x412)
-			debug_printf("F130");
-#endif
-#ifdef STM32F4
-		else if (DevID == 0x413)
-			debug_printf("F407");
-		else if (DevID == 0x419)
-			debug_printf("F450");
-#endif
-		else if (DevID == 0x440 || DevID == 0x444) // F030x4/F030x6=0x444 F030x8=0x440
-			debug_printf("F030/F051");
-		else
-			debug_printf("F%03x", DevID);
-	}
-	else if (CPUID > 0)
-	{
-		if (Clock == 48000000)
-			debug_printf("F130/F150");
-#ifdef STM32F1
-		else
-			debug_printf("F103");
-#endif
-	}
-
-	// 暂时不知道怎么计算引脚，一般F4/F6/C8CB/RB/VC/VE
-	if (_Index < 2)
-		debug_printf("F");
-	else if (_Index < 4)
-		debug_printf("C");
-	else if (_Index < 6)
-		debug_printf("R");
-	else
-		debug_printf("V");
-	debug_printf("%c", MemNames[_Index]);
-	//debug_printf("\r\n");
-
-	// 系统信息
-	//debug_printf(" %dMHz Flash:%dk RAM:%dk\r\n", Clock/1000000, FlashSize, RAMSize);
-	// 获取当前频率
-	debug_printf(" %dMHz Flash:%dk RAM:%dk\r\n", RCC_GetSysClock() / 1000000, FlashSize, RAMSize);
-	//debug_printf("\r\n");
-	debug_printf("DevID:0x%04X RevID:0x%04X \r\n", DevID, RevID);
-
-	debug_printf("CPUID:%p", CPUID);
-	if (cpu->Implementer == 0x41) debug_printf(" ARM:");
-	if (cpu->Constant == 0x0C)
-		debug_printf(" ARMv6-M");
-	else if (cpu->Constant == 0x0F)
-		debug_printf(" ARMv7-M");
-	if ((cpu->PartNo & 0x0FF0) == 0x0C20) debug_printf(" Cortex-M%d:", cpu->PartNo & 0x0F);
-	debug_printf(" R%dp%d", cpu->Revision, cpu->Variant);
-	debug_printf("\r\n");
-
-	// 输出堆信息
-	uint start = HeapBase();
-	// F4有64k的CCM内存
-#if defined(STM32F4)
-	if (start < 0x20000000) start = 0x20000000;
-#endif
-	uint end = SRAM_BASE + (RAMSize << 10);
-	uint size = end - start;
-	debug_printf("Heap :(%p, %p) = 0x%x (%dk)\r\n", start, end, size, size >> 10);
-#if defined(STM32F4)
-	if (start < 0x20000000) start = 0x20000000;
-#endif
-	//end = 0x20000000 + (RAMSize << 10);
-	size = end - start;
-	debug_printf("Stack:(%p, %p) = 0x%x (%dk)\r\n", start, end, size, size >> 10);
-
-	//if (IsGD) debug_printf("ChipType:%p %s\r\n", *(uint*)0x40022100, (cstring)0x40022100);
-#endif
-}
 
 #include "Device\SerialPort.h"
 
