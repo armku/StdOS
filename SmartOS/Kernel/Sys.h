@@ -69,14 +69,54 @@ class SystemConfig;
 class TSys
 {
 public:
+    byte	MessagePort;// 消息口，默认0表示USART1
+
     uint	Clock;  	// 系统时钟
     uint	CystalClock;// 晶振时钟
+
+	cstring	Name;		// 系统名称
+	cstring	Company;	// 系统厂商
+	cstring	Product;	// 产品批次
+	ushort	Code;		// 产品代码
+	uint	Ver;		// 系统版本
+	uint	HardVer;	// 硬件版本
+	//uint	AppVer;		// 产品版本
+
+	byte	ID[12];		// 芯片ID
+    ushort	DevID;		// MCU编码。低字设备版本，高字子版本
+    ushort	RevID;		// MCU编码。低字设备版本，高字子版本
+    uint	CPUID;		// CPUID
+    ushort	FlashSize;	// 芯片Flash容量。
+    ushort	RAMSize;	// 芯片RAM容量
+
+	uint	StartTimes;	// 启动次数
+	uint	HotStart;	// 热启动次数
+
+	const SystemConfig*	Config;	// 系统设置
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	uint	HeapSize;	// 堆大小
 	uint	StackSize;	// 栈大小
-
-	byte	ID[12];		// 芯片ID。
-    ushort	FlashSize;	// 芯片Flash容量。
-    //ushort	RAMSize;	// 芯片RAM容量
 	Version OsVer;//系统版本
 	Version AppVer;//软件版本
 
