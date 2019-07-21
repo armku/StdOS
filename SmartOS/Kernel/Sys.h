@@ -2,7 +2,68 @@
 #define _Sys_H_
 
 #include <stdint.h>
+#include <stdio.h>
+#include <stddef.h>
+
 #include "Core\Type.h"
+#include "Core\Buffer.h"
+#include "Core\Array.h"
+#include "Core\ByteArray.h"
+#include "Core\SString.h"
+#include "Core\Stream.h"
+#include "Core\DateTime.h"
+#include "Core\Version.h"
+#include "Core\List.h"
+#include "Core\Dictionary.h"
+#include "Core\Delegate.h"
+
+/* 引脚定义 */
+#include "Platform\Pin.h"
+
+// 强迫内联
+#define _force_inline __attribute__( ( always_inline ) ) __INLINE
+
+extern "C"
+{
+#if defined(DEBUG)
+	#define debug_printf SmartOS_printf
+	extern int SmartOS_printf(const char *format, ...);
+#else
+	#define debug_printf(format, ...)
+#endif
+}
+
+#ifdef DEBUG
+
+void assert_failed2(cstring msg, cstring file, unsigned int line);
+#define assert(expr, msg) ((expr) ? (void)0 : assert_failed2(msg, (const char*)__FILE__, __LINE__))
+
+#else
+
+#define assert(expr, msg) ((void)0)
+
+#endif
+
+// 关键性代码放到开头
+#if !defined(TINY) && defined(USEROOT)
+	#define INROOT __attribute__((section(".InRoot")))
+#else
+	#define INROOT
+#endif
+
+#if defined(BOOT) || defined(APP)
+struct HandlerRemap
+{
+	Func pUserHandler;
+	void* Reserved1;
+	void* Reserved2;
+	void* Reserved3;
+};
+extern struct HandlerRemap StrBoot;
+#endif
+
+class SystemConfig;
+
 #include "Core\List.h"
 #include "Core\Delegate.h"
 #include "Version.h"
