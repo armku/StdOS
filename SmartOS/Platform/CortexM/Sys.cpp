@@ -106,16 +106,18 @@ void TSys::OnShowInfo()const
 	debug_printf("CystalClock:%dMHz SysClock:%dMHz Flash:%dk\n", this->CystalClock / 1000 / 1000, this->Clock / 1000 / 1000, this->FlashSize);
 	debug_printf("HeapSize:0X%08X(%dk) StackSize:0X%08X(%dk)\n", this->HeapSize, this->HeapSize / 1024, this->StackSize, this->StackSize / 1024);
 }
-// 重启系统
-void TSys::Reset()const
+
+
+
+
+void TSys::Reset() const { NVIC_SystemReset(); }
+
+void TSys::OnStart()
 {
-	NVIC_SystemReset();
+#if !DEBUG
+	//WatchDog::Start();
+#endif
 }
-
-
-
-
-
 /******************************** 临界区 ********************************/
 
 INROOT void EnterCritical() { __disable_irq(); }
@@ -381,14 +383,6 @@ void TSys::OnShowInfo() const
 #endif
 }
 
-void TSys::Reset() const { NVIC_SystemReset(); }
-
-void TSys::OnStart()
-{
-#if !DEBUG
-	//WatchDog::Start();
-#endif
-}
 #include "Device\SerialPort.h"
 
 #endif
