@@ -175,38 +175,3 @@ bool Port::Read()const
 	return (group->IDR >> (this->_Pin & 0xF)) & 1;
 #endif
 }
-#if 0
-void Port::Write(Pin pin, bool value)
-{
-	if (pin == P0)
-		return;
-#if defined STM32F0
-	if (value)
-	{
-		GPIO_SetBits(_GROUP(pin), _PORT(pin));
-	}
-	else
-	{
-		GPIO_ResetBits(_GROUP(pin), _PORT(pin));
-	}
-#elif defined STM32F1
-	if (value)
-	{
-		GPIO_SetBits(_GROUP(pin), _PORT(pin));
-	}
-	else
-	{
-		GPIO_ResetBits(_GROUP(pin), _PORT(pin));
-	}
-#elif defined STM32F4
-	if (value)
-	{
-		GPIO_SetBits(_GROUP(pin), _PORT(pin));
-	}
-	else
-	{
-		GPIO_ResetBits(_GROUP(pin), _PORT(pin));
-	}
-#endif
-}
-#endif
