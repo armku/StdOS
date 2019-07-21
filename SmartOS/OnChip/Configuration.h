@@ -201,7 +201,6 @@ public:
 	static Func PTim8Update;
 	//ÏµÍ³
 	static int CurrentTick();
-	static uint CurrentTicks1();
 
 private:
 	//ÖÐ¶Ï

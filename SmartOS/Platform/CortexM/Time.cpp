@@ -100,7 +100,11 @@ uint TTime::UsToTicks(uint us)const
 	return result;
 }
 
-
+// 当前滴答时钟
+INROOT uint TTime::CurrentTicks() const
+{
+	return SysTick->LOAD - SysTick->VAL;
+}
 
 
 
@@ -211,11 +215,7 @@ INROOT void TTime::OnHandler(ushort num, void* param)
 	//if(Sys.OnTick) Sys.OnTick();
 }
 
-// 当前滴答时钟
-INROOT uint TTime::CurrentTicks() const
-{
-	return SysTick->LOAD - SysTick->VAL;
-}
+
 
 // 当前毫秒数
 INROOT UInt64 TTime::Current() const

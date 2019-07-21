@@ -68,13 +68,6 @@ void TimeUpdate()
 #include "BspPlatform\BspPlatform.h"
 
 
-
-// 当前滴答时钟
-uint TTime::CurrentTicks()const
-{
-	return DeviceConfigCenter::CurrentTicks1();
-}
-
 //延时毫秒
 void delay(UInt64 ms)
 {
