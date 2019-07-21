@@ -13,7 +13,7 @@ static bool Port_Reserve(Pin pin, bool flag);
 
 // 端口基本功能
 #define REGION_Port 1
-
+#ifdef REGION_Port
 
 Port::Port()
 {
@@ -96,7 +96,14 @@ void Port::Close()
 	Opened = false;
 }
 
+WEAK void Port::Opening() { OnOpen(nullptr); }
+WEAK void Port::OnOpen(void* param) {}
 
+WEAK void Port::OnClose() {}
+
+WEAK void Port::RemapConfig(uint param, bool sta) {}
+WEAK void Port::AFConfig(GPIO_AF GPIO_AF) const {}
+#endif
 
 
 

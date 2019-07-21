@@ -75,8 +75,8 @@ public:
 
 protected:
     // ≈‰÷√π˝≥Ã
-    //virtual void OnOpen(void* param);
-	//virtual void OnClose();
+    virtual void OnOpen(void* param);
+	virtual void OnClose();
 
 private:
 	void Opening();
