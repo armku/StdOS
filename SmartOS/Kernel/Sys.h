@@ -7,6 +7,28 @@
 #include "Version.h"
 #include "TTime.h"
 
+
+#include <stdint.h>
+#include <stdio.h>
+#include <stddef.h>
+
+#include "Core\Type.h"
+#include "Core\Buffer.h"
+#include "Core\Array.h"
+#include "Core\ByteArray.h"
+#include "Core\SString.h"
+#include "Core\Stream.h"
+#include "Core\DateTime.h"
+#include "Core\Version.h"
+#include "Core\List.h"
+#include "Core\Dictionary.h"
+#include "Core\Delegate.h"
+
+/* Òý½Å¶¨Òå */
+#include "Platform\Pin.h"
+
+
+
 extern "C"
 {
 #ifdef DEBUG

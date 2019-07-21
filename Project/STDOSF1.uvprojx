@@ -930,6 +930,26 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Security\Parity.cpp</FilePath>
             </File>
+            <File>
+              <FileName>AES.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\AES.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MD5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\MD5.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RC4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\RC4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RC6.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\RC6.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1908,6 +1928,26 @@
               <FileName>Parity.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Security\Parity.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AES.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\AES.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MD5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\MD5.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RC4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\RC4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RC6.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\RC6.cpp</FilePath>
             </File>
           </Files>
         </Group>

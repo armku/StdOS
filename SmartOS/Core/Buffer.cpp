@@ -7,7 +7,7 @@
 #include "_Core.h"
 
 #include "Buffer.h"
-//#include "SString.h"
+#include "SString.h"
 
 
 /******************************** Buffer ********************************/
@@ -250,37 +250,37 @@ const Buffer Buffer::Sub(int index, int len) const
 }
 
 // 显示十六进制数据，指定分隔字符
-//String& Buffer::ToHex(String& str, char sep, int newLine) const
-//{
-//	auto buf = GetBuffer();
+String& Buffer::ToHex(String& str, char sep, int newLine) const
+{
+	auto buf = GetBuffer();
 
-//	// 拼接在字符串后面
-//	for (int i = 0; i < Length(); i++, buf++)
-//	{
-//		if (i)
-//		{
-//			if (newLine > 0 && i % newLine == 0)
-//				str += "\r\n";
-//			else if (sep != '\0')
-//				str += sep;
-//		}
+	// 拼接在字符串后面
+	for (int i = 0; i < Length(); i++, buf++)
+	{
+		if (i)
+		{
+			if (newLine > 0 && i % newLine == 0)
+				str += "\r\n";
+			else if (sep != '\0')
+				str += sep;
+		}
 
-//		str.Concat(*buf, -16);
-//	}
+		str.Concat(*buf, -16);
+	}
 
-//	return str;
-//}
+	return str;
+}
 
 // 显示十六进制数据，指定分隔字符
-//String Buffer::ToHex(char sep, int newLine) const
-//{
-//	String str;
+String Buffer::ToHex(char sep, int newLine) const
+{
+	String str;
 
-//	// 优化为使用RVO
-//	ToHex(str, sep, newLine);
+	// 优化为使用RVO
+	ToHex(str, sep, newLine);
 
-//	return str;
-//}
+	return str;
+}
 
 ushort	Buffer::ToUInt16(int offset, bool isLittleEndian) const
 {
