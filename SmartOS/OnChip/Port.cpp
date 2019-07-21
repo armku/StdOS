@@ -77,7 +77,24 @@ void Port::Clear()
 
 
 
+void Port::Close()
+{
+	if (!Opened) return;
+	if (_Pin == P0) return;
 
+//	OnClose();
+
+#if DEBUG
+	// ±£»¤Òý½Å
+	auto name = typeid(*this).name();
+	while (*name >= '0' && *name <= '9') name++;
+	debug_printf("%s", name);
+//	Port_Reserve(_Pin, false);
+	debug_printf("\r\n");
+#endif
+
+	Opened = false;
+}
 
 
 
@@ -172,16 +189,7 @@ void Port::pinMode(GPIOMode_T mode)
 	this->Opened = true;
 }
 
-void Port::Close()
-{
-	if (this->Opened)
-	{
-		if (this->_Pin != P0)
-		{
-			this->Opened = false;
-		}
-	}
-}
+
 
 bool Port::ReadInput()const
 {
