@@ -379,15 +379,5 @@ int SmartOS_Log(const String& msg)
 	return 0;
 }
 #if 0
-
-INROOT void TSys::OnInit()
-{
-
-}
-
-
-
-
 #include "Device\SerialPort.h"
-
 #endif
