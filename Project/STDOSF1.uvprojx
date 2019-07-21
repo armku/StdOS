@@ -1021,6 +1021,11 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\CortexM\Interrupt.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\CortexM\Sys.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2039,6 +2044,11 @@
               <FileName>Interrupt.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\CortexM\Interrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\CortexM\Sys.cpp</FilePath>
             </File>
           </Files>
         </Group>

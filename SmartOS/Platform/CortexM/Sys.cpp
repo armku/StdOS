@@ -1,4 +1,14 @@
-﻿#include "Kernel\Sys.h"
+
+
+
+
+
+
+
+
+
+#if 0
+#include "Kernel\Sys.h"
 #include <stdarg.h>
 //#include "WatchDog.h"
 
@@ -346,3 +356,4 @@ int SmartOS_Log(const String& msg)
 
 	return sp->Write(msg);
 }
+#endif
