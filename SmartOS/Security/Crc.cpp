@@ -4,7 +4,7 @@
 *  CRC8 码表
 ******************************************************************/
 //生成多项式：X8+X5+X4+1=0x31 ，CRC8TAB[1]=生成多项式
-const uint8_t CRC8TAB[256] = {
+const byte CRC8TAB[256] = {
 	//0
 	0x00, 0x31, 0x62, 0x53, 0xC4, 0xF5, 0xA6, 0x97,
 	0xB9, 0x88, 0xDB, 0xEA, 0x7D, 0x4C, 0x1F, 0x2E,
@@ -60,9 +60,9 @@ const uint8_t CRC8TAB[256] = {
  *输   出:校验值
  *功   能:循环冗余校验-8
  *******************************************************/
-uint8_t Crc::CRC8(uint8_t *buf, uint32_t len)
+byte Crc::CRC8(byte *buf, uint32_t len)
 {
-	uint8_t crc = 0;
+	byte crc = 0;
 
 	while (len--)
 	{
@@ -82,7 +82,7 @@ unLength 校验数据的长
  *功   能:循环冗余校验-16
 （美国标准-0x8005）
  *******************************************************/
-uint16_t Crc::CRC16Default(uint8_t *pszBuf, uint32_t unLength)
+uint16_t Crc::CRC16Default(byte *pszBuf, uint32_t unLength)
 {
 	uint32_t i, j;
 	uint16_t CrcReg = 0xFFFF;
@@ -113,7 +113,7 @@ unLength 校验数据的长
  *功   能:循环冗余校验-16
 （CCITT标准-0x1021）
  *******************************************************/
-uint16_t Crc::CRC16CCITT(uint8_t *pszBuf, uint32_t unLength)
+uint16_t Crc::CRC16CCITT(byte *pszBuf, uint32_t unLength)
 {
 
 	uint32_t i, j;
@@ -145,7 +145,7 @@ unLength 校验数据的长
  *功   能:循环冗余校验-16
 （RTU标准-0xA001）
  *******************************************************/
-uint16_t Crc::CRC16RTU(uint8_t *pszBuf, uint32_t unLength)
+uint16_t Crc::CRC16RTU(byte *pszBuf, uint32_t unLength)
 {
 	uint16_t CRC = 0XFFFF;
 	uint32_t CRC_count;
@@ -182,7 +182,7 @@ unLength 校验数据的长
  *功   能:循环冗余校验-32
 （美国标准-0x04C11DB7）
  *******************************************************/
-uint64_t Crc::CRC32Default(uint8_t *pszBuf, uint64_t ulLength)
+uint64_t Crc::CRC32Default(byte *pszBuf, uint64_t ulLength)
 {
 	uint64_t Result = 0xFFFFFFFF;
 	uint64_t m_Table[256];
