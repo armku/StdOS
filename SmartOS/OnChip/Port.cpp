@@ -1,3 +1,40 @@
+#include "Kernel\Sys.h"
+#include "Port.h"
+
+#include <typeinfo>
+using namespace ::std;
+
+/******************************** Port ********************************/
+
+#if DEBUG
+// 保护引脚，别的功能要使用时将会报错。返回是否保护成功
+static bool Port_Reserve(Pin pin, bool flag);
+#endif
+
+// 端口基本功能
+#define REGION_Port 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include "Port.h"
 #include "stm32f10x.h"
 
