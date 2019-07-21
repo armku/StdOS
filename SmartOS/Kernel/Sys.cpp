@@ -12,6 +12,29 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 
 TSys Sys; //系统参数
 
+// 系统配置
+const SystemConfig g_Config = {
+//SystemConfig g_Config = {
+	// 操作系统 v3.2.x
+	(0x03020000 | __BUILD_DATE__),
+	"SmartOS_CPU",
+
+	// 硬件
+	(0x0 | __BUILD_DATE__),
+
+	// 应用软件
+	(0x0 | __BUILD_DATE__),
+	(0x0 | __BUILD_DATE__),
+	__BUILD_USER__,
+	__BUILD_SDATE__,
+};
+
+#if defined(BOOT) || defined(APP)
+
+struct HandlerRemap StrBoot __attribute__((at(0x2000fff0)));
+
+#endif
+
 // 构造函数
 TSys::TSys()
 {
@@ -251,6 +274,7 @@ void assert_failed(byte *file, uint line, char *errstr)
 {
 	debug_printf("%s(%d):    %s\n", file, line, errstr);
 }
+
 #if 0
 /*定义STM32 MCU的类型*/
 typedef enum {
