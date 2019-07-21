@@ -57,3 +57,23 @@ void TInterrupt::Halt()
 #endif
 	while (true);
 }
+
+// 智能IRQ，初始化时备份，销毁时还原
+INROOT SmartIRQ::SmartIRQ(bool enable)
+{
+	_state = TInterrupt::GlobalState();
+	if (enable)
+		TInterrupt::GlobalEnable();
+	else
+		TInterrupt::GlobalDisable();
+}
+
+INROOT SmartIRQ::~SmartIRQ()
+{
+	//__set_PRIMASK(_state);
+	if (_state)
+		TInterrupt::GlobalDisable();
+	else
+		TInterrupt::GlobalEnable();
+}
+
