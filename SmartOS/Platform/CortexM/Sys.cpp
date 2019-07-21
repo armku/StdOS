@@ -1,13 +1,3 @@
-
-
-
-
-
-
-
-
-
-#if 0
 #include "Kernel\Sys.h"
 #include <stdarg.h>
 //#include "WatchDog.h"
@@ -31,6 +21,16 @@ extern uint __initial_sp;
 #ifndef TINY
 static int _Index;	// MCU在型号表中的索引
 #endif
+
+
+
+
+
+
+
+
+
+#if 0
 
 #ifndef TINY
 
