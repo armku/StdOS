@@ -28,7 +28,7 @@ extern "C" {
 uint8_t   loop_bufcom1[64] = { 0 };                             //定义环形缓冲区
 RingBuffer ringRcvcom1(loop_bufcom1,ArrayLength(loop_bufcom1));
 //向环形缓冲区【写】一字节数据
-static void write_loop_buf(uint8_t dat)
+static void write_loop_buf(byte dat)
 {
 	ringRcvcom1.Put(dat);
 }
@@ -57,7 +57,7 @@ void Com1ReadTest(void* param)
 			tmcnt = 0;
 			//50ms没有新数据认为完整一帧数据到来
 			readlen = ringRcvcom1.Get(buf, ArrayLength(buf));
-			UART1_send_data((uint8_t*)buf, readlen);
+			UART1_send_data((byte*)buf, readlen);
 		}		
 	}
 }
