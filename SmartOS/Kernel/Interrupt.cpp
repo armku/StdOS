@@ -77,3 +77,59 @@ INROOT SmartIRQ::~SmartIRQ()
 		TInterrupt::GlobalEnable();
 }
 
+/******************************** Lock ********************************/
+
+#include "TTime.h"
+
+// 智能锁。初始化时锁定一个整数，销毁时解锁
+Lock::Lock(int& ref)
+{
+	Success = false;
+	if (ref > 0) return;
+
+	// 加全局锁以后再修改引用
+	SmartIRQ irq;
+	// 再次判断，DoubleLock双锁结构，避免小概率冲突
+	if (ref > 0) return;
+
+	_ref = &ref;
+	ref++;
+	Success = true;
+}
+
+Lock::~Lock()
+{
+	if (Success)
+	{
+		SmartIRQ irq;
+		(*_ref)--;
+	}
+}
+
+bool Lock::Wait(int ms)
+{
+	// 可能已经进入成功
+	if (Success) return true;
+
+	int& ref = *_ref;
+	// 等待超时时间
+	//TimeWheel tw(ms);
+	//tw.Sleep = 1;
+	while (ref > 0)
+	{
+		// 延迟一下，释放CPU使用权
+		//Sys.Sleep(1);
+		//if (tw.Expired()) return false;
+	}
+
+	// 加全局锁以后再修改引用
+	SmartIRQ irq;
+	// 再次判断，DoubleLock双锁结构，避免小概率冲突
+	if (ref > 0) return false;
+
+	ref++;
+	Success = true;
+
+	return true;
+}
+
