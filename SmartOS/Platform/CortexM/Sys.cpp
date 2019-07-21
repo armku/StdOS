@@ -115,7 +115,20 @@ void TSys::Reset()const
 
 
 
+#include "Kernel\Task.h"
 
+// 打印日志
+int SmartOS_Log(const String& msg)
+{
+	if (Sys.Clock == 0 || Sys.MessagePort == COM_NONE) return 0;
+
+	// 检查并打开串口
+//	auto sp = SerialPort::GetMessagePort();
+//	if (!sp || !sp->Opened) return 0;
+
+//	return sp->Write(msg);
+	return 0;
+}
 #if 0
 
 INROOT void TSys::OnInit()
@@ -377,17 +390,5 @@ INROOT ushort	_REV16(ushort value) { return __REV16(value); }
 /******************************** 调试日志 ********************************/
 
 #include "Device\SerialPort.h"
-#include "Kernel\Task.h"
 
-// 打印日志
-int SmartOS_Log(const String& msg)
-{
-	if (Sys.Clock == 0 || Sys.MessagePort == COM_NONE) return 0;
-
-	// 检查并打开串口
-	auto sp = SerialPort::GetMessagePort();
-	if (!sp || !sp->Opened) return 0;
-
-	return sp->Write(msg);
-}
 #endif
