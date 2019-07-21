@@ -1,7 +1,7 @@
 #ifndef MQTT_H
 #define MQTT_H
 
-#include <stdint.h>
+//#include <stdint.h>
 #include "../HAL/STM32F1/ARCH_UART.h"
 
 #define MAX_FRAME_DATA_LENGTH 200
@@ -24,7 +24,7 @@ public:
 	int Port;//远程端口号
 	char * ClientID;//客户端id，不能大于23字节
 	char* Topic;//主题
-	int8_t FixHead;//报文头	
+	byte FixHead;//报文头	
 	int step;//运行步骤
 	ushort MessageID;//信号ID
 	bool Send();
