@@ -3,7 +3,7 @@
 #include "Device\Port.h"
 
 #include "Platform\stm32.h"
-
+#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
 static GPIO_TypeDef* IndexToGroup(byte index) { return ((GPIO_TypeDef *) (GPIOA_BASE + (index << 10))); }
 
 ///******************************** Port ********************************/
@@ -67,7 +67,22 @@ void Port::OnClose()
 	// 不能随便关闭时钟，否则可能会影响别的引脚
 	OpenClock(_Pin, false);
 }
-
+bool Port::Read()const
+{
+	if (this->Empty())
+		return false;
+#if defined STM32F0
+	GPIO_TypeDef *group = _GROUP(this->_Pin);
+	return (group->IDR >> (this->_Pin & 0xF)) & 1;
+#elif defined STM32F1
+	GPIO_TypeDef *group = _GROUP(this->_Pin);
+	bool ret= (group->IDR >> (this->_Pin & 0xF)) & 1;
+	return this->Invert ? (!ret) : ret;
+#elif defined STM32F4
+	GPIO_TypeDef *group = _GROUP(this->_Pin);
+	return (group->IDR >> (this->_Pin & 0xF)) & 1;
+#endif
+}
 //bool Port::Read() const
 //{
 //	if(_Pin == P0) return false;
