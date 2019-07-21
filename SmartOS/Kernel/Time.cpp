@@ -63,30 +63,7 @@ void TimeUpdate()
 	Time.Milliseconds += 1000;
 	Time.Seconds++;
 }
-int gTicks = 0; //每个us需要的systick时钟数 	
 
-uint TTime::TicksToUs(uint ticks)const
-{
-	uint result;
-
-	if (ticks)
-		result = ticks / gTicks;
-	else
-		result = 0;
-	return result;
-
-}
-
-uint TTime::UsToTicks(uint us)const
-{
-	uint result;
-
-	if (us)
-		result = us * gTicks;
-	else
-		result = 0;
-	return result;
-}
 #include "Platform\stm32.h"
 #include "BspPlatform\BspPlatform.h"
 

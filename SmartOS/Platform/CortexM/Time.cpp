@@ -77,6 +77,28 @@ void TTime::Init()
 #endif
 }
 
+uint TTime::TicksToUs(uint ticks)const
+{
+	uint result;
+
+	if (ticks)
+		result = ticks / gTicks;
+	else
+		result = 0;
+	return result;
+
+}
+
+uint TTime::UsToTicks(uint us)const
+{
+	uint result;
+
+	if (us)
+		result = us * gTicks;
+	else
+		result = 0;
+	return result;
+}
 
 
 
