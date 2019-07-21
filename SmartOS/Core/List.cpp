@@ -1,69 +1,197 @@
+#include "Type.h"
+#include "Buffer.h"
 #include "List.h"
-#include "Sys.h"
 
 IList::IList()
 {
-	this->Init();
+	Init();
 }
 
-// 添加单个元素
-void IList::Add(void *item)
+IList::IList(const IList& list)
 {
-	if (this->_Count < this->_Capacity)
+	Init();
+
+	operator=(list);
+}
+
+IList::IList(IList&& list)
+{
+	Init();
+
+	move(list);
+}
+
+IList::~IList()
+{
+	if(_Arr && _Arr != Arr) delete[] _Arr;
+}
+
+void IList::Init()
+{
+	_Arr	= Arr;
+	_Count	= 0;
+	_Capacity	= ArrayLength(Arr);
+
+	Comparer	= nullptr;
+}
+
+IList& IList::operator=(const IList& list)
+{
+	if(this != &list)
 	{
-		this->_tmpbuf[this->_Count++] = (uint32_t)item;
+		_Count	= list._Count;
+		Comparer	= list.Comparer;
+
+		if(list._Arr != list.Arr) CheckCapacity(list._Count);
+
+		Buffer(_Arr, _Count << 2)	= list._Arr;
+	}
+
+	return *this;
+}
+
+IList& IList::operator=(IList&& list)
+{
+	if(this != &list) move(list);
+
+	return *this;
+}
+
+void IList::move(IList& list)
+{
+	_Count	= list._Count;
+	_Capacity	= list._Capacity;
+	Comparer	= list.Comparer;
+
+	// 如果list的缓冲区是自己的，则拷贝过来
+	// 如果不是自己的，则直接拿过来用
+	if(list._Arr == list.Arr)
+	{
+		_Arr	= Arr;
+		Buffer(_Arr, _Count << 2)	= list._Arr;
 	}
 	else
 	{
-		debug_printf("列表容量不够 %d，请增加\n",this->_Capacity);
+		// 如果已有数据区，则释放
+		if(_Arr && _Arr != Arr) delete[] _Arr;
+
+		_Arr	= list._Arr;
+		list.Init();
 	}
+}
+
+//int IList::Count() const { return _Count; }
+
+// 添加单个元素
+void IList::Add(void* item)
+{
+	CheckCapacity(_Count + 1);
+
+	_Arr[_Count++]	= item;
+}
+
+// 添加多个元素
+void IList::Add(void** items, int count)
+{
+	if(!items || !count) return;
+
+	CheckCapacity(_Count + count);
+
+	while(count--) _Arr[_Count++]	= items++;
 }
 
 // 删除指定位置元素
 void IList::RemoveAt(int index)
 {
-	return;
+	int len = _Count;
+	if(len <= 0 || index >= len) return;
+
+	// 复制元素，最后一个不用复制
+	int remain	= len - 1 - index;
+	if(remain)
+	{
+		len	= remain * sizeof(void*);
+		Buffer(&_Arr[index], len).Copy(0, &_Arr[index + 1], len);
+	}
+	_Count--;
 }
 
 // 删除指定元素
-int IList::Remove(const void *item)
+int IList::Remove(const void* item)
 {
-	int idx=this->FindIndex(item);
-	if(idx>=0)
-	this->RemoveAt(idx);
-    return idx;
+	int idx = FindIndex(item);
+	if(idx >= 0) RemoveAt(idx);
+
+	return idx;
 }
 
-// 查找指定项。不存在时返回-1
-int IList::FindIndex(const void *item)const
+int IList::FindIndex(const void* item) const
 {
-    for (int i = 0; this->_Count > i; ++i)
-    {
-        if ((const void*)(this->_tmpbuf[i]) == item)
-            return i;
-        if (this->Comparer((void*)this->_tmpbuf[i], item))
-        {
-            return i;
-        }
-    }
-    return  - 1;
+	for(int i=0; i<_Count; i++)
+	{
+		if(_Arr[i] == item) return i;
+		if(Comparer && Comparer(_Arr[i], item) == 0) return i;
+	}
+
+	return -1;
+}
+
+// 释放所有指针指向的内存
+IList& IList::DeleteAll()
+{
+	for(int i=0; i < _Count; i++)
+	{
+		if(_Arr[i]) delete (int*)_Arr[i];
+	}
+
+	return *this;
+}
+
+void IList::Clear()
+{
+	_Count = 0;
 }
 
 // 重载索引运算符[]，返回指定元素的第一个
-void *IList::operator[](int i)const
+void* IList::operator[](int i) const
 {
-	if(i>=0&&this->_Count>i)
-	{
-		return (void *)(this->_tmpbuf[i]);
-	}
-	else
-	{
-		return nullptr;
-	}
+	if(i<0 || i>=_Count) return nullptr;
+
+	return _Arr[i];
 }
 
-void IList::Init()
+void*& IList::operator[](int i)
 {
-	this->_Count=0;
-	this->_Capacity = ArrayLength(this->_tmpbuf);
+	if(i<0 || i>=_Count)
+	{
+		static void* dummy;
+		return dummy;
+	}
+
+	return _Arr[i];
+}
+
+bool IList::CheckCapacity(int count)
+{
+	// 是否超出容量
+	if(_Arr && count <= _Capacity) return true;
+
+	// 自动计算合适的容量
+	int sz = 0x40 >> 2;
+	while(sz < count) sz <<= 1;
+
+	void* p = new byte[sz << 2];
+	if(!p) return false;
+
+	// 需要备份数据
+	if(_Count > 0 && _Arr)
+		// 为了安全，按照字节拷贝
+		Buffer(p, sz << 2).Copy(0, _Arr, _Count << 2);
+
+	if(_Arr && _Arr != Arr) delete[] _Arr;
+
+	_Arr		= (void**)p;
+	_Capacity	= sz;
+
+	return true;
 }
