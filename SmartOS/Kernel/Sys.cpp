@@ -1,11 +1,10 @@
-/*
-Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
-毫秒级睡眠期间，系统将会安排执行其他耗时较短的任务。
- */
+#include "Kernel\Sys.h"
+
+#include "Interrupt.h"
 #include "TTime.h"
+
 #include "Task.h"
 #include <string.h>
-#include "Sys.h"
 #include "Platform\stm32.h"
 #include "OnChip\Configuration.h"
 #include "Core\Buffer.h"
