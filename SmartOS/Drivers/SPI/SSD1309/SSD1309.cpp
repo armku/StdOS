@@ -44,7 +44,7 @@ void SSD1309::SetPinSpi(Pin sclk,Pin sdin,Pin dc,Pin res,Pin cs)
     //向SSD1106写入一个字节。
     //dat:要写入的数据/命令
     //cmd:数据/命令标志 0,表示命令;1,表示数据;
-    void SSD1309::this->WRByte(uint8_t dat, uint8_t cmd)
+    void SSD1309::this->WRByte(byte dat, byte cmd)
     {
         DATAOUT(dat);
         if (cmd)
@@ -61,9 +61,9 @@ void SSD1309::SetPinSpi(Pin sclk,Pin sdin,Pin dc,Pin res,Pin cs)
     //向SSD1106写入一个字节。
     //dat:要写入的数据/命令
     //cmd:数据/命令标志 0,表示命令;1,表示数据;
-    void SSD1309::WRByte(uint8_t dat, uint8_t cmd)
+    void SSD1309::WRByte(byte dat, byte cmd)
     {
-        uint8_t i;
+        byte i;
         if (cmd)
             this->_dc = 1;
         else
@@ -84,16 +84,16 @@ void SSD1309::SetPinSpi(Pin sclk,Pin sdin,Pin dc,Pin res,Pin cs)
     }	
 #endif
 //写命令
-void SSD1309::_wrcmd(uint8_t cmd)
+void SSD1309::_wrcmd(byte cmd)
 {
 	this->WRByte(cmd,0);
 }
 //写数据
-void SSD1309::_wrdata(uint8_t da)
+void SSD1309::_wrdata(byte da)
 {
 	this->WRByte(da,1);
 }	
-void SSD1309::SetPos(uint8_t x, uint8_t y)
+void SSD1309::SetPos(byte x, byte y)
 {
     this->_wrcmd(0xb0 + y);
     this->_wrcmd(((x &0xf0) >> 4) | 0x10);
@@ -119,7 +119,7 @@ void SSD1309::DisplayOff()
 //清屏函数,清完屏,整个屏幕是黑色的!和没点亮一样!!!	  
 void SSD1309::Clear(char ch)
 {
-    uint8_t i, n;
+    byte i, n;
     for (i = 0; i < 8; i++)
     {
         this->_wrcmd(0xb0 + i); //设置页地址（0~7）
@@ -136,7 +136,7 @@ void SSD1309::Clear(char ch)
 //y:0~63
 //mode:0,反白显示;1,正常显示				 
 //size:选择字体 16/12 
-void SSD1309::ShowChar(uint8_t x, uint8_t y, uint8_t chr)
+void SSD1309::ShowChar(byte x, byte y, byte chr)
 {
     unsigned char c = 0, i = 0;
     c = chr - ' '; //得到偏移后的值			
@@ -164,7 +164,7 @@ void SSD1309::ShowChar(uint8_t x, uint8_t y, uint8_t chr)
 }
 
 //m^n函数
-uint SSD1309::oled_pow(uint8_t m, uint8_t n)
+uint SSD1309::oled_pow(byte m, byte n)
 {
     uint result = 1;
     while (n--)
@@ -178,10 +178,10 @@ uint SSD1309::oled_pow(uint8_t m, uint8_t n)
 //size:字体大小
 //mode:模式	0,填充模式;1,叠加模式
 //num:数值(0~4294967295);	 		  
-void SSD1309::ShowNum(uint8_t x, uint8_t y, uint num, uint8_t len, uint8_t size)
+void SSD1309::ShowNum(byte x, byte y, uint num, byte len, byte size)
 {
-    uint8_t t, temp;
-    uint8_t enshow = 0;
+    byte t, temp;
+    byte enshow = 0;
     for (t = 0; t < len; t++)
     {
         temp = (num / oled_pow(10, len - t - 1)) % 10;
@@ -200,7 +200,7 @@ void SSD1309::ShowNum(uint8_t x, uint8_t y, uint num, uint8_t len, uint8_t size)
     }
 }
 //显示一个字符号串
-void SSD1309::ShowString(uint8_t x, uint8_t y, char *chr, uint8_t interval)
+void SSD1309::ShowString(byte x, byte y, char *chr, byte interval)
 {
     unsigned char j = 0;
     while (chr[j] != '\0')
@@ -226,9 +226,9 @@ void SSD1309::ShowString(uint8_t x, uint8_t y, char *chr, uint8_t interval)
     }
 }
 //显示汉字
-void SSD1309::ShowCHinese11(uint8_t x, uint8_t y, uint8_t no)
+void SSD1309::ShowCHinese11(byte x, byte y, byte no)
 {
-	uint8_t t, adder = 0;
+	byte t, adder = 0;
     this->SetPos(x, y);
     for (t = 0; t < 16; t++)
     {
@@ -242,14 +242,14 @@ void SSD1309::ShowCHinese11(uint8_t x, uint8_t y, uint8_t no)
         adder += 1;
     }
 }
-void SSD1309::ShowCHinese(uint8_t x, uint8_t y, char *hz)
+void SSD1309::ShowCHinese(byte x, byte y, char *hz)
 {
-	uint8_t lo=hz[0];
-	uint8_t hi=hz[1];
+	byte lo=hz[0];
+	byte hi=hz[1];
 	this->ShowCHinese11(x,y,this->SearchhzIndex(lo,hi));
 }
 //查找汉字编码位置
-uint16_t SSD1309::SearchhzIndex(uint8_t lo, uint8_t hi)
+uint16_t SSD1309::SearchhzIndex(byte lo, byte hi)
 {
 	uint16_t i = 0;
     uint16_t maxcount = 251;
@@ -264,7 +264,7 @@ uint16_t SSD1309::SearchhzIndex(uint8_t lo, uint8_t hi)
 }
 
 /***********功能描述：显示显示BMP图片128×64起始点坐标(x,y),x的范围0～127，y为页的范围0～7*****************/
-void SSD1309::DrawBMP(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1, uint8_t BMP[])
+void SSD1309::DrawBMP(byte x0, byte y0, byte x1, byte y1, byte BMP[])
 {
     unsigned int j = 0;
     unsigned char x, y;

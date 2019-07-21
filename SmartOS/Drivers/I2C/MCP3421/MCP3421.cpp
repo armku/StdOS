@@ -13,7 +13,7 @@ void MCP3421::Init()
 
 }
 //3421写数据   --需查看芯片时序图和芯片指令
-void MCP3421::MCP3421_WriteOne(uint8_t  dt)
+void MCP3421::MCP3421_WriteOne(byte  dt)
 {
 	this->IIC.Start();
 	this->IIC.WriteByte(0XD0);
@@ -26,13 +26,13 @@ void MCP3421::MCP3421_WriteOne(uint8_t  dt)
 int32_t MCP3421::MCP3421_ReadOne(void)
 {
 	int32_t volatil = 0;
-//	uint8_t Step, Temp;
+//	byte Step, Temp;
 	this->IIC.Start();
 	this->IIC.WriteByte(0XD1);
 	this->IIC.WaitAck();
-	uint8_t adh = this->IIC.ReadByte(true);
-	uint8_t adm = this->IIC.ReadByte(true);
-	uint8_t adl = this->IIC.ReadByte(false);
+	byte adh = this->IIC.ReadByte(true);
+	byte adm = this->IIC.ReadByte(true);
+	byte adl = this->IIC.ReadByte(false);
 	volatil = adh;
 	volatil <<= 8;
 	volatil += adm;

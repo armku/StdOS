@@ -14,8 +14,8 @@ public:
 	virtual void Start()=0;
 	virtual void Stop()=0;
 
-	virtual void WriteByte(uint8_t dat)=0;
-	virtual uint8_t ReadByte(bool ack)=0;
+	virtual void WriteByte(byte dat)=0;
+	virtual byte ReadByte(bool ack)=0;
 	virtual bool WaitAck(int retry = 0)=0;
 };
 
@@ -33,11 +33,11 @@ public:
 	virtual void Start();
 	virtual void Stop();
 
-	virtual void WriteByte(uint8_t dat);	
-	virtual uint8_t ReadByte(bool ack);	
+	virtual void WriteByte(byte dat);	
+	virtual byte ReadByte(bool ack);	
 	virtual bool WaitAck(int retry=0);
 private:
-	virtual uint8_t ReadByte();
+	virtual byte ReadByte();
 	virtual void Ack(bool ack = true);
 private:
 	int _delay;			// 根据速度匹配的延时

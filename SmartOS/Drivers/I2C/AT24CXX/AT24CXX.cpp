@@ -41,7 +41,7 @@ bool AT24CXX::Write(uint addr, void * buf, int len, int bufpos)
 		if (bytesLeave > this->Block)
 		{
 			//¶ÁÈ¡ÕûÒ³
-			this->PageWrite(curAddr, ((uint8_t*)buf) + bufaddr, this->Block);
+			this->PageWrite(curAddr, ((byte*)buf) + bufaddr, this->Block);
 			bytesLeave -= this->Block;
 			curAddr += this->Block;
 			bufaddr += this->Block;
@@ -49,7 +49,7 @@ bool AT24CXX::Write(uint addr, void * buf, int len, int bufpos)
 		else
 		{
 			//¶ÁÈ¡Ê£ÓàÒ³
-			this->PageWrite(curAddr, ((uint8_t*)buf) + bufaddr, bytesLeave);
+			this->PageWrite(curAddr, ((byte*)buf) + bufaddr, bytesLeave);
 			return true;
 		}
 	}
@@ -93,7 +93,7 @@ bool AT24CXX::Read(uint addr, void * buf, int len, int bufpos)
 		if (bytesLeave > this->Block)
 		{
 			//¶ÁÈ¡ÕûÒ³
-			this->PageRead(curAddr, ((uint8_t*)buf) + bufaddr, this->Block);
+			this->PageRead(curAddr, ((byte*)buf) + bufaddr, this->Block);
 			bytesLeave -= this->Block;
 			curAddr += this->Block;
 			bufaddr += this->Block;
@@ -101,14 +101,14 @@ bool AT24CXX::Read(uint addr, void * buf, int len, int bufpos)
 		else
 		{
 			//¶ÁÈ¡Ê£ÓàÒ³
-			this->PageRead(curAddr, ((uint8_t*)buf) + bufaddr, bytesLeave);
+			this->PageRead(curAddr, ((byte*)buf) + bufaddr, bytesLeave);
 			return true;
 		}
 	}
 	return false;
 }
 //Ð´ÑÓÊ±Ê±¼ä
-AT24CXX::AT24CXX(EW24XXType devtype, uint8_t devaddr, uint wnms)
+AT24CXX::AT24CXX(EW24XXType devtype, byte devaddr, uint wnms)
 {
 	this->deviceType = devtype;
 	this->Address = devaddr;
@@ -126,9 +126,9 @@ void AT24CXX::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
 	}
 }
 
-uint8_t AT24CXX::Read(uint16_t address)
+byte AT24CXX::Read(uint16_t address)
 {
-	uint8_t ret = 0;
+	byte ret = 0;
 	
 	/* µÚ1²½£º·¢ÆðI2C×ÜÏßÆô¶¯ÐÅºÅ */
 	this->IIC.Start();
@@ -144,7 +144,7 @@ uint8_t AT24CXX::Read(uint16_t address)
 	if (this->deviceType > AT24C16)
 	{
 		/* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓÐ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ÐèÒªÁ¬·¢¶à¸öµØÖ· */
-		this->IIC.WriteByte((uint8_t)((address) >> 8));
+		this->IIC.WriteByte((byte)((address) >> 8));
 
 		/* µÚ5²½£ºµÈ´ýACK */
 		if (this->IIC.WaitAck() != 0)
@@ -153,7 +153,7 @@ uint8_t AT24CXX::Read(uint16_t address)
 		}
 	}
 	/* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓÐ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ÐèÒªÁ¬·¢¶à¸öµØÖ· */
-	this->IIC.WriteByte((uint8_t)address);
+	this->IIC.WriteByte((byte)address);
 
 	/* µÚ5²½£ºµÈ´ýACK */
 	if (this->IIC.WaitAck() != 0)
@@ -187,7 +187,7 @@ cmd_Readbytefail:  /* ÃüÁîÖ´ÐÐÊ§°Üºó£¬ÇÐ¼Ç·¢ËÍÍ£Ö¹ÐÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±
 	return ret;
 }
 
-bool AT24CXX::Write(uint16_t address, uint8_t da)
+bool AT24CXX::Write(uint16_t address, byte da)
 {
 	uint m;
 
@@ -218,7 +218,7 @@ bool AT24CXX::Write(uint16_t address, uint8_t da)
 	if (this->deviceType > AT24C16)
 	{
 		/* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓÐ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ÐèÒªÁ¬·¢¶à¸öµØÖ· */
-		this->IIC.WriteByte((uint8_t)((address >> 8)));
+		this->IIC.WriteByte((byte)((address >> 8)));
 
 		/* µÚ5²½£ºµÈ´ýACK */
 		if (this->IIC.WaitAck() != 0)
@@ -227,7 +227,7 @@ bool AT24CXX::Write(uint16_t address, uint8_t da)
 		}
 	}
 	/* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓÐ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ÐèÒªÁ¬·¢¶à¸öµØÖ· */
-	this->IIC.WriteByte((uint8_t)address);
+	this->IIC.WriteByte((byte)address);
 
 	/* µÚ5²½£ºµÈ´ýACK */
 	if (this->IIC.WaitAck() != 0)
@@ -275,7 +275,7 @@ int AT24CXX::PageRead(uint16_t addr, void * buf, int len)
 	if (this->deviceType > AT24C16)
 	{
 		/* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓÐ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ÐèÒªÁ¬·¢¶à¸öµØÖ· */
-		this->IIC.WriteByte((uint8_t)((addr) >> 8));
+		this->IIC.WriteByte((byte)((addr) >> 8));
 
 		/* µÚ5²½£ºµÈ´ýACK */
 		if (this->IIC.WaitAck() != 0)
@@ -284,7 +284,7 @@ int AT24CXX::PageRead(uint16_t addr, void * buf, int len)
 		}
 	}
 	/* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓÐ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ÐèÒªÁ¬·¢¶à¸öµØÖ· */
-	this->IIC.WriteByte((uint8_t)addr);
+	this->IIC.WriteByte((byte)addr);
 
 	/* µÚ5²½£ºµÈ´ýACK */
 	if (this->IIC.WaitAck() != 0)
@@ -307,7 +307,7 @@ int AT24CXX::PageRead(uint16_t addr, void * buf, int len)
 	/* µÚ9²½£ºÑ­»·¶ÁÈ¡Êý¾Ý */
 	for (int i = 0; i < len; i++)
 	{
-		((uint8_t*)buf)[i] = this->IIC.ReadByte((i != len - 1) ? true : false); /* ¶Á1¸ö×Ö½Ú */
+		((byte*)buf)[i] = this->IIC.ReadByte((i != len - 1) ? true : false); /* ¶Á1¸ö×Ö½Ú */
 		/* Ã¿¶ÁÍê1¸ö×Ö½Úºó£¬ÐèÒª·¢ËÍAck£¬ ×îºóÒ»¸ö×Ö½Ú²»ÐèÒªAck£¬·¢Nack */		
 	}
 	/* ·¢ËÍI2C×ÜÏßÍ£Ö¹ÐÅºÅ */
@@ -326,7 +326,7 @@ int AT24CXX::PageWrite(uint16_t addr, void * buf, int len)
 		return 1;
 	uint m;
 	uint16_t usAddr;
-	uint8_t buftmp[256];
+	byte buftmp[256];
 
 	//·Ç·¨³¤¶È£¬Ö±½Ó·µ»Ø
 	if (len > 256)
@@ -335,7 +335,7 @@ int AT24CXX::PageWrite(uint16_t addr, void * buf, int len)
 	bool flagchgs = false;
 	for (int i = 0; i < len; i++)
 	{
-		if (((uint8_t*)buf)[i] != buftmp[i])
+		if (((byte*)buf)[i] != buftmp[i])
 		{
 			flagchgs = true;
 			break;
@@ -373,7 +373,7 @@ int AT24CXX::PageWrite(uint16_t addr, void * buf, int len)
 	if (this->deviceType > AT24C16)
 	{
 		/* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓÐ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ÐèÒªÁ¬·¢¶à¸öµØÖ· */
-		this->IIC.WriteByte((uint8_t)((usAddr >> 8)));
+		this->IIC.WriteByte((byte)((usAddr >> 8)));
 
 		/* µÚ5²½£ºµÈ´ýACK */
 		if (this->IIC.WaitAck() != 0)
@@ -382,7 +382,7 @@ int AT24CXX::PageWrite(uint16_t addr, void * buf, int len)
 		}
 	}
 	/* µÚ4²½£º·¢ËÍ×Ö½ÚµØÖ·£¬24C02Ö»ÓÐ256×Ö½Ú£¬Òò´Ë1¸ö×Ö½Ú¾Í¹»ÁË£¬Èç¹ûÊÇ24C04ÒÔÉÏ£¬ÄÇÃ´´Ë´¦ÐèÒªÁ¬·¢¶à¸öµØÖ· */
-	this->IIC.WriteByte((uint8_t)usAddr);
+	this->IIC.WriteByte((byte)usAddr);
 
 	/* µÚ5²½£ºµÈ´ýACK */
 	if (this->IIC.WaitAck() != 0)
@@ -394,7 +394,7 @@ int AT24CXX::PageWrite(uint16_t addr, void * buf, int len)
 	{
 
 		/* µÚ6²½£º¿ªÊ¼Ð´ÈëÊý¾Ý */
-		this->IIC.WriteByte(((uint8_t*)buf)[i]);
+		this->IIC.WriteByte(((byte*)buf)[i]);
 
 		/* µÚ7²½£º·¢ËÍACK */
 		if (this->IIC.WaitAck() != 0)
@@ -450,9 +450,9 @@ uint16_t AT24CXX::jsPageSize(uint type) //¼ÆËã´æ´¢Ò³´óÐ¡
 	return ret;
 }
 
-uint8_t AT24CXX::checkDevice()
+byte AT24CXX::checkDevice()
 {
-	uint8_t ucAck;
+	byte ucAck;
 
 	this->IIC.Start(); /* ·¢ËÍÆô¶¯ÐÅºÅ */
 	/* ·¢ËÍÉè±¸µØÖ·+¶ÁÐ´¿ØÖÆbit£¨0 = w£¬ 1 = r) bit7 ÏÈ´« */
@@ -464,7 +464,7 @@ uint8_t AT24CXX::checkDevice()
 	return ucAck;
 }
 
-uint8_t AT24CXX::CheckOk()
+byte AT24CXX::CheckOk()
 {
 	if (this->checkDevice() == 0)
 	{

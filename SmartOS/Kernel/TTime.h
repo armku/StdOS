@@ -12,10 +12,10 @@ public:
 	volatile	uint	Seconds;		// 全局秒数，系统启动后总秒数。累加
 	volatile	uint64_t	Milliseconds;	// 全局毫秒数，系统启动后总毫秒（1000ms整部分）。
 	volatile	uint	BaseSeconds;	// 基准秒数。系统启动时相对于1970年的秒数，时间调节，加上Seconds得到当前时间Now()
-    //uint8_t	Ticks;			// 每微秒的时钟滴答数
-	uint8_t	Index;			// 定时器
+    //byte	Ticks;			// 每微秒的时钟滴答数
+	byte	Index;			// 定时器
 #if ! (defined(STM32F0) || defined(GD32F150))
-	uint8_t	Div;			// 分频系数。最大分频64k，无法让大于64M主频的芯片分配得到1k时钟
+	byte	Div;			// 分频系数。最大分频64k，无法让大于64M主频的芯片分配得到1k时钟
 #endif
 
     TTime();

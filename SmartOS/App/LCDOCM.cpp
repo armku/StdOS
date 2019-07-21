@@ -1,10 +1,10 @@
 #include "LCDOCM.h"
-extern const uint8_t  hanzi_16x16[][32];
-extern const uint8_t  ascii_table_8x16[95][16];
-extern const uint8_t  shuzi_16x16[][32];
-extern const uint8_t  GB3212[][32];
+extern const byte  hanzi_16x16[][32];
+extern const byte  ascii_table_8x16[95][16];
+extern const byte  shuzi_16x16[][32];
+extern const byte  GB3212[][32];
 
-void LCDOCM::DispStrAsc8x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t num, uint8_t mode)
+void LCDOCM::DispStrAsc8x16(byte x, byte y, byte *text, byte num, byte mode)
 {
 	while (*text != 0)//数据未结束
 	{
@@ -13,7 +13,7 @@ void LCDOCM::DispStrAsc8x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t num, ui
 		x += 1;
 	}
 }
-void LCDOCM::DispStrHz16x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t num, uint8_t mode)
+void LCDOCM::DispStrHz16x16(byte x, byte y, byte *text, byte num, byte mode)
 {
 	while (*text != 0)//数据未结束
 	{
@@ -22,19 +22,19 @@ void LCDOCM::DispStrHz16x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t num, ui
 		x += 2;
 	}
 }
-void LCDOCM::DispAscNum16x16(uint8_t x, uint8_t y, uint8_t text)
+void LCDOCM::DispAscNum16x16(byte x, byte y, byte text)
 {
-	this->DispDot16x16(x,y,(uint8_t*)shuzi_16x16[text],0);
+	this->DispDot16x16(x,y,(byte*)shuzi_16x16[text],0);
 }
 /************************************************************************************************
-@f_name: void Display_char_8x16(uint8_t hh,uint16_t page,uint16_t column,uint8_t text)
+@f_name: void Display_char_8x16(byte hh,uint16_t page,uint16_t column,byte text)
 @brief:	 显示字符
 @param:	 None
 @return: None
 ************************************************************************************************/
-void LCDOCM::DisplayHz16x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t mode)
+void LCDOCM::DisplayHz16x16(byte x, byte y, byte *text, byte mode)
 {
-	uint8_t qh, ql;
+	byte qh, ql;
 	uint16_t add1;
 
 	qh = *text;
@@ -43,30 +43,30 @@ void LCDOCM::DisplayHz16x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t mode)
 		add1 = qh - 48;
 	else
 		add1 = ((qh - 0xb0) * 94 + (ql - 0x96));
-	this->DispDot16x16(x, y, (uint8_t*)GB3212[add1], mode);
+	this->DispDot16x16(x, y, (byte*)GB3212[add1], mode);
 }
 
 /************************************************************************************************
-@f_name: void Display8x16(uint8_t hh,uint16_t page,uint16_t column,uint8_t text)
+@f_name: void Display8x16(byte hh,uint16_t page,uint16_t column,byte text)
 @brief:	 显示字符
 @param:	 None
 @return: None
 ************************************************************************************************/
-void LCDOCM::DisplayAsc8x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t mode)
+void LCDOCM::DisplayAsc8x16(byte x, byte y, byte *text, byte mode)
 {
-	this->DispDot8x16(x, y, (uint8_t*)ascii_table_8x16[*text - 32], mode);
+	this->DispDot8x16(x, y, (byte*)ascii_table_8x16[*text - 32], mode);
 }
 
-void LCDOCM::Clrchar(uint8_t x, uint8_t y, uint16_t count)
+void LCDOCM::Clrchar(byte x, byte y, uint16_t count)
 {
-	uint8_t i;
+	byte i;
 	for (i = 0; i < count; i++)
 	{
 		this->DispDot8x16(x, y, 0, 1);
 		x += 1;
 	}
 }
-const uint8_t  hanzi_16x16[][32] = {
+const byte  hanzi_16x16[][32] = {
 	/*--  ??:  ?  --*/
 	/*--  ??12;  ??????????:?x?=16x16   --*/
 	0x01,0x00,0x01,0x00,0x7F,0xFC,0x01,0x00,0x3F,0xF8,0x01,0x00,0xFF,0xFE,0x00,0x00,
@@ -77,7 +77,7 @@ const uint8_t  hanzi_16x16[][32] = {
 	0x01,0x00,0x02,0x00,0x1F,0xF0,0x10,0x10,0x12,0x10,0x11,0x50,0x10,0x20,0x10,0x00,
 	0x1F,0xFC,0x02,0x04,0x22,0x24,0x22,0x24,0x3F,0xE4,0x00,0x04,0x00,0x28,0x00,0x10,
 };
-const uint8_t  GB3212[][32] = {
+const byte  GB3212[][32] = {
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
 	/*--  ??:  ?  --*/
@@ -126,7 +126,7 @@ const uint8_t  GB3212[][32] = {
 	0x00,0x00,0x0E,0xFC,0xEA,0x08,0xAA,0x08,0xAA,0xE8,0xAA,0xA8,0xAC,0xA8,0xAA,0xA8,
 	0xAA,0xA8,0xAA,0xA8,0xEA,0xE8,0xAA,0xA8,0x0C,0x08,0x08,0x08,0x08,0x28,0x08,0x10,
 };
-const uint8_t  shuzi_16x16[][32] = {
+const byte  shuzi_16x16[][32] = {
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
 	/*--  ??:  ?  --*/

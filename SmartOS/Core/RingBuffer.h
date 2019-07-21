@@ -13,7 +13,7 @@ public:
 	int Get(char *c, int len);
 	bool Empty();
 
-	uint8_t * buf;
+	byte * buf;
 	int length;//数据长度
 	int head;//头
 	int tail;//尾

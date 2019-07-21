@@ -22,8 +22,8 @@
 		virtual void SetNss(Pin nss = P0)=0;
 
 		// 基础读写
-		virtual uint8_t Write(uint8_t data)=0;
-		uint8_t Read() { return this->Write(0XFF); }
+		virtual byte Write(byte data)=0;
+		byte Read() { return this->Write(0XFF); }
 		virtual uint16_t Write16(uint16_t data) = 0;
 
 		virtual void Start()=0; // 拉低NSS，开始传输
@@ -36,7 +36,7 @@
             CPOLTYPE CPOL; //时钟极性
             CPHATYPE CPHA; //时钟相位
         private:
-            uint8_t _index;
+            byte _index;
             void *_SPI;
             Port _nss;
 
@@ -57,7 +57,7 @@
 			virtual void SetNss(Pin nss = P0);
 
             // 基础读写
-			virtual uint8_t Write(uint8_t data);
+			virtual byte Write(byte data);
 			virtual uint16_t Write16(uint16_t data);
 
 			virtual void Start(); // 拉低NSS，开始传输
@@ -74,7 +74,7 @@
 			virtual void Init(CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge);
 			virtual void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
 			virtual void SetNss(Pin nss = P0);
-			virtual uint8_t Write(uint8_t data);
+			virtual byte Write(byte data);
 			virtual uint16_t Write16(uint16_t data);
             void Open();
             void Close();
@@ -87,6 +87,6 @@
             Port _miso;
             uint delayus; //延时时间
         private:
-            uint8_t WaitBusy();
+            byte WaitBusy();
     };
 #endif

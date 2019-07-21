@@ -18,9 +18,9 @@
 		void SetSpi(SpiBase *spi);
 		void SectorErase(uint SectorAddr);
 		void BulkErase(void);
-		void PageWrite(uint8_t* pBuffer, uint WriteAddr, uint16_t NumByteToWrite);
-		void BufferWrite(uint8_t* pBuffer, uint WriteAddr, uint16_t NumByteToWrite);
-		void BufferRead(uint8_t* pBuffer, uint ReadAddr, uint16_t NumByteToRead);
+		void PageWrite(byte* pBuffer, uint WriteAddr, uint16_t NumByteToWrite);
+		void BufferWrite(byte* pBuffer, uint WriteAddr, uint16_t NumByteToWrite);
+		void BufferRead(byte* pBuffer, uint ReadAddr, uint16_t NumByteToRead);
 		uint ReadID(void);
 		uint ReadDeviceID(void);
 		void StartReadSequence(uint ReadAddr);

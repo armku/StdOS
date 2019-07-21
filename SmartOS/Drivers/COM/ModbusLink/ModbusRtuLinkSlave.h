@@ -25,7 +25,7 @@ private:
 	int searchRegInGroup(uint16_t addr, uint16_t len);//查找输入寄存器组，没有查找到返回负值
 	int searchRegHoildGroup(uint16_t addr, uint16_t len);//查找保持寄存器组，没有查找到返回负值
 public:
-	uint8_t id; //本机ID
+	byte id; //本机ID
 	void DealFrame(); //处理数据帧
 	void(*OnUpdateRegHoid)(uint16_t regaddr, uint16_t reglen); //更新参数	
 };

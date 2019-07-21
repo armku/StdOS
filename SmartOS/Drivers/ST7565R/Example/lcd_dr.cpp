@@ -16,9 +16,9 @@ CLcd_DR::CLcd_DR()
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd_DR::DisplayChar4x8(uint16_t x, uint16_t y, uint8_t ch)
+void CLcd_DR::DisplayChar4x8(uint16_t x, uint16_t y, byte ch)
 {       
-	this->Display4x8(x,y,(uint8_t*)&ascii_table_4x8[ch - 0x20][0]);
+	this->Display4x8(x,y,(byte*)&ascii_table_4x8[ch - 0x20][0]);
 }
 /*********************************************************************************************************
 函 数 名: DisplayString4x8
@@ -47,9 +47,9 @@ void CLcd_DR::DisplayString4x8(uint16_t x, uint16_t y, char *text)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd_DR::DisplayChar5x8(uint16_t x, uint16_t y, uint8_t ch)
+void CLcd_DR::DisplayChar5x8(uint16_t x, uint16_t y, byte ch)
 {    
-    this->Display5x8(x,y,(uint8_t*)&ascii_table_5x8[ch - 0x20][0]);	
+    this->Display5x8(x,y,(byte*)&ascii_table_5x8[ch - 0x20][0]);	
 }
 /*********************************************************************************************************
 函 数 名: DisplayString5x8
@@ -79,9 +79,9 @@ void CLcd_DR::DisplayString5x8(uint16_t x, uint16_t y, char *text)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd_DR::DisplayChar6x12(uint16_t x, uint16_t y, uint8_t ch)
+void CLcd_DR::DisplayChar6x12(uint16_t x, uint16_t y, byte ch)
 {    
-	this->Display6x12(x,y,(uint8_t*)&ascii_table_6x12[ch - 0x20][0]);
+	this->Display6x12(x,y,(byte*)&ascii_table_6x12[ch - 0x20][0]);
 }
 /*********************************************************************************************************
 函 数 名: DisplayChar8x16
@@ -92,9 +92,9 @@ void CLcd_DR::DisplayChar6x12(uint16_t x, uint16_t y, uint8_t ch)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd_DR::DisplayChar8x16(uint16_t x, uint16_t y, uint8_t ch)
+void CLcd_DR::DisplayChar8x16(uint16_t x, uint16_t y, byte ch)
 {    
-	this->Display8x16(x,y,(uint8_t*)&ascii_table_8x16[ch - 0x20][0]);
+	this->Display8x16(x,y,(byte*)&ascii_table_8x16[ch - 0x20][0]);
 }
 
 /*********************************************************************************************************
@@ -106,9 +106,9 @@ void CLcd_DR::DisplayChar8x16(uint16_t x, uint16_t y, uint8_t ch)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd_DR::DisplayChar6x16(uint16_t x, uint16_t y, uint8_t ch)
+void CLcd_DR::DisplayChar6x16(uint16_t x, uint16_t y, byte ch)
 {    
-	this->Display6x16(x,y,(uint8_t*)&nAsciiDot6X16[ch - 0x20][0]);
+	this->Display6x16(x,y,(byte*)&nAsciiDot6X16[ch - 0x20][0]);
 }
 /*********************************************************************************************************
 函 数 名: DisplayChar8x16Bolt
@@ -119,9 +119,9 @@ void CLcd_DR::DisplayChar6x16(uint16_t x, uint16_t y, uint8_t ch)
 形    参4: color 颜色
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd_DR::DisplayChar8x16Bolt(uint16_t x, uint16_t y, uint8_t ch)
+void CLcd_DR::DisplayChar8x16Bolt(uint16_t x, uint16_t y, byte ch)
 {    
-	this->Display8x16(x,y,(uint8_t*)&ascBolt[ch - 0x20][0]);
+	this->Display8x16(x,y,(byte*)&ascBolt[ch - 0x20][0]);
 }
 /*********************************************************************************************************
 函 数 名: DisplayString8x16
@@ -152,7 +152,7 @@ void CLcd_DR::DisplayString8x16(uint16_t x, uint16_t y, char *text)
 形    参5: real 是否实点
 返 回 值: 无
  ********************************************************************************************************/
-void CLcd_DR::DisplayLattice(uint16_t x, uint16_t y, uint8_t *dp, Font font)
+void CLcd_DR::DisplayLattice(uint16_t x, uint16_t y, byte *dp, Font font)
 {
     switch (font)
     {
@@ -180,10 +180,10 @@ void CLcd_DR::DisplayLattice(uint16_t x, uint16_t y, uint8_t *dp, Font font)
     }
 }
 
-void CLcd_DR::DisplayHEX(uint16_t x,uint16_t y,uint8_t da,Font font)
+void CLcd_DR::DisplayHEX(uint16_t x,uint16_t y,byte da,Font font)
 {
-	uint8_t hi=da>>4;
-	uint8_t lo=da&0x0f;
+	byte hi=da>>4;
+	byte lo=da&0x0f;
 	
 	if(hi>9)
 	{
@@ -277,15 +277,15 @@ void CLcd_DR::DisplayStr(uint16_t x, uint16_t y, char *text, Font font)
             switch (font)
             {
                 case FONT_12X12:                    
-                        this->Display12x12(x, y, (uint8_t*)GB_12[SearchhzIndex(*text, *(text + 1), FONT_12X12)].Msk);
+                        this->Display12x12(x, y, (byte*)GB_12[SearchhzIndex(*text, *(text + 1), FONT_12X12)].Msk);
                         x += 12;                    
                     break;
                 case FONT_16X16:                    
-                        this->Display16x16(x, y, (uint8_t *)GB_16[SearchhzIndex(*text, *(text + 1), FONT_16X16)].Msk);
+                        this->Display16x16(x, y, (byte *)GB_16[SearchhzIndex(*text, *(text + 1), FONT_16X16)].Msk);
                         x += 16;                   
                     break;
                 default:                    
-                        this->Display16x16(x, y, (uint8_t *)GB_16[SearchhzIndex(*text, *(text + 1), FONT_16X16)].Msk);
+                        this->Display16x16(x, y, (byte *)GB_16[SearchhzIndex(*text, *(text + 1), FONT_16X16)].Msk);
                         x += 16;                    
                     break;
             }
@@ -326,10 +326,10 @@ void CLcd_DR::DispVal(uint16_t x, uint16_t y, float val, int8_t wei, Font font)
     }
 }
 //显示数值 固定位置反显
-void CLcd_DR::DispValu(uint16_t x, uint16_t y, uint16_t val, int wei, uint8_t reversebit, Font font)
+void CLcd_DR::DispValu(uint16_t x, uint16_t y, uint16_t val, int wei, byte reversebit, Font font)
 {
     char dat[20]; //字体选择 用于sprintf转换
-    uint8_t pos = 0;
+    byte pos = 0;
     if (wei > 3)
     {
         dat[pos] = val / 1000 % 10+'0';
@@ -374,7 +374,7 @@ void CLcd_DR::DispValu(uint16_t x, uint16_t y, uint16_t val, int wei, uint8_t re
 形    参：无
 返 回 值: 内码值
  ********************************************************************************************************/
-uint16_t CLcd_DR::SearchhzIndex(uint8_t lo, uint8_t hi, Font font) //查找汉字编码位置
+uint16_t CLcd_DR::SearchhzIndex(byte lo, byte hi, Font font) //查找汉字编码位置
 {
     uint16_t i = 0;
     uint16_t maxcount = 251;

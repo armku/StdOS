@@ -15,10 +15,10 @@ static void EspFrameDeal();
 /******************************************串口参数开始**************************************************/
 USARTHAL usart333(COM3, 115200); 
 #include "../HAL/STM32F1/ARCH_UART.h"
-static uint8_t   loop_bufcom3[64] = { 0 };                             //定义环形缓冲区
+static byte   loop_bufcom3[64] = { 0 };                             //定义环形缓冲区
 static RingBuffer ringRcvcom3(loop_bufcom3, ArrayLength(loop_bufcom3));
 //向环形缓冲区【写】一字节数据
-static void write_loop_buf(uint8_t dat)
+static void write_loop_buf(byte dat)
 {
 	ringRcvcom3.Put(dat);
 }
@@ -80,7 +80,7 @@ static void EspFrameDeal()
 		//ESP8266连接服务器未成功
 		mqtt.readlen = ringRcvcom3.Get(mqtt.bufRcv, ArrayLength(mqtt.bufRcv));
 		//debug_printf("Rcv(%d) Hex:",mqtt.readlen);
-		//UART1_send_data((uint8_t*)mqtt.bufRcv, mqtt.readlen);//接收到的数据显示
+		//UART1_send_data((byte*)mqtt.bufRcv, mqtt.readlen);//接收到的数据显示
 		//Buffer(mqtt.bufRcv, mqtt.readlen).ShowHex();
 		//ESP8266连接服务器成功
 		if (!mqtt.FlagConnected)
@@ -97,7 +97,7 @@ static void EspFrameDeal()
 	else
 	{
 		esp.readlen = ringRcvcom3.Get(esp.bufRcv, ArrayLength(esp.bufRcv));
-		UART1_send_data((uint8_t*)esp.bufRcv, esp.readlen);//接收到的数据显示
+		UART1_send_data((byte*)esp.bufRcv, esp.readlen);//接收到的数据显示
 	}
 }
 /******************************************ESP结束**************************************************/

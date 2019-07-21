@@ -42,7 +42,7 @@ void OCM240128::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d
 	this->data6.pinMode(GPIO_Out_PP);
 	this->data7.pinMode(GPIO_Out_PP);
 }
-void OCM240128::writedata(uint8_t da)
+void OCM240128::writedata(byte da)
 {
 	this->data0 = da & (1 << 0);
 	this->data1 = da & (1 << 1);
@@ -90,11 +90,11 @@ void OCM240128::Clr()
 	this->wcmd(0x98); //禁止光标闪动
 }
 
-void OCM240128::DispDot8x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t mode)
+void OCM240128::DispDot8x16(byte x, byte y, byte *text, byte mode)
 {
 	uint16_t add = y * 0x20 + x + 0x800;
-	uint8_t i = add;
-	uint8_t j = add >> 8;
+	byte i = add;
+	byte j = add >> 8;
 	for (int k = 0; k < 16; k++)
 	{
 		this->wcmd2(i, j, 0x24);
@@ -108,11 +108,11 @@ void OCM240128::DispDot8x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t mode)
 	}
 }
 
-void OCM240128::DispDot16x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t mode)
+void OCM240128::DispDot16x16(byte x, byte y, byte *text, byte mode)
 {
 	uint16_t add = y * 0x20 + x + 0x800;
-	uint8_t i = add;
-	uint8_t j = add >> 8;
+	byte i = add;
+	byte j = add >> 8;
 	for (int k = 0; k < 32; k = k + 2)
 		{
 			this->wcmd2(i, j, 0x24);
@@ -130,10 +130,10 @@ void OCM240128::DispDot16x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t mode)
 }
 
 //画横线
-void OCM240128::Draw_hline(uint8_t x, uint8_t y, uint16_t count)
+void OCM240128::Draw_hline(byte x, byte y, uint16_t count)
 {
 	uint16_t add;
-	uint8_t i, j;
+	byte i, j;
 	add = y * 0x20 + x + 0x800;
 	i = add;
 	j = add >> 8;
@@ -162,10 +162,10 @@ void OCM240128::Test()
 }
 
 //画竖线
-void OCM240128::Draw_vline(uint8_t x, uint8_t y, uint16_t count)
+void OCM240128::Draw_vline(byte x, byte y, uint16_t count)
 {
 	uint16_t add;
-	uint8_t i, j, k;
+	byte i, j, k;
 	add = y * 0x20 + x + 0x800;
 	i = add;
 	j = add >> 8;
@@ -179,12 +179,12 @@ void OCM240128::Draw_vline(uint8_t x, uint8_t y, uint16_t count)
 	}
 }
 /************************************************************************************************
-@f_name: uint8_t LCD12864_busy(void)
+@f_name: byte LCD12864_busy(void)
 @brief:	 检测忙状态
 @param:	 None
 @return: None
 ************************************************************************************************/
-void OCM240128::busycheck(uint8_t autowr)
+void OCM240128::busycheck(byte autowr)
 {
 #if 0
 	//	LCD_DataPort_In();
@@ -212,12 +212,12 @@ void OCM240128::busycheck(uint8_t autowr)
 #endif
 }
 /************************************************************************************************
-@f_name: void LCD12684_Wcmd_L(uint8_t dat)
+@f_name: void LCD12684_Wcmd_L(byte dat)
 @brief:	 写命令
-@param:	 uint8_t dat  输入指令
+@param:	 byte dat  输入指令
 @return: None
 ************************************************************************************************/
-void OCM240128::wcmd(uint8_t cmd)
+void OCM240128::wcmd(byte cmd)
 {
 	this->busycheck(0);
 	this->pincd = 1;
@@ -228,12 +228,12 @@ void OCM240128::wcmd(uint8_t cmd)
 }
 
 /************************************************************************************************
-@f_name: void LCD12684_Wcmd_R(uint8_t dat)
+@f_name: void LCD12684_Wcmd_R(byte dat)
 @brief:	 写数据
-@param:	 uint8_t dat  输入指令
+@param:	 byte dat  输入指令
 @return: None
 ************************************************************************************************/
-void OCM240128::wdata(uint8_t dat)
+void OCM240128::wdata(byte dat)
 {
 	this->busycheck(0);
 	this->pincd = 0;
@@ -243,24 +243,24 @@ void OCM240128::wdata(uint8_t dat)
 	this->pinwr = 1;
 }
 /************************************************************************************************
-@f_name: void LCD12684_Wdat_L(uint8_t dat)
+@f_name: void LCD12684_Wdat_L(byte dat)
 @brief:	 写一个数据和一个命令
-@param:	 uint8_t dat 输入数据
+@param:	 byte dat 输入数据
 @return: None
 ************************************************************************************************/
-void OCM240128::wcmd(uint8_t dat, uint8_t cmd)
+void OCM240128::wcmd(byte dat, byte cmd)
 {
 	this->wdata(dat);
 	this->wcmd(cmd);
 }
 
 /************************************************************************************************
-@f_name: void LCD12684_Wdat_R(uint8_t dat)
+@f_name: void LCD12684_Wdat_R(byte dat)
 @brief:	 写两个数据一个命令
-@param:	 uint8_t dat 输入数据
+@param:	 byte dat 输入数据
 @return: None
 ************************************************************************************************/
-void OCM240128::wcmd2(uint8_t dat1, uint8_t dat2, uint8_t cmd)
+void OCM240128::wcmd2(byte dat1, byte dat2, byte cmd)
 {
 	this->wdata(dat1);
 	this->wdata(dat2);

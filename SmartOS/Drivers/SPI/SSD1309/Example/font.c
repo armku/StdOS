@@ -4,7 +4,7 @@
 // 码表从0x20~0x7e                                                //
 // 字库: D:\job\SVN\Y1000\工具软件\现用字模\Asc6X12E.dat 纵向取模下高位//
 // -------------------------------------------------------------- //
-const uint8_t ascii_table_6x12[][12] =              // ASCII
+const byte ascii_table_6x12[][12] =              // ASCII
 {
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,  // - -
 	0x00,0x00,0x00,0x00,
@@ -298,7 +298,7 @@ const uint8_t ascii_table_6x12[][12] =              // ASCII
 // 码表从0x20~0x7e                                                //
 // 字库: D:\job\SVN\Y1000\工具软件\现用字模\Asc8X16E.dat 纵向取模下高位//
 // -------------------------------------------------------------- //
-const uint8_t nAsciiDot6X16[][16] =              // ASCII
+const byte nAsciiDot6X16[][16] =              // ASCII
 {
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,  // - -
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
@@ -593,7 +593,7 @@ const uint8_t nAsciiDot6X16[][16] =              // ASCII
 // 码表从0x20~0x7e                                                //
 // 字库: D:\job\SVN\Y1000\工具软件\现用字模\Asc8X16E.dat 横向取模左高位//
 // -------------------------------------------------------------- //
-const uint8_t ascBolt[][16] =              // ASCII
+const byte ascBolt[][16] =              // ASCII
 {
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,  // - -
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
@@ -1175,7 +1175,7 @@ const uint8_t ascBolt[][16] =              // ASCII
 };
 #endif
 
-const uint8_t ascii_table_8x16[95][16]={
+const byte ascii_table_8x16[95][16]={
 
 /*--  文字:     --*/
 /*--  Comic Sans MS12;  此字体下对应的点阵为：宽x高=8x16   --*/
@@ -1566,7 +1566,7 @@ const uint8_t ascii_table_8x16[95][16]={
 
  };
 
-const uint8_t ascii_table_5x8[95][5]={
+const byte ascii_table_5x8[95][5]={
 /*全体ASCII 列表:5x8点阵*/
 0x00,0x00,0x00,0x00,0x00,//space
 0x00,0x00,0x4f,0x00,0x00,//!
@@ -1665,7 +1665,7 @@ const uint8_t ascii_table_5x8[95][5]={
 0x04,0x02,0x02,0x02,0x01,//~
 };
 		
-const uint8_t ascii_table_4x8[][4]={
+const byte ascii_table_4x8[][4]={
 {0x00,0x00,0x00,0x00},/*  */
 {0x00,0x00,0x5E,0x00},/*"!",0*/
 {0x00,0x0E,0x00,0x0E},/*"未命名文件"," */

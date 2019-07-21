@@ -457,7 +457,7 @@ void TaskScheduler::ShowStatus()
     float RunTimes = 0;
     float RunTimesAvg = 0;
     Task *tsk;
-    uint8_t buf[1];
+    byte buf[1];
 
     runCounts++;
     uint64_t curms = millis();

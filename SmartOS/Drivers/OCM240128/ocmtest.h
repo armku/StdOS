@@ -6,25 +6,25 @@ class ocmtest
 public:
 	void SetPin(Pin ce = P0, Pin wr = P0, Pin rd = P0, Pin fs = P0, Pin led = P0, Pin cd = P0);
 	void SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d6, Pin d7);
-	void writedata(uint8_t da);
-	//	void wr_comm(uint8_t comm);
-	//	void wr_data(uint8_t dat);
-	//	void chk_busy(uint8_t autowr);
+	void writedata(byte da);
+	//	void wr_comm(byte comm);
+	//	void wr_data(byte dat);
+	//	void chk_busy(byte autowr);
 	void delay(uint us);
 	void lcdtest();
-	void disp_eng(uint8_t const* eng);
-	void disp_chn(uint addr, uint8_t xl, uint8_t yl, uint8_t row_xl, uint8_t row_yl, uint8_t const* chn);
-	void disp_img(uint addr, uint8_t xl, uint8_t yl, uint8_t const* img);
-	void disp_dz(uint8_t data1, uint8_t data2);
+	void disp_eng(byte const* eng);
+	void disp_chn(uint addr, byte xl, byte yl, byte row_xl, byte row_yl, byte const* chn);
+	void disp_img(uint addr, byte xl, byte yl, byte const* img);
+	void disp_dz(byte data1, byte data2);
 	void clrram(void);
 	void init_lcd(void);
-	void chk_busy(uint8_t autowr);    //测状态
-	void wr_data(uint8_t dat);       //写数据
-	void wr_comm(uint8_t comm);       //写命令
-	void wr_auto(uint8_t dat);               //自动写数据
-	void wr_xd(uint dat, uint8_t comm);       //写一个16进制数据和一个命令
-	void wr_td(uint8_t datl, uint8_t dath, uint8_t comm);  //写两个数据和一个命令
-	void wr_od(uint8_t dat, uint8_t comm);       //写一个数据和一个命令
+	void chk_busy(byte autowr);    //测状态
+	void wr_data(byte dat);       //写数据
+	void wr_comm(byte comm);       //写命令
+	void wr_auto(byte dat);               //自动写数据
+	void wr_xd(uint dat, byte comm);       //写一个16进制数据和一个命令
+	void wr_td(byte datl, byte dath, byte comm);  //写两个数据和一个命令
+	void wr_od(byte dat, byte comm);       //写一个数据和一个命令
 	void delay1(uint ms);
 public:
 	Port wr;  //Data Write into T6963C,L有效
@@ -38,7 +38,7 @@ public:
 	Port bf1;
 	Port bf3;
 
-	//uint8_t data_ora;
+	//byte data_ora;
 	Port data0;
 	Port data1;
 	Port data2;

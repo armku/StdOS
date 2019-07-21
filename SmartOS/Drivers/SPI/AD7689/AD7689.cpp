@@ -11,7 +11,7 @@
 //0-本次读取的数据缓存保存位置(n-2); 2-AD7689通道选择
 CAD7689::CAD7689()
 {	
-	for (uint8_t i = 0; i < MAXCH; i++)
+	for (byte i = 0; i < MAXCH; i++)
     {
         this->FlagEnable[i] = 1;
     }
@@ -65,7 +65,7 @@ void CAD7689::Routin(void)
 {
     uint16_t ch;
     uint16_t reg;
-    uint8_t chNext = 0;
+    byte chNext = 0;
     uint16_t adcur = 0;
 
     ch = this->chCurrent;
@@ -96,9 +96,9 @@ float CAD7689::getVolt(uint16_t ch)
 }
 
 //获取下次转换通道
-uint8_t CAD7689::getNextCH()
+byte CAD7689::getNextCH()
 {
-    uint8_t ret = 0;
+    byte ret = 0;
 
     ret = this->chCurrent;
     ret++;

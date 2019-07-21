@@ -87,8 +87,8 @@ void ad7124test(void *param)
 {
 	AD7124* ad7 = (AD7124*)param;
 	
-  uint8_t id=  ad7->ReadID();
- // uint8_t status=   ad7->ReadStatus();
+  byte id=  ad7->ReadID();
+ // byte status=   ad7->ReadStatus();
 	//   
 	////uint data = ad7->ReadRlt(AD7124_DATA_REG, AD7124_DATA_REG_BYTES);
 	//uint data = ad7->ReadRlt();

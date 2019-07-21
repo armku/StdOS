@@ -49,14 +49,14 @@
      */
     {
         public:
-            uint8_t(*IsKeyDownFunc)(); /* 按键按下的判断函数,1表示按下 */
+            byte(*IsKeyDownFunc)(); /* 按键按下的判断函数,1表示按下 */
 
-            uint8_t Count; /* 滤波器计数器 */
+            byte Count; /* 滤波器计数器 */
             uint16_t LongCount; /* 长按计数器 */
             uint16_t LongTime; /* 按键按下持续时间, 0表示不检测长按 */
-            uint8_t State; /* 按键当前状态（按下还是弹起） */
-            uint8_t RepeatSpeed; /* 连续按键周期 */
-            uint8_t RepeatCount; /* 连续按键计数器 */			
+            byte State; /* 按键当前状态（按下还是弹起） */
+            byte RepeatSpeed; /* 连续按键周期 */
+            byte RepeatCount; /* 连续按键计数器 */			
         public:
             //void CheckKey();			
     };
@@ -66,15 +66,15 @@
 			KEY_FIFO(){_bufSize=10;}
 			void Init();
             void Clear();
-            void Push(uint8_t da);
-            uint8_t Pop();
-            uint8_t Pop2();
+            void Push(byte da);
+            byte Pop();
+            byte Pop2();
         private:
             int _bufSize;// = 10;
-            uint8_t Buf[10]; /* 键值缓冲区 */
-            uint8_t Read; /* 缓冲区读指针1 */
-            uint8_t Write; /* 缓冲区写指针 */
-            uint8_t Read2; /* 缓冲区读指针2 */
+            byte Buf[10]; /* 键值缓冲区 */
+            byte Read; /* 缓冲区读指针1 */
+            byte Write; /* 缓冲区写指针 */
+            byte Read2; /* 缓冲区读指针2 */
     };
 
     class Key
@@ -82,19 +82,19 @@
         public:
             void InitKeyVar();
             void KeyScan();
-            void PutKey(uint8_t _KeyCode);
-            uint8_t GetKeyState(KEY_ID_E _ucKeyID);
-            void SetKeyParam(uint8_t _ucKeyID, uint16_t _LongTime, uint8_t _RepeatSpeed);
-            uint8_t GetKeyCode();
+            void PutKey(byte _KeyCode);
+            byte GetKeyState(KEY_ID_E _ucKeyID);
+            void SetKeyParam(byte _ucKeyID, uint16_t _LongTime, byte _RepeatSpeed);
+            byte GetKeyCode();
 
-            void SetKeyDetectFunc(uint8_t(*func)(), uint8_t pos = 0);
+            void SetKeyDetectFunc(byte(*func)(), byte pos = 0);
         public:
 
         private:
-            void DetectKey(uint8_t i);
+            void DetectKey(byte i);
         private:
             KEY_FIFO s_tKey;
             KEY_T s_tBtn[KEY_COUNT];
-			uint8_t flagLongkey;//长按标记，长按下时不发送弹起指令
+			byte flagLongkey;//长按标记，长按下时不发送弹起指令
     };
 #endif

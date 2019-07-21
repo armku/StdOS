@@ -40,9 +40,9 @@ void I2CSoft::Stop()
     this->SDA = 1;
 }
 
-void I2CSoft::WriteByte(uint8_t dat)
+void I2CSoft::WriteByte(byte dat)
 {
-    uint8_t i;
+    byte i;
 
     /* 先发送字节的高位bit7 */
     for (i = 0; i < 8; i++)
@@ -68,10 +68,10 @@ void I2CSoft::WriteByte(uint8_t dat)
     }
 }
 
-uint8_t I2CSoft::ReadByte()
+byte I2CSoft::ReadByte()
 {
-    uint8_t i;
-    uint8_t value;
+    byte i;
+    byte value;
 
     /* 读到第1个bit为数据的bit7 */
     value = 0;
@@ -89,9 +89,9 @@ uint8_t I2CSoft::ReadByte()
     }
     return value;
 }
-uint8_t I2CSoft::ReadByte(bool ack)
+byte I2CSoft::ReadByte(bool ack)
 {
-	uint8_t ret = this->ReadByte();
+	byte ret = this->ReadByte();
 	this->Ack(ack);
 	return ret;
 }
@@ -123,7 +123,7 @@ void I2CSoft::Ack(bool ack)
 //        0，接收应答成功
 bool I2CSoft::WaitAck(int retry)
 {
-    uint8_t re;
+    byte re;
 
     this->SDA = 1; /* CPU释放SDA总线 */
     delayMicroseconds(1);

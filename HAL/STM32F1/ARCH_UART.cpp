@@ -17,35 +17,35 @@ pFun_UART UART_3_rcv_IRQ = nullptr;
 pFun_UART UART_4_rcv_IRQ = nullptr;
 pFun_UART UART_5_rcv_IRQ = nullptr;
 
-void UART_1_send_byte(uint8_t c)
+void UART_1_send_byte(byte c)
 {
 	USART_ClearFlag(USART1, USART_FLAG_TC);
 	USART_SendData(USART1, c);
 	while(USART_GetFlagStatus(USART1, USART_FLAG_TC) != SET);
 }
 
-void UART_2_send_byte(uint8_t c)
+void UART_2_send_byte(byte c)
 {
 	USART_ClearFlag(USART2, USART_FLAG_TC);
 	USART_SendData(USART2, c);
 	while(USART_GetFlagStatus(USART2, USART_FLAG_TC) != SET);
 }
 
-void UART_3_send_byte(uint8_t c)
+void UART_3_send_byte(byte c)
 {
 	USART_ClearFlag(USART3, USART_FLAG_TC);
 	USART_SendData(USART3, c);
 	while(USART_GetFlagStatus(USART3, USART_FLAG_TC) != SET);
 }
 
-void UART_4_send_byte(uint8_t c)
+void UART_4_send_byte(byte c)
 {
 	USART_ClearFlag(UART4, USART_FLAG_TC);
 	USART_SendData(UART4, c);
 	while(USART_GetFlagStatus(UART4, USART_FLAG_TC) != SET);
 }
 
-void UART_5_send_byte(uint8_t c)
+void UART_5_send_byte(byte c)
 {
 	USART_ClearFlag(UART5, USART_FLAG_TC);
 	USART_SendData(UART5, c);
@@ -55,7 +55,7 @@ void UART_5_send_byte(uint8_t c)
 ///////////////////////////////////////////////////////////
 void USART1_IRQHandler(void)
 {
-	uint8_t c;
+	byte c;
 
 	if(USART_GetITStatus(USART1, USART_IT_RXNE) == SET)
 	{
@@ -98,7 +98,7 @@ void USART1_IRQHandler(void)
 
 void USART2_IRQHandler(void)
 {
-	uint8_t c;
+	byte c;
 
 	if (USART_GetITStatus(USART2, USART_IT_RXNE) == SET)
 	{
@@ -141,7 +141,7 @@ void USART2_IRQHandler(void)
 
 void USART3_IRQHandler(void)
 {
-	uint8_t c;
+	byte c;
 
 	if (USART_GetITStatus(USART3, USART_IT_RXNE) == SET)
 	{
@@ -184,7 +184,7 @@ void USART3_IRQHandler(void)
 
 void UART4_IRQHandler(void)
 {
-	uint8_t c;
+	byte c;
 
 	if (USART_GetITStatus(UART4, USART_IT_RXNE) == SET)
 	{
@@ -227,7 +227,7 @@ void UART4_IRQHandler(void)
 
 void UART5_IRQHandler(void)
 {
-	uint8_t c;
+	byte c;
 
 	if (USART_GetITStatus(UART5, USART_IT_RXNE) == SET)
 	{
@@ -323,7 +323,7 @@ void UART5_En_IRQ(void)
 }
 
 //通过串口（通讯串口）发送数据
-void UART1_send_data(uint8_t *data, uint len)
+void UART1_send_data(byte *data, uint len)
 {
 	if (COM1RS485 != nullptr)
 	{
@@ -340,7 +340,7 @@ void UART1_send_data(uint8_t *data, uint len)
 }
 
 //通过串口（通讯串口）发送数据
-void UART2_send_data(uint8_t *data, uint len)
+void UART2_send_data(byte *data, uint len)
 {
 	if (COM2RS485 != nullptr)
 	{
@@ -357,7 +357,7 @@ void UART2_send_data(uint8_t *data, uint len)
 }
 
 //通过串口（通讯串口）发送数据
-void UART3_send_data(uint8_t *data, uint len)
+void UART3_send_data(byte *data, uint len)
 {
 	if (COM3RS485 != nullptr)
 	{
@@ -374,7 +374,7 @@ void UART3_send_data(uint8_t *data, uint len)
 }
 
 //通过串口（通讯串口）发送数据
-void UART4_send_data(uint8_t *data, uint len)
+void UART4_send_data(byte *data, uint len)
 {
 	if (COM4RS485 != nullptr)
 	{
@@ -391,7 +391,7 @@ void UART4_send_data(uint8_t *data, uint len)
 }
 
 //通过串口（通讯串口）发送数据
-void UART5_send_data(uint8_t *data, uint len)
+void UART5_send_data(byte *data, uint len)
 {
 	if (COM5RS485 != nullptr)
 	{

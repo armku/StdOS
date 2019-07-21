@@ -22,8 +22,8 @@ public:
 	float GetVolt();
 private:
 	I2CSoft IIC; // I2C通信口
-	//uint8_t Address; // 设备地址
-	void MCP3421_WriteOne(uint8_t  dt);
+	//byte Address; // 设备地址
+	void MCP3421_WriteOne(byte  dt);
 	int32_t MCP3421_ReadOne(void);
 };
 

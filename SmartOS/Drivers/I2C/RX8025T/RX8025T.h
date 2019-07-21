@@ -9,22 +9,22 @@ class RX8025T
 {
 	public:
 		I2CSoft IIC; // I2C通信口
-        uint8_t Address; // 设备地址
+        byte Address; // 设备地址
 	public:
 		RX8025T();
-		RX8025T(Pin pinsck, Pin pinsda, uint8_t devaddr = 0xA0, uint wnus = 0);
+		RX8025T(Pin pinsck, Pin pinsda, byte devaddr = 0xA0, uint wnus = 0);
 		void Init();
-		uint8_t CheckDevice(void);//
-		uint8_t Output1s_Start(void);
-		uint8_t Output1s_Stop(void);
+		byte CheckDevice(void);//
+		byte Output1s_Start(void);
+		byte Output1s_Stop(void);
 		int LoadTime(DateTime &dt);
 		int SaveTime(DateTime &dt);		
 	private:
-		int RegWrite(uint8_t sadd, uint8_t  len);
-		int RegRead(uint8_t sadd, uint8_t len);
+		int RegWrite(byte sadd, byte  len);
+		int RegRead(byte sadd, byte len);
 	private:
-		uint8_t buf[20];
-		uint8_t devaddr;//设备地址
+		byte buf[20];
+		byte devaddr;//设备地址
 };
 
 #endif

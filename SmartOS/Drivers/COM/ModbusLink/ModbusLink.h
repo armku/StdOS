@@ -11,13 +11,13 @@
 struct DataFrameModbus
 {
 public:
-	uint8_t Address;	// 地址
-	uint8_t Code;		// 功能码
-	uint8_t Error;		// 是否异常
-	uint8_t Length;		// 数据长度
+	byte Address;	// 地址
+	byte Code;		// 功能码
+	byte Error;		// 是否异常
+	byte Length;		// 数据长度
 	uint16_t regAddr;
 	uint16_t regLength;
-	uint8_t data[MAX_FRAMEMODBUS_DATA_LENGTH];
+	byte data[MAX_FRAMEMODBUS_DATA_LENGTH];
 	bool isUpdated;
 	uint16_t Crc;		// 校验码
 	int frameLength;//当前数据帧长度
@@ -40,12 +40,12 @@ public:
 	}
 
 	//设置传输寄存器值，地址从0开始编码
-	void SetReg(uint8_t regaddr, uint16_t val)
+	void SetReg(byte regaddr, uint16_t val)
 	{
 		this->data[3 + regaddr * 2] = val >> 8;
 		this->data[3 + regaddr * 2 + 1] = val & 0xff;
 	}
-	void SetRegLen(uint8_t len)
+	void SetRegLen(byte len)
 	{
 		this->data[2] = len * 2;
 		this->frameLength = 5 + len * 2;

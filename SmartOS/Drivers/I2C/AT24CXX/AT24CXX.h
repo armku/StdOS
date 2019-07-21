@@ -22,21 +22,21 @@ class AT24CXX
 {
 public:
 	I2CSoft IIC; // I2C通信口
-	uint8_t Address; // 设备地址
+	byte Address; // 设备地址
 
-	bool Write(uint16_t addr, uint8_t data);
-	uint8_t Read(uint16_t addr);
+	bool Write(uint16_t addr, byte data);
+	byte Read(uint16_t addr);
 
 	virtual bool Write(uint addr, void * buf, int len, int bufpos = 0);
 	virtual bool Read(uint addr, void * buf, int len, int bufpos = 0);
 public:
-	AT24CXX(EW24XXType devtype, uint8_t devaddr = 0xA0, uint wnms = 5); //写延时时间
+	AT24CXX(EW24XXType devtype, byte devaddr = 0xA0, uint wnms = 5); //写延时时间
 	void SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect = P0);
-	uint8_t CheckOk();
+	byte CheckOk();
 
 	Port pinWP; //保护引脚
 private:
-	uint8_t checkDevice();
+	byte checkDevice();
 	uint16_t jsPageSize(uint type); //计算存储页大小
 private:
 	int PageRead(uint16_t addr, void * buf, int len);//页内读，最多一页

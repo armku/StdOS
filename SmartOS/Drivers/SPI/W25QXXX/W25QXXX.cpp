@@ -32,10 +32,10 @@
 
 
 /* 发送缓冲区初始化 */
-uint8_t Tx_Buffer[] = "0123456789";
+byte Tx_Buffer[] = "0123456789";
 #define countof(a)      (sizeof(a) / sizeof(*(a)))
 int  BufferSize = 10;
-uint8_t Rx_Buffer[11];
+byte Rx_Buffer[11];
 TestStatus TransferStatus1 = FAILED;
 /* Private typedef -----------------------------------------------------------*/
 //#define SPI_FLASH_PageSize      4096
@@ -119,7 +119,7 @@ void SPI25QXX::BulkErase(void)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI25QXX::PageWrite(uint8_t* pBuffer, uint WriteAddr, uint16_t NumByteToWrite)
+void SPI25QXX::PageWrite(byte* pBuffer, uint WriteAddr, uint16_t NumByteToWrite)
 {
 	/* Enable the write access to the FLASH */
 	WriteEnable();
@@ -168,9 +168,9 @@ void SPI25QXX::PageWrite(uint8_t* pBuffer, uint WriteAddr, uint16_t NumByteToWri
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI25QXX::BufferWrite(uint8_t* pBuffer, uint WriteAddr, uint16_t NumByteToWrite)
+void SPI25QXX::BufferWrite(byte* pBuffer, uint WriteAddr, uint16_t NumByteToWrite)
 {
-	uint8_t NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
+	byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
 	Addr = WriteAddr % SPI_FLASH_PageSize;
 	count = SPI_FLASH_PageSize - Addr;
@@ -238,9 +238,9 @@ void SPI25QXX::BufferWrite(uint8_t* pBuffer, uint WriteAddr, uint16_t NumByteToW
 		}
 	}
 }
-//void SPI25QXX::SPI_FLASH_BufferWrite(uint8_t* pBuffer, uint WriteAddr, uint16_t NumByteToWrite)
+//void SPI25QXX::SPI_FLASH_BufferWrite(byte* pBuffer, uint WriteAddr, uint16_t NumByteToWrite)
 //{
-//  uint8_t NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, i;
+//  byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, i;
 //	uint CurrentAddr;
 
 //	
@@ -286,7 +286,7 @@ void SPI25QXX::BufferWrite(uint8_t* pBuffer, uint WriteAddr, uint16_t NumByteToW
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI25QXX::BufferRead(uint8_t* pBuffer, uint ReadAddr, uint16_t NumByteToRead)
+void SPI25QXX::BufferRead(byte* pBuffer, uint ReadAddr, uint16_t NumByteToRead)
 {
 	/* Select the FLASH: Chip Select low */
 	this->_spi->Start();
@@ -433,7 +433,7 @@ void SPI25QXX::WriteEnable(void)
 *******************************************************************************/
 void SPI25QXX::WaitForWriteEnd(void)
 {
-	uint8_t FLASH_Status = 0;
+	byte FLASH_Status = 0;
 
 	/* Select the FLASH: Chip Select low */
 	this->_spi->Start();
@@ -490,7 +490,7 @@ void SPI25QXX::WAKEUP(void)
  * 返回  ：-PASSED pBuffer1 等于   pBuffer2
  *         -FAILED pBuffer1 不同于 pBuffer2
  */
-TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength)
+TestStatus Buffercmp(byte* pBuffer1, byte* pBuffer2, uint16_t BufferLength)
 {
 	while (BufferLength--)
 	{

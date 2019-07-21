@@ -41,7 +41,7 @@ uint AD7124::Write32(uint sendData)
     return ret;
 }
 
-uint AD7124::ReadReg(uint8_t reg, uint8_t bytes)
+uint AD7124::ReadReg(byte reg, byte bytes)
 {
     uint retVal;
     this->pspi->Start();
@@ -73,7 +73,7 @@ uint AD7124::ReadRlt()
 	return ret;
 }
 //读取AD值
-uint AD7124::ReadRlt(uint8_t& status)
+uint AD7124::ReadRlt(byte& status)
 {
 	uint adin=this->ReadReg(AD7124_DATA_REG, AD7124_DATA_REG_BYTES+1);
 	status=adin&0xff;
@@ -88,7 +88,7 @@ uint AD7124::ReadRlt(uint8_t& status)
  * @retval		: 读取的内容
  * @notes		: 
  *****************************************************************************/
-uint AD7124::ReadRegNoCS(uint8_t reg, uint8_t bytes)
+uint AD7124::ReadRegNoCS(byte reg, byte bytes)
 {
     uint retVal;
     this->pspi->Write(AD7124_RD | reg);
@@ -116,7 +116,7 @@ uint AD7124::ReadRegNoCS(uint8_t reg, uint8_t bytes)
  * @retval		: 无
  * @notes		: 
  *****************************************************************************/
-void AD7124::WriteReg(uint8_t reg, uint8_t bytes, uint data)
+void AD7124::WriteReg(byte reg, byte bytes, uint data)
 {
     this->pspi->Start();
     this->pspi->Write(AD7124_WR | reg);
@@ -245,7 +245,7 @@ void AD7124::Init_4()		//4通道初始化
     this->pspi->Start();
 }
 //设置需要读取的通道，默认通道0
-void AD7124::SetReadChannel(uint8_t ch,uint8_t chMax)
+void AD7124::SetReadChannel(byte ch,byte chMax)
 {
     for (int i = 0; i < chMax; i++)
     {
@@ -268,9 +268,9 @@ void AD7124::SetReadChannel(uint8_t ch,uint8_t chMax)
  * @retval		: 无
  * @notes		: 
  *****************************************************************************/
-uint8_t AD7124::ReadID()
+byte AD7124::ReadID()
 {
-    uint8_t retVal;
+    byte retVal;
     retVal = ReadReg(AD7124_ID_REG, AD7124_ID_REG_BYTES);
     //debug_printf("ID:0x%02x\r\n", retVal);
     return retVal;
@@ -283,9 +283,9 @@ uint8_t AD7124::ReadID()
  * @retval		: 无
  * @notes		: 
  *****************************************************************************/
-uint8_t AD7124::ReadStatus()
+byte AD7124::ReadStatus()
 {
-    uint8_t retVal;
+    byte retVal;
     retVal = ReadReg(AD7124_STATUS_REG, AD7124_STATUS_REG_BYTES);
     //debug_printf("Status:0x%02x\r\n", retVal);
 	this->pspi->Start();

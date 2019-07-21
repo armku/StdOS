@@ -41,7 +41,7 @@ void FlushPort::Start(int ms)
 	}
 }
 // mode 0xff  为不改变Port状态  0为Write false  1为Write true
-void FlushPort::Stop(uint8_t mode)
+void FlushPort::Stop(byte mode)
 {
 	if(this->Slow)
 		Sys.SetTaskPeriod(this->_tid,this->Slow);
@@ -64,7 +64,7 @@ void FlushPort::Flush()
 		
 	}
 }
-int FlushPort::Write(uint8_t* data)
+int FlushPort::Write(byte* data)
 {
 	this->Start(data[0]);
 	return 1;

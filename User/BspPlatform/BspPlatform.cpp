@@ -51,7 +51,7 @@ WEAK int SmartOS_printf(const char *format, ...)
 	n = vsprintf(sprint_buf, format, args);
 	va_end(args);
 	
-	UART1_send_data((uint8_t*)sprint_buf,n);
+	UART1_send_data((byte*)sprint_buf,n);
 	return n;
 }
 }

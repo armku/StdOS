@@ -4,12 +4,12 @@
 class LCDOCM :public OCM240128
 {
 public:
-	void DispStrAsc8x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t num, uint8_t mode);
-	void DispStrHz16x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t num, uint8_t mode);
-	void DispAscNum16x16(uint8_t x, uint8_t y, uint8_t text);
-	void DisplayHz16x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t mode);
-	void DisplayAsc8x16(uint8_t x, uint8_t y, uint8_t *text, uint8_t mode);
-	void Clrchar(uint8_t x, uint8_t y, uint16_t count);
+	void DispStrAsc8x16(byte x, byte y, byte *text, byte num, byte mode);
+	void DispStrHz16x16(byte x, byte y, byte *text, byte num, byte mode);
+	void DispAscNum16x16(byte x, byte y, byte text);
+	void DisplayHz16x16(byte x, byte y, byte *text, byte mode);
+	void DisplayAsc8x16(byte x, byte y, byte *text, byte mode);
+	void Clrchar(byte x, byte y, uint16_t count);
 };
 
 #endif // _LCDOCM_H

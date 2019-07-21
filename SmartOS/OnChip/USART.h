@@ -8,7 +8,7 @@
 class USARTHAL
 {
 public:
-	USARTHAL(COM index, uint baud, uint8_t priGroup = 3, uint8_t prePri = 7, uint8_t subPri = 1, bool remap = false, uint remapvalue = 1);
+	USARTHAL(COM index, uint baud, byte priGroup = 3, byte prePri = 7, byte subPri = 1, bool remap = false, uint remapvalue = 1);
 	void Initialize();
 	//////////////////////////
 	///@bief …Ë÷√≤®Ãÿ¬ 
@@ -24,11 +24,11 @@ public:
 	/*Port* RS485;*/
 #ifdef USE_USART_DMA
 private:
-	uint8_t                   mDMAIRQn;
+	byte                   mDMAIRQn;
 	DMA_Channel_TypeDef* mDMATxCh;
 	uint                  mDMATCFlag;
 	uint                  mDMAGLFlag;
-	uint8_t                   mDMATxBuf[USART_DMA_TX_BUFFER_SIZE];
+	byte                   mDMATxBuf[USART_DMA_TX_BUFFER_SIZE];
 	void InitDMA();
 public:
 	void DMAIRQ();
@@ -40,13 +40,13 @@ private:
 	uint			mRemapvalue;// remap value	
 	Port				mPortTx;	//tx
 	Port				mPortRx;	//rx
-	uint8_t             mIRQn;     //USART IRQn
+	byte             mIRQn;     //USART IRQn
 	COM index;				//com index
 	uint            mUSARTRcc; //USART Clock
 	bool           mRemap;    //gpio remap flag
-	uint8_t             mPrePri;   //preemption priority
-	uint8_t             mSubPri;   //sub priority
-	uint8_t             mPriGroup; //priority group
+	byte             mPrePri;   //preemption priority
+	byte             mSubPri;   //sub priority
+	byte             mPriGroup; //priority group
 };
 /**
 ===========================================================================

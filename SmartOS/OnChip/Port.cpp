@@ -6,7 +6,7 @@
 
 GPIO_TypeDef* GPIO_TypeDefGroup[] = { GPIOA ,GPIOB,GPIOC ,GPIOD ,GPIOE ,GPIOF,GPIOG };
 
-GPIO_TypeDef *IndexToGroup(uint8_t index)
+GPIO_TypeDef *IndexToGroup(byte index)
 {
 #if defined STM32F0
 	return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));

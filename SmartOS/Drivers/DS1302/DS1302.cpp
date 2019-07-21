@@ -15,7 +15,7 @@
 #define R_RAM_Addr		(0xc1)//读-存储器指令
 #define W_RAM_Addr		(0xc0)//写-存储器指令
 
-uint8_t buffer[20];
+byte buffer[20];
 DS1302::DS1302()
 {
 }
@@ -97,9 +97,9 @@ void DS1302::reset1302()
 * 输入: ucDa 写入的数据
 * 返回值: 无
 ***********************************************************************/
-void DS1302::Bytein(uint8_t ucDa)
+void DS1302::Bytein(byte ucDa)
 {
-	uint8_t   i;
+	byte   i;
 
 	for (i = 0; i < 8; i++)
 	{
@@ -129,9 +129,9 @@ void DS1302::Bytein(uint8_t ucDa)
 * 输入: 无
 * 返回值:ucDa 写入的数据
 ***********************************************************************/
-uint8_t DS1302::Byteout()
+byte DS1302::Byteout()
 {
-	uint8_t   i, ucDa;
+	byte   i, ucDa;
 	this->pio = 1;
 	for (i = 0; i < 8; i++)
 	{
@@ -158,7 +158,7 @@ uint8_t DS1302::Byteout()
 * 输入: ucAddr:地址命令 ；ucDa:写入的数据
 * 返回值: 无
 ***********************************************************************/
-void DS1302::DS_W1302(uint8_t ucAddr, uint8_t ucDa)
+void DS1302::DS_W1302(byte ucAddr, byte ucDa)
 {
 	set1302();
 	Bytein(ucAddr); /* 地址，命令 */
@@ -174,9 +174,9 @@ void DS1302::DS_W1302(uint8_t ucAddr, uint8_t ucDa)
 * 输入: ucAddr:地址命令 ；ucDa:写入的数据
 * 返回值: 无
 ***********************************************************************/
-uint8_t DS1302::DS_R1302(uint8_t ucAddr)
+byte DS1302::DS_R1302(byte ucAddr)
 {
-	uint8_t   ucDa;
+	byte   ucDa;
 
 	set1302();
 
@@ -196,10 +196,10 @@ uint8_t DS1302::DS_R1302(uint8_t ucAddr)
 * 7Byte (BCD码) 1B 1B 1B 1B 1B 1B 1B
 * 返回值: 无
 ***********************************************************************/
-void DS1302::DS_Set1302(uint8_t *pSecDa)
+void DS1302::DS_Set1302(byte *pSecDa)
 {
-	uint8_t   i;
-	uint8_t   ucAddr = W_Time_Addr;
+	byte   i;
+	byte   ucAddr = W_Time_Addr;
 
 	//开写保护
 	DS_W1302(W_CONTROL_Addr, 0x00);
@@ -222,10 +222,10 @@ void DS1302::DS_Set1302(uint8_t *pSecDa)
 * 7Byte (BCD码) 1B 1B 1B 1B 1B 1B 1B
 * 返回值: 无
 ***********************************************************************/
-void DS1302::DS_Get1302(uint8_t *ucCurtime)
+void DS1302::DS_Get1302(byte *ucCurtime)
 {
-	uint8_t   i;
-	uint8_t   ucAddr = R_Time_Addr;
+	byte   i;
+	byte   ucAddr = R_Time_Addr;
 
 	for (i = 0; i < 7; i++)
 	{
@@ -244,7 +244,7 @@ void DS1302::DS_Get1302(uint8_t *ucCurtime)
 * 7Byte (BCD码) 1B 1B 1B 1B 1B 1B 1B
 * 返回值: 无
 ***********************************************************************/
-void DS1302::dsWriteByte(uint8_t Addr, uint8_t ucDa)
+void DS1302::dsWriteByte(byte Addr, byte ucDa)
 {
 	Addr <<= 1;
 	DS_W1302(W_CONTROL_Addr, 0x00); //开写保护
@@ -261,7 +261,7 @@ void DS1302::dsWriteByte(uint8_t Addr, uint8_t ucDa)
 * 7Byte (BCD码) 1B 1B 1B 1B 1B 1B 1B
 * 返回值: 无
 ***********************************************************************/
-uint8_t DS1302::dsReadByte(uint8_t Addr)
+byte DS1302::dsReadByte(byte Addr)
 {
 	Addr <<= 1;
 	return DS_R1302(R_RAM_Addr | Addr);
@@ -269,14 +269,14 @@ uint8_t DS1302::dsReadByte(uint8_t Addr)
 //#endif 
 //向存储器写数据
 #if 0
-void dsWriteWord(uint8_t Addr, INT16U ucDa)
+void dsWriteWord(byte Addr, INT16U ucDa)
 {
 	dsWriteByte(Addr, ucDa & 0xff);
 	dsWriteByte(Addr + 1, ucDa >> 8);
 }
 
 //从存储器读数据
-INT16U dsReadWord(uint8_t addr)
+INT16U dsReadWord(byte addr)
 {
 	INT16U   ret;
 
@@ -287,7 +287,7 @@ INT16U dsReadWord(uint8_t addr)
 	return ret;
 }
 #endif 
-void DS1302::dsWritePage(uint8_t Addr, uint8_t *da, uint8_t len)
+void DS1302::dsWritePage(byte Addr, byte *da, byte len)
 {
 	int i;
 	for (i = 0; i < len; i++)
@@ -296,9 +296,9 @@ void DS1302::dsWritePage(uint8_t Addr, uint8_t *da, uint8_t len)
 	}
 }
 
-void DS1302::dsReadPage(uint8_t Addr, uint8_t *da, uint8_t len)
+void DS1302::dsReadPage(byte Addr, byte *da, byte len)
 {
-	uint8_t   i;
+	byte   i;
 	for (i = 0; i < len; i++)
 	{
 		*(da + i) = dsReadByte(Addr + i);

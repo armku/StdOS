@@ -207,7 +207,7 @@ void Spi::Init(CPOLTYPE cpol, CPHATYPE cpha)
 	{
 	case Spi1:
 		this->SetPin(PB3, PB4, PB5);//this->SetPin(PB3, PB4, PB5, PB14);//this->SetPin(PA5, PA6, PA7, PA4);/原生SPI1
-			//				uint8_t afs[] = 
+			//				byte afs[] = 
 			//        {
 			//            GPIO_AF_SPI1, GPIO_AF_SPI2, GPIO_AF_SPI3, GPIO_AF_SPI4, GPIO_AF_SPI5, GPIO_AF_SPI6
 			//        };
@@ -389,7 +389,7 @@ void Spi::Stop()
 	}
 }
 // 基础读写
-uint8_t Spi::Write(uint8_t data)
+byte Spi::Write(byte data)
 {
 #if defined STM32F0
 	int retry;
@@ -620,7 +620,7 @@ void SpiSoft::SetNss(Pin nss)
 /*---------------------------------------------------------
 忙状态判断，最长等待时间，200 X 10 ms=2S
 ---------------------------------------------------------*/
-uint8_t SpiSoft::WaitBusy()
+byte SpiSoft::WaitBusy()
 {
 	uint16_t i;
 	this->Start();
@@ -637,10 +637,10 @@ uint8_t SpiSoft::WaitBusy()
 }
 
 //SPI写字节
-uint8_t SpiSoft::Write(uint8_t data)
+byte SpiSoft::Write(byte data)
 {
-	uint8_t i;
-	uint8_t ret = 0;
+	byte i;
+	byte ret = 0;
 	if (this->CPOL == CPOL_Low)
 	{
 		//时钟极性，空闲时为低

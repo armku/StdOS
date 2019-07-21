@@ -1,6 +1,6 @@
 #include "NPA.h"
 
-CNPA::CNPA(uint8_t devAddr)
+CNPA::CNPA(byte devAddr)
 {
 	this->DEVER_ADDR = devAddr;
 }
@@ -11,7 +11,7 @@ void CNPA::SetPin(Pin pinsck, Pin pinsda)
 }
 int CNPA::Read()
 {
-    uint8_t buf1, buf2;
+    byte buf1, buf2;
     int buf;
     buf1 = 0;
     buf2 = 0;

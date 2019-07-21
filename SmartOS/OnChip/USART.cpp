@@ -4,7 +4,7 @@
 #include "Configuration.h"
 #include "Sys.h"
 
-USARTHAL::USARTHAL(COM index1, uint baud, uint8_t priGroup, uint8_t prePri, uint8_t subPri, bool remap, uint remapvalue)
+USARTHAL::USARTHAL(COM index1, uint baud, byte priGroup, byte prePri, byte subPri, bool remap, uint remapvalue)
 {
 	this->index = index1;
 	mBaudrate = baud;     //baudrate of usart
@@ -248,11 +248,11 @@ void USARTHAL::SetBaudRate(uint baudRate)
 	/* Implement the fractional part in the register */
 	if ((mUSARTx->CR1 & ((uint16_t)0x8000)) != 0)
 	{
-		tmpreg |= ((((fractionaldivider * 8) + 50) / 100)) & ((uint8_t)0x07);
+		tmpreg |= ((((fractionaldivider * 8) + 50) / 100)) & ((byte)0x07);
 	}
 	else /* if ((USARTx->CR1 & CR1_OVER8_Set) == 0) */
 	{
-		tmpreg |= ((((fractionaldivider * 16) + 50) / 100)) & ((uint8_t)0x0F);
+		tmpreg |= ((((fractionaldivider * 16) + 50) / 100)) & ((byte)0x0F);
 	}
 
 	/* Write to USART BRR */
@@ -330,14 +330,14 @@ class USARTOldNotUse
 {
 public:
 	USARTOldNotUse();
-	virtual bool SendBytes(uint8_t txData[], uint16_t size);
+	virtual bool SendBytes(byte txData[], uint16_t size);
 	USARTOldNotUse& operator<<(int val);
 	USARTOldNotUse& operator<<(double val);
 	USARTOldNotUse& operator<<(const char* pStr);
 private:
 
-	FIFOBuffer<uint8_t, USART_TX_BUFFER_SIZE>  mTxBuf;  //USART Tx Buffer
-	uint8_t mPrecision;   //when show precision after dot "."  when use "<<" to show float value
+	FIFOBuffer<byte, USART_TX_BUFFER_SIZE>  mTxBuf;  //USART Tx Buffer
+	byte mPrecision;   //when show precision after dot "."  when use "<<" to show float value
 };
 
 
@@ -346,7 +346,7 @@ USARTOldNotUse::USARTOldNotUse()
 	this->mPrecision = 3;
 }
 
-bool USARTOldNotUse::SendBytes(uint8_t txData[], uint16_t size)
+bool USARTOldNotUse::SendBytes(byte txData[], uint16_t size)
 {
 	USART_TypeDef* mUSARTx;   //USARTx
 
@@ -375,7 +375,7 @@ bool USARTOldNotUse::SendBytes(uint8_t txData[], uint16_t size)
 												   //USART_ITConfig(mUSARTx, USART_IT_TXE, ENABLE);  //Enable TC, going to send data
 	USART_GetFlagStatus(mUSARTx, USART_FLAG_TC);   //read SR to clear flag, otherwise the first byte may not able to send out
 												   //USART_GetFlagStatus(mUSARTx, USART_FLAG_TXE);   //read SR to clear flag, otherwise the first byte may not able to send out
-	static uint8_t data = 0;
+	static byte data = 0;
 	mTxBuf.Get(data);                              //get one byte data from tx buffer
 	USART_SendData(mUSARTx, data);                  //send one byte data
 #endif	
@@ -384,7 +384,7 @@ bool USARTOldNotUse::SendBytes(uint8_t txData[], uint16_t size)
 
 USARTOldNotUse& USARTOldNotUse::operator<<(int val)
 {
-	uint8_t sign = 0, len = 0, data[10];
+	byte sign = 0, len = 0, data[10];
 	if (val < 0)
 	{
 		sign = 1;
@@ -403,13 +403,13 @@ USARTOldNotUse& USARTOldNotUse::operator<<(int val)
 }
 USARTOldNotUse& USARTOldNotUse::operator<<(double val)
 {
-	uint8_t sign = 0, len = 0, data[20];
+	byte sign = 0, len = 0, data[20];
 	if (val < 0)
 	{
 		sign = 1;
 		val = -val;
 	}
-	uint8_t prec = mPrecision;
+	byte prec = mPrecision;
 	while (prec--)
 		val *= 10;
 	uint t = val;
@@ -436,7 +436,7 @@ USARTOldNotUse& USARTOldNotUse::operator<<(const char* pStr)
 	{
 		++length;
 	}
-	SendBytes((uint8_t*)pStr, length);
+	SendBytes((byte*)pStr, length);
 	return *this;
 }
 #endif

@@ -141,7 +141,7 @@ bool MqttLink::Puslish(char *buf, int len)
 //·¢²¼
 bool MqttLink::Puslish_Release()
 {
-	uint8_t buf[4];
+	byte buf[4];
 	buf[0] = 0X62;
 	buf[1] = 0X02;
 	buf[2] = this->MessageID >> 8;

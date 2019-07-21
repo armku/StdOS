@@ -11,10 +11,10 @@ void DealRcv(char* buf, int length);
 
 /******************************************串口参数开始**************************************************/
 USARTHAL usart222(COM2, 115200);
-static uint8_t   loop_bufcom2[64] = { 0 };                             //定义环形缓冲区
+static byte   loop_bufcom2[64] = { 0 };                             //定义环形缓冲区
 static RingBuffer ringRcvcom2(loop_bufcom2, ArrayLength(loop_bufcom2));
 //向环形缓冲区【写】一字节数据
-static void write_loop_buf(uint8_t dat)
+static void write_loop_buf(byte dat)
 {
 	ringRcvcom2.Put(dat);
 }

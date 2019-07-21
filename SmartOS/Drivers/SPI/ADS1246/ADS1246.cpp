@@ -71,10 +71,10 @@ ADS1246::ADS1246(Spi *spi,InputPort& pinrd, Pin pinreset,ADSPEEDTYPE spd)
 	this->online=false;
 }
 
-uint8_t ADS1246::ReadReg(uint8_t RegAddr)
+byte ADS1246::ReadReg(byte RegAddr)
 {
-    uint8_t ret = 0;
-    uint8_t Cmd;
+    byte ret = 0;
+    byte Cmd;
 
     this->pspi->Start();
 
@@ -90,9 +90,9 @@ uint8_t ADS1246::ReadReg(uint8_t RegAddr)
 
 }
 
-void ADS1246::WriteReg(uint8_t RegAddr, uint8_t da)
+void ADS1246::WriteReg(byte RegAddr, byte da)
 {
-    uint8_t Cmd;
+    byte Cmd;
     this->pspi->Start();
 
     Cmd = ADC_CMD_WREG | RegAddr;
@@ -111,7 +111,7 @@ void ADS1246::WriteReg(uint8_t RegAddr, uint8_t da)
 FF FF FF -MIN
 80 00 00 -MAX
 ---------------------------------------------------------*/
-int ADS1246::decodead(uint8_t *da)
+int ADS1246::decodead(byte *da)
 {
     int ret = 0;
     uint ret1 = 0;
@@ -141,7 +141,7 @@ int ADS1246::decodead(uint8_t *da)
 
 int ADS1246::Read(void) //返回-1,表示转换未完成
 {
-    uint8_t Cmd[3];
+    byte Cmd[3];
     int Ret = 0;
 	this->readCnt++;
 	this->readCntCheck++;
@@ -201,9 +201,9 @@ void  ADS1246::SetSpeed(ADSPEEDTYPE spd)
 }
 
 //AD检查，正常返回0
-uint8_t ADS1246::Check(void)
+byte ADS1246::Check(void)
 {
-    uint8_t ret = 0;
+    byte ret = 0;
     if (0x08 != this->ReadReg(ADC_REG_ID))
     {
         ret++;

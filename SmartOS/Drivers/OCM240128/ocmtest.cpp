@@ -39,7 +39,7 @@ void ocmtest::SetDataPin(Pin d0, Pin d1, Pin d2, Pin d3, Pin d4, Pin d5, Pin d6,
 	this->data6.pinMode(GPIO_Out_PP);
 	this->data7.pinMode(GPIO_Out_PP);
 }
-void ocmtest::writedata(uint8_t da)
+void ocmtest::writedata(byte da)
 {
 	this->data0 = da & (1 << 0);
 	this->data1 = da & (1 << 1);
@@ -55,7 +55,7 @@ void ocmtest::writedata(uint8_t da)
 #define addr_t     0x01e0   //图形显示区首地址
 //#define data_ora   P0       //MCU P0<------> LCM
 
-uint8_t const tab11[] = {
+byte const tab11[] = {
 0x00,0x00,0x00,0x00,0x00,0x27,0x4f,0x4c,0x44,0x45,0x4e,0x00,0x30,0x41,0x4c,
 0x4d,0x00,0x33,0x43,0x49,0x45,0x4e,0x43,0x45,0x00,0x00,0x00,0x00,0x00,0x00,
 0x00,0x00,0x00,0x00,0x00,0x34,0x45,0x43,0x48,0x4e,0x4f,0x4c,0x4f,0x47,0x59,
@@ -75,7 +75,7 @@ uint8_t const tab11[] = {
 0x26,0x21,0x38,0x1a,0x00,0x12,0x12,0x18,0x15,0x11,0x11,0x10,0x00,0x00,0x28,
 0x4f,0x54,0x4c,0x49,0x4e,0x45,0x1a,0x00,0x12,0x12,0x19,0x12,0x10,0x11,0x14 };
 
-uint8_t const tab12[] = {
+byte const tab12[] = {
 	/*--  宋体12;  此字体下对应的点阵为：宽x高=16x16   --*/
 	/*--  文字:  肇  --*/
 	0x10,0x40,0x08,0x40,0x3E,0xFE,0x23,0x48,0x3E,0x30,0x40,0xC8,0x41,0x06,0x9F,0xF0,
@@ -138,7 +138,7 @@ uint8_t const tab12[] = {
 	0x1F,0xF0,0x10,0x10,0x10,0x10,0x10,0x10,0x1F,0xF0,0x00,0x00,0xFF,0xFE,0x08,0x00,
 	0x08,0x00,0x1F,0xF0,0x08,0x10,0x00,0x10,0x00,0x10,0x01,0x10,0x00,0xA0,0x00,0x40 };
 
-uint8_t const tab3[] = {
+byte const tab3[] = {
 	/*--  宋体18;  此字体下对应的点阵为：宽x高=24x24   --*/
 	/*--  文字:  本  --*/
 	0x00,0x00,0x00,0x00,0x10,0x00,0x00,0x18,0x00,0x00,0x18,0x00,0x00,0x18,0x00,0x00,
@@ -381,7 +381,7 @@ uint8_t const tab3[] = {
 	0x0F,0x00,0x00,0x11,0x00,0x00,0x11,0x00,0x00,0x11,0x00,0x00,0x0F,0x00,0x00,0x00,
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 };
 
-uint8_t const tab5[] = {
+byte const tab5[] = {
 	/*--  调入了一幅图像：F:\梁\画图\cock128128.bmp  --*/
 	/*--  宽度x高度=128x128  --*/
 	0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
@@ -528,27 +528,27 @@ void ocmtest::delay1(uint ms)
 			;
 }
 /*------------写命令或数据到LCD--------------*/
-void ocmtest::wr_od(uint8_t dat, uint8_t comm)       //写一个数据和一个命令
+void ocmtest::wr_od(byte dat, byte comm)       //写一个数据和一个命令
 {
 	wr_data(dat);
 	wr_comm(comm);
 }
-void ocmtest::wr_td(uint8_t datl, uint8_t dath, uint8_t comm)  //写两个数据和一个命令
+void ocmtest::wr_td(byte datl, byte dath, byte comm)  //写两个数据和一个命令
 {
 	wr_data(datl);
 	wr_data(dath);
 	wr_comm(comm);
 }
-void ocmtest::wr_xd(uint dat, uint8_t comm)       //写一个16进制数据和一个命令
+void ocmtest::wr_xd(uint dat, byte comm)       //写一个16进制数据和一个命令
 {
-	uint8_t datl, dath;
+	byte datl, dath;
 	datl = dat;
 	dath = dat >> 8;
 	wr_data(datl);
 	wr_data(dath);
 	wr_comm(comm);
 }
-void ocmtest::wr_auto(uint8_t dat)               //自动写数据
+void ocmtest::wr_auto(byte dat)               //自动写数据
 {
 	chk_busy(1);
 	cd = 0;
@@ -559,7 +559,7 @@ void ocmtest::wr_auto(uint8_t dat)               //自动写数据
 	wr = 1;
 }
 
-void ocmtest::wr_comm(uint8_t comm)       //写命令
+void ocmtest::wr_comm(byte comm)       //写命令
 {
 	chk_busy(0);
 	cd = 1;
@@ -569,7 +569,7 @@ void ocmtest::wr_comm(uint8_t comm)       //写命令
 	wr = 0;
 	wr = 1;
 }
-void ocmtest::wr_data(uint8_t dat)       //写数据
+void ocmtest::wr_data(byte dat)       //写数据
 {
 	chk_busy(0);
 	cd = 0;
@@ -579,7 +579,7 @@ void ocmtest::wr_data(uint8_t dat)       //写数据
 	wr = 0;
 	wr = 1;
 }
-void ocmtest::chk_busy(uint8_t autowr)    //测状态
+void ocmtest::chk_busy(byte autowr)    //测状态
 {
 	this->writedata(0xff);
 	//data_ora = 0xff;
@@ -619,7 +619,7 @@ void ocmtest::init_lcd(void)
 /*--------------清RAM------------------*/
 void ocmtest::clrram(void)
 {
-	uint8_t i, j;
+	byte i, j;
 	wr_xd(addr_w, 0x24);
 	wr_comm(0xb0);
 	for (j = 0; j < 144; j++)
@@ -630,9 +630,9 @@ void ocmtest::clrram(void)
 	wr_comm(0xb2);
 }
 /*--------------显示点阵------------------*/
-void ocmtest::disp_dz(uint8_t data1, uint8_t data2)
+void ocmtest::disp_dz(byte data1, byte data2)
 {
-	uint8_t i, j;
+	byte i, j;
 	wr_xd(addr_t, 0x24);
 	wr_comm(0xb0);
 	for (j = 0; j < 32; j++)
@@ -645,9 +645,9 @@ void ocmtest::disp_dz(uint8_t data1, uint8_t data2)
 	wr_comm(0xb2);
 }
 /*--------------在addr处显示8xl*yl的图形--------------*/
-void ocmtest::disp_img(uint addr, uint8_t xl, uint8_t yl, uint8_t const * img)
+void ocmtest::disp_img(uint addr, byte xl, byte yl, byte const * img)
 {
-	uint8_t i, j;
+	byte i, j;
 	for (j = 0; j < yl; j++)
 	{
 		for (i = 0; i < xl; i++)
@@ -658,9 +658,9 @@ void ocmtest::disp_img(uint addr, uint8_t xl, uint8_t yl, uint8_t const * img)
 	}
 }
 /*----------在addr处显示row_yl行(每行row_xl个)8xl*yl的文字----------*/
-void ocmtest::disp_chn(uint addr, uint8_t xl, uint8_t yl, uint8_t row_xl, uint8_t row_yl, uint8_t const * chn)
+void ocmtest::disp_chn(uint addr, byte xl, byte yl, byte row_xl, byte row_yl, byte const * chn)
 {
-	uint8_t i, j, k, m;
+	byte i, j, k, m;
 	for (m = 0; m < row_yl; m++)
 	{
 		for (k = 0; k < row_xl; k++)
@@ -677,9 +677,9 @@ void ocmtest::disp_chn(uint addr, uint8_t xl, uint8_t yl, uint8_t row_xl, uint8_
 	}
 }
 /*--------------显示字符------------------*/
-void ocmtest::disp_eng(uint8_t const * eng)
+void ocmtest::disp_eng(byte const * eng)
 {
-	uint8_t i, j;
+	byte i, j;
 	wr_xd(addr_w, 0x24);
 	wr_comm(0xb0);
 	for (j = 0; j < 9; j++)

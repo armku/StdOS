@@ -107,7 +107,7 @@ bool Esp8266::ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint waittime)
 	this->WaitTime = waittime;
 	delay(waittime);
 	
-	//UART1_send_data((uint8_t*)this->bufRcv, this->readlen);
+	//UART1_send_data((byte*)this->bufRcv, this->readlen);
 	this->DealRespose(this->bufRcv, this->readlen);
 	return true;
 }
@@ -122,7 +122,7 @@ void Esp8266::Cmd(char* cmd)
 		buf[i] = cmd[i];
 	buf[len] = 0X0D;
 	buf[len + 1] = 0X0A;
-	this->send_buf((uint8_t*)buf, len+2);
+	this->send_buf((byte*)buf, len+2);
 }
 //处理接收到的数据
 bool Esp8266::DealRespose(char* buf, int len)

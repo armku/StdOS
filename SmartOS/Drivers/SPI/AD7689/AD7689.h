@@ -10,7 +10,7 @@
 class CAD7689
 {
 public:
-	uint8_t FlagEnable[MAXCH]; //是否允许通道转换 0：禁止，1：允许 备用
+	byte FlagEnable[MAXCH]; //是否允许通道转换 0：禁止，1：允许 备用
 public:
 	CAD7689();
 	void SetSpi(SpiBase *spi);
@@ -22,11 +22,11 @@ private:
 
 	float volt[MAXCH]; //电压值
 	uint16_t ADBuf[MAXCH]; //原始AD值
-	uint8_t chCurrent; //当前通道
-	uint8_t chDelayCnt; //通道延时时间，用于数据稳定        
+	byte chCurrent; //当前通道
+	byte chDelayCnt; //通道延时时间，用于数据稳定        
 private:
 	uint16_t AD_Read(void);
 	uint16_t AD_Write(uint16_t sdat);
-	uint8_t getNextCH(); //获取下次转换通道		
+	byte getNextCH(); //获取下次转换通道		
 };
 #endif

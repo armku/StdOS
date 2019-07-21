@@ -18,9 +18,9 @@ void PCF8563::GetDateTime(DateTime& dt)
 {
 	
 }
-uint8_t PCF8563::readaddr(uint8_t add)
+byte PCF8563::readaddr(byte add)
 {
-	uint8_t ret = 0;
+	byte ret = 0;
 	/* 第1步：发起I2C总线启动信号 */
 	this->IIC.Start();
 
@@ -34,7 +34,7 @@ uint8_t PCF8563::readaddr(uint8_t add)
 	}
 	
 	/* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-	this->IIC.WriteByte((uint8_t)this->Address);
+	this->IIC.WriteByte((byte)this->Address);
 
 	/* 第5步：等待ACK */
 	if (this->IIC.WaitAck() != 0)

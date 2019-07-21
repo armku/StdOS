@@ -11,8 +11,8 @@ extern "C" {
 
 typedef struct
 	{
-		//uint8_t data[1024];
-		uint8_t data[512];
+		//byte data[1024];
+		byte data[512];
 		uint len;
 	}
 	_data_Q_t;
@@ -27,8 +27,8 @@ typedef struct
 		int UsartReadCntCopy;
 	}UsartKernel_T;
 	
-	typedef void (*pFun_UART)(uint8_t c); 
-	typedef void (*pFun_UART_buf)(uint8_t *buf, uint len);
+	typedef void (*pFun_UART)(byte c); 
+	typedef void (*pFun_UART_buf)(byte *buf, uint len);
 	
 	
 	void UART1_Dis_IRQ(void);
@@ -43,26 +43,26 @@ typedef struct
 	void UART4_En_IRQ(void);
 	void UART5_En_IRQ(void);
 	
-	void UART_1_send_byte(uint8_t c);//不处理485方向口
-	void UART_2_send_byte(uint8_t c);//不处理485方向口
-	void UART_3_send_byte(uint8_t c);//不处理485方向口
-	void UART_4_send_byte(uint8_t c);//不处理485方向口
-	void UART_5_send_byte(uint8_t c);//不处理485方向口
+	void UART_1_send_byte(byte c);//不处理485方向口
+	void UART_2_send_byte(byte c);//不处理485方向口
+	void UART_3_send_byte(byte c);//不处理485方向口
+	void UART_4_send_byte(byte c);//不处理485方向口
+	void UART_5_send_byte(byte c);//不处理485方向口
 	
 	//通过串口（通讯串口）发送数据
-	void UART1_send_data(uint8_t *data, uint len);
+	void UART1_send_data(byte *data, uint len);
 
 //通过串口（通讯串口）发送数据
-	void UART2_send_data(uint8_t *data, uint len);
+	void UART2_send_data(byte *data, uint len);
 
 //通过串口（通讯串口）发送数据
-	void UART3_send_data(uint8_t *data, uint len);
+	void UART3_send_data(byte *data, uint len);
 
 //通过串口（通讯串口）发送数据
-	void UART4_send_data(uint8_t *data, uint len);
+	void UART4_send_data(byte *data, uint len);
 
 //通过串口（通讯串口）发送数据
-	void UART5_send_data(uint8_t *data, uint len);
+	void UART5_send_data(byte *data, uint len);
 
 	extern pFun_UART UART_1_rcv_IRQ;
 	extern pFun_UART UART_2_rcv_IRQ  ;

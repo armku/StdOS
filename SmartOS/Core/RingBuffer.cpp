@@ -8,7 +8,7 @@ RingBuffer::RingBuffer(void* buffer, int bufsize)
 
 void RingBuffer::Init(void* buffer, int bufsize)
 {
-	this->buf = (uint8_t*)buffer;
+	this->buf = (byte*)buffer;
 	this->BufLen = bufsize;
 	this->head = 0;
 	this->tail = 0;

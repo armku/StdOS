@@ -29,7 +29,7 @@ void DS18B20::Rest()
  */
 bool DS18B20::Presence()
 {
-    uint8_t pulse_time = 0;
+    byte pulse_time = 0;
     /* 主机设置为上拉输入 */
     /* 等待存在脉冲的到来，存在脉冲为一个60~240us的低电平信号 
      * 如果存在脉冲没有来则做超时处理，从机接收到主机的复位信号后，会在15~60us后给主机发一个存在脉冲
@@ -61,9 +61,9 @@ bool DS18B20::Presence()
 /*
  * 从DS18B20读取一个bit
  */
-uint8_t DS18B20::ReadBit()
+byte DS18B20::ReadBit()
 {
-    uint8_t dat;
+    byte dat;
 
     /* 读0和读1的时间至少要大于60us */
     /* 读时间的起始：必须由主机产生 >1us <15us 的低电平信号 */
@@ -87,9 +87,9 @@ uint8_t DS18B20::ReadBit()
 /*
  * 从DS18B20读一个字节，低位先行
  */
-uint8_t DS18B20::ReadByte()
+byte DS18B20::ReadByte()
 {
-    uint8_t i, j, dat = 0;
+    byte i, j, dat = 0;
 
     for (i = 0; i < 8; i++)
     {
@@ -103,9 +103,9 @@ uint8_t DS18B20::ReadByte()
 /*
  * 写一个字节到DS18B20，低位先行
  */
-void DS18B20::WriteByte(uint8_t dat)
+void DS18B20::WriteByte(byte dat)
 {
-    uint8_t i, testb;
+    byte i, testb;
 
     for (i = 0; i < 8; i++)
     {
@@ -142,7 +142,7 @@ void DS18B20::Start()
     this->WriteByte(0X44); /* 开始转换 */
 }
 
-uint8_t DS18B20::Init()
+byte DS18B20::Init()
 {
     this->Rest();
     return 0;
@@ -185,7 +185,7 @@ void DS18B20::SkipRom()
  */
 float DS18B20::GetTemp()
 {
-    uint8_t tpmsb, tplsb;
+    byte tpmsb, tplsb;
     short s_tem;
     float f_tem;
 

@@ -23,16 +23,16 @@
 #define CTL_REG_ADDR	0x0F
 
 RX8025T::RX8025T(){}
-RX8025T::RX8025T(Pin pinsck, Pin pinsda, uint8_t devaddr, uint wnus)
+RX8025T::RX8025T(Pin pinsck, Pin pinsda, byte devaddr, uint wnus)
 {
     this->IIC.SetPin(pinsck, pinsda);
 }
-uint8_t BCD2Dec(uint8_t val)
+byte BCD2Dec(byte val)
 {
     return (val >> 4) *10+(val &0x0f);
 }
 
-uint8_t Dec2BCD(uint8_t val)
+byte Dec2BCD(byte val)
 {
     return ((val / 10) << 4)+(val % 10);
 }
@@ -53,9 +53,9 @@ void RX8025T::Init()
 
 }
 //
-uint8_t RX8025T::CheckDevice(void)
+byte RX8025T::CheckDevice(void)
 {
-	uint8_t re;
+	byte re;
 
     this->IIC.Start(); /* 发送启动信号 */
     this->IIC.WriteByte(this->devaddr|1);
@@ -63,7 +63,7 @@ uint8_t RX8025T::CheckDevice(void)
     this->IIC.Stop(); /* 发送停止信号 */
     return re;
 }
-uint8_t RX8025T::Output1s_Start(void)
+byte RX8025T::Output1s_Start(void)
 {	
 	//有问题
 	this->buf[EXT_REG_ADDR]=0x00;
@@ -72,7 +72,7 @@ uint8_t RX8025T::Output1s_Start(void)
 	
 	return this->RegWrite(EXT_REG_ADDR,3);	
 }
-uint8_t RX8025T::Output1s_Stop(void)
+byte RX8025T::Output1s_Stop(void)
 {
 	//有问题
 	this->buf[EXT_REG_ADDR]=0x00;
@@ -83,7 +83,7 @@ uint8_t RX8025T::Output1s_Stop(void)
 }
 
 //读RX8025寄存器
-int RX8025T::RegRead(uint8_t sadd, uint8_t len)
+int RX8025T::RegRead(byte sadd, byte len)
 {
     this->IIC.Start();
     this->IIC.WriteByte(this->devaddr);
@@ -112,7 +112,7 @@ int RX8025T::RegRead(uint8_t sadd, uint8_t len)
 }
 
 //写RX8025寄存器
-int RX8025T::RegWrite(uint8_t sadd, uint8_t len)
+int RX8025T::RegWrite(byte sadd, byte len)
 {
     this->IIC.Start();
     this->IIC.WriteByte(this->devaddr);

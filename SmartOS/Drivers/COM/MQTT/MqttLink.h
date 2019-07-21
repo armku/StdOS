@@ -9,8 +9,8 @@
 struct DataFrame
 {
 public:
-	uint8_t data[MAX_FRAME_DATA_LENGTH];//当前数据
-	uint8_t dataLength; //当前数据长度
+	byte data[MAX_FRAME_DATA_LENGTH];//当前数据
+	byte dataLength; //当前数据长度
 public:	
 };
 
@@ -31,11 +31,11 @@ public:
 	bool Connect();
 	bool Puslish(char *buf, int len);//发送数据
 	bool PuslishAndRelease(char* buf, int len);//发送并发布数据
-	bool Puslish(uint8_t*buf, int len)
+	bool Puslish(byte*buf, int len)
 	{
 		return Puslish((char *)buf, len);
 	}
-	bool PuslishAndRelease(uint8_t* buf, int len)
+	bool PuslishAndRelease(byte* buf, int len)
 	{
 		return this->PuslishAndRelease((char*)buf,len);
 	}
