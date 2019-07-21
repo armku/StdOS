@@ -1,4 +1,3 @@
-#include <stdint.h>
 #include "type.h"
 
 #ifndef _FONT_H
