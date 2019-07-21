@@ -6,8 +6,6 @@
 #include "Task.h"
 #include <string.h>
 #include "Platform\stm32.h"
-#include "OnChip\Configuration.h"
-#include "Core\Buffer.h"
 
 TSys Sys; //系统参数
 TTime Time; //系统时间，不建议用户直接使用
