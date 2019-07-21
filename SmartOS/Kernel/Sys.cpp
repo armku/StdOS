@@ -11,7 +11,7 @@ Sys.ID 是12字节芯片唯一标识、也就是ChipID，同一批芯片仅前面几个字节不同
 #include "Core\Buffer.h"
 
 TSys Sys; //系统参数
-
+TTime Time; //系统时间，不建议用户直接使用
 // 系统配置
 const SystemConfig g_Config = {
 //SystemConfig g_Config = {
