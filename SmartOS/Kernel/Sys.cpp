@@ -245,32 +245,7 @@ extern "C"
 	extern uint __initial_sp;
 }
 
-void TSys::OnInit()
-{
-#if defined STM32F0
-	this->Clock = 72000000;
-	this->CystalClock = HSE_VALUE;
-	memcpy(this->ID, (void*)0x1FFFF7AC, ArrayLength(this->ID));
-		
-	this->FlashSize = *(__IO ushort*)(0x1FFFF7CC); // 容量	
-#elif defined STM32F1
-	this->Clock = 72000000;
-	this->CystalClock = HSE_VALUE;
-	memcpy(this->ID, (void*)0x1FFFF7E8, ArrayLength(this->ID));
 
-	uint MCUID = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
-	
-	this->FlashSize = *(__IO ushort*)(0x1FFFF7E0); // 容量
-#elif defined STM32F4
-	this->Clock = 168000000;
-	this->CystalClock = HSE_VALUE;
-	memcpy(this->ID, (void*)0x1fff7a10, ArrayLength(this->ID));
-	
-	this->FlashSize = *(__IO ushort*)(0X1FFF7a22); // 容量	
-#endif
-	HeapSize = ((uint)&__heap_limit - (uint)&__heap_base);
-	StackSize = ((uint)&__initial_sp - (uint)&__heap_limit);
-}
 
 void TSys::OnShowInfo()const
 {	
