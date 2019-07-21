@@ -85,7 +85,7 @@ void setup()
 	
 	com1test();
 
-	Esp8266TestInit();
+	//Esp8266TestInit();
 	/*ModbusSlaveLinkTestInit();*/
 }
 
