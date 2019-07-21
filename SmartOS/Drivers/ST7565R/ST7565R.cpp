@@ -324,7 +324,7 @@ void CLcd::Line(ushort x0, ushort y0, ushort x1, ushort y1)
         //x0,y0起点坐标；x1,y1终点坐标；
         ushort x, y;
         ushort d_x, d_y;
-        int16_t err = 0;
+        int err = 0;
         ushort temp = 0;
 
         if (y1 < y0)
@@ -462,7 +462,7 @@ void CLcd::RectSolid(ushort x0, ushort y0, ushort width, ushort height)
 void CLcd::Circle(ushort x0, ushort y0, ushort R)
 {
     ushort a = 0, b = 0;
-    int16_t di = 0;
+    int di = 0;
     b = R;
     di = 1-R;
     while (a <= b)

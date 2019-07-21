@@ -70,7 +70,7 @@ DateTime &DateTime::Parse(int seconds)
     return  *this;
 }
 
-DateTime &DateTime::ParseMs(int64_t ms)
+DateTime &DateTime::ParseMs(Int64 ms)
 {
     this->Parse(ms / 1000);
     this->Ms = ms % 1000;
@@ -131,7 +131,7 @@ int DateTime::TotalSeconds()const
        + 60 * (this->Minute + 60 * (this->Hour + 24 * this->TotalDays()));
 }
 // 1970/1/1ÒÔÀ´ºÁÃëÊý
-int64_t DateTime::TotalMs()const
+Int64 DateTime::TotalMs()const
 {
     return 1000 * this->TotalSeconds() + this->Ms;
 }
@@ -201,7 +201,7 @@ DateTime DateTime::AddSeconds(int value) const
 	ret.Parse(ret.TotalSeconds()+value);
 	return ret;
 }
-DateTime DateTime::AddMilliseconds(int64_t value) const
+DateTime DateTime::AddMilliseconds(Int64 value) const
 {
   DateTime ret(*this);
 	

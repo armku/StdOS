@@ -88,7 +88,7 @@ int ADS1232::Read(bool cal)
 	static UInt64 msnew = 0;
 	int temp = 0;
 	uint valOrigin = 0;
-	int32_t ret = 0;
+	int ret = 0;
 
 	msnew = millis();
 	this->Status = 0;
