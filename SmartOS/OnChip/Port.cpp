@@ -26,7 +26,7 @@ Port::Port()
 #ifndef TINY
 Port::~Port()
 {
-	//Close();
+	Close();
 }
 #endif
 
@@ -82,14 +82,14 @@ void Port::Close()
 	if (!Opened) return;
 	if (_Pin == P0) return;
 
-//	OnClose();
+	OnClose();
 
 #if DEBUG
 	// 保护引脚
 	auto name = typeid(*this).name();
 	while (*name >= '0' && *name <= '9') name++;
 	debug_printf("%s", name);
-//	Port_Reserve(_Pin, false);
+	Port_Reserve(_Pin, false);
 	debug_printf("\r\n");
 #endif
 
@@ -105,6 +105,43 @@ WEAK void Port::RemapConfig(uint param, bool sta) {}
 WEAK void Port::AFConfig(GPIO_AF GPIO_AF) const {}
 #endif
 
+// 端口引脚保护
+#if DEBUG
+// 引脚保留位，记录每个引脚是否已经被保留，禁止别的模块使用
+// !!!注意，不能全零，否则可能会被当作zeroinit而不是copy，导致得不到初始化
+static ushort Reserved[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xFF };
+
+// 保护引脚，别的功能要使用时将会报错。返回是否保护成功
+bool Port_Reserve(Pin pin, bool flag)
+{
+	debug_printf("::");
+	int port = pin >> 4, bit = 1 << (pin & 0x0F);
+	if (flag) {
+		if (Reserved[port] & bit) {
+			// 增加针脚已经被保护的提示，很多地方调用ReservePin而不写日志，得到False后直接抛异常
+			debug_printf("P%c%d 已被打开", _PIN_NAME(pin));
+			return false; // already reserved
+		}
+		Reserved[port] |= bit;
+
+		debug_printf("打开 P%c%d", _PIN_NAME(pin));
+	}
+	else {
+		Reserved[port] &= ~bit;
+
+		debug_printf("关闭 P%c%d", _PIN_NAME(pin));
+	}
+
+	return true;
+}
+
+/*// 引脚是否被保护
+bool Port::IsBusy(Pin pin)
+{
+	int port = pin >> 4, sh = pin & 0x0F;
+	return (Reserved[port] >> sh) & 1;
+}*/
+#endif
 
 
 
