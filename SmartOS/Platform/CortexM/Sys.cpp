@@ -46,15 +46,6 @@ const uint RamSizes[] = { 6, 10, 20,  20,  48,  48, 128, 192,  128,  192,  192 }
 #endif
 
 #endif
-
-
-
-
-
-
-
-
-#if 0
 // 关键性代码，放到开头
 INROOT _force_inline void InitHeapStack(uint top)
 {
@@ -81,6 +72,15 @@ INROOT uint16_t Get_JTAG_ID()
 	}
 	return  0;
 }
+
+
+
+
+
+
+
+
+#if 0
 
 INROOT void TSys::OnInit()
 {
