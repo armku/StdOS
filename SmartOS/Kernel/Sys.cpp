@@ -247,7 +247,7 @@ void TSys::GlobalDisable()
 {
 	INTX_DISABLE();
 }
-void assert_failed(uint8_t *file, uint32_t line, char *errstr)
+void assert_failed(byte *file, uint32_t line, char *errstr)
 {
 	debug_printf("%s(%d):    %s\n", file, line, errstr);
 }

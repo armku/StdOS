@@ -56,7 +56,7 @@ public:
 	uint32_t	HeapSize;	// 堆大小
 	uint32_t	StackSize;	// 栈大小
 
-	uint8_t	ID[12];		// 芯片ID。
+	byte	ID[12];		// 芯片ID。
     uint16_t	FlashSize;	// 芯片Flash容量。
     //uint16_t	RAMSize;	// 芯片RAM容量
 	Version OsVer;//系统版本
