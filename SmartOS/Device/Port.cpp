@@ -658,11 +658,6 @@ bool Port::Read()const
 #endif
 }
 
-bool OutputPort::Read() const
-{
-	return false;
-}
-
 void OutputPort::OpenPin(void* param)
 	{
 	}

@@ -4,40 +4,40 @@
 
 #include "Platform\stm32.h"
 
-//GPIO_TypeDef* IndexToGroup(byte index) { return ((GPIO_TypeDef *) (GPIOA_BASE + (index << 10))); }
+static GPIO_TypeDef* IndexToGroup(byte index) { return ((GPIO_TypeDef *) (GPIOA_BASE + (index << 10))); }
 
 ///******************************** Port ********************************/
 
-//// 端口基本功能
-//#define REGION_Port 1
-//#ifdef REGION_Port
+// 端口基本功能
+#define REGION_Port 1
+#ifdef REGION_Port
 
-//// 分组时钟
-//static byte _GroupClock[10];
+// 分组时钟
+static byte _GroupClock[10];
 
-//extern void OpenPeriphClock(Pin pin, bool flag);
+extern void OpenPeriphClock(Pin pin, bool flag);
 
-//static void OpenClock(Pin pin, bool flag)
-//{
-//    int gi = pin >> 4;
+static void OpenClock(Pin pin, bool flag)
+{
+    int gi = pin >> 4;
 
-//	if(flag)
-//	{
-//		// 增加计数，首次打开时钟
+	if(flag)
+	{
+		// 增加计数，首次打开时钟
 //		if(_GroupClock[gi]++) return;
-//	}
-//	else
-//	{
-//		// 减少计数，最后一次关闭时钟
+	}
+	else
+	{
+		// 减少计数，最后一次关闭时钟
 //		if(_GroupClock[gi]-- > 1) return;
-//	}
+	}
 
 //	OpenPeriphClock(pin, flag);
-//}
+}
 
-//// 确定配置,确认用对象内部的参数进行初始化
-//void Port::Opening()
-//{
+// 确定配置,确认用对象内部的参数进行初始化
+void Port::Opening()
+{
 //    // 先打开时钟才能配置
 //	OpenClock(_Pin, true);
 
@@ -50,23 +50,23 @@
 //	GPIO_StructInit(&gpio);
 
 //	OnOpen(&gpio);
-//}
+}
 
-//WEAK void Port_OnOpen(Pin pin) {}
+WEAK void Port_OnOpen(Pin pin) {}
 
-//void Port::OnOpen(void* param)
-//{
+void Port::OnOpen(void* param)
+{
 //	auto gpio	= (GPIO_InitTypeDef*)param;
 //    gpio->GPIO_Pin = 1 << (_Pin & 0x0F);
 
 //	Port_OnOpen(_Pin);
-//}
+}
 
-//void Port::OnClose()
-//{
-//	// 不能随便关闭时钟，否则可能会影响别的引脚
-//	OpenClock(_Pin, false);
-//}
+void Port::OnClose()
+{
+	// 不能随便关闭时钟，否则可能会影响别的引脚
+	OpenClock(_Pin, false);
+}
 
 //bool Port::Read() const
 //{
@@ -76,27 +76,27 @@
 //	ushort ms	= 1 << (_Pin & 0x0F);
 //	return GPIO_ReadInputData(gp) & ms;
 //}
-//#endif
+#endif
 
 ///******************************** OutputPort ********************************/
 
-//// 输出端口
-//#define REGION_Output 1
-//#ifdef REGION_Output
+// 输出端口
+#define REGION_Output 1
+#ifdef REGION_Output
 
-//bool OutputPort::Read() const
-//{
-//	if(Empty()) return false;
+bool OutputPort::Read() const
+{
+	if(Empty()) return false;
 
-//	auto gp	= IndexToGroup(_Pin >> 4);
-//	auto ms	= 1 << (_Pin & 0x0F);
-//	// 转为bool时会转为0/1
-//	bool rs = GPIO_ReadOutputData(gp) & ms;
-//	return rs ^ Invert;
-//}
+	auto gp	= IndexToGroup(_Pin >> 4);
+	auto ms	= 1 << (_Pin & 0x0F);
+	// 转为bool时会转为0/1
+	bool rs = GPIO_ReadOutputData(gp) & ms;
+	return rs ^ Invert;	
+}
 
-//void OutputPort::Write(bool value) const
-//{
+void OutputPort::Write(bool value) const
+{
 //	if(Empty()) return;
 
 //	auto gi	= IndexToGroup(_Pin >> 4);
@@ -105,11 +105,11 @@
 //        GPIO_SetBits(gi, ms);
 //    else
 //        GPIO_ResetBits(gi, ms);
-//}
+}
 
-//// 设置端口状态
-//void OutputPort::Write(Pin pin, bool value)
-//{
+// 设置端口状态
+void OutputPort::Write(Pin pin, bool value)
+{
 //	if(pin == P0) return;
 
 //	auto gi	= IndexToGroup(pin >> 4);
@@ -118,9 +118,9 @@
 //        GPIO_SetBits(gi, ms);
 //    else
 //        GPIO_ResetBits(gi, ms);
-//}
+}
 
-//#endif
+#endif
 
 ///******************************** AlternatePort ********************************/
 
