@@ -35,8 +35,57 @@ struct HandlerRemap StrBoot __attribute__((at(0x2000fff0)));
 
 #endif
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ¹¹Ôìº¯Êý
-TSys::TSys()
+INROOT TSys::TSys()
 {
 #ifdef STM32F0
 	this->CystalClock = 8;
