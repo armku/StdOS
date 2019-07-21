@@ -50,7 +50,7 @@ INROOT void TInterrupt::Process(uint num) const
 void TInterrupt::Halt()
 {
 #if DEBUG
-	//TraceStack::Show();
+	TraceStack::Show();
 
 	//auto sp	= SerialPort::GetMessagePort();
 	//if(sp) sp->Flush();
