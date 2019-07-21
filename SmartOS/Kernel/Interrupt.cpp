@@ -133,3 +133,35 @@ bool Lock::Wait(int ms)
 	return true;
 }
 
+/*================================ 跟踪栈 ================================*/
+
+#if DEBUG
+
+// 使用字符串指针的指针，因为引用的都是字符串常量，不需要拷贝和分配空间
+static cstring _TS[64];
+static int _TS_Len = 0;
+
+TraceStack::TraceStack(cstring name)
+{
+	if (_TS_Len < 64) _TS[_TS_Len++] = name;
+}
+
+TraceStack::~TraceStack()
+{
+	if (_TS_Len > 0)
+		_TS_Len--;
+	else
+		debug_printf("_TS_Len \r\n");
+}
+
+void TraceStack::Show()
+{
+	debug_printf("TraceStack::Show:\r\n");
+	for (int i = _TS_Len - 1; i >= 0; i--)
+	{
+		debug_printf("\t<=%s \r\n", _TS[i]);
+	}
+}
+
+#endif
+
