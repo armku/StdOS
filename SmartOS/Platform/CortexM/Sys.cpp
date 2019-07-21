@@ -49,16 +49,16 @@ const uint RamSizes[] = { 6, 10, 20,  20,  48,  48, 128, 192,  128,  192,  192 }
 // 关键性代码，放到开头
 INROOT _force_inline void InitHeapStack(uint top)
 {
-	uint* p = (uint*)__get_MSP();
+//	uint* p = (uint*)__get_MSP();
 
-	uint size = (uint)&__initial_sp - (uint)p;
-	uint msp = top - size;
-	// 拷贝一部分栈内容到新栈
-	//Buffer((void*)msp, size)	= (void*)p;
-	Buffer::Copy((void*)msp, (void*)p, size);
+//	uint size = (uint)&__initial_sp - (uint)p;
+//	uint msp = top - size;
+//	// 拷贝一部分栈内容到新栈
+//	//Buffer((void*)msp, size)	= (void*)p;
+//	Buffer::Copy((void*)msp, (void*)p, size);
 
-	// 必须先拷贝完成栈，再修改栈指针
-	__set_MSP(msp);
+//	// 必须先拷贝完成栈，再修改栈指针
+//	__set_MSP(msp);
 }
 
 // 获取JTAG编号，ST是0x041，GD是0x7A3
@@ -97,6 +97,85 @@ void TSys::OnInit()
 #endif
 //	HeapSize = ((uint)&__heap_limit - (uint)&__heap_base);
 //	StackSize = ((uint)&__initial_sp - (uint)&__heap_limit);
+
+
+
+
+
+
+
+
+#ifdef STM32F0
+	Clock = 48000000;
+#elif defined(STM32F1) || defined(GD32F150)
+	Clock = 72000000;
+#elif defined(STM32F4)
+	Clock = 168000000;
+#endif
+	//CystalClock = 8000000;    // 晶振时钟
+	CystalClock = HSE_VALUE;    // 晶振时钟
+	MessagePort = COM1; // COM1;
+
+#ifndef TINY
+	bool IsGD = Get_JTAG_ID() == 0x7A3;
+
+#if defined(STM32F0) || defined(GD32F150)
+	void* p = (void*)0x1FFFF7AC;	// 手册里搜索UID，优先英文手册
+#elif defined(STM32F1)
+	void* p = (void*)0x1FFFF7E8;
+#elif defined(STM32F4)
+	void* p = (void*)0x1FFF7A10;
+#endif
+	//Buffer(ID, ArrayLength(ID))	= p;
+	Buffer::Copy(ID, p, ArrayLength(ID));
+
+	CPUID = SCB->CPUID;
+	uint mcuid = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
+	if (mcuid == 0 && IsGD) mcuid = *(uint*)0xE0042000; // 用GD32F103的位置
+	RevID = mcuid >> 16;
+	DevID = mcuid & 0x0FFF;
+
+	// GD32F103 默认使用120M
+#ifdef STM32F1
+	//if (IsGD && (DevID == 0x0430 || DevID == 0x0414)) Clock = 120000000;
+	if (IsGD) Clock = 120000000;
+#elif defined(STM32F4)
+	if (IsGD) Clock = 200000000;
+#endif
+
+	_Index = 0;
+#if defined(STM32F0) || defined(GD32F150)
+	if (IsGD)
+		FlashSize = *(__IO ushort *)(0x1FFFF7E0);  // 容量
+	else
+		FlashSize = *(__IO ushort *)(0x1FFFF7CC);  // 容量。手册里搜索FLASH_SIZE，优先英文手册
+#elif defined(STM32F1)
+	FlashSize = *(__IO ushort *)(0x1FFFF7E0);  // 容量
+#elif defined(STM32F4)
+	FlashSize = *(__IO ushort *)(0x1FFF7A22);  // 容量
+#endif
+	if (FlashSize != 0xFFFF)
+	{
+		RAMSize = FlashSize >> 3;	// 通过Flash大小和MCUID识别型号后得知内存大小
+		for (int i = 0; i < ArrayLength(MemSizes); i++)
+		{
+			if (MemSizes[i] == Sys.FlashSize)
+			{
+				_Index = i;
+				break;
+			}
+		}
+		RAMSize = RamSizes[_Index];
+	}
+
+	InitHeapStack(StackTop());
+#endif
+
+#ifdef STM32F1
+	// 关闭JTAG仿真接口，只打开SW仿真。
+	RCC->APB2ENR |= RCC_APB2ENR_AFIOEN; // 打开时钟
+	AFIO->MAPR |= AFIO_MAPR_SWJ_CFG_JTAGDISABLE;    //关闭JTAG仿真接口，只打开SW仿真。
+#endif
 }
 #if DEBUG
 typedef struct
@@ -303,77 +382,7 @@ int SmartOS_Log(const String& msg)
 
 INROOT void TSys::OnInit()
 {
-#ifdef STM32F0
-	Clock = 48000000;
-#elif defined(STM32F1) || defined(GD32F150)
-	Clock = 72000000;
-#elif defined(STM32F4)
-	Clock = 168000000;
-#endif
-	//CystalClock = 8000000;    // 晶振时钟
-	CystalClock = HSE_VALUE;    // 晶振时钟
-	MessagePort = COM1; // COM1;
 
-#ifndef TINY
-	bool IsGD = Get_JTAG_ID() == 0x7A3;
-
-#if defined(STM32F0) || defined(GD32F150)
-	void* p = (void*)0x1FFFF7AC;	// 手册里搜索UID，优先英文手册
-#elif defined(STM32F1)
-	void* p = (void*)0x1FFFF7E8;
-#elif defined(STM32F4)
-	void* p = (void*)0x1FFF7A10;
-#endif
-	//Buffer(ID, ArrayLength(ID))	= p;
-	Buffer::Copy(ID, p, ArrayLength(ID));
-
-	CPUID = SCB->CPUID;
-	uint mcuid = DBGMCU->IDCODE; // MCU编码。低字设备版本，高字子版本
-	if (mcuid == 0 && IsGD) mcuid = *(uint*)0xE0042000; // 用GD32F103的位置
-	RevID = mcuid >> 16;
-	DevID = mcuid & 0x0FFF;
-
-	// GD32F103 默认使用120M
-#ifdef STM32F1
-	//if (IsGD && (DevID == 0x0430 || DevID == 0x0414)) Clock = 120000000;
-	if (IsGD) Clock = 120000000;
-#elif defined(STM32F4)
-	if (IsGD) Clock = 200000000;
-#endif
-
-	_Index = 0;
-#if defined(STM32F0) || defined(GD32F150)
-	if (IsGD)
-		FlashSize = *(__IO ushort *)(0x1FFFF7E0);  // 容量
-	else
-		FlashSize = *(__IO ushort *)(0x1FFFF7CC);  // 容量。手册里搜索FLASH_SIZE，优先英文手册
-#elif defined(STM32F1)
-	FlashSize = *(__IO ushort *)(0x1FFFF7E0);  // 容量
-#elif defined(STM32F4)
-	FlashSize = *(__IO ushort *)(0x1FFF7A22);  // 容量
-#endif
-	if (FlashSize != 0xFFFF)
-	{
-		RAMSize = FlashSize >> 3;	// 通过Flash大小和MCUID识别型号后得知内存大小
-		for (int i = 0; i < ArrayLength(MemSizes); i++)
-		{
-			if (MemSizes[i] == Sys.FlashSize)
-			{
-				_Index = i;
-				break;
-			}
-		}
-		RAMSize = RamSizes[_Index];
-	}
-
-	InitHeapStack(StackTop());
-#endif
-
-#ifdef STM32F1
-	// 关闭JTAG仿真接口，只打开SW仿真。
-	RCC->APB2ENR |= RCC_APB2ENR_AFIOEN; // 打开时钟
-	AFIO->MAPR |= AFIO_MAPR_SWJ_CFG_JTAGDISABLE;    //关闭JTAG仿真接口，只打开SW仿真。
-#endif
 }
 
 
