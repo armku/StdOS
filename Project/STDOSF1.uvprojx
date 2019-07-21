@@ -876,6 +876,11 @@
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
+              <FileName>Heap.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Kernel\Heap.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Kernel\Sys.cpp</FilePath>
@@ -886,9 +891,19 @@
               <FilePath>..\SmartOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
+              <FileName>Thread.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Kernel\Thread.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Kernel\Time.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaitHandle.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1840,6 +1855,11 @@
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
+              <FileName>Heap.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Kernel\Heap.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Kernel\Sys.cpp</FilePath>
@@ -1850,9 +1870,19 @@
               <FilePath>..\SmartOS\Kernel\Task.cpp</FilePath>
             </File>
             <File>
+              <FileName>Thread.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Kernel\Thread.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Kernel\Time.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaitHandle.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Kernel\WaitHandle.cpp</FilePath>
             </File>
           </Files>
         </Group>
