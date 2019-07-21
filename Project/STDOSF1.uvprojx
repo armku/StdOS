@@ -336,7 +336,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>STM32F1,DEBUG,STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SmartOS;..\SmartOS\Core;..\SmartOS\OnChip;..\SmartOS\Kernel;..\Libraries\STM32F1\CMSIS;..\Libraries\STM32F1\FWLib\inc;..\Util;..\User;..\SmartOS\Security</IncludePath>
+              <IncludePath>..\SmartOS;..\SmartOS\Core;..\SmartOS\OnChip;..\SmartOS\Kernel;..\Libraries\STM32F1\CMSIS;..\Libraries\STM32F1\FWLib\inc;..\Util;..\User;..\SmartOS\Security;..\SmartOS\Device</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -704,15 +704,17 @@
         </Group>
         <Group>
           <GroupName>Device</GroupName>
-        </Group>
-        <Group>
-          <GroupName>OnChip</GroupName>
           <Files>
             <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\OnChip\Port.cpp</FilePath>
+              <FilePath>..\SmartOS\Device\Port.cpp</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>OnChip</GroupName>
+          <Files>
             <File>
               <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>
@@ -1746,15 +1748,17 @@
         </Group>
         <Group>
           <GroupName>Device</GroupName>
-        </Group>
-        <Group>
-          <GroupName>OnChip</GroupName>
           <Files>
             <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\OnChip\Port.cpp</FilePath>
+              <FilePath>..\SmartOS\Device\Port.cpp</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>OnChip</GroupName>
+          <Files>
             <File>
               <FileName>PwmSolo.cpp</FileName>
               <FileType>8</FileType>

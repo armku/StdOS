@@ -1,9 +1,9 @@
-ï»¿#ifndef _Port_H_
+#ifndef _Port_H_
 #define _Port_H_
 
 #include "Kernel\Sys.h"
 
-/******** ç«¯å£æ‰“å¼€å…³é—­æµç¨‹ ********/
+/******** ¶Ë¿Ú´ò¿ª¹Ø±ÕÁ÷³Ì ********/
 /*
 Port::Open
 	#Port::Opening
@@ -18,9 +18,22 @@ Port::Close
 
 /******************************** Port ********************************/
 
-// ç«¯å£åŸºç±»
-// ç”¨äºç®¡ç†ä¸€ä¸ªç«¯å£ï¼Œé€šè¿‡PinBitæ ‡è¯†è¯¥ç»„çš„å“ªäº›å¼•è„šã€‚
-// å­ç±»åˆå§‹åŒ–æ—¶å…ˆé€šè¿‡SetPortè®¾ç½®ç«¯å£ï¼Œå¤‡ä»½å¼•è„šçŠ¶æ€ï¼Œç„¶åConfigé€šè¿‡gpioç»“æ„ä½“é…ç½®ç«¯å£ï¼Œç«¯å£é”€æ¯æ—¶æ¢å¤å¼•è„šçŠ¶æ€
+// ¶Ë¿Ú»ùÀà
+// ÓÃÓÚ¹ÜÀíÒ»¸ö¶Ë¿Ú£¬Í¨¹ıPinBit±êÊ¶¸Ã×éµÄÄÄĞ©Òı½Å¡£
+// ×ÓÀà³õÊ¼»¯Ê±ÏÈÍ¨¹ıSetPortÉèÖÃ¶Ë¿Ú£¬±¸·İÒı½Å×´Ì¬£¬È»ºóConfigÍ¨¹ıgpio½á¹¹ÌåÅäÖÃ¶Ë¿Ú£¬¶Ë¿ÚÏú»ÙÊ±»Ö¸´Òı½Å×´Ì¬
+typedef enum
+{
+	GPIO_AIN = 0x0,//Ä£ÄâÊäÈëÄ£Ê½
+	GPIO_IN_FLOATING = 0x04,//¸¡¿ÕÊäÈëÄ£Ê½
+	GPIO_IPD = 0x28,//ÏÂÀ­ÊäÈëÄ£Ê½
+	GPIO_IPU = 0x48, //ÉÏÀ­ÊäÈëÄ£Ê½
+	GPIO_Out_OD = 0x14,//¿ªÂ©Êä³öÄ£Ê½
+	GPIO_Out_PP = 0x10,//Í¨ÓÃÍÆÍìÊä³öÄ£Ê½
+	GPIO_AF_OD = 0x1C,//¸´ÓÃ¹¦ÄÜ¿ªÂ©Êä³ö
+	GPIO_AF_PP = 0x18//¸´ÓÃ¹¦ÄÜÍÆÍìÊä³ö
+}GPIOMode_T;
+
+// ¶Ë¿ÚÀà
 class Port
 {
 public:
@@ -36,17 +49,17 @@ public:
 		AF_7 = 7
 	};
 
-    Pin		_Pin;		// å¼•è„š
-	bool	Opened;		// æ˜¯å¦å·²ç»æ‰“å¼€
-	byte    Index;		// å¼•è„šè‡ªèº«æ¬¡åºç¼–å·ï¼Œç”¨äºåŒºåˆ†å¤šå¼•è„šæ¬¡åº
-	void*	State;		// ç”¨æˆ·çŠ¶æ€æ•°æ®
+    Pin		_Pin;		// Òı½Å
+	bool	Opened;		// ÊÇ·ñÒÑ¾­´ò¿ª
+	byte    Index;		// Òı½Å×ÔÉí´ÎĞò±àºÅ£¬ÓÃÓÚÇø·Ö¶àÒı½Å´ÎĞò
+	void*	State;		// ÓÃ»§×´Ì¬Êı¾İ
 
 	Port();
 #ifndef TINY
 	virtual ~Port();
 #endif
 
-    Port& Set(Pin pin);	// è®¾ç½®å¼•è„š
+    Port& Set(Pin pin);	// ÉèÖÃÒı½Å
 	bool Empty() const;
 
 	bool Open();
@@ -61,23 +74,47 @@ public:
 	String ToString() const;
 
 protected:
-    // é…ç½®è¿‡ç¨‹
+    // ÅäÖÃ¹ı³Ì
     virtual void OnOpen(void* param);
 	virtual void OnClose();
 
 private:
 	void Opening();
+
+
+
+
+
+
+
+
+
+
+
+
+public:
+	virtual Port& SetPin(Pin pin);	// ÉèÖÃÒı½Å
+	void pinMode(GPIOMode_T mode);//ÉèÖÃ¹Ü½ÅÄ£Ê½
+
+	bool ReadInput() const;// Read/ReadInput µÄÇø±ğÔÚÓÚ£¬Ç°Õß¶ÁÊä³öºóÕß¶ÁÊäÈë£¬ÔÚ¿ªÂ©Êä³öµÄÊ±ºòÓĞºÜ´óÇø±ğ
+	void Write(bool value) const;
+	Port& operator=(bool value) { Write(value); return *this; }
+	Port& operator=(Port& port) { Write(port.Read()); return *this; }
+	
+	operator bool() const { return Read(); }
+public:
+	int Invert;//ÊÇ·ñ·´Ïò
 };
 
 /******************************** OutputPort ********************************/
 
-// è¾“å‡ºå£
+// Êä³ö¿Ú
 class OutputPort : public Port
 {
 public:
-    byte Invert		= 2;		// æ˜¯å¦å€’ç½®è¾“å…¥è¾“å‡ºã€‚é»˜è®¤2è¡¨ç¤ºè‡ªåŠ¨æ£€æµ‹
-    bool OpenDrain	= false;	// æ˜¯å¦å¼€æ¼è¾“å‡º
-    byte Speed		= 50;		// é€Ÿåº¦
+    byte Invert		= 2;		// ÊÇ·ñµ¹ÖÃÊäÈëÊä³ö¡£Ä¬ÈÏ2±íÊ¾×Ô¶¯¼ì²â
+    bool OpenDrain	= false;	// ÊÇ·ñ¿ªÂ©Êä³ö
+    byte Speed		= 50;		// ËÙ¶È
 
     OutputPort();
     OutputPort(Pin pin);
@@ -86,13 +123,13 @@ public:
 	OutputPort& Init(Pin pin, bool invert);
 
     void Write(bool value) const;
-	// æ‹‰é«˜ä¸€æ®µæ—¶é—´åæ‹‰ä½
+	// À­¸ßÒ»¶ÎÊ±¼äºóÀ­µÍ
 	void Up(int ms) const;
 	void Down(int ms) const;
-	// é—ªçƒå¤šæ¬¡
+	// ÉÁË¸¶à´Î
 	void Blink(int times, int ms) const;
 
-	// Read/ReadInput çš„åŒºåˆ«åœ¨äºï¼Œå‰è€…è¯»è¾“å‡ºåè€…è¯»è¾“å…¥ï¼Œåœ¨å¼€æ¼è¾“å‡ºçš„æ—¶å€™æœ‰å¾ˆå¤§åŒºåˆ«
+	// Read/ReadInput µÄÇø±ğÔÚÓÚ£¬Ç°Õß¶ÁÊä³öºóÕß¶ÁÊäÈë£¬ÔÚ¿ªÂ©Êä³öµÄÊ±ºòÓĞºÜ´óÇø±ğ
     virtual bool Read() const;
 	bool ReadInput() const;
 
@@ -111,7 +148,7 @@ private:
 
 /******************************** AlternatePort ********************************/
 
-// å¤ç”¨è¾“å‡ºå£
+// ¸´ÓÃÊä³ö¿Ú
 class AlternatePort : public OutputPort
 {
 public:
@@ -128,35 +165,35 @@ private:
 
 /******************************** InputPort ********************************/
 
-// è¾“å…¥å£
+// ÊäÈë¿Ú
 class InputPort : public Port
 {
 public:
     typedef enum
     {
         NOPULL	= 0x00,
-        UP		= 0x01,	// ä¸Šæ‹‰ç”µé˜»
-        DOWN	= 0x02,	// ä¸‹æ‹‰ç”µé˜»
+        UP		= 0x01,	// ÉÏÀ­µç×è
+        DOWN	= 0x02,	// ÏÂÀ­µç×è
     }PuPd;
     typedef enum
     {
-        Rising	= 0x01,	// ä¸Šå‡æ²¿
-        Falling	= 0x02,	// ä¸‹é™æ²¿
-		Both	= 0x03	// ä¸Šå‡ä¸‹é™æ²¿
+        Rising	= 0x01,	// ÉÏÉıÑØ
+        Falling	= 0x02,	// ÏÂ½µÑØ
+		Both	= 0x03	// ÉÏÉıÏÂ½µÑØ
     }Trigger;
 
-    // è¯»å–å§”æ‰˜
+    // ¶ÁÈ¡Î¯ÍĞ
     typedef void (*IOReadHandler)(InputPort* port, bool down, void* param);
 
-    ushort	ShakeTime	= 0;	// è®¾ç½® æŠ–åŠ¨æ—¶é—´ã€‚æ¯«ç§’
-	ushort	PressTime	= 0;	// è·å– é•¿æŒ‰æ—¶é—´ã€‚æ¯«ç§’
-    byte	Invert		= 2;	// æ˜¯å¦å€’ç½®è¾“å…¥è¾“å‡ºã€‚é»˜è®¤2è¡¨ç¤ºè‡ªåŠ¨æ£€æµ‹
-    bool	Floating	= true;	// æ˜¯å¦æµ®ç©ºè¾“å…¥
-    PuPd	Pull		= UP;	// ä¸Šæ‹‰ä¸‹æ‹‰ç”µé˜»
-	//Trigger	Mode		= Both;	// è§¦å‘æ¨¡å¼ï¼Œä¸Šå‡æ²¿ä¸‹é™æ²¿
-	bool	HardEvent	= false;// æ˜¯å¦ä½¿ç”¨ç¡¬ä»¶äº‹ä»¶ã€‚é»˜è®¤false
+    ushort	ShakeTime	= 0;	// ÉèÖÃ ¶¶¶¯Ê±¼ä¡£ºÁÃë
+	ushort	PressTime	= 0;	// »ñÈ¡ ³¤°´Ê±¼ä¡£ºÁÃë
+    byte	Invert		= 2;	// ÊÇ·ñµ¹ÖÃÊäÈëÊä³ö¡£Ä¬ÈÏ2±íÊ¾×Ô¶¯¼ì²â
+    bool	Floating	= true;	// ÊÇ·ñ¸¡¿ÕÊäÈë
+    PuPd	Pull		= UP;	// ÉÏÀ­ÏÂÀ­µç×è
+	//Trigger	Mode		= Both;	// ´¥·¢Ä£Ê½£¬ÉÏÉıÑØÏÂ½µÑØ
+	bool	HardEvent	= false;// ÊÇ·ñÊ¹ÓÃÓ²¼şÊÂ¼ş¡£Ä¬ÈÏfalse
 
-	Delegate2<InputPort&, bool>	Press;	// æŒ‰ä¸‹äº‹ä»¶
+	Delegate2<InputPort&, bool>	Press;	// °´ÏÂÊÂ¼ş
 
 	InputPort();
     InputPort(Pin pin, bool floating = true, PuPd pull = UP);
@@ -164,7 +201,7 @@ public:
 
 	InputPort& Init(Pin pin, bool invert);
 
-	// è¯»å–çŠ¶æ€
+	// ¶ÁÈ¡×´Ì¬
     virtual bool Read() const;
 
 	bool UsePress();
@@ -179,9 +216,9 @@ protected:
 private:
 	bool	_IRQ	= false;
 
-	uint	_task	= 0;	// è¾“å…¥ä»»åŠ¡
-	int		_Start	= 0;	// å¼€å§‹æŒ‰ä¸‹æ—¶é—´
-	int		_Last	= 0;	// æœ€åä¸€æ¬¡è§¦å‘æ—¶é—´
+	uint	_task	= 0;	// ÊäÈëÈÎÎñ
+	int		_Start	= 0;	// ¿ªÊ¼°´ÏÂÊ±¼ä
+	int		_Last	= 0;	// ×îºóÒ»´Î´¥·¢Ê±¼ä
 	static void InputTask(void* param);
 	static void InputNoIRQTask(void* param);
 
@@ -189,12 +226,12 @@ private:
 	void OpenPin(void* param);
 	void ClosePin();
 	bool OnRegister();
-	byte	_Value;	// å½“å‰å€¼
+	byte	_Value;	// µ±Ç°Öµ
 };
 
 /******************************** AnalogInPort ********************************/
 
-// æ¨¡æ‹Ÿè¾“å…¥å£
+// Ä£ÄâÊäÈë¿Ú
 class AnalogInPort : public Port
 {
 public:
@@ -210,7 +247,7 @@ private:
 
 /******************************** PortScope ********************************/
 
-// è¾“å‡ºç«¯å£ä¼šè¯ç±»ã€‚åˆå§‹åŒ–æ—¶æ‰“å¼€ç«¯å£ï¼Œè¶…å‡ºä½œç”¨åŸŸææ„æ—¶å…³é—­ã€‚åå‘æ“ä½œå¯é…ç½®ç«¯å£ä¸ºå€’ç½®
+// Êä³ö¶Ë¿Ú»á»°Àà¡£³õÊ¼»¯Ê±´ò¿ª¶Ë¿Ú£¬³¬³ö×÷ÓÃÓòÎö¹¹Ê±¹Ø±Õ¡£·´Ïò²Ù×÷¿ÉÅäÖÃ¶Ë¿ÚÎªµ¹ÖÃ
 class PortScope
 {
 private:
@@ -223,7 +260,7 @@ public:
 		_port = port;
 		if(_port)
 		{
-			// å¤‡ä»½æ•°å€¼ï¼Œææ„çš„æ—¶å€™éœ€è¦è¿˜åŸ
+			// ±¸·İÊıÖµ£¬Îö¹¹µÄÊ±ºòĞèÒª»¹Ô­
 			_value = port->Read();
 			*_port = value;
 		}
@@ -236,11 +273,11 @@ public:
 };
 
 /*
-è¾“å…¥å£é˜²æŠ–åŸç†ï¼š
-1ï¼Œä¸­æ–­æ—¶ï¼Œé€šè¿‡å¾ªç¯è¯»å–æ¥é¿å…æå¿«çš„ä¸­æ–­è§¦å‘ã€‚
-å®é™…ä¸Šä¸çŸ¥é“æ˜¯å¦æœ‰æ•ˆæœï¼Œå¤ªå¿«äº†æ— ä»æµ‹è¯•ï¼Œè¿™æ ·å­å¯èƒ½å¯¼è‡´ä¸¢å¤±æŒ‰ä¸‹æˆ–å¼¹èµ·äº‹ä»¶ï¼Œå°†æ¥è€ƒè™‘æ˜¯å¦éœ€è¦æ”¹è¿›ã€‚
-2ï¼ŒæŒ‰ä¸‹å’Œå¼¹èµ·äº‹ä»¶å…è®¸åŒæ—¶å¹¶å­˜äº_Valueï¼Œç„¶åå¯åŠ¨ä¸€ä¸ªä»»åŠ¡æ¥å¤„ç†ï¼Œä»»åŠ¡æ”¯æŒæ¯«ç§’çº§é˜²æŠ–å»¶è¿Ÿ
-3ï¼Œå› ä¸º_Valueå¯èƒ½åŒæ—¶å­˜åœ¨æŒ‰ä¸‹å’Œå¼¹èµ·ï¼Œä»»åŠ¡å¤„ç†æ—¶éœ€è¦åŒæ—¶è€ƒè™‘ä¸¤è€…ã€‚
+ÊäÈë¿Ú·À¶¶Ô­Àí£º
+1£¬ÖĞ¶ÏÊ±£¬Í¨¹ıÑ­»·¶ÁÈ¡À´±ÜÃâ¼«¿ìµÄÖĞ¶Ï´¥·¢¡£
+Êµ¼ÊÉÏ²»ÖªµÀÊÇ·ñÓĞĞ§¹û£¬Ì«¿ìÁËÎŞ´Ó²âÊÔ£¬ÕâÑù×Ó¿ÉÄÜµ¼ÖÂ¶ªÊ§°´ÏÂ»òµ¯ÆğÊÂ¼ş£¬½«À´¿¼ÂÇÊÇ·ñĞèÒª¸Ä½ø¡£
+2£¬°´ÏÂºÍµ¯ÆğÊÂ¼şÔÊĞíÍ¬Ê±²¢´æÓÚ_Value£¬È»ºóÆô¶¯Ò»¸öÈÎÎñÀ´´¦Àí£¬ÈÎÎñÖ§³ÖºÁÃë¼¶·À¶¶ÑÓ³Ù
+3£¬ÒòÎª_Value¿ÉÄÜÍ¬Ê±´æÔÚ°´ÏÂºÍµ¯Æğ£¬ÈÎÎñ´¦ÀíÊ±ĞèÒªÍ¬Ê±¿¼ÂÇÁ½Õß¡£
 */
 
 #endif //_Port_H_

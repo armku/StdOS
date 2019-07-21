@@ -1,7 +1,7 @@
 #ifndef _AD7689_H
 #define _AD7689_H
 
-#include "OnChip\Port.h"
+#include "Device\Port.h"
 #include "OnChip/Spi.h"
 
 #define MAXCH	8

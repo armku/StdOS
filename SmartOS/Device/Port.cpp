@@ -1,5 +1,5 @@
-ï»¿#include "Kernel\Sys.h"
-#include "Device\Port.h"
+#include "Kernel\Sys.h"
+#include "Port.h"
 
 #include <typeinfo>
 using namespace ::std;
@@ -7,20 +7,21 @@ using namespace ::std;
 /******************************** Port ********************************/
 
 #if DEBUG
-// ä¿æŠ¤å¼•è„šï¼Œåˆ«çš„åŠŸèƒ½è¦ä½¿ç”¨æ—¶å°†ä¼šæŠ¥é”™ã€‚è¿”å›æ˜¯å¦ä¿æŠ¤æˆåŠŸ
+// ±£»¤Òı½Å£¬±ğµÄ¹¦ÄÜÒªÊ¹ÓÃÊ±½«»á±¨´í¡£·µ»ØÊÇ·ñ±£»¤³É¹¦
 static bool Port_Reserve(Pin pin, bool flag);
 #endif
 
-// ç«¯å£åŸºæœ¬åŠŸèƒ½
+// ¶Ë¿Ú»ù±¾¹¦ÄÜ
 #define REGION_Port 1
 #ifdef REGION_Port
+
 Port::Port()
 {
-	_Pin = P0;
-	Opened = false;
-	Index = 0;
-	State = nullptr;
+	this->_Pin = P0;
+	this->Opened = false;
+	this->Invert=false;
 }
+
 
 #ifndef TINY
 Port::~Port()
@@ -28,6 +29,7 @@ Port::~Port()
 	Close();
 }
 #endif
+
 
 String Port::ToString() const
 {
@@ -45,14 +47,14 @@ String Port::ToString() const
 	return str;
 }
 
-// å•ä¸€å¼•è„šåˆå§‹åŒ–
+// µ¥Ò»Òı½Å³õÊ¼»¯
 Port& Port::Set(Pin pin)
 {
-	// å¦‚æœå¼•è„šä¸å˜ï¼Œåˆ™ä¸åšå¤„ç†
+	// Èç¹ûÒı½Å²»±ä£¬Ôò²»×ö´¦Àí
 	if (pin == _Pin) return *this;
 
 #ifndef TINY
-	// é‡Šæ”¾å·²æœ‰å¼•è„šçš„ä¿æŠ¤
+	// ÊÍ·ÅÒÑÓĞÒı½ÅµÄ±£»¤
 	if (_Pin != P0) Close();
 #endif
 
@@ -73,28 +75,7 @@ void Port::Clear()
 	_Pin = P0;
 }
 
-// ç¡®å®šé…ç½®,ç¡®è®¤ç”¨å¯¹è±¡å†…éƒ¨çš„å‚æ•°è¿›è¡Œåˆå§‹åŒ–
-bool Port::Open()
-{
-	if (_Pin == P0) return false;
-	if (Opened) return true;
 
-	TS("Port::Open");
-
-#if DEBUG
-	// ä¿æŠ¤å¼•è„š
-	auto name = typeid(*this).name();
-	while (*name >= '0' && *name <= '9') name++;
-	debug_printf("%s", name);
-	Port_Reserve(_Pin, true);
-#endif
-
-	Opening();
-
-	Opened = true;
-
-	return true;
-}
 
 void Port::Close()
 {
@@ -104,7 +85,7 @@ void Port::Close()
 	OnClose();
 
 #if DEBUG
-	// ä¿æŠ¤å¼•è„š
+	// ±£»¤Òı½Å
 	auto name = typeid(*this).name();
 	while (*name >= '0' && *name <= '9') name++;
 	debug_printf("%s", name);
@@ -124,37 +105,37 @@ WEAK void Port::RemapConfig(uint param, bool sta) {}
 WEAK void Port::AFConfig(GPIO_AF GPIO_AF) const {}
 #endif
 
-// ç«¯å£å¼•è„šä¿æŠ¤
+// ¶Ë¿ÚÒı½Å±£»¤
 #if DEBUG
-// å¼•è„šä¿ç•™ä½ï¼Œè®°å½•æ¯ä¸ªå¼•è„šæ˜¯å¦å·²ç»è¢«ä¿ç•™ï¼Œç¦æ­¢åˆ«çš„æ¨¡å—ä½¿ç”¨
-// !!!æ³¨æ„ï¼Œä¸èƒ½å…¨é›¶ï¼Œå¦åˆ™å¯èƒ½ä¼šè¢«å½“ä½œzeroinitè€Œä¸æ˜¯copyï¼Œå¯¼è‡´å¾—ä¸åˆ°åˆå§‹åŒ–
+// Òı½Å±£ÁôÎ»£¬¼ÇÂ¼Ã¿¸öÒı½ÅÊÇ·ñÒÑ¾­±»±£Áô£¬½ûÖ¹±ğµÄÄ£¿éÊ¹ÓÃ
+// !!!×¢Òâ£¬²»ÄÜÈ«Áã£¬·ñÔò¿ÉÄÜ»á±»µ±×÷zeroinit¶ø²»ÊÇcopy£¬µ¼ÖÂµÃ²»µ½³õÊ¼»¯
 static ushort Reserved[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xFF };
 
-// ä¿æŠ¤å¼•è„šï¼Œåˆ«çš„åŠŸèƒ½è¦ä½¿ç”¨æ—¶å°†ä¼šæŠ¥é”™ã€‚è¿”å›æ˜¯å¦ä¿æŠ¤æˆåŠŸ
+// ±£»¤Òı½Å£¬±ğµÄ¹¦ÄÜÒªÊ¹ÓÃÊ±½«»á±¨´í¡£·µ»ØÊÇ·ñ±£»¤³É¹¦
 bool Port_Reserve(Pin pin, bool flag)
 {
 	debug_printf("::");
 	int port = pin >> 4, bit = 1 << (pin & 0x0F);
 	if (flag) {
 		if (Reserved[port] & bit) {
-			// å¢åŠ é’ˆè„šå·²ç»è¢«ä¿æŠ¤çš„æç¤ºï¼Œå¾ˆå¤šåœ°æ–¹è°ƒç”¨ReservePinè€Œä¸å†™æ—¥å¿—ï¼Œå¾—åˆ°Falseåç›´æ¥æŠ›å¼‚å¸¸
-			debug_printf("P%c%d å·²è¢«æ‰“å¼€", _PIN_NAME(pin));
+			// Ôö¼ÓÕë½ÅÒÑ¾­±»±£»¤µÄÌáÊ¾£¬ºÜ¶àµØ·½µ÷ÓÃReservePin¶ø²»Ğ´ÈÕÖ¾£¬µÃµ½FalseºóÖ±½ÓÅ×Òì³£
+			debug_printf("P%c%d ÒÑ±»´ò¿ª", _PIN_NAME(pin));
 			return false; // already reserved
 		}
 		Reserved[port] |= bit;
 
-		debug_printf("æ‰“å¼€ P%c%d", _PIN_NAME(pin));
+		debug_printf("´ò¿ª P%c%d", _PIN_NAME(pin));
 	}
 	else {
 		Reserved[port] &= ~bit;
 
-		debug_printf("å…³é—­ P%c%d", _PIN_NAME(pin));
+		debug_printf("¹Ø±Õ P%c%d", _PIN_NAME(pin));
 	}
 
 	return true;
 }
 
-/*// å¼•è„šæ˜¯å¦è¢«ä¿æŠ¤
+/*// Òı½ÅÊÇ·ñ±»±£»¤
 bool Port::IsBusy(Pin pin)
 {
 	int port = pin >> 4, sh = pin & 0x0F;
@@ -164,7 +145,7 @@ bool Port::IsBusy(Pin pin)
 
 /******************************** OutputPort ********************************/
 
-// è¾“å‡ºç«¯å£
+// Êä³ö¶Ë¿Ú
 #define REGION_Output 1
 #ifdef REGION_Output
 
@@ -179,7 +160,7 @@ OutputPort::OutputPort(Pin pin, byte invert, bool openDrain, byte speed) : Port(
 	if (pin != P0)
 	{
 		Set(pin);
-		Open();
+		//Open();
 	}
 }
 
@@ -199,13 +180,13 @@ void OutputPort::OnOpen(void* param)
 #if DEBUG
 	debug_printf(" %dM", Speed);
 	if (OpenDrain)
-		debug_printf(" å¼€æ¼");
+		debug_printf(" ¿ªÂ©");
 	else
-		debug_printf(" æ¨æŒ½");
+		debug_printf(" ÍÆÍì");
 	bool fg = false;
 #endif
 
-	// æ ¹æ®å€’ç½®æƒ…å†µæ¥è·å–åˆå§‹çŠ¶æ€ï¼Œè‡ªåŠ¨åˆ¤æ–­æ˜¯å¦å€’ç½®
+	// ¸ù¾İµ¹ÖÃÇé¿öÀ´»ñÈ¡³õÊ¼×´Ì¬£¬×Ô¶¯ÅĞ¶ÏÊÇ·ñµ¹ÖÃ
 	bool rs = Port::Read();
 	if (Invert > 1)
 	{
@@ -219,19 +200,19 @@ void OutputPort::OnOpen(void* param)
 	if (Invert)
 	{
 		if (fg)
-			debug_printf(" è‡ªåŠ¨å€’ç½®");
+			debug_printf(" ×Ô¶¯µ¹ÖÃ");
 		else
-			debug_printf(" å€’ç½®");
+			debug_printf(" µ¹ÖÃ");
 	}
 #endif
 
 #if DEBUG
-	debug_printf(" åˆå§‹ç”µå¹³=%d \r\n", rs);
+	debug_printf(" ³õÊ¼µçÆ½=%d \r\n", rs);
 #endif
 
 	Port::OnOpen(param);
 
-	OpenPin(param);
+	//OpenPin(param);
 }
 
 WEAK bool OutputPort::ReadInput() const
@@ -247,18 +228,18 @@ void OutputPort::Up(int ms) const
 {
 	if (Empty()) return;
 
-	Write(true);
-	Sys.Sleep(ms);
-	Write(false);
+	//Write(true);
+	//Sys.Sleep(ms);
+	//Write(false);
 }
 
 void OutputPort::Down(int ms) const
 {
 	if (Empty()) return;
 
-	Write(false);
-	Sys.Sleep(ms);
-	Write(true);
+	//Write(false);
+	//Sys.Sleep(ms);
+	//Write(true);
 }
 
 void OutputPort::Blink(int times, int ms) const
@@ -268,11 +249,11 @@ void OutputPort::Blink(int times, int ms) const
 	bool flag = true;
 	for (int i = 0; i < times; i++)
 	{
-		Write(flag);
+		//Write(flag);
 		flag = !flag;
-		Sys.Sleep(ms);
+		//Sys.Sleep(ms);
 	}
-	Write(false);
+	//Write(false);
 }
 
 /******************************** AlternatePort ********************************/
@@ -283,7 +264,7 @@ AlternatePort::AlternatePort(Pin pin) : OutputPort(P0, false, false)
 	if (pin != P0)
 	{
 		Set(pin);
-		Open();
+		//Open();
 	}
 }
 AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
@@ -292,17 +273,17 @@ AlternatePort::AlternatePort(Pin pin, byte invert, bool openDrain, byte speed)
 	if (pin != P0)
 	{
 		Set(pin);
-		Open();
+		//Open();
 	}
 }
 
-WEAK void AlternatePort::OpenPin(void* param) { OutputPort::OpenPin(param); }
+//WEAK void AlternatePort::OpenPin(void* param) { OutputPort::OpenPin(param); }
 
 #endif
 
 /******************************** InputPort ********************************/
 
-// è¾“å…¥ç«¯å£
+// ÊäÈë¶Ë¿Ú
 #define REGION_Input 1
 #ifdef REGION_Input
 
@@ -320,7 +301,7 @@ InputPort::InputPort(Pin pin, bool floating, PuPd pull) : Port()
 	if (pin != P0)
 	{
 		Set(pin);
-		Open();
+		//Open();
 	}
 }
 
@@ -338,7 +319,7 @@ InputPort& InputPort::Init(Pin pin, bool invert)
 	return *this;
 }
 
-// è¯»å–æœ¬ç»„æ‰€æœ‰å¼•è„šï¼Œä»»æ„è„šä¸ºtrueåˆ™è¿”å›trueï¼Œä¸»è¦ä¸ºå•ä¸€å¼•è„šæœåŠ¡
+// ¶ÁÈ¡±¾×éËùÓĞÒı½Å£¬ÈÎÒâ½ÅÎªtrueÔò·µ»Øtrue£¬Ö÷ÒªÎªµ¥Ò»Òı½Å·şÎñ
 bool InputPort::Read() const
 {
 	bool v = Port::Read();
@@ -354,23 +335,23 @@ void InputPort::OnPress(bool down)
 {
 	auto v = down ? Rising : Falling;
 
-	// åœ¨GD32F103VEä¸Šï¼ŒæŒ‰ä¸‹PE13ï¼Œæœ‰5%å·¦å³å‡ ç‡è§¦å‘PE14çš„å¼¹èµ·ä¸­æ–­ï¼Œä¸”ç¤ºæ³¢å™¨æ²¡æœ‰æ£€æµ‹åˆ°PE14æŒ‰é”®æœ‰æ³¢å½¢
-	// ä¸Šè¿°é—®é¢˜ä»…å‡ºç°äº0801ï¼Œåœ¨0802ä¸Šæ²¡æœ‰é‡ç°ï¼Œä¸¤ä¸ªæŒ‰é”®æ˜¯PE9/PE14
+	// ÔÚGD32F103VEÉÏ£¬°´ÏÂPE13£¬ÓĞ5%×óÓÒ¼¸ÂÊ´¥·¢PE14µÄµ¯ÆğÖĞ¶Ï£¬ÇÒÊ¾²¨Æ÷Ã»ÓĞ¼ì²âµ½PE14°´¼üÓĞ²¨ĞÎ
+	// ÉÏÊöÎÊÌâ½ö³öÏÖÓÚ0801£¬ÔÚ0802ÉÏÃ»ÓĞÖØÏÖ£¬Á½¸ö°´¼üÊÇPE9/PE14
 	if (_Value == v) return;
 
 	/*
-	ï¼ï¼ï¼æ³¨æ„ï¼š
-	æœ‰äº›æŒ‰é’®å¯èƒ½ä¼šå‡ºç°110ç°è±¡ï¼Œä¹Ÿå°±æ˜¯æŒ‰ä¸‹çš„æ—¶å€™1ï¼ˆæ­£å¸¸ï¼‰ï¼Œå¼¹èµ·çš„æ—¶å€™è¿ç»­çš„1å’Œ0ï¼ˆä¸æ­£å¸¸ï¼‰ã€‚
+	£¡£¡£¡×¢Òâ£º
+	ÓĞĞ©°´Å¥¿ÉÄÜ»á³öÏÖ110ÏÖÏó£¬Ò²¾ÍÊÇ°´ÏÂµÄÊ±ºò1£¨Õı³££©£¬µ¯ÆğµÄÊ±ºòÁ¬ĞøµÄ1ºÍ0£¨²»Õı³££©¡£
 	*/
 
 #if DEBUG
 	InputPort_Total++;
 #endif
-	int	now = (int)Sys.Ms();
-	// è¿™ä¸€æ¬¡è§¦å‘ç¦»ä¸Šä¸€æ¬¡å¤ªè¿‘ï¼Œç®—ä½œæŠ–åŠ¨å¿½ç•¥æ‰
+	int	now =0;// (int)Sys.Ms();
+	// ÕâÒ»´Î´¥·¢ÀëÉÏÒ»´ÎÌ«½ü£¬Ëã×÷¶¶¶¯ºöÂÔµô
 	if (_Last > 0 && ShakeTime > 0 && now - _Last < ShakeTime)
 	{
-		// æ’¤æ¶ˆä¸Šä¸€æ¬¡å‡†å¤‡æ‰§è¡Œçš„åŠ¨ä½œï¼Œå¹¶å–æ¶ˆè¿™ä¸€æ¬¡äº‹ä»¶
+		// ³·ÏûÉÏÒ»´Î×¼±¸Ö´ĞĞµÄ¶¯×÷£¬²¢È¡ÏûÕâÒ»´ÎÊÂ¼ş
 		_Value = 0;
 #if DEBUG
 		InputPort_Error++;
@@ -380,7 +361,7 @@ void InputPort::OnPress(bool down)
 	_Last = now;
 
 	//_Value |= v;
-	// ä¸èƒ½æˆ–è¿ç®—ï¼Œå¦åˆ™è½®è¯¢æ—¶ä¼šè¿ç»­è§¦å‘ï¼Œå…·ä½“åŸå› æœªæ¸…æ¥š
+	// ²»ÄÜ»òÔËËã£¬·ñÔòÂÖÑ¯Ê±»áÁ¬Ğø´¥·¢£¬¾ßÌåÔ­ÒòÎ´Çå³ş
 	_Value = v;
 
 	if (down)
@@ -391,7 +372,7 @@ void InputPort::OnPress(bool down)
 	if (HardEvent || !_IRQ)
 		Press(*this, down);
 	else
-		// åœ¨æŠ–åŠ¨æ—¶é—´å†…ï¼Œå¦‚æœä¸‹ä¸€æ¬¡ä¿¡å·åˆ°æ¥ï¼Œè¿˜æœ‰æœºä¼šæ’¤æ¶ˆ
+		// ÔÚ¶¶¶¯Ê±¼äÄÚ£¬Èç¹ûÏÂÒ»´ÎĞÅºÅµ½À´£¬»¹ÓĞ»ú»á³·Ïû
 		Sys.SetTask(_task, true, ShakeTime);
 }
 
@@ -419,26 +400,26 @@ void InputPort::OnOpen(void* param)
 {
 	TS("InputPort::OnOpen");
 
-	// å¦‚æœä¸æ˜¯ç¡¬ä»¶äº‹ä»¶ï¼Œåˆ™é»˜è®¤ä½¿ç”¨20msæŠ–åŠ¨
+	// Èç¹û²»ÊÇÓ²¼şÊÂ¼ş£¬ÔòÄ¬ÈÏÊ¹ÓÃ20ms¶¶¶¯
 	if (!HardEvent && ShakeTime == 0) ShakeTime = 20;
 #if DEBUG
-	debug_printf(" æŠ–åŠ¨=%dms", ShakeTime);
+	debug_printf(" ¶¶¶¯=%dms", ShakeTime);
 	if (Floating)
-		debug_printf(" æµ®ç©º");
+		debug_printf(" ¸¡¿Õ");
 	else if (Pull == UP)
-		debug_printf(" ä¸Šå‡æ²¿");
+		debug_printf(" ÉÏÉıÑØ");
 	else if (Pull == DOWN)
-		debug_printf(" ä¸‹é™æ²¿");
-	//if(Mode & Rising)	debug_printf(" æŒ‰ä¸‹");
-	//if(Mode & Falling)	debug_printf(" å¼¹èµ·");
+		debug_printf(" ÏÂ½µÑØ");
+	//if(Mode & Rising)	debug_printf(" °´ÏÂ");
+	//if(Mode & Falling)	debug_printf(" µ¯Æğ");
 
 	bool fg = false;
 #endif
 
-	Port::OnOpen(param);
-	OpenPin(param);
+	//Port::OnOpen(param);
+	//OpenPin(param);
 
-	// æ ¹æ®å€’ç½®æƒ…å†µæ¥è·å–åˆå§‹çŠ¶æ€ï¼Œè‡ªåŠ¨åˆ¤æ–­æ˜¯å¦å€’ç½®
+	// ¸ù¾İµ¹ÖÃÇé¿öÀ´»ñÈ¡³õÊ¼×´Ì¬£¬×Ô¶¯ÅĞ¶ÏÊÇ·ñµ¹ÖÃ
 	bool rs = Port::Read();
 	if (Invert > 1)
 	{
@@ -447,7 +428,7 @@ void InputPort::OnOpen(void* param)
 		fg = true;
 #endif
 
-		// è®¾ç½®æŒ‰é”®åˆå§‹çŠ¶æ€ï¼Œé¿å…å¼€å§‹è½®è¯¢æ—¶äº§ç”Ÿä¸€æ¬¡è¯¯è§¦å‘
+		// ÉèÖÃ°´¼ü³õÊ¼×´Ì¬£¬±ÜÃâ¿ªÊ¼ÂÖÑ¯Ê±²úÉúÒ»´ÎÎó´¥·¢
 		_Value = Falling;
 	}
 
@@ -455,14 +436,14 @@ void InputPort::OnOpen(void* param)
 	if (Invert)
 	{
 		if (fg)
-			debug_printf(" è‡ªåŠ¨å€’ç½®");
+			debug_printf(" ×Ô¶¯µ¹ÖÃ");
 		else
-			debug_printf(" å€’ç½®");
+			debug_printf(" µ¹ÖÃ");
 	}
 #endif
 
 #if DEBUG
-	debug_printf(" åˆå§‹ç”µå¹³=%d \r\n", rs);
+	debug_printf(" ³õÊ¼µçÆ½=%d \r\n", rs);
 #endif
 }
 
@@ -470,28 +451,28 @@ void InputPort::OnClose()
 {
 	Port::OnClose();
 
-	ClosePin();
+	//ClosePin();
 }
 
-// è¾“å…¥è½®è¯¢æ—¶é—´é—´éš”ã€‚é»˜è®¤100msï¼Œå…è®¸å¤–éƒ¨ä¿®æ”¹
+// ÊäÈëÂÖÑ¯Ê±¼ä¼ä¸ô¡£Ä¬ÈÏ100ms£¬ÔÊĞíÍâ²¿ĞŞ¸Ä
 uint InputPort_Polling = 100;
 
 bool InputPort::UsePress()
 {
-	assert(_Pin != P0, "è¾“å…¥æ³¨å†Œå¿…é¡»å…ˆè®¾ç½®å¼•è„š");
+	assert(_Pin != P0, "ÊäÈë×¢²á±ØĞëÏÈÉèÖÃÒı½Å");
 
-	_IRQ = OnRegister();
+	_IRQ =false;// OnRegister();
 
 	if (!_task && !HardEvent)
 	{
-		// å¦‚æœç¡¬ä»¶ä¸­æ–­æ³¨å†Œå¤±è´¥ï¼Œåˆ™é‡‡ç”¨10mså®šæ—¶è¯»å–
+		// Èç¹ûÓ²¼şÖĞ¶Ï×¢²áÊ§°Ü£¬Ôò²ÉÓÃ10ms¶¨Ê±¶ÁÈ¡
 		if (_IRQ)
-			_task = Sys.AddTask(InputTask, this, -1, -1, "è¾“å…¥äº‹ä»¶");
+			_task = Sys.AddTask(InputTask, this, -1, -1, "ÊäÈëÊÂ¼ş");
 		else
 		{
-			// è®¾ç½®æŒ‰é”®åˆå§‹çŠ¶æ€ï¼Œé¿å…å¼€å§‹è½®è¯¢æ—¶äº§ç”Ÿä¸€æ¬¡è¯¯è§¦å‘
+			// ÉèÖÃ°´¼ü³õÊ¼×´Ì¬£¬±ÜÃâ¿ªÊ¼ÂÖÑ¯Ê±²úÉúÒ»´ÎÎó´¥·¢
 			//_Value = Read() ? Rising : Falling;
-			_task = Sys.AddTask(InputNoIRQTask, this, InputPort_Polling, InputPort_Polling, "è¾“å…¥è½®è¯¢");
+			_task = Sys.AddTask(InputNoIRQTask, this, InputPort_Polling, InputPort_Polling, "ÊäÈëÂÖÑ¯");
 		}
 	}
 
@@ -508,7 +489,183 @@ void AnalogInPort::OnOpen(void* param)
 	debug_printf("\r\n");
 #endif
 
-	Port::OnOpen(param);
+	//Port::OnOpen(param);
 
-	OpenPin(param);
+	//OpenPin(param);
+}
+
+
+
+
+
+
+#include "Port.h"
+#include "stm32f10x.h"
+
+#define _GROUP(PIN) ((GPIO_TypeDef *) (GPIOA_BASE + (((PIN) & (ushort)0xF0) << 6)))
+#define _RCC_APB2(PIN) (RCC_APB2Periph_GPIOA << (PIN >> 4))
+
+GPIO_TypeDef* GPIO_TypeDefGroup[] = { GPIOA ,GPIOB,GPIOC ,GPIOD ,GPIOE ,GPIOF,GPIOG };
+
+GPIO_TypeDef *IndexToGroup(byte index)
+{
+#if defined STM32F0
+	return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
+#elif defined STM32F1
+	return GPIO_TypeDefGroup[index];
+#elif defined STM32F4
+	return ((GPIO_TypeDef*)(GPIOA_BASE + (index << 10)));
+#endif
+}
+
+
+
+Port &Port::SetPin(Pin pin)
+{
+	if (this->_Pin != pin)
+	{
+		if (this->_Pin != P0)
+			this->Close();
+		this->_Pin = pin;
+
+	}
+	return  *this;
+}
+
+//ÉèÖÃ¹Ü½ÅÄ£Ê½
+void Port::pinMode(GPIOMode_T mode)
+{
+	if (this->Empty())
+		return;
+	//***±ØĞëÏÈ¿ªÆôÊ±ÖÓ£¬·ñÔò²»Õı³£
+#if defined STM32F0
+	// ´ò¿ªÊ±ÖÓ
+	int gi = _Pin >> 4;
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA << gi, ENABLE);
+#elif defined STM32F1
+	// ´ò¿ªÊ±ÖÓ
+	int gi = _Pin >> 4;
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA << gi, ENABLE);
+	// PA15/PB3/PB4 ĞèÒª¹Ø±ÕJTAG
+	switch (_Pin)
+	{
+	case PA15:
+	case PB3:
+	case PB4:
+		//debug_printf("Close JTAG for P%c%d\r\n", _PIN_NAME(_Pin));
+		// PA15ÊÇjtag½Ó¿ÚÖĞµÄÒ»Ô± ÏëÒªÊ¹ÓÃ ±ØĞë¿ªÆôremap
+		RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+		GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
+		break;
+	}
+#elif defined STM32F4
+	// ´ò¿ªÊ±ÖÓ
+	int gi = _Pin >> 4;
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA << gi, ENABLE);
+#endif
+
+#if defined STM32F0
+	gpio.GPIO_Speed = GPIO_Speed_50MHz;
+#elif defined STM32F1
+	GPIO_InitTypeDef gpio;
+	// ÌØ±ğÒªÉ÷ÖØ£¬ÓĞĞ©½á¹¹Ìå³ÉÔ±¿ÉÄÜÒòÎªÃ»ÓĞ³õÊ¼»¯¶øÄğ³É´ó´í
+	GPIO_StructInit(&gpio);
+	gpio.GPIO_Pin = 1 << (this->_Pin & 0x0F);
+
+	gpio.GPIO_Speed = GPIO_Speed_50MHz;
+	gpio.GPIO_Mode = (GPIOMode_TypeDef)mode;
+
+	GPIO_Init(IndexToGroup(this->_Pin >> 4), &gpio);
+#elif defined STM32F4
+	gpio.GPIO_Speed = GPIO_Speed_100MHz;
+#endif
+
+	this->Opened = true;
+}
+
+
+
+bool Port::ReadInput()const
+{
+	if (this->Empty())
+		return false;
+	else
+		return Port::Read();
+}
+
+void Port::Write(bool value)const
+{
+	if (this->Empty())
+		return;
+#if defined STM32F0	
+	if (value)
+	{
+		GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+	}
+	else
+	{
+		GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+	}
+#elif defined STM32F1
+	if (this->Invert == false)
+	{
+		if (value)
+		{
+			GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+		}
+		else
+		{
+			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+		}
+	}
+	else
+	{
+		if (value)
+		{
+			GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));			
+		}
+		else
+		{
+			GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+		}
+	}
+#elif defined STM32F4
+	if (value)
+	{
+		GPIO_SetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+	}
+	else
+	{
+		GPIO_ResetBits(_GROUP(this->_Pin), _PORT(this->_Pin));
+	}
+#endif
+}
+
+bool Port::Read()const
+{
+	if (this->Empty())
+		return false;
+#if defined STM32F0
+	GPIO_TypeDef *group = _GROUP(this->_Pin);
+	return (group->IDR >> (this->_Pin & 0xF)) & 1;
+#elif defined STM32F1
+	GPIO_TypeDef *group = _GROUP(this->_Pin);
+	bool ret= (group->IDR >> (this->_Pin & 0xF)) & 1;
+	return this->Invert ? (!ret) : ret;
+#elif defined STM32F4
+	GPIO_TypeDef *group = _GROUP(this->_Pin);
+	return (group->IDR >> (this->_Pin & 0xF)) & 1;
+#endif
+}
+
+bool OutputPort::Read() const
+{
+	return false;
+}
+
+void OutputPort::OpenPin(void* param)
+	{
+	}
+void AlternatePort::OpenPin(void* param)
+{
 }
