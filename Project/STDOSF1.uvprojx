@@ -661,6 +661,11 @@
               <FilePath>..\SmartOS\Core\Delegate.cpp</FilePath>
             </File>
             <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\List.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Dictionary.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\Dictionary.cpp</FilePath>
@@ -669,11 +674,6 @@
               <FileName>Environment.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\Environment.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>List.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Core\List.cpp</FilePath>
             </File>
             <File>
               <FileName>Queue.cpp</FileName>
@@ -1625,6 +1625,11 @@
               <FilePath>..\SmartOS\Core\Delegate.cpp</FilePath>
             </File>
             <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Core\List.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Dictionary.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\Dictionary.cpp</FilePath>
@@ -1633,11 +1638,6 @@
               <FileName>Environment.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Core\Environment.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>List.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Core\List.cpp</FilePath>
             </File>
             <File>
               <FileName>Queue.cpp</FileName>
