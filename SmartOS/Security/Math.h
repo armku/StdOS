@@ -16,8 +16,8 @@ public:
 	static float Min(float buf[], int len,int pos=0);//×îÐ¡Öµ
 	static void SortUp(float buf[],int len,int pos=0);//ÅÅÐò£¬ÉýÐò
 	static void SortDown(float buf[],int len,int pos=0);//ÅÅÐò ½µÐò
-	static uint16_t Crc16(void * buf, uint16_t len);
-	static byte  Crc8(void *buf, uint16_t len);
+	static ushort Crc16(void * buf, ushort len);
+	static byte  Crc8(void *buf, ushort len);
 	
 private:
 

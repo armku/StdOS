@@ -46,16 +46,16 @@ static void checkComRoutin(void* param)
 //测试 01 03 00 00 00 0A C5 CD
 ModbusRtuLinkSlave modbusSlave;
 Port p485dr;
-uint16_t RegInputu16[144]; //输入寄存器
-uint16_t RegHoilding16[60];
+ushort RegInputu16[144]; //输入寄存器
+ushort RegHoilding16[60];
 
 static void DealRcv(char* buf, int length)
 {
 	Buffer(loop_bufcom2, length).ShowHex(true);
 	if (length >= 8)
 	{
-		uint16_t crccal = Crc::CRC16RTU(loop_bufcom2, length - 2);
-		uint16_t crcrcv = loop_bufcom2[length - 1];
+		ushort crccal = Crc::CRC16RTU(loop_bufcom2, length - 2);
+		ushort crcrcv = loop_bufcom2[length - 1];
 		crcrcv <<= 8;
 		crcrcv |= loop_bufcom2[length - 2];
 		if (crcrcv == crccal)

@@ -22,7 +22,7 @@
 			void _wrdata(byte da);//写数据			       
 		private:
 			uint oled_pow(byte m, byte n);		
-			uint16_t SearchhzIndex(byte lo, byte hi); //查找汉字编码位置
+			ushort SearchhzIndex(byte lo, byte hi); //查找汉字编码位置
 			void ShowCHinese11(byte x, byte y, byte no);     
 			void WRByte(byte dat, byte cmd);
 		protected:

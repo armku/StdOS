@@ -490,7 +490,7 @@ byte Spi::Write(byte data)
 #endif
 }
 
-uint16_t Spi::Write16(uint16_t data)
+ushort Spi::Write16(ushort data)
 {
 #if defined STM32F0
 	int retry;
@@ -622,7 +622,7 @@ void SpiSoft::SetNss(Pin nss)
 ---------------------------------------------------------*/
 byte SpiSoft::WaitBusy()
 {
-	uint16_t i;
+	ushort i;
 	this->Start();
 	i = 0;
 	while (this->_miso.Read() > 0)
@@ -767,9 +767,9 @@ byte SpiSoft::Write(byte data)
 	}
 	return ret;
 }
-uint16_t SpiSoft::Write16(uint16_t data)
+ushort SpiSoft::Write16(ushort data)
 {
-	uint16_t dat = 0;
+	ushort dat = 0;
 
 	dat = this->Write((data >> 8) & 0xff);
 	dat <<= 8;

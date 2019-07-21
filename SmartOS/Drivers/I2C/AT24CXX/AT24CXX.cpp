@@ -9,7 +9,7 @@ bool AT24CXX::Write(uint addr, void * buf, int len, int bufpos)
 	uint curAddr;
 	uint pageStart; //Ò³ÄÚÆğÊ¼µØÖ·
 	uint bytesLeave; //»¹Ê£¶àÉÙ×Ö½Ú¶ÁÈ¡
-	uint16_t bufaddr;
+	ushort bufaddr;
 
 	pageStart = addr % this->Block;
 	bytesLeave = len;
@@ -62,7 +62,7 @@ bool AT24CXX::Read(uint addr, void * buf, int len, int bufpos)
 	uint curAddr;
 	uint pageStart; //Ò³ÄÚÆğÊ¼µØÖ·
 	uint bytesLeave; //»¹Ê£¶àÉÙ×Ö½Ú¶ÁÈ¡
-	uint16_t bufaddr;
+	ushort bufaddr;
 
 	pageStart = addr % this->Block;
 	bytesLeave = len;
@@ -126,7 +126,7 @@ void AT24CXX::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
 	}
 }
 
-byte AT24CXX::Read(uint16_t address)
+byte AT24CXX::Read(ushort address)
 {
 	byte ret = 0;
 	
@@ -187,7 +187,7 @@ cmd_Readbytefail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±
 	return ret;
 }
 
-bool AT24CXX::Write(uint16_t address, byte da)
+bool AT24CXX::Write(ushort address, byte da)
 {
 	uint m;
 
@@ -256,7 +256,7 @@ cmd_Writebytefail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè
 }
 
 //Ò³ÄÚ¶Á£¬×î¶àÒ»Ò³
-int AT24CXX::PageRead(uint16_t addr, void * buf, int len)
+int AT24CXX::PageRead(ushort addr, void * buf, int len)
 {
 	if (len > this->Block)
 		return 1;
@@ -320,12 +320,12 @@ cmd_Readfail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ */
 	return 1;
 }
 //Ò³ÄÚĞ´£¬×î¶àÒ»Ò³
-int AT24CXX::PageWrite(uint16_t addr, void * buf, int len)
+int AT24CXX::PageWrite(ushort addr, void * buf, int len)
 {
 	if (len > this->Block)
 		return 1;
 	uint m;
-	uint16_t usAddr;
+	ushort usAddr;
 	byte buftmp[256];
 
 	//·Ç·¨³¤¶È£¬Ö±½Ó·µ»Ø
@@ -416,9 +416,9 @@ cmd_Writefail:  /* ÃüÁîÖ´ĞĞÊ§°Üºó£¬ÇĞ¼Ç·¢ËÍÍ£Ö¹ĞÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ *
 	return 1;
 }
 
-uint16_t AT24CXX::jsPageSize(uint type) //¼ÆËã´æ´¢Ò³´óĞ¡
+ushort AT24CXX::jsPageSize(uint type) //¼ÆËã´æ´¢Ò³´óĞ¡
 {
-	uint16_t ret = 8;
+	ushort ret = 8;
 	switch (type)
 	{
 	case AT24C02:

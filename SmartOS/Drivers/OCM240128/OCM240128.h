@@ -14,8 +14,8 @@ public:
 		
 	void DispDot8x16(byte x, byte y, byte *text, byte mode);
 	void DispDot16x16(byte x, byte y, byte *text, byte mode);
-	void Draw_hline(byte x, byte y, uint16_t count);
-	void Draw_vline(byte x, byte y, uint16_t count);
+	void Draw_hline(byte x, byte y, ushort count);
+	void Draw_vline(byte x, byte y, ushort count);
 	void Test();
 private:
 	void busycheck(byte autowr);//¼ì²âÃ¦×´Ì¬

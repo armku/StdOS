@@ -24,8 +24,8 @@ public:
 	I2CSoft IIC; // I2C通信口
 	byte Address; // 设备地址
 
-	bool Write(uint16_t addr, byte data);
-	byte Read(uint16_t addr);
+	bool Write(ushort addr, byte data);
+	byte Read(ushort addr);
 
 	virtual bool Write(uint addr, void * buf, int len, int bufpos = 0);
 	virtual bool Read(uint addr, void * buf, int len, int bufpos = 0);
@@ -37,10 +37,10 @@ public:
 	Port pinWP; //保护引脚
 private:
 	byte checkDevice();
-	uint16_t jsPageSize(uint type); //计算存储页大小
+	ushort jsPageSize(uint type); //计算存储页大小
 private:
-	int PageRead(uint16_t addr, void * buf, int len);//页内读，最多一页
-	int PageWrite(uint16_t addr, void * buf, int len);//页内写，最多一页
+	int PageRead(ushort addr, void * buf, int len);//页内读，最多一页
+	int PageWrite(ushort addr, void * buf, int len);//页内写，最多一页
 	
 	EW24XXType deviceType; //器件类型
 	uint Block; //存储页大小

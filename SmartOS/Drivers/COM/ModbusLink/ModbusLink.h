@@ -15,11 +15,11 @@ public:
 	byte Code;		// 功能码
 	byte Error;		// 是否异常
 	byte Length;		// 数据长度
-	uint16_t regAddr;
-	uint16_t regLength;
+	ushort regAddr;
+	ushort regLength;
 	byte data[MAX_FRAMEMODBUS_DATA_LENGTH];
 	bool isUpdated;
-	uint16_t Crc;		// 校验码
+	ushort Crc;		// 校验码
 	int frameLength;//当前数据帧长度
 
 public:
@@ -40,7 +40,7 @@ public:
 	}
 
 	//设置传输寄存器值，地址从0开始编码
-	void SetReg(byte regaddr, uint16_t val)
+	void SetReg(byte regaddr, ushort val)
 	{
 		this->data[3 + regaddr * 2] = val >> 8;
 		this->data[3 + regaddr * 2 + 1] = val & 0xff;
@@ -151,7 +151,7 @@ typedef struct
 {
 	int Addr0;//起始地址
 	int Lenth;//寄存器长度
-	uint16_t *Reg;//寄存器指针
+	ushort *Reg;//寄存器指针
 }ModbusReg_T;//寄存器结构体
 
 class ModbusLink

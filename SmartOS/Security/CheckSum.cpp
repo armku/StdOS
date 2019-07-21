@@ -7,9 +7,9 @@ len 校验数据的长
  *输   出:校验和
  *功   能:校验和-8
  *******************************************************/
-byte CheckSum::XorCheckSum8(byte *buf, uint16_t len)
+byte CheckSum::XorCheckSum8(byte *buf, ushort len)
 {
-	uint16_t i = 0;
+	ushort i = 0;
 	byte Sum = 0;
 
 	for (i = 0; i < len; i++)
@@ -46,10 +46,10 @@ len 校验数据的长
  *输   出:校验和
  *功   能:校验和-16
  *******************************************************/
-uint16_t CheckSum::CheckSum16(byte *buf, uint len)
+ushort CheckSum::CheckSum16(byte *buf, uint len)
 {
     uint i = 0;
-    uint16_t Sum = 0;
+    ushort Sum = 0;
 
     for (i = 0; i < len; i++)
     {
@@ -103,7 +103,7 @@ len 校验数据的长
  *输   出:校验和
  *功   能:校验和-TCP/IP
  *******************************************************/
-uint16_t CheckSum::NetCheckSum(byte *buf, uint len)
+ushort CheckSum::NetCheckSum(byte *buf, uint len)
 {
     uint Sum = 0;
 
@@ -115,7 +115,7 @@ uint16_t CheckSum::NetCheckSum(byte *buf, uint len)
     Sum = (Sum >> 16) + (Sum &0xffff);
     Sum += (Sum >> 16);
 
-    return (uint16_t)(~Sum);
+    return (ushort)(~Sum);
 }
 
 /******************************************************

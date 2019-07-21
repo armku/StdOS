@@ -122,7 +122,7 @@ void ModbusRtuLinkSlave::DealFrame()
 	}
 }
 //设置输入寄存器
-void ModbusRtuLinkSlave::SetRegInput(int addr0, int reglen, uint16_t* reg, int reggroup)
+void ModbusRtuLinkSlave::SetRegInput(int addr0, int reglen, ushort* reg, int reggroup)
 {
 	//非法寄存器组
 	if (reggroup >= ModbusRtuLinkSlave::RegInputLen)
@@ -132,7 +132,7 @@ void ModbusRtuLinkSlave::SetRegInput(int addr0, int reglen, uint16_t* reg, int r
 	this->RegInputs[reggroup].Reg = reg;
 }
 //设置保持寄存器
-void ModbusRtuLinkSlave::SetRegHoid(int addr0, int reglen, uint16_t* reg, int reggroup)
+void ModbusRtuLinkSlave::SetRegHoid(int addr0, int reglen, ushort* reg, int reggroup)
 {
 	//非法寄存器组
 	if (reggroup >= ModbusRtuLinkSlave::RegHoildingLen)
@@ -142,7 +142,7 @@ void ModbusRtuLinkSlave::SetRegHoid(int addr0, int reglen, uint16_t* reg, int re
 	this->RegHoildings[reggroup].Reg = reg;
 }
 //处理读取输入寄存器 0 正确 1 非法地址 2非法长度
-int ModbusRtuLinkSlave::dealRegInputRead(uint16_t addr, uint16_t len)
+int ModbusRtuLinkSlave::dealRegInputRead(ushort addr, ushort len)
 {
 	int ret = this->searchRegInGroup(addr, len);
 	if (ret == -1)
@@ -166,7 +166,7 @@ int ModbusRtuLinkSlave::dealRegInputRead(uint16_t addr, uint16_t len)
 	return 0;
 }
 //处理读取保持寄存器 0 正确 1 非法地址 2非法长度
-int ModbusRtuLinkSlave::dealRegHoildRead(uint16_t addr, uint16_t len)
+int ModbusRtuLinkSlave::dealRegHoildRead(ushort addr, ushort len)
 {
 	int ret = this->searchRegHoildGroup(addr, len);
 	if (ret == -1)
@@ -186,7 +186,7 @@ int ModbusRtuLinkSlave::dealRegHoildRead(uint16_t addr, uint16_t len)
 	return 0;
 }
 //处理写入保持寄存器 0 正确 1 非法地址 2非法长度
-int ModbusRtuLinkSlave::dealRegHoildWrite(uint16_t addr, uint16_t len)
+int ModbusRtuLinkSlave::dealRegHoildWrite(ushort addr, ushort len)
 {
 	int ret = this->searchRegHoildGroup(addr, len);
 	if (ret == -1)
@@ -196,7 +196,7 @@ int ModbusRtuLinkSlave::dealRegHoildWrite(uint16_t addr, uint16_t len)
 	if (ret < 0)
 		return 3;
 
-	uint16_t tt;
+	ushort tt;
 	debug_printf("\nWriteMultipleRegisters reg:%d len:%d\n", addr, len);
 
 	for (int i = 0; i < this->rxFrame.regLength; i++)
@@ -214,7 +214,7 @@ int ModbusRtuLinkSlave::dealRegHoildWrite(uint16_t addr, uint16_t len)
 	return 0;
 }
 //处理写入单个保持寄存器 0 正确 1 非法地址 2非法长度
-int ModbusRtuLinkSlave::dealRegHoildWriteOne(uint16_t addr, uint16_t val)
+int ModbusRtuLinkSlave::dealRegHoildWriteOne(ushort addr, ushort val)
 {
 	int ret = this->searchRegHoildGroup(addr, 1);
 	if (ret == -1)
@@ -232,7 +232,7 @@ int ModbusRtuLinkSlave::dealRegHoildWriteOne(uint16_t addr, uint16_t val)
 	return 0;
 }
 //查找寄存器组，没有查找到返回负值
-int ModbusRtuLinkSlave::searchRegInGroup(uint16_t addr, uint16_t len)
+int ModbusRtuLinkSlave::searchRegInGroup(ushort addr, ushort len)
 {
 	for (int i = 0; i < this->RegInputLen; i++)
 	{
@@ -245,7 +245,7 @@ int ModbusRtuLinkSlave::searchRegInGroup(uint16_t addr, uint16_t len)
 	return -1;
 }
 //查找保持寄存器组，没有查找到返回负值
-int ModbusRtuLinkSlave::searchRegHoildGroup(uint16_t addr, uint16_t len)
+int ModbusRtuLinkSlave::searchRegHoildGroup(ushort addr, ushort len)
 {
 	for (int i = 0; i < this->RegHoildingLen; i++)
 	{

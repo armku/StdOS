@@ -85,7 +85,7 @@ void USART1_IRQHandler(void)
 		//if (mTxBuf.Size() > 0)                                //still left some bytes of data
 		//{
 		//	mTxBuf.Get(data);                                //get one byte data from buffer
-		//	USART1->DR = (data & (uint16_t)0x01FF);              //send one byte data
+		//	USART1->DR = (data & (ushort)0x01FF);              //send one byte data
 		//}
 		//else                                               //all data send complete
 		{
@@ -128,7 +128,7 @@ void USART2_IRQHandler(void)
 		//if (mTxBuf.Size() > 0)                                //still left some bytes of data
 		//{
 		//	mTxBuf.Get(data);                                //get one byte data from buffer
-		//	USART2->DR = (data & (uint16_t)0x01FF);              //send one byte data
+		//	USART2->DR = (data & (ushort)0x01FF);              //send one byte data
 		//}
 		//else                                               //all data send complete
 		{
@@ -171,7 +171,7 @@ void USART3_IRQHandler(void)
 		//if (mTxBuf.Size() > 0)                                //still left some bytes of data
 		//{
 		//	mTxBuf.Get(data);                                //get one byte data from buffer
-		//	USART3->DR = (data & (uint16_t)0x01FF);              //send one byte data
+		//	USART3->DR = (data & (ushort)0x01FF);              //send one byte data
 		//}
 		//else                                               //all data send complete
 		{
@@ -214,7 +214,7 @@ void UART4_IRQHandler(void)
 		//if (mTxBuf.Size() > 0)                                //still left some bytes of data
 		//{
 		//	mTxBuf.Get(data);                                //get one byte data from buffer
-		//	USART4->DR = (data & (uint16_t)0x01FF);              //send one byte data
+		//	USART4->DR = (data & (ushort)0x01FF);              //send one byte data
 		//}
 		//else                                               //all data send complete
 		{
@@ -257,7 +257,7 @@ void UART5_IRQHandler(void)
 		//if (mTxBuf.Size() > 0)                                //still left some bytes of data
 		//{
 		//	mTxBuf.Get(data);                                //get one byte data from buffer
-		//	USART5->DR = (data & (uint16_t)0x01FF);              //send one byte data
+		//	USART5->DR = (data & (ushort)0x01FF);              //send one byte data
 		//}
 		//else                                               //all data send complete
 		{

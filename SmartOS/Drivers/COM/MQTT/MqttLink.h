@@ -26,7 +26,7 @@ public:
 	char* Topic;//主题
 	int8_t FixHead;//报文头	
 	int step;//运行步骤
-	uint16_t MessageID;//信号ID
+	ushort MessageID;//信号ID
 	bool Send();
 	bool Connect();
 	bool Puslish(char *buf, int len);//发送数据

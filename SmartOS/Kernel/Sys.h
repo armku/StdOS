@@ -57,8 +57,8 @@ public:
 	uint	StackSize;	// 栈大小
 
 	byte	ID[12];		// 芯片ID。
-    uint16_t	FlashSize;	// 芯片Flash容量。
-    //uint16_t	RAMSize;	// 芯片RAM容量
+    ushort	FlashSize;	// 芯片Flash容量。
+    //ushort	RAMSize;	// 芯片RAM容量
 	Version OsVer;//系统版本
 	Version AppVer;//软件版本
 

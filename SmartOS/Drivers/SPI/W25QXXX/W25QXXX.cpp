@@ -119,7 +119,7 @@ void SPI25QXX::BulkErase(void)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI25QXX::PageWrite(byte* pBuffer, uint WriteAddr, uint16_t NumByteToWrite)
+void SPI25QXX::PageWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
 	/* Enable the write access to the FLASH */
 	WriteEnable();
@@ -168,7 +168,7 @@ void SPI25QXX::PageWrite(byte* pBuffer, uint WriteAddr, uint16_t NumByteToWrite)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI25QXX::BufferWrite(byte* pBuffer, uint WriteAddr, uint16_t NumByteToWrite)
+void SPI25QXX::BufferWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite)
 {
 	byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
@@ -238,7 +238,7 @@ void SPI25QXX::BufferWrite(byte* pBuffer, uint WriteAddr, uint16_t NumByteToWrit
 		}
 	}
 }
-//void SPI25QXX::SPI_FLASH_BufferWrite(byte* pBuffer, uint WriteAddr, uint16_t NumByteToWrite)
+//void SPI25QXX::SPI_FLASH_BufferWrite(byte* pBuffer, uint WriteAddr, ushort NumByteToWrite)
 //{
 //  byte NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, i;
 //	uint CurrentAddr;
@@ -286,7 +286,7 @@ void SPI25QXX::BufferWrite(byte* pBuffer, uint WriteAddr, uint16_t NumByteToWrit
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void SPI25QXX::BufferRead(byte* pBuffer, uint ReadAddr, uint16_t NumByteToRead)
+void SPI25QXX::BufferRead(byte* pBuffer, uint ReadAddr, ushort NumByteToRead)
 {
 	/* Select the FLASH: Chip Select low */
 	this->_spi->Start();
@@ -490,7 +490,7 @@ void SPI25QXX::WAKEUP(void)
  * 返回  ：-PASSED pBuffer1 等于   pBuffer2
  *         -FAILED pBuffer1 不同于 pBuffer2
  */
-TestStatus Buffercmp(byte* pBuffer1, byte* pBuffer2, uint16_t BufferLength)
+TestStatus Buffercmp(byte* pBuffer1, byte* pBuffer2, ushort BufferLength)
 {
 	while (BufferLength--)
 	{

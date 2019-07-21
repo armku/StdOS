@@ -16,10 +16,10 @@ extern "C" {
 	};
 
 	void bubbleSort(float *buf, uint len); //设置浮点数
-	void SetBufFloat(byte buf[], float da, uint16_t pos = 0, byte type = 0);//设置浮点数 0:小端 1：大端
-	float GetBufFloat(byte buf[], uint16_t pos = 0, byte type = 0);//设置浮点数 0:小端 1：大端
-	uint16_t GetBufUshort(byte buf[], uint16_t pos, byte type = 0);
-	void SetBufUshort(byte buf[], uint16_t pos, uint16_t da, byte type = 0); //从电阻获得温度
+	void SetBufFloat(byte buf[], float da, ushort pos = 0, byte type = 0);//设置浮点数 0:小端 1：大端
+	float GetBufFloat(byte buf[], ushort pos = 0, byte type = 0);//设置浮点数 0:小端 1：大端
+	ushort GetBufUshort(byte buf[], ushort pos, byte type = 0);
+	void SetBufUshort(byte buf[], ushort pos, ushort da, byte type = 0); //从电阻获得温度
 	float GetTFromPT100(float om);
 	float GetValueDot(float value, int dot);//根据小数点获取值	
 	void BoxCar(int* buf, int len);//矩形波过滤器,目前限定100个数据量

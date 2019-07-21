@@ -153,7 +153,7 @@ typedef enum Pin
 }Pin_Type;
 
 // 获取组和针脚
-#define _PORT(PIN) (1 << ((PIN) & (uint16_t)0x0F))
+#define _PORT(PIN) (1 << ((PIN) & (ushort)0x0F))
 #define _PIN(PIN) (PIN & 0x000F)
 #define _PIN_NAME(pin) (pin==P0 ? '_' : ('A' + (pin >> 4))), (pin==P0 ? '0' : (pin & 0x0F))
 

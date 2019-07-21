@@ -79,7 +79,7 @@ void OCM240128::Init()
 
 void OCM240128::Clr()
 {
-	uint16_t i;
+	ushort i;
 	this->wcmd2(0x00, 0x00, 0x24);
 	this->wcmd(0xb0);
 	for (i = 0; i < 8192; i++)
@@ -92,7 +92,7 @@ void OCM240128::Clr()
 
 void OCM240128::DispDot8x16(byte x, byte y, byte *text, byte mode)
 {
-	uint16_t add = y * 0x20 + x + 0x800;
+	ushort add = y * 0x20 + x + 0x800;
 	byte i = add;
 	byte j = add >> 8;
 	for (int k = 0; k < 16; k++)
@@ -110,7 +110,7 @@ void OCM240128::DispDot8x16(byte x, byte y, byte *text, byte mode)
 
 void OCM240128::DispDot16x16(byte x, byte y, byte *text, byte mode)
 {
-	uint16_t add = y * 0x20 + x + 0x800;
+	ushort add = y * 0x20 + x + 0x800;
 	byte i = add;
 	byte j = add >> 8;
 	for (int k = 0; k < 32; k = k + 2)
@@ -130,9 +130,9 @@ void OCM240128::DispDot16x16(byte x, byte y, byte *text, byte mode)
 }
 
 //»­ºáÏß
-void OCM240128::Draw_hline(byte x, byte y, uint16_t count)
+void OCM240128::Draw_hline(byte x, byte y, ushort count)
 {
-	uint16_t add;
+	ushort add;
 	byte i, j;
 	add = y * 0x20 + x + 0x800;
 	i = add;
@@ -162,9 +162,9 @@ void OCM240128::Test()
 }
 
 //»­ÊúÏß
-void OCM240128::Draw_vline(byte x, byte y, uint16_t count)
+void OCM240128::Draw_vline(byte x, byte y, ushort count)
 {
-	uint16_t add;
+	ushort add;
 	byte i, j, k;
 	add = y * 0x20 + x + 0x800;
 	i = add;

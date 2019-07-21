@@ -9,7 +9,7 @@ public:
 	void DispAscNum16x16(byte x, byte y, byte text);
 	void DisplayHz16x16(byte x, byte y, byte *text, byte mode);
 	void DisplayAsc8x16(byte x, byte y, byte *text, byte mode);
-	void Clrchar(byte x, byte y, uint16_t count);
+	void Clrchar(byte x, byte y, ushort count);
 };
 
 #endif // _LCDOCM_H

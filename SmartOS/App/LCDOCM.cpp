@@ -27,7 +27,7 @@ void LCDOCM::DispAscNum16x16(byte x, byte y, byte text)
 	this->DispDot16x16(x,y,(byte*)shuzi_16x16[text],0);
 }
 /************************************************************************************************
-@f_name: void Display_char_8x16(byte hh,uint16_t page,uint16_t column,byte text)
+@f_name: void Display_char_8x16(byte hh,ushort page,ushort column,byte text)
 @brief:	 ÏÔÊ¾×Ö·û
 @param:	 None
 @return: None
@@ -35,7 +35,7 @@ void LCDOCM::DispAscNum16x16(byte x, byte y, byte text)
 void LCDOCM::DisplayHz16x16(byte x, byte y, byte *text, byte mode)
 {
 	byte qh, ql;
-	uint16_t add1;
+	ushort add1;
 
 	qh = *text;
 	ql = *(text + 1);
@@ -47,7 +47,7 @@ void LCDOCM::DisplayHz16x16(byte x, byte y, byte *text, byte mode)
 }
 
 /************************************************************************************************
-@f_name: void Display8x16(byte hh,uint16_t page,uint16_t column,byte text)
+@f_name: void Display8x16(byte hh,ushort page,ushort column,byte text)
 @brief:	 ÏÔÊ¾×Ö·û
 @param:	 None
 @return: None
@@ -57,7 +57,7 @@ void LCDOCM::DisplayAsc8x16(byte x, byte y, byte *text, byte mode)
 	this->DispDot8x16(x, y, (byte*)ascii_table_8x16[*text - 32], mode);
 }
 
-void LCDOCM::Clrchar(byte x, byte y, uint16_t count)
+void LCDOCM::Clrchar(byte x, byte y, ushort count)
 {
 	byte i;
 	for (i = 0; i < count; i++)

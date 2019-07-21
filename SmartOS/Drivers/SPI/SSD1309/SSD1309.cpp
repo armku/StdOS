@@ -249,10 +249,10 @@ void SSD1309::ShowCHinese(byte x, byte y, char *hz)
 	this->ShowCHinese11(x,y,this->SearchhzIndex(lo,hi));
 }
 //²éÕÒºº×Ö±àÂëÎ»ÖÃ
-uint16_t SSD1309::SearchhzIndex(byte lo, byte hi)
+ushort SSD1309::SearchhzIndex(byte lo, byte hi)
 {
-	uint16_t i = 0;
-    uint16_t maxcount = 251;
+	ushort i = 0;
+    ushort maxcount = 251;
 	for (i = 0; i < maxcount; i++)
 	{
 		if ((gb16ssd1309[i].Index[0] == lo) && (gb16ssd1309[i].Index[1] == hi))

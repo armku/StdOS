@@ -230,7 +230,7 @@ void USARTHAL::SetBaudRate(uint baudRate)
 	}
 
 	/* Determine the integer part */
-	if ((mUSARTx->CR1 & ((uint16_t)0x8000)) != 0)//CR1_OVER8_Set=((uint16_t)0x8000)
+	if ((mUSARTx->CR1 & ((ushort)0x8000)) != 0)//CR1_OVER8_Set=((ushort)0x8000)
 	{
 		/* Integer part computing in case Oversampling mode is 8 Samples */
 		integerdivider = ((25 * apbclock) / (2 * (baudRate)));
@@ -246,7 +246,7 @@ void USARTHAL::SetBaudRate(uint baudRate)
 	fractionaldivider = integerdivider - (100 * (tmpreg >> 4));
 
 	/* Implement the fractional part in the register */
-	if ((mUSARTx->CR1 & ((uint16_t)0x8000)) != 0)
+	if ((mUSARTx->CR1 & ((ushort)0x8000)) != 0)
 	{
 		tmpreg |= ((((fractionaldivider * 8) + 50) / 100)) & ((byte)0x07);
 	}
@@ -256,7 +256,7 @@ void USARTHAL::SetBaudRate(uint baudRate)
 	}
 
 	/* Write to USART BRR */
-	mUSARTx->BRR = (uint16_t)tmpreg;
+	mUSARTx->BRR = (ushort)tmpreg;
 }
 
 #ifdef USE_USART_DMA
@@ -330,7 +330,7 @@ class USARTOldNotUse
 {
 public:
 	USARTOldNotUse();
-	virtual bool SendBytes(byte txData[], uint16_t size);
+	virtual bool SendBytes(byte txData[], ushort size);
 	USARTOldNotUse& operator<<(int val);
 	USARTOldNotUse& operator<<(double val);
 	USARTOldNotUse& operator<<(const char* pStr);
@@ -346,7 +346,7 @@ USARTOldNotUse::USARTOldNotUse()
 	this->mPrecision = 3;
 }
 
-bool USARTOldNotUse::SendBytes(byte txData[], uint16_t size)
+bool USARTOldNotUse::SendBytes(byte txData[], ushort size)
 {
 	USART_TypeDef* mUSARTx;   //USARTx
 

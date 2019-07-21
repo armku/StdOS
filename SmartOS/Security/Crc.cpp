@@ -82,11 +82,11 @@ unLength 校验数据的长
  *功   能:循环冗余校验-16
 （美国标准-0x8005）
  *******************************************************/
-uint16_t Crc::CRC16Default(byte *pszBuf, uint unLength)
+ushort Crc::CRC16Default(byte *pszBuf, uint unLength)
 {
 	uint i, j;
-	uint16_t CrcReg = 0xFFFF;
-	uint16_t CurVal;
+	ushort CrcReg = 0xFFFF;
+	ushort CurVal;
 
 	for (i = 0; i < unLength; i++)
 	{
@@ -113,12 +113,12 @@ unLength 校验数据的长
  *功   能:循环冗余校验-16
 （CCITT标准-0x1021）
  *******************************************************/
-uint16_t Crc::CRC16CCITT(byte *pszBuf, uint unLength)
+ushort Crc::CRC16CCITT(byte *pszBuf, uint unLength)
 {
 
 	uint i, j;
-	uint16_t CrcReg = 0xFFFF;
-	uint16_t CurVal;
+	ushort CrcReg = 0xFFFF;
+	ushort CurVal;
 
 	for (i = 0; i < unLength; i++)
 	{
@@ -145,9 +145,9 @@ unLength 校验数据的长
  *功   能:循环冗余校验-16
 （RTU标准-0xA001）
  *******************************************************/
-uint16_t Crc::CRC16RTU(byte *pszBuf, uint unLength)
+ushort Crc::CRC16RTU(byte *pszBuf, uint unLength)
 {
-	uint16_t CRC = 0XFFFF;
+	ushort CRC = 0XFFFF;
 	uint CRC_count;
 
 	for (CRC_count = 0; CRC_count < unLength; CRC_count++)

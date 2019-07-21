@@ -8,7 +8,7 @@
     class AD7124
     {
         public:
-            uint16_t CHCONFIG[16];//通道配置
+            ushort CHCONFIG[16];//通道配置
 
 			void SetSpi(SpiBase *spi); 
 			void Init_8();		//8通道初始化
@@ -25,7 +25,7 @@
 			void WriteReg(byte reg, byte bytes, uint data);
 			void SetReadChannel(byte ch=0,byte chMax=7);//设置需要读取的通道，默认通道0
         private:
-			uint16_t Write16(uint16_t sendData);
+			ushort Write16(ushort sendData);
             uint Write24(uint sendData);
             uint Write32(uint sendData);
             uint ReadRegNoCS(byte reg, byte bytes);

@@ -24,9 +24,9 @@ void CAD7689::SetSpi(SpiBase *spi)
 	this->pspi = spi;
 }
 
-uint16_t CAD7689::AD_Read(void)
+ushort CAD7689::AD_Read(void)
 {
-    uint16_t dat = 0;
+    ushort dat = 0;
 	this->pspi->Start();
     delayMicroseconds(1);
 	dat = this->pspi->Write16(0XFFFF);
@@ -34,9 +34,9 @@ uint16_t CAD7689::AD_Read(void)
     return dat;
 }
 
-uint16_t CAD7689::AD_Write(uint16_t sdat)
+ushort CAD7689::AD_Write(ushort sdat)
 {
-    uint16_t dat = 0;
+    ushort dat = 0;
 	this->pspi->Start();
     delayMicroseconds(1);
 	dat=this->pspi->Write16(sdat);
@@ -63,10 +63,10 @@ void CAD7689::Init(void)
  *******************************************************************************/
 void CAD7689::Routin(void)
 {
-    uint16_t ch;
-    uint16_t reg;
+    ushort ch;
+    ushort reg;
     byte chNext = 0;
-    uint16_t adcur = 0;
+    ushort adcur = 0;
 
     ch = this->chCurrent;
 
@@ -83,7 +83,7 @@ void CAD7689::Routin(void)
 }
 
 //获取通道电压值
-float CAD7689::getVolt(uint16_t ch)
+float CAD7689::getVolt(ushort ch)
 {
     if (ch >= MAXCH)
     {

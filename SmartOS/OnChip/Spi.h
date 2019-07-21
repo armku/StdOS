@@ -24,7 +24,7 @@
 		// 基础读写
 		virtual byte Write(byte data)=0;
 		byte Read() { return this->Write(0XFF); }
-		virtual uint16_t Write16(uint16_t data) = 0;
+		virtual ushort Write16(ushort data) = 0;
 
 		virtual void Start()=0; // 拉低NSS，开始传输
 		virtual void Stop()=0; // 拉高NSS，停止传输
@@ -58,7 +58,7 @@
 
             // 基础读写
 			virtual byte Write(byte data);
-			virtual uint16_t Write16(uint16_t data);
+			virtual ushort Write16(ushort data);
 
 			virtual void Start(); // 拉低NSS，开始传输
 			virtual void Stop(); // 拉高NSS，停止传输
@@ -75,7 +75,7 @@
 			virtual void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
 			virtual void SetNss(Pin nss = P0);
 			virtual byte Write(byte data);
-			virtual uint16_t Write16(uint16_t data);
+			virtual ushort Write16(ushort data);
             void Open();
             void Close();
 			virtual void Start(); // 拉低NSS，开始传输
