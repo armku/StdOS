@@ -6,8 +6,14 @@
 //SCL		开漏复用输出
 //SDA		开漏复用输出
 
+// I2C外设
 class I2C
 {
+
+	
+	
+	
+	
 public:
 	virtual void SetPin(Pin scl, Pin sda)=0;
 
