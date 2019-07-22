@@ -710,16 +710,16 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\Port.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\PwmSolo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>OnChip</GroupName>
           <Files>
-            <File>
-              <FileName>PwmSolo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\OnChip\PwmSolo.cpp</FilePath>
-            </File>
             <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
@@ -1759,16 +1759,16 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\Port.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PwmSolo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\PwmSolo.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>OnChip</GroupName>
           <Files>
-            <File>
-              <FileName>PwmSolo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\OnChip\PwmSolo.cpp</FilePath>
-            </File>
             <File>
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
