@@ -1127,6 +1127,9 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>Net</GroupName>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -2249,6 +2252,9 @@
               <FilePath>..\SmartOS\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Net</GroupName>
         </Group>
       </Groups>
     </Target>
