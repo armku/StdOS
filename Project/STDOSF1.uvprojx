@@ -386,6 +386,46 @@
               <FilePath>..\HAL\STM32F1\ARCH_UART.cpp</FilePath>
             </File>
             <File>
+              <FileName>AD7124Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7689Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXXDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\SPI\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Esp8266Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SmartOS\Drivers\SPI\SSD1309\Example\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SmartOS\Drivers\SPI\SSD1309\Example\ssd1309font.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_dr.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\ST7565R\Example\lcd_dr.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Reset.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HAL\STM32F1\Reset.c</FilePath>
@@ -701,6 +741,16 @@
           <GroupName>Device</GroupName>
           <Files>
             <File>
+              <FileName>USART.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\OnChip\USART.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\OnChip\Spi.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\Port.cpp</FilePath>
@@ -719,21 +769,6 @@
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\I2C.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>OnChip</GroupName>
-          <Files>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\OnChip\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>USART.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\OnChip\USART.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -959,51 +994,6 @@
               <FileName>RC6.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Security\RC6.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Demo</GroupName>
-          <Files>
-            <File>
-              <FileName>lcd_dr.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\ST7565R\Example\lcd_dr.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7124Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W25QXXXDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\SPI\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7689Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Esp8266Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\Drivers\SPI\SSD1309\Example\font.c</FilePath>
-            </File>
-            <File>
-              <FileName>ssd1309font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\Drivers\SPI\SSD1309\Example\ssd1309font.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1424,6 +1414,46 @@
               <FilePath>..\HAL\STM32F1\ARCH_UART.cpp</FilePath>
             </File>
             <File>
+              <FileName>AD7124Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD7689Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>W25QXXXDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\SPI\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Esp8266Demo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusLinkDemo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SmartOS\Drivers\SPI\SSD1309\Example\font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1309font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SmartOS\Drivers\SPI\SSD1309\Example\ssd1309font.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_dr.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\ST7565R\Example\lcd_dr.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Reset.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HAL\STM32F1\Reset.c</FilePath>
@@ -1739,6 +1769,16 @@
           <GroupName>Device</GroupName>
           <Files>
             <File>
+              <FileName>USART.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\OnChip\USART.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\OnChip\Spi.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\Port.cpp</FilePath>
@@ -1757,21 +1797,6 @@
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\I2C.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>OnChip</GroupName>
-          <Files>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\OnChip\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>USART.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\OnChip\USART.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1997,51 +2022,6 @@
               <FileName>RC6.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Security\RC6.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Demo</GroupName>
-          <Files>
-            <File>
-              <FileName>lcd_dr.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\ST7565R\Example\lcd_dr.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7124Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\SPI\AD7124\Example\AD7124Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W25QXXXDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\SPI\W25QXXX\Example\W25QXXXDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD7689Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\SPI\AD7689\Example\AD7689Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLinkDemo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\Example\ModbusLinkDemo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Esp8266Demo.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\Esp8266\Example\Esp8266Demo.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\Drivers\SPI\SSD1309\Example\font.c</FilePath>
-            </File>
-            <File>
-              <FileName>ssd1309font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SmartOS\Drivers\SPI\SSD1309\Example\ssd1309font.c</FilePath>
             </File>
           </Files>
         </Group>
