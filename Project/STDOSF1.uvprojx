@@ -1032,6 +1032,9 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>Platform</GroupName>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -2059,6 +2062,9 @@
               <FilePath>..\SmartOS\Platform\CortexM\Port.cpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Platform</GroupName>
         </Group>
       </Groups>
     </Target>
