@@ -75,6 +75,28 @@ void Port::Clear()
 	_Pin = P0;
 }
 
+// 确定配置,确认用对象内部的参数进行初始化
+bool Port::Open()
+{
+	if (_Pin == P0) return false;
+	if (Opened) return true;
+
+	TS("Port::Open");
+
+#if DEBUG
+	// 保护引脚
+	auto name = typeid(*this).name();
+	while (*name >= '0' && *name <= '9') name++;
+	debug_printf("%s", name);
+	Port_Reserve(_Pin, true);
+#endif
+
+	Opening();
+
+	Opened = true;
+
+	return true;
+}
 
 
 void Port::Close()

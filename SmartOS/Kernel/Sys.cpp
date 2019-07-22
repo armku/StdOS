@@ -118,7 +118,56 @@ uint TSys::Seconds()const
 {
 	return Time.Seconds;
 }
+INROOT void TSys::Sleep(int ms) const
+{
+	// 优先使用线程级睡眠
+	if(OnSleep)
+		OnSleep(ms);
+	else
+	{
+#if DEBUG
+		if(ms > 1000) debug_printf("Sys::Sleep 设计错误，睡眠%dms太长！", ms);
+#endif
 
+		// 在这段时间里面，去处理一下别的任务
+		if(Sys.Started && ms != 0)
+		{
+			bool cancel	= false;
+			int ct	= Task::Scheduler()->ExecuteForWait(ms, cancel);
+
+			if(ct >= ms) return;
+
+			ms	-= ct;
+		}
+		//if(ms) Time.Sleep(ms);
+	}
+}
+
+INROOT void TSys::Delay(int us) const
+{
+	// 如果延迟微秒数太大，则使用线程级睡眠
+	if(OnSleep && us >= 2000)
+		OnSleep((us + 500) / 1000);
+	else
+	{
+#if DEBUG
+		if(us > 1000000) debug_printf("Sys::Sleep 设计错误，睡眠%dus太长！", us);
+#endif
+
+		// 在这段时间里面，去处理一下别的任务
+		if(Sys.Started && us != 0 && us >= 1000)
+		{
+			bool cancel	= false;
+			int ct	= Task::Scheduler()->ExecuteForWait(us / 1000, cancel);
+			ct	*= 1000;
+
+			if(ct >= us) return;
+
+			us -= ct;
+		}
+		//if(us) Time.Delay(us);
+	}
+}
 // 毫秒级延迟
 void TSys::Sleep112233(int ms)const
 {
