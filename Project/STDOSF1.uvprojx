@@ -770,6 +770,11 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\I2C.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Power.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\Power.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1044,6 +1049,11 @@
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\STM32F1\Spi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Power.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Power.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1813,6 +1823,11 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\I2C.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Power.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\Power.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2087,6 +2102,11 @@
               <FileName>Spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\STM32F1\Spi.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Power.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Power.cpp</FilePath>
             </File>
           </Files>
         </Group>
