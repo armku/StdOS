@@ -381,24 +381,19 @@
           <GroupName>USER</GroupName>
           <Files>
             <File>
-              <FileName>RingBuffer.cpp</FileName>
+              <FileName>ARCH_UART.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Core\RingBuffer.cpp</FilePath>
+              <FilePath>..\HAL\STM32F1\ARCH_UART.cpp</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>HAL</GroupName>
-          <Files>
             <File>
               <FileName>Reset.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HAL\STM32F1\Reset.c</FilePath>
             </File>
             <File>
-              <FileName>ARCH_UART.cpp</FileName>
+              <FileName>RingBuffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\HAL\STM32F1\ARCH_UART.cpp</FilePath>
+              <FilePath>..\SmartOS\Core\RingBuffer.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1424,24 +1419,19 @@
           <GroupName>USER</GroupName>
           <Files>
             <File>
-              <FileName>RingBuffer.cpp</FileName>
+              <FileName>ARCH_UART.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Core\RingBuffer.cpp</FilePath>
+              <FilePath>..\HAL\STM32F1\ARCH_UART.cpp</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>HAL</GroupName>
-          <Files>
             <File>
               <FileName>Reset.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HAL\STM32F1\Reset.c</FilePath>
             </File>
             <File>
-              <FileName>ARCH_UART.cpp</FileName>
+              <FileName>RingBuffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\HAL\STM32F1\ARCH_UART.cpp</FilePath>
+              <FilePath>..\SmartOS\Core\RingBuffer.cpp</FilePath>
             </File>
           </Files>
         </Group>
