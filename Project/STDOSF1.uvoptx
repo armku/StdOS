@@ -1293,7 +1293,7 @@
 
   <Group>
     <GroupName>Device</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1349,7 +1349,7 @@
 
   <Group>
     <GroupName>OnChip</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2008,29 +2008,13 @@
   </Group>
 
   <Group>
-    <GroupName>ArduinoAPI</GroupName>
-    <tvExp>1</tvExp>
-    <tvExpOptDlg>0</tvExpOptDlg>
-    <cbSel>0</cbSel>
-    <RteFlg>0</RteFlg>
-  </Group>
-
-  <Group>
-    <GroupName>ArduinoCore</GroupName>
-    <tvExp>1</tvExp>
-    <tvExpOptDlg>0</tvExpOptDlg>
-    <cbSel>0</cbSel>
-    <RteFlg>0</RteFlg>
-  </Group>
-
-  <Group>
     <GroupName>CortexM</GroupName>
     <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>20</GroupNumber>
+      <GroupNumber>18</GroupNumber>
       <FileNumber>111</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -2042,7 +2026,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>20</GroupNumber>
+      <GroupNumber>18</GroupNumber>
       <FileNumber>112</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -2054,7 +2038,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>20</GroupNumber>
+      <GroupNumber>18</GroupNumber>
       <FileNumber>113</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -2066,7 +2050,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>20</GroupNumber>
+      <GroupNumber>18</GroupNumber>
       <FileNumber>114</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -2078,7 +2062,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>20</GroupNumber>
+      <GroupNumber>18</GroupNumber>
       <FileNumber>115</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -2090,7 +2074,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>20</GroupNumber>
+      <GroupNumber>18</GroupNumber>
       <FileNumber>116</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>

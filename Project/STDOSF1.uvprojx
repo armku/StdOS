@@ -1013,12 +1013,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>ArduinoAPI</GroupName>
-        </Group>
-        <Group>
-          <GroupName>ArduinoCore</GroupName>
-        </Group>
-        <Group>
           <GroupName>CortexM</GroupName>
           <Files>
             <File>
@@ -2060,12 +2054,6 @@
               <FilePath>..\SmartOS\Drivers\SPI\SSD1309\Example\ssd1309font.c</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>ArduinoAPI</GroupName>
-        </Group>
-        <Group>
-          <GroupName>ArduinoCore</GroupName>
         </Group>
         <Group>
           <GroupName>CortexM</GroupName>
