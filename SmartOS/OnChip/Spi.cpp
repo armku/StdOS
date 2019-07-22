@@ -2,13 +2,13 @@
 #include "Spi.h"
 #include "Platform\stm32.h"
 
-Spi::Spi(SPI spi)
+Spi11::Spi11(SPI spi)
 {
 	this->_index = 0xff;
 	this->_index = spi;
 }
 
-void Spi::Init(CPOLTYPE cpol, CPHATYPE cpha)
+void Spi11::Init(CPOLTYPE cpol, CPHATYPE cpha)
 {
 	this->Retry = 200; //默认重试次数为200
 #if DEBUG
@@ -353,7 +353,7 @@ void Spi::Init(CPOLTYPE cpol, CPHATYPE cpha)
 #endif
 }
 
-void Spi::SetPin(Pin clk, Pin miso, Pin mosi)
+void Spi11::SetPin(Pin clk, Pin miso, Pin mosi)
 {
 	this->_clk.SetPin(clk);
 	this->_miso.SetPin(miso);
@@ -363,14 +363,14 @@ void Spi::SetPin(Pin clk, Pin miso, Pin mosi)
 	this->_miso.pinMode(GPIO_AF_PP);
 	this->_mosi.pinMode(GPIO_AF_PP);
 }
-void Spi::SetNss(Pin nss)
+void Spi11::SetNss(Pin nss)
 {
 	this->_nss.SetPin(nss);
 	this->_nss.pinMode(GPIO_Out_PP);
 }
 
 // 拉低NSS，开始传输
-void Spi::Start()
+void Spi11::Start()
 {
 	if (!this->_nss.Empty())
 	{
@@ -381,7 +381,7 @@ void Spi::Start()
 }
 
 // 拉高NSS，停止传输
-void Spi::Stop()
+void Spi11::Stop()
 {
 	if (!this->_nss.Empty())
 	{
@@ -389,7 +389,7 @@ void Spi::Stop()
 	}
 }
 // 基础读写
-byte Spi::Write(byte data)
+byte Spi11::Write(byte data)
 {
 #if defined STM32F0
 	int retry;
@@ -490,7 +490,7 @@ byte Spi::Write(byte data)
 #endif
 }
 
-ushort Spi::Write16(ushort data)
+ushort Spi11::Write16(ushort data)
 {
 #if defined STM32F0
 	int retry;
