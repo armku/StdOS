@@ -6,7 +6,7 @@
 //SCL		开漏复用输出
 //SDA		开漏复用输出
 
-class I2CBase
+class I2C
 {
 public:
 	virtual void SetPin(Pin scl, Pin sda)=0;
@@ -20,7 +20,7 @@ public:
 };
 
 // 软件模拟I2C
-class I2CSoft:public I2CBase
+class I2CSoft:public I2C
 {
 public:
 	bool HasSecAddress;	// 设备是否有子地址
