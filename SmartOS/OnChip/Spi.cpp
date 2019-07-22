@@ -2,6 +2,39 @@
 #include "Spi.h"
 #include "Platform\stm32.h"
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Spi11::Spi11(SPI spi)
 {
 	this->_index = 0xff;
