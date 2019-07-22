@@ -775,6 +775,26 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\Power.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CAN.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\CAN.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DAC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\DAC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Flash.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\Flash.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1054,6 +1074,36 @@
               <FileName>Power.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\STM32F1\Power.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CAN.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\CAN.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DAC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\DAC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Flash.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Flash.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Storage</GroupName>
+          <Files>
+            <File>
+              <FileName>Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1828,6 +1878,26 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\Power.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CAN.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\CAN.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DAC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\DAC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Flash.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\Flash.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2107,6 +2177,36 @@
               <FileName>Power.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\STM32F1\Power.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CAN.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\CAN.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DAC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\DAC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Flash.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Flash.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Storage</GroupName>
+          <Files>
+            <File>
+              <FileName>Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Storage\Storage.cpp</FilePath>
             </File>
           </Files>
         </Group>
