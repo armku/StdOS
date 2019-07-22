@@ -1,4 +1,4 @@
-#include "../OnChip/I2C.h"
+#include "../Device/I2C.h"
 
 #ifndef _MCP3421_H
 #define _MCP3421_H
