@@ -71,7 +71,90 @@ public:
 		_iic->Stop();
 	}
 };
+// 硬件I2C
+class HardI2C : public I2C
+{
+private:
+	void Init(byte index, uint speedHz);
 
+public:
+	// 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
+    //HardI2C(I2C_TypeDef* iic = I2C1, uint speedHz = 100000);
+	HardI2C(byte index, uint speedHz = 100000);
+    virtual ~HardI2C();
+
+	virtual void SetPin(Pin scl, Pin sda);
+	virtual void GetPin(Pin* scl = nullptr, Pin* sda = nullptr);
+
+	virtual void Start();
+	virtual void Stop();
+
+	virtual void WriteByte(byte dat);
+	virtual byte ReadByte();
+	virtual void Ack(bool ack);
+	virtual bool WaitAck(bool ack);
+
+	//virtual bool Write(int addr, byte* buf, uint len);	// 新会话向指定地址写入多个字节
+	//virtual uint Read(int addr, byte* buf, uint len);	// 新会话从指定地址读取多个字节
+
+private:
+    byte	_index;
+	void*	_IIC;
+	uint	_Event;
+
+	AlternatePort SCL;
+	AlternatePort SDA;
+
+	virtual bool SendAddress(int addr, bool tx = true);
+
+	void OnInit();
+	virtual bool OnOpen();
+	virtual void OnClose();
+};
+// 软件模拟I2C
+class SoftI2C : public I2C
+{
+public:
+	bool HasSecAddress;	// 设备是否有子地址
+
+	// 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
+    SoftI2C(uint speedHz = 100000);
+    virtual ~SoftI2C();
+
+	virtual void SetPin(Pin scl, Pin sda);
+	virtual void GetPin(Pin* scl = nullptr, Pin* sda = nullptr);
+
+	virtual void Start();
+	virtual void Stop();
+
+	virtual void WriteByte(byte dat);
+	virtual byte ReadByte();
+	virtual void Ack(bool ack);
+	virtual bool WaitAck(bool ack);
+
+private:
+	int _delay;			// 根据速度匹配的延时
+
+	OutputPort	SCL;	// 时钟。开漏输出
+	OutputPort	SDA;	// 数据。开漏输出，直接具备读写功能
+
+	virtual bool OnOpen();
+	virtual void OnClose();
+	
+	void Delay();
+};
+
+/*
+开发历史
+
+2015-10-03
+I2C的核心，SCL为高时SDA不许改变，开始停止除外。
+SCL为高时，SDA下降沿表示开始，SDA上升沿表示停止。
+发送数据后，拉高SCL等待接收方通过SDA发过来的ACK确认。
+读取数据时，如果数据提供方来不及提供数据，可拉低SCL。
+感谢夏宇@10068953
+
+*/
 
 // 软件模拟I2C
 class I2CSoft:public I2C
