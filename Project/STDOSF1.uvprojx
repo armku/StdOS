@@ -1040,6 +1040,11 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\STM32F1\I2C.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Spi.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2077,6 +2082,11 @@
               <FileName>I2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\STM32F1\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Spi.cpp</FilePath>
             </File>
           </Files>
         </Group>
