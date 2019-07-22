@@ -1,28 +1,25 @@
-ï»¿#ifndef __WatchDog_H__
+#ifndef __WatchDog_H__
 #define __WatchDog_H__
 
-#include "Kernel\Sys.h"
+#include "Core\Type.h"
 
-// çœ‹é—¨ç‹—
+// ¿´ÃÅ¹·
 class WatchDog
 {
 private:
 	WatchDog();
 
 public:
-	//WatchDog(uint ms = 3000);
-	~WatchDog();
+	uint Timeout; // µ±Ç°³¬Ê±Ê±¼ä
 
-	uint Timeout; // å½“å‰è¶…æ—¶æ—¶é—´
-
-	bool Config(uint ms);	// é…ç½®çœ‹é—¨ç‹—å–‚ç‹—é‡ç½®æ—¶é—´ï¼Œè¶…è¿‡è¯¥æ—¶é—´å°†é‡å¯MCU
-	void ConfigMax();		// çœ‹é—¨ç‹—æ— æ³•å…³é—­ï¼Œåªèƒ½è®¾ç½®ä¸€ä¸ªæœ€å¤§å€¼
-	void Feed(); // å–‚ç‹—
+	bool Config(uint ms);	// ÅäÖÃ¿´ÃÅ¹·Î¹¹·ÖØÖÃÊ±¼ä£¬³¬¹ı¸ÃÊ±¼ä½«ÖØÆôMCU
+	void ConfigMax();		// ¿´ÃÅ¹·ÎŞ·¨¹Ø±Õ£¬Ö»ÄÜÉèÖÃÒ»¸ö×î´óÖµ
+	void Feed(); // Î¹¹·
 
 	static WatchDog& Current();
 	static void FeedDogTask(void* param);
-	// æ‰“å¼€çœ‹é—¨ç‹—ã€‚æœ€é•¿å–‚ç‹—æ—¶é—´26208msï¼Œé»˜è®¤2000ms
-	static void Start(uint msTimeout = 2000, uint msFeed = 500);
+	// ´ò¿ª¿´ÃÅ¹·¡£×î³¤Î¹¹·Ê±¼ä26208ms£¬Ä¬ÈÏ20ms
+	static void Start(uint msTimeout = 5000, uint msFeed = 20);
 };
 
 #endif

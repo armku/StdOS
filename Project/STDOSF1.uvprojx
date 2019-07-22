@@ -715,6 +715,11 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\PwmSolo.cpp</FilePath>
             </File>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\WatchDog.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -729,11 +734,6 @@
               <FileName>USART.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\OnChip\USART.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\OnChip\WatchDog.cpp</FilePath>
             </File>
             <File>
               <FileName>I2C.cpp</FileName>
@@ -1764,6 +1764,11 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\PwmSolo.cpp</FilePath>
             </File>
+            <File>
+              <FileName>WatchDog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\WatchDog.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1778,11 +1783,6 @@
               <FileName>USART.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\OnChip\USART.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WatchDog.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\OnChip\WatchDog.cpp</FilePath>
             </File>
             <File>
               <FileName>I2C.cpp</FileName>

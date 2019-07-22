@@ -1,46 +1,324 @@
-ï»¿#include "WatchDog.h"
+#include "WatchDog.h"
+#include "Kernel\Sys.h"
 
-WatchDog::WatchDog() { }
-WatchDog::~WatchDog()
+#if defined(STM32F4)
+#include "stm32f4xx.h"
+#include "Platform\STM32F4\Pin_STM32F4.h"
+#elif defined(STM32F2)
+#include "stm32f2xx.h"
+#elif defined(STM32F1)
+#include "stm32f10x.h"
+#include "Platform/STM32F1/Pin_STM32F1.h"
+#elif defined(STM32F3)
+#include "stm32f3xx.h"
+#elif defined(STM32F0)
+#include "stm32f0xx.h"
+#include "Platform/STM32F0/Pin_STM32F0.h"
+#elif defined(GD32F150)
+#include "stm32f0xx.h"
+#else
+#error "ÇëÔÚKeilÏîÄ¿ÅäÖÃC/C++Ò³¶¨ÒåĞ¾Æ¬Æ½Ì¨£¬ÈçSTM32F0/STM32F1/STM32F2/STM32F3/STM32F4/GD32F150"
+#endif
+
+WatchDog::WatchDog()
 {
-	ConfigMax();
+	this->Timeout = 3000;
 }
 
+WatchDog* cur;
 WatchDog& WatchDog::Current()
 {
-    static WatchDog dog;
-	return dog;
+	return *cur;
 }
-
 void WatchDog::FeedDogTask(void* param)
 {
-    WatchDog* dog = (WatchDog*)param;
-    dog->Feed();
+	WatchDog *dog = (WatchDog*)param;
+	dog->Feed();
+}
+// ´ò¿ª¿´ÃÅ¹·¡£×î³¤Î¹¹·Ê±¼ä26208ms£¬Ä¬ÈÏ2000ms
+void WatchDog::Start(uint msTimeOut, uint msFeed)
+{
+	cur = new WatchDog();
+	cur->Config(msTimeOut);
+	Sys.AddTask(FeedDogTask, &WatchDog::Current(), 10, msFeed, "FeedDog");
+	cur->Feed();
 }
 
-void WatchDog::Start(uint ms, uint msFeed)
+int OpenWatchDog(void)
 {
-	static uint		tid = 0;
-
-	auto& dog	= Current();
-	if(ms > 20000)
+	//  RCC_LSICmd(1);
+	//  if ( RCC_GetFlagStatus(125) )
+	//    RCC_ClearFlag();
+	//  return IWDG_WriteAccessCmd(21845);
+	return 0;
+}
+// Î¹¹·
+void WatchDog::Feed()
+{
+	IWDG_ReloadCounter();
+}
+// ÅäÖÃ¿´ÃÅ¹·Î¹¹·ÖØÖÃÊ±¼ä£¬³¬¹ı¸ÃÊ±¼ä½«ÖØÆôMCU
+bool WatchDog::Config(uint ms)
+{
+#if defined STM32F0
+	if (ms == 0)
 	{
-		dog.ConfigMax();
+		debug_printf("WatchDog msTimeout %dms must larger than 0ms\r\n", ms);
+		return false;
+	}
+	RCC_LSICmd(ENABLE);
+	/* ¼ì²éÏµÍ³ÊÇ·ñ´ÓIWDGÖØÖÃ»Ö¸´ */
+	if (RCC_GetFlagStatus(RCC_FLAG_IWDGRST) != RESET)
+	{
+		/* Çå³ıÖØÖÃ±êÊ¶ */
+		RCC_ClearFlag();
+	}
+	/* ´ò¿ªIWDG_PRºÍIWDG_RLR¼Ä´æÆ÷µÄĞ´·ÃÎÊ */
+	IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);
 
-		if(tid) Sys.RemoveTask(tid);
+	byte pre = IWDG_Prescaler_4;
+	int mul = 4;
+	// ¼ÆÊıÆ÷12Î» 0~0x0FFF£¬ÓĞreload = ms/1000 / (1/(LSI/mul)) = ms * LSI / (mul*1000) = ms * 40 / mul
+	// ¿¼ÂÇµ½reloadÒç³öµÄ¿ÉÄÜ£¬Ã¿ÖÖ·ÖÆµ×î´óms = reload * mul / 40 ~= 102 * mul
+	int i = 0;
+	/*
+	#define IWDG_Prescaler_4            ((byte)0x00)
+	#define IWDG_Prescaler_8            ((byte)0x01)
+	#define IWDG_Prescaler_16           ((byte)0x02)
+	#define IWDG_Prescaler_32           ((byte)0x03)
+	#define IWDG_Prescaler_64           ((byte)0x04)
+	#define IWDG_Prescaler_128          ((byte)0x05)
+	#define IWDG_Prescaler_256          ((byte)0x06)
+	 */
+	for (i = IWDG_Prescaler_4; i <= IWDG_Prescaler_256; i++)
+	{
+		pre = i;
+		mul = 1 << (i + 2);
+
+		// ÅĞ¶ÏÊÇ·ñÔÚ·¶Î§Ö®ÄÚ
+		if (ms * 40 / mul < 0x0FFF)
+			break;
+	}
+	if (i > IWDG_Prescaler_256)
+	{
+		debug_printf("WatchDog msTimeout must smaller than %dms\r\n", 0x0FFF * 256 / 40);
+		return false;
+	}
+	IWDG_SetPrescaler(pre);
+	/*if(ms < (0x0FFF * 32 / 40))
+	{
+	// IWDG¼ÆÊıÆ÷Ê±ÖÓ: LSI/32=40KHz/32=1250Hz£¬Ã¿ÖÜÆÚ0.8ms
+	IWDG_SetPrescaler(IWDG_Prescaler_32);
 	}
 	else
 	{
-		dog.Config(ms);
-		dog.Feed();
+	// IWDG¼ÆÊıÆ÷Ê±ÖÓ: LSI/64=40KHz/64=625Hz£¬Ã¿ÖÜÆÚ0.4ms
+	IWDG_SetPrescaler(IWDG_Prescaler_64);
 
-		if(!tid && msFeed > 0 && msFeed <= 26000)
-		{
-			debug_printf("WatchDog::Start ");
-			// é¦–æ¬¡è°ƒåº¦ä¸º0msï¼Œè®©è°ƒåº¦ç³»ç»Ÿè®¡ç®—å¾—åˆ°å…¶å¹³å‡è€—æ—¶ï¼Œå…¶å®ƒä»»åŠ¡Sleepæ—¶ä¹Ÿå¯ä»¥å–‚ç‹—
-			tid = Sys.AddTask(WatchDog::FeedDogTask, &dog, 0, msFeed, "çœ‹é—¨ç‹—");
-		}
-		else
-			debug_printf("WatchDog::Config %dms Feed=%dms \r\n", ms, msFeed);
+	// Ö±½Ó³ıÒÔ2£¬ºóÃæ²»ÓÃÖØ¸´¼ÆËã
+	ms >>= 2;
+	}*/
+
+	/* ÉèÖÃ¼ÆÊıÆ÷ÖØÔØÖµÎª³¬Ê±Ê±¼ä
+	Counter Reload Value = ms / 1000 / IWDG¼ÆÊıÆ÷Ê±ÖÓÖÜÆÚ
+	= ms / 1000 / (1/(LSI/mul))
+	= ms * LSI / (mul * 1000)
+	= ms * 40k / (mul * 1000)
+	= ms * 40 / mul
+	 */
+	IWDG_SetReload(ms * 40 / mul);
+
+	/* ÖØÔØ IWDG ¼ÆÊıÆ÷ */
+	IWDG_ReloadCounter();
+
+	/* ´ò¿ª IWDG (LSI½«ÓÉÓ²¼ş´ò¿ª) */
+	IWDG_Enable();
+
+	Timeout = ms;
+
+	return true;
+#elif defined STM32F1
+	if (ms == 0)
+	{
+		debug_printf("WatchDog msTimeout %dms must larger than 0ms\r\n", ms);
+		return false;
 	}
+	RCC_LSICmd(ENABLE);
+	/* ¼ì²éÏµÍ³ÊÇ·ñ´ÓIWDGÖØÖÃ»Ö¸´ */
+	if (RCC_GetFlagStatus(RCC_FLAG_IWDGRST) != RESET)
+	{
+		/* Çå³ıÖØÖÃ±êÊ¶ */
+		RCC_ClearFlag();
+	}
+	/* ´ò¿ªIWDG_PRºÍIWDG_RLR¼Ä´æÆ÷µÄĞ´·ÃÎÊ */
+	IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);
+
+	byte pre = IWDG_Prescaler_4;
+	int mul = 4;
+	// ¼ÆÊıÆ÷12Î» 0~0x0FFF£¬ÓĞreload = ms/1000 / (1/(LSI/mul)) = ms * LSI / (mul*1000) = ms * 40 / mul
+	// ¿¼ÂÇµ½reloadÒç³öµÄ¿ÉÄÜ£¬Ã¿ÖÖ·ÖÆµ×î´óms = reload * mul / 40 ~= 102 * mul
+	int i = 0;
+	/*
+	#define IWDG_Prescaler_4            ((byte)0x00)
+	#define IWDG_Prescaler_8            ((byte)0x01)
+	#define IWDG_Prescaler_16           ((byte)0x02)
+	#define IWDG_Prescaler_32           ((byte)0x03)
+	#define IWDG_Prescaler_64           ((byte)0x04)
+	#define IWDG_Prescaler_128          ((byte)0x05)
+	#define IWDG_Prescaler_256          ((byte)0x06)
+	 */
+	for (i = IWDG_Prescaler_4; i <= IWDG_Prescaler_256; i++)
+	{
+		pre = i;
+		mul = 1 << (i + 2);
+
+		// ÅĞ¶ÏÊÇ·ñÔÚ·¶Î§Ö®ÄÚ
+		if (ms * 40 / mul < 0x0FFF)
+			break;
+	}
+	if (i > IWDG_Prescaler_256)
+	{
+		debug_printf("WatchDog msTimeout must smaller than %dms\r\n", 0x0FFF * 256 / 40);
+		return false;
+	}
+	IWDG_SetPrescaler(pre);
+	/*if(ms < (0x0FFF * 32 / 40))
+	{
+	// IWDG¼ÆÊıÆ÷Ê±ÖÓ: LSI/32=40KHz/32=1250Hz£¬Ã¿ÖÜÆÚ0.8ms
+	IWDG_SetPrescaler(IWDG_Prescaler_32);
+	}
+	else
+	{
+	// IWDG¼ÆÊıÆ÷Ê±ÖÓ: LSI/64=40KHz/64=625Hz£¬Ã¿ÖÜÆÚ0.4ms
+	IWDG_SetPrescaler(IWDG_Prescaler_64);
+
+	// Ö±½Ó³ıÒÔ2£¬ºóÃæ²»ÓÃÖØ¸´¼ÆËã
+	ms >>= 2;
+	}*/
+
+	/* ÉèÖÃ¼ÆÊıÆ÷ÖØÔØÖµÎª³¬Ê±Ê±¼ä
+	Counter Reload Value = ms / 1000 / IWDG¼ÆÊıÆ÷Ê±ÖÓÖÜÆÚ
+	= ms / 1000 / (1/(LSI/mul))
+	= ms * LSI / (mul * 1000)
+	= ms * 40k / (mul * 1000)
+	= ms * 40 / mul
+	 */
+	IWDG_SetReload(ms * 40 / mul);
+
+	/* ÖØÔØ IWDG ¼ÆÊıÆ÷ */
+	IWDG_ReloadCounter();
+
+	/* ´ò¿ª IWDG (LSI½«ÓÉÓ²¼ş´ò¿ª) */
+	IWDG_Enable();
+
+	Timeout = ms;
+
+	return true;
+#elif defined STM32F4
+	if (ms == 0)
+	{
+		debug_printf("WatchDog msTimeout %dms must larger than 0ms\r\n", ms);
+		return false;
+	}
+	RCC_LSICmd(ENABLE);
+	/* ¼ì²éÏµÍ³ÊÇ·ñ´ÓIWDGÖØÖÃ»Ö¸´ */
+	if (RCC_GetFlagStatus(RCC_FLAG_IWDGRST) != RESET)
+	{
+		/* Çå³ıÖØÖÃ±êÊ¶ */
+		RCC_ClearFlag();
+	}
+	/* ´ò¿ªIWDG_PRºÍIWDG_RLR¼Ä´æÆ÷µÄĞ´·ÃÎÊ */
+	IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);
+
+	byte pre = IWDG_Prescaler_4;
+	int mul = 4;
+	// ¼ÆÊıÆ÷12Î» 0~0x0FFF£¬ÓĞreload = ms/1000 / (1/(LSI/mul)) = ms * LSI / (mul*1000) = ms * 40 / mul
+	// ¿¼ÂÇµ½reloadÒç³öµÄ¿ÉÄÜ£¬Ã¿ÖÖ·ÖÆµ×î´óms = reload * mul / 40 ~= 102 * mul
+	int i = 0;
+	/*
+	#define IWDG_Prescaler_4            ((byte)0x00)
+	#define IWDG_Prescaler_8            ((byte)0x01)
+	#define IWDG_Prescaler_16           ((byte)0x02)
+	#define IWDG_Prescaler_32           ((byte)0x03)
+	#define IWDG_Prescaler_64           ((byte)0x04)
+	#define IWDG_Prescaler_128          ((byte)0x05)
+	#define IWDG_Prescaler_256          ((byte)0x06)
+	 */
+	for (i = IWDG_Prescaler_4; i <= IWDG_Prescaler_256; i++)
+	{
+		pre = i;
+		mul = 1 << (i + 2);
+
+		// ÅĞ¶ÏÊÇ·ñÔÚ·¶Î§Ö®ÄÚ
+		if (ms * 40 / mul < 0x0FFF)
+			break;
+	}
+	if (i > IWDG_Prescaler_256)
+	{
+		debug_printf("WatchDog msTimeout must smaller than %dms\r\n", 0x0FFF * 256 / 40);
+		return false;
+	}
+	IWDG_SetPrescaler(pre);
+	/*if(ms < (0x0FFF * 32 / 40))
+	{
+	// IWDG¼ÆÊıÆ÷Ê±ÖÓ: LSI/32=40KHz/32=1250Hz£¬Ã¿ÖÜÆÚ0.8ms
+	IWDG_SetPrescaler(IWDG_Prescaler_32);
+	}
+	else
+	{
+	// IWDG¼ÆÊıÆ÷Ê±ÖÓ: LSI/64=40KHz/64=625Hz£¬Ã¿ÖÜÆÚ0.4ms
+	IWDG_SetPrescaler(IWDG_Prescaler_64);
+
+	// Ö±½Ó³ıÒÔ2£¬ºóÃæ²»ÓÃÖØ¸´¼ÆËã
+	ms >>= 2;
+	}*/
+
+	/* ÉèÖÃ¼ÆÊıÆ÷ÖØÔØÖµÎª³¬Ê±Ê±¼ä
+	Counter Reload Value = ms / 1000 / IWDG¼ÆÊıÆ÷Ê±ÖÓÖÜÆÚ
+	= ms / 1000 / (1/(LSI/mul))
+	= ms * LSI / (mul * 1000)
+	= ms * 40k / (mul * 1000)
+	= ms * 40 / mul
+	 */
+	IWDG_SetReload(ms * 40 / mul);
+
+	/* ÖØÔØ IWDG ¼ÆÊıÆ÷ */
+	IWDG_ReloadCounter();
+
+	/* ´ò¿ª IWDG (LSI½«ÓÉÓ²¼ş´ò¿ª) */
+	IWDG_Enable();
+
+	Timeout = ms;
+
+	return true;
+#endif
+}
+// ¿´ÃÅ¹·ÎŞ·¨¹Ø±Õ£¬Ö»ÄÜÉèÖÃÒ»¸ö×î´óÖµ
+void WatchDog::ConfigMax()
+{
+#if defined STM32F0
+	/* ´ò¿ªIWDG_PRºÍIWDG_RLR¼Ä´æÆ÷µÄĞ´·ÃÎÊ */
+	IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);
+
+	// ¶ÀÁ¢¿´ÃÅ¹·ÎŞ·¨¹Ø±Õ
+	IWDG_SetPrescaler(IWDG_Prescaler_256);
+	IWDG_SetReload(0x0FFF);
+	IWDG_ReloadCounter();
+#elif defined STM32F1
+	/* ´ò¿ªIWDG_PRºÍIWDG_RLR¼Ä´æÆ÷µÄĞ´·ÃÎÊ */
+	IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);
+
+	// ¶ÀÁ¢¿´ÃÅ¹·ÎŞ·¨¹Ø±Õ
+	IWDG_SetPrescaler(IWDG_Prescaler_256);
+	IWDG_SetReload(0x0FFF);
+	IWDG_ReloadCounter();
+#elif defined STM32F4
+	/* ´ò¿ªIWDG_PRºÍIWDG_RLR¼Ä´æÆ÷µÄĞ´·ÃÎÊ */
+	IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);
+
+	// ¶ÀÁ¢¿´ÃÅ¹·ÎŞ·¨¹Ø±Õ
+	IWDG_SetPrescaler(IWDG_Prescaler_256);
+	IWDG_SetReload(0x0FFF);
+	IWDG_ReloadCounter();
+#endif
 }
