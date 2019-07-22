@@ -19,38 +19,38 @@ public:
 
 	bool	Opened;		// 是否已经打开
 
-//	I2C();
-//	virtual ~I2C();
+	I2C();
+	virtual ~I2C();
 
 	virtual void SetPin(Pin scl, Pin sda) = 0;
-//	virtual void GetPin(Pin* scl = nullptr, Pin* sda = nullptr) = 0;
+	virtual void GetPin(Pin* scl = nullptr, Pin* sda = nullptr) = 0;
 
-//	virtual bool Open();		// 打开设备
-//	virtual void Close();		// 关闭设备
+	virtual bool Open();		// 打开设备
+	virtual void Close();		// 关闭设备
 
 	virtual void Start() = 0;	// 开始会话
 	virtual void Stop() = 0;	// 停止会话
 
-//	virtual void WriteByte(byte dat) = 0;	// 写入单个字节
-//	virtual byte ReadByte() = 0;			// 读取单个字节
-//	virtual void Ack(bool ack) = 0;			// 发送Ack/Nak
-//	virtual bool WaitAck(bool ack) = 0;		// 等待Ack/Nak
+	virtual void WriteByte(byte dat) = 0;	// 写入单个字节
+	virtual byte ReadByte() = 0;			// 读取单个字节
+	virtual void Ack(bool ack) = 0;			// 发送Ack/Nak
+	virtual bool WaitAck(bool ack) = 0;		// 等待Ack/Nak
 
 	// 新会话向指定地址写入
-//	bool Write(int addr, const Buffer& bs);
-//	bool Write(int addr, byte data);
+	bool Write(int addr, const Buffer& bs);
+	bool Write(int addr, byte data);
 	// 新会话从指定地址读取
-//	virtual uint Read(int addr, Buffer& bs);
-//	virtual byte Read(int addr);
-//	virtual ushort Read2(int addr);
-//	virtual uint Read4(int addr);
+	virtual uint Read(int addr, Buffer& bs);
+	virtual byte Read(int addr);
+	virtual ushort Read2(int addr);
+	virtual uint Read4(int addr);
 
 protected:
-//	virtual bool OnOpen() = 0;	// 打开设备
-//	virtual void OnClose() = 0;	// 外部设备
+	virtual bool OnOpen() = 0;	// 打开设备
+	virtual void OnClose() = 0;	// 外部设备
 
-//	virtual bool SendAddress(int addr, bool tx);
-//	virtual bool SendSubAddr(int addr);
+	virtual bool SendAddress(int addr, bool tx);
+	virtual bool SendSubAddr(int addr);
 };
 
 // I2C会话类。初始化时打开，超出作用域析构时关闭
@@ -71,6 +71,7 @@ public:
 		_iic->Stop();
 	}
 };
+
 // 硬件I2C
 class HardI2C : public I2C
 {
@@ -111,6 +112,7 @@ private:
 	virtual bool OnOpen();
 	virtual void OnClose();
 };
+
 // 软件模拟I2C
 class SoftI2C : public I2C
 {
