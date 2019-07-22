@@ -1145,6 +1145,11 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\STM32F1\RTC.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Interrupt.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2406,6 +2411,11 @@
               <FileName>RTC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\STM32F1\RTC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Interrupt.cpp</FilePath>
             </File>
           </Files>
         </Group>
