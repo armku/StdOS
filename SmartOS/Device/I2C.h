@@ -155,9 +155,20 @@ SCL为高时，SDA下降沿表示开始，SDA上升沿表示停止。
 感谢夏宇@10068953
 
 */
+class I2CBase
+{
+public:
+	virtual void SetPin(Pin scl, Pin sda)=0;
 
+	virtual void Start()=0;
+	virtual void Stop()=0;
+
+	virtual void WriteByte(byte dat)=0;
+	virtual byte ReadByte(bool ack)=0;
+	virtual bool WaitAck(int retry = 0)=0;
+};
 // 软件模拟I2C
-class I2CSoft:public I2C
+class I2CSoft:public I2CBase
 {
 public:
 	bool HasSecAddress;	// 设备是否有子地址
