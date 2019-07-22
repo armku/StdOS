@@ -640,12 +640,3 @@ void Port::Write(bool value)const
 	}
 #endif
 }
-
-
-
-void OutputPort::OpenPin(void* param)
-	{
-	}
-void AlternatePort::OpenPin(void* param)
-{
-}

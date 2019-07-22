@@ -1034,6 +1034,13 @@
         </Group>
         <Group>
           <GroupName>Platform</GroupName>
+          <Files>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Port.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>
@@ -2065,6 +2072,13 @@
         </Group>
         <Group>
           <GroupName>Platform</GroupName>
+          <Files>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Port.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>
