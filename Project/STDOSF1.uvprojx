@@ -655,6 +655,36 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\App\PID.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Button_magnetic.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\App\Button_magnetic.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CommandPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\App\CommandPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IR.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\App\IR.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IRcoding.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\App\IRcoding.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PulsePort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\App\PulsePort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sensor.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\App\Sensor.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1886,6 +1916,36 @@
               <FileName>PID.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\App\PID.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Button_magnetic.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\App\Button_magnetic.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CommandPort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\App\CommandPort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IR.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\App\IR.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IRcoding.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\App\IRcoding.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PulsePort.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\App\PulsePort.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sensor.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\App\Sensor.cpp</FilePath>
             </File>
           </Files>
         </Group>
