@@ -1129,6 +1129,43 @@
         </Group>
         <Group>
           <GroupName>Net</GroupName>
+          <Files>
+            <File>
+              <FileName>HttpClient.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\HttpClient.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\IPAddress.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPEndPoint.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\IPEndPoint.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ITransport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\ITransport.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MacAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\MacAddress.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NetUri.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\NetUri.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Zigbee.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\Zigbee.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>
@@ -2255,6 +2292,43 @@
         </Group>
         <Group>
           <GroupName>Net</GroupName>
+          <Files>
+            <File>
+              <FileName>HttpClient.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\HttpClient.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\IPAddress.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IPEndPoint.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\IPEndPoint.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ITransport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\ITransport.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MacAddress.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\MacAddress.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NetUri.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\NetUri.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Zigbee.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\Zigbee.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>

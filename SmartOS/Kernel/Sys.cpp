@@ -112,7 +112,8 @@ void TSys::ShowInfo()const
 	debug_printf("ChipID:");
 	Buffer((void*)this->ID, 12).ShowHex(true);
 }
-
+// 系统启动后的毫秒数
+INROOT UInt64 TSys::Ms() const { return Time.Current(); }
 // 系统绝对当前时间，秒
 uint TSys::Seconds()const
 {
