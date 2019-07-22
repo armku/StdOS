@@ -1,5 +1,31 @@
+#include "Kernel\Sys.h"
+
 #include "I2C.h"
-#include "Sys.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
 I2CSoft::I2CSoft(uint speedHz)
 {
