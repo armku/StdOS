@@ -284,6 +284,28 @@ void TSys::Start()
 	Sys.GlobalEnable();	
 	Task::Scheduler()->Start();
 }
+/****************ÏµÍ³¸ú×Ù****************/
+
+//#if DEBUG
+	#include "Device\Port.h"
+	static OutputPort* _trace = nullptr;
+//#endif
+void TSys::InitTrace(void* port) const
+{
+//#if DEBUG
+	_trace	= (OutputPort*)port;
+//#endif
+}
+
+void TSys::Trace(int times) const
+{
+//#if DEBUG
+	if(_trace)
+	{
+		while(times--) *_trace = !*_trace;
+	}
+//#endif
+}
 
 #include "BspPlatform\BspPlatform.h"
 /////////////////////////////////////////////////////////////////////////////

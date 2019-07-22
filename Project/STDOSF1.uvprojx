@@ -795,6 +795,16 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\Flash.cpp</FilePath>
             </File>
+            <File>
+              <FileName>DMA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\DMA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\RTC.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1094,6 +1104,16 @@
               <FileName>Flash.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\STM32F1\Flash.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DMA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\DMA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\RTC.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1898,6 +1918,16 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\Flash.cpp</FilePath>
             </File>
+            <File>
+              <FileName>DMA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\DMA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Device\RTC.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2197,6 +2227,16 @@
               <FileName>Flash.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\STM32F1\Flash.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DMA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\DMA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\RTC.cpp</FilePath>
             </File>
           </Files>
         </Group>
