@@ -22,7 +22,7 @@ public:
 //	I2C();
 //	virtual ~I2C();
 
-//	virtual void SetPin(Pin scl, Pin sda) = 0;
+	virtual void SetPin(Pin scl, Pin sda) = 0;
 //	virtual void GetPin(Pin* scl = nullptr, Pin* sda = nullptr) = 0;
 
 //	virtual bool Open();		// 打开设备
