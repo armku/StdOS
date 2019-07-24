@@ -15,7 +15,7 @@ Array::Array(const void* data, int len) : Buffer((void*)data, len)
 {
 	Init();
 
-	_canWrite	= false;
+	_canWrite = false;
 }
 
 Array::Array(const Buffer& rhs) : Buffer(nullptr, 0)
@@ -37,24 +37,24 @@ void Array::move(Array& rval)
 
 	Buffer::move(rval);
 
-	_Capacity	= rval._Capacity;
-	_needFree	= rval._needFree;
-	_canWrite	= rval._canWrite;
-	Expand		= rval.Expand;
+	_Capacity = rval._Capacity;
+	_needFree = rval._needFree;
+	_canWrite = rval._canWrite;
+	Expand = rval.Expand;
 
-	rval._Capacity	= 0;
-	rval._needFree	= false;
-	rval._canWrite	= false;
+	rval._Capacity = 0;
+	rval._needFree = false;
+	rval._canWrite = false;
 }
 
 void Array::Init()
 {
-	Expand	= true;
-	_Size	= 1;
+	Expand = true;
+	_Size = 1;
 
-	_Capacity	= _Length;
-	_needFree	= false;
-	_canWrite	= true;
+	_Capacity = _Length;
+	_needFree = false;
+	_canWrite = true;
 }
 
 // 析构。释放资源
@@ -66,19 +66,19 @@ Array::~Array()
 // 释放已占用内存
 bool Array::Release()
 {
-	auto p	= _Arr;
-	bool fr	= _needFree;
+	auto p = _Arr;
+	bool fr = _needFree;
 
-	_Arr		= nullptr;
-	_Capacity	= 0;
-	_Length		= 0;
+	_Arr = nullptr;
+	_Capacity = 0;
+	_Length = 0;
 
-	_needFree	= false;
-	_canWrite	= true;
+	_needFree = false;
+	_canWrite = true;
 
-	if(fr && p)
+	if (fr && p)
 	{
-		delete[] (byte*)p;
+		delete[](byte*)p;
 
 		return true;
 	}
@@ -119,15 +119,15 @@ bool Array::SetLength(int len)
 
 bool Array::SetLength(int len, bool bak)
 {
-	if(len <= _Capacity)
+	if (len <= _Capacity)
 	{
 		_Length = len;
 	}
 	else
 	{
-		if(!CheckCapacity(len, bak ? _Length : 0)) return false;
+		if (!CheckCapacity(len, bak ? _Length : 0)) return false;
 		// 扩大长度
-		if(len > _Length) _Length = len;
+		if (len > _Length) _Length = len;
 	}
 	return true;
 }
@@ -150,21 +150,21 @@ void Array::SetBuffer(const void* ptr, int len)
 int Array::Copy(int destIndex, const Buffer& src, int srcIndex, int len)
 {
 	// 可能需要先扩容，否则Buffer拷贝时，长度可能不准确
-	int remain	= src.Length() - srcIndex;
-	if(len < 0)
+	int remain = src.Length() - srcIndex;
+	if (len < 0)
 	{
 		// -1时选择右边最大长度
-		len	= remain;
-		if(len <= 0) return 0;
+		len = remain;
+		if (len <= 0) return 0;
 	}
 	else
 	{
 		// 右边可能不足len
-		if(len > remain) len	= remain;
+		if (len > remain) len = remain;
 	}
 
 	// 左边不足时自动扩容，需要备份已有数据
-	if(Length() < destIndex + len) SetLength(destIndex + len, true);
+	if (Length() < destIndex + len) SetLength(destIndex + len, true);
 
 	return Buffer::Copy(destIndex, src, srcIndex, len);
 }
@@ -176,7 +176,7 @@ bool Array::SetItem(const void* data, int index, int count)
 	assert(data, "Array::SetItem data Error");
 
 	// count<=0 表示设置全部元素
-	if(count <= 0) count = _Length - index;
+	if (count <= 0) count = _Length - index;
 	assert(count > 0, "Array::SetItem count Error");
 
 	// 检查长度是否足够
@@ -184,21 +184,21 @@ bool Array::SetItem(const void* data, int index, int count)
 	CheckCapacity(len2, index);
 
 	// 扩大长度
-	if(len2 > _Length) _Length = len2;
+	if (len2 > _Length) _Length = len2;
 
 	//byte* buf = (byte*)GetBuffer();
 	// 如果元素类型大小为1，那么可以直接调用内存设置函数
-	if(_Size == 1)
+	if (_Size == 1)
 		//memset(&buf[index], *(byte*)data, count);
 		Set(*(byte*)data, index, count);
 	else
 	{
-		while(count-- > 0)
+		while (count-- > 0)
 		{
 			//memcpy(buf, data, _Size);
 			//buf += _Size;
 			Copy(index, data, _Size);
-			index	+= _Size;
+			index += _Size;
 		}
 	}
 
@@ -208,9 +208,9 @@ bool Array::SetItem(const void* data, int index, int count)
 // 设置数组。直接使用指针，不拷贝数据
 bool Array::Set(void* data, int len)
 {
-	if(!Set((const void*)data, len)) return false;
+	if (!Set((const void*)data, len)) return false;
 
-	_canWrite	= true;
+	_canWrite = true;
 
 	return true;
 }
@@ -219,13 +219,13 @@ bool Array::Set(void* data, int len)
 bool Array::Set(const void* data, int len)
 {
 	// 销毁旧的
-	if(_needFree && _Arr != data) Release();
+	if (_needFree && _Arr != data) Release();
 
-	_Arr		= (char*)data;
-	_Length		= len;
-	_Capacity	= len;
-	_needFree	= false;
-	_canWrite	= false;
+	_Arr = (char*)data;
+	_Length = len;
+	_Capacity = len;
+	_needFree = false;
+	_canWrite = false;
 
 	return true;
 }
@@ -248,7 +248,7 @@ void Array::SetItemAt(int i, const void* item)
 	// 检查长度，不足时扩容
 	CheckCapacity(i + 1, _Length);
 
-	if(i >= _Length) _Length = i + 1;
+	if (i >= _Length) _Length = i + 1;
 
 	//memcpy((byte*)_Arr + _Size * i, item, _Size);
 	Copy(_Size * i, item, _Size);
@@ -260,7 +260,7 @@ byte Array::operator[](int i) const
 	assert(_Arr && i >= 0 && i < _Length, "下标越界");
 
 	byte* buf = (byte*)_Arr;
-	if(_Size > 1) i *= _Size;
+	if (_Size > 1) i *= _Size;
 
 	return buf[i];
 }
@@ -270,7 +270,7 @@ byte& Array::operator[](int i)
 	assert(_Arr && i >= 0 && i < _Length, "下标越界");
 
 	byte* buf = (byte*)_Arr;
-	if(_Size > 1) i *= _Size;
+	if (_Size > 1) i *= _Size;
 
 	return buf[i];
 }
@@ -280,35 +280,35 @@ bool Array::CheckCapacity(int len, int bak)
 {
 	// 是否超出容量
 	// 如果不是可写，在扩容检查时，也要进行扩容，避免内部不可写数据被修改
-	if(_Arr && len <= _Capacity && _canWrite) return true;
+	if (_Arr && len <= _Capacity && _canWrite) return true;
 	// 是否可以扩容
-	if(!Expand) return false;
+	if (!Expand) return false;
 
 	// 自动计算合适的容量
 	int sz = 0x40;
-	while(sz < len) sz <<= 1;
+	while (sz < len) sz <<= 1;
 
-	bool _free	= _needFree;
+	bool _free = _needFree;
 
 	void* p = Alloc(sz);
-	if(!p) return false;
+	if (!p) return false;
 
 	// 是否需要备份数据
-	if(bak > _Length) bak = _Length;
-	if(bak > 0 && _Arr)
+	if (bak > _Length) bak = _Length;
+	if (bak > 0 && _Arr)
 		// 为了安全，按照字节拷贝
 		Buffer(p, sz).Copy(0, _Arr, bak);
 
-	int oldlen	= _Length;
+	int oldlen = _Length;
 	if (_free && _Arr != p)
 	{
 		// Release(); 会动标志位 不能用它
 		delete _Arr;
 	}
 
-	_Arr		= (char*)p;
-	_Capacity	= sz;
-	_Length		= oldlen;
+	_Arr = (char*)p;
+	_Capacity = sz;
+	_Length = oldlen;
 
 	// _needFree 由Alloc决定
 	// 有可能当前用的内存不是内部内存，然后要分配的内存小于内部内存，则直接使用内部，不需要释放
@@ -319,14 +319,14 @@ bool Array::CheckCapacity(int len, int bak)
 
 void* Array::Alloc(int len)
 {
-	_needFree	= true;
+	_needFree = true;
 
 	return new byte[_Size * len];
 }
 
 bool operator==(const Array& bs1, const Array& bs2)
 {
-	if(bs1.Length() != bs2.Length()) return false;
+	if (bs1.Length() != bs2.Length()) return false;
 
 	return bs1.CompareTo(bs2) == 0;
 	//return memcmp(bs1._Arr, bs2._Arr, bs1.Length() * bs1._Size) == 0;
@@ -334,7 +334,7 @@ bool operator==(const Array& bs1, const Array& bs2)
 
 bool operator!=(const Array& bs1, const Array& bs2)
 {
-	if(bs1.Length() != bs2.Length()) return true;
+	if (bs1.Length() != bs2.Length()) return true;
 
 	return bs1.CompareTo(bs2) != 0;
 	//return memcmp(bs1._Arr, bs2._Arr, bs1.Length() * bs1._Size) != 0;

@@ -8,7 +8,7 @@ class Array : public Buffer
 {
 public:
 	bool	Expand;	// 是否可扩容
-	
+
 	// 数组最大容量。初始化时决定，后面不允许改变
 	inline int Capacity() const { return _Capacity; }
 
@@ -47,9 +47,9 @@ public:
 	// 设置指定位置的值，不足时自动扩容
 	virtual void SetItemAt(int i, const void* item);
 
-    // 重载索引运算符[]，返回指定元素的第一个字节
-    byte operator[](int i) const;
-    byte& operator[](int i);
+	// 重载索引运算符[]，返回指定元素的第一个字节
+	byte operator[](int i) const;
+	byte& operator[](int i);
 
 	friend bool operator==(const Array& bs1, const Array& bs2);
 	friend bool operator!=(const Array& bs1, const Array& bs2);
