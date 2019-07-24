@@ -22,15 +22,15 @@ public:
 	ByteArray& operator = (ByteArray&& rval);
 
 	// 重载等号运算符，使用外部指针、内部长度，用户自己注意安全
-    //ByteArray& operator=(const void* data);
+	//ByteArray& operator=(const void* data);
 
 	// 保存到普通字节数组，首字节为长度
 	int Load(const void* data, int maxsize = -1);
 	// 从普通字节数据组加载，首字节为长度
 	int Save(void* data, int maxsize = -1) const;
 
-    //friend bool operator==(const ByteArray& bs1, const ByteArray& bs2);
-    //friend bool operator!=(const ByteArray& bs1, const ByteArray& bs2);
+	//friend bool operator==(const ByteArray& bs1, const ByteArray& bs2);
+	//friend bool operator!=(const ByteArray& bs1, const ByteArray& bs2);
 
 #if DEBUG
 	static void Test();

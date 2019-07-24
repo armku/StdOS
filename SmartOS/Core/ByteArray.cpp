@@ -19,9 +19,9 @@ ByteArray::ByteArray(byte item, int length) : Array(Arr, sizeof(Arr))
 
 ByteArray::ByteArray(const void* data, int length, bool copy) : Array(Arr, sizeof(Arr))
 {
-	if(copy)
+	if (copy)
 	{
-		_Length	=	length;
+		_Length = length;
 		Copy(0, data, length);
 	}
 	else
@@ -30,9 +30,9 @@ ByteArray::ByteArray(const void* data, int length, bool copy) : Array(Arr, sizeo
 
 ByteArray::ByteArray(void* data, int length, bool copy) : Array(Arr, sizeof(Arr))
 {
-	if(copy)
+	if (copy)
 	{
-		_Length	=	length;
+		_Length = length;
 		Copy(0, data, length);
 	}
 	else
@@ -78,7 +78,7 @@ void ByteArray::move(ByteArray& rval)
 	3，如果右值是外部指针，而不需要释放，则拷贝数据，因为那指针可能是借用外部的栈内存
 	*/
 
-	if(rval._Arr != (char*)rval.Arr && rval._needFree)
+	if (rval._Arr != (char*)rval.Arr && rval._needFree)
 	{
 		Array::move(rval);
 
@@ -91,14 +91,14 @@ void ByteArray::move(ByteArray& rval)
 
 void* ByteArray::Alloc(int len)
 {
-	if(len <= (int)sizeof(Arr))
+	if (len <= (int)sizeof(Arr))
 	{
-		_needFree	= false;
+		_needFree = false;
 		return Arr;
 	}
 	else
 	{
-		_needFree	= true;
+		_needFree = true;
 		return new byte[len];
 	}
 }
