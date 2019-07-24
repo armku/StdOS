@@ -446,16 +446,3 @@ void BufferRef::Set(void* ptr, int len)
 	_Length = len;
 }
 
-
-static void ShowChar(char c)
-{
-	if (c >= 10)
-	{
-		debug_printf("%c", c - 10 + 'A');
-	}
-	else
-	{
-		debug_printf("%c", c + '0');
-	}
-}
-
