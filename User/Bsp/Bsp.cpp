@@ -98,6 +98,7 @@ void BufferTest()
 	bf.ShowHex(true,'-');
 	debug_printf("\r\n");
 	
+	bf.ToHex('$').Show(true);
 }
 /*
 			LED1	LED2	LED3	LED4
