@@ -364,17 +364,17 @@ void Buffer::Write(UInt64 value, int index)
 	Copy(index, (byte*)&value, sizeof(UInt64));
 }
 
-//String& Buffer::ToStr(String& str) const
-//{
-//	return ToHex(str, '-', 0x20);
-//}
+String& Buffer::ToStr(String& str) const
+{
+	return ToHex(str, '-', 0x20);
+}
 
 // 包装为字符串对象
-//String Buffer::AsString() const
-//{
-//	String str((cstring)_Arr, _Length);
-//	return str;
-//}
+String Buffer::AsString() const
+{
+	String str((cstring)_Arr, _Length);
+	return str;
+}
 
 int Buffer::CompareTo(const Buffer& bs) const
 {

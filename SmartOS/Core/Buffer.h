@@ -92,7 +92,7 @@ public:
 	void Write(UInt64 value, int index = 0);
 
 	// 输出对象的字符串表示方式
-	//virtual String& ToStr(String& str) const;
+	virtual String& ToStr(String& str) const;
 	// 包装为字符串对象
 	String AsString() const;
 
