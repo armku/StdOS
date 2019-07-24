@@ -123,7 +123,7 @@ bool MqttLink::Puslish(char *buf, int len)
 	if (this->readlen == 4)
 	{
 		debug_printf("Puslish Rec Length 4\r\n");
-		Buffer(this->bufRcv, this->readlen).ShowHex(true);
+		Buffer(this->bufRcv, this->readlen).ToHex(' ').Show(true);
 		for (int i = 0; i < 3; i++)
 		{
 			if (this->bufRcv[i] != bufneed[i])
@@ -134,7 +134,7 @@ bool MqttLink::Puslish(char *buf, int len)
 	else
 	{
 		debug_printf("Puslish to Server rcv length %d ERROR\r\n", this->readlen);
-		Buffer(this->bufRcv, this->readlen).ShowHex(true);
+		Buffer(this->bufRcv, this->readlen).ToHex(' ').Show(true);
 	}
 	return false;
 }
@@ -161,7 +161,7 @@ bool MqttLink::Puslish_Release()
 	if (this->readlen == 4)
 	{
 		debug_printf("Puslish_Release Rec Length 4\r\n");
-		Buffer(this->bufRcv, this->readlen).ShowHex(true);
+		Buffer(this->bufRcv, this->readlen).ToHex(' ').Show(true);
 		//20 02 00 00 (4)
 		for (int i = 0; i < 3; i++)
 		{
@@ -173,7 +173,7 @@ bool MqttLink::Puslish_Release()
 	else
 	{
 		debug_printf("Puslish to Server rcv length %d ERROR\r\n", this->readlen);
-		Buffer(this->bufRcv, this->readlen).ShowHex(true);
+		Buffer(this->bufRcv, this->readlen).ToHex(' ').Show(true);
 	}
 	return false;
 }

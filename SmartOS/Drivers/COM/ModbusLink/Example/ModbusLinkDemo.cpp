@@ -51,7 +51,7 @@ ushort RegHoilding16[60];
 
 static void DealRcv(char* buf, int length)
 {
-	Buffer(loop_bufcom2, length).ShowHex(true);
+	Buffer(loop_bufcom2, length).ToHex(' ').Show(true);
 	if (length >= 8)
 	{
 		ushort crccal = Crc::CRC16RTU(loop_bufcom2, length - 2);

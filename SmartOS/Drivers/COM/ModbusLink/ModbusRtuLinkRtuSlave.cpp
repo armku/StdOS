@@ -14,7 +14,7 @@ ModbusRtuLinkSlave::ModbusRtuLinkSlave()
 bool ModbusRtuLinkSlave::CheckFrame()
 {
 #ifdef  DEBUG
-	Buffer(rxFrame.data, rxFrame.Length).ShowHex(true);
+	Buffer(rxFrame.data, rxFrame.Length).ToHex(' ').Show(true);
 #endif //  DEBUG	
 	if (!rxFrame.CheckFrame())
 		return false;
@@ -32,7 +32,7 @@ bool ModbusRtuLinkSlave::Send()
 	txFrame.data[txFrame.frameLength - 2] = txFrame.Crc & 0xff;
 	txFrame.data[txFrame.frameLength - 1] = txFrame.Crc >> 8;
 	this->send_buf(txFrame.data, txFrame.frameLength);
-	Buffer(txFrame.data, txFrame.frameLength).ShowHex();
+	Buffer(txFrame.data, txFrame.frameLength).ToHex(' ').Show();
 	txFrame.isUpdated = false;
 	return true;
 }
