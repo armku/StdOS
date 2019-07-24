@@ -168,8 +168,6 @@ public:
     void Sleep112233(int ms) const; // 毫秒级延迟，仅供系统调用	
 	// 打开全局中断
 	void GlobalEnable();
-	// 关闭全局中断
-	void GlobalDisable();
 };
 
 extern TSys Sys;		// 创建一个全局的Sys对象  会在main函数之前执行构造函数（！！！！！）

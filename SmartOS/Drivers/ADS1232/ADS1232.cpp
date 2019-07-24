@@ -114,7 +114,7 @@ int ADS1232::Read(bool cal)
 	if (temp < 1000)
 	{
 		valOrigin = 0;
-		Sys.GlobalDisable();
+		EnterCritical();
 		for (int i = 0; i < 24; i++)
 		{
 			valOrigin <<= 1;

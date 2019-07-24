@@ -102,7 +102,7 @@ INROOT TSys::TSys()
 
 void TSys::Init()
 {
-	Sys.GlobalDisable();
+	EnterCritical();
 	Time.Init();
 }
 
@@ -347,11 +347,6 @@ void TSys::GlobalEnable()
 	INTX_ENABLE();
 }
 
-// 关闭全局中断
-void TSys::GlobalDisable()
-{
-	INTX_DISABLE();
-}
 void assert_failed(byte *file, uint line, char *errstr)
 {
 	debug_printf("%s(%d):    %s\n", file, line, errstr);
