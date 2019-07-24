@@ -23,7 +23,7 @@ public:
 private:
 	int		_Used;
 	int		_Count;
-	void*	_First;	// 第一个有空闲的内存块，加速搜索
+	void* _First;	// 第一个有空闲的内存块，加速搜索
 };
 
 #endif

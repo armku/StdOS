@@ -4,7 +4,7 @@
 
 WaitHandle::WaitHandle()
 {
-	Result		= false;
+	Result = false;
 
 	TaskID = Task::Current().ID;
 	State = nullptr;
@@ -13,7 +13,7 @@ WaitHandle::WaitHandle()
 bool WaitHandle::WaitOne(int ms)
 {
 	// 实际可用时间，-1表示无限等待
-	if(ms == -1) ms	= 0x7FFFFFFF;
+	if (ms == -1) ms = 0x7FFFFFFF;
 
 	Task::Scheduler()->ExecuteForWait(ms, Result);
 
@@ -22,5 +22,5 @@ bool WaitHandle::WaitOne(int ms)
 
 void WaitHandle::Set()
 {
-	Result	= true;
+	Result = true;
 }

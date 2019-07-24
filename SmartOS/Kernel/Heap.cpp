@@ -4,12 +4,10 @@
 #include "Heap.h"
 #include "TTime.h"
 
-
 #define MEMORY_ALIGN	4
 
 // 当前堆
-const Heap* Heap::Current = nullptr;
-
+const Heap * Heap::Current = nullptr;
 
 /*
 堆分配原理：
@@ -25,7 +23,7 @@ const Heap* Heap::Current = nullptr;
 typedef struct MemoryBlock_
 {
 	int	Used;
-	struct MemoryBlock_*	Next;
+	struct MemoryBlock_* Next;
 } MemoryBlock;
 
 /******************************** Heap ********************************/
@@ -144,4 +142,3 @@ void Heap::Free(void* ptr)
 	}
 	debug_printf("正在释放不是本系统申请的内存 0x%p \r\n", ptr);
 }
-
