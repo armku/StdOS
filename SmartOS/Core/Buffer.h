@@ -26,7 +26,7 @@ class Buffer : public Object
 public:
 	// 打包一个指针和长度指定的数据区
 	Buffer(void* ptr, int len);
-// 禁用拷贝构造函数
+	// 禁用拷贝构造函数
 	Buffer(const Buffer& buf) = delete;
 	// 对象mov操作，指针和长度归我，清空对方
 	Buffer(Buffer&& rval);
@@ -39,21 +39,21 @@ public:
 	Buffer& operator = (Buffer&& rval);
 
 	// 拿出指针供外部使用
-	inline byte* GetBuffer()				{ return (byte*)_Arr; }
-	inline const byte* GetBuffer() const	{ return (byte*)_Arr; }
-	inline int Length() const				{ return _Length; }
+	inline byte* GetBuffer() { return (byte*)_Arr; }
+	inline const byte* GetBuffer() const { return (byte*)_Arr; }
+	inline int Length() const { return _Length; }
 
 	// 设置数组长度。只能缩小不能扩大，子类可以扩展以实现自动扩容
 	virtual bool SetLength(int len);
-	virtual void SetBuffer(void* ptr, int len);
+	//virtual void SetBuffer(void* ptr, int len);
 
 	// 设置指定位置的值，长度不足时自动扩容
 	bool SetAt(int index, byte value);
 
-    // 重载索引运算符[]，返回指定元素的第一个字节
-    byte operator[](int i) const;
+	// 重载索引运算符[]，返回指定元素的第一个字节
+	byte operator[](int i) const;
 	// 支持 buf[i] = 0x36 的语法
-    byte& operator[](int i);
+	byte& operator[](int i);
 
 	// 原始拷贝、清零，不检查边界
 	static void Copy(void* dest, const void* src, int len);
@@ -96,8 +96,8 @@ public:
 	// 包装为字符串对象
 	String AsString() const;
 
-    explicit operator bool() const { return _Length > 0; }
-    bool operator !() const { return _Length == 0; }
+	explicit operator bool() const { return _Length > 0; }
+	bool operator !() const { return _Length == 0; }
 	int CompareTo(const Buffer& bs) const;
 	int CompareTo(const void* ptr, int len = -1) const;
 	friend bool operator == (const Buffer& bs1, const Buffer& bs2);
@@ -110,7 +110,7 @@ public:
 #endif
 
 protected:
-    char*	_Arr;		// 数据指针
+	char* _Arr;		// 数据指针
 	int		_Length;	// 长度
 
 	void move(Buffer& rval);
@@ -120,7 +120,7 @@ protected:
 class BufferRef : public Buffer
 {
 public:
-	int	Ref	= 1;	// 引用计数
+	int	Ref = 1;	// 引用计数
 
 	// 打包一个指针和长度指定的数据区
 	void Set(void* ptr, int len);

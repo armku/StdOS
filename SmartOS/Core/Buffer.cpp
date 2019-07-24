@@ -9,7 +9,6 @@
 #include "Buffer.h"
 #include "SString.h"
 
-
 /******************************** Buffer ********************************/
 
 Buffer::Buffer(void* ptr, int len)
@@ -99,11 +98,11 @@ bool Buffer::SetLength(int len)
 	return true;
 }
 
-void Buffer::SetBuffer(void* ptr, int len)
+/*void Buffer::SetBuffer(void* ptr, int len)
 {
 	_Arr		= (char*)ptr;
 	_Length		= len;
-}
+}*/
 
 // 原始拷贝、清零，不检查边界
 void Buffer::Copy(void* dest, const void* src, int len)
@@ -341,27 +340,27 @@ UInt64	Buffer::ToUInt64(int offset, bool isLittleEndian) const
 
 void Buffer::Write(ushort value, int index)
 {
-	Copy(index, (byte*)&value, sizeof(ushort));
+	Copy(index, (byte*)& value, sizeof(ushort));
 }
 
 void Buffer::Write(short value, int index)
 {
-	Copy(index, (byte*)&value, sizeof(short));
+	Copy(index, (byte*)& value, sizeof(short));
 }
 
 void Buffer::Write(uint value, int index)
 {
-	Copy(index, (byte*)&value, sizeof(uint));
+	Copy(index, (byte*)& value, sizeof(uint));
 }
 
 void Buffer::Write(int value, int index)
 {
-	Copy(index, (byte*)&value, sizeof(int));
+	Copy(index, (byte*)& value, sizeof(int));
 }
 
 void Buffer::Write(UInt64 value, int index)
 {
-	Copy(index, (byte*)&value, sizeof(UInt64));
+	Copy(index, (byte*)& value, sizeof(UInt64));
 }
 
 String& Buffer::ToStr(String& str) const
@@ -445,4 +444,3 @@ void BufferRef::Set(void* ptr, int len)
 	_Arr = (char*)ptr;
 	_Length = len;
 }
-
