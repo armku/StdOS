@@ -128,6 +128,26 @@ INROOT void TTime::Delay(int us) const
 	}
 }
 
+extern "C"
+{
+#ifndef _MSC_VER
+	// 获取系统启动后经过的毫秒数
+	clock_t clock(void)
+	{
+		return Time.Current();
+	}
+
+	// 实现C函数库的time函数
+	time_t time(time_t* sec)
+	{
+		uint s = Time.BaseSeconds + Time.Seconds;
+		if (sec)* sec = s;
+
+		return s;
+	}
+#endif
+}
+
 
 
 
