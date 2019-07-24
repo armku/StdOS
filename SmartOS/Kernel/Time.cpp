@@ -1,19 +1,71 @@
 #include "TTime.h"
-#include "OnChip\Configuration.h"
 
+#include "Core\Environment.h"
 
+#if defined(__CC_ARM)
+#include <time.h>
+#else
+#include <ctime>
+#endif
+
+#define TIME_DEBUG 0
+
+#define UTC		true								// utc 从1970/1/1 开始计时
+#define UTC_CALIBRATE				946684800UL		// 2000/1/1 - 1970/1/1 秒值
+#ifdef UTC
+#define BASE_YEAR_US				62135596800UL		// (63082281600UL-UTC_CALIBRATE)	// 从0 到 2000-01-01的所有秒数
+#else
+#define BASE_YEAR_US				63082281600UL	// 从0 到 2000-01-01的所有秒数
+#endif
+/************************************************ TTime ************************************************/
 TTime::TTime()
 {
-	this->BaseSeconds = 0;
-	this->Seconds = 0;
-
-	this->Index = 0;
-	this->Milliseconds = 0;
-
-#if ! (defined(STM32F0) || defined(GD32F150))
-	this->Div = 0;			// 分频系数。最大分频64k，无法让大于64M主频的芯片分配得到1k时钟
+	Seconds = 0;
+	//Ticks	= 0;
+#if defined(STM32F0) || defined(GD32F150)
+	Index = 13;
+#else
+	Div = 0;
+	if (Sys.FlashSize > 0x80)
+		Index = 5;
+	else
+		Index = 1;	// 错开开关的 TIM3 背光
 #endif
+	BaseSeconds = 0;
+
+	OnInit = nullptr;
+	OnLoad = nullptr;
+	OnSave = nullptr;
+	OnSleep = nullptr;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include "OnChip\Configuration.h"
 /////////////////////////////////////////////////////////////////////////////////////
 TimeCost::TimeCost()
 {
