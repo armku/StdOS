@@ -55,6 +55,79 @@ void TTime::SetTime(UInt64 sec)
 }
 
 
+// 关键性代码，放到开头
+INROOT void TTime::Sleep(int ms, bool* running) const
+{
+	// 睡眠时间太短
+	if (ms <= 0) return;
+
+	// 结束时间
+	UInt64 end = Current() + ms;
+
+	// 较大的睡眠时间直接让CPU停下来
+	if (OnSleep && ms >= 10)
+	{
+		while (ms >= 10)
+		{
+			OnSleep(ms);
+
+			// 判断是否需要继续
+			if (running != nullptr && !*running) break;
+
+			// 重新计算剩下的时间
+			ms = (int)(end - Current());
+		}
+	}
+	// 睡眠时间太短
+	if (!ms || (running && !*running)) return;
+
+	// 空转
+	while (true)
+	{
+		if (Current() >= end) break;
+		if (running != nullptr && !*running) break;
+	}
+}
+
+INROOT void TTime::Delay(int us) const
+{
+	// 睡眠时间太短
+	if (us <= 0) return;
+
+	// 当前函数耗时1~3us
+	if (us > 100) us -= 1;
+
+	UInt64 end = Current();
+	if (us >= 1000)
+	{
+		// 拆分毫秒和微秒
+		int ms = us / 1000;
+		end += ms;
+
+		us %= 1000;
+	}
+
+	// 微秒转为滴答
+	uint ticks = CurrentTicks() + UsToTicks(us);
+	// 结束嘀嗒数有可能超过1000
+	uint max = UsToTicks(1000 - 1);
+	if (ticks >= max)
+	{
+		end++;
+		ticks -= max;
+	}
+
+	// 等待目标时间
+	while (true)
+	{
+		// 首先比较毫秒数
+		int n = (int)(Current() - end);
+		if (n > 0) break;
+
+		if (n == 0 && CurrentTicks() >= ticks) break;
+	}
+}
+
 
 
 
