@@ -1,3 +1,123 @@
+#include "Type.h"
+#include "DateTime.h"
+#include "SString.h"
+
+#include "Version.h"
+
+/************************************************ Version ************************************************/
+
+Version::Version()
+{
+	Major = 0;
+	Minor = 0;
+	Build = 0;
+}
+
+Version::Version(int value)
+{
+	Major = value >> 24;
+	Minor = value >> 16;
+
+	Build = value & 0xFFFF;
+}
+
+Version::Version(int major, int minor, int build)
+{
+	Major = major;
+	Minor = minor;
+	Build = build;
+
+	// 有可能是 170325 这样的写法
+	if (build > 120000) SetCompile(build);
+}
+
+Version::Version(const Version& ver)
+{
+	*this = ver;
+}
+
+Version::Version(Version&& ver)
+{
+	*this = ver;
+}
+
+Version& Version::operator=(const Version& ver)
+{
+	Major = ver.Major;
+	Minor = ver.Minor;
+	Build = ver.Build;
+
+	return *this;
+}
+
+int Version::ToValue() const
+{
+	return (Major << 24) | (Minor << 16) | Build;
+}
+
+int Version::CompareTo(const Version& value) const
+{
+	int n = (int)Major - value.Major;
+	if (n) return n;
+
+	n = (int)Minor - value.Minor;
+	if (n) return n;
+
+	n = (int)Build - value.Build;
+	if (n) return n;
+
+	return 0;
+}
+
+bool operator==	(const Version& left, const Version& right) { return left.CompareTo(right) == 0; }
+bool operator!=	(const Version& left, const Version& right) { return left.CompareTo(right) != 0; }
+bool operator>	(const Version& left, const Version& right) { return left.CompareTo(right) > 0; }
+bool operator<	(const Version& left, const Version& right) { return left.CompareTo(right) < 0; }
+bool operator>=	(const Version& left, const Version& right) { return left.CompareTo(right) >= 0; }
+bool operator<=	(const Version& left, const Version& right) { return left.CompareTo(right) <= 0; }
+
+// 根据版本号反推编译时间
+DateTime Version::Compile() const
+{
+	DateTime dt(2000, 1, 1);
+
+	// Build 是2000-01-01以来的天数
+	dt = dt.AddDays(Build);
+
+	return dt;
+}
+
+Version& Version::SetCompile(int year, int month, int day)
+{
+	DateTime dt(2000, 1, 1);
+	DateTime dt2(year, month, day);
+	Build = (dt2 - dt).TotalDays();
+
+	return *this;
+}
+
+// 设置编译日期 170325
+Version& Version::SetCompile(int buildday)
+{
+	int day = buildday % 100;
+	buildday /= 100;
+	int month = buildday % 100;
+	int year = buildday / 100 + 2000;
+
+	DateTime dt(2000, 1, 1);
+	DateTime dt2(year, month, day);
+	Build = (dt2 - dt).TotalDays();
+
+	return *this;
+}
+
+String Version::ToString() const
+{
+	String str;
+	str = str + Major + '.' + Minor + '.' + Build;
+
+	return str;
+}
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -67,21 +187,21 @@ static void parse(char* str, int* major, int* minor, int* year, int* monday)
 	*monday = atoi(buf);
 }
 
-Version::Version(int major, int minor, int year, int monday)
-{
-	this->Major = major;
-	this->Minor = minor;
-	this->Year = year;
-	this->MonthDay = monday;
-}
+//Version::Version(int major, int minor, int year, int monday)
+//{
+//	this->Major = major;
+//	this->Minor = minor;
+//	this->Year = year;
+//	this->MonthDay = monday;
+//}
 
-Version::Version(const Version &ver)
-{
-	this->Major = ver.Major;
-	this->Minor = ver.Minor;
-	this->Year = ver.Year;
-	this->MonthDay = ver.MonthDay;
-}
+//Version::Version(const Version &ver)
+//{
+//	this->Major = ver.Major;
+//	this->Minor = ver.Minor;
+//	this->Year = ver.Year;
+//	this->MonthDay = ver.MonthDay;
+//}
 
 //适配版本，格式1.0.2018.1114
 int Version::Parse(char* str)
@@ -103,91 +223,91 @@ int Version::Show(char* buf, int pos)
 	ret = sprintf(buf+pos, "%d.%d.%d.%d", this->Major, this->Minor, this->Year, this->MonthDay);
 	return ret;
 }
-Version &Version::operator = (const Version &ver)
-{
-	Version* v = new Version(ver.Major, ver.Minor, ver.Year, ver.MonthDay);
-	v->Major = ver.Major;
-	v->Minor = ver.Minor;
-	v->Year = ver.Year;
-	v->MonthDay = ver.MonthDay;
-	return  *v;
-}
+//Version &Version::operator = (const Version &ver)
+//{
+//	Version* v = new Version(ver.Major, ver.Minor, ver.Year, ver.MonthDay);
+//	v->Major = ver.Major;
+//	v->Minor = ver.Minor;
+//	v->Year = ver.Year;
+//	v->MonthDay = ver.MonthDay;
+//	return  *v;
+//}
 
-int Version::CompareTo(const Version &value)const
-{
-	if (this->Major > value.Major)
-	{
-		return 1;
-	}
-	else if (this->Major < value.Major)
-	{
-		return  -1;
-	}
-	else
-	{
-	}
-	if (this->Minor > value.Minor)
-	{
-		return 1;
-	}
-	else if (this->Minor < value.Minor)
-	{
-		return  -1;
-	}
-	else
-	{
-	}
-	if (this->Year > value.Year)
-	{
-		return 1;
-	}
-	else if (this->Year < value.Year)
-	{
-		return  -1;
-	}
-	else
-	{
-	}
-	if (this->MonthDay > value.MonthDay)
-	{
-		return 1;
-	}
-	else if (this->MonthDay < value.MonthDay)
-	{
-		return  -1;
-	}
-	else
-	{
-	}
-	return 0;
-}
+//int Version::CompareTo(const Version &value)const
+//{
+//	if (this->Major > value.Major)
+//	{
+//		return 1;
+//	}
+//	else if (this->Major < value.Major)
+//	{
+//		return  -1;
+//	}
+//	else
+//	{
+//	}
+//	if (this->Minor > value.Minor)
+//	{
+//		return 1;
+//	}
+//	else if (this->Minor < value.Minor)
+//	{
+//		return  -1;
+//	}
+//	else
+//	{
+//	}
+//	if (this->Year > value.Year)
+//	{
+//		return 1;
+//	}
+//	else if (this->Year < value.Year)
+//	{
+//		return  -1;
+//	}
+//	else
+//	{
+//	}
+//	if (this->MonthDay > value.MonthDay)
+//	{
+//		return 1;
+//	}
+//	else if (this->MonthDay < value.MonthDay)
+//	{
+//		return  -1;
+//	}
+//	else
+//	{
+//	}
+//	return 0;
+//}
 
-bool operator == (const Version &left, const Version &right)
-{
-	return (left.CompareTo(right)) == 0;
-}
+//bool operator == (const Version &left, const Version &right)
+//{
+//	return (left.CompareTo(right)) == 0;
+//}
 
-bool operator != (const Version &left, const Version &right)
-{
-	return (left.CompareTo(right)) != 0;
-}
+//bool operator != (const Version &left, const Version &right)
+//{
+//	return (left.CompareTo(right)) != 0;
+//}
 
-bool operator > (const Version &left, const Version &right)
-{
-	return (left.CompareTo(right)) > 0;
-}
+//bool operator > (const Version &left, const Version &right)
+//{
+//	return (left.CompareTo(right)) > 0;
+//}
 
-bool operator < (const Version &left, const Version &right)
-{
-	return (left.CompareTo(right)) < 0;
-}
+//bool operator < (const Version &left, const Version &right)
+//{
+//	return (left.CompareTo(right)) < 0;
+//}
 
-bool operator >= (const Version &left, const Version &right)
-{
-	return (left.CompareTo(right)) >= 0;
-}
+//bool operator >= (const Version &left, const Version &right)
+//{
+//	return (left.CompareTo(right)) >= 0;
+//}
 
-bool operator <= (const Version &left, const Version &right)
-{
-	return (left.CompareTo(right)) <= 0;
-}
+//bool operator <= (const Version &left, const Version &right)
+//{
+//	return (left.CompareTo(right)) <= 0;
+//}
