@@ -8,7 +8,7 @@ typedef unsigned short	ushort;
 typedef unsigned int	uint;
 typedef unsigned long long	UInt64;
 typedef long long		Int64;
-typedef const char*		cstring;
+typedef const char* cstring;
 
 #define UInt64_Max 0xFFFFFFFFFFFFFFFFull
 
