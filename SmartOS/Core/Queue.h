@@ -10,7 +10,7 @@ class Queue
 private:
 	Array _s;	// 数据流
 	int _head;		// 头部位置
-    int _tail;		// 尾部位置
+	int _tail;		// 尾部位置
 	int _size;		// 长度
 
 public:

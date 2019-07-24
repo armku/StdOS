@@ -17,23 +17,23 @@ void Queue::SetCapacity(int len)
 void Queue::Clear()
 {
 	_s.SetLength(_s.Capacity());
-	_head	= 0;
-	_tail	= 0;
-	_size	= 0;
+	_head = 0;
+	_tail = 0;
+	_size = 0;
 }
 
 // 关键性代码，放到开头
 INROOT void Queue::Enqueue(byte dat)
 {
-	int total	= _s.Capacity();
-	if(!total) _s.SetLength(64);
+	int total = _s.Capacity();
+	if (!total) _s.SetLength(64);
 	// 溢出不再接收
-	if(_size >= total) return;
+	if (_size >= total) return;
 
 	_s[_head++] = dat;
 	//_head %= _s.Capacity();
 	// 除法运算是一个超级大祸害，它浪费了大量时间，导致串口中断接收丢数据
-	if(_head >= total) _head -= total;
+	if (_head >= total) _head -= total;
 
 	EnterCritical();
 	_size++;
@@ -42,7 +42,7 @@ INROOT void Queue::Enqueue(byte dat)
 
 INROOT byte Queue::Dequeue()
 {
-	if(_size == 0) return 0;
+	if (_size == 0) return 0;
 
 	EnterCritical();
 	_size--;
@@ -55,20 +55,20 @@ INROOT byte Queue::Dequeue()
 	该问题只能通过关闭中断来解决。为了减少关中断时间以提升性能，增加了专门的Read方法。
 	*/
 
-	int total	= _s.Capacity();
-	byte dat	= _s[_tail++];
+	int total = _s.Capacity();
+	byte dat = _s[_tail++];
 	//_tail		%= _s.Capacity();
-	if(_tail >= total) _tail -= total;
+	if (_tail >= total) _tail -= total;
 
 	return dat;
 }
 
 int Queue::Write(const Buffer& bs)
 {
-	int total	= _s.Capacity();
-	if(!total) _s.SetLength(64);
+	int total = _s.Capacity();
+	if (!total) _s.SetLength(64);
 	// 溢出不再接收
-	if(_size >= total) return 0;
+	if (_size >= total) return 0;
 
 	/*
 	1，数据写入队列末尾
@@ -77,33 +77,33 @@ int Queue::Write(const Buffer& bs)
 	4，如果队列过小，很有可能后来数据会覆盖前面数据
 	*/
 
-	int	len	= bs.Length();
+	int	len = bs.Length();
 
 	// 如果队列满了，不需要覆盖
-	if(_size + len > total)
-		len	= total - _size;
+	if (_size + len > total)
+		len = total - _size;
 
 	int rs = 0;
-	while(true)
+	while (true)
 	{
 		// 计算这一个循环剩下的位置
-		int remain	= _s.Capacity() - _head;
+		int remain = _s.Capacity() - _head;
 		// 如果要写入的数据足够存放
-		if(len <= remain)
+		if (len <= remain)
 		{
 			_s.Copy(_head, bs, rs, len);
-			rs		+= len;
-			_head	+= len;
-			if(_head >= _s.Length()) _head -= _s.Length();
+			rs += len;
+			_head += len;
+			if (_head >= _s.Length()) _head -= _s.Length();
 
 			break;
 		}
 
 		// 否则先写一段，指针回到开头
 		_s.Copy(_head, bs, rs, remain);
-		len		-= remain;
-		rs		+= remain;
-		_head	= 0;
+		len -= remain;
+		rs += remain;
+		_head = 0;
 	}
 
 	EnterCritical();
@@ -115,7 +115,7 @@ int Queue::Write(const Buffer& bs)
 
 int Queue::Read(Buffer& bs)
 {
-	if(_size == 0) return 0;
+	if (_size == 0) return 0;
 
 	/*
 	1，读取当前数据到末尾
@@ -124,33 +124,33 @@ int Queue::Read(Buffer& bs)
 	4，如果队列过小，很有可能后来数据会覆盖前面数据
 	*/
 
-	int	len	= bs.Length();
-	if(!len) return 0;
+	int	len = bs.Length();
+	if (!len) return 0;
 
-	if(len > _size) len = _size;
+	if (len > _size) len = _size;
 
 	int rs = 0;
-	while(true)
+	while (true)
 	{
-		int total	= _s.Capacity();
+		int total = _s.Capacity();
 		// 计算这一个循环剩下的位置
 		int remain = total - _tail;
 		// 如果要读取的数据都在这里
-		if(len <= remain)
+		if (len <= remain)
 		{
 			bs.Copy(rs, _s, _tail, len);
-			rs		+= len;
-			_tail	+= len;
-			if(_tail >= total) _tail -= total;
+			rs += len;
+			_tail += len;
+			if (_tail >= total) _tail -= total;
 
 			break;
 		}
 
 		// 否则先读一段，指针回到开头
 		bs.Copy(rs, _s, _tail, remain);
-		len		-= remain;
-		rs		+= remain;
-		_tail	= 0;
+		len -= remain;
+		rs += remain;
+		_tail = 0;
 	}
 
 	bs.SetLength(rs);

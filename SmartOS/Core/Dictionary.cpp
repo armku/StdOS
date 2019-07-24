@@ -7,7 +7,7 @@
 
 IDictionary::IDictionary(IComparer comparer)
 {
-	_Keys.Comparer	= comparer;
+	_Keys.Comparer = comparer;
 }
 
 IDictionary::IDictionary(const IDictionary& dic)
@@ -22,8 +22,8 @@ IDictionary::IDictionary(IDictionary&& dic)
 
 IDictionary& IDictionary::operator=(const IDictionary& dic)
 {
-	_Keys	= dic._Keys;
-	_Values	= dic._Values;
+	_Keys = dic._Keys;
+	_Values = dic._Values;
 
 	return *this;
 }
@@ -37,8 +37,8 @@ IDictionary& IDictionary::operator=(IDictionary&& dic)
 
 void IDictionary::move(IDictionary& dic)
 {
-	_Keys	= dic._Keys;
-	_Values	= dic._Values;
+	_Keys = dic._Keys;
+	_Values = dic._Values;
 }
 
 //int IDictionary::Count() const { return _Keys.Count(); }
@@ -49,10 +49,10 @@ void IDictionary::move(IDictionary& dic)
 void IDictionary::Add(PKey key, void* value)
 {
 	// 判断一下，如果已存在，则覆盖
-	int idx	= _Keys.FindIndex(key);
-	if(idx >= 0)
+	int idx = _Keys.FindIndex(key);
+	if (idx >= 0)
 	{
-		_Values[idx]	= value;
+		_Values[idx] = value;
 	}
 	else
 	{
@@ -65,7 +65,7 @@ void IDictionary::Add(PKey key, void* value)
 void IDictionary::Remove(PKey key)
 {
 	int idx = _Keys.Remove(key);
-	if(idx >= 0) _Values.RemoveAt(idx);
+	if (idx >= 0) _Values.RemoveAt(idx);
 }
 
 void IDictionary::Clear()
@@ -83,10 +83,10 @@ bool IDictionary::ContainKey(PKey key) const
 // 尝试获取值
 bool IDictionary::TryGetValue(PKey key, void*& value) const
 {
-	int idx	= _Keys.FindIndex(key);
-	if(idx < 0) return false;
+	int idx = _Keys.FindIndex(key);
+	if (idx < 0) return false;
 
-	value	= _Values[idx];
+	value = _Values[idx];
 
 	return true;
 }
@@ -95,16 +95,16 @@ bool IDictionary::TryGetValue(PKey key, void*& value) const
 // 重载索引运算符[]，返回指定元素的第一个
 void* IDictionary::operator[](PKey key) const
 {
-	int idx	= _Keys.FindIndex(key);
-	if(idx < 0) return nullptr;
+	int idx = _Keys.FindIndex(key);
+	if (idx < 0) return nullptr;
 
 	return _Values[idx];
 }
 
 void*& IDictionary::operator[](PKey key)
 {
-	int idx	= _Keys.FindIndex(key);
-	if(idx < 0)
+	int idx = _Keys.FindIndex(key);
+	if (idx < 0)
 	{
 		static void* dummy;
 		return dummy;
@@ -115,7 +115,7 @@ void*& IDictionary::operator[](PKey key)
 
 const String IDictionary::GetString(PKey key) const
 {
-	void* p	= nullptr;
+	void* p = nullptr;
 	TryGetValue(key, p);
 
 	return String((cstring)p);

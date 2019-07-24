@@ -23,15 +23,15 @@ int Random::Next() const
 
 int Random::Next(int max) const
 {
-	int value	= rand();
+	int value = rand();
 
-	if(max == 0x100) return value & 0xFF;
+	if (max == 0x100) return value & 0xFF;
 
 	return value % max;
 }
 
 void Random::Next(Buffer& bs) const
 {
-//	for(int i=0; i<bs.Length(); i++)
-//		bs[i]	= rand() & 0xFF;
+	for (int i = 0; i < bs.Length(); i++)
+		bs[i] = rand() & 0xFF;
 }
