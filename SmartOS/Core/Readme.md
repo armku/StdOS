@@ -18,5 +18,5 @@ Core文件夹，多文件：RingBuffer.cpp RingBuffer.h
 | Random.cpp Random.h           | ✔    | cpp line:11     |
 | Stream.cpp Stream.h           | ✔    |                 |
 | TimeSpan.cpp TimeSpan.h       | ✔    |                 |
-| Version.cpp Version.h         | ×    |                 |
+| Version.cpp Version.h         | ×    | h:41 cpp:121    |
 
