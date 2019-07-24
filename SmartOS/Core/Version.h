@@ -45,22 +45,12 @@ public:
 	int MonthDay;// 月日
 
 	Version(int major , int minor , int year , int monday );
-//	Version(const Version& ver);
 	int Parse(char* str);//适配版本，格式1.0.2018.1114
 	int Parse(const char* str) { return Parse((char*)str); }//适配版本，格式1.0.2018.1114
 	
-//    Version& operator=(const Version& ver);
 	void Show(bool newLine = true) const;
 	int Show(char* buf, int pos);
 	int Show(byte* buf, int pos) { return Show((char*)buf, pos); }
-	
-//	int CompareTo(const Version& value) const;
-//    friend bool operator==	(const Version& left, const Version& right);
-//    friend bool operator!=	(const Version& left, const Version& right);
-//    friend bool operator>	(const Version& left, const Version& right);
-//    friend bool operator<	(const Version& left, const Version& right);
-//    friend bool operator>=	(const Version& left, const Version& right);
-//    friend bool operator<=	(const Version& left, const Version& right);
 };
 
 /*
