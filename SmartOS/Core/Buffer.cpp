@@ -99,11 +99,11 @@ bool Buffer::SetLength(int len)
 	return true;
 }
 
-/*void Buffer::SetBuffer(void* ptr, int len)
+void Buffer::SetBuffer(void* ptr, int len)
 {
 	_Arr		= (char*)ptr;
 	_Length		= len;
-}*/
+}
 
 // 原始拷贝、清零，不检查边界
 void Buffer::Copy(void* dest, const void* src, int len)

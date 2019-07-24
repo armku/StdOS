@@ -45,7 +45,7 @@ public:
 
 	// 设置数组长度。只能缩小不能扩大，子类可以扩展以实现自动扩容
 	virtual bool SetLength(int len);
-	//virtual void SetBuffer(void* ptr, int len);
+	virtual void SetBuffer(void* ptr, int len);
 
 	// 设置指定位置的值，长度不足时自动扩容
 	bool SetAt(int index, byte value);
