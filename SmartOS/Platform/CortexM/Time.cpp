@@ -1,7 +1,7 @@
 #include "Kernel\Sys.h"
 #include "Kernel\Interrupt.h"
 #include "Kernel\TTime.h"
-//#include "Device\Timer.h"
+#include "Device\Timer.h"
 
 #include "Platform\stm32.h"
 
@@ -12,8 +12,36 @@
 #define SYSTICK_MAXCOUNT       SysTick_LOAD_RELOAD_Msk	//((1<<24) - 1)	/* SysTick MaxCount */
 #define SYSTICK_ENABLE         SysTick_CTRL_ENABLE_Msk	//     0		/* Config-Bit to start or stop the SysTick Timer */
 
-static TIM_TypeDef* const g_Timers[] = TIMS;
+static TIM_TypeDef * const g_Timers[] = TIMS;
 static uint	gTicks;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void TTime::Init()
 {
