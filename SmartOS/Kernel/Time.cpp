@@ -148,6 +148,66 @@ extern "C"
 #endif
 }
 
+/************************************************ TimeWheel ************************************************/
+
+TimeWheel::TimeWheel(uint ms)
+{
+	Sleep = 0;
+	Reset(ms);
+}
+
+void TimeWheel::Reset(uint ms)
+{
+	Expire = Time.Current() + ms;
+}
+
+// 是否已过期
+bool TimeWheel::Expired()
+{
+	UInt64 now = Time.Current();
+	if (now > Expire) return true;
+
+	// 睡眠，释放CPU
+	if (Sleep) Sys.Sleep(Sleep);
+
+	return false;
+}
+
+/************************************************ TimeCost ************************************************/
+
+TimeCost::TimeCost()
+{
+	Reset();
+}
+
+void TimeCost::Reset()
+{
+	Start = Time.Current();
+	StartTicks = Time.CurrentTicks();
+}
+
+// 逝去的时间，微秒
+int TimeCost::Elapsed() const
+{
+	int ts = (int)(Time.CurrentTicks() - StartTicks);
+	int ms = (int)(Time.Current() - Start);
+
+	// 有可能滴答部分不是完整的一圈
+	if (ts > 0) return ms * 1000 + Time.TicksToUs(ts);
+
+	// 如果毫秒部分也没有，那么可能是微小错误偏差
+	if (ms <= 0) return 0;
+
+	// 如果滴答是负数，则干脆减去
+	return ms * 1000 - Time.TicksToUs(-ts);
+}
+
+void TimeCost::Show(cstring format) const
+{
+	if (!format) format = "执行 %dus\r\n";
+	debug_printf(format, Elapsed());
+}
+
 
 
 
@@ -174,48 +234,6 @@ extern "C"
 
 #include "OnChip\Configuration.h"
 /////////////////////////////////////////////////////////////////////////////////////
-TimeCost::TimeCost()
-{
-	this->Reset();
-}
-
-void TimeCost::Reset()
-{
-	this->Start = Sys.Ms();
-	this->StartTicks = Time.CurrentTicks();
-}
-// 逝去的时间，微秒
-int TimeCost::Elapsed()const
-{
-	int ticks = Time.CurrentTicks() - this->StartTicks;
-	int times = Sys.Ms() - this->Start;
-	int ret = 0;
-
-	if (ticks <= 0)
-	{
-		if (times > 0)
-		{
-			ret = 1000 * times - Time.TicksToUs(-ticks);
-		}
-		else
-		{
-			ret = 0;
-		}
-	}
-	else
-	{
-		ret = Time.TicksToUs(ticks) + 1000 * times;
-	}
-	if (ret < 0)
-		ret = 0;
-	return ret;
-}
-
-void TimeCost::Show(cstring format)const
-{
-	if (!format) format = "执行 %dus\r\n";
-	debug_printf(format, Elapsed());
-}
 
 void TimeUpdate()
 {
