@@ -139,7 +139,7 @@ int ADS1232::Read(bool cal)
 			this->sclk = 1;
 			this->sclk = 0;
 		}
-		Sys.GlobalEnable();
+		ExitCritical();
 		if (valOrigin & 0x800000)
 		{
 			ret = -((0XFFFFFF ^ valOrigin) + 1);

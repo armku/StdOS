@@ -282,7 +282,7 @@ bool TSys::SetTaskPeriod(uint taskid, int period)const
 void TSys::Start()
 {
 	this->Started = true;
-	Sys.GlobalEnable();	
+	ExitCritical();	
 	Task::Scheduler()->Start();
 }
 /****************系统跟踪****************/
@@ -340,11 +340,6 @@ extern "C"
 		MSR MSP, r0 			//set Main Stack value
 			BX r14
 	}
-}
-// 打开全局中断
-void TSys::GlobalEnable()
-{
-	INTX_ENABLE();
 }
 
 void assert_failed(byte *file, uint line, char *errstr)
