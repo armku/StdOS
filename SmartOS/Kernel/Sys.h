@@ -163,8 +163,6 @@ public:
 
 
 
-	uint	HeapSize;	// 堆大小
-	uint	StackSize;	// 栈大小
 	Version OsVer;//系统版本
 	Version AppVer;//软件版本	
     void Sleep112233(int ms) const; // 毫秒级延迟，仅供系统调用	

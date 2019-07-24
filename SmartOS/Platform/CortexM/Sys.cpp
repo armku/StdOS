@@ -191,10 +191,7 @@ void TSys::OnShowInfo()const
 {	
 	debug_printf("StdOSVer:");this->OsVer.Show();
 	debug_printf("  AppVer:");this->AppVer.Show();
-	debug_printf("CystalClock:%dMHz SysClock:%dMHz Flash:%dk\n", this->CystalClock / 1000 / 1000, this->Clock / 1000 / 1000, this->FlashSize);
-	debug_printf("HeapSize:0X%08X(%dk) StackSize:0X%08X(%dk)\n", this->HeapSize, this->HeapSize / 1024, this->StackSize, this->StackSize / 1024);
-
-
+	
 
 #if DEBUG
 	debug_printf("SmartOS::");
