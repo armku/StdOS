@@ -114,11 +114,6 @@ protected:
 	int		_Length;	// 长度
 
 	void move(Buffer& rval);
-	
-	
-	
-public:
-	virtual void ShowHex(bool newLine = false, char sep = 0X20) const;
 };
 
 // 带引用计数的缓冲区

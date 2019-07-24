@@ -95,8 +95,6 @@ void BufferTest()
 	byte buf[]={0x01,0x0b,0x0c,0x0d};
 	debug_printf("\r\n");
 	Buffer bf(buf,ArrayLength(buf));
-	bf.ShowHex(true,'-');
-	debug_printf("\r\n");
 	
 	bf.ToHex('-',false).Show(true);
 }

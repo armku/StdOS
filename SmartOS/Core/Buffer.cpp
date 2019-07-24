@@ -459,20 +459,3 @@ static void ShowChar(char c)
 	}
 }
 
-void Buffer::ShowHex(bool newLine,char sep) const
-{
-	for(int i=0;i<this->_Length;i++)
-	{
-		ShowChar(this->_Arr[i]>>4);
-		ShowChar(this->_Arr[i]&0x0F);
-		if(i!=this->_Length-1)
-		{
-			debug_printf("%c",sep);
-		}
-	}
-	
-	if(newLine)
-	{
-		debug_printf("\n");
-	}
-}
