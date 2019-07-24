@@ -121,7 +121,6 @@ String Version::ToString() const
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "Version.h"
 #include "Sys.h"
 
 template <typename T1>
