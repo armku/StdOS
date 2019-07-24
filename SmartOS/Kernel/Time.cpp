@@ -107,8 +107,3 @@ UInt64 millis()
 {
 	return Time.Milliseconds + DeviceConfigCenter::CurrentTick();
 }
-//开机到现在的微妙数
-UInt64 micros()
-{
-	return millis() * 1000;
-}

@@ -73,7 +73,6 @@ public:
 void delayMicroseconds(uint us);//us延时，100us以下精确
 void delay(UInt64 ms);//延时毫秒
 UInt64 millis();//系统启动后的毫秒数
-UInt64 micros();//开机到现在的微妙数
 /*
 开发历史：
 
