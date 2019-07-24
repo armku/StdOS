@@ -48,6 +48,9 @@ INROOT uint TTime::CurrentTicks() const
 }
 
 
+INROOT uint TTime::TicksToUs(uint ticks) const { return !ticks ? 0 : (ticks / gTicks); }
+INROOT uint TTime::UsToTicks(uint us) const { return !us ? 0 : (us * gTicks); }
+
 
 
 
@@ -203,15 +206,6 @@ void TTime::Init()
 	// 打开计数
 	TIM_Cmd(tim, ENABLE);
 }
-
-
-INROOT uint TTime::TicksToUs(uint ticks) const	{ return !ticks ? 0 : (ticks / gTicks); }
-INROOT uint TTime::UsToTicks(uint us) const	{ return !us ? 0 : (us * gTicks); }
-
-
-
-
-
 
 #include "OnChip\Configuration.h"
 // 当前毫秒数
