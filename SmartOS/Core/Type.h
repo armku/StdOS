@@ -61,15 +61,4 @@ public:
 #define	WEAK	__attribute__((weak))
 #endif
 
-
-//以下需要升级
-extern "C"
-{
-#ifdef DEBUG
-	#define debug_printf SmartOS_printf	
-	extern int SmartOS_printf(const char *format, ...);
-#else
-	#define debug_printf(format, ...)
-#endif
-}
 #endif
