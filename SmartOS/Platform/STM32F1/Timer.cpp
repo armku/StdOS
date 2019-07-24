@@ -4,6 +4,14 @@
 #include "Device\Timer.h"
 
 #include "Platform\stm32.h"
+uint RCC_GetPCLK()
+{
+	return 720000;
+}
+uint RCC_GetPCLK2()
+{
+	return 720000;
+}
 
 static TIM_TypeDef* const g_Timers[] = TIMS;
 const byte Timer::TimerCount = ArrayLength(g_Timers);

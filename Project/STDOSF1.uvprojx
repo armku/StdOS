@@ -1150,6 +1150,11 @@
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\STM32F1\Interrupt.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Timer.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2416,6 +2421,11 @@
               <FileName>Interrupt.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\STM32F1\Interrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Timer.cpp</FilePath>
             </File>
           </Files>
         </Group>
