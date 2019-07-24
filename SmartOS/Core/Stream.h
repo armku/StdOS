@@ -8,7 +8,7 @@ class Stream
 protected:
 	byte* _Buffer;	// 数据缓冲区。扩容后会重新分配缓冲区
 	int _Capacity;	// 缓冲区容量
-    int _Position;	// 游标位置
+	int _Position;	// 游标位置
 
 	void Init(void* buf, int len);
 	virtual bool CheckRemain(int count);
@@ -39,9 +39,9 @@ public:
 	bool Seek(int offset);
 
 	// 数据流指针。注意：扩容后指针会改变！
-    byte* GetBuffer() const;
+	byte* GetBuffer() const;
 	// 数据流当前位置指针。注意：扩容后指针会改变！
-    byte* Current() const;
+	byte* Current() const;
 
 	// 读取7位压缩编码整数
 	int ReadEncodeInt();
@@ -72,9 +72,9 @@ public:
 	bool Write(uint value);
 	bool Write(UInt64 value);
 	//bool Write(sbyte value)	{ return Write((byte)value); }
-	bool Write(short value)	{ return Write((ushort)value); }
-	bool Write(int value)	{ return Write((uint)value); }
-	bool Write(Int64 value)	{ return Write((UInt64)value); }
+	bool Write(short value) { return Write((ushort)value); }
+	bool Write(int value) { return Write((uint)value); }
+	bool Write(Int64 value) { return Write((UInt64)value); }
 
 	// 取回指定结构体指针，并移动游标位置
 	template<typename T>
@@ -82,10 +82,10 @@ public:
 	{
 		int p = sizeof(T) + _Position;
 		// 允许移动到最后一个字节之后，也就是Length
-		if(p < 0 || p > Length) return nullptr;
+		if (p < 0 || p > Length) return nullptr;
 
 		T* pt = (T*)Current();
-		if(move && !Seek(sizeof(T))) return nullptr;
+		if (move && !Seek(sizeof(T))) return nullptr;
 
 		return pt;
 	}

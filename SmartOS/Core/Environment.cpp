@@ -3,9 +3,9 @@
 #include "Environment.h"
 
 #if defined(__CC_ARM)
-	#include <time.h>
+#include <time.h>
 #else
-	#include <ctime>
+#include <ctime>
 #endif
 
 const TEnvironment Environment;
@@ -14,7 +14,7 @@ const TEnvironment Environment;
 
 TEnvironment::TEnvironment()
 {
-	
+
 }
 
 // 获取系统启动后经过的毫秒数

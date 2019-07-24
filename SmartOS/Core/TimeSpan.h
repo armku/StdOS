@@ -21,12 +21,12 @@ public:
 	Int64 TotalMs() const;
 
 	int CompareTo(const TimeSpan& value) const;
-    friend bool operator==	(const TimeSpan& left, const TimeSpan& right);
-    friend bool operator!=	(const TimeSpan& left, const TimeSpan& right);
-    friend bool operator>	(const TimeSpan& left, const TimeSpan& right);
-    friend bool operator<	(const TimeSpan& left, const TimeSpan& right);
-    friend bool operator>=	(const TimeSpan& left, const TimeSpan& right);
-    friend bool operator<=	(const TimeSpan& left, const TimeSpan& right);
+	friend bool operator==	(const TimeSpan& left, const TimeSpan& right);
+	friend bool operator!=	(const TimeSpan& left, const TimeSpan& right);
+	friend bool operator>	(const TimeSpan& left, const TimeSpan& right);
+	friend bool operator<	(const TimeSpan& left, const TimeSpan& right);
+	friend bool operator>=	(const TimeSpan& left, const TimeSpan& right);
+	friend bool operator<=	(const TimeSpan& left, const TimeSpan& right);
 
 	String ToString() const;
 	void Show(bool newLine = false) const;

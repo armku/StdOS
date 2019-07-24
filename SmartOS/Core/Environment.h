@@ -6,7 +6,7 @@ class TEnvironment
 {
 public:
 	TEnvironment();
-	
+
 	// 获取系统启动后经过的毫秒数
 	UInt64 TickCount() const;
 
