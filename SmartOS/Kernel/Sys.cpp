@@ -258,7 +258,7 @@ bool TSys::SetTaskPeriod(uint taskid, int period)const
 			if (period)
 			{
 				tsk->Period = period;
-				tsk->NextTime = millis() + period;
+				tsk->NextTime = Sys.Ms() + period;
 			}
 			else
 			{

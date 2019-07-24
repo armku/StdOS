@@ -188,10 +188,11 @@ INROOT void TTime::OnHandler(ushort num, void* param)
 }
 
 
-
+#include "OnChip\Configuration.h"
 // 当前毫秒数
 INROOT UInt64 TTime::Current() const
 {
+	return Time.Milliseconds + DeviceConfigCenter::CurrentTick();
 	uint cnt = g_Timers[Index]->CNT;
 #if ! (defined(STM32F0) || defined(GD32F150))
 	if(Div) cnt >>= Div;

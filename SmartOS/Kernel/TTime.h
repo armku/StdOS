@@ -71,7 +71,6 @@ public:
 	void Show(cstring format = nullptr) const;
 };
 void delayMicroseconds(uint us);//us延时，100us以下精确
-UInt64 millis();//系统启动后的毫秒数
 /*
 开发历史：
 

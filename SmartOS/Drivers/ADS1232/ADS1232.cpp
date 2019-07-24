@@ -90,7 +90,7 @@ int ADS1232::Read(bool cal)
 	uint valOrigin = 0;
 	int ret = 0;
 
-	msnew = millis();
+	msnew = Sys.Ms();
 	this->Status = 0;
 	if (msnew - msold > 5000)
 	{

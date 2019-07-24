@@ -22,14 +22,14 @@ TimeCost::TimeCost()
 
 void TimeCost::Reset()
 {
-	this->Start = millis();
+	this->Start = Sys.Ms();
 	this->StartTicks = Time.CurrentTicks();
 }
 // 逝去的时间，微秒
 int TimeCost::Elapsed()const
 {
 	int ticks = Time.CurrentTicks() - this->StartTicks;
-	int times = millis() - this->Start;
+	int times = Sys.Ms() - this->Start;
 	int ret = 0;
 
 	if (ticks <= 0)
@@ -96,9 +96,4 @@ void delayMicroseconds(uint us)
 		for (int j = 0; j < 40; j++);
 	}
 #endif
-}
-//系统启动后的毫秒数
-UInt64 millis()
-{
-	return Time.Milliseconds + DeviceConfigCenter::CurrentTick();
 }

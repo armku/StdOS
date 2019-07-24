@@ -61,7 +61,7 @@ void Task::Set(bool enable, int msNextTime)
 {
     if (msNextTime >= 0)
     {
-        this->NextTime = msNextTime + millis();
+        this->NextTime = msNextTime + Sys.Ms();
     }
     this->Enable = enable;
     if (enable)
@@ -105,7 +105,7 @@ void Task::ShowStatus()
     float cpuPercent = 0;
     cpuPercent = 0;
     cpuPercent = this->Cost *this->Times / 10;
-    cpuPercent /= millis();
+    cpuPercent /= Sys.Ms();
 
     if (cpuPercent >= 10)
     {
@@ -173,7 +173,7 @@ bool Task::CheckTime(UInt64 end, bool isSleep)
 
     if (this->Deepth < this->MaxDeepth)
     {
-        UInt64 mscur = millis();
+        UInt64 mscur = Sys.Ms();
 		if(!this->Enable)
 		{
 			ret=false;
@@ -255,7 +255,7 @@ uint TaskScheduler::Add(Action func, void *param, int dueTime, int period, cstri
     task->Callback = func;
     task->Param = param;
     task->Period = period;
-    task->NextTime = millis() + dueTime;
+    task->NextTime = Sys.Ms() + dueTime;
     task->Name = name;
     if (dueTime < 0)
     {
@@ -345,7 +345,7 @@ void TaskScheduler::Stop()
 // 执行一次循环。指定最大可用时间
 void TaskScheduler::Execute(uint msMax, bool &cancel)
 {
-    UInt64 mscur = millis();
+    UInt64 mscur = Sys.Ms();
     TimeCost tmcost;
 
     UInt64 min = UInt64_Max; // 最小时间，这个时间就会有任务到来
@@ -366,7 +366,7 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
 				}
 				if(!msMax)
 					return;
-				UInt64 msend = millis();
+				UInt64 msend = Sys.Ms();
 			}
 			// 不能通过累加的方式计算下一次时间，因为可能系统时间被调整
 			this->Current->NextTime = mscur + this->Current->Period;
@@ -376,9 +376,9 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
 			}
 			bool cancel = false;
 			this->Current = this->Current;
-			if (this->Current->CheckTime(millis(), cancel))
+			if (this->Current->CheckTime(Sys.Ms(), cancel))
 			{
-				this->Current->Execute(millis());
+				this->Current->Execute(Sys.Ms());
 			}
 			this->Current = NULL;			
         }
@@ -387,7 +387,7 @@ void TaskScheduler::Execute(uint msMax, bool &cancel)
     this->Cost = tmcost.Elapsed();
 
     // 如果有最小时间，睡一会吧
-    mscur = millis(); // 当前时间
+    mscur = Sys.Ms(); // 当前时间
     if (min != UInt64_Max && min > mscur)
     {
         min -= mscur;
@@ -421,14 +421,14 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
         this->Deepth++;
 		Task* tskcur=this->Current;
 		tskcur->Deepth++;
-        UInt64 msBegin = millis();
+        UInt64 msBegin = Sys.Ms();
         UInt64 msEndMax = msBegin + msMax;
         UInt64 msRemain = msMax;
         TimeCost tmcost;
         while (msRemain > 0 && !cancel)
         {
 			this->Execute(msRemain, cancel);
-			UInt64 msc = millis();
+			UInt64 msc = Sys.Ms();
 			if (msEndMax > msc)			
 				msRemain = msEndMax - msc;			
 			else
@@ -436,7 +436,7 @@ uint TaskScheduler::ExecuteForWait(uint msMax, bool &cancel)
         }
 		int sleepus = tmcost.Elapsed();
         this->TotalSleep += sleepus/1000;
-        UInt64 msUsed = millis() - msBegin;
+        UInt64 msUsed = Sys.Ms() - msBegin;
 		tskcur->SleepTime+=sleepus;
 		tskcur->Deepth--;
         this->Deepth--;
@@ -460,7 +460,7 @@ void TaskScheduler::ShowStatus()
     byte buf[1];
 
     runCounts++;
-    UInt64 curms = millis();
+    UInt64 curms = Sys.Ms();
     //统计运行时间
     RunTimes = 0;
     RunTimesAvg = 0;
