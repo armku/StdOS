@@ -74,12 +74,12 @@ public:
 
 	// 重载字符串连接运算符
 	template<class T>
-	String& operator += (const T& rhs)		{ Concat(rhs); return (*this); }
+	String& operator += (const T& rhs) { Concat(rhs); return (*this); }
 	template<class T>
 	friend String& operator + (String& lhs, const T& rhs) { lhs.Concat(rhs); return lhs; }
 
-    explicit operator bool() const { return _Length > 0; }
-    bool operator !() const { return _Length == 0; }
+	explicit operator bool() const { return _Length > 0; }
+	bool operator !() const { return _Length == 0; }
 	//operator char*() const { return _Arr; }
 	int CompareTo(const String& s) const;
 	int CompareTo(cstring cstr, int len = -1, bool ignoreCase = false) const;
@@ -87,10 +87,10 @@ public:
 	bool Equals(cstring cstr) const;
 	bool EqualsIgnoreCase(const String& s) const;
 	bool EqualsIgnoreCase(cstring cstr) const;
-	bool operator == (const String& rhs) const	{return Equals(rhs);	}
-	bool operator == (cstring cstr) const 		{return Equals(cstr);	}
-	bool operator != (const String& rhs) const	{return !Equals(rhs);	}
-	bool operator != (cstring cstr) const		{return !Equals(cstr);	}
+	bool operator == (const String& rhs) const { return Equals(rhs); }
+	bool operator == (cstring cstr) const { return Equals(cstr); }
+	bool operator != (const String& rhs) const { return !Equals(rhs); }
+	bool operator != (cstring cstr) const { return !Equals(cstr); }
 	bool operator <  (const String& rhs) const;
 	bool operator >  (const String& rhs) const;
 	bool operator <= (const String& rhs) const;
@@ -99,10 +99,10 @@ public:
 	//void SetAt(int index, char c);
 	char operator [] (int index) const;
 	char& operator [] (int index);
-	void GetBytes(byte* buf, int bufsize, int index=0) const;
+	void GetBytes(byte* buf, int bufsize, int index = 0) const;
 	ByteArray GetBytes() const;
 	ByteArray ToHex() const;
-	void ToArray(char* buf, int bufsize, int index=0) const { GetBytes((byte*)buf, bufsize, index); }
+	void ToArray(char* buf, int bufsize, int index = 0) const { GetBytes((byte*)buf, bufsize, index); }
 
 	int ToInt() const;
 	float ToFloat() const;
@@ -187,8 +187,8 @@ public:
 	// 是否已经到达末尾
 	//bool End() const { return Position == -2; }
 
-    explicit operator bool() const { return Position >= -1; }
-    bool operator !() const { return Position < -1; }
+	explicit operator bool() const { return Position >= -1; }
+	bool operator !() const { return Position < -1; }
 
 private:
 	const String& _Str;

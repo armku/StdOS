@@ -503,7 +503,7 @@ static char* ftoa(char* str, int len, double num, int prec)
 		while (--prec > 0) m *= 10;
 
 		str[slen++] = '.';
-		ltoa((Int64)(m*num), str + slen, 10);
+		ltoa((Int64)(m * num), str + slen, 10);
 		slen = strlen(str);
 		/*for (int i = 0; i < prec; i++)
 		{
@@ -595,7 +595,7 @@ bool String::Equals(cstring cstr) const
 	return CompareTo(cstr, len, false) == 0;
 }
 
-bool String::EqualsIgnoreCase(const String &str) const
+bool String::EqualsIgnoreCase(const String& str) const
 {
 	return _Length == str._Length && CompareTo(str._Arr, str._Length, true) == 0;
 }
@@ -751,7 +751,7 @@ String& String::ToStr(String& str) const
 	//str.Copy(*this, str._Length);
 	str += *this;
 
-	return (String&)*this;
+	return (String&)* this;
 }
 
 // 输出对象的字符串表示方式
@@ -995,7 +995,7 @@ String String::Replace(char find, char replace) const
 	auto p = (char*)str.GetBuffer();
 	for (int i = 0; i < Length(); i++, p++)
 	{
-		if (*p == find) *p = replace;
+		if (*p == find)* p = replace;
 	}
 
 	return str;
@@ -1035,7 +1035,7 @@ int String::Compare(const void* v1, const void* v2)
 /******************************** 辅助 ********************************/
 
 #ifndef _MSC_VER
-extern char* itoa(int value, char *string, int radix)
+extern char* itoa(int value, char* string, int radix)
 {
 	return ltoa(value, string, radix);
 }
@@ -1043,11 +1043,11 @@ extern char* itoa(int value, char *string, int radix)
 extern char* ltoa(Int64 value, char* string, int radix)
 {
 	char tmp[33];
-	char *tp = tmp;
+	char* tp = tmp;
 	Int64 i;
 	UInt64 v;
 	int sign;
-	char *sp;
+	char* sp;
 
 	if (string == nullptr) return 0;
 
@@ -1064,16 +1064,16 @@ extern char* ltoa(Int64 value, char* string, int radix)
 		i = v % radix;
 		v = v / radix;
 		if (i < 10)
-			*tp++ = i + '0';
+			* tp++ = i + '0';
 		else
 			*tp++ = i + 'a' - 10;
 	}
 
 	sp = string;
 
-	if (sign) *sp++ = '-';
+	if (sign)* sp++ = '-';
 	while (tp > tmp)
-		*sp++ = *--tp;
+		* sp++ = *--tp;
 	*sp = 0;
 
 	return string;
@@ -1095,7 +1095,7 @@ char* utohex(uint value, byte size, char* string, bool upper)
 		byte bt = value & 0x0F;
 		value >>= 4;
 		if (bt < 10)
-			*tp-- = bt + '0';
+			* tp-- = bt + '0';
 		else
 			*tp-- = bt + ch - 10;
 	}
@@ -1124,21 +1124,21 @@ extern char* ultoa(UInt64 value, char* string, int radix)
 		auto i = v % radix;
 		v = v / radix;
 		if (i < 10)
-			*tp++ = i + '0';
+			* tp++ = i + '0';
 		else
 			*tp++ = i + ch - 10;
 	}
 
 	auto sp = string;
 	while (tp > tmp)
-		*sp++ = *--tp;
+		* sp++ = *--tp;
 	*sp = '\0';
 
 	return string;
 }
 #endif
 
-char *dtostrf(double val, byte prec, char* str, int len)
+char* dtostrf(double val, byte prec, char* str, int len)
 {
 	char fmt[20];
 #if defined(_MSC_VER)
