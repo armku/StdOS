@@ -23,8 +23,8 @@ public:
 	DateTime(DateTime&& value);
 
 	// 重载等号运算符
-    DateTime& operator=(int seconds);
-    DateTime& operator=(const DateTime& value);
+	DateTime& operator=(int seconds);
+	DateTime& operator=(const DateTime& value);
 
 	DateTime& Parse(int seconds);
 	DateTime& ParseMs(Int64 ms);
@@ -54,16 +54,16 @@ public:
 
 	DateTime operator+(const TimeSpan& value);
 	DateTime operator-(const TimeSpan& value);
-    friend TimeSpan operator-(const DateTime& left, const DateTime& right);
+	friend TimeSpan operator-(const DateTime& left, const DateTime& right);
 
 	// 时间比较
 	int CompareTo(const DateTime& value) const;
-    friend bool operator==	(const DateTime& left, const DateTime& right);
-    friend bool operator!=	(const DateTime& left, const DateTime& right);
-    friend bool operator>	(const DateTime& left, const DateTime& right);
-    friend bool operator<	(const DateTime& left, const DateTime& right);
-    friend bool operator>=	(const DateTime& left, const DateTime& right);
-    friend bool operator<=	(const DateTime& left, const DateTime& right);
+	friend bool operator==	(const DateTime& left, const DateTime& right);
+	friend bool operator!=	(const DateTime& left, const DateTime& right);
+	friend bool operator>	(const DateTime& left, const DateTime& right);
+	friend bool operator<	(const DateTime& left, const DateTime& right);
+	friend bool operator>=	(const DateTime& left, const DateTime& right);
+	friend bool operator<=	(const DateTime& left, const DateTime& right);
 
 	String ToString() const;
 	void Show(bool newLine = false) const;
