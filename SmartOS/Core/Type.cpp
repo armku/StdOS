@@ -14,9 +14,9 @@ using namespace ::std;
 String& Object::ToStr(String& str) const
 {
 	auto name = typeid(*this).name();
-	while(*name >= '0' && *name <= '9') name++;
+	while (*name >= '0' && *name <= '9') name++;
 
-	str	+= name;
+	str += name;
 
 	return str;
 }
@@ -46,12 +46,12 @@ const Type Object::GetType() const
 	auto p = (int*)this;
 
 	//return Type(&typeid(*this), *(p - 1));
-	
+
 	Type type;
-	
-	type._info	= &typeid(*this);
-	type.Size	= *(p - 1);
-	
+
+	type._info = &typeid(*this);
+	type.Size = *(p - 1);
+
 	return type;
 }
 
@@ -66,9 +66,9 @@ Type::Type()
 
 const String Type::Name() const
 {
-	auto ti	= (const type_info*)_info;
+	auto ti = (const type_info*)_info;
 	auto name = ti->name();
-	while(*name >= '0' && *name <= '9') name++;
+	while (*name >= '0' && *name <= '9') name++;
 
 	return String(name);
 }
