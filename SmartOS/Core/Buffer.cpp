@@ -451,11 +451,11 @@ static void ShowChar(char c)
 {
 	if (c >= 10)
 	{
-		//debug_printf("%c", c - 10 + 'A');
+		debug_printf("%c", c - 10 + 'A');
 	}
 	else
 	{
-		//debug_printf("%c", c + '0');
+		debug_printf("%c", c + '0');
 	}
 }
 
@@ -467,12 +467,12 @@ void Buffer::ShowHex(bool newLine,char sep) const
 		ShowChar(this->_Arr[i]&0x0F);
 		if(i!=this->_Length-1)
 		{
-			//debug_printf("%c",sep);
+			debug_printf("%c",sep);
 		}
 	}
 	
 	if(newLine)
 	{
-		//debug_printf("\n");
+		debug_printf("\n");
 	}
 }

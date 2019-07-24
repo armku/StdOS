@@ -74,6 +74,7 @@ void com1test()
 void Esp8266TestInit();
 void ModbusSlaveLinkTestInit();
 void w25qxxxtest();
+void BufferTest();
 void setup()
 {
 	led1.SetPin(PB0);
@@ -87,8 +88,15 @@ void setup()
 
 	//Esp8266TestInit();
 	/*ModbusSlaveLinkTestInit();*/
+	BufferTest();
 }
-
+void BufferTest()
+{
+	byte buf[]={0x01,0x0b,0x0c,0x0d};
+	debug_printf("\r\n");
+	Buffer(buf,ArrayLength(buf)).ShowHex(true,'-');
+	debug_printf("\r\n");
+}
 /*
 			LED1	LED2	LED3	LED4
 STM32F0		PC6		PC7		PC8		PC9
