@@ -18,6 +18,7 @@
 #define BASE_YEAR_US				63082281600UL	// 从0 到 2000-01-01的所有秒数
 #endif
 /************************************************ TTime ************************************************/
+
 TTime::TTime()
 {
 	Seconds = 0;
@@ -38,6 +39,7 @@ TTime::TTime()
 	OnSave = nullptr;
 	OnSleep = nullptr;
 }
+
 void TTime::SetTime(UInt64 sec)
 {
 	if (sec >= BASE_YEAR_US) sec -= BASE_YEAR_US;
@@ -53,7 +55,6 @@ void TTime::SetTime(UInt64 sec)
 	// 保存到RTC
 	if (OnSave) OnSave();
 }
-
 
 // 关键性代码，放到开头
 INROOT void TTime::Sleep(int ms, bool* running) const
@@ -207,28 +208,3 @@ void TimeCost::Show(cstring format) const
 	if (!format) format = "执行 %dus\r\n";
 	debug_printf(format, Elapsed());
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
