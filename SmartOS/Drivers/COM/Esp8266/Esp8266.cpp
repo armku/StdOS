@@ -105,7 +105,7 @@ bool Esp8266::ESP8266_Cmd(char* cmd, char* reply1, char* reply2, uint waittime)
 	if ((reply1 == 0) && (reply2 == 0))                      //不需要接收数据
 		return true;
 	this->WaitTime = waittime;
-	delay(waittime);
+	Sys.Sleep112233(waittime);
 	
 	//UART1_send_data((byte*)this->bufRcv, this->readlen);
 	this->DealRespose(this->bufRcv, this->readlen);

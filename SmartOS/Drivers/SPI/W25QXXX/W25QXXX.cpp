@@ -512,7 +512,7 @@ void SPI25QXX::Test()
 	/* Get SPI Flash Device ID */
 	DeviceID = ReadDeviceID();
 
-	delay(200);
+	Sys.Sleep112233(200);
 
 	/* Get SPI Flash ID */
 	FlashID = ReadID();

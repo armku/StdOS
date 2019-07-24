@@ -49,7 +49,7 @@ bool MqttLink::CONNECTServer()
 
 	this->Send();
 	//debug_printf("Send Login Command\r\n");
-	delay(500);
+	Sys.Sleep112233(500);
 	char bufneed[] = { 0x20,0x02,0x00,0x00 };
 	if (this->readlen == 4)
 	{
@@ -118,7 +118,7 @@ bool MqttLink::Puslish(char *buf, int len)
 	this->txFrame.dataLength = 6 + topticlen + len;
 
 	this->Send();
-	delay(100);
+	Sys.Sleep112233(100);
 	char bufneed[] = { 0x50,0x02,0x00,0x00 };//响应，最后一个字节为数据帧流水号
 	if (this->readlen == 4)
 	{
@@ -156,7 +156,7 @@ bool MqttLink::Puslish_Release()
 	this->txFrame.dataLength = ArrayLength(buf);
 
 	this->Send();
-	delay(100);
+	Sys.Sleep112233(100);
 	char bufneed[] = { 0x50,0x02,0x00,0x00 };//响应，最后一个字节为数据帧流水号
 	if (this->readlen == 4)
 	{
@@ -182,7 +182,7 @@ bool MqttLink::PuslishAndRelease(char* buf, int len)
 {
 	if (this->Puslish(buf, len))
 	{
-		delay(50);
+		Sys.Sleep112233(50);
 		return this->Puslish_Release();
 	}
 	else

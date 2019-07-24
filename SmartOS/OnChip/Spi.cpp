@@ -823,7 +823,7 @@ byte SpiSoft::WaitBusy()
 	i = 0;
 	while (this->_miso.Read() > 0)
 	{
-		delay(10);
+		Sys.Sleep112233(10);
 		i++;
 		if (i > 200)
 			return 1;

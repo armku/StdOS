@@ -287,9 +287,9 @@ void SSD1309::DrawBMP(byte x0, byte y0, byte x1, byte y1, byte BMP[])
 void SSD1309::Init()
 {
     this->_res = 1;
-    delay(100);
+    Sys.Sleep112233(100);
     this->_res = 0;
-    delay(100);
+    Sys.Sleep112233(100);
     this->_res = 1;
 	this->_wrcmd(0xFD); //--turn off oled panel
     this->_wrcmd(0x12); //--turn off oled panel	

@@ -68,11 +68,6 @@ void TimeUpdate()
 #include "BspPlatform\BspPlatform.h"
 
 
-//延时毫秒
-void delay(UInt64 ms)
-{
-	Sys.Sleep112233(ms);
-}
 //us延时，100us以下精确
 void delayMicroseconds(uint us)
 {
