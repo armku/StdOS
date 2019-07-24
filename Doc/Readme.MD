@@ -11,7 +11,7 @@ Core文件夹
 | String.cpp SString.h          | ✔    |                 |
 | DateTime.cpp DateTime.h       | ✔    | cpp 390 Now     |
 | Delegate.cpp Delegate.h       | ×    | CPP OK,.H:ERROR |
-| List.cpp List.h               |      |                 |
+| List.cpp List.h               | ✔    |                 |
 | Dictionary.cpp Dictionary.h   |      |                 |
 | Environment.cpp Environment.h |      |                 |
 | Queue.cpp Queue.h             |      |                 |
