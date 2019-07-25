@@ -124,40 +124,25 @@ INROOT uint TTime::CurrentTicks() const
 	return SysTick->LOAD - SysTick->VAL;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// 当前毫秒数
+//INROOT UInt64 TTime::Current() const
+//{
+//	uint cnt = g_Timers[Index]->CNT;
+//#if ! (defined(STM32F0) || defined(GD32F150))
+//	if (Div) cnt >>= Div;
+//#endif
+//	return Milliseconds + cnt;
+//}
 
 INROOT uint TTime::TicksToUs(uint ticks) const { return !ticks ? 0 : (ticks / gTicks); }
 INROOT uint TTime::UsToTicks(uint us) const { return !us ? 0 : (us * gTicks); }
+
+
+
+
+
+
+
 
 
 
