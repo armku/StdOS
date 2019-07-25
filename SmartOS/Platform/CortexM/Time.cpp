@@ -118,44 +118,42 @@ INROOT void TTime::OnHandler(ushort num, void* param)
 	//if(Sys.OnTick) Sys.OnTick();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // 当前滴答时钟
 INROOT uint TTime::CurrentTicks() const
 {
 	return SysTick->LOAD - SysTick->VAL;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 INROOT uint TTime::TicksToUs(uint ticks) const { return !ticks ? 0 : (ticks / gTicks); }
