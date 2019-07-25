@@ -16,9 +16,39 @@ static TIM_TypeDef * const g_Timers[] = TIMS;
 static uint	gTicks;
 
 
-#if  defined(STM32F0) || defined(GD32F150) || defined(STM32F4)
-#define SysTick_CTRL_COUNTFLAG SysTick_CTRL_COUNTFLAG_Msk
-#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // 关键性代码，放到开头
 INROOT void TTime::OnHandler(ushort num, void* param)
 {
