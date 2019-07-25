@@ -1080,68 +1080,6 @@
         </Group>
         <Group>
           <GroupName>Platform</GroupName>
-          <Files>
-            <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\Interrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\I2C.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Power.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\Power.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\ADC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CAN.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\CAN.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DAC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\DAC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Flash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\Flash.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DMA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\DMA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RTC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\RTC.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Security</GroupName>
@@ -1259,6 +1197,68 @@
         </Group>
         <Group>
           <GroupName>STM32F1</GroupName>
+          <Files>
+            <File>
+              <FileName>ADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CAN.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\CAN.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DAC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\DAC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DMA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\DMA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Flash.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Flash.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Interrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Power.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Power.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\RTC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Spi.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>DriversCom</GroupName>
@@ -2379,68 +2379,6 @@
         </Group>
         <Group>
           <GroupName>Platform</GroupName>
-          <Files>
-            <File>
-              <FileName>Interrupt.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\Interrupt.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Port.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\Port.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\I2C.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Spi.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\Spi.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Power.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\Power.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ADC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\ADC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CAN.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\CAN.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DAC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\DAC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Flash.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\Flash.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DMA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\DMA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RTC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\RTC.cpp</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Security</GroupName>
@@ -2558,6 +2496,68 @@
         </Group>
         <Group>
           <GroupName>STM32F1</GroupName>
+          <Files>
+            <File>
+              <FileName>ADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CAN.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\CAN.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DAC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\DAC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DMA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\DMA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Flash.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Flash.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interrupt.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Interrupt.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Port.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Port.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Power.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Power.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\RTC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Spi.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Platform\STM32F1\Spi.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>DriversCom</GroupName>
