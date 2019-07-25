@@ -138,34 +138,6 @@ INROOT uint TTime::TicksToUs(uint ticks) const { return !ticks ? 0 : (ticks / gT
 INROOT uint TTime::UsToTicks(uint us) const { return !us ? 0 : (us * gTicks); }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #include "OnChip\Configuration.h"
 // 当前毫秒数
 INROOT UInt64 TTime::Current() const
