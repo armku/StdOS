@@ -628,6 +628,9 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>SmartOS</GroupName>
+        </Group>
+        <Group>
           <GroupName>App</GroupName>
           <Files>
             <File>
@@ -686,6 +689,9 @@
               <FilePath>..\SmartOS\App\Sensor.cpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Board</GroupName>
         </Group>
         <Group>
           <GroupName>Core</GroupName>
@@ -928,46 +934,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>DriversCom</GroupName>
-          <Files>
-            <File>
-              <FileName>GPS_S1216.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SHARP_PM2_5.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Esp8266.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\Esp8266\Esp8266.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MqttLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\MQTT\MqttLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusRtuLinkMaster.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusRtuLinkMaster.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusRtuLinkRtuSlave.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusRtuLinkRtuSlave.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
@@ -1008,87 +974,95 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Security</GroupName>
+          <GroupName>Link</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Message</GroupName>
           <Files>
             <File>
-              <FileName>CheckSum.cpp</FileName>
+              <FileName>Api.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\CheckSum.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\Api.cpp</FilePath>
             </File>
             <File>
-              <FileName>Crc.cpp</FileName>
+              <FileName>BinaryPair.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\Crc.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\BinaryPair.cpp</FilePath>
             </File>
             <File>
-              <FileName>Crc16.cpp</FileName>
+              <FileName>Controller.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\Crc16.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\Controller.cpp</FilePath>
             </File>
             <File>
-              <FileName>Math.cpp</FileName>
+              <FileName>DataStore.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\Math.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\DataStore.cpp</FilePath>
             </File>
             <File>
-              <FileName>Parity.cpp</FileName>
+              <FileName>Json.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\Parity.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\Json.cpp</FilePath>
             </File>
             <File>
-              <FileName>AES.cpp</FileName>
+              <FileName>Message.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\AES.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\Message.cpp</FilePath>
             </File>
             <File>
-              <FileName>MD5.cpp</FileName>
+              <FileName>MessageBase.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\MD5.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\MessageBase.cpp</FilePath>
             </File>
             <File>
-              <FileName>RC4.cpp</FileName>
+              <FileName>Pair.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\RC4.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\Pair.cpp</FilePath>
             </File>
             <File>
-              <FileName>RC6.cpp</FileName>
+              <FileName>WeakStore.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\RC6.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\WeakStore.cpp</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>CortexM</GroupName>
+          <GroupName>Net</GroupName>
           <Files>
             <File>
-              <FileName>Interrupt.cpp</FileName>
+              <FileName>HttpClient.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\CortexM\Interrupt.cpp</FilePath>
+              <FilePath>..\SmartOS\Net\HttpClient.cpp</FilePath>
             </File>
             <File>
-              <FileName>Sys.cpp</FileName>
+              <FileName>IPAddress.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\CortexM\Sys.cpp</FilePath>
+              <FilePath>..\SmartOS\Net\IPAddress.cpp</FilePath>
             </File>
             <File>
-              <FileName>Runtime.cpp</FileName>
+              <FileName>IPEndPoint.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\CortexM\Runtime.cpp</FilePath>
+              <FilePath>..\SmartOS\Net\IPEndPoint.cpp</FilePath>
             </File>
             <File>
-              <FileName>Time.cpp</FileName>
+              <FileName>ITransport.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\CortexM\Time.cpp</FilePath>
+              <FilePath>..\SmartOS\Net\ITransport.cpp</FilePath>
             </File>
             <File>
-              <FileName>Thread.cpp</FileName>
+              <FileName>MacAddress.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\CortexM\Thread.cpp</FilePath>
+              <FilePath>..\SmartOS\Net\MacAddress.cpp</FilePath>
             </File>
             <File>
-              <FileName>Port.cpp</FileName>
+              <FileName>NetUri.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\CortexM\Port.cpp</FilePath>
+              <FilePath>..\SmartOS\Net\NetUri.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Zigbee.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\Zigbee.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1158,6 +1132,56 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Security</GroupName>
+          <Files>
+            <File>
+              <FileName>CheckSum.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\CheckSum.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Crc.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\Crc.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Crc16.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\Crc16.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Math.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\Math.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Parity.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\Parity.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AES.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\AES.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MD5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\MD5.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RC4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\RC4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RC6.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\RC6.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Storage</GroupName>
           <Files>
             <File>
@@ -1168,44 +1192,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Net</GroupName>
-          <Files>
-            <File>
-              <FileName>HttpClient.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Net\HttpClient.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IPAddress.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Net\IPAddress.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IPEndPoint.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Net\IPEndPoint.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ITransport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Net\ITransport.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MacAddress.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Net\MacAddress.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NetUri.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Net\NetUri.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Zigbee.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Net\Zigbee.cpp</FilePath>
-            </File>
-          </Files>
+          <GroupName>Test</GroupName>
         </Group>
         <Group>
           <GroupName>TinyIP</GroupName>
@@ -1224,57 +1211,85 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Esp8266</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Message</GroupName>
+          <GroupName>CortexM</GroupName>
           <Files>
             <File>
-              <FileName>Api.cpp</FileName>
+              <FileName>Interrupt.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\Api.cpp</FilePath>
+              <FilePath>..\SmartOS\Platform\CortexM\Interrupt.cpp</FilePath>
             </File>
             <File>
-              <FileName>BinaryPair.cpp</FileName>
+              <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\BinaryPair.cpp</FilePath>
+              <FilePath>..\SmartOS\Platform\CortexM\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>Controller.cpp</FileName>
+              <FileName>Runtime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\Controller.cpp</FilePath>
+              <FilePath>..\SmartOS\Platform\CortexM\Runtime.cpp</FilePath>
             </File>
             <File>
-              <FileName>DataStore.cpp</FileName>
+              <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\DataStore.cpp</FilePath>
+              <FilePath>..\SmartOS\Platform\CortexM\Time.cpp</FilePath>
             </File>
             <File>
-              <FileName>Json.cpp</FileName>
+              <FileName>Thread.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\Json.cpp</FilePath>
+              <FilePath>..\SmartOS\Platform\CortexM\Thread.cpp</FilePath>
             </File>
             <File>
-              <FileName>Message.cpp</FileName>
+              <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\Message.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MessageBase.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\MessageBase.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pair.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\Pair.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WeakStore.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\WeakStore.cpp</FilePath>
+              <FilePath>..\SmartOS\Platform\CortexM\Port.cpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>STM32F1</GroupName>
+        </Group>
+        <Group>
+          <GroupName>DriversCom</GroupName>
+          <Files>
+            <File>
+              <FileName>GPS_S1216.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SHARP_PM2_5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\Esp8266\Esp8266.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MqttLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\MQTT\MqttLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusRtuLinkMaster.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusRtuLinkMaster.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusRtuLinkRtuSlave.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusRtuLinkRtuSlave.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Esp8266</GroupName>
         </Group>
       </Groups>
     </Target>
@@ -1900,6 +1915,9 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>SmartOS</GroupName>
+        </Group>
+        <Group>
           <GroupName>App</GroupName>
           <Files>
             <File>
@@ -1958,6 +1976,9 @@
               <FilePath>..\SmartOS\App\Sensor.cpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Board</GroupName>
         </Group>
         <Group>
           <GroupName>Core</GroupName>
@@ -2200,46 +2221,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>DriversCom</GroupName>
-          <Files>
-            <File>
-              <FileName>GPS_S1216.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SHARP_PM2_5.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Esp8266.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\Esp8266\Esp8266.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MqttLink.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\MQTT\MqttLink.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusRtuLinkMaster.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusRtuLinkMaster.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ModbusRtuLinkRtuSlave.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusRtuLinkRtuSlave.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
@@ -2280,87 +2261,95 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Security</GroupName>
+          <GroupName>Link</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Message</GroupName>
           <Files>
             <File>
-              <FileName>CheckSum.cpp</FileName>
+              <FileName>Api.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\CheckSum.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\Api.cpp</FilePath>
             </File>
             <File>
-              <FileName>Crc.cpp</FileName>
+              <FileName>BinaryPair.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\Crc.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\BinaryPair.cpp</FilePath>
             </File>
             <File>
-              <FileName>Crc16.cpp</FileName>
+              <FileName>Controller.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\Crc16.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\Controller.cpp</FilePath>
             </File>
             <File>
-              <FileName>Math.cpp</FileName>
+              <FileName>DataStore.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\Math.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\DataStore.cpp</FilePath>
             </File>
             <File>
-              <FileName>Parity.cpp</FileName>
+              <FileName>Json.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\Parity.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\Json.cpp</FilePath>
             </File>
             <File>
-              <FileName>AES.cpp</FileName>
+              <FileName>Message.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\AES.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\Message.cpp</FilePath>
             </File>
             <File>
-              <FileName>MD5.cpp</FileName>
+              <FileName>MessageBase.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\MD5.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\MessageBase.cpp</FilePath>
             </File>
             <File>
-              <FileName>RC4.cpp</FileName>
+              <FileName>Pair.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\RC4.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\Pair.cpp</FilePath>
             </File>
             <File>
-              <FileName>RC6.cpp</FileName>
+              <FileName>WeakStore.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Security\RC6.cpp</FilePath>
+              <FilePath>..\SmartOS\Message\WeakStore.cpp</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>CortexM</GroupName>
+          <GroupName>Net</GroupName>
           <Files>
             <File>
-              <FileName>Interrupt.cpp</FileName>
+              <FileName>HttpClient.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\CortexM\Interrupt.cpp</FilePath>
+              <FilePath>..\SmartOS\Net\HttpClient.cpp</FilePath>
             </File>
             <File>
-              <FileName>Sys.cpp</FileName>
+              <FileName>IPAddress.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\CortexM\Sys.cpp</FilePath>
+              <FilePath>..\SmartOS\Net\IPAddress.cpp</FilePath>
             </File>
             <File>
-              <FileName>Runtime.cpp</FileName>
+              <FileName>IPEndPoint.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\CortexM\Runtime.cpp</FilePath>
+              <FilePath>..\SmartOS\Net\IPEndPoint.cpp</FilePath>
             </File>
             <File>
-              <FileName>Time.cpp</FileName>
+              <FileName>ITransport.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\CortexM\Time.cpp</FilePath>
+              <FilePath>..\SmartOS\Net\ITransport.cpp</FilePath>
             </File>
             <File>
-              <FileName>Thread.cpp</FileName>
+              <FileName>MacAddress.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\CortexM\Thread.cpp</FilePath>
+              <FilePath>..\SmartOS\Net\MacAddress.cpp</FilePath>
             </File>
             <File>
-              <FileName>Port.cpp</FileName>
+              <FileName>NetUri.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\CortexM\Port.cpp</FilePath>
+              <FilePath>..\SmartOS\Net\NetUri.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Zigbee.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Net\Zigbee.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2430,6 +2419,56 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Security</GroupName>
+          <Files>
+            <File>
+              <FileName>CheckSum.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\CheckSum.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Crc.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\Crc.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Crc16.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\Crc16.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Math.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\Math.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Parity.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\Parity.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AES.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\AES.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MD5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\MD5.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RC4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\RC4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RC6.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Security\RC6.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Storage</GroupName>
           <Files>
             <File>
@@ -2440,44 +2479,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Net</GroupName>
-          <Files>
-            <File>
-              <FileName>HttpClient.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Net\HttpClient.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IPAddress.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Net\IPAddress.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>IPEndPoint.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Net\IPEndPoint.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ITransport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Net\ITransport.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MacAddress.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Net\MacAddress.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NetUri.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Net\NetUri.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Zigbee.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Net\Zigbee.cpp</FilePath>
-            </File>
-          </Files>
+          <GroupName>Test</GroupName>
         </Group>
         <Group>
           <GroupName>TinyIP</GroupName>
@@ -2496,57 +2498,85 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Esp8266</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Message</GroupName>
+          <GroupName>CortexM</GroupName>
           <Files>
             <File>
-              <FileName>Api.cpp</FileName>
+              <FileName>Interrupt.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\Api.cpp</FilePath>
+              <FilePath>..\SmartOS\Platform\CortexM\Interrupt.cpp</FilePath>
             </File>
             <File>
-              <FileName>BinaryPair.cpp</FileName>
+              <FileName>Sys.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\BinaryPair.cpp</FilePath>
+              <FilePath>..\SmartOS\Platform\CortexM\Sys.cpp</FilePath>
             </File>
             <File>
-              <FileName>Controller.cpp</FileName>
+              <FileName>Runtime.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\Controller.cpp</FilePath>
+              <FilePath>..\SmartOS\Platform\CortexM\Runtime.cpp</FilePath>
             </File>
             <File>
-              <FileName>DataStore.cpp</FileName>
+              <FileName>Time.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\DataStore.cpp</FilePath>
+              <FilePath>..\SmartOS\Platform\CortexM\Time.cpp</FilePath>
             </File>
             <File>
-              <FileName>Json.cpp</FileName>
+              <FileName>Thread.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\Json.cpp</FilePath>
+              <FilePath>..\SmartOS\Platform\CortexM\Thread.cpp</FilePath>
             </File>
             <File>
-              <FileName>Message.cpp</FileName>
+              <FileName>Port.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\Message.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MessageBase.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\MessageBase.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pair.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\Pair.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WeakStore.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Message\WeakStore.cpp</FilePath>
+              <FilePath>..\SmartOS\Platform\CortexM\Port.cpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>STM32F1</GroupName>
+        </Group>
+        <Group>
+          <GroupName>DriversCom</GroupName>
+          <Files>
+            <File>
+              <FileName>GPS_S1216.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\GPS_S1216\GPS_S1216.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SHARP_PM2_5.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\SHARP_PM2_5\SHARP_PM2_5.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Esp8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\Esp8266\Esp8266.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MqttLink.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\MQTT\MqttLink.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusRtuLinkMaster.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusRtuLinkMaster.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ModbusRtuLinkRtuSlave.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\COM\ModbusLink\ModbusRtuLinkRtuSlave.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Esp8266</GroupName>
         </Group>
       </Groups>
     </Target>
