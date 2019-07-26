@@ -5,7 +5,6 @@
 
 #include "Platform\stm32.h"
 
-
 static TIM_TypeDef* const g_Timers[] = TIMS;
 const byte Timer::TimerCount = ArrayLength(g_Timers);
 
@@ -18,22 +17,22 @@ void Timer::OnInit()
 {
 	assert_param(_index <= ArrayLength(g_Timers));
 
-	_Timer		= g_Timers[_index];
+	_Timer = g_Timers[_index];
 }
 
 void Timer::Config()
 {
 	TS("Timer::Config");
 
-	auto ti	= (TIM_TypeDef*)_Timer;
+	auto ti = (TIM_TypeDef*)_Timer;
 
 	// 配置时钟
 	TIM_TimeBaseInitTypeDef tr;
 	TIM_TimeBaseStructInit(&tr);
-	tr.TIM_Period		= Period - 1;
-	tr.TIM_Prescaler	= Prescaler - 1;
+	tr.TIM_Period = Period - 1;
+	tr.TIM_Prescaler = Prescaler - 1;
 	//tr.TIM_ClockDivision = 0x0;
-	tr.TIM_CounterMode	= TIM_CounterMode_Up;
+	tr.TIM_CounterMode = TIM_CounterMode_Up;
 	TIM_TimeBaseInit(ti, &tr);
 
 	//TIM_PrescalerConfig(ti, tr.TIM_Period,TIM_PSCReloadMode_Immediate);		// 分频数立即加载
@@ -49,12 +48,12 @@ void Timer::Config()
 void Timer::OnOpen()
 {
 #if DEBUG
-    // 获取当前频率
+	// 获取当前频率
 	uint clk = RCC_GetPCLK();
 #if defined(STM32F1) || defined(STM32F4)
-	if((uint)_Timer & 0x00010000) clk = RCC_GetPCLK2();
+	if ((uint)_Timer & 0x00010000) clk = RCC_GetPCLK2();
 #endif
-	if(clk < Sys.Clock) clk <<= 1;
+	if (clk < Sys.Clock) clk <<= 1;
 
 	uint fre = clk / Prescaler / Period;
 	debug_printf("Timer%d::Open clk=%d Prescaler=%d Period=%d Fre=%d\r\n", _index + 1, clk, Prescaler, Period, fre);
@@ -75,7 +74,7 @@ void Timer::OnOpen()
 
 void Timer::OnClose()
 {
-	auto ti	= (TIM_TypeDef*)_Timer;
+	auto ti = (TIM_TypeDef*)_Timer;
 	// 关闭计数器时钟
 	TIM_Cmd(ti, DISABLE);
 	TIM_ITConfig(ti, TIM_IT_Update, DISABLE);
@@ -86,33 +85,33 @@ void Timer::OnClose()
 void Timer::ClockCmd(int idx, bool state)
 {
 	FunctionalState st = state ? ENABLE : DISABLE;
-	switch(idx + 1)
+	switch (idx + 1)
 	{
-		case 1: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, st); break;
-		case 2: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, st); break;
-		case 3: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, st); break;
+	case 1: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, st); break;
+	case 2: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, st); break;
+	case 3: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, st); break;
 #if defined(STM32F1) && defined(STM32F4)
-		case 4: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, st); break;
-		case 5: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, st); break;
+	case 4: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, st); break;
+	case 5: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, st); break;
 #endif
-		case 6: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, st); break;
+	case 6: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, st); break;
 #if defined(STM32F1) && defined(STM32F4)
-		case 7: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, st); break;
-		case 8: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8, st); break;
+	case 7: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, st); break;
+	case 8: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8, st); break;
 #endif
 #ifdef STM32F4
-		case 9: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM9, st); break;
-		case 10: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM10, st); break;
-		case 11: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM11, st); break;
-		case 12: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM12, st); break;
-		case 13: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM13, st); break;
-		case 14: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM14, st); break;
+	case 9: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM9, st); break;
+	case 10: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM10, st); break;
+	case 11: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM11, st); break;
+	case 12: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM12, st); break;
+	case 13: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM13, st); break;
+	case 14: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM14, st); break;
 #endif
 #if defined(STM32F0) || defined(GD32F150)
-		case 14: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM14, st); break;
-		case 15: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM15, st); break;
-		case 16: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM16, st); break;
-		case 17: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM17, st); break;
+	case 14: RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM14, st); break;
+	case 15: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM15, st); break;
+	case 16: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM16, st); break;
+	case 17: RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM17, st); break;
 #endif
 	}
 }
@@ -129,39 +128,39 @@ void Timer::ClockCmd(int idx, bool state)
 // 设置频率，自动计算预分频
 void Timer::SetFrequency(uint frequency)
 {
-    // 获取当前频率
+	// 获取当前频率
 #if defined(STM32F0) || defined(GD32F150)
-	uint clk	= Sys.Clock;
+	uint clk = Sys.Clock;
 #else
 	uint clk = RCC_GetPCLK();
-	if((uint)_Timer & 0x00010000) clk = RCC_GetPCLK2();
+	if ((uint)_Timer & 0x00010000) clk = RCC_GetPCLK2();
 	clk <<= 1;
 #endif
 
 	// 120M时，分频系数必须是120K才能得到1k的时钟，超过了最大值64k
 	// 因此，需要增加系数
-	uint prd	= clk / frequency;
-	uint psc	= 1;
-	uint Div	= 0;
-	while(prd > 0xFFFF)
+	uint prd = clk / frequency;
+	uint psc = 1;
+	uint Div = 0;
+	while (prd > 0xFFFF)
 	{
-		prd	>>= 1;
-		psc	<<= 1;
+		prd >>= 1;
+		psc <<= 1;
 		Div++;
 	}
 
 	assert(frequency > 0 && frequency <= clk, "频率超出范围");
 
-	Prescaler	= psc;
-	Period		= prd;
+	Prescaler = psc;
+	Period = prd;
 
 	// 如果已启动定时器，则重新配置一下，让新设置生效
-	if(Opened)
+	if (Opened)
 	{
 		TIM_TimeBaseInitTypeDef tr;
 		TIM_TimeBaseStructInit(&tr);
-		tr.TIM_Period		= Period - 1;
-		tr.TIM_Prescaler	= Prescaler - 1;
+		tr.TIM_Period = Period - 1;
+		tr.TIM_Prescaler = Prescaler - 1;
 		//tr.TIM_ClockDivision = 0x0;
 		tr.TIM_CounterMode = TIM_CounterMode_Up;
 		TIM_TimeBaseInit((TIM_TypeDef*)_Timer, &tr);
@@ -181,8 +180,8 @@ void Timer::SetCounter(uint cnt)
 void Timer::SetHandler(bool set)
 {
 	const byte irqs[] = TIM_IRQns;
-	byte irq	= irqs[_index];
-	if(set)
+	byte irq = irqs[_index];
+	if (set)
 	{
 		// 打开中断
 		//TIM_ITConfig((TIM_TypeDef*)_Timer, TIM_IT_Update, ENABLE);
@@ -199,11 +198,11 @@ void Timer::SetHandler(bool set)
 void Timer::OnHandler(ushort num, void* param)
 {
 	auto timer = (Timer*)param;
-	if(timer)
+	if (timer)
 	{
-		auto ti	= (TIM_TypeDef*)timer->_Timer;
+		auto ti = (TIM_TypeDef*)timer->_Timer;
 		// 检查指定的 TIM 中断发生
-		if(TIM_GetITStatus(ti, TIM_IT_Update) == RESET) return;
+		if (TIM_GetITStatus(ti, TIM_IT_Update) == RESET) return;
 		// 必须清除TIMx的中断待处理位，否则会频繁中断
 		TIM_ClearITPendingBit(ti, TIM_IT_Update);
 
