@@ -9,11 +9,6 @@ class USARTHAL
 public:
 	USARTHAL(COM index, uint baud, byte priGroup = 3, byte prePri = 7, byte subPri = 1, bool remap = false, uint remapvalue = 1);
 	void Initialize();
-	//////////////////////////
-	///@bief 设置波特率
-	///@param baudRate 波特率大小
-	//////////////////////////
-	void SetBaudRate(uint baudRate);
 	int SendTimeMs(int buflen)
 	{
 		if (this->mBaudrate < 100)
