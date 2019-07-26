@@ -17,6 +17,8 @@
 #include "Core\Dictionary.h"
 #include "Core\Delegate.h"
 
+#include "..//SmartOSPorting/SmartOSPor.h"
+
 /* Òý½Å¶¨Òå */
 #include "Platform\Pin.h"
 
