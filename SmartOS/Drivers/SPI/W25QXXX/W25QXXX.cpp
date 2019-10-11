@@ -518,7 +518,7 @@ void SPI25QXX::Test()
 	FlashID = ReadID();
 
 	debug_printf("FlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", FlashID, DeviceID);
-
+	return;
 	/* Check the SPI Flash ID */
 	if (FlashID == sFLASH_ID)  /* #define  sFLASH_ID  0XEF4017 */
 	{

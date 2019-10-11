@@ -793,6 +793,19 @@ void SpiSoft::Init(CPOLTYPE cpol  , CPHATYPE cpha)
 #endif
 	this->CPOL = cpol;
 	this->CPHA = cpha;
+
+	this->_clk.Open();
+	this->_miso.Open();
+	this->_mosi.Open();
+	this->_nss.Open();
+
+	this->_miso = 1;
+	if (CPOL_High)
+		this->_clk = 1;
+	else
+		this->_clk = 0;
+	this->_mosi = 1;
+	this->_nss = 1;
 }
 
 void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi)

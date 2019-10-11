@@ -75,6 +75,7 @@ void Esp8266TestInit();
 void ModbusSlaveLinkTestInit();
 void w25qxxxtest();
 void BufferTest();
+void w25qxxxtest();
 void setup()
 {
 	led1.SetPin(PB0);
@@ -89,6 +90,7 @@ void setup()
 	//Esp8266TestInit();
 	/*ModbusSlaveLinkTestInit();*/
 	BufferTest();
+	w25qxxxtest();
 }
 void BufferTest()
 {
