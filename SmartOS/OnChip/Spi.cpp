@@ -784,13 +784,8 @@ SpiSoft::SpiSoft()
 }
 void SpiSoft::Init(CPOLTYPE cpol  , CPHATYPE cpha)
 {
-#ifdef STM32F0
-	this->delayus = 0;
-#elif defined STM32F1
 	this->delayus = 10;
-#elif defined STM32F4
-	this->delayus = 0;
-#endif
+
 	this->CPOL = cpol;
 	this->CPHA = cpha;
 
