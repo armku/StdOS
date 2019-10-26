@@ -888,11 +888,6 @@
               <FilePath>..\SmartOS\Drivers\ST7565R\ST7565R.cpp</FilePath>
             </File>
             <File>
-              <FileName>AT24CXX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\I2C\AT24CXX\AT24CXX.cpp</FilePath>
-            </File>
-            <File>
               <FileName>NPA.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Drivers\I2C\NPA\NPA.cpp</FilePath>
@@ -946,6 +941,11 @@
               <FileName>ocmtest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Drivers\OCM240128\ocmtest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT24CXX_2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\I2C\AT24CXX_2\AT24CXX_2.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2191,11 +2191,6 @@
               <FilePath>..\SmartOS\Drivers\ST7565R\ST7565R.cpp</FilePath>
             </File>
             <File>
-              <FileName>AT24CXX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\I2C\AT24CXX\AT24CXX.cpp</FilePath>
-            </File>
-            <File>
               <FileName>NPA.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Drivers\I2C\NPA\NPA.cpp</FilePath>
@@ -2249,6 +2244,11 @@
               <FileName>ocmtest.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Drivers\OCM240128\ocmtest.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT24CXX_2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\I2C\AT24CXX_2\AT24CXX_2.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,9 +1,9 @@
-#include "Drivers/AT24CXX/AT24CXX.h"
+#include "Drivers/AT24CXX_2/AT24CXX_2.h"
 
 //#define _AT24CXX_TEST_CPP
 #ifdef _AT24CXX_TEST_CPP
 #define EE_SIZE				256			  /* 24xx02总容量 */    
-AT24CXX at2402(AT24C02);
+AT24CXX_2 at2402(AT24C02);
 void AT24C02Test()
 {
 #if 0
