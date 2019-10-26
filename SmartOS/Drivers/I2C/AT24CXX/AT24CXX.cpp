@@ -4,7 +4,7 @@
 #define macI2C_WR	0		/* Ð´¿ØÖÆbit */
 #define macI2C_RD	1		/* ¶Á¿ØÖÆbit */
 
-bool AT24CXX::Write(uint addr, void * buf, int len, int bufpos)
+bool AT24CXX_2::Write(uint addr, void * buf, int len, int bufpos)
 {
 	uint curAddr;
 	uint pageStart; //Ò³ÄÚÆðÊ¼µØÖ·
@@ -57,7 +57,7 @@ bool AT24CXX::Write(uint addr, void * buf, int len, int bufpos)
 	return false;
 }
 
-bool AT24CXX::Read(uint addr, void * buf, int len, int bufpos)
+bool AT24CXX_2::Read(uint addr, void * buf, int len, int bufpos)
 {
 	uint curAddr;
 	uint pageStart; //Ò³ÄÚÆðÊ¼µØÖ·
@@ -108,14 +108,14 @@ bool AT24CXX::Read(uint addr, void * buf, int len, int bufpos)
 	return false;
 }
 //Ð´ÑÓÊ±Ê±¼ä
-AT24CXX::AT24CXX(EW24XXType devtype, byte devaddr, uint wnms)
+AT24CXX_2::AT24CXX_2(EW24XXType devtype, byte devaddr, uint wnms)
 {
 	this->deviceType = devtype;
 	this->Address = devaddr;
 	this->Block = this->jsPageSize(devtype);
 	this->writedelaynms = wnms;
 }
-void AT24CXX::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
+void AT24CXX_2::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
 {
 	this->IIC.SetPin(pinscl, pinsda);
 	if (pinwriteprotect != P0)
@@ -126,7 +126,7 @@ void AT24CXX::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
 	}
 }
 
-byte AT24CXX::Read(ushort address)
+byte AT24CXX_2::Read(ushort address)
 {
 	byte ret = 0;
 	
@@ -187,7 +187,7 @@ cmd_Readbytefail:  /* ÃüÁîÖ´ÐÐÊ§°Üºó£¬ÇÐ¼Ç·¢ËÍÍ£Ö¹ÐÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±
 	return ret;
 }
 
-bool AT24CXX::Write(ushort address, byte da)
+bool AT24CXX_2::Write(ushort address, byte da)
 {
 	uint m;
 
@@ -256,7 +256,7 @@ cmd_Writebytefail:  /* ÃüÁîÖ´ÐÐÊ§°Üºó£¬ÇÐ¼Ç·¢ËÍÍ£Ö¹ÐÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè
 }
 
 //Ò³ÄÚ¶Á£¬×î¶àÒ»Ò³
-int AT24CXX::PageRead(ushort addr, void * buf, int len)
+int AT24CXX_2::PageRead(ushort addr, void * buf, int len)
 {
 	if (len > this->Block)
 		return 1;
@@ -320,7 +320,7 @@ cmd_Readfail:  /* ÃüÁîÖ´ÐÐÊ§°Üºó£¬ÇÐ¼Ç·¢ËÍÍ£Ö¹ÐÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ */
 	return 1;
 }
 //Ò³ÄÚÐ´£¬×î¶àÒ»Ò³
-int AT24CXX::PageWrite(ushort addr, void * buf, int len)
+int AT24CXX_2::PageWrite(ushort addr, void * buf, int len)
 {
 	if (len > this->Block)
 		return 1;
@@ -416,7 +416,7 @@ cmd_Writefail:  /* ÃüÁîÖ´ÐÐÊ§°Üºó£¬ÇÐ¼Ç·¢ËÍÍ£Ö¹ÐÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±¸ *
 	return 1;
 }
 
-ushort AT24CXX::jsPageSize(uint type) //¼ÆËã´æ´¢Ò³´óÐ¡
+ushort AT24CXX_2::jsPageSize(uint type) //¼ÆËã´æ´¢Ò³´óÐ¡
 {
 	ushort ret = 8;
 	switch (type)
@@ -450,7 +450,7 @@ ushort AT24CXX::jsPageSize(uint type) //¼ÆËã´æ´¢Ò³´óÐ¡
 	return ret;
 }
 
-byte AT24CXX::checkDevice()
+byte AT24CXX_2::checkDevice()
 {
 	byte ucAck;
 
@@ -464,7 +464,7 @@ byte AT24CXX::checkDevice()
 	return ucAck;
 }
 
-byte AT24CXX::CheckOk()
+byte AT24CXX_2::CheckOk()
 {
 	if (this->checkDevice() == 0)
 	{
