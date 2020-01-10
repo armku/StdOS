@@ -71,47 +71,6 @@ public:
 		_iic->Stop();
 	}
 };
-
-// 硬件I2C
-class HardI2C : public I2C
-{
-private:
-	void Init(byte index, uint speedHz);
-
-public:
-	// 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
-    //HardI2C(I2C_TypeDef* iic = I2C1, uint speedHz = 100000);
-	HardI2C(byte index, uint speedHz = 100000);
-    virtual ~HardI2C();
-
-	virtual void SetPin(Pin scl, Pin sda);
-	virtual void GetPin(Pin* scl = nullptr, Pin* sda = nullptr);
-
-	virtual void Start();
-	virtual void Stop();
-
-	virtual void WriteByte(byte dat);
-	virtual byte ReadByte();
-	virtual void Ack(bool ack);
-	virtual bool WaitAck(bool ack);
-
-	//virtual bool Write(int addr, byte* buf, uint len);	// 新会话向指定地址写入多个字节
-	//virtual uint Read(int addr, byte* buf, uint len);	// 新会话从指定地址读取多个字节
-
-private:
-    byte	_index;
-	void*	_IIC;
-	uint	_Event;
-
-	AlternatePort SCL;
-	AlternatePort SDA;
-
-	virtual bool SendAddress(int addr, bool tx = true);
-
-	void OnInit();
-	virtual bool OnOpen();
-	virtual void OnClose();
-};
 /*
 开发历史
 

@@ -208,56 +208,6 @@ uint I2C::Read4(int addr)
 	return (bs[3] << 24) | (bs[2] << 16) | (bs[1] << 8) | bs[0];
 }
 
-/*HardI2C::HardI2C(I2C_TypeDef* iic, uint speedHz ) : I2C()
-{
-	assert_param(iic);
-
-	I2C_TypeDef* g_I2Cs[] = I2CS;
-	_index = 0xFF;
-	for(int i=0; i<ArrayLength(g_I2Cs); i++)
-	{
-		if(g_I2Cs[i] == iic)
-		{
-			_index = i;
-			break;
-		}
-	}
-
-	Init(_index, speedHz);
-}*/
-
-HardI2C::HardI2C(byte index, uint speedHz) : I2C()
-{
-	Init(index, speedHz);
-}
-
-void HardI2C::Init(byte index, uint speedHz)
-{
-	_index = index;
-	Speed = speedHz;
-
-	OnInit();
-
-	debug_printf("HardI2C_%d::Init %dHz \r\n", _index + 1, speedHz);
-}
-
-HardI2C::~HardI2C()
-{
-	Close();
-}
-
-void HardI2C::SetPin(Pin scl, Pin sda)
-{
-	SCL.Set(scl);
-	SDA.Set(sda);
-}
-
-void HardI2C::GetPin(Pin* scl, Pin* sda)
-{
-	if (scl) *scl = SCL._Pin;
-	if (sda) *sda = SDA._Pin;
-}
-
 /******************************** SoftI2C ********************************/
 // 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
 I2CSoft_ARMKU::I2CSoft_ARMKU(uint speedHz)
