@@ -53,24 +53,6 @@ protected:
 	virtual bool SendSubAddr(int addr);
 };
 
-// I2C会话类。初始化时打开，超出作用域析构时关闭
-class I2CScope
-{
-private:
-	I2C* _iic;
-
-public:
-	I2CScope(I2C* iic)
-	{
-		_iic = iic;
-		_iic->Start();
-	}
-
-	~I2CScope()
-	{
-		_iic->Stop();
-	}
-};
 /*
 开发历史
 
