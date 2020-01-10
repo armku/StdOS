@@ -46,7 +46,7 @@ SPI25QXX::SPI25QXX()
 {
 	
 }
-void SPI25QXX::SetSpi(SpiBase *spi)
+void SPI25QXX::SetSpi(SpiBase_ARMKU *spi)
 {
 	this->_spi = spi;
 	this->_spi->Stop();

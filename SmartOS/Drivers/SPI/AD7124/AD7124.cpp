@@ -3,7 +3,7 @@
 
 #include "Sys.h"
 
-void AD7124::SetSpi(SpiBase *spi)
+void AD7124::SetSpi(SpiBase_ARMKU *spi)
 {
 	this->pspi = spi;
 }

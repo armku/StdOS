@@ -19,7 +19,7 @@ CAD7689::CAD7689()
     this->chDelayCnt = 0;
 }
 
-void CAD7689::SetSpi(SpiBase *spi)
+void CAD7689::SetSpi(SpiBase_ARMKU *spi)
 {
 	this->pspi = spi;
 }

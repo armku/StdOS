@@ -13,7 +13,7 @@ typedef enum
 	CPHA_1Edge = 0,  //时钟相位 在串行同步时钟的第一个跳变沿（上升或下降）数据被采样
 	CPHA_2Edge = 1,  //时钟相位 在串行同步时钟的第二个跳变沿（上升或下降）数据被采样
 } CPHATYPE;
-class SpiBase
+class SpiBase_ARMKU
 {
 public:
 	virtual void Init(CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge)=0;
@@ -29,7 +29,7 @@ public:
 	virtual void Start()=0; // 拉低NSS，开始传输
 	virtual void Stop()=0; // 拉高NSS，停止传输
 };
-class SpiSoft_ARMKU :public SpiBase
+class SpiSoft_ARMKU :public SpiBase_ARMKU
 {
 	public:
 		CPOLTYPE CPOL; //时钟极性

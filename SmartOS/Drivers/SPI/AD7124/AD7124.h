@@ -10,7 +10,7 @@
         public:
             ushort CHCONFIG[16];//通道配置
 
-			void SetSpi(SpiBase *spi); 
+			void SetSpi(SpiBase_ARMKU *spi); 
 			void Init_8();		//8通道初始化
 			void Init_4();		//4通道初始化
             byte ReadID();		//读取ID
@@ -36,7 +36,7 @@
             int readCnt; //读取次数
             int readCntCheck; //上次检查的读取周期
 
-            SpiBase *pspi; //SPI接口            
+            SpiBase_ARMKU *pspi; //SPI接口            
 		private:		
 		//测试
 			float GetTemp1();

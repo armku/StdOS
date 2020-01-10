@@ -13,12 +13,12 @@ public:
 	byte FlagEnable[MAXCH]; //是否允许通道转换 0：禁止，1：允许 备用
 public:
 	CAD7689();
-	void SetSpi(SpiBase *spi);
+	void SetSpi(SpiBase_ARMKU *spi);
 	void Routin(void); //读取AD值,并切换通道
 	void Init(void); //
 	float getVolt(ushort ch); //获取通道电压值    
 private:
-	SpiBase *pspi; //SPI接口  
+	SpiBase_ARMKU *pspi; //SPI接口  
 
 	float volt[MAXCH]; //电压值
 	ushort ADBuf[MAXCH]; //原始AD值
