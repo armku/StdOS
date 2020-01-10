@@ -54,35 +54,6 @@ private:
 	void OnClose();
 };
 
-// Spi会话类。初始化时打开Spi，超出作用域析构时关闭
-class SpiScope
-{
-private:
-	Spi* _spi;
-
-public:
-	SpiScope(Spi* spi)
-	{
-		_spi = spi;
-		_spi->Start();
-	}
-
-	~SpiScope()
-	{
-		_spi->Stop();
-	}
-};
-
-// Spi设备配置
-class SpiConfig
-{
-public:
-	SPI Spi;
-
-	Pin	Irq;
-	Pin Reset;
-};
-
 typedef enum
 {
 	CPOL_Low = 0,  // 时钟极性，空闲时为低
