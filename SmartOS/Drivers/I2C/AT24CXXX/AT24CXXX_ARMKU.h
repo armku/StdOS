@@ -18,7 +18,7 @@ typedef enum
 	AT24C2048 = (32767 * 8) //
 } EW24XXType;
 // EEPROM
-class AT24CXXX_ARMKU
+class AT24CXXX
 {
 public:
 	I2CSoft_ARMKU IIC; // I2C通信口
@@ -30,7 +30,7 @@ public:
 	virtual bool Write(uint addr, void * buf, int len, int bufpos = 0);
 	virtual bool Read(uint addr, void * buf, int len, int bufpos = 0);
 public:
-	AT24CXXX_ARMKU(EW24XXType devtype, byte devaddr = 0xA0, uint wnms = 5); //写延时时间
+	AT24CXXX(EW24XXType devtype, byte devaddr = 0xA0, uint wnms = 5); //写延时时间
 	void SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect = P0);
 	byte CheckOk();
 
