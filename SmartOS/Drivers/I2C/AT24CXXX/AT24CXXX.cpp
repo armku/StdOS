@@ -1,4 +1,4 @@
-#include "AT24CXXX_ARMKU.h"
+#include "AT24CXXX.h"
 #include "Sys.h"
 
 #define macI2C_WR	0		/* Ð´¿ØÖÆbit */
