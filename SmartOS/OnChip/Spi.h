@@ -109,41 +109,6 @@ public:
 	virtual void Start()=0; // 拉低NSS，开始传输
 	virtual void Stop()=0; // 拉高NSS，停止传输
 };
-// Spi类
-class Spi11:public SpiBase
-{
-	public:
-		CPOLTYPE CPOL; //时钟极性
-		CPHATYPE CPHA; //时钟相位
-	private:
-		byte _index;
-		void *_SPI;
-		Port _nss;
-
-		Port _clk;
-		Port _miso;
-		Port _mosi;			
-	public:
-		int Retry; // 等待重试次数，默认200
-		int Error; // 错误次数
-		bool Opened;
-
-		Spi11(SPI spi);
-		// 使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度
-
-		virtual void Init(CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge);
-
-		virtual void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
-		virtual void SetNss(Pin nss = P0);
-
-		// 基础读写
-		virtual byte Write(byte data);
-		virtual ushort Write16(ushort data);
-
-		virtual void Start(); // 拉低NSS，开始传输
-		virtual void Stop(); // 拉高NSS，停止传输
-};
-	
 class SpiSoft_ARMKU :public SpiBase
 {
 	public:
