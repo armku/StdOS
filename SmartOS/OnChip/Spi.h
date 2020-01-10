@@ -144,13 +144,13 @@ class Spi11:public SpiBase
 		virtual void Stop(); // 拉高NSS，停止传输
 };
 	
-class SpiSoft :public SpiBase
+class SpiSoft_ARMKU :public SpiBase
 {
 	public:
 		CPOLTYPE CPOL; //时钟极性
 		CPHATYPE CPHA; //时钟相位
 	public:
-		SpiSoft(); //使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度   
+		SpiSoft_ARMKU(); //使用端口和最大速度初始化Spi，因为需要分频，实际速度小于等于该速度   
 		virtual void Init(CPOLTYPE cpol = CPOL_High, CPHATYPE cpha = CPHA_2Edge);
 		virtual void SetPin(Pin clk = P0, Pin miso = P0, Pin mosi = P0);
 		virtual void SetNss(Pin nss = P0);

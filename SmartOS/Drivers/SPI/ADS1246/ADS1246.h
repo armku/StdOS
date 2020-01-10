@@ -22,7 +22,7 @@
     {
         public:
 			#if ADS1246SPISOFT
-				ADS1246(SpiSoft *spi,Port &pinrd, Pin pinreset,ADSPEEDTYPE spd);
+				ADS1246(SpiSoft_ARMKU *spi,Port &pinrd, Pin pinreset,ADSPEEDTYPE spd);
 			#else
 				ADS1246(Spi *spi,InputPort &pinrd, Pin pinreset,ADSPEEDTYPE spd);
 			#endif
@@ -45,7 +45,7 @@
 			ADSPEEDTYPE speed;//AD转换速度
 
 			#if ADS1246SPISOFT
-				SpiSoft *pspi; //SPI接口
+				SpiSoft_ARMKU *pspi; //SPI接口
 			#else
 				Spi *pspi; //SPI接口
 			#endif

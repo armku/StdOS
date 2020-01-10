@@ -7,7 +7,7 @@
 #define SPISOFT
 
 #ifdef SPISOFT
-SpiSoft spi;
+SpiSoft_ARMKU spi;
 #else
 Spi spi(Spi1);
 #endif

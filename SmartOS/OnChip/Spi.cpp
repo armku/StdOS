@@ -778,11 +778,11 @@ ushort Spi11::Write16(ushort data)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////SpiSoft////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-SpiSoft::SpiSoft()
+SpiSoft_ARMKU::SpiSoft_ARMKU()
 {	
 
 }
-void SpiSoft::Init(CPOLTYPE cpol  , CPHATYPE cpha)
+void SpiSoft_ARMKU::Init(CPOLTYPE cpol  , CPHATYPE cpha)
 {
 	this->delayus = 10;
 
@@ -803,7 +803,7 @@ void SpiSoft::Init(CPOLTYPE cpol  , CPHATYPE cpha)
 	this->_nss = 1;
 }
 
-void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi)
+void SpiSoft_ARMKU::SetPin(Pin clk, Pin miso, Pin mosi)
 {
 	this->_clk.SetPin(clk);
 	this->_mosi.SetPin(mosi);
@@ -813,7 +813,7 @@ void SpiSoft::SetPin(Pin clk, Pin miso, Pin mosi)
 	this->_mosi.pinMode(GPIO_Out_PP);//此处设置错误将导致异常
 	this->_miso.pinMode(GPIO_IPU);	
 }
-void SpiSoft::SetNss(Pin nss)
+void SpiSoft_ARMKU::SetNss(Pin nss)
 {
 	this->_nss.SetPin(nss);
 
@@ -824,7 +824,7 @@ void SpiSoft::SetNss(Pin nss)
 /*---------------------------------------------------------
 忙状态判断，最长等待时间，200 X 10 ms=2S
 ---------------------------------------------------------*/
-byte SpiSoft::WaitBusy()
+byte SpiSoft_ARMKU::WaitBusy()
 {
 	ushort i;
 	this->Start();
@@ -841,7 +841,7 @@ byte SpiSoft::WaitBusy()
 }
 
 //SPI写字节
-byte SpiSoft::Write(byte data)
+byte SpiSoft_ARMKU::Write(byte data)
 {
 	byte i;
 	byte ret = 0;
@@ -971,7 +971,7 @@ byte SpiSoft::Write(byte data)
 	}
 	return ret;
 }
-ushort SpiSoft::Write16(ushort data)
+ushort SpiSoft_ARMKU::Write16(ushort data)
 {
 	ushort dat = 0;
 
@@ -982,7 +982,7 @@ ushort SpiSoft::Write16(ushort data)
 	return dat;
 }
 
-void SpiSoft::Open()
+void SpiSoft_ARMKU::Open()
 {
 	if (this->CPOL)
 	{
@@ -994,7 +994,7 @@ void SpiSoft::Open()
 	}
 	this->Stop();
 }
-void SpiSoft::Close()
+void SpiSoft_ARMKU::Close()
 {
 	//测试，等待删除
 	for (int i = 0; i < 8; i++)
@@ -1008,7 +1008,7 @@ void SpiSoft::Close()
 }
 
 // 拉低NSS，开始传输
-void SpiSoft::Start()
+void SpiSoft_ARMKU::Start()
 {
 	if (!this->_nss.Empty())
 	{
@@ -1019,7 +1019,7 @@ void SpiSoft::Start()
 }
 
 // 拉高NSS，停止传输
-void SpiSoft::Stop()
+void SpiSoft_ARMKU::Stop()
 {
 	if (!this->_nss.Empty())
 	{

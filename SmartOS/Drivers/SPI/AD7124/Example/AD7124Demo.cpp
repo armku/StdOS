@@ -80,7 +80,7 @@ float AD7124::Temp1Test()
 }
 
 #if 1
-SpiSoft spi1;
+SpiSoft_ARMKU spi1;
 AD7124 ad;
 
 void ad7124test(void *param)
