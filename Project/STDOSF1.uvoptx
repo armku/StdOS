@@ -1860,8 +1860,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\SmartOS\Drivers\I2C\AT24CXX_2\AT24CXX_2.cpp</PathWithFileName>
-      <FilenameWithoutPath>AT24CXX_2.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\SmartOS\Drivers\I2C\AT24CXX_2\AT24CXX_ARMKU.cpp</PathWithFileName>
+      <FilenameWithoutPath>AT24CXX_ARMKU.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

@@ -943,9 +943,9 @@
               <FilePath>..\SmartOS\Drivers\OCM240128\ocmtest.cpp</FilePath>
             </File>
             <File>
-              <FileName>AT24CXX_2.cpp</FileName>
+              <FileName>AT24CXX_ARMKU.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\I2C\AT24CXX_2\AT24CXX_2.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\I2C\AT24CXX_2\AT24CXX_ARMKU.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2246,9 +2246,9 @@
               <FilePath>..\SmartOS\Drivers\OCM240128\ocmtest.cpp</FilePath>
             </File>
             <File>
-              <FileName>AT24CXX_2.cpp</FileName>
+              <FileName>AT24CXX_ARMKU.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\SmartOS\Drivers\I2C\AT24CXX_2\AT24CXX_2.cpp</FilePath>
+              <FilePath>..\SmartOS\Drivers\I2C\AT24CXX_2\AT24CXX_ARMKU.cpp</FilePath>
             </File>
           </Files>
         </Group>
