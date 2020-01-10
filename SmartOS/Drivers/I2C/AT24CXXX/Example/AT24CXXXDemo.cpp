@@ -1,4 +1,4 @@
-#include "Drivers/AT24CXX_2/AT24CXX_2.h"
+#include "../AT24CXXX.h"
 
 //#define _AT24CXX_TEST_CPP
 #ifdef _AT24CXX_TEST_CPP
