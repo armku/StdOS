@@ -818,11 +818,6 @@
               <FilePath>..\SmartOS\Device\WatchDog.cpp</FilePath>
             </File>
             <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Device\I2C.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Power.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\Power.cpp</FilePath>
@@ -946,6 +941,11 @@
               <FileName>AT24CXX_ARMKU.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Drivers\I2C\AT24CXX_2\AT24CXX_ARMKU.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2CSoft_ARMKU.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\I2C\I2CSoft_ARMKU.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1226,11 +1226,6 @@
               <FileName>Flash.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\STM32F1\Flash.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\I2C.cpp</FilePath>
             </File>
             <File>
               <FileName>Interrupt.cpp</FileName>
@@ -2121,11 +2116,6 @@
               <FilePath>..\SmartOS\Device\WatchDog.cpp</FilePath>
             </File>
             <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Device\I2C.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Power.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Device\Power.cpp</FilePath>
@@ -2249,6 +2239,11 @@
               <FileName>AT24CXX_ARMKU.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Drivers\I2C\AT24CXX_2\AT24CXX_ARMKU.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2CSoft_ARMKU.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Drivers\I2C\I2CSoft_ARMKU.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2529,11 +2524,6 @@
               <FileName>Flash.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\SmartOS\Platform\STM32F1\Flash.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>I2C.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\SmartOS\Platform\STM32F1\I2C.cpp</FilePath>
             </File>
             <File>
               <FileName>Interrupt.cpp</FileName>

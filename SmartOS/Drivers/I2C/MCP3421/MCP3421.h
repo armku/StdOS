@@ -1,4 +1,4 @@
-#include "../Device/I2C.h"
+#include "../I2CSoft_ARMKU.h"
 
 #ifndef _MCP3421_H
 #define _MCP3421_H

@@ -2,7 +2,7 @@
 #define _RX8025T_H
 
 #include "Kernel\Sys.h"
-#include "../Device/I2C.h"
+#include "../I2CSoft_ARMKU.h"
 #include "Core\DateTime.h"
 
 class RX8025T

@@ -1,7 +1,7 @@
 #ifndef _NPA_H
 #define _NPA_H
 
-    #include "../Device/I2C.h"
+    #include "../I2CSoft_ARMKU.h"
 
     class CNPA
     {

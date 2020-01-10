@@ -1,7 +1,7 @@
 #ifndef _AT24CXX_2_H_
 #define _AT24CXX_2_H_
 
-#include "../Device/I2C.h"
+#include "../I2CSoft_ARMKU.h"
 typedef enum
 {
 	AT24C01 = 127,  //
