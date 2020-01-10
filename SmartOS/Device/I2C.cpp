@@ -522,12 +522,12 @@ SDA 线上的数据必须在时钟的高电平周期保持稳定。
 
 
 // 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
-I2CSoft::I2CSoft(uint speedHz)
+I2CSoft_ARMKU::I2CSoft_ARMKU(uint speedHz)
 {
 	this->_delay=4;	
 }
 
-void I2CSoft::SetPin(Pin scl, Pin sda)
+void I2CSoft_ARMKU::SetPin(Pin scl, Pin sda)
 {
 	this->SCL.SetPin(scl);
     this->SDA.SetPin(sda);
@@ -539,7 +539,7 @@ void I2CSoft::SetPin(Pin scl, Pin sda)
 	this->SCL = 1;
 }
 
-void I2CSoft::Start()
+void I2CSoft_ARMKU::Start()
 {
     /* 当SCL高电平时，SDA出现一个下跳沿表示I2C总线启动信号 */
     this->SDA = 1;
@@ -552,7 +552,7 @@ void I2CSoft::Start()
     delayMicroseconds(1);
 }
 
-void I2CSoft::Stop()
+void I2CSoft_ARMKU::Stop()
 {
     /* 当SCL高电平时，SDA出现一个上跳沿表示I2C总线停止信号 */
     this->SDA = 0;
@@ -561,7 +561,7 @@ void I2CSoft::Stop()
     this->SDA = 1;
 }
 
-void I2CSoft::WriteByte(byte dat)
+void I2CSoft_ARMKU::WriteByte(byte dat)
 {
     byte i;
 
@@ -589,7 +589,7 @@ void I2CSoft::WriteByte(byte dat)
     }
 }
 
-byte I2CSoft::ReadByte()
+byte I2CSoft_ARMKU::ReadByte()
 {
     byte i;
     byte value;
@@ -610,13 +610,13 @@ byte I2CSoft::ReadByte()
     }
     return value;
 }
-byte I2CSoft::ReadByte(bool ack)
+byte I2CSoft_ARMKU::ReadByte(bool ack)
 {
 	byte ret = this->ReadByte();
 	this->Ack(ack);
 	return ret;
 }
-void I2CSoft::Ack(bool ack)
+void I2CSoft_ARMKU::Ack(bool ack)
 {
     if (ack)
     {
@@ -642,7 +642,7 @@ void I2CSoft::Ack(bool ack)
 //等待应答信号到来
 //返回值：1，接收应答失败
 //        0，接收应答成功
-bool I2CSoft::WaitAck(int retry)
+bool I2CSoft_ARMKU::WaitAck(int retry)
 {
     byte re;
 

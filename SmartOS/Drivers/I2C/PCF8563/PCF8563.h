@@ -11,7 +11,7 @@ public:
 	void GetDateTime(DateTime& dt);
 	byte readaddr(byte add);
 public:
-	I2CSoft IIC; // I2C通信口
+	I2CSoft_ARMKU IIC; // I2C通信口
 	
 private:	
 	byte Address; // 设备地址

@@ -11,7 +11,7 @@
             int Read();
 			float ReadP();//读取大气压值
         private:
-            I2CSoft pi2c;
+            I2CSoft_ARMKU pi2c;
             byte DEVER_ADDR; //设备地址
     };
 #endif

@@ -21,7 +21,7 @@ public:
 	int GetADValue(_Gain3421 gain= GAIN1);
 	float GetVolt();
 private:
-	I2CSoft IIC; // I2C通信口
+	I2CSoft_ARMKU IIC; // I2C通信口
 	//byte Address; // 设备地址
 	void MCP3421_WriteOne(byte  dt);
 	int MCP3421_ReadOne(void);

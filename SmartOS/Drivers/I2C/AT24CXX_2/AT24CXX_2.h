@@ -21,7 +21,7 @@ typedef enum
 class AT24CXX_ARMKU
 {
 public:
-	I2CSoft IIC; // I2C通信口
+	I2CSoft_ARMKU IIC; // I2C通信口
 	byte Address; // 设备地址
 
 	bool Write(ushort addr, byte data);
