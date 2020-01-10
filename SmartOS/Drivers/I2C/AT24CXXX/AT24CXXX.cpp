@@ -117,11 +117,12 @@ AT24CXXX::AT24CXXX(EW24XXType devtype, byte devaddr, uint wnms)
 }
 void AT24CXXX::SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect)
 {
-	this->IIC.SetPin(pinscl, pinsda);
+	this->IIC->SetPin(pinscl, pinsda);
 	if (pinwriteprotect != P0)
 	{
-		this->pinWP.SetPin(pinwriteprotect);
-		this->pinWP.pinMode(GPIO_Out_PP);
+		this->pinWP.Set(pinwriteprotect);
+		this->pinWP.Opened = false;
+		this->pinWP.Open();
 		this->pinWP = 1;
 	}
 }
@@ -131,58 +132,58 @@ byte AT24CXXX::Read(ushort address)
 	byte ret = 0;
 	
 	/* 第1步：发起I2C总线启动信号 */
-	this->IIC.Start();
+	this->IIC->Start();
 
 	/* 第2步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
-	this->IIC.WriteByte(this->Address | macI2C_WR); /* 此处是写指令 */
+	this->IIC->WriteByte(this->Address | macI2C_WR); /* 此处是写指令 */
 
 	/* 第3步：等待ACK */
-	if (this->IIC.WaitAck() != 0)
+	if (this->IIC->WaitAck() != 0)
 	{
 		goto cmd_Readbytefail; /* EEPROM器件无应答 */
 	}
 	if (this->deviceType > AT24C16)
 	{
 		/* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-		this->IIC.WriteByte((byte)((address) >> 8));
+		this->IIC->WriteByte((byte)((address) >> 8));
 
 		/* 第5步：等待ACK */
-		if (this->IIC.WaitAck() != 0)
+		if (this->IIC->WaitAck() != 0)
 		{
 			goto cmd_Readbytefail; /* EEPROM器件无应答 */
 		}
 	}
 	/* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-	this->IIC.WriteByte((byte)address);
+	this->IIC->WriteByte((byte)address);
 
 	/* 第5步：等待ACK */
-	if (this->IIC.WaitAck() != 0)
+	if (this->IIC->WaitAck() != 0)
 	{
 		goto cmd_Readbytefail; /* EEPROM器件无应答 */
 	}
 
 	/* 第6步：重新启动I2C总线。前面的代码的目的向EEPROM传送地址，下面开始读取数据 */
-	this->IIC.Start();
+	this->IIC->Start();
 
 	/* 第7步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
-	this->IIC.WriteByte(this->Address | macI2C_RD); /* 此处是读指令 */
+	this->IIC->WriteByte(this->Address | macI2C_RD); /* 此处是读指令 */
 
 	/* 第8步：发送ACK */
-	if (this->IIC.WaitAck() != 0)
+	if (this->IIC->WaitAck() != 0)
 	{
 		goto cmd_Readbytefail; /* EEPROM器件无应答 */
 	}
 	/* 第9步：循环读取数据 */
-	ret = this->IIC.ReadByte(false); /* 读1个字节 */	
+	ret = this->IIC->ReadByte(false); /* 读1个字节 */
 	/* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
 
 	/* 发送I2C总线停止信号 */
-	this->IIC.Stop();
+	this->IIC->Stop();
 	return ret; /* 执行成功 */
 
 cmd_Readbytefail:  /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
 /* 发送I2C总线停止信号 */
-	this->IIC.Stop();
+	this->IIC->Stop();
 
 	return ret;
 }
@@ -192,7 +193,7 @@ bool AT24CXXX::Write(ushort address, byte da)
 	uint m;
 
 	/*　第０步：发停止信号，启动内部写操作　*/
-	this->IIC.Stop();
+	this->IIC->Stop();
 
 	/* 通过检查器件应答的方式，判断内部写操作是否完成, 一般小于 10ms
 	CLK频率为200KHz时，查询次数为30次左右
@@ -200,13 +201,13 @@ bool AT24CXXX::Write(ushort address, byte da)
 	for (m = 0; m < 1000; m++)
 	{
 		/* 第1步：发起I2C总线启动信号 */
-		this->IIC.Start();
+		this->IIC->Start();
 
 		/* 第2步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
-		this->IIC.WriteByte(this->Address | macI2C_WR); /* 此处是写指令 */
+		this->IIC->WriteByte(this->Address | macI2C_WR); /* 此处是写指令 */
 
 		/* 第3步：发送一个时钟，判断器件是否正确应答 */
-		if (this->IIC.WaitAck() == 0)
+		if (this->IIC->WaitAck() == 0)
 		{
 			break;
 		}
@@ -218,40 +219,40 @@ bool AT24CXXX::Write(ushort address, byte da)
 	if (this->deviceType > AT24C16)
 	{
 		/* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-		this->IIC.WriteByte((byte)((address >> 8)));
+		this->IIC->WriteByte((byte)((address >> 8)));
 
 		/* 第5步：等待ACK */
-		if (this->IIC.WaitAck() != 0)
+		if (this->IIC->WaitAck() != 0)
 		{
 			goto cmd_Writebytefail; /* EEPROM器件无应答 */
 		}
 	}
 	/* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-	this->IIC.WriteByte((byte)address);
+	this->IIC->WriteByte((byte)address);
 
 	/* 第5步：等待ACK */
-	if (this->IIC.WaitAck() != 0)
+	if (this->IIC->WaitAck() != 0)
 	{
 		goto cmd_Writebytefail; /* EEPROM器件无应答 */
 	}
 	
 	/* 第6步：开始写入数据 */
-	this->IIC.WriteByte(da);
+	this->IIC->WriteByte(da);
 
 	/* 第7步：发送ACK */
-	if (this->IIC.WaitAck() != 0)
+	if (this->IIC->WaitAck() != 0)
 	{
 		goto cmd_Writebytefail; /* EEPROM器件无应答 */
 	}
 
 	/* 命令执行成功，发送I2C总线停止信号 */
-	this->IIC.Stop();
-	Sys.Sleep112233(this->writedelaynms);
+	this->IIC->Stop();
+	this->IIC->Sleep(this->writedelaynms);
 	return true;
 
 cmd_Writebytefail:  /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
 /* 发送I2C总线停止信号 */
-	this->IIC.Stop();
+	this->IIC->Stop();
 	return true;
 }
 
@@ -262,44 +263,44 @@ int AT24CXXX::PageRead(ushort addr, void * buf, int len)
 		return 1;
 
 	/* 第1步：发起I2C总线启动信号 */
-	this->IIC.Start();
+	this->IIC->Start();
 
 	/* 第2步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
-	this->IIC.WriteByte(this->Address | macI2C_WR); /* 此处是写指令 */
+	this->IIC->WriteByte(this->Address | macI2C_WR); /* 此处是写指令 */
 
 													/* 第3步：等待ACK */
-	if (this->IIC.WaitAck() != 0)
+	if (this->IIC->WaitAck() != 0)
 	{
 		goto cmd_Readfail; /* EEPROM器件无应答 */
 	}
 	if (this->deviceType > AT24C16)
 	{
 		/* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-		this->IIC.WriteByte((byte)((addr) >> 8));
+		this->IIC->WriteByte((byte)((addr) >> 8));
 
 		/* 第5步：等待ACK */
-		if (this->IIC.WaitAck() != 0)
+		if (this->IIC->WaitAck() != 0)
 		{
 			goto cmd_Readfail; /* EEPROM器件无应答 */
 		}
 	}
 	/* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-	this->IIC.WriteByte((byte)addr);
+	this->IIC->WriteByte((byte)addr);
 
 	/* 第5步：等待ACK */
-	if (this->IIC.WaitAck() != 0)
+	if (this->IIC->WaitAck() != 0)
 	{
 		goto cmd_Readfail; /* EEPROM器件无应答 */
 	}
 
 	/* 第6步：重新启动I2C总线。前面的代码的目的向EEPROM传送地址，下面开始读取数据 */
-	this->IIC.Start();
+	this->IIC->Start();
 
 	/* 第7步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
-	this->IIC.WriteByte(this->Address | macI2C_RD); /* 此处是读指令 */
+	this->IIC->WriteByte(this->Address | macI2C_RD); /* 此处是读指令 */
 
 													/* 第8步：发送ACK */
-	if (this->IIC.WaitAck() != 0)
+	if (this->IIC->WaitAck() != 0)
 	{
 		goto cmd_Readfail; /* EEPROM器件无应答 */
 	}
@@ -307,16 +308,16 @@ int AT24CXXX::PageRead(ushort addr, void * buf, int len)
 	/* 第9步：循环读取数据 */
 	for (int i = 0; i < len; i++)
 	{
-		((byte*)buf)[i] = this->IIC.ReadByte((i != len - 1) ? true : false); /* 读1个字节 */
+		((byte*)buf)[i] = this->IIC->ReadByte((i != len - 1) ? true : false); /* 读1个字节 */
 		/* 每读完1个字节后，需要发送Ack， 最后一个字节不需要Ack，发Nack */		
 	}
 	/* 发送I2C总线停止信号 */
-	this->IIC.Stop();
+	this->IIC->Stop();
 	return 0; /* 执行成功 */
 
 cmd_Readfail:  /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
 			   /* 发送I2C总线停止信号 */
-	this->IIC.Stop();
+	this->IIC->Stop();
 	return 1;
 }
 //页内写，最多一页
@@ -347,7 +348,7 @@ int AT24CXXX::PageWrite(ushort addr, void * buf, int len)
 
 	usAddr = addr;
 	/*　第０步：发停止信号，启动内部写操作　*/
-	this->IIC.Stop();
+	this->IIC->Stop();
 
 	/* 通过检查器件应答的方式，判断内部写操作是否完成, 一般小于 10ms
 	CLK频率为200KHz时，查询次数为30次左右
@@ -355,13 +356,13 @@ int AT24CXXX::PageWrite(ushort addr, void * buf, int len)
 	for (m = 0; m < 1000; m++)
 	{
 		/* 第1步：发起I2C总线启动信号 */
-		this->IIC.Start();
+		this->IIC->Start();
 
 		/* 第2步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
-		this->IIC.WriteByte(this->Address | macI2C_WR); /* 此处是写指令 */
+		this->IIC->WriteByte(this->Address | macI2C_WR); /* 此处是写指令 */
 
 														/* 第3步：发送一个时钟，判断器件是否正确应答 */
-		if (this->IIC.WaitAck() == 0)
+		if (this->IIC->WaitAck() == 0)
 		{
 			break;
 		}
@@ -373,19 +374,19 @@ int AT24CXXX::PageWrite(ushort addr, void * buf, int len)
 	if (this->deviceType > AT24C16)
 	{
 		/* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-		this->IIC.WriteByte((byte)((usAddr >> 8)));
+		this->IIC->WriteByte((byte)((usAddr >> 8)));
 
 		/* 第5步：等待ACK */
-		if (this->IIC.WaitAck() != 0)
+		if (this->IIC->WaitAck() != 0)
 		{
 			goto cmd_Writefail; /* EEPROM器件无应答 */
 		}
 	}
 	/* 第4步：发送字节地址，24C02只有256字节，因此1个字节就够了，如果是24C04以上，那么此处需要连发多个地址 */
-	this->IIC.WriteByte((byte)usAddr);
+	this->IIC->WriteByte((byte)usAddr);
 
 	/* 第5步：等待ACK */
-	if (this->IIC.WaitAck() != 0)
+	if (this->IIC->WaitAck() != 0)
 	{
 		goto cmd_Writefail; /* EEPROM器件无应答 */
 	}
@@ -394,10 +395,10 @@ int AT24CXXX::PageWrite(ushort addr, void * buf, int len)
 	{
 
 		/* 第6步：开始写入数据 */
-		this->IIC.WriteByte(((byte*)buf)[i]);
+		this->IIC->WriteByte(((byte*)buf)[i]);
 
 		/* 第7步：发送ACK */
-		if (this->IIC.WaitAck() != 0)
+		if (this->IIC->WaitAck() != 0)
 		{
 			goto cmd_Writefail; /* EEPROM器件无应答 */
 		}
@@ -406,13 +407,13 @@ int AT24CXXX::PageWrite(ushort addr, void * buf, int len)
 	}
 
 	/* 命令执行成功，发送I2C总线停止信号 */
-	this->IIC.Stop();
-	Sys.Sleep112233(this->writedelaynms);
+	this->IIC->Stop();
+	this->IIC->Sleep(this->writedelaynms);
 	return 0;
 
 cmd_Writefail:  /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
 				/* 发送I2C总线停止信号 */
-	this->IIC.Stop();
+	this->IIC->Stop();
 	return 1;
 }
 
@@ -454,12 +455,12 @@ byte AT24CXXX::checkDevice()
 {
 	byte ucAck;
 
-	this->IIC.Start(); /* 发送启动信号 */
+	this->IIC->Start(); /* 发送启动信号 */
 	/* 发送设备地址+读写控制bit（0 = w， 1 = r) bit7 先传 */
-	this->IIC.WriteByte((this->Address) | macI2C_WR);
-	ucAck = this->IIC.WaitAck(); /*检测设备的ACK应答 */
+	this->IIC->WriteByte((this->Address) | macI2C_WR);
+	ucAck = this->IIC->WaitAck(); /*检测设备的ACK应答 */
 
-	this->IIC.Stop(); /* 发送停止信号 */
+	this->IIC->Stop(); /* 发送停止信号 */
 
 	return ucAck;
 }
@@ -473,7 +474,7 @@ byte AT24CXXX::CheckOk()
 	else
 	{
 		/* 失败后，切记发送I2C总线停止信号 */
-		this->IIC.Stop();
+		this->IIC->Stop();
 		return 0;
 	}
 }

@@ -1,7 +1,8 @@
 #ifndef _AT24CXX_2_H_
 #define _AT24CXX_2_H_
 
-#include "../I2CSoft_ARMKU.h"
+#include "..\I2CSoft_ARMKU.h"
+
 typedef enum
 {
 	AT24C01 = 127,  //
@@ -21,7 +22,7 @@ typedef enum
 class AT24CXXX
 {
 public:
-	I2CSoft_ARMKU IIC; // I2C通信口
+	I2CSoft_ARMKU* IIC; // I2C通信口
 	byte Address; // 设备地址
 
 	bool Write(ushort addr, byte data);
@@ -34,7 +35,7 @@ public:
 	void SetPin(Pin pinscl, Pin pinsda, Pin pinwriteprotect = P0);
 	byte CheckOk();
 
-	Port pinWP; //保护引脚
+	OutputPort pinWP; //保护引脚
 private:
 	byte checkDevice();
 	ushort jsPageSize(uint type); //计算存储页大小

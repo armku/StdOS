@@ -1,5 +1,5 @@
-#ifndef _I2C_H_
-#define _I2C_H_
+#ifndef _I2CSOFT_ARMKU_H
+#define _I2CSOFT_ARMKU_H
 
 #include "Device\Port.h"
 
@@ -16,6 +16,8 @@ public:
 	virtual void WriteByte(byte dat)=0;
 	virtual byte ReadByte(bool ack)=0;
 	virtual bool WaitAck(int retry = 0)=0;
+	void Delay(int us) const;//延时-微妙
+	void Sleep(int ms) const;//延时-毫秒
 };
 // 软件模拟I2C
 class I2CSoft_ARMKU:public I2CBase_ARMKU
@@ -40,8 +42,8 @@ private:
 private:
 	int _delay;			// 根据速度匹配的延时
 
-	Port	SCL;	// 时钟。开漏输出
-	Port	SDA;	// 数据。开漏输出，直接具备读写功能
+	OutputPort	SCL;	// 时钟。开漏输出
+	OutputPort	SDA;	// 数据。开漏输出，直接具备读写功能
 };
 
 /*
