@@ -1,7 +1,7 @@
 #ifndef __AD7124_H
     #define __AD7124_H
 
-    #include "spi.h"
+    #include "../SpiSoft_ARMKU.h"
 
     #define AD7124_BUFSIZE 6
 

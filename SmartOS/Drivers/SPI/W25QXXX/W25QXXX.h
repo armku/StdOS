@@ -2,7 +2,7 @@
     #define _W25QXXX_H
 
     #include "Kernel\Sys.h"
-    #include "OnChip\Spi.h"
+    #include "../SpiSoft_ARMKU.h"
 
     //W25X系列/Q系列芯片列表	   
     typedef enum
