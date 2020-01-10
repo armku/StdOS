@@ -112,40 +112,6 @@ private:
 	virtual bool OnOpen();
 	virtual void OnClose();
 };
-
-// 软件模拟I2C
-class SoftI2C : public I2C
-{
-public:
-	bool HasSecAddress;	// 设备是否有子地址
-
-	// 使用端口和最大速度初始化，因为需要分频，实际速度小于等于该速度
-    SoftI2C(uint speedHz = 100000);
-    virtual ~SoftI2C();
-
-	virtual void SetPin(Pin scl, Pin sda);
-	virtual void GetPin(Pin* scl = nullptr, Pin* sda = nullptr);
-
-	virtual void Start();
-	virtual void Stop();
-
-	virtual void WriteByte(byte dat);
-	virtual byte ReadByte();
-	virtual void Ack(bool ack);
-	virtual bool WaitAck(bool ack);
-
-private:
-	int _delay;			// 根据速度匹配的延时
-
-	OutputPort	SCL;	// 时钟。开漏输出
-	OutputPort	SDA;	// 数据。开漏输出，直接具备读写功能
-
-	virtual bool OnOpen();
-	virtual void OnClose();
-	
-	void Delay();
-};
-
 /*
 开发历史
 
