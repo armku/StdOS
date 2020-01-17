@@ -1297,6 +1297,16 @@
         <Group>
           <GroupName>Esp8266</GroupName>
         </Group>
+        <Group>
+          <GroupName>Debug</GroupName>
+          <Files>
+            <File>
+              <FileName>CGpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Debug\CGpio.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -2589,6 +2599,16 @@
         </Group>
         <Group>
           <GroupName>Esp8266</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Debug</GroupName>
+          <Files>
+            <File>
+              <FileName>CGpio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\SmartOS\Debug\CGpio.cpp</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>
